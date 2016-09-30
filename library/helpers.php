@@ -22,7 +22,7 @@
 
 
 function display($text) {
-    $config = \Config::factory();
+    $config = \Exakat\Config::factory();
     
     if ($config->verbose) {
         echo trim($text), "\n";
@@ -33,7 +33,7 @@ function display_r($object) {
     static $config;
     
     if ($config === null) {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
     }
     
     if ($config->verbose) {
