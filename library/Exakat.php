@@ -162,11 +162,6 @@ class Exakat {
                 $task->run($config);
                 break;
 
-            case 'vector' : 
-                $task = new Tasks\Vector($this->gremlin);
-                $task->run($config);
-                break;
-
             case 'classes' : 
                 $task = new Tasks\Classes($this->gremlin);
                 $task->run($config);
