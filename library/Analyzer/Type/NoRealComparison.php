@@ -44,24 +44,6 @@ class NoRealComparison extends Analyzer\Analyzer {
              ->hasNoIn(array('ARGUMENT', 'INDEX'))
              ->back('first');
         $this->prepareQuery();
-return;
-        // 1.2 == ( 2 / 3)
-        $this->atomIs('Comparison')
-             ->codeIs(array('==', '!=', '===', '!=='))
-             ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Multiplication')
-             ->codeIs('/')
-             ->back('first');
-        $this->prepareQuery();
-
-        // 1.2 == ( 2 / 3)
-        $this->atomIs('Comparison')
-             ->codeIs(array('==', '!=', '===', '!=='))
-             ->outIs(array('LEFT', 'RIGHT'))
-             ->atomInside('Multiplication')
-             ->codeIs('/')
-             ->back('first');
-        $this->prepareQuery();
     }
 }
 
