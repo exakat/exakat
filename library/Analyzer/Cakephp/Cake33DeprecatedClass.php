@@ -26,7 +26,8 @@ use Analyzer;
 
 class Cake33DeprecatedClass extends \Analyzer\Common\ClassUsage {
     public function analyze() {
-        $this->classes = '\cake\utility\crypto\mcrypt';
+        $this->classes = array('\cake\utility\crypto\mcrypt',
+                               '\cake\network\http\client');
 
         return parent::analyze();
     }
