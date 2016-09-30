@@ -2432,10 +2432,10 @@ class Load extends Tasks {
         $indexId = $this->popExpression();
         $this->addLink($parentheseId, $indexId, 'CODE');
 
-        $this->setAtom($parentheseId, ['code'     => $this->tokens[$this->id][1],
+        $this->setAtom($parentheseId, ['code'     => '(',
                                        'fullcode' => '(' . $this->atoms[$indexId]['fullcode'] . ')',
                                        'line'     => $this->tokens[$this->id][2],
-                                       'token'    => $this->getToken($this->tokens[$this->id][0]) ]);
+                                       'token'    => 'T_OPEN_PARENTHESIS' ]);
         $this->pushExpression($parentheseId);
         ++$this->id; // Skipping the )
 
@@ -2564,12 +2564,12 @@ class Load extends Tasks {
         $this->addLink($ternaryId, $thenId, 'THEN');
         $this->addLink($ternaryId, $elseId, 'ELSE');
 
-        $x = ['code'     => $this->tokens[$current][1],
+        $x = ['code'     => '?',
               'fullcode' => $this->atoms[$conditionId]['fullcode'] . ' ?' .
                             ($this->atoms[$thenId]['atom'] === 'Void' ? '' : ' '.$this->atoms[$thenId]['fullcode'].' ' ). ': ' .
                             $this->atoms[$elseId]['fullcode'],
               'line'     => $this->tokens[$current][2],
-              'token'    => $this->getToken($this->tokens[$current][0])];
+              'token'    => 'T_QUESTION'];
         $this->setAtom($ternaryId, $x);
 
         $this->pushExpression($ternaryId);
@@ -2715,7 +2715,6 @@ class Load extends Tasks {
             $this->pushExpression($asId);
             
             return $asId;
-        return $additionId;
         } else {
             return $this->processOperator('As', $this->precedence->get($this->tokens[$this->id][0]), ['NAME', 'AS']);
         }
