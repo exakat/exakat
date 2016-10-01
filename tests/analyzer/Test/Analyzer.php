@@ -20,7 +20,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         }
 
         // initialize Config (needed by phpexec)
-        $config = \Config::factory(array('foo', '-p', 'test'));
+        $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
         $res = shell_exec($config->$versionPHP.' -l ./source/'.str_replace('_', '/', $file).'.php 2>/dev/null');

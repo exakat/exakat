@@ -58,8 +58,8 @@ function run($test, $number) {
     $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
 
     include_once('../../library/Phpexec.php');
-    include_once('../../library/Config.php');
-    $config = \Config::factory(array('foo', '-p', 'test'));
+    include_once('../../library/Exakat/Config.php');
+    $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
         
     $versionPHP = 'php'.str_replace('.', '', $phpversion);
 
