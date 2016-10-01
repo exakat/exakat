@@ -25,10 +25,10 @@ namespace Analyzer\Type;
 
 use Analyzer;
 
-class _Float extends Analyzer\Common\Type {
+class Real extends Analyzer\Common\Type {
 
     public function analyze() {
-        $this->type = 'Float';
+        $this->type = 'Real';
 
         parent::analyze();
     }
