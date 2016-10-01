@@ -56,7 +56,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                  ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
-                 ->atomIs(array('Boolean', 'Null', 'Integer', 'Float', 'String', 'Concatenation', 'Logical'))
+                 ->atomIs(array('Boolean', 'Null', 'Integer', 'Real', 'String', 'Concatenation', 'Logical'))
                  ->back('first');
             $this->prepareQuery();
 
@@ -111,7 +111,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                 ->outIs('ARGUMENTS')
                 ->outIs('ARGUMENT')
                 ->is('rank', $position)
-                ->atomIs(array('Boolean', 'Null', 'Integer', 'Float'))
+                ->atomIs(array('Boolean', 'Null', 'Integer', 'Real'))
                 ->back('first');
            $this->prepareQuery();
         }

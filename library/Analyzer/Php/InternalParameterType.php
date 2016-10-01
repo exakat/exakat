@@ -33,9 +33,9 @@ class InternalParameterType extends Analyzer\Analyzer {
         $args = $data->getInternalParameterType();
 
         $typeConversion = array('string'   => array('Magicconstant', 'Heredoc', 'String'),
-                                'float'    => 'Float',
+                                'real'     => 'Real',
                                 'int'      => 'Integer',
-                                'numeric'  => array('Float', 'Integer'),
+                                'numeric'  => array('Real', 'Integer'),
                                 'resource' => '',
                                 'bool'     => 'Boolean',
                                 'array'    => '',
@@ -65,7 +65,6 @@ class InternalParameterType extends Analyzer\Analyzer {
 
                     // Constant (Identifier), logical, concatenation, addition ? 
                     // Those will have to be replaced after more research
-//                     ->atomIsNot(array('Constant', 'Logical', 'Concatenation', 'Addition', 'Power', 'Multiplication'))
 
                     // All string equivalents 
                      ->atomIsNot($typeConversion[$type])

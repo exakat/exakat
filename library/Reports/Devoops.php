@@ -1258,7 +1258,7 @@ SQL
                             'Hexadecimal' => 'Type/Hexadecimal',
                             'Octal'       => 'Type/Octal',
                             'Binary'      => 'Type/Binary',
-                            'Float'       => 'Type/_Float',
+                            'Real'        => 'Type/Real',
                     ),
 
                     'Strings' => array(

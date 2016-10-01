@@ -29,8 +29,9 @@ class ConstantComparisonConsistance extends Analyzer\Analyzer {
 
     public function analyze() {
 
+        $literalsList = '"' . join('", "', self::LITERALS) . '"';
         $query = <<<GREMLIN
-g.V().hasLabel("Comparison").out("LEFT").map{ if (it.get().label() in ["Integer", "Float", "String", "Boolean", "Null"]) { 
+g.V().hasLabel("Comparison").out("LEFT").map{ if (it.get().label() in [$literalsList]) { 
                 x2 = "left"; 
             } else { 
                 x2 = "right"; 
@@ -43,7 +44,7 @@ GREMLIN;
 
        $this->atomIs('Comparison')
             ->outIs('LEFT')
-            ->raw('sideEffect{ if (it.get().label() in ["Integer", "Float", "String", "Boolean", "Null"]) { 
+            ->raw('sideEffect{ if (it.get().label() in [$literalsList]) { 
                 x2 = "left"; 
             } else { 
                 x2 = "right"; 

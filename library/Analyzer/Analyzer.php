@@ -68,7 +68,7 @@ abstract class Analyzer {
     const T_LONG    = 'Long';    //360';
 
     const CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
-    const LITERALS = array('Integer', 'Float', 'Null', 'Boolean', 'String');
+    const LITERALS = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
