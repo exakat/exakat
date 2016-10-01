@@ -3078,9 +3078,9 @@ class Load extends Tasks {
             $current = $this->id;
             
             // Case of return ; 
-            $returnArgId = $this->addAtomVoid();
             $returnId = $this->addAtom('Return');
         
+            $returnArgId = $this->addAtomVoid();
             $this->addLink($returnId, $returnArgId, 'RETURN');
 
             $x = ['code'     => $this->tokens[$current][1],
@@ -3089,8 +3089,10 @@ class Load extends Tasks {
                   'token'    => $this->getToken($this->tokens[$current][0])];
             $this->setAtom($returnId, $x);
 
-            $this->addToSequence($returnId);
-            ++$this->id;
+            if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+               $this->processSemicolon();
+            }
+            $this->pushExpression($returnId);
         
             return $returnId;
         } else {

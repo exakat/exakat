@@ -23,7 +23,7 @@ Label : PROJECT
                 Label : NAME
                   abs
               Label : RIGHT
-                $c
+                (
                 Label : CODE
                   -
                   Label : LEFT

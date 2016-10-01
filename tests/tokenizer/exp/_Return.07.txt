@@ -11,6 +11,6 @@ Label : PROJECT
         Label : ELEMENT
           return
           Label : RETURN
-            1
+            (
             Label : CODE
               1

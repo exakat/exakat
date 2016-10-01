@@ -12,5 +12,3 @@ Label : PROJECT
           return
           Label : RETURN
             Void
-        Label : ELEMENT
-          Void

@@ -22,7 +22,7 @@ Label : PROJECT
             Label : ELSE
               $d
             Label : THEN
-              $c
+              (
               Label : CODE
                 clone
                 Label : CLONE
