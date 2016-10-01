@@ -17,7 +17,7 @@ Label : PROJECT
               Label : LEFT
                 0
               Label : RIGHT
-                }
+                (
                 Label : CODE
                   =
                   Label : LEFT
@@ -537,7 +537,7 @@ Label : PROJECT
               Label : LEFT
                 0
               Label : RIGHT
-                }
+                (
                 Label : CODE
                   =
                   Label : LEFT
@@ -696,8 +696,6 @@ Label : PROJECT
                                                         return
                                                         Label : RETURN
                                                           Void
-                                                      Label : ELEMENT
-                                                        Void
                                                 Label : NAME
                                                   $x
                                             Label : CONDITION
@@ -753,7 +751,7 @@ Label : PROJECT
               Label : LEFT
                 0
               Label : RIGHT
-                }
+                (
                 Label : CODE
                   =
                   Label : LEFT
@@ -851,7 +849,7 @@ Label : PROJECT
               Label : LEFT
                 0
               Label : RIGHT
-                }
+                (
                 Label : CODE
                   =
                   Label : LEFT
@@ -951,7 +949,7 @@ Label : PROJECT
               Label : LEFT
                 0
               Label : RIGHT
-                }
+                (
                 Label : CODE
                   =
                   Label : LEFT

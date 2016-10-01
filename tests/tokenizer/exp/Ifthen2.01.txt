@@ -27,7 +27,7 @@ Label : PROJECT
         Label : ELEMENT
           if
           Label : CONDITION
-            )
+            (
             Label : CODE
               isset
               Label : ARGUMENTS

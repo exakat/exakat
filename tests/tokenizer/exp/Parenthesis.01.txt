@@ -9,6 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          1
+          (
           Label : CODE
             1

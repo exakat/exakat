@@ -39,7 +39,7 @@ Label : PROJECT
             Label : ARGUMENT
               &
               Label : LEFT
-                $b
+                (
                 Label : CODE
                   |
                   Label : LEFT

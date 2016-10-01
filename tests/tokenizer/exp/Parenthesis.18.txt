@@ -19,7 +19,7 @@ Label : PROJECT
             Label : ARGUMENT
               .
               Label : CONCAT
-                'g'
+                (
                 Label : CODE
                   ?
                   Label : CONDITION

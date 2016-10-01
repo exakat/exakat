@@ -36,8 +36,6 @@ Label : PROJECT
                   return
                   Label : RETURN
                     Void
-                Label : ELEMENT
-                  Void
             Label : ELEMENT
               case $c instanceof   :  /**/  
               Label : CASE
@@ -142,7 +140,5 @@ Label : PROJECT
                   return
                   Label : RETURN
                     Void
-                Label : ELEMENT
-                  Void
           Label : NAME
             B

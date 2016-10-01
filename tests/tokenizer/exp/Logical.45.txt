@@ -31,7 +31,7 @@ Label : PROJECT
                   Label : ARGUMENT
                     2
                   Label : ARGUMENT
-                    4
+                    (
                     Label : CODE
                       &
                       Label : LEFT

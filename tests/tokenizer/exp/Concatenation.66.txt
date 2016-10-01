@@ -21,7 +21,7 @@ Label : PROJECT
                 Label : LEFT
                   .
                   Label : CONCAT
-                    'E'
+                    (
                     Label : CODE
                       ?
                       Label : CONDITION

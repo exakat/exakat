@@ -13,7 +13,7 @@ Label : PROJECT
           Label : LEFT
             $a
           Label : RIGHT
-            $d
+            (
             Label : CODE
               &
               Label : LEFT

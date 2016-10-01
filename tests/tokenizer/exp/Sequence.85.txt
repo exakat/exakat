@@ -52,7 +52,7 @@ Label : PROJECT
               Label : RIGHT
                 +
                 Label : LEFT
-                  4
+                  (
                   Label : CODE
                     +
                     Label : LEFT
@@ -106,7 +106,7 @@ Label : PROJECT
                   Label : RIGHT
                     ?
                     Label : CONDITION
-                      $e
+                      (
                       Label : CODE
                         ===
                         Label : LEFT

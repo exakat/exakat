@@ -42,8 +42,6 @@ Label : PROJECT
                   return
                   Label : RETURN
                     Void
-                Label : ELEMENT
-                  Void
             Label : ELEMENT
               =
               Label : LEFT
@@ -85,7 +83,7 @@ Label : PROJECT
                 Label : LEFT
                   ->
                   Label : OBJECT
-                    I
+                    (
                     Label : CODE
                       ::
                       Label : CLASS

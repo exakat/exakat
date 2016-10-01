@@ -170,7 +170,7 @@ Label : PROJECT
                               Label : CONCAT
                                 $aa
                               Label : CONCAT
-                                'Q'
+                                (
                                 Label : CODE
                                   ?
                                   Label : CONDITION

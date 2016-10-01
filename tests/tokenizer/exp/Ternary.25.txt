@@ -29,7 +29,7 @@ Label : PROJECT
                 Label : RIGHT
                   *
                   Label : LEFT
-                    1
+                    (
                     Label : CODE
                       -
                       Label : LEFT

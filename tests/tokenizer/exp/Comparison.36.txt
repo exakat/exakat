@@ -18,7 +18,7 @@ Label : PROJECT
               Label : ARGUMENTS
                 )
                 Label : ARGUMENT
-                  $b
+                  (
                   Label : CODE
                     $b
               Label : NAME

@@ -11,6 +11,6 @@ Label : PROJECT
         Label : ELEMENT
           -
           Label : SIGN
-            $x
+            (
             Label : CODE
               $x

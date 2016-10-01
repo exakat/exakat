@@ -19,7 +19,7 @@ Label : PROJECT
               Label : RIGHT
                 @
                 Label : AT
-                  0
+                  (
                   Label : CODE
                     /
                     Label : LEFT

@@ -19,7 +19,7 @@ Label : PROJECT
               Label : VARIABLE
                 $a
             Label : RIGHT
-              0
+              (
               Label : CODE
                 ||
                 Label : LEFT

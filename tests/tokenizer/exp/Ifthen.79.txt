@@ -14,9 +14,7 @@ Label : PROJECT
           Label : THEN
             ;
             Label : ELEMENT
-              return
-              Label : RETURN
-                Void
+              Void
         Label : ELEMENT
           if
           Label : CONDITION

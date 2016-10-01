@@ -36,8 +36,6 @@ Label : PROJECT
                   return
                   Label : RETURN
                     Void
-                Label : ELEMENT
-                  Void
             Label : ELEMENT
               while
               Label : BLOCK

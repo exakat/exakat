@@ -35,7 +35,7 @@ Label : PROJECT
               Label : CONCAT
                 g
             Label : CONCAT
-              $h
+              (
               Label : CODE
                 ++
                 Label : PREPLUSPLUS

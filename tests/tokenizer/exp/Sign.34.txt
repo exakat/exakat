@@ -13,11 +13,11 @@ Label : PROJECT
           Label : CONDITION
             ==
             Label : LEFT
-              2
+              (
               Label : CODE
                 %
                 Label : LEFT
-                  1
+                  (
                   Label : CODE
                     +
                     Label : LEFT
@@ -35,11 +35,11 @@ Label : PROJECT
               Label : LEFT
                 $g
               Label : RIGHT
-                )
+                (
                 Label : CODE
                   -
                   Label : LEFT
-                    $i
+                    (
                     Label : CODE
                       *
                       Label : LEFT
@@ -49,7 +49,7 @@ Label : PROJECT
                   Label : RIGHT
                     -
                     Label : LEFT
-                      $k
+                      (
                       Label : CODE
                         *
                         Label : LEFT
@@ -57,7 +57,7 @@ Label : PROJECT
                         Label : RIGHT
                           $k
                     Label : RIGHT
-                      $m
+                      (
                       Label : CODE
                         *
                         Label : LEFT

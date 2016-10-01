@@ -13,7 +13,7 @@ Label : PROJECT
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              'f'
+              (
               Label : CODE
                 ?
                 Label : CONDITION

@@ -16,7 +16,7 @@ Label : PROJECT
             Label : ARGUMENT
               *
               Label : LEFT
-                0
+                (
                 Label : CODE
                   /
                   Label : LEFT

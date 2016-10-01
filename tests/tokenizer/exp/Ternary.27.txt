@@ -22,7 +22,7 @@ Label : PROJECT
         Label : ELEMENT
           ?
           Label : CONDITION
-            $a
+            (
             Label : CODE
               $a
           Label : ELSE

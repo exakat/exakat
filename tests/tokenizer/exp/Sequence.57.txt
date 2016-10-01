@@ -53,7 +53,7 @@ Label : PROJECT
                   Label : ARGUMENT
                     (array)
                     Label : CAST
-                      $c
+                      (
                       Label : CODE
                         $c
                 Label : NAME

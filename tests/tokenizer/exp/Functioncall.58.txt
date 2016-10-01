@@ -15,7 +15,7 @@ Label : PROJECT
             Label : ARGUMENT
               &&
               Label : LEFT
-                "foo"
+                (
                 Label : CODE
                   "foo"
               Label : RIGHT
@@ -23,7 +23,7 @@ Label : PROJECT
                 Label : ARGUMENTS
                   )
                   Label : ARGUMENT
-                    "bar"
+                    (
                     Label : CODE
                       "bar"
                 Label : NAME
@@ -45,7 +45,7 @@ Label : PROJECT
             Label : ARGUMENT
               and
               Label : LEFT
-                "foo"
+                (
                 Label : CODE
                   "foo"
               Label : RIGHT
@@ -53,7 +53,7 @@ Label : PROJECT
                 Label : ARGUMENTS
                   )
                   Label : ARGUMENT
-                    "bar"
+                    (
                     Label : CODE
                       "bar"
                 Label : NAME

@@ -595,7 +595,7 @@ Label : PROJECT
           Label : CONDITION
             &&
             Label : LEFT
-              2
+              (
               Label : CODE
                 ==
                 Label : LEFT
@@ -603,7 +603,7 @@ Label : PROJECT
                 Label : RIGHT
                   2
             Label : RIGHT
-              3
+              (
               Label : CODE
                 ==
                 Label : LEFT
@@ -645,7 +645,7 @@ Label : PROJECT
           Label : CONDITION
             &&
             Label : LEFT
-              4
+              (
               Label : CODE
                 ==
                 Label : LEFT
@@ -653,7 +653,7 @@ Label : PROJECT
                 Label : RIGHT
                   4
             Label : RIGHT
-              5
+              (
               Label : CODE
                 ==
                 Label : LEFT
@@ -671,7 +671,7 @@ Label : PROJECT
           Label : CONDITION
             &&
             Label : LEFT
-              6
+              (
               Label : CODE
                 ==
                 Label : LEFT
@@ -679,7 +679,7 @@ Label : PROJECT
                 Label : RIGHT
                   6
             Label : RIGHT
-              7
+              (
               Label : CODE
                 ==
                 Label : LEFT
@@ -717,7 +717,7 @@ Label : PROJECT
           Label : CONDITION
             &&
             Label : LEFT
-              8
+              (
               Label : CODE
                 ==
                 Label : LEFT
@@ -725,7 +725,7 @@ Label : PROJECT
                 Label : RIGHT
                   8
             Label : RIGHT
-              9
+              (
               Label : CODE
                 ==
                 Label : LEFT

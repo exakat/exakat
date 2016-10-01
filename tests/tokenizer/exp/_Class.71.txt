@@ -19,7 +19,7 @@ Label : PROJECT
             Label : NAME
               bootstrap
           Label : OBJECT
-            }
+            (
             Label : CODE
               new
               Label : NEW

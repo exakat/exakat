@@ -69,7 +69,7 @@ Label : PROJECT
                       Label : OBJECT
                         $k
                   Label : RIGHT
-                    )
+                    (
                     Label : CODE
                       =
                       Label : LEFT
@@ -115,7 +115,7 @@ Label : PROJECT
                       Label : OBJECT
                         $e
                   Label : RIGHT
-                    )
+                    (
                     Label : CODE
                       =
                       Label : LEFT
@@ -141,7 +141,7 @@ Label : PROJECT
               Label : RIGHT
                 (int)
                 Label : CAST
-                  )
+                  (
                   Label : CODE
                     ->
                     Label : METHOD

@@ -100,7 +100,7 @@ Label : PROJECT
                 Label : ARGUMENT
                   .
                   Label : CONCAT
-                    'R'
+                    (
                     Label : CODE
                       ?
                       Label : CONDITION

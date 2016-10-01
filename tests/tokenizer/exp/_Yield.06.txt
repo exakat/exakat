@@ -37,7 +37,7 @@ Label : PROJECT
                 Label : ARGUMENT
                   -
                   Label : LEFT
-                    yield
+                    (
                     Label : CODE
                       Void
                   Label : RIGHT
@@ -51,7 +51,7 @@ Label : PROJECT
                 Label : ARGUMENT
                   yield
                   Label : YIELD
-                    1
+                    (
                     Label : CODE
                       -1
               Label : NAME
@@ -73,7 +73,7 @@ Label : PROJECT
             Label : ELEMENT
               yield
               Label : YIELD
-                die
+                (
                 Label : CODE
                   or
                   Label : LEFT
@@ -89,7 +89,7 @@ Label : PROJECT
             Label : ELEMENT
               or
               Label : LEFT
-                $foo
+                (
                 Label : CODE
                   yield
                   Label : YIELD

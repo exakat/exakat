@@ -9,7 +9,7 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          )
+          (
           Label : CODE
             ===
             Label : LEFT

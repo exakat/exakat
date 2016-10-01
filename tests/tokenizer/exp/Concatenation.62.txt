@@ -27,7 +27,7 @@ Label : PROJECT
               Label : RIGHT
                 'E'
             Label : RIGHT
-              $a
+              (
               Label : CODE
                 ||
                 Label : LEFT
@@ -113,7 +113,7 @@ Label : PROJECT
               Label : ARGUMENTS
                 )
                 Label : ARGUMENT
-                  )
+                  (
                   Label : CODE
                     +
                     Label : LEFT
@@ -129,7 +129,7 @@ Label : PROJECT
                       Label : CONCAT
                         Void
                     Label : RIGHT
-                      '0'
+                      (
                       Label : CODE
                         ?
                         Label : CONDITION

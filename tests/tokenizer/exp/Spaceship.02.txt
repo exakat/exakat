@@ -11,7 +11,7 @@ Label : PROJECT
         Label : ELEMENT
           ===
           Label : LEFT
-            $b
+            (
             Label : CODE
               <=>
               Label : LEFT

@@ -33,7 +33,7 @@ Label : PROJECT
               Label : NAME
                 C
             Label : OBJECT
-              )
+              (
               Label : CODE
                 new
                 Label : NEW

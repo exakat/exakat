@@ -37,7 +37,7 @@ Label : PROJECT
               Label : NAME
                 d
             Label : OBJECT
-              )
+              (
               Label : CODE
                 new
                 Label : NEW
@@ -79,7 +79,7 @@ Label : PROJECT
               Label : NAME
                 d
             Label : OBJECT
-              )
+              (
               Label : CODE
                 new
                 Label : NEW

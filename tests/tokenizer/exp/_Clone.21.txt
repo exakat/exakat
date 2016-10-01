@@ -43,7 +43,7 @@ Label : PROJECT
               Label : RIGHT
                 clone
                 Label : CLONE
-                  E
+                  (
                   Label : CODE
                     ?
                     Label : CONDITION

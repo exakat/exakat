@@ -13,11 +13,11 @@ Label : PROJECT
           Label : LEFT
             $b
           Label : RIGHT
-            )
+            (
             Label : CODE
-              )
+              (
               Label : CODE
-                3
+                (
                 Label : CODE
                   +
                   Label : LEFT
@@ -35,13 +35,13 @@ Label : PROJECT
           Label : THEN
             {}
             Label : ELEMENT
-              B
+              (
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   $b
               Label : NAME
-                B
+                (
                 Label : CODE
                   ->
                   Label : OBJECT
@@ -49,7 +49,7 @@ Label : PROJECT
                   Label : PROPERTY
                     B
         Label : ELEMENT
-          C
+          (
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -57,7 +57,7 @@ Label : PROJECT
             Label : ARGUMENT
               $d
           Label : NAME
-            C
+            (
             Label : CODE
               ->
               Label : OBJECT

@@ -59,7 +59,7 @@ Label : PROJECT
         Label : ELEMENT
           ?
           Label : CONDITION
-            'I'
+            (
             Label : CODE
               ==
               Label : LEFT

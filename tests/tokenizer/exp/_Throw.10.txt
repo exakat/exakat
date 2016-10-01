@@ -30,7 +30,7 @@ Label : PROJECT
               Label : NAME
                 b
             Label : OBJECT
-              A
+              (
               Label : CODE
                 new
                 Label : NEW

@@ -19,7 +19,7 @@ Label : PROJECT
             Label : ELEMENT
               ?
               Label : CONDITION
-                )
+                (
                 Label : CODE
                   C
                   Label : ARGUMENTS

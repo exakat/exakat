@@ -14,7 +14,7 @@ Label : PROJECT
             Label : ARGUMENT
               .
               Label : CONCAT
-                0
+                (
                 Label : CODE
                   +
                   Label : LEFT

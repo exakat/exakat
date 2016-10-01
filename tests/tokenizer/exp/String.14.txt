@@ -42,7 +42,7 @@ Label : PROJECT
               Label : VARIABLE
                 $b
             Label : ARGUMENT
-              'M'
+              (
               Label : CODE
                 ?
                 Label : CONDITION

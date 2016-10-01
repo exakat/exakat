@@ -15,7 +15,7 @@ Label : PROJECT
           Label : RIGHT
             [
             Label : INDEX
-              2
+              (
               Label : CODE
                 +
                 Label : LEFT

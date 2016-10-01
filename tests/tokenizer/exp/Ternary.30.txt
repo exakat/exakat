@@ -14,7 +14,7 @@ Label : PROJECT
           Label : RIGHT
             ?
             Label : CONDITION
-              3
+              (
               Label : CODE
                 ===
                 Label : LEFT
@@ -24,11 +24,11 @@ Label : PROJECT
             Label : ELSE
               +
               Label : LEFT
-                64
+                (
                 Label : CODE
                   *
                   Label : LEFT
-                    32
+                    (
                     Label : CODE
                       %
                       Label : LEFT
@@ -42,7 +42,7 @@ Label : PROJECT
                   Label : RIGHT
                     64
               Label : RIGHT
-                64
+                (
                 Label : CODE
                   %
                   Label : LEFT
@@ -56,11 +56,11 @@ Label : PROJECT
             Label : THEN
               +
               Label : LEFT
-                4096
+                (
                 Label : CODE
                   *
                   Label : LEFT
-                    16
+                    (
                     Label : CODE
                       %
                       Label : LEFT
@@ -76,11 +76,11 @@ Label : PROJECT
               Label : RIGHT
                 +
                 Label : LEFT
-                  64
+                  (
                   Label : CODE
                     *
                     Label : LEFT
-                      64
+                      (
                       Label : CODE
                         %
                         Label : LEFT
@@ -94,7 +94,7 @@ Label : PROJECT
                     Label : RIGHT
                       64
                 Label : RIGHT
-                  64
+                  (
                   Label : CODE
                     %
                     Label : LEFT

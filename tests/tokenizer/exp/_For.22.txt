@@ -223,7 +223,7 @@ Label : PROJECT
                               Label : CONDITION
                                 !
                                 Label : NOT
-                                  )
+                                  (
                                   Label : CODE
                                     AQ
                                     Label : ARGUMENTS
@@ -413,7 +413,7 @@ Label : PROJECT
                                   Label : CONDITION
                                     !
                                     Label : NOT
-                                      )
+                                      (
                                       Label : CODE
                                         CH
                                         Label : ARGUMENTS
@@ -461,7 +461,7 @@ Label : PROJECT
                     Label : ELEMENT
                       if
                       Label : CONDITION
-                        )
+                        (
                         Label : CODE
                           isset
                           Label : ARGUMENTS
@@ -1695,7 +1695,7 @@ Label : PROJECT
                       Label : CONDITION
                         or
                         Label : LEFT
-                          'DS'
+                          (
                           Label : CODE
                             ==
                             Label : LEFT
@@ -1707,7 +1707,7 @@ Label : PROJECT
                             Label : RIGHT
                               'DS'
                         Label : RIGHT
-                          'DS'
+                          (
                           Label : CODE
                             ==
                             Label : LEFT
@@ -1847,7 +1847,7 @@ Label : PROJECT
                               Label : CONDITION
                                 or
                                 Label : LEFT
-                                  'DS'
+                                  (
                                   Label : CODE
                                     ==
                                     Label : LEFT
@@ -1859,7 +1859,7 @@ Label : PROJECT
                                     Label : RIGHT
                                       'DS'
                                 Label : RIGHT
-                                  'DS'
+                                  (
                                   Label : CODE
                                     ==
                                     Label : LEFT
@@ -4793,7 +4793,7 @@ Label : PROJECT
             Label : ELEMENT
               return
               Label : RETURN
-                )
+                (
                 Label : CODE
                   ->
                   Label : METHOD

@@ -19,13 +19,13 @@ Label : PROJECT
           Label : THEN
             {}
             Label : ELEMENT
-              B
+              (
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   $b
               Label : NAME
-                B
+                (
                 Label : CODE
                   ->
                   Label : OBJECT
@@ -33,13 +33,13 @@ Label : PROJECT
                   Label : PROPERTY
                     B
             Label : ELEMENT
-              B2
+              (
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   $b2
               Label : NAME
-                B2
+                (
                 Label : CODE
                   ->
                   Label : OBJECT
@@ -47,13 +47,13 @@ Label : PROJECT
                   Label : PROPERTY
                     B2
             Label : ELEMENT
-              B3
+              (
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   $b3
               Label : NAME
-                B3
+                (
                 Label : CODE
                   ->
                   Label : OBJECT
@@ -63,7 +63,7 @@ Label : PROJECT
             Label : ELEMENT
               [
               Label : INDEX
-                B3
+                (
                 Label : CODE
                   ->
                   Label : OBJECT

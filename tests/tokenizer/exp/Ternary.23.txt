@@ -41,7 +41,7 @@ Label : PROJECT
                   Label : PROPERTY
                     j
               Label : RIGHT
-                ]
+                (
                 Label : CODE
                   /
                   Label : LEFT

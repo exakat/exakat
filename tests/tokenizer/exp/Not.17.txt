@@ -13,7 +13,7 @@ Label : PROJECT
           Label : RETURN
             &
             Label : LEFT
-              $b
+              (
               Label : CODE
                 >>
                 Label : LEFT
@@ -23,7 +23,7 @@ Label : PROJECT
             Label : RIGHT
               ~
               Label : NOT
-                )
+                (
                 Label : CODE
                   >>
                   Label : LEFT
@@ -31,7 +31,7 @@ Label : PROJECT
                     Label : LEFT
                       1
                     Label : RIGHT
-                      1
+                      (
                       Label : CODE
                         -
                         Label : LEFT
@@ -43,7 +43,7 @@ Label : PROJECT
                         Label : RIGHT
                           1
                   Label : RIGHT
-                    1
+                    (
                     Label : CODE
                       -
                       Label : LEFT
@@ -55,7 +55,7 @@ Label : PROJECT
           Label : RETURN
             &
             Label : LEFT
-              $b
+              (
               Label : CODE
                 >>
                 Label : LEFT
@@ -65,7 +65,7 @@ Label : PROJECT
             Label : RIGHT
               !
               Label : NOT
-                )
+                (
                 Label : CODE
                   >>
                   Label : LEFT
@@ -73,7 +73,7 @@ Label : PROJECT
                     Label : LEFT
                       1
                     Label : RIGHT
-                      1
+                      (
                       Label : CODE
                         -
                         Label : LEFT
@@ -85,7 +85,7 @@ Label : PROJECT
                         Label : RIGHT
                           1
                   Label : RIGHT
-                    1
+                    (
                     Label : CODE
                       -
                       Label : LEFT

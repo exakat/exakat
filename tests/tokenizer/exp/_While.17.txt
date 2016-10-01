@@ -21,7 +21,7 @@ Label : PROJECT
           Label : CONDITION
             !=
             Label : LEFT
-              )
+              (
               Label : CODE
                 =
                 Label : LEFT

@@ -37,7 +37,7 @@ Label : PROJECT
                   Label : NAME
                     in_array
               Label : RIGHT
-                )
+                (
                 Label : CODE
                   ||
                   Label : LEFT

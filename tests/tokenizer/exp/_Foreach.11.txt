@@ -17,7 +17,7 @@ Label : PROJECT
           Label : SOURCE
             !
             Label : NOT
-              )
+              (
               Label : CODE
                 ?
                 Label : CONDITION

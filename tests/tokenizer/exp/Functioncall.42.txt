@@ -21,7 +21,7 @@ Label : PROJECT
                 Label : LEFT
                   @
                   Label : AT
-                    $d
+                    (
                     Label : CODE
                       +
                       Label : LEFT

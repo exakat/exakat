@@ -15,7 +15,7 @@ Label : PROJECT
           Label : RIGHT
             ?
             Label : CONDITION
-              )
+              (
               Label : CODE
                 ||
                 Label : LEFT
@@ -59,7 +59,7 @@ Label : PROJECT
             Label : ARGUMENT
               ?
               Label : CONDITION
-                )
+                (
                 Label : CODE
                   &&
                   Label : LEFT

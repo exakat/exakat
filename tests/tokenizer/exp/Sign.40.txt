@@ -13,7 +13,7 @@ Label : PROJECT
           Label : RETURN
             %
             Label : LEFT
-              )
+              (
               Label : CODE
                 +
                 Label : LEFT
@@ -23,7 +23,7 @@ Label : PROJECT
                     Label : LEFT
                       (int)
                       Label : CAST
-                        2
+                        (
                         Label : CODE
                           /
                           Label : LEFT
@@ -45,7 +45,7 @@ Label : PROJECT
                         Label : RIGHT
                           (int)
                           Label : CAST
-                            4
+                            (
                             Label : CODE
                               /
                               Label : LEFT
@@ -55,7 +55,7 @@ Label : PROJECT
                   Label : RIGHT
                     (int)
                     Label : CAST
-                      5
+                      (
                       Label : CODE
                         /
                         Label : LEFT
@@ -65,7 +65,7 @@ Label : PROJECT
                 Label : RIGHT
                   (int)
                   Label : CAST
-                    6
+                    (
                     Label : CODE
                       /
                       Label : LEFT

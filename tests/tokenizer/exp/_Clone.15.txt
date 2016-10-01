@@ -19,7 +19,7 @@ Label : PROJECT
               Label : ARGUMENT
                 clone
                 Label : CLONE
-                  $a
+                  (
                   Label : CODE
                     $a
             Label : NAME

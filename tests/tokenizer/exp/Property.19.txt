@@ -68,7 +68,7 @@ Label : PROJECT
               Label : LEFT
                 ->
                 Label : OBJECT
-                  a
+                  (
                   Label : CODE
                     new
                     Label : NEW
@@ -92,7 +92,7 @@ Label : PROJECT
               Label : NAME
                 p
             Label : OBJECT
-              b
+              (
               Label : CODE
                 new
                 Label : NEW
@@ -104,7 +104,7 @@ Label : PROJECT
           Label : LEFT
             $c
           Label : RIGHT
-            c
+            (
             Label : CODE
               new
               Label : NEW

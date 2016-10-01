@@ -15,7 +15,7 @@ Label : PROJECT
             Label : ARGUMENT
               *
               Label : LEFT
-                $b
+                (
                 Label : CODE
                   -
                   Label : LEFT
@@ -37,7 +37,7 @@ Label : PROJECT
             Label : ARGUMENT
               -
               Label : LEFT
-                $b
+                (
                 Label : CODE
                   -
                   Label : LEFT
@@ -59,7 +59,7 @@ Label : PROJECT
             Label : ARGUMENT
               **
               Label : LEFT
-                $b
+                (
                 Label : CODE
                   -
                   Label : LEFT
@@ -81,7 +81,7 @@ Label : PROJECT
             Label : ARGUMENT
               <<
               Label : LEFT
-                $b
+                (
                 Label : CODE
                   -
                   Label : LEFT
@@ -103,7 +103,7 @@ Label : PROJECT
             Label : ARGUMENT
               &&
               Label : LEFT
-                $b
+                (
                 Label : CODE
                   -
                   Label : LEFT
@@ -125,7 +125,7 @@ Label : PROJECT
             Label : ARGUMENT
               ?
               Label : CONDITION
-                $b
+                (
                 Label : CODE
                   -
                   Label : LEFT

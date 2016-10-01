@@ -19,7 +19,7 @@ Label : PROJECT
             Label : ELSE
               'h'
             Label : THEN
-              )
+              (
               Label : CODE
                 ?
                 Label : CONDITION

@@ -35,7 +35,7 @@ Label : PROJECT
               Label : RETURN
                 ?
                 Label : CONDITION
-                  $c
+                  (
                   Label : CODE
                     $c
                 Label : ELSE
@@ -43,7 +43,7 @@ Label : PROJECT
                 Label : THEN
                   (bool)
                   Label : CAST
-                    $d
+                    (
                     Label : CODE
                       <
                       Label : LEFT

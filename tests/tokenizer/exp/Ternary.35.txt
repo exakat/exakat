@@ -22,7 +22,7 @@ Label : PROJECT
                 Label : ARGUMENT
                   ?
                   Label : CONDITION
-                    ]
+                    (
                     Label : CODE
                       and
                       Label : LEFT

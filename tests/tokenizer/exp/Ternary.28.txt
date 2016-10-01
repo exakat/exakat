@@ -37,13 +37,13 @@ Label : PROJECT
               Label : RIGHT
                 ?
                 Label : CONDITION
-                  $b
+                  (
                   Label : CODE
                     $b
                 Label : ELSE
                   0
                 Label : THEN
-                  1
+                  (
                   Label : CODE
                     +
                     Label : LEFT

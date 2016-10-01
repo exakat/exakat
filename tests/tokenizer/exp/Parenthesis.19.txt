@@ -17,7 +17,7 @@ Label : PROJECT
               Label : LEFT
                 $a
               Label : RIGHT
-                C
+                (
                 Label : CODE
                   |
                   Label : LEFT

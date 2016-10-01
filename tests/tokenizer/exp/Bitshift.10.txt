@@ -21,13 +21,13 @@ Label : PROJECT
               Label : LEFT
                 0
               Label : RIGHT
-                )
+                (
                 Label : CODE
                   +
                   Label : LEFT
                     $c
                   Label : RIGHT
-                    $d
+                    (
                     Label : CODE
                       $d
         Label : ELEMENT

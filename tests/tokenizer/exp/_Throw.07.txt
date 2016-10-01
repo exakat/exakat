@@ -11,7 +11,7 @@ Label : PROJECT
         Label : ELEMENT
           throw
           Label : THROW
-            )
+            (
             Label : CODE
               new
               Label : NEW

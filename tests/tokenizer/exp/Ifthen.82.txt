@@ -25,7 +25,7 @@ Label : PROJECT
                   Label : RIGHT
                     (int)
                     Label : CAST
-                      $k
+                      (
                       Label : CODE
                         /
                         Label : LEFT

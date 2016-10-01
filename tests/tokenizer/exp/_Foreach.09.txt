@@ -15,7 +15,7 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : SOURCE
-            )
+            (
             Label : CODE
               ?
               Label : CONDITION

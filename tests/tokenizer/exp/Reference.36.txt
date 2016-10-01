@@ -13,7 +13,7 @@ Label : PROJECT
           Label : CONDITION
             !=
             Label : LEFT
-              $b
+              (
               Label : CODE
                 &
                 Label : LEFT

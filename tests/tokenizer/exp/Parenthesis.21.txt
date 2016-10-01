@@ -25,11 +25,11 @@ Label : PROJECT
                   Label : RETURN
                     (int)
                     Label : CAST
-                      )
+                      (
                       Label : CODE
                         ?
                         Label : CONDITION
-                          E
+                          (
                           Label : CODE
                             ===
                             Label : LEFT

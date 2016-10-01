@@ -27,7 +27,7 @@ Label : PROJECT
               Label : ARGUMENT
                 $d
               Label : ARGUMENT
-                I
+                (
                 Label : CODE
                   ?
                   Label : CONDITION

@@ -19,11 +19,11 @@ Label : PROJECT
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
-                  $f
+                  (
                   Label : CODE
                     /
                     Label : LEFT
-                      $e
+                      (
                       Label : CODE
                         -
                         Label : LEFT
@@ -33,11 +33,11 @@ Label : PROJECT
                     Label : RIGHT
                       $f
                 Label : ARGUMENT
-                  $i
+                  (
                   Label : CODE
                     /
                     Label : LEFT
-                      $h
+                      (
                       Label : CODE
                         -
                         Label : LEFT
@@ -47,11 +47,11 @@ Label : PROJECT
                     Label : RIGHT
                       $i
                 Label : ARGUMENT
-                  $l
+                  (
                   Label : CODE
                     /
                     Label : LEFT
-                      $k
+                      (
                       Label : CODE
                         -
                         Label : SIGN
@@ -63,11 +63,11 @@ Label : PROJECT
                     Label : RIGHT
                       $l
                 Label : ARGUMENT
-                  $o
+                  (
                   Label : CODE
                     /
                     Label : LEFT
-                      $n
+                      (
                       Label : CODE
                         -
                         Label : SIGN

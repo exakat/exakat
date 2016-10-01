@@ -51,7 +51,7 @@ Label : PROJECT
                     Label : ARGUMENTS
                       )
                       Label : ARGUMENT
-                        'J'
+                        (
                         Label : CODE
                           .
                           Label : CONCAT

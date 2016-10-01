@@ -57,7 +57,7 @@ Label : PROJECT
                         Label : CONCAT
                           'D'
                         Label : CONCAT
-                          ]
+                          (
                           Label : CODE
                             ?
                             Label : CONDITION

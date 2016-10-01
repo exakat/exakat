@@ -13,7 +13,7 @@ Label : PROJECT
           Label : CONDITION
             &&
             Label : LEFT
-              0
+              (
               Label : CODE
                 ||
                 Label : LEFT

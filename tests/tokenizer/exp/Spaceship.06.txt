@@ -13,7 +13,7 @@ Label : PROJECT
           Label : CONDITION
             !==
             Label : LEFT
-              )
+              (
               Label : CODE
                 =
                 Label : LEFT
@@ -47,7 +47,7 @@ Label : PROJECT
               Label : CONDITION
                 !==
                 Label : LEFT
-                  )
+                  (
                   Label : CODE
                     =
                     Label : LEFT

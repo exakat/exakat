@@ -13,11 +13,11 @@ Label : PROJECT
           Label : LEFT
             $a
           Label : RIGHT
-            $d
+            (
             Label : CODE
               /
               Label : LEFT
-                $c
+                (
                 Label : CODE
                   -
                   Label : SIGN

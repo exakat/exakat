@@ -14,7 +14,7 @@ Label : PROJECT
             Label : ARGUMENT
               .
               Label : CONCAT
-                'E'
+                (
                 Label : CODE
                   ?
                   Label : CONDITION

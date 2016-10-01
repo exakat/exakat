@@ -13,7 +13,7 @@ Label : PROJECT
           Label : LEFT
             1
           Label : RIGHT
-            3
+            (
             Label : CODE
               +
               Label : LEFT

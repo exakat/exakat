@@ -13,7 +13,7 @@ Label : PROJECT
           Label : CONDITION
             &&
             Label : LEFT
-              'D'
+              (
               Label : CODE
                 ||
                 Label : LEFT
@@ -71,7 +71,7 @@ Label : PROJECT
                   Label : ARGUMENTS
                     )
                     Label : ARGUMENT
-                      'Z'
+                      (
                       Label : CODE
                         'Z'
                   Label : NAME
@@ -123,7 +123,7 @@ Label : PROJECT
                   Label : RIGHT
                     ?
                     Label : CONDITION
-                      'AC'
+                      (
                       Label : CODE
                         ==
                         Label : LEFT
@@ -279,7 +279,7 @@ Label : PROJECT
                             Label : VARIABLE
                               $g
                       Label : CONDITION
-                        )
+                        (
                         Label : CODE
                           =
                           Label : LEFT
@@ -415,7 +415,7 @@ Label : PROJECT
                         Label : VARIABLE
                           $g
                   Label : CONDITION
-                    )
+                    (
                     Label : CODE
                       =
                       Label : LEFT

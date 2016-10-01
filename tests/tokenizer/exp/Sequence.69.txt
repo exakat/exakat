@@ -21,7 +21,7 @@ Label : PROJECT
             Label : LEFT
               B
             Label : RIGHT
-              )
+              (
               Label : CODE
                 =
                 Label : LEFT

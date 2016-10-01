@@ -20,7 +20,7 @@ Label : PROJECT
                 Label : INDEX
                   -
                   Label : LEFT
-                    )
+                    (
                     Label : CODE
                       =
                       Label : LEFT
@@ -44,7 +44,7 @@ Label : PROJECT
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              1
+              (
               Label : CODE
                 1
           Label : NAME
@@ -54,11 +54,11 @@ Label : PROJECT
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              1
+              (
               Label : CODE
                 1
             Label : ARGUMENT
-              3
+              (
               Label : CODE
                 3
           Label : NAME
@@ -68,7 +68,7 @@ Label : PROJECT
           Label : ARGUMENTS
             )
             Label : ARGUMENT
-              $d
+              (
               Label : CODE
                 $d
           Label : NAME
@@ -80,7 +80,7 @@ Label : PROJECT
             Label : ARGUMENT
               +
               Label : LEFT
-                'a'
+                (
                 Label : CODE
                   'a'
               Label : RIGHT

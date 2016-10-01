@@ -24,7 +24,7 @@ Label : PROJECT
                 Label : RIGHT
                   'C'
               Label : ELSE
-                'C'
+                (
                 Label : CODE
                   ?
                   Label : CONDITION

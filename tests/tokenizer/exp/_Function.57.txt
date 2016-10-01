@@ -47,7 +47,7 @@ Label : PROJECT
               Label : ARGUMENTS
                 )
                 Label : ARGUMENT
-                  )
+                  (
                   Label : CODE
                     array
                     Label : ARGUMENTS

@@ -11,11 +11,11 @@ Label : PROJECT
         Label : ELEMENT
           if
           Label : CONDITION
-            )
+            (
             Label : CODE
               ||
               Label : LEFT
-                ]
+                (
                 Label : CODE
                   [
                   Label : INDEX
@@ -23,7 +23,7 @@ Label : PROJECT
                   Label : VARIABLE
                     $a
               Label : RIGHT
-                )
+                (
                 Label : CODE
                   &&
                   Label : LEFT
@@ -37,7 +37,7 @@ Label : PROJECT
                       Label : VARIABLE
                         $C
                   Label : RIGHT
-                    ]
+                    (
                     Label : CODE
                       ||
                       Label : LEFT

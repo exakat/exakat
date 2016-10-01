@@ -8,7 +8,7 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          'a.php'
+          (
           Label : CODE
             'a.php'
         Label : ELEMENT
@@ -22,7 +22,7 @@ Label : PROJECT
         Label : ELEMENT
           A
         Label : ELEMENT
-          'b.php'
+          (
           Label : CODE
             'b.php'
         Label : ELEMENT

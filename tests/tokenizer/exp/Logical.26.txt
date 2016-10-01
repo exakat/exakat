@@ -19,7 +19,7 @@ Label : PROJECT
               Label : RIGHT
                 $b
             Label : RIGHT
-              4.1
+              (
               Label : CODE
                 &&
                 Label : LEFT

@@ -13,7 +13,7 @@ Label : PROJECT
           Label : CONDITION
             !
             Label : NOT
-              ArrayAccess
+              (
               Label : CODE
                 ||
                 Label : LEFT

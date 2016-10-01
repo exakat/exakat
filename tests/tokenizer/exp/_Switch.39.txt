@@ -53,11 +53,11 @@ Label : PROJECT
                         Label : RIGHT
                           %
                           Label : LEFT
-                            )
+                            (
                             Label : CODE
                               *
                               Label : LEFT
-                                1
+                                (
                                 Label : CODE
                                   -
                                   Label : LEFT

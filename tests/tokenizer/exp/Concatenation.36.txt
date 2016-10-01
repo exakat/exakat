@@ -33,7 +33,7 @@ Label : PROJECT
                 Label : CONCAT
                   "f"
                 Label : CONCAT
-                  1
+                  (
                   Label : CODE
                     +
                     Label : LEFT

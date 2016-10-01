@@ -12,7 +12,7 @@ Label : PROJECT
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-              )
+              (
               Label : CODE
                 $
                 Label : NAME
@@ -30,7 +30,7 @@ Label : PROJECT
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-              )
+              (
               Label : CODE
                 $
                 Label : NAME
@@ -42,7 +42,7 @@ Label : PROJECT
                   Label : NAME
                     $e
             Label : ARGUMENT
-              )
+              (
               Label : CODE
                 $
                 Label : NAME
@@ -54,7 +54,7 @@ Label : PROJECT
                   Label : NAME
                     $e
             Label : ARGUMENT
-              )
+              (
               Label : CODE
                 $
                 Label : NAME

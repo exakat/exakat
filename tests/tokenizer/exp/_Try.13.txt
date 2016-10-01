@@ -30,8 +30,6 @@ Label : PROJECT
                 return
                 Label : RETURN
                   Void
-              Label : ELEMENT
-                Void
             Label : CLASS
               D
             Label : VARIABLE

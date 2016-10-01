@@ -16,7 +16,7 @@ Label : PROJECT
           Label : NAME
             B
         Label : ELEMENT
-          'D'
+          (
           Label : CODE
             'D'
         Label : ELEMENT
@@ -28,7 +28,7 @@ Label : PROJECT
           Label : NAME
             include
         Label : ELEMENT
-          'E'
+          (
           Label : CODE
             'E'
         Label : ELEMENT

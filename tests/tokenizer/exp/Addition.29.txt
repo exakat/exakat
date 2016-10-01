@@ -17,7 +17,7 @@ Label : PROJECT
             Label : LEFT
               /
               Label : LEFT
-                )
+                (
                 Label : CODE
                   /
                   Label : LEFT

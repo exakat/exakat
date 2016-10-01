@@ -47,7 +47,7 @@ Label : PROJECT
                     Label : ARGUMENT
                       *
                       Label : LEFT
-                        $c
+                        (
                         Label : CODE
                           /
                           Label : LEFT
@@ -77,7 +77,7 @@ Label : PROJECT
                     Label : ARGUMENT
                       *
                       Label : LEFT
-                        $c
+                        (
                         Label : CODE
                           /
                           Label : LEFT

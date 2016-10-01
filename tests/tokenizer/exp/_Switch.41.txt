@@ -333,11 +333,11 @@ Label : PROJECT
                         Label : INDEX
                           (int)
                           Label : CAST
-                            )
+                            (
                             Label : CODE
                               .
                               Label : CONCAT
-                                31
+                                (
                                 Label : CODE
                                   %
                                   Label : LEFT
@@ -351,7 +351,7 @@ Label : PROJECT
                                   Label : RIGHT
                                     31
                               Label : CONCAT
-                                32
+                                (
                                 Label : CODE
                                   %
                                   Label : LEFT
@@ -365,7 +365,7 @@ Label : PROJECT
                                   Label : RIGHT
                                     32
                               Label : CONCAT
-                                33
+                                (
                                 Label : CODE
                                   %
                                   Label : LEFT

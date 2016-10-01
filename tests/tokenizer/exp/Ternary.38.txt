@@ -13,7 +13,7 @@ Label : PROJECT
           Label : RETURN
             ?
             Label : CONDITION
-              )
+              (
               Label : CODE
                 ->
                 Label : METHOD
@@ -33,7 +33,7 @@ Label : PROJECT
               Label : ARGUMENTS
                 )
                 Label : ARGUMENT
-                  $c
+                  (
                   Label : CODE
                     $c
               Label : NAME
@@ -45,7 +45,7 @@ Label : PROJECT
             Label : ARGUMENT
               ?
               Label : CONDITION
-                $e
+                (
                 Label : CODE
                   $e
               Label : ELSE

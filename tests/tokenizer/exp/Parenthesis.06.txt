@@ -19,11 +19,11 @@ Label : PROJECT
             Label : ELEMENT
               return
               Label : RETURN
-                )
+                (
                 Label : CODE
                   ?
                   Label : CONDITION
-                    b
+                    (
                     Label : CODE
                       ->
                       Label : OBJECT
@@ -63,11 +63,11 @@ Label : PROJECT
             Label : ELEMENT
               return
               Label : RETURN
-                )
+                (
                 Label : CODE
                   ?
                   Label : CONDITION
-                    b
+                    (
                     Label : CODE
                       ::
                       Label : CLASS
@@ -107,11 +107,11 @@ Label : PROJECT
             Label : ELEMENT
               return
               Label : RETURN
-                )
+                (
                 Label : CODE
                   ?
                   Label : CONDITION
-                    $b
+                    (
                     Label : CODE
                       ::
                       Label : CLASS

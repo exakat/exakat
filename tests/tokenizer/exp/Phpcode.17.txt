@@ -12,7 +12,7 @@ Label : PROJECT
           Label : ARGUMENTS
             <?=
             Label : ARGUMENT
-              'c'
+              (
               Label : CODE
                 ?
                 Label : CONDITION
@@ -30,7 +30,7 @@ Label : PROJECT
             Label : ARGUMENT
               ?
               Label : CONDITION
-                $f
+                (
                 Label : CODE
                   &&
                   Label : LEFT

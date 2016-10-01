@@ -9,6 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          true
+          (
           Label : CODE
             true

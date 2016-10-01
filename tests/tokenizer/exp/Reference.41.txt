@@ -13,7 +13,7 @@ Label : PROJECT
           Label : RETURN
             (bool)
             Label : CAST
-              $c
+              (
               Label : CODE
                 &
                 Label : LEFT
@@ -35,7 +35,7 @@ Label : PROJECT
           Label : RETURN
             (bool)
             Label : CAST
-              $c
+              (
               Label : CODE
                 &
                 Label : LEFT
@@ -57,7 +57,7 @@ Label : PROJECT
           Label : RETURN
             (bool)
             Label : CAST
-              $c
+              (
               Label : CODE
                 &
                 Label : LEFT

@@ -117,7 +117,7 @@ Label : PROJECT
                   Label : RIGHT
                     ?
                     Label : CONDITION
-                      'N'
+                      (
                       Label : CODE
                         ==
                         Label : LEFT

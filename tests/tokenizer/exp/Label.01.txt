@@ -21,7 +21,7 @@ Label : PROJECT
             Label : ELEMENT
               ?
               Label : CONDITION
-                'd'
+                (
                 Label : CODE
                   ==
                   Label : LEFT

@@ -19,7 +19,7 @@ Label : PROJECT
         Label : ELEMENT
           -
           Label : SIGN
-            3
+            (
             Label : CODE
               +
               Label : LEFT

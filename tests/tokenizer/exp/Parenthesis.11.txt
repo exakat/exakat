@@ -15,13 +15,13 @@ Label : PROJECT
           Label : RIGHT
             +
             Label : LEFT
-              1
+              (
               Label : CODE
                 <<
                 Label : LEFT
                   (int)
                   Label : CAST
-                    $c
+                    (
                     Label : CODE
                       /
                       Label : LEFT
@@ -33,7 +33,7 @@ Label : PROJECT
             Label : RIGHT
               (int)
               Label : CAST
-                $e
+                (
                 Label : CODE
                   /
                   Label : LEFT

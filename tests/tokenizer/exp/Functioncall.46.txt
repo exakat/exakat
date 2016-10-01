@@ -13,7 +13,7 @@ Label : PROJECT
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              'H'
+              (
               Label : CODE
                 ?
                 Label : CONDITION
@@ -25,7 +25,7 @@ Label : PROJECT
             Label : ARGUMENT
               'I'
             Label : ARGUMENT
-              "K"
+              (
               Label : CODE
                 ?
                 Label : CONDITION

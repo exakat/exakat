@@ -33,7 +33,7 @@ Label : PROJECT
             Label : RIGHT
               *
               Label : LEFT
-                $e
+                (
                 Label : CODE
                   -
                   Label : LEFT

@@ -12,7 +12,7 @@ Label : PROJECT
           Label : ARGUMENTS
             )
             Label : ARGUMENT
-              'B'
+              (
               Label : CODE
                 'B'
           Label : NAME

@@ -47,7 +47,7 @@ Label : PROJECT
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  )
+                  (
                   Label : CODE
                     array
                     Label : ARGUMENTS
