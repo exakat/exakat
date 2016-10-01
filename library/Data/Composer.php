@@ -28,7 +28,7 @@ class Composer {
     private $phar_tmp = null;
     
     public function __construct() {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         
         if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exMethods').'.sqlite';

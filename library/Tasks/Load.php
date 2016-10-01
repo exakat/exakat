@@ -213,7 +213,7 @@ class Load extends Tasks {
         $this->precedence = new \Tasks\Precedence();
     }
 
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $this->config = $config;
         
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {

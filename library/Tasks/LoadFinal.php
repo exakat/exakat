@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class LoadFinal extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $linksIn = \Tokenizer\Token::linksAsList();
         
         // processing '\parent' fullnspath

@@ -27,7 +27,7 @@ use Analyzer;
 
 class AvoidUsing extends Analyzer\Analyzer {
     public function analyze() {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $classes = $config->Classes_AvoidUsing;
         
         if (empty($classes)) {

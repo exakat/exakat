@@ -51,7 +51,7 @@ class CypherG3 {
     private $cyhper = null;
     
     public function __construct() {
-        $this->config = \Config::factory();
+        $this->config = \Exakat\Config::factory();
         
         // Force autoload
         $this->cypher = new \Graph\Cypher($this->config );
@@ -180,7 +180,7 @@ CYPHER;
     }
 
     public function saveTokenCounts() {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $datastore = new \Datastore($config);
         
         $datastore->addRow('tokenCounts', static::$tokenCounts);

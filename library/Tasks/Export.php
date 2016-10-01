@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Export extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $queryTemplate = 'g.V().not(hasId(0))';
 
         $result = $this->gremlin->query($queryTemplate);

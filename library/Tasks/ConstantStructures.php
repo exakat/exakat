@@ -26,7 +26,7 @@ namespace Tasks;
 class ConstantStructures extends Tasks {
     private $lastTiming = 0;
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $this->displayTiming('Start');
 
         // First, clean it all

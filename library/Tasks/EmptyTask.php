@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class EmptyTask extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         
     }
 }

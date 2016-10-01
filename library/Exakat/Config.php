@@ -20,6 +20,7 @@
  *
 */
 
+namespace Exakat;
 
 class Config {
     static private $singleton      = null;
@@ -172,12 +173,12 @@ class Config {
         $this->is_phar  = strpos(basename(dirname(__DIR__)), '.phar') !== false;
         if ($this->is_phar) {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
-            $this->projects_root = substr(dirname(dirname(__DIR__)), 7);
+            $this->projects_root = substr(dirname(dirname(dirname(__DIR__))), 7);
             $this->dir_root      = 'phar://'.$this->executable;
         } else {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
-            $this->dir_root      = dirname(__DIR__);
-            $this->projects_root = dirname(__DIR__);
+            $this->dir_root      = dirname(dirname(__DIR__));
+            $this->projects_root = dirname(dirname(__DIR__));
         }
         
         $configFile = $this->projects_root.'/config/exakat.ini'; 
@@ -220,7 +221,7 @@ class Config {
             }
             return static::$singleton;
         } else {
-            if (is_object($argv) && ($argv instanceof \Config)) {
+            if (is_object($argv) && ($argv instanceof \Exakat\Config)) {
                 self::$singleton = $argv;
             } else {
                 self::$singleton = new self($argv);

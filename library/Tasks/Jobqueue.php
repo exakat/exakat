@@ -33,7 +33,7 @@ class Jobqueue extends Tasks {
         unlink($this->pipefile);
     }
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $this->config = $config;
         
         $this->log->log('Started jobQueue : '.time()."\n");

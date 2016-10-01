@@ -34,7 +34,7 @@ class Clustergrammer extends Reports {
     }
 
     public function generate($folder, $name= 'txt') {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $themes = $config->thema;
 
         $analyzers = array();

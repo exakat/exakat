@@ -1673,7 +1673,7 @@ TEXT
             $counts[$row['analyzer']] = $row['counts'];
         }
         
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         foreach($list as $l) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$l.'.ini');
             if (isset($counts[$l])) {
@@ -1710,7 +1710,7 @@ TEXT
         $res = $this->dump->query('SELECT analyzer, count(*) AS nb, severity AS severity FROM results '.$where.' GROUP BY analyzer');
         $listBySeverity = array();
 
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $listBySeverity[] = array('name'  => $ini['name'],

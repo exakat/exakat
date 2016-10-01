@@ -31,7 +31,7 @@ class CleanDb extends Tasks {
         parent::__construct($gremlin);
     }
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $this->config = $config;
 
         if (!file_exists($config->neo4j_folder.'/scripts/exakat.txt')) {

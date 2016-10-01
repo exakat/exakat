@@ -36,7 +36,7 @@ abstract class Reports {
     protected $sqlite = null;
     
     public function __construct() {
-        $this->config = \Config::Factory();
+        $this->config = \Exakat\Config::Factory();
 
         $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($this->config->thema);
         $this->themesList = '("'.implode('", "', $analyzers).'")';

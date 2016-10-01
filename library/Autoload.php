@@ -61,9 +61,9 @@ class Autoload {
 spl_autoload_register('Autoload::autoload_library');
 
 if (isset($argv)) {
-    $config = \Config::factory($argv);
+    $config = \Exakat\Config::factory($argv);
 } else {
-    $config = \Config::factory($GLOBALS['argv']);
+    $config = \Exakat\Config::factory($GLOBALS['argv']);
 }
 
 include 'helpers.php';

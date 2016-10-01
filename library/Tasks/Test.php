@@ -27,7 +27,7 @@ class Test extends Tasks {
     private $project_dir = '.';
     private $config = null;
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $this->config = $config;
         $project = 'test';
 
@@ -72,13 +72,13 @@ class Test extends Tasks {
                         );
         
         try {
-            $configThema = \Config::push($args);
+            $configThema = \Exakat\Config::push($args);
 
             $analyze = new Analyze($this->gremlin);
             $analyze->run($configThema);
             unset($report);
             
-            \Config::pop();
+            \Exakat\Config::pop();
         } catch (\Exception $e) {
             echo "Error while running the Analyze $theme \n",
                  $e->getMessage();

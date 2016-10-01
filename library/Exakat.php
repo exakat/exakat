@@ -30,7 +30,7 @@ class Exakat {
         $this->gremlin = $gremlin;
     }
     
-    public function execute(Config $config) {
+    public function execute(\Exakat\Config $config) {
         switch ($config->command) {
             case 'doctor' : 
                 $doctor = new Tasks\Doctor($this->gremlin);

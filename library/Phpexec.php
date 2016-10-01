@@ -62,7 +62,7 @@ class Phpexec {
     private $actualVersion    = null;
     
     public function __construct($phpversion = null) {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
 
         if ($phpversion === null) {
             $phpversion = $config->phpversion;

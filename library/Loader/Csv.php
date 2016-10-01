@@ -54,7 +54,7 @@ class Csv {
         fclose(static::$fp_rels);
         fclose(static::$fp_nodes);
         
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         
         $res = shell_exec(<<<SHELL
 
@@ -82,7 +82,7 @@ HEADER
 		);
 
 		$context = stream_context_create($context_options);
-		$config = \Config::factory();
+		$config = \Exakat\Config::factory();
 		$response = file_get_contents('http://'.$config->neo4j_host.':'.$config->neo4j_port.'/db/data/', false, $context);
 		
 		if (strpos($response, 'NOT_FOUND') !== false) {

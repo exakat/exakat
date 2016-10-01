@@ -108,7 +108,7 @@ abstract class Analyzer {
         
         $this->_as('first');
         
-        $this->config = \Config::factory();
+        $this->config = \Exakat\Config::factory();
     }
     
     public function __destruct() {
@@ -123,7 +123,7 @@ abstract class Analyzer {
     
     static public function initDocs() {
         if (Analyzer::$docs === null) {
-            $config = \Config::factory();
+            $config = \Exakat\Config::factory();
             
             $pathDocs = $config->dir_root.'/data/analyzers.sqlite';
             self::$docs = new Docs($pathDocs);
@@ -1723,7 +1723,7 @@ GREMLIN;
     }
     
     protected function loadIni($file, $index = null) {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $fullpath = $config->dir_root.'/data/'.$file;
         
         if (!file_exists($fullpath)) {
@@ -1740,7 +1740,7 @@ GREMLIN;
     }
 
     protected function loadJson($file) {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $fullpath = $config->dir_root.'/data/'.$file;
 
         if (!file_exists($fullpath)) {
@@ -1807,7 +1807,7 @@ GREMLIN;
     
     public function getSeverity() {
         if (Analyzer::$docs === null) {
-            $config = \Config::factory();
+            $config = \Exakat\Config::factory();
             
             Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
@@ -1830,7 +1830,7 @@ GREMLIN;
 
     public function getVendors() {
         if (Analyzer::$docs === null) {
-            $config = \Config::factory();
+            $config = \Exakat\Config::factory();
             
             Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
@@ -1840,7 +1840,7 @@ GREMLIN;
 
     public function getTimeToFix() {
         if (Analyzer::$docs === null) {
-            $config = \Config::factory();
+            $config = \Exakat\Config::factory();
             
             Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }

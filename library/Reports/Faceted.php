@@ -33,7 +33,7 @@ class Faceted extends FacetedJson {
         }
 
         $sqlite      = new \sqlite3($dirName.'/dump.sqlite', SQLITE3_OPEN_READONLY);
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
 
         // Clean final destination
         if ($dirName.'/'.$fileName !== '/') {

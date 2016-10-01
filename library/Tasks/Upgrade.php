@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Upgrade extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
     /*
         if (!$config->isPhar) {
             print "This command can only upgrade exakat.phar.\n  If you are running exakat from source, do a git pull\n";

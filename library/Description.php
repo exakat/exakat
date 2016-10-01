@@ -28,7 +28,7 @@ class Description {
                          'clearphp' => '');
     
     public function __construct($analyzer) {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
 
         $filename = $config->dir_root.'/human/'.$this->language.'/'.str_replace('\\', '/', str_replace('Analyzer\\', '', $analyzer)).'.ini';
         

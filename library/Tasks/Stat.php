@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Stat extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $project = $config->project;
 
         $stats = new \Stats($this->gremlin);

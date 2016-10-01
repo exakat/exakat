@@ -29,7 +29,7 @@ class Dump extends Tasks {
     
     const WAITING_LOOP = 1000;
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             throw new Exakat\Exceptions\NoSuchProject($config->project);
         }

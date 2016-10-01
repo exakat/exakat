@@ -29,7 +29,7 @@ class OnePage extends Tasks {
     
     const TOTAL_STEPS = 7;
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $this->config = $config;
         
         $progress = 0;

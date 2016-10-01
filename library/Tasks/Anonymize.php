@@ -33,7 +33,7 @@ class Anonymize extends Tasks {
     private $stringsNames = array();
     private $strings = 'A';
 
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         
         if (($file = $config->file) !== 'stdout') {
             display("Anonymizing file $file\n");

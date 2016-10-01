@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Report2 extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         if ($config->project == "default") {
             die("This command requires a project (option -p).\nAborting\n");
         }

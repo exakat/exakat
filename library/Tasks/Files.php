@@ -26,7 +26,7 @@ namespace Tasks;
 class Files extends Tasks {
     private $config = null;
 
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $dir = $config->project;
         $this->config = $config;
 
@@ -258,7 +258,7 @@ class Files extends Tasks {
     }
     
     static public function findFiles($path, &$files, &$ignoredFiles) {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $ignore_dirs = $config->ignore_dirs;
         $dir = $config->project;
 

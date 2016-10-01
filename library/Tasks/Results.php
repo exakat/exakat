@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Results extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $analyzer = $config->program;
         if (empty($analyzer)) {
             die('Provide the analyzer with the option -P X/Y. Aborting'."\n");

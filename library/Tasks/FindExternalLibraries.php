@@ -69,7 +69,7 @@ class FindExternalLibraries extends Tasks {
                              'yii'              => self::FILE_ONLY,
                              );
 
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $project = $config->project;
         if ($project == 'default') {
             die("findextlib needs a -p <project>\nAborting\n");
