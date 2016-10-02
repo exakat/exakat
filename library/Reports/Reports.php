@@ -34,6 +34,7 @@ abstract class Reports {
     protected $config     = null;
     
     protected $sqlite = null;
+    protected $datastore = null;
     
     public function __construct() {
         $this->config = \Exakat\Config::Factory();
@@ -42,7 +43,8 @@ abstract class Reports {
         $this->themesList = '("'.implode('", "', $analyzers).'")';
 
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', SQLITE3_OPEN_READONLY);
-        
+
+        $this->datastore = new \sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
     }
     
     public abstract function generateFileReport($report);
