@@ -126,7 +126,12 @@ class Devoops extends Reports {
 
         // Analyze
         $analyze = array();
-        $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$this->themesList);
+        $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
+                              '"Dead code"', 'Security', 'Analyze');
+        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($themes);
+        $themesList = '("'.implode('", "', $analyzers).'")';
+
+        $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$themesList);
         while($row = $res->fetchArray()) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
             
@@ -1105,9 +1110,14 @@ TEXT
         $css->titles = array('Label', 'Count', 'Severity');
         $css->readOrder = $css->titles;
 
+        $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
+                              '"Dead code"', 'Security', 'Analyze');
+        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($themes);
+        $themesList = '("'.implode('", "', $analyzers).'")';
+
         $res = $this->dump->query(<<<SQL
 SELECT analyzer, count(*) AS count, severity FROM results 
-        WHERE analyzer IN $this->themesList 
+        WHERE analyzer IN $themesList 
         GROUP BY analyzer
         HAVING count > 0
 SQL
