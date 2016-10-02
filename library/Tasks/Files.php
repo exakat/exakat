@@ -55,9 +55,13 @@ class Files extends Tasks {
         $files = [];
         self::findFiles($config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles);
         
-        $this->datastore->addRow('ignoredFiles', array_map(function ($a) {
-                return array('file'   => $a);
-            }, $ignoredFiles));
+        $i = [];
+        foreach($ignoredFiles as $file => $reason) {
+            $i[] = ['file' => $file, 'reason' => $reason];
+        }
+        $ignoredFiles = $i;
+        $this->datastore->addRow('ignoredFiles', $ignoredFiles);
+        
         $this->datastore->addRow('files', array_map(function ($a) {
                 return array('file'   => $a);
             }, $files));
@@ -302,21 +306,21 @@ class Files extends Tasks {
             if (empty($ext)) {
                 if ($php->countTokenFromFile($path . $file) < 2) {
                     unset($files[$id]);
-                    $ignoredFiles[] = $file;
+                    $ignoredFiles[$file] = 'Not a PHP file';
                 }
             } elseif (!in_array($ext, $exts)) {
                 // selection of extensions
                 unset($files[$id]);
+                $ignoredFiles[$file] = "Ignored extension ($ext)";
             } elseif (!empty($regex) && preg_match($regex, $file)) {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
-                $ignoredFiles[] = $file;
+                $ignoredFiles[$file] = 'Ignored dir';
             } elseif ($php->countTokenFromFile($path . $file) < 2) {
                 unset($files[$id]);
-                $ignoredFiles[] = $file;
+                $ignoredFiles[$file] = 'Not a PHP File';
             }
         }
-
     }
 }
 
