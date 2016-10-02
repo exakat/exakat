@@ -198,6 +198,7 @@ class Load extends Tasks {
     private $atoms = array();
     private $atomCount = 0;
     private $argumentsId = array();
+    private $path;
     
     public function __construct($gremlin) {
         parent::__construct($gremlin);
@@ -211,10 +212,19 @@ class Load extends Tasks {
 
         \Tasks\Precedence::preloadConstants($this->php->getActualVersion());
         $this->precedence = new \Tasks\Precedence();
+        
+        $config = \Exakat\Config::factory();
+        $this->path = $config->dir_root.'/.exakat';
     }
 
     public function run(\Exakat\Config $config) {
         $this->config = $config;
+
+        if (!file_exists($this->config->dir_root.'/.exakat')) {
+            display("rebuilding .exakat\n");
+            rmdirRecursive($this->config->dir_root.'/.exakat');
+            mkdir($this->config->dir_root.'/.exakat');
+        }
         
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
             throw new Exakat\Exceptions\NoSuchProject($this->config->project);
@@ -3927,12 +3937,7 @@ class Load extends Tasks {
         
         // Saving atoms
         foreach($this->atoms as $atom) {
-            if ($atom['atom'] === '') {
-                print_r($atom);
-                die();
-            }
-
-            $fileName = './nodes.g3.'.$atom['atom'].'.csv';
+            $fileName = $this->path.'/nodes.g3.'.$atom['atom'].'.csv';
             if ($atom['atom'] === 'Project' && file_exists($fileName)) {
                 // Project is saved only once
                 continue;
@@ -3984,7 +3989,7 @@ class Load extends Tasks {
             foreach($origins as $origin => $destinations) {
                 foreach($destinations as $destination => $links) {
                     $csv = $label.'.'.$origin.'.'.$destination;
-                    $fileName = './rels.g3.'.$csv.'.csv';
+                    $fileName = $this->path.'/rels.g3.'.$csv.'.csv';
                     if (isset($extras[$csv])) {
                         $fp = fopen($fileName, 'a');
                     } else {
@@ -4022,11 +4027,11 @@ class Load extends Tasks {
                     foreach($path['definitions'] as $destination => $destinations) {
                         $csv = 'DEFINITION.'.$destination.'.'.$origin;
 
-                        $filePath = './rels.g3.'.$csv.'.csv';
+                        $filePath = $this->path.'/rels.g3.'.$csv.'.csv';
                         if (file_exists($filePath)) {
-                            $fp = fopen('./rels.g3.'.$csv.'.csv', 'a');
+                            $fp = fopen($this->path.'/rels.g3.'.$csv.'.csv', 'a');
                         } else {
-                            $fp = fopen('./rels.g3.'.$csv.'.csv', 'w+');
+                            $fp = fopen($this->path.'/rels.g3.'.$csv.'.csv', 'w+');
                             fputcsv($fp, ['start', 'end']);
                         }
 
