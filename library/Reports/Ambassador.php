@@ -29,6 +29,7 @@ class Ambassador extends Reports {
     protected $analyzers = array(); // cache for analyzers [Title] = object
     protected $projectPath = null;
     protected $finalName = null;
+    private $tmpName = '';
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
@@ -86,6 +87,8 @@ class Ambassador extends Reports {
         $this->projectPath = $folder;
         
         $this->initFolder();
+        $this->generateSettings();
+        $this->generateProcFiles();
 
         $this->generateDocumentation();
         $this->generateDashboard();
@@ -911,6 +914,79 @@ SQL;
         }
         
         return $class;
+    }
+    
+    private function generateSettings() {
+
+       $info = array(array('Code name', $this->config->project_name));
+        if (!empty($this->config->project_description)) {
+            $info[] = array('Code description', $this->config->project_description);
+        }
+        if (!empty($this->config->project_packagist)) {
+            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
+        }
+        if (!empty($this->config->project_url)) {
+            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
+        }
+        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
+            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
+            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
+            $info[] = array('Git URL', $r[1]);
+            
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
+            $info[] = array('Git branch', trim($res));
+
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
+            $info[] = array('Git commit', trim($res));
+        } else {
+            $info[] = array('Repository URL', 'Downloaded archive');
+        }
+
+        $datastore = new \Datastore($this->config);
+        
+        $info[] = array('Number of PHP files', $datastore->getHash('files'));
+        $info[] = array('Number of lines of code', $datastore->getHash('loc'));
+        $info[] = array('Number of lines of code with comments', $datastore->getHash('locTotal'));
+
+        $info[] = array('Report production date', date('r', strtotime('now')));
+        
+        $php = new \Phpexec($this->config->phpversion);
+        $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
+        $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
+        
+        $info[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');
+        
+        $settings = '';
+        foreach($info as $i) {
+            $settings .= "<tr><td>$i[0]</td><td>$i[1]</td></tr>";
+        }        
+        
+        $file = $this->tmpName.'/datas/used_settings.html';
+        $html = file_get_contents($file);
+        $html = str_replace('<settings />', $settings, $html);
+        file_put_contents($file, $html);
+    }
+
+    private function generateProcFiles() {
+        $files = '';
+        $res = $this->datastore->query('SELECT file FROM files');
+        while($row = $res->fetchArray()) {
+            $files .= "<tr><td>{$row['file']}</td></tr>\n";
+        }
+
+        $nonFiles = '';
+        $res = $this->datastore->query('SELECT file, reason FROM ignoredFiles');
+        while($row = $res->fetchArray()) {
+            if (empty($row['file'])) { continue; }
+
+            $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
+        }
+
+        $file = $this->tmpName.'/datas/proc_files.html';
+        $html = file_get_contents($file);
+        $html = str_replace('<files />', $files, $html);
+        $html = str_replace('<non-files />', $nonFiles, $html);
+        file_put_contents($file, $html);
     }
 
 }
