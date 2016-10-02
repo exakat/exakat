@@ -1281,6 +1281,16 @@ GREMLIN
         
         return $this;
     }
+    
+    public function goToAllTraits($self = self::INCLUDE_SELF) {
+        if ($self === self::INCLUDE_SELF) {
+            $this->addMethod('repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).emit(hasLabel("Trait")).times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
+        }
+        
+        return $this;
+    }
 
     public function goToTraits() {
         $this->addMethod('repeat( __.out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.') ');
