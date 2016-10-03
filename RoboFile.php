@@ -176,7 +176,7 @@ LICENCE;
          ->exec('mkdir release/scripts')
          ->exec('cp -r scripts/*.sh release/scripts/')
          ->exec('cp -r scripts/doctor.php release/scripts/')
-         ->exec('cp -r tests release/')
+//         ->exec('cp -r tests release/')
          ->exec('cp -r composer.* release/')
          ->exec('cp -r RoboFile.php release/')
          ->exec('tar czf release.tgz release')
