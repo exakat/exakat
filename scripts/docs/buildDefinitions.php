@@ -58,11 +58,12 @@ $entries = array('preg\_replace'                  => 'http://www.php.net/preg_re
                  'srand'                          => 'http://www.php.net/srand',
                  'mt\_rand'                       => 'http://www.php.net/mt_rand',
                  'mt\_srand'                      => 'http://www.php.net/mt_srand',
+                 'set\_exception\_handler'        => 'http://www.php.net/set_exception_handler',
 
                  'strlen'                         => 'http://www.php.net/strlen',
-                 'mb_strlen'                      => 'http://www.php.net/mb_strlen',
-                 'grapheme_strlen'                => 'http://www.php.net/grapheme_strlen',
-                 'iconv_strlen'                   => 'http://www.php.net/iconv_strlen',
+                 'mb\_strlen'                     => 'http://www.php.net/mb_strlen',
+                 'grapheme\_strlen'               => 'http://www.php.net/grapheme_strlen',
+                 'iconv\_strlen'                  => 'http://www.php.net/iconv_strlen',
                  'empty'                          => 'http://www.php.net/empty',
 
                  'usort'                          => 'http://www.php.net/usort',
@@ -116,6 +117,9 @@ $entries = array('preg\_replace'                  => 'http://www.php.net/preg_re
                  '\_\_debugInfo'                  => 'http://php.net/manual/en/language.oop5.magic.php',
                  
                  'ArrayAccess'                    => 'http://php.net/manual/en/class.arrayaccess.php',
+                 'Throwable'                      => 'http://php.net/manual/fr/class.throwable.php',
+                 'Closure'                        => 'http://php.net/manual/fr/class.closure.php',
+                 'Traversable'                    => 'http://php.net/manual/fr/class.traversable.php',
                  
                  '__FILE__'                       => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__DIR__'                        => 'http://php.net/manual/en/language.constants.predefined.php',
@@ -125,7 +129,6 @@ $entries = array('preg\_replace'                  => 'http://www.php.net/preg_re
                  '__NAMESPACE__'                  => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__TRAIT__'                      => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__FUNCTION__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
-                 
 
                  );
 
@@ -236,6 +239,20 @@ Glossary
 
 GLOSSARY;
 ksort($glossary);
+
+$found = 0;
+foreach($glossary as $letters => $items) {
+    $found += count(array_keys($items));
+}
+print "$found found\n";
+print count($entries)." defined\n";
+
+foreach($entries as $name => $url) {
+    $letter = strtoupper(trim($name, '\\`'))[0];
+    if (!isset($glossary[$letter][$name])) {
+        print $name." $letter\n";
+    }
+}
 
 foreach($glossary as $letter => $items) {
     $glossaryRst .= "+ `$letter`\n";
