@@ -1,4 +1,4 @@
-Version 0.8.3 (Guzhi Gong, Coming up)
+Version 0.8.4 (Lingkongzi, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 0.8.3 (Guzhi Gong, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.8.3 (Guzhi Gong, 2016-10-03)
++ Architecture
+    + Created temp folder .exakat in projects_dir
+    + Removed mentions of float, only using Real
+    + Moved Config to Exakat\Config
+    + More examples in docs
++ Report
+    + Added settings and files to Ambassador
++ Analyzer
+    + New analyzer for dependant Traits
+    + Added new Theme 'Cakephp' with 6 analyzers for migration
+    + New values for Not-a-hash
+    + Unresolved Catch now takes Throwable into account
++ Tokenizer
+    + Fixed edge case where return is used inside if/then without {} nor value.
+    + Fixed 'code' and 'token' for ?: and ()
 
 Version 0.8.2 (Jinjie Shiba Gong, 2016-09-26)
 + Architecture
