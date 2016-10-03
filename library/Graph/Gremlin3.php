@@ -31,7 +31,7 @@ class Gremlin3 extends Graph {
         parent::__construct($config);
 
         if (!file_exists($config->neo4j_folder)) {
-            die("Error in the path to the Neo4j folder. Please, check config/config.ini\n");
+            die("Error in the path to the Neo4j folder ($config->neo4j_folder). Please, check config/exakat.ini\n");
         }
         $this->scriptDir = $config->neo4j_folder.'/scripts/';
 

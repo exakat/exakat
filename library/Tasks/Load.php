@@ -214,16 +214,16 @@ class Load extends Tasks {
         $this->precedence = new \Tasks\Precedence();
         
         $config = \Exakat\Config::factory();
-        $this->path = $config->dir_root.'/.exakat';
+        $this->path = $config->projects_root.'/.exakat';
     }
 
     public function run(\Exakat\Config $config) {
         $this->config = $config;
 
-        if (!file_exists($this->config->dir_root.'/.exakat')) {
+        if (!file_exists($this->config->projects_root.'/.exakat')) {
             display("rebuilding .exakat\n");
-            rmdirRecursive($this->config->dir_root.'/.exakat');
-            mkdir($this->config->dir_root.'/.exakat');
+            rmdirRecursive($this->config->projects_root.'/.exakat');
+            mkdir($this->config->projects_root.'/.exakat');
         }
         
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
