@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 26 Sep 2016 08:08:23 +0000
-.. comment: Generation hash : 68baddda7a2dd06d1b552991cc4e214f63cdf2f0
+.. comment: Generation date : Mon, 03 Oct 2016 05:10:22 +0000
+.. comment: Generation hash : 562957cdd6b67a30f22612f051b4369ffddb7d31
 
 
 .. _$http\_raw\_post\_data:
@@ -18,7 +18,19 @@ $HTTP\_RAW\_POST\_DATA
 ######################
 
 
-Starting at PHP 5.6, $HTTP\_RAW\_POST\_DATA will be deprecated, and should be replaced by php://input. You may get ready by setting always\_populate\_raw\_post\_data to -1.
+Starting at PHP 5.6, $HTTP\_RAW\_POST\_DATA is deprecated, and should be replaced by php://input. You may get ready by setting always\_populate\_raw\_post\_data to -1.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 5.5 and older
+   $postdata = $HTTP\_RAW\_POST\_DATA;
+   
+   // PHP 5.6 and more recent
+   $postdata = file\_get\_contents(php://input);
+   
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------+
 | Command Line | Php/RawPostDataUsage                                                                            |
@@ -674,7 +686,26 @@ Bracketless Blocks
 ##################
 
 
-PHP allows one liners as for/foreach/while loops, or as then/else expressions. It is generally considered a bad practice, as readability is lower and there are non-négligeable risk of excluding from the loop the next instruction.
+PHP allows one liners as for(), foreach(), while(), do..while() loops, or as then/else expressions. 
+
+It is generally considered a bad practice, as readability is lower and there are non-négligeable risk of excluding from the loop the next instruction.
+
+.. code-block:: php
+
+   <?php
+   
+   // Legit one liner
+   foreach(range('a', 'z') as $letter) ++$letterCount;
+   
+   // More readable version, even for a one liner.
+   foreach(range('a', 'z') as $letter) {
+       ++$letterCount;
+   }
+   
+   ?>
+
+
+switch() cannot be without bracket.
 
 +--------------+------------------------------------------------+
 | Command Line | Structures/Bracketless                         |
@@ -1533,6 +1564,53 @@ PHP 7.0 has the ability to define an array as a constant, using the define() nat
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
 +--------------+------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _dependant-trait:
+
+Dependant Trait
+###############
+
+
+The following traits make usage of methods and properties, static or not, that are not defined in the trait. This means the host class must provide those methods and properties, but there is no way to enforce this. 
+
+This may also lead to dead code : when the trait is removed, the host class have unused properties and methods.
+
+.. code-block:: php
+
+   <?php
+   
+   // autonomous trait : all it needs is within the trait
+   trait t {
+       private $p = 0;
+       
+       function foo() {
+           return ++$this->p;
+       }
+   }
+   
+   // dependant trait : the host class needs to provide some properties or methods
+   trait t2 {
+       function foo() {
+           return ++$this->p;
+       }
+   }
+   
+   class x {
+       use t2;
+       
+       private $p = 0;
+   }
+   ?>
+
++--------------+-----------------------+
+| Command Line | Traits/DependantTrait |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
 
 
 
@@ -5983,13 +6061,27 @@ global keyword should only be used with simple variables (global $var), and not 
 
 
 
-.. _simple-regex:
+.. _simplify-regex:
 
-Simple Regex
-############
+Simplify Regex
+##############
 
 
-PRCE regex are a powerful way to search inside strings, but they also come at the price of performance. When the query is simple enough, try using strpos() or strposi() instead.
+PRCE regex are a powerful way to search inside strings, but they also come at the price of performance. When the query is simple enough, try using strpos() or stripos() instead.
+
+.. code-block:: php
+
+   <?php
+   
+   // simple preg calls
+   if (preg\_match('/a/', $string))  {}
+   if (preg\_match('/b/i', $string)) {} // case insensitive
+   
+   // light replacements
+   if( strpos('a', $string)) {}
+   if( stripos('b', $string)) {}       // case insensitive
+   
+   ?>
 
 +--------------+-----------------------+
 | Command Line | Structures/SimplePreg |
@@ -8328,7 +8420,24 @@ Wrong Parameter Type
 ####################
 
 
-The expected parameter is not the correct type. Check PHP documentation to know which is the right format to be used.
+The expected parameter is not of the correct type. Check PHP documentation to know which is the right format to be used.
+
+.. code-block:: php
+
+   <?php
+   
+   // substr() shouldn't work on integers.
+   // the first argument is first converted to string, and it is 123456.
+   echo substr(123456, 0, 4); // display 1234
+   
+   // substr() shouldn't work on boolean
+   // the first argument is first converted to string, and it is 1, and not t
+   echo substr(true, 0, 1); // displays 1
+   
+   // substr() works correctly on strings.
+   echo substr(123456, 0, 4);
+   
+   ?>
 
 +--------------+---------------------------+
 | Command Line | Php/InternalParameterType |
@@ -8836,9 +8945,26 @@ set\_exception\_handler() Warning
 #################################
 
 
-set\_exception\_handler() callable function has to be adapted to PHP 7 : Exception is not the right typehint, it is now Throwable. 
+The set\_exception\_handler() callable function has to be adapted to PHP 7 : Exception is not the right typehint, it is now Throwable. 
 
 When in doubt about backward compatibility, just drop the Typehint. Otherwise, use Throwable.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 5.6- typehint 
+   class foo { function bar(\Exception $e) {} }
+   
+   // PHP 7+ typehint 
+   class foo { function bar(Throwable $e) {} }
+   
+   // PHP 5 and PHP 7 compatible typehint (note : there is none)
+   class foo { function bar($e) {} }
+   
+   set\_exception\_handler(foo);
+   
+   ?>
 
 +--------------+------------------------------------------------------+
 | Command Line | Php/SetExceptionHandlerPHP7                          |

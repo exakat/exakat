@@ -10,6 +10,7 @@ Glossary
       + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
       + :ref:`Accessing Private <accessing-private>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Dependant Trait <dependant-trait>`
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
@@ -58,6 +59,12 @@ Glossary
 
 
 + `C`
+    + `Closure`
+
+      + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+      + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+
     + `curl_multi_errno`
 
       + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
@@ -98,6 +105,7 @@ Glossary
 + `F`
     + `for()`
 
+      + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`For Using Functioncall <for-using-functioncall>`
       + :ref:`Sequences In For <sequences-in-for>`
@@ -105,6 +113,7 @@ Glossary
     + `foreach()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`No Direct Usage <no-direct-usage>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
@@ -157,6 +166,7 @@ Glossary
     + `preg_match`
 
       + :ref:`Results May Be Missing <results-may-be-missing>`
+      + :ref:`Simplify Regex <simplify-regex>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
     + `preg_replace`
@@ -182,6 +192,14 @@ Glossary
 
 
 + `S`
+    + `set_exception_handler`
+
+      + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
+
+    + `stripos`
+
+      + :ref:`Simplify Regex <simplify-regex>`
+
     + `strlen`
 
       + :ref:`Make One Call <make-one-call>`
@@ -190,11 +208,12 @@ Glossary
 
     + `strpos`
 
-      + :ref:`Simple Regex <simple-regex>`
+      + :ref:`Simplify Regex <simplify-regex>`
       + :ref:`Strpos Comparison <strpos-comparison>`
 
     + `switch()`
 
+      + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch Without Default <switch-without-default>`
@@ -206,6 +225,11 @@ Glossary
 
 
 + `T`
+    + `Throwable`
+
+      + :ref:`Empty Try Catch <empty-try-catch>`
+      + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
+
     + `throw`
 
       + :ref:`Exception Order <exception-order>`
@@ -238,6 +262,7 @@ Glossary
 + `W`
     + `while()`
 
+      + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
 
 

@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 26 Sep 2016 08:08:23 +0000
-.. comment: Generation hash : 68baddda7a2dd06d1b552991cc4e214f63cdf2f0
+.. comment: Generation date : Mon, 03 Oct 2016 05:10:22 +0000
+.. comment: Generation hash : 562957cdd6b67a30f22612f051b4369ffddb7d31
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 255 analysis
+Total : 256 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -114,6 +114,7 @@ Total : 255 analysis
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
+* :ref:`Dependant Trait <dependant-trait>`
 * :ref:`Deprecated Code <deprecated-code>`
 * :ref:`Directive Name <directive-name>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
@@ -709,7 +710,7 @@ Total : 16 analysis
 * :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`
-* :ref:`Simple Regex <simple-regex>`
+* :ref:`Simplify Regex <simplify-regex>`
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 
