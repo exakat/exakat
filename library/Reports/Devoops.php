@@ -32,7 +32,6 @@ class Devoops extends Reports {
     const INCOMPATIBLE = 'Incompatible';
     
     private $dump      = null; // Dump.sqlite
-    private $datastore = null; // Datastore.sqlite
     
     private $analyzers  = array(); // cache for analyzers [Title] = object
     

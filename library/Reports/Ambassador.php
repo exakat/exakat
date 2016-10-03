@@ -25,7 +25,6 @@ namespace Reports;
 class Ambassador extends Reports {
 
     protected $dump = null; // Dump.sqlite
-    protected $datastore = null; // Datastore.sqlite
     protected $analyzers = array(); // cache for analyzers [Title] = object
     protected $projectPath = null;
     protected $finalName = null;
