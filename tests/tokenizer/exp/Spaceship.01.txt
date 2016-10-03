@@ -1,7 +1,482 @@
-echo
-Label : ARGUMENT
-  <=>
-  Label : LEFT
-    1
-  Label : RIGHT
-    1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Spaceship.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                1
+              Label : RIGHT
+                1
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                1
+              Label : RIGHT
+                2
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                2
+              Label : RIGHT
+                1
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                1.5
+              Label : RIGHT
+                1.5
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                1.5
+              Label : RIGHT
+                2.5
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                2.5
+              Label : RIGHT
+                1.5
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                "a"
+              Label : RIGHT
+                "a"
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                "a"
+              Label : RIGHT
+                "b"
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                "b"
+              Label : RIGHT
+                "a"
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                "a"
+              Label : RIGHT
+                "aa"
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                "zz"
+              Label : RIGHT
+                "aa"
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    Void
+                Label : VARIABLE
+                  [
+              Label : RIGHT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    Void
+                Label : VARIABLE
+                  [
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    3
+                Label : VARIABLE
+                  [
+              Label : RIGHT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    3
+                Label : VARIABLE
+                  [
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    3
+                Label : VARIABLE
+                  [
+              Label : RIGHT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    Void
+                Label : VARIABLE
+                  [
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    3
+                Label : VARIABLE
+                  [
+              Label : RIGHT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    1
+                Label : VARIABLE
+                  [
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    3
+                Label : VARIABLE
+                  [
+              Label : RIGHT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                  Label : ARGUMENT
+                    4
+                Label : VARIABLE
+                  [
+          Label : NAME
+            echo
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            (object)
+            Label : CAST
+              [
+              Label : ARGUMENTS
+                [
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    "a"
+                  Label : VALUE
+                    "b"
+              Label : VARIABLE
+                [
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            (object)
+            Label : CAST
+              [
+              Label : ARGUMENTS
+                [
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    "a"
+                  Label : VALUE
+                    "b"
+              Label : VARIABLE
+                [
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                $a
+              Label : RIGHT
+                $b
+          Label : NAME
+            echo
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            (object)
+            Label : CAST
+              [
+              Label : ARGUMENTS
+                [
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    "a"
+                  Label : VALUE
+                    "b"
+              Label : VARIABLE
+                [
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            (object)
+            Label : CAST
+              [
+              Label : ARGUMENTS
+                [
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    "a"
+                  Label : VALUE
+                    "c"
+              Label : VARIABLE
+                [
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                $a
+              Label : RIGHT
+                $b
+          Label : NAME
+            echo
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            (object)
+            Label : CAST
+              [
+              Label : ARGUMENTS
+                [
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    "a"
+                  Label : VALUE
+                    "c"
+              Label : VARIABLE
+                [
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            (object)
+            Label : CAST
+              [
+              Label : ARGUMENTS
+                [
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    "a"
+                  Label : VALUE
+                    "b"
+              Label : VARIABLE
+                [
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                $a
+              Label : RIGHT
+                $b
+          Label : NAME
+            echo
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            (object)
+            Label : CAST
+              [
+              Label : ARGUMENTS
+                [
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    "a"
+                  Label : VALUE
+                    "b"
+              Label : VARIABLE
+                [
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            (object)
+            Label : CAST
+              [
+              Label : ARGUMENTS
+                [
+                Label : ARGUMENT
+                  =>
+                  Label : KEY
+                    "b"
+                  Label : VALUE
+                    "b"
+              Label : VARIABLE
+                [
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <=>
+              Label : LEFT
+                $a
+              Label : RIGHT
+                $b
+          Label : NAME
+            echo

@@ -1,5 +1,34 @@
-[
-Label : INDEX
-  'B'
-Label : VARIABLE
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.39.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              [
+              Label : INDEX
+                'B'
+              Label : VARIABLE
+                $c
+            Label : ELSE
+              ::
+              Label : CLASS
+                C
+              Label : CONSTANT
+                F
+            Label : THEN
+              ::
+              Label : CLASS
+                C
+              Label : CONSTANT
+                D

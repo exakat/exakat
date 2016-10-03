@@ -1,7 +1,18 @@
-+
-Label : LEFT
-  !
-  Label : NOT
-    1
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          +
+          Label : LEFT
+            !
+            Label : NOT
+              1
+          Label : RIGHT
+            2

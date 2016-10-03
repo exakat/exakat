@@ -1,20 +1,22 @@
-./tests/tokenizer/source/Phpcode.15.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        namespace
-        Label : BLOCK
-          
-        Label : NAME
-          \
-          Label : SUBNAME
-            A
-          Label : SUBNAME
-            B
-          Label : SUBNAME
-            C
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C

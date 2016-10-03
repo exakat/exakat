@@ -1,5 +1,112 @@
-(
-Label : ARGUMENT
-  "people.csv"
-Label : ARGUMENT
-  "r"
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Spaceship.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !==
+            Label : LEFT
+              (
+              Label : CODE
+                =
+                Label : LEFT
+                  $handle
+                Label : RIGHT
+                  fopen
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      "people.csv"
+                    Label : ARGUMENT
+                      "r"
+                  Label : NAME
+                    fopen
+            Label : RIGHT
+              FALSE
+          Label : THEN
+            {}
+            Label : ELEMENT
+              while
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $data
+                    Label : APPEND
+                      $data
+                  Label : RIGHT
+                    $row
+              Label : CONDITION
+                !==
+                Label : LEFT
+                  (
+                  Label : CODE
+                    =
+                    Label : LEFT
+                      $row
+                    Label : RIGHT
+                      fgetcsv
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $handle
+                        Label : ARGUMENT
+                          1000
+                        Label : ARGUMENT
+                          ","
+                      Label : NAME
+                        fgetcsv
+                Label : RIGHT
+                  FALSE
+            Label : ELEMENT
+              fclose
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $handle
+              Label : NAME
+                fclose
+        Label : ELEMENT
+          usort
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $data
+            Label : ARGUMENT
+               
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $left
+                Label : ARGUMENT
+                  $right
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    <=>
+                    Label : LEFT
+                      [
+                      Label : INDEX
+                        1
+                      Label : VARIABLE
+                        $left
+                    Label : RIGHT
+                      [
+                      Label : INDEX
+                        1
+                      Label : VARIABLE
+                        $right
+              Label : NAME
+                Void
+          Label : NAME
+            usort

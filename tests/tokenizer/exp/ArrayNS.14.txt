@@ -1,9 +1,36 @@
-[
-Label : INDEX
-  $e
-Label : VARIABLE
-  ::
-  Label : CLASS
-    C
-  Label : PROPERTY
-    $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/ArrayNS.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              [
+              Label : INDEX
+                'h'
+              Label : VARIABLE
+                $g
+            Label : VARIABLE
+              [
+              Label : INDEX
+                $f
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  $e
+                Label : VARIABLE
+                  ::
+                  Label : CLASS
+                    C
+                  Label : PROPERTY
+                    $d
+          Label : RIGHT
+            $i

@@ -1,5 +1,32 @@
-=
-Label : LEFT
-  $c
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.31.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              var
+              Label : VAR
+                var
+              Label : PPP
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  3
+              Label : PPP
+                =
+                Label : LEFT
+                  $c
+                Label : RIGHT
+                  2
+          Label : NAME
+            x

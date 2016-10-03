@@ -1,5 +1,36 @@
-<
-Label : LEFT
-  $i
-Label : RIGHT
-  5
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_For.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          for
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $j
+          Label : FINAL
+            ;
+            Label : ELEMENT
+              <
+              Label : LEFT
+                $i
+              Label : RIGHT
+                5
+          Label : INCREMENT
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $i
+          Label : INIT
+            ;
+            Label : ELEMENT
+              Void

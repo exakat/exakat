@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Magicnumber extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $project = $config->project;
         if ($project == 'default') {
             die("Magicnumber needs a -p <project>\nAborting\n");

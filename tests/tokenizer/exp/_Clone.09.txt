@@ -1,9 +1,20 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  clone
-  Label : CLONE
-    $y
-    Label : CODE
-      $y
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Clone.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            clone
+            Label : CLONE
+              (
+              Label : CODE
+                $y

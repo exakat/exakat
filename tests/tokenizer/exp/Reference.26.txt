@@ -1,5 +1,52 @@
->>
-Label : LEFT
-  $c
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          |
+          Label : LEFT
+            $a
+          Label : RIGHT
+            &
+            Label : LEFT
+              >>
+              Label : LEFT
+                $c
+              Label : RIGHT
+                1
+            Label : RIGHT
+              $d
+        Label : ELEMENT
+          |
+          Label : LEFT
+            $a
+          Label : RIGHT
+            &
+            Label : LEFT
+              >>
+              Label : LEFT
+                $c
+              Label : RIGHT
+                1.2
+            Label : RIGHT
+              $d
+        Label : ELEMENT
+          |
+          Label : LEFT
+            $a
+          Label : RIGHT
+            &
+            Label : LEFT
+              >>
+              Label : LEFT
+                $c
+              Label : RIGHT
+                -3
+            Label : RIGHT
+              $d

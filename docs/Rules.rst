@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 29 Aug 2016 09:54:35 +0000
-.. comment: Generation hash : 04a6925cc2f4587a3bdb39f44312b105a0a20b83
+.. comment: Generation date : Mon, 03 Oct 2016 05:10:22 +0000
+.. comment: Generation hash : 562957cdd6b67a30f22612f051b4369ffddb7d31
 
 
 .. _$http\_raw\_post\_data:
@@ -18,7 +18,19 @@ $HTTP\_RAW\_POST\_DATA
 ######################
 
 
-Starting at PHP 5.6, $HTTP\_RAW\_POST\_DATA will be deprecated, and should be replaced by php://input. You may get ready by setting always\_populate\_raw\_post\_data to -1.
+Starting at PHP 5.6, $HTTP\_RAW\_POST\_DATA is deprecated, and should be replaced by php://input. You may get ready by setting always\_populate\_raw\_post\_data to -1.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 5.5 and older
+   $postdata = $HTTP\_RAW\_POST\_DATA;
+   
+   // PHP 5.6 and more recent
+   $postdata = file\_get\_contents(php://input);
+   
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------+
 | Command Line | Php/RawPostDataUsage                                                                            |
@@ -54,7 +66,27 @@ $this Is Not An Array
 #####################
 
 
-$this variable represents an object (the current object) and it is not an array, unless the class (or its parents) has the ArrayAccess interface.
+`$this` variable represents the current object and it is not an array, unless the class (or its parents) has the ArrayAccess interface.
+
+.. code-block:: php
+
+   <?php
+   
+   // $this is an array
+   class Foo extends ArrayAccess {
+       function bar() {
+           ++$this[3];
+       }
+   }
+   
+   // $this is not an array
+   class Foo2 {
+       function bar() {
+           ++$this[3];
+       }
+   }
+   
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Classes/ThisIsNotAnArray |
@@ -272,11 +304,23 @@ Adding Zero
 ###########
 
 
-Adding 0 is useless. 
+Adding 0 is useless, as 0 is the neutral element for addition. It may trigger a cast (to integer), though behavior changes from PHP 7.0 to PHP 7.1. 
 
-If it is used to type cast a value to integer, then casting (integer) is clearer. 
+.. code-block:: php
 
-In (0 - $x) structures, 0 may be omitted.
+   <?php
+   
+   $a = 123 + 0;
+   $a = 0 + 123;
+   
+   // Also works with minus
+   $b = 0 - $c; // drop the 0, but keep the minus
+   $b = $c - 0; // drop the 0 and the minus
+   
+   ?>
+
+
+If it is used to type cast a value to integer, then casting (integer) is clearer.
 
 +--------------+-----------------------------------------------------------------------------------------------+
 | Command Line | Structures/AddZero                                                                            |
@@ -378,7 +422,20 @@ Ambiguous Index
 
 List of all indexes that are defined in the same array, with different types. 
 
-Example : $x[1] = 1; $x['1'] = 2; 
+.. code-block:: php
+
+   <?php
+   
+   $x = [];
+   $x[1]    = 1; 
+   $x['1']  = 2; 
+   $x[1.0]  = 3; 
+   $x[true] = 4; 
+   
+   // $x only contains one element : 1 => 4
+   
+   ?>
+
 
 They are indeed distinct, but may lead to confusion.
 
@@ -516,7 +573,28 @@ Avoid array\_unique()
 #####################
 
 
-The native function array\_unique is much slower than using other alternative, such as array\_count\_values(), array\_flip/array\_keys, or even a foreach() loops.
+The native function array\_unique() is much slower than using other alternative, such as array\_count\_values(), array\_flip()/array\_keys(), or even a foreach() loops. 
+
+.. code-block:: php
+
+   <?php
+   
+   // using array\_unique()
+   $uniques = array\_unique($someValues);
+   
+   // When values are strings or integers
+   $uniques = array\_keys(array\_count\_values($someValues));
+   $uniques = array\_flip(array\_flip($someValues))
+   
+   //even some loops are faster.
+   $uniques = [];
+   foreach($someValues as $s) {
+       if (!in\_array($uniques, $s)) {
+           $uniques[] $s;
+       }
+   }
+   
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Structures/NoArrayUnique |
@@ -524,6 +602,42 @@ The native function array\_unique is much slower than using other alternative, s
 | clearPHP     |                          |
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
+
+.. _avoid-get\_class():
+
+Avoid get\_class()
+##################
+
+
+get\_class() should be replaced with the 'instanceof' operator to check the class of an object. 
+
+get\_class() will only compare the full namespace name of the object's class, while instanceof actually resolve the name, using the local namespace and aliases.
+
+.. code-block:: php
+
+   <?php
+       function foo($arg) {
+           if (get\_class($arg) === 'Stdclass') {
+               // doSomething()
+           }
+       }
+   
+       function bar($arg) {
+           if ($arg instanceof Stdclass) {
+               // doSomething()
+           }
+       }
+   ?>
+
++--------------+--------------------------+
+| Command Line | Structures/UseInstanceof |
++--------------+--------------------------+
+| clearPHP     |                          |
++--------------+--------------------------+
+| Analyzers    | none                     |
 +--------------+--------------------------+
 
 
@@ -572,7 +686,26 @@ Bracketless Blocks
 ##################
 
 
-PHP allows one liners as for/foreach/while loops, or as then/else expressions. It is generally considered a bad practice, as readability is lower and there are non-négligeable risk of excluding from the loop the next instruction.
+PHP allows one liners as for(), foreach(), while(), do..while() loops, or as then/else expressions. 
+
+It is generally considered a bad practice, as readability is lower and there are non-négligeable risk of excluding from the loop the next instruction.
+
+.. code-block:: php
+
+   <?php
+   
+   // Legit one liner
+   foreach(range('a', 'z') as $letter) ++$letterCount;
+   
+   // More readable version, even for a one liner.
+   foreach(range('a', 'z') as $letter) {
+       ++$letterCount;
+   }
+   
+   ?>
+
+
+switch() cannot be without bracket.
 
 +--------------+------------------------------------------------+
 | Command Line | Structures/Bracketless                         |
@@ -590,7 +723,29 @@ Break Outside Loop
 ##################
 
 
-Starting with PHP 7, breaks or continue that are outside a loop (for, foreach, do...while, while) or a switch() statement won't compile anymore.
+Starting with PHP 7, breaks or continue that are outside a loop (for(), foreach(), do...while(), while()) or a switch() statement won't compile anymore.
+
+It is not possible anymore to include a piece of code inside a loop that will then `break`.
+
+.. code-block:: php
+
+   <?php
+   
+       // outside a loop : This won't compile
+       break 1; 
+       
+       foreach($array as $a) {
+           break 1; // Compile OK
+   
+           break 2; // This won't compile, as this break is in one loop, and not 2
+       }
+   
+       foreach($array as $a) {
+           foreach($array2 as $a2) {
+               break 2; // OK in PHP 5 and 7
+           }
+       }
+   ?>
 
 +--------------+----------------------------------------------------------------------+
 | Command Line | Structures/BreakOutsideLoop                                          |
@@ -683,6 +838,28 @@ Cant Extend Final
 It is not possible to extend final classes. 
 
 Since PHP fails with a fatal error, this means that the extending class is probably not used in the rest of the code. Check for dead code.
+
+.. code-block:: php
+
+   <?php
+       // File Foo
+       final class foo {
+           public final function bar() {
+               // doSomething
+           }
+       }
+   ?>
+
+
+In a separate file : 
+.. code-block:: php
+
+   <?php
+       // File Bar
+       class bar extends foo {
+       
+       }
+   ?>
 
 +--------------+----------------------------------------------+
 | Command Line | Classes/CantExtendFinal                      |
@@ -823,6 +1000,21 @@ Classes Mutually Extending Each Other
 
 
 Those classes are extending each other, creating an extension loop. PHP will yield a fatal error at running time, even if it is compiling the code.
+
+.. code-block:: php
+
+   <?php
+   
+   // This code is lintable but won't run
+   class Foo extends Bar { }
+   class Bar extends Foo { }
+   
+   // The loop may be quite large
+   class Foo extends Bar { }
+   class Bar extends Bar2 { }
+   class Bar2 extends Foo { }
+   
+   ?>
 
 +--------------+-------------------------+
 | Command Line | Classes/MutualExtension |
@@ -995,9 +1187,38 @@ Confusing Names
 ###############
 
 
-The following variables's name are very close and may lead to confusion.  
+The following variables's name are very close and may lead to confusion.
 
 Variables are 3 letters long (at least). Variables names build with an extra 's' are omitted.
+Variables may be scattered across the code, or close to each other. 
+
+.. code-block:: php
+
+   <?php
+   
+       // Variable names with one letter difference
+       $fWScale = 1;
+       $fHScale = 1;
+       $fScale = 2;
+       
+       $oFrame = 3;
+       $iFrame = new Foo();
+       
+       $v2\_norm = array();
+       $v1\_norm = 'string';
+       
+       $exept11 = 1;
+       $exept10 = 2;
+       $exept8 = 3;
+       
+       // This even looks like a typo
+       $privileges  = 1;
+       $privilieges = true;
+       
+       // This is not reported : Adding extra s is tolerated.
+       $rows[] = $row;
+       
+   ?>
 
 +--------------+-----------------------+
 | Command Line | Variables/CloseNaming |
@@ -1346,6 +1567,53 @@ PHP 7.0 has the ability to define an array as a constant, using the define() nat
 
 
 
+.. _dependant-trait:
+
+Dependant Trait
+###############
+
+
+The following traits make usage of methods and properties, static or not, that are not defined in the trait. This means the host class must provide those methods and properties, but there is no way to enforce this. 
+
+This may also lead to dead code : when the trait is removed, the host class have unused properties and methods.
+
+.. code-block:: php
+
+   <?php
+   
+   // autonomous trait : all it needs is within the trait
+   trait t {
+       private $p = 0;
+       
+       function foo() {
+           return ++$this->p;
+       }
+   }
+   
+   // dependant trait : the host class needs to provide some properties or methods
+   trait t2 {
+       function foo() {
+           return ++$this->p;
+       }
+   }
+   
+   class x {
+       use t2;
+       
+       private $p = 0;
+   }
+   ?>
+
++--------------+-----------------------+
+| Command Line | Traits/DependantTrait |
++--------------+-----------------------+
+| clearPHP     |                       |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
+
+
+
 .. _deprecated-code:
 
 Deprecated Code
@@ -1580,13 +1848,72 @@ The keyword elseif SHOULD be used instead of else if so that all control keyword
 
 
 
+.. _empty-blocks:
+
+Empty Blocks
+############
+
+
+The listed control structures are empty, or have one of the commanded block empty. It is recommended to remove those blocks, so as to reduce confusion in the code. 
+
+.. code-block:: php
+
+   <?php
+   
+   foreach($foo as $bar) ; // This block seems erroneous
+       $foobar++;
+   
+   if ($a === $b) {
+       doSomething();
+   } else {
+       // Empty block. Remove this
+   }
+   
+   // Blocks containing only empty expressions are also detected
+   for($i = 0; $i < 10; $i++) {
+       ;
+   }
+   
+   // Although namespaces are not control structures, they are reported here
+   namespace A;
+   namespace B;
+   
+   ?>
+
++--------------+------------------------+
+| Command Line | Structures/EmptyBlocks |
++--------------+------------------------+
+| clearPHP     |                        |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
+
 .. _empty-classes:
 
 Empty Classes
 #############
 
 
-List of empty classes. Classes that are directly derived from an exception are not considered here.
+List of empty classes. Classes that are directly derived from an exception are omited.
+
+.. code-block:: php
+
+   <?php
+   
+   //Empty class
+   class foo extends bar {}
+   
+   //Not an empty class
+   class foo2 extends bar {
+       const FOO = 2;
+   }
+   
+   //Not an empty class, as derived from Exception
+   class barException extends \Exception {}
+   
+   ?>
 
 +--------------+--------------------+
 | Command Line | Classes/EmptyClass |
@@ -1681,6 +2008,40 @@ Empty Namespace
 
 Declaring a namespace in the code and not using it for structure declarations (classes, interfaces, etc...) or global instructions is useless.
 
+Using simple style : 
+
+.. code-block:: php
+
+   <?php
+   
+   namespace X;
+   // This is useless
+   
+   namespace Y;
+   
+   class foo {}
+   
+   ?>
+
+
+Using bracket-style syntax : 
+
+.. code-block:: php
+
+   <?php
+   
+   namespace X {
+       // This is useless
+   }
+   
+   namespace Y {
+   
+       class foo {}
+   
+   }
+   
+   ?>
+
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Command Line | Namespaces/EmptyNamespace                                                                           |
 +--------------+-----------------------------------------------------------------------------------------------------+
@@ -1742,9 +2103,22 @@ Empty Try Catch
 
 The code does try, then catch errors but do no act upon the error. 
 
-At worse, the error should be logged somewhere, so as to measure the actual usage of the log.
+.. code-block:: php
 
-catch( Exception $e) should be banned, as they will simply ignore any error.
+   <?php
+   
+   try { 
+       doSomething();
+   } catch (Throwable $e) {
+       // simply ignore this
+   }
+   
+   ?>
+
+
+At worst, the error should be logged, so as to measure the actual usage of the catch expression.
+
+catch( Exception $e) (PHP 5) or catch(Throwable $e) with empty catch block should be banned, as they will simply ignore any error.
 
 +--------------+--------------------------+
 | Command Line | Structures/EmptyTryCatch |
@@ -2454,24 +2828,6 @@ One way or another, if the project has a vast majority of either case, it will r
 
 
 
-.. _incrementations:
-
-Incrementations
-###############
-
-
-Incrementing a variable should be done with ++ or -- operator. Any other way, like $x = $x + 1; or $y += 1; may be avoided.
-
-+--------------+------------------------------------------------+
-| Command Line | Structures/PlusEgalOne                         |
-+--------------+------------------------------------------------+
-| clearPHP     |                                                |
-+--------------+------------------------------------------------+
-| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
-
-
-
 .. _indices-are-int-or-string:
 
 Indices Are Int Or String
@@ -2641,6 +2997,19 @@ List Short Syntax
 
 
 Usage of short syntax version of list().
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7.1 short list syntax
+   // PHP 7.1 may also use key => value structures with list
+   [$a, $b, $c] = ['2', 3, '4'];
+   
+   // PHP 7.0 list syntax
+   list($a, $b, $c) = ['2', 3, '4'];
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/ListShortSyntax                                                                                                                   |
@@ -3083,6 +3452,57 @@ However, this is not common programming practise : all arguments should be named
 
 
 
+.. _multiple-exceptions-catch():
+
+Multiple Exceptions Catch()
+###########################
+
+
+Starting with PHP 7.1, it is possible to have several distinct exceptions class caught by the same catch, preventing code repetition. 
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7.1 and more recent
+   try {  
+       throw new someException(); 
+   } catch (Single $s) {
+       doSomething();
+   } catch (oneType \| anotherType $s) {
+       processIdentically();
+   } finally {
+   
+   }
+   
+   // PHP 7.0 and older
+   try {  
+       throw new someException(); 
+   } catch (Single $s) {
+       doSomething();
+   } catch (oneType $s) {
+       processIdentically();
+   } catch (anotherType $s) {
+       processIdentically();
+   } finally {
+   
+   }
+   
+   ?>
+
+
+This is a backward incompabitible feature of PHP 7.1.
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Exceptions/MultipleCatch                                                                                                              |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| clearPHP     |                                                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _multiple-index-definition:
 
 Multiple Index Definition
@@ -3149,7 +3569,23 @@ Must Return Methods
 ###################
 
 
-Those methods are expected to return a value that will be used later. Without return, they are useless.
+The following methods are expected to return a value that will be used later. Without return, they are useless.
+
+Methods that must return are : \_\_get(), \_\_isset(), \_\_sleep(), \_\_toString(), \_\_set\_state(), \_\_invoke(), \_\_debugInfo().
+Methods that may not return, but are often expected to : \_\_call(), \_\_callStatic().
+
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public function \_get($a) {
+           $this->$a++;
+           // not returning... 
+       }
+   }
+   ?>
 
 +--------------+----------------------+
 | Command Line | Functions/MustReturn |
@@ -3167,9 +3603,23 @@ Negative Power
 ##############
 
 
-The power operator has higher priority than the sign operator. This means that -2 \*\* 2 == -4. It is in fact, -(2 \*\* 2). 
+The power operator `\*\*` has higher priority than the sign operators `+` and `-`. This means that -2 \*\* 2 == -4. It is in fact, -(2 \*\* 2). 
 
-When using negative power, it is clearer to add parenthesis or to use the pow() function, which has no such ambiguity : pow(-2, 2) == 4.
+When using negative power, it is clearer to add parenthesis or to use the pow() function, which has no such ambiguity : 
+
+.. code-block:: php
+
+   <?php
+   
+   // -2 to the power of 2 (a square)
+   pow(-2, 2) == 4;
+   
+   // minus 2 to the power of 2 (a negative square)
+   -2 \*\* 2 == -(2 \*\* 2) == 4;
+   
+   ?>
+
+.
 
 +--------------+------------------------+
 | Command Line | Structures/NegativePow |
@@ -3187,9 +3637,59 @@ Nested Ternary
 ##############
 
 
-Ternary operators ($a == 1 ? $b : $c) are a convenient instruction to apply some condition, and avoid a if() structure when it is simple (like in a one liner). 
+Ternary operators `?...:` are a convenient instruction to apply some condition, and avoid a if() structure. It works best when it is simple, like in a one liner. 
 
 However, ternary operators tends to make the syntax very difficult to read when they are nested. It is then recommended to use an if() structure, and make the whole code readable.
+
+.. code-block:: php
+
+   <?php
+   
+   // Simple ternary expression
+   echo ($a == 1 ? $b : $c) ;
+   
+   // Nested ternary expressions
+   echo ($a === 1 ? $d === 2 ? $b : $d : $d === 3 ? $e : $c) ;
+   echo ($a === 1 ? $d === 2 ? $f ===4 ? $g : $h : $d : $d === 3 ? $e : $i === 5 ? $j : $k) ;
+   
+   //Previous expressions, written as a if / Then expression
+   if ($a === 1) {
+       if ($d === 2) {
+           echo $b;
+       } else {
+           echo $d;
+       }
+   } else {
+       if ($d === 3) {
+           echo $e;
+       } else {
+           echo $c;
+       }
+   }
+   
+   if ($a === 1) {
+       if ($d === 2) {
+           if ($f === 4) {
+               echo $g;
+           } else {
+               echo $h;
+           }
+       } else {
+           echo $d;
+       }
+   } else {
+       if ($d === 3) {
+           echo $e;
+       } else {
+           if ($i === 5) {
+               echo $j;
+           } else {
+               echo $k;
+           }
+       }
+   }
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------+
 | Command Line | Structures/NestedTernary                                                                          |
@@ -3338,6 +3838,74 @@ Either the condition is useless, and may be removed, or the alternatives needs t
 
 
 
+.. _no-count-with-0:
+
+No Count With 0
+###############
+
+
+Comparing count() and strlen() to 0 is a waste of resources. There are three distinct situations situations.
+
+When comparing count() with 0, with ===, ==, !==, !=, it is more efficient to use empty(). Empty() is a language constructs that checks if a value is present, while count() actually load the number of element.
+
+.. code-block:: php
+
+   <?php
+   
+   // Checking if an array is empty
+   if (count($array) == 0) {
+       // doSomething();
+   }
+   // This may be replaced with 
+   if (empty($array)) {
+       // doSomething();
+   }
+   
+   ?>
+
+
+When comparing count() strictly with 0 (>) it is more efficient to use !(empty())
+
+.. code-block:: php
+
+   <?php
+   
+   // Checking if an array is empty
+   if (count($array) > 0) {
+       // doSomething();
+   }
+   // This may be replaced with 
+   if (!empty($array)) {
+       // doSomething();
+   }
+   
+   Of course comparing count() with negative values, or with >= is useless.
+   
+   <?php
+   
+   // Checking if an array is empty
+   if (count($array) < 0) {
+       // This never happens
+       // doSomething();
+   }
+   
+   ?>
+
+
+Comparing count() and strlen() with other values than 0 cannot be replaced with a comparison with empty().
+
+Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing time of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops.
+
++--------------+---------------------------+
+| Command Line | Performances/NotCountNull |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Performances`       |
++--------------+---------------------------+
+
+
+
 .. _no-direct-call-to-magic-method:
 
 No Direct Call To Magic Method
@@ -3463,7 +4031,30 @@ No Hardcoded Path
 #################
 
 
-It is not recommended to have literals when reaching for files. Either use \_\_FILE\_\_ and \_\_DIR\_\_ to make the path relative to the current file, or add some DOC\_ROOT as a configuration constant that will allow you to move your script later.
+It is not recommended to have literals when accessing files. 
+
+Either use \_\_FILE\_\_ and \_\_DIR\_\_ to make the path relative to the current file; use a DOC\_ROOT as a configuration constant that will allow you to move your script later or rely on functions likes sys\_get\_temp\_dir(), to reach special folders.
+
+.. code-block:: php
+
+   <?php
+   
+       // This depends on the current executed script
+       file\_get\_contents('token.txt');
+   
+       // Exotic protocols are ignored
+       file\_get\_contents('jackalope://file.txt');
+   
+       // Some protocols are ignored : http, https, ftp, ssh2, php (with memory)
+       file\_get\_contents('http://www.php.net/');
+       file\_get\_contents('php://memory/');
+       
+       // glob() with special chars \* and ? are not reported
+       glob('./\*/foo/bar?.txt');
+       // glob() without special chars \* and ? are reported
+       glob('/foo/bar/');
+       
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------+
 | Command Line | Structures/NoHardcodedPath                                                                        |
@@ -3555,13 +4146,73 @@ It it better to avoid using parenthesis with echo, print, return, throw, include
 
 
 
+.. _no-plus-one:
+
+No Plus One
+###########
+
+
+Incrementing a variable should be done with the ++ or -- operators. Any other way, may be avoided.
+
+.. code-block:: php
+
+   <?php
+   
+   // Best way to increment
+   ++$x; --$y;
+   
+   // Second best way to increment, if the current value is needed :
+   echo $x++, $y--;
+   
+   // Good but slow 
+   $x += 1; 
+   $x -= -1; 
+   
+   $y += -1;
+   $y -= 1;
+   
+   // even slower
+   $x = $x + 1; 
+   $y = $y - 1; 
+   
+   ?>
+
++--------------+------------------------------------------------+
+| Command Line | Structures/PlusEgalOne                         |
++--------------+------------------------------------------------+
+| clearPHP     |                                                |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
+
 .. _no-public-access:
 
 No Public Access
 ################
 
 
-Properties are declared with public access, but are never used publicly. May be they can be made protected or private.
+The properties below are declared with public access, but are never used publicly. They can be made protected or private.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public $bar = 1;            // Public, and used in public space
+       public $neverInPublic = 3;  // Public, but never used in outside the class
+       
+       function bar() {
+           $neverInPublic++;
+       }
+   }
+   
+   $x = new foo();
+   $x->bar = 3;
+   $x->bar();
+   
+   ?>
 
 +--------------+------------------------+
 | Command Line | Classes/NoPublicAccess |
@@ -3664,7 +4315,22 @@ Non Ascii Variables
 ###################
 
 
-PHP supports variables with '[a-zA-Z\_\x7f-\xff][a-zA-Z0-9\_\x7f-\xff]\*'. In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more care when éditing the code or passing it from OS to OS.
+PHP supports variables with '[a-zA-Z\_\x7f-\xff][a-zA-Z0-9\_\x7f-\xff]\*'. In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more care when editing the code or passing it from OS to OS. 
+
+.. code-block:: php
+
+   <?php
+   
+   class 人 {
+       // An actual working class in PHP.
+       public function \_\_construct() {
+           echo \_\_CLASS\_\_;
+       }
+   }
+   
+   $people = new 人();
+   
+   ?>
 
 +--------------+----------------------------+
 | Command Line | Variables/VariableNonascii |
@@ -3693,7 +4359,7 @@ method statically :
    <?php
        class x {
            static public function sm( ) { echo \_\_METHOD\_\_.\n; }
-           public sm( ) { echo \_\_METHOD\_\_.\n; }
+           public public sm( ) { echo \_\_METHOD\_\_.\n; }
        } 
        
        x::sm( ); // echo x::sm 
@@ -3704,8 +4370,21 @@ It is a bad idea to call non-static method statically. Such method may make use 
 variable $this, which will be undefined. PHP will not check those calls at compile time,
 nor at running time. 
 
-It is recommended to fix this situation : make the method actually static, or use it only 
+It is recommended to update this situation : make the method actually static, or use it only 
 in object context.
+
+Note that this analysis reports all static method call made on a non-static method,
+even within the same class or class hierarchy. PHP silently accepts static call to any
+in-family method.
+
+.. code-block:: php
+
+   <?php
+       class x {
+           public function foo( ) { self::bar() }
+           public function bar( ) { echo \_\_METHOD\_\_.\n; }
+       } 
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------+
 | Command Line | Classes/NonStaticMethodsCalledStatic                                                            |
@@ -3769,7 +4448,18 @@ Nonce Creation
 ##############
 
 
-Mark the creation of nonce by Wordpress
+Mark the creation of nonce by Wordpress. Nonce may be created with the Wordpress functions wp\_nonce\_field(), wp\_nonce\_url() and wp\_nonce\_create().
+
+.. code-block:: php
+
+   <?php
+   
+   // Create an nonce for a link.
+   $nonce = wp\_create\_nonce( 'my-nonce' );
+   
+   echo '<a href="myplugin.php?do\_something=some\_action&\_wpnonce='.$nonce.'">Do some action</a>';
+   
+   ?>
 
 +--------------+-------------------------+
 | Command Line | Wordpress/NonceCreation |
@@ -3907,6 +4597,37 @@ Old Style Constructor
 
 
 A long time ago, PHP classes used to have the method bearing the same name as the class acts as the constructor.
+
+.. code-block:: php
+
+   <?php
+   
+   namespace {
+       // Global namespace is important
+       class foo {
+           function foo() {
+               // This acts as the old-style constructor, and is reported by PHP
+           }
+       }
+   
+       class bar {
+           function \_\_construct() { }
+           function bar() {
+               // This doesn't act as constructor, as bar has a \_\_construct() method
+           }
+       }
+   }
+   
+   namespace Foo\Bar{
+       class foo {
+           function foo() {
+               // This doesn't act as constructor, as bar is not in the global namespace
+           }
+       }
+   }
+   
+   ?>
+
 
 This is no more the case in PHP 5, which relies on \_\_construct() to do so. Having this old style constructor may bring in confusion, unless you are also supporting old time PHP 4.
 
@@ -4359,7 +5080,20 @@ Php 71 New Classes
 ##################
 
 
-New classes, introduced in PHP 7.1 : they have to be removed from PHP code before PHP 7.1 may be run.
+New classes, introduced in PHP 7.1. If classes where created with the same name, in current code, they have to be moved in a namespace, or removed from code to migrate safely to PHP 7.1.
+
+The new class is : ReflectionClassConstant. The other class is 'Void' : this is forbidden as a classname, as Void is used for return type hint.
+
+.. code-block:: php
+
+   <?php
+   
+   class ReflectionClassConstant {
+       // Move to a namespace, do not leave in global
+       // or, remove this class
+   }
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/Php71NewClasses                                                                                                                   |
@@ -4522,6 +5256,26 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +--------------+------------------------+
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
+
+
+
+.. _property-used-below:
+
+Property Used Below
+###################
+
+
+Mark properties that are used in children classes.
+
+This doesn't mark the current class, nor the parent ones.
+
++--------------+---------------------------+
+| Command Line | Classes/PropertyUsedBelow |
++--------------+---------------------------+
+| clearPHP     |                           |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
 
 
 
@@ -4736,6 +5490,17 @@ Relay Function
 
 
 Relay functions (or method) are delegating the actual work to another function or method. They do not have any impact on the results, besides exposing another name for the same feature.
+
+.. code-block:: php
+
+   <?php
+   
+   function myStrtolower($string) {
+       return \strtolower($string);
+   }
+   
+   ?>
+
 
 Relay functions are typical of transition API, where an old API have to be preserved until it is fully migrated. Then, they may be removed, so as to reduce confusion, and unclutter the API.
 
@@ -5096,8 +5861,9 @@ Should Be Single Quote
 ######################
 
 
-Static content inside a string, that has no single quotes nor escape sequence (such as \n or \t),
- should be using single quote delimiter, instead of double quote. 
+Static content inside a string, that has no single quotes nor escape sequence (such as \n or \t), should be using single quote delimiter, instead of double quote. 
+
+
 
 If you have too many of them, don't loose your time switching them all. If you have a few of them, it may be good for consistence.
 
@@ -5295,13 +6061,27 @@ global keyword should only be used with simple variables (global $var), and not 
 
 
 
-.. _simple-regex:
+.. _simplify-regex:
 
-Simple Regex
-############
+Simplify Regex
+##############
 
 
-PRCE regex are a powerful way to search inside strings, but they also come at the price of performance. When the query is simple enough, try using strpos() or strposi() instead.
+PRCE regex are a powerful way to search inside strings, but they also come at the price of performance. When the query is simple enough, try using strpos() or stripos() instead.
+
+.. code-block:: php
+
+   <?php
+   
+   // simple preg calls
+   if (preg\_match('/a/', $string))  {}
+   if (preg\_match('/b/i', $string)) {} // case insensitive
+   
+   // light replacements
+   if( strpos('a', $string)) {}
+   if( stripos('b', $string)) {}       // case insensitive
+   
+   ?>
 
 +--------------+-----------------------+
 | Command Line | Structures/SimplePreg |
@@ -5339,7 +6119,26 @@ Static Loop
 
 It looks like the following loops are static : the same code is executed each time, without taking into account loop variables.
 
-It is possible to create loops that don't use any blind variables, and this is fairly rare.
+.. code-block:: php
+
+   <?php
+   
+   // Static loop
+   $total = 0;
+   for($i = 0; $i < 10; $i++) {
+       $total += $i;
+   }
+   
+   // Non-Static loop (the loop depends on the size of the array)
+   $n = count($array);
+   for($i = 0; $i < $n; $i++) {
+       $total += $i;
+   }
+   
+   ?>
+
+
+It is possible to create loops that don't use any blind variables, though this is fairly rare.
 
 +--------------+-----------------------+
 | Command Line | Structures/StaticLoop |
@@ -5475,6 +6274,51 @@ Switch To Switch
 
 The following structures are based on if / elseif / else. Since they have more than three conditions (not withstanding the final else), it is recommended to use the switch structure, so as to make this more readable.
 
+On the other hand, switch() structures will less than 3 elements should be expressed as a if / else structure.
+
+Note that if condition that uses strict typing (=== or !==) can't be converted to switch() as the latter only performs == or != comparisons.
+
+.. code-block:: php
+
+   <?php
+   
+   if ($a == 1) {
+   
+   } elseif ($a == 2) {
+   
+   } elseif ($a == 3) {
+   
+   } elseif ($a == 4) {
+   
+   } else {
+   
+   }
+   
+   // Better way to write long if/else lists
+   switch ($a) {
+       case 1 : 
+           doSomething(1);
+           break 1;
+       
+       case 2 : 
+           doSomething(2);
+           break 1;
+   
+       case 3 : 
+           doSomething(3);
+           break 1;
+   
+       case 4 : 
+           doSomething(4);
+           break 1;
+       
+       default :
+           doSomething();
+           break 1;
+   }
+   
+   ?>
+
 +--------------+---------------------------+
 | Command Line | Structures/SwitchToSwitch |
 +--------------+---------------------------+
@@ -5511,7 +6355,48 @@ Switch Without Default
 
 Switch statements hold a number of 'case' that cover all known situations, and a 'default' one which is executed when all other options are exhausted. 
 
-Most of the time, Switch do need a default case, so as to catch the odd situation where the 'value is not what it was expected'. This is a good place to catch unexpected values, to set a default behavior.
+.. code-block:: php
+
+   <?php
+   
+   // Missing default
+   switch($format) {
+       case 'gif' : 
+           processGif();
+           break 1;
+       
+       case 'jpeg' : 
+           processJpeg();
+           break 1;
+           
+       case 'bmp' :
+           throw new UnsupportedFormat($format);
+   }
+   // In case $format is not known, then switch is ignored and no processing happens, leading to preparation errors
+   
+   
+   // switch with default
+   switch($format) {
+       case 'text' : 
+           processText();
+           break 1;
+       
+       case 'jpeg' : 
+           processJpeg();
+           break 1;
+           
+       case 'rtf' :
+           throw new UnsupportedFormat($format);
+           
+       default :
+           throw new UnknownFileFormat($format);
+   }
+   // In case $format is not known, an exception is thrown for processing 
+   
+   ?>
+
+
+Most of the time, switch() do need a default case, so as to catch the odd situation where the 'value is not what it was expected'. This is a good place to catch unexpected values, to set a default behavior.
 
 +--------------+-------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/SwitchWithoutDefault                                                                                   |
@@ -5586,6 +6471,51 @@ When the new keyword is forgotten, then the class construtor is used as a functi
 +--------------+------------------------------+
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
+
+
+
+.. _throw-in-destruct:
+
+Throw In Destruct
+#################
+
+
+According to the manual, 'Attempting to throw an exception from a destructor (called in the time of script termination) causes a fatal error.'
+
+The destructor may be called during the lifespan of the script, but it is not certain. If the exception is thrown later, the script may end up with a fatal error. 
+Thus, it is recommended to avoid throwing exceptions within the \_\_destruct method of a class.
+
+.. code-block:: php
+
+   <?php
+   
+   // No exception thrown
+   class Bar { 
+       function \_\_construct() {
+           throw new Exception('\_\_construct');
+       }
+   
+       function \_\_destruct() {
+           $this->cleanObject();
+       }
+   }
+   
+   // Potential crash
+   class Foo { 
+       function \_\_destruct() {
+           throw new Exception('\_\_destruct');
+       }
+   }
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Classes/ThrowInDestruct |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
 
 
 
@@ -5887,6 +6817,35 @@ List of all undefined static and self properties and methods.
 
 
 
+.. _unescaped-variables-in-templates:
+
+Unescaped Variables In Templates
+################################
+
+
+Whenever variables are emitted, they are reported as long as they are not escaped. 
+
+While this is quite a strict rule, it is good to know when variables are not protected at echo time. 
+
+.. code-block:: php
+
+   <?php
+       echo $unescapedVariable;
+       
+       echo esc\_html($escapedVariable);
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Wordpress/UnescapedVariables |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Wordpress`             |
++--------------+------------------------------+
+
+
+
 .. _unicode-escape-partial:
 
 Unicode Escape Partial
@@ -6125,7 +7084,35 @@ Unset In Foreach
 ################
 
 
-Unset applied to the variables of a foreach loop are useless, as they are mere copies and not the actual value. Even if the value is a reference, unsetting it will not have effect on the original array.
+Unset applied to the variables of a foreach loop are useless, as they are copies and not the actual value. Even if the value is a reference, unsetting it will not have effect on the original array : the only effect may be on values inside an array, or on properties inside an object.
+
+.. code-block:: php
+
+   <?php
+   
+   // When unset is useless
+   $array = [1, 2, 3];
+   foreach($array as $a) {
+       unset($a);
+   }
+   
+   print\_r($array); // still [1, 2, 3]
+   
+   foreach($array as $b => &$a) {
+       unset($a);
+   }
+   
+   print\_r($array); // still [1, 2, 3]
+   
+   // When unset is useful
+   $array = [ [ 'c' => 1] ]; // Array in array
+   foreach($array as &$a) {
+       unset(&$a['c']);
+   }
+   
+   print\_r($array); // now [ ['c' => null] ]
+   
+   ?>
 
 +--------------+----------------------------------------------+
 | Command Line | Structures/UnsetInForeach                    |
@@ -6314,6 +7301,26 @@ The following methods are never called as methods. They are probably dead code.
 
 
 
+.. _unused-protected-methods:
+
+Unused Protected Methods
+########################
+
+
+The following methods are protected, and may be used in the current class or any of its children. 
+
+No usage of those methods were found.
+
++--------------+--------------------------------+
+| Command Line | Classes/UnusedProtectedMethods |
++--------------+--------------------------------+
+| clearPHP     |                                |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`   |
++--------------+--------------------------------+
+
+
+
 .. _unused-static-methods:
 
 Unused Static Methods
@@ -6410,7 +7417,17 @@ Unverified Nonce
 ################
 
 
-Nonces were created in the code with wp\_create\_nonce() function, but they are not verified with wp\_verify\_nonce() nor check\_ajax\_referer()
+Nonces were created in the code with  wp\_nonce\_field(), wp\_nonce\_url() and wp\_nonce\_create() functions, but they are not verified with wp\_verify\_nonce() nor check\_ajax\_referer()
+
+.. code-block:: php
+
+   <?php
+   
+   $nonce = wp\_create\_nonce( 'my-nonce' );
+   
+   if ( ! wp\_verify\_nonce( $nonce, 'my-other-nonce' ) ) { } else { }
+   
+   ?>
 
 +--------------+---------------------------+
 | Command Line | Wordpress/UnverifiedNonce |
@@ -6624,6 +7641,41 @@ If you're using path with UTF-8 characters, pathinfo will strip them. There, you
 
 
 
+.. _use-system-tmp:
+
+Use System Tmp
+##############
+
+
+It is recommended to avoid hardcoding the tmp file. It is better to rely on the system's tmp folder, which is accessible with sys\_get\_temp\_dir().
+
+.. code-block:: php
+
+   <?php
+   
+   // Where the tmp is : 
+   file\_put\_contents(sys\_get\_temp\_dir().'/tempFile.txt', $content);
+   
+   
+   // Avoid hard-coding tmp folder : 
+   // On Linux-like systems
+   file\_put\_contents('/tmp/tempFile.txt', $content);
+   
+   // On Windows systems
+   file\_put\_contents('C:\WINDOWS\TEMP\tempFile.txt', $content);
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Structures/UseSystemTmp |
++--------------+-------------------------+
+| clearPHP     |                         |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
+
 .. _use-with-fully-qualified-name:
 
 Use With Fully Qualified Name
@@ -6713,7 +7765,29 @@ Use random\_int()
 
 rand() provides random number. A better and more varied version is mt\_rand(), which is a drop-in replacement. 
 
-Since PHP 7, random\_int() (and its cousin random\_byte()), provides cryptographically secure pseudo-random bytes, which are good to be used
+.. code-block:: php
+
+   <?php
+   
+   // Avoid using this
+   $random = rand(0, 10);
+   
+   // Drop-in replacement
+   $random = mt\_rand(0, 10);
+   
+   // Even better but different : 
+   try {
+       $random = random\_int(0, 10);
+   } catch (\Exception $e) {
+       // process case of not enoug random values
+   }
+   
+   // PHP 7.1 
+   
+   ?>
+
+
+Since PHP 7, random\_int() (and its cousin random\_bytes()), provides cryptographically secure pseudo-random bytes, which are good to be used
 when security is involved. openssl\_random\_pseudo\_bytes() may be used when the OpenSSL extension is available.
 
 +--------------+---------------------------------+
@@ -6773,6 +7847,24 @@ This is the list of used once variables, broken down by scope. Those variables a
 
 
 
+.. _used-protected-method:
+
+Used Protected Method
+#####################
+
+
+Marks methods being used in the current class or its children classes.
+
++--------------+------------------------------+
+| Command Line | Classes/UsedProtectedMethod  |
++--------------+------------------------------+
+| clearPHP     |                              |
++--------------+------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>` |
++--------------+------------------------------+
+
+
+
 .. _useless-abstract-class:
 
 Useless Abstract Class
@@ -6781,7 +7873,28 @@ Useless Abstract Class
 
 Those classes are marked 'abstract' and they are never extended. This way, they won't be instantiated nor used. 
 
-Abstract classes that have only static methods are omitted here : one usage of such classes are Utilities classes, which only offer static methods.
+Abstract classes that have only static methods are omitted here : one usage of such classes are Utilities classes, which only offer static methods. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Never extended class : this is useless
+   abstract class foo {}
+   
+   // Extended class
+   abstract class bar {
+       public function barbar() {}
+   }
+   
+   class bar2 extends bar {}
+   
+   // Utility class : omitted here
+   abstract class bar {
+       public static function barbar() {}
+   }
+   
+   ?>
 
 +--------------+-------------------------+
 | Command Line | Classes/UselessAbstract |
@@ -6875,9 +7988,15 @@ Useless Instructions
 ####################
 
 
-The instructions below are useless. For example, running '&lt;?php 1 + 1; ?&gt;' will do nothing, as the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
+The instructions below are useless, or contains useless parts. For example, running '&lt;?php 1 + 1; ?&gt;' does nothing : the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
 
-The first level of the spotted instructions may be removed safely. For example, the analyzer will spot : '1 + $a++'; as a useless instruction. The addition is useless, but the plusplus is not.
+Here the useless instructions that are spotted : 
+
+\* Empty string in a concatenation
+\* Returning expression, whose result is not used (additions, comparisons, properties, closures, new without =, ...)
+\* Returning $a++;
+\* array\_merge() with only one argument
+\* @ operator on source array, in foreach, or when assigning literals
 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/UselessInstruction                                                                               |
@@ -7050,9 +8169,9 @@ Using $this Outside A Class
 ###########################
 
 
-$this is a special variable, that may only be used in a class context. 
+`$this` is a special variable, that should only be used in a class context. 
 
-$this may be used as an argument in a function (or a method) : while this is legit, it sounds confusing enough to avoid this.
+`$this` may be used as an argument in a function (or a method) : while this is legit, it sounds confusing enough to avoid it.
 
 +--------------+--------------------------------+
 | Command Line | Classes/UsingThisOutsideAClass |
@@ -7070,9 +8189,47 @@ Usort Sorting In PHP 7.0
 ########################
 
 
-Usort (and co) sorting has changed in PHP 7. Values that are equals (based on user-provided method) may be sorted differently than in PHP 5. 
+Usort(), uksort() and uasort() behavior has changed in PHP 7. Values that are equals (based on the user-provided method) may be sorted differently than in PHP 5. 
 
-If this sorting is important, it is advised to add extra comparison in the user-function and avoid returning 0 (thus, depending on default implementation).
+If this sorting is important, it is advised to add extra comparison in the user-function and avoid returning 0 (thus, depending on default implementation). 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = [ 2, 4, 3, 6];
+   
+   function noSort($a) { return $a > 5; }
+   
+   usort($a, 'noSort');
+   print\_r($a);
+   
+   ?>
+
+
+In PHP 5, the results is :::
+
+   
+   Array
+   (
+       [0] => 3
+       [1] => 4
+       [2] => 2
+       [3] => 6
+   )
+   
+
+
+in PHP 7, the result is :::
+
+   
+   Array
+   (
+       [0] => 2
+       [1] => 4
+       [2] => 3
+       [3] => 6
+   )
 
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/UsortSorting                                                                                                                                                 |
@@ -7155,6 +8312,17 @@ Wpdb Best Usage
 Wordpress database API ($wpdb) offers several eponymous methods to safely handle insert, delete, replace and update. 
 
 It is recommended to use them, instead of writing queries with concatenations.
+
+.. code-block:: php
+
+   <?php
+   // Example from Wordpress Manual
+   $user\_count = $wpdb->get\_var( "SELECT COUNT(\*) FROM $wpdb->users" );
+   echo <p>User count is {$user\_count}</p>;
+   ?>
+
+
+See <a href=https://codex.wordpress.org/Class\_Reference/wpdb>Class Reference/wpdb</a>.
 
 +--------------+-------------------------+
 | Command Line | Wordpress/WpdbBestUsage |
@@ -7252,7 +8420,24 @@ Wrong Parameter Type
 ####################
 
 
-The expected parameter is not the correct type. Check PHP documentation to know which is the right format to be used.
+The expected parameter is not of the correct type. Check PHP documentation to know which is the right format to be used.
+
+.. code-block:: php
+
+   <?php
+   
+   // substr() shouldn't work on integers.
+   // the first argument is first converted to string, and it is 123456.
+   echo substr(123456, 0, 4); // display 1234
+   
+   // substr() shouldn't work on boolean
+   // the first argument is first converted to string, and it is 1, and not t
+   echo substr(true, 0, 1); // displays 1
+   
+   // substr() works correctly on strings.
+   echo substr(123456, 0, 4);
+   
+   ?>
 
 +--------------+---------------------------+
 | Command Line | Php/InternalParameterType |
@@ -7760,9 +8945,26 @@ set\_exception\_handler() Warning
 #################################
 
 
-set\_exception\_handler() callable function has to be adapted to PHP 7 : Exception is not the right typehint, it is now Throwable. 
+The set\_exception\_handler() callable function has to be adapted to PHP 7 : Exception is not the right typehint, it is now Throwable. 
 
 When in doubt about backward compatibility, just drop the Typehint. Otherwise, use Throwable.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 5.6- typehint 
+   class foo { function bar(\Exception $e) {} }
+   
+   // PHP 7+ typehint 
+   class foo { function bar(Throwable $e) {} }
+   
+   // PHP 5 and PHP 7 compatible typehint (note : there is none)
+   class foo { function bar($e) {} }
+   
+   set\_exception\_handler(foo);
+   
+   ?>
 
 +--------------+------------------------------------------------------+
 | Command Line | Php/SetExceptionHandlerPHP7                          |

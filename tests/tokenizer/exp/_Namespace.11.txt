@@ -1,3 +1,58 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Namespace.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              use
+              Label : USE
+                \
+                Label : SUBNAME
+                  F
+                Label : SUBNAME
+                  G
+                Label : SUBNAME
+                  H
+                Label : SUBNAME
+                  I
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  M
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      Void
+                  Label : NAME
+                    M
+              Label : EXTENDS
+                K
+              Label : IMPLEMENTS
+                L
+              Label : NAME
+                J
+          Label : NAME
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+            Label : SUBNAME
+              E

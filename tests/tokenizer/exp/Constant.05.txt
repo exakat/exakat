@@ -1,3 +1,18 @@
-__FUNCTION__
-Label : ARGUMENT
-  __FUNCTION__
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Constant.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            __FUNCTION__
+            Label : ARGUMENT
+              __FUNCTION__
+          Label : NAME
+            print

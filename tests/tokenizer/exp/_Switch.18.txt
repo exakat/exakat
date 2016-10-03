@@ -1,3 +1,84 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'a' :  /**/  
+              Label : CASE
+                'a'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $count
+                  Label : RIGHT
+                    0
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $indexed
+                  Label : RIGHT
+                    array
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      array
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $associative
+                  Label : RIGHT
+                    array
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      array
+                Label : ELEMENT
+                  foreach
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      Void
+                  Label : SOURCE
+                    $data
+                  Label : VALUE
+                    =>
+                    Label : KEY
+                      $key
+                    Label : VALUE
+                      $value
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    $c
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $d
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    'e'
+          Label : NAME
+            $b

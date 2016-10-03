@@ -1,9 +1,20 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  *
-  Label : LEFT
-    2
-  Label : RIGHT
-    3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Addition.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          +
+          Label : LEFT
+            1
+          Label : RIGHT
+            *
+            Label : LEFT
+              2
+            Label : RIGHT
+              3

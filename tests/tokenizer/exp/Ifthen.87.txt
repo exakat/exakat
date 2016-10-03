@@ -1,3 +1,162 @@
-(
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.87.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+              Label : NAME
+                B
+            Label : RIGHT
+              $b
+          Label : THEN
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  ->
+                  Label : METHOD
+                    C
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      C
+                  Label : OBJECT
+                    $c
+                Label : RIGHT
+                  'D'
+              Label : ELSE
+                ;
+                Label : ELEMENT
+                  or
+                  Label : LEFT
+                    =
+                    Label : LEFT
+                      $j
+                    Label : RIGHT
+                      ->
+                      Label : METHOD
+                        J
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            "
+                            Label : CONCAT
+                              K
+                            Label : CONCAT
+                              $lL
+                            Label : CONCAT
+                              $mM
+                        Label : NAME
+                          J
+                      Label : OBJECT
+                        $k
+                  Label : RIGHT
+                    (
+                    Label : CODE
+                      =
+                      Label : LEFT
+                        $n
+                        Label : APPEND
+                          $n
+                      Label : RIGHT
+                        ->
+                        Label : METHOD
+                          N
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            N
+                        Label : OBJECT
+                          $o
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  or
+                  Label : LEFT
+                    =
+                    Label : LEFT
+                      $d
+                    Label : RIGHT
+                      ->
+                      Label : METHOD
+                        E
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            "
+                            Label : CONCAT
+                              F
+                            Label : CONCAT
+                              $fG
+                            Label : CONCAT
+                              $gH
+                        Label : NAME
+                          E
+                      Label : OBJECT
+                        $e
+                  Label : RIGHT
+                    (
+                    Label : CODE
+                      =
+                      Label : LEFT
+                        $h
+                        Label : APPEND
+                          $h
+                      Label : RIGHT
+                        ->
+                        Label : METHOD
+                          I
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            I
+                        Label : OBJECT
+                          $i
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $p
+              Label : RIGHT
+                (int)
+                Label : CAST
+                  (
+                  Label : CODE
+                    ->
+                    Label : METHOD
+                      O
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $r
+                      Label : NAME
+                        O
+                    Label : OBJECT
+                      $q
+            Label : ELEMENT
+              +=
+              Label : LEFT
+                $s
+              Label : RIGHT
+                $t

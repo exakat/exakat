@@ -1,21 +1,37 @@
-do
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    do
-    Label : BLOCK
-      {}
-      Label : ELEMENT
-        do
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            do
-            Label : BLOCK
-123098120398 [label="Reached level 15"]            Label : CONDITION
-123098120398 [label="Reached level 15"]        Label : CONDITION
-          2
-    Label : CONDITION
-      3
-Label : CONDITION
-  4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dowhile.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              do
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  do
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      do
+                      Label : BLOCK
+                        {}
+                        Label : ELEMENT
+                          ++
+                          Label : POSTPLUSPLUS
+                            $x
+                      Label : CONDITION
+                        1
+                  Label : CONDITION
+                    2
+              Label : CONDITION
+                3
+          Label : CONDITION
+            4

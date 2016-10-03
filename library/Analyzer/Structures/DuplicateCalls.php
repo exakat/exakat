@@ -28,17 +28,20 @@ use Analyzer;
 class DuplicateCalls extends Analyzer\Analyzer {
     public function analyze() {
         // This is counting ALL occurences as itself.
-        $this->atomIs('Methodcall')
-             ->hasNoIn('METHOD')
-             ->fetchContext()
-             ->eachCounted('it.fullcode + "/" + context.Function + "/" + context.Class + "/" + context.Namespace ', 2, '>=');
-        $this->prepareQuery();
-
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->fetchContext()
-             ->eachCounted('it.fullcode + "/" + context.Function + "/" + context.Class + "/" + context.Namespace ', 2, '>=');
-        $this->prepareQuery();
+        $atoms = ['Methodcall', 'Functioncall'];
+        
+        foreach($atoms as $atom) {
+            $calls = $this->query('g.V().hasLabel("'.$atom.'").where( __.in("METHOD").count().is(eq(0)))
+                                      .groupCount("m").by("fullcode").cap("m").next().findAll{ it.value >= 2; }');
+            $calls = array_keys((array) $calls);
+            
+            if (!empty($calls)) {
+                $this->atomIs($atom)
+                     ->hasNoIn('METHOD')
+                     ->is('fullcode', $calls);
+                $this->prepareQuery();
+            }
+        }
     }
 }
 

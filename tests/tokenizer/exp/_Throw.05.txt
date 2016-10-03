@@ -1,18 +1,22 @@
-./tests/tokenizer/source/_Throw.05.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Throw.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        throw
-        Label : THROW
-          new
-          Label : NEW
-            \
-            Label : SUBNAME
-123098120398 [label="Reached level 15"]            Label : SUBNAME
-123098120398 [label="Reached level 15"]            Label : SUBNAME
-123098120398 [label="Reached level 15"]
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            new
+            Label : NEW
+              \
+              Label : SUBNAME
+                A
+              Label : SUBNAME
+                B
+              Label : SUBNAME
+                C

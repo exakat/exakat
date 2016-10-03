@@ -1,3 +1,50 @@
-(
-Label : ARGUMENT
-  'C'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Declare.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            B
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'C'
+            Label : NAME
+              B
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              declare
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    $b
+              Label : DECLARE
+                (
+                Label : ARGUMENT
+                  =
+                  Label : LEFT
+                    E
+                  Label : RIGHT
+                    1
+          Label : THEN
+            {}
+            Label : ELEMENT
+              D
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                D

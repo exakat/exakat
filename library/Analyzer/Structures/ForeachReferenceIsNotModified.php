@@ -31,7 +31,7 @@ class ForeachReferenceIsNotModified extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $modifiedVar = 'where( __.repeat( out() ).emit( hasLabel("Variable") ).times(15).hasLabel("Variable")
+        $modifiedVar = 'where( __.repeat( out() ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').hasLabel("Variable")
                                  .filter{ it.get().value("code") == name}
                                  .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Variables\\\\IsModified").count().is(eq(1)) )
                                  .count().is(eq(0)) )';

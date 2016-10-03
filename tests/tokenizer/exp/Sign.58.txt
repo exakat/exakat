@@ -1,13 +1,42 @@
--
-Label : LEFT
-  \
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      $c
-  Label : NAME
-    \
-    Label : SUBNAME
-      B
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.58.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                C
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              -
+              Label : SIGN
+                -
+                Label : LEFT
+                  \
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    \
+                    Label : SUBNAME
+                      B
+                Label : RIGHT
+                  2
+          Label : NAME
+            B

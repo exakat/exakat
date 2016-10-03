@@ -1,3 +1,44 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.47.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          DefinedWithAReference
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                $x
+          Label : NAME
+            DefinedWithAReference
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              MethodDefinedWithAReference
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    $x
+              Label : NAME
+                MethodDefinedWithAReference
+          Label : NAME
+            x

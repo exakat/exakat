@@ -1,19 +1,46 @@
-catch
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $f
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $g
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $h
-Label : CLASS
-  Exception
-Label : VARIABLE
-  $e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Try.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          try
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $c
+          Label : CATCH
+            catch
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $f
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $g
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $h
+            Label : CLASS
+              Exception
+            Label : VARIABLE
+              $e

@@ -45,6 +45,8 @@ class MultipleDefinedCase extends Analyzer\Analyzer {
                              .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
                               )');
         $this->prepareQuery();
+
+        // Special case for mix of strings and constants
     }
 }
 

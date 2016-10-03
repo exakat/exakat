@@ -1,5 +1,18 @@
-.
-Label : CONCAT
-  'a'
-Label : CONCAT
-  'b'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          (
+          Label : CODE
+            .
+            Label : CONCAT
+              'a'
+            Label : CONCAT
+              'b'

@@ -1,3 +1,258 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.34.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : USE
+                \
+                Label : SUBNAME
+                  N
+                Label : SUBNAME
+                  A
+              Label : USE
+                \
+                Label : SUBNAME
+                  N
+                Label : SUBNAME
+                  B
+            Label : ELEMENT
+              use
+              Label : FUNCTION
+                function
+              Label : USE
+                \
+                Label : SUBNAME
+                  A
+                Label : SUBNAME
+                  F
+              Label : USE
+                \
+                Label : SUBNAME
+                  N
+                Label : SUBNAME
+                  F2
+            Label : ELEMENT
+              use
+              Label : CONST
+                const
+              Label : USE
+                \
+                Label : SUBNAME
+                  N
+                Label : SUBNAME
+                  C
+              Label : USE
+                \
+                Label : SUBNAME
+                  N
+                Label : SUBNAME
+                  C2
+            Label : ELEMENT
+              use
+              Label : GROUPUSE
+                \
+                Label : SUBNAME
+                  N
+                Label : SUBNAME
+                  D
+              Label : USE
+                D
+              Label : USE
+                DF
+                Label : FUNCTION
+                  function
+              Label : USE
+                DC
+                Label : CONST
+                  const
+            Label : ELEMENT
+              use
+              Label : GROUPUSE
+                \
+                Label : SUBNAME
+                  N2
+                Label : SUBNAME
+                  D2
+              Label : USE
+                D3
+              Label : USE
+                D2
+              Label : USE
+                DF3
+                Label : FUNCTION
+                  function
+              Label : USE
+                DF2
+              Label : USE
+                DC3
+                Label : CONST
+                  const
+              Label : USE
+                DC2
+            Label : ELEMENT
+              use
+              Label : GROUPUSE
+                \
+                Label : SUBNAME
+                  some
+                Label : SUBNAME
+                  namespaces
+              Label : USE
+                as
+                Label : AS
+                  C
+                Label : NAME
+                  ClassC
+              Label : USE
+                ClassA
+              Label : USE
+                ClassB
+            Label : ELEMENT
+              use
+              Label : FUNCTION
+                function
+              Label : GROUPUSE
+                \
+                Label : SUBNAME
+                  some
+                Label : SUBNAME
+                  namespaces
+              Label : USE
+                fn_a
+              Label : USE
+                fn_b
+              Label : USE
+                fn_c
+            Label : ELEMENT
+              use
+              Label : CONST
+                const
+              Label : GROUPUSE
+                \
+                Label : SUBNAME
+                  some
+                Label : SUBNAME
+                  namespaces
+              Label : USE
+                ConstA
+              Label : USE
+                ConstB
+              Label : USE
+                ConstC
+            Label : ELEMENT
+              DF3
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                DF3
+            Label : ELEMENT
+              new
+              Label : NEW
+                DF2
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  DF2
+          Label : NAME
+            Void
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              DF2
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  print
+                  Label : ARGUMENTS
+                    __FUNCTION__
+                    Label : ARGUMENT
+                      __FUNCTION__
+                  Label : NAME
+                    print
+              Label : NAME
+                DF2
+            Label : ELEMENT
+              DF3
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  print
+                  Label : ARGUMENTS
+                    __FUNCTION__
+                    Label : ARGUMENT
+                      __FUNCTION__
+                  Label : NAME
+                    print
+              Label : NAME
+                DF3
+              Label : DEFINITION
+                DF3
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  DF3
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  __construct
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      print
+                      Label : ARGUMENTS
+                        __METHOD__
+                        Label : ARGUMENT
+                          __METHOD__
+                      Label : NAME
+                        print
+                  Label : NAME
+                    __construct
+              Label : DEFINITION
+                DF2
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  DF2
+              Label : NAME
+                DF2
+          Label : NAME
+            \
+            Label : SUBNAME
+              N2
+            Label : SUBNAME
+              D2

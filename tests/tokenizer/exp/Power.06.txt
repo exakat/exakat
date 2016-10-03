@@ -1,14 +1,16 @@
-./tests/tokenizer/source/Power.06.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Power.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        **
-        Label : LEFT
-          1
-        Label : RIGHT
-          -2
+      Label : CODE
+        ;
+        Label : ELEMENT
+          **
+          Label : LEFT
+            1
+          Label : RIGHT
+            -2

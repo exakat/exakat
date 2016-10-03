@@ -1,11 +1,34 @@
-(
-Label : ARGUMENT
-  $a
-  Label : TYPEHINT
-    C
-Label : ARGUMENT
-  $b
-  Label : DEFAULT
-    null
-  Label : TYPEHINT
-    callable
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Typehint.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+              Label : TYPEHINT
+                C
+            Label : ARGUMENT
+              $b
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                callable
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $c
+          Label : NAME
+            B
+        Label : ELEMENT
+          Void

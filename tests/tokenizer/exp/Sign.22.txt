@@ -1,9 +1,20 @@
-+
-Label : LEFT
-  [
-  Label : INDEX
-    'h'
-  Label : VARIABLE
-    $g
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          +
+          Label : LEFT
+            [
+            Label : INDEX
+              'h'
+            Label : VARIABLE
+              $g
+          Label : RIGHT
+            1

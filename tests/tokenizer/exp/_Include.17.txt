@@ -1,23 +1,46 @@
-(
-Label : ARGUMENT
-  =>
-  Label : KEY
-    'a'
-  Label : VALUE
-    require
-    Label : ARGUMENTS
-      )
-      Label : ARGUMENT
-        'c'
-        Label : CODE
-          .
-          Label : CONCAT
-            dirname
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            array
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : CONCAT
-            'c'
-    Label : NAME
-      require
-Label : ARGUMENT
-  Void
+              (
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'a'
+                Label : VALUE
+                  require
+                  Label : ARGUMENTS
+                    )
+                    Label : ARGUMENT
+                      (
+                      Label : CODE
+                        .
+                        Label : CONCAT
+                          dirname
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              __FILE__
+                          Label : NAME
+                            dirname
+                        Label : CONCAT
+                          'c'
+                  Label : NAME
+                    require
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              array

@@ -1,25 +1,27 @@
-./tests/tokenizer/source/_Instanceof.05.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        instanceof
-        Label : CLASS
-          static
-        Label : VARIABLE
-          $a
-      Label : ELEMENT
-        if
-        Label : CONDITION
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Instanceof.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
           instanceof
           Label : CLASS
             static
           Label : VARIABLE
             $a
-        Label : THEN
-          ;
-          Label : ELEMENT
-            Void
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            instanceof
+            Label : CLASS
+              static
+            Label : VARIABLE
+              $a
+          Label : THEN
+            ;
+            Label : ELEMENT
+              Void

@@ -1,35 +1,98 @@
-(
-Label : ARGUMENT
-  =>
-  Label : KEY
-    'C'
-  Label : VALUE
-     
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        $c
-      Label : ARGUMENT
-        $d
-    Label : BLOCK
-      {}
-      Label : ELEMENT
-        global
-        Label : GLOBAL
-          $f
-        Label : GLOBAL
-          $e
-      Label : ELEMENT
-        return
-        Label : RETURN
-          [
-          Label : INDEX
-            .
-            Label : CONCAT
-123098120398 [label="Reached level 15"]            Label : CONCAT
-123098120398 [label="Reached level 15"]          Label : VARIABLE
-            $e
-    Label : NAME
-      Void
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.86.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              private
+              Label : PPP
+                $z
+              Label : PRIVATE
+                private
+              Label : PPP
+                $x
+              Label : PPP
+                $y
+          Label : NAME
+            x
+        Label : ELEMENT
+          array
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              =>
+              Label : KEY
+                'C'
+              Label : VALUE
+                 
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                  Label : ARGUMENT
+                    $d
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    global
+                    Label : GLOBAL
+                      $f
+                    Label : GLOBAL
+                      $e
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      [
+                      Label : INDEX
+                        .
+                        Label : CONCAT
+                          'D'
+                        Label : CONCAT
+                          (
+                          Label : CODE
+                            ?
+                            Label : CONDITION
+                              empty
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  [
+                                  Label : INDEX
+                                    'E'
+                                  Label : VARIABLE
+                                    $c
+                              Label : NAME
+                                empty
+                            Label : ELSE
+                              [
+                              Label : INDEX
+                                [
+                                Label : INDEX
+                                  'E'
+                                Label : VARIABLE
+                                  $c
+                              Label : VARIABLE
+                                [
+                                Label : INDEX
+                                  'G'
+                                Label : VARIABLE
+                                  $f
+                            Label : THEN
+                              'F'
+                      Label : VARIABLE
+                        $e
+                Label : NAME
+                  Void
+            Label : ARGUMENT
+              1
+          Label : NAME
+            array

@@ -1,3 +1,238 @@
-(
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.55.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            x
+          Label : RETURNTYPE
+            Stdclass
+        Label : ELEMENT
+          x2
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            x2
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              x3
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+              Label : BLOCK
+                Void
+              Label : NAME
+                x3
+            Label : ELEMENT
+              x4
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+              Label : BLOCK
+                Void
+              Label : NAME
+                x4
+              Label : RETURNTYPE
+                Stdclass
+          Label : NAME
+            i
+        Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            Void
+          Label : RETURNTYPE
+            Stdclass
+        Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            Void
+        Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            Void
+          Label : RETURNTYPE
+            Stdclass
+          Label : USE
+            (
+            Label : ARGUMENT
+              $y
+        Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            Void
+          Label : USE
+            (
+            Label : ARGUMENT
+              $y
+        Label : ELEMENT
+          xr
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            xr
+          Label : RETURNTYPE
+            Stdclass
+        Label : ELEMENT
+          x2r
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            x2r
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              x3r
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+              Label : BLOCK
+                Void
+              Label : NAME
+                x3r
+            Label : ELEMENT
+              x4r
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+              Label : BLOCK
+                Void
+              Label : NAME
+                x4r
+              Label : RETURNTYPE
+                Stdclass
+          Label : NAME
+            i
+        Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            Void
+          Label : RETURNTYPE
+            Stdclass
+        Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            Void
+        Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            Void
+          Label : RETURNTYPE
+            Stdclass
+          Label : USE
+            (
+            Label : ARGUMENT
+              $y
+        Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            Void
+          Label : USE
+            (
+            Label : ARGUMENT
+              $y

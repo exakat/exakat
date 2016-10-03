@@ -1,3 +1,78 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Const.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              private
+              Label : PPP
+                =
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  'b'
+              Label : PRIVATE
+                private
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  C
+                Label : VALUE
+                  1
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  D
+                Label : VALUE
+                  '2'
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  E
+                Label : VALUE
+                  ::
+                  Label : CLASS
+                    F
+                  Label : CONSTANT
+                    G
+            Label : ELEMENT
+              static
+              Label : PPP
+                $E
+              Label : PROTECTED
+                protected
+              Label : STATIC
+                static
+            Label : ELEMENT
+              f
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                f
+              Label : PUBLIC
+                public
+              Label : STATIC
+                static
+          Label : NAME
+            x

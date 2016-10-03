@@ -1,3 +1,92 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Spaceship.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            <=>
+            Label : LEFT
+              $b
+            Label : RIGHT
+              ->
+              Label : OBJECT
+                $c
+              Label : PROPERTY
+                d
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            <=>
+            Label : LEFT
+              $b
+            Label : RIGHT
+              ->
+              Label : METHOD
+                d
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  d
+              Label : OBJECT
+                $c
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            <=>
+            Label : LEFT
+              $b
+            Label : RIGHT
+              ::
+              Label : CLASS
+                D
+              Label : CONSTANT
+                E
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            <=>
+            Label : LEFT
+              $b
+            Label : RIGHT
+              ::
+              Label : CLASS
+                D
+              Label : METHOD
+                E
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  E
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            <=>
+            Label : LEFT
+              $b
+            Label : RIGHT
+              ::
+              Label : CLASS
+                D
+              Label : PROPERTY
+                $E

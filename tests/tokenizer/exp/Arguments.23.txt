@@ -1,11 +1,30 @@
-(
-Label : ARGUMENT
-  <<<EOF
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.23.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-  Label : CONCAT
-    A 
-  Label : CONCAT
-    $b
-  Label : CONCAT
-     C
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                <<<EOF
 
+                Label : CONCAT
+                  A 
+                Label : CONCAT
+                  $b
+                Label : CONCAT
+                   C
+
+            Label : NAME
+              b
+          Label : OBJECT
+            $a

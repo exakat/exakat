@@ -32,7 +32,7 @@ class CaughtButNotThrown extends Analyzer\Analyzer {
         $thrown1 = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").values("fullnspath").unique()');
 
         $thrown2 = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").in("DEFINITION")
-                                     .repeat( out("EXTENDS").in("DEFINITION") ).emit().times(15).values("fullnspath").unique()');
+                                     .repeat( out("EXTENDS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.').values("fullnspath").unique()');
         $thrown = array_merge($thrown1, $thrown2);
         
         $this->atomIs('Catch')

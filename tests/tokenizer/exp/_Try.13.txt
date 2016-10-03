@@ -1,41 +1,102 @@
-(
-Label : ARGUMENT
-  'H'
-Label : ARGUMENT
-  array
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      =>
-      Label : KEY
-        'J'
-      Label : VALUE
-        .
-        Label : CONCAT
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Try.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          try
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                [
+                Label : INDEX
+                  'B'
+                Label : VARIABLE
+                  $b
+          Label : CATCH
+            catch
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  Void
+            Label : CLASS
+              D
+            Label : VARIABLE
+              $c
+        Label : ELEMENT
           ->
           Label : METHOD
-            L
+            G
             Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : OBJECT
-            $e
-        Label : CONCAT
-          'M'
-        Label : CONCAT
-          ->
-          Label : METHOD
-            O
-            Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : OBJECT
-            $f
-        Label : CONCAT
-          ->
-          Label : METHOD
-            R
-            Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : OBJECT
-            $g
-  Label : NAME
-    array
+              (
+              Label : ARGUMENT
+                'H'
+              Label : ARGUMENT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    =>
+                    Label : KEY
+                      'J'
+                    Label : VALUE
+                      .
+                      Label : CONCAT
+                        ->
+                        Label : METHOD
+                          L
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            L
+                        Label : OBJECT
+                          $e
+                      Label : CONCAT
+                        'M'
+                      Label : CONCAT
+                        ->
+                        Label : METHOD
+                          O
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'P'
+                          Label : NAME
+                            O
+                        Label : OBJECT
+                          $f
+                      Label : CONCAT
+                        ->
+                        Label : METHOD
+                          R
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'S'
+                          Label : NAME
+                            R
+                        Label : OBJECT
+                          $g
+                Label : NAME
+                  array
+            Label : NAME
+              G
+          Label : OBJECT
+            [
+            Label : INDEX
+              'E'
+            Label : VARIABLE
+              $d

@@ -1,11 +1,22 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  clone
-  Label : CLONE
-    ->
-    Label : OBJECT
-      $y
-    Label : PROPERTY
-      z
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Clone.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            clone
+            Label : CLONE
+              ->
+              Label : OBJECT
+                $y
+              Label : PROPERTY
+                z

@@ -1,7 +1,34 @@
-+
-Label : LEFT
-  ++
-  Label : POSTPLUSPLUS
-    $b
-Label : RIGHT
-  4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.47.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            +
+            Label : LEFT
+              ++
+              Label : POSTPLUSPLUS
+                $b
+            Label : RIGHT
+              4
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            -
+            Label : LEFT
+              ++
+              Label : PREPLUSPLUS
+                $d
+            Label : RIGHT
+              4

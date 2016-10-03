@@ -1,3 +1,45 @@
-break
-Label : BREAK
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.24.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  {}
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $d
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $b
+            Label : ELEMENT
+              case 'a' :  /**/  
+              Label : CASE
+                'a'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  {}
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $a
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+          Label : NAME
+            $c

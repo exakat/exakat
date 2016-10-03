@@ -1,5 +1,16 @@
-[
-Label : INDEX
-  'shell'
-Label : VARIABLE
-  $_ENV
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Variable.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          [
+          Label : INDEX
+            'shell'
+          Label : VARIABLE
+            $_ENV

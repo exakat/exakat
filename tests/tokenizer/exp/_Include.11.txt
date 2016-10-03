@@ -1,7 +1,22 @@
-b
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    a
-  Label : CONSTANT
-    b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            b
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                a
+              Label : CONSTANT
+                b
+          Label : NAME
+            include

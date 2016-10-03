@@ -1,9 +1,24 @@
-(
-Label : ARGUMENT
-  g
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      1
-  Label : NAME
-    g
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              g
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  1
+              Label : NAME
+                g
+          Label : NAME
+            f

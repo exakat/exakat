@@ -1,5 +1,86 @@
-[
-Label : INDEX
-  $b
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $
+                Label : NAME
+                  [
+                  Label : INDEX
+                    'B'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      $b
+                    Label : VARIABLE
+                      $a
+              Label : PROPERTY
+                C
+            Label : RIGHT
+              D
+          Label : THEN
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                [
+                Label : INDEX
+                  'E'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    $b
+                  Label : VARIABLE
+                    $a
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            =
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $
+                Label : NAME
+                  [
+                  Label : INDEX
+                    'B'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      $b
+                    Label : VARIABLE
+                      $a
+              Label : PROPERTY
+                C
+            Label : RIGHT
+              D
+          Label : THEN
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                [
+                Label : INDEX
+                  'E'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    $b
+                  Label : VARIABLE
+                    $a

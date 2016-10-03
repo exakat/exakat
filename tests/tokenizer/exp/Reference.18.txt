@@ -1,9 +1,20 @@
-=
-Label : LEFT
-  $forms
-Label : RIGHT
-  ::
-  Label : CLASS
-    self
-  Label : PROPERTY
-    $_forms
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $forms
+          Label : RIGHT
+            ::
+            Label : CLASS
+              self
+            Label : PROPERTY
+              $_forms

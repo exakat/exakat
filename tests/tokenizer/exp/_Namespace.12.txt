@@ -1,7 +1,27 @@
-class
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    Void
-Label : NAME
-  C
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Namespace.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                C
+          Label : NAME
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B

@@ -1,24 +1,64 @@
-(
-Label : ARGUMENT
-  =>
-  Label : KEY
-    'a'
-  Label : VALUE
-    d
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        .
-        Label : CONCAT
-          b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'a'
+                Label : VALUE
+                  d
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        b
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            __FILE__
+                        Label : NAME
+                          b
+                      Label : CONCAT
+                        'c'
+                  Label : NAME
+                    d
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              array
+        Label : ELEMENT
+          unset
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            b
-        Label : CONCAT
-          'c'
-    Label : NAME
-      d
-Label : ARGUMENT
-  Void
+              $
+              Label : NAME
+                .
+                Label : CONCAT
+                  b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      __FILE__
+                  Label : NAME
+                    b
+                Label : CONCAT
+                  'c'
+          Label : NAME
+            unset

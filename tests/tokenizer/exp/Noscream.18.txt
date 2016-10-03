@@ -1,3 +1,72 @@
-(
-Label : ARGUMENT
-  'D'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Noscream.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'D'
+            Label : NAME
+              C
+          Label : OBJECT
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              B
+        Label : ELEMENT
+          OR
+          Label : LEFT
+            E
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  F
+                Label : CONCAT
+                  'G'
+            Label : NAME
+              E
+          Label : RIGHT
+            @
+            Label : AT
+              H
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    I
+                  Label : CONCAT
+                    'J'
+                Label : ARGUMENT
+                  0
+              Label : NAME
+                H
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $e
+          Label : SOURCE
+            $b
+          Label : VALUE
+            =>
+            Label : KEY
+              $c
+            Label : VALUE
+              $d

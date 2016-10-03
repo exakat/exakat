@@ -1,5 +1,58 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Precedence.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            5
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                +
+                Label : LEFT
+                  1
+                Label : RIGHT
+                  2
+              Label : CONCAT
+                5
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            "\n"
+            Label : ARGUMENT
+              "\n"
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            4
+            Label : ARGUMENT
+              +
+              Label : LEFT
+                .
+                Label : CONCAT
+                  1
+                Label : CONCAT
+                  2
+              Label : RIGHT
+                4
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            "\n"
+            Label : ARGUMENT
+              "\n"
+          Label : NAME
+            print

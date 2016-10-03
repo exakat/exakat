@@ -1,3 +1,26 @@
-(
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          aasdfasf
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $b
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                1
+          Label : NAME
+            aasdfasf
+        Label : ELEMENT
+          Void

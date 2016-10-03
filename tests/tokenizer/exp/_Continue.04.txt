@@ -1,28 +1,73 @@
-echo
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    D
-  Label : METHOD
-    E
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        ->
-        Label : METHOD
-          F
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            F
-        Label : OBJECT
-          $b
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $b
-        Label : PROPERTY
-          H
-    Label : NAME
-      E
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Continue.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  $c
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  continue
+                  Label : CONTINUE
+                    Void
+                Label : ELEMENT
+                  Void
+            Label : ELEMENT
+              C
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ::
+                  Label : CLASS
+                    D
+                  Label : METHOD
+                    E
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          F
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'G'
+                          Label : NAME
+                            F
+                        Label : OBJECT
+                          $b
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $b
+                        Label : PROPERTY
+                          H
+                    Label : NAME
+                      E
+              Label : NAME
+                echo
+            Label : ELEMENT
+              I
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

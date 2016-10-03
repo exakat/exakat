@@ -32,7 +32,8 @@ class FunctionSubscripting extends Analyzer\Analyzer {
         $this->atomIs('Array')
              ->outIs('VARIABLE')
              ->atomIs(array('Functioncall', 'Staticmethodcall', 'Methodcall'))
-             ->back('first');
+             ->back('first')
+             ->inIsIE(array('PROPERTY', 'VARIABLE'));
         $this->prepareQuery();
     }
 }

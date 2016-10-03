@@ -1,3 +1,54 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.48.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              static
+              Label : PPP
+                $a
+              Label : PUBLIC
+                public
+              Label : STATIC
+                static
+            Label : ELEMENT
+              b
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                b
+              Label : PUBLIC
+                public
+              Label : STATIC
+                static
+            Label : ELEMENT
+              c
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                c
+              Label : PUBLIC
+                public
+          Label : NAME
+            x

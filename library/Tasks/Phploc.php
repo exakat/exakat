@@ -30,7 +30,7 @@ class Phploc extends Tasks {
     const EMPTYFILE = 4;
     const ONETOKEN = 8;
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         
         $loc = array('files'    => 0,
                      'total'    => 0,

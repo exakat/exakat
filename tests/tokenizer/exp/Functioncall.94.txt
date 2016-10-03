@@ -1,3 +1,140 @@
-(
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.94.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            $y
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              $y
+          Label : OBJECT
+            $a
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            $y
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+            Label : NAME
+              $y
+          Label : OBJECT
+            $a
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            x1
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+            Label : NAME
+              x1
+          Label : OBJECT
+            $a
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            x2
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                3
+              Label : ARGUMENT
+                4
+            Label : NAME
+              x2
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  2
+              Label : NAME
+                x2
+          Label : OBJECT
+            $a
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            x3
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                5
+              Label : ARGUMENT
+                6
+            Label : NAME
+              x3
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  3
+                Label : ARGUMENT
+                  4
+              Label : NAME
+                x3
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2
+                Label : NAME
+                  x3
+          Label : OBJECT
+            $a
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            x4
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                7
+              Label : ARGUMENT
+                8
+            Label : NAME
+              x4
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  5
+                Label : ARGUMENT
+                  6
+              Label : NAME
+                x4
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    3
+                  Label : ARGUMENT
+                    4
+                Label : NAME
+                  x4
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      1
+                    Label : ARGUMENT
+                      2
+                  Label : NAME
+                    x4
+          Label : OBJECT
+            $a

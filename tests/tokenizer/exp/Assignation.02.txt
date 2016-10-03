@@ -1,9 +1,22 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  .
-  Label : CONCAT
-    '1'
-  Label : CONCAT
-    "2"
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Assignation.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            .
+            Label : CONCAT
+              '1'
+            Label : CONCAT
+              "2"
+        Label : ELEMENT
+          Void

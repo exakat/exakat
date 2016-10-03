@@ -1,10 +1,25 @@
-(
-Label : ARGUMENT
-  'd'
-Label : ARGUMENT
-  <<<HEREDOC
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.66.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-  Label : CONCAT
-    bc
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foo
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'd'
+            Label : ARGUMENT
+              <<<HEREDOC
+
+              Label : CONCAT
+                bc
 
 
+          Label : NAME
+            foo

@@ -1,1 +1,12 @@
-true
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Boolean.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          true

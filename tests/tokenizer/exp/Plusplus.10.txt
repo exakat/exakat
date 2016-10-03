@@ -1,11 +1,30 @@
-==
-Label : LEFT
-  1
-Label : RIGHT
-  %
-  Label : LEFT
-    --
-    Label : POSTPLUSPLUS
-      $i
-  Label : RIGHT
-    2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Plusplus.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              1
+            Label : RIGHT
+              %
+              Label : LEFT
+                --
+                Label : POSTPLUSPLUS
+                  $i
+              Label : RIGHT
+                2
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                $a

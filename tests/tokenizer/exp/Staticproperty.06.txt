@@ -1,3 +1,36 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticproperty.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ->
+            Label : OBJECT
+              [
+              Label : INDEX
+                $b
+              Label : VARIABLE
+                ::
+                Label : CLASS
+                  self
+                Label : PROPERTY
+                  $a
+            Label : PROPERTY
+              d
+          Label : RIGHT
+            new
+            Label : NEW
+              $e
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                $e

@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Try extends Tokenizer {
-    /* 15 methods */
+    /* 18 methods */
 
     public function test_Try01()  { $this->generic_test('_Try.01'); }
     public function test_Try02()  { $this->generic_test('_Try.02'); }
@@ -24,5 +24,8 @@ class _Try extends Tokenizer {
     public function test_Try13()  { $this->generic_test('_Try.13'); }
     public function test_Try14()  { $this->generic_test('_Try.14'); }
     public function test_Try15()  { $this->generic_test('_Try.15'); }
+    public function test_Try16()  { $this->generic_test('_Try.16'); }
+    public function test_Try17()  { $this->generic_test('_Try.17'); }
+    public function test_Try18()  { $this->generic_test('_Try.18'); }
 }
 ?>

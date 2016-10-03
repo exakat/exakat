@@ -1,7 +1,26 @@
-[
-Label : ARGUMENT
-  =>
-  Label : KEY
-    'a'
-  Label : VALUE
-    'b'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/ArrayNS.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            [
+            Label : ARGUMENTS
+              [
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'a'
+                Label : VALUE
+                  'b'
+            Label : VARIABLE
+              [

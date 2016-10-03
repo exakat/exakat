@@ -44,12 +44,15 @@ class Docs {
         }
     }
     
-    public function getThemeAnalyzers($theme) {
+    public function getThemeAnalyzers($theme = null) {
         if (is_array($theme)) {
             $theme = array_map(function ($x) { return trim($x, '"'); }, $theme);
-            $where = 'c.name in ("'.join('", "', $theme).'")';
+            $where = 'WHERE c.name in ("'.implode('", "', $theme).'")';
+        } elseif ($theme === null) {
+            // Default is ALL of them
+            $where = '';
         } else {
-            $where = 'c.name = "'.trim($theme, '"').'"';
+            $where = 'WHERE c.name = "'.trim($theme, '"').'"';
         }
 
         $query = <<<SQL
@@ -58,7 +61,7 @@ class Docs {
         ON ac.id_analyzer = a.id
     JOIN categories AS c
         ON c.id = ac.id_categories
-    WHERE $where
+    $where
 SQL;
         
         $res = $this->sqlite->query($query);

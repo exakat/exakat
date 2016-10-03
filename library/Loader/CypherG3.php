@@ -51,12 +51,12 @@ class CypherG3 {
     private $cyhper = null;
     
     public function __construct() {
-        $this->config = \Config::factory();
+        $this->config = \Exakat\Config::factory();
         
         // Force autoload
         $this->cypher = new \Graph\Cypher($this->config );
 
-        if (file_exists($this->config->projects_root.'/nodes.cypher.csv') && static::$file_saved == 0) {
+        if (file_exists($this->config->projects_root.'/.exakat/nodes.cypher.csv') && static::$file_saved == 0) {
             $this->cleanCsv();
         }
         
@@ -68,7 +68,7 @@ class CypherG3 {
         self::saveTokenCounts();
         
         // Load Nodes
-        $files = glob($this->config->projects_root.'/nodes.g3.*.csv');
+        $files = glob($this->config->projects_root.'/.exakat/nodes.g3.*.csv');
         foreach($files as $file) {
             preg_match('/nodes\.g3\.(.*)\.csv$/', $file, $r);
             $atom = $r[1];
@@ -95,14 +95,14 @@ class CypherG3 {
                     }
                 }
             }
-            $extra = join(', ', $extra);
+            $extra = implode(', ', $extra);
             if(!empty($extra)) {
                 $extra = ','. $extra;
             }
             
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/nodes.g3.$atom.csv" AS csvLine
+LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/.exakat/nodes.g3.$atom.csv" AS csvLine
 CREATE (token:$atom { 
 eid: toInt(csvLine.id),
 code: csvLine.code,
@@ -121,10 +121,8 @@ CYPHER;
                     die();
                 }
 
-                $this->unlink[] = "{$this->config->projects_root}/nodes.g3.$atom.csv";
+                $this->unlink[] = $file;
                 $e = microtime(true);
-//                $wc = trim(shell_exec("wc -l {$this->config->projects_root}/nodes.g3.$atom.csv"));
-//                print "$atom $wc ".number_format(($e - $b) * 1000, 2)."ms\n";
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load nodes in the database\n".$e->getMessage());
@@ -133,7 +131,7 @@ CYPHER;
         display('Loaded nodes');
         
         // Load relations
-        $files = glob($this->config->projects_root.'/rels.g3.*.csv');
+        $files = glob($this->config->projects_root.'/.exakat/rels.g3.*.csv');
         foreach($files as $file) {
             preg_match('/rels\.g3\.(.*)\.(.*)\.(.*)\.csv$/', $file, $r);
             $edge = $r[1];
@@ -143,7 +141,7 @@ CYPHER;
             $b = microtime(true);
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv" AS csvLine
+LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/.exakat/rels.g3.$edge.$origin.$destination.csv" AS csvLine
 MATCH (token:$origin { eid: toInt(csvLine.start)}),(token2:$destination { eid: toInt(csvLine.end)})
 CREATE (token)-[:$edge]->(token2)
 
@@ -155,10 +153,8 @@ CYPHER;
                     print_r($res);
                     die();
                 }
-                $this->unlink[] = "{$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv";
+                $this->unlink[] = $file;
                 $e = microtime(true);
-//                $wc = trim(shell_exec("wc -l {$this->config->projects_root}/rels.g3.$edge.$origin.$destination.csv"));
-//                print "$atom $wc ".number_format(($e - $b) * 1000, 2)."ms\n";
             } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load relations for ".$edge." in the database\n".$e->getMessage());
@@ -177,10 +173,11 @@ CYPHER;
         foreach($this->unlink as $file) {
             unlink($file);
         }
+        rmdir(dirname($file));
     }
 
     public function saveTokenCounts() {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $datastore = new \Datastore($config);
         
         $datastore->addRow('tokenCounts', static::$tokenCounts);

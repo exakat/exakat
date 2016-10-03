@@ -1,3 +1,96 @@
-(
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticmethodcall.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              2
+          Label : NAME
+            f
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              f
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            D
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              c
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                c
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            D
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                14
+            Label : NAME
+              c
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  13
+              Label : NAME
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    12
+                Label : NAME
+                  c
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            D
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                5
+            Label : NAME
+              c
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  4
+              Label : NAME
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    3
+                Label : NAME
+                  c
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      2
+                  Label : NAME
+                    c

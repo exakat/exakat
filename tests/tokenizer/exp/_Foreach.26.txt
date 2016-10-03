@@ -1,11 +1,78 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    ->
-    Label : OBJECT
-      $d
-    Label : PROPERTY
-      e
-  Label : PROPERTY
-    f
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                is_array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      ->
+                      Label : OBJECT
+                        $d
+                      Label : PROPERTY
+                        e
+                    Label : PROPERTY
+                      f
+                Label : NAME
+                  is_array
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $g
+                  Label : RIGHT
+                    h
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $i
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          ->
+                          Label : OBJECT
+                            $j
+                          Label : PROPERTY
+                            k
+                        Label : PROPERTY
+                          l
+                    Label : NAME
+                      h
+          Label : SOURCE
+            ->
+            Label : OBJECT
+              $a
+            Label : PROPERTY
+              b
+          Label : VALUE
+            $c
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $m
+          Label : RIGHT
+            new
+            Label : NEW
+              m
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $o
+              Label : NAME
+                m

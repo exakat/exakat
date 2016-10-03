@@ -1,3 +1,54 @@
-continue
-Label : CONTINUE
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Continue.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              continue
+              Label : CONTINUE
+                Void
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              continue
+              Label : CONTINUE
+                1
+          Label : SOURCE
+            $a2
+          Label : VALUE
+            $b
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  continue
+                  Label : CONTINUE
+                    2
+              Label : SOURCE
+                $a
+              Label : VALUE
+                $b
+          Label : SOURCE
+            $a3
+          Label : VALUE
+            $b

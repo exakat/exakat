@@ -1,17 +1,99 @@
-echo
-Label : ARGUMENT
-  ->
-  Label : METHOD
-    D
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        $a
-    Label : NAME
-      D
-  Label : OBJECT
-    [
-    Label : INDEX
-      'C'
-    Label : VARIABLE
-      $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.77.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            ;
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    D
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $a
+                    Label : NAME
+                      D
+                  Label : OBJECT
+                    [
+                    Label : INDEX
+                      'C'
+                    Label : VARIABLE
+                      $b
+              Label : NAME
+                echo
+            Label : ELEMENT
+              E
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          F
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                G
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      D
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $c
+                        Label : ARGUMENT
+                          array
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            array
+                        Label : ARGUMENT
+                          $d
+                      Label : NAME
+                        D
+                    Label : OBJECT
+                      [
+                      Label : INDEX
+                        'C'
+                      Label : VARIABLE
+                        $b
+                Label : NAME
+                  G
+              Label : OBJECT
+                $b
+          Label : NAME
+            echo
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            ;
+            Label : ELEMENT
+              J
+        Label : ELEMENT
+          Void
+    Label : ELEMENT
+      K

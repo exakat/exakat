@@ -1,5 +1,50 @@
-(
-Label : ARGUMENT
-  $f
-Label : ARGUMENT
-  $g
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.63.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $f
+            Label : ARGUMENT
+              $g
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
+          Label : NAME
+            Void
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            d
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'e'
+            Label : NAME
+              d
+          Label : OBJECT
+            (
+            Label : CODE
+              new
+              Label : NEW
+                A
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    $c
+                Label : NAME
+                  A

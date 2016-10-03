@@ -1,5 +1,88 @@
-=
-Label : LEFT
-  $b
-Label : RIGHT
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              switch
+              Label : CASES
+                 /**/ 
+                Label : ELEMENT
+                  case 'A' :  /**/  
+                  Label : CASE
+                    'A'
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $b
+                      Label : RIGHT
+                        $c
+                    Label : ELEMENT
+                      break
+                      Label : BREAK
+                        Void
+                Label : ELEMENT
+                  case 'B' :  /**/  
+                  Label : CASE
+                    'B'
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $b
+                      Label : RIGHT
+                        $d
+                    Label : ELEMENT
+                      break
+                      Label : BREAK
+                        1
+                Label : ELEMENT
+                  case 'C' :  /**/  
+                  Label : CASE
+                    'C'
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $b
+                      Label : RIGHT
+                        $d
+                    Label : ELEMENT
+                      break
+                      Label : BREAK
+                        2
+                Label : ELEMENT
+                  default
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $b
+                      Label : RIGHT
+                        @
+                        Label : AT
+                          $e
+                    Label : ELEMENT
+                      break
+                      Label : BREAK
+                        Void
+              Label : NAME
+                $type
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

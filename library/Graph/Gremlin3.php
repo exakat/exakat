@@ -31,7 +31,7 @@ class Gremlin3 extends Graph {
         parent::__construct($config);
 
         if (!file_exists($config->neo4j_folder)) {
-            die("Error in the path to the Neo4j folder. Please, check config/config.ini\n");
+            die("Error in the path to the Neo4j folder ($config->neo4j_folder). Please, check config/exakat.ini\n");
         }
         $this->scriptDir = $config->neo4j_folder.'/scripts/';
 
@@ -84,7 +84,7 @@ class Gremlin3 extends Graph {
                     }
                 } elseif (is_array($value)) {
                     $valueList = array_map(function ($x) { return str_replace(array('$', "\n", "\r"), array('\\$', "\\\n", "\\\r"), addslashes($x)); }, $value);
-                    $gremlin = "{ ['".join("','", $valueList)."'] }";
+                    $gremlin = "{ ['".implode("','", $valueList)."'] }";
                     $defName = 'a'.crc32($gremlin);
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
@@ -104,7 +104,7 @@ def $defName() {
 }
 GREMLIN;
                             file_put_contents($defFileName, $gremlin);
-                            file_put_contents($this->scriptDir.$defName.'.txt', join("\n", $value) );
+                            file_put_contents($this->scriptDir.$defName.'.txt', implode("\n", $value) );
                         } else {
                             file_put_contents($defFileName, $gremlin);
                         }
@@ -166,11 +166,7 @@ GREMLIN;
     
         $result = json_decode($result);
         if (isset($result->errormessage)) {
-            print "Gremlin error : ";//javax.script.ScriptException: groovy.lang.MissingMethodException: 
-            print $result->errormessage."\n";
-            print "Query : $query\n";//javax.script.ScriptException: groovy.lang.MissingMethodException: 
-            die();
-//            throw new \Exceptions\GremlinException($result->errormessage, $query);
+            throw new \Exakat\Exceptions\GremlinException($result->errormessage, $query);
         }
 
         return $result;

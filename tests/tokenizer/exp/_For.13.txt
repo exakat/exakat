@@ -1,5 +1,50 @@
-[
-Label : INDEX
-  $f
-Label : VARIABLE
-  e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_For.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          for
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                [
+                Label : INDEX
+                  $f
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    e
+              Label : RIGHT
+                $g
+          Label : FINAL
+            ;
+            Label : ELEMENT
+              <
+              Label : LEFT
+                $i
+              Label : RIGHT
+                10
+          Label : INCREMENT
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $i
+          Label : INIT
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $i
+              Label : RIGHT
+                0

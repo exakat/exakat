@@ -1,3 +1,18 @@
-echo
-Label : ARGUMENT
-  __NAMESPACE__
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Constant.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              __NAMESPACE__
+          Label : NAME
+            echo

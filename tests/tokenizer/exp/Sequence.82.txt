@@ -1,3 +1,66 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.82.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ===
+            Label : LEFT
+              ->
+              Label : METHOD
+                b
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  b
+              Label : OBJECT
+                $a
+            Label : RIGHT
+              'c'
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $h
+          Label : THEN
+            {}
+            Label : ELEMENT
+              `
+              Label : CONCAT
+                ls -1 
+              Label : CONCAT
+                $g
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                d
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      ::
+                      Label : CLASS
+                        self
+                      Label : CONSTANT
+                        E
+                    Label : CONCAT
+                      "
+                      Label : CONCAT
+                         
+                      Label : CONCAT
+                        $d
+                Label : NAME
+                  d
+              Label : OBJECT
+                $c

@@ -1,3 +1,30 @@
-(
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $z
+          Label : RIGHT
+            .
+            Label : CONCAT
+              "a"
+            Label : CONCAT
+              @
+              Label : AT
+                y
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    1
+                Label : NAME
+                  y
+            Label : CONCAT
+              $c

@@ -1,13 +1,11 @@
 <?php
 
-$expected     = array('class G extends \Exception { /**/ } ',
+$expected     = array('throw new D( )',
+                      'throw new G( )',
                       );
 
-$expected_not = array('class A extends \Exception { /**/ } ',
-                      'class B extends A { /**/ } ',
-                      'class C extends B { /**/ } ',
-                      'class D extends C { /**/ } ',
-                      'class F extends C { /**/ } ',
-                      'class E { /**/ } ');
+$expected_not = array('throw new A( )',
+                      'throw new B( )',
+                      'throw new C( )',);
 
 ?>

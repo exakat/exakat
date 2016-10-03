@@ -26,224 +26,51 @@ namespace Analyzer\Structures;
 use Analyzer;
 
 class UnsetInForeach extends Analyzer\Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         // foreach($a as $v) { unset($v); }
+        // Only valid : Objects (unset on properties) or arrays (if the blind variable is reference)
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE(array('KEY', 'VALUE'))
              ->atomIs('Variable')
              ->savePropertyAs('code', 'blind')
+             ->savePropertyAs('reference', 'reference')
              ->back('first')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->tokenIs('T_UNSET')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Variable')
+             ->outIsIE(array('VARIABLE', 'OBJECT'))
              ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $k => $v) { unset($v); }
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE('VALUE')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'blind')
+             ->inIsIE(array('VARIABLE', 'OBJECT'))
+             ->atomIsNot('Property')
+             ->raw('filter{ !(it.get().label() == "Array" && reference == true) }')
              ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Variable')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $k => $v) { unset($k); }
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE('KEY')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'blind')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Variable')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $v) { unset($v[1]); }
-        // Not &$v
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('Variable')
-             ->isNot('reference', true)
-             ->savePropertyAs('code', 'blind')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $k => $v) { unset($k[1]); }
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIs('KEY')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'blind')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $k => $v) { unset($v[1]); }
-        // is OK on &$v
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE('VALUE')
-             ->atomIs('Variable')
-             ->isNot('reference', true)
-             ->savePropertyAs('code', 'blind')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->tokenIs('T_UNSET')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Array')
-             ->outIs('VARIABLE')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
 ////////////////////////////////////////////////////////////
 // same but with (unset) instead of unset()
 ////////////////////////////////////////////////////////////
-        // foreach($a as $v) { (unset) $v; }
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE(array('KEY', 'VALUE'))
              ->atomIs('Variable')
              ->savePropertyAs('code', 'blind')
+             ->savePropertyAs('reference', 'reference')
              ->back('first')
              ->outIs('BLOCK')
              ->atomInside('Cast')
              ->tokenIs('T_UNSET_CAST')
              ->outIs('CAST')
-             ->atomIs('Variable')
+             ->outIsIE(array('VARIABLE', 'OBJECT'))
              ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $k => $v) { unset($v); }
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE('VALUE')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'blind')
+             ->inIsIE(array('VARIABLE', 'OBJECT'))
+             ->atomIsNot('Property')
+             ->raw('filter{ !(it.get().label() == "Array" && reference == true) }')
              ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Cast')
-             ->tokenIs('T_UNSET_CAST')
-             ->outIs('CAST')
-             ->atomIs('Variable')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $k => $v) { unset($k); }
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE('KEY')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'blind')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Cast')
-             ->tokenIs('T_UNSET_CAST')
-             ->outIs('CAST')
-             ->atomIs('Variable')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $v) { unset($v[1]); }
-        // Not &$v
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->atomIs('Variable')
-             ->isNot('reference', true)
-             ->savePropertyAs('code', 'blind')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Cast')
-             ->tokenIs('T_UNSET_CAST')
-             ->outIs('CAST')
-             ->atomIs('Array')
-             ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $k => $v) { unset($k[1]); }
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIs('KEY')
-             ->atomIs('Variable')
-             ->savePropertyAs('code', 'blind')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Cast')
-             ->tokenIs('T_UNSET_CAST')
-             ->outIs('CAST')
-             ->atomIs('Array')
-             ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
-        $this->prepareQuery();
-
-        // foreach($a as $k => $v) { unset($v[1]); }
-        // is OK on &$v
-        $this->atomIs('Foreach')
-             ->outIs('VALUE')
-             ->outIsIE('VALUE')
-             ->atomIs('Variable')
-             ->isNot('reference', true)
-             ->savePropertyAs('code', 'blind')
-             ->back('first')
-             ->outIs('BLOCK')
-             ->atomInside('Cast')
-             ->tokenIs('T_UNSET_CAST')
-             ->outIs('CAST')
-             ->atomIs('Array')
-             ->outIsIE('VARIABLE')
-             ->samePropertyAs('code', 'blind')
-             ->back('first');
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

@@ -1,5 +1,32 @@
-(
-Label : ARGUMENT
-  '/tmp/b.init'
-Label : ARGUMENT
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Shell.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          @
+          Label : AT
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                '/tmp/b.init'
+              Label : ARGUMENT
+                $c
+            Label : NAME
+              a
+        Label : ELEMENT
+          `
+          Label : CONCAT
+            cat /tmp/d.init > 
+          Label : CONCAT
+            $e
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $f

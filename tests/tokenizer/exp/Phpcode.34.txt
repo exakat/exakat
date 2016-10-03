@@ -1,9 +1,75 @@
-echo
-Label : ARGUMENT
-  S
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'UX1'
-  Label : NAME
-    S
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.34.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      UV
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              S
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'UX1'
+              Label : NAME
+                S
+          Label : NAME
+            echo
+        Label : ELEMENT
+          UW
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              S
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'UX2'
+              Label : NAME
+                S
+          Label : NAME
+            echo
+        Label : ELEMENT
+          UX
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              S
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'UX3'
+              Label : NAME
+                S
+          Label : NAME
+            echo
+        Label : ELEMENT
+          UY
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              S
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'UX4'
+              Label : NAME
+                S
+          Label : NAME
+            echo
+    Label : ELEMENT
+      UZ

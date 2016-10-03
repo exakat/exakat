@@ -1,7 +1,53 @@
-[
-Label : ARGUMENT
-  new
-  Label : NEW
-    static
-Label : ARGUMENT
-  $method
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Static.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          [
+          Label : ARGUMENTS
+            [
+            Label : ARGUMENT
+              new
+              Label : NEW
+                static
+            Label : ARGUMENT
+              $method
+          Label : VARIABLE
+            [
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              new
+              Label : NEW
+                static
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  static
+          Label : NAME
+            x
+        Label : ELEMENT
+          y
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              new
+              Label : NEW
+                static
+                Label : ARGUMENTS
+                  Void
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  static
+          Label : NAME
+            y

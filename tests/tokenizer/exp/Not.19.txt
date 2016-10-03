@@ -1,15 +1,40 @@
-(
-Label : ARGUMENT
-  $d
-Label : ARGUMENT
-  null
-Label : ARGUMENT
-  !
-  Label : NOT
-    instanceof
-    Label : CLASS
-      \
-      Label : SUBNAME
-        E
-    Label : VARIABLE
-      $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ::
+            Label : CLASS
+              \
+              Label : SUBNAME
+                b
+            Label : METHOD
+              instance
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $d
+                Label : ARGUMENT
+                  null
+                Label : ARGUMENT
+                  !
+                  Label : NOT
+                    instanceof
+                    Label : CLASS
+                      \
+                      Label : SUBNAME
+                        E
+                    Label : VARIABLE
+                      $d
+              Label : NAME
+                instance

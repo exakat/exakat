@@ -1,5 +1,100 @@
--
-Label : LEFT
-  $g
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.39.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              --
+              Label : PREPLUSPLUS
+                $b
+            Label : VARIABLE
+              $a
+          Label : RIGHT
+            0
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              --
+              Label : PREPLUSPLUS
+                $d
+            Label : VARIABLE
+              $c
+          Label : RIGHT
+            B
+        Label : ELEMENT
+          while
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              --
+              Label : POSTPLUSPLUS
+                $h
+          Label : CONDITION
+            &&
+            Label : LEFT
+              >
+              Label : LEFT
+                $e
+              Label : RIGHT
+                1
+            Label : RIGHT
+              [
+              Label : INDEX
+                -
+                Label : LEFT
+                  $g
+                Label : RIGHT
+                  2
+              Label : VARIABLE
+                $f
+        Label : ELEMENT
+          &&
+          Label : LEFT
+            C
+          Label : RIGHT
+            D
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'E'
+            Label : NAME
+              D
+        Label : ELEMENT
+          while
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              continue
+              Label : CONTINUE
+                Void
+          Label : CONDITION
+            [
+            Label : INDEX
+              --
+              Label : PREPLUSPLUS
+                $j
+            Label : VARIABLE
+              $i
+        Label : ELEMENT
+          &&
+          Label : LEFT
+            G
+          Label : RIGHT
+            H
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'I'
+            Label : NAME
+              H

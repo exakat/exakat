@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Results extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $analyzer = $config->program;
         if (empty($analyzer)) {
             die('Provide the analyzer with the option -P X/Y. Aborting'."\n");
@@ -81,12 +81,12 @@ g.V().hasLabel("Analysis").has("analyzer", "{$analyzer}").out('ANALYZED')
              theNamespace='None'; 
              }
 .sideEffect{ line = it.get().value('line'); }
-.until( hasLabel('File') ).repeat( 
+.until( hasLabel('Project') ).repeat( 
     __.in($linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
-      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() == 'Class') { theClass = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
        )
-.map{  file = it.get().value('fullcode');}
 
 .map{ ['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace]; }
 GREMLIN;

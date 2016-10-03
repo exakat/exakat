@@ -27,7 +27,7 @@ use Analyzer;
 
 class UseConstantAsArguments extends Analyzer\Analyzer {
     public function dependsOn() {
-        return array('IsPhpConstant');
+        return array('Constants/IsPhpConstant');
     }
     
     public function analyze() {
@@ -47,7 +47,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs(array('Identifier', 'Nsname'))
-                 ->analyzerIsNot('IsPhpConstant')
+                 ->analyzerIsNot('Constants/IsPhpConstant')
                  ->back('first');
             $this->prepareQuery();
 
@@ -56,7 +56,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                  ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
-                 ->atomIs(array('Boolean', 'Null', 'Integer', 'Float', 'String', 'Concatenation', 'Logical'))
+                 ->atomIs(array('Boolean', 'Null', 'Integer', 'Real', 'String', 'Concatenation', 'Logical'))
                  ->back('first');
             $this->prepareQuery();
 
@@ -67,7 +67,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs(array('Identifier', 'Nsname'))
-                     ->analyzerIs('IsPhpConstant')
+                     ->analyzerIs('Constants/IsPhpConstant')
                      ->outIsIE('SUBNAME')
                      ->codeIsNot($constants)
                      ->back('first');
@@ -90,7 +90,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs(array('Identifier', 'Nsname'))
-                 ->analyzerIsNot('IsPhpConstant')
+                 ->analyzerIsNot('Constants/IsPhpConstant')
                  ->back('first');
             $this->prepareQuery();
 
@@ -101,7 +101,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                  ->is('rank', $position)
                  ->atomIs('Logical')
                  ->atomInside(array('Identifier', 'Nsname'))
-                 ->analyzerIsNot('IsPhpConstant')
+                 ->analyzerIsNot('Constants/IsPhpConstant')
                  ->hasNoIn('SUBNAME')
                  ->back('first');
             $this->prepareQuery();
@@ -111,7 +111,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                 ->outIs('ARGUMENTS')
                 ->outIs('ARGUMENT')
                 ->is('rank', $position)
-                ->atomIs(array('Boolean', 'Null', 'Integer', 'Float'))
+                ->atomIs(array('Boolean', 'Null', 'Integer', 'Real'))
                 ->back('first');
            $this->prepareQuery();
         }
@@ -126,7 +126,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs(array('Identifier', 'Nsname'))
-                     ->analyzerIs('IsPhpConstant')
+                     ->analyzerIs('Constants/IsPhpConstant')
                      ->outIsIE('SUBNAME')
                      ->codeIsNot($constants)
                      ->back('first');
@@ -139,7 +139,7 @@ class UseConstantAsArguments extends Analyzer\Analyzer {
                      ->is('rank', $position)
                      ->atomIs('Logical')
                      ->atomInside(array('Identifier', 'Nsname'))
-                     ->analyzerIs('IsPhpConstant')
+                     ->analyzerIs('Constants/IsPhpConstant')
                      ->outIsIE('SUBNAME')
                      ->codeIsNot($constants)
                      ->back('first');

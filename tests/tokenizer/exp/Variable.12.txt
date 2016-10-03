@@ -1,5 +1,51 @@
-[
-Label : INDEX
-  'c'
-Label : VARIABLE
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Variable.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $result
+          Label : RIGHT
+            <<<EOF
+
+            Label : CONCAT
+              A
+            Label : CONCAT
+              ?
+              Label : CONDITION
+                [
+                Label : INDEX
+                  'c'
+                Label : VARIABLE
+                  $b
+              Label : ELSE
+                'false'
+              Label : THEN
+                'true'
+            Label : CONCAT
+              
+
+D
+            Label : CONCAT
+              ?
+              Label : CONDITION
+                [
+                Label : INDEX
+                  'f'
+                Label : VARIABLE
+                  $e
+              Label : ELSE
+                'false'
+              Label : THEN
+                'true'
+            Label : CONCAT
+              
+
+

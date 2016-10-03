@@ -1,7 +1,76 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'w'
-  Label : VARIABLE
-    $v
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.50.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                !
+                Label : NOT
+                  isset
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'w'
+                      Label : VARIABLE
+                        $v
+                  Label : NAME
+                    isset
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  continue
+                  Label : CONTINUE
+                    Void
+            Label : ELEMENT
+              try
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $d
+              Label : CATCH
+                catch
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    continue
+                    Label : CONTINUE
+                      Void
+                Label : CLASS
+                  Exception
+                Label : VARIABLE
+                  $e
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                2
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                3
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

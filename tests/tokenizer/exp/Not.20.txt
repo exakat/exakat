@@ -1,3 +1,54 @@
-(
-Label : ARGUMENT
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              +
+              Label : SIGN
+                $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                Label : NAME
+                  B
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            @
+            Label : AT
+              +
+              Label : SIGN
+                $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                B
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                Label : NAME
+                  B

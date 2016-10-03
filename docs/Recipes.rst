@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 29 Aug 2016 09:54:35 +0000
-.. comment: Generation hash : 04a6925cc2f4587a3bdb39f44312b105a0a20b83
+.. comment: Generation date : Mon, 03 Oct 2016 05:10:22 +0000
+.. comment: Generation hash : 562957cdd6b67a30f22612f051b4369ffddb7d31
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 251 analysis
+Total : 256 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -87,6 +87,7 @@ Total : 251 analysis
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid array\_unique() <avoid-array\_unique()>`
+* :ref:`Avoid get\_class() <avoid-get\_class()>`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -113,6 +114,7 @@ Total : 251 analysis
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
+* :ref:`Dependant Trait <dependant-trait>`
 * :ref:`Deprecated Code <deprecated-code>`
 * :ref:`Directive Name <directive-name>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
@@ -120,6 +122,7 @@ Total : 251 analysis
 * :ref:`Double Instruction <double-instruction>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Else If Versus Elseif <else-if-versus-elseif>`
+* :ref:`Empty Blocks <empty-blocks>`
 * :ref:`Empty Classes <empty-classes>`
 * :ref:`Empty Function <empty-function>`
 * :ref:`Empty Instructions <empty-instructions>`
@@ -210,6 +213,7 @@ Total : 251 analysis
 * :ref:`Preprocessable`
 * :ref:`Print And Die <print-and-die>`
 * :ref:`Property Could Be Private <property-could-be-private>`
+* :ref:`Property Used Below <property-used-below>`
 * :ref:`Property/Variable Confusion <property/variable-confusion>`
 * :ref:`Queries In Loops <queries-in-loops>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
@@ -241,6 +245,7 @@ Total : 251 analysis
 * :ref:`Switch Without Default <switch-without-default>`
 * :ref:`Ternary In Concat <ternary-in-concat>`
 * :ref:`Throw Functioncall <throw-functioncall>`
+* :ref:`Throw In Destruct <throw-in-destruct>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
@@ -277,9 +282,9 @@ Total : 251 analysis
 * :ref:`Use === null <use-===-null>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
-* :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use Object Api <use-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
+* :ref:`Use System Tmp <use-system-tmp>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
 * :ref:`Use random\_int() <use-random\_int()>`
@@ -338,9 +343,9 @@ Total : 21 analysis
 * :ref:`Echo Or Print <echo-or-print>`
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
 * :ref:`Inconsistant Closing Tag <inconsistant-closing-tag>`
-* :ref:`Incrementations`
 * :ref:`Interpolation`
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
+* :ref:`No Plus One <no-plus-one>`
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
 * :ref:`Not Same Name As File <not-same-name-as-file>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
@@ -356,7 +361,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 50 analysis
+Total : 51 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -382,6 +387,7 @@ Total : 50 analysis
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Methodcall On New <methodcall-on-new>`
 * :ref:`Mixed Keys <mixed-keys>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.4 <new-functions-in-php-5.4>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
@@ -414,7 +420,7 @@ Total : 50 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 45 analysis
+Total : 46 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
@@ -438,6 +444,7 @@ Total : 45 analysis
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Mixed Keys <mixed-keys>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`No List With String <no-list-with-string>`
@@ -467,7 +474,7 @@ Total : 45 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 41 analysis
+Total : 42 analysis
 
 * :ref:`... Usage <...-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -485,6 +492,7 @@ Total : 41 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Null On New <null-on-new>`
@@ -516,7 +524,7 @@ Total : 41 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 33 analysis
+Total : 34 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -529,6 +537,7 @@ Total : 33 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Null On New <null-on-new>`
@@ -557,7 +566,7 @@ Total : 33 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 32 analysis
+Total : 33 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -572,6 +581,7 @@ Total : 32 analysis
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
+* :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
@@ -655,7 +665,7 @@ Total : 5 analysis
 Dead code
 +++++++++
 
-Total : 20 analysis
+Total : 22 analysis
 
 * :ref:`Cant Extend Final <cant-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
@@ -674,16 +684,18 @@ Total : 20 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Protected Methods <unused-protected-methods>`
 * :ref:`Unused Static Methods <unused-static-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Use <unused-use>`
+* :ref:`Used Protected Method <used-protected-method>`
 
 .. _performances:
 
 Performances
 ++++++++++++
 
-Total : 15 analysis
+Total : 16 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -694,10 +706,11 @@ Total : 15 analysis
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
 * :ref:`Make One Call <make-one-call>`
+* :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`
-* :ref:`Simple Regex <simple-regex>`
+* :ref:`Simplify Regex <simplify-regex>`
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 
@@ -732,10 +745,11 @@ Total : 18 analysis
 Wordpress
 +++++++++
 
-Total : 5 analysis
+Total : 6 analysis
 
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
+* :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
 * :ref:`Unverified Nonce <unverified-nonce>`
 * :ref:`Use $wpdb Api <use-$wpdb-api>`
 * :ref:`Wpdb Best Usage <wpdb-best-usage>`

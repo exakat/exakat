@@ -1,5 +1,33 @@
-==
-Label : LEFT
-  $a
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.53.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              $a
+            Label : RIGHT
+              1
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              ==
+              Label : LEFT
+                $b
+              Label : RIGHT
+                1
+            Label : ELSE
+              ;
+            Label : THEN
+              ;
+          Label : THEN
+            ;
+        Label : ELEMENT
+          Void

@@ -1,25 +1,26 @@
-./tests/tokenizer/source/_Foreach.08.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        foreach
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]        Label : SOURCE
-          $a
-        Label : VALUE
-          ->
-          Label : OBJECT
-            $b
-          Label : PROPERTY
-            d
-      Label : ELEMENT
-        Void
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $j
+          Label : SOURCE
+            $a
+          Label : VALUE
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              d

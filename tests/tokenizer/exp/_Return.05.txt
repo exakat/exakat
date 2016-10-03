@@ -1,12 +1,14 @@
-./tests/tokenizer/source/_Return.05.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Return.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        return
-        Label : RETURN
-          $x
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            $x

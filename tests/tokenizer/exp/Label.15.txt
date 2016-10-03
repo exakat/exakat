@@ -1,3 +1,66 @@
-(
-Label : ARGUMENT
-  $i
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Label.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            [
+            Label : INDEX
+              $d
+            Label : VARIABLE
+              ->
+              Label : OBJECT
+                $b
+              Label : PROPERTY
+                c
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $e
+          Label : RIGHT
+            3
+        Label : ELEMENT
+          :
+          Label : LABEL
+            F
+        Label : ELEMENT
+          --
+          Label : PREPLUSPLUS
+            $g
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $h
+          Label : RIGHT
+            strlen
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $i
+            Label : NAME
+              strlen
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $m
+          Label : RIGHT
+            ->
+            Label : METHOD
+              k
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $l
+              Label : NAME
+                k
+            Label : OBJECT
+              $j

@@ -1,5 +1,46 @@
-[
-Label : INDEX
-  1
-Label : VARIABLE
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Array.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            "
+            Label : CONCAT
+              a
+            Label : CONCAT
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                $b
+            Label : CONCAT
+              [
+              Label : INDEX
+                2
+              Label : VARIABLE
+                $c
+            Label : CONCAT
+              d
+            Label : CONCAT
+              [
+              Label : INDEX
+                3
+              Label : VARIABLE
+                $e
+            Label : CONCAT
+              F
+            Label : CONCAT
+              [
+              Label : INDEX
+                4
+              Label : VARIABLE
+                $g
+            Label : CONCAT
+              h

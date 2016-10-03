@@ -1,3 +1,86 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Namespace.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              use
+              Label : USE
+                \
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  G
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      return
+                      Label : RETURN
+                        ->
+                        Label : OBJECT
+                          $a
+                        Label : PROPERTY
+                          H
+                  Label : NAME
+                    G
+                  Label : PUBLIC
+                    public
+                Label : ELEMENT
+                  I
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      ->
+                      Label : METHOD
+                        J
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          J
+                      Label : OBJECT
+                        $b
+                    Label : ELEMENT
+                      return
+                      Label : RETURN
+                        ->
+                        Label : OBJECT
+                          $c
+                        Label : PROPERTY
+                          K
+                  Label : NAME
+                    I
+                  Label : PUBLIC
+                    public
+              Label : NAME
+                F
+          Label : NAME
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C

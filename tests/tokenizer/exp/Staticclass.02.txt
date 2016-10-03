@@ -1,3 +1,198 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticclass.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : DEFINITION
+                X
+              Label : DEFINITION
+                ClassName1
+              Label : DEFINITION
+                \
+                Label : SUBNAME
+                  NS1
+                Label : SUBNAME
+                  ClassName1
+              Label : NAME
+                ClassName1
+          Label : NAME
+            NS1
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : USE
+                as
+                Label : AS
+                  X
+                Label : NAME
+                  \
+                  Label : SUBNAME
+                    NS1
+                  Label : SUBNAME
+                    ClassName1
+            Label : ELEMENT
+              use
+              Label : USE
+                \
+                Label : SUBNAME
+                  NS1
+                Label : SUBNAME
+                  ClassName1
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : DEFINITION
+                ParentClass
+              Label : NAME
+                ParentClass
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  x
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      echo
+                      Label : ARGUMENTS
+                        echo
+                        Label : ARGUMENT
+                          ::
+                          Label : CLASS
+                            self
+                          Label : CLASS
+                            class
+                      Label : NAME
+                        echo
+                    Label : ELEMENT
+                      echo
+                      Label : ARGUMENTS
+                        echo
+                        Label : ARGUMENT
+                          ::
+                          Label : CLASS
+                            static
+                          Label : CLASS
+                            class
+                      Label : NAME
+                        echo
+                    Label : ELEMENT
+                      echo
+                      Label : ARGUMENTS
+                        echo
+                        Label : ARGUMENT
+                          ::
+                          Label : CLASS
+                            parent
+                          Label : CLASS
+                            class
+                      Label : NAME
+                        echo
+                  Label : NAME
+                    x
+                  Label : STATIC
+                    static
+              Label : EXTENDS
+                ParentClass
+              Label : NAME
+                ClassName
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    ::
+                    Label : CLASS
+                      X
+                    Label : CLASS
+                      class
+                  Label : CONCAT
+                    "\n"
+              Label : NAME
+                echo
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    ::
+                    Label : CLASS
+                      ClassName1
+                    Label : CLASS
+                      class
+                  Label : CONCAT
+                    "\n"
+              Label : NAME
+                echo
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    ::
+                    Label : CLASS
+                      class
+                    Label : CLASS
+                      \
+                      Label : SUBNAME
+                        NS1
+                      Label : SUBNAME
+                        ClassName1
+                  Label : CONCAT
+                    "\n"
+              Label : NAME
+                echo
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    ::
+                    Label : CLASS
+                      class
+                    Label : CLASS
+                      \
+                      Label : SUBNAME
+                        NS1
+                      Label : SUBNAME
+                        ClassName1
+                  Label : CONCAT
+                    "\n"
+              Label : NAME
+                echo
+          Label : NAME
+            NS

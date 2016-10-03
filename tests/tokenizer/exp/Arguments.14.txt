@@ -1,17 +1,32 @@
-(
-Label : ARGUMENT
-  1
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $x
-  Label : PROPERTY
-    {
-    Label : INDEX
-      4
-    Label : VARIABLE
-      [
-      Label : INDEX
-        3
-      Label : VARIABLE
-        var
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              {
+              Label : INDEX
+                4
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  3
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $x
+                  Label : PROPERTY
+                    var
+          Label : NAME
+            x

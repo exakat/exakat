@@ -1,5 +1,292 @@
-=
-Label : LEFT
-  $s1
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Static.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $s1
+                Label : RIGHT
+                  1
+              Label : STATIC
+                static
+            Label : ELEMENT
+              static
+              Label : PPP
+                $s2
+              Label : STATIC
+                static
+            Label : ELEMENT
+              private
+              Label : PPP
+                =
+                Label : LEFT
+                  $pr1
+                Label : RIGHT
+                  1
+              Label : PRIVATE
+                private
+            Label : ELEMENT
+              private
+              Label : PPP
+                $pr2
+              Label : PRIVATE
+                private
+            Label : ELEMENT
+              private
+              Label : PPP
+                $sp2
+              Label : PRIVATE
+                private
+              Label : STATIC
+                static
+            Label : ELEMENT
+              private
+              Label : PPP
+                =
+                Label : LEFT
+                  $sp1
+                Label : RIGHT
+                  1
+              Label : PRIVATE
+                private
+              Label : STATIC
+                static
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $ps1
+                Label : RIGHT
+                  1
+              Label : PRIVATE
+                private
+              Label : STATIC
+                static
+            Label : ELEMENT
+              static
+              Label : PPP
+                $ps2
+              Label : PRIVATE
+                private
+              Label : STATIC
+                static
+            Label : ELEMENT
+              static
+              Label : STATIC
+                static
+              Label : PPP
+                $y1
+              Label : PPP
+                $x1
+            Label : ELEMENT
+              static
+              Label : STATIC
+                static
+              Label : PPP
+                =
+                Label : LEFT
+                  $y2
+                Label : RIGHT
+                  1
+              Label : PPP
+                =
+                Label : LEFT
+                  $x2
+                Label : RIGHT
+                  1
+            Label : ELEMENT
+              static
+              Label : STATIC
+                static
+              Label : PPP
+                $y3
+              Label : PPP
+                =
+                Label : LEFT
+                  $x3
+                Label : RIGHT
+                  1
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $y4
+                Label : RIGHT
+                  1
+              Label : STATIC
+                static
+              Label : PPP
+                $x4
+            Label : ELEMENT
+              static
+              Label : PPP
+                $a5
+              Label : STATIC
+                static
+              Label : PPP
+                $x5
+              Label : PPP
+                $y5
+              Label : PPP
+                $z5
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $a6
+                Label : RIGHT
+                  1
+              Label : STATIC
+                static
+              Label : PPP
+                =
+                Label : LEFT
+                  $x6
+                Label : RIGHT
+                  1
+              Label : PPP
+                =
+                Label : LEFT
+                  $y6
+                Label : RIGHT
+                  1
+              Label : PPP
+                =
+                Label : LEFT
+                  $z6
+                Label : RIGHT
+                  1
+            Label : ELEMENT
+              static
+              Label : PPP
+                $a7
+              Label : STATIC
+                static
+              Label : PPP
+                =
+                Label : LEFT
+                  $x7
+                Label : RIGHT
+                  1
+              Label : PPP
+                $y7
+              Label : PPP
+                =
+                Label : LEFT
+                  $z7
+                Label : RIGHT
+                  1
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $a8
+                Label : RIGHT
+                  1
+              Label : PRIVATE
+                private
+              Label : STATIC
+                static
+              Label : PPP
+                $x8
+              Label : PPP
+                =
+                Label : LEFT
+                  $y8
+                Label : RIGHT
+                  1
+              Label : PPP
+                $z8
+            Label : ELEMENT
+              static
+              Label : PPP
+                $z9
+              Label : PRIVATE
+                private
+              Label : STATIC
+                static
+              Label : PPP
+                $x9
+              Label : PPP
+                $y9
+            Label : ELEMENT
+              static
+              Label : PPP
+                $z11
+              Label : STATIC
+                static
+              Label : PPP
+                $x11
+              Label : PPP
+                $y11
+            Label : ELEMENT
+              public
+              Label : PPP
+                $p1
+              Label : PUBLIC
+                public
+            Label : ELEMENT
+              private
+              Label : PPP
+                $p2
+              Label : PRIVATE
+                private
+            Label : ELEMENT
+              protected
+              Label : PPP
+                $p3
+              Label : PROTECTED
+                protected
+            Label : ELEMENT
+              static
+              Label : PPP
+                $p4
+              Label : STATIC
+                static
+            Label : ELEMENT
+              var
+              Label : PPP
+                $p5
+              Label : VAR
+                var
+            Label : ELEMENT
+              public
+              Label : PPP
+                =
+                Label : LEFT
+                  $p6
+                Label : RIGHT
+                  2
+              Label : PUBLIC
+                public
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $p7
+                Label : RIGHT
+                  2
+              Label : PUBLIC
+                public
+              Label : STATIC
+                static
+          Label : NAME
+            a

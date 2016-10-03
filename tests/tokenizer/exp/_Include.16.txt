@@ -1,11 +1,26 @@
-)
-Label : ARGUMENT
-  fct_lien_page_custom
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      "fonctions/sysout_agent.php"
-    Label : ARGUMENT
-      "abs"
-  Label : NAME
-    fct_lien_page_custom
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          require
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              fct_lien_page_custom
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  "fonctions/sysout_agent.php"
+                Label : ARGUMENT
+                  "abs"
+              Label : NAME
+                fct_lien_page_custom
+          Label : NAME
+            require

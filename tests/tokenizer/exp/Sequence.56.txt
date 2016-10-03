@@ -1,5 +1,36 @@
-=
-Label : LEFT
-  $a
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.56.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            2
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $b
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            3
+        Label : ELEMENT
+          --
+          Label : PREPLUSPLUS
+            $d
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $e
+          Label : RIGHT
+            3

@@ -1,3 +1,18 @@
-(int)
-Label : CAST
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Cast.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          (int)
+          Label : CAST
+            $x
+        Label : ELEMENT
+          (integer)
+          Label : CAST
+            $y

@@ -1,7 +1,28 @@
-(
-Label : ARGUMENT
-  =
-  Label : LEFT
-    ticks
-  Label : RIGHT
-    1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Declare.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          declare
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                $a
+          Label : DECLARE
+            (
+            Label : ARGUMENT
+              =
+              Label : LEFT
+                ticks
+              Label : RIGHT
+                1

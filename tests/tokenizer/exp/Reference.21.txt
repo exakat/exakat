@@ -1,11 +1,32 @@
-(
-Label : ARGUMENT
-  |
-  Label : LEFT
-    0xC0
-  Label : RIGHT
-    >>
-    Label : LEFT
-      $char
-    Label : RIGHT
-      12
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            (
+            Label : CODE
+              chr
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  |
+                  Label : LEFT
+                    0xC0
+                  Label : RIGHT
+                    >>
+                    Label : LEFT
+                      $char
+                    Label : RIGHT
+                      12
+              Label : NAME
+                chr

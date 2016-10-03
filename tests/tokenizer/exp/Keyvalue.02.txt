@@ -1,97 +1,116 @@
-(
-Label : ARGUMENT
-  =>
-  Label : KEY
-    ->
-    Label : OBJECT
-      $a
-    Label : PROPERTY
-      b
-  Label : VALUE
-    ->
-    Label : OBJECT
-      $c
-    Label : PROPERTY
-      d
-Label : ARGUMENT
-  =>
-  Label : KEY
-    ->
-    Label : METHOD
-      f
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          Void
-      Label : NAME
-        f
-    Label : OBJECT
-      $e
-  Label : VALUE
-    ->
-    Label : METHOD
-      h
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          Void
-      Label : NAME
-        h
-    Label : OBJECT
-      $g
-Label : ARGUMENT
-  =>
-  Label : KEY
-    ::
-    Label : CLASS
-      I
-    Label : CONSTANT
-      J
-  Label : VALUE
-    ::
-    Label : CLASS
-      K
-    Label : CONSTANT
-      L
-Label : ARGUMENT
-  =>
-  Label : KEY
-    ::
-    Label : CLASS
-      M
-    Label : METHOD
-      N
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          Void
-      Label : NAME
-        N
-  Label : VALUE
-    ::
-    Label : CLASS
-      O
-    Label : METHOD
-      P
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          Void
-      Label : NAME
-        P
-Label : ARGUMENT
-  =>
-  Label : KEY
-    ::
-    Label : CLASS
-      Q
-    Label : PROPERTY
-      $r
-  Label : VALUE
-    ::
-    Label : CLASS
-      S
-    Label : PROPERTY
-      $t
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Keyvalue.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  ->
+                  Label : OBJECT
+                    $a
+                  Label : PROPERTY
+                    b
+                Label : VALUE
+                  ->
+                  Label : OBJECT
+                    $c
+                  Label : PROPERTY
+                    d
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  ->
+                  Label : METHOD
+                    f
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      f
+                  Label : OBJECT
+                    $e
+                Label : VALUE
+                  ->
+                  Label : METHOD
+                    h
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      h
+                  Label : OBJECT
+                    $g
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  ::
+                  Label : CLASS
+                    I
+                  Label : CONSTANT
+                    J
+                Label : VALUE
+                  ::
+                  Label : CLASS
+                    K
+                  Label : CONSTANT
+                    L
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  ::
+                  Label : CLASS
+                    M
+                  Label : METHOD
+                    N
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      N
+                Label : VALUE
+                  ::
+                  Label : CLASS
+                    O
+                  Label : METHOD
+                    P
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      P
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  ::
+                  Label : CLASS
+                    Q
+                  Label : PROPERTY
+                    $r
+                Label : VALUE
+                  ::
+                  Label : CLASS
+                    S
+                  Label : PROPERTY
+                    $t
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              array

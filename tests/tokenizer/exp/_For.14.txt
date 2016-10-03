@@ -1,3 +1,48 @@
-(
-Label : ARGUMENT
-  $f
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_For.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          for
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                e
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $f
+                Label : NAME
+                  e
+              Label : OBJECT
+                $d
+          Label : FINAL
+            ;
+            Label : ELEMENT
+              <
+              Label : LEFT
+                $i
+              Label : RIGHT
+                10
+          Label : INCREMENT
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $i
+          Label : INIT
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $i
+              Label : RIGHT
+                0

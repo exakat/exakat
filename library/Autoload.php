@@ -51,6 +51,7 @@ class Autoload {
 
     static public function autoload_phpunit($name) {
         $file = 'Test/'.str_replace('_', '/', str_replace('Test\\', '', $name)).'.php';
+
         if (file_exists($file)) {
             include $file;
         }
@@ -60,9 +61,9 @@ class Autoload {
 spl_autoload_register('Autoload::autoload_library');
 
 if (isset($argv)) {
-    $config = \Config::factory($argv);
+    $config = \Exakat\Config::factory($argv);
 } else {
-    $config = \Config::factory($GLOBALS['argv']);
+    $config = \Exakat\Config::factory($GLOBALS['argv']);
 }
 
 include 'helpers.php';

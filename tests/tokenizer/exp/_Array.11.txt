@@ -1,7 +1,18 @@
-[
-Label : INDEX
-  ++
-  Label : POSTPLUSPLUS
-    $b
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Array.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          [
+          Label : INDEX
+            ++
+            Label : POSTPLUSPLUS
+              $b
+          Label : VARIABLE
+            $a

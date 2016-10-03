@@ -1,17 +1,34 @@
-'/c.php'
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    ->
-    Label : METHOD
-      b
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          Void
-      Label : NAME
-        b
-    Label : OBJECT
-      $a
-  Label : CONCAT
-    '/c.php'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          @
+          Label : AT
+            include
+            Label : ARGUMENTS
+              '/c.php'
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  ->
+                  Label : METHOD
+                    b
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      b
+                  Label : OBJECT
+                    $a
+                Label : CONCAT
+                  '/c.php'
+            Label : NAME
+              include

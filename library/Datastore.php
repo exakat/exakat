@@ -31,7 +31,7 @@ class Datastore {
     const TIMEOUT_WRITE = 500;
     const TIMEOUT_READ = 3000;
     
-    public function __construct(Config $config, $create = self::REUSE) {
+    public function __construct(\Exakat\Config $config, $create = self::REUSE) {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         
         if ($create === self::CREATE) {
@@ -95,7 +95,7 @@ class Datastore {
             }
             
             if (count($cols) != 2) {
-                throw new Exceptions\WrongNumberOfColsForAHash();
+                throw new Exakat\Exceptions\WrongNumberOfColsForAHash();
             }
         }
         
@@ -410,7 +410,7 @@ SQLITE;
                 break;
 
             default : 
-                throw new Exceptions\NoStructureForTable($table);
+                throw new Exakat\Exceptions\NoStructureForTable($table);
         }
 
         self::$sqliteWrite->query($createTable);

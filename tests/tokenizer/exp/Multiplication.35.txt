@@ -1,13 +1,64 @@
-+
-Label : LEFT
-  new
-  Label : NEW
-    D
-Label : RIGHT
-  C
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      Void
-  Label : NAME
-    C
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Multiplication.35.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            /
+            Label : LEFT
+              new
+              Label : NEW
+                B
+            Label : RIGHT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                C
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            +
+            Label : LEFT
+              new
+              Label : NEW
+                D
+            Label : RIGHT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                C
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $d
+          Label : RIGHT
+            **
+            Label : LEFT
+              new
+              Label : NEW
+                E
+            Label : RIGHT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                C

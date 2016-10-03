@@ -1,38 +1,57 @@
-echo
-Label : ARGUMENT
-  ?
-  Label : CONDITION
-    isset
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        ->
-        Label : OBJECT
-          $a
-        Label : PROPERTY
-          b
-    Label : NAME
-      isset
-  Label : ELSE
-    'I'
-  Label : THEN
-    htmlspecialchars
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        ->
-        Label : METHOD
-          d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.62.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
           Label : ARGUMENTS
-            (
+            echo
             Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            d
-        Label : OBJECT
-          $c
-      Label : ARGUMENT
-        G
-      Label : ARGUMENT
-        'H'
-    Label : NAME
-      htmlspecialchars
+              ?
+              Label : CONDITION
+                isset
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $a
+                    Label : PROPERTY
+                      b
+                Label : NAME
+                  isset
+              Label : ELSE
+                'I'
+              Label : THEN
+                htmlspecialchars
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      d
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          ->
+                          Label : OBJECT
+                            $e
+                          Label : PROPERTY
+                            f
+                      Label : NAME
+                        d
+                    Label : OBJECT
+                      $c
+                  Label : ARGUMENT
+                    G
+                  Label : ARGUMENT
+                    'H'
+                Label : NAME
+                  htmlspecialchars
+          Label : NAME
+            echo

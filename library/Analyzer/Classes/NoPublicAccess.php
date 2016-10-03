@@ -30,7 +30,7 @@ class NoPublicAccess extends Analyzer\Analyzer {
 
         $gremlin = <<<GREMLIN
 g.V().hasLabel("Property").out("OBJECT").not(has("code", "\$this")).in("OBJECT")
-     .out("PROPERTY").hasLabel("Identifier").map{ it.get().value("code").toLowerCase(); }.unique();
+     .out("PROPERTY").hasLabel("Identifier").map{ it.get().value("code"); }.unique();
 GREMLIN;
         $properties = $this->query($gremlin);
         
@@ -39,7 +39,7 @@ GREMLIN;
              ->hasNoOut('STATIC')
              ->outIs('PPP')
              ->_as('ppp')
-             ->isPropertyNotIn('propertyname', $properties)
+             ->isNot('propertyname', $properties)
              ->back('ppp');
         $this->prepareQuery();
 

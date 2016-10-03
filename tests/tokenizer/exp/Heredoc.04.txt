@@ -1,19 +1,30 @@
-=
-Label : LEFT
-  $b
-Label : RIGHT
-  <<<eof
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Heredoc.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-  Label : CONCAT
-    a
-  Label : CONCAT
-    <<<eof
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            <<<eof
 
-    Label : OBJECT
-      $b
-    Label : PROPERTY
-      c
-  Label : CONCAT
-    
+            Label : CONCAT
+              a
+            Label : CONCAT
+              <<<eof
+
+              Label : OBJECT
+                $b
+              Label : PROPERTY
+                c
+            Label : CONCAT
+              
 d
 

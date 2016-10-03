@@ -1,16 +1,11 @@
 <?php
 
-$expected     = array('use a\b\ClassCaseNotOK as AliasCaseNotOK',
-                      'new classcasenotok( )',
-                      '$x instanceof aliascasenotok',
-                      'aliascasenotok::x',
-                      'aliascasenotok::$x',
-                      'aliascasenotok::x( )',
-                      'aliascasenotok $a',
-                      'catch (aliascasenotok $e) { /**/ } ',
-);
+$expected     = array('new \X',
+                      'new \X(1)', 
+                      'new \X( )');
 
-$expected_not = array(
-);
+$expected_not = array('new \x()',
+                      'new \x(1)', 
+                      'new \x( )');
 
 ?>

@@ -1,3 +1,18 @@
-Void
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.35.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          exit
+          Label : ARGUMENTS
+            Void
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            exit

@@ -1,5 +1,71 @@
-as
-Label : AS
-  E
-Label : NAME
-  D
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.27.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    E
+                  Label : NAME
+                    D
+              Label : USE
+                C
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    E
+                  Label : NAME
+                    D
+              Label : USE
+                F
+              Label : USE
+                G
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    E
+                  Label : NAME
+                    D
+              Label : USE
+                \
+                Label : SUBNAME
+                  F2
+                Label : SUBNAME
+                  F3
+              Label : USE
+                \
+                Label : SUBNAME
+                  G2
+                Label : SUBNAME
+                  G3
+                Label : SUBNAME
+                  G4
+          Label : NAME
+            B
+        Label : ELEMENT
+          {}
+          Label : ELEMENT
+            ++
+            Label : POSTPLUSPLUS
+              $a

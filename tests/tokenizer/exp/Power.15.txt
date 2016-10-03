@@ -1,3 +1,68 @@
-(
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Power.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          **
+          Label : LEFT
+            ::
+            Label : CLASS
+              a
+            Label : METHOD
+              x
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  1
+              Label : NAME
+                x
+          Label : RIGHT
+            1
+        Label : ELEMENT
+          **
+          Label : LEFT
+            ::
+            Label : CLASS
+              a
+            Label : METHOD
+              x
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  1
+              Label : NAME
+                x
+          Label : RIGHT
+            ::
+            Label : CLASS
+              a2
+            Label : METHOD
+              x2
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  12
+              Label : NAME
+                x2
+        Label : ELEMENT
+          **
+          Label : LEFT
+            2
+          Label : RIGHT
+            ::
+            Label : CLASS
+              a2
+            Label : METHOD
+              x2
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  12
+              Label : NAME
+                x2

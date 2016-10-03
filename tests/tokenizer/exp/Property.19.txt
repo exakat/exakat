@@ -1,3 +1,111 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              public
+              Label : PPP
+                =
+                Label : LEFT
+                  $p
+                Label : RIGHT
+                  1
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            a
+          Label : NAME
+            a
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              p
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    3
+              Label : NAME
+                p
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            b
+          Label : NAME
+            b
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : DEFINITION
+            c
+          Label : NAME
+            c
+        Label : ELEMENT
+          var_dump
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              ==
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  (
+                  Label : CODE
+                    new
+                    Label : NEW
+                      a
+                Label : PROPERTY
+                  p
+              Label : RIGHT
+                2
+          Label : NAME
+            var_dump
+        Label : ELEMENT
+          ==
+          Label : LEFT
+            ->
+            Label : METHOD
+              p
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                p
+            Label : OBJECT
+              (
+              Label : CODE
+                new
+                Label : NEW
+                  b
+          Label : RIGHT
+            3
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $c
+          Label : RIGHT
+            (
+            Label : CODE
+              new
+              Label : NEW
+                c

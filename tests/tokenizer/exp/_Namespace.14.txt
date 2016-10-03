@@ -1,3 +1,276 @@
-(
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Namespace.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+          Label : NAME
+            B
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+          Label : NAME
+            C
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+          Label : NAME
+            D
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  F
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $a
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      if
+                      Label : CONDITION
+                        ===
+                        Label : LEFT
+                          G
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              H
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  I
+                                Label : ARGUMENT
+                                  0
+                                Label : ARGUMENT
+                                  1
+                              Label : NAME
+                                H
+                          Label : NAME
+                            G
+                        Label : RIGHT
+                          'J'
+                      Label : ELSE
+                        {}
+                        Label : ELEMENT
+                          if
+                          Label : CONDITION
+                            K
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                'Q'
+                            Label : NAME
+                              K
+                          Label : THEN
+                            {}
+                            Label : ELEMENT
+                              return
+                              Label : RETURN
+                                V
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    $a
+                                Label : NAME
+                                  V
+                        Label : ELEMENT
+                          static
+                          Label : STATIC
+                            =
+                            Label : LEFT
+                              $b
+                            Label : RIGHT
+                              Z
+                        Label : ELEMENT
+                          if
+                          Label : CONDITION
+                            ===
+                            Label : LEFT
+                              $b
+                            Label : RIGHT
+                              Z
+                          Label : THEN
+                            {}
+                            Label : ELEMENT
+                              =
+                              Label : LEFT
+                                $b
+                              Label : RIGHT
+                                @
+                                Label : AT
+                                  AB
+                                  Label : ARGUMENTS
+                                    (
+                                    Label : ARGUMENT
+                                      'AC'
+                                    Label : ARGUMENT
+                                      'AD'
+                                  Label : NAME
+                                    AB
+                        Label : ELEMENT
+                          if
+                          Label : CONDITION
+                            &&
+                            Label : LEFT
+                              !==
+                              Label : LEFT
+                                $b
+                              Label : RIGHT
+                                Z
+                            Label : RIGHT
+                              !==
+                              Label : LEFT
+                                $b
+                              Label : RIGHT
+                                AF
+                          Label : THEN
+                            {}
+                            Label : ELEMENT
+                              return
+                              Label : RETURN
+                                AG
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    $b
+                                  Label : ARGUMENT
+                                    $a
+                                Label : NAME
+                                  AG
+                        Label : ELEMENT
+                          if
+                          Label : CONDITION
+                            K
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                'L'
+                            Label : NAME
+                              K
+                          Label : THEN
+                            {}
+                            Label : ELEMENT
+                              return
+                              Label : RETURN
+                                O
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    $a
+                                  Label : ARGUMENT
+                                    AK
+                                Label : NAME
+                                  O
+                      Label : THEN
+                        {}
+                        Label : ELEMENT
+                          if
+                          Label : CONDITION
+                            &&
+                            Label : LEFT
+                              K
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  'L'
+                              Label : NAME
+                                K
+                            Label : RIGHT
+                              K
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  'N'
+                              Label : NAME
+                                K
+                          Label : THEN
+                            {}
+                            Label : ELEMENT
+                              return
+                              Label : RETURN
+                                O
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    $a
+                                Label : NAME
+                                  O
+                        Label : ELEMENT
+                          if
+                          Label : CONDITION
+                            &&
+                            Label : LEFT
+                              K
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  'Q'
+                              Label : NAME
+                                K
+                            Label : RIGHT
+                              R
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  S
+                                Label : ARGUMENT
+                                  'T'
+                                Label : ARGUMENT
+                                  'U'
+                              Label : NAME
+                                R
+                          Label : THEN
+                            {}
+                            Label : ELEMENT
+                              return
+                              Label : RETURN
+                                V
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    $a
+                                Label : NAME
+                                  V
+                    Label : ELEMENT
+                      throw
+                      Label : THROW
+                        new
+                        Label : NEW
+                          \
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'AM'
+                          Label : NAME
+                            \
+                            Label : SUBNAME
+                              AL
+                  Label : NAME
+                    F
+                  Label : STATIC
+                    static
+              Label : NAME
+                E
+          Label : NAME
+            \
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D

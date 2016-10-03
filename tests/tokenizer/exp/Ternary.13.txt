@@ -1,7 +1,66 @@
-(
-Label : ARGUMENT
-  $e
-Label : ARGUMENT
-  0
-Label : ARGUMENT
-  $f
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              $b
+            Label : ELSE
+              'h'
+            Label : THEN
+              (
+              Label : CODE
+                ?
+                Label : CONDITION
+                  ==
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    'd'
+                Label : ELSE
+                  substr
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      md5
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          microtime
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            microtime
+                      Label : NAME
+                        md5
+                    Label : ARGUMENT
+                      -
+                      Label : SIGN
+                        $g
+                  Label : NAME
+                    substr
+                Label : THEN
+                  substr
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $e
+                    Label : ARGUMENT
+                      0
+                    Label : ARGUMENT
+                      $f
+                  Label : NAME
+                    substr

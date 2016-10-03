@@ -1,13 +1,23 @@
-=
-Label : LEFT
-  $a4
-Label : RIGHT
-  "
-  Label : CONCAT
-    $b4
-  Label : CONCAT
-    C
-  Label : CONCAT
-    $c
-  Label : CONCAT
-    $d4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/String.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a4
+          Label : RIGHT
+            "
+            Label : CONCAT
+              $b4
+            Label : CONCAT
+              C
+            Label : CONCAT
+              $c
+            Label : CONCAT
+              $d4

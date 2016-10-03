@@ -1,19 +1,62 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $this
-  Label : PROPERTY
-    d
-Label : ARGUMENT
-  ->
-  Label : METHOD
-    f
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        Void
-    Label : NAME
-      f
-  Label : OBJECT
-    $e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.32.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          (
+          Label : CODE
+            &&
+            Label : LEFT
+              ===
+              Label : LEFT
+                ::
+                Label : CLASS
+                  self
+                Label : CONSTANT
+                  A
+              Label : RIGHT
+                (
+                Label : CODE
+                  &
+                  Label : LEFT
+                    ::
+                    Label : CLASS
+                      self
+                    Label : CONSTANT
+                      B
+                  Label : RIGHT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      c
+            Label : RIGHT
+              preg_match
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    d
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    f
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      f
+                  Label : OBJECT
+                    $e
+              Label : NAME
+                preg_match

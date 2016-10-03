@@ -1,5 +1,24 @@
-(
-Label : ARGUMENT
-  $a
-  Label : TYPEHINT
-    array
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Variadic.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+              Label : TYPEHINT
+                array
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            a

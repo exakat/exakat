@@ -1,5 +1,20 @@
-<=
-Label : LEFT
-  $i
-Label : RIGHT
-  10
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_While.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          while
+          Label : BLOCK
+            ;
+          Label : CONDITION
+            <=
+            Label : LEFT
+              $i
+            Label : RIGHT
+              10

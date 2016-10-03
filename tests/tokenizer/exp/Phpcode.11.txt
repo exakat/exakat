@@ -1,7 +1,26 @@
-<?=
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'e'
-  Label : VARIABLE
-    $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      <?=
+      Label : CODE
+        ;
+        Label : ELEMENT
+          <?=
+          Label : ARGUMENTS
+            <?=
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'e'
+              Label : VARIABLE
+                $d
+          Label : NAME
+            <?=
+    Label : ELEMENT
+      B
+

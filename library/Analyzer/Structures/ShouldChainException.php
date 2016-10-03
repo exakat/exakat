@@ -29,7 +29,7 @@ class ShouldChainException extends Analyzer\Analyzer {
     public function analyze() {
         // omitted 3rd argument
         $this->atomIs('Catch')
-             ->outIs('CODE')
+             ->outIs('BLOCK')
              ->atomInside('Throw')
              ->outIs('THROW')
              ->outIs('NEW')
@@ -43,7 +43,7 @@ class ShouldChainException extends Analyzer\Analyzer {
              ->outIs('VARIABLE')
              ->savePropertyAs('code', 'caught')
              ->inIs('VARIABLE')
-             ->outIs('CODE')
+             ->outIs('BLOCK')
              ->atomInside('Throw')
              ->outIs('THROW')
              ->outIs('NEW')

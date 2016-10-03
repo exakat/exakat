@@ -29,9 +29,9 @@ class Dump extends Tasks {
     
     const WAITING_LOOP = 1000;
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
-            throw new \Exceptions\NoSuchProject($config->project);
+            throw new Exakat\Exceptions\NoSuchProject($config->project);
         }
         
         $sqliteFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
@@ -82,7 +82,7 @@ SQL;
             $toProcess = $config->thema;
         }
         foreach($toProcess as $thema) {
-            display('Processing thema : '.(is_array($thema) ? join(', ', $thema) : $thema));
+            display('Processing thema : '.(is_array($thema) ? implode(', ', $thema) : $thema));
             $themaClasses = \Analyzer\Analyzer::getThemeAnalyzers($thema);
 
             $themes[] = $themaClasses;

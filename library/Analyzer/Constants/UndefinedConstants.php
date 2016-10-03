@@ -33,14 +33,12 @@ class UndefinedConstants extends Analyzer\Analyzer {
     
     public function analyze() {
         $this->atomIs('Identifier')
-             ->raw('filter{ it.in("ARGUMENT").in("IMPLEMENTS").any() == false}')
              ->analyzerIs('Constants/CustomConstantUsage')
              ->hasNoConstantDefinition()
              ->analyzerIsNot('Constants/IsExtConstant');
         $this->prepareQuery();
 
         $this->atomIs('Nsname')
-             ->raw('filter{ it.in("ARGUMENT").in("IMPLEMENTS").any() == false}')
              ->analyzerIs('Constants/CustomConstantUsage')
              ->hasNoConstantDefinition()
              ->analyzerIsNot('Constants/IsExtConstant');

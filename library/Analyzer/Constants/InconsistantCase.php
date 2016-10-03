@@ -28,13 +28,34 @@ use Analyzer;
 class InconsistantCase extends Analyzer\Analyzer {
 
     public function analyze() {
-        $this->atomIs('Null')
-             ->groupFilter("if (it.code == it.code.toLowerCase()) { x2 = 'lower'; } else if (it.code == it.code.toUpperCase()) { x2 = 'upper'; } else {x2 = 'mixed'; }", 0.1);
-        $this->prepareQuery();
+        $query = <<<GREMLIN
+g.V().hasLabel("<atom>").map{ if (it.get().value('code') == it.get().value('code').toLowerCase()) { 
+                                    x2 = 'lower'; 
+                                } else if (it.get().value('code') == it.get().value('code').toUpperCase()) { 
+                                    x2 = 'upper'; 
+                                } else {
+                                    x2 = 'mixed'; 
+                                }; }.groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * 0.1; }.keySet()
+GREMLIN;
+        
+        $atoms = ['Null', 'Boolean'];
+        foreach($atoms as $atom) {
+            $types = $this->query(str_replace('<atom>', $atom, $query) );
 
-        $this->atomIs('Boolean')
-             ->groupFilter("if (it.code == it.code.toLowerCase()) { x2 = 'lower'; } else if (it.code == it.code.toUpperCase()) { x2 = 'upper'; } else {x2 = 'mixed'; }", 0.1);
-        $this->prepareQuery();
+            if (count($types) > 0) {
+                $typesList = '"'.implode('", "', $types).'"';
+                $this->atomIs($atom)
+                     ->raw('sideEffect{ if (it.get().value("code") == it.get().value("code").toLowerCase()) { 
+                                x2 = "lower"; 
+                            } else if (it.get().value("code") == it.get().value("code").toUpperCase()) { 
+                                x2 = "upper"; 
+                            } else {
+                                x2 = "mixed"; 
+                            }; }')
+                      ->raw('filter{ x2 in ['.$typesList.']}');
+                $this->prepareQuery();
+            }
+        }
     }
 }
 

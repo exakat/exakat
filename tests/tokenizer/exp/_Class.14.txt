@@ -1,19 +1,30 @@
-class
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    var
-    Label : PPP
-      $a
-    Label : VAR
-      var
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        b
-      Label : VALUE
-        2
-Label : NAME
-  x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              var
+              Label : PPP
+                $a
+              Label : VAR
+                var
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  b
+                Label : VALUE
+                  2
+          Label : NAME
+            x

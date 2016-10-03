@@ -1,3 +1,34 @@
-echo
-Label : ARGUMENT
-  'Foo'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Goto.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          goto
+          Label : GOTO
+            a
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              'Foo'
+          Label : NAME
+            echo
+        Label : ELEMENT
+          :
+          Label : LABEL
+            a
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              'Bar'
+          Label : NAME
+            echo

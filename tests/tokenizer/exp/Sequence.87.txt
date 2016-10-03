@@ -1,3 +1,182 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.87.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                (int)
+                Label : CAST
+                  ->
+                  Label : METHOD
+                    B
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      B
+                  Label : OBJECT
+                    $b
+            Label : ELEMENT
+              return
+              Label : RETURN
+                ?
+                Label : CONDITION
+                  (
+                  Label : CODE
+                    $c
+                Label : ELSE
+                  G
+                Label : THEN
+                  (bool)
+                  Label : CAST
+                    (
+                    Label : CODE
+                      <
+                      Label : LEFT
+                        C
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            ->
+                            Label : METHOD
+                              F
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  Void
+                              Label : NAME
+                                F
+                            Label : OBJECT
+                              ::
+                              Label : CLASS
+                                D
+                              Label : METHOD
+                                E
+                                Label : ARGUMENTS
+                                  (
+                                  Label : ARGUMENT
+                                    Void
+                                Label : NAME
+                                  E
+                        Label : NAME
+                          C
+                      Label : RIGHT
+                        $d
+            Label : ELEMENT
+              break
+              Label : BREAK
+                Void
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                1
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  $a
+                Label : ELEMENT
+                  $b
+            Label : ELEMENT
+              Void
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  $a
+                Label : ELEMENT
+                  $b
+              Label : SOURCE
+                $a
+              Label : VALUE
+                $b
+            Label : ELEMENT
+              Void
+            Label : ELEMENT
+              switch
+              Label : CASES
+                 /**/ 
+                Label : ELEMENT
+                  case 'a' :  /**/  
+                  Label : CASE
+                    'a'
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      $a
+                    Label : ELEMENT
+                      $b
+                Label : ELEMENT
+                  case 'b' :  /**/  
+                  Label : CASE
+                    'b'
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      $a
+                    Label : ELEMENT
+                      $b
+                Label : ELEMENT
+                  default
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      $a
+                    Label : ELEMENT
+                      $b
+              Label : NAME
+                $a
+            Label : ELEMENT
+              Void
+            Label : ELEMENT
+              for
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  $a
+                Label : ELEMENT
+                  $b
+              Label : FINAL
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $i
+              Label : INCREMENT
+                ;
+                Label : ELEMENT
+                  --
+                  Label : POSTPLUSPLUS
+                    $i
+              Label : INIT
+                ;
+                Label : ELEMENT
+                  $i
+            Label : ELEMENT
+              while
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  $a
+                Label : ELEMENT
+                  $b
+              Label : CONDITION
+                $a
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

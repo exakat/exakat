@@ -1,3 +1,64 @@
-(
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Variable.25.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                AND
+                Label : LEFT
+                  ==
+                  Label : LEFT
+                    B
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $a
+                    Label : NAME
+                      B
+                  Label : RIGHT
+                    0
+                Label : RIGHT
+                  !==
+                  Label : LEFT
+                    C
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        "
+                        Label : CONCAT
+                          $c
+                        Label : CONCAT
+                          D
+                    Label : NAME
+                      C
+                  Label : RIGHT
+                    E
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $d
+                  Label : RIGHT
+                    1
+          Label : CONDITION
+            <
+            Label : LEFT
+              ++
+              Label : POSTPLUSPLUS
+                $e
+            Label : RIGHT
+              2

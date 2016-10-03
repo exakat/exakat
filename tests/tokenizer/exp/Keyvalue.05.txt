@@ -1,21 +1,40 @@
-(
-Label : ARGUMENT
-  =>
-  Label : KEY
-    ::
-    Label : CLASS
-      B
-    Label : CONSTANT
-      C
-  Label : VALUE
-    'd'
-Label : ARGUMENT
-  =>
-  Label : KEY
-    ->
-    Label : OBJECT
-      $b
-    Label : PROPERTY
-      c
-  Label : VALUE
-    $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Keyvalue.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  ::
+                  Label : CLASS
+                    B
+                  Label : CONSTANT
+                    C
+                Label : VALUE
+                  'd'
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : PROPERTY
+                    c
+                Label : VALUE
+                  $d
+            Label : NAME
+              array

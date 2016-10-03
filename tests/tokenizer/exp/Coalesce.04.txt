@@ -1,3 +1,56 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Coalesce.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foo
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  "executed!"
+                Label : ARGUMENT
+                  PHP_EOL
+              Label : NAME
+                echo
+          Label : DEFINITION
+            foo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              foo
+          Label : NAME
+            foo
+        Label : ELEMENT
+          var_dump
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              ??
+              Label : LEFT
+                true
+              Label : RIGHT
+                foo
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  foo
+          Label : NAME
+            var_dump

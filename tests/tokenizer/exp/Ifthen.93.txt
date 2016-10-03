@@ -1,3 +1,62 @@
-(
-Label : ARGUMENT
-  $newHash
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.93.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              $a
+            Label : RIGHT
+              1
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $newHash
+              Label : RIGHT
+                ''
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  2
+              Label : ELSE
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    false
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    !
+                    Label : NOT
+                      empty
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $newHash
+                      Label : NAME
+                        empty
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      Void
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    true

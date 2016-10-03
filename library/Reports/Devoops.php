@@ -32,7 +32,6 @@ class Devoops extends Reports {
     const INCOMPATIBLE = 'Incompatible';
     
     private $dump      = null; // Dump.sqlite
-    private $datastore = null; // Datastore.sqlite
     
     private $analyzers  = array(); // cache for analyzers [Title] = object
     
@@ -90,12 +89,12 @@ class Devoops extends Reports {
         }
 
         // Clean final destination
-        if ($folder.'/'.$finalName !== '/') {
-            rmdirRecursive($folder.'/'.$finalName);
+        if ($folder . '/' . $finalName !== '/') {
+            rmdirRecursive($folder . '/' . $finalName);
         }
 
-        if (file_exists($folder.'/'.$finalName)) {
-            display ($folder.'/'.$finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+        if (file_exists($folder . '/' . $finalName)) {
+            display ($folder . '/' . $finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 
@@ -126,7 +125,12 @@ class Devoops extends Reports {
 
         // Analyze
         $analyze = array();
-        $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$this->themesList);
+        $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
+                              '"Dead code"', 'Security', 'Analyze');
+        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($themes);
+        $themesList = '("'.implode('", "', $analyzers).'")';
+
+        $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$themesList);
         while($row = $res->fetchArray()) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
             
@@ -980,11 +984,7 @@ HTML;
 
         foreach($data as $value) {
             // @note This is the same getId() than in Section::getId()
-            if ($value['severity'] == '') {
-                $severity = $this->makeLink($value['name']);
-            } else {
-                $severity = $this->makeLink($value['name']);
-            }
+            $severity = $this->makeLink($value['name']);
             $html .= <<<HTML
                     <tr>
 						<td>$severity</td>
@@ -1109,9 +1109,14 @@ TEXT
         $css->titles = array('Label', 'Count', 'Severity');
         $css->readOrder = $css->titles;
 
+        $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
+                              '"Dead code"', 'Security', 'Analyze');
+        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($themes);
+        $themesList = '("'.implode('", "', $analyzers).'")';
+
         $res = $this->dump->query(<<<SQL
 SELECT analyzer, count(*) AS count, severity FROM results 
-        WHERE analyzer IN $this->themesList 
+        WHERE analyzer IN $themesList 
         GROUP BY analyzer
         HAVING count > 0
 SQL
@@ -1262,7 +1267,7 @@ SQL
                             'Hexadecimal' => 'Type/Hexadecimal',
                             'Octal'       => 'Type/Octal',
                             'Binary'      => 'Type/Binary',
-                            'Float'       => 'Type/_Float',
+                            'Real'        => 'Type/Real',
                     ),
 
                     'Strings' => array(
@@ -1270,13 +1275,14 @@ SQL
                             'Nowdoc'     => 'Type/Nowdoc',
                      ),
                     
-                    'Errors' => array(
-                            'Throw exceptions' => 'Php/ThrowUsage',
-                            'Try...Catch'      => 'Php/TryCatchUsage',
-                            'Multiple catch'   => 'Structures/MultipleCatch',
-                            'Finally'          => 'Structures/TryFinally',
-                            'Trigger error'    => 'Php/TriggerErrorUsage',
-                            'Error messages'   => 'Structures/ErrorMessages',
+                    'Errors' => array(   
+                            'Throw exceptions'    => 'Php/ThrowUsage',
+                            'Try...Catch'         => 'Php/TryCatchUsage',
+                            'Multiple catch'      => 'Structures/MultipleCatch',
+                            'Multiple Exceptions' => 'Exceptions/MultipleCatch',
+                            'Finally'             => 'Structures/TryFinally',
+                            'Trigger error'       => 'Php/TriggerErrorUsage',
+                            'Error messages'      => 'Structures/ErrorMessages',
                      ),
 
                     'External systems' => array(
@@ -1600,7 +1606,7 @@ TEXT
                 foreach($cves as $cve) {
                     $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
                 }
-                $cveHtml = join(', ', $cveHtml);
+                $cveHtml = implode(', ', $cveHtml);
             } else {
                 $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
             }
@@ -1676,7 +1682,7 @@ TEXT
             $counts[$row['analyzer']] = $row['counts'];
         }
         
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         foreach($list as $l) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$l.'.ini');
             if (isset($counts[$l])) {
@@ -1713,7 +1719,7 @@ TEXT
         $res = $this->dump->query('SELECT analyzer, count(*) AS nb, severity AS severity FROM results '.$where.' GROUP BY analyzer');
         $listBySeverity = array();
 
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $listBySeverity[] = array('name'  => $ini['name'],

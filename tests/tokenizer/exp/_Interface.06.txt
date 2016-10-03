@@ -1,5 +1,100 @@
-(
-Label : ARGUMENT
-  $f
-  Label : TYPEHINT
-    E
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Interface.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              D
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $f
+                  Label : TYPEHINT
+                    E
+              Label : BLOCK
+                Void
+              Label : NAME
+                D
+          Label : NAME
+            A
+          Label : EXTENDS
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              D
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $f
+                  Label : TYPEHINT
+                    E
+              Label : BLOCK
+                Void
+              Label : NAME
+                D
+          Label : NAME
+            A
+          Label : EXTENDS
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+          Label : EXTENDS
+            \
+            Label : SUBNAME
+              G
+            Label : SUBNAME
+              H
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              D
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $f
+                  Label : TYPEHINT
+                    E
+              Label : BLOCK
+                Void
+              Label : NAME
+                D
+          Label : NAME
+            A
+          Label : EXTENDS
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+          Label : EXTENDS
+            \
+            Label : SUBNAME
+              G
+            Label : SUBNAME
+              H
+          Label : EXTENDS
+            \
+            Label : SUBNAME
+              I
+            Label : SUBNAME
+              J

@@ -1,3 +1,41 @@
-(
-Label : ARGUMENT
-  'UX1'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.38.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      UV
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          S
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'UX1'
+          Label : NAME
+            S
+        Label : ELEMENT
+          UY
+        Label : ELEMENT
+          S
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'UX2'
+          Label : NAME
+            S
+        Label : ELEMENT
+          UZ
+        Label : ELEMENT
+          S
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'UX3'
+          Label : NAME
+            S
+    Label : ELEMENT
+      UW

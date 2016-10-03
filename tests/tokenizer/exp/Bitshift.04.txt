@@ -1,9 +1,20 @@
-+
-Label : LEFT
-  .
-  Label : CONCAT
-    1
-  Label : CONCAT
-    2
-Label : RIGHT
-  3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Bitshift.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          +
+          Label : LEFT
+            .
+            Label : CONCAT
+              1
+            Label : CONCAT
+              2
+          Label : RIGHT
+            3

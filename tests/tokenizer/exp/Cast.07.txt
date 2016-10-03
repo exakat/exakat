@@ -1,7 +1,34 @@
-(real)
-Label : CAST
-  ::
-  Label : CLASS
-    x
-  Label : PROPERTY
-    $y
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Cast.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          (real)
+          Label : CAST
+            ::
+            Label : CLASS
+              x
+            Label : PROPERTY
+              $y
+        Label : ELEMENT
+          (float)
+          Label : CAST
+            ::
+            Label : CLASS
+              y
+            Label : CONSTANT
+              y
+        Label : ELEMENT
+          (double)
+          Label : CAST
+            ->
+            Label : OBJECT
+              $z
+            Label : PROPERTY
+              h

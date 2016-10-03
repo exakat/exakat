@@ -1,5 +1,64 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/ArrayNS.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            [
+            Label : ARGUMENTS
+              [
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'B'
+                Label : VALUE
+                  +
+                  Label : LEFT
+                    1
+                  Label : RIGHT
+                    2
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'C'
+                Label : VALUE
+                  >>
+                  Label : LEFT
+                    4
+                  Label : RIGHT
+                    %
+                    Label : LEFT
+                      5
+                    Label : RIGHT
+                      7
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'E'
+                Label : VALUE
+                  ->
+                  Label : OBJECT
+                    $y
+                  Label : PROPERTY
+                    [
+                    Label : INDEX
+                      3
+                    Label : VARIABLE
+                      z
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        z
+            Label : VARIABLE
+              [

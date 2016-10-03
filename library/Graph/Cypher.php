@@ -23,7 +23,7 @@
 namespace Graph;
 
 class Cypher extends Graph {
-    public function __construct(\Config $config) {
+    public function __construct(\Exakat\Config $config) {
         parent::__construct($config);
     }
 
@@ -39,7 +39,7 @@ class Cypher extends Graph {
 
         static $neo4j_host, $neo4j_auth;
         if (!isset($neo4j_host)) {  
-            $config = \Config::factory();
+            $config = \Exakat\Config::factory();
             $neo4j_host = $config->neo4j_host.':'.$config->neo4j_port;
         
             if ($config->neo4j_login !== '') {

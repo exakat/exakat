@@ -1,3 +1,44 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Instanceof.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              instanceof
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  B
+                Label : SUBNAME
+                  C
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+              Label : VARIABLE
+                $b
+            Label : ELSE
+              $d
+            Label : THEN
+              ->
+              Label : METHOD
+                F
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  F
+              Label : OBJECT
+                $c

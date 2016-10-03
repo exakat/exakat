@@ -1,7 +1,64 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'b'
-  Label : VARIABLE
-    $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ||
+            Label : LEFT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'b'
+                  Label : VARIABLE
+                    $a
+              Label : NAME
+                empty
+            Label : RIGHT
+              !
+              Label : NOT
+                in_array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'd'
+                    Label : VARIABLE
+                      $c
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'e'
+                      Label : ARGUMENT
+                        'f'
+                      Label : ARGUMENT
+                        'g'
+                    Label : NAME
+                      array
+                Label : NAME
+                  in_array
+          Label : THEN
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                [
+                Label : INDEX
+                  'i'
+                Label : VARIABLE
+                  $h
+              Label : RIGHT
+                'j'

@@ -27,22 +27,24 @@ abstract class Reports {
 
     CONST FILE_EXTENSION = 'undefined';
     CONST FORMATS        = ['Clustergrammer', 'Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
-                            'Text', 'Xml', 'Uml', 'ZendFramework'];
+                            'Text', 'Xml', 'Uml', 'ZendFramework', 'Ambassador'];
 
     protected $themes     = array(); // cache for themes list
     protected $themesList = '';      // cache for themes list in SQLITE
     protected $config     = null;
     
     protected $sqlite = null;
+    protected $datastore = null;
     
     public function __construct() {
-        $this->config = \Config::Factory();
+        $this->config = \Exakat\Config::Factory();
 
         $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($this->config->thema);
         $this->themesList = '("'.implode('", "', $analyzers).'")';
 
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', SQLITE3_OPEN_READONLY);
-        
+
+        $this->datastore = new \sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
     }
     
     public abstract function generateFileReport($report);

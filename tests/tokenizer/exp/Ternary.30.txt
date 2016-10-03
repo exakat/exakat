@@ -1,49 +1,119 @@
-+
-Label : LEFT
-  4096
-  Label : CODE
-    *
-    Label : LEFT
-      16
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.30.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
       Label : CODE
-        %
-        Label : LEFT
-          [
-          Label : INDEX
-            0
-          Label : VARIABLE
-            $temp
-        Label : RIGHT
-          16
-    Label : RIGHT
-      4096
-Label : RIGHT
-  +
-  Label : LEFT
-    64
-    Label : CODE
-      *
-      Label : LEFT
-        64
-        Label : CODE
-          %
+        ;
+        Label : ELEMENT
+          =
           Label : LEFT
-            [
-            Label : INDEX
-123098120398 [label="Reached level 15"]            Label : VARIABLE
-123098120398 [label="Reached level 15"]          Label : RIGHT
-            64
-      Label : RIGHT
-        64
-  Label : RIGHT
-    64
-    Label : CODE
-      %
-      Label : LEFT
-        [
-        Label : INDEX
-          2
-        Label : VARIABLE
-          $temp
-      Label : RIGHT
-        64
+            $number
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              (
+              Label : CODE
+                ===
+                Label : LEFT
+                  $count
+                Label : RIGHT
+                  3
+            Label : ELSE
+              +
+              Label : LEFT
+                (
+                Label : CODE
+                  *
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      %
+                      Label : LEFT
+                        [
+                        Label : INDEX
+                          0
+                        Label : VARIABLE
+                          $temp
+                      Label : RIGHT
+                        32
+                  Label : RIGHT
+                    64
+              Label : RIGHT
+                (
+                Label : CODE
+                  %
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      1
+                    Label : VARIABLE
+                      $temp
+                  Label : RIGHT
+                    64
+            Label : THEN
+              +
+              Label : LEFT
+                (
+                Label : CODE
+                  *
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      %
+                      Label : LEFT
+                        [
+                        Label : INDEX
+                          0
+                        Label : VARIABLE
+                          $temp
+                      Label : RIGHT
+                        16
+                  Label : RIGHT
+                    4096
+              Label : RIGHT
+                +
+                Label : LEFT
+                  (
+                  Label : CODE
+                    *
+                    Label : LEFT
+                      (
+                      Label : CODE
+                        %
+                        Label : LEFT
+                          [
+                          Label : INDEX
+                            1
+                          Label : VARIABLE
+                            $temp
+                        Label : RIGHT
+                          64
+                    Label : RIGHT
+                      64
+                Label : RIGHT
+                  (
+                  Label : CODE
+                    %
+                    Label : LEFT
+                      [
+                      Label : INDEX
+                        2
+                      Label : VARIABLE
+                        $temp
+                    Label : RIGHT
+                      64
+        Label : ELEMENT
+          .=
+          Label : LEFT
+            $out
+          Label : RIGHT
+            .
+            Label : CONCAT
+              '&#'
+            Label : CONCAT
+              $number
+            Label : CONCAT
+              ';'

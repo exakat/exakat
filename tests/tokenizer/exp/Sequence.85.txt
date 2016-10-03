@@ -1,5 +1,251 @@
-+
-Label : LEFT
-  $b
-Label : RIGHT
-  4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.85.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      B
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            .
+            Label : CONCAT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  0
+                Label : ARGUMENT
+                  1
+              Label : NAME
+                C
+            Label : CONCAT
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  2
+                Label : ARGUMENT
+                  1
+              Label : NAME
+                C
+        Label : ELEMENT
+          Void
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          for
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              F
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                +
+                Label : LEFT
+                  (
+                  Label : CODE
+                    +
+                    Label : LEFT
+                      $b
+                    Label : RIGHT
+                      4
+                Label : RIGHT
+                  [
+                  Label : INDEX
+                    'G'
+                  Label : VARIABLE
+                    $d
+            Label : ELEMENT
+              Void
+            Label : ELEMENT
+              H
+            Label : ELEMENT
+              for
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  I
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $f
+                  Label : RIGHT
+                    [
+                    Label : INDEX
+                      $b
+                    Label : VARIABLE
+                      [
+                      Label : INDEX
+                        'K'
+                      Label : VARIABLE
+                        [
+                        Label : INDEX
+                          $e
+                        Label : VARIABLE
+                          [
+                          Label : INDEX
+                            'J'
+                          Label : VARIABLE
+                            $d
+                Label : ELEMENT
+                  I
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $g
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      (
+                      Label : CODE
+                        ===
+                        Label : LEFT
+                          $a
+                        Label : RIGHT
+                          .
+                          Label : CONCAT
+                            $b
+                          Label : CONCAT
+                            $e
+                    Label : ELSE
+                      'N'
+                    Label : THEN
+                      'M'
+                Label : ELEMENT
+                  Void
+                Label : ELEMENT
+                  O
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      $g
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  P
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  Q
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      R
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'S'
+                          Label : VARIABLE
+                            $f
+                        Label : ARGUMENT
+                          T
+                        Label : ARGUMENT
+                          'U'
+                      Label : NAME
+                        R
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  V
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      R
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'X'
+                          Label : VARIABLE
+                            $f
+                        Label : ARGUMENT
+                          T
+                        Label : ARGUMENT
+                          'U'
+                      Label : NAME
+                        R
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  AA
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  AB
+              Label : FINAL
+                ;
+                Label : ELEMENT
+                  <
+                  Label : LEFT
+                    $e
+                  Label : RIGHT
+                    3
+              Label : INCREMENT
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $e
+              Label : INIT
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $e
+                  Label : RIGHT
+                    2
+            Label : ELEMENT
+              AC
+          Label : FINAL
+            ;
+            Label : ELEMENT
+              <
+              Label : LEFT
+                $b
+              Label : RIGHT
+                3
+          Label : INCREMENT
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b
+          Label : INIT
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                2

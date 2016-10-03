@@ -1,0 +1,44 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Return.24.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          __static__construct
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                >
+                Label : LEFT
+                  count
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        K
+                      Label : PROPERTY
+                        $load_paths
+                  Label : NAME
+                    count
+                Label : RIGHT
+                  0
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    Void
+          Label : NAME
+            __static__construct

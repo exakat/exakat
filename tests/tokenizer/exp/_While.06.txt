@@ -1,23 +1,28 @@
-./tests/tokenizer/source/_While.06.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_While.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        while
-        Label : BLOCK
-          {}
-          Label : ELEMENT
+      Label : CODE
+        ;
+        Label : ELEMENT
+          while
+          Label : BLOCK
             {}
             Label : ELEMENT
-123098120398 [label="Reached level 15"]          Label : ELEMENT
-            while
-            Label : BLOCK
-123098120398 [label="Reached level 15"]            Label : CONDITION
-123098120398 [label="Reached level 15"]        Label : CONDITION
-          1
-      Label : ELEMENT
-        Void
+              {}
+              Label : ELEMENT
+                Void
+            Label : ELEMENT
+              while
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  Void
+              Label : CONDITION
+                2
+          Label : CONDITION
+            1

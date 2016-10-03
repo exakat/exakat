@@ -1,21 +1,46 @@
-(
-Label : ARGUMENT
-  $x
-  Label : NULLABLE
-    ?
-  Label : TYPEHINT
-    int
-Label : ARGUMENT
-  $y
-  Label : DEFAULT
-    "3"
-  Label : NULLABLE
-    ?
-  Label : TYPEHINT
-    string
-Label : ARGUMENT
-  $z
-  Label : NULLABLE
-    ?
-  Label : TYPEHINT
-    callable
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Nullable.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foo
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $x
+              Label : NULLABLE
+                ?
+              Label : TYPEHINT
+                int
+            Label : ARGUMENT
+              $y
+              Label : DEFAULT
+                "3"
+              Label : NULLABLE
+                ?
+              Label : TYPEHINT
+                string
+            Label : ARGUMENT
+              $z
+              Label : NULLABLE
+                ?
+              Label : TYPEHINT
+                callable
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            foo
+          Label : NULLABLE
+            ?
+          Label : RETURNTYPE
+            array
+        Label : ELEMENT
+          Void

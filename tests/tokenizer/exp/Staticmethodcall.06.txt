@@ -1,3 +1,26 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticmethodcall.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              $x
+          Label : METHOD
+            $b
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              $b

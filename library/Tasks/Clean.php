@@ -29,7 +29,7 @@ class Clean extends Tasks {
         parent::__construct($gremlin);
     }
 
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $path = $config->projects_root.'/projects/'.$config->project;
         
         $dirsToErase = array('log',

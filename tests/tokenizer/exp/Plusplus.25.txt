@@ -1,9 +1,48 @@
-[
-Label : INDEX
-  [
-  Label : INDEX
-    'c'
-  Label : VARIABLE
-    $b
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Plusplus.25.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              [
+              Label : INDEX
+                'c'
+              Label : VARIABLE
+                $b
+            Label : VARIABLE
+              $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              [
+              Label : INDEX
+                [
+                Label : INDEX
+                  'f'
+                Label : VARIABLE
+                  $f
+              Label : VARIABLE
+                $e
+            Label : ELSE
+              -1
+            Label : THEN
+              --
+              Label : POSTPLUSPLUS
+                [
+                Label : INDEX
+                  [
+                  Label : INDEX
+                    'i'
+                  Label : VARIABLE
+                    $h
+                Label : VARIABLE
+                  $g

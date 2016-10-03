@@ -1,7 +1,26 @@
-(
-Label : ARGUMENT
-  =>
-  Label : KEY
-    1
-  Label : VALUE
-    2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  1
+                Label : VALUE
+                  2
+            Label : NAME
+              array

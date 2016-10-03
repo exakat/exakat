@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Status extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $project = $config->project;
 
         if ($project === 'default') {
@@ -34,7 +34,7 @@ class Status extends Tasks {
         $path = $config->projects_root.'/projects/'.$project;
         
         if (!file_exists($path.'/')) {
-            die("Project '$project' does not exists. Aborting\n");
+            throw new Exakat\Exceptions\NoSuchProject($project);
         }
 
         $status = array('project' => $project);

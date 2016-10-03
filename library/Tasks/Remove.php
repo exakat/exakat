@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Remove extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             die("Project '{$config->project} doesn't exist yet.\nNothing to do\n");
         }

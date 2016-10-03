@@ -1,25 +1,50 @@
-(
-Label : ARGUMENT
-  [
-  Label : ARGUMENTS
-    [
-    Label : ARGUMENT
-      Void
-  Label : VARIABLE
-    [
-Label : ARGUMENT
-  [
-  Label : ARGUMENTS
-    [
-    Label : ARGUMENT
-      Void
-  Label : VARIABLE
-    [
-Label : ARGUMENT
-  [
-  Label : ARGUMENTS
-    [
-    Label : ARGUMENT
-      Void
-  Label : VARIABLE
-    [
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/ArrayNS.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .=
+          Label : LEFT
+            $x
+            Label : APPEND
+              $x
+          Label : RIGHT
+            ::
+            Label : CLASS
+              C
+            Label : METHOD
+              b
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : ARGUMENTS
+                    [
+                    Label : ARGUMENT
+                      Void
+                  Label : VARIABLE
+                    [
+                Label : ARGUMENT
+                  [
+                  Label : ARGUMENTS
+                    [
+                    Label : ARGUMENT
+                      Void
+                  Label : VARIABLE
+                    [
+                Label : ARGUMENT
+                  [
+                  Label : ARGUMENTS
+                    [
+                    Label : ARGUMENT
+                      Void
+                  Label : VARIABLE
+                    [
+              Label : NAME
+                b

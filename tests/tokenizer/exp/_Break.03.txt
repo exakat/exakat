@@ -1,3 +1,46 @@
-break
-Label : BREAK
-  3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Break.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  foreach
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      foreach
+                      Label : BLOCK
+                        {}
+                        Label : ELEMENT
+                          break
+                          Label : BREAK
+                            3
+                      Label : SOURCE
+                        $a
+                      Label : VALUE
+                        $b
+                  Label : SOURCE
+                    $a
+                  Label : VALUE
+                    $b
+              Label : SOURCE
+                $a
+              Label : VALUE
+                $b
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

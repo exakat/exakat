@@ -1,3 +1,78 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Namespace.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  CONNECT_OK
+                Label : VALUE
+                  1
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                Connection
+            Label : ELEMENT
+              connect
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                connect
+          Label : NAME
+            MyProject
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  CONNECT_OK
+                Label : VALUE
+                  1
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                Connection
+            Label : ELEMENT
+              connect
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                connect
+          Label : NAME
+            AnotherProject

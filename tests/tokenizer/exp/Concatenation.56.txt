@@ -1,3 +1,32 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.56.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            {}
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              {}
+              Label : CODE
+                .
+                Label : CONCAT
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : PROPERTY
+                    c
+                Label : CONCAT
+                  'd'
+          Label : OBJECT
+            $a

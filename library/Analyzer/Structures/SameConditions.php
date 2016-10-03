@@ -31,7 +31,7 @@ class SameConditions extends Analyzer\Analyzer {
              ->savePropertyAs('fullcode', 'condition')
              ->_as('results')
              ->inIs('CONDITION')
-             ->raw('where( __.repeat( __.out("ELSE").coalesce(hasLabel("Sequence").has("count", 1).out("ELEMENT").hasLabel("Ifthen"),  __.filter{true} )).emit().times(15).out("CONDITION").filter{ it.get().value("fullcode") == condition; } )')
+             ->raw('where( __.repeat( __.out("ELSE").coalesce(hasLabel("Sequence").has("count", 1).out("ELEMENT").hasLabel("Ifthen"),  __.filter{true} )).emit().times('.self::MAX_LOOPING.').out("CONDITION").filter{ it.get().value("fullcode") == condition; } )')
              ->back('first');
         $this->prepareQuery();
     }

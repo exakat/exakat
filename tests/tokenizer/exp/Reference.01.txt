@@ -1,5 +1,16 @@
-=
-Label : LEFT
-  $y
-Label : RIGHT
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $y
+          Label : RIGHT
+            $x

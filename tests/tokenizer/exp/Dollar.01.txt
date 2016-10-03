@@ -1,9 +1,38 @@
-(
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    b
-  Label : PROPERTY
-    $
-    Label : NAME
-      $name
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dollar.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          array
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                b
+              Label : PROPERTY
+                $
+                Label : NAME
+                  $name
+          Label : NAME
+            array
+        Label : ELEMENT
+          array
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                b
+              Label : PROPERTY
+                $
+                Label : NAME
+                  $name
+          Label : NAME
+            array

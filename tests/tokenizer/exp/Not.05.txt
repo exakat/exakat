@@ -1,5 +1,70 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          !
+          Label : NOT
+            [
+            Label : INDEX
+              +
+              Label : LEFT
+                1
+              Label : RIGHT
+                2
+            Label : VARIABLE
+              $y
+        Label : ELEMENT
+          !
+          Label : NOT
+            [
+            Label : INDEX
+              .
+              Label : CONCAT
+                1
+              Label : CONCAT
+                2
+            Label : VARIABLE
+              $y
+        Label : ELEMENT
+          !
+          Label : NOT
+            [
+            Label : INDEX
+              %
+              Label : LEFT
+                1
+              Label : RIGHT
+                2
+            Label : VARIABLE
+              $y
+        Label : ELEMENT
+          !
+          Label : NOT
+            [
+            Label : INDEX
+              &&
+              Label : LEFT
+                1
+              Label : RIGHT
+                2
+            Label : VARIABLE
+              $y
+        Label : ELEMENT
+          !
+          Label : NOT
+            [
+            Label : INDEX
+              &
+              Label : LEFT
+                1
+              Label : RIGHT
+                2
+            Label : VARIABLE
+              $y

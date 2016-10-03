@@ -1,519 +1,530 @@
-class
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        abstract
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        and
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        array
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        as
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        break
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        case
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        catch
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        clone
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        const
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        continue
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        declare
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        default
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        die
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        do
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        echo
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        else
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        elseif
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        empty
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        enddeclare
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        endfor
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        endforeach
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        endif
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        endswitch
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        endwhile
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        eval
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        exit
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        extends
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        final
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        finally
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        for
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        foreach
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        function
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        global
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        goto
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        if
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        implements
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        include
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        include_once
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        instanceof
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        insteadof
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        interface
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        isset
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        list
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        namespace
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        new
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        or
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        print
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        private
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        protected
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        public
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        require
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        require_once
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        return
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        static
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        switch
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        throw
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        trait
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        try
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        unset
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        use
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        var
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        while
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        xor
-      Label : VALUE
-        3
-  Label : ELEMENT
-    const
-    Label : CONST
-      const
-      Label : NAME
-        yield
-      Label : VALUE
-        3
-Label : DEFINITION
-  static
-Label : NAME
-  x3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.75.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  abstract
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  and
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  array
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  as
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  break
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  case
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  catch
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  clone
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  const
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  continue
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  declare
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  default
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  die
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  do
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  echo
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  else
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  elseif
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  empty
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  enddeclare
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  endfor
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  endforeach
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  endif
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  endswitch
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  endwhile
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  eval
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  exit
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  extends
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  final
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  finally
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  for
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  foreach
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  function
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  global
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  goto
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  if
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  implements
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  include
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  include_once
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  instanceof
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  insteadof
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  interface
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  isset
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  list
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  namespace
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  new
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  or
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  print
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  private
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  protected
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  public
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  require
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  require_once
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  return
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  static
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  switch
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  throw
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  trait
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  try
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  unset
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  use
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  var
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  while
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  xor
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : CONST
+                const
+                Label : NAME
+                  yield
+                Label : VALUE
+                  3
+          Label : DEFINITION
+            static
+          Label : NAME
+            x3

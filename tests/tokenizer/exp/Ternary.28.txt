@@ -1,5 +1,52 @@
-+
-Label : LEFT
-  $c
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.28.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          for
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : FINAL
+            ;
+            Label : ELEMENT
+              <
+              Label : LEFT
+                $d
+              Label : RIGHT
+                $e
+          Label : INCREMENT
+            ;
+            Label : ELEMENT
+              ++
+              Label : PREPLUSPLUS
+                $f
+          Label : INIT
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                ?
+                Label : CONDITION
+                  (
+                  Label : CODE
+                    $b
+                Label : ELSE
+                  0
+                Label : THEN
+                  (
+                  Label : CODE
+                    +
+                    Label : LEFT
+                      $c
+                    Label : RIGHT
+                      1

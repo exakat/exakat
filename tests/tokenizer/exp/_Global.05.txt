@@ -1,16 +1,18 @@
-./tests/tokenizer/source/_Global.05.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Global.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        global
-        Label : GLOBAL
-          $c
-        Label : GLOBAL
-          $a
-        Label : GLOBAL
-          $b
+      Label : CODE
+        ;
+        Label : ELEMENT
+          global
+          Label : GLOBAL
+            $c
+          Label : GLOBAL
+            $a
+          Label : GLOBAL
+            $b

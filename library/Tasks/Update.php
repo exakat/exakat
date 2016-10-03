@@ -29,7 +29,7 @@ class Update extends Tasks {
         parent::__construct($gremlin);
     }
 
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         if ($config->project === 'default') {
             die("php ".$config->phpexecutable." -p <project>\n");
         }

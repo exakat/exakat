@@ -41,7 +41,7 @@ class ForeachDontChangePointer extends Analyzer\Analyzer {
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath(array('\\current', '\\next', '\\prev', '\\each', '\\end'))
+             ->fullnspathIs(array('\\current', '\\next', '\\prev', '\\each', '\\end'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
 //             ->samePropertyAs('fullcode', 'source')

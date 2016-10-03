@@ -1,7 +1,72 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    $b
-  Label : VARIABLE
-    $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.50.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 1 :  /**/  
+              Label : CASE
+                1
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  {}
+                  Label : ELEMENT
+                    throw
+                    Label : THROW
+                      new
+                      Label : NEW
+                        \
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            'D'
+                        Label : NAME
+                          \
+                          Label : SUBNAME
+                            C
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  {}
+                  Label : ELEMENT
+                    throw
+                    Label : THROW
+                      new
+                      Label : NEW
+                        \
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            'D'
+                        Label : NAME
+                          \
+                          Label : SUBNAME
+                            C
+          Label : NAME
+            >>
+            Label : LEFT
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    $b
+                  Label : VARIABLE
+                    $a
+              Label : NAME
+                B
+            Label : RIGHT
+              0

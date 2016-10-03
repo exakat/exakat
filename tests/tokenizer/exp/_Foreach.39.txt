@@ -1,5 +1,29 @@
-=
-Label : LEFT
-  $a
-Label : RIGHT
-  true
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.39.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $x
+          Label : THEN
+            ;
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    true
+              Label : SOURCE
+                $a
+              Label : VALUE
+                $b

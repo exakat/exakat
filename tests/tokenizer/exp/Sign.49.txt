@@ -1,5 +1,40 @@
-+
-Label : LEFT
-  4
-Label : RIGHT
-  3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.49.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          \
+          Label : SUBNAME
+            A
+          Label : SUBNAME
+            B
+          Label : SUBNAME
+            C
+        Label : ELEMENT
+          -
+          Label : SIGN
+            (
+            Label : CODE
+              +
+              Label : LEFT
+                4
+              Label : RIGHT
+                3
+        Label : ELEMENT
+          MY_CONSTANT
+        Label : ELEMENT
+          "String"
+        Label : ELEMENT
+          <<<HEREDOC
+
+          Label : CONCAT
+            
+silly string
+
+

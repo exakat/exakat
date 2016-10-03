@@ -1,5 +1,12 @@
 <?php
 
+class c {
+     private $x = 1;
+
+     function definedInParentParent() { print __METHOD__."\n";}
+     private $pdefinedInParentParent;
+}
+
 class a extends c {
      private $x = 1;
      
@@ -24,13 +31,6 @@ class b extends a {
      
      function definedinStatic() { print __METHOD__."\n";}
      private $pdefinedinStatic;
-}
-
-class c {
-     private $x = 1;
-
-     function definedInParentParent() { print __METHOD__."\n";}
-     private $pdefinedInParentParent;
 }
 
 

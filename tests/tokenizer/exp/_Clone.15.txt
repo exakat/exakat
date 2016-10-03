@@ -1,7 +1,26 @@
-(
-Label : ARGUMENT
-  clone
-  Label : CLONE
-    $a
-    Label : CODE
-      $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Clone.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                clone
+                Label : CLONE
+                  (
+                  Label : CODE
+                    $a
+            Label : NAME
+              array

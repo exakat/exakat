@@ -1,3 +1,66 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Shell.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            `
+            Label : CONCAT
+              $a
+            Label : CONCAT
+               b 
+            Label : CONCAT
+              $c
+            Label : CONCAT
+               d 
+            Label : CONCAT
+              ->
+              Label : OBJECT
+                $e
+              Label : PROPERTY
+                f
+            Label : CONCAT
+               
+            Label : CONCAT
+              ->
+              Label : METHOD
+                h
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  h
+              Label : OBJECT
+                $g
+            Label : CONCAT
+               i j 
+            Label : CONCAT
+              [
+              Label : INDEX
+                'l'
+              Label : VARIABLE
+                $k
+            Label : CONCAT
+               
+            Label : CONCAT
+              [
+              Label : INDEX
+                'o'
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  'n'
+                Label : VARIABLE
+                  $m
+            Label : CONCAT
+               

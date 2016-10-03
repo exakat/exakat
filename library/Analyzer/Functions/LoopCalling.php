@@ -29,79 +29,71 @@ class LoopCalling extends Analyzer\Analyzer {
     public function analyze() {
         // loop of 2
         $this->atomIs('Function')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
+             ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->notSamePropertyAs('code', 'name')
+             ->notSamePropertyAs('fullnspath', 'name')
+
              ->functionDefinition()
-             ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('fullnspath', 'name')
              ->back('first')
-             ->outIs('NAME')
-             ;
+             ->outIs('NAME');
         $this->prepareQuery();
 
         // loop of 3
         $this->atomIs('Function')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
+             ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->notSamePropertyAs('code', 'name')
+             ->notSamePropertyAs('fullnspath', 'name')
+
              ->functionDefinition()
-             ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->notSamePropertyAs('code', 'name')
+             ->notSamePropertyAs('fullnspath', 'name')
+
              ->functionDefinition()
-             ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('fullnspath', 'name')
+
              ->back('first')
              ->outIs('NAME');
         $this->prepareQuery();
 
         // loop of 4
         $this->atomIs('Function')
-             ->outIs('NAME')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
+             ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->notSamePropertyAs('code', 'name')
+             ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
-             ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->notSamePropertyAs('code', 'name')
+             ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
-             ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->notSamePropertyAs('code', 'name')
+             ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
-             ->inIs('NAME')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->hasNoIn('METHOD')
-             ->samePropertyAs('code', 'name')
+             ->samePropertyAs('fullnspath', 'name')
+
              ->back('first')
              ->outIs('NAME');
         $this->prepareQuery();

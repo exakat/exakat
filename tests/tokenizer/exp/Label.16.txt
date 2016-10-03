@@ -1,3 +1,64 @@
-echo
-Label : ARGUMENT
-  'a'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Label.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case T_LNUMBER :  /**/  
+              Label : CASE
+                T_LNUMBER
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $a
+                Label : ELEMENT
+                  goto
+                  Label : GOTO
+                    T_C
+            Label : ELEMENT
+              case T_B :  /**/  
+              Label : CASE
+                T_B
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $a
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'a'
+                  Label : NAME
+                    echo
+          Label : NAME
+            $t
+        Label : ELEMENT
+          :
+          Label : LABEL
+            T_C
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              'fin'
+          Label : NAME
+            echo

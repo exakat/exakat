@@ -1,3 +1,108 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.45.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                [
+                Label : INDEX
+                  "
+                  Label : CONCAT
+                    d 
+                  Label : CONCAT
+                    "
+                    Label : OBJECT
+                      $e
+                    Label : PROPERTY
+                      f
+                  Label : CONCAT
+                     
+                  Label : CONCAT
+                    $g
+                  Label : CONCAT
+                     
+                  Label : CONCAT
+                    $h
+                Label : VARIABLE
+                  $items
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  array
+          Label : SOURCE
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              a
+          Label : VALUE
+            =>
+            Label : KEY
+              $b
+            Label : VALUE
+              $c
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'j'
+                  Label : VARIABLE
+                    $i
+              Label : NAME
+                empty
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                [
+                Label : INDEX
+                  "
+                  Label : CONCAT
+                    k 
+                  Label : CONCAT
+                    "
+                    Label : OBJECT
+                      $l
+                    Label : PROPERTY
+                      m
+                  Label : CONCAT
+                     
+                  Label : CONCAT
+                    $n
+                  Label : CONCAT
+                     o
+                Label : VARIABLE
+                  $items
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  array

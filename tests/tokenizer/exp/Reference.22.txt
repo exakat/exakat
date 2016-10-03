@@ -1,3 +1,46 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ===
+            Label : LEFT
+              (
+              Label : CODE
+                &
+                Label : LEFT
+                  x
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    x
+                Label : RIGHT
+                  ->
+                  Label : METHOD
+                    z
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      z
+                  Label : OBJECT
+                    $y
+            Label : RIGHT
+              FALSE
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a

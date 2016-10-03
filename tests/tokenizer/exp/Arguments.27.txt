@@ -1,51 +1,101 @@
-echo
-Label : ARGUMENT
-  D
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      $d
-  Label : NAME
-    D
-Label : ARGUMENT
-  'E'
-Label : ARGUMENT
-  ?
-  Label : CONDITION
-    F
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        $e
-    Label : NAME
-      F
-  Label : ELSE
-    H
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        'I'
-      Label : ARGUMENT
-        'J'
-      Label : ARGUMENT
-        ::
-        Label : CLASS
-          K
-        Label : METHOD
-          L
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-123098120398 [label="Reached level 15"]            Label : ARGUMENT
-123098120398 [label="Reached level 15"]          Label : NAME
-            L
-    Label : NAME
-      H
-  Label : THEN
-    G
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        $f
-    Label : NAME
-      G
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.27.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  D
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $d
+                  Label : NAME
+                    D
+                Label : ARGUMENT
+                  'E'
+                Label : ARGUMENT
+                  ?
+                  Label : CONDITION
+                    F
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $e
+                    Label : NAME
+                      F
+                  Label : ELSE
+                    H
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'I'
+                      Label : ARGUMENT
+                        'J'
+                      Label : ARGUMENT
+                        ::
+                        Label : CLASS
+                          K
+                        Label : METHOD
+                          L
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              $g
+                            Label : ARGUMENT
+                              array
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  =>
+                                  Label : KEY
+                                    ::
+                                    Label : CLASS
+                                      M
+                                    Label : CONSTANT
+                                      N
+                                  Label : VALUE
+                                    O
+                              Label : NAME
+                                array
+                          Label : NAME
+                            L
+                    Label : NAME
+                      H
+                  Label : THEN
+                    G
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $f
+                    Label : NAME
+                      G
+              Label : NAME
+                echo
+            Label : ELEMENT
+              O
+          Label : SOURCE
+            [
+            Label : INDEX
+              'B'
+            Label : VARIABLE
+              $a
+          Label : VALUE
+            =>
+            Label : KEY
+              $b
+            Label : VALUE
+              $c

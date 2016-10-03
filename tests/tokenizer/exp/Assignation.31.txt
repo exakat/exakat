@@ -1,3 +1,156 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Assignation.31.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ===
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                B
+            Label : RIGHT
+              ::
+              Label : CLASS
+                C
+              Label : CONSTANT
+                D
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              ===
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $c
+                Label : PROPERTY
+                  E
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  F
+                Label : CONSTANT
+                  G
+            Label : ELSE
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $l
+                Label : RIGHT
+                  ->
+                  Label : METHOD
+                    P
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      P
+                  Label : OBJECT
+                    $m
+            Label : THEN
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  ->
+                  Label : METHOD
+                    H
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      H
+                  Label : OBJECT
+                    $e
+              Label : ELEMENT
+                if
+                Label : CONDITION
+                  !==
+                  Label : LEFT
+                    I
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          J
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            J
+                        Label : OBJECT
+                          $f
+                      Label : ARGUMENT
+                        $g
+                      Label : ARGUMENT
+                        K
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            $h
+                        Label : NAME
+                          K
+                    Label : NAME
+                      I
+                  Label : RIGHT
+                    0
+                Label : THEN
+                  {}
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      L
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $i
+                Label : RIGHT
+                  (string)
+                  Label : CAST
+                    M
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          N
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            N
+                        Label : OBJECT
+                          $j
+                      Label : ARGUMENT
+                        O
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            $k
+                        Label : NAME
+                          O
+                    Label : NAME
+                      M
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b

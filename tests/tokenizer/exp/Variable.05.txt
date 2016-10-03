@@ -1,12 +1,14 @@
-./tests/tokenizer/source/Variable.05.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Variable.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        "
-        Label : CONCAT
-          b
+      Label : CODE
+        ;
+        Label : ELEMENT
+          "
+          Label : CONCAT
+            b

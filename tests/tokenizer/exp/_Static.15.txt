@@ -1,19 +1,58 @@
-(
-Label : ARGUMENT
-   
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      $fulfill
-  Label : BLOCK
-    {}
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Static.15.php
+  Label : FILE
+    ;
     Label : ELEMENT
-      ++
-      Label : POSTPLUSPLUS
-        $self
-  Label : NAME
-    Void
-  Label : USE
-    (
-    Label : ARGUMENT
-      $self
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          new
+          Label : NEW
+            static
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                 
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $fulfill
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $self
+                Label : NAME
+                  Void
+                Label : USE
+                  (
+                  Label : ARGUMENT
+                    $self
+            Label : NAME
+              static
+        Label : ELEMENT
+          new
+          Label : NEW
+            static
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                 
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $fulfill
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $self
+                Label : NAME
+                  Void
+            Label : NAME
+              static

@@ -1,5 +1,66 @@
-+
-Label : LEFT
-  2
-Label : RIGHT
-  3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            (
+            Label : CODE
+              (
+              Label : CODE
+                (
+                Label : CODE
+                  +
+                  Label : LEFT
+                    2
+                  Label : RIGHT
+                    3
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ->
+            Label : OBJECT
+              $b
+            Label : PROPERTY
+              B
+          Label : THEN
+            {}
+            Label : ELEMENT
+              (
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                (
+                Label : CODE
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : PROPERTY
+                    B
+        Label : ELEMENT
+          (
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              $d
+          Label : NAME
+            (
+            Label : CODE
+              ->
+              Label : OBJECT
+                $c
+              Label : PROPERTY
+                C

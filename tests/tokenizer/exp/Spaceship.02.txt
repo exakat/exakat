@@ -1,5 +1,22 @@
-<=>
-Label : LEFT
-  $a
-Label : RIGHT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Spaceship.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ===
+          Label : LEFT
+            (
+            Label : CODE
+              <=>
+              Label : LEFT
+                $a
+              Label : RIGHT
+                $b
+          Label : RIGHT
+            -1

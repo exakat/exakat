@@ -1,5 +1,24 @@
-[
-Label : INDEX
-  'c'
-Label : VARIABLE
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .
+          Label : CONCAT
+            'a'
+          Label : CONCAT
+            'd'
+          Label : CONCAT
+            [
+            Label : INDEX
+              'c'
+            Label : VARIABLE
+              $b
+          Label : CONCAT
+            $e

@@ -1,3 +1,61 @@
-(
-Label : ARGUMENT
-  'UX1'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.37.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      UV
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          S
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'UX1'
+          Label : NAME
+            S
+        Label : ELEMENT
+          UY
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $a
+              Label : ELSE
+                {}
+                Label : ELEMENT
+                  UZb
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $b
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  UZa
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $a
+          Label : NAME
+            f
+        Label : ELEMENT
+          S
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'UX3'
+          Label : NAME
+            S
+    Label : ELEMENT
+      UW

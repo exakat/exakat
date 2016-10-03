@@ -1,5 +1,20 @@
-(
-Label : ARGUMENT
-  __DIR__
-Label : ARGUMENT
-  __FILE__
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Constant.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          chdir
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              __DIR__
+            Label : ARGUMENT
+              __FILE__
+          Label : NAME
+            chdir

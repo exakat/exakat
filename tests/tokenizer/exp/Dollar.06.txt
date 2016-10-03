@@ -1,0 +1,18 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dollar.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $
+            Label : NAME
+              $
+              Label : NAME
+                $a

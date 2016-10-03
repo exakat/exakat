@@ -1,3 +1,24 @@
-(
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Throw.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            (
+            Label : CODE
+              new
+              Label : NEW
+                C
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    1
+                Label : NAME
+                  C

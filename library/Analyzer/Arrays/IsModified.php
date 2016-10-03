@@ -39,8 +39,18 @@ class IsModified extends Analyzer\Analyzer {
 
         // $a[1] = 2;
         $this->atomIs('Array')
+             ->hasNoIn('VARIABLE')
              ->inIs('LEFT')
-             ->atomIs(array('Assignation', 'Arrayappend'))
+             ->atomIs('Assignation')
+             ->back('first')
+             ->raw('where( __.repeat( __.out("VARIABLE")).emit(hasLabel("Arrayappend")).times('.self::MAX_LOOPING.').count().is(eq(0)) )')
+             ;
+        $this->prepareQuery();
+
+        // $a[1][] = 2;
+        $this->atomIs('Array')
+             ->inIs('APPEND')
+             ->atomIs('Arrayappend')
              ->back('first');
         $this->prepareQuery();
 

@@ -1,19 +1,40 @@
-(
-Label : ARGUMENT
-  $x
-  Label : DEFAULT
-    null
-  Label : TYPEHINT
-    StdClass
-Label : ARGUMENT
-  $b
-  Label : DEFAULT
-    null
-  Label : TYPEHINT
-    StdClass
-Label : ARGUMENT
-  $c
-  Label : DEFAULT
-    null
-  Label : TYPEHINT
-    StdClass
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.30.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $x
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                StdClass
+            Label : ARGUMENT
+              $b
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                StdClass
+            Label : ARGUMENT
+              $c
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                StdClass
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            x
+        Label : ELEMENT
+          Void

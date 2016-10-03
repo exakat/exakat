@@ -1,5 +1,24 @@
-{
-Label : INDEX
-  'B'
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/ArrayNS.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          [
+          Label : INDEX
+            0
+          Label : VARIABLE
+            {
+            Label : INDEX
+              'C'
+            Label : VARIABLE
+              {
+              Label : INDEX
+                'B'
+              Label : VARIABLE
+                $a

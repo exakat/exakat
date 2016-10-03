@@ -1,3 +1,34 @@
-(
-Label : ARGUMENT
-  'C'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Label.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          :
+          Label : LABEL
+            D
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'C'
+              Label : NAME
+                B
+            Label : ELSE
+              null
+            Label : THEN
+              (float)
+              Label : CAST
+                Void

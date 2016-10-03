@@ -1,7 +1,90 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'E'
-  Label : VARIABLE
-    $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Assignation.30.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'C' :  /**/  
+              Label : CASE
+                'C'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    (string)
+                    Label : CAST
+                      D
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'E'
+                          Label : VARIABLE
+                            $c
+                      Label : NAME
+                        D
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $d
+                  Label : RIGHT
+                    ->
+                    Label : OBJECT
+                      ->
+                      Label : OBJECT
+                        $e
+                      Label : PROPERTY
+                        F
+                    Label : PROPERTY
+                      G
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    H
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $f
+                      Label : ARGUMENT
+                        'I'
+                    Label : NAME
+                      H
+                  Label : ELSE
+                    {}
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $h
+                      Label : RIGHT
+                        'K'
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        $g
+                      Label : RIGHT
+                        'J'
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+          Label : NAME
+            [
+            Label : INDEX
+              'B'
+            Label : VARIABLE
+              $a

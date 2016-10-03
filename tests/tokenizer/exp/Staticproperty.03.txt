@@ -1,9 +1,20 @@
-[
-Label : INDEX
-  'b'
-Label : VARIABLE
-  ::
-  Label : CLASS
-    self
-  Label : PROPERTY
-    $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticproperty.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          [
+          Label : INDEX
+            'b'
+          Label : VARIABLE
+            ::
+            Label : CLASS
+              self
+            Label : PROPERTY
+              $a

@@ -1,11 +1,81 @@
-echo
-Label : ARGUMENT
-  E
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      'F'
-    Label : ARGUMENT
-      G
-  Label : NAME
-    E
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.96.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ||
+            Label : LEFT
+              ==
+              Label : LEFT
+                $a
+              Label : RIGHT
+                'B'
+            Label : RIGHT
+              ||
+              Label : LEFT
+                ==
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  'C'
+              Label : RIGHT
+                ==
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  'D'
+          Label : THEN
+            {}
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  E
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'F'
+                    Label : ARGUMENT
+                      G
+                  Label : NAME
+                    E
+              Label : NAME
+                echo
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                isset
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $b
+                Label : NAME
+                  isset
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      H
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'I'
+                        Label : ARGUMENT
+                          $b
+                      Label : NAME
+                        H
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  Void

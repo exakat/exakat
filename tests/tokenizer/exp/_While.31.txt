@@ -1,3 +1,108 @@
-(
-Label : ARGUMENT
-  $fetchMode
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_While.31.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              $index
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              while
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    !
+                    Label : NOT
+                      isset
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            $index
+                          Label : VARIABLE
+                            $row
+                      Label : NAME
+                        isset
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
+                      continue
+                      Label : CONTINUE
+                        Void
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      [
+                      Label : INDEX
+                        $index
+                      Label : VARIABLE
+                        $row
+                    Label : VARIABLE
+                      $result
+                  Label : RIGHT
+                    $row
+              Label : CONDITION
+                =
+                Label : LEFT
+                  $row
+                Label : RIGHT
+                  ->
+                  Label : METHOD
+                    fetch
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $fetchMode
+                    Label : NAME
+                      fetch
+                  Label : OBJECT
+                    $this
+            Label : ELEMENT
+              Void
+          Label : THEN
+            ;
+            Label : ELEMENT
+              while
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $result
+                    Label : APPEND
+                      $result
+                  Label : RIGHT
+                    $row
+              Label : CONDITION
+                =
+                Label : LEFT
+                  $row
+                Label : RIGHT
+                  ->
+                  Label : METHOD
+                    fetch
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $fetchMode
+                    Label : NAME
+                      fetch
+                  Label : OBJECT
+                    $this
+            Label : ELEMENT
+              Void

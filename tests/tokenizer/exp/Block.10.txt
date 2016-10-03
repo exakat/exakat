@@ -1,3 +1,148 @@
-(
-Label : ARGUMENT
-  D
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Block.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                C
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    D
+                Label : NAME
+                  C
+              Label : OBJECT
+                ::
+                Label : CLASS
+                  B
+                Label : PROPERTY
+                  $b
+            Label : ELEMENT
+              {}
+              Label : ELEMENT
+                {}
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    C
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        G
+                    Label : NAME
+                      C
+                  Label : OBJECT
+                    ::
+                    Label : CLASS
+                      B
+                    Label : PROPERTY
+                      $b
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    I
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $c
+                    Label : NAME
+                      I
+                  Label : OBJECT
+                    ::
+                    Label : CLASS
+                      B
+                    Label : PROPERTY
+                      $b
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    K
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      K
+                  Label : OBJECT
+                    ::
+                    Label : CLASS
+                      B
+                    Label : PROPERTY
+                      $b
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    C
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        N
+                    Label : NAME
+                      C
+                  Label : OBJECT
+                    ::
+                    Label : CLASS
+                      B
+                    Label : PROPERTY
+                      $b
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    I
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $d
+                    Label : NAME
+                      I
+                  Label : OBJECT
+                    ::
+                    Label : CLASS
+                      B
+                    Label : PROPERTY
+                      $b
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    K
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      K
+                  Label : OBJECT
+                    ::
+                    Label : CLASS
+                      B
+                    Label : PROPERTY
+                      $b
+              Label : ELEMENT
+                ->
+                Label : METHOD
+                  K
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    K
+                Label : OBJECT
+                  ::
+                  Label : CLASS
+                    B
+                  Label : PROPERTY
+                    $b

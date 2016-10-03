@@ -1,5 +1,22 @@
-=
-Label : LEFT
-  $y
-Label : RIGHT
-  3
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Assignation.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $y
+          Label : RIGHT
+            3
+        Label : ELEMENT
+          ===
+          Label : LEFT
+            $x
+          Label : RIGHT
+            Void

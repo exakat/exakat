@@ -1,16 +1,18 @@
-./tests/tokenizer/source/_Use.02.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        use
-        Label : USE
-          \
-          Label : SUBNAME
-            A
-          Label : SUBNAME
-            B
+      Label : CODE
+        ;
+        Label : ELEMENT
+          use
+          Label : USE
+            \
+            Label : SUBNAME
+              A
+            Label : SUBNAME
+              B

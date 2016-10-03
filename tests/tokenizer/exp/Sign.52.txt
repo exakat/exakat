@@ -1,3 +1,46 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.52.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            instanceof
+            Label : CLASS
+              B
+            Label : VARIABLE
+              $a
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                -
+                Label : SIGN
+                  $f
+              Label : RIGHT
+                '-'
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                ->
+                Label : METHOD
+                  e
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    e
+                Label : OBJECT
+                  $d

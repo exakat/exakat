@@ -42,7 +42,7 @@ SELECT  id AS id,
 SQL;
         $res = $sqlite->query($sqlQuery);
         
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
 
         $datastore = new \Datastore($config);
 

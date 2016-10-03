@@ -1,3 +1,26 @@
-(
-Label : ARGUMENT
-  34
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/FunctioncallArray.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          [
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              34
+          Label : NAME
+            [
+            Label : INDEX
+              d
+            Label : VARIABLE
+              ->
+              Label : OBJECT
+                $b
+              Label : PROPERTY
+                c

@@ -1,11 +1,26 @@
-(
-Label : ARGUMENT
-  include
-  Label : ARGUMENTS
-    )
-    Label : ARGUMENT
-      'b'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
       Label : CODE
-        'b'
-  Label : NAME
-    include
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              include
+              Label : ARGUMENTS
+                )
+                Label : ARGUMENT
+                  (
+                  Label : CODE
+                    'b'
+              Label : NAME
+                include
+          Label : NAME
+            a

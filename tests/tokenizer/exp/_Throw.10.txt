@@ -1,13 +1,37 @@
-(
-Label : ARGUMENT
-  get_class
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      ->
-      Label : OBJECT
-        $this
-      Label : PROPERTY
-        c
-  Label : NAME
-    get_class
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Throw.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            ->
+            Label : METHOD
+              b
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  get_class
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      ->
+                      Label : OBJECT
+                        $this
+                      Label : PROPERTY
+                        c
+                  Label : NAME
+                    get_class
+              Label : NAME
+                b
+            Label : OBJECT
+              (
+              Label : CODE
+                new
+                Label : NEW
+                  A

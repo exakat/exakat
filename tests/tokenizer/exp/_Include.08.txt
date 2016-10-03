@@ -1,3 +1,18 @@
-$var
-Label : ARGUMENT
-  $var
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          require_once
+          Label : ARGUMENTS
+            $var
+            Label : ARGUMENT
+              $var
+          Label : NAME
+            require_once

@@ -1,7 +1,22 @@
-"autre"
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    "literal"
-  Label : CONCAT
-    "autre"
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          require_once
+          Label : ARGUMENTS
+            "autre"
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                "literal"
+              Label : CONCAT
+                "autre"
+          Label : NAME
+            require_once

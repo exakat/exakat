@@ -1,0 +1,21 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Methodcall.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            print
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $d
+            Label : NAME
+              print
+          Label : OBJECT
+            $a

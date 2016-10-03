@@ -24,12 +24,12 @@
 namespace Tasks;
 
 class ReportAll extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         display("Starting reportAll\n");
 
         $formats = array('Markdown', 'Sqlite', 'Devoops', 'Html', 'Text');
         $reportType = 'Premier';
-        $oldConfig = \Config::factory();
+        $oldConfig = \Exakat\Config::factory();
         
         foreach($formats as $format) {
             display("Reporting $format\n");
@@ -43,13 +43,13 @@ class ReportAll extends Tasks {
                             8 => '-report',
                             9 => $reportType,
                             );
-            $config = \Config::factory($args);
+            $config = \Exakat\Config::factory($args);
             
             $report = new Report();
             $report->run($config);
             unset($report);
         }
-        \Config::factory($oldConfig);
+        \Exakat\Config::factory($oldConfig);
 
         // generating counts
         display("Reporting Counts (Sqlite)\n");
@@ -65,7 +65,7 @@ class ReportAll extends Tasks {
                         );
         
         $report = new Report();
-        $report->run(\Config::factory($args));
+        $report->run(\Exakat\Config::factory($args));
         unset($report);
 
         display("Done\n");

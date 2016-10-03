@@ -1,7 +1,56 @@
-(
-Label : ARGUMENT
-  $c
-Label : ARGUMENT
-  false
-Label : ARGUMENT
-  false
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.35.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            =
+            Label : LEFT
+              $g
+            Label : RIGHT
+              &&
+              Label : LEFT
+                ->
+                Label : METHOD
+                  b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                    Label : ARGUMENT
+                      false
+                    Label : ARGUMENT
+                      false
+                  Label : NAME
+                    b
+                Label : OBJECT
+                  $a
+              Label : RIGHT
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  ->
+                  Label : METHOD
+                    f
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      f
+                  Label : OBJECT
+                    $e
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a

@@ -1,23 +1,44 @@
-echo
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    'a'
-  Label : CONCAT
-    date
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        "Y"
-      Label : ARGUMENT
-        strtotime
-        Label : ARGUMENTS
-          (
-          Label : ARGUMENT
-            $b
-        Label : NAME
-          strtotime
-    Label : NAME
-      date
-  Label : CONCAT
-    'c'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'a'
+              Label : CONCAT
+                date
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    "Y"
+                  Label : ARGUMENT
+                    strtotime
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $b
+                    Label : NAME
+                      strtotime
+                Label : NAME
+                  date
+              Label : CONCAT
+                'c'
+          Label : NAME
+            echo
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            2

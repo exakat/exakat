@@ -1,3 +1,20 @@
-Void
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_New.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          new
+          Label : NEW
+            static
+            Label : ARGUMENTS
+              Void
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              static

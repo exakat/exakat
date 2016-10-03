@@ -1,3 +1,18 @@
-__METHOD__
-Label : ARGUMENT
-  __METHOD__
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Constant.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            __METHOD__
+            Label : ARGUMENT
+              __METHOD__
+          Label : NAME
+            print

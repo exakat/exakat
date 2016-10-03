@@ -1,11 +1,34 @@
-(
-Label : ARGUMENT
-  $a
-Label : ARGUMENT
-  $b
-  Label : TYPEHINT
-    Stdclass
-Label : ARGUMENT
-  $c
-  Label : TYPEHINT
-    Stdclass
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Typehint.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              $b
+              Label : TYPEHINT
+                Stdclass
+            Label : ARGUMENT
+              $c
+              Label : TYPEHINT
+                Stdclass
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                1
+          Label : NAME
+            x
+        Label : ELEMENT
+          Void

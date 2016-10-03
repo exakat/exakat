@@ -1,9 +1,63 @@
-(
-Label : ARGUMENT
-  "
-  Label : CONCAT
-    C
-  Label : CONCAT
-    $aD
-Label : ARGUMENT
-  E
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/String.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              "
+              Label : CONCAT
+                C
+              Label : CONCAT
+                $aD
+            Label : ARGUMENT
+              E
+          Label : NAME
+            B
+        Label : ELEMENT
+          F
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'G'
+            Label : ARGUMENT
+              H
+          Label : NAME
+            F
+        Label : ELEMENT
+          I
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'J'
+              Label : VARIABLE
+                $b
+            Label : ARGUMENT
+              (
+              Label : CODE
+                ?
+                Label : CONDITION
+                  ===
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      'K'
+                    Label : VARIABLE
+                      $c
+                  Label : RIGHT
+                    'L'
+                Label : ELSE
+                  'M'
+                Label : THEN
+                  $d
+          Label : NAME
+            I

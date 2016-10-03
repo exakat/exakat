@@ -1,9 +1,24 @@
-[
-Label : INDEX
-  "
-  Label : CONCAT
-    $bB
-  Label : CONCAT
-    $c
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          !
+          Label : NOT
+            ++
+            Label : POSTPLUSPLUS
+              [
+              Label : INDEX
+                "
+                Label : CONCAT
+                  $bB
+                Label : CONCAT
+                  $c
+              Label : VARIABLE
+                $a

@@ -1,19 +1,30 @@
-class
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    Void
-Label : EXTENDS
-  \
-  Label : SUBNAME
-    E
-  Label : SUBNAME
-    D
-Label : IMPLEMENTS
-  \
-  Label : SUBNAME
-    B
-  Label : SUBNAME
-    C
-Label : NAME
-  A
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.62.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : EXTENDS
+            \
+            Label : SUBNAME
+              E
+            Label : SUBNAME
+              D
+          Label : IMPLEMENTS
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+          Label : NAME
+            A

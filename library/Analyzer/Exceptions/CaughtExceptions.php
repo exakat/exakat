@@ -29,6 +29,7 @@ class CaughtExceptions extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Catch')
              ->outIs('CLASS');
+        $this->prepareQuery();
     }
 }
 

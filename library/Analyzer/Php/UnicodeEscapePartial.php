@@ -32,6 +32,7 @@ class UnicodeEscapePartial extends Analyzer\Analyzer {
         // Normal string
         $this->atomIs('String')
              ->outIsIE('CONCAT')
+             ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->regexIs('noDelimiter', '\\\\\\\\u\\\\{')
              ->back('first');
         $this->prepareQuery();
@@ -39,6 +40,7 @@ class UnicodeEscapePartial extends Analyzer\Analyzer {
         // Here/NowDoc string
         $this->atomIs('Heredoc')
              ->outIs('CONCAT')
+             ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->regexIs('noDelimiter', '\\\\\\\\u\\\\{')
              ->back('first');
         $this->prepareQuery();

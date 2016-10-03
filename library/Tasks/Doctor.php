@@ -29,7 +29,7 @@ class Doctor extends Tasks {
         parent::__construct($gremlin);
     }
 
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $stats = array();
 
         $stats = array_merge($stats, $this->checkPreRequisite($config));
@@ -60,6 +60,7 @@ class Doctor extends Tasks {
         $stats['PHP']['sqlite3']   = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it)';
         $stats['PHP']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it)';
         $stats['PHP']['phar']      = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar)';
+        $stats['PHP']['mbstring']  = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional)';
 
         // java
         $res = shell_exec('java -version 2>&1');
@@ -187,7 +188,7 @@ class Doctor extends Tasks {
         return $stats;
     }
     
-    private function checkAutoInstall(\Config $config) {
+    private function checkAutoInstall(\Exakat\Config $config) {
         $stats = array();
         
         // config
@@ -277,7 +278,7 @@ INI;
         return $stats;
     }
 
-    private function checkOptional(\Config $config) {
+    private function checkOptional(\Exakat\Config $config) {
         $stats = array();
 
         // check PHP 5.2

@@ -1,7 +1,36 @@
-(
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    $b
-  Label : CONCAT
-    'E'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Cast.24.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            (int)
+            Label : CAST
+              ::
+              Label : CLASS
+                \
+                Label : SUBNAME
+                  B
+                Label : SUBNAME
+                  C
+              Label : METHOD
+                D
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      $b
+                    Label : CONCAT
+                      'E'
+                Label : NAME
+                  D

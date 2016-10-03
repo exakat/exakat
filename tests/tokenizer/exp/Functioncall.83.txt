@@ -1,3 +1,120 @@
-(
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.83.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          $y1
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              1
+          Label : NAME
+            $y1
+        Label : ELEMENT
+          $y2
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              2
+          Label : NAME
+            $y2
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              $y2
+        Label : ELEMENT
+          $y3
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              3
+          Label : NAME
+            $y3
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                2
+            Label : NAME
+              $y3
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  1
+              Label : NAME
+                $y3
+        Label : ELEMENT
+          x1
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              1
+          Label : NAME
+            x1
+        Label : ELEMENT
+          x2
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              22
+          Label : NAME
+            x2
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                2
+            Label : NAME
+              x2
+        Label : ELEMENT
+          x3
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              333
+          Label : NAME
+            x3
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                33
+            Label : NAME
+              x3
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  3
+              Label : NAME
+                x3
+        Label : ELEMENT
+          x4
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              4444
+          Label : NAME
+            x4
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                444
+            Label : NAME
+              x4
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  44
+              Label : NAME
+                x4
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    4
+                Label : NAME
+                  x4

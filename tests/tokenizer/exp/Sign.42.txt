@@ -1,7 +1,26 @@
-=
-Label : LEFT
-  $b
-Label : RIGHT
-  -
-  Label : SIGN
-    false
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sign.42.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          >=
+          Label : LEFT
+            $a
+          Label : RIGHT
+            -
+            Label : SIGN
+              B
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            -
+            Label : SIGN
+              false

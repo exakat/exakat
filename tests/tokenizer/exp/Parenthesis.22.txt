@@ -1,3 +1,52 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              ?
+              Label : CONDITION
+                (
+                Label : CODE
+                  ->
+                  Label : METHOD
+                    B
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      B
+                  Label : OBJECT
+                    $c
+              Label : ELSE
+                @
+                Label : AT
+                  D
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    D
+              Label : THEN
+                C
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                Label : NAME
+                  C
+          Label : SOURCE
+            $b
+          Label : VALUE
+            $c

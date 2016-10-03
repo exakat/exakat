@@ -1,7 +1,42 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'c'
-  Label : VARIABLE
-    $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.31.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          &&
+          Label : LEFT
+            ::
+            Label : CLASS
+              $
+              Label : NAME
+                x
+            Label : METHOD
+              a
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'c'
+                  Label : VARIABLE
+                    $b
+              Label : NAME
+                a
+          Label : RIGHT
+            d
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'f'
+                Label : VARIABLE
+                  $e
+            Label : NAME
+              d

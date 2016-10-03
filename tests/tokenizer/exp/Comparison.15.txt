@@ -1,7 +1,40 @@
-(
-Label : ARGUMENT
-  $c
-Label : ARGUMENT
-  $d
-Label : ARGUMENT
-  $e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Comparison.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            =
+            Label : LEFT
+              !
+              Label : NOT
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  a
+            Label : RIGHT
+              b
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $c
+                Label : ARGUMENT
+                  $d
+                Label : ARGUMENT
+                  $e
+              Label : NAME
+                b
+          Label : THEN
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                f

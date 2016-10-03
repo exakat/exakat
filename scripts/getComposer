@@ -4,7 +4,7 @@ $project = $argv[1];
 if (empty($project)) {
     die( "getComposer <project>\n");
 }
-if (!file_exists('./projects/'.$project.'')) {
+if (!file_exists('./projects/'.$project)) {
     die( "No such project as $project\n");
 }
 

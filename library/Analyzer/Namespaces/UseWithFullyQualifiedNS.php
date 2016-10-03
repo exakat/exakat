@@ -27,11 +27,21 @@ use Analyzer;
 
 class UseWithFullyQualifiedNS extends Analyzer\Analyzer {
     public function analyze() {
+        // Normal group
         $this->atomIs('Use')
+             ->hasNoClassTrait()
              ->outIs('USE')
              ->atomIs(array('Nsname', 'As'))
              ->outIsIE('NAME')
-             ->is('absolutens', true);
+             ->is('absolute', true);
+        $this->prepareQuery();
+
+        // Group use
+        $this->atomIs('Use')
+             ->hasNoClassTrait()
+             ->outIs('GROUPUSE')
+             ->atomIs('Nsname')
+             ->is('absolute', true);
         $this->prepareQuery();
     }
 }

@@ -1,5 +1,144 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'a' :  /**/  
+              Label : CASE
+                'a'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    1
+            Label : ELEMENT
+              case 'b' :  /**/  
+              Label : CASE
+                'b'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    2
+            Label : ELEMENT
+              case 'c' :  /**/  
+              Label : CASE
+                'c'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    3
+            Label : ELEMENT
+              case 'd' :  /**/  
+              Label : CASE
+                'd'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    4
+            Label : ELEMENT
+              case 'e' :  /**/  
+              Label : CASE
+                'e'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    5
+            Label : ELEMENT
+              default
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+            Label : ELEMENT
+              case 'f' :  /**/  
+              Label : CASE
+                'f'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    6
+            Label : ELEMENT
+              case 'g' :  /**/  
+              Label : CASE
+                'g'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    7
+            Label : ELEMENT
+              case 'h' :  /**/  
+              Label : CASE
+                'h'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    8
+            Label : ELEMENT
+              case 'i' :  /**/  
+              Label : CASE
+                'i'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    9
+            Label : ELEMENT
+              case 'j' :  /**/  
+              Label : CASE
+                'j'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    10
+          Label : NAME
+            $a

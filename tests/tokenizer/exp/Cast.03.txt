@@ -1,3 +1,18 @@
-(string)
-Label : CAST
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Cast.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          (string)
+          Label : CAST
+            $x
+        Label : ELEMENT
+          (string)
+          Label : CAST
+            $y

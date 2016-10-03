@@ -1,9 +1,20 @@
-=
-Label : LEFT
-  $a
-Label : RIGHT
-  <<<'NOWDOC'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Heredoc.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-  Label : CONCAT
-    abc
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            <<<'NOWDOC'
+
+            Label : CONCAT
+              abc
 

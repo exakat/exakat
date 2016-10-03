@@ -1,11 +1,30 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    ->
-    Label : OBJECT
-      $b
-    Label : PROPERTY
-      c
-  Label : PROPERTY
-    False
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                ->
+                Label : OBJECT
+                  ->
+                  Label : OBJECT
+                    $b
+                  Label : PROPERTY
+                    c
+                Label : PROPERTY
+                  False
+            Label : NAME
+              a
+          Label : OBJECT
+            $this

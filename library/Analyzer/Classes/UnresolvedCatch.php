@@ -32,6 +32,7 @@ class UnresolvedCatch extends Analyzer\Analyzer {
 
     public function analyze() {
         $exceptions = $this->loadIni('php_exception.ini', 'classes');
+        $exceptions[] = '\throwable';
         $exceptions = $this->makeFullNsPath($exceptions);
         
         $this->atomIs('Catch')

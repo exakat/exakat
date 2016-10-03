@@ -1,5 +1,74 @@
-(
-Label : ARGUMENT
-  $a
-Label : ARGUMENT
-  'D'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.68.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            B
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $a
+              Label : ARGUMENT
+                'D'
+            Label : NAME
+              C
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            E
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                F
+              Label : ARGUMENT
+                'G'
+            Label : NAME
+              E
+          Label : OBJECT
+            $b
+        Label : ELEMENT
+          &&
+          Label : LEFT
+            ::
+            Label : CLASS
+              H
+            Label : METHOD
+              I
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    J
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      J
+                  Label : OBJECT
+                    $c
+              Label : NAME
+                I
+          Label : RIGHT
+            ->
+            Label : METHOD
+              K
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'L'
+              Label : NAME
+                K
+            Label : OBJECT
+              $d

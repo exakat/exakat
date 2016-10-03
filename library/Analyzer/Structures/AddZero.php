@@ -27,11 +27,13 @@ use Analyzer;
 
 class AddZero extends Analyzer\Analyzer {
     public function analyze() {
+        $zeros = array(0, '+0', '-0');
+        
         // $x += 0
         $this->atomIs('Assignation')
              ->codeIs(array('+=', '-='))
              ->outIs('RIGHT')
-             ->codeIs('0')
+             ->codeIs($zeros)
              ->back('first');
         $this->prepareQuery();
 
@@ -39,14 +41,14 @@ class AddZero extends Analyzer\Analyzer {
         $this->atomIs('Addition')
              ->tokenIs('T_PLUS')
              ->outIs('LEFT')
-             ->codeIs('0')
+             ->codeIs($zeros)
              ->back('first');
         $this->prepareQuery();
 
         // $x +- 2
         $this->atomIs('Addition')
              ->outIs('RIGHT')
-             ->codeIs('0')
+             ->codeIs($zeros)
              ->back('first');
         $this->prepareQuery();
     }

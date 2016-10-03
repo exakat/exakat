@@ -1,3 +1,65 @@
-(
-Label : ARGUMENT
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.38.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $x
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                [
+                Label : INDEX
+                  d
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    d
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $a
+                  Label : PROPERTY
+                    b
+              Label : RIGHT
+                true
+          Label : THEN
+            ;
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      d
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $c
+                      Label : NAME
+                        d
+                    Label : VARIABLE
+                      ->
+                      Label : OBJECT
+                        $a
+                      Label : PROPERTY
+                        b
+                  Label : RIGHT
+                    true
+              Label : SOURCE
+                $a
+              Label : VALUE
+                $b

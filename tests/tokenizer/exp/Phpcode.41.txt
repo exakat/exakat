@@ -1,5 +1,52 @@
-(
-Label : ARGUMENT
-  $b
-Label : ARGUMENT
-  $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.41.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              $c
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Q
+            Label : ELEMENT
+              <?=
+              Label : ARGUMENTS
+                <?=
+                Label : ARGUMENT
+                  $g
+              Label : NAME
+                <?=
+            Label : ELEMENT
+              R
+            Label : ELEMENT
+              <?=
+              Label : ARGUMENTS
+                <?=
+                Label : ARGUMENT
+                  E
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'T'
+                  Label : NAME
+                    E
+              Label : NAME
+                <?=
+            Label : ELEMENT
+              E
+          Label : NAME
+            B
+        Label : ELEMENT
+          Void

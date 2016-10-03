@@ -1,33 +1,53 @@
-echo
-Label : ARGUMENT
-  ?
-  Label : CONDITION
-    ==
-    Label : LEFT
-      [
-      Label : INDEX
-        'B'
-      Label : VARIABLE
-        $a
-    Label : RIGHT
-      'C'
-  Label : ELSE
-    'C'
-    Label : CODE
-      ?
-      Label : CONDITION
-        ==
-        Label : LEFT
-          [
-          Label : INDEX
-            'B'
-          Label : VARIABLE
-            $a
-        Label : RIGHT
-          'F'
-      Label : ELSE
-        'C'
-      Label : THEN
-        'G'
-  Label : THEN
-    'D'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcodemiddle.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ?
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'B'
+                  Label : VARIABLE
+                    $a
+                Label : RIGHT
+                  'C'
+              Label : ELSE
+                (
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    ==
+                    Label : LEFT
+                      [
+                      Label : INDEX
+                        'B'
+                      Label : VARIABLE
+                        $a
+                    Label : RIGHT
+                      'F'
+                  Label : ELSE
+                    'C'
+                  Label : THEN
+                    'G'
+              Label : THEN
+                'D'
+          Label : NAME
+            echo
+        Label : ELEMENT
+          I
+        Label : ELEMENT
+          ++
+          Label : POSTPLUSPLUS
+            $b

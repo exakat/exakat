@@ -1,3 +1,104 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Trait.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              sayHello
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'Hello World!'
+                  Label : NAME
+                    echo
+              Label : NAME
+                sayHello
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            HelloWorld
+          Label : NAME
+            HelloWorld
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : USE
+                HelloWorld
+            Label : ELEMENT
+              sayHello
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'Hello Universe!'
+                  Label : NAME
+                    echo
+              Label : NAME
+                sayHello
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            TheWorldIsNotEnough
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              TheWorldIsNotEnough
+          Label : DEFINITION
+            TheWorldIsNotEnough
+          Label : NAME
+            TheWorldIsNotEnough
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $o
+          Label : RIGHT
+            new
+            Label : NEW
+              TheWorldIsNotEnough
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                TheWorldIsNotEnough
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            sayHello
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              sayHello
+          Label : OBJECT
+            $o

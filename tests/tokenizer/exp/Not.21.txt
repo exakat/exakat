@@ -1,3 +1,76 @@
-(
-Label : ARGUMENT
-  'O'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Not.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                B
+            Label : RIGHT
+              $b
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              throw
+              Label : THROW
+                new
+                Label : NEW
+                  N
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'O'
+                  Label : NAME
+                    N
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  C
+              Label : RIGHT
+                &
+                Label : LEFT
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    C
+                Label : RIGHT
+                  ~
+                  Label : NOT
+                    ::
+                    Label : CLASS
+                      E
+                    Label : CONSTANT
+                      F
+            Label : ELEMENT
+              =
+              Label : LEFT
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  G
+              Label : RIGHT
+                1
+        Label : ELEMENT
+          return
+          Label : RETURN
+            P

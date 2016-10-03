@@ -1,5 +1,30 @@
-+
-Label : LEFT
-  $b
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Array.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          !==
+          Label : LEFT
+            [
+            Label : INDEX
+              'c'
+            Label : VARIABLE
+              [
+              Label : INDEX
+                (
+                Label : CODE
+                  +
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    1
+              Label : VARIABLE
+                $a
+          Label : RIGHT
+            D

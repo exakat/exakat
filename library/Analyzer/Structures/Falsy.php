@@ -30,7 +30,7 @@ class Falsy extends Analyzer\Analyzer {
              ->codeIs(array(0, '-0'));
         $this->prepareQuery();
 
-        // Float
+        // Real
         $this->atomIs('Real')
              ->regexIs('fullcode', '^[+-]?[0\\\\.]+');
         $this->prepareQuery();

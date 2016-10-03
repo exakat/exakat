@@ -1,3 +1,140 @@
-(
-Label : ARGUMENT
-  'k'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .
+          Label : CONCAT
+            'a'
+          Label : CONCAT
+            (
+            Label : CODE
+              ?
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'c'
+                  Label : VARIABLE
+                    $b
+                Label : RIGHT
+                  'd'
+              Label : ELSE
+                .
+                Label : CONCAT
+                  "
+                  Label : CONCAT
+                    p
+                  Label : CONCAT
+                    $q
+                  Label : CONCAT
+                    r
+                  Label : CONCAT
+                    [
+                    Label : INDEX
+                      t
+                    Label : VARIABLE
+                      $s
+                  Label : CONCAT
+                    u
+                Label : CONCAT
+                  (
+                  Label : CODE
+                    ?
+                    Label : CONDITION
+                      (
+                      Label : CODE
+                        !=
+                        Label : LEFT
+                          [
+                          Label : INDEX
+                            'w'
+                          Label : VARIABLE
+                            $v
+                        Label : RIGHT
+                          X
+                    Label : ELSE
+                      .
+                      Label : CONCAT
+                        "ac"
+                      Label : CONCAT
+                        ad
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            'ae'
+                        Label : NAME
+                          ad
+                      Label : CONCAT
+                        "af"
+                    Label : THEN
+                      .
+                      Label : CONCAT
+                        "y"
+                      Label : CONCAT
+                        z
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            'aa'
+                        Label : NAME
+                          z
+                      Label : CONCAT
+                        "'ab"
+                Label : CONCAT
+                  "ag"
+                Label : CONCAT
+                  ah
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'ai'
+                  Label : NAME
+                    ah
+                Label : CONCAT
+                  "aj"
+              Label : THEN
+                .
+                Label : CONCAT
+                  "
+                  Label : CONCAT
+                    e
+                  Label : CONCAT
+                    $f
+                  Label : CONCAT
+                    g
+                  Label : CONCAT
+                    [
+                    Label : INDEX
+                      i
+                    Label : VARIABLE
+                      $h
+                Label : CONCAT
+                  j
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'k'
+                  Label : NAME
+                    j
+                Label : CONCAT
+                  "l"
+                Label : CONCAT
+                  m
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'n'
+                  Label : NAME
+                    m
+                Label : CONCAT
+                  "o"
+          Label : CONCAT
+            "ak"

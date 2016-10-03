@@ -1,30 +1,97 @@
-./tests/tokenizer/source/Ifthen.60.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          $a
-        Label : ELSE
-          elseif
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.60.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
           Label : CONDITION
-            $b
+            $a
           Label : ELSE
             elseif
             Label : CONDITION
-123098120398 [label="Reached level 15"]            Label : ELSE
-123098120398 [label="Reached level 15"]            Label : THEN
-123098120398 [label="Reached level 15"]          Label : THEN
+              $b
+            Label : ELSE
+              elseif
+              Label : CONDITION
+                $b
+              Label : ELSE
+                elseif
+                Label : CONDITION
+                  $b
+                Label : ELSE
+                  elseif
+                  Label : CONDITION
+                    $b
+                  Label : ELSE
+                    elseif
+                    Label : CONDITION
+                      $b
+                    Label : ELSE
+                      elseif
+                      Label : CONDITION
+                        $b
+                      Label : ELSE
+                        elseif
+                        Label : CONDITION
+                          $b
+                        Label : ELSE
+                          ;
+                          Label : ELEMENT
+                            ++
+                            Label : POSTPLUSPLUS
+                              $d
+                        Label : THEN
+                          ;
+                          Label : ELEMENT
+                            ++
+                            Label : POSTPLUSPLUS
+                              $c
+                      Label : THEN
+                        ;
+                        Label : ELEMENT
+                          ++
+                          Label : POSTPLUSPLUS
+                            $c
+                    Label : THEN
+                      ;
+                      Label : ELEMENT
+                        ++
+                        Label : POSTPLUSPLUS
+                          $c
+                  Label : THEN
+                    ;
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $c
+                Label : THEN
+                  ;
+                  Label : ELEMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $c
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $c
+            Label : THEN
+              ;
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $c
+          Label : THEN
             ;
             Label : ELEMENT
-123098120398 [label="Reached level 15"]        Label : THEN
-          ;
-          Label : ELEMENT
-            ++
-            Label : POSTPLUSPLUS
-123098120398 [label="Reached level 15"]      Label : ELEMENT
-        Void
+              ++
+              Label : POSTPLUSPLUS
+                $b
+        Label : ELEMENT
+          Void

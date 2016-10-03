@@ -1,3 +1,36 @@
-break
-Label : BREAK
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dowhile.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              switch
+              Label : CASES
+                 /**/ 
+                Label : ELEMENT
+                  case 1 :  /**/  
+                  Label : CASE
+                    1
+                  Label : CODE
+                    ;
+                    Label : ELEMENT
+                      break
+                      Label : BREAK
+                        1
+                Label : ELEMENT
+                  default
+                  Label : CODE
+                    ;
+              Label : NAME
+                $a
+          Label : CONDITION
+            $z

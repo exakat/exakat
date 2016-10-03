@@ -1,11 +1,138 @@
--
-Label : LEFT
-  strlen
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      $aa
-  Label : NAME
-    strlen
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Array.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          {
+          Label : INDEX
+            -
+            Label : LEFT
+              strlen
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $aa
+              Label : NAME
+                strlen
+            Label : RIGHT
+              1
+          Label : VARIABLE
+            $a
+        Label : ELEMENT
+          {
+          Label : INDEX
+            -
+            Label : LEFT
+              strlen
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $bb
+              Label : NAME
+                strlen
+            Label : RIGHT
+              1
+          Label : VARIABLE
+            [
+            Label : INDEX
+              2
+            Label : VARIABLE
+              $b
+        Label : ELEMENT
+          {
+          Label : INDEX
+            -
+            Label : LEFT
+              strlen
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $cc
+              Label : NAME
+                strlen
+            Label : RIGHT
+              1
+          Label : VARIABLE
+            [
+            Label : INDEX
+              4
+            Label : VARIABLE
+              [
+              Label : INDEX
+                3
+              Label : VARIABLE
+                $c
+        Label : ELEMENT
+          {
+          Label : INDEX
+            -
+            Label : LEFT
+              strlen
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $dd
+              Label : NAME
+                strlen
+            Label : RIGHT
+              1
+          Label : VARIABLE
+            {
+            Label : INDEX
+              4
+            Label : VARIABLE
+              [
+              Label : INDEX
+                3
+              Label : VARIABLE
+                $d
+        Label : ELEMENT
+          {
+          Label : INDEX
+            -
+            Label : LEFT
+              strlen
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $ee
+              Label : NAME
+                strlen
+            Label : RIGHT
+              1
+          Label : VARIABLE
+            {
+            Label : INDEX
+              6
+            Label : VARIABLE
+              $e
+        Label : ELEMENT
+          {
+          Label : INDEX
+            -
+            Label : LEFT
+              strlen
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $dd
+              Label : NAME
+                strlen
+            Label : RIGHT
+              1
+          Label : VARIABLE
+            [
+            Label : INDEX
+              4
+            Label : VARIABLE
+              {
+              Label : INDEX
+                3
+              Label : VARIABLE
+                $f

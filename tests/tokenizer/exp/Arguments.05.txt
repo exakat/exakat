@@ -1,7 +1,22 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    3
-  Label : VARIABLE
-    $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arguments.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                3
+              Label : VARIABLE
+                $x
+          Label : NAME
+            f

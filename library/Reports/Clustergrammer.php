@@ -34,7 +34,7 @@ class Clustergrammer extends Reports {
     }
 
     public function generate($folder, $name= 'txt') {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $themes = $config->thema;
 
         $analyzers = array();
@@ -44,7 +44,7 @@ class Clustergrammer extends Reports {
         $analyzers = call_user_func_array('array_merge', $analyzers);
         display( count($analyzers)." analyzers\n");
 
-        $res = $this->sqlite->query('SELECT distinct analyzer FROM results WHERE analyzer IN ("'.join('","', $analyzers).'") ORDER BY analyzer');
+        $res = $this->sqlite->query('SELECT distinct analyzer FROM results WHERE analyzer IN ("'.implode('","', $analyzers).'") ORDER BY analyzer');
         $skeleton = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $skeleton[$row['analyzer']] = 0;
@@ -59,7 +59,7 @@ class Clustergrammer extends Reports {
         }
 
         $all = array();
-        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer IN ("'.join('","', $analyzers).'") ORDER BY file');
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer IN ("'.implode('","', $analyzers).'") ORDER BY file');
         $total = 0;
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             if (!isset($all[$row['file']])) {
@@ -70,9 +70,9 @@ class Clustergrammer extends Reports {
         }
         display( $total." issues read\n");
 
-        $txt = " \t".join("\t", array_values($titles))."\n";
+        $txt = " \t".implode("\t", array_values($titles))."\n";
         foreach($all as $file => $values) {
-            $txt .= "$file\t".join("\t", array_values($values))."\n";
+            $txt .= "$file\t".implode("\t", array_values($values))."\n";
         }
         file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $txt);
 

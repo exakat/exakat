@@ -1,3 +1,30 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Static.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          static
+          Label : STATIC
+            $x
+        Label : ELEMENT
+          y
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              static
+              Label : STATIC
+                $z
+          Label : NAME
+            y
+        Label : ELEMENT
+          Void

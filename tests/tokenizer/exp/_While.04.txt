@@ -1,21 +1,74 @@
-+
-Label : LEFT
-  1
-Label : RIGHT
-  +
-  Label : LEFT
-    2
-  Label : RIGHT
-    +
-    Label : LEFT
-      3
-    Label : RIGHT
-      +
-      Label : LEFT
-        4
-      Label : RIGHT
-        {
-        Label : INDEX
-          4
-        Label : VARIABLE
-          $y
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_While.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            1
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              Void
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                [
+                Label : INDEX
+                  3
+                Label : VARIABLE
+                  $x
+              Label : RIGHT
+                b
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                Label : NAME
+                  b
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                +
+                Label : LEFT
+                  1
+                Label : RIGHT
+                  +
+                  Label : LEFT
+                    2
+                  Label : RIGHT
+                    +
+                    Label : LEFT
+                      3
+                    Label : RIGHT
+                      +
+                      Label : LEFT
+                        4
+                      Label : RIGHT
+                        {
+                        Label : INDEX
+                          4
+                        Label : VARIABLE
+                          $y
+        Label : ELEMENT
+          while
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : CONDITION
+            ==
+            Label : LEFT
+              $x
+            Label : RIGHT
+              2

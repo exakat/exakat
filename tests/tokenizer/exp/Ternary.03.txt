@@ -1,18 +1,20 @@
-./tests/tokenizer/source/Ternary.03.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        ?
-        Label : CONDITION
-          !
-          Label : NOT
-            $x
-        Label : ELSE
-          'b'
-        Label : THEN
-          'a'
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ?
+          Label : CONDITION
+            !
+            Label : NOT
+              $x
+          Label : ELSE
+            'b'
+          Label : THEN
+            'a'

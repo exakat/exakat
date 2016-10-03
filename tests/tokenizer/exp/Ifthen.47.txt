@@ -1,7 +1,41 @@
-]
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'c'
-  Label : VARIABLE
-    $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.47.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              $d
+            Label : THEN
+              ;
+              Label : ELEMENT
+                C
+          Label : THEN
+            ;
+            Label : ELEMENT
+              A
+            Label : ELEMENT
+              print
+              Label : ARGUMENTS
+                ]
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'c'
+                  Label : VARIABLE
+                    $b
+              Label : NAME
+                print
+            Label : ELEMENT
+              B
+        Label : ELEMENT
+          Void

@@ -1,9 +1,52 @@
-do
-Label : BLOCK
-  ;
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $a
-Label : CONDITION
-  17
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dowhile.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
+          Label : CONDITION
+            17
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $b
+          Label : CONDITION
+            27
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a
+          Label : CONDITION
+            37
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              Void
+          Label : CONDITION
+            47

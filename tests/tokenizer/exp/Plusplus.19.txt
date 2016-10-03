@@ -1,15 +1,26 @@
-=
-Label : LEFT
-  ->
-  Label : OBJECT
-    $this
-  Label : PROPERTY
-    a
-Label : RIGHT
-  ++
-  Label : POSTPLUSPLUS
-    ::
-    Label : CLASS
-      self
-    Label : PROPERTY
-      $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Plusplus.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ->
+            Label : OBJECT
+              $this
+            Label : PROPERTY
+              a
+          Label : RIGHT
+            ++
+            Label : POSTPLUSPLUS
+              ::
+              Label : CLASS
+                self
+              Label : PROPERTY
+                $b

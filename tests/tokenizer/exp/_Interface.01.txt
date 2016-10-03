@@ -1,18 +1,18 @@
-./tests/tokenizer/source/_Interface.01.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Interface.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        interface
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            Void
-        Label : NAME
-          a
-      Label : ELEMENT
-        Void
+      Label : CODE
+        ;
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            a

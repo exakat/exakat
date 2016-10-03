@@ -1,15 +1,32 @@
-case $b instanceof \C :  /**/  
-Label : CASE
-  instanceof
-  Label : CLASS
-    \
-    Label : SUBNAME
-      C
-  Label : VARIABLE
-    $b
-Label : CODE
-  ;
-  Label : ELEMENT
-    ++
-    Label : POSTPLUSPLUS
-      $c
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Label.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case $b instanceof \C :  /**/  
+              Label : CASE
+                instanceof
+                Label : CLASS
+                  \
+                  Label : SUBNAME
+                    C
+                Label : VARIABLE
+                  $b
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $c
+          Label : NAME
+            $a

@@ -1,13 +1,30 @@
-[
-Label : INDEX
-  /
-  Label : LEFT
-    ++
-    Label : POSTPLUSPLUS
-      (int)
-      Label : CAST
-        $b
-  Label : RIGHT
-    1
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Preplusplus.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ]
+            Label : APPEND
+              [
+              Label : INDEX
+                /
+                Label : LEFT
+                  ++
+                  Label : POSTPLUSPLUS
+                    (int)
+                    Label : CAST
+                      $b
+                Label : RIGHT
+                  1
+              Label : VARIABLE
+                $a
+          Label : RIGHT
+            $c

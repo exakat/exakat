@@ -1,5 +1,20 @@
-)
-Label : ARGUMENT
-  "literal"
-  Label : CODE
-    "literal"
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          include_once
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              (
+              Label : CODE
+                "literal"
+          Label : NAME
+            include_once

@@ -1,3 +1,96 @@
-(
-Label : ARGUMENT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Methodcall.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              2
+          Label : NAME
+            f
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              f
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              c
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                c
+          Label : OBJECT
+            $c
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                4
+            Label : NAME
+              c
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  3
+              Label : NAME
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    2
+                Label : NAME
+                  c
+          Label : OBJECT
+            $c
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                5
+            Label : NAME
+              c
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  4
+              Label : NAME
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    3
+                Label : NAME
+                  c
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      2
+                  Label : NAME
+                    c
+          Label : OBJECT
+            $c

@@ -1,5 +1,50 @@
-(
-Label : ARGUMENT
-  "e"
-Label : ARGUMENT
-  $f
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            &&
+            Label : LEFT
+              ==
+              Label : LEFT
+                [
+                Label : INDEX
+                  3
+                Label : VARIABLE
+                  $a
+              Label : RIGHT
+                'b'
+            Label : RIGHT
+              &&
+              Label : LEFT
+                ==
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    4
+                  Label : VARIABLE
+                    $c
+                Label : RIGHT
+                  1
+              Label : RIGHT
+                d
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    "e"
+                  Label : ARGUMENT
+                    $f
+                Label : NAME
+                  d
+          Label : THEN
+            {}
+            Label : ELEMENT
+              Void

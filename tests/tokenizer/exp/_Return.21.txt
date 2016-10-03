@@ -1,11 +1,28 @@
-{
-Label : INDEX
-  ++
-  Label : POSTPLUSPLUS
-    ->
-    Label : OBJECT
-      $this
-    Label : PROPERTY
-      C
-Label : VARIABLE
-  B
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Return.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            {
+            Label : INDEX
+              ++
+              Label : POSTPLUSPLUS
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  C
+            Label : VARIABLE
+              ->
+              Label : OBJECT
+                $this
+              Label : PROPERTY
+                B

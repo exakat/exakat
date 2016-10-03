@@ -1,11 +1,42 @@
-as
-Label : AS
-  D
-Label : NAME
-  \
-  Label : SUBNAME
-    A
-  Label : SUBNAME
-    B
-  Label : SUBNAME
-    C
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          use
+          Label : USE
+            as
+            Label : AS
+              D
+            Label : NAME
+              \
+              Label : SUBNAME
+                A
+              Label : SUBNAME
+                B
+              Label : SUBNAME
+                C
+        Label : ELEMENT
+          use
+          Label : USE
+            as
+            Label : AS
+              E
+            Label : NAME
+              A
+        Label : ELEMENT
+          use
+          Label : USE
+            as
+            Label : AS
+              F
+            Label : NAME
+              \
+              Label : SUBNAME
+                A

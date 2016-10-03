@@ -1,3 +1,22 @@
-$a
-Label : APPEND
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Arrayappend.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ]
+            Label : APPEND
+              $a
+              Label : APPEND
+                $a
+          Label : RIGHT
+            (integer)
+            Label : CAST
+              $b

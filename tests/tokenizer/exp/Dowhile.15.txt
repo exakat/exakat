@@ -1,13 +1,23 @@
-do
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    do
-    Label : BLOCK
-      {}
-      Label : ELEMENT
-        Void
-    Label : CONDITION
-      1
-Label : CONDITION
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dowhile.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              do
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : CONDITION
+                1
+          Label : CONDITION
+            2

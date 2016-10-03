@@ -1,7 +1,62 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'F'
-  Label : VARIABLE
-    $this
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.22.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          use
+          Label : USE
+            \
+            Label : SUBNAME
+              B
+            Label : SUBNAME
+              C
+            Label : SUBNAME
+              D
+        Label : ELEMENT
+          E
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            isset
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'F'
+                Label : VARIABLE
+                  $this
+            Label : NAME
+              isset
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    'G'
+                  Label : CONCAT
+                    H
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'F'
+                        Label : VARIABLE
+                          $this
+                    Label : NAME
+                      H
+              Label : NAME
+                echo
+            Label : ELEMENT
+              Void

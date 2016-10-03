@@ -1,3 +1,62 @@
-(
-Label : ARGUMENT
-  'G'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Label.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          :
+          Label : LABEL
+            B
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case @  :  /**/  
+              Label : CASE
+                @
+                Label : AT
+                  Void
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      C
+                  Label : RIGHT
+                    D
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $this
+                    Label : PROPERTY
+                      E
+                  Label : RIGHT
+                    ->
+                    Label : METHOD
+                      F
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'G'
+                      Label : NAME
+                        F
+                    Label : OBJECT
+                      $this
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+          Label : NAME
+            $a

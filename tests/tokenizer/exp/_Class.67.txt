@@ -1,9 +1,30 @@
-(
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    B
-  Label : CONSTANT
-    class
-Label : ARGUMENT
-  2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.67.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            {}
+            Label : ELEMENT
+              a
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  ::
+                  Label : CLASS
+                    B
+                  Label : CLASS
+                    class
+                Label : ARGUMENT
+                  2
+              Label : NAME
+                a

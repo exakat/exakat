@@ -1,9 +1,30 @@
-+
-Label : LEFT
-  --
-  Label : PREPLUSPLUS
-    $x
-Label : RIGHT
-  ++
-  Label : POSTPLUSPLUS
-    $y
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Plusplus.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          +
+          Label : LEFT
+            --
+            Label : PREPLUSPLUS
+              $x
+          Label : RIGHT
+            ++
+            Label : POSTPLUSPLUS
+              $y
+        Label : ELEMENT
+          +
+          Label : LEFT
+            ++
+            Label : POSTPLUSPLUS
+              $x
+          Label : RIGHT
+            --
+            Label : PREPLUSPLUS
+              $y

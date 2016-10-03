@@ -1,3 +1,124 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yieldfrom.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foo
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              yield
+              Label : YIELD
+                1
+            Label : ELEMENT
+              return
+              Label : RETURN
+                yield from
+                Label : YIELD
+                  bar
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    bar
+          Label : DEFINITION
+            foo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              foo
+          Label : NAME
+            foo
+        Label : ELEMENT
+          bar
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              yield
+              Label : YIELD
+                2
+            Label : ELEMENT
+              yield
+              Label : YIELD
+                3
+            Label : ELEMENT
+              return
+              Label : RETURN
+                4
+          Label : DEFINITION
+            bar
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              bar
+          Label : NAME
+            bar
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $baz
+          Label : RIGHT
+            foo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              foo
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  $element
+                Label : ARGUMENT
+                  "\n"
+              Label : NAME
+                echo
+          Label : SOURCE
+            $baz
+          Label : VALUE
+            $element
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                getReturn
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  getReturn
+              Label : OBJECT
+                $baz
+            Label : ARGUMENT
+              "\n"
+          Label : NAME
+            echo

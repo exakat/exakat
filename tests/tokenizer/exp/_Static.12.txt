@@ -1,27 +1,38 @@
-+
-Label : LEFT
-  ::
-  Label : CLASS
-    static
-  Label : PROPERTY
-    $B
-Label : RIGHT
-  +
-  Label : LEFT
-    ::
-    Label : CLASS
-      static
-    Label : CONSTANT
-      C
-  Label : RIGHT
-    ::
-    Label : CLASS
-      static
-    Label : METHOD
-      d
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          Void
-      Label : NAME
-        d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Static.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          +
+          Label : LEFT
+            ::
+            Label : CLASS
+              static
+            Label : PROPERTY
+              $B
+          Label : RIGHT
+            +
+            Label : LEFT
+              ::
+              Label : CLASS
+                static
+              Label : CONSTANT
+                C
+            Label : RIGHT
+              ::
+              Label : CLASS
+                static
+              Label : METHOD
+                d
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  d

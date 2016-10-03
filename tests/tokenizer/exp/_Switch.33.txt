@@ -1,3 +1,80 @@
-Void
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.33.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'b' :  /**/  
+              Label : CASE
+                'b'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  if
+                  Label : CONDITION
+                    !
+                    Label : NOT
+                      ->
+                      Label : OBJECT
+                        $c
+                      Label : PROPERTY
+                        d
+                  Label : THEN
+                    {}
+                    Label : ELEMENT
+                      exit
+                      Label : ARGUMENTS
+                        Void
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        exit
+                Label : ELEMENT
+                  e
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'f'
+                    Label : ARGUMENT
+                      round
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          /
+                          Label : LEFT
+                            [
+                            Label : INDEX
+                              'h'
+                            Label : VARIABLE
+                              $g
+                          Label : RIGHT
+                            /
+                            Label : LEFT
+                              2
+                            Label : RIGHT
+                              3
+                        Label : ARGUMENT
+                          4
+                      Label : NAME
+                        round
+                  Label : NAME
+                    e
+                Label : ELEMENT
+                  exit
+                  Label : ARGUMENTS
+                    Void
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    exit
+          Label : NAME
+            $a

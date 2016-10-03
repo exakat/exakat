@@ -37,7 +37,7 @@ class InvalidName extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         $invalidNames = $this->loadIni('php_keywords.ini', 'keyword');
-        $invalidNames = "'".join("', '", $invalidNames)."'";
+        $invalidNames = "'".implode("', '", $invalidNames)."'";
         
         // case-insensitive constants
         $this->atomFunctionIs('\\define')

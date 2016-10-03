@@ -1,3 +1,45 @@
-(
-Label : ARGUMENT
-  'E'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.65.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            0
+          Label : THEN
+            ;
+            Label : ELEMENT
+              A
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                C
+              Label : METHOD
+                D
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'E'
+                Label : NAME
+                  D
+            Label : ELEMENT
+              E
+            Label : ELEMENT
+              ::
+              Label : CLASS
+                G
+              Label : METHOD
+                H
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'I'
+                Label : NAME
+                  H
+        Label : ELEMENT
+          Void

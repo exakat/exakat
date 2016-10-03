@@ -1,7 +1,18 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  (double)
-  Label : CAST
-    1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Cast.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            (double)
+            Label : CAST
+              1

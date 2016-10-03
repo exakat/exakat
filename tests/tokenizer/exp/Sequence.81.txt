@@ -1,5 +1,46 @@
-(
-Label : ARGUMENT
-  $c
-  Label : TYPEHINT
-    b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.81.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $c
+              Label : TYPEHINT
+                b
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  false
+                Label : RIGHT
+                  ::
+                  Label : CLASS
+                    d
+                  Label : METHOD
+                    e
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $f
+                    Label : NAME
+                      e
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  false
+          Label : NAME
+            a
+        Label : ELEMENT
+          Void

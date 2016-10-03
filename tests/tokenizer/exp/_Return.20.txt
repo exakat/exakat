@@ -1,3 +1,29 @@
-(
-Label : ARGUMENT
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Return.20.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            ?
+            Label : CONDITION
+              a
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $b
+              Label : NAME
+                a
+            Label : ELSE
+              $d
+            Label : THEN
+              (
+              Label : CODE
+                clone
+                Label : CLONE
+                  $c

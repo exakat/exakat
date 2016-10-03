@@ -1,23 +1,251 @@
-echo
-Label : ARGUMENT
-  D
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      E
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          .
-          Label : CONCAT
-            'F'
-          Label : CONCAT
-            G
-            Label : ARGUMENTS
-123098120398 [label="Reached level 15"]            Label : NAME
-123098120398 [label="Reached level 15"]          Label : CONCAT
-            'I'
-      Label : NAME
-        E
-  Label : NAME
-    D
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.73.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      A
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              AM
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  AO
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'AP'
+                  Label : NAME
+                    AO
+              Label : NAME
+                echo
+            Label : ELEMENT
+              AP
+          Label : THEN
+            ;
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  D
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      E
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          .
+                          Label : CONCAT
+                            'F'
+                          Label : CONCAT
+                            G
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                ->
+                                Label : OBJECT
+                                  $b
+                                Label : PROPERTY
+                                  H
+                            Label : NAME
+                              G
+                          Label : CONCAT
+                            'I'
+                      Label : NAME
+                        E
+                  Label : NAME
+                    D
+              Label : NAME
+                echo
+            Label : ELEMENT
+              I
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    'K'
+                  Label : CONCAT
+                    L
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'M'
+                      Label : ARGUMENT
+                        'N'
+                    Label : NAME
+                      L
+                  Label : CONCAT
+                    'O'
+                  Label : CONCAT
+                    P
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'Q'
+                        Label : VARIABLE
+                          $c
+                    Label : NAME
+                      P
+              Label : NAME
+                echo
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                [
+                Label : INDEX
+                  'R'
+                Label : VARIABLE
+                  $d
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        'S'
+                      Label : CONCAT
+                        T
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            'U'
+                          Label : ARGUMENT
+                            'V'
+                        Label : NAME
+                          T
+                      Label : CONCAT
+                        'W'
+                      Label : CONCAT
+                        X
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            [
+                            Label : INDEX
+                              'Y'
+                            Label : VARIABLE
+                              $e
+                        Label : NAME
+                          X
+                  Label : NAME
+                    echo
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                &&
+                Label : LEFT
+                  $f
+                Label : RIGHT
+                  ->
+                  Label : METHOD
+                    Z
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      Z
+                  Label : OBJECT
+                    $g
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        'AA'
+                      Label : CONCAT
+                        AB
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            'AC'
+                          Label : ARGUMENT
+                            'AD'
+                        Label : NAME
+                          AB
+                      Label : CONCAT
+                        'AE'
+                      Label : CONCAT
+                        AF
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            ->
+                            Label : METHOD
+                              AG
+                              Label : ARGUMENTS
+                                (
+                                Label : ARGUMENT
+                                  Void
+                              Label : NAME
+                                AG
+                            Label : OBJECT
+                              $h
+                        Label : NAME
+                          AF
+                  Label : NAME
+                    echo
+            Label : ELEMENT
+              AG
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    AI
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'AJ'
+                      Label : ARGUMENT
+                        array
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              'AK'
+                            Label : VALUE
+                              'AL'
+                        Label : NAME
+                          array
+                    Label : NAME
+                      AI
+                  Label : OBJECT
+                    $i
+              Label : NAME
+                echo
+            Label : ELEMENT
+              AL
+        Label : ELEMENT
+          Void

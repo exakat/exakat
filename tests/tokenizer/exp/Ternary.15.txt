@@ -1,3 +1,44 @@
-(
-Label : ARGUMENT
-  'e'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.15.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              'b'
+            Label : VARIABLE
+              $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              ||
+              Label : LEFT
+                [
+                Label : INDEX
+                  'd'
+                Label : VARIABLE
+                  $c
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  C
+                Label : METHOD
+                  t
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'e'
+                  Label : NAME
+                    t
+            Label : ELSE
+              2
+            Label : THEN
+              1

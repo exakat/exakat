@@ -1,15 +1,26 @@
-do
-Label : BLOCK
-  ;
-  Label : ELEMENT
-    if
-    Label : CONDITION
-      $x
-    Label : THEN
-      {}
-      Label : ELEMENT
-        ++
-        Label : POSTPLUSPLUS
-          $y
-Label : CONDITION
-  $z
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Dowhile.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          do
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $x
+              Label : THEN
+                {}
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $y
+          Label : CONDITION
+            $z

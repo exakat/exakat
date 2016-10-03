@@ -1,14 +1,16 @@
-./tests/tokenizer/source/Sequence.06.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        /
-        Label : LEFT
-          2
-        Label : RIGHT
-          8
+      Label : CODE
+        ;
+        Label : ELEMENT
+          /
+          Label : LEFT
+            2
+          Label : RIGHT
+            8

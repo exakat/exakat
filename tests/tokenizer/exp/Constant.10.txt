@@ -1,11 +1,30 @@
-(
-Label : ARGUMENT
-  $x
-Label : ARGUMENT
-  ?
-  Label : CONDITION
-    $b
-  Label : ELSE
-    $c
-  Label : THEN
-    null
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Constant.10.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $x
+              Label : ARGUMENT
+                ?
+                Label : CONDITION
+                  $b
+                Label : ELSE
+                  $c
+                Label : THEN
+                  null
+            Label : NAME
+              a
+          Label : OBJECT
+            $d

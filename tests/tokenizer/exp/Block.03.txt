@@ -1,3 +1,66 @@
-(
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Block.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            empty
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $a
+            Label : NAME
+              empty
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                strrchr
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                  Label : ARGUMENT
+                    'd'
+                Label : NAME
+                  strrchr
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $e
+          Label : RIGHT
+            1
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            !
+            Label : NOT
+              empty
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $f
+              Label : NAME
+                empty
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                [
+                Label : INDEX
+                  'h'
+                Label : VARIABLE
+                  $g
+              Label : RIGHT
+                $i

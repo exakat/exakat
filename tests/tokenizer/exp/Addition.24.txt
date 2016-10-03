@@ -1,25 +1,40 @@
--
-Label : LEFT
-  $b
-Label : RIGHT
-  ->
-  Label : METHOD
-    f
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        $g
-    Label : NAME
-      f
-  Label : OBJECT
-    ::
-    Label : CLASS
-      C
-    Label : METHOD
-      d
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          'e'
-      Label : NAME
-        d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Addition.24.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            -
+            Label : LEFT
+              $b
+            Label : RIGHT
+              ->
+              Label : METHOD
+                f
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $g
+                Label : NAME
+                  f
+              Label : OBJECT
+                ::
+                Label : CLASS
+                  C
+                Label : METHOD
+                  d
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'e'
+                  Label : NAME
+                    d

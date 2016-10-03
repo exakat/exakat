@@ -2,82 +2,318 @@
 
 Glossary
 ============
-+ T
-    + throw
++ `$`
+    + `$this`
 
-      + :ref:`Exception Order <exception-order>`
-      + :ref:`Exit() Usage <exit()-usage>`
-      + :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
-      + :ref:`Null On New <null-on-new>`
-      + :ref:`Should Chain Exception <should-chain-exception>`
-      + :ref:`Throw Functioncall <throw-functioncall>`
-      + :ref:`Throws An Assignement <throws-an-assignement>`
-      + :ref:`Uncaught Exceptions <uncaught-exceptions>`
-      + :ref:`Unreachable Code <unreachable-code>`
-      + :ref:`Unresolved Catch <unresolved-catch>`
-      + :ref:`Unthrown Exception <unthrown-exception>`
-      + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
-      + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
-
-
-+ S
-    + strpos
-
-      + :ref:`Simple Regex <simple-regex>`
-      + :ref:`Strpos Comparison <strpos-comparison>`
+      + :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
+      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
+      + :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
+      + :ref:`Accessing Private <accessing-private>`
+      + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Dependant Trait <dependant-trait>`
+      + :ref:`Make Global A Property <make-global-a-property>`
+      + :ref:`Must Return Methods <must-return-methods>`
+      + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+      + :ref:`Property/Variable Confusion <property/variable-confusion>`
+      + :ref:`Redefined Default <redefined-default>`
+      + :ref:`Should Use $this <should-use-$this>`
+      + :ref:`Static Methods Called From Object <static-methods-called-from-object>`
+      + :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
+      + :ref:`Throw In Destruct <throw-in-destruct>`
+      + :ref:`Used Once Variables <used-once-variables>`
+      + :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 
 
-+ A
-    + array\\_unique
++ `*`
+    + ``**``
+
+      + :ref:`Negative Power <negative-power>`
+
+
++ `A`
+    + `ArrayAccess`
+
+      + :ref:`$this Is Not An Array <$this-is-not-an-array>`
+
+    + `array_count_values`
+
+      + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+
+    + `array_flip`
+
+      + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+
+    + `array_keys`
+
+      + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+
+    + `array_unique`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
 
 
-+ P
-    + pow
++ `B`
+    + ``break``
+
+      + :ref:`Break Outside Loop <break-outside-loop>`
+
+
++ `C`
+    + `Closure`
+
+      + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+      + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+
+    + `curl_multi_errno`
+
+      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+
+    + `curl_share_strerror`
+
+      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+
+
++ `E`
+    + `empty`
+
+      + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
+      + :ref:`Empty Blocks <empty-blocks>`
+      + :ref:`Empty Classes <empty-classes>`
+      + :ref:`Empty Function <empty-function>`
+      + :ref:`Empty Instructions <empty-instructions>`
+      + :ref:`Empty Interfaces <empty-interfaces>`
+      + :ref:`Empty List <empty-list>`
+      + :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
+      + :ref:`Empty Traits <empty-traits>`
+      + :ref:`Empty Try Catch <empty-try-catch>`
+      + :ref:`Empty With Expression <empty-with-expression>`
+      + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`Random_ Without Try <random\_-without-try>`
+      + :ref:`Results May Be Missing <results-may-be-missing>`
+      + :ref:`Useless Constructor <useless-constructor>`
+      + :ref:`Useless Instructions <useless-instructions>`
+      + :ref:`parse_str() Warning <parse\_str()-warning>`
+
+    + `eval`
+
+      + :ref:`Eval() Usage <eval()-usage>`
+      + :ref:`eval() Without Try <eval()-without-try>`
+      + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+
+
++ `F`
+    + `for()`
+
+      + :ref:`Bracketless Blocks <bracketless-blocks>`
+      + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`For Using Functioncall <for-using-functioncall>`
+      + :ref:`Sequences In For <sequences-in-for>`
+
+    + `foreach()`
+
+      + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Bracketless Blocks <bracketless-blocks>`
+      + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`No Direct Usage <no-direct-usage>`
+      + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
+
+
++ `G`
+    + `get_class`
+
+      + :ref:`Avoid get_class() <avoid-get\_class()>`
+
+
++ `I`
+    + `instanceof`
+
+      + :ref:`Avoid get_class() <avoid-get\_class()>`
+      + :ref:`Undefined Interfaces <undefined-interfaces>`
+      + :ref:`Unresolved Instanceof <unresolved-instanceof>`
+      + :ref:`Use Instanceof <use-instanceof>`
+      + :ref:`Useless Interfaces <useless-interfaces>`
+
+    + `is_iterable`
+
+      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+
+
++ `M`
+    + `mb_chr`
+
+      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+
+    + `mb_ord`
+
+      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+
+    + `mb_scrub`
+
+      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+
+    + `mb_substr`
+
+      + :ref:`Not Substr One <not-substr-one>`
+
+
++ `P`
+    + `pow`
 
       + :ref:`** For Exponent <**-for-exponent>`
       + :ref:`Negative Power <negative-power>`
-      + :ref:`Simple Regex <simple-regex>`
 
-    + preg\\_replace
+    + `preg_match`
+
+      + :ref:`Results May Be Missing <results-may-be-missing>`
+      + :ref:`Simplify Regex <simplify-regex>`
+      + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
+
+    + `preg_replace`
 
       + :ref:`Make One Call <make-one-call>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
 
-+ C
-    + curl\\_multi\\_errno
++ `R`
+    + `rand`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`Use random_int() <use-random\_int()>`
 
-    + curl\\_share\\_errno
+    + `random_bytes`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`Random_ Without Try <random\_-without-try>`
+      + :ref:`Use random_int() <use-random\_int()>`
 
-    + curl\\_share\\_strerror
+    + `random_int`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
-
-
-+ M
-    + mb\\_chr
-
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
-
-    + mb\\_ord
-
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
-
-    + mb\\_scrub
-
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`Random_ Without Try <random\_-without-try>`
+      + :ref:`Use random_int() <use-random\_int()>`
 
 
-+ I
-    + is\\_iterable
++ `S`
+    + `set_exception_handler`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
+
+    + `stripos`
+
+      + :ref:`Simplify Regex <simplify-regex>`
+
+    + `strlen`
+
+      + :ref:`Make One Call <make-one-call>`
+      + :ref:`Never Negative <never-negative>`
+      + :ref:`No Count With 0 <no-count-with-0>`
+
+    + `strpos`
+
+      + :ref:`Simplify Regex <simplify-regex>`
+      + :ref:`Strpos Comparison <strpos-comparison>`
+
+    + `switch()`
+
+      + :ref:`Bracketless Blocks <bracketless-blocks>`
+      + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`Switch To Switch <switch-to-switch>`
+      + :ref:`Switch Without Default <switch-without-default>`
+
+    + `sys_get_temp_dir`
+
+      + :ref:`No Hardcoded Path <no-hardcoded-path>`
+      + :ref:`Use System Tmp <use-system-tmp>`
+
+
++ `T`
+    + `Throwable`
+
+      + :ref:`Empty Try Catch <empty-try-catch>`
+      + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
+
+    + `throw`
+
+      + :ref:`Exception Order <exception-order>`
+      + :ref:`Exit() Usage <exit()-usage>`
+      + :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
+      + :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
+      + :ref:`Should Chain Exception <should-chain-exception>`
+      + :ref:`Switch Without Default <switch-without-default>`
+      + :ref:`Throw Functioncall <throw-functioncall>`
+      + :ref:`Throw In Destruct <throw-in-destruct>`
+      + :ref:`Throws An Assignement <throws-an-assignement>`
+      + :ref:`Unreachable Code <unreachable-code>`
+      + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
+
+
++ `U`
+    + `uasort`
+
+      + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+
+    + `uksort`
+
+      + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+
+    + `usort`
+
+      + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+
+
++ `W`
+    + `while()`
+
+      + :ref:`Bracketless Blocks <bracketless-blocks>`
+      + :ref:`Break Outside Loop <break-outside-loop>`
+
+
++ `_`
+    + `__call`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+
+    + `__construct`
+
+      + :ref:`Make Global A Property <make-global-a-property>`
+      + :ref:`Non Ascii Variables <non-ascii-variables>`
+      + :ref:`Old Style Constructor <old-style-constructor>`
+      + :ref:`Redefined Default <redefined-default>`
+      + :ref:`Throw In Destruct <throw-in-destruct>`
+
+    + `__debugInfo`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+      + :ref:`__debugInfo() <\_\_debuginfo()>`
+
+    + `__destruct`
+
+      + :ref:`Throw In Destruct <throw-in-destruct>`
+
+    + `__get`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+      + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+
+    + `__invoke`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+
+    + `__isset`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+
+    + `__set`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+      + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+
+    + `__sleep`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+
+    + `__toString`
+
+      + :ref:`Must Return Methods <must-return-methods>`
+      + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
 
 

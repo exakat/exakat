@@ -1,58 +1,60 @@
-./tests/tokenizer/source/_Interface.11.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Interface.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        interface
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            Void
-        Label : NAME
-          i
-      Label : ELEMENT
-        interface
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            Void
-        Label : NAME
-          i1
-        Label : DEFINITION
-          i1
-        Label : DEFINITION
-          i1
-        Label : EXTENDS
-          i2
-      Label : ELEMENT
-        interface
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            Void
-        Label : NAME
-          i3
-        Label : DEFINITION
-          i3
-        Label : EXTENDS
-          i1
-        Label : EXTENDS
-          i2
-      Label : ELEMENT
-        interface
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            Void
-        Label : NAME
-          i4
-        Label : EXTENDS
-          i1
-        Label : EXTENDS
-          i2
-        Label : EXTENDS
-          i3
+      Label : CODE
+        ;
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            i
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            i1
+          Label : DEFINITION
+            i1
+          Label : DEFINITION
+            i1
+          Label : EXTENDS
+            i2
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            i3
+          Label : DEFINITION
+            i3
+          Label : EXTENDS
+            i1
+          Label : EXTENDS
+            i2
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            i4
+          Label : EXTENDS
+            i1
+          Label : EXTENDS
+            i2
+          Label : EXTENDS
+            i3

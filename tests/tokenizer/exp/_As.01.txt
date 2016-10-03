@@ -1,9 +1,39 @@
-as
-Label : AS
-  I
-Label : NAME
-  ::
-  Label : CLASS
-    F
-  Label : CONSTANT
-    H
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_As.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    I
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      F
+                    Label : CONSTANT
+                      H
+              Label : USE
+                \
+                Label : SUBNAME
+                  D
+                Label : SUBNAME
+                  E
+                Label : SUBNAME
+                  F
+          Label : EXTENDS
+            C
+          Label : NAME
+            B

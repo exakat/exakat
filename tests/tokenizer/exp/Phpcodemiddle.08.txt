@@ -1,5 +1,103 @@
-+
-Label : LEFT
-  $d
-Label : RIGHT
-  0
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcodemiddle.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                [
+                Label : INDEX
+                  $d
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    B
+            Label : ELEMENT
+              C
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  +
+                  Label : LEFT
+                    $d
+                  Label : RIGHT
+                    0
+              Label : NAME
+                echo
+            Label : ELEMENT
+              D
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                ->
+                Label : OBJECT
+                  ->
+                  Label : METHOD
+                    E
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      E
+                  Label : OBJECT
+                    $this
+                Label : PROPERTY
+                  F
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'G'
+                  Label : NAME
+                    echo
+            Label : ELEMENT
+              H
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    I
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      I
+                  Label : OBJECT
+                    $c
+              Label : NAME
+                echo
+            Label : ELEMENT
+              J
+            Label : ELEMENT
+              ++
+              Label : PREPLUSPLUS
+                $d
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b
+        Label : ELEMENT
+          Void

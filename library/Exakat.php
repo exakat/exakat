@@ -21,8 +21,8 @@
 */
 
 class Exakat {
-    const VERSION = '0.7.9';
-    const BUILD = 392;
+    const VERSION = '0.8.3';
+    const BUILD = 432;
     
     private $gremlin = null;
     
@@ -30,7 +30,7 @@ class Exakat {
         $this->gremlin = $gremlin;
     }
     
-    public function execute(Config $config) {
+    public function execute(\Exakat\Config $config) {
         switch ($config->command) {
             case 'doctor' : 
                 $doctor = new Tasks\Doctor($this->gremlin);
@@ -89,11 +89,6 @@ class Exakat {
 
             case 'project' : 
                 $task = new Tasks\Project($this->gremlin);
-                $task->run($config);
-                break;
-
-            case 'projectspip' : 
-                $task = new Tasks\ProjectSpip($this->gremlin);
                 $task->run($config);
                 break;
 
@@ -164,11 +159,6 @@ class Exakat {
 
             case 'queue' : 
                 $task = new Tasks\Queue($this->gremlin);
-                $task->run($config);
-                break;
-
-            case 'vector' : 
-                $task = new Tasks\Vector($this->gremlin);
                 $task->run($config);
                 break;
 

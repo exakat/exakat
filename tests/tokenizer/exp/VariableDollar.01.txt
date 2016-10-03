@@ -1,3 +1,32 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/VariableDollar.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            ::
+            Label : CLASS
+              $
+              Label : NAME
+                .
+                Label : CONCAT
+                  $a
+                Label : CONCAT
+                  "_1"
+            Label : METHOD
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                foo

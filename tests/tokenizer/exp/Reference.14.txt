@@ -1,5 +1,20 @@
-[
-Label : INDEX
-  1
-Label : VARIABLE
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Reference.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $y
+          Label : RIGHT
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              $x

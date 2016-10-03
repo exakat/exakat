@@ -1,7 +1,136 @@
--
-Label : LEFT
-  yield
-  Label : CODE
-    Void
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yield.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          x
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  yield
+                  Label : YIELD
+                    -1
+              Label : NAME
+                echo
+            Label : ELEMENT
+              yield
+              Label : YIELD
+                Void
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  -
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      Void
+                  Label : RIGHT
+                    1
+              Label : NAME
+                echo
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  yield
+                  Label : YIELD
+                    (
+                    Label : CODE
+                      -1
+              Label : NAME
+                echo
+            Label : ELEMENT
+              yield
+              Label : YIELD
+                or
+                Label : LEFT
+                  $foo
+                Label : RIGHT
+                  die
+                  Label : ARGUMENTS
+                    Void
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    die
+            Label : ELEMENT
+              yield
+              Label : YIELD
+                (
+                Label : CODE
+                  or
+                  Label : LEFT
+                    $foo
+                  Label : RIGHT
+                    die
+                    Label : ARGUMENTS
+                      Void
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      die
+            Label : ELEMENT
+              or
+              Label : LEFT
+                (
+                Label : CODE
+                  yield
+                  Label : YIELD
+                    $foo
+              Label : RIGHT
+                die
+                Label : ARGUMENTS
+                  Void
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  die
+          Label : DEFINITION
+            x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              x
+          Label : NAME
+            x
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              var_dump
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $y
+              Label : NAME
+                var_dump
+          Label : SOURCE
+            x
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              x
+          Label : VALUE
+            $y

@@ -1,9 +1,38 @@
-as
-Label : AS
-  d
-Label : NAME
-  ::
-  Label : CLASS
-    c
-  Label : CONSTANT
-    reset
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.39.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  as
+                  Label : AS
+                    d
+                  Label : NAME
+                    ::
+                    Label : CLASS
+                      c
+                    Label : CONSTANT
+                      reset
+              Label : USE
+                b
+            Label : ELEMENT
+              protected
+              Label : PPP
+                $e
+              Label : PROTECTED
+                protected
+          Label : NAME
+            a

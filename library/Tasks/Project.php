@@ -36,7 +36,7 @@ class Project extends Tasks {
     
     const TOTAL_STEPS = 23; // 2 Reports + 10 Analyzes + 10 other steps
 
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $this->config = $config;
         
         $progress = 0;
@@ -98,14 +98,14 @@ class Project extends Tasks {
                         4 => '-u',
                         );
         
-        $configThema = \Config::push($args);
+        $configThema = \Exakat\Config::push($args);
 
         $analyze = new FindExternalLibraries($this->gremlin);
         $analyze->run($configThema);
         unset($report);
         $this->updateProgress($progress++);
 
-        \Config::pop();
+        \Exakat\Config::pop();
         unset($analyze);
         $this->updateProgress($progress++);
 
@@ -146,7 +146,7 @@ class Project extends Tasks {
                             );
             
             try {
-                $configThema = \Config::push($args);
+                $configThema = \Exakat\Config::push($args);
 
                 $analyze = new Analyze($this->gremlin);
                 $analyze->run($configThema);
@@ -155,7 +155,7 @@ class Project extends Tasks {
                 rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
                 $this->updateProgress($progress++);
 
-                \Config::pop();
+                \Exakat\Config::pop();
             } catch (\Exception $e) {
                 echo "Error while running the Analyze $theme \n",
                      $e->getMessage();
@@ -175,7 +175,7 @@ class Project extends Tasks {
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
-        $oldConfig = \Config::factory();
+        $oldConfig = \Exakat\Config::factory();
         foreach($this->reports as $reportName => $formats) {
             foreach($formats as $format => $fileName) {
                 display("Reporting $reportName in $format\n");
@@ -189,7 +189,7 @@ class Project extends Tasks {
                                 6 => '-format',
                                 7 => $format,
                                 );
-                $config = \Config::factory($args);
+                $config = \Exakat\Config::factory($args);
             
                 try {
                     $report = new Report2($this->gremlin);
@@ -202,7 +202,7 @@ class Project extends Tasks {
                 }
             }
         }
-        \Config::factory($oldConfig);
+        \Exakat\Config::factory($oldConfig);
 
         display("Reported project\n");
 

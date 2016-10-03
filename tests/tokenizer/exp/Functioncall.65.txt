@@ -1,17 +1,121 @@
--
-Label : LEFT
-  )
-  Label : CODE
-    =
-    Label : LEFT
-      $c
-    Label : RIGHT
-      strlen
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          $d
-      Label : NAME
-        strlen
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.65.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ord
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  -
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      =
+                      Label : LEFT
+                        $c
+                      Label : RIGHT
+                        strlen
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            $d
+                        Label : NAME
+                          strlen
+                  Label : RIGHT
+                    1
+                Label : VARIABLE
+                  $b
+            Label : NAME
+              ord
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              (
+              Label : CODE
+                1
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              (
+              Label : CODE
+                1
+            Label : ARGUMENT
+              (
+              Label : CODE
+                3
+          Label : NAME
+            echo
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              (
+              Label : CODE
+                $d
+          Label : NAME
+            print
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            3
+            Label : ARGUMENT
+              +
+              Label : LEFT
+                (
+                Label : CODE
+                  'a'
+              Label : RIGHT
+                3
+          Label : NAME
+            include
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              print
+              Label : ARGUMENTS
+                '1'
+                Label : ARGUMENT
+                  '1'
+              Label : NAME
+                print
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+               
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $x
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                Void
+          Label : NAME
+            echo

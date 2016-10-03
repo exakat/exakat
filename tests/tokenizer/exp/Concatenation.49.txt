@@ -1,15 +1,26 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  .
-  Label : CONCAT
-    'A'
-  Label : CONCAT
-    __DIR__
-  Label : CONCAT
-    \
-    Label : SUBNAME
-      C
-  Label : CONCAT
-    'D'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.49.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            .
+            Label : CONCAT
+              'A'
+            Label : CONCAT
+              __DIR__
+            Label : CONCAT
+              \
+              Label : SUBNAME
+                C
+            Label : CONCAT
+              'D'

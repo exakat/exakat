@@ -1,3 +1,70 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yield.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  yield
+                  Label : YIELD
+                    Void
+                Label : ELEMENT
+                  Void
+              Label : SOURCE
+                range
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    3
+                Label : NAME
+                  range
+              Label : VALUE
+                $i
+          Label : NAME
+            a
+          Label : DEFINITION
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              a
+        Label : ELEMENT
+          var_dump
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              iterator_to_array
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  a
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    a
+              Label : NAME
+                iterator_to_array
+          Label : NAME
+            var_dump

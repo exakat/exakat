@@ -1,5 +1,47 @@
-=
-Label : LEFT
-  $c
-Label : RIGHT
-  $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.54.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ->
+            Label : OBJECT
+              $f
+            Label : PROPERTY
+              h
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                2
+          Label : THEN
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                $f
+              Label : ELSE
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    3
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    $d

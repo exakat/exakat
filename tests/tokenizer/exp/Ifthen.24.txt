@@ -1,5 +1,48 @@
-[
-Label : INDEX
-  'b'
-Label : VARIABLE
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.24.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            [
+            Label : INDEX
+              'b'
+            Label : VARIABLE
+              $a
+          Label : THEN
+            ;
+            Label : ELEMENT
+              for
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : FINAL
+                ;
+                Label : ELEMENT
+                  <=
+                  Label : LEFT
+                    $d
+                  Label : RIGHT
+                    8
+              Label : INCREMENT
+                ;
+                Label : ELEMENT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $e
+              Label : INIT
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    1

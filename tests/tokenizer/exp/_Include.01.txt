@@ -1,3 +1,42 @@
-'path'
-Label : ARGUMENT
-  'path'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          include_once
+          Label : ARGUMENTS
+            'path'
+            Label : ARGUMENT
+              'path'
+          Label : NAME
+            include_once
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            'path'
+            Label : ARGUMENT
+              'path'
+          Label : NAME
+            include
+        Label : ELEMENT
+          require_once
+          Label : ARGUMENTS
+            'path'
+            Label : ARGUMENT
+              'path'
+          Label : NAME
+            require_once
+        Label : ELEMENT
+          require
+          Label : ARGUMENTS
+            'path'
+            Label : ARGUMENT
+              'path'
+          Label : NAME
+            require

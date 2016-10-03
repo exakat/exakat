@@ -1,3 +1,18 @@
-(
-Label : ARGUMENT
-  true
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.38.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          die
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              true
+          Label : NAME
+            die

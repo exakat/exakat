@@ -1,9 +1,20 @@
-class
-Label : BLOCK
-  {}
-  Label : ELEMENT
-    Void
-Label : FINAL
-  final
-Label : NAME
-  y
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Final.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : FINAL
+            final
+          Label : NAME
+            y

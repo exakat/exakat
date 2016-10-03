@@ -1,1 +1,1188 @@
-abstract
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yieldfrom.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          assert
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              &&
+              Label : LEFT
+                0
+              Label : RIGHT
+                (
+                Label : CODE
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                     
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $a
+                        Label : TYPEHINT
+                          array
+                      Label : ARGUMENT
+                        $b
+                        Label : DEFAULT
+                          null
+                        Label : TYPEHINT
+                          X
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        class
+                        Label : ABSTRACT
+                          abstract
+                        Label : BLOCK
+                          {}
+                          Label : ELEMENT
+                            const
+                            Label : CONST
+                              const
+                              Label : NAME
+                                X
+                                Label : DEFINITION
+                                  X
+                              Label : VALUE
+                                12
+                          Label : ELEMENT
+                            const
+                            Label : CONST
+                              const
+                              Label : NAME
+                                Y
+                              Label : VALUE
+                                ::
+                                Label : CLASS
+                                  self
+                                Label : CONSTANT
+                                  X
+                            Label : CONST
+                              ,
+                              Label : NAME
+                                Z
+                              Label : VALUE
+                                "aaa"
+                          Label : ELEMENT
+                            public
+                            Label : PUBLIC
+                              public
+                            Label : PPP
+                              $b
+                            Label : PPP
+                              =
+                              Label : LEFT
+                                $a
+                              Label : RIGHT
+                                1
+                          Label : ELEMENT
+                            protected
+                            Label : PPP
+                              $c
+                            Label : PROTECTED
+                              protected
+                          Label : ELEMENT
+                            private
+                            Label : PPP
+                              =
+                              Label : LEFT
+                                $d
+                              Label : RIGHT
+                                null
+                            Label : PRIVATE
+                              private
+                            Label : STATIC
+                              static
+                          Label : ELEMENT
+                            foo
+                            Label : ABSTRACT
+                              abstract
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                Void
+                            Label : BLOCK
+                              Void
+                            Label : NAME
+                              foo
+                          Label : ELEMENT
+                            f1
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                Void
+                            Label : BLOCK
+                              {}
+                              Label : ELEMENT
+                                for
+                                Label : BLOCK
+                                  {}
+                                  Label : ELEMENT
+                                    =
+                                    Label : LEFT
+                                      [
+                                      Label : INDEX
+                                        $i
+                                      Label : VARIABLE
+                                        $s
+                                    Label : RIGHT
+                                      [
+                                      Label : INDEX
+                                        $j
+                                      Label : VARIABLE
+                                        $a
+                                Label : FINAL
+                                  ;
+                                  Label : ELEMENT
+                                    <
+                                    Label : LEFT
+                                      $i
+                                    Label : RIGHT
+                                      $j
+                                Label : INCREMENT
+                                  ;
+                                  Label : ELEMENT
+                                    ++
+                                    Label : POSTPLUSPLUS
+                                      $i
+                                  Label : ELEMENT
+                                    --
+                                    Label : PREPLUSPLUS
+                                      $j
+                                Label : INIT
+                                  ;
+                                  Label : ELEMENT
+                                    =
+                                    Label : LEFT
+                                      $i
+                                    Label : RIGHT
+                                      0
+                                  Label : ELEMENT
+                                    =
+                                    Label : LEFT
+                                      $j
+                                    Label : RIGHT
+                                      100
+                              Label : ELEMENT
+                                foreach
+                                Label : BLOCK
+                                  {}
+                                  Label : ELEMENT
+                                    print
+                                    Label : ARGUMENTS
+                                      "
+                                      Label : ARGUMENT
+                                        "
+                                        Label : CONCAT
+                                          $key
+                                        Label : CONCAT
+                                           => 
+                                        Label : CONCAT
+                                          $val
+                                        Label : CONCAT
+                                          \n
+                                    Label : NAME
+                                      print
+                                Label : SOURCE
+                                  $a
+                                Label : VALUE
+                                  =>
+                                  Label : KEY
+                                    $key
+                                  Label : VALUE
+                                    $val
+                              Label : ELEMENT
+                                while
+                                Label : BLOCK
+                                  {}
+                                  Label : ELEMENT
+                                    ++
+                                    Label : POSTPLUSPLUS
+                                      $i
+                                Label : CONDITION
+                                  [
+                                  Label : INDEX
+                                    $i
+                                  Label : VARIABLE
+                                    $s
+                              Label : ELEMENT
+                                do
+                                Label : BLOCK
+                                  {}
+                                  Label : ELEMENT
+                                    --
+                                    Label : POSTPLUSPLUS
+                                      $i
+                                Label : CONDITION
+                                  [
+                                  Label : INDEX
+                                    $i
+                                  Label : VARIABLE
+                                    $s
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  foo
+                                  Label : ARGUMENTS
+                                    (
+                                    Label : ARGUMENT
+                                      +
+                                      Label : LEFT
+                                        $a
+                                      Label : RIGHT
+                                        1
+                                    Label : ARGUMENT
+                                      4
+                                    Label : ARGUMENT
+                                      [
+                                      Label : ARGUMENTS
+                                        [
+                                        Label : ARGUMENT
+                                          1
+                                        Label : ARGUMENT
+                                          2
+                                        Label : ARGUMENT
+                                          3
+                                      Label : VARIABLE
+                                        [
+                                  Label : NAME
+                                    foo
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  $
+                                  Label : ARGUMENTS
+                                    (
+                                    Label : ARGUMENT
+                                      Void
+                                  Label : NAME
+                                    $
+                                    Label : NAME
+                                      .
+                                      Label : CONCAT
+                                        $a
+                                      Label : CONCAT
+                                        "_1"
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  ::
+                                  Label : CLASS
+                                    A
+                                  Label : METHOD
+                                    foo
+                                    Label : ARGUMENTS
+                                      (
+                                      Label : ARGUMENT
+                                        Void
+                                    Label : NAME
+                                      foo
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  ::
+                                  Label : CLASS
+                                    $
+                                    Label : NAME
+                                      .
+                                      Label : CONCAT
+                                        $a
+                                      Label : CONCAT
+                                        "_1"
+                                  Label : METHOD
+                                    foo
+                                    Label : ARGUMENTS
+                                      (
+                                      Label : ARGUMENT
+                                        Void
+                                    Label : NAME
+                                      foo
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  ::
+                                  Label : CLASS
+                                    A
+                                  Label : METHOD
+                                    $
+                                    Label : ARGUMENTS
+                                      (
+                                      Label : ARGUMENT
+                                        Void
+                                    Label : NAME
+                                      $
+                                      Label : NAME
+                                        .
+                                        Label : CONCAT
+                                          $a
+                                        Label : CONCAT
+                                          "_1"
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  ->
+                                  Label : METHOD
+                                    foo
+                                    Label : ARGUMENTS
+                                      (
+                                      Label : ARGUMENT
+                                        Void
+                                    Label : NAME
+                                      foo
+                                  Label : OBJECT
+                                    $x
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  ->
+                                  Label : METHOD
+                                    foo
+                                    Label : ARGUMENTS
+                                      (
+                                      Label : ARGUMENT
+                                        Void
+                                    Label : NAME
+                                      foo
+                                  Label : OBJECT
+                                    $
+                                    Label : NAME
+                                      .
+                                      Label : CONCAT
+                                        $a
+                                      Label : CONCAT
+                                        "_1"
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  ->
+                                  Label : METHOD
+                                    {}
+                                    Label : ARGUMENTS
+                                      (
+                                      Label : ARGUMENT
+                                        Void
+                                    Label : NAME
+                                      {}
+                                      Label : CODE
+                                        .
+                                        Label : CONCAT
+                                          $a
+                                        Label : CONCAT
+                                          "_1"
+                                  Label : OBJECT
+                                    $x
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  ->
+                                  Label : OBJECT
+                                    $x
+                                  Label : PROPERTY
+                                    a
+                                Label : RIGHT
+                                  ::
+                                  Label : CLASS
+                                    C
+                                  Label : CONSTANT
+                                    C
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  ->
+                                  Label : OBJECT
+                                    $
+                                    Label : NAME
+                                      .
+                                      Label : CONCAT
+                                        $a
+                                      Label : CONCAT
+                                        "_1"
+                                  Label : PROPERTY
+                                    a
+                                Label : RIGHT
+                                  ::
+                                  Label : CLASS
+                                    $
+                                    Label : NAME
+                                      .
+                                      Label : CONCAT
+                                        $a
+                                      Label : CONCAT
+                                        "_1"
+                                  Label : CONSTANT
+                                    C
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  ->
+                                  Label : OBJECT
+                                    $x
+                                  Label : PROPERTY
+                                    {}
+                                    Label : CODE
+                                      .
+                                      Label : CONCAT
+                                        a
+                                      Label : CONCAT
+                                        "_1"
+                                Label : RIGHT
+                                  ::
+                                  Label : CLASS
+                                    C
+                                  Label : CONSTANT
+                                    C
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  ::
+                                  Label : CLASS
+                                    C
+                                  Label : PROPERTY
+                                    $z
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  ::
+                                  Label : CLASS
+                                    $
+                                    Label : NAME
+                                      .
+                                      Label : CONCAT
+                                        $a
+                                      Label : CONCAT
+                                        "_1"
+                                  Label : PROPERTY
+                                    $z
+                              Label : ELEMENT
+                                =
+                                Label : LEFT
+                                  $x
+                                Label : RIGHT
+                                  ::
+                                  Label : CLASS
+                                    C
+                                  Label : PROPERTY
+                                    $
+                                    Label : NAME
+                                      .
+                                      Label : CONCAT
+                                        $z
+                                      Label : CONCAT
+                                        "_1"
+                            Label : NAME
+                              f1
+                            Label : PRIVATE
+                              private
+                            Label : STATIC
+                              static
+                        Label : DEFINITION
+                          A
+                        Label : DEFINITION
+                          A
+                        Label : DEFINITION
+                          self
+                        Label : EXTENDS
+                          B
+                        Label : IMPLEMENTS
+                          C
+                        Label : IMPLEMENTS
+                          D
+                        Label : NAME
+                          A
+                    Label : NAME
+                      Void
+                    Label : USE
+                      (
+                      Label : ARGUMENT
+                        $c
+                      Label : ARGUMENT
+                        $d
+          Label : NAME
+            assert
+        Label : ELEMENT
+          assert
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              &&
+              Label : LEFT
+                0
+              Label : RIGHT
+                (
+                Label : CODE
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                     
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $a
+                        Label : TYPEHINT
+                          array
+                      Label : ARGUMENT
+                        $b
+                        Label : DEFAULT
+                          null
+                        Label : TYPEHINT
+                          X
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        class
+                        Label : BLOCK
+                          {}
+                          Label : ELEMENT
+                            f2
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                Void
+                            Label : BLOCK
+                              {}
+                              Label : ELEMENT
+                                if
+                                Label : CONDITION
+                                  !
+                                  Label : NOT
+                                    $x
+                                Label : THEN
+                                  {}
+                                  Label : ELEMENT
+                                    return
+                                    Label : RETURN
+                                      0
+                              Label : ELEMENT
+                                if
+                                Label : CONDITION
+                                  ==
+                                  Label : LEFT
+                                    $x
+                                  Label : RIGHT
+                                    1
+                                Label : ELSE
+                                  ;
+                                  Label : ELEMENT
+                                    if
+                                    Label : CONDITION
+                                      ==
+                                      Label : LEFT
+                                        $x
+                                      Label : RIGHT
+                                        2
+                                    Label : ELSE
+                                      ;
+                                      Label : ELEMENT
+                                        if
+                                        Label : CONDITION
+                                          ==
+                                          Label : LEFT
+                                            $x
+                                          Label : RIGHT
+                                            3
+                                        Label : ELSE
+                                          {}
+                                          Label : ELEMENT
+                                            if
+                                            Label : CONDITION
+                                              ==
+                                              Label : LEFT
+                                                $x
+                                              Label : RIGHT
+                                                9
+                                            Label : THEN
+                                              {}
+                                              Label : ELEMENT
+                                                return
+                                                Label : RETURN
+                                                  9
+                                          Label : ELEMENT
+                                            :
+                                            Label : LABEL
+                                              L0
+                                          Label : ELEMENT
+                                            do
+                                            Label : BLOCK
+                                              {}
+                                              Label : ELEMENT
+                                                switch
+                                                Label : CASES
+                                                   /**/ 
+                                                  Label : ELEMENT
+                                                    case 4 :  /**/  
+                                                    Label : CASE
+                                                      4
+                                                    Label : CODE
+                                                      ;
+                                                      Label : ELEMENT
+                                                        break
+                                                        Label : BREAK
+                                                          Void
+                                                  Label : ELEMENT
+                                                    case 5 :  /**/  
+                                                    Label : CASE
+                                                      5
+                                                    Label : CODE
+                                                      ;
+                                                      Label : ELEMENT
+                                                        continue
+                                                        Label : CONTINUE
+                                                          Void
+                                                  Label : ELEMENT
+                                                    case 6 :  /**/  
+                                                    Label : CASE
+                                                      6
+                                                    Label : CODE
+                                                      ;
+                                                      Label : ELEMENT
+                                                        break
+                                                        Label : BREAK
+                                                          2
+                                                  Label : ELEMENT
+                                                    case 7 :  /**/  
+                                                    Label : CASE
+                                                      7
+                                                    Label : CODE
+                                                      ;
+                                                      Label : ELEMENT
+                                                        continue
+                                                        Label : CONTINUE
+                                                          2
+                                                  Label : ELEMENT
+                                                    case 8 :  /**/  
+                                                    Label : CASE
+                                                      8
+                                                    Label : CODE
+                                                      ;
+                                                      Label : ELEMENT
+                                                        goto
+                                                        Label : GOTO
+                                                          L0
+                                                  Label : ELEMENT
+                                                    default
+                                                    Label : CODE
+                                                      ;
+                                                      Label : ELEMENT
+                                                        return
+                                                        Label : RETURN
+                                                          Void
+                                                Label : NAME
+                                                  $x
+                                            Label : CONDITION
+                                              0
+                                        Label : THEN
+                                          {}
+                                          Label : ELEMENT
+                                            return
+                                            Label : RETURN
+                                              3
+                                    Label : THEN
+                                      {}
+                                      Label : ELEMENT
+                                        return
+                                        Label : RETURN
+                                          2
+                                Label : THEN
+                                  {}
+                                  Label : ELEMENT
+                                    return
+                                    Label : RETURN
+                                      1
+                            Label : FINAL
+                              final
+                            Label : NAME
+                              f2
+                            Label : PROTECTED
+                              protected
+                        Label : DEFINITION
+                          A
+                        Label : DEFINITION
+                          A
+                        Label : FINAL
+                          final
+                        Label : NAME
+                          A
+                    Label : NAME
+                      Void
+                    Label : USE
+                      (
+                      Label : ARGUMENT
+                        $c
+                      Label : ARGUMENT
+                        $d
+          Label : NAME
+            assert
+        Label : ELEMENT
+          assert
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              &&
+              Label : LEFT
+                0
+              Label : RIGHT
+                (
+                Label : CODE
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                     
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $a
+                        Label : TYPEHINT
+                          array
+                      Label : ARGUMENT
+                        $b
+                        Label : DEFAULT
+                          null
+                        Label : TYPEHINT
+                          X
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        class
+                        Label : BLOCK
+                          {}
+                          Label : ELEMENT
+                            use
+                            Label : BLOCK
+                              {}
+                              Label : ELEMENT
+                                insteadof
+                                Label : INSTEADOF
+                                  foo
+                                Label : NAME
+                                  ::
+                                  Label : CLASS
+                                    T1
+                                  Label : CONSTANT
+                                    foo
+                              Label : ELEMENT
+                                as
+                                Label : AS
+                                  bar
+                                Label : NAME
+                                  ::
+                                  Label : CLASS
+                                    T2
+                                  Label : CONSTANT
+                                    foo
+                              Label : ELEMENT
+                                as
+                                Label : AS
+                                  Void
+                                Label : NAME
+                                  baz
+                                Label : PUBLIC
+                                  public
+                              Label : ELEMENT
+                                as
+                                Label : AS
+                                  x
+                                Label : NAME
+                                  ops
+                                Label : PROTECTED
+                                  protected
+                            Label : USE
+                              T1
+                            Label : USE
+                              T2
+                          Label : ELEMENT
+                            use
+                            Label : USE
+                              T3
+                        Label : DEFINITION
+                          A
+                        Label : DEFINITION
+                          A
+                        Label : NAME
+                          A
+                    Label : NAME
+                      Void
+                    Label : USE
+                      (
+                      Label : ARGUMENT
+                        $c
+                      Label : ARGUMENT
+                        $d
+          Label : NAME
+            assert
+        Label : ELEMENT
+          assert
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              &&
+              Label : LEFT
+                0
+              Label : RIGHT
+                (
+                Label : CODE
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                     
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $a
+                        Label : TYPEHINT
+                          array
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        declare
+                        Label : BLOCK
+                          ;
+                          Label : ELEMENT
+                            Void
+                        Label : DECLARE
+                          (
+                          Label : ARGUMENT
+                            =
+                            Label : LEFT
+                              A
+                            Label : RIGHT
+                              1
+                          Label : ARGUMENT
+                            =
+                            Label : LEFT
+                              B
+                            Label : RIGHT
+                              2
+                      Label : ELEMENT
+                        try
+                        Label : BLOCK
+                          {}
+                          Label : ELEMENT
+                            ++
+                            Label : POSTPLUSPLUS
+                              $i
+                        Label : FINALLY
+                          finally
+                          Label : BLOCK
+                            {}
+                            Label : ELEMENT
+                              echo
+                              Label : ARGUMENTS
+                                echo
+                                Label : ARGUMENT
+                                  3
+                              Label : NAME
+                                echo
+                        Label : CATCH
+                          catch
+                          Label : BLOCK
+                            {}
+                            Label : ELEMENT
+                              echo
+                              Label : ARGUMENTS
+                                echo
+                                Label : ARGUMENT
+                                  1
+                              Label : NAME
+                                echo
+                          Label : CLASS
+                            MyException
+                          Label : VARIABLE
+                            $e
+                        Label : CATCH
+                          catch
+                          Label : BLOCK
+                            {}
+                            Label : ELEMENT
+                              echo
+                              Label : ARGUMENTS
+                                echo
+                                Label : ARGUMENT
+                                  2
+                              Label : NAME
+                                echo
+                          Label : CLASS
+                            Exception
+                          Label : VARIABLE
+                            $e
+                    Label : NAME
+                      Void
+          Label : NAME
+            assert
+        Label : ELEMENT
+          assert
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              &&
+              Label : LEFT
+                0
+              Label : RIGHT
+                (
+                Label : CODE
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                     
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        declare
+                        Label : BLOCK
+                          {}
+                          Label : ELEMENT
+                            echo
+                            Label : ARGUMENTS
+                              echo
+                              Label : ARGUMENT
+                                1
+                            Label : NAME
+                              echo
+                        Label : DECLARE
+                          (
+                          Label : ARGUMENT
+                            =
+                            Label : LEFT
+                              C
+                            Label : RIGHT
+                              1
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          '\'"`$a'
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          "
+                          Label : CONCAT
+                            '\"`
+                          Label : CONCAT
+                            $a
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          `
+                          Label : CONCAT
+                            '"\`
+                          Label : CONCAT
+                            $a
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          "
+                          Label : CONCAT
+                            $a
+                          Label : CONCAT
+                            b
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          "
+                          Label : CONCAT
+                            a
+                          Label : CONCAT
+                            b
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          "
+                          Label : CONCAT
+                             
+                          Label : CONCAT
+                            ->
+                            Label : OBJECT
+                              $foo
+                            Label : PROPERTY
+                              bar
+                          Label : CONCAT
+                             
+                          Label : CONCAT
+                            ->
+                            Label : OBJECT
+                              $foo
+                            Label : PROPERTY
+                              bar
+                          Label : CONCAT
+                             
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          "
+                          Label : CONCAT
+                             
+                          Label : CONCAT
+                            '---'
+                          Label : CONCAT
+                             
+                      Label : ELEMENT
+                        foo
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          foo
+                      Label : ELEMENT
+                        \
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          \
+                          Label : SUBNAME
+                            foo
+                      Label : ELEMENT
+                        \
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          \
+                          Label : SUBNAME
+                            namespace
+                          Label : SUBNAME
+                            foo
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          foo
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          \
+                          Label : SUBNAME
+                            foo
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          \
+                          Label : SUBNAME
+                            namespace
+                          Label : SUBNAME
+                            foo
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          new
+                          Label : NEW
+                            foo
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                Void
+                            Label : NAME
+                              foo
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          new
+                          Label : NEW
+                            \
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                Void
+                            Label : NAME
+                              \
+                              Label : SUBNAME
+                                foo
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $x
+                        Label : RIGHT
+                          new
+                          Label : NEW
+                            \
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                Void
+                            Label : NAME
+                              \
+                              Label : SUBNAME
+                                namespace
+                              Label : SUBNAME
+                                foo
+                      Label : ELEMENT
+                        if
+                        Label : CONDITION
+                          $a
+                        Label : ELSE
+                          elseif
+                          Label : CONDITION
+                            $b
+                          Label : THEN
+                            {}
+                            Label : ELEMENT
+                              Void
+                        Label : THEN
+                          {}
+                          Label : ELEMENT
+                            Void
+                    Label : NAME
+                      Void
+          Label : NAME
+            assert

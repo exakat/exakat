@@ -34,7 +34,7 @@ class Dependencies extends Reports {
     }
 
     public function generate($folder, $name= 'dependencies') {
-        $graph = new \Graph\Gremlin2(\Config::factory());
+        $graph = new \Graph\Gremlin2(\Exakat\Config::factory());
         
         $links    = [];
         $nodes    = ['class' => [], 'trait' => [], 'interface' => [], 'unknown' => []];

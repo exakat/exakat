@@ -1,5 +1,26 @@
-[
-Label : INDEX
-  1
-Label : VARIABLE
-  $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              1
+            Label : ELSE
+              [
+              Label : INDEX
+                1
+              Label : VARIABLE
+                $b
+            Label : THEN
+              2

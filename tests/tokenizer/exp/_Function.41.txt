@@ -1,11 +1,38 @@
-(
-Label : ARGUMENT
-  $b
-Label : ARGUMENT
-  $c
-Label : ARGUMENT
-  $d
-Label : ARGUMENT
-  $e
-  Label : TYPEHINT
-    Stdclass
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.41.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+             
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                $d
+              Label : ARGUMENT
+                $e
+                Label : TYPEHINT
+                  Stdclass
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $a
+            Label : NAME
+              Void
+        Label : ELEMENT
+          Void

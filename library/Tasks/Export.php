@@ -24,18 +24,23 @@
 namespace Tasks;
 
 class Export extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         $queryTemplate = 'g.V().not(hasId(0))';
 
         $result = $this->gremlin->query($queryTemplate);
         $vertices = (array) $result->results;
 
         $V = array();
+        $root = 0;
         foreach($vertices as $v) {
             $x = $v->id;
             $vv = array();
             foreach($v->properties as $key => $value) {
                 $vv[$key] = $value[0]->value;
+                
+                if ($key === 'token' && $value[0]->value == 'T_WHOLE') {
+                    $root = $x;
+                }
             }
             $V[$x] =  $vv;
         }
@@ -60,7 +65,6 @@ class Export extends Tasks {
             }
         }
 
-        $root = array_keys($V)[0];
         if ($config->format == 'Dot') {
             $text = $this->display_dot($V, $E, $root);
         } elseif ($config->format  == 'Table') {
@@ -85,17 +89,16 @@ class Export extends Tasks {
     private function display_text($V, $E, $root, $level = 0) {
         $r = '';
 
-        if ($level == 7) { return '123098120398 [label="Reached level 15"]';}
-
         if (isset($V[$root])) {
             $r .= str_repeat('  ', $level).$V[$root]['code']."\n";
         }
+
         if (isset($E[$root])) {
             asort($E[$root]);
             uksort($E[$root], function ($a, $b) use ($V) {
-    if (!isset($V[$a]['rank'])) { return 0; }
-    if (!isset($V[$b]['rank'])) { return 0; }
-    return $V[$a]['rank'] > $V[$b]['rank']; });
+        if (!isset($V[$a]['rank'])) { return 0; }
+        if (!isset($V[$b]['rank'])) { return 0; }
+        return $V[$a]['rank'] > $V[$b]['rank']; });
 
             foreach($E[$root] as $id => $label) {
                 $r .= str_repeat('  ', $level).'Label : '.$label."\n".$this->display_text($V, $E, $id, $level + 1);
@@ -108,14 +111,12 @@ class Export extends Tasks {
     private function display_dot($V, $E, $root, $level = 0) {
         $r = '';
 
-        if ($level == 7) { return '123098120398 [label="Reached level 15"];
-        123098120391 [label="Reached level 15"];
-        123098120398 -> 123098120391';}
-
         foreach($V as $id => $v) {
             if (!isset($v['fullcode'])) {
                 if (isset($v['code'])) {
                     $v['fullcode'] =  $v['code'];
+                } elseif (isset($v['analyzer'])) {
+                    $v['fullcode'] =  $v['analyzer'];
                 } else {
                     $v['fullcode'] =  'NO CODE PROVIDED';
                 }
@@ -172,7 +173,7 @@ class Export extends Tasks {
                 $row[] = '';
             }
 
-            $row = '<td>'.join('</td><td>', $row).'</td>';
+            $row = '<td>'.implode('</td><td>', $row).'</td>';
             $r .= "<tr>$row</tr>\n";
         }
         $r .= '</table>';

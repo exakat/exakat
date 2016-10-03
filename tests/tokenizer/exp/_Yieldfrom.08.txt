@@ -1,3 +1,44 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Yieldfrom.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                [
+                Label : ARGUMENTS
+                  [
+                  Label : ARGUMENT
+                    =
+                    Label : LEFT
+                      $b
+                    Label : RIGHT
+                      yield from
+                      Label : YIELD
+                        c
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          c
+                Label : VARIABLE
+                  [
+          Label : NAME
+            a

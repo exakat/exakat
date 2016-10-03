@@ -42,7 +42,7 @@ class NullOnNew extends Analyzer\Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspath($names)
+             ->fullnspathIs($names)
              ->back('first');
         $this->prepareQuery();
     }

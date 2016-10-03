@@ -1,22 +1,22 @@
-./tests/tokenizer/source/_Foreach.12.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        foreach
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            Void
-        Label : SOURCE
-          @
-          Label : AT
-            $array
-        Label : VALUE
-          $e
-      Label : ELEMENT
-        Void
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : SOURCE
+            @
+            Label : AT
+              $array
+          Label : VALUE
+            $e

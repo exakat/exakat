@@ -1,17 +1,42 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $d
-  Label : PROPERTY
-    {
-    Label : INDEX
-      ++
-      Label : POSTPLUSPLUS
-        ->
-        Label : OBJECT
-          $f
-        Label : PROPERTY
-          g
-    Label : VARIABLE
-      e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Block.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            b
+            Label : APPEND
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                b
+          Label : RIGHT
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                {
+                Label : INDEX
+                  ++
+                  Label : POSTPLUSPLUS
+                    ->
+                    Label : OBJECT
+                      $f
+                    Label : PROPERTY
+                      g
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $d
+                  Label : PROPERTY
+                    e
+            Label : NAME
+              c

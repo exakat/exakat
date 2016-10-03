@@ -1,35 +1,53 @@
-echo
-Label : ARGUMENT
-  <<<HEREDOC
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Heredoc.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-  Label : CONCAT
-    a
-  Label : CONCAT
-    [
-    Label : INDEX
-      1
-    Label : VARIABLE
-      $b
-  Label : CONCAT
-    c
-  Label : CONCAT
-    [
-    Label : INDEX
-      4
-    Label : VARIABLE
-      [
-      Label : INDEX
-        2
-      Label : VARIABLE
-        $d
-  Label : CONCAT
-    e
-  Label : CONCAT
-    ->
-    Label : OBJECT
-      $f
-    Label : PROPERTY
-      h
-  Label : CONCAT
-    g
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              <<<HEREDOC
+
+              Label : CONCAT
+                a
+              Label : CONCAT
+                [
+                Label : INDEX
+                  1
+                Label : VARIABLE
+                  $b
+              Label : CONCAT
+                c
+              Label : CONCAT
+                [
+                Label : INDEX
+                  4
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    2
+                  Label : VARIABLE
+                    $d
+              Label : CONCAT
+                e
+              Label : CONCAT
+                ->
+                Label : OBJECT
+                  $f
+                Label : PROPERTY
+                  h
+              Label : CONCAT
+                g
+
+          Label : NAME
+            echo
+    Label : ELEMENT
+      
 

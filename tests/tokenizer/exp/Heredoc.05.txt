@@ -1,5 +1,52 @@
-(
-Label : ARGUMENT
-  $b
-  Label : DEFAULT
-    true
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Heredoc.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $b
+              Label : DEFAULT
+                true
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  <<< C
+
+                  Label : CONCAT
+                    D
+
+              Label : NAME
+                echo
+            Label : ELEMENT
+              ob_flush
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                ob_flush
+            Label : ELEMENT
+              exit
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                exit
+          Label : NAME
+            a
+        Label : ELEMENT
+          Void

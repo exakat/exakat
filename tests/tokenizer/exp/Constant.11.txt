@@ -1,5 +1,28 @@
-.
-Label : CONCAT
-  'a'
-Label : CONCAT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Constant.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          :
+          Label : LABEL
+            B
+        Label : ELEMENT
+          (
+          Label : CODE
+            ?
+            Label : CONDITION
+              $x
+            Label : ELSE
+              'c'
+            Label : THEN
+              .
+              Label : CONCAT
+                'a'
+              Label : CONCAT
+                Void

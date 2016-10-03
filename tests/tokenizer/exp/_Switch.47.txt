@@ -1,9 +1,46 @@
-=
-Label : LEFT
-  ->
-  Label : OBJECT
-    $enc
-  Label : PROPERTY
-    level
-Label : RIGHT
-  QR_ECLEVEL_H
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Switch.47.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 'h' :  /**/  
+              Label : CASE
+                'h'
+              Label : CODE
+                ;
+            Label : ELEMENT
+              case 'H' :  /**/  
+              Label : CASE
+                'H'
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $enc
+                    Label : PROPERTY
+                      level
+                  Label : RIGHT
+                    QR_ECLEVEL_H
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+          Label : NAME
+            .
+            Label : CONCAT
+              $level
+            Label : CONCAT
+              ''

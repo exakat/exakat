@@ -1,3 +1,66 @@
-(
-Label : ARGUMENT
-  Void
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.52.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    ::
+                    Label : CLASS
+                      static
+                    Label : PROPERTY
+                      $a
+                  Label : RIGHT
+                    new
+                    Label : NEW
+                      C
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        C
+                Label : ELEMENT
+                  ->
+                  Label : METHOD
+                    D
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      D
+                  Label : OBJECT
+                    ::
+                    Label : CLASS
+                      static
+                    Label : PROPERTY
+                      $a
+              Label : NAME
+                B
+          Label : DEFINITION
+            static
+          Label : DEFINITION
+            static
+          Label : NAME
+            x

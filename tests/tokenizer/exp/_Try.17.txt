@@ -1,0 +1,74 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Try.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          B
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  try
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      ->
+                      Label : METHOD
+                        D
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          D
+                      Label : OBJECT
+                        ->
+                        Label : OBJECT
+                          $d
+                        Label : PROPERTY
+                          C
+                    Label : ELEMENT
+                      ->
+                      Label : METHOD
+                        F
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
+                          F
+                      Label : OBJECT
+                        ->
+                        Label : OBJECT
+                          $d
+                        Label : PROPERTY
+                          C
+                  Label : CATCH
+                    catch
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        Void
+                    Label : CLASS
+                      G
+                    Label : VARIABLE
+                      $e
+              Label : SOURCE
+                $b
+              Label : VALUE
+                $c
+          Label : NAME
+            B

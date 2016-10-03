@@ -1,13 +1,57 @@
-(
-Label : ARGUMENT
-  .
-  Label : CONCAT
-    d
-  Label : CONCAT
-    (int)
-    Label : CAST
-      [
-      Label : INDEX
-        'f'
-      Label : VARIABLE
-        $e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.29.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            [
+            Label : INDEX
+              'b'
+            Label : VARIABLE
+              $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              .
+              Label : CONCAT
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      d
+                    Label : CONCAT
+                      (int)
+                      Label : CAST
+                        [
+                        Label : INDEX
+                          'f'
+                        Label : VARIABLE
+                          $e
+                Label : NAME
+                  c
+              Label : CONCAT
+                'g'
+            Label : ELSE
+              'L'
+            Label : THEN
+              .
+              Label : CONCAT
+                H
+              Label : CONCAT
+                (int)
+                Label : CAST
+                  [
+                  Label : INDEX
+                    'j'
+                  Label : VARIABLE
+                    $i
+              Label : CONCAT
+                'k'

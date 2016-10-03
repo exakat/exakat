@@ -1,7 +1,54 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    $i
-  Label : VARIABLE
-    $b
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.39.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .=
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              >
+              Label : LEFT
+                ord
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      $i
+                    Label : VARIABLE
+                      $b
+                Label : NAME
+                  ord
+              Label : RIGHT
+                127
+            Label : ELSE
+              [
+              Label : INDEX
+                $k
+              Label : VARIABLE
+                $e
+            Label : THEN
+              .
+              Label : CONCAT
+                [
+                Label : INDEX
+                  $e
+                Label : VARIABLE
+                  $c
+              Label : CONCAT
+                [
+                Label : INDEX
+                  ++
+                  Label : PREPLUSPLUS
+                    $l
+                Label : VARIABLE
+                  $d

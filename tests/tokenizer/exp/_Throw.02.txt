@@ -1,12 +1,14 @@
-./tests/tokenizer/source/_Throw.02.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Throw.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        throw
-        Label : THROW
-          $e
+      Label : CODE
+        ;
+        Label : ELEMENT
+          throw
+          Label : THROW
+            $e

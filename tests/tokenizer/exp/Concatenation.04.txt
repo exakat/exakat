@@ -1,13 +1,24 @@
-.
-Label : CONCAT
-  'a'
-Label : CONCAT
-  'b'
-Label : CONCAT
-  'c'
-Label : CONCAT
-  'd'
-Label : CONCAT
-  'e'
-Label : CONCAT
-  'f'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          .
+          Label : CONCAT
+            'a'
+          Label : CONCAT
+            'b'
+          Label : CONCAT
+            'c'
+          Label : CONCAT
+            'd'
+          Label : CONCAT
+            'e'
+          Label : CONCAT
+            'f'

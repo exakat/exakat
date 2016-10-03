@@ -1,13 +1,62 @@
-(
-Label : ARGUMENT
-  ->
-  Label : METHOD
-    e
-    Label : ARGUMENTS
-      (
-      Label : ARGUMENT
-        'f'
-    Label : NAME
-      e
-  Label : OBJECT
-    $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ifthen.43.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $a
+          Label : ELSE
+            ;
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                cc
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      ee
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'ff'
+                      Label : NAME
+                        ee
+                    Label : OBJECT
+                      $dd
+                Label : NAME
+                  cc
+              Label : OBJECT
+                $bb
+          Label : THEN
+            ;
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                c
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      e
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'f'
+                      Label : NAME
+                        e
+                    Label : OBJECT
+                      $d
+                Label : NAME
+                  c
+              Label : OBJECT
+                $b

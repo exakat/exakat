@@ -24,7 +24,7 @@
 namespace Tasks;
 
 class Help extends Tasks {
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         print <<<HELP
 [Usage] :   php {$config->executable} init -p <Project name> -R <Repository>
             php {$config->executable} project -p <Project name>

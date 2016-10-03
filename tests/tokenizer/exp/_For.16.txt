@@ -1,7 +1,81 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $c
-  Label : PROPERTY
-    d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_For.16.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          for
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              ->
+              Label : METHOD
+                f
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $g
+                Label : NAME
+                  f
+              Label : OBJECT
+                $e
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    i
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'j'
+                    Label : NAME
+                      i
+                  Label : OBJECT
+                    $h
+              Label : NAME
+                echo
+          Label : FINAL
+            ;
+            Label : ELEMENT
+              <
+              Label : LEFT
+                $i
+              Label : RIGHT
+                $n
+          Label : INCREMENT
+            ;
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $i
+          Label : INIT
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $i
+              Label : RIGHT
+                0
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $n
+              Label : RIGHT
+                count
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    ->
+                    Label : OBJECT
+                      $c
+                    Label : PROPERTY
+                      d
+                Label : NAME
+                  count

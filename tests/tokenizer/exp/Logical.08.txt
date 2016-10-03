@@ -1,14 +1,16 @@
-./tests/tokenizer/source/Logical.08.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Logical.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        OR
-        Label : LEFT
-          3
-        Label : RIGHT
-          4
+      Label : CODE
+        ;
+        Label : ELEMENT
+          OR
+          Label : LEFT
+            3
+          Label : RIGHT
+            4

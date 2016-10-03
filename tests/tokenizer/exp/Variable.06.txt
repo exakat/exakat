@@ -1,7 +1,22 @@
-echo
-Label : ARGUMENT
-  "
-  Label : CONCAT
-    b
-  Label : CONCAT
-    [1]
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Variable.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              "
+              Label : CONCAT
+                b
+              Label : CONCAT
+                [1]
+          Label : NAME
+            echo

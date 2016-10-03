@@ -1,5 +1,45 @@
-)
-Label : ARGUMENT
-  'a.php'
-  Label : CODE
-    'a.php'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Include.14.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          (
+          Label : CODE
+            'a.php'
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            include
+        Label : ELEMENT
+          A
+        Label : ELEMENT
+          (
+          Label : CODE
+            'b.php'
+        Label : ELEMENT
+          include
+          Label : ARGUMENTS
+            )
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            include
+        Label : ELEMENT
+          B
+        Label : ELEMENT
+          b
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'c'
+          Label : NAME
+            b

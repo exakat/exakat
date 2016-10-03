@@ -16,6 +16,7 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
         
         $offset = 0;
         $number = 1000;
+        $total = 0;
         foreach($tests as $i => $test ) {
             if ($i < $offset) continue;
             $name = str_replace('\\', '/', str_replace('\\Test\\', '', $test));
@@ -38,6 +39,7 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
             foreach($exp as &$v) {
                 $v = preg_replace('#exp/'.$name.'\.(\d+)\.php#is', '\1', $v);
             }
+            $total += count($exp);
             
             $diff = array_diff($sources, $methods);
             if ($diff) {
@@ -66,6 +68,10 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
             
             continue;
         }
+        
+        $fp = fopen('alltests.csv', 'a');
+        fwrite($fp, "\"".date('r')."\"\t\"$i\"\t\"$total\"\n");
+        fclose($fp);
         
         return $suite;
     }

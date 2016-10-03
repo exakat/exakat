@@ -176,7 +176,7 @@ LICENCE;
          ->exec('mkdir release/scripts')
          ->exec('cp -r scripts/*.sh release/scripts/')
          ->exec('cp -r scripts/doctor.php release/scripts/')
-         ->exec('cp -r tests release/')
+//         ->exec('cp -r tests release/')
          ->exec('cp -r composer.* release/')
          ->exec('cp -r RoboFile.php release/')
          ->exec('tar czf release.tgz release')
@@ -212,7 +212,7 @@ LICENCE;
              ->printed(false)
              ->run();
 
-        $folders = array('data', 'human', 'library', 'media/devoops', 'media/faceted', 'server');
+        $folders = array('data', 'human', 'library', 'media/devoops', 'media/devfaceted', 'media/faceted', 'server');
         foreach($folders as $folder) {
             $files = Finder::create()->ignoreVCS(true)
                                      ->files()
@@ -340,8 +340,10 @@ JOIN categories
 
                 if (!isset($ini['name'])) {
                     echo 'human/en/'.$row['name'].'.ini', " is not set\n";
+                } elseif (strpos($ini['description'], '<?php') === false) {
+                    echo 'human/en/'.$row['name'].'.ini', " has no example in the docs\n";
                 } else {
-                    $title = str_replace(array('PHP', 'autoload', 'const'), '', $ini['name']);  
+                    $title = str_replace(array('PHP', 'autoload', 'const', 'HTTP'), '', $ini['name']);  
                     $title = preg_replace('#__\S+#', '', $title);
                     $title = preg_replace('#\S+::#', '', $title);
                     $title = preg_replace('#\*_\S+#', '', $title);

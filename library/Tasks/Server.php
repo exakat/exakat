@@ -26,7 +26,7 @@ namespace Tasks;
 class Server extends Tasks {
     private $config = null;
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         if ($config->stop === true) {
             $display = @file_get_contents('http://localhost:7447/stop/');
             display('Shut down server ('.$display.')');

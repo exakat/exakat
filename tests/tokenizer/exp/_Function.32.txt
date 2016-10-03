@@ -1,25 +1,46 @@
-(
-Label : ARGUMENT
-  $a
-  Label : DEFAULT
-    null
-Label : ARGUMENT
-  $b
-  Label : DEFAULT
-    null
-Label : ARGUMENT
-  $c
-  Label : DEFAULT
-    null
-Label : ARGUMENT
-  $d
-  Label : DEFAULT
-    null
-Label : ARGUMENT
-  $e
-  Label : DEFAULT
-    null
-Label : ARGUMENT
-  $f
-  Label : DEFAULT
-    null
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.32.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          z
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $a
+              Label : DEFAULT
+                null
+            Label : ARGUMENT
+              $b
+              Label : DEFAULT
+                null
+            Label : ARGUMENT
+              $c
+              Label : DEFAULT
+                null
+            Label : ARGUMENT
+              $d
+              Label : DEFAULT
+                null
+            Label : ARGUMENT
+              $e
+              Label : DEFAULT
+                null
+            Label : ARGUMENT
+              $f
+              Label : DEFAULT
+                null
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            z
+        Label : ELEMENT
+          Void

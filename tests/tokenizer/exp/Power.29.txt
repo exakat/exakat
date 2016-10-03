@@ -1,9 +1,153 @@
-+
-Label : LEFT
-  2
-Label : RIGHT
-  *
-  Label : LEFT
-    3
-  Label : RIGHT
-    4
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Power.29.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            4
+            Label : ARGUMENT
+              *
+              Label : LEFT
+                **
+                Label : LEFT
+                  2
+                Label : RIGHT
+                  3
+              Label : RIGHT
+                4
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            " "
+            Label : ARGUMENT
+              " "
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            4
+            Label : ARGUMENT
+              *
+              Label : LEFT
+                2
+              Label : RIGHT
+                **
+                Label : LEFT
+                  3
+                Label : RIGHT
+                  4
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            "\n"
+            Label : ARGUMENT
+              "\n"
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            4
+            Label : ARGUMENT
+              +
+              Label : LEFT
+                2
+              Label : RIGHT
+                *
+                Label : LEFT
+                  3
+                Label : RIGHT
+                  4
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            " "
+            Label : ARGUMENT
+              " "
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            4
+            Label : ARGUMENT
+              +
+              Label : LEFT
+                *
+                Label : LEFT
+                  2
+                Label : RIGHT
+                  3
+              Label : RIGHT
+                4
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            "\n"
+            Label : ARGUMENT
+              "\n"
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            4
+            Label : ARGUMENT
+              +
+              Label : LEFT
+                **
+                Label : LEFT
+                  2
+                Label : RIGHT
+                  3
+              Label : RIGHT
+                4
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            " "
+            Label : ARGUMENT
+              " "
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            4
+            Label : ARGUMENT
+              +
+              Label : LEFT
+                2
+              Label : RIGHT
+                **
+                Label : LEFT
+                  3
+                Label : RIGHT
+                  4
+          Label : NAME
+            print
+        Label : ELEMENT
+          print
+          Label : ARGUMENTS
+            "\n"
+            Label : ARGUMENT
+              "\n"
+          Label : NAME
+            print

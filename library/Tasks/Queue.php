@@ -26,7 +26,7 @@ namespace Tasks;
 class Queue extends Tasks {
     private $pipefile = '/tmp/onepageQueue';
     
-    public function run(\Config $config) {
+    public function run(\Exakat\Config $config) {
         if ($config->stop === true) {
             display('Stopping queue');
             $queuePipe = fopen($this->pipefile, 'w');

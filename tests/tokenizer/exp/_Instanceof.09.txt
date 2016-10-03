@@ -1,17 +1,36 @@
-(
-Label : ARGUMENT
-  instanceof
-  Label : CLASS
-    e
-  Label : VARIABLE
-    new
-    Label : NEW
-      c
-      Label : ARGUMENTS
-        (
-        Label : ARGUMENT
-          $d
-      Label : NAME
-        c
-Label : ARGUMENT
-  'F'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Instanceof.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ->
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  e
+                Label : VARIABLE
+                  new
+                  Label : NEW
+                    c
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $d
+                    Label : NAME
+                      c
+              Label : ARGUMENT
+                'F'
+            Label : NAME
+              b
+          Label : OBJECT
+            $a

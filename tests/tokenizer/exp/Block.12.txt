@@ -1,11 +1,64 @@
-(
-Label : ARGUMENT
-  ->
-  Label : OBJECT
-    $this
-  Label : PROPERTY
-    [
-    Label : INDEX
-      'C'
-    Label : VARIABLE
-      B
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Block.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            isset
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'C'
+                Label : VARIABLE
+                  ->
+                  Label : OBJECT
+                    $this
+                  Label : PROPERTY
+                    B
+            Label : NAME
+              isset
+          Label : ELSE
+            {}
+            Label : ELEMENT
+              {}
+              Label : ELEMENT
+                ++
+                Label : POSTPLUSPLUS
+                  $b
+            Label : ELEMENT
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $e
+              Label : ELEMENT
+                +=
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    2
+                  Label : VARIABLE
+                    $f
+                Label : RIGHT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $e
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $a

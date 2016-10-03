@@ -34,7 +34,7 @@ class Incompilable extends Analyzer\Analyzer {
     public function toArray() {
         $report = array();
         
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         foreach($config->other_php_versions as $version) {
             $r = \Analyzer\Analyzer::$datastore->getRow('compilation'.$version);
             
@@ -48,7 +48,7 @@ class Incompilable extends Analyzer\Analyzer {
     }
 
     public function hasResults() {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         foreach($config->other_php_versions as $version) {
             $r = \Analyzer\Analyzer::$datastore->getRow('compilation'.$version);
             

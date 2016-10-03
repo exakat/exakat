@@ -1,7 +1,51 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'I'
-  Label : VARIABLE
-    $d
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcodemiddle.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            isset
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'I'
+                Label : VARIABLE
+                  $d
+            Label : NAME
+              isset
+          Label : THEN
+            ;
+            Label : ELEMENT
+              echo
+              Label : ARGUMENTS
+                echo
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'I'
+                  Label : VARIABLE
+                    $d
+                Label : ARGUMENT
+                  K
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'L'
+                      Label : VARIABLE
+                        $d
+                  Label : NAME
+                    K
+              Label : NAME
+                echo
+        Label : ELEMENT
+          Void

@@ -33,9 +33,9 @@ class UnusedGlobal extends Analyzer\Analyzer {
              ->atomIs('Variable')
              ->_as('result')
              ->savePropertyAs('code', 'theGlobal')
-             ->savePropertyAs('id', 'theGlobalId')
              ->goToFunction()
-//             ->raw('filter{ it.out("BLOCK").out.loop(1){true}{it.object.atom == "Variable"}.has("code", theGlobal).hasNot("id", theGlobalId).any() == false}')
+             // Not used as a variable
+             ->raw('where( __.repeat( __.out() ).emit(hasLabel("Variable")).times('.self::MAX_LOOPING.').where( __.in("GLOBAL").count().is(eq(0)) ).filter{ it.get().value("code") == theGlobal}.count().is(eq(0)) )')
              ->back('result');
         $this->prepareQuery();
 
@@ -45,14 +45,13 @@ class UnusedGlobal extends Analyzer\Analyzer {
              ->atomIs('Variable')
              ->_as('result')
              ->savePropertyAs('code', 'theGlobal')
-             ->savePropertyAs('id', 'theGlobalId')
              ->hasNoFunction()
              ->hasNoClass()
              ->hasNoInterface()
              ->hasNoTrait()
-//             ->goToFile()
-//             ->raw('filter{ it.out("FILE").out("ELEMENT").out("CODE").out.loop(1){!(it.object.atom in ["Class", "Function", "Trait", "Interface"])}{it.object.atom == "Variable"}.has("code", theGlobal).hasNot("id", theGlobalId).any() == false}')
-//             ->raw('filter{ it.out("FILE").out("CODE").out.loop(1){!(it.object.atom in ["Class", "Function", "Trait", "Interface"])}{it.object.atom == "Variable"}.has("code", theGlobal).hasNot("id", theGlobalId).any() == false}')
+             // Not used as a variable
+             ->raw('where( g.V().out("FILE").out("ELEMENT").out("CODE").out("ELEMENT").not(hasLabel("Global", "Function", "Trait", "Class", "Interface"))
+                                .repeat( __.out() ).emit(hasLabel("Variable")).times('.self::MAX_LOOPING.').where( __.in("GLOBAL").count().is(eq(0)) ).filter{ it.get().value("code") == theGlobal}.count().is(eq(0)) )')
              ->back('result');
         $this->prepareQuery();
     }

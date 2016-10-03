@@ -1,15 +1,26 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  ?
-  Label : CONDITION
-    1
-  Label : ELSE
-    ->
-    Label : OBJECT
-      $a
-    Label : PROPERTY
-      b
-  Label : THEN
-    2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              1
+            Label : ELSE
+              ->
+              Label : OBJECT
+                $a
+              Label : PROPERTY
+                b
+            Label : THEN
+              2

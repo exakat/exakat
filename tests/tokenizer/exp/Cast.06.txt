@@ -1,3 +1,18 @@
-(bool)
-Label : CAST
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Cast.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          (bool)
+          Label : CAST
+            $x
+        Label : ELEMENT
+          (boolean)
+          Label : CAST
+            $y

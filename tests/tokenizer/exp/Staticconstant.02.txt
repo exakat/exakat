@@ -1,5 +1,20 @@
-[
-Label : INDEX
-  1
-Label : VARIABLE
-  $x
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticconstant.02.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              $x
+          Label : CONSTANT
+            b

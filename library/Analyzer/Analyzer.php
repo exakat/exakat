@@ -68,7 +68,10 @@ abstract class Analyzer {
     const T_LONG    = 'Long';    //360';
 
     const CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
-    const LITERALS = array('Integer', 'Float', 'Null', 'Boolean', 'String');
+    const LITERALS = array('Integer', 'Real', 'Null', 'Boolean', 'String');
+    
+    const INCLUDE_SELF = false;
+    const EXCLUDE_SELF = true;
 
     private $isCompatible            = self::UNKNOWN_COMPATIBILITY;
     const COMPATIBLE                 =  0;
@@ -105,7 +108,7 @@ abstract class Analyzer {
         
         $this->_as('first');
         
-        $this->config = \Config::factory();
+        $this->config = \Exakat\Config::factory();
     }
     
     public function __destruct() {
@@ -120,7 +123,7 @@ abstract class Analyzer {
     
     static public function initDocs() {
         if (Analyzer::$docs === null) {
-            $config = \Config::factory();
+            $config = \Exakat\Config::factory();
             
             $pathDocs = $config->dir_root.'/data/analyzers.sqlite';
             self::$docs = new Docs($pathDocs);
@@ -203,7 +206,7 @@ abstract class Analyzer {
         return $this->description;
     }
 
-    static public function getThemeAnalyzers($theme) {
+    static public function getThemeAnalyzers($theme = null) {
         self::initDocs();
         return Analyzer::$docs->getThemeAnalyzers($theme);
     }
@@ -403,7 +406,7 @@ repeat(__.in('.$linksDown.'))
         $linksDown = \Tokenizer\Token::linksAsList();
         $this->addMethod('where( 
 repeat(__.in('.$linksDown.'))
-.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').has("code", "'.$name.'").count().is(eq(0)))');
+.until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'").count().is(eq(0)))');
         
         return $this;
     }
@@ -427,13 +430,13 @@ repeat(__.in('.$linksDown.'))
     }
 
     public function tokenIs($atom) {
-        $this->addMethod('has("token", within('.$this->SorA($atom).'))');
+        $this->addMethod('has("token", within(***))', $atom);
         
         return $this;
     }
 
     public function tokenIsNot($atom) {
-        $this->addMethod('not(has("token", within('.$this->SorA($atom).')))');
+        $this->addMethod('not(has("token", within(***)))', $atom);
         
         return $this;
     }
@@ -460,14 +463,14 @@ repeat(__.in('.$linksDown.'))
     public function functioncallIs($fullnspath) {
         $this->atomIs('Functioncall')
              ->hasNoIn(array('METHOD', 'NEW'))
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET'))
              ->fullnspathIs($this->makeFullNsPath($fullnspath));
 
         return $this;
     }
     
     public function atomInside($atom) {
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out() ).times('.self::MAX_LOOPING.') ';
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
@@ -489,15 +492,19 @@ repeat(__.in('.$linksDown.'))
     public function analyzerIs($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = str_replace('\\', '\\\\', self::getClass($analyzer));
+                $a = str_replace('\\', '\\\\', self::getClass($a));
             }
             unset($a);
-        } elseif ($analyzer == 'self') {
-            $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(neq(0)) )', $analyzer);
         } else {
-            $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
+            if ($analyzer == 'self') {
+                $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+            } else {
+                $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
+            }
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(neq(0)) )');
         }
-        $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(neq(0)) )');
 
         return $this;
     }
@@ -505,16 +512,20 @@ repeat(__.in('.$linksDown.'))
     public function analyzerIsNot($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = str_replace('\\', '\\\\', self::getClass($analyzer));
+                $a = str_replace('\\', '\\\\', self::getClass($a));
             }
             unset($a);
-        } elseif ($analyzer == 'self') {
-            $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        } else {
-            $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
-        }
-        $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(eq(0)) )');
 
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(eq(0)) )', $analyzer);
+        } else {
+            if ($analyzer == 'self') {
+                $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+            } else {
+                $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
+            }
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(eq(0)) )');
+        }
+        
         return $this;
     }
 
@@ -545,7 +556,7 @@ repeat(__.in('.$linksDown.'))
         } elseif (is_int($value)) {
             $this->addMethod('not(has("'.$property.'", '.$value.'))');
         } else {
-            $this->addMethod('not(has("'.$property.'", within('.$this->SorA($value).')))');
+            $this->addMethod('not(has("'.$property.'", within(***)))', $value);
         }
         
         return $this;
@@ -654,52 +665,6 @@ repeat(__.in('.$linksDown.'))
         return $this;
     }
 
-    public function isPropertyIn($property, $name, $caseSensitive = false) {
-        if ($caseSensitive === true || $property === 'line' || $property === 'rank') {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        if (is_array($name)) {
-            $this->addMethod('filter{ it.'.$property.$caseSensitive.' in *** }', $name);
-        } else {
-            $this->addMethod('filter{ it.'.$property.$caseSensitive.' != *** }', $name);
-        }
-    
-        return $this;
-    }
-
-    public function isPropertyNotIn($property, $name, $caseSensitive = false) {
-        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
-            $caseSensitive = '';
-        } else {
-            $caseSensitive = '.toLowerCase()';
-        }
-
-        // Array, is a list of literal
-        if (is_array($name)) {
-            $this->addMethod('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in *** )}', $name);
-        } else {
-        // String, is a variable name
-            $this->addMethod('filter{ !(it.get().value("'.$property.'")'.$caseSensitive.' in '.$name.' )}');
-        }
-    
-        return $this;
-    }
-    
-    public function sameContextAs($storage = 'context', $context = array('Namespace', 'Class', 'Function')) {
-        foreach($context as &$c) {
-            $c = $storage.'["'.$c.'"] == '.$context.'["'.$c.'"] ';
-        }
-        unset($c);
-        $context = join(' && ', $context);
-        
-        $this->addMethod('filter{ '.$context.' }');
-
-        return $this;
-    }
-    
     public function saveArglistAs($name) {
         // Calculate the arglist, normalized it, then put it in a variable
         // This needs to be in Arguments, (both Functioncall or Function)
@@ -727,40 +692,6 @@ GREMLIN
         return $this;
     }
 
-    public function isGrandParent() {
-        $this->addMethod('filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("EXTENDS")
-                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() }');
-
-        return $this;
-    }
-
-    public function isNotGrandParent() {
-        $this->addMethod('filter{ fns = it.fullnspath; it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.out("EXTENDS")
-                         .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                         .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.loop(2){true}{it.object.fullnspath == fns}.any() == false}');
-
-        return $this;
-    }
-
-    public function fullcodeTrimmed($code, $trim = "\"'", $caseSensitive = false) {
-        if ($caseSensitive === true) {
-            $caseSensitive = '';
-        } else {
-            $this->tolowercase($code);
-            $caseSensitive = '.toLowerCase()';
-        }
-        
-        $trim = addslashes($trim);
-        if (is_array($code)) {
-            $this->addMethod('filter{it.get().value("fullcode")'.$caseSensitive.'.replaceFirst("^['.$trim.']?(.*?)['.$trim.']?\\$", "\\$1") in ***}', $code);
-        } else {
-            $this->addMethod('filter{it.get().value("fullcode")'.$caseSensitive.'.replaceFirst("^['.$trim.']?(.*?)['.$trim.']?\\\$", "\\$1") == ***}', $code);
-        }
-        
-        return $this;
-    }
-    
     public function fullcodeIs($code, $caseSensitive = false) {
         $this->propertyIs('fullcode', $code, $caseSensitive);
         
@@ -1326,9 +1257,13 @@ GREMLIN
         return $this;
     }
 
-    public function goToAllParents() {
+    public function goToAllParents($self = self::INCLUDE_SELF) {
 //        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
-        $this->addMethod('repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.')');
+        if ($self === self::INCLUDE_SELF) {
+            $this->addMethod('repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('filter{true}.emit().repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
+        }
         
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
 //        $this->addMethod('sideEffect{ allParents = []; }.until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0)) ).emit().repeat( sideEffect{allParents.push(it.get().id()); }.out("EXTENDS").in("DEFINITION").filter{ !(it.get().id() in allParents); } )');
@@ -1337,8 +1272,22 @@ GREMLIN
         return $this;
     }
 
-    public function goToAllChildren() {
-        $this->addMethod('out("DEFINITION")');
+    public function goToAllChildren($self = self::INCLUDE_SELF) {
+        if ($self === self::INCLUDE_SELF) {
+            $this->addMethod('repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit().times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('filter{true}.emit().repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::MAX_LOOPING.')');
+        }
+        
+        return $this;
+    }
+    
+    public function goToAllTraits($self = self::INCLUDE_SELF) {
+        if ($self === self::INCLUDE_SELF) {
+            $this->addMethod('repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).emit(hasLabel("Trait")).times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
+        }
         
         return $this;
     }
@@ -1784,7 +1733,7 @@ GREMLIN;
     }
     
     protected function loadIni($file, $index = null) {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $fullpath = $config->dir_root.'/data/'.$file;
         
         if (!file_exists($fullpath)) {
@@ -1801,7 +1750,7 @@ GREMLIN;
     }
 
     protected function loadJson($file) {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $fullpath = $config->dir_root.'/data/'.$file;
 
         if (!file_exists($fullpath)) {
@@ -1868,7 +1817,7 @@ GREMLIN;
     
     public function getSeverity() {
         if (Analyzer::$docs === null) {
-            $config = \Config::factory();
+            $config = \Exakat\Config::factory();
             
             Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
@@ -1891,7 +1840,7 @@ GREMLIN;
 
     public function getVendors() {
         if (Analyzer::$docs === null) {
-            $config = \Config::factory();
+            $config = \Exakat\Config::factory();
             
             Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
@@ -1901,7 +1850,7 @@ GREMLIN;
 
     public function getTimeToFix() {
         if (Analyzer::$docs === null) {
-            $config = \Config::factory();
+            $config = \Exakat\Config::factory();
             
             Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }

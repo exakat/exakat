@@ -156,7 +156,7 @@ foreach($blocks as $block) {
     $bugs = 0;
     $withFunction = 0;
 
-    preg_match('#<h3>Version (\d\.\d\.\d)</h3>#s', $block, $r);
+    preg_match('#<h3>Version (\d\.\d\.\d+)</h3>#s', $block, $r);
     $version = $r[1];
     $final .= "$version\n";
     
@@ -182,8 +182,6 @@ foreach($blocks as $block) {
                 if (preg_match("/\\b(".$functions.")\\b/is", $l[2], $r)) {
                     if (isset($l[4])) {
                         $cve = $l[4];
-                        print $cve."\n";
-                        print_r($l);
                     } else {
                         $cve = '';
                     }

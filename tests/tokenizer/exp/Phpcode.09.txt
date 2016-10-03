@@ -1,3 +1,17 @@
-<?=
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Phpcode.09.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?=
+      Label : CODE
+        ;
+        Label : ELEMENT
+          <?=
+          Label : ARGUMENTS
+            <?=
+            Label : ARGUMENT
+              $a
+          Label : NAME
+            <?=

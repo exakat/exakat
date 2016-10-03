@@ -1,5 +1,52 @@
-=
-Label : LEFT
-  $y
-Label : RIGHT
-  'f'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_New.23.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $y
+                Label : RIGHT
+                  'f'
+              Label : PUBLIC
+                public
+              Label : STATIC
+                static
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $y3
+                Label : RIGHT
+                  'f'
+              Label : PRIVATE
+                private
+              Label : STATIC
+                static
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $y4
+                Label : RIGHT
+                  'f'
+              Label : PROTECTED
+                protected
+              Label : STATIC
+                static
+          Label : NAME
+            C

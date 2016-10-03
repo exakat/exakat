@@ -1,7 +1,59 @@
-(
-Label : ARGUMENT
-  [
-  Label : INDEX
-    'columns'
-  Label : VARIABLE
-    $swimlane
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Break.07.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+              
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              if
+              Label : CONDITION
+                empty
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'columns'
+                    Label : VARIABLE
+                      $swimlane
+                Label : NAME
+                  empty
+              Label : ELSE
+                ;
+                Label : ELEMENT
+                              
+                Label : ELEMENT
+                  <?=
+                  Label : ARGUMENTS
+                    <?=
+                    Label : ARGUMENT
+                      $this
+                  Label : NAME
+                    <?=
+                Label : ELEMENT
+                          
+              Label : THEN
+                ;
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    Void
+                Label : ELEMENT
+                          
+            Label : ELEMENT
+              Void
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b
+        Label : ELEMENT
+          Void

@@ -1,15 +1,94 @@
-(
-Label : ARGUMENT
-  *
-  Label : LEFT
-    $c
-    Label : CODE
-      /
-      Label : LEFT
-        0
-      Label : RIGHT
-        $c
-  Label : RIGHT
-    $d
-Label : ARGUMENT
-  $e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.60.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            ==
+            Label : LEFT
+              $a
+            Label : RIGHT
+              B
+          Label : ELSE
+            elseif
+            Label : CONDITION
+              ==
+              Label : LEFT
+                $a
+              Label : RIGHT
+                E
+            Label : ELSE
+              ;
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  .
+                  Label : CONCAT
+                    $d
+                  Label : CONCAT
+                    $f
+            Label : THEN
+              ;
+              Label : ELEMENT
+                .
+                Label : CONCAT
+                  C
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      *
+                      Label : LEFT
+                        (
+                        Label : CODE
+                          /
+                          Label : LEFT
+                            0
+                          Label : RIGHT
+                            $c
+                      Label : RIGHT
+                        $d
+                    Label : ARGUMENT
+                      $e
+                  Label : NAME
+                    C
+                Label : CONCAT
+                  'D'
+          Label : THEN
+            ;
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                .
+                Label : CONCAT
+                  C
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      *
+                      Label : LEFT
+                        (
+                        Label : CODE
+                          /
+                          Label : LEFT
+                            0
+                          Label : RIGHT
+                            $c
+                      Label : RIGHT
+                        $d
+                    Label : ARGUMENT
+                      $e
+                  Label : NAME
+                    C
+                Label : CONCAT
+                  'D'

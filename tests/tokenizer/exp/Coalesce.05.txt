@@ -1,3 +1,42 @@
-(
-Label : ARGUMENT
-  $a
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Coalesce.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            ??
+            Label : LEFT
+              [
+              Label : INDEX
+                C
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $a
+                Label : NAME
+                  C
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  $c
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    B
+                  Label : VARIABLE
+                    $b
+            Label : RIGHT
+              .
+              Label : CONCAT
+                $d
+              Label : CONCAT
+                $a

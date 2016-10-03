@@ -1,5 +1,28 @@
-)
-Label : ARGUMENT
-  'a.php'
-  Label : CODE
-    'a.php'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Parenthesis.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            include_once
+            Label : ARGUMENTS
+              )
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  'a.php'
+            Label : NAME
+              include_once
+          Label : THEN
+            {}
+            Label : ELEMENT
+              ++
+              Label : POSTPLUSPLUS
+                $x

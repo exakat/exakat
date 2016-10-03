@@ -1,9 +1,24 @@
-echo
-Label : ARGUMENT
-  dirname
-  Label : ARGUMENTS
-    (
-    Label : ARGUMENT
-      __FILE__
-  Label : NAME
-    dirname
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.27.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              dirname
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  __FILE__
+              Label : NAME
+                dirname
+          Label : NAME
+            echo

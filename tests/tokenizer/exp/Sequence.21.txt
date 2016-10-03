@@ -1,5 +1,40 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.21.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case 1 :  /**/  
+              Label : CASE
+                1
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    1
+          Label : NAME
+            $x
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            $x
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $y
+              Label : RIGHT
+                2

@@ -1,12 +1,92 @@
-Version 0.7.10 (Nine Headed Bug, Coming up)
+Version 0.8.4 (Lingkongzi, Coming up)
 + Architecture
-    +
+    + 
 + Report
     + 
 + Analyzer
     + 
 + Tokenizer
     + 
+
+Version 0.8.3 (Guzhi Gong, 2016-10-03)
++ Architecture
+    + Created temp folder .exakat in projects_dir
+    + Removed mentions of float, only using Real
+    + Moved Config to Exakat\Config
+    + More examples in docs
++ Report
+    + Added settings and files to Ambassador
++ Analyzer
+    + New analyzer for dependant Traits
+    + Added new Theme 'Cakephp' with 6 analyzers for migration
+    + New values for Not-a-hash
+    + Unresolved Catch now takes Throwable into account
++ Tokenizer
+    + Fixed edge case where return is used inside if/then without {} nor value.
+    + Fixed 'code' and 'token' for ?: and ()
+
+Version 0.8.2 (Jinjie Shiba Gong, 2016-09-26)
++ Architecture
+    + More examples in docs
+    + Fixed 'file' in results
++ Report
+    + Added more media for Ambassador
++ Analyzer
+    + New analyzer for count/strlen compared to 0
+    + Upgraded analysis : 1563 / 1579 test pass (99% pass). 
+    + Backported all 4 Wordpress analysis (wpdb, nonce usage)
+    + Added new Wordpress Analysis : variable escaping in templates
++ Tokenizer
+    + Fixed <?= so it is handled like echo
+
+Version 0.8.1 (Babo'erben, 2016-09-19)
++ Architecture
+    + Added main Try/Catch
++ Report
+    + Added 'Ambassador' report. 
++ Analyzer
+    + Upgraded analysis : 1540 / 1561 test pass (99% pass). 
+    + More documentation (examples, glossary) 
+    + Added a list of stopwords for No Hardcoded Hash
+    + Upgraded analyzer 'No Hardcoded Path' with protocols and glob with wildcards
+    + Upgraded analyzer 'No Hardcoded Hash' with stopwords
+    + Added new Analyzer for portability : spot common Linux files
+    + Added new Analyzer : use system temp dir, not hardcoded one 
+    + New analyzer that spot unused protected methods
+    + Added Time-to-fix and severity to all analyzers
++ Tokenizer
+    + Fixed edge case with if/then and try/catch 
+    + Synchronized constants in Tokens/Consts*.php
+    + Added support for PHP 7.2
+
+Version 0.8.0 (Benbo'erba, 2016-09-12)
++ Architecture
+    + More examples in the docs
+    + Better find root in export
++ Report
+    + Prepared code for new report style
++ Analyzer
+    + New analysis : no throw in __destruct
+    + New analysis : spot empty blocks in control structures
+    + Update : Check parse_str and mb_parse_str()
+    + Upgraded analysis : 1524 / 1540 test pass (99% pass). 
++ Tokenizer
+    + Fixed representation of [] and [index] with static properties
+
+Version 0.7.10 (Nine Headed Bug, 2016-09-05)
++ Architecture
+    + Added optional dependency to mbstring in Doctor
+    + 
++ Analyzer
+    + Added analysers for PHP 7.1 features
+    + Upgraded analysis : 1377 / 1510 test pass (91% pass). 
++ Tokenizer
+    + Removed parasit 'void' added in sequences.
+    + Raised export max depth to 15. 
+    + Fixed FQN for new without parenthesis
+    + Fixed support for PHP 5.5/5.6. 
+    + Added support for iterable
+    + Checked support for extensions and ignore dirs 
 
 Version 0.7.9 (Wansheng Princess, 2016-08-29)
 + Architecture
@@ -15,7 +95,7 @@ Version 0.7.9 (Wansheng Princess, 2016-08-29)
 + Analyzer
     + Added analysis for impossible comparisons (count($a) < or >= 0)
     + Added analysis for PHP 7.1 : removed directives, added functions
-    + Upgraded analysis : 1377 / 1510 test pass (91% pass). 
+    + Upgraded analysis : 1485 / 1522 test pass (97.5% pass). 
 + Tokenizer
     + Fixed edge case with <?= $v;
     + Fixed priorities between include and .

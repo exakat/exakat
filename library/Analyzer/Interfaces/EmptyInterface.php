@@ -30,6 +30,8 @@ class EmptyInterface extends Analyzer\Analyzer {
     public function analyze() {
         $this->atomIs('Interface')
              ->outIs('BLOCK')
+             ->is('count', 1)
+             ->outIs('ELEMENT')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();

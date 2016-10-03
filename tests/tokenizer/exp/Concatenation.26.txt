@@ -1,3 +1,34 @@
-(
-Label : ARGUMENT
-  'c'
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Concatenation.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $x
+          Label : RIGHT
+            <<<EOD
+
+            Label : CONCAT
+              A 
+            Label : CONCAT
+              ->
+              Label : METHOD
+                b
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'c'
+                Label : NAME
+                  b
+              Label : OBJECT
+                $a
+            Label : CONCAT
+               B
+

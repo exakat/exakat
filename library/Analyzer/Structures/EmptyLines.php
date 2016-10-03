@@ -37,7 +37,7 @@ class EmptyLines extends Analyzer\Analyzer {
         $this->atomIs('Void')
              ->is('rank', 0)
              ->inIs('ELEMENT')
-             ->hasNoIn('BLOCK')
+             ->isNot('count', 1)
              ->back('first');
         $this->prepareQuery();
     }

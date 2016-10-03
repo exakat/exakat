@@ -1,28 +1,28 @@
-./tests/tokenizer/source/Sequence.54.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.54.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        if
-        Label : CONDITION
-          1
-        Label : THEN
-          {}
-          Label : ELEMENT
-            $d
-      Label : ELEMENT
-        foreach
-        Label : BLOCK
-          {}
-          Label : ELEMENT
-            $c
-        Label : SOURCE
-          $a
-        Label : VALUE
-          $b
-      Label : ELEMENT
-        Void
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            1
+          Label : THEN
+            {}
+            Label : ELEMENT
+              $d
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              $c
+          Label : SOURCE
+            $a
+          Label : VALUE
+            $b

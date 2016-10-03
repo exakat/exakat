@@ -55,7 +55,7 @@ class Cypher {
                              'isFunctionDefinition',  'absolutens');
     
     public function __construct() {
-        $this->config = \Config::factory();
+        $this->config = \Exakat\Config::factory();
         
         // Force autoload
         $this->cypher = new \Graph\Cypher($this->config );
@@ -180,7 +180,7 @@ CYPHER;
     }
 
     public function saveTokenCounts() {
-        $config = \Config::factory();
+        $config = \Exakat\Config::factory();
         $datastore = new \Datastore($config);
         
         $datastore->addRow('tokenCounts', static::$tokenCounts);
@@ -224,7 +224,7 @@ CYPHER;
                     $row[$col] = '';
                 }
                 if ($diff = array_diff(array_keys($row), $les_cols, array('id'))) {
-                    display('Some columns were not processed : '.join(', ', $diff).".\n");
+                    display('Some columns were not processed : '.implode(', ', $diff).".\n");
                 }
             }
             $row['id'] = $id;

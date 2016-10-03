@@ -1,13 +1,30 @@
-(
-Label : ARGUMENT
-  =
-  Label : LEFT
-    encODing
-  Label : RIGHT
-    'ISO-8859-1'
-Label : ARGUMENT
-  =
-  Label : LEFT
-    tIcks
-  Label : RIGHT
-    2
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Declare.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          declare
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              Void
+          Label : DECLARE
+            (
+            Label : ARGUMENT
+              =
+              Label : LEFT
+                encODing
+              Label : RIGHT
+                'ISO-8859-1'
+            Label : ARGUMENT
+              =
+              Label : LEFT
+                tIcks
+              Label : RIGHT
+                2

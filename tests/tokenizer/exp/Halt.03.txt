@@ -1,15 +1,17 @@
-./tests/tokenizer/source/Halt.03.php
-Label : FILE
-  ;
-  Label : ELEMENT
-    <?php
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Halt.03.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
 
-    Label : CODE
-      ;
-      Label : ELEMENT
-        __HALT_COMPILER
-  Label : ELEMENT
-     
+      Label : CODE
+        ;
+        Label : ELEMENT
+          __HALT_COMPILER
+    Label : ELEMENT
+       
 
 $x = 1;
 $y = 2;

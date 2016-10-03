@@ -35,7 +35,7 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(1)) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -49,8 +49,9 @@ class DefinedStaticMP extends Analyzer\Analyzer {
              ->savePropertyAs('code', 'name')
              ->goToClass()
              ->goToAllParents()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
-             ->back('first');
+             ->raw('where( __.out("BLOCK").out("ELEMENT").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(1)) )')
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // static::$property the current class

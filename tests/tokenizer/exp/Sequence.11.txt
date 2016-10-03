@@ -1,5 +1,62 @@
-=
-Label : LEFT
-  $x
-Label : RIGHT
-  1
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Sequence.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            1
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $x
+              Label : RIGHT
+                1
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                2
+          Label : SOURCE
+            $y
+          Label : VALUE
+            $b
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            2
+          Label : THEN
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $x
+              Label : RIGHT
+                2
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                3
+          Label : SOURCE
+            $y
+          Label : VALUE
+            $b

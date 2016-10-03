@@ -1,11 +1,88 @@
-echo
-Label : ARGUMENT
-  ::
-  Label : CLASS
-    ::
-    Label : CLASS
-      Foo
-    Label : PROPERTY
-      $bar
-  Label : PROPERTY
-    $e
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticproperty.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $bar
+                Label : RIGHT
+                  'Nar'
+              Label : STATIC
+                static
+          Label : DEFINITION
+            Foo
+          Label : DEFINITION
+            Foo
+          Label : NAME
+            Foo
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              static
+              Label : PPP
+                =
+                Label : LEFT
+                  $e
+                Label : RIGHT
+                  'yes'
+              Label : STATIC
+                static
+          Label : DEFINITION
+            'Nar'
+          Label : NAME
+            Nar
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                ::
+                Label : CLASS
+                  Foo
+                Label : PROPERTY
+                  $bar
+              Label : PROPERTY
+                $e
+          Label : NAME
+            echo
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                ::
+                Label : CLASS
+                  ::
+                  Label : CLASS
+                    ::
+                    Label : CLASS
+                      Foo
+                    Label : PROPERTY
+                      $bar
+                  Label : PROPERTY
+                    $e
+                Label : PROPERTY
+                  $f
+              Label : PROPERTY
+                $g
+          Label : NAME
+            echo
