@@ -30,6 +30,10 @@ class Ambassador extends Reports {
     protected $finalName = null;
     private $tmpName = '';
 
+    private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                                  'CompatibilityPHP70', 'CompatibilityPHP71',
+                                  '"Dead code"', 'Security', 'Analyze');
+
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
 
@@ -94,6 +98,8 @@ class Ambassador extends Reports {
         $this->generateFiles();
         $this->generateAnalyzers();
         $this->generateIssues();
+        $this->generateAnalyzersList();
+        $this->generateExternalLib();
 
         $this->cleanFolder();
     }
@@ -183,11 +189,12 @@ class Ambassador extends Reports {
         $baseHTML = $this->getBasedPage("analyzers_doc");
         $analyzersDocHTML = "";
 
-        foreach(\Analyzer\Analyzer::getThemeAnalyzers($this->config->thema) as $analyzer) {
+        foreach(\Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
             $analyzer = \Analyzer\Analyzer::getInstance($analyzer);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'">'.$description->getName().'</a></h2>';
             $analyzersDocHTML.='<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
+
             if(!empty($description->getClearPHP())){
                 $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
             }
@@ -307,7 +314,7 @@ class Ambassador extends Reports {
                                 <div class="pourcentage">' . round($porcentFile) . '%</div>
                             </div>
                             <div class="sub-div">
-                                <div class="title">Annalyser free of issues</div>
+                                <div class="title">Analyzer free of issues</div>
                                 <div class="progress progress-sm active">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . round($pourcentAnalyzer) . '%">
                                         <span class="sr-only">20% Complete</span>
@@ -462,13 +469,17 @@ SQL;
      * @return string
      */
     protected function getAnalyzersResultsCounts() {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+        
         $result = $this->sqlite->query(<<<SQL
         SELECT analyzer, count(*) AS Issues, severity AS Severity FROM results
-        WHERE analyzer IN $this->themesList
+        WHERE analyzer IN $this->themesList AND analyzer IN ($list)
         GROUP BY analyzer
         HAVING Issues > 0
 SQL
         );
+
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
@@ -988,6 +999,44 @@ SQL;
         file_put_contents($file, $html);
     }
 
+    private function generateAnalyzersList() {
+        $analyzers = '';
+
+       foreach(\Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
+           $analyzer = \Analyzer\Analyzer::getInstance($analyzer);
+           $description = $analyzer->getDescription();
+    
+           $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
+        }
+
+        $file = $this->tmpName.'/datas/proc_analyzers.html';
+        $html = file_get_contents($file);
+        $html = str_replace('<analyzers />', $analyzers, $html);
+        file_put_contents($file, $html);
+    }
+
+    private function generateExternalLib() {
+        $externallibraries = json_decode(file_get_contents($this->config->dir_root.'/data/externallibraries.json'));
+
+        $libraries = '';
+        $res = $this->datastore->query('SELECT library AS Library, file AS Folder FROM externallibraries ORDER BY library');
+
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $url = $externallibraries->{strtolower($row['Library'])}->homepage;
+            $name = $externallibraries->{strtolower($row['Library'])}->name;
+            if (empty($url)) {
+                $homepage = '';
+            } else {
+                $homepage = "<a href=\"".$url."\">".$row['Library']."</a>";
+            }
+            $libraries .= "<tr><td>$name</td><td>$row[Folder]</td><td>$homepage</td></tr>\n";
+        }
+        
+        $file = $this->tmpName.'/datas/ext_lib.html';
+        $html = file_get_contents($file);
+        $html = str_replace('<libraries />', $libraries, $html);
+        file_put_contents($file, $html);
+    }
 }
 
 ?>
