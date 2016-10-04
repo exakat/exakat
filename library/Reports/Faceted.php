@@ -98,6 +98,7 @@ class Faceted extends FacetedJson {
         $docs = str_replace('PROJECT_NAME', $this->config->project_name, $docs);
         file_put_contents($dirName.'/'.$fileName.'/docs.html', $docs);        
         
+        $prefix = $config->projects_root.'/projects/'.$config->project.'/code';
         foreach($filesList as $path => $line) {
             $dirs = explode('/', $path);
             array_pop($dirs); // remove file name
@@ -110,7 +111,7 @@ class Faceted extends FacetedJson {
                 }
             }
 
-            $php = file_get_contents($path);
+            $php = file_get_contents($prefix.$path);
             $html = highlight_string($php, true);
             $html = preg_replace_callback('$<br />$s', function ($r) { 
             static $line; 
