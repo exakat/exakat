@@ -448,7 +448,8 @@ SQL;
 
         foreach ($analysers as $analyser) {
             $analyserHTML.= "<tr>";
-            $analyserHTML.='<td><a href="#" title="' . $analyser["Label"] . '">' . $analyser["Label"] . '</a></td>
+//            $analyserHTML.='<td><a href="#" title="' . $analyser["Label"] . '">' . $analyser["Label"] . '</a></td>
+            $analyserHTML.='<td>' . $analyser["Label"] . '</td>
                         <td>' . $analyser["Type"] . '</td>
                         <td>' . $analyser["Receipt"] . '</td>
                         <td>' . $analyser["Issues"] . '</td>
@@ -474,7 +475,7 @@ SQL;
         
         $result = $this->sqlite->query(<<<SQL
         SELECT analyzer, count(*) AS Issues, severity AS Severity FROM results
-        WHERE analyzer IN $this->themesList AND analyzer IN ($list)
+        WHERE analyzer IN ($list)
         GROUP BY analyzer
         HAVING Issues > 0
 SQL
@@ -524,7 +525,8 @@ SQL;
 
         foreach ($files as $file) {
             $filesHTML.= "<tr>";
-            $filesHTML.='<td><a href="#" title="' . $file["Filename"] . '">' . $file["Filename"] . '</a></td>
+//            $filesHTML.='<td><a href="#" title="' . $file["Filename"] . '">' . $file["Filename"] . '</a></td>
+            $filesHTML.='<td>' . $file["Filename"] . '</td>
                         <td>' . $file["LoC"] . '</td>
                         <td>' . $file["Issues"] . '</td>
                         <td>' . $file["Analysers"] . '</td>
@@ -544,9 +546,12 @@ SQL;
      * @return type
      */
     private function getFilesResultsCounts() {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $result = $this->sqlite->query(<<<SQL
 SELECT file AS Filename, line AS LoC, count(*) AS Issues FROM results
-        WHERE analyzer IN $this->themesList
+        WHERE analyzer IN ($list)
         GROUP BY file
 SQL
         );
@@ -605,12 +610,16 @@ SQL;
      * @param type $limit
      * @return type
      */
-    public function getFilesCount($limit) {
+    public function getFilesCount($limit = null) {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $query = "SELECT file, count(*) AS number
                     FROM results
+                    WHERE analyzer IN ($list)
                     GROUP BY file
                     ORDER BY number DESC ";
-        if ($limit) {
+        if ($limit !== null) {
             $query .= " LIMIT " . $limit;
         }
         $result = $this->sqlite->query($query);
@@ -689,8 +698,12 @@ SQL;
      * @return type
      */
     private function getAnalyzersCount($limit) {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
+                    WHERE analyzer in ($list)
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
@@ -869,10 +882,13 @@ SQL;
      */
     public function getIssuesFaceted()
     {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $sqlQuery = <<<SQL
             SELECT fullcode, file, line, analyzer
                 FROM results
-                WHERE analyzer IN $this->themesList
+                WHERE analyzer IN ($list)
 
 SQL;
         $result = $this->sqlite->query($sqlQuery);
@@ -888,13 +904,13 @@ SQL;
             $item['file_md5' ] =  md5($row['file']);
             $item['code' ] = $row['fullcode'];
             $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus'] = "\$this->setRunner(\$runner);}\rpublic function() {\r}";
+            $item['code_plus'] = htmlentities($row['fullcode']);
             $item['link_file'] = "#";
             $item['line' ] =  $row['line'];
             $item['severity'] = "<i class=\"fa fa-warning " . $this->getClassByType($analyzer->getSeverity()) . "\"></i>";
             $item['complexity'] = "<i class=\"fa fa-cog " . $this->getClassByType($analyzer->getTimeToFix()) . "\"></i>";
             $item['receipt' ] =  'A';//$analyzer->getReceipt($this->config->thema);
-            $item['analyzer_help' ] =  $ini['description'];
+            $item['analyzer_help' ] =  explode("\n", $ini['description'])[0];
 
             $items[] = json_encode($item);
             $this->count();
