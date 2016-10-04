@@ -120,6 +120,7 @@ $entries = array('preg\_replace'                  => 'http://www.php.net/preg_re
                  'Throwable'                      => 'http://php.net/manual/fr/class.throwable.php',
                  'Closure'                        => 'http://php.net/manual/fr/class.closure.php',
                  'Traversable'                    => 'http://php.net/manual/fr/class.traversable.php',
+                 'ParseError'                     => 'http://php.net/manual/fr/class.parseerror.php',
                  
                  '__FILE__'                       => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__DIR__'                        => 'http://php.net/manual/en/language.constants.predefined.php',
@@ -188,9 +189,11 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
         
         $lineSize = max(strlen($commandLine), strlen($clearPHP), strlen($recipes));
         $commandLine = str_pad($commandLine, $lineSize, ' ');
-        $clearPHP    = str_pad($clearPHP,    $lineSize, ' ');
         $recipes     = str_pad($recipes,     $lineSize, ' ');
         $separator   = '+--------------+-'.str_pad('', $lineSize, '-').'-+';
+        if (!empty($clearPHP)) {
+            $clearPHP    = '| clearPHP     | '.str_pad($clearPHP,    $lineSize, ' ')." |\n$separator\n";
+        }
 
         $desc .= <<<RST
 
@@ -198,9 +201,7 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
 $separator
 | Command Line | $commandLine |
 $separator
-| clearPHP     | $clearPHP |
-$separator
-| Analyzers    | $recipes |
+$clearPHP| Analyzers    | $recipes |
 $separator
 
 
