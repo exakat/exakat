@@ -27,6 +27,8 @@ class FindExternalLibraries extends Tasks {
     const WHOLE_DIR   = 1;
     const FILE_ONLY   = 2;
     const PARENT_DIR  = 3; // Whole_dir and parent.
+    
+    private $php = null;
 
     // classic must be in lower case form.
     private $classic = array('adoconnection'    => self::WHOLE_DIR,
@@ -94,10 +96,19 @@ class FindExternalLibraries extends Tasks {
             display('No files to process. Aborting');
             return;
         }
+
+        $this->php = new \Phpexec();
+        if (!$this->php->isValid()) {
+            die("This PHP binary is not valid for running Exakat.\n");
+        }
+
+        $this->php->getTokens();
+        \Tasks\Precedence::preloadConstants($this->php->getActualVersion());
         
         $r = array();
+        $path = $config->projects_root.'/projects/'.$project.'/code';
         foreach($files as $file) {
-            $s = $this->process($file);
+            $s = $this->process($path.$file);
             
             if (!empty($s)) {
                $r[] = $s;
@@ -141,13 +152,12 @@ class FindExternalLibraries extends Tasks {
     private function process($filename) {
         $return = array();
 
-        $php = new \Phpexec();
-        $tokens = $php->getTokenFromFile($filename);
+        $tokens = $this->php->getTokenFromFile($filename);
         if (count($tokens) == 1) {
             return $return;
         }
         $this->log->log("$filename : ".count($tokens));
-
+        
         foreach($tokens as $id => $token) {
             if (is_string($token)) { continue; }
 
