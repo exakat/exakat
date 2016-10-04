@@ -65,10 +65,18 @@ class UncheckedResources extends Analyzer\Analyzer {
                      ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\is_resource").count().is(eq(0)) )')
                      // checked with a !$variable
                      ->hasNoIn('NOT')
+
+                     // checked as the condition in a if/then or while
+                     ->raw('where( __.in("CONDITION").hasLabel("Ifthen", "While" ).count().is(eq(0)) )')
+
+                     // checked with a $variable && 
+                     ->raw('where( __.in("LEFT", "RIGHT").hasLabel("Logical").count().is(eq(0)) )')
+                     
                      // checked with a if ($resource == false) or while($resource == false)
                      ->hasNoComparison()
                     // ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").in("RIGHT").in("CODE").in("RIGHT").has("atom", "Comparison").in("CONDITION").count().is(eq(0)) )')
-                     ->back('result');
+                     ->back('result')
+                     ->analyzerIsNot('self');
                 $this->prepareQuery();
             }
         }
