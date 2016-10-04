@@ -375,7 +375,7 @@ class Load extends Tasks {
         
         $id1 = $this->addAtom('File');
         $this->setAtom($id1, ['code'     => $filename,
-                              'fullcode' => $filename,
+                              'fullcode' => $file,
                               'line'     => -1,
                               'token'    => 'T_FILENAME']);
         $this->addLink($this->id0, $id1, 'PROJECT');
