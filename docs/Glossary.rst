@@ -158,6 +158,10 @@ Glossary
 
 
 + `P`
+    + `ParseError`
+
+      + :ref:`eval() Without Try <eval()-without-try>`
+
     + `pow`
 
       + :ref:`** For Exponent <**-for-exponent>`

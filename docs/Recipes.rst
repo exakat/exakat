@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 03 Oct 2016 05:10:22 +0000
-.. comment: Generation hash : 562957cdd6b67a30f22612f051b4369ffddb7d31
+.. comment: Generation date : Tue, 04 Oct 2016 14:29:13 +0000
+.. comment: Generation hash : 76cd1277b034d7bcdc1ec9fb4e9d2f18a067bcbe
 
 
 .. _analyze:
@@ -277,7 +277,7 @@ Total : 256 analysis
 * :ref:`Unused Methods <unused-methods>`
 * :ref:`Unused Static Methods <unused-static-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
-* :ref:`Unused Trait <unused-trait>`
+* :ref:`Unused Traits <unused-traits>`
 * :ref:`Unused Use <unused-use>`
 * :ref:`Use === null <use-===-null>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
