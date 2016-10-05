@@ -54,6 +54,9 @@ class Ambassador extends Reports {
         $baseHTML = file_get_contents($this->tmpName . '/datas/base.html');
         $title = ($file == 'index') ? 'Dashboard' : $file;
         $baseHTML = $this->injectBloc($baseHTML, "TITLE", $title);
+        $baseHTML = $this->injectBloc($baseHTML, "{{PROJECT}}", $this->config->project);
+        $baseHTML = $this->injectBloc($baseHTML, "{{PROJECT_LETTER}}", strtoupper($this->config->project{0}));
+
         $subPageHTML = file_get_contents($this->tmpName . '/datas/' . $file . '.html');
 
         $combinePageHTML = $this->injectBloc($baseHTML, "BLOC-MAIN", $subPageHTML);
@@ -724,8 +727,12 @@ SQL;
      * @return type
      */
     private function getTopAnalyzers() {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
+                    WHERE analyzer IN ($list)
                     GROUP BY analyzer
                     ORDER BY number DESC
                     LIMIT " . self::TOPLIMIT;
@@ -755,10 +762,13 @@ SQL;
      * @return type
      */
     private function getSeverityNumberByFile($file) {
-        $query = <<<'SQL'
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
+        $query = <<<SQL
                 SELECT severity, count(*) AS number
                     FROM results
-                    WHERE file = :file
+                    WHERE analyzer IN ($list) AND file = :file
                     GROUP BY severity
                     ORDER BY number DESC
 SQL;
@@ -987,10 +997,7 @@ SQL;
             $settings .= "<tr><td>$i[0]</td><td>$i[1]</td></tr>";
         }        
         
-        $file = $this->tmpName.'/datas/used_settings.html';
-        $html = file_get_contents($file);
-        $html = str_replace('<settings />', $settings, $html);
-        file_put_contents($file, $html);
+        $this->updateFile('used_settings.html', ['<settings />'     => $settings]);
     }
 
     private function generateProcFiles() {
@@ -1008,11 +1015,8 @@ SQL;
             $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
         }
 
-        $file = $this->tmpName.'/datas/proc_files.html';
-        $html = file_get_contents($file);
-        $html = str_replace('<files />', $files, $html);
-        $html = str_replace('<non-files />', $nonFiles, $html);
-        file_put_contents($file, $html);
+        $this->updateFile('proc_files.html', ['<files />'     => $files, 
+                                              '<non-files />' => $nonFiles]);
     }
 
     private function generateAnalyzersList() {
@@ -1025,10 +1029,7 @@ SQL;
            $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
         }
 
-        $file = $this->tmpName.'/datas/proc_analyzers.html';
-        $html = file_get_contents($file);
-        $html = str_replace('<analyzers />', $analyzers, $html);
-        file_put_contents($file, $html);
+        $this->updateFile('proc_analyzers.html', ['<analyzers />' => $analyzers]);
     }
 
     private function generateExternalLib() {
@@ -1048,10 +1049,19 @@ SQL;
             $libraries .= "<tr><td>$name</td><td>$row[Folder]</td><td>$homepage</td></tr>\n";
         }
         
-        $file = $this->tmpName.'/datas/ext_lib.html';
-        $html = file_get_contents($file);
-        $html = str_replace('<libraries />', $libraries, $html);
-        file_put_contents($file, $html);
+        $this->updateFile('ext_lib.html', ['<libraries />' => $libraries]);
+    }
+    
+    private function updateFile($file, $blocks) {
+        $filePath = $this->tmpName.'/datas/'.$file;
+        $html = file_get_contents($filePath);
+
+        $html = str_replace("{{PROJECT}}", $this->config->project, $html);
+        $html = str_replace("{{PROJECT_LETTER}}", strtoupper($this->config->project{0}), $html);
+        
+        $html = str_replace(array_keys($blocks), array_values($blocks), $html);
+
+        file_put_contents($filePath, $html);
     }
 }
 
