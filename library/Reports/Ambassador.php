@@ -54,8 +54,8 @@ class Ambassador extends Reports {
         $baseHTML = file_get_contents($this->tmpName . '/datas/base.html');
         $title = ($file == 'index') ? 'Dashboard' : $file;
         $baseHTML = $this->injectBloc($baseHTML, "TITLE", $title);
-        $baseHTML = $this->injectBloc($baseHTML, "{{PROJECT}}", $this->config->project);
-        $baseHTML = $this->injectBloc($baseHTML, "{{PROJECT_LETTER}}", strtoupper($this->config->project{0}));
+        $baseHTML = $this->injectBloc($baseHTML, "PROJECT", $this->config->project);
+        $baseHTML = $this->injectBloc($baseHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
 
         $subPageHTML = file_get_contents($this->tmpName . '/datas/' . $file . '.html');
 
@@ -94,7 +94,8 @@ class Ambassador extends Reports {
         
         $this->initFolder();
         $this->generateSettings();
-        $this->generateProcFiles();
+        $this->generateProcFiles();  
+        $this->generateCodes();  
 
         $this->generateDocumentation();
         $this->generateDashboard();
@@ -1051,7 +1052,7 @@ SQL;
         
         $this->updateFile('ext_lib.html', ['<libraries />' => $libraries]);
     }
-    
+
     private function updateFile($file, $blocks) {
         $filePath = $this->tmpName.'/datas/'.$file;
         $html = file_get_contents($filePath);
@@ -1062,6 +1063,31 @@ SQL;
         $html = str_replace(array_keys($blocks), array_values($blocks), $html);
 
         file_put_contents($filePath, $html);
+    }
+
+    private function generateCodes() {
+        mkdir($this->tmpName.'/datas/sources/', 0755);
+
+        $files = '';
+        $res = $this->datastore->query('SELECT file FROM files ORDER BY file');
+        while($row = $res->fetchArray()) {
+            $files .= '<li><a href="#" class="menuitem">'.htmlentities($row['file'])."</a></li>\n";
+            
+            $subdirs = explode('/', dirname($row['file']));
+            $dir = $this->tmpName.'/datas/sources';
+            foreach($subdirs as $subdir) {
+                $dir .= '/'.$subdir;
+                if (!file_exists($dir)) { 
+                    mkdir($dir, 0755); 
+                }
+            }
+
+            $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
+            file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], substr($source, 6, -8));
+        }
+        
+
+        $this->updateFile('codes.html', ['<files />' => $files]);
     }
 }
 
