@@ -164,6 +164,13 @@
     $('#filename').html(event.target.text + '  <span class="caret"></span>');
   });
 
+  var fileParam = window.location.search.split('file=')[1];
+  if(fileParam !== undefined) {
+    $('#results').load("sources/" + fileParam);
+    $('#filename').html(fileParam + '  <span class="caret"></span>');
+  }
+  
+
   </script>
 
 </body>

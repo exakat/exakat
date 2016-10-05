@@ -916,7 +916,7 @@ SQL;
             $item['code' ] = $row['fullcode'];
             $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
             $item['code_plus'] = htmlentities($row['fullcode']);
-            $item['link_file'] = "#";
+            $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
             $item['severity'] = "<i class=\"fa fa-warning " . $this->getClassByType($analyzer->getSeverity()) . "\"></i>";
             $item['complexity'] = "<i class=\"fa fa-cog " . $this->getClassByType($analyzer->getTimeToFix()) . "\"></i>";
@@ -1071,7 +1071,8 @@ SQL;
         $files = '';
         $res = $this->datastore->query('SELECT file FROM files ORDER BY file');
         while($row = $res->fetchArray()) {
-            $files .= '<li><a href="#" class="menuitem">'.htmlentities($row['file'])."</a></li>\n";
+            $id = str_replace('/', '_', $row['file']);
+            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'])."</a></li>\n";
             
             $subdirs = explode('/', dirname($row['file']));
             $dir = $this->tmpName.'/datas/sources';
