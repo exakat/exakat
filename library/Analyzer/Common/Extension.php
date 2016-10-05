@@ -143,7 +143,7 @@ class Extension extends Analyzer\Analyzer {
             $this->atomIs('Instanceof')
                  ->outIs('CLASS')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->atomIsNot('Array')
+                 ->atomIsNot(array('Array', 'Boolean', 'Null'))
                  ->fullnspathIs($classes);
             $this->prepareQuery();
         }
