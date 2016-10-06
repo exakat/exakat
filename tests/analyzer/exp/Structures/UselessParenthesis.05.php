@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('1', 
-                      '($a++)'
+                      '($a++)',
                       '$b'
 );
 
