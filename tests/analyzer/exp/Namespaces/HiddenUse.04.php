@@ -15,7 +15,7 @@ $expected     = array('use some\namespace2 { /**/ } ',
 
 $expected_not = array('use A',
                       'use traitT',
-                      'use A',
-                      'use traitT',);
+                      'use a',
+                      'use traitt',);
 
 ?>
