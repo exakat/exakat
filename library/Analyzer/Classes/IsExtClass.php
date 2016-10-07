@@ -51,7 +51,7 @@ class IsExtClass extends Analyzer\Analyzer {
         
         $this->analyzerIs('Classes/ClassUsage')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR', 'T_AS'))
-             ->atomIsNot('Array')
+             ->atomIsNot(array('Array', 'Null', 'Boolean'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
     }
