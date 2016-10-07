@@ -170,9 +170,13 @@ CYPHER;
     }
 
     private function cleanCsv() {
+        if (empty($this->unlink)) {
+            return ;
+        }
         foreach($this->unlink as $file) {
             unlink($file);
         }
+
         rmdir(dirname($file));
     }
 
