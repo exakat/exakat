@@ -36,19 +36,11 @@ class ShouldPreprocess extends Analyzer\Analyzer {
 
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
             // Functioncall, that are not authorized
-             ->raw('where( __.repeat( out() ).emit( hasLabel("Functioncall") ).times(15).hasLabel("Functioncall").filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) }.count().is(eq(0)) )')
+             ->raw('where( __.repeat( out() ).emit( hasLabel("Functioncall") ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) }.count().is(eq(0)) )')
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
 
         $this->atomFunctionIs(array('\\join', '\\explode', '\\implode', '\\split'))
-//where( __.repeat( out() ).emit( hasLabel('.$this->SorA($atom).') ).times(15).hasLabel('.$this->SorA($atom).').count().is(eq(0)) )
-//             ->outIs('ARGUMENTS')
-//             ->atomInside('Functioncall')
-//             ->hasNoIn('METHOD')
-//             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-//             ->fullnspathIs($functionList)
-//             ->back('first')
-//             ->outIs('ARGUMENTS')
              ->noAtomInside($dynamicAtoms)
              ->back('first');
         $this->prepareQuery();
