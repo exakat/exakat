@@ -36,17 +36,32 @@ class AmbiguousKeys extends Analyzer\Analyzer {
       .sideEffect{ 
             if ("noDelimiter" in it.get().keys() ) { 
                 k = it.get().value("noDelimiter"); 
-                if (strings[k] == null) { strings[k] = 1; } else { strings[k]++; }
-                if (integers[k] != null) { integers[k] = 1; }
+                if (counts[k] == null) { counts[k] = ["string"]; } else { counts[k].add("string"); }
             } else { 
                 k = it.get().value("code"); 
-                if (integers[k] == null) { integers[k] = 1; } else { integers[k]++; }
-                if (strings[k] != null) { counts[k] = 1; }
+                if (counts[k] == null) { counts[k] = ["integer"]; } else { counts[k].add("integer"); }
             }
         }
-        .map{ counts; }.unfold().count().is(neq(0))
+        .map{ counts.findAll{a,b -> b.unique().size() > 1}; }.unfold().count().is(neq(0))
 )'
 );
+        $this->prepareQuery();
+
+        // $x = [1.0 => 2];
+        $this->atomFunctionIs('\\array')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Keyvalue')
+             ->outIs('KEY')
+             ->atomIs(array('Real', 'Null', 'Boolean'))
+             ->back('first');
+        $this->prepareQuery();
+
+        // $x[1.0] = 2;
+        $this->atomIs('Array')
+             ->outIs('INDEX')
+             ->atomIs(array('Real', 'Null', 'Boolean'))
+             ->back('first');
         $this->prepareQuery();
     }
 }
