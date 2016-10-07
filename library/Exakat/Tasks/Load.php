@@ -220,9 +220,12 @@ class Load extends Tasks {
     public function run(\Exakat\Config $config) {
         $this->config = $config;
 
-        if (!file_exists($this->config->projects_root.'/.exakat')) {
-            display("rebuilding .exakat\n");
+        if (file_exists($this->config->projects_root.'/.exakat')) {
+            display("Emptying .exakat\n");
             rmdirRecursive($this->config->projects_root.'/.exakat');
+            mkdir($this->config->projects_root.'/.exakat');
+        } else {
+            display("rebuilding .exakat\n");
             mkdir($this->config->projects_root.'/.exakat');
         }
         
@@ -291,8 +294,8 @@ class Load extends Tasks {
 
         $files = [];
         $ignoredFiles = [];
-        if (substr($dir, -1) !== '/') {
-            $dir .= '/';
+        if (substr($dir, -1) === '/') {
+            $dir = substr($dir, 0, -1);
         }
         Files::findFiles($dir, $files, $ignoredFiles);
 
@@ -3937,6 +3940,10 @@ class Load extends Tasks {
         
         // Saving atoms
         foreach($this->atoms as $atom) {
+            if (empty($atom)) {
+                print "Atom is empty in \n";
+                die();
+            }
             $fileName = $this->path.'/nodes.g3.'.$atom['atom'].'.csv';
             if ($atom['atom'] === 'Project' && file_exists($fileName)) {
                 // Project is saved only once
