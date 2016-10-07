@@ -3102,10 +3102,10 @@ class Load extends Tasks {
                   'token'    => $this->getToken($this->tokens[$current][0])];
             $this->setAtom($returnId, $x);
 
-            if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
-               $this->processSemicolon();
-            }
             $this->pushExpression($returnId);
+            if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+                $this->processSemicolon();
+            }
         
             return $returnId;
         } else {

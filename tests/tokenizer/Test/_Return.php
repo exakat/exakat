@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Return extends Tokenizer {
-    /* 25 methods */
+    /* 26 methods */
 
     public function test_Return01()  { $this->generic_test('_Return.01'); }
     public function test_Return02()  { $this->generic_test('_Return.02'); }
@@ -34,5 +34,6 @@ class _Return extends Tokenizer {
     public function test_Return23()  { $this->generic_test('_Return.23'); }
     public function test_Return24()  { $this->generic_test('_Return.24'); }
     public function test_Return25()  { $this->generic_test('_Return.25'); }
+    public function test_Return26()  { $this->generic_test('_Return.26'); }
 }
 ?>

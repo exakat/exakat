@@ -1,0 +1,27 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Return.26.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          if
+          Label : CONDITION
+            empty
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $b
+            Label : NAME
+              empty
+          Label : THEN
+            ;
+            Label : ELEMENT
+              B
+            Label : ELEMENT
+              return
+              Label : RETURN
+                Void
