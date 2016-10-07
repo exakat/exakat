@@ -94,9 +94,9 @@
     shell_exec('bbedit ./exp/'.$test.'.'.$next.'.php');
     
     echo "New test number : $next\n",
-         "Run the tests with   phpunit Test/$test.php\n",
-    
-         "Run the tests with   phpunit --filter=$next Test/$test.php\n",
+         "Run the tests with     phpunit Test/$test.php\n",
+         "Run the tests with     phpunit --filter=$next Test/$test.php\n",
+         "Run manual test with   php manualTest.php --filter=$next Test/$test.php\n",
          "\n";
 
     function closest_string($string, $array) {
