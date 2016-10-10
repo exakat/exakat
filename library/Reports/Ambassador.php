@@ -915,7 +915,7 @@ SQL;
             $item['file_md5' ] =  md5($row['file']);
             $item['code' ] = $row['fullcode'];
             $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus'] = htmlentities($row['fullcode']);
+            $item['code_plus'] = htmlentities($row['fullcode'], ENT_COMPAT | ENT_HTML401 , 'UTF-8');
             $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
             $item['severity'] = "<i class=\"fa fa-warning " . $this->getClassByType($analyzer->getSeverity()) . "\"></i>";
@@ -1072,7 +1072,7 @@ SQL;
         $res = $this->datastore->query('SELECT file FROM files ORDER BY file');
         while($row = $res->fetchArray()) {
             $id = str_replace('/', '_', $row['file']);
-            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'])."</a></li>\n";
+            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
             
             $subdirs = explode('/', dirname($row['file']));
             $dir = $this->tmpName.'/datas/sources';
