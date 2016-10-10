@@ -1163,7 +1163,7 @@ class Load extends Tasks {
             --$n;
         }
 
-        while ( ($this->id < $n) ) {
+        while ($this->id < $n) {
             if ($this->tokens[$this->id][0] === T_OPEN_TAG_WITH_ECHO) {
                 --$this->id;
                 $this->processOpenWithEcho();
@@ -2308,7 +2308,7 @@ class Load extends Tasks {
         $this->addLink($switchId, $casesId, 'CASES');
         ++$this->id;
 
-        $isColon = ($this->tokens[$this->id + 1][0] === T_COLON);
+        $isColon = $this->tokens[$this->id + 1][0] === T_COLON;
         
         $rank = 0;
         if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {

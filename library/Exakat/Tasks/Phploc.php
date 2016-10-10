@@ -132,11 +132,12 @@ class Phploc extends Tasks {
     }
 
     private function countLocInFile($filename) {
-        $return = array('comments' => 0,
-                        'tokens'   => 0,
-                        'total'    => 0,
-                        'code'     => 0,
-                        'files'    => 1);
+        $return = array('comments'   => 0,
+                        'whitespace' => 0,
+                        'tokens'     => 0,
+                        'total'      => 0,
+                        'code'       => 0,
+                        'files'      => 1);
 
         $lines = array();
         $php = new \Phpexec();
@@ -171,7 +172,7 @@ class Phploc extends Tasks {
                 } elseif ($tokenName == 'T_COMMENT') {
                     ++$return['comments'];
                 } elseif ($tokenName == 'T_WHITESPACE') {
-                    
+                    ++$return['whitespace'];
                 } else {
                     if (isset($lines[$line])) {
                         ++$lines[$line];

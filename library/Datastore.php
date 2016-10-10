@@ -35,10 +35,6 @@ class Datastore {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         
         if ($create === self::CREATE) {
-            if (self::$sqliteWrite !== null) {
-//                unset(self::$sqliteWrite);
-//                unset(self::$sqliteRead);
-            }
             if (file_exists($this->sqlitePath)) {
                 unlink($this->sqlitePath);
             }

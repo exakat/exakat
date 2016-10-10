@@ -159,16 +159,15 @@ class Ambassador extends Reports {
 
             $startLine = 0;
             $endLine = 10;
-            if(count($fileLines) > $lineNumber){
+            if(count($fileLines) > $lineNumber) {
                 $startLine = $lineNumber-$numberBeforeAndAfter;
                 if($startLine<0)
                     $startLine=0;
 
-                if($lineNumber+$numberBeforeAndAfter < count($fileLines)-1 )
-                {
+                if($lineNumber+$numberBeforeAndAfter < count($fileLines)-1 ) {
                     $endLine = $lineNumber+$numberBeforeAndAfter;
-                }else{
-                    $endLine = (count($fileLines)-1);
+                } else {
+                    $endLine = count($fileLines)-1;
                 }
             }
 
