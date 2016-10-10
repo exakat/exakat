@@ -15,7 +15,7 @@ class A2 extends A1 {
         \A1::f();
         \A2::f();
         B::f();
-        C::f();
+        \C::f();
     }
 }
 

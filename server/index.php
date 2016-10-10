@@ -39,14 +39,14 @@ function archive($path) {
                    'json'     => 'report.json');
                   
     if (!isset($types[$type])) {
-        print "No such format as '".htmlentities($type)."'\n";
+        print "No such format as '".htmlentities($type, ENT_COMPAT | ENT_HTML401 , 'UTF-8')."'\n";
         exit;
     }
     
     if (file_exists(__DIR__.'/../progress')) {
         $status = json_decode(file_get_contents(__DIR__.'/../progress/jobqueue.exakat'));
         if (substr($status->job, 0, strlen($project)) == $project && $status->progress < 100) {
-            print "No such report as '".htmlentities($type)."'\n";
+            print "No such report as '".htmlentities($type, ENT_COMPAT | ENT_HTML401 , 'UTF-8')."'\n";
             exit;
         }
     }
@@ -135,7 +135,7 @@ function project($path) {
             exit;
         }
 
-        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']).'');
+        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']));
         
         pushToQueue($project);
         echo json_encode(['project' => $project]);
@@ -163,7 +163,7 @@ function report($path) {
                    'text'     => 'report.txt',
                    'json'     => 'report.json');
     if (!isset($types[$type])) {
-        print "No such report as '".htmlentities($type)."'\n";
+        print "No such report as '".htmlentities($type, ENT_COMPAT | ENT_HTML401 , 'UTF-8')."'\n";
         exit;
     }
 

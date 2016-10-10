@@ -44,7 +44,7 @@ GREMLIN;
 
        $this->atomIs('Comparison')
             ->outIs('LEFT')
-            ->raw('sideEffect{ if (it.get().label() in [$literalsList]) { 
+            ->raw('sideEffect{ if (it.get().label() in ['.$literalsList.']) { 
                 x2 = "left"; 
             } else { 
                 x2 = "right"; 

@@ -20,8 +20,10 @@
  *
 */
 
+use Exakat\Tasks;
+
 class Exakat {
-    const VERSION = '0.8.3';
+    const VERSION = '0.8.4';
     const BUILD = 432;
     
     private $gremlin = null;

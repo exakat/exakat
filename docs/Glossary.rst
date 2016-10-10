@@ -56,6 +56,7 @@ Glossary
     + ``break``
 
       + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`Break With Non Integer <break-with-non-integer>`
 
 
 + `C`
@@ -63,6 +64,7 @@ Glossary
 
       + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
       + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Namespaces/HiddenUse <namespaces/hiddenuse>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
 
     + `curl_multi_errno`
@@ -103,6 +105,31 @@ Glossary
 
 
 + `F`
+    + `fclose`
+
+      + :ref:`Join file() <join-file()>`
+
+    + `file`
+
+      + :ref:`$HTTP_RAW_POST_DATA <$http\_raw\_post\_data>`
+      + :ref:`Cant Extend Final <cant-extend-final>`
+      + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
+      + :ref:`Eval() Usage <eval()-usage>`
+      + :ref:`Join file() <join-file()>`
+      + :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
+      + :ref:`No Direct Usage <no-direct-usage>`
+      + :ref:`No Hardcoded Path <no-hardcoded-path>`
+      + :ref:`Not Same Name As File <not-same-name-as-file>`
+      + :ref:`Should Use Constants <should-use-constants>`
+      + :ref:`Use System Tmp <use-system-tmp>`
+      + :ref:`Use const <use-const>`
+      + :ref:`include_once() Usage <include\_once()-usage>`
+
+    + `fopen`
+
+      + :ref:`Join file() <join-file()>`
+      + :ref:`fopen() Mode <fopen()-mode>`
+
     + `for()`
 
       + :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -126,9 +153,14 @@ Glossary
 
 
 + `I`
+    + `implode`
+
+      + :ref:`Join file() <join-file()>`
+
     + `instanceof`
 
       + :ref:`Avoid get_class() <avoid-get\_class()>`
+      + :ref:`Should Make Alias <should-make-alias>`
       + :ref:`Undefined Interfaces <undefined-interfaces>`
       + :ref:`Unresolved Instanceof <unresolved-instanceof>`
       + :ref:`Use Instanceof <use-instanceof>`
@@ -137,6 +169,12 @@ Glossary
     + `is_iterable`
 
       + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+
+
++ `J`
+    + `join`
+
+      + :ref:`Join file() <join-file()>`
 
 
 + `M`
@@ -158,6 +196,10 @@ Glossary
 
 
 + `P`
+    + `ParseError`
+
+      + :ref:`eval() Without Try <eval()-without-try>`
+
     + `pow`
 
       + :ref:`** For Exponent <**-for-exponent>`
@@ -171,6 +213,7 @@ Glossary
 
     + `preg_replace`
 
+      + :ref:`Eval() Usage <eval()-usage>`
       + :ref:`Make One Call <make-one-call>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
@@ -243,6 +286,42 @@ Glossary
       + :ref:`Throws An Assignement <throws-an-assignement>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
+
+    + `time`
+
+      + :ref:`Assign Default To Properties <assign-default-to-properties>`
+      + :ref:`Avoid Parenthesis <avoid-parenthesis>`
+      + :ref:`Avoir Sleep()/Usleep() <avoir-sleep()/usleep()>`
+      + :ref:`Class Name Case Difference <class-name-case-difference>`
+      + :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
+      + :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
+      + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
+      + :ref:`Echo With Concat <echo-with-concat>`
+      + :ref:`Eval() Usage <eval()-usage>`
+      + :ref:`Exit() Usage <exit()-usage>`
+      + :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
+      + :ref:`Multiple Class Declarations <multiple-class-declarations>`
+      + :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
+      + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+      + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
+      + :ref:`Old Style Constructor <old-style-constructor>`
+      + :ref:`Redefined Default <redefined-default>`
+      + :ref:`Short Open Tags <short-open-tags>`
+      + :ref:`Should Be Single Quote <should-be-single-quote>`
+      + :ref:`Should Make Alias <should-make-alias>`
+      + :ref:`Static Loop <static-loop>`
+      + :ref:`Switch Without Default <switch-without-default>`
+      + :ref:`Throw In Destruct <throw-in-destruct>`
+      + :ref:`Throws An Assignement <throws-an-assignement>`
+      + :ref:`Timestamp Difference <timestamp-difference>`
+      + :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
+      + :ref:`Use const <use-const>`
+      + :ref:`Used Once Variables <used-once-variables>`
+      + :ref:`eval() Without Try <eval()-without-try>`
+      + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
+      + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
+      + :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
 
 + `U`

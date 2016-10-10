@@ -30,6 +30,10 @@ class Ambassador extends Reports {
     protected $finalName = null;
     private $tmpName = '';
 
+    private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                                  'CompatibilityPHP70', 'CompatibilityPHP71',
+                                  '"Dead code"', 'Security', 'Analyze');
+
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
 
@@ -50,6 +54,9 @@ class Ambassador extends Reports {
         $baseHTML = file_get_contents($this->tmpName . '/datas/base.html');
         $title = ($file == 'index') ? 'Dashboard' : $file;
         $baseHTML = $this->injectBloc($baseHTML, "TITLE", $title);
+        $baseHTML = $this->injectBloc($baseHTML, "PROJECT", $this->config->project);
+        $baseHTML = $this->injectBloc($baseHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
+
         $subPageHTML = file_get_contents($this->tmpName . '/datas/' . $file . '.html');
 
         $combinePageHTML = $this->injectBloc($baseHTML, "BLOC-MAIN", $subPageHTML);
@@ -87,13 +94,16 @@ class Ambassador extends Reports {
         
         $this->initFolder();
         $this->generateSettings();
-        $this->generateProcFiles();
+        $this->generateProcFiles();  
+        $this->generateCodes();  
 
         $this->generateDocumentation();
         $this->generateDashboard();
         $this->generateFiles();
         $this->generateAnalyzers();
         $this->generateIssues();
+        $this->generateAnalyzersList();
+        $this->generateExternalLib();
 
         $this->cleanFolder();
     }
@@ -149,16 +159,15 @@ class Ambassador extends Reports {
 
             $startLine = 0;
             $endLine = 10;
-            if(count($fileLines) > $lineNumber){
+            if(count($fileLines) > $lineNumber) {
                 $startLine = $lineNumber-$numberBeforeAndAfter;
                 if($startLine<0)
                     $startLine=0;
 
-                if($lineNumber+$numberBeforeAndAfter < count($fileLines)-1 )
-                {
+                if($lineNumber+$numberBeforeAndAfter < count($fileLines)-1 ) {
                     $endLine = $lineNumber+$numberBeforeAndAfter;
-                }else{
-                    $endLine = (count($fileLines)-1);
+                } else {
+                    $endLine = count($fileLines)-1;
                 }
             }
 
@@ -183,11 +192,12 @@ class Ambassador extends Reports {
         $baseHTML = $this->getBasedPage("analyzers_doc");
         $analyzersDocHTML = "";
 
-        foreach(\Analyzer\Analyzer::getThemeAnalyzers($this->config->thema) as $analyzer) {
+        foreach(\Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
             $analyzer = \Analyzer\Analyzer::getInstance($analyzer);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'">'.$description->getName().'</a></h2>';
             $analyzersDocHTML.='<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
+
             if(!empty($description->getClearPHP())){
                 $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
             }
@@ -307,7 +317,7 @@ class Ambassador extends Reports {
                                 <div class="pourcentage">' . round($porcentFile) . '%</div>
                             </div>
                             <div class="sub-div">
-                                <div class="title">Annalyser free of issues</div>
+                                <div class="title">Analyzer free of issues</div>
                                 <div class="progress progress-sm active">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . round($pourcentAnalyzer) . '%">
                                         <span class="sr-only">20% Complete</span>
@@ -441,7 +451,8 @@ SQL;
 
         foreach ($analysers as $analyser) {
             $analyserHTML.= "<tr>";
-            $analyserHTML.='<td><a href="#" title="' . $analyser["Label"] . '">' . $analyser["Label"] . '</a></td>
+//            $analyserHTML.='<td><a href="#" title="' . $analyser["Label"] . '">' . $analyser["Label"] . '</a></td>
+            $analyserHTML.='<td>' . $analyser["Label"] . '</td>
                         <td>' . $analyser["Type"] . '</td>
                         <td>' . $analyser["Receipt"] . '</td>
                         <td>' . $analyser["Issues"] . '</td>
@@ -462,13 +473,17 @@ SQL;
      * @return string
      */
     protected function getAnalyzersResultsCounts() {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+        
         $result = $this->sqlite->query(<<<SQL
         SELECT analyzer, count(*) AS Issues, severity AS Severity FROM results
-        WHERE analyzer IN $this->themesList
+        WHERE analyzer IN ($list)
         GROUP BY analyzer
         HAVING Issues > 0
 SQL
         );
+
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
@@ -513,7 +528,8 @@ SQL;
 
         foreach ($files as $file) {
             $filesHTML.= "<tr>";
-            $filesHTML.='<td><a href="#" title="' . $file["Filename"] . '">' . $file["Filename"] . '</a></td>
+//            $filesHTML.='<td><a href="#" title="' . $file["Filename"] . '">' . $file["Filename"] . '</a></td>
+            $filesHTML.='<td>' . $file["Filename"] . '</td>
                         <td>' . $file["LoC"] . '</td>
                         <td>' . $file["Issues"] . '</td>
                         <td>' . $file["Analysers"] . '</td>
@@ -533,9 +549,12 @@ SQL;
      * @return type
      */
     private function getFilesResultsCounts() {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $result = $this->sqlite->query(<<<SQL
 SELECT file AS Filename, line AS LoC, count(*) AS Issues FROM results
-        WHERE analyzer IN $this->themesList
+        WHERE analyzer IN ($list)
         GROUP BY file
 SQL
         );
@@ -594,12 +613,16 @@ SQL;
      * @param type $limit
      * @return type
      */
-    public function getFilesCount($limit) {
+    public function getFilesCount($limit = null) {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $query = "SELECT file, count(*) AS number
                     FROM results
+                    WHERE analyzer IN ($list)
                     GROUP BY file
                     ORDER BY number DESC ";
-        if ($limit) {
+        if ($limit !== null) {
             $query .= " LIMIT " . $limit;
         }
         $result = $this->sqlite->query($query);
@@ -678,8 +701,12 @@ SQL;
      * @return type
      */
     private function getAnalyzersCount($limit) {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
+                    WHERE analyzer in ($list)
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
@@ -700,8 +727,12 @@ SQL;
      * @return type
      */
     private function getTopAnalyzers() {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
+                    WHERE analyzer IN ($list)
                     GROUP BY analyzer
                     ORDER BY number DESC
                     LIMIT " . self::TOPLIMIT;
@@ -731,10 +762,13 @@ SQL;
      * @return type
      */
     private function getSeverityNumberByFile($file) {
-        $query = <<<'SQL'
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
+        $query = <<<SQL
                 SELECT severity, count(*) AS number
                     FROM results
-                    WHERE file = :file
+                    WHERE analyzer IN ($list) AND file = :file
                     GROUP BY severity
                     ORDER BY number DESC
 SQL;
@@ -858,10 +892,13 @@ SQL;
      */
     public function getIssuesFaceted()
     {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $sqlQuery = <<<SQL
             SELECT fullcode, file, line, analyzer
                 FROM results
-                WHERE analyzer IN $this->themesList
+                WHERE analyzer IN ($list)
 
 SQL;
         $result = $this->sqlite->query($sqlQuery);
@@ -877,13 +914,13 @@ SQL;
             $item['file_md5' ] =  md5($row['file']);
             $item['code' ] = $row['fullcode'];
             $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus'] = "\$this->setRunner(\$runner);}\rpublic function() {\r}";
-            $item['link_file'] = "#";
+            $item['code_plus'] = htmlentities($row['fullcode'], ENT_COMPAT | ENT_HTML401 , 'UTF-8');
+            $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
             $item['severity'] = "<i class=\"fa fa-warning " . $this->getClassByType($analyzer->getSeverity()) . "\"></i>";
             $item['complexity'] = "<i class=\"fa fa-cog " . $this->getClassByType($analyzer->getTimeToFix()) . "\"></i>";
             $item['receipt' ] =  'A';//$analyzer->getReceipt($this->config->thema);
-            $item['analyzer_help' ] =  $ini['description'];
+            $item['analyzer_help' ] =  explode("\n", $ini['description'])[0];
 
             $items[] = json_encode($item);
             $this->count();
@@ -960,10 +997,7 @@ SQL;
             $settings .= "<tr><td>$i[0]</td><td>$i[1]</td></tr>";
         }        
         
-        $file = $this->tmpName.'/datas/used_settings.html';
-        $html = file_get_contents($file);
-        $html = str_replace('<settings />', $settings, $html);
-        file_put_contents($file, $html);
+        $this->updateFile('used_settings.html', ['<settings />'     => $settings]);
     }
 
     private function generateProcFiles() {
@@ -981,13 +1015,80 @@ SQL;
             $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
         }
 
-        $file = $this->tmpName.'/datas/proc_files.html';
-        $html = file_get_contents($file);
-        $html = str_replace('<files />', $files, $html);
-        $html = str_replace('<non-files />', $nonFiles, $html);
-        file_put_contents($file, $html);
+        $this->updateFile('proc_files.html', ['<files />'     => $files, 
+                                              '<non-files />' => $nonFiles]);
     }
 
+    private function generateAnalyzersList() {
+        $analyzers = '';
+
+       foreach(\Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
+           $analyzer = \Analyzer\Analyzer::getInstance($analyzer);
+           $description = $analyzer->getDescription();
+    
+           $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
+        }
+
+        $this->updateFile('proc_analyzers.html', ['<analyzers />' => $analyzers]);
+    }
+
+    private function generateExternalLib() {
+        $externallibraries = json_decode(file_get_contents($this->config->dir_root.'/data/externallibraries.json'));
+
+        $libraries = '';
+        $res = $this->datastore->query('SELECT library AS Library, file AS Folder FROM externallibraries ORDER BY library');
+
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $url = $externallibraries->{strtolower($row['Library'])}->homepage;
+            $name = $externallibraries->{strtolower($row['Library'])}->name;
+            if (empty($url)) {
+                $homepage = '';
+            } else {
+                $homepage = "<a href=\"".$url."\">".$row['Library']."</a>";
+            }
+            $libraries .= "<tr><td>$name</td><td>$row[Folder]</td><td>$homepage</td></tr>\n";
+        }
+        
+        $this->updateFile('ext_lib.html', ['<libraries />' => $libraries]);
+    }
+
+    private function updateFile($file, $blocks) {
+        $filePath = $this->tmpName.'/datas/'.$file;
+        $html = file_get_contents($filePath);
+
+        $html = str_replace("{{PROJECT}}", $this->config->project, $html);
+        $html = str_replace("{{PROJECT_LETTER}}", strtoupper($this->config->project{0}), $html);
+        
+        $html = str_replace(array_keys($blocks), array_values($blocks), $html);
+
+        file_put_contents($filePath, $html);
+    }
+
+    private function generateCodes() {
+        mkdir($this->tmpName.'/datas/sources/', 0755);
+
+        $files = '';
+        $res = $this->datastore->query('SELECT file FROM files ORDER BY file');
+        while($row = $res->fetchArray()) {
+            $id = str_replace('/', '_', $row['file']);
+            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
+            
+            $subdirs = explode('/', dirname($row['file']));
+            $dir = $this->tmpName.'/datas/sources';
+            foreach($subdirs as $subdir) {
+                $dir .= '/'.$subdir;
+                if (!file_exists($dir)) { 
+                    mkdir($dir, 0755); 
+                }
+            }
+
+            $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
+            file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], substr($source, 6, -8));
+        }
+        
+
+        $this->updateFile('codes.html', ['<files />' => $files]);
+    }
 }
 
 ?>

@@ -79,7 +79,7 @@ class CypherG3 {
             $b = microtime(true);
             
             $extra = [];
-            foreach(\Tasks\Load::PROP_OPTIONS as $title => $atoms) {
+            foreach(\Exakat\Tasks\Load::PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
                     if (in_array($title, ['delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'])) {
                     // Raw string
@@ -170,9 +170,13 @@ CYPHER;
     }
 
     private function cleanCsv() {
+        if (empty($this->unlink)) {
+            return ;
+        }
         foreach($this->unlink as $file) {
             unlink($file);
         }
+
         rmdir(dirname($file));
     }
 

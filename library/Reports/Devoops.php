@@ -1005,7 +1005,19 @@ HTML;
     }
 
     private function formatThemeList($list) {
-        $html = 'This analyze is part of those themes : ';
+        static $figure2Letters = array(1 => 'one', 
+                                       2 => 'two', 
+                                       3 => 'three', 
+                                       4 => 'four', 
+                                       5 => 'five', 
+                                       6 => 'six');
+        if (isset($figure2Letters[count($list)])) {
+            $count = $figure2Letters[count($list)];
+        } else {
+            $count = count($list);
+        }
+                                       
+        $html = 'This analysis is part of '.$count.' theme'.(count($list) > 1 ? 's' : '').' : ';
         
         foreach($list as &$title) {
             $title = $this->makeLink($title, 'ajax/'.$this->makeFileName($title));
@@ -1021,7 +1033,7 @@ HTML;
             
             $text .= "    <ul>\n";
             foreach($v as $k2 => $v2) {
-                $text .= "        <li>$k2 ".($this->makeIcon($v2)).'</li>';
+                $text .= "        <li>$k2 ".$this->makeIcon($v2).'</li>';
             }
             $text .= "    </ul>\n";
             
@@ -2037,7 +2049,7 @@ TEXT
         $return = $this->formatTextLead($description);
 
         if ($clearPHP = $analyzer->getDescription()->getClearPHP()) {
-            $return .= $this->formatText('clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a><br />', 'textLead');
+            $return .= '<p>clearPHP : <a href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$clearPHP.'.md">'.$clearPHP.'</a></p>';
         }
 
         $return .= $this->formatThemeList($analyzer->getThemes());

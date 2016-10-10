@@ -130,7 +130,7 @@ DOT
     }
     
     private function str2dot($str) {
-        return htmlspecialchars($str);
+        return htmlspecialchars($str, ENT_COMPAT | ENT_HTML401 , 'UTF-8');
     }
     
     private function subgraphs($array, $level = 1, $nsname = '') {

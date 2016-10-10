@@ -35,10 +35,6 @@ class Datastore {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         
         if ($create === self::CREATE) {
-            if (self::$sqliteWrite !== null) {
-//                unset(self::$sqliteWrite);
-//                unset(self::$sqliteRead);
-            }
             if (file_exists($this->sqlitePath)) {
                 unlink($this->sqlitePath);
             }
@@ -95,7 +91,7 @@ class Datastore {
             }
             
             if (count($cols) != 2) {
-                throw new Exakat\Exceptions\WrongNumberOfColsForAHash();
+                throw new \Exakat\Exceptions\WrongNumberOfColsForAHash();
             }
         }
         
@@ -410,7 +406,7 @@ SQLITE;
                 break;
 
             default : 
-                throw new Exakat\Exceptions\NoStructureForTable($table);
+                throw new \Exakat\Exceptions\NoStructureForTable($table);
         }
 
         self::$sqliteWrite->query($createTable);

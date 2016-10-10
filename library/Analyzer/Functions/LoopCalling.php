@@ -29,15 +29,19 @@ class LoopCalling extends Analyzer\Analyzer {
     public function analyze() {
         // loop of 2
         $this->atomIs('Function')
+             ->hasNoClassTrait()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
              ->samePropertyAs('fullnspath', 'name')
              ->back('first')
@@ -46,21 +50,25 @@ class LoopCalling extends Analyzer\Analyzer {
 
         // loop of 3
         $this->atomIs('Function')
+             ->hasNoClassTrait()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
              ->samePropertyAs('fullnspath', 'name')
 
@@ -70,27 +78,32 @@ class LoopCalling extends Analyzer\Analyzer {
 
         // loop of 4
         $this->atomIs('Function')
+             ->hasNoClassTrait()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
              ->notSamePropertyAs('fullnspath', 'name')
 
              ->functionDefinition()
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD')
              ->samePropertyAs('fullnspath', 'name')
 

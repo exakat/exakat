@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Exakat | Dashboard</title>
+  <meta name="description" content="Exakat's PHP static analysis report for {{PROJECT}}">
+  <meta name="author" content="Exakat">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <title>Exakat</title>
+  <title>Exakat | Issues</title>
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <!-- Place favicon.ico in the root directory -->
@@ -33,9 +34,9 @@
       <!-- Logo -->
       <a href="index.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>E</b></span>
+        <span class="logo-mini"><b>{{PROJECT_LETTER}}</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">Bocasay</span>
+        <span class="logo-lg">{{PROJECT}}</span>
       </a>
 
       <!-- Header Navbar -->
@@ -56,10 +57,10 @@
         <ul class="sidebar-menu">
           <li class="header">HEADER</li>
           <!-- Optionally, you can add icons to the links -->
-          <li><a href="/"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
           <li><a href="files.html"><i class="fa fa-file-code-o"></i> <span>Files</span></a></li>
           <li><a href="analyzers.html"><i class="fa fa-line-chart"></i> <span>Analyzers</span></a></li>
-          <li><a href="issues.html"><i class="fa fa-flag"></i> <span>Issues</span></a></li>
+          <li class="active"><a href="issues.html"><i class="fa fa-flag"></i> <span>Issues</span></a></li>
           <li class="treeview">
             <a href="#"><i class="fa fa-pie-chart"></i> <span>Audit logs</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
@@ -69,11 +70,11 @@
               <li><a href="ext_lib.html"><i class="fa fa-circle-o"></i>External Libraries</a></li>
             </ul>
           </li>
-          <li class="treeview active">
+          <li class="treeview">
             <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="analyzers_doc.html"><i class="fa fa-circle-o"></i>Analyzers Documentation</a></li>
-              <li class="active"><a href="codes.html"><i class="fa fa-circle-o"></i>Codes</a></li>
+              <li><a href="codes.html"><i class="fa fa-circle-o"></i>Codes</a></li>
               <li><a href="credits.html"><i class="fa fa-circle-o"></i>Credits</a></li>
             </ul>
           </li>
@@ -88,48 +89,36 @@
       <div class="content-wrapper" id="ajax-content">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Codes
-          </h1>
+        <h1>
+          Issues
+        </h1>
         </section>
 
         <!-- Main content -->
-        <section id="used_settings" class="content">
-          <div class="box">
-            <div class="box-body">
-              <div class="row">
-                <div class="col-xs-12">
-                
-<pre>
-  <code class="php">
-  &lt;?php 
-    echo  $a ,' b ', $c ;
-  ?&gt;
-  </code>
-</pre>
-                
-<pre>
-  <code class="php">
-  &lt;?php 
-    echo  $a , ' b ' , $c ;
-    echo  $a b $c ;
-  ?&gt;
-  </code>
-</pre>
-                
-<pre>
-  <code class="php">
-  &lt;?php 
-    $a = array(1, 2, array("a", "b", "c"));
-    var_dump($a);
-  ?&gt;
-  </code>
-</pre>
-                </div>
-              </div>
-            </div>
-          </div>
+        <section class="content" id="issues">
+
+        	<div class="box">
+        		<div class="box-body">
+        			<div id="facets" class="filter clearfix"></div>
+                        <div class="dropdown">
+                          <button id="filename" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            File list
+                            <span class="caret"></span>
+                          </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <files />
+                        </ul>
+                        </div>
+                      <div class="row">
+                        <div class="col-xs-12" id="results">
+                            <p>Select a file to display.</p>
+                        </div>
+                      </div>
+        		</div>
+        	</div>
+
         </section>
+        <!-- /.content -->
       </div>
     </div>
     <!-- /.content-wrapper -->
@@ -158,19 +147,32 @@
     </aside>
     <!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
-    immediately after the control sidebar -->
+         immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
   </div>
   <!-- ./wrapper -->
 
   <script src="scripts/vendor.js"></script>
+  <script src="facetedsearch.js"></script>
+
+
   <script>
-    $(document).ready(function() {
-      $('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
-    });
+  "use strict";
+
+  $('.menuitem').click(function(event){
+    $('#results').load("sources/" + event.target.text);
+    $('#filename').html(event.target.text + '  <span class="caret"></span>');
+  });
+
+  var fileParam = window.location.search.split('file=')[1];
+  if(fileParam !== undefined) {
+    $('#results').load("sources/" + fileParam);
+    $('#filename').html(fileParam + '  <span class="caret"></span>');
+  }
+  
+
   </script>
 
 </body>
 </html>
+        

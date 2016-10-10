@@ -2,6 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="description" content="Exakat's PHP static analysis report for {{PROJECT}}">
+  <meta name="author" content="Exakat">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Exakat | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -33,9 +35,9 @@
       <!-- Logo -->
       <a href="index.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>E</b></span>
+        <span class="logo-mini"><b>{{PROJECT_LETTER}}</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">Bocasay</span>
+        <span class="logo-lg">{{PROJECT}}</span>
       </a>
 
       <!-- Header Navbar -->
@@ -56,7 +58,7 @@
         <ul class="sidebar-menu">
           <li class="header">HEADER</li>
           <!-- Optionally, you can add icons to the links -->
-          <li><a href="/"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
           <li><a href="files.html"><i class="fa fa-file-code-o"></i> <span>Files</span></a></li>
           <li><a href="analyzers.html"><i class="fa fa-line-chart"></i> <span>Analyzers</span></a></li>
           <li><a href="issues.html"><i class="fa fa-flag"></i> <span>Issues</span></a></li>

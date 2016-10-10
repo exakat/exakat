@@ -352,7 +352,7 @@ abstract class Analyzer {
     public function query($queryString, $arguments = null) {
         try {
             $result = $this->gremlin->query($queryString, $arguments);
-        } catch (\Exceptions\GremlinException $e) {
+        } catch (\Exakat\Exceptions\GremlinException $e) {
             display($e->getMessage().
                     $queryString);
             $result = new \StdClass();
@@ -512,7 +512,7 @@ repeat(__.in('.$linksDown.'))
     public function analyzerIsNot($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = str_replace('\\', '\\\\', self::getClass($a));
+                $a = self::getClass($a);
             }
             unset($a);
 
@@ -684,10 +684,7 @@ GREMLIN
     }
 
     public function savePropertyAs($property, $name) {
-        if ($property == 'arglist') {
-        } else {
-            $this->addMethod("sideEffect{ $name = it.get().value('$property'); }");
-        }
+        $this->addMethod("sideEffect{ $name = it.get().value('$property'); }");
 
         return $this;
     }
@@ -1644,7 +1641,7 @@ GREMLIN;
 
             if (isset($r[0]->processed->{1})) {
                 $this->processedCount += $r[0]->processed->{1};
-                $this->rowCount += (isset($r[0]->total->{1}) ? $r[0]->total->{1} : 0);
+                $this->rowCount       += isset($r[0]->total->{1}) ? $r[0]->total->{1} : 0;
             }
         }
 

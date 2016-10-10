@@ -1,4 +1,4 @@
-Version 0.8.4 (Lingkongzi, Coming up)
+Version 0.8.5 (Fuyun Sou , Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,31 @@ Version 0.8.4 (Lingkongzi, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.8.4 (Lingkongzi, 2016-10-10)
++ Architecture
+    + Moved Tasks into Exkat\Tasks
+    + Fixed findExternalLibs
++ Report
+    + Ambassador report got good annex, fixed settings and faceted search
+    + Omit clearPHP if not present in docs
++ Analyzer
+    + New analyzer : detect multiple identical traits/interface in CIT
+    + New analyzer : suggest creating aliases to reduce code
+    + New analyzer : spot aliases that may be reused again
+    + New analyzer : hidden use, that are not at the beginning of the code
+    + Upgraded analysis : 1607 / 1618 test pass (99% pass). 
+    + More documentations to many analyzers
+    + HasMagicProperty report all magic methods 
+    + Upgraded 'Useless Parenthesis' with more situations
+    + Upgraded 'Unchecked resources' with 2 more situations
+    + Fixed several analyzers when using Boolean and Null as a class
+    + Fixed analyzerIsNot with arrays
+    + Removed include-like from undefined functions
+    + Arrays/AmbiguousKeys : Extended to arrays calls
++ Tokenizer
+    + Fixed edge case with return ?>
+    + Fixed path for reporting
 
 Version 0.8.3 (Guzhi Gong, 2016-10-03)
 + Architecture

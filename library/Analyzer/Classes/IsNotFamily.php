@@ -37,10 +37,10 @@ class IsNotFamily extends Analyzer\Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToClass()
              ->notSamePropertyAs('fullnspath', 'fnp')
-             ->raw('where( until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()
-             .filter{ it.get().value("fullnspath") == fnp }
-             .count().is(neq(1))
-             )')
+             ->raw('where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+                             .filter{ it.get().value("fullnspath") == fnp }
+                             .count().is(eq(0))
+                          )')
              ->back('first');
         $this->prepareQuery();
 
