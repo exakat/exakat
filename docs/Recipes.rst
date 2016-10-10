@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 04 Oct 2016 14:29:13 +0000
-.. comment: Generation hash : 76cd1277b034d7bcdc1ec9fb4e9d2f18a067bcbe
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 256 analysis
+Total : 261 analysis
 
 * :ref:`$HTTP\_RAW\_POST\_DATA`
 * :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
@@ -109,6 +109,7 @@ Total : 256 analysis
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Static <could-be-static>`
+* :ref:`Could Use Alias <could-use-alias>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Could Use \_\_DIR\_\_ <could-use-\_\_dir\_\_>`
 * :ref:`Could Use self <could-use-self>`
@@ -116,7 +117,6 @@ Total : 256 analysis
 * :ref:`Deep Definitions <deep-definitions>`
 * :ref:`Dependant Trait <dependant-trait>`
 * :ref:`Deprecated Code <deprecated-code>`
-* :ref:`Directive Name <directive-name>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Double Assignation <double-assignation>`
 * :ref:`Double Instruction <double-instruction>`
@@ -164,13 +164,16 @@ Total : 256 analysis
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Malformed Octal <malformed-octal>`
+* :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
 * :ref:`Multiple Class Declarations <multiple-class-declarations>`
 * :ref:`Multiple Constant Definition <multiple-constant-definition>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
+* :ref:`Multiple Identical Trait Or Interface <multiple-identical-trait-or-interface>`
 * :ref:`Multiple Index Definition <multiple-index-definition>`
 * :ref:`Multiples Identical Case <multiples-identical-case>`
 * :ref:`Multiply By One <multiply-by-one>`
 * :ref:`Must Return Methods <must-return-methods>`
+* :ref:`Namespaces/HiddenUse`
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Negative <never-negative>`
@@ -228,6 +231,7 @@ Total : 256 analysis
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
 * :ref:`Short Open Tags <short-open-tags>`
 * :ref:`Should Chain Exception <should-chain-exception>`
+* :ref:`Should Make Alias <should-make-alias>`
 * :ref:`Should Typecast <should-typecast>`
 * :ref:`Should Use $this <should-use-$this>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
@@ -259,6 +263,7 @@ Total : 256 analysis
 * :ref:`Undefined Properties <undefined-properties>`
 * :ref:`Undefined Trait <undefined-trait>`
 * :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
+* :ref:`Unknown Directive Name <unknown-directive-name>`
 * :ref:`Unkown PCRE Options <unkown-pcre-options>`
 * :ref:`Unpreprocessed Values <unpreprocessed-values>`
 * :ref:`Unreachable Code <unreachable-code>`
