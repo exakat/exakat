@@ -103,7 +103,10 @@ class $name extends Analyzer\Analyzer {
 PHP;
 
 file_put_contents('library/Analyzer/'.$analyzer.'.php', $php);
-print 'bbedit library/Analyzer/'.$analyzer.'.php'."\n";
+shell_exec( 'bbedit library/Analyzer/'.$analyzer.'.php'."\n");
+shell_exec( 'bbedit human/en/'.$analyzer.'.ini');
+//print 'php manualTest.php Tests/'.$analyzer.'.php');
+print 'php exakat analyze -p project -P '.$analyzer.' -v'."\n";
 
 // add documentation
 $ini = <<<INI
