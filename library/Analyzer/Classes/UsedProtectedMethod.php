@@ -26,10 +26,6 @@ namespace Analyzer\Classes;
 use Analyzer;
 
 class UsedProtectedMethod extends Analyzer\Analyzer {
-    public function dependsOn() {
-        return array('Classes/IsNotFamily');
-    }
-
     public function analyze() {
         // method used in a static methodcall \a\b::b()
         $this->atomIs('Class')
@@ -49,7 +45,6 @@ class UsedProtectedMethod extends Analyzer\Analyzer {
              ->goToAllChildren(true)
              ->outIs('BLOCK')
              ->atomInside('Staticmethodcall')
-             ->analyzerIsNot('Classes/IsNotFamily')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->samePropertyAs('code', 'name', true)
