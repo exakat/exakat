@@ -1104,9 +1104,9 @@ TEXT
         }
         
         $return = $this->formatText( <<<TEXT
-This is the list of analyzers that were run. Those that doesn't have result will not be listed in the 'Analyzers' section.
+This is the list of analyzers that were run. Those that don't have any results will not be listed in the 'Analyzers' section.
 
-This may be due to PHP version or PHP configuration incompatibilities.
+This may be due to the PHP version or PHP configuration incompatibilities.
 TEXT
 , 'textLead');
 
@@ -1495,8 +1495,8 @@ This is an overview of your application.
 
 <ul>
 <li>Ticked <i class="fa fa-check"></i> information are features used in the application.</li>
-<li>Non-ticked are feature that are not in use in the application.</li>
-<li>Crossed <i class="fa fa-minus-circle"></i> features are not compatibile with the PHP version used, or its configuration. </li>
+<li>Non-ticked are features that are not in use in the application.</li>
+<li>Crossed <i class="fa fa-minus-circle"></i> features are not compatible with the PHP version used, or its configuration. </li>
 <li>Crossed <i class="fa fa-times-circle-o"></i> information were not tested.</li>
 </ul>
 
