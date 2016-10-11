@@ -20,6 +20,23 @@
  *
 */
 
+// More to come, and automate collection too
+$attributes = array('ANALYZERS_COUNT' => '261');
+
+shell_exec('rm docs/*.rst');
+
+$files = glob('docs/src/*.rst');
+foreach($files as $file) {
+    $rst = file_get_contents($file);
+    
+    $rst = str_replace(array_map(function ($x) { return '{{'.$x.'}}'; }, array_keys($attributes)), array_values($attributes), $rst);
+    if (preg_match_all('/{{(.*?)}}/', $rst, $r)) {
+        print "There are ".count($r[1])." missed attributes in \"".basename($file)."\" : ".implode(", ", $r[1])."\n\n";
+    }
+    
+    file_put_contents(str_replace('/src/', '/', $file), $rst);
+}
+
 $recipes = ["Analyze",
             "CompatibilityPHP72",
             "CompatibilityPHP71",
@@ -39,40 +56,43 @@ $recipes = ["Analyze",
 $text = '';
 $recipesList = '"'.join('", "', $recipes).'"';
 $glossary = array();
-$entries = array('preg\_replace'                  => 'http://www.php.net/preg_replace',
-                 'preg\_match'                    => 'http://www.php.net/preg_match',
-                 'preg\_replace\_callback\_array' => 'http://www.php.net/preg_replace_callback_array',
+$entries = array('preg_replace'                   => 'http://www.php.net/preg_replace',
+                 'preg_match'                     => 'http://www.php.net/preg_match',
+                 'preg_replace_callback_array'    => 'http://www.php.net/preg_replace_callback_array',
                  'pow'                            => 'http://www.php.net/pow',
-                 'array\_unique'                  => 'http://www.php.net/array_unique',
-                 'array\_count\_values'           => 'http://www.php.net/array_count_values',
-                 'array\_flip'                    => 'http://www.php.net/array_flip',
-                 'array\_keys'                    => 'http://www.php.net/array_keys',
+                 'array_unique'                   => 'http://www.php.net/array_unique',
+                 'array_count_values'             => 'http://www.php.net/array_count_values',
+                 'array_flip'                     => 'http://www.php.net/array_flip',
+                 'array_keys'                     => 'http://www.php.net/array_keys',
                  'strpos'                         => 'http://www.php.net/strpos',
                  'stripos'                        => 'http://www.php.net/stripos',
                  'throw'                          => 'http://www.php.net/throw',
-                 'curl\_share\_strerror'          => 'http://www.php.net/curl_share_strerror',
-                 'curl\_multi\_errno'             => 'http://www.php.net/curl_multi_errno',
-                 'random\_int'                    => 'http://www.php.net/random_int',
-                 'random\_bytes'                  => 'http://www.php.net/random_bytes',
+                 'curl_share_strerror'            => 'http://www.php.net/curl_share_strerror',
+                 'curl_multi_errno'               => 'http://www.php.net/curl_multi_errno',
+                 'random_int'                     => 'http://www.php.net/random_int',
+                 'random_bytes'                   => 'http://www.php.net/random_bytes',
+                 'openssl_random_pseudo_bytes'    => 'http://www.php.net/openssl_random_pseudo_bytes',
                  'rand'                           => 'http://www.php.net/rand',
                  'srand'                          => 'http://www.php.net/srand',
-                 'mt\_rand'                       => 'http://www.php.net/mt_rand',
-                 'mt\_srand'                      => 'http://www.php.net/mt_srand',
-                 'set\_exception\_handler'        => 'http://www.php.net/set_exception_handler',
+                 'mt_rand'                        => 'http://www.php.net/mt_rand',
+                 'mt_srand'                       => 'http://www.php.net/mt_srand',
+                 'set_exception_handler'          => 'http://www.php.net/set_exception_handler',
                  'join'                           => 'http://www.php.net/join',
                  'implode'                        => 'http://www.php.net/implode',
                  'file'                           => 'http://www.php.net/file',
-                 'file\_get\_contents'            => 'http://www.php.net/file_get_contents',
-                 'file\_put\_contents'            => 'http://www.php.net/file_put_contents',
+                 'file_get_contents'              => 'http://www.php.net/file_get_contents',
+                 'file_put_contents'              => 'http://www.php.net/file_put_contents',
                  'fopen'                          => 'http://www.php.net/fopen',
                  'fclose'                         => 'http://www.php.net/fclose',
                  'time'                           => 'http://www.php.net/time',
                  'microtime'                      => 'http://www.php.net/microtime',
+                 'sleep'                          => 'http://www.php.net/sleep',
+                 'usleep'                         => 'http://www.php.net/usleep',
 
                  'strlen'                         => 'http://www.php.net/strlen',
-                 'mb\_strlen'                     => 'http://www.php.net/mb_strlen',
-                 'grapheme\_strlen'               => 'http://www.php.net/grapheme_strlen',
-                 'iconv\_strlen'                  => 'http://www.php.net/iconv_strlen',
+                 'mb_strlen'                      => 'http://www.php.net/mb_strlen',
+                 'grapheme_strlen'                => 'http://www.php.net/grapheme_strlen',
+                 'iconv_strlen'                   => 'http://www.php.net/iconv_strlen',
                  'empty'                          => 'http://www.php.net/empty',
 
                  'usort'                          => 'http://www.php.net/usort',
@@ -83,14 +103,14 @@ $entries = array('preg\_replace'                  => 'http://www.php.net/preg_re
                  'exec'                           => 'http://www.php.net/exec',
                  'eval'                           => 'http://www.php.net/eval',
 
-                 'mb\_substr'                     => 'http://www.php.net/mb_substr',
-                 'mb\_ord'                        => 'http://www.php.net/mb_ord',
-                 'mb\_chr'                        => 'http://www.php.net/mb_chr',
-                 'mb\_scrub'                      => 'http://www.php.net/mb_scrub',
-                 'is\_iterable'                   => 'http://www.php.net/is_iterable',
+                 'mb_substr'                      => 'http://www.php.net/mb_substr',
+                 'mb_ord'                         => 'http://www.php.net/mb_ord',
+                 'mb_chr'                         => 'http://www.php.net/mb_chr',
+                 'mb_scrub'                       => 'http://www.php.net/mb_scrub',
+                 'is_iterable'                    => 'http://www.php.net/is_iterable',
                  
-                 'get\_class'                     => 'http://www.php.net/get_class',
-                 'sys\_get\_temp\_dir'            => 'http://php.net/manual/en/function.sys-get-temp-dir.php',
+                 'get_class'                      => 'http://www.php.net/get_class',
+                 'sys_get_temp_dir'               => 'http://php.net/manual/en/function.sys-get-temp-dir.php',
  
                  'switch()'                       => 'http://php.net/manual/en/control-structures.switch.php',
                  'for()'                          => 'http://php.net/manual/en/control-structures.for.php',
@@ -98,32 +118,33 @@ $entries = array('preg\_replace'                  => 'http://www.php.net/preg_re
                  'while()'                        => 'http://php.net/manual/en/control-structures.while.php',
                  'do..while()'                    => 'http://php.net/manual/en/control-structures.do.while.php',
    
-                 '`break`'                        => 'http://php.net/manual/en/control-structures.break.php',
-                 '`continue`'                     => 'http://php.net/manual/en/control-structures.continue.php',
+                 'break'                          => 'http://php.net/manual/en/control-structures.break.php',
+                 'continue'                       => 'http://php.net/manual/en/control-structures.continue.php',
                  'instanceof'                     => 'http://php.net/manual/en/language.operators.type.php',
                  'insteadof'                      => 'http://php.net/manual/en/language.oop5.traits.php',
-                    
-                 '`**`'                           => 'http://php.net/manual/en/language.operators.arithmetic.php',
+                     
+                 '**'                             => 'http://php.net/manual/en/language.operators.arithmetic.php',
                  '$_GET'                          => 'http://php.net/manual/en/reserved.variables.get.php',
                  '$_POST'                         => 'http://php.net/manual/en/reserved.variables.post.php',
+                 '$HTTP_RAW_POST_DATA'            => 'http://php.net/manual/en/reserved.variables.httprawpostdata.php',
                  '$this'                          => 'http://php.net/manual/en/language.oop5.basic.php',
                   
-                 '\_\_construct'                  => 'http://php.net/manual/en/language.oop5.decon.php',
-                 '\_\_destruct'                   => 'http://php.net/manual/en/language.oop5.decon.php',
+                 '__construct'                  => 'http://php.net/manual/en/language.oop5.decon.php',
+                 '__destruct'                   => 'http://php.net/manual/en/language.oop5.decon.php',
                   
-                 '\_\_call'                       => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_callStatic'                 => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_get'                        => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_set'                        => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_isset'                      => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_unset'                      => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_sleep'                      => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_wakeup'                     => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_toString'                   => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_invoke'                     => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_set_state'                  => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_clone'                      => 'http://php.net/manual/en/language.oop5.magic.php',
-                 '\_\_debugInfo'                  => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__call'                       => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__callStatic'                 => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__get'                        => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__set'                        => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__isset'                      => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__unset'                      => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__sleep'                      => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__wakeup'                     => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__toString'                   => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__invoke'                     => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__set_state'                  => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__clone'                      => 'http://php.net/manual/en/language.oop5.magic.php',
+                 '__debugInfo'                  => 'http://php.net/manual/en/language.oop5.magic.php',
                  
                  'ArrayAccess'                    => 'http://php.net/manual/en/class.arrayaccess.php',
                  'Throwable'                      => 'http://php.net/manual/fr/class.throwable.php',
@@ -131,14 +152,14 @@ $entries = array('preg\_replace'                  => 'http://www.php.net/preg_re
                  'Traversable'                    => 'http://php.net/manual/fr/class.traversable.php',
                  'ParseError'                     => 'http://php.net/manual/fr/class.parseerror.php',
                  
-                 '__FILE__'                       => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__DIR__'                        => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__LINE__'                       => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__CLASS__'                      => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__METHOD__'                     => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__NAMESPACE__'                  => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__TRAIT__'                      => 'http://php.net/manual/en/language.constants.predefined.php',
-                 '__FUNCTION__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
+                 '__FILE__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
+                 '__DIR__'                    => 'http://php.net/manual/en/language.constants.predefined.php',
+                 '__LINE__'                   => 'http://php.net/manual/en/language.constants.predefined.php',
+                 '__CLASS__'                  => 'http://php.net/manual/en/language.constants.predefined.php',
+                 '__METHOD__'                 => 'http://php.net/manual/en/language.constants.predefined.php',
+                 '__NAMESPACE__'              => 'http://php.net/manual/en/language.constants.predefined.php',
+                 '__TRAIT__'                  => 'http://php.net/manual/en/language.constants.predefined.php',
+                 '__FUNCTION__'               => 'http://php.net/manual/en/language.constants.predefined.php',
 
                  );
 
@@ -178,10 +199,10 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
 
         $a = rst_link($ini['name']);
 
-        $desc = trim(rst_escape($ini['description']));
-        $ini['description'] = rst_link($ini['description']);
+//        $ini['description'] = rst_link($ini['description']);
         
-        $ini['description'] = glossary($ini['name'], $ini['description']);
+        $desc = glossary($ini['name'], $ini['description']);
+        $desc = trim(rst_escape($desc));
 
         if (!empty($ini['clearphp'])) {
             $clearPHP = "`$ini[clearphp] <https://github.com/dseguy/clearPHP/tree/master/rules/$ini[clearphp].md>`__";
@@ -196,7 +217,7 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $recipes = 'none';
         }
         
-        $lineSize = max(strlen($commandLine), strlen($clearPHP), strlen($recipes));
+        $lineSize    = max(strlen($commandLine), strlen($clearPHP), strlen($recipes));
         $commandLine = str_pad($commandLine, $lineSize, ' ');
         $recipes     = str_pad($recipes,     $lineSize, ' ');
         $separator   = '+--------------+-'.str_pad('', $lineSize, '-').'-+';
@@ -231,13 +252,13 @@ foreach($analyzers as $title => $desc) {
     $rules .= rst_level($title, 3)."\n\n$desc\n\n";
 }
 
-$rst = file_get_contents('docs/Recipes.rst');
+$rst = file_get_contents('docs/src/Recipes.rst');
 $date = date('r');
 $hash = shell_exec('git rev-parse HEAD');
 $rst = preg_replace('/.. comment: Recipes details(.*)$/is', ".. comment: Recipes details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$text", $rst);
 print file_put_contents('docs/Recipes.rst', $rst)." octets written for Recipes\n";
 
-$rst = file_get_contents('docs/Rules.rst');
+$rst = file_get_contents('docs/src/Rules.rst');
 $rst = preg_replace('/.. comment: Rules details(.*)$/is', ".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$rules", $rst);
 print file_put_contents('docs/Rules.rst', $rst)." octets written for Rules\n";
 
@@ -287,6 +308,7 @@ function rst_anchor_def($name) {
 
 function rst_escape($string) {
     $r = preg_replace_callback('/<\?php(.*?)\?>/is', function ($r) {
+        $r[0] = preg_replace('/`([^ ]+?) .*?`_/', '$1', $r[0]);
         $rst = ".. code-block:: php\n\n   ".str_replace("\n", "\n   ", $r[0])."\n";
         return $rst;
     }, $string);
@@ -296,7 +318,8 @@ function rst_escape($string) {
         return $rst;
     }, $r);
 
-    $r = str_replace(array('*', '|', '_'), array('\\*', '\\|', '\\_'), $r);
+//    $r = str_replace(array('*', '|'), array('\\*', '\\|'), $r);
+    $r = str_replace(array('**='), array('\\*\\*\\='), $r);
     
     return $r;
 }
@@ -316,20 +339,47 @@ function rst_level($title, $level = 1) {
     return rst_anchor_def($title).$escapeTitle."\n".str_repeat($levels[$level], strlen($escapeTitle))."\n";
 }
 
-function glossary($title, &$description) {
+function glossary($title, $description) {
     global $glossary, $entries;
+
+    $alt = implode('|', array_keys($entries));
+    $alt = str_replace(array('*', '(', ')'), array('\\*', '\(', '\)'), $alt);
     
+    $cbGlossary = function ($r) use ($title) {
+        global $glossary, $entries;
+        
+        $letter = strtoupper($r[2]{0});
+        $glossary[$letter][$r[2]][":ref:`$title <".rst_anchor($title).">`"] = 1;
+        
+        if (isset($entries[$r[2]])) {
+            $url = $entries[$r[2]];
+            return $r[1]."`$r[2]$r[3] <$url>`_";//.$r[4];
+        } else {
+//            print "Nothing for ".$r[2]."\n";
+            return $r[0];
+        }
+
+    };
+    
+    $description = preg_replace_callback('@([^a-zA-Z_])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])@is', $cbGlossary, ' '.$description);
+    /*, $r
     foreach($entries as $keyword => $url) {
         $letter = strtoupper(trim($keyword, '\\`'))[0];
 
         $regex = preg_quote($keyword);
-        if (preg_match('!\W'.$regex.'\W!is', $description, $r)) {
+        if (preg_match('![^a-zA-Z`_]'.$regex.'[^a-zA-Z_]!is', $description, $r)) {
             $glossary[$letter][$keyword][":ref:`$title <".rst_anchor($title).">`"] = 1;
-            $description = preg_replace('!'.$regex.'!is', "`$keyword <$url>`_", $description);
+            $description = preg_replace('!'.$regex.'(\S*)!is', "`$keyword\$1 <$url>`_", $description);
         }
     }
-
+    */
+    if ($title == 'Use random_int()') {
+//        print $description;
+    }
+    
+    
     return $description;
 }
+
 
 ?>

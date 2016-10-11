@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Exakat'
-copyright = u'2015, Damien Seguy'
+copyright = u'2015-2016, Damien Seguy'
 author = u'Damien Seguy'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -55,7 +55,7 @@ author = u'Damien Seguy'
 # built documents.
 #
 # The short X.Y version.
-version = u'0.4'
+version = u'0.8'
 # The full version, including alpha/beta/rc tags.
 release = u'1'
 
@@ -74,7 +74,7 @@ language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build']
+exclude_patterns = ['_build', 'src']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
