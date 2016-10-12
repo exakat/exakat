@@ -24,12 +24,13 @@
 namespace Analyzer\Structures;
 
 use Analyzer;
+use Exakat\Tokenizer\Token;
 
 class ImplicitGlobal extends Analyzer\Analyzer {
     public function analyze() {
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
 
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         $globalGlobal = $this->query('g.V().hasLabel("Global").out("GLOBAL")
 .where( repeat(__.in('.$linksDown.')).until(hasLabel("File")).emit().hasLabel("Function").count().is(eq(0)) )
 .values("code").unique()');

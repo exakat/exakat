@@ -21,7 +21,7 @@
 */
 
 
-namespace Data;
+namespace Exakat\Data;
 
 class ZendF {
     private $sqlite = null;

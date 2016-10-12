@@ -20,6 +20,8 @@
  *
 */
 
+namespace Exakat;
+
 class Stats {
     private $stats = array();
     private $file_filter = '';

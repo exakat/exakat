@@ -20,7 +20,11 @@
  *
 */
 
-namespace Reports;
+namespace Exakat\Reports;
+
+use Exakat\Datastore;
+use Exakat\Phpexec;
+use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
 
@@ -259,9 +263,9 @@ class Ambassador extends Reports {
      * @return string
      */
     public function getHashData() {
-        $php = new \Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion);
 
-        $datastore = new \Datastore($this->config);
+        $datastore = new Datastore($this->config);
         $info = array(
             'Number of PHP files' => $datastore->getHash('files'),
             'Number of lines of code' => $datastore->getHash('loc'),
@@ -978,7 +982,7 @@ SQL;
             $info[] = array('Repository URL', 'Downloaded archive');
         }
 
-        $datastore = new \Datastore($this->config);
+        $datastore = new Datastore($this->config);
         
         $info[] = array('Number of PHP files', $datastore->getHash('files'));
         $info[] = array('Number of lines of code', $datastore->getHash('loc'));
@@ -986,7 +990,7 @@ SQL;
 
         $info[] = array('Report production date', date('r', strtotime('now')));
         
-        $php = new \Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
         

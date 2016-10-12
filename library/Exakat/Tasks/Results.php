@@ -23,6 +23,8 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Tokenizer\Token;
+
 class Results extends Tasks {
     public function run(\Exakat\Config $config) {
         $analyzer = $config->program;
@@ -69,7 +71,7 @@ GREMLIN;
 
             $return[] = $vertices[0];
         } elseif ($config->style == 'ALL') {
-            $linksDown = \Tokenizer\Token::linksAsList();
+            $linksDown = Token::linksAsList();
 
             $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "{$analyzer}").out('ANALYZED')

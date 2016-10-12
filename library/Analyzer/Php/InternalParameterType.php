@@ -22,6 +22,7 @@
 namespace Analyzer\Php;
 
 use Analyzer;
+use Exakat\Data\Methods;
 
 class InternalParameterType extends Analyzer\Analyzer {
     public function dependsOn() {
@@ -29,7 +30,7 @@ class InternalParameterType extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $data = new \Data\Methods();
+        $data = new Methods();
         $args = $data->getInternalParameterType();
 
         $typeConversion = array('string'   => array('Magicconstant', 'Heredoc', 'String'),

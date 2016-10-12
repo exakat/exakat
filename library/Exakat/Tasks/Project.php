@@ -23,6 +23,8 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Datastore;
+
 class Project extends Tasks {
     private $project_dir = '.';
     private $config = null;
@@ -74,7 +76,7 @@ class Project extends Tasks {
         $this->logTime('Start');
 
         // cleaning datastore
-        $this->datastore = new \Datastore($config, \Datastore::CREATE);
+        $this->datastore = new Datastore($config, Datastore::CREATE);
         
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start' => $audit_start,

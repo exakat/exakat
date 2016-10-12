@@ -24,10 +24,11 @@
 namespace Analyzer\Composer;
 
 use Analyzer;
+use Exakat\Data\Composer;
 
 class IsComposerClass extends Analyzer\Analyzer {
     public function analyze() {
-        $data = new \Data\Composer();
+        $data = new Composer();
 
         $classes = $data->getComposerClasses();
         $classesFullNP = $this->makeFullNsPath($classes);

@@ -20,7 +20,11 @@
  *
 */
 
-namespace Reports;
+namespace Exakat\Reports;
+
+use Exakat\Datastore;
+use Exakat\Config;
+
 
 class FacetedJson extends Reports {
     const FILE_EXTENSION = 'json';
@@ -42,9 +46,9 @@ SELECT  id AS id,
 SQL;
         $res = $sqlite->query($sqlQuery);
         
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
 
-        $datastore = new \Datastore($config);
+        $datastore = new Datastore($config);
 
         $items = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {

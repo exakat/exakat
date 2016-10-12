@@ -24,10 +24,11 @@
 namespace Analyzer\Structures;
 
 use Analyzer;
+use Exakat\Tokenizer\Token;
 
 class UnusedLabel extends Analyzer\Analyzer {
     public function analyze() {
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
 
         // inside functions
         $this->atomIs('Label')

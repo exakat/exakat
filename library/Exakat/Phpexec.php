@@ -20,6 +20,7 @@
  *
 */
 
+namespace Exakat;
 
 class Phpexec {
     private $phpexec          = 'php';

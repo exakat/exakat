@@ -23,6 +23,8 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Tokenizer\Token;
+
 class Dump extends Tasks {
     private $stmtResults       = null;
     private $stmtResultsCounts = null;
@@ -154,7 +156,7 @@ SQL;
         $this->stmtResults->bindValue(':class', $class, SQLITE3_TEXT);
         $analyzerName = 'Analyzer\\\\'.str_replace('/', '\\\\', $class);
         
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "{$analyzerName}").out('ANALYZED')
@@ -232,7 +234,7 @@ SQL;
         $insert = $sqlite->prepare($sqlQuery);
 
         
-        foreach(\Tokenizer\Token::ATOMS as $atom) {
+        foreach(Token::ATOMS as $atom) {
             $query = 'g.V().hasLabel("'.$atom.'").count()';
             $res = $this->gremlin->query($query);
             if (!is_object($res) || !isset($res->results)) {

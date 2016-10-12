@@ -24,6 +24,7 @@
 namespace Analyzer\Composer;
 
 use Analyzer;
+use Exakat\Data\Composer;
 
 class IsComposerInterface extends Analyzer\Analyzer {
 
@@ -32,7 +33,7 @@ class IsComposerInterface extends Analyzer\Analyzer {
     }
     
     public function analyze() {
-        $data = new \Data\Composer();
+        $data = new Composer();
 
         $interfaces = $data->getComposerInterfaces();
         $interfacesFullNP = $this->makeFullNsPath($interfaces);

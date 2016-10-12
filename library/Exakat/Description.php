@@ -20,6 +20,7 @@
  *
 */
 
+namespace Exakat;
 
 class Description {
     private $language = 'en';

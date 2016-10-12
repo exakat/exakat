@@ -21,7 +21,11 @@
 */
 
 
-namespace Loader;
+namespace Exakat\Loader;
+
+use Exakat\Datastore;
+use Exakat\Config;
+use Exakat\Graph\Cypher;
 
 class CypherG3 {
     const CSV_SEPARATOR = ',';
@@ -51,10 +55,10 @@ class CypherG3 {
     private $cyhper = null;
     
     public function __construct() {
-        $this->config = \Exakat\Config::factory();
+        $this->config = Config::factory();
         
         // Force autoload
-        $this->cypher = new \Graph\Cypher($this->config );
+        $this->cypher = new Cypher($this->config );
 
         if (file_exists($this->config->projects_root.'/.exakat/nodes.cypher.csv') && static::$file_saved == 0) {
             $this->cleanCsv();
@@ -182,7 +186,7 @@ CYPHER;
 
     public function saveTokenCounts() {
         $config = \Exakat\Config::factory();
-        $datastore = new \Datastore($config);
+        $datastore = new Datastore($config);
         
         $datastore->addRow('tokenCounts', static::$tokenCounts);
     }

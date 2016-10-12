@@ -23,6 +23,9 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Datastore;
+use Exakat\Phpexec;
+
 class Phploc extends Tasks {
     const OK = 0;
     const IGNORED_BY_CONFIG = 1;
@@ -48,7 +51,7 @@ class Phploc extends Tasks {
                 die("Datastore for '$project' doesn't exist. Run 'files' first.\n");
             }
             
-            $datastore = new \Datastore($config);
+            $datastore = new Datastore($config);
             $files = $datastore->getCol('files', 'file');
 
             foreach($files as $file) {
@@ -140,7 +143,7 @@ class Phploc extends Tasks {
                         'files'      => 1);
 
         $lines = array();
-        $php = new \Phpexec();
+        $php = new Phpexec();
         
         $tokens = $php->getTokenFromFile($filename);
 

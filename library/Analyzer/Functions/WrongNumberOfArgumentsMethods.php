@@ -24,11 +24,12 @@
 namespace Analyzer\Functions;
 
 use Analyzer;
+use Exakat\Data\Methods;
 
 class WrongNumberOfArgumentsMethods extends Analyzer\Analyzer {
     
     public function analyze() {
-        $data = new \Data\Methods();
+        $data = new Methods();
         
         $methods = $data->getMethodsArgsInterval();
         $argsMins = array();

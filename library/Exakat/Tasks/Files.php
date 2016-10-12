@@ -23,6 +23,8 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Phpexec;
+
 class Files extends Tasks {
     private $config = null;
 
@@ -285,7 +287,7 @@ class Files extends Tasks {
             $regex = '#^('.implode('|', $ignoreDirs).')#';
         }
 
-        $php = new \Phpexec();
+        $php = new Phpexec();
         $ignoredFiles = array();
 
         $d = getcwd();

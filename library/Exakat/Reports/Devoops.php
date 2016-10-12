@@ -21,7 +21,12 @@
 */
 
 
-namespace Reports;
+namespace Exakat\Reports;
+
+use Exakat\Datastore;
+use Exakat\Data\Methods;
+use Exakat\Phpexec;
+use Exakat\Reports\Reports;
 
 class Devoops extends Reports {
     const FOLDER_PRIVILEGES = 0755;
@@ -111,8 +116,8 @@ class Devoops extends Reports {
         copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
-        $this->dump      = new \sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
-        $this->datastore = new \sqlite3($folder.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
+        $this->dump      = new \Sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
+        $this->datastore = new \Sqlite3($folder.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
         
         // Compatibility
         $compatibility = array('Compilation' => 'Compilation');
@@ -1538,7 +1543,7 @@ TEXT
             $info[] = array('Repository URL', 'Downloaded archive');
         }
 
-        $datastore = new \Datastore($this->config);
+        $datastore = new Datastore($this->config);
         
         $info[] = array('Number of PHP files', $datastore->getHash('files'));
         $info[] = array('Number of lines of code', $datastore->getHash('loc'));
@@ -1546,7 +1551,7 @@ TEXT
 
         $info[] = array('Report production date', date('r', strtotime('now')));
         
-        $php = new \Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
         
@@ -1561,7 +1566,7 @@ TEXT
         $css->titles = array('Title', 'Solved In 7.0', 'Solved In 5.6', 'Solved In 5.5', 'Solved In php-src', 'bugs.php.net', 'CVE');
         $css->readOrder = $css->titles;
 
-        $data = new \Data\Methods();
+        $data = new Methods();
         $bugfixes = $data->getBugFixes();
         
         $found = $this->dump->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');

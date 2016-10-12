@@ -24,10 +24,11 @@
 namespace Analyzer\Composer;
 
 use Analyzer;
+use Exakat\Data\Composer;
 
 class IsComposerNsname extends Analyzer\Analyzer {
     public function analyze() {
-        $data = new \Data\Composer();
+        $data = new Composer();
 
         $packagistNamespaces = $data->getComposerNamespaces();
         $packagistNamespacesFullNS = $this->makeFullNSpath($packagistNamespaces);

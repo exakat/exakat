@@ -20,10 +20,13 @@
  *
 */
 
-namespace Graph;
+namespace Exakat\Graph;
+
+use Exakat\Config;
+use Exakat\Graph\Graph;
 
 class Cypher extends Graph {
-    public function __construct(\Exakat\Config $config) {
+    public function __construct(Config $config) {
         parent::__construct($config);
     }
 

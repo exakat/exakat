@@ -20,7 +20,7 @@
  *
 */
 
-namespace Reports;
+namespace Exakat\Reports;
 
 class Dependencies extends Reports {
     CONST FILE_EXTENSION = 'dot';

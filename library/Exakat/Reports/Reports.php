@@ -20,7 +20,7 @@
  *
 */
 
-namespace Reports;
+namespace Exakat\Reports;
 
 abstract class Reports {
     private $count = 0;

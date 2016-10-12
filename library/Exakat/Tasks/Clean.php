@@ -23,6 +23,8 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Datastore;
+
 class Clean extends Tasks {
     public function __construct($gremlin) {
         $this->enabledLog = false;
@@ -90,7 +92,7 @@ class Clean extends Tasks {
         }
         display("Removed $total files\n");
 
-        $this->datastore = new \Datastore($config, \Datastore::CREATE);
+        $this->datastore = new Datastore($config, Datastore::CREATE);
         display("Recreating database\n");
     }
 }

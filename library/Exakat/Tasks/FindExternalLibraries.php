@@ -23,6 +23,8 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Phpexec;
+
 class FindExternalLibraries extends Tasks {
     const WHOLE_DIR   = 1;
     const FILE_ONLY   = 2;
@@ -97,7 +99,7 @@ class FindExternalLibraries extends Tasks {
             return;
         }
 
-        $this->php = new \Phpexec();
+        $this->php = new Phpexec();
         if (!$this->php->isValid()) {
             die("This PHP binary is not valid for running Exakat.\n");
         }

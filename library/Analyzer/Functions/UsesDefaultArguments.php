@@ -24,10 +24,11 @@
 namespace Analyzer\Functions;
 
 use Analyzer;
+use Exakat\Data\Methods;
 
 class UsesDefaultArguments extends Analyzer\Analyzer {
     public function analyze() {
-        $data = new \Data\Methods();
+        $data = new Methods();
         $functions = $data->getFunctionsArgsInterval();
 
         $positions = array();

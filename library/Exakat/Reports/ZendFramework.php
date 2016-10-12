@@ -21,7 +21,9 @@
 */
 
 
-namespace Reports;
+namespace Exakat\Reports;
+
+use Exakat\Devoops;
 
 class ZendFramework extends Devoops {
     public function __construct() {

@@ -23,9 +23,13 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Data\Methods;
+use Exakat\Tokenizer\Token;
+
 class LoadFinal extends Tasks {
-    public function run(\Exakat\Config $config) {
-        $linksIn = \Tokenizer\Token::linksAsList();
+    public function run(Config $config) {
+        $linksIn = Token::linksAsList();
         
         // processing '\parent' fullnspath
         $query = <<<GREMLIN
@@ -283,7 +287,7 @@ g.V().hasLabel("Identifier",  "Nsname").not(hasLabel("Functioncall"))
 GREMLIN;
         $this->gremlin->query($query);
 
-        $data = new \Data\Methods();
+        $data = new Methods();
         $deterministFunctions = $data->getDeterministFunctions();
         $deterministFunctions = array_map(function ($x) { return '\\'.$x['name'];}, $deterministFunctions);
 

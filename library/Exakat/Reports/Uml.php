@@ -20,7 +20,7 @@
  *
 */
 
-namespace Reports;
+namespace Exakat\Reports;
 
 class Uml extends Reports {
     CONST FILE_EXTENSION = 'dot';

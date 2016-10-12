@@ -23,11 +23,14 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Stats;
+
 class Stat extends Tasks {
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $project = $config->project;
 
-        $stats = new \Stats($this->gremlin);
+        $stats = new Stats($this->gremlin);
         if ($config->filename) {
             $stats->setFileFilter($config->filename);
         }

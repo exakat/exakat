@@ -23,6 +23,10 @@
 
 namespace Analyzer;
 
+use Exakat\Description;
+use Exakat\Config;
+use Exakat\Tokenizer\Token;
+
 abstract class Analyzer {
     protected $neo4j          = null;
     protected $code           = null;
@@ -104,11 +108,11 @@ abstract class Analyzer {
         $this->apply = new AnalyzerApply();
         $this->apply->setAnalyzer($this->analyzer);
         
-        $this->description = new \Description($this->analyzer);
+        $this->description = new Description($this->analyzer);
         
         $this->_as('first');
         
-        $this->config = \Exakat\Config::factory();
+        $this->config = Config::factory();
     }
     
     public function __destruct() {
@@ -390,7 +394,7 @@ abstract class Analyzer {
 ////////////////////////////////////////////////////////////////////////////////
 
     protected function hasNoInstruction($atom = 'Function') {
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         $this->addMethod('where( 
 repeat(__.in('.$linksDown.'))
 .until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(eq(0)))');
@@ -403,7 +407,7 @@ repeat(__.in('.$linksDown.'))
             return $this->hasNoInstruction($atom);
         }
 
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         $this->addMethod('where( 
 repeat(__.in('.$linksDown.'))
 .until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'").count().is(eq(0)))');
@@ -412,7 +416,7 @@ repeat(__.in('.$linksDown.'))
     }
 
     protected function hasInstruction($atom = 'Function') {
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         $this->addMethod('where( 
 repeat(__.in('.$linksDown.'))
 .until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(neq(0)))');
@@ -421,7 +425,7 @@ repeat(__.in('.$linksDown.'))
     }
 
     protected function goToInstruction($atom = 'Namespace') {
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         $this->addMethod('repeat( __.in(
 '.$linksDown.'
         )).until(hasLabel('.$this->SorA($atom).', "File") )');
@@ -1061,7 +1065,7 @@ GREMLIN
     }
     
     public function goToFunction() {
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         $this->addMethod('repeat(__.in(
 '.$linksDown.'
 )).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))');
@@ -1368,7 +1372,7 @@ GREMLIN
     }
 
     public function isLocalClass() {
-        $linksUp = \Tokenizer\Token::linksAsList();
+        $linksUp = Token::linksAsList();
 
         $this->addMethod(<<<GREMLIN
 sideEffect{ inside = it.get().value("fullnspath"); }
@@ -1381,7 +1385,7 @@ GREMLIN
     }
     
     public function isNotLocalClass() {
-        $linksUp = \Tokenizer\Token::linksAsList();
+        $linksUp = Token::linksAsList();
 
         $this->addMethod(<<<GREMLIN
 sideEffect{ inside = it.get().value("fullnspath"); }
@@ -1466,7 +1470,7 @@ GREMLIN
             $forClosure = "";
         }
         
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         $this->addMethod(<<<GREMLIN
 as("context")
 .sideEffect{ line = it.get().value('line');

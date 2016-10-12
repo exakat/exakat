@@ -20,7 +20,7 @@
  *
 */
 
-namespace Graph;
+namespace Exakat\Graph;
 
 abstract class Graph {
     protected $config = null;

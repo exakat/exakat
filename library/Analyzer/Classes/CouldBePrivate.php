@@ -24,14 +24,16 @@
 namespace Analyzer\Classes;
 
 use Analyzer;
+use Exakat\Tokenizer\Token;
 
 class CouldBePrivate extends Analyzer\Analyzer {
     public function analyze() {
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         // Searching for properties that are never used outside the definition class or its children
 
         // Non-static properties
         $this->atomIs('Ppp')
+             ->hasClass()
              ->hasNoOut('PRIVATE')
              ->hasNoOut('STATIC')
 
@@ -60,10 +62,11 @@ class CouldBePrivate extends Analyzer\Analyzer {
 
         // Static properties
         $this->atomIs('Ppp')
+             ->hasClassTrait()
              ->hasNoOut('PRIVATE')
              ->hasOut('STATIC')
 
-             ->goToClassTrait()
+             ->goToClass()
              ->savePropertyAs('fullnspath', 'fnp')
              ->back('first')
 
@@ -74,11 +77,12 @@ class CouldBePrivate extends Analyzer\Analyzer {
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'dname')
 
+            // The static property is not used inside the defining class, nor its children
              ->raw('where( g.V().hasLabel("Staticproperty").where( __.out("PROPERTY").filter{ it.get().value("code") == dname})
-                                                           .where( __.out("CLASS").has("tokenizer", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") == fnp})
+                                                           .where( __.out("CLASS").has("token", within("T_STRING", "T_NS_SEPARATOR", "T_STATIC")).filter{ it.get().value("fullnspath") == fnp})
 
                                                             // Not in the defining class
-                                                           .where( __.until( hasLabel("Class", "File") ).repeat( __.in('.$linksDown.')).filter{ it.get().label() == "File" || it.get().value("fullnspath") != fnp }.count().is(eq(0)) ) 
+                                                           .where( __.until( hasLabel("Class", "File") ).emit(hasLabel("Class", "File")).repeat( __.in('.$linksDown.')).filter{ it.get().label() == "File" || it.get().value("fullnspath") != fnp }.count().is(eq(0)) ) 
 
                                                            .count().is(neq(0))
                           )')

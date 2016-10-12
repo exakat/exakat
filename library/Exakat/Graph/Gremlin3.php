@@ -20,7 +20,9 @@
  *
 */
 
-namespace Graph;
+namespace Exakat\Graph;
+
+use Exakat\Graph\Graph;
 
 class Gremlin3 extends Graph {
     private $scriptDir = '';

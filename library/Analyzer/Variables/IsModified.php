@@ -24,6 +24,7 @@
 namespace Analyzer\Variables;
 
 use Analyzer;
+use Exakat\Data\Methods;
 
 class IsModified extends Analyzer\Analyzer {
     public function dependsOn() {
@@ -88,7 +89,7 @@ class IsModified extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // PHP functions that are using references
-        $data = new \Data\Methods();
+        $data = new Methods();
         
         $functions = $data->getFunctionsReferenceArgs();
         $references = array();

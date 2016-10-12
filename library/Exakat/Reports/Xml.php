@@ -21,7 +21,7 @@
 */
 
 
-namespace Reports;
+namespace Exakat\Reports;
 
 use XmlWriter;
 

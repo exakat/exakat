@@ -20,6 +20,9 @@
  *
 */
 
+namespace Exakat;
+
+use Exakat\Config;
 
 class Datastore {
     private static $sqliteRead = null;
@@ -31,7 +34,7 @@ class Datastore {
     const TIMEOUT_WRITE = 500;
     const TIMEOUT_READ = 3000;
     
-    public function __construct(\Exakat\Config $config, $create = self::REUSE) {
+    public function __construct(Config $config, $create = self::REUSE) {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         
         if ($create === self::CREATE) {
@@ -39,16 +42,16 @@ class Datastore {
                 unlink($this->sqlitePath);
             }
             // force creation 
-            self::$sqliteWrite = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+            self::$sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
             self::$sqliteWrite->close();
             self::$sqliteWrite = null;
         }
         
         if (self::$sqliteWrite === null) {
-            self::$sqliteWrite = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+            self::$sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
             self::$sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
             // open the read connexion AFTER the write, to have the sqlite databse created
-            self::$sqliteRead = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+            self::$sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
             self::$sqliteWrite->busyTimeout(self::TIMEOUT_READ);
         }
         
@@ -99,12 +102,12 @@ class Datastore {
             if (is_array($row)) {
                 $d = array_values($row);
                 foreach($d as &$e) {
-                    $e = Sqlite3::escapeString($e);
+                    $e = \Sqlite3::escapeString($e);
                 }
                 unset($e);
                 
             } else {
-                $d = array($key, Sqlite3::escapeString($row));
+                $d = array($key, \Sqlite3::escapeString($row));
             }
 
             $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ('".implode("', '", $d)."')";
@@ -139,7 +142,7 @@ class Datastore {
             if (is_array($row)) {
                 $d = array_values($row);
                 foreach($d as &$e) {
-                    $e = Sqlite3::escapeString($e);
+                    $e = \Sqlite3::escapeString($e);
                 }
                 unset($e);
             } else {
@@ -418,10 +421,10 @@ SQLITE;
         self::$sqliteRead->close();
         self::$sqliteWrite->close();
         
-        self::$sqliteWrite = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+        self::$sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
         self::$sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
         // open the read connexion AFTER the write, to have the sqlite databse created
-        self::$sqliteRead = new \sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+        self::$sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
         self::$sqliteWrite->busyTimeout(self::TIMEOUT_READ);
     }
 }

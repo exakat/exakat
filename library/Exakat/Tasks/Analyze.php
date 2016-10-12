@@ -23,6 +23,8 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Phpexec;
+
 class Analyze extends Tasks {
     public function run(\Exakat\Config $config) {
         $project = $config->project;
@@ -138,7 +140,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
         }
 
         $total_results = 0;
-        $Php = new \Phpexec($config->version);
+        $Php = new Phpexec($config->version);
 
         $progressBar = new \Progressbar(count($dependencies2));
         

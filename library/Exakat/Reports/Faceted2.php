@@ -20,7 +20,7 @@
  *
 */
 
-namespace Reports;
+namespace Exakat\Reports;
 
 class Faceted2 extends FacetedJson {
     const FOLDER_PRIVILEGES = 0755;

@@ -24,6 +24,7 @@
 namespace Analyzer\Classes;
 
 use Analyzer;
+use Exakat\Data\Methods;
 
 class IsRead extends Analyzer\Analyzer {
     public function dependsOn() {
@@ -85,7 +86,7 @@ class IsRead extends Analyzer\Analyzer {
         $this->prepareQuery();
 
         // PHP functions that are passed by value
-        $data = new \Data\Methods();
+        $data = new Methods();
         
         $functions = $data->getFunctionsValueArgs();
         $references = array();

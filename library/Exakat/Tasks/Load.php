@@ -22,6 +22,9 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Phpexec;
+use Exakat\Loader\CypherG3;
+
 const T_BANG                         = '!';
 const T_CLOSE_BRACKET                = ']';
 const T_CLOSE_PARENTHESIS            = ')';
@@ -203,7 +206,7 @@ class Load extends Tasks {
     public function __construct($gremlin) {
         parent::__construct($gremlin);
 
-        $this->php = new \Phpexec();
+        $this->php = new Phpexec();
         if (!$this->php->isValid()) {
             die("This PHP binary is not valid for running Exakat.\n");
         }
@@ -242,7 +245,7 @@ class Load extends Tasks {
                                     'token'    => 'T_WHOLE']);
         
         if (static::$client === null) {
-            static::$client = new \Loader\CypherG3();
+            static::$client = new CypherG3();
         }
         
         $this->datastore->cleanTable('tokenCounts');

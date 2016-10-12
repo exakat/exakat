@@ -20,6 +20,7 @@
  *
 */
 
+namespace Exakat;
 
 class Log {
     private $name  = null;

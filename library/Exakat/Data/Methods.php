@@ -21,7 +21,7 @@
 */
 
 
-namespace Data;
+namespace Exakat\Data;
 
 class Methods {
     private $sqlite = null;

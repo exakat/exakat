@@ -20,7 +20,7 @@
  *
 */
 
-namespace Reports;
+namespace Exakat\Reports;
 
 class Text extends Reports {
     CONST FILE_EXTENSION = 'txt';
