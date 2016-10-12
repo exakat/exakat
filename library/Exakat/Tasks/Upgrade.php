@@ -37,7 +37,7 @@ class Upgrade extends Tasks {
 
         if (empty($html)) {
             print "Unable to check last version. Try again later.\n";
-            exit;
+            die;
         }
         
         preg_match('/Download exakat version (\d+\.\d+\.\d+) \(Latest\)/s', $html, $r);
@@ -53,16 +53,16 @@ class Upgrade extends Tasks {
                 
                 if (hash('sha256', $phar) !== $sha256) {
                     print "Error while checking exakat.phar's checksum. Aborting update. Please, try again\n";
-                    exit;
+                    die;
                 }
                 
                 file_put_contents('exakat.1.phar', $phar);
                 print "Setting up exakat.phar\n";
                 rename('exakat.1.phar', 'exakat.phar');
-                exit;
+                die;
             } else {
                 print "  You may run this command with -u option to upgrade to the latest exakat version.\n";
-                exit;
+                die;
             }
         } elseif (version_compare(\Exakat::VERSION, $r[1]) === 0) {
             print "This is the latest version (".\Exakat::VERSION.")\n";
