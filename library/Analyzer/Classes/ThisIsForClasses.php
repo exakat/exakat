@@ -28,11 +28,43 @@ use Analyzer;
 class ThisIsForClasses extends Analyzer\Analyzer {
 
     public function analyze() {
+        // General case
         $this->atomIs('Variable')
              ->codeIs('$this')
              ->hasNoClass()
              ->hasNoTrait()
              ->back('first');
+        $this->prepareQuery();
+
+        // Inside Classes
+        // catch, global, static
+        // Any cast of $this is bad, unset or else. 
+        $this->atomIs('Variable')
+             ->codeIs('$this')
+             ->inIs(array('VARIABLE', 'STATIC', 'GLOBAL', 'CAST'))
+             ->atomIs(array('Catch', 'Static', 'Global', 'Cast'))
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+
+        // foreach
+        $this->atomIs('Variable')
+             ->codeIs('$this')
+             ->inIsIE(array('KEY', 'VALUE'))
+             ->atomIs('Foreach')
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+
+        // unset($this)
+        $this->atomIs('Variable')
+             ->codeIs('$this')
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->functioncallIs('Unset')
+             ->hasNoIn('METHOD')
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
