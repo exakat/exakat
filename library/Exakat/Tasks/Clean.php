@@ -31,11 +31,15 @@ class Clean extends Tasks {
 
     public function run(\Exakat\Config $config) {
         $path = $config->projects_root.'/projects/'.$config->project;
+
+        display( "Cleaning project $config->project\n" );
         
         $dirsToErase = array('log',
                              'report',
                              'Premier-ace',
                              'faceted',
+                             'faceted2',
+                             'ambassador'
                              );
         foreach($dirsToErase as $dir) {
             $dirPath = $path.'/'.$dir;
