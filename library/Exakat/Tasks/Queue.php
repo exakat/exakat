@@ -33,8 +33,9 @@ class Queue extends Tasks {
             fwrite($queuePipe, "quit\n");
             fclose($queuePipe);
 
-            exit();
+            return;
         }
+
         if ($config->project != 'default') {
             if (file_exists($config->projects_root.'/projects/'.$config->project.'/report/')) {
                 display('Cleaning the project first');
@@ -48,16 +49,15 @@ class Queue extends Tasks {
             fclose($queuePipe);
         } elseif (!empty($config->filename)) {
             if (!file_exists($config->projects_root.'/in/'.$config->filename.'.php')) {
-                display('No such file "'.$config->filename.'" in /in/ folder');
-                die();
+                throw new \Exakat\Exceptions\NoSuchFile('No such file "'.$config->filename.'" in /in/ folder');
             }
 
             if (file_exists($config->projects_root.'/out/'.$config->filename.'.json')) {
-                display('Report already exists for "'.$config->filename.'" in /out/ folder');
-                die();
+                throw new \Exakat\Exceptions\ReportAlreadyDone($config->filename);
             }
 
             display('Adding file '.$config->project.' to the queue');
+
             $queuePipe = fopen($this->pipefile, 'w');
             fwrite($queuePipe, $config->filename."\n");
             fclose($queuePipe);
