@@ -71,12 +71,13 @@ class FindExternalLibraries extends Tasks {
                              'ci_xmlrpc'        => self::FILE_ONLY,
                              'xajax'            => self::PARENT_DIR,
                              'yii'              => self::FILE_ONLY,
+                             'zend_view'        => self::WHOLE_DIR,
                              );
 
     public function run(\Exakat\Config $config) {
         $project = $config->project;
         if ($project == 'default') {
-            die("findextlib needs a -p <project>\nAborting\n");
+            die("findextlib requires a -p <project>\nAborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {

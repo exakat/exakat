@@ -23,8 +23,10 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Data\Methods;
+use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
@@ -206,8 +208,8 @@ HTML;
         $html = file_get_contents($this->config->dir_root.'/media/devoops/index.exakat.html');
         $html = str_replace('<menu>', $summaryHtml, $html);
 
-        $html = str_replace('EXAKAT_VERSION', \Exakat::VERSION, $html);
-        $html = str_replace('EXAKAT_BUILD', \Exakat::BUILD, $html);
+        $html = str_replace('EXAKAT_VERSION', Exakat::VERSION, $html);
+        $html = str_replace('EXAKAT_BUILD', Exakat::BUILD, $html);
         $html = str_replace('PROJECT_NAME', $this->config->project_name, $html);
         $html = str_replace('PROJECT_FAVICON', $faviconHtml, $html);
 
@@ -1555,7 +1557,7 @@ TEXT
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
         
-        $info[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');
+        $info[] = array('Exakat version', Exakat::VERSION. ' ( Build '. Exakat::BUILD . ') ');
         
         return $this->formatSimpleTable($info, $css);
     }
@@ -1699,7 +1701,7 @@ TEXT
             $counts[$row['analyzer']] = $row['counts'];
         }
         
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         foreach($list as $l) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$l.'.ini');
             if (isset($counts[$l])) {
@@ -1736,7 +1738,7 @@ TEXT
         $res = $this->dump->query('SELECT analyzer, count(*) AS nb, severity AS severity FROM results '.$where.' GROUP BY analyzer');
         $listBySeverity = array();
 
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $listBySeverity[] = array('name'  => $ini['name'],

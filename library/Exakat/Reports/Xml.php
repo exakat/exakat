@@ -24,6 +24,7 @@
 namespace Exakat\Reports;
 
 use XmlWriter;
+use Exakat\Exakat;
 
 /**
  * Xml report for PHP_CodeSniffer.
@@ -179,7 +180,7 @@ class Xml extends Reports {
         }
         
         $return = '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL .
-                  '<phpcs version="'.\Exakat::VERSION.'">'.PHP_EOL . 
+                  '<phpcs version="'.Exakat::VERSION.'">'.PHP_EOL . 
                   $this->cachedData . 
                   '</phpcs>'.PHP_EOL;
 

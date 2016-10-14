@@ -34,8 +34,11 @@ class Text extends Reports {
     }
 
     public function generate($folder, $name=null) {
+        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in '.$this->themesList;
+        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
         $res = $sqlite->query($sqlQuery);
         
         $results = array();

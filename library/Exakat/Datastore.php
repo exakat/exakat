@@ -23,6 +23,8 @@
 namespace Exakat;
 
 use Exakat\Config;
+use Exakat\Exakat;
+use Exakat\Exceptions;
 
 class Datastore {
     private static $sqliteRead = null;
@@ -66,8 +68,8 @@ class Datastore {
             $this->cleanTable('composer');
             $this->cleanTable('configFiles');
 
-            $this->addRow('hash', array('exakat_version'       => \Exakat::VERSION,
-                                        'exakat_build'         => \Exakat::BUILD,
+            $this->addRow('hash', array('exakat_version'       => Exakat::VERSION,
+                                        'exakat_build'         => Exakat::BUILD,
                                         'datastore_creation'   => date('r', time()),
                                         ));
         }
@@ -94,7 +96,7 @@ class Datastore {
             }
             
             if (count($cols) != 2) {
-                throw new \Exakat\Exceptions\WrongNumberOfColsForAHash();
+                throw new Exceptions\WrongNumberOfColsForAHash();
             }
         }
         
@@ -409,7 +411,7 @@ SQLITE;
                 break;
 
             default : 
-                throw new \Exakat\Exceptions\NoStructureForTable($table);
+                throw new Exceptions\NoStructureForTable($table);
         }
 
         self::$sqliteWrite->query($createTable);

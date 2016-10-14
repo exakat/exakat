@@ -23,7 +23,9 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Exakat;
 
 class OnePage extends Tasks {
     private $project_dir = '.';
@@ -31,7 +33,7 @@ class OnePage extends Tasks {
     
     const TOTAL_STEPS = 7;
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
         
         $progress = 0;
@@ -75,8 +77,8 @@ class OnePage extends Tasks {
         
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
-                                               'exakat_version' => \Exakat::VERSION,
-                                               'exakat_build'   => \Exakat::BUILD,
+                                               'exakat_version' => Exakat::VERSION,
+                                               'exakat_build'   => Exakat::BUILD,
                                                ));
 
         display("Cleaning DB\n");

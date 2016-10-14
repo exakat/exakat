@@ -46,9 +46,6 @@ class Faceted2 extends FacetedJson {
         $html = file_get_contents($this->config->dir_root.'/media/faceted2/index.html');
 
         $html = str_replace('PROJECT_NAME', $this->config->project_name, $html);
-//        $html = str_replace('EXAKAT_VERSION', \Exakat::VERSION, $html);
-//        $html = str_replace('EXAKAT_BUILD', \Exakat::BUILD, $html);
-//        $html = str_replace('PROJECT_FAVICON', $faviconHtml, $html);
 
         file_put_contents($dirName.'/'.$tmpFileName.'/index.html', $html);        
 

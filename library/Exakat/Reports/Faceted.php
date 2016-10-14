@@ -22,6 +22,8 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Config;
+
 class Faceted extends FacetedJson {
     const FOLDER_PRIVILEGES = 0755;
 
@@ -32,8 +34,8 @@ class Faceted extends FacetedJson {
             return "Can't produce report to stdout\n";
         }
 
-        $sqlite      = new \sqlite3($dirName.'/dump.sqlite', SQLITE3_OPEN_READONLY);
-        $config = \Exakat\Config::factory();
+        $sqlite      = new \Sqlite3($dirName.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
+        $config = Config::factory();
 
         // Clean final destination
         if ($dirName.'/'.$fileName !== '/') {
@@ -65,10 +67,6 @@ class Faceted extends FacetedJson {
         $html = file_get_contents($config->dir_root.'/media/faceted/index.html');
 
         $html = str_replace('PROJECT_NAME', $this->config->project_name, $html);
-
-//        $html = str_replace('EXAKAT_VERSION', \Exakat::VERSION, $html);
-//        $html = str_replace('EXAKAT_BUILD', \Exakat::BUILD, $html);
-//        $html = str_replace('PROJECT_FAVICON', $faviconHtml, $html);
 
         file_put_contents($dirName.'/'.$fileName.'/index.html', $html);        
 

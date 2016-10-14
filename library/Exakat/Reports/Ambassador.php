@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Datastore;
+use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
@@ -994,7 +995,7 @@ SQL;
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
         
-        $info[] = array('Exakat version', \Exakat::VERSION. ' ( Build '. \Exakat::BUILD . ') ');
+        $info[] = array('Exakat version', Exakat::VERSION. ' ( Build '. Exakat::BUILD . ') ');
         
         $settings = '';
         foreach($info as $i) {

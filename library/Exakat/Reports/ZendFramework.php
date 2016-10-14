@@ -24,6 +24,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Devoops;
+use Exakat\Exakat;
 
 class ZendFramework extends Devoops {
     public function __construct() {
@@ -135,8 +136,8 @@ HTML;
         $html = file_get_contents($this->config->dir_root.'/media/devoops/index.exakat.html');
         $html = str_replace('<menu>', $summaryHtml, $html);
 
-        $html = str_replace('EXAKAT_VERSION', \Exakat::VERSION, $html);
-        $html = str_replace('EXAKAT_BUILD', \Exakat::BUILD, $html);
+        $html = str_replace('EXAKAT_VERSION', Exakat::VERSION, $html);
+        $html = str_replace('EXAKAT_BUILD', Exakat::BUILD, $html);
         $html = str_replace('PROJECT_NAME', $this->config->project_name, $html);
         $html = str_replace('PROJECT_FAVICON', $faviconHtml, $html);
 

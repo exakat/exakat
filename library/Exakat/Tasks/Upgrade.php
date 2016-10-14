@@ -23,12 +23,15 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Exakat;
+
 class Upgrade extends Tasks {
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $options = array(
             'http'=>array(
                 'method' => 'GET',
-                'header' => "User-Agent: exakat-" .\Exakat::VERSION
+                'header' => "User-Agent: exakat-" .Exakat::VERSION
             )
         );
 
@@ -42,8 +45,8 @@ class Upgrade extends Tasks {
         
         preg_match('/Download exakat version (\d+\.\d+\.\d+) \(Latest\)/s', $html, $r);
         
-        if (version_compare(\Exakat::VERSION, $r[1]) < 0) {
-            print "This needs some updating (Current : ".\Exakat::VERSION.", Latest: $r[1])\n";
+        if (version_compare(Exakat::VERSION, $r[1]) < 0) {
+            print "This needs some updating (Current : ".Exakat::VERSION.", Latest: $r[1])\n";
             if ($config->update === true) {
                 print "  Updating to latest version.\n";
                 preg_match('#<pre id="sha256">(.*?)</pre>#', $html, $r);
@@ -64,10 +67,10 @@ class Upgrade extends Tasks {
                 print "  You may run this command with -u option to upgrade to the latest exakat version.\n";
                 die;
             }
-        } elseif (version_compare(\Exakat::VERSION, $r[1]) === 0) {
-            print "This is the latest version (".\Exakat::VERSION.")\n";
+        } elseif (version_compare(Exakat::VERSION, $r[1]) === 0) {
+            print "This is the latest version (".Exakat::VERSION.")\n";
         } else {
-            print "This version is ahead of the latest publication (Current : ".\Exakat::VERSION.", Latest: $r[1])\n";
+            print "This version is ahead of the latest publication (Current : ".Exakat::VERSION.", Latest: $r[1])\n";
         }
     }
 }
