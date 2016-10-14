@@ -20,10 +20,13 @@
  *
 */
 
+namespace Exakat;
+
 use Exakat\Tasks;
+use Exakat\Config;
 
 class Exakat {
-    const VERSION = '0.8.4';
+    const VERSION = '0.8.5';
     const BUILD = 433;
     
     private $gremlin = null;
@@ -32,7 +35,7 @@ class Exakat {
         $this->gremlin = $gremlin;
     }
     
-    public function execute(\Exakat\Config $config) {
+    public function execute(Config $config) {
         switch ($config->command) {
             case 'doctor' : 
                 $doctor = new Tasks\Doctor($this->gremlin);
