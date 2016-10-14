@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\Finder\Finder;
+use Exakat\Exakat;
 
 include './library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
@@ -18,17 +19,17 @@ class RoboFile extends \Robo\Tasks
             ++$versionParts[count($versionParts)-1];
             $version = implode('.', $versionParts);
         }
-        $this->taskReplaceInFile(__DIR__.'/library/Exakat.php')
+        $this->taskReplaceInFile(__DIR__.'/library/Exakat/Exakat.php')
             ->from("VERSION = '".\Exakat::VERSION."'")
             ->to("VERSION = '".$version."'")
             ->run();
     }
 
     public function updateBuild() {
-        $build = \Exakat::BUILD + 1;
+        $build = Exakat::BUILD + 1;
 
-        $this->taskReplaceInFile(__DIR__.'/library/Exakat.php')
-            ->from("BUILD = ".\Exakat::BUILD)
+        $this->taskReplaceInFile(__DIR__.'/library/Exakat/Exakat.php')
+            ->from("BUILD = ".Exakat::BUILD)
             ->to("BUILD = ".$build)
             ->run();
     }
@@ -180,7 +181,7 @@ LICENCE;
          ->exec('cp -r composer.* release/')
          ->exec('cp -r RoboFile.php release/')
          ->exec('tar czf release.tgz release')
-         ->exec('mv release.tgz release.'.\Exakat::VERSION.'.tgz')
+         ->exec('mv release.tgz release.'.Exakat::VERSION.'.tgz')
          ->run();
     }
 
@@ -191,7 +192,7 @@ LICENCE;
         $this->taskExecStack()
          ->stopOnFail()
          ->exec('rm -rf release')
-         ->exec('rm -rf release.'.\Exakat::VERSION.'.tgz')
+         ->exec('rm -rf release.'.Exakat::VERSION.'.tgz')
          ->run();
     }
     
@@ -231,7 +232,7 @@ LICENCE;
              ->exec('mv exakat.phar ../release/')
              ->exec('cp docs/*.rst ../release/docs/')
              ->exec('cp -r docs/images ../release/docs/')
-             ->exec('cd ../release/; tar -zcvf exakat-'.\Exakat::VERSION.'.tar.gz exakat.phar docs/*')
+             ->exec('cd ../release/; tar -zcvf exakat-'.Exakat::VERSION.'.tar.gz exakat.phar docs/*')
              ->run();
     }
     
@@ -755,7 +756,7 @@ SQL
         }
         
         // Update doc version
-        $php = file_get_contents('library/Exakat.php');
+        $php = file_get_contents('library/Exakat/Exakat.php');
 
         preg_match('/const VERSION = \'(\d+.\d+.\d+)\'/is', $php, $version);
         $version = $version[1];
