@@ -2,6 +2,8 @@
 
 namespace Test;
 
+use Exakat\Phpexec;
+
 include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
@@ -28,7 +30,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Compilation problem : "'.$res.'".');
         }
         
-        $Php = new \Phpexec($phpversion);
+        $Php = new Phpexec($phpversion);
         if (!$analyzerobject->checkPhpConfiguration($Php)) {
             $message = array();
             $confs = $analyzerobject->getPhpConfiguration();
