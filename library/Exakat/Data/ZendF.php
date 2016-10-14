@@ -61,6 +61,22 @@ class ZendF {
         
         return $return;
     }
+
+    public function getInterfaceByRelease() {
+        $query = 'SELECT interface, release FROM interfaces 
+                    JOIN namespaces 
+                      ON interfaces.namespace_id = namespaces.id
+                    JOIN releases 
+                      ON namespaces.release_id = releases.id';
+        $res = $this->sqlite->query($query);
+        $return = array();
+        
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $return[$row['release']] = $row['interface'];
+        }
+        
+        return $return;
+    }
     
     public function getReleaseUsingClasses($classes) {
         $sqlClasses = "'".implode("', '", $classes)."'";

@@ -23,6 +23,7 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Data\Methods;
@@ -134,12 +135,12 @@ class Devoops extends Reports {
         $analyze = array();
         $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
                               '"Dead code"', 'Security', 'Analyze');
-        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($themes);
+        $analyzers = Analyzer::getThemeAnalyzers($themes);
         $themesList = '("'.implode('", "', $analyzers).'")';
 
         $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$themesList);
         while($row = $res->fetchArray()) {
-            $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer']);
             
             $this->analyzers[$analyzer->getDescription()->getName()] = $analyzer;
             $analyze[$analyzer->getDescription()->getName()] = 'OneAnalyzer';
@@ -345,9 +346,9 @@ HTML;
     }
 
     private function reportStatus($count) {
-        if ($count == \Analyzer\Analyzer::VERSION_INCOMPATIBLE) {
+        if ($count == Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-stethoscope"></i>';
-        } elseif ($count == \Analyzer\Analyzer::CONFIGURATION_INCOMPATIBLE) {
+        } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {
             return '<i class="fa fa-stethoscope"></i>';
         } else {
             return $count;
@@ -536,10 +537,10 @@ $text .= <<<HTML
 										<tbody>
 HTML;
         foreach($data as $k => $v) {
-            if ($v['result'] == \Analyzer\Analyzer::VERSION_INCOMPATIBLE) {
+            if ($v['result'] == Analyzer::VERSION_INCOMPATIBLE) {
                 $v['result'] = '';
                 $icon = '<i class="fa fa-stethoscope"></i>';
-            } elseif ($v['result'] == \Analyzer\Analyzer::CONFIGURATION_INCOMPATIBLE) {
+            } elseif ($v['result'] == Analyzer::CONFIGURATION_INCOMPATIBLE) {
                 $v['result'] = '';
                 $icon = '<i class="fa fa-stethoscope"></i>';
             } elseif ($v['result'] === 0) {
@@ -1130,7 +1131,7 @@ TEXT
 
         $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
                               '"Dead code"', 'Security', 'Analyze');
-        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($themes);
+        $analyzers = Analyzer::getThemeAnalyzers($themes);
         $themesList = '("'.implode('", "', $analyzers).'")';
 
         $res = $this->dump->query(<<<SQL
@@ -1142,7 +1143,7 @@ SQL
 );
         $data = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
-            $analyzer = \Analyzer\Analyzer::getInstance($row[0]);
+            $analyzer = Analyzer::getInstance($row[0]);
             $row[0] = $analyzer->getDescription()->getName();
 
             $data[] = $row;
@@ -1438,7 +1439,7 @@ SQL
                 );
 
         // collecting information for Extensions
-        $themed = \Analyzer\Analyzer::getThemeAnalyzers('Appinfo');
+        $themed = Analyzer::getThemeAnalyzers('Appinfo');
         $res = $this->dump->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -1460,12 +1461,12 @@ SQL
                 }
                 
                 // incompatible
-                if ($sources[$ext] == \Analyzer\Analyzer::CONFIGURATION_INCOMPATIBLE) {
+                if ($sources[$ext] == Analyzer::CONFIGURATION_INCOMPATIBLE) {
                     $data[$section][$name] = self::INCOMPATIBLE;
                     continue ;
                 } 
 
-                if ($sources[$ext] == \Analyzer\Analyzer::VERSION_INCOMPATIBLE) {
+                if ($sources[$ext] == Analyzer::VERSION_INCOMPATIBLE) {
                     $data[$section][$name] = self::INCOMPATIBLE;
                     continue ;
                 } 
@@ -1693,7 +1694,7 @@ TEXT
         $css->titles = array('Feature', 'Status');
         $css->readOrder = $css->titles;
         
-        $list = \Analyzer\Analyzer::getThemeAnalyzers(str_replace(array(' ', '.'), array('PHP', ''), $title));
+        $list = Analyzer::getThemeAnalyzers(str_replace(array(' ', '.'), array('PHP', ''), $title));
         
         $res = $this->datastore->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();
@@ -1725,7 +1726,7 @@ TEXT
                         'Security'            => 'Security',
                         'Performances'        => 'Performances');
         
-        $list = \Analyzer\Analyzer::getThemeAnalyzers($titles[$title]);
+        $list = Analyzer::getThemeAnalyzers($titles[$title]);
         $where = 'WHERE analyzer in ("'.implode('", "', $list).'")';
 
         $res = $this->dump->query('SELECT severity, count(*) AS nb FROM results '.$where.' GROUP BY severity ORDER BY severity');
@@ -2089,7 +2090,7 @@ SELECT fullcode as Code, analyzer AS Analyzer, line AS Line FROM results
 SQL;
         $res = $this->dump->query($sqlQuery);
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $analyzer = \Analyzer\Analyzer::getInstance($row['Analyzer']);
+            $analyzer = Analyzer::getInstance($row['Analyzer']);
             $row['File'] = $analyzer->getDescription()->getName();
             $data[] = $row;
         }

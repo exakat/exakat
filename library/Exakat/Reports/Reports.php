@@ -22,6 +22,8 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Analyzer\Analyzer;
+
 abstract class Reports {
     private $count = 0;
 
@@ -39,7 +41,7 @@ abstract class Reports {
     public function __construct() {
         $this->config = \Exakat\Config::Factory();
 
-        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers($this->config->thema);
+        $analyzers = Analyzer::getThemeAnalyzers($this->config->thema);
         $this->themesList = '("'.implode('", "', $analyzers).'")';
 
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', SQLITE3_OPEN_READONLY);

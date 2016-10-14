@@ -24,7 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
-use Analyzer\Analyzer;
+use Exakat\Analyzer\Analyzer;
 
 class Report2 extends Tasks {
     public function run(Config $config) {
@@ -32,7 +32,7 @@ class Report2 extends Tasks {
             die("This command requires a project (option -p).\nAborting\n");
         }
 
-        if (!class_exists('\Exakat\\Reports\\'.$config->format)) {
+        if (!class_exists('\\Exakat\\Reports\\'.$config->format)) {
             die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', Reports::FORMATS)."\nAborting\n");
         }
 

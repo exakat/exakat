@@ -23,6 +23,7 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Docs;
 use Exakat\Config;
 use Exakat\Data\Methods;
 use Exakat\Tokenizer\Token;
@@ -133,7 +134,7 @@ GREMLIN;
         // fallback for PHP and ext, class, function, constant
         // update fullnspath with fallback for functions 
         $pathDocs = $config->dir_root.'/data/analyzers.sqlite';
-        $docs = new \Analyzer\Docs($pathDocs);
+        $docs = new Docs($pathDocs);
 
         $exts = $docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';

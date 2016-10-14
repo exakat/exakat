@@ -22,6 +22,7 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Analyzer\Analyzer;
 use Exakat\Datastore;
 use Exakat\Exakat;
 use Exakat\Phpexec;
@@ -197,8 +198,8 @@ class Ambassador extends Reports {
         $baseHTML = $this->getBasedPage("analyzers_doc");
         $analyzersDocHTML = "";
 
-        foreach(\Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = \Analyzer\Analyzer::getInstance($analyzer);
+        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
+            $analyzer = Analyzer::getInstance($analyzer);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'">'.$description->getName().'</a></h2>';
             $analyzersDocHTML.='<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
@@ -279,6 +280,7 @@ class Ambassador extends Reports {
         $totalFile = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFile['totalanalysedfile'] - $totalFileAnalysed['totalanalysedfile'];
         $porcentFile = ($totalFileSansError / $totalFile['totalanalysedfile']) * 100;
+
         // analyzer
         $totalAnalyzerUsed = $this->getTotalAnalyzer(true);
         $totalAnalyzer = $this->getTotalAnalyzer();
@@ -350,7 +352,7 @@ class Ambassador extends Reports {
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $data[] = ['label' => $key, 'value' => count(\Analyzer\Analyzer::getThemeAnalyzers($categorie))];
+            $data[] = ['label' => $key, 'value' => count(Analyzer::getThemeAnalyzers($categorie))];
         }
         // ordonné DESC par valeur
         uasort($data, function ($a, $b) {
@@ -392,7 +394,7 @@ SQL;
         while ($row = $result->fetchArray()) {
             $data[] = array('label' => $row['severity'], 'value' => $row['number']);
         }
-
+        
         $html = '';
         $dataScript = '';
         foreach ($data as $key => $value) {
@@ -478,7 +480,7 @@ SQL;
      * @return string
      */
     protected function getAnalyzersResultsCounts() {
-        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
         
         $result = $this->sqlite->query(<<<SQL
@@ -491,7 +493,7 @@ SQL
 
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer']);
             $row['Files'] = $this->getCountFileByAnalyzers($row['analyzer']);
             $row['Label'] = $analyzer->getDescription()->getName();
             $row['Receipt'] = 'B'; //implode(', ', $analyzer->getThemeAnalyzers($this->config->thema));
@@ -554,7 +556,7 @@ SQL;
      * @return type
      */
     private function getFilesResultsCounts() {
-        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
@@ -619,7 +621,7 @@ SQL;
      * @return type
      */
     public function getFilesCount($limit = null) {
-        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
         $query = "SELECT file, count(*) AS number
@@ -706,7 +708,7 @@ SQL;
      * @return type
      */
     private function getAnalyzersCount($limit) {
-        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -732,7 +734,7 @@ SQL;
      * @return type
      */
     private function getTopAnalyzers() {
-        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
@@ -744,7 +746,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray()) {
-            $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer']);
             $data[] = array('label' => $analyzer->getDescription()->getName(), 'value' => $row['number']);
         }
 
@@ -767,7 +769,7 @@ SQL;
      * @return type
      */
     private function getSeverityNumberByFile($file) {
-        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
         $query = <<<SQL
@@ -897,7 +899,7 @@ SQL;
      */
     public function getIssuesFaceted()
     {
-        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
         $sqlQuery = <<<SQL
@@ -912,7 +914,7 @@ SQL;
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer']);
             $item['analyzer'] =  $ini['name'];
             $item['analyzer_md5'] = md5($ini['name']);
             $item['file' ] =  $row['file'];
@@ -1027,8 +1029,8 @@ SQL;
     private function generateAnalyzersList() {
         $analyzers = '';
 
-       foreach(\Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-           $analyzer = \Analyzer\Analyzer::getInstance($analyzer);
+       foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
+           $analyzer = Analyzer::getInstance($analyzer);
            $description = $analyzer->getDescription();
     
            $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";

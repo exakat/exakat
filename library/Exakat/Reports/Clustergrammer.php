@@ -22,6 +22,9 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
+
 class Clustergrammer extends Reports {
     CONST FILE_EXTENSION = 'txt';
 
@@ -34,12 +37,12 @@ class Clustergrammer extends Reports {
     }
 
     public function generate($folder, $name= 'txt') {
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         $themes = $config->thema;
 
         $analyzers = array();
         foreach($themes as $theme) {
-            $analyzers[] = \Analyzer\Analyzer::getThemeAnalyzers($theme);
+            $analyzers[] = Analyzer::getThemeAnalyzers($theme);
         }
         $analyzers = call_user_func_array('array_merge', $analyzers);
         display( count($analyzers)." analyzers\n");

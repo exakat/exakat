@@ -20,7 +20,9 @@
  *
 */
 
-namespace Reports;
+namespace Exakat\Reports;
+
+use Exakat\Analyzer\Analyzer;
 
 class Json extends Reports {
     CONST FILE_EXTENSION = 'json';
@@ -52,7 +54,7 @@ class Json extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+                $analyzer = Analyzer::getInstance($row['analyzer']);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
             }

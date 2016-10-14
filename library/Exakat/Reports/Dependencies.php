@@ -22,6 +22,9 @@
 
 namespace Exakat\Reports;
 
+use \Exakat\Graph\Gremlin3;
+use \Exakat\Config;
+
 class Dependencies extends Reports {
     CONST FILE_EXTENSION = 'dot';
 
@@ -34,7 +37,7 @@ class Dependencies extends Reports {
     }
 
     public function generate($folder, $name= 'dependencies') {
-        $graph = new \Graph\Gremlin2(\Exakat\Config::factory());
+        $graph = new Gremlin3(Config::factory());
         
         $links    = [];
         $nodes    = ['class' => [], 'trait' => [], 'interface' => [], 'unknown' => []];
@@ -65,113 +68,112 @@ GREMLIN;
             $nodes['interface'][] = $v[0];
         }
         $nodesId = array_flip(call_user_func_array('array_merge', array_values($nodes)));
-        
+
         // static constants
         $query = <<<GREMLIN
-g.idx('atoms')[['atom':'Staticconstant']].sideEffect{ fullcode = it.fullcode;}.out('CLASS').sideEffect{ origin = it.fullnspath;}.filter{ !(it.code in ['self'])}.in('CLASS')
-.in().loop(1){!(it.object.atom in ['Class', 'Interface'])}{it.object.atom in ['Class', 'Interface']}
-.filter{ origin != it.fullnspath}
-.transform{ [origin, it.fullnspath, fullcode]};
-
+g.V().hasLabel("Staticconstant").as('fullcode')
+.out('CLASS').as('destination')
+.repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as('origin')
+.select('origin', 'destination', 'fullcode').by('fullnspath').by('fullnspath').by('fullcode')
 GREMLIN;
+
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v[0]])) { 
-                $nodes['unknown'][] = $v[0];
-                $nodesId[$v[0]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->origin])) { 
+                $nodes['unknown'][] = $v->origin;
+                $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v[1]])) { 
-                $nodes['unknown'][] = $v[1];
-                $nodesId[$v[1]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->destination])) { 
+                $nodes['unknown'][] = $v->destination;
+                $nodesId[$v->destination] = count($nodes) - 1;
             }
-            $links[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = 'staticconstant';
-            $fullcode[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = $v[2];
+            $links[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = 'staticconstant';
+            $fullcode[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = $v->fullcode;
             ++$total;
         }
         print "$total Static constants\n";
 
         // static property
         $query = <<<GREMLIN
-g.idx('atoms')[['atom':'Staticproperty']].sideEffect{ fullcode = it.fullcode;}.out('CLASS').sideEffect{ origin = it.fullnspath;}.filter{ !(it.code in ['self'])}.in('CLASS')
-.in().loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}
-.filter{ origin != it.fullnspath}
-.transform{ [origin, it.fullnspath, fullcode]};
-
+g.V().hasLabel("Staticproperty").as('fullcode')
+.out('CLASS').as('destination')
+.repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as('origin')
+.select('origin', 'destination', 'fullcode').by('fullnspath').by('fullnspath').by('fullcode')
 GREMLIN;
+
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v[0]])) { 
-                $nodes['unknown'][] = $v[0];
-                $nodesId[$v[0]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->origin])) { 
+                $nodes['unknown'][] = $v->origin;
+                $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v[1]])) { 
-                $nodes['unknown'][] = $v[1];
-                $nodesId[$v[1]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->destination])) { 
+                $nodes['unknown'][] = $v->destination;
+                $nodesId[$v->destination] = count($nodes) - 1;
             }
-            $links[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = 'staticproperty';
-            $fullcode[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = $v[2];
+            $links[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = 'staticproperty';
+            $fullcode[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = $v->fullcode;
             ++$total;
         }
         print "$total Static property\n";
 
         // Instantiation
         $query = <<<GREMLIN
-g.idx('atoms')[['atom':'New']].sideEffect{ fullcode = it.fullcode;}.out('NEW').hasNot('fullnspath', null).filter{ !(it.code in ['self'])}.sideEffect{ origin = it.fullnspath;}
-.in().loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}
-.filter{ origin != it.fullnspath}
-.transform{ [origin, it.fullnspath, fullcode]};
-
+g.V().hasLabel("New").as('fullcode')
+.out('NEW').as('destination')
+.repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as('origin')
+.select('origin', 'destination', 'fullcode').by('fullnspath').by('fullnspath').by('fullcode')
 GREMLIN;
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v[0]])) { 
-                $nodes['unknown'][] = $v[0];
-                $nodesId[$v[0]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->origin])) { 
+                $nodes['unknown'][] = $v->origin;
+                $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v[1]])) { 
-                $nodes['unknown'][] = $v[1];
-                $nodesId[$v[1]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->destination])) { 
+                $nodes['unknown'][] = $v->destination;
+                $nodesId[$v->destination] = count($nodes) - 1;
             }
-            $links[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = 'instanciation';
-            $fullcode[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = $v[2];
+            $links[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = 'instanciation';
+            $fullcode[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = $v->fullcode;
             ++$total;
         }
         print "$total New\n";
 
         // Typehint
         $query = <<<GREMLIN
-g.idx('atoms')[['atom':'Typehint']].sideEffect{ fullcode = it.fullcode;}.out('CLASS').sideEffect{ origin = it.fullnspath;}.filter{ !(it.code in ['self'])}.in('CLASS')
-.in().loop(1){!(it.object.atom in ['Class'])}{it.object.atom in ['Class']}
-.filter{ origin != it.fullnspath}
-.transform{ [origin, it.fullnspath, fullcode]};
+g.V().hasLabel("Function").as('fullcode')
+.out('ARGUMENTS').out("ARGUMENT").out("TYPEHINT").as('destination')
+.repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as('origin')
+.select('origin', 'destination', 'fullcode').by('fullnspath').by('fullnspath').by('fullcode')
 
 GREMLIN;
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v[0]])) { 
-                $nodes['unknown'][] = $v[0];
-                $nodesId[$v[0]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->origin])) { 
+                $nodes['unknown'][] = $v->origin;
+                $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v[1]])) { 
-                $nodes['unknown'][] = $v[1];
-                $nodesId[$v[1]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->destination])) { 
+                $nodes['unknown'][] = $v->destination;
+                $nodesId[$v->destination] = count($nodes) - 1;
             }
-            $links[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = 'typehint';
-            $fullcode[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = $v[2];
+            $links[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = 'typehint';
+            $fullcode[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = $v->fullcode;
             ++$total;
         }
         print "$total Typehint\n";
 
         // instanceof
         $query = <<<GREMLIN
-g.idx('atoms')[['atom':'Instanceof']].sideEffect{ fullcode = it.fullcode;}.out('CLASS').sideEffect{ origin = it.fullnspath;}.filter{ !(it.code in ['self'])}.in('CLASS')
-.in().loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}
-.filter{ origin != it.fullnspath}
-.transform{ [origin, it.fullnspath, fullcode]};
+g.V().hasLabel("Instanceof").as('fullcode')
+.out('CLASS').as('destination')
+.repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as('origin')
+.select('origin', 'destination', 'fullcode').by('fullnspath').by('fullnspath').by('fullcode')
 
 GREMLIN;
         $res = $graph->query($query);
@@ -191,56 +193,30 @@ GREMLIN;
         }
         print "$total Instanceof\n";
 
-        // Use (for classes)
-        $query = <<<GREMLIN
-g.idx('atoms')[['atom':'Use']].sideEffect{ fullcode = it.fullcode;}.out('USE').sideEffect{ origin = it.fullnspath;}.in('USE')
-.in('ELEMENT').in('BLOCK').filter{ it.atom in ['Trait', 'Class']}
-.filter{ origin != it.fullnspath}
-.transform{ [origin, it.fullnspath, fullcode]};
-
-GREMLIN;
-        $res = $graph->query($query);
-        $total = 0;
-        foreach($res->results as $v) {
-            if (!isset($nodesId[$v[0]])) { 
-                $nodes['unknown'][] = $v[0];
-                $nodesId[$v[0]] = count($nodes) - 1;
-            }
-            if (!isset($nodesId[$v[1]])) { 
-                $nodes['unknown'][] = $v[1];
-                $nodesId[$v[1]] = count($nodes) - 1;
-            }
-            $links[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = 'use';
-            $fullcode[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = $v[2];
-            ++$total;
-        }
-        print "$total Use (for class or trait)\n";
-
         // static methods
         $query = <<<GREMLIN
-g.idx('atoms')[['atom':'Staticmethodcall']].sideEffect{ fullcode = it.fullcode;}.out('CLASS').sideEffect{ origin = it.fullnspath;}.filter{ !(it.code in ['self'])}.in('CLASS')
-.in().loop(1){!(it.object.atom in ['Class', 'Trait'])}{it.object.atom in ['Class', 'Trait']}
-.filter{ origin != it.fullnspath}
-.transform{ [origin, it.fullnspath, fullcode]};
-
+g.V().hasLabel("Staticmethodcall").as('fullcode')
+.out('CLASS').as('destination')
+.repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as('origin')
+.select('origin', 'destination', 'fullcode').by('fullnspath').by('fullnspath').by('fullcode')
 GREMLIN;
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v[0]])) { 
-                $nodes['unknown'][] = $v[0];
-                $nodesId[$v[0]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->origin])) { 
+                $nodes['unknown'][] = $v->origin;
+                $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v[1]])) { 
-                $nodes['unknown'][] = $v[1];
-                $nodesId[$v[1]] = count($nodes) - 1;
+            if (!isset($nodesId[$v->destination])) { 
+                $nodes['unknown'][] = $v->destination;
+                $nodesId[$v->destination] = count($nodes) - 1;
             }
-            $links[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = 'staticmethodcall';
-            $fullcode[$nodesId[$v[1]].' -> '.$nodesId[$v[0]]][] = $v[2];
+            $links[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = 'staticmethodcall';
+            $fullcode[$nodesId[$v->destination].' -> '.$nodesId[$v->origin]][] = $v->fullcode;
             ++$total;
         }
-        print "$total Static methods\n";
 
+        print "$total Static methods\n";
 
 // Final preparation
 // Nodes
@@ -258,7 +234,7 @@ DOT;
             unset($n);
         }
         unset($someNodes);
-        print_r($nodes);
+//        print_r($nodes);
 
 // Links
         $colors = array('staticmethodcall' => 'firebrick2',
@@ -272,7 +248,8 @@ DOT;
         $linksDot = array();
         foreach($links as $link => $type) {
             foreach($type as $id => $t) {
-                $linksDot[] = $link.' [shape="none" color="'.$colors[$t].'" label="'.$fullcode[$link][$id].'"];';
+                $linksDot[] = $link.' [shape="none" color="'.$colors[$t].'" label="'.
+                str_replace('"', '\\"', $fullcode[$link][$id]).'"];';
             }
         }
         unset($type);

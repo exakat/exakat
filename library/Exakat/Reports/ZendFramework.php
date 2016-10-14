@@ -23,6 +23,7 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Analyzer\Analyzer;
 use Exakat\Devoops;
 use Exakat\Exakat;
 
@@ -30,7 +31,7 @@ class ZendFramework extends Devoops {
     public function __construct() {
         parent::__construct();
 
-        $this->themes = \Analyzer\Analyzer::getThemeAnalyzers('ZendFramework');
+        $this->themes = Analyzer::getThemeAnalyzers('ZendFramework');
         $this->themesList = '("'.implode('", "', $this->themes).'")';    
     }
     
@@ -84,7 +85,7 @@ class ZendFramework extends Devoops {
         print 'SELECT * FROM resultsCounts WHERE analyzer in '.$this->themesList.' ORDER BY id';
         $res = $this->sqlite->query('SELECT * FROM resultsCounts WHERE analyzer in '.$this->themesList);
         while($row = $res->fetchArray()) {
-            $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer']);
             
             $this->analyzers[$analyzer->getDescription()->getName()] = $analyzer;
             $analyze[$analyzer->getDescription()->getName()] = 'OneAnalyzer';

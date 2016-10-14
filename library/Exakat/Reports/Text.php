@@ -22,6 +22,8 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Analyzer\Analyzer;
+
 class Text extends Reports {
     CONST FILE_EXTENSION = 'txt';
 
@@ -34,7 +36,7 @@ class Text extends Reports {
     }
 
     public function generate($folder, $name=null) {
-        $list = \Analyzer\Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
@@ -55,7 +57,7 @@ class Text extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+                $analyzer = Analyzer::getInstance($row['analyzer']);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
             }

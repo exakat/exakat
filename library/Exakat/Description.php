@@ -22,16 +22,18 @@
 
 namespace Exakat;
 
+use Exakat\Config;
+
 class Description {
     private $language = 'en';
-    private $ini = array('human'    => '',
-                         'name'     => '',
-                         'clearphp' => '');
+    private $ini = array('description'    => '',
+                         'name'           => '',
+                         'clearphp'       => '');
     
     public function __construct($analyzer) {
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
 
-        $filename = $config->dir_root.'/human/'.$this->language.'/'.str_replace('\\', '/', str_replace('Analyzer\\', '', $analyzer)).'.ini';
+        $filename = $config->dir_root.'/human/'.$this->language.'/'.str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $analyzer)).'.ini';
         
         if (file_exists($filename)) {
             $this->ini = parse_ini_file($filename) + $this->ini;

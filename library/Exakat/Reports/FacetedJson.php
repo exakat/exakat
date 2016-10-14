@@ -22,9 +22,9 @@
 
 namespace Exakat\Reports;
 
-use Exakat\Datastore;
+use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
-
+use Exakat\Datastore;
 
 class FacetedJson extends Reports {
     const FILE_EXTENSION = 'json';
@@ -55,7 +55,7 @@ SQL;
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $row['error'] = $ini['name'];
             
-            $a = \Analyzer\Analyzer::getInstance($row['analyzer']);
+            $a = Analyzer::getInstance($row['analyzer']);
             $row['severity'] = $a->getSeverity();
             $row['impact']   = $a->getTimeToFix();
             $row['recipes']  = $a->getThemes();

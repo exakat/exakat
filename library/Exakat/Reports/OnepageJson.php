@@ -22,6 +22,8 @@
 
 namespace Reports;
 
+use Exakat\Analyzer\Analyzer;
+
 class OnepageJson extends Reports {
     CONST FILE_EXTENSION = 'json';
 
@@ -47,7 +49,7 @@ class OnepageJson extends Reports {
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+                $analyzer = Analyzer::getInstance($row['analyzer']);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
                 $clearphp = $analyzer->getDescription()->getClearPHP();
@@ -64,7 +66,6 @@ class OnepageJson extends Reports {
             }
             $results[$titleCache[$row['analyzer']]][] = $message;
 
-//            ++$results['warnings'];
             $this->count();
         }
         

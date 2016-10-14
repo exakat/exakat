@@ -23,6 +23,7 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Analyzer;
 use Exakat\Tokenizer\Token;
 
 class Dump extends Tasks {
@@ -42,7 +43,7 @@ class Dump extends Tasks {
             unlink($sqliteFile);
         }
         
-        \Analyzer\Analyzer::initDocs();
+        Analyzer::initDocs();
         
         $sqlite = new \Sqlite3($sqliteFile);
         $this->getAtomCounts($sqlite);
@@ -85,7 +86,7 @@ SQL;
         }
         foreach($toProcess as $thema) {
             display('Processing thema : '.(is_array($thema) ? implode(', ', $thema) : $thema));
-            $themaClasses = \Analyzer\Analyzer::getThemeAnalyzers($thema);
+            $themaClasses = Analyzer::getThemeAnalyzers($thema);
 
             $themes[] = $themaClasses;
         }
@@ -154,7 +155,7 @@ SQL;
         }
 
         $this->stmtResults->bindValue(':class', $class, SQLITE3_TEXT);
-        $analyzerName = 'Analyzer\\\\'.str_replace('/', '\\\\', $class);
+        $analyzerName = 'Exakat\\\\Analyzer\\\\'.str_replace('/', '\\\\', $class);
         
         $linksDown = Token::linksAsList();
         
@@ -189,7 +190,7 @@ GREMLIN;
         $res = $res->results;
         
         $saved = 0;
-        $severity = \Analyzer\Analyzer::$docs->getSeverity(str_replace('\\\\', '\\', $analyzerName));
+        $severity = Analyzer::$docs->getSeverity('Exakat\\Analyzer\\'.str_replace('/', '\\', $class));
 
         foreach($res as $result) {
             if (!is_object($result)) {

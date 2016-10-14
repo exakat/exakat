@@ -23,11 +23,14 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
+
 class Test extends Tasks {
     private $project_dir = '.';
     private $config = null;
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
         $project = 'test';
 
@@ -40,10 +43,10 @@ class Test extends Tasks {
 
         // Check for requested analyze
         $analyzer = $config->program;
-        if (\Analyzer\Analyzer::getClass($analyzer)) {
+        if (Analyzer::getClass($analyzer)) {
             $analyzers_class = array($analyzer);
         } else {
-            $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
+            $r = Analyzer::getSuggestionClass($analyzer);
             if (count($r) > 0) {
                 echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
             }

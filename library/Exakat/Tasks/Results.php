@@ -23,21 +23,23 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
 use Exakat\Tokenizer\Token;
 
 class Results extends Tasks {
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $analyzer = $config->program;
         if (empty($analyzer)) {
             die('Provide the analyzer with the option -P X/Y. Aborting'."\n");
         }
         
-        $analyzerClass = \Analyzer\Analyzer::getClass($analyzer);
+        $analyzerClass = Analyzer::getClass($analyzer);
 
-        if ("Analyzer\\".str_replace('/', '\\', $analyzer) != $analyzerClass) {
+        if ("Exakat\\Analyzer\\".str_replace('/', '\\', $analyzer) != $analyzerClass) {
             $die = "'$analyzer' doesn't exist. Aborting\n";
     
-            $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
+            $r = Analyzer::getSuggestionClass($analyzer);
             if (count($r) > 0) {
                 $die .= 'Did you mean : '.implode(', ', str_replace('_', '/', $r))."\n";
             }

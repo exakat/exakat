@@ -24,6 +24,7 @@
 namespace Exakat\Reports;
 
 use XmlWriter;
+use Exakat\Analyzer\Analyzer;
 use Exakat\Exakat;
 
 /**
@@ -156,7 +157,7 @@ class Xml extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = \Analyzer\Analyzer::getInstance($row['analyzer']);
+                $analyzer = Analyzer::getInstance($row['analyzer']);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
             }
