@@ -637,12 +637,12 @@ repeat(__.in('.$linksDown.'))
         return $this->propertyIsNot('noDelimiter', $code, $caseSensitive);
     }
 
-    public function fullnspathIs($code, $caseSensitive = false) {
-        return $this->propertyIs('fullnspath', $code, $caseSensitive);
+    public function fullnspathIs($code) {
+        return $this->propertyIs('fullnspath', $code, false);
     }
 
-    public function fullnspathIsNot($code, $caseSensitive = false) {
-        return $this->propertyIsNot('fullnspath', $code, $caseSensitive);
+    public function fullnspathIsNot($code) {
+        return $this->propertyIsNot('fullnspath', $code, false);
     }
     
     public function codeIsPositiveInteger() {
@@ -1607,7 +1607,7 @@ GREMLIN
         } elseif (substr($this->methods[1], 0, 39) == 'where( __.in("ANALYZED").has("analyzer"') {
             $first = array_shift($this->methods); // remove first 
             $init = array_shift($this->methods); // remove first 
-            preg_match('/"(Exakat\\\\\\\\Analyzer\\\\.*?)"/', $init, $r);
+            preg_match('#"([^"\/]+?/[^"]+?)"#', $init, $r);
             $query = implode('.', $this->methods);
             $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$r[1].'").out("ANALYZED").as("first").groupCount("processed").by(count()).'.$query;
             unset($this->methods[1]);
@@ -1623,8 +1623,8 @@ GREMLIN;
         
         $query .= '.groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
-// Query (#'.(count($this->queries) + 1).') for '.substr($this->analyzerQuoted, 10).'
-// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.str_replace('\\\\', '/', substr($this->analyzerQuoted, 10))." -v\n";
+// Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
+// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";
 
     // initializing a new query
         $this->queries[] = $query;
