@@ -331,7 +331,7 @@ JOIN categories
         $res = $sqlite->query('SELECT analyzers.folder || "/" || analyzers.name as name FROM analyzers');
         while($row = $res->fetchArray()) {
             ++$total;
-            if (!file_exists('library/Analyzer/'.$row['name'].'.php')) {
+            if (!file_exists('library/Exakat/Analyzer/'.$row['name'].'.php')) {
                 echo $row['name'], " has no exakat code\n";
             }
             if (!file_exists('human/en/'.$row['name'].'.ini')) {
@@ -406,8 +406,8 @@ JOIN categories
                           );
         $analyzeList = '("'.implode('", "', $analyzes).'")';
         
-        include 'library/Analyzer/Analyzer.php';
-        $oClass = new ReflectionClass('\Analyzer\Analyzer');
+        include 'library/Exakat/Analyzer/Analyzer.php';
+        $oClass = new ReflectionClass('\Exakat\Analyzer\Analyzer');
         $analyzerConstants = array_keys($oClass->getConstants());
 
        $severityList = "'". implode("', '", array_filter($analyzerConstants, function ($x) { return substr($x, 0, 2) === 'S_';})) . "'";
