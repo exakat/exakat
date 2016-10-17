@@ -23,6 +23,10 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
+use Exakat\Phpexec;
+
 class Analyze extends Tasks {
     public function run(\Exakat\Config $config) {
         $project = $config->project;
@@ -38,7 +42,7 @@ class Analyze extends Tasks {
         $this->checkTokenLimit();
         $begin = microtime(true);
 
-        \Analyzer\Analyzer::$gremlinStatic = $this->gremlin;
+        Analyzer::$gremlinStatic = $this->gremlin;
         
         // Take this before we clean it up
         $rows = $this->datastore->getRow('analyzed');
@@ -49,10 +53,10 @@ class Analyze extends Tasks {
 
         if ($config->program !== null) {
             $analyzer = $config->program;
-            if (\Analyzer\Analyzer::getClass($analyzer)) {
+            if (Analyzer::getClass($analyzer)) {
                 $analyzers_class = array($analyzer);
             } else {
-                $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
+                $r = Analyzer::getSuggestionClass($analyzer);
                 if (count($r) > 0) {
                     echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
                 }
@@ -61,7 +65,7 @@ class Analyze extends Tasks {
         } elseif ($config->thema !== null) {
             $thema = $config->thema;
 
-            if (!$analyzers_class = \Analyzer\Analyzer::getThemeAnalyzers($thema)) {
+            if (!$analyzers_class = Analyzer::getThemeAnalyzers($thema)) {
                 die("No such thema as '$thema'. Aborting\n");
             }
             $this->datastore->addRow('hash', array($config->thema => count($analyzers_class) ) );
@@ -79,7 +83,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
             $dependencies = array();
             $dependencies2 = array();
             foreach($analyzers_class as $a) {
-                $d = \Analyzer\Analyzer::getInstance($a);
+                $d = Analyzer::getInstance($a);
                 $configName = str_replace('/', '_', $a);
                 $d = $d->dependsOn();
                 if (empty($d)) {
@@ -102,7 +106,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
 
                     foreach($diff as $k => $v) {
                         if (!isset($dependencies[$v])) {
-                            $x = \Analyzer\Analyzer::getInstance($v);
+                            $x = Analyzer::getInstance($v);
                             if ($x === null) {
                                 display( "No such dependency as '$v'. Ignoring\n");
                                 continue;
@@ -133,12 +137,12 @@ php exakat analyze -P <One/rule> -p <project>\n");
 
             if (!empty($dependencies)) {
                 die( "Dependencies depending on each other : can't finalize. Aborting\n".
-                      print_r($dependencies, 1));
+                      print_r($dependencies, true));
             }
         }
 
         $total_results = 0;
-        $Php = new \Phpexec($config->version);
+        $Php = new Phpexec($config->version);
 
         $progressBar = new \Progressbar(count($dependencies2));
         
@@ -147,8 +151,8 @@ php exakat analyze -P <One/rule> -p <project>\n");
                 echo $progressBar->drawCurrentProgress();
             }
             $begin = microtime(true);
-            $analyzer = \Analyzer\Analyzer::getInstance($analyzer_class);
-            $configName = str_replace(array('/', '\\'), '_', str_replace('Analyzer\\', '', $analyzer_class));
+            $analyzer = Analyzer::getInstance($analyzer_class);
+            $configName = str_replace(array('/', '\\'), '_', str_replace('Exakat\\Analyzer\\', '', $analyzer_class));
     
             if ($config->noRefresh && isset($analyzed[$analyzer_class])) {
                 display( "$analyzer_class is already processed\n");

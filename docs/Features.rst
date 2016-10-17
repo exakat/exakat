@@ -3,31 +3,31 @@
 Exakat features
 ===============
 
-Feature list
-------------
+Features list
+-------------
 
-* 240 analyzers
+* 261 analyzers
 * Compatible with PHP 5.3 to 7.1-dev
-* Migration analyzers from 5.2 to 5.3 to 7.0 to dev
+* Migration analyzers from 5.2 to 5.3 to 7.2 to dev
 * List bug fixes for your code
 * appinfo(): the list of PHP features
 * List PHP directives that impact your code
 * Class Hierarchy Diagram
 
-240 analyzers
--------------
+261 analyzers
+-----------------------------
 
-There are currently over 240 different analyzers that check the PHP code to report code smells. Analyzers are inspired by PHP manual, migration documents, community good practices or simple logic. 
+There are currently 261 different analyzers that check the PHP code to report code smells. Analyzers are inspired by PHP manual, migration documents, community good practices, computer science or simple logic. 
 
 Some of them track rare occurrences, and some are frequent. Some track careless mistakes and some are highly complex situations. In any case, exakat has your back, and will warn you. 
 
-Compatible with PHP 5.3 to 7.1-dev
+Compatible with PHP 5.3 to 7.2-dev
 ----------------------------------
 
-The Exakat engine runs on PHP 7.0, 5.6. It is checked against newer version by itself, and it probably runs on older versions. 
+The Exakat engine runs on PHP 7.1, 7.0, 5.6. It is checked against newer version by itself, and it probably runs on older versions. 
 It may examine code that range from PHP 5.2 to PHP 7.1-dev. 
 
-Migration guide from 5.2 to 5.3 to 7.0 to dev
+Migration guide from 5.2 to 5.3 to 7.2 to dev
 ---------------------------------------------
 
 Every middle version of PHP comes with its migration guide from the manual, and from community's feedback. Incompatibilities are included as analyzers in Exakat, and report everything they can find that may prevent you from moving to the newer version. 

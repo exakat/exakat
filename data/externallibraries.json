@@ -99,5 +99,8 @@
               "name":"CI xmlRPC"},
  "yii":{"homepage":"http://www.yiiframework.com/",
         "ignore":"FILE_ONLY",
-        "name":"Yii"}
+        "name":"Yii"},
+ "zend_view":{"homepage":"http://framework.zend.com/",
+              "ignore":"WHOLE_DIR",
+              "name":"Zend Framework"}
 }

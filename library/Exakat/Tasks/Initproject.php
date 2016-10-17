@@ -23,10 +23,13 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Datastore;
+
 class Initproject extends Tasks {
     private $config = null;
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
         $project = $config->project;
 
@@ -71,7 +74,7 @@ class Initproject extends Tasks {
             return null;
         }
 
-        $this->datastore = new \Datastore(\Exakat\Config::factory(), \Datastore::CREATE);
+        $this->datastore = new Datastore(Config::factory(), Datastore::CREATE);
 
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/config.ini')) {
             if ($this->config->symlink === true) {

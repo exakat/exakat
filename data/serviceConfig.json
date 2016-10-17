@@ -75,6 +75,8 @@
                         "file":[".semver"]},
  "spip":{"homepage":"http://www.spip.net/",
            "file":["paquet.xml"]},
+ "storyplayer":{"homepage":"https://datasift.github.io/storyplayer/",
+           "file":["storyplayer.json.dist"]},
  "styleci":{"homepage":"https://styleci.io/",
             "file":[".styleci.yml"]},
  "sublimelinter":{"homepage":"http://www.sublimelinter.com/en/latest/",

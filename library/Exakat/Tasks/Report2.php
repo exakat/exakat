@@ -23,14 +23,18 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Reports2 as Report;
+
 class Report2 extends Tasks {
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         if ($config->project == "default") {
             die("This command requires a project (option -p).\nAborting\n");
         }
 
-        if (!class_exists('\Reports\\'.$config->format)) {
-            die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', \Reports\Reports::FORMATS)."\nAborting\n");
+        if (!class_exists('\\Exakat\\Reports\\'.$config->format)) {
+            die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', Reports::FORMATS)."\nAborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
@@ -41,7 +45,7 @@ class Report2 extends Tasks {
             die("Project hasn't been analyzed. Run project first.\nAborting\n");
         }
 
-        \Analyzer\Analyzer::$datastore = $this->datastore;
+        Analyzer::$datastore = $this->datastore;
         // errors, warnings, fixable and filename
         // line number => columnnumber => type, source, severity, fixable, message
 
@@ -88,7 +92,7 @@ class Report2 extends Tasks {
         
         // Choose format from options
 
-        $format = '\Reports\\'.$config->format;
+        $format = '\Exakat\Reports\\'.$config->format;
         $report = new $format();
         if ($config->file == 'stdout') {
             echo $report->generate( $config->projects_root.'/projects/'.$config->project);

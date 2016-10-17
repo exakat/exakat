@@ -22,6 +22,11 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Phpexec;
+use Exakat\Loader\CypherG3;
+use Exakat\Tasks\Precedence;
+
 const T_BANG                         = '!';
 const T_CLOSE_BRACKET                = ']';
 const T_CLOSE_PARENTHESIS            = ')';
@@ -199,25 +204,28 @@ class Load extends Tasks {
     private $atomCount = 0;
     private $argumentsId = array();
     private $path;
+    private $sequence = [];
+    private $sequenceCurrentRank = 0;
+    private $sequenceRank = [];
     
     public function __construct($gremlin) {
         parent::__construct($gremlin);
 
-        $this->php = new \Phpexec();
+        $this->php = new Phpexec();
         if (!$this->php->isValid()) {
             die("This PHP binary is not valid for running Exakat.\n");
         }
 
         $this->php->getTokens();
 
-        \Exakat\Tasks\Precedence::preloadConstants($this->php->getActualVersion());
-        $this->precedence = new \Exakat\Tasks\Precedence();
+        Precedence::preloadConstants($this->php->getActualVersion());
+        $this->precedence = new Precedence();
         
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         $this->path = $config->projects_root.'/.exakat';
     }
 
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
 
         if (file_exists($this->config->projects_root.'/.exakat')) {
@@ -242,7 +250,7 @@ class Load extends Tasks {
                                     'token'    => 'T_WHOLE']);
         
         if (static::$client === null) {
-            static::$client = new \Loader\CypherG3();
+            static::$client = new CypherG3();
         }
         
         $this->datastore->cleanTable('tokenCounts');
@@ -388,19 +396,19 @@ class Load extends Tasks {
         $this->startSequence(); // At least, one sequence available
         $this->id = -1;
         do {
-            $id = $this->processNext();
+            $theId = $this->processNext();
             display( "$this->id / $n\n");
 
-            if ($id > 0) {
-                $this->addToSequence($id);
+            if ($theId > 0) {
+                $this->addToSequence($theId);
             }
         } while ($this->id < $n);
         
-        $id = $this->sequence;
+        $sequenceId = $this->sequence;
         $this->endSequence();
 
-        $this->addLink($id1, $id, 'FILE');
-        $this->setAtom($id, ['root' => true]);
+        $this->addLink($id1, $sequenceId, 'FILE');
+        $this->setAtom($sequenceId, ['root' => true]);
 
         $this->checkTokens($filename);
         
@@ -2005,7 +2013,7 @@ class Load extends Tasks {
                 ++$this->id; // skip ; (will do just below)
             }
         }
-        $this->processSemicolon($forId);
+        $this->processSemicolon();
 
         return $forId;
     }
@@ -3489,7 +3497,7 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $this->nestContext(self::CONTEXT_NOSEQUENCE);
+        $this->nestContext();
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             $blockId = $this->processCurlyExpression();
             $right = $this->processFCOA($blockId);

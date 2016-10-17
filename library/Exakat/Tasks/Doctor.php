@@ -23,13 +23,17 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Exakat;
+use Exakat\Config;
+use Exakat\Task;
+
 class Doctor extends Tasks {
     public function __construct($gremlin) {
         $this->enabledLog = false;
         parent::__construct($gremlin);
     }
 
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $stats = array();
 
         $stats = array_merge($stats, $this->checkPreRequisite($config));
@@ -50,8 +54,8 @@ class Doctor extends Tasks {
 
     private function checkPreRequisite($config) {
 // Compulsory
-        $stats['exakat']['version'] = \Exakat::VERSION;
-        $stats['exakat']['build'] = \Exakat::BUILD;
+        $stats['exakat']['version'] = Exakat::VERSION;
+        $stats['exakat']['build'] = Exakat::BUILD;
 
         // check for PHP
         $stats['PHP']['version']   = phpversion();
@@ -188,7 +192,7 @@ class Doctor extends Tasks {
         return $stats;
     }
     
-    private function checkAutoInstall(\Exakat\Config $config) {
+    private function checkAutoInstall(Config $config) {
         $stats = array();
         
         // config
@@ -278,7 +282,7 @@ INI;
         return $stats;
     }
 
-    private function checkOptional(\Exakat\Config $config) {
+    private function checkOptional(Config $config) {
         $stats = array();
 
         // check PHP 5.2

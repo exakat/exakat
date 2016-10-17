@@ -22,6 +22,8 @@
 
 namespace Exakat;
 
+use Exakat\Phpexec;
+
 class Config {
     static private $singleton      = null;
            private $configFile     = array();
@@ -286,7 +288,7 @@ class Config {
             if (empty($this->configFile['php'.$version])) {
                 continue;
             }
-            $php = new \Phpexec($version[0].'.'.$version[1]);
+            $php = new Phpexec($version[0].'.'.$version[1]);
             if ($php->isValid()) {
                 $other_php_versions[] = $version;
             }

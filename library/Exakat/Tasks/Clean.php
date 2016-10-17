@@ -23,19 +23,26 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Datastore;
+use \Exakat\Config;
+
 class Clean extends Tasks {
     public function __construct($gremlin) {
         $this->enabledLog = false;
         parent::__construct($gremlin);
     }
 
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $path = $config->projects_root.'/projects/'.$config->project;
+
+        display( "Cleaning project $config->project\n" );
         
         $dirsToErase = array('log',
                              'report',
                              'Premier-ace',
                              'faceted',
+                             'faceted2',
+                             'ambassador'
                              );
         foreach($dirsToErase as $dir) {
             $dirPath = $path.'/'.$dir;
@@ -86,7 +93,7 @@ class Clean extends Tasks {
         }
         display("Removed $total files\n");
 
-        $this->datastore = new \Datastore($config, \Datastore::CREATE);
+        $this->datastore = new Datastore($config, Datastore::CREATE);
         display("Recreating database\n");
     }
 }

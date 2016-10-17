@@ -23,11 +23,15 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
+use Exakat\Tasks\CleanDb;
+
 class Test extends Tasks {
     private $project_dir = '.';
     private $config = null;
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
         $project = 'test';
 
@@ -40,10 +44,10 @@ class Test extends Tasks {
 
         // Check for requested analyze
         $analyzer = $config->program;
-        if (\Analyzer\Analyzer::getClass($analyzer)) {
+        if (Analyzer::getClass($analyzer)) {
             $analyzers_class = array($analyzer);
         } else {
-            $r = \Analyzer\Analyzer::getSuggestionClass($analyzer);
+            $r = Analyzer::getSuggestionClass($analyzer);
             if (count($r) > 0) {
                 echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
             }
@@ -51,7 +55,8 @@ class Test extends Tasks {
         }
 
         display("Cleaning DB\n");
-        shell_exec($this->config->php.' '.$config->executable.' cleandb -v');
+        $clean = new CleanDb($this->gremlin);
+        $clean->run($config);
 
         if (!empty($config->dirname)) {
             shell_exec($this->config->php.' '.$config->executable.' load -v -p test -r -d '.$config->dirname. ' > '.$config->projects_root.'/projects/test/log/load.final.log' );
@@ -59,9 +64,6 @@ class Test extends Tasks {
             shell_exec($this->config->php.' '.$config->executable.' load -v -p test -f '.$config->filename. ' > '.$config->projects_root.'/projects/test/log/load.final.log' );
         }
         display("Project loaded\n");
-
-        $res = shell_exec($this->config->php.' '.$config->executable.' tokenizer -p test > '.$config->projects_root.'/projects/test/log/tokenizer.final.log');
-        display("Project tokenized\n");
 
         $args = array ( 1 => 'analyze',
                         2 => '-p',

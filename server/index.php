@@ -88,9 +88,7 @@ function onepage($path) {
 
         pushToQueue(md5($_REQUEST['script']));
         echo json_encode(['id' => md5($_REQUEST['script'])]);
-    } else {
-        // Nothing
-    }
+    } 
     exit;
 }
 
@@ -139,10 +137,7 @@ function project($path) {
         
         pushToQueue($project);
         echo json_encode(['project' => $project]);
-    } else {
-        // Nothing
     }
-
     exit;
 }
 

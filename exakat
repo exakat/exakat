@@ -4,13 +4,13 @@
 if(strpos(basename(__FILE__), 'phar') !== false){
     require_once 'phar://exakat.phar/library/Autoload.php';
 } else {
-    include_once(__DIR__.'/library/Autoload.php');
+    include_once __DIR__.'/library/Autoload.php';
 }
 
-$graphDB = new \Graph\Gremlin3($config);
+$graphDB = new \Exakat\Graph\Gremlin3($config);
 
 try {
-    $exakat = new \Exakat($graphDB);
+    $exakat = new \Exakat\Exakat($graphDB);
     $exakat->execute($config);
 } catch (Throwable $e) {
     print "\nError : ".$e->getMessage()."\nStopping execution\n\n";

@@ -23,15 +23,18 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Analyzer;
+use Exakat\Config;
+
 class OnepageReport extends Tasks {
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $project = $config->project;
 
         $result = new \Stdclass();
-        $analyzers = \Analyzer\Analyzer::getThemeAnalyzers('OneFile');
+        $analyzers = Analyzer::getThemeAnalyzers('OneFile');
         
         foreach($analyzers as $analyzer) {
-            $a = \Analyzer\Analyzer::getInstance($analyzer);
+            $a = Analyzer::getInstance($analyzer);
             $results = $a->getArray();
             if (!empty($results)) {
                 $result->{$a->getDescription()->getName()} = $results;

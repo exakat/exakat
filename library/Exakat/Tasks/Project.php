@@ -23,6 +23,10 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Datastore;
+use Exakat\Exakat;
+
 class Project extends Tasks {
     private $project_dir = '.';
     private $config = null;
@@ -31,12 +35,12 @@ class Project extends Tasks {
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               'Analyze');
 
-    protected $reports = array('Premier' => array('Devoops' => 'report',
-                                                  'Faceted' => 'faceted'));
+    protected $reports = array('Premier' => array('Ambassador' => 'report',
+                                                  'Faceted'    => 'faceted'));
     
     const TOTAL_STEPS = 23; // 2 Reports + 10 Analyzes + 10 other steps
 
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
         
         $progress = 0;
@@ -74,12 +78,12 @@ class Project extends Tasks {
         $this->logTime('Start');
 
         // cleaning datastore
-        $this->datastore = new \Datastore($config, \Datastore::CREATE);
+        $this->datastore = new Datastore($config, Datastore::CREATE);
         
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start' => $audit_start,
-                                               'exakat_version' => \Exakat::VERSION,
-                                               'exakat_build' => \Exakat::BUILD,
+                                               'exakat_version' => Exakat::VERSION,
+                                               'exakat_build' => Exakat::BUILD,
                                          ));
 
         display("Running project '$project'\n");
@@ -98,14 +102,14 @@ class Project extends Tasks {
                         4 => '-u',
                         );
         
-        $configThema = \Exakat\Config::push($args);
+        $configThema = Config::push($args);
 
         $analyze = new FindExternalLibraries($this->gremlin);
         $analyze->run($configThema);
         unset($report);
         $this->updateProgress($progress++);
 
-        \Exakat\Config::pop();
+        Config::pop();
         unset($analyze);
         $this->updateProgress($progress++);
 
@@ -146,7 +150,7 @@ class Project extends Tasks {
                             );
             
             try {
-                $configThema = \Exakat\Config::push($args);
+                $configThema = Config::push($args);
 
                 $analyze = new Analyze($this->gremlin);
                 $analyze->run($configThema);
@@ -155,7 +159,7 @@ class Project extends Tasks {
                 rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
                 $this->updateProgress($progress++);
 
-                \Exakat\Config::pop();
+                Config::pop();
             } catch (\Exception $e) {
                 echo "Error while running the Analyze $theme \n",
                      $e->getMessage();
@@ -175,7 +179,7 @@ class Project extends Tasks {
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
-        $oldConfig = \Exakat\Config::factory();
+        $oldConfig = Config::factory();
         foreach($this->reports as $reportName => $formats) {
             foreach($formats as $format => $fileName) {
                 display("Reporting $reportName in $format\n");
@@ -189,7 +193,7 @@ class Project extends Tasks {
                                 6 => '-format',
                                 7 => $format,
                                 );
-                $config = \Exakat\Config::factory($args);
+                $config = Config::factory($args);
             
                 try {
                     $report = new Report2($this->gremlin);
@@ -202,8 +206,8 @@ class Project extends Tasks {
                 }
             }
         }
-        \Exakat\Config::factory($oldConfig);
 
+        Config::factory($oldConfig);
         display("Reported project\n");
 
         $analyze = new Stat($this->gremlin);

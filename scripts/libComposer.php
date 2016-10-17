@@ -159,9 +159,7 @@ SQL
                 
                 $res = $sqlite->query("SELECT id FROM classes WHERE namespace_id = '{$namespacesIds[$ns]}' AND classname = '$class'");
                 $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
-                if ($nsid) {
-    //                print "   $class found in $nsid\n";
-                } else {
+                if (!$nsid) {
                     $sqlite->query("INSERT INTO classes (namespace_id, classname) VALUES ('{$namespacesIds[$ns]}', '$class');");
                     print "Insertion de la classe '$class'\n";
                 }
@@ -174,9 +172,7 @@ SQL
             foreach($interfaces as $interface) {
                 $res = $sqlite->query("SELECT id FROM interfaces WHERE namespace_id = '{$namespacesIds[$ns]}' AND interfacename = '$interface'");
                 $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
-                if ($nsid) {
-    //                print "   $class found in $nsid\n";
-                } else {
+                if (!$nsid) {
                     $sqlite->query("INSERT INTO interfaces (namespace_id, interfacename) VALUES ('{$namespacesIds[$ns]}', '$interface');");
                 }
             }
@@ -188,9 +184,7 @@ SQL
             foreach($traits as $trait) {
                 $res = $sqlite->query("SELECT id FROM traits WHERE namespace_id = '{$namespacesIds[$ns]}' AND traitname = '$trait'");
                 $nsid = $res->fetchArray(SQLITE3_ASSOC)['id'];
-                if ($nsid) {
-    //                print "   $class found in $nsid\n";
-                } else {
+                if (!$nsid) {
                     $sqlite->query("INSERT INTO traits (namespace_id, traitname) VALUES ('{$namespacesIds[$ns]}', '$trait');");
                 }
             }

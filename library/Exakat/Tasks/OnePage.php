@@ -23,13 +23,17 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Datastore;
+use Exakat\Exakat;
+
 class OnePage extends Tasks {
     private $project_dir = '.';
     private $config = null;
     
     const TOTAL_STEPS = 7;
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
         
         $progress = 0;
@@ -69,12 +73,12 @@ class OnePage extends Tasks {
         }
         
         unset($this->datastore);
-        $this->datastore = new \Datastore($config, \Datastore::CREATE);
+        $this->datastore = new Datastore($config, Datastore::CREATE);
         
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
-                                               'exakat_version' => \Exakat::VERSION,
-                                               'exakat_build'   => \Exakat::BUILD,
+                                               'exakat_version' => Exakat::VERSION,
+                                               'exakat_build'   => Exakat::BUILD,
                                                ));
 
         display("Cleaning DB\n");
@@ -107,7 +111,7 @@ class OnePage extends Tasks {
             rename($config->projects_root.'/projects/onepage/log/analyze.log',
                    $config->projects_root.'/projects/onepage/log/analyze.onepage.log');
         } catch (\Exception $e) {
-            display( "Error while running the Analyze $theme \n".
+            display( "Error while running the Analyze OnePage \n".
                  $e->getMessage());
             file_put_contents($config->projects_root.'/projects/onepage/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
             die();
@@ -118,12 +122,12 @@ class OnePage extends Tasks {
         $this->logTime('Analyze');
 
         $b1 = microtime(true);
-        $task = new Dump();
+        $task = new Dump($this->gremlin);
         $task->run($config);
         display("Project dumped\n");
         $e1 = microtime(true);
 
-        $task = new Report2();
+        $task = new Report2($this->gremlin);
         $task->run($config);
         display("Project reported\n");
         $this->logTime('Report');

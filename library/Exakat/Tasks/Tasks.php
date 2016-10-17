@@ -23,6 +23,9 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Datastore;
+use Exakat\Log;
+
 abstract class Tasks {
     protected $log        = null;
     protected $enabledLog = true;
@@ -36,13 +39,13 @@ abstract class Tasks {
         
         if ($this->enabledLog) {
             $task = strtolower((new \ReflectionClass($this))->getShortName());
-            $this->log = new \Log($task,
+            $this->log = new Log($task,
                                   $config->projects_root.'/projects/'.$config->project);
         }
         
         if ($config->project != 'default' &&
             file_exists($config->projects_root.'/projects/'.$config->project)) {
-            $this->datastore = new \Datastore($config);
+            $this->datastore = new Datastore($config);
         }
     }
     

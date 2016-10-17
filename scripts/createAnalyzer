@@ -26,9 +26,9 @@ $analyzer = $argv[1];
 if (!preg_match('#^([A-Z][a-zA-Z0-9]*)/([A-Z][a-zA-Z0-9]*)$#is', $analyzer, $parts)) {
     print "Usage : createAnalyzer <Dir>/<Analyzer>\n";
     
-    $dirs = glob('library/Analyzer/*', GLOB_ONLYDIR);
+    $dirs = glob('library/Exakat/Analyzer/*', GLOB_ONLYDIR);
     $dirs = array_map(function ($dir) { 
-        return str_replace('library/Analyzer/', '', $dir); 
+        return str_replace('library/Exakat/Analyzer/', '', $dir); 
     }, $dirs);
     print "Dirs : ".implode(', ', $dirs)."\n";
     die();
@@ -36,26 +36,26 @@ if (!preg_match('#^([A-Z][a-zA-Z0-9]*)/([A-Z][a-zA-Z0-9]*)$#is', $analyzer, $par
 
 list(,$category, $name) = $parts;
 
-if (!file_exists('library/Analyzer/'.$category)) {
+if (!file_exists('library/Exakat/Analyzer/'.$category)) {
     print "Usage : createAnalyzer <Dir>/<Analyzer>\n";
     print "Dir $category doesn't exists\n";
     
-    $dirs = glob('library/Analyzer/*', GLOB_ONLYDIR);
+    $dirs = glob('library/Exakat/Analyzer/*', GLOB_ONLYDIR);
     $dirs = array_map(function ($dir) { 
-        return str_replace('library/Analyzer/', '', $dir); 
+        return str_replace('library/Exakat/Analyzer/', '', $dir); 
     }, $dirs);
     print "Dirs : ".implode(', ', $dirs)."\n";
     die();
 }
 
-if (file_exists('library/Analyzer/'.$category.'/'.$name.'.php')) {
+if (file_exists('library/Exakat/Analyzer/'.$category.'/'.$name.'.php')) {
     print "Usage : createAnalyzer <Dir>/<Analyzer>\n";
     print "Analyzer $category/$name already exists\n";
     
     die();
 }
 
-// create class in library/Analyzer
+// create class in library/Exakat/Analyzer
 $php = '<?'. <<<PHP
 php
 /*
@@ -79,11 +79,11 @@ php
  *
 */
 
-namespace Analyzer\\$category;
+namespace Exakat\\Analyzer\\$categorie;
 
-use Analyzer;
+use Exakat\Analyzer\Analyzer;
 
-class $name extends Analyzer\Analyzer {
+class $name extends Analyzer {
     /* Remove this if useless
     public function dependsOn() {
         return array('MethodDefinition');
@@ -102,9 +102,8 @@ class $name extends Analyzer\Analyzer {
 
 PHP;
 
-file_put_contents('library/Analyzer/'.$analyzer.'.php', $php);
-shell_exec( 'bbedit library/Analyzer/'.$analyzer.'.php'."\n");
-shell_exec( 'bbedit human/en/'.$analyzer.'.ini');
+file_put_contents('library/Exakat/Analyzer/'.$analyzer.'.php', $php);
+shell_exec( 'bbedit library/Exakat/Analyzer/'.$analyzer.'.php'."\n");
 //print 'php manualTest.php Tests/'.$analyzer.'.php');
 print 'php exakat analyze -p project -P '.$analyzer.' -v'."\n";
 
@@ -117,6 +116,7 @@ clearphp = "";
 INI;
 
 file_put_contents('human/en/'.$analyzer.'.ini', $ini);
+shell_exec( 'bbedit human/en/'.$analyzer.'.ini');
 
 // add to sqlite
 $sqlite = new Sqlite3('data/analyzers.sqlite');
@@ -128,6 +128,8 @@ $sqlite->query("INSERT INTO analyzers ('folder', 'name') VALUES ('$category', '$
 $id = $sqlite->lastInsertRowID();
 
 $sqlite->query("INSERT INTO analyzers_categories VALUES ('$id', '$idUnassigned')"); 
+// 38 is id for All
+$sqlite->query("INSERT INTO analyzers_categories VALUES ('$id', 38)"); 
 
 // add test
 shell_exec("cd tests/analyzer/; php create_test.php $analyzer");

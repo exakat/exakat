@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
-.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+.. comment: Generation date : Mon, 17 Oct 2016 14:39:06 +0000
+.. comment: Generation hash : 451c56ed72b1c12cee39cac818dda515e9e882ca
 
 
 .. _analyze:
@@ -68,10 +68,10 @@ Recipes details
 Analyze
 +++++++
 
-Total : 261 analysis
+Total : 264 analysis
 
-* :ref:`$HTTP\_RAW\_POST\_DATA`
-* :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
+* :ref:`$HTTP_RAW_POST_DATA`
+* :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
 * :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
 * :ref:`<?= usage <<?=-usage>`
@@ -86,15 +86,16 @@ Total : 261 analysis
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
-* :ref:`Avoid array\_unique() <avoid-array\_unique()>`
-* :ref:`Avoid get\_class() <avoid-get\_class()>`
+* :ref:`Avoid array_unique() <avoid-array\_unique()>`
+* :ref:`Avoid get_class() <avoid-get\_class()>`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Buried Assignation <buried-assignation>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
-* :ref:`Cant Extend Final <cant-extend-final>`
+* :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
+* :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
@@ -111,7 +112,7 @@ Total : 261 analysis
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Use Alias <could-use-alias>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
-* :ref:`Could Use \_\_DIR\_\_ <could-use-\_\_dir\_\_>`
+* :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
@@ -133,6 +134,7 @@ Total : 261 analysis
 * :ref:`Empty Try Catch <empty-try-catch>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Exit() Usage <exit()-usage>`
+* :ref:`Failed Substr Comparison <failed-substr-comparison>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Foreach Needs Reference Array <foreach-needs-reference-array>`
 * :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
@@ -175,6 +177,7 @@ Total : 261 analysis
 * :ref:`Must Return Methods <must-return-methods>`
 * :ref:`Namespaces/HiddenUse`
 * :ref:`Negative Power <negative-power>`
+* :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Negative <never-negative>`
 * :ref:`Never Used Properties <never-used-properties>`
@@ -190,7 +193,7 @@ Total : 261 analysis
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
-* :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
+* :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Non Ascii Variables <non-ascii-variables>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
@@ -200,7 +203,7 @@ Total : 261 analysis
 * :ref:`Null On New <null-on-new>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
 * :ref:`Old Style Constructor <old-style-constructor>`
-* :ref:`Old Style \_\_autoload() <old-style-\_\_autoload()>`
+* :ref:`Old Style __autoload() <old-style-\_\_autoload()>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`One Variable String <one-variable-string>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
@@ -292,7 +295,7 @@ Total : 261 analysis
 * :ref:`Use System Tmp <use-system-tmp>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
-* :ref:`Use random\_int() <use-random\_int()>`
+* :ref:`Use random_int() <use-random\_int()>`
 * :ref:`Used Once Variables (In Scope) <used-once-variables-(in-scope)>`
 * :ref:`Used Once Variables <used-once-variables>`
 * :ref:`Useless Abstract Class <useless-abstract-class>`
@@ -314,9 +317,9 @@ Total : 261 analysis
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
 * :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
-* :ref:`\_\_toString() Throws Exception <\_\_tostring()-throws-exception>`
+* :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
-* :ref:`error\_reporting() With Integers <error\_reporting()-with-integers>`
+* :ref:`error_reporting() With Integers <error\_reporting()-with-integers>`
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/apc`
 * :ref:`ext/fann`
@@ -324,20 +327,20 @@ Total : 261 analysis
 * :ref:`ext/mysql`
 * :ref:`ext/sqlite`
 * :ref:`fopen() Mode <fopen()-mode>`
-* :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
-* :ref:`include\_once() Usage <include\_once()-usage>`
+* :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
+* :ref:`include_once() Usage <include\_once()-usage>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
-* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
-* :ref:`preg\_match\_all() Flag <preg\_match\_all()-flag>`
-* :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
-* :ref:`var\_dump()... Usage <var\_dump()...-usage>`
+* :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
+* :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
+* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+* :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
 .. _coding-conventions:
 
 Coding Conventions
 ++++++++++++++++++
 
-Total : 21 analysis
+Total : 20 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -352,7 +355,6 @@ Total : 21 analysis
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
 * :ref:`No Plus One <no-plus-one>`
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
-* :ref:`Not Same Name As File <not-same-name-as-file>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Should Be Single Quote <should-be-single-quote>`
 * :ref:`True False Inconsistant Case <true-false-inconsistant-case>`
@@ -368,6 +370,7 @@ CompatibilityPHP53
 
 Total : 51 analysis
 
+* :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -413,8 +416,7 @@ Total : 51 analysis
 * :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
-* :ref:`\*\* For Exponent <**-for-exponent>`
-* :ref:`\_\_debugInfo()`
+* :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/dba`
 * :ref:`ext/fdf`
@@ -427,6 +429,7 @@ CompatibilityPHP54
 
 Total : 46 analysis
 
+* :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -468,11 +471,10 @@ Total : 46 analysis
 * :ref:`Use Const And Functions <use-const-and-functions>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
-* :ref:`\*\* For Exponent <**-for-exponent>`
-* :ref:`\_\_debugInfo()`
+* :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`eval() Without Try <eval()-without-try>`
-* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
+* :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
 .. _compatibilityphp55:
 
@@ -481,6 +483,7 @@ CompatibilityPHP55
 
 Total : 42 analysis
 
+* :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -513,16 +516,15 @@ Total : 42 analysis
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
 * :ref:`Use Const And Functions <use-const-and-functions>`
-* :ref:`Use password\_hash() <use-password\_hash()>`
+* :ref:`Use password_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
-* :ref:`\*\* For Exponent <**-for-exponent>`
-* :ref:`\_\_debugInfo()`
+* :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/apc`
 * :ref:`ext/mysql`
-* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
+* :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
 .. _compatibilityphp56:
 
@@ -531,7 +533,7 @@ CompatibilityPHP56
 
 Total : 34 analysis
 
-* :ref:`$HTTP\_RAW\_POST\_DATA`
+* :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -557,14 +559,14 @@ Total : 34 analysis
 * :ref:`Scalar Typehint Usage <scalar-typehint-usage>`
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
-* :ref:`Use password\_hash() <use-password\_hash()>`
+* :ref:`Use password_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/apc`
 * :ref:`ext/mysql`
-* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
+* :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
 .. _compatibilityphp70:
 
@@ -573,7 +575,7 @@ CompatibilityPHP70
 
 Total : 33 analysis
 
-* :ref:`$HTTP\_RAW\_POST\_DATA`
+* :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -596,16 +598,16 @@ Total : 33 analysis
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
-* :ref:`Use password\_hash() <use-password\_hash()>`
+* :ref:`Use password_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/apc`
 * :ref:`ext/ereg`
 * :ref:`ext/mysql`
-* :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
-* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
-* :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
-* :ref:`set\_exception\_handler() Warning <set\_exception\_handler()-warning>`
+* :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
+* :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
+* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+* :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
 
 .. _compatibilityphp71:
 
@@ -614,7 +616,7 @@ CompatibilityPHP71
 
 Total : 37 analysis
 
-* :ref:`$HTTP\_RAW\_POST\_DATA`
+* :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -641,16 +643,16 @@ Total : 37 analysis
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Use Nullable Type <use-nullable-type>`
-* :ref:`Use password\_hash() <use-password\_hash()>`
+* :ref:`Use password_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/apc`
 * :ref:`ext/ereg`
 * :ref:`ext/mysql`
-* :ref:`func\_get\_arg() Modified <func\_get\_arg()-modified>`
-* :ref:`mcrypt\_create\_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
-* :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
-* :ref:`set\_exception\_handler() Warning <set\_exception\_handler()-warning>`
+* :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
+* :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
+* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+* :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
 
 .. _compatibilityphp72:
 
@@ -672,7 +674,7 @@ Dead code
 
 Total : 22 analysis
 
-* :ref:`Cant Extend Final <cant-extend-final>`
+* :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
 * :ref:`Empty Namespace <empty-namespace>`
 * :ref:`Exception Order <exception-order>`
@@ -712,7 +714,7 @@ Total : 16 analysis
 * :ref:`Join file() <join-file()>`
 * :ref:`Make One Call <make-one-call>`
 * :ref:`No Count With 0 <no-count-with-0>`
-* :ref:`No array\_merge() In Loops <no-array\_merge()-in-loops>`
+* :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`
 * :ref:`Simplify Regex <simplify-regex>`
@@ -727,7 +729,7 @@ Security
 Total : 18 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
-* :ref:`Avoir Sleep()/Usleep() <avoir-sleep()/usleep()>`
+* :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
@@ -735,15 +737,15 @@ Total : 18 analysis
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
-* :ref:`Random\_ Without Try <random\_-without-try>`
+* :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe CurlOptions <safe-curloptions>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
-* :ref:`Use random\_int() <use-random\_int()>`
-* :ref:`parse\_str() Warning <parse\_str()-warning>`
-* :ref:`preg\_replace With Option e <preg\_replace-with-option-e>`
-* :ref:`var\_dump()... Usage <var\_dump()...-usage>`
+* :ref:`Use random_int() <use-random\_int()>`
+* :ref:`parse_str() Warning <parse\_str()-warning>`
+* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+* :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
 .. _wordpress:
 

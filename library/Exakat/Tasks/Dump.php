@@ -23,6 +23,9 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Analyzer;
+use Exakat\Tokenizer\Token;
+
 class Dump extends Tasks {
     private $stmtResults       = null;
     private $stmtResultsCounts = null;
@@ -40,7 +43,7 @@ class Dump extends Tasks {
             unlink($sqliteFile);
         }
         
-        \Analyzer\Analyzer::initDocs();
+        Analyzer::initDocs();
         
         $sqlite = new \Sqlite3($sqliteFile);
         $this->getAtomCounts($sqlite);
@@ -83,7 +86,7 @@ SQL;
         }
         foreach($toProcess as $thema) {
             display('Processing thema : '.(is_array($thema) ? implode(', ', $thema) : $thema));
-            $themaClasses = \Analyzer\Analyzer::getThemeAnalyzers($thema);
+            $themaClasses = Analyzer::getThemeAnalyzers($thema);
 
             $themes[] = $themaClasses;
         }
@@ -152,9 +155,9 @@ SQL;
         }
 
         $this->stmtResults->bindValue(':class', $class, SQLITE3_TEXT);
-        $analyzerName = 'Analyzer\\\\'.str_replace('/', '\\\\', $class);
+        $analyzerName = 'Exakat\\\\Analyzer\\\\'.str_replace('/', '\\\\', $class);
         
-        $linksDown = \Tokenizer\Token::linksAsList();
+        $linksDown = Token::linksAsList();
         
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "{$analyzerName}").out('ANALYZED')
@@ -187,7 +190,7 @@ GREMLIN;
         $res = $res->results;
         
         $saved = 0;
-        $severity = \Analyzer\Analyzer::$docs->getSeverity(str_replace('\\\\', '\\', $analyzerName));
+        $severity = Analyzer::$docs->getSeverity('Exakat\\Analyzer\\'.str_replace('/', '\\', $class));
 
         foreach($res as $result) {
             if (!is_object($result)) {
@@ -232,7 +235,7 @@ SQL;
         $insert = $sqlite->prepare($sqlQuery);
 
         
-        foreach(\Tokenizer\Token::ATOMS as $atom) {
+        foreach(Token::ATOMS as $atom) {
             $query = 'g.V().hasLabel("'.$atom.'").count()';
             $res = $this->gremlin->query($query);
             if (!is_object($res) || !isset($res->results)) {
