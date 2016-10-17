@@ -28,14 +28,20 @@ use Exakat\Analyzer\Analyzer;
 class HardcodedPasswords extends Analyzer {
     public function analyze() {
         $passwords = array(
-                           'mysql_connect'  => 3,
-                           'mysqli_connect' => 3,
-                           'ftp_login'      => 3,
-                           'mssql_connect'  => 3,
-                           'oci_connect'    => 2,
-                           'imap_open'      => 3,
-                           'cyrus_authenticate' => 8,
-                           'ssh2_auth_password' => 2,
+                           'mysql_connect'            => 3,
+                           'mysqli_connect'           => 3,
+                           'ftp_login'                => 3,
+                           'mssql_connect'            => 3,
+                           'oci_connect'              => 2,
+                           'imap_open'                => 3,
+                           'cyrus_authenticate'       => 8,
+                           'ssh2_auth_password'       => 2,
+                           'hash_hmac'                => 2,
+                           'hash_hmac_file'           => 2,
+                           'hash_pbkdf2'              => 1,
+                           'kadm5_create_principal'   => 2,
+                           'kadm5_chpass_principal'   => 2,
+                           'kadm5_init_with_password' => 3,
                            );
         
         $positions = array();
