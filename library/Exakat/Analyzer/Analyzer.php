@@ -26,6 +26,7 @@ namespace Exakat\Analyzer;
 use Exakat\Description;
 use Exakat\Config;
 use Exakat\Tokenizer\Token;
+use Exakat\Exceptions\GremlinException;
 
 abstract class Analyzer {
     protected $neo4j          = null;
@@ -98,8 +99,7 @@ abstract class Analyzer {
         self::$gremlinStatic = $gremlin;
         
         $this->analyzer = get_class($this);
-        $this->analyzerQuoted = str_replace('\\', '\\\\', $this->analyzer);
-        $this->analyzerInBase = str_replace('\\', '/', str_replace('Analyzer\\', '', $this->analyzer));
+        $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
 
         $this->code = $this->analyzer;
         
@@ -122,16 +122,20 @@ abstract class Analyzer {
     }
     
     public function getInBaseName() {
-        return $this->analyzerInBase;
+        return $this->analyzerQuoted;
     }
     
     static public function initDocs() {
         if (Analyzer::$docs === null) {
-            $config = \Exakat\Config::factory();
+            $config = Config::factory();
             
             $pathDocs = $config->dir_root.'/data/analyzers.sqlite';
             self::$docs = new Docs($pathDocs);
         }
+    }
+    
+    public static function getName($classname) {
+        return str_replace( array('Exakat\\Analyzer\\', '\\'), array('', '/'), $classname);
     }
     
     public static function getClass($name) {
@@ -216,7 +220,7 @@ abstract class Analyzer {
     }
 
     public function getThemes() {
-        $analyzer = str_replace('\\', '/', substr(get_class($this), 9));
+        $analyzer = self::getClass($this);
         return Analyzer::$docs->getThemeForAnalyzer($analyzer);
     }
 
@@ -356,7 +360,7 @@ abstract class Analyzer {
     public function query($queryString, $arguments = null) {
         try {
             $result = $this->gremlin->query($queryString, $arguments);
-        } catch (\Exakat\Exceptions\GremlinException $e) {
+        } catch (GremlinException $e) {
             display($e->getMessage().
                     $queryString);
             $result = new \StdClass();
@@ -502,12 +506,12 @@ repeat(__.in('.$linksDown.'))
 
             $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(neq(0)) )', $analyzer);
         } else {
-            if ($analyzer == 'self') {
-                $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+            if ($analyzer === 'self') {
+                $analyzer = self::getName(get_class($this));
             } else {
-                $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
+                $analyzer = self::getName($analyzer);
             }
-            $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(neq(0)) )');
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", "'.$analyzer.'").count().is(neq(0)) )');
         }
 
         return $this;
@@ -522,12 +526,12 @@ repeat(__.in('.$linksDown.'))
 
             $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(eq(0)) )', $analyzer);
         } else {
-            if ($analyzer == 'self') {
-                $analyzer = str_replace('\\', '\\\\', $this->analyzer);
+            if ($analyzer === 'self') {
+                $analyzer = self::getName(get_class($this));
             } else {
-                $analyzer = str_replace('\\', '\\\\', self::getClass($analyzer));
+                $analyzer = self::getName($analyzer);
             }
-            $this->addMethod('where( __.in("ANALYZED").has("analyzer", '.$this->SorA($analyzer).').count().is(eq(0)) )');
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", "'.$analyzer.'").count().is(eq(0)) )');
         }
         
         return $this;
@@ -1676,8 +1680,9 @@ GREMLIN;
     }
 
     public function getArray() {
+        die(__CLASS__.'::'.__METHOD__);
         $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        if (substr($analyzer, 0, 5) === 'Analyzer\\Files\\') {
+        if (substr($analyzer, 0, 15) === 'Analyzer\\Files\\') {
             $query = <<<GREMLIN
 g.idx('analyzers')[['analyzer':'$analyzer']].out
 .has('notCompatibleWithPhpVersion', null)
@@ -1733,7 +1738,7 @@ GREMLIN;
     }
     
     protected function loadIni($file, $index = null) {
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         $fullpath = $config->dir_root.'/data/'.$file;
         
         if (!file_exists($fullpath)) {
@@ -1750,7 +1755,7 @@ GREMLIN;
     }
 
     protected function loadJson($file) {
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         $fullpath = $config->dir_root.'/data/'.$file;
 
         if (!file_exists($fullpath)) {
@@ -1817,7 +1822,7 @@ GREMLIN;
     
     public function getSeverity() {
         if (Analyzer::$docs === null) {
-            $config = \Exakat\Config::factory();
+            $config = Config::factory();
             
             Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
@@ -1840,7 +1845,7 @@ GREMLIN;
 
     public function getVendors() {
         if (Analyzer::$docs === null) {
-            $config = \Exakat\Config::factory();
+            $config = Config::factory();
             
             Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
@@ -1850,7 +1855,7 @@ GREMLIN;
 
     public function getTimeToFix() {
         if (Analyzer::$docs === null) {
-            $config = \Exakat\Config::factory();
+            $config = Config::factory();
             
             Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
         }
@@ -1894,8 +1899,8 @@ GREMLIN;
     }
     
     public static function makeBaseName($className) {
-        // A/B to Analyzer\\\\A\\\\B
-        return 'Analyzer\\\\'.str_replace('/', '\\\\', $className);
+        // No Exakat, no Analyzer, using / instead of \ 
+        return $className;
     }
 
     private function propertyIs($property, $code, $caseSensitive = false) {
