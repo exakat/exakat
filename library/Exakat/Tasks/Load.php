@@ -22,8 +22,10 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Loader\CypherG3;
+use Exakat\Tasks\Precedence;
 
 const T_BANG                         = '!';
 const T_CLOSE_BRACKET                = ']';
@@ -216,14 +218,14 @@ class Load extends Tasks {
 
         $this->php->getTokens();
 
-        \Exakat\Tasks\Precedence::preloadConstants($this->php->getActualVersion());
-        $this->precedence = new \Exakat\Tasks\Precedence();
+        Precedence::preloadConstants($this->php->getActualVersion());
+        $this->precedence = new Precedence();
         
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         $this->path = $config->projects_root.'/.exakat';
     }
 
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
 
         if (file_exists($this->config->projects_root.'/.exakat')) {

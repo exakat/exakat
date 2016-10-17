@@ -57,7 +57,7 @@ class UnusedArguments extends Analyzer {
              ->raw($isNotRead)
              ->back('first');
         $this->prepareQuery();
-
+return;
         // Arguments, reference
         $this->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'varname')

@@ -36,6 +36,7 @@ class UndefinedFunctions extends Analyzer {
              ->tokenIsNot(array('T_VARIABLE','T_OPEN_BRACKET', 'T_ARRAY', 'T_INCLUDE', 'T_INCLUDE_ONCE', 'T_REQUIRE', 'T_REQUIRE_ONCE'))
              ->analyzerIsNot('Functions/IsExtFunction')
              ->hasNoFunctionDefinition();
+//        $this->printQuery();
         $this->prepareQuery();
     }
 }

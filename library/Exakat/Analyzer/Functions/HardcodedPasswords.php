@@ -27,15 +27,16 @@ use Exakat\Analyzer\Analyzer;
 
 class HardcodedPasswords extends Analyzer {
     public function analyze() {
+        // Position is 0 based
         $passwords = array(
-                           'mysql_connect'            => 3,
-                           'mysqli_connect'           => 3,
-                           'ftp_login'                => 3,
-                           'mssql_connect'            => 3,
-                           'oci_connect'              => 2,
-                           'imap_open'                => 3,
-                           'cyrus_authenticate'       => 8,
-                           'ssh2_auth_password'       => 2,
+                           'mysql_connect'            => 2,
+                           'mysqli_connect'           => 2,
+                           'ftp_login'                => 2,
+                           'mssql_connect'            => 2,
+                           'oci_connect'              => 1,
+                           'imap_open'                => 2,
+                           'cyrus_authenticate'       => 7,
+                           'ssh2_auth_password'       => 1,
                            'hash_hmac'                => 2,
                            'hash_hmac_file'           => 2,
                            'hash_pbkdf2'              => 1,
@@ -46,10 +47,10 @@ class HardcodedPasswords extends Analyzer {
         
         $positions = array();
         foreach($passwords as $function => $position) {
-            if (isset($positions[$position - 1])) {
-                $positions[$position - 1][] = '\\'.$function;
+            if (isset($positions[$position])) {
+                $positions[$position][] = '\\'.$function;
             } else {
-                $positions[$position - 1] = array('\\'.$function);
+                $positions[$position] = array('\\'.$function);
             }
         }
 

@@ -30,7 +30,7 @@ class DefinedParentMP extends Analyzer {
     }
     
     public function analyze() {
-        $isComposerClass = 'where( __.out("EXTENDS").in("ANALYZED").has("analyzer", "Analyzer\\\\Composer\\\\IsComposerNsname").count().is(eq(1)) )';
+        $isComposerClass = 'where( __.out("EXTENDS").in("ANALYZED").has("analyzer", "Composer/IsComposerNsname").count().is(eq(1)) )';
         
         // parent::method()
         $this->atomIs('Staticmethodcall')

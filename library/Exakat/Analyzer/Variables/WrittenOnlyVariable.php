@@ -49,7 +49,7 @@ class WrittenOnlyVariable extends Analyzer {
              ->goToFunction()
              ->raw('where( __.out("BLOCK").repeat( __.out()).emit(hasLabel("Variable")).times('.self::MAX_LOOPING.')
                              .filter{ it.get().value("code") == name}
-                             .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Variables\\\\IsRead").count().is(neq(0)) )
+                             .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead").count().is(neq(0)) )
                              .count().is(eq(0)) )')
              ->back('results');
 

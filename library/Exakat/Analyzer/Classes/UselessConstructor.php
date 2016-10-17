@@ -31,7 +31,7 @@ class UselessConstructor extends Analyzer {
     }
 
     public function analyze() {
-        $checkConstructor = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Classes\\\\Constructor")).count().is(eq(0)) )';
+        $checkConstructor = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").where( __.in("ANALYZED").has("analyzer", "Classes/Constructor")).count().is(eq(0)) )';
         
         // class a (no extends, no implements)
         $this->atomIs('Class')

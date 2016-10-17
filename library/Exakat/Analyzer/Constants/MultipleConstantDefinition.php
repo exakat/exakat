@@ -39,7 +39,7 @@ g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
                               .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
                               .out("ARGUMENTS")
                               .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
-                                   __.out("ARGUMENT").has("rank", 2).where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Structures\\\\Truthy").count().is(eq(0)) ),
+                                   __.out("ARGUMENT").has("rank", 2).where( __.in("ANALYZED").has("analyzer", "Structures/Truthy").count().is(eq(0)) ),
                                   )
                               .out("ARGUMENT").has("rank", 0).hasLabel("String").where(__.out("CONCAT").count().is(eq(0)) )
                               .values("noDelimiter")
@@ -58,7 +58,7 @@ g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
                               .has("token", within('T_STRING', 'T_NS_SEPARATOR') )
                               .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
                               .out("ARGUMENTS")
-                              .out("ARGUMENT").has("rank", 2).where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Structures\\\\Truthy").count().is(eq(1)) ).in("ARGUMENT")
+                              .out("ARGUMENT").has("rank", 2).where( __.in("ANALYZED").has("analyzer", "Structures/Truthy").count().is(eq(1)) ).in("ARGUMENT")
                               .out("ARGUMENT").has("rank", 0)
                               .map{ it.get().value("noDelimiter").toLowerCase()}
 GREMLIN

@@ -30,7 +30,7 @@ class IsLibrary extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Project')
-             //->raw('where( __.out("PROJECT").where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Files\\\\DefinitionsOnly").count().is(eq(0)) ).count().is(eq(0)) )')
+             //->raw('where( __.out("PROJECT").where( __.in("ANALYZED").has("analyzer", "Files/DefinitionsOnly").count().is(eq(0)) ).count().is(eq(0)) )')
              ;
         $this->prepareQuery();
     }

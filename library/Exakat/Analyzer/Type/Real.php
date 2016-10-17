@@ -24,7 +24,7 @@
 namespace Exakat\Analyzer\Type;
 
 use Exakat\Analyzer\Analyzer;
-use Analyzer\Common\Type;
+use Exakat\Analyzer\Common\Type;
 
 class Real extends Type {
 

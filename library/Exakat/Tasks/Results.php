@@ -46,7 +46,7 @@ class Results extends Tasks {
             die($die);
         }
 
-        $analyzer = str_replace('\\', '\\\\', $analyzerClass);
+        $analyzer = str_replace(array('Exakat\\Analyzer\\', '\\'), array('', '/'), $analyzerClass);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "$analyzer").out().count();

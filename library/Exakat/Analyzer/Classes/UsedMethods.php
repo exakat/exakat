@@ -60,8 +60,7 @@ class UsedMethods extends Analyzer {
         $this->prepareQuery();
 
         $callables = $this->query(<<<GREMLIN
-//g.idx("analyzers")[["analyzer":"Analyzer\\\\Functions\\\\MarkCallable"]].out.transform{
-g.V().hasLabel("Analysis").has("analyzer", "Analyzer\\\\Functions\\\\MarkCallable").out("ANALYZED")
+g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZED")
 .not( hasLabel("Function") )
 .map{
     // Strings

@@ -53,7 +53,7 @@ class CouldBeStatic extends Analyzer {
 
              // This global is only in the current function
              ->raw('where( g.V().hasLabel("Variable").filter{ it.get().value("code") == theGlobal }
-                             .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Structures\\\\GlobalInGlobal").count().is(neq(0)) )
+                             .where( __.in("ANALYZED").has("analyzer", "Structures/GlobalInGlobal").count().is(neq(0)) )
                              .count().is(eq(0)) 
                              )')
              ->back('first');

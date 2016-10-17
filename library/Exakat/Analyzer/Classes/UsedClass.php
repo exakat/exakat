@@ -114,7 +114,7 @@ GREMLIN
         // class used in a String (string with ::)
         $strings = $this->query(<<<GREMLIN
 g.V().hasLabel('String').filter{ (it.get().value('noDelimiter') =~ "::" ).getCount() == 1 }
-                        .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Functions\\\\MarkCallable") )
+                        .where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable") )
                         .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
 GREMLIN
 );
@@ -131,7 +131,7 @@ GREMLIN
         $arrays = $this->query(<<<GREMLIN
 g.V().hasLabel('Functioncall').out("ARGUMENTS").out("ARGUMENT")
         .hasLabel("Functioncall").has("fullnspath", "\\\\array")
-        .out("ARGUMENTS").where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Functions\\\\MarkCallable").count().is(eq(1)) )
+        .out("ARGUMENTS").where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable").count().is(eq(1)) )
         .has("count", 2).out("ARGUMENT").has("rank", 0).values('noDelimiter').unique()
 GREMLIN
 );
