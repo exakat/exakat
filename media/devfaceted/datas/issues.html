@@ -166,7 +166,7 @@
       var item_template =  
         '<tr>' +
           '<td width="20%"><%= obj.analyzer %></td>' +
-          '<td width="20%"><%= obj.file %></td>' +
+          '<td width="20%"><%= obj.file + ":" + obj.line %></td>' +
           '<td width="18%"><%= obj.code %></td>' + 
           '<td width="2%"><%= obj.code_detail %></td>' +
           '<td width="7%" align="center"><%= obj.severity %></td>' +
