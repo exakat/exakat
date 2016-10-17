@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 11 Oct 2016 14:59:27 +0000
-.. comment: Generation hash : cda2ff750c0283ff4cddcca0f67e259999ade9e5
+.. comment: Generation date : Mon, 17 Oct 2016 14:39:06 +0000
+.. comment: Generation hash : 451c56ed72b1c12cee39cac818dda515e9e882ca
 
 
 .. _analyze:
@@ -68,10 +68,10 @@ Recipes details
 Analyze
 +++++++
 
-Total : 261 analysis
+Total : 264 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
-* :ref:`$this Belongs To Classes <$this-belongs-to-classes>`
+* :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
 * :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
 * :ref:`<?= usage <<?=-usage>`
@@ -95,6 +95,7 @@ Total : 261 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
+* :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
@@ -133,6 +134,7 @@ Total : 261 analysis
 * :ref:`Empty Try Catch <empty-try-catch>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Exit() Usage <exit()-usage>`
+* :ref:`Failed Substr Comparison <failed-substr-comparison>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Foreach Needs Reference Array <foreach-needs-reference-array>`
 * :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
@@ -175,6 +177,7 @@ Total : 261 analysis
 * :ref:`Must Return Methods <must-return-methods>`
 * :ref:`Namespaces/HiddenUse`
 * :ref:`Negative Power <negative-power>`
+* :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Negative <never-negative>`
 * :ref:`Never Used Properties <never-used-properties>`
@@ -337,7 +340,7 @@ Total : 261 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 21 analysis
+Total : 20 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -352,7 +355,6 @@ Total : 21 analysis
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
 * :ref:`No Plus One <no-plus-one>`
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
-* :ref:`Not Same Name As File <not-same-name-as-file>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Should Be Single Quote <should-be-single-quote>`
 * :ref:`True False Inconsistant Case <true-false-inconsistant-case>`

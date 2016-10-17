@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 11 Oct 2016 14:59:27 +0000
-.. comment: Generation hash : cda2ff750c0283ff4cddcca0f67e259999ade9e5
+.. comment: Generation date : Mon, 17 Oct 2016 14:39:06 +0000
+.. comment: Generation hash : 451c56ed72b1c12cee39cac818dda515e9e882ca
 
 
 .. _$http\_raw\_post\_data:
@@ -40,13 +40,65 @@ Starting at PHP 5.6, $HTTP_RAW_POST_DATA is deprecated, and should be replaced b
 
 
 
-.. _$this-belongs-to-classes:
+.. _$this-belongs-to-classes-or-traits:
 
-$this Belongs To Classes
-########################
+$this Belongs To Classes Or Traits
+##################################
 
 
-$this variable represents an object (the current object) and it should be used within class's methods (except for static) and not outside.
+$this variable represents only the current object. 
+
+It is a pseudo-variable, and should be used within class's or trait's methods (except for static) and not outside.
+
+PHP 7.1 is stricter and check for $this at several positions. Some are found by static analysis, some are dynamic analysis.
+
+.. code-block:: php
+
+   <?php
+   
+   // as an argument
+   function foo($this) {
+       // Using global
+       global $this;
+       // Using static (not a property)
+       static $this;
+       
+       // Can't unset it
+       unset($this);
+       
+       try {
+           // inside a foreach
+           foreach($a as $this) {  }
+           foreach($a as $this => $b) {  }
+           foreach($a as $b => $this) {  }
+       } catch (Exception $this) {
+           // inside a catch
+       }
+       
+       // with Variable Variable
+       $a = this;
+       $$a = 42;
+   }
+   
+   class foo {
+       function bar() {
+           // Using references
+           $a =& $this;
+           $a = 42;
+           
+           // Using extract(), parse_str() or similar functions
+           extract([this => 42]);  // throw new Error(Cannot re-assign $this)
+           var_dump($this);
+       }
+   
+       static function __call($name, $args) {
+           // Using __call
+           var_dump($this); // prints object(C)#1 (0) {}, php-7.0 printed NULL
+           $this->test();   // prints ops
+       }
+   
+   }
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Classes/ThisIsForClasses |
@@ -931,6 +983,40 @@ Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
 +--------------+----------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53` |
 +--------------+----------------------------------------------------------------------+
+
+
+
+.. _cast-to-boolean:
+
+Cast To Boolean
+###############
+
+
+This expression may be reduced by casting to boolean type.
+
+.. code-block:: php
+
+   <?php
+   
+   $variable = $condition == 'met' ? 1 : 0;
+   // Same as 
+   $variable = (bool) $condition == 'met';
+   
+   $variable = $condition == 'met' ? 0 : 1;
+   // Same as (Note the condition inversion)
+   $variable = (bool) $condition != 'met';
+   // also, with an indentical condition
+   $variable = !(bool) $condition == 'met';
+   
+   
+   
+   ?>
+
++--------------+--------------------------+
+| Command Line | Structures/CastToBoolean |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
 
 
 
@@ -2258,6 +2344,41 @@ Usage of the `** <http://php.net/manual/en/language.operators.arithmetic.php>`_ 
 
 
 
+.. _failed-substr-comparison:
+
+Failed Substr Comparison
+########################
+
+
+The extracted string must be of the size of the compared string.
+
+This is also true for negative lengths.
+
+.. code-block:: php
+
+   <?php
+   
+   // Possible comparison
+   if (substr($a, 0, 3) === 'abc') { }
+   if (substr($b, 4, 3) === 'abc') { }
+   
+   // Always failing
+   if (substr($a, 0, 3) === 'ab') { }
+   if (substr($a, 3, -3) === 'ab') { }
+   
+   // Omitted in this analysis
+   if (substr($a, 0, 3) !== 'ab') { }
+   
+   ?>
+
++--------------+------------------------------------+
+| Command Line | Structures/FailingSubstrComparison |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`                     |
++--------------+------------------------------------+
+
+
+
 .. _for-using-functioncall:
 
 For Using Functioncall
@@ -2451,6 +2572,27 @@ Function Subscripting
 
 This is a new PHP 5.4 feature, where one may use the result of a method directly as an array, given that the method actually returns an array. 
 
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       return array(1 => 'a', 'b', 'c');
+   }
+   
+   echo foo()[1]; // displays 'a';
+   
+   // Function subscripting, the old way
+   function foo() {
+       return array(1 => 'a', 'b', 'c');
+   }
+   
+   $x = foo();
+   echo $x[1]; // displays 'a';
+   
+   ?>
+
+
 This was not possible until PHP 5.4. Is used to be necessary to put the result in a variable, and then access the desired index.
 
 +--------------+---------------------------------+
@@ -2469,12 +2611,25 @@ Function Subscripting, Old Style
 
 Since PHP 5.4, it is now possible use function results as an array, and access directly its element : 
 
-$x = f()[1];
+.. code-block:: php
 
-instead of spreading this on two lines : 
-
-$tmp = f();
-$x = $tmp[1];
+   <?php
+   
+   function foo() {
+       return array(1 => 'a', 'b', 'c');
+   }
+   
+   echo foo()[1]; // displays 'a';
+   
+   // Function subscripting, the old way
+   function foo() {
+       return array(1 => 'a', 'b', 'c');
+   }
+   
+   $x = foo();
+   echo $x[1]; // displays 'a';
+   
+   ?>
 
 +--------------+------------------------------------+
 | Command Line | Structures/FunctionPreSubscripting |
@@ -2494,7 +2649,31 @@ The following functions call each-other in a loop fashion : A -> B -> A.
 
 When those functions have no other interaction, the code is useless and should be dropped.
 
-Loops of size 2, 3 and 4 are supported.
+.. code-block:: php
+
+   <?php
+   
+   function foo1($a) {
+       if ($a < 1000) {
+           return foo2($a + 1);
+       }
+       return $a;
+   }
+   
+   function foo2($a) {
+       if ($a < 1000) {
+           return foo1($a + 1);
+       }
+       return $a;
+   }
+   
+   // if foo1 nor foo2 are called, then this is dead code. 
+   // if foo1 or foo2 are called, this recursive call should be investigated.
+   
+   ?>
+
+
+Loops of size 2, 3 and 4 function are supported by this analyzer.
 
 +--------------+-------------------------------------+
 | Command Line | Functions/LoopCalling               |
@@ -2542,7 +2721,24 @@ Global Inside Loop
 ##################
 
 
-The global keyword should be out of loops. It will be evaluated each loop, slowing the whole process.
+The global keyword must be out of loops. It is evaluated each loop, slowing the whole process.
+
+.. code-block:: php
+
+   <?php
+   
+   // Good idea, global is used once
+   global $total;
+   foreach($a as $b) {
+       $total += $b;
+   }
+   
+   // Bad idea, this is slow.
+   foreach($a as $b) {
+       global $total;
+       $total += $b;
+   }
+   ?>
 
 +--------------+------------------------------+
 | Command Line | Structures/GlobalOutsideLoop |
@@ -2627,6 +2823,20 @@ Hash Algorithms Incompatible With PHP 5.3
 
 
 List of hash algorithms incompatible with PHP 5.3. They were introduced in newer version, and, as such, are not available with older versions.
+
+fnv132, fnv164 and joaat were added in PHP 5.4.
+
+.. code-block:: php
+
+   <?php
+   
+   // Valid in PHP 5.4 +
+   hash('joaat', 'string');
+   
+   // Valid in PHP all versions
+   hash('crc32', 'string');
+   
+   ?>
 
 +--------------+---------------------------+
 | Command Line | Php/HashAlgos53           |
@@ -3755,6 +3965,49 @@ When using negative power, it is clearer to add parenthesis or to use the `pow()
 
 
 
+.. _nested-ifthen:
+
+Nested Ifthen
+#############
+
+
+Three levels of ifthen is too much. The method should be split into smaller functions.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a, $b) {
+       if ($a == 1) {
+           // Second level, possibly too much already
+           if ($b == 2) {
+               
+           }
+       }
+   }
+   
+   function bar($a, $b, $c) {
+       if ($a == 1) {
+           // Second level. 
+           if ($b == 2) {
+               // Third level level. 
+               if ($c == 3) {
+                   // Too much
+               }
+           }
+       }
+   }
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Structures/NestedIfthen |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
+
 .. _nested-ternary:
 
 Nested Ternary
@@ -4605,22 +4858,6 @@ This is a wrongly done type casting to boolean :
 
 
 
-.. _not-same-name-as-file:
-
-Not Same Name As File
-#####################
-
-
-The class, trait or interface bears a name that is not the same than the `file <http://www.php.net/file>`_ that defines it.
-
-+--------------+------------------------------------------------+
-| Command Line | Classes/NotSameNameAsFile                      |
-+--------------+------------------------------------------------+
-| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
-
-
-
 .. _not-substr-one:
 
 Not Substr One
@@ -4791,7 +5028,26 @@ Only Variable Returned By Reference
 ###################################
 
 
-When a function returns a reference, one may only return variables, properties or static properties. Anything else will yield a warning.
+When a function returns a reference, it is only possible to return variables, properties or static properties. 
+
+Anything else, like literals or static expressions, yield a warning at execution `time <http://www.php.net/time>`_.
+
+.. code-block:: php
+
+   <?php
+   
+   // Can't return a literal number
+   function &foo() {
+       return 3 + rand();
+   }
+   
+   // bar must return values that are stored in a 
+   function &bar() {
+       $a = 3 + rand();
+       return $a;
+   }
+   
+   ?>
 
 +--------------+--------------------------------------------+
 | Command Line | Structures/OnlyVariableReturnedByReference |
@@ -5758,9 +6014,23 @@ Safe CurlOptions
 ################
 
 
-It is advised to avoid disabling CURLOPT_SSL_VERIFYPEER and CURLOPT_SSL_VERIFYHOST when requesting a SSL connexion. 
+It is advised to always use CURLOPT_SSL_VERIFYPEER and CURLOPT_SSL_VERIFYHOST when requesting a SSL connexion. 
 
 With those tests (by default), the certificate is verified, and if it isn't valided, the connexion fails : this is a safe behavior.
+
+.. code-block:: php
+
+   <?php
+   $ch = curl_init();
+   
+   curl_setopt($ch, CURLOPT_URL, https://www.php.net/);
+   
+   // To be safe, always set this to true
+   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+   
+   curl_exec($ch);
+   curl_close($ch);
+   ?>
 
 +--------------+----------------------+
 | Command Line | Security/CurlOptions |
@@ -6971,7 +7241,19 @@ Unicode Escape Syntax
 #####################
 
 
-Usage of the PHP 7 Unicode Escape syntax, with the \u{xxxxx} format.
+Usage of the Unicode Escape syntax, with the \u{xxxxx} format, available since PHP 7.0.
+
+.. code-block:: php
+
+   <?php
+   
+   // Produce an elephant icon in PHP 7.0+
+   echo \u{1F418};
+   
+   // Produce the raw sequence in PHP 5.0
+   echo \u{1F418};
+   
+   ?>
 
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/UnicodeEscapeSyntax                                                                                    |
@@ -7100,9 +7382,24 @@ Unresolved Catch
 ################
 
 
-Classes in Catch expression may turn useless because the code was namespaced and the catch is set on Exception (no \).
+Catch clauses do not check for Exception existence. 
 
-Or, the expected class is not even an Exception : that is not needed for catching, but for throwing. Catching will only match the class, if it reaches it.
+Catch clauses check that the emitted expression is of the requested Class, but if that class doesn't exist in the code, the catch clause is always false. This is dead code.
+
+.. code-block:: php
+
+   <?php
+   
+   try {
+       // doSomething()
+   } catch {TypoedExxeption $e) { // Do not exist Exception
+       // Fix this exception
+   } catch {Stdclass $e) {        // Exists, but is not an exception
+       // Fix this exception
+   } catch {Exception $e) {        // Actual and effective catch
+       // Fix this exception
+   }
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/UnresolvedCatch                                                                               |
@@ -7297,7 +7594,21 @@ Unused Arguments
 ################
 
 
-Those arguments are not used in the method or function.
+Those arguments are not used in the method or function. 
+
+Unused arguments should be removed in functions : they are just dead code.
+
+Unused argument may have to stay in methods, as the signature is actually defined in the parent class. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $unused is in the signature, but not used. 
+   function foo($unused, $b, $c) {
+       return $b + $c;
+   }
+   ?>
 
 +--------------+---------------------------+
 | Command Line | Functions/UnusedArguments |
@@ -7722,7 +8033,16 @@ Use Nullable Type
 #################
 
 
-The project is using nullable type (PHP 7.1).
+The code uses nullable type, available since PHP 7.1.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(?string $a = abc) : ?string {
+       return $a.b;
+   }
+   ?>
 
 +--------------+------------------------------------------------------+
 | Command Line | Php/UseNullableType                                  |
@@ -8029,7 +8349,26 @@ Useless Brackets
 ################
 
 
-You may remove those brackets, they have no use here. It may be a left over of an old instruction, or a misunderstanding of the alternative syntax.
+Those brackets have no use here. 
+
+They may be a left over of an old instruction, or a misunderstanding of the alternative syntax.
+
+.. code-block:: php
+
+   <?php
+   
+   // The following brackets are useless : they are a leftover from an older instruction
+   // if (DEBUG) 
+   {
+       $a = 1;
+   }
+   
+   // Here, the extra brackets are useless
+   for($a = 2; $a < 5; $a++) : {
+       $b++;
+   } endfor;
+   
+   ?>
 
 +--------------+----------------------------+
 | Command Line | Structures/UselessBrackets |

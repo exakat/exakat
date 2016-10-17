@@ -140,7 +140,6 @@ Glossary
       + :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
       + :ref:`No Direct Usage <no-direct-usage>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
-      + :ref:`Not Same Name As File <not-same-name-as-file>`
       + :ref:`Should Use Constants <should-use-constants>`
       + :ref:`Use System Tmp <use-system-tmp>`
       + :ref:`Use const <use-const>`
@@ -271,6 +270,7 @@ Glossary
 + `R`
     + `rand`
 
+      + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
       + :ref:`Use random_int() <use-random\_int()>`
 
     + `random_bytes`
@@ -337,6 +337,7 @@ Glossary
 
     + `throw`
 
+      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
       + :ref:`Exception Order <exception-order>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
@@ -368,6 +369,7 @@ Glossary
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
       + :ref:`Old Style Constructor <old-style-constructor>`
+      + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
       + :ref:`Redefined Default <redefined-default>`
       + :ref:`Short Open Tags <short-open-tags>`
       + :ref:`Should Be Single Quote <should-be-single-quote>`
@@ -436,6 +438,7 @@ Glossary
 
     + `__call`
 
+      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
       + :ref:`Must Return Methods <must-return-methods>`
 
     + `__callStatic`
