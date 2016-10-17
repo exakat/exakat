@@ -172,6 +172,11 @@ class Exakat {
                 $task->run($config);
                 break;
 
+            case 'test' : 
+                $task = new Tasks\Test($this->gremlin);
+                $task->run($config);
+                break;
+
             case 'remove' : 
                 $task = new Tasks\Remove($this->gremlin);
                 $task->run($config);
