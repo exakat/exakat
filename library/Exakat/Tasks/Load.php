@@ -202,6 +202,9 @@ class Load extends Tasks {
     private $atomCount = 0;
     private $argumentsId = array();
     private $path;
+    private $sequence = [];
+    private $sequenceCurrentRank = 0;
+    private $sequenceRank = [];
     
     public function __construct($gremlin) {
         parent::__construct($gremlin);
@@ -2008,7 +2011,7 @@ class Load extends Tasks {
                 ++$this->id; // skip ; (will do just below)
             }
         }
-        $this->processSemicolon($forId);
+        $this->processSemicolon();
 
         return $forId;
     }
@@ -3492,7 +3495,7 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
-        $this->nestContext(self::CONTEXT_NOSEQUENCE);
+        $this->nestContext();
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             $blockId = $this->processCurlyExpression();
             $right = $this->processFCOA($blockId);

@@ -25,6 +25,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
+use Exakat\Reports\Reports2 as Report;
 
 class Report2 extends Tasks {
     public function run(Config $config) {

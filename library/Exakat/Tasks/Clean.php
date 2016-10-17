@@ -24,6 +24,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Datastore;
+use \Exakat\Config;
 
 class Clean extends Tasks {
     public function __construct($gremlin) {
@@ -31,7 +32,7 @@ class Clean extends Tasks {
         parent::__construct($gremlin);
     }
 
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $path = $config->projects_root.'/projects/'.$config->project;
 
         display( "Cleaning project $config->project\n" );

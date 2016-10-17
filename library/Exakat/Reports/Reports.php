@@ -22,6 +22,7 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
 
 abstract class Reports {
@@ -39,14 +40,14 @@ abstract class Reports {
     protected $datastore = null;
     
     public function __construct() {
-        $this->config = \Exakat\Config::Factory();
+        $this->config = Config::Factory();
 
         $analyzers = Analyzer::getThemeAnalyzers($this->config->thema);
         $this->themesList = '("'.implode('", "', $analyzers).'")';
 
-        $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', SQLITE3_OPEN_READONLY);
+        $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
 
-        $this->datastore = new \sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
+        $this->datastore = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite', \SQLITE3_OPEN_READONLY);
     }
     
     public abstract function generateFileReport($report);

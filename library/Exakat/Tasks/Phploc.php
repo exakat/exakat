@@ -40,8 +40,9 @@ class Phploc extends Tasks {
                      'tokens'   => 0,
                      'comments' => 0,
                      'code'     => 0);
-        if ($config->project != 'default') {
-            $projectPath = $config->projects_root.'/projects/'.$config->project;
+        $project = $config->project;
+        if ($project != 'default') {
+            $projectPath = $config->projects_root.'/projects/'.$project;
 
             if (!file_exists($projectPath)) {
                 die("Project '$project' doesn't exist\n");
@@ -55,7 +56,7 @@ class Phploc extends Tasks {
             $files = $datastore->getCol('files', 'file');
 
             foreach($files as $file) {
-                $counts = $this->countLocInFile($config->projects_root.'/projects/'.$config->project.'/code'.$file);
+                $counts = $this->countLocInFile($config->projects_root.'/projects/'.$project.'/code'.$file);
                 array_add($loc, $counts);
                 
                 if ($counts['error'] != self::OK) {

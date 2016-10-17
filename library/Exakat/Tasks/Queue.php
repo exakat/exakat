@@ -23,10 +23,13 @@
 
 namespace Exakat\Tasks;
 
+use \Exakat\Config;
+use \Exakat\Clean;
+
 class Queue extends Tasks {
     private $pipefile = '/tmp/onepageQueue';
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         if ($config->stop === true) {
             display('Stopping queue');
             $queuePipe = fopen($this->pipefile, 'w');
@@ -39,7 +42,7 @@ class Queue extends Tasks {
         if ($config->project != 'default') {
             if (file_exists($config->projects_root.'/projects/'.$config->project.'/report/')) {
                 display('Cleaning the project first');
-                $clean = new Clean();
+                $clean = new Clean($this->gremlin);
                 $clean->run($config);
             }
 

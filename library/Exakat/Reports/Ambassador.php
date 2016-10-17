@@ -54,7 +54,6 @@ class Ambassador extends Reports {
      * Get the base file
      *
      * @param type $file
-     * @return type
      */
     private function getBasedPage($file) {
         $baseHTML = file_get_contents($this->tmpName . '/datas/base.html');
@@ -76,7 +75,6 @@ class Ambassador extends Reports {
      * @param type $html
      * @param type $bloc
      * @param type $content
-     * @return type
      */
     private function injectBloc($html, $bloc, $content) {
         return str_replace("{{" . $bloc . "}}", $content, $html);
@@ -136,7 +134,6 @@ class Ambassador extends Reports {
     /**
      * Clear existant folder
      *
-     * @return type
      */
     private function cleanFolder() {
         if (file_exists($this->tmpName . '/base.html')) {
@@ -342,7 +339,6 @@ class Ambassador extends Reports {
     /**
      * Get Issues Breakdown
      *
-     * @return type
      */
     public function getIssuesBreakdown() {
         $receipt = array('Code Smells'  => 'Analyze',
@@ -380,7 +376,6 @@ class Ambassador extends Reports {
     /**
      * Severity Breakdown
      *
-     * @return type
      */
     public function getSeverityBreakdown() {
         $query = <<<SQL
@@ -411,7 +406,6 @@ SQL;
     /**
      * Liste fichier analysé
      *
-     * @return type
      */
     private function getTotalAnalysedFile($issues = false) {
         // sous requete
@@ -434,7 +428,6 @@ SQL;
      * Liste analyzer
      *
      * @param type $issues
-     * @return type
      */
     private function getTotalAnalyzer($issues = false) {
         $query = "SELECT count(*) AS totalanalyzer FROM resultsCounts ";
@@ -509,7 +502,6 @@ SQL
      * Nombre fichier qui ont l'analyzer
      *
      * @param type $analyzer
-     * @return type
      */
     private function getCountFileByAnalyzers($analyzer) {
         $query = <<<'SQL'
@@ -553,7 +545,6 @@ SQL;
     /**
      * Get list of file
      *
-     * @return type
      */
     private function getFilesResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
@@ -580,7 +571,6 @@ SQL
      * Nombre analyzer par fichier
      *
      * @param type $file
-     * @return type
      */
     private function getCountAnalyzersByFile($file) {
         $query = <<<'SQL'
@@ -599,7 +589,6 @@ SQL;
      * Nombre duplication analyzer par fichier
      *
      * @param type $file
-     * @return type
      */
     private function getDuplicationFileByAnalyzer($file) {
         $query = <<<'SQL'
@@ -618,7 +607,6 @@ SQL;
      * List file with count
      *
      * @param type $limit
-     * @return type
      */
     public function getFilesCount($limit = null) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
@@ -644,7 +632,6 @@ SQL;
     /**
      * Liste de top file
      *
-     * @return type
      */
     private function getTopFile() {
         $data = $this->getFilesCount(self::TOPLIMIT);
@@ -664,7 +651,6 @@ SQL;
     /**
      * Get data files overview
      * 
-     * @return type
      */
     private function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
@@ -705,7 +691,6 @@ SQL;
      * List analyzer with count
      *
      * @param type $limit
-     * @return type
      */
     private function getAnalyzersCount($limit) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
@@ -731,7 +716,6 @@ SQL;
     /**
      * Liste de top analyzers
      *
-     * @return type
      */
     private function getTopAnalyzers() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
@@ -766,7 +750,6 @@ SQL;
     /**
      * Nombre severity by file en Dashboard
      *
-     * @return type
      */
     private function getSeverityNumberByFile($file) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
@@ -806,7 +789,6 @@ SQL;
     /**
      * Get data analyzer overview
      * 
-     * @return type
      */
     private function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
@@ -847,7 +829,6 @@ SQL;
     /**
      * Nombre severity by analyzer en Dashboard
      *
-     * @return type
      */
     private function getSeverityNumberByAnalyzer($analyzer) {
         $query = <<<'SQL'

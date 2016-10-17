@@ -137,7 +137,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
 
             if (!empty($dependencies)) {
                 die( "Dependencies depending on each other : can't finalize. Aborting\n".
-                      print_r($dependencies, 1));
+                      print_r($dependencies, true));
             }
         }
 
