@@ -394,19 +394,19 @@ class Load extends Tasks {
         $this->startSequence(); // At least, one sequence available
         $this->id = -1;
         do {
-            $id = $this->processNext();
+            $theId = $this->processNext();
             display( "$this->id / $n\n");
 
-            if ($id > 0) {
-                $this->addToSequence($id);
+            if ($theId > 0) {
+                $this->addToSequence($theId);
             }
         } while ($this->id < $n);
         
-        $id = $this->sequence;
+        $sequenceId = $this->sequence;
         $this->endSequence();
 
-        $this->addLink($id1, $id, 'FILE');
-        $this->setAtom($id, ['root' => true]);
+        $this->addLink($id1, $sequenceId, 'FILE');
+        $this->setAtom($sequenceId, ['root' => true]);
 
         $this->checkTokens($filename);
         
