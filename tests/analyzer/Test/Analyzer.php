@@ -3,6 +3,7 @@
 namespace Test;
 
 use Exakat\Phpexec;
+use Exakat\Analyzer\Analyzer as ExakatAnalyzer;
 
 include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
 
@@ -16,7 +17,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
         $test_config = str_replace('_', '/', substr(get_class($this), 5));
 
-        $analyzerobject = \Analyzer\Analyzer::getInstance($test_config);
+        $analyzerobject = ExakatAnalyzer::getInstance($test_config);
         if (!$analyzerobject->checkPhpVersion($phpversion)) {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
@@ -54,6 +55,9 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         }
         $shell_res = shell_exec($shell);
         $res = json_decode($shell_res);
+        if ($res === null) {
+            $this->assertTrue(false, "Json couldn't be decoded : '$shell_res'");
+        }
 
         if (empty($res)) {
             $list = array();
