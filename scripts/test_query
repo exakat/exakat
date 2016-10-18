@@ -30,7 +30,7 @@ $query = <<<'QUERY'
 
 QUERY;
 
-$graphDB = new \Graph\Gremlin3($config);
+$graphDB = new \Exakat\Graph\Gremlin3($config);
 
 $res = $graphDB->query($query);
 
