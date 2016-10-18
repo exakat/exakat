@@ -30,13 +30,14 @@ use Exakat\Tokenizer\Token;
 class Results extends Tasks {
     public function run(Config $config) {
         $analyzer = $config->program;
+
         if (empty($analyzer)) {
             die('Provide the analyzer with the option -P X/Y. Aborting'."\n");
         }
         
         $analyzerClass = Analyzer::getClass($analyzer);
 
-        if ("Exakat\\Analyzer\\".str_replace('/', '\\', $analyzer) != $analyzerClass) {
+        if ($analyzerClass === false) {
             $die = "'$analyzer' doesn't exist. Aborting\n";
     
             $r = Analyzer::getSuggestionClass($analyzer);
@@ -46,7 +47,7 @@ class Results extends Tasks {
             die($die);
         }
 
-        $analyzer = str_replace(array('Exakat\\Analyzer\\', '\\'), array('', '/'), $analyzerClass);
+        $analyzer = Analyzer::getName($analyzerClass);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "$analyzer").out().count();

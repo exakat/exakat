@@ -139,12 +139,11 @@ SQL;
         }
 
         $this->finish();
-        return ;
     }
         
     private function processResults($class, $count) {
-        $this->stmtResultsCounts->bindValue(':class', $class, SQLITE3_TEXT);
-        $this->stmtResultsCounts->bindValue(':count', $count, SQLITE3_INTEGER);
+        $this->stmtResultsCounts->bindValue(':class', $class, \SQLITE3_TEXT);
+        $this->stmtResultsCounts->bindValue(':count', $count, \SQLITE3_INTEGER);
 
         $result = $this->stmtResultsCounts->execute();
         
@@ -154,8 +153,8 @@ SQL;
             return;
         }
 
-        $this->stmtResults->bindValue(':class', $class, SQLITE3_TEXT);
-        $analyzerName = 'Exakat\\\\Analyzer\\\\'.str_replace('/', '\\\\', $class);
+        $this->stmtResults->bindValue(':class', $class, \SQLITE3_TEXT);
+        $analyzerName = Analyzer::getName($class);
         
         $linksDown = Token::linksAsList();
         
@@ -190,7 +189,7 @@ GREMLIN;
         $res = $res->results;
         
         $saved = 0;
-        $severity = Analyzer::$docs->getSeverity('Exakat\\Analyzer\\'.str_replace('/', '\\', $class));
+        $severity = Analyzer::$docs->getSeverity( Analyzer::getClass($class) );
 
         foreach($res as $result) {
             if (!is_object($result)) {
