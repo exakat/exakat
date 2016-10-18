@@ -35,7 +35,7 @@ class UnusedArguments extends Analyzer {
     
     public function analyze() {
         $isNotRead = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; }).times('.self::MAX_LOOPING.')
-                                          .where( __.in("ANALYZED").has("analyzer", "Analyzer\\\\Variables\\\\IsRead").count().is(eq(1)) )
+                                          .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead").count().is(eq(1)) )
                                           .count().is(eq(0)) )';
     
         $isNotUsed = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times('.self::MAX_LOOPING.').count().is(eq(0)) )';
@@ -57,7 +57,7 @@ class UnusedArguments extends Analyzer {
              ->raw($isNotRead)
              ->back('first');
         $this->prepareQuery();
-return;
+
         // Arguments, reference
         $this->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'varname')
