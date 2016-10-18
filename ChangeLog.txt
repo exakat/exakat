@@ -1,4 +1,4 @@
-Version 0.8.5 (Fuyun Sou , Coming up)
+Version 0.8.6 (Fuyun Sou , Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,19 @@ Version 0.8.5 (Fuyun Sou , Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.8.5 (Naked Demon, 2016-10-17)
++ Architecture
+    + Moved all classes under Exakat folder for clean hierarchy
++ Report
+    + Ambassador : restored line number in display
++ Analyzer
+    + New analyzer, check for substr() comparisons with literals
+    + New analyzer, suggest boolean cast, instead of Ternary.
+    + New analyzer, spot 3 levels of if/then
+    + Upgraded 'hardcoded password', for kadm5 and hash_* functions
+    + Upgraded 'external libs', with Zend Framework
+    + Upgraded analysis : 1625 / 1638 test pass (99% pass). 
 
 Version 0.8.4 (Lingkongzi, 2016-10-10)
 + Architecture
