@@ -220,7 +220,7 @@ abstract class Analyzer {
     }
 
     public function getThemes() {
-        $analyzer = self::getClass($this);
+        $analyzer = self::getName($this->analyzerQuoted);
         return Analyzer::$docs->getThemeForAnalyzer($analyzer);
     }
 
