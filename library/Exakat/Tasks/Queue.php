@@ -24,7 +24,7 @@
 namespace Exakat\Tasks;
 
 use \Exakat\Config;
-use \Exakat\Clean;
+use \Exakat\Tasks\Clean;
 
 class Queue extends Tasks {
     private $pipefile = '/tmp/onepageQueue';
