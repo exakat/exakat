@@ -23,8 +23,12 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Reports\Reports;
+
 class Status extends Tasks {
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $project = $config->project;
 
         if ($project === 'default') {
@@ -34,7 +38,7 @@ class Status extends Tasks {
         $path = $config->projects_root.'/projects/'.$project;
         
         if (!file_exists($path.'/')) {
-            throw new \Exakat\Exceptions\NoSuchProject($project);
+            throw new NoSuchProject($project);
         }
 
         $status = array('project' => $project);
@@ -94,15 +98,14 @@ class Status extends Tasks {
         // errors? 
 
         $formats = array();
-        foreach(\Exakats\Reports\Reports::FORMATS as $format) {
+        foreach(Reports::FORMATS as $format) {
             $a = $this->datastore->getHash($format);
             if (!empty($a)) {
                 $formats[$format] = $a;
             }
         }
-        if (!empty($formats)) {
-            $status['formats'] = $formats;
-        }
+        // Always have formats, even if empty
+        $status['formats'] = $formats;
 
         // Publication : Json or Text file
         if ($config->json == true) {
@@ -150,28 +153,6 @@ class Status extends Tasks {
         if (!empty($e)) {
             $errors['init error'] = $e;
             return $errors;
-        }
-        
-        // Error log
-        if (!file_exists($path.'/log/errors.log')) {
-            $errors['errors.log'] = 'errors.log is missing';
-        } elseif (filesize($path.'/log/errors.log') != 191) {
-            $log = file_get_contents($path.'/log/errors.log');
-            preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r);
-            $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
-        } // Else no report
-
-        // Tokenizer log
-        if (!file_exists($path.'/log/errors.log')) {
-            $errors['errors.log'] = 'errors.log is missing';
-        } elseif (filesize($path.'/log/errors.log') != 191) {
-            $log = file_get_contents($path.'/log/errors.log');
-            if (preg_match_all("#files with next : (.+?)\n((  .*?\n)*)#m", $log, $r)) {
-                $errors['errors.log'] = 'errors.log has '.(count($r[1]) + count(explode("\n", $r[2][0]))).' files in error';
-            }
-        } // Else no report        
-        if (!empty($errors)) {
-            $status['errors'] = $errors;
         }
         
         return $errors;
