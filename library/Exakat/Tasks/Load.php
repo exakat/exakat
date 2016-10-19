@@ -3636,9 +3636,17 @@ class Load extends Tasks {
 
         $this->nestContext();
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $id = array_search(T_REQUIRE, $finals);
+        unset($finals[$id]);
+        $id = array_search(T_REQUIRE_ONCE, $finals);
+        unset($finals[$id]);
+        $id = array_search(T_INCLUDE, $finals);
+        unset($finals[$id]);
+        $id = array_search(T_INCLUDE_ONCE, $finals);
+        unset($finals[$id]);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
-            
+
             if ($this->tokens[$this->id + 1][0] === T_DOT) {
                 $containsId = $this->popExpression();
                 $this->addLink($concatenationId, $containsId, 'CONCAT');
@@ -4003,6 +4011,8 @@ class Load extends Tasks {
         foreach($this->links as $label => $origins) {
             foreach($origins as $origin => $destinations) {
                 foreach($destinations as $destination => $links) {
+                    if (empty($origin)) { die("Unknown origin for Rel files\n"); }
+                    if (empty($destination)) { die("Unknown destination for Rel files\n"); }
                     $csv = $label.'.'.$origin.'.'.$destination;
                     $fileName = $this->path.'/rels.g3.'.$csv.'.csv';
                     if (isset($extras[$csv])) {
