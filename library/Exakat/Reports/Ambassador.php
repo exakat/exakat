@@ -109,6 +109,14 @@ class Ambassador extends Reports {
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
+        $files = ['base', 'index', 'credits'];
+        foreach($files as $file) {
+            $baseHTML = file_get_contents($this->tmpName . '/datas/'.$file.'.html');
+            $baseHTML = $this->injectBloc($baseHTML, "PROJECT", $this->config->project);
+            $baseHTML = $this->injectBloc($baseHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
+            file_put_contents($this->tmpName . '/datas/'.$file.'.html', $baseHTML);
+        }
+        
         $this->cleanFolder();
     }
 
@@ -870,6 +878,8 @@ SQL;
         $baseHTML = file_get_contents($this->tmpName . '/datas/issues.html');
         $issues = $this->getIssuesFaceted();
         $finalHTML = str_replace("SCRIPT_DATA_FACETED", implode(",", $issues), $baseHTML);
+        $finalHTML = $this->injectBloc($finalHTML, "PROJECT", $this->config->project);
+        $finalHTML = $this->injectBloc($finalHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
 
         file_put_contents($this->tmpName . '/datas/issues.html', $finalHTML);
     }
