@@ -39,6 +39,15 @@ class Queue extends Tasks {
             return;
         }
 
+        if ($config->ping === true) {
+            display('Ping queue');
+            $queuePipe = fopen($this->pipefile, 'w');
+            fwrite($queuePipe, "ping\n");
+            fclose($queuePipe);
+
+            return;
+        }
+
         if ($config->project != 'default') {
             if (file_exists($config->projects_root.'/projects/'.$config->project.'/report/')) {
                 display('Cleaning the project first');
