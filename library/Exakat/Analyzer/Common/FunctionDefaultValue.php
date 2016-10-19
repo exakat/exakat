@@ -30,7 +30,7 @@ class FunctionDefaultValue extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Functioncall')
-             ->code($this->code)
+             ->codeIs($this->code)
              ->hasNoIn('METHOD')
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', $this->rank)
