@@ -79,7 +79,7 @@ php
  *
 */
 
-namespace Exakat\\Analyzer\\$categorie;
+namespace Exakat\\Analyzer\\$category;
 
 use Exakat\Analyzer\Analyzer;
 
