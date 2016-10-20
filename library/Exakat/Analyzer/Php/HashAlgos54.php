@@ -39,7 +39,7 @@ class HashAlgos54 extends Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->atomIs('String')
-             ->noDelimiter($algos);
+             ->noDelimiterIs($algos);
         $this->prepareQuery();
     }
 }

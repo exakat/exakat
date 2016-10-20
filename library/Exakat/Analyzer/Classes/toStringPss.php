@@ -39,7 +39,7 @@ class toStringPss extends Analyzer {
         $this->atomIs('Function')
              ->hasClass()
              ->outIs('NAME')
-             ->code($methods)
+             ->codeIs($methods)
              ->inIs('NAME')
              ->hasOut('STATIC')
              ->back('first');
@@ -48,7 +48,7 @@ class toStringPss extends Analyzer {
         $this->atomIs('Function')
              ->hasClass()
              ->outIs('NAME')
-             ->code($methods)
+             ->codeIs($methods)
              ->inIs('NAME')
              ->hasOut(array('PRIVATE', 'PROTECTED'))
              ->back('first');

@@ -32,7 +32,8 @@ class Php extends Analyzer {
         
         if (isset($ini['trait'])) {
             $this->analyzerIs('Interfaces/TraitUsage')
-                 ->code($ini['trait']);
+                 ->codeIs($ini['trait']);
+            $this->prepareQuery();
         }
     }
 }

@@ -32,8 +32,9 @@ class Break0 extends Analyzer {
         $this->atomIs('Break')
              ->outIs('LEVEL')
              ->atomIs('Integer')
-             ->code(0)
+             ->codeIs(0)
              ->back('first');
+        $this->prepareQuery();
     }
 }
 
