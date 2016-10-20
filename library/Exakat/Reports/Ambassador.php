@@ -104,7 +104,7 @@ class Ambassador extends Reports {
 
         $this->generateDocumentation();
         $this->generateDashboard();
-//        $this->generateFiles();
+        $this->generateFiles();
 //        $this->generateAnalyzers();
 
         $this->generateIssues();
@@ -537,11 +537,10 @@ SQL;
 
         foreach ($files as $file) {
             $filesHTML.= "<tr>";
-            $filesHTML.='<td>' . $file["Filename"] . '</td>
-                        <td>' . $file["LoC"] . '</td>
-                        <td>' . $file["Issues"] . '</td>
-                        <td>' . $file["Analysers"] . '</td>
-                        <td>' . $file["Duplication"] . '</td>';
+            $filesHTML.='<td>' . $file["file"] . '</td>
+                        <td>' . $file["loc"] . '</td>
+                        <td>' . $file["issues"] . '</td>
+                        <td>' . $file["analyzers"] . '</td>';
             $filesHTML.= "</tr>";
         }
 
@@ -560,20 +559,16 @@ SQL;
         $list = '"'.join('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
-SELECT file AS Filename, line AS LoC, count(*) AS Issues FROM results
-        WHERE analyzer IN ($list)
+SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
         GROUP BY file
 SQL
         );
-        $data = array();
+        $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $row['Analysers'] = $this->getCountAnalyzersByFile($row['Filename']);
-            $row['Duplication'] = $this->getDuplicationFileByAnalyzer($row['Filename']);
-
-            $data[] = $row;
+            $return[$row['file']] = $row;
         }
 
-        return $data;
+        return $return;
     }
 
     /**
@@ -585,24 +580,6 @@ SQL
         $query = <<<'SQL'
                 SELECT count(*)  AS number
                 FROM (SELECT DISTINCT analyzer FROM results WHERE file = :file)
-SQL;
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':file', $file, SQLITE3_TEXT);
-        $result = $stmt->execute();
-        $row = $result->fetchArray(\SQLITE3_ASSOC);
-
-        return $row['number'];
-    }
-
-    /**
-     * Nombre duplication analyzer par fichier
-     *
-     * @param type $file
-     */
-    private function getDuplicationFileByAnalyzer($file) {
-        $query = <<<'SQL'
-                SELECT analyzer, count(*)  AS number FROM results WHERE file = :file
-                    GROUP BY analyzer
 SQL;
         $stmt = $this->sqlite->prepare($query);
         $stmt->bindValue(':file', $file, SQLITE3_TEXT);
