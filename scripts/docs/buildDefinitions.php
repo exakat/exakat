@@ -88,6 +88,8 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'microtime'                      => 'http://www.php.net/microtime',
                  'sleep'                          => 'http://www.php.net/sleep',
                  'usleep'                         => 'http://www.php.net/usleep',
+                 'abs'                            => 'http://www.php.net/abs',
+                 'count'                          => 'http://www.php.net/count',
 
                  'strlen'                         => 'http://www.php.net/strlen',
                  'mb_strlen'                      => 'http://www.php.net/mb_strlen',
