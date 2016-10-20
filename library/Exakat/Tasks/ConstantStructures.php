@@ -35,7 +35,7 @@ class ConstantStructures extends Tasks {
         $this->displayTiming('Initial clean');
 
         // Case for Literals
-        $literals = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'RawString', 'Magicconstant', 'Staticconstant');
+        $literals = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'InlineHtml', 'Magicconstant', 'Staticconstant');
         foreach($literals as $literal) {
             $query = 'g.idx("atoms")[["atom":"'.$literal.'"]].each{ it.setProperty("constante", true)};';
             $this->gremlin->query($query);

@@ -27,15 +27,31 @@ use Exakat\Analyzer\Analyzer;
 
 class OneLineTwoInstructions extends Analyzer {
     public function analyze() {
+        // Two expressions in a row
         $this->atomIs('Sequence')
              ->outIs('ELEMENT')
              ->_as('report')
-             ->atomIsNot(array('Ppp', 'Global', 'Const', 'RawString'))
+             ->atomIsNot(array('Ppp', 'Global', 'Const', 'InlineHtml'))
              ->savePropertyAs('line', 'line_number')
              ->nextSibling()
-             ->atomIsNot(array('RawString'))
+             ->atomIsNot('InlineHtml')
              ->samePropertyAs('line', 'line_number')
              ->back('report');
+        $this->prepareQuery();
+
+        // Two expressions with HTML between
+        $this->atomIs('Sequence')
+             ->outIs('ELEMENT')
+             ->_as('report')
+             ->atomIsNot(array('Ppp', 'Global', 'Const', 'InlineHtml'))
+             ->savePropertyAs('line', 'line_number')
+             ->nextSibling()
+             ->atomIs('InlineHtml')
+             ->nextSibling()
+             ->atomIsNot('InlineHtml')
+             ->samePropertyAs('line', 'line_number')
+             ->back('report')
+             ;
         $this->prepareQuery();
     }
 }

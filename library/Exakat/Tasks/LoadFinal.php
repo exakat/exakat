@@ -268,7 +268,7 @@ GREMLIN;
         
         //display('Mark constants expressions');
         $query = <<<GREMLIN
-g.V().hasLabel("Integer", "Boolean", "Real", "Null", "Void", "RawString", "Magicconstant", "Staticconstant", "Void")
+g.V().hasLabel("Integer", "Boolean", "Real", "Null", "Void", "InlineHtml", "Magicconstant", "Staticconstant", "Void")
      .sideEffect{ it.get().property("constant", true); }
 
 GREMLIN;
