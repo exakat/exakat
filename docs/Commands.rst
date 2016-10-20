@@ -230,7 +230,7 @@ Command
 #######
 ::
 
-    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer] [-v]
+    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer|-symlink|-copy] [-v]
 
 Options
 #######
@@ -263,7 +263,8 @@ Tips
 ####
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
-
+* `php exakat.phar init -p <name> -R <directory> -symlink` : this creates a symlink to a local folder in the server.
+* `php exakat.phar init -p <name> -R <directory> -copy` : this copies a local folder in the projects folder for analysis
 
 project
 -------
