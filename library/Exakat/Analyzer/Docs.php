@@ -98,12 +98,17 @@ SQL;
     }
 
     public function getThemesForAnalyzer() {
-        $query = <<<'SQL'
+        $list = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                                  'CompatibilityPHP70', 'CompatibilityPHP71',
+                                  'Dead code', 'Security', 'Analyze');
+        $listSqlite3 = '"'.join('", "', $list).'"';
+                                          $query = <<<SQL
 SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM categories AS c
     JOIN analyzers_categories AS ac
         ON ac.id_categories = c.id
     JOIN analyzers AS a
         ON a.id = ac.id_analyzer
+    WHERE c.name IN ($listSqlite3)
 	GROUP BY analyzer
 SQL;
         $res = $this->sqlite->query($query);
