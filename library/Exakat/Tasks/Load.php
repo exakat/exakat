@@ -1271,7 +1271,7 @@ class Load extends Tasks {
     
         $functioncallId = $this->addAtom('Functioncall');
         $this->setAtom($functioncallId, ['code'       => $this->atoms[$echoId]['code'],
-                                         'fullcode'   => '<?php echo ' . $this->atoms[$argumentsId]['fullcode'],
+                                         'fullcode'   => '<?= ' . $this->atoms[$argumentsId]['fullcode'],
                                          'line'       => $this->tokens[$current === -1 ? 0 : $current][2],
                                          'token'      => 'T_OPEN_TAG_WITH_ECHO',
                                          'fullnspath' => '\\echo' ]);
