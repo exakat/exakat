@@ -36,6 +36,11 @@ class Ambassador extends Reports {
     protected $projectPath = null;
     protected $finalName = null;
     private $tmpName = '';
+    
+    private $docs              = null;
+    private $timesToFix        = null;
+    private $themesForAnalyzer = null;
+    private $severities        = null;
 
     private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                   'CompatibilityPHP70', 'CompatibilityPHP71',
@@ -49,6 +54,10 @@ class Ambassador extends Reports {
      */
     public function __construct() {
         parent::__construct();
+        $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
+        $this->timesToFix        = $this->docs->getTimesToFix();
+        $this->themesForAnalyzer = $this->docs->getThemesForAnalyzer();
+        $this->severities        = $this->docs->getSeverities();
     }
 
     /**
@@ -105,7 +114,7 @@ class Ambassador extends Reports {
         $this->generateDocumentation();
         $this->generateDashboard();
         $this->generateFiles();
-//        $this->generateAnalyzers();
+        $this->generateAnalyzers();
 
         $this->generateIssues();
         $this->generateAnalyzersList();
@@ -462,19 +471,18 @@ SQL;
 
         foreach ($analysers as $analyser) {
             $analyserHTML.= "<tr>";
-            $analyserHTML.='<td>' . $analyser["Label"] . '</td>
-                        <td>' . $analyser["Type"] . '</td>
-                        <td>' . $analyser["Receipt"] . '</td>
-                        <td>' . $analyser["Issues"] . '</td>
-                        <td>' . $analyser["Files"] . '</td>
-                        <td>' . $analyser["Severity"] . '</td>';
+            $analyserHTML.='<td>' . $analyser["label"] . '</td>
+                        <td>' . $analyser["recipes"] . '</td>
+                        <td>' . $analyser["issues"] . '</td>
+                        <td>' . $analyser["files"] . '</td>
+                        <td>' . $analyser["severity"] . '</td>';
             $analyserHTML.= "</tr>";
         }
 
         $finalHTML = $this->injectBloc($baseHTML, "BLOC-ANALYZERS", $analyserHTML);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/datatables.js"></script>');
 
-        file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML);
+        print file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML)." in analyzers\n";
     }
 
     /**
@@ -485,27 +493,25 @@ SQL;
     protected function getAnalyzersResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
-        
+
         $result = $this->sqlite->query(<<<SQL
-        SELECT analyzer, count(*) AS Issues, severity AS Severity FROM results
+        SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity FROM results
         WHERE analyzer IN ($list)
         GROUP BY analyzer
         HAVING Issues > 0
 SQL
         );
 
-        $data = array();
+        $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
-            $row['Files'] = $this->getCountFileByAnalyzers($row['analyzer']);
-            $row['Label'] = $analyzer->getDescription()->getName();
-            $row['Receipt'] = 'B'; //implode(', ', $analyzer->getThemeAnalyzers($this->config->thema));
-            $row['Type'] = 'null';
+            $row['label'] = $analyzer->getDescription()->getName();
+            $row['recipes' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
-            $data[] = $row;
+            $return[] = $row;
         }
 
-        return $data;
+        return $return;
     }
 
     /**
@@ -653,11 +659,11 @@ SQL;
             $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
             $dataNone[]     = empty($severities[$value['file']]['None'])     ? 0 : $severities[$value['file']]['Major'];
         }
-        $xAxis = join(', ', $xAxis);
+        $xAxis        = join(', ', $xAxis);
         $dataCritical = join(', ', $dataCritical);
-        $dataMajor = join(', ', $dataMajor);
-        $dataMinor = join(', ', $dataMinor);
-        $dataNone = join(', ', $dataNone);
+        $dataMajor    = join(', ', $dataMajor);
+        $dataMinor    = join(', ', $dataMinor);
+        $dataNone     = join(', ', $dataNone);
 
         return array(
             'scriptDataFiles' => $xAxis,
@@ -823,10 +829,6 @@ SQL;
         $result = $this->sqlite->query($sqlQuery);
 
         $items = array();
-        $docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        $severities = $docs->getSeverities();
-        $timesToFix = $docs->getTimesToFix();
-        $themes = $docs->getThemesForAnalyzer();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
@@ -839,9 +841,9 @@ SQL;
             $item['code_plus'] = htmlentities($row['fullcode'], ENT_COMPAT | ENT_HTML401 , 'UTF-8');
             $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
-            $item['severity'] = "<i class=\"fa fa-warning " . $severities[$row['analyzer']] . "\"></i>";
-            $item['complexity'] = "<i class=\"fa fa-cog " . $timesToFix[$row['analyzer']] . "\"></i>";
-            $item['receipt' ] =  join(', ', $themes[$row['analyzer']]);//'A';//$analyzer->getReceipt($this->config->thema);
+            $item['severity'] = "<i class=\"fa fa-warning " . $this->severities[$row['analyzer']] . "\"></i>";
+            $item['complexity'] = "<i class=\"fa fa-cog " . $this->timesToFix[$row['analyzer']] . "\"></i>";
+            $item['recipes' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
             $item['analyzer_help' ] =  explode("\n", $ini['description'])[0];
 
             $items[] = json_encode($item);
