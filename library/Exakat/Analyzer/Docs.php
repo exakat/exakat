@@ -96,7 +96,26 @@ SQL;
         
         return $return;
     }
-    
+
+    public function getThemesForAnalyzer() {
+        $query = <<<'SQL'
+SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM categories AS c
+    JOIN analyzers_categories AS ac
+        ON ac.id_categories = c.id
+    JOIN analyzers AS a
+        ON a.id = ac.id_analyzer
+	GROUP BY analyzer
+SQL;
+        $res = $this->sqlite->query($query);
+
+        $return = array();
+        while($row = $res->fetchArray()) {
+            $return[$row['analyzer']] = explode(',', $row['categories']);
+        }
+        
+        return $return;
+    }
+        
     public function getSeverity($analyzer) {
         list($folder, $name) = explode('\\', substr($analyzer, 16));
 
@@ -129,6 +148,30 @@ SQL;
         return $return;
     }
 
+    public function getSeverities() {
+        $query = "SELECT folder||'/'||name AS analyzer, severity FROM analyzers";
+
+        $return = [];
+        $res = $this->sqlite->query($query);
+        while($row = $res->fetchArray()) {
+            $return[$row['analyzer']] = empty($res2[0]) ? Analyzer::S_NONE : constant("Exakat\\Analyzer\\Analyzer::$res2[0]");
+        }
+
+        return $return;
+    }
+
+    public function getTimesToFix() {
+        $query = "SELECT folder||'/'||name AS analyzer, timetofix FROM analyzers";
+
+        $return = [];
+        $res = $this->sqlite->query($query);
+        while($row = $res->fetchArray()) {
+            $return[$row['analyzer']] = empty($res2[0]) ? Analyzer::S_NONE : constant("Exakat\\Analyzer\\Analyzer::$res2[0]");
+        }
+
+        return $return;
+    }
+    
     public function getVendors() {
         $query = <<<SQL
         SELECT vendor FROM vendors

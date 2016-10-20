@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Docs;
 use Exakat\Datastore;
 use Exakat\Exakat;
 use Exakat\Phpexec;
@@ -103,8 +104,9 @@ class Ambassador extends Reports {
 
         $this->generateDocumentation();
         $this->generateDashboard();
-        $this->generateFiles();
-        $this->generateAnalyzers();
+//        $this->generateFiles();
+//        $this->generateAnalyzers();
+
         $this->generateIssues();
         $this->generateAnalyzersList();
         $this->generateExternalLib();
@@ -226,7 +228,8 @@ class Ambassador extends Reports {
         $baseHTML = file_get_contents($this->tmpName . '/datas/index.html');
 
         // Bloc top left
-        $hashData = $this->getHashData();
+//        $hashData = $this->getHashData();
+        $hashData = '';
         $finalHTML = $this->injectBloc($baseHTML, "BLOCHASHDATA", $hashData);
 
         // bloc Issues
@@ -255,11 +258,11 @@ class Ambassador extends Reports {
         
         // Analyzer Overview
         $analyzerOverview = $this->getAnalyzerOverview();
-        $finalHTML = str_replace("SCRIPTDATAANALYZERLIST", $analyzerOverview['scriptDataAnalyzer'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERMAJOR", $analyzerOverview['scriptDataAnalyzerMajor'], $finalHTML);
+        $finalHTML = str_replace("SCRIPTDATAANALYZERLIST",     $analyzerOverview['scriptDataAnalyzer'], $finalHTML);
+        $finalHTML = str_replace("SCRIPTDATAANALYZERMAJOR",    $analyzerOverview['scriptDataAnalyzerMajor'], $finalHTML);
         $finalHTML = str_replace("SCRIPTDATAANALYZERCRITICAL", $analyzerOverview['scriptDataAnalyzerCritical'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERNONE", $analyzerOverview['scriptDataAnalyzerNone'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERMINOR", $analyzerOverview['scriptDataAnalyzerMinor'], $finalHTML);
+        $finalHTML = str_replace("SCRIPTDATAANALYZERNONE",     $analyzerOverview['scriptDataAnalyzerNone'], $finalHTML);
+        $finalHTML = str_replace("SCRIPTDATAANALYZERMINOR",    $analyzerOverview['scriptDataAnalyzerMinor'], $finalHTML);
 
         file_put_contents($this->tmpName . '/datas/index.html', $finalHTML);
     }
@@ -459,7 +462,6 @@ SQL;
 
         foreach ($analysers as $analyser) {
             $analyserHTML.= "<tr>";
-//            $analyserHTML.='<td><a href="#" title="' . $analyser["Label"] . '">' . $analyser["Label"] . '</a></td>
             $analyserHTML.='<td>' . $analyser["Label"] . '</td>
                         <td>' . $analyser["Type"] . '</td>
                         <td>' . $analyser["Receipt"] . '</td>
@@ -535,7 +537,6 @@ SQL;
 
         foreach ($files as $file) {
             $filesHTML.= "<tr>";
-//            $filesHTML.='<td><a href="#" title="' . $file["Filename"] . '">' . $file["Filename"] . '</a></td>
             $filesHTML.='<td>' . $file["Filename"] . '</td>
                         <td>' . $file["LoC"] . '</td>
                         <td>' . $file["Issues"] . '</td>
@@ -662,29 +663,24 @@ SQL;
      */
     private function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
-        $xAxis = '';
-        $dataMajor = '';
-        $dataCritical = '';
-        $dataNone = '';
-        $dataMinor = '';
+        $xAxis        = [];
+        $dataMajor    = [];
+        $dataCritical = [];
+        $dataNone     = [];
+        $dataMinor    = [];
+        $severities = $this->getSeveritiesNumberBy('file');
         foreach ($data as $value) {
-            $xAxis .= ($xAxis) ? ', ' . "'" . $value['file'] . "'" : "'" . $value['file'] . "'";
-            $severity = $this->getSeverityNumberByFile($value['file']);
-            foreach ($severity as $severityValue) {
-                if ($severityValue['severity'] == 'Major') {
-                    $dataMajor .= ($dataMajor != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'Critical') {
-                    $dataCritical .= ($dataCritical != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'None') {
-                    $dataNone .= ($dataNone != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'Minor') {
-                    $dataMinor .= ($dataMinor != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-            }
+            $xAxis[] = "'" . $value['file'] . "'";
+            $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
+            $dataMajor[]    = empty($severities[$value['file']]['Major'])    ? 0 : $severities[$value['file']]['Major'];
+            $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
+            $dataNone[]     = empty($severities[$value['file']]['None'])     ? 0 : $severities[$value['file']]['Major'];
         }
+        $xAxis = join(', ', $xAxis);
+        $dataCritical = join(', ', $dataCritical);
+        $dataMajor = join(', ', $dataMajor);
+        $dataMinor = join(', ', $dataMinor);
+        $dataNone = join(', ', $dataNone);
 
         return array(
             'scriptDataFiles' => $xAxis,
@@ -759,39 +755,29 @@ SQL;
      * Nombre severity by file en Dashboard
      *
      */
-    private function getSeverityNumberByFile($file) {
+    private function getSeveritiesNumberBy($type = 'file') {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
         $query = <<<SQL
-                SELECT severity, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list) AND file = :file
-                    GROUP BY severity
-                    ORDER BY number DESC
+SELECT $type, severity, count(*) AS count
+    FROM results
+    WHERE analyzer IN ($list)
+    GROUP BY $type, severity
 SQL;
 
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':file', $file, SQLITE3_TEXT);
-        $result = $stmt->execute();
+        $stmt = $this->sqlite->query($query);
 
-        $data = array();
-        $severityType = ['Major', 'Critical', 'None', 'Minor'];
-        $severityExiste = array();
-        $count = 0;
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $count ++;
-            $severityExiste[] = $row['severity'];
-            $data[] = array('severity' => $row['severity'], 'value' => $row['number']);
-        }
-        if (count($severityType) > $count) {
-            $datasup = array_diff($severityType, $severityExiste);
-            foreach ($datasup as $sup) {
-                $data[] = array('severity' => $sup, 'value' => 0);
+        $return = array();
+        while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
+            if ( !isset($return[$row[$type]]) ) {
+                $return[$row[$type]] = [$row['severity'] => $row['count']];
+            } else {
+                $return[$row[$type]][$row['severity']] = $row['count'];
             }
         }
 
-        return $data;
+        return $return;
     }
     
     /**
@@ -800,74 +786,33 @@ SQL;
      */
     private function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
-        $xAxis = '';
-        $dataMajor = '';
-        $dataCritical = '';
-        $dataNone = '';
-        $dataMinor = '';
+        $xAxis        = [];
+        $dataMajor    = [];
+        $dataCritical = [];
+        $dataNone     = [];
+        $dataMinor    = [];
 
+        $severities = $this->getSeveritiesNumberBy('analyzer');
         foreach ($data as $value) {
-            $xAxis .= ($xAxis) ? ', ' . "'" . $value['analyzer'] . "'" : "'" . $value['analyzer'] . "'";
-            $severity = $this->getSeverityNumberByAnalyzer($value['analyzer']);
-            foreach ($severity as $severityValue) {
-                if ($severityValue['severity'] == 'Major') {
-                    $dataMajor .= ($dataMajor != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'Critical') {
-                    $dataCritical .= ($dataCritical != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'None') {
-                    $dataNone .= ($dataNone != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'Minor') {
-                    $dataMinor .= ($dataMinor != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-            }
+            $xAxis[] = "'" . $value['analyzer'] . "'";
+            $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
+            $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
+            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
+            $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['Major'];
         }
+        $xAxis = join(', ', $xAxis);
+        $dataCritical = join(', ', $dataCritical);
+        $dataMajor = join(', ', $dataMajor);
+        $dataMinor = join(', ', $dataMinor);
+        $dataNone = join(', ', $dataNone);
 
         return array(
-            'scriptDataAnalyzer' => $xAxis,
-            'scriptDataAnalyzerMajor' => $dataMajor,
+            'scriptDataAnalyzer'         => $xAxis,
+            'scriptDataAnalyzerMajor'    => $dataMajor,
             'scriptDataAnalyzerCritical' => $dataCritical,
-            'scriptDataAnalyzerNone' => $dataNone,
-            'scriptDataAnalyzerMinor' => $dataMinor
+            'scriptDataAnalyzerNone'     => $dataNone,
+            'scriptDataAnalyzerMinor'    => $dataMinor
         );
-    }
-    
-    /**
-     * Nombre severity by analyzer en Dashboard
-     *
-     */
-    private function getSeverityNumberByAnalyzer($analyzer) {
-        $query = <<<'SQL'
-                SELECT severity, count(*) AS number
-                    FROM results
-                    WHERE analyzer = :analyzer
-                    GROUP BY severity
-                    ORDER BY number DESC
-SQL;
-
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':analyzer', $analyzer, SQLITE3_TEXT);
-        $result = $stmt->execute();
-
-        $data = array();
-        $severityType = ['Major', 'Critical', 'None', 'Minor'];
-        $severityExiste = array();
-        $count = 0;
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $count ++;
-            $severityExiste[] = $row['severity'];
-            $data[] = array('severity' => $row['severity'], 'value' => $row['number']);
-        }
-        if (count($severityType) > $count) {
-            $datasup = array_diff($severityType, $severityExiste);
-            foreach ($datasup as $sup) {
-                $data[] = array('severity' => $sup, 'value' => 0);
-            }
-        }
-
-        return $data;
     }
     
     /**
@@ -888,8 +833,7 @@ SQL;
      * List of Issues faceted
      * @return array
      */
-    public function getIssuesFaceted()
-    {
+    public function getIssuesFaceted() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
@@ -902,10 +846,13 @@ SQL;
         $result = $this->sqlite->query($sqlQuery);
 
         $items = array();
+        $docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
+        $severities = $docs->getSeverities();
+        $timesToFix = $docs->getTimesToFix();
+        $themes = $docs->getThemesForAnalyzer();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $analyzer = Analyzer::getInstance($row['analyzer']);
             $item['analyzer'] =  $ini['name'];
             $item['analyzer_md5'] = md5($ini['name']);
             $item['file' ] =  $row['file'];
@@ -915,9 +862,9 @@ SQL;
             $item['code_plus'] = htmlentities($row['fullcode'], ENT_COMPAT | ENT_HTML401 , 'UTF-8');
             $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
-            $item['severity'] = "<i class=\"fa fa-warning " . $this->getClassByType($analyzer->getSeverity()) . "\"></i>";
-            $item['complexity'] = "<i class=\"fa fa-cog " . $this->getClassByType($analyzer->getTimeToFix()) . "\"></i>";
-            $item['receipt' ] =  'A';//$analyzer->getReceipt($this->config->thema);
+            $item['severity'] = "<i class=\"fa fa-warning " . $severities[$row['analyzer']] . "\"></i>";
+            $item['complexity'] = "<i class=\"fa fa-cog " . $timesToFix[$row['analyzer']] . "\"></i>";
+            $item['receipt' ] =  join(', ', $themes[$row['analyzer']]);//'A';//$analyzer->getReceipt($this->config->thema);
             $item['analyzer_help' ] =  explode("\n", $ini['description'])[0];
 
             $items[] = json_encode($item);
