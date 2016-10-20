@@ -237,8 +237,7 @@ class Ambassador extends Reports {
         $baseHTML = file_get_contents($this->tmpName . '/datas/index.html');
 
         // Bloc top left
-//        $hashData = $this->getHashData();
-        $hashData = '';
+        $hashData = $this->getHashData();
         $finalHTML = $this->injectBloc($baseHTML, "BLOCHASHDATA", $hashData);
 
         // bloc Issues
@@ -286,23 +285,22 @@ class Ambassador extends Reports {
 
         $datastore = new Datastore($this->config);
         $info = array(
-            'Number of PHP files' => $datastore->getHash('files'),
-            'Number of lines of code' => $datastore->getHash('loc'),
+            'Number of PHP files'                   => $datastore->getHash('files'),
+            'Number of lines of code'               => $datastore->getHash('loc'),
             'Number of lines of code with comments' => $datastore->getHash('locTotal'),
             'PHP used' => $php->getActualVersion() //.' (version '.$this->config->phpversion.' configured)'
         );
 
         // fichier
-        $totalFileAnalysed = $this->getTotalAnalysedFile(true);
-        $totalFile = $this->getTotalAnalysedFile();
-        $totalFileSansError = $totalFile['totalanalysedfile'] - $totalFileAnalysed['totalanalysedfile'];
-        $porcentFile = ($totalFileSansError / $totalFile['totalanalysedfile']) * 100;
+        $totalFileAnalysed = $this->getTotalAnalysedFile();
+        $totalFile = $datastore->getHash('php');
+        $totalFileSansError = $totalFile - $totalFileAnalysed;
+        $porcentFile = ($totalFileSansError / $totalFile) * 100;
 
         // analyzer
-        $totalAnalyzerUsed = $this->getTotalAnalyzer(true);
-        $totalAnalyzer = $this->getTotalAnalyzer();
-        $totaalAnalyzerSansError = $totalAnalyzer['totalanalyzer'] - $totalAnalyzerUsed['totalanalyzer'];
-        $pourcentAnalyzer = ($totaalAnalyzerSansError / $totalAnalyzer['totalanalyzer']) * 100;
+        list($totalAnalyzerUsed, $totalAnalyzer) = $this->getTotalAnalyzer();
+        $totaalAnalyzerSansError = $totalAnalyzer - $totalAnalyzerUsed;
+        $pourcentAnalyzer = ($totaalAnalyzerSansError / $totalAnalyzer) * 100;
 
         $html = '<div class="box">
                     <div class="box-header with-border">
@@ -427,21 +425,11 @@ SQL;
      * Liste fichier analysé
      *
      */
-    private function getTotalAnalysedFile($issues = false) {
-        // sous requete
-        $sQuery = "SELECT r.*, rc.* from results as r
-                    JOIN resultsCounts as rc on  rc.analyzer = r.analyzer";
-        if ($issues) {
-            $sQuery .= " WHERE rc.count > 0";
-        }
-        $sQuery .= " GROUP BY file";
+    private function getTotalAnalysedFile() {
+        $query = "SELECT count(*) FROM results GROUP BY file";
+        $result = $this->sqlite->query($query);
 
-        $query = "SELECT count(*) AS totalanalysedfile "
-                . "FROM (" . $sQuery . ")";
-        $stmt = $this->sqlite->prepare($query);
-        $result = $stmt->execute();
-
-        return $result->fetchArray();
+        return $result->fetchArray()[0];
     }
 
     /**
@@ -450,14 +438,14 @@ SQL;
      * @param type $issues
      */
     private function getTotalAnalyzer($issues = false) {
-        $query = "SELECT count(*) AS totalanalyzer FROM resultsCounts ";
-        if ($issues) {
-            $query .= " WHERE count > 0";
-        }
+        $query = "SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
+            FROM resultsCounts AS rc
+            WHERE rc.count >= 0";
+
         $stmt = $this->sqlite->prepare($query);
         $result = $stmt->execute();
 
-        return $result->fetchArray();
+        return $result->fetchArray(\SQLITE3_NUM);
     }
 
     /**
