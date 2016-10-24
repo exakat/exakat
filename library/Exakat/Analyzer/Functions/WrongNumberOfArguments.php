@@ -43,7 +43,9 @@ class WrongNumberOfArguments extends Analyzer {
             if ($function['args_min'] > 0) {
                 $argsMins[$function['args_min']][] = '\\'.$function['name'];
             }
-            $argsMaxs[$function['args_max']][] = '\\'.$function['name'];
+            if ($function['args_max'] < 100) {
+                $argsMaxs[$function['args_max']][] = '\\'.$function['name'];
+            }
         }
 
         foreach($argsMins as $nb => $f) {
@@ -53,7 +55,7 @@ class WrongNumberOfArguments extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
         }
-
+        
         foreach($argsMaxs as $nb => $f) {
             $this->atomFunctionIs($f)
                  ->outIs('ARGUMENTS')
