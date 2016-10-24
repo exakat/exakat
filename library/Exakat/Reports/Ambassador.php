@@ -831,7 +831,7 @@ SQL;
             $item['line' ] =  $row['line'];
             $item['severity'] = "<i class=\"fa fa-warning " . $this->severities[$row['analyzer']] . "\"></i>";
             $item['complexity'] = "<i class=\"fa fa-cog " . $this->timesToFix[$row['analyzer']] . "\"></i>";
-            $item['recipes' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $item['recipe' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
             $item['analyzer_help' ] =  explode("\n", $ini['description'])[0];
 
             $items[] = json_encode($item);
