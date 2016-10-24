@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('<?php echo $E',
-                      '<?php echo $G',
+$expected     = array('<?= $E',
+                      '<?= $G',
                       'echo $a . \' b \' . $c');
 
 $expected_not = array('<?php echo esc_html($f)',

@@ -1,6 +1,6 @@
 <?php
 
-class AController extends Zend_View_Helper_Abstract {}
+class AHelper extends Zend_View_Helper_Abstract {}
 
 class AHelper22 extends AHelper21 {}
 class AHelper21 extends \Zend_View_Helper_Abstract {}
