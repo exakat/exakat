@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 17 Oct 2016 14:39:06 +0000
-.. comment: Generation hash : 451c56ed72b1c12cee39cac818dda515e9e882ca
+.. comment: Generation date : Mon, 24 Oct 2016 10:30:34 +0000
+.. comment: Generation hash : 5a4dcb260c856efb93fe203530683910e7cd26cc
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 264 analysis
+Total : 266 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -82,6 +82,7 @@ Total : 264 analysis
 * :ref:`Aliases Usage <aliases-usage>`
 * :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
+* :ref:`Always Positive Comparison <always-positive-comparison>`
 * :ref:`Ambiguous Index <ambiguous-index>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
@@ -179,7 +180,6 @@ Total : 264 analysis
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
-* :ref:`Never Negative <never-negative>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`No Choice <no-choice>`
 * :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
@@ -193,13 +193,13 @@ Total : 264 analysis
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
+* :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 * :ref:`Non Ascii Variables <non-ascii-variables>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Non-constant Index In Array <non-constant-index-in-array>`
 * :ref:`Not Definitions Only <not-definitions-only>`
 * :ref:`Not Not <not-not>`
-* :ref:`Not Substr One <not-substr-one>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`Objects Don't Need References <objects-don't-need-references>`
 * :ref:`Old Style Constructor <old-style-constructor>`
@@ -235,6 +235,7 @@ Total : 264 analysis
 * :ref:`Short Open Tags <short-open-tags>`
 * :ref:`Should Chain Exception <should-chain-exception>`
 * :ref:`Should Make Alias <should-make-alias>`
+* :ref:`Should Make Ternary <should-make-ternary>`
 * :ref:`Should Typecast <should-typecast>`
 * :ref:`Should Use $this <should-use-$this>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
@@ -283,6 +284,7 @@ Total : 264 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Returned Value <unused-returned-value>`
 * :ref:`Unused Static Methods <unused-static-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Traits <unused-traits>`
@@ -399,10 +401,10 @@ Total : 51 analysis
 * :ref:`New Functions In PHP 5.4 <new-functions-in-php-5.4>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
+* :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
-* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
@@ -455,10 +457,10 @@ Total : 46 analysis
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
+* :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
-* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
@@ -502,10 +504,10 @@ Total : 42 analysis
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
+* :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
-* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
@@ -545,11 +547,11 @@ Total : 34 analysis
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
+* :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
-* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
@@ -629,12 +631,12 @@ Total : 37 analysis
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`New Functions In PHP 5.4 <new-functions-in-php-5.4>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
+* :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+* :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
-* :ref:`PHP 7.0 New Functions <php-7.0-new-functions>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
-* :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
@@ -663,7 +665,7 @@ Total : 5 analysis
 
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Magic Visibility <magic-visibility>`
-* :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+* :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 
@@ -714,8 +716,8 @@ Total : 16 analysis
 * :ref:`Join file() <join-file()>`
 * :ref:`Make One Call <make-one-call>`
 * :ref:`No Count With 0 <no-count-with-0>`
+* :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-* :ref:`Not Substr One <not-substr-one>`
 * :ref:`Pre-increment`
 * :ref:`Simplify Regex <simplify-regex>`
 * :ref:`Slow Functions <slow-functions>`

@@ -16,6 +16,11 @@ Glossary
 
       + :ref:`$this Is Not An Array <$this-is-not-an-array>`
 
+    + `abs`
+
+      + :ref:`Always Positive Comparison <always-positive-comparison>`
+      + :ref:`No Real Comparison <no-real-comparison>`
+
     + `array_count_values`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
@@ -27,6 +32,15 @@ Glossary
     + `array_keys`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+
+    + `array_merge`
+
+      + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+      + :ref:`Useless Instructions <useless-instructions>`
+
+    + `array_merge_recursive`
+
+      + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 
     + `array_unique`
 
@@ -52,9 +66,25 @@ Glossary
 
 
 + `C`
+    + `COUNT`
+
+      + :ref:`Wpdb Best Usage <wpdb-best-usage>`
+
     + `Closure`
 
       + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
+
+    + `Count`
+
+      + :ref:`Uses Default Values <uses-default-values>`
+
+    + `call_user_func`
+
+      + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+
+    + `call_user_func_array`
+
+      + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 
     + `closure`
 
@@ -67,13 +97,28 @@ Glossary
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
 
+    + `count`
+
+      + :ref:`Always Positive Comparison <always-positive-comparison>`
+      + :ref:`Common Alternatives <common-alternatives>`
+      + :ref:`For Using Functioncall <for-using-functioncall>`
+      + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`Static Loop <static-loop>`
+      + :ref:`Used Once Variables <used-once-variables>`
+      + :ref:`Uses Default Values <uses-default-values>`
+      + :ref:`Wpdb Best Usage <wpdb-best-usage>`
+
     + `curl_multi_errno`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+
+    + `curl_share_errno`
+
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 
     + `curl_share_strerror`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 
 
 + `D`
@@ -110,6 +155,10 @@ Glossary
       + :ref:`Results May Be Missing <results-may-be-missing>`
       + :ref:`Useless Constructor <useless-constructor>`
       + :ref:`parse_str() Warning <parse\_str()-warning>`
+
+    + `error_clear_last`
+
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 
     + `eval`
 
@@ -175,9 +224,17 @@ Glossary
 
 
 + `G`
+    + `gc_mem_caches`
+
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+
     + `get_class`
 
       + :ref:`Avoid get_class() <avoid-get\_class()>`
+
+    + `get_resources`
+
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 
 
 + `I`
@@ -194,9 +251,13 @@ Glossary
       + :ref:`Use Instanceof <use-instanceof>`
       + :ref:`Useless Interfaces <useless-interfaces>`
 
+    + `intdiv`
+
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+
     + `is_iterable`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 
 
 + `J`
@@ -208,19 +269,19 @@ Glossary
 + `M`
     + `mb_chr`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 
     + `mb_ord`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 
     + `mb_scrub`
 
-      + :ref:`PHP 7.1 New Functions <php-7.1-new-functions>`
+      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 
     + `mb_substr`
 
-      + :ref:`Not Substr One <not-substr-one>`
+      + :ref:`No Substr() One <no-substr()-one>`
 
     + `microtime`
 
@@ -247,6 +308,10 @@ Glossary
 
       + :ref:`eval() Without Try <eval()-without-try>`
 
+    + `posix_setrlimit`
+
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+
     + `pow`
 
       + :ref:`** For Exponent <**-for-exponent>`
@@ -265,21 +330,25 @@ Glossary
     + `preg_replace_callback_array`
 
       + :ref:`Make One Call <make-one-call>`
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 
 
 + `R`
     + `rand`
 
       + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
+      + :ref:`Unused Returned Value <unused-returned-value>`
       + :ref:`Use random_int() <use-random\_int()>`
 
     + `random_bytes`
 
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
       + :ref:`Random Without Try <random-without-try>`
       + :ref:`Use random_int() <use-random\_int()>`
 
     + `random_int`
 
+      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
       + :ref:`Random Without Try <random-without-try>`
       + :ref:`Use random_int() <use-random\_int()>`
 
@@ -307,8 +376,8 @@ Glossary
 
     + `strlen`
 
+      + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`Make One Call <make-one-call>`
-      + :ref:`Never Negative <never-negative>`
       + :ref:`No Count With 0 <no-count-with-0>`
 
     + `strpos`
