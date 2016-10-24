@@ -46,23 +46,31 @@ class ZendF {
         }
     }
 
-    public function getClassByRelease() {
+    public function getClassByRelease($release = null) {
         $query = 'SELECT class, release FROM classes 
                     JOIN namespaces 
                       ON classes.namespace_id = namespaces.id
                     JOIN releases 
                       ON namespaces.release_id = releases.id';
+        if ($release !== null) {
+            $query .= " WHERE releases.release = \"release-$release.0\"";
+        }
+        
         $res = $this->sqlite->query($query);
         $return = array();
         
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $return[$row['release']] = $row['class'];
+            if (isset($return[$row['release']])) {
+                $return[$row['release']][] = $row['class'];
+            } else {
+                $return[$row['release']] = [$row['class']];
+            }
         }
         
         return $return;
     }
 
-    public function getInterfaceByRelease() {
+    public function getInterfaceByRelease($release = null) {
         $query = 'SELECT interface, release FROM interfaces 
                     JOIN namespaces 
                       ON interfaces.namespace_id = namespaces.id
@@ -70,9 +78,17 @@ class ZendF {
                       ON namespaces.release_id = releases.id';
         $res = $this->sqlite->query($query);
         $return = array();
+
+        if ($release !== null) {
+            $query .= " WHERE releases.release = \"release-$release.0\"";
+        }
         
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $return[$row['release']] = $row['interface'];
+            if (isset($return[$row['release']])) {
+                $return[$row['release']][] = $row['interface'];
+            } else {
+                $return[$row['release']] = [$row['interface']];
+            }
         }
         
         return $return;
