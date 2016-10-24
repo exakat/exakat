@@ -27,6 +27,7 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
 use Exakat\Exceptions\NoFileToProcess;
+use Exakat\Exceptions\NoSuchFile;
 use Exakat\Loader\CypherG3;
 use Exakat\Phpexec;
 use Exakat\Tasks\Precedence;
@@ -343,7 +344,7 @@ class Load extends Tasks {
     
         if (is_link($filename)) { return true; }
         if (!file_exists($filename)) {
-            throw new \Exakat\Exceptions\NoSuchFile( $filename );
+            throw new NoSuchFile( $filename );
         }
 
         $file = realpath($filename);
