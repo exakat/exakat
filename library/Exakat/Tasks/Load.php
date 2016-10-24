@@ -28,6 +28,7 @@ use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchFile;
+use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Loader\CypherG3;
 use Exakat\Phpexec;
 use Exakat\Tasks\Precedence;
@@ -218,7 +219,7 @@ class Load extends Tasks {
 
         $this->php = new Phpexec();
         if (!$this->php->isValid()) {
-            die("This PHP binary is not valid for running Exakat.\n");
+            throw new InvalidPHPBinary($this->php->getVersion());
         }
 
         $this->php->getTokens();
