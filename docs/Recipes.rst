@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 24 Oct 2016 10:30:34 +0000
-.. comment: Generation hash : 5a4dcb260c856efb93fe203530683910e7cd26cc
+.. comment: Generation date : Mon, 24 Oct 2016 16:41:46 +0000
+.. comment: Generation hash : 0cf40b1b48d007bd14a67f015447233cef92a9a8
 
 
 .. _analyze:
@@ -674,7 +674,7 @@ Total : 5 analysis
 Dead code
 +++++++++
 
-Total : 22 analysis
+Total : 23 analysis
 
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
@@ -694,6 +694,7 @@ Total : 22 analysis
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
 * :ref:`Unused Protected Methods <unused-protected-methods>`
+* :ref:`Unused Returned Value <unused-returned-value>`
 * :ref:`Unused Static Methods <unused-static-methods>`
 * :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Use <unused-use>`

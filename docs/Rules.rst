@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 24 Oct 2016 10:30:34 +0000
-.. comment: Generation hash : 5a4dcb260c856efb93fe203530683910e7cd26cc
+.. comment: Generation date : Mon, 24 Oct 2016 16:41:46 +0000
+.. comment: Generation hash : 0cf40b1b48d007bd14a67f015447233cef92a9a8
 
 
 .. _$http\_raw\_post\_data:
@@ -8001,11 +8001,11 @@ It is recommended to add a check on the return value, or remove the call.
 
 Note that this analysis ignores functions that return void (same meaning that PHP 7.1 : return ; or no return in the function body).
 
-+--------------+-------------------------------+
-| Command Line | Functions/UnusedReturnedValue |
-+--------------+-------------------------------+
-| Analyzers    | :ref:`Analyze`                |
-+--------------+-------------------------------+
++--------------+---------------------------------------------+
+| Command Line | Functions/UnusedReturnedValue               |
++--------------+---------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
++--------------+---------------------------------------------+
 
 
 
