@@ -23,11 +23,12 @@
 
 namespace Exakat\Analyzer\Classes;
 
+use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
 
 class AvoidUsing extends Analyzer {
     public function analyze() {
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         $classes = $config->Classes_AvoidUsing;
         
         if (empty($classes)) {
