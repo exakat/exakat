@@ -25,6 +25,9 @@ namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
+use Exakat\Exceptions\NoSuchFile;
+use Exakat\Exceptions\NoSuchDir;
+use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Tasks\CleanDb;
 
 class Test extends Tasks {
@@ -37,9 +40,9 @@ class Test extends Tasks {
 
         // Check for requested file
         if (!empty($config->filename) && !file_exists($config->filename)) {
-            die("No such file '$config->filename'. Aborting\n");
+            throw new NoSuchFile($config->filename);
         } elseif (!empty($config->dirname) && !file_exists($config->dirname)) {
-            die("No such directory '$config->filename'. Aborting\n");
+            throw new NoSuchDir($config->filename);
         }
 
         // Check for requested analyze
@@ -51,7 +54,7 @@ class Test extends Tasks {
             if (count($r) > 0) {
                 echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
             }
-            die("No such class as '$analyzer'. Aborting\n");
+            throw new NoSuchAnalyzer($analyzer);
         }
 
         display("Cleaning DB\n");
@@ -74,13 +77,13 @@ class Test extends Tasks {
                         );
         
         try {
-            $configThema = \Exakat\Config::push($args);
+            $configThema = Config::push($args);
 
             $analyze = new Analyze($this->gremlin);
             $analyze->run($configThema);
             unset($report);
             
-            \Exakat\Config::pop();
+            Config::pop();
         } catch (\Exception $e) {
             echo "Error while running the Analyze $theme \n",
                  $e->getMessage();

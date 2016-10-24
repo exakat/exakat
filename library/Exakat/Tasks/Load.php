@@ -23,8 +23,12 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
-use Exakat\Phpexec;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\MustBeAFile;
+use Exakat\Exceptions\MustBeADir;
+use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Loader\CypherG3;
+use Exakat\Phpexec;
 use Exakat\Tasks\Precedence;
 
 const T_BANG                         = '!';
@@ -238,7 +242,7 @@ class Load extends Tasks {
         }
         
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
-            throw new \Exakat\Exceptions\NoSuchProject($this->config->project);
+            throw new NoSuchProject($this->config->project);
         }
 
         $this->checkTokenLimit();
@@ -256,16 +260,22 @@ class Load extends Tasks {
         $this->datastore->cleanTable('tokenCounts');
 
         if ($filename = $this->config->filename) {
+            if (!is_file($filename)) {
+                throw new MustBeAFile($filename);
+            }
             if ($this->processFile($filename)) {
                 $this->saveFiles();
                 $this->saveDefinitions();
             }
         } elseif ($dirName = $this->config->dirname) {
+            if (!is_dir($dirName)) {
+                throw new MustBeADir($dirName);
+            }
             $this->processDir($dirName);
         } elseif (($project = $this->config->project) !== 'default') {
             $this->processProject($project);
         } else {
-            die('No file to process. Aborting');
+            throw new NoFileToProcess($filename);
         }
 
         static::$client->finalize();
