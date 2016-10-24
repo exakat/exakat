@@ -60,7 +60,11 @@ use Exakat\Exakat;
 class Xml extends Reports {
     private $cachedData = '';
     
-    CONST FILE_EXTENSION = 'xml';
+    const FILE_EXTENSION = 'xml';
+    
+    private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                                  'CompatibilityPHP70', 'CompatibilityPHP71',
+                                  '"Dead code"', 'Security', 'Analyze');
 
     public function __construct() {
         parent::__construct();
@@ -101,9 +105,6 @@ class Xml extends Reports {
                 foreach ($colErrors as $error) {
 
                     $error['type'] = strtolower($error['type']);
-//                    if (PHP_CODESNIFFER_ENCODING !== 'utf-8') {
-//                        $error['message'] = iconv(PHP_CODESNIFFER_ENCODING, 'utf-8', $error['message']);
-//                    }
 
                     $out->startElement($error['type']);
                     $out->writeAttribute('line', $line);
@@ -139,8 +140,11 @@ class Xml extends Reports {
      * @return void
      */
     public function generate($folder, $name = null) {
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in '.$this->themesList;
+        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
         $res = $sqlite->query($sqlQuery);
         
         $results = array();
