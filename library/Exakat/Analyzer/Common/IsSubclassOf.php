@@ -20,15 +20,24 @@
  *
 */
 
-namespace Exakat\Analyzer\ZendF;
 
-use Exakat\Analyzer\Common\IsSubclassOf;
+namespace Exakat\Analyzer\Common;
 
-class IsController extends IsSubclassOf {
+use Exakat\Analyzer\Analyzer;
+
+class IsSubclassOf extends Analyzer {
+    protected $classes = array();
+    
     public function analyze() {
-        $this->classes = '\\zend_controller_action';
-        
-        parent::analyze();
+        $classes =  $this->makeFullNsPath($this->classes);
+
+        $this->atomIs('Class')
+             ->goToAllParents(true)
+             ->outIs('EXTENDS')
+             ->fullnspathIs($classes)
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
     }
 }
 

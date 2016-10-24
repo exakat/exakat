@@ -24,9 +24,9 @@ namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Common\IsSubclassOf;
 
-class IsController extends IsSubclassOf {
+class IsHelper extends IsSubclassOf {
     public function analyze() {
-        $this->classes = '\\zend_controller_action';
+        $this->classes = '\\zend_view_helper_abstract';
         
         parent::analyze();
     }
