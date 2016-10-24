@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 
 class Clustergrammer extends Reports {
-    CONST FILE_EXTENSION = 'txt';
+    const FILE_EXTENSION = 'txt';
 
     public function __construct() {
         parent::__construct();

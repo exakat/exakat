@@ -25,7 +25,7 @@ namespace Reports;
 use Exakat\Analyzer\Analyzer;
 
 class OnepageJson extends Reports {
-    CONST FILE_EXTENSION = 'json';
+    const FILE_EXTENSION = 'json';
 
     public function __construct() {
         parent::__construct();
