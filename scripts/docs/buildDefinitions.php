@@ -64,6 +64,9 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'array_count_values'             => 'http://www.php.net/array_count_values',
                  'array_flip'                     => 'http://www.php.net/array_flip',
                  'array_keys'                     => 'http://www.php.net/array_keys',
+                 'array_merge_recursive'          => 'http://www.php.net/array_merge_recursive',
+                 'array_merge'                    => 'http://www.php.net/array_merge',
+
                  'strpos'                         => 'http://www.php.net/strpos',
                  'stripos'                        => 'http://www.php.net/stripos',
                  'throw'                          => 'http://www.php.net/throw',
@@ -106,6 +109,9 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'mb_scrub'                       => 'http://www.php.net/mb_scrub',
                  'is_iterable'                    => 'http://www.php.net/is_iterable',
 
+                 'call_user_func_array'           => 'http://www.php.net/call_user_func_array',
+                 'call_user_func'                 => 'http://www.php.net/call_user_func',
+
                  'strlen'                         => 'http://www.php.net/strlen',
                  'mb_strlen'                      => 'http://www.php.net/mb_strlen',
                  'grapheme_strlen'                => 'http://www.php.net/grapheme_strlen',
@@ -119,6 +125,7 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
 
                  'exec'                           => 'http://www.php.net/exec',
                  'eval'                           => 'http://www.php.net/eval',
+                 'pcntl_exec'                     => 'http://www.php.net/pcntl_exec',
 
                  'mb_substr'                      => 'http://www.php.net/mb_substr',
                  'mb_ord'                         => 'http://www.php.net/mb_ord',
