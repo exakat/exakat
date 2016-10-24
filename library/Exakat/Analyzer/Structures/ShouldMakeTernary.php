@@ -26,14 +26,17 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldMakeTernary extends Analyzer {
     public function analyze() {
+        // if ($a) $b = 2; else $b = 3;
         $this->atomIs('Ifthen')
              ->outIs('THEN')
+             ->is('count', 1)
              ->outWithRank('ELEMENT', 0)
              ->atomIs('Assignation')
              ->outIs('LEFT')
              ->savePropertyAs('fullcode', 'a')
              ->back('first')
              ->outIs('ELSE')
+             ->is('count', 1)
              ->outWithRank('ELEMENT', 0)
              ->atomIs('Assignation')
              ->outIs('LEFT')
