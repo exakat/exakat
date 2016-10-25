@@ -1,4 +1,4 @@
-Version 0.8.5 (Fuyun Sou , Coming up)
+Version 0.8.7 (Naked Demon, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,41 @@ Version 0.8.5 (Fuyun Sou , Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.8.6 (Fuyun Sou , 2016-10-24)
++ Architecture
+    + New command to ping a queue
+    + More documentation
++ Report
+    + Ambassador report sped up multiple times
+    + Text, Json and XML all report only analyzers (not the dependencies)
++ Analyzer
+    + New analyzer : suggest ternary instead of Ifthen
+    + New analyzer : check for returned value usage
+    + Added support for PHP 7.0.12 and 5.6.27
+    + Added more bugs fixing from extensions
+    + Fixed analysis for Zend Framework 1
+    + Ignore $this in variable used once
+    + Fixed report with unlimited arguments functions
+    + Overwritten literals : Ignore assignations in for()
+    + Upgraded old PHP 5.* analysis to Gremlin 3
+    + Upgraded analysis : 1639 / 1645 test pass (99% pass). 
++ Tokenizer
+    + Fixed precedence between require and .
+    + Better fullcode for <?= 
+
+Version 0.8.5 (Naked Demon, 2016-10-17)
++ Architecture
+    + Moved all classes under Exakat folder for clean hierarchy
++ Report
+    + Ambassador : restored line number in display
++ Analyzer
+    + New analyzer, check for substr() comparisons with literals
+    + New analyzer, suggest boolean cast, instead of Ternary.
+    + New analyzer, spot 3 levels of if/then
+    + Upgraded 'hardcoded password', for kadm5 and hash_* functions
+    + Upgraded 'external libs', with Zend Framework
+    + Upgraded analysis : 1625 / 1638 test pass (99% pass). 
 
 Version 0.8.4 (Lingkongzi, 2016-10-10)
 + Architecture

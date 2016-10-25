@@ -5,7 +5,7 @@
  *
  * Exakat is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
+ * the Free Software Foundation,either version 3 of the License,or
  * (at your option) any later version.
  *
  * Exakat is distributed in the hope that it will be useful,
@@ -14,13 +14,13 @@
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Exakat.  If not,see <http://www.gnu.org/licenses/>.
  *
  * The latest code can be found at <http://exakat.io/>.
  *
 */
 
-// More to come, and automate collection too
+// More to come,and automate collection too
 $attributes = array('ANALYZERS_COUNT' => '261');
 
 shell_exec('rm docs/*.rst');
@@ -29,12 +29,12 @@ $files = glob('docs/src/*.rst');
 foreach($files as $file) {
     $rst = file_get_contents($file);
     
-    $rst = str_replace(array_map(function ($x) { return '{{'.$x.'}}'; }, array_keys($attributes)), array_values($attributes), $rst);
-    if (preg_match_all('/{{(.*?)}}/', $rst, $r)) {
-        print "There are ".count($r[1])." missed attributes in \"".basename($file)."\" : ".implode(", ", $r[1])."\n\n";
+    $rst = str_replace(array_map(function ($x) { return '{{'.$x.'}}'; },array_keys($attributes)),array_values($attributes),$rst);
+    if (preg_match_all('/{{(.*?)}}/',$rst,$r)) {
+        print "There are ".count($r[1])." missed attributes in \"".basename($file)."\" : ".implode(",",$r[1])."\n\n";
     }
     
-    file_put_contents(str_replace('/src/', '/', $file), $rst);
+    file_put_contents(str_replace('/src/','/',$file),$rst);
 }
 
 $recipes = ["Analyze",
@@ -54,7 +54,7 @@ $recipes = ["Analyze",
             ];
 
 $text = '';
-$recipesList = '"'.join('", "', $recipes).'"';
+$recipesList = '"'.join('","',$recipes).'"';
 $glossary = array();
 $entries = array('preg_replace'                   => 'http://www.php.net/preg_replace',
                  'preg_match'                     => 'http://www.php.net/preg_match',
@@ -64,6 +64,9 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'array_count_values'             => 'http://www.php.net/array_count_values',
                  'array_flip'                     => 'http://www.php.net/array_flip',
                  'array_keys'                     => 'http://www.php.net/array_keys',
+                 'array_merge_recursive'          => 'http://www.php.net/array_merge_recursive',
+                 'array_merge'                    => 'http://www.php.net/array_merge',
+
                  'strpos'                         => 'http://www.php.net/strpos',
                  'stripos'                        => 'http://www.php.net/stripos',
                  'throw'                          => 'http://www.php.net/throw',
@@ -88,6 +91,26 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'microtime'                      => 'http://www.php.net/microtime',
                  'sleep'                          => 'http://www.php.net/sleep',
                  'usleep'                         => 'http://www.php.net/usleep',
+                 'abs'                            => 'http://www.php.net/abs',
+                 'count'                          => 'http://www.php.net/count',
+                 'get_resources'                  => 'http://www.php.net/get_resources',
+                 'gc_mem_caches'                  => 'http://www.php.net/gc_mem_caches',
+                 'preg_replace_callback_array'    => 'http://www.php.net/preg_replace_callback_array',
+                 'posix_setrlimit'                => 'http://www.php.net/posix_setrlimit',
+                 'random_bytes'                   => 'http://www.php.net/random_bytes',
+                 'random_int'                     => 'http://www.php.net/random_int',
+                 'intdiv'                         => 'http://www.php.net/intdiv',
+                 'error_clear_last'               => 'http://www.php.net/error_clear_last',
+                 'curl_share_strerror'            => 'http://www.php.net/curl_share_strerror',
+                 'curl_multi_errno'               => 'http://www.php.net/curl_multi_errno',
+                 'curl_share_errno'               => 'http://www.php.net/curl_share_errno',
+                 'mb_ord'                         => 'http://www.php.net/mb_ord',
+                 'mb_chr'                         => 'http://www.php.net/mb_chr',
+                 'mb_scrub'                       => 'http://www.php.net/mb_scrub',
+                 'is_iterable'                    => 'http://www.php.net/is_iterable',
+
+                 'call_user_func_array'           => 'http://www.php.net/call_user_func_array',
+                 'call_user_func'                 => 'http://www.php.net/call_user_func',
 
                  'strlen'                         => 'http://www.php.net/strlen',
                  'mb_strlen'                      => 'http://www.php.net/mb_strlen',
@@ -102,6 +125,7 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
 
                  'exec'                           => 'http://www.php.net/exec',
                  'eval'                           => 'http://www.php.net/eval',
+                 'pcntl_exec'                     => 'http://www.php.net/pcntl_exec',
 
                  'mb_substr'                      => 'http://www.php.net/mb_substr',
                  'mb_ord'                         => 'http://www.php.net/mb_ord',
@@ -165,7 +189,7 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
 
 $sqlite = new \Sqlite3('data/analyzers.sqlite');
 
-$query = 'SELECT a.folder || "/" || a.name AS analyzer, GROUP_CONCAT(c.name) analyzers  
+$query = 'SELECT a.folder || "/" || a.name AS analyzer,GROUP_CONCAT(c.name) analyzers  
                 FROM categories c
                 JOIN analyzers_categories ac
                     ON c.id = ac.id_categories
@@ -176,10 +200,10 @@ $query = 'SELECT a.folder || "/" || a.name AS analyzer, GROUP_CONCAT(c.name) ana
 $res = $sqlite->query($query);
 $a2themes = [];
 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-   $a2themes[$row['analyzer']] = explode(',', $row['analyzers']);
+   $a2themes[$row['analyzer']] = explode(',',$row['analyzers']);
 }
 
-$query = 'SELECT c.name, GROUP_CONCAT(a.folder || "/" || a.name) analyzers  
+$query = 'SELECT c.name,GROUP_CONCAT(a.folder || "/" || a.name) analyzers  
                 FROM categories c
                 JOIN analyzers_categories ac
                     ON c.id = ac.id_categories
@@ -191,7 +215,7 @@ $query = 'SELECT c.name, GROUP_CONCAT(a.folder || "/" || a.name) analyzers
 $res = $sqlite->query($query);
 $analyzers = [];
 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-    $liste = explode(',', $row['analyzers']);
+    $liste = explode(',',$row['analyzers']);
     foreach($liste as &$a) {
         $name = $a;
         $ini = parse_ini_file("human/en/$a.ini");
@@ -201,7 +225,7 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
 
 //        $ini['description'] = rst_link($ini['description']);
         
-        $desc = glossary($ini['name'], $ini['description']);
+        $desc = glossary($ini['name'],$ini['description']);
         $desc = trim(rst_escape($desc));
 
         if (!empty($ini['clearphp'])) {
@@ -211,18 +235,18 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
         }
 
         if (isset($a2themes[$name])) {
-            $c = array_map('rst_link', $a2themes[$name]);
-            $recipes = implode(', ', $c);
+            $c = array_map('rst_link',$a2themes[$name]);
+            $recipes = implode(',',$c);
         } else {
             $recipes = 'none';
         }
         
-        $lineSize    = max(strlen($commandLine), strlen($clearPHP), strlen($recipes));
-        $commandLine = str_pad($commandLine, $lineSize, ' ');
-        $recipes     = str_pad($recipes,     $lineSize, ' ');
-        $separator   = '+--------------+-'.str_pad('', $lineSize, '-').'-+';
+        $lineSize    = max(strlen($commandLine),strlen($clearPHP),strlen($recipes));
+        $commandLine = str_pad($commandLine,$lineSize,' ');
+        $recipes     = str_pad($recipes,$lineSize,' ');
+        $separator   = '+--------------+-'.str_pad('',$lineSize,'-').'-+';
         if (!empty($clearPHP)) {
-            $clearPHP    = '| clearPHP     | '.str_pad($clearPHP,    $lineSize, ' ')." |\n$separator\n";
+            $clearPHP    = '| clearPHP     | '.str_pad($clearPHP,$lineSize,' ')." |\n$separator\n";
         }
 
         $desc .= <<<RST
@@ -243,24 +267,24 @@ RST;
     unset($a);
 
     sort($liste);
-    $text .= rst_level($row['name'], 4)."\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ", $liste)."\n\n";
+    $text .= rst_level($row['name'],4)."\nTotal : ".count($liste)." analysis\n\n* ".implode("\n* ",$liste)."\n\n";
 }
 
 $rules = '';
 ksort($analyzers);
 foreach($analyzers as $title => $desc) {
-    $rules .= rst_level($title, 3)."\n\n$desc\n\n";
+    $rules .= rst_level($title,3)."\n\n$desc\n\n";
 }
 
 $rst = file_get_contents('docs/src/Recipes.rst');
 $date = date('r');
 $hash = shell_exec('git rev-parse HEAD');
-$rst = preg_replace('/.. comment: Recipes details(.*)$/is', ".. comment: Recipes details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$text", $rst);
-print file_put_contents('docs/Recipes.rst', $rst)." octets written for Recipes\n";
+$rst = preg_replace('/.. comment: Recipes details(.*)$/is',".. comment: Recipes details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$text",$rst);
+print file_put_contents('docs/Recipes.rst',$rst)." octets written for Recipes\n";
 
 $rst = file_get_contents('docs/src/Rules.rst');
-$rst = preg_replace('/.. comment: Rules details(.*)$/is', ".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$rules", $rst);
-print file_put_contents('docs/Rules.rst', $rst)." octets written for Rules\n";
+$rst = preg_replace('/.. comment: Rules details(.*)$/is',".. comment: Rules details\n.. comment: Generation date : $date\n.. comment: Generation hash : $hash\n\n$rules",$rst);
+print file_put_contents('docs/Rules.rst',$rst)." octets written for Rules\n";
 
 $glossaryRst = <<<GLOSSARY
 .. Glossary:
@@ -279,7 +303,7 @@ print "$found found\n";
 print count($entries)." defined\n";
 
 foreach($entries as $name => $url) {
-    $letter = strtoupper(trim($name, '\\`'))[0];
+    $letter = strtoupper(trim($name,'\\`'))[0];
     if (!isset($glossary[$letter][$name])) {
         print $name." $letter\n";
     }
@@ -291,15 +315,15 @@ foreach($glossary as $letter => $items) {
     foreach($items as $key => $urls) {
         ksort($urls);
         $glossaryRst .= "    + `".stripslashes($key)."`\n
-      + ".join("\n      + ", array_keys($urls))."\n\n";
+      + ".join("\n      + ",array_keys($urls))."\n\n";
     }
     $glossaryRst .= "\n";
 }
 $glossaryRst .= "\n";
-print file_put_contents('docs/Glossary.rst', $glossaryRst)." octets written for Rules\n";
+print file_put_contents('docs/Glossary.rst',$glossaryRst)." octets written for Rules\n";
 
 function rst_anchor($name) {
-    return str_replace(array(' ', '_', ':'), array('-', '\\_', '\\:'), strtolower($name));
+    return str_replace(array(' ','_',':'),array('-','\\_','\\:'),strtolower($name));
 }
 
 function rst_anchor_def($name) {
@@ -307,25 +331,25 @@ function rst_anchor_def($name) {
 }
 
 function rst_escape($string) {
-    $r = preg_replace_callback('/<\?php(.*?)\?>/is', function ($r) {
-        $r[0] = preg_replace('/`([^ ]+?) .*?`_/', '$1', $r[0]);
-        $rst = ".. code-block:: php\n\n   ".str_replace("\n", "\n   ", $r[0])."\n";
+    $r = preg_replace_callback('/<\?php(.*?)\?>/is',function ($r) {
+        $r[0] = preg_replace('/`([^ ]+?) .*?`_/','$1',$r[0]);
+        $rst = ".. code-block:: php\n\n   ".str_replace("\n","\n   ",$r[0])."\n";
         return $rst;
-    }, $string);
+    },$string);
 
-    $r = preg_replace_callback('/\s*<\?literal(.*?)\?>/is', function ($r) {
-        $rst = "::\n\n   ".str_replace("\n", "\n   ", $r[1])."\n";
+    $r = preg_replace_callback('/\s*<\?literal(.*?)\?>/is',function ($r) {
+        $rst = "::\n\n   ".str_replace("\n","\n   ",$r[1])."\n";
         return $rst;
-    }, $r);
+    },$r);
 
-//    $r = str_replace(array('*', '|'), array('\\*', '\\|'), $r);
-    $r = str_replace(array('**='), array('\\*\\*\\='), $r);
+//    $r = str_replace(array('*','|'),array('\\*','\\|'),$r);
+    $r = str_replace(array('**='),array('\\*\\*\\='),$r);
     
     return $r;
 }
 
 function rst_link($title) {
-    if (strpos($title, ' ') !== false) {
+    if (strpos($title,' ') !== false) {
         $escapeTitle = rst_anchor($title);
         return ':ref:`'.rst_escape($title).' <'.$escapeTitle.'>`';
     } else {
@@ -333,20 +357,20 @@ function rst_link($title) {
     }
 }
 
-function rst_level($title, $level = 1) {
-    $levels = array(1 => '=', 2 => '-', 3 => '#', 4 => '+');
+function rst_level($title,$level = 1) {
+    $levels = array(1 => '=',2 => '-',3 => '#',4 => '+');
     $escapeTitle = rst_escape($title);
-    return rst_anchor_def($title).$escapeTitle."\n".str_repeat($levels[$level], strlen($escapeTitle))."\n";
+    return rst_anchor_def($title).$escapeTitle."\n".str_repeat($levels[$level],strlen($escapeTitle))."\n";
 }
 
-function glossary($title, $description) {
-    global $glossary, $entries;
+function glossary($title,$description) {
+    global $glossary,$entries;
 
-    $alt = implode('|', array_keys($entries));
-    $alt = str_replace(array('*', '(', ')'), array('\\*', '\(', '\)'), $alt);
+    $alt = implode('|',array_keys($entries));
+    $alt = str_replace(array('*','(',')'),array('\\*','\(','\)'),$alt);
     
     $cbGlossary = function ($r) use ($title) {
-        global $glossary, $entries;
+        global $glossary,$entries;
         
         $letter = strtoupper($r[2]{0});
         $glossary[$letter][$r[2]][":ref:`$title <".rst_anchor($title).">`"] = 1;
@@ -361,15 +385,15 @@ function glossary($title, $description) {
 
     };
     
-    $description = preg_replace_callback('@([^a-zA-Z_])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])@is', $cbGlossary, ' '.$description);
-    /*, $r
+    $description = preg_replace_callback('@([^a-zA-Z_])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])@is',$cbGlossary,' '.$description);
+    /*,$r
     foreach($entries as $keyword => $url) {
-        $letter = strtoupper(trim($keyword, '\\`'))[0];
+        $letter = strtoupper(trim($keyword,'\\`'))[0];
 
         $regex = preg_quote($keyword);
-        if (preg_match('![^a-zA-Z`_]'.$regex.'[^a-zA-Z_]!is', $description, $r)) {
+        if (preg_match('![^a-zA-Z`_]'.$regex.'[^a-zA-Z_]!is',$description,$r)) {
             $glossary[$letter][$keyword][":ref:`$title <".rst_anchor($title).">`"] = 1;
-            $description = preg_replace('!'.$regex.'(\S*)!is', "`$keyword\$1 <$url>`_", $description);
+            $description = preg_replace('!'.$regex.'(\S*)!is',"`$keyword\$1 <$url>`_",$description);
         }
     }
     */

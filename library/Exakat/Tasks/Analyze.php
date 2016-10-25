@@ -25,6 +25,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
+use Exakat\Exceptions\DependsOnMustReturnArray;
 use Exakat\Phpexec;
 
 class Analyze extends Tasks {
@@ -86,6 +87,9 @@ php exakat analyze -P <One/rule> -p <project>\n");
                 $d = Analyzer::getInstance($a);
                 $configName = str_replace('/', '_', $a);
                 $d = $d->dependsOn();
+                if (!is_array($d)) {
+                    throw new DependsOnMustReturnArray(get_class($this));
+                }
                 if (empty($d)) {
                     $dependencies2[] = $a;
                 } else {

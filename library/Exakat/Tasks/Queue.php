@@ -24,7 +24,7 @@
 namespace Exakat\Tasks;
 
 use \Exakat\Config;
-use \Exakat\Clean;
+use \Exakat\Tasks\Clean;
 
 class Queue extends Tasks {
     private $pipefile = '/tmp/onepageQueue';
@@ -34,6 +34,15 @@ class Queue extends Tasks {
             display('Stopping queue');
             $queuePipe = fopen($this->pipefile, 'w');
             fwrite($queuePipe, "quit\n");
+            fclose($queuePipe);
+
+            return;
+        }
+
+        if ($config->ping === true) {
+            display('Ping queue');
+            $queuePipe = fopen($this->pipefile, 'w');
+            fwrite($queuePipe, "ping\n");
             fclose($queuePipe);
 
             return;

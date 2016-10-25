@@ -23,6 +23,7 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Log;
 
@@ -35,7 +36,7 @@ abstract class Tasks {
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
         // Config is the general one.
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         
         if ($this->enabledLog) {
             $task = strtolower((new \ReflectionClass($this))->getShortName());
@@ -52,14 +53,14 @@ abstract class Tasks {
     protected function checkTokenLimit() {
         $nb_tokens = $this->datastore->getHash('tokens');
 
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         if ($nb_tokens > $config->token_limit) {
             $this->datastore->addRow('hash', array('token error' => "Project too large ($nb_tokens / {$config->token_limit})"));
             die("Project too large ($nb_tokens / {$config->token_limit})\n");
         }
     }
     
-    public abstract function run(\Exakat\Config $config);
+    public abstract function run(Config $config);
 
     protected function cleanLog($path) {
         // cleaning log directory (possibly logs)

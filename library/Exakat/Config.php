@@ -114,6 +114,7 @@ class Config {
                                  '-text'      => 'text',
                                  '-o'         => 'output',
                                  '-stop'      => 'stop',
+                                 '-ping'      => 'ping',
                                  '-restart'   => 'restart',
 
 // Vcs

@@ -25,6 +25,12 @@ namespace Exakat\Analyzer\ZendF;
 use Exakat\Analyzer\Analyzer;
 
 class NotInThatPath extends Analyzer {
+    public function dependsOn() {
+        return array('ZendF/IsController',
+                     'ZendF/IsHelper',
+                     );
+    }
+    
     public function analyze() {
         // No Zend_Auth in .phtml
         $this->atomIs('Staticmethodcall')
@@ -37,9 +43,9 @@ class NotInThatPath extends Analyzer {
 
         //Zend_Controller_Action must be in /controllers/ path
         $this->atomIs('Class')
-//             ->filter('"\\\\zend_controller_action" in it.classTree')
+             ->analyzerIs('ZendF/IsController')
              ->goToFile()
-             ->regexIsNot('code', '\\\\/controllers\\\\/')
+             ->regexIsNot('code', '/controllers/')
              ->back('first');
         $this->prepareQuery();
 
@@ -47,9 +53,9 @@ class NotInThatPath extends Analyzer {
 
         //Zend_View_Helper_Abstract must be in /helpers/ folder
         $this->atomIs('Class')
-//             ->filter('"\\\\zend_view_helper_abstract" in it.classTree')
+             ->analyzerIs('ZendF/IsHelper')
              ->goToFile()
-             ->regexIsNot('code', '\\\\/helpers\\\\/')
+             ->regexIsNot('code', '/helpers/')
              ->back('first');
         $this->prepareQuery();
     }

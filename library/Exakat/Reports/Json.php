@@ -25,7 +25,12 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 
 class Json extends Reports {
-    CONST FILE_EXTENSION = 'json';
+    const FILE_EXTENSION = 'json';
+
+    private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                                  'CompatibilityPHP70', 'CompatibilityPHP71',
+                                  '"Dead code"', 'Security', 'Analyze');
+
 
     public function __construct() {
         parent::__construct();
@@ -35,9 +40,12 @@ class Json extends Reports {
         return false;
     }
 
-    public function generate($folder, $name) {
+    public function generate($folder, $name = null) {
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT * FROM results WHERE analyzer in '.$this->themesList;
+        $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
         $res = $sqlite->query($sqlQuery);
         
         $results = array();

@@ -31,7 +31,7 @@ class ShortTags extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Phpcode')
-             ->code(array('<?', '<script language="php">', '<%=', '<%'), true);
+             ->codeIs(array('<?', '<script language="php">', '<%=', '<%'), true);
         $this->prepareQuery();
     }
 }

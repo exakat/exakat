@@ -22,8 +22,10 @@
 
 namespace Exakat\Reports;
 
+use Exakat\Analyzer\Analyzer;
+
 class Uml extends Reports {
-    CONST FILE_EXTENSION = 'dot';
+    const FILE_EXTENSION = 'dot';
 
     public function __construct() {
         parent::__construct();

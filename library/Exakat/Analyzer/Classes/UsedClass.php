@@ -33,7 +33,7 @@ class UsedClass extends Analyzer {
     public function analyze() {
 
         $new = $this->query(<<<GREMLIN
-g.V().hasLabel('New').out("NEW").not(has("fullnspath", "")).values('fullnspath').unique()
+g.V().hasLabel("New").out("NEW").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
 );
         // class used in a New
@@ -46,7 +46,7 @@ GREMLIN
         
         // classed used in a extends
         $extends = $this->query(<<<GREMLIN
-g.V().hasLabel('Class').out("EXTENDS", "IMPLEMENTS").not(has("fullnspath", "")).values('fullnspath').unique()
+g.V().hasLabel("Class").out("EXTENDS", "IMPLEMENTS").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
 );
         if (count($extends) > 0) {
@@ -97,8 +97,8 @@ GREMLIN
         
         // class used in a String (full string only)
         $strings = $this->query(<<<GREMLIN
-g.V().hasLabel('String').has('token', 'T_CONSTANT_ENCAPSED_STRING')
-     .where( __.in('ARGUMENT').in("ARGUMENTS").has("fullnspath", "\\\\array").count().is(eq(0)) )
+g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
+     .where( __.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\array").count().is(eq(0)) )
      .filter{ it.get().value("noDelimiter").length() < 100}.filter{ it.get().value("noDelimiter").length() > 0}
      .filter{ !(it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\x7f-\xff]/)}
      .map{ it.get().value("noDelimiter").toLowerCase(); }.unique()
@@ -113,7 +113,7 @@ GREMLIN
 
         // class used in a String (string with ::)
         $strings = $this->query(<<<GREMLIN
-g.V().hasLabel('String').filter{ (it.get().value('noDelimiter') =~ "::" ).getCount() == 1 }
+g.V().hasLabel("String").filter{ (it.get().value("noDelimiter") =~ "::" ).getCount() == 1 }
                         .where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable") )
                         .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
 GREMLIN
@@ -129,10 +129,10 @@ GREMLIN
 
         // class used in an array
         $arrays = $this->query(<<<GREMLIN
-g.V().hasLabel('Functioncall').out("ARGUMENTS").out("ARGUMENT")
+g.V().hasLabel("Functioncall").out("ARGUMENTS").out("ARGUMENT")
         .hasLabel("Functioncall").has("fullnspath", "\\\\array")
         .out("ARGUMENTS").where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable").count().is(eq(1)) )
-        .has("count", 2).out("ARGUMENT").has("rank", 0).values('noDelimiter').unique()
+        .has("count", 2).out("ARGUMENT").has("rank", 0).values("noDelimiter").unique()
 GREMLIN
 );
         $arrays = $this->makeFullnspath($arrays);

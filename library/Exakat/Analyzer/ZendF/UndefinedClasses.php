@@ -35,12 +35,13 @@ class UndefinedClasses extends Analyzer {
         if (!in_array($this->release, array('1.5', '1.6', '1.7', '1.8', '1.9', '1.10', '1.11', '1.12'))) {
             $this->release = '1.12';
         }
+
         $data = new ZendF();
 
         $classes = $data->getClassByRelease($this->release);
-        $classes = $this->makeFullNSpath($classes);
+        $classes = $this->makeFullNSpath(array_pop($classes));
         $interfaces = $data->getInterfaceByRelease($this->release);
-        $interfaces = $this->makeFullNSpath($interfaces);
+        $interfaces = $this->makeFullNSpath(array_pop($interfaces));
         $all = array_merge($classes, $interfaces);
         
         $this->analyzerIs('ZendF/ZendClasses')

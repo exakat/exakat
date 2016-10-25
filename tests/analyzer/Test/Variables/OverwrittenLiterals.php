@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Variables_OverwrittenLiterals extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testVariables_OverwrittenLiterals01()  { $this->generic_test('Variables_OverwrittenLiterals.01'); }
     public function testVariables_OverwrittenLiterals02()  { $this->generic_test('Variables_OverwrittenLiterals.02'); }
     public function testVariables_OverwrittenLiterals03()  { $this->generic_test('Variables_OverwrittenLiterals.03'); }
+    public function testVariables_OverwrittenLiterals04()  { $this->generic_test('Variables/OverwrittenLiterals.04'); }
 }
 ?>

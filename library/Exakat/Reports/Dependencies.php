@@ -26,7 +26,7 @@ use \Exakat\Graph\Gremlin3;
 use \Exakat\Config;
 
 class Dependencies extends Reports {
-    CONST FILE_EXTENSION = 'dot';
+    const FILE_EXTENSION = 'dot';
 
     public function __construct() {
         parent::__construct();

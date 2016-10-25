@@ -23,8 +23,14 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
-use Exakat\Phpexec;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\MustBeAFile;
+use Exakat\Exceptions\MustBeADir;
+use Exakat\Exceptions\NoFileToProcess;
+use Exakat\Exceptions\NoSuchFile;
+use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Loader\CypherG3;
+use Exakat\Phpexec;
 use Exakat\Tasks\Precedence;
 
 const T_BANG                         = '!';
@@ -213,7 +219,7 @@ class Load extends Tasks {
 
         $this->php = new Phpexec();
         if (!$this->php->isValid()) {
-            die("This PHP binary is not valid for running Exakat.\n");
+            throw new InvalidPHPBinary($this->php->getVersion());
         }
 
         $this->php->getTokens();
@@ -238,7 +244,7 @@ class Load extends Tasks {
         }
         
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
-            throw new \Exakat\Exceptions\NoSuchProject($this->config->project);
+            throw new NoSuchProject($this->config->project);
         }
 
         $this->checkTokenLimit();
@@ -256,16 +262,22 @@ class Load extends Tasks {
         $this->datastore->cleanTable('tokenCounts');
 
         if ($filename = $this->config->filename) {
+            if (!is_file($filename)) {
+                throw new MustBeAFile($filename);
+            }
             if ($this->processFile($filename)) {
                 $this->saveFiles();
                 $this->saveDefinitions();
             }
         } elseif ($dirName = $this->config->dirname) {
+            if (!is_dir($dirName)) {
+                throw new MustBeADir($dirName);
+            }
             $this->processDir($dirName);
         } elseif (($project = $this->config->project) !== 'default') {
             $this->processProject($project);
         } else {
-            die('No file to process. Aborting');
+            throw new NoFileToProcess($filename);
         }
 
         static::$client->finalize();
@@ -333,7 +345,7 @@ class Load extends Tasks {
     
         if (is_link($filename)) { return true; }
         if (!file_exists($filename)) {
-            throw new \Exakat\Exceptions\NoSuchFile( $filename );
+            throw new NoSuchFile( $filename );
         }
 
         $file = realpath($filename);
@@ -1271,7 +1283,7 @@ class Load extends Tasks {
     
         $functioncallId = $this->addAtom('Functioncall');
         $this->setAtom($functioncallId, ['code'       => $this->atoms[$echoId]['code'],
-                                         'fullcode'   => '<?php echo ' . $this->atoms[$argumentsId]['fullcode'],
+                                         'fullcode'   => '<?= ' . $this->atoms[$argumentsId]['fullcode'],
                                          'line'       => $this->tokens[$current === -1 ? 0 : $current][2],
                                          'token'      => 'T_OPEN_TAG_WITH_ECHO',
                                          'fullnspath' => '\\echo' ]);
@@ -3636,9 +3648,17 @@ class Load extends Tasks {
 
         $this->nestContext();
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $id = array_search(T_REQUIRE, $finals);
+        unset($finals[$id]);
+        $id = array_search(T_REQUIRE_ONCE, $finals);
+        unset($finals[$id]);
+        $id = array_search(T_INCLUDE, $finals);
+        unset($finals[$id]);
+        $id = array_search(T_INCLUDE_ONCE, $finals);
+        unset($finals[$id]);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
-            
+
             if ($this->tokens[$this->id + 1][0] === T_DOT) {
                 $containsId = $this->popExpression();
                 $this->addLink($concatenationId, $containsId, 'CONCAT');
@@ -4003,6 +4023,8 @@ class Load extends Tasks {
         foreach($this->links as $label => $origins) {
             foreach($origins as $origin => $destinations) {
                 foreach($destinations as $destination => $links) {
+                    if (empty($origin)) { die("Unknown origin for Rel files\n"); }
+                    if (empty($destination)) { die("Unknown destination for Rel files\n"); }
                     $csv = $label.'.'.$origin.'.'.$destination;
                     $fileName = $this->path.'/rels.g3.'.$csv.'.csv';
                     if (isset($extras[$csv])) {

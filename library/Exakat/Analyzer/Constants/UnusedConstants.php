@@ -32,7 +32,7 @@ class UnusedConstants extends Analyzer {
     }
     
     public function analyze() {
-        $constants = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Analyzer\\\\Constants\\\\ConstantUsage").out("ANALYZED").values("code").unique()');
+        $constants = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Constants/ConstantUsage").out("ANALYZED").values("code").unique()');
 
         // Const from a define (case insensitive)
         $this->atomFunctionIs('\define')
@@ -65,7 +65,7 @@ class UnusedConstants extends Analyzer {
              ->noDelimiterIsNot($constantsLC);
         $this->prepareQuery();
 
-        $constConstants = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Analyzer\\\\Constants\\\\ConstantUsage").out("ANALYZED").values("fullnspath").unique()');
+        $constConstants = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Constants/ConstantUsage").out("ANALYZED").values("fullnspath").unique()');
         // Const from a const
         $this->atomIs('Const')
              ->hasNoClassInterface()

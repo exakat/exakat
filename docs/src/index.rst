@@ -15,9 +15,11 @@ Contents:
    Features
    Installation
    Example
+   Project
    Commands
    Recipes
    Rules
+   Reports
    Configuration
    Glossary
 

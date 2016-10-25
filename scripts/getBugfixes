@@ -28,7 +28,7 @@ if (file_exists('NEWS.txt')) {
 
 print "found ".strlen($changelog)." changelog\n";
 
-$exts = array('php_functions', 'session', 'pgsql', 'filter');
+$exts = array('php_functions', 'session', 'pgsql', 'filter', 'openssl', 'exif', 'mbstring', 'gmp', 'xml');
 $functions = [];
 foreach($exts as $ext) {
     $sf = parse_ini_file('data/'.$ext.'.ini');
@@ -103,6 +103,9 @@ $processed = 0;
 preg_match_all("/- ([^:]+):\s*(  \. .*?)\n\n/s", $text, $sections, PREG_SET_ORDER);
 foreach($sections as $section) {
     $lasection = $section[1];
+    if (!in_array(strtolower($lasection), $exts)) {
+        print "  Missing extension : $lasection\n";
+    }
     preg_match_all("/  \. (.*?)\n(?!    )/s", $section[2]."\n  . ", $features);
 //    print $lasection." ".count($features[0])."\n";
 //    print_r($features[0]);

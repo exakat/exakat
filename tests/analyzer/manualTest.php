@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($argv[1])) {
-    die($testFile." ./Test/Structures/Test.php [01]\n");
+    die("Usage : php manualTest.php ./Test/Structures/Test.php [01]\n");
 }
 
 $testFile = $argv[1];
@@ -50,7 +50,7 @@ shell_exec('bbedit '.$sourceFile);
 shell_exec('bbedit '.$expFile);
 shell_exec('bbedit ../../test.php');
 
-$analyzerFile = '../../library/Analyzer/'.substr($testFile, 7);
+$analyzerFile = '../../library/Exakat/Analyzer/'.substr($testFile, 7);
 shell_exec('bbedit '.$analyzerFile);
 
 

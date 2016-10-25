@@ -25,16 +25,19 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
-use Exakat\Reports\Reports2 as Report;
+use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Reports\Reports as Report;
 
 class Report2 extends Tasks {
     public function run(Config $config) {
         if ($config->project == "default") {
-            die("This command requires a project (option -p).\nAborting\n");
+            throw new ProjectNeeded();
         }
+        
+        $reportClass = '\\Exakat\\Reports\\'.$config->format;
 
-        if (!class_exists('\\Exakat\\Reports\\'.$config->format)) {
-            die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', Reports::FORMATS)."\nAborting\n");
+        if (!class_exists($reportClass)) {
+            die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', Report::FORMATS)."\nAborting\n");
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
@@ -50,7 +53,7 @@ class Report2 extends Tasks {
         // line number => columnnumber => type, source, severity, fixable, message
 
         $dumpFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
-        
+
         $max = 20;
         while (!file_exists($dumpFile)) {
             display("$config->project/dump.sqlite doesn't exist yet ($max). Waiting\n");
@@ -92,8 +95,7 @@ class Report2 extends Tasks {
         
         // Choose format from options
 
-        $format = '\Exakat\Reports\\'.$config->format;
-        $report = new $format();
+        $report = new $reportClass();
         if ($config->file == 'stdout') {
             echo $report->generate( $config->projects_root.'/projects/'.$config->project);
         } else {

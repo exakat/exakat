@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
+use Exakat\Exceptions\ProjectNeeded;
 
 class Project extends Tasks {
     private $project_dir = '.';
@@ -49,8 +50,8 @@ class Project extends Tasks {
 
         $this->project_dir = $config->projects_root.'/projects/'.$project;
 
-        if ($config->project === 'default') {
-            die("Usage : {$config->php} {$config->executable} project -p [Project name]\n");
+        if ($config->project == "default") {
+            throw new ProjectNeeded();
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project)) {

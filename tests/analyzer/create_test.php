@@ -19,8 +19,8 @@
         print "Dropping extension .php from the test name. Now using '$test'\n";
     }
     
-    if (!file_exists(dirname(dirname(__DIR__)).'/library/Analyzer/'.$dir)) {
-        $groups = array_map('basename', glob(dirname(dirname(__DIR__)).'/library/Analyzer/*' , GLOB_ONLYDIR));
+    if (!file_exists(dirname(dirname(__DIR__)).'/library/Exakat/Analyzer/'.$dir)) {
+        $groups = array_map('basename', glob(dirname(dirname(__DIR__)).'/library/Exakat/Analyzer/*' , GLOB_ONLYDIR));
         $closest = closest_string($dir, $groups);
         print "No such analyzer group '$dir'. Did you mean '$closest' ? \nChoose among : ".join(', ', $groups);
         
@@ -28,9 +28,9 @@
         die();
     }
 
-    if (!file_exists(dirname(dirname(__DIR__)).'/library/Analyzer/'.$dir.'/'.$test.'.php')) {
+    if (!file_exists(dirname(dirname(__DIR__)).'/library/Exakat/Analyzer/'.$dir.'/'.$test.'.php')) {
         $groups = array_map( function ($name) { return substr(basename($name), 0, -4); }, 
-                             glob(dirname(dirname(__DIR__)).'/library/Analyzer/'.$dir.'/*'));
+                             glob(dirname(dirname(__DIR__)).'/library/Exakat/Analyzer/'.$dir.'/*'));
         $closest = closest_string($dir, $groups);
         print "No such analyzer '{$dir}/$test'. Did you mean '$closest' ? \nChoose among : ".join(', ', $groups);
         
@@ -102,6 +102,7 @@
     function closest_string($string, $array) {
         $shortest = -1;
 
+        $closest = '';
         foreach ($array as $a) {
             $lev = levenshtein($string, $a);
 

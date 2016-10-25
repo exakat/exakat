@@ -23,18 +23,25 @@
 
 namespace Exakat\Tasks;
 
+use \Exakat\Config;
+
 class Jobqueue extends Tasks {
     private $config   = null;
     private $pipefile = '/tmp/onepageQueue';
+    private $jobQueueLog = null;
     
     public function __destruct() {
-        $this->log->log('Closed jobQueue : '.time()."\n");
+        $this->log->log('Closed jobQueue');
         
         unlink($this->pipefile);
+        fclose($this->jobQueueLog);
     }
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
+        
+        $this->jobQueueLog = fopen($config->projects_root.'/projects/log/jobqueue.log', 'a');
+        $this->log('Open Job Queue '.date('r')."\n");
         
         $this->log->log('Started jobQueue : '.time()."\n");
 
@@ -84,32 +91,42 @@ class Jobqueue extends Tasks {
                 switch($job) {
                     case 'quit' :
                         display( "Received quit command. Bye\n");
+                        $this->log('Quit command');
                         $this->log->log('Quit jobQueue : '.time()."\n");
                         die();
 
-                    default:
-                        if (file_exists($this->config->projects_root.'/in/'.$job.'.php')) {
-                            display( 'processing onepage job ' . $job . PHP_EOL);
-                            $this->process($job);
-                        } elseif (file_exists($this->config->projects_root.'/projects/'.$job)) {
-                            display( 'processing project job ' . $job . PHP_EOL);
-                            $b = microtime(true);
-                            shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
-                            $e = microtime(true);
-                            display( 'processing project job ' . $job . ' done ('.number_format(($e -$b), 2) . ' s)'. PHP_EOL);
-                        }
+                    case 'ping' :
+                        print 'pong'.PHP_EOL;
+                        break;
+                        
+                    case file_exists($this->config->projects_root.'/projects/'.$job) : 
+                        display( 'processing project job ' . $job . PHP_EOL);
+                        $this->log('Start job : '.$job);
+                        $b = microtime(true);
+                        shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
+                        $e = microtime(true);
+                        $this->log('End job : '.$job.'('.number_format(($e -$b), 2) . ' s)');
+                        display( 'processing project job ' . $job . ' done ('.number_format(($e -$b), 2) . ' s)'. PHP_EOL);
+                        break;
+
+                    case file_exists($this->config->projects_root.'/in/'.$job.'.php') :
+                        display( 'processing onepage job ' . $job . PHP_EOL);
+                        $this->process($job);
+                        
+                    default : 
+                    
                     }
                     
-                    next($queue);
-                    unset($job, $queue[$jobkey]);
-                } else {
+                next($queue);
+                unset($job, $queue[$jobkey]);
+            } else {
                 display( 'no jobs to do - waiting...'. PHP_EOL);
                 stream_set_blocking($pipe, true);
             }
         }
     }
 
-    private function process($job) {
+  private function process($job) {
         $this->log->log('Started : ' . $job.' '.time()."\n");
 
         // This has already been processed
@@ -136,29 +153,9 @@ class Jobqueue extends Tasks {
 
         return true;
     }
-
-    private function processProject($job) {
-        $this->log->log('Started Project : ' . $job.' '.time()."\n");
-
-        // This has already been processed
-        if (file_exists($this->config->projects_root.'/projects/'.$job.'/report')) {
-            display( "$job has already a report (/projects/$job/report). Remove it first. Aborting\n");
-            return;
-        }
-
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job, 'progress' => 0]));
-        shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
-
-        // cleaning
-        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
-        $progress->end = time();
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
-
-        $this->log->log('Finished Project : ' . $job.' '.time()."\n");
-
-        shell_exec($this->config->php.' '.$this->config->executable.' cleandb');
-
-        return true;
+    
+    private function log($message) {
+        fwrite($this->jobQueueLog, date('r')."\t".$message."\n");
     }
 }
 

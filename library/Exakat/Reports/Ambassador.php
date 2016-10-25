@@ -23,6 +23,7 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Docs;
 use Exakat\Datastore;
 use Exakat\Exakat;
 use Exakat\Phpexec;
@@ -30,11 +31,16 @@ use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
 
-    protected $dump = null; // Dump.sqlite
-    protected $analyzers = array(); // cache for analyzers [Title] = object
-    protected $projectPath = null;
-    protected $finalName = null;
-    private $tmpName = '';
+    protected $dump            = null; // Dump.sqlite
+    protected $analyzers       = array(); // cache for analyzers [Title] = object
+    protected $projectPath     = null;
+    protected $finalName       = null;
+    private $tmpName           = '';
+    
+    private $docs              = null;
+    private $timesToFix        = null;
+    private $themesForAnalyzer = null;
+    private $severities        = null;
 
     private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                   'CompatibilityPHP70', 'CompatibilityPHP71',
@@ -48,6 +54,10 @@ class Ambassador extends Reports {
      */
     public function __construct() {
         parent::__construct();
+        $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
+        $this->timesToFix        = $this->docs->getTimesToFix();
+        $this->themesForAnalyzer = $this->docs->getThemesForAnalyzer();
+        $this->severities        = $this->docs->getSeverities();
     }
 
     /**
@@ -105,10 +115,19 @@ class Ambassador extends Reports {
         $this->generateDashboard();
         $this->generateFiles();
         $this->generateAnalyzers();
+
         $this->generateIssues();
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
+        $files = ['base', 'index', 'credits'];
+        foreach($files as $file) {
+            $baseHTML = file_get_contents($this->tmpName . '/datas/'.$file.'.html');
+            $baseHTML = $this->injectBloc($baseHTML, "PROJECT", $this->config->project);
+            $baseHTML = $this->injectBloc($baseHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
+            file_put_contents($this->tmpName . '/datas/'.$file.'.html', $baseHTML);
+        }
+        
         $this->cleanFolder();
     }
 
@@ -247,11 +266,11 @@ class Ambassador extends Reports {
         
         // Analyzer Overview
         $analyzerOverview = $this->getAnalyzerOverview();
-        $finalHTML = str_replace("SCRIPTDATAANALYZERLIST", $analyzerOverview['scriptDataAnalyzer'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERMAJOR", $analyzerOverview['scriptDataAnalyzerMajor'], $finalHTML);
+        $finalHTML = str_replace("SCRIPTDATAANALYZERLIST",     $analyzerOverview['scriptDataAnalyzer'], $finalHTML);
+        $finalHTML = str_replace("SCRIPTDATAANALYZERMAJOR",    $analyzerOverview['scriptDataAnalyzerMajor'], $finalHTML);
         $finalHTML = str_replace("SCRIPTDATAANALYZERCRITICAL", $analyzerOverview['scriptDataAnalyzerCritical'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERNONE", $analyzerOverview['scriptDataAnalyzerNone'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERMINOR", $analyzerOverview['scriptDataAnalyzerMinor'], $finalHTML);
+        $finalHTML = str_replace("SCRIPTDATAANALYZERNONE",     $analyzerOverview['scriptDataAnalyzerNone'], $finalHTML);
+        $finalHTML = str_replace("SCRIPTDATAANALYZERMINOR",    $analyzerOverview['scriptDataAnalyzerMinor'], $finalHTML);
 
         file_put_contents($this->tmpName . '/datas/index.html', $finalHTML);
     }
@@ -266,23 +285,22 @@ class Ambassador extends Reports {
 
         $datastore = new Datastore($this->config);
         $info = array(
-            'Number of PHP files' => $datastore->getHash('files'),
-            'Number of lines of code' => $datastore->getHash('loc'),
+            'Number of PHP files'                   => $datastore->getHash('files'),
+            'Number of lines of code'               => $datastore->getHash('loc'),
             'Number of lines of code with comments' => $datastore->getHash('locTotal'),
             'PHP used' => $php->getActualVersion() //.' (version '.$this->config->phpversion.' configured)'
         );
 
         // fichier
-        $totalFileAnalysed = $this->getTotalAnalysedFile(true);
-        $totalFile = $this->getTotalAnalysedFile();
-        $totalFileSansError = $totalFile['totalanalysedfile'] - $totalFileAnalysed['totalanalysedfile'];
-        $porcentFile = ($totalFileSansError / $totalFile['totalanalysedfile']) * 100;
+        $totalFileAnalysed = $this->getTotalAnalysedFile();
+        $totalFile = $datastore->getHash('php');
+        $totalFileSansError = $totalFile - $totalFileAnalysed;
+        $porcentFile = ($totalFileSansError / $totalFile) * 100;
 
         // analyzer
-        $totalAnalyzerUsed = $this->getTotalAnalyzer(true);
-        $totalAnalyzer = $this->getTotalAnalyzer();
-        $totaalAnalyzerSansError = $totalAnalyzer['totalanalyzer'] - $totalAnalyzerUsed['totalanalyzer'];
-        $pourcentAnalyzer = ($totaalAnalyzerSansError / $totalAnalyzer['totalanalyzer']) * 100;
+        list($totalAnalyzerUsed, $totalAnalyzer) = $this->getTotalAnalyzer();
+        $totaalAnalyzerSansError = $totalAnalyzer - $totalAnalyzerUsed;
+        $pourcentAnalyzer = ($totaalAnalyzerSansError / $totalAnalyzer) * 100;
 
         $html = '<div class="box">
                     <div class="box-header with-border">
@@ -407,21 +425,11 @@ SQL;
      * Liste fichier analysé
      *
      */
-    private function getTotalAnalysedFile($issues = false) {
-        // sous requete
-        $sQuery = "SELECT r.*, rc.* from results as r
-                    JOIN resultsCounts as rc on  rc.analyzer = r.analyzer";
-        if ($issues) {
-            $sQuery .= " WHERE rc.count > 0";
-        }
-        $sQuery .= " GROUP BY file";
+    private function getTotalAnalysedFile() {
+        $query = "SELECT count(*) FROM results GROUP BY file";
+        $result = $this->sqlite->query($query);
 
-        $query = "SELECT count(*) AS totalanalysedfile "
-                . "FROM (" . $sQuery . ")";
-        $stmt = $this->sqlite->prepare($query);
-        $result = $stmt->execute();
-
-        return $result->fetchArray();
+        return $result->fetchArray()[0];
     }
 
     /**
@@ -430,14 +438,14 @@ SQL;
      * @param type $issues
      */
     private function getTotalAnalyzer($issues = false) {
-        $query = "SELECT count(*) AS totalanalyzer FROM resultsCounts ";
-        if ($issues) {
-            $query .= " WHERE count > 0";
-        }
+        $query = "SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
+            FROM resultsCounts AS rc
+            WHERE rc.count >= 0";
+
         $stmt = $this->sqlite->prepare($query);
         $result = $stmt->execute();
 
-        return $result->fetchArray();
+        return $result->fetchArray(\SQLITE3_NUM);
     }
 
     /**
@@ -451,20 +459,18 @@ SQL;
 
         foreach ($analysers as $analyser) {
             $analyserHTML.= "<tr>";
-//            $analyserHTML.='<td><a href="#" title="' . $analyser["Label"] . '">' . $analyser["Label"] . '</a></td>
-            $analyserHTML.='<td>' . $analyser["Label"] . '</td>
-                        <td>' . $analyser["Type"] . '</td>
-                        <td>' . $analyser["Receipt"] . '</td>
-                        <td>' . $analyser["Issues"] . '</td>
-                        <td>' . $analyser["Files"] . '</td>
-                        <td>' . $analyser["Severity"] . '</td>';
+            $analyserHTML.='<td>' . $analyser["label"] . '</td>
+                        <td>' . $analyser["recipes"] . '</td>
+                        <td>' . $analyser["issues"] . '</td>
+                        <td>' . $analyser["files"] . '</td>
+                        <td>' . $analyser["severity"] . '</td>';
             $analyserHTML.= "</tr>";
         }
 
         $finalHTML = $this->injectBloc($baseHTML, "BLOC-ANALYZERS", $analyserHTML);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/datatables.js"></script>');
 
-        file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML);
+        print file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML)." in analyzers\n";
     }
 
     /**
@@ -475,27 +481,25 @@ SQL;
     protected function getAnalyzersResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
-        
+
         $result = $this->sqlite->query(<<<SQL
-        SELECT analyzer, count(*) AS Issues, severity AS Severity FROM results
+        SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity FROM results
         WHERE analyzer IN ($list)
         GROUP BY analyzer
         HAVING Issues > 0
 SQL
         );
 
-        $data = array();
+        $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
-            $row['Files'] = $this->getCountFileByAnalyzers($row['analyzer']);
-            $row['Label'] = $analyzer->getDescription()->getName();
-            $row['Receipt'] = 'B'; //implode(', ', $analyzer->getThemeAnalyzers($this->config->thema));
-            $row['Type'] = 'null';
+            $row['label'] = $analyzer->getDescription()->getName();
+            $row['recipes' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
-            $data[] = $row;
+            $return[] = $row;
         }
 
-        return $data;
+        return $return;
     }
 
     /**
@@ -527,12 +531,10 @@ SQL;
 
         foreach ($files as $file) {
             $filesHTML.= "<tr>";
-//            $filesHTML.='<td><a href="#" title="' . $file["Filename"] . '">' . $file["Filename"] . '</a></td>
-            $filesHTML.='<td>' . $file["Filename"] . '</td>
-                        <td>' . $file["LoC"] . '</td>
-                        <td>' . $file["Issues"] . '</td>
-                        <td>' . $file["Analysers"] . '</td>
-                        <td>' . $file["Duplication"] . '</td>';
+            $filesHTML.='<td>' . $file["file"] . '</td>
+                        <td>' . $file["loc"] . '</td>
+                        <td>' . $file["issues"] . '</td>
+                        <td>' . $file["analyzers"] . '</td>';
             $filesHTML.= "</tr>";
         }
 
@@ -551,20 +553,16 @@ SQL;
         $list = '"'.join('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
-SELECT file AS Filename, line AS LoC, count(*) AS Issues FROM results
-        WHERE analyzer IN ($list)
+SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
         GROUP BY file
 SQL
         );
-        $data = array();
+        $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $row['Analysers'] = $this->getCountAnalyzersByFile($row['Filename']);
-            $row['Duplication'] = $this->getDuplicationFileByAnalyzer($row['Filename']);
-
-            $data[] = $row;
+            $return[$row['file']] = $row;
         }
 
-        return $data;
+        return $return;
     }
 
     /**
@@ -576,24 +574,6 @@ SQL
         $query = <<<'SQL'
                 SELECT count(*)  AS number
                 FROM (SELECT DISTINCT analyzer FROM results WHERE file = :file)
-SQL;
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':file', $file, SQLITE3_TEXT);
-        $result = $stmt->execute();
-        $row = $result->fetchArray(\SQLITE3_ASSOC);
-
-        return $row['number'];
-    }
-
-    /**
-     * Nombre duplication analyzer par fichier
-     *
-     * @param type $file
-     */
-    private function getDuplicationFileByAnalyzer($file) {
-        $query = <<<'SQL'
-                SELECT analyzer, count(*)  AS number FROM results WHERE file = :file
-                    GROUP BY analyzer
 SQL;
         $stmt = $this->sqlite->prepare($query);
         $stmt->bindValue(':file', $file, SQLITE3_TEXT);
@@ -654,29 +634,24 @@ SQL;
      */
     private function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
-        $xAxis = '';
-        $dataMajor = '';
-        $dataCritical = '';
-        $dataNone = '';
-        $dataMinor = '';
+        $xAxis        = [];
+        $dataMajor    = [];
+        $dataCritical = [];
+        $dataNone     = [];
+        $dataMinor    = [];
+        $severities = $this->getSeveritiesNumberBy('file');
         foreach ($data as $value) {
-            $xAxis .= ($xAxis) ? ', ' . "'" . $value['file'] . "'" : "'" . $value['file'] . "'";
-            $severity = $this->getSeverityNumberByFile($value['file']);
-            foreach ($severity as $severityValue) {
-                if ($severityValue['severity'] == 'Major') {
-                    $dataMajor .= ($dataMajor != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'Critical') {
-                    $dataCritical .= ($dataCritical != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'None') {
-                    $dataNone .= ($dataNone != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'Minor') {
-                    $dataMinor .= ($dataMinor != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-            }
+            $xAxis[] = "'" . $value['file'] . "'";
+            $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
+            $dataMajor[]    = empty($severities[$value['file']]['Major'])    ? 0 : $severities[$value['file']]['Major'];
+            $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
+            $dataNone[]     = empty($severities[$value['file']]['None'])     ? 0 : $severities[$value['file']]['None'];
         }
+        $xAxis        = join(', ', $xAxis);
+        $dataCritical = join(', ', $dataCritical);
+        $dataMajor    = join(', ', $dataMajor);
+        $dataMinor    = join(', ', $dataMinor);
+        $dataNone     = join(', ', $dataNone);
 
         return array(
             'scriptDataFiles' => $xAxis,
@@ -751,39 +726,29 @@ SQL;
      * Nombre severity by file en Dashboard
      *
      */
-    private function getSeverityNumberByFile($file) {
+    private function getSeveritiesNumberBy($type = 'file') {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
         $query = <<<SQL
-                SELECT severity, count(*) AS number
-                    FROM results
-                    WHERE analyzer IN ($list) AND file = :file
-                    GROUP BY severity
-                    ORDER BY number DESC
+SELECT $type, severity, count(*) AS count
+    FROM results
+    WHERE analyzer IN ($list)
+    GROUP BY $type, severity
 SQL;
 
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':file', $file, SQLITE3_TEXT);
-        $result = $stmt->execute();
+        $stmt = $this->sqlite->query($query);
 
-        $data = array();
-        $severityType = ['Major', 'Critical', 'None', 'Minor'];
-        $severityExiste = array();
-        $count = 0;
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $count ++;
-            $severityExiste[] = $row['severity'];
-            $data[] = array('severity' => $row['severity'], 'value' => $row['number']);
-        }
-        if (count($severityType) > $count) {
-            $datasup = array_diff($severityType, $severityExiste);
-            foreach ($datasup as $sup) {
-                $data[] = array('severity' => $sup, 'value' => 0);
+        $return = array();
+        while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
+            if ( !isset($return[$row[$type]]) ) {
+                $return[$row[$type]] = [$row['severity'] => $row['count']];
+            } else {
+                $return[$row[$type]][$row['severity']] = $row['count'];
             }
         }
 
-        return $data;
+        return $return;
     }
     
     /**
@@ -792,74 +757,33 @@ SQL;
      */
     private function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
-        $xAxis = '';
-        $dataMajor = '';
-        $dataCritical = '';
-        $dataNone = '';
-        $dataMinor = '';
+        $xAxis        = [];
+        $dataMajor    = [];
+        $dataCritical = [];
+        $dataNone     = [];
+        $dataMinor    = [];
 
+        $severities = $this->getSeveritiesNumberBy('analyzer');
         foreach ($data as $value) {
-            $xAxis .= ($xAxis) ? ', ' . "'" . $value['analyzer'] . "'" : "'" . $value['analyzer'] . "'";
-            $severity = $this->getSeverityNumberByAnalyzer($value['analyzer']);
-            foreach ($severity as $severityValue) {
-                if ($severityValue['severity'] == 'Major') {
-                    $dataMajor .= ($dataMajor != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'Critical') {
-                    $dataCritical .= ($dataCritical != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'None') {
-                    $dataNone .= ($dataNone != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-                if ($severityValue['severity'] == 'Minor') {
-                    $dataMinor .= ($dataMinor != '') ? ', ' . $severityValue['value'] : $severityValue['value'];
-                }
-            }
+            $xAxis[] = "'" . $value['analyzer'] . "'";
+            $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
+            $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
+            $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
+            $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['None'];
         }
+        $xAxis = join(', ', $xAxis);
+        $dataCritical = join(', ', $dataCritical);
+        $dataMajor = join(', ', $dataMajor);
+        $dataMinor = join(', ', $dataMinor);
+        $dataNone = join(', ', $dataNone);
 
         return array(
-            'scriptDataAnalyzer' => $xAxis,
-            'scriptDataAnalyzerMajor' => $dataMajor,
+            'scriptDataAnalyzer'         => $xAxis,
+            'scriptDataAnalyzerMajor'    => $dataMajor,
             'scriptDataAnalyzerCritical' => $dataCritical,
-            'scriptDataAnalyzerNone' => $dataNone,
-            'scriptDataAnalyzerMinor' => $dataMinor
+            'scriptDataAnalyzerNone'     => $dataNone,
+            'scriptDataAnalyzerMinor'    => $dataMinor
         );
-    }
-    
-    /**
-     * Nombre severity by analyzer en Dashboard
-     *
-     */
-    private function getSeverityNumberByAnalyzer($analyzer) {
-        $query = <<<'SQL'
-                SELECT severity, count(*) AS number
-                    FROM results
-                    WHERE analyzer = :analyzer
-                    GROUP BY severity
-                    ORDER BY number DESC
-SQL;
-
-        $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':analyzer', $analyzer, SQLITE3_TEXT);
-        $result = $stmt->execute();
-
-        $data = array();
-        $severityType = ['Major', 'Critical', 'None', 'Minor'];
-        $severityExiste = array();
-        $count = 0;
-        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $count ++;
-            $severityExiste[] = $row['severity'];
-            $data[] = array('severity' => $row['severity'], 'value' => $row['number']);
-        }
-        if (count($severityType) > $count) {
-            $datasup = array_diff($severityType, $severityExiste);
-            foreach ($datasup as $sup) {
-                $data[] = array('severity' => $sup, 'value' => 0);
-            }
-        }
-
-        return $data;
     }
     
     /**
@@ -870,6 +794,8 @@ SQL;
         $baseHTML = file_get_contents($this->tmpName . '/datas/issues.html');
         $issues = $this->getIssuesFaceted();
         $finalHTML = str_replace("SCRIPT_DATA_FACETED", implode(",", $issues), $baseHTML);
+        $finalHTML = $this->injectBloc($finalHTML, "PROJECT", $this->config->project);
+        $finalHTML = $this->injectBloc($finalHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
 
         file_put_contents($this->tmpName . '/datas/issues.html', $finalHTML);
     }
@@ -878,8 +804,7 @@ SQL;
      * List of Issues faceted
      * @return array
      */
-    public function getIssuesFaceted()
-    {
+    public function getIssuesFaceted() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 
@@ -895,7 +820,6 @@ SQL;
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $analyzer = Analyzer::getInstance($row['analyzer']);
             $item['analyzer'] =  $ini['name'];
             $item['analyzer_md5'] = md5($ini['name']);
             $item['file' ] =  $row['file'];
@@ -905,9 +829,9 @@ SQL;
             $item['code_plus'] = htmlentities($row['fullcode'], ENT_COMPAT | ENT_HTML401 , 'UTF-8');
             $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
-            $item['severity'] = "<i class=\"fa fa-warning " . $this->getClassByType($analyzer->getSeverity()) . "\"></i>";
-            $item['complexity'] = "<i class=\"fa fa-cog " . $this->getClassByType($analyzer->getTimeToFix()) . "\"></i>";
-            $item['receipt' ] =  'A';//$analyzer->getReceipt($this->config->thema);
+            $item['severity'] = "<i class=\"fa fa-warning " . $this->severities[$row['analyzer']] . "\"></i>";
+            $item['complexity'] = "<i class=\"fa fa-cog " . $this->timesToFix[$row['analyzer']] . "\"></i>";
+            $item['recipe' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
             $item['analyzer_help' ] =  explode("\n", $ini['description'])[0];
 
             $items[] = json_encode($item);

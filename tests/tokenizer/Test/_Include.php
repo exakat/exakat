@@ -7,7 +7,7 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class _Include extends Tokenizer {
-    /* 22 methods */
+    /* 23 methods */
 
     public function test_Include01()  { $this->generic_test('_Include.01'); }
     public function test_Include02()  { $this->generic_test('_Include.02'); }
@@ -31,5 +31,6 @@ class _Include extends Tokenizer {
     public function test_Include20()  { $this->generic_test('_Include.20'); }
     public function test_Include21()  { $this->generic_test('_Include.21'); }
     public function test_Include22()  { $this->generic_test('_Include.22'); }
+    public function test_Include23()  { $this->generic_test('_Include.23'); }
 }
 ?>

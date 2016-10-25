@@ -57,7 +57,7 @@ function run($test, $number) {
     $ini = parse_ini_file('../../projects/test/config.ini');
     $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
 
-    include_once('../../library/Phpexec.php');
+    include_once('../../library/Exakat/Phpexec.php');
     include_once('../../library/Exakat/Config.php');
     $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
         
