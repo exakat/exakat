@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Tokenizer\Token;
 
 class Type extends Analyzer {
     
@@ -31,6 +32,42 @@ class Type extends Analyzer {
 
     public function analyze() {
         $this->atomIs($this->type);
+        $this->prepareQuery();
+    }
+
+    public function getDump() {
+        $linksDown = Token::linksAsList();
+        
+        $query = <<<GREMLIN
+g.V().hasLabel("{$this->type}")
+.sideEffect{ line = it.get().value('line');
+             fullcode = it.get().value('fullcode');
+             file='None'; 
+             theFunction = 'None'; 
+             theClass='None'; 
+             theNamespace='None'; 
+             }
+.sideEffect{ line = it.get().value('line'); }
+.until( hasLabel('File') ).repeat( 
+    __.in($linksDown)
+      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
+       )
+.sideEffect{  file = it.get().value('fullcode');}
+
+.map{ ['fullcode':fullcode, 'file':file, 'line':line, 'namespace':theNamespace, 'class':theClass, 'function':theFunction ];}
+
+GREMLIN;
+
+        $res = $this->gremlin->query($query);
+        if (!isset($res->results)) {
+            $this->log->log( "Couldn't run the query and get a result : \n" .
+                 "Query : " . $query . " \n".
+                 print_r($res, true));
+            return ;
+        }
+
+        return $res->results;
     }
 }
 

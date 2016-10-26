@@ -26,9 +26,9 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\Type;
 
-class Real extends Type {
+class NullValue extends Type {
     public function __construct($gremlin) {
-        $this->type = 'Real';
+        $this->type = 'Null';
         parent::__construct($gremlin);
     }
 
