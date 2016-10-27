@@ -71,7 +71,7 @@ class Doctor extends Tasks {
         if (preg_match('/command not found/is', $res)) {
             $stats['java']['installed'] = 'No';
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
-        } elseif (preg_match('/java version "(.*)"/is', $res, $r)) {
+        } elseif (preg_match('/.* version "(.*)"/is', $res, $r)) {
             $lines = explode("\n", $res);
             $line2 = $lines[1];
             $stats['java']['installed'] = 'Yes';
