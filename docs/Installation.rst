@@ -234,7 +234,7 @@ Neo4j 3.0.0 won't work yet (The gremlin plug-in hasn't been tested successfully)
     
     //This will set the environnement variable
     
-    export NEO4J_HOME=\`pwd\`
+    export NEO4J_HOME=`pwd`
 
 
 Register the Gremlin plugin in the `$NEO4J_HOME/conf/neo4j-server.properties` file. To do so, add this line:
@@ -264,9 +264,6 @@ Make the following changes in the following files :
     + change the tinkerpop-version tag from 3.1.0-incubating to 3.2.0-incubating
 
 ::
-
-    git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin.git gremlin-plugin
-    cd gremlin-plugin
 
 
 Then, finish the compilation : 
