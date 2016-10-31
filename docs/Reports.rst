@@ -10,6 +10,7 @@ There are several reports that may be extracted from Exakat :
 * XML
 * Ambassador
 * Devoops
+* Uml
 * Clustergrammer
 
    `php exakat.phar report -p <project> -format <format> -file <filename>`
@@ -135,7 +136,14 @@ Ambassador includes :
     + List of processed files
     + List of dependant libraries
 
+Uml
+---
+
+This report produces a dot file with a representation of the classes used in the repository. 
+
+.dot files are best seen with [graphviz](http://www.graphviz.org/).
+
 Clustergrammer
 --------------
 
-Clustergrammer is a visualisation tool that may be found online. After generation of this report, a TEXT file is available in the project directory. Upload it on http://amp.pharm.mssm.edu/clustergrammer/ to visualize it. 
+Clustergrammer is a visualisation tool that may be found online. After generation of this report, a TEXT file is available in the project directory. Upload it on [http://amp.pharm.mssm.edu/clustergrammer/](http://amp.pharm.mssm.edu/clustergrammer/) to visualize it. 

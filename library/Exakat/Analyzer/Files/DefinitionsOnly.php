@@ -55,7 +55,7 @@ where(
       .out("ELEMENT")
       .where( __.hasLabel($definitionsList).count().is(eq(0)) )
       .where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )
-      .where( __.in("ANALYZED").not(has("analyzer", "Structures/NoDirectAccess") ).count().is(eq(0)) )
+      .where( __.in("ANALYZED").has("analyzer", "Structures/NoDirectAccess").count().is(eq(0)) )
       .where( __.hasLabel("Functioncall").filter{ it.get().value("fullnspath") in [$definitionsFunctionsList] }.count().is(eq(0)) )
       .count().is(eq(0))
 )

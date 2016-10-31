@@ -50,8 +50,7 @@ class OneLineTwoInstructions extends Analyzer {
              ->nextSibling()
              ->atomIsNot('InlineHtml')
              ->samePropertyAs('line', 'line_number')
-             ->back('report')
-             ;
+             ->back('report');
         $this->prepareQuery();
     }
 }

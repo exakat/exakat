@@ -4,6 +4,8 @@ abstract class x {
     private static function privatem() {}
     public static function publicm() {}
     protected static function protectedm() {}
+
+    abstract function nonPPPabstract() {}
 }
 
 function normalFunction() {}

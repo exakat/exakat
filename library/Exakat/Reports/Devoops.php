@@ -1276,6 +1276,8 @@ SQL
 
                     'Constants' => array(
                             'Constants'           => 'Constants/ConstantUsage',
+                            'Boolean'             => 'Type/BooleanValue',
+                            'Null'                => 'Type/NullValue',
                             'Variable Constant'   => 'Constants/VariableConstant',
                             'PHP constants'       => 'Constants/PhpConstantUsage',
                             'PHP Magic constants' => 'Constants/MagicConstantUsage',
@@ -1283,16 +1285,16 @@ SQL
                     ),
 
                     'Numbers' => array(
-                            'Integers'    => 'Type/Integer',
-                            'Hexadecimal' => 'Type/Hexadecimal',
-                            'Octal'       => 'Type/Octal',
-                            'Binary'      => 'Type/Binary',
-                            'Real'        => 'Type/Real',
+                            'Integers'            => 'Type/Integer',
+                            'Hexadecimal'         => 'Type/Hexadecimal',
+                            'Octal'               => 'Type/Octal',
+                            'Binary'              => 'Type/Binary',
+                            'Real'                => 'Type/Real',
                     ),
 
                     'Strings' => array(
-                            'Heredoc'    => 'Type/Heredoc',
-                            'Nowdoc'     => 'Type/Nowdoc',
+                            'Heredoc'             => 'Type/Heredoc',
+                            'Nowdoc'              => 'Type/Nowdoc',
                      ),
                     
                     'Errors' => array(   
@@ -1510,7 +1512,6 @@ This is an overview of your application.
 
 TEXT
 , 'textLead');
-
         $return .= $this->formatTree($data, $css);
 
         return $return;

@@ -27,10 +27,12 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\Type;
 
 class Real extends Type {
+    public function __construct($gremlin) {
+        $this->type = 'Real';
+        parent::__construct($gremlin);
+    }
 
     public function analyze() {
-        $this->type = 'Real';
-
         parent::analyze();
     }
 }

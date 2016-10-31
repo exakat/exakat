@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 24 Oct 2016 16:41:46 +0000
-.. comment: Generation hash : 0cf40b1b48d007bd14a67f015447233cef92a9a8
+.. comment: Generation date : Mon, 31 Oct 2016 13:44:45 +0000
+.. comment: Generation hash : 0a59ccc395708a62713593d0968e254035e2befb
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 266 analysis
+Total : 269 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -122,6 +122,7 @@ Total : 266 analysis
 * :ref:`Don't Change Incomings <don't-change-incomings>`
 * :ref:`Double Assignation <double-assignation>`
 * :ref:`Double Instruction <double-instruction>`
+* :ref:`Drop Else After Return <drop-else-after-return>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Else If Versus Elseif <else-if-versus-elseif>`
 * :ref:`Empty Blocks <empty-blocks>`
@@ -167,6 +168,7 @@ Total : 266 analysis
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Malformed Octal <malformed-octal>`
+* :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
 * :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
 * :ref:`Multiple Class Declarations <multiple-class-declarations>`
 * :ref:`Multiple Constant Definition <multiple-constant-definition>`
@@ -294,6 +296,7 @@ Total : 266 analysis
 * :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use Object Api <use-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
+* :ref:`Use Positive Condition <use-positive-condition>`
 * :ref:`Use System Tmp <use-system-tmp>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`

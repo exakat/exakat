@@ -230,8 +230,6 @@ LICENCE;
         $this->taskExecStack()
              ->stopOnFail()
              ->exec('mv exakat.phar ../release/')
-             ->exec('cp docs/*.rst ../release/docs/')
-             ->exec('cp -r docs/images ../release/docs/')
              ->exec('cd ../release/; tar -zcvf exakat-'.Exakat::VERSION.'.tar.gz exakat.phar docs/*')
              ->run();
     }
@@ -792,40 +790,40 @@ SQL
     }
 
     public function checkReportFormat() {
-        $php = file_get_contents('library/Reports/Reports.php');
+        $php = file_get_contents('library/Exakat/Reports/Reports.php');
         preg_match('/    CONST FORMATS        = \[(.*?)\];/is', $php, $r);
         
         $formats = explode(',', $r[1]);
         $formats = array_map(function($x) { return trim($x, "' "); }, $formats);
         
-        $files = glob('./library/Reports/*');
+        $files = glob('./library/Exakat/Reports/*');
         $files = array_map(function($x) { return substr(basename($x), 0, -4);}, $files);
         $files = array_filter($files, function($x) { return $x !== 'Reports'; });
         sort($files);
         
         $missing = array_diff($files, $formats);
         if (count($missing) > 0) {
-            print count($missing).' format are missing in ./library/Reports/Reports.php : '.implode(', ', $missing)."\n";
+            print count($missing).' format are missing in ./library/Exakat/Reports/Reports.php : '.implode(', ', $missing)."\n";
             print "    CONST FORMATS = ['".implode("', '", $files)."'];\n";
         }
 
         $toomany = array_diff($formats, $files);
         if (count($toomany) > 0) {
-            print count($toomany).' format are too many in ./library/Reports/Reports.php : '.implode(', ', $toomany)."\n";
+            print count($toomany).' format are too many in ./library/Exakat/Reports/Reports.php : '.implode(', ', $toomany)."\n";
             print "    CONST FORMATS        = ['".implode("', '", $files)."'];\n";
         }
     }
     
     public function checkAppinfo() {
-        $php = file_get_contents('library/Report/Content/Appinfo.php');
+        $php = file_get_contents('library/Exakat/Report/Content/Appinfo.php');
         preg_match_all("#'([A-Z][a-z0-9]+?/[A-Z][a-zA-Z0-9]+?)'#s", $php, $r);
         foreach($r[1] as $class) {
             if ($class == 'Extensions/Extskeleton') {
                 continue;
             }
 
-            if (!file_exists("./library/Analyzer/$class.php")) {
-                print "./library/Analyzer/$class.php";
+            if (!file_exists("./library/Exakat/Analyzer/$class.php")) {
+                print "./library/Exakat/Analyzer/$class.php";
                 echo 'Appinfo is missing a class : ', $class, "\n";
             }
         }
@@ -852,10 +850,21 @@ SQL
 
         //methods.json
         $sqlite = new Sqlite3('data/methods.sqlite');
-        // function column must be lowercase
-        $sqlite->query('UPDATE bugfixes SET function=LOWER(function)');
-        unset($sqlite);
 
+        $res = $sqlite->query('SELECT name FROM methods WHERE name NOT IN ("flush", "key", "stat") GROUP BY lower(name) HAVING count(*) > 1');
+        $leftovers = array();
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            $leftovers[] = $row[0];
+        }
+        
+        if (!empty($leftovers)) {
+            print count($leftovers) . " PHP native functions are in double  ; ".implode(', ', $leftovers) . "\n";
+        } else {
+            // function column must be lowercase
+            $sqlite->query('UPDATE bugfixes SET function=LOWER(function)');
+            unset($sqlite);
+            print "All native functions are OK\n";
+        }
     }
 }
 

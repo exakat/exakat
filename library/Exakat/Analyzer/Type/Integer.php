@@ -27,10 +27,12 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\Type;
 
 class Integer extends Type {
+    public function __construct($gremlin) {
+        $this->type = 'Integer';
+        parent::__construct($gremlin);
+    }
 
     public function analyze() {
-        $this->type = 'Integer';
-
         parent::analyze();
     }
 }

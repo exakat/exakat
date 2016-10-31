@@ -23,7 +23,9 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
+use Exakat\Exceptions\NoSuchProject;
 use Exakat\Tokenizer\Token;
 
 class Dump extends Tasks {
@@ -32,9 +34,9 @@ class Dump extends Tasks {
     
     const WAITING_LOOP = 1000;
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
-            throw new \Exakat\Exceptions\NoSuchProject($config->project);
+            throw new NoSuchProject($config->project);
         }
         
         $sqliteFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
@@ -44,6 +46,7 @@ class Dump extends Tasks {
         }
         
         Analyzer::initDocs();
+        Analyzer::$gremlinStatic = $this->gremlin;
         
         $sqlite = new \Sqlite3($sqliteFile);
         $this->getAtomCounts($sqlite);
@@ -154,42 +157,12 @@ SQL;
         }
 
         $this->stmtResults->bindValue(':class', $class, \SQLITE3_TEXT);
-        $analyzerName = Analyzer::getName($class);
+        $analyzer = Analyzer::getInstance($class);
         
-        $linksDown = Token::linksAsList();
-        
-        $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", "{$analyzerName}").out('ANALYZED')
-.sideEffect{ line = it.get().value('line');
-             fullcode = it.get().value('fullcode');
-             file='None'; 
-             theFunction = 'None'; 
-             theClass='None'; 
-             theNamespace='None'; 
-             }
-.sideEffect{ line = it.get().value('line'); }
-.until( hasLabel('File') ).repeat( 
-    __.in($linksDown)
-      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
-      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
-       )
-.sideEffect{  file = it.get().value('fullcode');}
-
-.map{ ['fullcode':fullcode, 'file':file, 'line':line, 'namespace':theNamespace, 'class':theClass, 'function':theFunction ];}
-
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        if (!isset($res->results)) {
-            $this->log->log( "Couldn't run the query and get a result : \n" .
-                 "Query : " . $query . " \n".
-                 print_r($res, true));
-            return ;
-        }
-
-        $res = $res->results;
+        $res = $analyzer->getDump();
         
         $saved = 0;
-        $severity = Analyzer::$docs->getSeverity( Analyzer::getClass($class) );
+        $severity = $analyzer->getSeverity( );
 
         foreach($res as $result) {
             if (!is_object($result)) {

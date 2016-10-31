@@ -29,7 +29,6 @@ use Exakat\Tokenizer\Token;
 use Exakat\Exceptions\GremlinException;
 
 abstract class Analyzer {
-    protected $neo4j          = null;
     protected $code           = null;
 
     protected $description    = null;
@@ -91,12 +90,14 @@ abstract class Analyzer {
     
     static public $docs = null;
 
-    private $gremlin = null;
+    protected $gremlin = null;
     public static $gremlinStatic = null;
 
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
-        self::$gremlinStatic = $gremlin;
+        if (self::$gremlinStatic === null) {
+            self::$gremlinStatic = $gremlin;
+        }
         
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
@@ -179,6 +180,40 @@ abstract class Analyzer {
         } else {
             return false;
         }
+    }
+    
+    public function getDump() {
+        $linksDown = Token::linksAsList();
+        
+        $query = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALYZED')
+.sideEffect{ line = it.get().value('line');
+             fullcode = it.get().value('fullcode');
+             file='None'; 
+             theFunction = 'None'; 
+             theClass='None'; 
+             theNamespace='None'; 
+             }
+.sideEffect{ line = it.get().value('line'); }
+.until( hasLabel('File') ).repeat( 
+    __.in($linksDown)
+      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
+       )
+.sideEffect{  file = it.get().value('fullcode');}
+
+.map{ ['fullcode':fullcode, 'file':file, 'line':line, 'namespace':theNamespace, 'class':theClass, 'function':theFunction ];}
+
+GREMLIN;
+        $res = $this->gremlin->query($query);
+        if (!isset($res->results)) {
+            $this->log->log( "Couldn't run the query and get a result : \n" .
+                 "Query : " . $query . " \n".
+                 print_r($res, true));
+            return ;
+        }
+
+        return $res->results;
     }
     
     public static function getSuggestionClass($name) {
