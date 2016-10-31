@@ -1,11 +1,7 @@
 cd ../..
-php exakat init -p ut3 -R https://github.com/sculpin/sculpin.git -v
-php exakat project -p ut3 -v
+php exakat init -p ut_nlptools -R https://github.com/atrilla/nlptools.git -v
+php exakat project -p ut_nlptools -v
 
-# testing results
-php exakat analyze -p ut3 -P Variables/Variablenames -v
-php exakat results -p ut3 -P Variables/Variablenames -o
-
-php exakat remove -p ut3
+php exakat remove -p ut_nlptools
 cd -
 
