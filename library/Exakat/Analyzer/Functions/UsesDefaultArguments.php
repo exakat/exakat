@@ -35,16 +35,16 @@ class UsesDefaultArguments extends Analyzer {
         foreach($functions as $function) {
             if ($function['args_min'] == $function['args_max']) { continue; }
             if ($function['args_max'] == 100) { continue; }
-            for ($i = $function['args_min'] + 1; $i <= $function['args_max']; ++$i) {
-                $positions[$i - 1][] = '\\'.$function['name'];
-            }
+            // Only test if the last is missing. This is sufficient
+            $positions[$function['args_max'] - 1][] = '\\'.$function['name'];
         }
         
         foreach($positions as $position => $f) {
             $this->atomFunctionIs($f)
                  ->outIs('ARGUMENTS')
                  ->noChildWithRank('ARGUMENT', $position)
-                 ->back('first');
+                 ->back('first')
+                 ->analyzerIsNot('self');
             $this->prepareQuery();
         }
     }

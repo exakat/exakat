@@ -2,6 +2,7 @@
 
 $expected     = array('\\GETOPT(1)', 
                       '\\getopt( )', 
+                      '\\getopt(2, 3)',
                       'CRYpt(1)', 
                       'crypt( )');
 
