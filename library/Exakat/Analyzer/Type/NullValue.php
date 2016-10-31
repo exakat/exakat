@@ -34,6 +34,12 @@ class NullValue extends Type {
 
     public function analyze() {
         parent::analyze();
+        
+        $this->atomIs(array('Identifier', 'Nsname'))
+             ->hasNoIn('SUBNAME')
+             ->fullnspathIs('\\null')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
     }
 }
 
