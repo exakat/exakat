@@ -1,4 +1,4 @@
-Version 0.8.7 (Naked Demon, Coming up)
+Version 0.8.8 (Apricot Immortal, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 0.8.7 (Naked Demon, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.8.7 (Naked Demon, 2016-10-31)
++ Architecture
+    + Upgraded Boolean and Integer to report results without storing them in graph
++ Analyzer
+    + New analysis : modernizable empty() calls
+    + New analysis : recommend Positive conditions
+    + New analysis : drop else after return
+    + Upgraded analysis : unreacheable code handles if/then with returns.
+    + Added tests for Boolean and Null
+    + More not Hashes dict.
+    + Upgraded analysis : 1637 / 1650 test pass (99% pass). 
++ Tokenizer
+    + Fixed line number of <?= 
+    + Fixed token on arguments
 
 Version 0.8.6 (Fuyun Sou , 2016-10-24)
 + Architecture
