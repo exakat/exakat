@@ -1270,12 +1270,13 @@ class Load extends Tasks {
     }
     
     private function processOpenWithEcho() {
-        $current = $this->id;
-    
         // Processing ECHO
         $echoId = $this->processNextAsIdentifier();
-    
+        $current = $this->id;
+        
         $argumentsId = $this->processArguments([T_SEMICOLON, T_CLOSE_TAG, T_END]);
+//        print_r($this->atoms[$argumentsId]);die();
+    
         //processArguments goes too far, up to ;
         if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
             --$this->id;
@@ -1497,7 +1498,7 @@ class Load extends Tasks {
             $this->setAtom($argumentsId, ['code'     => $this->tokens[$current][1],
                                           'fullcode' => implode(', ', $fullcode),
                                           'line'     => $this->tokens[$current][2],
-                                          'token'    => $this->getToken($this->tokens[$current][0]),
+                                          'token'    => 'T_COMMA',
                                           'count'    => $rank + 1,
                                           'args_max' => $args_max,
                                           'args_min' => $args_min]);
