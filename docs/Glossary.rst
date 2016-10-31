@@ -91,6 +91,7 @@ Glossary
       + :ref:`Closure May Use $this <closure-may-use-$this>`
       + :ref:`Namespaces/HiddenUse <namespaces/hiddenuse>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+      + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `continue`
 
@@ -150,9 +151,11 @@ Glossary
       + :ref:`Empty Traits <empty-traits>`
       + :ref:`Empty Try Catch <empty-try-catch>`
       + :ref:`Empty With Expression <empty-with-expression>`
+      + :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`Random Without Try <random-without-try>`
       + :ref:`Results May Be Missing <results-may-be-missing>`
+      + :ref:`Use Positive Condition <use-positive-condition>`
       + :ref:`Useless Constructor <useless-constructor>`
       + :ref:`parse_str() Warning <parse\_str()-warning>`
 
@@ -190,6 +193,7 @@ Glossary
       + :ref:`No Direct Usage <no-direct-usage>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
       + :ref:`Should Use Constants <should-use-constants>`
+      + :ref:`Use Pathinfo <use-pathinfo>`
       + :ref:`Use System Tmp <use-system-tmp>`
       + :ref:`Use const <use-const>`
       + :ref:`include_once() Usage <include\_once()-usage>`
@@ -331,6 +335,7 @@ Glossary
 
       + :ref:`Make One Call <make-one-call>`
       + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+      + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
 
 + `R`
@@ -384,6 +389,7 @@ Glossary
 
       + :ref:`Simplify Regex <simplify-regex>`
       + :ref:`Strpos Comparison <strpos-comparison>`
+      + :ref:`Use Pathinfo <use-pathinfo>`
 
     + `switch()`
 

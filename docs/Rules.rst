@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 24 Oct 2016 16:41:46 +0000
-.. comment: Generation hash : 0cf40b1b48d007bd14a67f015447233cef92a9a8
+.. comment: Generation date : Mon, 31 Oct 2016 13:44:45 +0000
+.. comment: Generation hash : 0a59ccc395708a62713593d0968e254035e2befb
 
 
 .. _$http\_raw\_post\_data:
@@ -1878,6 +1878,54 @@ Twice the same call in a row. This is worth a check.
 
 
 
+.. _drop-else-after-return:
+
+Drop Else After Return
+######################
+
+
+Avoid else clause when the then clause returns, but not the else. 
+
+The else may simply be set in the main sequence of the function. 
+
+This is also true if else has a return, and then not : simply reverse the condition. 
+
+.. code-block:: php
+
+   <?php
+   
+   // drop the else
+   if ($a) {
+       return $a;
+   } else {
+       doSomething();
+   }
+   
+   // drop the then
+   if ($b) {
+       doSomething();
+   } else {
+       return $a;
+   }
+   
+   // return in else and then
+   if ($a3) {
+       return $a;
+   } else {
+       $b = doSomething();
+       return $b;
+   }
+   
+   ?>
+
++--------------+--------------------------------+
+| Command Line | Structures/DropElseAfterReturn |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
+
+
 .. _echo-or-print:
 
 Echo Or Print
@@ -1963,7 +2011,32 @@ Else If Versus Elseif
 #####################
 
 
-The keyword elseif SHOULD be used instead of else if so that all control keywords look like single words. (Directly quoted from the PHP-FIG documentation).
+Always use elseif instead of else and if. 
+
+"The keyword elseif SHOULD be used instead of else if so that all control keywords look like single words". Quoted from the PHP-FIG documentation
+
+.. code-block:: php
+
+   <?php
+   
+   // Using elseif 
+   if ($a == 1) { doSomething(); }
+   elseif ($a == 2) { doSomethingElseIf(); }
+   else { doSomethingElse(); }
+   
+   // Using else if 
+   if ($a == 1) { doSomething(); }
+   else if ($a == 2) { doSomethingElseIf(); }
+   else { doSomethingElse(); }
+   
+   // Using else if, no {}
+   if ($a == 1)  doSomething(); 
+   else if ($a == 2) doSomethingElseIf(); 
+   else  doSomethingElse(); 
+   
+   ?>
+
+.
 
 +--------------+-------------------------+
 | Command Line | Structures/ElseIfElseif |
@@ -2243,7 +2316,24 @@ Empty With Expression
 #####################
 
 
-The function '`empty() <http://www.php.net/empty>`_' doesn't accept expressions until PHP 5.5. Until then, it is necessary to store the result of the expression in a variable and then, test it with `empty() <http://www.php.net/empty>`_.
+`empty() <http://www.php.net/empty>`_ doesn't accept expressions until PHP 5.5. Until then, it is necessary to store the result of the expression in a variable and then, test it with `empty() <http://www.php.net/empty>`_.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 5.5+ empty() usage
+   if (empty(strtolower($b . $c))) {
+       doSomethingWithoutA();
+   }
+   
+   // Compatible empty() usage
+   $a = strtolower($b . $c);
+   if (empty($a)) {
+       doSomethingWithoutA();
+   }
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/EmptyWithExpression                                                                          |
@@ -3664,6 +3754,47 @@ Either switch to a newer version of PHP (5.5 or newer), or make sure the resulti
 
 
 
+.. _modernize-empty-with-expression:
+
+Modernize Empty With Expression
+###############################
+
+
+`empty() <http://www.php.net/empty>`_ accept expressions since PHP 5.5. There is no need to store the expression in a variable before testing, unless it is reused later.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 5.5+ empty() usage
+   if (empty(strtolower($b . $c))) {
+       doSomethingWithoutA();
+   }
+   
+   // Compatible empty() usage
+   $a = strtolower($b . $c);
+   if (empty($a)) {
+       doSomethingWithoutA();
+   }
+   
+   // $a2 is reused, storage is legit
+   $a2 = strtolower($b . $c);
+   if (empty($a2)) {
+       doSomething();
+   } else {
+       echo $a2;
+   }
+   
+   ?>
+
++--------------+------------------------+
+| Command Line | Structures/ModernEmpty |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
+
 .. _multiple-alias-definitions:
 
 Multiple Alias Definitions
@@ -4471,7 +4602,21 @@ No Hardcoded Hash
 #################
 
 
-Hash (may it be MD5, SHA1, SHA512, Bcrypt or any other), should not be hard coded. Such values may have to be changed for security reasons, and the source code is not the safest place to hide it.
+Hash should never be hardcoded. 
+
+Hashes may be MD5, SHA1, SHA512, Bcrypt or any other. Such values must be easily changed, for security reasons, and the source code is not the safest place to hide it. 
+
+.. code-block:: php
+
+   <?php
+   
+       // Those strings may be sha512 hashes. 
+       // it is recomemdned to check if they are static or should be put into configuration
+       $init512 = array( // initial values for SHA512
+           '6a09e667f3bcc908', 'bb67ae8584caa73b', '3c6ef372fe94f82b', 'a54ff53a5f1d36f1', 
+       );
+   
+   ?>
 
 +--------------+--------------------------------+
 | Command Line | Structures/NoHardcodedHash     |
@@ -5256,6 +5401,18 @@ Anything else, like literals or static expressions, yield a warning at execution
 
 Or Die
 ######
+
+
+Classic old style failed error management. 
+
+.. code-block:: php
+
+   <?php
+   
+   // In case the connexion fails, this kills the current script
+   mysql_connect('localhost', $user, $pass) or die();
+   
+   ?>
 
 
 Interrupting a script will leave the application with a blank page, will make your life miserable for testing. Just don't do that.
@@ -6824,9 +6981,37 @@ String May Hold A Variable
 ##########################
 
 
-This is a list of string using single quotes and Nowdoc syntax : as such, they are treated as literals, and they won't be scanned to interpolate variables.
+Those strings looks like holding a variable. 
+
+Single quotes and Nowdoc syntax may include $ signs that are treated as literals, and not replaced with a variable value. 
 
 However, there are some potential variables in those strings, making it possible for an error : the variable was forgotten and will be published as such. It is worth checking the content and make sure those strings are not variables.
+
+.. code-block:: php
+
+   <?php
+   
+   $a = 2;
+   
+   // Explicit variable, but literal effect is needed
+   echo '$a is '.$a;
+   
+   // One of the variable has been forgotten
+   echo '$a is $a';
+   
+   // $CAD is not a variable, rather a currency unit
+   $total = 12;
+   echo $total.' $CAD';
+   
+   // $CAD is not a variable, rather a currency unit
+   $total = 12;
+   
+   // Here, $total has been forgotten
+   echo <<<'TEXT'
+   $total $CAD
+   TEXT;
+   
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Type/StringHoldAVariable |
@@ -7561,7 +7746,43 @@ Unreachable Code
 ################
 
 
-Code located after `throw <http://www.php.net/throw>`_, return, exit(), die(), `break <http://php.net/manual/en/control-structures.break.php>`_ or `continue <http://php.net/manual/en/control-structures.continue.php>`_ cannot be reached, as the previous instruction will divert the engine to another part of the code. 
+Code may be unreachable, because other instructions prevent its reaching. 
+For example, it be located after `throw <http://www.php.net/throw>`_, return, exit(), die(), goto, `break <http://php.net/manual/en/control-structures.break.php>`_ or `continue <http://php.net/manual/en/control-structures.continue.php>`_ : this way, it cannot be reached, as the previous instruction will divert the engine to another part of the code. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       $a++;
+       return $a;
+       $b++;      // $b++ can't be reached;
+   }
+   
+   function bar() {
+       if ($a) {
+           return $a;
+       } else {
+           return $b;
+       }
+       $b++;      // $b++ can't be reached;
+   }
+   
+   foreach($a as $b) {
+       $c += $b;
+       continue 1;
+       $d += $e;   // this can't be reached
+   }
+   
+   $a = 1;
+   goto B;
+   class foo {}    // Definitions are accessible, but not functioncalls
+   B: 
+   echo $a;
+   
+   
+   ?>
+
 
 This is dead code, that may be removed.
 
@@ -8324,15 +8545,84 @@ Use Pathinfo
 ############
 
 
-Is is recommended to use pathinfo() function instead of string manipulation functions to extract the various parts of a path. It is more efficient and readable.
+Use pathinfo() function instead of string manipulations.
 
-If you're using path with UTF-8 characters, pathinfo will strip them. There, you might have to use string functions.
+pathinfo() is more efficient and readable and string functions.
+
+.. code-block:: php
+
+   <?php
+   
+   $filename = '/path/to/file.php';
+   
+   // With pathinfo();
+   $details = pathinfo($filename);
+   print $details['extension'];  // also capture php
+   
+   // With string functions (other solutions possible)
+   $ext = substr($filename, - strpos(strreverse($filename), '.')); // Capture php
+   
+   ?>
+
+
+When the path contains UTF-8 characters, pathinfo() may strip them. There, string functions are necessary.
 
 +--------------+-----------------+
 | Command Line | Php/UsePathinfo |
 +--------------+-----------------+
 | Analyzers    | :ref:`Analyze`  |
 +--------------+-----------------+
+
+
+
+.. _use-positive-condition:
+
+Use Positive Condition
+######################
+
+
+Whenever possible, use a positive condition. 
+
+Positive conditions are easier to understand, and lead to less understanding problems.
+Negative conditions are not reported when else is not present. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This is a positive condition
+   if ($a == 'b') {
+       doSomething();
+   } else {
+       doSomethingElse();
+   }
+   
+   if (!empty($a)) {
+       doSomething();
+   } else {
+       doSomethingElse();
+   }
+   
+   // This is a negative condition
+   if ($a == 'b') {
+       doSomethingElse();
+   } else {
+       doSomething();
+   }
+   
+   // No need to force $a == 'b' with empty else
+   if ($a != 'b') {
+       doSomethingElse();
+   } 
+   
+   
+   ?>
+
++--------------+---------------------------------+
+| Command Line | Structures/UsePositiveCondition |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
 
 
 
@@ -9703,7 +9993,34 @@ preg_replace With Option e
 ##########################
 
 
-`preg_replace() <http://www.php.net/preg_replace>`_ had a /e option until PHP 7.0 which allowed the use of `eval <http://www.php.net/eval>`_'ed expression as replacement. This has been dropped in PHP 7.0, for security reasons.
+`preg_replace() <http://www.php.net/preg_replace>`_ supported the /e option until PHP 7.0. It allowed the use of `eval() <http://www.php.net/eval>`_'ed expression as replacement. This has been dropped in PHP 7.0, for security reasons.
+
+`preg_replace() <http://www.php.net/preg_replace>`_ with /e option may be replaced with preg_replace_callback() and a closure, or `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_ and an array of closures.
+
+.. code-block:: php
+
+   <?php
+   
+   // preg_replace with /e
+   $string = abcde;
+   
+   // PHP 5.6 and older usage of /e
+   $replaced = preg_replace(/c/e, 'strtoupper(.. comment: Rules details
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+)', $string);
+   
+   // PHP 7.0 and more recent
+   // With one replacement
+   $replaced = preg_replace_callback(/c/, function ($x) { return strtoupper($x[0]); }, $string);
+   
+   // With several replacements, preventing multiple calls to preg_replace_callback
+   $replaced = preg_replace_callback_array(array(/c/ => function ($x) { return strtoupper($x[0]); },
+                                           /[a-b]/ => function ($x) { return strtolower($x[0]); }), $string);
+   
+   
+   ?>
 
 +--------------+------------------------------------------------------------------------------------+
 | Command Line | Structures/pregOptionE                                                             |
