@@ -1006,7 +1006,6 @@ SQL;
         $res = $this->datastore->query('SELECT file FROM files ORDER BY file');
         while($row = $res->fetchArray()) {
             $id = str_replace('/', '_', $row['file']);
-            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
             
             $subdirs = explode('/', dirname($row['file']));
             $dir = $this->tmpName.'/datas/sources';
@@ -1018,6 +1017,7 @@ SQL;
             }
 
             $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
+            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
             file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], substr($source, 6, -8));
         }
         
