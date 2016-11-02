@@ -37,7 +37,7 @@ class Composer {
         } else {
             $docPath = $config->dir_root.'/data/composer.sqlite';
         }
-        $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
+        $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }
 
     public function __destruct() {
@@ -56,7 +56,7 @@ class Composer {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = strtolower($row['namespace']);
         }
         
@@ -73,7 +73,7 @@ class Composer {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = strtolower($row['classname']);
         }
         
@@ -92,7 +92,7 @@ JOIN interfaces ON interfaces.namespace_id = namespaces.id";
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = strtolower($row['interfacename']);
         }
         
@@ -111,7 +111,7 @@ JOIN traits ON traits.namespace_id = namespaces.id";
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = strtolower($row['traitname']);
         }
         
