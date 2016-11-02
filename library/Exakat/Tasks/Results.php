@@ -28,6 +28,8 @@ use Exakat\Config;
 use Exakat\Tokenizer\Token;
 
 class Results extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+    
     public function run(Config $config) {
         $analyzer = $config->program;
 

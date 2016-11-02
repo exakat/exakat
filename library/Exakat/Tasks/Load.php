@@ -1303,7 +1303,21 @@ class Load extends Tasks {
     private function processNsname() {
         $current = $this->id;
 
-        $nsnameId = $this->addAtom('Nsname');
+        if ($this->tokens[$this->id][0] === T_NS_SEPARATOR && 
+            $this->tokens[$this->id + 1][0] === T_STRING && 
+            in_array(strtolower($this->tokens[$this->id + 1][1]), array('true', 'false')) &&
+            $this->tokens[$this->id + 2][0] !== T_NS_SEPARATOR
+            ) {
+            $nsnameId = $this->addAtom('Boolean');
+        } elseif ($this->tokens[$this->id][0] === T_NS_SEPARATOR  && 
+            $this->tokens[$this->id + 1][0] === T_STRING          && 
+            strtolower($this->tokens[$this->id + 1][1]) === 'null' &&
+            $this->tokens[$this->id + 2][0] !== T_NS_SEPARATOR
+            ) {
+            $nsnameId = $this->addAtom('Null');
+        } else {
+            $nsnameId = $this->addAtom('Nsname');
+        }
         $fullcode = [];
 
         $rank = 0;
