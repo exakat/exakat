@@ -32,7 +32,6 @@ use Exakat\Tasks\CleanDb;
 
 class Test extends Tasks {
     private $project_dir = '.';
-    private $config = null;
     
     public function run(Config $config) {
         $this->config = $config;

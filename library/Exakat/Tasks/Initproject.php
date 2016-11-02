@@ -25,22 +25,20 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Exceptions\ProjectNeeded;
 
 class Initproject extends Tasks {
-    private $config = null;
-    
     public function run(Config $config) {
         $this->config = $config;
         $project = $config->project;
 
         if ($project == 'default') {
-            die("No project name provided. Add -p option\n");
+            throw ProjectNeeded();
         }
 
         $repositoryURL = $config->repository;
 
         if ($config->delete === true) {
-            $this->check_project_dir($project);
             display( "Deleting $project\n");
     
             // final wait..., just in case
@@ -48,7 +46,6 @@ class Initproject extends Tasks {
 
             rmdirRecursive($config->projects_root.'/projects/'.$project);
         } elseif ($config->update === true) {
-            $this->scheck_project_dir($project);
             display( "Updating $project\n");
     
             shell_exec('cd '.$config->projects_root.'/projects/'.$project.'/code/; git pull');
@@ -257,17 +254,6 @@ INI;
             unset($analyze);
         }
     }
-
-    private function check_project_dir($project) {
-        if ($project === null ) {
-            die( 'Usage : php '.$this->config->executable.' project_init -p project_name -R repository');
-        }
-
-        if (!file_exists($this->config->projects_root.'/projects/'.$project) ) {
-            die( "Project $project doesn't exists.\n Aborting\n");
-        }
-    }
-
 }
 
 ?>

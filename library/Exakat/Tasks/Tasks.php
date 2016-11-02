@@ -32,6 +32,7 @@ abstract class Tasks {
     protected $enabledLog = true;
     protected $datastore  = null;
     protected $gremlin    = null;
+    protected $config     = null;
     
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
@@ -62,9 +63,8 @@ abstract class Tasks {
     
     public abstract function run(Config $config);
 
-    protected function cleanLog($path) {
-        // cleaning log directory (possibly logs)
-        $logs = glob("$path/*");
+    protected function cleanLogForProject($project) {
+        $logs = glob($this->config->projects_root.'/projects/'.$project.'/log/*');
         foreach($logs as $log) {
             unlink($log);
         }

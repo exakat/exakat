@@ -27,8 +27,6 @@ use Exakat\Phpexec;
 use Exakat\Config;
 
 class Files extends Tasks {
-    private $config = null;
-
     public function run(Config $config) {
         $dir = $config->project;
         $this->config = $config;

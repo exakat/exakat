@@ -30,7 +30,6 @@ use Exakat\Exceptions\ProjectNeeded;
 
 class Project extends Tasks {
     private $project_dir = '.';
-    private $config = null;
     
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',

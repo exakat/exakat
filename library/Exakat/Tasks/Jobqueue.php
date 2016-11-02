@@ -23,10 +23,9 @@
 
 namespace Exakat\Tasks;
 
-use \Exakat\Config;
+use Exakat\Config;
 
 class Jobqueue extends Tasks {
-    private $config   = null;
     private $pipefile = '/tmp/onepageQueue';
     private $jobQueueLog = null;
     

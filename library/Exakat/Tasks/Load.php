@@ -69,7 +69,6 @@ const T_VOID                         = 'v';
 class Load extends Tasks {
     private $php    = null;
     private static $client = null;
-    private $config = null;
     
     private $precedence;
 
@@ -232,8 +231,6 @@ class Load extends Tasks {
     }
 
     public function run(Config $config) {
-        $this->config = $config;
-
         if (file_exists($this->config->projects_root.'/.exakat')) {
             display("Emptying .exakat\n");
             rmdirRecursive($this->config->projects_root.'/.exakat');

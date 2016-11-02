@@ -34,6 +34,8 @@ class Doctor extends Tasks {
     }
 
     public function run(Config $config) {
+        $this->config = $config;
+        
         $stats = array();
 
         $stats = array_merge($stats, $this->checkPreRequisite($config));
