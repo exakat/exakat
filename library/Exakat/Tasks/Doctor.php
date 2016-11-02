@@ -59,12 +59,13 @@ class Doctor extends Tasks {
 
         // check for PHP
         $stats['PHP']['version']   = phpversion();
-        $stats['PHP']['curl']      = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it)';
-        $stats['PHP']['hash']      = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it)';
-        $stats['PHP']['sqlite3']   = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it)';
-        $stats['PHP']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it)';
-        $stats['PHP']['phar']      = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar)';
-        $stats['PHP']['mbstring']  = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional)';
+        $stats['PHP']['curl']      = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
+        $stats['PHP']['hash']      = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
+        $stats['PHP']['phar']      = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
+        $stats['PHP']['sysvsem']   = extension_loaded('sysvsem')   ? 'Yes' : 'No (Compulsory, please install it with --enable-sysvsem)';
+        $stats['PHP']['sqlite3']   = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
+        $stats['PHP']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
+        $stats['PHP']['mbstring']  = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional, add --enable-mbstring to configure)';
 
         // java
         $res = shell_exec('java -version 2>&1');
@@ -506,7 +507,7 @@ INI;
         $res = trim(shell_exec('composer -V 2>&1'));
         // remove colors from shell syntax
         $res = preg_replace('/\e\[[\d;]*m/', '', $res);
-        if (preg_match('/Composer version ([0-9\.a-z@\-]+) /', $res, $r)) {//
+        if (preg_match('/Composer version ([0-9\.a-z@_\(\)\-]+) /', $res, $r)) {//
             $stats['composer']['installed'] = 'Yes';
             $stats['composer']['version'] = $r[1];
         } else {
