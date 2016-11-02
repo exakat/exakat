@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '0.8.5';
-    const BUILD = 433;
+    const VERSION = '0.8.8';
+    const BUILD = 453;
     
     private $gremlin = null;
     
@@ -87,11 +87,6 @@ class Exakat {
                 $task->run($config);
                 break;
 
-            case 'report_all' : 
-                $task = new Tasks\ReportAll($this->gremlin);
-                $task->run($config);
-                break;
-
             case 'project' : 
                 $task = new Tasks\Project($this->gremlin);
                 $task->run($config);
@@ -114,11 +109,6 @@ class Exakat {
 
             case 'help' : 
                 $task = new Tasks\Help($this->gremlin);
-                $task->run($config);
-                break;
-
-            case 'constantes' : 
-                $task = new Tasks\ConstantStructures($this->gremlin);
                 $task->run($config);
                 break;
 
