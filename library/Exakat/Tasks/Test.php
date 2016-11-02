@@ -31,7 +31,7 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Tasks\CleanDb;
 
 class Test extends Tasks {
-    const CONCURENCE = self::NONE;
+    const CONCURENCE = self::ANYTIME;
     
     private $project_dir = '.';
     
