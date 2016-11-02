@@ -28,6 +28,8 @@ use Exakat\Datastore;
 use Exakat\Exakat;
 
 class OnePage extends Tasks {
+    const CONCURENCE = self::NONE;
+    
     private $project_dir = '.';
     
     const TOTAL_STEPS = 7;

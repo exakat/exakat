@@ -23,8 +23,12 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+
 class Classes extends Tasks {
-    public function run(\Exakat\Config $config) {
+    const CONCURENCE = self::ANYTIME;
+    
+    public function run(Config $config) {
         $stats = $this->gremlin->queryColumn(<<<GREMLIN
 g.idx('atoms')[['atom':'Class']]
 .sideEffect{

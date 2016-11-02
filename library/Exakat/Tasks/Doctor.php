@@ -28,6 +28,8 @@ use Exakat\Config;
 use Exakat\Task;
 
 class Doctor extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+    
     public function __construct($gremlin) {
         $this->enabledLog = false;
         parent::__construct($gremlin);

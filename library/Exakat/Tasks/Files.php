@@ -27,6 +27,8 @@ use Exakat\Phpexec;
 use Exakat\Config;
 
 class Files extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+
     public function run(Config $config) {
         $dir = $config->project;
         $this->config = $config;

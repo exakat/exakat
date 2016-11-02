@@ -26,7 +26,10 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 
 class Jobqueue extends Tasks {
-    private $pipefile = '/tmp/onepageQueue';
+    const CONCURENCE = self::QUEUE;
+    const PATH = '/tmp/onepageQueue';
+    
+    private $pipefile = self::PATH;
     private $jobQueueLog = null;
     
     public function __destruct() {

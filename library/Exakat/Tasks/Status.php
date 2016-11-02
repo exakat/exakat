@@ -29,6 +29,8 @@ use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Reports\Reports;
 
 class Status extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+    
     public function run(Config $config) {
         $project = $config->project;
 

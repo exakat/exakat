@@ -28,6 +28,8 @@ use Exakat\Datastore;
 use Exakat\Exceptions\ProjectNeeded;
 
 class Initproject extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+    
     public function run(Config $config) {
         $this->config = $config;
         $project = $config->project;

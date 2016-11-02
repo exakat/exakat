@@ -22,6 +22,9 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Exceptions\NoConstFile;
+use Exakat\Exceptions\NoPrecedence;
+
 class Precedence {
 
     const PRECEDENCE = [
@@ -157,7 +160,7 @@ class Precedence {
         }
         
         if (!isset($cache[$token])) {
-            throw new \Exakat\Exceptions\NoPrecedence($token);
+            throw new NoPrecedence($token);
         }
         
         return $cache[$token];
@@ -166,7 +169,7 @@ class Precedence {
     public static function preloadConstants($version) {
         $filename = dirname(__DIR__) . '/Tasks/Tokens/Const' . $version[0] . $version[2] . ".php";
         if (!file_exists($filename)) {
-            throw new \Exakat\Exceptions\NoConstFile($version);
+            throw new NoConstFile($version);
         }
         include($filename);
     }

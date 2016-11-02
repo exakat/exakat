@@ -26,6 +26,8 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 
 class Server extends Tasks {
+    const CONCURENCE = self::SERVER;
+    
     public function run(Config $config) {
         $this->config = $config;
         

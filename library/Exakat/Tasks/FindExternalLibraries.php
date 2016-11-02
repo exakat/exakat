@@ -23,9 +23,13 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
 use Exakat\Phpexec;
+use Exakat\Tasks\Precedence;
 
 class FindExternalLibraries extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+
     const WHOLE_DIR   = 1;
     const FILE_ONLY   = 2;
     const PARENT_DIR  = 3; // Whole_dir and parent.
@@ -74,7 +78,7 @@ class FindExternalLibraries extends Tasks {
                              'zend_view'        => self::WHOLE_DIR,
                              );
 
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $project = $config->project;
         if ($project == 'default') {
             die("findextlib requires a -p <project>\nAborting\n");
@@ -106,7 +110,7 @@ class FindExternalLibraries extends Tasks {
         }
 
         $this->php->getTokens();
-        \Exakat\Tasks\Precedence::preloadConstants($this->php->getActualVersion());
+        Precedence::preloadConstants($this->php->getActualVersion());
         
         $r = array();
         $path = $config->projects_root.'/projects/'.$project.'/code';

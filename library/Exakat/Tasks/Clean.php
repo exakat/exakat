@@ -23,16 +23,23 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
 use Exakat\Datastore;
-use \Exakat\Config;
+use Exakat\Exceptions\ProjectNeeded;
 
 class Clean extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+
     public function __construct($gremlin) {
         $this->enabledLog = false;
         parent::__construct($gremlin);
     }
 
     public function run(Config $config) {
+        if ($config->project == 'default') {
+            new throw ProjectNeeded();
+        }
+        
         $path = $config->projects_root.'/projects/'.$config->project;
 
         display( "Cleaning project $config->project\n" );

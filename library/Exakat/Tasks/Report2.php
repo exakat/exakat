@@ -29,6 +29,8 @@ use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Reports\Reports as Report;
 
 class Report2 extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+
     public function run(Config $config) {
         if ($config->project == "default") {
             throw new ProjectNeeded();

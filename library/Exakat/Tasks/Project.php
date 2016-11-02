@@ -29,6 +29,8 @@ use Exakat\Exakat;
 use Exakat\Exceptions\ProjectNeeded;
 
 class Project extends Tasks {
+    const CONCURENCE = self::NONE;
+    
     private $project_dir = '.';
     
     protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',

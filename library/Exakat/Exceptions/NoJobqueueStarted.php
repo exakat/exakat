@@ -21,29 +21,12 @@
 */
 
 
-namespace Exakat\Tasks;
+namespace Exakat\Exceptions;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Config;
-
-class OnepageReport extends Tasks {
-    const CONCURENCE = self::ANYTIME;
-    
-    public function run(Config $config) {
-        $project = $config->project;
-
-        $result = new \Stdclass();
-        $analyzers = Analyzer::getThemeAnalyzers('OneFile');
+class NoJobqueueStarted extends \RuntimeException {
+    public function __construct($message = '', $code = 0, \Exception $previous = null) {
         
-        foreach($analyzers as $analyzer) {
-            $a = Analyzer::getInstance($analyzer);
-            $results = $a->getArray();
-            if (!empty($results)) {
-                $result->{$a->getDescription()->getName()} = $results;
-            }
-        }
-
-        file_put_contents($config->projects_root.'/projects/'.$project.'/onepage.json', json_encode($result));
+        parent::__construct( "No Jobqueue server was found on this server. Start the queue (exakat queue) and try again.", $code, $previous);
     }
 }
 

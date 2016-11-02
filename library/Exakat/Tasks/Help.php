@@ -23,8 +23,12 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+
 class Help extends Tasks {
-    public function run(\Exakat\Config $config) {
+    const CONCURENCE = self::ANYTIME;
+    
+    public function run(Config $config) {
         print <<<HELP
 [Usage] :   php {$config->executable} init -p <Project name> -R <Repository>
             php {$config->executable} project -p <Project name>

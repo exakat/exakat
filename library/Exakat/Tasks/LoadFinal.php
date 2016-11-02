@@ -29,6 +29,8 @@ use Exakat\Data\Methods;
 use Exakat\Tokenizer\Token;
 
 class LoadFinal extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+
     public function run(Config $config) {
         $linksIn = Token::linksAsList();
         

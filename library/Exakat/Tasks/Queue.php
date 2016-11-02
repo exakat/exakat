@@ -23,13 +23,21 @@
 
 namespace Exakat\Tasks;
 
-use \Exakat\Config;
-use \Exakat\Tasks\Clean;
+use Exakat\Config;
+use Exakat\Tasks\Clean;
+use Exakat\Tasks\Jobqueue;
+use Exakat\Exceptions\NoJobqueueStarted;
 
 class Queue extends Tasks {
-    private $pipefile = '/tmp/onepageQueue';
+    const CONCURENCE = self::ANYTIME;
+    
+    private $pipefile = Jobqueue::PATH;
     
     public function run(Config $config) {
+        if (!file_exists($this->pipefile)) {
+            throw new NoJobqueueStarted();
+        }
+
         if ($config->stop === true) {
             display('Stopping queue');
             $queuePipe = fopen($this->pipefile, 'w');

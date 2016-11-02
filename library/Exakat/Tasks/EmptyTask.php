@@ -23,8 +23,12 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+
 class EmptyTask extends Tasks {
-    public function run(\Exakat\Config $config) {
+    const CONCURENCE = self::ANYTIME;
+    
+    public function run(Config $config) {
         
     }
 }
