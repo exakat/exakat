@@ -61,7 +61,6 @@ abstract class Tasks {
                 } else {
                     $ftok_proj = 'j';
                 }
-                var_dump($ftok_proj);
                 $key = ftok(__FILE__, $ftok_proj);
                 self::$semaphore = sem_get($key, 1);
                 if (sem_acquire(self::$semaphore, 1) === false) {

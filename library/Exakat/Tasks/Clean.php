@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\NoSuchProject;
 
 class Clean extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -36,11 +37,15 @@ class Clean extends Tasks {
     }
 
     public function run(Config $config) {
-        if ($config->project == 'default') {
-            new throw ProjectNeeded();
+        if ($config->project === 'default') {
+            throw new ProjectNeeded();
+        }
+
+        $path = $config->projects_root.'/projects/'.$config->project;
+        if (!file_exists($path)) {
+            throw new NoSuchProject($config->project);
         }
         
-        $path = $config->projects_root.'/projects/'.$config->project;
 
         display( "Cleaning project $config->project\n" );
         

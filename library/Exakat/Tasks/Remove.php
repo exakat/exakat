@@ -25,13 +25,18 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
 
 class Remove extends Tasks {
     const CONCURENCE = self::NONE;
 
     public function run(Config $config) {
+        if ($config->project === 'default') {
+            throw new ProjectNeeded();
+        }
+
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
-            throw new NoSuchProject();
+            throw new NoSuchProject($config->project);
         }
         
         rmdirRecursive($config->projects_root.'/projects/'.$config->project);
