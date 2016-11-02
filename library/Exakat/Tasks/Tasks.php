@@ -25,6 +25,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Exceptions\AnotherProcessIsRunning;
 use Exakat\Log;
 
 abstract class Tasks {
@@ -33,12 +34,44 @@ abstract class Tasks {
     protected $datastore  = null;
     protected $gremlin    = null;
     protected $config     = null;
+    protected $exakatDir  = null;
+    private   static $semaphore      = null;
+    private   static $keepSemaphore  = false;
+    
+    const  NONE    = 1;
+    const  ANYTIME = 2;
+    const  QUEUE = 4;
+    const  SERVER = 5;
     
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
         // Config is the general one.
         $config = Config::factory();
-        
+
+        if (!defined('static::CONCURENCE')) {
+            print get_class($this)." is missing CONCURENCE\n";
+            die();
+        }
+        if (static::CONCURENCE !== self::ANYTIME) {
+            if (self::$semaphore === null) {
+                if (static::CONCURENCE === self::QUEUE) {
+                    $ftok_proj = 'q';
+                } elseif (static::CONCURENCE === self::SERVER) {
+                    $ftok_proj = 's';
+                } else {
+                    $ftok_proj = 'j';
+                }
+                var_dump($ftok_proj);
+                $key = ftok(__FILE__, $ftok_proj);
+                self::$semaphore = sem_get($key, 1);
+                if (sem_acquire(self::$semaphore, 1) === false) {
+                    throw new AnotherProcessIsRunning();
+                }
+            } else {
+                self::$keepSemaphore = true;
+            }
+        } 
+                
         if ($this->enabledLog) {
             $task = strtolower((new \ReflectionClass($this))->getShortName());
             $this->log = new Log($task,
@@ -48,6 +81,18 @@ abstract class Tasks {
         if ($config->project != 'default' &&
             file_exists($config->projects_root.'/projects/'.$config->project)) {
             $this->datastore = new Datastore($config);
+        }
+
+        if (!file_exists($config->projects_root.'/projects/.exakat/')) {
+            mkdir($config->projects_root.'/projects/.exakat/', 0700);
+        }
+        $this->exakatDir = $config->projects_root.'/projects/.exakat/';
+    }
+    
+    public function __destruct() {
+        if (self::$keepSemaphore === false && self::$semaphore !== null) {
+            sem_remove(self::$semaphore);
+            self::$semaphore = null;
         }
     }
     
