@@ -26,10 +26,6 @@ namespace Exakat\Analyzer\Variables;
 use Exakat\Analyzer\Analyzer;
 
 class Variablenames extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/Blind');
-    }
-    
     public function analyze() {
         // $x
         $this->atomIs('Variable')
@@ -42,8 +38,7 @@ class Variablenames extends Analyzer {
              
              ->hasNoParent('Staticproperty', 'PROPERTY')
              ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
-             ->hasNoParent('Staticproperty', array('VARIABLE', 'VARIABLE', 'PROPERTY'))
-             ->analyzerIsNot('Variables/Blind');
+             ->hasNoParent('Staticproperty', array('VARIABLE', 'VARIABLE', 'PROPERTY'));
         $this->prepareQuery();
 
         // $object->$x()

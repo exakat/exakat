@@ -50,8 +50,6 @@ abstract class Analyzer {
     static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
 
-    protected $apply          = null;
-
     protected $phpVersion       = 'Any';
     protected $phpConfiguration = 'Any';
     
@@ -105,9 +103,6 @@ abstract class Analyzer {
         $this->code = $this->analyzer;
         
         self::initDocs();
-        
-        $this->apply = new AnalyzerApply();
-        $this->apply->setAnalyzer($this->analyzer);
         
         $this->description = new Description($this->analyzer);
         
@@ -315,19 +310,6 @@ GREMLIN;
         }
     }
 
-    public function isDone() {
-        $result = $this->query("g.getRawGraph().index().existsForNodes('analyzers');");
-        if ($result[0] == 0) {
-            $this->query("g.createIndex('analyzers', Vertex)");
-
-            return false;
-        }
-        
-        $query = "g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].count() == 1";
-        $res = $this->query($query);
-        return (bool) $res[0][0];
-    }
-
     public function checkphpConfiguration($Php) {
         // this handles Any version of PHP
         if ($this->phpConfiguration == 'Any') {
@@ -384,14 +366,6 @@ GREMLIN;
         return array();
     }
     
-    public function setApplyBelow($applyBelow = true) {
-        $this->apply->setApplyBelow($applyBelow);
-        
-        $this->addMethod('sideEffect{ applyBelowRoot = it }');
-        
-        return $this;
-    }
-
     public function query($queryString, $arguments = null) {
         try {
             $result = $this->gremlin->query($queryString, $arguments);
@@ -1061,7 +1035,7 @@ GREMLIN
     }
         
     public function hasConstantDefinition() {
-        $this->addMethod("filter{ g.idx('constants')[['path':it.fullnspath]].any()}");
+        $this->addMethod('where( __.in("DEFINITION"))');
     
         return $this;
     }
@@ -1132,12 +1106,6 @@ GREMLIN
     public function goToLoop() {
         $this->goToInstruction(array('For', 'Foreach', 'While', 'Dowhile'));
         
-        return $this;
-    }
-
-    public function noNamespaceDefinition() {
-        $this->addMethod("hasNot('fullnspath', null).filter{ g.idx('namespaces')[['path':it.fullnspath]].any() == false }");
-    
         return $this;
     }
 
@@ -1435,45 +1403,6 @@ GREMLIN
         return $this;
     }
 
-    public function goToMethodDefinition() {
-        // starting with a staticmethodcall , no support for static, self, parent
-        $this->addMethod('sideEffect{methodname = it.out("METHOD").next().code.toLowerCase();}
-                .out("CLASS").transform{
-                    if (it.code.toLowerCase() == "self") {
-                        init = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next();
-                    } else if (it.code.toLowerCase() == "static") {
-                        init = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next();
-                    } else  if (it.code.toLowerCase() == "parent") {
-                        init = it.in.loop(1){it.object.atom != "Class"}{it.object.atom == "Class"}.next().out("EXTENDS")
-                                 .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                                 .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }.next();
-                    } else {
-                        init = g.idx("classes")[["path":it.fullnspath]].next();
-                    };
-
-                    find = null;
-                    if (init.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any()) {
-                        found = init.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("NAME").next().code.toLowerCase() == methodname }.next();
-                    } else if (init.out("EXTENDS").any() == false) {
-                        found = it;
-                    } else {
-                        found = init.out("EXTENDS")
-                            .filter{ g.idx("classes").get("path", it.fullnspath).any(); }
-                            .transform{ g.idx("classes")[["path":it.fullnspath]].next(); }
-                            .loop(2){ it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any() == false}
-                                    { it.object.out("BLOCK").out("ELEMENT").has("atom", "Function").out("NAME").filter{ it.code.toLowerCase() == methodname }.any()}
-                        .next();
-                        
-                        if (found == null) { found = it; } else {
-                            found = found.out("BLOCK").out("ELEMENT").has("atom", "Function").filter{ it.out("NAME").next().code.toLowerCase() == methodname }.next();
-                        }
-                    };
-                    found;
-                }.has("atom", "Function")');
-        
-        return $this;
-    }
-    
     public function goToNamespace() {
         $this->goToInstruction('Namespace');
         
@@ -1532,48 +1461,6 @@ as("context")
 GREMLIN
 
 );
-        
-        return $this;
-    }
-    
-    public function followConnexion( $iterations = 3) {
-        //it.rank in x[-2] should be better than !x[-2].intersect([it.rank]).isEmpty() but this isn't working!!
-        $this->addMethod(
-        <<<GREMLIN
-
-// Loop init
-sideEffect{ loops = 1;}
-
-//// LOOP ////
-.as('connexion')
-.transform{
-    if (it.in('METHOD').any() == false) {
-        if (g.idx('functions')[['path':it.fullnspath]].any()) {
-            g.idx('functions')[['path':it.fullnspath]].next();
-        } else {
-            it;
-        }
-    } else if (it.in('METHOD').any()) {  // case of Staticmethodcall or Propertycall
-                name = it.code.toLowerCase();
-                g.idx('atoms')[['atom':'Class']].out('BLOCK').out('ELEMENT')
-                                    .has('atom', 'Function').out('NAME').filter{it.code.toLowerCase() == name }.next();
-    } else { it; }
-}.in('NAME')
-// calculating the path AND obtaining the arguments list
-.sideEffect{ while(x.last() >= loops) { x.pop(); x.pop();}; y = it.out('ARGUMENTS').out('ARGUMENT').filter{!x[-2].intersect([it.rank]).isEmpty() }.code.toList(); x += [y];  x += loops;}
-// find outgoing function
-.out('BLOCK').out.loop(1){true}{it.object.atom in ['Functioncall', 'Staticmethodcall', 'Methodcall'] && (it.object.in('METHOD').any() == false)}
-.transform{ if (it.out('METHOD').any()) { it.out('METHOD').next(); } else { it; }}
-
-// filter with arguments that are relayed
-.filter{ it.out('ARGUMENTS').out('ARGUMENT').filter{ it.code in x[-2]}.any() }
-.sideEffect{ y=[]; it.out('ARGUMENTS').out('ARGUMENT').filter{ it.code in x[-2]}.rank.fill(y); x += [y]; x += loops}
-
-.loop('connexion'){ loops = it.loops; it.loops < $iterations; }{true}
-//// LOOP ////
-
-GREMLIN
-                        );
         
         return $this;
     }
@@ -1700,78 +1587,6 @@ GREMLIN;
         return count($this->toArray());
     }
     
-    public function toArray() {
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'{$this->analyzerQuoted}']].out";
-        $vertices = $this->query($queryTemplate);
-
-        $report = array();
-        if (count($vertices) > 0) {
-            foreach($vertices as $v) {
-                $report[] = $v->fullcode;
-            }
-        }
-        
-        return $report;
-    }
-
-    public function getArray() {
-        die(__CLASS__.'::'.__METHOD__);
-        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        if (substr($analyzer, 0, 15) === 'Analyzer\\Files\\') {
-            $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out
-.has('notCompatibleWithPhpVersion', null)
-.has('notCompatibleWithPhpConfiguration', null)
-.as('fullcode').as('line').as('filename').select{it.fullcode}{it.line}{it.fullcode}
-GREMLIN;
-        } else {
-            $query = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out
-.has('notCompatibleWithPhpVersion', null)
-.has('notCompatibleWithPhpConfiguration', null)
-.as('fullcode').in.loop(1){ it.object.token != 'T_FILENAME'}.as('file').back('fullcode').as('line').select{it.fullcode}{it.line}{it.fullcode}
-GREMLIN;
-        }
-        $vertices = $this->query($query);
-
-        $analyzer = $this->analyzer;
-        $report = array();
-        if (count($vertices) > 0) {
-            foreach($vertices as $v) {
-                if (!isset($v->file)) {
-                    echo "Error in getArray() : Couldn't find the file\n$query\n",
-                         get_class($this),
-                         "\n",
-                         print_r($v, true);
-                    die();
-                }
-                $report[] = array('code' => $v->fullcode,
-                                  'file' => $v->file,
-                                  'line' => $v->line,
-                                  'desc' => $this->description->getName(),
-                                  'clearphp' => $this->description->getClearPHP(),
-                                  );
-            }
-        }
-        
-        return $report;
-    }
-
-    public function toCountedArray($load = 'it.fullcode') {
-        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "m = [:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out.groupCount(m){".$load.'}.cap';
-        $vertices = $this->query($queryTemplate);
-
-        $report = array();
-        if (count($vertices) > 0) {
-            foreach($vertices[0][0] as $k => $v) {
-                $report[$k] = $v;
-            }
-        }
-        
-        return $report;
-    }
-    
     protected function loadIni($file, $index = null) {
         $config = Config::factory();
         $fullpath = $config->dir_root.'/data/'.$file;
@@ -1807,54 +1622,10 @@ GREMLIN;
         return self::$docs->listAllAnalyzer();
     }
 
-    public function isRun() {
-        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = "g.idx('analyzers')[['analyzer':'".$analyzer."']].any()";
-        $vertices = $this->query($queryTemplate);
-
-        return $vertices[0][0] == 1;
-    }
-    
     public function hasResults() {
         return (bool) ($this->getResultsCount() > 0);
     }
 
-    public function getResultsCount() {
-        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $queryTemplate = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out
-.has('notCompatibleWithPhpVersion', null)
-.has('notCompatibleWithPhpConfiguration', null)
-.count();
-
-GREMLIN;
-        $vertices = $this->query($queryTemplate);
-        
-        $return = (int) $vertices[0];
-        if ($return > 0) {
-            return $return;
-        }
-        
-        $queryTemplate = <<<GREMLIN
-g.idx('analyzers')[['analyzer':'$analyzer']].out
-.transform{ ['versionCompatible':it.notCompatibleWithPhpVersion,
-             'configurationCompatible': it.notCompatibleWithPhpConfiguration]};
-
-GREMLIN;
-        $vertices = $this->query($queryTemplate);
-        
-        if (empty($vertices[0])) { // really no results
-            return 0;
-        } elseif (isset($vertices[0]->versionCompatible)) {
-            return self::VERSION_INCOMPATIBLE;
-        } elseif (isset($vertices[0]->configurationCompatible)) {
-            return self::CONFIGURATION_INCOMPATIBLE;
-        } else {
-            // Error
-            return 0;
-        }
-    }
-    
     public function getSeverity() {
         if (Analyzer::$docs === null) {
             $config = Config::factory();
@@ -1863,29 +1634,6 @@ GREMLIN;
         }
         
         return Analyzer::$docs->getSeverity($this->analyzer);
-    }
-
-    public function getFileList() {
-        $analyzer = str_replace('\\', '\\\\', $this->analyzer);
-        $query = "m=[:]; g.idx('analyzers')[['analyzer':'".$analyzer."']].out('ANALYZED').in.loop(1){true}{it.object.atom == 'File'}.groupCount(m){it.fullcode}.iterate(); m;";
-        $vertices = $this->query($query);
-        
-        $return = array();
-        foreach($vertices as $k => $v) {
-            $return[$k] = (array) $v;
-        }
-        
-        return $return;
-    }
-
-    public function getVendors() {
-        if (Analyzer::$docs === null) {
-            $config = Config::factory();
-            
-            Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
-        }
-        
-        return Analyzer::$docs->getVendors();
     }
 
     public function getTimeToFix() {
