@@ -157,11 +157,6 @@ class Exakat {
                 $task->run($config);
                 break;
 
-            case 'classes' : 
-                $task = new Tasks\Classes($this->gremlin);
-                $task->run($config);
-                break;
-
             case 'test' : 
                 $task = new Tasks\Test($this->gremlin);
                 $task->run($config);
