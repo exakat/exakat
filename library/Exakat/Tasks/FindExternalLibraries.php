@@ -78,6 +78,15 @@ class FindExternalLibraries extends Tasks {
                              'zend_view'        => self::WHOLE_DIR,
                              );
 
+    // classic must be in lower case form.
+    private $classicTests = array('phpunit_framework_testcase'    => self::WHOLE_DIR, // PHPunit
+                                  'codeception\test\unit'         => self::WHOLE_DIR, // Codeception
+                                  'objectbehavior'                => self::WHOLE_DIR, // PHP spec
+                                  'unittestcase'                  => self::WHOLE_DIR, // Simpletest
+                                  'atoum'                         => self::WHOLE_DIR, // Atoum
+                                  // behat, peridot, kahlan, phpt?
+                                   );
+
     public function run(Config $config) {
         $project = $config->project;
         if ($project == 'default') {
@@ -127,6 +136,7 @@ class FindExternalLibraries extends Tasks {
         } else {
             $newConfigs = array();
         }
+//        $newConfigs = array_keys(array_count_values($newConfigs));
 
         if (count($newConfigs) == 1) {
             display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));
@@ -192,6 +202,30 @@ class FindExternalLibraries extends Tasks {
                     if ($returnPath != '/') {
                         $return[$class] = $returnPath;
                     }
+                }
+                
+                if (is_array($tokens[$id + 4]) && $tokens[$id + 4][0] == T_EXTENDS) {
+                    $ix = $id + 6;
+                    $extends = '';
+                    
+                    while($tokens[$ix][0] == T_NS_SEPARATOR || $tokens[$ix][0] == T_STRING ) {
+                        $extends .= $tokens[$ix][1];
+                        ++$ix;
+                    }
+                    
+                    $extends = trim(strtolower($extends), '\\');
+                    if (isset($this->classicTests[$extends])) {
+                        if ($this->classicTests[$extends] == static::WHOLE_DIR) {
+                            $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
+                        } elseif ($this->classicTests[$extends] == static::PARENT_DIR) {
+                            $returnPath = dirname(dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename)));
+                        } elseif ($this->classicTests[$extends] == static::FILE_ONLY) {
+                            $returnPath = preg_replace('#.*projects/.*?/code/#', '/', $filename);
+                        }
+                        if ($returnPath != '/') {
+                            $return[$class] = $returnPath;
+                        }
+                    } 
                 }
             }
         }
