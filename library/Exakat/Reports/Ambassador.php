@@ -294,12 +294,12 @@ class Ambassador extends Reports {
         $totalFile = $datastore->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFileAnalysed - $totalFile;
-        $percentFile = round($totalFileSansError / $totalFile) * 100;
+        $percentFile = abs(round($totalFileSansError / $totalFile * 100));
 
         // analyzer
         list($totalAnalyzerUsed, $totalAnalyzerReporting) = $this->getTotalAnalyzer();
-        $totaalAnalyzerWithoutError = $totalAnalyzerUsed - $totalAnalyzerReporting;
-        $percentAnalyzer = round($totaalAnalyzerWithoutError / $totalAnalyzerUsed) * 100;
+        $totalAnalyzerWithoutError = $totalAnalyzerUsed - $totalAnalyzerReporting;
+        $percentAnalyzer = abs(round($totalAnalyzerWithoutError / $totalAnalyzerUsed * 100));
 
         $html = '<div class="box">
                     <div class="box-header with-border">
@@ -331,9 +331,9 @@ class Ambassador extends Reports {
                             <div class="sub-div">
                                 <div class="title">Files free of issues (%)</div>
                                 <div class="progress progress-sm">
-                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentFile . '%">
-                                        <span class="sr-only">20% Complete</span>
-                                    </div>
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentFile . '%">
+                                        '.$totalFileSansError.'
+                                    </div><div style="color:black; text-align:center;">'.$totalFileAnalysed.'</div>
                                 </div>
                                 <div class="pourcentage">' . $percentFile . '%</div>
                             </div>
@@ -341,8 +341,8 @@ class Ambassador extends Reports {
                                 <div class="title">Analyzers free of issues (%)</div>
                                 <div class="progress progress-sm active">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentAnalyzer . '%">
-                                        <span class="sr-only">20% Complete</span>
-                                    </div>
+                                        '.$totalAnalyzerWithoutError.'
+                                    </div><div style="color:black; text-align:center;">'.$totalAnalyzerReporting.'</div>
                                 </div>
                                 <div class="pourcentage">' . $percentAnalyzer . '%</div>
                             </div>
