@@ -74,16 +74,16 @@ class Load extends Tasks {
     
     private $precedence;
 
-    private $calls = array();
+    private $calls = [];
 
     private $namespace = '\\';
-    private $uses = array('function' => array(),
-                          'const'    => array(),
-                          'class'    => array());
+    private $uses = ['function' => array(),
+                     'const'    => array(),
+                     'class'    => array()];
 
-    private $links = array();
+    private $links = [];
     
-    private $tokens = array();
+    private $tokens = [];
     private $id = 0;
     
     const FULLCODE_SEQUENCE = ' /**/ ';
@@ -292,7 +292,7 @@ class Load extends Tasks {
         $files = $this->datastore->getCol('files', 'file');
     
         $nbTokens = 0;
-        $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
+        $path = $this->config->projects_root.'/projects/'.$project.'/code';
         foreach($files as $file) {
             if ($r = $this->processFile($path.$file)) {
                 $nbTokens += $r;
@@ -391,7 +391,6 @@ class Load extends Tasks {
                                 1 => '/* END */',
                                 2 => $line);
         unset($tokens);
-        unset($lines);
         
         $id1 = $this->addAtom('File');
         $this->setAtom($id1, ['code'     => $filename,
@@ -768,7 +767,7 @@ class Load extends Tasks {
                 $catchFullcode[] = $this->atoms[$classId]['fullcode'];
                 
                 if ($this->tokens[$this->id + 1][0] === T_PIPE) {
-                    $this->id++; // Skip |
+                    ++$this->id; // Skip |
                 }
             }
             $this->setAtom($catchId, ['count' => $rankCatch + 1]);
@@ -1187,7 +1186,7 @@ class Load extends Tasks {
                 /// processing the first expression as an echo
                 $this->processSemicolon();
                 if ($this->tokens[$this->id + 1][0] == T_END) {
-                    $this->id--;
+                    --$this->id;
                 }
             }
 
@@ -1734,7 +1733,6 @@ class Load extends Tasks {
             
             $this->addLink($plusplusId, $previousId, 'POSTPLUSPLUS');
 
-            $fullcode = '';
             $this->setAtom($plusplusId, ['code'     => $this->tokens[$this->id][1],
                                          'fullcode' => $this->atoms[$previousId]['fullcode'] .
                                                        $this->tokens[$this->id][1],
@@ -2854,7 +2852,6 @@ class Load extends Tasks {
 
                 ++$this->id; // Skip \
 
-                $fullcode2 = [];
                 $useTypeGeneric = $useType;
                 $useTypeId = 0;
                 do {
@@ -3184,8 +3181,8 @@ class Load extends Tasks {
     private function processCurlyExpression() {
         ++$this->id;
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
-            $id = $this->processNext();
-        } ;
+            $this->processNext();
+        };
         
         $codeId = $this->popExpression();
         $blockId = $this->addAtom('Block');
@@ -3592,8 +3589,6 @@ class Load extends Tasks {
     }
 
     private function processEllipsis() {
-        $current = $this->id;
-    
         // Simply skipping the ...
         $finals = $this->precedence->get(T_ELLIPSIS);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
@@ -3617,7 +3612,6 @@ class Load extends Tasks {
             $current = $this->id;
 
             // Simply skipping the &
-            $finals = $this->precedence->get(T_REFERENCE);
             $this->processNext();
             
             $operandId = $this->popExpression();
@@ -4007,7 +4001,7 @@ class Load extends Tasks {
 
             $extra = [];
             foreach($extras[$atom['atom']] as $e) {
-                $extra[] = isset($atom[$e]) ? "\"".$this->escapeCsv($atom[$e])."\"" : "\"-1\"";
+                $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
             }
 
             if (count($extras[$atom['atom']]) > 0) {
@@ -4145,7 +4139,7 @@ class Load extends Tasks {
     private function endSequence() {
         $this->setAtom($this->sequence, ['count' => $this->sequenceRank[$this->sequenceCurrentRank] + 1]);
 
-        $id = array_pop($this->sequences);
+        array_pop($this->sequences);
         array_pop($this->sequenceRank);
         $this->sequenceCurrentRank = count($this->sequenceRank) - 1;
         
