@@ -177,21 +177,6 @@ SQL;
         return $return;
     }
     
-    public function getVendors() {
-        $query = <<<SQL
-        SELECT vendor FROM vendors
-SQL;
-        
-        $res = $this->sqlite->query($query);
-
-        $return = array();
-        while($row = $res->fetchArray()) {
-            $return[] = $row['vendor'];
-        }
-        
-        return $return;
-    }
-    
     public function guessAnalyzer($name) {
         $query = <<<'SQL'
 SELECT 'Analyzer\\' || folder || '\\' || name AS name FROM analyzers WHERE name=:name;

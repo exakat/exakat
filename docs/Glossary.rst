@@ -24,6 +24,7 @@ Glossary
     + `array_count_values`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Slow Functions <slow-functions>`
 
     + `array_flip`
 
@@ -32,6 +33,7 @@ Glossary
     + `array_keys`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Slow Functions <slow-functions>`
 
     + `array_merge`
 
@@ -45,6 +47,7 @@ Glossary
     + `array_unique`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Slow Functions <slow-functions>`
 
 
 + `B`
@@ -123,6 +126,10 @@ Glossary
 
 
 + `D`
+    + `date`
+
+      + :ref:`Timestamp Difference <timestamp-difference>`
+
     + `do..while()`
 
       + :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -137,6 +144,7 @@ Glossary
       + :ref:`Empty Interfaces <empty-interfaces>`
       + :ref:`Empty List <empty-list>`
       + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`No Isset With Empty <no-isset-with-empty>`
       + :ref:`Useless Instructions <useless-instructions>`
 
     + `empty`
@@ -151,8 +159,10 @@ Glossary
       + :ref:`Empty Traits <empty-traits>`
       + :ref:`Empty Try Catch <empty-try-catch>`
       + :ref:`Empty With Expression <empty-with-expression>`
+      + :ref:`Indices Are Int Or String <indices-are-int-or-string>`
       + :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
       + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`No Isset With Empty <no-isset-with-empty>`
       + :ref:`Random Without Try <random-without-try>`
       + :ref:`Results May Be Missing <results-may-be-missing>`
       + :ref:`Use Positive Condition <use-positive-condition>`
@@ -390,6 +400,11 @@ Glossary
       + :ref:`Simplify Regex <simplify-regex>`
       + :ref:`Strpos Comparison <strpos-comparison>`
       + :ref:`Use Pathinfo <use-pathinfo>`
+      + :ref:`Useless Casting <useless-casting>`
+
+    + `strtotime`
+
+      + :ref:`Performances/timeVsstrtotime <performances/timevsstrtotime>`
 
     + `switch()`
 
@@ -445,16 +460,19 @@ Glossary
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
       + :ref:`Old Style Constructor <old-style-constructor>`
       + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
+      + :ref:`Performances/timeVsstrtotime <performances/timevsstrtotime>`
       + :ref:`Redefined Default <redefined-default>`
       + :ref:`Short Open Tags <short-open-tags>`
       + :ref:`Should Be Single Quote <should-be-single-quote>`
       + :ref:`Should Make Alias <should-make-alias>`
+      + :ref:`Should Typecast <should-typecast>`
       + :ref:`Static Loop <static-loop>`
       + :ref:`Switch Without Default <switch-without-default>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
       + :ref:`Throws An Assignement <throws-an-assignement>`
       + :ref:`Timestamp Difference <timestamp-difference>`
       + :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
+      + :ref:`Use Class Operator <use-class-operator>`
       + :ref:`Use const <use-const>`
       + :ref:`Used Once Variables <used-once-variables>`
       + :ref:`eval() Without Try <eval()-without-try>`

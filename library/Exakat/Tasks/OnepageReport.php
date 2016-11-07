@@ -27,6 +27,8 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 
 class OnepageReport extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+    
     public function run(Config $config) {
         $project = $config->project;
 

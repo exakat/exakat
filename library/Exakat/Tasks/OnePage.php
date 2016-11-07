@@ -28,8 +28,9 @@ use Exakat\Datastore;
 use Exakat\Exakat;
 
 class OnePage extends Tasks {
+    const CONCURENCE = self::NONE;
+    
     private $project_dir = '.';
-    private $config = null;
     
     const TOTAL_STEPS = 7;
     
@@ -39,7 +40,6 @@ class OnePage extends Tasks {
         $progress = 0;
         
         $begin = microtime(true);
-        $path = $config->projects_root.'/projects/onepage/log';
         $this->project_dir = $config->projects_root.'/projects/onepage/';
 
         // checking for installation
@@ -60,7 +60,7 @@ class OnePage extends Tasks {
             die("'$config->filename' must be a readable file. Aborting\n");
         }
 
-        $this->cleanLog($path);
+        $this->cleanLogForProject('onepage');
 
         copy($config->filename, $config->projects_root.'/projects/onepage/code/onepage.php');
 

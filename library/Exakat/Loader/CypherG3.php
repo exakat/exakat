@@ -23,9 +23,11 @@
 
 namespace Exakat\Loader;
 
-use Exakat\Datastore;
 use Exakat\Config;
+use Exakat\Datastore;
 use Exakat\Graph\Cypher;
+use Exakat\Tasks\Load;
+use Exception;
 
 class CypherG3 {
     const CSV_SEPARATOR = ',';
@@ -60,7 +62,7 @@ class CypherG3 {
         // Force autoload
         $this->cypher = new Cypher($this->config );
 
-        if (file_exists($this->config->projects_root.'/.exakat/nodes.cypher.csv') && static::$file_saved == 0) {
+        if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.cypher.csv') && static::$file_saved == 0) {
             $this->cleanCsv();
         }
         
@@ -72,7 +74,7 @@ class CypherG3 {
         self::saveTokenCounts();
         
         // Load Nodes
-        $files = glob($this->config->projects_root.'/.exakat/nodes.g3.*.csv');
+        $files = glob($this->config->projects_root.'/projects/.exakat/nodes.g3.*.csv');
         foreach($files as $file) {
             preg_match('/nodes\.g3\.(.*)\.csv$/', $file, $r);
             $atom = $r[1];
@@ -83,7 +85,7 @@ class CypherG3 {
             $b = microtime(true);
             
             $extra = [];
-            foreach(\Exakat\Tasks\Load::PROP_OPTIONS as $title => $atoms) {
+            foreach(Load::PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
                     if (in_array($title, ['delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'])) {
                     // Raw string
@@ -106,7 +108,7 @@ class CypherG3 {
             
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/.exakat/nodes.g3.$atom.csv" AS csvLine
+LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/projects/.exakat/nodes.g3.$atom.csv" AS csvLine
 CREATE (token:$atom { 
 eid: toInt(csvLine.id),
 code: csvLine.code,
@@ -127,7 +129,7 @@ CYPHER;
 
                 $this->unlink[] = $file;
                 $e = microtime(true);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load nodes in the database\n".$e->getMessage());
             }
@@ -135,7 +137,7 @@ CYPHER;
         display('Loaded nodes');
         
         // Load relations
-        $files = glob($this->config->projects_root.'/.exakat/rels.g3.*.csv');
+        $files = glob($this->config->projects_root.'/projects/.exakat/rels.g3.*.csv');
         foreach($files as $file) {
             preg_match('/rels\.g3\.(.*)\.(.*)\.(.*)\.csv$/', $file, $r);
             $edge = $r[1];
@@ -145,7 +147,7 @@ CYPHER;
             $b = microtime(true);
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/.exakat/rels.g3.$edge.$origin.$destination.csv" AS csvLine
+LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/projects/.exakat/rels.g3.$edge.$origin.$destination.csv" AS csvLine
 MATCH (token:$origin { eid: toInt(csvLine.start)}),(token2:$destination { eid: toInt(csvLine.end)})
 CREATE (token)-[:$edge]->(token2)
 
@@ -159,7 +161,7 @@ CYPHER;
                 }
                 $this->unlink[] = $file;
                 $e = microtime(true);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->cleanCsv(); 
                 die("Couldn't load relations for ".$edge." in the database\n".$e->getMessage());
             }
@@ -180,12 +182,10 @@ CYPHER;
         foreach($this->unlink as $file) {
             unlink($file);
         }
-
-        rmdir(dirname($file));
     }
 
     public function saveTokenCounts() {
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         $datastore = new Datastore($config);
         
         $datastore->addRow('tokenCounts', static::$tokenCounts);

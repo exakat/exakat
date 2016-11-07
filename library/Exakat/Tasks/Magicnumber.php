@@ -23,11 +23,16 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Exceptions\ProjectNeeded;
+
 class Magicnumber extends Tasks {
-    public function run(\Exakat\Config $config) {
+    const CONCURENCE = self::ANYTIME;
+
+    public function run(Config $config) {
         $project = $config->project;
         if ($project == 'default') {
-            die("Magicnumber needs a -p <project>\nAborting\n");
+            throw new ProjectNeeded();
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {

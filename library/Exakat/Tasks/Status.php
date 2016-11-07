@@ -25,14 +25,20 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Reports\Reports;
 
 class Status extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+    
     public function run(Config $config) {
         $project = $config->project;
 
         if ($project === 'default') {
-            die("Please, provide a project name with -p option. Aborting\n");
+            $status = array('project' => $project);
+            
+            $this->display($status, $config->json);
+            return;
         }
 
         $path = $config->projects_root.'/projects/'.$project;
@@ -106,36 +112,42 @@ class Status extends Tasks {
         }
         // Always have formats, even if empty
         $status['formats'] = $formats;
-
-        // Publication : Json or Text file
-        if ($config->json == true) {
+        
+        $this->display($status, $config->json);
+    }
+    
+    private function display($status, $json = false) {
+        // Json publication
+        if ($json === true) {
             print json_encode($status);
-        } else {
-            $text = '';
-            $size = 0;
-            foreach($status as $k => $v) {
-                $size = max($size, strlen($k));
-            }
-
-            foreach($status as $field => $value) {
-                if (is_array($value)) {
-                    $sub = substr($field.str_repeat(' ', $size), 0, $size)." : \n";
-
-                    $sizea = 0;
-                    foreach($value as $k => $v) {
-                        $sizea = max($sizea, strlen($k));
-                    }
-                    foreach($value as $k => $v) {
-                        $sub .= "    ".substr($k.str_repeat(' ', $sizea), 0, $sizea)." : $v\n";
-                    }
-                    $text .= "\n".$sub."\n";
-                } else {
-                    $text .= substr($field.str_repeat(' ', $size), 0, $size) . ' : '.$value."\n";
-                }
-            }
-            
-            print $text;
+            return;
+        } 
+        
+        // commandline publication
+        $text = '';
+        $size = 0;
+        foreach($status as $k => $v) {
+            $size = max($size, strlen($k));
         }
+
+        foreach($status as $field => $value) {
+            if (is_array($value)) {
+                $sub = substr($field.str_repeat(' ', $size), 0, $size)." : \n";
+
+                $sizea = 0;
+                foreach($value as $k => $v) {
+                    $sizea = max($sizea, strlen($k));
+                }
+                foreach($value as $k => $v) {
+                    $sub .= "    ".substr($k.str_repeat(' ', $sizea), 0, $sizea)." : $v\n";
+                }
+                $text .= "\n".$sub."\n";
+            } else {
+                $text .= substr($field.str_repeat(' ', $size), 0, $size) . ' : '.$value."\n";
+            }
+        }
+        
+        print $text;
     }
     
     private function getErrors($path) {

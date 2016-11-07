@@ -23,25 +23,32 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exakat\Exceptions\NoCodeInProject;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
+
 class Update extends Tasks {
+    const CONCURENCE = self::NONE;
+
     public function __construct($gremlin) {
         $this->enabledLog = false;
         parent::__construct($gremlin);
     }
 
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         if ($config->project === 'default') {
-            die("php ".$config->phpexecutable." -p <project>\n");
+            throw new ProjectNeeded();
         }
 
         $path = $config->projects_root.'/projects/'.$config->project;
         
         if (!file_exists($path)) {
-            die("Not such project as '$config->project'. Aborting\n");
+            throw new NoSuchProject($config->project);
         }
 
         if (!file_exists($path.'/code')) {
-            die("Project '$config->project' has no code. Aborting\n");
+            throw new NoCodeInProject($config->project);
         }
         
         switch(true) {

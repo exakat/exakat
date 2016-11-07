@@ -29,7 +29,9 @@ use Exakat\Exceptions\DependsOnMustReturnArray;
 use Exakat\Phpexec;
 
 class Analyze extends Tasks {
-    public function run(\Exakat\Config $config) {
+    const CONCURENCE = self::ANYTIME;
+
+    public function run(Config $config) {
         $project = $config->project;
         
         if ($project == 'default') {

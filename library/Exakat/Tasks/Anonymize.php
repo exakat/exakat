@@ -23,7 +23,11 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+
 class Anonymize extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+    
     private $lnumberValues = array();
     private $lnumber = 0;
     private $dnumberValues = array();
@@ -33,7 +37,7 @@ class Anonymize extends Tasks {
     private $stringsNames = array();
     private $strings = 'A';
 
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         
         if (($file = $config->file) !== 'stdout') {
             display("Anonymizing file $file\n");

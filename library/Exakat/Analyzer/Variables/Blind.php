@@ -37,7 +37,6 @@ class Blind extends Analyzer {
              ->inIs('VALUE')
              ->atomIs('Foreach')
              ->outIs('BLOCK')
-             ->setApplyBelow(true)
              ->back('x');
         $this->prepareQuery();
 
@@ -49,7 +48,6 @@ class Blind extends Analyzer {
              ->inIs('VALUE')
              ->atomIs('Foreach')
              ->outIs('BLOCK')
-             ->setApplyBelow(true)
              ->back('x');
         $this->prepareQuery();
 
@@ -60,7 +58,6 @@ class Blind extends Analyzer {
              ->inIs('VALUE')
              ->atomIs('Foreach')
              ->outIs('BLOCK')
-             ->setApplyBelow(true)
              ->back('x');
         $this->prepareQuery();
 
@@ -72,7 +69,6 @@ class Blind extends Analyzer {
              ->inIs('VALUE')
              ->atomIs('Foreach')
              ->outIs('BLOCK')
-             ->setApplyBelow(true)
              ->back('x');
         $this->prepareQuery();
 
@@ -85,7 +81,6 @@ class Blind extends Analyzer {
              ->inIs('VALUE')
              ->atomIs('Foreach')
              ->outIs('BLOCK')
-             ->setApplyBelow(true)
              ->back('x');
         $this->prepareQuery();
         

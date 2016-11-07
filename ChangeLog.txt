@@ -1,4 +1,4 @@
-Version 0.8.8 (Apricot Immortal, Coming up)
+Version 0.8.9 (Yellow Brows Great King, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,35 @@ Version 0.8.8 (Apricot Immortal, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.8.8 (Apricot Immortal, Coming up)
++ Architecture
+    + Added concurency test to avoid running several instance at the same time
+    + Report error when it happens with git clone
+    + Added UT classes to external libraries
+    + Dump is now hidden until finished.
+    + Better detection of java and composer (Thanks Julien)
++ Report
+    + New report : Radwell
+    + New report : PhpConfiguration helping with configure and php.ini
+    + Ambassador : Fixed dashboard values
++ Analyzer
+    + New analyzer : time() vs strtotime('now')
+    + New analyzer : useless casting
+    + New analyzer : No Isset() with Empty()
+    + New analyzer : don't echo errors
+    + New analyzer : ext/rar
+    + New analyzer : use Class::class when possible
+    + Added array_key_exists() to slow functions list.
+    + Upgraded UpperCaseKeywords to handle partial uppercase
+    + Added reported directives for ext/filter
+    + Upgraded 'Variables used once' to exclude $this and arguments
+    + Upgraded Unreachable Code with break/continue;
+    + Multiple Identical Keys now handles null, boolean, real.
+    + Upgraded analysis : 1652 / 1668 test pass (99% pass). 
++ Tokenizer
+    + Now spots \true, \false, \null as Boolean and Null
+    + Removed 'xargs too many arguments' error on Linux
 
 Version 0.8.7 (Naked Demon, 2016-10-31)
 + Architecture

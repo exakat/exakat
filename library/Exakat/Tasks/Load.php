@@ -67,22 +67,23 @@ const T_REFERENCE                    = 'r';
 const T_VOID                         = 'v';
 
 class Load extends Tasks {
+    const CONCURENCE = self::NONE;
+    
     private $php    = null;
     private static $client = null;
-    private $config = null;
     
     private $precedence;
 
-    private $calls = array();
+    private $calls = [];
 
     private $namespace = '\\';
-    private $uses = array('function' => array(),
-                          'const'    => array(),
-                          'class'    => array());
+    private $uses = ['function' => array(),
+                     'const'    => array(),
+                     'class'    => array()];
 
-    private $links = array();
+    private $links = [];
     
-    private $tokens = array();
+    private $tokens = [];
     private $id = 0;
     
     const FULLCODE_SEQUENCE = ' /**/ ';
@@ -226,22 +227,18 @@ class Load extends Tasks {
 
         Precedence::preloadConstants($this->php->getActualVersion());
         $this->precedence = new Precedence();
-        
-        $config = Config::factory();
-        $this->path = $config->projects_root.'/.exakat';
     }
 
     public function run(Config $config) {
         $this->config = $config;
-
-        if (file_exists($this->config->projects_root.'/.exakat')) {
-            display("Emptying .exakat\n");
-            rmdirRecursive($this->config->projects_root.'/.exakat');
-            mkdir($this->config->projects_root.'/.exakat');
-        } else {
-            display("rebuilding .exakat\n");
-            mkdir($this->config->projects_root.'/.exakat');
-        }
+        
+        $files = glob($this->exakatDir.'/*.csv');
+        
+        if (!empty($files)) {
+            foreach($files as $file) {
+                unlink($file);
+            }
+        } 
         
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
             throw new NoSuchProject($this->config->project);
@@ -295,7 +292,7 @@ class Load extends Tasks {
         $files = $this->datastore->getCol('files', 'file');
     
         $nbTokens = 0;
-        $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
+        $path = $this->config->projects_root.'/projects/'.$project.'/code';
         foreach($files as $file) {
             if ($r = $this->processFile($path.$file)) {
                 $nbTokens += $r;
@@ -394,7 +391,6 @@ class Load extends Tasks {
                                 1 => '/* END */',
                                 2 => $line);
         unset($tokens);
-        unset($lines);
         
         $id1 = $this->addAtom('File');
         $this->setAtom($id1, ['code'     => $filename,
@@ -771,7 +767,7 @@ class Load extends Tasks {
                 $catchFullcode[] = $this->atoms[$classId]['fullcode'];
                 
                 if ($this->tokens[$this->id + 1][0] === T_PIPE) {
-                    $this->id++; // Skip |
+                    ++$this->id; // Skip |
                 }
             }
             $this->setAtom($catchId, ['count' => $rankCatch + 1]);
@@ -1190,7 +1186,7 @@ class Load extends Tasks {
                 /// processing the first expression as an echo
                 $this->processSemicolon();
                 if ($this->tokens[$this->id + 1][0] == T_END) {
-                    $this->id--;
+                    --$this->id;
                 }
             }
 
@@ -1306,7 +1302,21 @@ class Load extends Tasks {
     private function processNsname() {
         $current = $this->id;
 
-        $nsnameId = $this->addAtom('Nsname');
+        if ($this->tokens[$this->id][0] === T_NS_SEPARATOR && 
+            $this->tokens[$this->id + 1][0] === T_STRING && 
+            in_array(strtolower($this->tokens[$this->id + 1][1]), array('true', 'false')) &&
+            $this->tokens[$this->id + 2][0] !== T_NS_SEPARATOR
+            ) {
+            $nsnameId = $this->addAtom('Boolean');
+        } elseif ($this->tokens[$this->id][0] === T_NS_SEPARATOR  && 
+            $this->tokens[$this->id + 1][0] === T_STRING          && 
+            strtolower($this->tokens[$this->id + 1][1]) === 'null' &&
+            $this->tokens[$this->id + 2][0] !== T_NS_SEPARATOR
+            ) {
+            $nsnameId = $this->addAtom('Null');
+        } else {
+            $nsnameId = $this->addAtom('Nsname');
+        }
         $fullcode = [];
 
         $rank = 0;
@@ -1723,7 +1733,6 @@ class Load extends Tasks {
             
             $this->addLink($plusplusId, $previousId, 'POSTPLUSPLUS');
 
-            $fullcode = '';
             $this->setAtom($plusplusId, ['code'     => $this->tokens[$this->id][1],
                                          'fullcode' => $this->atoms[$previousId]['fullcode'] .
                                                        $this->tokens[$this->id][1],
@@ -2843,7 +2852,6 @@ class Load extends Tasks {
 
                 ++$this->id; // Skip \
 
-                $fullcode2 = [];
                 $useTypeGeneric = $useType;
                 $useTypeId = 0;
                 do {
@@ -3173,8 +3181,8 @@ class Load extends Tasks {
     private function processCurlyExpression() {
         ++$this->id;
         while (!in_array($this->tokens[$this->id + 1][0], [T_CLOSE_CURLY])) {
-            $id = $this->processNext();
-        } ;
+            $this->processNext();
+        };
         
         $codeId = $this->popExpression();
         $blockId = $this->addAtom('Block');
@@ -3581,8 +3589,6 @@ class Load extends Tasks {
     }
 
     private function processEllipsis() {
-        $current = $this->id;
-    
         // Simply skipping the ...
         $finals = $this->precedence->get(T_ELLIPSIS);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
@@ -3606,7 +3612,6 @@ class Load extends Tasks {
             $current = $this->id;
 
             // Simply skipping the &
-            $finals = $this->precedence->get(T_REFERENCE);
             $this->processNext();
             
             $operandId = $this->popExpression();
@@ -3973,7 +3978,7 @@ class Load extends Tasks {
                 print "Atom is empty in \n";
                 die();
             }
-            $fileName = $this->path.'/nodes.g3.'.$atom['atom'].'.csv';
+            $fileName = $this->exakatDir.'/nodes.g3.'.$atom['atom'].'.csv';
             if ($atom['atom'] === 'Project' && file_exists($fileName)) {
                 // Project is saved only once
                 continue;
@@ -3996,7 +4001,7 @@ class Load extends Tasks {
 
             $extra = [];
             foreach($extras[$atom['atom']] as $e) {
-                $extra[] = isset($atom[$e]) ? "\"".$this->escapeCsv($atom[$e])."\"" : "\"-1\"";
+                $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
             }
 
             if (count($extras[$atom['atom']]) > 0) {
@@ -4027,7 +4032,7 @@ class Load extends Tasks {
                     if (empty($origin)) { die("Unknown origin for Rel files\n"); }
                     if (empty($destination)) { die("Unknown destination for Rel files\n"); }
                     $csv = $label.'.'.$origin.'.'.$destination;
-                    $fileName = $this->path.'/rels.g3.'.$csv.'.csv';
+                    $fileName = $this->exakatDir.'/rels.g3.'.$csv.'.csv';
                     if (isset($extras[$csv])) {
                         $fp = fopen($fileName, 'a');
                     } else {
@@ -4065,11 +4070,11 @@ class Load extends Tasks {
                     foreach($path['definitions'] as $destination => $destinations) {
                         $csv = 'DEFINITION.'.$destination.'.'.$origin;
 
-                        $filePath = $this->path.'/rels.g3.'.$csv.'.csv';
+                        $filePath = $this->exakatDir.'/rels.g3.'.$csv.'.csv';
                         if (file_exists($filePath)) {
-                            $fp = fopen($this->path.'/rels.g3.'.$csv.'.csv', 'a');
+                            $fp = fopen($this->exakatDir.'/rels.g3.'.$csv.'.csv', 'a');
                         } else {
-                            $fp = fopen($this->path.'/rels.g3.'.$csv.'.csv', 'w+');
+                            $fp = fopen($this->exakatDir.'/rels.g3.'.$csv.'.csv', 'w+');
                             fputcsv($fp, ['start', 'end']);
                         }
 
@@ -4134,7 +4139,7 @@ class Load extends Tasks {
     private function endSequence() {
         $this->setAtom($this->sequence, ['count' => $this->sequenceRank[$this->sequenceCurrentRank] + 1]);
 
-        $id = array_pop($this->sequences);
+        array_pop($this->sequences);
         array_pop($this->sequenceRank);
         $this->sequenceCurrentRank = count($this->sequenceRank) - 1;
         

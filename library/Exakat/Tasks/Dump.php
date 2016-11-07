@@ -29,26 +29,38 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Tokenizer\Token;
 
 class Dump extends Tasks {
+    const CONCURENCE = self::DUMP;
+    
     private $stmtResults       = null;
     private $stmtResultsCounts = null;
+    private $rounds            = 0;
+    private $sqliteFile        = null;
+    private $sqliteFileFinal   = null;
     
     const WAITING_LOOP = 1000;
     
     public function run(Config $config) {
+        $this->config = $config;
+
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             throw new NoSuchProject($config->project);
         }
         
-        $sqliteFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
-        if (file_exists($sqliteFile)) {
-            display('Removing old dump.sqlite');
-            unlink($sqliteFile);
+        // move this to .dump.sqlite then rename at the end, or any imtermediate time
+        // Mention that some are not yet arrived in the snitch
+        $this->sqliteFile = $config->projects_root.'/projects/'.$config->project.'/.dump.sqlite';
+        $this->sqliteFileFinal = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
+        if (file_exists($this->sqliteFile)) {
+            unlink($this->sqliteFile);
+            display('Removing old .dump.sqlite');
         }
+
+        $this->addSnitch();
         
         Analyzer::initDocs();
         Analyzer::$gremlinStatic = $this->gremlin;
         
-        $sqlite = new \Sqlite3($sqliteFile);
+        $sqlite = new \Sqlite3($this->sqliteFile);
         $this->getAtomCounts($sqlite);
         
         $this->collectStructures($sqlite);
@@ -96,11 +108,10 @@ SQL;
         $themes = call_user_func_array('array_merge', $themes);
         $themes = array_keys(array_count_values($themes));
 
-        $rounds = 0;
         $sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         while (count($themes) > 0) {
-            ++$rounds;
-            $this->log->log( "Run round $rounds");
+            ++$this->rounds;
+            $this->log->log( 'Run round '.$this->rounds);
 
             $counts = array();
             $datastore = new \Sqlite3($sqlitePath, \SQLITE3_OPEN_READONLY);
@@ -109,14 +120,14 @@ SQL;
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $counts[$row['analyzer']] = $row['counts'];
             }
-            $this->log->log( "count analyzed : ".count($counts)."\n");
-            $this->log->log( "counts ".implode(', ', $counts)."\n");
+            $this->log->log( 'count analyzed : '.count($counts)."\n");
+            $this->log->log( 'counts '.implode(', ', $counts)."\n");
             $datastore->close();
             unset($datastore);
         
             foreach($themes as $id => $thema) {
                 if (isset($counts[$thema])) {
-                    display( $thema." : ".($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n");
+                    display( $thema.' : '.($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n");
                     $this->processResults($thema, $counts[$thema]);
                     unset($themes[$id]);
                 } else {
@@ -124,8 +135,8 @@ SQL;
                 }
             }
 
-            $this->log->log( "Still ".count($themes)." to be processed\n");
-            display("Still ".count($themes)." to be processed\n");
+            $this->log->log( 'Still '.count($themes)." to be processed\n");
+            display('Still '.count($themes)." to be processed\n");
             if (count($themes) === 0) {
                 $this->finish();
                 return ;
@@ -134,8 +145,8 @@ SQL;
             sleep($wait);
             display('Sleep '.$wait.' seconds');
             
-            if ($rounds >= self::WAITING_LOOP) {
-                $this->log->log( "Waited for ".self::WAITING_LOOP." loop. Now aborting. Aborting\n");
+            if ($this->rounds >= self::WAITING_LOOP) {
+                $this->log->log( 'Waited for '.self::WAITING_LOOP." loop. Now aborting. Aborting\n");
                 $this->finish();
                 return true;
             }
@@ -174,14 +185,14 @@ SQL;
                 continue;
             }
             
-            $this->stmtResults->bindValue(':fullcode', $result->fullcode,      SQLITE3_TEXT);
-            $this->stmtResults->bindValue(':file',     $result->file,          SQLITE3_TEXT);
-            $this->stmtResults->bindValue(':line',     $result->line,          SQLITE3_INTEGER);
-            $this->stmtResults->bindValue(':namespace',$result->{'namespace'}, SQLITE3_TEXT);
-            $this->stmtResults->bindValue(':class',    $result->class,         SQLITE3_TEXT);
-            $this->stmtResults->bindValue(':function', $result->function,      SQLITE3_TEXT);
-            $this->stmtResults->bindValue(':analyzer', $class,                 SQLITE3_TEXT);
-            $this->stmtResults->bindValue(':severity', $severity,              SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':fullcode', $result->fullcode,      \SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':file',     $result->file,          \SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':line',     $result->line,          \SQLITE3_INTEGER);
+            $this->stmtResults->bindValue(':namespace',$result->{'namespace'}, \SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':class',    $result->class,         \SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':function', $result->function,      \SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':analyzer', $class,                 \SQLITE3_TEXT);
+            $this->stmtResults->bindValue(':severity', $severity,              \SQLITE3_TEXT);
             
             $this->stmtResults->execute();
             ++$saved;
@@ -212,23 +223,28 @@ SQL;
             $res = $this->gremlin->query($query);
             if (!is_object($res) || !isset($res->results)) {
                 $this->log->log( "Couldn't run the query and get a result : \n" .
-                     "Query : " . $query . " \n".
+                     'Query : ' . $query . " \n".
                      print_r($res, true));
                 continue ;
             }
 
             $res = $res->results;
-            $insert->bindValue(':atom', $atom ,   SQLITE3_TEXT);
-            $insert->bindValue(':count', $res[0], SQLITE3_INTEGER);
+            $insert->bindValue(':atom', $atom ,   \SQLITE3_TEXT);
+            $insert->bindValue(':count', $res[0], \SQLITE3_INTEGER);
             $insert->execute();
         }
     }
     
     private function finish() {
-        $this->stmtResultsCounts->bindValue(':class', 'Project/Dump', SQLITE3_TEXT);
-        $this->stmtResultsCounts->bindValue(':count', 1, SQLITE3_INTEGER);
+        $this->stmtResultsCounts->bindValue(':class', 'Project/Dump', \SQLITE3_TEXT);
+        $this->stmtResultsCounts->bindValue(':count', $this->rounds, \SQLITE3_INTEGER);
 
         $this->stmtResultsCounts->execute();
+        
+        unset($this->sqlite);
+        rename($this->sqliteFile, $this->sqliteFileFinal);
+        
+        $this->removeSnitch();
     }
     
     private function collectStructures($sqlite) {
@@ -260,7 +276,7 @@ GREMLIN
                 continue;
             }
 
-            $stmt->bindValue(':namespace',   $row->name,            SQLITE3_TEXT);
+            $stmt->bindValue(':namespace',   $row->name,            \SQLITE3_TEXT);
             $stmt->execute();
             $namespacesId['\\'.strtolower($row->name)] = $sqlite->lastInsertRowID();
 
@@ -329,10 +345,10 @@ GREMLIN
                 $namespaceId = 1;
             }
             
-            $stmt->bindValue(':class',       $row->name,            SQLITE3_TEXT);
-            $stmt->bindValue(':namespaceId', $namespaceId,          SQLITE3_INTEGER);
-            $stmt->bindValue(':abstract',    (int) $row->abstract , SQLITE3_INTEGER);
-            $stmt->bindValue(':final',       (int) $row->final,     SQLITE3_INTEGER);
+            $stmt->bindValue(':class',       $row->name,            \SQLITE3_TEXT);
+            $stmt->bindValue(':namespaceId', $namespaceId,          \SQLITE3_INTEGER);
+            $stmt->bindValue(':abstract',    (int) $row->abstract , \SQLITE3_INTEGER);
+            $stmt->bindValue(':final',       (int) $row->final,     \SQLITE3_INTEGER);
 
             $stmt->execute();
             $citId[$row->fullnspath] = $sqlite->lastInsertRowID();
@@ -393,8 +409,8 @@ GREMLIN
                 $namespaceId = 1;
             }
 
-            $stmt->bindValue(':name',       $row->name,            SQLITE3_TEXT);
-            $stmt->bindValue(':namespaceId', $namespaceId,          SQLITE3_INTEGER);
+            $stmt->bindValue(':name',       $row->name,            \SQLITE3_TEXT);
+            $stmt->bindValue(':namespaceId', $namespaceId,          \SQLITE3_INTEGER);
 
             $stmt->execute();
             $citId[$row->fullnspath] = $sqlite->lastInsertRowID();
@@ -448,8 +464,8 @@ GREMLIN
                 $namespaceId = 1;
             }
 
-            $stmt->bindValue(':name',       $row->name,            SQLITE3_TEXT);
-            $stmt->bindValue(':namespaceId', $namespaceId,          SQLITE3_INTEGER);
+            $stmt->bindValue(':name',       $row->name,             \SQLITE3_TEXT);
+            $stmt->bindValue(':namespaceId', $namespaceId,          \SQLITE3_INTEGER);
 
             $stmt->execute();
             $citId[$row->fullnspath] = $sqlite->lastInsertRowID();
@@ -467,8 +483,8 @@ SQL;
         foreach($extendsId as $exId => $ids) {
             if (isset($citId[$exId])) {
                 foreach($ids as $id) {
-                    $stmt->bindValue(':id',       $id,           SQLITE3_INTEGER);
-                    $stmt->bindValue(':class',    $citId[$exId], SQLITE3_INTEGER);
+                    $stmt->bindValue(':id',       $id,           \SQLITE3_INTEGER);
+                    $stmt->bindValue(':class',    $citId[$exId], \SQLITE3_INTEGER);
                 
                     $stmt->execute();
                     ++$total;
@@ -485,12 +501,12 @@ SQL;
         $stmtImplements = $sqlite->prepare($sqlQuery);
 
         $total = 0;
-        $stmtImplements->bindValue(':type',   'implements',          SQLITE3_TEXT);
+        $stmtImplements->bindValue(':type',   'implements',          \SQLITE3_TEXT);
         foreach($implementsId as $id => $implementsFNP) {
             foreach($implementsFNP as $fnp) {
-                $stmtImplements->bindValue(':implementing',   $id,          SQLITE3_INTEGER);
+                $stmtImplements->bindValue(':implementing',   $id,          \SQLITE3_INTEGER);
                 if (isset($citId[$fnp])) {
-                    $stmtImplements->bindValue(':implements', $citId[$fnp], SQLITE3_INTEGER);
+                    $stmtImplements->bindValue(':implements', $citId[$fnp], \SQLITE3_INTEGER);
                     
                     $stmtImplements->execute();
                     ++$total;
@@ -503,15 +519,15 @@ SQL;
         // Same SQL than for implements
 
         $total = 0;
-        $stmtImplements->bindValue(':type',   'use',          SQLITE3_TEXT);
+        $stmtImplements->bindValue(':type',   'use',          \SQLITE3_TEXT);
         foreach($usesId as $id => $usesFNP) {
             foreach($usesFNP as $fnp) {
-                $stmtImplements->bindValue(':implementing',   $id,          SQLITE3_INTEGER);
+                $stmtImplements->bindValue(':implementing',   $id,          \SQLITE3_INTEGER);
                 if (substr($fnp, 0, 2) == '\\\\') {
                     $fnp = substr($fnp, 2);
                 }
                 if (isset($citId[$fnp])) {
-                    $stmtImplements->bindValue(':implements', $citId[$fnp], SQLITE3_INTEGER);
+                    $stmtImplements->bindValue(':implements', $citId[$fnp], \SQLITE3_INTEGER);
                     
                     $stmtImplements->execute();
                     ++$total;
@@ -572,12 +588,12 @@ GREMLIN
                 $visibility = '';
             }
 
-            $stmt->bindValue(':method',    $row->name,                   SQLITE3_TEXT);
-            $stmt->bindValue(':citId',     $citId[$row->class],          SQLITE3_INTEGER);
-            $stmt->bindValue(':static',    (int) $row->static,           SQLITE3_INTEGER);
-            $stmt->bindValue(':final',     (int) $row->final,            SQLITE3_INTEGER);
-            $stmt->bindValue(':abstract',  (int) $row->abstract,         SQLITE3_INTEGER);
-            $stmt->bindValue(':visibility',$visibility,                  SQLITE3_TEXT);
+            $stmt->bindValue(':method',    $row->name,                   \SQLITE3_TEXT);
+            $stmt->bindValue(':citId',     $citId[$row->class],          \SQLITE3_INTEGER);
+            $stmt->bindValue(':static',    (int) $row->static,           \SQLITE3_INTEGER);
+            $stmt->bindValue(':final',     (int) $row->final,            \SQLITE3_INTEGER);
+            $stmt->bindValue(':abstract',  (int) $row->abstract,         \SQLITE3_INTEGER);
+            $stmt->bindValue(':visibility',$visibility,                  \SQLITE3_TEXT);
 
             $result = $stmt->execute();
             ++$total;
@@ -646,11 +662,11 @@ GREMLIN
                 $visibility = '';
             }
 
-            $stmt->bindValue(':property',  $row->name,                   SQLITE3_TEXT);
-            $stmt->bindValue(':citId',     $citId[$row->class],      SQLITE3_INTEGER);
-            $stmt->bindValue(':value',     $row->value,                  SQLITE3_TEXT);
-            $stmt->bindValue(':static',    (int) $row->static,           SQLITE3_INTEGER);
-            $stmt->bindValue(':visibility',$visibility,                  SQLITE3_TEXT);
+            $stmt->bindValue(':property',  $row->name,                   \SQLITE3_TEXT);
+            $stmt->bindValue(':citId',     $citId[$row->class],          \SQLITE3_INTEGER);
+            $stmt->bindValue(':value',     $row->value,                  \SQLITE3_TEXT);
+            $stmt->bindValue(':static',    (int) $row->static,           \SQLITE3_INTEGER);
+            $stmt->bindValue(':visibility',$visibility,                  \SQLITE3_TEXT);
 
             $result = $stmt->execute();
             ++$total;
@@ -691,9 +707,9 @@ GREMLIN
         
         $total = 0;
         foreach($res as $row) {
-            $stmt->bindValue(':constant',  $row->name,                   SQLITE3_TEXT);
-            $stmt->bindValue(':citId',   $citId[$row->class],      SQLITE3_INTEGER);
-            $stmt->bindValue(':value',     $row->value,                  SQLITE3_TEXT);
+            $stmt->bindValue(':constant',  $row->name,                   \SQLITE3_TEXT);
+            $stmt->bindValue(':citId',   $citId[$row->class],            \SQLITE3_INTEGER);
+            $stmt->bindValue(':value',     $row->value,                  \SQLITE3_TEXT);
 
             $result = $stmt->execute();
             ++$total;

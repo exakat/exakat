@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 31 Oct 2016 13:44:45 +0000
-.. comment: Generation hash : 0a59ccc395708a62713593d0968e254035e2befb
+.. comment: Generation date : Mon, 07 Nov 2016 15:30:41 +0000
+.. comment: Generation hash : fbe07700232be7e52de924358e064db7417bd76a
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 269 analysis
+Total : 273 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -120,8 +120,9 @@ Total : 269 analysis
 * :ref:`Dependant Trait <dependant-trait>`
 * :ref:`Deprecated Code <deprecated-code>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
+* :ref:`Dont Echo Error <dont-echo-error>`
 * :ref:`Double Assignation <double-assignation>`
-* :ref:`Double Instruction <double-instruction>`
+* :ref:`Double Instructions <double-instructions>`
 * :ref:`Drop Else After Return <drop-else-after-return>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Else If Versus Elseif <else-if-versus-elseif>`
@@ -191,6 +192,7 @@ Total : 269 analysis
 * :ref:`No Hardcoded Path <no-hardcoded-path>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`No Implied If <no-implied-if>`
+* :ref:`No Isset With Empty <no-isset-with-empty>`
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
@@ -292,6 +294,7 @@ Total : 269 analysis
 * :ref:`Unused Traits <unused-traits>`
 * :ref:`Unused Use <unused-use>`
 * :ref:`Use === null <use-===-null>`
+* :ref:`Use Class Operator <use-class-operator>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
 * :ref:`Use Object Api <use-object-api>`
@@ -305,6 +308,7 @@ Total : 269 analysis
 * :ref:`Used Once Variables <used-once-variables>`
 * :ref:`Useless Abstract Class <useless-abstract-class>`
 * :ref:`Useless Brackets <useless-brackets>`
+* :ref:`Useless Casting <useless-casting>`
 * :ref:`Useless Constructor <useless-constructor>`
 * :ref:`Useless Final <useless-final>`
 * :ref:`Useless Global <useless-global>`
@@ -708,7 +712,7 @@ Total : 23 analysis
 Performances
 ++++++++++++
 
-Total : 16 analysis
+Total : 18 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -722,9 +726,11 @@ Total : 16 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+* :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
 * :ref:`Simplify Regex <simplify-regex>`
 * :ref:`Slow Functions <slow-functions>`
+* :ref:`Use Class Operator <use-class-operator>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 
 .. _security:
@@ -732,12 +738,13 @@ Total : 16 analysis
 Security
 ++++++++
 
-Total : 18 analysis
+Total : 19 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
+* :ref:`Dont Echo Error <dont-echo-error>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Indirect Injection <indirect-injection>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`

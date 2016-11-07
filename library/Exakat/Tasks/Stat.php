@@ -27,6 +27,8 @@ use Exakat\Config;
 use Exakat\Stats;
 
 class Stat extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+
     public function run(Config $config) {
         $project = $config->project;
 

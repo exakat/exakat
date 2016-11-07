@@ -24,8 +24,8 @@
 namespace Exakat\Tasks;
 
 class CleanDb extends Tasks {
-    private $config = null;
-
+    const CONCURENCE = self::ANYTIME;
+    
     public function __construct($gremlin) {
         $this->enabledLog = false;
         parent::__construct($gremlin);

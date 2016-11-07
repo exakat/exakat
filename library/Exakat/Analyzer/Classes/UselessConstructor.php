@@ -58,7 +58,7 @@ class UselessConstructor extends Analyzer {
              ->atomIs('Void')
              ->back('first')
              ->outIs('EXTENDS')
-             ->classDefinition()
+             ->inIs('DEFINITION')
              ->hasNoOut('EXTENDS')
              ->hasNoOut('IMPLEMENTS')
              ->raw($checkConstructor)
@@ -77,11 +77,11 @@ class UselessConstructor extends Analyzer {
              ->atomIs('Void')
              ->back('first')
              ->outIs('EXTENDS')
-             ->classDefinition()
+             ->inIs('DEFINITION')
              ->hasOut('EXTENDS')
              ->raw($checkConstructor)
              ->outIs('EXTENDS')
-             ->classDefinition()
+             ->inIs('DEFINITION')
              ->raw($checkConstructor)
              ->back('first');
         $this->prepareQuery();

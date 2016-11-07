@@ -31,7 +31,6 @@ use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
 
-    protected $dump            = null; // Dump.sqlite
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
@@ -292,15 +291,15 @@ class Ambassador extends Reports {
         );
 
         // fichier
+        $totalFile = $datastore->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
-        $totalFile = $datastore->getHash('php');
-        $totalFileSansError = $totalFile - $totalFileAnalysed;
-        $porcentFile = ($totalFileSansError / $totalFile) * 100;
+        $totalFileSansError = $totalFileAnalysed - $totalFile;
+        $percentFile = abs(round($totalFileSansError / $totalFile * 100));
 
         // analyzer
-        list($totalAnalyzerUsed, $totalAnalyzer) = $this->getTotalAnalyzer();
-        $totaalAnalyzerSansError = $totalAnalyzer - $totalAnalyzerUsed;
-        $pourcentAnalyzer = ($totaalAnalyzerSansError / $totalAnalyzer) * 100;
+        list($totalAnalyzerUsed, $totalAnalyzerReporting) = $this->getTotalAnalyzer();
+        $totalAnalyzerWithoutError = $totalAnalyzerUsed - $totalAnalyzerReporting;
+        $percentAnalyzer = abs(round($totalAnalyzerWithoutError / $totalAnalyzerUsed * 100));
 
         $html = '<div class="box">
                     <div class="box-header with-border">
@@ -310,7 +309,7 @@ class Ambassador extends Reports {
                     <div class="box-body chart-responsive">
                         <div class="row">
                             <div class="sub-div">
-                                <p class="title"><span># of Php</span> files</p>
+                                <p class="title"><span># of PHP</span> files</p>
                                 <p class="value">' . $info['Number of PHP files'] . '</p>
                             </div>
                             <div class="sub-div">
@@ -320,32 +319,32 @@ class Ambassador extends Reports {
                         </div>
                         <div class="row">
                             <div class="sub-div">
-                                <p class="title"><span># of</span> LoC</p>
+                                <p class="title"><span>PHP</span> LoC</p>
                                 <p class="value">' . $info['Number of lines of code'] . '</p>
                             </div>
                             <div class="sub-div">
-                                <p class="title"><span># of</span> LoC</p>
+                                <p class="title"><span>Total</span> LoC</p>
                                 <p class="value">' . $info['Number of lines of code with comments'] . '</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="sub-div">
-                                <div class="title">Filename free of issues</div>
+                                <div class="title">Files free of issues (%)</div>
                                 <div class="progress progress-sm">
-                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . round($porcentFile) . '%">
-                                        <span class="sr-only">20% Complete</span>
-                                    </div>
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentFile . '%">
+                                        '.$totalFileSansError.'
+                                    </div><div style="color:black; text-align:center;">'.$totalFileAnalysed.'</div>
                                 </div>
-                                <div class="pourcentage">' . round($porcentFile) . '%</div>
+                                <div class="pourcentage">' . $percentFile . '%</div>
                             </div>
                             <div class="sub-div">
-                                <div class="title">Analyzer free of issues</div>
+                                <div class="title">Analyzers free of issues (%)</div>
                                 <div class="progress progress-sm active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . round($pourcentAnalyzer) . '%">
-                                        <span class="sr-only">20% Complete</span>
-                                    </div>
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentAnalyzer . '%">
+                                        '.$totalAnalyzerWithoutError.'
+                                    </div><div style="color:black; text-align:center;">'.$totalAnalyzerReporting.'</div>
                                 </div>
-                                <div class="pourcentage">' . round($pourcentAnalyzer) . '%</div>
+                                <div class="pourcentage">' . $percentAnalyzer . '%</div>
                             </div>
                         </div>
                     </div>
@@ -380,12 +379,20 @@ class Ambassador extends Reports {
         });
         $issuesHtml = '';
         $dataScript = '';
+
         foreach ($data as $key => $value) {
             $issuesHtml .= '<div class="clearfix">
                    <div class="block-cell">' . $value['label'] . '</div>
                    <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
             $dataScript .= ($dataScript) ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
+        }
+        $nb = 4 - count($data);
+        for($i = 0; $i < $nb; ++$i) {
+            $html .= '<div class="clearfix">
+                   <div class="block-cell">&nbsp;</div>
+                   <div class="block-cell text-center">&nbsp;</div>
+                 </div>';
         }
 
         return array('html' => $issuesHtml, 'script' => $dataScript);
@@ -417,6 +424,13 @@ SQL;
                  </div>';
             $dataScript .= ($dataScript) ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
         }
+        $nb = 4 - count($data);
+        for($i = 0; $i < $nb; ++$i) {
+            $html .= '<div class="clearfix">
+                   <div class="block-cell">&nbsp;</div>
+                   <div class="block-cell text-center">&nbsp;</div>
+                 </div>';
+        }
 
         return array('html' => $html, 'script' => $dataScript);
     }
@@ -426,10 +440,10 @@ SQL;
      *
      */
     private function getTotalAnalysedFile() {
-        $query = "SELECT count(*) FROM results GROUP BY file";
+        $query = "SELECT COUNT(DISTINCT file) FROM results";
         $result = $this->sqlite->query($query);
 
-        return $result->fetchArray()[0];
+        return $result->fetchArray(\SQLITE3_NUM)[0];
     }
 
     /**
@@ -615,6 +629,7 @@ SQL;
      */
     private function getTopFile() {
         $data = $this->getFilesCount(self::TOPLIMIT);
+
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
@@ -622,6 +637,13 @@ SQL;
                       <div class="block-cell-name">' . $value['file'] . '</div>
                       <div class="block-cell-issue text-center">' . $value['value'] . '</div>
                     </a>
+                  </div>';
+        }
+        $nb = 10 - count($data);
+        for($i = 0; $i < $nb; ++$i) {
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">&nbsp;</div>
+                      <div class="block-cell-issue text-center">&nbsp;</div>
                   </div>';
         }
 
@@ -983,7 +1005,6 @@ SQL;
         $res = $this->datastore->query('SELECT file FROM files ORDER BY file');
         while($row = $res->fetchArray()) {
             $id = str_replace('/', '_', $row['file']);
-            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
             
             $subdirs = explode('/', dirname($row['file']));
             $dir = $this->tmpName.'/datas/sources';
@@ -995,6 +1016,7 @@ SQL;
             }
 
             $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
+            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
             file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], substr($source, 6, -8));
         }
         

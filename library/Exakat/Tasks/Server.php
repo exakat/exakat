@@ -23,19 +23,23 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+
 class Server extends Tasks {
-    private $config = null;
+    const CONCURENCE = self::SERVER;
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
+        $this->config = $config;
+        
         if ($config->stop === true) {
             $display = @file_get_contents('http://localhost:7447/stop/');
             display('Shut down server ('.$display.')');
-            die();
+            return;
         }
         
         if (file_exists($config->dir_root.'/projects/index.php')) {
             display('A server is already running. Aborting.');
-            die();
+            return;
         }
 
         display('Copy router server');
@@ -46,6 +50,8 @@ class Server extends Tasks {
 
         display('Start server');
         exec($config->php . ' -S 0.0.0.0:7447 -t '.$config->projects_root.'/projects/ '.$config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
+
+        return;
     }
 }
 

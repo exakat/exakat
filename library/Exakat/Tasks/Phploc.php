@@ -23,6 +23,7 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Phpexec;
 
@@ -32,8 +33,10 @@ class Phploc extends Tasks {
     const INCOMPILABLE = 2;
     const EMPTYFILE = 4;
     const ONETOKEN = 8;
+
+    const CONCURENCE = self::ANYTIME;
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         
         $loc = array('files'    => 0,
                      'total'    => 0,

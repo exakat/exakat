@@ -23,8 +23,12 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+
 class Export extends Tasks {
-    public function run(\Exakat\Config $config) {
+    const CONCURENCE = self::ANYTIME;
+
+    public function run(Config $config) {
         $queryTemplate = 'g.V().not(hasId(0))';
 
         $result = $this->gremlin->query($queryTemplate);

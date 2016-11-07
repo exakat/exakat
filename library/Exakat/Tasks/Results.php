@@ -28,6 +28,8 @@ use Exakat\Config;
 use Exakat\Tokenizer\Token;
 
 class Results extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+    
     public function run(Config $config) {
         $analyzer = $config->program;
 
@@ -109,16 +111,16 @@ GREMLIN;
                 $return[] = $row;
             }
         } elseif ($config->style == 'DISTINCT') {
-            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.code.unique()';
-            $vertices = $this->gremlin->query($queryTemplate);
+            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").values("code").unique()';
+            $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return = array();
             foreach($vertices as $k => $v) {
-                $return[] = $v[0];
+                $return[] = [$v];
             }
         } elseif ($config->style == 'COUNTED') {
-            $queryTemplate = 'g.idx("analyzers")[["analyzer":"'.$analyzer.'"]].out.groupCount(m){it.code}.cap';
-            $vertices = $this->gremlin->query($queryTemplate);
+            $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").groupCount("m")by("code").cap("m")';
+            $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return = array();
             foreach($vertices[0] as $k => $v) {

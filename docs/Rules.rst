@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 31 Oct 2016 13:44:45 +0000
-.. comment: Generation hash : 0a59ccc395708a62713593d0968e254035e2befb
+.. comment: Generation date : Mon, 07 Nov 2016 15:30:41 +0000
+.. comment: Generation hash : fbe07700232be7e52de924358e064db7417bd76a
 
 
 .. _$http\_raw\_post\_data:
@@ -1462,7 +1462,29 @@ Could Be Class Constant
 #######################
 
 
-The following property is defined and used, but never modified. This may be transformed into a constant.
+When a property is defined and read, but never modified, it may be a constant. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // $this->bar is never modified. 
+       private $bar = 1;
+       
+       // $this->foofoo is modified, at least once
+       private $foofoo = 2;
+       
+       function method($a) {
+           $this->foofoo = $this->bar + $a + $this->foofoo;
+           
+           return $this->foofoo;
+       }
+       
+   }
+   
+   ?>
+
 
 Starting with PHP 5.6, even array() may be defined as constants.
 
@@ -1846,6 +1868,42 @@ It is recommended to put the modified values in another variable, and keep the o
 
 
 
+.. _dont-echo-error:
+
+Dont Echo Error
+###############
+
+
+It is recommended to avoid displaying error messages directly to the browser.
+
+.. code-block:: php
+
+   <?php
+   
+   // Inside a 'or' test
+   mysql_connect('localhost', $user, $pass) or die(mysql_error());
+   
+   // Inside a if test
+   $result = pg_query( $db, $query );
+   if( !$result )
+   {
+   	echo Erreur SQL: . pg_error();
+   	exit;
+   }
+   
+   ?>
+
+
+Error messages should be logged, but not displayed.
+
++--------------+--------------------------------+
+| Command Line | Security/DontEchoError         |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`Security` |
++--------------+--------------------------------+
+
+
+
 .. _double-assignation:
 
 Double Assignation
@@ -1862,13 +1920,19 @@ This is when a same container (variable, property, array index) are assigned wit
 
 
 
-.. _double-instruction:
+.. _double-instructions:
 
-Double Instruction
-##################
+Double Instructions
+###################
 
 
 Twice the same call in a row. This is worth a check.
+
+.. code-block:: php
+
+   <?php
+   
+   ?>
 
 +--------------+------------------------------+
 | Command Line | Structures/DoubleInstruction |
@@ -1933,6 +1997,29 @@ Echo Or Print
 
 
 Echo or print, this project made a clear choice, but forgot a few spots.
+
+Usage of echo and print are counted, and if one of them is below 10%, then the other one is considered dominant and de facto standard. 
+
+.. code-block:: php
+
+   <?php
+   
+   echo 'a';
+   echo 'b';
+   echo 'c';
+   echo 'd';
+   echo 'e';
+   echo 'f';
+   echo 'g';
+   echo 'h';
+   echo 'i';
+   echo 'j';
+   echo 'k';
+   
+   // This should probably be written 'echo';
+   print 'l';
+   
+   ?>
 
 +--------------+------------------------------------------------+
 | Command Line | Structures/EchoPrintConsistance                |
@@ -2177,6 +2264,18 @@ Empty List
 
 
 Empty list() are not allowed anymore in PHP 7. There must be at least one variable in the list call.
+
+.. code-block:: php
+
+   <?php
+   
+   //Not accepted since PHP 7.0
+   list() = array(1,2,3);
+   
+   //Still valid PHP code
+   list(,$x) = array(1,2,3);
+   
+   ?>
 
 +--------------+--------------------------------------------------------------------+
 | Command Line | Php/EmptyList                                                      |
@@ -2662,7 +2761,26 @@ Forgotten Visibility
 
 Some classes elements (property, method, and constant in PHP 7.1) are missing their explicit visibility. By default, it is public.
 
-It should at least be mentioned as public, or may be reviewed as protected or private.
+It should at least be mentioned as public, or may be reviewed as protected or private. 
+
+final, static and abstract are not counted as visibility. Only public, private and protected.  The PHP 4 var keyword is counted as undefined.
+
+Traits, classes and interfaces are checked. 
+
+.. code-block:: php
+
+   <?php
+   
+   // 
+   class X {
+       const NO_VISIBILITY_CONST = 1; // For PHP 7.1 and later
+   
+       var $noVisibilityProperty = 2; // Only with var
+       
+       function NoVisibilityForMethod() {}
+   }
+   
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/NonPpp                                                                                              |
@@ -3217,9 +3335,50 @@ Indices Are Int Or String
 #########################
 
 
-Indices in an array notation such as $array['indice'] should be integers or string. Boolean, null or float will be converted to their integer or string equivalent.
+Indices in an array notation such as $array['indice'] may only be integers or string.
 
-Even integers inside strings will be converted, though not all of them : $array['8'] and $array[8] are the same, though $array['08'] is not. 
+Boolean, Null or float will be converted to their integer or string equivalent.
+
+.. code-block:: php
+
+   <?php
+       $a = [true => 1,
+             1.0  => 2,
+             1.2  => 3,
+             1    => 4,
+             '1'  => 5,
+             0.8  => 6,
+             0x1  => 7,
+             01   => 8,
+             
+             null  => 1,
+             ''    => 2,
+             
+             false => 1,
+             0     => 2,
+   
+             '0.8' => 3,
+             '01'  => 4,
+             '2a'  => 5
+             ];
+             
+       print_r($a);
+   ?>::
+
+   
+   Array
+   (
+       [1] => 8
+       [0] => 2
+       [] => 2
+       [0.8] => 3
+       [01] => 4
+       [2a] => 5
+   )
+   
+
+
+Decimal numbers are rounded to the closest integer; Null is transtyped to '' (`empty <http://www.php.net/empty>`_ string); true is 1 and false is 0; Integers in strings are transtyped, while partial numbers or decimals are not analyzed in strings. 
 
 As a general rule of thumb, only use integers or strings that don\'t look like integers.
 
@@ -3835,9 +3994,30 @@ Multiple Class Declarations
 ###########################
 
 
-It is possible to declare several times the same class in the code. PHP will not notice it until execution `time <http://www.php.net/time>`_, since declarations may be conditional. 
+It is possible to declare several times the same class in the code. PHP will not mention it until execution `time <http://www.php.net/time>`_, since declarations may be conditional. 
 
-It is recommended to avoid declaring several times the same class in the code. At least, separate them with namespaces, they are for here for that purpose.
+.. code-block:: php
+
+   <?php
+   
+   $a = 1;
+   
+   // Conditional declaration
+   if ($a == 1) {
+       class foo {
+           function method() { echo 'class 1';}
+       }
+   } else {
+       class foo {
+           function method() { echo 'class 2';}
+       }
+   }
+   
+   (new foo())->method();
+   ?>
+
+
+It is recommended to avoid declaring several times the same class in the code. The best practice is to separate them with namespaces, they are for here for that purpose. In case those two classes are to be used interchangeably, the best is to use an abstract class or an interface.
 
 +--------------+------------------------------+
 | Command Line | Classes/MultipleDeclarations |
@@ -3995,9 +4175,27 @@ Multiple Index Definition
 #########################
 
 
-List of all indexes that are defined multiple times in the same array. 
+Indexes that are defined multiple times in the same array. 
 
-Example : $x = array(1 => 2, 2 => 3,  1 => 3);
+.. code-block:: php
+
+   <?php
+       // Multiple identical keys
+       $x = array(1 => 2, 
+                  2 => 3,  
+                  1 => 3);
+   
+       // Multiple identical keys (sneaky version)
+       $x = array(1 => 2, 
+                  1.1 => 3,  
+                  true => 4);
+   
+       // Multiple identical keys (automated version)
+       $x = array(1 => 2, 
+                  3,        // This will be index 2
+                  2 => 4);  // this index is overwritten
+   ?>
+
 
 They are indeed overwriting each other. This is most probably a typo.
 
@@ -4720,6 +4918,41 @@ It is recommended to use a real 'if then' structures, to make the condition read
 +--------------+-------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                            |
 +--------------+-------------------------------------------------------------------------------------------+
+
+
+
+.. _no-isset-with-empty:
+
+No Isset With Empty
+###################
+
+
+Empty() actually does the job of Isset() too. 
+
+From the manual : No warning is generated if the variable does not exist. That means `empty() <http://www.php.net/empty>`_ is essentially the concise equivalent to !isset($var) || $var == false.
+
+.. code-block:: php
+
+   <?php
+   
+   
+   // Enough tests
+   if (i!empty($a)) {
+       doSomething();
+   }
+   
+   // Too many tests
+   if (isset($a) && !empty($a)) {
+       doSomething();
+   }
+   
+   ?>
+
++--------------+-----------------------------+
+| Command Line | Structures/NoIssetWithEmpty |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
 
 
 
@@ -5675,6 +5908,37 @@ Using parenthesis around parameters used to silent some internal check. This is 
 +--------------+-----------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
 +--------------+-----------------------------------------------------+
+
+
+
+.. _performances/timevsstrtotime:
+
+Performances/timeVsstrtotime
+############################
+
+
+`time() <http://www.php.net/time>`_ is actually faster than `strtotime( <http://www.php.net/strtotime>`_'now').
+
+.. code-block:: php
+
+   <?php
+   
+   // Faster version
+   $a = time();
+   
+   // Slower version
+   $b = strtotime('now');
+   
+   ?>
+
+
+This is a micro-optimisation. Gain is real, but small unless the function is used many times.
+
++--------------+------------------------------+
+| Command Line | Performances/timeVsstrtotime |
++--------------+------------------------------+
+| Analyzers    | :ref:`Performances`          |
++--------------+------------------------------+
 
 
 
@@ -6660,7 +6924,23 @@ Should Typecast
 ###############
 
 
-When typecasting, it is better to use the casting operator, such as (int) or (bool), instead of the slower functions such as intval or settype.
+When typecasting, it is better to use the casting operator, such as (int) or (bool).
+
+Functions such as intval() or settype() are always slower.
+
+.. code-block:: php
+
+   <?php
+   
+   $int = intval($_GET['x']);
+   
+   // Quicker version
+   $int = (int) $_GET['x'];
+   
+   ?>
+
+
+This is a micro-optimisation, although such conversion may be use multiple `time <http://www.php.net/time>`_, leading to a larger performance increase.
 
 +--------------+---------------------+
 | Command Line | Type/ShouldTypecast |
@@ -6856,6 +7136,20 @@ Slow Functions
 
 
 Avoid using those slow native PHP functions, and replace them with alternatives.
+
+.. code-block:: php
+
+   <?php
+   
+   $array = source();
+   
+   // Slow extraction of distinct values
+   $array = array_unique($array);
+   
+   // Much faster extraction of distinct values
+   $array = array_keys(array_count_values($array));
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------------------+
 | Command Line | Performances/SlowFunctions                                                                                          |
@@ -7331,7 +7625,7 @@ Timestamp Difference
 
 When the difference may be rounded to a larger `time <http://www.php.net/time>`_ unit (rounding the difference to days, or several hours), the variation may be ignored safely.
 
-When the difference is very small, it requires a better way to mesure `time <http://www.php.net/time>`_ difference, such as ticks, ext/hrtime, or including a check on the actual `time <http://www.php.net/time>`_ zone (ini_get() with 'date.timezone').
+When the difference is very small, it requires a better way to mesure `time <http://www.php.net/time>`_ difference, such as ticks, ext/hrtime, or including a check on the actual `time <http://www.php.net/time>`_ zone (ini_get() with '`date <http://www.php.net/date>`_.timezone').
 
 +--------------+--------------------------------+
 | Command Line | Structures/TimestampDifference |
@@ -7607,7 +7901,22 @@ Unicode Escape Partial
 PHP 7 introduces a new escape sequence for strings : \u{hex}. It is backward incompatible with previous PHP versions for two reasons : 
 
 PHP 7 will recognize en replace those sequences, while PHP 5 keep them intact.
-PHP 7 will chocke on partial Unicode Sequences, as it tries to understand them, but may fail. 
+PHP 7 will halt on partial Unicode Sequences, as it tries to understand them, but may fail. 
+
+.. code-block:: php
+
+   <?php
+   
+   echo \u{1F418}\n; 
+   // PHP 5 displays the same string
+   // PHP 7 displays : an elephant
+   
+   echo \u{NOT A UNICODE CODEPOINT}\n; 
+   // PHP 5 displays the same string
+   // PHP 7 emits a fatal error
+   
+   ?>
+
 
 Is is recommended to check all those strings, and make sure they will behave correctly in PHP 7.
 
@@ -7770,7 +8079,12 @@ For example, it be located after `throw <http://www.php.net/throw>`_, return, ex
    
    foreach($a as $b) {
        $c += $b;
-       continue 1;
+       if ($c > 10) {
+           continue 1;
+       } else {
+           $c--;
+           continue;
+       }
        $d += $e;   // this can't be reached
    }
    
@@ -8408,6 +8722,51 @@ It is faster to use === null instead of is_null().
 
 
 
+.. _use-class-operator:
+
+Use Class Operator
+##################
+
+
+Use ::class to hardcode class names, instead of strings.
+
+This is actually faster than strings, which are parsed at executio `time <http://www.php.net/time>`_, while ::class is compiled, making it faster to execute. 
+
+It is also capable to handle aliases, making the code easier to maintain. 
+
+.. code-block:: php
+
+   <?php
+   
+   namespace foo\bar;
+   
+   use foo\bar\X as B;
+   
+   class X {}
+   
+   $className = '\foo\bar\X';
+   
+   $className = foo\bar\X::class;
+   
+   $className = B\X;
+   
+   $object = new $className;
+   
+   ?>
+
+
+This is not possible when building the name of the class with concatenation.
+
+This is a micro-optimization.
+
++--------------+------------------------------------+
+| Command Line | Classes/UseClassOperator           |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`Performances` |
++--------------+------------------------------------+
+
+
+
 .. _use-const-and-functions:
 
 Use Const And Functions
@@ -8914,6 +9273,34 @@ They may be a left over of an old instruction, or a misunderstanding of the alte
 
 
 
+.. _useless-casting:
+
+Useless Casting
+###############
+
+
+There is no need to overcast returned values.
+
+.. code-block:: php
+
+   <?php
+   
+   // trim always returns a string : cast is useless
+   $a = (string) trim($b);
+   
+   // strpos doesn't always returns an integer : cast is useful
+   $a = (boolean) strpos($b, $c);
+   
+   ?>
+
++--------------+---------------------------+
+| Command Line | Structures/UselessCasting |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
+
+
 .. _useless-constructor:
 
 Useless Constructor
@@ -8936,7 +9323,25 @@ Useless Final
 #############
 
 
-When a class is declared final, all of its methods are also final by default. There is no need to declare them individually final.
+When a class is declared final, all of its methods are also final by default. 
+
+There is no need to declare them individually final.
+
+.. code-block:: php
+
+   <?php
+   
+       final class foo {
+           // Useless final, as the whole class is final
+           final function method() { }
+       }
+   
+       class bar {
+           // Usefule final, as the whole class is not final
+           final function method() { }
+       }
+   
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------+
 | Command Line | Classes/UselessFinal                                                                            |
@@ -8954,11 +9359,27 @@ Useless Global
 ##############
 
 
-The listed global below are useless : they are only used once.
+Global are useless in two cases. First, on super-globals, which are always globals, like $_GET. Secondly, on variables that are not used.
+
+.. code-block:: php
+
+   <?php
+   
+   // $_POST is already a global : it is in fact a global everywhere
+   global $_POST;
+   
+   // $unused is useless
+   function foo() {
+       global $used, $unused;
+       
+       ++$used;
+   }
+   
+   ?>
+
 
 Also, PHP has superglobals, a special team of variables that are always available, whatever the context. 
-They are : $GLOBALS, $_SERVER, $_GET, $_POST, $_FILES, $_COOKIE, $_SESSION, $_REQUEST and $_ENV. 
-Simply avoid using 'global $_POST'.
+They are : $GLOBALS, $_SERVER, $_GET, $_POST, $_FILES, $_COOKIE, $_SESSION, $_REQUEST and $_ENV.
 
 +--------------+--------------------------+
 | Command Line | Structures/UselessGlobal |

@@ -112,23 +112,6 @@ out("ARGUMENTS").out('ARGUMENT').has('rank', 0).sideEffect{ cbClassNode = it.get
     };
     cbMethod = cbMethodNode.value('noDelimiter').toLowerCase();
 
-    /*
-    // case for array('Class', "parent::method") 
-    i = cbMethod.indexOf("::");
-    if (i > 0) {
-        theArray.property('cbMethod', cbMethod.substring(i + 2));
-        
-        // we assume it is only parent.
-        if (g.idx("classes")[["path":theArray.cbClass]].any() == false) {
-            // No such class
-        } else if (g.idx("classes")[["path":theArray.cbClass]].out("EXTENDS").any()) {
-            theArray.cbClass = g.idx("classes")[["path":theArray.cbClass]].out("EXTENDS").next().fullnspath;
-        } else {
-            theArray.cbParentClass = theArray.cbParentClass + "\\parent";
-        }
-    }
-    */
-
     theArrayNode.property('cbClass', cbClass);
     theArrayNode.property('cbMethod', cbMethod);
 }

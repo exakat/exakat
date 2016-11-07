@@ -25,27 +25,32 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoSuchFormat;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\ProjectNotInited;
 use Exakat\Reports\Reports as Report;
 
 class Report2 extends Tasks {
+    const CONCURENCE = self::ANYTIME;
+
     public function run(Config $config) {
         if ($config->project == "default") {
             throw new ProjectNeeded();
+        }
+
+        if (!file_exists($config->projects_root.'/projects/')) {
+            throw new NoSuchProject($config->project);
         }
         
         $reportClass = '\\Exakat\\Reports\\'.$config->format;
 
         if (!class_exists($reportClass)) {
-            die("Format '".$config->format."' doesn't exist. Choose among : ".implode(', ', Report::FORMATS)."\nAborting\n");
-        }
-
-        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
-            die("Project '{$config->project} doesn't exist yet. Run init to create it.\nAborting\n");
+            throw new NoSuchFormat($config->format, Report::FORMATS);
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite')) {
-            die("Project hasn't been analyzed. Run project first.\nAborting\n");
+            throw new ProjectNotInited($config->project);
         }
 
         Analyzer::$datastore = $this->datastore;
@@ -71,7 +76,7 @@ class Report2 extends Tasks {
         $row = $res->fetchArray(\SQLITE3_NUM);
 
         $max = 20;
-        while( $row[0] != 1) {
+        while($row[0] == 0) {
             unset($dump);
             sleep(rand(1,3));
             display("No Dump finish signal ($max). Waiting\n");

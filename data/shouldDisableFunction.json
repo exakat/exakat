@@ -1,0 +1,9 @@
+{
+ "Extensions/Extcurl":{"functions":["curl_init"]},
+ "Extensions/Extftp":{"functions":["ftp_connect","ftp_ssl_connect"]},
+ "Extensions/Extldap":{"functions":["ldap_connect"]},
+ "Extensions/Extmail":{"functions":["mail"]},
+ "Extensions/Extmysqli":{"functions":["mysqli_connect", "mysqli_pconnect"],"classes":["mysqli"]},
+ "Extensions/Extpgsql":{"functions":["pg_connect", "pg_pconnect"]},
+ "Extensions/Extsockets":{"functions":["socket_create", "socket_accept", "socket_connect", "socket_listen"]}
+}
