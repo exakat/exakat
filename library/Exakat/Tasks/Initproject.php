@@ -235,6 +235,8 @@ INI;
                     $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
+                        display( "An error prevented code initialization : ".trim(substr($res, $offset + 7))."\nNo code was loaded.\n");
+
                         $skipFiles = true;
                     }
                     break 1;
