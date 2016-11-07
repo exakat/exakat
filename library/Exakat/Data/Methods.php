@@ -165,6 +165,21 @@ SQL;
 
         return $return;
     }
+
+    public function getFunctionsByReturn() {
+        $return = array();
+
+        $query = <<<SQL
+SELECT return, lower(GROUP_CONCAT('\\' || name)) AS functions FROM args_type WHERE class='PHP' GROUP BY return
+SQL;
+        $res = $this->sqlite->query($query);
+            
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $return[$row['return']] = explode(',', $row['functions']);
+        }
+
+        return $return;
+    }
 }
 
 ?>
