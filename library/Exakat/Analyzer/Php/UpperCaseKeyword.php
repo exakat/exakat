@@ -30,9 +30,10 @@ class UpperCaseKeyword extends Analyzer {
         $this->atomIs(array('Class', 'Foreach', 'Switch', 'For', 'Namespace', 'Use', 'Function',
                             'Try', 'Catch', 'Case', 'Default', 'Goto', 'Continue', 'Const', 'Break',
                             'Clone', 'Dowhile', 'While', 'Interface', 'Instanceof', 'Insteadof', 'Return',
-                            'Throw', 'Trait', 'Interface', 'Var', 'Logical' ))
+                            'Throw', 'Trait', 'Interface', 'Var', 'Logical', 'Public', 'Static', 'Protected', 'Private',
+                            'Final', 'Abstract' ))
              ->codeIsNot(array('&&', '||', '^', '&', '|'))
-             ->isUpperCase('code');
+             ->isNotLowercase('code');
         $this->prepareQuery();
         
         // some of the keywords are lost anyway : implements, extends, as in foreach(), endforeach/while/for/* are lost in tokenizer (may be keep track of that)
