@@ -39,17 +39,18 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
 .toList().get(0).findAll{ a,b -> b == 1}.keySet()');
 
         $this->atomIs('Variable')
-             ->hasNoIn(array('PROPERTY'))
+             ->hasNoIn(array('PPP'))
+             ->raw('where( __.in("LEFT").in("PPP").count().is(eq(0)) )')
              ->hasNoFunction()
              ->codeIs($variables);
         $this->prepareQuery();
 
         $this->atomIs('Function')
-             ->outIs('BLOCK')
              ->raw('where( __
                    .sideEffect{counts = [:]}
                              .repeat( out().where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) ) )
                              .emit( hasLabel("Variable").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
+                             .hasLabel("Variable").not(has("code", "\\$this"))
                              .where( __.in("PROPERTY").count().is(eq(0)) )
                              .sideEffect{ k = it.get().value("code"); 
                                          if (counts[k] == null) {
