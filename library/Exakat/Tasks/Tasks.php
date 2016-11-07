@@ -40,6 +40,7 @@ abstract class Tasks {
     
     const  NONE    = 1;
     const  ANYTIME = 2;
+    const  DUMP = 3;
     const  QUEUE = 4;
     const  SERVER = 5;
     
@@ -58,10 +59,12 @@ abstract class Tasks {
                     $ftok_proj = 'q';
                 } elseif (static::CONCURENCE === self::SERVER) {
                     $ftok_proj = 's';
+                } elseif (static::CONCURENCE === self::DUMP) {
+                    $ftok_proj = 'd';
                 } else {
                     $ftok_proj = 'j';
                 }
-                $key = ftok(__FILE__, $ftok_proj);
+                $key = ftok($config->executable, $ftok_proj);
                 self::$semaphore = sem_get($key, 1);
                 if (sem_acquire(self::$semaphore, 1) === false) {
                     throw new AnotherProcessIsRunning();
@@ -113,7 +116,31 @@ abstract class Tasks {
             unlink($log);
         }
     }
+    
+    protected function addSnitch($values = array()) {
+        static $snitch, $pid, $path;
+        
+        if ($snitch === null) {
+            $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
+            $pid = getmypid();
+            $path = $this->config->projects_root.'/projects/.exakat/'.$snitch.'.json';
+        }
+        
+        $values['pid'] = $pid;
+        file_put_contents($path, json_encode($values));
+    }
 
+    protected function removeSnitch() {
+        static $snitch;
+        
+        if ($snitch === null) {
+            $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
+            $pid = getmypid();
+            $path = $this->config->projects_root.'/projects/.exakat/'.$snitch.'.json';
+        }
+        
+        unlink($path);
+    }
 }
 
 ?>
