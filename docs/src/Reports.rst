@@ -12,6 +12,8 @@ There are several reports that may be extracted from Exakat :
 * Devoops
 * Uml
 * Clustergrammer
+* PhpConfiguration
+* RadwellCodes
 
    `php exakat.phar report -p <project> -format <format> -file <filename>`
 
@@ -147,3 +149,21 @@ Clustergrammer
 --------------
 
 Clustergrammer is a visualisation tool that may be found online. After generation of this report, a TEXT file is available in the project directory. Upload it on [http://amp.pharm.mssm.edu/clustergrammer/](http://amp.pharm.mssm.edu/clustergrammer/) to visualize it. 
+
+PhpConfiguration
+----------------
+
+PhpConfiguration gives your a ./configure list of options to build a PHP binary, tailored for the repository. 
+
+It also produces a list of php.ini directives that should be reviewed, to make sure that the PHP installation is adapted to the code. 
+
+The result itself is a Text file.
+
+RadwellCodes
+------------
+
+RadwellCodes is a report based on Oliver Radwell's [PHP Do And Don't](https://blog.radwell.codes/2016/11/php-dos-donts-aka-programmers-dont-like/)
+
+This is a Text report, with the file name and line of issue, and the report's error. 
+
+Note that all rules are not implemented, especially the 'coding conventions' ones, as this is beyond the scope of this tool.
