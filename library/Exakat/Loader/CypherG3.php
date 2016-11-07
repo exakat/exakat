@@ -182,8 +182,6 @@ CYPHER;
         foreach($this->unlink as $file) {
             unlink($file);
         }
-
-        rmdir(dirname($file));
     }
 
     public function saveTokenCounts() {
