@@ -76,7 +76,7 @@ class Report2 extends Tasks {
         $row = $res->fetchArray(\SQLITE3_NUM);
 
         $max = 20;
-        while( $row[0] != 1) {
+        while($row[0] == 0) {
             unset($dump);
             sleep(rand(1,3));
             display("No Dump finish signal ($max). Waiting\n");
