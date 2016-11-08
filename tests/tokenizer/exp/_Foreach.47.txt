@@ -1,0 +1,41 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Foreach.47.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foreach
+          Label : BLOCK
+            ;
+            Label : ELEMENT
+              foreach
+              Label : BLOCK
+                ;
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      'A'
+                  Label : NAME
+                    echo
+                Label : ELEMENT
+                  J
+              Label : SOURCE
+                $e
+              Label : VALUE
+                $f
+          Label : SOURCE
+            $b
+          Label : VALUE
+            =>
+            Label : KEY
+              $c
+            Label : VALUE
+              $d
+        Label : ELEMENT
+          Void
