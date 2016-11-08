@@ -1193,6 +1193,8 @@ class Load extends Tasks {
                 if ($this->tokens[$this->id + 1][0] == T_END) {
                     --$this->id;
                 }
+            } elseif ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
+                --$this->id;
             }
 
             $this->processNext();
@@ -1240,7 +1242,6 @@ class Load extends Tasks {
     
             ++$this->id;
             $inlineId = $this->processInlineHtml();
-            $this->addToSequence($inlineId);
         
             if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
@@ -1275,8 +1276,7 @@ class Load extends Tasks {
         $current = $this->id;
         
         $argumentsId = $this->processArguments(array(T_SEMICOLON, T_CLOSE_TAG, T_END));
-//        print_r($this->atoms[$argumentsId]);die();
-    
+
         //processArguments goes too far, up to ;
         if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
             --$this->id;
@@ -2071,7 +2071,7 @@ class Load extends Tasks {
         ++$this->id; // Skip )
         $isColon = ($this->tokens[$current][0] === T_FOREACH) && ($this->tokens[$this->id + 1][0] === T_COLON);
 
-        $blockId = $this->processFollowingBlock(array(T_ENDFOREACH));
+        $blockId = $this->processFollowingBlock($isColon === true ? array(T_ENDFOREACH) : array());
         
         $this->popExpression();
         $this->addLink($id, $blockId, 'BLOCK');
@@ -2085,12 +2085,16 @@ class Load extends Tasks {
         }
 
         $this->setAtom($id, array('code'        => $this->tokens[$current][1],
-                             'fullcode'    => $fullcode,
-                             'line'        => $this->tokens[$current][2],
-                             'token'       => $this->getToken($this->tokens[$current][0]),
-                             'alternative' => $isColon));
+                                  'fullcode'    => $fullcode,
+                                  'line'        => $this->tokens[$current][2],
+                                  'token'       => $this->getToken($this->tokens[$current][0]),
+                                  'alternative' => $isColon));
         $this->pushExpression($id);
         $this->processSemicolon();
+        
+        if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
+            --$this->id;
+        }
 
         return $id;
     }
@@ -2641,8 +2645,7 @@ class Load extends Tasks {
 
     private function processInlineHtml() {
         $this->processSingle('InlineHtml');
-        
-        return $this->popExpression();
+        $this->processSemicolon();
     }
 
     private function processNamespaceBlock() {
