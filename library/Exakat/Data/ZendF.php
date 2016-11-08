@@ -63,7 +63,7 @@ class ZendF {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['class'];
             } else {
-                $return[$row['release']] = [$row['class']];
+                $return[$row['release']] = array($row['class']);
             }
         }
         
@@ -87,7 +87,7 @@ class ZendF {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['interface'];
             } else {
-                $return[$row['release']] = [$row['interface']];
+                $return[$row['release']] = array($row['interface']);
             }
         }
         

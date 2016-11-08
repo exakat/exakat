@@ -156,7 +156,7 @@ SQL;
     public function getSeverities() {
         $query = "SELECT folder||'/'||name AS analyzer, severity FROM analyzers";
 
-        $return = [];
+        $return = array();
         $res = $this->sqlite->query($query);
         while($row = $res->fetchArray()) {
             $return[$row['analyzer']] = empty($res2[0]) ? Analyzer::S_NONE : constant("Exakat\\Analyzer\\Analyzer::$res2[0]");
@@ -168,7 +168,7 @@ SQL;
     public function getTimesToFix() {
         $query = "SELECT folder||'/'||name AS analyzer, timetofix FROM analyzers";
 
-        $return = [];
+        $return = array();
         $res = $this->sqlite->query($query);
         while($row = $res->fetchArray()) {
             $return[$row['analyzer']] = empty($res2[0]) ? Analyzer::S_NONE : constant("Exakat\\Analyzer\\Analyzer::$res2[0]");

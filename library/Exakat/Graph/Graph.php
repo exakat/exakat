@@ -29,7 +29,7 @@ abstract class Graph {
         $this->config = $config;
     }
 
-    abstract public function query($query, $params = [], $load = []); 
+    abstract public function query($query, $params = array(), $load = array()); 
 }
 
 ?>

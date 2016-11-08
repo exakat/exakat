@@ -144,10 +144,10 @@ class FindExternalLibraries extends Tasks {
             display(count($newConfigs).' external libraries are going to be omitted : '.implode(', ', array_keys($newConfigs)));
         }
 
-        $store = [];
+        $store = array();
         foreach($newConfigs as $library => $file) {
-            $store[] = ['library' => $library,
-                        'file'    => $file];
+            $store[] = array('library' => $library,
+                             'file'    => $file);
         }
 
         $this->datastore->cleanTable('externallibraries');

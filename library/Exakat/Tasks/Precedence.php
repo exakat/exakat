@@ -27,7 +27,7 @@ use Exakat\Exceptions\NoPrecedence;
 
 class Precedence {
 
-    const PRECEDENCE = [
+    static private $PRECEDENCE = array(
                         T_OBJECT_OPERATOR             => 0,
                         T_DOUBLE_COLON                => 0,
                         T_DOLLAR                      => 0,
@@ -142,16 +142,16 @@ class Precedence {
                         T_INSTEADOF                   => 31,
 
                         T_SEMICOLON                   => 32,
-    ];
+    );
 
     public function get($token, $itself = false) {
         static $cache;
         
         if ($cache === null) {
-            $cache = [];
-            foreach(self::PRECEDENCE as $k1 => $p1) {
-                $cache[$k1] = [];
-                foreach(self::PRECEDENCE as $k2 => $p2) {
+            $cache = array();
+            foreach(self::$PRECEDENCE as $k1 => $p1) {
+                $cache[$k1] = array();
+                foreach(self::$PRECEDENCE as $k2 => $p2) {
                     if ($p1 <= $p2 && ($itself === true || $k1 !== $k2) ) {// && (!in_array($token, [T_COALESCE]) || $token !== $k2)
                         $cache[$k1][] = $k2;
                     }
@@ -168,6 +168,7 @@ class Precedence {
     
     public static function preloadConstants($version) {
         $filename = dirname(__DIR__) . '/Tasks/Tokens/Const' . $version[0] . $version[2] . ".php";
+        print $filename."\n";
         if (!file_exists($filename)) {
             throw new NoConstFile($version);
         }

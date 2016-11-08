@@ -46,7 +46,7 @@ class Report2 extends Tasks {
         $reportClass = '\\Exakat\\Reports\\'.$config->format;
 
         if (!class_exists($reportClass)) {
-            throw new NoSuchFormat($config->format, Report::FORMATS);
+            throw new NoSuchFormat($config->format, Report::$FORMATS);
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite')) {

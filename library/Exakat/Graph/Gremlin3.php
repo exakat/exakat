@@ -51,11 +51,11 @@ class Gremlin3 extends Graph {
         }
     }
 
-    public function query($query, $params = [], $load = []) {
+    public function query($query, $params = array(), $load = array()) {
         $getString = 'script='.urlencode($query);
     
         if (!is_array($load)) {
-            $load = [$load];
+            $load = array($load);
         }
 
         if (isset($params) && !empty($params)) {
@@ -174,7 +174,7 @@ GREMLIN;
         return $result;
     }
 
-    public function queryOne($query, $params = [], $load = []) {
+    public function queryOne($query, $params = array(), $load = array()) {
         $res = $this->query($query, $params, $load);
         if (!is_object($res)) {
             die('Server is not responding');
@@ -194,7 +194,7 @@ GREMLIN;
         }
     }
 
-    public function queryColumn($query, $params = [], $load = []) {
+    public function queryColumn($query, $params = array(), $load = array()) {
         $res = $this->query($query, $params, $load);
         $res = $res->results;
     

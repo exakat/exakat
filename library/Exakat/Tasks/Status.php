@@ -104,7 +104,7 @@ class Status extends Tasks {
         // errors? 
 
         $formats = array();
-        foreach(Reports::FORMATS as $format) {
+        foreach(Reports::$FORMATS as $format) {
             $a = $this->datastore->getHash($format);
             if (!empty($a)) {
                 $formats[$format] = $a;

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DuplicateCalls extends Analyzer {
     public function analyze() {
         // This is counting ALL occurences as itself.
-        $atoms = ['Methodcall', 'Functioncall'];
+        $atoms = array('Methodcall', 'Functioncall');
         
         foreach($atoms as $atom) {
             $calls = $this->query('g.V().hasLabel("'.$atom.'").where( __.in("METHOD").count().is(eq(0)))

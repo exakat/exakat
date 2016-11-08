@@ -218,7 +218,7 @@ SQL;
         $insert = $sqlite->prepare($sqlQuery);
 
         
-        foreach(Token::ATOMS as $atom) {
+        foreach(Token::$ATOMS as $atom) {
             $query = 'g.V().hasLabel("'.$atom.'").count()';
             $res = $this->gremlin->query($query);
             if (!is_object($res) || !isset($res->results)) {
@@ -269,7 +269,7 @@ GREMLIN
         $res = $this->gremlin->query($query);
         $res = $res->results;
         
-        $namespacesId = ['' => 1];
+        $namespacesId = array('' => 1);
         $total = 0;
         foreach($res as $row) {
             if (isset($namespacesId['\\'.$row->name])) {

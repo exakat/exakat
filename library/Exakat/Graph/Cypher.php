@@ -30,8 +30,8 @@ class Cypher extends Graph {
         parent::__construct($config);
     }
 
-    public function query($query, $params = [], $load = []) {
-        $fields = ['query' => $query];
+    public function query($query, $params = array(), $load = array()) {
+        $fields = array('query' => $query);
         if (isset($params) && !empty($params)) {
             $fields['params'] = $params;
         }

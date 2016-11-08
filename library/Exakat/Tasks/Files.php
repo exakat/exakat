@@ -54,13 +54,13 @@ class Files extends Tasks {
         
         $this->checkComposer($dir);
 
-        $ignoredFiles = [];
-        $files = [];
+        $ignoredFiles = array();
+        $files = array();
         self::findFiles($config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles);
         
-        $i = [];
+        $i = array();
         foreach($ignoredFiles as $file => $reason) {
-            $i[] = ['file' => $file, 'reason' => $reason];
+            $i[] = array('file' => $file, 'reason' => $reason);
         }
         $ignoredFiles = $i;
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
@@ -294,8 +294,8 @@ class Files extends Tasks {
         $d = getcwd();
         if (!file_exists($path)) {
             display( "No such file as " . $path . " when looking for files\n");
-            $files = [];
-            $ignoredFiles = [];
+            $files = array();
+            $ignoredFiles = array();
             return ;
         }
         chdir($path);

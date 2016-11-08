@@ -130,7 +130,7 @@ class Phploc extends Tasks {
                 if (substr($file, -4) !== '.php') {
                     continue;
                 }
-                $r[] = [$dirname.'/'.$file];
+                $r[] = array($dirname.'/'.$file);
             }
         }
         $return = call_user_func_array('array_merge', $r);

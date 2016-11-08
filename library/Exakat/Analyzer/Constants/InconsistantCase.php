@@ -38,7 +38,7 @@ g.V().hasLabel("<atom>").map{ if (it.get().value('code') == it.get().value('code
                                 }; }.groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * 0.1; }.keySet()
 GREMLIN;
         
-        $atoms = ['Null', 'Boolean'];
+        $atoms = array('Null', 'Boolean');
         foreach($atoms as $atom) {
             $types = $this->query(str_replace('<atom>', $atom, $query) );
 

@@ -170,7 +170,7 @@ g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "E
 }
 
 GREMLIN;
-        $this->gremlin->query($query, ['arg1' => $constants]);
+        $this->gremlin->query($query, array('arg1' => $constants));
         display('spot PHP / ext constants');
 
         $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() > 0 }.values("code")';
@@ -192,7 +192,7 @@ g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "E
 }.addE("DEFINITION").from( g.V().hasLabel("Const").out("CONST").out("NAME").filter{ it.get().value("code") == name} )
 
 GREMLIN;
-        $this->gremlin->query($query, ['arg1' => $constantsGlobal, 'arg2' => $constantsDefinitions]);
+        $this->gremlin->query($query, array('arg1' => $constantsGlobal, 'arg2' => $constantsDefinitions));
         display('spot constants that falls back on global constants');
 
         $functions = call_user_func_array('array_merge', $f);
@@ -209,7 +209,7 @@ g.V().hasLabel("Functioncall").not(has("token", "T_OPEN_TAG_WITH_ECHO"))
 }
 
 GREMLIN;
-        $this->gremlin->query($query, ['arg1' => $functions]);
+        $this->gremlin->query($query, array('arg1' => $functions));
         display('mark PHP native functions call');
 
         // Define-style constant definitions
@@ -243,7 +243,7 @@ g.V().hasLabel("Identifier", "Nsname")
          )
 
 GREMLIN;
-            $res = $this->gremlin->query($query, ['arg1' => $constants]);
+            $res = $this->gremlin->query($query, array('arg1' => $constants));
 
             // Second round, with fallback to global constants
             $query = <<<GREMLIN
@@ -259,7 +259,7 @@ g.V().hasLabel("Identifier", "Nsname")
          )
 
 GREMLIN;
-            $res = $this->gremlin->query($query, ['arg1' => $constants]);
+            $res = $this->gremlin->query($query, array('arg1' => $constants));
             
             // TODO : handle case-insensitive
 
@@ -336,7 +336,7 @@ g.V().hasLabel("Functioncall").filter{ it.get().value("fullnspath") in arg1}
      .where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant", true)).count().is(eq(0)) )
     .sideEffect{ it.get().property("constant", true);}
 GREMLIN;
-            $this->gremlin->query($query, ['arg1' => $deterministFunctions]);
+            $this->gremlin->query($query, array('arg1' => $deterministFunctions));
         }
         display('Mark constants expressions');
 

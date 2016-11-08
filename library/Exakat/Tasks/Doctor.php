@@ -519,7 +519,8 @@ INI;
         }
 
         // wget
-        $res = explode("\n", shell_exec('wget -V 2>&1'))[0];
+        $res = explode("\n", shell_exec('wget -V 2>&1'));
+        $res = $res[0];
         if ($res !== '') {//
             $stats['wget']['installed'] = 'Yes';
             $stats['wget']['version'] = $res;
