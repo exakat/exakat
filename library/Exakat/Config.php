@@ -176,6 +176,8 @@ class Config {
             $this->projects_root = substr(dirname(dirname(dirname(__DIR__))), 7);
             $this->dir_root      = 'phar://'.$this->executable;
 
+            assert_options(ASSERT_ACTIVE, 0);
+            
             error_reporting(0);
             ini_set('display_errors', 0);
         } else {
@@ -183,6 +185,9 @@ class Config {
             $this->dir_root      = dirname(dirname(__DIR__));
             $this->projects_root = dirname(dirname(__DIR__));
 
+            assert_options(ASSERT_ACTIVE, 1);
+            assert_options(ASSERT_BAIL, 1);
+            
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
         }
