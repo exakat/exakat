@@ -175,10 +175,16 @@ class Config {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->projects_root = substr(dirname(dirname(dirname(__DIR__))), 7);
             $this->dir_root      = 'phar://'.$this->executable;
+
+            error_reporting(0);
+            ini_set('display_errors', 0);
         } else {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->dir_root      = dirname(dirname(__DIR__));
             $this->projects_root = dirname(dirname(__DIR__));
+
+            error_reporting(E_ALL);
+            ini_set('display_errors', 1);
         }
         
         $configFile = $this->projects_root.'/config/exakat.ini'; 
