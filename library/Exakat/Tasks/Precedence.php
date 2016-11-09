@@ -168,7 +168,6 @@ class Precedence {
     
     public static function preloadConstants($version) {
         $filename = dirname(__DIR__) . '/Tasks/Tokens/Const' . $version[0] . $version[2] . ".php";
-        print $filename."\n";
         if (!file_exists($filename)) {
             throw new NoConstFile($version);
         }
