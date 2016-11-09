@@ -2634,6 +2634,9 @@ class Load extends Tasks {
     //////////////////////////////////////////////////////
     private function processSingle($atom) {
         $id = $this->addAtom($atom);
+        if (strlen($this->tokens[$this->id][1]) > 100000) {
+            $this->tokens[$this->id][1] = substr($this->tokens[$this->id][1], 0, 100000)."\n[.... 100000 / ".strlen($this->tokens[$this->id][1])."]\n";
+        }
         $this->setAtom($id, array('code'     => $this->tokens[$this->id][1],
                                   'fullcode' => $this->tokens[$this->id][1],
                                   'line'     => $this->tokens[$this->id][2],
@@ -3974,11 +3977,8 @@ class Load extends Tasks {
         
         // Saving atoms
         foreach($this->atoms as $atom) {
-            if (empty($atom)) {
-                print "Atom is empty in \n";
-                die();
-            }
             $fileName = $this->exakatDir.'/nodes.g3.'.$atom['atom'].'.csv';
+            assert(empty($atom),  "Atom is empty in $atom['atom']\n");
             if ($atom['atom'] === 'Project' && file_exists($fileName)) {
                 // Project is saved only once
                 continue;
@@ -4029,8 +4029,8 @@ class Load extends Tasks {
         foreach($this->links as $label => $origins) {
             foreach($origins as $origin => $destinations) {
                 foreach($destinations as $destination => $links) {
-                    if (empty($origin)) { die("Unknown origin for Rel files\n"); }
-                    if (empty($destination)) { die("Unknown destination for Rel files\n"); }
+                    assert(empty($origin),  "Unknown origin for Rel files\n");
+                    assert(empty($destination),  "Unknown destination for Rel files\n");
                     $csv = $label.'.'.$origin.'.'.$destination;
                     $fileName = $this->exakatDir.'/rels.g3.'.$csv.'.csv';
                     if (isset($extras[$csv])) {
