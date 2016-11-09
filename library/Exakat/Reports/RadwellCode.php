@@ -33,6 +33,7 @@ class RadwellCode extends Reports {
                              'Structures/NestedIfthen'                      => 'Too many nested if statements',
                              'Structures/NoParenthesisForLanguageConstruct' => 'Extra brackets and braces',
                              'Structures/UselessBrackets'                   => 'Extra brackets and braces',
+                             'Type/OneVariableStrings'                      => 'Extra brackets and braces and quotes',
                              'Structures/UselessCasting'                    => 'Unnecessary casting',
                              'Structures/NoIssetWithEmpty'                  => 'Useless checks',
                              'Performances/timeVsstrtotime'                 => 'Slow PHP built-in functions',
@@ -45,6 +46,7 @@ class RadwellCode extends Reports {
                              'Php/UpperCaseKeyword'                         => 'Wrong function / class name casing',
                              'Classes/WrongCase'                            => 'Wrong function / class name casing',
 //                             '' => 'Lack of coding standards',
+                        
                              );
 
     public function __construct() {
