@@ -94,6 +94,25 @@ class UselessParenthesis extends Analyzer {
                             'Magicconstant', 'Null', 'Functioncall', 'Property', 'Methodcall', 
                             'Staticmethodcall', 'Staticconstant', 'Staticproperty'));
         $this->prepareQuery();
+
+        //$d = ((($a)+$b)+$c);
+        $this->atomIs('Addition')
+             ->inIs('CODE')
+             ->atomIs('Parenthesis')
+             ->inIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Addition')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+
+        //$d = ((($a)*$b)*$c);
+        $this->atomIs('Multiplication')
+             ->inIs('CODE')
+             ->atomIs('Parenthesis')
+             ->inIs(array('LEFT', 'RIGHT'))
+             ->atomIs('Multiplication')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+        
     }
 }
 
