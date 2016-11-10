@@ -509,7 +509,7 @@ repeat(__.in('.$linksDown.'))
     public function analyzerIs($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = str_replace('\\', '\\\\', self::getClass($a));
+                $a = self::getName($a);
             }
             unset($a);
 
@@ -529,7 +529,7 @@ repeat(__.in('.$linksDown.'))
     public function analyzerIsNot($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = self::getClass($a);
+                $a = self::getName($a);
             }
             unset($a);
 
