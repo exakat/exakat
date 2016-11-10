@@ -124,10 +124,8 @@ class Project extends Tasks {
         $this->logTime('Loading');
         $this->updateProgress($progress++);
 
-        $analyze = new Magicnumber($this->gremlin);
-        $analyze->run($config);
-        unset($analyze);
-        $this->updateProgress($progress++);
+        // paralell running
+        exec($config->php . ' '.$config->executable.' magicnumber -p '.$config->project.'   > /dev/null &');
         $this->addSnitch(array('step' => 'Magic Numbers', 'project' => $config->project));
 
         // Dump is a child process
