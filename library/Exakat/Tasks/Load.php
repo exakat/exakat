@@ -3978,7 +3978,7 @@ class Load extends Tasks {
         // Saving atoms
         foreach($this->atoms as $atom) {
             $fileName = $this->exakatDir.'/nodes.g3.'.$atom['atom'].'.csv';
-            assert(empty($atom),  "Atom is empty in $atom[atom]\n");
+            assert(!empty($atom),  "Atom is empty for $atom[atom]\n");
             if ($atom['atom'] === 'Project' && file_exists($fileName)) {
                 // Project is saved only once
                 continue;
@@ -4029,8 +4029,8 @@ class Load extends Tasks {
         foreach($this->links as $label => $origins) {
             foreach($origins as $origin => $destinations) {
                 foreach($destinations as $destination => $links) {
-                    assert(empty($origin),  "Unknown origin for Rel files\n");
-                    assert(empty($destination),  "Unknown destination for Rel files\n");
+                    assert(!empty($origin),  "Unknown origin for Rel files\n");
+                    assert(!empty($destination),  "Unknown destination for Rel files\n");
                     $csv = $label.'.'.$origin.'.'.$destination;
                     $fileName = $this->exakatDir.'/rels.g3.'.$csv.'.csv';
                     if (isset($extras[$csv])) {
