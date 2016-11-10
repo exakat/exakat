@@ -26,6 +26,8 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Tasks\Precedence;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
 
 class FindExternalLibraries extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -90,11 +92,11 @@ class FindExternalLibraries extends Tasks {
     public function run(Config $config) {
         $project = $config->project;
         if ($project == 'default') {
-            die("findextlib requires a -p <project>\nAborting\n");
+            throw new ProjectNeeded();
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {
-            die("No such project as $project.\nAborting\n");
+            throw new NoSuchProject();
         }
 
         $dir = $config->projects_root.'/projects/'.$project.'/code';
@@ -114,9 +116,6 @@ class FindExternalLibraries extends Tasks {
         }
 
         $this->php = new Phpexec();
-        if (!$this->php->isValid()) {
-            die("This PHP binary is not valid for running Exakat.\n");
-        }
 
         $this->php->getTokens();
         Precedence::preloadConstants($this->php->getActualVersion());
@@ -136,7 +135,7 @@ class FindExternalLibraries extends Tasks {
         } else {
             $newConfigs = array();
         }
-//        $newConfigs = array_keys(array_count_values($newConfigs));
+        $newConfigs = array_keys(array_count_values($newConfigs));
 
         if (count($newConfigs) == 1) {
             display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));
