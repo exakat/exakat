@@ -32,9 +32,9 @@ Command
 #######
 ::
 
-    exakat init -p <project> 
-    exakat init -d <directory> 
-    exakat init -file <filename> 
+    exakat anonymize -p <project> 
+    exakat anonymize -d <directory> 
+    exakat anonymize -file <filename> 
 
 Options
 #######
@@ -230,7 +230,7 @@ Command
 #######
 ::
 
-    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer] [-v]
+    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer|-symlink|-copy|-tgz|-zip] [-v]
 
 Options
 #######
@@ -263,6 +263,26 @@ Tips
 ####
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
+
+Examples
+########
+::
+
+    # Clone Exakat with Git
+    php exakat.phar init -p exakat -R https://github.com/exakat/exakat.git 
+
+    # Download Spip with Zip
+    php exakat init -p spip2 -zip -R http://files.spip.org/spip/stable/spip-3.1.zip
+
+    # Download PHPMyadmin, 
+    php exakat.phar init -p pma2 -tgz -R https://files.phpmyadmin.net/phpMyAdmin/4.6.4/phpMyAdmin-4.6.4-all-languages.tar.gz
+
+    # Make a local copy of PHPMyadmin, 
+    php exakat.phar init -p copyProject -copy -R projects/phpmyadmin/code/
+
+    # Make a local symlink with the local webserver, 
+    php exakat.phar init -p copyProject -copy -R /var/www/public_html
+
 
 
 project
