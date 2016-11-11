@@ -1512,6 +1512,23 @@ GREMLIN
         die();
     }
 
+    public function debugQuery() {
+        $methods = $this->methods;
+        $arguments = $this->arguments;
+
+        $nb = count($methods);
+        for($i = 2; $i < $nb; ++$i) {
+            $this->methods = array_slice($methods, 0, $i);
+            $this->arguments = array_slice($arguments, 0, $i);
+            $this->prepareQuery();
+            $this->execQuery();
+            print $this->rowCount."\n";
+            $this->rowCount = 0;
+        }
+
+        die();
+    }
+    
     public function prepareQuery() {
         // @doc This is when the object is a placeholder for others.
         if (count($this->methods) <= 1) { return true; }
