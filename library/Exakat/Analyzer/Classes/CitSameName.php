@@ -28,10 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class CitSameName extends Analyzer {
     public function analyze() {
 
+        $classes = $this->query('g.V().hasLabel("Class").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
         $interfaces = $this->query('g.V().hasLabel("Interface").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
-        $classes = $this->query('g.V().hasLabel("Trait").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
-        $traits = $this->query('g.V().hasLabel("Class").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
-
+        $traits = $this->query('g.V().hasLabel("Trait").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
+        
         // Classes
         $this->atomIs('Class')
              ->outIs('NAME')
@@ -42,14 +42,14 @@ class CitSameName extends Analyzer {
         // Trait
         $this->atomIs('Trait')
              ->outIs('NAME')
-             ->codeIs(array_merge($classes, $traits))
+             ->codeIs(array_merge($classes, $interfaces))
              ->back('first');
         $this->prepareQuery();
 
         // Interfaces
         $this->atomIs('Interface')
              ->outIs('NAME')
-             ->codeIs(array_merge($classes, $interfaces))
+             ->codeIs(array_merge($classes, $traits))
              ->back('first');
         $this->prepareQuery();
     }

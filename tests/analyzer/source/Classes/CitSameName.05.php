@@ -1,10 +1,11 @@
 <?php
 
 interface T {}
-
 class T {}
 
-trait T {}
+function Tu () {}
+function Tv () {}
+function Tx () {}
 
 interface Tu {}
 
