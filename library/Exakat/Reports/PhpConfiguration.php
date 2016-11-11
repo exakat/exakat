@@ -100,7 +100,6 @@ TEXT
         $functionsList = array();
         $classesList = array();
         foreach((array) $shouldDisableFunctions as $ext => $toDisable) {
-            print "$ext\n";
             if ($sources[$ext] == 0) {
                 if (isset($toDisable->functions)) { 
                     $functionsList[] = $toDisable->functions;
