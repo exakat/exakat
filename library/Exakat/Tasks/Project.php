@@ -39,10 +39,8 @@ class Project extends Tasks {
                               'Analyze');
 
     protected $reports = array('Premier' => array('Ambassador' => 'report',
-                                                  'Faceted'    => 'faceted'));
+                                                  'Devoops'    => 'oldreport'));
     
-    const TOTAL_STEPS = 23; // 2 Reports + 10 Analyzes + 10 other steps
-
     public function run(Config $config) {
         $this->config = $config;
         
@@ -86,7 +84,6 @@ class Project extends Tasks {
         unset($analyze);
         $this->logTime('CleanDb');
         $this->addSnitch(array('step' => 'Clean DB', 'project' => $config->project));
-        $this->updateProgress($progress++);
 
         display("Search for external libraries\n");
         $args = array ( 1 => 'findextlib',
@@ -100,19 +97,16 @@ class Project extends Tasks {
         $analyze = new FindExternalLibraries($this->gremlin);
         $analyze->run($configThema);
         unset($report);
-        $this->updateProgress($progress++);
         $this->addSnitch(array('step' => 'External lib', 'project' => $config->project));
 
         Config::pop();
         unset($analyze);
-        $this->updateProgress($progress++);
 
         display("Running files\n");
         $analyze = new Files($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         $this->logTime('Files');
-        $this->updateProgress($progress++);
         $this->addSnitch(array('step' => 'Files', 'project' => $config->project));
 
         $this->checkTokenLimit();
@@ -122,7 +116,6 @@ class Project extends Tasks {
         unset($analyze);
         display("Project loaded\n");
         $this->logTime('Loading');
-        $this->updateProgress($progress++);
 
         // paralell running
         exec($config->php . ' '.$config->executable.' magicnumber -p '.$config->project.'   > /dev/null &');
@@ -152,7 +145,6 @@ class Project extends Tasks {
                 unset($report);
                 
                 rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
-                $this->updateProgress($progress++);
 
                 Config::pop();
             } catch (\Exception $e) {
@@ -164,7 +156,6 @@ class Project extends Tasks {
         }
 
         display("Analyzed project\n");
-        $this->updateProgress($progress++);
         $this->logTime('Analyze');
         $this->addSnitch(array('step' => 'Analyzed', 'project' => $config->project));
 
@@ -172,7 +163,6 @@ class Project extends Tasks {
         check on dump ? 
 */
 
-        $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
         $oldConfig = Config::factory();
@@ -180,7 +170,6 @@ class Project extends Tasks {
             foreach($formats as $format => $fileName) {
                 display("Reporting $reportName in $format\n");
                 $this->addSnitch(array('step' => 'Report : '.$format, 'project' => $config->project));
-                $this->updateProgress($progress++);
                 
                 $args = array ( 1 => 'report',
                                 2 => '-p',
@@ -221,7 +210,6 @@ class Project extends Tasks {
         $this->logTime('Final');
         $this->removeSnitch();
         display("End\n");
-        $this->updateProgress($progress++);
     }
 
     private function logTime($step) {
@@ -239,13 +227,6 @@ class Project extends Tasks {
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
     }
-
-    private function updateProgress($status) {
-        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
-        $progress->progress = number_format(100 * $status / self::TOTAL_STEPS, 0);
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
-    }
-
 }
 
 ?>
