@@ -139,11 +139,6 @@ INI;
         $skipFiles = false;
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
             switch (true) {
-                // Empty initialization
-                case ($repositoryURL === '' || $repositoryURL === false) :
-                    display('Empty initialization');
-                    break 1;
-
                 // Symlink
                 case ($this->config->symlink === true) :
                     display('Symlink initialization : '.realpath($repositoryURL));
@@ -155,6 +150,11 @@ INI;
                     display('Copy initialization');
                     $total = copyDir(realpath($repositoryURL), $this->config->projects_root.'/projects/'.$project.'/code');
                     display($total . ' files were copied');
+                    break 1;
+
+                // Empty initialization
+                case ($repositoryURL === '' || $repositoryURL === false) :
+                    display('Empty initialization');
                     break 1;
 
                 // composer archive (early in the list, as this won't have 'scheme'
@@ -210,7 +210,8 @@ INI;
                     $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tgz';
                     file_put_contents($archiveFile, $binary);
                     display('Unarchive');
-                    shell_exec('tar -zxf '.$archiveFile.' --directory '.$this->config->projects_root.'/projects/'.$project.'/code/');
+                    mkdir($this->config->projects_root.'/projects/'.$project.'/code/');
+                    shell_exec('tar -zxf '.$archiveFile.' -C '.$this->config->projects_root.'/projects/'.$project.'/code/');
                     display('Cleanup');
                     unlink($archiveFile);
                     break 1;

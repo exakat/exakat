@@ -12,6 +12,25 @@ php exakat remove -p ut2
 
 #git project with password
 php exakat init -p ut3 -R https://brivezac:heureux@bitbucket.org/devteampmeti/sitewebpmeti.git 
+php exakat remove -p ut3
+
+#tgz project
+php exakat init -p ut4 -tgz -R https://files.phpmyadmin.net/phpMyAdmin/4.6.4/phpMyAdmin-4.6.4-all-languages.tar.gz
+php exakat remove -p ut4
+
+#zip project
+php exakat init -p ut5 -zip -R http://files.spip.org/spip/stable/spip-3.1.zip
+
+#copy project
+php exakat init -p ut6 -copy -R projects/ut5/code 
+php exakat remove -p ut6
+
+php exakat init -p ut7 -symlink -R projects/ut5/code 
+php exakat files -p ut7
+php exakat remove -p ut7
+
+# clen previous
+php exakat remove -p ut4
 
 cd -
 
