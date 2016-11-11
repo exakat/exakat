@@ -101,6 +101,7 @@ $text = $newsDev;
 $total     = 0;
 $processed = 0;
 preg_match_all("/- ([^:]+):\s*(  \. .*?)\n\n/s", $text, $sections, PREG_SET_ORDER);
+print count($sections)." sections\n";
 foreach($sections as $section) {
     $lasection = $section[1];
     if (!in_array(strtolower($lasection), $exts)) {
@@ -143,8 +144,8 @@ foreach($changelogdev as $bugid => $section) {
 
     if ($row === false) {
         $section['title'] = $sqlite->escapeString($section['title']);
-        print "INSERT INTO bugfixes ('id', 'title', 'namespace', 'function', 'cve', 'bugs', 'solvedInDev', 'solvedIn70', 'solvedIn56', 'solvedIn55', 'extension', 'analyzer') 
-                            VALUES  (null, '$section[title]', 'PHP'      , '$section[function]', '', $bugid, '7.1.0-dev', '', '', '', '$section[section]', null);\n";
+        print "INSERT INTO bugfixes ('id', 'title', 'namespace', 'function', 'cve', 'bugs', 'solvedInDev', 'solvedIn71', 'solvedIn70', 'solvedIn56', 'solvedIn55', 'extension', 'analyzer') 
+                            VALUES  (null, '$section[title]', 'PHP'      , '$section[function]', '', $bugid, '7.1.0-dev', '', '', '', '', '$section[section]', null);\n";
     }
 }
 
@@ -204,13 +205,16 @@ foreach($blocks as $block) {
 
                     $updates = array();
                     if ($row === false) {
-                        print "INSERT INTO bugfixes ('id', 'title', 'namespace', 'function', 'cve', 'bugs', 'solvedInDev', 'solvedIn70', 'solvedIn56', 'solvedIn55', 'extension', 'analyzer') 
-                                             VALUES (null, '$title', 'PHP'      , '$lafunction', '$cve', $l[1], '$solvedInDev', '$version', '$solvedIn56', '$solvedIn55', '$lasection', null);\n";
+                        print "INSERT INTO bugfixes ('id', 'title', 'namespace', 'function', 'cve', 'bugs', 'solvedInDev', 'solvedIn71', 'solvedIn70', 'solvedIn56', 'solvedIn55', 'extension', 'analyzer') 
+                                             VALUES (null, '$title', 'PHP'      , '$lafunction', '$cve', $l[1], '$solvedInDev', '$version', '', '$solvedIn56', '$solvedIn55', '$lasection', null);\n";
                         continue;
                     } 
 
                     if ($row['solvedInDev'] != $solvedInDev) {
                         $updates[] = "solvedInDev = '7.1.0-dev' ";
+                    } 
+                    if ($row['solvedIn71'] != $version) {
+                        $updates[] = "solvedIn71 = '$version' ";
                     } 
                     if ($row['solvedIn70'] != $version) {
                         $updates[] = "solvedIn70 = '$version' ";
