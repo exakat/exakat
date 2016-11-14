@@ -1748,7 +1748,7 @@ TEXT
                                       'count' => $row['nb']);
         }
         uasort($listBySeverity, function ($a, $b) {
-            $s = ['Critical' => 6, 'Major' => 5, 'Middle' => 4, 'Minor' => 3, 'None' => 0];
+            $s = array('Critical' => 6, 'Major' => 5, 'Middle' => 4, 'Minor' => 3, 'None' => 0);
             if ($s[$a['severity']] > $s[$b['severity']]) {
                 return -1;
             } elseif ($s[$a['severity']] < $s[$b['severity']]) {
@@ -1779,9 +1779,9 @@ TEXT
     private function Directives() {
         $css = new \Stdclass();
         $css->displayTitles = true;
-        $css->titles = ['Directive', 'Suggestion', 'Description'];
+        $css->titles = array('Directive', 'Suggestion', 'Description');
         $css->backgroundColor = '#DDDDDD';
-        $css->readOrder = ['name', 'suggested', 'documentation'];
+        $css->readOrder = array('name', 'suggested', 'documentation');
 
     // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
         $directives = array('standard', 'bcmath', 'date', 'file', 
@@ -2210,10 +2210,12 @@ TEXT
             foreach($hash as $name => $ext) {
                 if (strpos($ext, '/') === false) {
                     $res = $this->dump->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"'); 
-                    $d = (int) $res->fetchArray(\SQLITE3_ASSOC)['count'];
+                    $d = $res->fetchArray(\SQLITE3_ASSOC);
+                    $d = (int) $d['count'];
                 } else {
                     $res = $this->dump->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"'); 
-                    $d = (int) $res->fetchArray(\SQLITE3_ASSOC)['count'];
+                    $d = $res->fetchArray(\SQLITE3_ASSOC);
+                    $d = (int) $d['count'];
                 }
                 $data[$section][$name] = $d === -2 ? 'N/A' : $d;
             }

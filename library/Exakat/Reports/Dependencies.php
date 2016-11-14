@@ -39,9 +39,9 @@ class Dependencies extends Reports {
     public function generate($folder, $name= 'dependencies') {
         $graph = new Gremlin3(Config::factory());
         
-        $links    = [];
-        $nodes    = ['class' => [], 'trait' => [], 'interface' => [], 'unknown' => []];
-        $fullcode = [];
+        $links    = array();
+        $nodes    = array('class' => array(), 'trait' => array(), 'interface' => array(), 'unknown' => array());
+        $fullcode = array();
         
         $query = <<<GREMLIN
 g.V().hasLabel("Class").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}

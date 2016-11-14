@@ -137,7 +137,7 @@ class Jobqueue extends Tasks {
             return;
         }
 
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(['start' => time(), 'job' => $job, 'progress' => 0]));
+        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(array('start' => time(), 'job' => $job, 'progress' => 0)));
         shell_exec($this->config->php.' '.$this->config->executable.' onepage -f '.$this->config->projects_root.'/in/'.$job.'.php');
 
         // cleaning

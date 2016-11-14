@@ -69,8 +69,8 @@ abstract class Analyzer {
     const T_SLOW    = 'Slow';    //60';
     const T_LONG    = 'Long';    //360';
 
-    const CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
-    const LITERALS = array('Integer', 'Real', 'Null', 'Boolean', 'String');
+    static public $CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
+    static public $LITERALS   = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -509,7 +509,7 @@ repeat(__.in('.$linksDown.'))
     public function analyzerIs($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = str_replace('\\', '\\\\', self::getClass($a));
+                $a = self::getName($a);
             }
             unset($a);
 
@@ -529,7 +529,7 @@ repeat(__.in('.$linksDown.'))
     public function analyzerIsNot($analyzer) {
         if (is_array($analyzer)) {
             foreach($analyzer as &$a) {
-                $a = self::getClass($a);
+                $a = self::getName($a);
             }
             unset($a);
 
@@ -1211,7 +1211,7 @@ GREMLIN
     }
 
     public function goToClassTrait() {
-        $this->goToInstruction(['Trait', 'Class']);
+        $this->goToInstruction(array('Trait', 'Class'));
         
         return $this;
     }
@@ -1223,25 +1223,25 @@ GREMLIN
     }
 
     public function goToClassInterface() {
-        $this->goToInstruction(['Interface', 'Class']);
+        $this->goToInstruction(array('Interface', 'Class'));
         
         return $this;
     }
 
     public function hasNoClassInterface() {
-        $this->hasNoInstruction(['Class', 'Interface']);
+        $this->hasNoInstruction(array('Class', 'Interface'));
         
         return $this;
     }
 
     public function goToClassInterfaceTrait() {
-        $this->goToInstruction(['Interface', 'Class', 'Trait']);
+        $this->goToInstruction(array('Interface', 'Class', 'Trait'));
         
         return $this;
     }
 
     public function hasNoClassInterfaceTrait() {
-        $this->hasNoInstruction(['Class', 'Interface', 'Trait']);
+        $this->hasNoInstruction(array('Class', 'Interface', 'Trait'));
         
         return $this;
     }
@@ -1312,13 +1312,13 @@ GREMLIN
     }
 
     public function hasClassTrait() {
-        $this->hasInstruction(['Class', 'Trait']);
+        $this->hasInstruction(array('Class', 'Trait'));
         
         return $this;
     }
 
     public function hasClassInterface() {
-        $this->hasInstruction(['Class', 'Interface']);
+        $this->hasInstruction(array('Class', 'Interface'));
         
         return $this;
     }
@@ -1419,11 +1419,6 @@ or( __.hasLabel("Integer", "Boolean", "Magicconstant", "Real", "String", "Heredo
 GREMLIN
 );
 
-
-//filter{ (it.atom in []) ||
-//        (it.atom == 'Functioncall' && it.constante == true && it.token in ['T_ARRAY', 'T_OPEN_BRACKET'])
-//}
-
         return $this;
     }
     
@@ -1517,6 +1512,23 @@ GREMLIN
         die();
     }
 
+    public function debugQuery() {
+        $methods = $this->methods;
+        $arguments = $this->arguments;
+
+        $nb = count($methods);
+        for($i = 2; $i < $nb; ++$i) {
+            $this->methods = array_slice($methods, 0, $i);
+            $this->arguments = array_slice($arguments, 0, $i);
+            $this->prepareQuery();
+            $this->execQuery();
+            print $this->rowCount."\n";
+            $this->rowCount = 0;
+        }
+
+        die();
+    }
+    
     public function prepareQuery() {
         // @doc This is when the object is a placeholder for others.
         if (count($this->methods) <= 1) { return true; }

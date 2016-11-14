@@ -27,6 +27,7 @@ use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\NoSuchProject;
 
 class Project extends Tasks {
     const CONCURENCE = self::NONE;
@@ -38,10 +39,8 @@ class Project extends Tasks {
                               'Analyze');
 
     protected $reports = array('Premier' => array('Ambassador' => 'report',
-                                                  'Faceted'    => 'faceted'));
+                                                  'Devoops'    => 'oldreport'));
     
-    const TOTAL_STEPS = 23; // 2 Reports + 10 Analyzes + 10 other steps
-
     public function run(Config $config) {
         $this->config = $config;
         
@@ -56,19 +55,7 @@ class Project extends Tasks {
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project)) {
-            die("Project '$project' doesn't exist in projects folder. Aborting\n");
-        }
-
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/config.ini')) {
-            die("Project '$project' exists but has no config file. Aborting\n");
-        }
-
-        if (!file_exists($config->codePath)) {
-            die("Project '$project' exists but has no code folder ($config->codePath). Aborting\n");
-        }
-
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/log')) {
-            die("Project '$project' exists but has no log folder. Aborting\n");
+            throw new NoSuchProject($config->project);
         }
 
         // cleaning log directory (possibly logs)
@@ -78,6 +65,7 @@ class Project extends Tasks {
         }
 
         $this->logTime('Start');
+        $this->addSnitch(array('step' => 'Start', 'project' => $config->project));
 
         // cleaning datastore
         $this->datastore = new Datastore($config, Datastore::CREATE);
@@ -95,7 +83,7 @@ class Project extends Tasks {
         $analyze->run($config);
         unset($analyze);
         $this->logTime('CleanDb');
-        $this->updateProgress($progress++);
+        $this->addSnitch(array('step' => 'Clean DB', 'project' => $config->project));
 
         display("Search for external libraries\n");
         $args = array ( 1 => 'findextlib',
@@ -109,18 +97,17 @@ class Project extends Tasks {
         $analyze = new FindExternalLibraries($this->gremlin);
         $analyze->run($configThema);
         unset($report);
-        $this->updateProgress($progress++);
+        $this->addSnitch(array('step' => 'External lib', 'project' => $config->project));
 
         Config::pop();
         unset($analyze);
-        $this->updateProgress($progress++);
 
         display("Running files\n");
         $analyze = new Files($this->gremlin);
         $analyze->run($config);
         unset($analyze);
         $this->logTime('Files');
-        $this->updateProgress($progress++);
+        $this->addSnitch(array('step' => 'Files', 'project' => $config->project));
 
         $this->checkTokenLimit();
 
@@ -129,18 +116,17 @@ class Project extends Tasks {
         unset($analyze);
         display("Project loaded\n");
         $this->logTime('Loading');
-        $this->updateProgress($progress++);
 
-        $analyze = new Magicnumber($this->gremlin);
-        $analyze->run($config);
-        unset($analyze);
-        $this->updateProgress($progress++);
+        // paralell running
+        exec($config->php . ' '.$config->executable.' magicnumber -p '.$config->project.'   > /dev/null &');
+        $this->addSnitch(array('step' => 'Magic Numbers', 'project' => $config->project));
 
         // Dump is a child process
         exec($config->php . ' '.$config->executable.' dump -p '.$config->project.'   > /dev/null &');
         display('Started dump process');
 
         foreach($this->themes as $theme) {
+            $this->addSnitch(array('step' => 'Analyze : '.$theme, 'project' => $config->project));
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
 
             $args = array ( 1 => 'analyze',
@@ -159,7 +145,6 @@ class Project extends Tasks {
                 unset($report);
                 
                 rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
-                $this->updateProgress($progress++);
 
                 Config::pop();
             } catch (\Exception $e) {
@@ -171,21 +156,20 @@ class Project extends Tasks {
         }
 
         display("Analyzed project\n");
-        $this->updateProgress($progress++);
         $this->logTime('Analyze');
+        $this->addSnitch(array('step' => 'Analyzed', 'project' => $config->project));
 
 /*
         check on dump ? 
 */
 
-        $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
         $oldConfig = Config::factory();
         foreach($this->reports as $reportName => $formats) {
             foreach($formats as $format => $fileName) {
                 display("Reporting $reportName in $format\n");
-                $this->updateProgress($progress++);
+                $this->addSnitch(array('step' => 'Report : '.$format, 'project' => $config->project));
                 
                 $args = array ( 1 => 'report',
                                 2 => '-p',
@@ -212,11 +196,6 @@ class Project extends Tasks {
         Config::factory($oldConfig);
         display("Reported project\n");
 
-        $analyze = new Stat($this->gremlin);
-        $analyze->run($config);
-        unset($analyze);
-        display("Stats\n");
-        
         $audit_end = time();
         
         // measure Neo4j's final size
@@ -229,8 +208,8 @@ class Project extends Tasks {
                                                
 
         $this->logTime('Final');
-        display("End 2\n");
-        $this->updateProgress($progress++);
+        $this->removeSnitch();
+        display("End\n");
     }
 
     private function logTime($step) {
@@ -248,13 +227,6 @@ class Project extends Tasks {
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
     }
-
-    private function updateProgress($status) {
-        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
-        $progress->progress = number_format(100 * $status / self::TOTAL_STEPS, 0);
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
-    }
-
 }
 
 ?>

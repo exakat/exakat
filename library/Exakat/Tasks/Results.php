@@ -116,7 +116,7 @@ GREMLIN;
 
             $return = array();
             foreach($vertices as $k => $v) {
-                $return[] = [$v];
+                $return[] = array($v);
             }
         } elseif ($config->style == 'COUNTED') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").groupCount("m")by("code").cap("m")';

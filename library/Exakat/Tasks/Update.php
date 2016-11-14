@@ -29,7 +29,7 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 
 class Update extends Tasks {
-    const CONCURENCE = self::NONE;
+    const CONCURENCE = self::ANYTIME;
 
     public function __construct($gremlin) {
         $this->enabledLog = false;

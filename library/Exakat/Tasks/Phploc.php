@@ -25,6 +25,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Exceptions\NoSuchProject;
 use Exakat\Phpexec;
 
 class Phploc extends Tasks {
@@ -48,11 +49,11 @@ class Phploc extends Tasks {
             $projectPath = $config->projects_root.'/projects/'.$project;
 
             if (!file_exists($projectPath)) {
-                die("Project '$project' doesn't exist\n");
+                throw new NoSuchProject($config->project);
             }
 
             if (!file_exists($projectPath.'/datastore.sqlite')) {
-                die("Datastore for '$project' doesn't exist. Run 'files' first.\n");
+                throw new NoDatastore($config->project);
             }
             
             $datastore = new Datastore($config);
@@ -100,7 +101,8 @@ class Phploc extends Tasks {
         } elseif (!empty($config->filename)) {
             $loc = $this->countLocInFile($config->filename);
         } else {
-            die("Usage : php exakat phploc <-p project> <-d dirname> <-f filename>\n");
+            print("Usage : php exakat phploc <-p project> <-d dirname> <-f filename>\n");
+            return;
         }
         
         if ($config->json) {
@@ -130,7 +132,7 @@ class Phploc extends Tasks {
                 if (substr($file, -4) !== '.php') {
                     continue;
                 }
-                $r[] = [$dirname.'/'.$file];
+                $r[] = array($dirname.'/'.$file);
             }
         }
         $return = call_user_func_array('array_merge', $r);

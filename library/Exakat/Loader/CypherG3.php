@@ -84,16 +84,16 @@ class CypherG3 {
 
             $b = microtime(true);
             
-            $extra = [];
-            foreach(Load::PROP_OPTIONS as $title => $atoms) {
+            $extra = array();
+            foreach(Load::$PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
-                    if (in_array($title, ['delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'])) {
+                    if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'))) {
                     // Raw string
                         $extra[] = "$title: csvLine.$title";
-                    } elseif (in_array($title, ['alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag'])) {
+                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag'))) {
                     // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
-                    } elseif (in_array($title, ['count', 'intval', 'args_max', 'args_min'])) {
+                    } elseif (in_array($title, array('count', 'intval', 'args_max', 'args_min'))) {
                     // Integer
                         $extra[] = "$title: toInt(csvLine.$title)";
                     } else {

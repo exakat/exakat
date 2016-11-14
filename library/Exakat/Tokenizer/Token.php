@@ -24,12 +24,12 @@
 namespace Exakat\Tokenizer;
 
 abstract class Token {
-    const ATOMS = array('Break', 'Continue', 'Arguments', 'Assignation', 'Array', 'Arrayappend', 'Block', 'Boolean', 'Case', 'Catch', 'Class', 'Const',  'Constant', 'Declare', 'Default', 'Dowhile', 'File', 'Finally', 'For', 'Foreach', 'Function', 'Functioncall', 'Global', 'Halt', 'Heredoc', 'Include', 'Identifier', 'Ifthen', 'Interface', 'Label', 'Methodcall', 'Namespace', 'Nsname', 'Null', 'New', 'Parenthesis', 'Php', 'PostPlusPlus', 'Project', 'Property', 'Return', 'Sequence', 'Shell', 'Sign', 'Staticconstant', 'Staticmethodcall', 'Staticproperty', 'Staticclass', 'String', 'Switch', 'Ternary', 'Trait', 'Try', 'Use', 'Variable', 'Void', 'While', 'Yield');
+    static public $ATOMS = array('Break', 'Continue', 'Arguments', 'Assignation', 'Array', 'Arrayappend', 'Block', 'Boolean', 'Case', 'Catch', 'Class', 'Const',  'Constant', 'Declare', 'Default', 'Dowhile', 'File', 'Finally', 'For', 'Foreach', 'Function', 'Functioncall', 'Global', 'Halt', 'Heredoc', 'Include', 'Identifier', 'Ifthen', 'Interface', 'Label', 'Methodcall', 'Namespace', 'Nsname', 'Null', 'New', 'Parenthesis', 'Php', 'PostPlusPlus', 'Project', 'Property', 'Return', 'Sequence', 'Shell', 'Sign', 'Staticconstant', 'Staticmethodcall', 'Staticproperty', 'Staticclass', 'String', 'Switch', 'Ternary', 'Trait', 'Try', 'Use', 'Variable', 'Void', 'While', 'Yield');
     
-    const LINKS = array('ABSTRACT', 'APPEND', 'ARGUMENT', 'ARGUMENTS', 'AS', 'AT', 'BLOCK', 'BREAK', 'CASE', 'CASES', 'CAST', 'CATCH', 'CLASS', 'CLONE', 'CODE', 'CONCAT', 'CONDITION', 'CONST', 'CONSTANT', 'CONTINUE', 'DECLARE', 'DEFAULT', 'ELEMENT', 'ELSE', 'EXTENDS', 'FILE', 'FINAL', 'FINALLY', 'FUNCTION', 'GLOBAL', 'GOTO', 'GROUPUSE', 'IMPLEMENTS', 'INCREMENT', 'INDEX', 'INIT', 'KEY', 'LABEL', 'LEFT', 'METHOD', 'NAME', 'NEW', 'NOT', 'OBJECT', 'PPP', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'PRIVATE', 'PROJECT', 'PROPERTY', 'PROTECTED', 'PUBLIC', 'RETURN', 'RETURNTYPE', 'RIGHT', 'SIGN', 'SOURCE', 'STATIC', 'SUBNAME', 'THEN', 'THROW', 'TYPEHINT', 'USE', 'VALUE', 'VAR', 'VARIABLE', 'YIELD');
+    static public $LINKS = array('ABSTRACT', 'APPEND', 'ARGUMENT', 'ARGUMENTS', 'AS', 'AT', 'BLOCK', 'BREAK', 'CASE', 'CASES', 'CAST', 'CATCH', 'CLASS', 'CLONE', 'CODE', 'CONCAT', 'CONDITION', 'CONST', 'CONSTANT', 'CONTINUE', 'DECLARE', 'DEFAULT', 'ELEMENT', 'ELSE', 'EXTENDS', 'FILE', 'FINAL', 'FINALLY', 'FUNCTION', 'GLOBAL', 'GOTO', 'GROUPUSE', 'IMPLEMENTS', 'INCREMENT', 'INDEX', 'INIT', 'KEY', 'LABEL', 'LEFT', 'METHOD', 'NAME', 'NEW', 'NOT', 'OBJECT', 'PPP', 'POSTPLUSPLUS', 'PREPLUSPLUS', 'PRIVATE', 'PROJECT', 'PROPERTY', 'PROTECTED', 'PUBLIC', 'RETURN', 'RETURNTYPE', 'RIGHT', 'SIGN', 'SOURCE', 'STATIC', 'SUBNAME', 'THEN', 'THROW', 'TYPEHINT', 'USE', 'VALUE', 'VAR', 'VARIABLE', 'YIELD');
     
     static public function linksAsList() {
-        return '"'.implode('", "', self::LINKS).'"';
+        return '"'.implode('", "', self::$LINKS).'"';
     }
 }
 

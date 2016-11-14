@@ -50,15 +50,15 @@ class PhpConfiguration extends Reports {
         }
         
         // preparing the list of PHP extensions to compile PHP with
-        $return = [<<<TEXT
+        $return = array(<<<TEXT
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ; PHP configure list   ;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 TEXT
 ,
-'./configure',];
-        $pecl = [];
+'./configure');
+        $pecl = array();
         foreach($configureDirectives as $ext => $configure) {
             if (isset($sources[$configure->analysis])) {
                 if(!empty($configure->activate) && $sources[$configure->analysis] != 0) {
@@ -77,7 +77,7 @@ TEXT
             }
         }
         
-        $return = array_merge($return, [
+        $return = array_merge($return, array(
                    '',
                    '; For debug purposes',
                    ';--enable-dtrace',
@@ -85,7 +85,7 @@ TEXT
                    '',
                    ';--enable-zend-signals',
                    ';--disable-opcache',
-            ]);
+            ));
         
         $final = '';
         if (!empty($pecl)) {
@@ -97,10 +97,9 @@ TEXT
         
 
         $shouldDisableFunctions = json_decode(file_get_contents($this->config->dir_root.'/data/shouldDisableFunction.json'));
-        $functionsList = [];
-        $classesList = [];
+        $functionsList = array();
+        $classesList = array();
         foreach((array) $shouldDisableFunctions as $ext => $toDisable) {
-            print "$ext\n";
             if ($sources[$ext] == 0) {
                 if (isset($toDisable->functions)) { 
                     $functionsList[] = $toDisable->functions;
@@ -113,13 +112,13 @@ TEXT
         if (empty($functionsList)) {
             $functionsList = '';
         } else {
-            $functionsList = array_merge(...$functionsList);
+            $functionsList = call_user_func_array('array_merge', $functionsList);
             $functionsList = join(',', $functionsList);
         }
         if (empty($classesList)) {
             $classesList = '';
         } else {
-            $classesList = array_merge(...$classesList);
+            $classesList = call_user_func_array('array_merge', $classesList);
             $classesList = join(',', $classesList);
         }
 

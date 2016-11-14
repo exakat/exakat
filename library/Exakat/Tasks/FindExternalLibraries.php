@@ -26,6 +26,8 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Tasks\Precedence;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
 
 class FindExternalLibraries extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -74,7 +76,7 @@ class FindExternalLibraries extends Tasks {
                              'utf8'             => self::WHOLE_DIR,
                              'ci_xmlrpc'        => self::FILE_ONLY,
                              'xajax'            => self::PARENT_DIR,
-                             'yii'              => self::FILE_ONLY,
+                             'yii'              => self::WHOLE_DIR,
                              'zend_view'        => self::WHOLE_DIR,
                              );
 
@@ -90,11 +92,11 @@ class FindExternalLibraries extends Tasks {
     public function run(Config $config) {
         $project = $config->project;
         if ($project == 'default') {
-            die("findextlib requires a -p <project>\nAborting\n");
+            throw new ProjectNeeded();
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {
-            die("No such project as $project.\nAborting\n");
+            throw new NoSuchProject();
         }
 
         $dir = $config->projects_root.'/projects/'.$project.'/code';
@@ -114,20 +116,23 @@ class FindExternalLibraries extends Tasks {
         }
 
         $this->php = new Phpexec();
-        if (!$this->php->isValid()) {
-            die("This PHP binary is not valid for running Exakat.\n");
-        }
 
         $this->php->getTokens();
         Precedence::preloadConstants($this->php->getActualVersion());
         
         $r = array();
         $path = $config->projects_root.'/projects/'.$project.'/code';
-        foreach($files as $file) {
+        rsort($files);
+        $ignore = 'None';
+        $ignoreLength = 0;
+        foreach($files as $id => $file) {
+            if (substr($file, 0, $ignoreLength) == $ignore) { print "Ignore $file ($ignore)\n"; continue; }
             $s = $this->process($path.$file);
             
             if (!empty($s)) {
                $r[] = $s;
+               $ignore = array_pop($s);
+               $ignoreLength = strlen($ignore);
             }
        }
 
@@ -136,24 +141,24 @@ class FindExternalLibraries extends Tasks {
         } else {
             $newConfigs = array();
         }
-//        $newConfigs = array_keys(array_count_values($newConfigs));
+//        $newConfigs = array_keys(array_count_values(array_values($newConfigs)));
 
-        if (count($newConfigs) == 1) {
+        if (count(array_keys($newConfigs)) == 1) {
             display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));
-        } elseif (count($newConfigs)) {
-            display(count($newConfigs).' external libraries are going to be omitted : '.implode(', ', array_keys($newConfigs)));
+        } elseif (!empty($newConfigs)) {
+            display(count(array_keys($newConfigs)).' external libraries are going to be omitted : '.implode(', ', array_keys($newConfigs)));
         }
 
-        $store = [];
+        $store = array();
         foreach($newConfigs as $library => $file) {
-            $store[] = ['library' => $library,
-                        'file'    => $file];
+            $store[] = array('library' => $library,
+                             'file'    => $file);
         }
 
         $this->datastore->cleanTable('externallibraries');
         $this->datastore->addRow('externallibraries', $store);
 
-        if ($config->update === true && count($newConfigs) > 0) {
+        if ($config->update === true && !empty($newConfigs)) {
              display('Updating '.$project.'/config.ini');
              $ini = file_get_contents($configFile);
              $ini = preg_replace("#(ignore_dirs\[\] = \/.*?\n)\n#is", '$1'."\n".';Ignoring external libraries'."\n".'ignore_dirs[] = '.implode("\n".'ignore_dirs[] = ', $newConfigs)."\n;Ignoring external libraries\n\n", $ini);

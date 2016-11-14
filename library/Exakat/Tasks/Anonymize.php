@@ -50,66 +50,68 @@ class Anonymize extends Tasks {
                 die('Can\'t anonymize '.$file.' as it doesn\'t compile with PHP '.PHP_VERSION."\n");
             }
             $this->processFile($file);
-        } elseif (!empty($dir = $config->dirname)) {
-            if (substr($dir, -1) === '/') {
-                $dir = substr($dir, 0, -1);
-            }
-
-            if (!file_exists($dir)) {
-                die('Can\'t anonymize '.$dir.' as it doesn\'t exist'."\n");
-            }
-
-            display("Anonymizing directory $dir\n");
-
-            $files = rglob($dir);
-            $total = 0;
-            if (file_exists($dir.'.anon')) {
-                rmdirRecursive($dir.'.anon');
-            }
-            mkdir($dir.'.anon', 0755);
-            foreach($files as $file) {
-                if ($this->checkCompilation($file)) {
-                    ++$this->strings;
-                    $total += (int) $this->processFile($file, $dir.'.anon/'.$this->strings.'.php');
-                }
-            }
-            display("Anonymized $total files\n");
-        } elseif (($project = $config->project) !== 'default') {
-            display("Anonymizing project $project\n");
-            $dir = $config->projects_root.'/projects/'.$project.'/'.$project;
-
-            if (!file_exists($config->projects_root.'/projects/'.$project)) {
-                die('Can\'t anonymize project '.$project.' as it doesn\'t exist'."\n");
-            }
-
-            if (!file_exists($config->projects_root.'/projects/'.$project.'/code')) {
-                die('Can\'t anonymize project '.$project.' as it doesn\'t have code'."\n");
-            }
-
-            $files = $this->datastore->getCol('files', 'file');
-    
-            $path = $config->projects_root.'/projects/'.$config->project.'/code';
-
-            $total = 0;
-            if (file_exists($dir.'.anon')) {
-                rmdirRecursive($dir.'.anon');
-            }
-            mkdir($dir.'.anon', 0755);
-            foreach($files as $file) {
-                if ($this->checkCompilation($path.$file)) {
-                    ++$this->strings;
-                    $total += (int) $this->processFile($path.$file, $dir.'.anon/'.$this->strings.'.php');
-                }
-            }
-            display("Anonymized $total files\n");
         } else {
-            die("Usage : php exakat anonymize -file <filename>
-                             -d <dirname>
-                             -p <project>\n");
+            $dir = $config->dirname;
+            if (!empty($dir)) {
+                if (substr($dir, -1) === '/') {
+                    $dir = substr($dir, 0, -1);
+                }
+
+                if (!file_exists($dir)) {
+                    die('Can\'t anonymize '.$dir.' as it doesn\'t exist'."\n");
+                }
+
+                display("Anonymizing directory $dir\n");
+
+                $files = rglob($dir);
+                $total = 0;
+                if (file_exists($dir.'.anon')) {
+                    rmdirRecursive($dir.'.anon');
+                }
+                mkdir($dir.'.anon', 0755);
+                foreach($files as $file) {
+                    if ($this->checkCompilation($file)) {
+                        ++$this->strings;
+                        $total += (int) $this->processFile($file, $dir.'.anon/'.$this->strings.'.php');
+                    }
+                }
+                display("Anonymized $total files\n");
+            } elseif (($project = $config->project) !== 'default') {
+                display("Anonymizing project $project\n");
+                $dir = $config->projects_root.'/projects/'.$project.'/'.$project;
+    
+                if (!file_exists($config->projects_root.'/projects/'.$project)) {
+                    die('Can\'t anonymize project '.$project.' as it doesn\'t exist'."\n");
+                }
+    
+                if (!file_exists($config->projects_root.'/projects/'.$project.'/code')) {
+                    die('Can\'t anonymize project '.$project.' as it doesn\'t have code'."\n");
+                }
+    
+                $files = $this->datastore->getCol('files', 'file');
+        
+                $path = $config->projects_root.'/projects/'.$config->project.'/code';
+    
+                $total = 0;
+                if (file_exists($dir.'.anon')) {
+                    rmdirRecursive($dir.'.anon');
+                }
+                mkdir($dir.'.anon', 0755);
+                foreach($files as $file) {
+                    if ($this->checkCompilation($path.$file)) {
+                        ++$this->strings;
+                        $total += (int) $this->processFile($path.$file, $dir.'.anon/'.$this->strings.'.php');
+                    }
+                }
+                display("Anonymized $total files\n");
+            } else {
+                die("Usage : php exakat anonymize -file <filename>
+                                 -d <dirname>
+                                 -p <project>\n");
+            }
         }
 
         display( 'Processing file ', $file,' into ', $file, ".anon\n");
-
     }
     
     private function processFile($file, $anonFile = null) {

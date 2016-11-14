@@ -534,11 +534,33 @@ JOIN categories
             ->files()
             ->name('*.php');
             
+        $errors53 = [];
+        $errors54 = [];
+        $errors55 = [];
         $errors56 = [];
         $errors70 = [];
         $errors71 = [];
+        $errors72 = [];
         $total = count($files);
         foreach($files as $file) {
+            $res = shell_exec('php53 -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                $errors53[(string) $file] = $res;
+            }
+
+            $res = shell_exec('php54 -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                $errors54[(string) $file] = $res;
+            }
+
+            $res = shell_exec('php55 -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                $errors55[(string) $file] = $res;
+            }
+
             $res = shell_exec('php56 -l '.$file);
             
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
@@ -556,27 +578,29 @@ JOIN categories
             if (substr($res, 0, 29) != 'No syntax errors detected in ') {
                 $errors71[(string) $file] = $res;
             }
+
+            $res = shell_exec('php72 -l '.$file);
+            
+            if (substr($res, 0, 29) != 'No syntax errors detected in ') {
+                $errors72[(string) $file] = $res;
+            }
         }
         
-        if (empty($errors56)) {
-            echo 'All ', $total, " compilations OK for PHP 5.6\n";
+        $this->reportCompilation($errors53, '5.3', $total);
+        $this->reportCompilation($errors54, '5.4', $total);
+        $this->reportCompilation($errors55, '5.5', $total);
+        $this->reportCompilation($errors56, '5.6', $total);
+        $this->reportCompilation($errors70, '7.0', $total);
+        $this->reportCompilation($errors71, '7.1', $total);
+        $this->reportCompilation($errors72, '7.2', $total);
+    }
+    
+    private function reportCompilation($errors, $version, $total) {
+        if (empty($errors)) {
+            echo 'All ', $total, " compilations OK for PHP $version\n";
         } else {
-            echo count($errors56), " errors out of $total compilations for PHP 5.6\n",
-                  print_r($errors56, true), "\n";
-        }
-
-        if (empty($errors70)) {
-            echo 'All ', $total, " compilations OK for PHP 7.0\n";
-        } else {
-            echo count($errors70), ' errors out of ', $total, " compilations for PHP 7.0\n", 
-                 print_r($errors70, true), "\n";
-        }
-
-        if (empty($errors71)) {
-            echo 'All ', $total, " compilations OK for PHP 7.1\n";
-        } else {
-            echo count($errors71), ' errors out of ', $total, " compilations for PHP 7.1\n", 
-                 print_r($errors71, true), "\n";
+            echo count($errors), ' errors out of ', $total, " compilations for PHP $version\n", 
+                 print_r($errors, true), "\n";
         }
     }
 

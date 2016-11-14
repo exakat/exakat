@@ -22,6 +22,8 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
 
+        require('exp/'.str_replace('_', '/', $file).'.php');
+
         // initialize Config (needed by phpexec)
         $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
         
@@ -68,8 +70,6 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             }
             $this->assertNotEquals(count($list), 0, 'No values were read from the analyzer' );
         }
-        
-        include('exp/'.str_replace('_', '/', $file).'.php');
         
         if (isset($expected) && is_array($expected)) {
             $missing = array();

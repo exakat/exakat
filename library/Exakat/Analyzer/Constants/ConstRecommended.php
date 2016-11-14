@@ -66,7 +66,7 @@ class ConstRecommended extends Analyzer {
              ->back('args')
              ->outWithRank('ARGUMENT', 1)
              ->atomIsNot(array('Identifier', 'Nsname','String', 'Real', 'Integer', 'Boolean', 'Null', 'Staticconstant', 'Variable'))
-             ->noAtomInside(["Variable", "Functioncall"])
+             ->noAtomInside(array("Variable", "Functioncall"))
              ->back('first');
         $this->prepareQuery();
     }

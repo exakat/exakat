@@ -1,4 +1,4 @@
-Version 0.8.9 (Yellow Brows Great King, Coming up)
+Version 0.9.0 (Python Demon, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,36 @@ Version 0.8.9 (Yellow Brows Great King, Coming up)
 + Tokenizer
     + 
 
-Version 0.8.8 (Apricot Immortal, Coming up)
+Version 0.8.9 (Yellow Brows Great King, 2016-11-07)
++ Architecture
+    + Fixed and document -tgz and -zip option of init
+    + Removed progress folder
+    + Made MagicNumber a parallel task in Project.
+    + Turned some die into assertion()
+    + .phar doesn't report any PHP errors. 
+    + Checked compilation with PHP 5.3->7.2
++ Report
+    + Removed Faceted report
+    + Added Bugfixes for PHP 7.0.13, 5.6.28 and PHP 7.2
+    + Added 'One variable string' to Radwell report
++ Analyzer
+    + New analyzer : Object Calisthenics #1, #4
+    + New analyzer : check that properties are all set at constructor time.
+    + New analyzer : spot useless checks
+    + Updated UndefinedParentMP to take PHP ext classes into account
+    + Upgraded 'array_merge in loops' with file_put_contents
+    + Upgraded 'useless parenthesis' with math operations
+    + Upgraded analysis : 1666 / 1682 test pass (99% pass). 
+    + Added debug Query method to analyzer
++ Tokenizer
+    + Fixed Files to compile first, then count tokens
+    + Find Ext Lib handle UT classes better
+    + Added limit to 'code' before loading into database. There is a 2M limit.
+    + Fixed edge case with nested foreach()
+    + Fixed segmentation fault when getting tokens from a script with wrong encoding
+    
+
+Version 0.8.8 (Apricot Immortal, 2016-11-07)
 + Architecture
     + Added concurency test to avoid running several instance at the same time
     + Report error when it happens with git clone

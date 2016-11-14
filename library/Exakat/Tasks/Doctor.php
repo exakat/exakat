@@ -271,13 +271,6 @@ INI;
             }
         }
 
-        $stats['folders']['progress'] = file_exists($config->projects_root.'/progress/') ? 'Yes' : 'No';
-        if ($stats['folders']['progress'] == 'No') {
-            mkdir($config->projects_root.'/progress/', 0755);
-            file_put_contents('progress/jobqueue.exakat', '{"progress":"17"}');
-            $stats['folders']['progress'] = file_exists($config->projects_root.'/progress/') ? 'Yes' : 'No';
-        }
-
         $stats['folders']['in'] = file_exists($config->projects_root.'/in/') ? 'Yes' : 'No';
         $stats['folders']['out'] = file_exists($config->projects_root.'/out/') ? 'Yes' : 'No';
         $stats['folders']['projects/test'] = file_exists($config->projects_root.'/projects/test/') ? 'Yes' : 'No';
@@ -519,7 +512,8 @@ INI;
         }
 
         // wget
-        $res = explode("\n", shell_exec('wget -V 2>&1'))[0];
+        $res = explode("\n", shell_exec('wget -V 2>&1'));
+        $res = $res[0];
         if ($res !== '') {//
             $stats['wget']['installed'] = 'Yes';
             $stats['wget']['version'] = $res;

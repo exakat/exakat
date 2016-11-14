@@ -79,6 +79,7 @@ GREMLIN;
         display(number_format(($end - $begin) * 1000, 0).' ms');
         
         $this->cleanScripts();
+        $this->cleanTmpDir();
     }
     
     private function cleanScripts() {
@@ -88,6 +89,11 @@ GREMLIN;
             unlink($file);
         }
         display('   Cleaned '.count($files).' gremlin scripts');
+    }
+
+    private function cleanTmpDir() {
+        rmdirRecursive($this->config->projects_root.'/projects/.exakat/');
+        mkdir($this->config->projects_root.'/projects/.exakat/');
     }
     
     private function restartNeo4j() {

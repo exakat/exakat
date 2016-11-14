@@ -25,20 +25,24 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\NoSuchProject;
 
 class Magicnumber extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run(Config $config) {
+        $this->config = $config;
+
         $project = $config->project;
         if ($project == 'default') {
             throw new ProjectNeeded();
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {
-            die("No such project as $project.\nAborting\n");
+            throw new NoSuchProject($this->config);
         }
 
+        $this->addSnitch();
         $sqliteFile = $config->projects_root.'/projects/'.$config->project.'/magicnumber.sqlite';
         if (file_exists($sqliteFile)) {
             unlink($sqliteFile);
@@ -57,8 +61,8 @@ class Magicnumber extends Tasks {
 
             $total = 0;
             foreach($res[0] as $value => $count) {
-                $stmt->bindValue(':value', $value, SQLITE3_TEXT);
-                $stmt->bindValue(':count', $count, SQLITE3_INTEGER);
+                $stmt->bindValue(':value', $value, \SQLITE3_TEXT);
+                $stmt->bindValue(':count', $count, \SQLITE3_INTEGER);
                 $stmt->execute();
                 ++$total;
             }
@@ -74,6 +78,7 @@ class Magicnumber extends Tasks {
             fwrite($outputFile, $v."\n");
         }
         fclose($outputFile);
+        $this->removeSnitch();
         display( "array : ".count($res)."\n");
     }
 }

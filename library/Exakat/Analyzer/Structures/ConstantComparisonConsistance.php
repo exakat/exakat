@@ -29,7 +29,7 @@ class ConstantComparisonConsistance extends Analyzer {
 
     public function analyze() {
 
-        $literalsList = '"' . join('", "', self::LITERALS) . '"';
+        $literalsList = '"' . join('", "', self::$LITERALS) . '"';
         $query = <<<GREMLIN
 g.V().hasLabel("Comparison").out("LEFT").map{ if (it.get().label() in [$literalsList]) { 
                 x2 = "left"; 

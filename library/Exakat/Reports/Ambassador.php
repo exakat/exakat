@@ -119,7 +119,7 @@ class Ambassador extends Reports {
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
-        $files = ['base', 'index', 'credits'];
+        $files = array('base', 'index', 'credits');
         foreach($files as $file) {
             $baseHTML = file_get_contents($this->tmpName . '/datas/'.$file.'.html');
             $baseHTML = $this->injectBloc($baseHTML, "PROJECT", $this->config->project);
@@ -219,7 +219,8 @@ class Ambassador extends Reports {
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'">'.$description->getName().'</a></h2>';
             $analyzersDocHTML.='<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
 
-            if(!empty($description->getClearPHP())){
+            $v = $description->getClearPHP();
+            if(!empty($v)){
                 $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
             }
         }
@@ -365,7 +366,7 @@ class Ambassador extends Reports {
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $data[] = ['label' => $key, 'value' => count(Analyzer::getThemeAnalyzers($categorie))];
+            $data[] = array('label' => $key, 'value' => count(Analyzer::getThemeAnalyzers($categorie)));
         }
         // ordonné DESC par valeur
         uasort($data, function ($a, $b) {
@@ -443,7 +444,8 @@ SQL;
         $query = "SELECT COUNT(DISTINCT file) FROM results";
         $result = $this->sqlite->query($query);
 
-        return $result->fetchArray(\SQLITE3_NUM)[0];
+        $result = $result->fetchArray(\SQLITE3_NUM);
+        return $result[0];
     }
 
     /**
@@ -656,11 +658,11 @@ SQL;
      */
     private function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
-        $xAxis        = [];
-        $dataMajor    = [];
-        $dataCritical = [];
-        $dataNone     = [];
-        $dataMinor    = [];
+        $xAxis        = array();
+        $dataMajor    = array();
+        $dataCritical = array();
+        $dataNone     = array();
+        $dataMinor    = array();
         $severities = $this->getSeveritiesNumberBy('file');
         foreach ($data as $value) {
             $xAxis[] = "'" . $value['file'] . "'";
@@ -764,7 +766,7 @@ SQL;
         $return = array();
         while ($row = $stmt->fetchArray(\SQLITE3_ASSOC) ) {
             if ( !isset($return[$row[$type]]) ) {
-                $return[$row[$type]] = [$row['severity'] => $row['count']];
+                $return[$row[$type]] = array($row['severity'] => $row['count']);
             } else {
                 $return[$row[$type]][$row['severity']] = $row['count'];
             }
@@ -779,11 +781,11 @@ SQL;
      */
     private function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
-        $xAxis        = [];
-        $dataMajor    = [];
-        $dataCritical = [];
-        $dataNone     = [];
-        $dataMinor    = [];
+        $xAxis        = array();
+        $dataMajor    = array();
+        $dataCritical = array();
+        $dataNone     = array();
+        $dataMinor    = array();
 
         $severities = $this->getSeveritiesNumberBy('analyzer');
         foreach ($data as $value) {
@@ -854,7 +856,8 @@ SQL;
             $item['severity'] = "<i class=\"fa fa-warning " . $this->severities[$row['analyzer']] . "\"></i>";
             $item['complexity'] = "<i class=\"fa fa-cog " . $this->timesToFix[$row['analyzer']] . "\"></i>";
             $item['recipe' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
-            $item['analyzer_help' ] =  explode("\n", $ini['description'])[0];
+            $lines = explode("\n", $ini['description']);
+            $item['analyzer_help' ] = $lines[0];
 
             $items[] = json_encode($item);
             $this->count();
@@ -931,7 +934,7 @@ SQL;
             $settings .= "<tr><td>$i[0]</td><td>$i[1]</td></tr>";
         }        
         
-        $this->updateFile('used_settings.html', ['<settings />'     => $settings]);
+        $this->updateFile('used_settings.html', array('<settings />'     => $settings));
     }
 
     private function generateProcFiles() {
@@ -949,8 +952,8 @@ SQL;
             $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
         }
 
-        $this->updateFile('proc_files.html', ['<files />'     => $files, 
-                                              '<non-files />' => $nonFiles]);
+        $this->updateFile('proc_files.html', array('<files />'     => $files, 
+                                                   '<non-files />' => $nonFiles));
     }
 
     private function generateAnalyzersList() {
@@ -963,7 +966,7 @@ SQL;
            $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
         }
 
-        $this->updateFile('proc_analyzers.html', ['<analyzers />' => $analyzers]);
+        $this->updateFile('proc_analyzers.html', array('<analyzers />' => $analyzers));
     }
 
     private function generateExternalLib() {
@@ -983,7 +986,7 @@ SQL;
             $libraries .= "<tr><td>$name</td><td>$row[Folder]</td><td>$homepage</td></tr>\n";
         }
         
-        $this->updateFile('ext_lib.html', ['<libraries />' => $libraries]);
+        $this->updateFile('ext_lib.html', array('<libraries />' => $libraries));
     }
 
     private function updateFile($file, $blocks) {
@@ -1021,7 +1024,7 @@ SQL;
         }
         
 
-        $this->updateFile('codes.html', ['<files />' => $files]);
+        $this->updateFile('codes.html', array('<files />' => $files));
     }
 }
 

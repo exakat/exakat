@@ -27,12 +27,12 @@ use Exakat\Data\Methods;
 
 class UselessCasting extends Analyzer {
     public function analyze() {
-        $casts = ['T_STRING_CAST'  => 'string',
-                  'T_BOOL_CAST'    => 'bool',
-                  'T_INT_CAST'     => 'int',
-                  'T_ARRAY_CAST'   => 'array',
-                  'T_DOUBLE_CAST'  => 'real'
-                  ];
+        $casts = array('T_STRING_CAST'  => 'string',
+                       'T_BOOL_CAST'    => 'bool',
+                       'T_INT_CAST'     => 'int',
+                       'T_ARRAY_CAST'   => 'array',
+                       'T_DOUBLE_CAST'  => 'real'
+                  );
         
         $data = new Methods();
         $returnTypes = $data->getFunctionsByReturn();

@@ -166,6 +166,7 @@ Glossary
       + :ref:`Random Without Try <random-without-try>`
       + :ref:`Results May Be Missing <results-may-be-missing>`
       + :ref:`Use Positive Condition <use-positive-condition>`
+      + :ref:`Useless Check <useless-check>`
       + :ref:`Useless Constructor <useless-constructor>`
       + :ref:`parse_str() Warning <parse\_str()-warning>`
 
@@ -216,6 +217,7 @@ Glossary
 
     + `file_put_contents`
 
+      + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
       + :ref:`Use System Tmp <use-system-tmp>`
 
     + `fopen`
@@ -545,6 +547,7 @@ Glossary
       + :ref:`Old Style Constructor <old-style-constructor>`
       + :ref:`Redefined Default <redefined-default>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
+      + :ref:`Unitialized Properties <unitialized-properties>`
 
     + `__debugInfo`
 

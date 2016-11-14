@@ -26,11 +26,13 @@ use Exakat\Analyzer\Analyzer;
 
 class DefinedParentMP extends Analyzer {
     public function dependsOn() {
-        return array('Composer/IsComposerNsname');
+        return array('Composer/IsComposerNsname',
+                     'Classes/IsExtClass' );
     }
     
     public function analyze() {
         $isComposerClass = 'where( __.out("EXTENDS").in("ANALYZED").has("analyzer", "Composer/IsComposerNsname").count().is(eq(1)) )';
+        $isPhpClass = 'where( __.out("EXTENDS").in("ANALYZED").has("analyzer", "Classes/IsExtClass").count().is(eq(1)) )';
         
         // parent::method()
         $this->atomIs('Staticmethodcall')
@@ -73,6 +75,32 @@ class DefinedParentMP extends Analyzer {
              ->goToClass()
              ->goToAllParents()
              ->raw($isComposerClass)
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+
+        // Case of PHP class
+        $this->atomIs('Staticmethodcall')
+             ->outIs('METHOD')
+             ->savePropertyAs('code', 'name')
+             ->inIs('METHOD')
+             ->outIs('CLASS')
+             ->codeIs('parent')
+             ->goToClass()
+             ->raw($isPhpClass)
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+
+        $this->atomIs('Staticmethodcall')
+             ->outIs('METHOD')
+             ->savePropertyAs('code', 'name')
+             ->inIs('METHOD')
+             ->outIs('CLASS')
+             ->codeIs('parent')
+             ->goToClass()
+             ->goToAllParents()
+             ->raw($isPhpClass)
              ->back('first')
              ->analyzerIsNot('self');
         $this->prepareQuery();
@@ -123,6 +151,31 @@ class DefinedParentMP extends Analyzer {
              ->analyzerIsNot('self');
         $this->prepareQuery();
 
+        $this->atomIs('Staticproperty')
+             ->outIs('PROPERTY')
+             ->savePropertyAs('code', 'name')
+             ->inIs('PROPERTY')
+             ->outIs('CLASS')
+             ->codeIs('parent')
+             ->goToClass()
+             ->raw($isPhpClass)
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+
+        $this->atomIs('Staticproperty')
+             ->outIs('PROPERTY')
+             ->savePropertyAs('code', 'name')
+             ->inIs('PROPERTY')
+             ->outIs('CLASS')
+             ->codeIs('parent')
+             ->goToClass()
+             ->goToAllParents()
+             ->raw($isPhpClass)
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+        
         // defined in traits (via use)
         $this->atomIs('Property')
              ->analyzerIsNot('self')
