@@ -1,5 +1,11 @@
-Begin : 1458661351.2089
+Begin : 1479140018.5035
+
+Error : No Jobqueue server was found on this server. Start the queue (exakat queue) and try again.
+Stopping execution
+
+no jobs to do - waiting...
 Stopping queue
-unable to create named pipe/Users/famille/Desktop/analyze/tests/cli
-Duration : -34.69ms 
-End : 1458661351.2436
+Received quit command. Bye
+/Users/famille/Desktop/analyzeG3/tests/cli
+Duration : 61.07ms 
+End : 1479140018.5645\Date : Mon, 14 Nov 2016 16:13:38 +0000

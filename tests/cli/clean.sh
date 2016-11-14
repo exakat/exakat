@@ -1,7 +1,7 @@
 cd ../..
 
 # Normal test
-php exakat init -p clean
+php exakat init -p clean -v
 
 mkdir projects/clean/code
 echo '<?php phpinfo(); ?>' > projects/clean/code/index.php

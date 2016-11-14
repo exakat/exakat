@@ -1,0 +1,8 @@
+Begin : 1479140138.2833
+
+Error : No Jobqueue server was found on this server. Start the queue (exakat queue) and try again.
+Stopping execution
+
+/Users/famille/Desktop/analyzeG3/tests/cli
+Duration : 140.00ms 
+End : 1479140138.4233\Date : Mon, 14 Nov 2016 16:15:38 +0000
