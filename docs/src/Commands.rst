@@ -7,6 +7,8 @@ List of commands :
 ------------------
 
 * anonymize
+* clean
+* cleandb
 * doctor
 * help
 * init
@@ -57,6 +59,46 @@ Tips
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
 
+clean
+-----
+
+Cleans the provided project of everything except the config.ini and the code. 
+
+This is a maintenance command, that removes all produced files and folder, and restores a project to its initial state.
+
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -p        | Yes | Project name. Should be an existing project.                                |
++-----------+-----+-----------------------------------------------------------------------------+
+| -v        | No  | Verbose mode                                                                |
++-----------+-----+-----------------------------------------------------------------------------+
+
+
+cleandb
+-------
+
+Cleans the graph database. 
+
+This is a maintenance command, that removes all produced data and scripts, and restores the exakat database to its empty state. 
+
+By default, the database is cleaned with graph commands, letting the server do the cleaning.
+
+The -Q option makes the same cleaning with a full restart of the server. This is cleaner, and faster if the database was big or in some instable state.
+
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -Q        | No  | Cleans the database by restarting it, and removing files.                   |
++-----------+-----+-----------------------------------------------------------------------------+
+| -v        | No  | Verbose mode                                                                |
++-----------+-----+-----------------------------------------------------------------------------+
 
 
 doctor
