@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 07 Nov 2016 15:30:41 +0000
-.. comment: Generation hash : fbe07700232be7e52de924358e064db7417bd76a
+.. comment: Generation date : Mon, 14 Nov 2016 13:58:34 +0000
+.. comment: Generation hash : edc1a5936fa639eb6b302567744ded06a601f797
 
 
 .. _$http\_raw\_post\_data:
@@ -4909,6 +4909,19 @@ when the left operand of 'or' is true, the right one is not executed, as its res
 
 However, such structures are confusing. It is easy to misread them as conditions, and ignore an important logic step. 
 
+.. code-block:: php
+
+   <?php
+   
+   // Either connect, or die
+   mysql_connect('localhost', $user, $pass) or die();
+   
+   // Defines a constant if not found. 
+   defined('SOME_CONSTANT') and define('SOME_CONSTANT', 1);
+   
+   ?>
+
+
 It is recommended to use a real 'if then' structures, to make the condition readable.
 
 +--------------+-------------------------------------------------------------------------------------------+
@@ -5234,7 +5247,7 @@ Since arrays may be quite big, it is recommended to avoid using `array_merge() <
    ?>
 
 
-Note that `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ is also affected.
+Note that `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ and `file_put_contents() <http://www.php.net/file_put_contents>`_ are also affected and reported.
 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Performances/ArrayMergeInLoops                                                                              |
@@ -7956,6 +7969,44 @@ Usage of the Unicode Escape syntax, with the \u{xxxxx} format, available since P
 
 
 
+.. _unitialized-properties:
+
+Unitialized Properties
+######################
+
+
+Properties that are not initialized in the constructor, nor at definition. 
+
+.. code-block:: php
+
+   <?php
+   
+   class X {
+       private $i1 = 1, $i2;
+       protected $u1, $u2;
+       
+       function __construct() {
+           $this->i2 = 1 + $this->u2;
+       }
+       
+       function m() {
+           echo $this->i1, $this->i2, $this->u1, $this->u2;
+       }
+   }
+   ?>
+
+
+With the above class, when m() is accessed right after instantiation, there will be a missing property. 
+Using default values at property definition, or setting default values in the constructor ensures that the created object is consistent.
+
++--------------+-------------------------------+
+| Command Line | Classes/UnitializedProperties |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
+
+
+
 .. _unknown-directive-name:
 
 Unknown Directive Name
@@ -9298,6 +9349,42 @@ There is no need to overcast returned values.
 +--------------+---------------------------+
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
+
+
+
+.. _useless-check:
+
+Useless Check
+#############
+
+
+Situation where the condition is useless. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Checking for type is good. 
+   if (is_array($array)) {
+       foreach($array as $a) {
+           doSomething($a);
+       }
+   }
+   
+   // Foreach on empty arrays doesn't start. Checking is useless
+   if (!empty($array)) {
+       foreach($array as $a) {
+           doSomething($a);
+       }
+   }
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Structures/UselessCheck |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
 
 
 

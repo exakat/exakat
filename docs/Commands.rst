@@ -7,6 +7,8 @@ List of commands :
 ------------------
 
 * anonymize
+* clean
+* cleandb
 * doctor
 * help
 * init
@@ -32,9 +34,9 @@ Command
 #######
 ::
 
-    exakat init -p <project> 
-    exakat init -d <directory> 
-    exakat init -file <filename> 
+    exakat anonymize -p <project> 
+    exakat anonymize -d <directory> 
+    exakat anonymize -file <filename> 
 
 Options
 #######
@@ -57,6 +59,46 @@ Tips
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
 
+clean
+-----
+
+Cleans the provided project of everything except the config.ini and the code. 
+
+This is a maintenance command, that removes all produced files and folder, and restores a project to its initial state.
+
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -p        | Yes | Project name. Should be an existing project.                                |
++-----------+-----+-----------------------------------------------------------------------------+
+| -v        | No  | Verbose mode                                                                |
++-----------+-----+-----------------------------------------------------------------------------+
+
+
+cleandb
+-------
+
+Cleans the graph database. 
+
+This is a maintenance command, that removes all produced data and scripts, and restores the exakat database to its empty state. 
+
+By default, the database is cleaned with graph commands, letting the server do the cleaning.
+
+The -Q option makes the same cleaning with a full restart of the server. This is cleaner, and faster if the database was big or in some instable state.
+
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -Q        | No  | Cleans the database by restarting it, and removing files.                   |
++-----------+-----+-----------------------------------------------------------------------------+
+| -v        | No  | Verbose mode                                                                |
++-----------+-----+-----------------------------------------------------------------------------+
 
 
 doctor
@@ -230,7 +272,7 @@ Command
 #######
 ::
 
-    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer] [-v]
+    exakat init -p <project> [-R vcs_url] [-git|-svn|-bzr|-hg|-composer|-symlink|-copy|-tgz|-zip] [-v]
 
 Options
 #######
@@ -263,6 +305,26 @@ Tips
 ####
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
+
+Examples
+########
+::
+
+    # Clone Exakat with Git
+    php exakat.phar init -p exakat -R https://github.com/exakat/exakat.git 
+
+    # Download Spip with Zip
+    php exakat init -p spip2 -zip -R http://files.spip.org/spip/stable/spip-3.1.zip
+
+    # Download PHPMyadmin, 
+    php exakat.phar init -p pma2 -tgz -R https://files.phpmyadmin.net/phpMyAdmin/4.6.4/phpMyAdmin-4.6.4-all-languages.tar.gz
+
+    # Make a local copy of PHPMyadmin, 
+    php exakat.phar init -p copyProject -copy -R projects/phpmyadmin/code/
+
+    # Make a local symlink with the local webserver, 
+    php exakat.phar init -p copyProject -copy -R /var/www/public_html
+
 
 
 project

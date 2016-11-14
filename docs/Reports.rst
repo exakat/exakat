@@ -13,7 +13,7 @@ There are several reports that may be extracted from Exakat :
 * Uml
 * Clustergrammer
 * PhpConfiguration
-* RadwellCodes
+* RadwellCode
 
    `php exakat.phar report -p <project> -format <format> -file <filename>`
 
@@ -159,8 +159,8 @@ It also produces a list of php.ini directives that should be reviewed, to make s
 
 The result itself is a Text file.
 
-RadwellCodes
-------------
+RadwellCode
+-----------
 
 RadwellCodes is a report based on Oliver Radwell's [PHP Do And Don't](https://blog.radwell.codes/2016/11/php-dos-donts-aka-programmers-dont-like/)
 

@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 07 Nov 2016 15:30:41 +0000
-.. comment: Generation hash : fbe07700232be7e52de924358e064db7417bd76a
+.. comment: Generation date : Mon, 14 Nov 2016 13:58:34 +0000
+.. comment: Generation hash : edc1a5936fa639eb6b302567744ded06a601f797
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 273 analysis
+Total : 275 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -271,6 +271,7 @@ Total : 273 analysis
 * :ref:`Undefined Properties <undefined-properties>`
 * :ref:`Undefined Trait <undefined-trait>`
 * :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
+* :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unknown Directive Name <unknown-directive-name>`
 * :ref:`Unkown PCRE Options <unkown-pcre-options>`
 * :ref:`Unpreprocessed Values <unpreprocessed-values>`
@@ -309,6 +310,7 @@ Total : 273 analysis
 * :ref:`Useless Abstract Class <useless-abstract-class>`
 * :ref:`Useless Brackets <useless-brackets>`
 * :ref:`Useless Casting <useless-casting>`
+* :ref:`Useless Check <useless-check>`
 * :ref:`Useless Constructor <useless-constructor>`
 * :ref:`Useless Final <useless-final>`
 * :ref:`Useless Global <useless-global>`
