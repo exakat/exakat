@@ -30,32 +30,31 @@ class ConstantComparisonConsistance extends Analyzer {
     public function analyze() {
 
         $literalsList = '"' . join('", "', self::$LITERALS) . '"';
-        $query = <<<GREMLIN
-g.V().hasLabel("Comparison").out("LEFT").map{ if (it.get().label() in [$literalsList]) { 
-                x2 = "left"; 
-            } else { 
-                x2 = "right"; 
-            }; }.groupCount("gf").cap("gf")
-            .sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * 0.1; }.keySet()
+        $mapping = <<<GREMLIN
+if (it.get().label() in [$literalsList]) { 
+    x2 = "left"; 
+} else { 
+    x2 = "right"; 
+}
 GREMLIN;
-        
-        $types = $this->query($query);
+
+        $this->atomIs('Comparison')
+             ->outIs('LEFT')
+             ->raw('map{ '.$mapping.' }')
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * 0.1; }.keySet()');
+        $types = $this->rawQuery();
+
         if (count($types) == 0) {
             return;
         }
        
-        $types = $types[0];
+        $types = '["'.implode('", "', $types).'"]';
 
-        $this->atomIs('Comparison')
-             ->outIs('LEFT')
-             ->raw('sideEffect{ if (it.get().label() in ['.$literalsList.']) { 
-                x2 = "left"; 
-            } else { 
-                x2 = "right"; 
-            } }')
-              ->raw('filter{ x2 == "'.$types.'"}')
-              ->back('first');
-         $this->prepareQuery();
+        $this->atomFunctionIs(array('\\print', '\\echo'))
+             ->raw('sideEffect{ '.$mapping.' }')
+             ->raw('filter{ x2 in '.$types.'}')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
