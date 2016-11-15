@@ -34,7 +34,6 @@ class UseWpFunctions extends Analyzer {
         
         $this->atomFunctionIs($functions)
              ->back('first');
-        $this->printQuery();
         $this->prepareQuery();
     }
 }
