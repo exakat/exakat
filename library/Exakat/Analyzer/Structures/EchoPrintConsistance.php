@@ -28,20 +28,27 @@ use Exakat\Analyzer\Analyzer;
 class EchoPrintConsistance extends Analyzer {
 
     public function analyze() {
-        
-        $inconsistent = $this->query(<<<GREMLIN
-g.V().as("first").hasLabel("Functioncall")
-                 .where( __.in("METHOD", "NEW").count().is(eq(0)) )
-                 .has("token", within("T_ECHO", "T_PRINT"))
-                 .groupCount("gf").by{it.value("fullnspath");}.cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s / 10;}.keySet()
-GREMLIN
-);
+                $literalsList = '"' . join('", "', self::$LITERALS) . '"';
+        $mapping = <<<GREMLIN
+x2 = it.get().value("token");
+GREMLIN;
 
-        if (!empty($inconsistent)) {
-            $this->atomFunctionIs(array('\echo', '\print'))
-                 ->fullnspathIs($inconsistent);
-            $this->prepareQuery();
+        $this->atomFunctionIs(array('\\print', '\\echo'))
+             ->raw('map{ '.$mapping.' }')
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * 0.1; }.keySet()');
+        $types = $this->rawQuery();
+
+        if (count($types) == 0) {
+            return;
         }
+        
+        $types = '["'.implode('", "', $types).'"]';
+
+        $this->atomFunctionIs(array('\\print', '\\echo'))
+             ->raw('sideEffect{ '.$mapping.' }')
+             ->raw('filter{ x2 in '.$types.'}')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
