@@ -30,6 +30,7 @@ use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchFile;
 use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Loader\CypherG3;
+use Exakat\Loader\GremlinServerNeo4j;
 use Exakat\Phpexec;
 use Exakat\Tasks\Precedence;
 
@@ -253,12 +254,13 @@ class Load extends Tasks {
 
         $this->id0 = $this->addAtom('Project');
         $this->setAtom($this->id0, array('code'     => 'Whole',
-                                         'fullcode' => 'Whole',
+                                         'fullcode' => $config->project,
                                          'line'     => -1,
                                          'token'    => 'T_WHOLE'));
         
         if (static::$client === null) {
             static::$client = new CypherG3();
+//            static::$client = new GremlinServerNeo4j();
         }
         
         $this->datastore->cleanTable('tokenCounts');
@@ -343,7 +345,6 @@ class Load extends Tasks {
         
         $this->line = 0;
         $log = array();
-        $begin = microtime(true);
     
         if (is_link($filename)) { return true; }
         if (!file_exists($filename)) {
@@ -1241,7 +1242,7 @@ class Load extends Tasks {
             in_array($this->tokens[$this->id + 2][0], array(T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO))) {
     
             ++$this->id;
-            $inlineId = $this->processInlineHtml();
+            $this->processInlineHtml();
         
             if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
@@ -2591,7 +2592,7 @@ class Load extends Tasks {
         $ternaryId = $this->addAtom('Ternary');
         
         while (!in_array($this->tokens[$this->id + 1][0], array(T_COLON)) ) {
-            $id = $this->processNext();
+            $this->processNext();
         };
         $thenId = $this->popExpression();
         ++$this->id; // Skip colon
@@ -3275,7 +3276,6 @@ class Load extends Tasks {
     /// processing binary operators
     //////////////////////////////////////////////////////
     private function processSign() {
-        $current = $this->id;
         $sign = $this->tokens[$this->id][1];
         $code = $sign.'1';
         while (in_array($this->tokens[$this->id + 1][0], array(T_PLUS, T_MINUS))) {
@@ -3345,7 +3345,7 @@ class Load extends Tasks {
         
         $this->nestContext();
         do {
-            $id = $this->processNext();
+            $this->processNext();
 
             if (in_array($this->tokens[$this->id + 1][0], array(T_EQUAL, T_PLUS_EQUAL, T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_POW_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL))) {
                 $this->processNext();
@@ -4010,15 +4010,20 @@ class Load extends Tasks {
                 $extra = '';
             }
             
-            fwrite($fp, $atom['id'].','.
-                        $atom['atom'].',"'.
-                        $this->escapeCsv( $atom['code'] ).'","'.
-                        $this->escapeCsv( $atom['fullcode']).'",'.
-                        (isset($atom['line']) ? $atom['line'] : 0).',"'.
-                        $this->escapeCsv( isset($atom['token']) ? $atom['token'] : '') .'","'.
-                        (isset($atom['rank']) ? $atom['rank'] : -1).'"'.
-                        $extra.
-                        "\n");
+            $written = fwrite($fp, 
+                              $atom['id'].','.
+                              $atom['atom'].',"'.
+                              $this->escapeCsv( $atom['code'] ).'","'.
+                              $this->escapeCsv( $atom['fullcode']).'",'.
+                              (isset($atom['line']) ? $atom['line'] : 0).',"'.
+                              $this->escapeCsv( isset($atom['token']) ? $atom['token'] : '') .'","'.
+                              (isset($atom['rank']) ? $atom['rank'] : -1).'"'.
+                              $extra.
+                              "\n");
+            
+            if ($written > 2000000) {
+                print "Warning : Writing a csv line over 2M in $fileName\n";
+            }
 
             fclose($fp);
         }

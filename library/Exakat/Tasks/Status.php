@@ -37,9 +37,11 @@ class Status extends Tasks {
         if ($project === 'default') {
             if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
                 $json = json_decode(file_get_contents($config->projects_root.'/projects/.exakat/Project.json'));
+                $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
                 $status = array('running' => 'Project',
                                 'project' => @$json->project,
-                                'step'    => $json->step);
+                                'in graph' => $res->results[0],
+                                'step'    => $json->step,);
             } else {
                 $status = array();
             }
