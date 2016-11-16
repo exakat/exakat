@@ -26,6 +26,10 @@ namespace Exakat\Tasks;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Exceptions\DependsOnMustReturnArray;
+use Exakat\Exceptions\NoSuchAnalyzer;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoSuchThema;
+use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Phpexec;
 
 class Analyze extends Tasks {
@@ -35,11 +39,11 @@ class Analyze extends Tasks {
         $project = $config->project;
         
         if ($project == 'default') {
-            die("analyze require -p <project> option. Aborting\n");
+            throw new ProjectNeeded($project);
         }
 
         if (!file_exists($config->projects_root.'/projects/'.$project)) {
-            die("Project '$project' doesn't exist in projects folder. Aborting\n");
+            throw new NoSuchProject($project);
         }
 
         $this->checkTokenLimit();
@@ -63,14 +67,15 @@ class Analyze extends Tasks {
                 if (count($r) > 0) {
                     echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
                 }
-                die("No such class as '$analyzer'. Aborting\n");
+                throw new NoSuchAnalyzer($analyzer);
             }
-        } elseif ($config->thema !== null) {
+        } elseif (is_string($config->thema)) {
             $thema = $config->thema;
 
             if (!$analyzers_class = Analyzer::getThemeAnalyzers($thema)) {
-                die("No such thema as '$thema'. Aborting\n");
+                throw new NoSuchAnalyzer($thema);
             }
+
             $this->datastore->addRow('hash', array($config->thema => count($analyzers_class) ) );
         } else {
             die( "Usage :php exakat analyze -T <\"Thema\"> -p <project>\n
