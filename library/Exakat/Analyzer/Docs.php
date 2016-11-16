@@ -217,5 +217,28 @@ SQL;
         
         return $return;
     }
+
+    public function listAllThemes($theme = null) {
+        $query = <<<'SQL'
+SELECT name AS name FROM categories
+
+SQL;
+        if ($theme !== null) {
+            $query .= ' WHERE name=:name';
+            $stmt = $this->sqlite->prepare($query);
+            
+            $stmt->bindValue(':name', $theme, SQLITE3_TEXT);
+        } else {
+            $stmt = $this->sqlite->prepare($query);
+        }
+        $res = $stmt->execute();
+
+        $return = array();
+        while($row = $res->fetchArray()) {
+            $return[] = $row['name'];
+        }
+        
+        return $return;
+    }
 }
 ?>

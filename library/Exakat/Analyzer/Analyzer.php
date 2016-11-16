@@ -210,6 +210,21 @@ GREMLIN;
 
         return $res->results;
     }
+
+    public static function getSuggestionThema($thema) {
+        self::initDocs();
+        $list = self::$docs->listAllThemes();
+        $r = array();
+        foreach($list as $c) {
+            $l = levenshtein($c, $thema);
+
+            if ($l < 8) {
+                $r[] = $c;
+            }
+        }
+        
+        return $r;
+    }
     
     public static function getSuggestionClass($name) {
         self::initDocs();
@@ -242,6 +257,11 @@ GREMLIN;
     
     public function getDescription() {
         return $this->description;
+    }
+
+    static public function listAllThemes($theme = null) {
+        self::initDocs();
+        return Analyzer::$docs->listAllThemes($theme);
     }
 
     static public function getThemeAnalyzers($theme = null) {
@@ -1560,10 +1580,32 @@ GREMLIN;
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
 // php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";
 
-    // initializing a new query
         $this->queries[] = $query;
         $this->queriesArguments[] = $this->arguments;
 
+         // initializing a new query
+        return $this->initNewQuery();
+    }
+
+    public function rawQuery() {
+        // @doc This is when the object is a placeholder for others.
+        if (count($this->methods) <= 1) { return true; }
+        
+        $query = implode('.', $this->methods);
+        $query = 'g.V().'.
+                 $query.
+                 '
+// Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
+// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";
+
+        $arguments = $this->arguments;
+
+        $this->initNewQuery();
+        
+        return $this->query($query, $arguments);
+    }
+    
+    private function initNewQuery() {
         $this->methods = array();
         $this->addMethod('as("first")');
 
