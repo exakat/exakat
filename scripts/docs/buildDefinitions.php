@@ -21,7 +21,7 @@
 */
 
 // More to come,and automate collection too
-$attributes = array('ANALYZERS_COUNT' => '261');
+$attributes = array('ANALYZERS_COUNT' => '275');
 
 shell_exec('rm docs/*.rst');
 
@@ -125,6 +125,12 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'uksort'                         => 'http://www.php.net/uksort',
                  'uasort'                         => 'http://www.php.net/uasort',
                  'sort'                           => 'http://www.php.net/sort',
+
+                 'mail'                           => 'http://www.php.net/mail',
+
+                 'header'                         => 'http://www.php.net/header',
+                 'exit'                           => 'http://www.php.net/exit',
+                 'die'                            => 'http://www.php.net/die',
 
                  'exec'                           => 'http://www.php.net/exec',
                  'eval'                           => 'http://www.php.net/eval',
