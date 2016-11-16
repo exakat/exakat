@@ -122,7 +122,7 @@ class Project extends Tasks {
         $this->addSnitch(array('step' => 'Magic Numbers', 'project' => $config->project));
 
         // Dump is a child process
-        exec($config->php . ' '.$config->executable.' dump -p '.$config->project.'   > /dev/null &');
+        echo shell_exec($config->php . ' '.$config->executable.' dump -p '.$config->project);
         display('Started dump process');
 
         foreach($this->themes as $theme) {
@@ -147,6 +147,8 @@ class Project extends Tasks {
                 rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
 
                 Config::pop();
+
+                echo shell_exec($config->php . ' '.$config->executable.' dump -p '.$config->project.' -T '.$theme.' -u');
             } catch (\Exception $e) {
                 echo "Error while running the Analyze $theme \n",
                      $e->getMessage();
