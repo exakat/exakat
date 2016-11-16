@@ -25,7 +25,10 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
+use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoSuchThema;
+use Exakat\Exceptions\NotProjectInGraph;
 use Exakat\Tokenizer\Token;
 
 class Dump extends Tasks {
@@ -45,6 +48,11 @@ class Dump extends Tasks {
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             throw new NoSuchProject($config->project);
         }
+
+        $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
+        if ($res->results[0] != $config->project) {
+            throw new NotProjectInGraph($config->project, $res->results[0]);
+        }
         
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
@@ -60,95 +68,119 @@ class Dump extends Tasks {
         Analyzer::initDocs();
         Analyzer::$gremlinStatic = $this->gremlin;
         
-        $sqlite = new \Sqlite3($this->sqliteFile);
-        $this->getAtomCounts($sqlite);
+        if ($config->update === true) {
+            copy($this->sqliteFileFinal, $this->sqliteFile);
+            $sqlite = new \Sqlite3($this->sqliteFile);
+        } else {
+            $sqlite = new \Sqlite3($this->sqliteFile);
+            $this->getAtomCounts($sqlite);
+
+            $this->collectStructures($sqlite);
+
+            $sqlite->query('CREATE TABLE themas (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                   thema STRING
+                                                  )');
         
-        $this->collectStructures($sqlite);
+            $sqlite->query('CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                    fullcode STRING,
+                                                    file STRING,
+                                                    line INTEGER,
+                                                    namespace STRING,
+                                                    class STRING,
+                                                    function STRING,
+                                                    analyzer STRING,
+                                                    severity STRING
+                                                  )');
 
-        $sqlite->query('CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                fullcode STRING,
-                                                file STRING,
-                                                line INTEGER,
-                                                namespace STRING,
-                                                class STRING,
-                                                function STRING,
-                                                analyzer STRING,
-                                                severity STRING
-                                              )');
-
-        $sqlite->query('CREATE TABLE resultsCounts (   id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                       analyzer STRING,
-                                                       count INTEGER DEFAULT -6)');
-        display('Inited tables');
+            $sqlite->query('CREATE TABLE resultsCounts (   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                           analyzer STRING,
+                                                           count INTEGER DEFAULT -6)');
+            display('Inited tables');
+        }
 
         $sqlQuery = <<<SQL
-INSERT INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
+REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
              VALUES ( NULL, :fullcode, :file,  :line,  :namespace,  :class,  :function,  :analyzer,  :severity )
 SQL;
         $this->stmtResults = $sqlite->prepare($sqlQuery);
 
         $sqlQuery = <<<SQL
-INSERT INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, :class, :count )
+REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, :class, :count )
 SQL;
         $this->stmtResultsCounts = $sqlite->prepare($sqlQuery);
 
         $themes = array();
-        if ($config->thema === null) {
-            $toProcess = $this->themes;
-            // ???? 
+        if ($config->thema !== null) {
+            $thema = $config->thema;
+            $themes = Analyzer::getThemeAnalyzers($thema);
+            if (empty($themes)) {
+                $r = Analyzer::getSuggestionThema($thema);
+                if (count($r) > 0) {
+                    echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
+                }
+                throw new NoSuchThema($thema);
+            }
+            display('Processing thema : '.$thema);
+        } elseif ($config->program !== null) {
+            $analyzer = $config->program;
+            if (!Analyzer::getClass($analyzer)) {
+                $r = Analyzer::getSuggestionClass($analyzer);
+                if (count($r) > 0) {
+                    echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
+                }
+                throw new NoSuchAnalyzer($analyzer);
+            }            
+            $themes = array($analyzer);
+            display('Processing one analyzer : '.$analyzer);
         } else {
-            $toProcess = $config->thema;
+            display('No analysis dump requested (-T <thema> | -P <Analyzer>)');
+            $this->finish();
+            return;
         }
-        foreach($toProcess as $thema) {
-            display('Processing thema : '.(is_array($thema) ? implode(', ', $thema) : $thema));
-            $themaClasses = Analyzer::getThemeAnalyzers($thema);
 
-            $themes[] = $themaClasses;
+        /*
+        $res = $sqlite->query('SELECT COUNT(*) FROM themas WHERE thema="'.$thema.'"');
+        $count = $res->fetchArray(\SQLITE3_NUM);
+        if ($count === 1) {
+            display("$thema was already run\n");
+        } else {
+            display("$thema was not already run\n");
         }
-        $themes = call_user_func_array('array_merge', $themes);
-        $themes = array_keys(array_count_values($themes));
+        die();
+        print_r($themes);
+        */
 
         $sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
-        while (count($themes) > 0) {
-            ++$this->rounds;
-            $this->log->log( 'Run round '.$this->rounds);
 
-            $counts = array();
-            $datastore = new \Sqlite3($sqlitePath, \SQLITE3_OPEN_READONLY);
-            $datastore->busyTimeout(5000);
-            $res = $datastore->query('SELECT * FROM analyzed');
-            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-                $counts[$row['analyzer']] = $row['counts'];
-            }
-            $this->log->log( 'count analyzed : '.count($counts)."\n");
-            $this->log->log( 'counts '.implode(', ', $counts)."\n");
-            $datastore->close();
-            unset($datastore);
+        $this->log->log( 'Run round '.$this->rounds);
+
+        $counts = array();
+        $datastore = new \Sqlite3($sqlitePath, \SQLITE3_OPEN_READONLY);
+        $datastore->busyTimeout(5000);
+        $res = $datastore->query('SELECT * FROM analyzed');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $counts[$row['analyzer']] = $row['counts'];
+        }
+        $this->log->log( 'count analyzed : '.count($counts)."\n");
+        $this->log->log( 'counts '.implode(', ', $counts)."\n");
+        $datastore->close();
+        unset($datastore);
         
-            foreach($themes as $id => $thema) {
-                if (isset($counts[$thema])) {
-                    display( $thema.' : '.($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n");
-                    $this->processResults($thema, $counts[$thema]);
-                    unset($themes[$id]);
-                } else {
-                    display( $thema." : No\n");
-                }
+        foreach($themes as $id => $thema) {
+            if (isset($counts[$thema])) {
+                display( $thema.' : '.($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n");
+                $this->processResults($thema, $counts[$thema]);
+                unset($themes[$id]);
+            } else {
+                display( $thema." : No\n");
             }
+        }
 
-            $this->log->log( 'Still '.count($themes)." to be processed\n");
-            display('Still '.count($themes)." to be processed\n");
-            if (count($themes) === 0) {
-                $this->finish();
-                return ;
-            }
-            $wait = rand(2,7);
-            sleep($wait);
-            display('Sleep '.$wait.' seconds');
-            
-            if ($this->rounds >= self::WAITING_LOOP) {
-                $this->log->log( 'Waited for '.self::WAITING_LOOP." loop. Now aborting. Aborting\n");
-                $this->finish();
-                return true;
+        $this->log->log( 'Still '.count($themes)." to be processed\n");
+        display('Still '.count($themes)." to be processed\n");
+        if (count($themes) === 0) {
+            if ($config->thema !== null) {
+                $sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$config->thema.'")');
             }
         }
 
