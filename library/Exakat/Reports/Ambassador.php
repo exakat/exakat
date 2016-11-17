@@ -65,14 +65,21 @@ class Ambassador extends Reports {
      * @param type $file
      */
     private function getBasedPage($file) {
-        $baseHTML = file_get_contents($this->tmpName . '/datas/base.html');
-        $title = ($file == 'index') ? 'Dashboard' : $file;
-        $baseHTML = $this->injectBloc($baseHTML, "TITLE", $title);
-        $baseHTML = $this->injectBloc($baseHTML, "PROJECT", $this->config->project);
-        $baseHTML = $this->injectBloc($baseHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
+        static $baseHTML;
+        
+        if (empty($baseHTML)) {
+            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
+            $title = ($file == 'index') ? 'Dashboard' : $file;
 
-        $subPageHTML = file_get_contents($this->tmpName . '/datas/' . $file . '.html');
+            $baseHTML = $this->injectBloc($baseHTML, 'TITLE', $title);
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
+            $menu = file_get_contents($this->tmpName . '/datas/menu.html');
+            $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
+        }
+
+        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
         $combinePageHTML = $this->injectBloc($baseHTML, "BLOC-MAIN", $subPageHTML);
 
         return $combinePageHTML;
@@ -121,11 +128,10 @@ class Ambassador extends Reports {
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
-        $files = array('base', 'index', 'credits');
+        // Static files
+        $files = array('credits');
         foreach($files as $file) {
-            $baseHTML = file_get_contents($this->tmpName . '/datas/'.$file.'.html');
-            $baseHTML = $this->injectBloc($baseHTML, "PROJECT", $this->config->project);
-            $baseHTML = $this->injectBloc($baseHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
+            $baseHTML = $this->getBasedPage($file);
             file_put_contents($this->tmpName . '/datas/'.$file.'.html', $baseHTML);
         }
         
@@ -158,6 +164,7 @@ class Ambassador extends Reports {
     private function cleanFolder() {
         if (file_exists($this->tmpName . '/base.html')) {
             unlink($this->tmpName . '/base.html');
+            unlink($this->tmpName . '/menu.html');
         }
 
         // Clean final destination
@@ -233,7 +240,7 @@ class Ambassador extends Reports {
     }
 
     private function generateFavorites() {
-        $baseHTML = file_get_contents($this->tmpName . '/datas/favorites_dashboard.html');
+        $baseHTML = $this->getBasedPage('favorites_dashboard');
         
         $analyzers = Analyzer::getThemeAnalyzers('Preferences');
         
@@ -306,27 +313,299 @@ HTML
 JAVASCRIPT;
         }
         $donut = implode("\n", $donut);
+        $donut = <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      $donut
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAFILES]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Critical',
+              data: [SCRIPTDATACRITICAL]
+          }, {
+              name: 'Major',
+              data: [SCRIPTDATAMAJOR]
+          }, {
+              name: 'Minor',
+              data: [SCRIPTDATAMINOR]
+          }, {
+              name: 'None',
+              data: [SCRIPTDATANONE]
+          }]
+      });
+
+      $('#container').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAANALYZERLIST]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Critical',
+              data: [SCRIPTDATAANALYZERCRITICAL]
+          }, {
+              name: 'Major',
+              data: [SCRIPTDATAANALYZERMAJOR]
+          }, {
+              name: 'Minor',
+              data: [SCRIPTDATAANALYZERMINOR]
+          }, {
+              name: 'None',
+              data: [SCRIPTDATAANALYZERNONE]
+          }]
+      });
+    });
+  </script>
+
+JAVASCRIPT;
         $html = '<div class="row">'.implode("\n", $html).'</div>';
 
         $baseHTML = $this->injectBloc($baseHTML, "FAVORITES", $html);
-        $baseHTML = $this->injectBloc($baseHTML, "DONUTS", $donut);
+        $baseHTML = $this->injectBloc($baseHTML, "BLOC-JS", $donut);
         file_put_contents($this->tmpName . '/datas/favorites_dashboard.html', $baseHTML);
 
-        $baseHTML = file_get_contents($this->tmpName . '/datas/favorites_issues.html');
-        $preferencesJson = $this->getIssuesFaceted('Preferences');
-        
-//        $issues = '{"analyzer":"Non Static Methods Called In A Static","analyzer_md5":"8561bd2d54ef20d16ccf8588877a9eaa","file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","file_md5":"3aca4d820088f1a498a6ac7477fbeef3","code":"Argument::any( )","code_detail":"<i class=\"fa fa-plus \"><\/i>","code_plus":"Argument::any( )","link_file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","line":20,"severity":"<i class=\"fa fa-warning None\"><\/i>","complexity":"<i class=\"fa fa-cog None\"><\/i>","recipe":"Analyze, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71","analyzer_help":"Static methods have to be declared as such (using the static keyword). Then, "}';
-// [23625]=> string(802) "{"analyzer":"Non Static Methods Called In A Static","analyzer_md5":"8561bd2d54ef20d16ccf8588877a9eaa","file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","file_md5":"3aca4d820088f1a498a6ac7477fbeef3","code":"Argument::any( )","code_detail":"<i class=\"fa fa-plus \"><\/i>","code_plus":"Argument::any( )","link_file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","line":20,"severity":"<i class=\"fa fa-warning None\"><\/i>","complexity":"<i class=\"fa fa-cog None\"><\/i>","recipe":"Analyze, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71","analyzer_help":"Static methods have to be declared as such (using the static keyword). Then, "}"        
-        $finalHTML = str_replace("SCRIPT_DATA_FACETED", implode(', ', $preferencesJson), $baseHTML);
-        file_put_contents($this->tmpName . '/datas/favorites_issues.html', $finalHTML);
 
+        $baseHTML = $this->getBasedPage('favorites_issues');
+
+        $preferencesJson = implode(', ', $this->getIssuesFaceted('Preferences'));
+        $blocjs = <<<JAVASCRIPT
+ <script src="facetedsearch.js"></script>
+
+
+  <script>
+  "use strict";
+
+    $(document).ready(function() {
+
+      var data_items = [$preferencesJson];
+      var item_template =  
+        '<tr>' +
+          '<td width="20%"><%= obj.analyzer %></td>' +
+          '<td width="20%"><%= obj.file + ":" + obj.line %></td>' +
+          '<td width="18%"><%= obj.code %></td>' + 
+          '<td width="2%"><%= obj.code_detail %></td>' +
+          '<td width="7%" align="center"><%= obj.severity %></td>' +
+          '<td width="7%" align="center"><%= obj.complexity %></td>' +
+          '<td width="16%"><%= obj.recipe %></td>' +
+        '</tr>' +
+        '<tr class="fullcode">' +
+          '<td colspan="7" width="100%"><div class="analyzer_help"><%= obj.analyzer_help %></div><pre><code><%= obj.code_plus %></code><div class="text-right"><a target="_BLANK" href="codes.html?file=<%= obj.link_file %>" class="btn btn-info">View File</a></div></pre></td>' +
+        '</tr>';
+      var settings = { 
+        items           : data_items,
+        facets          : { 
+          'analyzer'  : 'Analyzer',
+          'file'      : 'File',
+          'severity'  : 'Severity',
+          'complexity': 'Complexity',
+          'receipt'   : 'Receipt'
+        },
+        facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
+        facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
+        facetListContainer : '<ul class="facetlist multiselect-container dropdown-menu"></ul>',
+        listItemTemplate   : '<li class=facetitem id="<%= id %>" data-analyzer="<%= data_analyzer %>" data-file="<%= data_file %>"><span class="check"></span><%= name %><span class=facetitemcount>(<%= count %>)</span></li>',
+        bottomContainer    : '<div class=bottomline></div>',  
+        resultSelector   : '#results',
+        facetSelector    : '#facets',
+        resultTemplate   : item_template,
+        paginationCount  : 50
+      }   
+      $.facetelize(settings);
+      
+      var analyzerParam = window.location.search.split('analyzer=')[1];
+      var fileParam = window.location.search.split('file=')[1];
+      if(analyzerParam !== undefined) {
+        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam + "']").click();
+      }
+      if(fileParam !== undefined) {
+        $('#file .facetlist').find("[data-file='" + fileParam + "']").click();
+      }
+    });
+  </script>
+
+JAVASCRIPT;
+
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
+        file_put_contents($this->tmpName . '/datas/favorites_issues.html', $finalHTML);
     }
 
     /**
      * generate the content of Dashboad
      */
     public function generateDashboard() {
-        $baseHTML = file_get_contents($this->tmpName . '/datas/index.html');
+        $baseHTML = $this->getBasedPage('index');
+        
+        $tags = array();
+        $code = array();
 
         // Bloc top left
         $hashData = $this->getHashData();
@@ -335,34 +614,274 @@ JAVASCRIPT;
         // bloc Issues
         $issues = $this->getIssuesBreakdown();
         $finalHTML = $this->injectBloc($finalHTML, "BLOCISSUES", $issues['html']);
-        $finalHTML = str_replace("SCRIPTISSUES", $issues['script'], $finalHTML);
+        $tags[] = 'SCRIPTISSUES';
+        $code[] = $issues['script'];
 
         // bloc severity
         $severity = $this->getSeverityBreakdown();
         $finalHTML = $this->injectBloc($finalHTML, "BLOCSEVERITY", $severity['html']);
-        $finalHTML = str_replace("SCRIPTSEVERITY", $severity['script'], $finalHTML);
+        $tags[] = 'SCRIPTSEVERITY';
+        $code[] = $severity['script'];
 
         // top 10
         $fileHTML = $this->getTopFile();
         $finalHTML = $this->injectBloc($finalHTML, "TOPFILE", $fileHTML);
         $analyzerHTML = $this->getTopAnalyzers();
         $finalHTML = $this->injectBloc($finalHTML, "TOPANALYZER", $analyzerHTML);
+        
+        $blocjs = <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      Morris.Donut({
+        element: 'donut-chart_issues',
+        resize: true,
+        colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
+        data: [SCRIPTISSUES]
+      });
+      Morris.Donut({
+        element: 'donut-chart_severity',
+        resize: true,
+        colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
+        data: [SCRIPTSEVERITY]
+      });
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAFILES]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Critical',
+              data: [SCRIPTDATACRITICAL]
+          }, {
+              name: 'Major',
+              data: [SCRIPTDATAMAJOR]
+          }, {
+              name: 'Minor',
+              data: [SCRIPTDATAMINOR]
+          }, {
+              name: 'None',
+              data: [SCRIPTDATANONE]
+          }]
+      });
+
+      $('#container').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAANALYZERLIST]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Critical',
+              data: [SCRIPTDATAANALYZERCRITICAL]
+          }, {
+              name: 'Major',
+              data: [SCRIPTDATAANALYZERMAJOR]
+          }, {
+              name: 'Minor',
+              data: [SCRIPTDATAANALYZERMINOR]
+          }, {
+              name: 'None',
+              data: [SCRIPTDATAANALYZERNONE]
+          }]
+      });
+    });
+  </script>
+JAVASCRIPT;
 
         // Filename Overview
         $fileOverview = $this->getFileOverview();
-        $finalHTML = str_replace("SCRIPTDATAFILES", $fileOverview['scriptDataFiles'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAMAJOR", $fileOverview['scriptDataMajor'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATACRITICAL", $fileOverview['scriptDataCritical'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATANONE", $fileOverview['scriptDataNone'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAMINOR", $fileOverview['scriptDataMinor'], $finalHTML);
+        $tags[] = 'SCRIPTDATAFILES';
+        $code[] = $fileOverview['scriptDataFiles'];
+        $tags[] = 'SCRIPTDATAMAJOR';
+        $code[] = $fileOverview['scriptDataMajor'];
+        $tags[] = 'SCRIPTDATACRITICAL';
+        $code[] = $fileOverview['scriptDataCritical'];
+        $tags[] = 'SCRIPTDATANONE';
+        $code[] = $fileOverview['scriptDataNone'];
+        $tags[] = 'SCRIPTDATAMINOR';
+        $code[] = $fileOverview['scriptDataMinor'];
         
         // Analyzer Overview
         $analyzerOverview = $this->getAnalyzerOverview();
-        $finalHTML = str_replace("SCRIPTDATAANALYZERLIST",     $analyzerOverview['scriptDataAnalyzer'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERMAJOR",    $analyzerOverview['scriptDataAnalyzerMajor'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERCRITICAL", $analyzerOverview['scriptDataAnalyzerCritical'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERNONE",     $analyzerOverview['scriptDataAnalyzerNone'], $finalHTML);
-        $finalHTML = str_replace("SCRIPTDATAANALYZERMINOR",    $analyzerOverview['scriptDataAnalyzerMinor'], $finalHTML);
+        $tags[] = 'SCRIPTDATAANALYZERLIST';
+        $code[] = $analyzerOverview['scriptDataAnalyzer'];
+        $tags[] = 'SCRIPTDATAANALYZERMAJOR';
+        $code[] = $analyzerOverview['scriptDataAnalyzerMajor'];
+        $tags[] = 'SCRIPTDATAANALYZERCRITICAL';
+        $code[] = $analyzerOverview['scriptDataAnalyzerCritical'];
+        $tags[] = 'SCRIPTDATAANALYZERNONE';
+        $code[] = $analyzerOverview['scriptDataAnalyzerNone'];
+        $tags[] = 'SCRIPTDATAANALYZERMINOR';
+        $code[] = $analyzerOverview['scriptDataAnalyzerMinor'];
+
+        $blocjs = str_replace($tags, $code, $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS",  $blocjs);
 
         file_put_contents($this->tmpName . '/datas/index.html', $finalHTML);
     }
@@ -577,7 +1096,7 @@ SQL;
         $finalHTML = $this->injectBloc($baseHTML, "BLOC-ANALYZERS", $analyserHTML);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/datatables.js"></script>');
 
-        print file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML)." in analyzers\n";
+        file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML);
     }
 
     /**
@@ -906,12 +1425,65 @@ SQL;
      */
     private function generateIssues()
     {
-        $baseHTML = file_get_contents($this->tmpName . '/datas/issues.html');
-        $issues = $this->getIssuesFaceted($this->themesToShow);
-        $finalHTML = str_replace("SCRIPT_DATA_FACETED", implode(",", $issues), $baseHTML);
-        $finalHTML = $this->injectBloc($finalHTML, "PROJECT", $this->config->project);
-        $finalHTML = $this->injectBloc($finalHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
+        $baseHTML = $this->getBasedPage('issues');
 
+        $issues = implode(', ', $this->getIssuesFaceted($this->themesToShow));
+        $blocjs = <<<JAVASCRIPT
+        
+  <script src="facetedsearch.js"></script>
+  <script>
+  "use strict";
+
+    $(document).ready(function() {
+
+      var data_items = [$issues];
+      var item_template =  
+        '<tr>' +
+          '<td width="20%"><%= obj.analyzer %></td>' +
+          '<td width="20%"><%= obj.file + ":" + obj.line %></td>' +
+          '<td width="18%"><%= obj.code %></td>' + 
+          '<td width="2%"><%= obj.code_detail %></td>' +
+          '<td width="7%" align="center"><%= obj.severity %></td>' +
+          '<td width="7%" align="center"><%= obj.complexity %></td>' +
+          '<td width="16%"><%= obj.recipe %></td>' +
+        '</tr>' +
+        '<tr class="fullcode">' +
+          '<td colspan="7" width="100%"><div class="analyzer_help"><%= obj.analyzer_help %></div><pre><code><%= obj.code_plus %></code><div class="text-right"><a target="_BLANK" href="codes.html?file=<%= obj.link_file %>" class="btn btn-info">View File</a></div></pre></td>' +
+        '</tr>';
+      var settings = { 
+        items           : data_items,
+        facets          : { 
+          'analyzer'  : 'Analyzer',
+          'file'      : 'File',
+          'severity'  : 'Severity',
+          'complexity': 'Complexity',
+          'receipt'   : 'Receipt'
+        },
+        facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
+        facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
+        facetListContainer : '<ul class="facetlist multiselect-container dropdown-menu"></ul>',
+        listItemTemplate   : '<li class=facetitem id="<%= id %>" data-analyzer="<%= data_analyzer %>" data-file="<%= data_file %>"><span class="check"></span><%= name %><span class=facetitemcount>(<%= count %>)</span></li>',
+        bottomContainer    : '<div class=bottomline></div>',  
+        resultSelector   : '#results',
+        facetSelector    : '#facets',
+        resultTemplate   : item_template,
+        paginationCount  : 50
+      }   
+      $.facetelize(settings);
+      
+      var analyzerParam = window.location.search.split('analyzer=')[1];
+      var fileParam = window.location.search.split('file=')[1];
+      if(analyzerParam !== undefined) {
+        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam + "']").click();
+      }
+      if(fileParam !== undefined) {
+        $('#file .facetlist').find("[data-file='" + fileParam + "']").click();
+      }
+    });
+  </script>
+JAVASCRIPT;
+
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
         file_put_contents($this->tmpName . '/datas/issues.html', $finalHTML);
     }
 
@@ -1023,7 +1595,9 @@ SQL;
             $settings .= "<tr><td>$i[0]</td><td>$i[1]</td></tr>";
         }        
         
-        $this->updateFile('used_settings.html', array('<settings />'     => $settings));
+        $html = $this->getBasedPage('used_settings');
+        $html = $this->injectBloc($html, 'SETTINGS', $settings);
+        file_put_contents($this->tmpName.'/datas/used_settings.html', $html);
     }
 
     private function generateProcFiles() {
@@ -1041,8 +1615,10 @@ SQL;
             $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
         }
 
-        $this->updateFile('proc_files.html', array('<files />'     => $files, 
-                                                   '<non-files />' => $nonFiles));
+        $html = $this->getBasedPage('proc_files');
+        $html = $this->injectBloc($html, 'FILES', $files);
+        $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
+        file_put_contents($this->tmpName.'/datas/proc_files.html', $html);
     }
 
     private function generateAnalyzersList() {
@@ -1055,7 +1631,9 @@ SQL;
            $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
         }
 
-        $this->updateFile('proc_analyzers.html', array('<analyzers />' => $analyzers));
+        $html = $this->getBasedPage('proc_analyzers');
+        $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
+        file_put_contents($this->tmpName.'/datas/proc_analyzers.html', $html);
     }
 
     private function generateExternalLib() {
@@ -1074,20 +1652,10 @@ SQL;
             }
             $libraries .= "<tr><td>$name</td><td>$row[file]</td><td>$homepage</td></tr>\n";
         }
-        
-        $this->updateFile('ext_lib.html', array('<libraries />' => $libraries));
-    }
 
-    private function updateFile($file, $blocks) {
-        $filePath = $this->tmpName.'/datas/'.$file;
-        $html = file_get_contents($filePath);
-
-        $html = str_replace("{{PROJECT}}", $this->config->project, $html);
-        $html = str_replace("{{PROJECT_LETTER}}", strtoupper($this->config->project{0}), $html);
-        
-        $html = str_replace(array_keys($blocks), array_values($blocks), $html);
-
-        file_put_contents($filePath, $html);
+        $html = $this->getBasedPage('ext_lib');
+        $html = $this->injectBloc($html, 'LIBRARIES', $libraries);
+        file_put_contents($this->tmpName.'/datas/ext_lib.html', $html);
     }
 
     private function generateCodes() {
@@ -1111,9 +1679,33 @@ SQL;
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
             file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], substr($source, 6, -8));
         }
-        
 
-        $this->updateFile('codes.html', array('<files />' => $files));
+        $blocjs = <<<JAVASCRIPT
+  <script src="facetedsearch.js"></script>
+
+
+  <script>
+  "use strict";
+
+  $('.menuitem').click(function(event){
+    $('#results').load("sources/" + event.target.text);
+    $('#filename').html(event.target.text + '  <span class="caret"></span>');
+  });
+
+  var fileParam = window.location.search.split('file=')[1];
+  if(fileParam !== undefined) {
+    $('#results').load("sources/" + fileParam);
+    $('#filename').html(fileParam + '  <span class="caret"></span>');
+  }
+  
+
+  </script>
+JAVASCRIPT;
+        $html = $this->getBasedPage('codes');
+        $html = $this->injectBloc($html, 'BLOC-JS', $blocjs);
+        $html = $this->injectBloc($html, 'FILES', $files);
+        
+        file_put_contents($this->tmpName.'/datas/codes.html', $html);
     }
 }
 
