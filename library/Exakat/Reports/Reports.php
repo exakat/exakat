@@ -24,6 +24,7 @@ namespace Exakat\Reports;
 
 use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
+use Exakat\Datastore;
 
 abstract class Reports {
     private $count = 0;
@@ -48,6 +49,7 @@ abstract class Reports {
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
 
         $this->datastore = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite', \SQLITE3_OPEN_READONLY);
+        $this->datastore = new Datastore($this->config);
     }
     
     public abstract function generateFileReport($report);
