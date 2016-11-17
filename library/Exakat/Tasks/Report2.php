@@ -75,26 +75,6 @@ class Report2 extends Tasks {
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
 
-        $max = 20;
-        while($row[0] == 0) {
-            unset($dump);
-            sleep(rand(1,3));
-            display("No Dump finish signal ($max). Waiting\n");
-
-            $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
-
-            $res = @$dump->query($ProjectDumpSql);
-            if ($res) {
-                $row = $res->fetchArray(\SQLITE3_NUM);
-            }
-            
-            --$max;
-            if ($max == 0) {
-                display("Waited for Project/Dump, but it never came. Try again later\n");
-                die();
-            }
-        }
-
         display( 'Building report for project '.$config->project.' in file "'.$config->file.'", with format '.$config->format."\n");
         $begin = microtime(true);
         
