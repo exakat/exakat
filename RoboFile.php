@@ -95,11 +95,6 @@ LICENCE;
         $licenceCRC = crc32(trim($licence));
 
         foreach ($files as $file) {
-            if (strpos($file, 'Progressbar') !== false) { 
-                print "Avoiding Progressbar.php\n"; 
-                continue; 
-            }
-            
             $tokens = token_get_all(file_get_contents($file));
             
             $tokenId = 0;
