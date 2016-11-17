@@ -100,7 +100,7 @@ SQL;
     public function getThemesForAnalyzer() {
         $list = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                   'CompatibilityPHP70', 'CompatibilityPHP71',
-                                  'Dead code', 'Security', 'Analyze');
+                                  'Dead code', 'Security', 'Analyze', 'Preferences');
         $listSqlite3 = '"'.join('", "', $list).'"';
                                           $query = <<<SQL
 SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM categories AS c
