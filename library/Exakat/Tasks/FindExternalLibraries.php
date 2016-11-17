@@ -67,7 +67,7 @@ class FindExternalLibraries extends Tasks {
                              'qrcode'           => self::FILE_ONLY,
                              'services_json'    => self::FILE_ONLY,
                              'sfyaml'           => self::WHOLE_DIR,
-                             'swift'            => self::WHOLE_DIR,
+                             'swift'            => self::PARENT_DIR,
                              'smarty'           => self::WHOLE_DIR,
                              'tcpdf'            => self::WHOLE_DIR,
                              'text_diff'        => self::WHOLE_DIR,
