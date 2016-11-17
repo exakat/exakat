@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Description;
+use Exakat\Datastore;
 use Exakat\Config;
 use Exakat\Tokenizer\Token;
 use Exakat\Exceptions\GremlinException;
@@ -109,6 +110,10 @@ abstract class Analyzer {
         $this->_as('first');
         
         $this->config = Config::factory();
+        
+        if (!isset(self::$datastore)) {
+            self::$datastore = new Datastore($this->config);
+        }
     }
     
     public function __destruct() {
