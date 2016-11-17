@@ -114,6 +114,8 @@ class Ambassador extends Reports {
         $this->generateDashboard();
         $this->generateFiles();
         $this->generateAnalyzers();
+        
+        $this->generateFavorites();
 
         $this->generateIssues();
         $this->generateAnalyzersList();
@@ -230,6 +232,91 @@ class Ambassador extends Reports {
         file_put_contents($this->tmpName . '/datas/analyzers_doc.html', $finalHTML);
     }
 
+    private function generateFavorites() {
+        $baseHTML = file_get_contents($this->tmpName . '/datas/favorites_dashboard.html');
+        
+        $analyzers = Analyzer::getThemeAnalyzers('Preferences');
+        
+        foreach($analyzers as $analyzer) {
+            $list = $this->datastore->getHashAnalyzer($analyzer);
+        
+            $table = '';
+            $values = '';
+            $object = Analyzer::getInstance($analyzer);
+            $name = $object->getDescription()->getName();
+
+            $total = 0;
+            foreach($list as $key => $value) {
+                $table .= '
+                <div class="clearfix">
+                   <div class="block-cell">'.htmlentities($key, ENT_COMPAT | ENT_HTML401, 'UTF-8').'</div>
+                   <div class="block-cell text-center">'.$value.'</div>
+                 </div>
+';          
+                $values[] = '{label:"'.$key.'", value:'.$value.'}';
+                $total += $value;
+            }
+            $nb = 4 - count($list);
+            for($i = 0; $i < $nb; ++$i) {
+                $table .= '
+                <div class="clearfix">
+                   <div class="block-cell">&nbsp;</div>
+                   <div class="block-cell text-center">&nbsp;</div>
+                 </div>
+';          
+            }
+            // Ignore if we have no occurrences
+            if ($total === 0) { continue; }
+            $values = implode(', ', $values);
+
+            $html[] = <<<HTML
+            <div class="col-md-3">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">$name</h3>
+                </div>
+                <div class="box-body chart-responsive">
+                  <div id="donut-chart_$name"></div>
+                  <div class="clearfix">
+                    <div class="block-cell bold">Number</div>
+                    <div class="block-cell bold text-center">Count</div>
+                  </div>
+                  $table
+                </div>
+                <!-- /.box-body -->
+              </div>
+            </div>
+HTML
+;       
+            if (count($html) % 4 === 0) {
+                $html[] = '          </div>
+          <div class="row">';
+            }
+            $donut[] = <<<JAVASCRIPT
+      Morris.Donut({
+        element: 'donut-chart_$name',
+        resize: true,
+        colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
+        data: [$values]
+      });
+
+JAVASCRIPT;
+        }
+        $donut = implode("\n", $donut);
+        $html = '<div class="row">'.implode("\n", $html).'</div>';
+
+        $baseHTML = $this->injectBloc($baseHTML, "FAVORITES", $html);
+        $baseHTML = $this->injectBloc($baseHTML, "DONUTS", $donut);
+        file_put_contents($this->tmpName . '/datas/favorites_dashboard.html', $baseHTML);
+
+        $baseHTML = file_get_contents($this->tmpName . '/datas/favorites_issues.html');
+        $issues = '{"analyzer":"Non Static Methods Called In A Static","analyzer_md5":"8561bd2d54ef20d16ccf8588877a9eaa","file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","file_md5":"3aca4d820088f1a498a6ac7477fbeef3","code":"Argument::any( )","code_detail":"<i class=\"fa fa-plus \"><\/i>","code_plus":"Argument::any( )","link_file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","line":20,"severity":"<i class=\"fa fa-warning None\"><\/i>","complexity":"<i class=\"fa fa-cog None\"><\/i>","recipe":"Analyze, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71","analyzer_help":"Static methods have to be declared as such (using the static keyword). Then, "}';
+// [23625]=> string(802) "{"analyzer":"Non Static Methods Called In A Static","analyzer_md5":"8561bd2d54ef20d16ccf8588877a9eaa","file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","file_md5":"3aca4d820088f1a498a6ac7477fbeef3","code":"Argument::any( )","code_detail":"<i class=\"fa fa-plus \"><\/i>","code_plus":"Argument::any( )","link_file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","line":20,"severity":"<i class=\"fa fa-warning None\"><\/i>","complexity":"<i class=\"fa fa-cog None\"><\/i>","recipe":"Analyze, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71","analyzer_help":"Static methods have to be declared as such (using the static keyword). Then, "}"        
+        $finalHTML = str_replace("SCRIPT_DATA_FACETED", $issues, $baseHTML);
+        file_put_contents($this->tmpName . '/datas/favorites_issues.html', $finalHTML);
+
+    }
+
     /**
      * generate the content of Dashboad
      */
@@ -283,16 +370,15 @@ class Ambassador extends Reports {
     public function getHashData() {
         $php = new Phpexec($this->config->phpversion);
 
-        $datastore = new Datastore($this->config);
         $info = array(
-            'Number of PHP files'                   => $datastore->getHash('files'),
-            'Number of lines of code'               => $datastore->getHash('loc'),
-            'Number of lines of code with comments' => $datastore->getHash('locTotal'),
+            'Number of PHP files'                   => $this->datastore->getHash('files'),
+            'Number of lines of code'               => $this->datastore->getHash('loc'),
+            'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
             'PHP used' => $php->getActualVersion() //.' (version '.$this->config->phpversion.' configured)'
         );
 
         // fichier
-        $totalFile = $datastore->getHash('files');
+        $totalFile = $this->datastore->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFileAnalysed - $totalFile;
         $percentFile = abs(round($totalFileSansError / $totalFile * 100));
@@ -529,7 +615,7 @@ SQL
                 FROM (SELECT DISTINCT file FROM results WHERE analyzer = :analyzer)
 SQL;
         $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':analyzer', $analyzer, SQLITE3_TEXT);
+        $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
         $result = $stmt->execute();
         $row = $result->fetchArray(\SQLITE3_ASSOC);
 
@@ -592,7 +678,7 @@ SQL
                 FROM (SELECT DISTINCT analyzer FROM results WHERE file = :file)
 SQL;
         $stmt = $this->sqlite->prepare($query);
-        $stmt->bindValue(':file', $file, SQLITE3_TEXT);
+        $stmt->bindValue(':file', $file, \SQLITE3_TEXT);
         $result = $stmt->execute();
         $row = $result->fetchArray(\SQLITE3_ASSOC);
 
@@ -915,11 +1001,9 @@ SQL;
             $info[] = array('Repository URL', 'Downloaded archive');
         }
 
-        $datastore = new Datastore($this->config);
-        
-        $info[] = array('Number of PHP files', $datastore->getHash('files'));
-        $info[] = array('Number of lines of code', $datastore->getHash('loc'));
-        $info[] = array('Number of lines of code with comments', $datastore->getHash('locTotal'));
+        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
+        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
+        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
 
         $info[] = array('Report production date', date('r', strtotime('now')));
         
@@ -939,14 +1023,14 @@ SQL;
 
     private function generateProcFiles() {
         $files = '';
-        $res = $this->datastore->query('SELECT file FROM files');
-        while($row = $res->fetchArray()) {
-            $files .= "<tr><td>{$row['file']}</td></tr>\n";
+        $fileList = $this->datastore->getCol('files', 'file');
+        foreach($fileList as $file) {
+            $files .= "<tr><td>$file</td></tr>\n";
         }
 
         $nonFiles = '';
-        $res = $this->datastore->query('SELECT file, reason FROM ignoredFiles');
-        while($row = $res->fetchArray()) {
+        $ignoredFiles = $this->datastore->getRow('ignoredFiles');
+        foreach($ignoredFiles as $row) {
             if (empty($row['file'])) { continue; }
 
             $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
@@ -973,17 +1057,17 @@ SQL;
         $externallibraries = json_decode(file_get_contents($this->config->dir_root.'/data/externallibraries.json'));
 
         $libraries = '';
-        $res = $this->datastore->query('SELECT library AS Library, file AS Folder FROM externallibraries ORDER BY library');
+        $externallibrariesList = $this->datastore->getRow('externallibraries');
 
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $url = $externallibraries->{strtolower($row['Library'])}->homepage;
-            $name = $externallibraries->{strtolower($row['Library'])}->name;
+        foreach($externallibrariesList as $row) {
+            $url = $externallibraries->{strtolower($row['library'])}->homepage;
+            $name = $externallibraries->{strtolower($row['library'])}->name;
             if (empty($url)) {
                 $homepage = '';
             } else {
-                $homepage = "<a href=\"".$url."\">".$row['Library']."</a>";
+                $homepage = "<a href=\"".$url."\">".$row['library']."</a>";
             }
-            $libraries .= "<tr><td>$name</td><td>$row[Folder]</td><td>$homepage</td></tr>\n";
+            $libraries .= "<tr><td>$name</td><td>$row[file]</td><td>$homepage</td></tr>\n";
         }
         
         $this->updateFile('ext_lib.html', array('<libraries />' => $libraries));
@@ -1004,9 +1088,9 @@ SQL;
     private function generateCodes() {
         mkdir($this->tmpName.'/datas/sources/', 0755);
 
+        $filesList = $this->datastore->getRow('files');
         $files = '';
-        $res = $this->datastore->query('SELECT file FROM files ORDER BY file');
-        while($row = $res->fetchArray()) {
+        foreach($filesList as $row) {
             $id = str_replace('/', '_', $row['file']);
             
             $subdirs = explode('/', dirname($row['file']));

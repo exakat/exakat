@@ -28,34 +28,46 @@ use Exakat\Analyzer\Analyzer;
 class InconsistantCase extends Analyzer {
 
     public function analyze() {
-        $query = <<<GREMLIN
-g.V().hasLabel("<atom>").map{ if (it.get().value('code') == it.get().value('code').toLowerCase()) { 
-                                    x2 = 'lower'; 
-                                } else if (it.get().value('code') == it.get().value('code').toUpperCase()) { 
-                                    x2 = 'upper'; 
-                                } else {
-                                    x2 = 'mixed'; 
-                                }; }.groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * 0.1; }.keySet()
+        $mapping = <<<GREMLIN
+if (it.get().value('code') == it.get().value('code').toLowerCase()) { 
+    x2 = 'lower'; 
+} else if (it.get().value('code') == it.get().value('code').toUpperCase()) { 
+    x2 = 'upper'; 
+} else {
+    x2 = 'mixed'; 
+}
 GREMLIN;
-        
-        $atoms = array('Null', 'Boolean');
-        foreach($atoms as $atom) {
-            $types = $this->query(str_replace('<atom>', $atom, $query) );
+        $storage = array('lowercase' => 'lower',
+                         'UPPERCASE' => 'upper',
+                         'Mixed'     => 'mixed');
 
-            if (count($types) > 0) {
-                $typesList = '"'.implode('", "', $types).'"';
-                $this->atomIs($atom)
-                     ->raw('sideEffect{ if (it.get().value("code") == it.get().value("code").toLowerCase()) { 
-                                x2 = "lower"; 
-                            } else if (it.get().value("code") == it.get().value("code").toUpperCase()) { 
-                                x2 = "upper"; 
-                            } else {
-                                x2 = "mixed"; 
-                            }; }')
-                      ->raw('filter{ x2 in ['.$typesList.']}');
-                $this->prepareQuery();
-            }
+        $this->atomIs(array('Null', 'Boolean'))
+             ->raw('map{ '.$mapping.' }')
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next()');
+        $types = (array) $this->rawQuery();
+
+        $store = array();
+        $total = 0;
+        foreach($storage as $key => $v) {
+            $c = empty($types[$v]) ? 0 : $types[$v];
+            $store[] = array('key'   => $key,
+                             'value' => $c);
+            $total += $c;
         }
+        Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
+        
+        if ($total == 0) {
+            return;
+        }
+
+        $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
+        $types = '["'.str_replace('\\', '\\\\', implode('", "', array_keys($types))).'"]';
+
+        $this->atomIs(array('Null', 'Boolean'))
+             ->raw('sideEffect{ '.$mapping.' }')
+             ->raw('filter{ x2 in '.$types.'}')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

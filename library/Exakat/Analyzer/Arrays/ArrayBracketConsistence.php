@@ -32,18 +32,30 @@ class ArrayBracketConsistence extends Analyzer {
         $mapping = <<<GREMLIN
 x2 = it.get().value("token");
 GREMLIN;
-
+        $storage = array('array()' => 'T_ARRAY',
+                         '[]'      => 'T_OPEN_BRACKET');
+        
         $this->atomFunctionIs('\\array')
              ->raw('map{ '.$mapping.' }')
-             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s * 0.1; }.keySet()');
-        $types = $this->rawQuery();
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next()');
+        $types = (array) $this->rawQuery();
         
-        if (count($types) == 0) {
+        $store = array();
+        $total = 0;
+        foreach($storage as $key => $v) {
+            $c = empty($types[$v]) ? 0 : $types[$v];
+            $store[] = array('key'   => $key,
+                             'value' => $c);
+            $total += $c;
+        }
+        Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
+        
+        if ($total == 0) {
             return;
         }
-        
-        
-        $types = '["'.addslashes(implode('", "', $types)).'"]';
+
+        $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
+        $types = '["'.str_replace('\\', '\\\\', implode('", "', array_keys($types))).'"]';
 
         $this->atomFunctionIs('\\array')
              ->raw('sideEffect{ '.$mapping.' }')
