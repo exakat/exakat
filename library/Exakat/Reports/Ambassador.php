@@ -310,9 +310,11 @@ JAVASCRIPT;
         file_put_contents($this->tmpName . '/datas/favorites_dashboard.html', $baseHTML);
 
         $baseHTML = file_get_contents($this->tmpName . '/datas/favorites_issues.html');
-        $issues = '{"analyzer":"Non Static Methods Called In A Static","analyzer_md5":"8561bd2d54ef20d16ccf8588877a9eaa","file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","file_md5":"3aca4d820088f1a498a6ac7477fbeef3","code":"Argument::any( )","code_detail":"<i class=\"fa fa-plus \"><\/i>","code_plus":"Argument::any( )","link_file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","line":20,"severity":"<i class=\"fa fa-warning None\"><\/i>","complexity":"<i class=\"fa fa-cog None\"><\/i>","recipe":"Analyze, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71","analyzer_help":"Static methods have to be declared as such (using the static keyword). Then, "}';
+        $preferencesJson = $this->getIssuesFaceted('Preferences');
+        
+//        $issues = '{"analyzer":"Non Static Methods Called In A Static","analyzer_md5":"8561bd2d54ef20d16ccf8588877a9eaa","file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","file_md5":"3aca4d820088f1a498a6ac7477fbeef3","code":"Argument::any( )","code_detail":"<i class=\"fa fa-plus \"><\/i>","code_plus":"Argument::any( )","link_file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","line":20,"severity":"<i class=\"fa fa-warning None\"><\/i>","complexity":"<i class=\"fa fa-cog None\"><\/i>","recipe":"Analyze, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71","analyzer_help":"Static methods have to be declared as such (using the static keyword). Then, "}';
 // [23625]=> string(802) "{"analyzer":"Non Static Methods Called In A Static","analyzer_md5":"8561bd2d54ef20d16ccf8588877a9eaa","file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","file_md5":"3aca4d820088f1a498a6ac7477fbeef3","code":"Argument::any( )","code_detail":"<i class=\"fa fa-plus \"><\/i>","code_plus":"Argument::any( )","link_file":"\/src\/Pim\/Bundle\/ReferenceDataBundle\/spec\/Doctrine\/ORM\/RequirementChecker\/ReferenceDataUniqueCodeCheckerSpec.php","line":20,"severity":"<i class=\"fa fa-warning None\"><\/i>","complexity":"<i class=\"fa fa-cog None\"><\/i>","recipe":"Analyze, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71","analyzer_help":"Static methods have to be declared as such (using the static keyword). Then, "}"        
-        $finalHTML = str_replace("SCRIPT_DATA_FACETED", $issues, $baseHTML);
+        $finalHTML = str_replace("SCRIPT_DATA_FACETED", implode(', ', $preferencesJson), $baseHTML);
         file_put_contents($this->tmpName . '/datas/favorites_issues.html', $finalHTML);
 
     }
@@ -902,7 +904,7 @@ SQL;
     private function generateIssues()
     {
         $baseHTML = file_get_contents($this->tmpName . '/datas/issues.html');
-        $issues = $this->getIssuesFaceted();
+        $issues = $this->getIssuesFaceted($this->themesToShow);
         $finalHTML = str_replace("SCRIPT_DATA_FACETED", implode(",", $issues), $baseHTML);
         $finalHTML = $this->injectBloc($finalHTML, "PROJECT", $this->config->project);
         $finalHTML = $this->injectBloc($finalHTML, "PROJECT_LETTER", strtoupper($this->config->project{0}));
@@ -914,8 +916,8 @@ SQL;
      * List of Issues faceted
      * @return array
      */
-    public function getIssuesFaceted() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+    public function getIssuesFaceted($theme) {
+        $list = Analyzer::getThemeAnalyzers($theme);
         $list = '"'.join('", "', $list).'"';
 
         $sqlQuery = <<<SQL
