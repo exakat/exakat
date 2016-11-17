@@ -31,6 +31,7 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Phpexec;
+use ProgressBar\Manager as ProgressBar;
 
 class Analyze extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -155,11 +156,11 @@ php exakat analyze -P <One/rule> -p <project>\n");
         $total_results = 0;
         $Php = new Phpexec($config->version);
 
-        $progressBar = new \Progressbar(count($dependencies2));
+        $progressBar = new Progressbar(0, count($dependencies2) + 1, exec('tput cols'));
         
         foreach($dependencies2 as $analyzer_class) {
             if (!$config->verbose && !$config->quiet) {
-                echo $progressBar->drawCurrentProgress();
+                echo $progressBar->advance();
             }
             $begin = microtime(true);
             $analyzer = Analyzer::getInstance($analyzer_class);
@@ -222,6 +223,10 @@ GREMLIN;
                 // storing the number of row found in Hash table (datastore)
                 $this->datastore->addRow('analyzed', array($analyzer_class => $count ) );
             }
+        }
+
+        if (!$config->verbose && !$config->quiet) {
+            echo $progressBar->advance();
         }
 
         display( "Done\n");
