@@ -96,7 +96,7 @@ class Project extends Tasks {
 
         $analyze = new FindExternalLibraries($this->gremlin);
         $analyze->run($configThema);
-        unset($report);
+
         $this->addSnitch(array('step' => 'External lib', 'project' => $config->project));
 
         Config::pop();
@@ -135,6 +135,7 @@ class Project extends Tasks {
                             4 => '-T',
                             5 => trim($theme, '"'), // No need to protect anymore, as this is internal
                             6 => '-norefresh',
+                            7 => '-u'
                             );
             
             try {
@@ -142,28 +143,38 @@ class Project extends Tasks {
 
                 $analyze = new Analyze($this->gremlin);
                 $analyze->run($configThema);
-                unset($report);
+                unset($analyze);
                 
                 rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
 
                 Config::pop();
 
-                echo shell_exec($config->php . ' '.$config->executable.' dump -p '.$config->project.' -T '.$theme.' -u');
+                $args = array ( 1 => 'dump',
+                                2 => '-p',
+                                3 => $config->project,
+                                4 => '-T',
+                                5 => trim($theme, '"'), // No need to protect anymore, as this is internal
+                                6 => '-u'
+                            );
+
+                $configThema = Config::push($args);
+
+                $dump = new Dump($this->gremlin);
+                $dump->run($configThema);
+                unset($dump);
+
+                Config::pop();
             } catch (\Exception $e) {
                 echo "Error while running the Analyze $theme \n",
-                     $e->getMessage();
+                     $e->getMessage(),
+                     "\nTrying next analysis\n";
                 file_put_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
-                die();
             }
         }
 
         display("Analyzed project\n");
         $this->logTime('Analyze');
         $this->addSnitch(array('step' => 'Analyzed', 'project' => $config->project));
-
-/*
-        check on dump ? 
-*/
 
         $this->logTime('Analyze');
 
@@ -189,8 +200,8 @@ class Project extends Tasks {
                     unset($report);
                 } catch (\Exception $e) {
                     echo "Error while building $reportName in $format \n",
-                         $e->getMessage();
-                    die();
+                         $e->getMessage(),
+                         "\nTrying next report\n";
                 }
             }
         }
