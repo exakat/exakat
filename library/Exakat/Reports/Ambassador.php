@@ -237,6 +237,9 @@ class Ambassador extends Reports {
         
         $analyzers = Analyzer::getThemeAnalyzers('Preferences');
         
+        $donut = array();
+        $html = array();
+        
         foreach($analyzers as $analyzer) {
             $list = $this->datastore->getHashAnalyzer($analyzer);
         
