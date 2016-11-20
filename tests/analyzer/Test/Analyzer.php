@@ -17,15 +17,15 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
         $test_config = str_replace('_', '/', substr(get_class($this), 5));
 
+        // initialize Config (needed by phpexec)
+        $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
+
         $analyzerobject = ExakatAnalyzer::getInstance($test_config);
         if (!$analyzerobject->checkPhpVersion($phpversion)) {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
 
         require('exp/'.str_replace('_', '/', $file).'.php');
-
-        // initialize Config (needed by phpexec)
-        $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
         $res = shell_exec($config->$versionPHP.' -l ./source/'.str_replace('_', '/', $file).'.php 2>/dev/null');
