@@ -38,6 +38,12 @@ class ConstantConditions extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        $this->atomIs('Dowhile')
+             ->outIs('CONDITION')
+             ->is('constant', true)
+             ->back('first');
+        $this->prepareQuery();
+
         $this->atomIs('Ifthen')
              // constant shouldn't be PHP's
              ->outIs('CONDITION')
