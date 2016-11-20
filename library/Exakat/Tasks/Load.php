@@ -285,10 +285,10 @@ class Load extends Tasks {
         }
 
         static::$client->finalize();
-        display('Final memory : '.number_format(memory_get_usage() / pow(2, 20)).'Mb');
-        display('Maximum memory : '.number_format(memory_get_peak_usage() / pow(2, 20)).'Mb');
-        display('Tokens size : '.count($this->tokens).' items');
-        display('Links size : '.count($this->links).' items');
+#        display('Final memory : '.number_format(memory_get_usage() / pow(2, 20)).'Mb');
+#        display('Maximum memory : '.number_format(memory_get_peak_usage() / pow(2, 20)).'Mb');
+#        display('Tokens size : '.count($this->tokens).' items');
+#        display('Links size : '.count($this->links).' items');
         $this->datastore->addRow('hash', array('status' => 'Load'));
         
         $loadFinal = new LoadFinal($this->gremlin);
@@ -339,7 +339,7 @@ class Load extends Tasks {
     }
 
     private function processFile($filename) {
-        display( "Process '$filename'\n");
+#        display( "Process '$filename'\n");
         $this->log->log("$filename");
         $this->filename = $filename;
         
@@ -411,7 +411,7 @@ class Load extends Tasks {
         $this->id = -1;
         do {
             $theId = $this->processNext();
-            display( "$this->id / $n\n");
+#            display( "$this->id / $n\n");
 
             if ($theId > 0) {
                 $this->addToSequence($theId);
@@ -426,9 +426,9 @@ class Load extends Tasks {
 
         $this->checkTokens($filename);
         
-        display( count($this->atoms)." atoms\n");
-        display( count($this->links)." links\n");
-        display( "Final id : $this->id\n");
+#        display( count($this->atoms)." atoms\n");
+#        display( count($this->links)." links\n");
+#        display( "Final id : $this->id\n");
         
         return true;
     }
@@ -436,7 +436,7 @@ class Load extends Tasks {
     private function processNext() {
        ++$this->id;
        
-       display( $this->id.") ".$this->tokens[$this->id][1]."\n");
+#       display( $this->id.") ".$this->tokens[$this->id][1]."\n");
        $this->processing = array(
                             T_OPEN_TAG                 => 'processOpenTag',
                             T_OPEN_TAG_WITH_ECHO       => 'processOpenTag',
@@ -612,7 +612,7 @@ class Load extends Tasks {
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
         
-        display( "$method\n" );
+#        display( "$method\n" );
         
         return $this->$method();
     }
@@ -1854,22 +1854,22 @@ class Load extends Tasks {
         $id = $this->addAtom('Functioncall');
 
         $variableId = $this->addAtom('Identifier');
-        $this->addLink($id, $variableId, 'VARIABLE');
+        $this->addLink($id, $variableId, 'NAME');
         $this->setAtom($variableId, array('code'       => '[',
-                                     'fullcode'   => '[ '.self::FULLCODE_SEQUENCE.' ]',
-                                     'line'       => $this->tokens[$this->id][2],
-                                     'token'      => $this->getToken($this->tokens[$this->id][0]),
-                                     'fullnspath' => '\\array'));
+                                          'fullcode'   => '[',
+                                          'line'       => $this->tokens[$this->id][2],
+                                          'token'      => $this->getToken($this->tokens[$this->id][0]),
+                                          'fullnspath' => '\\array'));
 
         // No need to skip opening bracket
         $argumentId = $this->processArguments(array(T_CLOSE_BRACKET));
         $this->addLink($id, $argumentId, 'ARGUMENTS');
 
         $this->setAtom($id, array('code'       => $this->tokens[$current][1],
-                             'fullcode'   => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ,
-                             'line'       => $this->tokens[$this->id][2],
-                             'token'      => $this->getToken($this->tokens[$current][0]),
-                             'fullnspath' => '\\array'));
+                                  'fullcode'   => '[' . $this->atoms[$argumentId]['fullcode'] . ']' ,
+                                  'line'       => $this->tokens[$this->id][2],
+                                  'token'      => $this->getToken($this->tokens[$current][0]),
+                                  'fullnspath' => '\\array'));
         $this->pushExpression($id);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
