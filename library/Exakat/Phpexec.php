@@ -22,6 +22,9 @@
 
 namespace Exakat;
 
+use Exakat\Config;
+use Exakat\Exceptions\NoPhpBinary;
+
 class Phpexec {
     private $phpexec          = 'php';
     private static $extraTokens    = array(';'       => 'T_SEMICOLON',
@@ -63,7 +66,7 @@ class Phpexec {
     private $actualVersion    = null;
     
     public function __construct($phpversion = null) {
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
 
         if ($phpversion === null) {
             $phpversion = $config->phpversion;
@@ -112,15 +115,15 @@ class Phpexec {
                 $this->actualVersion = PHP_VERSION;
         }
         if ($this->phpexec === null) {
-            throw new \Exakat\Exceptions\NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check config/exakat.ini');
+            throw new NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check config/exakat.ini');
         }
 
         if (!file_exists($this->phpexec)) {
-            throw new \Exakat\Exceptions\NoPhpBinary('PHP binary for version '.$phpversion.' is not valid : "'.$this->phpexec.'". Please, check config/exkat.ini');
+            throw new NoPhpBinary('PHP binary for version '.$phpversion.' is not valid : "'.$this->phpexec.'". Please, check config/exkat.ini');
         }
 
         if (!is_executable($this->phpexec)) {
-            throw new \Exakat\Exceptions\NoPhpBinary('PHP binary for version '.$phpversion.' exists but is not executable : "'.$this->phpexec.'". Please, check config/exakat.ini');
+            throw new NoPhpBinary('PHP binary for version '.$phpversion.' exists but is not executable : "'.$this->phpexec.'". Please, check config/exakat.ini');
         }
     }
 
