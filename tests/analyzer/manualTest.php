@@ -61,6 +61,9 @@ file_put_contents('../../test.sh', $sh);
 
 print "Run all  unit tests with : phpunit $testFile\n";
 print "Run this unit tests with : phpunit --filter=$number $testFile\n";
-
+$res = shell_exec('php -l '.$sourceFile);
+print "Lint           ".(trim($res) == "No syntax errors detected in $sourceFile" ? 'OK' : 'KO')."        : php -l $sourceFile\n";
+$res = shell_exec('php -l '.$expFile);
+print "Lint           ".(trim($res) == "No syntax errors detected in $expFile" ? 'OK' : 'KO')."        : php -l $expFile\n";
 
 ?>
