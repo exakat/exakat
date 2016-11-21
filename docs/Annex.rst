@@ -25,7 +25,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/cairo
 * ext/calendar
 * ext/com
-* Crypto (pecl)
+* ext/crypto
 * ext/ctype
 * ext/curl
 * ext/cyrus

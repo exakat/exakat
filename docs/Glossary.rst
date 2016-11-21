@@ -26,13 +26,30 @@ Glossary
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
       + :ref:`Slow Functions <slow-functions>`
 
+    + `array_diff`
+
+      + :ref:`Slow Functions <slow-functions>`
+
     + `array_flip`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Slow Functions <slow-functions>`
+
+    + `array_intersect`
+
+      + :ref:`Slow Functions <slow-functions>`
+
+    + `array_key_exists`
+
+      + :ref:`Slow Functions <slow-functions>`
 
     + `array_keys`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Slow Functions <slow-functions>`
+
+    + `array_map`
+
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_merge`
@@ -44,9 +61,29 @@ Glossary
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 
+    + `array_search`
+
+      + :ref:`Slow Functions <slow-functions>`
+
+    + `array_udiff`
+
+      + :ref:`Slow Functions <slow-functions>`
+
+    + `array_uintersect`
+
+      + :ref:`Slow Functions <slow-functions>`
+
     + `array_unique`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Slow Functions <slow-functions>`
+
+    + `array_unshift`
+
+      + :ref:`Slow Functions <slow-functions>`
+
+    + `array_walk`
+
       + :ref:`Slow Functions <slow-functions>`
 
 
@@ -57,6 +94,7 @@ Glossary
 
     + `break`
 
+      + :ref:`Bail Out Early <bail-out-early>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Break With 0 <break-with-0>`
       + :ref:`Break With Non Integer <break-with-non-integer>`
@@ -98,6 +136,7 @@ Glossary
 
     + `continue`
 
+      + :ref:`Bail Out Early <bail-out-early>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
 
@@ -129,6 +168,16 @@ Glossary
     + `date`
 
       + :ref:`Timestamp Difference <timestamp-difference>`
+
+    + `die`
+
+      + :ref:`Dont Echo Error <dont-echo-error>`
+      + :ref:`Exit() Usage <exit()-usage>`
+      + :ref:`No Implied If <no-implied-if>`
+      + :ref:`Or Die <or-die>`
+      + :ref:`Print And Die <print-and-die>`
+      + :ref:`Unreachable Code <unreachable-code>`
+      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
 
     + `do..while()`
 
@@ -180,6 +229,13 @@ Glossary
       + :ref:`eval() Without Try <eval()-without-try>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
+    + `exit`
+
+      + :ref:`Dont Echo Error <dont-echo-error>`
+      + :ref:`Exit() Usage <exit()-usage>`
+      + :ref:`Unreachable Code <unreachable-code>`
+      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+
 
 + `F`
     + `File`
@@ -198,6 +254,7 @@ Glossary
 
       + :ref:`Can't Extend Final <can't-extend-final>`
       + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
+      + :ref:`Echo Or Print <echo-or-print>`
       + :ref:`Eval() Usage <eval()-usage>`
       + :ref:`Join file() <join-file()>`
       + :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
@@ -235,7 +292,9 @@ Glossary
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
       + :ref:`No Direct Usage <no-direct-usage>`
+      + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
 
@@ -253,10 +312,29 @@ Glossary
       + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 
 
++ `H`
+    + `Header`
+
+      + :ref:`Close Tags <close-tags>`
+
+    + `header`
+
+      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+
+
 + `I`
+    + `Isset`
+
+      + :ref:`No Isset With Empty <no-isset-with-empty>`
+
     + `implode`
 
       + :ref:`Join file() <join-file()>`
+
+    + `in_array`
+
+      + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Slow Functions <slow-functions>`
 
     + `instanceof`
 
@@ -275,6 +353,13 @@ Glossary
 
       + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 
+    + `isset`
+
+      + :ref:`Isset With Constant <isset-with-constant>`
+      + :ref:`No Isset With Empty <no-isset-with-empty>`
+      + :ref:`Should Use Coalesce <should-use-coalesce>`
+      + :ref:`Slow Functions <slow-functions>`
+
 
 + `J`
     + `join`
@@ -283,6 +368,14 @@ Glossary
 
 
 + `M`
+    + `Mail`
+
+      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+
+    + `mail`
+
+      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+
     + `mb_chr`
 
       + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
@@ -306,6 +399,7 @@ Glossary
 
     + `mt_rand`
 
+      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
       + :ref:`Use random_int() <use-random\_int()>`
 
     + `mt_srand`
@@ -341,6 +435,7 @@ Glossary
     + `preg_replace`
 
       + :ref:`Eval() Usage <eval()-usage>`
+      + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `preg_replace_callback_array`
@@ -355,6 +450,7 @@ Glossary
 
       + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
       + :ref:`Unused Returned Value <unused-returned-value>`
+      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
       + :ref:`Use random_int() <use-random\_int()>`
 
     + `random_bytes`
@@ -400,9 +496,14 @@ Glossary
     + `strpos`
 
       + :ref:`Simplify Regex <simplify-regex>`
+      + :ref:`Slow Functions <slow-functions>`
       + :ref:`Strpos Comparison <strpos-comparison>`
       + :ref:`Use Pathinfo <use-pathinfo>`
       + :ref:`Useless Casting <useless-casting>`
+
+    + `strstr`
+
+      + :ref:`Slow Functions <slow-functions>`
 
     + `strtotime`
 
@@ -490,18 +591,22 @@ Glossary
 
     + `uasort`
 
+      + :ref:`Slow Functions <slow-functions>`
       + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 
     + `uksort`
 
+      + :ref:`Slow Functions <slow-functions>`
       + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 
     + `usleep`
 
       + :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
+      + :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 
     + `usort`
 
+      + :ref:`Slow Functions <slow-functions>`
       + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 
 

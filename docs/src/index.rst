@@ -22,4 +22,6 @@ Contents:
    Reports
    Configuration
    Glossary
-
+   Contribute
+   Contributors
+   Annex

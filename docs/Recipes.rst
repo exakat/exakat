@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 14 Nov 2016 13:58:34 +0000
-.. comment: Generation hash : edc1a5936fa639eb6b302567744ded06a601f797
+.. comment: Generation date : Mon, 21 Nov 2016 21:45:27 +0000
+.. comment: Generation hash : 6bc5976dc83c4f58ea2ddcac18c9fddd3f0e5a0b
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 275 analysis
+Total : 277 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -89,6 +89,7 @@ Total : 275 analysis
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
+* :ref:`Bail Out Early <bail-out-early>`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -120,6 +121,7 @@ Total : 275 analysis
 * :ref:`Dependant Trait <dependant-trait>`
 * :ref:`Deprecated Code <deprecated-code>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
+* :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
 * :ref:`Dont Echo Error <dont-echo-error>`
 * :ref:`Double Assignation <double-assignation>`
 * :ref:`Double Instructions <double-instructions>`
@@ -351,7 +353,7 @@ Total : 275 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 20 analysis
+Total : 19 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -368,7 +370,6 @@ Total : 20 analysis
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Should Be Single Quote <should-be-single-quote>`
-* :ref:`True False Inconsistant Case <true-false-inconsistant-case>`
 * :ref:`Unusual Case For PHP Functions <unusual-case-for-php-functions>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
@@ -625,7 +626,7 @@ Total : 33 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 37 analysis
+Total : 38 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -646,6 +647,7 @@ Total : 37 analysis
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
+* :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
@@ -670,11 +672,12 @@ Total : 37 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 5 analysis
+Total : 6 analysis
 
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+* :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 
@@ -767,12 +770,13 @@ Total : 19 analysis
 Wordpress
 +++++++++
 
-Total : 6 analysis
+Total : 7 analysis
 
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
 * :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
 * :ref:`Unverified Nonce <unverified-nonce>`
 * :ref:`Use $wpdb Api <use-$wpdb-api>`
+* :ref:`Use Wordpress Functions <use-wordpress-functions>`
 * :ref:`Wpdb Best Usage <wpdb-best-usage>`
 
