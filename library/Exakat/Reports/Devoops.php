@@ -120,6 +120,7 @@ class Devoops extends Reports {
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
         $this->dump      = new \Sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
+        // This is an overwriting. Leave it here.
         $this->datastore = new \Sqlite3($folder.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
         
         // Compatibility
