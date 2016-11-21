@@ -20,8 +20,40 @@
  *
 */
 
+$sqlite = new \Sqlite3('data/analyzers.sqlite');
+
+$res = $sqlite->query('SELECT COUNT(*)
+                FROM categories c
+                JOIN analyzers_categories ac
+                    ON c.id = ac.id_categories
+                JOIN analyzers a
+                    ON a.id = ac.id_analyzer
+                WHERE c.name = "Analyze"');
+$analyzer_count = $res->fetchArray(\SQLITE3_NUM)[0];
+
+$extension_list = array();
+$ext = glob('./human/en/Extensions/Ext*.ini');
+foreach($ext as $f) {
+    $ini = parse_ini_file($f);
+    $extension_list[] = '* '.$ini['name'];
+}
+$extension_list = join("\n", $extension_list);
+
+$library_list = array();
+$json = json_decode(file_get_contents('data/externallibraries.json'));
+foreach( (array) $json as $library) {
+    if (!isset($library->name)) {
+        print_r($library);
+    }
+    $library_list[] = '* ['.$library->name.']('.$library->homepage.')';
+}
+$library_list = join("\n", $library_list);
+
+
 // More to come,and automate collection too
-$attributes = array('ANALYZERS_COUNT' => '275');
+$attributes = array('ANALYZERS_COUNT' => $analyzer_count,
+                    'EXTENSION_LIST' => $extension_list,
+                    'LIBRARY_LIST' => $library_list);
 
 shell_exec('rm docs/*.rst');
 
@@ -208,7 +240,6 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
 
                  );
 
-$sqlite = new \Sqlite3('data/analyzers.sqlite');
 
 $query = 'SELECT a.folder || "/" || a.name AS analyzer,GROUP_CONCAT(c.name) analyzers  
                 FROM categories c
