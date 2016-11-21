@@ -14,4 +14,10 @@ if (array_key_exists(1, $anArray) !== false) {
     print "Not Found";
 }
 
+if (isset($anArray[1]) !== false) {
+    print "Found";
+} else {
+    print "Not Found";
+}
+
 ?>
