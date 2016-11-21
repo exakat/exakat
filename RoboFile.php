@@ -448,6 +448,20 @@ JOIN categories
             }
         }
 
+        $errors = array();
+        $json = json_decode(file_get_contents('data/externallibraries.json'));
+        foreach( (array) $json as $id => $library) {
+            if (!isset($library->name)) {
+                $errors[] = "$id's element is missing name (externallibraries.json)\n";
+                continue;
+            }
+            if (!isset($library->homepage)) {
+                $errors[] = "$library->name is missing homepage (externallibraries.json)\n";
+            }
+            if (!isset($library->ignore)) {
+                $errors[] = "$library->name is missing ignore (externallibraries.json)\n";
+            }
+        }
 
         // checking inifile files
         $files = Finder::create()->ignoreVCS(true)
