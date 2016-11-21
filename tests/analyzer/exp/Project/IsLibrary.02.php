@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('Whole');
+$expected     = array('test');
 
 $expected_not = array();
 
