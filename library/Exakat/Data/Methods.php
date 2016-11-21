@@ -112,14 +112,14 @@ class Methods {
         $return = array();
         
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $return[] = $row;
+            $return[] = $row['name'];
         }
         
         return $return;
     }
 
     public function getNonDeterministFunctions() {
-        $query = 'SELECT name FROM methods WHERE determinist != 0';
+        $query = 'SELECT name FROM methods WHERE determinist = 0';
         $res = $this->sqlite->query($query);
         $return = array();
         
