@@ -36,5 +36,5 @@ Label : PROJECT
                   2
               Label : ARGUMENT
                 Void
-            Label : VARIABLE
+            Label : NAME
               [

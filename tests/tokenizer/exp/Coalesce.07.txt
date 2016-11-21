@@ -38,7 +38,7 @@ Label : PROJECT
                     [
                     Label : ARGUMENT
                       Void
-                  Label : VARIABLE
+                  Label : NAME
                     [
             Label : NAME
               B

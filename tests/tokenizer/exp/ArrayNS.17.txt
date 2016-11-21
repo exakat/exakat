@@ -60,5 +60,5 @@ Label : PROJECT
                           Void
                       Label : NAME
                         z
-            Label : VARIABLE
+            Label : NAME
               [

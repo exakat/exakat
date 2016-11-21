@@ -64,7 +64,7 @@ Label : PROJECT
                     Void
                 Label : RIGHT
                   1
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =

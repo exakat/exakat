@@ -72,8 +72,6 @@ Label : PROJECT
                       fetch
                   Label : OBJECT
                     $this
-            Label : ELEMENT
-              Void
           Label : THEN
             ;
             Label : ELEMENT
@@ -104,5 +102,3 @@ Label : PROJECT
                       fetch
                   Label : OBJECT
                     $this
-            Label : ELEMENT
-              Void

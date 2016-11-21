@@ -42,7 +42,7 @@ Label : PROJECT
                         INF
                       Label : ARGUMENT
                         NAN
-                    Label : VARIABLE
+                    Label : NAME
                       [
                 Label : NAME
                   in_array

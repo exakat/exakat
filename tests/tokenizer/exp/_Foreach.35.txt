@@ -24,7 +24,7 @@ Label : PROJECT
                     10
                   Label : ARGUMENT
                     20
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : ARGUMENT
                 [
@@ -34,11 +34,11 @@ Label : PROJECT
                     30
                   Label : ARGUMENT
                     40
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : ARGUMENT
                 Void
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           foreach

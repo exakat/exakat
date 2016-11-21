@@ -17,7 +17,7 @@ Label : PROJECT
                 static
             Label : ARGUMENT
               $method
-          Label : VARIABLE
+          Label : NAME
             [
         Label : ELEMENT
           x

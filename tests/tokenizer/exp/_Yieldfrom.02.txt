@@ -50,8 +50,6 @@ Label : PROJECT
                               const
                               Label : NAME
                                 X
-                                Label : DEFINITION
-                                  X
                               Label : VALUE
                                 12
                           Label : ELEMENT
@@ -254,7 +252,7 @@ Label : PROJECT
                                           2
                                         Label : ARGUMENT
                                           3
-                                      Label : VARIABLE
+                                      Label : NAME
                                         [
                                   Label : NAME
                                     foo

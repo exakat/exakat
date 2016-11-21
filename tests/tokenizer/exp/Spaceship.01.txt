@@ -152,7 +152,7 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     Void
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : RIGHT
                 [
@@ -160,7 +160,7 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     Void
-                Label : VARIABLE
+                Label : NAME
                   [
           Label : NAME
             echo
@@ -180,7 +180,7 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : RIGHT
                 [
@@ -192,7 +192,7 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : VARIABLE
+                Label : NAME
                   [
           Label : NAME
             echo
@@ -212,7 +212,7 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : RIGHT
                 [
@@ -220,7 +220,7 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     Void
-                Label : VARIABLE
+                Label : NAME
                   [
           Label : NAME
             echo
@@ -240,7 +240,7 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : RIGHT
                 [
@@ -252,7 +252,7 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     1
-                Label : VARIABLE
+                Label : NAME
                   [
           Label : NAME
             echo
@@ -272,7 +272,7 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : RIGHT
                 [
@@ -284,7 +284,7 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     4
-                Label : VARIABLE
+                Label : NAME
                   [
           Label : NAME
             echo
@@ -304,7 +304,7 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : VARIABLE
+              Label : NAME
                 [
         Label : ELEMENT
           =
@@ -322,7 +322,7 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : VARIABLE
+              Label : NAME
                 [
         Label : ELEMENT
           echo
@@ -352,7 +352,7 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : VARIABLE
+              Label : NAME
                 [
         Label : ELEMENT
           =
@@ -370,7 +370,7 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "c"
-              Label : VARIABLE
+              Label : NAME
                 [
         Label : ELEMENT
           echo
@@ -400,7 +400,7 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "c"
-              Label : VARIABLE
+              Label : NAME
                 [
         Label : ELEMENT
           =
@@ -418,7 +418,7 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : VARIABLE
+              Label : NAME
                 [
         Label : ELEMENT
           echo
@@ -448,7 +448,7 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : VARIABLE
+              Label : NAME
                 [
         Label : ELEMENT
           =
@@ -466,7 +466,7 @@ Label : PROJECT
                     "b"
                   Label : VALUE
                     "b"
-              Label : VARIABLE
+              Label : NAME
                 [
         Label : ELEMENT
           echo

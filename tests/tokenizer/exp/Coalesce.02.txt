@@ -56,7 +56,7 @@ Label : PROJECT
                   "c"
                 Label : VALUE
                   "d"
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           var_dump

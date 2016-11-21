@@ -18,14 +18,6 @@ Label : PROJECT
                 const
                 Label : NAME
                   A
-                  Label : DEFINITION
-                    A
-                  Label : DEFINITION
-                    A
-                  Label : DEFINITION
-                    A
-                  Label : DEFINITION
-                    A
                 Label : VALUE
                   array
                   Label : ARGUMENTS
@@ -68,6 +60,24 @@ Label : PROJECT
                   x
                 Label : CONSTANT
                   A
+                Label : DEFINITION
+                  const
+                  Label : NAME
+                    A
+                  Label : VALUE
+                    array
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        1
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          2
+                        Label : VALUE
+                          3
+                    Label : NAME
+                      array
           Label : NAME
             print
         Label : ELEMENT
@@ -96,6 +106,24 @@ Label : PROJECT
                       x
                     Label : CONSTANT
                       A
+                    Label : DEFINITION
+                      const
+                      Label : NAME
+                        A
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            1
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              2
+                            Label : VALUE
+                              3
+                        Label : NAME
+                          array
           Label : NAME
             print
         Label : ELEMENT
@@ -124,6 +152,24 @@ Label : PROJECT
                       x
                     Label : CONSTANT
                       A
+                    Label : DEFINITION
+                      const
+                      Label : NAME
+                        A
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            1
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              2
+                            Label : VALUE
+                              3
+                        Label : NAME
+                          array
           Label : NAME
             print
         Label : ELEMENT
@@ -152,5 +198,23 @@ Label : PROJECT
                       x
                     Label : CONSTANT
                       A
+                    Label : DEFINITION
+                      const
+                      Label : NAME
+                        A
+                      Label : VALUE
+                        array
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            1
+                          Label : ARGUMENT
+                            =>
+                            Label : KEY
+                              2
+                            Label : VALUE
+                              3
+                        Label : NAME
+                          array
           Label : NAME
             print

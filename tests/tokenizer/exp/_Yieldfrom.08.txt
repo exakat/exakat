@@ -38,7 +38,7 @@ Label : PROJECT
                             Void
                         Label : NAME
                           c
-                Label : VARIABLE
+                Label : NAME
                   [
           Label : NAME
             a

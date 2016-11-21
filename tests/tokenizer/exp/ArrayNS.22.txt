@@ -40,7 +40,7 @@ Label : PROJECT
                             4
                           Label : ARGUMENT
                             5
-                        Label : VARIABLE
+                        Label : NAME
                           [
                       Label : ARGUMENT
                         [
@@ -48,9 +48,9 @@ Label : PROJECT
                           [
                           Label : ARGUMENT
                             6
-                        Label : VARIABLE
+                        Label : NAME
                           [
-                    Label : VARIABLE
+                    Label : NAME
                       [
                   Label : ARGUMENT
                     [
@@ -58,11 +58,11 @@ Label : PROJECT
                       [
                       Label : ARGUMENT
                         7
-                    Label : VARIABLE
+                    Label : NAME
                       [
                   Label : ARGUMENT
                     8
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : ARGUMENT
                 [
@@ -70,7 +70,7 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     9
-                Label : VARIABLE
+                Label : NAME
                   [
-            Label : VARIABLE
+            Label : NAME
               [
