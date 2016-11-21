@@ -33,11 +33,8 @@ class ShouldPreprocess extends Analyzer {
 
 //'Identifier', 
         $methods = new Methods();
-        $functionList = array();
-        foreach($methods->getDeterministFunctions() as $row) {
-            $functionList[] = '\\'.$row['name'];
-        }
-//        var_dump($functionList);die();
+        $functionList = $methods->getDeterministFunctions();
+        $functionList = $this->makeFullNSPath($functionList);
 
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
             // Functioncall, that are not authorized

@@ -310,7 +310,7 @@ GREMLIN;
 
         $data = new Methods();
         $deterministFunctions = $data->getDeterministFunctions();
-        $deterministFunctions = array_map(function ($x) { return '\\'.$x['name'];}, $deterministFunctions);
+        $deterministFunctions = array_map(function ($x) { return '\\'.$x;}, $deterministFunctions);
 
         for ($i =0; $i < 3; ++$i) {
         // Cases for Structures (all sub element are constante => structure is constante)
