@@ -33,7 +33,7 @@ class LoadFinal extends Tasks {
 
     public function run(Config $config) {
         $linksIn = Token::linksAsList();
-        
+
         // processing '\parent' fullnspath
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() == "\\\\parent"}
@@ -56,7 +56,7 @@ g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() 
 GREMLIN;
         $this->gremlin->query($query);
         display('\\self to fullnspath');
-        
+
         // processing '\static' fullnspath
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() == "\\\\static"}
@@ -67,6 +67,24 @@ g.V().hasLabel("Identifier").filter{ it.get().value("fullnspath").toLowerCase() 
 GREMLIN;
         $this->gremlin->query($query);
         display('\\static to fullnspath');
+
+        // Create link between Class constant and definition
+        $query = <<<'GREMLIN'
+        g.V().hasLabel('Staticconstant').as('first')
+.out('CONSTANT').sideEffect{name = it.get().value("code");}.select('first')
+.out('CLASS').sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
+.where( __.sideEffect{classes = [];}
+          .emit(hasLabel("Class")).repeat( out("EXTENDS").in("DEFINITION") ).times(15)
+          .out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").as('const')
+          .out("NAME").filter{ it.get().value("code") == name; }.select('const')
+          .sideEffect{classes.add(it.get()); }
+          .fold()
+)
+.map{classes[0]}.as('theClass')
+.addE('DEFINITION').from( 'first' )
+GREMLIN;
+        $this->gremlin->query($query);
+        display('Create link between Class constant and definition');
 
         // Create propertyname for Property Definitions
         $query = <<<GREMLIN
@@ -162,7 +180,7 @@ GREMLIN;
         $constants = array_map('strtolower', $constants);
 
         $query = <<<GREMLIN
-g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
+g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
                             .filter{ it.get().value("code").toLowerCase() in arg1 }
 .sideEffect{ 
     fullnspath = "\\\\" + it.get().value("code").toLowerCase();
@@ -182,7 +200,7 @@ GREMLIN;
         $constantsDefinitions = $constants->results;
 
         $query = <<<GREMLIN
-g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
+g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
                             .filter{ it.get().value("code") in arg1 }
                             .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
                             .sideEffect{ name = it.get().value("code"); }
@@ -235,7 +253,7 @@ GREMLIN;
 g.V().hasLabel("Identifier", "Nsname")
      .where( __.in("NAME", "SUBNAME").count().is(eq(0)) )
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
-     .addE('DEFINITION2')
+     .addE('DEFINITION')
      .from( 
         g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define")
              .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String")
