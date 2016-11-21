@@ -30,17 +30,17 @@ class ConstantComparisonConsistance extends Analyzer {
     public function analyze() {
         $literalsList = '"' . join('", "', self::$LITERALS) . '"';
         $mapping = <<<GREMLIN
-if (it.get().label() in [$literalsList]) { 
+if (it.get().vertices(OUT, "LEFT").next().label() in [$literalsList]) { 
     x2 = "left"; 
-} else { 
+} else if (it.get().vertices(OUT, "RIGHT").next().label() in [$literalsList]) { 
     x2 = "right"; 
-}
+} // else, ignore. 
+
 GREMLIN;
         $storage = array('To the left'  => 'left',
                          'To the right' => 'right');
 
         $this->atomIs('Comparison')
-             ->outIs('LEFT')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next()');
         $types = (array) $this->rawQuery();
@@ -62,7 +62,7 @@ GREMLIN;
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
         $types = '["'.str_replace('\\', '\\\\', implode('", "', array_keys($types))).'"]';
 
-        $this->atomFunctionIs(array('\\print', '\\echo'))
+        $this->atomIs('Comparison')
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in '.$types.'}')
              ->back('first');
