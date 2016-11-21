@@ -31,13 +31,15 @@ class BadConstantnames extends Analyzer {
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
-             ->regexIs('code', '^[\'\\"]__(.*)__[\'\\"]\\$');
+             ->is('constant', true)
+             ->regexIs('noDelimiter', '^__(.*)__\\$');
         $this->prepareQuery();
         
         //with const
         $this->atomIs('Const')
+             ->outIs('CONST')
              ->outIs('NAME')
-             ->regexIs('code', '^[\'\\"]__(.*)__[\'\\"]\\$');
+             ->regexIs('code', '^__(.*)__\\$');
         $this->prepareQuery();
     }
 }
