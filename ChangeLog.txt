@@ -1,4 +1,4 @@
-Version 0.9.0 (Python Demon, Coming up)
+Version 0.9.0 (Sai Tai Sui, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,29 @@ Version 0.9.0 (Python Demon, Coming up)
 + Tokenizer
     + 
 
-Version 0.8.9 (Yellow Brows Great King, 2016-11-07)
+Version 0.9.0 (Python Demon, 2016-11-21)
++ Architecture
+    + Project now include 'Preference' analysis
+    + Dump is now incremental (-u option), and doesn't need to be run in paralell
+    + Added new hashAnalyzer table, to handle generic results from analysers.
+    + Added project name in the graph.
+    + New command 'status' to report the current status of exakat
++ Report
+    + Ambassador includes 'Preferences' section and new menu system
+    + Upgraded progressbar to display project processing
++ Analyzer
+    + New analysis : Early Bail Out (with if/then)
+    + New analysis : PHP 7.1 backward incompatibilities with microseconds
+    + New analysis : Wordpress : recommend using WP api, not PHP.
+    + Upgraded 'Constant condition' to include do..while()
+    + Upgraded 'Useless Abstract' to include methodless classes
+    + Upgraded analysis : 1687 / 1697 test pass (99% pass). 
++ Tokenizer
+    + Added 'Array' to list of determinist functions (more constants are spotted)
+    + Fixed 'Name' for Array Short Syntax.
+    + Fixed variadic support
+
+Version 0.8.9 (Yellow Brows Great King, 2016-11-14)
 + Architecture
     + Fixed and document -tgz and -zip option of init
     + Removed progress folder
