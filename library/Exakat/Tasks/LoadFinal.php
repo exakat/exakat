@@ -72,7 +72,7 @@ GREMLIN;
         $query = <<<'GREMLIN'
         g.V().hasLabel('Staticconstant').as('first')
 .out('CONSTANT').sideEffect{name = it.get().value("code");}.select('first')
-.out('CLASS').sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
+.out('CLASS').hasLabel("Identifier", "Nsname").sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
 .where( __.sideEffect{classes = [];}
           .emit(hasLabel("Class")).repeat( out("EXTENDS").in("DEFINITION") ).times(15)
           .out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").as('const')
