@@ -250,6 +250,9 @@ LICENCE;
 
         echo "Check Reports' format\n";
         $this->checkReportFormat();
+        
+        echo "Check anonymize's token list\n";
+        $this->checkToken();
 
         echo "Check Data/*.ini consistency\n";
         $this->checkData();
@@ -862,6 +865,26 @@ SQL
         }
     }
 
+    public function checkToken() {
+        $constants = get_defined_constants();
+        $constants = array_filter(array_keys($constants), function ($x) { return substr($x, 0, 2) === 'T_';});
+        
+        $errors = array();
+        $php = file_get_contents('library/Exakat/Tasks/Anonymize.php');
+        foreach($constants as $c) {
+            if ($c === 'T_FMT') { continue; }
+            if ($c === 'T_FMT_AMPM') { continue; }
+            if (strpos($php, $c) === false) {
+                $errors[] = "$c is missing\n";
+            }
+        }
+        
+        if (empty($errors)) {
+            print count($errors)." errors in Anonymize\n";
+            print implode("\n", $errors);
+        }
+    }
+    
     public function checkData() {
         //php_constant_arguments.json
         $functions = json_decode(file_get_contents('data/php_constant_arguments.json'));
