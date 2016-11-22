@@ -122,7 +122,7 @@ class Anonymize extends Tasks {
             return false;
         }
 
-        $checks = array('T_TRAIT', 'T_FINALLY', 'T_YIELD', 'T_YIELDFROM', 'T_COALESCE', 'T_CHARACTER', 'T_BAD_CHARACTER');
+        $checks = array('T_TRAIT', 'T_FINALLY', 'T_YIELD', 'T_YIELD_FROM', 'T_COALESCE', 'T_CHARACTER', 'T_BAD_CHARACTER', 'T_SPACESHIP');
         foreach($checks as $check) {
             if (!defined($check)) {
                 define($check, 1);
@@ -302,6 +302,7 @@ class Anonymize extends Tasks {
 
                     case T_FINALLY :
                     case T_YIELD :
+                    case T_YIELD_FROM :
 
                     case T_FOR :
                     case T_ENDFOR :
