@@ -113,6 +113,19 @@ GREMLIN;
         }
         
         shell_exec('cd '.$config->neo4j_folder.'; '.$sshLoad);
+
+        if (!file_exists($config->neo4j_folder.'/conf/')) {
+            print "No conf folder in $config->neo4j_folder\n";
+        } elseif (!file_exists($config->neo4j_folder.'/conf/neo4j-server.properties')) {
+            print "No neo4j-server.properties file in $config->neo4j_folder/conf/\n";
+        } else {
+            $neo4j_config = file_get_contents($config->neo4j_folder.'/conf/neo4j-server.properties');
+            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/m', $neo4j_config, $r)) {
+                if ($r[1] != $config->neo4j_port) {
+                    print "Warning : Exakat's port and Neo4j's port are not the same ($r[1] / $config->neo4j_port)\n";
+                }
+            }
+        }
         
         // checking that the server has indeed restarted
         $round = 0;
@@ -127,13 +140,6 @@ GREMLIN;
                 die('Couldn\'t restart neo4j\'s server. Please, kill it (kill -9 '.$pid.') and try again');
             }
             
-            $neo4j_config = file_get_contents($config->neo4j_folder.'/conf/neo4j-server.properties');
-            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/m', $neo4j_config, $r)) {
-                if ($r[1] != $config->neo4j_port) {
-                    print "Warning : Exakat's port and Neo4j's port are not the same ($r[1] / $config->neo4j_port)\n";
-                }
-            }
-
             shell_exec('cd '.$config->neo4j_folder.'; ./bin/neo4j start 2>&1');
             
             // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.

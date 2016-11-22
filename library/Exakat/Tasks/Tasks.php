@@ -84,9 +84,14 @@ abstract class Tasks {
             $this->datastore = new Datastore($config);
         }
 
+        if (!file_exists($config->projects_root.'/projects/')) {
+            mkdir($config->projects_root.'/projects/', 0700);
+        }
+        
         if (!file_exists($config->projects_root.'/projects/.exakat/')) {
             mkdir($config->projects_root.'/projects/.exakat/', 0700);
         }
+        
         $this->exakatDir = $config->projects_root.'/projects/.exakat/';
     }
     

@@ -35,15 +35,24 @@ class Status extends Tasks {
         $project = $config->project;
 
         if ($project === 'default') {
+            $status = array();
+
             if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
-                $json = json_decode(file_get_contents($config->projects_root.'/projects/.exakat/Project.json'));
+                if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
+                    $json = json_decode(file_get_contents($config->projects_root.'/projects/.exakat/Project.json'));
+                } else {
+                    $json = new \Stdclass();
+                    $json->project = '';
+                    $json->step = '';
+                
+                }
                 $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-                $status = array('running' => 'Project',
-                                'project' => @$json->project,
+                $status = array('Running'  => 'Project',
+                                'project'  => $json->project,
                                 'in graph' => $res->results[0],
-                                'step'    => $json->step,);
+                                'step'     => $json->step,);
             } else {
-                $status = array();
+                $status['Running'] = 'idle';
             }
             //$status = array('project' => $project);
             
