@@ -64,6 +64,7 @@ class Phpexec {
     private $isCurrentVersion = false;
     private $version          = null;
     private $actualVersion    = null;
+    private $requestedVersion = null;
     
     public function __construct($phpversion = null) {
         $config = Config::factory();
@@ -71,11 +72,20 @@ class Phpexec {
         if ($phpversion === null) {
             $phpversion = $config->phpversion;
         } 
+        $this->requestedVersion = $phpversion;
         
         $this->version = $phpversion;
         $phpversion3 = substr($phpversion, 0, 3);
         $this->isCurrentVersion = substr(PHP_VERSION, 0, 3) === $phpversion3;
-
+        if ($this->isCurrentVersion === true) {
+            preg_match('/([0-9\.]+)/', PHP_VERSION, $r);
+            $this->actualVersion = $r[1];
+            
+            if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
+                throw new NoPhpBinary('PHP binary for version '.$phpversion.' doesn\'t have the right middle version : "'.$this->actualVersion.'". Please, check config/exakat.ini');
+            }
+        }
+        
         switch($phpversion3) {
             case '5.2' : 
                 $this->phpexec = $config->php52;
@@ -222,6 +232,11 @@ class Phpexec {
         $res = shell_exec($this->phpexec.' -v 2>&1');
         if (preg_match('/PHP ([0-9\.]+)/', $res, $r)) {
             $this->actualVersion = $r[1];
+
+            if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
+                throw new NoPhpBinary('PHP binary for version '.$this->requestedVersion.' doesn\'t have the right middle version : "'.$this->actualVersion.'" is provided. Please, check config/exakat.ini');
+            }
+
             return strpos($res, 'The PHP Group') !== false;
         } else {
             return false;
