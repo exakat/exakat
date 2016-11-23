@@ -51,11 +51,11 @@ $php = <<<'PHP'
  *
 */
 
-namespace Tasks;
+namespace Exakat\Tasks;
 
 PHP;
 
-$consts = glob('library/Tokens/Const*.php');
+$consts = glob('library/Exakat/Tasks/Tokens/Const*.php');
 
 foreach($consts as $id => $f) {
     $constFile[$id] = file_get_contents($f);
@@ -84,6 +84,6 @@ $php .= "\n".'?>';
 
 print "$total constants found for PHP ".PHP_VERSION."\n";
 
-file_put_contents('library/Tokens/Const'.$version.'.php', $php);
+file_put_contents('library/Exakat/Tasks/Tokens/Const'.$version.'.php', $php);
 
 ?>
