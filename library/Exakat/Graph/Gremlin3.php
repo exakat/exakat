@@ -23,6 +23,7 @@
 namespace Exakat\Graph;
 
 use Exakat\Graph\Graph;
+use Exakat\Exceptions\UnableToReachGraphServer;
 
 class Gremlin3 extends Graph {
     private $scriptDir = '';
@@ -39,7 +40,6 @@ class Gremlin3 extends Graph {
 
         if (!file_exists($this->scriptDir)) {
             mkdir($this->scriptDir, 0755);
-            file_put_contents($this->scriptDir.'/exakat.txt', 'This folder and this file were created by exakat.');
         } elseif (!is_writable($this->scriptDir)) {
             die("Can't write in '$this->scriptDir'. Exakat needs to write in this folder.\n");
         }
@@ -48,6 +48,11 @@ class Gremlin3 extends Graph {
 
         if ($this->config->neo4j_login !== '') {
             $this->neo4j_auth   = base64_encode($this->config->neo4j_login.':'.$this->config->neo4j_password);
+        }
+        
+        $test = $this->$serverInfo();
+        if (empty($test)) {
+            throw new UnableToReachGraphServer();
         }
     }
 

@@ -156,10 +156,8 @@ class Doctor extends Tasks {
             $stats['neo4j']['scriptFolder'] = file_exists($config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
             if ($stats['neo4j']['scriptFolder'] == 'No') {
                 mkdir($config->neo4j_folder.'/scripts/', 0755);
-                file_put_contents($config->neo4j_folder.'/scripts/exakat.txt', 'This folder and this file were created by exakat.');
                 $stats['neo4j']['scriptFolder'] = file_exists($config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
             }
-            $stats['neo4j']['Neo4J for exakat'] = file_exists($config->neo4j_folder.'/scripts/exakat.txt') ? 'Yes' : 'No (Warning : make sure exakat is not trying to access an existing Neo4J database.)';
             
             $pidPath = $config->neo4j_folder.'/conf/neo4j-service.pid';
             if (file_exists($pidPath)) {
@@ -215,9 +213,6 @@ class Doctor extends Tasks {
                 $neo4j_folder = 'neo4j'; // Local Installation
             } elseif (!file_exists($neo4j_folder.'/scripts/')) {
                 // This Neo4J has no 'scripts' folder and we use it! Not our database
-                $neo4j_folder = 'neo4j'; // Local Installation
-            } elseif (!file_exists($neo4j_folder.'/scripts/exakat.txt')) {
-                // This Neo4J has no 'exakat.txt' file : Not an exakat installation! 
                 $neo4j_folder = 'neo4j'; // Local Installation
             }
             $ini = <<<INI

@@ -23,6 +23,9 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exception;
+
 class CleanDb extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
@@ -31,13 +34,8 @@ class CleanDb extends Tasks {
         parent::__construct($gremlin);
     }
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
-
-        if (!file_exists($config->neo4j_folder.'/scripts/exakat.txt')) {
-            display('Warning : This Neo4j installation doesn\'t seem to be used by Exakat. Please, stop the server, remove "data" and "scripts" folder, then run "'.$config->executable.' doctor".');
-            return false;
-        }
 
         if ($config->quick) {
             $this->restartNeo4j();
@@ -102,9 +100,9 @@ GREMLIN;
         
         // preserve data/dbms/auth to preserve authentication
         if (file_exists($config->neo4j_folder.'/data/dbms/auth')) {
-            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; mkdir -p data/scripts; echo "" > data/scripts/exakat.txt ';
+            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; mkdir -p data/scripts ';
         } else {
-            $sshLoad =  'rm -rf data; mkdir -p data; mkdir -p data/log; mkdir -p data/scripts; echo "" > data/scripts/exakat.txt ';
+            $sshLoad =  'rm -rf data; mkdir -p data; mkdir -p data/log; mkdir -p data/scripts ';
         }
 
         // if neo4j-service.pid exists, we kill the process once
@@ -154,7 +152,7 @@ GREMLIN;
         try {
             $res = $this->gremlin->serverInfo();
             display('Restarted Neo4j cleanly');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             display('Didn\'t restart neo4j cleanly');
         }
 
