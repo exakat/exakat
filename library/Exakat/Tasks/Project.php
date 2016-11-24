@@ -98,7 +98,8 @@ class Project extends Tasks {
         $analyze = new FindExternalLibraries($this->gremlin);
         $analyze->run($configThema);
 
-        $this->addSnitch(array('step' => 'External lib', 'project' => $config->project));
+        $this->addSnitch(array('step'   => 'External lib', 
+                              'project' => $config->project));
 
         Config::pop();
         unset($analyze);
@@ -108,7 +109,8 @@ class Project extends Tasks {
         $analyze->run($config);
         unset($analyze);
         $this->logTime('Files');
-        $this->addSnitch(array('step' => 'Files', 'project' => $config->project));
+        $this->addSnitch(array('step'    => 'Files', 
+                               'project' => $config->project));
 
         $this->checkTokenLimit();
 
@@ -120,11 +122,11 @@ class Project extends Tasks {
 
         // paralell running
         exec($config->php . ' '.$config->executable.' magicnumber -p '.$config->project.'   > /dev/null &');
-        $this->addSnitch(array('step' => 'Magic Numbers', 'project' => $config->project));
+        $this->addSnitch(array('step'    => 'Magic Numbers', 
+                               'project' => $config->project));
 
         // Dump is a child process
         echo shell_exec($config->php . ' '.$config->executable.' dump -p '.$config->project);
-        display('Started dump process');
 
         foreach($this->themes as $theme) {
             $this->addSnitch(array('step' => 'Analyze : '.$theme, 'project' => $config->project));
