@@ -57,6 +57,10 @@ class Description {
     public function getClearPHP() {
         return $this->ini['clearphp'];
     }    
+
+    public function getVersionAdded() {
+        return $this->ini['exakatSince'];
+    }    
 }
 
 ?>

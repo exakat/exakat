@@ -226,6 +226,14 @@ class Ambassador extends Reports {
             $analyzer = Analyzer::getInstance($analyzer);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'">'.$description->getName().'</a></h2>';
+            
+            $badges = array();
+            $v = $description->getVersionAdded();
+            if(!empty($v)){
+                $badges[] = '[Since '.$v.']';
+            }
+            $badges[] = '[ -P '.$analyzer->getInBaseName().']';
+            $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
             $analyzersDocHTML.='<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
 
             $v = $description->getClearPHP();
