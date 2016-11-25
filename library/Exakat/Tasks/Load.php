@@ -84,6 +84,8 @@ class Load extends Tasks {
 
     private $links = array();
     
+    private $currentClassTrait = array();
+    
     private $tokens = array();
     private $id = 0;
     
@@ -997,6 +999,7 @@ class Load extends Tasks {
     private function processTrait() {
         $current = $this->id;
         $traitId = $this->addAtom('Trait');
+        $this->currentClassTrait[] = $traitId;
         $this->toggleContext(self::CONTEXT_TRAIT);
         
         $nameId = $this->processNextAsIdentifier();
@@ -1022,6 +1025,8 @@ class Load extends Tasks {
         $this->processSemicolon();
 
         $this->toggleContext(self::CONTEXT_TRAIT);
+
+        array_pop($this->currentClassTrait);
 
         return $traitId;
     }
@@ -1078,6 +1083,7 @@ class Load extends Tasks {
     private function processClass() {
         $current = $this->id;
         $classId = $this->addAtom('Class');
+        $this->currentClassTrait[] = $classId;
         $this->toggleContext(self::CONTEXT_CLASS);
 
         // Should work on Abstract and Final only
@@ -1156,6 +1162,7 @@ class Load extends Tasks {
         }
 
         $this->toggleContext(self::CONTEXT_CLASS);
+        array_pop($this->currentClassTrait);
 
         return $classId;
     }
@@ -2982,6 +2989,10 @@ class Load extends Tasks {
     
     private function processVariable() {
         $variableId = $this->processSingle('Variable');
+        if ($this->tokens[$this->id][1] === '$this') {
+            $this->addCall('class', end($this->currentClassTrait), $variableId);
+//            $this->addLink(end($this->currentClassTrait), $variableId, 'DEFINITION');
+        }
         $this->setAtom($variableId, array('reference' => false,
                                           'variadic'  => false,
                                           'enclosing' => false));
