@@ -23,29 +23,50 @@ namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Data\ZendF;
+use Exakat\Data\ZendF2;
 
 class UndefinedClasses extends Analyzer {
     protected $release = '1.12';
     
     public function dependsOn() {
-        return array('ZendF/ZendClasses');
+        return array('ZendF/ZendClasses',
+                     'ZendF/ZendTrait',
+                     'ZendF/ZendInterfaces'
+                     );
     }
         
     public function analyze() {
-        if (!in_array($this->release, array('1.5', '1.6', '1.7', '1.8', '1.9', '1.10', '1.11', '1.12'))) {
-            $this->release = '1.12';
+        if (in_array($this->release, array('1.5', '1.6', '1.7', '1.8', '1.9', '1.10', '1.11', '1.12'))) {
+            $data = new ZendF();
+        } elseif (in_array($this->release, array('2.0', '2.1', '2.2', '2.3', '2.4', '2.5', '3.0'))) {
+            $data = new ZendF2();
+        } else {
+            $this->release = '2.5';
+            $data = new ZendF2();
         }
-
-        $data = new ZendF();
 
         $classes = $data->getClassByRelease($this->release);
         $classes = $this->makeFullNSpath(array_pop($classes));
+
         $interfaces = $data->getInterfaceByRelease($this->release);
         $interfaces = $this->makeFullNSpath(array_pop($interfaces));
-        $all = array_merge($classes, $interfaces);
+
+        $traits = $data->getTraitByRelease($this->release);
+        $traits = $this->makeFullNSpath(array_pop($traits));
+
+        $all = array_merge($classes, $interfaces, $traits);
         
         $this->analyzerIs('ZendF/ZendClasses')
-             ->fullnspathIsNot($all);
+             ->fullnspathIsNot($classes);
+        $this->prepareQuery();
+
+        $this->analyzerIs('ZendF/ZendTrait')
+             ->fullnspathIsNot($traits);
+        $this->prepareQuery();
+
+        $this->analyzerIs('ZendF/ZendInterfaces')
+             ->fullnspathIsNot($interfaces)
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
