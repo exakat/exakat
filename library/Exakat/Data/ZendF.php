@@ -23,12 +23,14 @@
 
 namespace Exakat\Data;
 
+use Exakat\Config;
+
 class ZendF {
-    private $sqlite = null;
-    private $phar_tmp = null;
+    protected $sqlite = null;
+    protected $phar_tmp = null;
     
     public function __construct() {
-        $config = \Exakat\Config::factory();
+        $config = Config::factory();
         
         if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf').'.sqlite';
@@ -37,7 +39,7 @@ class ZendF {
         } else {
             $docPath = $config->dir_root.'/data/zendf.sqlite';
         }
-        $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
+        $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }
 
     public function __destruct() {
@@ -59,7 +61,7 @@ class ZendF {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['class'];
             } else {
@@ -80,14 +82,40 @@ class ZendF {
         $return = array();
 
         if ($release !== null) {
+            $return = array($release => array());
             $query .= " WHERE releases.release = \"release-$release.0\"";
         }
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['interface'];
             } else {
                 $return[$row['release']] = array($row['interface']);
+            }
+        }
+        
+        return $return;
+    }
+
+    public function getTraitByRelease($release = null) {
+        $query = 'SELECT trait, release FROM traits 
+                    JOIN namespaces 
+                      ON traits.namespace_id = namespaces.id
+                    JOIN releases 
+                      ON namespaces.release_id = releases.id';
+        $res = $this->sqlite->query($query);
+        $return = array();
+
+        if ($release !== null) {
+            $return = array($release => array());
+            $query .= " WHERE releases.release = \"release-$release.0\"";
+        }
+        
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (isset($return[$row['release']])) {
+                $return[$row['release']][] = $row['trait'];
+            } else {
+                $return[$row['release']] = array($row['trait']);
             }
         }
         
