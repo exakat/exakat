@@ -50,7 +50,7 @@ class Gremlin3 extends Graph {
             $this->neo4j_auth   = base64_encode($this->config->neo4j_login.':'.$this->config->neo4j_password);
         }
         
-        $test = $this->$serverInfo();
+        $test = $this->serverInfo();
         if (empty($test)) {
             throw new UnableToReachGraphServer();
         }
