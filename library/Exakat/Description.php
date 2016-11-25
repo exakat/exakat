@@ -29,9 +29,11 @@ class Description {
     private $ini = array('description'    => '',
                          'name'           => '',
                          'clearphp'       => '');
+    private $analyzer = null;
     
     public function __construct($analyzer) {
         $config = Config::factory();
+        $this->analyzer = $analyzer;
 
         $filename = $config->dir_root.'/human/'.$this->language.'/'.str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $analyzer)).'.ini';
         
