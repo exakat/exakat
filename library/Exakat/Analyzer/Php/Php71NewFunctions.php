@@ -39,6 +39,13 @@ class Php71NewFunctions extends FunctionDefinition {
 'mb_scrub',
 'is_iterable',
 'pcntl_async_signals',
+'pcntl_signal_get_handler',
+'sapi_windows_cp_get',
+'sapi_windows_cp_set',
+'sapi_windows_cp_conv',
+'sapi_windows_cp_is_utf8',
+'session_create_id',
+'session_gc',
     );
         parent::analyze();
     }
