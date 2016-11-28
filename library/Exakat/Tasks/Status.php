@@ -47,6 +47,7 @@ class Status extends Tasks {
                 
                 }
                 $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
+                $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
                 $status = array('Running'  => 'Project',
                                 'project'  => $json->project,
                                 'in graph' => $res->results[0],
