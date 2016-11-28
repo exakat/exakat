@@ -13,6 +13,9 @@ try {
 
     $exakat = new \Exakat\Exakat($graphDB);
     $exakat->execute($config);
-} catch (Throwable $e) {
-    print "\nError : ".$e->getMessage()."\nStopping execution\n\n";
+} catch (Exception $e) {
+    print "\nError : ".$e->getMessage()." 
+on file ".$e->getFile()."
+on line ".$e->getLine()."
+Stopping execution\n\n";
 } 
