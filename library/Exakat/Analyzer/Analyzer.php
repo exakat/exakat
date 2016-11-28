@@ -91,6 +91,8 @@ abstract class Analyzer {
 
     protected $gremlin = null;
     public static $gremlinStatic = null;
+    
+    private $linksDown = '';
 
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
@@ -114,6 +116,8 @@ abstract class Analyzer {
         if (!isset(self::$datastore)) {
             self::$datastore = new Datastore($this->config);
         }
+        
+        $this->linksDown = Token::linksAsList();
     }
     
     public function __destruct() {
@@ -183,7 +187,6 @@ abstract class Analyzer {
     }
     
     public function getDump() {
-        $linksDown = Token::linksAsList();
         
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALYZED')
@@ -196,7 +199,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALY
              }
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File') ).repeat( 
-    __.in($linksDown)
+    __.in($this->linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
        )
@@ -432,10 +435,9 @@ GREMLIN;
 ////////////////////////////////////////////////////////////////////////////////
 
     protected function hasNoInstruction($atom = 'Function') {
-        $linksDown = Token::linksAsList();
         $this->addMethod('where( 
-repeat(__.in('.$linksDown.'))
-.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(eq(0)))');
+ __.repeat(__.in(' . $this->linksDown . ')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
+   .count().is(eq(0)))');
         
         return $this;
     }
@@ -445,28 +447,23 @@ repeat(__.in('.$linksDown.'))
             return $this->hasNoInstruction($atom);
         }
 
-        $linksDown = Token::linksAsList();
         $this->addMethod('where( 
-repeat(__.in('.$linksDown.'))
-.until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'").count().is(eq(0)))');
+__.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'")
+  .count().is(eq(0)))');
         
         return $this;
     }
 
     protected function hasInstruction($atom = 'Function') {
-        $linksDown = Token::linksAsList();
         $this->addMethod('where( 
-repeat(__.in('.$linksDown.'))
-.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(neq(0)))');
+__.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
+  .count().is(neq(0)))');
         
         return $this;
     }
 
     protected function goToInstruction($atom = 'Namespace') {
-        $linksDown = Token::linksAsList();
-        $this->addMethod('repeat( __.in(
-'.$linksDown.'
-        )).until(hasLabel('.$this->SorA($atom).', "File") )');
+        $this->addMethod('repeat( __.in('.$this->linksDown.')).until(hasLabel('.$this->SorA($atom).', "File") )');
         
         return $this;
     }
@@ -512,14 +509,14 @@ repeat(__.in('.$linksDown.'))
     }
     
     public function atomInside($atom) {
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
     }
 
     public function noAtomInside($atom) {
-        $gremlin = 'where( __.repeat( out() ).emit( hasLabel('.$this->SorA($atom).') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
+        $gremlin = 'where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel('.$this->SorA($atom).') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
         return $this;
@@ -1102,10 +1099,7 @@ GREMLIN
     }
     
     public function goToFunction() {
-        $linksDown = Token::linksAsList();
-        $this->addMethod('repeat(__.in(
-'.$linksDown.'
-)).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))');
+        $this->addMethod('repeat(__.in('.$this->linksDown.')).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))');
         
         return $this;
     }
@@ -1457,7 +1451,6 @@ GREMLIN
             $forClosure = "";
         }
         
-        $linksDown = Token::linksAsList();
         $this->addMethod(<<<GREMLIN
 as("context")
 .sideEffect{ line = it.get().value('line');
@@ -1469,7 +1462,7 @@ as("context")
              }
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File') ).repeat( 
-    __.in($linksDown)
+    __.in($this->linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
       .sideEffect{ if (it.get().label() in ['Namespace']) { theNamespace = it.get().vertices(OUT, 'NAME').next().value('fullcode')} }
