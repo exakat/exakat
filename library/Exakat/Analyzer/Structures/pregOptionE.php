@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class pregOptionE extends Analyzer {
     public function analyze() {
+        $functions = array('\preg_replace', '\mb_eregi');
         // delimiters
         $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[';
         
@@ -39,7 +40,7 @@ class pregOptionE extends Analyzer {
 }';
 
         // preg_match with a string
-        $this->atomFunctionIs('\preg_replace')
+        $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
@@ -50,7 +51,7 @@ class pregOptionE extends Analyzer {
         $this->prepareQuery();
 
         // With an interpolated string "a $x b"
-        $this->atomFunctionIs('\preg_replace')
+        $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
@@ -63,7 +64,7 @@ class pregOptionE extends Analyzer {
         $this->prepareQuery();
 
         // with a concatenation
-        $this->atomFunctionIs('\preg_replace')
+        $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
