@@ -28,8 +28,6 @@ use Exakat\Tokenizer\Token;
 
 class UnusedLabel extends Analyzer {
     public function analyze() {
-        $linksDown = Token::linksAsList();
-
         // inside functions
         $this->atomIs('Label')
              ->outIs('LABEL')
@@ -47,7 +45,7 @@ class UnusedLabel extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->hasNoFunction()
              ->raw('where( g.V().hasLabel("Goto").out("GOTO").filter{ it.get().value("code") == name}
-                            .where( repeat(__.in('.$linksDown.'))
+                            .where( repeat(__.in('.$this->linksDown.'))
                                     .until(hasLabel("File")).emit()
                                     .hasLabel("Function").count().is(eq(0)) 
                             ).count().is(eq(0)) )')

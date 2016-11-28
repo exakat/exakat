@@ -36,8 +36,6 @@ class Type extends Analyzer {
     }
 
     public function getDump() {
-        $linksDown = Token::linksAsList();
-        
         $query = <<<GREMLIN
 g.V().hasLabel("{$this->type}")
 .sideEffect{ line = it.get().value('line');
@@ -49,7 +47,7 @@ g.V().hasLabel("{$this->type}")
              }
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File') ).repeat( 
-    __.in($linksDown)
+    __.in($this->linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
        )
@@ -60,12 +58,6 @@ g.V().hasLabel("{$this->type}")
 GREMLIN;
 
         $res = $this->gremlin->query($query);
-        if (!isset($res->results)) {
-            $this->log->log( "Couldn't run the query and get a result : \n" .
-                 "Query : " . $query . " \n".
-                 print_r($res, true));
-            return ;
-        }
 
         return $res->results;
     }

@@ -92,7 +92,7 @@ abstract class Analyzer {
     protected $gremlin = null;
     public static $gremlinStatic = null;
     
-    private $linksDown = '';
+    protected $linksDown = '';
 
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
