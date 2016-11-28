@@ -76,6 +76,8 @@ class Phpexec {
         
         $this->version = $phpversion;
         $phpversion3 = substr($phpversion, 0, 3);
+
+        
         $this->isCurrentVersion = substr(PHP_VERSION, 0, 3) === $phpversion3;
         if ($this->isCurrentVersion === true) {
             preg_match('/([0-9\.]+)/', PHP_VERSION, $r);
@@ -124,16 +126,28 @@ class Phpexec {
                 // PHP will be always valid if we use the one that is currently executing us
                 $this->actualVersion = PHP_VERSION;
         }
-        if ($this->phpexec === null) {
-            throw new NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check config/exakat.ini');
-        }
+        
+        if (preg_match('/^php:(.+?)$/', $this->phpexec)) {
+            $folder = $config->projects_root;
+            $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php -v 2>&1');
 
-        if (!file_exists($this->phpexec)) {
-            throw new NoPhpBinary('PHP binary for version '.$phpversion.' is not valid : "'.$this->phpexec.'". Please, check config/exkat.ini');
-        }
+            if (substr($res, 0, 4) !== 'PHP ') {
+                throw new NoPhpBinary('Error when accessing Docker\'s PHP : "'.$res.'". Please, check config/exakat.ini');
+            } else {
+                $this->phpexec = 'docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php ';
+            }
+        } else {
+            if ($this->phpexec === null) {
+                throw new NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check config/exakat.ini');
+            }
 
-        if (!is_executable($this->phpexec)) {
-            throw new NoPhpBinary('PHP binary for version '.$phpversion.' exists but is not executable : "'.$this->phpexec.'". Please, check config/exakat.ini');
+            if (!file_exists($this->phpexec)) {
+                throw new NoPhpBinary('PHP binary for version '.$phpversion.' is not valid : "'.$this->phpexec.'". Please, check config/exkat.ini');
+            }
+
+            if (!is_executable($this->phpexec)) {
+                throw new NoPhpBinary('PHP binary for version '.$phpversion.' exists but is not executable : "'.$this->phpexec.'". Please, check config/exakat.ini');
+            }
         }
     }
 
@@ -274,6 +288,26 @@ class Phpexec {
             $this->isValid();
         }
         return $this->actualVersion;
+    }
+    
+    public function getVersion() {
+        return shell_exec($this->phpexec.' -r "echo phpversion();" 2>&1');
+    }
+    
+    public function getShortTag() {
+        return shell_exec($this->phpexec.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
+    }
+
+    public function getTimezone() {
+        return shell_exec($this->phpexec.' -r "echo ini_get(\'date.timezone\');" 2>&1');
+    }
+
+    public function getTokenizer() {
+        return shell_exec($this->phpexec.' -r "echo extension_loaded(\'tokenizer\') ? \'Yes\' : \'No\';" 2>&1');
+    }
+
+    public function getMemory_limit() {
+        return shell_exec($this->phpexec.' -r "echo ini_get(\'memory_limit\');" 2>&1');
     }
 }
 
