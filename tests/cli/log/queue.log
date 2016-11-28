@@ -1,8 +1,10 @@
-Begin : 1479140138.2833
+Begin : 1480360584.8284
 
-Error : No Jobqueue server was found on this server. Start the queue (exakat queue) and try again.
+Error : No Jobqueue server was found on this server. Start the queue (exakat queue) and try again. 
+on file /Users/famille/Desktop/analyzeG3/library/Exakat/Tasks/Queue.php
+on line 38
 Stopping execution
 
 /Users/famille/Desktop/analyzeG3/tests/cli
-Duration : 140.00ms 
-End : 1479140138.4233\Date : Mon, 14 Nov 2016 16:15:38 +0000
+Duration : 179.11ms 
+End : 1480360585.0075\Date : Mon, 28 Nov 2016 19:16:25 +0000

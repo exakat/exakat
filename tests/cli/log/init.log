@@ -1,14 +1,10 @@
-Begin : 1479139652.1686
+Begin : 1480360017.8338
 Initializing ut1 with ''
 Empty initialization
 Counting files
 Running files
 No code in project 'ut1'
 Aborting
-
-Warning: file_get_contents(/Users/famille/Desktop/analyzeG3/projects/.exakat/Project.json): failed to open stream: No such file or directory in /Users/famille/Desktop/analyzeG3/library/Exakat/Tasks/Status.php on line 61
-
-Notice: Trying to get property of non-object in /Users/famille/Desktop/analyzeG3/library/Exakat/Tasks/Status.php on line 62
 project   : ut1
 loc       : 
 tokens    : 
@@ -22,6 +18,7 @@ Git initialization
 Counting files
 Running files
 Check composer
+Check compilation for 55
 Check compilation for 56
 Check compilation for 70
 Check compilation for 71
@@ -98,7 +95,7 @@ Array
     [notCompilable52] => N/C
     [notCompilable53] => N/C
     [notCompilable54] => N/C
-    [notCompilable55] => N/C
+    [notCompilable55] => 0
     [notCompilable56] => 0
     [notCompilable70] => 0
     [notCompilable71] => 0
@@ -106,10 +103,6 @@ Array
     [php] => 155
 )
 Done
-
-Warning: file_get_contents(/Users/famille/Desktop/analyzeG3/projects/.exakat/Project.json): failed to open stream: No such file or directory in /Users/famille/Desktop/analyzeG3/library/Exakat/Tasks/Status.php on line 61
-
-Notice: Trying to get property of non-object in /Users/famille/Desktop/analyzeG3/library/Exakat/Tasks/Status.php on line 62
 project    : ut2
 loc        : 4088
 tokens     : 33338
@@ -120,9 +113,11 @@ updatable  :
 formats    : 
 
 
-Error : No such project as "ut4"
+Error : No such project as "ut4" 
+on file /Users/famille/Desktop/analyzeG3/library/Exakat/Tasks/Remove.php
+on line 39
 Stopping execution
 
 /Users/famille/Desktop/analyzeG3/tests/cli
-Duration : 366,334.61ms 
-End : 1479140018.5032\Date : Mon, 14 Nov 2016 16:13:38 +0000
+Duration : 416,936.94ms 
+End : 1480360434.7708\Date : Mon, 28 Nov 2016 19:13:54 +0000

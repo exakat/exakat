@@ -1,4 +1,4 @@
-Begin : 1479140254.4598
+Begin : 1480360737.1987
 Initializing ut1 with ''
 Empty initialization
 Counting files
@@ -18,6 +18,7 @@ Git initialization
 Counting files
 Running files
 Check composer
+Check compilation for 55
 Check compilation for 56
 Check compilation for 70
 Check compilation for 71
@@ -94,7 +95,7 @@ Array
     [notCompilable52] => N/C
     [notCompilable53] => N/C
     [notCompilable54] => N/C
-    [notCompilable55] => N/C
+    [notCompilable55] => 0
     [notCompilable56] => 0
     [notCompilable70] => 0
     [notCompilable71] => 0
@@ -112,5 +113,5 @@ updatable  :
 formats    : 
 
 /Users/famille/Desktop/analyzeG3/tests/cli
-Duration : 10,891.89ms 
-End : 1479140265.3517\Date : Mon, 14 Nov 2016 16:17:45 +0000
+Duration : 13,693.63ms 
+End : 1480360750.8924\Date : Mon, 28 Nov 2016 19:19:10 +0000

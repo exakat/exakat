@@ -1,11 +1,10 @@
-Begin : 1479140018.5035
-
-Error : No Jobqueue server was found on this server. Start the queue (exakat queue) and try again.
-Stopping execution
-
+Begin : 1480360434.7746
+no jobs to do - waiting...
+Ping queue
+pong
 no jobs to do - waiting...
 Stopping queue
 Received quit command. Bye
 /Users/famille/Desktop/analyzeG3/tests/cli
-Duration : 61.07ms 
-End : 1479140018.5645\Date : Mon, 14 Nov 2016 16:13:38 +0000
+Duration : 1,073.01ms 
+End : 1480360435.8476\Date : Mon, 28 Nov 2016 19:13:55 +0000

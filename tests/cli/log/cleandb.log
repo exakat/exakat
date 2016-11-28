@@ -1,15 +1,15 @@
-Begin : 1479139640.371
+Begin : 1480360005.2548
 Cleaning with restart
 Database cleaned with restart
 Restarted Neo4j cleanly
 Cleaning scripts
-Cleaned 574 gremlin scripts
+Cleaned 578 gremlin scripts
 1 nodes in the database
 Cleaning with gremlin
 Database cleaned
-37 ms
+48 ms
 Cleaning scripts
 Cleaned 0 gremlin scripts
 /Users/famille/Desktop/analyzeG3/tests/cli
-Duration : 10,188.06ms 
-End : 1479139650.5591\Date : Mon, 14 Nov 2016 16:07:30 +0000
+Duration : 8,722.55ms 
+End : 1480360013.9774\Date : Mon, 28 Nov 2016 19:06:53 +0000
