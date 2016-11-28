@@ -26,14 +26,18 @@ use Exakat\Analyzer\Analyzer;
 
 class ActionInController extends Analyzer {
     public function analyze() {
+        $controllers = '["\\\\zend_controller_action", "\\\\zend\\\\mvc\\\\controller\\\\abstractactioncontroller"]';
+        
         // Methods ending with Action must be in controller
         $this->atomIs('Function')
              ->hasClass()
-             // Why not Action\\$?
              ->outIs('NAME')
              ->regexIs('code', 'Action\$')
              ->goToClass()
-//             ->filter('!("\\\\zend_controller_action" in it.classTree)')
+             ->outIs(array('EXTENDS', 'IMPLEMENTS'))
+             ->raw('where( __.emit().repeat( __.in("DEFINITION").out("EXTENDS", "IMPLEMENTS")).times('.self::MAX_LOOPING.')
+                             .has("fullnspath", within('.$controllers.'))
+                             .count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -41,12 +45,15 @@ class ActionInController extends Analyzer {
         $this->atomIs('Function')
              ->analyzerIsNot('self')
              ->hasClass()
+             ->hasOut(array('PRIVATE', 'PROTECTED'))
              // Why not Action\\$?
              ->outIs('NAME')
              ->regexIs('code', 'Action\$')
-             ->hasOut(array('PRIVATE', 'PROTECTED'))
              ->goToClass()
-//             ->filter('"\\\\zend_controller_action" in it.classTree')
+             ->outIs(array('EXTENDS', 'IMPLEMENTS'))
+             ->raw('where( __.emit().repeat( __.in("DEFINITION").out("EXTENDS", "IMPLEMENTS")).times('.self::MAX_LOOPING.')
+                             .has("fullnspath", within('.$controllers.'))
+                             .count().is(neq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }
