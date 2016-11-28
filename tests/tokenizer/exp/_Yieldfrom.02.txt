@@ -64,6 +64,12 @@ Label : PROJECT
                                   self
                                 Label : CONSTANT
                                   X
+                                Label : DEFINITION
+                                  const
+                                  Label : NAME
+                                    X
+                                  Label : VALUE
+                                    12
                             Label : CONST
                               ,
                               Label : NAME
