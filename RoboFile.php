@@ -114,7 +114,7 @@ LICENCE;
                     }
                     fclose($fp);
                 } elseif (crc32($tokens[$tokenId + 1][1]) === $licenceCRC2015) {
-                    print "Updating licence date in file '", $file, "'\n";
+                    print "Updating licence date in file '". $file. "'\n";
                     $tokens[$tokenId + 1][1] = $licence;
 
                     $fp = fopen($file, 'w+');
@@ -127,10 +127,10 @@ LICENCE;
                     }
                     fclose($fp);
                 } elseif (crc32($tokens[$tokenId + 1][1]) !== $licenceCRC) {
-                    print "Licence seems to be changed in file '", $file, "'\n";
+                    print "Licence seems to be changed in file '". $file. "'\n";
                 }
             } else {
-                print "Couldn't apply licence on '", $file, "'\n", 
+                print "Couldn't apply licence on '". $file. "'\n". 
                       print_r($tokens[$tokenId], true);
             }
         }
@@ -286,9 +286,9 @@ JOIN analyzers
         $total = 0;
         while($row = $res->fetchArray()) {
             ++$total;
-            print ' + ', $row['name'], "\n";
+            print ' + '. $row['name']. "\n";
         }
-        print $total, "analyzers in Unassigned\n";
+        print $total. "analyzers in Unassigned\n";
 
         // categories with orphans
         $res = $sqlite->query('SELECT analyzers_categories.id_analyzer, analyzers_categories.id_categories FROM categories 
@@ -304,7 +304,7 @@ JOIN analyzers
             print_r($row);
 //            $res = $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer='.$row['id_analyzer'].' AND id_categories = '.$row['id_categories']);
         }
-        print $total, " categories have orphans\n";
+        print $total. " categories have orphans\n";
 
         // analyzers in no categories
         $res = $sqlite->query('SELECT analyzers_categories.id_analyzer, analyzers_categories.id_categories FROM analyzers 
@@ -320,7 +320,7 @@ JOIN categories
             print_r($row);
 //            $res = $sqlite->query('DELETE FROM analyzers_categories WHERE id_analyzer='.$row['id_analyzer'].' AND id_categories = '.$row['id_categories']);
         }
-        print $total, " analyzers are orphans\n";
+        print $total. " analyzers are orphans\n";
 
         // check for analyzers in Files
         $total = 0;
@@ -328,23 +328,23 @@ JOIN categories
         while($row = $res->fetchArray()) {
             ++$total;
             if (!file_exists('library/Exakat/Analyzer/'.$row['name'].'.php')) {
-                print $row['name'], " has no exakat code\n";
+                print $row['name']. " has no exakat code\n";
             }
             if (!file_exists('human/en/'.$row['name'].'.ini')) {
-                print $row['name'], " has no documentation\n";
+                print $row['name']. " has no documentation\n";
             } else {
                 $ini = parse_ini_file('human/en/'.$row['name'].'.ini');
 
                 if (!isset($ini['name'])) {
-                    print 'human/en/'.$row['name'].'.ini', " is not set\n";
+                    print 'human/en/'.$row['name'].'.ini'. " is not set\n";
                 } 
 
                 if (!isset($ini['exakatSince'])) {
-                    print 'human/en/'.$row['name'].'.ini', " has no exakatSince\n";
+                    print 'human/en/'.$row['name'].'.ini'. " has no exakatSince\n";
                 } 
                 
                 if (strpos($ini['description'], '<?php') === false) {
-                    print 'human/en/'.$row['name'].'.ini', " has no example in the docs\n";
+                    print 'human/en/'.$row['name'].'.ini'. " has no example in the docs\n";
                 } 
                 
                 $title = str_replace(array('PHP', 'autoload', 'const', 'HTTP'), '', $ini['name']);  
@@ -355,16 +355,16 @@ JOIN categories
 
                 if ($title !== ucwords(strtolower($title)) && 
                     !preg_match('$^ext/$', $ini['name'])) { 
-                    print 'human/en/'.$row['name'].'.ini', " name is not Capital Worded ($ini[name])\n";
+                    print 'human/en/'.$row['name'].'.ini'. " name is not Capital Worded ($ini[name])\n";
                 }
                 // else all is fine
             }
             
             if (!file_exists('tests/analyzer/Test/'.$row['name'].'.php')) {
-                print $row['name'], " has no Test\n";
+                print $row['name']. " has no Test\n";
             }
         }
-        print "\n", $total, " analyzers are in the base\n";
+        print "\n". $total. " analyzers are in the base\n";
 
         $analyzes = array('Analyze', 
                           'Dead Code',
@@ -393,7 +393,7 @@ JOIN categories
             ++$total;
             print " + ".$row['name']."\n";
         }
-        print $total, " analyzers have no Severity or TimeToFix\n";
+        print $total. " analyzers have no Severity or TimeToFix\n";
 
         // Checking that severity and timetofix are only using the right values
         $analyzes = array('Analyze', 
@@ -430,7 +430,7 @@ JOIN categories
             ++$total;
             print " + ".$row['name'].' '.$row['s']."\n";
         }
-        print $total, " analyzers have unknown Severity or TimeToFix\n";
+        print $total. " analyzers have unknown Severity or TimeToFix\n";
 
         
         // cleaning
@@ -520,7 +520,7 @@ JOIN categories
         
         foreach($files as $file) {
             ++$total;
-            print $file, "\n";
+            print $file. "\n";
             $sqlite = new \Sqlite3($file);
             $results = $sqlite->query('pragma integrity_check');
             $response = $results->fetchArray()['integrity_check'];
@@ -539,9 +539,9 @@ JOIN categories
 
         // results
         if (empty($errors)) {
-            print 'No error found in ', $total, " files tested.\n";
+            print 'No error found in '. $total. " files tested.\n";
         } else {
-            print count($errors), ' errors found', "\n", print_r($errors, true);
+            print count($errors). ' errors found'. "\n". print_r($errors, true);
         }
     }
 
@@ -615,10 +615,10 @@ JOIN categories
     
     private function reportCompilation($errors, $version, $total) {
         if (empty($errors)) {
-            print 'All ', $total, " compilations OK for PHP $version\n";
+            print 'All '. $total. " compilations OK for PHP $version\n";
         } else {
-            print count($errors), ' errors out of ', $total, " compilations for PHP $version\n", 
-                 print_r($errors, true), "\n";
+            print count($errors). ' errors out of '. $total. " compilations for PHP $version\n".
+                 print_r($errors, true). "\n";
         }
     }
 
@@ -706,7 +706,7 @@ SQL
             if (!empty($toDelete)) {
 //                print "To be deleted " , implode(', ', $toDelete), "\n";
                 $sqlite->query('DELETE FROM '.$table.' WHERE id IN ('.implode(', ', array_keys($toDelete)).')');
-                print count($toDelete), ' rows removed in ', $table, ' : "', implode('", "', array_values($toDelete)), "\"\n";
+                print count($toDelete). ' rows removed in '. $table. ' : "'. implode('", "', array_values($toDelete)). "\"\n";
             }
         }
 
@@ -729,7 +729,7 @@ SQL
                 ++$total;
             }
 
-            print 'Found ', $missing / $total, $child, 's without parent ', $parent. "s\n";
+            print 'Found '. $missing / $total. $child. 's without parent '. $parent. "s\n";
         }
         print "\n";
 
@@ -741,7 +741,7 @@ SQL
             }
 
             if ($children == 0) {
-                print 'Found ', $children, ' ', $parent, ' without ', $child, "\n";
+                print 'Found '. $children. ' '. $parent. ' without '. $child. "\n";
                 // what to do?
             }
         }
@@ -752,15 +752,15 @@ SQL
         // Display stats
         print "\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM components');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb'], " components\n";
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']. " components\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM versions');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb'], " versions\n";
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']. " versions\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM classes');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb'], " classes\n";
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']. " classes\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM interfaces');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb'], " interfaces\n";
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']. " interfaces\n";
         $res = $sqlite->query('SELECT count(*) AS nb FROM traits');
-        print $res->fetchArray(SQLITE3_ASSOC)['nb'], " traits\n";
+        print $res->fetchArray(SQLITE3_ASSOC)['nb']. " traits\n";
         print "\n";
     }
 
@@ -820,13 +820,13 @@ SQL
             
             $code = file_get_contents($file);
             if (!preg_match('#(class|interface) ([^ ]+)#is', $code, $r)) {
-                print 'No class in ', $file, "\n";
+                print 'No class in '. $file. "\n";
                 continue;
             }
             
             $filename = substr(basename($file), 0, -4);
             if ($filename != $r[2]) {
-                print 'Classname error in ', $file, "\n";
+                print 'Classname error in '. $file. "\n";
             }
         }
     }
@@ -866,7 +866,7 @@ SQL
 
             if (!file_exists("./library/Exakat/Analyzer/$class.php")) {
                 print "./library/Exakat/Analyzer/$class.php";
-                print 'Appinfo is missing a class : ', $class, "\n";
+                print 'Appinfo is missing a class : '. $class. "\n";
             }
         }
     }
@@ -931,7 +931,7 @@ SQL
 }
 
 function error_handler ( $errno , $errstr , $errfile = '', $errline = null, $errcontext = array()) {
-    print __METHOD__, "\n";
+    print __METHOD__. "\n";
     return true;
 }
 
