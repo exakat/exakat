@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class ZendF_ActionInController extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testZendF_ActionInController01()  { $this->generic_test('ZendF/ActionInController.01'); }
+    public function testZendF_ActionInController02()  { $this->generic_test('ZendF/ActionInController.02'); }
 }
 ?>

@@ -176,7 +176,7 @@ Label : PROJECT
                                         Y
                                   Label : THEN
                                     Void
-                              Label : VARIABLE
+                              Label : NAME
                                 [
                           Label : ARGUMENT
                             =>
@@ -188,9 +188,9 @@ Label : PROJECT
                                 [
                                 Label : ARGUMENT
                                   Void
-                              Label : VARIABLE
+                              Label : NAME
                                 [
-                        Label : VARIABLE
+                        Label : NAME
                           [
                 Label : ELEMENT
                   default
@@ -360,7 +360,7 @@ Label : PROJECT
                                     $e
                                 Label : ARGUMENT
                                   $f
-                              Label : VARIABLE
+                              Label : NAME
                                 [
                           Label : ARGUMENT
                             =>
@@ -372,9 +372,9 @@ Label : PROJECT
                                 [
                                 Label : ARGUMENT
                                   Void
-                              Label : VARIABLE
+                              Label : NAME
                                 [
-                        Label : VARIABLE
+                        Label : NAME
                           [
               Label : NAME
                 [

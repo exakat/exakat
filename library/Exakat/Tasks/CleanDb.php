@@ -23,6 +23,9 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Config;
+use Exception;
+
 class CleanDb extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
@@ -31,13 +34,8 @@ class CleanDb extends Tasks {
         parent::__construct($gremlin);
     }
     
-    public function run(\Exakat\Config $config) {
+    public function run(Config $config) {
         $this->config = $config;
-
-        if (!file_exists($config->neo4j_folder.'/scripts/exakat.txt')) {
-            display('Warning : This Neo4j installation doesn\'t seem to be used by Exakat. Please, stop the server, remove "data" and "scripts" folder, then run "'.$config->executable.' doctor".');
-            return false;
-        }
 
         if ($config->quick) {
             $this->restartNeo4j();
@@ -102,9 +100,9 @@ GREMLIN;
         
         // preserve data/dbms/auth to preserve authentication
         if (file_exists($config->neo4j_folder.'/data/dbms/auth')) {
-            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; mkdir -p data/scripts; echo "" > data/scripts/exakat.txt ';
+            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; mkdir -p data/scripts ';
         } else {
-            $sshLoad =  'rm -rf data; mkdir -p data; mkdir -p data/log; mkdir -p data/scripts; echo "" > data/scripts/exakat.txt ';
+            $sshLoad =  'rm -rf data; mkdir -p data; mkdir -p data/log; mkdir -p data/scripts ';
         }
 
         // if neo4j-service.pid exists, we kill the process once
@@ -113,6 +111,19 @@ GREMLIN;
         }
         
         shell_exec('cd '.$config->neo4j_folder.'; '.$sshLoad);
+
+        if (!file_exists($config->neo4j_folder.'/conf/')) {
+            print "No conf folder in $config->neo4j_folder\n";
+        } elseif (!file_exists($config->neo4j_folder.'/conf/neo4j-server.properties')) {
+            print "No neo4j-server.properties file in $config->neo4j_folder/conf/\n";
+        } else {
+            $neo4j_config = file_get_contents($config->neo4j_folder.'/conf/neo4j-server.properties');
+            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/m', $neo4j_config, $r)) {
+                if ($r[1] != $config->neo4j_port) {
+                    print "Warning : Exakat's port and Neo4j's port are not the same ($r[1] / $config->neo4j_port)\n";
+                }
+            }
+        }
         
         // checking that the server has indeed restarted
         $round = 0;
@@ -127,13 +138,6 @@ GREMLIN;
                 die('Couldn\'t restart neo4j\'s server. Please, kill it (kill -9 '.$pid.') and try again');
             }
             
-            $neo4j_config = file_get_contents($config->neo4j_folder.'/conf/neo4j-server.properties');
-            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/m', $neo4j_config, $r)) {
-                if ($r[1] != $config->neo4j_port) {
-                    print "Warning : Exakat's port and Neo4j's port are not the same ($r[1] / $config->neo4j_port)\n";
-                }
-            }
-
             shell_exec('cd '.$config->neo4j_folder.'; ./bin/neo4j start 2>&1');
             
             // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
@@ -148,7 +152,7 @@ GREMLIN;
         try {
             $res = $this->gremlin->serverInfo();
             display('Restarted Neo4j cleanly');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             display('Didn\'t restart neo4j cleanly');
         }
 

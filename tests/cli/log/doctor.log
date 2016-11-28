@@ -1,46 +1,48 @@
-Begin : 1458661347.7532
+Begin : 1480360013.9776
 exakat : 
-    version              : 0.5.7
-    build                : 323
+    version              : 0.9.1
+    build                : 480
 
 PHP : 
-    version              : 7.0.4
+    version              : 7.0.13
     curl                 : Yes
     hash                 : Yes
+    phar                 : Yes
+    sysvsem              : Yes
     sqlite3              : Yes
     tokenizer            : Yes
-    phar                 : Yes
+    mbstring             : Yes
 
 java : 
     installed            : Yes
-    type                 : Java(TM) SE Runtime Environment (build 1.8.0_40-b25)
-    version              : 1.8.0_40
-    $JAVA_HOME           : /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home
+    type                 : Java(TM) SE Runtime Environment (build 1.8.0_101-b13)
+    version              : java
+    $JAVA_HOME           : /Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home
 
 neo4j : 
-    version              : Neo4j 2.2.6
-    port                 : 7474
+    version              : Neo4j 2.3.7
+    MaxPermSize          : Unset (64M)
+    MaxPermSize warning  : Set MaxPermSize to 512 or more in neo4j/conf/neo4j-wrapper.conf, with "wrapper.java.additional=-XX:MaxPermSize=512m" around line 20
+    port                 : 7475
     authentication       : Not enabled
     gremlinPlugin        : Configured.
-    gremlinJar           : gremlin-java-2.7.0-SNAPSHOT.jar
+    gremlinJar           : neo4j-gremlin-3.2.0-incubating.jar
     scriptFolder         : Yes
-    Neo4J for exakat     : Yes
-    pid                  : 27585
+    pid                  : 83162
     running              : Yes
     running here         : Yes
     gremlin              : Yes
     $NEO4J_HOME          : /Users/famille/Desktop/analyze/neo4j
-    $NEO4J_HOME / config : Same
+    $NEO4J_HOME / config : Different
 
 folders : 
     config-folder        : Yes
     config.ini           : Yes
     projects folder      : Yes
-    progress             : Yes
     in                   : Yes
     out                  : Yes
     projects/test        : Yes
-    projects/default     : Yes
+    projects/default     : No
     projects/onepage     : Yes
 
 PHP 5.2 : 
@@ -54,230 +56,55 @@ PHP 5.4 :
 
 PHP 5.5 : 
     configured           : Yes
-    installed            : Yes
-    version              : 5.5.32
+    version              : 7.0.13 (This doesn't seem to be version 5.5)
     short_open_tags      : Off
-    timezone             : Europe/Amsterdam
+    timezone             : 
     tokenizer            : Yes
     memory_limit         : -1
 
 PHP 5.6 : 
-    configured           : /usr/local/sbin/php56
-    installed            : Yes
-    version              : 5.6.18
+    configured           : Yes
+    version              : 7.0.13 (This doesn't seem to be version 5.6)
     short_open_tags      : Off
-    timezone             : Europe/Amsterdam
+    timezone             : 
     tokenizer            : Yes
     memory_limit         : -1
 
 PHP 7.0 : 
     configured           : Yes
-    version              : 7.0.4
+    version              : 7.0.13
     short_open_tags      : Off
     timezone             : 
     tokenizer            : Yes
     memory_limit         : -1
 
 PHP 7.1 : 
-    configured           : No
-
-git : 
-    installed            : Yes
-    version              : 2.7.4
-
-hg : 
-    installed            : Yes
-    version              : 3.7.2
-
-svn : 
-    installed            : Yes
-    version              : 1.9.3
-
-bzr : 
-    installed            : No
-    optional             : Yes
-
-composer : 
-    installed            : Yes
-    version              : 1.0.0-beta1
-
-wget : 
-    installed            : Yes
-    version              : GNU Wget 1.17.1 built on darwin15.2.0.
-
-zip : 
-    installed            : Yes
-    version              : 3.0
-
-exakat : 
-    version              : 0.5.7
-    build                : 323
-
-PHP : 
-    version              : 7.0.4
-    curl                 : Yes
-    hash                 : Yes
-    sqlite3              : Yes
+    configured           : Yes
+    version              : 7.0.13 (This doesn't seem to be version 7.1)
+    short_open_tags      : Off
+    timezone             : 
     tokenizer            : Yes
-    phar                 : Yes
+    memory_limit         : -1
 
-java : 
-    installed            : Yes
-    type                 : Java(TM) SE Runtime Environment (build 1.8.0_40-b25)
-    version              : 1.8.0_40
-    $JAVA_HOME           : /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home
-
-neo4j : 
-    version              : Neo4j 2.2.6
-    port                 : 7474
-    authentication       : Not enabled
-    gremlinPlugin        : Configured.
-    gremlinJar           : gremlin-java-2.7.0-SNAPSHOT.jar
-    scriptFolder         : Yes
-    Neo4J for exakat     : Yes
-    pid                  : 27585
-    running              : Yes
-    running here         : Yes
-    gremlin              : Yes
-    $NEO4J_HOME          : /Users/famille/Desktop/analyze/neo4j
-    $NEO4J_HOME / config : Same
-
-folders : 
-    config-folder        : Yes
-    config.ini           : Yes
-    projects folder      : Yes
-    progress             : Yes
-    in                   : Yes
-    out                  : Yes
-    projects/test        : Yes
-    projects/default     : Yes
-    projects/onepage     : Yes
-
-PHP 5.2 : 
-    configured           : No
-
-PHP 5.3 : 
-    configured           : No
-
-PHP 5.4 : 
-    configured           : No
-
-PHP 5.5 : 
-    configured           : No
-
-PHP 5.6 : 
-    configured           : No
-
-PHP 7.0 : 
-    configured           : No
-
-PHP 7.1 : 
-    configured           : No
-
-git : 
-    installed            : Yes
-    version              : 2.7.4
-
-hg : 
-    installed            : Yes
-    version              : 3.7.2
-
-svn : 
-    installed            : Yes
-    version              : 1.9.3
-
-bzr : 
-    installed            : No
-    optional             : Yes
-
-composer : 
-    installed            : Yes
-    version              : 1.0.0-beta1
-
-wget : 
-    installed            : Yes
-    version              : GNU Wget 1.17.1 built on darwin15.2.0.
-
-zip : 
-    installed            : Yes
-    version              : 3.0
-
-exakat : 
-    version              : 0.5.7
-    build                : 323
-
-PHP : 
-    version              : 7.0.4
-    curl                 : Yes
-    hash                 : Yes
-    sqlite3              : Yes
+PHP 7.2 : 
+    configured           : Yes
+    version              : 7.0.13 (This doesn't seem to be version 7.2)
+    short_open_tags      : Off
+    timezone             : 
     tokenizer            : Yes
-    phar                 : Yes
-
-java : 
-    installed            : Yes
-    type                 : Java(TM) SE Runtime Environment (build 1.8.0_40-b25)
-    version              : 1.8.0_40
-    $JAVA_HOME           : /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home
-
-neo4j : 
-    version              : Neo4j 2.2.6
-    port                 : 7474
-    authentication       : Not enabled
-    gremlinPlugin        : Configured.
-    gremlinJar           : gremlin-java-2.7.0-SNAPSHOT.jar
-    scriptFolder         : Yes
-    Neo4J for exakat     : Yes
-    pid                  : 27585
-    running              : Yes
-    running here         : Yes
-    gremlin              : Yes
-    $NEO4J_HOME          : /Users/famille/Desktop/analyze/neo4j
-    $NEO4J_HOME / config : Same
-
-folders : 
-    config-folder        : Yes
-    config.ini           : Yes
-    projects folder      : Yes
-    progress             : Yes
-    in                   : Yes
-    out                  : Yes
-    projects/test        : Yes
-    projects/default     : Yes
-    projects/onepage     : Yes
-
-PHP 5.2 : 
-    configured           : No
-
-PHP 5.3 : 
-    configured           : No
-
-PHP 5.4 : 
-    configured           : No
-
-PHP 5.5 : 
-    configured           : No
-
-PHP 5.6 : 
-    configured           : No
-
-PHP 7.0 : 
-    configured           : No
-
-PHP 7.1 : 
-    configured           : No
+    memory_limit         : -1
 
 git : 
     installed            : Yes
-    version              : 2.7.4
+    version              : 2.10.2
 
 hg : 
     installed            : Yes
-    version              : 3.7.2
+    version              : 4.0
 
 svn : 
     installed            : Yes
-    version              : 1.9.3
+    version              : 1.9.4
 
 bzr : 
     installed            : No
@@ -285,16 +112,18 @@ bzr :
 
 composer : 
     installed            : Yes
-    version              : 1.0.0-beta1
+    version              : 1.2.2
 
 wget : 
     installed            : Yes
-    version              : GNU Wget 1.17.1 built on darwin15.2.0.
+    version              : GNU Wget 1.18 built on darwin15.5.0.
 
 zip : 
     installed            : Yes
     version              : 3.0
 
-/Users/famille/Desktop/analyze/tests/cli
-Duration : -2,706.25ms 
-End : 1458661350.4594
+Error in the path to the Neo4j folder (). Please, check config/exakat.ini
+Error in the path to the Neo4j folder (). Please, check config/exakat.ini
+/Users/famille/Desktop/analyzeG3/tests/cli
+Duration : 3,856.13ms 
+End : 1480360017.8337\Date : Mon, 28 Nov 2016 19:06:57 +0000

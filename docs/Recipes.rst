@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 14 Nov 2016 13:58:34 +0000
-.. comment: Generation hash : edc1a5936fa639eb6b302567744ded06a601f797
+.. comment: Generation date : Mon, 28 Nov 2016 19:32:12 +0000
+.. comment: Generation hash : 96269123760a7787ec7257614cd65ba53ab0e09c
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 275 analysis
+Total : 279 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -89,6 +89,7 @@ Total : 275 analysis
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
+* :ref:`Bail Out Early <bail-out-early>`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -111,6 +112,7 @@ Total : 275 analysis
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Static <could-be-static>`
+* :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Alias <could-use-alias>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
@@ -120,6 +122,7 @@ Total : 275 analysis
 * :ref:`Dependant Trait <dependant-trait>`
 * :ref:`Deprecated Code <deprecated-code>`
 * :ref:`Don't Change Incomings <don't-change-incomings>`
+* :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
 * :ref:`Dont Echo Error <dont-echo-error>`
 * :ref:`Double Assignation <double-assignation>`
 * :ref:`Double Instructions <double-instructions>`
@@ -305,6 +308,7 @@ Total : 275 analysis
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
 * :ref:`Use random_int() <use-random\_int()>`
+* :ref:`Use stdClass <use-stdclass>`
 * :ref:`Used Once Variables (In Scope) <used-once-variables-(in-scope)>`
 * :ref:`Used Once Variables <used-once-variables>`
 * :ref:`Useless Abstract Class <useless-abstract-class>`
@@ -351,7 +355,7 @@ Total : 275 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 20 analysis
+Total : 19 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -368,7 +372,6 @@ Total : 20 analysis
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Should Be Single Quote <should-be-single-quote>`
-* :ref:`True False Inconsistant Case <true-false-inconsistant-case>`
 * :ref:`Unusual Case For PHP Functions <unusual-case-for-php-functions>`
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
@@ -625,7 +628,7 @@ Total : 33 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 37 analysis
+Total : 44 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -635,6 +638,7 @@ Total : 37 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Dont Change Pointer <foreach-dont-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
@@ -642,23 +646,29 @@ Total : 37 analysis
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+* :ref:`No Substr() One <no-substr()-one>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
+* :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
+* :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Use password_hash() <use-password\_hash()>`
+* :ref:`Use random_int() <use-random\_int()>`
+* :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/apc`
 * :ref:`ext/ereg`
+* :ref:`ext/mcrypt`
 * :ref:`ext/mysql`
 * :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
@@ -670,26 +680,33 @@ Total : 37 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 5 analysis
+Total : 11 analysis
 
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+* :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`Use Nullable Type <use-nullable-type>`
+* :ref:`Use random_int() <use-random\_int()>`
+* :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
+* :ref:`ext/mcrypt`
+* :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
 .. _dead-code:
 
 Dead code
 +++++++++
 
-Total : 23 analysis
+Total : 24 analysis
 
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Empty Instructions <empty-instructions>`
 * :ref:`Empty Namespace <empty-namespace>`
 * :ref:`Exception Order <exception-order>`
 * :ref:`Locally Unused Property <locally-unused-property>`
+* :ref:`Rethrown Exceptions <rethrown-exceptions>`
 * :ref:`Undefined Caught Exceptions <undefined-caught-exceptions>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unresolved Catch <unresolved-catch>`
@@ -714,7 +731,7 @@ Total : 23 analysis
 Performances
 ++++++++++++
 
-Total : 18 analysis
+Total : 19 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -722,6 +739,7 @@ Total : 18 analysis
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Functions In Loop Calls <functions-in-loop-calls>`
+* :ref:`Getting Last Element <getting-last-element>`
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
 * :ref:`Make One Call <make-one-call>`
@@ -767,12 +785,13 @@ Total : 19 analysis
 Wordpress
 +++++++++
 
-Total : 6 analysis
+Total : 7 analysis
 
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
 * :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
 * :ref:`Unverified Nonce <unverified-nonce>`
 * :ref:`Use $wpdb Api <use-$wpdb-api>`
+* :ref:`Use Wordpress Functions <use-wordpress-functions>`
 * :ref:`Wpdb Best Usage <wpdb-best-usage>`
 

@@ -26,7 +26,7 @@ Label : PROJECT
                     1
                   Label : ARGUMENT
                     2
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : ARGUMENT
                 [
@@ -34,7 +34,7 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     3
-                Label : VARIABLE
+                Label : NAME
                   [
-            Label : VARIABLE
+            Label : NAME
               [

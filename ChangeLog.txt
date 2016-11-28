@@ -1,4 +1,4 @@
-Version 0.9.0 (Python Demon, Coming up)
+Version 0.9.2 (Golden Haired Hou, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,47 @@ Version 0.9.0 (Python Demon, Coming up)
 + Tokenizer
     + 
 
-Version 0.8.9 (Yellow Brows Great King, 2016-11-07)
+Version 0.9.1 (Sai Tai Sui, 2016-11-28)
++ Architecture
+    + Docker supported in exakat/config.ini for PHP binaries. 
+    + Added exakatSince in analyzers documentation
+    + Added some missing tokens in anonymize command
++ Report
+    + Added several new analyzers for PHP 7.1
++ Analyzer
+    + new analyzer : find methods that could return Void
+    + new analyzer : find malformed octal sequence in strings
+    + new analyzer : spot rethrown exception
+    + new analyzer : reach the last element
+    + new analyzers : find undefined Zend Framework classes (2.0 to 3.0)
+    + Upgraded analysis : 1706 / 1714 test pass (99.5% pass). 
++ Tokenizer
+    + Fixed handling references (some were missing)
+    + Fixed handling of ellipsis (some were missing)
+
+Version 0.9.0 (Python Demon, 2016-11-21)
++ Architecture
+    + Project now include 'Preference' analysis
+    + Dump is now incremental (-u option), and doesn't need to be run in paralell
+    + Added new hashAnalyzer table, to handle generic results from analysers.
+    + Added project name in the graph.
+    + New command 'status' to report the current status of exakat
++ Report
+    + Ambassador includes 'Preferences' section and new menu system
+    + Upgraded progressbar to display project processing
++ Analyzer
+    + New analysis : Early Bail Out (with if/then)
+    + New analysis : PHP 7.1 backward incompatibilities with microseconds
+    + New analysis : Wordpress : recommend using WP api, not PHP.
+    + Upgraded 'Constant condition' to include do..while()
+    + Upgraded 'Useless Abstract' to include methodless classes
+    + Upgraded analysis : 1687 / 1697 test pass (99% pass). 
++ Tokenizer
+    + Added 'Array' to list of determinist functions (more constants are spotted)
+    + Fixed 'Name' for Array Short Syntax.
+    + Fixed variadic support
+
+Version 0.8.9 (Yellow Brows Great King, 2016-11-14)
 + Architecture
     + Fixed and document -tgz and -zip option of init
     + Removed progress folder

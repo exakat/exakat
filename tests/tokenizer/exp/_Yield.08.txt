@@ -32,7 +32,7 @@ Label : PROJECT
                       yield
                       Label : YIELD
                         $c
-                Label : VARIABLE
+                Label : NAME
                   [
           Label : NAME
             a

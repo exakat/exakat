@@ -1,0 +1,6 @@
+{
+    "require": {
+        "brightzone/gremlin-php": "3.0.1",
+        "guiguiboy/php-cli-progress-bar": "dev-master"
+    }
+}

@@ -90,7 +90,7 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : VARIABLE
+                Label : NAME
                   [
             Label : ELEMENT
               =

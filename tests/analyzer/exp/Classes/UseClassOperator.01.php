@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('\x',
-                      '\X',
-                      'x',
+$expected     = array('\'x\'', 
+                      '\'\x\'', 
+                      '\'\X\''
 );
 
 $expected_not = array('"x$a"',

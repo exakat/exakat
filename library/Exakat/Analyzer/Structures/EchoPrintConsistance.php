@@ -28,20 +28,40 @@ use Exakat\Analyzer\Analyzer;
 class EchoPrintConsistance extends Analyzer {
 
     public function analyze() {
-        
-        $inconsistent = $this->query(<<<GREMLIN
-g.V().as("first").hasLabel("Functioncall")
-                 .where( __.in("METHOD", "NEW").count().is(eq(0)) )
-                 .has("token", within("T_ECHO", "T_PRINT"))
-                 .groupCount("gf").by{it.value("fullnspath");}.cap("gf").sideEffect{ s = it.get().values().sum(); }.next().findAll{ it.value < s / 10;}.keySet()
-GREMLIN
-);
+        $mapping = <<<GREMLIN
+x2 = it.get().value("token");
+GREMLIN;
+        $storage = array('print' => 'T_PRINT',
+                         'echo'  => 'T_ECHO',
+                         '<?='   => 'T_OPEN_TAG_WITH_ECHO');
 
-        if (!empty($inconsistent)) {
-            $this->atomFunctionIs(array('\echo', '\print'))
-                 ->fullnspathIs($inconsistent);
-            $this->prepareQuery();
+        $this->atomFunctionIs(array('\\print', '\\echo'))
+             ->raw('map{ '.$mapping.' }')
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next()');
+        $types = (array) $this->rawQuery();
+        
+        $store = array();
+        $total = 0;
+        foreach($storage as $key => $v) {
+            $c = empty($types[$v]) ? 0 : $types[$v];
+            $store[] = array('key'   => $key,
+                             'value' => $c);
+            $total += $c;
         }
+        Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
+        
+        if ($total == 0) {
+            return;
+        }
+
+        $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
+        $types = '["'.str_replace('\\', '\\\\', implode('", "', array_keys($types))).'"]';
+
+        $this->atomFunctionIs(array('\\print', '\\echo'))
+             ->raw('sideEffect{ '.$mapping.' }')
+             ->raw('filter{ x2 in '.$types.'}')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

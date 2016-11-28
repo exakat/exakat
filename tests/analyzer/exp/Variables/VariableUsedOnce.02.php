@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array('$a');
+$expected     = array('$a', 
+                      '$e');
 
-$expected_not = array('$b' ,'$c', '$d', '$e');
+$expected_not = array('$b',
+                      '$c', 
+                      '$d');
 
 ?>

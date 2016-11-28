@@ -1,5 +1,10 @@
-Begin : 1458661351.2089
+Begin : 1480360434.7746
+no jobs to do - waiting...
+Ping queue
+pong
+no jobs to do - waiting...
 Stopping queue
-unable to create named pipe/Users/famille/Desktop/analyze/tests/cli
-Duration : -34.69ms 
-End : 1458661351.2436
+Received quit command. Bye
+/Users/famille/Desktop/analyzeG3/tests/cli
+Duration : 1,073.01ms 
+End : 1480360435.8476\Date : Mon, 28 Nov 2016 19:13:55 +0000

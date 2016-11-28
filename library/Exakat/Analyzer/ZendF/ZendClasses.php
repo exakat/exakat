@@ -29,53 +29,54 @@ class ZendClasses extends Analyzer {
     }
     
     public function analyze() {
-
+        $regex = '^\\\\\\\\zend(_|\\\\\\\\)';
+        
         $this->atomIs('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', '^\\\\\\\\zend_');
+             ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
         
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', '^\\\\\\\\zend_');
+             ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', '^\\\\\\\\zend_');
+             ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', '^\\\\\\\\zend_');
+             ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', '^\\\\\\\\zend_');
+             ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 
         $this->atomIs('Typehint')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', '^\\\\\\\\zend_');
+             ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', '^\\\\\\\\zend_');
+             ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 
         $this->atomIs('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', '^\\\\\\\\zend_');
+             ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 
 // Check that... Const/function and aliases

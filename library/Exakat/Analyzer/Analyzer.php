@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer;
 
 use Exakat\Description;
+use Exakat\Datastore;
 use Exakat\Config;
 use Exakat\Tokenizer\Token;
 use Exakat\Exceptions\GremlinException;
@@ -90,6 +91,8 @@ abstract class Analyzer {
 
     protected $gremlin = null;
     public static $gremlinStatic = null;
+    
+    protected $linksDown = '';
 
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
@@ -109,6 +112,12 @@ abstract class Analyzer {
         $this->_as('first');
         
         $this->config = Config::factory();
+        
+        if (!isset(self::$datastore)) {
+            self::$datastore = new Datastore($this->config);
+        }
+        
+        $this->linksDown = Token::linksAsList();
     }
     
     public function __destruct() {
@@ -178,7 +187,6 @@ abstract class Analyzer {
     }
     
     public function getDump() {
-        $linksDown = Token::linksAsList();
         
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALYZED')
@@ -191,7 +199,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALY
              }
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File') ).repeat( 
-    __.in($linksDown)
+    __.in($this->linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
        )
@@ -209,6 +217,21 @@ GREMLIN;
         }
 
         return $res->results;
+    }
+
+    public static function getSuggestionThema($thema) {
+        self::initDocs();
+        $list = self::$docs->listAllThemes();
+        $r = array();
+        foreach($list as $c) {
+            $l = levenshtein($c, $thema);
+
+            if ($l < 8) {
+                $r[] = $c;
+            }
+        }
+        
+        return $r;
     }
     
     public static function getSuggestionClass($name) {
@@ -242,6 +265,11 @@ GREMLIN;
     
     public function getDescription() {
         return $this->description;
+    }
+
+    static public function listAllThemes($theme = null) {
+        self::initDocs();
+        return Analyzer::$docs->listAllThemes($theme);
     }
 
     static public function getThemeAnalyzers($theme = null) {
@@ -407,10 +435,9 @@ GREMLIN;
 ////////////////////////////////////////////////////////////////////////////////
 
     protected function hasNoInstruction($atom = 'Function') {
-        $linksDown = Token::linksAsList();
         $this->addMethod('where( 
-repeat(__.in('.$linksDown.'))
-.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(eq(0)))');
+ __.repeat(__.in(' . $this->linksDown . ')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
+   .count().is(eq(0)))');
         
         return $this;
     }
@@ -420,28 +447,23 @@ repeat(__.in('.$linksDown.'))
             return $this->hasNoInstruction($atom);
         }
 
-        $linksDown = Token::linksAsList();
         $this->addMethod('where( 
-repeat(__.in('.$linksDown.'))
-.until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'").count().is(eq(0)))');
+__.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'")
+  .count().is(eq(0)))');
         
         return $this;
     }
 
     protected function hasInstruction($atom = 'Function') {
-        $linksDown = Token::linksAsList();
         $this->addMethod('where( 
-repeat(__.in('.$linksDown.'))
-.until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).').count().is(neq(0)))');
+__.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
+  .count().is(neq(0)))');
         
         return $this;
     }
 
     protected function goToInstruction($atom = 'Namespace') {
-        $linksDown = Token::linksAsList();
-        $this->addMethod('repeat( __.in(
-'.$linksDown.'
-        )).until(hasLabel('.$this->SorA($atom).', "File") )');
+        $this->addMethod('repeat( __.in('.$this->linksDown.')).until(hasLabel('.$this->SorA($atom).', "File") )');
         
         return $this;
     }
@@ -487,14 +509,14 @@ repeat(__.in('.$linksDown.'))
     }
     
     public function atomInside($atom) {
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
     }
 
     public function noAtomInside($atom) {
-        $gremlin = 'where( __.repeat( out() ).emit( hasLabel('.$this->SorA($atom).') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
+        $gremlin = 'where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel('.$this->SorA($atom).') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
         return $this;
@@ -1077,10 +1099,7 @@ GREMLIN
     }
     
     public function goToFunction() {
-        $linksDown = Token::linksAsList();
-        $this->addMethod('repeat(__.in(
-'.$linksDown.'
-)).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))');
+        $this->addMethod('repeat(__.in('.$this->linksDown.')).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))');
         
         return $this;
     }
@@ -1432,7 +1451,6 @@ GREMLIN
             $forClosure = "";
         }
         
-        $linksDown = Token::linksAsList();
         $this->addMethod(<<<GREMLIN
 as("context")
 .sideEffect{ line = it.get().value('line');
@@ -1444,7 +1462,7 @@ as("context")
              }
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File') ).repeat( 
-    __.in($linksDown)
+    __.in($this->linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class']) { theClass = it.get().value('fullcode')} }
       .sideEffect{ if (it.get().label() in ['Namespace']) { theNamespace = it.get().vertices(OUT, 'NAME').next().value('fullcode')} }
@@ -1560,10 +1578,32 @@ GREMLIN;
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
 // php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";
 
-    // initializing a new query
         $this->queries[] = $query;
         $this->queriesArguments[] = $this->arguments;
 
+         // initializing a new query
+        return $this->initNewQuery();
+    }
+
+    public function rawQuery() {
+        // @doc This is when the object is a placeholder for others.
+        if (count($this->methods) <= 1) { return true; }
+        
+        $query = implode('.', $this->methods);
+        $query = 'g.V().'.
+                 $query.
+                 '
+// Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
+// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";
+
+        $arguments = $this->arguments;
+
+        $this->initNewQuery();
+        
+        return $this->query($query, $arguments);
+    }
+    
+    private function initNewQuery() {
         $this->methods = array();
         $this->addMethod('as("first")');
 

@@ -35,7 +35,27 @@ class Status extends Tasks {
         $project = $config->project;
 
         if ($project === 'default') {
-            $status = array('project' => $project);
+            $status = array();
+
+            if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
+                if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
+                    $json = json_decode(file_get_contents($config->projects_root.'/projects/.exakat/Project.json'));
+                } else {
+                    $json = new \Stdclass();
+                    $json->project = '';
+                    $json->step = '';
+                
+                }
+                $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
+                $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
+                $status = array('Running'  => 'Project',
+                                'project'  => $json->project,
+                                'in graph' => $res->results[0],
+                                'step'     => $json->step,);
+            } else {
+                $status['Running'] = 'idle';
+            }
+            //$status = array('project' => $project);
             
             $this->display($status, $config->json);
             return;
@@ -50,7 +70,16 @@ class Status extends Tasks {
         $status = array('project' => $project);
         $status['loc'] = $this->datastore->getHash('loc');
         $status['tokens'] = $this->datastore->getHash('tokens');
-        $status['status'] = $this->datastore->getHash('status');
+        if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
+            $json = json_decode(file_get_contents($config->projects_root.'/projects/.exakat/Project.json'));
+            if ($json->project === $project) {
+                $status['status'] = $json->step;
+            } else {
+                $status['status'] = 'Not running';
+            }
+        } else {
+            $status['status'] = 'Not running';
+        }
 
         switch($config->project_vcs) {
             case 'git' :
@@ -89,6 +118,8 @@ class Status extends Tasks {
                 $status['updatable'] = 'N/A';
                 break 1;
         }
+        
+        
 
         $configuration = array();
         // 

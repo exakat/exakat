@@ -46,5 +46,5 @@ Label : PROJECT
                   'i'
                 Label : VALUE
                   'j'
-            Label : VARIABLE
+            Label : NAME
               [

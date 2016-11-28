@@ -100,7 +100,7 @@ SQL;
     public function getThemesForAnalyzer() {
         $list = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                   'CompatibilityPHP70', 'CompatibilityPHP71',
-                                  'Dead code', 'Security', 'Analyze');
+                                  'Dead code', 'Security', 'Analyze', 'Preferences');
         $listSqlite3 = '"'.join('", "', $list).'"';
                                           $query = <<<SQL
 SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM categories AS c
@@ -213,6 +213,29 @@ SQL;
         $return = array();
         while($row = $res->fetchArray()) {
             $return[] = str_replace('\\\\', '\\', $row['name']);
+        }
+        
+        return $return;
+    }
+
+    public function listAllThemes($theme = null) {
+        $query = <<<'SQL'
+SELECT name AS name FROM categories
+
+SQL;
+        if ($theme !== null) {
+            $query .= ' WHERE name=:name';
+            $stmt = $this->sqlite->prepare($query);
+            
+            $stmt->bindValue(':name', $theme, SQLITE3_TEXT);
+        } else {
+            $stmt = $this->sqlite->prepare($query);
+        }
+        $res = $stmt->execute();
+
+        $return = array();
+        while($row = $res->fetchArray()) {
+            $return[] = $row['name'];
         }
         
         return $return;

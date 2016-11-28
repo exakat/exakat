@@ -24,12 +24,13 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\Methods;
 
 class StaticLoop extends Analyzer {
     public function analyze() {
-        $nonDeterminist = $this->loadIni('php_nondeterministic.ini', 'functions');
-        $nonDeterminist = $this->makeFullNsPath($nonDeterminist);
-        $nonDeterminist = "'\\" . implode("', '\\", $nonDeterminist)."'";
+        $methods = new Methods();
+        $nonDeterminist = $methods->getNonDeterministFunctions();
+        $nonDeterminist = "'\\\\" . implode("', '\\\\", $nonDeterminist)."'";
 
         $whereNonDeterminist = 'where( __.repeat( __.out() ).emit( hasLabel("Functioncall") ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").where(__.in("METHOD", "NEW").count().is(eq(0))).has("token", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") in ['.$nonDeterminist.']}.count().is(eq(0)) )';
         

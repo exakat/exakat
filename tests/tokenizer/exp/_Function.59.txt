@@ -114,7 +114,7 @@ Label : PROJECT
                               [
                               Label : ARGUMENT
                                 Void
-                            Label : VARIABLE
+                            Label : NAME
                               [
                     Label : ELEMENT
                       return
@@ -196,7 +196,7 @@ Label : PROJECT
                               [
                               Label : ARGUMENT
                                 Void
-                            Label : VARIABLE
+                            Label : NAME
                               [
                     Label : ELEMENT
                       return

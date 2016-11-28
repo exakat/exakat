@@ -1,9 +1,10 @@
 <?php
 
 $expected     = array('if(!defined(\'B\')) { /**/ } ', 
-                      'if(ini_get_all( )) { /**/ } ', 
-                      'if(mt_rand(\'C\')) { /**/ } ');
+                      'if(ini_get_all( )) { /**/ } ',
+                      'if(srand(\'C\')) { /**/ } ', 
+                      'if(strtolower(\'C\')) { /**/ } ');
 
-$expected_not = array("mt_rand('C')");
+$expected_not = array( 'if(mt_rand(\'C\')) { /**/ } ', );
 
 ?>

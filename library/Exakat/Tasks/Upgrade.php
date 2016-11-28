@@ -27,6 +27,8 @@ use Exakat\Config;
 use Exakat\Exakat;
 
 class Upgrade extends Tasks {
+    const CONCURENCE = self::NONE;
+
     public function run(Config $config) {
         $options = array(
             'http'=>array(

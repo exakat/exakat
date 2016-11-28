@@ -28,5 +28,5 @@ Label : PROJECT
                   'c'
                 Label : VALUE
                   's'
-            Label : VARIABLE
+            Label : NAME
               [

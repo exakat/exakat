@@ -1,17 +1,21 @@
 #!/usr/bin/env php
 <?php
 
-if(strpos(basename(__FILE__), 'phar') !== false){
-    require_once 'phar://exakat.phar/library/Autoload.php';
-} else {
-    include_once __DIR__.'/library/Autoload.php';
-}
-
-$graphDB = new \Exakat\Graph\Gremlin3($config);
-
 try {
+    if(strpos(basename(__FILE__), 'phar') !== false){
+        require_once 'phar://exakat.phar/library/Autoload.php';
+    } else {
+        include_once __DIR__.'/library/Autoload.php';
+    }
+
+    $graphDB = new \Exakat\Graph\Gremlin3($config);
+    //$graphDB = new \Exakat\Graph\GremlinServer($config);
+
     $exakat = new \Exakat\Exakat($graphDB);
     $exakat->execute($config);
-} catch (Throwable $e) {
-    print "\nError : ".$e->getMessage()."\nStopping execution\n\n";
+} catch (Exception $e) {
+    print "\nError : ".$e->getMessage()." 
+on file ".$e->getFile()."
+on line ".$e->getLine()."
+Stopping execution\n\n";
 } 

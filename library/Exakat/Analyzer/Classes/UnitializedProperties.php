@@ -47,7 +47,7 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Function')
              ->analyzerIs('Classes/Constructor')
              ->raw('where(
-    __.out("BLOCK").emit( hasLabel("Property")).repeat( out() ).times(15)
+    __.out("BLOCK").emit( hasLabel("Property")).repeat( out() ).times('.self::MAX_LOOPING.')
       .hasLabel("Property").where(__.out("PROPERTY").has("token", "T_STRING").filter{ it.get().value("code") == property})
       .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified").count().is(eq(1)) ).count().is(eq(0))
 )')
@@ -71,7 +71,7 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Function')
              ->analyzerIs('Classes/Constructor')
              ->raw('where(
-    __.out("BLOCK").emit( hasLabel("Staticproperty")).repeat( out() ).times(15)
+    __.out("BLOCK").emit( hasLabel("Staticproperty")).repeat( out() ).times('.self::MAX_LOOPING.')
       .hasLabel("Staticproperty").out("CLASS").filter{ it.get().value("fullnspath") == classe}.in("CLASS").where(__.out("PROPERTY").filter{ it.get().value("code") == property})
       .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified").count().is(eq(1)) ).count().is(eq(0))
 )')

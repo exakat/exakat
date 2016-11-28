@@ -62,7 +62,7 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
                           )
                           .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
                           .repeat( out().where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) )  )
-                          .emit( hasLabel("Variable")).times('.self::MAX_LOOPING.')
+                          .emit( hasLabel("Variable").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
                           .filter{ it.get().value("code") in names }');
         $this->prepareQuery();
     }

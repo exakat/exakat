@@ -34,7 +34,7 @@ Label : PROJECT
                     3
                   Label : ARGUMENT
                     4
-                Label : VARIABLE
+                Label : NAME
                   [
             Label : ELEMENT
               yield from
@@ -52,7 +52,7 @@ Label : PROJECT
                           5
                         Label : ARGUMENT
                           6
-                      Label : VARIABLE
+                      Label : NAME
                         [
                   Label : NAME
                     ArrayIterator

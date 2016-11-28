@@ -34,7 +34,7 @@ Label : PROJECT
                             'F'
                           Label : VALUE
                             'G'
-                      Label : VARIABLE
+                      Label : NAME
                         [
                   Label : NAME
                     \

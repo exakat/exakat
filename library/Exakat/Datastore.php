@@ -39,6 +39,11 @@ class Datastore {
     public function __construct(Config $config, $create = self::REUSE) {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         
+        // if project dir isn't created, we are about to create it.
+        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
+            return;
+        }
+
         if ($create === self::CREATE) {
             if (file_exists($this->sqlitePath)) {
                 unlink($this->sqlitePath);
@@ -59,6 +64,7 @@ class Datastore {
         
         if ($create === self::CREATE) {
             $this->cleanTable('hash');
+            $this->cleanTable('hashAnalyzer');
             $this->cleanTable('analyzed');
             $this->cleanTable('tokenCounts');
             $this->cleanTable('externallibraries');
@@ -172,7 +178,7 @@ class Datastore {
         }        
         $return = array();
 
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
         
@@ -190,7 +196,7 @@ class Datastore {
         }
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row[$col];
         }
         
@@ -200,14 +206,44 @@ class Datastore {
     public function getHash($key) {
         $query = 'SELECT value FROM hash WHERE key=:key';
         $stmt = self::$sqliteRead->prepare($query);
-        $stmt->bindValue(':key', $key, SQLITE3_TEXT);
+        $stmt->bindValue(':key', $key, \SQLITE3_TEXT);
         $res = $stmt->execute();
 
         if (!$res) { 
             return array();
         } else {
-            $row = $res->fetchArray(SQLITE3_ASSOC);
+            $row = $res->fetchArray(\SQLITE3_ASSOC);
             return $row['value'];
+        }
+    }
+
+    public function getHashAnalyzer($analyzer) {
+        $query = 'SELECT key, value FROM hashAnalyzer WHERE analyzer=:analyzer';
+        $stmt = self::$sqliteRead->prepare($query);
+        $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
+        $res = $stmt->execute();
+
+        if (!$res) { 
+            return array();
+        } 
+        
+        $return = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $return[$row['key']] = $row['value'];
+        }
+        
+        return $return;
+    }
+
+    public function addRowAnalyzer($analyzer, $key, $value = '') {
+        if (is_array($key)) {
+            foreach($key as $k => &$v) {
+                $v['analyzer'] = $analyzer;
+            }
+            return $this->addRow('hashAnalyzer', $key);
+        } else {
+            return $this->addRow('hashAnalyzer', array('analyzer' => $analyzer,
+                                                        $key      => $value));
         }
     }
 
@@ -353,6 +389,17 @@ SQLITE;
                 $createTable = <<<SQLITE
 CREATE TABLE hash (
   id INTEGER PRIMARY KEY,
+  key TEXT UNIQUE,
+  value TEXT
+);
+SQLITE;
+                break;
+
+            case 'hashAnalyzer' : 
+                $createTable = <<<SQLITE
+CREATE TABLE hashAnalyzer (
+  id INTEGER PRIMARY KEY,
+  analyzer TEXT,
   key TEXT UNIQUE,
   value TEXT
 );

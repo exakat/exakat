@@ -22,26 +22,6 @@ Label : PROJECT
                     const
                     Label : NAME
                       a
-                      Label : DEFINITION
-                        a
-                      Label : DEFINITION
-                        a
-                      Label : DEFINITION
-                        a
-                      Label : DEFINITION
-                        a
-                      Label : DEFINITION
-                        a
-                      Label : DEFINITION
-                        a
-                      Label : DEFINITION
-                        a
-                      Label : DEFINITION
-                        a
-                      Label : DEFINITION
-                        a
-                      Label : DEFINITION
-                        a
                     Label : VALUE
                       2
               Label : DEFINITION
@@ -234,6 +214,12 @@ Label : PROJECT
                     one_identifier
                   Label : CONSTANT
                     a
+                  Label : DEFINITION
+                    const
+                    Label : NAME
+                      a
+                    Label : VALUE
+                      2
               Label : NAME
                 print
             Label : ELEMENT
@@ -246,6 +232,12 @@ Label : PROJECT
                     absolute_path
                   Label : CONSTANT
                     a
+                  Label : DEFINITION
+                    const
+                    Label : NAME
+                      a
+                    Label : VALUE
+                      2
               Label : NAME
                 print
             Label : ELEMENT
@@ -258,6 +250,12 @@ Label : PROJECT
                     path
                   Label : CONSTANT
                     a
+                  Label : DEFINITION
+                    const
+                    Label : NAME
+                      a
+                    Label : VALUE
+                      2
               Label : NAME
                 print
             Label : ELEMENT
@@ -270,6 +268,12 @@ Label : PROJECT
                     path2
                   Label : CONSTANT
                     a
+                  Label : DEFINITION
+                    const
+                    Label : NAME
+                      a
+                    Label : VALUE
+                      2
               Label : NAME
                 print
             Label : ELEMENT
@@ -282,6 +286,12 @@ Label : PROJECT
                     a1
                   Label : CONSTANT
                     a
+                  Label : DEFINITION
+                    const
+                    Label : NAME
+                      a
+                    Label : VALUE
+                      2
               Label : NAME
                 print
             Label : ELEMENT
@@ -296,6 +306,12 @@ Label : PROJECT
                       a1
                   Label : CONSTANT
                     a
+                  Label : DEFINITION
+                    const
+                    Label : NAME
+                      a
+                    Label : VALUE
+                      2
               Label : NAME
                 print
             Label : ELEMENT

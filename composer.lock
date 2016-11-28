@@ -1,0 +1,119 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "8a288896692c7c4af6f88fc840852794",
+    "content-hash": "4d26da88ee30906fce2b22ae93d5f503",
+    "packages": [
+        {
+            "name": "brightzone/gremlin-php",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PommeVerte/gremlin-php.git",
+                "reference": "7b576b9246d26760e9aa9d440cc52f9837689b6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PommeVerte/gremlin-php/zipball/7b576b9246d26760e9aa9d440cc52f9837689b6c",
+                "reference": "7b576b9246d26760e9aa9d440cc52f9837689b6c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "dev-master",
+                "yiisoft/yii2-apidoc": "*"
+            },
+            "type": "library",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Brightzone\\GremlinDriver\\": "src/",
+                    "Brightzone\\GremlinDriver\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2"
+            ],
+            "authors": [
+                {
+                    "name": "Brightzone",
+                    "email": "dylan.millikin@brightzone.fr"
+                }
+            ],
+            "description": "gremlin-server client for php",
+            "keywords": [
+                "driver",
+                "gremlin",
+                "gremlin-server",
+                "rexpro",
+                "rexpro-php"
+            ],
+            "time": "2016-10-12 19:43:25"
+        },
+        {
+            "name": "guiguiboy/php-cli-progress-bar",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guiguiboy/PHP-CLI-Progress-Bar.git",
+                "reference": "7d3eb61c1f0c164b9c3139af694b2d38171e4d04"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guiguiboy/PHP-CLI-Progress-Bar/zipball/7d3eb61c1f0c164b9c3139af694b2d38171e4d04",
+                "reference": "7d3eb61c1f0c164b9c3139af694b2d38171e4d04",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ProgressBar": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guillaume",
+                    "email": "guillaume.bretou@gmail.com"
+                }
+            ],
+            "description": "Progress bar for PHP CLI scripts",
+            "homepage": "https://github.com/guiguiboy/PHP-CLI-Progress-Bar",
+            "keywords": [
+                "bar",
+                "cli",
+                "command-line",
+                "progress"
+            ],
+            "time": "2014-11-19 13:12:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "guiguiboy/php-cli-progress-bar": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

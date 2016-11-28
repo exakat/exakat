@@ -24,8 +24,8 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Devoops;
 use Exakat\Exakat;
+use Exakat\Reports\Devoops;
 
 class ZendFramework extends Devoops {
     public function __construct() {
@@ -67,6 +67,7 @@ class ZendFramework extends Devoops {
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
         display("Copied media files");
+        $this->dump      = new \Sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
         
         $this->datastore = new \sqlite3($folder.'/datastore.sqlite', \SQLITE3_OPEN_READONLY);
         
@@ -191,7 +192,7 @@ HTML;
         return '';
     }//end generate()
     
-    private function OneAnalyzer($title) {
+    protected function OneAnalyzer($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Code', 'File', 'Line');

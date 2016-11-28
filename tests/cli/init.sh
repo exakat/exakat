@@ -11,7 +11,7 @@ php exakat status -p ut2
 php exakat remove -p ut2
 
 #git project with password
-php exakat init -p ut3 -R https://brivezac:heureux@bitbucket.org/devteampmeti/sitewebpmeti.git 
+php exakat init -p ut3 -R https://brivezac@bitbucket.org/arthur_wellezcabral/fabereo.git
 php exakat remove -p ut3
 
 #tgz project

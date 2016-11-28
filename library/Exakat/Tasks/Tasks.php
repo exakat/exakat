@@ -49,10 +49,8 @@ abstract class Tasks {
         // Config is the general one.
         $config = Config::factory();
 
-        if (!defined('static::CONCURENCE')) {
-            print get_class($this)." is missing CONCURENCE\n";
-            die();
-        }
+        assert(defined('static::CONCURENCE'), get_class($this)." is missing CONCURENCE\n");
+
         if (static::CONCURENCE !== self::ANYTIME) {
             if (self::$semaphore === null) {
                 if (static::CONCURENCE === self::QUEUE) {
@@ -86,9 +84,14 @@ abstract class Tasks {
             $this->datastore = new Datastore($config);
         }
 
+        if (!file_exists($config->projects_root.'/projects/')) {
+            mkdir($config->projects_root.'/projects/', 0700);
+        }
+        
         if (!file_exists($config->projects_root.'/projects/.exakat/')) {
             mkdir($config->projects_root.'/projects/.exakat/', 0700);
         }
+        
         $this->exakatDir = $config->projects_root.'/projects/.exakat/';
     }
     
@@ -105,7 +108,7 @@ abstract class Tasks {
         $config = Config::factory();
         if ($nb_tokens > $config->token_limit) {
             $this->datastore->addRow('hash', array('token error' => "Project too large ($nb_tokens / {$config->token_limit})"));
-            die("Project too large ($nb_tokens / {$config->token_limit})\n");
+            throw new ProjectTooLarge($nb_tokens, $config->token_limit);
         }
     }
     
@@ -132,7 +135,7 @@ abstract class Tasks {
     }
 
     protected function removeSnitch() {
-        static $snitch;
+        static $snitch, $path;
         
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));

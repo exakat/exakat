@@ -107,12 +107,16 @@ shell_exec( 'bbedit library/Exakat/Analyzer/'.$analyzer.'.php'."\n");
 //print 'php manualTest.php Tests/'.$analyzer.'.php');
 print 'php exakat analyze -p project -P '.$analyzer.' -v'."\n";
 
+$exakat = file_get_contents('library/Exakat/Exakat.php');
+preg_match('/const VERSION = \'(\d+.\d+.\d+)\';/', $exakat, $r);
+$version = $r[1];
+
 // add documentation
 $ini = <<<INI
 name = "$analyzer";
 description = "";
 clearphp = "";
-
+exakatSince = "$version";
 INI;
 
 file_put_contents('human/en/'.$analyzer.'.ini', $ini);

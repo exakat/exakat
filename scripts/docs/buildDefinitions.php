@@ -20,8 +20,40 @@
  *
 */
 
+$sqlite = new \Sqlite3('data/analyzers.sqlite');
+
+$res = $sqlite->query('SELECT COUNT(*)
+                FROM categories c
+                JOIN analyzers_categories ac
+                    ON c.id = ac.id_categories
+                JOIN analyzers a
+                    ON a.id = ac.id_analyzer
+                WHERE c.name = "Analyze"');
+$analyzer_count = $res->fetchArray(\SQLITE3_NUM)[0];
+
+$extension_list = array();
+$ext = glob('./human/en/Extensions/Ext*.ini');
+foreach($ext as $f) {
+    $ini = parse_ini_file($f);
+    $extension_list[] = '* '.$ini['name'];
+}
+$extension_list = join("\n", $extension_list);
+
+$library_list = array();
+$json = json_decode(file_get_contents('data/externallibraries.json'));
+foreach( (array) $json as $library) {
+    if (!isset($library->name)) {
+        print_r($library);
+    }
+    $library_list[] = '* ['.$library->name.']('.$library->homepage.')';
+}
+$library_list = join("\n", $library_list);
+
+
 // More to come,and automate collection too
-$attributes = array('ANALYZERS_COUNT' => '261');
+$attributes = array('ANALYZERS_COUNT' => $analyzer_count,
+                    'EXTENSION_LIST' => $extension_list,
+                    'LIBRARY_LIST' => $library_list);
 
 shell_exec('rm docs/*.rst');
 
@@ -66,6 +98,18 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'array_keys'                     => 'http://www.php.net/array_keys',
                  'array_merge_recursive'          => 'http://www.php.net/array_merge_recursive',
                  'array_merge'                    => 'http://www.php.net/array_merge',
+                 'array_diff'                     => 'http://www.php.net/array_diff',
+                 'array_intersect'                     => 'http://www.php.net/array_intersect',
+                 'array_map'                     => 'http://www.php.net/array_map',
+                 'array_search'                     => 'http://www.php.net/array_search',
+                 'array_udiff'                     => 'http://www.php.net/array_udiff',
+                 'array_uintersect'                     => 'http://www.php.net/array_uintersect',
+                 'array_unshift'                     => 'http://www.php.net/array_unshift',
+                 'array_walk'                     => 'http://www.php.net/array_walk',
+                 'in_array'                     => 'http://www.php.net/in_array',
+                 'strstr'                     => 'http://www.php.net/strstr',
+                 'isset'                     => 'http://www.php.net/isset',
+                 'in_array'                     => 'http://www.php.net/in_array',
 
                  'strpos'                         => 'http://www.php.net/strpos',
                  'stripos'                        => 'http://www.php.net/stripos',
@@ -125,6 +169,12 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'uksort'                         => 'http://www.php.net/uksort',
                  'uasort'                         => 'http://www.php.net/uasort',
                  'sort'                           => 'http://www.php.net/sort',
+
+                 'mail'                           => 'http://www.php.net/mail',
+
+                 'header'                         => 'http://www.php.net/header',
+                 'exit'                           => 'http://www.php.net/exit',
+                 'die'                            => 'http://www.php.net/die',
 
                  'exec'                           => 'http://www.php.net/exec',
                  'eval'                           => 'http://www.php.net/eval',
@@ -190,7 +240,6 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
 
                  );
 
-$sqlite = new \Sqlite3('data/analyzers.sqlite');
 
 $query = 'SELECT a.folder || "/" || a.name AS analyzer,GROUP_CONCAT(c.name) analyzers  
                 FROM categories c

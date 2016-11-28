@@ -1,7 +1,7 @@
-Begin : 1458661638.8956
+Begin : 1480360737.0867
 Copy router server
 Start server
 Shut down server (<p>Shutting down server</p>)
-/Users/famille/Desktop/analyze/tests/cli
-Duration : -61.51ms 
-End : 1458661638.9571
+/Users/famille/Desktop/analyzeG3/tests/cli
+Duration : 111.95ms 
+End : 1480360737.1986\Date : Mon, 28 Nov 2016 19:18:57 +0000

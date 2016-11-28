@@ -135,7 +135,7 @@ Label : PROJECT
                 1
               Label : ARGUMENT
                 2
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =
@@ -157,7 +157,7 @@ Label : PROJECT
                 1
               Label : ARGUMENT
                 2
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =
@@ -179,7 +179,7 @@ Label : PROJECT
                 1
               Label : ARGUMENT
                 2
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =
@@ -205,7 +205,7 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =
@@ -231,7 +231,7 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =
@@ -257,7 +257,7 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =
@@ -283,7 +283,7 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =
@@ -309,7 +309,7 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =
@@ -335,7 +335,7 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           =
@@ -361,5 +361,5 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : VARIABLE
+            Label : NAME
               [

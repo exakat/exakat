@@ -54,7 +54,7 @@ class CypherG3 {
     
     private $isLink = false;
     
-    private $cyhper = null;
+    private $cypher = null;
     
     public function __construct() {
         $this->config = Config::factory();

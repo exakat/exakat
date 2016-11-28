@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Data\Methods;
 
 class ShouldPreprocess extends Analyzer {
     public function analyze() {
@@ -31,8 +32,9 @@ class ShouldPreprocess extends Analyzer {
         //'Functioncall' : if they also have only constants.
 
 //'Identifier', 
-        $functionList = $this->loadIni('inert_functions.ini', 'functions');
-        $functionList = $this->makeFullnspath($functionList);
+        $methods = new Methods();
+        $functionList = $methods->getDeterministFunctions();
+        $functionList = $this->makeFullNSPath($functionList);
 
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
             // Functioncall, that are not authorized

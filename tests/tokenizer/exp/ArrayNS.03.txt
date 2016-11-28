@@ -22,5 +22,5 @@ Label : PROJECT
                 'b'
               Label : ARGUMENT
                 'c'
-            Label : VARIABLE
+            Label : NAME
               [

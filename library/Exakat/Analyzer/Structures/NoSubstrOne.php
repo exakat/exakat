@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class NoSubstrOne extends Analyzer {
     public function analyze() {
+        // Don't use substr($x, -1) but $x[-1];
         $this->atomFunctionIs('\\substr')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)

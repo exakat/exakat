@@ -1,0 +1,117 @@
+Begin : 1480360737.1987
+Initializing ut1 with ''
+Empty initialization
+Counting files
+Running files
+No code in project 'ut1'
+Aborting
+project   : ut1
+loc       : 
+tokens    : 
+status    : Not running
+updatable : 
+
+formats   : 
+
+Initializing ut2 with 'https://github.com/sculpin/sculpin.git'
+Git initialization
+Counting files
+Running files
+Check composer
+Check compilation for 55
+Check compilation for 56
+Check compilation for 70
+Check compilation for 71
+Check compilation for 72
+Counting files
+/Users/famille/Desktop/analyzeG3/projects/ut2/code/LICENSE doesn't compile
+Finally ignoring /LICENSE
+/Users/famille/Desktop/analyzeG3/projects/ut2/code/src/Sculpin/Bundle/PostsBundle/LICENSE doesn't compile
+Finally ignoring /src/Sculpin/Bundle/PostsBundle/LICENSE
+/Users/famille/Desktop/analyzeG3/projects/ut2/code/src/Sculpin/Contrib/ProxySourceCollection/LICENSE doesn't compile
+Finally ignoring /src/Sculpin/Contrib/ProxySourceCollection/LICENSE
+/Users/famille/Desktop/analyzeG3/projects/ut2/code/src/Sculpin/Contrib/Taxonomy/LICENSE doesn't compile
+Finally ignoring /src/Sculpin/Contrib/Taxonomy/LICENSE
+/Users/famille/Desktop/analyzeG3/projects/ut2/code/src/Sculpin/Core/LICENSE doesn't compile
+Finally ignoring /src/Sculpin/Core/LICENSE
+files    : 150
+total    : 11419
+tokens   : 33338
+comments : 2968
+code     : 4088
+Counted files
+Check short tag (normal pass)
+Check short tag (with directive activated)
+Short tag OK
+Check config files
+Array
+(
+    [0] => Array
+        (
+            [file] => composer.json
+            [name] => composer
+            [homepage] => https://getcomposer.org/
+        )
+
+    [1] => Array
+        (
+            [file] => composer.lock
+            [name] => composer
+            [homepage] => https://getcomposer.org/
+        )
+
+    [2] => Array
+        (
+            [file] => .git
+            [name] => git
+            [homepage] => https://git-scm.com/
+        )
+
+    [3] => Array
+        (
+            [file] => .gitignore
+            [name] => git
+            [homepage] => https://git-scm.com/
+        )
+
+    [4] => Array
+        (
+            [file] => phpunit.xml.dist
+            [name] => phpunit
+            [homepage] => https://phpunit.de/
+        )
+
+    [5] => Array
+        (
+            [file] => .travis.yml
+            [name] => travis
+            [homepage] => https://travis-ci.org/
+        )
+
+)
+Done
+Array
+(
+    [notCompilable52] => N/C
+    [notCompilable53] => N/C
+    [notCompilable54] => N/C
+    [notCompilable55] => 0
+    [notCompilable56] => 0
+    [notCompilable70] => 0
+    [notCompilable71] => 0
+    [notCompilable72] => 0
+    [php] => 155
+)
+Done
+project    : ut2
+loc        : 4088
+tokens     : 33338
+status     : Not running
+git status : d0ac0a92c8b864351bf1295a6f5ded98c17e815e
+updatable  : 
+
+formats    : 
+
+/Users/famille/Desktop/analyzeG3/tests/cli
+Duration : 13,693.63ms 
+End : 1480360750.8924\Date : Mon, 28 Nov 2016 19:19:10 +0000

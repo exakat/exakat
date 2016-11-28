@@ -34,5 +34,5 @@ Label : PROJECT
                   'E'
                 Label : VALUE
                   F
-            Label : VARIABLE
+            Label : NAME
               [

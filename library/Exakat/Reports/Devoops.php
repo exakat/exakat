@@ -39,9 +39,9 @@ class Devoops extends Reports {
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
     
-    private $dump      = null; // Dump.sqlite
+    protected $dump      = null; // Dump.sqlite
     
-    private $analyzers  = array(); // cache for analyzers [Title] = object
+    protected $analyzers  = array(); // cache for analyzers [Title] = object
     
     public function __construct() {
         parent::__construct();
@@ -120,6 +120,7 @@ class Devoops extends Reports {
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
         
         $this->dump      = new \Sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
+        // This is an overwriting. Leave it here.
         $this->datastore = new \Sqlite3($folder.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
         
         // Compatibility
@@ -266,7 +267,7 @@ HTML;
     ////////////////////////////////////////////////////////////////////////////////////
     // Utilities
     ////////////////////////////////////////////////////////////////////////////////////
-    private function makeSummary($summary, $level = 0) {
+    protected function makeSummary($summary, $level = 0) {
         if ($level === 0) {
             $html = '<ul class="nav main-menu">';
 
@@ -330,7 +331,7 @@ HTML;
         return nl2br(trim(htmlentities($text, ENT_COMPAT | ENT_HTML401 , 'UTF-8')));
     }
 
-    private function makeIcon($tag) {
+    protected function makeIcon($tag) {
         switch($tag) {
             case self::YES : 
                 return '<i class="fa fa-check"></i>';
@@ -345,7 +346,7 @@ HTML;
         }
     }
 
-    private function reportStatus($count) {
+    protected function reportStatus($count) {
         if ($count == Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-stethoscope"></i>';
         } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {
@@ -358,7 +359,7 @@ HTML;
     ////////////////////////////////////////////////////////////////////////////////////
     /// Formatting methods 
     ////////////////////////////////////////////////////////////////////////////////////
-    private function formatCamembert($data, $css) {
+    protected function formatCamembert($data, $css) {
         $datajs = '';
         foreach($data as $k => $v) {
             $datajs .= "{label: \"$k\", value: $v[count]},\n";
@@ -398,7 +399,7 @@ HTML;
         return $html;
     }
     
-    private function formatCompilationTable($data, $css) {
+    protected function formatCompilationTable($data, $css) {
         $th = '<tr>';
         foreach($css->titles as $title) {
             $th .= <<<HTML
@@ -446,7 +447,7 @@ HTML;
         return $text;
     }
     
-    private function formatDashboard($data, $css) {
+    protected function formatDashboard($data, $css) {
         $camembert = $this->formatCamembert($data['upLeft'], $css);
         $infobox = $this->formatInfobox($data['upRight'], $css);
 
@@ -464,7 +465,7 @@ HTML;
                $this->formatRow($top5Severity, $top5Files, $css);
     }
     
-    private function formatDefinitions($data, $css) {
+    protected function formatDefinitions($data, $css) {
         $text = <<<HTML
 													<dl id="dt-list-1" >
 HTML;
@@ -506,7 +507,7 @@ HTML;
         return $text;
     }
 
-    private function formatHashTableLinked($data, $css) {
+    protected function formatHashTableLinked($data, $css) {
         static $counter;
         
         if (!isset($counter)) {
@@ -584,7 +585,7 @@ HTML;
         return $text;
     }
     
-    private function formatHorizontal($data, $css) {
+    protected function formatHorizontal($data, $css) {
         static $counter;
         
         if (!isset($counter)) {
@@ -664,7 +665,7 @@ HTML;
         return $html;
     }
     
-    private function formatInfobox($data, $css) {
+    protected function formatInfobox($data, $css) {
         /*
         $text = <<<HTML
 <div class="row">
@@ -694,7 +695,7 @@ HTML;
         return $html;
     }
     
-    private function formatRow($left, $right, $css) {
+    protected function formatRow($left, $right, $css) {
         $html = <<<HTML
         <div class="row">
         	<div class="col-xs-6">
@@ -709,7 +710,7 @@ HTML;
         return $html;
     }
 
-    private function formatSectionedHashTable($data, $css) {
+    protected function formatSectionedHashTable($data, $css) {
         static $counter;
         
         if (!isset($counter)) {
@@ -757,7 +758,7 @@ HTML;
         return $text;
     }
 
-    private function formatSectionedTable($data, $css) {
+    protected function formatSectionedTable($data, $css) {
         static $counter;
         if (!isset($counter)) {
             $counter = 1;
@@ -818,7 +819,7 @@ HTML;
     }
     
 
-    private function formatSimpleTable($data, $css) {
+    protected function formatSimpleTable($data, $css) {
         $th = '';
         
         if ($css->displayTitles === true) {
@@ -867,7 +868,7 @@ HTML;
         return $text;
     }
 
-    private function formatSimpleTableResultsCount($data, $css) {
+    protected function formatSimpleTableResultsCount($data, $css) {
         static $counter;
         if (!isset($counter)) {
             $counter = 1;
@@ -951,7 +952,7 @@ HTML;
         return $text;
     }
     
-    private function formatText($text, $style = '') {
+    protected function formatText($text, $style = '') {
         $text = $this->prepareText($text);
         
         if (!empty($style)) {
@@ -963,7 +964,7 @@ HTML;
         return '<p'.$class.'>'.$text."</p>\n";
     }
 
-    private function formatTextLead($text) {
+    protected function formatTextLead($text) {
         $text = $this->prepareText($text);
 
         return "<article><p class=\"lead\">".$text."</p></article>\n".
@@ -972,7 +973,7 @@ HTML;
                "<script>$('article').readmore({collapsedHeight: 90});</script>\n";
     }
     
-    private function formatTop5($data, $css) {
+    protected function formatTop5($data, $css) {
         $html = '<p>'.$css->title."</p>\n";
         $html .= <<<HTML
 <table class="table table-striped">
@@ -1012,7 +1013,7 @@ HTML;
         return $html;
     }
 
-    private function formatThemeList($list) {
+    protected function formatThemeList($list) {
         static $figure2Letters = array(1 => 'one', 
                                        2 => 'two', 
                                        3 => 'three', 
@@ -1034,7 +1035,7 @@ HTML;
         return $html . implode(', ', $list);
     }
 
-    private function formatTree($data, $css) {
+    protected function formatTree($data, $css) {
         $text = "<ul>\n";
         foreach($data as $k => $v) {
             $text .= "    <li>$k";
@@ -1058,7 +1059,7 @@ HTML;
     ////////////////////////////////////////////////////////////////////////////////////
     /// Content methods
     ////////////////////////////////////////////////////////////////////////////////////
-    private function AboutThisReport() {
+    protected function AboutThisReport() {
         return $this->formatText( <<<Devoops
             This report has been build, thanks to the following other Open Source projects. 
             
@@ -1078,7 +1079,7 @@ Devoops
 );
     }
 
-    private function AlteredDirectives() {
+    protected function AlteredDirectives() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Directive');
@@ -1097,7 +1098,7 @@ TEXT
                 .$this->formatSimpleTable($data, $css);
     }
     
-    private function Analyzers() {
+    protected function Analyzers() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Analyzer');
@@ -1123,7 +1124,7 @@ TEXT
         return $return;
     }
 
-    private function AnalyzersResultsCounts() {
+    protected function AnalyzersResultsCounts() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Label', 'Count', 'Severity');
@@ -1152,7 +1153,7 @@ SQL
         return $this->formatSimpleTableResultsCount($data, $css);
     }
     
-    private function Appinfo() {
+    protected function Appinfo() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File');
@@ -1517,7 +1518,7 @@ TEXT
         return $return;
     }
 
-    private function AuditConfiguration() {
+    protected function AuditConfiguration() {
         $css = new \Stdclass();
         $css->displayTitles = false;
         $css->titles = array(0, 1);
@@ -1564,7 +1565,7 @@ TEXT
         return $this->formatSimpleTable($info, $css);
     }
 
-    private function Bugfixes() {
+    protected function Bugfixes() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Title', 'Solved In 7.0', 'Solved In 5.6', 'Solved In 5.5', 'Solved In php-src', 'bugs.php.net', 'CVE');
@@ -1619,7 +1620,7 @@ TEXT
         return $this->formatCompilationTable($info, $css);
     }
     
-    private function Bugfixes_cve($cve) {
+    protected function Bugfixes_cve($cve) {
         if (!empty($cve)) {
             if (strpos($cve, ', ') !== false) {
                 $cves = explode(', ', $cve);
@@ -1638,7 +1639,7 @@ TEXT
         return $cveHtml;
     }
 
-    private function Compilation() {
+    protected function Compilation() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Version', 'Count', 'Fraction', 'Files', 'Errors');
@@ -1689,7 +1690,7 @@ TEXT
         return $this->formatCompilationTable($info, $css);
     }
 
-    private function Compatibility($title) {
+    protected function Compatibility($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Feature', 'Status');
@@ -1716,7 +1717,7 @@ TEXT
         return $this->formatHashTableLinked($info, $css);
     }
 
-    private function Dashboard($title) {
+    protected function Dashboard($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Library', 'Folder', 'Home page');
@@ -1776,7 +1777,7 @@ TEXT
         return $this->formatDashboard($info, $css);
     }
 
-    private function Directives() {
+    protected function Directives() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Directive', 'Suggestion', 'Description');
@@ -1833,7 +1834,7 @@ TEXT
                   .$this->formatSectionedTable($data, $css);
     }
 
-    private function Documentation() {
+    protected function Documentation() {
         $css = new \Stdclass();
         $css->displayTitles = true;
 //        $css->titles = array('Library', 'Folder', 'Home page');
@@ -1850,7 +1851,7 @@ TEXT
         return $this->formatDefinitions($data, $css);
     }
     
-    private function DynamicCode() {
+    protected function DynamicCode() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Code');
@@ -1922,7 +1923,7 @@ TEXT
         }
     }
     
-    private function ErrorMessages() {
+    protected function ErrorMessages() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Message');
@@ -1945,7 +1946,7 @@ TEXT
                 .$this->formatSimpleTable($data, $css);
     }
 
-    private function ExternalConfigFiles() {
+    protected function ExternalConfigFiles() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Service', 'File', 'Home page');
@@ -1971,7 +1972,7 @@ TEXT
         
         return $return;    }
     
-    private function ExternalLibraries() {
+    protected function ExternalLibraries() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Library', 'Folder', 'Home page');
@@ -2003,7 +2004,7 @@ TEXT
         return $return;
     }
 
-    private function FilesResultsCounts() {
+    protected function FilesResultsCounts() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File', 'Count');
@@ -2023,7 +2024,7 @@ SQL
         return $this->formatSimpleTableResultsCount($data, $css);
     }
 
-    private function GlobalVariablesList() {
+    protected function GlobalVariablesList() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Code', 'File', 'Line');
@@ -2043,7 +2044,7 @@ TEXT
                 .$this->formatSimpleTable($data, $css);
     }
     
-    private function OneAnalyzer($title) {
+    protected function OneAnalyzer($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Code', 'File', 'Line');
@@ -2073,7 +2074,7 @@ TEXT
         return $return;
     }
 
-    private function OneFile($title) {
+    protected function OneFile($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Code', 'Analyzer', 'Line');
@@ -2100,7 +2101,7 @@ SQL;
         return $return;
     }
         
-    private function NonProcessedFiles() {
+    protected function NonProcessedFiles() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File');
@@ -2130,7 +2131,7 @@ TEXT
         return $return;
     }
     
-    private function ProcessedFiles() {
+    protected function ProcessedFiles() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File');
@@ -2151,7 +2152,7 @@ TEXT
                 .$this->formatSimpleTable($data, $css);
     }
     
-    private function Stats() {
+    protected function Stats() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File');
@@ -2228,7 +2229,7 @@ TEXT
                 .$this->formatSectionedHashTable($data, $css);
     }
     
-    private function prepareText($text) {
+    protected function prepareText($text) {
         $html = nl2br(trim($text));
         
         $html = preg_replace('$(https?://\S+)\.?\s$', '<a href=\"\1\">\1</a>', $html);

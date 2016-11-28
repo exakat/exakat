@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 14 Nov 2016 13:58:34 +0000
-.. comment: Generation hash : edc1a5936fa639eb6b302567744ded06a601f797
+.. comment: Generation date : Mon, 28 Nov 2016 19:32:12 +0000
+.. comment: Generation hash : 96269123760a7787ec7257614cd65ba53ab0e09c
 
 
 .. _$http\_raw\_post\_data:
@@ -735,6 +735,75 @@ As much as possible, avoid delaying the end of the script.
 
 
 
+.. _bail-out-early:
+
+Bail Out Early
+##############
+
+
+When using conditions, it is recommended to return in the then, and avoid else clause. 
+
+The main benefit is to make clear the method applies a condition, and stop quickly went it is not satisfied. 
+The main sequence is then focused on the useful code. 
+
+This works with `break <http://php.net/manual/en/control-structures.break.php>`_, `continue <http://php.net/manual/en/control-structures.continue.php>`_ too, inside loops. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Bailing out early, low level of indentation
+   function foo1($a) {
+       if ($a > 0) {
+           return false;
+       } 
+       
+       $a++;
+       return $a;
+   }
+   
+   // Works with continue too
+   foreach($array as $a => $b) {
+       if ($a > 0) {
+           continue false;
+       } 
+       
+       $a++;
+       return $a;
+   }
+   
+   // No need for else
+   function foo2($a) {
+       if ($a > 0) {
+           return false;
+       } else {
+           $a++;
+       }
+       
+       return $a;
+   }
+   
+   // No need for else : return goes into then. 
+   function foo3($a) {
+       if ($a < 0) {
+           $a++;
+       } else {
+           return false;
+       }
+       
+       return $a;
+   }
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Structures/BailOutEarly |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
+
 .. _binary-glossary:
 
 Binary Glossary
@@ -914,7 +983,9 @@ Calltime Pass By Reference
 ##########################
 
 
-PHP doesn't like anymore when the value is turned into a reference at the moment of function call. Either the function use a reference in its signature, either the reference won't pass.
+PHP doesn't allow when a value is turned into a reference at functioncall, since PHP 5.4. 
+
+Either the function use a reference in its signature, either the reference won't pass.
 
 +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/CalltimePassByReference                                                                                                               |
@@ -1521,6 +1592,40 @@ This global is only used in one function or method. It may be called 'static', i
 
 
 
+.. _could-return-void:
+
+Could Return Void
+#################
+
+
+The following functions may bear the Void return typeHint. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This can be Void
+   function foo(&$a) {
+       ++$a;
+       return; 
+   }
+   
+   // This can't be Void
+   function bar($a) {
+       ++$a;
+       return $a;  
+   }
+   
+   ?>
+
++--------------+---------------------------+
+| Command Line | Functions/CouldReturnVoid |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
+
+
+
 .. _could-use-alias:
 
 Could Use Alias
@@ -1868,6 +1973,45 @@ It is recommended to put the modified values in another variable, and keep the o
 
 
 
+.. _dont-change-the-blind-var:
+
+Dont Change The Blind Var
+#########################
+
+
+When using a `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_, the blind variables are a copy. It is confusing to change them. 
+
+.. code-block:: php
+
+   <?php
+   
+   $foo = [1, 2, 3];
+   foreach($foo as $bar) {
+       // $bar is updated but its final value is lost
+       print $bar . ' => ' . ($bar + 1) . PHP_EOL;
+       // if $bar + 1 is repeated several times, consider assigning it to a variable.
+       foobar($bar + 1);
+   
+   }
+   
+   $foo = [1, 2, 3];
+   foreach($foo as $bar) {
+       // $bar is updated but its final value is lost
+       print $bar . ' => ' . (++$bar) . PHP_EOL;
+       // Now that $bar is reused, it is easy to confuse its value
+       foobar($bar);
+   }
+   
+   ?>
+
++--------------+-------------------------------+
+| Command Line | Structures/DontChangeBlindKey |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
+
+
+
 .. _dont-echo-error:
 
 Dont Echo Error
@@ -1996,9 +2140,13 @@ Echo Or Print
 #############
 
 
-Echo or print, this project made a clear choice, but forgot a few spots.
+Echo and print have the same functional use. <?= is also considered in this analysis. 
 
-Usage of echo and print are counted, and if one of them is below 10%, then the other one is considered dominant and de facto standard. 
+There seems to be a choice that is not enforced : one form is dominent, (> 90%) while the others are rare. 
+
+The analyzed code has less than 10% of one of the three : for consistency reasons, it is recommended to make them all the same. 
+
+It happens that print, echo or <?= are used depending on coding style and files. One `file <http://www.php.net/file>`_ may be consistently using print, while the others are all using echo. 
 
 .. code-block:: php
 
@@ -2521,7 +2669,7 @@ Exit() Usage
 ############
 
 
-Using exit or die() in the code makes the code untestable (it will `break <http://php.net/manual/en/control-structures.break.php>`_ unit tests). Morover, if there is no reason or string to display, it may take a long `time <http://www.php.net/time>`_ to spot where the application is stuck. 
+Using `exit <http://www.php.net/exit>`_ or `die() <http://www.php.net/die>`_ in the code makes the code untestable (it will `break <http://php.net/manual/en/control-structures.break.php>`_ unit tests). Morover, if there is no reason or string to display, it may take a long `time <http://www.php.net/time>`_ to spot where the application is stuck. 
 
 Try exiting the function/class, or `throw <http://www.php.net/throw>`_ exception that may be caught later in the code.
 
@@ -2979,6 +3127,50 @@ Those functions were removed in PHP 5.5.
 | Command Line | Php/Php55RemovedFunctions |
 +--------------+---------------------------+
 | Analyzers    | :ref:`CompatibilityPHP55` |
++--------------+---------------------------+
+
+
+
+.. _getting-last-element:
+
+Getting Last Element
+####################
+
+
+Getting the last element of an array is done with `count() <http://www.php.net/count>`_ or end().
+
+.. code-block:: php
+
+   <?php
+   
+   $array = [1, 2, 3];
+   
+   // Best solutions, just as quick as each other
+   $last = $array[count($array) - 1];
+   $last = end($array);
+   
+   // Bad solutions
+   
+   // popping, but restoring the value. 
+   $last = array_pop($array);
+   $array[] = $last; 
+   
+   // array_unshift would be even worse
+   
+   // reversing array
+   $last = array_reverse($array)[0];
+   
+   // slicing the array
+   $last = array_slice($array, -1)[0]',
+   $last = current(array_slice($array, -1));
+   );
+   
+   ?>
+
++--------------+---------------------------+
+| Command Line | Arrays/GettingLastElement |
++--------------+---------------------------+
+| Analyzers    | :ref:`Performances`       |
 +--------------+---------------------------+
 
 
@@ -3472,13 +3664,43 @@ Constant, when defined using define() function, must follow this regex :::
 
 
 
+.. _invalid-octal-in-string:
+
+Invalid Octal In String
+#######################
+
+
+Starting with PHP 7.1, any octal sequence inside a string can't be beyong 7. Those will be a fatal error at parsing `time <http://www.php.net/time>`_. 
+
+In PHP 7.0 and older, those sequences were silently adapted (divided by 0).
+
+.. code-block:: php
+
+   <?php
+   
+   // Emit no error in PHP 7.1
+   echo 0; // @
+   
+   // Emit an error in PHP 7.1
+   echo 0; // @
+   
+   ?>
+
++--------------+-----------------------------------------------------+
+| Command Line | Type/OctalInString                                  |
++--------------+-----------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+-----------------------------------------------------+
+
+
+
 .. _isset-with-constant:
 
 Isset With Constant
 ###################
 
 
-Until PHP 7, it was possible to use arrays as constants, but it was not possible to test them with isset.
+Until PHP 7, it was possible to use arrays as constants, but it was not possible to test them with `isset <http://www.php.net/isset>`_.
 
 .. code-block:: php
 
@@ -3491,7 +3713,7 @@ Until PHP 7, it was possible to use arrays as constants, but it was not possible
 
 This would yield an error : 
 
-Fatal error: Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in test.php on line 7
+Fatal error: Cannot use `isset() <http://www.php.net/isset>`_ on the result of an expression (you can use "null !== expression" instead) in test.php on line 7
 
 This is a backward incompatibility.
 
@@ -4942,7 +5164,7 @@ No Isset With Empty
 
 Empty() actually does the job of Isset() too. 
 
-From the manual : No warning is generated if the variable does not exist. That means `empty() <http://www.php.net/empty>`_ is essentially the concise equivalent to !isset($var) || $var == false.
+From the manual : No warning is generated if the variable does not exist. That means `empty() <http://www.php.net/empty>`_ is essentially the concise equivalent to !`isset( <http://www.php.net/isset>`_$var) || $var == false.
 
 .. code-block:: php
 
@@ -5172,7 +5394,7 @@ There are two ways to access a byte in a string : substr() and $v[$pos];
 The second one is more readable. It may be up to four times faster, though it is a micro-optimization. 
 It is recommended to use it. 
 
-PHP 7.1 also introduces the support of negative offsets as string index.
+PHP 7.1 also introduces the support of negative offsets as string index : negative offset are also reported here.
 
 .. code-block:: php
 
@@ -5194,11 +5416,11 @@ PHP 7.1 also introduces the support of negative offsets as string index.
 
 Beware that substr() and $v[$pos] are similar, while `mb_substr() <http://www.php.net/mb_substr>`_ is not. The first functions works on bytes, while the latter works on characters.
 
-+--------------+------------------------------------+
-| Command Line | Structures/NoSubstrOne             |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances` |
-+--------------+------------------------------------+
++--------------+--------------------------------------------------------------+
+| Command Line | Structures/NoSubstrOne                                       |
++--------------+--------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`Performances`,:ref:`CompatibilityPHP71` |
++--------------+--------------------------------------------------------------+
 
 
 
@@ -5786,6 +6008,52 @@ List of directives that are removed in PHP 7.0.
 
 
 
+.. _php-7.1-microseconds:
+
+PHP 7.1 Microseconds
+####################
+
+
+PHP 7.1 supports microseconds in DateTime class and date_create() function. 
+
+In previous PHP versions, those dates only used seconds, leading to lazy comparisons : 
+
+.. code-block:: php
+
+   <?php
+   
+   $now = date_create();
+   usleep(10);              // wait for 0.001 ms
+   var_dump($now == date_create());
+   
+   ?>
+
+
+This code displays true in PHP 7.0 and older, (unless the code was run too close from the next second). In PHP 7.1, this is always false.
+
+This is also true with Datetime : 
+
+.. code-block:: php
+
+   <?php
+   
+   $now = new DateTime();
+   usleep(10);              // wait for 0.001 ms
+   var_dump((new DateTime())->format('u') == $now->format('u'));
+   
+   ?>
+
+
+This evolution impacts mostly exact comparisons (== and ===). Non-equality (!= and !==) will probably be always true, and should be reviewed.
+
++--------------+-----------------------------------------------------+
+| Command Line | Php/Php71microseconds                               |
++--------------+-----------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+-----------------------------------------------------+
+
+
+
 .. _php-7.1-removed-directives:
 
 PHP 7.1 Removed Directives
@@ -5844,14 +6112,36 @@ PHP5 Indirect Variable Expression
 
 The following structures are evaluated differently in PHP 5 and 7. It is recommended to review them or switch to a less ambiguous syntax.
 
-See also http://php.net/manual/en/migration70.incompatible.php.
-<table>
-<tr><td>Expression</td><td>PHP 5 interpretation</td><td>PHP 7 interpretation</td></tr>
-<tr><td>$$foo['bar']['baz']</td><td>${$foo['bar']['baz']}</td><td>($$foo)['bar']['baz']</td></tr>
-<tr><td>$foo->$bar['baz']</td><td>$foo->{$bar['baz']}</td><td>($foo->$bar)['baz']</td></tr>
-<tr><td>$foo->$bar['baz']()</td><td>$foo->{$bar['baz']}()</td><td>($foo->$bar)['baz']()</td></tr>
-<tr><td>Foo::$bar['baz']()</td><td>Foo::{$bar['baz']}()</td><td>(Foo::$bar)['baz']()</td></tr>
-</table>
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7 
+   $foo = 'bar';
+   $bar['bar']['baz'] = 'foobarbarbaz';
+   echo $$foo['bar']['baz'];
+   echo ($$foo)['bar']['baz'];
+   
+   // PHP 5
+   $foo['bar']['baz'] = 'bar';
+   $bar = 'foobarbazbar';
+   echo $$foo['bar']['baz'];
+   echo ${$foo['bar']['baz']};
+   
+   ?>
+
+
+
+See also [http://php.net/manual/en/migration70.incompatible.php](http://php.net/manual/en/migration70.incompatible.php).
+
++---------------------+-----------------------+-----------------------+
+| Expression          | PHP 5 interpretation  | PHP 7 interpretation  |
++---------------------+-----------------------+-----------------------+
+|$$foo['bar']['baz']  |${$foo['bar']['baz']}  |($$foo)['bar']['baz']  |
+|$foo->$bar['baz']    |$foo->{$bar['baz']}    |($foo->$bar)['baz']    |
+|$foo->$bar['baz']()  |$foo->{$bar['baz']}()  |($foo->$bar)['baz']()  |
+|Foo::$bar['baz']()   |Foo::{$bar['baz']}()   |(Foo::$bar)['baz']()   |
++---------------------+-----------------------+-----------------------+
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Variables/Php5IndirectExpression                                                                        |
@@ -5992,11 +6282,11 @@ The new class is : ReflectionClassConstant. The other class is 'Void' : this is 
    
    ?>
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php71NewClasses                                                                                                               |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php71NewClasses                                                                                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6179,7 +6469,7 @@ Print And Die
 #############
 
 
-When stopping a script with die() and echo(), it is possible to provide a message as first argument, that will be displayed at execution. There is no need to make a specific call to print or echo.
+When stopping a script with `die() <http://www.php.net/die>`_ and echo(), it is possible to provide a message as first argument, that will be displayed at execution. There is no need to make a specific call to print or echo.
 
 +--------------+------------------------+
 | Command Line | Structures/PrintAndDie |
@@ -6318,7 +6608,23 @@ Redeclared PHP Functions
 ########################
 
 
-Function that bear the same name as a PHP function, and that are declared. This is possible when managing some backward compatibility (emulating some old function), or preparing for newer PHP version (emulating new upcoming function).
+Function that bear the same name as a PHP function, and that are declared. 
+
+This is possible when managing some backward compatibility, like emulating an old function, or preparing for newer PHP version, like emulating new upcoming function.
+
+.. code-block:: php
+
+   <?php
+   
+   if (version_compare(PHP_VERSION, 7.0) > 0) {
+       function split($separator, $string) {
+           return explode($separator, $string);
+       }
+   }
+   
+   print_r( split(' ', '2 3'));
+   
+   ?>
 
 +--------------+---------------------------------+
 | Command Line | Functions/RedeclaredPhpFunction |
@@ -6510,11 +6816,9 @@ Results May Be Missing
 .. code-block:: php
 
    <?php
-   
-           preg_match('/PHP ([0-9\.]+) /', $res, $r);
-           $s = $r[1];
-           // $s may end up null if preg_match fails.
-   
+       preg_match('/PHP ([0-9\.]+) /', $res, $r);
+       $s = $r[1];
+       // $s may end up null if preg_match fails.
    ?>
 
 +--------------+-------------------------------+
@@ -6522,6 +6826,38 @@ Results May Be Missing
 +--------------+-------------------------------+
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
+
+
+
+.. _rethrown-exceptions:
+
+Rethrown Exceptions
+###################
+
+
+Throwing a caught exception is usually useless and dead code.
+
+When exception are caught, they should be processed or transformed, but not rethrown.
+
+Those issues often happen when a catch structure was positioned for debug purposes, but lost its usage later. 
+
+.. code-block:: php
+
+   <?php
+   
+   try {
+       doSomething();
+   } catch (Exception $e) {
+       throw $e;
+   }
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Exceptions/Rethrown          |
++--------------+------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>` |
++--------------+------------------------------+
 
 
 
@@ -7164,6 +7500,27 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
    
    ?>
 
++-------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| Slow Function                                               |  Faster                                                                                                                  | 
++-------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| `array_diff() <http://www.php.net/array_diff>`_             |  `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_                                                  | 
+| `array_intersect() <http://www.php.net/array_intersect>`_   |  `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_                                                  | 
+| `array_key_exists() <http://www.php.net/array_key_exists>`_ |  `isset() <http://www.php.net/isset>`_                                                                                   | 
+| `array_map() <http://www.php.net/array_map>`_               |  `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_                                                  | 
+| `array_search() <http://www.php.net/array_search>`_         |  `array_flip() <http://www.php.net/array_flip>`_ and `isset() <http://www.php.net/isset>`_                               | 
+| `array_udiff() <http://www.php.net/array_udiff>`_           |  Use another way                                                                                                         | 
+| `array_uintersect() <http://www.php.net/array_uintersect>`_ |  Use another way                                                                                                         | 
+| `array_unique() <http://www.php.net/array_unique>`_         |  `array_keys() <http://www.php.net/array_keys>`_ and `array_count_values() <http://www.php.net/array_count_values>`_     | 
+| `array_unshift() <http://www.php.net/array_unshift>`_       |  Use another way                                                                                                         | 
+| `array_walk() <http://www.php.net/array_walk>`_             |  `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_                                                  | 
+| `in_array() <http://www.php.net/in_array>`_                 |  `isset() <http://www.php.net/isset>`_                                                                                   | 
+| `preg_replace() <http://www.php.net/preg_replace>`_         |  `strpos() <http://www.php.net/strpos>`_                                                                                 | 
+| `strstr() <http://www.php.net/strstr>`_                     |  `strpos() <http://www.php.net/strpos>`_                                                                                 | 
+| `uasort() <http://www.php.net/uasort>`_                     |  Use another way                                                                                                         | 
+| `uksort() <http://www.php.net/uksort>`_                     |  Use another way                                                                                                         | 
+| `usort() <http://www.php.net/usort>`_                       |  Use another way                                                                                                         | 
++-------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+
 +--------------+---------------------------------------------------------------------------------------------------------------------+
 | Command Line | Performances/SlowFunctions                                                                                          |
 +--------------+---------------------------------------------------------------------------------------------------------------------+
@@ -7648,24 +8005,6 @@ When the difference is very small, it requires a better way to mesure `time <htt
 
 
 
-.. _true-false-inconsistant-case:
-
-True False Inconsistant Case
-############################
-
-
-Usually, PHP projects choose between ALL CAPS True/False, or all lowercase True/False. Sometimes, the project will have no recommendations. 
-
-When your project use a vast majority of one of the convention, then the analyzer will report all remaining inconsistantly cased constant.
-
-+--------------+------------------------------------------------+
-| Command Line | Constants/InconsistantCase                     |
-+--------------+------------------------------------------------+
-| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
-
-
-
 .. _uncaught-exceptions:
 
 Uncaught Exceptions
@@ -8107,7 +8446,7 @@ Unreachable Code
 
 
 Code may be unreachable, because other instructions prevent its reaching. 
-For example, it be located after `throw <http://www.php.net/throw>`_, return, exit(), die(), goto, `break <http://php.net/manual/en/control-structures.break.php>`_ or `continue <http://php.net/manual/en/control-structures.continue.php>`_ : this way, it cannot be reached, as the previous instruction will divert the engine to another part of the code. 
+For example, it be located after `throw <http://www.php.net/throw>`_, return, `exit() <http://www.php.net/exit>`_, `die() <http://www.php.net/die>`_, goto, `break <http://php.net/manual/en/control-structures.break.php>`_ or `continue <http://php.net/manual/en/control-structures.continue.php>`_ : this way, it cannot be reached, as the previous instruction will divert the engine to another part of the code. 
 
 .. code-block:: php
 
@@ -9085,6 +9424,50 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
 
 
 
+.. _use-wordpress-functions:
+
+Use Wordpress Functions
+#######################
+
+
+Wordpress provides a lot of functions, that replace PHP natives one. It is recommended to used them.
+
+Here is a table of conversion : 
+
+.. Table is ugly, because PHP function will turn into a link. 
+
++---------------------------------------------+---------------------+
+| PHP                                         |  Wordpress          | 
++---------------------------------------------+---------------------+
+| `mail() <http://www.php.net/mail>`_         |  wp_mail()          | 
+| `header() <http://www.php.net/header>`_     |  wp_redirect()      | 
+| `header() <http://www.php.net/header>`_     |  wp_safe_redirect() | 
+| `exit() <http://www.php.net/exit>`_         |  wp_die()           | 
+| `die() <http://www.php.net/die>`_           |  wp_die()           | 
+| `rand() <http://www.php.net/rand>`_         |  wp_rand()          | 
+| `mt_rand() <http://www.php.net/mt_rand>`_   |  wp_rand()          | 
++---------------------------------------------+---------------------+
+
+.. code-block:: php
+
+   <?php
+   
+   // use Wordpress Mail
+   wp_mail('to@exakat.io', 'Mail subject', 'Mail message');
+   
+   // do not use PHP mail
+   mail('to@exakat.io', 'Mail subject', 'Mail message');
+   
+   ?>
+
++--------------+--------------------------+
+| Command Line | Wordpress/UseWpFunctions |
++--------------+--------------------------+
+| Analyzers    | :ref:`Wordpress`         |
++--------------+--------------------------+
+
+
+
 .. _use-const:
 
 Use const
@@ -9181,11 +9564,39 @@ At worse, `rand() <http://www.php.net/rand>`_ should be replaced with `mt_rand()
 Since PHP 7, `random_int() <http://www.php.net/random_int>`_ along with `random_bytes() <http://www.php.net/random_bytes>`_, provides cryptographically secure pseudo-random bytes, which are good to be used
 when security is involved. `openssl_random_pseudo_bytes() <http://www.php.net/openssl_random_pseudo_bytes>`_ may be used when the OpenSSL extension is available.
 
-+--------------+--------------------------------+
-| Command Line | Php/BetterRand                 |
-+--------------+--------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security` |
-+--------------+--------------------------------+
++--------------+------------------------------------------------------------------------------------+
+| Command Line | Php/BetterRand                                                                     |
++--------------+------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`Security`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------------------------------------+
+
+
+
+.. _use-stdclass:
+
+Use stdClass
+############
+
+
+stdClass is the default class for PHP. It is instantiated when PHP needs to return a object, but no class is specifically available.
+
+It is recommended to avoid instantiating this class, nor use it is any way.
+
+.. code-block:: php
+
+   <?php
+   
+   $json = '{a:1,b:2,c:3}';
+   $object = json_decode($json);
+   // $object is a stdClass, as returned by json_decode
+   
+   ?>
+
++--------------+-----------------+
+| Command Line | Php/UseStdclass |
++--------------+-----------------+
+| Analyzers    | :ref:`Analyze`  |
++--------------+-----------------+
 
 
 
@@ -9196,6 +9607,18 @@ Used Once Variables
 
 
 This is the list of used once variables. 
+
+.. code-block:: php
+
+   <?php
+   
+   // The variables below never appear again in the code
+   $writtenOnce = 1;
+   
+   foo($readOnce);
+   
+   ?>
+
 
 Such variables are useless. Variables must be used at least twice : once for writing, once for reading, at least. It is recommended to remove them.
 
@@ -9222,7 +9645,26 @@ Used Once Variables (In Scope)
 ##############################
 
 
-This is the list of used once variables, broken down by scope. Those variables are used once in a function, a method, a class or a namespace. In any case, this means the variable is read or written, while it should be used at least twice.
+This is the list of used once variables, scope by scope. Those variables are used once in a function, a method, a class or a namespace. In any case, this means the variable is read or written, while it should be used at least twice. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       // The variables below never appear twice, inside foo()
+       $writtenOnce = 1;
+   
+       foo($readOnce);
+       // They do appear again in other functions, or in global space. 
+   }
+   
+   function bar() {
+       $writtenOnce = 1;
+       foo($readOnce);
+   }
+   
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------------+
 | Command Line | Variables/VariableUsedOnceByContext                                                                   |
@@ -9734,11 +10176,11 @@ Until PHP 7.1, `$this` may be used as an argument in a function (or a method), a
 
 Starting with PHP 7.1, the PHP engine check thouroughly that $this is used in an appropriate manner, and raise fatal errors in case it isn't.
 
-+--------------+--------------------------------+
-| Command Line | Classes/UsingThisOutsideAClass |
-+--------------+--------------------------------+
-| Analyzers    | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++--------------+--------------------------------------------------------------------+
+| Command Line | Classes/UsingThisOutsideAClass                                     |
++--------------+--------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+--------------------------------------------------------------------+
 
 
 
@@ -9836,7 +10278,22 @@ Variable Global
 ###############
 
 
-Variable global such as global $$foo->bar are valid in PHP 5.6, but no in PHP 7.0. They should be replaced with ${$foo->bar}.
+Variable global such are valid in PHP 5.6, but no in PHP 7.0. They should be replaced with ${$foo->bar}.
+
+.. code-block:: php
+
+   <?php
+   
+   // Forbidden in PHP 7
+   global $normalGlobal;
+   
+   // Forbidden in PHP 7
+   global $$variable->global ;
+   
+   // Tolerated in PHP 7
+   global ${$variable->global};
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/VariableGlobal                                                                               |
@@ -10259,6 +10716,22 @@ Extension ext/fdf
 
 
 
+.. _ext/mcrypt:
+
+ext/mcrypt
+##########
+
+
+Extension ext/mcrypt
+
++--------------+-----------------------------------------------------+
+| Command Line | Extensions/Extmcrypt                                |
++--------------+-----------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+-----------------------------------------------------+
+
+
+
 .. _ext/ming:
 
 ext/ming
@@ -10510,10 +10983,10 @@ preg_replace With Option e
    <?php
    
    // preg_replace with /e
-   $string = abcde;
+   $string = 'abcde';
    
    // PHP 5.6 and older usage of /e
-   $replaced = preg_replace(/c/e, 'strtoupper(.. comment: Rules details
+   $replaced = preg_replace('/c/e', 'strtoupper(.. comment: Rules details
 .. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
 .. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
 
@@ -10521,20 +10994,18 @@ preg_replace With Option e
    
    // PHP 7.0 and more recent
    // With one replacement
-   $replaced = preg_replace_callback(/c/, function ($x) { return strtoupper($x[0]); }, $string);
+   $replaced = preg_replace_callback('/c/', function ($x) { return strtoupper($x[0]); }, $string);
    
    // With several replacements, preventing multiple calls to preg_replace_callback
-   $replaced = preg_replace_callback_array(array(/c/ => function ($x) { return strtoupper($x[0]); },
-                                           /[a-b]/ => function ($x) { return strtolower($x[0]); }), $string);
-   
-   
+   $replaced = preg_replace_callback_array(array('/c/' => function ($x) { return strtoupper($x[0]); },
+                                                 '/[a-b]/' => function ($x) { return strtolower($x[0]); }), $string);
    ?>
 
-+--------------+------------------------------------------------------------------------------------+
-| Command Line | Structures/pregOptionE                                                             |
-+--------------+------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`Security`,:ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------------------------------+
++--------------+--------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/pregOptionE                                                                                       |
++--------------+--------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`Security`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+--------------------------------------------------------------------------------------------------------------+
 
 
 

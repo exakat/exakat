@@ -16,7 +16,7 @@ Label : PROJECT
               [
               Label : ARGUMENT
                 Void
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           return
@@ -26,7 +26,7 @@ Label : PROJECT
               [
               Label : ARGUMENT
                 1
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           return
@@ -40,7 +40,7 @@ Label : PROJECT
                 3
               Label : ARGUMENT
                 4
-            Label : VARIABLE
+            Label : NAME
               [
         Label : ELEMENT
           return
@@ -54,7 +54,7 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     Void
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : ARGUMENT
                 [
@@ -62,7 +62,7 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     Void
-                Label : VARIABLE
+                Label : NAME
                   [
               Label : ARGUMENT
                 [
@@ -70,7 +70,7 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     Void
-                Label : VARIABLE
+                Label : NAME
                   [
-            Label : VARIABLE
+            Label : NAME
               [

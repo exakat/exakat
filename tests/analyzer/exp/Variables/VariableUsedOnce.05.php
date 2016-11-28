@@ -4,12 +4,13 @@ $expected     = array('$source1',
                       '$source2', 
                       '$source3', 
                       '$source4',
-                      '$blindKeyButUsed', 
+                      '$blind', 
+                      '$blindKey', 
+                      '$blindValue',
+);
+
+$expected_not = array('$blindKeyButUsed', 
                       '$blindButUsed', 
                       '$blindValueButUsed' );
-
-$expected_not = array('$blind', 
-                      '$blindKey', 
-                      '$blindValue', );
 
 ?>

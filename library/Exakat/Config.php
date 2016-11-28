@@ -22,6 +22,7 @@
 
 namespace Exakat;
 
+use Exakat\Config;
 use Exakat\Phpexec;
 
 class Config {
@@ -75,9 +76,7 @@ class Config {
                                             'project'        => 'default',
                                             'program'        => null,
                                             'repository'     => false,
-                                            'thema'          => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
-                                                                      'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
-                                                                      'Analyze'),
+                                            'thema'          => null,
                                             'report'         => 'Premier',
                                             'format'         => 'Text',
                                             'file'           => 'stdout',
@@ -232,7 +231,7 @@ class Config {
             }
             return static::$singleton;
         } else {
-            if (is_object($argv) && ($argv instanceof \Exakat\Config)) {
+            if (is_object($argv) && ($argv instanceof Config)) {
                 self::$singleton = $argv;
             } else {
                 self::$singleton = new self($argv);
