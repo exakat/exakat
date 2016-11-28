@@ -80,6 +80,7 @@ Glossary
 
     + `array_unshift`
 
+      + :ref:`Getting Last Element <getting-last-element>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_walk`
@@ -145,6 +146,7 @@ Glossary
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`Common Alternatives <common-alternatives>`
       + :ref:`For Using Functioncall <for-using-functioncall>`
+      + :ref:`Getting Last Element <getting-last-element>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`Static Loop <static-loop>`
       + :ref:`Used Once Variables <used-once-variables>`
@@ -535,6 +537,7 @@ Glossary
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
       + :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
+      + :ref:`Rethrown Exceptions <rethrown-exceptions>`
       + :ref:`Should Chain Exception <should-chain-exception>`
       + :ref:`Switch Without Default <switch-without-default>`
       + :ref:`Throw Functioncall <throw-functioncall>`
@@ -556,6 +559,7 @@ Glossary
       + :ref:`Eval() Usage <eval()-usage>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
+      + :ref:`Invalid Octal In String <invalid-octal-in-string>`
       + :ref:`Multiple Class Declarations <multiple-class-declarations>`
       + :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
       + :ref:`No Count With 0 <no-count-with-0>`

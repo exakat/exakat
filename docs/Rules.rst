@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 21 Nov 2016 21:45:27 +0000
-.. comment: Generation hash : 6bc5976dc83c4f58ea2ddcac18c9fddd3f0e5a0b
+.. comment: Generation date : Mon, 28 Nov 2016 19:32:12 +0000
+.. comment: Generation hash : 96269123760a7787ec7257614cd65ba53ab0e09c
 
 
 .. _$http\_raw\_post\_data:
@@ -983,7 +983,9 @@ Calltime Pass By Reference
 ##########################
 
 
-PHP doesn't like anymore when the value is turned into a reference at the moment of function call. Either the function use a reference in its signature, either the reference won't pass.
+PHP doesn't allow when a value is turned into a reference at functioncall, since PHP 5.4. 
+
+Either the function use a reference in its signature, either the reference won't pass.
 
 +--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/CalltimePassByReference                                                                                                               |
@@ -1587,6 +1589,40 @@ This global is only used in one function or method. It may be called 'static', i
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
+
+
+
+.. _could-return-void:
+
+Could Return Void
+#################
+
+
+The following functions may bear the Void return typeHint. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This can be Void
+   function foo(&$a) {
+       ++$a;
+       return; 
+   }
+   
+   // This can't be Void
+   function bar($a) {
+       ++$a;
+       return $a;  
+   }
+   
+   ?>
+
++--------------+---------------------------+
+| Command Line | Functions/CouldReturnVoid |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
 
 
 
@@ -3095,6 +3131,50 @@ Those functions were removed in PHP 5.5.
 
 
 
+.. _getting-last-element:
+
+Getting Last Element
+####################
+
+
+Getting the last element of an array is done with `count() <http://www.php.net/count>`_ or end().
+
+.. code-block:: php
+
+   <?php
+   
+   $array = [1, 2, 3];
+   
+   // Best solutions, just as quick as each other
+   $last = $array[count($array) - 1];
+   $last = end($array);
+   
+   // Bad solutions
+   
+   // popping, but restoring the value. 
+   $last = array_pop($array);
+   $array[] = $last; 
+   
+   // array_unshift would be even worse
+   
+   // reversing array
+   $last = array_reverse($array)[0];
+   
+   // slicing the array
+   $last = array_slice($array, -1)[0]',
+   $last = current(array_slice($array, -1));
+   );
+   
+   ?>
+
++--------------+---------------------------+
+| Command Line | Arrays/GettingLastElement |
++--------------+---------------------------+
+| Analyzers    | :ref:`Performances`       |
++--------------+---------------------------+
+
+
+
 .. _global-inside-loop:
 
 Global Inside Loop
@@ -3581,6 +3661,36 @@ Constant, when defined using define() function, must follow this regex :::
 +--------------+-----------------------+
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
+
+
+
+.. _invalid-octal-in-string:
+
+Invalid Octal In String
+#######################
+
+
+Starting with PHP 7.1, any octal sequence inside a string can't be beyong 7. Those will be a fatal error at parsing `time <http://www.php.net/time>`_. 
+
+In PHP 7.0 and older, those sequences were silently adapted (divided by 0).
+
+.. code-block:: php
+
+   <?php
+   
+   // Emit no error in PHP 7.1
+   echo 0; // @
+   
+   // Emit an error in PHP 7.1
+   echo 0; // @
+   
+   ?>
+
++--------------+-----------------------------------------------------+
+| Command Line | Type/OctalInString                                  |
++--------------+-----------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+-----------------------------------------------------+
 
 
 
@@ -5284,7 +5394,7 @@ There are two ways to access a byte in a string : substr() and $v[$pos];
 The second one is more readable. It may be up to four times faster, though it is a micro-optimization. 
 It is recommended to use it. 
 
-PHP 7.1 also introduces the support of negative offsets as string index.
+PHP 7.1 also introduces the support of negative offsets as string index : negative offset are also reported here.
 
 .. code-block:: php
 
@@ -5306,11 +5416,11 @@ PHP 7.1 also introduces the support of negative offsets as string index.
 
 Beware that substr() and $v[$pos] are similar, while `mb_substr() <http://www.php.net/mb_substr>`_ is not. The first functions works on bytes, while the latter works on characters.
 
-+--------------+------------------------------------+
-| Command Line | Structures/NoSubstrOne             |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances` |
-+--------------+------------------------------------+
++--------------+--------------------------------------------------------------+
+| Command Line | Structures/NoSubstrOne                                       |
++--------------+--------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`Performances`,:ref:`CompatibilityPHP71` |
++--------------+--------------------------------------------------------------+
 
 
 
@@ -6002,14 +6112,36 @@ PHP5 Indirect Variable Expression
 
 The following structures are evaluated differently in PHP 5 and 7. It is recommended to review them or switch to a less ambiguous syntax.
 
-See also http://php.net/manual/en/migration70.incompatible.php.
-<table>
-<tr><td>Expression</td><td>PHP 5 interpretation</td><td>PHP 7 interpretation</td></tr>
-<tr><td>$$foo['bar']['baz']</td><td>${$foo['bar']['baz']}</td><td>($$foo)['bar']['baz']</td></tr>
-<tr><td>$foo->$bar['baz']</td><td>$foo->{$bar['baz']}</td><td>($foo->$bar)['baz']</td></tr>
-<tr><td>$foo->$bar['baz']()</td><td>$foo->{$bar['baz']}()</td><td>($foo->$bar)['baz']()</td></tr>
-<tr><td>Foo::$bar['baz']()</td><td>Foo::{$bar['baz']}()</td><td>(Foo::$bar)['baz']()</td></tr>
-</table>
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7 
+   $foo = 'bar';
+   $bar['bar']['baz'] = 'foobarbarbaz';
+   echo $$foo['bar']['baz'];
+   echo ($$foo)['bar']['baz'];
+   
+   // PHP 5
+   $foo['bar']['baz'] = 'bar';
+   $bar = 'foobarbazbar';
+   echo $$foo['bar']['baz'];
+   echo ${$foo['bar']['baz']};
+   
+   ?>
+
+
+
+See also [http://php.net/manual/en/migration70.incompatible.php](http://php.net/manual/en/migration70.incompatible.php).
+
++---------------------+-----------------------+-----------------------+
+| Expression          | PHP 5 interpretation  | PHP 7 interpretation  |
++---------------------+-----------------------+-----------------------+
+|$$foo['bar']['baz']  |${$foo['bar']['baz']}  |($$foo)['bar']['baz']  |
+|$foo->$bar['baz']    |$foo->{$bar['baz']}    |($foo->$bar)['baz']    |
+|$foo->$bar['baz']()  |$foo->{$bar['baz']}()  |($foo->$bar)['baz']()  |
+|Foo::$bar['baz']()   |Foo::{$bar['baz']}()   |(Foo::$bar)['baz']()   |
++---------------------+-----------------------+-----------------------+
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Variables/Php5IndirectExpression                                                                        |
@@ -6150,11 +6282,11 @@ The new class is : ReflectionClassConstant. The other class is 'Void' : this is 
    
    ?>
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php71NewClasses                                                                                                               |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php71NewClasses                                                                                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6476,7 +6608,23 @@ Redeclared PHP Functions
 ########################
 
 
-Function that bear the same name as a PHP function, and that are declared. This is possible when managing some backward compatibility (emulating some old function), or preparing for newer PHP version (emulating new upcoming function).
+Function that bear the same name as a PHP function, and that are declared. 
+
+This is possible when managing some backward compatibility, like emulating an old function, or preparing for newer PHP version, like emulating new upcoming function.
+
+.. code-block:: php
+
+   <?php
+   
+   if (version_compare(PHP_VERSION, 7.0) > 0) {
+       function split($separator, $string) {
+           return explode($separator, $string);
+       }
+   }
+   
+   print_r( split(' ', '2 3'));
+   
+   ?>
 
 +--------------+---------------------------------+
 | Command Line | Functions/RedeclaredPhpFunction |
@@ -6668,11 +6816,9 @@ Results May Be Missing
 .. code-block:: php
 
    <?php
-   
-           preg_match('/PHP ([0-9\.]+) /', $res, $r);
-           $s = $r[1];
-           // $s may end up null if preg_match fails.
-   
+       preg_match('/PHP ([0-9\.]+) /', $res, $r);
+       $s = $r[1];
+       // $s may end up null if preg_match fails.
    ?>
 
 +--------------+-------------------------------+
@@ -6680,6 +6826,38 @@ Results May Be Missing
 +--------------+-------------------------------+
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
+
+
+
+.. _rethrown-exceptions:
+
+Rethrown Exceptions
+###################
+
+
+Throwing a caught exception is usually useless and dead code.
+
+When exception are caught, they should be processed or transformed, but not rethrown.
+
+Those issues often happen when a catch structure was positioned for debug purposes, but lost its usage later. 
+
+.. code-block:: php
+
+   <?php
+   
+   try {
+       doSomething();
+   } catch (Exception $e) {
+       throw $e;
+   }
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Exceptions/Rethrown          |
++--------------+------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>` |
++--------------+------------------------------+
 
 
 
@@ -9386,11 +9564,39 @@ At worse, `rand() <http://www.php.net/rand>`_ should be replaced with `mt_rand()
 Since PHP 7, `random_int() <http://www.php.net/random_int>`_ along with `random_bytes() <http://www.php.net/random_bytes>`_, provides cryptographically secure pseudo-random bytes, which are good to be used
 when security is involved. `openssl_random_pseudo_bytes() <http://www.php.net/openssl_random_pseudo_bytes>`_ may be used when the OpenSSL extension is available.
 
-+--------------+--------------------------------+
-| Command Line | Php/BetterRand                 |
-+--------------+--------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security` |
-+--------------+--------------------------------+
++--------------+------------------------------------------------------------------------------------+
+| Command Line | Php/BetterRand                                                                     |
++--------------+------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`Security`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------------------------------------+
+
+
+
+.. _use-stdclass:
+
+Use stdClass
+############
+
+
+stdClass is the default class for PHP. It is instantiated when PHP needs to return a object, but no class is specifically available.
+
+It is recommended to avoid instantiating this class, nor use it is any way.
+
+.. code-block:: php
+
+   <?php
+   
+   $json = '{a:1,b:2,c:3}';
+   $object = json_decode($json);
+   // $object is a stdClass, as returned by json_decode
+   
+   ?>
+
++--------------+-----------------+
+| Command Line | Php/UseStdclass |
++--------------+-----------------+
+| Analyzers    | :ref:`Analyze`  |
++--------------+-----------------+
 
 
 
@@ -9401,6 +9607,18 @@ Used Once Variables
 
 
 This is the list of used once variables. 
+
+.. code-block:: php
+
+   <?php
+   
+   // The variables below never appear again in the code
+   $writtenOnce = 1;
+   
+   foo($readOnce);
+   
+   ?>
+
 
 Such variables are useless. Variables must be used at least twice : once for writing, once for reading, at least. It is recommended to remove them.
 
@@ -9427,7 +9645,26 @@ Used Once Variables (In Scope)
 ##############################
 
 
-This is the list of used once variables, broken down by scope. Those variables are used once in a function, a method, a class or a namespace. In any case, this means the variable is read or written, while it should be used at least twice.
+This is the list of used once variables, scope by scope. Those variables are used once in a function, a method, a class or a namespace. In any case, this means the variable is read or written, while it should be used at least twice. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       // The variables below never appear twice, inside foo()
+       $writtenOnce = 1;
+   
+       foo($readOnce);
+       // They do appear again in other functions, or in global space. 
+   }
+   
+   function bar() {
+       $writtenOnce = 1;
+       foo($readOnce);
+   }
+   
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------------+
 | Command Line | Variables/VariableUsedOnceByContext                                                                   |
@@ -9939,11 +10176,11 @@ Until PHP 7.1, `$this` may be used as an argument in a function (or a method), a
 
 Starting with PHP 7.1, the PHP engine check thouroughly that $this is used in an appropriate manner, and raise fatal errors in case it isn't.
 
-+--------------+--------------------------------+
-| Command Line | Classes/UsingThisOutsideAClass |
-+--------------+--------------------------------+
-| Analyzers    | :ref:`Analyze`                 |
-+--------------+--------------------------------+
++--------------+--------------------------------------------------------------------+
+| Command Line | Classes/UsingThisOutsideAClass                                     |
++--------------+--------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+--------------------------------------------------------------------+
 
 
 
@@ -10041,7 +10278,22 @@ Variable Global
 ###############
 
 
-Variable global such as global $$foo->bar are valid in PHP 5.6, but no in PHP 7.0. They should be replaced with ${$foo->bar}.
+Variable global such are valid in PHP 5.6, but no in PHP 7.0. They should be replaced with ${$foo->bar}.
+
+.. code-block:: php
+
+   <?php
+   
+   // Forbidden in PHP 7
+   global $normalGlobal;
+   
+   // Forbidden in PHP 7
+   global $$variable->global ;
+   
+   // Tolerated in PHP 7
+   global ${$variable->global};
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/VariableGlobal                                                                               |
@@ -10464,6 +10716,22 @@ Extension ext/fdf
 
 
 
+.. _ext/mcrypt:
+
+ext/mcrypt
+##########
+
+
+Extension ext/mcrypt
+
++--------------+-----------------------------------------------------+
+| Command Line | Extensions/Extmcrypt                                |
++--------------+-----------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+-----------------------------------------------------+
+
+
+
 .. _ext/ming:
 
 ext/ming
@@ -10718,7 +10986,11 @@ preg_replace With Option e
    $string = 'abcde';
    
    // PHP 5.6 and older usage of /e
-   $replaced = preg_replace('/c/e', 'strtoupper($0)', $string);
+   $replaced = preg_replace('/c/e', 'strtoupper(.. comment: Rules details
+.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
+.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
+
+)', $string);
    
    // PHP 7.0 and more recent
    // With one replacement
@@ -10729,11 +11001,11 @@ preg_replace With Option e
                                                  '/[a-b]/' => function ($x) { return strtolower($x[0]); }), $string);
    ?>
 
-+--------------+------------------------------------------------------------------------------------+
-| Command Line | Structures/pregOptionE                                                             |
-+--------------+------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`Security`,:ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------------------------------+
++--------------+--------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/pregOptionE                                                                                       |
++--------------+--------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`Security`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
++--------------+--------------------------------------------------------------------------------------------------------------+
 
 
 
