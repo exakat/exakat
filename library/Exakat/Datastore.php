@@ -39,6 +39,11 @@ class Datastore {
     public function __construct(Config $config, $create = self::REUSE) {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
         
+        // if project dir isn't created, we are about to create it.
+        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
+            return;
+        }
+
         if ($create === self::CREATE) {
             if (file_exists($this->sqlitePath)) {
                 unlink($this->sqlitePath);
