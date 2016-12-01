@@ -51,7 +51,7 @@ abstract class Analyzer {
     static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
 
-    protected $phpVersion       = 'Any';
+    protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
     
     private $path_tmp           = null;
@@ -69,6 +69,8 @@ abstract class Analyzer {
     const T_QUICK   = 'Quick';   //30';
     const T_SLOW    = 'Slow';    //60';
     const T_LONG    = 'Long';    //360';
+    
+    const PHP_VERSION_ANY = 'Any';
 
     static public $CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
     static public $LITERALS   = array('Integer', 'Real', 'Null', 'Boolean', 'String');
@@ -355,7 +357,7 @@ GREMLIN;
     
     public function checkPhpVersion($version) {
         // this handles Any version of PHP
-        if ($this->phpVersion === 'Any') {
+        if ($this->phpVersion === self::PHP_VERSION_ANY) {
             return true;
         }
 
