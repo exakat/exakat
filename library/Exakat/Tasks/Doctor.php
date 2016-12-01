@@ -63,6 +63,7 @@ class Doctor extends Tasks {
         $stats['exakat']['build'] = Exakat::BUILD;
 
         // check for PHP
+        $stats['PHP']['binary']    = $config->php;
         $stats['PHP']['version']   = phpversion();
         $stats['PHP']['curl']      = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
         $stats['PHP']['hash']      = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
@@ -216,6 +217,8 @@ class Doctor extends Tasks {
                 // This Neo4J has no 'scripts' folder and we use it! Not our database
                 $neo4j_folder = 'neo4j'; // Local Installation
             }
+            $php = $config->php;
+
             $ini = <<<INI
 ; where and which PHP executable are available
 neo4j_host     = '127.0.0.1';
@@ -225,7 +228,7 @@ neo4j_login    = 'admin';
 neo4j_password = 'admin';
 
 ; where and which PHP executable are available
-php          = {$_SERVER['_']}
+php          = "$php"
 
 ;php52        = /path/to/php53
 ;php53        = /path/to/php53
@@ -385,8 +388,8 @@ INI;
         if (!$config) {
             $stats['configured'] = 'No';
         } else {
-            $stats['configured'] = 'Yes';
-            $php = new Phpexec($config);
+            $stats['configured'] = 'Yes ('.$config.')';
+            $php = new Phpexec($displayedVersion);
             $version = $php->getVersion();
             if (strpos($version, 'not found') !== false) {
                 $stats['installed'] = 'No';
