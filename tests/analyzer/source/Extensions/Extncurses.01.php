@@ -1,0 +1,3 @@
+<?php
+ncurses_noecho( );
+?>
