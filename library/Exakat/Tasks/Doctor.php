@@ -386,7 +386,7 @@ INI;
             $stats['configured'] = 'No';
         } else {
             $stats['configured'] = 'Yes';
-            $php = new Phpexec($config);
+            $php = new Phpexec($displayedVersion);
             $version = $php->getVersion();
             if (strpos($version, 'not found') !== false) {
                 $stats['installed'] = 'No';
