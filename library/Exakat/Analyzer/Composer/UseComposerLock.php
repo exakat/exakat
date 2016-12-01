@@ -25,7 +25,7 @@ namespace Exakat\Analyzer\Composer;
 
 use Exakat\Analyzer\Analyzer;
 
-class UseComposer extends Analyzer {
+class UseComposerLock extends Analyzer {
     public function analyze() {
         return true;
     }
