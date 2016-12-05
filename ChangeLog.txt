@@ -1,4 +1,4 @@
-Version 0.9.2 (Golden Haired Hou, Coming up)
+Version 0.9.3 (Purple-Gold Bells, Coming up)
 + Architecture
     + 
 + Report
@@ -8,6 +8,22 @@ Version 0.9.2 (Golden Haired Hou, Coming up)
 + Tokenizer
     + 
 
+Version 0.9.2 (Golden Haired Hou, 2016-12-05)
++ Architecture
+    + First version of Exakat for docker (beta)
+    + Added a waiting loop in cleandb
+    + Docs include a list of new analyzers per version
++ Report
+    + Added 2 first inventories, Appinfo() in Ambassador
+    + Favorites now reports global/$GLOBALS
+    + Restore composer.lock report
+    + Upgraded uselessReturn for the final return. 
++ Analyzer
+    + New analyzers for Newt, Nsapi, 
+    + New analyzer : __ in methods names
+    + New analyzer : Too many local variables
+    + New analyzer : Avoid array_push()
+    + Upgraded ext/apache coverage
 Version 0.9.1 (Sai Tai Sui, 2016-11-28)
 + Architecture
     + Docker supported in exakat/config.ini for PHP binaries. 
