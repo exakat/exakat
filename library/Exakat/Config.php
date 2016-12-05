@@ -194,6 +194,9 @@ class Config {
         $configFile = $this->projects_root.'/config/exakat.ini'; 
         if (file_exists($this->projects_root.'/config/exakat.ini')) {
             $this->configFile = parse_ini_file($configFile);
+            if (empty($this->configFile['php'])) {
+                $this->configFile['php'] = !isset($_SERVER['_']) ? $_SERVER['_'] : '/usr/bin/env php ';
+            }
         } else {
             $configFile = $this->projects_root.'/config/config-default.ini'; 
             if (file_exists($configFile)) {
@@ -306,11 +309,11 @@ class Config {
         $defaults = array( 'ignore_dirs'        => array('/test', '/tests', '/Tests', '/Test', '/example', '/examples', '/docs', '/doc', '/tmp', '/version', '/vendor', '/js', '/lang', '/data', '/css', '/cache', '/vendor', '/assets', '/spec', '/sql'),
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => PHP_VERSION,
-                           'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp')
+                           'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
                            );
         
         foreach($defaults as $name => $value) {
-            if (!isset($this->projectConfig[$name]) || empty($this->projectConfig[$name])) {
+            if (empty($this->projectConfig[$name])) {
                 $this->projectConfig[$name] = $value;
             }
         }

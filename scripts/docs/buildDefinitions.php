@@ -50,10 +50,14 @@ foreach( (array) $json as $library) {
 $library_list = join("\n", $library_list);
 
 
+$analyzer_introduction = generateAnalyzerList();
+
 // More to come,and automate collection too
-$attributes = array('ANALYZERS_COUNT' => $analyzer_count,
-                    'EXTENSION_LIST' => $extension_list,
-                    'LIBRARY_LIST' => $library_list);
+$attributes = array('ANALYZERS_COUNT'       => $analyzer_count,
+                    'EXTENSION_LIST'        => $extension_list,
+                    'LIBRARY_LIST'          => $library_list,
+                    'ANALYZER_INTRODUCTION' => $analyzer_introduction
+                    );
 
 shell_exec('rm docs/*.rst');
 
@@ -457,5 +461,33 @@ function glossary($title,$description) {
     return $description;
 }
 
+function generateAnalyzerList() {
+    $files = glob('./human/en/*/*.ini');
+    
+    $versions = array();
+    foreach($files as $file) {
+        $ini = parse_ini_file($file);
+        if (empty($ini['exakatSince'])) {
+            print $file."\n";
+            continue;
+        }
+        if (isset($versions[$ini['exakatSince']])) {
+            $versions[$ini['exakatSince']][] = $ini['name'].' ('.basename(dirname($file)).'/'.substr(basename($file), 0, -4).')';
+        } else {
+            $versions[$ini['exakatSince']] = array($ini['name'].' ('.basename(dirname($file)).'/'.substr(basename($file), 0, -4).')');
+        }
+    }
+    krsort($versions);
+    
+    $list = "\n";
+    foreach($versions as $version => $analyzers) {
+        $list .= '* '.$version."\n";
+        sort($analyzers);
+        $list .= '  * '.implode("\n  * ", $analyzers)."\n";
+    }
+    $list .= "\n";
+
+    return $list;
+}
 
 ?>

@@ -50,7 +50,7 @@ class Status extends Tasks {
                 $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
                 $status = array('Running'  => 'Project',
                                 'project'  => $json->project,
-                                'in graph' => $res->results[0],
+                                'in graph' => isset($res->results[0]) ? $res->results[0] : '<N/A>',
                                 'step'     => $json->step,);
             } else {
                 $status['Running'] = 'idle';

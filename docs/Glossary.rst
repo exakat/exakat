@@ -148,6 +148,7 @@ Glossary
       + :ref:`For Using Functioncall <for-using-functioncall>`
       + :ref:`Getting Last Element <getting-last-element>`
       + :ref:`No Count With 0 <no-count-with-0>`
+      + :ref:`Performances/AvoidArrayPush <performances/avoidarraypush>`
       + :ref:`Static Loop <static-loop>`
       + :ref:`Used Once Variables <used-once-variables>`
       + :ref:`Uses Default Values <uses-default-values>`
@@ -219,6 +220,7 @@ Glossary
       + :ref:`Use Positive Condition <use-positive-condition>`
       + :ref:`Useless Check <useless-check>`
       + :ref:`Useless Constructor <useless-constructor>`
+      + :ref:`Useless Return <useless-return>`
       + :ref:`parse_str() Warning <parse\_str()-warning>`
 
     + `error_clear_last`
@@ -340,6 +342,7 @@ Glossary
 
     + `instanceof`
 
+      + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Avoid get_class() <avoid-get\_class()>`
       + :ref:`Should Make Alias <should-make-alias>`
       + :ref:`Undefined Interfaces <undefined-interfaces>`
@@ -433,6 +436,7 @@ Glossary
 
       + :ref:`Results May Be Missing <results-may-be-missing>`
       + :ref:`Simplify Regex <simplify-regex>`
+      + :ref:`Unkown Regex Options <unkown-regex-options>`
 
     + `preg_replace`
 
@@ -638,6 +642,7 @@ Glossary
 
     + `__METHOD__`
 
+      + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 
     + `__call`
@@ -651,12 +656,14 @@ Glossary
 
     + `__construct`
 
+      + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`
       + :ref:`Old Style Constructor <old-style-constructor>`
       + :ref:`Redefined Default <redefined-default>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
       + :ref:`Unitialized Properties <unitialized-properties>`
+      + :ref:`Useless Return <useless-return>`
 
     + `__debugInfo`
 

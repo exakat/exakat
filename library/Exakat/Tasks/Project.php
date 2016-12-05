@@ -126,7 +126,7 @@ class Project extends Tasks {
                                'project' => $config->project));
 
         // Dump is a child process
-        echo shell_exec($config->php . ' '.$config->executable.' dump -p '.$config->project);
+        shell_exec($config->php . ' '.$config->executable.' dump -p '.$config->project);
 
         foreach($this->themes as $theme) {
             $this->addSnitch(array('step' => 'Analyze : '.$theme, 'project' => $config->project));

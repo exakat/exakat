@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UseNullableType extends Analyzer {
+    protected $phpVersion = '7.1+';
+    
     public function analyze() {
         // Return type
         $this->atomIs('Function')

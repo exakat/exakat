@@ -1,12 +1,13 @@
 <?php
 
 class x {
-    function __constructor() {
+    function __construct() {
         $a ++;
         $b += 2;
-        return;
+        return $this;
     }
 
+    // Destructor is on purpose
     function __destructor() {
         return null;
     }
@@ -24,4 +25,19 @@ class x {
     }
 }
 
+class y {
+    function __construct($y) {
+        $a ++;
+        $b += 2;
+        return ;
+    }
+}
+
+class z {
+    function __construct($z) {
+        $a ++;
+        $b += 2;
+        return null;
+    }
+}
 ?>

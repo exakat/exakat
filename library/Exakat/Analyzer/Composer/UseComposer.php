@@ -32,7 +32,7 @@ class UseComposer extends Analyzer {
 
     public function toArray() {
         Analyzer::initDocs();
-        $report = array('composer' => Analyzer::$datastore->getHash('composer.json'));
+        $report = array('composer.json' => Analyzer::$datastore->getHash('composer.json'));
 
         return $report;
     }

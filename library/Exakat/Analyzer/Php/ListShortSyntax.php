@@ -28,6 +28,7 @@ class ListShortSyntax extends Analyzer {
     protected $phpVersion = '7.1+';
 
     public function analyze() {
+        // [$a, $b] = [1, 2], insteead of list($a, $b);
         $this->atomIs('Assignation')
              ->outIs('LEFT')
              ->atomIs('Functioncall')

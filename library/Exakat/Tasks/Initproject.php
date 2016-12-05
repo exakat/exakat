@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\HelperException;
 
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -35,7 +36,7 @@ class Initproject extends Tasks {
         $project = $config->project;
 
         if ($project == 'default') {
-            throw ProjectNeeded();
+            throw new ProjectNeeded();
         }
 
         $repositoryURL = $config->repository;
@@ -160,6 +161,11 @@ INI;
                 // composer archive (early in the list, as this won't have 'scheme'
                 case ($this->config->composer === true) :
                     display('Initialization with composer');
+                    
+                    $res = shell_exec('composer --version');
+                    if (strpos($res, 'Composer') === false) {
+                        throw new HelperException('Composer');
+                    }
 
                 // composer install
                     $composer = new \stdClass();
@@ -173,18 +179,31 @@ INI;
 
                 // SVN
                 case (isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'svn' || $this->config->svn === true) :
+
+                    $res = shell_exec('svn --version');
+                    if (strpos($res, 'svn') === false) {
+                        throw new HelperException('SVN');
+                    }
                     display('SVN initialization');
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; svn checkout '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
                 // Bazaar
                 case ($this->config->bzr === true) :
+                    $res = shell_exec('bzr --version');
+                    if (strpos($res, 'Bazaar') === false) {
+                        throw new HelperException('Bazar');
+                    }
                     display('Bazaar initialization');
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; bzr branch '.escapeshellarg($repositoryURL).' code');
                     break 1;
 
                 // HG
                 case ($this->config->hg === true) :
+                    $res = shell_exec('hg --version');
+                    if (strpos($res, 'Mercurial') === false) {
+                        throw new HelperException('Mercurial');
+                    }
                     display('Mercurial initialization');
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; hg clone '.escapeshellarg($repositoryURL).' code');
                     break 1;
@@ -218,6 +237,11 @@ INI;
 
                 // zip archive
                 case ($this->config->zip === true) :
+                    $res = shell_exec('zip --version');
+                    if (strpos($res, 'Zip') === false) {
+                        throw new HelperException('zip');
+                    }
+
                     display('Download the zip');
                     $binary = file_get_contents($repositoryURL);
                     display('Saving');
@@ -232,6 +256,11 @@ INI;
                 // Git
                 // Git is last, as it will act as a default
                 case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $this->config->git === true) :
+                    $res = shell_exec('git --version');
+                    if (strpos($res, 'git') === false) {
+                        throw new HelperException('git');
+                    }
+
                     display('Git initialization');
                     $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {

@@ -136,7 +136,7 @@ class Phpexec {
                 $this->phpexec = 'docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php ';
             }
         } else {
-            if ($this->phpexec === null) {
+            if (empty($this->phpexec)) {
                 throw new NoPhpBinary('No PHP binary for version '.$phpversion.' is available. Please, check config/exakat.ini');
             }
 
