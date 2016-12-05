@@ -70,11 +70,19 @@ class Update extends Tasks {
             // Git case
             case file_exists($path.'/code/.git') :
                 display('Git pull for '.$config->project);
-                $res = shell_exec('cd '.$path.'/code/; git pull --quiet; git branch');
+                $res = shell_exec('cd '.$path.'/code/; git branch | grep \\*');
                 $branch = substr(trim($res), 2);
 
-                $res = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
-                display( "Git updated to commit $res");
+                $resInitial = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
+
+                $date = trim(shell_exec('cd '.$path.'/code/; git pull --quiet; git log -1 --format=%cd '));
+
+                $resFinal = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
+                if ($resFinal != $resInitial) {
+                    display( "Git updated to commit $res (Last commit : $date)");
+                } else {
+                    display( "No update available (Last commit : $date)");
+                }
                 
                 break;
 
