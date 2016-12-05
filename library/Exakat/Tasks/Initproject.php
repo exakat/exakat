@@ -35,7 +35,7 @@ class Initproject extends Tasks {
         $project = $config->project;
 
         if ($project == 'default') {
-            throw ProjectNeeded();
+            throw new ProjectNeeded();
         }
 
         $repositoryURL = $config->repository;
