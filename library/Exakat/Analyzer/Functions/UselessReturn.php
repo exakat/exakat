@@ -40,12 +40,13 @@ class UselessReturn extends Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Return')
              ->outIs('RETURN')
-             ->atomIsNot(array('Void', 'Null'))
+             ->atomIsNot('Void')
              ->back('first');
         $this->prepareQuery();
 
         // function that finally returns void. (the last return is useless)
         $this->atomIs('Function')
+             ->hasNoClassTrait()
              ->outIs('BLOCK')
              ->outWithRank('ELEMENT', 'last')
              ->atomIs('Return')
