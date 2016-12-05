@@ -24,25 +24,22 @@ namespace Exakat\Graph;
 
 use Exakat\Graph\Graph;
 use Exakat\Exceptions\UnableToReachGraphServer;
+use Exakat\Exceptions\Neo4jException;
 
 class Gremlin3 extends Graph {
-    private $scriptDir = '';
+    const CHECKED = true;
+    const UNCHECKED = false;
+    
+    private $scriptDir  = '';
     private $neo4j_host = '';
     private $neo4j_auth = '';
     
+    private $status     = self::UNCHECKED;
+    
     public function __construct($config) {
         parent::__construct($config);
-
-        if (!file_exists($config->neo4j_folder)) {
-            die("Error in the path to the Neo4j folder ($config->neo4j_folder). Please, check config/exakat.ini\n");
-        }
+        
         $this->scriptDir = $config->neo4j_folder.'/scripts/';
-
-        if (!file_exists($this->scriptDir)) {
-            mkdir($this->scriptDir, 0755);
-        } elseif (!is_writable($this->scriptDir)) {
-            die("Can't write in '$this->scriptDir'. Exakat needs to write in this folder.\n");
-        }
 
         $this->neo4j_host   = $config->neo4j_host.':'.$config->neo4j_port;
 
@@ -50,8 +47,26 @@ class Gremlin3 extends Graph {
             $this->neo4j_auth   = base64_encode($this->config->neo4j_login.':'.$this->config->neo4j_password);
         }
     }
+    
+    private function checkConfiguration() {
+        if (!file_exists($this->config->neo4j_folder)) {
+            throw new Neo4jException("Error in the path to the Neo4j folder ($this->config->neo4j_folder). Please, check config/exakat.ini\n");
+        }
+
+        if (!file_exists($this->scriptDir)) {
+            mkdir($this->scriptDir, 0755);
+        } elseif (!is_writable($this->scriptDir)) {
+            throw new Neo4jException("Can't write in '$this->scriptDir'. Exakat needs to write in this folder.\n");
+        }
+        
+        $this->status = self::CHECKED;
+    }
 
     public function query($query, $params = array(), $load = array()) {
+        if ($this->status === self::UNCHECKED) {
+            $this->checkConfiguration();
+        }
+
         $getString = 'script='.urlencode($query);
     
         if (!is_array($load)) {
@@ -175,6 +190,10 @@ GREMLIN;
     }
 
     public function queryOne($query, $params = array(), $load = array()) {
+        if ($this->status === self::UNCHECKED) {
+            $this->checkConfiguration();
+        }
+
         $res = $this->query($query, $params, $load);
         if (!is_object($res)) {
             die('Server is not responding');
@@ -195,6 +214,10 @@ GREMLIN;
     }
 
     public function queryColumn($query, $params = array(), $load = array()) {
+        if ($this->status === self::UNCHECKED) {
+            $this->checkConfiguration();
+        }
+
         $res = $this->query($query, $params, $load);
         $res = $res->results;
     
@@ -209,6 +232,10 @@ GREMLIN;
     }
 
     public function serverInfo() {
+        if ($this->status === self::UNCHECKED) {
+            $this->checkConfiguration();
+        }
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'http://'.$this->config->neo4j_host);
         curl_setopt($ch, CURLOPT_PORT, $this->config->neo4j_port);
