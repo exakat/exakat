@@ -36,7 +36,7 @@ class CleanDb extends Tasks {
     
     public function run(Config $config) {
         $this->config = $config;
-
+        
         if ($config->quick) {
             $this->restartNeo4j();
             $this->cleanScripts();
@@ -46,12 +46,23 @@ class CleanDb extends Tasks {
         $queryTemplate = <<<GREMLIN
 g.V().count();
 GREMLIN;
-        $result = $this->gremlin->query($queryTemplate);
-        if (!is_object($result) || $result->results === null) {
+        $result = null;
+        $counts = 0;
+        
+        while($counts < 100 && (!is_object($result) || $result->results === null)) {
+            $result = $this->gremlin->query($queryTemplate);
+            ++$counts;
+            usleep(100000);
+        }
+
+        if ($counts === 100)  {
+            display('No connexion to neo4j : forcing restart ('.$counts.')');
             // Can't connect to neo4j. Forcing restart.
             $this->restartNeo4j();
             $this->cleanScripts();
             return false;
+        } else {
+            display('Connexion to neo4j found ('.$counts.')');
         }
         $nodes = $result->results[0];
         display($nodes.' nodes in the database');
@@ -60,6 +71,7 @@ GREMLIN;
         if ($nodes == 0) {
             display('No nodes in neo4j. No need to clean');
         } elseif ($nodes > 10000) {
+            display($nodes.'nodes : forcing restart');
             $this->restartNeo4j();
         } else {
             display('Cleaning with gremlin');
