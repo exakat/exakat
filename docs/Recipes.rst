@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 28 Nov 2016 19:32:12 +0000
-.. comment: Generation hash : 96269123760a7787ec7257614cd65ba53ab0e09c
+.. comment: Generation date : Mon, 05 Dec 2016 13:46:08 +0000
+.. comment: Generation hash : 68e2b5b4c844b76900ccc5877c945c247da7cbb1
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 279 analysis
+Total : 281 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -157,6 +157,7 @@ Total : 279 analysis
 * :ref:`Identical Conditions <identical-conditions>`
 * :ref:`If With Same Conditions <if-with-same-conditions>`
 * :ref:`Iffectations`
+* :ref:`Illegal Name For Method <illegal-name-for-method>`
 * :ref:`Implement Is For Interface <implement-is-for-interface>`
 * :ref:`Implicit Global <implicit-global>`
 * :ref:`Incompilable Files <incompilable-files>`
@@ -263,6 +264,7 @@ Total : 279 analysis
 * :ref:`Throw In Destruct <throw-in-destruct>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
+* :ref:`Too Many Local Variables <too-many-local-variables>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
 * :ref:`Undefined Class Constants <undefined-class-constants>`
@@ -276,7 +278,7 @@ Total : 279 analysis
 * :ref:`Undefined static:: Or self:: <undefined-static\:\:-or-self\:\:>`
 * :ref:`Unitialized Properties <unitialized-properties>`
 * :ref:`Unknown Directive Name <unknown-directive-name>`
-* :ref:`Unkown PCRE Options <unkown-pcre-options>`
+* :ref:`Unkown Regex Options <unkown-regex-options>`
 * :ref:`Unpreprocessed Values <unpreprocessed-values>`
 * :ref:`Unreachable Code <unreachable-code>`
 * :ref:`Unresolved Classes <unresolved-classes>`
@@ -731,7 +733,7 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 19 analysis
+Total : 20 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -746,6 +748,7 @@ Total : 19 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
+* :ref:`Performances/AvoidArrayPush`
 * :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
 * :ref:`Simplify Regex <simplify-regex>`

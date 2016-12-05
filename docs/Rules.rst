@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 28 Nov 2016 19:32:12 +0000
-.. comment: Generation hash : 96269123760a7787ec7257614cd65ba53ab0e09c
+.. comment: Generation date : Mon, 05 Dec 2016 13:46:08 +0000
+.. comment: Generation hash : 68e2b5b4c844b76900ccc5877c945c247da7cbb1
 
 
 .. _$http\_raw\_post\_data:
@@ -404,7 +404,46 @@ Already Parents Interface
 #########################
 
 
-The same interface is implemented by a class and one of its children. That way, the child doesn't need to implement the interface, as the parent is already doing so, even if it is overwriting the interface's methods.
+The same interface is implemented by a class and one of its children. 
+
+That way, the child doesn't need to implement the interface, nor define its methods to be an instance of the interface. 
+
+.. code-block:: php
+
+   <?php
+   
+   interface i { 
+       function i();
+   }
+   
+   class A implements i {
+       function i() {
+           return __METHOD__;
+       }
+   }
+   
+   // This implements is useless. 
+   class AB extends A implements i {
+       // No definition for function i()
+   }
+   
+   // Implements i is understated
+   class AB extends A {
+       // redefinition of the i method
+       function i() {
+           return __METHOD__.' ';
+       }
+   }
+   
+   $x = new AB;
+   var_dump($x instanceof i);
+   // true
+   
+   $x = new AC;
+   var_dump($x instanceof i);
+   // true
+   
+   ?>
 
 +--------------+------------------------------------+
 | Command Line | Interfaces/AlreadyParentsInterface |
@@ -1517,7 +1556,21 @@ Constants With Strange Names
 
 List of constants being defined with names that are incompatible with PHP standards. 
 
-For example, define('ABC!', 1); The constant ABC! will not be accessible via the PHP syntax, such as $x = ABC!; but only with the function constant('ABC!');. It may also be tested with defined('ABC!');.
+.. code-block:: php
+
+   <?php
+   
+   // Define a valid PHP constant
+   define('ABC', 1); 
+   const ABCD = 2; 
+   
+   // Define an invalid PHP constant
+   define('ABC!', 1); 
+   echo defined('ABC!') ? constant('ABC!') : 'Undefined';
+   
+   // Const doesn't allow illegal names
+   
+   ?>
 
 +--------------+--------------------------------+
 | Command Line | Constants/ConstantStrangeNames |
@@ -3366,7 +3419,24 @@ Identical Conditions
 ####################
 
 
-The following logical expressions contain members that are identical. For example, $a || $a may be reduced into $a alone.
+These logical expressions contain members that are identical. 
+
+This means those expressions may be simplified. 
+
+.. code-block:: php
+
+   <?php
+   
+   // twice $a
+   if ($a || $b || $c || $a) {  }
+   
+   // Hiding is parenthesis is bad
+   if (($a) ^ ($a)) {}
+   
+   // expressions may be large
+   if ($a === 1 && 1 === $a) {}
+   
+   ?>
 
 +--------------+--------------------------------+
 | Command Line | Structures/IdenticalConditions |
@@ -3446,6 +3516,39 @@ Iffectations are a way to do both a test and an affectations. They may also be t
 +--------------+------------------------+
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
+
+
+
+.. _illegal-name-for-method:
+
+Illegal Name For Method
+#######################
+
+
+PHP has reserved usage of methods starting with __ for magic methods. It is recommended to avoid using this prefix, to prevent confusions.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo{
+       // Constructor
+       function __construct() {}
+   
+       // Constructor's typo
+       function __constructor() {}
+   
+       // Illegal function name, even as private
+       private function __bar() {}
+   }
+   
+   ?>
+
++--------------+-------------------+
+| Command Line | Classes/WrongName |
++--------------+-------------------+
+| Analyzers    | :ref:`Analyze`    |
++--------------+-------------------+
 
 
 
@@ -3799,7 +3902,41 @@ List With Appends
 #################
 
 
-List() behavior has changed in PHP 7.0 and it has impact on the indexing when list is used with the [] operator.
+List() behavior has changed in PHP 7.0 and it has impact on the indexing when list is used with the [] operator. 
+
+.. code-block:: php
+
+   <?php
+   
+   $x = array();
+   list($x[], $x[], $x[]) = [1, 2, 3];
+   
+   print_r($x);
+   
+   ?>
+
+
+In PHP 7.0, results are :::
+
+   
+   Array
+   (
+       [0] => 1
+       [1] => 2
+       [2] => 3
+   )
+   
+
+
+In PHP 5.6, results are :::
+
+   
+   Array
+   (
+       [0] => 3
+       [1] => 2
+       [2] => 1
+   )
 
 +--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/ListWithAppends                                                                                                                                                        |
@@ -5604,6 +5741,23 @@ Non-lowercase Keywords
 
 Usual convention is to write PHP keywords (like as, foreach, switch, case, `break <http://php.net/manual/en/control-structures.break.php>`_, etc.) all in lowercase. 
 
+.. code-block:: php
+
+   <?php
+   
+   // usual PHP convention
+   foreach($array as $element) {
+       echo $element;
+   }
+   
+   // unusual PHP conventions
+   Foreach($array AS $element) {
+       eCHo $element;
+   }
+   
+   ?>
+
+
 PHP do understand them in lowercase, UPPERCASE or WilDCase, so there is nothing compulsory here. Although, it will look strange to many.
 
 +--------------+------------------------------------------------+
@@ -6211,6 +6365,47 @@ Using parenthesis around parameters used to silent some internal check. This is 
 +--------------+-----------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
 +--------------+-----------------------------------------------------+
+
+
+
+.. _performances/avoidarraypush:
+
+Performances/AvoidArrayPush
+###########################
+
+
+array_push() is slower than the [] operator.
+
+This is also true if the [] operator is called several times, while array_push() may be called only once. 
+And counting elements by the end of the push is still faster than collecting array_push() return value. 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = [1,2,3];
+   // Fast version
+   $a[] = 4;
+   
+   $a[] = 5;
+   $a[] = 6;
+   $a[] = 7;
+   $count = count($a);
+   
+   // Slow version
+   array_push($a, 4);
+   $count = array_push($a, 5,6,7);
+   
+   ?>
+
+
+This is a micro-optimisation.
+
++--------------+-----------------------------+
+| Command Line | Performances/AvoidArrayPush |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Performances`         |
++--------------+-----------------------------+
 
 
 
@@ -7438,7 +7633,22 @@ Simple Global Variable
 ######################
 
 
-global keyword should only be used with simple variables (global $var), and not with complex or dynamic structures.
+The global keyword should only be used with simple variables. Since PHP 7, it cannot be used with complex or dynamic structures.
+
+.. code-block:: php
+
+   <?php
+   
+   // Forbidden in PHP 7
+   global $normalGlobal;
+   
+   // Forbidden in PHP 7
+   global $$variable->global ;
+   
+   // Tolerated in PHP 7
+   global ${$variable->global};
+   
+   ?>
 
 +--------------+-----------------------------------------------------+
 | Command Line | Php/GlobalWithoutSimpleVariable                     |
@@ -8005,6 +8215,86 @@ When the difference is very small, it requires a better way to mesure `time <htt
 
 
 
+.. _too-many-local-variables:
+
+Too Many Local Variables
+########################
+
+
+Too many local variables were found in the methods. When over 15 variables are found in such a method, a violation is reported.
+
+Local variables exclude globals (imported with global) and arguments. 
+
+When too many variables are used in a function, it is a code smells. The function is trying to do too much and needs extra space for juggling.
+Beyond 15 variables, it becomes difficult to keep track of their name and usage, leading to confusion, overwritting or hijacking. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This function is OK : 3 vars are arguments, 3 others are globals.
+   function a20a3g3($a1, $a2, $a3) {
+       global $a4, $a5, $a6;
+       
+       $a1  = 1;
+       $a2  = 2;
+       $a3  = 3 ;
+       $a4  = 4 ;
+       $a5  = 5 ;
+       $a6  = 6 ;
+       $a7  = 7 ;
+       $a8  = 8 ;
+       $a9  = 9 ;
+       $a10 = 10;
+       $a11  = 11;
+       $a12  = 12;
+       $a13  = 13 ;
+       $a14  = 14 ;
+       $a15  = 15 ;
+       $a16  = 16 ;
+       $a17  = 17 ;
+       $a18  = 18 ;
+       $a19  = 19 ;
+       $a20 = 20;
+   
+   }
+   
+   // This function has too many variables
+   function a20() {
+       
+       $a1  = 1;
+       $a2  = 2;
+       $a3  = 3 ;
+       $a4  = 4 ;
+       $a5  = 5 ;
+       $a6  = 6 ;
+       $a7  = 7 ;
+       $a8  = 8 ;
+       $a9  = 9 ;
+       $a10 = 10;
+       $a11  = 11;
+       $a12  = 12;
+       $a13  = 13 ;
+       $a14  = 14 ;
+       $a15  = 15 ;
+       $a16  = 16 ;
+       $a17  = 17 ;
+       $a18  = 18 ;
+       $a19  = 19 ;
+       $a20 = 20;
+   
+   }
+   
+   ?>
+
++--------------+---------------------------------+
+| Command Line | Functions/TooManyLocalVariables |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
+
+
 .. _uncaught-exceptions:
 
 Uncaught Exceptions
@@ -8191,7 +8481,30 @@ Undefined Trait
 ###############
 
 
-Those traits are undefined.
+Those traits are undefined. 
+
+When the using class or trait is instantiated, PHP emits a a fatal error.
+
+.. code-block:: php
+
+   <?php
+   
+   use Composer/Component/someTrait as externalTrait;
+   
+   trait t {
+       function foo() {}
+   }
+   
+   // This class uses trait that are all known
+   class hasOnlyDefinedTrait {
+       use t, externalTrait;
+   }
+   
+   // This class uses trait that are unknown
+   class hasUndefinedTrait {
+       use unknownTrait, t, externalTrait;
+   }
+   ?>
 
 +--------------+-----------------------+
 | Command Line | Traits/UndefinedTrait |
@@ -8383,15 +8696,27 @@ The following list has directive mentionned in the code, that are not known from
 
 
 
-.. _unkown-pcre-options:
+.. _unkown-regex-options:
 
-Unkown PCRE Options
-###################
+Unkown Regex Options
+####################
 
 
-PHP's regex support the following list of options : eimsuxADJSUX. They are detailled in the manual : http://php.net/manual/en/reference.pcre.pattern.modifiers.php. 
+PHP's regex support the following list of options : eimsuxADJSUX. They are detailled in the manual : [http://php.net/manual/en/reference.pcre.pattern.modifiers.php](http://php.net/manual/en/reference.pcre.pattern.modifiers.php). 
 
 All other options are not supported, may be ignored or raise an error.
+
+.. code-block:: php
+
+   <?php
+   
+   // all options are available
+   if (preg_match('/\d+/isA', $string, $results)) { }
+   
+   // p and h are not regex options, p is double
+   if (preg_match('/\d+/php', $string, $results)) { }
+   
+   ?>
 
 +--------------+------------------------------+
 | Command Line | Structures/UnknownPregOption |
@@ -10034,6 +10359,27 @@ Useless Return
 
 
 The spotted functions or methods have a return statement, but this statement is useless. This is the case for constructor and destructors, whose return value are ignored or inaccessible.
+
+When return is void, and the last element in a function, it is also useless.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       function __construct() {
+           // return is not used by PHP
+           return 2;
+       }
+   }
+   
+   function bar(&$a) {
+       $a++;
+       // The last return, when empty, is useless
+       return;
+   }
+   
+   ?>
 
 +--------------+-------------------------+
 | Command Line | Functions/UselessReturn |
