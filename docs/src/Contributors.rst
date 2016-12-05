@@ -7,6 +7,7 @@ The following people helped in the making of Exakat : installing, coding, sugges
 
 
 * 陈曦 (Buck / Leon)
+* Jent Zheng (Jean)
 * Gérard Ernaelsten
 * Philippe Gamache
 * Cyrille Granval
