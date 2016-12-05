@@ -120,20 +120,27 @@ class Ambassador extends Reports {
         $this->initFolder();
         $this->generateSettings();
         $this->generateProcFiles();  
-        $this->generateCodes();  
 
-        $this->generateDocumentation();
         $this->generateDashboard();
         $this->generateFiles();
         $this->generateAnalyzers();
-        
-        $this->generateFavorites();
-
         $this->generateIssues();
         $this->generateAnalyzersList();
         $this->generateExternalLib();
         
         $this->generateAppinfo();
+        
+        // Favorites
+        $this->generateFavorites();
+        $this->generateDynamicCode();
+
+        // inventories
+        $this->generateErrorMessages();
+
+
+        // Annex
+        $this->generateDocumentation();
+        $this->generateCodes();  
 
         // Static files
         $files = array('credits');
@@ -1684,6 +1691,32 @@ SQL;
         file_put_contents($this->tmpName.'/datas/ext_lib.html', $html);
     }
 
+    private function generateErrorMessages() {
+        $errorMessages = '';
+
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
+        while($row = $res->fetchArray()) {
+            $errorMessages .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('error_messages');
+        $html = $this->injectBloc($html, 'ERROR_MESSAGES', $errorMessages);
+        file_put_contents($this->tmpName.'/datas/error_messages.html', $html);
+    }
+
+    private function generateDynamicCode() {
+        $dynamicCode = '';
+
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
+        while($row = $res->fetchArray()) {
+            $dynamicCode .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('dynamic_code');
+        $html = $this->injectBloc($html, 'DYNAMIC_CODE', $dynamicCode);
+        file_put_contents($this->tmpName.'/datas/dynamic_code.html', $html);
+    }
+    
     private function generateCodes() {
         mkdir($this->tmpName.'/datas/sources/', 0755);
 
