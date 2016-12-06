@@ -60,8 +60,7 @@ class WpdbBestUsage extends Analyzer {
              // If it's a property, we accept $wpdb
              ->raw('where( __.out("CONCAT").hasLabel("Property").out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )')
              // Some queries won't accept prepared statements
-             ->raw('where( __.out("CONCAT").hasLabel("String").has("rank", 0).filter{(it.get().value("noDelimiter") =~ "^(SHOW TABLES|DESC) ").getCount() == 0} )')
-             ;
+             ->raw('where( __.out("CONCAT").hasLabel("String").has("rank", 0).filter{(it.get().value("noDelimiter") =~ "^(SHOW TABLES|DESC) ").getCount() == 0} )');
         $this->prepareQuery();
     }
 }
