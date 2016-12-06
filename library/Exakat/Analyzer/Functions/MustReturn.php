@@ -26,18 +26,13 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class MustReturn extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/MethodDefinition');
-    }
-    
     public function analyze() {
         $this->atomIs('Function')
              ->hasNoOut('ABSTRACT')
-             ->hasNoInterface()
+             ->hasClassTrait()
              ->outIs('NAME')
              ->codeIs(array('__call', '__callStatic', '__get', '__isset', '__sleep', '__toString', '__set_state',
                             '__invoke', '__debugInfo'))
-             ->analyzerIs('Classes/MethodDefinition')
              ->back('first')
              ->noAtomInside('Return');
         $this->prepareQuery();
