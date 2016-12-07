@@ -256,6 +256,7 @@ Glossary
 
     + `file`
 
+      + :ref:`Assign Default To Properties <assign-default-to-properties>`
       + :ref:`Can't Extend Final <can't-extend-final>`
       + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
       + :ref:`Echo Or Print <echo-or-print>`
@@ -283,6 +284,7 @@ Glossary
 
     + `fopen`
 
+      + :ref:`Assign Default To Properties <assign-default-to-properties>`
       + :ref:`Join file() <join-file()>`
       + :ref:`fopen() Mode <fopen()-mode>`
 
@@ -361,6 +363,7 @@ Glossary
     + `isset`
 
       + :ref:`Isset With Constant <isset-with-constant>`
+      + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
       + :ref:`Should Use Coalesce <should-use-coalesce>`
       + :ref:`Slow Functions <slow-functions>`
@@ -586,6 +589,7 @@ Glossary
       + :ref:`Use Class Operator <use-class-operator>`
       + :ref:`Use const <use-const>`
       + :ref:`Used Once Variables <used-once-variables>`
+      + :ref:`Wpdb Prepare Or Not <wpdb-prepare-or-not>`
       + :ref:`eval() Without Try <eval()-without-try>`
       + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
@@ -656,11 +660,13 @@ Glossary
 
     + `__construct`
 
+      + :ref:`Assign Default To Properties <assign-default-to-properties>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`
       + :ref:`Old Style Constructor <old-style-constructor>`
       + :ref:`Redefined Default <redefined-default>`
+      + :ref:`Should Use $this <should-use-$this>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
       + :ref:`Unitialized Properties <unitialized-properties>`
       + :ref:`Useless Return <useless-return>`

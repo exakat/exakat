@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 05 Dec 2016 13:46:08 +0000
-.. comment: Generation hash : 68e2b5b4c844b76900ccc5877c945c247da7cbb1
+.. comment: Generation date : Wed, 07 Dec 2016 09:12:56 +0000
+.. comment: Generation hash : dd1c51653f892c68a54e4108630147860a446fcd
 
 
 .. _$http\_raw\_post\_data:
@@ -604,6 +604,34 @@ Assign Default To Properties
 
 
 Properties may be assigned default values at declaration `time <http://www.php.net/time>`_. Such values may be later modified, if needed. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       private $propertyWithDefault = 1;
+       private $propertyWithoutDefault;
+       private $propertyThatCantHaveDefault;
+       
+       public function __construct() {
+           // Skip this extra line, and give the default value above
+           $this->propertyWithoutDefault = 1;
+   
+           // Static expressions are available to set up simple computation at definition time.
+           $this->propertyWithoutDefault = OtherClass::CONSTANT + 1;
+   
+           // Arrays, just like scalars, may be set at definition time
+           $this->propertyWithoutDefault = [1,2,3];
+   
+           // Objects or resources can't be made default. That is OK.
+           $this->propertyThatCantHaveDefault = fopen('/path/to/file.txt');
+           $this->propertyThatCantHaveDefault = new Fileinfo();
+       }
+   }
+   
+   ?>
+
 
 Default values will save some instructions in the constructor, and makes the value obvious in the code.
 
@@ -4636,10 +4664,21 @@ Methods that may not return, but are often expected to : `__call() <http://php.n
    <?php
    
    class foo {
-       public function _get($a) {
+       public function __isset($a) {
+           // returning something useful
+           return isset($this->$var[$a]);
+       }
+   
+       public function __get($a) {
            $this->$a++;
            // not returning... 
        }
+   
+       public function __call($name, $args) {
+           $this->$name(...$args);
+           // not returning anything, but that's OK
+       }
+   
    }
    ?>
 
@@ -7500,9 +7539,38 @@ Should Use $this
 ################
 
 
-Classes' methods should use $this, or a static method or property (when they are static). 
+Classes' methods should use $this, or call parent::. A static method should call another static method, or a static property. 
 
-Otherwise, the method doesn't belong to the object. It may be a function.
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public function __construct() {
+           // This method should do something locally, or be removed.
+       }
+   }
+   
+   class bar extends foo {
+       private $a = 1;
+       
+       public function __construct() {
+           // Calling parent:: is sufficient
+           parent::__construct();
+       }
+   
+       public function barbar() {
+           // This is acting on the local object
+           $this->a++;
+       }
+   
+       public function barfoo($b) {
+           // This has no action on the local object. It could be a function
+           return 3 + $b;
+       }
+   }
+   
+   ?>
 
 +--------------+-----------------------------------------------------------------------------------------+
 | Command Line | Classes/ShouldUseThis                                                                   |
@@ -10699,6 +10767,34 @@ See <a href=https://codex.wordpress.org/Class_Reference/wpdb>Class Reference/wpd
 +--------------+-------------------------+
 | Analyzers    | :ref:`Wordpress`        |
 +--------------+-------------------------+
+
+
+
+.. _wpdb-prepare-or-not:
+
+Wpdb Prepare Or Not
+###################
+
+
+When using $wpdb, it is recommended to use the query() method when the SQL is not using variables.
+
+.. code-block:: php
+
+   <?php
+   
+   // No need to prepare this query : it is all known at coding time.
+   $wpdb->prepare('INSERT INTO TABLE values (1,2,3)');
+   
+   // Don't use query when variable are involved : always use prepare
+   $wpdb->query('INSERT INTO TABLE values (1,2,'.$var.')');
+   
+   ?>
+
++--------------+----------------------------+
+| Command Line | Wordpress/WpdbPrepareOrNot |
++--------------+----------------------------+
+| Analyzers    | :ref:`Wordpress`           |
++--------------+----------------------------+
 
 
 
