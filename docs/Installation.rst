@@ -35,9 +35,9 @@ Currently, Docker installation only ships with one PHP version (7.0).
 * Install [Docker](http://www.docker.com/)
 * Start Docker
 * Pull exkat : git pull exakat/exakat
-* Run exakat : docker run -it -v ($pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat version
-* Init a project : docker run -it -v ($pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat init -p <project name> -R <vcs_url>
-* Run exakat : docker run -it -v ($pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat project -v <project name>
+* Run exakat : docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat version
+* Init a project : docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat init -p <project name> -R <vcs_url>
+* Run exakat : docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat project -p <project name>
 
 Installation guide with Vagrant and Ansible
 -------------------------------------------
