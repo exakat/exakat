@@ -69,8 +69,12 @@ class Status extends Tasks {
                                 'step'     => $json->step,);
             } else {
                 $status['Running'] = 'idle';
+
+                $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
+                if (isset($res->results[0])) {
+                    $status['Project'] = $res->results[0];
+                }
             }
-            //$status = array('project' => $project);
             
             $this->display($status, $config->json);
             return;
