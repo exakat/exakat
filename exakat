@@ -2,10 +2,10 @@
 <?php
 
 try {
-    if(strpos(basename(__FILE__), 'phar') !== false){
-        require_once 'phar://exakat.phar/library/Autoload.php';
-    } else {
+    if(phar::running() === ''){
         include_once __DIR__.'/library/Autoload.php';
+    } else {
+        require_once 'phar://exakat.phar/library/Autoload.php';
     }
 
     $graphDB = new \Exakat\Graph\Gremlin3($config);
@@ -14,8 +14,12 @@ try {
     $exakat = new \Exakat\Exakat($graphDB);
     $exakat->execute($config);
 } catch (Exception $e) {
-    print "\nError : ".$e->getMessage()." 
+    if(phar::running() === ''){
+        print $e->getMessage();
+    } else {
+        print "\nError : ".$e->getMessage()." 
 on file ".$e->getFile()."
 on line ".$e->getLine()."
 Stopping execution\n\n";
+    }
 } 
