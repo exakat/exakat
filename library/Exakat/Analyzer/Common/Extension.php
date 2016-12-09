@@ -40,44 +40,8 @@ class Extension extends Analyzer {
     
     
     public function analyze() {
-        $functions  = array();
-        $constants  = array();
-        $classes    = array();
-        $interfaces = array();
-        $traits     = array();
-        $namespaces = array();
-        $directives = array();
-
         if (substr($this->source, -4) == '.ini') {
             $ini = $this->loadIni($this->source);
-
-            if (count($ini['functions']) == 1 && empty($ini['functions'][0])) {
-                $functions = array();
-            }
-
-            if (count($ini['constants']) == 1 && empty($ini['constants'][0])) {
-                $constants = array();
-            }
-
-            if (count($ini['classes']) == 1 && empty($ini['classes'][0])) {
-                $classes = array();
-            }
-
-            if (count($ini['interfaces']) == 1 && empty($ini['interfaces'][0])) {
-                $interfaces = array();
-            }
-
-            if (count($ini['traits']) == 1 && empty($ini['traits'][0])) {
-                $traits = array();
-            }
-
-            if (count($ini['namespaces']) == 1 && empty($ini['namespaces'][0])) {
-                $namespaces = array();
-            }
-
-            if (count($ini['directives']) == 1 && empty($ini['directives'][0])) {
-                $directives = array();
-            }
         } else {
             return true;
         }
