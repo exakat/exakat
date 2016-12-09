@@ -60,7 +60,8 @@ class Files extends Tasks {
         
         $i = array();
         foreach($ignoredFiles as $file => $reason) {
-            $i[] = array('file' => $file, 'reason' => $reason);
+            $i[] = array('file'   => $file, 
+                         'reason' => $reason);
         }
         $ignoredFiles = $i;
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
@@ -69,10 +70,14 @@ class Files extends Tasks {
         file_put_contents($tmpFileName, '"'.$config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"$config->projects_root/projects/$dir/code", $files).'"');
 
         $versions = $config->other_php_versions;
-        // This is collected over all versions. @todo make this only for the requested version.
-        $toRemoveFromFiles = array();
+
+        $analyzingVersion = $config->phpversion[0].$config->phpversion[2];
+        $id = array_search($analyzingVersion, $versions);
+        unset($versions[$id]);
+        $versions[] = $analyzingVersion;
         
         foreach($versions as $version) {
+            $toRemoveFromFiles = array();
             display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
             
@@ -173,12 +178,6 @@ class Files extends Tasks {
                         $incompilables[] = array('error' => 'Error parsing', 'file' => $file, 'line' => 0);
                         $toRemoveFromFiles['/'.$file] = 1;
                     }
-                } else {
-                    $this->log->log( "\nCouldn't interpret on syntax error : \n" .
-                         print_r($resFile, true) .
-                         print_r($res, true) .
-                         "\n" . __FILE__ . "\n");
-                    // Then, ignore it.
                 }
             }
     
@@ -189,6 +188,7 @@ class Files extends Tasks {
         
         $files = array_diff($files, array_keys($toRemoveFromFiles));
         unset($toRemoveFromFiles);
+        
         $this->datastore->addRow('files', array_map(function ($a) {
                 return array('file'   => $a);
             }, $files));
