@@ -31,15 +31,15 @@ class IsComposerNsname extends Analyzer {
         $data = new Composer();
 
         $packagistNamespaces = $data->getComposerNamespaces();
-        $packagistNamespacesFullNS = $this->makeFullNSpath($packagistNamespaces);
+        $packagistNamespacesFullNS = $this->makeFullNSPath($packagistNamespaces);
 
         $packagistClasses = $data->getComposerClasses();
-        $packagistClassesFullNS = $this->makeFullNSpath($packagistClasses);
+        $packagistClassesFullNS = $this->makeFullNSPath($packagistClasses);
         // Chunks is made to shorten the queries
         $packagistClassesFullNSChunks = array_chunk($packagistClassesFullNS, 5000);
 
         $packagistInterfaces = $data->getComposerInterfaces();
-        $packagistInterfacesFullNs = $this->makeFullNSpath($packagistInterfaces);
+        $packagistInterfacesFullNs = $this->makeFullNSPath($packagistInterfaces);
 
         ////////////////////////////////////////////////
         // Use

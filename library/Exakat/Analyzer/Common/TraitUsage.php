@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Common;
 use Exakat\Analyzer\Analyzer;
 
 class TraitUsage extends Analyzer {
-    protected $classes = array();
+    protected $traits = array();
     
     public function analyze() {
         $traits =  $this->makeFullNsPath($this->traits);

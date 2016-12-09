@@ -30,6 +30,7 @@ use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
+use XMLWriter;
 
 class Devoops extends Reports {
     const FOLDER_PRIVILEGES = 0755;

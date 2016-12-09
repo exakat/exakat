@@ -90,13 +90,6 @@ class Ambassador extends Reports {
         return $combinePageHTML;
     }
 
-    /**
-     * Inject bloc in html content
-     *
-     * @param type $html
-     * @param type $bloc
-     * @param type $content
-     */
     private function injectBloc($html, $bloc, $content) {
         return str_replace("{{" . $bloc . "}}", $content, $html);
     }
@@ -105,12 +98,6 @@ class Ambassador extends Reports {
         
     }
 
-    /**
-     * Generate the report
-     *
-     * @param type $folder
-     * @param type $name
-     */
     public function generate($folder, $name = 'report') {
         $this->finalName = $folder . '/' . $name;
         $this->tmpName = $folder . '/.' . $name;

@@ -243,9 +243,8 @@ class Files extends Tasks {
                         $shortOpenTag[] = array('file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $file));
                     }
                 }
+                $this->datastore->addRow('shortopentag', $shortOpenTag);
             }
-    
-            $this->datastore->addRow('shortopentag', $shortOpenTag);
         } else {
             display('Short tag OK');
         }

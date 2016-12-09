@@ -144,7 +144,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
                         $d = $diff;
                     }
                 }
-                (unset) $d;
+                unset($d);
             }
 
             if (!empty($dependencies)) {

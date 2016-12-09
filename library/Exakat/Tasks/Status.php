@@ -51,6 +51,9 @@ class Status extends Tasks {
                 if (strpos($log, 'java.lang.OutOfMemoryError: Java heap space') !== false ) {
                     $pid = trim(file_get_contents($config->neo4j_folder.'/data/neo4j-service.pid'));
                     $projectStatus = 'Neo4j died : Java heap space. Kill neo4j ('.$pid.') and run exakat again.';
+                    
+                    $res = new Stdclass();
+                    $res->results[0] = '';
                 } elseif (strpos($log, 'java.lang.OutOfMemoryError') !== false ) {
                     $pid = trim(file_get_contents($config->neo4j_folder.'/data/neo4j-service.pid'));
                     $projectStatus = 'Neo4j running out of memory...';

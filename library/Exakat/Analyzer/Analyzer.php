@@ -50,6 +50,8 @@ abstract class Analyzer {
     
     static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
+    protected $analyzerQuoted = '';
+    private $analyzerId       = 0;
 
     protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
@@ -285,11 +287,7 @@ GREMLIN;
     }
 
     public function getAppinfoHeader($lang = 'en') {
-        if ($this->appinfo === null) {
-            $this->getDescription();
-        }
-
-        return $this->appinfo;
+        return $this->description;
     }
     
     static public function getAnalyzers($theme) {
@@ -1637,10 +1635,6 @@ GREMLIN;
         return $this->rowCount;
     }
 
-    public function toCount() {
-        return count($this->toArray());
-    }
-    
     protected function loadIni($file, $index = null) {
         $config = Config::factory();
         $fullpath = $config->dir_root.'/data/'.$file;

@@ -111,7 +111,7 @@ class Anonymize extends Tasks {
             }
         }
 
-        display( 'Processing file ', $file,' into ', $file, ".anon\n");
+        display( 'Processing file ' . $file .' into '. $file. ".anon\n");
     }
     
     private function processFile($file, $anonFile = null) {

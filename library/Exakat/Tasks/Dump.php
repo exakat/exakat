@@ -273,7 +273,6 @@ SQL;
 
         $this->stmtResultsCounts->execute();
         
-        unset($this->sqlite);
         rename($this->sqliteFile, $this->sqliteFileFinal);
         
         $this->removeSnitch();
