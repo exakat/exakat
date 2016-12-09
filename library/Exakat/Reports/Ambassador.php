@@ -1009,7 +1009,11 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $data[] = array('label' => $key, 'value' => count(Analyzer::getThemeAnalyzers($categorie)));
+            $list = 'IN ("'.implode('", "', Analyzer::getThemeAnalyzers($categorie)).'")';
+            $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
+            $total = $this->sqlite->querySingle($query);
+
+            $data[] = array('label' => $key, 'value' => $total);
         }
         // ordonné DESC par valeur
         uasort($data, function ($a, $b) {
@@ -1047,16 +1051,21 @@ JAVASCRIPT;
      *
      */
     public function getSeverityBreakdown() {
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $query = <<<SQL
                 SELECT severity, count(*) AS number
                     FROM results
+                    WHERE analyzer IN ($list)
                     GROUP BY severity
                     ORDER BY number DESC
 SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray()) {
-            $data[] = array('label' => $row['severity'], 'value' => $row['number']);
+            $data[] = array('label' => $row['severity'], 
+                            'value' => $row['number']);
         }
         
         $html = '';

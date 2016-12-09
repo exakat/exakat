@@ -84,7 +84,8 @@ class Project extends Tasks {
         $analyze->run($config);
         unset($analyze);
         $this->logTime('CleanDb');
-        $this->addSnitch(array('step' => 'Clean DB', 'project' => $config->project));
+        $this->addSnitch(array('step'    => 'Clean DB', 
+                               'project' => $config->project));
 
         display("Search for external libraries\n");
         $args = array ( 1 => 'findextlib',

@@ -37,6 +37,8 @@ class Jobqueue extends Tasks {
         
         unlink($this->pipefile);
         fclose($this->jobQueueLog);
+        
+        parent::__destruct();
     }
     
     public function run(Config $config) {
@@ -152,8 +154,6 @@ class Jobqueue extends Tasks {
 
         // Clean after self
         shell_exec($this->config->php.' '.$this->config->executable.' cleandb');
-
-        return true;
     }
     
     private function log($message) {

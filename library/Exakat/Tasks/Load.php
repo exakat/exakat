@@ -84,10 +84,13 @@ class Load extends Tasks {
 
     private $links = array();
     
+    private $sequences = array();
+    
     private $currentClassTrait = array();
     
     private $tokens = array();
     private $id = 0;
+    private $id0 = 0;
     
     const FULLCODE_SEQUENCE = ' /**/ ';
     const FULLCODE_BLOCK    = ' { /**/ } ';
@@ -4226,8 +4229,11 @@ class Load extends Tasks {
                 return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
             }
         } elseif ($this->atoms[$nameId]['atom'] === 'String' && isset($this->atoms[$nameId]['noDelimiter'])) {
-            $prefix =  ($this->atoms[$nameId]['noDelimiter'][0] === '\\' ? '' : '\\') .
-                        strtolower($this->atoms[$nameId]['noDelimiter']);
+            if (empty($this->atoms[$nameId]['noDelimiter'])) {
+                $prefix = '\\';
+            } else {
+                $prefix =  ($this->atoms[$nameId]['noDelimiter'][0] === '\\' ? '' : '\\') . strtolower($this->atoms[$nameId]['noDelimiter']);
+            }
 
             // define doesn't care about use...
             return $prefix;

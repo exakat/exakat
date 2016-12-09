@@ -3,7 +3,7 @@
 use Symfony\Component\Finder\Finder;
 use Exakat\Exakat;
 
-include './library/Autoload.php';
+include __DIR__.'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
 
 class RoboFile extends \Robo\Tasks
@@ -408,7 +408,7 @@ JOIN categories
                           );
         $analyzeList = '("'.implode('", "', $analyzes).'")';
         
-        include 'library/Exakat/Analyzer/Analyzer.php';
+        include __DIR__.'/library/Exakat/Analyzer/Analyzer.php';
         $oClass = new ReflectionClass('\Exakat\Analyzer\Analyzer');
         $analyzerConstants = array_keys($oClass->getConstants());
 
