@@ -302,6 +302,9 @@ class Load extends Tasks {
 
     private function processProject($project) {
         $files = $this->datastore->getCol('files', 'file');
+        if (empty($files)) {
+            throw new NoFileToProcess($project);
+        }
     
         $nbTokens = 0;
         $path = $this->config->projects_root.'/projects/'.$project.'/code';
