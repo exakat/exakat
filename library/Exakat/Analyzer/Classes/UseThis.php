@@ -26,15 +26,22 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class UseThis extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/MethodDefinition');
-    }
-    
     public function analyze() {
+        // Valid for both statics and normal
+        // parent::
         $this->atomIs('Function')
-             ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->inIs('NAME')
+             ->hasClassTrait()
+             ->outIs('BLOCK')
+             ->atomInside(array('Staticmethodcall', 'Staticconstant', 'Staticproperty'))
+             ->outIs('CLASS')
+             ->codeIs('parent')
+             ->back('first')
+             ->analyzerIsNot('self');
+        $this->prepareQuery();
+
+        // Case for normal methods
+        $this->atomIs('Function')
+             ->hasClassTrait()
              ->hasNoOut('STATIC')
              ->outIs('BLOCK')
              ->atomInside('Variable')
@@ -43,15 +50,13 @@ class UseThis extends Analyzer {
              ->analyzerIsNot('self');
         $this->prepareQuery();
 
-        // Case for statics
+        // Case for statics methods
         $this->atomIs('Function')
              ->analyzerIsNot('self')
-             ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->inIs('NAME')
+             ->hasClassTrait()
              ->hasOut('STATIC')
              ->outIs('BLOCK')
-             ->atomInside('Staticmethodcall')
+             ->atomInside(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->savePropertyAs('fullnspath', 'classe')
@@ -62,9 +67,7 @@ class UseThis extends Analyzer {
 
         $this->atomIs('Function')
              ->analyzerIsNot('self')
-             ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->inIs('NAME')
+             ->hasClassTrait()
              ->hasOut('STATIC')
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')

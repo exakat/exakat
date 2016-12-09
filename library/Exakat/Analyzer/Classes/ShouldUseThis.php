@@ -27,8 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldUseThis extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UseThis',
-                     'Classes/MethodDefinition');
+        return array('Classes/UseThis');
     }
     
     public function analyze() {
@@ -37,9 +36,6 @@ class ShouldUseThis extends Analyzer {
              ->hasNoOut('STATIC')
              ->hasNoOut('ABSTRACT')
              ->hasClassTrait()
-             ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->inIs('NAME')
              ->analyzerIsNot('Classes/UseThis');
         $this->prepareQuery();
 
@@ -47,9 +43,6 @@ class ShouldUseThis extends Analyzer {
         $this->atomIs('Function')
              ->hasOut('STATIC')
              ->hasClassTrait()
-             ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->inIs('NAME')
              ->noAtomInside(array('Staticproperty', 'Staticmethodcall'))
              ->back('first');
         $this->prepareQuery();
