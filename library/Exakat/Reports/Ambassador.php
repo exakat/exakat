@@ -25,6 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Docs;
 use Exakat\Datastore;
+use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
@@ -116,7 +117,8 @@ class Ambassador extends Reports {
         $this->generateExternalLib();
         
         $this->generateAppinfo();
-        
+        $this->generateBugFixes();
+
         // Favorites
         $this->generateFavorites();
         $this->generateDynamicCode();
@@ -1687,6 +1689,63 @@ SQL;
         file_put_contents($this->tmpName.'/datas/ext_lib.html', $html);
     }
 
+    protected function generateBugfixes() {
+        $table = '';
+
+        $data = new Methods();
+        $bugfixes = $data->getBugFixes();
+        print_r($bugfixes);
+        
+        $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
+        $reported = array();
+        $info = array();
+
+        $rows = array();
+        while($row = $found->fetchArray()) {
+            $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
+        }
+        
+        foreach($bugfixes as $bugfix) {
+            if (!empty($bugfix['function'])) {
+                if (!isset($rows[$bugfix['function']])) { continue; }
+
+                $cve = $this->Bugfixes_cve($bugfix['cve']);
+                $table .= '<tr>
+    <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
+    <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
+    <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
+    <td>'.($bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-').'</td>
+    <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
+    <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
+    <td>'.$cve.'</td>
+                </tr>';
+            } elseif (!empty($bugfix['analyzer'])) {
+                $subanalyze = $this->sqlite->querySingle('SELECT count FROM resultsCounts WHERE analyzer = "'.$bugfix['analyzer'].'"');
+                
+                $cve = $this->Bugfixes_cve($bugfix['cve']);
+
+                if ($subanalyze == 0) { continue; }
+                $table .= '<tr>
+    <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
+    <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
+    <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
+    <td>'.($bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-').'</td>
+    <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
+    <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
+    <td>'.$cve.'</td>
+                </tr>';
+            } else {
+                continue; // ignore. Possibly some mis-configuration
+            }
+        }
+        
+        $html = $this->getBasedPage('bugfixes');
+        $html = $this->injectBloc($html, 'BUG_FIXES', $table);
+        file_put_contents($this->tmpName.'/datas/bugfixes.html', $html);
+    }
+
     private function generateErrorMessages() {
         $errorMessages = '';
 
@@ -2160,6 +2219,26 @@ HTML;
             default : 
                 return '&nbsp;';
         }
-    }}
+    }
+
+    private function Bugfixes_cve($cve) {
+        if (!empty($cve)) {
+            if (strpos($cve, ', ') !== false) {
+                $cves = explode(', ', $cve);
+                $cveHtml = array();
+                foreach($cves as $cve) {
+                    $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+                }
+                $cveHtml = implode(',<br />', $cveHtml);
+            } else {
+                $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+            }
+        } else {
+            $cveHtml = '-';
+        }
+        
+        return $cveHtml;
+    }    
+}
 
 ?>

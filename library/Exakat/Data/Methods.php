@@ -37,7 +37,7 @@ class Methods {
         } else {
             $docPath = $config->dir_root.'/data/methods.sqlite';
         }
-        $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
+        $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }
 
     public function __destruct() {
@@ -51,7 +51,7 @@ class Methods {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
         
@@ -63,7 +63,7 @@ class Methods {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
         
@@ -81,7 +81,7 @@ class Methods {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
         
@@ -99,7 +99,7 @@ class Methods {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
         
@@ -111,7 +111,7 @@ class Methods {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row['name'];
         }
         
@@ -123,7 +123,7 @@ class Methods {
         $res = $this->sqlite->query($query);
         $return = array();
         
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row['name'];
         }
         
@@ -141,7 +141,7 @@ SQL;
             $res = $this->sqlite->query($query);
             
             $position = array();
-            while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $position[$row[$arg]] = explode(',', $row['functions']);
             }
             
@@ -155,11 +155,11 @@ SQL;
         $return = array();
 
         $query = <<<SQL
-SELECT * FROM bugfixes
+SELECT * FROM bugfixes ORDER BY SUBSTR(solvedIn71, 5) + 0 DESC, SUBSTR(solvedIn70, 5) + 0 DESC, SUBSTR(56, 5) + 0 DESC 
 SQL;
         $res = $this->sqlite->query($query);
 
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
 
