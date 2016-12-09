@@ -46,10 +46,22 @@ class Status extends Tasks {
                     $json->step = '';
                 
                 }
-                $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-                $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
+                
+                $log = file_get_contents($config->neo4j_folder.'/data/log/console.log');
+                if (strpos($log, 'java.lang.OutOfMemoryError: Java heap space') !== false ) {
+                    $pid = trim(file_get_contents($config->neo4j_folder.'/data/neo4j-service.pid'));
+                    $projectStatus = 'Neo4j died : Java heap space. Kill neo4j ('.$pid.') and run exakat again.';
+                } elseif (strpos($log, 'java.lang.OutOfMemoryError') !== false ) {
+                    $pid = trim(file_get_contents($config->neo4j_folder.'/data/neo4j-service.pid'));
+                    $projectStatus = 'Neo4j running out of memory...';
+                } else {
+                    $projectStatus = $json->project;
+                    $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
+                    $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
+                }
+                
                 $status = array('Running'  => 'Project',
-                                'project'  => $json->project,
+                                'project'  => $projectStatus,
                                 'in graph' => isset($res->results[0]) ? $res->results[0] : '<N/A>',
                                 'step'     => $json->step,);
             } else {
