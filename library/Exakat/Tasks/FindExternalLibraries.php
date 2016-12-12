@@ -126,7 +126,9 @@ class FindExternalLibraries extends Tasks {
         $ignore = 'None';
         $ignoreLength = 0;
         foreach($files as $id => $file) {
-            if (substr($file, 0, $ignoreLength) == $ignore) { print "Ignore $file ($ignore)\n"; continue; }
+            if (substr($file, 0, $ignoreLength) == $ignore) { 
+                print "Ignore $file ($ignore)\n"; continue; 
+            }
             $s = $this->process($path.$file);
             
             if (!empty($s)) {
@@ -141,7 +143,6 @@ class FindExternalLibraries extends Tasks {
         } else {
             $newConfigs = array();
         }
-//        $newConfigs = array_keys(array_count_values(array_values($newConfigs)));
 
         if (count(array_keys($newConfigs)) == 1) {
             display('One external library is going to be omitted : '.implode(', ', array_keys($newConfigs)));

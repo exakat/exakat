@@ -118,7 +118,8 @@ class Ambassador extends Reports {
         
         $this->generateAppinfo();
         $this->generateBugFixes();
-
+        $this->generateExternalServices();
+        
         // Favorites
         $this->generateFavorites();
         $this->generateDynamicCode();
@@ -1744,7 +1745,26 @@ SQL;
         $html = $this->injectBloc($html, 'ERROR_MESSAGES', $errorMessages);
         file_put_contents($this->tmpName.'/datas/error_messages.html', $html);
     }
+    
+    private function generateExternalServices() {
+        $externalServices = '';
 
+        $res = $this->datastore->getRow('configFiles');
+        foreach($res as $row) {
+            if (empty($row['homepage'])) {
+                $link = '';
+            } else {
+                $link = "<a href=\"".$row['homepage']."\">".$row['homepage']."&nbsp;<i class=\"fa fa-sign-out\"></i></a>";
+            }
+
+            $externalServices .= "<tr><td>$row[name]</td><td>$row[file]</td><td>$link</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('external_services');
+        $html = $this->injectBloc($html, 'EXTERNAL_SERVICES', $externalServices);
+        file_put_contents($this->tmpName.'/datas/external_services.html', $html);
+    }
+    
     private function generateDynamicCode() {
         $dynamicCode = '';
 
