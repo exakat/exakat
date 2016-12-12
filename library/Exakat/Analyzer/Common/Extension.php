@@ -110,25 +110,25 @@ class Extension extends Analyzer {
             $this->prepareQuery();
         }
 
-        if (!empty($interfaces)) {
+        if (!empty($ini['interfaces'])) {
             $interfaces = $this->makeFullNsPath($interfaces);
             $this->analyzerIs('Interfaces/InterfaceUsage')
                  ->fullnspathIs($ini['interfaces']);
             $this->prepareQuery();
         }
 
-        if (!empty($traits)) {
+        if (!empty($ini['traits'])) {
             $this->analyzerIs('Traits/TraitUsage')
-                 ->codeIs($traits);
+                 ->codeIs($ini['traits']);
             $this->prepareQuery();
 
-            $traits = $this->makeFullNsPath($traits);
+            $traits = $this->makeFullNsPath($ini['traits']);
             $this->analyzerIs('Traits/TraitUsage')
-                 ->fullnspathIs($ini['traits']);
+                 ->fullnspathIs($traits);
             $this->prepareQuery();
         }
 
-        if (!empty($namespaces)) {
+        if (!empty($ini['namespaces'])) {
             $namespaces = $this->makeFullNsPath($ini['namespaces']);
             $this->analyzerIs('Namespaces/NamespaceUsage')
                  ->outIs('NAME')
@@ -139,12 +139,11 @@ class Extension extends Analyzer {
             // Can a namespace be used in a nsname (as prefix) ? 
         }
 
-        if (!empty($directives)) {
-            $namespaces = $this->makeFullNsPath($ini['namespaces']);
+        if (!empty($ini['directives'])) {
             $this->analyzerIs('Php/DirectivesUsage')
                  ->outIs('ARGUMENTS')
                  ->outWithRank("ARGUMENT", 0)
-                 ->noDelimiterIs($directives);
+                 ->noDelimiterIs($ini['directives']);
             $this->prepareQuery();
             
             // Can a namespace be used in a nsname (as prefix) ? 
