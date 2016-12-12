@@ -66,7 +66,8 @@ class Project extends Tasks {
         }
 
         $this->logTime('Start');
-        $this->addSnitch(array('step' => 'Start', 'project' => $config->project));
+        $this->addSnitch(array('step'    => 'Start', 
+                               'project' => $config->project));
 
         // cleaning datastore
         $this->datastore = new Datastore($config, Datastore::CREATE);
@@ -223,6 +224,16 @@ class Project extends Tasks {
                                                'audit_length' => $audit_end - $audit_start,
                                                'neo4jSize'    => $neo4jSize));
                                                
+        $query = <<<GREMLIN
+g.V().where( __.sideEffect{x = []; }.in('ANALYZED').sideEffect{ x.add(it.get().value('analyzer')); }.barrier().sideEffect{ y = x.groupBy().findAll{ i,j -> j.size() > 1;};} )
+.filter{ y.size() > 0; }
+.map{ y; };
+GREMLIN;
+
+        $res = $this->gremlin->query($query);
+        if (!empty($res)) {
+            file_put_contents($config->projects_root.'/projects/'.$project.'/log/doublons.log', var_export($res, true));
+        }
 
         $this->logTime('Final');
         $this->removeSnitch();
