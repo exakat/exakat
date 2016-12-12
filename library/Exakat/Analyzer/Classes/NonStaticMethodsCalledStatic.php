@@ -51,7 +51,8 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->hasNoOut('STATIC')
              ->outIs('NAME')
              ->samePropertyAs('code', 'methodname')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // check outside the class to undefined Class : report it as pb. 

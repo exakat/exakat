@@ -35,7 +35,8 @@ class IssetWithConstant extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIsIE(array('VARIABLE', 'CONSTANT', 'PROPERTY')) // Staticconstant 
              ->atomIs(array('Identifier', 'Nsname'))
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

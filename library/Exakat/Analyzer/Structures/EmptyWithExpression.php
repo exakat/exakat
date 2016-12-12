@@ -49,7 +49,8 @@ class EmptyWithExpression extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->samePropertyAs('code', 'storage')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // extends this to array, property, static property

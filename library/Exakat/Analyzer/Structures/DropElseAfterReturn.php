@@ -33,7 +33,8 @@ class DropElseAfterReturn extends Analyzer {
              ->back('first')
              ->outIs('ELSE')
              ->noAtomInside('Return')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         //if ($a) { doSomething(); } else { return $a; }
@@ -43,7 +44,8 @@ class DropElseAfterReturn extends Analyzer {
              ->back('first')
              ->outIs('THEN')
              ->noAtomInside('Return')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

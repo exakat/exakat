@@ -44,7 +44,8 @@ class UsedPrivateProperty extends Analyzer {
                                                            .out("CLASS").filter{ it.get().value("token") in ["T_STRING", "T_NS_SEPARATOR", "T_STATIC" ] }.filter{ it.get().value("fullnspath") == classe }.in("CLASS")
                                                            .out("PROPERTY").filter{ it.get().value("code") == property }
                                                            .count().is(neq(0)) )')
-             ->back('ppp');
+             ->back('ppp')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // property used in a static property static::$b[] or self::$b[]
@@ -72,7 +73,8 @@ class UsedPrivateProperty extends Analyzer {
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->samePropertyAs('code', 'x')
-             ->back('ppp');
+             ->back('ppp')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // property used in a normal methodcall with $this $this->b()
@@ -95,7 +97,8 @@ class UsedPrivateProperty extends Analyzer {
              ->inIs('OBJECT')
              ->outIs('PROPERTY')
              ->samePropertyAs('code', 'x')
-             ->back('ppp');
+             ->back('ppp')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

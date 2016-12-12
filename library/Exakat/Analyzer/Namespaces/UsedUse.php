@@ -41,7 +41,8 @@ class UsedUse extends Analyzer {
              ->atomInside('New')
              ->outIs('NEW')
              ->samePropertyAs('code', 'used')
-             ->back('result');
+             ->back('result')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
     // case of simple use in Typehint
@@ -59,7 +60,8 @@ class UsedUse extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->samePropertyAs('code', 'used')
-             ->back('result');
+             ->back('result')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
     // case of alias use in extends or implements
@@ -75,7 +77,8 @@ class UsedUse extends Analyzer {
              ->atomInside('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
              ->samePropertyAs('code', 'alias')
-             ->back('result');
+             ->back('result')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
         
     // case of simple use in a Static structure or instanceof
@@ -91,7 +94,8 @@ class UsedUse extends Analyzer {
              ->atomInside(array('Staticconstant', 'Staticproperty', 'Staticmethodcall', 'Instanceof'))
              ->outIs('CLASS')
              ->samePropertyAs('code', 'used')
-             ->back('result');
+             ->back('result')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
     // case of namespace use used in a class/trait
@@ -108,7 +112,8 @@ class UsedUse extends Analyzer {
              ->hasClassTrait()
              ->outIs('USE')
              ->samePropertyAs('code', 'used')
-             ->back('result');
+             ->back('result')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
         
     // As nsname prefix
@@ -125,7 +130,8 @@ class UsedUse extends Analyzer {
              ->hasNoIn(array('USE', 'NAME')) // avoid namespace and use itself.
              ->outWithRank('SUBNAME', 0)
              ->samePropertyAs('code', 'used')
-             ->back('result');
+             ->back('result')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

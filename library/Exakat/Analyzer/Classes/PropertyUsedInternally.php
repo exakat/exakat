@@ -43,7 +43,8 @@ class PropertyUsedInternally extends Analyzer {
              ->inIs('OBJECT')
              ->outIs('PROPERTY')
              ->samePropertyAs('code','propertyname')
-             ->back('ppp');
+             ->back('ppp')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         //////////////////////////////////////////////////////////////////
@@ -67,7 +68,8 @@ class PropertyUsedInternally extends Analyzer {
              ->inIs('CLASS')
              ->outIs('PROPERTY')
              ->samePropertyAs('code','property')
-             ->back('ppp');
+             ->back('ppp')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
 // Test for arrays ? 

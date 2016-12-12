@@ -37,7 +37,8 @@ class CatchShadowsVariable extends Analyzer {
              ->samePropertyAs('code', 'catchVariable')
              ->hasNoIn('VARIABLE')
              ->hasNoCatch()
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

@@ -36,7 +36,8 @@ class ConstantScalarExpression extends Analyzer {
              ->outIs('CONST')
              ->outIs('VALUE')
              ->atomIsNot($authorizedAtoms)
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // in argument's default value
@@ -45,7 +46,8 @@ class ConstantScalarExpression extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->atomIsNot($authorizedAtoms)
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // in property's default value
@@ -56,7 +58,8 @@ class ConstantScalarExpression extends Analyzer {
              ->outIs('PPP')
              ->outIs('RIGHT')
              ->atomIsNot($authorizedAtoms)
-             ->inIs('RIGHT');
+             ->inIs('RIGHT')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
