@@ -47,7 +47,8 @@ class PropertyVariableConfusion extends Analyzer {
              ->samePropertyAs('code', 'name')
              ->hasNoIn('PROPERTY')
              ->analyzerIsNot('Variables/Arguments')
-             ->back('ppp');
+             ->back('ppp')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
