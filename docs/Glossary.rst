@@ -647,6 +647,7 @@ Glossary
     + `__METHOD__`
 
       + :ref:`Already Parents Interface <already-parents-interface>`
+      + :ref:`Anonymous Classes <anonymous-classes>`
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 
     + `__call`
@@ -660,6 +661,7 @@ Glossary
 
     + `__construct`
 
+      + :ref:`Anonymous Classes <anonymous-classes>`
       + :ref:`Assign Default To Properties <assign-default-to-properties>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`

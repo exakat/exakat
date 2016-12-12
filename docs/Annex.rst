@@ -207,6 +207,8 @@ List of analyzers, by version of introduction, newest to oldest.
 
 
 * 0.9.3
+  * Close Tags Consistency (Php/CloseTagsConsistency)
+  * Unset() Or (unset) (Php/UnsetOrCast)
   * Wpdb Prepare Or Not (Wordpress/WpdbPrepareOrNot)
 * 0.9.2
   * $GLOBALS or global (Php/GlobalsVsGlobal)
