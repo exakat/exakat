@@ -1,4 +1,4 @@
-Version 0.9.3 (Purple-Gold Bells, Coming up)
+Version 0.9.4 (Lady of Jinsheng Palace, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 0.9.3 (Purple-Gold Bells, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.9.3 (Purple-Gold Bells, 2016-12-12)
++ Architecture
+    + Lots of cleaned code
+    + Harmonized data for extensions
+    + Stop 'project' if no code is available
+    + Now using stub in phar.
++ Report
+    + Added directives, bugfixes, external services and 
+    + Added support for PHP 7.0.14 and 5.6.29
++ Analyzer
+    + New analyzer : Wordpress, recommend prepare()
+    + More favorite reports : final ?> and unset()/(unset)
+    + Reduced number of double reports for many analysis
+    + Update : Fixed analysis with $THIS
+    + Upgrade : report useless casting of comparisons
+    + Update : Should use this takes into account parent::
 
 Version 0.9.2 (Golden Haired Hou, 2016-12-05)
 + Architecture
