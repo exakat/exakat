@@ -1,11 +1,12 @@
-#!/usr/bin/env php
 <?php
 
 try {
-    if(phar::running() === ''){
+    $isPhar = phar::running();
+
+    if(empty($isPhar)){
         include_once __DIR__.'/library/Autoload.php';
     } else {
-        require_once 'phar://exakat.phar/library/Autoload.php';
+        require_once $isPhar.'/library/Autoload.php';
     }
 
     $graphDB = new \Exakat\Graph\Gremlin3($config);
