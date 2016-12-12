@@ -41,7 +41,7 @@ abstract class Reports {
     protected $datastore = null;
     
     public function __construct() {
-        $this->config = Config::Factory();
+        $this->config = Config::factory();
 
         $analyzers = Analyzer::getThemeAnalyzers($this->config->thema);
         $this->themesList = '("'.implode('", "', $analyzers).'")';

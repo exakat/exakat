@@ -118,7 +118,7 @@ g.V().hasLabel("String").filter{ (it.get().value("noDelimiter") =~ "::" ).getCou
                         .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
 GREMLIN
 );
-        $strings = $this->makeFullNsPath($strings);
+        $strings = $this->makeFullnspath($strings);
         if (count($strings) > 0) {
             $this->atomIs('Class')
                  ->analyzerIsNot('self')

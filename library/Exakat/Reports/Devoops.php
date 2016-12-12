@@ -77,17 +77,14 @@ class Devoops extends Reports {
                     $out->writeAttribute('fixable', (int) $error['fixable']);
                     $out->text($error['message']);
                     $out->endElement();
-                    ++$this->count;
                 }
             }
-        }//end foreach
+        }
 
         $out->endElement();
-        $this->cachedData .= $out->flush();
-
         return true;
 
-    }//end generateFileReport()
+    }
 
     public function generate($folder, $name = 'report') {
         $finalName = $name;

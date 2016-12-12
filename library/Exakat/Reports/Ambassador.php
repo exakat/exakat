@@ -1089,11 +1089,6 @@ SQL;
         return $result[0];
     }
 
-    /**
-     * Liste analyzer
-     *
-     * @param type $issues
-     */
     private function getTotalAnalyzer($issues = false) {
         $query = "SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
             FROM resultsCounts AS rc
@@ -1105,9 +1100,6 @@ SQL;
         return $result->fetchArray(\SQLITE3_NUM);
     }
 
-    /**
-     * generate the content of liste analyzers
-     */
     private function generateAnalyzers() {
         $analysers = $this->getAnalyzersResultsCounts();
 
@@ -1130,11 +1122,6 @@ SQL;
         file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML);
     }
 
-    /**
-     * Get list of analyzers
-     *
-     * @return string
-     */
     protected function getAnalyzersResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1694,7 +1681,6 @@ SQL;
 
         $data = new Methods();
         $bugfixes = $data->getBugFixes();
-        print_r($bugfixes);
         
         $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
         $reported = array();

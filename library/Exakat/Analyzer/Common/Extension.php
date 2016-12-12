@@ -111,9 +111,9 @@ class Extension extends Analyzer {
         }
 
         if (!empty($ini['interfaces'])) {
-            $interfaces = $this->makeFullNsPath($interfaces);
+            $interfaces = $this->makeFullNsPath($ini['interfaces']);
             $this->analyzerIs('Interfaces/InterfaceUsage')
-                 ->fullnspathIs($ini['interfaces']);
+                 ->fullnspathIs($interfaces);
             $this->prepareQuery();
         }
 

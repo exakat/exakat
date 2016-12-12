@@ -46,13 +46,13 @@ class UndefinedClasses extends Analyzer {
         }
 
         $classes = $data->getClassByRelease($this->release);
-        $classes = $this->makeFullNSpath(array_pop($classes));
+        $classes = $this->makeFullNsPath(array_pop($classes));
 
         $interfaces = $data->getInterfaceByRelease($this->release);
-        $interfaces = $this->makeFullNSpath(array_pop($interfaces));
+        $interfaces = $this->makeFullNsPath(array_pop($interfaces));
 
         $traits = $data->getTraitByRelease($this->release);
-        $traits = $this->makeFullNSpath(array_pop($traits));
+        $traits = $this->makeFullNsPath(array_pop($traits));
 
         $all = array_merge($classes, $interfaces, $traits);
         

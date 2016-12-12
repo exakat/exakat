@@ -37,6 +37,7 @@ class Php extends Analyzer {
 
         $this->analyzerIs('Interfaces/InterfaceUsage')
              ->fullnspathIs($interfaces);
+        $this->prepareQuery();
     }
 }
 

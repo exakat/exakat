@@ -184,7 +184,7 @@ CYPHER;
         }
     }
 
-    public function saveTokenCounts() {
+    private static function saveTokenCounts() {
         $config = Config::factory();
         $datastore = new Datastore($config);
         

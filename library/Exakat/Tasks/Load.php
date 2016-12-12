@@ -81,6 +81,9 @@ class Load extends Tasks {
     private $uses = array('function' => array(),
                           'const'    => array(),
                           'class'    => array());
+    private $filename   = null;
+    private $line       = 0;
+    private $processing = array();
 
     private $links = array();
     
@@ -347,7 +350,6 @@ class Load extends Tasks {
     }
 
     private function processFile($filename) {
-#        display( "Process '$filename'\n");
         $this->log->log("$filename");
         $this->filename = $filename;
         
