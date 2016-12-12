@@ -25,6 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Docs;
 use Exakat\Datastore;
+use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
@@ -90,13 +91,6 @@ class Ambassador extends Reports {
         return $combinePageHTML;
     }
 
-    /**
-     * Inject bloc in html content
-     *
-     * @param type $html
-     * @param type $bloc
-     * @param type $content
-     */
     private function injectBloc($html, $bloc, $content) {
         return str_replace("{{" . $bloc . "}}", $content, $html);
     }
@@ -105,12 +99,6 @@ class Ambassador extends Reports {
         
     }
 
-    /**
-     * Generate the report
-     *
-     * @param type $folder
-     * @param type $name
-     */
     public function generate($folder, $name = 'report') {
         $this->finalName = $folder . '/' . $name;
         $this->tmpName = $folder . '/.' . $name;
@@ -129,6 +117,9 @@ class Ambassador extends Reports {
         $this->generateExternalLib();
         
         $this->generateAppinfo();
+        $this->generateBugFixes();
+        $this->generateExternalServices();
+        $this->generateDirectiveList();
         
         // Favorites
         $this->generateFavorites();
@@ -1009,7 +1000,11 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $data[] = array('label' => $key, 'value' => count(Analyzer::getThemeAnalyzers($categorie)));
+            $list = 'IN ("'.implode('", "', Analyzer::getThemeAnalyzers($categorie)).'")';
+            $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
+            $total = $this->sqlite->querySingle($query);
+
+            $data[] = array('label' => $key, 'value' => $total);
         }
         // ordonné DESC par valeur
         uasort($data, function ($a, $b) {
@@ -1047,16 +1042,21 @@ JAVASCRIPT;
      *
      */
     public function getSeverityBreakdown() {
+        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = '"'.join('", "', $list).'"';
+
         $query = <<<SQL
                 SELECT severity, count(*) AS number
                     FROM results
+                    WHERE analyzer IN ($list)
                     GROUP BY severity
                     ORDER BY number DESC
 SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray()) {
-            $data[] = array('label' => $row['severity'], 'value' => $row['number']);
+            $data[] = array('label' => $row['severity'], 
+                            'value' => $row['number']);
         }
         
         $html = '';
@@ -1091,11 +1091,6 @@ SQL;
         return $result[0];
     }
 
-    /**
-     * Liste analyzer
-     *
-     * @param type $issues
-     */
     private function getTotalAnalyzer($issues = false) {
         $query = "SELECT count(*) AS total, COUNT(CASE WHEN rc.count != 0 THEN 1 ELSE null END) AS yielding 
             FROM resultsCounts AS rc
@@ -1107,9 +1102,6 @@ SQL;
         return $result->fetchArray(\SQLITE3_NUM);
     }
 
-    /**
-     * generate the content of liste analyzers
-     */
     private function generateAnalyzers() {
         $analysers = $this->getAnalyzersResultsCounts();
 
@@ -1132,11 +1124,6 @@ SQL;
         file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML);
     }
 
-    /**
-     * Get list of analyzers
-     *
-     * @return string
-     */
     protected function getAnalyzersResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1691,6 +1678,62 @@ SQL;
         file_put_contents($this->tmpName.'/datas/ext_lib.html', $html);
     }
 
+    protected function generateBugfixes() {
+        $table = '';
+
+        $data = new Methods();
+        $bugfixes = $data->getBugFixes();
+        
+        $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
+        $reported = array();
+        $info = array();
+
+        $rows = array();
+        while($row = $found->fetchArray()) {
+            $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
+        }
+        
+        foreach($bugfixes as $bugfix) {
+            if (!empty($bugfix['function'])) {
+                if (!isset($rows[$bugfix['function']])) { continue; }
+
+                $cve = $this->Bugfixes_cve($bugfix['cve']);
+                $table .= '<tr>
+    <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
+    <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
+    <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
+    <td>'.($bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-').'</td>
+    <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
+    <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
+    <td>'.$cve.'</td>
+                </tr>';
+            } elseif (!empty($bugfix['analyzer'])) {
+                $subanalyze = $this->sqlite->querySingle('SELECT count FROM resultsCounts WHERE analyzer = "'.$bugfix['analyzer'].'"');
+                
+                $cve = $this->Bugfixes_cve($bugfix['cve']);
+
+                if ($subanalyze == 0) { continue; }
+                $table .= '<tr>
+    <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
+    <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
+    <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
+    <td>'.($bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-').'</td>
+    <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
+    <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
+    <td>'.$cve.'</td>
+                </tr>';
+            } else {
+                continue; // ignore. Possibly some mis-configuration
+            }
+        }
+        
+        $html = $this->getBasedPage('bugfixes');
+        $html = $this->injectBloc($html, 'BUG_FIXES', $table);
+        file_put_contents($this->tmpName.'/datas/bugfixes.html', $html);
+    }
+
     private function generateErrorMessages() {
         $errorMessages = '';
 
@@ -1703,7 +1746,75 @@ SQL;
         $html = $this->injectBloc($html, 'ERROR_MESSAGES', $errorMessages);
         file_put_contents($this->tmpName.'/datas/error_messages.html', $html);
     }
+    
+    private function generateExternalServices() {
+        $externalServices = '';
 
+        $res = $this->datastore->getRow('configFiles');
+        foreach($res as $row) {
+            if (empty($row['homepage'])) {
+                $link = '';
+            } else {
+                $link = "<a href=\"".$row['homepage']."\">".$row['homepage']."&nbsp;<i class=\"fa fa-sign-out\"></i></a>";
+            }
+
+            $externalServices .= "<tr><td>$row[name]</td><td>$row[file]</td><td>$link</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('external_services');
+        $html = $this->injectBloc($html, 'EXTERNAL_SERVICES', $externalServices);
+        file_put_contents($this->tmpName.'/datas/external_services.html', $html);
+    }
+    
+    private function generateDirectiveList() {
+    // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
+        $directives = array('standard', 'bcmath', 'date', 'file', 
+                            'fileupload', 'mail', 'ob', 'env',
+                            // standard extensions
+                            'apc', 'amqp', 'apache', 'assertion', 'curl', 'dba',
+                            'filter', 'image', 'intl', 'ldap',
+                            'mbstring', 
+                            'opcache', 'openssl', 'pcre', 'pdo', 'pgsql',
+                            'session', 'sqlite', 'sqlite3', 
+                            // pecl extensions
+                            'com', 'eaccelerator',
+                            'geoip', 'ibase', 
+                            'imagick', 'mailparse', 'mongo', 
+                            'trader', 'wincache', 'xcache'
+                             );
+
+        $directiveList = '';
+        $res = $this->sqlite->query(<<<SQL
+SELECT analyzer FROM resultsCounts 
+    WHERE ( analyzer LIKE "Extensions/Ext%" OR 
+            analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
+        AND count > 0
+SQL
+);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if ($row['analyzer'] == 'Structures/FileUploadUsage') {
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
+                $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
+            } elseif ($row['analyzer'] == 'Php/UsesEnv') {
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
+                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+            } else {
+                $ext = substr($row['analyzer'], 14);
+                if (in_array($ext, $directives)) {
+                    $data = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
+                    $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
+                    foreach($data as $row) { 
+                        $directiveList .= "<tr><td>$row->name</td><td>$row->suggested</td><td>$row->documentation</td></tr>\n";
+                    }
+                }
+            }
+        }
+        
+        $html = $this->getBasedPage('directive_list');
+        $html = $this->injectBloc($html, 'DIRECTIVE_LIST', $directiveList);
+        file_put_contents($this->tmpName.'/datas/directive_list.html', $html);
+    }
+    
     private function generateDynamicCode() {
         $dynamicCode = '';
 
@@ -2164,6 +2275,26 @@ HTML;
             default : 
                 return '&nbsp;';
         }
-    }}
+    }
+
+    private function Bugfixes_cve($cve) {
+        if (!empty($cve)) {
+            if (strpos($cve, ', ') !== false) {
+                $cves = explode(', ', $cve);
+                $cveHtml = array();
+                foreach($cves as $cve) {
+                    $cveHtml[] = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+                }
+                $cveHtml = implode(',<br />', $cveHtml);
+            } else {
+                $cveHtml = '<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name='.$cve.'">'.$cve.'</a>';
+            }
+        } else {
+            $cveHtml = '-';
+        }
+        
+        return $cveHtml;
+    }    
+}
 
 ?>

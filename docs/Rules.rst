@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 07 Dec 2016 09:12:56 +0000
-.. comment: Generation hash : dd1c51653f892c68a54e4108630147860a446fcd
+.. comment: Generation date : Mon, 12 Dec 2016 15:32:10 +0000
+.. comment: Generation hash : 2ccb3ceda74a4476cdd19b2c7c16212ed06eeb3a
 
 
 .. _$http\_raw\_post\_data:
@@ -554,6 +554,15 @@ Anonymous Classes
 
 
 Mark anonymous classes.
+
+.. code-block:: php
+
+   <?php
+   
+   // Anonymous class, available since PHP 7.0
+   $object = new class { function __construct() { echo __METHOD__; } };
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/Anonymous                                                                                       |
@@ -2135,7 +2144,20 @@ Double Assignation
 ##################
 
 
-This is when a same container (variable, property, array index) are assigned with values twice in a row. One of them is probably a debug instruction, that was forgotten.
+This happens when a container (variable, property, array index) is assigned with values twice in a row. One of them is probably a debug instruction, that was forgotten. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Normal assignation
+   $a = 1;
+   
+   // Double assignation
+   $b = 2;
+   $b = 3;
+   
+   ?>
 
 +--------------+------------------------------+
 | Command Line | Structures/DoubleAssignation |
@@ -6399,6 +6421,18 @@ Parenthesis As Parameter
 
 Using parenthesis around parameters used to silent some internal check. This is not the case anymore in PHP 7, and should be fixed by removing the parenthesis and making the value a real reference.
 
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7 sees through parenthesis
+   $d = foo(1, 2, $c);
+   
+   // Avoid parenthesis in arguments
+   $d = foo(1, 2, ($c));
+   
+   ?>
+
 +--------------+-----------------------------------------------------+
 | Command Line | Php/ParenthesisAsParameter                          |
 +--------------+-----------------------------------------------------+
@@ -7287,6 +7321,21 @@ Setlocale Needs Constants
 
 
 The first argument of setlocale must be one of the valid constants, LC_ALL, LC_COLLATE, LC_CTYPE, LC_MONETARY, LC_NUMERIC, LC_TIME, LC_MESSAGES.
+
+.. code-block:: php
+
+   <?php
+   
+   // Use constantes for setlocale first argument
+   setlocale(LC_ALL, 'nl_NL');
+   setlocale(\LC_ALL, 'nl_NL');
+   
+   // Don't use string for setlocale first argument
+   setlocale('LC_ALL', 'nl_NL');
+   setlocale('LC_'.'ALL', 'nl_NL');
+   
+   ?>
+
 
 The PHP 5 usage of strings (same name as above, enclosed in ' or ") is not legit anymore in PHP 7 and later.
 
@@ -10177,6 +10226,9 @@ There is no need to overcast returned values.
    // strpos doesn't always returns an integer : cast is useful
    $a = (boolean) strpos($b, $c);
    
+   // comparison don't need casting, nor parenthesis
+   $c = (bool) ($b > 2);
+   
    ?>
 
 +--------------+---------------------------+
@@ -11428,11 +11480,7 @@ preg_replace With Option e
    $string = 'abcde';
    
    // PHP 5.6 and older usage of /e
-   $replaced = preg_replace('/c/e', 'strtoupper(.. comment: Rules details
-.. comment: Generation date : Mon, 10 Oct 2016 10:17:00 +0000
-.. comment: Generation hash : d4a634700b94af15c6612b44000d8e148260503b
-
-)', $string);
+   $replaced = preg_replace('/c/e', 'strtoupper($0)', $string);
    
    // PHP 7.0 and more recent
    // With one replacement

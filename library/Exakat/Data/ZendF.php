@@ -121,43 +121,6 @@ class ZendF {
         
         return $return;
     }
-    
-    public function getReleaseUsingClasses($classes) {
-        $sqlClasses = "'".implode("', '", $classes)."'";
-        
-        $query = <<<SQL
-select count(*) from classes 
-JOIN namespaces 
-  ON classes.namespace_id = namespaces.id
-JOIN releases 
-  ON namespaces.release_id = releases.id
-where class IN ($sqlClasses)
-GROUP BY release
-order by count(*) DESC
-SQL;
-        $res = $this->sqlite->query($query);
-        $row = $res->fetchArray(SQLITE3_ASSOC);
-        $max = array_pop($row);
-
-        $query = <<<SQL
-select release, GROUP_CONCAT(class) AS classes from classes 
-JOIN namespaces 
-  ON classes.namespace_id = namespaces.id
-JOIN releases 
-  ON namespaces.release_id = releases.id
-where class IN ($sqlClasses)
-GROUP BY release
-HAVING COUNT(*) = $max
-SQL;
-        $res = $this->sqlite->query($query);
-        
-        $return = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $return[$row['release']] = explode(',', $row['classes']);
-        }
-        
-        return $return;
-    }
 }
 
 ?>

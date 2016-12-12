@@ -27,11 +27,11 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Datastore;
 
 abstract class Reports {
-    private $count = 0;
-
     const FILE_EXTENSION = 'undefined';
     static public $FORMATS        = array('Clustergrammer', 'Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
                                           'Text', 'Xml', 'Uml', 'ZendFramework', 'Ambassador', 'PhpConfiguration', 'RadwellCode');
+
+    private $count = 0;
 
     protected $themes     = array(); // cache for themes list
     protected $themesList = '';      // cache for themes list in SQLITE
@@ -41,7 +41,7 @@ abstract class Reports {
     protected $datastore = null;
     
     public function __construct() {
-        $this->config = Config::Factory();
+        $this->config = Config::factory();
 
         $analyzers = Analyzer::getThemeAnalyzers($this->config->thema);
         $this->themesList = '("'.implode('", "', $analyzers).'")';

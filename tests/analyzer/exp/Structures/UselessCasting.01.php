@@ -10,6 +10,10 @@ $expected     = array('(double) date_sun_info( )',
                       '(boolean) phpinfo( )',
                       '(string) trim($a)',);
 
-$expected_not = array();
+$expected_not = array('(integer) $a->curl_errno()',
+                      '(integer) A::curl_errno()',
+                      '(integer) $a->$curl_errno()',
+                      '(integer) A::$curl_errno()'
+);
 
 ?>

@@ -6,13 +6,13 @@ Installation
 Summary
 -------
 
-* `General installation guide`_
+* `Presentation`_
 * `Installation guide with Docker`_
 * `Installation guide with Vagrant and Ansible`_
 * `Installation guide for Debian/Ubuntu`_
-* `Optional installation`_
+* `Optional installations`_
 
-Introduction
+Presentation
 ------------
 
 Exakat relies on several parts : 
@@ -32,12 +32,12 @@ Installation with docker is easy, and convenient. It hides the dependency on the
 
 Currently, Docker installation only ships with one PHP version (7.0).
 
-* Install [Docker](http://www.docker.com/)
+* Install `Docker <http://www.docker.com/>`_
 * Start Docker
 * Pull exkat : git pull exakat/exakat
-* Run exakat : docker run -it -v ($pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat version
-* Init a project : docker run -it -v ($pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat init -p <project name> -R <vcs_url>
-* Run exakat : docker run -it -v ($pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat project -v <project name>
+* Run exakat : docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat version
+* Init a project : docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat init -p <project name> -R <vcs_url>
+* Run exakat : docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat project -p <project name>
 
 Installation guide with Vagrant and Ansible
 -------------------------------------------
@@ -72,8 +72,8 @@ Install with Vagrant and Ansible
 
 You are now ready to run a project. 
 
-Installation guide for Debian
------------------------------
+Installation guide for Debian/Ubuntu
+------------------------------------
 
 These is the installation guide for a Debian server. This also serves as general installation guide. 
 
@@ -179,8 +179,8 @@ Test
 From the commandline, run `php exakat.phar doctor`.
 This will check if all of the above has be correctly run and will report some diagnostic. 
 
-Optional installation
----------------------
+Optional installations
+----------------------
 
 By default, exakat works with Git repository for downloading code. You may also use 
 

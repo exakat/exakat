@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoDatastore;
 use Exakat\Phpexec;
 
 class Phploc extends Tasks {

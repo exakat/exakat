@@ -23,7 +23,7 @@
 
 namespace Exakat\Exceptions;
 
-class NoSuchProject extends \RuntimeException {
+class ProjectTooLarge extends \RuntimeException {
     public function __construct($nb_tokens, $limit) {
         parent::__construct("Project too large ($nb_tokens tokens found, $limit tokens limit). Check config/exakat.ini to change this limit.\n", 0, null);
     }

@@ -81,13 +81,19 @@ class Load extends Tasks {
     private $uses = array('function' => array(),
                           'const'    => array(),
                           'class'    => array());
+    private $filename   = null;
+    private $line       = 0;
+    private $processing = array();
 
     private $links = array();
+    
+    private $sequences = array();
     
     private $currentClassTrait = array();
     
     private $tokens = array();
     private $id = 0;
+    private $id0 = 0;
     
     const FULLCODE_SEQUENCE = ' /**/ ';
     const FULLCODE_BLOCK    = ' { /**/ } ';
@@ -299,6 +305,9 @@ class Load extends Tasks {
 
     private function processProject($project) {
         $files = $this->datastore->getCol('files', 'file');
+        if (empty($files)) {
+            throw new NoFileToProcess($project);
+        }
     
         $nbTokens = 0;
         $path = $this->config->projects_root.'/projects/'.$project.'/code';
@@ -341,7 +350,6 @@ class Load extends Tasks {
     }
 
     private function processFile($filename) {
-#        display( "Process '$filename'\n");
         $this->log->log("$filename");
         $this->filename = $filename;
         
@@ -4226,8 +4234,11 @@ class Load extends Tasks {
                 return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
             }
         } elseif ($this->atoms[$nameId]['atom'] === 'String' && isset($this->atoms[$nameId]['noDelimiter'])) {
-            $prefix =  ($this->atoms[$nameId]['noDelimiter'][0] === '\\' ? '' : '\\') .
-                        strtolower($this->atoms[$nameId]['noDelimiter']);
+            if (empty($this->atoms[$nameId]['noDelimiter'])) {
+                $prefix = '\\';
+            } else {
+                $prefix =  ($this->atoms[$nameId]['noDelimiter'][0] === '\\' ? '' : '\\') . strtolower($this->atoms[$nameId]['noDelimiter']);
+            }
 
             // define doesn't care about use...
             return $prefix;

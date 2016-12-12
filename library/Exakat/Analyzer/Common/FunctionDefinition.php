@@ -35,7 +35,7 @@ class FunctionDefinition extends Analyzer {
     }
     
     public function analyze() {
-        $fullnspath = $this->makeFullnspath($this->functions);
+        $fullnspath = $this->makeFullNsPath($this->functions);
         
         $this->atomIs('Function')
              ->outIs('NAME')

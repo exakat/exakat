@@ -27,6 +27,7 @@ use Exakat\Data\Methods;
 
 class UselessCasting extends Analyzer {
     public function analyze() {
+        // Function returning a type, then casted to that type
         $casts = array('T_STRING_CAST'  => 'string',
                        'T_BOOL_CAST'    => 'bool',
                        'T_INT_CAST'     => 'int',
@@ -41,11 +42,21 @@ class UselessCasting extends Analyzer {
             $this->atomIs('Cast')
                  ->tokenIs($token)
                  ->outIs('CAST')
+                 ->outIsIE('CODE') // In case there are some parenthesis
                  ->atomIs('Functioncall')
                  ->fullnspathIs($returnTypes[$type])
                  ->back('first');
             $this->prepareQuery();
         }
+        
+        // (bool) ($a > 2)
+        $this->atomIs('Cast')
+             ->tokenIs('T_BOOL_CAST')
+             ->outIs('CAST')
+             ->outIsIE('CODE') // In case there are some parenthesis
+             ->atomIs('Comparison')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

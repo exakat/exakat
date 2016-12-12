@@ -30,6 +30,7 @@ use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
+use XMLWriter;
 
 class Devoops extends Reports {
     const FOLDER_PRIVILEGES = 0755;
@@ -76,17 +77,14 @@ class Devoops extends Reports {
                     $out->writeAttribute('fixable', (int) $error['fixable']);
                     $out->text($error['message']);
                     $out->endElement();
-                    ++$this->count;
                 }
             }
-        }//end foreach
+        }
 
         $out->endElement();
-        $this->cachedData .= $out->flush();
-
         return true;
 
-    }//end generateFileReport()
+    }
 
     public function generate($folder, $name = 'report') {
         $finalName = $name;

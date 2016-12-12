@@ -139,7 +139,7 @@ GREMLIN;
                     $text[] = array($k, $v);
                 }
             }
-        } elseif ($config->markdown === true || $config->html === true || $config->odt === true) {
+        } elseif ($config->html === true || $config->odt === true) {
             $text = '';
             foreach($return as $k => $r) {
                 if ($config->style == 'COUNTED') {
@@ -165,10 +165,6 @@ GREMLIN;
             }
         }
 
-        if ($config->html === true || $config->odt === true) {
-            $text = Markdown::defaultTransform($text);
-        }
-
         if ($config->output) {
             echo $text;
         }
@@ -179,9 +175,6 @@ GREMLIN;
                 break 1;
             case $config->odt :
                 $extension = 'odt';
-                break 1;
-            case $config->markdown :
-                $extension = 'md';
                 break 1;
             case $config->html :
                 $extension = 'html';

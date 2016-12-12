@@ -43,7 +43,8 @@ class ShouldBeTypehinted extends Analyzer {
              ->atomInside('Property')
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'name')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // spotting objects with methodcall

@@ -77,19 +77,12 @@ class Test extends Tasks {
                         6 => '-q'
                         );
         
-        try {
-            $configThema = Config::push($args);
+        $configThema = Config::push($args);
 
-            $analyze = new Analyze($this->gremlin);
-            $analyze->run($configThema);
-            unset($report);
-            
-            Config::pop();
-        } catch (\Exception $e) {
-            echo "Error while running the Analyze $theme \n",
-                 $e->getMessage();
-            die();
-        }
+        $analyze = new Analyze($this->gremlin);
+        $analyze->run($configThema);
+        
+        Config::pop();
 
         display("Analyzed project\n");
     }

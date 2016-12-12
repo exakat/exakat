@@ -40,52 +40,14 @@ class Extension extends Analyzer {
     
     
     public function analyze() {
-        $functions  = array();
-        $constants  = array();
-        $classes    = array();
-        $interfaces = array();
-        $traits     = array();
-        $namespaces = array();
-        $directives = array();
-
         if (substr($this->source, -4) == '.ini') {
             $ini = $this->loadIni($this->source);
-            extract($ini);
-            
-            if (count($functions) == 1 && empty($functions[0])) {
-                $functions = array();
-            }
-
-            if (count($constants) == 1 && empty($constants[0])) {
-                $constants = array();
-            }
-
-            if (count($classes) == 1 && empty($classes[0])) {
-                $classes = array();
-            }
-
-            if (count($interfaces) == 1 && empty($interfaces[0])) {
-                $interfaces = array();
-            }
-
-            if (count($traits) == 1 && empty($traits[0])) {
-                $traits = array();
-            }
-
-            if (count($namespaces) == 1 && empty($namespaces[0])) {
-                $namespaces = array();
-            }
-
-            if (count($directives) == 1 && empty($directives[0])) {
-                $directives = array();
-            }
         } else {
-            echo "Cannot process the '", $this->source, "' file. It has to be .ini format.\n";
             return true;
         }
         
-        if (!empty($functions)) {
-            $functions = $this->makeFullNsPath($functions);
+        if (!empty($ini['functions'])) {
+            $functions = $this->makeFullNsPath($ini['functions']);
             $this->atomIs('Functioncall')
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -93,15 +55,15 @@ class Extension extends Analyzer {
             $this->prepareQuery();
         }
         
-        if (!empty($constants)) {
+        if (!empty($ini['constants'])) {
             $this->atomIs('Identifier')
                  ->analyzerIs('Constants/ConstantUsage')
-                 ->fullnspathIs($this->makeFullNsPath($constants));
+                 ->fullnspathIs($this->makeFullNsPath($ini['constants']));
             $this->prepareQuery();
         }
 
-        if (!empty($classes)) {
-            $classes = $this->makeFullNsPath($classes);
+        if (!empty($ini['classes'])) {
+            $classes = $this->makeFullNsPath($ini['classes']);
 
             $this->atomIs('New')
                  ->outIs('NEW')
@@ -148,26 +110,26 @@ class Extension extends Analyzer {
             $this->prepareQuery();
         }
 
-        if (!empty($interfaces)) {
-            $interfaces = $this->makeFullNsPath($interfaces);
+        if (!empty($ini['interfaces'])) {
+            $interfaces = $this->makeFullNsPath($ini['interfaces']);
             $this->analyzerIs('Interfaces/InterfaceUsage')
                  ->fullnspathIs($interfaces);
             $this->prepareQuery();
         }
 
-        if (!empty($traits)) {
+        if (!empty($ini['traits'])) {
             $this->analyzerIs('Traits/TraitUsage')
-                 ->codeIs($traits);
+                 ->codeIs($ini['traits']);
             $this->prepareQuery();
 
-            $traits = $this->makeFullNsPath($traits);
+            $traits = $this->makeFullNsPath($ini['traits']);
             $this->analyzerIs('Traits/TraitUsage')
                  ->fullnspathIs($traits);
             $this->prepareQuery();
         }
 
-        if (!empty($namespaces)) {
-            $namespaces = $this->makeFullNsPath($namespaces);
+        if (!empty($ini['namespaces'])) {
+            $namespaces = $this->makeFullNsPath($ini['namespaces']);
             $this->analyzerIs('Namespaces/NamespaceUsage')
                  ->outIs('NAME')
                  ->fullnspathIs($namespaces)
@@ -177,12 +139,11 @@ class Extension extends Analyzer {
             // Can a namespace be used in a nsname (as prefix) ? 
         }
 
-        if (!empty($directives)) {
-            $namespaces = $this->makeFullNsPath($namespaces);
+        if (!empty($ini['directives'])) {
             $this->analyzerIs('Php/DirectivesUsage')
                  ->outIs('ARGUMENTS')
                  ->outWithRank("ARGUMENT", 0)
-                 ->noDelimiterIs($directives);
+                 ->noDelimiterIs($ini['directives']);
             $this->prepareQuery();
             
             // Can a namespace be used in a nsname (as prefix) ? 

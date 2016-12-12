@@ -50,8 +50,6 @@ class Server extends Tasks {
 
         display('Start server');
         exec($config->php . ' -S 0.0.0.0:7447 -t '.$config->projects_root.'/projects/ '.$config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
-
-        return;
     }
 }
 

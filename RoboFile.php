@@ -3,7 +3,7 @@
 use Symfony\Component\Finder\Finder;
 use Exakat\Exakat;
 
-include './library/Autoload.php';
+include __DIR__.'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
 
 class RoboFile extends \Robo\Tasks
@@ -193,11 +193,13 @@ LICENCE;
     
     public function pharBuild() {
         $packer = $this->taskPackPhar('exakat.phar')
+                       ->stub('stub.php');
 //                       ->compress()
 // compress yield a 'too many files open' error
-                       ;
         
         $this->updateBuild();
+
+        $packer->addFile('exakat', 'exakat');
 
         $this->taskComposerInstall()
             ->noDev()
@@ -218,9 +220,7 @@ LICENCE;
             }
         }
 
-        $packer->addFile('exakat','exakat')
-               ->executable('exakat')
-               ->run();
+        $packer->run();
 
         $this->taskExecStack()
              ->stopOnFail()
@@ -408,7 +408,7 @@ JOIN categories
                           );
         $analyzeList = '("'.implode('", "', $analyzes).'")';
         
-        include 'library/Exakat/Analyzer/Analyzer.php';
+        include __DIR__.'/library/Exakat/Analyzer/Analyzer.php';
         $oClass = new ReflectionClass('\Exakat\Analyzer\Analyzer');
         $analyzerConstants = array_keys($oClass->getConstants());
 

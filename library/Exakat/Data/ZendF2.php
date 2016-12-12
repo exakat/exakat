@@ -25,7 +25,10 @@ namespace Exakat\Data;
 
 use Exakat\Config;
 
-class ZendF2 extends ZendF {
+class ZendF2 {
+    protected $sqlite = null;
+    protected $phar_tmp = null;
+    
     public function __construct() {
         $config = Config::factory();
         
@@ -37,6 +40,12 @@ class ZendF2 extends ZendF {
             $docPath = $config->dir_root.'/data/zendf2.sqlite';
         }
         $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
+    }
+
+    public function __destruct() {
+        if ($this->phar_tmp !== null) {
+            unlink($this->phar_tmp);
+        }
     }
 
     public function getClassByRelease($release = null) {

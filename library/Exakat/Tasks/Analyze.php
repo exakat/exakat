@@ -144,7 +144,7 @@ php exakat analyze -P <One/rule> -p <project>\n");
                         $d = $diff;
                     }
                 }
-                (unset) $d;
+                unset($d);
             }
 
             if (!empty($dependencies)) {
@@ -164,8 +164,8 @@ php exakat analyze -P <One/rule> -p <project>\n");
             }
             $begin = microtime(true);
             $analyzer = Analyzer::getInstance($analyzer_class);
-            $configName = str_replace(array('/', '\\'), '_', str_replace('Exakat\\Analyzer\\', '', $analyzer_class));
-    
+            $configName = str_replace(array('/', '\\', 'Exakat\\Analyzer\\'), array('_', '_', ''),$analyzer_class);    
+            
             if ($config->noRefresh && isset($analyzed[$analyzer_class])) {
                 display( "$analyzer_class is already processed\n");
                 continue 1;

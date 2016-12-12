@@ -50,6 +50,8 @@ abstract class Analyzer {
     
     static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
+    protected $analyzerQuoted = '';
+    private $analyzerId       = 0;
 
     protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
@@ -212,9 +214,6 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALY
 GREMLIN;
         $res = $this->gremlin->query($query);
         if (!isset($res->results)) {
-            $this->log->log( "Couldn't run the query and get a result : \n" .
-                 "Query : " . $query . " \n".
-                 print_r($res, true));
             return ;
         }
 
@@ -285,11 +284,7 @@ GREMLIN;
     }
 
     public function getAppinfoHeader($lang = 'en') {
-        if ($this->appinfo === null) {
-            $this->getDescription();
-        }
-
-        return $this->appinfo;
+        return $this->description;
     }
     
     static public function getAnalyzers($theme) {
@@ -945,9 +940,7 @@ GREMLIN
     }
 
     public function hasNoCatchBlock() {
-        $this->hasNoInstruction('Catch');
-        
-        return $this;
+        return $this->hasNoInstruction('Catch');
     }
 
     public function hasParent($parentClass, $ins = array()) {
@@ -1107,9 +1100,7 @@ GREMLIN
     }
 
     public function hasNoFunction() {
-        $this->hasNoInstruction('Function');
-        
-        return $this;
+        return $this->hasNoInstruction('Function');
     }
 
     public function hasNoNamedFunction($name) {
@@ -1196,9 +1187,7 @@ GREMLIN
     }
     
     public function hasNoClass() {
-        $this->hasNoInstruction('Class');
-        
-        return $this;
+        return $this->hasNoInstruction('Class');
     }
 
     public function hasClass() {
@@ -1214,9 +1203,7 @@ GREMLIN
     }
 
     public function hasNoInterface() {
-        $this->hasNoInstruction('Interface');
-        
-        return $this;
+        return $this->hasNoInstruction('Interface');
     }
 
     public function goToTrait() {
@@ -1226,9 +1213,7 @@ GREMLIN
     }
 
     public function hasNoTrait() {
-        $this->hasNoInstruction('Trait');
-        
-        return $this;
+        return $this->hasNoInstruction('Trait');
     }
 
     public function goToClassTrait() {
@@ -1238,9 +1223,7 @@ GREMLIN
     }
 
     public function hasNoClassTrait() {
-        $this->hasNoInstruction(array('Class', 'Trait'));
-        
-        return $this;
+        return $this->hasNoInstruction(array('Class', 'Trait'));
     }
 
     public function goToClassInterface() {
@@ -1250,9 +1233,7 @@ GREMLIN
     }
 
     public function hasNoClassInterface() {
-        $this->hasNoInstruction(array('Class', 'Interface'));
-        
-        return $this;
+        return $this->hasNoInstruction(array('Class', 'Interface'));
     }
 
     public function goToClassInterfaceTrait() {
@@ -1262,9 +1243,7 @@ GREMLIN
     }
 
     public function hasNoClassInterfaceTrait() {
-        $this->hasNoInstruction(array('Class', 'Interface', 'Trait'));
-        
-        return $this;
+        return $this->hasNoInstruction(array('Class', 'Interface', 'Trait'));
     }
     
     public function goToExtends() {
@@ -1369,15 +1348,11 @@ GREMLIN
     }
 
     public function hasNoIfthen() {
-        $this->hasNoInstruction('Ifthen');
-        
-        return $this;
+        return $this->hasNoInstruction('Ifthen');
     }
 
     public function hasNoComparison() {
-        $this->hasNoInstruction('Comparison');
-        
-        return $this;
+        return $this->hasNoInstruction('Comparison');
     }
 
     public function hasTryCatch() {
@@ -1387,15 +1362,11 @@ GREMLIN
     }
 
     public function hasNoTryCatch() {
-        $this->hasNoInstruction('Try');
-        
-        return $this;
+        return $this->hasNoInstruction('Try');
     }
 
     public function hasNoCatch() {
-        $this->hasNoInstruction('Catch');
-        
-        return $this;
+        return $this->hasNoInstruction('Catch');
     }
 
     public function isLocalClass() {
@@ -1637,10 +1608,6 @@ GREMLIN;
         return $this->rowCount;
     }
 
-    public function toCount() {
-        return count($this->toArray());
-    }
-    
     protected function loadIni($file, $index = null) {
         $config = Config::factory();
         $fullpath = $config->dir_root.'/data/'.$file;
@@ -1677,7 +1644,7 @@ GREMLIN;
     }
 
     public function hasResults() {
-        return (bool) ($this->getResultsCount() > 0);
+        return (bool) ($this->rowCount > 0);
     }
 
     public function getSeverity() {

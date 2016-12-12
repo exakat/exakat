@@ -63,6 +63,8 @@
                  "file":[".phpsa.yml"]},
  "phpspec":{"homepage":"http://www.phpspec.net/en/latest/",
             "file":["phpspec.yml"]},
+ "phpstan":{"homepage":"https://github.com/phpstan",
+              "file":["phpstan.neon"]},
  "phpswitch":{"homepage":"https://github.com/jubianchi/phpswitch",
               "file":[".phpswitch.yml"]},
  "phpunit":{"homepage":"https://phpunit.de/",

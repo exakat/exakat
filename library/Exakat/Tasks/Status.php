@@ -40,22 +40,34 @@ class Status extends Tasks {
             if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
                 if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
                     $json = json_decode(file_get_contents($config->projects_root.'/projects/.exakat/Project.json'));
-                } else {
-                    $json = new \Stdclass();
-                    $json->project = '';
-                    $json->step = '';
+                    $projectStatus = $json->project;
+                    $projectStep = $json->step;
+                } 
                 
+                $log = file_get_contents($config->neo4j_folder.'/data/log/console.log');
+                if (strpos($log, 'java.lang.OutOfMemoryError: Java heap space2') !== false ) {
+                    $pid = trim(file_get_contents($config->neo4j_folder.'/data/neo4j-service.pid'));
+                    $projectStatus = 'Neo4j died : Java heap space. Kill neo4j ('.$pid.') and run exakat again.';
+                    
+                    $inGraph = 'N/A';
+                    $projectStep = 'N/A';
+                } else {
+                    $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
+                    $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
                 }
-                $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-                $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
+                
                 $status = array('Running'  => 'Project',
-                                'project'  => $json->project,
-                                'in graph' => isset($res->results[0]) ? $res->results[0] : '<N/A>',
-                                'step'     => $json->step,);
+                                'project'  => $projectStatus,
+                                'in graph' => $inGraph,
+                                'step'     => $projectStep,);
             } else {
                 $status['Running'] = 'idle';
+
+                $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
+                if (isset($res->results[0])) {
+                    $status['Project'] = $res->results[0];
+                }
             }
-            //$status = array('project' => $project);
             
             $this->display($status, $config->json);
             return;

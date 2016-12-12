@@ -28,9 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class AliasesUsage extends Analyzer {
     
     public function analyze() {
-        $ini = $this->loadIni('aliases.ini');
-        extract($ini);
-        $ini = $this->makeFullNsPath(array_keys($ini['alias']));
+        $ini = $this->loadIni('aliases.ini', 'alias');
+        $ini = $this->makeFullNsPath(array_keys($ini));
 
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')

@@ -50,7 +50,7 @@ class Dump extends Tasks {
         }
 
         $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-        if ($res->results[0] != $config->project) {
+        if ($res->results[0] !== $config->project) {
             throw new NotProjectInGraph($config->project, $res->results[0]);
         }
         
@@ -273,7 +273,6 @@ SQL;
 
         $this->stmtResultsCounts->execute();
         
-        unset($this->sqlite);
         rename($this->sqliteFile, $this->sqliteFileFinal);
         
         $this->removeSnitch();

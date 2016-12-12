@@ -82,14 +82,14 @@ class OnePage extends Tasks {
                                                ));
 
         display("Cleaning DB\n");
-        $task = new CleanDb();
+        $task = new CleanDb($this->gremlin);
         $task->run($config);
 
         $this->updateProgress($progress++);
         $this->logTime('CleanDb');
 
         display("Running files\n");
-        $task = new Files();
+        $task = new Files($this->gremlin);
         $task->run($config);
 
         $this->updateProgress($progress++);
@@ -97,25 +97,18 @@ class OnePage extends Tasks {
 
         display("Running project 'onepage'\n");
 
-        $task = new Load();
+        $task = new Load($this->gremlin);
         $task->run($config);
 
         display("Project loaded\n");
         $this->updateProgress($progress++);
         $this->logTime('Loading');
 
-        try {
-            $task = new Analyze();
-            $task->run($config);
-            
-            rename($config->projects_root.'/projects/onepage/log/analyze.log',
-                   $config->projects_root.'/projects/onepage/log/analyze.onepage.log');
-        } catch (\Exception $e) {
-            display( "Error while running the Analyze OnePage \n".
-                 $e->getMessage());
-            file_put_contents($config->projects_root.'/projects/onepage/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
-            die();
-        }
+        $task = new Analyze($this->gremlin);
+        $task->run($config);
+        
+        rename($config->projects_root.'/projects/onepage/log/analyze.log',
+               $config->projects_root.'/projects/onepage/log/analyze.onepage.log');
 
         display("Project analyzed\n");
         $this->updateProgress($progress++);
