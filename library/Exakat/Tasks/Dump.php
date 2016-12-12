@@ -36,6 +36,8 @@ class Dump extends Tasks {
     
     private $stmtResults       = null;
     private $stmtResultsCounts = null;
+    private $cleanResults      = null;
+    
     private $rounds            = 0;
     private $sqliteFile        = null;
     private $sqliteFileFinal   = null;
@@ -99,6 +101,11 @@ class Dump extends Tasks {
         }
 
         $sqlQuery = <<<SQL
+DELETE FROM results WHERE analyzer = :analyzer
+SQL;
+        $this->cleanResults = $sqlite->prepare($sqlQuery);
+
+        $sqlQuery = <<<SQL
 REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
              VALUES ( NULL, :fullcode, :file,  :line,  :namespace,  :class,  :function,  :analyzer,  :severity )
 SQL;
@@ -152,8 +159,6 @@ SQL;
 
         $sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
 
-        $this->log->log( 'Run round '.$this->rounds);
-
         $counts = array();
         $datastore = new \Sqlite3($sqlitePath, \SQLITE3_OPEN_READONLY);
         $datastore->busyTimeout(5000);
@@ -188,6 +193,9 @@ SQL;
     }
         
     private function processResults($class, $count) {
+        $this->cleanResults->bindValue(':analyzer', $class, \SQLITE3_TEXT);
+        $this->cleanResults->execute();
+
         $this->stmtResultsCounts->bindValue(':class', $class, \SQLITE3_TEXT);
         $this->stmtResultsCounts->bindValue(':count', $count, \SQLITE3_INTEGER);
 
@@ -207,7 +215,7 @@ SQL;
         $saved = 0;
         $severity = $analyzer->getSeverity( );
 
-        foreach($res as $result) {
+        foreach($res as $id => $result) {
             if (!is_object($result)) {
                 $this->log->log("Object expected but not found\n".print_r($result, true)."\n");
                 continue;
