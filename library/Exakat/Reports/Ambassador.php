@@ -119,6 +119,7 @@ class Ambassador extends Reports {
         $this->generateAppinfo();
         $this->generateBugFixes();
         $this->generateExternalServices();
+        $this->generateDirectiveList();
         
         // Favorites
         $this->generateFavorites();
@@ -1763,6 +1764,55 @@ SQL;
         $html = $this->getBasedPage('external_services');
         $html = $this->injectBloc($html, 'EXTERNAL_SERVICES', $externalServices);
         file_put_contents($this->tmpName.'/datas/external_services.html', $html);
+    }
+    
+    private function generateDirectiveList() {
+    // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
+        $directives = array('standard', 'bcmath', 'date', 'file', 
+                            'fileupload', 'mail', 'ob', 'env',
+                            // standard extensions
+                            'apc', 'amqp', 'apache', 'assertion', 'curl', 'dba',
+                            'filter', 'image', 'intl', 'ldap',
+                            'mbstring', 
+                            'opcache', 'openssl', 'pcre', 'pdo', 'pgsql',
+                            'session', 'sqlite', 'sqlite3', 
+                            // pecl extensions
+                            'com', 'eaccelerator',
+                            'geoip', 'ibase', 
+                            'imagick', 'mailparse', 'mongo', 
+                            'trader', 'wincache', 'xcache'
+                             );
+
+        $directiveList = '';
+        $res = $this->sqlite->query(<<<SQL
+SELECT analyzer FROM resultsCounts 
+    WHERE ( analyzer LIKE "Extensions/Ext%" OR 
+            analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
+        AND count > 0
+SQL
+);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if ($row['analyzer'] == 'Structures/FileUploadUsage') {
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
+                $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
+            } elseif ($row['analyzer'] == 'Php/UsesEnv') {
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
+                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+            } else {
+                $ext = substr($row['analyzer'], 14);
+                if (in_array($ext, $directives)) {
+                    $data = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
+                    $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
+                    foreach($data as $row) { 
+                        $directiveList .= "<tr><td>$row->name</td><td>$row->suggested</td><td>$row->documentation</td></tr>\n";
+                    }
+                }
+            }
+        }
+        
+        $html = $this->getBasedPage('directive_list');
+        $html = $this->injectBloc($html, 'DIRECTIVE_LIST', $directiveList);
+        file_put_contents($this->tmpName.'/datas/directive_list.html', $html);
     }
     
     private function generateDynamicCode() {
