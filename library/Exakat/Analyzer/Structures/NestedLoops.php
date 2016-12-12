@@ -30,25 +30,29 @@ class NestedLoops extends Analyzer {
         $this->atomIs('For')
              ->outIs('BLOCK')
              ->atomInside(array('For' ,'Foreach', 'While', 'Dowhile'))
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         $this->atomIs('Foreach')
              ->outIs('BLOCK')
              ->atomInside(array('For' ,'Foreach', 'While', 'Dowhile'))
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         $this->atomIs('Dowhile')
              ->outIs('BLOCK')
              ->atomInside(array('For' ,'Foreach', 'While', 'Dowhile'))
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         $this->atomIs('While')
              ->outIs('BLOCK')
              ->atomInside(array('For' ,'Foreach', 'While', 'Dowhile'))
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

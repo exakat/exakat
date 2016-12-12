@@ -35,7 +35,8 @@ class DynamicCalls extends Analyzer {
         $this->atomIs('Variable')
              ->outIs('NAME')
              ->tokenIsNot('T_STRING')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // dynamic functioncall
@@ -43,7 +44,8 @@ class DynamicCalls extends Analyzer {
              ->hasNoIn(array('METHOD', 'NEW'))
              ->outIs('NAME')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET'))
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // dynamic new
@@ -51,7 +53,8 @@ class DynamicCalls extends Analyzer {
              ->outIs('NEW')
              ->outIs('NAME')
              ->atomIs('Variable')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // $$o->p or $$o->m() are variable variable, not variable object
@@ -66,14 +69,16 @@ class DynamicCalls extends Analyzer {
         $this->atomIs('Property')
              ->outIs('PROPERTY')
              ->atomIs('Block')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // $o->{$m}()
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->tokenIsNot('T_STRING')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // static constants
@@ -85,14 +90,16 @@ class DynamicCalls extends Analyzer {
              ->outIs('CLASS')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_OPEN_BRACKET'))
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // $o->{$p}
         $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')
              ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // static methods
@@ -100,14 +107,16 @@ class DynamicCalls extends Analyzer {
              ->outIs('CLASS')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot(array('self', 'parent', 'static'))
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // $o::{$p}()
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->tokenIsNot('T_STRING')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
 // class_alias

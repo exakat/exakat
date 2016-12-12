@@ -30,7 +30,8 @@ class IsGenerator extends Analyzer {
         $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInside('Yield')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }

@@ -62,7 +62,8 @@ class UseThis extends Analyzer {
              ->savePropertyAs('fullnspath', 'classe')
              ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         $this->atomIs('Function')
@@ -76,7 +77,8 @@ class UseThis extends Analyzer {
              ->savePropertyAs('fullnspath', 'classe')
              ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
     // static constant are excluded.

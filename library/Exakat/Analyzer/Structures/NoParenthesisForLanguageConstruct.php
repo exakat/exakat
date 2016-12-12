@@ -34,21 +34,24 @@ class NoParenthesisForLanguageConstruct extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Parenthesis')
-             ->back('results');
+             ->back('results')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // throw
         $this->atomIs('Throw')
              ->outIs('THROW')
              ->atomIs('Parenthesis')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // Return
         $this->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Parenthesis')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
 
         // print, echo
@@ -57,7 +60,8 @@ class NoParenthesisForLanguageConstruct extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Parenthesis')
-             ->back('first');
+             ->back('first')
+             ->analyzerIsNot('self');
         $this->prepareQuery();
     }
 }
