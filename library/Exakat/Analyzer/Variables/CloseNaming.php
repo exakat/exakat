@@ -56,8 +56,7 @@ GREMLIN
     }
 }')
             ->atomInside('Variable')
-            ->raw('filter{ it.get().value("code") in found}')
-            ->analyzerIsNot('self');
+            ->raw('filter{ it.get().value("code") in found}');
         $this->prepareQuery();
     }
 }

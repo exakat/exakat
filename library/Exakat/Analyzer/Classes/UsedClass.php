@@ -49,9 +49,8 @@ GREMLIN
 g.V().hasLabel("Class").out("EXTENDS", "IMPLEMENTS").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
 );
-        if (count($extends) > 0) {
+        if (!empty($extends)) {
             $this->atomIs('Class')
-                 ->analyzerIsNot('self')
                  ->savePropertyAs('fullnspath', 'classdns')
                  ->fullnspathIs($extends);
             $this->prepareQuery();
@@ -62,9 +61,8 @@ GREMLIN
 g.V().hasLabel("Staticproperty", "Staticconstant", "Staticmethodcall", "Instanceof").out("CLASS").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
 );
-        if (count($staticproperties) > 0) {
+        if (!empty($staticproperties)) {
             $this->atomIs('Class')
-                 ->analyzerIsNot('self')
                  ->savePropertyAs('fullnspath', 'classdns')
                  ->fullnspathIs($staticproperties);
             $this->prepareQuery();
@@ -75,9 +73,8 @@ GREMLIN
 g.V().hasLabel("Function").out("ARGUMENTS").out("ARGUMENT").out("TYPEHINT").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
 );
-        if (count($typehints) > 0) {
+        if (!empty($typehints)) {
             $this->atomIs('Class')
-                 ->analyzerIsNot('self')
                  ->savePropertyAs('fullnspath', 'classdns')
                  ->fullnspathIs($typehints);
             $this->prepareQuery();
@@ -88,9 +85,8 @@ GREMLIN
 g.V().hasLabel("Use").out("USE").values("origin").unique()
 GREMLIN
 );
-        if (count($uses) > 0) {
+        if (!empty($uses)) {
             $this->atomIs('Class')
-                 ->analyzerIsNot('self')
                  ->fullnspathIs($uses);
             $this->prepareQuery();
         }
@@ -118,9 +114,8 @@ g.V().hasLabel("String").filter{ (it.get().value("noDelimiter") =~ "::" ).getCou
 GREMLIN
 );
         $strings = $this->makeFullnspath($strings);
-        if (count($strings) > 0) {
+        if (!empty($strings)) {
             $this->atomIs('Class')
-                 ->analyzerIsNot('self')
                  ->fullnspathIs($strings)
                  ->back('first');
             $this->prepareQuery();
@@ -136,9 +131,8 @@ GREMLIN
 );
         $arrays = $this->makeFullnspath($arrays);
         
-        if (count($arrays) > 0) {
+        if (!empty($arrays)) {
             $this->atomIs('Class')
-                 ->analyzerIsNot('self')
                  ->fullnspathIs($arrays)
                  ->back('first');
             $this->prepareQuery();

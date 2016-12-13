@@ -43,8 +43,7 @@ class UsesDefaultArguments extends Analyzer {
             $this->atomFunctionIs($f)
                  ->outIs('ARGUMENTS')
                  ->noChildWithRank('ARGUMENT', $position)
-                 ->back('first')
-                 ->analyzerIsNot('self');
+                 ->back('first');
             $this->prepareQuery();
         }
     }

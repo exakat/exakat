@@ -1544,8 +1544,8 @@ GREMLIN
         $query = <<<GREMLIN
 
 {$query}
+
 GREMLIN;
-        //.analyzerIsNot("self")
         $query .= '.where( __.in("ANALYZED").has("analyzer", "'.$this->analyzerQuoted.'").count().is(eq(0)) ).groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
