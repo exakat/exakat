@@ -129,8 +129,7 @@ class IsRead extends Analyzer {
         // Array in a functioncall
         $this->atomIs('Array')
              ->hasIn(array('ARGUMENT'))
-             ->hasNoParent('Function', array('ARGUMENTS', 'ARGUMENT'))
-             ->analyzerIsNot('self');
+             ->hasNoParent('Function', array('ARGUMENTS', 'ARGUMENT'));
         $this->prepareQuery();
 
         // Class constructors (__construct)

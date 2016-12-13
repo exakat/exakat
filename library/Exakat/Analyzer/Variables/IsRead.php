@@ -35,8 +35,7 @@ class IsRead extends Analyzer {
         $this->atomIs('Variable')
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
-                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'))
-             ->analyzerIsNot('self');
+                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'));
         $this->prepareQuery();
 
         // Reading inside an assignation
@@ -53,8 +52,7 @@ class IsRead extends Analyzer {
 
         // $this is always read
         $this->atomIs('Variable')
-             ->codeIs('$this')
-             ->analyzerIsNot('self');
+             ->codeIs('$this');
         $this->prepareQuery();
              
 
@@ -62,16 +60,14 @@ class IsRead extends Analyzer {
         $this->atomIs('Variable')
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift'))
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // right only
         $this->atomIs('Variable')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // $x++ + 2 (a plusplus within another
@@ -79,32 +75,28 @@ class IsRead extends Analyzer {
              ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->inIs(array('RIGHT', 'LEFT'))
              ->atomIs(array('Addition', 'Multiplication', 'Logical', 'Comparison', 'Bitshift', 'Assignation'))
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // $x++ + 2 (a plusplus in a functioncall
         $this->atomIs('Variable')
              ->inIs(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->hasIn('ARGUMENT')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // variable in a sequence (also useless...)
         $this->atomIs('Variable')
              ->inIs('ELEMENT')
              ->atomIs('Sequence')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // array only
         $this->atomIs('Variable')
              ->inIs('VARIABLE')
              ->atomIs(array('Array', 'Arrayappend'))
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // arguments
@@ -118,8 +110,7 @@ class IsRead extends Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('LEFT')
              ->atomIs('VARIABLE')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // arguments : normal variable in a custom function
@@ -134,8 +125,7 @@ class IsRead extends Analyzer {
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', true)
              ->isNot('reference', true)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // PHP functions that are passed by value
@@ -161,18 +151,15 @@ class IsRead extends Analyzer {
                  ->hasNoIn('METHOD')
                  ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
                  ->fullnspathIs($functions)
-                 ->back('first')
-             ->analyzerIsNot('self');
+                 ->back('first');
             $this->prepareQuery();
         }
 
         // Variable that are not a reference in a functioncall
         $this->atomIs('Variable')
              ->hasIn('ARGUMENT')
-             ->hasNoParent('Function', array('ARGUMENT', 'ARGUMENTS'))
-             ->analyzerIsNot('self');
+             ->hasNoParent('Function', array('ARGUMENT', 'ARGUMENTS'));
         $this->prepareQuery();
-
     }
 }
 

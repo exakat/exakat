@@ -40,8 +40,7 @@ class DontChangeBlindKey extends Analyzer {
              ->atomInside('Variable')
              ->samePropertyAs('fullcode', 'blind')
              ->analyzerIs('Variables/IsModified')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

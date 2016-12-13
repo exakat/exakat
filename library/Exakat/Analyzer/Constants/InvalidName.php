@@ -41,7 +41,6 @@ class InvalidName extends Analyzer {
         
         // case-insensitive constants
         $this->atomFunctionIs('\\define')
-             ->analyzerIsNot('self')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')

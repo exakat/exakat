@@ -43,8 +43,7 @@ class LocallyUsedProperty extends Analyzer {
              ->outIs('PROPERTY')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'property')
-             ->back('ppp')
-             ->analyzerIsNot('self');
+             ->back('ppp');
         $this->prepareQuery();
 
         // static property in an variable static::$c
@@ -60,8 +59,7 @@ class LocallyUsedProperty extends Analyzer {
              ->outIs('PROPERTY')
              ->outIsIE(array('VARIABLE', 'APPEND'))
              ->samePropertyAs('code', 'property')
-             ->back('ppp')
-             ->analyzerIsNot('self');
+             ->back('ppp');
         $this->prepareQuery();
     }
 }

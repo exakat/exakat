@@ -63,7 +63,6 @@ class Variablenames extends Analyzer {
 
         // ${'x'}
         $this->atomIs('Variable')
-             ->analyzerIsNot('self')
 
              ->hasNoParent('Class', array('PPP', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Class', array('LEFT', 'PPP', 'ELEMENT', 'BLOCK'))

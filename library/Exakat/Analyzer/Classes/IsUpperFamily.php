@@ -42,8 +42,7 @@ class IsUpperFamily extends Analyzer {
              ->atomIsNot('Interface')
              ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code").toLowerCase() == method.toLowerCase() }.count().is(neq(0)) )')
 
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Staticproperty
@@ -62,8 +61,7 @@ class IsUpperFamily extends Analyzer {
              ->atomIsNot('Interface')
              ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").out("PPP").coalesce(__.out("LEFT"), __.filter{true; }).filter{it.get().value("code") == property }.count().is(neq(0)) )')
 
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Staticconstant
@@ -82,8 +80,7 @@ class IsUpperFamily extends Analyzer {
              ->atomIsNot('Interface')
              ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constant }.count().is(neq(0)) )')
 
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

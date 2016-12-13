@@ -98,7 +98,6 @@ class UselessInstruction extends Analyzer {
 
         // New in a instanceof (with/without parenthesis)
         $this->atomIs('New')
-             ->analyzerIsNot('self')
              ->inIsIE(array('CODE', 'RIGHT'))
              ->inIs('VARIABLE')
              ->atomIs('Instanceof')

@@ -38,8 +38,7 @@ class CouldUseAlias extends Analyzer {
              ->outIs('USE')
              ->isNot('absolute', true)
              ->raw('filter{ (fnp =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") + "(\\\\\\\\.*)?\\$" ).getCount() > 0 }')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

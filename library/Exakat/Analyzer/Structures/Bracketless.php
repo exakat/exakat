@@ -29,7 +29,6 @@ class Bracketless extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Ifthen')
-             ->analyzerIsNot('self')
              ->is('alternative', false)
              ->outIs('ELSE')
              ->is('bracket', false)
@@ -38,7 +37,6 @@ class Bracketless extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Ifthen')
-             ->analyzerIsNot('self')
              ->is('alternative', false)
              ->outIs('THEN')
              ->is('bracket', false)

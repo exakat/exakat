@@ -105,7 +105,6 @@ g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
 GREMLIN
 );
         $this->atomIs('Class')
-             ->analyzerIsNot('self')
              ->outIs('NAME')
              ->codeIs($strings)
              ->back('first');

@@ -49,7 +49,6 @@ class IsNotFamily extends Analyzer {
              ->hasNoClass()
              ->hasNoTrait()
              ->outIs('CLASS')
-             ->analyzerIsNot('self')
              ->back('first');
         $this->prepareQuery();
     }

@@ -35,7 +35,6 @@ class SilentlyCastInteger extends Analyzer {
 
         // Octal cast to Real
         $this->atomIs('Real')
-             ->analyzerIsNot('self')
              ->regexIs('code', '^0')
              ->regexIsNot('code', '\\\\.')
              ->back('first');
@@ -43,7 +42,6 @@ class SilentlyCastInteger extends Analyzer {
 
         // Too long integer
         $this->atomIs('Real')
-             ->analyzerIsNot('self')
              ->regexIs('code', '^[0-9]+\\$')
              ->regexIsNot('code', '\\\\.')
              ->back('first');

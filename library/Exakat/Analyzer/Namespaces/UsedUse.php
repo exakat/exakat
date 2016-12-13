@@ -32,7 +32,6 @@ class UsedUse extends Analyzer {
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->analyzerIsNot('self')
              ->_as('result')
              ->savePropertyAs('alias', 'used')
              ->inIs('USE')
@@ -41,15 +40,13 @@ class UsedUse extends Analyzer {
              ->atomInside('New')
              ->outIs('NEW')
              ->samePropertyAs('code', 'used')
-             ->back('result')
-             ->analyzerIsNot('self');
+             ->back('result');
         $this->prepareQuery();
 
     // case of simple use in Typehint
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->analyzerIsNot('self')
              ->_as('result')
              ->savePropertyAs('alias', 'used')
              ->inIs('USE')
@@ -60,15 +57,13 @@ class UsedUse extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->samePropertyAs('code', 'used')
-             ->back('result')
-             ->analyzerIsNot('self');
+             ->back('result');
         $this->prepareQuery();
 
     // case of alias use in extends or implements
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->analyzerIsNot('self')
              ->_as('result')
              ->savePropertyAs('alias', 'alias')
              ->inIs('USE')
@@ -77,15 +72,13 @@ class UsedUse extends Analyzer {
              ->atomInside('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
              ->samePropertyAs('code', 'alias')
-             ->back('result')
-             ->analyzerIsNot('self');
+             ->back('result');
         $this->prepareQuery();
         
     // case of simple use in a Static structure or instanceof
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->analyzerIsNot('self')
              ->_as('result')
              ->savePropertyAs('alias', 'used')
              ->inIs('USE')
@@ -94,15 +87,13 @@ class UsedUse extends Analyzer {
              ->atomInside(array('Staticconstant', 'Staticproperty', 'Staticmethodcall', 'Instanceof'))
              ->outIs('CLASS')
              ->samePropertyAs('code', 'used')
-             ->back('result')
-             ->analyzerIsNot('self');
+             ->back('result');
         $this->prepareQuery();
 
     // case of namespace use used in a class/trait
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->analyzerIsNot('self')
              ->_as('result')
              ->savePropertyAs('alias', 'used')
              ->inIs('USE')
@@ -112,15 +103,13 @@ class UsedUse extends Analyzer {
              ->hasClassTrait()
              ->outIs('USE')
              ->samePropertyAs('code', 'used')
-             ->back('result')
-             ->analyzerIsNot('self');
+             ->back('result');
         $this->prepareQuery();
         
     // As nsname prefix
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->analyzerIsNot('self')
              ->_as('result')
              ->savePropertyAs('alias', 'used')
              ->inIs('USE')
@@ -130,8 +119,7 @@ class UsedUse extends Analyzer {
              ->hasNoIn(array('USE', 'NAME')) // avoid namespace and use itself.
              ->outWithRank('SUBNAME', 0)
              ->samePropertyAs('code', 'used')
-             ->back('result')
-             ->analyzerIsNot('self');
+             ->back('result');
         $this->prepareQuery();
     }
 }

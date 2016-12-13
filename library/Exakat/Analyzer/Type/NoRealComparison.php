@@ -37,7 +37,6 @@ class NoRealComparison extends Analyzer {
 
         // 1.2 == 3.4 + 0
         $this->atomIs('Comparison')
-             ->analyzerIsNot('self')
              ->codeIs(array('==', '!=', '===', '!=='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomInside('Real')

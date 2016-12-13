@@ -99,8 +99,7 @@ class DirectInjection extends Analyzer {
              ->analyzerIs('Security/SensitiveArgument')
              ->raw($safeIndex)
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->analyzerIsNot('self');
+             ->inIs('ARGUMENTS');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
@@ -108,8 +107,7 @@ class DirectInjection extends Analyzer {
              ->codeIs($vars, true)
              ->goToArray()
              ->raw($safeIndex)
-             ->inIs('CONCAT')
-             ->analyzerIsNot('self');
+             ->inIs('CONCAT');
         $this->prepareQuery();
 
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
@@ -118,8 +116,7 @@ class DirectInjection extends Analyzer {
              ->codeIs($vars, true)
              ->goToArray()
              ->raw($safeIndex)
-             ->inIs('CONCAT')
-             ->analyzerIsNot('self');
+             ->inIs('CONCAT');
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)

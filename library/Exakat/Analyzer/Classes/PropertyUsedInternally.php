@@ -33,7 +33,6 @@ class PropertyUsedInternally extends Analyzer {
              ->hasNoOut('STATIC')
              ->outIs('PPP')
              ->_as('ppp')
-             ->analyzerIsNot('self')
              ->savePropertyAs('propertyname', 'propertyname')
              ->goToClass()
              ->outIs('BLOCK')
@@ -43,8 +42,7 @@ class PropertyUsedInternally extends Analyzer {
              ->inIs('OBJECT')
              ->outIs('PROPERTY')
              ->samePropertyAs('code','propertyname')
-             ->back('ppp')
-             ->analyzerIsNot('self');
+             ->back('ppp');
         $this->prepareQuery();
 
         //////////////////////////////////////////////////////////////////
@@ -56,7 +54,6 @@ class PropertyUsedInternally extends Analyzer {
              ->outIs('PPP')
              ->_as('ppp')
              ->outIsIE('LEFT')
-             ->analyzerIsNot('self')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->savePropertyAs('fullnspath', 'fnp')
@@ -68,8 +65,7 @@ class PropertyUsedInternally extends Analyzer {
              ->inIs('CLASS')
              ->outIs('PROPERTY')
              ->samePropertyAs('code','property')
-             ->back('ppp')
-             ->analyzerIsNot('self');
+             ->back('ppp');
         $this->prepareQuery();
 
 // Test for arrays ? 

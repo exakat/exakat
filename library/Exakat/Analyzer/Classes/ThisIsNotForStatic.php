@@ -35,8 +35,7 @@ class ThisIsNotForStatic extends Analyzer {
              ->_as('result')
              ->hasOut('STATIC')
              ->goToClassTrait()
-             ->back('result')
-             ->analyzerIsNot('self');
+             ->back('result');
         $this->prepareQuery();
     }
 }

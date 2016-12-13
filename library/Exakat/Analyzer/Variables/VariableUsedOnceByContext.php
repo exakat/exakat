@@ -42,8 +42,7 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
              ->hasNoIn(array('PPP'))
              ->raw('where( __.in("LEFT").in("PPP").count().is(eq(0)) )')
              ->hasNoFunction()
-             ->codeIs($variables)
-             ->analyzerIsNot('self');
+             ->codeIs($variables);
         $this->prepareQuery();
 
         $this->atomIs('Function')
@@ -64,8 +63,7 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
                           .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
                           .repeat( out().where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) )  )
                           .emit( hasLabel("Variable").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
-                          .filter{ it.get().value("code") in names }')
-             ->analyzerIsNot('self');
+                          .filter{ it.get().value("code") in names }');
         $this->prepareQuery();
     }
 }

@@ -31,8 +31,7 @@ class ArrayMergeInLoops extends Analyzer {
 
         $this->atomFunctionIs($functions)
              ->hasLoop()
-             ->goToLoop()
-             ->analyzerIsNot('self');
+             ->goToLoop();
         $this->prepareQuery();
     }
 }

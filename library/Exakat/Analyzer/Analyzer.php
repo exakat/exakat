@@ -535,7 +535,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
             $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(neq(0)) )', $analyzer);
         } else {
             if ($analyzer === 'self') {
-                $analyzer = self::getName(get_class($this));
+                $analyzer = self::getName($this->analyzerQuoted);
             } else {
                 $analyzer = self::getName($analyzer);
             }
@@ -555,7 +555,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
             $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(eq(0)) )', $analyzer);
         } else {
             if ($analyzer === 'self') {
-                $analyzer = self::getName(get_class($this));
+                $analyzer = self::getName($this->analyzerQuoted);
             } else {
                 $analyzer = self::getName($analyzer);
             }
@@ -1545,8 +1545,8 @@ GREMLIN
 
 {$query}
 GREMLIN;
-        
-        $query .= '.groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
+        //.analyzerIsNot("self")
+        $query .= '.where( __.in("ANALYZED").has("analyzer", "'.$this->analyzerQuoted.'").count().is(eq(0)) ).groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
 // php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";

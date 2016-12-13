@@ -51,8 +51,7 @@ class WrittenOnlyVariable extends Analyzer {
                              .filter{ it.get().value("code") == name}
                              .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead").count().is(neq(0)) )
                              .count().is(eq(0)) )')
-             ->back('results')
-             ->analyzerIsNot('self');
+             ->back('results');
         $this->prepareQuery();
     }
 }

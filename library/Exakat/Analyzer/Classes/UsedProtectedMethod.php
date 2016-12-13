@@ -48,8 +48,7 @@ class UsedProtectedMethod extends Analyzer {
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->samePropertyAs('code', 'name', true)
-             ->back('method')
-             ->analyzerIsNot('self');
+             ->back('method');
         $this->prepareQuery();
 
         // method used in a normal methodcall with $this $this->b()
@@ -76,8 +75,7 @@ class UsedProtectedMethod extends Analyzer {
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->samePropertyAs('code', 'name', true)
-             ->back('method')
-             ->analyzerIsNot('self');
+             ->back('method');
         $this->prepareQuery();
     }
 }

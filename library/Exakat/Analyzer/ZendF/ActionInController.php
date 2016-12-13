@@ -43,7 +43,6 @@ class ActionInController extends Analyzer {
 
         // Methods ending with Action must be public
         $this->atomIs('Function')
-             ->analyzerIsNot('self')
              ->hasClass()
              ->hasOut(array('PRIVATE', 'PROTECTED'))
              // Why not Action\\$?

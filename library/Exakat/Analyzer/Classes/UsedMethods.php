@@ -43,8 +43,7 @@ class UsedMethods extends Analyzer {
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
              ->codeIs($methods)
-             ->back('used')
-             ->analyzerIsNot('self');
+             ->back('used');
         $this->prepareQuery();
 
         // Staticmethodcall
@@ -57,8 +56,7 @@ class UsedMethods extends Analyzer {
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
              ->codeIs($staticmethods)
-             ->back('used')
-             ->analyzerIsNot('self');
+             ->back('used');
         $this->prepareQuery();
 
         $callables = $this->query(<<<GREMLIN
@@ -98,8 +96,7 @@ GREMLIN
              ->outIs('NAME')
              ->codeIsNot($magicMethods)
              ->codeIs($callables)
-             ->back('used')
-             ->analyzerIsNot('self');
+             ->back('used');
         $this->prepareQuery();
 
         // Private constructors
@@ -118,8 +115,7 @@ GREMLIN
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->samePropertyAs('fullnspath', 'fullnspath')
-             ->back('used')
-             ->analyzerIsNot('self');
+             ->back('used');
         $this->prepareQuery();
 
         // Normal Constructors
@@ -135,8 +131,7 @@ GREMLIN
              ->goToClass()
              ->outIs('DEFINITION')
              ->hasIn('NEW')
-             ->back('used')
-             ->analyzerIsNot('self');
+             ->back('used');
         $this->prepareQuery();
 
         // the special methods must be processed independantly

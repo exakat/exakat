@@ -35,7 +35,6 @@ class UsedPrivateMethod extends Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->analyzerIsNot('self')
              ->_as('method')
              ->hasOut('PRIVATE')
              ->outIs('NAME')
@@ -49,8 +48,7 @@ class UsedPrivateMethod extends Analyzer {
              ->inIs('CLASS')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
-             ->back('method')
-             ->analyzerIsNot('self');
+             ->back('method');
         $this->prepareQuery();
 
         // method used in a static methodcall static::b() or self
@@ -58,7 +56,6 @@ class UsedPrivateMethod extends Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->analyzerIsNot('self')
              ->_as('method')
              ->hasOut('PRIVATE')
              ->outIs('NAME')
@@ -72,8 +69,7 @@ class UsedPrivateMethod extends Analyzer {
              ->inIs('CLASS')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
-             ->back('method')
-             ->analyzerIsNot('self');
+             ->back('method');
         $this->prepareQuery();
 
         // method used in a normal methodcall with $this $this->b()
@@ -81,7 +77,6 @@ class UsedPrivateMethod extends Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
-             ->analyzerIsNot('self')
              ->_as('method')
              ->hasOut('PRIVATE')
              ->outIs('NAME')
@@ -94,8 +89,7 @@ class UsedPrivateMethod extends Analyzer {
              ->inIs('OBJECT')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
-             ->back('method')
-             ->analyzerIsNot('self');
+             ->back('method');
         $this->prepareQuery();
 
         // method used in a new (constructor)
@@ -115,8 +109,7 @@ class UsedPrivateMethod extends Analyzer {
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->samePropertyAs('fullnspath', 'fnp')
-             ->back('method')
-             ->analyzerIsNot('self');
+             ->back('method');
         $this->prepareQuery();
 
         // __destruct is considered automatically checked
@@ -127,8 +120,7 @@ class UsedPrivateMethod extends Analyzer {
              ->hasOut('PRIVATE')
              ->outIs('NAME')
              ->codeIs('__destruct')
-             ->inIs('NAME')
-             ->analyzerIsNot('self');
+             ->inIs('NAME');
         $this->prepareQuery();
     }
 }

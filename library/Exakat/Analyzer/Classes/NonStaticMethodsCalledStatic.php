@@ -51,8 +51,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->hasNoOut('STATIC')
              ->outIs('NAME')
              ->samePropertyAs('code', 'methodname')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // check outside the class to undefined Class : report it as pb. 
@@ -82,8 +81,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->outIs('NAME')
              ->samePropertyAs('code', 'methodname')
 
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Go to all parents class
@@ -107,8 +105,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->outIs('NAME')
              ->samePropertyAs('code', 'methodname')
 
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

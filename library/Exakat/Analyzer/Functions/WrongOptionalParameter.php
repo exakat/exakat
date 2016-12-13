@@ -33,8 +33,7 @@ class WrongOptionalParameter extends Analyzer {
              ->hasOut('DEFAULT')
              ->nextSibling('ARGUMENT')
              ->hasNoOut('DEFAULT')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

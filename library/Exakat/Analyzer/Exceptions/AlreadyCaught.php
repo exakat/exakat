@@ -41,8 +41,7 @@ class AlreadyCaught extends Analyzer {
              ->classDefinition()
              ->goToAllParents()
              ->samePropertyAs('fullnspath', 'fnp')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

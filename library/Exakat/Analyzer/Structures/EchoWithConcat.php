@@ -34,8 +34,7 @@ class EchoWithConcat extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIsIE('CODE') // Skipping parenthesis if any
              ->atomIs('Concatenation')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         //echo "should also $be with comma";
@@ -45,8 +44,7 @@ class EchoWithConcat extends Analyzer {
              ->outIsIE('CODE') // Skipping parenthesis if any
              ->atomIs('String')
              ->hasOut('CONCAT')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         //echo <<<NOWDOC should also $be with comma NOWDOC;
@@ -57,8 +55,7 @@ class EchoWithConcat extends Analyzer {
              ->atomIs('Heredoc')
              ->is('heredoc', true)
              ->hasOut('CONCAT')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

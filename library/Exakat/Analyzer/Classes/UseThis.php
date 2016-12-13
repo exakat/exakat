@@ -35,8 +35,7 @@ class UseThis extends Analyzer {
              ->atomInside(array('Staticmethodcall', 'Staticconstant', 'Staticproperty'))
              ->outIs('CLASS')
              ->codeIs('parent')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Case for normal methods
@@ -46,13 +45,11 @@ class UseThis extends Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Variable')
              ->codeIs('$this', true)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Case for statics methods
         $this->atomIs('Function')
-             ->analyzerIsNot('self')
              ->hasClassTrait()
              ->hasOut('STATIC')
              ->outIs('BLOCK')
@@ -62,12 +59,10 @@ class UseThis extends Analyzer {
              ->savePropertyAs('fullnspath', 'classe')
              ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Function')
-             ->analyzerIsNot('self')
              ->hasClassTrait()
              ->hasOut('STATIC')
              ->outIs('BLOCK')
@@ -77,8 +72,7 @@ class UseThis extends Analyzer {
              ->savePropertyAs('fullnspath', 'classe')
              ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
     // static constant are excluded.

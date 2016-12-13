@@ -41,7 +41,6 @@ class ThrowFunctioncall extends Analyzer {
 
         // throw RuntimeException()
         $this->atomIs('Throw')
-             ->analyzerIsNot('self')
              ->outIs('THROW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot('Array')

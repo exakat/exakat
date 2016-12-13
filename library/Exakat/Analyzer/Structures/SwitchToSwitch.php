@@ -37,8 +37,7 @@ class SwitchToSwitch extends Analyzer {
              ->raw('coalesce( __.hasLabel("Sequence").has("count", 1).out("ELEMENT"), __.filter{ true; } )')
 
              ->atomIs('Ifthen')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

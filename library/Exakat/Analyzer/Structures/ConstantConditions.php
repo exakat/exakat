@@ -60,8 +60,7 @@ class ConstantConditions extends Analyzer {
         $this->atomIs('For')
              ->outIs(array('FINAL', 'INCREMENT'))
              ->is('constant', true)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
         
 /*

@@ -33,8 +33,7 @@ class UselessInterfaces extends Analyzer {
              ->outIs('DEFINITION')
              ->hasNoIn('TYPEHINT')
              ->hasNoIn('CLASS')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

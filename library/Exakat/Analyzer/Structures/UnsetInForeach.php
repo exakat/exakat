@@ -46,8 +46,7 @@ class UnsetInForeach extends Analyzer {
              ->inIsIE(array('VARIABLE', 'OBJECT'))
              ->atomIsNot('Property')
              ->raw('filter{ !(it.get().label() == "Array" && reference == true) }')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
 ////////////////////////////////////////////////////////////
@@ -69,8 +68,7 @@ class UnsetInForeach extends Analyzer {
              ->inIsIE(array('VARIABLE', 'OBJECT'))
              ->atomIsNot('Property')
              ->raw('filter{ !(it.get().label() == "Array" && reference == true) }')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

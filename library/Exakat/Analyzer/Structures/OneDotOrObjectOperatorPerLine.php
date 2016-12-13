@@ -34,8 +34,7 @@ class OneDotOrObjectOperatorPerLine extends Analyzer {
              ->outIs('OBJECT')
              ->atomIs(array('Property', 'Methodcall'))
              ->samePropertyAs('line', 'line')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Two expressions with HTML between
@@ -46,8 +45,7 @@ class OneDotOrObjectOperatorPerLine extends Analyzer {
              ->samePropertyAs('line', 'line')
              ->nextSibling('CONCAT')
              ->samePropertyAs('line', 'line')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // f('a'.'b', $c->d);
@@ -57,8 +55,7 @@ class OneDotOrObjectOperatorPerLine extends Analyzer {
              ->atomIs(array('Concatenation', 'Methodcall', 'Property'))
              ->samePropertyAs('line', 'line')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->analyzerIsNot('self');
+             ->inIs('ARGUMENTS');
         $this->prepareQuery();
     }
 }

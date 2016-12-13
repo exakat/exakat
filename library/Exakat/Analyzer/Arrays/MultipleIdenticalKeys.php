@@ -45,8 +45,7 @@ class MultipleIdenticalKeys extends Analyzer {
         }
         .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
 )')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

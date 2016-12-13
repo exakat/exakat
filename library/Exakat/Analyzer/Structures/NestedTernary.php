@@ -30,8 +30,7 @@ class NestedTernary extends Analyzer {
         $this->atomIs('Ternary')
              ->outIs(array('THEN', 'ELSE'))
              ->atomIs('Ternary')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }
