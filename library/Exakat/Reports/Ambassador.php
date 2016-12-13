@@ -126,6 +126,7 @@ class Ambassador extends Reports {
         // Favorites
         $this->generateFavorites();
         $this->generateDynamicCode();
+        $this->generateGlobals();
 
         // inventories
         $this->generateErrorMessages();
@@ -1829,6 +1830,18 @@ SQL
         $html = $this->injectBloc($html, 'DYNAMIC_CODE', $dynamicCode);
         file_put_contents($this->tmpName.'/datas/dynamic_code.html', $html);
     }
+    
+    private function generateGlobals() {
+        $theGlobals = '';
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
+        while($row = $res->fetchArray()) {
+            $theGlobals .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('globals');
+        $html = $this->injectBloc($html, 'GLOBALS', $theGlobals);
+        file_put_contents($this->tmpName.'/datas/globals.html', $html);
+    }    
     
     private function generateAlteredDirectives() {
         $alteredDirectives = '';
