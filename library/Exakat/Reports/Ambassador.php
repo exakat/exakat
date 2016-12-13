@@ -72,11 +72,6 @@ class Ambassador extends Reports {
         $this->severities        = $this->docs->getSeverities();
     }
 
-    /**
-     * Get the base file
-     *
-     * @param type $file
-     */
     private function getBasedPage($file) {
         static $baseHTML;
         
@@ -101,6 +96,13 @@ class Ambassador extends Reports {
         $combinePageHTML = $this->injectBloc($baseHTML, "BLOC-MAIN", $subPageHTML);
 
         return $combinePageHTML;
+    }
+
+    private function putBasedPage($file, $html) {
+        if (strpos($html, '{{BLOC-JS}}') !== false) {
+            $html = str_replace('{{BLOC-JS}}', '', $html);
+        }
+        file_put_contents($this->tmpName . '/datas/'.$file.'.html', $html);
     }
 
     private function injectBloc($html, $bloc, $content) {
@@ -152,7 +154,7 @@ class Ambassador extends Reports {
         $files = array('credits');
         foreach($files as $file) {
             $baseHTML = $this->getBasedPage($file);
-            file_put_contents($this->tmpName . '/datas/'.$file.'.html', $baseHTML);
+            $this->putBasedPage($file, $baseHTML);
         }
         
         $this->cleanFolder();
@@ -177,14 +179,10 @@ class Ambassador extends Reports {
         copyDir($this->config->dir_root . '/media/devfaceted', $this->tmpName );
     }
 
-    /**
-     * Clear existant folder
-     *
-     */
     private function cleanFolder() {
-        if (file_exists($this->tmpName . '/base.html')) {
-            unlink($this->tmpName . '/base.html');
-            unlink($this->tmpName . '/menu.html');
+        if (file_exists($this->tmpName . '/datas/base.html')) {
+            unlink($this->tmpName . '/datas/base.html');
+            unlink($this->tmpName . '/datas/menu.html');
         }
 
         // Clean final destination
@@ -275,7 +273,7 @@ class Ambassador extends Reports {
         $finalHTML = $this->injectBloc($baseHTML, "BLOC-ANALYZERS", $analyzersDocHTML);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/highlight.pack.js"></script>');
 
-        file_put_contents($this->tmpName . '/datas/analyzers_doc.html', $finalHTML);
+        $this->putBasedPage('analyzers_doc', $finalHTML);
     }
 
     private function generateFavorites() {
@@ -570,8 +568,7 @@ JAVASCRIPT;
 
         $baseHTML = $this->injectBloc($baseHTML, "FAVORITES", $html);
         $baseHTML = $this->injectBloc($baseHTML, "BLOC-JS", $donut);
-        file_put_contents($this->tmpName . '/datas/favorites_dashboard.html', $baseHTML);
-
+        $this->putBasedPage('favorites_dashboard', $baseHTML);
 
         $baseHTML = $this->getBasedPage('favorites_issues');
 
@@ -634,7 +631,7 @@ JAVASCRIPT;
 JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
-        file_put_contents($this->tmpName . '/datas/favorites_issues.html', $finalHTML);
+        $this->putBasedPage('favorites_issues', $finalHTML);
     }
 
     /**
@@ -922,7 +919,7 @@ JAVASCRIPT;
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS",  $blocjs);
 
-        file_put_contents($this->tmpName . '/datas/index.html', $finalHTML);
+        $this->putBasedPage('index', $finalHTML);
     }
 
     /**
@@ -1136,7 +1133,7 @@ SQL;
         $finalHTML = $this->injectBloc($baseHTML, "BLOC-ANALYZERS", $analyserHTML);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/datatables.js"></script>');
 
-        file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML);
+        $this->putBasedPage('analyzers', $finalHTML);
     }
 
     protected function getAnalyzersResultsCounts() {
@@ -1202,7 +1199,7 @@ SQL;
         $finalHTML = $this->injectBloc($baseHTML, "BLOC-FILES", $filesHTML);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/datatables.js"></script>');
 
-        file_put_contents($this->tmpName . '/datas/files.html', $finalHTML);
+        $this->putBasedPage('files', $finalHTML);
     }
 
     /**
@@ -1519,7 +1516,7 @@ SQL;
 JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
-        file_put_contents($this->tmpName . '/datas/issues.html', $finalHTML);
+        $this->putBasedPage('issues', $finalHTML);
     }
 
     /**
@@ -1632,7 +1629,7 @@ SQL;
         
         $html = $this->getBasedPage('used_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
-        file_put_contents($this->tmpName.'/datas/used_settings.html', $html);
+        $this->putBasedPage('used_settings', $html);
     }
 
     private function generateProcFiles() {
@@ -1653,7 +1650,7 @@ SQL;
         $html = $this->getBasedPage('proc_files');
         $html = $this->injectBloc($html, 'FILES', $files);
         $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
-        file_put_contents($this->tmpName.'/datas/proc_files.html', $html);
+        $this->putBasedPage('proc_files', $html);
     }
 
     private function generateAnalyzersList() {
@@ -1668,7 +1665,7 @@ SQL;
 
         $html = $this->getBasedPage('proc_analyzers');
         $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
-        file_put_contents($this->tmpName.'/datas/proc_analyzers.html', $html);
+        $this->putBasedPage('proc_analyzers', $html);
     }
 
     private function generateExternalLib() {
@@ -1690,7 +1687,7 @@ SQL;
 
         $html = $this->getBasedPage('ext_lib');
         $html = $this->injectBloc($html, 'LIBRARIES', $libraries);
-        file_put_contents($this->tmpName.'/datas/ext_lib.html', $html);
+        $this->putBasedPage('ext_lib', $html);
     }
 
     protected function generateBugfixes() {
@@ -1746,7 +1743,7 @@ SQL;
         
         $html = $this->getBasedPage('bugfixes');
         $html = $this->injectBloc($html, 'BUG_FIXES', $table);
-        file_put_contents($this->tmpName.'/datas/bugfixes.html', $html);
+        $this->putBasedPage('bugfixes', $html);
     }
 
     private function generateErrorMessages() {
@@ -1759,7 +1756,7 @@ SQL;
 
         $html = $this->getBasedPage('error_messages');
         $html = $this->injectBloc($html, 'ERROR_MESSAGES', $errorMessages);
-        file_put_contents($this->tmpName.'/datas/error_messages.html', $html);
+        $this->putBasedPage('error_messages', $html);
     }
     
     private function generateExternalServices() {
@@ -1778,7 +1775,7 @@ SQL;
 
         $html = $this->getBasedPage('external_services');
         $html = $this->injectBloc($html, 'EXTERNAL_SERVICES', $externalServices);
-        file_put_contents($this->tmpName.'/datas/external_services.html', $html);
+        $this->putBasedPage('external_services', $html);
     }
     
     private function generateDirectiveList() {
@@ -1827,7 +1824,7 @@ SQL
         
         $html = $this->getBasedPage('directive_list');
         $html = $this->injectBloc($html, 'DIRECTIVE_LIST', $directiveList);
-        file_put_contents($this->tmpName.'/datas/directive_list.html', $html);
+        $this->putBasedPage('directive_list', $html);
     }
     
     private function generateDynamicCode() {
@@ -1840,7 +1837,7 @@ SQL
 
         $html = $this->getBasedPage('dynamic_code');
         $html = $this->injectBloc($html, 'DYNAMIC_CODE', $dynamicCode);
-        file_put_contents($this->tmpName.'/datas/dynamic_code.html', $html);
+        $this->putBasedPage('dynamic_code', $html);
     }
     
     private function generateGlobals() {
@@ -1852,7 +1849,7 @@ SQL
 
         $html = $this->getBasedPage('globals');
         $html = $this->injectBloc($html, 'GLOBALS', $theGlobals);
-        file_put_contents($this->tmpName.'/datas/globals.html', $html);
+        $this->putBasedPage('globals', $html);
     }    
 
     private function generateInventories() {
@@ -1884,7 +1881,7 @@ SQL
             $html = $this->injectBloc($html, 'TITLE', $theTitle);
             $html = $this->injectBloc($html, 'DESCRIPTION', $theDescription);
             $html = $this->injectBloc($html, 'TABLE', $theTable);
-            file_put_contents($this->tmpName.'/datas/inventories_'.$fileName.'.html', $html);
+            $this->putBasedPage('inventories_'.$fileName, $html);
         }
     }
     
@@ -1897,7 +1894,7 @@ SQL
         
         $html = $this->getBasedPage('altered_directives');
         $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
-        file_put_contents($this->tmpName.'/datas/altered_directives.html', $html);
+        $this->putBasedPage('altered_directives', $html);
     }    
     
     private function generateStats() {
@@ -1969,7 +1966,7 @@ SQL
         
         $html = $this->getBasedPage('stats');
         $html = $this->injectBloc($html, 'STATS', $stats);
-        file_put_contents($this->tmpName.'/datas/stats.html', $html);
+        $this->putBasedPage('stats', $html);
     }
     
     private function generateCodes() {
@@ -2019,7 +2016,7 @@ JAVASCRIPT;
         $html = $this->injectBloc($html, 'BLOC-JS', $blocjs);
         $html = $this->injectBloc($html, 'FILES', $files);
         
-        file_put_contents($this->tmpName.'/datas/codes.html', $html);
+        $this->putBasedPage('code', $html);
     }
     
     private function generateAppinfo() {
@@ -2402,8 +2399,7 @@ HTML;
 
         $html = $this->getBasedPage('appinfo');
         $html = $this->injectBloc($html, 'APPINFO', $list);
-        file_put_contents($this->tmpName.'/datas/appinfo.html', $html);
-
+        $this->putBasedPage('appinfo', $html);
     }
 
     protected function makeIcon($tag) {
