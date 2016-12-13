@@ -53,6 +53,13 @@ class Ambassador extends Reports {
     const YES          = 'Yes';
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
+    
+    private $inventories = array('constants'  => 'Constants',
+                                 'classes'    => 'Classes',
+                                 'interfaces' => 'Interfaces',
+                                 'functions'  => 'Functions',
+                                 'traits'     => 'Traits',
+                                 'namespaces' => 'Namespaces',);
 
     /**
      * __construct
@@ -82,6 +89,11 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
             $menu = file_get_contents($this->tmpName . '/datas/menu.html');
+            $inventories = '';
+            foreach($this->inventories as $fileName => $title) {
+                $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
+            }
+            $menu = $this->injectBloc($menu, 'INVENTORIES', $inventories);
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
@@ -125,13 +137,13 @@ class Ambassador extends Reports {
         
         // Favorites
         $this->generateFavorites();
-        $this->generateDynamicCode();
-        $this->generateGlobals();
 
         // inventories
         $this->generateErrorMessages();
-
-
+        $this->generateDynamicCode();
+        $this->generateGlobals();
+        $this->generateInventories();
+        
         // Annex
         $this->generateDocumentation();
         $this->generateCodes();  
@@ -1842,6 +1854,39 @@ SQL
         $html = $this->injectBloc($html, 'GLOBALS', $theGlobals);
         file_put_contents($this->tmpName.'/datas/globals.html', $html);
     }    
+
+    private function generateInventories() {
+        $definitions = array(
+            'constants'  => array('description' => 'List of all defined constants in the code.',
+                                  'analyzer'    => 'Constants/Constantnames'),
+            'classes'    => array('description' => 'List of all defined classes in the code.',
+                                  'analyzer'    => 'Classes/Classnames'),
+            'interfaces' => array('description' => 'List of all defined interfaces in the code.',
+                                  'analyzer'    => 'Interfaces/Interfacenames'),
+            'traits'     => array('description' => 'List of all defined traits in the code.',
+                                  'analyzer'    => 'Traits/Traitnames'),
+            'functions'  => array('description' => 'List of all defined functions in the code.',
+                                  'analyzer'    => 'Functions/Functionnames'),
+            'namespaces' => array('description' => 'List of all defined namespaces in the code.',
+                                  'analyzer'    => 'Namespaces/Namespacesnames'),
+        );
+        foreach($this->inventories as $fileName => $theTitle) {
+            $theDescription = $definitions[$fileName]['description'];
+            $theAnalyzer    = $definitions[$fileName]['analyzer'];
+
+            $theTable = '';
+            $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
+            while($row = $res->fetchArray()) {
+                $theTable .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            }
+
+            $html = $this->getBasedPage('inventories');
+            $html = $this->injectBloc($html, 'TITLE', $theTitle);
+            $html = $this->injectBloc($html, 'DESCRIPTION', $theDescription);
+            $html = $this->injectBloc($html, 'TABLE', $theTable);
+            file_put_contents($this->tmpName.'/datas/inventories_'.$fileName.'.html', $html);
+        }
+    }
     
     private function generateAlteredDirectives() {
         $alteredDirectives = '';
