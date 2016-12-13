@@ -120,6 +120,7 @@ class Ambassador extends Reports {
         $this->generateBugFixes();
         $this->generateExternalServices();
         $this->generateDirectiveList();
+        $this->generateAlteredDirectives();
         
         // Favorites
         $this->generateFavorites();
@@ -1828,6 +1829,17 @@ SQL
         file_put_contents($this->tmpName.'/datas/dynamic_code.html', $html);
     }
     
+    private function generateAlteredDirectives() {
+        $alteredDirectives = '';
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
+        while($row = $res->fetchArray()) {
+            $alteredDirectives .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        }
+        
+        $html = $this->getBasedPage('altered_directives');
+        $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
+        file_put_contents($this->tmpName.'/datas/altered_directives.html', $html);
+    }    
     private function generateCodes() {
         mkdir($this->tmpName.'/datas/sources/', 0755);
 
