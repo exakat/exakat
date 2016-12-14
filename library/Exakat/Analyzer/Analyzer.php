@@ -299,7 +299,7 @@ GREMLIN;
             array_shift($arguments);
             $argnames = array(str_replace('***', '%s', $method));
             foreach($arguments as $arg) {
-                $argname = 'arg'.(count($this->arguments));
+                $argname = 'arg'.count($this->arguments);
                 $this->arguments[$argname] = $arg;
                 $argnames[] = $argname;
             }
