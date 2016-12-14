@@ -41,9 +41,9 @@ abstract class Tasks {
     
     const  NONE    = 1;
     const  ANYTIME = 2;
-    const  DUMP = 3;
-    const  QUEUE = 4;
-    const  SERVER = 5;
+    const  DUMP    = 3;
+    const  QUEUE   = 4;
+    const  SERVER  = 5;
     
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
@@ -55,17 +55,18 @@ abstract class Tasks {
         if (static::CONCURENCE !== self::ANYTIME) {
             if (self::$semaphore === null) {
                 if (static::CONCURENCE === self::QUEUE) {
-                    $ftok_proj = 'q';
+                    $port = 7500;
                 } elseif (static::CONCURENCE === self::SERVER) {
-                    $ftok_proj = 's';
+                    $port = 7501;
                 } elseif (static::CONCURENCE === self::DUMP) {
-                    $ftok_proj = 'd';
+                    $port = 7502;
                 } else {
-                    $ftok_proj = 'j';
+                    $port = 7503;
                 }
-                $key = ftok($config->executable, $ftok_proj);
-                self::$semaphore = sem_get($key, 1);
-                if (sem_acquire(self::$semaphore, 1) === false) {
+
+                if ($socket = @stream_socket_server("tcp://0.0.0.0:$port", $errno, $errstr)) {
+                    self::$semaphore = $socket;
+                } else {
                     throw new AnotherProcessIsRunning();
                 }
             } else {
@@ -77,7 +78,7 @@ abstract class Tasks {
             $a = get_class($this);
             $task = strtolower(substr($a, strrpos($a, '\\') + 1));
             $this->log = new Log($task,
-                                  $config->projects_root.'/projects/'.$config->project);
+                                 $config->projects_root.'/projects/'.$config->project);
         }
         
         if ($config->project != 'default' &&
@@ -98,7 +99,7 @@ abstract class Tasks {
     
     public function __destruct() {
         if (self::$keepSemaphore === false && self::$semaphore !== null) {
-            sem_remove(self::$semaphore);
+            unlink(self::$semaphore);
             self::$semaphore = null;
         }
     }

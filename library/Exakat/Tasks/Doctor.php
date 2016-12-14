@@ -68,7 +68,6 @@ class Doctor extends Tasks {
         $stats['PHP']['curl']      = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
         $stats['PHP']['hash']      = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
         $stats['PHP']['phar']      = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
-        $stats['PHP']['sysvsem']   = extension_loaded('sysvsem')   ? 'Yes' : 'No (Compulsory, please install it with --enable-sysvsem)';
         $stats['PHP']['sqlite3']   = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
         $stats['PHP']['tokenizer'] = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
         $stats['PHP']['mbstring']  = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional, add --enable-mbstring to configure)';
