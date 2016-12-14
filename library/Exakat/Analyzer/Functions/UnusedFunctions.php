@@ -35,8 +35,8 @@ class UnusedFunctions extends Analyzer {
              ->hasNoClassInterfaceTrait()
              ->outIs('NAME')
              ->atomIsNot('Void')
-             ->analyzerIsNot('Functions/UsedFunctions')
-             ->fullnspathIsNot('\\__autoload');
+             ->fullnspathIsNot('\\__autoload')
+             ->analyzerIsNot('Functions/UsedFunctions');
         $this->prepareQuery();
     }
 }
