@@ -48,10 +48,7 @@ class Extension extends Analyzer {
         
         if (!empty($ini['functions'])) {
             $functions = $this->makeFullNsPath($ini['functions']);
-            $this->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->fullnspathIs($functions);
+            $this->atomFunctionIs($functions);
             $this->prepareQuery();
         }
         
