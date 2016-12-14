@@ -171,7 +171,7 @@ class Precedence {
         if (!file_exists($filename)) {
             throw new NoConstFile($version);
         }
-        include($filename);
+        include $filename ;
     }
 }
 

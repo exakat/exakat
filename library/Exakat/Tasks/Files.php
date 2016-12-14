@@ -261,12 +261,10 @@ class Files extends Tasks {
         $configFiles = array();
         foreach($services as $name => $service) {
             $diff = array_intersect((array) $service->file, $files);
-            if (!empty($diff)) {
-                foreach($diff as $d) {
-                    $configFiles[] = array('file'     => $d,
-                                           'name'     => $name,
-                                           'homepage' => $service->homepage);
-                }
+            foreach($diff as $d) {
+                $configFiles[] = array('file'     => $d,
+                                       'name'     => $name,
+                                       'homepage' => $service->homepage);
             }
         }
         $this->datastore->addRow('configFiles', $configFiles);

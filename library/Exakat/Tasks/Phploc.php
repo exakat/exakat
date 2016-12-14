@@ -102,7 +102,7 @@ class Phploc extends Tasks {
         } elseif (!empty($config->filename)) {
             $loc = $this->countLocInFile($config->filename);
         } else {
-            print("Usage : php exakat phploc <-p project> <-d dirname> <-f filename>\n");
+            print "Usage : php exakat phploc <-p project> <-d dirname> <-f filename>\n";
             return;
         }
         

@@ -74,8 +74,8 @@ abstract class Tasks {
         } 
                 
         if ($this->enabledLog) {
-            $rc = new \ReflectionClass($this);
-            $task = strtolower($rc->getShortName());
+            $a = get_class($this);
+            $task = strtolower(substr($a, strrpos($a, '\\') + 1));
             $this->log = new Log($task,
                                   $config->projects_root.'/projects/'.$config->project);
         }

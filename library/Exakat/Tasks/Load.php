@@ -245,19 +245,16 @@ class Load extends Tasks {
 
     public function run(Config $config) {
         $this->config = $config;
-        
-        $files = glob($this->exakatDir.'/*.csv');
-        
-        if (!empty($files)) {
-            foreach($files as $file) {
-                unlink($file);
-            }
-        } 
-        
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
             throw new NoSuchProject($this->config->project);
         }
-
+        
+        $files = glob($this->exakatDir.'/*.csv');
+        
+        foreach($files as $file) {
+            unlink($file);
+        }
+        
         $this->checkTokenLimit();
 
         $this->id0 = $this->addAtom('Project');
@@ -1743,7 +1740,7 @@ class Load extends Tasks {
             return $labelId;
         }
         $this->pushExpression($id);
-
+        
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
@@ -3546,11 +3543,11 @@ class Load extends Tasks {
         $this->addLink($additionId, $right, $links[1]);
 
         $x = array('code'     => $this->tokens[$current][1],
-              'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
-                            $this->tokens[$current][1] . ' ' .
-                            $this->atoms[$right]['fullcode'],
-              'line'     => $this->tokens[$current][2],
-              'token'    => $this->getToken($this->tokens[$current][0]));
+                   'fullcode' => $this->atoms[$left]['fullcode'] . ' ' .
+                                 $this->tokens[$current][1] . ' ' .
+                                 $this->atoms[$right]['fullcode'],
+                   'line'     => $this->tokens[$current][2],
+                   'token'    => $this->getToken($this->tokens[$current][0]));
         $this->setAtom($additionId, $x);
         $this->pushExpression($additionId);
         
@@ -3896,10 +3893,10 @@ class Load extends Tasks {
 
     private function addAtomVoid() {
         $id = $this->addAtom('Void');
-        $this->setAtom($id, array('code'     => 'Void',
-                                  'fullcode' => self::FULLCODE_VOID,
-                                  'line'     => $this->tokens[$this->id][2],
-                                  'token'    => T_VOID,
+        $this->setAtom($id, array('code'       => 'Void',
+                                  'fullcode'   => self::FULLCODE_VOID,
+                                  'line'       => $this->tokens[$this->id][2],
+                                  'token'      => T_VOID,
                                   'fullnspath' => '\\'));
         
         return $id;
@@ -4216,15 +4213,18 @@ class Load extends Tasks {
         } elseif (!in_array($this->atoms[$nameId]['atom'], array('Nsname', 'Identifier', 'String'))) {
             // No fullnamespace for non literal namespaces
             return '';
-        } elseif (in_array($this->atoms[$nameId]['token'], array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
+        } elseif (in_array($this->atoms[$nameId]['token'], array('T_STATIC', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
             // For language structures, it is always in global space, like eval or list
             return '\\'.strtolower($this->atoms[$nameId]['code']);
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
             // namespace\A\B 
             return substr($this->namespace, 0, -1).strtolower(substr($this->atoms[$nameId]['fullcode'], 9));
         } elseif ($this->atoms[$nameId]['atom'] === 'Identifier') {
+            // This is an identifier, self or parent
+            if (strtolower($this->atoms[$nameId]['code']) === 'self' || strtolower($this->atoms[$nameId]['code']) === 'parent') {
+                return '\\'.strtolower($this->atoms[$nameId]['code']);
             // This is an identifier
-            if ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
+            } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
                 return $this->uses['class'][strtolower($this->atoms[$nameId]['code'])];
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
                 return $this->uses['const'][strtolower($this->atoms[$nameId]['code'])];
