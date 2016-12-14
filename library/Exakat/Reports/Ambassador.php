@@ -124,6 +124,7 @@ class Ambassador extends Reports {
         $this->generateProcFiles();  
 
         $this->generateDashboard();
+        $this->generateExtensionsBreakdown();
         $this->generateFiles();
         $this->generateAnalyzers();
         $this->generateIssues();
@@ -634,9 +635,6 @@ JAVASCRIPT;
         $this->putBasedPage('favorites_issues', $finalHTML);
     }
 
-    /**
-     * generate the content of Dashboad
-     */
     public function generateDashboard() {
         $baseHTML = $this->getBasedPage('index');
         
@@ -921,12 +919,182 @@ JAVASCRIPT;
 
         $this->putBasedPage('index', $finalHTML);
     }
+    
+    public function generateExtensionsBreakdown() {
+        $finalHTML = $this->getBasedPage('extension_list');
 
-    /**
-     * Get info bloc top left
-     *
-     * @return string
-     */
+        // List of extensions used
+        $res = $this->sqlite->query(<<<SQL
+SELECT analyzer, count(*) AS count FROM results 
+WHERE analyzer LIKE "Extensions/Ext%"
+GROUP BY analyzer
+ORDER BY count(*) DESC
+SQL
+);
+//        $fileHTML = $this->getTopFile();
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $shortName = str_replace('Extensions/Ext', 'ext/', $value['analyzer']);
+            $xAxis[] = "'" . $shortName . "'";
+            $data[$value['analyzer']] = $value['count'];
+//                    <a href="#" title="' . $value['analyzer'] . '">
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">' . $shortName . '</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                  </div>';
+        }
+
+        $finalHTML = $this->injectBloc($finalHTML, "TOPFILE", $html);
+        
+        $blocjs = <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAFILES]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Calls',
+              data: [CALLCOUNT]
+          }]
+      });
+
+    });
+  </script>
+JAVASCRIPT;
+
+        $tags = array();
+        $code = array();
+        
+        // Filename Overview
+        $tags[] = 'CALLCOUNT';
+        $code[] = implode(', ', $data);
+        $tags[] = 'SCRIPTDATAFILES';
+        $code[] = implode(', ', $xAxis);
+        
+        $blocjs = str_replace($tags, $code, $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS",  $blocjs);
+
+        $this->putBasedPage('extension_list', $finalHTML);
+    }
+
     public function getHashData() {
         $php = new Phpexec($this->config->phpversion);
 
@@ -1036,7 +1204,7 @@ JAVASCRIPT;
                    <div class="block-cell">' . $value['label'] . '</div>
                    <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
-            $dataScript .= ($dataScript) ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
+            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
         }
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
@@ -1078,7 +1246,7 @@ SQL;
                    <div class="block-cell">' . $value['label'] . '</div>
                    <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
-            $dataScript .= ($dataScript) ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
+            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
         }
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
@@ -1294,10 +1462,6 @@ SQL;
         return $html;
     }
 
-    /**
-     * Get data files overview
-     * 
-     */
     private function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
         $xAxis        = array();
@@ -1320,11 +1484,11 @@ SQL;
         $dataNone     = join(', ', $dataNone);
 
         return array(
-            'scriptDataFiles' => $xAxis,
-            'scriptDataMajor' => $dataMajor,
+            'scriptDataFiles'    => $xAxis,
+            'scriptDataMajor'    => $dataMajor,
             'scriptDataCritical' => $dataCritical,
-            'scriptDataNone' => $dataNone,
-            'scriptDataMinor' => $dataMinor
+            'scriptDataNone'     => $dataNone,
+            'scriptDataMinor'    => $dataMinor
         );
     }
 
