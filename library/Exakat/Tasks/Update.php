@@ -31,45 +31,45 @@ use Exakat\Exceptions\ProjectNeeded;
 class Update extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function __construct($gremlin) {
+    public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         $this->enabledLog = false;
-        parent::__construct($gremlin);
+        parent::__construct($gremlin, $config, $subtask);
     }
 
-    public function run(Config $config) {
-        if ($config->project === 'default') {
+    public function run() {
+        if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
 
-        $path = $config->projects_root.'/projects/'.$config->project;
+        $path = $this->config->projects_root.'/projects/'.$this->config->project;
         
         if (!file_exists($path)) {
-            throw new NoSuchProject($config->project);
+            throw new NoSuchProject($this->config->project);
         }
 
         if (!file_exists($path.'/code')) {
-            throw new NoCodeInProject($config->project);
+            throw new NoCodeInProject($this->config->project);
         }
         
         switch(true) {
             // symlink case
-            case $config->project_vcs === 'symlink' :
+            case $this->config->project_vcs === 'symlink' :
                 // Nothing to do, the symlink is here for that
                 break;
 
             // copy case
-            case $config->project_vcs === 'copy' :
+            case $this->config->project_vcs === 'copy' :
                 // Remove and copy again
-                $total = rmdirRecursive($config->projects_root.'/projects/'.$config->project.'/code/');
+                $total = rmdirRecursive($this->config->projects_root.'/projects/'.$this->config->project.'/code/');
                 display("$total files were removed");
                 
-                $total = copyDir(realpath($config->project_url), $config->projects_root.'/projects/'.$config->project.'/code');
+                $total = copyDir(realpath($this->config->project_url), $this->config->projects_root.'/projects/'.$this->config->project.'/code');
                 display("$total files were copied");
                 break;
 
             // Git case
             case file_exists($path.'/code/.git') :
-                display('Git pull for '.$config->project);
+                display('Git pull for '.$this->config->project);
                 $res = shell_exec('cd '.$path.'/code/; git branch | grep \\*');
                 $branch = substr(trim($res), 2);
 
@@ -88,7 +88,7 @@ class Update extends Tasks {
 
             // svn case
             case file_exists($path.'/code/.svn') :
-                display('SVN update '.$config->project);
+                display('SVN update '.$this->config->project);
                 $res = shell_exec('cd '.$path.'/code/; svn update');
                 preg_match('/At revision (\d+)/', $res, $r);
 
@@ -98,7 +98,7 @@ class Update extends Tasks {
 
             // bazaar case
             case file_exists($path.'/code/.bzr') :
-                display('Bazaar update '.$config->project);
+                display('Bazaar update '.$this->config->project);
                 $res = shell_exec('cd '.$path.'/code/; bzr update 2>&1');
                 preg_match('/revision (\d+)/', $res, $r);
 
@@ -107,15 +107,15 @@ class Update extends Tasks {
                 break;
 
             // composer case
-            case $config->project_vcs === 'composer' :
-                display('Composer update '.$config->project);
+            case $this->config->project_vcs === 'composer' :
+                display('Composer update '.$this->config->project);
                 $res = shell_exec('cd '.$path.'/code/; composer install ');
 
                 $json = file_get_contents($path.'/code/composer.lock');
                 $json = json_decode($json);
                 
                 foreach($json->packages as $package) {
-                    if ($package->name == $config->project_url) {
+                    if ($package->name == $this->config->project_url) {
                         display( "Composer updated to revision ".$package->source->reference. ' ( version : '.$package->version.' )');
                     }
                 }

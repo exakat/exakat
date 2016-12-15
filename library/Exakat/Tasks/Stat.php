@@ -29,26 +29,24 @@ use Exakat\Stats;
 class Stat extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run(Config $config) {
-        $project = $config->project;
-
+    public function run() {
         $stats = new Stats($this->gremlin);
-        if ($config->filename) {
-            $stats->setFileFilter($config->filename);
+        if ($this->config->filename) {
+            $stats->setFileFilter($this->config->filename);
         }
         $stats->collect();
         $stats = $stats->toArray();
 
-        if ($config->json) {
+        if ($this->config->json) {
             $output = json_encode($stats);
-        } elseif ($config->table) {
+        } elseif ($this->config->table) {
             $output = $this->table_encode($stats);
         } else {
             $output = $this->text_encode($stats);
         }
 
-        if ($config->output) {
-            $outputFile = fopen($config->filename, 'w+');
+        if ($this->config->output) {
+            $outputFile = fopen($this->config->filename, 'w+');
             fwrite($outputFile, $output);
             fclose($outputFile);
         } else {

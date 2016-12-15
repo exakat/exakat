@@ -31,23 +31,22 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Tasks\CleanDb;
 
 class Test extends Tasks {
-    const CONCURENCE = self::ANYTIME;
+    const CONCURENCE = self::NONE;
     
     private $project_dir = '.';
     
-    public function run(Config $config) {
-        $this->config = $config;
+    public function run() {
         $project = 'test';
 
         // Check for requested file
-        if (!empty($config->filename) && !file_exists($config->filename)) {
-            throw new NoSuchFile($config->filename);
-        } elseif (!empty($config->dirname) && !file_exists($config->dirname)) {
-            throw new NoSuchDir($config->filename);
+        if (!empty($this->config->filename) && !file_exists($this->config->filename)) {
+            throw new NoSuchFile($this->config->filename);
+        } elseif (!empty($this->config->dirname) && !file_exists($this->config->dirname)) {
+            throw new NoSuchDir($this->config->filename);
         }
 
         // Check for requested analyze
-        $analyzer = $config->program;
+        $analyzer = $this->config->program;
         if (Analyzer::getClass($analyzer)) {
             $analyzers_class = array($analyzer);
         } else {
@@ -59,31 +58,22 @@ class Test extends Tasks {
         }
 
         display("Cleaning DB\n");
-        $clean = new CleanDb($this->gremlin);
-        $clean->run($config);
+        $clean = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $clean->run();
 
-        if (!empty($config->dirname)) {
-            shell_exec($this->config->php.' '.$config->executable.' load -v -p test -r -d '.$config->dirname. ' > '.$config->projects_root.'/projects/test/log/load.final.log' );
-        } else {
-            shell_exec($this->config->php.' '.$config->executable.' load -v -p test -f '.$config->filename. ' > '.$config->projects_root.'/projects/test/log/load.final.log' );
-        }
+        $load = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $load->run();
+        unset($load);
         display("Project loaded\n");
-
-        $args = array ( 1 => 'analyze',
-                        2 => '-p',
-                        3 => 'test',
-                        4 => '-P',
-                        5 => $config->program,
-                        6 => '-q'
-                        );
         
-        $configThema = Config::push($args);
+        $analyze = new Analyze($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $analyze->run();
+        unset($analyze);
 
-        $analyze = new Analyze($this->gremlin);
-        $analyze->run($configThema);
+        $results = new Results($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $results->run();
+        unset($results);
         
-        Config::pop();
-
         display("Analyzed project\n");
     }
 }

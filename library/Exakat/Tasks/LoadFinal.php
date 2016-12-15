@@ -31,7 +31,7 @@ use Exakat\Tokenizer\Token;
 class LoadFinal extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run(Config $config) {
+    public function run() {
         $linksIn = Token::linksAsList();
 
         // processing '\parent' fullnspath
@@ -153,7 +153,7 @@ GREMLIN;
         
         // fallback for PHP and ext, class, function, constant
         // update fullnspath with fallback for functions 
-        $pathDocs = $config->dir_root.'/data/analyzers.sqlite';
+        $pathDocs = $this->config->dir_root.'/data/analyzers.sqlite';
         $docs = new Docs($pathDocs);
 
         $exts = $docs->listAllAnalyzer('Extensions');
@@ -163,7 +163,7 @@ GREMLIN;
         $f = array();
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
-            $fullpath = $config->dir_root.'/data/'.$inifile;
+            $fullpath = $this->config->dir_root.'/data/'.$inifile;
 
             $iniFile = parse_ini_file($fullpath);
             

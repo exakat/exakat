@@ -28,7 +28,7 @@ use Exakat\Config;
 class Export extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run(Config $config) {
+    public function run() {
         $queryTemplate = 'g.V().not(hasId(0))';
 
         $result = $this->gremlin->query($queryTemplate);
@@ -69,19 +69,19 @@ class Export extends Tasks {
             }
         }
 
-        if ($config->format == 'Dot') {
+        if ($this->config->format == 'Dot') {
             $text = $this->display_dot($V, $E, $root);
-        } elseif ($config->format  == 'Table') {
+        } elseif ($this->config->format  == 'Table') {
             $text = $this->display_table($V, $E, $root);
         } else {
             $text = $this->display_text($V, $E, $root);
         }
 
-        if ($config->filename) {
-            if ($config->format == 'Dot') {
-                $fp = fopen($config->filename.'.dot', 'w+');
+        if ($this->config->filename) {
+            if ($this->config->format == 'Dot') {
+                $fp = fopen($this->config->filename.'.dot', 'w+');
             } else {
-                $fp = fopen($config->filename, 'w+');
+                $fp = fopen($this->config->filename, 'w+');
             }
             fwrite($fp, $text);
             fclose($fp);

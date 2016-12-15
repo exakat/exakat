@@ -33,12 +33,12 @@ class Queue extends Tasks {
     
     private $pipefile = Jobqueue::PATH;
     
-    public function run(Config $config) {
+    public function run() {
         if (!file_exists($this->pipefile)) {
             throw new NoJobqueueStarted();
         }
 
-        if ($config->stop === true) {
+        if ($this->config->stop === true) {
             display('Stopping queue');
             $queuePipe = fopen($this->pipefile, 'w');
             fwrite($queuePipe, "quit\n");
@@ -47,7 +47,7 @@ class Queue extends Tasks {
             return;
         }
 
-        if ($config->ping === true) {
+        if ($this->config->ping === true) {
             display('Ping queue');
             $queuePipe = fopen($this->pipefile, 'w');
             fwrite($queuePipe, "ping\n");
@@ -56,30 +56,30 @@ class Queue extends Tasks {
             return;
         }
 
-        if ($config->project != 'default') {
-            if (file_exists($config->projects_root.'/projects/'.$config->project.'/report/')) {
+        if ($this->config->project != 'default') {
+            if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/report/')) {
                 display('Cleaning the project first');
-                $clean = new Clean($this->gremlin);
-                $clean->run($config);
+                $clean = new Clean($this->gremlin, $this->config);
+                $clean->run();
             }
 
-            display('Adding project '.$config->project.' to the queue');
+            display('Adding project '.$this->config->project.' to the queue');
             $queuePipe = fopen($this->pipefile, 'w');
-            fwrite($queuePipe, $config->project."\n");
+            fwrite($queuePipe, $this->config->project."\n");
             fclose($queuePipe);
-        } elseif (!empty($config->filename)) {
-            if (!file_exists($config->projects_root.'/in/'.$config->filename.'.php')) {
-                throw new \Exakat\Exceptions\NoSuchFile('No such file "'.$config->filename.'" in /in/ folder');
+        } elseif (!empty($this->config->filename)) {
+            if (!file_exists($this->config->projects_root.'/in/'.$this->config->filename.'.php')) {
+                throw new \Exakat\Exceptions\NoSuchFile('No such file "'.$this->config->filename.'" in /in/ folder');
             }
 
-            if (file_exists($config->projects_root.'/out/'.$config->filename.'.json')) {
-                throw new \Exakat\Exceptions\ReportAlreadyDone($config->filename);
+            if (file_exists($this->config->projects_root.'/out/'.$this->config->filename.'.json')) {
+                throw new \Exakat\Exceptions\ReportAlreadyDone($this->config->filename);
             }
 
-            display('Adding file '.$config->project.' to the queue');
+            display('Adding file '.$this->config->project.' to the queue');
 
             $queuePipe = fopen($this->pipefile, 'w');
-            fwrite($queuePipe, $config->filename."\n");
+            fwrite($queuePipe, $this->config->filename."\n");
             fclose($queuePipe);
         }
 

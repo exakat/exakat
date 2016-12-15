@@ -44,22 +44,20 @@ class Dump extends Tasks {
     
     const WAITING_LOOP = 1000;
     
-    public function run(Config $config) {
-        $this->config = $config;
-
-        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
-            throw new NoSuchProject($config->project);
+    public function run() {
+        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
+            throw new NoSuchProject($this->config->project);
         }
 
         $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-        if ($res->results[0] !== $config->project) {
-            throw new NotProjectInGraph($config->project, $res->results[0]);
+        if ($res->results[0] !== $this->config->project) {
+            throw new NotProjectInGraph($this->config->project, $res->results[0]);
         }
         
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
-        $this->sqliteFile = $config->projects_root.'/projects/'.$config->project.'/.dump.sqlite';
-        $this->sqliteFileFinal = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
+        $this->sqliteFile = $this->config->projects_root.'/projects/'.$this->config->project.'/.dump.sqlite';
+        $this->sqliteFileFinal = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
         if (file_exists($this->sqliteFile)) {
             unlink($this->sqliteFile);
             display('Removing old .dump.sqlite');
@@ -70,7 +68,7 @@ class Dump extends Tasks {
         Analyzer::initDocs();
         Analyzer::$gremlinStatic = $this->gremlin;
         
-        if ($config->update === true) {
+        if ($this->config->update === true) {
             copy($this->sqliteFileFinal, $this->sqliteFile);
             $sqlite = new \Sqlite3($this->sqliteFile);
         } else {
@@ -117,8 +115,8 @@ SQL;
         $this->stmtResultsCounts = $sqlite->prepare($sqlQuery);
 
         $themes = array();
-        if ($config->thema !== null) {
-            $thema = $config->thema;
+        if ($this->config->thema !== null) {
+            $thema = $this->config->thema;
             $themes = Analyzer::getThemeAnalyzers($thema);
             if (empty($themes)) {
                 $r = Analyzer::getSuggestionThema($thema);
@@ -128,8 +126,8 @@ SQL;
                 throw new NoSuchThema($thema);
             }
             display('Processing thema : '.$thema);
-        } elseif ($config->program !== null) {
-            $analyzer = $config->program;
+        } elseif ($this->config->program !== null) {
+            $analyzer = $this->config->program;
             if (!Analyzer::getClass($analyzer)) {
                 $r = Analyzer::getSuggestionClass($analyzer);
                 if (count($r) > 0) {
@@ -157,7 +155,7 @@ SQL;
         print_r($themes);
         */
 
-        $sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
+        $sqlitePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
 
         $counts = array();
         $datastore = new \Sqlite3($sqlitePath, \SQLITE3_OPEN_READONLY);
@@ -184,8 +182,8 @@ SQL;
         $this->log->log( 'Still '.count($themes)." to be processed\n");
         display('Still '.count($themes)." to be processed\n");
         if (count($themes) === 0) {
-            if ($config->thema !== null) {
-                $sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$config->thema.'")');
+            if ($this->config->thema !== null) {
+                $sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');
             }
         }
 

@@ -31,23 +31,23 @@ use Exakat\Exceptions\NoSuchProject;
 class Clean extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function __construct($gremlin) {
+    public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         $this->enabledLog = false;
-        parent::__construct($gremlin);
+        parent::__construct($gremlin, $config, $subtask);
     }
 
-    public function run(Config $config) {
-        if ($config->project === 'default') {
+    public function run() {
+        if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
 
-        $path = $config->projects_root.'/projects/'.$config->project;
+        $path = $this->config->projects_root.'/projects/'.$this->config->project;
         if (!file_exists($path)) {
-            throw new NoSuchProject($config->project);
+            throw new NoSuchProject($this->config->project);
         }
         
 
-        display( "Cleaning project $config->project\n" );
+        display( "Cleaning project {$this->config->project}\n" );
         
         $dirsToErase = array('log',
                              'report',
@@ -105,7 +105,7 @@ class Clean extends Tasks {
         }
         display("Removed $total files\n");
 
-        $this->datastore = new Datastore($config, Datastore::CREATE);
+        $this->datastore = new Datastore($this->config, Datastore::CREATE);
         display("Recreating database\n");
     }
 }

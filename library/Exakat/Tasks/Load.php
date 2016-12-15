@@ -207,8 +207,8 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank = array();
     
-    public function __construct($gremlin) {
-        parent::__construct($gremlin);
+    public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
+        parent::__construct($gremlin, $config, $subtask);
 
         $this->php = new Phpexec();
         if (!$this->php->isValid()) {
@@ -243,8 +243,7 @@ class Load extends Tasks {
         $this->precedence = new Precedence();
     }
 
-    public function run(Config $config) {
-        $this->config = $config;
+    public function run() {
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
             throw new NoSuchProject($this->config->project);
         }
@@ -259,7 +258,7 @@ class Load extends Tasks {
 
         $this->id0 = $this->addAtom('Project');
         $this->setAtom($this->id0, array('code'     => 'Whole',
-                                         'fullcode' => $config->project,
+                                         'fullcode' => $this->config->project,
                                          'line'     => -1,
                                          'token'    => 'T_WHOLE'));
         
@@ -290,14 +289,10 @@ class Load extends Tasks {
         }
 
         static::$client->finalize();
-#        display('Final memory : '.number_format(memory_get_usage() / pow(2, 20)).'Mb');
-#        display('Maximum memory : '.number_format(memory_get_peak_usage() / pow(2, 20)).'Mb');
-#        display('Tokens size : '.count($this->tokens).' items');
-#        display('Links size : '.count($this->links).' items');
         $this->datastore->addRow('hash', array('status' => 'Load'));
         
-        $loadFinal = new LoadFinal($this->gremlin);
-        $loadFinal->run($config);
+        $loadFinal = new LoadFinal($this->gremlin, $this->config, self::IS_SUBTASK);
+        $loadFinal->run();
     }
 
     private function processProject($project) {

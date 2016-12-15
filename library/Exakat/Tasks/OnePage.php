@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
+use Exakat\Exceptions\NoSuchFile;
 
 class OnePage extends Tasks {
     const CONCURENCE = self::NONE;
@@ -34,46 +35,44 @@ class OnePage extends Tasks {
     
     const TOTAL_STEPS = 7;
     
-    public function run(Config $config) {
-        $this->config = $config;
-        
+    public function run() {
         $progress = 0;
         
         $begin = microtime(true);
-        $this->project_dir = $config->projects_root.'/projects/onepage/';
+        $this->project_dir = $this->config->projects_root.'/projects/onepage/';
 
         // checking for installation
         if (!file_exists($this->project_dir)) {
-            shell_exec($this->config->php . ' ' . $config->executable . ' init -p onepage ');
+            shell_exec($this->config->php . ' ' . $this->config->executable . ' init -p onepage ');
             mkdir($this->project_dir.'/code', 0755);
-            shell_exec($this->config->php . ' ' . $config->executable . ' phploc -p onepage ');
+            shell_exec($this->config->php . ' ' . $this->config->executable . ' phploc -p onepage ');
         }
         $this->updateProgress($progress++);
 
         // todo : check that there is indeed this project or create it.
-        if (!file_exists($config->filename)) {
-            die("Can't find the file '$config->filename'. Aborting\n");
+        if (!file_exists($this->config->filename)) {
+            throw new NoSuchFile($this->config->filename);
         }
 
         // todo : check that there is indeed this project or create it.
-        if (!is_file($config->filename) || !is_readable($config->filename)) {
-            die("'$config->filename' must be a readable file. Aborting\n");
+        if (!is_file($this->config->filename) || !is_readable($this->config->filename)) {
+            die("'{$this->config->filename}' must be a readable file. Aborting\n");
         }
 
         $this->cleanLogForProject('onepage');
 
-        copy($config->filename, $config->projects_root.'/projects/onepage/code/onepage.php');
+        copy($this->config->filename, $this->config->projects_root.'/projects/onepage/code/onepage.php');
 
         $this->updateProgress($progress++);
         $this->logTime('Start');
 
-        $datastorePath = $config->projects_root.'/projects/onepage/datastore.sqlite';
+        $datastorePath = $this->config->projects_root.'/projects/onepage/datastore.sqlite';
         if (file_exists($datastorePath)) {
             unlink($datastorePath);
         }
         
         unset($this->datastore);
-        $this->datastore = new Datastore($config, Datastore::CREATE);
+        $this->datastore = new Datastore($this->config, Datastore::CREATE);
         
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
@@ -82,46 +81,46 @@ class OnePage extends Tasks {
                                                ));
 
         display("Cleaning DB\n");
-        $task = new CleanDb($this->gremlin);
-        $task->run($config);
+        $task = new CleanDb($this->gremlin, $this->config);
+        $task->run();
 
         $this->updateProgress($progress++);
         $this->logTime('CleanDb');
 
         display("Running files\n");
-        $task = new Files($this->gremlin);
-        $task->run($config);
+        $task = new Files($this->gremlin, $this->config);
+        $task->run();
 
         $this->updateProgress($progress++);
         $this->logTime('Files');
 
         display("Running project 'onepage'\n");
 
-        $task = new Load($this->gremlin);
-        $task->run($config);
+        $task = new Load($this->gremlin, $this->config);
+        $task->run();
 
         display("Project loaded\n");
         $this->updateProgress($progress++);
         $this->logTime('Loading');
 
-        $task = new Analyze($this->gremlin);
-        $task->run($config);
+        $task = new Analyze($this->gremlin, $this->config);
+        $task->run();
         
-        rename($config->projects_root.'/projects/onepage/log/analyze.log',
-               $config->projects_root.'/projects/onepage/log/analyze.onepage.log');
+        rename($this->config->projects_root.'/projects/onepage/log/analyze.log',
+               $this->config->projects_root.'/projects/onepage/log/analyze.onepage.log');
 
         display("Project analyzed\n");
         $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
         $b1 = microtime(true);
-        $task = new Dump($this->gremlin);
-        $task->run($config);
+        $task = new Dump($this->gremlin, $this->config);
+        $task->run();
         display("Project dumped\n");
         $e1 = microtime(true);
 
-        $task = new Report2($this->gremlin);
-        $task->run($config);
+        $task = new Report2($this->gremlin, $this->config);
+        $task->run();
         display("Project reported\n");
         $this->logTime('Report');
         $this->updateProgress($progress++);
@@ -130,7 +129,7 @@ class OnePage extends Tasks {
         $this->updateProgress($progress++);
 
         // Clean code
-        unlink($config->projects_root.'/projects/onepage/code/onepage.php');
+        unlink($this->config->projects_root.'/projects/onepage/code/onepage.php');
 
         $audit_end = time();
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,

@@ -34,34 +34,34 @@ use Exakat\Reports\Reports as Report;
 class Report2 extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run(Config $config) {
-        if ($config->project == "default") {
+    public function run() {
+        if ($this->config->project == "default") {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists($config->projects_root.'/projects/')) {
-            throw new NoSuchProject($config->project);
+        if (!file_exists($this->config->projects_root.'/projects/')) {
+            throw new NoSuchProject($this->config->project);
         }
         
-        $reportClass = '\\Exakat\\Reports\\'.$config->format;
+        $reportClass = '\\Exakat\\Reports\\'.$this->config->format;
 
         if (!class_exists($reportClass)) {
-            throw new NoSuchFormat($config->format, Report::$FORMATS);
+            throw new NoSuchFormat($this->config->format, Report::$FORMATS);
         }
 
-        if (!file_exists($config->projects_root.'/projects/'.$config->project.'/datastore.sqlite')) {
-            throw new ProjectNotInited($config->project);
+        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite')) {
+            throw new ProjectNotInited($this->config->project);
         }
 
         Analyzer::$datastore = $this->datastore;
         // errors, warnings, fixable and filename
         // line number => columnnumber => type, source, severity, fixable, message
 
-        $dumpFile = $config->projects_root.'/projects/'.$config->project.'/dump.sqlite';
+        $dumpFile = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
 
         $max = 20;
         while (!file_exists($dumpFile)) {
-            display("$config->project/dump.sqlite doesn't exist yet ($max). Waiting\n");
+            display("{$this->config->project}/dump.sqlite doesn't exist yet ($max). Waiting\n");
             sleep(rand(1,3));
             --$max;
             
@@ -75,22 +75,22 @@ class Report2 extends Tasks {
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
 
-        display( 'Building report for project '.$config->project.' in file "'.$config->file.'", with format '.$config->format."\n");
+        display( 'Building report for project '.$this->config->project.' in file "'.$this->config->file.'", with format '.$this->config->format."\n");
         $begin = microtime(true);
         
         // Choose format from options
 
         $report = new $reportClass();
-        if ($config->file == 'stdout') {
-            echo $report->generate( $config->projects_root.'/projects/'.$config->project);
+        if ($this->config->file == 'stdout') {
+            echo $report->generate( $this->config->projects_root.'/projects/'.$this->config->project);
         } else {
-            $report->generate( $config->projects_root.'/projects/'.$config->project, $config->file);
+            $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, $this->config->file);
         }
-        display("Reported ".$report->getCount()." messages in $config->format\n");
+        display("Reported ".$report->getCount()." messages in {$this->config->format}\n");
         $end = microtime(true);
 
         display( "Processing time : ".number_format($end - $begin, 2)." s\n");
-        $this->datastore->addRow('hash', array($config->format => $config->file));
+        $this->datastore->addRow('hash', array($this->config->format => $this->config->file));
         display( "Done\n");
     }
 }

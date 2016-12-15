@@ -30,20 +30,18 @@ use Exakat\Exceptions\NoSuchProject;
 class Magicnumber extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run(Config $config) {
-        $this->config = $config;
-
-        $project = $config->project;
+    public function run() {
+        $project = $this->config->project;
         if ($project == 'default') {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {
+        if (!file_exists($this->config->projects_root.'/projects/'.$project.'/')) {
             throw new NoSuchProject($this->config);
         }
 
         $this->addSnitch();
-        $sqliteFile = $config->projects_root.'/projects/'.$config->project.'/magicnumber.sqlite';
+        $sqliteFile = $this->config->projects_root.'/projects/'.$this->config->project.'/magicnumber.sqlite';
         if (file_exists($sqliteFile)) {
             unlink($sqliteFile);
         }
@@ -73,7 +71,7 @@ class Magicnumber extends Tasks {
         $res = $this->gremlin->query('g.V().hasLabel("Functioncall").has("token", "T_ARRAY").where( __.out("ARGUMENTS").has( "count", is(gte(10))) ).values("fullcode")');
         $res = $res->results;
         
-        $outputFile = fopen($config->projects_root.'/projects/'.$config->project.'/bigArrays.txt', 'w+');
+        $outputFile = fopen($this->config->projects_root.'/projects/'.$this->config->project.'/bigArrays.txt', 'w+');
         foreach($res as $v) {
             fwrite($outputFile, $v."\n");
         }

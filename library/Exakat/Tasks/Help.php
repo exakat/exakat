@@ -28,12 +28,12 @@ use Exakat\Config;
 class Help extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
-    public function run(Config $config) {
+    public function run() {
         print <<<HELP
-[Usage] :   php {$config->executable} init -p <Project name> -R <Repository>
-            php {$config->executable} project -p <Project name>
-            php {$config->executable} doctor
-            php {$config->executable} version (default)
+[Usage] :   php {$this->config->executable} init -p <Project name> -R <Repository>
+            php {$this->config->executable} project -p <Project name>
+            php {$this->config->executable} doctor
+            php {$this->config->executable} version (default)
 
 
 HELP;

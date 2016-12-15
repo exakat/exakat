@@ -29,7 +29,7 @@ use Exakat\Exakat;
 class Upgrade extends Tasks {
     const CONCURENCE = self::NONE;
 
-    public function run(Config $config) {
+    public function run() {
         $options = array(
             'http'=>array(
                 'method' => 'GET',
@@ -52,7 +52,7 @@ class Upgrade extends Tasks {
         
         if (version_compare(Exakat::VERSION, $r[1]) < 0) {
             print "This needs some updating (Current : ".Exakat::VERSION.", Latest: $r[1])\n";
-            if ($config->update === true) {
+            if ($this->config->update === true) {
                 print "  Updating to latest version.\n";
                 preg_match('#<pre id="sha256">(.*?)</pre>#', $html, $r);
 

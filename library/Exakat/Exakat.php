@@ -26,154 +26,156 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
     const BUILD = 504;
     
     private $gremlin = null;
+    private $config = null;
     
-    public function __construct($gremlin) {
+    public function __construct($gremlin, $config) {
         $this->gremlin = $gremlin;
+        $this->config  = $config;
     }
     
     public function execute(Config $config) {
         switch ($config->command) {
             case 'doctor' : 
-                $doctor = new Tasks\Doctor($this->gremlin);
+                $doctor = new Tasks\Doctor($this->gremlin, $this->config);
                 $doctor->run($config);
                 break;
 
             case 'init' : 
-                $task = new Tasks\Initproject($this->gremlin);
+                $task = new Tasks\Initproject($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'anonymize' : 
-                $task = new Tasks\Anonymize($this->gremlin);
+                $task = new Tasks\Anonymize($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'files' : 
-                $task = new Tasks\Files($this->gremlin);
+                $task = new Tasks\Files($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'load' : 
-                $task = new Tasks\Load($this->gremlin);
+                $task = new Tasks\Load($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'stat' : 
-                $task = new Tasks\Stat($this->gremlin);
+                $task = new Tasks\Stat($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'analyze' : 
-                $task = new Tasks\Analyze($this->gremlin);
+                $task = new Tasks\Analyze($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'results' : 
-                $task = new Tasks\Results($this->gremlin);
+                $task = new Tasks\Results($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'export' : 
-                $task = new Tasks\Export($this->gremlin);
+                $task = new Tasks\Export($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'report' : 
-                $task = new Tasks\Report2($this->gremlin);
+                $task = new Tasks\Report2($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'project' : 
-                $task = new Tasks\Project($this->gremlin);
+                $task = new Tasks\Project($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'magicnumber' : 
-                $task = new Tasks\Magicnumber($this->gremlin);
+                $task = new Tasks\Magicnumber($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'clean' : 
-                $task = new Tasks\Clean($this->gremlin);
+                $task = new Tasks\Clean($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'status' : 
-                $task = new Tasks\Status($this->gremlin);
+                $task = new Tasks\Status($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'help' : 
-                $task = new Tasks\Help($this->gremlin);
+                $task = new Tasks\Help($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'cleandb' : 
-                $task = new Tasks\CleanDb($this->gremlin);
+                $task = new Tasks\CleanDb($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'onepage' : 
-                $task = new Tasks\OnePage($this->gremlin);
+                $task = new Tasks\OnePage($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'update' : 
-                $task = new Tasks\Update($this->gremlin);
+                $task = new Tasks\Update($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'onepagereport' : 
-                $task = new Tasks\OnepageReport($this->gremlin);
+                $task = new Tasks\OnepageReport($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'phploc' : 
-                $task = new Tasks\Phploc($this->gremlin);
+                $task = new Tasks\Phploc($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'findextlib' : 
-                $task = new Tasks\FindExternalLibraries($this->gremlin);
+                $task = new Tasks\FindExternalLibraries($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'dump' : 
-                $task = new Tasks\Dump($this->gremlin);
+                $task = new Tasks\Dump($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'jobqueue' : 
-                $task = new Tasks\Jobqueue($this->gremlin);
+                $task = new Tasks\Jobqueue($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'queue' : 
-                $task = new Tasks\Queue($this->gremlin);
+                $task = new Tasks\Queue($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'test' : 
-                $task = new Tasks\Test($this->gremlin);
+                $task = new Tasks\Test($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'remove' : 
-                $task = new Tasks\Remove($this->gremlin);
+                $task = new Tasks\Remove($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'server' : 
-                $task = new Tasks\Server($this->gremlin);
+                $task = new Tasks\Server($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
             case 'upgrade' : 
-                $task = new Tasks\Upgrade($this->gremlin);
+                $task = new Tasks\Upgrade($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 
