@@ -635,6 +635,12 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
         return $this;
     }
 
+    public function outWithoutLastRank() {
+        $this->addMethod('sideEffect{dernier = it.get().value("count") - 1;}.out("ELEMENT").filter{ it.get().value("rank") < dernier}');
+
+        return $this;
+    }
+
     public function noChildWithRank($edgeName, $rank = '0') {
         $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs(intval($rank)).').count().is(eq(0)) )');
 
