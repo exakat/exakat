@@ -134,6 +134,7 @@ class Ambassador extends Reports {
         
         $this->generateAppinfo();
         $this->generateBugFixes();
+        $this->generatePhpConfiguration();
         $this->generateExternalServices();
         $this->generateDirectiveList();
         $this->generateAlteredDirectives();
@@ -1910,6 +1911,19 @@ SQL;
         $html = $this->injectBloc($html, 'BUG_FIXES', $table);
         $this->putBasedPage('bugfixes', $html);
     }
+    
+    protected function generatePhpConfiguration() {
+        $phpConfiguration = new PhpConfiguration();
+        $report = $phpConfiguration->generate(null, null);
+        
+        $id = strpos($report, "\n\n\n");
+        $configline = substr($report, 0, $id);
+        $configline = str_replace(array(' ', "\n") , array("&nbsp;", "<br />\n",), $configline);
+
+        $html = $this->getBasedPage('php_compilation');
+        $html = $this->injectBloc($html, 'COMPILATION', $configline);
+        $this->putBasedPage('php_compilation', $html);
+    }
 
     private function generateErrorMessages() {
         $errorMessages = '';
@@ -2183,7 +2197,7 @@ JAVASCRIPT;
         $html = $this->injectBloc($html, 'BLOC-JS', $blocjs);
         $html = $this->injectBloc($html, 'FILES', $files);
         
-        $this->putBasedPage('code', $html);
+        $this->putBasedPage('codes', $html);
     }
     
     private function generateAppinfo() {
