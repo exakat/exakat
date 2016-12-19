@@ -257,7 +257,9 @@ LICENCE;
         print "Check Data/*.ini consistency\n";
         $this->checkData();
         
-
+        print "Check data/configure.json and the extensions\n";
+        $this->checkConfigurejson();
+        
         print "Check Classname' case\n";
         $this->checkClassnames();
 
@@ -889,6 +891,23 @@ SQL
             print count($errors)." errors in Anonymize\n";
             print implode("\n", $errors);
         }
+    }
+
+    public function checkConfigurejson() {
+        $json = json_decode(file_get_contents('data/configure.json'));
+        
+        $sqlite = new \Sqlite3('data/analyzers.sqlite');
+        $res = $sqlite->query('SELECT * FROM analyzers WHERE folder="Extensions"');
+        
+        $total = 0;
+        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+            $ext = substr($row['name'], 3);
+            if (!isset($json->$ext)) {
+                print "Missing $ext in data/configure.json\n";
+                ++$total;
+            }
+        }
+        print "Missing $total definitions\n";
     }
     
     public function checkData() {
