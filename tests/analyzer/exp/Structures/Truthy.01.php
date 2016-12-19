@@ -7,14 +7,6 @@ $expected     = array('array(12)',
                       '<<<\'PHP\'
 dd
 PHP',
-                       '<<<PHP
-$sd$f
-PHP
-', 
-                      '<<<PHP
-sd$f
-PHP
-', 
                       '<<<PHP
 sd$f
 PHP
@@ -31,6 +23,10 @@ PHP
                       'TRUE', 
                       'true');
 
-$expected_not = array();
+$expected_not = array( '<<<PHP
+$sd$f
+PHP
+'
+);
 
 ?>

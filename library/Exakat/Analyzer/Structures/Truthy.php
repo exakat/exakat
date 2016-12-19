@@ -42,10 +42,9 @@ class Truthy extends Analyzer {
 
         // Note : heredoc always includes a final \n
         $this->atomIs('Heredoc')
-             ->analyzerIsNot('Structures/Falsy')
              ->outIs('CONCAT')
              ->atomIs('String')
-             ->codeIsNot('')
+             ->codeIsNot(array('', "\n"))
              ->back('first');
         $this->prepareQuery();
 

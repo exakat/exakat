@@ -294,7 +294,10 @@ GREMLIN;
     private function addMethod($method, $arguments = null) {
         if ($arguments === null) { // empty
             $this->methods[] = $method;
-        } elseif (func_num_args() >= 2) {
+            return $this;
+        } 
+        
+        if (func_num_args() >= 2) {
             $arguments = func_get_args();
             array_shift($arguments);
             $argnames = array(str_replace('***', '%s', $method));
@@ -304,12 +307,14 @@ GREMLIN;
                 $argnames[] = $argname;
             }
             $this->methods[] = call_user_func_array('sprintf', $argnames);
-        } else { // one argument
-            $argname = 'arg'.count($this->arguments);
-            $this->arguments[$argname] = $arguments;
-            $this->methods[] = str_replace('***', $argname, $method);
-        }
+            return $this;
+        } 
 
+        // one argument
+        $argname = 'arg'.count($this->arguments);
+        $this->arguments[$argname] = $arguments;
+        $this->methods[] = str_replace('***', $argname, $method);
+        
         return $this;
     }
     
@@ -1731,7 +1736,7 @@ GREMLIN;
     }
 
     private function propertyIsNot($property, $code, $caseSensitive = false) {
-            if ($caseSensitive === true) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             $this->tolowercase($code);
