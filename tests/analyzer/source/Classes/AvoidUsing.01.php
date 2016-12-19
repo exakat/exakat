@@ -1,51 +1,54 @@
 <?php
 
 namespace {
-new AjxpRole();
+    new AvoidThisClass();
 
-AjxpRole::constante + 1;
+    AvoidThisClass::constante + 1;
 
-if ($a instanceof AjxpRole) {
-    AjxpRole::$yes = AjxpRole::methodCall();
-}
+    if ($a instanceof AvoidThisClass) {
+        AvoidThisClass::$yes = AvoidThisClass::methodCall();
+    }
 
-class_alias('AjxpRole', $b);
-class_alias('\NS\AjxpROLE', $b);
-class_alias('NS\AjxpROLE', $b);
-
+    class_alias('AvoidThisClass', $b);
+    class_alias('\NS\AvoidThisClass', $b);
+    class_alias('NS\AvoidThisClass', $b);
 }
 
 namespace NS {
-new AjxpRole();
-
-AjxpRole::constante + 1;
-
-if ($a instanceof AjxpRole) {
-    AjxpRole::$yes = AjxpRole::methodCall();
-}
-
-function x (AjxpRole $a) {}
-
-class y extends AjxpRole implements AjxpRole {}
+    new AvoidThisClass();
+    
+    AvoidThisClass::constante + 1;
+    
+    if ($a instanceof AvoidThisClass) {
+        AvoidThisClass::$yes = AvoidThisClass::methodCall();
+    }
+    
+    function x (AvoidThisClass $a) {}
+    
+    class y extends AvoidThisClass implements AvoidThisClass {}
 
 }
 
 namespace NS2 {
 
-use NS\AjxpRole as b;
-
-new AjxpRole();
-
-AjxpRole::constante + 1;
-
-if ($a instanceof AjxpRole) {
-    AjxpRole::$yes = AjxpRole::methodCall();
+    use NS\AvoidThisClass as b;
+    
+    new AvoidThisClass();
+    
+    AvoidThisClass::constante + 1;
+    
+    if ($a instanceof AvoidThisClass) {
+        AvoidThisClass::$yes = AvoidThisClass::methodCall();
+    }
+    
+    function x (AvoidThisClass $a) {}
+    
+    class y extends AvoidThisClass implements AvoidThisClass {}
+    
+    // Function call, with the name of the class. Should not be spotted.
+    AvoidThisClass(2, 3, 4);
 }
 
-function x (AjxpRole $a) {}
 
-class y extends AjxpRole implements AjxpRole {}
-
-}
 
 ?>

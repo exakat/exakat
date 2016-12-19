@@ -1,26 +1,24 @@
 <?php
 
-$expected     = array("'AjxpRole'",
-                      "'\\NS\\AjxpROLE'",
-                      "'NS\\AjxpROLE'",
+$expected     = array("'AvoidThisClass'",
+                      "'\\NS\\AvoidThisClass'",
+                      "'NS\\AvoidThisClass'",
+                      "\$a instanceof AvoidThisClass",
+                      "AvoidThisClass::constante",
+                      "AvoidThisClass::\$yes",
+                      "AvoidThisClass::methodCall( )",
+                      "new AvoidThisClass( )");
 
-//\'AjxpRole\', \'NS\AjxpROLE\'
-
-                      "use NS\AjxpRole as b",
-                      'class y extends AjxpRole implements AjxpRole { /**/ } ',
-                      'class y extends AjxpRole implements AjxpRole { /**/ } ',
-                      'function x(AjxpRole $a) { /**/ } ',
-                      "\$a instanceof AjxpRole",
-                      "\$a instanceof AjxpRole",
-                      "AjxpRole::constante",
-                      "AjxpRole::constante",
-                      "AjxpRole::\$yes",
-                      "AjxpRole::\$yes",
-                      "AjxpRole::methodCall( )",
-                      "AjxpRole::methodCall( )",
-                      "new AjxpRole( )",
-                      "new AjxpRole( )");
-
-$expected_not = array();
+$expected_not = array('AvoidThisClass(2, 3, 4)',
+                      "AvoidThisClass::methodCall( )",
+                      "use NS\AvoidThisClass as b",
+                      "\$a instanceof AvoidThisClass",
+                      'class y extends AvoidThisClass implements AvoidThisClass { /**/ } ',
+                      "AvoidThisClass::\$yes",
+                      "new AvoidThisClass( )",
+                      "AvoidThisClass::constante",
+                      'class y extends AvoidThisClass implements AvoidThisClass { /**/ } ',
+                      'function x(AvoidThisClass $a) { /**/ } ',
+);
 
 ?>
