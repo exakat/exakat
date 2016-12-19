@@ -311,12 +311,14 @@ class Load extends Tasks {
         }
         $this->saveDefinitions();
 
-        return array('files' => count($files), 'tokens' => $nbTokens);
+        return array('files'  => count($files), 
+                     'tokens' => $nbTokens);
     }
 
     private function processDir($dir) {
         if (!file_exists($dir)) {
-            return array('files' => -1, 'tokens' => -1);
+            return array('files'  => -1, 
+                         'tokens' => -1);
         }
 
         $files = array();
@@ -338,7 +340,8 @@ class Load extends Tasks {
         }
         $this->saveDefinitions();
 
-        return array('files' => count($files), 'tokens' => $nbTokens);
+        return array('files'  => count($files), 
+                     'tokens' => $nbTokens);
     }
 
     private function processFile($filename) {
@@ -3094,7 +3097,7 @@ class Load extends Tasks {
             $this->addNoDelimiterCall($id);
         } else {
             $this->setAtom($id, array('delimiter'   => '',
-                                 'noDelimiter' => ''));
+                                      'noDelimiter' => ''));
         }
 
         if (function_exists('mb_detect_encoding')) {
