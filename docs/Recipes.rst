@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 12 Dec 2016 15:32:10 +0000
-.. comment: Generation hash : 2ccb3ceda74a4476cdd19b2c7c16212ed06eeb3a
+.. comment: Generation date : Mon, 19 Dec 2016 18:13:23 +0000
+.. comment: Generation hash : b201e9b80c75bdf322a771437ccafd3055daa406
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 281 analysis
+Total : 282 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -100,6 +100,7 @@ Total : 281 analysis
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
+* :ref:`Class Should Be Final By Ocramius <class-should-be-final-by-ocramius>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
 * :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
@@ -443,7 +444,7 @@ Total : 51 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 46 analysis
+Total : 47 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -490,6 +491,7 @@ Total : 46 analysis
 * :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`eval() Without Try <eval()-without-try>`
+* :ref:`ext/mhash`
 * :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
 .. _compatibilityphp55:
@@ -497,7 +499,7 @@ Total : 46 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 42 analysis
+Total : 43 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -539,6 +541,7 @@ Total : 42 analysis
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/apc`
+* :ref:`ext/mhash`
 * :ref:`ext/mysql`
 * :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
@@ -547,7 +550,7 @@ Total : 42 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 34 analysis
+Total : 35 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -581,6 +584,7 @@ Total : 34 analysis
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`eval() Without Try <eval()-without-try>`
 * :ref:`ext/apc`
+* :ref:`ext/mhash`
 * :ref:`ext/mysql`
 * :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 
@@ -589,7 +593,7 @@ Total : 34 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 33 analysis
+Total : 34 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -619,6 +623,7 @@ Total : 33 analysis
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`ext/apc`
 * :ref:`ext/ereg`
+* :ref:`ext/mhash`
 * :ref:`ext/mysql`
 * :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
@@ -630,7 +635,7 @@ Total : 33 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 44 analysis
+Total : 45 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -671,6 +676,7 @@ Total : 44 analysis
 * :ref:`ext/apc`
 * :ref:`ext/ereg`
 * :ref:`ext/mcrypt`
+* :ref:`ext/mhash`
 * :ref:`ext/mysql`
 * :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
@@ -682,7 +688,7 @@ Total : 44 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 11 analysis
+Total : 12 analysis
 
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
@@ -694,6 +700,7 @@ Total : 11 analysis
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`
 * :ref:`ext/mcrypt`
+* :ref:`ext/mhash`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
 .. _dead-code:

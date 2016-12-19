@@ -16,14 +16,14 @@ Common Behavior
 
 General Philosophy
 ##################
-At the moment, the exakat engine has the lowest overhead for configuration. It tries to avoid configuration as much as possible, so as to focus on working out of the box, rather than spend time on pre-requisite.
+Exakat tries to avoid configuration as much as possible, so as to focus on working out of the box, rather than spend time on pre-requisite.
 
 As such, it will probably do more work, but that may be dismissed later, at the report reading time.
 
 More configuration options will appear with the evolution of the engine.
 
 Precedence
-##################
+##########
 
 The exakat engine read directives from three places :
 
@@ -52,15 +52,15 @@ Engine configuration is were the exakat engine general configuration are stored.
 Configuration File
 ##################
 
-The Exakat engine is configured in the 'config/config.ini' file. 
+The Exakat engine is configured in the 'config/exakat.ini' file. 
 
-This file is created manually, or, with the 'doctor' command.
+This file is created with the 'doctor' command.
 
 ::
 
    php exakat.phar doctor
 
-When the doctor can't find the 'config/config.ini' file, it attempts to create one, with reasonable values. It is recommended to use this to create the config.ini skeleton, and later, modify it.
+When the doctor can't find the 'config/config.ini' file, it attempts to create one, with reasonable values. It is recommended to use this to create the exakat.ini skeleton, and later, modify it.
 
 Available Options
 #################
