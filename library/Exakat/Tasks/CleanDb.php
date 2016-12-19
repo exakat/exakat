@@ -136,8 +136,28 @@ GREMLIN;
         }
         
         // checking that the server has indeed restarted
+        if (Tasks::$semaphore !== null) {
+            fclose(Tasks::$semaphore);
+            $this->doRestart();
+            Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
+        } else {
+            $this->doRestart();
+        }
+
+        display('Database cleaned with restart');
+
+        try {
+            $res = $this->gremlin->serverInfo();
+            display('Restarted Neo4j cleanly');
+        } catch (Exception $e) {
+            display('Didn\'t restart neo4j cleanly');
+        }
+
+        $this->gremlin->query("g.addV('delete', true)");
+    }
+    
+    private function doRestart() {
         $round = 0;
-        fclose(Tasks::$semaphore);
         do {
             ++$round;
             if ($round > 0) {
@@ -161,19 +181,6 @@ GREMLIN;
 
             $res = $this->gremlin->serverInfo();
         } while ( $res === false);
-
-        Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
-
-        display('Database cleaned with restart');
-
-        try {
-            $res = $this->gremlin->serverInfo();
-            display('Restarted Neo4j cleanly');
-        } catch (Exception $e) {
-            display('Didn\'t restart neo4j cleanly');
-        }
-
-        $this->gremlin->query("g.addV('delete', true)");
     }
 }
 
