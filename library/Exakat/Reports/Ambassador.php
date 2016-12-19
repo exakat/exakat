@@ -59,7 +59,8 @@ class Ambassador extends Reports {
                                  'interfaces' => 'Interfaces',
                                  'functions'  => 'Functions',
                                  'traits'     => 'Traits',
-                                 'namespaces' => 'Namespaces',);
+                                 'namespaces' => 'Namespaces',
+                                 'exceptions' => 'Exceptions');
 
     /**
      * __construct
@@ -2030,6 +2031,8 @@ SQL
                                   'analyzer'    => 'Functions/Functionnames'),
             'namespaces' => array('description' => 'List of all defined namespaces in the code.',
                                   'analyzer'    => 'Namespaces/Namespacesnames'),
+            'exceptions' => array('description' => 'List of all defined exceptions.',
+                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
         );
         foreach($this->inventories as $fileName => $theTitle) {
             $theDescription = $definitions[$fileName]['description'];
