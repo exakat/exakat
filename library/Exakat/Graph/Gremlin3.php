@@ -100,8 +100,8 @@ class Gremlin3 extends Graph {
                         unset($params[$name]);
                     }
                 } elseif (is_array($value)) {
-                    $valueList = array_map(function ($x) { return str_replace(array('$', "\n", "\r"), array('\\$', "\\\n", "\\\r"), addslashes($x)); }, $value);
-                    $gremlin = "{ ['".implode("','", $valueList)."'] }";
+                    $valueList = array_map(function ($x) { return addslashes($x); }, $value);
+                    $gremlin = "{ ['''".implode("''','''", $valueList)."'''] }";
                     $defName = 'a'.crc32($gremlin);
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
@@ -132,7 +132,7 @@ GREMLIN;
                         unset($params[$name]);
                     }
                 } else { // a short string (less than 2000) : hardcoded
-                    $query = str_replace($name, "'".addslashes($value)."'", $query);
+                    $query = str_replace($name, "'''".addslashes($value)."'''", $query);
                     unset($params[$name]);
                 }
             }
@@ -211,24 +211,6 @@ GREMLIN;
                  print_r($res, true);
             die();
         }
-    }
-
-    public function queryColumn($query, $params = array(), $load = array()) {
-        if ($this->status === self::UNCHECKED) {
-            $this->checkConfiguration();
-        }
-
-        $res = $this->query($query, $params, $load);
-        $res = $res->results;
-    
-        $return = array();
-        if(count($res) > 0) {
-            foreach($res as $r) {
-                $return[] = $r;
-            }
-        }
-    
-        return $return;
     }
 
     public function serverInfo() {

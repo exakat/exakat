@@ -31,8 +31,7 @@ class OctalInString extends Analyzer {
         $this->atomIs('String')
              ->hasNoOut('CONTAINS')
              ->regexIs('noDelimiter', '\\\\\\\\'.'(\\\\d{4,}|[4-9]\\\\d{2,2}|3[89]\\\\d|37[89])')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

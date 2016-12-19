@@ -28,28 +28,26 @@ use Exakat\Config;
 class Server extends Tasks {
     const CONCURENCE = self::SERVER;
     
-    public function run(Config $config) {
-        $this->config = $config;
-        
-        if ($config->stop === true) {
+    public function run() {
+        if ($this->config->stop === true) {
             $display = @file_get_contents('http://localhost:7447/stop/');
             display('Shut down server ('.$display.')');
             return;
         }
         
-        if (file_exists($config->dir_root.'/projects/index.php')) {
+        if (file_exists($this->config->dir_root.'/projects/index.php')) {
             display('A server is already running. Aborting.');
             return;
         }
 
         display('Copy router server');
-        $php = file_get_contents($config->dir_root.'/server/index.php');
-        $php = str_replace('__PHP__', $config->php, $php);
-        $php = str_replace('__EXAKAT__', $config->executable, $php);
-        file_put_contents($config->projects_root.'/projects/index.php', $php);
+        $php = file_get_contents($this->config->dir_root.'/server/index.php');
+        $php = str_replace('__PHP__', $this->config->php, $php);
+        $php = str_replace('__EXAKAT__', $this->config->executable, $php);
+        file_put_contents($this->config->projects_root.'/projects/index.php', $php);
 
         display('Start server');
-        exec($config->php . ' -S 0.0.0.0:7447 -t '.$config->projects_root.'/projects/ '.$config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
+        exec($this->config->php . ' -S 0.0.0.0:7447 -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
     }
 }
 

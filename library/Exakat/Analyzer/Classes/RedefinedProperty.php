@@ -40,8 +40,7 @@ class RedefinedProperty extends Analyzer {
              ->outIs('PPP')
              ->outIsIE('LEFT')
              ->samePropertyAs('code', 'property')
-             ->back('ppp')
-             ->analyzerIsNot('self');
+             ->back('ppp');
         $this->prepareQuery();
     }
 }

@@ -29,14 +29,26 @@ class UselessInstruction extends Analyzer {
     public function analyze() {
         // Structures that should be put somewhere, and never left alone
         $this->atomIs('Sequence')
+             ->hasNoIn('FINAL')
              ->outIs('ELEMENT')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
-             ->noAtomInside(array('Functioncall', 'Assignation'));
+             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation'));
         $this->prepareQuery();
         
+        // foreach($i = 0; $i < 10, $j < 20; $i++)
+        $this->atomIs('For')
+             ->outIs('FINAL')
+             ->outWithoutLastRank()
+             ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
+                            'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
+                            'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
+                            'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
+             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation'));
+        $this->prepareQuery();
+
         // -$x = 3
         $this->atomIs('Assignation')
              ->outIs('LEFT')
@@ -98,7 +110,6 @@ class UselessInstruction extends Analyzer {
 
         // New in a instanceof (with/without parenthesis)
         $this->atomIs('New')
-             ->analyzerIsNot('self')
              ->inIsIE(array('CODE', 'RIGHT'))
              ->inIs('VARIABLE')
              ->atomIs('Instanceof')

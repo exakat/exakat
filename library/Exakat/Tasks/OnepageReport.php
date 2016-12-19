@@ -29,9 +29,7 @@ use Exakat\Config;
 class OnepageReport extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
-    public function run(Config $config) {
-        $project = $config->project;
-
+    public function run() {
         $result = new \Stdclass();
         $analyzers = Analyzer::getThemeAnalyzers('OneFile');
         
@@ -43,7 +41,7 @@ class OnepageReport extends Tasks {
             }
         }
 
-        file_put_contents($config->projects_root.'/projects/'.$project.'/onepage.json', json_encode($result));
+        file_put_contents($this->config->projects_root.'/projects/'.$project.'/onepage.json', json_encode($result));
     }
 }
 

@@ -43,8 +43,7 @@ class ThisIsForClasses extends Analyzer {
              ->codeIs('$this')
              ->inIs(array('VARIABLE', 'STATIC', 'GLOBAL', 'CAST'))
              ->atomIs(array('Catch', 'Static', 'Global', 'Cast'))
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // foreach
@@ -52,8 +51,7 @@ class ThisIsForClasses extends Analyzer {
              ->codeIs('$this')
              ->inIsIE(array('KEY', 'VALUE'))
              ->atomIs('Foreach')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // unset($this)
@@ -63,8 +61,7 @@ class ThisIsForClasses extends Analyzer {
              ->inIs('ARGUMENTS')
              ->functioncallIs('Unset')
              ->hasNoIn('METHOD')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

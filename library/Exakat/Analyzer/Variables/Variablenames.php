@@ -41,7 +41,7 @@ class Variablenames extends Analyzer {
              ->hasNoParent('Staticproperty', array('VARIABLE', 'VARIABLE', 'PROPERTY'));
         $this->prepareQuery();
 
-        // $object->$x()
+        // $x()
         $this->atomIs('Functioncall')
              ->tokenIs('T_VARIABLE')
              ->outIs('NAME')
@@ -62,7 +62,6 @@ class Variablenames extends Analyzer {
 
         // ${'x'}
         $this->atomIs('Variable')
-             ->analyzerIsNot('self')
 
              ->hasNoParent('Class', array('PPP', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Class', array('LEFT', 'PPP', 'ELEMENT', 'BLOCK'))

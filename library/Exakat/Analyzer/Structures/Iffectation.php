@@ -37,8 +37,7 @@ class Iffectation extends Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')
              ->atomInside('Assignation')
-             ->hasNoIn('ARGUMENT')
-             ->analyzerIsNot('self');
+             ->hasNoIn('ARGUMENT');
         $this->prepareQuery();
     }
 }

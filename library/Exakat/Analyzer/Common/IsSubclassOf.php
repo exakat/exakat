@@ -35,8 +35,7 @@ class IsSubclassOf extends Analyzer {
              ->goToAllParents(true)
              ->outIs('EXTENDS')
              ->fullnspathIs($classes)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

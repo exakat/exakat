@@ -30,8 +30,8 @@ use Exakat\Tokenizer\Token;
 class Results extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
-    public function run(Config $config) {
-        $analyzer = $config->program;
+    public function run() {
+        $analyzer = $this->config->program;
 
         if (empty($analyzer)) {
             die('Provide the analyzer with the option -P X/Y. Aborting'."\n");
@@ -57,25 +57,25 @@ GREMLIN;
 
         $vertices = $this->gremlin->query($query)->results;
         if (isset($vertices[0]->notCompatibleWithPhpVersion)) {
-            die($config->program." is not compatible with the running version of PHP. No result available.\n");
+            die($this->config->program." is not compatible with the running version of PHP. No result available.\n");
         }
 
         if (isset($vertices[0]->notCompatibleWithPhpConfiguration)) {
-            die($config->program." is not compatible with the compilation of the running version of PHP. No result available.\n");
+            die($this->config->program." is not compatible with the compilation of the running version of PHP. No result available.\n");
         }
 
         $return = array();
-        if ($config->style == 'BOOLEAN') {
+        if ($this->config->style == 'BOOLEAN') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count().is(gt(0))';
             $vertices = $this->gremlin->query($queryTemplate);
 
             $return[] = $vertices[0];
-        } elseif ($config->style == 'COUNTED_ALL') {
+        } elseif ($this->config->style == 'COUNTED_ALL') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count()';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return[] = $vertices[0];
-        } elseif ($config->style == 'ALL') {
+        } elseif ($this->config->style == 'ALL') {
             $linksDown = Token::linksAsList();
 
             $query = <<<GREMLIN
@@ -110,7 +110,7 @@ GREMLIN;
                              $v->function);
                 $return[] = $row;
             }
-        } elseif ($config->style == 'DISTINCT') {
+        } elseif ($this->config->style == 'DISTINCT') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").values("code").unique()';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
@@ -118,7 +118,7 @@ GREMLIN;
             foreach($vertices as $k => $v) {
                 $return[] = array($v);
             }
-        } elseif ($config->style == 'COUNTED') {
+        } elseif ($this->config->style == 'COUNTED') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").groupCount("m")by("code").cap("m")';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
@@ -128,9 +128,9 @@ GREMLIN;
             }
         }
 
-        if ($config->json === true) {
+        if ($this->config->json === true) {
             $text = json_encode($return);
-        } elseif ($config->csv === true) {
+        } elseif ($this->config->csv === true) {
             $text = array(array('Code', 'File', 'Namespace', 'Class', 'Function'));
             foreach($return as $k => $v) {
                 if (is_array($v)) {
@@ -139,10 +139,10 @@ GREMLIN;
                     $text[] = array($k, $v);
                 }
             }
-        } elseif ($config->html === true || $config->odt === true) {
+        } elseif ($this->config->html === true || $this->config->odt === true) {
             $text = '';
             foreach($return as $k => $r) {
-                if ($config->style == 'COUNTED') {
+                if ($this->config->style == 'COUNTED') {
                     $text .= "+ $k => $r\n";
                 } else {
                     $text .= "+ $k\n";
@@ -154,10 +154,10 @@ GREMLIN;
                 }
             }
         } else {
-            // count also for $config->text == 1
+            // count also for $this->config->text == 1
             $text = '';
             foreach($return as $k => $v) {
-                if ($config->style == 'COUNTED') {
+                if ($this->config->style == 'COUNTED') {
                     $text .= "$k => $v\n";
                 } else {
                     $text .= implode(', ', $v)."\n";
@@ -165,43 +165,43 @@ GREMLIN;
             }
         }
 
-        if ($config->output) {
+        if ($this->config->output) {
             echo $text;
         }
 
         switch (1) {
-            case $config->json :
+            case $this->config->json :
                 $extension = 'json';
                 break 1;
-            case $config->odt :
+            case $this->config->odt :
                 $extension = 'odt';
                 break 1;
-            case $config->html :
+            case $this->config->html :
                 $extension = 'html';
                 break 1;
-            case $config->csv :
+            case $this->config->csv :
                 $extension = 'csv';
                 break 1;
-            case $config->text :
+            case $this->config->text :
             default :
                 $extension = 'txt';
                 break 1;
         }
 
-        if ($config->filename) {
-            $name = $config->filename.'.'.$extension;
+        if ($this->config->file != 'stdout') {
+            $name = $this->config->file.'.'.$extension;
             if (file_exists($name)) {
                 die( "$name already exists. Aborting\n");
             }
 
-            if ($config->format == 'ODT') {
+            if ($this->config->format == 'ODT') {
                 $name1 = FILE.'.html';
                 file_put_contents($name1, $text);
 
                 $name = FILE.'.'.$extension;
                 shell_exec('pandoc -o '.$name.' '.$name1);
                 unlink($name1);
-            } elseif ($config->format == 'CSV') {
+            } elseif ($this->config->format == 'CSV') {
                 $csvFile = fopen($name, 'w');
                 foreach($text as $t) {
                     fputcsv($csvFile, $t);

@@ -38,7 +38,6 @@ class MultipleDefinedCase extends Analyzer {
 
         // Special case for strings (avoiding ' and ")
         $this->atomIs('Switch')
-             ->analyzerIsNot('self')
              ->raw('where( __.sideEffect{ counts = [:]; }
                              .out("CASES").out("ELEMENT").hasLabel("Case").out("CASE").hasLabel("String").where( __.out("CONCAT").count().is(eq(0)) )
                              .sideEffect{ k = it.get().value("noDelimiter"); if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }}

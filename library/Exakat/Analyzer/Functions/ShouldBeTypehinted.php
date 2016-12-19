@@ -43,8 +43,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->atomInside('Property')
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'name')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // spotting objects with methodcall
@@ -59,8 +58,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'name')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // spotting array with array[index]
@@ -76,8 +74,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->hasNoChildren('Integer', 'INDEX') // attempt to avoid strings
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // spotting array with arrayappend[]
@@ -92,8 +89,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->atomInside('Arrayappend')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // spotting array in a functioncall
@@ -109,8 +105,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->tokenIs('T_OPEN_BRACKET')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'name')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // spotting array with callable
@@ -126,8 +121,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->tokenIs('T_VARIABLE')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

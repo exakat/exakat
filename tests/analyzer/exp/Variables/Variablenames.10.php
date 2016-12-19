@@ -5,6 +5,6 @@ $expected     = array('$variableHereF',
                       '$variableHereM'
 );
 
-$expected_not = array();
+$expected_not = array('$y');
 
 ?>

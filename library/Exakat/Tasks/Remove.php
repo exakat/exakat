@@ -30,17 +30,17 @@ use Exakat\Exceptions\ProjectNeeded;
 class Remove extends Tasks {
     const CONCURENCE = self::NONE;
 
-    public function run(Config $config) {
-        if ($config->project === 'default') {
+    public function run() {
+        if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
-            throw new NoSuchProject($config->project);
+        if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
+            throw new NoSuchProject($this->config->project);
         }
         
-        rmdirRecursive($config->projects_root.'/projects/'.$config->project);
-        display('Project '.$config->project.' removed.');
+        rmdirRecursive($this->config->projects_root.'/projects/'.$this->config->project);
+        display('Project '.$this->config->project.' removed.');
     }
 }
 

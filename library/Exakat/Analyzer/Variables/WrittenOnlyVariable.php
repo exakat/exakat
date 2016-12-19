@@ -52,7 +52,6 @@ class WrittenOnlyVariable extends Analyzer {
                              .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead").count().is(neq(0)) )
                              .count().is(eq(0)) )')
              ->back('results');
-
         $this->prepareQuery();
     }
 }

@@ -43,7 +43,7 @@ class MalformedOctal extends Analyzer {
         $this->prepareQuery();
 
         // integer that is defined but will be too big and will be turned into a float
-        $maxSize = (log(PHP_INT_MAX) / log(2)) / 3 + 1;
+        $maxSize = log(PHP_INT_MAX) / log(2) / 3 + 1;
         $this->atomIs('Real')
              ->regexIs('code', '^[+-]?0[0-7]{'.$maxSize.',}\\$');
         $this->prepareQuery();

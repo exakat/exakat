@@ -56,7 +56,6 @@ class AccessPrivate extends Analyzer {
 
         // classname::method() parent class through extension (not the direct class)
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->inIs('METHOD')
@@ -67,13 +66,11 @@ class AccessPrivate extends Analyzer {
              ->classDefinition()
              ->goToAllParents()
              ->raw($hasPrivateMethodDefinition)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Case of parent::
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
@@ -86,13 +83,11 @@ class AccessPrivate extends Analyzer {
              ->goToClass()
              ->goToExtends()
              ->raw($hasPrivateMethodDefinition)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // In the grand-parents
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
@@ -105,15 +100,13 @@ class AccessPrivate extends Analyzer {
              ->goToClass()
              // Go to All parent is in the next raw
              ->raw('where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times(6).'.$hasPrivateMethodDefinition.'.count().is(neq(0)) )')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // self / static::method() in parent class
         // static : the class which is called
         // self   : the class where the definition is
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('self')
              ->outIs('METHOD')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
@@ -127,8 +120,7 @@ class AccessPrivate extends Analyzer {
              ->raw($notHasPrivateMethodDefinition)
              ->goToAllParents()
              ->raw($hasPrivateMethodDefinition)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // properties
@@ -150,7 +142,6 @@ class AccessPrivate extends Analyzer {
         
         // class::$property
         $this->atomIs('Staticproperty')
-             ->analyzerIsNot('self')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
              ->inIs('PROPERTY')
@@ -167,7 +158,6 @@ class AccessPrivate extends Analyzer {
 
         // parent::$property
         $this->atomIs('Staticproperty')
-             ->analyzerIsNot('self')
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'name')
              ->inIs('PROPERTY')

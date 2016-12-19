@@ -31,22 +31,22 @@ use Exakat\Reports\Reports;
 class Status extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
-    public function run(Config $config) {
-        $project = $config->project;
+    public function run() {
+        $project = $this->config->project;
 
         if ($project === 'default') {
             $status = array();
 
-            if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
-                if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
-                    $json = json_decode(file_get_contents($config->projects_root.'/projects/.exakat/Project.json'));
+            if (file_exists($this->config->projects_root.'/projects/.exakat/Project.json')) {
+                if (file_exists($this->config->projects_root.'/projects/.exakat/Project.json')) {
+                    $json = json_decode(file_get_contents($this->config->projects_root.'/projects/.exakat/Project.json'));
                     $projectStatus = $json->project;
                     $projectStep = $json->step;
                 } 
                 
-                $log = file_get_contents($config->neo4j_folder.'/data/log/console.log');
+                $log = file_get_contents($this->config->neo4j_folder.'/data/log/console.log');
                 if (strpos($log, 'java.lang.OutOfMemoryError: Java heap space2') !== false ) {
-                    $pid = trim(file_get_contents($config->neo4j_folder.'/data/neo4j-service.pid'));
+                    $pid = trim(file_get_contents($this->config->neo4j_folder.'/data/neo4j-service.pid'));
                     $projectStatus = 'Neo4j died : Java heap space. Kill neo4j ('.$pid.') and run exakat again.';
                     
                     $inGraph = 'N/A';
@@ -69,11 +69,11 @@ class Status extends Tasks {
                 }
             }
             
-            $this->display($status, $config->json);
+            $this->display($status, $this->config->json);
             return;
         }
 
-        $path = $config->projects_root.'/projects/'.$project;
+        $path = $this->config->projects_root.'/projects/'.$project;
         
         if (!file_exists($path.'/')) {
             throw new NoSuchProject($project);
@@ -82,8 +82,8 @@ class Status extends Tasks {
         $status = array('project' => $project);
         $status['loc'] = $this->datastore->getHash('loc');
         $status['tokens'] = $this->datastore->getHash('tokens');
-        if (file_exists($config->projects_root.'/projects/.exakat/Project.json')) {
-            $json = json_decode(file_get_contents($config->projects_root.'/projects/.exakat/Project.json'));
+        if (file_exists($this->config->projects_root.'/projects/.exakat/Project.json')) {
+            $json = json_decode(file_get_contents($this->config->projects_root.'/projects/.exakat/Project.json'));
             if ($json->project === $project) {
                 $status['status'] = $json->step;
             } else {
@@ -93,14 +93,14 @@ class Status extends Tasks {
             $status['status'] = 'Not running';
         }
 
-        switch($config->project_vcs) {
+        switch($this->config->project_vcs) {
             case 'git' :
-                if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/')) {
-                    $status['git status'] = trim(shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git rev-parse HEAD'));
+                if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/')) {
+                    $status['git status'] = trim(shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD'));
                 }
                 
-                if (file_exists($config->projects_root.'/projects/'.$config->project.'/code/')) {
-                    $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'/code/; git remote update; git status -uno | grep \'up-to-date\'');
+                if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/')) {
+                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git remote update; git status -uno | grep \'up-to-date\'');
                     $status['updatable'] = empty($res);
                 } else {
                     $status['updatable'] = false;
@@ -108,14 +108,14 @@ class Status extends Tasks {
                 break 1;
 
             case 'composer' :
-                $json = @json_decode(@file_get_contents($config->projects_root.'/projects/'.$config->project.'/code/composer.lock'));
+                $json = @json_decode(@file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.lock'));
                 if (isset($json->hash)) {
                     $status['hash'] = $json->hash;
                 } else {
                     $status['hash'] = 'Can\'t read hash';
                 }
                 
-                $res = shell_exec('cd '.$config->projects_root.'/projects/'.$config->project.'; git remote update; git status -uno | grep \'Nothing to install or update\'');
+                $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'; git remote update; git status -uno | grep \'Nothing to install or update\'');
                 $status['updatable'] = empty($res);
                 break 1;
 
@@ -133,7 +133,7 @@ class Status extends Tasks {
         
         
 
-        $configuration = array();
+        $this->configuration = array();
         // 
 
         // Check the logs
@@ -156,7 +156,7 @@ class Status extends Tasks {
         // Always have formats, even if empty
         $status['formats'] = $formats;
         
-        $this->display($status, $config->json);
+        $this->display($status, $this->config->json);
     }
     
     private function display($status, $json = false) {

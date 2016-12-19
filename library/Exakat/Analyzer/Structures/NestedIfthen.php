@@ -32,8 +32,7 @@ class NestedIfthen extends Analyzer {
              ->atomInside('Ifthen')
              ->outIs(array('THEN', 'ELSE'))
              ->atomInside('Ifthen')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

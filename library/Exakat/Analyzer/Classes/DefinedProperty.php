@@ -46,7 +46,6 @@ class DefinedProperty extends Analyzer {
 
         // defined in parents (Extended)
         $this->atomIs('Property')
-             ->analyzerIsNot('self')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')
@@ -59,13 +58,11 @@ class DefinedProperty extends Analyzer {
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->samePropertyAs('propertyname', 'property')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // defined in parents implemented
         $this->atomIs('Property')
-             ->analyzerIsNot('self')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')
@@ -83,7 +80,6 @@ class DefinedProperty extends Analyzer {
 
         // defined in traits (via use)
         $this->atomIs('Property')
-             ->analyzerIsNot('self')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')

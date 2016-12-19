@@ -44,12 +44,11 @@ where( __.sideEffect{counts = [:]}
        .filter{ it.get().value("fullnspath") in names }
 GREMLIN
 )
-      ->back('first')
-      ->analyzerIsNot('self');
-      $this->prepareQuery();
+             ->back('first');
+             $this->prepareQuery();
 
         // traits
-        $this->atomIs('Class')
+             $this->atomIs('Class')
              ->raw(<<<'GREMLIN'
 where( __.sideEffect{counts = [:]}
          .out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE")
@@ -66,9 +65,8 @@ where( __.sideEffect{counts = [:]}
        .filter{ it.get().value("fullnspath") in names }
 GREMLIN
 )
-      ->back('first')
-      ->analyzerIsNot('self');
-      $this->prepareQuery();
+             ->back('first');
+             $this->prepareQuery();
     }
 }
 

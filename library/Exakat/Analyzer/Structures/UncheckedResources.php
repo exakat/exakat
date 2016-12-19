@@ -75,8 +75,7 @@ class UncheckedResources extends Analyzer {
                      // checked with a if ($resource == false) or while($resource == false)
                      ->hasNoComparison()
                     // ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").in("RIGHT").in("CODE").in("RIGHT").has("atom", "Comparison").in("CONDITION").count().is(eq(0)) )')
-                     ->back('result')
-                     ->analyzerIsNot('self');
+                     ->back('result');
                 $this->prepareQuery();
             }
         }

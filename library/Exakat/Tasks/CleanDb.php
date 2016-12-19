@@ -29,15 +29,13 @@ use Exception;
 class CleanDb extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
-    public function __construct($gremlin) {
+    public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         $this->enabledLog = false;
-        parent::__construct($gremlin);
+        parent::__construct($gremlin, $config, $subtask);
     }
     
-    public function run(Config $config) {
-        $this->config = $config;
-        
-        if ($config->quick) {
+    public function run() {
+        if ($this->config->quick) {
             $this->restartNeo4j();
             $this->cleanScripts();
             return false;
@@ -108,57 +106,44 @@ GREMLIN;
     
     private function restartNeo4j() {
         display('Cleaning with restart');
-        $config = $this->config;
+        $this->config = $this->config;
         
         // preserve data/dbms/auth to preserve authentication
-        if (file_exists($config->neo4j_folder.'/data/dbms/auth')) {
+        if (file_exists($this->config->neo4j_folder.'/data/dbms/auth')) {
             $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; mkdir -p data/scripts ';
         } else {
             $sshLoad =  'rm -rf data; mkdir -p data; mkdir -p data/log; mkdir -p data/scripts ';
         }
 
         // if neo4j-service.pid exists, we kill the process once
-        if (file_exists($config->neo4j_folder.'/data/neo4j-service.pid')) {
-            shell_exec('kill -9 $(cat '.$config->neo4j_folder.'/data/neo4j-service.pid) 2>>/dev/null; ');
+        if (file_exists($this->config->neo4j_folder.'/data/neo4j-service.pid')) {
+            shell_exec('kill -9 $(cat '.$this->config->neo4j_folder.'/data/neo4j-service.pid) 2>>/dev/null; ');
         }
         
-        shell_exec('cd '.$config->neo4j_folder.'; '.$sshLoad);
+        shell_exec('cd '.$this->config->neo4j_folder.'; '.$sshLoad);
 
-        if (!file_exists($config->neo4j_folder.'/conf/')) {
-            print "No conf folder in $config->neo4j_folder\n";
-        } elseif (!file_exists($config->neo4j_folder.'/conf/neo4j-server.properties')) {
-            print "No neo4j-server.properties file in $config->neo4j_folder/conf/\n";
+        if (!file_exists($this->config->neo4j_folder.'/conf/')) {
+            print "No conf folder in {$this->config->neo4j_folder}\n";
+        } elseif (!file_exists($this->config->neo4j_folder.'/conf/neo4j-server.properties')) {
+            print "No neo4j-server.properties file in {$this->config->neo4j_folder}/conf/\n";
         } else {
-            $neo4j_config = file_get_contents($config->neo4j_folder.'/conf/neo4j-server.properties');
+            $neo4j_config = file_get_contents($this->config->neo4j_folder.'/conf/neo4j-server.properties');
             if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/m', $neo4j_config, $r)) {
-                if ($r[1] != $config->neo4j_port) {
-                    print "Warning : Exakat's port and Neo4j's port are not the same ($r[1] / $config->neo4j_port)\n";
+                if ($r[1] != $this->config->neo4j_port) {
+                    print "Warning : Exakat's port and Neo4j's port are not the same ($r[1] / {$this->config->neo4j_port})\n";
                 }
             }
         }
         
         // checking that the server has indeed restarted
-        $round = 0;
-        do {
-            ++$round;
-            if ($round > 0) {
-                sleep($round);
-            }
+        if (Tasks::$semaphore !== null) {
+            fclose(Tasks::$semaphore);
+            $this->doRestart();
+            Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
+        } else {
+            $this->doRestart();
+        }
 
-            if ($round > 10) {
-                $pid = file_get_contents($config->neo4j_folder.'/data/neo4j-service.pid');
-                die('Couldn\'t restart neo4j\'s server. Please, kill it (kill -9 '.$pid.') and try again');
-            }
-            
-            shell_exec('cd '.$config->neo4j_folder.'; ./bin/neo4j start 2>&1');
-            
-            // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
-            // Needs to pick up this error and act
-            // also, may be we can wait for the pid to appear?
-
-            $res = $this->gremlin->serverInfo();
-        } while ( $res === false);
-        
         display('Database cleaned with restart');
 
         try {
@@ -169,6 +154,33 @@ GREMLIN;
         }
 
         $this->gremlin->query("g.addV('delete', true)");
+    }
+    
+    private function doRestart() {
+        $round = 0;
+        do {
+            ++$round;
+            if ($round > 0) {
+                sleep($round);
+            }
+
+            if ($round > 10) {
+                if (file_exists($this->config->neo4j_folder.'/data/neo4j-service.pid')) {
+                    $pid = file_get_contents($this->config->neo4j_folder.'/data/neo4j-service.pid');
+                    die('Couldn\'t restart neo4j\'s server. Please, kill it (kill -9 '.$pid.') and try again');
+                } else {
+                    die('Couldn\'t restart neo4j\'s server, though it doesn\'t seem to be running. Please, make sure it is runnable at "'.$this->config->neo4j_folder.'" and try again.');
+                }
+            }
+            
+            echo exec('cd '.$this->config->neo4j_folder.'; ./bin/neo4j start >/dev/null 2>&1 & ');
+            
+            // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
+            // Needs to pick up this error and act
+            // also, may be we can wait for the pid to appear?
+
+            $res = $this->gremlin->serverInfo();
+        } while ( $res === false);
     }
 }
 

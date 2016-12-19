@@ -56,8 +56,7 @@ class DefinedConstants extends Analyzer {
              ->classDefinition()
              ->goToAllParents()
              ->raw($containsConstantDefinition)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // constants defined in a class of an extension

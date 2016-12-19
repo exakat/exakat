@@ -36,8 +36,7 @@ class ImplementIsForInterface extends Analyzer {
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS')
              ->hasClassDefinition()
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // class a implements a PHP class

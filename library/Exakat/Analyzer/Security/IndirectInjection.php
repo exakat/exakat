@@ -78,16 +78,14 @@ class IndirectInjection extends Analyzer {
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
         $this->atomIs('Variable')
              ->codeIs($vars, true)
-             ->inIs('CONCAT')
-             ->analyzerIsNot('self');
+             ->inIs('CONCAT');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
         $this->atomIs('Variable')
              ->codeIs($vars, true)
              ->inIs('VARIABLE')
-             ->inIs('CONCAT')
-             ->analyzerIsNot('self');
+             ->inIs('CONCAT');
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)

@@ -44,10 +44,6 @@ class Devoops extends Reports {
     
     protected $analyzers  = array(); // cache for analyzers [Title] = object
     
-    public function __construct() {
-        parent::__construct();
-    }
-    
     public function generateFileReport($report) {
         $out = new XMLWriter;
         $out->openMemory();

@@ -53,6 +53,14 @@ class Ambassador extends Reports {
     const YES          = 'Yes';
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
+    
+    private $inventories = array('constants'  => 'Constants',
+                                 'classes'    => 'Classes',
+                                 'interfaces' => 'Interfaces',
+                                 'functions'  => 'Functions',
+                                 'traits'     => 'Traits',
+                                 'namespaces' => 'Namespaces',
+                                 'exceptions' => 'Exceptions');
 
     /**
      * __construct
@@ -65,11 +73,6 @@ class Ambassador extends Reports {
         $this->severities        = $this->docs->getSeverities();
     }
 
-    /**
-     * Get the base file
-     *
-     * @param type $file
-     */
     private function getBasedPage($file) {
         static $baseHTML;
         
@@ -82,6 +85,11 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
             $menu = file_get_contents($this->tmpName . '/datas/menu.html');
+            $inventories = '';
+            foreach($this->inventories as $fileName => $title) {
+                $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
+            }
+            $menu = $this->injectBloc($menu, 'INVENTORIES', $inventories);
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
@@ -89,6 +97,13 @@ class Ambassador extends Reports {
         $combinePageHTML = $this->injectBloc($baseHTML, "BLOC-MAIN", $subPageHTML);
 
         return $combinePageHTML;
+    }
+
+    private function putBasedPage($file, $html) {
+        if (strpos($html, '{{BLOC-JS}}') !== false) {
+            $html = str_replace('{{BLOC-JS}}', '', $html);
+        }
+        file_put_contents($this->tmpName . '/datas/'.$file.'.html', $html);
     }
 
     private function injectBloc($html, $bloc, $content) {
@@ -110,6 +125,7 @@ class Ambassador extends Reports {
         $this->generateProcFiles();  
 
         $this->generateDashboard();
+        $this->generateExtensionsBreakdown();
         $this->generateFiles();
         $this->generateAnalyzers();
         $this->generateIssues();
@@ -118,17 +134,21 @@ class Ambassador extends Reports {
         
         $this->generateAppinfo();
         $this->generateBugFixes();
+        $this->generatePhpConfiguration();
         $this->generateExternalServices();
         $this->generateDirectiveList();
+        $this->generateAlteredDirectives();
+        $this->generateStats();
         
         // Favorites
         $this->generateFavorites();
-        $this->generateDynamicCode();
 
         // inventories
         $this->generateErrorMessages();
-
-
+        $this->generateDynamicCode();
+        $this->generateGlobals();
+        $this->generateInventories();
+        
         // Annex
         $this->generateDocumentation();
         $this->generateCodes();  
@@ -137,7 +157,7 @@ class Ambassador extends Reports {
         $files = array('credits');
         foreach($files as $file) {
             $baseHTML = $this->getBasedPage($file);
-            file_put_contents($this->tmpName . '/datas/'.$file.'.html', $baseHTML);
+            $this->putBasedPage($file, $baseHTML);
         }
         
         $this->cleanFolder();
@@ -162,14 +182,10 @@ class Ambassador extends Reports {
         copyDir($this->config->dir_root . '/media/devfaceted', $this->tmpName );
     }
 
-    /**
-     * Clear existant folder
-     *
-     */
     private function cleanFolder() {
-        if (file_exists($this->tmpName . '/base.html')) {
-            unlink($this->tmpName . '/base.html');
-            unlink($this->tmpName . '/menu.html');
+        if (file_exists($this->tmpName . '/datas/base.html')) {
+            unlink($this->tmpName . '/datas/base.html');
+            unlink($this->tmpName . '/datas/menu.html');
         }
 
         // Clean final destination
@@ -260,7 +276,7 @@ class Ambassador extends Reports {
         $finalHTML = $this->injectBloc($baseHTML, "BLOC-ANALYZERS", $analyzersDocHTML);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/highlight.pack.js"></script>');
 
-        file_put_contents($this->tmpName . '/datas/analyzers_doc.html', $finalHTML);
+        $this->putBasedPage('analyzers_doc', $finalHTML);
     }
 
     private function generateFavorites() {
@@ -555,8 +571,7 @@ JAVASCRIPT;
 
         $baseHTML = $this->injectBloc($baseHTML, "FAVORITES", $html);
         $baseHTML = $this->injectBloc($baseHTML, "BLOC-JS", $donut);
-        file_put_contents($this->tmpName . '/datas/favorites_dashboard.html', $baseHTML);
-
+        $this->putBasedPage('favorites_dashboard', $baseHTML);
 
         $baseHTML = $this->getBasedPage('favorites_issues');
 
@@ -619,12 +634,9 @@ JAVASCRIPT;
 JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
-        file_put_contents($this->tmpName . '/datas/favorites_issues.html', $finalHTML);
+        $this->putBasedPage('favorites_issues', $finalHTML);
     }
 
-    /**
-     * generate the content of Dashboad
-     */
     public function generateDashboard() {
         $baseHTML = $this->getBasedPage('index');
         
@@ -907,14 +919,184 @@ JAVASCRIPT;
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS",  $blocjs);
 
-        file_put_contents($this->tmpName . '/datas/index.html', $finalHTML);
+        $this->putBasedPage('index', $finalHTML);
+    }
+    
+    public function generateExtensionsBreakdown() {
+        $finalHTML = $this->getBasedPage('extension_list');
+
+        // List of extensions used
+        $res = $this->sqlite->query(<<<SQL
+SELECT analyzer, count(*) AS count FROM results 
+WHERE analyzer LIKE "Extensions/Ext%"
+GROUP BY analyzer
+ORDER BY count(*) DESC
+SQL
+);
+//        $fileHTML = $this->getTopFile();
+        $html = '';
+        $xAxis = array();
+        $data = array();
+        while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $shortName = str_replace('Extensions/Ext', 'ext/', $value['analyzer']);
+            $xAxis[] = "'" . $shortName . "'";
+            $data[$value['analyzer']] = $value['count'];
+//                    <a href="#" title="' . $value['analyzer'] . '">
+            $html .= '<div class="clearfix">
+                      <div class="block-cell-name">' . $shortName . '</div>
+                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                  </div>';
+        }
+
+        $finalHTML = $this->injectBloc($finalHTML, "TOPFILE", $html);
+        
+        $blocjs = <<<JAVASCRIPT
+  <script>
+    $(document).ready(function() {
+      Highcharts.theme = {
+         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
+         chart: {
+            backgroundColor: null,
+            style: {
+               fontFamily: "Dosis, sans-serif"
+            }
+         },
+         title: {
+            style: {
+               fontSize: '16px',
+               fontWeight: 'bold',
+               textTransform: 'uppercase'
+            }
+         },
+         tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'rgba(219,219,216,0.8)',
+            shadow: false
+         },
+         legend: {
+            itemStyle: {
+               fontWeight: 'bold',
+               fontSize: '13px'
+            }
+         },
+         xAxis: {
+            gridLineWidth: 1,
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         yAxis: {
+            minorTickInterval: 'auto',
+            title: {
+               style: {
+                  textTransform: 'uppercase'
+               }
+            },
+            labels: {
+               style: {
+                  fontSize: '12px'
+               }
+            }
+         },
+         plotOptions: {
+            candlestick: {
+               lineColor: '#404048'
+            }
+         },
+
+
+         // General
+         background2: '#F0F0EA'
+      };
+
+      // Apply the theme
+      Highcharts.setOptions(Highcharts.theme);
+
+      $('#filename').highcharts({
+          credits: {
+            enabled: false
+          },
+
+          exporting: {
+            enabled: false
+          },
+
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: ''
+          },
+          xAxis: {
+              categories: [SCRIPTDATAFILES]
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: ''
+              },
+              stackLabels: {
+                  enabled: false,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: 0,
+              verticalAlign: 'top',
+              y: -10,
+              floating: false,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              headerFormat: '<b>{point.x}</b><br/>',
+              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: false,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'Calls',
+              data: [CALLCOUNT]
+          }]
+      });
+
+    });
+  </script>
+JAVASCRIPT;
+
+        $tags = array();
+        $code = array();
+        
+        // Filename Overview
+        $tags[] = 'CALLCOUNT';
+        $code[] = implode(', ', $data);
+        $tags[] = 'SCRIPTDATAFILES';
+        $code[] = implode(', ', $xAxis);
+        
+        $blocjs = str_replace($tags, $code, $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS",  $blocjs);
+
+        $this->putBasedPage('extension_list', $finalHTML);
     }
 
-    /**
-     * Get info bloc top left
-     *
-     * @return string
-     */
     public function getHashData() {
         $php = new Phpexec($this->config->phpversion);
 
@@ -1024,7 +1206,7 @@ JAVASCRIPT;
                    <div class="block-cell">' . $value['label'] . '</div>
                    <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
-            $dataScript .= ($dataScript) ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
+            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
         }
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
@@ -1066,7 +1248,7 @@ SQL;
                    <div class="block-cell">' . $value['label'] . '</div>
                    <div class="block-cell text-center">' . $value['value'] . '</div>
                  </div>';
-            $dataScript .= ($dataScript) ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
+            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
         }
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
@@ -1121,7 +1303,7 @@ SQL;
         $finalHTML = $this->injectBloc($baseHTML, "BLOC-ANALYZERS", $analyserHTML);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/datatables.js"></script>');
 
-        file_put_contents($this->tmpName . '/datas/analyzers.html', $finalHTML);
+        $this->putBasedPage('analyzers', $finalHTML);
     }
 
     protected function getAnalyzersResultsCounts() {
@@ -1187,7 +1369,7 @@ SQL;
         $finalHTML = $this->injectBloc($baseHTML, "BLOC-FILES", $filesHTML);
         $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/datatables.js"></script>');
 
-        file_put_contents($this->tmpName . '/datas/files.html', $finalHTML);
+        $this->putBasedPage('files', $finalHTML);
     }
 
     /**
@@ -1282,10 +1464,6 @@ SQL;
         return $html;
     }
 
-    /**
-     * Get data files overview
-     * 
-     */
     private function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
         $xAxis        = array();
@@ -1308,11 +1486,11 @@ SQL;
         $dataNone     = join(', ', $dataNone);
 
         return array(
-            'scriptDataFiles' => $xAxis,
-            'scriptDataMajor' => $dataMajor,
+            'scriptDataFiles'    => $xAxis,
+            'scriptDataMajor'    => $dataMajor,
             'scriptDataCritical' => $dataCritical,
-            'scriptDataNone' => $dataNone,
-            'scriptDataMinor' => $dataMinor
+            'scriptDataNone'     => $dataNone,
+            'scriptDataMinor'    => $dataMinor
         );
     }
 
@@ -1504,7 +1682,7 @@ SQL;
 JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
-        file_put_contents($this->tmpName . '/datas/issues.html', $finalHTML);
+        $this->putBasedPage('issues', $finalHTML);
     }
 
     /**
@@ -1617,7 +1795,7 @@ SQL;
         
         $html = $this->getBasedPage('used_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
-        file_put_contents($this->tmpName.'/datas/used_settings.html', $html);
+        $this->putBasedPage('used_settings', $html);
     }
 
     private function generateProcFiles() {
@@ -1638,7 +1816,7 @@ SQL;
         $html = $this->getBasedPage('proc_files');
         $html = $this->injectBloc($html, 'FILES', $files);
         $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
-        file_put_contents($this->tmpName.'/datas/proc_files.html', $html);
+        $this->putBasedPage('proc_files', $html);
     }
 
     private function generateAnalyzersList() {
@@ -1653,7 +1831,7 @@ SQL;
 
         $html = $this->getBasedPage('proc_analyzers');
         $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
-        file_put_contents($this->tmpName.'/datas/proc_analyzers.html', $html);
+        $this->putBasedPage('proc_analyzers', $html);
     }
 
     private function generateExternalLib() {
@@ -1675,7 +1853,7 @@ SQL;
 
         $html = $this->getBasedPage('ext_lib');
         $html = $this->injectBloc($html, 'LIBRARIES', $libraries);
-        file_put_contents($this->tmpName.'/datas/ext_lib.html', $html);
+        $this->putBasedPage('ext_lib', $html);
     }
 
     protected function generateBugfixes() {
@@ -1731,7 +1909,20 @@ SQL;
         
         $html = $this->getBasedPage('bugfixes');
         $html = $this->injectBloc($html, 'BUG_FIXES', $table);
-        file_put_contents($this->tmpName.'/datas/bugfixes.html', $html);
+        $this->putBasedPage('bugfixes', $html);
+    }
+    
+    protected function generatePhpConfiguration() {
+        $phpConfiguration = new PhpConfiguration();
+        $report = $phpConfiguration->generate(null, null);
+        
+        $id = strpos($report, "\n\n\n");
+        $configline = substr($report, 0, $id);
+        $configline = str_replace(array(' ', "\n") , array("&nbsp;", "<br />\n",), $configline);
+
+        $html = $this->getBasedPage('php_compilation');
+        $html = $this->injectBloc($html, 'COMPILATION', $configline);
+        $this->putBasedPage('php_compilation', $html);
     }
 
     private function generateErrorMessages() {
@@ -1744,7 +1935,7 @@ SQL;
 
         $html = $this->getBasedPage('error_messages');
         $html = $this->injectBloc($html, 'ERROR_MESSAGES', $errorMessages);
-        file_put_contents($this->tmpName.'/datas/error_messages.html', $html);
+        $this->putBasedPage('error_messages', $html);
     }
     
     private function generateExternalServices() {
@@ -1763,7 +1954,7 @@ SQL;
 
         $html = $this->getBasedPage('external_services');
         $html = $this->injectBloc($html, 'EXTERNAL_SERVICES', $externalServices);
-        file_put_contents($this->tmpName.'/datas/external_services.html', $html);
+        $this->putBasedPage('external_services', $html);
     }
     
     private function generateDirectiveList() {
@@ -1812,7 +2003,7 @@ SQL
         
         $html = $this->getBasedPage('directive_list');
         $html = $this->injectBloc($html, 'DIRECTIVE_LIST', $directiveList);
-        file_put_contents($this->tmpName.'/datas/directive_list.html', $html);
+        $this->putBasedPage('directive_list', $html);
     }
     
     private function generateDynamicCode() {
@@ -1825,7 +2016,138 @@ SQL
 
         $html = $this->getBasedPage('dynamic_code');
         $html = $this->injectBloc($html, 'DYNAMIC_CODE', $dynamicCode);
-        file_put_contents($this->tmpName.'/datas/dynamic_code.html', $html);
+        $this->putBasedPage('dynamic_code', $html);
+    }
+    
+    private function generateGlobals() {
+        $theGlobals = '';
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
+        while($row = $res->fetchArray()) {
+            $theGlobals .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('globals');
+        $html = $this->injectBloc($html, 'GLOBALS', $theGlobals);
+        $this->putBasedPage('globals', $html);
+    }    
+
+    private function generateInventories() {
+        $definitions = array(
+            'constants'  => array('description' => 'List of all defined constants in the code.',
+                                  'analyzer'    => 'Constants/Constantnames'),
+            'classes'    => array('description' => 'List of all defined classes in the code.',
+                                  'analyzer'    => 'Classes/Classnames'),
+            'interfaces' => array('description' => 'List of all defined interfaces in the code.',
+                                  'analyzer'    => 'Interfaces/Interfacenames'),
+            'traits'     => array('description' => 'List of all defined traits in the code.',
+                                  'analyzer'    => 'Traits/Traitnames'),
+            'functions'  => array('description' => 'List of all defined functions in the code.',
+                                  'analyzer'    => 'Functions/Functionnames'),
+            'namespaces' => array('description' => 'List of all defined namespaces in the code.',
+                                  'analyzer'    => 'Namespaces/Namespacesnames'),
+            'exceptions' => array('description' => 'List of all defined exceptions.',
+                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
+        );
+        foreach($this->inventories as $fileName => $theTitle) {
+            $theDescription = $definitions[$fileName]['description'];
+            $theAnalyzer    = $definitions[$fileName]['analyzer'];
+
+            $theTable = '';
+            $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
+            while($row = $res->fetchArray()) {
+                $theTable .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            }
+
+            $html = $this->getBasedPage('inventories');
+            $html = $this->injectBloc($html, 'TITLE', $theTitle);
+            $html = $this->injectBloc($html, 'DESCRIPTION', $theDescription);
+            $html = $this->injectBloc($html, 'TABLE', $theTable);
+            $this->putBasedPage('inventories_'.$fileName, $html);
+        }
+    }
+    
+    private function generateAlteredDirectives() {
+        $alteredDirectives = '';
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
+        while($row = $res->fetchArray()) {
+            $alteredDirectives .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        }
+        
+        $html = $this->getBasedPage('altered_directives');
+        $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
+        $this->putBasedPage('altered_directives', $html);
+    }    
+    
+    private function generateStats() {
+        $extensions = array(
+                    'Summary' => array(
+                            'Namespaces'     => 'Namespace',
+                            'Classes'        => 'Class',
+                            'Interfaces'     => 'Interface',
+                            'Trait'          => 'Trait',
+                            'Function'       => 'Functions/RealFunctions',
+                            'Variables'      => 'Variables/RealVariables',
+                            'Constants'      => 'Constants/Constantnames',
+                     ),
+                    'Classes' => array(
+                            'Classes'           => 'Class',
+                            'Class constants'   => 'Classes/ConstantDefinition',
+                            'Properties'        => 'Classes/NormalProperties',
+                            'Static properties' => 'Classes/StaticProperties',
+                            'Methods'           => 'Classes/NormalMethods',
+                            'Static methods'    => 'Classes/StaticMethods',
+                            // Spot Abstract methods
+                            // Spot Final Methods 
+                     ),
+                    'Structures' => array(
+                            'Ifthen'              => 'Ifthen',
+                            'Else'                => 'Structures/ElseUsage',
+                            'Switch'              => 'Switch',
+                            'Case'                => 'Case',
+                            'Default'             => 'Default',
+                            'For'                 => 'For',
+                            'Foreach'             => 'Foreach',
+                            'While'               => 'While',
+                            'Do..while'           => 'Dowhile',
+                            'New'                 => 'New',
+                            'Clone'               => 'Clone',
+                            'Throw'               => 'Throw',
+                            'Try'                 => 'Try',
+                            'Catch'               => 'Catch',
+                            'Finally'             => 'Finally',
+                            'Yield'               => 'Yield',
+                            '?  :'                => 'Ternary',
+                            '?: '                 => 'Php/Coalesce',
+                            '??'                  => 'Php/NullCoalesce',
+                            'Variables constants' => 'Constants/VariableConstants',
+                            'Variables variables' => 'Variables/VariableVariable',
+                            'Variables functions' => 'Functions/Dynamiccall',
+                            'Variables classes'   => 'Classes/VariableClasses',
+                    ),
+                );
+
+        $stats = '';
+        foreach($extensions as $section => $hash) {
+            $stats .= "<tr><td colspan=2 bgcolor=#BBB>$section</td></tr>\n";
+
+            foreach($hash as $name => $ext) {
+                if (strpos($ext, '/') === false) {
+                    $res = $this->sqlite->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"'); 
+                    $d = $res->fetchArray(\SQLITE3_ASSOC);
+                    $d = (int) $d['count'];
+                } else {
+                    $res = $this->sqlite->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"'); 
+                    $d = $res->fetchArray(\SQLITE3_ASSOC);
+                    $d = (int) $d['count'];
+                }
+                $res = $d === -2 ? 'N/A' : $d;
+                $stats .= "<tr><td>$name</td><td>$res</td></tr>\n";
+            }
+        }
+        
+        $html = $this->getBasedPage('stats');
+        $html = $this->injectBloc($html, 'STATS', $stats);
+        $this->putBasedPage('stats', $html);
     }
     
     private function generateCodes() {
@@ -1875,7 +2197,7 @@ JAVASCRIPT;
         $html = $this->injectBloc($html, 'BLOC-JS', $blocjs);
         $html = $this->injectBloc($html, 'FILES', $files);
         
-        file_put_contents($this->tmpName.'/datas/codes.html', $html);
+        $this->putBasedPage('codes', $html);
     }
     
     private function generateAppinfo() {
@@ -2258,8 +2580,7 @@ HTML;
 
         $html = $this->getBasedPage('appinfo');
         $html = $this->injectBloc($html, 'APPINFO', $list);
-        file_put_contents($this->tmpName.'/datas/appinfo.html', $html);
-
+        $this->putBasedPage('appinfo', $html);
     }
 
     protected function makeIcon($tag) {

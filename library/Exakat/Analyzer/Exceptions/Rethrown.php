@@ -36,8 +36,7 @@ class Rethrown extends Analyzer {
              ->atomIs('Throw')
              ->outIs('THROW')
              ->samePropertyAs('code', 'rethrow')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

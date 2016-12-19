@@ -38,7 +38,6 @@ class TestClass extends Analyzer {
 
 // second level of heritage
         $this->atomIs('Class')
-             ->analyzerIsNot('self')
              ->outIs('EXTENDS')
              ->classDefinition()
              ->analyzerIs('self')
@@ -47,7 +46,6 @@ class TestClass extends Analyzer {
 
 // third level of heritage
         $this->atomIs('Class')
-             ->analyzerIsNot('self')
              ->outIs('EXTENDS')
              ->classDefinition()
              ->analyzerIs('self')

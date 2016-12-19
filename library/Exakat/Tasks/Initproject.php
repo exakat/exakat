@@ -31,27 +31,26 @@ use Exakat\Exceptions\HelperException;
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
-    public function run(Config $config) {
-        $this->config = $config;
-        $project = $config->project;
+    public function run() {
+        $project = $this->config->project;
 
         if ($project == 'default') {
             throw new ProjectNeeded();
         }
 
-        $repositoryURL = $config->repository;
+        $repositoryURL = $this->config->repository;
 
-        if ($config->delete === true) {
+        if ($this->config->delete === true) {
             display( "Deleting $project\n");
     
             // final wait..., just in case
             sleep(2);
 
-            rmdirRecursive($config->projects_root.'/projects/'.$project);
-        } elseif ($config->update === true) {
+            rmdirRecursive($this->config->projects_root.'/projects/'.$project);
+        } elseif ($this->config->update === true) {
             display( "Updating $project\n");
     
-            shell_exec('cd '.$config->projects_root.'/projects/'.$project.'/code/; git pull');
+            shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code/; git pull');
         } else {
             display( "Initializing $project with '$repositoryURL'\n");
             $this->init_project($project, $repositoryURL);
@@ -283,8 +282,8 @@ INI;
 
         if (!$skipFiles) {
             display("Running files\n");
-            $analyze = new Files($this->gremlin);
-            $analyze->run($this->config);
+            $analyze = new Files($this->gremlin, $this->config);
+            $analyze->run();
             unset($analyze);
         }
     }

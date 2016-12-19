@@ -33,8 +33,7 @@ class AlreadyParentsInterface extends Analyzer {
              ->goToAllParents()
              ->outIs('IMPLEMENTS')
              ->samePropertyAs('fullnspath', 'i')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

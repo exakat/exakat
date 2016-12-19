@@ -109,7 +109,6 @@ class IsRead extends Analyzer {
 
         // Variable that are not a reference in a functioncall
         $this->atomIs($atoms)
-             ->analyzerIsNot('self')
              ->hasIn('ARGUMENT')
              ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").hasLabel("Function").count().is(eq(0)) )')
              ->analyzerIsNot('Variables/IsRead');

@@ -28,17 +28,16 @@ use Exakat\Analyzer\Analyzer;
 
 class AvoidUsing extends Analyzer {
     public function analyze() {
-        $config = Config::factory();
-        $classes = $config->Classes_AvoidUsing;
+        $classes = $this->config->Classes_AvoidUsing;
         
         if (empty($classes)) {
             return null;
         }
-        $classes = $this->makeFullNsPath($classes);
+        $classesPath = $this->makeFullNsPath($classes);
 
         // class may be used in a class
         $this->atomIs('Class')
-             ->fullnspathIs($classes)
+             ->fullnspathIs($classesPath)
              ->back('first');
         $this->prepareQuery();
         
@@ -46,14 +45,14 @@ class AvoidUsing extends Analyzer {
         $this->atomIs('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($classes)
+             ->fullnspathIs($classesPath)
              ->back('first');
         $this->prepareQuery();
 
         // class may be used in a Staticmethodcall
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant', 'Instanceof'))
              ->outIs('CLASS')
-             ->fullnspathIs($classes)
+             ->fullnspathIs($classesPath)
              ->back('first');
         $this->prepareQuery();
 
@@ -62,21 +61,21 @@ class AvoidUsing extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
-             ->fullnspathIs($classes)
+             ->fullnspathIs($classesPath)
              ->back('first');
         $this->prepareQuery();
 
         // class may be used in an extension
         $this->atomIs('Class')
              ->outIs(array('EXTENDS', 'IMPLEMENTS'))
-             ->fullnspathIs($classes)
+             ->fullnspathIs($classesPath)
              ->back('first');
         $this->prepareQuery();
 
         // class may be used in an use
         $this->atomIs('Use')
              ->outIs('USE')
-             ->fullnspathIs($classes)
+             ->fullnspathIs($classesPath)
              ->back('first');
         $this->prepareQuery();
 
@@ -85,14 +84,12 @@ class AvoidUsing extends Analyzer {
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->atomIs('String')
-             ->noDelimiterIs(array_merge($config->Classes_AvoidUsing, $classes))
-             ->analyzerIsNot('self');
+             ->noDelimiterIs(array_merge($classes, $classesPath));
         $this->prepareQuery();
 
         // mentions in strings
         $this->atomIs('String')
-             ->analyzerIsNot('self')
-             ->noDelimiterIs($config->Classes_AvoidUsing);
+             ->regexIs('noDelimiter', join('|',$classes));
         $this->prepareQuery();
     }
 }

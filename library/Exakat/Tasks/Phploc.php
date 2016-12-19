@@ -38,30 +38,30 @@ class Phploc extends Tasks {
 
     const CONCURENCE = self::ANYTIME;
     
-    public function run(Config $config) {
+    public function run() {
         
         $loc = array('files'    => 0,
                      'total'    => 0,
                      'tokens'   => 0,
                      'comments' => 0,
                      'code'     => 0);
-        $project = $config->project;
+        $project = $this->config->project;
         if ($project != 'default') {
-            $projectPath = $config->projects_root.'/projects/'.$project;
+            $projectPath = $this->config->projects_root.'/projects/'.$project;
 
             if (!file_exists($projectPath)) {
-                throw new NoSuchProject($config->project);
+                throw new NoSuchProject($this->config->project);
             }
 
             if (!file_exists($projectPath.'/datastore.sqlite')) {
-                throw new NoDatastore($config->project);
+                throw new NoDatastore($this->config->project);
             }
             
-            $datastore = new Datastore($config);
+            $datastore = new Datastore($this->config);
             $files = $datastore->getCol('files', 'file');
 
             foreach($files as $file) {
-                $counts = $this->countLocInFile($config->projects_root.'/projects/'.$project.'/code'.$file);
+                $counts = $this->countLocInFile($this->config->projects_root.'/projects/'.$project.'/code'.$file);
                 array_add($loc, $counts);
                 
                 if ($counts['error'] != self::OK) {
@@ -78,12 +78,12 @@ class Phploc extends Tasks {
                                                    array('key' => 'tokens',      'value' => $loc['tokens']),
                                         )
                           );
-        } elseif (!empty($config->dirname)) {
-            $dirPath = $config->dirname;
+        } elseif (!empty($this->config->dirname)) {
+            $dirPath = $this->config->dirname;
 
             $ignoreDirs = array();
             $ignoreName = array();
-            foreach($config->ignore_dirs as $ignore) {
+            foreach($this->config->ignore_dirs as $ignore) {
                 if ($ignore[0] == '/') {
                     $d = $dirPath.$ignore;
                     if (file_exists($d)) {
@@ -99,16 +99,16 @@ class Phploc extends Tasks {
             foreach($files as $file) {
                 array_add($loc, $this->countLocInFile($file));
             }
-        } elseif (!empty($config->filename)) {
-            $loc = $this->countLocInFile($config->filename);
+        } elseif (!empty($this->config->filename)) {
+            $loc = $this->countLocInFile($this->config->filename);
         } else {
-            print("Usage : php exakat phploc <-p project> <-d dirname> <-f filename>\n");
+            print "Usage : php exakat phploc <-p project> <-d dirname> <-f filename>\n";
             return;
         }
         
-        if ($config->json) {
+        if ($this->config->json) {
             print json_encode($loc);
-        } elseif ($config->verbose) {
+        } elseif ($this->config->verbose) {
             foreach($loc as $k => $v) {
                 print substr("$k        ", 0, 8)." : $v\n";
             }

@@ -65,8 +65,7 @@ class UndefinedClasses extends Analyzer {
         $this->prepareQuery();
 
         $this->analyzerIs('ZendF/ZendInterfaces')
-             ->fullnspathIsNot($interfaces)
-             ->analyzerIsNot('self');
+             ->fullnspathIsNot($interfaces);
         $this->prepareQuery();
     }
 }

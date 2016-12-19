@@ -89,21 +89,21 @@ class FindExternalLibraries extends Tasks {
                                   // behat, peridot, kahlan, phpt?
                                    );
 
-    public function run(Config $config) {
-        $project = $config->project;
+    public function run() {
+        $project = $this->config->project;
         if ($project == 'default') {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists($config->projects_root.'/projects/'.$project.'/')) {
+        if (!file_exists($this->config->projects_root.'/projects/'.$project.'/')) {
             throw new NoSuchProject();
         }
 
-        $dir = $config->projects_root.'/projects/'.$project.'/code';
-        $configFile = $config->projects_root.'/projects/'.$project.'/config.ini';
+        $dir = $this->config->projects_root.'/projects/'.$project.'/code';
+        $configFile = $this->config->projects_root.'/projects/'.$project.'/config.ini';
         $ini = parse_ini_file($configFile);
         
-        if ($config->update && isset($ini['FindExternalLibraries'])) {
+        if ($this->config->update && isset($ini['FindExternalLibraries'])) {
             display('Not updating '.$project.'/config.ini. This tool was already run. Please, clean the config.ini file in the project directory, before running it again.');
             return; //Cancel task
         }
@@ -121,7 +121,7 @@ class FindExternalLibraries extends Tasks {
         Precedence::preloadConstants($this->php->getActualVersion());
         
         $r = array();
-        $path = $config->projects_root.'/projects/'.$project.'/code';
+        $path = $this->config->projects_root.'/projects/'.$project.'/code';
         rsort($files);
         $ignore = 'None';
         $ignoreLength = 0;
@@ -159,7 +159,7 @@ class FindExternalLibraries extends Tasks {
         $this->datastore->cleanTable('externallibraries');
         $this->datastore->addRow('externallibraries', $store);
 
-        if ($config->update === true && !empty($newConfigs)) {
+        if ($this->config->update === true && !empty($newConfigs)) {
              display('Updating '.$project.'/config.ini');
              $ini = file_get_contents($configFile);
              $ini = preg_replace("#(ignore_dirs\[\] = \/.*?\n)\n#is", '$1'."\n".';Ignoring external libraries'."\n".'ignore_dirs[] = '.implode("\n".'ignore_dirs[] = ', $newConfigs)."\n;Ignoring external libraries\n\n", $ini);
@@ -187,7 +187,12 @@ class FindExternalLibraries extends Tasks {
             if ($token[0] == T_WHITESPACE)  { continue; }
             if ($token[0] == T_DOC_COMMENT) { continue; }
             if ($token[0] == T_COMMENT)     { continue; }
-        
+            
+            // If we find a namespace, it is not the global space, and we may skip the rest.
+            if ($token[0] == T_NAMESPACE) {
+                return;
+            }
+            
             if ($token[0] == T_CLASS) {
                 if (!is_array($tokens[$id + 2])) { continue; }
                 $class = $tokens[$id + 2][1];

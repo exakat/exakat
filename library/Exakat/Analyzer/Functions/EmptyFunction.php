@@ -48,7 +48,7 @@ class EmptyFunction extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('NAME')
              ->outIs('BLOCK')
-//             ->is('count', 1)
+             ->is('count', 1)
              ->outIs('ELEMENT')
              ->atomIs('Void')
              ->goToClass()
@@ -64,9 +64,7 @@ class EmptyFunction extends Analyzer {
                              .where( __.out("ABSTRACT", "PRIVATE").count().is(eq(0)) ) 
                              .out("NAME").filter{ it.get().value("code").toLowerCase() == name.toLowerCase()}
                              .count().is(eq(0)) )')
-             ->back('first')
-             ->analyzerIsNot('self')
-             ;
+             ->back('first');
         $this->prepareQuery();
     }
 }

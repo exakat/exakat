@@ -36,7 +36,6 @@ class EmptyNamespace extends Analyzer {
 
         // Namespace with empty block (case of namespace A {})
         $this->atomIs('Namespace')
-             ->analyzerIsNot('self')
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('ELEMENT')
@@ -46,7 +45,6 @@ class EmptyNamespace extends Analyzer {
 
         // Namespace with only use is empty
         $this->atomIs('Namespace')
-             ->analyzerIsNot('self')
              ->outIs('BLOCK')
              ->raw('where(__.out("ELEMENT").not( hasLabel("Use") ).count().is(eq(0)) )')
              ->back('first');

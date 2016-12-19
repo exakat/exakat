@@ -24,6 +24,7 @@ namespace Exakat;
 
 use Exakat\Config;
 use Exakat\Phpexec;
+use Phar;
 
 class Config {
     static private $singleton      = null;
@@ -37,7 +38,7 @@ class Config {
            public  $executable     = '';
            private $projectConfig  = array();
         
-           private $options = array();
+           private $options = array('configFiles' => array());
 
            private $defaultConfig  = array( // directives with boolean value
                                             'verbose'        => false,
@@ -86,6 +87,31 @@ class Config {
                                             'neo4j_folder'   => 'neo4j',
                                             'neo4j_login'    => 'admin',
                                             'neo4j_password' => 'admin',
+                                            
+                                             'php'           => '',
+                                             'php52'         => '',
+                                             'php53'         => '',
+                                             'php54'         => '',
+                                             'php55'         => '',
+                                             'php56'         => '',
+                                             'php70'         => '',
+                                             'php71'         => '',
+                                             'php72'         => '',
+                                             
+                                             'phpversion'    => '7.1',
+                                             'token_limit'   => '1000000',
+                                             
+                                             'configFiles'   => array(),
+                                             'command'       => 'version',
+
+                                             'ignore_dirs'         => array(),
+                                             'file_extensions'     => array(),
+                                             'project_name'        => '',
+                                             'project_url'         => '',
+                                             'project_vcs'         => '',
+                                             'project_description' => '',
+                                             'project_packagist'   => '',
+                                             'other_php_versions'  => '',
                                            );
 
         private static $BOOLEAN_OPTIONS = array(
@@ -169,7 +195,7 @@ class Config {
     private function __construct($argv) {
         $this->argv = $argv;
         
-        $this->is_phar  = strpos(basename(dirname(dirname(__DIR__))), '.phar') !== false;
+        $this->is_phar  = !empty(Phar::Running());
         if ($this->is_phar) {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->projects_root = substr(dirname(dirname(dirname(__DIR__))), 7);
@@ -191,19 +217,22 @@ class Config {
             ini_set('display_errors', 1);
         }
         
-        $configFile = $this->projects_root.'/config/exakat.ini'; 
-        if (file_exists($this->projects_root.'/config/exakat.ini')) {
-            $this->configFile = parse_ini_file($configFile);
-            if (empty($this->configFile['php'])) {
-                $this->configFile['php'] = !isset($_SERVER['_']) ? $_SERVER['_'] : '/usr/bin/env php ';
-            }
-        } else {
-            $configFile = $this->projects_root.'/config/config-default.ini'; 
+        $configFiles = array('/etc/exakat.ini',
+                             '/etc/exakat/exakat.ini',
+                             
+                             $this->projects_root.'/config/config-default.ini',
+                             $this->projects_root.'/config/exakat.ini',
+                             ); 
+        foreach($configFiles as $id => $configFile) {
             if (file_exists($configFile)) {
-                $this->configFile = parse_ini_file($configFile);
+                $inis[] = parse_ini_file($configFile);
             } else {
-                $this->configFile = array();
+                unset($configFiles[$id]);
             }
+        }
+        $this->configFile = call_user_func_array('array_merge', $inis);
+        if (empty($this->configFile['php'])) {
+            $this->configFile['php'] = !isset($_SERVER['_']) ? $_SERVER['_'] : '/usr/bin/env php ';
         }
 
         // then read the config from the commandline (if any)
@@ -216,14 +245,15 @@ class Config {
         }  else {
             $this->codePath = '/No/Path/To/Code';
         }
-                
-        // build the actual config. Project overwrite commandline overwrites config, if any.
-        $this->options = array_merge($this->defaultConfig, $this->configFile, $this->commandline, $this->projectConfig);
 
+        // build the actual config. Project overwrite commandline overwrites config, if any.
+        $this->options = array_merge($this->defaultConfig, $this->configFile, $this->projectConfig, $this->commandline);
+        
         if ($this->options['neo4j_folder'][0] !== '/') {
             $this->options['neo4j_folder'] = $this->projects_root.'/'.$this->options['neo4j_folder'];
         }
         $this->options['neo4j_folder'] = realpath($this->options['neo4j_folder']);
+        $this->options['configFiles'] = $configFiles;
     }
     
     static public function factory($argv = array()) {

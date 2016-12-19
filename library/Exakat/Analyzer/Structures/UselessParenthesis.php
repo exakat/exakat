@@ -100,8 +100,7 @@ class UselessParenthesis extends Analyzer {
              ->inIs('CODE')
              ->atomIs('Parenthesis')
              ->inIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Addition')
-             ->analyzerIsNot('self');
+             ->atomIs('Addition');
         $this->prepareQuery();
 
         //$d = ((($a)*$b)*$c);
@@ -109,8 +108,7 @@ class UselessParenthesis extends Analyzer {
              ->inIs('CODE')
              ->atomIs('Parenthesis')
              ->inIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Multiplication')
-             ->analyzerIsNot('self');
+             ->atomIs('Multiplication');
         $this->prepareQuery();
         
     }

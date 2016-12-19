@@ -45,8 +45,7 @@ class RedefinedMethods extends Analyzer {
              ->hasNoOut('ABSTRACT') // abstract methods are not redefined. 
              ->outIs('NAME')
              ->samePropertyAs('code', 'method')
-             ->back('results')
-             ->analyzerIsNot('self');
+             ->back('results');
         $this->prepareQuery();
     }
 }

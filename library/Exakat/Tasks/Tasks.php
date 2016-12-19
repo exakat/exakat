@@ -33,87 +33,93 @@ abstract class Tasks {
     protected $log        = null;
     protected $enabledLog = true;
     protected $datastore  = null;
+
     protected $gremlin    = null;
     protected $config     = null;
+    
+    private $is_subtask   = self::IS_NOT_SUBTASK;
+
     protected $exakatDir  = null;
-    private   static $semaphore      = null;
-    private   static $keepSemaphore  = false;
+    public    static $semaphore      = null;
+    public    static $semaphorePort  = null;
     
     const  NONE    = 1;
     const  ANYTIME = 2;
-    const  DUMP = 3;
-    const  QUEUE = 4;
-    const  SERVER = 5;
+    const  DUMP    = 3;
+    const  QUEUE   = 4;
+    const  SERVER  = 5;
     
-    public function __construct($gremlin) {
+    const IS_SUBTASK     = true;
+    const IS_NOT_SUBTASK = false;
+    
+    public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
         $this->gremlin = $gremlin;
-        // Config is the general one.
-        $config = Config::factory();
+        $this->config  = $config;
+        $this->is_subtask = $subTask;
 
         assert(defined('static::CONCURENCE'), get_class($this)." is missing CONCURENCE\n");
 
-        if (static::CONCURENCE !== self::ANYTIME) {
+        if (static::CONCURENCE !== self::ANYTIME && $subTask === self::IS_NOT_SUBTASK) {
             if (self::$semaphore === null) {
                 if (static::CONCURENCE === self::QUEUE) {
-                    $ftok_proj = 'q';
+                    Tasks::$semaphorePort = 7610;
                 } elseif (static::CONCURENCE === self::SERVER) {
-                    $ftok_proj = 's';
+                    Tasks::$semaphorePort = 7611;
                 } elseif (static::CONCURENCE === self::DUMP) {
-                    $ftok_proj = 'd';
+                    Tasks::$semaphorePort = 7612;
                 } else {
-                    $ftok_proj = 'j';
+                    Tasks::$semaphorePort = 7613;
                 }
-                $key = ftok($config->executable, $ftok_proj);
-                self::$semaphore = sem_get($key, 1);
-                if (sem_acquire(self::$semaphore, 1) === false) {
+
+                if ($socket = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND)) {
+                    Tasks::$semaphore = $socket;
+                } else {
                     throw new AnotherProcessIsRunning();
                 }
-            } else {
-                self::$keepSemaphore = true;
-            }
+            } 
         } 
                 
         if ($this->enabledLog) {
-            $rc = new \ReflectionClass($this);
-            $task = strtolower($rc->getShortName());
+            $a = get_class($this);
+            $task = strtolower(substr($a, strrpos($a, '\\') + 1));
             $this->log = new Log($task,
-                                  $config->projects_root.'/projects/'.$config->project);
+                                 $this->config->projects_root.'/projects/'.$this->config->project);
         }
         
-        if ($config->project != 'default' &&
-            file_exists($config->projects_root.'/projects/'.$config->project)) {
-            $this->datastore = new Datastore($config);
+        if ($this->config->project != 'default' &&
+            file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
+            $this->datastore = new Datastore($this->config);
         }
 
-        if (!file_exists($config->projects_root.'/projects/')) {
-            mkdir($config->projects_root.'/projects/', 0700);
+        if (!file_exists($this->config->projects_root.'/projects/')) {
+            mkdir($this->config->projects_root.'/projects/', 0700);
         }
         
-        if (!file_exists($config->projects_root.'/projects/.exakat/')) {
-            mkdir($config->projects_root.'/projects/.exakat/', 0700);
+        if (!file_exists($this->config->projects_root.'/projects/.exakat/')) {
+            mkdir($this->config->projects_root.'/projects/.exakat/', 0700);
         }
         
-        $this->exakatDir = $config->projects_root.'/projects/.exakat/';
+        $this->exakatDir = $this->config->projects_root.'/projects/.exakat/';
     }
     
     public function __destruct() {
-        if (self::$keepSemaphore === false && self::$semaphore !== null) {
-            sem_remove(self::$semaphore);
+        if (static::CONCURENCE !== self::ANYTIME && $this->is_subtask === self::IS_NOT_SUBTASK) {
+            fclose(Tasks::$semaphore);
             self::$semaphore = null;
+            self::$semaphorePort = -1;
         }
     }
     
     protected function checkTokenLimit() {
         $nb_tokens = $this->datastore->getHash('tokens');
 
-        $config = Config::factory();
-        if ($nb_tokens > $config->token_limit) {
-            $this->datastore->addRow('hash', array('token error' => "Project too large ($nb_tokens / {$config->token_limit})"));
-            throw new ProjectTooLarge($nb_tokens, $config->token_limit);
+        if ($nb_tokens > $this->config->token_limit) {
+            $this->datastore->addRow('hash', array('token error' => "Project too large ($nb_tokens / {$this->config->token_limit})"));
+            throw new ProjectTooLarge($nb_tokens, $this->config->token_limit);
         }
     }
     
-    public abstract function run(Config $config);
+    public abstract function run();
 
     protected function cleanLogForProject($project) {
         $logs = glob($this->config->projects_root.'/projects/'.$project.'/log/*');

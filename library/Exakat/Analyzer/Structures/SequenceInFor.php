@@ -30,8 +30,7 @@ class SequenceInFor extends Analyzer {
         $this->atomIs('For')
              ->outIs(array('INIT', 'INCREMENT', 'FINAL'))
              ->isNot('count', 1)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
     }
 }

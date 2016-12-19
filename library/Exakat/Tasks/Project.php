@@ -42,34 +42,33 @@ class Project extends Tasks {
     protected $reports = array('Premier' => array('Ambassador' => 'report',
                                                   'Devoops'    => 'oldreport'));
     
-    public function run(Config $config) {
-        $this->config = $config;
-        
+    public function run() {
         $progress = 0;
 
-        $project = $config->project;
+        $project = $this->config->project;
 
-        $this->project_dir = $config->projects_root.'/projects/'.$project;
+        $this->project_dir = $this->config->projects_root.'/projects/'.$project;
 
-        if ($config->project == "default") {
+        if ($this->config->project == "default") {
             throw new ProjectNeeded();
         }
 
-        if (!file_exists($config->projects_root.'/projects/'.$project)) {
-            throw new NoSuchProject($config->project);
+        if (!file_exists($this->config->projects_root.'/projects/'.$project)) {
+            throw new NoSuchProject($this->config->project);
         }
 
         // cleaning log directory (possibly logs)
-        $logs = glob($config->projects_root.'/projects/'.$project.'/log/*');
+        $logs = glob($this->config->projects_root.'/projects/'.$project.'/log/*');
         foreach($logs as $log) {
             unlink($log);
         }
 
         $this->logTime('Start');
-        $this->addSnitch(array('step' => 'Start', 'project' => $config->project));
+        $this->addSnitch(array('step'    => 'Start', 
+                               'project' => $this->config->project));
 
         // cleaning datastore
-        $this->datastore = new Datastore($config, Datastore::CREATE);
+        $this->datastore = new Datastore($this->config, Datastore::CREATE);
         
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start' => $audit_start,
@@ -80,62 +79,62 @@ class Project extends Tasks {
         display("Running project '$project'\n");
 
         display("Cleaning DB\n");
-        $analyze = new CleanDb($this->gremlin);
-        $analyze->run($config);
+        $analyze = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $analyze->run();
         unset($analyze);
         $this->logTime('CleanDb');
         $this->addSnitch(array('step'    => 'Clean DB', 
-                               'project' => $config->project));
+                               'project' => $this->config->project));
 
         display("Search for external libraries\n");
         $args = array ( 1 => 'findextlib',
                         2 => '-p',
-                        3 => $config->project,
+                        3 => $this->config->project,
                         4 => '-u',
                         );
         
         $configThema = Config::push($args);
 
-        $analyze = new FindExternalLibraries($this->gremlin);
-        $analyze->run($configThema);
+        $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+        $analyze->run();
 
         $this->addSnitch(array('step'   => 'External lib', 
-                              'project' => $config->project));
+                              'project' => $this->config->project));
 
         Config::pop();
         unset($analyze);
 
         display("Running files\n");
-        $analyze = new Files($this->gremlin);
-        $analyze->run($config);
+        $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $analyze->run();
         unset($analyze);
         $this->logTime('Files');
         $this->addSnitch(array('step'    => 'Files', 
-                               'project' => $config->project));
+                               'project' => $this->config->project));
 
         $this->checkTokenLimit();
 
-        $analyze = new Load($this->gremlin);
-        $analyze->run($config);
+        $analyze = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $analyze->run();
         unset($analyze);
         display("Project loaded\n");
         $this->logTime('Loading');
 
         // paralell running
-        exec($config->php . ' '.$config->executable.' magicnumber -p '.$config->project.'   > /dev/null &');
+        exec($this->config->php . ' '.$this->config->executable.' magicnumber -p '.$this->config->project.'   > /dev/null &');
         $this->addSnitch(array('step'    => 'Magic Numbers', 
-                               'project' => $config->project));
+                               'project' => $this->config->project));
 
         // Dump is a child process
-        shell_exec($config->php . ' '.$config->executable.' dump -p '.$config->project);
+        shell_exec($this->config->php . ' '.$this->config->executable.' dump -p '.$this->config->project);
 
         foreach($this->themes as $theme) {
-            $this->addSnitch(array('step' => 'Analyze : '.$theme, 'project' => $config->project));
+            $this->addSnitch(array('step' => 'Analyze : '.$theme, 'project' => $this->config->project));
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
 
             $args = array ( 1 => 'analyze',
                             2 => '-p',
-                            3 => $config->project,
+                            3 => $this->config->project,
                             4 => '-T',
                             5 => trim($theme, '"'), // No need to protect anymore, as this is internal
                             6 => '-norefresh',
@@ -145,17 +144,17 @@ class Project extends Tasks {
             try {
                 $configThema = Config::push($args);
 
-                $analyze = new Analyze($this->gremlin);
-                $analyze->run($configThema);
+                $analyze = new Analyze($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+                $analyze->run();
                 unset($analyze);
                 
-                rename($config->projects_root.'/projects/'.$project.'/log/analyze.log', $config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
+                rename($this->config->projects_root.'/projects/'.$project.'/log/analyze.log', $this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
 
                 Config::pop();
 
                 $args = array ( 1 => 'dump',
                                 2 => '-p',
-                                3 => $config->project,
+                                3 => $this->config->project,
                                 4 => '-T',
                                 5 => trim($theme, '"'), // No need to protect anymore, as this is internal
                                 6 => '-u'
@@ -163,8 +162,8 @@ class Project extends Tasks {
 
                 $configThema = Config::push($args);
 
-                $dump = new Dump($this->gremlin);
-                $dump->run($configThema);
+                $dump = new Dump($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+                $dump->run();
                 unset($dump);
 
                 Config::pop();
@@ -172,13 +171,13 @@ class Project extends Tasks {
                 echo "Error while running the Analyze $theme \n",
                      $e->getMessage(),
                      "\nTrying next analysis\n";
-                file_put_contents($config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+                file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
             }
         }
 
         display("Analyzed project\n");
         $this->logTime('Analyze');
-        $this->addSnitch(array('step' => 'Analyzed', 'project' => $config->project));
+        $this->addSnitch(array('step' => 'Analyzed', 'project' => $this->config->project));
 
         $this->logTime('Analyze');
 
@@ -186,21 +185,21 @@ class Project extends Tasks {
         foreach($this->reports as $reportName => $formats) {
             foreach($formats as $format => $fileName) {
                 display("Reporting $reportName in $format\n");
-                $this->addSnitch(array('step' => 'Report : '.$format, 'project' => $config->project));
+                $this->addSnitch(array('step' => 'Report : '.$format, 'project' => $this->config->project));
                 
                 $args = array ( 1 => 'report',
                                 2 => '-p',
-                                3 => $config->project,
+                                3 => $this->config->project,
                                 4 => '-file',
                                 5 => $fileName,
                                 6 => '-format',
                                 7 => $format,
                                 );
-                $config = Config::factory($args);
+                $this->config = Config::factory($args);
             
                 try {
-                    $report = new Report2($this->gremlin);
-                    $report->run($config);
+                    $report = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+                    $report->run();
                     unset($report);
                 } catch (\Exception $e) {
                     echo "Error while building $reportName in $format \n",
@@ -216,13 +215,23 @@ class Project extends Tasks {
         $audit_end = time();
         
         // measure Neo4j's final size
-        $res = shell_exec('du -sh '.$config->neo4j_folder.' 2>/dev/null');
-        $neo4jSize = trim(str_replace(basename($config->neo4j_folder), '', $res));
+        $res = shell_exec('du -sh '.$this->config->neo4j_folder.' 2>/dev/null');
+        $neo4jSize = trim(str_replace(basename($this->config->neo4j_folder), '', $res));
 
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                                'audit_length' => $audit_end - $audit_start,
                                                'neo4jSize'    => $neo4jSize));
                                                
+        $query = <<<GREMLIN
+g.V().where( __.sideEffect{x = []; }.in('ANALYZED').sideEffect{ x.add(it.get().value('analyzer')); }.barrier().sideEffect{ y = x.groupBy().findAll{ i,j -> j.size() > 1;};} )
+.filter{ y.size() > 0; }
+.map{ y; };
+GREMLIN;
+
+        $res = $this->gremlin->query($query);
+        if (!empty($res)) {
+            file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/doublons.log', var_export($res, true));
+        }
 
         $this->logTime('Final');
         $this->removeSnitch();

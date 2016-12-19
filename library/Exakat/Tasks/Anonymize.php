@@ -37,9 +37,9 @@ class Anonymize extends Tasks {
     private $stringsNames = array();
     private $strings = 'A';
 
-    public function run(Config $config) {
+    public function run() {
         
-        if (($file = $config->file) !== 'stdout') {
+        if (($file = $this->config->file) !== 'stdout') {
             display("Anonymizing file $file\n");
 
             if (!file_exists($file)) {
@@ -51,7 +51,7 @@ class Anonymize extends Tasks {
             }
             $this->processFile($file);
         } else {
-            $dir = $config->dirname;
+            $dir = $this->config->dirname;
             if (!empty($dir)) {
                 if (substr($dir, -1) === '/') {
                     $dir = substr($dir, 0, -1);
@@ -76,21 +76,21 @@ class Anonymize extends Tasks {
                     }
                 }
                 display("Anonymized $total files\n");
-            } elseif (($project = $config->project) !== 'default') {
+            } elseif (($project = $this->config->project) !== 'default') {
                 display("Anonymizing project $project\n");
-                $dir = $config->projects_root.'/projects/'.$project.'/'.$project;
+                $dir = $this->config->projects_root.'/projects/'.$project.'/'.$project;
     
-                if (!file_exists($config->projects_root.'/projects/'.$project)) {
+                if (!file_exists($this->config->projects_root.'/projects/'.$project)) {
                     die('Can\'t anonymize project '.$project.' as it doesn\'t exist'."\n");
                 }
     
-                if (!file_exists($config->projects_root.'/projects/'.$project.'/code')) {
+                if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code')) {
                     die('Can\'t anonymize project '.$project.' as it doesn\'t have code'."\n");
                 }
     
                 $files = $this->datastore->getCol('files', 'file');
         
-                $path = $config->projects_root.'/projects/'.$config->project.'/code';
+                $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
     
                 $total = 0;
                 if (file_exists($dir.'.anon')) {

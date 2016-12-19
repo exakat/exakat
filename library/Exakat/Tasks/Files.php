@@ -29,9 +29,8 @@ use Exakat\Config;
 class Files extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function run(Config $config) {
-        $dir = $config->project;
-        $this->config = $config;
+    public function run() {
+        $dir = $this->config->project;
 
         $stats = array('notCompilable52' => 'N/C',
                        'notCompilable53' => 'N/C',
@@ -44,11 +43,11 @@ class Files extends Tasks {
                        ) ;
         $unknown = array();
 
-        if ($config->project === null) {
+        if ($this->config->project === null) {
             die("Usage : exakat files -p project\nAborting\n");
-        } elseif (!file_exists($config->projects_root.'/projects/'.$dir)) {
-            die("No such project as '{$config->projects_root}/projects/$dir'\nAborting\n");
-        } elseif (!file_exists($config->projects_root.'/projects/'.$dir.'/code/')) {
+        } elseif (!file_exists($this->config->projects_root.'/projects/'.$dir)) {
+            die("No such project as '{$this->config->projects_root}/projects/$dir'\nAborting\n");
+        } elseif (!file_exists($this->config->projects_root.'/projects/'.$dir.'/code/')) {
             die("No code in project '$dir'\nAborting\n");
         }
         
@@ -56,7 +55,7 @@ class Files extends Tasks {
 
         $ignoredFiles = array();
         $files = array();
-        self::findFiles($config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles);
+        self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles);
         
         $i = array();
         foreach($ignoredFiles as $file => $reason) {
@@ -67,11 +66,11 @@ class Files extends Tasks {
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
 
         $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
-        file_put_contents($tmpFileName, '"'.$config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"$config->projects_root/projects/$dir/code", $files).'"');
+        file_put_contents($tmpFileName, '"'.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"{$this->config->projects_root}/projects/$dir/code", $files).'"');
 
-        $versions = $config->other_php_versions;
+        $versions = $this->config->other_php_versions;
 
-        $analyzingVersion = $config->phpversion[0].$config->phpversion[2];
+        $analyzingVersion = $this->config->phpversion[0].$this->config->phpversion[2];
         $id = array_search($analyzingVersion, $versions);
         unset($versions[$id]);
         $versions[] = $analyzingVersion;
@@ -81,7 +80,7 @@ class Files extends Tasks {
             display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
             
-            $shell = 'cat '.$tmpFileName.'  | tr "\n" "\0" | xargs -n1 -P5 -0 -I {} sh -c "'.$config->{'php'.$version}.' -l {} 2>&1 || true "';
+            $shell = 'cat '.$tmpFileName.'  | tr "\n" "\0" | xargs -n1 -P5 -0 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
@@ -96,76 +95,76 @@ class Files extends Tasks {
                     // do nothing. All is fine.
                 } elseif (substr($resFile, 0, 17) == 'PHP Parse error: ') {
                     preg_match('#Parse error: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                         $toRemoveFromFiles['/'.$file] = 1;
                     }
                 } elseif (substr($resFile, 0, 13) == 'Parse error: ') {
                     // Actually, almost a repeat of the previous. We just ignore it. (Except in PHP 5.4)
                     if ($version == '52' || $version == '71' || $version == '72') {
                         preg_match('#Parse error: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                     }
                 } elseif (substr($resFile, 0, 14) == 'PHP Warning:  ') {
                     preg_match('#PHP Warning:  (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                         $toRemoveFromFiles['/'.$file] = 1;
                     }
                 } elseif (substr($resFile, 0, 13) == 'Fatal error: ') {
                     if (preg_match('#Fatal error: (.+?) in (/.+?) on line (\d+)#', $resFile, $r)) {
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                     } 
                     // else ignore Fatal error we can't understand
                 } elseif (substr($resFile, 0, 18) == 'PHP Fatal error:  ') {
                     // Actually, a repeat of the previous. We just ignore it.
                 } elseif (substr($resFile, 0, 23) == 'PHP Strict standards:  ') {
                     preg_match('#PHP Strict standards:  (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                         $toRemoveFromFiles['/'.$file] = 1;
                     }
                 } elseif (substr($resFile, 0, 18) == 'Strict Standards: ') {
                     preg_match('#Strict Standards: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                         $toRemoveFromFiles['/'.$file] = 1;
                     }
                 } elseif (substr($resFile, 0, 18) == 'Strict standards: ') {
                     preg_match('#Strict standards: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                         $toRemoveFromFiles['/'.$file] = 1;
                     }
                 } elseif (substr($resFile, 0, 22) == 'PHP Strict Standards: ') {
                     preg_match('#PHP Strict Standards: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                         $toRemoveFromFiles['/'.$file] = 1;
                     }
                 } elseif (substr($resFile, 0, 17) == 'PHP Deprecated:  ') {
                     preg_match('#PHP Deprecated:  (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                         $toRemoveFromFiles['/'.$file] = 1;
                     }
                 } elseif (substr($resFile, 0, 12) == 'Deprecated: ') {
                     preg_match('#Deprecated: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
+                        $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                         $toRemoveFromFiles['/'.$file] = 1;
                     }
                 } elseif (substr($resFile, 0, 9) == 'Warning: ') {
                     preg_match('#Warning: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
                         $incompilables[] = array('error' => $r[1], 'file' => $file, 'line' => $r[3]);
                         $toRemoveFromFiles['/'.$file] = 1;
@@ -173,7 +172,7 @@ class Files extends Tasks {
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
                     //Errors parsing /projects/slims7_cendana/code//lib/phpbarcode/bin/nix/genbarcode64
                     preg_match('#Errors parsing (.+)#', $resFile, $r);
-                    $file = str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $r[1]);
+                    $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[1]);
                     if (!isset($toRemoveFromFiles['/'.$file])) {
                         $incompilables[] = array('error' => 'Error parsing', 'file' => $file, 'line' => 0);
                         $toRemoveFromFiles['/'.$file] = 1;
@@ -193,23 +192,23 @@ class Files extends Tasks {
                 return array('file'   => $a);
             }, $files));
         $this->datastore->reload();
-        file_put_contents($tmpFileName, '"'.$config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"$config->projects_root/projects/$dir/code", $files).'"');
+        file_put_contents($tmpFileName, '"'.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"{$this->config->projects_root}/projects/$dir/code", $files).'"');
         
         display('Counting files');
         // Also refining the file list with empty, one-tokened and incompilable files.
-        $counting = new Phploc($this->gremlin);
-        $counting->run($config);
+        $counting = new Phploc($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+        $counting->run();
         display('Counted files');
 
         display('Check short tag (normal pass)');
         $stats['php'] = count($files);
-        $shell = 'cat '.$tmpFileName.' | sort | tr "\n" "\0" |  xargs -n1 -P5 -0 '.$config->php.' -d short_open_tag=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
+        $shell = 'cat '.$tmpFileName.' | sort | tr "\n" "\0" |  xargs -n1 -P5 -0 '.$this->config->php.' -d short_open_tag=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
         
         $resultNosot = shell_exec($shell);
         $tokens = (int) array_sum(explode("\n", $resultNosot));
 
         display('Check short tag (with directive activated)');
-        $shell = 'cat '.$tmpFileName.' | sort |  tr "\n" "\0" |  xargs -n1 -P5 -0 '.$config->php.' -d short_open_tag=1 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
+        $shell = 'cat '.$tmpFileName.' | sort |  tr "\n" "\0" |  xargs -n1 -P5 -0 '.$this->config->php.' -d short_open_tag=1 -r "echo count(@token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true ';
         $resultSot = shell_exec($shell);
         $tokenssot = (int) array_sum(explode("\n", $resultSot));
 
@@ -240,7 +239,7 @@ class Files extends Tasks {
                 $shortOpenTag = array();
                 foreach($nosot as $file => $countNoSot) {
                     if ($sot[$file] != $countNoSot) {
-                        $shortOpenTag[] = array('file' => str_replace($config->projects_root.'/projects/'.$dir.'/code/', '', $file));
+                        $shortOpenTag[] = array('file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $file));
                     }
                 }
                 $this->datastore->addRow('shortopentag', $shortOpenTag);
@@ -253,20 +252,18 @@ class Files extends Tasks {
         
         // check for special files
         display('Check config files');
-        $files = glob($config->projects_root.'/projects/'.$dir.'/code/{,.}*', GLOB_BRACE);
+        $files = glob($this->config->projects_root.'/projects/'.$dir.'/code/{,.}*', GLOB_BRACE);
         $files = array_map('basename', $files);
         
-        $services = json_decode(file_get_contents($config->dir_root.'/data/serviceConfig.json'));
+        $services = json_decode(file_get_contents($this->config->dir_root.'/data/serviceConfig.json'));
 
         $configFiles = array();
         foreach($services as $name => $service) {
             $diff = array_intersect((array) $service->file, $files);
-            if (!empty($diff)) {
-                foreach($diff as $d) {
-                    $configFiles[] = array('file'     => $d,
-                                           'name'     => $name,
-                                           'homepage' => $service->homepage);
-                }
+            foreach($diff as $d) {
+                $configFiles[] = array('file'     => $d,
+                                       'name'     => $name,
+                                       'homepage' => $service->homepage);
             }
         }
         $this->datastore->addRow('configFiles', $configFiles);
@@ -275,7 +272,7 @@ class Files extends Tasks {
 
         display('Done');
         
-        if ($config->json) {
+        if ($this->config->json) {
             if ($unknown) {
                 $stats['unknown'] = $unknown;
             }

@@ -41,8 +41,7 @@ class IsComponent extends Analyzer {
              ->raw('coalesce(__.out("ELEMENT").hasLabel("Namespace").out("BLOCK"),  __.filter{true} )')
              ->raw('where( __.out("ELEMENT")'.$inertWithIfthen.'.count().is(eq(0)) )
              ')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
         //
     }

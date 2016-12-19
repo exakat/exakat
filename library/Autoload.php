@@ -56,7 +56,7 @@ class Autoload {
 }
 
 spl_autoload_register('Autoload::autoload_library');
-require_once(__DIR__.'/../vendor/autoload.php'); // depending on your project this may not be necessary
+require_once __DIR__.'/../vendor/autoload.php'; // depending on your project this may not be necessary
 
 if (isset($argv)) {
     $config = \Exakat\Config::factory($argv);

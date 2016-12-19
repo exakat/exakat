@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('file_get_contents(tmpfile( ))',
-                      'tmpfile( )');
+$expected     = array( 'chop(strval($y))', 
+                       'strval($y)');
 
-$expected_not = array();
+$expected_not = array('file_get_contents(\'/path/to/file.txt\')');
 
 ?>

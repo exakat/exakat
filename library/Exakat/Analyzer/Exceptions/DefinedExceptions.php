@@ -40,7 +40,6 @@ class DefinedExceptions extends Analyzer {
         // second to fifth level
         for($i = 0; $i < 4; ++$i) {
             $this->atomIs('Class')
-                 ->analyzerIsNot('self')
                  ->outIs('EXTENDS')
                  ->classDefinition()
                  ->analyzerIs('self')

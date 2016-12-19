@@ -41,7 +41,6 @@ class DefinedStaticMP extends Analyzer {
 
         // static::method() parents and beyond
         $this->atomIs('Staticmethodcall')
-             ->analyzerIsNot('self')
              ->outIs('CLASS')
              ->codeIs(array('static', 'self'))
              ->back('first')
@@ -50,8 +49,7 @@ class DefinedStaticMP extends Analyzer {
              ->goToClass()
              ->goToAllParents()
              ->raw('where( __.out("BLOCK").out("ELEMENT").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(1)) )')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // static::$property the current class
@@ -74,7 +72,6 @@ class DefinedStaticMP extends Analyzer {
 
         // static::$property Parents
         $this->atomIs('Staticproperty')
-             ->analyzerIsNot('self')
              ->outIs('CLASS')
              ->codeIs(array('static', 'self'))
              ->back('first')

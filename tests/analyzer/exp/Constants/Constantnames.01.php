@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("'someConstant'");
+$expected     = array("'someDefineConstant'",
+                      "someConstConstant",
+                        );
 
-$expected_not = array();
+$expected_not = array("'notADefined'");
 
 ?>

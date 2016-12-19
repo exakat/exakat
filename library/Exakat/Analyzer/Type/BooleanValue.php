@@ -37,8 +37,7 @@ class BooleanValue extends Type {
         
         $this->atomIs(array('Identifier', 'Nsname'))
              ->hasNoIn('SUBNAME')
-             ->fullnspathIs(array('\\true', '\\false'))
-             ->analyzerIsNot('self');
+             ->fullnspathIs(array('\\true', '\\false'));
         $this->prepareQuery();
     }
 }

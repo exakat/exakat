@@ -40,8 +40,7 @@ class DependantTrait extends Analyzer {
              ->goToTrait()
              ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
                              .out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Case for $this->$properties
@@ -59,8 +58,7 @@ class DependantTrait extends Analyzer {
              ->goToTrait()
              ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
                              .out("BLOCK").out("ELEMENT").hasLabel("Ppp").out("PPP").filter{ it.get().value("propertyname") == property }.count().is(eq(0)) )')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Case for class::$properties
@@ -77,8 +75,7 @@ class DependantTrait extends Analyzer {
              ->goToTrait()
              ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
                              .out("BLOCK").out("ELEMENT").hasLabel("Ppp").out("PPP").coalesce(__.out("LEFT"), __.filter{ true }).filter{ it.get().value("code") == property }.count().is(eq(0)) )')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Case for class::methodcall
@@ -95,8 +92,7 @@ class DependantTrait extends Analyzer {
              ->goToTrait()
              ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
                              .out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Case for class::methodcall

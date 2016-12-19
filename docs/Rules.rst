@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 12 Dec 2016 15:32:10 +0000
-.. comment: Generation hash : 2ccb3ceda74a4476cdd19b2c7c16212ed06eeb3a
+.. comment: Generation date : Mon, 19 Dec 2016 18:13:23 +0000
+.. comment: Generation hash : b201e9b80c75bdf322a771437ccafd3055daa406
 
 
 .. _$http\_raw\_post\_data:
@@ -1247,6 +1247,40 @@ Most of the `time <http://www.php.net/time>`_, this is also a violation of codin
 +--------------+---------------------------------------------------------------+
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>`,:ref:`Analyze` |
 +--------------+---------------------------------------------------------------+
+
+
+
+.. _class-should-be-final-by-ocramius:
+
+Class Should Be Final By Ocramius
+#################################
+
+
+'Make your classes always final, if they implement an interface, and no other public methods are defined'.
+
+When a class should be final, as explained by Ocramiux (Marco Pivetti).
+
+Full article : http://ocramius.github.io/blog/when-to-declare-classes-final/
+
+<?php
+
+interface i1 {
+    function i1() ;
+}
+
+final class finalClass implements i1 {
+    // public interface 
+    function i1 () {}
+    
+    // private method
+    private function a1 () {}
+}
+
++--------------+-------------------------+
+| Command Line | Classes/FinalByOcramius |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
 
 
 
@@ -10372,12 +10406,33 @@ Useless Instructions
 The instructions below are useless, or contains useless parts. For example, running '&lt;?php 1 + 1; ?&gt;' does nothing : the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
 
 Here the useless instructions that are spotted : 
+.. code-block:: php
 
-* Empty string in a concatenation
-* Returning expression, whose result is not used (additions, comparisons, properties, closures, new without =, ...)
-* Returning $a++;
-* `array_merge() <http://www.php.net/array_merge>`_ with only one argument
-* @ operator on source array, in foreach, or when assigning literals
+   <?php
+   
+   // Empty string in a concatenation
+   $a = 'abc' . '';
+   
+   // Returning expression, whose result is not used (additions, comparisons, properties, closures, new without =, ...)
+   1 + 2;
+   
+   // Returning post-incrementation
+   function foo($a) {
+       return $a++;
+   }
+   
+   // array_merge() with only one argument
+   $merge = array_merge($array);
+   
+   // @ operator on source array, in foreach, or when assigning literals
+   $array = @array(1,2,3);
+   
+   // Comparisons in a for loop : only the last is actually used.
+   for($i = 0; $j = 0; $j < 10, $i < 20; ++$j, ++$i) {
+       print $i $j\n;
+   }
+   
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/UselessInstruction                                                                               |
@@ -11226,6 +11281,22 @@ Extension ext/mcrypt
 
 
 
+.. _ext/mhash:
+
+ext/mhash
+#########
+
+
+Extension mhash (obsolete since PHP 5.3.0).
+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Extensions/Extmhash                                                                                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
 .. _ext/ming:
 
 ext/ming
@@ -11433,7 +11504,7 @@ The second option is the most interesting when the following `foreach() <http://
 .. code-block:: php
 
    <?php
-   $string = ababab;
+   $string = 'ababab';
    
    // default behavior
    preg_match_all('/(a)(b)/', $string, $r);

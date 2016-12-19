@@ -41,10 +41,8 @@ class Jobqueue extends Tasks {
         parent::__destruct();
     }
     
-    public function run(Config $config) {
-        $this->config = $config;
-        
-        $this->jobQueueLog = fopen($config->projects_root.'/projects/log/jobqueue.log', 'a');
+    public function run() {
+        $this->jobQueueLog = fopen($this->config->projects_root.'/projects/log/jobqueue.log', 'a');
         $this->log('Open Job Queue '.date('r')."\n");
         
         $this->log->log('Started jobQueue : '.time()."\n");

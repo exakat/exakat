@@ -49,8 +49,7 @@ class DefinedParentMP extends Analyzer {
              ->hasNoOut('PRIVATE')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // handle composer case
@@ -62,8 +61,7 @@ class DefinedParentMP extends Analyzer {
              ->codeIs('parent')
              ->goToClass()
              ->raw($isComposerClass)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall')
@@ -75,8 +73,7 @@ class DefinedParentMP extends Analyzer {
              ->goToClass()
              ->goToAllParents()
              ->raw($isComposerClass)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // Case of PHP class
@@ -88,8 +85,7 @@ class DefinedParentMP extends Analyzer {
              ->codeIs('parent')
              ->goToClass()
              ->raw($isPhpClass)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticmethodcall')
@@ -101,8 +97,7 @@ class DefinedParentMP extends Analyzer {
              ->goToClass()
              ->goToAllParents()
              ->raw($isPhpClass)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
         
         // parent::$property
@@ -121,8 +116,7 @@ class DefinedParentMP extends Analyzer {
              ->outIs('PPP')
              ->outIsIE('LEFT')
              ->samePropertyAs('code', 'name')
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         // handle composer case
@@ -134,8 +128,7 @@ class DefinedParentMP extends Analyzer {
              ->codeIs('parent')
              ->goToClass()
              ->raw($isComposerClass)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
@@ -147,8 +140,7 @@ class DefinedParentMP extends Analyzer {
              ->goToClass()
              ->goToAllParents()
              ->raw($isComposerClass)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
@@ -159,8 +151,7 @@ class DefinedParentMP extends Analyzer {
              ->codeIs('parent')
              ->goToClass()
              ->raw($isPhpClass)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
@@ -172,13 +163,11 @@ class DefinedParentMP extends Analyzer {
              ->goToClass()
              ->goToAllParents()
              ->raw($isPhpClass)
-             ->back('first')
-             ->analyzerIsNot('self');
+             ->back('first');
         $this->prepareQuery();
         
         // defined in traits (via use)
         $this->atomIs('Property')
-             ->analyzerIsNot('self')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')

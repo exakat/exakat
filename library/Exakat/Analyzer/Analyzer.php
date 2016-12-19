@@ -294,22 +294,27 @@ GREMLIN;
     private function addMethod($method, $arguments = null) {
         if ($arguments === null) { // empty
             $this->methods[] = $method;
-        } elseif (func_num_args() >= 2) {
+            return $this;
+        } 
+        
+        if (func_num_args() >= 2) {
             $arguments = func_get_args();
             array_shift($arguments);
             $argnames = array(str_replace('***', '%s', $method));
             foreach($arguments as $arg) {
-                $argname = 'arg'.(count($this->arguments));
+                $argname = 'arg'.count($this->arguments);
                 $this->arguments[$argname] = $arg;
                 $argnames[] = $argname;
             }
             $this->methods[] = call_user_func_array('sprintf', $argnames);
-        } else { // one argument
-            $argname = 'arg'.count($this->arguments);
-            $this->arguments[$argname] = $arguments;
-            $this->methods[] = str_replace('***', $argname, $method);
-        }
+            return $this;
+        } 
 
+        // one argument
+        $argname = 'arg'.count($this->arguments);
+        $this->arguments[$argname] = $arguments;
+        $this->methods[] = str_replace('***', $argname, $method);
+        
         return $this;
     }
     
@@ -535,7 +540,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
             $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(neq(0)) )', $analyzer);
         } else {
             if ($analyzer === 'self') {
-                $analyzer = self::getName(get_class($this));
+                $analyzer = self::getName($this->analyzerQuoted);
             } else {
                 $analyzer = self::getName($analyzer);
             }
@@ -555,7 +560,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
             $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(eq(0)) )', $analyzer);
         } else {
             if ($analyzer === 'self') {
-                $analyzer = self::getName(get_class($this));
+                $analyzer = self::getName($this->analyzerQuoted);
             } else {
                 $analyzer = self::getName($analyzer);
             }
@@ -631,6 +636,12 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
         } else {
             $this->addMethod('out("'.$link.'").has("rank", eq('.abs(intval($rank)).'))');
         }
+
+        return $this;
+    }
+
+    public function outWithoutLastRank() {
+        $this->addMethod('sideEffect{dernier = it.get().value("count") - 1;}.out("ELEMENT").filter{ it.get().value("rank") < dernier}');
 
         return $this;
     }
@@ -1544,9 +1555,9 @@ GREMLIN
         $query = <<<GREMLIN
 
 {$query}
+
 GREMLIN;
-        
-        $query .= '.groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
+        $query .= '.where( __.in("ANALYZED").has("analyzer", "'.$this->analyzerQuoted.'").count().is(eq(0)) ).groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
 // php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";
@@ -1725,7 +1736,7 @@ GREMLIN;
     }
 
     private function propertyIsNot($property, $code, $caseSensitive = false) {
-            if ($caseSensitive === true) {
+        if ($caseSensitive === true) {
             $caseSensitive = '';
         } else {
             $this->tolowercase($code);

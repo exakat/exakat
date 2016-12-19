@@ -26,7 +26,7 @@ namespace Exakat\Exceptions;
 class AnotherProcessIsRunning extends \RuntimeException {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
         
-        parent::__construct( "Another exakat is running. Wait until it finishes to launch this command again.", $code, $previous);
+        parent::__construct( "Another exakat is running. Wait until it finishes to launch this command again.\n", $code, $previous);
     }
 }
 

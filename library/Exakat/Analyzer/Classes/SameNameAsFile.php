@@ -37,7 +37,6 @@ class SameNameAsFile extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs(array('Interface','Class', 'Trait'))
-             ->analyzerIsNot('self')
              ->outIs('NAME')
              ->savePropertyAs('code', 'classname')
              ->goToFile()

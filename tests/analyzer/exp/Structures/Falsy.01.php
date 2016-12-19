@@ -21,7 +21,7 @@ $expected     = array('[ ]',
 PHP', 
                       '<<<PHP
 PHP
-'
+',
                       );
 
 $expected_not = array('[ [   ] ]',

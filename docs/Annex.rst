@@ -78,6 +78,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/mcrypt
 * ext/memcache
 * ext/memcached
+* ext/mhash
 * ext/ming
 * ext/mongo
 * ext/mssql
@@ -120,6 +121,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/sqlsrv
 * ext/ssh2
 * ext/standard
+* String
 * ext/suhosin
 * ext/tidy
 * ext/tokenizer
@@ -165,14 +167,17 @@ Libraries that are popular, large and often included in repositories are identif
 Those libraries, or even some of the, may be included again in the analysis by commenting the ignored_dir[] line, in the projects/<project>/config.ini file. 
 
 * [BBQ](https://github.com/eventio/bbq)
-* [DomPDF](https://github.com/dompdf/dompdf)
+* [CI xmlRPC](http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html)
 * [CPDF](https://pear.php.net/reference/PhpDocumentor-latest/li_Cpdf.html)
+* [DomPDF](https://github.com/dompdf/dompdf)
 * [FPDF](http://www.fpdf.org/)
+* [gettext Reader](http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html)
 * [jpGraph](http://jpgraph.net/)
 * [HTML2PDF](http://sourceforge.net/projects/phphtml2pdf/)
 * [HTMLPurifier](http://htmlpurifier.org/)
 * [http_class]()
 * [IDNA convert](https://github.com/phpWhois/idna-convert)
+* [lessc](http://leafo.net/lessphp/)
 * [lessc](http://leafo.net/lessphp/)
 * [magpieRSS](http://magpierss.sourceforge.net/)
 * [MarkDown Parser](http://processwire.com/apigen/class-Markdown_Parser.html)
@@ -183,7 +188,6 @@ Those libraries, or even some of the, may be included again in the analysis by c
 * [pChart](http://www.pchart.net/)
 * [pclZip](http://www.phpconcept.net/pclzip/)
 * [Propel](http://propelorm.org/)
-* [gettext Reader](http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html)
 * [phpExecl](https://phpexcel.codeplex.com/)
 * [phpMailer](https://github.com/PHPMailer/PHPMailer)
 * [qrCode](http://phpqrcode.sourceforge.net/)
@@ -196,7 +200,6 @@ Those libraries, or even some of the, may be included again in the analysis by c
 * [text highlighter](https://pear.php.net/package/Text_Highlighter/)
 * [tfpdf](http://www.fpdf.org/en/script/script92.php)
 * [UTF8]()
-* [CI xmlRPC](http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html)
 * [Yii](http://www.yiiframework.com/)
 * [Zend Framework](http://framework.zend.com/)
 
@@ -206,6 +209,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. 
 
 
+* 0.9.4
+  * Class Should Be Final By Ocramius (Classes/FinalByOcramius)
+  * String (Extensions/Extstring)
+  * ext/mhash (Extensions/Extmhash)
 * 0.9.3
   * Close Tags Consistency (Php/CloseTagsConsistency)
   * Unset() Or (unset) (Php/UnsetOrCast)
