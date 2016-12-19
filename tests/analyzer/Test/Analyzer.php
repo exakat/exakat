@@ -51,14 +51,14 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $source = 'source/'.str_replace('_', '/', $file).'.php';
 
         if (is_dir($source)) {
-            $shell = 'cd ../..; php exakat test -d ./tests/analyzer/'.$source.' -P '.$analyzer.'; php exakat results  -p test -P '.$analyzer.' -o -json';
+            $shell = 'cd ../..; php exakat test -r -d ./tests/analyzer/'.$source.' -P '.$analyzer.' -p test -q -o -json';
         } else {
-            $shell = 'cd ../..; php exakat test -f ./tests/analyzer/'.$source.' -P '.$analyzer.'; php exakat results  -p test -P '.$analyzer.' -o -json';
+            $shell = 'cd ../..; php exakat test    -f ./tests/analyzer/'.$source.' -P '.$analyzer.' -p test -q -o -json';
         }
         $shell_res = shell_exec($shell);
         $res = json_decode($shell_res);
         if ($res === null) {
-            $this->assertTrue(false, "Json couldn't be decoded : '$shell_res'");
+            $this->assertTrue(false, "Json couldn't be decoded : '$shell_res'\n$shell");
         }
 
         if (empty($res)) {
