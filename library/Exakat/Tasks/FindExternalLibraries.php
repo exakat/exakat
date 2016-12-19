@@ -187,7 +187,12 @@ class FindExternalLibraries extends Tasks {
             if ($token[0] == T_WHITESPACE)  { continue; }
             if ($token[0] == T_DOC_COMMENT) { continue; }
             if ($token[0] == T_COMMENT)     { continue; }
-        
+            
+            // If we find a namespace, it is not the global space, and we may skip the rest.
+            if ($token[0] == T_NAMESPACE) {
+                return;
+            }
+            
             if ($token[0] == T_CLASS) {
                 if (!is_array($tokens[$id + 2])) { continue; }
                 $class = $tokens[$id + 2][1];
