@@ -45,9 +45,6 @@ class PhpConfiguration extends Reports {
         }
         
         $configureDirectives = json_decode(file_get_contents($this->config->dir_root.'/data/configure.json'));
-        if (!is_object($configureDirectives)) {
-            print "Erreur de lecture du Json";
-        }
         
         // preparing the list of PHP extensions to compile PHP with
         $return = array(<<<TEXT
@@ -73,7 +70,7 @@ TEXT
                     $return[] = ' '.$configure->deactivate;
                 } 
             } else {
-                print "Missing $configure->analysis in sqlite\n";
+                display( "Missing $configure->analysis in sqlite\n");
             }
         }
         
@@ -94,7 +91,6 @@ TEXT
             $final .= implode("\n", $pecl)."\n\n";
         }
         $final .= implode("\n", $return);
-        
 
         $shouldDisableFunctions = json_decode(file_get_contents($this->config->dir_root.'/data/shouldDisableFunction.json'));
         $functionsList = array();
@@ -109,6 +105,7 @@ TEXT
                 }
             }
         }
+        
         if (empty($functionsList)) {
             $functionsList = '';
         } else {
