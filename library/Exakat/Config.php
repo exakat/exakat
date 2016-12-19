@@ -249,12 +249,6 @@ class Config {
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->defaultConfig, $this->configFile, $this->projectConfig, $this->commandline);
         
-        // Removing any extra configuration
-        $extra = array_diff(array_keys($this->options), array_keys($this->defaultConfig));
-        foreach($extra as $key) {
-            unset($this->options[$key]);
-        }
-
         if ($this->options['neo4j_folder'][0] !== '/') {
             $this->options['neo4j_folder'] = $this->projects_root.'/'.$this->options['neo4j_folder'];
         }
