@@ -286,7 +286,7 @@ GREMLIN;
             display('Link constant definitions : skipping.');
         }
         
-        //display('Mark constants expressions');
+        display('Mark literal expressions as constants');
         $query = <<<GREMLIN
 g.V().hasLabel("Integer", "Boolean", "Real", "Null", "Void", "InlineHtml", "Magicconstant", "Staticconstant", "Void")
      .sideEffect{ it.get().property("constant", true); }
