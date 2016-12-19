@@ -32,7 +32,7 @@ class Constantnames extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->is('constant', 'true');
+             ->is('constant', true);
         $this->prepareQuery();
 
         // with const
