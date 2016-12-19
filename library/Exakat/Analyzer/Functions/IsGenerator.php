@@ -29,7 +29,7 @@ class IsGenerator extends Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->outIs('BLOCK')
-             ->atomInside('Yield')
+             ->atomInside(array('Yield', 'Yieldfrom'))
              ->back('first');
         $this->prepareQuery();
     }
