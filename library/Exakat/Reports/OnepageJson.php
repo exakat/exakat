@@ -20,7 +20,7 @@
  *
 */
 
-namespace Reports;
+namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Reports\Reports;
