@@ -812,24 +812,6 @@ GREMLIN
         return $this;
     }
 
-    public function eachCounted($variable, $times, $comp = '==') {
-        $this->addMethod(<<<GREMLIN
-groupCount("m").by{$variable}
-GREMLIN
-);
-
-/*
-//groupCount('counts').by(label).cap('a').map{ it.get().findAll{ it.value > 2}; }
-groupCount('counts').by(
-
-{{$variable}}{it}.iterate();
-
-// This is plugged into each{}
-m.findAll{ it.value.size() $comp $times}.values().flatten().each{ n.add(it); }
-*/
-        return $this;
-    }
-
     public function regexIs($column, $regex) {
         $this->addMethod(<<<GREMLIN
 filter{ (it.get().value('$column') =~ "$regex" ).getCount() > 0 }
