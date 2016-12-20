@@ -214,7 +214,7 @@ SQL;
         $severity = $analyzer->getSeverity( );
 
         foreach($res as $id => $result) {
-            if (!is_object($result)) {
+            if (!$result instanceof \Stdclass) {
                 $this->log->log("Object expected but not found\n".print_r($result, true)."\n");
                 continue;
             }
@@ -259,7 +259,7 @@ SQL;
         foreach(Token::$ATOMS as $atom) {
             $query = 'g.V().hasLabel("'.$atom.'").count()';
             $res = $this->gremlin->query($query);
-            if (!is_object($res) || !isset($res->results)) {
+            if (!$res instanceof \stdClass || !isset($res->results)) {
                 $this->log->log( "Couldn't run the query and get a result : \n" .
                      'Query : ' . $query . " \n".
                      print_r($res, true));

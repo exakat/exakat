@@ -264,7 +264,7 @@ class Config {
             }
             return static::$singleton;
         } else {
-            if (is_object($argv) && ($argv instanceof Config)) {
+            if ($argv instanceof Config) {
                 self::$singleton = $argv;
             } else {
                 self::$singleton = new self($argv);
@@ -454,7 +454,7 @@ class Config {
             $this->commandline['project']   = 'onepage';
             $this->commandline['thema']     = 'OneFile';
             $this->commandline['format']    = 'OnepageJson';
-            $this->commandline['file']      = 'onepage';
+            $this->commandline['file']      = 'stdout';
             $this->commandline['norefresh'] = true;
         }
     }

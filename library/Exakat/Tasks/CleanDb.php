@@ -47,7 +47,7 @@ GREMLIN;
         $result = null;
         $counts = 0;
         
-        while($counts < 100 && (!is_object($result) || $result->results === null)) {
+        while($counts < 100 && (!$result instanceof \Stdclass || $result->results === null)) {
             $result = $this->gremlin->query($queryTemplate);
             ++$counts;
             usleep(100000);

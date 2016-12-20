@@ -59,17 +59,6 @@ class Report2 extends Tasks {
 
         $dumpFile = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
 
-        $max = 20;
-        while (!file_exists($dumpFile)) {
-            display("{$this->config->project}/dump.sqlite doesn't exist yet ($max). Waiting\n");
-            sleep(rand(1,3));
-            --$max;
-            
-            if ($max == 0) {
-                die("Waited for dump.sqlite, but it never came. Try again later\n");
-            }
-        }
-
         $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
         $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
         $res = $dump->query($ProjectDumpSql);
