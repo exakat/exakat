@@ -76,3 +76,5 @@ foreach($reference as $id => $t) {
 
 asort($ratio);
 print_r($ratio);
+
+?>

@@ -281,3 +281,5 @@ DOT;
         file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
     }
 }
+
+?>

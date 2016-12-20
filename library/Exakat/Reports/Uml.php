@@ -158,3 +158,5 @@ color=\"$level\";
         return $r;
     }
 }
+
+?>

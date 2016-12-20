@@ -78,3 +78,5 @@ class OnepageJson extends Reports {
         }
     }
 }
+
+?>

@@ -25,7 +25,7 @@ $rows = glob('projects/*');
 
 $finals = [['project', 'Duree', 'Tokens', 'LoC', 'Neo4jSize']];
 foreach($rows as $row) {
-    $final = [basename($row)];
+    $final = array(basename($row));
     
     if (!is_dir($row)) { continue; }
     

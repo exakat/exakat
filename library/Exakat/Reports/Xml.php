@@ -197,3 +197,5 @@ class Xml extends Reports {
         }
     } 
 } 
+
+?>

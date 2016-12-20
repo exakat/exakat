@@ -63,3 +63,5 @@ abstract class Reports {
         return $this->count;
     }
 }
+
+?>

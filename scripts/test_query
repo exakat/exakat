@@ -27,6 +27,10 @@ spl_autoload_register('Autoload::autoload_library');
 $query = <<<'QUERY'
 
 /// insert a query here
+g.V().as("first").groupCount("processed").by(count()).hasLabel("Class").sideEffect{ interfaces = []; }.out("IMPLEMENTS").in("DEFINITION").hasLabel("Interface").out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").sideEffect{ interfaces.add( it.get().value("code")); }
+//.select('first').values('fullcode');
+
+.map{ interfaces ; }
 
 QUERY;
 

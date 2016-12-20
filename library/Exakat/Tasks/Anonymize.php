@@ -222,7 +222,7 @@ class Anonymize extends Tasks {
                 
                     case T_END_HEREDOC:
                         $t[1] = $heredoc;
-                        (unset) $heredoc;
+                        unset($heredoc);
 
                         break;
 

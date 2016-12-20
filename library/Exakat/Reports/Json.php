@@ -90,3 +90,5 @@ class Json extends Reports {
         }
     }
 }
+
+?>

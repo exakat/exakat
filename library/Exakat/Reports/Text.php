@@ -99,3 +99,5 @@ class Text extends Reports {
         }
     }
 }
+
+?>

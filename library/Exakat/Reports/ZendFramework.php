@@ -226,4 +226,6 @@ HTML;
         
         return $return;
     }
-}//end class
+}
+
+?>
