@@ -25,6 +25,7 @@ namespace Exakat\Graph;
 use Exakat\Graph\Graph;
 use Exakat\Exceptions\UnableToReachGraphServer;
 use Exakat\Exceptions\Neo4jException;
+use Exakat\Exceptions\GremlinException;
 
 class Gremlin3 extends Graph {
     const CHECKED = true;
@@ -150,13 +151,10 @@ GREMLIN;
             $getString .= '&load='.implode(',', array_map('urlencode', $load));
         } // else (aka 0) is ignored (nothing to do)
     
+        assert(strlen($getString) < 20000,  
+              'Query string too big for GET ('. strlen($getString). ")\n" . 'Query : ' . $query . "\n\n" . print_r($params, true));
         if (strlen($getString) > 20000) {
-            echo 'Query string too big for GET (', strlen($getString), ")\n",
-                 'Query : ',
-                 $query,
-                "\n\n",
-                print_r($params, true);
-            die();
+            return array();
         }
 
         $ch = curl_init();
@@ -183,7 +181,7 @@ GREMLIN;
     
         $result = json_decode($result);
         if (isset($result->errormessage)) {
-            throw new \Exakat\Exceptions\GremlinException($result->errormessage, $query);
+            throw new GremlinException($result->errormessage, $query);
         }
 
         return $result;
@@ -195,21 +193,14 @@ GREMLIN;
         }
 
         $res = $this->query($query, $params, $load);
-        if (!is_object($res)) {
-            die('Server is not responding');
+        if (!$res instanceof Stdclass || !isset($res->results)) {
+            throw new GremlinException('Server is not responding');
         }
-    
-        if (isset($res->results)) {
-            if (is_array($res->results)) {
-                return $res->results[0];
-            } else {
-                return $res->results;
-            }
+        
+        if (is_array($res->results)) {
+            return $res->results[0];
         } else {
-            echo 'Help needed in ', __METHOD__, "\n",
-                 "Query : '", $query, "'\n",
-                 print_r($res, true);
-            die();
+            return $res->results;
         }
     }
 
