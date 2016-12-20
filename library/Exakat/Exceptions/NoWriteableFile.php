@@ -23,9 +23,9 @@
 
 namespace Exakat\Exceptions;
 
-class NoSuchFile extends \RuntimeException {
+class NoWriteableFile extends \RuntimeException {
     public function __construct($filename = '', $code = 0, \Exception $previous = null) {
-        parent::__construct('No such file as "'.$filename."\"\n", $code, $previous);
+        parent::__construct('File "'.$filename."\" is not writeable.\n", $code, $previous);
     }
 }
 
