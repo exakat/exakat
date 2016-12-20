@@ -49,8 +49,7 @@ class Truthy extends Analyzer {
         $this->prepareQuery();
 
         // array
-        $this->atomIs('Functioncall')
-             ->fullnspathIs('\array')
+        $this->atomFunctionIs('\array')
              ->analyzerIsNot('Structures/Falsy');
         $this->prepareQuery();
         

@@ -50,8 +50,7 @@ class Falsy extends Analyzer {
         $this->prepareQuery();
 
         // array
-        $this->atomIs('Functioncall')
-             ->fullnspathIs('\array')
+        $this->atomFunctionIs('\array')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Void')

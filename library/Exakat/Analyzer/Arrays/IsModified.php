@@ -56,19 +56,22 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // arguments : reference variable in a custom function
-        $this->atomIs('Array')
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->hasNoIn('METHOD') // possibly new too
+        $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->hasNoIn('METHOD') // possibly new too
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Array')
+             ->savePropertyAs('rank', 'rank')
+             ->_as('results')
+             ->back('first')
              ->functionDefinition()
              ->inIs('NAME')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', true)
              ->is('reference', true)
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
 
         // function/methods definition : all modified by incoming values
@@ -94,27 +97,23 @@ class IsModified extends Analyzer {
         }
         
         foreach($references as $position => $functions) {
-            $this->atomIs('Array')
-                 ->is('rank', $position)
-                 ->inIs('ARGUMENT')
-                 ->inIs('ARGUMENTS')
-                 ->hasNoIn('METHOD') // possibly new too
-                 ->atomIs('Functioncall')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_UNSET'))
-                 ->fullnspathIs($functions)
-                 ->back('first');
+            $this->atomFunctionIs($functions)
+                 ->outIs('ARGUMENTS')
+                 ->outIs('ARGUMENT')
+                 ->is('rank', $position);
             $this->prepareQuery();
         }
 
         // Class constructors (__construct)
-        $this->atomIs('Array')
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->hasNoIn('METHOD') // possibly new too
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIs('Functioncall')
+        $this->atomIs('Functioncall')
              ->hasIn('NEW')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Array')
+             ->savePropertyAs('rank', 'rank')
+             ->back('first')
              ->classDefinition()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

@@ -108,7 +108,8 @@ GREMLIN
 
         // class used in a String (string with ::)
         $strings = $this->query(<<<GREMLIN
-g.V().hasLabel("String").filter{ (it.get().value("noDelimiter") =~ "::" ).getCount() == 1 }
+g.V().hasLabel("String").where( __.out("CONCAT").count().is(eq(0)) )
+                        .filter{ (it.get().value("noDelimiter") =~ "::" ).getCount() == 1 }
                         .where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable") )
                         .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
 GREMLIN

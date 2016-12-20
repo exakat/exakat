@@ -114,11 +114,13 @@ class IsRead extends Analyzer {
         $this->prepareQuery();
 
         // arguments : normal variable in a custom function
-        $this->atomIs('Variable')
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD') // possibly new too
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Variable')
+             ->savePropertyAs('rank', 'rank')
+             ->back('first')
              ->functionDefinition()
              ->inIs('NAME')
              ->outIs('ARGUMENTS')
@@ -143,15 +145,11 @@ class IsRead extends Analyzer {
         }
         
         foreach($references as $position => $functions) {
-            $this->atomIs('Variable')
-                 ->is('rank', $position)
-                 ->inIs('ARGUMENT')
-                 ->inIs('ARGUMENTS')
-                 ->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->fullnspathIs($functions)
-                 ->back('first');
+            $this->atomFunctionIs($functions)
+                 ->outIs('ARGUMENTS')
+                 ->outIs('ARGUMENT')
+                 ->atomIs('Variable')
+                 ->is('rank', $position);
             $this->prepareQuery();
         }
 

@@ -33,7 +33,7 @@ class NoHardcodedHash extends Analyzer {
         // Find common hashes, based on hexadecimal and length
         foreach($algos as $size => $algo) {
             $this->atomIs('String')
-                 ->hasNoOut('T_CONCAT')
+                 ->hasNoOut('CONCAT')
                  ->regexIs('noDelimiter', '^[a-fA-Z0-9]{'.$size.'}\\$')
                  ->isNotMixedcase('noDelimiter')
                  ->noDelimiterIsNot($stopwords)

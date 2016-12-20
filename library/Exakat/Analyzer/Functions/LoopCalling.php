@@ -29,7 +29,8 @@ class LoopCalling extends Analyzer {
     public function analyze() {
         // loop of 2
         $this->atomIs('Function')
-             ->hasNoClassTrait()
+             ->hasNoClassInterfaceTrait()
+             ->hasName()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
@@ -50,7 +51,8 @@ class LoopCalling extends Analyzer {
 
         // loop of 3
         $this->atomIs('Function')
-             ->hasNoClassTrait()
+             ->hasNoClassInterfaceTrait()
+             ->hasName()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
@@ -78,7 +80,8 @@ class LoopCalling extends Analyzer {
 
         // loop of 4
         $this->atomIs('Function')
-             ->hasNoClassTrait()
+             ->hasNoClassInterfaceTrait()
+             ->hasName()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
