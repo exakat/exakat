@@ -380,8 +380,6 @@ INI;
     }
     
     private function checkPHP($configVersion, $displayedVersion) {
-        $phpname = 'PHP '.$displayedVersion;
-        
         $stats = array();
         if (!$configVersion) {
             $stats['configured'] = 'No';
