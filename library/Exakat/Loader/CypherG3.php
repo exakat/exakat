@@ -26,7 +26,10 @@ namespace Exakat\Loader;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Graph\Cypher;
+use Exakat\Graph\Gremlin3;
+use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
+use Exakat\Tasks\Tasks;
 use Exception;
 
 class CypherG3 {
@@ -69,9 +72,18 @@ class CypherG3 {
         $node = array('inited' => true);
         $this->node = &$node;
     }
+    
+    private function cleandDb() {
+        display("Cleaning DB in cypher3\n");
+        $clean = new CleanDb(new Gremlin3($this->config), $this->config, Tasks::IS_SUBTASK);
+        $clean->run();
+    }
 
     public function finalize() {
         self::saveTokenCounts();
+        
+        $this->cleandDb();
+        display('loading nodes');
         
         // Load Nodes
         $files = glob($this->config->projects_root.'/projects/.exakat/nodes.g3.*.csv');
@@ -258,6 +270,122 @@ CYPHER;
     public function escapeString($string) {
         $x = str_replace("\\", "\\\\", $string);
         return str_replace("\"", "\\\"", $x);
+    }
+
+    private function escapeCsv($string) {
+        return str_replace(array('\\', '"'), array('\\\\', '\\"'), $string);
+    }
+    
+    public function saveFiles($exakatDir, $atoms, $links, $id0) {
+        static $extras = array();
+        
+        // Saving atoms
+        foreach($atoms as $atom) {
+            $fileName = $exakatDir.'/nodes.g3.'.$atom['atom'].'.csv';
+            assert(!empty($atom),  "Atom is empty for $atom[atom]\n");
+            if ($atom['atom'] === 'Project' && file_exists($fileName)) {
+                // Project is saved only once
+                continue;
+            }
+            if (isset($extras[$atom['atom']])) {
+                $fp = fopen($fileName, 'a');
+            } else {
+                $fp = fopen($fileName, 'w+');
+                $headers = array('id', 'atom', 'code', 'fullcode', 'line', 'token', 'rank');
+
+                $extras[$atom['atom']]= array();
+                foreach(Load::$PROP_OPTIONS as $title => $atoms) {
+                    if (in_array($atom['atom'], $atoms)) {
+                        $headers[] = $title;
+                        $extras[$atom['atom']][] = $title;
+                    }
+                }
+                fputcsv($fp, $headers);
+            }
+
+            $extra= array();
+            foreach($extras[$atom['atom']] as $e) {
+                if ($e == 'variadic' && !isset($atom[$e])) {
+                    display(print_r($atom, true));
+                }
+                $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
+            }
+
+            if (count($extras[$atom['atom']]) > 0) {
+                $extra = ','.implode(',', $extra);
+            } else {
+                $extra = '';
+            }
+            
+            $written = fwrite($fp, 
+                              $atom['id'].','.
+                              $atom['atom'].',"'.
+                              $this->escapeCsv( $atom['code'] ).'","'.
+                              $this->escapeCsv( $atom['fullcode']).'",'.
+                              (isset($atom['line']) ? $atom['line'] : 0).',"'.
+                              $this->escapeCsv( isset($atom['token']) ? $atom['token'] : '') .'","'.
+                              (isset($atom['rank']) ? $atom['rank'] : -1).'"'.
+                              $extra.
+                              "\n");
+
+            if ($written > 2000000) {
+                print "Warning : Writing a csv line over 2M in $fileName\n";
+            }
+
+            fclose($fp);
+        }
+        
+        // Saving the links between atoms
+        foreach($links as $label => $origins) {
+            foreach($origins as $origin => $destinations) {
+                foreach($destinations as $destination => $links) {
+                    assert(!empty($origin),  "Unknown origin for Rel files\n");
+                    assert(!empty($destination),  "Unknown destination for Rel files\n");
+                    $csv = $label.'.'.$origin.'.'.$destination;
+                    $fileName = $exakatDir.'/rels.g3.'.$csv.'.csv';
+                    if (isset($extras[$csv])) {
+                        $fp = fopen($fileName, 'a');
+                    } else {
+                        $fp = fopen($fileName, 'w+');
+                        fputcsv($fp, array('start', 'end'));
+                        $extras[$csv] = 1;
+                    }
+    
+                    foreach($links as $link) {
+                        fputcsv($fp, array($link['origin'], $link['destination']), ',', '"', '\\');
+                    }
+                    
+                    fclose($fp);
+                }
+            }
+        }
+    }
+
+    public function saveDefinitions($exakatDir, $calls) {
+        // Saving the function / class definitions
+        foreach($calls as $type => $paths) {
+            foreach($paths as $path) {
+                foreach($path['calls'] as $origin => $origins) {
+                    foreach($path['definitions'] as $destination => $destinations) {
+                        $csv = 'DEFINITION.'.$destination.'.'.$origin;
+
+                        $filePath = $exakatDir.'/rels.g3.'.$csv.'.csv';
+                        if (file_exists($filePath)) {
+                            $fp = fopen($exakatDir.'/rels.g3.'.$csv.'.csv', 'a');
+                        } else {
+                            $fp = fopen($exakatDir.'/rels.g3.'.$csv.'.csv', 'w+');
+                            fputcsv($fp, array('start', 'end'));
+                        }
+
+                        foreach($origins as $o) {
+                            foreach($destinations as $d) {
+                                fputcsv($fp, array($d, $o), ',', '"', '\\');
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

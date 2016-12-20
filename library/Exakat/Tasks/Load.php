@@ -30,6 +30,7 @@ use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchFile;
 use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Loader\CypherG3;
+use Exakat\Loader\Neo4jImport;
 use Exakat\Loader\GremlinServerNeo4j;
 use Exakat\Phpexec;
 use Exakat\Tasks\Precedence;
@@ -244,6 +245,7 @@ class Load extends Tasks {
     }
 
     public function run() {
+        $this->logTime('Start');
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
             throw new NoSuchProject($this->config->project);
         }
@@ -263,11 +265,13 @@ class Load extends Tasks {
                                          'token'    => 'T_WHOLE'));
         
         if (static::$client === null) {
-            static::$client = new CypherG3();
+//            static::$client = new CypherG3();
+            static::$client = new Neo4jImport();
 //            static::$client = new GremlinServerNeo4j();
         }
         
         $this->datastore->cleanTable('tokenCounts');
+        $this->logTime('Init');
 
         if ($filename = $this->config->filename) {
             if (!is_file($filename)) {
@@ -288,11 +292,17 @@ class Load extends Tasks {
             throw new NoFileToProcess($filename);
         }
 
+        $this->logTime('Load in graph');
+
         static::$client->finalize();
         $this->datastore->addRow('hash', array('status' => 'Load'));
         
+        $this->logTime('LoadFinal');
         $loadFinal = new LoadFinal($this->gremlin, $this->config, self::IS_SUBTASK);
+        $this->logTime('LoadFinal new');
         $loadFinal->run();
+        $this->logTime('The End');
+
     }
 
     private function processProject($project) {
@@ -4015,92 +4025,10 @@ class Load extends Tasks {
     }
 
     private function saveFiles() {
-        static $extras = array();
-        
-        // Saving atoms
-        foreach($this->atoms as $atom) {
-            $fileName = $this->exakatDir.'/nodes.g3.'.$atom['atom'].'.csv';
-            assert(!empty($atom),  "Atom is empty for $atom[atom]\n");
-            if ($atom['atom'] === 'Project' && file_exists($fileName)) {
-                // Project is saved only once
-                continue;
-            }
-            if (isset($extras[$atom['atom']])) {
-                $fp = fopen($fileName, 'a');
-            } else {
-                $fp = fopen($fileName, 'w+');
-                $headers = array('id', 'atom', 'code', 'fullcode', 'line', 'token', 'rank');
+        self::$client->saveFiles($this->exakatDir, $this->atoms, $this->links, $this->id0);
 
-                $extras[$atom['atom']]= array();
-                foreach(self::$PROP_OPTIONS as $title => $atoms) {
-                    if (in_array($atom['atom'], $atoms)) {
-                        $headers[] = $title;
-                        $extras[$atom['atom']][] = $title;
-                    }
-                }
-                fputcsv($fp, $headers);
-            }
-
-            $extra= array();
-            foreach($extras[$atom['atom']] as $e) {
-                if ($e == 'variadic' && !isset($atom[$e])) {
-                    display(print_r($atom, true));
-                }
-                $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
-            }
-
-            if (count($extras[$atom['atom']]) > 0) {
-                $extra = ','.implode(',', $extra);
-            } else {
-                $extra = '';
-            }
-            
-            $written = fwrite($fp, 
-                              $atom['id'].','.
-                              $atom['atom'].',"'.
-                              $this->escapeCsv( $atom['code'] ).'","'.
-                              $this->escapeCsv( $atom['fullcode']).'",'.
-                              (isset($atom['line']) ? $atom['line'] : 0).',"'.
-                              $this->escapeCsv( isset($atom['token']) ? $atom['token'] : '') .'","'.
-                              (isset($atom['rank']) ? $atom['rank'] : -1).'"'.
-                              $extra.
-                              "\n");
-            
-            if ($written > 2000000) {
-                print "Warning : Writing a csv line over 2M in $fileName\n";
-            }
-
-            fclose($fp);
-        }
-        
         $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
-
-        // Saving the links between atoms
-        foreach($this->links as $label => $origins) {
-            foreach($origins as $origin => $destinations) {
-                foreach($destinations as $destination => $links) {
-                    assert(!empty($origin),  "Unknown origin for Rel files\n");
-                    assert(!empty($destination),  "Unknown destination for Rel files\n");
-                    $csv = $label.'.'.$origin.'.'.$destination;
-                    $fileName = $this->exakatDir.'/rels.g3.'.$csv.'.csv';
-                    if (isset($extras[$csv])) {
-                        $fp = fopen($fileName, 'a');
-                    } else {
-                        $fp = fopen($fileName, 'w+');
-                        fputcsv($fp, array('start', 'end'));
-                        $extras[$csv] = 1;
-                    }
-    
-                    foreach($links as $link) {
-                        fputcsv($fp, array($link['origin'], $link['destination']), ',', '"', '\\');
-                    }
-                    
-                    fclose($fp);
-                }
-            }
-        }
         $this->links = array();
-        
     }
 
     private function saveDefinitions() {
@@ -4113,35 +4041,12 @@ class Load extends Tasks {
             $this->fallbackToGlobal('constant');
         }
 
-        // Saving the function / class definitions
-        foreach($this->calls as $type => $paths) {
-            foreach($paths as $path) {
-                foreach($path['calls'] as $origin => $origins) {
-                    foreach($path['definitions'] as $destination => $destinations) {
-                        $csv = 'DEFINITION.'.$destination.'.'.$origin;
-
-                        $filePath = $this->exakatDir.'/rels.g3.'.$csv.'.csv';
-                        if (file_exists($filePath)) {
-                            $fp = fopen($this->exakatDir.'/rels.g3.'.$csv.'.csv', 'a');
-                        } else {
-                            $fp = fopen($this->exakatDir.'/rels.g3.'.$csv.'.csv', 'w+');
-                            fputcsv($fp, array('start', 'end'));
-                        }
-
-                        foreach($origins as $o) {
-                            foreach($destinations as $d) {
-                                fputcsv($fp, array($d, $o), ',', '"', '\\');
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        static::$client->saveDefinitions($this->exakatDir, $this->calls);
         
         $end = microtime(true);
         $this->log->log("saveDefinitions\t".(($end - $begin) * 1000)."\t".count($this->calls)."\n");
-
     }
+
     
     private function fallbackToGlobal($type) {
         foreach($this->calls[$type] as $fnp => &$usage) {
@@ -4164,10 +4069,6 @@ class Load extends Tasks {
         }
     }
 
-    private function escapeCsv($string) {
-        return str_replace(array('\\', '"'), array('\\\\', '\\"'), $string);
-    }
-    
     private function startSequence() {
         $this->sequence = $this->addAtom('Sequence');
         $this->setAtom($this->sequence, array('code'     => ';',
@@ -4373,6 +4274,24 @@ class Load extends Tasks {
         }
        $this->calls[$type][$fullnspath]['definitions'][$atom][] = $definitionId;
     }
+
+    private function logTime($step) {
+        static $log, $begin, $end, $start;
+
+        if ($log === null) {
+            $log = fopen($this->config->projects_root.'/projects/onepage/log/load.timing.csv', 'w+');
+        }
+
+        $end = microtime(true);
+        if ($begin === null) {
+            $begin = $end;
+            $start = $end;
+        }
+
+        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
+        $begin = $end;
+    }
+
 }
 
 ?>

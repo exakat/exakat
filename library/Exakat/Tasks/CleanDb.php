@@ -100,8 +100,8 @@ GREMLIN;
     }
 
     private function cleanTmpDir() {
-        rmdirRecursive($this->config->projects_root.'/projects/.exakat/');
-        mkdir($this->config->projects_root.'/projects/.exakat/');
+//        rmdirRecursive($this->config->projects_root.'/projects/.exakat/');
+//        mkdir($this->config->projects_root.'/projects/.exakat/');
     }
     
     private function restartNeo4j() {
