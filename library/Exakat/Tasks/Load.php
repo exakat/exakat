@@ -1195,10 +1195,11 @@ class Load extends Tasks {
             $this->endSequence();
             $closing = '';
 
-            $this->setAtom($id, array('code'     => $this->tokens[$current][1],
-                                      'fullcode' => '<?php '.self::FULLCODE_SEQUENCE.' '.$closing,
-                                      'line'     => $this->tokens[$current][2],
-                                      'token'    => $this->getToken($this->tokens[$current][0])));
+            $this->setAtom($id, array('code'      => $this->tokens[$current][1],
+                                      'fullcode'  => '<?php '.self::FULLCODE_SEQUENCE.' '.$closing,
+                                      'line'      => $this->tokens[$current][2],
+                                      'close_tag' => false,
+                                      'token'     => $this->getToken($this->tokens[$current][0])));
         
             return $id;
         }
@@ -2573,6 +2574,7 @@ class Load extends Tasks {
             $this->setAtom($nameId, array('code'       => $this->tokens[$this->id][1],
                                           'fullcode'   => $this->tokens[$this->id][1],
                                           'variadic'   => false,
+                                          'rank'       => 0,
                                           'line'       => $this->tokens[$this->id][2],
                                           'token'      => $this->getToken($this->tokens[$this->id][0]),
                                           'fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ));
@@ -2584,6 +2586,7 @@ class Load extends Tasks {
             $this->setAtom($argumentsId, array('code'     => $this->atoms[$voidId]['code'],
                                                'fullcode' => $this->atoms[$voidId]['fullcode'],
                                                'line'     => $this->tokens[$this->id][2],
+                                               'count'    => 1,
                                                'token'    => $this->getToken($this->tokens[$this->id][0])));
 
             $functioncallId = $this->addAtom('Functioncall');
@@ -3072,7 +3075,7 @@ class Load extends Tasks {
             $actual = bindec(substr($value, 2));
         } elseif (strtolower(substr($value, 0, 2)) === '0x') {
             $actual = hexdec(substr($value, 2));
-        } elseif (strtolower(substr($value, 0, 2)) === '0') {
+        } elseif (strtolower(substr($value, 0, 1)) === '0') {
             // PHP 7 will just stop.
             // PHP 5 will work until it fails
             $actual = octdec(substr($value, 1));
@@ -3104,6 +3107,10 @@ class Load extends Tasks {
         if ($this->tokens[$this->id][0] === T_CONSTANT_ENCAPSED_STRING) {
             $this->setAtom($id, array('delimiter'   => $this->atoms[$id]['code'][0],
                                       'noDelimiter' => substr($this->atoms[$id]['code'], 1, -1)));
+            $this->addNoDelimiterCall($id);
+        } elseif ($this->tokens[$this->id][0] === T_NUM_STRING) {
+            $this->setAtom($id, array('delimiter'   => '',
+                                      'noDelimiter' => $this->atoms[$id]['code']));
             $this->addNoDelimiterCall($id);
         } else {
             $this->setAtom($id, array('delimiter'   => '',
@@ -3864,6 +3871,7 @@ class Load extends Tasks {
         $this->setAtom($argumentsId, array('code'     => $this->tokens[$this->id][1],
                                            'fullcode' => implode(', ', $fullcode),
                                            'line'     => $this->tokens[$this->id][2],
+                                           'count'    => 1,
                                            'token'    => $this->getToken($this->tokens[$this->id][0])));
 
         $functioncallId = $this->addAtom('Functioncall');
