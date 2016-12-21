@@ -74,8 +74,9 @@ abstract class Analyzer {
     
     const PHP_VERSION_ANY = 'Any';
 
-    static public $CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
-    static public $LITERALS   = array('Integer', 'Real', 'Null', 'Boolean', 'String');
+    static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Property', 'Array');
+    static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
+    static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -504,7 +505,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     public function functioncallIs($fullnspath) {
         $this->atomIs('Functioncall')
              ->hasNoIn(array('METHOD', 'NEW'))
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET'))
+             ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($this->makeFullNsPath($fullnspath));
 
         return $this;

@@ -36,9 +36,13 @@ class ShouldPreprocess extends Analyzer {
         $functionList = $methods->getDeterministFunctions();
         $functionList = $this->makeFullNSPath($functionList);
 
+        $tokenList = '"'.implode('", "', self::$FUNCTIONS_TOKENS).'"';
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
             // Functioncall, that are not authorized
-             ->raw('where( __.repeat( out() ).emit( hasLabel("Functioncall") ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) }.count().is(eq(0)) )')
+             ->raw('where( __.repeat( out() ).emit( hasLabel("Functioncall") ).times('.self::MAX_LOOPING.')
+                                             .hasLabel("Functioncall")
+                                             .has("token", within('.$tokenList.'))
+                                             .filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) }.count().is(eq(0)) )')
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
 
