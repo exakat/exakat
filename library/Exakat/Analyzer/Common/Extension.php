@@ -121,6 +121,7 @@ class Extension extends Analyzer {
 
             $traits = $this->makeFullNsPath($ini['traits']);
             $this->analyzerIs('Traits/TraitUsage')
+                 ->outIs('USE')
                  ->fullnspathIs($traits);
             $this->prepareQuery();
         }

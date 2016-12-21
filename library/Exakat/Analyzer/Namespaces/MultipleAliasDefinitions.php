@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class MultipleAliasDefinitions extends Analyzer {
     public function analyze() {
         // alias with varied values
-        $aliases = $this->query('g.V().hasLabel("Use").out("USE").group("a").by("alias").by("origin").cap("a").next().findAll{a,b -> b.unique().size() > 1}.keySet()');
+        $aliases = $this->query('g.V().hasLabel("Use").out("USE").has("alias").group("a").by("alias").by("origin").cap("a").next().findAll{a,b -> b.unique().size() > 1}.keySet()');
         
         $this->atomIs('Use')
              ->outIs('USE')
