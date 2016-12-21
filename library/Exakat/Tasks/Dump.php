@@ -129,31 +129,14 @@ SQL;
         } elseif ($this->config->program !== null) {
             $analyzer = $this->config->program;
             if (!Analyzer::getClass($analyzer)) {
-                $r = Analyzer::getSuggestionClass($analyzer);
-                if (count($r) > 0) {
-                    echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
-                }
                 throw new NoSuchAnalyzer($analyzer);
             }            
             $themes = array($analyzer);
             display('Processing one analyzer : '.$analyzer);
         } else {
-            display('No analysis dump requested (-T <thema> | -P <Analyzer>)');
             $this->finish();
-            return;
+            throw new NeedsAnalysisThema();
         }
-
-        /*
-        $res = $sqlite->query('SELECT COUNT(*) FROM themas WHERE thema="'.$thema.'"');
-        $count = $res->fetchArray(\SQLITE3_NUM);
-        if ($count === 1) {
-            display("$thema was already run\n");
-        } else {
-            display("$thema was not already run\n");
-        }
-        die();
-        print_r($themes);
-        */
 
         $sqlitePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
 

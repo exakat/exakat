@@ -64,10 +64,6 @@ class Analyze extends Tasks {
             if (Analyzer::getClass($analyzer)) {
                 $analyzers_class = array($analyzer);
             } else {
-                $r = Analyzer::getSuggestionClass($analyzer);
-                if (count($r) > 0) {
-                    echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
-                }
                 throw new NoSuchAnalyzer($analyzer);
             }
         } elseif (is_string($this->config->thema)) {
@@ -79,8 +75,7 @@ class Analyze extends Tasks {
 
             $this->datastore->addRow('hash', array($this->config->thema => count($analyzers_class) ) );
         } else {
-            die( "Usage :php exakat analyze -T <\"Thema\"> -p <project>\n
-php exakat analyze -P <One/rule> -p <project>\n");
+            die( "");
         }
 
         $this->log->log("Analyzing project $project");
@@ -147,10 +142,9 @@ php exakat analyze -P <One/rule> -p <project>\n");
                 unset($d);
             }
 
-            if (!empty($dependencies)) {
-                die( "Dependencies depending on each other : can't finalize. Aborting\n".
-                      print_r($dependencies, true));
-            }
+            assert(empty($dependencies), 
+                   "Dependencies depending on each other : can't finalize. Aborting\n".
+                   print_r($dependencies, true));
         }
 
         $total_results = 0;

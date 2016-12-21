@@ -47,15 +47,10 @@ class Test extends Tasks {
 
         // Check for requested analyze
         $analyzer = $this->config->program;
-        if (Analyzer::getClass($analyzer)) {
-            $analyzers_class = array($analyzer);
-        } else {
-            $r = Analyzer::getSuggestionClass($analyzer);
-            if (count($r) > 0) {
-                echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
-            }
+        if (!Analyzer::getClass($analyzer)) {
             throw new NoSuchAnalyzer($analyzer);
         }
+        $analyzers_class = array($analyzer);
 
         display("Cleaning DB\n");
         $clean = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
