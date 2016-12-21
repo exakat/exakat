@@ -44,9 +44,7 @@ class ErrorMessages extends Analyzer {
         //  new \Exception('Message');
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIs('Functioncall')
-             ->isNot('fullnspath', null)
-             ->fullnspathIs('\\exception')
+             ->functioncallIs('\\exception')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);

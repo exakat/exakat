@@ -119,6 +119,7 @@ class IsRead extends Analyzer {
 
         // Class constructors with self
         $this->atomIs($atoms)
+             ->hasIn('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -141,6 +142,7 @@ class IsRead extends Analyzer {
 
         // Class constructors with self
         $this->atomIs($atoms)
+             ->hasIn('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')

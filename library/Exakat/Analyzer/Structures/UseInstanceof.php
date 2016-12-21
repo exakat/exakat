@@ -30,16 +30,14 @@ class UseInstanceof extends Analyzer {
         // get_class($x) == 'Function'
         $this->atomIs('Comparison')
              ->outIs('LEFT')
-             ->atomIs('Functioncall')
-             ->fullnspathIs('\\get_class')
+             ->functioncallIs('\\get_class')
              ->back('first');
         $this->prepareQuery();
 
         // 'Function' == get_class($x)
         $this->atomIs('Comparison')
              ->outIs('RIGHT')
-             ->atomIs('Functioncall')
-             ->fullnspathIs('\\get_class')
+             ->functioncallIs('\\get_class')
              ->back('first');
         $this->prepareQuery();
     }

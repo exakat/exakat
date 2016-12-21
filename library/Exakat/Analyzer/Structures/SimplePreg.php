@@ -33,6 +33,7 @@ class SimplePreg extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
+             ->hasNoOut('CONCAT')
              // Normal delimiters
              ->regexIsNot('noDelimiter', '(?<!\\\\\\\\)[.?*+\\\\\$\\\\^|{}()\\\\[\\\\]|]')
              // Simple assertions

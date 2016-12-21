@@ -120,6 +120,7 @@ class IsRead extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->savePropertyAs('rank', 'rank')
+             ->_as('results')
              ->back('first')
              ->functionDefinition()
              ->inIs('NAME')
@@ -127,7 +128,7 @@ class IsRead extends Analyzer {
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', true)
              ->isNot('reference', true)
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
 
         // PHP functions that are passed by value

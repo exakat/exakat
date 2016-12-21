@@ -28,8 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class ShouldBeSingleQuote extends Analyzer {
     public function analyze() {
         $this->atomIs('String')
-             ->is('delimiter', '"')
              ->hasNoOut('CONCAT')
+             ->is('delimiter', '"')
              ->regexIsNot('code', "'")
              ->regexIsNot('code', "\\\\\\\\");
         $this->prepareQuery();

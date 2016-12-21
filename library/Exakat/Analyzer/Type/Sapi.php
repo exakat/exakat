@@ -30,6 +30,7 @@ class Sapi extends Analyzer {
         $sapi = $this->loadIni('php_sapi.ini', 'sapi');
         
         $this->atomIs('String')
+             ->hasNoOut('CONCAT')
              ->noDelimiterIs($sapi);
         $this->prepareQuery();
     }

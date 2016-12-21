@@ -29,11 +29,7 @@ class ShouldTypecast extends Analyzer {
     public function analyze() {
         $typeCasting = array('\\intval', '\\floatval', '\\strval', '\\boolval', '\\settype');
         
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($typeCasting)
-             ->back('first');
+        $this->atomFunctionIs($typeCasting);
         $this->prepareQuery();
     }
 }

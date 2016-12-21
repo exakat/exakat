@@ -102,7 +102,7 @@ class UseConstantAsArguments extends Analyzer {
                  ->atomIs('Logical')
                  ->atomInside(array('Identifier', 'Nsname'))
                  ->analyzerIsNot('Constants/IsPhpConstant')
-                 ->hasNoIn('SUBNAME')
+                 ->hasNoIn(array('SUBNAME', 'NAME'))
                  ->back('first');
             $this->prepareQuery();
 

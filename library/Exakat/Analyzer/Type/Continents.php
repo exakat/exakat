@@ -30,6 +30,7 @@ class Continents extends Analyzer {
         $ini = $this->loadIni('Continents_en.ini', 'continents_en');
         
         $this->atomIs('String')
+             ->hasNoOut('CONCAT')
              ->noDelimiterIs($ini);
         $this->prepareQuery();
     }

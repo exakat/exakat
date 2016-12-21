@@ -32,6 +32,8 @@ class BadConstantnames extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->is('constant', true)
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^__(.*)__\\$');
         $this->prepareQuery();
         

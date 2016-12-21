@@ -53,6 +53,8 @@ class NoGlobalModification extends Analyzer {
         // $GLOBALS['post']++;
         $this->atomIs('Array')
              ->outIs('INDEX')
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
              ->noDelimiterIs($globalNames)
              ->inIs('INDEX')
              ->outIs('VARIABLE')

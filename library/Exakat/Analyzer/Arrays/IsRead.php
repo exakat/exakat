@@ -85,11 +85,14 @@ class IsRead extends Analyzer {
         $this->prepareQuery();
 
         // arguments : normal variable in a custom function
-        $this->atomIs('Array')
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
+        $this->atomIs('Functioncall')
              ->hasNoIn('METHOD') // possibly new too
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Array')
+             ->savePropertyAs('rank', 'rank')
+             ->_as('results')
+             ->back('first')
              ->functionDefinition()
              ->inIs('NAME')
              ->outIs('ARGUMENTS')
@@ -114,15 +117,11 @@ class IsRead extends Analyzer {
         }
         
         foreach($references as $position => $functions) {
-            $this->atomIs('Array')
-                 ->is('rank', $position)
-                 ->inIs('ARGUMENT')
-                 ->inIs('ARGUMENTS')
-                 ->atomIs('Functioncall')
-                 ->hasNoIn('METHOD')
-                 ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-                 ->fullnspathIs($functions)
-                 ->back('first');
+            $this->atomFunctionIs($functions)
+                 ->outIs('ARGUMENTS')
+                 ->outIs('ARGUMENT')
+                 ->atomIs('Variable')
+                 ->is('rank', $position);
             $this->prepareQuery();
         }
 
@@ -134,6 +133,7 @@ class IsRead extends Analyzer {
 
         // Class constructors (__construct)
         $this->atomIs('Array')
+             ->hasIn('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
@@ -154,6 +154,7 @@ class IsRead extends Analyzer {
 
         // Class constructors with self
         $this->atomIs('Array')
+             ->hasIn('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')

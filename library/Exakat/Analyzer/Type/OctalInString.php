@@ -29,7 +29,7 @@ class OctalInString extends Analyzer {
     
     public function analyze() {
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '\\\\\\\\'.'(\\\\d{4,}|[4-9]\\\\d{2,2}|3[89]\\\\d|37[89])')
              ->back('first');
         $this->prepareQuery();

@@ -40,9 +40,10 @@ class NoHardcodedHash extends Analyzer {
                  ->regexIsNot('noDelimiter', $regexDate);
             $this->prepareQuery();
         }
+        
         // Crypt (some salts are missing)
         $this->atomIs('String')
-             ->tokenIsNot('T_QUOTE')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^\\\\\\$(1|2a|2x|2y|5|6)\\\\\\$.+')
              ->noDelimiterIsNot($stopwords)
              ->regexIsNot('noDelimiter', $regexDate);
@@ -50,7 +51,7 @@ class NoHardcodedHash extends Analyzer {
 
         // Base64 encode
         $this->atomIs('String')
-             ->tokenIsNot('T_QUOTE')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^[a-zA-Z0-9]+={0,2}\\$')
              ->raw('filter{ it.get().value("noDelimiter").length() % 4 == 0}')
              ->isNotMixedcase('noDelimiter')

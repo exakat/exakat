@@ -36,12 +36,16 @@ class IndirectInjection extends Analyzer {
 
         // Relayed via variable to sensitive function
         // $a = $_GET['a']; f($a); function f($a) { exec($a);}
-        $this->atomIs('Variable')
-             ->codeIs($vars, true)
-             ->_as('result')
+        $this->atomIs('Functioncall')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
+             ->_as('result')
+             ->outIsIE('VARIABLE')
+             ->atomIs('Variable')
+             ->codeIs($vars, true)
+             ->back('first')
+
              ->functionDefinition()
              ->inIs('NAME')
 

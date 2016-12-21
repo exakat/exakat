@@ -32,7 +32,7 @@ class UselessCheck extends Analyzer {
              ->outIs('CONDITION')
              ->atomInside('Functioncall')
              // count($a) > 0, sizeof($a) != 0, !empty($a)
-             ->fullnspathIs(array('\\count', '\\sizeof', '\\empty'))
+             ->functioncallIs(array('\\count', '\\sizeof', '\\empty'))
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->savePropertyAs('fullcode', 'var')

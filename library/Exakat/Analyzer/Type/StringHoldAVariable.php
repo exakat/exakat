@@ -29,6 +29,7 @@ class StringHoldAVariable extends Analyzer {
     public function analyze() {
         // String that has a PHP variables but ' as delimiters
         $this->atomIs('String')
+             ->hasNoOut('CONCAT')
              ->is('delimiter', "'")
              ->regexIs('noDelimiter', '[^\\\\\\\\]\\\\\$[a-zA-Z_\\\\x7f-\\\\xff][a-zA-Z0-9_\\\\x7f-\\\\xff]*');
         $this->prepareQuery();

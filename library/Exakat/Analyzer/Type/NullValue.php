@@ -36,7 +36,7 @@ class NullValue extends Type {
         parent::analyze();
         
         $this->atomIs(array('Identifier', 'Nsname'))
-             ->hasNoIn('SUBNAME')
+             ->hasNoIn(array('SUBNAME', 'NAME'))
              ->fullnspathIs('\\null');
         $this->prepareQuery();
     }

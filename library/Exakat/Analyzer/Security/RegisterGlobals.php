@@ -81,8 +81,7 @@ class RegisterGlobals extends Analyzer {
         $this->prepareQuery();
 
         // With import_request_variables
-        $this->atomIs('Functioncall')
-             ->fullnspathIs('\\import_request_variables');
+        $this->atomFunctionIs('\\import_request_variables');
         $this->prepareQuery();
         
         // Other methods?

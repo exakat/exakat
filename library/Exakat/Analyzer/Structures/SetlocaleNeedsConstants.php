@@ -36,9 +36,7 @@ class SetlocaleNeedsConstants extends Analyzer {
                                   '\\LC_MESSAGES');
 
         // something else than a constant
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->fullnspathIs('\\setlocale')
+        $this->atomFunctionIs('\\setlocale')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
@@ -46,9 +44,7 @@ class SetlocaleNeedsConstants extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->fullnspathIs('\\setlocale')
+        $this->atomFunctionIs('\\setlocale')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)

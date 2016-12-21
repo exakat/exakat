@@ -38,7 +38,7 @@ class FailingSubstrComparison extends Analyzer {
              ->back('first')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('String')
-             ->hasNoOut('CONTAINS')
+             ->hasNoOut('CONCAT')
              
              // Substring is actually as long as length
              ->raw('filter{ it.get().value("noDelimiter").length() != length.toInteger().abs();}');
