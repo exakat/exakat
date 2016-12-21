@@ -1,4 +1,4 @@
-Version 0.9.4 (Lady of Jinsheng Palace, Coming up)
+Version 0.9.5 (Immortal Ziyang, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,25 @@ Version 0.9.4 (Lady of Jinsheng Palace, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.9.4 (Lady of Jinsheng Palace, 2016-12-19)
++ Architecture
+    + Rewrote the concurrence check (removed needs for ext/sem)
+    + Results are never double anymore
+    + Upgraded gremlin calls, to handle \n
+    + Dump cleans the previous values before dumping
+    + Excluded namespaces classes when searching for external libraries
++ Report
+    + Ambassador : extension usage, inventories, global lists, stats, PHP Compilation directives
+    + Covers more compilation directives (Not finished)
++ Analyzer
+    + New analyzer : Final by Ocramius
+    + Upgraded : Comparison with == : added curl_exec
+    + Upgraded : isset with constant (mistake on properties as arrays)
+    + Upgraded : Avoid using now uses full NS path
+    + Upgraded : Useless instructions handles for() correctly
+    + Upgraded : Recursive, IsGenerator and Loop Calling includes yield from
+    + Upgraded analysis : 1741 / 1750 test pass (99.5% pass). 
 
 Version 0.9.3 (Purple-Gold Bells, 2016-12-12)
 + Architecture
