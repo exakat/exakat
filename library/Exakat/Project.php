@@ -21,11 +21,29 @@
 */
 
 
-namespace Exakat\Exceptions;
+namespace Exakat;
 
-class NoSuchProject extends \RuntimeException {
-    public function __construct($project = '', $code = 0, \Exception $previous = null) {
-        parent::__construct("No such project as \"$project\".\n", $code, $previous);
+class Project {
+    private $project; 
+    
+    public function __construct($project) {
+        $this->project = $project;
+    }
+
+    public function validate() {
+        if (strpos($this->project, DIRECTORY_SEPARATOR) !== false) {
+            return false;
+        }
+        
+        if (in_array($this->project, array('test', 'onepage'))) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public function __toString() {
+        return $this->project;
     }
 }
 

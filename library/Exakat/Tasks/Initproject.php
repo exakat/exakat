@@ -25,17 +25,23 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\HelperException;
+use Exakat\Project;
 
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
     public function run() {
-        $project = $this->config->project;
+        $project = new Project($this->config->project);
 
         if ($project == 'default') {
             throw new ProjectNeeded();
+        }
+        
+        if (!$project->validate()) {
+            throw new NoSuchProject($project);
         }
 
         $repositoryURL = $this->config->repository;
