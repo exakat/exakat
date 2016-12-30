@@ -26,11 +26,11 @@ namespace Exakat\Analyzer\Extensions;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\Extension;
 
-class Extast extends Extension {
+class Extzbarcode extends Extension {
     public $phpVersion = '7.0+';
     
     public function analyze() {
-        $this->source = 'ast.ini';
+        $this->source = 'zbarcode.ini';
         
         parent::analyze();
     }
