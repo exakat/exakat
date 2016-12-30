@@ -248,6 +248,7 @@ GREMLIN;
         // Define-style constant definitions
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
+     .where( __.in("METHOD").count().is(eq(0)))
      .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
      .has("fullnspath", "\\\\define")
      .out("ARGUMENTS").out("ARGUMENT").has("rank", 0)
@@ -268,7 +269,7 @@ GREMLIN;
             // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .where( __.in("NAME", "SUBNAME").count().is(eq(0)) )
+     .where( __.in("NAME", "SUBNAME", "METHOD", "PROPERTY", "CONSTANT").count().is(eq(0)) )
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')
      .from( 
@@ -372,9 +373,11 @@ GREMLIN;
         
             $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+     .where( __.in("METHOD").count().is(eq(0)))
+     .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY'))
      .filter{ it.get().value("fullnspath") in arg1}
-     .where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant", true)).count().is(eq(0)) )
+     .where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant")).count().is(eq(0)) )
     .sideEffect{ it.get().property("constant", true);}
 GREMLIN;
             $this->gremlin->query($query, array('arg1' => $deterministFunctions));
@@ -384,7 +387,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Variable").has("code", "\\\$GLOBALS").in("VARIABLE").hasLabel("Array").as("var")
-     .out("INDEX").hasLabel("String")
+     .out("INDEX").hasLabel("String").where( __.out("CONCAT").count().is(eq(0)))
      .sideEffect{ varname = '\$' + it.get().value('noDelimiter');
                   it.get().property("globalvar", varname);}
 
