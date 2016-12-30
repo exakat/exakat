@@ -79,7 +79,7 @@ class Phpexec {
 
         $this->isCurrentVersion = substr(PHP_VERSION, 0, 3) === $phpversion3;
         if ($this->isCurrentVersion === true) {
-            preg_match('/^(\d\.\d+\.\d+)$/', PHP_VERSION, $r);
+            preg_match('/^(\d\.\d+\.\d+)/', PHP_VERSION, $r);
             $this->actualVersion = $r[1];
             
             if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
