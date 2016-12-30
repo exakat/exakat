@@ -177,7 +177,7 @@ TEXT;
             
             foreach((array) $details as $detail) {
                 if ($detail->name == 'Extra configurations') {
-                    preg_match('#(http://[^"]+?)"#is', $detail->documentation, $url);
+                    preg_match('#(https?://[^"]+?)"#is', $detail->documentation, $url);
                     $directives .= "; More information about $section : 
 ;$url[1]
 
