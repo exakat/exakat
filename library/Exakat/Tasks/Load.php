@@ -2574,12 +2574,12 @@ class Load extends Tasks {
             $this->setAtom($nameId, array('code'       => $this->tokens[$this->id][1],
                                           'fullcode'   => $this->tokens[$this->id][1],
                                           'variadic'   => false,
-                                          'rank'       => 0,
                                           'line'       => $this->tokens[$this->id][2],
                                           'token'      => $this->getToken($this->tokens[$this->id][0]),
                                           'fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ));
 
             $voidId = $this->addAtomVoid();
+            $this->setAtom($voidId, array('rank'  => 0));
 
             $argumentsId = $this->addAtom('Arguments');
             $this->addLink($argumentsId, $voidId, 'ARGUMENT');
