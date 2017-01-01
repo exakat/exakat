@@ -81,15 +81,15 @@ mkdir data/log;
 ./bin/neo4j-import  --multiline-fields=true \
                     --into data/graph.db \
                     --nodes {$this->config->projects_root}/projects/.exakat/nodes.g3.csv \
-                    --relationships {$this->config->projects_root}/projects/.exakat/rels.g3.csv 2>&1 >/dev/null;
+                    --relationships {$this->config->projects_root}/projects/.exakat/rels.g3.csv;
 SHELL;
         if (Tasks::$semaphore !== null) {
-            exec($shell);
+            $res = exec($shell);
             fclose(Tasks::$semaphore);
             exec("cd {$this->config->neo4j_folder}; ./bin/neo4j start");
             Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
         } else {
-            exec($shell);
+            $res = exec($shell);
             exec("cd {$this->config->neo4j_folder}; ./bin/neo4j start");
         }
 
@@ -104,6 +104,11 @@ SHELL;
         }
 
         $cypher = new Cypher($this->config );
+        $check = $cypher->query('start n=node(*) match n return count(n)');
+        if ($check->data[0][0] < 3) {
+            throw new GremlinException('Couldn\'t load any nodes. Return message "'.$res.'"');
+        }
+        
         foreach($index as $indice) {
             $queryTemplate = 'CREATE INDEX ON :'.$indice.'(id)';
             $cypher->query($queryTemplate);
@@ -244,13 +249,14 @@ GREMLIN;
                                'alias'       => '', 
                                'origin'      => '', 
                                'encoding'    => '', 
-                               'intval'      => 'int', 
+                               'intval'      => 'long', 
                                'strval'      => '', 
                                'enclosing'   => 'int',
                                'args_max'    => 'int', 
                                'args_min'    => 'int', 
                                'bracket'     => 'int', 
-                               'close_tag'   => 'int');
+                               'close_tag'   => 'int',
+                               'use'         => 'int');
         
         $fileName = $exakatDir.'/nodes.g3.csv';
         if (file_exists($fileName)) {
@@ -278,7 +284,7 @@ GREMLIN;
         foreach($atoms as $id => $atom) {
             if ($id == $id0) { continue; }
             $extra= array();
-
+            
             foreach($extras as $name => $type) {
                 if ($name == ':ID') {
                     $name = 'id';
@@ -289,7 +295,17 @@ GREMLIN;
                         $atom['reference'] = $atom['reference'] == true ? 1 : -1;
                     }
                 } 
-                $extra[] = isset($atom[$name]) ? $this->escapeCsv($atom[$name]) : '';
+
+                if (!isset($atom[$name])) {
+                    $extra[] = '';
+                    continue;
+                }
+                if ($atom[$name] === false) {
+                    $extra[] = 0;
+                    continue;
+                }
+                
+                $extra[] = $this->escapeCsv($atom[$name]);
             }
             $written = fputcsv($fp, $extra);
         }

@@ -236,6 +236,7 @@ class Load extends Tasks {
                           'args_min'    => self::$PROP_ARGS_MIN,
                           'bracket'     => self::$PROP_BRACKET,
                           'close_tag'   => self::$PROP_CLOSETAG,
+                          'use'         => array(),
                           );
 
         $this->php->getTokens();
@@ -4138,10 +4139,14 @@ class Load extends Tasks {
                 return '\\'.strtolower($this->atoms[$nameId]['code']);
             // This is an identifier
             } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
+                $this->setAtom($nameId, array('use' => 1));
                 return $this->uses['class'][strtolower($this->atoms[$nameId]['code'])];
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
+                $this->setAtom($nameId, array('use' => 1));
                 return $this->uses['const'][strtolower($this->atoms[$nameId]['code'])];
             } elseif ($type === 'function' && isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
+                print "Using a function use ".$this->uses['function'][strtolower($this->atoms[$nameId]['code'])]."\n";
+                $this->setAtom($nameId, array('use' => 1));
                 return $this->uses['function'][strtolower($this->atoms[$nameId]['code'])];
             } else {
                 return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
