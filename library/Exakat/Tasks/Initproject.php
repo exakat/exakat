@@ -260,7 +260,7 @@ INI;
 
                 // Git
                 // Git is last, as it will act as a default
-                case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $this->config->git === true) :
+                case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] === 'git') || $this->config->git === true) :
                     $res = shell_exec('git --version');
                     if (strpos($res, 'git') === false) {
                         throw new HelperException('git');

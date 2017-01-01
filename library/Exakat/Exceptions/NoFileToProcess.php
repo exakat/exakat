@@ -24,8 +24,8 @@
 namespace Exakat\Exceptions;
 
 class NoFileToProcess extends \RuntimeException {
-    public function __construct($filename = '', $code = 0, \Exception $previous = null) {
-        parent::__construct("No file to process. The provided file(s) were not PHP, empty, ignored or couldn't compile with the requested PHP version. Check your project config.ini.", $code, $previous);
+    public function __construct($filename = '', $type = 'empty or doesn\'t compile', $code = 0, $previous = null ) {
+        parent::__construct("Not a file to process. The provided file is $type.", $code, $previous);
     }
 }
 

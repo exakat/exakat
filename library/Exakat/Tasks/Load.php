@@ -289,7 +289,7 @@ class Load extends Tasks {
         } elseif (($project = $this->config->project) !== 'default') {
             $this->processProject($project);
         } else {
-            throw new NoFileToProcess($filename);
+            throw new NoFileToProcess($filename, 'non-existent');
         }
 
         $this->logTime('Load in graph');
@@ -308,15 +308,19 @@ class Load extends Tasks {
     private function processProject($project) {
         $files = $this->datastore->getCol('files', 'file');
         if (empty($files)) {
-            throw new NoFileToProcess($project);
+            throw new NoFileToProcess($project, 'empty');
         }
     
         $nbTokens = 0;
         $path = $this->config->projects_root.'/projects/'.$project.'/code';
         foreach($files as $file) {
-            if ($r = $this->processFile($path.$file)) {
-                $nbTokens += $r;
-                $this->saveFiles();
+            try {
+                if ($r = $this->processFile($path.$file)) {
+                    $nbTokens += $r;
+                    $this->saveFiles();
+                }
+            } catch (NoFileToProcess $e) {
+                // ignoring empty files
             }
         }
         $this->saveDefinitions();
@@ -343,9 +347,13 @@ class Load extends Tasks {
 
         $nbTokens = 0;
         foreach($files as $file) {
-            if ($r = $this->processFile($dir . $file)) {
-                $nbTokens += $r;
-                $this->saveFiles();
+            try {
+                if ($r = $this->processFile($dir . $file)) {
+                    $nbTokens += $r;
+                    $this->saveFiles();
+                }
+            } catch (NoFileToProcess $e) {
+                // Ignoring
             }
         }
         $this->saveDefinitions();
@@ -377,15 +385,13 @@ class Load extends Tasks {
         }
 
         if (!$this->php->compile($filename)) {
-            display('Ignoring file '.$filename.' as it won\'t compile with the configured PHP version ('.$this->config->phpversion.')');
-            return false;
+            throw new NoFileToProcess($filename, 'won\'t compile');
         }
     
         $tokens = $this->php->getTokenFromFile($filename);
         $log['token_initial'] = count($tokens);
         if (count($tokens) === 1) {
-            display('Ignoring file '.$filename.' as it is not a PHP file (No PHP token found)');
-            return false;
+            throw new NoFileToProcess($filename, 'empty');
         }
         
         $line = 0;
