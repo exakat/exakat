@@ -97,10 +97,10 @@ GREMLIN;
         // Create propertyname for Property Definitions
         $query = <<<GREMLIN
 g.V().hasLabel("Ppp", "Var").out("PPP").as("ppp")
-.coalesce( out("LEFT"), __.filter{ true } )
-.sideEffect{ propertyname = it.get().value('code').toString().substring(1, it.get().value('code').size()); }
-.select("ppp")
-.sideEffect{ it.get().property('propertyname', propertyname); }
+     .coalesce( out("LEFT"), __.filter{ true } )
+     .sideEffect{ propertyname = it.get().value('code').toString().substring(1, it.get().value('code').size()); }
+     .select("ppp")
+     .sideEffect{ it.get().property('propertyname', propertyname); }
 
 GREMLIN;
         $this->gremlin->query($query);
@@ -110,17 +110,17 @@ GREMLIN;
         // update fullnspath with fallback for functions 
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall").as("a")
-                              .has("fullnspath", without(''))
-                              .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-                              .where( __.in("NEW", "METHOD").count().is(eq(0)))
-                              .sideEffect{ fullnspath = it.get().value("fullnspath")}
-                              .in('DEFINITION')
-                              .filter{ it.get().value("fullnspath") != fullnspath}
-                              .sideEffect{ fullnspath = it.get().value("fullnspath")}
-                              .select("a")
-                              .sideEffect{ 
-                                   it.get().property("fullnspath", fullnspath ); 
-                               }
+     .has("fullnspath", without(''))
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+     .where( __.in("NEW", "METHOD").count().is(eq(0)))
+     .sideEffect{ fullnspath = it.get().value("fullnspath")}
+     .in('DEFINITION')
+     .filter{ it.get().value("fullnspath") != fullnspath}
+     .sideEffect{ fullnspath = it.get().value("fullnspath")}
+     .select("a")
+     .sideEffect{ 
+          it.get().property("fullnspath", fullnspath ); 
+      }
 
 GREMLIN;
         $this->gremlin->query($query);
@@ -129,14 +129,15 @@ GREMLIN;
 
         // update fullnspath with fallback for functions 
         $query = <<<GREMLIN
-g.V().hasLabel("Functioncall").has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-                              .has("fullnspath", without(''))
-                              .where( __.in("NEW", "METHOD", "DEFINITION").count().is(eq(0)))
-
-.sideEffect{ 
-    fullnspath = it.get().vertices(OUT, 'NAME').next().value("fullnspath").toString().toLowerCase();
-    it.get().property("fullnspath", fullnspath ); 
-}
+g.V().hasLabel("Functioncall")
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+     .has("fullnspath", without(''))
+     .where( __.in("NEW", "METHOD", "DEFINITION").count().is(eq(0)))
+     .sideEffect{ 
+        fullnspath = it.get().vertices(OUT, 'NAME').next().value("fullnspath").toString().toLowerCase();
+        it.get().property("fullnspath", fullnspath ); 
+        it.get().property("fallback", true ); 
+    }
 
 GREMLIN;
         $this->gremlin->query($query);
@@ -146,17 +147,17 @@ GREMLIN;
         // update fullnspath with fallback for functions 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname").as("a")
-                              .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-                              .has("fullnspath", without(''))
-                              .where( __.in("NEW", "METHOD", "NAME", "SUBNAME").count().is(eq(0)))
-                              .sideEffect{ fullnspath = it.get().value("fullnspath")}
-                              .in('DEFINITION').out("NAME")
-                              .filter{ it.get().value("fullnspath") != fullnspath}
-                              .sideEffect{ fullnspath = it.get().value("fullnspath")}
-                              .select("a")
-                              .sideEffect{ 
-                                   it.get().property("fullnspath", fullnspath ); 
-                               }
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+     .has("fullnspath", without(''))
+     .where( __.in("NEW", "METHOD", "NAME", "SUBNAME").count().is(eq(0)))
+     .sideEffect{ fullnspath = it.get().value("fullnspath")}
+     .in('DEFINITION').out("NAME")
+     .filter{ it.get().value("fullnspath") != fullnspath}
+     .sideEffect{ fullnspath = it.get().value("fullnspath")}
+     .select("a")
+     .sideEffect{ 
+          it.get().property("fullnspath", fullnspath ); 
+      }
 
 GREMLIN;
         $this->gremlin->query($query);
@@ -192,12 +193,13 @@ GREMLIN;
         $constants = array_map('strtolower', $constants);
 
         $query = <<<GREMLIN
-g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
-                            .filter{ it.get().value("code").toLowerCase() in arg1 }
-.sideEffect{ 
-    fullnspath = "\\\\" + it.get().value("code").toLowerCase();
-    it.get().property("fullnspath", fullnspath); 
-}
+g.V().hasLabel("Identifier")
+     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
+     .filter{ it.get().value("code").toLowerCase() in arg1 }
+     .sideEffect{ 
+        fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+        it.get().property("fullnspath", fullnspath); 
+      }
 
 GREMLIN;
         $this->gremlin->query($query, array('arg1' => $constants));
@@ -213,14 +215,16 @@ GREMLIN;
         $constantsDefinitions = $constants->results;
 
         $query = <<<GREMLIN
-g.V().hasLabel("Identifier").where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
-                            .filter{ it.get().value("code") in arg1 }
-                            .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
-                            .sideEffect{ name = it.get().value("code"); }
-.sideEffect{ 
-    fullnspath = "\\\\" + it.get().value("code").toLowerCase();
-    it.get().property("fullnspath", fullnspath); 
-}.addE("DEFINITION").from( g.V().hasLabel("Const").out("CONST").out("NAME").filter{ it.get().value("code") == name} )
+g.V().hasLabel("Identifier")
+     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
+     .filter{ it.get().value("code") in arg1 }
+     .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
+     .sideEffect{ name = it.get().value("code"); }
+     .sideEffect{ 
+         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+         it.get().property("fullnspath", fullnspath); 
+      }
+      .addE("DEFINITION").from( g.V().hasLabel("Const").out("CONST").out("NAME").filter{ it.get().value("code") == name} )
 
 GREMLIN;
         $this->gremlin->query($query, array('arg1' => $constantsGlobal, 'arg2' => $constantsDefinitions));
@@ -232,13 +236,14 @@ GREMLIN;
         $functions = array_map('strtolower', $functions);
 
         $query = <<<GREMLIN
-g.V().hasLabel("Functioncall").not(has("token", "T_OPEN_TAG_WITH_ECHO"))
-                              .filter{ it.get().value("code").toLowerCase() in arg1 }
-                              .where( __.in("DEFINITION").count().is(eq(0)) )
-.sideEffect{
-    fullnspath = "\\\\" + it.get().value("code").toLowerCase();
-    it.get().property("fullnspath", fullnspath); 
-}
+g.V().hasLabel("Functioncall")
+     .not(has("token", "T_OPEN_TAG_WITH_ECHO"))
+     .filter{ it.get().value("code").toLowerCase() in arg1 }
+     .where( __.in("DEFINITION").count().is(eq(0)) )
+     .sideEffect{
+         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+         it.get().property("fullnspath", fullnspath); 
+     }
 
 GREMLIN;
         $this->gremlin->query($query, array('arg1' => $functions));
