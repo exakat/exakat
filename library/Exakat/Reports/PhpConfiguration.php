@@ -69,8 +69,6 @@ TEXT
                 } elseif(!empty($configure->deactivate) && $sources[$configure->analysis] == 0) {
                     $return[] = ' '.$configure->deactivate;
                 } 
-            } else {
-                display( "Missing $configure->analysis in sqlite\n");
             }
         }
         
