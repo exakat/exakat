@@ -150,6 +150,7 @@ class Ambassador extends Reports {
         $this->generateInventories();
         
         // Annex
+        $this->generateAnalyzerSettings();
         $this->generateDocumentation();
         $this->generateCodes();  
 
@@ -1923,6 +1924,59 @@ SQL;
         $html = $this->getBasedPage('php_compilation');
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
         $this->putBasedPage('php_compilation', $html);
+    }
+
+    protected function generateAnalyzerSettings() {
+        $settings = '';
+
+        $info = array(array('Code name', $this->config->project_name));
+        if (!empty($this->config->project_description)) {
+            $info[] = array('Code description', $this->config->project_description);
+        }
+        if (!empty($this->config->project_packagist)) {
+            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
+        }
+        if (!empty($this->config->project_url)) {
+            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
+        }
+        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
+            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
+            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
+            $info[] = array('Git URL', $r[1]);
+            
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
+            $info[] = array('Git branch', trim($res));
+
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
+            $info[] = array('Git commit', trim($res));
+        } else {
+            $info[] = array('Repository URL', 'Downloaded archive');
+        }
+
+        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
+        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
+        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
+        
+        $info[] = array('Analysis execution date', date('r', $this->datastore->getHash('audit_end')));
+        $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
+        $info[] = array('Report production date', date('r', strtotime('now')));
+        
+        $php = new Phpexec($this->config->phpversion);
+        $info[] = array('PHP used', $this->config->phpversion . ' ('. $php->getActualVersion() . ')');
+        
+        $info[] = array('Exakat version', Exakat::VERSION . ' ( Build '. Exakat::BUILD . ') ');
+
+        
+        foreach($info as &$row) {
+            $row = '<tr><td>'.implode('</td><td>', $row).'</td></tr>';
+        }
+        unset($row);
+        
+        $settings = join("", $info);
+
+        $html = $this->getBasedPage('annex_settings');
+        $html = $this->injectBloc($html, 'SETTINGS', $settings);
+        $this->putBasedPage('annex_settings', $html);
     }
 
     private function generateErrorMessages() {
