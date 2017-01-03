@@ -30,6 +30,16 @@ foreach($files as $file) {
     if (empty($expected) && empty($expected_not)) {
         ++$total;
         print "Empty exp files : $file\n";
+    } else {
+        if (empty($expected)) {
+//            ++$total;
+            print "Empty expected array : $file\n";
+        }
+
+        if (empty($expected_not)) {
+//            ++$total;
+            print "Empty expected_not array : $file\n";
+        }
     }
 }
 print "total unfinished tests : $total\n\n";
