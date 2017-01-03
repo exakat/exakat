@@ -2,16 +2,14 @@
 
 $analyzer = $argv[1];
 
-var_dump($analyzer);
-
-if (!file_exists('library/Analyzer/'.$analyzer.'.php')) {
+if (!file_exists('library/Exakat/Analyzer/'.$analyzer.'.php')) {
     print "'$analyzer' doesn't exists in Analyzer\n";
 } else {
-    shell_exec("git rm library/Analyzer/$analyzer.php");
+    shell_exec("git rm library/Exakat/Analyzer/$analyzer.php");
 }
 
 if (!file_exists('human/en/'.$analyzer.'.ini')) {
-    print "'$analyzer' doesn't exists in Definitions\n";
+    print "'$analyzer' doesn't exists in human/en/\n";
 } else {
     shell_exec("git rm human/en/$analyzer.ini");
 }
