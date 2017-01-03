@@ -49,14 +49,22 @@ foreach( (array) $json as $library) {
 }
 $library_list = join("\n", $library_list);
 
+$external_services_list = array();
+$json = json_decode(file_get_contents('data/serviceConfig.json'));
+foreach( (array) $json as $name => $service) {
+    $external_services_list[] = '* ['.$name.']('.$service->homepage.') - '.implode(', ', $service->file);
+}
+$external_services_list = join("\n", $external_services_list);
+
 
 $analyzer_introduction = generateAnalyzerList();
 
 // More to come,and automate collection too
-$attributes = array('ANALYZERS_COUNT'       => $analyzer_count,
-                    'EXTENSION_LIST'        => $extension_list,
-                    'LIBRARY_LIST'          => $library_list,
-                    'ANALYZER_INTRODUCTION' => $analyzer_introduction
+$attributes = array('ANALYZERS_COUNT'        => $analyzer_count,
+                    'EXTENSION_LIST'         => $extension_list,
+                    'LIBRARY_LIST'           => $library_list,
+                    'ANALYZER_INTRODUCTION'  => $analyzer_introduction,
+                    'EXTERNAL_SERVICES_LIST' => $external_services_list,
                     );
 
 shell_exec('rm docs/*.rst');
