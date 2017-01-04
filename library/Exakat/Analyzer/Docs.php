@@ -67,7 +67,7 @@ SQL;
         $res = $this->sqlite->query($query);
 
         $return = array();
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row['folder'].'/'.$row['name'];
         }
         
@@ -90,7 +90,7 @@ SQL;
         $res = $this->sqlite->query($query);
 
         $return = array();
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row['name'];
         }
         
@@ -114,7 +114,7 @@ SQL;
         $res = $this->sqlite->query($query);
 
         $return = array();
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[$row['analyzer']] = explode(',', $row['categories']);
         }
         
@@ -127,11 +127,11 @@ SQL;
         $query = "SELECT severity FROM analyzers WHERE folder = '$folder' AND name = '$name'";
 
         $res = $this->sqlite->query($query);
-        $res2 = $res->fetchArray();
-        if (empty($res2[0])) {
+        $res2 = $res->fetchArray(\SQLITE3_ASSOC);
+        if (empty($res2['severity'])) {
             $return = Analyzer::S_NONE;
         } else {
-            $return = constant("Exakat\\Analyzer\\Analyzer::$res2[0]");
+            $return = constant("Exakat\\Analyzer\\Analyzer::".$res2['severity']);
         }
 
         return $return;
@@ -142,12 +142,12 @@ SQL;
         $query = "SELECT timetofix FROM analyzers WHERE folder = '$folder' AND name = '$name'";
 
         $res = $this->sqlite->query($query);
-        $res2 = $res->fetchArray();
+        $res2 = $res->fetchArray(\SQLITE3_ASSOC);
 
-        if (empty($res2[0])) {
+        if (empty($res2['timetofix'])) {
             $return = Analyzer::T_NONE;
         } else {
-            $return = constant("Exakat\\Analyzer\\Analyzer::$res2[0]");
+            $return = constant('Exakat\\Analyzer\\Analyzer::'.$res2['timetofix']);
         }
 
         return $return;
@@ -158,8 +158,8 @@ SQL;
 
         $return = array();
         $res = $this->sqlite->query($query);
-        while($row = $res->fetchArray()) {
-            $return[$row['analyzer']] = empty($res2[0]) ? Analyzer::S_NONE : constant("Exakat\\Analyzer\\Analyzer::$res2[0]");
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $return[$row['analyzer']] = empty($row['severity']) ? Analyzer::S_NONE : constant('Exakat\\Analyzer\\Analyzer::'.$row['severity']);
         }
 
         return $return;
@@ -170,8 +170,8 @@ SQL;
 
         $return = array();
         $res = $this->sqlite->query($query);
-        while($row = $res->fetchArray()) {
-            $return[$row['analyzer']] = empty($res2[0]) ? Analyzer::S_NONE : constant("Exakat\\Analyzer\\Analyzer::$res2[0]");
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $return[$row['analyzer']] = empty($row['timetofix']) ? Analyzer::S_NONE : constant("Exakat\\Analyzer\\Analyzer::".$row['timetofix']);
         }
 
         return $return;
@@ -188,7 +188,7 @@ SQL;
         $res = $stmt->execute();
 
         $return = array();
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = str_replace('\\\\', '\\', $row['name']);
         }
         
@@ -211,7 +211,7 @@ SQL;
         $res = $stmt->execute();
 
         $return = array();
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = str_replace('\\\\', '\\', $row['name']);
         }
         
@@ -234,7 +234,7 @@ SQL;
         $res = $stmt->execute();
 
         $return = array();
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row['name'];
         }
         

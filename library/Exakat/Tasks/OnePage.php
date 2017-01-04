@@ -27,6 +27,7 @@ use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
 use Exakat\Exceptions\NoSuchFile;
+use Exakat\Tasks\NoReadableWFile;
 
 class OnePage extends Tasks {
     const CONCURENCE = self::NONE;

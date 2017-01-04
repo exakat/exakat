@@ -66,10 +66,6 @@ class Xml extends Reports {
                                   'CompatibilityPHP70', 'CompatibilityPHP71',
                                   '"Dead code"', 'Security', 'Analyze');
 
-    public function __construct() {
-        parent::__construct();
-    }
-
     /**
      * Generate a partial report for a single processed file.
      *

@@ -85,7 +85,7 @@ class ZendFramework extends Devoops {
         //count > 0 AND 
         print 'SELECT * FROM resultsCounts WHERE analyzer in '.$this->themesList.' ORDER BY id';
         $res = $this->sqlite->query('SELECT * FROM resultsCounts WHERE analyzer in '.$this->themesList);
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
             
             $this->analyzers[$analyzer->getDescription()->getName()] = $analyzer;
@@ -100,7 +100,7 @@ class ZendFramework extends Devoops {
         // Files
         $files = array();
         $res = $this->sqlite->query('SELECT DISTINCT file FROM results ORDER BY file');
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $files[$row['file']] = 'OneFile';
         }
         $files = array_merge(array('Files Counts' => 'FilesResultsCounts'), $files);

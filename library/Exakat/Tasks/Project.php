@@ -218,9 +218,19 @@ class Project extends Tasks {
         $res = shell_exec('du -sh '.$this->config->neo4j_folder.' 2>/dev/null');
         $neo4jSize = trim(str_replace(basename($this->config->neo4j_folder), '', $res));
 
+        $query = "g.V().count()";
+        $res = $this->gremlin->query($query);
+        $nodes = $res->results[0];
+        $query = "g.E().count()";
+        $res = $this->gremlin->query($query);
+        $links = $res->results[0];
+        
+
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                                'audit_length' => $audit_end - $audit_start,
-                                               'neo4jSize'    => $neo4jSize));
+                                               'neo4jSize'    => $neo4jSize,
+                                               'graphNodes'   => $nodes,
+                                               'graphLinks'   => $links));
                                                
         $query = <<<GREMLIN
 g.V().where( __.sideEffect{x = []; }.in('ANALYZED').sideEffect{ x.add(it.get().value('analyzer')); }.barrier().sideEffect{ y = x.groupBy().findAll{ i,j -> j.size() > 1;};} )

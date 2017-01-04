@@ -39,9 +39,9 @@ class Doctor extends Tasks {
     public function run() {
         $stats = array();
 
-        $stats = array_merge($stats, $this->checkPreRequisite($this->config));
-        $stats = array_merge($stats, $this->checkAutoInstall($this->config));
-        $stats = array_merge($stats, $this->checkOptional($this->config));
+        $stats = array_merge($stats, $this->checkPreRequisite());
+        $stats = array_merge($stats, $this->checkAutoInstall());
+        $stats = array_merge($stats, $this->checkOptional());
 
         $doctor = '';
         foreach($stats as $section => $details) {

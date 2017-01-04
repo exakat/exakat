@@ -96,7 +96,7 @@ class Datastore {
             $res = self::$sqliteRead->query($query);
             
             $cols = array();
-            while($row = $res->fetchArray()) {
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 if ($row['name'] == 'id') { continue; }
                 $cols[] = $row['name'];
             }
@@ -140,7 +140,7 @@ class Datastore {
             $res = self::$sqliteRead->query($query);
             
             $cols = array();
-            while($row = $res->fetchArray()) {
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 if ($row['name'] == 'id') { continue; }
                 $cols[] = $row['name'];
             }

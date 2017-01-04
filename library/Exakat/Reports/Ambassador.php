@@ -1178,10 +1178,6 @@ JAVASCRIPT;
         return $html;
     }
 
-    /**
-     * Get Issues Breakdown
-     *
-     */
     public function getIssuesBreakdown() {
         $receipt = array('Code Smells'  => 'Analyze',
                          'Dead Code'    => 'Dead code',
@@ -1218,19 +1214,16 @@ JAVASCRIPT;
         }
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
-            $html .= '<div class="clearfix">
+            $issuesHtml .= '<div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>';
         }
 
-        return array('html' => $issuesHtml, 'script' => $dataScript);
+        return array('html'  => $issuesHtml, 
+                    'script' => $dataScript);
     }
 
-    /**
-     * Severity Breakdown
-     *
-     */
     public function getSeverityBreakdown() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1244,7 +1237,7 @@ JAVASCRIPT;
 SQL;
         $result = $this->sqlite->query($query);
         $data = array();
-        while ($row = $result->fetchArray()) {
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $data[] = array('label' => $row['severity'], 
                             'value' => $row['number']);
         }
@@ -1436,8 +1429,9 @@ SQL;
         }
         $result = $this->sqlite->query($query);
         $data = array();
-        while ($row = $result->fetchArray()) {
-            $data[] = array('file' => $row['file'], 'value' => $row['number']);
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+            $data[] = array('file'  => $row['file'], 
+                            'value' => $row['number']);
         }
 
         return $data;
@@ -1520,7 +1514,8 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'], 'value' => $row['number']);
+            $data[] = array('analyzer' => $row['analyzer'], 
+                            'value'    => $row['number']);
         }
 
         return $data;
@@ -1542,9 +1537,10 @@ SQL;
                     LIMIT " . self::TOPLIMIT;
         $result = $this->sqlite->query($query);
         $data = array();
-        while ($row = $result->fetchArray()) {
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
-            $data[] = array('label' => $analyzer->getDescription()->getName(), 'value' => $row['number']);
+            $data[] = array('label' => $analyzer->getDescription()->getName(), 
+                            'value' => $row['number']);
         }
 
         $html = '';
@@ -1868,7 +1864,7 @@ SQL;
         $this->putBasedPage('ext_lib', $html);
     }
 
-    protected function generateBugfixes() {
+    protected function generateBugFixes() {
         $table = '';
 
         $data = new Methods();
@@ -1879,7 +1875,7 @@ SQL;
         $info = array();
 
         $rows = array();
-        while($row = $found->fetchArray()) {
+        while($row = $found->fetchArray(\SQLITE3_ASSOC)) {
             $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
         }
         
@@ -1979,13 +1975,12 @@ SQL;
         
         $info[] = array('Exakat version', Exakat::VERSION . ' ( Build '. Exakat::BUILD . ') ');
 
-        
         foreach($info as &$row) {
             $row = '<tr><td>'.implode('</td><td>', $row).'</td></tr>';
         }
         unset($row);
         
-        $settings = join("", $info);
+        $settings = join('', $info);
 
         $html = $this->getBasedPage('annex_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
@@ -1996,7 +1991,7 @@ SQL;
         $errorMessages = '';
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $errorMessages .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
@@ -2077,7 +2072,7 @@ SQL
         $dynamicCode = '';
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $dynamicCode .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
@@ -2089,7 +2084,7 @@ SQL
     private function generateGlobals() {
         $theGlobals = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $theGlobals .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
@@ -2121,7 +2116,7 @@ SQL
 
             $theTable = '';
             $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
-            while($row = $res->fetchArray()) {
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $theTable .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
             }
 
@@ -2136,7 +2131,7 @@ SQL
     private function generateAlteredDirectives() {
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $alteredDirectives .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
         
