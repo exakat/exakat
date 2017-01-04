@@ -380,7 +380,7 @@ GREMLIN;
 g.V().hasLabel("Functioncall")
      .where( __.in("METHOD").count().is(eq(0)))
      .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY'))
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_OPEN_BRACKET'))
      .filter{ it.get().value("fullnspath") in arg1}
      .where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant")).count().is(eq(0)) )
     .sideEffect{ it.get().property("constant", true);}
