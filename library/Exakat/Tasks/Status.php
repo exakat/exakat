@@ -45,7 +45,7 @@ class Status extends Tasks {
                 } 
                 
                 $log = file_get_contents($this->config->neo4j_folder.'/data/log/console.log');
-                if (strpos($log, 'java.lang.OutOfMemoryError: Java heap space2') !== false ) {
+                if (strpos($log, 'java.lang.OutOfMemoryError: Java heap space') !== false ) {
                     $pid = trim(file_get_contents($this->config->neo4j_folder.'/data/neo4j-service.pid'));
                     $projectStatus = 'Neo4j died : Java heap space. Kill neo4j ('.$pid.') and run exakat again.';
                     
@@ -132,9 +132,6 @@ class Status extends Tasks {
         }
         
         
-
-        $this->configuration = array();
-        // 
 
         // Check the logs
         $errors = $this->getErrors($path);
