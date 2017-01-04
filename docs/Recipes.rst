@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 19 Dec 2016 18:13:23 +0000
-.. comment: Generation hash : b201e9b80c75bdf322a771437ccafd3055daa406
+.. comment: Generation date : Wed, 04 Jan 2017 10:43:27 +0000
+.. comment: Generation hash : 08cc7b4fec5accc115827eab236a46e557a20108
 
 
 .. _analyze:
@@ -358,7 +358,7 @@ Total : 282 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 19 analysis
+Total : 18 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -368,7 +368,6 @@ Total : 19 analysis
 * :ref:`Curly Arrays <curly-arrays>`
 * :ref:`Echo Or Print <echo-or-print>`
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
-* :ref:`Inconsistant Closing Tag <inconsistant-closing-tag>`
 * :ref:`Interpolation`
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
 * :ref:`No Plus One <no-plus-one>`
@@ -740,7 +739,7 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 20 analysis
+Total : 21 analysis
 
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
@@ -758,6 +757,7 @@ Total : 20 analysis
 * :ref:`Performances/AvoidArrayPush`
 * :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
+* :ref:`Should Use Function Use <should-use-function-use>`
 * :ref:`Simplify Regex <simplify-regex>`
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`Use Class Operator <use-class-operator>`
