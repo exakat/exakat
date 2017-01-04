@@ -33,6 +33,6 @@ Nowdoc wrongfully spread over 2 statement (part b)
 
 NOWDOC2");
 
-$expected_not = array();
+$expected_not = array("'twgfr ddde wrere$'");
 
 ?>
