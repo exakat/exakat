@@ -6,8 +6,8 @@ $expected     = array( '\'b\'',
                        '1', 
                        '2', 
                        '3',
-                       'f',
-                       'f2');
+                       '\'f\'',
+                       '\'f2\'');
 
 $expected_not = array("'notIndex'");
 
