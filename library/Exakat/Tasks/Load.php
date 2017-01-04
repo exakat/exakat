@@ -2147,6 +2147,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             ++$this->id;
             $blockId = $this->processBlock(false);
+            $this->setAtom($blockId, array('bracket' => true));
         } elseif ($this->tokens[$this->id + 1][0] === T_COLON) {
             $this->startSequence();
             $blockId = $this->sequence;
@@ -2156,6 +2157,7 @@ class Load extends Tasks {
                 $this->processNext();
             };
 
+            $this->setAtom($blockId, array('bracket' => false));
             $this->pushExpression($this->sequence);
             $this->endSequence();
 
@@ -2167,6 +2169,7 @@ class Load extends Tasks {
             $voidId = $this->addAtomVoid();
             $this->addToSequence($voidId);
             $this->endSequence();
+            $this->setAtom($blockId, array('bracket' => false));
             $this->pushExpression($blockId);
             ++$this->id;
 
@@ -2179,6 +2182,7 @@ class Load extends Tasks {
             $this->addToSequence($voidId);
             $this->endSequence();
 
+            $this->setAtom($blockId, array('bracket' => false));
             $this->pushExpression($blockId);
 
         } else {
@@ -2205,7 +2209,8 @@ class Load extends Tasks {
             if (!in_array($this->tokens[$current + 1][0], $specials)) {
                 ++$this->id;
             }
-            
+
+            $this->setAtom($blockId, array('bracket' => false));
             $this->pushExpression($blockId);
         }
         
