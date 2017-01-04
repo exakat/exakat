@@ -1,4 +1,4 @@
-Version 0.9.5 (Immortal Ziyang, Coming up)
+Version 0.9.5 (Spider Demons, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 0.9.5 (Immortal Ziyang, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.9.5 (Immortal Ziyang, Coming up)
++ Architecture
+    + Better check of PHP version 
++ Report
+    + Ambassador : report analyzer settings
+    + PHP Compilations : supports all extensions
+    + New report : Inventories
++ Analyzer
+    + New analyzer : Don't Use Fallback to Global space
+    + New analyzer : MongoDB (ext/mongo version 3)
+    + New analyzer : zbarcode 
+    + Bug : Fixed intval for octals in Arrays/MultipleIdenticalKeys
+    + Removed analyzer : Php/InconsistantClosingTag (double)
++ Tokenizer
+    + Ranking arguments, not functioncall
 
 Version 0.9.4 (Lady of Jinsheng Palace, 2016-12-19)
 + Architecture
