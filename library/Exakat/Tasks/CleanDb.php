@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -47,7 +47,7 @@ GREMLIN;
         $result = null;
         $counts = 0;
         
-        while($counts < 100 && (!is_object($result) || $result->results === null)) {
+        while($counts < 100 && (!$result instanceof \Stdclass || $result->results === null)) {
             $result = $this->gremlin->query($queryTemplate);
             ++$counts;
             usleep(100000);
@@ -100,8 +100,8 @@ GREMLIN;
     }
 
     private function cleanTmpDir() {
-        rmdirRecursive($this->config->projects_root.'/projects/.exakat/');
-        mkdir($this->config->projects_root.'/projects/.exakat/');
+//        rmdirRecursive($this->config->projects_root.'/projects/.exakat/');
+//        mkdir($this->config->projects_root.'/projects/.exakat/');
     }
     
     private function restartNeo4j() {

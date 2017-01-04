@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -36,12 +36,16 @@ class IndirectInjection extends Analyzer {
 
         // Relayed via variable to sensitive function
         // $a = $_GET['a']; f($a); function f($a) { exec($a);}
-        $this->atomIs('Variable')
-             ->codeIs($vars, true)
-             ->_as('result')
+        $this->atomIs('Functioncall')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
+             ->_as('result')
+             ->outIsIE('VARIABLE')
+             ->atomIs('Variable')
+             ->codeIs($vars, true)
+             ->back('first')
+
              ->functionDefinition()
              ->inIs('NAME')
 

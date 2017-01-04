@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -28,8 +28,18 @@ use Exakat\Analyzer\Analyzer;
 class Arrayindex extends Analyzer {
 
     public function analyze() {
+        // $a[1]
         $this->atomIs('Array')
              ->outIs('INDEX');
+        $this->prepareQuery();
+
+        // list( 'a' => 2) = ['b' => 2];
+        $this->atomFunctionIs(array('\\list', '\\array'))
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Keyvalue')
+             ->outIs('KEY')
+             ->atomIs(self::$LITERALS);
         $this->prepareQuery();
     }
 }

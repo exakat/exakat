@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -123,6 +123,28 @@ function rglob($pattern, $flags = 0) {
     }
 
     return call_user_func_array('array_merge', $subdirs);
+}
+
+function duration($seconds) {
+    if ($seconds < 60) {
+        return $seconds.' s';
+    }
+    
+    $minuts = floor($seconds / 60);
+    $seconds %= 60;
+    if ($minuts < 60) {
+        return $minuts.' min '.$seconds.' s';
+    }
+
+    $hours = floor($minuts / 60);
+    $minuts %= 60;
+    if ($minutes < 24 ) {
+        return $hours. ' h '.$minuts.' min '.$seconds.' s';
+    }
+
+    $days = floor($hours / 24);
+    $hours %= 24;
+    return $days.' d '.$hours. ' h '.$minuts.' min '.$seconds.' s';
 }
 
 

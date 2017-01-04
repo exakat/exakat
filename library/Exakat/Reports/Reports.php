@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -29,7 +29,8 @@ use Exakat\Datastore;
 abstract class Reports {
     const FILE_EXTENSION = 'undefined';
     static public $FORMATS        = array('Clustergrammer', 'Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
-                                          'Text', 'Xml', 'Uml', 'ZendFramework', 'Ambassador', 'PhpConfiguration', 'RadwellCode');
+                                          'Text', 'Xml', 'Uml', 'ZendFramework', 'Ambassador', 'PhpConfiguration', 'RadwellCode',
+                                          'Inventories' );
 
     private $count = 0;
 
@@ -63,3 +64,5 @@ abstract class Reports {
         return $this->count;
     }
 }
+
+?>

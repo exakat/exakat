@@ -1,7 +1,7 @@
-.. Contribute:
+.. Annex:
 
-Summary
-=======
+Annex
+=====
 
 * Supported PHP Extensions
 * Supported Frameworks
@@ -81,6 +81,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/mhash
 * ext/ming
 * ext/mongo
+* Ext/mongodb
 * ext/mssql
 * ext/mysql
 * ext/mysqli
@@ -142,6 +143,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/xsl
 * ext/yaml
 * ext/yis
+* ext/zbarcode
 * ext/zip
 * ext/zlib
 * ext/0mq
@@ -209,6 +211,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. 
 
 
+* 0.9.5
+  * Ext/mongodb (Extensions/Extmongodb)
+  * Should Use Function Use (Php/ShouldUseFunction)
+  * ext/zbarcode (Extensions/Extzbarcode)
 * 0.9.4
   * Class Should Be Final By Ocramius (Classes/FinalByOcramius)
   * String (Extensions/Extstring)
@@ -482,7 +488,6 @@ List of analyzers, by version of introduction, newest to oldest.
   * Implicit Global (Structures/ImplicitGlobal)
   * Inclusions (Structures/IncludeUsage)
   * Incompilable Files (Php/Incompilable)
-  * Inconsistant Closing Tag (Php/InconsistantClosingTag)
   * Inconsistent Concatenation (Structures/InconsistentConcatenation)
   * Indices Are Int Or String (Structures/IndicesAreIntOrString)
   * Indirect Injection (Security/IndirectInjection)
@@ -989,4 +994,57 @@ List of analyzers, by version of introduction, newest to oldest.
   * Variable Global (Structures/VariableGlobal)
 
 
+
+External services
+-----------------
+
+List of external services whose configuration files has been commited in the code.
+
+* [Apache](http://www.apache.org/) - .htaccess
+* [Apple](http://www.apple.com/) - .DS_Store
+* [appveyor](http://www.appveyor.com/) - appveyor.yml
+* [ant](https://ant.apache.org/) - build.xml
+* [artisan](http://laravel.com/docs/5.1/artisan) - artisan
+* [atoum](http://atoum.org/) - .bootstrap.atoum.php,.atoum.php
+* [arcanist](https://secure.phabricator.com/book/phabricator/article/arcanist_lint/) - .arclint, .arcconfig
+* [box2](https://github.com/box-project/box2) - box.json
+* [behat](http://docs.behat.org/en/v2.5/) - behat.yml.dist
+* [bower](http://bower.io/) - bower.json, .bowerrc
+* [bazaar](http://bazaar.canonical.com/en/) - .bzr
+* [circleCI](https://circleci.com/) - circle.yml
+* [codeception](http://codeception.com/) - codeception.yml
+* [codeclimate](http://www.codeclimate.com/) - .codeclimate.yml
+* [composer](https://getcomposer.org/) - composer.json, composer.lock
+* [couscous](http://couscous.io/) - couscous.yml
+* [Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) - .php_cs
+* [coveralls](https://coveralls.zendesk.com/) - .coveralls.yml
+* [eslint](http://eslint.org/) - .eslintrc
+* [git](https://git-scm.com/) - .git, .gitignore, .gitattributes, .gitmodules
+* [gulpfile](http://gulpjs.com/) - .js
+* [gush](https://github.com/gushphp/gush) - .gush.yml
+* [mercurial](https://www.mercurial-scm.org/) - .hg, .hgtags
+* [insight](https://insight.sensiolabs.com/) - .sensiolabs.yml
+* [jshint](http://jshint.com/) - .jshintrc
+* [npm](https://www.npmjs.com/) - package.json
+* [phan](https://github.com/etsy/phan) - .phan
+* [pharcc](https://github.com/cbednarski/pharcc) - .pharcc.yml
+* [phpformatter](https://github.com/mmoreram/php-formatter) - .formatter.yml
+* [phpmetrics](http://www.phpmetrics.org/) - .phpmetrics.yml.dist
+* [phpsa](https://github.com/ovr/phpsa) - .phpsa.yml
+* [phpspec](http://www.phpspec.net/en/latest/) - phpspec.yml
+* [phpstan](https://github.com/phpstan) - phpstan.neon
+* [phpswitch](https://github.com/jubianchi/phpswitch) - .phpswitch.yml
+* [phpunit](https://phpunit.de/) - phpunit.xml.dist
+* [robo](https://robo.li/) - RoboFile.php
+* [scrutinizer](https://scrutinizer-ci.com/) - .scrutinizer.yml
+* [semantic versioning](http://semver.org/) - .semver
+* [spip](http://www.spip.net/) - paquet.xml
+* [storyplayer](https://datasift.github.io/storyplayer/) - storyplayer.json.dist
+* [styleci](https://styleci.io/) - .styleci.yml
+* [sublimelinter](http://www.sublimelinter.com/en/latest/) - .csslintrc
+* [svn](https://subversion.apache.org/) - svn.revision, .svn
+* [Robots.txt](http://www.robotstxt.org/) - robots.txt
+* [travis](https://travis-ci.org/) - .travis.yml
+* [Vagrant](https://www.vagrantup.com/) - Vagrantfile
+* [Zend_Tool](https://framework.zend.com/) - zfproject.xml
 

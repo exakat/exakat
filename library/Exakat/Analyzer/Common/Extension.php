@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -121,6 +121,7 @@ class Extension extends Analyzer {
 
             $traits = $this->makeFullNsPath($ini['traits']);
             $this->analyzerIs('Traits/TraitUsage')
+                 ->outIs('USE')
                  ->fullnspathIs($traits);
             $this->prepareQuery();
         }

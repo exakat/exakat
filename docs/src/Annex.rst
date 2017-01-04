@@ -1,7 +1,7 @@
-.. Contribute:
+.. Annex:
 
-Summary
-=======
+Annex
+=====
 
 * Supported PHP Extensions
 * Supported Frameworks
@@ -44,4 +44,11 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. 
 
 {{ANALYZER_INTRODUCTION}}
+
+External services
+-----------------
+
+List of external services whose configuration files has been commited in the code.
+
+{{EXTERNAL_SERVICES_LIST}}
 

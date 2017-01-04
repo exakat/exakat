@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -29,7 +29,8 @@ class LoopCalling extends Analyzer {
     public function analyze() {
         // loop of 2
         $this->atomIs('Function')
-             ->hasNoClassTrait()
+             ->hasNoClassInterfaceTrait()
+             ->hasName()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
@@ -50,7 +51,8 @@ class LoopCalling extends Analyzer {
 
         // loop of 3
         $this->atomIs('Function')
-             ->hasNoClassTrait()
+             ->hasNoClassInterfaceTrait()
+             ->hasName()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
@@ -78,7 +80,8 @@ class LoopCalling extends Analyzer {
 
         // loop of 4
         $this->atomIs('Function')
-             ->hasNoClassTrait()
+             ->hasNoClassInterfaceTrait()
+             ->hasName()
              ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')

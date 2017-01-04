@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -25,6 +25,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
+use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Tokenizer\Token;
 
 class Results extends Tasks {
@@ -34,19 +35,13 @@ class Results extends Tasks {
         $analyzer = $this->config->program;
 
         if (empty($analyzer)) {
-            die('Provide the analyzer with the option -P X/Y. Aborting'."\n");
+            throw new NeedsAnalyzer();
         }
         
         $analyzerClass = Analyzer::getClass($analyzer);
 
         if ($analyzerClass === false) {
-            $die = "'$analyzer' doesn't exist. Aborting\n";
-    
-            $r = Analyzer::getSuggestionClass($analyzer);
-            if (count($r) > 0) {
-                $die .= 'Did you mean : '.implode(', ', str_replace('_', '/', $r))."\n";
-            }
-            die($die);
+            throw new NoSuchAnalyzer($analyzer);
         }
 
         $analyzer = Analyzer::getName($analyzerClass);

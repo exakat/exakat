@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -29,7 +29,8 @@ class Classnames extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('NAME');
+             ->outIs('NAME')
+             ->atomIsNot('Void');
         $this->prepareQuery();
     }
 }

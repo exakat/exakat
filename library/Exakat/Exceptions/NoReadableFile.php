@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -21,27 +21,11 @@
 */
 
 
-namespace Exakat\Tasks;
+namespace Exakat\Exceptions;
 
-use Exakat\Analyzer\Analyzer;
-use Exakat\Config;
-
-class OnepageReport extends Tasks {
-    const CONCURENCE = self::ANYTIME;
-    
-    public function run() {
-        $result = new \Stdclass();
-        $analyzers = Analyzer::getThemeAnalyzers('OneFile');
-        
-        foreach($analyzers as $analyzer) {
-            $a = Analyzer::getInstance($analyzer);
-            $results = $a->getArray();
-            if (!empty($results)) {
-                $result->{$a->getDescription()->getName()} = $results;
-            }
-        }
-
-        file_put_contents($this->config->projects_root.'/projects/'.$project.'/onepage.json', json_encode($result));
+class NoReadableFile extends \RuntimeException {
+    public function __construct($filename = '', $code = 0, \Exception $previous = null) {
+        parent::__construct('File "'.$filename."\" is not readeable.\n", $code, $previous);
     }
 }
 

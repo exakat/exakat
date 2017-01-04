@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -74,8 +74,9 @@ abstract class Analyzer {
     
     const PHP_VERSION_ANY = 'Any';
 
-    static public $CONTAINERS = array('Variable', 'Staticproperty', 'Property', 'Array');
-    static public $LITERALS   = array('Integer', 'Real', 'Null', 'Boolean', 'String');
+    static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Property', 'Array');
+    static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
+    static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -504,7 +505,8 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     public function functioncallIs($fullnspath) {
         $this->atomIs('Functioncall')
              ->hasNoIn(array('METHOD', 'NEW'))
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET'))
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))')
+             ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($this->makeFullNsPath($fullnspath));
 
         return $this;
@@ -809,24 +811,6 @@ GREMLIN
     public function groupCount($column) {
         $this->addMethod("groupCount(m){it.$column}");
         
-        return $this;
-    }
-
-    public function eachCounted($variable, $times, $comp = '==') {
-        $this->addMethod(<<<GREMLIN
-groupCount("m").by{$variable}
-GREMLIN
-);
-
-/*
-//groupCount('counts').by(label).cap('a').map{ it.get().findAll{ it.value > 2}; }
-groupCount('counts').by(
-
-{{$variable}}{it}.iterate();
-
-// This is plugged into each{}
-m.findAll{ it.value.size() $comp $times}.values().flatten().each{ n.add(it); }
-*/
         return $this;
     }
 

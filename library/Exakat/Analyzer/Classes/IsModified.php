@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -46,18 +46,21 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // arguments : reference variable in a custom function
-        $this->atomIs($atoms)
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->hasNoIn('METHOD') // possibly new too
+        $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->hasNoIn('METHOD') // possibly new too
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs($atoms)
+             ->savePropertyAs('rank', 'rank')
+             ->_as('results')
+             ->back('first')
              ->functionDefinition()
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', true)
              ->is('reference', true)
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
 
         // PHP functions that are references
@@ -75,28 +78,25 @@ class IsModified extends Analyzer {
         }
         
         foreach($references as $position => $functions) {
-            $this->atomIs($atoms)
-                 ->inIsIE('VARIABLE')
+            $this->atomFunctionIs($functions)
+                 ->outIs('ARGUMENTS')
+                 ->outIs('ARGUMENT')
                  ->is('rank', $position)
-                 ->inIs('ARGUMENT')
-                 ->inIs('ARGUMENTS')
-                 ->hasNoIn('METHOD') // possibly new too
-                 ->atomIs('Functioncall')
-                 ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_UNSET'))
-                 ->fullnspathIs($functions)
-                 ->back('first');
+                 ->atomIs($atoms);
             $this->prepareQuery();
         }
 
         // Class constructors (__construct)
-        $this->atomIs($atoms)
-             ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->hasNoIn('METHOD') // possibly new too
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIs('Functioncall')
+        $this->atomIs('Functioncall')
              ->hasIn('NEW')
+             ->hasNoIn('METHOD')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs($atoms)
+             ->savePropertyAs('rank', 'rank')
+             ->_as('results')
+             ->back('first')
              ->classDefinition()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -105,7 +105,7 @@ class IsModified extends Analyzer {
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
              ->is('reference', true)
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
     }
 }

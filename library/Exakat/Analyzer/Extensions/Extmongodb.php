@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -21,16 +21,18 @@
 */
 
 
-namespace Exakat\Analyzer\Php;
+namespace Exakat\Analyzer\Extensions;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\Extension;
 
-class InconsistantClosingTag extends Analyzer {
+class Extmongodb extends Extension {
+    public $phpVersion = '7.0+';
+    
     public function analyze() {
-        $this->atomIs('Phpcode')
-             ->is('root', true)
-             ->groupFilter("if (it.closing_tag == true) { x2 = 'closed'; } else { x2 = 'not_closed'; } ", 0.1);
-        $this->prepareQuery();
+        $this->source = 'mongodb.ini';
+        
+        parent::analyze();
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -380,8 +380,6 @@ INI;
     }
     
     private function checkPHP($configVersion, $displayedVersion) {
-        $phpname = 'PHP '.$displayedVersion;
-        
         $stats = array();
         if (!$configVersion) {
             $stats['configured'] = 'No';

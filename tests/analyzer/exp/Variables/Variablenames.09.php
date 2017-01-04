@@ -8,6 +8,6 @@ $expected     = array('$a',
                       '$g',
                       '$i');
 
-$expected_not = array();
+$expected_not = array('$aFoo');
 
 ?>

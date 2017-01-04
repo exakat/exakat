@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -80,7 +80,8 @@ class Ambassador extends Reports {
             $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
             $title = ($file == 'index') ? 'Dashboard' : $file;
 
-            $baseHTML = $this->injectBloc($baseHTML, 'TITLE', $title);
+            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
+            $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
@@ -94,7 +95,7 @@ class Ambassador extends Reports {
         }
 
         $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
-        $combinePageHTML = $this->injectBloc($baseHTML, "BLOC-MAIN", $subPageHTML);
+        $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
     }
@@ -103,6 +104,8 @@ class Ambassador extends Reports {
         if (strpos($html, '{{BLOC-JS}}') !== false) {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
+        $html = str_replace('{{TITLE}}', 'PHP Static analysis for '.$this->config->project, $html);
+        
         file_put_contents($this->tmpName . '/datas/'.$file.'.html', $html);
     }
 
@@ -150,6 +153,7 @@ class Ambassador extends Reports {
         $this->generateInventories();
         
         // Annex
+        $this->generateAnalyzerSettings();
         $this->generateDocumentation();
         $this->generateCodes();  
 
@@ -224,8 +228,8 @@ class Ambassador extends Reports {
 
             for ($i=$startLine; $i < $endLine+1 ; $i++) {
                 $lines[]= array(
-                            "line"=>$i+1,
-                            "code"=>$fileLines[$i]
+                            'line' => $i + 1,
+                            'code' => $fileLines[$i]
                     );
             }
         }
@@ -240,7 +244,7 @@ class Ambassador extends Reports {
 
     private function generateDocumentation(){
         $datas = array();
-        $baseHTML = $this->getBasedPage("analyzers_doc");
+        $baseHTML = $this->getBasedPage('analyzers_doc');
         $analyzersDocHTML = "";
 
         foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
@@ -273,8 +277,9 @@ class Ambassador extends Reports {
                 $analyzersDocHTML.='<p>This rule is named <a target="_blank" href="https://github.com/dseguy/clearPHP/blob/master/rules/'.$description->getClearPHP().'.md">'.$description->getClearPHP().'</a>, in the clearPHP reference.</p>';
             }
         }
-        $finalHTML = $this->injectBloc($baseHTML, "BLOC-ANALYZERS", $analyzersDocHTML);
-        $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/highlight.pack.js"></script>');
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyzersDocHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/highlight.pack.js"></script>');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
 
         $this->putBasedPage('analyzers_doc', $finalHTML);
     }
@@ -569,8 +574,9 @@ JAVASCRIPT;
 JAVASCRIPT;
         $html = '<div class="row">'.implode("\n", $html).'</div>';
 
-        $baseHTML = $this->injectBloc($baseHTML, "FAVORITES", $html);
-        $baseHTML = $this->injectBloc($baseHTML, "BLOC-JS", $donut);
+        $baseHTML = $this->injectBloc($baseHTML, 'FAVORITES', $html);
+        $baseHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $donut);
+        $baseHTML = $this->injectBloc($baseHTML, 'TITLE', 'Favorites\' dashboard');
         $this->putBasedPage('favorites_dashboard', $baseHTML);
 
         $baseHTML = $this->getBasedPage('favorites_issues');
@@ -634,6 +640,7 @@ JAVASCRIPT;
 JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
+        $baseHTML = $this->injectBloc($baseHTML, 'TITLE', 'Favorites\' issues');
         $this->putBasedPage('favorites_issues', $finalHTML);
     }
 
@@ -645,25 +652,25 @@ JAVASCRIPT;
 
         // Bloc top left
         $hashData = $this->getHashData();
-        $finalHTML = $this->injectBloc($baseHTML, "BLOCHASHDATA", $hashData);
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOCHASHDATA', $hashData);
 
         // bloc Issues
         $issues = $this->getIssuesBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, "BLOCISSUES", $issues['html']);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
         $tags[] = 'SCRIPTISSUES';
         $code[] = $issues['script'];
 
         // bloc severity
         $severity = $this->getSeverityBreakdown();
-        $finalHTML = $this->injectBloc($finalHTML, "BLOCSEVERITY", $severity['html']);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOCSEVERITY', $severity['html']);
         $tags[] = 'SCRIPTSEVERITY';
         $code[] = $severity['script'];
 
         // top 10
         $fileHTML = $this->getTopFile();
-        $finalHTML = $this->injectBloc($finalHTML, "TOPFILE", $fileHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
         $analyzerHTML = $this->getTopAnalyzers();
-        $finalHTML = $this->injectBloc($finalHTML, "TOPANALYZER", $analyzerHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
         
         $blocjs = <<<JAVASCRIPT
   <script>
@@ -917,8 +924,8 @@ JAVASCRIPT;
         $code[] = $analyzerOverview['scriptDataAnalyzerMinor'];
 
         $blocjs = str_replace($tags, $code, $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS",  $blocjs);
-
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' dashboard');
         $this->putBasedPage('index', $finalHTML);
     }
     
@@ -948,7 +955,7 @@ SQL
                   </div>';
         }
 
-        $finalHTML = $this->injectBloc($finalHTML, "TOPFILE", $html);
+        $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
         
         $blocjs = <<<JAVASCRIPT
   <script>
@@ -1092,7 +1099,8 @@ JAVASCRIPT;
         $code[] = implode(', ', $xAxis);
         
         $blocjs = str_replace($tags, $code, $blocjs);
-        $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS",  $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Extensions\' list');
 
         $this->putBasedPage('extension_list', $finalHTML);
     }
@@ -1287,21 +1295,21 @@ SQL;
     private function generateAnalyzers() {
         $analysers = $this->getAnalyzersResultsCounts();
 
-        $baseHTML = $this->getBasedPage("analyzers");
+        $baseHTML = $this->getBasedPage('analyzers');
         $analyserHTML = '';
 
         foreach ($analysers as $analyser) {
             $analyserHTML.= "<tr>";
-            $analyserHTML.='<td>' . $analyser["label"] . '</td>
-                        <td>' . $analyser["recipes"] . '</td>
-                        <td>' . $analyser["issues"] . '</td>
-                        <td>' . $analyser["files"] . '</td>
-                        <td>' . $analyser["severity"] . '</td>';
+            $analyserHTML.='<td>' . $analyser['label'] . '</td>
+                        <td>' . $analyser['recipes'] . '</td>
+                        <td>' . $analyser['issues'] . '</td>
+                        <td>' . $analyser['files'] . '</td>
+                        <td>' . $analyser['severity'] . '</td>';
             $analyserHTML.= "</tr>";
         }
 
-        $finalHTML = $this->injectBloc($baseHTML, "BLOC-ANALYZERS", $analyserHTML);
-        $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/datatables.js"></script>');
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-ANALYZERS', $analyserHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
 
         $this->putBasedPage('analyzers', $finalHTML);
     }
@@ -1348,26 +1356,24 @@ SQL;
         return $row['number'];
     }
 
-    /**
-     * generate the content of liste files
-     */
     private function generateFiles() {
         $files = $this->getFilesResultsCounts();
 
-        $baseHTML = $this->getBasedPage("files");
+        $baseHTML = $this->getBasedPage('files');
         $filesHTML = '';
 
         foreach ($files as $file) {
             $filesHTML.= "<tr>";
-            $filesHTML.='<td>' . $file["file"] . '</td>
-                        <td>' . $file["loc"] . '</td>
-                        <td>' . $file["issues"] . '</td>
-                        <td>' . $file["analyzers"] . '</td>';
+            $filesHTML.='<td>' . $file['file'] . '</td>
+                        <td>' . $file['loc'] . '</td>
+                        <td>' . $file['issues'] . '</td>
+                        <td>' . $file['analyzers'] . '</td>';
             $filesHTML.= "</tr>";
         }
 
-        $finalHTML = $this->injectBloc($baseHTML, "BLOC-FILES", $filesHTML);
-        $finalHTML = $this->injectBloc($finalHTML, "BLOC-JS", '<script src="scripts/datatables.js"></script>');
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Files\' list');
 
         $this->putBasedPage('files', $finalHTML);
     }
@@ -1618,9 +1624,6 @@ SQL;
         );
     }
     
-    /**
-     * generate the content of Issues
-     */
     private function generateIssues()
     {
         $baseHTML = $this->getBasedPage('issues');
@@ -1682,6 +1685,7 @@ SQL;
 JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' list');
         $this->putBasedPage('issues', $finalHTML);
     }
 
@@ -1795,6 +1799,8 @@ SQL;
         
         $html = $this->getBasedPage('used_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
+        $html = $this->injectBloc($html, 'TITLE', 'Analyzer settings\' list');
+
         $this->putBasedPage('used_settings', $html);
     }
 
@@ -1816,6 +1822,8 @@ SQL;
         $html = $this->getBasedPage('proc_files');
         $html = $this->injectBloc($html, 'FILES', $files);
         $html = $this->injectBloc($html, 'NON-FILES', $nonFiles);
+        $html = $this->injectBloc($html, 'TITLE', 'Processed Files\' list');
+
         $this->putBasedPage('proc_files', $html);
     }
 
@@ -1831,6 +1839,8 @@ SQL;
 
         $html = $this->getBasedPage('proc_analyzers');
         $html = $this->injectBloc($html, 'ANALYZERS', $analyzers);
+        $html = $this->injectBloc($html, 'TITLE', 'Processed Analyzers\' list');
+
         $this->putBasedPage('proc_analyzers', $html);
     }
 
@@ -1853,6 +1863,8 @@ SQL;
 
         $html = $this->getBasedPage('ext_lib');
         $html = $this->injectBloc($html, 'LIBRARIES', $libraries);
+        $html = $this->injectBloc($html, 'TITLE', 'External Libraries\' list');
+
         $this->putBasedPage('ext_lib', $html);
     }
 
@@ -1922,7 +1934,62 @@ SQL;
 
         $html = $this->getBasedPage('php_compilation');
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
+        $html = $this->injectBloc($html, 'TITLE', 'PHP Configurations\' list');
+
         $this->putBasedPage('php_compilation', $html);
+    }
+
+    protected function generateAnalyzerSettings() {
+        $settings = '';
+
+        $info = array(array('Code name', $this->config->project_name));
+        if (!empty($this->config->project_description)) {
+            $info[] = array('Code description', $this->config->project_description);
+        }
+        if (!empty($this->config->project_packagist)) {
+            $info[] = array('Packagist', '<a href="https://packagist.org/packages/'.$this->config->project_packagist.'">'.$this->config->project_packagist.'</a>');
+        }
+        if (!empty($this->config->project_url)) {
+            $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
+        }
+        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
+            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
+            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
+            $info[] = array('Git URL', $r[1]);
+            
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
+            $info[] = array('Git branch', trim($res));
+
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
+            $info[] = array('Git commit', trim($res));
+        } else {
+            $info[] = array('Repository URL', 'Downloaded archive');
+        }
+
+        $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
+        $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
+        $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
+        
+        $info[] = array('Analysis execution date', date('r', $this->datastore->getHash('audit_end')));
+        $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
+        $info[] = array('Report production date', date('r', strtotime('now')));
+        
+        $php = new Phpexec($this->config->phpversion);
+        $info[] = array('PHP used', $this->config->phpversion . ' ('. $php->getActualVersion() . ')');
+        
+        $info[] = array('Exakat version', Exakat::VERSION . ' ( Build '. Exakat::BUILD . ') ');
+
+        
+        foreach($info as &$row) {
+            $row = '<tr><td>'.implode('</td><td>', $row).'</td></tr>';
+        }
+        unset($row);
+        
+        $settings = join("", $info);
+
+        $html = $this->getBasedPage('annex_settings');
+        $html = $this->injectBloc($html, 'SETTINGS', $settings);
+        $this->putBasedPage('annex_settings', $html);
     }
 
     private function generateErrorMessages() {

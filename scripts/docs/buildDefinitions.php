@@ -49,14 +49,22 @@ foreach( (array) $json as $library) {
 }
 $library_list = join("\n", $library_list);
 
+$external_services_list = array();
+$json = json_decode(file_get_contents('data/serviceConfig.json'));
+foreach( (array) $json as $name => $service) {
+    $external_services_list[] = '* ['.$name.']('.$service->homepage.') - '.implode(', ', $service->file);
+}
+$external_services_list = join("\n", $external_services_list);
+
 
 $analyzer_introduction = generateAnalyzerList();
 
 // More to come,and automate collection too
-$attributes = array('ANALYZERS_COUNT'       => $analyzer_count,
-                    'EXTENSION_LIST'        => $extension_list,
-                    'LIBRARY_LIST'          => $library_list,
-                    'ANALYZER_INTRODUCTION' => $analyzer_introduction
+$attributes = array('ANALYZERS_COUNT'        => $analyzer_count,
+                    'EXTENSION_LIST'         => $extension_list,
+                    'LIBRARY_LIST'           => $library_list,
+                    'ANALYZER_INTRODUCTION'  => $analyzer_introduction,
+                    'EXTERNAL_SERVICES_LIST' => $external_services_list,
                     );
 
 shell_exec('rm docs/*.rst');
@@ -73,21 +81,21 @@ foreach($files as $file) {
     file_put_contents(str_replace('/src/','/',$file),$rst);
 }
 
-$recipes = ["Analyze",
-            "CompatibilityPHP72",
-            "CompatibilityPHP71",
-            "CompatibilityPHP70",
-            "CompatibilityPHP56",
-            "CompatibilityPHP55",
-            "CompatibilityPHP54",
-            "CompatibilityPHP53",
-            "Analyze",
-            "Security",
-            "Performances",
-            "Dead code",
-            "Coding Conventions",
-            "Wordpress",
-            ];
+$recipes = array("Analyze",
+                 "CompatibilityPHP72",
+                 "CompatibilityPHP71",
+                 "CompatibilityPHP70",
+                 "CompatibilityPHP56",
+                 "CompatibilityPHP55",
+                 "CompatibilityPHP54",
+                 "CompatibilityPHP53",
+                 "Analyze",
+                 "Security",
+                 "Performances",
+                 "Dead code",
+                 "Coding Conventions",
+                 "Wordpress",
+                 );
 
 $text = '';
 $recipesList = '"'.join('","',$recipes).'"';
@@ -179,6 +187,7 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'header'                         => 'http://www.php.net/header',
                  'exit'                           => 'http://www.php.net/exit',
                  'die'                            => 'http://www.php.net/die',
+                 'trigger_error'                  => 'http://www.php.net/trigger_error',
 
                  'exec'                           => 'http://www.php.net/exec',
                  'eval'                           => 'http://www.php.net/eval',
@@ -254,7 +263,7 @@ $query = 'SELECT a.folder || "/" || a.name AS analyzer,GROUP_CONCAT(c.name) anal
                 WHERE c.name IN ('.$recipesList.')
                 GROUP BY a.name';
 $res = $sqlite->query($query);
-$a2themes = [];
+$a2themes = array();
 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
    $a2themes[$row['analyzer']] = explode(',',$row['analyzers']);
 }
@@ -269,7 +278,7 @@ $query = 'SELECT c.name,GROUP_CONCAT(a.folder || "/" || a.name) analyzers
                 GROUP BY c.name';
 
 $res = $sqlite->query($query);
-$analyzers = [];
+$analyzers = array();
 while($row = $res->fetchArray(SQLITE3_ASSOC)) {
     $liste = explode(',',$row['analyzers']);
     foreach($liste as &$a) {

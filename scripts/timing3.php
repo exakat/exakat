@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ $rows = glob('projects/*');
 
 $finals = [['project', 'Duree', 'Tokens', 'LoC', 'Neo4jSize']];
 foreach($rows as $row) {
-    $final = [basename($row)];
+    $final = array(basename($row));
     
     if (!is_dir($row)) { continue; }
     

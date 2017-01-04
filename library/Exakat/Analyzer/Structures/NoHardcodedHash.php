@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -33,16 +33,17 @@ class NoHardcodedHash extends Analyzer {
         // Find common hashes, based on hexadecimal and length
         foreach($algos as $size => $algo) {
             $this->atomIs('String')
-                 ->hasNoOut('T_CONCAT')
+                 ->hasNoOut('CONCAT')
                  ->regexIs('noDelimiter', '^[a-fA-Z0-9]{'.$size.'}\\$')
                  ->isNotMixedcase('noDelimiter')
                  ->noDelimiterIsNot($stopwords)
                  ->regexIsNot('noDelimiter', $regexDate);
             $this->prepareQuery();
         }
+        
         // Crypt (some salts are missing)
         $this->atomIs('String')
-             ->tokenIsNot('T_QUOTE')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^\\\\\\$(1|2a|2x|2y|5|6)\\\\\\$.+')
              ->noDelimiterIsNot($stopwords)
              ->regexIsNot('noDelimiter', $regexDate);
@@ -50,7 +51,7 @@ class NoHardcodedHash extends Analyzer {
 
         // Base64 encode
         $this->atomIs('String')
-             ->tokenIsNot('T_QUOTE')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^[a-zA-Z0-9]+={0,2}\\$')
              ->raw('filter{ it.get().value("noDelimiter").length() % 4 == 0}')
              ->isNotMixedcase('noDelimiter')

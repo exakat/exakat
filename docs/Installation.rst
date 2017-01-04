@@ -34,10 +34,44 @@ Currently, Docker installation only ships with one PHP version (7.0).
 
 * Install `Docker <http://www.docker.com/>`_
 * Start Docker
-* Pull exkat : git pull exakat/exakat
-* Run exakat : docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat version
-* Init a project : docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat init -p <project name> -R <vcs_url>
-* Run exakat : docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat project -p <project name>
+* Pull exkat : 
+
+::
+
+    git pull exakat/exakat
+
+* Run exakat : 
+
+::
+
+    docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat version
+
+* Init a project : 
+
+::
+
+    docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat init -p <project name> -R <vcs_url>
+
+* Run exakat : 
+
+::
+
+    docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat project -p <project name>
+
+You may simply run any exakat command by prefixing it with the following command : 
+
+::
+
+    docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat 
+
+
+You may also create a handy shortcut, by creating an exakat.sh script and put it in your PATH : 
+
+::
+
+    cat 'docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat $1' > /etc/local/sbin/exakat.sh
+    chmod u+x  /etc/local/sbin/exakat.sh
+    ./exakat.sh version
 
 Installation guide with Vagrant and Ansible
 -------------------------------------------
@@ -159,7 +193,7 @@ Then, in command line :
 
 
 Various versions of PHP
-+++++++++++++++++++++++++++++
++++++++++++++++++++++++
 
 You need one version of PHP (at least) to run exakat. This version needs the `curl <http://www.php.net/curl>`_, `hash <http://www.php.net/hash>`_, `Semaphore <http://php.net/manual/en/book.sem.php>`_ , `tokenizer <http://www.php.net/tokenizer>`_ and `sqlite3 <http://www.php.net/sqlite3>`_ extensions. They all are part of the core. 
 

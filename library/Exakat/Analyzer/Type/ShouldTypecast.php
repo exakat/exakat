@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -29,11 +29,7 @@ class ShouldTypecast extends Analyzer {
     public function analyze() {
         $typeCasting = array('\\intval', '\\floatval', '\\strval', '\\boolval', '\\settype');
         
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($typeCasting)
-             ->back('first');
+        $this->atomFunctionIs($typeCasting);
         $this->prepareQuery();
     }
 }

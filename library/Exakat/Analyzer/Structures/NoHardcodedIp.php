@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -28,6 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NoHardcodedIp extends Analyzer {
     public function analyze() {
         $this->atomIs('String')
+             ->hasNoOut('CONCAT')
              ->noDelimiterIsNot('127.0.0.1')
              ->regexIs('noDelimiter', '^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(:\\\\d+)?\\$');
         $this->prepareQuery();

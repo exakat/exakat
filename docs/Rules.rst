@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 19 Dec 2016 18:13:23 +0000
-.. comment: Generation hash : b201e9b80c75bdf322a771437ccafd3055daa406
+.. comment: Generation date : Wed, 04 Jan 2017 10:43:27 +0000
+.. comment: Generation hash : 08cc7b4fec5accc115827eab236a46e557a20108
 
 
 .. _$http\_raw\_post\_data:
@@ -1262,19 +1262,23 @@ When a class should be final, as explained by Ocramiux (Marco Pivetti).
 
 Full article : http://ocramius.github.io/blog/when-to-declare-classes-final/
 
-<?php
+.. code-block:: php
 
-interface i1 {
-    function i1() ;
-}
-
-final class finalClass implements i1 {
-    // public interface 
-    function i1 () {}
-    
-    // private method
-    private function a1 () {}
-}
+   <?php
+   
+   interface i1 {
+       function i1() ;
+   }
+   
+   final class finalClass implements i1 {
+       // public interface 
+       function i1 () {}
+       
+       // private method
+       private function a1 () {}
+   }
+   
+   ?>
 
 +--------------+-------------------------+
 | Command Line | Classes/FinalByOcramius |
@@ -3687,24 +3691,6 @@ Code that is incompilable with older PHP versions means that the code is breakin
 +--------------+-----------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                |
 +--------------+-----------------------------------------------------------------------------------------------+
-
-
-
-.. _inconsistant-closing-tag:
-
-Inconsistant Closing Tag
-########################
-
-
-Project usually chose between always closing a PHP script (such as &gt;?php xxx(); ?&lt;) or never closing it (&gt;?php xxx(); ). The second is recommended to avoid leaving some whitespaces at the end of the script, and, thus, leading to the infamous 'Headers already sent' error. 
-
-One way or another, if the project has a vast majority of either case, it will report the other here, so as to make things homogenous. If the project appears undecided about this issue, nothing will be reported.
-
-+--------------+------------------------------------------------+
-| Command Line | Php/InconsistantClosingTag                     |
-+--------------+------------------------------------------------+
-| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
 
 
 
@@ -7715,6 +7701,47 @@ For example, $lines = `file( <http://www.php.net/file>`_'`file <http://www.php.n
 
 
 
+.. _should-use-function-use:
+
+Should Use Function Use
+#######################
+
+
+Functioncalls that fall back to global scope should be using 'use function' or be fully namespaced. 
+
+PHP searches for functions in the local namespaces, and in case it fails, makes the same search in the global scope. Anytime a native function is referenced this way, the search (and fail) happens. This slows down the scripts.
+
+The speed bump range from 2 to 8 %, depending on the availability of functions in the local scope. The overall bump is about 1 µs per functioncall, which makes it a micro optimisation until a lot of function calls are made.
+
+Based on [Marco Pivetti tweet](https://twitter.com/Ocramius/status/811504929357660160), and [veewee](http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/) blog post.
+
+.. code-block:: php
+
+   <?php
+   
+   namespace X {
+       use function strtolower as strtolower_aliased;
+       
+       // PHP searches for strtolower in X, fails, then falls back to global scope, succeeds.
+       $a = strtolower($b);
+   
+       // PHP searches for strtolower in global scope, succeeds.
+       $a = \strtolower($b);
+   
+       // PHP searches for strtolower_aliased in global scope, succeeds.
+       $a = \strtolower_aliased($b);
+   }
+   
+   ?>
+
++--------------+-----------------------+
+| Command Line | Php/ShouldUseFunction |
++--------------+-----------------------+
+| Analyzers    | :ref:`Performances`   |
++--------------+-----------------------+
+
+
+
 .. _should-use-prepared-statement:
 
 Should Use Prepared Statement
@@ -10429,7 +10456,7 @@ Here the useless instructions that are spotted :
    
    // Comparisons in a for loop : only the last is actually used.
    for($i = 0; $j = 0; $j < 10, $i < 20; ++$j, ++$i) {
-       print $i $j\n;
+       print $i.' '.$j.PHP_EOL;
    }
    
    ?>
@@ -11611,7 +11638,23 @@ var_dump()... Usage
 ###################
 
 
-var_dump(), print_r() or var_export() are debugging functions, that should not be left in any production code. 
+var_dump(), print_r() or var_export() should not be left in any production code. They are debugging functions.
+
+.. code-block:: php
+
+   <?php
+   
+   if ($error) {
+       // Debugging usage of var_dump
+       // And major security problem 
+       var_dump($query);
+       
+       // This is OK : the $query is logged, and not displayed
+       $this->log(print_r($query, true));
+   }
+   
+   ?>
+
 
 They may be tolerated during development `time <http://www.php.net/time>`_, but must be removed so as not to have any chance to be run in production.
 

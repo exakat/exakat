@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -29,6 +29,7 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\NotProjectInGraph;
+use Exakat\Exceptions\NeedsAnalysisThema;
 use Exakat\Tokenizer\Token;
 
 class Dump extends Tasks {
@@ -76,6 +77,7 @@ class Dump extends Tasks {
             $this->getAtomCounts($sqlite);
 
             $this->collectStructures($sqlite);
+            $this->collectLiterals($sqlite);
 
             $sqlite->query('CREATE TABLE themas (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    thema STRING
@@ -129,31 +131,11 @@ SQL;
         } elseif ($this->config->program !== null) {
             $analyzer = $this->config->program;
             if (!Analyzer::getClass($analyzer)) {
-                $r = Analyzer::getSuggestionClass($analyzer);
-                if (count($r) > 0) {
-                    echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
-                }
                 throw new NoSuchAnalyzer($analyzer);
             }            
             $themes = array($analyzer);
             display('Processing one analyzer : '.$analyzer);
-        } else {
-            display('No analysis dump requested (-T <thema> | -P <Analyzer>)');
-            $this->finish();
-            return;
-        }
-
-        /*
-        $res = $sqlite->query('SELECT COUNT(*) FROM themas WHERE thema="'.$thema.'"');
-        $count = $res->fetchArray(\SQLITE3_NUM);
-        if ($count === 1) {
-            display("$thema was already run\n");
-        } else {
-            display("$thema was not already run\n");
-        }
-        die();
-        print_r($themes);
-        */
+        } 
 
         $sqlitePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
 
@@ -214,7 +196,7 @@ SQL;
         $severity = $analyzer->getSeverity( );
 
         foreach($res as $id => $result) {
-            if (!is_object($result)) {
+            if (!$result instanceof \Stdclass) {
                 $this->log->log("Object expected but not found\n".print_r($result, true)."\n");
                 continue;
             }
@@ -259,7 +241,7 @@ SQL;
         foreach(Token::$ATOMS as $atom) {
             $query = 'g.V().hasLabel("'.$atom.'").count()';
             $res = $this->gremlin->query($query);
-            if (!is_object($res) || !isset($res->results)) {
+            if (!$res instanceof \stdClass || !isset($res->results)) {
                 $this->log->log( "Couldn't run the query and get a result : \n" .
                      'Query : ' . $query . " \n".
                      print_r($res, true));
@@ -752,6 +734,60 @@ GREMLIN
             ++$total;
         }
         display("$total constants\n");
+    }
+
+    private function collectLiterals($sqlite) {
+        $types = array('Integer', 'Real', 'String', 'Heredoc', 'Array');
+        
+        foreach($types as $type) {
+            $sqlite->query('DROP TABLE IF EXISTS literal'.$type);
+            $sqlite->query('CREATE TABLE literal'.$type.' (  
+                                                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                   name STRING,
+                                                   file STRING,
+                                                   line INTEGER
+                                                 )');
+                                                 
+            $stmt = $sqlite->prepare('INSERT INTO literal'.$type.' (name, file, line) VALUES(:name, :file, :line)');
+
+            if ($type == 'Array') {
+                $filter = 'hasLabel("Functioncall").has("fullnspath", "\\\\array")';
+            } else {
+                $filter = 'hasLabel("'.$type.'")';
+            }
+            $query = <<<GREMLIN
+
+g.V().$filter.has('constant', true)
+.sideEffect{ name = it.get().value("fullcode");
+             line = it.get().value('line');
+             file='None'; 
+             }
+.until( hasLabel('Project') ).repeat( 
+    __.in()
+      .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
+       )
+.map{ 
+    x = ['name': name,
+         'file': file,
+         'line': line
+         ];
+}
+
+GREMLIN
+;
+            $res = $this->gremlin->query($query);
+            $res = $res->results;
+
+            $total = 0;
+            foreach($res as $value => $row) {
+                $stmt->bindValue(':name', $row->name, \SQLITE3_TEXT);
+                $stmt->bindValue(':file', $row->file, \SQLITE3_TEXT);
+                $stmt->bindValue(':line', $row->line, \SQLITE3_INTEGER);
+                $stmt->execute();
+                ++$total;
+            }
+            display( "literal$type : $total\n");
+        }
     }
 }
 

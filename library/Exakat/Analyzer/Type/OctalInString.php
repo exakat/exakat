@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ class OctalInString extends Analyzer {
     
     public function analyze() {
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '\\\\\\\\'.'(\\\\d{4,}|[4-9]\\\\d{2,2}|3[89]\\\\d|37[89])')
              ->back('first');
         $this->prepareQuery();

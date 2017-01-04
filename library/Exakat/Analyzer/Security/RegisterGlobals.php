@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -81,8 +81,7 @@ class RegisterGlobals extends Analyzer {
         $this->prepareQuery();
 
         // With import_request_variables
-        $this->atomIs('Functioncall')
-             ->fullnspathIs('\\import_request_variables');
+        $this->atomFunctionIs('\\import_request_variables');
         $this->prepareQuery();
         
         // Other methods?

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -47,7 +47,6 @@ class OnePage extends Tasks {
             mkdir($this->project_dir.'/code', 0755);
             shell_exec($this->config->php . ' ' . $this->config->executable . ' phploc -p onepage ');
         }
-        $this->updateProgress($progress++);
 
         // todo : check that there is indeed this project or create it.
         if (!file_exists($this->config->filename)) {
@@ -56,14 +55,13 @@ class OnePage extends Tasks {
 
         // todo : check that there is indeed this project or create it.
         if (!is_file($this->config->filename) || !is_readable($this->config->filename)) {
-            die("'{$this->config->filename}' must be a readable file. Aborting\n");
+            throw new NoReadableWFile($this->config->filename);
         }
 
         $this->cleanLogForProject('onepage');
 
         copy($this->config->filename, $this->config->projects_root.'/projects/onepage/code/onepage.php');
 
-        $this->updateProgress($progress++);
         $this->logTime('Start');
 
         $datastorePath = $this->config->projects_root.'/projects/onepage/datastore.sqlite';
@@ -81,52 +79,44 @@ class OnePage extends Tasks {
                                                ));
 
         display("Cleaning DB\n");
-        $task = new CleanDb($this->gremlin, $this->config);
+        $task = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
 
-        $this->updateProgress($progress++);
         $this->logTime('CleanDb');
 
         display("Running files\n");
-        $task = new Files($this->gremlin, $this->config);
+        $task = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
 
-        $this->updateProgress($progress++);
         $this->logTime('Files');
 
         display("Running project 'onepage'\n");
 
-        $task = new Load($this->gremlin, $this->config);
+        $task = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
 
         display("Project loaded\n");
-        $this->updateProgress($progress++);
         $this->logTime('Loading');
 
-        $task = new Analyze($this->gremlin, $this->config);
+        $task = new Analyze($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
         
         rename($this->config->projects_root.'/projects/onepage/log/analyze.log',
                $this->config->projects_root.'/projects/onepage/log/analyze.onepage.log');
 
         display("Project analyzed\n");
-        $this->updateProgress($progress++);
         $this->logTime('Analyze');
 
-        $b1 = microtime(true);
-        $task = new Dump($this->gremlin, $this->config);
+        $task = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
         display("Project dumped\n");
-        $e1 = microtime(true);
 
-        $task = new Report2($this->gremlin, $this->config);
+        $task = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
         display("Project reported\n");
         $this->logTime('Report');
-        $this->updateProgress($progress++);
 
         display("Project reported\n");
-        $this->updateProgress($progress++);
 
         // Clean code
         unlink($this->config->projects_root.'/projects/onepage/code/onepage.php');
@@ -138,18 +128,6 @@ class OnePage extends Tasks {
         $this->logTime('Final');
         display("End 2\n");
         $end = microtime(true);
-        $this->updateProgress($progress++);
-        
-        $this->logTime('Files');
-        
-        // Back to 0
-        $this->updateProgress(0);
-    }
-
-    private function updateProgress($status) {
-        $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
-        $progress->progress = number_format(100 * $status / self::TOTAL_STEPS, 0);
-        file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
     }
 
     private function logTime($step) {
@@ -157,8 +135,8 @@ class OnePage extends Tasks {
 
         if ($log === null) {
             $log = fopen($this->project_dir.'/log/project.timing.csv', 'w+');
-            fwrite($log, "Yes $step\n");
         }
+
         $end = microtime(true);
         if ($begin === null) {
             $begin = $end;

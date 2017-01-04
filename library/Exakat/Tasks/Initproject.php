@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -25,17 +25,23 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\HelperException;
+use Exakat\Project;
 
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
     public function run() {
-        $project = $this->config->project;
+        $project = new Project($this->config->project);
 
         if ($project == 'default') {
             throw new ProjectNeeded();
+        }
+        
+        if (!$project->validate()) {
+            throw new NoSuchProject($project);
         }
 
         $repositoryURL = $this->config->repository;
@@ -254,7 +260,7 @@ INI;
 
                 // Git
                 // Git is last, as it will act as a default
-                case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] == 'git') || $this->config->git === true) :
+                case ((isset($repositoryDetails['scheme']) && $repositoryDetails['scheme'] === 'git') || $this->config->git === true) :
                     $res = shell_exec('git --version');
                     if (strpos($res, 'git') === false) {
                         throw new HelperException('git');

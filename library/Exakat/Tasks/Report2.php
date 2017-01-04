@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -58,17 +58,6 @@ class Report2 extends Tasks {
         // line number => columnnumber => type, source, severity, fixable, message
 
         $dumpFile = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
-
-        $max = 20;
-        while (!file_exists($dumpFile)) {
-            display("{$this->config->project}/dump.sqlite doesn't exist yet ($max). Waiting\n");
-            sleep(rand(1,3));
-            --$max;
-            
-            if ($max == 0) {
-                die("Waited for dump.sqlite, but it never came. Try again later\n");
-            }
-        }
 
         $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
         $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);

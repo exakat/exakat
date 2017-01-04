@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -23,10 +23,28 @@
 
 namespace Exakat\Exceptions;
 
+use Exakat\Analyzer\Analyzer;
+
 class NoSuchAnalyzer extends \RuntimeException {
-    public function __construct($message = '', $code = 0, \Exception $previous = null) {
+    public function __construct($analyzer) {
+        $die = "Couldn't find '$analyzer'. Aborting\n";
         
-        parent::__construct("No such Analyzer as '$message'.\n", $code, $previous);
+        if (preg_match('#[a-z0-9_]+/[a-z0-9_]+$#i', $analyzer)) {
+            $r = Analyzer::getSuggestionClass($analyzer);
+            if (count($r) > 0) {
+                $die .= 'Did you mean : '.implode(', ', array_slice($r, 0, 5));
+                if (count($r) > 5) {
+                    $die .= " (More available)";
+                }
+                $die .= "\n";
+            } else {
+                $die .= "Couldn't find a suggestion. Check the documentation http://exakat.readthedocs.io/\n";
+            }
+        } else {
+            $die .= "Analyzers use the format Folder/Rule, for example Structures/UselessInstructions. Check the documentation http://exakat.readthedocs.io/\n";
+        }
+
+        parent::__construct($die);
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -35,7 +35,8 @@ class MultipleConstantDefinition extends Analyzer {
         // Search for definitions and count them
         $csDefinitions = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
-                              .has("token", within('T_STRING', 'T_NS_SEPARATOR') )
+                              .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
+                              .has("token", within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY') )
                               .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
                               .out("ARGUMENTS")
                               .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
@@ -55,7 +56,8 @@ GREMLIN
 
         $cisDefinitions = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
-                              .has("token", within('T_STRING', 'T_NS_SEPARATOR') )
+                              .has("token", within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY') )
+                              .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
                               .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
                               .out("ARGUMENTS")
                               .out("ARGUMENT").has("rank", 2).where( __.in("ANALYZED").has("analyzer", "Structures/Truthy").count().is(eq(1)) ).in("ARGUMENT")

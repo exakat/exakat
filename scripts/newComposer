@@ -12,3 +12,6 @@ include('libComposer.php');
 foreach($packages[1] as $id => $vendor) {
     processComponent($vendor, $packages[2][$id], $packages[3][$id]);
 }
+
+
+?>

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -264,7 +264,7 @@ class Config {
             }
             return static::$singleton;
         } else {
-            if (is_object($argv) && ($argv instanceof Config)) {
+            if ($argv instanceof Config) {
                 self::$singleton = $argv;
             } else {
                 self::$singleton = new self($argv);
@@ -454,7 +454,7 @@ class Config {
             $this->commandline['project']   = 'onepage';
             $this->commandline['thema']     = 'OneFile';
             $this->commandline['format']    = 'OnepageJson';
-            $this->commandline['file']      = 'onepage';
+            $this->commandline['file']      = 'stdout';
             $this->commandline['norefresh'] = true;
         }
     }

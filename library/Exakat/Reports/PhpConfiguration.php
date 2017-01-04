@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -69,8 +69,6 @@ TEXT
                 } elseif(!empty($configure->deactivate) && $sources[$configure->analysis] == 0) {
                     $return[] = ' '.$configure->deactivate;
                 } 
-            } else {
-                display( "Missing $configure->analysis in sqlite\n");
             }
         }
         
@@ -177,7 +175,7 @@ TEXT;
             
             foreach((array) $details as $detail) {
                 if ($detail->name == 'Extra configurations') {
-                    preg_match('#(http://[^"]+?)"#is', $detail->documentation, $url);
+                    preg_match('#(https?://[^"]+?)"#is', $detail->documentation, $url);
                     $directives .= "; More information about $section : 
 ;$url[1]
 
@@ -212,3 +210,5 @@ disable_classes = $classesList
         }
     } 
 } 
+
+?>

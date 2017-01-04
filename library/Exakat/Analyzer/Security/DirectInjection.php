@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -43,16 +43,18 @@ class DirectInjection extends Analyzer {
                             .count().is(eq(0)))';
 
         // Relayed call to another function
-        $this->atomIs('Variable')
-             ->codeIs($vars, true)
-             ->inIsIE('VARIABLE')
-             ->raw($safeIndex)
-             ->_as('result')
+        $this->atomIs('Functioncall')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
-             ->functionDefinition()
+             ->_as('result')
+             ->raw($safeIndex)
+             ->outIsIE('VARIABLE')
+             ->atomIs('Variable')
+             ->codeIs($vars, true)
+             ->back('first')
 
+             ->functionDefinition()
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')

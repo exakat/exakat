@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -30,6 +30,7 @@ class Continents extends Analyzer {
         $ini = $this->loadIni('Continents_en.ini', 'continents_en');
         
         $this->atomIs('String')
+             ->hasNoOut('CONCAT')
              ->noDelimiterIs($ini);
         $this->prepareQuery();
     }

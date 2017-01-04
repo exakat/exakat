@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -70,7 +70,7 @@ class DynamicCode extends Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->outIs('NAME')
-             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR', 'T_ISSET', 'T_ARRAY', 'T_EMPTY', 'T_LIST', 'T_UNSET', 'T_ARRAY', 'T_OPEN_BRACKET', 'T_ECHO', 'T_PRINT', 'T_EXIT'))
+             ->tokenIsNot(self::$FUNCTIONS_TOKENS)
              ->back('first');
         $this->prepareQuery();
 

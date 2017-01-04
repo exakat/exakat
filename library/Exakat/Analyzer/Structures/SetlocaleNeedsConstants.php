@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -36,9 +36,7 @@ class SetlocaleNeedsConstants extends Analyzer {
                                   '\\LC_MESSAGES');
 
         // something else than a constant
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->fullnspathIs('\\setlocale')
+        $this->atomFunctionIs('\\setlocale')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
@@ -46,9 +44,7 @@ class SetlocaleNeedsConstants extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->fullnspathIs('\\setlocale')
+        $this->atomFunctionIs('\\setlocale')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
