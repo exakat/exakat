@@ -187,6 +187,7 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'header'                         => 'http://www.php.net/header',
                  'exit'                           => 'http://www.php.net/exit',
                  'die'                            => 'http://www.php.net/die',
+                 'trigger_error'                  => 'http://www.php.net/trigger_error',
 
                  'exec'                           => 'http://www.php.net/exec',
                  'eval'                           => 'http://www.php.net/eval',

@@ -70,9 +70,33 @@ class RoboFile extends \Robo\Tasks
 LICENCE;
         $licenceCRC2015 = crc32(trim($licence2015));
 
-        $licence = <<<'LICENCE'
+        $licence2016 = <<<'LICENCE'
 /*
  * Copyright 2012-2016 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * This file is part of Exakat.
+ *
+ * Exakat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Exakat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The latest code can be found at <http://exakat.io/>.
+ *
+*/
+LICENCE;
+        $licenceCRC2016 = crc32(trim($licence2016));
+
+        $licence = <<<'LICENCE'
+/*
+ * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
  * Exakat is free software: you can redistribute it and/or modify
@@ -113,7 +137,9 @@ LICENCE;
                         }
                     }
                     fclose($fp);
-                } elseif (crc32($tokens[$tokenId + 1][1]) === $licenceCRC2015) {
+                } elseif (crc32($tokens[$tokenId + 1][1]) === $licenceCRC2015 || 
+                          crc32($tokens[$tokenId + 1][1]) === $licenceCRC2016
+                          ) {
                     print "Updating licence date in file '". $file. "'\n";
                     $tokens[$tokenId + 1][1] = $licence;
 
