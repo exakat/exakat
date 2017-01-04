@@ -28,8 +28,18 @@ use Exakat\Analyzer\Analyzer;
 class Arrayindex extends Analyzer {
 
     public function analyze() {
+        // $a[1]
         $this->atomIs('Array')
              ->outIs('INDEX');
+        $this->prepareQuery();
+
+        // list( 'a' => 2) = ['b' => 2];
+        $this->atomFunctionIs(array('\\list', '\\array'))
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Keyvalue')
+             ->outIs('KEY')
+             ->atomIs(self::$LITERALS);
         $this->prepareQuery();
     }
 }
