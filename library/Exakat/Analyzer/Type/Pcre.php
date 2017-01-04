@@ -27,29 +27,56 @@ use Exakat\Analyzer\Analyzer;
 
 class Pcre extends Analyzer {
     public function analyze() {
+        $atoms = array('String', 'Concatenation');
+        
         // regex like $....$is
-        $this->atomIs('String')
-             ->regexIs('code', '([\'\\"])\\$[^\\$].*?\\$[imsxeADSUXJu]*[\'\\"]');
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])\\$[^\\$].*?\\$[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
         // regex like #....#is
-        $this->atomIs('String')
-             ->regexIs('code', '([\'\\"])#[^#].*?#[imsxeADSUXJu]*[\'\\"]');
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])#[^#].*?#[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
         // regex like ~....~is
-        $this->atomIs('String')
-             ->regexIs('code', '([\'\\"])~[^~].*?~[imsxeADSUXJu]*[\'\\"]');
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])~[^~].*?~[imsxeADSUXJu]*[\'\\"]');
+        $this->prepareQuery();
+
+        // regex like %....%is
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])%[^%].*?%[imsxeADSUXJu]*[\'\\"]');
+        $this->prepareQuery();
+
+        // regex like '....'is
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])\'[^\'].*?\'[imsxeADSUXJu]*[\'\\"]');
+        $this->prepareQuery();
+
+        // regex like "...."is
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])"[^"].*?"[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
         // regex like /..../
-        $this->atomIs('String')
-             ->regexIs('code', '([\'\\"])\\\\/[^\\\\/*][^\\\\/]*?\\\\/[imsxeADSUXJu]*[\'\\"]');
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])\\\\/[^\\\\/*][^\\\\/]*?\\\\/[imsxeADSUXJu]*[\'\\"]');
+        $this->prepareQuery();
+
+        // regex like /..../
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])\\\\/[^\\\\/*][^\\\\/]*?\\\\/[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
         // regex like {....}
-        $this->atomIs('String')
-             ->regexIs('code', '([\'\\"])\\\\{.+?\\\\}[imsxeADSUXJu]*[\'\\"]');
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])\\\\{.+?\\\\}[imsxeADSUXJu]*[\'\\"]');
+        $this->prepareQuery();
+
+        // regex like (....)
+        $this->atomIs($atoms)
+             ->regexIs('fullcode', '([\'\\"])\\\\(.+?\\\\)[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
     }
 }

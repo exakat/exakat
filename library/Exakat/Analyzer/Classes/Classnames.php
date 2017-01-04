@@ -29,7 +29,8 @@ class Classnames extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('NAME');
+             ->outIs('NAME')
+             ->atomIsNot('Void');
         $this->prepareQuery();
     }
 }
