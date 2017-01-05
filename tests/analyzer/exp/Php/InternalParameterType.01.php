@@ -5,7 +5,11 @@ $expected     = array('crypt(function ($a) { /**/ } )',
                       'crypt(false)', 
                       'crypt(true)', 
                       'crypt(1.1)', 
-                      'crypt(-2)');
+                      'crypt(-2)',
+                      'crypt([13, 23])', 
+                      'crypt(array(1, 2))', 
+                      'crypt(array(1, 2, 3))', 
+                      'strtolower(array(1, 2))');
 
 $expected_not = array('crypt(<<<\'BC\'
 
