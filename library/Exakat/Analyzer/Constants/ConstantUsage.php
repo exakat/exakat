@@ -46,10 +46,7 @@ class ConstantUsage extends Analyzer {
         $this->prepareQuery();
         
         // defined('constant') : then the string is a constant
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs(array('\defined', '\constant'))
+        $this->atomFunctionIs(array('\defined', '\constant'))
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String');

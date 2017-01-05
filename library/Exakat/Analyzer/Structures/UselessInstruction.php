@@ -70,10 +70,7 @@ class UselessInstruction extends Analyzer {
         $this->prepareQuery();
 
         // array_merge($a); one argument is useless.
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs(array('\\array_merge', '\\array_merge_recursive', '\\array_replace'))
+        $this->atomFunctionIs(array('\\array_merge', '\\array_merge_recursive', '\\array_replace'))
              ->outIs('ARGUMENTS')
              ->isLess('count', 2)
              ->back('first');

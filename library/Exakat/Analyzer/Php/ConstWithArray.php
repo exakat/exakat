@@ -33,8 +33,7 @@ class ConstWithArray extends Analyzer {
         $this->atomIs('Const')
              ->outIs('CONST')
              ->outIs('VALUE')
-             ->atomIs('Functioncall')
-             ->fullnspathIs('\\array')
+             ->functioncallIs('\\array')
              ->back('first');
         $this->prepareQuery();
     }

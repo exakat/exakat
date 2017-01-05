@@ -1400,7 +1400,7 @@ GREMLIN
         // Closures are literal if not using a variable from the context
         $this->addMethod(<<<GREMLIN
 or( __.hasLabel("Integer", "Boolean", "Magicconstant", "Real", "String", "Heredoc", "Function"), 
-    __.hasLabel("Functioncall").has("constante", true).has("fullnspath", "\\\\array")
+    __.hasLabel("Functioncall").has("constant", true).has("fullnspath", "\\\\array")
 )
 
 GREMLIN
