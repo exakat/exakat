@@ -62,9 +62,6 @@ class Ambassador extends Reports {
                                  'namespaces' => 'Namespaces',
                                  'exceptions' => 'Exceptions');
 
-    /**
-     * __construct
-     */
     public function __construct() {
         parent::__construct();
         $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
@@ -167,11 +164,6 @@ class Ambassador extends Reports {
         $this->cleanFolder();
     }
 
-    /**
-     * Clear and init folder
-     *
-     * @return string
-     */
     private function initFolder() {
         if ($this->finalName === null) {
             return "Can't produce Devoops format to stdout";
@@ -1262,10 +1254,6 @@ SQL;
         return array('html' => $html, 'script' => $dataScript);
     }
 
-    /**
-     * Liste fichier analysé
-     *
-     */
     private function getTotalAnalysedFile() {
         $query = "SELECT COUNT(DISTINCT file) FROM results";
         $result = $this->sqlite->query($query);
@@ -1331,11 +1319,6 @@ SQL
         return $return;
     }
 
-    /**
-     * Nombre fichier qui ont l'analyzer
-     *
-     * @param type $analyzer
-     */
     private function getCountFileByAnalyzers($analyzer) {
         $query = <<<'SQL'
                 SELECT count(*)  AS number
@@ -1371,10 +1354,6 @@ SQL;
         $this->putBasedPage('files', $finalHTML);
     }
 
-    /**
-     * Get list of file
-     *
-     */
     private function getFilesResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1392,11 +1371,6 @@ SQL
         return $return;
     }
 
-    /**
-     * Nombre analyzer par fichier
-     *
-     * @param type $file
-     */
     private function getCountAnalyzersByFile($file) {
         $query = <<<'SQL'
                 SELECT count(*)  AS number
@@ -1410,11 +1384,6 @@ SQL;
         return $row['number'];
     }
 
-    /**
-     * List file with count
-     *
-     * @param type $limit
-     */
     public function getFilesCount($limit = null) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1437,10 +1406,6 @@ SQL;
         return $data;
     }
 
-    /**
-     * Liste de top file
-     *
-     */
     private function getTopFile() {
         $data = $this->getFilesCount(self::TOPLIMIT);
 
@@ -1494,11 +1459,6 @@ SQL;
         );
     }
 
-    /**
-     * List analyzer with count
-     *
-     * @param type $limit
-     */
     private function getAnalyzersCount($limit) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1521,10 +1481,6 @@ SQL;
         return $data;
     }
 
-    /**
-     * Liste de top analyzers
-     *
-     */
     private function getTopAnalyzers() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1556,10 +1512,6 @@ SQL;
         return $html;
     }
 
-    /**
-     * Nombre severity by file en Dashboard
-     *
-     */
     private function getSeveritiesNumberBy($type = 'file') {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1585,10 +1537,6 @@ SQL;
         return $return;
     }
     
-    /**
-     * Get data analyzer overview
-     * 
-     */
     private function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
@@ -1685,10 +1633,6 @@ JAVASCRIPT;
         $this->putBasedPage('issues', $finalHTML);
     }
 
-    /**
-     * List of Issues faceted
-     * @return array
-     */
     public function getIssuesFaceted($theme) {
         $list = Analyzer::getThemeAnalyzers($theme);
         $list = '"'.join('", "', $list).'"';
@@ -1727,12 +1671,6 @@ SQL;
         return $items;
     }
     
-    /**
-     * Get class by type
-     * 
-     * @param type $type
-     * @return string
-     */
     private function getClassByType($type)
     {
         if ($type == 'Critical' || $type == 'Long') {
@@ -1751,7 +1689,6 @@ SQL;
     }
     
     private function generateSettings() {
-
        $info = array(array('Code name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
             $info[] = array('Code description', $this->config->project_description);
