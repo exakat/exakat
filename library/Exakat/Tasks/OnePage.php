@@ -42,28 +42,12 @@ class OnePage extends Tasks {
         $begin = microtime(true);
         $this->project_dir = $this->config->projects_root.'/projects/onepage/';
 
-        // checking for installation
-        if (!file_exists($this->project_dir)) {
-            shell_exec($this->config->php . ' ' . $this->config->executable . ' init -p onepage ');
-            mkdir($this->project_dir.'/code', 0755);
-            shell_exec($this->config->php . ' ' . $this->config->executable . ' phploc -p onepage ');
-        }
-
         // todo : check that there is indeed this project or create it.
         if (!file_exists($this->config->filename)) {
             throw new NoSuchFile($this->config->filename);
         }
 
-        // todo : check that there is indeed this project or create it.
-        if (!is_file($this->config->filename) || !is_readable($this->config->filename)) {
-            throw new NoReadableWFile($this->config->filename);
-        }
-
         $this->cleanLogForProject('onepage');
-
-        copy($this->config->filename, $this->config->projects_root.'/projects/onepage/code/onepage.php');
-
-        $this->logTime('Start');
 
         $datastorePath = $this->config->projects_root.'/projects/onepage/datastore.sqlite';
         if (file_exists($datastorePath)) {
@@ -82,14 +66,6 @@ class OnePage extends Tasks {
         display("Cleaning DB\n");
         $task = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
-
-        $this->logTime('CleanDb');
-
-        display("Running files\n");
-        $task = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        $task->run();
-
-        $this->logTime('Files');
 
         display("Running project 'onepage'\n");
 
@@ -116,11 +92,6 @@ class OnePage extends Tasks {
         $task->run();
         display("Project reported\n");
         $this->logTime('Report');
-
-        display("Project reported\n");
-
-        // Clean code
-        unlink($this->config->projects_root.'/projects/onepage/code/onepage.php');
 
         $audit_end = time();
         $this->datastore->addRow('hash', array('audit_end'    => $audit_end,

@@ -28,10 +28,6 @@ use Exakat\Reports\Reports;
 class OnepageJson extends Reports {
     const FILE_EXTENSION = 'json';
 
-    public function __construct() {
-        parent::__construct();
-    }
-
     public function generateFileReport($report) {
         return false;
     }
@@ -73,7 +69,7 @@ class OnepageJson extends Reports {
         if ($name === null) {
             return json_encode($results);
         } else {
-            file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, json_encode($results));
+            file_put_contents($name.'.'.self::FILE_EXTENSION, json_encode($results));
             return true;
         }
     }

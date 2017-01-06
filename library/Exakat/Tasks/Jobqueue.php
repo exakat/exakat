@@ -49,17 +49,15 @@ class Jobqueue extends Tasks {
 
         $queue = array();
         
-        // @todo add this to doctor
-        if (!file_exists($this->config->projects_root.'/out')) {
-            mkdir($this->config->projects_root.'/out', 0755);
+        if (!file_exists($this->config->projects_root.'/projects/onepage')) {
+            mkdir($this->config->projects_root.'/projects/onepage/', 0755);
+            mkdir($this->config->projects_root.'/projects/onepage/code', 0755);
+            mkdir($this->config->projects_root.'/projects/onepage/log', 0755);
         }
-        if (!file_exists($this->config->projects_root.'/in')) {
-            mkdir($this->config->projects_root.'/in', 0755);
+        if (!file_exists($this->config->projects_root.'/projects/onepage/reports')) {
+            mkdir($this->config->projects_root.'/projects/onepage/reports', 0755);
         }
-        if (!file_exists($this->config->projects_root.'/progress')) {
-            mkdir($this->config->projects_root.'/progress', 0755);
-        }
-
+        
         //////// setup our named pipe ////////
         // @todo put this in config
         if(file_exists($this->pipefile)) {
@@ -111,12 +109,13 @@ class Jobqueue extends Tasks {
                         display( 'processing project job ' . $job . ' done ('.number_format(($e -$b), 2) . ' s)'. PHP_EOL);
                         break;
 
-                    case file_exists($this->config->projects_root.'/in/'.$job.'.php') :
+                    case file_exists($this->config->projects_root.'/projects/onepage/code/'.$job.'.php') :
                         display( 'processing onepage job ' . $job . PHP_EOL);
                         $this->process($job);
+                        break;
                         
                     default : 
-                    
+                        display('Default order '.$job.'. Ignoring '.PHP_EOL);
                     }
                     
                 next($queue);
@@ -132,17 +131,14 @@ class Jobqueue extends Tasks {
         $this->log->log('Started : ' . $job.' '.time()."\n");
 
         // This has already been processed
-        if (file_exists($this->config->projects_root.'/out/'.$job.'.json')) {
+        if (file_exists($this->config->projects_root.'/projects/onepage/reports/'.$job.'.json')) {
             display( "$job already exists\n");
             return;
         }
 
         file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode(array('start' => time(), 'job' => $job, 'progress' => 0)));
-        shell_exec($this->config->php.' '.$this->config->executable.' onepage -f '.$this->config->projects_root.'/in/'.$job.'.php');
+        shell_exec($this->config->php.' '.$this->config->executable.' onepage -f '.$this->config->projects_root.'/projects/onepage/code/'.$job.'.php');
 
-        // cleaning
-        rename($this->config->projects_root.'/projects/onepage/onepage.json', $this->config->projects_root.'/out/'.$job.'.json');
-        
         // final progress
         $progress = json_decode(file_get_contents($this->config->projects_root.'/progress/jobqueue.exakat'));
         $progress->end = time();

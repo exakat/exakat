@@ -454,8 +454,10 @@ class Config {
             $this->commandline['project']   = 'onepage';
             $this->commandline['thema']     = 'OneFile';
             $this->commandline['format']    = 'OnepageJson';
-            $this->commandline['file']      = 'stdout';
+            $this->commandline['file']      = str_replace('/code/', '/reports/', substr($this->commandline['filename'], 0, -4));
+            $this->commandline['quiet']     = true;
             $this->commandline['norefresh'] = true;
+            print_r($this->commandline);
         }
     }
 }

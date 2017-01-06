@@ -26,7 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 
 class Server extends Tasks {
-    const CONCURENCE = self::SERVER;
+    const CONCURENCE = self::ANYTIME;
     
     public function run() {
         if ($this->config->stop === true) {
@@ -45,6 +45,10 @@ class Server extends Tasks {
         $php = str_replace('__PHP__', $this->config->php, $php);
         $php = str_replace('__EXAKAT__', $this->config->executable, $php);
         file_put_contents($this->config->projects_root.'/projects/index.php', $php);
+        
+        if (!file_exists($this->config->projects_root.'/projects/server.log')) {
+            file_put_contents($this->config->projects_root.'/projects/server.log', date('r')."\tCreated file\n");
+        }
 
         display('Start server');
         exec($this->config->php . ' -S 0.0.0.0:7447 -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
