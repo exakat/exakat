@@ -101,11 +101,15 @@ class Jobqueue extends Tasks {
                         
                     case file_exists($this->config->projects_root.'/projects/'.$job) : 
                         display( 'processing project job ' . $job . PHP_EOL);
-                        $this->log('Start job : '.$job);
+                        if (file_exists($this->config->projects_root.'/projects/'.$job.'/dump.sqlite')) {
+                            $this->log('omitting project ready : '.$job);
+                            break;
+                        }
+                        $this->log('start project : '.$job);
                         $b = microtime(true);
                         shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
                         $e = microtime(true);
-                        $this->log('End job : '.$job.'('.number_format(($e -$b), 2) . ' s)');
+                        $this->log('end project : '.$job.' ('.number_format(($e -$b), 2) . ' s)');
                         display( 'processing project job ' . $job . ' done ('.number_format(($e -$b), 2) . ' s)'. PHP_EOL);
                         break;
 
@@ -128,7 +132,8 @@ class Jobqueue extends Tasks {
     }
 
   private function process($job) {
-        $this->log->log('Started : ' . $job.' '.time()."\n");
+        $this->log->log('started onepage : ' . $job."\n");
+        $b = microtime(true);
 
         // This has already been processed
         if (file_exists($this->config->projects_root.'/projects/onepage/reports/'.$job.'.json')) {
@@ -144,7 +149,8 @@ class Jobqueue extends Tasks {
         $progress->end = time();
         file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
 
-        $this->log->log('Finished : ' . $job.' '.time()."\n");
+        $e = microtime(true);
+        $this->log('end onepage : '.$job.' ('.number_format(($e -$b), 2) . ' s)');
 
         // Clean after self
         shell_exec($this->config->php.' '.$this->config->executable.' cleandb');
