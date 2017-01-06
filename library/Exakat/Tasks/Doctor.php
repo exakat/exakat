@@ -62,6 +62,7 @@ class Doctor extends Tasks {
 
         // check for PHP
         $stats['PHP']['binary']     = $this->config->php;
+        $stats['PHP']['executable'] = $this->config->executable;
         $stats['PHP']['version']    = phpversion();
         $stats['PHP']['curl']       = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
         $stats['PHP']['hash']       = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
@@ -69,6 +70,7 @@ class Doctor extends Tasks {
         $stats['PHP']['sqlite3']    = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
         $stats['PHP']['tokenizer']  = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
         $stats['PHP']['mbstring']   = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional, add --enable-mbstring to configure)';
+        $stats['PHP']['json']       = extension_loaded('json')      ? 'Yes' : 'No';
         $stats['PHP']['exakat.ini'] = implode(",\n                           ", $this->config->configFiles);
 
         // java
