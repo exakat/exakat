@@ -20,8 +20,8 @@ try {
     } else {
         print "\nError : ".$e->getMessage()." 
 on file ".$e->getFile()."
-on line ".$e->getLine()."
-Stopping execution\n\n";
+on line ".$e->getLine()."\n\n";
+    
     }
 } 
 
