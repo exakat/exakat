@@ -28,6 +28,8 @@ use Exakat\Datastore;
 
 abstract class Reports {
     const FILE_EXTENSION = 'undefined';
+    const FILE_NAME      = 'undefined';
+    
     static public $FORMATS        = array('Clustergrammer', 'Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
                                           'Text', 'Xml', 'Uml', 'ZendFramework', 'Ambassador', 'PhpConfiguration', 'RadwellCode',
                                           'Inventories' );

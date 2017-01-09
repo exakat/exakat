@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Uml extends Reports {
     const FILE_EXTENSION = 'dot';
+    const FILE_FILENAME  = 'exakat.uml';
 
     public function __construct() {
         parent::__construct();

@@ -61,6 +61,7 @@ class Xml extends Reports {
     private $cachedData = '';
     
     const FILE_EXTENSION = 'xml';
+    const FILE_FILENAME  = 'exakat';
     
     private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                   'CompatibilityPHP70', 'CompatibilityPHP71',

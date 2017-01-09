@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class PhpConfiguration extends Reports {
     const FILE_EXTENSION = 'txt';
-    
+    const FILE_FILENAME  = 'compilation';
+
     public function __construct() {
         parent::__construct();
     }

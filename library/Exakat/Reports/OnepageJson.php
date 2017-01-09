@@ -27,6 +27,7 @@ use Exakat\Reports\Reports;
 
 class OnepageJson extends Reports {
     const FILE_EXTENSION = 'json';
+    const FILE_FILENAME  = 'onepage';
 
     public function generateFileReport($report) {
         return false;

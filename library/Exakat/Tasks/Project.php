@@ -39,9 +39,22 @@ class Project extends Tasks {
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               );
 
-    protected $reports = array('Premier' => array('Ambassador' => 'report',
-                                                  'Devoops'    => 'oldreport'));
-    
+    protected $reports = array('Ambassador', 'Devoops');
+
+    public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
+        parent::__construct($gremlin, $config, $subTask);
+        
+        $themes = $config->project_themes;
+        if (!empty($themes)) {
+            $this->themes = $themes;
+        }
+
+        $reports = $config->project_reports;
+        if (!empty($reports)) {
+            $this->reports = $reports;
+        }
+    }
+
     public function run() {
         $progress = 0;
 
@@ -182,30 +195,29 @@ class Project extends Tasks {
         $this->logTime('Analyze');
 
         $oldConfig = Config::factory();
-        foreach($this->reports as $reportName => $formats) {
-            foreach($formats as $format => $fileName) {
-                display("Reporting $reportName in $format\n");
-                $this->addSnitch(array('step' => 'Report : '.$format, 'project' => $this->config->project));
-                
-                $args = array ( 1 => 'report',
-                                2 => '-p',
-                                3 => $this->config->project,
-                                4 => '-file',
-                                5 => $fileName,
-                                6 => '-format',
-                                7 => $format,
-                                );
-                $this->config = Config::factory($args);
+        foreach($this->reports as $format) {
+            display("Reporting $format\n");
+            $this->addSnitch(array('step'    => 'Report : '.$format, 
+                                   'project' => $this->config->project));
             
-                try {
-                    $report = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-                    $report->run();
-                    unset($report);
-                } catch (\Exception $e) {
-                    echo "Error while building $reportName in $format \n",
-                         $e->getMessage(),
-                         "\nTrying next report\n";
-                }
+            $args = array ( 1 => 'report',
+                            2 => '-p',
+                            3 => $this->config->project,
+                            4 => '-file',
+                            5 => constant('\\Exakat\\Reports\\'.$format.'::FILE_FILENAME'),
+                            6 => '-format',
+                            7 => $format,
+                            );
+            $this->config = Config::factory($args);
+            
+            try {
+                $report = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+                $report->run();
+                unset($report);
+            } catch (\Exception $e) {
+                echo "Error while building $reportName in $format \n",
+                     $e->getMessage(),
+                     "\nTrying next report\n";
             }
         }
 

@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class RadwellCode extends Reports {
     const FILE_EXTENSION = 'txt';
+    const FILE_FILENAME  = 'radwell';
 
     private $themesToShow = array('RadwellCodes');
     

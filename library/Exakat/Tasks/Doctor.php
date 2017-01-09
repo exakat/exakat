@@ -240,6 +240,24 @@ php          = "$php"
 ;php72        = /path/to/php72
 php$version        = {$_SERVER['_']}
 
+; Default themes to run
+project_themes[] = 'CompatibilityPHP53';
+project_themes[] = 'CompatibilityPHP54';
+project_themes[] = 'CompatibilityPHP55';
+project_themes[] = 'CompatibilityPHP56';
+project_themes[] = 'CompatibilityPHP70';
+project_themes[] = 'CompatibilityPHP71';
+project_themes[] = 'Analyze';
+project_themes[] = 'Preferences';
+project_themes[] = 'Appinfo';
+project_themes[] = 'Appcontent';
+project_themes[] = '"Dead code"';
+project_themes[] = 'Security';
+project_themes[] = 'Custom';
+
+; Default reports to generate
+project_reports[] = 'Ambassador';
+
 ; Limit the size of a project to 1000 k tokens (about 100 k LOC)
 token_limit = 1000000
 INI;

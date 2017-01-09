@@ -28,6 +28,7 @@ use Exakat\Config;
 
 class Clustergrammer extends Reports {
     const FILE_EXTENSION = 'txt';
+    const FILE_FILENAME  = 'clustergrammer';
 
     private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                   'CompatibilityPHP70', 'CompatibilityPHP71',

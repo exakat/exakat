@@ -31,6 +31,7 @@ use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
+    const FILE_FILENAME  = 'ambassador';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;

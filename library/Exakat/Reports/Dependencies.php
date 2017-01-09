@@ -27,10 +27,7 @@ use \Exakat\Config;
 
 class Dependencies extends Reports {
     const FILE_EXTENSION = 'dot';
-
-    public function __construct() {
-        parent::__construct();
-    }
+    const FILE_FILENAME  = 'dependencies';
 
     public function generateFileReport($report) {
         return false;

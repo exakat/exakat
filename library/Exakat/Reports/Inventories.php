@@ -28,6 +28,7 @@ use Exakat\Exakat;
 
 class Inventories extends Reports {
     const FILE_EXTENSION = 'csv';
+    const FILE_FILENAME  = 'inventories';
     
     public function generateFileReport($report) {
 

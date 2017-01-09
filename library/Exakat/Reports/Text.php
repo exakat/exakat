@@ -26,20 +26,17 @@ use Exakat\Analyzer\Analyzer;
 
 class Text extends Reports {
     const FILE_EXTENSION = 'txt';
+    const FILE_FILENAME  = 'exakat';
 
     private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                   'CompatibilityPHP70', 'CompatibilityPHP71',
                                   '"Dead code"', 'Security', 'Analyze');
 
-    public function __construct() {
-        parent::__construct();
-    }
-
     public function generateFileReport($report) {
         return false;
     }
 
-    public function generate($folder, $name = null) {
+    public function generate($folder, $name = self::FILE_FILENAME) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
 

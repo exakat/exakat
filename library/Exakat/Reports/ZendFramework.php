@@ -28,6 +28,8 @@ use Exakat\Exakat;
 use Exakat\Reports\Devoops;
 
 class ZendFramework extends Devoops {
+    const FILE_FILENAME  = 'zfreport';
+
     public function __construct() {
         parent::__construct();
 
