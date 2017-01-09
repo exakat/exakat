@@ -3,9 +3,27 @@
 Annex
 =====
 
+* Supported Themes
+* Supported Reports
 * Supported PHP Extensions
 * Supported Frameworks
 * Recognized Libraries
+* New analyzers
+* External services
+
+Supported Themes
+----------------
+
+Exakat groups analysis by themes. This way, analyzing 'Security' runs all possible analysis related to themes.
+
+{{THEMES_LIST}}
+
+Supported Reports
+-----------------
+
+Exakat produces various reports. Some are general, covering various aspects in a reference way; others focus on one aspect. 
+
+{{REPORTS_LIST}}
 
 Supported PHP Extensions
 ------------------------
