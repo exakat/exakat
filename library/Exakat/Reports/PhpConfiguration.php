@@ -26,18 +26,16 @@ namespace Exakat\Reports;
 use Exakat\Analyzer\Analyzer;
 
 class PhpConfiguration extends Reports {
-    const FILE_EXTENSION = 'txt';
-    const FILE_FILENAME  = 'compilation';
+    const FILE_EXTENSION = 'ini-dist';
+    const FILE_FILENAME  = 'php.suggested';
 
-    public function __construct() {
-        parent::__construct();
-    }
-    
     public function generateFileReport($report) {
         return false;
     }
 
     public function generate($folder, $name = null) {
+        $final = '';
+
         $themed = Analyzer::getThemeAnalyzers('Appinfo');
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
         $sources = array();
@@ -45,52 +43,6 @@ class PhpConfiguration extends Reports {
             $sources[$row['analyzer']] = $row['count'];
         }
         
-        $configureDirectives = json_decode(file_get_contents($this->config->dir_root.'/data/configure.json'));
-        
-        // preparing the list of PHP extensions to compile PHP with
-        $return = array(<<<TEXT
-;;;;;;;;;;;;;;;;;;;;;;;;
-; PHP configure list   ;
-;;;;;;;;;;;;;;;;;;;;;;;;
-
-TEXT
-,
-'./configure');
-        $pecl = array();
-        foreach($configureDirectives as $ext => $configure) {
-            if (isset($sources[$configure->analysis])) {
-                if(!empty($configure->activate) && $sources[$configure->analysis] != 0) {
-                    $return[] = ' '.$configure->activate;
-                    if (!empty($configure->others)) {
-                        $return[] = "   ".join("\n    ", $configure->others);
-                    }
-                    if (!empty($configure->pecl)) {
-                        $pecl[] = '#pecl install '.basename($configure->pecl).' ('.$configure->pecl.')';
-                    }
-                } elseif(!empty($configure->deactivate) && $sources[$configure->analysis] == 0) {
-                    $return[] = ' '.$configure->deactivate;
-                } 
-            }
-        }
-        
-        $return = array_merge($return, array(
-                   '',
-                   '; For debug purposes',
-                   ';--enable-dtrace',
-                   ';--disable-phpdbg',
-                   '',
-                   ';--enable-zend-signals',
-                   ';--disable-opcache',
-            ));
-        
-        $final = '';
-        if (!empty($pecl)) {
-            $c = count($pecl);
-            $final .= "# install ".( $c === 1 ? 'one' : $c)." extra extension".($c === 1 ? '' : 's')."\n";
-            $final .= implode("\n", $pecl)."\n\n";
-        }
-        $final .= implode("\n", $return);
-
         $shouldDisableFunctions = json_decode(file_get_contents($this->config->dir_root.'/data/shouldDisableFunction.json'));
         $functionsList = array();
         $classesList = array();

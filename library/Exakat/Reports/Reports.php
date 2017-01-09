@@ -30,9 +30,13 @@ abstract class Reports {
     const FILE_EXTENSION = 'undefined';
     const FILE_NAME      = 'undefined';
     
-    static public $FORMATS        = array('Clustergrammer', 'Devoops', 'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
-                                          'Text', 'Xml', 'Uml', 'ZendFramework', 'Ambassador', 'PhpConfiguration', 'RadwellCode',
-                                          'Inventories' );
+    static public $FORMATS        = array('Ambassador', 'Devoops', 
+                                          'Text', 'Xml', 'Uml',
+                                          'PhpConfiguration', 'PhpCompilation',
+                                          'Inventories', 'Clustergrammer', 
+                                          'ZendFramework',  'RadwellCode',
+                                          'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
+                                          );
 
     private $count = 0;
 
