@@ -1,4 +1,4 @@
-Version 0.9.5 (Spider Demons, Coming up)
+Version 0.9.7 (Hundred Eyed Demon Lord, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,27 @@ Version 0.9.5 (Spider Demons, Coming up)
 + Tokenizer
     + 
 
-Version 0.9.5 (Immortal Ziyang, Coming up)
+Version 0.9.5 (Spider Demons, 2017-01-09)
++ Architecture
+    + Added support for report/analysis theme list in config (exakat and project)
+    + Better cleaning of projects
+    + Doctor : Initialisation with themes/reports; Reports executable being used.
+    + Added a log for gremlin Queries
+    + Rebuild the server command
+    + Added 'catalog' command
++ Report
+    + Split Phpconfiguration into eponymous and Phpcompilation
++ Analyzer
+    + New analyzer : avoid Glob, use scandir without sorting.
+    + New analyzer : always configure ext/sqlite3 FetchRow()
+    + New analyzer : no string with append
+    + Removed analyzer : Structures/ForeachSourcesNotVariable
+    + Upgraded Analyzer 'Should Import Functions'
+    + Upgraded analysis : 1764 / 1773 test pass (99.5% pass). 
++ Tokenizer
+    + Added 'aliased' property to nodes.
+
+Version 0.9.5 (Immortal Ziyang, 2017-01-04)
 + Architecture
     + Better check of PHP version 
 + Report
