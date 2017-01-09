@@ -288,7 +288,7 @@ class Ambassador extends Reports {
             $list = $this->datastore->getHashAnalyzer($analyzer);
         
             $table = '';
-            $values = '';
+            $values = array();
             $object = Analyzer::getInstance($analyzer);
             $name = $object->getDescription()->getName();
 
