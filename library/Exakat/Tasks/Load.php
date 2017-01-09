@@ -935,6 +935,7 @@ class Load extends Tasks {
             $this->addDefinition('function', $fullnspath, $functionId);
         } else {
             $fullnspath = '';
+            $aliased    = false;
         }
         $this->setAtom($functionId, array('code'       => $this->atoms[$nameId]['fullcode'],
                                           'fullcode'   => implode(' ', $fullcode).$this->tokens[$current][1] . ' ' .
