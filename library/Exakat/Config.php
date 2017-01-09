@@ -227,7 +227,8 @@ class Config {
                 unset($configFiles[$id]);
             }
         }
-        $this->configFile = call_user_func_array('array_merge', $inis);
+        
+        $this->configFile = empty($inis) ? array() : call_user_func_array('array_merge', $inis);
         if (empty($this->configFile['php'])) {
             $this->configFile['php'] = !isset($_SERVER['_']) ? $_SERVER['_'] : '/usr/bin/env php ';
         }
