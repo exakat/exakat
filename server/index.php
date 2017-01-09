@@ -161,9 +161,13 @@ function report($path) {
 function status($path) {
     global $initTime;
     
-    if (isset($path[0]) && !empty($path[0]) && file_exists(__DIR__.'/'.$path[0].'/')) {
-        $json = shell_exec('__PHP__ __EXAKAT__ status -p '.$path[0].' -json');
-        echo $json;
+    if (isset($path[0]) && !empty($path[0])) {
+        if (file_exists(__DIR__.'/'.$path[0].'/')) {
+            $json = shell_exec('__PHP__ __EXAKAT__ status -p '.$path[0].' -json');
+            echo $json;
+        } else {
+            error('No such project');
+        }
     } else {
         $status = array(
             'Status'       => 'OK',
