@@ -31,6 +31,8 @@ $res = $sqlite->query('SELECT COUNT(*)
                 WHERE c.name = "Analyze"');
 $analyzer_count = $res->fetchArray(\SQLITE3_NUM)[0];
 
+// extensions services
+/////////////////////////
 $extension_list = array();
 $ext = glob('./human/en/Extensions/Ext*.ini');
 foreach($ext as $f) {
@@ -39,6 +41,8 @@ foreach($ext as $f) {
 }
 $extension_list = join("\n", $extension_list);
 
+// library services
+/////////////////////////
 $library_list = array();
 $json = json_decode(file_get_contents('data/externallibraries.json'));
 foreach( (array) $json as $library) {
@@ -49,13 +53,30 @@ foreach( (array) $json as $library) {
 }
 $library_list = join("\n", $library_list);
 
+// reports
+/////////////////////////
+$reports_list = array();
+include(__DIR__.'/../../library/Exakat/Reports/Reports.php');
+$reports_list = \Exakat\Reports\Reports::$FORMATS;
+$reports_list = '  *'.join("\n  *", $reports_list)."\n";
+
+// themes
+/////////////////////////
+$themes_list = array();
+$res = $sqlite->query('SELECT name FROM categories c ORDER BY name');
+while($row = $res->fetchArray(\SQLITE3_NUM)) {
+    $themes_list[] = '* '.$row[0];
+}
+$themes_list = join("\n", $themes_list);
+
+// themes
+/////////////////////////
 $external_services_list = array();
 $json = json_decode(file_get_contents('data/serviceConfig.json'));
 foreach( (array) $json as $name => $service) {
     $external_services_list[] = '* ['.$name.']('.$service->homepage.') - '.implode(', ', $service->file);
 }
 $external_services_list = join("\n", $external_services_list);
-
 
 $analyzer_introduction = generateAnalyzerList();
 
@@ -65,6 +86,8 @@ $attributes = array('ANALYZERS_COUNT'        => $analyzer_count,
                     'LIBRARY_LIST'           => $library_list,
                     'ANALYZER_INTRODUCTION'  => $analyzer_introduction,
                     'EXTERNAL_SERVICES_LIST' => $external_services_list,
+                    'REPORTS_LIST'           => $reports_list,
+                    'THEMES_LIST'            => $themes_list,
                     );
 
 shell_exec('rm docs/*.rst');
