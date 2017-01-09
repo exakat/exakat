@@ -2543,7 +2543,7 @@ JAVASCRIPT;
         // collecting information for Composer
         if (isset($sources['Composer/PackagesNames'])) {
             $data['Composer Packages'] = array();
-            $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
+            $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $data['Composer Packages'][] = $row['fullcode'];
             }

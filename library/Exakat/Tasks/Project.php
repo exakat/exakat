@@ -215,7 +215,7 @@ class Project extends Tasks {
                 $report->run();
                 unset($report);
             } catch (\Exception $e) {
-                echo "Error while building $reportName in $format \n",
+                echo "Error while building $format in $format \n",
                      $e->getMessage(),
                      "\nTrying next report\n";
             }
