@@ -1403,7 +1403,8 @@ class Load extends Tasks {
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
             $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
                                             'aliased'    => $aliased));
-            $this->addCall('class', $this->getFullnspath($nsnameId), $nsnameId);
+            list($fullnspath, $aliased) = $this->getFullnspath($nsnameId);
+            $this->addCall('class', $fullnspath, $nsnameId);
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'const');
             $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
@@ -3040,7 +3041,6 @@ class Load extends Tasks {
         $variableId = $this->processSingle('Variable');
         if ($this->tokens[$this->id][1] === '$this') {
             $this->addCall('class', end($this->currentClassTrait), $variableId);
-//            $this->addLink(end($this->currentClassTrait), $variableId, 'DEFINITION');
         }
         $this->setAtom($variableId, array('reference' => false,
                                           'variadic'  => false,
