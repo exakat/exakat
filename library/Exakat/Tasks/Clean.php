@@ -54,7 +54,8 @@ class Clean extends Tasks {
                              'Premier-ace',
                              'faceted',
                              'faceted2',
-                             'ambassador'
+                             'ambassador',
+                             'oldreport',
                              );
         foreach($dirsToErase as $dir) {
             $dirPath = $path.'/'.$dir;
@@ -82,6 +83,8 @@ class Clean extends Tasks {
                               'report.md',
                               'report.odt',
                               'report.pdf',
+                              'report.json',
+                              'report.xml',
                               'report.sqlite',
                               'report.txt',
                               'report.zip',

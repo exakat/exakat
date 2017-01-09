@@ -35,6 +35,7 @@ class ShortOpenTagRequired extends Analyzer {
     public function getArray() {
         $r = Analyzer::$datastore->getRow('shortopentag');
         
+        $report = array();
         foreach($r as $l) {
             $report[] = array($l['file']);
         }

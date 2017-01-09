@@ -20,17 +20,33 @@
  *
 */
 
-
-namespace Exakat\Analyzer\Structures;
+namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
 
-class ForeachSourceNotVariable extends Analyzer {
+class NoStringWithAppend extends Analyzer {
+    protected $phpVersion = '7.0+';
+    
+    // $x = ''; $x[] = 2;
     public function analyze() {
-        $this->atomIs('Foreach')
-             ->outIs('SOURCE')
-             ->atomIsNot(array('Variable', 'Staticproperty', 'Property', 'Array'))
-             ->back('first');
+        $this->atomIs('Function')
+             ->outIs('BLOCK')
+             ->atomInside('Assignation')
+             ->codeIs('=')
+             ->_as('results')
+             ->outIs('RIGHT')
+             ->atomIs('String')
+             ->inIs('RIGHT')
+             ->outIs('LEFT')
+             ->savePropertyAs('fullcode', 'container')
+             ->back('first')
+             ->outIs('BLOCK')
+             ->atomInside('Assignation')
+             ->outIs('LEFT')
+             ->atomIs('Arrayappend')
+             ->outIs('APPEND')
+             ->samePropertyAs('fullcode', 'container')
+             ->back('results');
         $this->prepareQuery();
     }
 }

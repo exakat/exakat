@@ -28,14 +28,19 @@ use Exakat\Exakat;
 
 class Inventories extends Reports {
     const FILE_EXTENSION = 'csv';
+    const FILE_FILENAME  = 'inventories';
     
     public function generateFileReport($report) {
 
     }
 
     public function generate($folder, $name = null) {
-        print "$folder/$name\n";
-        mkdir($folder.'/'.$name, 0777);
+        $path = $folder.'/'.$name;
+
+        if (file_exists($path)) {
+            rmdirRecursive($path);
+        }
+        mkdir($path, 0777);
         
         $this->saveInventory('Constants/Constantnames', "$folder/$name/constants.csv");
         $this->saveInventory('Variables/Variablesnames', "$folder/$name/variables.csv");
@@ -48,27 +53,36 @@ class Inventories extends Reports {
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/errorMessages.csv");
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/comparedLiterals.csv");
         
-        $this->saveAtom('Integer', "$folder/$name/integers.csv");
-        
+        $this->saveAtom('Integer', "$path/integers.csv");
+        $this->saveAtom('Array',   "$path/arrays.csv");
+        $this->saveAtom('Heredoc', "$path/heredoc.csv");
+        $this->saveAtom('Real',    "$path/real.csv");
+        $this->saveAtom('String',  "$path/strings.csv");
     } 
     
     private function saveInventory($analyzer, $file) {
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$analyzer.'"');
         $fp = fopen($file, 'w+');
         fputcsv($fp, array('Name', 'File', 'Line'));
-        while($row = $res->fetchArray()) {
+        $step = 0;
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            ++$step;
             fputcsv($fp, $row);
         }
+        $this->count($step);
         fclose($fp);
     }
 
     private function saveAtom($atom, $file) {
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$analyzer.'"');
+        $res = $this->sqlite->query('SELECT name, file, line FROM literal'.$atom.'');
         $fp = fopen($file, 'w+');
         fputcsv($fp, array('Name', 'File', 'Line'));
-        while($row = $res->fetchArray()) {
+        $step = 0;
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            ++$step;
             fputcsv($fp, $row);
         }
+        $this->count($step);
         fclose($fp);
     }
 

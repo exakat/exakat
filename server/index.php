@@ -2,213 +2,185 @@
 
 const PIPEFILE = '/tmp/onepageQueue';
 
-$initTime = time(true);
+$initTime = microtime(true);
 
-$path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$commands = explode('/', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
+unset($commands[0]);
+$command = array_shift($commands);
 
-$orders = array('stop', 'report', 'onepage', 'archive', 'project', 'status');
-$offset = strpos($path, '/', 1);
-if ($offset === false) {
-    exit;
-}
+$orders = array('stop', 'init', 'update', 'project', 'onepage', 'report', 'status', 'list', 'stop');
 
-$command = substr($path, 1, $offset - 1);
 if (!in_array($command, $orders)) {
+    serverLog("unknown command : $command");
+    echo "Exakat server (unknown command)";
     exit;
 }
 
+$command($commands);
 
-$command($path);
-otherwise($path);
+$endTime = microtime(true);
+serverLog(substr($command."\t".floor(1000*($endTime - $initTime))."\t".implode("\t", $commands), 0, 256));
+//End script
 
 /// Function definitions
 
-function archive($path) {
-    list(,,$project, $type, $compression) = explode('/', $path.'/');
-    if (empty($compression)) {
-        $compression = 'zip';
-    }
-    
-    $types = array('html'     => 'report',
-                   'faceted'  => 'faceted',
-                   'faceted2' => 'faceted2',
-                   'text'     => 'report.txt',
-                   'json'     => 'report.json');
-                  
-    if (!isset($types[$type])) {
-        print "No such format as '".htmlentities($type, ENT_COMPAT | ENT_HTML401 , 'UTF-8')."'\n";
-        return;
-    }
-    
-    if (file_exists(__DIR__.'/../progress')) {
-        $status = json_decode(file_get_contents(__DIR__.'/../progress/jobqueue.exakat'));
-        if (substr($status->job, 0, strlen($project)) == $project && $status->progress < 100) {
-            print "No such report as '".htmlentities($type, ENT_COMPAT | ENT_HTML401 , 'UTF-8')."'\n";
-            return;
-        }
-    }
-    $report = __DIR__.'/../projects/'.$project.'/'.$types[$type];
-    if (!file_exists($report)) {
-        return;
-    }
-    
-    $archive = './projects/'.$project.'/'.$types[$type].'.'.$compression;
+function stop($path) {
+    serverLog("Shutting down\n");
+    $pid = getmypid();
+    echo "<p>Shutting down server (pid : $pid)</p>";
+    ob_flush();
 
-    if (!file_exists($archive)) {
-        shell_exec('cd '.__DIR__.'/'.$project.'; zip -r '.$types[$type].'.zip '.$types[$type]);
-    }
+    unlink(__FILE__);
 
-    header("Content-Type: ".getMimeContentType($archive));
-    header('Content-Disposition: attachment; filename="downloaded.'.'zip'.'"');
-   
-    readfile($archive);
+    exec('kill '.getmypid());
+    // This is killed.
 }
 
-function onepage($path) {
-    if (isset($_REQUEST['id'])) {
-        if (file_exists('./out/'.$_REQUEST['id'].'.json')) {
-            header('Content-Type: application/json');
-            readfile('./out/'.$_REQUEST['id'].'.json');
-        } else {
-            $json = json_decode(file_get_contents('./progress/jobqueue.exakat'));
-            if ($json->job == $_REQUEST['id']) {
-                echo json_encode(array('status' => $json->progress));
-            } else {
-                echo json_encode(array('status' => 0));
-            }
-        }
-    } elseif (isset($_REQUEST['script'])) {
-        $file = './in/'.md5($_REQUEST['script']).'.php';
-        file_put_contents($file, $_REQUEST['script']);
-
-        pushToQueue(md5($_REQUEST['script']));
-        echo json_encode(array('id' => md5($_REQUEST['script'])));
-    } 
-}
-
-function project($path) {
+function init($path) {
     if (isset($_REQUEST['project'])) {
-        // Validation
-        if (!file_exists('./projects/'.$_REQUEST['project'])) {
-            echo json_encode(array('project'  => $_REQUEST['project'], 
-                                   'progress' => 0, 
-                                   'status'   => 'Not found')); // empty array
-            return;
-        } elseif (!file_exists('./projects/'.$_REQUEST['project'].'/datastore.sqlite')) {
-            echo json_encode(array('project'  => $_REQUEST['project'], 
-                                   'progress' => 0, 
-                                   'status'   => 'Initialization'));
-            return;
-        } else {
-            $return = array('project' => $_REQUEST['project']);
-
-            $sqlite = new \Sqlite3('./projects/'.$_REQUEST['project'].'/datastore.sqlite');
-            $res = $sqlite->query('SELECT value FROM hash WHERE key="tokens"');
-            $row = $res->fetchArray();
-            $return['size'] = $row[0];
-            
-            if (file_exists('./projects/'.$_REQUEST['project'].'/report')) {
-                $return['report'] = true;
-                if (!file_exists('./projects/'.escapeshellarg($_REQUEST['project']).'/report')) {
-                    shell_exec('cd ./projects/'.escapeshellarg($_REQUEST['project']).'; zip -r report.zip report > /dev/null 2>/dev/null &');
-                    $return['zip'] = false;
-                    $return['status'] = 'Archiving';
-                } else {
-                    $return['zip'] = true;
-                    // Not status anymore
-                }
-            } else {
-                $return['status'] = 'Running';
-            }
-
-            echo json_encode($return);
+        $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $_REQUEST['project']);
+        if (empty($project)) {
+            $project = '';
+        } elseif (file_exists(__DIR__.'/'.$project)) {
+            error('Project already exists');
         }
-    } elseif (isset($_REQUEST['vcs'])) {
-        $project = 'a'.substr(md5($_REQUEST['vcs']), 0, 8);
+    } else {
+        $project = '';
+    }
+    
+    if (isset($_REQUEST['vcs'])) {
+        $url = parse_url($_REQUEST['vcs']);
+        if (!isset($url['scheme'], $url['host'], $url['path'])) {
+            error('Malformed VCS');
+        }
+        $vcs = $url['scheme'].'://'.$url['host'].(!empty($url['port']) ? ':'.$url['port'] : '').$url['path'];
         
-        if (file_exists('./projects/'.$project)) {
-            echo json_encode(array('project' => $project));
-            return;
+        if (empty($project)) {
+            $project = autoprojectname();
         }
 
         shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']));
+    } elseif (isset($_REQUEST['code'])) {
+        $php = $_REQUEST['code'];
+        if (strpos($php, '<?php') === false) {
+            error('Invalide code');
+        }
+
+        if (empty($project)) {
+            $project = autoOnagepageName();
+        }
         
-        pushToQueue($project);
-        echo json_encode(array('project' => $project));
+        file_put_contents(__DIR__.'/onepage/code/'.$project.'.php', $php);
+        shell_exec('__PHP__ __EXAKAT__ queue -f '.$project);
+    } else {
+        error('Missing VCS/code');
     }
+
+    echo json_encode(array('project' => $project));
+}
+
+function update($path) {
+    if (isset($_REQUEST['project'])) {
+        $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $_REQUEST['project']);
+        if (empty($project)) {
+            error('Missing project');
+        }
+
+        if (!file_exists(__DIR__.'/'.$project)) {
+            error('No such project');
+        }
+    } else {
+        error('No such project');
+    }
+
+    shell_exec('__PHP__ __EXAKAT__ update -p '.$project);
+    echo json_encode(array('project' => $project));
+}
+
+function project($path) {
+    if (isset($path[0])) {
+        $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $path[0]);
+        if (empty($project)) {
+            error('Missing project');
+        }
+
+        if (!file_exists(__DIR__.'/'.$project)) {
+            error('No such project');
+        }
+    } else {
+        error('No such project');
+    }
+    
+    echo shell_exec('__PHP__ __EXAKAT__ queue -p '.$project);
+    echo json_encode(array('project' => $project));
+}
+
+function onepage($path) {
+    if (isset($path[0])) {
+        $file = preg_replace('/[^a-zA-Z0-9-_]/', '', $path[0]);
+        if (empty($file)) {
+            error('Missing file');
+        }
+
+        if (!file_exists(__DIR__.'/onepage/code/'.$file.'.php')) {
+            error('No such file');
+        }
+    } else {
+        error('No such file');
+    }
+
+    if (!file_exists(__DIR__.'/onepage/reports/'.$file.'.json')) {
+        error('No such results');
+    }
+    
+    readfile(__DIR__.'/onepage/reports/'.$file.'.json');
 }
 
 function report($path) {
-    list(,,$project, $type, $r) = explode('/', $path.'/');
-
-    // forgot the final /
-    if (empty($r) && substr($path, -1) !== '/') {
-        header("Location: /report/$project/$type/");
-        return;
-    }
-
-    $r = substr($path, strlen('/report/') + strlen($project) + 1 + strlen($type) + 1);
-
-    $types = array('html'     => 'report',
-                   'faceted'  => 'faceted',
-                   'faceted2' => 'faceted2',
-                   'text'     => 'report.txt',
-                   'json'     => 'report.json');
-    if (!isset($types[$type])) {
-        print "No such report as '".htmlentities($type, ENT_COMPAT | ENT_HTML401 , 'UTF-8')."'\n";
-        return;
-    }
-
-    if (file_exists(__DIR__.'/'.$project.'/'.$types[$type])) {
-        if (in_array($type, array('html', 'faceted', 'faceted2')) && empty($r)) {
-            $r = '/index.html';
-        } else {
-            $r = '/'.$r;
+    if (isset($path[0])) {
+        $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $path[0]);
+        if (empty($project)) {
+            error('Missing project');
         }
 
-        header("Content-Type: ".getMimeContentType(__DIR__.'/'.$project.'/'.$types[$type].$r));
-
-        readfile(__DIR__.'/'.$project.'/'.$types[$type].$r);
-        return;
+        if (!file_exists(__DIR__.'/'.$project)) {
+            error('No such project');
+        }
     } else {
-        echo "The '$type' report hasn't been generated yet.";
-        return;
+        error('No such project');
     }
+    
+    // Check on report, then get dump.sqlite.
+    if (!file_exists(__DIR__.'/'.$project.'/report')) {
+        error('No report available');
+    }
+    
+    readfile(__DIR__.'/'.$project.'/dump.sqlite');
 }
 
 function status($path) {
     global $initTime;
     
-    $d = explode('/', $path);
-    if (isset($d[2]) && !empty($d[2]) && file_exists(__DIR__.'/'.$d[2].'/')) {
-        $json = shell_exec('__PHP__ __EXAKAT__ status -p '.$d[2].' -json');
-        echo $json;
+    if (isset($path[0]) && !empty($path[0])) {
+        if (file_exists(__DIR__.'/'.$path[0].'/')) {
+            $json = shell_exec('__PHP__ __EXAKAT__ status -p '.$path[0].' -json');
+            echo $json;
+        } else {
+            error('No such project');
+        }
     } else {
         $status = array(
             'Status'       => 'OK',
-            'Running Time' => duration(time() - $initTime),
-            'Init Time '   => date('r', $initTime),
+            'Running Time' => duration(microtime(true) - $initTime),
+            'Init Time '   => date('r', (int) $initTime),
             'Queue'        => file_exists(PIPEFILE) ? 'Yes' : 'No'
         );
         echo json_encode($status);
     }
 }
 
-function stop($path) {
-    echo "<p>Shutting down server</p>";
-    ob_flush();
 
-    unlink('./projects/index.php');
-
-    exec('kill '.getmypid());
-    // This is killed.
-}
-
-function otherwise($path) {
-    echo "<p>$path (otherwise)</p>";
-    return;
-}
-
+// Helper functions
 function duration($duration) {
     $duration = (int) $duration;
     
@@ -226,24 +198,25 @@ function pushToQueue($id) {
     fclose($fp);
 }
 
-function getMimeContentType($path) {
-    static $mimeTypes = array('css'  => 'text/css',
-                              'gif'  => 'image/gif',
-                              'png'  => 'image/png',
-                              'woff' => 'application/x-font-woff',
-                              'js'   => 'text/javascript',
-                              'html' => 'text/html',
-                              'zip'  => 'application/octet-stream',
-                              );
-    
-    $ext = pathinfo($path, PATHINFO_EXTENSION);
-    
-    if (!isset($mimeTypes[$ext])) {
-        print "missing '$ext' ($path) mime type\n";
-        return '';
-    }
-    
-    return $mimeTypes[$ext];
+function autoProjectName() {
+    $files = glob(__DIR__.'/*');
+    return 'a'.count($files);
+}
+
+function autoOnagepageName() {
+    $files = glob(__DIR__.'/onepage/code/*');
+    return 'o'.count($files);
+}
+
+function error($message) {
+    echo json_encode(array('error' => $message));
+    exit;
+}
+
+function serverLog($message) {
+    $fp = fopen(__DIR__.'/server.log', 'a');
+    fwrite($fp, date('r')."\t$message\n");
+    fclose($fp);
 }
 
 ?>

@@ -33,6 +33,8 @@ use Exakat\Reports\Reports;
 use XMLWriter;
 
 class Devoops extends Reports {
+    const FILE_FILENAME  = 'devoops';
+
     const FOLDER_PRIVILEGES = 0755;
     
     const NOT_RUN      = 'Not Run';

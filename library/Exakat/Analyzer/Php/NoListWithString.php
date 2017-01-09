@@ -30,10 +30,7 @@ class NoListWithString extends Analyzer {
     
     public function analyze() {
         // list($a, $b) = 'string';
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs('T_LIST')
-             ->fullnspathIs('\\list')
+        $this->atomFunctionIs('\\list')
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
@@ -42,10 +39,7 @@ class NoListWithString extends Analyzer {
         $this->prepareQuery();
 
         // $c = 'string'; list($a, $b) = $c;
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs('T_LIST')
-             ->fullnspathIs('\\list')
+        $this->atomFunctionIs('\\list')
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomIs('Variable')

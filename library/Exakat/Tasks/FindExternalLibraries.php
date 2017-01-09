@@ -203,6 +203,7 @@ class FindExternalLibraries extends Tasks {
 
                 $lclass = strtolower($class);
                 if (isset($this->classic[$lclass])) {
+                    $returnPath = '';
                     if ($this->classic[$lclass] == static::WHOLE_DIR) {
                         $returnPath = dirname(preg_replace('#.*projects/.*?/code/#', '/', $filename));
                     } elseif ($this->classic[$lclass] == static::PARENT_DIR) {

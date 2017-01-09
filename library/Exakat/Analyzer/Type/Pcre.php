@@ -56,7 +56,7 @@ class Pcre extends Analyzer {
 
         // regex like "...."is
         $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])"[^"].*?"[imsxeADSUXJu]*[\'\\"]');
+             ->regexIs('fullcode', '([\'\\"])\\"[^\\"].*?\\"[imsxeADSUXJu]*[\'\\"]');
         $this->prepareQuery();
 
         // regex like /..../

@@ -194,6 +194,9 @@ SQL;
         
         $saved = 0;
         $severity = $analyzer->getSeverity( );
+        if (!is_array($res)) {
+            return;
+        }
 
         foreach($res as $id => $result) {
             if (!$result instanceof \Stdclass) {

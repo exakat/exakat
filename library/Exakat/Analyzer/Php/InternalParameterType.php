@@ -54,12 +54,10 @@ class InternalParameterType extends Analyzer {
                     continue;
                 }
                 
-                $this->atomIs('Functioncall')
+                $this->atomFunctionIs($functions)
                      ->analyzerIs('Functions/IsExtFunction')
-                     ->fullnspathIs($functions)
                      ->outIs('ARGUMENTS')
-                     ->outIs('ARGUMENT')
-                     ->is('rank', $position)
+                     ->outWithRank('ARGUMENT', $position)
 
                      // only include literals (and closures and literal array)
                      ->isLiteral()

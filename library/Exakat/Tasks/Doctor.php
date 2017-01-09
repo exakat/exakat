@@ -39,9 +39,9 @@ class Doctor extends Tasks {
     public function run() {
         $stats = array();
 
-        $stats = array_merge($stats, $this->checkPreRequisite($this->config));
-        $stats = array_merge($stats, $this->checkAutoInstall($this->config));
-        $stats = array_merge($stats, $this->checkOptional($this->config));
+        $stats = array_merge($stats, $this->checkPreRequisite());
+        $stats = array_merge($stats, $this->checkAutoInstall());
+        $stats = array_merge($stats, $this->checkOptional());
 
         $doctor = '';
         foreach($stats as $section => $details) {
@@ -62,6 +62,7 @@ class Doctor extends Tasks {
 
         // check for PHP
         $stats['PHP']['binary']     = $this->config->php;
+        $stats['PHP']['executable'] = $this->config->executable;
         $stats['PHP']['version']    = phpversion();
         $stats['PHP']['curl']       = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
         $stats['PHP']['hash']       = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
@@ -69,6 +70,7 @@ class Doctor extends Tasks {
         $stats['PHP']['sqlite3']    = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
         $stats['PHP']['tokenizer']  = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
         $stats['PHP']['mbstring']   = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional, add --enable-mbstring to configure)';
+        $stats['PHP']['json']       = extension_loaded('json')      ? 'Yes' : 'No';
         $stats['PHP']['exakat.ini'] = implode(",\n                           ", $this->config->configFiles);
 
         // java
@@ -238,8 +240,48 @@ php          = "$php"
 ;php72        = /path/to/php72
 php$version        = {$_SERVER['_']}
 
+; Default themes to run
+#project_themes[] = 'CompatibilityPHP53';
+#project_themes[] = 'CompatibilityPHP54';
+#project_themes[] = 'CompatibilityPHP55';
+#project_themes[] = 'CompatibilityPHP56';
+project_themes[] = 'CompatibilityPHP70';
+project_themes[] = 'CompatibilityPHP71';
+project_themes[] = 'CompatibilityPHP72';
+project_themes[] = 'Analyze';
+project_themes[] = 'Preferences';
+project_themes[] = 'Appinfo';
+project_themes[] = 'Appcontent';
+project_themes[] = '"Dead code"';
+project_themes[] = 'Security';
+project_themes[] = 'Custom';
+
+; Default reports to generate
+; General reports
+project_reports[] = 'Ambassador';
+; project_reports[] = 'Text';
+; project_reports[] = 'Xml';
+; project_reports[] = 'Csv';
+
+; Focused reports
+project_reports[] = 'PhpConfiguration';
+project_reports[] = 'PhpCompilation';
+; project_reports[] = 'Inventories';
+; project_reports[] = 'Uml';
+; project_reports[] = 'Clustergrammer';
+
+; Special reports
+project_reports[] = 'RadwellCode';
+project_reports[] = 'ZendFramework';
+
+;Old reports (soon to be dropped)
+; project_reports[] = 'Devoops';
+; project_reports[] = 'Faceted';
+
 ; Limit the size of a project to 1000 k tokens (about 100 k LOC)
 token_limit = 1000000
+
+
 INI;
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
         }

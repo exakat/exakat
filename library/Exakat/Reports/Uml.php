@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class Uml extends Reports {
     const FILE_EXTENSION = 'dot';
+    const FILE_FILENAME  = 'exakat.uml';
 
     public function __construct() {
         parent::__construct();
@@ -53,7 +54,7 @@ SQL
         $colors = array('class' => 'darkorange', 'trait' => 'gold', 'interface' => 'skyblue');
         $subgraphs = array();
         
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             ++$id;
             if (strlen($row['properties']) > 0) {
                 $row['properties'] = "+&nbsp;".str_replace('||', "<br align='left'/>+&nbsp;", $this->str2dot($row['properties']))."<br align='left'/>"; 
@@ -103,7 +104,7 @@ SQL
 SELECT implementing, implements, type FROM cit_implements
 SQL
 );
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $links[] = $ids[$row['implementing']]." -> ".$ids[$row['implements']]." [label=\"$row[type]\"];";
         }
         

@@ -27,6 +27,8 @@ use Exakat\Config;
 use Exakat\Tasks\Clean;
 use Exakat\Tasks\Jobqueue;
 use Exakat\Exceptions\NoJobqueueStarted;
+use Exakat\Exceptions\NoSuchFile;
+use Exakat\Exceptions\ReportAlreadyDone;
 
 class Queue extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -68,12 +70,12 @@ class Queue extends Tasks {
             fwrite($queuePipe, $this->config->project."\n");
             fclose($queuePipe);
         } elseif (!empty($this->config->filename)) {
-            if (!file_exists($this->config->projects_root.'/in/'.$this->config->filename.'.php')) {
-                throw new \Exakat\Exceptions\NoSuchFile('No such file "'.$this->config->filename.'" in /in/ folder');
+            if (!file_exists($this->config->projects_root.'/projects/onepage/code/'.$this->config->filename.'.php')) {
+                throw new NoSuchFile('No such file "'.$this->config->filename.'" in /in/ folder');
             }
 
-            if (file_exists($this->config->projects_root.'/out/'.$this->config->filename.'.json')) {
-                throw new \Exakat\Exceptions\ReportAlreadyDone($this->config->filename);
+            if (file_exists($this->config->projects_root.'/projects/onepage/reports/'.$this->config->filename.'.json')) {
+                throw new ReportAlreadyDone($this->config->filename);
             }
 
             display('Adding file '.$this->config->project.' to the queue');

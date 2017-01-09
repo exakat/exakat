@@ -31,6 +31,7 @@ use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
+    const FILE_FILENAME  = 'ambassador';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -62,9 +63,6 @@ class Ambassador extends Reports {
                                  'namespaces' => 'Namespaces',
                                  'exceptions' => 'Exceptions');
 
-    /**
-     * __construct
-     */
     public function __construct() {
         parent::__construct();
         $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
@@ -167,11 +165,6 @@ class Ambassador extends Reports {
         $this->cleanFolder();
     }
 
-    /**
-     * Clear and init folder
-     *
-     * @return string
-     */
     private function initFolder() {
         if ($this->finalName === null) {
             return "Can't produce Devoops format to stdout";
@@ -296,7 +289,7 @@ class Ambassador extends Reports {
             $list = $this->datastore->getHashAnalyzer($analyzer);
         
             $table = '';
-            $values = '';
+            $values = array();
             $object = Analyzer::getInstance($analyzer);
             $name = $object->getDescription()->getName();
 
@@ -1178,10 +1171,6 @@ JAVASCRIPT;
         return $html;
     }
 
-    /**
-     * Get Issues Breakdown
-     *
-     */
     public function getIssuesBreakdown() {
         $receipt = array('Code Smells'  => 'Analyze',
                          'Dead Code'    => 'Dead code',
@@ -1218,19 +1207,16 @@ JAVASCRIPT;
         }
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
-            $html .= '<div class="clearfix">
+            $issuesHtml .= '<div class="clearfix">
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>';
         }
 
-        return array('html' => $issuesHtml, 'script' => $dataScript);
+        return array('html'  => $issuesHtml, 
+                    'script' => $dataScript);
     }
 
-    /**
-     * Severity Breakdown
-     *
-     */
     public function getSeverityBreakdown() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1244,7 +1230,7 @@ JAVASCRIPT;
 SQL;
         $result = $this->sqlite->query($query);
         $data = array();
-        while ($row = $result->fetchArray()) {
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $data[] = array('label' => $row['severity'], 
                             'value' => $row['number']);
         }
@@ -1269,10 +1255,6 @@ SQL;
         return array('html' => $html, 'script' => $dataScript);
     }
 
-    /**
-     * Liste fichier analysé
-     *
-     */
     private function getTotalAnalysedFile() {
         $query = "SELECT COUNT(DISTINCT file) FROM results";
         $result = $this->sqlite->query($query);
@@ -1338,11 +1320,6 @@ SQL
         return $return;
     }
 
-    /**
-     * Nombre fichier qui ont l'analyzer
-     *
-     * @param type $analyzer
-     */
     private function getCountFileByAnalyzers($analyzer) {
         $query = <<<'SQL'
                 SELECT count(*)  AS number
@@ -1378,10 +1355,6 @@ SQL;
         $this->putBasedPage('files', $finalHTML);
     }
 
-    /**
-     * Get list of file
-     *
-     */
     private function getFilesResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1399,11 +1372,6 @@ SQL
         return $return;
     }
 
-    /**
-     * Nombre analyzer par fichier
-     *
-     * @param type $file
-     */
     private function getCountAnalyzersByFile($file) {
         $query = <<<'SQL'
                 SELECT count(*)  AS number
@@ -1417,11 +1385,6 @@ SQL;
         return $row['number'];
     }
 
-    /**
-     * List file with count
-     *
-     * @param type $limit
-     */
     public function getFilesCount($limit = null) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1436,17 +1399,14 @@ SQL;
         }
         $result = $this->sqlite->query($query);
         $data = array();
-        while ($row = $result->fetchArray()) {
-            $data[] = array('file' => $row['file'], 'value' => $row['number']);
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+            $data[] = array('file'  => $row['file'], 
+                            'value' => $row['number']);
         }
 
         return $data;
     }
 
-    /**
-     * Liste de top file
-     *
-     */
     private function getTopFile() {
         $data = $this->getFilesCount(self::TOPLIMIT);
 
@@ -1500,11 +1460,6 @@ SQL;
         );
     }
 
-    /**
-     * List analyzer with count
-     *
-     * @param type $limit
-     */
     private function getAnalyzersCount($limit) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1520,16 +1475,13 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'], 'value' => $row['number']);
+            $data[] = array('analyzer' => $row['analyzer'], 
+                            'value'    => $row['number']);
         }
 
         return $data;
     }
 
-    /**
-     * Liste de top analyzers
-     *
-     */
     private function getTopAnalyzers() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1542,9 +1494,10 @@ SQL;
                     LIMIT " . self::TOPLIMIT;
         $result = $this->sqlite->query($query);
         $data = array();
-        while ($row = $result->fetchArray()) {
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
-            $data[] = array('label' => $analyzer->getDescription()->getName(), 'value' => $row['number']);
+            $data[] = array('label' => $analyzer->getDescription()->getName(), 
+                            'value' => $row['number']);
         }
 
         $html = '';
@@ -1560,10 +1513,6 @@ SQL;
         return $html;
     }
 
-    /**
-     * Nombre severity by file en Dashboard
-     *
-     */
     private function getSeveritiesNumberBy($type = 'file') {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -1589,10 +1538,6 @@ SQL;
         return $return;
     }
     
-    /**
-     * Get data analyzer overview
-     * 
-     */
     private function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
@@ -1689,10 +1634,6 @@ JAVASCRIPT;
         $this->putBasedPage('issues', $finalHTML);
     }
 
-    /**
-     * List of Issues faceted
-     * @return array
-     */
     public function getIssuesFaceted($theme) {
         $list = Analyzer::getThemeAnalyzers($theme);
         $list = '"'.join('", "', $list).'"';
@@ -1731,12 +1672,6 @@ SQL;
         return $items;
     }
     
-    /**
-     * Get class by type
-     * 
-     * @param type $type
-     * @return string
-     */
     private function getClassByType($type)
     {
         if ($type == 'Critical' || $type == 'Long') {
@@ -1755,7 +1690,6 @@ SQL;
     }
     
     private function generateSettings() {
-
        $info = array(array('Code name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
             $info[] = array('Code description', $this->config->project_description);
@@ -1868,7 +1802,7 @@ SQL;
         $this->putBasedPage('ext_lib', $html);
     }
 
-    protected function generateBugfixes() {
+    protected function generateBugFixes() {
         $table = '';
 
         $data = new Methods();
@@ -1879,7 +1813,7 @@ SQL;
         $info = array();
 
         $rows = array();
-        while($row = $found->fetchArray()) {
+        while($row = $found->fetchArray(\SQLITE3_ASSOC)) {
             $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
         }
         
@@ -1979,13 +1913,12 @@ SQL;
         
         $info[] = array('Exakat version', Exakat::VERSION . ' ( Build '. Exakat::BUILD . ') ');
 
-        
         foreach($info as &$row) {
             $row = '<tr><td>'.implode('</td><td>', $row).'</td></tr>';
         }
         unset($row);
         
-        $settings = join("", $info);
+        $settings = join('', $info);
 
         $html = $this->getBasedPage('annex_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
@@ -1996,7 +1929,7 @@ SQL;
         $errorMessages = '';
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $errorMessages .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
@@ -2077,7 +2010,7 @@ SQL
         $dynamicCode = '';
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $dynamicCode .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
@@ -2089,7 +2022,7 @@ SQL
     private function generateGlobals() {
         $theGlobals = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $theGlobals .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
@@ -2121,7 +2054,7 @@ SQL
 
             $theTable = '';
             $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$theAnalyzer.'"');
-            while($row = $res->fetchArray()) {
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $theTable .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
             }
 
@@ -2136,7 +2069,7 @@ SQL
     private function generateAlteredDirectives() {
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
-        while($row = $res->fetchArray()) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $alteredDirectives .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
         

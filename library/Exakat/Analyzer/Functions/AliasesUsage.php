@@ -31,10 +31,7 @@ class AliasesUsage extends Analyzer {
         $ini = $this->loadIni('aliases.ini', 'alias');
         $ini = $this->makeFullNsPath(array_keys($ini));
 
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->fullnspathIs($ini);
+        $this->atomFunctionIs($ini);
         $this->prepareQuery();
     }
 }

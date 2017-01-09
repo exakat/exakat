@@ -28,12 +28,8 @@ class ShouldUseFunction extends Analyzer {
     public function analyze() {
         $this->atomIs('Functioncall')
              ->hasNoIn(array('METHOD', 'NEW'))
-             ->tokenIsNot('token', array('T_OPEN_BRACKET', 'T_ARRAY'))
-             ->isNot('absolute', true)
-             
-//             ->isNot('use', true)
-//             ->back('first')
-             ;
+             ->tokenIsNot(array('T_OPEN_BRACKET', 'T_ARRAY', 'T_PRINT', 'T_ECHO'))
+             ->is('aliased', false);
         $this->prepareQuery();
     }
 }

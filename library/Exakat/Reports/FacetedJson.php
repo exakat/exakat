@@ -28,6 +28,7 @@ use Exakat\Datastore;
 
 class FacetedJson extends Reports {
     const FILE_EXTENSION = 'json';
+    const FILE_FILENAME  = 'faceted';
 
     public function generateFileReport($report) {}
 

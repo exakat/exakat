@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Wed, 04 Jan 2017 10:43:27 +0000
-.. comment: Generation hash : 08cc7b4fec5accc115827eab236a46e557a20108
+.. comment: Generation date : Mon, 09 Jan 2017 17:00:17 +0000
+.. comment: Generation hash : 653ff5d38cb66269a9f516d51dc82cefce68dc88
 
 
 .. _analyze:
@@ -154,6 +154,7 @@ Total : 282 analysis
 * :ref:`Global Usage <global-usage>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Hash Algorithms <hash-algorithms>`
+* :ref:`Hidden Use Expression <hidden-use-expression>`
 * :ref:`Htmlentities Calls <htmlentities-calls>`
 * :ref:`Identical Conditions <identical-conditions>`
 * :ref:`If With Same Conditions <if-with-same-conditions>`
@@ -184,7 +185,6 @@ Total : 282 analysis
 * :ref:`Multiples Identical Case <multiples-identical-case>`
 * :ref:`Multiply By One <multiply-by-one>`
 * :ref:`Must Return Methods <must-return-methods>`
-* :ref:`Namespaces/HiddenUse`
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
@@ -384,7 +384,7 @@ Total : 18 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 51 analysis
+Total : 52 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -417,6 +417,7 @@ Total : 51 analysis
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
+* :ref:`No String With Append <no-string-with-append>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
@@ -443,7 +444,7 @@ Total : 51 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 47 analysis
+Total : 48 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -473,6 +474,7 @@ Total : 47 analysis
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
+* :ref:`No String With Append <no-string-with-append>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
@@ -498,7 +500,7 @@ Total : 47 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 43 analysis
+Total : 44 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -521,6 +523,7 @@ Total : 43 analysis
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
+* :ref:`No String With Append <no-string-with-append>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
@@ -549,7 +552,7 @@ Total : 43 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 35 analysis
+Total : 36 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -565,6 +568,7 @@ Total : 35 analysis
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
+* :ref:`No String With Append <no-string-with-append>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
@@ -739,12 +743,14 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 21 analysis
+Total : 23 analysis
 
+* :ref:`Avoid array_push() <avoid-array\_push()>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Echo With Concatenation <echo-with-concatenation>`
 * :ref:`Eval() Usage <eval()-usage>`
+* :ref:`Fetch One Row Format <fetch-one-row-format>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Functions In Loop Calls <functions-in-loop-calls>`
 * :ref:`Getting Last Element <getting-last-element>`
@@ -754,7 +760,7 @@ Total : 21 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-* :ref:`Performances/AvoidArrayPush`
+* :ref:`Performances/NoGlob`
 * :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
 * :ref:`Should Use Function Use <should-use-function-use>`

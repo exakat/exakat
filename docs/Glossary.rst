@@ -131,7 +131,7 @@ Glossary
     + `closure`
 
       + :ref:`Closure May Use $this <closure-may-use-$this>`
-      + :ref:`Namespaces/HiddenUse <namespaces/hiddenuse>`
+      + :ref:`Hidden Use Expression <hidden-use-expression>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
@@ -144,11 +144,11 @@ Glossary
     + `count`
 
       + :ref:`Always Positive Comparison <always-positive-comparison>`
+      + :ref:`Avoid array_push() <avoid-array\_push()>`
       + :ref:`Common Alternatives <common-alternatives>`
       + :ref:`For Using Functioncall <for-using-functioncall>`
       + :ref:`Getting Last Element <getting-last-element>`
       + :ref:`No Count With 0 <no-count-with-0>`
-      + :ref:`Performances/AvoidArrayPush <performances/avoidarraypush>`
       + :ref:`Static Loop <static-loop>`
       + :ref:`Used Once Variables <used-once-variables>`
       + :ref:`Uses Default Values <uses-default-values>`
@@ -439,6 +439,7 @@ Glossary
 
       + :ref:`Results May Be Missing <results-may-be-missing>`
       + :ref:`Simplify Regex <simplify-regex>`
+      + :ref:`Strpos Comparison <strpos-comparison>`
       + :ref:`Unkown Regex Options <unkown-regex-options>`
 
     + `preg_replace`
@@ -476,10 +477,6 @@ Glossary
 
 
 + `S`
-    + `Strpos`
-
-      + :ref:`Strpos Comparison <strpos-comparison>`
-
     + `set_exception_handler`
 
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
@@ -574,6 +571,7 @@ Glossary
       + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
       + :ref:`Old Style Constructor <old-style-constructor>`
       + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
+      + :ref:`Performances/NoGlob <performances/noglob>`
       + :ref:`Performances/timeVsstrtotime <performances/timevsstrtotime>`
       + :ref:`Redefined Default <redefined-default>`
       + :ref:`Short Open Tags <short-open-tags>`

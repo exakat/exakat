@@ -34,7 +34,7 @@ class ShouldPreprocess extends Analyzer {
 //'Identifier', 
         $methods = new Methods();
         $functionList = $methods->getDeterministFunctions();
-        $functionList = $this->makeFullNSPath($functionList);
+        $functionList = $this->makeFullNsPath($functionList);
 
         $tokenList = '"'.implode('", "', self::$FUNCTIONS_TOKENS).'"';
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))

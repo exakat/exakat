@@ -50,10 +50,8 @@ class Config {
                                             'delete'         => false,
                                             'lint'           => false,
                                             'json'           => false,
+                                            'array'          => false,
                                             'dot'            => false,
-                                            'ss'             => false,
-                                            'sm'             => false,
-                                            'sl'             => false,
                                             'noDependencies' => false,
                                             'noRefresh'      => false,
                                             'today'          => false,
@@ -124,13 +122,10 @@ class Config {
                                  '-D'         => 'delete',
                                  '-l'         => 'lint',
                                  '-json'      => 'json',
+                                 '-array'     => 'array',
                                  '-dot'       => 'dot',
 
 // Size of the projects
-                                 '-ss'        => 'ss',
-                                 '-sm'        => 'sm',
-                                 '-sl'        => 'sl',
-
                                  '-nodep'     => 'noDependencies',
                                  '-norefresh' => 'noRefresh',
                                  '-today'     => 'today',
@@ -170,6 +165,7 @@ class Config {
                                          'findextlib'    => 1,
                                          'help'          => 1, 
                                          'init'          => 1, 
+                                         'catalog'       => 1,
                                          'remove'        => 1, 
                                          'server'        => 1, 
                                          'jobqueue'      => 1, 
@@ -217,6 +213,7 @@ class Config {
             ini_set('display_errors', 1);
         }
         
+        $inis = array();
         $configFiles = array('/etc/exakat.ini',
                              '/etc/exakat/exakat.ini',
                              
@@ -454,8 +451,10 @@ class Config {
             $this->commandline['project']   = 'onepage';
             $this->commandline['thema']     = 'OneFile';
             $this->commandline['format']    = 'OnepageJson';
-            $this->commandline['file']      = 'stdout';
+            $this->commandline['file']      = str_replace('/code/', '/reports/', substr($this->commandline['filename'], 0, -4));
+            $this->commandline['quiet']     = true;
             $this->commandline['norefresh'] = true;
+            print_r($this->commandline);
         }
     }
 }

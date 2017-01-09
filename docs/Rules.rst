@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 04 Jan 2017 10:43:27 +0000
-.. comment: Generation hash : 08cc7b4fec5accc115827eab236a46e557a20108
+.. comment: Generation date : Mon, 09 Jan 2017 17:00:17 +0000
+.. comment: Generation hash : 653ff5d38cb66269a9f516d51dc82cefce68dc88
 
 
 .. _$http\_raw\_post\_data:
@@ -696,6 +696,54 @@ When possible, avoid using them, may it be as PHP functions, or hashing function
 
 
 
+.. _avoid-array\_push():
+
+Avoid array_push()
+##################
+
+
+array_push() is slower than the [] operator.
+
+This is also true if the [] operator is called several times, while array_push() may be called only once. 
+And using `count <http://www.php.net/count>`_ after the push is also faster than collecting array_push() return value. 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = [1,2,3];
+   // Fast version
+   $a[] = 4;
+   
+   $a[] = 5;
+   $a[] = 6;
+   $a[] = 7;
+   $count = count($a);
+   
+   // Slow version
+   array_push($a, 4);
+   $count = array_push($a, 5,6,7);
+   
+   // Multiple version : 
+   $a[] = 1;
+   $a[] = 2;
+   $a[] = 3;
+   array_push($a, 1, 2, 3);
+   
+   
+   ?>
+
+
+This is a micro-optimisation.
+
++--------------+-----------------------------+
+| Command Line | Performances/AvoidArrayPush |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Performances`         |
++--------------+-----------------------------+
+
+
+
 .. _avoid-array\_unique():
 
 Avoid array_unique()
@@ -886,7 +934,16 @@ Binary Glossary
 ###############
 
 
-List of all the integer values using the binary format, such as 0b10 or 0B0101.
+List of all the integer values using the binary format.
+
+.. code-block:: php
+
+   <?php
+   
+   $a = 0b10;
+   $b = 0B0101;
+   
+   ?>
 
 +--------------+---------------------------+
 | Command Line | Type/Binary               |
@@ -2886,6 +2943,44 @@ This is also true for negative lengths.
 
 
 
+.. _fetch-one-row-format:
+
+Fetch One Row Format
+####################
+
+
+When reading results with ext/Sqlite3, it is recommended to explicitely request SQLITE3_NUM or SQLITE3_ASSOC, while avoiding the default value and SQLITE3_BOTH.
+
+.. code-block:: php
+
+   <?php
+   
+   $res = $database->query($query);
+   
+   // Fastest version, but less readable
+   $row = $res->fetchArray(\SQLITE3_NUM);
+   // Almost the fastest version, and more readable
+   $row = $res->fetchArray(\SQLITE3_ASSOC);
+   
+   // Default version. Quite slow
+   $row = $res->fetchArray();
+   
+   // Worse case
+   $row = $res->fetchArray(\SQLITE3_BOTH);
+   
+   ?>
+
+
+This is a micro-optimisation. The difference may be visible with 200k rows fetches, and measurable with 10k.
+
++--------------+--------------------------------+
+| Command Line | Performances/FetchOneRowFormat |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Performances`            |
++--------------+--------------------------------+
+
+
+
 .. _for-using-functioncall:
 
 For Using Functioncall
@@ -3479,6 +3574,47 @@ Mark strings that may be confused with hexadecimal.
 
 
 
+.. _hidden-use-expression:
+
+Hidden Use Expression
+#####################
+
+
+The use expression for namespaces should always be at te beginning of the namespace block. 
+
+It is where everyone expect them, and it is less confusing than having them at various levels.
+
+.. code-block:: php
+
+   <?php
+   
+   // This is visible 
+   use A;
+   
+   class B {}
+   
+   // This is hidden 
+   use C as D;
+   
+   class E extends D {
+       use traitT; // This is a use for a trait
+   
+       function foo() {
+           // This is a use for a closure
+           return function ($a) use ($b) {}
+       }
+   }
+   
+   ?>
+
++--------------+----------------------+
+| Command Line | Namespaces/HiddenUse |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
+
+
+
 .. _htmlentities-calls:
 
 Htmlentities Calls
@@ -3595,9 +3731,26 @@ Iffectations
 ############
 
 
-Affectations that appears in a if() conditions, such as if ($x = mysql_connect(...)).
+Affectations that appears in a conditions. 
 
-Iffectations are a way to do both a test and an affectations. They may also be typos, such as if ($x = 3) { ... }, leading to a constant condition.
+Iffectations are a way to do both a test and an affectations. 
+They may also be typos, such as if ($x = 3) { ... }, leading to a constant condition. 
+
+.. code-block:: php
+
+   <?php
+   
+   // an iffectation : assignation in a If condition
+   if($connexion = mysql_connect($host, $user, $pass)) {
+       $res = mysql_query($connexion, $query);
+   }
+   
+   // Iffectation may happen in while too.
+   while($row = mysql_fetch($res)) {
+       $store[] = $row;
+   }
+   
+   ?>
 
 +--------------+------------------------+
 | Command Line | Structures/Iffectation |
@@ -4732,47 +4885,6 @@ Methods that may not return, but are often expected to : `__call() <http://php.n
 
 
 
-.. _namespaces/hiddenuse:
-
-Namespaces/HiddenUse
-####################
-
-
-The use expression for namespaces should always be at te beginning of the namespace block. 
-
-It is where everyone expect them, and it is less confusing than having them at various levels.
-
-.. code-block:: php
-
-   <?php
-   
-   // This is visible 
-   use A;
-   
-   class B {}
-   
-   // This is hidden 
-   use C as D;
-   
-   class E extends D {
-       use traitT; // This is a use for a trait
-   
-       function foo() {
-           // This is a use for a closure
-           return function ($a) use ($b) {}
-       }
-   }
-   
-   ?>
-
-+--------------+----------------------+
-| Command Line | Namespaces/HiddenUse |
-+--------------+----------------------+
-| Analyzers    | :ref:`Analyze`       |
-+--------------+----------------------+
-
-
-
 .. _negative-power:
 
 Negative Power
@@ -5272,6 +5384,27 @@ No Hardcoded Ip
 
 Do not leave hard coded IP in your code.
 
+It is recommended to move such configuration in external files or databases, for each update. 
+This may also come handy when testing. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This IPv4 is hardcoded. 
+   $ip = '183.207.224.50';
+   // This IPv6 is hardcoded. 
+   $ip = '2001:0db8:85a3:0000:0000:8a2e:0370:7334';
+   
+   // This looks like an IP
+   $thisIsNotAnIP = '213.187.99.50';
+   $thisIsNotAnIP = '2133:1387:9393:5330';
+   
+   ?>
+
+
+127.0.0.1, ::1 and ::0 are omitted, and not considered as a violation.
+
 +--------------+--------------------------------+
 | Command Line | Structures/NoHardcodedIp       |
 +--------------+--------------------------------+
@@ -5598,6 +5731,32 @@ The code needs to reference the full class's name to do so, without using the cu
 +--------------+-----------------------------------+
 | Analyzers    | :ref:`Analyze`                    |
 +--------------+-----------------------------------+
+
+
+
+.. _no-string-with-append:
+
+No String With Append
+#####################
+
+
+PHP 7 doesn't allow the usage of [] with strings. [] is an array-only oeprator.
+
+.. code-block:: php
+
+   <?php
+   
+   
+   ?>
+
+
+This was possible in PHP 5.*, but is now forbidden in PHP 7.
+
++--------------+---------------------------------------------------------------------------------------------------------+
+| Command Line | Php/NoStringWithAppend                                                                                  |
++--------------+---------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6461,44 +6620,46 @@ Using parenthesis around parameters used to silent some internal check. This is 
 
 
 
-.. _performances/avoidarraypush:
+.. _performances/noglob:
 
-Performances/AvoidArrayPush
-###########################
+Performances/NoGlob
+###################
 
 
-array_push() is slower than the [] operator.
+glob() and scandir() sorts results by default. If you don't need that sorting, save some `time <http://www.php.net/time>`_ by requesting NOSORT with those functions.
 
-This is also true if the [] operator is called several times, while array_push() may be called only once. 
-And counting elements by the end of the push is still faster than collecting array_push() return value. 
+Besides, whenever possible, use scandir() instead of glob(). 
 
 .. code-block:: php
 
    <?php
    
-   $a = [1,2,3];
-   // Fast version
-   $a[] = 4;
+   // Scandir without sorting is the fastest. 
+   scandir('docs/', SCANDIR_SORT_NONE);
    
-   $a[] = 5;
-   $a[] = 6;
-   $a[] = 7;
-   $count = count($a);
+   // Scandir sorts files by default. Same as above, but with sorting
+   scandir('docs/');
    
-   // Slow version
-   array_push($a, 4);
-   $count = array_push($a, 5,6,7);
+   // glob sorts files by default. Same as below, but no sorting
+   glob('docs/*', GLOB_NOSORT);
+   
+   // glob sorts files by default. This is the slowest version
+   glob('docs/*');
    
    ?>
 
 
-This is a micro-optimisation.
+Using opendir() and a while loop may be even faster. 
 
-+--------------+-----------------------------+
-| Command Line | Performances/AvoidArrayPush |
-+--------------+-----------------------------+
-| Analyzers    | :ref:`Performances`         |
-+--------------+-----------------------------+
+This analysis skips scandir() and glob() if they are explicitely configured with flags (aka, sorting is explicitely needed).
+
+Glob() accepts wildchar, that may not easily replaced with scandir() or opendir().
+
++--------------+---------------------+
+| Command Line | Performances/NoGlob |
++--------------+---------------------+
+| Analyzers    | :ref:`Performances` |
++--------------+---------------------+
 
 
 
@@ -6617,7 +6778,18 @@ Phpinfo
 #######
 
 
-Phpinfo is a great function to learn about the current configuration of the server.
+phpinfo() is a great function to learn about the current configuration of the server.
+
+.. code-block:: php
+
+   <?php
+   
+   if (DEBUG) {
+       phpinfo();
+   }
+   
+   ?>
+
 
 If left in the production code, it may lead to a critical leak, as any attacker gaining access to this data will know a lot about the server configuration.
 It is advised to never leave that kind of instruction in a production code.
@@ -7002,7 +7174,21 @@ This lead to security failures, as the variables were often used but not filtere
 Though it is less often found in more recent code, register_globals is sometimes needed in legacy code, that haven't made the move to eradicate this style of coding.
 Backward compatible pieces of code that mimic the register_globals features usually create even greater security risks by being run after scripts startup. At that point, some important variables are already set, and may be overwritten by the incoming call, creating confusion in the script.
 
-Mimicking register_globals is achieved with variables variables, extract(), parse_str() and import_request_variables() (Up to PHP 5.4).
+Mimicking register_globals is achieved with variables variables, extract(), parse_str() and import_request_variables() (Up to PHP 5.4). 
+
+.. code-block:: php
+
+   <?php
+   
+   // Security warning ! This overwrites existing variables. 
+   extract($_POST);
+   
+   // Security warning ! This overwrites existing variables. 
+   foreach($_REQUEST as $var => $value) {
+       $$var = $value;
+   }
+   
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Security/RegisterGlobals |
@@ -8079,10 +8265,35 @@ Strpos Comparison
 #################
 
 
-Strpos() returns a string position, starting at 0, or false, in case of failure. 
+`strpos() <http://www.php.net/strpos>`_ returns a string position, starting at 0, or false, in case of failure. 
 
-It is recommended to check the result of `strpos <http://www.php.net/strpos>`_ with === or !==, so as to avoid confusing 0 and false. 
-This analyzer list all the `strpos <http://www.php.net/strpos>`_ function that are directly compared with == or !=.
+.. code-block:: php
+
+   <?php
+   
+   // This is the best comparison
+   if (strpos($string, 'a') === false) { }
+   
+   // This is OK, as 2 won't be mistaken with false
+   if (strpos($string, 'a') == 2) { }
+   
+   // strpos is one of the 26 functions that may behave this way
+   if (preg_match($regex, $string)) { } 
+   
+   // This works like above, catching the value for later reuse
+   if ($a = strpos($string, 'a')) { }
+   
+   // This misses the case where 'a' is the first char of the string
+   if (strpos($string, 'a')) { }
+   
+   // This misses the case where 'a' is the first char of the string, just like above
+   if (strpos($string, 'a') == 0) { }
+   
+   ?>
+
+
+It is recommended to check the reslt of `strpos <http://www.php.net/strpos>`_ with === or !==, so as to avoid confusing 0 and false. 
+This analyzer list all the `strpos() <http://www.php.net/strpos>`_ function that are directly compared with == or !=.
 
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Command Line | Structures/StrposCompare                                                                            |
@@ -8343,7 +8554,21 @@ Throws An Assignement
 #####################
 
 
-It is possible to `throw <http://www.php.net/throw>`_ an exception, and, in the same `time <http://www.php.net/time>`_, assign this exception to a variable : `throw <http://www.php.net/throw>`_ $e = new() Exception().
+It is possible to `throw <http://www.php.net/throw>`_ an exception, and, in the same `time <http://www.php.net/time>`_, assign this exception to a variable.
+
+.. code-block:: php
+
+   <?php
+   
+       // $e is useful, though not by much
+       $e = new() Exception();
+       throw $e;
+   
+       // $e is useless
+       throw $e = new() Exception();
+   
+   ?>
+
 
 However, $e will never be used, as the exception is thrown, and any following code is not executed. 
 
@@ -10169,13 +10394,11 @@ This is the list of used once variables, scope by scope. Those variables are use
    
    ?>
 
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Command Line | Variables/VariableUsedOnceByContext                                                                   |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| clearPHP     | `no-unused-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/no-unused-arguments.md>`__ |
-+--------------+-------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`                                                                                        |
-+--------------+-------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------+
+| Command Line | Variables/VariableUsedOnceByContext |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`                      |
++--------------+-------------------------------------+
 
 
 
@@ -10433,6 +10656,7 @@ Useless Instructions
 The instructions below are useless, or contains useless parts. For example, running '&lt;?php 1 + 1; ?&gt;' does nothing : the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
 
 Here the useless instructions that are spotted : 
+
 .. code-block:: php
 
    <?php
@@ -11429,6 +11653,19 @@ include_once() Usage
 
 
 include_once() and require_once() functions should be avoided for performances reasons.
+
+.. code-block:: php
+
+   <?php
+   
+   // Including a library. 
+   include 'lib/helpers.inc';
+   
+   // Including a library, and avoiding double inclusion
+   include_once 'lib/helpers.inc';
+   
+   ?>
+
 
 Try using autoload for loading classes, or use include() or require() and make it possible to include several times the same `file <http://www.php.net/file>`_ without errors.
 

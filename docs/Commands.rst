@@ -7,6 +7,7 @@ List of commands :
 ------------------
 
 * anonymize
+* catalog
 * clean
 * cleandb
 * doctor
@@ -58,6 +59,22 @@ Tips
 ####
 
 * `-R` is not compulsory : you may omit it, then, provide PHP files in the `projects/<name>/code` folder by the mean you want.
+
+catalog
+-------
+
+Catalog list all available themes and reports with the current exakat.
+
+This is a help command, to help find the available values for various options.
+
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -json     | No  | Returns the catalog as JSON, for further processing.                        |
++-----------+-----+-----------------------------------------------------------------------------+
 
 clean
 -----

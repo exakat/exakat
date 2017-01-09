@@ -23,14 +23,16 @@
 namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Tasks\Project;
 use Exakat\Config;
 
 class Clustergrammer extends Reports {
     const FILE_EXTENSION = 'txt';
+    const FILE_FILENAME  = 'clustergrammer';
 
-    public function __construct() {
-        parent::__construct();
-    }
+    private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                                  'CompatibilityPHP70', 'CompatibilityPHP71',
+                                  '"Dead code"', 'Security', 'Analyze');
 
     public function generateFileReport($report) {
         return false;
@@ -38,7 +40,7 @@ class Clustergrammer extends Reports {
 
     public function generate($folder, $name= 'txt') {
         $config = Config::factory();
-        $themes = $config->thema;
+        $themes = $this->themesToShow;
 
         $analyzers = array();
         foreach($themes as $theme) {

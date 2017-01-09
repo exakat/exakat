@@ -30,8 +30,7 @@ class TimestampDifference extends Analyzer {
         $this->atomIs('Addition')
              ->codeIs('-')
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Functioncall')
-             ->fullnspathIs(array('\\time', '\\microtime'))
+             ->functioncallIs(array('\\time', '\\microtime'))
              ->back('first');
         $this->prepareQuery();
     }

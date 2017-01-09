@@ -3,9 +3,70 @@
 Annex
 =====
 
+* Supported Themes
+* Supported Reports
 * Supported PHP Extensions
 * Supported Frameworks
 * Recognized Libraries
+* New analyzers
+* External services
+
+Supported Themes
+----------------
+
+Exakat groups analysis by themes. This way, analyzing 'Security' runs all possible analysis related to themes.
+
+* All
+* Analyze
+* Appcontent
+* Appinfo
+* Cakephp
+* Calisthenics
+* ClearPHP
+* Coding Conventions
+* CompatibilityPHP53
+* CompatibilityPHP54
+* CompatibilityPHP55
+* CompatibilityPHP56
+* CompatibilityPHP70
+* CompatibilityPHP71
+* CompatibilityPHP72
+* Custom
+* Dead code
+* Internal
+* Inventory
+* OneFile
+* PHP recommendations
+* Performances
+* Portability
+* Preferences
+* RadwellCodes
+* Security
+* Unassigned
+* Wordpress
+* ZendFramework
+
+Supported Reports
+-----------------
+
+Exakat produces various reports. Some are general, covering various aspects in a reference way; others focus on one aspect. 
+
+  *Ambassador
+  *Devoops
+  *Text
+  *Xml
+  *Uml
+  *PhpConfiguration
+  *PhpCompilation
+  *Inventories
+  *Clustergrammer
+  *ZendFramework
+  *RadwellCode
+  *Faceted
+  *FacetedJson
+  *Json
+  *OnepageJson
+
 
 Supported PHP Extensions
 ------------------------
@@ -211,8 +272,12 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. 
 
 
+* 0.9.6
+  * Fetch One Row Format (Performances/FetchOneRowFormat)
+  * Performances/NoGlob (Performances/NoGlob)
 * 0.9.5
   * Ext/mongodb (Extensions/Extmongodb)
+  * One Expression Brackets Consistency (Structures/OneExpressionBracketsConsistency)
   * Should Use Function Use (Php/ShouldUseFunction)
   * ext/zbarcode (Extensions/Extzbarcode)
 * 0.9.4
@@ -232,9 +297,9 @@ List of analyzers, by version of introduction, newest to oldest.
   * ext/newt (Extensions/Extnewt)
   * ext/nsapi (Extensions/Extnsapi)
 * 0.9.1
+  * Avoid array_push() (Performances/AvoidArrayPush)
   * Could Return Void (Functions/CouldReturnVoid)
   * Invalid Octal In String (Type/OctalInString)
-  * Performances/AvoidArrayPush (Performances/AvoidArrayPush)
   * Undefined Class 2.0 (ZendF/UndefinedClass20)
   * Undefined Class 2.1 (ZendF/UndefinedClass21)
   * Undefined Class 2.2 (ZendF/UndefinedClass22)
@@ -447,7 +512,6 @@ List of analyzers, by version of introduction, newest to oldest.
   * Foreach Dont Change Pointer (Php/ForeachDontChangePointer)
   * Foreach Needs Reference Array (Structures/ForeachNeedReferencedSource)
   * Foreach Reference Is Not Modified (Structures/ForeachReferenceIsNotModified)
-  * Foreach Which Source Is Not A Variable (Structures/ForeachSourceNotVariable)
   * Foreach With list() (Structures/ForeachWithList)
   * Forgotten Visibility (Classes/NonPpp)
   * Forgotten Whitespace (Structures/ForgottenWhiteSpace)
@@ -479,6 +543,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Heredoc Delimiter Glossary (Type/Heredoc)
   * Hexadecimal Glossary (Type/Hexadecimal)
   * Hexadecimal In String (Type/HexadecimalString)
+  * Hidden Use Expression (Namespaces/HiddenUse)
   * Htmlentities Calls (Structures/Htmlentitiescall)
   * Http Headers (Type/HttpHeader)
   * Identical Conditions (Structures/IdenticalConditions)
@@ -561,7 +626,6 @@ List of analyzers, by version of introduction, newest to oldest.
   * Must Return Methods (Functions/MustReturn)
   * Namespaces (Namespaces/NamespaceUsage)
   * Namespaces Glossary (Namespaces/Namespacesnames)
-  * Namespaces/HiddenUse (Namespaces/HiddenUse)
   * Negative Power (Structures/NegativePow)
   * Nested Ifthen (Structures/NestedIfthen)
   * Nested Loops (Structures/NestedLoops)
@@ -616,7 +680,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Only Variable Returned By Reference (Structures/OnlyVariableReturnedByReference)
   * Or Die (Structures/OrDie)
   * Overwriting Variable (Variables/Overwriting)
-  * Overwritten Const (Classes/OverwrittenConst)
+  * Overwritten Class Const (Classes/OverwrittenConst)
   * Overwritten Exceptions (Exceptions/OverwriteException)
   * Overwritten Literals (Variables/OverwrittenLiterals)
   * PHP 7.0 New Classes (Php/Php70NewClasses)

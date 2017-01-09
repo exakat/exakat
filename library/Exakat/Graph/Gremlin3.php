@@ -37,6 +37,8 @@ class Gremlin3 extends Graph {
     
     private $status     = self::UNCHECKED;
     
+    private $log        = null;
+    
     public function __construct($config) {
         parent::__construct($config);
         
@@ -46,6 +48,19 @@ class Gremlin3 extends Graph {
 
         if ($this->config->neo4j_login !== '') {
             $this->neo4j_auth   = base64_encode($this->config->neo4j_login.':'.$this->config->neo4j_password);
+        }
+        
+        if ($config->project != 'default' && $config->project != 'test' &&
+            file_exists($config->projects_root.'/projects/'.$config->project)) {
+            $this->log = fopen($config->projects_root.'/projects/'.$config->project.'/log/gremlin.log', 'a');
+            fwrite($this->log, "New connexion \n");
+        }
+    }
+    
+    function __destruct() {
+        if ($this->log !== null) {
+            fwrite($this->log, "End connexion \n");
+            fclose($this->log);
         }
     }
     
@@ -181,6 +196,9 @@ GREMLIN;
     
         $result = json_decode($result);
         if (isset($result->errormessage)) {
+            if ($this->log !== null) {
+                fwrite($this->log, $query."\n".$result->errormessage."\n");
+            }
             throw new GremlinException($result->errormessage, $query);
         }
 

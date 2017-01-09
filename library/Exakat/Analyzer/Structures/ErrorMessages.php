@@ -55,7 +55,6 @@ class ErrorMessages extends Analyzer {
              ->outIs('THROW')
              ->atomIs('New')
              ->outIs('NEW')
-             ->atomIsNot('Functioncall')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
@@ -64,9 +63,9 @@ class ErrorMessages extends Analyzer {
         //  new myException('Message');
         $this->atomIs('New')
              ->outIs('NEW')
+             ->_as('new')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->isNot('fullnspath', null)
-             ->_as('new')
              ->classDefinition()
              ->analyzerIs('Exceptions/DefinedExceptions')
              ->back('new')

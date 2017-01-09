@@ -138,7 +138,7 @@ function duration($seconds) {
 
     $hours = floor($minuts / 60);
     $minuts %= 60;
-    if ($minutes < 24 ) {
+    if ($minuts < 24 ) {
         return $hours. ' h '.$minuts.' min '.$seconds.' s';
     }
 
