@@ -235,8 +235,7 @@ class Load extends Tasks {
                           'args_max'    => self::$PROP_ARGS_MAX,
                           'args_min'    => self::$PROP_ARGS_MIN,
                           'bracket'     => self::$PROP_BRACKET,
-                          'close_tag'   => self::$PROP_CLOSETAG,
-                          'use'         => array(),
+                          'close_tag'   => self::$PROP_CLOSETAG
                           );
 
         $this->php->getTokens();
@@ -793,7 +792,8 @@ class Load extends Tasks {
                 $classId = $this->processOneNsname();
                 $this->setAtom($catchId, array('rank' => ++$rankCatch));
                 $this->addLink($catchId, $classId, 'CLASS');
-                $this->addCall('class', $this->getFullnspath($classId), $classId);
+                list($fullnspath, $aliased) = $this->getFullnspath($classId);
+                $this->addCall('class', $fullnspath, $classId);
                 $catchFullcode[] = $this->atoms[$classId]['fullcode'];
                 
                 if ($this->tokens[$this->id + 1][0] === T_PIPE) {
@@ -931,7 +931,7 @@ class Load extends Tasks {
             !$this->isContext(self::CONTEXT_CLASS) &&
             !$this->isContext(self::CONTEXT_TRAIT) &&
             !$this->isContext(self::CONTEXT_INTERFACE)) {
-            $fullnspath = $this->getFullnspath($nameId);
+            list($fullnspath, $aliased) = $this->getFullnspath($nameId);
             $this->addDefinition('function', $fullnspath, $functionId);
         } else {
             $fullnspath = '';
@@ -946,7 +946,8 @@ class Load extends Tasks {
                                                           (isset($blockId) ? self::FULLCODE_BLOCK : ' ;'),
                                           'line'       => $this->tokens[$current][2],
                                           'token'      => $this->getToken($this->tokens[$current][0]),
-                                          'fullnspath' => $fullnspath ));
+                                          'fullnspath' => $fullnspath,
+                                          'aliased'    => $aliased ));
         
         $this->pushExpression($functionId);
         
@@ -1007,8 +1008,9 @@ class Load extends Tasks {
                                              'token'    => $this->getToken($this->tokens[$current + 1][0]),
                                              'variadic' => false,
                                              'absolute' => !$hasPrevious));
-            $fullnspath = $this->getFullnspath($extendsId);
-            $this->setAtom($extendsId, array('fullnspath' => $fullnspath));
+            list($fullnspath, $aliased) = $this->getFullnspath($extendsId);
+            $this->setAtom($extendsId, array('fullnspath' => $fullnspath,
+                                             'aliased'    => $aliased));
         } else {
             $extendsId = $this->popExpression();
         }
@@ -1031,13 +1033,14 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($traitId, $blockId, 'BLOCK');
         
-        $fullnspath = $this->getFullnspath($nameId);
+        list($fullnspath, $aliased) = $this->getFullnspath($nameId);
         $this->setAtom($traitId, array('code'       => $this->tokens[$current][1],
                                        'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].
                                                        static::FULLCODE_BLOCK,
                                        'line'       => $this->tokens[$current][2],
                                        'token'      => $this->getToken($this->tokens[$current][0]),
-                                       'fullnspath' => $fullnspath));
+                                       'fullnspath' => $fullnspath,
+                                       'aliased'    => $aliased));
         
         $this->addDefinition('class', $fullnspath, $traitId);
         
@@ -1071,7 +1074,8 @@ class Load extends Tasks {
                 $this->addLink($interfaceId, $extendsId, 'EXTENDS');
                 $fullcode[] = $this->atoms[$extendsId]['fullcode'];
 
-                $this->addCall('class', $this->getFullnspath($extendsId), $extendsId);
+                list($fullnspath, $aliased) = $this->getFullnspath($extendsId);
+                $this->addCall('class', $fullnspath, $extendsId);
             } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         }
 
@@ -1081,14 +1085,15 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($interfaceId, $blockId, 'BLOCK');
         
-        $fullnspath = $this->getFullnspath($nameId);
+        list($fullnspath, $aliased) = $this->getFullnspath($nameId);
         $this->setAtom($interfaceId, array('code'       => $this->tokens[$current][1],
                                            'fullcode'   => $this->tokens[$current][1] . ' ' . $this->atoms[$nameId]['fullcode'] .
                                                            (isset($extendsId) ? ' ' . $this->tokens[$extends][1] . ' ' . implode(', ', $fullcode) : '') .
                                                            static::FULLCODE_BLOCK,
                                            'line'       => $this->tokens[$current][2],
                                            'token'      => $this->getToken($this->tokens[$current][0]),
-                                           'fullnspath' => $fullnspath));
+                                           'fullnspath' => $fullnspath,
+                                           'aliased'    => $aliased));
 
         $this->addDefinition('class', $fullnspath, $interfaceId);
         
@@ -1136,7 +1141,8 @@ class Load extends Tasks {
             $extendsId = $this->processOneNsname();
             
             $this->addLink($classId, $extendsId, 'EXTENDS');
-            $this->addCall('class', $this->getFullnspath($extendsId), $extendsId);
+            list($fullnspath, $aliased) = $this->getFullnspath($extendsId);
+            $this->addCall('class', $fullnspath, $extendsId);
         }
 
         // Process implements
@@ -1148,8 +1154,9 @@ class Load extends Tasks {
                 $implementsId = $this->processOneNsname();
                 $this->addLink($classId, $implementsId, 'IMPLEMENTS');
                 $fullcodeImplements[] = $this->atoms[$implementsId]['fullcode'];
-                
-                $this->addCall('class', $this->getFullnspath($implementsId), $implementsId);
+
+                list($fullnspath, $aliased) = $this->getFullnspath($implementsId);
+                $this->addCall('class', $fullnspath, $implementsId);
             } while ($this->tokens[$this->id + 1][0] === T_COMMA);
         }
         
@@ -1159,7 +1166,7 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($classId, $blockId, 'BLOCK');
         
-        $fullnspath = $this->getFullnspath($nameId);
+        list($fullnspath, $aliased) = $this->getFullnspath($nameId);
         $this->setAtom($classId, array('code'       => $this->tokens[$current][1],
                                        'fullcode'   => (!empty($fullcode) ? implode(' ', $fullcode).' ' : '') .
                                                        $this->tokens[$current][1] .
@@ -1170,7 +1177,8 @@ class Load extends Tasks {
                                                        static::FULLCODE_BLOCK,
                                        'line'       => $this->tokens[$current][2],
                                        'token'      => $this->getToken($this->tokens[$current][0]),
-                                       'fullnspath' => $fullnspath));
+                                       'fullnspath' => $fullnspath,
+                                       'aliased'    => $aliased));
         
         $this->pushExpression($classId);
         
@@ -1391,13 +1399,16 @@ class Load extends Tasks {
                    'absolute' => $absolute);
         $this->setAtom($nsnameId, $x);
         if ($this->isContext(self::CONTEXT_NEW)) {
-            $fullnspath = $this->getFullnspath($nsnameId, 'class');
-            $this->setAtom($nsnameId, array('fullnspath' => $fullnspath));
+            list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
+            $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
+                                            'aliased'    => $aliased));
             $this->addCall('class', $this->getFullnspath($nsnameId), $nsnameId);
         } else {
-            $fullnspath = $this->getFullnspath($nsnameId, 'const');
-            $this->setAtom($nsnameId, array('fullnspath' => $fullnspath));
-            $this->addCall('const', $this->getFullnspath($nsnameId), $nsnameId);
+            list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'const');
+            $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
+                                            'aliased'    => $aliased));
+            list($fullnspath, $aliased) = $this->getFullnspath($nsnameId);
+            $this->addCall('const', $fullnspath, $nsnameId);
         }
 
         $this->pushExpression($nsnameId);
@@ -1567,7 +1578,9 @@ class Load extends Tasks {
                                   'token'      => $this->getToken($this->tokens[$this->id][0]),
                                   'variadic'   => false,
                                   'absolute'   => false));
-        $this->setAtom($id, array('fullnspath' => $this->getFullnspath($id)));
+        list($fullnspath, $aliased) = $this->getFullnspath($id);
+        $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                  'aliased'    => $aliased));
         
         return $id;
     }
@@ -1600,9 +1613,10 @@ class Load extends Tasks {
                                          'rank'     => ++$rank));
             $fullcode[] = $this->atoms[$defId]['fullcode'];
 
-            $fullnspath = $this->getFullnspath($nameId, 'const');
+            list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'const');
             $this->addDefinition('const', $fullnspath, $defId);
-            $this->setAtom($constId, array('fullnspath'     => $fullnspath));
+            $this->setAtom($constId, array('fullnspath'     => $fullnspath,
+                                           'aliased'        => $aliased));
             
             $this->addLink($constId, $defId, 'CONST');
         } while (!in_array($this->tokens[$this->id + 1][0], array(T_SEMICOLON)));
@@ -1686,23 +1700,25 @@ class Load extends Tasks {
 
         $functioncallId = $this->addAtom('Functioncall');
         if ($this->isContext(self::CONTEXT_NEW)) {
-            $fullnspath = $this->getFullnspath($nameId, 'class');
+            list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'class');
             $this->addCall('class', $fullnspath, $functioncallId);
         } else {
-            $fullnspath = $this->getFullnspath($nameId, 'function');
+            list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'function');
             // Probably weak check, since we haven't built fullnspath for functions yet... 
             if ($fullnspath === '\\define') {
                 $this->processDefineAsConstants($argumentsId);
             }
             $this->addCall('function', $fullnspath, $functioncallId);
         }
+
         $this->setAtom($functioncallId, array('code'       => $this->atoms[$nameId]['code'],
                                               'fullcode'   => $this->atoms[$nameId]['fullcode'].'('.$this->atoms[$argumentsId]['fullcode'].')',
                                               'line'       => $this->tokens[$current][2],
                                               'variadic'   => false,
                                               'reference'  => false,
                                               'token'      => $this->atoms[$nameId]['token'],
-                                              'fullnspath' => $fullnspath));
+                                              'fullnspath' => $fullnspath,
+                                              'aliased'    => $aliased));
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
 
@@ -1733,8 +1749,9 @@ class Load extends Tasks {
                                   'token'      => $this->getToken($this->tokens[$this->id][0]),
                                   'absolute'   => false));
         // when this is not already done, we prepare the fullnspath as a constant
-        $fullnspath = $this->getFullnspath($id, 'const');
-        $this->setAtom($id, array('fullnspath' => $fullnspath));
+        list($fullnspath, $aliased) = $this->getFullnspath($id, 'const');
+        $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                  'aliased'    => $aliased));
         $this->addCall('const', $fullnspath, $id);
         
         if ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
@@ -2736,7 +2753,9 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
             --$this->id;
             $nsnameId = $this->processOneNsname();
-            $this->setAtom($nsnameId, array('fullnspath' => $this->getFullnspath($nsnameId)));
+            list($fullnspath, $aliased) = $this->getFullnspath($nsnameId);
+            $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
+                                            'aliased'    => $aliased));
             $this->pushExpression($nsnameId);
             
             return $this->processFCOA($nsnameId);
@@ -2979,8 +2998,9 @@ class Load extends Tasks {
                 if ($this->isContext(self::CONTEXT_CLASS) ||
                     $this->isContext(self::CONTEXT_TRAIT)) {
                     
-                    $fullnspath = $this->getFullnspath($namespaceId);
-                    $this->setAtom($namespaceId, array('fullnspath' => $fullnspath));
+                    list($fullnspath, $aliased) = $this->getFullnspath($namespaceId);
+                    $this->setAtom($namespaceId, array('fullnspath' => $fullnspath,
+                                                       'aliased'    => $aliased));
                     $this->addCall('class', $fullnspath, $namespaceId);
                 }
 
@@ -3045,7 +3065,9 @@ class Load extends Tasks {
                   $this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
             return $this->processBracket();
         } elseif (in_array($this->atoms[$id]['atom'], array('Nsname', 'Identifier'))) {
-            $this->setAtom($id, array('fullnspath' => $this->getFullnspath($id, $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const')));
+            list($fullnspath, $aliased) = $this->getFullnspath($id, $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const');
+            $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased));
             return $id;
         } else {
             return $id;
@@ -3523,8 +3545,9 @@ class Load extends Tasks {
 
         $this->addLink($staticId, $leftId, 'CLASS');
         
-        $fullnspath = $this->getFullnspath($leftId);
-        $this->setAtom($leftId, array('fullnspath' => $this->getFullnspath($leftId, 'class')) );
+        list($fullnspath, $aliased) = $this->getFullnspath($leftId, 'class');
+        $this->setAtom($leftId, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased) );
         $this->addCall('class', $fullnspath, $leftId);
         
         $this->addLink($staticId, $right, $links);
@@ -3783,7 +3806,9 @@ class Load extends Tasks {
         $right = $this->popExpression();
         
         $this->addLink($instanceId, $right, 'CLASS');
-        $this->setAtom($right, array('fullnspath' => $this->getFullnspath($right, 'class')));
+        list($fullnspath, $aliased) = $this->getFullnspath($right, 'class');
+        $this->setAtom($right, array('fullnspath' => $fullnspath,
+                                     'aliased'    => $aliased));
         $this->addCall('class', $this->atoms[$right]['fullnspath'], $right);
 
         $x = array('code'     => $this->tokens[$current][1],
@@ -3814,6 +3839,7 @@ class Load extends Tasks {
         $argumentsId = $this->processArguments(array(T_SEMICOLON, T_CLOSE_TAG, T_END));
 
         $functioncallId = $this->addAtom('Functioncall');
+        list($fullnspath, $aliased) = $this->getFullnspath($nameId);
         $this->setAtom($functioncallId, array('code'       => $this->tokens[$current][1],
                                               'fullcode'   => $this->tokens[$current][1] . ' ' .
                                                               $this->atoms[$argumentsId]['fullcode'],
@@ -3821,7 +3847,8 @@ class Load extends Tasks {
                                               'reference'  => false,
                                               'line'       => $this->tokens[$current][2],
                                               'token'      => $this->getToken($this->tokens[$current][0]),
-                                              'fullnspath' => $this->getFullnspath($nameId)));
+                                              'fullnspath' => $fullnspath,
+                                              'aliased'    => $aliased));
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
 
@@ -4039,7 +4066,7 @@ class Load extends Tasks {
     }
 
     private function processDefineAsConstants($argumentsId) {
-        $fullnspath = $this->getFullnspath($this->argumentsId[0]);
+        list($fullnspath, $aliased) = $this->getFullnspath($this->argumentsId[0]);
         
         $this->addDefinition('const', $fullnspath, $argumentsId);
     }
@@ -4128,29 +4155,29 @@ class Load extends Tasks {
     private function getFullnspath($nameId, $type = 'class') {
         // Handle static, self, parent and PHP natives function
         if (isset($this->atoms[$nameId]['absolute']) && ($this->atoms[$nameId]['absolute'] === true)) {
-            return strtolower($this->atoms[$nameId]['fullcode']);
+            return array(strtolower($this->atoms[$nameId]['fullcode']), 0);
         } elseif (!in_array($this->atoms[$nameId]['atom'], array('Nsname', 'Identifier', 'String'))) {
             // No fullnamespace for non literal namespaces
-            return '';
+            return array('', 0);
         } elseif (in_array($this->atoms[$nameId]['token'], array('T_STATIC', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
             // For language structures, it is always in global space, like eval or list
-            return '\\'.strtolower($this->atoms[$nameId]['code']);
+            return array('\\'.strtolower($this->atoms[$nameId]['code']), 0);
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
             // namespace\A\B 
-            return substr($this->namespace, 0, -1).strtolower(substr($this->atoms[$nameId]['fullcode'], 9));
+            return array(substr($this->namespace, 0, -1).strtolower(substr($this->atoms[$nameId]['fullcode'], 9)), 0);
         } elseif ($this->atoms[$nameId]['atom'] === 'Identifier') {
             // This is an identifier, self or parent
             if (strtolower($this->atoms[$nameId]['code']) === 'self' || strtolower($this->atoms[$nameId]['code']) === 'parent') {
-                return '\\'.strtolower($this->atoms[$nameId]['code']);
+                return array('\\'.strtolower($this->atoms[$nameId]['code']), 0);
             // This is an identifier
             } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
-                return $this->uses['class'][strtolower($this->atoms[$nameId]['code'])];
+                return array($this->uses['class'][strtolower($this->atoms[$nameId]['code'])], 1);
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
-                return $this->uses['const'][strtolower($this->atoms[$nameId]['code'])];
+                return array($this->uses['const'][strtolower($this->atoms[$nameId]['code'])], 1);
             } elseif ($type === 'function' && isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
-                return $this->uses['function'][strtolower($this->atoms[$nameId]['code'])];
+                return array($this->uses['function'][strtolower($this->atoms[$nameId]['code'])], 1);
             } else {
-                return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
+                return array($this->namespace.strtolower($this->atoms[$nameId]['fullcode']), 0);
             }
         } elseif ($this->atoms[$nameId]['atom'] === 'String' && isset($this->atoms[$nameId]['noDelimiter'])) {
             if (empty($this->atoms[$nameId]['noDelimiter'])) {
@@ -4160,15 +4187,15 @@ class Load extends Tasks {
             }
 
             // define doesn't care about use...
-            return $prefix;
+            return array($prefix, 0);
         } else {
             // Finally, the case for a nsname
             $prefix = strtolower( substr($this->atoms[$nameId]['fullcode'], 0, strpos($this->atoms[$nameId]['fullcode'], '\\')) );
 
             if (isset($this->uses[$type][$prefix])) {
-                return $this->uses[$type][$prefix] . strtolower( substr($this->atoms[$nameId]['fullcode'], strlen($prefix)) ) ;
+                return array($this->uses[$type][$prefix] . strtolower( substr($this->atoms[$nameId]['fullcode'], strlen($prefix)) ) , 0);
             } else {
-                return $this->namespace.strtolower($this->atoms[$nameId]['fullcode']);
+                return array($this->namespace.strtolower($this->atoms[$nameId]['fullcode']), 0);
             }
         }
     }

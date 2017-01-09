@@ -102,7 +102,7 @@ class CypherG3 {
                     if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'))) {
                     // Raw string
                         $extra[] = "$title: csvLine.$title";
-                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'use'))) {
+                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased'))) {
                     // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
                     } elseif (in_array($title, array('count', 'intval', 'args_max', 'args_min'))) {

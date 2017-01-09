@@ -25,6 +25,7 @@ namespace Exakat\Loader;
 
 use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Exception\GremlinException;
 use Exakat\Graph\Cypher;
 use Exakat\Graph\Gremlin3;
 use Exakat\Tasks\Load;
@@ -127,7 +128,7 @@ GREMLIN;
         $gremlin->query($query);
 
         // Finish noDelimiter for strings
-        $properties = array('alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag');
+        $properties = array('alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased');
         foreach($properties as $property) {
             $query = <<<GREMLIN
 g.V().has("$property").sideEffect{ 
@@ -256,7 +257,7 @@ GREMLIN;
                                'args_min'    => 'int', 
                                'bracket'     => 'int', 
                                'close_tag'   => 'int',
-                               'use'         => 'int');
+                               'aliased'     => 'int');
         
         $fileName = $exakatDir.'/nodes.g3.csv';
         if (file_exists($fileName)) {
