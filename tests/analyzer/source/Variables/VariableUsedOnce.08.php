@@ -10,4 +10,6 @@ class A {
     public static $e;
     static public $f;
 }
+
+$foo = 1;
 ?>
