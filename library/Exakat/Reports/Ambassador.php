@@ -24,14 +24,13 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Docs;
-use Exakat\Datastore;
 use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
-    const FILE_FILENAME  = 'ambassador';
+    const FILE_FILENAME  = 'report';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
