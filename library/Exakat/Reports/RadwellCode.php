@@ -54,10 +54,6 @@ class RadwellCode extends Reports {
         parent::__construct();
     }
 
-    public function generateFileReport($report) {
-        return false;
-    }
-
     public function generate($folder, $name = null) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';

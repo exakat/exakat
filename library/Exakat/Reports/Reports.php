@@ -59,8 +59,6 @@ abstract class Reports {
         $this->datastore = new Dump($this->config);
     }
     
-    public abstract function generateFileReport($report);
-
     public abstract function generate($dirName, $fileName);
     
     protected function count($step = 1) {

@@ -29,10 +29,6 @@ class PhpConfiguration extends Reports {
     const FILE_EXTENSION = 'ini-dist';
     const FILE_FILENAME  = 'php.suggested';
 
-    public function generateFileReport($report) {
-        return false;
-    }
-
     public function generate($folder, $name = null) {
         $final = '';
 

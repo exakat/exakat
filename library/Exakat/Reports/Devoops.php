@@ -46,44 +46,6 @@ class Devoops extends Reports {
     
     protected $analyzers  = array(); // cache for analyzers [Title] = object
     
-    public function generateFileReport($report) {
-        $out = new XMLWriter;
-        $out->openMemory();
-        $out->setIndent(true);
-
-        if ($report['errors'] === 0 && $report['warnings'] === 0) {
-            // Nothing to print.
-            return false;
-        }
-
-        $out->startElement('file');
-        $out->writeAttribute('name', $report['filename']);
-        $out->writeAttribute('errors', $report['errors']);
-        $out->writeAttribute('warnings', $report['warnings']);
-        $out->writeAttribute('fixable', $report['fixable']);
-
-        foreach ($report['messages'] as $line => $lineErrors) {
-            foreach ($lineErrors as $column => $colErrors) {
-                foreach ($colErrors as $error) {
-
-                    $error['type'] = strtolower($error['type']);
-                    $out->startElement($error['type']);
-                    $out->writeAttribute('line', $line);
-                    $out->writeAttribute('column', $column);
-                    $out->writeAttribute('source', $error['source']);
-                    $out->writeAttribute('severity', $error['severity']);
-                    $out->writeAttribute('fixable', (int) $error['fixable']);
-                    $out->text($error['message']);
-                    $out->endElement();
-                }
-            }
-        }
-
-        $out->endElement();
-        return true;
-
-    }
-
     public function generate($folder, $name = 'report') {
         $finalName = $name;
         $name = '.'.$name;

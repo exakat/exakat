@@ -34,10 +34,6 @@ class Clustergrammer extends Reports {
                                   'CompatibilityPHP70', 'CompatibilityPHP71',
                                   '"Dead code"', 'Security', 'Analyze');
 
-    public function generateFileReport($report) {
-        return false;
-    }
-
     public function generate($folder, $name= 'txt') {
         $config = Config::factory();
         $themes = $this->themesToShow;

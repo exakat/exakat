@@ -29,10 +29,6 @@ class OnepageJson extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'onepage';
 
-    public function generateFileReport($report) {
-        return false;
-    }
-
     public function generate($folder, $name = null) {
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in '.$this->themesList;

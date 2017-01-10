@@ -29,10 +29,6 @@ class PhpCompilation extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'compilePHP';
 
-    public function generateFileReport($report) {
-        return false;
-    }
-
     public function generate($folder, $name = null) {
         $themed = Analyzer::getThemeAnalyzers('Appinfo');
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');

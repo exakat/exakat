@@ -29,10 +29,6 @@ class Dependencies extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'dependencies';
 
-    public function generateFileReport($report) {
-        return false;
-    }
-
     public function generate($folder, $name= 'dependencies') {
         $graph = new Gremlin3(Config::factory());
         

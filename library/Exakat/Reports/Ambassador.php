@@ -110,10 +110,6 @@ class Ambassador extends Reports {
         return str_replace("{{" . $bloc . "}}", $content, $html);
     }
 
-    public function generateFileReport($report) {
-        
-    }
-
     public function generate($folder, $name = 'report') {
         $this->finalName = $folder . '/' . $name;
         $this->tmpName = $folder . '/.' . $name;

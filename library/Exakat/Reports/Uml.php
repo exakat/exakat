@@ -32,10 +32,6 @@ class Uml extends Reports {
         parent::__construct();
     }
 
-    public function generateFileReport($report) {
-        return false;
-    }
-
     public function generate($folder, $name= 'uml') {
         
         $res = $this->sqlite->query(<<<SQL
