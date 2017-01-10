@@ -25,6 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Datastore;
+use Exakat\Dump;
 
 abstract class Reports {
     const FILE_EXTENSION = 'undefined';
@@ -55,7 +56,7 @@ abstract class Reports {
 
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
 
-        $this->datastore = new Datastore($this->config);
+        $this->datastore = new Dump($this->config);
     }
     
     public abstract function generateFileReport($report);
