@@ -23,11 +23,9 @@
 
 $rows = glob('projects/*', GLOB_ONLYDIR);
 
-$finals = [];
+$finals = array();
 foreach($rows as $row) {
-//    print $row."\n";
-    
-    $final = [basename($row)];
+    $final = array(basename($row));
 
     $sqliteFilename = $row.'/datastore.sqlite';
     if (!file_exists($sqliteFilename)) {
