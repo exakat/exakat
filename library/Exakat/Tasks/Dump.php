@@ -35,6 +35,7 @@ use Exakat\Tokenizer\Token;
 class Dump extends Tasks {
     const CONCURENCE = self::DUMP;
     
+    private $sqlite            = null;
     private $stmtResults       = null;
     private $stmtResultsCounts = null;
     private $cleanResults      = null;
@@ -71,19 +72,19 @@ class Dump extends Tasks {
         
         if ($this->config->update === true) {
             copy($this->sqliteFileFinal, $this->sqliteFile);
-            $sqlite = new \Sqlite3($this->sqliteFile);
+            $this->sqlite = new \Sqlite3($this->sqliteFile);
         } else {
-            $sqlite = new \Sqlite3($this->sqliteFile);
-            $this->getAtomCounts($sqlite);
+            $this->sqlite = new \Sqlite3($this->sqliteFile);
+            $this->getAtomCounts($this->sqlite);
 
-            $this->collectStructures($sqlite);
-            $this->collectLiterals($sqlite);
+            $this->collectStructures($this->sqlite);
+            $this->collectLiterals($this->sqlite);
 
-            $sqlite->query('CREATE TABLE themas (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+            $this->sqlite->query('CREATE TABLE themas (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    thema STRING
                                                   )');
         
-            $sqlite->query('CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+            $this->sqlite->query('CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                     fullcode STRING,
                                                     file STRING,
                                                     line INTEGER,
@@ -94,27 +95,27 @@ class Dump extends Tasks {
                                                     severity STRING
                                                   )');
 
-            $sqlite->query('CREATE TABLE resultsCounts (   id INTEGER PRIMARY KEY AUTOINCREMENT,
+            $this->sqlite->query('CREATE TABLE resultsCounts (   id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                            analyzer STRING,
                                                            count INTEGER DEFAULT -6)');
             display('Inited tables');
         }
-
+        
         $sqlQuery = <<<SQL
 DELETE FROM results WHERE analyzer = :analyzer
 SQL;
-        $this->cleanResults = $sqlite->prepare($sqlQuery);
+        $this->cleanResults = $this->sqlite->prepare($sqlQuery);
 
         $sqlQuery = <<<SQL
 REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
              VALUES ( NULL, :fullcode, :file,  :line,  :namespace,  :class,  :function,  :analyzer,  :severity )
 SQL;
-        $this->stmtResults = $sqlite->prepare($sqlQuery);
+        $this->stmtResults = $this->sqlite->prepare($sqlQuery);
 
         $sqlQuery = <<<SQL
 REPLACE INTO resultsCounts ("id", "analyzer", "count") VALUES (NULL, :class, :count )
 SQL;
-        $this->stmtResultsCounts = $sqlite->prepare($sqlQuery);
+        $this->stmtResultsCounts = $this->sqlite->prepare($sqlQuery);
 
         $themes = array();
         if ($this->config->thema !== null) {
@@ -122,7 +123,7 @@ SQL;
             $themes = Analyzer::getThemeAnalyzers($thema);
             if (empty($themes)) {
                 $r = Analyzer::getSuggestionThema($thema);
-                if (count($r) > 0) {
+                if (!empty($r)) {
                     echo 'did you mean : ', implode(', ', str_replace('_', '/', $r)), "\n";
                 }
                 throw new NoSuchThema($thema);
@@ -165,7 +166,7 @@ SQL;
         display('Still '.count($themes)." to be processed\n");
         if (count($themes) === 0) {
             if ($this->config->thema !== null) {
-                $sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');
+                $this->sqlite->query('INSERT INTO themas ("id", "thema") VALUES ( NULL, "'.$this->config->thema.'")');
             }
         }
 
@@ -229,8 +230,8 @@ SQL;
         }
     }
 
-    private function getAtomCounts($sqlite) {
-        $sqlite->query('CREATE TABLE atomsCounts (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+    private function getAtomCounts() {
+        $this->sqlite->query('CREATE TABLE atomsCounts (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                     atom STRING,
                                                     count INTEGER
                                               )');
@@ -238,7 +239,7 @@ SQL;
         $sqlQuery = <<<SQL
 INSERT INTO atomsCounts ("id", "atom", "count") VALUES (NULL, :atom, :count )
 SQL;
-        $insert = $sqlite->prepare($sqlQuery);
+        $insert = $this->sqlite->prepare($sqlQuery);
 
         
         foreach(Token::$ATOMS as $atom) {
@@ -263,26 +264,57 @@ SQL;
         $this->stmtResultsCounts->bindValue(':count', $this->rounds, \SQLITE3_INTEGER);
 
         $this->stmtResultsCounts->execute();
+
+        $this->collectDatastore();
         
         rename($this->sqliteFile, $this->sqliteFileFinal);
         
         $this->removeSnitch();
     }
     
-    private function collectStructures($sqlite) {
+    private function collectDatastore() {
+        $datastorePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
+        $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
+        
+        $tables = array('analyzed',
+                        'compilation55',
+                        'compilation56',
+                        'compilation70',
+                        'compilation71',
+                        'compilation72',
+                        'composer',
+                        'configFiles',
+                        'externallibraries',
+                        'files',
+                        'hash',
+                        'hashAnalyzer',
+                        'ignoredFiles',
+                        'shortopentag',
+                        'tokenCounts',
+                        );
+        foreach($tables as $table) {
+            $res = $this->sqlite->query('SELECT sql FROM datastore.sqlite_master WHERE type="table" AND name="'.$table.'"');
+            $createTable = $res->fetchArray(\SQLITE3_NUM)[0];
+
+            $this->sqlite->query($createTable);
+            $this->sqlite->query('REPLACE INTO '.$table.' SELECT * FROM datastore.'.$table);
+        }
+    }
+    
+    private function collectStructures() {
 
         // Name spaces
-        $sqlite->query('DROP TABLE IF EXISTS namespaces');
-        $sqlite->query('CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+        $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
+        $this->sqlite->query('CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    namespace STRING
                                                  )');
-        $sqlite->query('INSERT INTO namespaces VALUES ( 1, "Global")');
+        $this->sqlite->query('INSERT INTO namespaces VALUES ( 1, "Global")');
 
         $sqlQuery = <<<SQL
 INSERT INTO namespaces ("id", "namespace") 
              VALUES ( NULL, :namespace)
 SQL;
-        $stmt = $sqlite->prepare($sqlQuery);
+        $stmt = $this->sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Namespace").out("NAME").map{ ['name' : it.get().value("fullcode")] };
@@ -300,7 +332,7 @@ GREMLIN
 
             $stmt->bindValue(':namespace',   $row->name,            \SQLITE3_TEXT);
             $stmt->execute();
-            $namespacesId['\\'.strtolower($row->name)] = $sqlite->lastInsertRowID();
+            $namespacesId['\\'.strtolower($row->name)] = $this->sqlite->lastInsertRowID();
 
             ++$total;
         }
@@ -310,8 +342,8 @@ GREMLIN
         $citId = array();
 
         // Classes
-        $sqlite->query('DROP TABLE IF EXISTS cit');
-        $sqlite->query('CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+        $this->sqlite->query('DROP TABLE IF EXISTS cit');
+        $this->sqlite->query('CREATE TABLE cit (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    name STRING,
                                                    abstract INTEGER,
                                                    final INTEGER,
@@ -320,7 +352,7 @@ GREMLIN
                                                    namespaceId INTEGER DEFAULT 1
                                                  )');
 
-        $sqlite->query('CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+        $this->sqlite->query('CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                        implementing INTEGER,
                                                        implements INTEGER,
                                                        type    TEXT
@@ -330,7 +362,7 @@ GREMLIN
 INSERT INTO cit ("id", "name", "namespaceId", "abstract", "final", "extends", "type") 
              VALUES ( NULL, :class, :namespaceId, :abstract, :final, :extends, "class")
 SQL;
-        $stmt = $sqlite->prepare($sqlQuery);
+        $stmt = $this->sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Class")
@@ -373,7 +405,7 @@ GREMLIN
             $stmt->bindValue(':final',       (int) $row->final,     \SQLITE3_INTEGER);
 
             $stmt->execute();
-            $citId[$row->fullnspath] = $sqlite->lastInsertRowID();
+            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
 
             // Get extends
             if (!empty($row->extends)) {
@@ -403,7 +435,7 @@ GREMLIN
 INSERT INTO cit ("id", "name", "namespaceId", "abstract", "final", "type") 
              VALUES ( NULL, :name, :namespaceId, 0, 0, "interface")
 SQL;
-        $stmt = $sqlite->prepare($sqlQuery);
+        $stmt = $this->sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
@@ -435,7 +467,7 @@ GREMLIN
             $stmt->bindValue(':namespaceId', $namespaceId,          \SQLITE3_INTEGER);
 
             $stmt->execute();
-            $citId[$row->fullnspath] = $sqlite->lastInsertRowID();
+            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
 
             // Get extends
             if (!empty($row->extends)) {
@@ -459,7 +491,7 @@ GREMLIN
 INSERT INTO cit ("id", "name", "namespaceId", "abstract", "final", "type") 
              VALUES ( NULL, :name, :namespaceId, 0, 0, "trait")
 SQL;
-        $stmt = $sqlite->prepare($sqlQuery);
+        $stmt = $this->sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Trait")
@@ -490,7 +522,7 @@ GREMLIN
             $stmt->bindValue(':namespaceId', $namespaceId,          \SQLITE3_INTEGER);
 
             $stmt->execute();
-            $citId[$row->fullnspath] = $sqlite->lastInsertRowID();
+            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
             ++$total;
         }
         display("$total traits\n");
@@ -499,7 +531,7 @@ GREMLIN
         $sqlQuery = <<<SQL
 UPDATE cit SET extends = :class WHERE id = :id
 SQL;
-        $stmt = $sqlite->prepare($sqlQuery);
+        $stmt = $this->sqlite->prepare($sqlQuery);
 
         $total = 0;
         foreach($extendsId as $exId => $ids) {
@@ -520,7 +552,7 @@ SQL;
 INSERT INTO cit_implements ("id", "implementing", "implements", "type") 
              VALUES ( NULL, :implementing, :implements, :type)
 SQL;
-        $stmtImplements = $sqlite->prepare($sqlQuery);
+        $stmtImplements = $this->sqlite->prepare($sqlQuery);
 
         $total = 0;
         $stmtImplements->bindValue(':type',   'implements',          \SQLITE3_TEXT);
@@ -559,8 +591,8 @@ SQL;
         display("$total uses \n");
 
         // Methods
-        $sqlite->query('DROP TABLE IF EXISTS methods');
-        $sqlite->query('CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+        $this->sqlite->query('DROP TABLE IF EXISTS methods');
+        $this->sqlite->query('CREATE TABLE methods (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 method INTEGER,
                                                 citId INTEGER,
                                                 static INTEGER,
@@ -573,7 +605,7 @@ SQL;
 INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility") 
              VALUES ( NULL, :method, :citId, :static, :final, :abstract, :visibility)
 SQL;
-        $stmt = $sqlite->prepare($sqlQuery);
+        $stmt = $this->sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Function")
@@ -623,8 +655,8 @@ GREMLIN
         display("$total methods\n");
 
         // Properties
-        $sqlite->query('DROP TABLE IF EXISTS properties');
-        $sqlite->query('CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+        $this->sqlite->query('DROP TABLE IF EXISTS properties');
+        $this->sqlite->query('CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 property INTEGER,
                                                 citId INTEGER,
                                                 visibility INTEGER,
@@ -636,7 +668,7 @@ GREMLIN
 INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static") 
              VALUES ( NULL, :property, :citId, :visibility, :value, :static)
 SQL;
-        $stmt = $sqlite->prepare($sqlQuery);
+        $stmt = $this->sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
 
@@ -696,8 +728,8 @@ GREMLIN
         display("$total properties\n");
 
         // Constants
-        $sqlite->query('DROP TABLE IF EXISTS constants');
-        $sqlite->query('CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+        $this->sqlite->query('DROP TABLE IF EXISTS constants');
+        $this->sqlite->query('CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 constant INTEGER,
                                                 citId INTEGER,
                                                 value TEXT
@@ -707,7 +739,7 @@ GREMLIN
 INSERT INTO constants ("id", "constant", "citId", "value") 
              VALUES ( NULL, :constant, :citId, :value)
 SQL;
-        $stmt = $sqlite->prepare($sqlQuery);
+        $stmt = $this->sqlite->prepare($sqlQuery);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Const")
@@ -739,19 +771,19 @@ GREMLIN
         display("$total constants\n");
     }
 
-    private function collectLiterals($sqlite) {
+    private function collectLiterals() {
         $types = array('Integer', 'Real', 'String', 'Heredoc', 'Array');
         
         foreach($types as $type) {
-            $sqlite->query('DROP TABLE IF EXISTS literal'.$type);
-            $sqlite->query('CREATE TABLE literal'.$type.' (  
+            $this->sqlite->query('DROP TABLE IF EXISTS literal'.$type);
+            $this->sqlite->query('CREATE TABLE literal'.$type.' (  
                                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    name STRING,
                                                    file STRING,
                                                    line INTEGER
                                                  )');
                                                  
-            $stmt = $sqlite->prepare('INSERT INTO literal'.$type.' (name, file, line) VALUES(:name, :file, :line)');
+            $stmt = $this->sqlite->prepare('INSERT INTO literal'.$type.' (name, file, line) VALUES(:name, :file, :line)');
 
             if ($type == 'Array') {
                 $filter = 'hasLabel("Functioncall").has("fullnspath", "\\\\array")';
