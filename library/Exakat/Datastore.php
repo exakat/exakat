@@ -27,9 +27,9 @@ use Exakat\Exakat;
 use Exakat\Exceptions;
 
 class Datastore {
-    private static $sqliteRead = null;
-    private static $sqliteWrite = null;
-    private $sqlitePath = null;
+    protected $sqliteRead = null;
+    protected $sqliteWrite = null;
+    protected $sqlitePath = null;
     
     const CREATE = 1;
     const REUSE = 2;
@@ -49,17 +49,17 @@ class Datastore {
                 unlink($this->sqlitePath);
             }
             // force creation 
-            self::$sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
-            self::$sqliteWrite->close();
-            self::$sqliteWrite = null;
+            $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+            $this->sqliteWrite->close();
+            $this->sqliteWrite = null;
         }
         
-        if (self::$sqliteWrite === null) {
-            self::$sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
-            self::$sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
+        if ($this->sqliteWrite === null) {
+            $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+            $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
             // open the read connexion AFTER the write, to have the sqlite databse created
-            self::$sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
-            self::$sqliteWrite->busyTimeout(self::TIMEOUT_READ);
+            $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+            $this->sqliteWrite->busyTimeout(self::TIMEOUT_READ);
         }
         
         if ($create === self::CREATE) {
@@ -93,7 +93,7 @@ class Datastore {
             $cols = array_keys($first);
         } else {
             $query = "PRAGMA table_info($table)";
-            $res = self::$sqliteRead->query($query);
+            $res = $this->sqliteRead->query($query);
             
             $cols = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -119,7 +119,7 @@ class Datastore {
             }
 
             $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ('".implode("', '", $d)."')";
-            self::$sqliteWrite->querySingle($query);
+            $this->sqliteWrite->querySingle($query);
         }
         
         return true;
@@ -137,7 +137,7 @@ class Datastore {
             $cols = array_keys($first);
         } else {
             $query = "PRAGMA table_info($table)";
-            $res = self::$sqliteRead->query($query);
+            $res = $this->sqliteRead->query($query);
             
             $cols = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
@@ -158,7 +158,7 @@ class Datastore {
             }
 
             $query = 'DELETE FROM '.$table.' WHERE '.$col." IN ('".implode("', '", $d)."')";
-            self::$sqliteWrite->querySingle($query);
+            $this->sqliteWrite->querySingle($query);
         }
         
         return true;
@@ -168,7 +168,7 @@ class Datastore {
         $return = array();
         try {
             $query = "SELECT * FROM $table";
-            $res = self::$sqliteRead->query($query);
+            $res = $this->sqliteRead->query($query);
         } catch (\Exception $e) {
             return array();
         }
@@ -189,7 +189,7 @@ class Datastore {
         $return = array();
 
         $query = "SELECT $col FROM $table";
-        $res = self::$sqliteRead->query($query);
+        $res = $this->sqliteRead->query($query);
 
         if (!$res) {
             return array();
@@ -205,7 +205,7 @@ class Datastore {
 
     public function getHash($key) {
         $query = 'SELECT value FROM hash WHERE key=:key';
-        $stmt = self::$sqliteRead->prepare($query);
+        $stmt = $this->sqliteRead->prepare($query);
         $stmt->bindValue(':key', $key, \SQLITE3_TEXT);
         $res = $stmt->execute();
 
@@ -219,7 +219,7 @@ class Datastore {
 
     public function getHashAnalyzer($analyzer) {
         $query = 'SELECT key, value FROM hashAnalyzer WHERE analyzer=:analyzer';
-        $stmt = self::$sqliteRead->prepare($query);
+        $stmt = $this->sqliteRead->prepare($query);
         $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
         $res = $stmt->execute();
 
@@ -249,7 +249,7 @@ class Datastore {
 
     public function hasResult($table) {
         $query = "SELECT * FROM $table LIMIT 1";
-        $r = self::$sqliteRead->querySingle($query);
+        $r = $this->sqliteRead->querySingle($query);
 
         return !empty($r);
     }
@@ -257,14 +257,14 @@ class Datastore {
     public function cleanTable($table) {
         if ($this->checkTable($table)) {
             $query = "DELETE FROM $table";
-            self::$sqliteWrite->querySingle($query);
+            $this->sqliteWrite->querySingle($query);
         }
 
         return true;
     }
 
     private function checkTable($table) {
-        $res = self::$sqliteWrite->querySingle('SELECT count(*) FROM sqlite_master WHERE name="'.$table.'"');
+        $res = $this->sqliteWrite->querySingle('SELECT count(*) FROM sqlite_master WHERE name="'.$table.'"');
         
         if ($res == 1) { return true; }
 
@@ -461,20 +461,20 @@ SQLITE;
                 throw new Exceptions\NoStructureForTable($table);
         }
 
-        self::$sqliteWrite->query($createTable);
+        $this->sqliteWrite->query($createTable);
         
         return true;
     }
     
     public function reload() {
-        self::$sqliteRead->close();
-        self::$sqliteWrite->close();
+        $this->sqliteRead->close();
+        $this->sqliteWrite->close();
         
-        self::$sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
-        self::$sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
+        $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+        $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
         // open the read connexion AFTER the write, to have the sqlite databse created
-        self::$sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
-        self::$sqliteWrite->busyTimeout(self::TIMEOUT_READ);
+        $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
+        $this->sqliteWrite->busyTimeout(self::TIMEOUT_READ);
     }
 }
 
