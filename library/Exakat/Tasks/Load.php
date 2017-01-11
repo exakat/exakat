@@ -85,7 +85,6 @@ class Load extends Tasks {
                           'class'    => array());
     private $filename   = null;
     private $line       = 0;
-    private $processing = array();
 
     private $links = array();
     
@@ -376,8 +375,6 @@ class Load extends Tasks {
                             T_STATIC                   => 'processStatic',
                             T_GLOBAL                   => 'processGlobalVariable',
                             );
-
-
     
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
