@@ -31,6 +31,9 @@ class Inventories extends Reports {
     const FILE_FILENAME  = 'inventories';
     
     public function generate($folder, $name = null) {
+        if ($name === null) {
+            $name = self::FILE_FILENAME;
+        }
         $path = $folder.'/'.$name;
 
         if (file_exists($path)) {
