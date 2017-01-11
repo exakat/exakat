@@ -44,7 +44,7 @@ class Catalog extends Tasks {
         // List of reports
         $reports = Reports::$FORMATS;
         sort($reports);
-        $data['reports'] = $themas;
+        $data['reports'] = $reports;
 
         if ($this->config->json === true) {
             print json_encode($data);
