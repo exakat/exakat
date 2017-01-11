@@ -23,12 +23,13 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
-use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\InvalidPHPBinary;
+use Exakat\Exceptions\LoadError;
 use Exakat\Exceptions\MustBeAFile;
 use Exakat\Exceptions\MustBeADir;
+use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchFile;
-use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Loader\CypherG3;
 use Exakat\Loader\Neo4jImport;
 use Exakat\Loader\GremlinServerNeo4j;
@@ -135,6 +136,7 @@ class Load extends Tasks {
     static public $PROP_ARGS_MIN    = array('Arguments');
     static public $PROP_BRACKET     = array('Sequence');
     static public $PROP_CLOSETAG    = array('Php');
+    static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
 
     static public $PROP_OPTIONS = array();
     
@@ -207,6 +209,175 @@ class Load extends Tasks {
     private $sequence = array();
     private $sequenceCurrentRank = 0;
     private $sequenceRank = array();
+
+    private $processing = array(
+                            T_OPEN_TAG                 => 'processOpenTag',
+                            T_OPEN_TAG_WITH_ECHO       => 'processOpenTag',
+                            
+                            T_DOLLAR                   => 'processDollar',
+                            T_VARIABLE                 => 'processVariable',
+                            T_LNUMBER                  => 'processInteger',
+                            T_DNUMBER                  => 'processReal',
+                            
+                            T_OPEN_PARENTHESIS         => 'processParenthesis',
+           
+                            T_PLUS                     => 'processAddition',
+                            T_MINUS                    => 'processAddition',
+                            T_STAR                     => 'processMultiplication',
+                            T_SLASH                    => 'processMultiplication',
+                            T_PERCENTAGE               => 'processMultiplication',
+                            T_POW                      => 'processPower',
+                            T_INSTANCEOF               => 'processInstanceof',
+                            T_SL                       => 'processBitshift',
+                            T_SR                       => 'processBitshift',
+
+                            T_DOUBLE_COLON             => 'processDoubleColon',
+                            T_OBJECT_OPERATOR          => 'processObjectOperator',
+                            T_NEW                      => 'processNew',
+                            
+                            T_DOT                      => 'processDot',
+                            T_OPEN_CURLY               => 'processBlock',
+                            
+                            T_IS_SMALLER_OR_EQUAL      => 'processComparison',
+                            T_IS_GREATER_OR_EQUAL      => 'processComparison',
+                            T_GREATER                  => 'processComparison',
+                            T_SMALLER                  => 'processComparison',
+
+                            T_IS_EQUAL                 => 'processComparison',
+                            T_IS_NOT_EQUAL             => 'processComparison',
+                            T_IS_IDENTICAL             => 'processComparison',
+                            T_IS_NOT_IDENTICAL         => 'processComparison',
+                            T_SPACESHIP                => 'processComparison',
+
+                            T_OPEN_BRACKET             => 'processArrayBracket',
+                            T_ARRAY                    => 'processArray',
+                            T_EMPTY                    => 'processArray',
+                            T_LIST                     => 'processArray',
+                            T_EVAL                     => 'processArray',
+                            T_UNSET                    => 'processArray',
+                            T_ISSET                    => 'processArray',
+                            T_EXIT                     => 'processExit',
+                            T_DOUBLE_ARROW             => 'processKeyvalue',
+                            T_ECHO                     => 'processEcho',
+
+                            T_HALT_COMPILER            => 'processHalt',
+                            T_PRINT                    => 'processPrint',
+                            T_INCLUDE                  => 'processPrint',
+                            T_INCLUDE_ONCE             => 'processPrint',
+                            T_REQUIRE                  => 'processPrint',
+                            T_REQUIRE_ONCE             => 'processPrint',
+                            T_RETURN                   => 'processReturn',
+                            T_THROW                    => 'processThrow',
+                            T_YIELD                    => 'processYield',
+                            T_YIELD_FROM               => 'processYieldfrom',
+
+                            T_EQUAL                    => 'processAssignation',
+                            T_PLUS_EQUAL               => 'processAssignation',
+                            T_AND_EQUAL                => 'processAssignation',
+                            T_CONCAT_EQUAL             => 'processAssignation',
+                            T_DIV_EQUAL                => 'processAssignation',
+                            T_MINUS_EQUAL              => 'processAssignation',
+                            T_MOD_EQUAL                => 'processAssignation',
+                            T_MUL_EQUAL                => 'processAssignation',
+                            T_OR_EQUAL                 => 'processAssignation',
+                            T_POW_EQUAL                => 'processAssignation',
+                            T_SL_EQUAL                 => 'processAssignation',
+                            T_SR_EQUAL                 => 'processAssignation',
+                            T_XOR_EQUAL                => 'processAssignation',
+
+                            T_CONTINUE                 => 'processBreak',
+                            T_BREAK                    => 'processBreak',
+
+                            T_LOGICAL_AND              => 'processLogical',
+                            T_LOGICAL_XOR              => 'processLogical',
+                            T_LOGICAL_OR               => 'processLogical',
+                            T_PIPE                     => 'processLogical',
+                            T_CARET                    => 'processLogical',
+                            T_AND                      => 'processAnd',
+
+                            T_BOOLEAN_AND              => 'processLogical',
+                            T_BOOLEAN_OR               => 'processLogical',
+
+                            T_QUESTION                 => 'processTernary',
+                            T_NS_SEPARATOR             => 'processNsnameAbsolute',
+                            T_COALESCE                 => 'processCoalesce',
+
+                            T_INLINE_HTML              => 'processInlineHtml',
+
+                            T_INC                      => 'processPlusplus',
+                            T_DEC                      => 'processPlusplus',
+
+                            T_WHILE                    => 'processWhile',
+                            T_DO                       => 'processDo',
+                            T_IF                       => 'processIfthen',
+                            T_FOREACH                  => 'processForeach',
+                            T_FOR                      => 'processFor',
+                            T_TRY                      => 'processTry',
+                            T_CONST                    => 'processConst',
+                            T_SWITCH                   => 'processSwitch',
+                            T_DEFAULT                  => 'processDefault',
+                            T_CASE                     => 'processCase',
+                            T_DECLARE                  => 'processDeclare',
+
+                            T_AT                       => 'processNoscream',
+                            T_CLONE                    => 'processClone',
+                            T_GOTO                     => 'processGoto',
+
+                            T_STRING                   => 'processString',
+                            T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
+                            T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
+                            T_NUM_STRING               => 'processLiteral',
+                            T_STRING_VARNAME           => 'processVariable',
+
+                            T_ARRAY_CAST               => 'processCast',
+                            T_BOOL_CAST                => 'processCast',
+                            T_DOUBLE_CAST              => 'processCast',
+                            T_INT_CAST                 => 'processCast',
+                            T_OBJECT_CAST              => 'processCast',
+                            T_STRING_CAST              => 'processCast',
+                            T_UNSET_CAST               => 'processCast',
+
+                            T_FILE                     => 'processMagicConstant',
+                            T_CLASS_C                  => 'processMagicConstant',
+                            T_FUNC_C                   => 'processMagicConstant',
+                            T_LINE                     => 'processMagicConstant',
+                            T_DIR                      => 'processMagicConstant',
+                            T_METHOD_C                 => 'processMagicConstant',
+                            T_NS_C                     => 'processMagicConstant',
+                            T_TRAIT_C                  => 'processMagicConstant',
+
+                            T_BANG                     => 'processNot',
+                            T_TILDE                    => 'processNot',
+                            T_ELLIPSIS                 => 'processEllipsis',
+                             
+                            T_SEMICOLON                => 'processSemicolon',
+                            T_CLOSE_TAG                => 'processClosingTag',
+
+                            T_FUNCTION                 => 'processFunction',
+                            T_CLASS                    => 'processClass',
+                            T_TRAIT                    => 'processTrait',
+                            T_INTERFACE                => 'processInterface',
+                            T_NAMESPACE                => 'processNamespace',
+                            T_USE                      => 'processUse',
+                            T_AS                       => 'processAs',
+                            T_INSTEADOF                => 'processInsteadof',
+
+                            T_ABSTRACT                 => 'processAbstract',
+                            T_FINAL                    => 'processFinal',
+                            T_PRIVATE                  => 'processPrivate',
+                            T_PROTECTED                => 'processProtected',
+                            T_PUBLIC                   => 'processPublic',
+                            T_VAR                      => 'processVar',
+                            
+                            T_QUOTE                    => 'processQuote',
+                            T_START_HEREDOC            => 'processQuote',
+                            T_BACKTICK                 => 'processQuote',
+                            T_DOLLAR_OPEN_CURLY_BRACES => 'processDollarCurly',
+                            T_STATIC                   => 'processStatic',
+                            T_GLOBAL                   => 'processGlobalVariable',
+                            );
+
+
     
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
@@ -235,7 +406,8 @@ class Load extends Tasks {
                           'args_max'    => self::$PROP_ARGS_MAX,
                           'args_min'    => self::$PROP_ARGS_MIN,
                           'bracket'     => self::$PROP_BRACKET,
-                          'close_tag'   => self::$PROP_CLOSETAG
+                          'close_tag'   => self::$PROP_CLOSETAG,
+                          'aliased'     => self::$PROP_ALIASED,
                           );
 
         $this->php->getTokens();
@@ -390,6 +562,7 @@ class Load extends Tasks {
     
         $tokens = $this->php->getTokenFromFile($filename);
         $log['token_initial'] = count($tokens);
+
         if (count($tokens) === 1) {
             throw new NoFileToProcess($filename, 'empty');
         }
@@ -418,7 +591,7 @@ class Load extends Tasks {
                                 1 => '/* END */',
                                 2 => $line);
         unset($tokens);
-        
+
         $id1 = $this->addAtom('File');
         $this->setAtom($id1, array('code'     => $filename,
                                    'fullcode' => $file,
@@ -426,220 +599,54 @@ class Load extends Tasks {
                                    'token'    => 'T_FILENAME'));
         $this->addLink($this->id0, $id1, 'PROJECT');
         
-        $n = count($this->tokens) - 2;
-        $this->id = 0; // set to 0 so as to calculate line in the next call.
-        $this->startSequence(); // At least, one sequence available
-        $this->id = -1;
-        do {
-            $theId = $this->processNext();
-#            display( "$this->id / $n\n");
+        try {
+            $n = count($this->tokens) - 2;
+            $this->id = 0; // set to 0 so as to calculate line in the next call.
+            $this->startSequence(); // At least, one sequence available
+            $this->id = -1;
+            do {
+                $theId = $this->processNext();
+    
+                if ($theId > 0) {
+                    $this->addToSequence($theId);
+                }
+            } while ($this->id < $n);
+    
+            $sequenceId = $this->sequence;
+            $this->endSequence();
 
-            if ($theId > 0) {
-                $this->addToSequence($theId);
-            }
-        } while ($this->id < $n);
-        
-        $sequenceId = $this->sequence;
-        $this->endSequence();
+            $this->addLink($id1, $sequenceId, 'FILE');
+            $this->setAtom($sequenceId, array('root' => true));
+            $this->checkTokens($filename);
+        } catch (LoadError $e) {
+            $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
+            $this->links = array();
+            $this->contexts = $contexts = array(self::CONTEXT_CLASS      => false,
+                              self::CONTEXT_INTERFACE  => false,
+                              self::CONTEXT_TRAIT      => false,
+                              self::CONTEXT_FUNCTION   => false,
+                              self::CONTEXT_NEW        => false,
+                              self::CONTEXT_NOSEQUENCE => 0,
+                         );
+            throw new NoFileToProcess($filename, 'empty');
+        }
 
-        $this->addLink($id1, $sequenceId, 'FILE');
-        $this->setAtom($sequenceId, array('root' => true));
-
-        $this->checkTokens($filename);
-        
-#        display( count($this->atoms)." atoms\n");
-#        display( count($this->links)." links\n");
-#        display( "Final id : $this->id\n");
-        
         return true;
     }
 
     private function processNext() {
        ++$this->id;
        
-#       display( $this->id.") ".$this->tokens[$this->id][1]."\n");
-       $this->processing = array(
-                            T_OPEN_TAG                 => 'processOpenTag',
-                            T_OPEN_TAG_WITH_ECHO       => 'processOpenTag',
-                            
-                            T_DOLLAR                   => 'processDollar',
-                            T_VARIABLE                 => 'processVariable',
-                            T_LNUMBER                  => 'processInteger',
-                            T_DNUMBER                  => 'processReal',
-                            
-                            T_OPEN_PARENTHESIS         => 'processParenthesis',
-           
-                            T_PLUS                     => 'processAddition',
-                            T_MINUS                    => 'processAddition',
-                            T_STAR                     => 'processMultiplication',
-                            T_SLASH                    => 'processMultiplication',
-                            T_PERCENTAGE               => 'processMultiplication',
-                            T_POW                      => 'processPower',
-                            T_INSTANCEOF               => 'processInstanceof',
-                            T_SL                       => 'processBitshift',
-                            T_SR                       => 'processBitshift',
+       if ($this->tokens[$this->id][0] === T_END ||
+            !isset($this->processing[ $this->tokens[$this->id][0] ])) {
+            display("Can't process file '$this->filename' during load. Ignoring\n");
+            $this->log->log("Can't process file '$this->filename' during load. Ignoring\n");
 
-                            T_DOUBLE_COLON             => 'processDoubleColon',
-                            T_OBJECT_OPERATOR          => 'processObjectOperator',
-                            T_NEW                      => 'processNew',
-                            
-                            T_DOT                      => 'processDot',
-                            T_OPEN_CURLY               => 'processBlock',
-                            
-                            T_IS_SMALLER_OR_EQUAL      => 'processComparison',
-                            T_IS_GREATER_OR_EQUAL      => 'processComparison',
-                            T_GREATER                  => 'processComparison',
-                            T_SMALLER                  => 'processComparison',
-
-                            T_IS_EQUAL                 => 'processComparison',
-                            T_IS_NOT_EQUAL             => 'processComparison',
-                            T_IS_IDENTICAL             => 'processComparison',
-                            T_IS_NOT_IDENTICAL         => 'processComparison',
-                            T_SPACESHIP                => 'processComparison',
-
-                            T_OPEN_BRACKET             => 'processArrayBracket',
-                            T_ARRAY                    => 'processArray',
-                            T_EMPTY                    => 'processArray',
-                            T_LIST                     => 'processArray',
-                            T_EVAL                     => 'processArray',
-                            T_UNSET                    => 'processArray',
-                            T_ISSET                    => 'processArray',
-                            T_EXIT                     => 'processExit',
-                            T_DOUBLE_ARROW             => 'processKeyvalue',
-                            T_ECHO                     => 'processEcho',
-
-                            T_HALT_COMPILER            => 'processHalt',
-                            T_PRINT                    => 'processPrint',
-                            T_INCLUDE                  => 'processPrint',
-                            T_INCLUDE_ONCE             => 'processPrint',
-                            T_REQUIRE                  => 'processPrint',
-                            T_REQUIRE_ONCE             => 'processPrint',
-                            T_RETURN                   => 'processReturn',
-                            T_THROW                    => 'processThrow',
-                            T_YIELD                    => 'processYield',
-                            T_YIELD_FROM               => 'processYieldfrom',
-
-                            T_EQUAL                    => 'processAssignation',
-                            T_PLUS_EQUAL               => 'processAssignation',
-                            T_AND_EQUAL                => 'processAssignation',
-                            T_CONCAT_EQUAL             => 'processAssignation',
-                            T_DIV_EQUAL                => 'processAssignation',
-                            T_MINUS_EQUAL              => 'processAssignation',
-                            T_MOD_EQUAL                => 'processAssignation',
-                            T_MUL_EQUAL                => 'processAssignation',
-                            T_OR_EQUAL                 => 'processAssignation',
-                            T_POW_EQUAL                => 'processAssignation',
-                            T_SL_EQUAL                 => 'processAssignation',
-                            T_SR_EQUAL                 => 'processAssignation',
-                            T_XOR_EQUAL                => 'processAssignation',
-
-                            T_CONTINUE                 => 'processBreak',
-                            T_BREAK                    => 'processBreak',
-
-                            T_LOGICAL_AND              => 'processLogical',
-                            T_LOGICAL_XOR              => 'processLogical',
-                            T_LOGICAL_OR               => 'processLogical',
-                            T_PIPE                     => 'processLogical',
-                            T_CARET                    => 'processLogical',
-                            T_AND                      => 'processAnd',
-
-                            T_BOOLEAN_AND              => 'processLogical',
-                            T_BOOLEAN_OR               => 'processLogical',
-
-                            T_QUESTION                 => 'processTernary',
-                            T_NS_SEPARATOR             => 'processNsnameAbsolute',
-                            T_COALESCE                 => 'processCoalesce',
-
-                            T_INLINE_HTML              => 'processInlineHtml',
-
-                            T_INC                      => 'processPlusplus',
-                            T_DEC                      => 'processPlusplus',
-
-                            T_WHILE                    => 'processWhile',
-                            T_DO                       => 'processDo',
-                            T_IF                       => 'processIfthen',
-                            T_FOREACH                  => 'processForeach',
-                            T_FOR                      => 'processFor',
-                            T_TRY                      => 'processTry',
-                            T_CONST                    => 'processConst',
-                            T_SWITCH                   => 'processSwitch',
-                            T_DEFAULT                  => 'processDefault',
-                            T_CASE                     => 'processCase',
-                            T_DECLARE                  => 'processDeclare',
-
-                            T_AT                       => 'processNoscream',
-                            T_CLONE                    => 'processClone',
-                            T_GOTO                     => 'processGoto',
-
-                            T_STRING                   => 'processString',
-                            T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
-                            T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
-                            T_NUM_STRING               => 'processLiteral',
-                            T_STRING_VARNAME           => 'processVariable',
-
-                            T_ARRAY_CAST               => 'processCast',
-                            T_BOOL_CAST                => 'processCast',
-                            T_DOUBLE_CAST              => 'processCast',
-                            T_INT_CAST                 => 'processCast',
-                            T_OBJECT_CAST              => 'processCast',
-                            T_STRING_CAST              => 'processCast',
-                            T_UNSET_CAST               => 'processCast',
-
-                            T_FILE                     => 'processMagicConstant',
-                            T_CLASS_C                  => 'processMagicConstant',
-                            T_FUNC_C                   => 'processMagicConstant',
-                            T_LINE                     => 'processMagicConstant',
-                            T_DIR                      => 'processMagicConstant',
-                            T_METHOD_C                 => 'processMagicConstant',
-                            T_NS_C                     => 'processMagicConstant',
-                            T_TRAIT_C                  => 'processMagicConstant',
-
-                            T_BANG                     => 'processNot',
-                            T_TILDE                    => 'processNot',
-                            T_ELLIPSIS                 => 'processEllipsis',
-                             
-                            T_SEMICOLON                => 'processSemicolon',
-                            T_CLOSE_TAG                => 'processClosingTag',
-                            T_END                      => 'processEnd',
-                            T_COLON                    => 'processNone',
-                            
-                            T_FUNCTION                 => 'processFunction',
-                            T_CLASS                    => 'processClass',
-                            T_TRAIT                    => 'processTrait',
-                            T_INTERFACE                => 'processInterface',
-                            T_NAMESPACE                => 'processNamespace',
-                            T_USE                      => 'processUse',
-                            T_AS                       => 'processAs',
-                            T_INSTEADOF                => 'processInsteadof',
-
-                            T_ABSTRACT                 => 'processAbstract',
-                            T_FINAL                    => 'processFinal',
-                            T_PRIVATE                  => 'processPrivate',
-                            T_PROTECTED                => 'processProtected',
-                            T_PUBLIC                   => 'processPublic',
-                            T_VAR                      => 'processVar',
-                            
-                            T_QUOTE                    => 'processQuote',
-                            T_START_HEREDOC            => 'processQuote',
-                            T_BACKTICK                 => 'processQuote',
-                            T_DOLLAR_OPEN_CURLY_BRACES => 'processDollarCurly',
-                            T_STATIC                   => 'processStatic',
-                            T_GLOBAL                   => 'processGlobalVariable',
-                            );
-        if (!isset($this->processing[ $this->tokens[$this->id][0] ])) {
-            print "Defaulting a : $this->id in file '$this->filename'\n";
-            print_r($this->tokens[$this->id]);
-            die("Missing the method\n");
+            throw new LoadError('Processing error');
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
-        
-#        display( "$method\n" );
-        
-        return $this->$method();
-    }
 
-    private function processNone() {
-        return null;// Just ignore
+        return $this->$method();
     }
 
     //////////////////////////////////////////////////////
@@ -1469,6 +1476,7 @@ class Load extends Tasks {
             
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 ++$args_max;
+
                 if ($typehint === true) {
                     if ($this->tokens[$this->id + 1][0] === T_QUESTION) {
                         $nullableId = $this->processNextAsIdentifier();
@@ -1497,7 +1505,7 @@ class Load extends Tasks {
 
                     while (!in_array($this->tokens[$this->id + 1][0], array(T_COMMA, T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_BRACKET, T_CLOSE_TAG))) {
                         $this->processNext();
-                    }
+                    };
                     $indexId = $this->popExpression();
                 }
                                 
@@ -3541,7 +3549,7 @@ class Load extends Tasks {
             $staticId = $this->addAtom('Staticmethodcall');
             $links = 'METHOD';
         } else {
-            die("Unprocessed atom in static call (right) : ".$this->atoms[$right]['atom']."\n");
+            throw new LoadError("Unprocessed atom in static call (right) : ".$this->atoms[$right]['atom']."\n");
         }
 
         $this->addLink($staticId, $leftId, 'CLASS');
@@ -3644,7 +3652,7 @@ class Load extends Tasks {
             $staticId = $this->addAtom('Methodcall');
             $links = 'METHOD';
         } else {
-            die("Unprocessed atom in object call (right) : ".$this->atoms[$right]['atom']."\n");
+            throw new LoadError("Unprocessed atom in object call (right) : ".$this->atoms[$right]['atom']."\n");
         }
 
         $this->addLink($staticId, $left, 'OBJECT');
@@ -3933,10 +3941,6 @@ class Load extends Tasks {
         return $functioncallId;
     }
 
-    private function processEnd() {
-        die("Attempt to process T_END token\n\n");
-    }
-
     //////////////////////////////////////////////////////
     /// generic methods
     //////////////////////////////////////////////////////
@@ -3974,7 +3978,7 @@ class Load extends Tasks {
         if (!isset($this->links[$label][$o][$d])) { $this->links[$label][$o][$d]= array(); }
 
         $this->links[$label][$o][$d][] = array('origin'      => $origin,
-                                          'destination' => $destination);
+                                               'destination' => $destination);
         return true;
     }
 
@@ -3997,15 +4001,11 @@ class Load extends Tasks {
     
     private function checkTokens($filename) {
         if (count($this->expressions) > 0) {
-            print "Warning : expression is not empty in $filename\n";
-            print_r($this->expressions);
-            foreach($this->expressions as $atomId) {
-                print_r($this->atoms[$atomId]);
-            }
+            throw new LoadError("Warning : expression is not empty in $filename\n");
         }
 
         if ($this->contexts[self::CONTEXT_NOSEQUENCE] > 0) {
-            print "Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE]."\n";
+            throw new LoadError("Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE]."\n");
         }
     
         // All node has one incoming or one outgoing link (outgoing or incoming).
@@ -4060,10 +4060,6 @@ class Load extends Tasks {
                 ++$total;
             }
         }
-        if ($total > 0) {
-            print $total." errors found\n";
-        }
-        
     }
 
     private function processDefineAsConstants($argumentsId) {
