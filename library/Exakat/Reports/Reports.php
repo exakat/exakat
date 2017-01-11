@@ -36,7 +36,7 @@ abstract class Reports {
                                           'PhpConfiguration', 'PhpCompilation',
                                           'Inventories', 'Clustergrammer', 
                                           'ZendFramework',  'RadwellCode',
-                                          'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
+                                          'FacetedJson', 'Json', 'OnepageJson', 
                                           );
 
     private $count = 0;
