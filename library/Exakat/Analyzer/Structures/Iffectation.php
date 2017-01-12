@@ -27,12 +27,6 @@ use Exakat\Analyzer\Analyzer;
 
 class Iffectation extends Analyzer {
     public function analyze() {
-        // if ($a = 1) {} // straight
-        $this->atomIs('Ifthen')
-             ->outIs('CONDITION')
-             ->atomIs('Assignation');
-        $this->prepareQuery();
-
         // if ( 2 == ($a = 1)) {} (deeper inside)
         $this->atomIs('Ifthen')
              ->outIs('CONDITION')

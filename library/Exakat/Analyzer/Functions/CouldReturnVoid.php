@@ -36,6 +36,7 @@ class CouldReturnVoid extends Analyzer {
         // function foo() { } // always return ; 
         $this->atomIs('Function')
              ->outIs('BLOCK')
+             ->hasAtomInside('Return')
              ->raw('where( __.emit( hasLabel("Return")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel("Return").out("RETURN").not(hasLabel("Void")).count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
