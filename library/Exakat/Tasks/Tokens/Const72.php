@@ -1,4 +1,5 @@
-<?php /*
+<?php 
+/*
  * Copyright 2012-2017 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
  * This file is part of Exakat.
  *
@@ -20,7 +21,6 @@
 */
 
 namespace Exakat\Tasks;
-
 const T_REQUIRE_ONCE = 258;
 const T_REQUIRE = 259;
 const T_EVAL = 260;
