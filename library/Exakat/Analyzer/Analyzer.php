@@ -511,6 +511,13 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
 
         return $this;
     }
+
+    public function hasAtomInside($atom) {
+        $gremlin = 'where( __.emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') )';
+        $this->addMethod($gremlin);
+        
+        return $this;
+    }
     
     public function atomInside($atom) {
         $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
