@@ -24,16 +24,22 @@ namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
 
-class ZendInterfaces extends Analyzer {
+class ZendTypehinting extends Analyzer {
     public function analyze() {
         $regex = '^\\\\\\\\zend(_|\\\\\\\\)';
 
-        // In implements
-        $this->atomIs(array('Class', 'Interface'))
-             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('TYPEHINT')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
-    }
+
+        $this->atomIs('Instanceof')
+             ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->regexIs('fullnspath', $regex);
+        $this->prepareQuery();    }
 }
 
 ?>

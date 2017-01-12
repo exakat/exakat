@@ -31,7 +31,8 @@ class UndefinedClasses extends Analyzer {
     public function dependsOn() {
         return array('ZendF/ZendClasses',
                      'ZendF/ZendTrait',
-                     'ZendF/ZendInterfaces'
+                     'ZendF/ZendInterfaces',
+                     'ZendF/ZendTypehinting'
                      );
     }
         
@@ -53,8 +54,6 @@ class UndefinedClasses extends Analyzer {
 
         $traits = $data->getTraitByRelease($this->release);
         $traits = $this->makeFullNsPath(array_pop($traits));
-
-        $all = array_merge($classes, $interfaces, $traits);
         
         $this->analyzerIs('ZendF/ZendClasses')
              ->fullnspathIsNot($classes);
@@ -66,6 +65,10 @@ class UndefinedClasses extends Analyzer {
 
         $this->analyzerIs('ZendF/ZendInterfaces')
              ->fullnspathIsNot($interfaces);
+        $this->prepareQuery();
+
+        $this->analyzerIs('ZendF/ZendTypehinting')
+             ->fullnspathIsNot(array_merge($classes, $interfaces));
         $this->prepareQuery();
     }
 }

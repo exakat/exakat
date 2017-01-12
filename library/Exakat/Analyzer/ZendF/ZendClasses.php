@@ -30,7 +30,7 @@ class ZendClasses extends Analyzer {
     
     public function analyze() {
         $regex = '^\\\\\\\\zend(_|\\\\\\\\)';
-        
+
         $this->atomIs('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -56,18 +56,6 @@ class ZendClasses extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Catch')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', $regex);
-        $this->prepareQuery();
-
-        $this->atomIs('Typehint')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', $regex);
-        $this->prepareQuery();
-
-        $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->regexIs('fullnspath', $regex);
