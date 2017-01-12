@@ -589,6 +589,11 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
         return $this;
     }
 
+    public function isNotHash($property, $hash, $index) {
+        $this->addMethod('filter{ it.get().value("'.$property.'") in ***.'.$index.'}', $hash);
+        
+        return $this;
+    }
     public function isNot($property, $value = true) {
         if ($value === null) {
             $this->addMethod('not(has("'.$property.'", null))');
@@ -1541,7 +1546,8 @@ GREMLIN
 {$query}
 
 GREMLIN;
-        $query .= '.where( __.in("ANALYZED").has("analyzer", "'.$this->analyzerQuoted.'").count().is(eq(0)) ).groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
+//        $query .= '.where( __.in("ANALYZED").has("analyzer", "'.$this->analyzerQuoted.'").count().is(eq(0)) ).groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
+        $query .= '.dedup().groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
 // php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";

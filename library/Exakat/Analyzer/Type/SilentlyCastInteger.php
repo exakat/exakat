@@ -29,14 +29,7 @@ class SilentlyCastInteger extends Analyzer {
     public function analyze() {
         // Binary or hexadecimal, cast to Real
         $this->atomIs('Real')
-             ->regexIs('code', '0[xXbB]')
-             ->back('first');
-        $this->prepareQuery();
-
-        // Octal cast to Real
-        $this->atomIs('Real')
-             ->regexIs('code', '^0')
-             ->regexIsNot('code', '\\\\.')
+             ->regexIs('code', '^0[xXbB]')
              ->back('first');
         $this->prepareQuery();
 

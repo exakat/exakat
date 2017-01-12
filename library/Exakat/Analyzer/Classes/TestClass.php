@@ -36,20 +36,10 @@ class TestClass extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-// second level of heritage
+        // all children level of heritage
         $this->atomIs('Class')
-             ->outIs('EXTENDS')
-             ->classDefinition()
              ->analyzerIs('self')
-             ->back('first');
-        $this->prepareQuery();
-
-// third level of heritage
-        $this->atomIs('Class')
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->analyzerIs('self')
-             ->back('first');
+             ->goToAllChildren();
         $this->prepareQuery();
     }
 }

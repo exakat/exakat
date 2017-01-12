@@ -32,7 +32,7 @@ class UndefinedProperty extends Analyzer {
     }
     
     public function analyze() {
-        // only for internal calls. External calls still needs some work
+        // only for calls internal to the class. External calls still needs some work
         $this->atomIs('Property')
              ->outIs('PROPERTY')
              ->tokenIs('T_STRING')
