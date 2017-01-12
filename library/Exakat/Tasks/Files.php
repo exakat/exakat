@@ -267,7 +267,7 @@ class Files extends Tasks {
             }
         }
         $this->datastore->addRow('configFiles', $configFiles);
-        display(print_r($configFiles, true));
+        display("\n + ".implode("\n + ", array_map(function ($x) { return $x['file']; }, $configFiles))."\n\n");
         // Composer is check previously
 
         display('Done');
