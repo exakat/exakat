@@ -81,7 +81,7 @@ class Analyze extends Tasks {
         $this->log->log("Analyzing project $project");
         $this->log->log("Runnable analyzers\t".count($analyzers_class));
 
-        if ($this->config->noDependencies) {
+        if ($this->config->noDependencies === true) {
             $dependencies2 = $analyzers_class;
         } else {
             $dependencies = array();

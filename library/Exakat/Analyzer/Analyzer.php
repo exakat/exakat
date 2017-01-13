@@ -1287,12 +1287,12 @@ GREMLIN
         return $this;
     }
 
-    public function goToAllParents($self = self::INCLUDE_SELF) {
+    public function goToAllParents($self = self::EXCLUDE_SELF) {
 //        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
         if ($self === self::INCLUDE_SELF) {
             $this->addMethod('filter{true}.emit().repeat( sideEffect{ x = it.get(); }.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").filter{ it.get() != x;} ).times('.self::MAX_LOOPING.')');
         } else {
-            $this->addMethod('repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION").dedup() ).emit().times('.self::MAX_LOOPING.')');
+            $this->addMethod('repeat( sideEffect{ x = it.get(); }.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").filter{ it.get() != x;} ).emit().times('.self::MAX_LOOPING.')');
         }
         
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
