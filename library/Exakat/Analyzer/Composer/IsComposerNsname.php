@@ -35,8 +35,6 @@ class IsComposerNsname extends Analyzer {
 
         $packagistClasses = $data->getComposerClasses();
         $packagistClassesFullNS = $this->makeFullNsPath($packagistClasses);
-        // Chunks is made to shorten the queries
-        $packagistClassesFullNSChunks = array_chunk($packagistClassesFullNS, 5000);
 
         $packagistInterfaces = $data->getComposerInterfaces();
         $packagistInterfacesFullNs = $this->makeFullNsPath($packagistInterfaces);
@@ -50,12 +48,10 @@ class IsComposerNsname extends Analyzer {
         $this->prepareQuery();
 
         // classes in Composer
-        foreach($packagistClassesFullNSChunks as $id => $p) {
-            $this->atomIs('Use')
-                 ->outIs('USE')
-                 ->is('originpath', $p);
-            $this->prepareQuery();
-        }
+        $this->atomIs('Use')
+             ->outIs('USE')
+             ->is('originpath', $packagistInterfacesFullNs);
+        $this->prepareQuery();
 
         // interfaces in Composer
         $this->atomIs('Use')
@@ -73,13 +69,6 @@ class IsComposerNsname extends Analyzer {
         ////////////////////////////////////////////////
         // Classes extends or implements
         // Classes in Composer
-        foreach($packagistClassesFullNSChunks as $id => $p) {
-            $this->atomIs('Class')
-                 ->outIs(array('IMPLEMENTS', 'EXTENDS'))
-                 ->fullnspathIs($p);
-            $this->prepareQuery();
-        }
-
         $this->atomIs('Class')
              ->outIs(array('IMPLEMENTS', 'EXTENDS'))
              ->fullnspathIs($packagistInterfacesFullNs);
@@ -88,19 +77,12 @@ class IsComposerNsname extends Analyzer {
         ////////////////////////////////////////////////
         // Instanceof
         // Classes or interfaces in Composer
-        foreach($packagistClassesFullNSChunks as $id => $p) {
-            $this->atomIs('Instanceof')
-                 ->outIs('CLASS')
-                 ->atomIs(array('Nsname', 'Identifier'))
-                 ->fullnspathIs($p);
-            $this->prepareQuery();
-        }
-
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-                 ->atomIs(array('Nsname', 'Identifier'))
+             ->atomIs(array('Nsname', 'Identifier'))
              ->fullnspathIs($packagistInterfacesFullNs);
         $this->prepareQuery();
+
     }
 }
 

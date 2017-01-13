@@ -59,23 +59,6 @@ class Variablenames extends Analyzer {
              ->outIs('PROPERTY')
              ->tokenIs('T_VARIABLE');
         $this->prepareQuery();
-
-        // ${'x'}
-        $this->atomIs('Variable')
-
-             ->hasNoParent('Class', array('PPP', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent('Class', array('LEFT', 'PPP', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent('Class', array('STATIC', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent('Class', array('LEFT', 'STATIC', 'ELEMENT', 'BLOCK'))
-
-             ->hasNoParent('Staticproperty', 'PROPERTY')
-             ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
-             ->analyzerIsNot('Variables/Blind')
-             ->tokenIs('T_DOLLAR')
-             ->outIs('NAME')
-             ->tokenIs('T_STRING')
-             ->back('first');
-        $this->prepareQuery();
     }
 }
 
