@@ -38,6 +38,7 @@ class Htmlentitiescall extends Analyzer {
         // Case with no 3rd argument (using default)
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
+             ->hasChildWithRank('ARGUMENT', 1)
              ->noChildWithRank('ARGUMENT', 2)
              ->back('first');
         $this->prepareQuery();
@@ -45,6 +46,7 @@ class Htmlentitiescall extends Analyzer {
         // Case 2nd argument is a constant
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
+             ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(array('Identifier', 'Nsname'))
              ->outIsIE('SUBNAME')
@@ -55,6 +57,7 @@ class Htmlentitiescall extends Analyzer {
         // Case 2nd argument is a combinaison
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
+             ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Logical')
              ->atomInside(array('Identifier', 'Nsname'))
@@ -66,6 +69,7 @@ class Htmlentitiescall extends Analyzer {
         // Case 3rd argument is one of the following value
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
+             ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 2)
              ->atomIs('String')
              ->noDelimiterIsNot(array('ISO-8859-1', 'ISO8859-1', 'ISO-8859-5', 'ISO8859-5', 'ISO-8859-15', 'ISO8859-15', 'UTF-8', 'cp866',

@@ -43,6 +43,7 @@ class ErrorMessages extends Analyzer {
 
         //  new \Exception('Message');
         $this->atomIs('New')
+             ->hasNoIn('THROW')
              ->outIs('NEW')
              ->functioncallIs('\\exception')
              ->outIs('ARGUMENTS')
@@ -62,6 +63,7 @@ class ErrorMessages extends Analyzer {
 
         //  new myException('Message');
         $this->atomIs('New')
+             ->hasNoIn('THROW')
              ->outIs('NEW')
              ->_as('new')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
