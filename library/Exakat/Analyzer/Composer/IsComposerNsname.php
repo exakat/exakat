@@ -39,31 +39,15 @@ class IsComposerNsname extends Analyzer {
         $packagistInterfaces = $data->getComposerInterfaces();
         $packagistInterfacesFullNs = $this->makeFullNsPath($packagistInterfaces);
 
+        $packagistTraits = $data->getComposerTraits();
+        $packagistTraitsFullNs = $this->makeFullNsPath($packagistTraits);
+
         ////////////////////////////////////////////////
         // Use
         // namespaces in Composer
         $this->atomIs('Use')
              ->outIs('USE')
-             ->is('originpath', $packagistNamespacesFullNS);
-        $this->prepareQuery();
-
-        // classes in Composer
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->is('originpath', $packagistInterfacesFullNs);
-        $this->prepareQuery();
-
-        // interfaces in Composer
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->is('originpath', $packagistInterfaces);
-        $this->prepareQuery();
-
-        // traits in Composer
-        $packagistTraits = $data->getComposerTraits();
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->is('originpath', $packagistTraits);
+             ->is('originpath', array_merge($packagistNamespacesFullNS, $packagistClassesFullNS, $packagistInterfacesFullNs, $packagistTraitsFullNs));
         $this->prepareQuery();
 
         ////////////////////////////////////////////////
@@ -71,7 +55,7 @@ class IsComposerNsname extends Analyzer {
         // Classes in Composer
         $this->atomIs('Class')
              ->outIs(array('IMPLEMENTS', 'EXTENDS'))
-             ->fullnspathIs($packagistInterfacesFullNs);
+             ->fullnspathIs(array_merge($packagistInterfacesFullNs, $packagistClassesFullNS));
         $this->prepareQuery();
 
         ////////////////////////////////////////////////

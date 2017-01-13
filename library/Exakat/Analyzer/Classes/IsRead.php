@@ -88,25 +88,6 @@ class IsRead extends Analyzer {
         // PHP functions that are passed by value
         $data = new Methods();
         
-        $functions = $data->getFunctionsValueArgs();
-        $references = array();
-        
-        foreach($functions as $function) {
-            if (!isset($references[$function['position']])) {
-                $references[$function['position']] = array('\\'.$function['function']);
-            } else {
-                $references[$function['position']][] = '\\'.$function['function'];
-            }
-        }
-        
-        foreach($references as $position => $functions) {
-            $this->atomFunctionIs($functions)
-                 ->outIs('ARGUMENTS')
-                 ->outWithRank('ARGUMENT', $position)
-                 ->atomIs($atoms);
-            $this->prepareQuery();
-        }
-
         // Variable that are not a reference in a functioncall
         $this->atomIs($atoms)
              ->hasIn('ARGUMENT')

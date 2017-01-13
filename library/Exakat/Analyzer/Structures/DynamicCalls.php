@@ -79,7 +79,6 @@ class DynamicCalls extends Analyzer {
         // static constants
         // use constant() or reflexion
 
-        
         // static property
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
@@ -88,25 +87,21 @@ class DynamicCalls extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $o->{$p}
-        $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
-             ->tokenIsNot(array('T_VARIABLE', 'T_OPEN_BRACKET'))
-             ->back('first');
-        $this->prepareQuery();
-
-        // static methods
+        // static methods (class part)
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIsNot(array('Identifier', 'Nsname'))
              ->codeIsNot(array('self', 'parent', 'static'))
              ->back('first');
         $this->prepareQuery();
 
-        // $o::{$p}()
+        // static methods (method part)
         $this->atomIs('Staticmethodcall')
+             ->analyzerIsNot('self')
              ->outIs('METHOD')
-             ->tokenIsNot('T_STRING')
+             ->atomIs('Functioncall')
+             ->outIs('NAME')
+             ->atomIsNot('Identifier')
              ->back('first');
         $this->prepareQuery();
 

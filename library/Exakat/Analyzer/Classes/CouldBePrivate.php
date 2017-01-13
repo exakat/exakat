@@ -31,61 +31,58 @@ class CouldBePrivate extends Analyzer {
         // Searching for properties that are never used outside the definition class or its children
 
         // Non-static properties
+        // Case of property->property (that's another public access)
+        $publicProperties = $this->query('g.V().hasLabel("Property")
+                                              .where( __.out("OBJECT").not(has("code", "\$this")) )
+                                              .out("PROPERTY")
+                                              .hasLabel("Identifier")
+                                              .values("code").unique()');
+
+        $protectedProperties = $this->query('g.V().hasLabel("Property")
+                                              .where( __.out("OBJECT").has("code", "\$this") )
+                                              .out("PROPERTY")
+                                              .hasLabel("Identifier")
+                                              .values("code").unique()');
+
         $this->atomIs('Ppp')
-             ->hasClass()
              ->hasNoOut('PRIVATE')
              ->hasNoOut('STATIC')
-
-             ->goToClassTrait()
-             ->hasName()
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->back('first')
-
-             ->outIs('PPP')
-             ->_as('results')
-
-            // Skip properties with 'null' as default : they will probably get an object, and can't be unused.
-             ->savePropertyAs('propertyname', 'name')
-             
-             // property is never used, outside the current class, in a children class
-             ->raw('where( g.V().hasLabel("Property").where( __.out("PROPERTY").filter{ it.get().value("code") == name})
-                                                      // Object is not inside the current and parent class
-                                                     .where( __.out("OBJECT").has("code", "\$this") )
-                                                     .not(or(__.until( hasLabel("Class").where(__.out("NAME").hasLabel("Void").is(eq(0))) ).repeat( __.in('.$this->linksDown.')).filter{ it.get().value("fullnspath") != fnp }.count().is(neq(0)),
-                                                         __.out("OBJECT").has("code", "\$this").count().is(eq(0))
-                                                         ))
-                                                     .count().is(neq(0)) 
-                          )')
-             ->back('results');
+             ->isNot('', $publicProperties)
+             ->isNot('', $protectedProperties);
         $this->prepareQuery();
 
         // Static properties
+        // Case of property::property (that's another public access)
+        $publicStaticProperties = $this->query('g.V().hasLabel("Staticproperty")
+                                                     .out("CLASS")
+                                                     .not(has("code", within("self", "static")))
+                                                     .as("classe")
+                                                     .sideEffect{ fns = it.get().value("fullnspath"); }
+                                                     .in("CLASS")
+                                                     .out("PROPERTY")
+                                                     .hasLabel("Variable")
+                                                     .as("property")
+                                                     .repeat( __.in('.$this->linksDown.')).until(hasLabel("Class", "File") )
+                                                     .coalesce( hasLabel("File"), filter{it.get().value("fullnspath") != fns; })
+                                                     .select("classe", "property").by("fullnspath").by("code")
+                                                     .unique()');
+        if (empty($publicStaticProperties)) { return; }
+
+        $calls = array();
+        foreach($publicStaticProperties as $value) {
+            if (isset($calls[$value->property])) {
+                $calls[$value->property][] = $value->classe;
+            } else {
+                $calls[$value->property] = array($value->classe);
+            }
+        }
+        
+        // Property that is not used outside this class or its children
         $this->atomIs('Ppp')
-             ->hasClassTrait()
              ->hasNoOut('PRIVATE')
              ->hasOut('STATIC')
-
-             ->goToClass()
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->back('first')
-
              ->outIs('PPP')
-             ->_as('results')
-
-            // Skip properties with 'null' as default : they will probably get an object, and can't be unused.
-             ->outIsIE('LEFT')
-             ->savePropertyAs('code', 'dname')
-
-            // The static property is not used inside the defining class, nor its children
-             ->raw('where( g.V().hasLabel("Staticproperty").where( __.out("PROPERTY").filter{ it.get().value("code") == dname})
-                                                           .where( __.out("CLASS").has("token", within("T_STRING", "T_NS_SEPARATOR", "T_STATIC")).filter{ it.get().value("fullnspath") == fnp})
-
-                                                            // Not in the defining class
-                                                           .where( __.until( hasLabel("Class", "File") ).emit(hasLabel("Class", "File")).repeat( __.in('.$this->linksDown.')).filter{ it.get().label() == "File" || it.get().value("fullnspath") != fnp }.count().is(eq(0)) ) 
-
-                                                           .count().is(neq(0))
-                          )')
-             ->back('results');
+             ->isNot('code', array_keys($calls));
         $this->prepareQuery();
     }
 }

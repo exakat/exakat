@@ -38,9 +38,9 @@ class DirectInjection extends Analyzer {
                       'SCRIPT_NAME', 'SERVER_ADMIN', '_');
         $safeIndex = 'or( __.out("VARIABLE").has("code", "\\$_SERVER").count().is(eq(0)), 
                           __.out("INDEX").hasLabel("String")
-                            .where(__.out("ELEMENT").count().is(eq(0)) )
-                            .has("noDelimiter", within(["' . implode('", "', $safe) . '"]))
-                            .count().is(eq(0)))';
+                            .where(__.out("CONCAT").count().is(eq(0)) )
+                            .not(has("noDelimiter", within(["' . implode('", "', $safe) . '"])))
+                            .count().is(neq(0)))';
 
         // Relayed call to another function
         $this->atomIs('Functioncall')
@@ -77,47 +77,24 @@ class DirectInjection extends Analyzer {
         // $_GET/_POST ... directly as argument of PHP functions
         $this->atomIs('Variable')
              ->codeIs($vars, true)
-             ->analyzerIs('Security/SensitiveArgument')
-             ->inIsIE('CODE')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
-        $this->prepareQuery();
-
-        // $_GET/_POST ['index'] (one level).. directly as argument of PHP functions
-        $this->atomIs('Variable')
-             ->codeIs($vars, true)
              ->inIs('VARIABLE')
              ->raw($safeIndex)
+             ->goToArray()
              ->inIsIE('CODE')
              ->analyzerIs('Security/SensitiveArgument')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
-        $this->prepareQuery();
-
-        // $_GET/_POST ['index']['index2'] (2 levels and more)... directly as argument of PHP functions
-        $this->atomIs('Variable')
-             ->codeIs($vars, true)
-             ->goToArray()
-             ->analyzerIs('Security/SensitiveArgument')
-             ->raw($safeIndex)
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
-        $this->atomIs('Variable')
-             ->codeIs($vars, true)
-             ->goToArray()
-             ->raw($safeIndex)
-             ->inIs('CONCAT');
-        $this->prepareQuery();
-
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
         $this->atomIs('Variable')
              ->codeIs($vars, true)
-             ->goToArray()
+             ->inIs('VARIABLE')
              ->raw($safeIndex)
+             ->goToArray()
+             ->inIsIE('CODE')
              ->inIs('CONCAT');
         $this->prepareQuery();
 

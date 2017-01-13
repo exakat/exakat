@@ -32,28 +32,6 @@ class NonStaticMethodsCalledStatic extends Analyzer {
     }
     
     public function analyze() {
-        // check outside the class : the first found class has the method, and it is not static
-        $this->atomIs('Staticmethodcall')
-             ->analyzerIs('Classes/IsNotFamily')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->codeIsNot('__construct')
-             ->savePropertyAs('code', 'methodname')
-             ->inIs('METHOD')
-
-             ->outIs('CLASS')
-             ->codeIsNot(array('self', 'parent', 'static'))
-             ->classDefinition()
-
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->hasNoOut('STATIC')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'methodname')
-             ->back('first');
-        $this->prepareQuery();
-
         // check outside the class to undefined Class : report it as pb. 
         $this->atomIs('Staticmethodcall')
              ->analyzerIs('Classes/UndefinedClasses')
@@ -63,30 +41,8 @@ class NonStaticMethodsCalledStatic extends Analyzer {
         // check outside the class : the first found class has not method
         // Here, we find methods that are in the grand parents, and not static.
 
-        // Current class
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->tokenIs('T_STRING')
-             ->codeIsNot('__construct')
-             ->savePropertyAs('code', 'methodname')
-             ->inIs('METHOD')
-
-             ->outIs('CLASS')
-             ->classDefinition()
-
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->hasNoOut('STATIC')
-             ->outIs('NAME')
-             ->samePropertyAs('code', 'methodname')
-
-             ->back('first');
-        $this->prepareQuery();
-
         // Go to all parents class
         $this->atomIs('Staticmethodcall')
-             ->analyzerIs('Classes/IsNotFamily')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->codeIsNot('__construct')
@@ -96,7 +52,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->outIs('CLASS')
              ->codeIsNot(array('parent', 'self', 'static'))
              ->classDefinition()
-             ->goToAllParents()
+             ->goToAllParents(self::INCLUDE_SELF)
 
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
