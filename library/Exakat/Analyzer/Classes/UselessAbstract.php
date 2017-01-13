@@ -43,6 +43,7 @@ class UselessAbstract extends Analyzer {
         // abstract class without nothing in
         $this->atomIs('Class')
              ->hasOut('ABSTRACT')
+             ->hasOut('DEFINITION')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Void')
@@ -52,7 +53,8 @@ class UselessAbstract extends Analyzer {
         // abstract class with not methods
         $this->atomIs('Class')
              ->hasOut('ABSTRACT')
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").count().is(eq(0)) )')
+             ->hasOut('DEFINITION')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function", "Void").count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
      }

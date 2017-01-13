@@ -60,6 +60,7 @@ class NoSelfReferencingConstant extends Analyzer {
              ->outIs('VALUE')
              ->atomInside('Staticconstant')
              ->outIs('CLASS')
+             ->codeIsNot(array('self', 'static'))
              ->samePropertyAs('fullnspath', 'classe')
              ->inIs('CLASS')
 
