@@ -1105,7 +1105,7 @@ GREMLIN
     }
 
     public function goToArray() {
-        $this->addMethod('repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
+        $this->addMethod('emit().repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
         
         return $this;
     }
