@@ -13,6 +13,7 @@ $expected     = array('print ($_GET[\'DOCUMENT_ROOT\'])',
                        );
 
 $expected_not = array('"$_SERVER[\'DOCUMENT_ROOT\']"',
+                      'print ($_SERVER[\'DOCUMENT_ROOT\'])',
                       '\'ls \' . $_SERVER[\'DOCUMENT_ROOT\']',);
 
 ?>

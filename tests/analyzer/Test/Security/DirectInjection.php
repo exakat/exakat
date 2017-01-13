@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Security_DirectInjection extends Analyzer {
-    /* 6 methods */
+    /* 7 methods */
 
     public function testSecurity_DirectInjection01()  { $this->generic_test('Security_DirectInjection.01'); }
     public function testSecurity_DirectInjection02()  { $this->generic_test('Security/DirectInjection.02'); }
@@ -16,5 +16,6 @@ class Security_DirectInjection extends Analyzer {
     public function testSecurity_DirectInjection04()  { $this->generic_test('Security/DirectInjection.04'); }
     public function testSecurity_DirectInjection05()  { $this->generic_test('Security/DirectInjection.05'); }
     public function testSecurity_DirectInjection06()  { $this->generic_test('Security/DirectInjection.06'); }
+    public function testSecurity_DirectInjection07()  { $this->generic_test('Security/DirectInjection.07'); }
 }
 ?>
