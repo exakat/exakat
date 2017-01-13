@@ -80,9 +80,15 @@ class Load extends Tasks {
     private $calls = array();
 
     private $namespace = '\\';
-    private $uses = array('function' => array(),
-                          'const'    => array(),
-                          'class'    => array());
+    private $uses   = array('function' => array(),
+                            'const'    => array(),
+                            'class'    => array());
+    private $usesId = array('function' => array(),
+                            'const'    => array(),
+                            'class'    => array());
+
+    private $usesDefinitions = array();
+
     private $filename   = null;
     private $line       = 0;
 
@@ -140,65 +146,65 @@ class Load extends Tasks {
     static public $PROP_OPTIONS = array();
     
     static public $TOKENS = array(
-                     ';'  => T_SEMICOLON,
-                     '+'  => T_PLUS,
-                     '-'  => T_MINUS,
-                     '/'  => T_SLASH,
-                     '*'  => T_STAR,
-                     '.'  => T_DOT,
-                     '['  => T_OPEN_BRACKET,
-                     ']'  => T_CLOSE_BRACKET,
-                     '('  => T_OPEN_PARENTHESIS,
-                     ')'  => T_CLOSE_PARENTHESIS,
-                     '{'  => T_OPEN_CURLY,
-                     '}'  => T_CLOSE_CURLY,
-                     '='  => T_EQUAL,
-                     ','  => T_COMMA,
-                     '!'  => T_BANG,
-                     '~'  => T_TILDE,
-                     '@'  => T_AT,
-                     '?'  => T_QUESTION,
-                     ':'  => T_COLON,
-                     '<' => T_SMALLER,
-                     '>' => T_GREATER,
-                     '%' => T_PERCENTAGE,
-                     '"' => T_QUOTE,
-                     '$' => T_DOLLAR,
-                     '&' => T_AND,
-                     '|' => T_PIPE,
-                     '^' => T_CARET,
-                     '`' => T_BACKTICK,
+                     ';'  => \Exakat\Tasks\T_SEMICOLON,
+                     '+'  => \Exakat\Tasks\T_PLUS,
+                     '-'  => \Exakat\Tasks\T_MINUS,
+                     '/'  => \Exakat\Tasks\T_SLASH,
+                     '*'  => \Exakat\Tasks\T_STAR,
+                     '.'  => \Exakat\Tasks\T_DOT,
+                     '['  => \Exakat\Tasks\T_OPEN_BRACKET,
+                     ']'  => \Exakat\Tasks\T_CLOSE_BRACKET,
+                     '('  => \Exakat\Tasks\T_OPEN_PARENTHESIS,
+                     ')'  => \Exakat\Tasks\T_CLOSE_PARENTHESIS,
+                     '{'  => \Exakat\Tasks\T_OPEN_CURLY,
+                     '}'  => \Exakat\Tasks\T_CLOSE_CURLY,
+                     '='  => \Exakat\Tasks\T_EQUAL,
+                     ','  => \Exakat\Tasks\T_COMMA,
+                     '!'  => \Exakat\Tasks\T_BANG,
+                     '~'  => \Exakat\Tasks\T_TILDE,
+                     '@'  => \Exakat\Tasks\T_AT,
+                     '?'  => \Exakat\Tasks\T_QUESTION,
+                     ':'  => \Exakat\Tasks\T_COLON,
+                     '<' => \Exakat\Tasks\T_SMALLER,
+                     '>' => \Exakat\Tasks\T_GREATER,
+                     '%' => \Exakat\Tasks\T_PERCENTAGE,
+                     '"' => \Exakat\Tasks\T_QUOTE,
+                     '$' => \Exakat\Tasks\T_DOLLAR,
+                     '&' => \Exakat\Tasks\T_AND,
+                     '|' => \Exakat\Tasks\T_PIPE,
+                     '^' => \Exakat\Tasks\T_CARET,
+                     '`' => \Exakat\Tasks\T_BACKTICK,
                    );
     
     static public $TOKENNAMES = array(
-                         ';'  => 'T_SEMICOLON',
-                         '+'  => 'T_PLUS',
-                         '-'  => 'T_MINUS',
-                         '/'  => 'T_SLASH',
-                         '*'  => 'T_STAR',
-                         '.'  => 'T_DOT',
-                         '['  => 'T_OPEN_BRACKET',
-                         ']'  => 'T_CLOSE_BRACKET',
-                         '('  => 'T_OPEN_PARENTHESIS',
-                         ')'  => 'T_CLOSE_PARENTHESIS',
-                         '{'  => 'T_OPEN_CURLY',
-                         '}'  => 'T_CLOSE_CURLY',
-                         '='  => 'T_EQUAL',
-                         ','  => 'T_COMMA',
-                         '!'  => 'T_BANG',
-                         '~'  => 'T_TILDE',
-                         '@'  => 'T_AT',
-                         '?'  => 'T_QUESTION',
-                         ':'  => 'T_COLON',
-                         '<'  => 'T_SMALLER',
-                         '>'  => 'T_GREATER',
-                         '%'  => 'T_PERCENTAGE',
-                         '"'  => 'T_QUOTE',
-                         '$'  => 'T_DOLLAR',
-                         '&'  => 'T_AND',
-                         '|'  => 'T_PIPE',
-                         '^'  => 'T_CARET',
-                         '`'  => 'T_BACKTICK',
+                         ';'  => '\Exakat\Tasks\T_SEMICOLON',
+                         '+'  => '\Exakat\Tasks\T_PLUS',
+                         '-'  => '\Exakat\Tasks\T_MINUS',
+                         '/'  => '\Exakat\Tasks\T_SLASH',
+                         '*'  => '\Exakat\Tasks\T_STAR',
+                         '.'  => '\Exakat\Tasks\T_DOT',
+                         '['  => '\Exakat\Tasks\T_OPEN_BRACKET',
+                         ']'  => '\Exakat\Tasks\T_CLOSE_BRACKET',
+                         '('  => '\Exakat\Tasks\T_OPEN_PARENTHESIS',
+                         ')'  => '\Exakat\Tasks\T_CLOSE_PARENTHESIS',
+                         '{'  => '\Exakat\Tasks\T_OPEN_CURLY',
+                         '}'  => '\Exakat\Tasks\T_CLOSE_CURLY',
+                         '='  => '\Exakat\Tasks\T_EQUAL',
+                         ','  => '\Exakat\Tasks\T_COMMA',
+                         '!'  => '\Exakat\Tasks\T_BANG',
+                         '~'  => '\Exakat\Tasks\T_TILDE',
+                         '@'  => '\Exakat\Tasks\T_AT',
+                         '?'  => '\Exakat\Tasks\T_QUESTION',
+                         ':'  => '\Exakat\Tasks\T_COLON',
+                         '<'  => '\Exakat\Tasks\T_SMALLER',
+                         '>'  => '\Exakat\Tasks\T_GREATER',
+                         '%'  => '\Exakat\Tasks\T_PERCENTAGE',
+                         '"'  => '\Exakat\Tasks\T_QUOTE',
+                         '$'  => '\Exakat\Tasks\T_DOLLAR',
+                         '&'  => '\Exakat\Tasks\T_AND',
+                         '|'  => '\Exakat\Tasks\T_PIPE',
+                         '^'  => '\Exakat\Tasks\T_CARET',
+                         '`'  => '\Exakat\Tasks\T_BACKTICK',
                    );
     private $expressions = array();
     private $atoms = array();
@@ -209,172 +215,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank = array();
 
-    private $processing = array(
-                            T_OPEN_TAG                 => 'processOpenTag',
-                            T_OPEN_TAG_WITH_ECHO       => 'processOpenTag',
-                            
-                            T_DOLLAR                   => 'processDollar',
-                            T_VARIABLE                 => 'processVariable',
-                            T_LNUMBER                  => 'processInteger',
-                            T_DNUMBER                  => 'processReal',
-                            
-                            T_OPEN_PARENTHESIS         => 'processParenthesis',
-           
-                            T_PLUS                     => 'processAddition',
-                            T_MINUS                    => 'processAddition',
-                            T_STAR                     => 'processMultiplication',
-                            T_SLASH                    => 'processMultiplication',
-                            T_PERCENTAGE               => 'processMultiplication',
-                            T_POW                      => 'processPower',
-                            T_INSTANCEOF               => 'processInstanceof',
-                            T_SL                       => 'processBitshift',
-                            T_SR                       => 'processBitshift',
-
-                            T_DOUBLE_COLON             => 'processDoubleColon',
-                            T_OBJECT_OPERATOR          => 'processObjectOperator',
-                            T_NEW                      => 'processNew',
-                            
-                            T_DOT                      => 'processDot',
-                            T_OPEN_CURLY               => 'processBlock',
-                            
-                            T_IS_SMALLER_OR_EQUAL      => 'processComparison',
-                            T_IS_GREATER_OR_EQUAL      => 'processComparison',
-                            T_GREATER                  => 'processComparison',
-                            T_SMALLER                  => 'processComparison',
-
-                            T_IS_EQUAL                 => 'processComparison',
-                            T_IS_NOT_EQUAL             => 'processComparison',
-                            T_IS_IDENTICAL             => 'processComparison',
-                            T_IS_NOT_IDENTICAL         => 'processComparison',
-                            T_SPACESHIP                => 'processComparison',
-
-                            T_OPEN_BRACKET             => 'processArrayBracket',
-                            T_ARRAY                    => 'processArray',
-                            T_EMPTY                    => 'processArray',
-                            T_LIST                     => 'processArray',
-                            T_EVAL                     => 'processArray',
-                            T_UNSET                    => 'processArray',
-                            T_ISSET                    => 'processArray',
-                            T_EXIT                     => 'processExit',
-                            T_DOUBLE_ARROW             => 'processKeyvalue',
-                            T_ECHO                     => 'processEcho',
-
-                            T_HALT_COMPILER            => 'processHalt',
-                            T_PRINT                    => 'processPrint',
-                            T_INCLUDE                  => 'processPrint',
-                            T_INCLUDE_ONCE             => 'processPrint',
-                            T_REQUIRE                  => 'processPrint',
-                            T_REQUIRE_ONCE             => 'processPrint',
-                            T_RETURN                   => 'processReturn',
-                            T_THROW                    => 'processThrow',
-                            T_YIELD                    => 'processYield',
-                            T_YIELD_FROM               => 'processYieldfrom',
-
-                            T_EQUAL                    => 'processAssignation',
-                            T_PLUS_EQUAL               => 'processAssignation',
-                            T_AND_EQUAL                => 'processAssignation',
-                            T_CONCAT_EQUAL             => 'processAssignation',
-                            T_DIV_EQUAL                => 'processAssignation',
-                            T_MINUS_EQUAL              => 'processAssignation',
-                            T_MOD_EQUAL                => 'processAssignation',
-                            T_MUL_EQUAL                => 'processAssignation',
-                            T_OR_EQUAL                 => 'processAssignation',
-                            T_POW_EQUAL                => 'processAssignation',
-                            T_SL_EQUAL                 => 'processAssignation',
-                            T_SR_EQUAL                 => 'processAssignation',
-                            T_XOR_EQUAL                => 'processAssignation',
-
-                            T_CONTINUE                 => 'processBreak',
-                            T_BREAK                    => 'processBreak',
-
-                            T_LOGICAL_AND              => 'processLogical',
-                            T_LOGICAL_XOR              => 'processLogical',
-                            T_LOGICAL_OR               => 'processLogical',
-                            T_PIPE                     => 'processLogical',
-                            T_CARET                    => 'processLogical',
-                            T_AND                      => 'processAnd',
-
-                            T_BOOLEAN_AND              => 'processLogical',
-                            T_BOOLEAN_OR               => 'processLogical',
-
-                            T_QUESTION                 => 'processTernary',
-                            T_NS_SEPARATOR             => 'processNsnameAbsolute',
-                            T_COALESCE                 => 'processCoalesce',
-
-                            T_INLINE_HTML              => 'processInlineHtml',
-
-                            T_INC                      => 'processPlusplus',
-                            T_DEC                      => 'processPlusplus',
-
-                            T_WHILE                    => 'processWhile',
-                            T_DO                       => 'processDo',
-                            T_IF                       => 'processIfthen',
-                            T_FOREACH                  => 'processForeach',
-                            T_FOR                      => 'processFor',
-                            T_TRY                      => 'processTry',
-                            T_CONST                    => 'processConst',
-                            T_SWITCH                   => 'processSwitch',
-                            T_DEFAULT                  => 'processDefault',
-                            T_CASE                     => 'processCase',
-                            T_DECLARE                  => 'processDeclare',
-
-                            T_AT                       => 'processNoscream',
-                            T_CLONE                    => 'processClone',
-                            T_GOTO                     => 'processGoto',
-
-                            T_STRING                   => 'processString',
-                            T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
-                            T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
-                            T_NUM_STRING               => 'processLiteral',
-                            T_STRING_VARNAME           => 'processVariable',
-
-                            T_ARRAY_CAST               => 'processCast',
-                            T_BOOL_CAST                => 'processCast',
-                            T_DOUBLE_CAST              => 'processCast',
-                            T_INT_CAST                 => 'processCast',
-                            T_OBJECT_CAST              => 'processCast',
-                            T_STRING_CAST              => 'processCast',
-                            T_UNSET_CAST               => 'processCast',
-
-                            T_FILE                     => 'processMagicConstant',
-                            T_CLASS_C                  => 'processMagicConstant',
-                            T_FUNC_C                   => 'processMagicConstant',
-                            T_LINE                     => 'processMagicConstant',
-                            T_DIR                      => 'processMagicConstant',
-                            T_METHOD_C                 => 'processMagicConstant',
-                            T_NS_C                     => 'processMagicConstant',
-                            T_TRAIT_C                  => 'processMagicConstant',
-
-                            T_BANG                     => 'processNot',
-                            T_TILDE                    => 'processNot',
-                            T_ELLIPSIS                 => 'processEllipsis',
-                             
-                            T_SEMICOLON                => 'processSemicolon',
-                            T_CLOSE_TAG                => 'processClosingTag',
-
-                            T_FUNCTION                 => 'processFunction',
-                            T_CLASS                    => 'processClass',
-                            T_TRAIT                    => 'processTrait',
-                            T_INTERFACE                => 'processInterface',
-                            T_NAMESPACE                => 'processNamespace',
-                            T_USE                      => 'processUse',
-                            T_AS                       => 'processAs',
-                            T_INSTEADOF                => 'processInsteadof',
-
-                            T_ABSTRACT                 => 'processAbstract',
-                            T_FINAL                    => 'processFinal',
-                            T_PRIVATE                  => 'processPrivate',
-                            T_PROTECTED                => 'processProtected',
-                            T_PUBLIC                   => 'processPublic',
-                            T_VAR                      => 'processVar',
-                            
-                            T_QUOTE                    => 'processQuote',
-                            T_START_HEREDOC            => 'processQuote',
-                            T_BACKTICK                 => 'processQuote',
-                            T_DOLLAR_OPEN_CURLY_BRACES => 'processDollarCurly',
-                            T_STATIC                   => 'processStatic',
-                            T_GLOBAL                   => 'processGlobalVariable',
-                            );
+    private $processing = array();
     
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
@@ -383,6 +224,180 @@ class Load extends Tasks {
         if (!$this->php->isValid()) {
             throw new InvalidPHPBinary($this->php->getVersion());
         }
+
+        $this->php->getTokens();
+
+        Precedence::preloadConstants($this->php->getActualVersion());
+        $this->precedence = new Precedence();
+
+        $this->processing = array(
+                            \Exakat\Tasks\T_OPEN_TAG                 => 'processOpenTag',
+                            \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO       => 'processOpenTag',
+                            
+                            \Exakat\Tasks\T_DOLLAR                   => 'processDollar',
+                            \Exakat\Tasks\T_VARIABLE                 => 'processVariable',
+                            \Exakat\Tasks\T_LNUMBER                  => 'processInteger',
+                            \Exakat\Tasks\T_DNUMBER                  => 'processReal',
+                            
+                            \Exakat\Tasks\T_OPEN_PARENTHESIS         => 'processParenthesis',
+           
+                            \Exakat\Tasks\T_PLUS                     => 'processAddition',
+                            \Exakat\Tasks\T_MINUS                    => 'processAddition',
+                            \Exakat\Tasks\T_STAR                     => 'processMultiplication',
+                            \Exakat\Tasks\T_SLASH                    => 'processMultiplication',
+                            \Exakat\Tasks\T_PERCENTAGE               => 'processMultiplication',
+                            \Exakat\Tasks\T_POW                      => 'processPower',
+                            \Exakat\Tasks\T_INSTANCEOF               => 'processInstanceof',
+                            \Exakat\Tasks\T_SL                       => 'processBitshift',
+                            \Exakat\Tasks\T_SR                       => 'processBitshift',
+
+                            \Exakat\Tasks\T_DOUBLE_COLON             => 'processDoubleColon',
+                            \Exakat\Tasks\T_OBJECT_OPERATOR          => 'processObjectOperator',
+                            \Exakat\Tasks\T_NEW                      => 'processNew',
+                            
+                            \Exakat\Tasks\T_DOT                      => 'processDot',
+                            \Exakat\Tasks\T_OPEN_CURLY               => 'processBlock',
+                            
+                            \Exakat\Tasks\T_IS_SMALLER_OR_EQUAL      => 'processComparison',
+                            \Exakat\Tasks\T_IS_GREATER_OR_EQUAL      => 'processComparison',
+                            \Exakat\Tasks\T_GREATER                  => 'processComparison',
+                            \Exakat\Tasks\T_SMALLER                  => 'processComparison',
+
+                            \Exakat\Tasks\T_IS_EQUAL                 => 'processComparison',
+                            \Exakat\Tasks\T_IS_NOT_EQUAL             => 'processComparison',
+                            \Exakat\Tasks\T_IS_IDENTICAL             => 'processComparison',
+                            \Exakat\Tasks\T_IS_NOT_IDENTICAL         => 'processComparison',
+                            \Exakat\Tasks\T_SPACESHIP                => 'processComparison',
+
+                            \Exakat\Tasks\T_OPEN_BRACKET             => 'processArrayBracket',
+                            \Exakat\Tasks\T_ARRAY                    => 'processArray',
+                            \Exakat\Tasks\T_EMPTY                    => 'processArray',
+                            \Exakat\Tasks\T_LIST                     => 'processArray',
+                            \Exakat\Tasks\T_EVAL                     => 'processArray',
+                            \Exakat\Tasks\T_UNSET                    => 'processArray',
+                            \Exakat\Tasks\T_ISSET                    => 'processArray',
+                            \Exakat\Tasks\T_EXIT                     => 'processExit',
+                            \Exakat\Tasks\T_DOUBLE_ARROW             => 'processKeyvalue',
+                            \Exakat\Tasks\T_ECHO                     => 'processEcho',
+
+                            \Exakat\Tasks\T_HALT_COMPILER            => 'processHalt',
+                            \Exakat\Tasks\T_PRINT                    => 'processPrint',
+                            \Exakat\Tasks\T_INCLUDE                  => 'processPrint',
+                            \Exakat\Tasks\T_INCLUDE_ONCE             => 'processPrint',
+                            \Exakat\Tasks\T_REQUIRE                  => 'processPrint',
+                            \Exakat\Tasks\T_REQUIRE_ONCE             => 'processPrint',
+                            \Exakat\Tasks\T_RETURN                   => 'processReturn',
+                            \Exakat\Tasks\T_THROW                    => 'processThrow',
+                            \Exakat\Tasks\T_YIELD                    => 'processYield',
+                            \Exakat\Tasks\T_YIELD_FROM               => 'processYieldfrom',
+
+                            \Exakat\Tasks\T_COLON                    => 'processColon',
+
+                            \Exakat\Tasks\T_EQUAL                    => 'processAssignation',
+                            \Exakat\Tasks\T_PLUS_EQUAL               => 'processAssignation',
+                            \Exakat\Tasks\T_AND_EQUAL                => 'processAssignation',
+                            \Exakat\Tasks\T_CONCAT_EQUAL             => 'processAssignation',
+                            \Exakat\Tasks\T_DIV_EQUAL                => 'processAssignation',
+                            \Exakat\Tasks\T_MINUS_EQUAL              => 'processAssignation',
+                            \Exakat\Tasks\T_MOD_EQUAL                => 'processAssignation',
+                            \Exakat\Tasks\T_MUL_EQUAL                => 'processAssignation',
+                            \Exakat\Tasks\T_OR_EQUAL                 => 'processAssignation',
+                            \Exakat\Tasks\T_POW_EQUAL                => 'processAssignation',
+                            \Exakat\Tasks\T_SL_EQUAL                 => 'processAssignation',
+                            \Exakat\Tasks\T_SR_EQUAL                 => 'processAssignation',
+                            \Exakat\Tasks\T_XOR_EQUAL                => 'processAssignation',
+
+                            \Exakat\Tasks\T_CONTINUE                 => 'processBreak',
+                            \Exakat\Tasks\T_BREAK                    => 'processBreak',
+
+                            \Exakat\Tasks\T_LOGICAL_AND              => 'processLogical',
+                            \Exakat\Tasks\T_LOGICAL_XOR              => 'processLogical',
+                            \Exakat\Tasks\T_LOGICAL_OR               => 'processLogical',
+                            \Exakat\Tasks\T_PIPE                     => 'processLogical',
+                            \Exakat\Tasks\T_CARET                    => 'processLogical',
+                            \Exakat\Tasks\T_AND                      => 'processAnd',
+
+                            \Exakat\Tasks\T_BOOLEAN_AND              => 'processLogical',
+                            \Exakat\Tasks\T_BOOLEAN_OR               => 'processLogical',
+
+                            \Exakat\Tasks\T_QUESTION                 => 'processTernary',
+                            \Exakat\Tasks\T_NS_SEPARATOR             => 'processNsnameAbsolute',
+                            \Exakat\Tasks\T_COALESCE                 => 'processCoalesce',
+
+                            \Exakat\Tasks\T_INLINE_HTML              => 'processInlineHtml',
+
+                            \Exakat\Tasks\T_INC                      => 'processPlusplus',
+                            \Exakat\Tasks\T_DEC                      => 'processPlusplus',
+
+                            \Exakat\Tasks\T_WHILE                    => 'processWhile',
+                            \Exakat\Tasks\T_DO                       => 'processDo',
+                            \Exakat\Tasks\T_IF                       => 'processIfthen',
+                            \Exakat\Tasks\T_FOREACH                  => 'processForeach',
+                            \Exakat\Tasks\T_FOR                      => 'processFor',
+                            \Exakat\Tasks\T_TRY                      => 'processTry',
+                            \Exakat\Tasks\T_CONST                    => 'processConst',
+                            \Exakat\Tasks\T_SWITCH                   => 'processSwitch',
+                            \Exakat\Tasks\T_DEFAULT                  => 'processDefault',
+                            \Exakat\Tasks\T_CASE                     => 'processCase',
+                            \Exakat\Tasks\T_DECLARE                  => 'processDeclare',
+
+                            \Exakat\Tasks\T_AT                       => 'processNoscream',
+                            \Exakat\Tasks\T_CLONE                    => 'processClone',
+                            \Exakat\Tasks\T_GOTO                     => 'processGoto',
+
+                            \Exakat\Tasks\T_STRING                   => 'processString',
+                            \Exakat\Tasks\T_CONSTANT_ENCAPSED_STRING => 'processLiteral',
+                            \Exakat\Tasks\T_ENCAPSED_AND_WHITESPACE  => 'processLiteral',
+                            \Exakat\Tasks\T_NUM_STRING               => 'processLiteral',
+                            \Exakat\Tasks\T_STRING_VARNAME           => 'processVariable',
+
+                            \Exakat\Tasks\T_ARRAY_CAST               => 'processCast',
+                            \Exakat\Tasks\T_BOOL_CAST                => 'processCast',
+                            \Exakat\Tasks\T_DOUBLE_CAST              => 'processCast',
+                            \Exakat\Tasks\T_INT_CAST                 => 'processCast',
+                            \Exakat\Tasks\T_OBJECT_CAST              => 'processCast',
+                            \Exakat\Tasks\T_STRING_CAST              => 'processCast',
+                            \Exakat\Tasks\T_UNSET_CAST               => 'processCast',
+
+                            \Exakat\Tasks\T_FILE                     => 'processMagicConstant',
+                            \Exakat\Tasks\T_CLASS_C                  => 'processMagicConstant',
+                            \Exakat\Tasks\T_FUNC_C                   => 'processMagicConstant',
+                            \Exakat\Tasks\T_LINE                     => 'processMagicConstant',
+                            \Exakat\Tasks\T_DIR                      => 'processMagicConstant',
+                            \Exakat\Tasks\T_METHOD_C                 => 'processMagicConstant',
+                            \Exakat\Tasks\T_NS_C                     => 'processMagicConstant',
+                            \Exakat\Tasks\T_TRAIT_C                  => 'processMagicConstant',
+
+                            \Exakat\Tasks\T_BANG                     => 'processNot',
+                            \Exakat\Tasks\T_TILDE                    => 'processNot',
+                            \Exakat\Tasks\T_ELLIPSIS                 => 'processEllipsis',
+                             
+                            \Exakat\Tasks\T_SEMICOLON                => 'processSemicolon',
+                            \Exakat\Tasks\T_CLOSE_TAG                => 'processClosingTag',
+
+                            \Exakat\Tasks\T_FUNCTION                 => 'processFunction',
+                            \Exakat\Tasks\T_CLASS                    => 'processClass',
+                            \Exakat\Tasks\T_TRAIT                    => 'processTrait',
+                            \Exakat\Tasks\T_INTERFACE                => 'processInterface',
+                            \Exakat\Tasks\T_NAMESPACE                => 'processNamespace',
+                            \Exakat\Tasks\T_USE                      => 'processUse',
+                            \Exakat\Tasks\T_AS                       => 'processAs',
+                            \Exakat\Tasks\T_INSTEADOF                => 'processInsteadof',
+
+                            \Exakat\Tasks\T_ABSTRACT                 => 'processAbstract',
+                            \Exakat\Tasks\T_FINAL                    => 'processFinal',
+                            \Exakat\Tasks\T_PRIVATE                  => 'processPrivate',
+                            \Exakat\Tasks\T_PROTECTED                => 'processProtected',
+                            \Exakat\Tasks\T_PUBLIC                   => 'processPublic',
+                            \Exakat\Tasks\T_VAR                      => 'processVar',
+                            
+                            \Exakat\Tasks\T_QUOTE                    => 'processQuote',
+                            \Exakat\Tasks\T_START_HEREDOC            => 'processQuote',
+                            \Exakat\Tasks\T_BACKTICK                 => 'processQuote',
+                            \Exakat\Tasks\T_DOLLAR_OPEN_CURLY_BRACES => 'processDollarCurly',
+                            \Exakat\Tasks\T_STATIC                   => 'processStatic',
+                            \Exakat\Tasks\T_GLOBAL                   => 'processGlobalVariable',
+                            );
         
         self::$PROP_OPTIONS = array(
                           'alternative' => self::$PROP_ALTERNATIVE,
@@ -406,11 +421,6 @@ class Load extends Tasks {
                           'close_tag'   => self::$PROP_CLOSETAG,
                           'aliased'     => self::$PROP_ALIASED,
                           );
-
-        $this->php->getTokens();
-
-        Precedence::preloadConstants($this->php->getActualVersion());
-        $this->precedence = new Precedence();
     }
 
     public function run() {
@@ -431,11 +441,11 @@ class Load extends Tasks {
         $this->setAtom($this->id0, array('code'     => 'Whole',
                                          'fullcode' => $this->config->project,
                                          'line'     => -1,
-                                         'token'    => 'T_WHOLE'));
+                                         'token'    => '\Exakat\Tasks\T_WHOLE'));
         
         if (static::$client === null) {
-//            static::$client = new CypherG3();
-            static::$client = new Neo4jImport();
+            static::$client = new CypherG3();
+//            static::$client = new Neo4jImport();
 //            static::$client = new GremlinServerNeo4j();
         }
         
@@ -568,9 +578,9 @@ class Load extends Tasks {
         $this->tokens = array();
         foreach($tokens as $t) {
             if (is_array($t)) {
-                if ($t[0] === T_COMMENT ||
-                    $t[0] === T_WHITESPACE ||
-                    $t[0] === T_DOC_COMMENT) {
+                if ($t[0] === \Exakat\Tasks\T_COMMENT ||
+                    $t[0] === \Exakat\Tasks\T_WHITESPACE ||
+                    $t[0] === \Exakat\Tasks\T_DOC_COMMENT) {
                     $line += substr_count($t[1], "\n");
                     continue;
                 } else {
@@ -584,7 +594,7 @@ class Load extends Tasks {
             }
         }
         // Final token
-        $this->tokens[] = array(0 => T_END,
+        $this->tokens[] = array(0 => \Exakat\Tasks\T_END,
                                 1 => '/* END */',
                                 2 => $line);
         unset($tokens);
@@ -593,7 +603,7 @@ class Load extends Tasks {
         $this->setAtom($id1, array('code'     => $filename,
                                    'fullcode' => $file,
                                    'line'     => -1,
-                                   'token'    => 'T_FILENAME'));
+                                   'token'    => '\Exakat\Tasks\T_FILENAME'));
         $this->addLink($this->id0, $id1, 'PROJECT');
         
         try {
@@ -633,11 +643,17 @@ class Load extends Tasks {
 
     private function processNext() {
        ++$this->id;
-       
-       if ($this->tokens[$this->id][0] === T_END ||
+
+       if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_END ||
             !isset($this->processing[ $this->tokens[$this->id][0] ])) {
-            display("Can't process file '$this->filename' during load. Ignoring\n");
-            $this->log->log("Can't process file '$this->filename' during load. Ignoring\n");
+            if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_END) {
+                print "\Exakat\Tasks\T_END\n";
+            } else {
+                print "Load ({$this->id}) : {$this->tokens[$this->id][1]}\n{$this->tokens[$this->id][0]}/".\Exakat\Tasks\T_STRING."/".\Exakat\Tasks\T_STRING."\n";
+            }
+            print_r($this->processing);
+            display("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
+            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
 
             throw new LoadError('Processing error');
         }
@@ -645,6 +661,10 @@ class Load extends Tasks {
 
         return $this->$method();
     }
+
+    private function processColon() {
+        return null;// Just ignore
+     }
 
     //////////////////////////////////////////////////////
     /// processing complex tokens
@@ -654,36 +674,36 @@ class Load extends Tasks {
         $fullcode = array();
         $rank = -1;
         
-        if ($this->tokens[$current][0] === T_QUOTE) {
+        if ($this->tokens[$current][0] === \Exakat\Tasks\T_QUOTE) {
             $stringId = $this->addAtom('String');
-            $finalToken = T_QUOTE;
+            $finalToken = \Exakat\Tasks\T_QUOTE;
             $openQuote = '"';
             $closeQuote = '"';
-            $type = T_QUOTE;
-        } elseif ($this->tokens[$current][0] === T_BACKTICK) {
+            $type = \Exakat\Tasks\T_QUOTE;
+        } elseif ($this->tokens[$current][0] === \Exakat\Tasks\T_BACKTICK) {
             $stringId = $this->addAtom('Shell');
-            $finalToken = T_BACKTICK;
+            $finalToken = \Exakat\Tasks\T_BACKTICK;
             $openQuote = '`';
             $closeQuote = '`';
-            $type = T_BACKTICK;
-        } elseif ($this->tokens[$current][0] === T_START_HEREDOC) {
+            $type = \Exakat\Tasks\T_BACKTICK;
+        } elseif ($this->tokens[$current][0] === \Exakat\Tasks\T_START_HEREDOC) {
             $stringId = $this->addAtom('Heredoc');
-            $finalToken = T_END_HEREDOC;
+            $finalToken = \Exakat\Tasks\T_END_HEREDOC;
             $openQuote = $this->tokens[$this->id][1];
             if ($this->tokens[$this->id][1][3] === "'") {
                 $closeQuote = substr($this->tokens[$this->id][1], 4, -2);
             } else {
                 $closeQuote = substr($this->tokens[$this->id][1], 3);
             }
-            $type = T_START_HEREDOC;
+            $type = \Exakat\Tasks\T_START_HEREDOC;
         }
         
         while ($this->tokens[$this->id + 1][0] !== $finalToken) {
             $currentVariableId = $this->id + 1;
-            if (in_array($this->tokens[$this->id + 1][0], array(T_CURLY_OPEN, T_DOLLAR_OPEN_CURLY_BRACES))) {
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CURLY_OPEN, \Exakat\Tasks\T_DOLLAR_OPEN_CURLY_BRACES))) {
                 $openId = $this->id + 1;
                 ++$this->id; // Skip {
-                while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_CURLY))) {
+                while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY))) {
                     $this->processNext();
                 };
                 ++$this->id; // Skip }
@@ -693,10 +713,10 @@ class Load extends Tasks {
                                               'fullcode'  => $this->tokens[$openId][1] . $this->atoms[$partId]['fullcode'] . '}',
                                               'token'     => $this->getToken($this->tokens[$currentVariableId][0])));
                 $this->pushExpression($partId);
-            } elseif ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+            } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
                 $this->processNext();
 
-                if ($this->tokens[$this->id + 1][0] === T_OBJECT_OPERATOR) {
+                if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
                     ++$this->id;
                     
                     $objectId = $this->popExpression();
@@ -740,7 +760,7 @@ class Load extends Tasks {
                    'token'    => $this->getToken($this->tokens[$current][0]),
                    'count'    => $rank + 1);
               
-        if ($type === T_START_HEREDOC) {
+        if ($type === \Exakat\Tasks\T_START_HEREDOC) {
             $x['delimiter'] = $closeQuote;
             $x['heredoc'] = $openQuote[3] !== "'";
         }
@@ -756,7 +776,7 @@ class Load extends Tasks {
         $variableId = $this->addAtom('Variable');
         
         ++$this->id; // Skip ${
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_CURLY))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY))) {
             $this->processNext();
         } ;
         ++$this->id; // Skip }
@@ -778,13 +798,13 @@ class Load extends Tasks {
         $current = $this->id;
         $tryId = $this->addAtom('Try');
         
-        $blockId = $this->processFollowingBlock(array(T_CLOSE_CURLY));
+        $blockId = $this->processFollowingBlock(array(\Exakat\Tasks\T_CLOSE_CURLY));
         $this->popExpression();
         $this->addLink($tryId, $blockId, 'BLOCK');
         
         $rank = 0;
         $fullcodeCatch = array();
-        while ($this->tokens[$this->id + 1][0] === T_CATCH) {
+        while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CATCH) {
             $catch = $this->id + 1;
             ++$this->id; // Skip catch
             ++$this->id; // Skip (
@@ -792,7 +812,7 @@ class Load extends Tasks {
             $catchId = $this->addAtom('Catch');
             $catchFullcode = array();
             $rankCatch = -1;
-            while ($this->tokens[$this->id + 1][0] !== T_VARIABLE) {
+            while ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_VARIABLE) {
                 $classId = $this->processOneNsname();
                 $this->setAtom($catchId, array('rank' => ++$rankCatch));
                 $this->addLink($catchId, $classId, 'CLASS');
@@ -800,7 +820,7 @@ class Load extends Tasks {
                 $this->addCall('class', $fullnspath, $classId);
                 $catchFullcode[] = $this->atoms[$classId]['fullcode'];
                 
-                if ($this->tokens[$this->id + 1][0] === T_PIPE) {
+                if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_PIPE) {
                     ++$this->id; // Skip |
                 }
             }
@@ -817,7 +837,7 @@ class Load extends Tasks {
             ++$this->id;
 
             // Skip }
-            $blockCatchId = $this->processFollowingBlock(array(T_CLOSE_CURLY));
+            $blockCatchId = $this->processFollowingBlock(array(\Exakat\Tasks\T_CLOSE_CURLY));
             $this->popExpression();
             $this->addLink($catchId, $blockCatchId, 'BLOCK');
 
@@ -832,7 +852,7 @@ class Load extends Tasks {
             $fullcodeCatch[] = $this->atoms[$catchId]['fullcode'];
         }
         
-        if ($this->tokens[$this->id + 1][0] === T_FINALLY) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_FINALLY) {
             $finally = $this->id + 1;
             $finallyId = $this->addAtom('Finally');
 
@@ -875,14 +895,14 @@ class Load extends Tasks {
         }
         $this->optionsTokens = array();
 
-        if ($this->tokens[$this->id + 1][0] === T_AND) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_AND) {
             ++$this->id;
             $this->setAtom($functionId, array('reference' => true));
         } else {
             $this->setAtom($functionId, array('reference' => false));
         }
 
-        if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             $isClosure = true;
             $nameId = $this->addAtomVoid();
         } else {
@@ -893,11 +913,11 @@ class Load extends Tasks {
         
         // Process arguments
         ++$this->id; // Skip arguments
-        $argumentsId = $this->processArguments(array(T_CLOSE_PARENTHESIS), true);
+        $argumentsId = $this->processArguments(array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), true);
         $this->addLink($functionId, $argumentsId, 'ARGUMENTS');
         
         // Process use
-        if ($this->tokens[$this->id + 1][0] === T_USE) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_USE) {
             ++$this->id; // Skip use
             ++$this->id; // Skip (
             $useId = $this->processArguments();
@@ -905,9 +925,9 @@ class Load extends Tasks {
         }
         
         // Process return type
-        if ($this->tokens[$this->id + 1][0] === T_COLON) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON) {
             ++$this->id;
-            if ($this->tokens[$this->id + 1][0] === T_QUESTION) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_QUESTION) {
                 $nullableId = $this->processNextAsIdentifier();
                 $this->addLink($functionId, $nullableId, 'NULLABLE');
             }
@@ -917,12 +937,12 @@ class Load extends Tasks {
         }
 
         // Process block 
-        if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_SEMICOLON) {
             $voidId = $this->addAtomVoid();
             $this->addLink($functionId, $voidId, 'BLOCK');
             ++$this->id; // skip the next ;
         } else {
-            $blockId = $this->processFollowingBlock(array(T_CLOSE_CURLY));
+            $blockId = $this->processFollowingBlock(array(\Exakat\Tasks\T_CLOSE_CURLY));
             $this->popExpression();
             $this->addLink($functionId, $blockId, 'BLOCK');
         }
@@ -960,7 +980,7 @@ class Load extends Tasks {
             $this->processSemicolon();
         }
 
-        if (!$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if (!$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -972,7 +992,7 @@ class Load extends Tasks {
         $rank = -1;
         $fullcode = array();
         
-        if ($this->tokens[$this->id + 1][0] !== T_NS_SEPARATOR) {
+        if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_NS_SEPARATOR) {
             $subnameId = $this->processNextAsIdentifier();
             $this->pushExpression($subnameId);
             
@@ -982,7 +1002,7 @@ class Load extends Tasks {
         }
         $current = $this->id;
         
-        if ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
             $extendsId = $this->addAtom('Nsname');
             
             // Previous one
@@ -996,11 +1016,11 @@ class Load extends Tasks {
             }
             
             // Next one (at least one)
-            while ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR &&
-                   $this->tokens[$this->id + 2][0] !== T_OPEN_CURLY ) {
+            while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR &&
+                   $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_OPEN_CURLY ) {
                 ++$this->id; // Skip \
 
-                $subnameId = $this->processNextAsIdentifier();
+                $subnameId = $this->processNextAsIdentifier(false);
     
                 $this->setAtom($subnameId, array('rank' => ++$rank));
                 $fullcode[] = $this->atoms[$subnameId]['code'];
@@ -1071,7 +1091,7 @@ class Load extends Tasks {
         $rank = 0;
         $fullcode= array();
         $extends = $this->id + 1;
-        if ($this->tokens[$this->id + 1][0] === T_EXTENDS) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EXTENDS) {
             do {
                 ++$this->id; // Skip extends or ,
                 $extendsId = $this->processOneNsname();
@@ -1081,7 +1101,7 @@ class Load extends Tasks {
 
                 list($fullnspath, $aliased) = $this->getFullnspath($extendsId);
                 $this->addCall('class', $fullnspath, $extendsId);
-            } while ($this->tokens[$this->id + 1][0] === T_COMMA);
+            } while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA);
         }
 
         // Process block 
@@ -1124,12 +1144,12 @@ class Load extends Tasks {
         }
         $this->optionsTokens = array();
         
-        if ($this->tokens[$this->id + 1][0] === T_STRING) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING) {
             $nameId = $this->processNextAsIdentifier();
         } else {
             $nameId = $this->addAtomVoid();
             
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
                 // Process arguments
                 ++$this->id; // Skip arguments
                 $argumentsId = $this->processArguments();
@@ -1139,7 +1159,7 @@ class Load extends Tasks {
         $this->addLink($classId, $nameId, 'NAME');
 
         // Process extends
-        if ($this->tokens[$this->id + 1][0] === T_EXTENDS) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EXTENDS) {
             $extends = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip extends
 
@@ -1151,7 +1171,7 @@ class Load extends Tasks {
         }
 
         // Process implements
-        if ($this->tokens[$this->id + 1][0] === T_IMPLEMENTS) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_IMPLEMENTS) {
             $implements = $this->tokens[$this->id + 1][1];
             $fullcodeImplements = array();
             do {
@@ -1162,7 +1182,7 @@ class Load extends Tasks {
 
                 list($fullnspath, $aliased) = $this->getFullnspath($implementsId);
                 $this->addCall('class', $fullnspath, $implementsId);
-            } while ($this->tokens[$this->id + 1][0] === T_COMMA);
+            } while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA);
         }
         
         // Process block 
@@ -1190,7 +1210,7 @@ class Load extends Tasks {
         $this->addDefinition('class', $fullnspath, $classId);
         
         // Case of anonymous classes
-        if ($this->tokens[$current - 1][0] !== T_NEW) {
+        if ($this->tokens[$current - 1][0] !== \Exakat\Tasks\T_NEW) {
             $this->processSemicolon();
         }
 
@@ -1207,7 +1227,7 @@ class Load extends Tasks {
         $this->startSequence();
         
         // Special case for pretty much empty script (<?php .... END)
-        if ($this->tokens[$this->id + 1][0] === T_END) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_END) {
             $voidId = $this->addAtomVoid();
             $this->addToSequence($voidId);
             
@@ -1225,34 +1245,34 @@ class Load extends Tasks {
         }
 
         $n = count($this->tokens) - 2;
-        if ($this->tokens[$n][0] === T_INLINE_HTML) {
+        if ($this->tokens[$n][0] === \Exakat\Tasks\T_INLINE_HTML) {
             --$n;
         }
 
         while ($this->id < $n) {
-            if ($this->tokens[$this->id][0] === T_OPEN_TAG_WITH_ECHO) {
+            if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
                 --$this->id;
                 $this->processOpenWithEcho();
                 /// processing the first expression as an echo
                 $this->processSemicolon();
-                if ($this->tokens[$this->id + 1][0] == T_END) {
+                if ($this->tokens[$this->id + 1][0] == \Exakat\Tasks\T_END) {
                     --$this->id;
                 }
-            } elseif ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
+            } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 --$this->id;
             }
 
             $this->processNext();
         };
 
-        if ($this->tokens[$this->id][0] === T_INLINE_HTML) {
+        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_INLINE_HTML) {
             --$this->id;
         }
 
-        if ($this->tokens[$this->id - 1][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $close_tag = true;
             $closing = '?>';
-        } elseif ($this->tokens[$this->id][0] === T_HALT_COMPILER) {
+        } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_HALT_COMPILER) {
             $close_tag = false;
             ++$this->id; // Go to HaltCompiler
             $this->processHalt();
@@ -1262,7 +1282,7 @@ class Load extends Tasks {
             $closing = '';
         }
         
-        if ($this->tokens[$this->id - 1][0] === T_OPEN_TAG) {
+        if ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_OPEN_TAG) {
             $voidId = $this->addAtomVoid();
             $this->addToSequence($voidId);
         }
@@ -1282,32 +1302,32 @@ class Load extends Tasks {
     }
 
     private function processClosingTag() {
-        if ($this->tokens[$this->id + 1][0] === T_INLINE_HTML &&
-            in_array($this->tokens[$this->id + 2][0], array(T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO))) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_INLINE_HTML &&
+            in_array($this->tokens[$this->id + 2][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO))) {
     
             ++$this->id;
             $this->processInlineHtml();
         
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
-                if ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
+                if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
                     $this->processSemicolon();
                 }
             } else {
                 ++$this->id; // set to opening tag
             }
-        } elseif (in_array($this->tokens[$this->id + 1][0], array(T_OPEN_TAG, T_OPEN_TAG_WITH_ECHO))) {
+        } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO))) {
 
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_TAG_WITH_ECHO) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
-                if ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
+                if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
                     $this->processSemicolon();
                 }
             } else {
                 ++$this->id; // set to opening tag
             }
         } else {
-            if ($this->tokens[$this->id - 1][0] === T_OPEN_TAG) {
+            if ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_OPEN_TAG) {
                 $voidId = $this->addAtomVoid();
                 $this->addToSequence($voidId);
             }
@@ -1320,10 +1340,10 @@ class Load extends Tasks {
         $echoId = $this->processNextAsIdentifier();
         $current = $this->id;
         
-        $argumentsId = $this->processArguments(array(T_SEMICOLON, T_CLOSE_TAG, T_END));
+        $argumentsId = $this->processArguments(array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
 
         //processArguments goes too far, up to ;
-        if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             --$this->id;
         }
     
@@ -1331,7 +1351,7 @@ class Load extends Tasks {
         $this->setAtom($functioncallId, array('code'       => $this->atoms[$echoId]['code'],
                                               'fullcode'   => '<?= ' . $this->atoms[$argumentsId]['fullcode'],
                                               'line'       => $this->tokens[$current === -1 ? 0 : $current][2],
-                                              'token'      => 'T_OPEN_TAG_WITH_ECHO',
+                                              'token'      => '\Exakat\Tasks\T_OPEN_TAG_WITH_ECHO',
                                               'variadic'   => false,
                                               'fullnspath' => '\\echo' ));
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
@@ -1352,16 +1372,16 @@ class Load extends Tasks {
     private function processNsname() {
         $current = $this->id;
 
-        if ($this->tokens[$this->id][0] === T_NS_SEPARATOR && 
-            $this->tokens[$this->id + 1][0] === T_STRING && 
+        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR && 
+            $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING && 
             in_array(strtolower($this->tokens[$this->id + 1][1]), array('true', 'false')) &&
-            $this->tokens[$this->id + 2][0] !== T_NS_SEPARATOR
+            $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
             ) {
             $nsnameId = $this->addAtom('Boolean');
-        } elseif ($this->tokens[$this->id][0] === T_NS_SEPARATOR  && 
-            $this->tokens[$this->id + 1][0] === T_STRING          && 
+        } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR  && 
+            $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING          && 
             strtolower($this->tokens[$this->id + 1][1]) === 'null' &&
-            $this->tokens[$this->id + 2][0] !== T_NS_SEPARATOR
+            $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
             ) {
             $nsnameId = $this->addAtom('Null');
         } else {
@@ -1382,8 +1402,8 @@ class Load extends Tasks {
             $absolute = true;
         }
         
-        while ($this->tokens[$this->id][0] === T_NS_SEPARATOR) {
-            $subnameId = $this->processNextAsIdentifier();
+        while ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
+            $subnameId = $this->processNextAsIdentifier(false);
 
             $this->setAtom($subnameId, array('rank' => ++$rank));
 
@@ -1423,12 +1443,12 @@ class Load extends Tasks {
     }
     
     private function processTypehint() {
-        if (in_array($this->tokens[$this->id + 1][0], array(T_ARRAY, T_CALLABLE, T_STATIC))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_ARRAY, \Exakat\Tasks\T_CALLABLE, \Exakat\Tasks\T_STATIC))) {
             $id = $this->processNextAsIdentifier();
             $this->setAtom($id, array('fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ,
                                       'variadic'   => false));
             return $id;
-        } elseif (in_array($this->tokens[$this->id + 1][0], array(T_NS_SEPARATOR, T_STRING, T_NAMESPACE))) {
+        } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR, \Exakat\Tasks\T_STRING, \Exakat\Tasks\T_NAMESPACE))) {
             $id = $this->processOneNsname();
             if (in_array(strtolower($this->tokens[$this->id][1]), array('int', 'bool', 'void', 'float', 'string'))) {
                 $this->setAtom($id, array('fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ));
@@ -1441,14 +1461,14 @@ class Load extends Tasks {
         }
     }
 
-    private function processArguments($finals = array(T_CLOSE_PARENTHESIS), $typehint = false) {
+    private function processArguments($finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehint = false) {
         $argumentsId = $this->addAtom('Arguments');
         $current = $this->id;
         $this->argumentsId = array();
 
         $this->nestContext();
         $fullcode = array();
-        if (in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_PARENTHESIS, T_CLOSE_BRACKET))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_CLOSE_BRACKET))) {
             $voidId = $this->addAtomVoid();
             $this->setAtom($voidId, array('rank' => 0));
             $this->addLink($argumentsId, $voidId, 'ARGUMENT');
@@ -1475,7 +1495,7 @@ class Load extends Tasks {
                 ++$args_max;
 
                 if ($typehint === true) {
-                    if ($this->tokens[$this->id + 1][0] === T_QUESTION) {
+                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_QUESTION) {
                         $nullableId = $this->processNextAsIdentifier();
                     } else {
                         $nullableId = 0;
@@ -1485,9 +1505,9 @@ class Load extends Tasks {
                     $this->processNext();
                     $indexId = $this->popExpression();
                 
-                    if ($this->tokens[$this->id + 1][0] === T_EQUAL) {
+                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EQUAL) {
                         ++$this->id; // Skip =
-                        while (!in_array($this->tokens[$this->id + 1][0], array(T_COMMA, T_CLOSE_PARENTHESIS, T_CLOSE_BRACKET))) {
+                        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, \Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_CLOSE_BRACKET))) {
                             $this->processNext();
                         }
                         $defaultId = $this->popExpression();
@@ -1500,13 +1520,13 @@ class Load extends Tasks {
                     $defaultId  = 0;
                     $nullableId = 0;
 
-                    while (!in_array($this->tokens[$this->id + 1][0], array(T_COMMA, T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_BRACKET, T_CLOSE_TAG))) {
+                    while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, \Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_CLOSE_TAG))) {
                         $this->processNext();
                     };
                     $indexId = $this->popExpression();
                 }
                                 
-                while ($this->tokens[$this->id + 1][0] === T_COMMA) {
+                while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
                     if ($indexId === 0) {
                         $indexId = $this->addAtomVoid();
                     }
@@ -1565,7 +1585,7 @@ class Load extends Tasks {
             $this->setAtom($argumentsId, array('code'     => $this->tokens[$current][1],
                                                'fullcode' => implode(', ', $fullcode),
                                                'line'     => $this->tokens[$current][2],
-                                               'token'    => 'T_COMMA',
+                                               'token'    => '\Exakat\Tasks\T_COMMA',
                                                'count'    => $rank + 1,
                                                'args_max' => $args_max,
                                                'args_min' => $args_min));
@@ -1576,7 +1596,7 @@ class Load extends Tasks {
         return $argumentsId;
     }
     
-    private function processNextAsIdentifier() {
+    private function processNextAsIdentifier($getFullnspath = true) {
         ++$this->id;
         $id = $this->addAtom('Identifier');
         $this->setAtom($id, array('code'       => $this->tokens[$this->id][1],
@@ -1585,9 +1605,11 @@ class Load extends Tasks {
                                   'token'      => $this->getToken($this->tokens[$this->id][0]),
                                   'variadic'   => false,
                                   'absolute'   => false));
-        list($fullnspath, $aliased) = $this->getFullnspath($id);
-        $this->setAtom($id, array('fullnspath' => $fullnspath,
-                                  'aliased'    => $aliased));
+        if ($getFullnspath === true) {
+            list($fullnspath, $aliased) = $this->getFullnspath($id);
+            $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased));
+        }
         
         return $id;
     }
@@ -1604,7 +1626,7 @@ class Load extends Tasks {
             $nameId = $this->processNextAsIdentifier();
 
             ++$this->id; // Skip = 
-            while (!in_array($this->tokens[$this->id + 1][0], array(T_SEMICOLON, T_COMMA))) {
+            while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_COMMA))) {
                 $this->processNext();
             }
             $valueId = $this->popExpression();
@@ -1626,7 +1648,7 @@ class Load extends Tasks {
                                            'aliased'        => $aliased));
             
             $this->addLink($constId, $defId, 'CONST');
-        } while (!in_array($this->tokens[$this->id + 1][0], array(T_SEMICOLON)));
+        } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_SEMICOLON)));
 
         $this->setAtom($constId, array('code'     => $this->tokens[$current][1],
                                        'fullcode' => $this->tokens[$current][1].' '.implode(', ', $fullcode),
@@ -1657,7 +1679,7 @@ class Load extends Tasks {
     private function processVar() {
         $id = $this->processOptions('Var');
 
-        if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
             return $pppId;
         } else {
@@ -1668,7 +1690,7 @@ class Load extends Tasks {
     private function processPublic() {
         $id = $this->processOptions('Public');
 
-        if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
             return $pppId;
         } else {
@@ -1679,7 +1701,7 @@ class Load extends Tasks {
     private function processProtected() {
         $id = $this->processOptions('Protected');
 
-        if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
             return $pppId;
         } else {
@@ -1690,7 +1712,7 @@ class Load extends Tasks {
     private function processPrivate() {
         $id = $this->processOptions('Private');
 
-        if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
             $pppId = $this->processSGVariable('Ppp');
             return $pppId;
         } else {
@@ -1731,7 +1753,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncallId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $functioncallId = $this->processFCOA($functioncallId);
@@ -1761,13 +1783,13 @@ class Load extends Tasks {
                                   'aliased'    => $aliased));
         $this->addCall('const', $fullnspath, $id);
         
-        if ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
             $this->pushExpression($id);
             ++$this->id;
             $this->processNsname();
             $id = $this->popExpression();
-        } elseif ($this->tokens[$this->id + 1][0] === T_COLON &&
-                  !in_array($this->tokens[$this->id - 1][0], array(T_DOUBLE_COLON, T_OBJECT_OPERATOR, T_QUESTION, T_CASE))) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON &&
+                  !in_array($this->tokens[$this->id - 1][0], array(\Exakat\Tasks\T_DOUBLE_COLON, \Exakat\Tasks\T_OBJECT_OPERATOR, \Exakat\Tasks\T_QUESTION, \Exakat\Tasks\T_CASE))) {
             $labelId = $this->addAtom('Label');
             $this->addLink($labelId, $id, 'LABEL');
             $this->setAtom($labelId, array('code'     => ':',
@@ -1781,7 +1803,7 @@ class Load extends Tasks {
         }
         $this->pushExpression($id);
         
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             // For functions and constants 
@@ -1806,7 +1828,7 @@ class Load extends Tasks {
                                               'token'    => $this->getToken($this->tokens[$this->id][0])));
             $this->pushExpression($plusplusId);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
         } else {
@@ -1816,13 +1838,13 @@ class Load extends Tasks {
     }
     
     private function processStatic() {
-        if ($this->tokens[$this->id + 1][0] === T_DOUBLE_COLON ||
-            $this->tokens[$this->id - 1][0] === T_INSTANCEOF    ) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
+            $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF    ) {
             $id = $this->processSingle('Identifier');
             $this->setAtom($id, array('fullnspath' => '\\static',
                                       'variadic'   => false));
             return $id;
-        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             $nameId = $this->addAtom('Identifier');
             $this->setAtom($nameId, array('code'       => $this->tokens[$this->id][1],
                                           'fullcode'   => $this->tokens[$this->id][1],
@@ -1833,7 +1855,7 @@ class Load extends Tasks {
             $this->pushExpression($nameId);
 
             return $this->processFunctioncall();
-        } elseif ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
             if (($this->isContext(self::CONTEXT_CLASS) ||
                  $this->isContext(self::CONTEXT_TRAIT)   ) &&
                 !$this->isContext(self::CONTEXT_FUNCTION)) {
@@ -1878,10 +1900,10 @@ class Load extends Tasks {
         }
         
         $fullcode = array();
-        while ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
+        while ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
             $this->processNext();
             
-            if ($this->tokens[$this->id + 1][0] === T_COMMA) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
                 $elementId = $this->popExpression();
                 $this->setAtom($elementId, array('rank' => ++$rank));
                 $this->addLink($staticId, $elementId, strtoupper($atom));
@@ -1927,7 +1949,7 @@ class Load extends Tasks {
                                           'fullnspath' => '\\array'));
 
         // No need to skip opening bracket
-        $argumentId = $this->processArguments(array(T_CLOSE_BRACKET));
+        $argumentId = $this->processArguments(array(\Exakat\Tasks\T_CLOSE_BRACKET));
         $this->addLink($id, $argumentId, 'ARGUMENTS');
 
         $this->setAtom($id, array('code'       => $this->tokens[$current][1],
@@ -1938,7 +1960,7 @@ class Load extends Tasks {
                                   'fullnspath' => '\\array'));
         $this->pushExpression($id);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $id = $this->processFCOA($id);
@@ -1965,7 +1987,7 @@ class Load extends Tasks {
         ++$this->id;
         do {
             $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_BRACKET, T_CLOSE_CURLY))) ;
+        } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_CLOSE_CURLY))) ;
 
         // Skip closing bracket
         ++$this->id;
@@ -1982,7 +2004,7 @@ class Load extends Tasks {
                                   'enclosing' => false));
         $this->pushExpression($id);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } elseif ($followupFCOA === true) {
             $id = $this->processFCOA($id);
@@ -1995,15 +2017,15 @@ class Load extends Tasks {
         $this->startSequence();
         
         // Case for {}
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_CURLY) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_CURLY) {
             $voidId = $this->addAtomVoid();
             $this->addToSequence($voidId);
         } else {
-            while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_CURLY))) {
+            while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY))) {
                 $this->processNext();
             };
             
-            if ($this->tokens[$this->id + 1][0] !== T_CLOSE_CURLY) {
+            if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_CLOSE_CURLY) {
                 $this->processSemicolon();
             }
         }
@@ -2034,7 +2056,7 @@ class Load extends Tasks {
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
             
-            if ($this->tokens[$this->id + 1][0] === T_COMMA) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
                 $elementId = $this->popExpression();
                 $this->addToSequence($elementId);
                 
@@ -2066,21 +2088,21 @@ class Load extends Tasks {
         $current = $this->id;
         ++$this->id; // Skip for
 
-        $this->processForblock(array(T_SEMICOLON));
+        $this->processForblock(array(\Exakat\Tasks\T_SEMICOLON));
         $initId = $this->popExpression();
         $this->addLink($forId, $initId, 'INIT');
 
-        $this->processForblock(array(T_SEMICOLON));
+        $this->processForblock(array(\Exakat\Tasks\T_SEMICOLON));
         $finalId = $this->popExpression();
         $this->addLink($forId, $finalId, 'FINAL');
 
-        $this->processForblock(array(T_CLOSE_PARENTHESIS));
+        $this->processForblock(array(\Exakat\Tasks\T_CLOSE_PARENTHESIS));
         $incrementId = $this->popExpression();
         $this->addLink($forId, $incrementId, 'INCREMENT');
 
-        $isColon = ($this->tokens[$current][0] === T_FOR) && ($this->tokens[$this->id + 1][0] === T_COLON);
+        $isColon = ($this->tokens[$current][0] === \Exakat\Tasks\T_FOR) && ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON);
 
-        $blockId = $this->processFollowingBlock(array(T_ENDFOR));
+        $blockId = $this->processFollowingBlock(array(\Exakat\Tasks\T_ENDFOR));
         $this->popExpression();
         $this->addLink($forId, $blockId, 'BLOCK');
         
@@ -2101,7 +2123,7 @@ class Load extends Tasks {
         
         if ($isColon === true) {
             ++$this->id; // skip endfor
-            if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_SEMICOLON) {
                 ++$this->id; // skip ; (will do just below)
             }
         }
@@ -2115,7 +2137,7 @@ class Load extends Tasks {
         $current = $this->id;
         ++$this->id; // Skip foreach
 
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_AS))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_AS))) {
             $this->processNext();
         };
 
@@ -2125,11 +2147,11 @@ class Load extends Tasks {
         $as = $this->tokens[$this->id + 1][1];
         ++$this->id; // Skip as
 
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_PARENTHESIS, T_DOUBLE_ARROW))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_DOUBLE_ARROW))) {
             $this->processNext();
         };
 
-        if ($this->tokens[$this->id + 1][0] === T_DOUBLE_ARROW) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_ARROW) {
             $this->processNext();
         }
         
@@ -2137,9 +2159,9 @@ class Load extends Tasks {
         $this->addLink($id, $valueId, 'VALUE');
 
         ++$this->id; // Skip )
-        $isColon = ($this->tokens[$current][0] === T_FOREACH) && ($this->tokens[$this->id + 1][0] === T_COLON);
+        $isColon = ($this->tokens[$current][0] === \Exakat\Tasks\T_FOREACH) && ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON);
 
-        $blockId = $this->processFollowingBlock($isColon === true ? array(T_ENDFOREACH) : array());
+        $blockId = $this->processFollowingBlock($isColon === true ? array(\Exakat\Tasks\T_ENDFOREACH) : array());
         
         $this->popExpression();
         $this->addLink($id, $blockId, 'BLOCK');
@@ -2160,7 +2182,7 @@ class Load extends Tasks {
         $this->pushExpression($id);
         $this->processSemicolon();
         
-        if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             --$this->id;
         }
 
@@ -2168,11 +2190,11 @@ class Load extends Tasks {
     }
 
     private function processFollowingBlock($finals) {
-        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             ++$this->id;
             $blockId = $this->processBlock(false);
             $this->setAtom($blockId, array('bracket' => true));
-        } elseif ($this->tokens[$this->id + 1][0] === T_COLON) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON) {
             $this->startSequence();
             $blockId = $this->sequence;
             ++$this->id; // skip :
@@ -2185,7 +2207,7 @@ class Load extends Tasks {
             $this->pushExpression($this->sequence);
             $this->endSequence();
 
-        } elseif (in_array($this->tokens[$this->id + 1][0], array(T_SEMICOLON))) {
+        } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_SEMICOLON))) {
             // void; One epxression block, with ;
             $this->startSequence();
             $blockId = $this->sequence;
@@ -2197,7 +2219,7 @@ class Load extends Tasks {
             $this->pushExpression($blockId);
             ++$this->id;
 
-        } elseif (in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_TAG, T_CLOSE_CURLY, T_CLOSE_PARENTHESIS))) {
+        } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_CLOSE_CURLY, \Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
             // Completely void (not even ;)
             $this->startSequence();
             $blockId = $this->sequence;
@@ -2216,8 +2238,8 @@ class Load extends Tasks {
             $current = $this->id;
 
             // This may include WHILE in the list of finals for do....while
-            $finals = array_merge(array(T_SEMICOLON, T_CLOSE_TAG, T_ELSE, T_END, T_CLOSE_CURLY), $finals);
-            $specials = array(T_IF, T_FOREACH, T_SWITCH, T_FOR, T_TRY, T_WHILE);
+            $finals = array_merge(array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_ELSE, \Exakat\Tasks\T_END, \Exakat\Tasks\T_CLOSE_CURLY), $finals);
+            $specials = array(\Exakat\Tasks\T_IF, \Exakat\Tasks\T_FOREACH, \Exakat\Tasks\T_SWITCH, \Exakat\Tasks\T_FOR, \Exakat\Tasks\T_TRY, \Exakat\Tasks\T_WHILE);
             if (in_array($this->tokens[$this->id + 1][0], $specials)) {
                 $this->processNext();
             } else {
@@ -2245,7 +2267,7 @@ class Load extends Tasks {
         $dowhileId = $this->addAtom('Dowhile');
         $current = $this->id;
         
-        $blockId = $this->processFollowingBlock(array(T_WHILE));
+        $blockId = $this->processFollowingBlock(array(\Exakat\Tasks\T_WHILE));
         $this->popExpression();
         $this->addLink($dowhileId, $blockId, 'BLOCK');
 
@@ -2253,7 +2275,7 @@ class Load extends Tasks {
         ++$this->id; // Skip while
         ++$this->id; // Skip (
 
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_PARENTHESIS))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
             $this->processNext();
         };
         ++$this->id; // skip )
@@ -2268,7 +2290,7 @@ class Load extends Tasks {
                                          'token'    => $this->getToken($this->tokens[$current][0]) ));
         $this->pushExpression($dowhileId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -2281,22 +2303,22 @@ class Load extends Tasks {
         
         ++$this->id; // Skip while
 
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_PARENTHESIS))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
             $this->processNext();
         };
         $conditionId = $this->popExpression();
         $this->addLink($whileId, $conditionId, 'CONDITION');
 
         ++$this->id; // Skip )
-        $isColon = ($this->tokens[$current][0] === T_WHILE) && ($this->tokens[$this->id + 1][0] === T_COLON);
-        $blockId = $this->processFollowingBlock(array(T_ENDWHILE));
+        $isColon = ($this->tokens[$current][0] === \Exakat\Tasks\T_WHILE) && ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON);
+        $blockId = $this->processFollowingBlock(array(\Exakat\Tasks\T_ENDWHILE));
         $this->popExpression();
 
         $this->addLink($whileId, $blockId, 'BLOCK');
 
         if ($isColon === true) {
             ++$this->id;
-            if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_SEMICOLON) {
                 ++$this->id; // skip ;
             }
             
@@ -2324,9 +2346,9 @@ class Load extends Tasks {
         ++$this->id; // Skip declare
         $argsId = $this->processArguments();
         $this->addLink($declareId, $argsId, 'DECLARE');
-        $isColon = ($this->tokens[$current][0] === T_DECLARE) && ($this->tokens[$this->id + 1][0] === T_COLON);
+        $isColon = ($this->tokens[$current][0] === \Exakat\Tasks\T_DECLARE) && ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON);
 
-        $blockId = $this->processFollowingBlock(array(T_ENDDECLARE));
+        $blockId = $this->processFollowingBlock(array(\Exakat\Tasks\T_ENDDECLARE));
         $this->popExpression();
         $this->addLink($declareId, $blockId, 'BLOCK');
 
@@ -2354,7 +2376,7 @@ class Load extends Tasks {
         ++$this->id; // Skip : or ;
 
         $this->startSequence();
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_CURLY, T_CASE, T_DEFAULT, T_ENDSWITCH))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY, \Exakat\Tasks\T_CASE, \Exakat\Tasks\T_DEFAULT, \Exakat\Tasks\T_ENDSWITCH))) {
             $this->processNext();
         };
         $this->addLink($defaultId, $this->sequence, 'CODE');
@@ -2373,7 +2395,7 @@ class Load extends Tasks {
         $caseId = $this->addAtom('Case');
         $current = $this->id;
 
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_COLON, T_SEMICOLON))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COLON, \Exakat\Tasks\T_SEMICOLON))) {
             $this->processNext();
         };
         
@@ -2383,7 +2405,7 @@ class Load extends Tasks {
         ++$this->id; // Skip : 
 
         $this->startSequence();
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_CURLY, T_CASE, T_DEFAULT, T_ENDSWITCH))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY, \Exakat\Tasks\T_CASE, \Exakat\Tasks\T_DEFAULT, \Exakat\Tasks\T_ENDSWITCH))) {
             $this->processNext();
         };
         $this->addLink($caseId, $this->sequence, 'CODE');
@@ -2403,7 +2425,7 @@ class Load extends Tasks {
         $current = $this->id;
         ++$this->id; // Skip (
 
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_PARENTHESIS))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
             $this->processNext();
         };
         $nameId = $this->popExpression();
@@ -2418,22 +2440,22 @@ class Load extends Tasks {
         $this->addLink($switchId, $casesId, 'CASES');
         ++$this->id;
 
-        $isColon = $this->tokens[$this->id + 1][0] === T_COLON;
+        $isColon = $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON;
         
         $rank = 0;
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_PARENTHESIS) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_PARENTHESIS) {
             $voidId = $this->addAtomVoid();
             $this->addLink($casesId, $voidId, 'ELEMENT');
             $this->setAtom($voidId, array('rank' => $rank));
             
             ++$this->id;
         } else {
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
                 ++$this->id;
-                $finals = array(T_CLOSE_CURLY);
+                $finals = array(\Exakat\Tasks\T_CLOSE_CURLY);
             } else {
                 ++$this->id; // skip :
-                $finals = array(T_ENDSWITCH);
+                $finals = array(\Exakat\Tasks\T_ENDSWITCH);
             }
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 $this->processNext();
@@ -2469,27 +2491,27 @@ class Load extends Tasks {
         $current = $this->id;
         ++$this->id; // Skip (
 
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_PARENTHESIS))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
             $this->processNext();
         };
         $conditionId = $this->popExpression();
         $this->addLink($id, $conditionId, 'CONDITION');
 
         ++$this->id; // Skip )
-        $isInitialIf = $this->tokens[$current][0] === T_IF;
-        $isColon =  $this->tokens[$this->id + 1][0] === T_COLON;
+        $isInitialIf = $this->tokens[$current][0] === \Exakat\Tasks\T_IF;
+        $isColon =  $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON;
         
-        $thenId = $this->processFollowingBlock(array(T_ENDIF, T_ELSE, T_ELSEIF));
+        $thenId = $this->processFollowingBlock(array(\Exakat\Tasks\T_ENDIF, \Exakat\Tasks\T_ELSE, \Exakat\Tasks\T_ELSEIF));
         $this->popExpression();
         $this->addLink($id, $thenId, 'THEN');
 
         // Managing else case
-        if (in_array($this->tokens[$this->id][0], array(T_END, T_CLOSE_TAG))) {
+        if (in_array($this->tokens[$this->id][0], array(\Exakat\Tasks\T_END, \Exakat\Tasks\T_CLOSE_TAG))) {
             $else = '';
             // No else, end of a script
             --$this->id;
             // Back up one unit to allow later processing for sequence
-        } elseif ($this->tokens[$this->id + 1][0] === T_ELSEIF){
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_ELSEIF){
             ++$this->id;
 
             $elseifId = $this->processIfthen();
@@ -2497,11 +2519,11 @@ class Load extends Tasks {
 
             $else = $this->atoms[$elseifId]['fullcode'];
 
-        } elseif ($this->tokens[$this->id + 1][0] === T_ELSE){
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_ELSE){
             $else = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip else
 
-            $elseId = $this->processFollowingBlock(array(T_ENDIF));
+            $elseId = $this->processFollowingBlock(array(\Exakat\Tasks\T_ENDIF));
             $this->popExpression();
             $this->addLink($id, $elseId, 'ELSE');
 
@@ -2514,7 +2536,7 @@ class Load extends Tasks {
         }
 
         if ($isInitialIf === true && $isColon === true) {
-            if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_SEMICOLON) {
                 ++$this->id; // skip ;
             }
             ++$this->id; // skip ;
@@ -2527,12 +2549,12 @@ class Load extends Tasks {
             $fullcode = $this->tokens[$current][1] . '(' . $this->atoms[$conditionId]['fullcode'] . ')' . $this->atoms[$thenId]['fullcode'] . $else;
         }
         
-        if ($this->tokens[$current][0] === T_IF) {
+        if ($this->tokens[$current][0] === \Exakat\Tasks\T_IF) {
             $this->pushExpression($id);
             $this->processSemicolon();
         }
         
-        if ($this->tokens[$this->id][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             --$this->id;
         }
 
@@ -2548,7 +2570,7 @@ class Load extends Tasks {
     private function processParenthesis() {
         $parentheseId = $this->addAtom('Parenthesis');
 
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_PARENTHESIS))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS))) {
             $this->processNext();
         };
 
@@ -2558,11 +2580,11 @@ class Load extends Tasks {
         $this->setAtom($parentheseId, array('code'     => '(',
                                             'fullcode' => '(' . $this->atoms[$indexId]['fullcode'] . ')',
                                             'line'     => $this->tokens[$this->id][2],
-                                            'token'    => 'T_OPEN_PARENTHESIS' ));
+                                            'token'    => '\Exakat\Tasks\T_OPEN_PARENTHESIS' ));
         $this->pushExpression($parentheseId);
         ++$this->id; // Skipping the )
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -2605,7 +2627,7 @@ class Load extends Tasks {
     }
 
     private function processExit() {
-        if (in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_TAG, T_CLOSE_BRACKET, T_COLON))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_CLOSE_BRACKET, \Exakat\Tasks\T_COLON))) {
             $nameId = $this->addAtom('Identifier');
             $this->setAtom($nameId, array('code'       => $this->tokens[$this->id][1],
                                           'fullcode'   => $this->tokens[$this->id][1],
@@ -2638,7 +2660,7 @@ class Load extends Tasks {
 
             $this->pushExpression($functioncallId);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
 
@@ -2648,7 +2670,7 @@ class Load extends Tasks {
             $nameId = $this->processNextAsIdentifier();
             $this->pushExpression($nameId);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
             } else {
                 $nameId = $this->processFCOA($nameId);
@@ -2668,15 +2690,15 @@ class Load extends Tasks {
         $conditionId = $this->popExpression();
         $ternaryId = $this->addAtom('Ternary');
         
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_COLON)) ) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COLON)) ) {
             $this->processNext();
         };
         $thenId = $this->popExpression();
         ++$this->id; // Skip colon
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals[] = T_COLON; // Added from nested Ternary
-        $finals[] = T_CLOSE_TAG;
+        $finals[] = \Exakat\Tasks\T_COLON; // Added from nested Ternary
+        $finals[] = \Exakat\Tasks\T_CLOSE_TAG;
         
         $this->nestContext();
         do {
@@ -2695,12 +2717,12 @@ class Load extends Tasks {
                                  ($this->atoms[$thenId]['atom'] === 'Void' ? '' : ' '.$this->atoms[$thenId]['fullcode'].' ' ). ': ' .
                                  $this->atoms[$elseId]['fullcode'],
                    'line'     => $this->tokens[$current][2],
-                   'token'    => 'T_QUESTION');
+                   'token'    => '\Exakat\Tasks\T_QUESTION');
         $this->setAtom($ternaryId, $x);
 
         $this->pushExpression($ternaryId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -2733,11 +2755,11 @@ class Load extends Tasks {
     private function processNamespaceBlock() {
         $this->startSequence();
 
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_TAG, T_NAMESPACE, T_END))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_NAMESPACE, \Exakat\Tasks\T_END))) {
             $this->processNext();
             
-            if ($this->tokens[$this->id + 1][0] === T_NAMESPACE &&
-                $this->tokens[$this->id + 2][0] === T_NS_SEPARATOR) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NAMESPACE &&
+                $this->tokens[$this->id + 2][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
                 $this->processNext();
             }
         };
@@ -2755,9 +2777,9 @@ class Load extends Tasks {
     private function processNamespace() {
         $current = $this->id;
         
-        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             $nameId = $this->addAtomVoid();
-        } elseif ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
             --$this->id;
             $nsnameId = $this->processOneNsname();
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId);
@@ -2774,10 +2796,10 @@ class Load extends Tasks {
         $this->setNamespace($nameId);
 
         // Here, we make sure namespace is encompassing the next elements.
-        if ($this->tokens[$this->id + 1][0] === T_SEMICOLON) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_SEMICOLON) {
             // Process block 
             ++$this->id; // Skip ; to start actual sequence
-            if ($this->tokens[$this->id + 1][0] === T_END) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_END) {
                 $voidId = $this->addAtomVoid();
                 $blockId = $this->addAtom('Sequence');
                 $this->setAtom($blockId, array('code'       => '{}',
@@ -2815,19 +2837,19 @@ class Load extends Tasks {
     }
 
     private function processAs() {
-        if (in_array($this->tokens[$this->id + 1][0], array(T_PRIVATE, T_PUBLIC, T_PROTECTED))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_PRIVATE, \Exakat\Tasks\T_PUBLIC, \Exakat\Tasks\T_PROTECTED))) {
             $current = $this->id;
             $asId = $this->addAtom('As');
 
             $left = $this->popExpression();
             $this->addLink($asId, $left, 'NAME');
             
-            if (in_array($this->tokens[$this->id + 1][0], array(T_PRIVATE, T_PROTECTED, T_PUBLIC))) {
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_PRIVATE, \Exakat\Tasks\T_PROTECTED, \Exakat\Tasks\T_PUBLIC))) {
                 $visibilityId = $this->processNextAsIdentifier();
                 $this->addLink($asId, $visibilityId, strtoupper($this->atoms[$visibilityId]['code']));
             }
 
-            if (!in_array($this->tokens[$this->id + 1][0], array(T_COMMA, T_SEMICOLON))) {
+            if (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA, \Exakat\Tasks\T_SEMICOLON))) {
                 $aliasId = $this->processNextAsIdentifier();
                 $this->addLink($asId, $aliasId, 'AS');
             } else {
@@ -2863,7 +2885,7 @@ class Load extends Tasks {
         $fullcode = array();
 
         // use const
-        if ($this->tokens[$this->id + 1][0] === T_CONST) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CONST) {
             ++$this->id;
 
             $this->processSingle('Identifier');
@@ -2873,7 +2895,7 @@ class Load extends Tasks {
         }
 
         // use function
-        if ($this->tokens[$this->id + 1][0] === T_FUNCTION) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_FUNCTION) {
             ++$this->id;
 
             $this->processSingle('Identifier');
@@ -2891,7 +2913,7 @@ class Load extends Tasks {
             $originId = $namespaceId;
             $fullnspath = $this->makeFullnspath($namespaceId);
 
-            if ($this->tokens[$this->id + 1][0] === T_AS) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_AS) {
                 // use A\B as C
                 ++$this->id;
                 $this->setAtom($originId, array('fullnspath' => $this->makeFullnspath($originId)));
@@ -2913,14 +2935,14 @@ class Load extends Tasks {
                 $this->setAtom($namespaceId, array('fullnspath' => $fullnspath));
                 if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
-                    $alias = $this->addNamespaceUse($originId, $aliasId, $useType);
+                    $alias = $this->addNamespaceUse($originId, $aliasId, $useType, $namespaceId);
     
                     $this->setAtom($namespaceId, array('alias'  => $alias,
-                                                  'origin' => $fullnspath ));
+                                                       'origin' => $fullnspath ));
                 }
-            } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+            } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
                 //use A\B{} // Group
-                $blockId = $this->processFollowingBlock(array(T_CLOSE_CURLY));
+                $blockId = $this->processFollowingBlock(array(\Exakat\Tasks\T_CLOSE_CURLY));
                 $this->popExpression();
                 $this->addLink($useId, $blockId, 'BLOCK');
                 $fullcode[] = $this->atoms[$namespaceId]['fullcode'] . ' ' . $this->atoms[$blockId]['fullcode'];
@@ -2929,7 +2951,7 @@ class Load extends Tasks {
                 $fullnspath = $this->makeFullnspath($namespaceId);
 
                 $this->addLink($useId, $namespaceId, 'USE');
-            } elseif ($this->tokens[$this->id + 1][0] === T_NS_SEPARATOR) {
+            } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
                 //use A\B\ {} // Prefixes, within a Class/Trait 
                 $this->addLink($useId, $namespaceId, 'GROUPUSE');
                 $prefix = $this->makeFullnspath($namespaceId);
@@ -2947,7 +2969,7 @@ class Load extends Tasks {
 
                     $useType = $useTypeGeneric;
                     $useTypeId = 0;
-                    if ($this->tokens[$this->id + 1][0] === T_CONST) {
+                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CONST) {
                     // use const
                         ++$this->id;
 
@@ -2956,7 +2978,7 @@ class Load extends Tasks {
                         $useType = 'const';
                     }
 
-                    if ($this->tokens[$this->id + 1][0] === T_FUNCTION) {
+                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_FUNCTION) {
                         // use function
                         ++$this->id;
 
@@ -2970,7 +2992,7 @@ class Load extends Tasks {
                         $this->addLink($id, $useTypeId, strtoupper($useType));
                     }
 
-                    if ($this->tokens[$this->id + 1][0] === T_AS) {
+                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_AS) {
                         // A\B as C
                         ++$this->id;
                         $this->pushExpression($id);
@@ -2982,7 +3004,7 @@ class Load extends Tasks {
                         $this->setAtom($aliasId, array('fullnspath' => $prefix.strtolower($this->atoms[$id]['fullcode']),
                                                        'origin'     => $prefix.strtolower($this->atoms[$id]['fullcode']) ));
 
-                        $alias = $this->addNamespaceUse($id, $aliasId, $useType);
+                        $alias = $this->addNamespaceUse($id, $aliasId, $useType, $aliasId);
                         $this->setAtom($aliasId, array('alias'      => $alias));
                         $this->addLink($useId, $aliasId, 'USE');
                     } else {
@@ -2990,11 +3012,11 @@ class Load extends Tasks {
                         $this->setAtom($id, array('fullnspath' => $prefix.strtolower($this->atoms[$id]['fullcode']),
                                                   'origin'     => $prefix.strtolower($this->atoms[$id]['fullcode'])));
 
-                        $alias = $this->addNamespaceUse($id, $id, $useType);
+                        $alias = $this->addNamespaceUse($id, $id, $useType, $aliasId);
                         $this->setAtom($id, array('alias'      => $alias));
                         
                     }
-                } while (in_array($this->tokens[$this->id + 1][0], array(T_COMMA)));
+                } while (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA)));
                 
                 $fullcode[] = $this->atoms[$namespaceId]['fullcode'] . self::FULLCODE_BLOCK;
 
@@ -3016,7 +3038,7 @@ class Load extends Tasks {
                 $this->setAtom($namespaceId, array('fullnspath' => $fullnspath));
                 if (!$this->isContext(self::CONTEXT_CLASS) &&
                     !$this->isContext(self::CONTEXT_TRAIT) ) {
-                    $alias = $this->addNamespaceUse($aliasId, $aliasId, $useType);
+                    $alias = $this->addNamespaceUse($aliasId, $aliasId, $useType, $namespaceId);
     
                     $this->setAtom($namespaceId, array('alias'  => $alias,
                                                   'origin' => $fullnspath ));
@@ -3024,7 +3046,7 @@ class Load extends Tasks {
             }
             // No Else. Default will be dealt with by while() condition
 
-        } while ($this->tokens[$this->id + 1][0] === T_COMMA);
+        } while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA);
         
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => $this->tokens[$current][1] .
@@ -3035,7 +3057,7 @@ class Load extends Tasks {
         $this->setAtom($useId, $x);
         $this->pushExpression($useId);
 
-        if ($this->tokens[$this->id + 1][0] !== T_SEMICOLON) {
+        if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
             $this->processSemicolon();
         }
 
@@ -3051,7 +3073,7 @@ class Load extends Tasks {
                                           'variadic'  => false,
                                           'enclosing' => false));
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
              $variableId = $this->processFCOA($variableId);
@@ -3062,13 +3084,13 @@ class Load extends Tasks {
     
     private function processFCOA($id) {
         // For functions and constants 
-        if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             return $this->processFunctioncall();
-        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET &&
-                  $this->tokens[$this->id + 2][0] === T_CLOSE_BRACKET) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET &&
+                  $this->tokens[$this->id + 2][0] === \Exakat\Tasks\T_CLOSE_BRACKET) {
             return $this->processAppend();
-        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET ||
-                  $this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET ||
+                  $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             return $this->processBracket();
         } elseif (in_array($this->atoms[$id]['atom'], array('Nsname', 'Identifier'))) {
             list($fullnspath, $aliased) = $this->getFullnspath($id, $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const');
@@ -3097,7 +3119,7 @@ class Load extends Tasks {
         ++$this->id;
         ++$this->id;
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             // Mostly for arrays
@@ -3124,7 +3146,7 @@ class Load extends Tasks {
         }
         $this->setAtom($id, array('intval' => (abs($actual) > PHP_INT_MAX ? 0 : $actual)));
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -3134,7 +3156,7 @@ class Load extends Tasks {
     private function processReal() {
         $id = $this->processSingle('Real');
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -3144,11 +3166,11 @@ class Load extends Tasks {
     private function processLiteral() {
         $id = $this->processSingle('String');
         
-        if ($this->tokens[$this->id][0] === T_CONSTANT_ENCAPSED_STRING) {
+        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CONSTANT_ENCAPSED_STRING) {
             $this->setAtom($id, array('delimiter'   => $this->atoms[$id]['code'][0],
                                       'noDelimiter' => substr($this->atoms[$id]['code'], 1, -1)));
             $this->addNoDelimiterCall($id);
-        } elseif ($this->tokens[$this->id][0] === T_NUM_STRING) {
+        } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NUM_STRING) {
             $this->setAtom($id, array('delimiter'   => '',
                                       'noDelimiter' => $this->atoms[$id]['code']));
             $this->addNoDelimiterCall($id);
@@ -3159,12 +3181,12 @@ class Load extends Tasks {
 
         if (function_exists('mb_detect_encoding')) {
             $this->setAtom($id, array('encoding' => mb_detect_encoding($this->atoms[$id]['noDelimiter'])));
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_BRACKET) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET) {
                 $id = $this->processBracket();
             }
         }
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -3202,7 +3224,7 @@ class Load extends Tasks {
         $this->setAtom($operatorId, $x);
         $this->pushExpression($operatorId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -3214,7 +3236,7 @@ class Load extends Tasks {
     }
 
     private function processReturn() {
-        if (in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_TAG, T_SEMICOLON))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_SEMICOLON))) {
             $current = $this->id;
             
             // Case of return ; 
@@ -3230,7 +3252,7 @@ class Load extends Tasks {
             $this->setAtom($returnId, $x);
 
             $this->pushExpression($returnId);
-            if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
         
@@ -3245,7 +3267,7 @@ class Load extends Tasks {
     }
 
     private function processYield() {
-        if (in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_PARENTHESIS, T_SEMICOLON, T_CLOSE_TAG))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG))) {
             $current = $this->id;
             
             // Case of return ; 
@@ -3278,7 +3300,7 @@ class Load extends Tasks {
 
     private function processCurlyExpression() {
         ++$this->id;
-        while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_CURLY))) {
+        while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY))) {
             $this->processNext();
         };
         
@@ -3297,13 +3319,13 @@ class Load extends Tasks {
     }
 
     private function processDollar() {
-        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             $current = $this->id;
 
             $variableId = $this->addAtom('Variable');
 
             ++$this->id;
-            while (!in_array($this->tokens[$this->id + 1][0], array(T_CLOSE_CURLY)) ) {
+            while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY)) ) {
                 $id = $this->processNext();
             };
             
@@ -3323,7 +3345,7 @@ class Load extends Tasks {
             
             $this->pushExpression($variableId);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
 
@@ -3334,7 +3356,7 @@ class Load extends Tasks {
             $this->setAtom($id, array('variadic' => false));
             $this->exitContext();
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
 
@@ -3370,15 +3392,15 @@ class Load extends Tasks {
     private function processSign() {
         $sign = $this->tokens[$this->id][1];
         $code = $sign.'1';
-        while (in_array($this->tokens[$this->id + 1][0], array(T_PLUS, T_MINUS))) {
+        while (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_PLUS, \Exakat\Tasks\T_MINUS))) {
             ++$this->id;
             $sign = $this->tokens[$this->id][1].$sign;
             $code *= $this->tokens[$this->id][1].'1';
         }
 
         // -3 ** 3 => -(3 ** 3)
-        if (($this->tokens[$this->id + 1][0] === T_LNUMBER || $this->tokens[$this->id + 1][0] === T_DNUMBER) &&
-            $this->tokens[$this->id + 2][0] !== T_POW) {
+        if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER || $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
+            $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
             $operandId = $this->processNext();
 
             $x = array('code'     => $sign . $this->atoms[$operandId]['code'],
@@ -3414,7 +3436,7 @@ class Load extends Tasks {
             
             $this->pushExpression($signId);
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
             return $signId;
@@ -3439,7 +3461,7 @@ class Load extends Tasks {
         do {
             $this->processNext();
 
-            if (in_array($this->tokens[$this->id + 1][0], array(T_EQUAL, T_PLUS_EQUAL, T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_POW_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL))) {
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_EQUAL, \Exakat\Tasks\T_PLUS_EQUAL, \Exakat\Tasks\T_AND_EQUAL, \Exakat\Tasks\T_CONCAT_EQUAL, \Exakat\Tasks\T_DIV_EQUAL, \Exakat\Tasks\T_MINUS_EQUAL, \Exakat\Tasks\T_MOD_EQUAL, \Exakat\Tasks\T_MUL_EQUAL, \Exakat\Tasks\T_OR_EQUAL, \Exakat\Tasks\T_POW_EQUAL, \Exakat\Tasks\T_SL_EQUAL, \Exakat\Tasks\T_SR_EQUAL, \Exakat\Tasks\T_XOR_EQUAL))) {
                 $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
@@ -3458,7 +3480,7 @@ class Load extends Tasks {
         $this->setAtom($additionId, $x);
         $this->pushExpression($additionId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -3467,13 +3489,13 @@ class Load extends Tasks {
 
     private function processBreak() {
         $current = $this->id;
-        $breakId = $this->addAtom($this->tokens[$this->id][0] === T_BREAK ? 'Break' : 'Continue');
+        $breakId = $this->addAtom($this->tokens[$this->id][0] === \Exakat\Tasks\T_BREAK ? 'Break' : 'Continue');
         
-        if ($this->tokens[$this->id + 1][0] === T_LNUMBER) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER) {
             $this->processNext();
             
             $breakLevel = $this->popExpression();
-        } elseif ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             ++$this->id; // skip (
             $this->processNext();
             ++$this->id; // skip )
@@ -3483,7 +3505,7 @@ class Load extends Tasks {
             $breakLevel = $this->addAtomVoid();
         }
         
-        $this->addLink($breakId, $breakLevel, $this->tokens[$current][0] === T_BREAK ? 'BREAK' : 'CONTINUE');
+        $this->addLink($breakId, $breakLevel, $this->tokens[$current][0] === \Exakat\Tasks\T_BREAK ? 'BREAK' : 'CONTINUE');
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => $this->tokens[$current][1] . ( $this->atoms[$breakLevel]['atom'] !== 'Void' ?  ' '. $this->atoms[$breakLevel]['fullcode'] : ''),
                    'line'     => $this->tokens[$current][2],
@@ -3491,7 +3513,7 @@ class Load extends Tasks {
         $this->setAtom($breakId, $x);
         $this->pushExpression($breakId);
 
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
            $this->processSemicolon();
        }
 
@@ -3504,20 +3526,20 @@ class Load extends Tasks {
         $leftId = $this->popExpression();
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals[] = T_DOUBLE_COLON;
+        $finals[] = \Exakat\Tasks\T_DOUBLE_COLON;
         
         $this->nestContext();
-        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             $blockId = $this->processCurlyExpression();
             $right = $this->processFCOA($blockId);
             $this->popExpression();
-        } elseif ($this->tokens[$this->id + 1][0] === T_DOLLAR) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOLLAR) {
             ++$this->id; // Skip ::
             $blockId = $this->processDollar();
             $right = $this->processFCOA($blockId);
             $this->popExpression();
         } else {
-            if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
                 ++$this->id;
                 $this->processSingle('Variable');
                 $right = $this->popExpression();
@@ -3525,7 +3547,7 @@ class Load extends Tasks {
                 $right = $this->processNextAsIdentifier();
             }
 
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
                 $this->pushExpression($right);
                 $right = $this->processFunctioncall();
                 $this->popExpression();
@@ -3533,7 +3555,7 @@ class Load extends Tasks {
         }
         $this->exitContext();
 
-        if ($this->atoms[$right]['token'] === 'T_CLASS') {
+        if ($this->atoms[$right]['token'] === '\Exakat\Tasks\T_CLASS') {
             $staticId = $this->addAtom('Staticclass');
             $links = 'CLASS';
         } elseif ($this->atoms[$right]['atom'] === 'Identifier') {
@@ -3567,7 +3589,7 @@ class Load extends Tasks {
         $this->setAtom($staticId, $x);
         $this->pushExpression($staticId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $staticId = $this->processFCOA($staticId);
@@ -3588,7 +3610,7 @@ class Load extends Tasks {
         do {
             $this->processNext();
             
-            if (in_array($this->tokens[$this->id + 1][0], array(T_EQUAL, T_PLUS_EQUAL, T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_POW_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL))) {
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_EQUAL, \Exakat\Tasks\T_PLUS_EQUAL, \Exakat\Tasks\T_AND_EQUAL, \Exakat\Tasks\T_CONCAT_EQUAL, \Exakat\Tasks\T_DIV_EQUAL, \Exakat\Tasks\T_MINUS_EQUAL, \Exakat\Tasks\T_MOD_EQUAL, \Exakat\Tasks\T_MUL_EQUAL, \Exakat\Tasks\T_OR_EQUAL, \Exakat\Tasks\T_POW_EQUAL, \Exakat\Tasks\T_SL_EQUAL, \Exakat\Tasks\T_SR_EQUAL, \Exakat\Tasks\T_XOR_EQUAL))) {
                 $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
@@ -3607,7 +3629,7 @@ class Load extends Tasks {
         $this->setAtom($additionId, $x);
         $this->pushExpression($additionId);
         
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -3620,12 +3642,12 @@ class Load extends Tasks {
         $left = $this->popExpression();
 
         $this->nestContext();
-        if ($this->tokens[$this->id + 1][0] === T_OPEN_CURLY) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             $blockId = $this->processCurlyExpression();
             $right = $this->processFCOA($blockId);
             $this->popExpression();
         } else {
-            if ($this->tokens[$this->id + 1][0] === T_VARIABLE) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
                 ++$this->id;
                 $this->processSingle('Variable');
                 $right = $this->popExpression();
@@ -3633,7 +3655,7 @@ class Load extends Tasks {
                 $right = $this->processNextAsIdentifier();
             }
 
-            if ($this->tokens[$this->id + 1][0] === T_OPEN_PARENTHESIS) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
                 $this->pushExpression($right);
                 $right = $this->processFunctioncall();
                 $this->popExpression();
@@ -3665,7 +3687,7 @@ class Load extends Tasks {
         $this->setAtom($staticId, $x);
         $this->pushExpression($staticId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $staticId = $this->processFCOA($staticId);
@@ -3677,10 +3699,10 @@ class Load extends Tasks {
 
     private function processAssignation() {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $finals = array_merge($finals, array(T_EQUAL, T_PLUS_EQUAL, T_AND_EQUAL, T_CONCAT_EQUAL, T_DIV_EQUAL, T_MINUS_EQUAL, T_MOD_EQUAL, T_MUL_EQUAL, T_OR_EQUAL, T_POW_EQUAL, T_SL_EQUAL, T_SR_EQUAL, T_XOR_EQUAL));
+        $finals = array_merge($finals, array(\Exakat\Tasks\T_EQUAL, \Exakat\Tasks\T_PLUS_EQUAL, \Exakat\Tasks\T_AND_EQUAL, \Exakat\Tasks\T_CONCAT_EQUAL, \Exakat\Tasks\T_DIV_EQUAL, \Exakat\Tasks\T_MINUS_EQUAL, \Exakat\Tasks\T_MOD_EQUAL, \Exakat\Tasks\T_MUL_EQUAL, \Exakat\Tasks\T_OR_EQUAL, \Exakat\Tasks\T_POW_EQUAL, \Exakat\Tasks\T_SL_EQUAL, \Exakat\Tasks\T_SR_EQUAL, \Exakat\Tasks\T_XOR_EQUAL));
         $this->processOperator('Assignation', $finals);
 
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
     }
@@ -3691,7 +3713,7 @@ class Load extends Tasks {
 
     private function processEllipsis() {
         // Simply skipping the ...
-        $finals = $this->precedence->get(T_ELLIPSIS);
+        $finals = $this->precedence->get(\Exakat\Tasks\T_ELLIPSIS);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
         };
@@ -3755,18 +3777,18 @@ class Load extends Tasks {
 
         $this->nestContext();
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
-        $id = array_search(T_REQUIRE, $finals);
+        $id = array_search(\Exakat\Tasks\T_REQUIRE, $finals);
         unset($finals[$id]);
-        $id = array_search(T_REQUIRE_ONCE, $finals);
+        $id = array_search(\Exakat\Tasks\T_REQUIRE_ONCE, $finals);
         unset($finals[$id]);
-        $id = array_search(T_INCLUDE, $finals);
+        $id = array_search(\Exakat\Tasks\T_INCLUDE, $finals);
         unset($finals[$id]);
-        $id = array_search(T_INCLUDE_ONCE, $finals);
+        $id = array_search(\Exakat\Tasks\T_INCLUDE_ONCE, $finals);
         unset($finals[$id]);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
 
-            if ($this->tokens[$this->id + 1][0] === T_DOT) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOT) {
                 $containsId = $this->popExpression();
                 $this->addLink($concatenationId, $containsId, 'CONCAT');
                 $fullcode[] = $this->atoms[$containsId]['fullcode'];
@@ -3790,7 +3812,7 @@ class Load extends Tasks {
         $this->setAtom($concatenationId, $x);
         $this->pushExpression($concatenationId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
@@ -3842,7 +3864,7 @@ class Load extends Tasks {
         --$this->id;
         $nameId = $this->processNextAsIdentifier();
 
-        $argumentsId = $this->processArguments(array(T_SEMICOLON, T_CLOSE_TAG, T_END));
+        $argumentsId = $this->processArguments(array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
 
         $functioncallId = $this->addAtom('Functioncall');
         list($fullnspath, $aliased) = $this->getFullnspath($nameId);
@@ -3862,7 +3884,7 @@ class Load extends Tasks {
 
         // processArguments goes too far, up to ;
         --$this->id;
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -3888,7 +3910,7 @@ class Load extends Tasks {
     }
     
     private function processPrint() {
-        if (in_array($this->tokens[$this->id][0], array(T_INCLUDE, T_INCLUDE_ONCE, T_REQUIRE, T_REQUIRE_ONCE))) {
+        if (in_array($this->tokens[$this->id][0], array(\Exakat\Tasks\T_INCLUDE, \Exakat\Tasks\T_INCLUDE_ONCE, \Exakat\Tasks\T_REQUIRE, \Exakat\Tasks\T_REQUIRE_ONCE))) {
             $nameId = $this->addAtom('Include');
         } else {
             $nameId = $this->addAtom('Identifier');
@@ -3932,7 +3954,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncallId);
         
-        if ($this->tokens[$this->id + 1][0] === T_CLOSE_TAG) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         return $functioncallId;
@@ -3953,7 +3975,7 @@ class Load extends Tasks {
         $this->setAtom($id, array('code'       => 'Void',
                                   'fullcode'   => self::FULLCODE_VOID,
                                   'line'       => $this->tokens[$this->id][2],
-                                  'token'      => T_VOID,
+                                  'token'      => \Exakat\Tasks\T_VOID,
                                   'fullnspath' => '\\'));
         
         return $id;
@@ -4008,6 +4030,7 @@ class Load extends Tasks {
         // All node has one incoming or one outgoing link (outgoing or incoming).
         $O = $D= array();
         foreach($this->links as $label => $origins) {
+            if ($label === 'DEFINITION') { continue; }
             foreach($origins as $origin => $destinations) {
                 foreach($destinations as $destination => $links) {
                     foreach($links as $link) {
@@ -4115,7 +4138,7 @@ class Load extends Tasks {
         $this->setAtom($this->sequence, array('code'     => ';',
                                               'fullcode' => ' '.self::FULLCODE_SEQUENCE.' ',
                                               'line'     => $this->tokens[$this->id][2],
-                                              'token'    => 'T_SEMICOLON',
+                                              'token'    => '\Exakat\Tasks\T_SEMICOLON',
                                               'bracket'  => false));
         
         $this->sequences[]    = $this->sequence;
@@ -4153,7 +4176,7 @@ class Load extends Tasks {
         } elseif (!in_array($this->atoms[$nameId]['atom'], array('Nsname', 'Identifier', 'String'))) {
             // No fullnamespace for non literal namespaces
             return array('', 0);
-        } elseif (in_array($this->atoms[$nameId]['token'], array('T_STATIC', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
+        } elseif (in_array($this->atoms[$nameId]['token'], array('\Exakat\Tasks\T_STATIC', '\Exakat\Tasks\T_ARRAY', '\Exakat\Tasks\T_EVAL', '\Exakat\Tasks\T_ISSET', '\Exakat\Tasks\T_EXIT', '\Exakat\Tasks\T_UNSET', '\Exakat\Tasks\T_ECHO', '\Exakat\Tasks\T_PRINT', '\Exakat\Tasks\T_LIST', '\Exakat\Tasks\T_EMPTY'))) {
             // For language structures, it is always in global space, like eval or list
             return array('\\'.strtolower($this->atoms[$nameId]['code']), 0);
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
@@ -4165,10 +4188,13 @@ class Load extends Tasks {
                 return array('\\'.strtolower($this->atoms[$nameId]['code']), 0);
             // This is an identifier
             } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
+                $this->addLink($this->usesId['class'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
                 return array($this->uses['class'][strtolower($this->atoms[$nameId]['code'])], 1);
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
+                $this->addLink($this->usesId['const'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
                 return array($this->uses['const'][strtolower($this->atoms[$nameId]['code'])], 1);
             } elseif ($type === 'function' && isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
+                $this->addLink($this->usesId['function'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
                 return array($this->uses['function'][strtolower($this->atoms[$nameId]['code'])], 1);
             } else {
                 return array($this->namespace.strtolower($this->atoms[$nameId]['fullcode']), 0);
@@ -4231,7 +4257,7 @@ class Load extends Tasks {
         }
     }
 
-    private function addNamespaceUse($originId, $aliasId, $useType) {
+    private function addNamespaceUse($originId, $aliasId, $useType, $useId) {
         $fullnspath = $this->atoms[$originId]['fullnspath'];
 
         if ($originId !== $aliasId) { // Case of A as B
@@ -4247,7 +4273,8 @@ class Load extends Tasks {
         }
         
         $this->uses[$useType][strtolower($alias)] = $fullnspath;
-        
+        $this->usesId[$useType][strtolower($alias)] = $useId;
+
         return $alias;
     }
     
