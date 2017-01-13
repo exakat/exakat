@@ -1,8 +1,6 @@
 <?php
 
-$expected     = array('A::nonStaticMethod( )',
-                      'self::nonStaticMethod( )',
-                      'static::nonStaticMethod( )');
+$expected     = array('A::nonStaticMethod( )',);
 
 $expected_not = array('parent::nonStaticMethod( )',
                       'parent::staticMethod( )',
@@ -12,6 +10,9 @@ $expected_not = array('parent::nonStaticMethod( )',
                       'self::staticMethod( )',
                       'A::staticMethod( )',
                       'static::nonStaticMethod( )',
+
+                      'self::nonStaticMethod( )',
+                      'static::nonStaticMethod( )'
                       );
 
 ?>
