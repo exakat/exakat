@@ -512,6 +512,16 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
         return $this;
     }
 
+    public function functioncallIsNot($fullnspath) {
+        $this->atomIs('Functioncall')
+             ->hasNoIn(array('METHOD', 'NEW'))
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))')
+             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->fullnspathIsNot($this->makeFullNsPath($fullnspath));
+
+        return $this;
+    }
+
     public function hasAtomInside($atom) {
         $gremlin = 'where( __.emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') )';
         $this->addMethod($gremlin);
@@ -656,6 +666,12 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
 
     public function outWithoutLastRank() {
         $this->addMethod('sideEffect{dernier = it.get().value("count") - 1;}.out("ELEMENT").filter{ it.get().value("rank") < dernier}');
+
+        return $this;
+    }
+
+    public function hasChildWithRank($edgeName, $rank = '0') {
+        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs(intval($rank)).').count().is(neq(0)) )');
 
         return $this;
     }
@@ -1274,9 +1290,9 @@ GREMLIN
     public function goToAllParents($self = self::INCLUDE_SELF) {
 //        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
         if ($self === self::INCLUDE_SELF) {
-            $this->addMethod('repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.')');
+            $this->addMethod('filter{true}.emit().repeat( sideEffect{ x = it.get(); }.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").filter{ it.get() != x;} ).times('.self::MAX_LOOPING.')');
         } else {
-            $this->addMethod('filter{true}.emit().repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
+            $this->addMethod('repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION").dedup() ).emit().times('.self::MAX_LOOPING.')');
         }
         
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
