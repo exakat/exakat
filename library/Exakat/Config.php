@@ -190,7 +190,8 @@ class Config {
     private function __construct($argv) {
         $this->argv = $argv;
         
-        $this->is_phar  = !empty(Phar::Running());
+        $pharRunning = Phar::Running();
+        $this->is_phar  = !empty($pharRunning);
         if ($this->is_phar) {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->projects_root = substr(dirname(dirname(dirname(__DIR__))), 7);

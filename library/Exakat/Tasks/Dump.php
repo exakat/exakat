@@ -294,7 +294,8 @@ SQL;
                         );
         foreach($tables as $table) {
             $res = $this->sqlite->query('SELECT sql FROM datastore.sqlite_master WHERE type="table" AND name="'.$table.'"');
-            $createTable = $res->fetchArray(\SQLITE3_NUM)[0];
+            $createTable = $res->fetchArray(\SQLITE3_NUM);
+            $createTable = $createTable[0];
             $createTable = str_replace('CREATE TABLE ', 'CREATE TABLE IF NOT EXISTS ', $createTable);
 
             $this->sqlite->query($createTable);

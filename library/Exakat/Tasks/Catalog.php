@@ -31,7 +31,7 @@ class Catalog extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
     public function run() {
-        $data = [];
+        $data = array();
 
         // List of analysis
         $pathDocs = $this->config->dir_root.'/data/analyzers.sqlite';
