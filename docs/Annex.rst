@@ -51,21 +51,20 @@ Supported Reports
 
 Exakat produces various reports. Some are general, covering various aspects in a reference way; others focus on one aspect. 
 
-  *Ambassador
-  *Devoops
-  *Text
-  *Xml
-  *Uml
-  *PhpConfiguration
-  *PhpCompilation
-  *Inventories
-  *Clustergrammer
-  *ZendFramework
-  *RadwellCode
-  *Faceted
-  *FacetedJson
-  *Json
-  *OnepageJson
+  * Ambassador
+  * Devoops
+  * Text
+  * Xml
+  * Uml
+  * PhpConfiguration
+  * PhpCompilation
+  * Inventories
+  * Clustergrammer
+  * ZendFramework
+  * RadwellCode
+  * FacetedJson
+  * Json
+  * OnepageJson
 
 
 Supported PHP Extensions
@@ -272,6 +271,10 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. 
 
 
+* 0.9.7
+  * Avoid Large Array Assignation (Structures/NoAssignationInFunction)
+  * Could Be Protected Property (Classes/CouldBeProtectedProperty)
+  * ZendF/ZendTypehinting (ZendF/ZendTypehinting)
 * 0.9.6
   * Fetch One Row Format (Performances/FetchOneRowFormat)
   * Performances/NoGlob (Performances/NoGlob)
@@ -289,7 +292,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Unset() Or (unset) (Php/UnsetOrCast)
   * Wpdb Prepare Or Not (Wordpress/WpdbPrepareOrNot)
 * 0.9.2
-  * $GLOBALS or global (Php/GlobalsVsGlobal)
+  * $GLOBALS Or global (Php/GlobalsVsGlobal)
   * Illegal Name For Method (Classes/WrongName)
   * Too Many Local Variables (Functions/TooManyLocalVariables)
   * Use Composer Lock (Composer/UseComposerLock)
@@ -477,7 +480,6 @@ List of analyzers, by version of introduction, newest to oldest.
   * Dynamically Called Classes (Classes/VariableClasses)
   * Echo Or Print (Structures/EchoPrintConsistance)
   * Echo With Concat (Structures/EchoWithConcat)
-  * Echo With Concatenation (Structures/EchoArguments)
   * Else If Versus Elseif (Structures/ElseIfElseif)
   * Else Usage (Structures/ElseUsage)
   * Email Addresses (Type/Email)
@@ -509,7 +511,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Final Methods Usage (Classes/Finalmethod)
   * Fopen Mode (Portability/FopenMode)
   * For Using Functioncall (Structures/ForWithFunctioncall)
-  * Foreach Dont Change Pointer (Php/ForeachDontChangePointer)
+  * Foreach Don't Change Pointer (Php/ForeachDontChangePointer)
   * Foreach Needs Reference Array (Structures/ForeachNeedReferencedSource)
   * Foreach Reference Is Not Modified (Structures/ForeachReferenceIsNotModified)
   * Foreach With list() (Structures/ForeachWithList)
