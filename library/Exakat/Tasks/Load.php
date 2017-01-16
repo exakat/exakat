@@ -213,6 +213,8 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank = array();
 
+    private $loaderList = array('CypherG3', 'Neo4jimport');
+
     private $processing = array();
     
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
@@ -442,9 +444,16 @@ class Load extends Tasks {
                                          'token'    => 'T_WHOLE'));
         
         if (static::$client === null) {
-            static::$client = new CypherG3();
-//            static::$client = new Neo4jImport();
-//            static::$client = new GremlinServerNeo4j();
+            $client = $this->config->loader;
+            
+            if (!in_array($client, $this->loaderList)) {
+                throw new NoSuchLoad($client, $this->loaderList);
+            }
+            
+            display("Loading with $client\n");
+
+            $client = '\\Exakat\\Loader\\'.$client;
+            static::$client = new $client();
         }
         
         $this->datastore->cleanTable('tokenCounts');
@@ -661,12 +670,6 @@ class Load extends Tasks {
 
        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_END ||
             !isset($this->processing[ $this->tokens[$this->id][0] ])) {
-            if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_END) {
-                print "T_END\n";
-            } else {
-                print "Load ({$this->id}) : {$this->tokens[$this->id][1]}\n{$this->tokens[$this->id][0]}/".\Exakat\Tasks\T_STRING."/".\Exakat\Tasks\T_STRING."\n";
-            }
-            print_r($this->processing);
             display("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
             $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
 

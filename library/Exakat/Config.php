@@ -86,30 +86,32 @@ class Config {
                                             'neo4j_login'    => 'admin',
                                             'neo4j_password' => 'admin',
                                             
-                                             'php'           => '',
-                                             'php52'         => '',
-                                             'php53'         => '',
-                                             'php54'         => '',
-                                             'php55'         => '',
-                                             'php56'         => '',
-                                             'php70'         => '',
-                                             'php71'         => '',
-                                             'php72'         => '',
-                                             
-                                             'phpversion'    => '7.1',
-                                             'token_limit'   => '1000000',
-                                             
-                                             'configFiles'   => array(),
-                                             'command'       => 'version',
+                                            'php'           => '',
+                                            'php52'         => '',
+                                            'php53'         => '',
+                                            'php54'         => '',
+                                            'php55'         => '',
+                                            'php56'         => '',
+                                            'php70'         => '',
+                                            'php71'         => '',
+                                            'php72'         => '',
+                                            
+                                            'phpversion'    => '7.1',
+                                            'token_limit'   => '1000000',
+                                            
+                                            'configFiles'   => array(),
+                                            'command'       => 'version',
 
-                                             'ignore_dirs'         => array(),
-                                             'file_extensions'     => array(),
-                                             'project_name'        => '',
-                                             'project_url'         => '',
-                                             'project_vcs'         => '',
-                                             'project_description' => '',
-                                             'project_packagist'   => '',
-                                             'other_php_versions'  => '',
+                                            'ignore_dirs'         => array(),
+                                            'file_extensions'     => array(),
+                                            'project_name'        => '',
+                                            'project_url'         => '',
+                                            'project_vcs'         => '',
+                                            'project_description' => '',
+                                            'project_packagist'   => '',
+                                            'other_php_versions'  => '',
+                                            
+                                            'loader'              => 'Neo4jImport',
                                            );
 
         private static $BOOLEAN_OPTIONS = array(
@@ -125,12 +127,9 @@ class Config {
                                  '-array'     => 'array',
                                  '-dot'       => 'dot',
 
-// Size of the projects
                                  '-nodep'     => 'noDependencies',
                                  '-norefresh' => 'noRefresh',
-                                 '-today'     => 'today',
                                  '-none'      => 'none',
-                                 '-table'     => 'table',
                                  '-text'      => 'text',
                                  '-o'         => 'output',
                                  '-stop'      => 'stop',
@@ -338,6 +337,7 @@ class Config {
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => PHP_VERSION,
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
+                           'loader'             => 'Neo4jimport',
                            );
         
         foreach($defaults as $name => $value) {
@@ -405,6 +405,7 @@ class Config {
                                 '-neo4j_port'   => 'neo4j_port', 
                                 '-neo4j_folder' => 'neo4j_folder', 
                                 '-token_limit'  => 1000000,
+                                '-loader'       => 'Neo4jimport',
                                  );
 
         foreach($optionsValue as $key => $config) {

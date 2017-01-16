@@ -281,6 +281,10 @@ project_reports[] = 'ZendFramework';
 ; Limit the size of a project to 1000 k tokens (about 100 k LOC)
 token_limit = 1000000
 
+; Loader
+loader = Neo4jimport
+;loader = CypherG3
+
 
 INI;
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
