@@ -19,5 +19,5 @@ use A\{ B,
     function D };
 //B, 
 
-echo C, A, B, D, E, \A\A, \PHP_INT_MAX;
+echo C, A, B, D, E, \A\A, \PHP_INT_MAX, F;
 }

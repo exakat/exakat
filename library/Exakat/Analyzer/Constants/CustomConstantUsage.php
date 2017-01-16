@@ -46,14 +46,10 @@ class CustomConstantUsage extends Analyzer {
         $constants = call_user_func_array('array_merge', $c);
         $constants = $this->makeFullNsPath($constants);
 
-        $this->atomIs('Identifier')
-             ->analyzerIs('Constants/ConstantUsage')
-             ->fullnspathIsNot($constants);
-        $this->prepareQuery();
-
         // @note NSnamed are OK by default (may be not always!)
-        $this->atomIs('Nsname')
+        $this->atomIs(array('Identifier', 'Nsname'))
              ->analyzerIs('Constants/ConstantUsage')
+             ->hasIn('DEFINITION')
              ->fullnspathIsNot($constants);
         $this->prepareQuery();
     }

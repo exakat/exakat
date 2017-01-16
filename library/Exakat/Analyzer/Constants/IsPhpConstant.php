@@ -42,7 +42,14 @@ class IsPhpConstant extends Analyzer {
              ->hasNoClassTrait()
              ->outIs('USE')
              ->outIs('NAME')
-             ->fullnspathIs($constantsFNP);
+             ->fullnspathIs($constantsFNP)
+             ->inIs('NAME');
+        $this->prepareQuery();
+
+        $this->atomIs(array('Identifier', 'Nsname'))
+             ->inIs('DEFINITION')
+             ->analyzerIs('self')
+             ->back('first');
         $this->prepareQuery();
     }
 }

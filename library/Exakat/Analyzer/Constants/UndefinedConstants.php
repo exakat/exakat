@@ -27,19 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class UndefinedConstants extends Analyzer {
     public function dependsOn() {
-        return array('Constants/CustomConstantUsage',
+        return array('Constants/ConstantUsage',
                      'Constants/IsExtConstant');
     }
     
     public function analyze() {
-        $this->atomIs('Identifier')
-             ->analyzerIs('Constants/CustomConstantUsage')
-             ->hasNoConstantDefinition()
-             ->analyzerIsNot('Constants/IsExtConstant');
-        $this->prepareQuery();
-
-        $this->atomIs('Nsname')
-             ->analyzerIs('Constants/CustomConstantUsage')
+        $this->atomIs(array('Identifier', 'Nsname'))
+             ->analyzerIs('Constants/ConstantUsage')
+             ->analyzerIsNot('Constants/CustomConstantUsage')
              ->hasNoConstantDefinition()
              ->analyzerIsNot('Constants/IsExtConstant');
         $this->prepareQuery();
