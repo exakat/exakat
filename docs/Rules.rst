@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 16 Jan 2017 16:39:00 +0000
-.. comment: Generation hash : 3cb1ced8ad88c614a5251db866e62e12102a917f
+.. comment: Generation date : Mon, 16 Jan 2017 19:55:02 +0000
+.. comment: Generation hash : 6e6c1ec8321e170c07d863d9a8291f7372629d88
 
 
 .. _$http\_raw\_post\_data:
@@ -1828,6 +1828,45 @@ Starting with PHP 5.6, even array() may be defined as constants.
 +--------------+------------------------------+
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
+
+
+
+.. _could-be-protected-property:
+
+Could Be Protected Property
+###########################
+
+
+Those properties are declared public, but are never used publicly. They may be made protected. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // Public, and used publicly
+       public $publicProperty;
+       // Public, but never used outside the class or its children
+       public $protectedProperty;
+       
+       function bar() {
+           $this->protectedProperty = 1;
+       }
+   }
+   
+   $foo = new Foo();
+   $foo->publicProperty = 3;
+   
+   ?>
+
+
+This property may even be made private.
+
++--------------+----------------------------------+
+| Command Line | Classes/CouldBeProtectedProperty |
++--------------+----------------------------------+
+| Analyzers    | :ref:`Analyze`                   |
++--------------+----------------------------------+
 
 
 
@@ -4360,6 +4399,48 @@ Blocks are also valid syntax that group several instructions together, though th
 +--------------+----------------------+
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
+
+
+
+.. _long-arguments:
+
+Long Arguments
+##############
+
+
+Long arguments should be put in variable, to preserve readability. 
+
+When literal arguments are too long, they `break <http://php.net/manual/en/control-structures.break.php>`_ the hosting structure by moving the next argument too far on the right. Whenever possible, long arguments should be set in a local variable to keep the readability.
+
+.. code-block:: php
+
+   <?php
+   
+   // Now the call to foo() is easier to read.
+   $reallyBigNumber = <<<BIGNUMBER
+   123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+   BIGNUMBER
+   foo($reallyBigNumber, 2, '12345678901234567890123456789012345678901234567890');
+   
+   // where are the next arguments ? 
+   foo('123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', 2, '123456789012345678901234567890123456789012345678901234567890');
+   
+   // This is still difficult to read
+   foo(<<<BIGNUMBER
+   123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+   BIGNUMBER
+   , 2, '123456789012345678901234567890123456789012345678901234567890');
+   
+   ?>
+
+
+Literal strings and heredoc strings, including variables, that are over 50 chars longs are reported here.
+
++--------------+--------------------------+
+| Command Line | Structures/LongArguments |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
 
 
 

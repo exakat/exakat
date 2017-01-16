@@ -274,6 +274,7 @@ List of analyzers, by version of introduction, newest to oldest.
 * 0.9.7
   * Avoid Large Array Assignation (Structures/NoAssignationInFunction)
   * Could Be Protected Property (Classes/CouldBeProtectedProperty)
+  * Long Arguments (Structures/LongArguments)
   * ZendF/ZendTypehinting (ZendF/ZendTypehinting)
 * 0.9.6
   * Fetch One Row Format (Performances/FetchOneRowFormat)

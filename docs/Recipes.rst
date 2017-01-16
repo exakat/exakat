@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 16 Jan 2017 16:39:00 +0000
-.. comment: Generation hash : 3cb1ced8ad88c614a5251db866e62e12102a917f
+.. comment: Generation date : Mon, 16 Jan 2017 19:55:02 +0000
+.. comment: Generation hash : 6e6c1ec8321e170c07d863d9a8291f7372629d88
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 282 analysis
+Total : 284 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -112,6 +112,7 @@ Total : 282 analysis
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
+* :ref:`Could Be Protected Property <could-be-protected-property>`
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Alias <could-use-alias>`
@@ -171,6 +172,7 @@ Total : 282 analysis
 * :ref:`Logical Mistakes <logical-mistakes>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Lone Blocks <lone-blocks>`
+* :ref:`Long Arguments <long-arguments>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Make Global A Property <make-global-a-property>`
