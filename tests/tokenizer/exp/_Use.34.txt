@@ -16,6 +16,8 @@ Label : PROJECT
               use
               Label : USE
                 \
+                Label : DEFINITION
+                  A
                 Label : SUBNAME
                   N
                 Label : SUBNAME
@@ -48,6 +50,8 @@ Label : PROJECT
                 const
               Label : USE
                 \
+                Label : DEFINITION, DEFINITION
+                  C
                 Label : SUBNAME
                   N
                 Label : SUBNAME
@@ -80,6 +84,10 @@ Label : PROJECT
               use
               Label : GROUPUSE
                 \
+                Label : DEFINITION
+                  DF3
+                Label : DEFINITION
+                  DF2
                 Label : SUBNAME
                   N2
                 Label : SUBNAME

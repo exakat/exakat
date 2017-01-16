@@ -46,6 +46,8 @@ Label : PROJECT
                     C
               Label : USE
                 A
+                Label : DEFINITION
+                  A
               Label : USE
                 B
             Label : ELEMENT
