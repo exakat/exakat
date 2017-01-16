@@ -58,7 +58,7 @@ $library_list = join("\n", $library_list);
 $reports_list = array();
 include(__DIR__.'/../../library/Exakat/Reports/Reports.php');
 $reports_list = \Exakat\Reports\Reports::$FORMATS;
-$reports_list = '  *'.join("\n  *", $reports_list)."\n";
+$reports_list = '  * '.join("\n  * ", $reports_list)."\n";
 
 // themes
 /////////////////////////
