@@ -606,11 +606,18 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
         return $this;
     }
 
-    public function isNotHash($property, $hash, $index) {
-        $this->addMethod('filter{ it.get().value("'.$property.'") in ***.'.$index.'}', $hash);
+    public function isHash($property, $hash, $index) {
+        $this->addMethod('filter{ it.get().value("'.$property.'") in ***['.$index.']}', $hash);
         
         return $this;
     }
+
+    public function isNotHash($property, $hash, $index) {
+        $this->addMethod('filter{ !(it.get().value("'.$property.'") in ***['.$index.'])}', $hash);
+        
+        return $this;
+    }
+
     public function isNot($property, $value = true) {
         if ($value === null) {
             $this->addMethod('not(has("'.$property.'", null))');
@@ -1115,7 +1122,7 @@ GREMLIN
         
         return $this;
     }
-    
+
     public function goToFunction() {
         $this->addMethod('repeat(__.in('.$this->linksDown.')).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))');
         
@@ -1151,7 +1158,7 @@ GREMLIN
     }
 
     public function noClassDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").count().is(eq(0)))');
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Class").count().is(eq(0)))');
     
         return $this;
     }
