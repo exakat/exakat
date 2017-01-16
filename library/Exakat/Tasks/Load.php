@@ -87,8 +87,6 @@ class Load extends Tasks {
                             'const'    => array(),
                             'class'    => array());
 
-    private $usesDefinitions = array();
-
     private $filename   = null;
     private $line       = 0;
 
@@ -177,34 +175,34 @@ class Load extends Tasks {
                    );
     
     static public $TOKENNAMES = array(
-                         ';'  => '\Exakat\Tasks\T_SEMICOLON',
-                         '+'  => '\Exakat\Tasks\T_PLUS',
-                         '-'  => '\Exakat\Tasks\T_MINUS',
-                         '/'  => '\Exakat\Tasks\T_SLASH',
-                         '*'  => '\Exakat\Tasks\T_STAR',
-                         '.'  => '\Exakat\Tasks\T_DOT',
-                         '['  => '\Exakat\Tasks\T_OPEN_BRACKET',
-                         ']'  => '\Exakat\Tasks\T_CLOSE_BRACKET',
-                         '('  => '\Exakat\Tasks\T_OPEN_PARENTHESIS',
-                         ')'  => '\Exakat\Tasks\T_CLOSE_PARENTHESIS',
-                         '{'  => '\Exakat\Tasks\T_OPEN_CURLY',
-                         '}'  => '\Exakat\Tasks\T_CLOSE_CURLY',
-                         '='  => '\Exakat\Tasks\T_EQUAL',
-                         ','  => '\Exakat\Tasks\T_COMMA',
-                         '!'  => '\Exakat\Tasks\T_BANG',
-                         '~'  => '\Exakat\Tasks\T_TILDE',
-                         '@'  => '\Exakat\Tasks\T_AT',
-                         '?'  => '\Exakat\Tasks\T_QUESTION',
-                         ':'  => '\Exakat\Tasks\T_COLON',
-                         '<'  => '\Exakat\Tasks\T_SMALLER',
-                         '>'  => '\Exakat\Tasks\T_GREATER',
-                         '%'  => '\Exakat\Tasks\T_PERCENTAGE',
-                         '"'  => '\Exakat\Tasks\T_QUOTE',
-                         '$'  => '\Exakat\Tasks\T_DOLLAR',
-                         '&'  => '\Exakat\Tasks\T_AND',
-                         '|'  => '\Exakat\Tasks\T_PIPE',
-                         '^'  => '\Exakat\Tasks\T_CARET',
-                         '`'  => '\Exakat\Tasks\T_BACKTICK',
+                         ';'  => 'T_SEMICOLON',
+                         '+'  => 'T_PLUS',
+                         '-'  => 'T_MINUS',
+                         '/'  => 'T_SLASH',
+                         '*'  => 'T_STAR',
+                         '.'  => 'T_DOT',
+                         '['  => 'T_OPEN_BRACKET',
+                         ']'  => 'T_CLOSE_BRACKET',
+                         '('  => 'T_OPEN_PARENTHESIS',
+                         ')'  => 'T_CLOSE_PARENTHESIS',
+                         '{'  => 'T_OPEN_CURLY',
+                         '}'  => 'T_CLOSE_CURLY',
+                         '='  => 'T_EQUAL',
+                         ','  => 'T_COMMA',
+                         '!'  => 'T_BANG',
+                         '~'  => 'T_TILDE',
+                         '@'  => 'T_AT',
+                         '?'  => 'T_QUESTION',
+                         ':'  => 'T_COLON',
+                         '<'  => 'T_SMALLER',
+                         '>'  => 'T_GREATER',
+                         '%'  => 'T_PERCENTAGE',
+                         '"'  => 'T_QUOTE',
+                         '$'  => 'T_DOLLAR',
+                         '&'  => 'T_AND',
+                         '|'  => 'T_PIPE',
+                         '^'  => 'T_CARET',
+                         '`'  => 'T_BACKTICK',
                    );
     private $expressions = array();
     private $atoms = array();
@@ -441,7 +439,7 @@ class Load extends Tasks {
         $this->setAtom($this->id0, array('code'     => 'Whole',
                                          'fullcode' => $this->config->project,
                                          'line'     => -1,
-                                         'token'    => '\Exakat\Tasks\T_WHOLE'));
+                                         'token'    => 'T_WHOLE'));
         
         if (static::$client === null) {
             static::$client = new CypherG3();
@@ -521,9 +519,8 @@ class Load extends Tasks {
         }
         Files::findFiles($dir, $files, $ignoredFiles);
 
-        $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
-        $this->links = array();
-
+        $this->reset();
+        
         $nbTokens = 0;
         foreach($files as $file) {
             try {
@@ -539,6 +536,25 @@ class Load extends Tasks {
 
         return array('files'  => count($files), 
                      'tokens' => $nbTokens);
+    }
+    
+    private function reset() {
+        $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
+        $this->links = array();
+        $this->uses = array('function' => array(),
+                            'const'    => array(),
+                            'class'    => array());;
+        $this->usesId = array('function' => array(),
+                              'const'    => array(),
+                              'class'    => array());;
+        $this->contexts = $contexts = array(self::CONTEXT_CLASS      => false,
+                                            self::CONTEXT_INTERFACE  => false,
+                                            self::CONTEXT_TRAIT      => false,
+                                            self::CONTEXT_FUNCTION   => false,
+                                            self::CONTEXT_NEW        => false,
+                                            self::CONTEXT_NOSEQUENCE => 0,
+                         );
+        $this->expressions = array();
     }
 
     private function processFile($filename) {
@@ -573,7 +589,7 @@ class Load extends Tasks {
         if (count($tokens) === 1) {
             throw new NoFileToProcess($filename, 'empty');
         }
-        
+
         $line = 0;
         $this->tokens = array();
         foreach($tokens as $t) {
@@ -599,11 +615,18 @@ class Load extends Tasks {
                                 2 => $line);
         unset($tokens);
 
+        $this->uses   = array('function' => array(),
+                              'const'    => array(),
+                              'class'    => array());
+        $this->usesId   = array('function' => array(),
+                                'const'    => array(),
+                                'class'    => array());
+
         $id1 = $this->addAtom('File');
         $this->setAtom($id1, array('code'     => $filename,
                                    'fullcode' => $file,
                                    'line'     => -1,
-                                   'token'    => '\Exakat\Tasks\T_FILENAME'));
+                                   'token'    => 'T_FILENAME'));
         $this->addLink($this->id0, $id1, 'PROJECT');
         
         try {
@@ -626,15 +649,7 @@ class Load extends Tasks {
             $this->setAtom($sequenceId, array('root' => true));
             $this->checkTokens($filename);
         } catch (LoadError $e) {
-            $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
-            $this->links = array();
-            $this->contexts = $contexts = array(self::CONTEXT_CLASS      => false,
-                              self::CONTEXT_INTERFACE  => false,
-                              self::CONTEXT_TRAIT      => false,
-                              self::CONTEXT_FUNCTION   => false,
-                              self::CONTEXT_NEW        => false,
-                              self::CONTEXT_NOSEQUENCE => 0,
-                         );
+            $this->reset();
             throw new NoFileToProcess($filename, 'empty');
         }
 
@@ -647,7 +662,7 @@ class Load extends Tasks {
        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_END ||
             !isset($this->processing[ $this->tokens[$this->id][0] ])) {
             if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_END) {
-                print "\Exakat\Tasks\T_END\n";
+                print "T_END\n";
             } else {
                 print "Load ({$this->id}) : {$this->tokens[$this->id][1]}\n{$this->tokens[$this->id][0]}/".\Exakat\Tasks\T_STRING."/".\Exakat\Tasks\T_STRING."\n";
             }
@@ -1351,7 +1366,7 @@ class Load extends Tasks {
         $this->setAtom($functioncallId, array('code'       => $this->atoms[$echoId]['code'],
                                               'fullcode'   => '<?= ' . $this->atoms[$argumentsId]['fullcode'],
                                               'line'       => $this->tokens[$current === -1 ? 0 : $current][2],
-                                              'token'      => '\Exakat\Tasks\T_OPEN_TAG_WITH_ECHO',
+                                              'token'      => 'T_OPEN_TAG_WITH_ECHO',
                                               'variadic'   => false,
                                               'fullnspath' => '\\echo' ));
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
@@ -1585,7 +1600,7 @@ class Load extends Tasks {
             $this->setAtom($argumentsId, array('code'     => $this->tokens[$current][1],
                                                'fullcode' => implode(', ', $fullcode),
                                                'line'     => $this->tokens[$current][2],
-                                               'token'    => '\Exakat\Tasks\T_COMMA',
+                                               'token'    => 'T_COMMA',
                                                'count'    => $rank + 1,
                                                'args_max' => $args_max,
                                                'args_min' => $args_min));
@@ -2580,7 +2595,7 @@ class Load extends Tasks {
         $this->setAtom($parentheseId, array('code'     => '(',
                                             'fullcode' => '(' . $this->atoms[$indexId]['fullcode'] . ')',
                                             'line'     => $this->tokens[$this->id][2],
-                                            'token'    => '\Exakat\Tasks\T_OPEN_PARENTHESIS' ));
+                                            'token'    => 'T_OPEN_PARENTHESIS' ));
         $this->pushExpression($parentheseId);
         ++$this->id; // Skipping the )
 
@@ -2717,7 +2732,7 @@ class Load extends Tasks {
                                  ($this->atoms[$thenId]['atom'] === 'Void' ? '' : ' '.$this->atoms[$thenId]['fullcode'].' ' ). ': ' .
                                  $this->atoms[$elseId]['fullcode'],
                    'line'     => $this->tokens[$current][2],
-                   'token'    => '\Exakat\Tasks\T_QUESTION');
+                   'token'    => 'T_QUESTION');
         $this->setAtom($ternaryId, $x);
 
         $this->pushExpression($ternaryId);
@@ -3555,7 +3570,7 @@ class Load extends Tasks {
         }
         $this->exitContext();
 
-        if ($this->atoms[$right]['token'] === '\Exakat\Tasks\T_CLASS') {
+        if ($this->atoms[$right]['token'] === 'T_CLASS') {
             $staticId = $this->addAtom('Staticclass');
             $links = 'CLASS';
         } elseif ($this->atoms[$right]['atom'] === 'Identifier') {
@@ -3990,6 +4005,9 @@ class Load extends Tasks {
 
     private function addLink($origin, $destination, $label) {
         $o = $this->atoms[$origin]['atom'];
+        if (!isset($this->atoms[$destination]['atom'])) {
+            debug_print_backtrace();
+        }
         $d = $this->atoms[$destination]['atom'];
         
         if (!isset($this->links[$label]))         { $this->links[$label]= array(); }
@@ -4091,8 +4109,7 @@ class Load extends Tasks {
     private function saveFiles() {
         self::$client->saveFiles($this->exakatDir, $this->atoms, $this->links, $this->id0);
 
-        $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
-        $this->links = array();
+        $this->reset();
     }
 
     private function saveDefinitions() {
@@ -4138,7 +4155,7 @@ class Load extends Tasks {
         $this->setAtom($this->sequence, array('code'     => ';',
                                               'fullcode' => ' '.self::FULLCODE_SEQUENCE.' ',
                                               'line'     => $this->tokens[$this->id][2],
-                                              'token'    => '\Exakat\Tasks\T_SEMICOLON',
+                                              'token'    => 'T_SEMICOLON',
                                               'bracket'  => false));
         
         $this->sequences[]    = $this->sequence;
@@ -4176,7 +4193,7 @@ class Load extends Tasks {
         } elseif (!in_array($this->atoms[$nameId]['atom'], array('Nsname', 'Identifier', 'String'))) {
             // No fullnamespace for non literal namespaces
             return array('', 0);
-        } elseif (in_array($this->atoms[$nameId]['token'], array('\Exakat\Tasks\T_STATIC', '\Exakat\Tasks\T_ARRAY', '\Exakat\Tasks\T_EVAL', '\Exakat\Tasks\T_ISSET', '\Exakat\Tasks\T_EXIT', '\Exakat\Tasks\T_UNSET', '\Exakat\Tasks\T_ECHO', '\Exakat\Tasks\T_PRINT', '\Exakat\Tasks\T_LIST', '\Exakat\Tasks\T_EMPTY'))) {
+        } elseif (in_array($this->atoms[$nameId]['token'], array('T_STATIC', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
             // For language structures, it is always in global space, like eval or list
             return array('\\'.strtolower($this->atoms[$nameId]['code']), 0);
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
@@ -4247,6 +4264,9 @@ class Load extends Tasks {
             $this->uses = array('function' => array(),
                                 'const'    => array(),
                                 'class'    => array());
+            $this->usesId = array('function' => array(),
+                                  'const'    => array(),
+                                  'class'    => array());
         } elseif ($this->atoms[$namespaceId]['atom'] === 'Void') {
             $this->namespace = '\\';
         } else {
