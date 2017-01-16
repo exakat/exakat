@@ -161,8 +161,6 @@ class Project extends Tasks {
                 $analyze->run();
                 unset($analyze);
                 
-                rename($this->config->projects_root.'/projects/'.$project.'/log/analyze.log', $this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
-
                 Config::pop();
 
                 $args = array ( 1 => 'dump',
