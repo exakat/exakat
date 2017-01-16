@@ -30,6 +30,7 @@ use Exakat\Exceptions\MustBeADir;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchFile;
+use Exakat\Exceptions\NoSuchLoader;
 use Exakat\Loader\CypherG3;
 use Exakat\Loader\Neo4jImport;
 use Exakat\Loader\GremlinServerNeo4j;
@@ -447,7 +448,7 @@ class Load extends Tasks {
             $client = $this->config->loader;
             
             if (!in_array($client, $this->loaderList)) {
-                throw new NoSuchLoad($client, $this->loaderList);
+                throw new NoSuchLoader($client, $this->loaderList);
             }
             
             display("Loading with $client\n");
