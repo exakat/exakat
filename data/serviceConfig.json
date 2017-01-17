@@ -69,6 +69,8 @@
               "file":[".phpswitch.yml"]},
  "phpunit":{"homepage":"https://phpunit.de/",
            "file":["phpunit.xml.dist"]},
+ "psalm":{"homepage":"https://getpsalm.org/",
+           "file":["psalm.xml"]},
  "robo":{"homepage":"https://robo.li/",
          "file":["RoboFile.php"]},
  "scrutinizer":{"homepage":"https://scrutinizer-ci.com/",
