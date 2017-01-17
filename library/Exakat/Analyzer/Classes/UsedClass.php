@@ -114,7 +114,7 @@ g.V().hasLabel("String").where( __.out("CONCAT").count().is(eq(0)) )
                         .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
 GREMLIN
 );
-        $strings = $this->makeFullnspath($strings);
+        $strings = $this->makeFullNsPath($strings);
         if (!empty($strings)) {
             $this->atomIs('Class')
                  ->fullnspathIs($strings)
@@ -130,7 +130,7 @@ g.V().hasLabel("Functioncall").out("ARGUMENTS").out("ARGUMENT")
         .has("count", 2).out("ARGUMENT").has("rank", 0).values("noDelimiter").unique()
 GREMLIN
 );
-        $arrays = $this->makeFullnspath($arrays);
+        $arrays = $this->makeFullNsPath($arrays);
         
         if (!empty($arrays)) {
             $this->atomIs('Class')

@@ -2,6 +2,7 @@
 
 class y {
     public function __construct($a) {}
+    public function b($a) {}
 
 }
 
@@ -11,6 +12,7 @@ class x extends y {
         parent::__construct($a);
         
         self::b();
+        y::b();
         UndefinedClass::Yes();
     }
     

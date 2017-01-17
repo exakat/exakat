@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 09 Jan 2017 17:00:17 +0000
-.. comment: Generation hash : 653ff5d38cb66269a9f516d51dc82cefce68dc88
+.. comment: Generation date : Mon, 16 Jan 2017 19:55:02 +0000
+.. comment: Generation hash : 6e6c1ec8321e170c07d863d9a8291f7372629d88
 
 
 .. _$http\_raw\_post\_data:
@@ -651,6 +651,85 @@ Default values will save some instructions in the constructor, and makes the val
 +--------------+---------------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                                            |
 +--------------+---------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _avoid-large-array-assignation:
+
+Avoid Large Array Assignation
+#############################
+
+
+Avoid setting large arrays to local variables. This is done everytime the function is called.
+
+There are different ways to avoid this : inject the array, build the array once. Using an constant or even a global variable is faster.
+
+The effect on small arrays (less than 10 elements) is not significant. Arrays with 10 elements or more are reported here. The effect is also more important on functions that are called often, or within loops.
+
+.. code-block:: php
+
+   <?php
+   
+   // with constants, for functions
+   const ARRAY = array(1,2,3,4,5,6,7,8,9,10,11);
+   function foo() {
+       $array = ARRAY;
+       //more code
+   }
+   
+   // with class constants, for methods 
+   class x {
+       const ARRAY = array(1,2,3,4,5,6,7,8,9,10,11);
+       function foo() {
+           $array = self::ARRAY;
+           //more code
+       }
+   }
+   
+   // with properties, for methods 
+   class x {
+       private $array = array(1,2,3,4,5,6,7,8,9,10,11);
+       
+       function foo() {
+           $array = $this->array;
+           //more code
+       }
+   }
+   
+   // injection, leveraging default values
+   function foo($array = array(1,2,3,4,5,6,7,8,9,10,11)) {
+       //more code
+   }
+   
+   // local cache with static
+   function foo() {
+       static $array;
+       if ($array === null) {
+           $array = array(1,2,3,4,5,6,7,8,9,10,11);
+       }
+       
+       //more code
+   }
+   
+   // Avoid creating the same array all the time in a function
+   class x {
+       function foo() {
+           // assign to non local variable is OK. 
+           // Here, to a property, though it may be better in a __construct or as default values
+           $this->s = array(1,2,3,4,5,6,7,8,9,10,11);
+   
+           // This is wasting resources, as it is done each time. 
+           $array = array(1,2,3,4,5,6,7,8,9,10,11);
+       }
+   }
+   
+   ?>
+
++--------------+------------------------------------+
+| Command Line | Structures/NoAssignationInFunction |
++--------------+------------------------------------+
+| Analyzers    | :ref:`Performances`                |
++--------------+------------------------------------+
 
 
 
@@ -1752,6 +1831,45 @@ Starting with PHP 5.6, even array() may be defined as constants.
 
 
 
+.. _could-be-protected-property:
+
+Could Be Protected Property
+###########################
+
+
+Those properties are declared public, but are never used publicly. They may be made protected. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // Public, and used publicly
+       public $publicProperty;
+       // Public, but never used outside the class or its children
+       public $protectedProperty;
+       
+       function bar() {
+           $this->protectedProperty = 1;
+       }
+   }
+   
+   $foo = new Foo();
+   $foo->publicProperty = 3;
+   
+   ?>
+
+
+This property may even be made private.
+
++--------------+----------------------------------+
+| Command Line | Classes/CouldBeProtectedProperty |
++--------------+----------------------------------+
+| Analyzers    | :ref:`Analyze`                   |
++--------------+----------------------------------+
+
+
+
 .. _could-be-static:
 
 Could Be Static
@@ -2410,34 +2528,6 @@ instead of
 
 
 
-.. _echo-with-concatenation:
-
-Echo With Concatenation
-#######################
-
-
-Echo accepts an arbitrary number of argument, and will automatically concatenate all incoming arguments. It is not necessary to concatenate values when calling echo and it will save a few commands.
-
-.. code-block:: php
-
-   <?php
-     // Do
-     echo 'a', $b, $c, ' def';
-     
-     // Don't
-     echo 'a'.$b.$c def;
-   ?>
-
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/EchoArguments                                                                                                              |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| clearPHP     | `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__ |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Performances`                                                                                                                   |
-+--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-
-
-
 .. _else-if-versus-elseif:
 
 Else If Versus Elseif
@@ -3030,13 +3120,28 @@ This is true with any kind of functioncall that returns the same value throughou
 
 
 
-.. _foreach-dont-change-pointer:
+.. _foreach-don't-change-pointer:
 
-Foreach Dont Change Pointer
-###########################
+Foreach Don't Change Pointer
+############################
 
 
-In PHP 7.0, the foreach loop won't change the internal pointer of the array, but will work on a copy. So, applying array pointer's functions such as current or next to the source array won't have the same behavior than in PHP 5.
+In PHP 7.0, the foreach loop won't change the internal pointer of the array, but will work on a copy. So, applying array pointer's functions such as current() or next() to the source array won't have the same behavior than in PHP 5.
+
+This anly applies when a `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ by reference is used.
+
+.. code-block:: php
+
+   <?php
+   
+   $numbers = range(1, 10);
+   next($numbers);
+   foreach($numbers as &$number){
+       print $number;
+       print current($numbers).\n; // Always 
+   }
+   
+   ?>
 
 +--------------+-----------------------------------------------------+
 | Command Line | Php/ForeachDontChangePointer                        |
@@ -4294,6 +4399,48 @@ Blocks are also valid syntax that group several instructions together, though th
 +--------------+----------------------+
 | Analyzers    | :ref:`Analyze`       |
 +--------------+----------------------+
+
+
+
+.. _long-arguments:
+
+Long Arguments
+##############
+
+
+Long arguments should be put in variable, to preserve readability. 
+
+When literal arguments are too long, they `break <http://php.net/manual/en/control-structures.break.php>`_ the hosting structure by moving the next argument too far on the right. Whenever possible, long arguments should be set in a local variable to keep the readability.
+
+.. code-block:: php
+
+   <?php
+   
+   // Now the call to foo() is easier to read.
+   $reallyBigNumber = <<<BIGNUMBER
+   123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+   BIGNUMBER
+   foo($reallyBigNumber, 2, '12345678901234567890123456789012345678901234567890');
+   
+   // where are the next arguments ? 
+   foo('123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', 2, '123456789012345678901234567890123456789012345678901234567890');
+   
+   // This is still difficult to read
+   foo(<<<BIGNUMBER
+   123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
+   BIGNUMBER
+   , 2, '123456789012345678901234567890123456789012345678901234567890');
+   
+   ?>
+
+
+Literal strings and heredoc strings, including variables, that are over 50 chars longs are reported here.
+
++--------------+--------------------------+
+| Command Line | Structures/LongArguments |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
 
 
 
@@ -6655,6 +6802,8 @@ This analysis skips scandir() and glob() if they are explicitely configured with
 
 Glob() accepts wildchar, that may not easily replaced with scandir() or opendir().
 
+See also : https://www.phparch.com/2010/04/putting-glob-to-the-test/;
+
 +--------------+---------------------+
 | Command Line | Performances/NoGlob |
 +--------------+---------------------+
@@ -6966,7 +7115,34 @@ Property Used Below
 
 Mark properties that are used in children classes.
 
-This doesn't mark the current class, nor the parent ones.
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // This property is used in children
+       protected protectedProperty = 1;
+       
+       // This property is not used in children
+       protected localProtectedProperty = 1;
+   
+       private function foobar() {
+           // protectedProperty is used here, but defined in parent
+           $this->localProtectedProperty = 3;
+       }
+   }
+   
+   class foofoo extends foo {
+       private function bar() {
+           // protectedProperty is used here, but defined in parent
+           $this->protectedProperty = 3;
+       }
+   }
+   
+   ?>
+
+
+This doesn't mark the current class, nor the (grand-)parent ones.
 
 +--------------+---------------------------+
 | Command Line | Classes/PropertyUsedBelow |
@@ -9605,7 +9781,42 @@ Unused Protected Methods
 
 The following methods are protected, and may be used in the current class or any of its children. 
 
-No usage of those methods were found.
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // This method is not used
+       protected function unusedBar() {}
+       protected function usedInFoo() {}
+       protected function usedInFooFoo() {}
+       
+       public function bar2() {
+           // some code
+           $this->usedInFoo();
+       }
+   }
+   
+   class foofoo extends foo {
+       protected function bar() {}
+       
+       public function bar2() {
+           // some code
+           $this->usedInFooFoo();
+       }
+   }
+   
+   class someOtherClass {
+       protected function bar() {
+           // This is not related to foo.
+           $this->unusedbar();
+       }
+   }
+   
+   ?>
+
+
+No usage of those methods were found. This analysis is impacted by dynamic method calls.
 
 +--------------+--------------------------------+
 | Command Line | Classes/UnusedProtectedMethods |

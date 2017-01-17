@@ -35,7 +35,6 @@ class ThrowFunctioncall extends Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIs('Functioncall')
              ->hasNoFunctionDefinition()
-//             ->hasClassDefinition()
              ->back('first');
         $this->prepareQuery();
 
@@ -43,7 +42,7 @@ class ThrowFunctioncall extends Analyzer {
         $this->atomIs('Throw')
              ->outIs('THROW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
+             ->atomIsNot(array('Array', 'Functioncall'))
              ->fullnspathIs($phpClassesFnp)
              ->back('first');
         $this->prepareQuery();

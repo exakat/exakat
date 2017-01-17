@@ -29,7 +29,7 @@ if (file_exists('NEWS.txt')) {
 print "found ".strlen($changelog)." changelog\n";
 
 $exts = array('php_functions', 'session', 'pgsql', 'filter', 'openssl', 'exif', 'mbstring', 'gmp', 'xml');
-$functions = [];
+$functions = array();
 foreach($exts as $ext) {
     $sf = parse_ini_file('data/'.$ext.'.ini');
     $functions[] = implode('|', $sf['functions']);

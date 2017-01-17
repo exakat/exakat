@@ -32,10 +32,6 @@ class Text extends Reports {
                                   'CompatibilityPHP70', 'CompatibilityPHP71',
                                   '"Dead code"', 'Security', 'Analyze');
 
-    public function generateFileReport($report) {
-        return false;
-    }
-
     public function generate($folder, $name = self::FILE_FILENAME) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';

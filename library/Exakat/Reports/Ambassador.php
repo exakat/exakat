@@ -24,14 +24,13 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Docs;
-use Exakat\Datastore;
 use Exakat\Data\Methods;
 use Exakat\Exakat;
 use Exakat\Phpexec;
 use Exakat\Reports\Reports;
 
 class Ambassador extends Reports {
-    const FILE_FILENAME  = 'ambassador';
+    const FILE_FILENAME  = 'report';
 
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
@@ -109,10 +108,6 @@ class Ambassador extends Reports {
 
     private function injectBloc($html, $bloc, $content) {
         return str_replace("{{" . $bloc . "}}", $content, $html);
-    }
-
-    public function generateFileReport($report) {
-        
     }
 
     public function generate($folder, $name = 'report') {
@@ -2543,7 +2538,7 @@ JAVASCRIPT;
         // collecting information for Composer
         if (isset($sources['Composer/PackagesNames'])) {
             $data['Composer Packages'] = array();
-            $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
+            $res = $this->sqlite->query('SELECT fullcode FROM results WHERE analyzer = "Composer/PackagesNames"');
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $data['Composer Packages'][] = $row['fullcode'];
             }

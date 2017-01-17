@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 09 Jan 2017 17:00:17 +0000
-.. comment: Generation hash : 653ff5d38cb66269a9f516d51dc82cefce68dc88
+.. comment: Generation date : Mon, 16 Jan 2017 19:55:02 +0000
+.. comment: Generation hash : 6e6c1ec8321e170c07d863d9a8291f7372629d88
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 282 analysis
+Total : 284 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -112,6 +112,7 @@ Total : 282 analysis
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
+* :ref:`Could Be Protected Property <could-be-protected-property>`
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Alias <could-use-alias>`
@@ -171,6 +172,7 @@ Total : 282 analysis
 * :ref:`Logical Mistakes <logical-mistakes>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
 * :ref:`Lone Blocks <lone-blocks>`
+* :ref:`Long Arguments <long-arguments>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Make Global A Property <make-global-a-property>`
@@ -604,7 +606,7 @@ Total : 34 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
-* :ref:`Foreach Dont Change Pointer <foreach-dont-change-pointer>`
+* :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
@@ -646,7 +648,7 @@ Total : 45 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
-* :ref:`Foreach Dont Change Pointer <foreach-dont-change-pointer>`
+* :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`List With Appends <list-with-appends>`
@@ -745,10 +747,10 @@ Performances
 
 Total : 23 analysis
 
+* :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
-* :ref:`Echo With Concatenation <echo-with-concatenation>`
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Fetch One Row Format <fetch-one-row-format>`
 * :ref:`For Using Functioncall <for-using-functioncall>`

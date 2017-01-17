@@ -20,26 +20,20 @@
  *
 */
 
-
 namespace Exakat\Analyzer\Structures;
 
 use Exakat\Analyzer\Analyzer;
 
-class EchoArguments extends Analyzer {
+class LongArguments extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs('\\echo')
+        // foo('123456789012345678901234567890123456789012345678901234567890 (50)');
+        $this->atomIs('Functioncall')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Concatenation')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomFunctionIs('\\echo')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('String')
-             ->hasOut('CONCAT')
-             ->back('first');
+             ->atomIs(array('String', 'Heredoc'))
+             ->fullcodeLength(' > 50')
+             ->back('first')
+             ->inIsIE('METHOD');
         $this->prepareQuery();
     }
 }

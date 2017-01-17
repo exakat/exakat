@@ -100,6 +100,7 @@ Glossary
       + :ref:`Break With 0 <break-with-0>`
       + :ref:`Break With Non Integer <break-with-non-integer>`
       + :ref:`Exit() Usage <exit()-usage>`
+      + :ref:`Long Arguments <long-arguments>`
       + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch Without Default <switch-without-default>`
@@ -299,6 +300,7 @@ Glossary
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
+      + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
       + :ref:`No Direct Usage <no-direct-usage>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
@@ -553,6 +555,7 @@ Glossary
     + `time`
 
       + :ref:`Assign Default To Properties <assign-default-to-properties>`
+      + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
       + :ref:`Avoid Parenthesis <avoid-parenthesis>`
       + :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
       + :ref:`Class Name Case Difference <class-name-case-difference>`
@@ -661,6 +664,7 @@ Glossary
 
       + :ref:`Anonymous Classes <anonymous-classes>`
       + :ref:`Assign Default To Properties <assign-default-to-properties>`
+      + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`

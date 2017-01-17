@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class TestClass extends Analyzer {
     public function analyze() {
         $testClasses =  $this->loadIni('php_unittest.ini', 'classes');
-        $testClasses =  $this->makeFullNSPath($testClasses);
+        $testClasses =  $this->makeFullNsPath($testClasses);
     
         $this->atomIs('Class')
              ->outIs('EXTENDS')
@@ -36,20 +36,10 @@ class TestClass extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-// second level of heritage
+        // all children level of heritage
         $this->atomIs('Class')
-             ->outIs('EXTENDS')
-             ->classDefinition()
              ->analyzerIs('self')
-             ->back('first');
-        $this->prepareQuery();
-
-// third level of heritage
-        $this->atomIs('Class')
-             ->outIs('EXTENDS')
-             ->classDefinition()
-             ->analyzerIs('self')
-             ->back('first');
+             ->goToAllChildren();
         $this->prepareQuery();
     }
 }

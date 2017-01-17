@@ -31,76 +31,42 @@ class IsComposerNsname extends Analyzer {
         $data = new Composer();
 
         $packagistNamespaces = $data->getComposerNamespaces();
-        $packagistNamespacesFullNS = $this->makeFullNSPath($packagistNamespaces);
+        $packagistNamespacesFullNS = $this->makeFullNsPath($packagistNamespaces);
 
         $packagistClasses = $data->getComposerClasses();
-        $packagistClassesFullNS = $this->makeFullNSPath($packagistClasses);
-        // Chunks is made to shorten the queries
-        $packagistClassesFullNSChunks = array_chunk($packagistClassesFullNS, 5000);
+        $packagistClassesFullNS = $this->makeFullNsPath($packagistClasses);
 
         $packagistInterfaces = $data->getComposerInterfaces();
-        $packagistInterfacesFullNs = $this->makeFullNSPath($packagistInterfaces);
+        $packagistInterfacesFullNs = $this->makeFullNsPath($packagistInterfaces);
+
+        $packagistTraits = $data->getComposerTraits();
+        $packagistTraitsFullNs = $this->makeFullNsPath($packagistTraits);
 
         ////////////////////////////////////////////////
         // Use
         // namespaces in Composer
         $this->atomIs('Use')
              ->outIs('USE')
-             ->is('originpath', $packagistNamespacesFullNS);
-        $this->prepareQuery();
-
-        // classes in Composer
-        foreach($packagistClassesFullNSChunks as $id => $p) {
-            $this->atomIs('Use')
-                 ->outIs('USE')
-                 ->is('originpath', $p);
-            $this->prepareQuery();
-        }
-
-        // interfaces in Composer
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->is('originpath', $packagistInterfaces);
-        $this->prepareQuery();
-
-        // traits in Composer
-        $packagistTraits = $data->getComposerTraits();
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->is('originpath', $packagistTraits);
+             ->is('originpath', array_merge($packagistNamespacesFullNS, $packagistClassesFullNS, $packagistInterfacesFullNs, $packagistTraitsFullNs));
         $this->prepareQuery();
 
         ////////////////////////////////////////////////
         // Classes extends or implements
         // Classes in Composer
-        foreach($packagistClassesFullNSChunks as $id => $p) {
-            $this->atomIs('Class')
-                 ->outIs(array('IMPLEMENTS', 'EXTENDS'))
-                 ->fullnspathIs($p);
-            $this->prepareQuery();
-        }
-
         $this->atomIs('Class')
              ->outIs(array('IMPLEMENTS', 'EXTENDS'))
-             ->fullnspathIs($packagistInterfacesFullNs);
+             ->fullnspathIs(array_merge($packagistInterfacesFullNs, $packagistClassesFullNS));
         $this->prepareQuery();
 
         ////////////////////////////////////////////////
         // Instanceof
         // Classes or interfaces in Composer
-        foreach($packagistClassesFullNSChunks as $id => $p) {
-            $this->atomIs('Instanceof')
-                 ->outIs('CLASS')
-                 ->atomIs(array('Nsname', 'Identifier'))
-                 ->fullnspathIs($p);
-            $this->prepareQuery();
-        }
-
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-                 ->atomIs(array('Nsname', 'Identifier'))
+             ->atomIs(array('Nsname', 'Identifier'))
              ->fullnspathIs($packagistInterfacesFullNs);
         $this->prepareQuery();
+
     }
 }
 

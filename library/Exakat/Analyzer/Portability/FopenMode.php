@@ -37,6 +37,7 @@ class FopenMode extends Analyzer {
         $this->atomFunctionIs('\\fopen')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
+             ->regexIs('code', 'b')
              ->regexIs('code', 't')
              ->back('first');
         $this->prepareQuery();

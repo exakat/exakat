@@ -33,19 +33,19 @@ class DefinedConstants extends Analyzer {
     }
     
     public function analyze() {
-        $containsConstantDefinition = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").out("NAME").filter{ it.get().value("code").toLowerCase() == constante.toLowerCase(); }.count().is(neq(0)) )';
+        $containsConstantDefinition = <<<GREMLIN
+where( __.out("BLOCK")
+         .out("ELEMENT")
+         .hasLabel("Const")
+         .out("CONST")
+         .out("NAME")
+         .filter{ it.get().value("code").toLowerCase() == constante.toLowerCase(); }
+         .count()
+         .is(neq(0)) 
+    )
+GREMLIN;
 
         // constants defined at the class level
-        $this->atomIs('Staticconstant')
-             ->outIs('CONSTANT')
-             ->savePropertyAs('code', 'constante')
-             ->inIs('CONSTANT')
-             ->outIs('CLASS')
-             ->classDefinition()
-             ->raw($containsConstantDefinition)
-             ->back('first');
-        $this->prepareQuery();
-
         // constants defined at the parents level
         // This includes interfaces
         $this->atomIs('Staticconstant')
@@ -54,7 +54,7 @@ class DefinedConstants extends Analyzer {
              ->inIs('CONSTANT')
              ->outIs('CLASS')
              ->classDefinition()
-             ->goToAllParents()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->raw($containsConstantDefinition)
              ->back('first');
         $this->prepareQuery();

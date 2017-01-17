@@ -33,21 +33,6 @@ class ZendInterfaces extends Analyzer {
              ->outIs(array('IMPLEMENTS', 'EXTENDS'))
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
-
-        // In Instanceof
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'))
-             ->regexIs('fullnspath', $regex);
-        $this->prepareQuery();
-
-        // In Typehint
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT')
-             ->regexIs('fullnspath', $regex);
-        $this->prepareQuery();
     }
 }
 

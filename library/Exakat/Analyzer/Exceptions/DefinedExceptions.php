@@ -37,15 +37,11 @@ class DefinedExceptions extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // second to fifth level
-        for($i = 0; $i < 4; ++$i) {
-            $this->atomIs('Class')
-                 ->outIs('EXTENDS')
-                 ->classDefinition()
-                 ->analyzerIs('self')
-                 ->back('first');
-            $this->prepareQuery();
-        }
+        // all children level of heritage
+        $this->atomIs('Class')
+             ->analyzerIs('self')
+             ->goToAllChildren();
+        $this->prepareQuery();
     }
 }
 

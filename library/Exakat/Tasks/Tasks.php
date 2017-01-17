@@ -31,7 +31,7 @@ use Exakat\Log;
 
 abstract class Tasks {
     protected $log        = null;
-    protected $enabledLog = true;
+    protected $logname    = self::LOG_AUTONAMING;
     protected $datastore  = null;
 
     protected $gremlin    = null;
@@ -51,6 +51,9 @@ abstract class Tasks {
     
     const IS_SUBTASK     = true;
     const IS_NOT_SUBTASK = false;
+    
+    const LOG_NONE = null;
+    const LOG_AUTONAMING = '';
     
     public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
         $this->gremlin = $gremlin;
@@ -78,11 +81,16 @@ abstract class Tasks {
                 }
             } 
         } 
-                
-        if ($this->enabledLog) {
+
+        if ($this->logname === self::LOG_AUTONAMING) {
             $a = get_class($this);
-            $task = strtolower(substr($a, strrpos($a, '\\') + 1));
-            $this->log = new Log($task,
+            $this->logname = strtolower(substr($a, strrpos($a, '\\') + 1));
+            display("autolog log with $this->logname\n");
+        }
+                
+        if ($this->logname != self::LOG_NONE) {
+            display("init log with $this->logname\n");
+            $this->log = new Log($this->logname,
                                  $this->config->projects_root.'/projects/'.$this->config->project);
         }
         

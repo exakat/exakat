@@ -30,16 +30,9 @@ class Bracketless extends Analyzer {
     public function analyze() {
         $this->atomIs('Ifthen')
              ->is('alternative', false)
-             ->outIs('ELSE')
+             ->outIs(array('ELSE', 'THEN'))
              ->is('bracket', false)
              ->raw('where( __.not( and(has("count", 1), __.out("ELEMENT").hasLabel("Ifthen") ) ) )')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Ifthen')
-             ->is('alternative', false)
-             ->outIs('THEN')
-             ->is('bracket', false)
              ->back('first');
         $this->prepareQuery();
 

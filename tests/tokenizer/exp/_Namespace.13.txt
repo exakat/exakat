@@ -1,4 +1,3 @@
-Whole
 Label : PROJECT
   ./tests/tokenizer/source/_Namespace.13.php
   Label : FILE

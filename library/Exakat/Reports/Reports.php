@@ -25,6 +25,7 @@ namespace Exakat\Reports;
 use Exakat\Config;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Datastore;
+use Exakat\Dump;
 
 abstract class Reports {
     const FILE_EXTENSION = 'undefined';
@@ -35,7 +36,7 @@ abstract class Reports {
                                           'PhpConfiguration', 'PhpCompilation',
                                           'Inventories', 'Clustergrammer', 
                                           'ZendFramework',  'RadwellCode',
-                                          'Faceted', 'FacetedJson', 'Json', 'OnepageJson', 
+                                          'FacetedJson', 'Json', 'OnepageJson', 
                                           );
 
     private $count = 0;
@@ -55,11 +56,9 @@ abstract class Reports {
 
         $this->sqlite = new \Sqlite3($this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
 
-        $this->datastore = new Datastore($this->config);
+        $this->datastore = new Dump($this->config);
     }
     
-    public abstract function generateFileReport($report);
-
     public abstract function generate($dirName, $fileName);
     
     protected function count($step = 1) {

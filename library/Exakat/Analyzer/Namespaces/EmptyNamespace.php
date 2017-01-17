@@ -27,26 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class EmptyNamespace extends Analyzer {
     public function analyze() {
-        // Namespace with empty block (case of namespace A ;)
-        $this->atomIs('Namespace')
-             ->outIs('BLOCK')
-             ->is('count', 0)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Namespace with empty block (case of namespace A {})
-        $this->atomIs('Namespace')
-             ->outIs('BLOCK')
-             ->is('count', 1)
-             ->outIs('ELEMENT')
-             ->atomIs('Void')
-             ->back('first');
-        $this->prepareQuery();
-
         // Namespace with only use is empty
         $this->atomIs('Namespace')
              ->outIs('BLOCK')
-             ->raw('where(__.out("ELEMENT").not( hasLabel("Use") ).count().is(eq(0)) )')
+             ->raw('where(__.out("ELEMENT").not( hasLabel("Use", "Void") ).count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

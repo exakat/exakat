@@ -31,11 +31,8 @@ use Exakat\Phpexec;
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
-    public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
-        $this->enabledLog = false;
-        parent::__construct($gremlin, $config, $subtask);
-    }
-
+    protected $logname = self::LOG_NONE;
+    
     public function run() {
         $stats = array();
 
@@ -280,6 +277,10 @@ project_reports[] = 'ZendFramework';
 
 ; Limit the size of a project to 1000 k tokens (about 100 k LOC)
 token_limit = 1000000
+
+; Loader
+loader = Neo4jimport
+;loader = CypherG3
 
 
 INI;

@@ -31,7 +31,7 @@ class AvoidUsing extends Analyzer {
         $classes = $this->config->Classes_AvoidUsing;
         
         if (empty($classes)) {
-            return null;
+            return ;
         }
         $classesPath = $this->makeFullNsPath($classes);
 
@@ -79,14 +79,7 @@ class AvoidUsing extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomFunctionIs('\\class_alias')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->atomIs('String')
-             ->noDelimiterIs(array_merge($classes, $classesPath));
-        $this->prepareQuery();
-
+        // class_alias is covered by string test just below
         // mentions in strings
         $this->atomIs('String')
              ->regexIs('noDelimiter', join('|',$classes));

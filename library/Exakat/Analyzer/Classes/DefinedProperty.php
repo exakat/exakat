@@ -29,21 +29,6 @@ class DefinedProperty extends Analyzer {
 
     public function analyze() {
         // locally defined
-        $this->atomIs('Property')
-             ->outIs('OBJECT')
-             ->codeIs('$this')
-             ->inIs('OBJECT')
-             ->outIs('PROPERTY')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
-             ->samePropertyAs('propertyname', 'property')
-             ->back('first');
-        $this->prepareQuery();
-
         // defined in parents (Extended)
         $this->atomIs('Property')
              ->outIs('OBJECT')
@@ -52,24 +37,7 @@ class DefinedProperty extends Analyzer {
              ->outIs('PROPERTY')
              ->savePropertyAs('code', 'property')
              ->goToClass()
-             ->goToAllParents()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Ppp')
-             ->outIs('PPP')
-             ->samePropertyAs('propertyname', 'property')
-             ->back('first');
-        $this->prepareQuery();
-
-        // defined in parents implemented
-        $this->atomIs('Property')
-             ->outIs('OBJECT')
-             ->codeIs('$this')
-             ->inIs('OBJECT')
-             ->outIs('PROPERTY')
-             ->savePropertyAs('code', 'property')
-             ->goToClass()
-             ->goToImplements()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')

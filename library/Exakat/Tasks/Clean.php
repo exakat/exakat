@@ -31,11 +31,8 @@ use Exakat\Exceptions\NoSuchProject;
 class Clean extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
-    public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
-        $this->enabledLog = false;
-        parent::__construct($gremlin, $config, $subtask);
-    }
-
+    protected $logname = self::LOG_NONE;
+    
     public function run() {
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();

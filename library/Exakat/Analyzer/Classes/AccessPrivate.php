@@ -39,21 +39,6 @@ class AccessPrivate extends Analyzer {
         
         // methods
         // classname::method() direct class
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->outIs('NAME')
-             ->tokenIs('T_STRING')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_STATIC'))
-             ->codeIsNot(array('parent', 'static', 'self'))
-             ->isNotLocalClass()
-             ->classDefinition()
-             ->raw($hasPrivateMethodDefinition)
-             ->back('first');
-        $this->prepareQuery();
-
         // classname::method() parent class through extension (not the direct class)
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
@@ -64,7 +49,7 @@ class AccessPrivate extends Analyzer {
              ->codeIsNot(array('parent', 'static', 'self'))
              ->isNotLocalClass()
              ->classDefinition()
-             ->goToAllParents()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->raw($hasPrivateMethodDefinition)
              ->back('first');
         $this->prepareQuery();
@@ -81,25 +66,8 @@ class AccessPrivate extends Analyzer {
              ->codeIs('parent')
              ->isNotLocalClass()
              ->goToClass()
-             ->goToExtends()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->raw($hasPrivateMethodDefinition)
-             ->back('first');
-        $this->prepareQuery();
-
-        // In the grand-parents
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->outIs('NAME')
-             ->tokenIs('T_STRING')
-             ->savePropertyAs('code', 'name')
-             ->back('first')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_STATIC'))
-             ->codeIs('parent')
-             ->isNotLocalClass()
-             ->goToClass()
-             // Go to All parent is in the next raw
-             ->raw('where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit().times(6).'.$hasPrivateMethodDefinition.'.count().is(neq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -139,22 +107,6 @@ class AccessPrivate extends Analyzer {
 
              ->back('first');
         $this->prepareQuery();
-        
-        // class::$property
-        $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
-             ->savePropertyAs('code', 'name')
-             ->inIs('PROPERTY')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_STATIC'))
-             ->codeIs('parent')
-             ->isNotLocalClass()
-
-             ->goToClass()
-             ->raw($hasPrivateProperty)
-
-             ->back('first');
-        $this->prepareQuery();
 
         // parent::$property
         $this->atomIs('Staticproperty')
@@ -167,14 +119,11 @@ class AccessPrivate extends Analyzer {
              ->isNotLocalClass()
 
              ->goToClass()
-             ->goToExtends()
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->raw($hasPrivateProperty)
 
              ->back('first');
         $this->prepareQuery();
-
-        return false;
     }
 }
 

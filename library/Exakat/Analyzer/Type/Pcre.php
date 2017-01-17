@@ -29,55 +29,23 @@ class Pcre extends Analyzer {
     public function analyze() {
         $atoms = array('String', 'Concatenation');
         
-        // regex like $....$is
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])\\$[^\\$].*?\\$[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
-
-        // regex like #....#is
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])#[^#].*?#[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
-
-        // regex like ~....~is
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])~[^~].*?~[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
-
-        // regex like %....%is
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])%[^%].*?%[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
-
-        // regex like '....'is
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])\'[^\'].*?\'[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
-
-        // regex like "...."is
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])\\"[^\\"].*?\\"[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
-
-        // regex like /..../
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])\\\\/[^\\\\/*][^\\\\/]*?\\\\/[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
-
-        // regex like /..../
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])\\\\/[^\\\\/*][^\\\\/]*?\\\\/[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
-
-        // regex like {....}
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])\\\\{.+?\\\\}[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
-
-        // regex like (....)
-        $this->atomIs($atoms)
-             ->regexIs('fullcode', '([\'\\"])\\\\(.+?\\\\)[imsxeADSUXJu]*[\'\\"]');
-        $this->prepareQuery();
+        $delimiters = array('\\$' => '\\$',
+                            '#'   => '#',
+                            '~'   => '~',
+                            '%'   => '%',
+                            '/'   => '/',
+                            '\\\\{'   => '\\\\}',
+                            '\\\\('   => '\\\\)',
+                            '\\"'   => '\\"',
+                            "'"   => "'",
+                            );
+        
+        foreach($delimiters as $in => $out) {
+            // regex like $in....$out
+            $this->atomIs($atoms)
+                 ->regexIs('fullcode', '^([\'\\"])'.$in.'[^'.$out.']+?'.$out.'[imsxeADSUXJu]*[\'\\"]');
+            $this->prepareQuery();
+        }
     }
 }
 

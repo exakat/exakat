@@ -44,6 +44,7 @@ class UsedPrivateMethod extends Analyzer {
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->codeIsNot(array('static', 'self'))
              ->samePropertyAs('fullnspath', 'classname')
              ->inIs('CLASS')
              ->outIs('METHOD')

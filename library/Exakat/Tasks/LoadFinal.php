@@ -281,7 +281,7 @@ g.V().hasLabel("Identifier", "Nsname")
         g.V().hasLabel("Functioncall")
               .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
               .has("fullnspath", "\\\\define")
-             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String")
+             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
          )
 
@@ -297,7 +297,7 @@ g.V().hasLabel("Identifier", "Nsname")
      .addE('DEFINITION')
      .from( 
         g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define")
-             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String")
+             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
          )
 

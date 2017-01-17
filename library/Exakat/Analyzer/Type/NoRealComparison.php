@@ -28,13 +28,6 @@ use Exakat\Analyzer\Analyzer;
 class NoRealComparison extends Analyzer {
     public function analyze() {
         // 1.2 == 3.4
-        $this->atomIs('Comparison')
-             ->codeIs(array('==', '!=', '===', '!=='))
-             ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Real')
-             ->back('first');
-        $this->prepareQuery();
-
         // 1.2 == 3.4 + 0
         $this->atomIs('Comparison')
              ->codeIs(array('==', '!=', '===', '!=='))

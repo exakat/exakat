@@ -31,7 +31,7 @@ class Catalog extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
     public function run() {
-        $data = [];
+        $data = array();
 
         // List of analysis
         $pathDocs = $this->config->dir_root.'/data/analyzers.sqlite';
@@ -44,7 +44,7 @@ class Catalog extends Tasks {
         // List of reports
         $reports = Reports::$FORMATS;
         sort($reports);
-        $data['reports'] = $themas;
+        $data['reports'] = $reports;
 
         if ($this->config->json === true) {
             print json_encode($data);

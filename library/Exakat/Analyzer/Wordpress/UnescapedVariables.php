@@ -26,23 +26,28 @@ use Exakat\Analyzer\Analyzer;
 
 class UnescapedVariables extends Analyzer {
     public function analyze() {
+        $escFunctions = $this->loadIni('wordpress_functions.ini', 'esc');
+        $escFunctions = $this->makeFullNsPath($escFunctions);
+        
         // echo esc_attr($a) . $unescapedVar
         $this->atomFunctionIs(array('\\echo', '\\print'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
-             ->atomIs('Concatenation')
-             ->outIs('CONCAT')
+             ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty', 'Concatenation'))
+             ->outIsIE('CONCAT')
              ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
              ->back('first');
         $this->prepareQuery();
 
-        // echo $unescapedVar
+        // echo esc_attr($a) . $unescapedVar
         $this->atomFunctionIs(array('\\echo', '\\print'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
-             ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
+             ->outIsIE('CONCAT')
+             ->atomIs('Functioncall')
+             ->fullnspathIsNot($escFunctions)
              ->back('first');
         $this->prepareQuery();
     }

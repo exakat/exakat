@@ -116,8 +116,7 @@ class Gremlin3 extends Graph {
                         unset($params[$name]);
                     }
                 } elseif (is_array($value)) {
-                    $valueList = array_map(function ($x) { return addslashes($x); }, $value);
-                    $gremlin = "{ ['''".implode("''','''", $valueList)."'''] }";
+                    $gremlin = $this->toGremlin($value);
                     $defName = 'a'.crc32($gremlin);
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
@@ -211,7 +210,7 @@ GREMLIN;
         }
 
         $res = $this->query($query, $params, $load);
-        if (!$res instanceof Stdclass || !isset($res->results)) {
+        if (!($res instanceof \Stdclass) || !isset($res->results)) {
             throw new GremlinException('Server is not responding');
         }
         
@@ -236,6 +235,34 @@ GREMLIN;
         curl_close($ch);
 
         return $res;
+    }
+    
+    private function toGremlin($array) {
+        if (empty($array)) {
+            return "{ [  ] }";
+        }
+        $keys = array_keys($array);
+        $key = $keys[0];
+        if (is_array($array[$key])) {
+            $gremlin = array();
+            foreach($array as $key => $value) {
+                $a = array_map(function ($x) { return addslashes($x); }, $value);
+                $gremlin[] = "'''".addslashes($key)."''':['''".implode("''','''", $a)."''']";
+            }
+            $gremlin = "{ [" . implode(', ', $gremlin). "] }"; 
+        } elseif (is_object($array[$key])) {
+            $gremlin = array();
+            foreach($array as $key => $value) {
+                $a = array_map(function ($x) { return addslashes($x); }, (array) $value);
+                $gremlin[] = "'''".addslashes($key)."''':['''".implode("''','''", $a)."''']";
+            }
+            $gremlin = "{ [" . implode(', ', $gremlin). "] }"; 
+        } else {
+            $array = array_map(function ($x) { return addslashes($x); }, $array);
+            $gremlin = "{ ['''".implode("''','''", $array)."'''] }";
+        }
+        
+        return $gremlin;
     }
 }
 

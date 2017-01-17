@@ -35,7 +35,8 @@ class IsRead extends Analyzer {
         $this->atomIs('Variable')
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
                            'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
-                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'));
+                           'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'))
+            ->codeIsNot('$this');
         $this->prepareQuery();
 
         // Reading inside an assignation
@@ -54,7 +55,6 @@ class IsRead extends Analyzer {
         $this->atomIs('Variable')
              ->codeIs('$this');
         $this->prepareQuery();
-             
 
         // right or left, same
         $this->atomIs('Variable')
@@ -99,20 +99,6 @@ class IsRead extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // arguments
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('VARIABLE');
-        $this->prepareQuery();
-
-        // arguments : instanceof
-        $this->atomIs('Instanceof')
-             ->outIs('LEFT')
-             ->atomIs('VARIABLE')
-             ->back('first');
-        $this->prepareQuery();
-
         // arguments : normal variable in a custom function
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD') // possibly new too
@@ -131,28 +117,11 @@ class IsRead extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
-        // PHP functions that are passed by value
-        $data = new Methods();
-        
-        $functions = $data->getFunctionsValueArgs();
-        $references = array();
-        
-        foreach($functions as $function) {
-            if (!isset($references[$function['position']])) {
-                $references[$function['position']] = array('\\'.$function['function']);
-            } else {
-                $references[$function['position']][] = '\\'.$function['function'];
-            }
-        }
-        
-        foreach($references as $position => $functions) {
-            $this->atomFunctionIs($functions)
-                 ->outIs('ARGUMENTS')
-                 ->outIs('ARGUMENT')
-                 ->atomIs('Variable')
-                 ->is('rank', $position);
-            $this->prepareQuery();
-        }
+        $this->atomFunctionIs('Functioncall')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Variable');
+        $this->prepareQuery();
 
         // Variable that are not a reference in a functioncall
         $this->atomIs('Variable')

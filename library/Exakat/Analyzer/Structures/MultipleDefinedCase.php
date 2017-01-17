@@ -30,7 +30,7 @@ class MultipleDefinedCase extends Analyzer {
         // Check that fullcode is the same or not
         $this->atomIs('Switch')
              ->raw('where( __.sideEffect{ counts = [:]; }
-                             .out("CASES").out("ELEMENT").hasLabel("Case").out("CASE")
+                             .out("CASES").out("ELEMENT").hasLabel("Case").out("CASE").not(hasLabel("String"))
                              .sideEffect{ k = it.get().value("fullcode"); if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }}
                              .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
                               )');

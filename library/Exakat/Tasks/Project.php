@@ -161,8 +161,6 @@ class Project extends Tasks {
                 $analyze->run();
                 unset($analyze);
                 
-                rename($this->config->projects_root.'/projects/'.$project.'/log/analyze.log', $this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.log');
-
                 Config::pop();
 
                 $args = array ( 1 => 'dump',
@@ -174,6 +172,19 @@ class Project extends Tasks {
                             );
 
                 $configThema = Config::push($args);
+
+                $audit_end = time();
+                $query = "g.V().count()";
+                $res = $this->gremlin->query($query);
+                $nodes = $res->results[0];
+                $query = "g.E().count()";
+                $res = $this->gremlin->query($query);
+                $links = $res->results[0];
+
+                $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
+                                                       'audit_length' => $audit_end - $audit_start,
+                                                       'graphNodes'   => $nodes,
+                                                       'graphLinks'   => $links));
 
                 $dump = new Dump($this->gremlin, $configThema, Tasks::IS_SUBTASK);
                 $dump->run();
@@ -190,7 +201,8 @@ class Project extends Tasks {
 
         display("Analyzed project\n");
         $this->logTime('Analyze');
-        $this->addSnitch(array('step' => 'Analyzed', 'project' => $this->config->project));
+        $this->addSnitch(array('step'   => 'Analyzed', 
+                              'project' => $this->config->project));
 
         $this->logTime('Analyze');
 
@@ -215,7 +227,7 @@ class Project extends Tasks {
                 $report->run();
                 unset($report);
             } catch (\Exception $e) {
-                echo "Error while building $reportName in $format \n",
+                echo "Error while building $format in $format \n",
                      $e->getMessage(),
                      "\nTrying next report\n";
             }
@@ -224,25 +236,6 @@ class Project extends Tasks {
         Config::factory($oldConfig);
         display("Reported project\n");
 
-        $audit_end = time();
-        
-        // measure Neo4j's final size
-        $res = shell_exec('du -sh '.$this->config->neo4j_folder.' 2>/dev/null');
-        $neo4jSize = trim(str_replace(basename($this->config->neo4j_folder), '', $res));
-
-        $query = "g.V().count()";
-        $res = $this->gremlin->query($query);
-        $nodes = $res->results[0];
-        $query = "g.E().count()";
-        $res = $this->gremlin->query($query);
-        $links = $res->results[0];
-        
-
-        $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
-                                               'audit_length' => $audit_end - $audit_start,
-                                               'neo4jSize'    => $neo4jSize,
-                                               'graphNodes'   => $nodes,
-                                               'graphLinks'   => $links));
                                                
         $query = <<<GREMLIN
 g.V().where( __.sideEffect{x = []; }.in('ANALYZED').sideEffect{ x.add(it.get().value('analyzer')); }.barrier().sideEffect{ y = x.groupBy().findAll{ i,j -> j.size() > 1;};} )

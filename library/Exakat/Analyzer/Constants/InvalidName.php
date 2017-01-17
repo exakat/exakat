@@ -27,11 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class InvalidName extends Analyzer {
     public function analyze() {
-        // case-sensitive constants
+        // Invalid characters
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
+             ->hasNoOut('CONCAT')
              // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
              ->regexIsNot('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$');
         $this->prepareQuery();
@@ -39,17 +40,17 @@ class InvalidName extends Analyzer {
         $invalidNames = $this->loadIni('php_keywords.ini', 'keyword');
         $invalidNames = "'".implode("', '", $invalidNames)."'";
         
-        // case-insensitive constants
+        // reserved keywords
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
+             ->hasNoOut('CONCAT')
+             ->regexIs('noDelimiter', '^[a-zA-Z\\\\\\\\_\\\\u007f-\\\\u00ff][a-zA-Z0-9\\\\\\\\_\\\\u007f-\\\\u00ff]*\\$')
              ->regexIs('noDelimiter', '\\\\\\\\')
              // \ is an acceptable character in constants (NS separator) => \\\\\\\\ (yes, 8 \)
              ->filter('['.$invalidNames.'].intersect(it.get().value("noDelimiter").tokenize("\\\\\\\\")).size() > 0');
         $this->prepareQuery();
-
-
     }
 }
 

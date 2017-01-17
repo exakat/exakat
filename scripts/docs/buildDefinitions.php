@@ -58,7 +58,7 @@ $library_list = join("\n", $library_list);
 $reports_list = array();
 include(__DIR__.'/../../library/Exakat/Reports/Reports.php');
 $reports_list = \Exakat\Reports\Reports::$FORMATS;
-$reports_list = '  *'.join("\n  *", $reports_list)."\n";
+$reports_list = '  * '.join("\n  * ", $reports_list)."\n";
 
 // themes
 /////////////////////////
@@ -311,8 +311,6 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
 
         $a = rst_link($ini['name']);
 
-//        $ini['description'] = rst_link($ini['description']);
-        
         $desc = glossary($ini['name'],$ini['description']);
         $desc = trim(rst_escape($desc));
 
@@ -430,7 +428,6 @@ function rst_escape($string) {
         return $rst;
     },$r);
 
-//    $r = str_replace(array('*','|'),array('\\*','\\|'),$r);
     $r = str_replace(array('**='),array('\\*\\*\\='),$r);
     
     return $r;
@@ -467,29 +464,13 @@ function glossary($title,$description) {
             $url = $entries[$r[2]];
             return $r[1]."`$r[2]$r[3] <$url>`_";//.$r[4];
         } else {
-//            print "Nothing for ".$r[2]."\n";
             return $r[0];
         }
 
     };
     
     $description = preg_replace_callback('@([^a-zA-Z_])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])@is',$cbGlossary,' '.$description);
-    /*,$r
-    foreach($entries as $keyword => $url) {
-        $letter = strtoupper(trim($keyword,'\\`'))[0];
 
-        $regex = preg_quote($keyword);
-        if (preg_match('![^a-zA-Z`_]'.$regex.'[^a-zA-Z_]!is',$description,$r)) {
-            $glossary[$letter][$keyword][":ref:`$title <".rst_anchor($title).">`"] = 1;
-            $description = preg_replace('!'.$regex.'(\S*)!is',"`$keyword\$1 <$url>`_",$description);
-        }
-    }
-    */
-    if ($title == 'Use random_int()') {
-//        print $description;
-    }
-    
-    
     return $description;
 }
 

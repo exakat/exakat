@@ -8,4 +8,6 @@ $b = \ENT_COMPAT | \ENT_HTML401;
 
 $c = C;
 
+$d = D;
+
 ?>

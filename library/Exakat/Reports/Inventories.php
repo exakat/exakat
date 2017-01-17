@@ -30,11 +30,10 @@ class Inventories extends Reports {
     const FILE_EXTENSION = 'csv';
     const FILE_FILENAME  = 'inventories';
     
-    public function generateFileReport($report) {
-
-    }
-
     public function generate($folder, $name = null) {
+        if ($name === null) {
+            $name = self::FILE_FILENAME;
+        }
         $path = $folder.'/'.$name;
 
         if (file_exists($path)) {

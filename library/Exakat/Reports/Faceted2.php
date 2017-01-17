@@ -25,8 +25,6 @@ namespace Exakat\Reports;
 class Faceted2 extends FacetedJson {
     const FOLDER_PRIVILEGES = 0755;
 
-    public function generateFileReport($report) {}
-
     public function generate($dirName, $fileName = null) {
         if ($fileName === null) {
             return "Can't produce report to stdout\nAborting\n";

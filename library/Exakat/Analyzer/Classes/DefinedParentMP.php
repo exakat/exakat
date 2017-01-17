@@ -42,7 +42,7 @@ class DefinedParentMP extends Analyzer {
              ->outIs('CLASS')
              ->codeIs('parent')
              ->goToClass()
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
@@ -71,7 +71,7 @@ class DefinedParentMP extends Analyzer {
              ->outIs('CLASS')
              ->codeIs('parent')
              ->goToClass()
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->raw($isComposerClass)
              ->back('first');
         $this->prepareQuery();
@@ -84,18 +84,7 @@ class DefinedParentMP extends Analyzer {
              ->outIs('CLASS')
              ->codeIs('parent')
              ->goToClass()
-             ->raw($isPhpClass)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticmethodcall')
-             ->outIs('METHOD')
-             ->savePropertyAs('code', 'name')
-             ->inIs('METHOD')
-             ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
-             ->goToAllParents()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->raw($isPhpClass)
              ->back('first');
         $this->prepareQuery();
@@ -103,12 +92,13 @@ class DefinedParentMP extends Analyzer {
         // parent::$property
         $this->atomIs('Staticproperty')
              ->outIs('PROPERTY')
+             ->atomIs('Variable')
              ->savePropertyAs('code', 'name')
              ->inIs('PROPERTY')
              ->outIs('CLASS')
              ->codeIs('parent')
              ->goToClass()
-             ->goToAllParents()
+             ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
@@ -121,24 +111,10 @@ class DefinedParentMP extends Analyzer {
 
         // handle composer case
         $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
-             ->savePropertyAs('code', 'name')
-             ->inIs('PROPERTY')
              ->outIs('CLASS')
              ->codeIs('parent')
              ->goToClass()
-             ->raw($isComposerClass)
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
-             ->savePropertyAs('code', 'name')
-             ->inIs('PROPERTY')
-             ->outIs('CLASS')
-             ->codeIs('parent')
-             ->goToClass()
-             ->goToAllParents()
+             ->goToAllParents(self::INCLUDE_SELF)
              ->raw($isComposerClass)
              ->back('first');
         $this->prepareQuery();

@@ -511,6 +511,23 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
 
         return $this;
     }
+
+    public function functioncallIsNot($fullnspath) {
+        $this->atomIs('Functioncall')
+             ->hasNoIn(array('METHOD', 'NEW'))
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))')
+             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->fullnspathIsNot($this->makeFullNsPath($fullnspath));
+
+        return $this;
+    }
+
+    public function hasAtomInside($atom) {
+        $gremlin = 'where( __.emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') )';
+        $this->addMethod($gremlin);
+        
+        return $this;
+    }
     
     public function atomInside($atom) {
         $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
@@ -589,6 +606,18 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
         return $this;
     }
 
+    public function isHash($property, $hash, $index) {
+        $this->addMethod('filter{ it.get().value("'.$property.'") in ***['.$index.']}', $hash);
+        
+        return $this;
+    }
+
+    public function isNotHash($property, $hash, $index) {
+        $this->addMethod('filter{ !(it.get().value("'.$property.'") in ***['.$index.'])}', $hash);
+        
+        return $this;
+    }
+
     public function isNot($property, $value = true) {
         if ($value === null) {
             $this->addMethod('not(has("'.$property.'", null))');
@@ -644,6 +673,12 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
 
     public function outWithoutLastRank() {
         $this->addMethod('sideEffect{dernier = it.get().value("count") - 1;}.out("ELEMENT").filter{ it.get().value("rank") < dernier}');
+
+        return $this;
+    }
+
+    public function hasChildWithRank($edgeName, $rank = '0') {
+        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs(intval($rank)).').count().is(neq(0)) )');
 
         return $this;
     }
@@ -1077,7 +1112,7 @@ GREMLIN
     }
 
     public function goToArray() {
-        $this->addMethod('repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
+        $this->addMethod('emit().repeat( __.in("VARIABLE", "INDEX")).until( where(__.in("VARIABLE", "INDEX").hasLabel("Array").count().is(eq(0)) ) )');
         
         return $this;
     }
@@ -1087,7 +1122,7 @@ GREMLIN
         
         return $this;
     }
-    
+
     public function goToFunction() {
         $this->addMethod('repeat(__.in('.$this->linksDown.')).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))');
         
@@ -1123,7 +1158,7 @@ GREMLIN
     }
 
     public function noClassDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").count().is(eq(0)))');
+        $this->addMethod('where(__.in("DEFINITION").hasLabel("Class").count().is(eq(0)))');
     
         return $this;
     }
@@ -1259,12 +1294,12 @@ GREMLIN
         return $this;
     }
 
-    public function goToAllParents($self = self::INCLUDE_SELF) {
+    public function goToAllParents($self = self::EXCLUDE_SELF) {
 //        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
         if ($self === self::INCLUDE_SELF) {
-            $this->addMethod('repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.')');
+            $this->addMethod('filter{true}.emit().repeat( sideEffect{ x = it.get(); }.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").filter{ it.get() != x;} ).times('.self::MAX_LOOPING.')');
         } else {
-            $this->addMethod('filter{true}.emit().repeat( out("EXTENDS", "IMPLEMENTS").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
+            $this->addMethod('repeat( sideEffect{ x = it.get(); }.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").filter{ it.get() != x;} ).emit().times('.self::MAX_LOOPING.')');
         }
         
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
@@ -1541,7 +1576,8 @@ GREMLIN
 {$query}
 
 GREMLIN;
-        $query .= '.where( __.in("ANALYZED").has("analyzer", "'.$this->analyzerQuoted.'").count().is(eq(0)) ).groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
+//        $query .= '.where( __.in("ANALYZED").has("analyzer", "'.$this->analyzerQuoted.'").count().is(eq(0)) ).groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
+        $query .= '.dedup().groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
 // php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";

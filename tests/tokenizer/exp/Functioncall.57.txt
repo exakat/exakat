@@ -4,13 +4,20 @@ Label : PROJECT
   Label : FILE
     ;
     Label : ELEMENT
-      <? a('b') ?>
-
-
-    Label : ELEMENT
-      <?=
+      <?
       Label : CODE
         ;
+        Label : ELEMENT
+          a
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'b'
+          Label : NAME
+            a
+        Label : ELEMENT
+          
+
         Label : ELEMENT
           <?=
           Label : ARGUMENTS
@@ -37,10 +44,23 @@ Label : PROJECT
                     e
           Label : NAME
             <?=
-    Label : ELEMENT
-      <?
-
-$h = i();
-j();
-/* comments */
-
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $h
+          Label : RIGHT
+            i
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              i
+        Label : ELEMENT
+          j
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            j

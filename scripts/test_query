@@ -27,29 +27,9 @@ spl_autoload_register('Autoload::autoload_library');
 $query = <<<'QUERY'
 
 /// insert a query here
-g.V().hasLabel("Functioncall").as('a').as('b')
-     .not(has('token', within('T_ARRAY', 'T_LIST')))
-     .where( __.in("METHOD", "NEW").count().is(eq(0)))
-     .has('fullnspath')
-     .not(has('token', 'T_OPEN_BRACKET'))
-     .not(has('absolute', true))
-//     .has('use', true)
-     .select('a', 'b').by('fullcode').by('fullnspath')
-//     .count();
-
-g.V().has('code', 'strtoupper');
-
-g.V().hasLabel('Ifthen').out('ELSE', 'THEN').has('bracket').count();
-g.V().hasLabel('Ifthen').out('ELSE', 'THEN').not(has('bracket')).count();
-//g.V().hasLabel('Ifthen').out('ELSE', 'THEN').count();
-
-g.V().hasLabel('For', 'Foreach', 'While', 'Dowhile').out('BLOCK').has('bracket').count();
-//g.V().hasLabel('For', 'Foreach', 'While', 'Dowhile').out('BLOCK').not(has('bracket')).count();
-g.V().hasLabel('For', 'Foreach', 'While', 'Dowhile').out('BLOCK').count();
-
-g.V().hasLabel("String", "Concatenation")
-.filter{ (it.get().value('fullcode') =~ "(['\"])[\\|\$\"\\\\(][^\$].*?[\\|\$\"\\\\)][imsxeADSUXJu]*['\"]" ).getCount() > 0 }
-.values('fullcode');
+g.V().hasLabel("File").as('x').out("FILE").out("ELEMENT").hasLabel("Php").select('x').values('fullcode');
+//.values('close_tag');
+//.count();
 
 QUERY;
 

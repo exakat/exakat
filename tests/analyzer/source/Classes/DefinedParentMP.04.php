@@ -1,5 +1,6 @@
 <?php
 
+// This extends a Composer class. 
 class definedClassA extends Silex\EventListener\ConverterListener {
     public function x() {
         parent::$someAPropertyInCL;

@@ -29,10 +29,7 @@ use Exception;
 class CleanDb extends Tasks {
     const CONCURENCE = self::ANYTIME;
     
-    public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
-        $this->enabledLog = false;
-        parent::__construct($gremlin, $config, $subtask);
-    }
+    protected $logname = self::LOG_NONE;
     
     public function run() {
         if ($this->config->quick) {
@@ -100,8 +97,8 @@ GREMLIN;
     }
 
     private function cleanTmpDir() {
-//        rmdirRecursive($this->config->projects_root.'/projects/.exakat/');
-//        mkdir($this->config->projects_root.'/projects/.exakat/');
+        rmdirRecursive($this->config->projects_root.'/projects/.exakat/');
+        mkdir($this->config->projects_root.'/projects/.exakat/');
     }
     
     private function restartNeo4j() {

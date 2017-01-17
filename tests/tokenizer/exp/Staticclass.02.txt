@@ -42,6 +42,10 @@ Label : PROJECT
                 as
                 Label : AS
                   X
+                Label : DEFINITION
+                  x
+                Label : DEFINITION
+                  X
                 Label : NAME
                   \
                   Label : SUBNAME
@@ -52,6 +56,8 @@ Label : PROJECT
               use
               Label : USE
                 \
+                Label : DEFINITION
+                  ClassName1
                 Label : SUBNAME
                   NS1
                 Label : SUBNAME
@@ -64,6 +70,8 @@ Label : PROJECT
                   Void
               Label : DEFINITION
                 ParentClass
+              Label : DEFINITION
+                parent
               Label : NAME
                 ParentClass
             Label : ELEMENT
@@ -118,6 +126,10 @@ Label : PROJECT
                     x
                   Label : STATIC
                     static
+              Label : DEFINITION
+                self
+              Label : DEFINITION
+                static
               Label : EXTENDS
                 ParentClass
               Label : NAME

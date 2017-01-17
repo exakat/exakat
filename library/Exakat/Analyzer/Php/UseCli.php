@@ -40,6 +40,10 @@ class UseCli extends Analyzer {
              ->noDelimiterIs(array('argc', 'argv' ))
             ->back('first');
         $this->prepareQuery();
+        
+        // getopt()
+        $this->atomFunctionIs('\\getopt');
+        $this->prepareQuery();
 
     // STDIN is defined or used
     }

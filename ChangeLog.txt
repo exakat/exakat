@@ -1,4 +1,4 @@
-Version 0.9.7 (Hundred Eyed Demon Lord, Coming up)
+Version 0.9.7 (Multiple Eyed Creature, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 0.9.7 (Hundred Eyed Demon Lord, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.9.6 (Hundred Eyed Demon Lord, 2017-01-16)
++ Architecture
+    + Fixed constant names for tokens in Load
+    + Changed duplication check to dedup(). Cleaned analysis for duplicates.
+    + Speed but for large projects. Work in Progress. 
+    + Reduced usage of static properties
+    + Better detection of PHP scripts during project
++ Report
+    + Fixed generation of inventories when no target is provided
++ Analyzer
+    + New analyzer : Could Be Protected Property (not a public)
+    + New analyzer : avoid large literal arrays in local variables. 
+    + Removed analyzer : Structures/EchoArguments (double with Echo With Concat)
++ Tokenizer
+    + Fixed list of constants for PHP 7.1
 
 Version 0.9.5 (Spider Demons, 2017-01-09)
 + Architecture
