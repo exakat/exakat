@@ -279,7 +279,7 @@ project_reports[] = 'ZendFramework';
 token_limit = 1000000
 
 ; Loader
-loader = Neo4jimport
+loader = Neo4jImport
 ;loader = CypherG3
 
 

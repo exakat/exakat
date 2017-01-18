@@ -214,7 +214,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank = array();
 
-    private $loaderList = array('CypherG3', 'Neo4jimport');
+    private $loaderList = array('CypherG3', 'Neo4jImport');
 
     private $processing = array();
     
@@ -1511,6 +1511,7 @@ class Load extends Tasks {
             $rank = -1;
             
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+                $initialId = $this->id;
                 ++$args_max;
 
                 if ($typehint === true) {
@@ -1572,6 +1573,10 @@ class Load extends Tasks {
     
                     ++$this->id; // Skipping the comma ,
                     $indexId = 0;
+                }
+
+                if ($initialId === $this->id) {
+                    throw new NoFileToProcess($this->filename, 'not processable with the current code.');
                 }
             };
 
@@ -4009,9 +4014,6 @@ class Load extends Tasks {
 
     private function addLink($origin, $destination, $label) {
         $o = $this->atoms[$origin]['atom'];
-        if (!isset($this->atoms[$destination]['atom'])) {
-            debug_print_backtrace();
-        }
         $d = $this->atoms[$destination]['atom'];
         
         if (!isset($this->links[$label]))         { $this->links[$label]= array(); }
