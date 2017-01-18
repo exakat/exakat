@@ -28,21 +28,26 @@ class DontEchoError extends Analyzer {
     public function analyze() {
         // echo mysql_error();
         $errorMessageFunctions = $this->loadIni('errorMessageFunctions.ini', 'functions');
+        $errorMessageFunctions = $this->makeFullNsPath($errorMessageFunctions);
         
-        $this->atomFunctionIs(array('echo', 'print', 'die', 'exit'))
+        $this->atomFunctionIs(array('\\echo', '\\print', '\\die', '\\exit'))
              ->outIs('ARGUMENTS')
-             ->atomInside('Functioncall')
+             ->outIs('ARGUMENT')
+             ->atomIs('Functioncall')
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
+             ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
         $this->prepareQuery();
 
         // echo 'error '.pg_error();
-        $this->atomFunctionIs(array('echo', 'print', 'die', 'exit'))
+        $this->atomFunctionIs(array('\\echo', '\\print', '\\die', '\\exit'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Concatenation')
              ->outIs('CONCAT')
              ->atomIs('Functioncall')
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
         $this->prepareQuery();
