@@ -34,8 +34,8 @@ class FileUsage extends Analyzer {
 
         $this->atomIs('New')
              ->outIs('NEW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot(array('Variable', 'Array', 'Property', 'Staticproperty', 'Methodcall', 'Staticmethodcall'))
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
+             ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($fileClasses);
         $this->prepareQuery();
 
