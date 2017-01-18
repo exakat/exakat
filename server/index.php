@@ -24,7 +24,7 @@ serverLog(substr($command."\t".floor(1000*($endTime - $initTime))."\t".implode("
 
 /// Function definitions
 
-function stop($path) {
+function stop($args) {
     serverLog("Shutting down\n");
     $pid = getmypid();
     echo "<p>Shutting down server (pid : $pid)</p>";
@@ -36,7 +36,7 @@ function stop($path) {
     // This is killed.
 }
 
-function init($path) {
+function init($args) {
     if (isset($_REQUEST['project'])) {
         $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $_REQUEST['project']);
         if (empty($project)) {
@@ -53,13 +53,14 @@ function init($path) {
         if (!isset($url['scheme'], $url['host'], $url['path'])) {
             error('Malformed VCS');
         }
+        
         $vcs = $url['scheme'].'://'.$url['host'].(!empty($url['port']) ? ':'.$url['port'] : '').$url['path'];
         
         if (empty($project)) {
             $project = autoprojectname();
         }
 
-        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.escapeshellarg($_REQUEST['vcs']));
+        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.escapeshellarg($vcs));
     } elseif (isset($_REQUEST['code'])) {
         $php = $_REQUEST['code'];
         if (strpos($php, '<?php') === false) {
@@ -79,7 +80,7 @@ function init($path) {
     echo json_encode(array('project' => $project));
 }
 
-function update($path) {
+function update($args) {
     if (isset($_REQUEST['project'])) {
         $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $_REQUEST['project']);
         if (empty($project)) {
@@ -97,9 +98,9 @@ function update($path) {
     echo json_encode(array('project' => $project));
 }
 
-function project($path) {
-    if (isset($path[0])) {
-        $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $path[0]);
+function project($args) {
+    if (isset($args[0])) {
+        $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $args[0]);
         if (empty($project)) {
             error('Missing project');
         }
@@ -115,9 +116,9 @@ function project($path) {
     echo json_encode(array('project' => $project));
 }
 
-function onepage($path) {
-    if (isset($path[0])) {
-        $file = preg_replace('/[^a-zA-Z0-9-_]/', '', $path[0]);
+function onepage($args) {
+    if (isset($args[0])) {
+        $file = preg_replace('/[^a-zA-Z0-9-_]/', '', $args[0]);
         if (empty($file)) {
             error('Missing file');
         }
@@ -136,9 +137,9 @@ function onepage($path) {
     readfile(__DIR__.'/onepage/reports/'.$file.'.json');
 }
 
-function report($path) {
-    if (isset($path[0])) {
-        $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $path[0]);
+function report($args) {
+    if (isset($args[0])) {
+        $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $args[0]);
         if (empty($project)) {
             error('Missing project');
         }
@@ -158,12 +159,12 @@ function report($path) {
     readfile(__DIR__.'/'.$project.'/dump.sqlite');
 }
 
-function status($path) {
+function status($args) {
     global $initTime;
     
-    if (isset($path[0]) && !empty($path[0])) {
-        if (file_exists(__DIR__.'/'.$path[0].'/')) {
-            $json = shell_exec('__PHP__ __EXAKAT__ status -p '.$path[0].' -json');
+    if (isset($args[0]) && !empty($args[0])) {
+        if (file_exists(__DIR__.'/'.$args[0].'/')) {
+            $json = shell_exec('__PHP__ __EXAKAT__ status -p '.$args[0].' -json');
             echo $json;
         } else {
             error('No such project');
