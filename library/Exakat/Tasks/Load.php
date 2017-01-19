@@ -2898,7 +2898,14 @@ class Load extends Tasks {
     }
 
     private function processInsteadof() {
-        return $this->processOperator('Insteadof', $this->precedence->get($this->tokens[$this->id][0]), array('NAME', 'INSTEADOF'));
+        $insteadofId = $this->processOperator('Insteadof', $this->precedence->get($this->tokens[$this->id][0]), array('NAME', 'INSTEADOF'));
+        while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
+            ++$this->id; 
+            $nextId = $this->processOneNsname();
+
+            $this->addLink($insteadofId, $nextId, 'INSTEADOF');
+        }
+        return $insteadofId;
     }
 
     private function processUse() {
