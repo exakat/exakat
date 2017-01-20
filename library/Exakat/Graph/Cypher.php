@@ -50,8 +50,7 @@ class Cypher extends Graph {
 
         //set the url, number of POST vars, POST data
         $headers = array( 'Accept: application/json;stream=true',
-                          'Content-type: application/json',
-                          'Content-Length: '.strlen($fields_string));
+                          'Content-type: application/json');
         if (!empty($neo4j_auth)) {
             $headers[] = 'Authorization: Basic '.$neo4j_auth;
         }
