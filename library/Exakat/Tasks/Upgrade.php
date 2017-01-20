@@ -41,7 +41,7 @@ class Upgrade extends Tasks {
         $html = file_get_contents('http://dist.exakat.io/versions/index.php', true, $context);
 
         if (empty($html)) {
-            print "Unable to check last version. Try again later.\n";
+            print "Unable to reach server to fetch the last version. Try again later.\n";
             return;
         }
         
@@ -56,7 +56,7 @@ class Upgrade extends Tasks {
                 print "  Updating to latest version.\n";
                 preg_match('#<pre id="sha256">(.*?)</pre>#', $html, $r);
 
-                $phar = file_get_contents('http://dist.exakat.io/versions/index.php?file=latest');
+                $phar = @file_get_contents('http://dist.exakat.io/versions/index.php?file=latest');
                 $sha256 = $r[1];
                 
                 if (hash('sha256', $phar) !== $sha256) {
