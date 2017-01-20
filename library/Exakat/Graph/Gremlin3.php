@@ -174,8 +174,7 @@ GREMLIN;
         $ch = curl_init();
 
         //set the url, number of POST vars, POST data
-        $headers = array( 'Content-Length: '.strlen($getString),
-                          'User-Agent: exakat',
+        $headers = array('User-Agent: exakat',
                           'X-Stream: true');
         if (!empty($this->neo4j_auth)) {
             $headers[] = 'Authorization: Basic '.$this->neo4j_auth;
