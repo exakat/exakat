@@ -35,6 +35,7 @@ use Exakat\Loader\CypherG3;
 use Exakat\Loader\Neo4jImport;
 use Exakat\Loader\GremlinServerNeo4j;
 use Exakat\Phpexec;
+use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Precedence;
 
 const T_BANG                         = '!';
@@ -489,7 +490,6 @@ class Load extends Tasks {
         $this->logTime('LoadFinal new');
         $loadFinal->run();
         $this->logTime('The End');
-
     }
 
     private function processProject($project) {
@@ -4380,7 +4380,7 @@ class Load extends Tasks {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
-            $log = fopen($this->config->projects_root.'/projects/onepage/log/load.timing.csv', 'w+');
+            $log = fopen($this->config->projects_root.'/projects/'.$this->config->project.'/log/load.timing.csv', 'w+');
         }
 
         $end = microtime(true);
