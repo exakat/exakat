@@ -26,10 +26,6 @@ use Exakat\Config;
 use Exakat\Graph\Graph;
 
 class Cypher extends Graph {
-    public function __construct(Config $config) {
-        parent::__construct($config);
-    }
-
     public function query($query, $params = array(), $load = array()) {
         $fields = array('query' => $query);
         if (isset($params) && !empty($params)) {
