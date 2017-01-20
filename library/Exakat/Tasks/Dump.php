@@ -277,6 +277,9 @@ SQL;
         $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
         
         $tables = array('analyzed',
+                        'compilation52',
+                        'compilation53',
+                        'compilation54',
                         'compilation55',
                         'compilation56',
                         'compilation70',
@@ -292,7 +295,11 @@ SQL;
                         'shortopentag',
                         'tokenCounts',
                         );
-        foreach($tables as $table) {
+        $query = "SELECT name FROM sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
+        $existingTables = $this->sqlite->query('SELECT name FROM datastore.sqlite_master WHERE type="table" AND name="'.$table.'"');
+
+        while($table = $existingTables->fetchArray(\SQLITE3_NUM)) {
+            $table = $table[0];
             $res = $this->sqlite->query('SELECT sql FROM datastore.sqlite_master WHERE type="table" AND name="'.$table.'"');
             $createTable = $res->fetchArray(\SQLITE3_NUM);
             $createTable = $createTable[0];
