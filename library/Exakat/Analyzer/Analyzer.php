@@ -416,6 +416,29 @@ GREMLIN;
         return $result->results;
     }
 
+    public function queryHash($queryString, $arguments = null) {
+        try {
+            $result = $this->gremlin->query($queryString, $arguments);
+        } catch (GremlinException $e) {
+            display($e->getMessage().
+                    $queryString);
+            $result = new \StdClass();
+            $result->processed = 0;
+            $result->total = 0;
+            return array($result);
+        }
+
+        if (!isset($result->results)) {
+            return array();
+        }
+        
+        $return = array();
+        foreach($result->results as $row) {
+            $return[$row->key] = $row->value;
+        }
+        return $return;
+    }
+
     public function _as($name) {
         $this->methods[] = 'as("'.$name.'")';
         
