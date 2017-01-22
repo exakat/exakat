@@ -26,10 +26,6 @@ namespace Exakat\Analyzer\Constants;
 use Exakat\Analyzer\Analyzer;
 
 class MultipleConstantDefinition extends Analyzer {
-    public function dependsOn() {
-        return array('Structures/Truthy');
-    }
-
     public function analyze() {
         // case-insensitive constants with Define
         // Search for definitions and count them
@@ -40,7 +36,7 @@ g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
                               .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
                               .out("ARGUMENTS")
                               .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
-                                   __.out("ARGUMENT").has("rank", 2).where( __.in("ANALYZED").has("analyzer", "Structures/Truthy").count().is(eq(0)) ),
+                                   __.out("ARGUMENT").has("rank", 2).has('boolean', false),
                                   )
                               .out("ARGUMENT").has("rank", 0).hasLabel("String").where(__.out("CONCAT").count().is(eq(0)) )
                               .values("noDelimiter")
@@ -60,7 +56,7 @@ g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
                               .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
                               .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
                               .out("ARGUMENTS")
-                              .out("ARGUMENT").has("rank", 2).where( __.in("ANALYZED").has("analyzer", "Structures/Truthy").count().is(eq(1)) ).in("ARGUMENT")
+                              .out("ARGUMENT").has("rank", 2).has("boolean", true).in("ARGUMENT")
                               .out("ARGUMENT").has("rank", 0)
                               .map{ it.get().value("noDelimiter").toLowerCase()}
 GREMLIN
@@ -100,7 +96,7 @@ GREMLIN
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
-             ->analyzerIs('Structures/Truthy')
+             ->is('boolean', true)
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
@@ -113,7 +109,7 @@ GREMLIN
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
-             ->analyzerIsNot('Structures/Truthy')
+             ->is('boolean', false)
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')

@@ -27,8 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedConstants extends Analyzer {
     public function dependsOn() {
-        return array('Constants/ConstantUsage',
-                     'Structures/Truthy');
+        return array('Constants/ConstantUsage');
     }
     
     public function analyze() {
@@ -46,7 +45,7 @@ class UnusedConstants extends Analyzer {
         $this->atomFunctionIs('\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
-             ->analyzerIsNot('Structures/Truthy')
+             ->is('boolean', false)
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
@@ -58,7 +57,7 @@ class UnusedConstants extends Analyzer {
         $this->atomFunctionIs('\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
-             ->analyzerIs('Structures/Truthy')
+             ->is('boolean', true)
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
