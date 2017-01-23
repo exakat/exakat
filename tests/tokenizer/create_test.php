@@ -15,7 +15,7 @@
     sort($files);
     $last = array_pop($files);
     print $last;
-    $number = str_replace(array($test, '.php', '.', 'source/'), '', $last);
+    $number = intval(str_replace(array($test, '.php', '.', 'source/'), '', $last));
     
     if ($number + 1 == 100) { 
         print "Too many tests for $test : reaching 100 of them. Aborting\n";
