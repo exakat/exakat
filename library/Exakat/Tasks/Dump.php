@@ -295,18 +295,15 @@ SQL;
                         'shortopentag',
                         'tokenCounts',
                         );
-        $query = "SELECT name FROM sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
-        $existingTables = $this->sqlite->query('SELECT name FROM datastore.sqlite_master WHERE type="table" AND name="'.$table.'"');
+        $query = "SELECT name, sql FROM datastore.sqlite_master WHERE type='table' AND name in ('".implode("', '", $tables)."');";
+        $existingTables = $this->sqlite->query($query);
 
-        while($table = $existingTables->fetchArray(\SQLITE3_NUM)) {
-            $table = $table[0];
-            $res = $this->sqlite->query('SELECT sql FROM datastore.sqlite_master WHERE type="table" AND name="'.$table.'"');
-            $createTable = $res->fetchArray(\SQLITE3_NUM);
-            $createTable = $createTable[0];
+        while($table = $existingTables->fetchArray(\SQLITE3_ASSOC)) {
+            $createTable = $table['sql'];
             $createTable = str_replace('CREATE TABLE ', 'CREATE TABLE IF NOT EXISTS ', $createTable);
 
             $this->sqlite->query($createTable);
-            $this->sqlite->query('REPLACE INTO '.$table.' SELECT * FROM datastore.'.$table);
+            $this->sqlite->query('REPLACE INTO '.$table['name'].' SELECT * FROM datastore.'.$table['name']);
         }
     }
     
