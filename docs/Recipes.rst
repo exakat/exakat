@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 16 Jan 2017 19:55:02 +0000
-.. comment: Generation hash : 6e6c1ec8321e170c07d863d9a8291f7372629d88
+.. comment: Generation date : Mon, 23 Jan 2017 10:37:29 +0000
+.. comment: Generation hash : a327cabf1bfda08b1d18676657e043f2a256b843
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 284 analysis
+Total : 283 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -87,7 +87,6 @@ Total : 284 analysis
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
-* :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
 * :ref:`Bail Out Early <bail-out-early>`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -745,10 +744,11 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 23 analysis
+Total : 24 analysis
 
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
+* :ref:`Avoid array_unique() <avoid-array\_unique()>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Eval() Usage <eval()-usage>`

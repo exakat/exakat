@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 16 Jan 2017 19:55:02 +0000
-.. comment: Generation hash : 6e6c1ec8321e170c07d863d9a8291f7372629d88
+.. comment: Generation date : Mon, 23 Jan 2017 10:37:29 +0000
+.. comment: Generation hash : a327cabf1bfda08b1d18676657e043f2a256b843
 
 
 .. _$http\_raw\_post\_data:
@@ -855,7 +855,7 @@ The native function `array_unique() <http://www.php.net/array_unique>`_ is much 
 +--------------+--------------------------+
 | Command Line | Structures/NoArrayUnique |
 +--------------+--------------------------+
-| Analyzers    | :ref:`Analyze`           |
+| Analyzers    | :ref:`Performances`      |
 +--------------+--------------------------+
 
 
@@ -2648,7 +2648,31 @@ Empty Function
 ##############
 
 
-Function or method whose body is `empty <http://www.php.net/empty>`_. Such functions or methods are rarely useful. As a bare minimum, the function should return some useful value, even if constant.
+Function or method whose body is `empty <http://www.php.net/empty>`_. 
+
+Such functions or methods are rarely useful. As a bare minimum, the function should return some useful value, even if constant.
+
+.. code-block:: php
+
+   <?php
+   
+   // classic empty function
+   function emptyFunction() {}
+   
+   class bar {
+       // classic empty method
+       function emptyMethod() {}
+   
+       // classic empty function
+       function emptyMethodWithParent() {}
+   }
+   
+   class barbar extends bar {
+       // NOT an empty method : it overwrites the parent method
+       function emptyMethodWithParent() {}
+   }
+   
+   ?>
 
 +--------------+-------------------------+
 | Command Line | Functions/EmptyFunction |
@@ -2683,7 +2707,26 @@ Empty Interfaces
 ################
 
 
-Empty interfaces. Interfaces should have some function defined, and not be totally `empty <http://www.php.net/empty>`_.
+Empty interfaces. Interfaces should contains some function, and not be totally `empty <http://www.php.net/empty>`_.
+
+.. code-block:: php
+
+   <?php
+   
+   // an empty interface
+   interface empty {}
+   
+   // an normal interface
+   interface normal {
+       public function i() ;
+   }
+   
+   // an constant interface
+   interface constantsOnly {
+       const FOO = 1;
+   }
+   
+   ?>
 
 +--------------+---------------------------+
 | Command Line | Interfaces/EmptyInterface |
