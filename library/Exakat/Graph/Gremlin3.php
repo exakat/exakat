@@ -128,7 +128,19 @@ class Gremlin3 extends Graph {
                         unset($params[$name]);
                     } else {
                         $script = 'def '.$defName.'() '.$gremlin;
-                        if (strlen($gremlin) > 65535 ) {
+
+                        if (strlen($gremlin) > 1000000 ) {
+                            $loader = <<<GREMLIN
+def $defName() { 
+    x = [];
+    new File("$this->scriptDir/$defName.txt").each({ line -> x.push(line)});
+    x; 
+}
+GREMLIN;
+                            file_put_contents($defFileName, $loader);
+//                            file_put_contents($this->scriptDir.$defName.'.txt', implode("\n", array_map(function ($x) { return addslashes($x); }, (array) $value)));
+                            file_put_contents($this->scriptDir.$defName.'.txt', implode("\n", $value));
+                        } elseif (strlen($gremlin) > 65535 ) {
                             $loader = <<<GREMLIN
 def $defName() { 
     Eval.me(new File("$this->scriptDir/$defName.txt").getText());
