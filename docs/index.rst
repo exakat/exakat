@@ -15,6 +15,7 @@ Contents:
    Features
    Installation
    Example
+   FAQ
    Project
    Commands
    Recipes

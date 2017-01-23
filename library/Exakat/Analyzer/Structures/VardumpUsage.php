@@ -26,10 +26,6 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class VardumpUsage extends Analyzer {
-    public function dependsOn() {
-        return array('Structures/Truthy');
-    }
-    
     public function analyze() {
         $debug_functions = array('var_dump', 'print_r', 'var_export');
         
@@ -37,7 +33,7 @@ class VardumpUsage extends Analyzer {
         $this->atomFunctionIs(array('\\print_r', '\\var_export'))
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
-             ->analyzerIsNot('Structures/Truthy')
+             ->is('boolean', false)
              ->back('first');
         $this->prepareQuery();
         

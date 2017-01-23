@@ -338,7 +338,7 @@ class Config {
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => PHP_VERSION,
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
-                           'loader'             => 'Neo4jimport',
+                           'loader'             => 'Neo4jImport',
                            );
         
         foreach($defaults as $name => $value) {
@@ -406,7 +406,7 @@ class Config {
                                 '-neo4j_port'   => 'neo4j_port', 
                                 '-neo4j_folder' => 'neo4j_folder', 
                                 '-token_limit'  => 1000000,
-                                '-loader'       => 'Neo4jimport',
+                                '-loader'       => 'Neo4jImport',
                                  );
 
         foreach($optionsValue as $key => $config) {

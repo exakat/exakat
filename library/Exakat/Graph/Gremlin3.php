@@ -83,65 +83,77 @@ class Gremlin3 extends Graph {
             $this->checkConfiguration();
         }
 
-        $getString = 'script='.urlencode($query);
-    
         if (!is_array($load)) {
             $load = array($load);
         }
+        
+        $init = array();
 
-        if (isset($params) && !empty($params)) {
+        if (!empty($params)) {
             // Avoid changing arg10 to 'string'0 if query has more than 10 arguments.
             krsort($params);
             
             foreach($params as $name => $value) {
                 if (is_string($value) && strlen($value) > 2000) {
-                    $gremlin = "{ '".str_replace('$', '\\$', $value)."' }";
+                    $gremlin = "'''".str_replace('$', '\\$', $value)."'''";
 
                     // what about factorise this below? 
                     $defName = 'a'.crc32($gremlin);
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
                     if (file_exists($defFileName)) {
-                        $query = str_replace($name, $defName.'()', $query);
-
+                        $query = str_replace($name, $defName, $query);
                         $load[] = $defName;
+
                         unset($params[$name]);
                     } else {
-                        $gremlin = 'def '.$defName.'() '.$gremlin;
+                        $gremlin = 'def '.$defName.'() {'.$gremlin.'}';
                         file_put_contents($defFileName, $gremlin);
 
-                        $query = str_replace($name, $defName.'()', $query);
-
+                        $query = str_replace($name, $defName, $query);
                         $load[] = $defName;
+
                         unset($params[$name]);
                     }
                 } elseif (is_array($value)) {
-                    $gremlin = $this->toGremlin($value);
+                    $gremlin = $this->toMap($value);
                     $defName = 'a'.crc32($gremlin);
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
                     if (file_exists($defFileName)) {
-                        $query = str_replace($name, $defName.'()', $query);
+                        $query = str_replace($name, $defName, $query);
+                        $init[] = $defName.' = '.$defName.'();';
 
                         $load[] = $defName;
                         unset($params[$name]);
                     } else {
-                        $gremlin = 'def '.$defName.'() '.$gremlin;
-                        if (strlen($gremlin) > 65535 ) {
-                            $gremlin = <<<GREMLIN
+                        $script = 'def '.$defName.'() '.$gremlin;
+
+                        if (strlen($gremlin) > 1000000 ) {
+                            $loader = <<<GREMLIN
 def $defName() { 
     x = [];
     new File("$this->scriptDir/$defName.txt").each({ line -> x.push(line)});
     x; 
 }
 GREMLIN;
-                            file_put_contents($defFileName, $gremlin);
-                            file_put_contents($this->scriptDir.$defName.'.txt', implode("\n", $value) );
+                            file_put_contents($defFileName, $loader);
+//                            file_put_contents($this->scriptDir.$defName.'.txt', implode("\n", array_map(function ($x) { return addslashes($x); }, (array) $value)));
+                            file_put_contents($this->scriptDir.$defName.'.txt', implode("\n", $value));
+                        } elseif (strlen($gremlin) > 65535 ) {
+                            $loader = <<<GREMLIN
+def $defName() { 
+    Eval.me(new File("$this->scriptDir/$defName.txt").getText());
+}
+GREMLIN;
+                            file_put_contents($defFileName, $loader);
+                            file_put_contents($this->scriptDir.$defName.'.txt', $this->toMap($value));
                         } else {
-                            file_put_contents($defFileName, $gremlin);
+                            file_put_contents($defFileName, 'def '.$defName.'() { '.$this->toMap($value) .'}');
                         }
 
-                        $query = str_replace($name, $defName.'()', $query);
+                        $query = str_replace($name, $defName, $query);
+                        $init[] = $defName.' = '.$defName.'();';
 
                         $load[] = $defName;
                         unset($params[$name]);
@@ -151,11 +163,9 @@ GREMLIN;
                     unset($params[$name]);
                 }
             }
-
-            if (!empty($params)) {
-                $getString .= '&params='.urlencode(json_encode($params));
-            }
         }
+        
+        $query = implode("\n", $init)."\n".$query;
 
         $getString = 'script='.urlencode($query);
 
@@ -174,8 +184,7 @@ GREMLIN;
         $ch = curl_init();
 
         //set the url, number of POST vars, POST data
-        $headers = array( 'Content-Length: '.strlen($getString),
-                          'User-Agent: exakat',
+        $headers = array( 'User-Agent: exakat',
                           'X-Stream: true');
         if (!empty($this->neo4j_auth)) {
             $headers[] = 'Authorization: Basic '.$this->neo4j_auth;
@@ -237,32 +246,32 @@ GREMLIN;
         return $res;
     }
     
-    private function toGremlin($array) {
+    private function toMap($array) {
         if (empty($array)) {
-            return "{ [  ] }";
+            return "[  ]";
         }
         $keys = array_keys($array);
         $key = $keys[0];
         if (is_array($array[$key])) {
-            $gremlin = array();
+            $map = array();
             foreach($array as $key => $value) {
                 $a = array_map(function ($x) { return addslashes($x); }, $value);
-                $gremlin[] = "'''".addslashes($key)."''':['''".implode("''','''", $a)."''']";
+                $map[] = "'''".addslashes($key)."''':['''".implode("''','''", $a)."''']";
             }
-            $gremlin = "{ [" . implode(', ', $gremlin). "] }"; 
+            $map = "[" . implode(', ', $map). "]"; 
         } elseif (is_object($array[$key])) {
-            $gremlin = array();
+            $map = array();
             foreach($array as $key => $value) {
                 $a = array_map(function ($x) { return addslashes($x); }, (array) $value);
-                $gremlin[] = "'''".addslashes($key)."''':['''".implode("''','''", $a)."''']";
+                $map[] = "'''".addslashes($key)."''':['''".implode("''','''", $a)."''']";
             }
-            $gremlin = "{ [" . implode(', ', $gremlin). "] }"; 
+            $map = "[" . implode(', ', $map). "]"; 
         } else {
             $array = array_map(function ($x) { return addslashes($x); }, $array);
-            $gremlin = "{ ['''".implode("''','''", $array)."'''] }";
+            $map = "['''".implode("''','''", $array)."''']";
         }
         
-        return $gremlin;
+        return $map;
     }
 }
 

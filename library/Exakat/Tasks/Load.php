@@ -35,6 +35,7 @@ use Exakat\Loader\CypherG3;
 use Exakat\Loader\Neo4jImport;
 use Exakat\Loader\GremlinServerNeo4j;
 use Exakat\Phpexec;
+use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Precedence;
 
 const T_BANG                         = '!';
@@ -141,6 +142,7 @@ class Load extends Tasks {
     static public $PROP_BRACKET     = array('Sequence');
     static public $PROP_CLOSETAG    = array('Php');
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
+    static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
 
     static public $PROP_OPTIONS = array();
     
@@ -214,7 +216,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank = array();
 
-    private $loaderList = array('CypherG3', 'Neo4jimport');
+    private $loaderList = array('CypherG3', 'Neo4jImport');
 
     private $processing = array();
     
@@ -421,6 +423,7 @@ class Load extends Tasks {
                           'bracket'     => self::$PROP_BRACKET,
                           'close_tag'   => self::$PROP_CLOSETAG,
                           'aliased'     => self::$PROP_ALIASED,
+                          'boolean'     => self::$PROP_BOOLEAN,
                           );
     }
 
@@ -489,7 +492,6 @@ class Load extends Tasks {
         $this->logTime('LoadFinal new');
         $loadFinal->run();
         $this->logTime('The End');
-
     }
 
     private function processProject($project) {
@@ -777,7 +779,8 @@ class Load extends Tasks {
                    'fullcode' => $openQuote.implode('', $fullcode).$closeQuote,
                    'line'     => $this->tokens[$current][2],
                    'token'    => $this->getToken($this->tokens[$current][0]),
-                   'count'    => $rank + 1);
+                   'count'    => $rank + 1,
+                   'boolean'  => (int) (boolean) ($rank + 1));
               
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
             $x['delimiter'] = $closeQuote;
@@ -1397,12 +1400,14 @@ class Load extends Tasks {
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
             ) {
             $nsnameId = $this->addAtom('Boolean');
+            $this->setAtom($nsnameId, array('boolean' => (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true') ));
         } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR  && 
             $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING          && 
             strtolower($this->tokens[$this->id + 1][1]) === 'null' &&
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
             ) {
             $nsnameId = $this->addAtom('Null');
+            $this->setAtom($nsnameId, array('boolean' => 0));
         } else {
             $nsnameId = $this->addAtom('Nsname');
         }
@@ -1511,6 +1516,7 @@ class Load extends Tasks {
             $rank = -1;
             
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+                $initialId = $this->id;
                 ++$args_max;
 
                 if ($typehint === true) {
@@ -1572,6 +1578,10 @@ class Load extends Tasks {
     
                     ++$this->id; // Skipping the comma ,
                     $indexId = 0;
+                }
+
+                if ($initialId === $this->id) {
+                    throw new NoFileToProcess($this->filename, 'not processable with the current code.');
                 }
             };
 
@@ -1767,6 +1777,9 @@ class Load extends Tasks {
                                               'token'      => $this->atoms[$nameId]['token'],
                                               'fullnspath' => $fullnspath,
                                               'aliased'    => $aliased));
+        if ($fullnspath === '\\array') {
+            $this->setAtom($functioncallId, array('boolean'    => (int) (bool) $this->atoms[$argumentsId]['count']));
+        }
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
 
@@ -1784,8 +1797,10 @@ class Load extends Tasks {
     private function processString($fullnspath = true) {
         if (strtolower($this->tokens[$this->id][1]) === 'null' ) {
             $id = $this->addAtom('Null');
+            $this->setAtom($id, array('boolean' => 1));
         } elseif (in_array(strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $id = $this->addAtom('Boolean');
+            $this->setAtom($id, array('boolean' => (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true') ));
         } else {
             $id = $this->addAtom('Identifier');
         }
@@ -1976,7 +1991,8 @@ class Load extends Tasks {
                                   'line'       => $this->tokens[$this->id][2],
                                   'variadic'   => false,
                                   'token'      => $this->getToken($this->tokens[$current][0]),
-                                  'fullnspath' => '\\array'));
+                                  'fullnspath' => '\\array',
+                                  'boolean'    => (int) (bool) $this->atoms[$argumentId]['count']));
         $this->pushExpression($id);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -2893,7 +2909,14 @@ class Load extends Tasks {
     }
 
     private function processInsteadof() {
-        return $this->processOperator('Insteadof', $this->precedence->get($this->tokens[$this->id][0]), array('NAME', 'INSTEADOF'));
+        $insteadofId = $this->processOperator('Insteadof', $this->precedence->get($this->tokens[$this->id][0]), array('NAME', 'INSTEADOF'));
+        while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
+            ++$this->id; 
+            $nextId = $this->processOneNsname();
+
+            $this->addLink($insteadofId, $nextId, 'INSTEADOF');
+        }
+        return $insteadofId;
     }
 
     private function processUse() {
@@ -3163,7 +3186,8 @@ class Load extends Tasks {
         } else {
             $actual = $value;
         }
-        $this->setAtom($id, array('intval' => (abs($actual) > PHP_INT_MAX ? 0 : $actual)));
+        $this->setAtom($id, array('intval'  => (abs($actual) > PHP_INT_MAX ? 0 : $actual),
+                                  'boolean' => (int) (boolean) $value));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3174,6 +3198,7 @@ class Load extends Tasks {
 
     private function processReal() {
         $id = $this->processSingle('Real');
+        $this->setAtom($id, array('boolean' => (int) (strtolower($this->tokens[$this->id][1]) != 0)));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3197,6 +3222,7 @@ class Load extends Tasks {
             $this->setAtom($id, array('delimiter'   => '',
                                       'noDelimiter' => ''));
         }
+        $this->setAtom($id, array('boolean'   => (int) (bool) $this->atoms[$id]['noDelimiter'] ));
 
         if (function_exists('mb_detect_encoding')) {
             $this->setAtom($id, array('encoding' => mb_detect_encoding($this->atoms[$id]['noDelimiter'])));
@@ -4009,9 +4035,6 @@ class Load extends Tasks {
 
     private function addLink($origin, $destination, $label) {
         $o = $this->atoms[$origin]['atom'];
-        if (!isset($this->atoms[$destination]['atom'])) {
-            debug_print_backtrace();
-        }
         $d = $this->atoms[$destination]['atom'];
         
         if (!isset($this->links[$label]))         { $this->links[$label]= array(); }
@@ -4371,7 +4394,7 @@ class Load extends Tasks {
         static $log, $begin, $end, $start;
 
         if ($log === null) {
-            $log = fopen($this->config->projects_root.'/projects/onepage/log/load.timing.csv', 'w+');
+            $log = fopen($this->config->projects_root.'/projects/'.$this->config->project.'/log/load.timing.csv', 'w+');
         }
 
         $end = microtime(true);

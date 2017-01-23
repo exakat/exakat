@@ -33,8 +33,8 @@ class ClassUsage extends Analyzer {
 
         $this->atomIs('New')
              ->outIs('NEW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
+             ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($classes);
         $this->prepareQuery();
         

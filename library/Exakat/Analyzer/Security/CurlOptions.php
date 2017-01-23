@@ -25,8 +25,7 @@ use Exakat\Analyzer\Analyzer;
 
 class CurlOptions extends Analyzer {
     public function dependsOn() {
-        return array('Structures/Falsy',
-                     'Constants/ConstantUsage');
+        return array('Constants/ConstantUsage');
     }
     public function analyze() {
         $options = array('\\curlopt_ssl_verifypeer', '\\curlopt_ssl_verifyhost');
@@ -39,7 +38,7 @@ class CurlOptions extends Analyzer {
              ->fullnspathIs($options)
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 2)
-             ->analyzerIs('Structures/Falsy')
+             ->is('boolean', false)
              ->back('first');
         $this->prepareQuery();
 
@@ -53,7 +52,7 @@ class CurlOptions extends Analyzer {
              ->fullnspathIs($options)
              ->inIs('KEY')
              ->outIs('VALUE')
-             ->analyzerIs('Structures/Falsy')
+             ->is('boolean', false)
              ->back('first');
         $this->prepareQuery();
     }

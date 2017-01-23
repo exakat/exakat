@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Security_DontEchoError extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testSecurity_DontEchoError01()  { $this->generic_test('Security/DontEchoError.01'); }
+    public function testSecurity_DontEchoError02()  { $this->generic_test('Security/DontEchoError.02'); }
 }
 ?>

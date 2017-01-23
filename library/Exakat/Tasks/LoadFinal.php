@@ -408,7 +408,10 @@ GREMLIN;
         static $log, $begin, $end, $start;
 
         if ($log === null) {
-            $log = fopen($this->config->projects_root.'/projects/onepage/log/loadfinal.timing.csv', 'w+');
+            $log = fopen($this->config->projects_root.'/projects/'.$this->config->project.'/log/loadfinal.timing.csv', 'w+');
+            if ($log === false) {
+                return;
+            }
         }
 
         $end = microtime(true);

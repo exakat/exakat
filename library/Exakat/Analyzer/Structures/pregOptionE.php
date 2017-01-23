@@ -69,8 +69,12 @@ class pregOptionE extends Analyzer {
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->outWithRank('CONCAT', 0)
+             ->atomIs('String')
+             ->outIsIE('CONCAT')
+             ->atomIs('String')
+             ->is('rank', 0)
              ->raw('sideEffect{delimiter = it.get().value("noDelimiter")[0]; }')
-             ->inIs('CONCAT')
+             ->inIsIE('CONCAT')
              ->raw($makeDelimiters)
              ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
              ->back('first');

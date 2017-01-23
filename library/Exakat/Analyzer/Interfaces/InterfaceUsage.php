@@ -32,6 +32,11 @@ class InterfaceUsage extends Analyzer {
              ->outIs('IMPLEMENTS')
              ->atomIs(array('Identifier', 'Nsname'));
         $this->prepareQuery();
+
+        $this->atomIs('Interface')
+             ->outIs('Extends')
+             ->atomIs(array('Identifier', 'Nsname'));
+        $this->prepareQuery();
         
         $this->atomIs('Instanceof')
              ->outIs('CLASS')

@@ -1,4 +1,4 @@
-Version 0.9.7 (Multiple Eyed Creature, Coming up)
+Version 0.9.9 (Pilanpo Bodhisattva, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,24 @@ Version 0.9.7 (Multiple Eyed Creature, Coming up)
 + Tokenizer
     + 
 
-Version 0.9.6 (Hundred Eyed Demon Lord, 2017-01-16)
+Version 0.9.8 (Multiple Eyed Creature, 2017-01-23)
++ Architecture
+    + Moved 'Truthy/Falsy' as 'boolean' characteristics
+    + Updated Gremlin3 interface to handle Groovy maps
+    + Added default name when creating project
++ Report
+    + Added checks on merged table at Dump stage
+    + Added support for PHP 7.1.1 and 7.0.15
++ Analyzer
+    + New analyzer : variables assigned twice or more
+    + New preference : new x() / new x;
+    + Upgraded analysis : 1785 / 1794 test pass (99.5% pass)
+    + Fixed Interface usage : missing interfaces extends interfaces
+    + Added extra check for Functioncalls
++ Tokenizer
+    + Added support for instanceof + several names
+
+Version 0.9.7 (Hundred Eyed Demon Lord, 2017-01-16)
 + Architecture
     + Fixed constant names for tokens in Load
     + Changed duplication check to dedup(). Cleaned analysis for duplicates.
@@ -20,11 +37,12 @@ Version 0.9.6 (Hundred Eyed Demon Lord, 2017-01-16)
 + Analyzer
     + New analyzer : Could Be Protected Property (not a public)
     + New analyzer : avoid large literal arrays in local variables. 
+    + New analyzer : report long arguments. 
     + Removed analyzer : Structures/EchoArguments (double with Echo With Concat)
 + Tokenizer
     + Fixed list of constants for PHP 7.1
 
-Version 0.9.5 (Spider Demons, 2017-01-09)
+Version 0.9.6 (Spider Demons, 2017-01-09)
 + Architecture
     + Added support for report/analysis theme list in config (exakat and project)
     + Better cleaning of projects

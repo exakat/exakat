@@ -128,7 +128,7 @@ GREMLIN;
         $gremlin->query($query);
 
         // Finish noDelimiter for strings
-        $properties = array('alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased');
+        $properties = array('alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean');
         foreach($properties as $property) {
             $query = <<<GREMLIN
 g.V().has("$property").sideEffect{ 
@@ -257,7 +257,8 @@ GREMLIN;
                                'args_min'    => 'int', 
                                'bracket'     => 'int', 
                                'close_tag'   => 'int',
-                               'aliased'     => 'int');
+                               'aliased'     => 'int',
+                               'boolean'     => 'int');
         
         $fileName = $exakatDir.'/nodes.g3.csv';
         if (file_exists($fileName)) {

@@ -416,6 +416,29 @@ GREMLIN;
         return $result->results;
     }
 
+    public function queryHash($queryString, $arguments = null) {
+        try {
+            $result = $this->gremlin->query($queryString, $arguments);
+        } catch (GremlinException $e) {
+            display($e->getMessage().
+                    $queryString);
+            $result = new \StdClass();
+            $result->processed = 0;
+            $result->total = 0;
+            return array($result);
+        }
+
+        if (!isset($result->results)) {
+            return array();
+        }
+        
+        $return = array();
+        foreach($result->results as $row) {
+            $return[$row->key] = $row->value;
+        }
+        return $return;
+    }
+
     public function _as($name) {
         $this->methods[] = 'as("'.$name.'")';
         
@@ -505,7 +528,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     public function functioncallIs($fullnspath) {
         $this->atomIs('Functioncall')
              ->hasNoIn(array('METHOD', 'NEW'))
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))')
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($this->makeFullNsPath($fullnspath));
 

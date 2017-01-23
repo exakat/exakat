@@ -84,24 +84,54 @@ class Initproject extends Tasks {
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/config.ini')) {
             if ($this->config->symlink === true) {
                 $vcs = 'symlink';
+                $projectName = basename($repositoryURL);
             } elseif ($this->config->svn === true) {
                 $vcs = 'svn';
+                $projectName = basename($repositoryURL);
+                if (in_array($projectName, array('trunk', 'code'))) {
+                    $projectName = basename(dirname($repositoryURL));
+                    if (in_array($projectName, array('trunk', 'code'))) {
+                        $projectName = basename(dirname(dirname($repositoryURL)));
+                    }
+                }
             } elseif ($this->config->git === true) {
                 $vcs = 'git';
+                $projectName = basename($repositoryURL);
+                $projectName = str_replace('.git', '', $projectName);
             } elseif ($this->config->copy === true) {
                 $vcs = 'copy';
+                $projectName = basename($repositoryURL);
             } elseif ($this->config->bzr === true) {
                 $vcs = 'bzr';
+                list($server, $projectName) = explode(':', $repositoryURL);
             } elseif ($this->config->hg === true) {
                 $vcs = 'hg';
+                $projectName = basename($repositoryURL);
+            } elseif ($this->config->zip === true) {
+                $vcs = 'zip';
+                $projectName = basename($repositoryURL);
+                $projectName = str_replace('.zip', '', $projectName);
+            } elseif ($this->config->tgz === true) {
+                $vcs = 'tgz';
+                $projectName = basename($repositoryURL);
+                $projectName = str_replace(array('.tgz', '.tar.gz'), '', $projectName);
+            } elseif ($this->config->tgz === true) {
+                $vcs = 'tgz';
+                $projectName = basename($repositoryURL);
+                $projectName = str_replace(array('.tbz', '.tar.bz2'), '', $projectName);
             } elseif ($this->config->composer === true) {
                 $vcs = 'composer';
+                $projectName = str_replace('/', '_', $repositoryURL);
             } else {
                 $vcs = 'git';
+                $projectName = basename($repositoryURL);
+                $projectName = preg_replace('.git', '', $projectName);
             }
+            
+            
             // default initial config. Found in test project.
             $configIni = <<<INI
-phpversion = 7.0
+phpversion = 7.1
 
 ignore_dirs[] = /test
 ignore_dirs[] = /tests
@@ -126,7 +156,7 @@ ignore_dirs[] = /sql
 
 file_extensions =
 
-project_name        = "$project";
+project_name        = "$projectName";
 project_url         = "$repositoryURL";
 project_vcs         = "$vcs";
 project_description = "";

@@ -65,7 +65,8 @@ class CypherG3 {
         // Force autoload
         $this->cypher = new Cypher($this->config );
 
-        if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.cypher.csv') && static::$file_saved == 0) {
+        if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.g3.Project.csv') && static::$file_saved == 0) {
+            $this->unlink = glob($this->config->projects_root.'/projects/.exakat/*.csv');
             $this->cleanCsv();
         }
         
@@ -82,7 +83,6 @@ class CypherG3 {
     public function finalize() {
         self::saveTokenCounts();
         
-        $this->cleandDb();
         display('loading nodes');
         
         // Load Nodes
@@ -102,7 +102,7 @@ class CypherG3 {
                     if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'))) {
                     // Raw string
                         $extra[] = "$title: csvLine.$title";
-                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased'))) {
+                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'))) {
                     // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
                     } elseif (in_array($title, array('count', 'intval', 'args_max', 'args_min'))) {
@@ -278,7 +278,7 @@ CYPHER;
     
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
         static $extras = array();
-        
+
         // Saving atoms
         foreach($atoms as $atom) {
             $fileName = $exakatDir.'/nodes.g3.'.$atom['atom'].'.csv';
@@ -308,7 +308,11 @@ CYPHER;
                 if ($e == 'variadic' && !isset($atom[$e])) {
                     display(print_r($atom, true));
                 }
-                $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
+                if ($e === 'boolean') {
+                    $extra[] = isset($atom[$e]) ? '"'.($atom[$e] ? "1" : "").'"' : '""';
+                } else {
+                    $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
+                }
             }
 
             if (count($extras[$atom['atom']]) > 0) {
