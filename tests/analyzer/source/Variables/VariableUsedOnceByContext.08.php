@@ -13,7 +13,7 @@ trait F
         $argument,
         $defaultArgument = 'H',
         Typehint $typehintArgument,
-        Typehint $typehintDefaultArgument,
+        Typehint $typehintDefaultArgument
         
     ) {
         $e = 1;
