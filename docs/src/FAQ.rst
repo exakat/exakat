@@ -7,6 +7,7 @@ Summary
 -------
 
 * `I need special command to get my code`_
+* `The project is too big`_
 * `Where can I find the report`_
 * `Can I run exakat on local code?`_
 * `Can I run exakat on Windows?`_
@@ -28,6 +29,15 @@ If Exakat has no documented method to reach your code, you may use this process 
 
 
 Send a message on Github.com/exakat/exakat to mention your specific method.
+
+`The project is too big`_
+-------------------------
+
+There is a soft limit in config/exakat.ini, called 'token_limit' that initially prevents analysis of projects over 1 millions tokens. That's roughly 125k LOC, more than most code source.
+
+If you need to run exakat on larger sources, you may change this value to make it as large as possible. Then, the physical capacities of the machine, specially RAM, will be the actual limit. 
+
+It may be interesting to 'ignore_dir[]', from projects/<>/config.ini. 
 
 
 `Where can I find the report`_
