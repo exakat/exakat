@@ -142,7 +142,7 @@ class Load extends Tasks {
     static public $PROP_BRACKET     = array('Sequence');
     static public $PROP_CLOSETAG    = array('Php');
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
-    static public $PROP_BOOLEAN     = array('Boolean', 'Null');
+    static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
 
     static public $PROP_OPTIONS = array();
     
