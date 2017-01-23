@@ -308,7 +308,11 @@ CYPHER;
                 if ($e == 'variadic' && !isset($atom[$e])) {
                     display(print_r($atom, true));
                 }
-                $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
+                if ($e === 'boolean') {
+                    $extra[] = isset($atom[$e]) ? '"'.($atom[$e] ? "1" : "").'"' : '""';
+                } else {
+                    $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
+                }
             }
 
             if (count($extras[$atom['atom']]) > 0) {
