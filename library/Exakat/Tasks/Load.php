@@ -1407,7 +1407,7 @@ class Load extends Tasks {
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
             ) {
             $nsnameId = $this->addAtom('Null');
-            $this->setAtom(array('boolean' => 0));
+            $this->setAtom($nsnameId, array('boolean' => 0));
         } else {
             $nsnameId = $this->addAtom('Nsname');
         }
