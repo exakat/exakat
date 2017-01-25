@@ -15,3 +15,5 @@ preg_replace('#^.*?/projects/[^/]+/code/#', '/', $filename);
 preg_replace('/' . $name . '/ise', $gremlinArray, $query);
 
 preg_replace('/(PHP Warning|Warning|Strict Standards|PHP Warning|asfd)/', '4', $r);
+
+preg_replaced('/1sdf/', '4', $r);

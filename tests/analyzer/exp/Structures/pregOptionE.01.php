@@ -11,6 +11,7 @@ $expected     = array( 'preg_replace(\'/A\' . $x . \'H/eximU\', \'B\', $str)',
                        'preg_replace(\'/AAAD/ei\', \'B\', $str)'
 );
 
-$expected_not = array();
+$expected_not = array('preg_replace(\'~AAAA~\', \'B\', $str)',
+                      'preg_replace(\'~AAAB~i\', \'B\', $str)');
 
 ?>
