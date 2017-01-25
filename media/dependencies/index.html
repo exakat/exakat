@@ -1,0 +1,55 @@
+<html>
+<head>
+    <link rel="stylesheet" href="graphalchemy/alchemy.css">
+</head>
+<body>
+  <div class="alchemy" id="alchemy"></div>
+
+  <script type="text/javascript" src="graphalchemy/scripts/vendor.js"></script>
+  <script type="text/javascript" src="graphalchemy/alchemy.js"></script>
+  <script type="text/javascript">
+        var config = {
+            dataSource: 'fidep.json',
+            directedEdges:true,
+            edgeTypes: {"caption": ["new",
+                                    "functioncall",
+                                    "implements",
+                                    "extends",
+                                    "staticmethodcall",
+                                    "staticconstant",
+                                    "staticproperty",
+                                    "include",
+                                    "use",
+                                    "constant"]},
+            nodeStyle: {
+                "all": {
+                    "borderColor": "#127DC1",
+                    "borderWidth": function(d, radius) {
+                        return radius * d.getProperties().incoming / (d.getProperties().incoming + d.getProperties().outgoing)
+                    },
+                    "radius": function(d) {
+                        return d.getProperties().incoming + d.getProperties().outgoing;
+                    }, 
+                },
+            },
+            edgeStyle: {
+                "new": {"color": "green" },
+
+                "extends": {"color": "yellow" },
+                "implements": {"color": "goldenrod" },
+                "use": {"color": "PeachPuff" },
+
+                "functioncall": {"color": "red" },
+                "constant": {"color": "crimson" },
+
+                "staticmethodcall": {"color": "blue" },
+                "staticconstant": {"color": "LightSkyBlue" },
+                "staticproperty": {"color": "CornflowerBlue" },
+                },
+            };
+
+        alchemy = new Alchemy(config)
+    </script>
+  </body>
+</html>
+        
