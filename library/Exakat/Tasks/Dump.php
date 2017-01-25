@@ -77,8 +77,9 @@ class Dump extends Tasks {
             $this->sqlite = new \Sqlite3($this->sqliteFile);
             $this->getAtomCounts($this->sqlite);
 
-            $this->collectStructures($this->sqlite);
-            $this->collectLiterals($this->sqlite);
+            $this->collectStructures();
+            $this->collectLiterals();
+            $this->collectFilesDependencies();
 
             $this->sqlite->query('CREATE TABLE themas (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    thema STRING
@@ -158,7 +159,7 @@ SQL;
                 $this->processResults($thema, $counts[$thema]);
                 unset($themes[$id]);
             } else {
-                display( $thema." : No\n");
+                display( $thema.' : No'.PHP_EOL);
             }
         }
 
@@ -172,7 +173,7 @@ SQL;
 
         $this->finish();
     }
-        
+
     private function processResults($class, $count) {
         $this->cleanResults->bindValue(':analyzer', $class, \SQLITE3_TEXT);
         $this->cleanResults->execute();
@@ -743,7 +744,7 @@ GREMLIN
 
         $sqlQuery = <<<SQL
 INSERT INTO constants ("id", "constant", "citId", "value") 
-             VALUES ( NULL, :constant, :citId, :value)
+             VALUES   ( NULL, :constant, :citId, :value)
 SQL;
         $stmt = $this->sqlite->prepare($sqlQuery);
 
@@ -829,6 +830,171 @@ GREMLIN
             }
             display( "literal$type : $total\n");
         }
+    }
+    
+    function collectFilesDependencies() {
+        $this->sqlite->query('DROP TABLE IF EXISTS filesDependencies');
+        $this->sqlite->query('CREATE TABLE filesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                               including STRING,
+                                                               included STRING,
+                                                               type STRING
+                                                 )');
+
+        $sqlQuery = <<<SQL
+INSERT INTO filesDependencies ("id", "including", "included", "type") 
+                       VALUES ( NULL, :including, :included, :type)
+SQL;
+        $insertQuery = $this->sqlite->prepare($sqlQuery);
+    
+        // Direct inclusion
+        $query = 'g.V().hasLabel("File").as("file")
+                   .repeat( out() ).emit(hasLabel("Include")).times(15)
+                   .hasLabel("Include").in("NAME").as("include")
+                   .select("file", "include").by("fullcode").by("fullcode")';
+        $res = $this->gremlin->query($query);
+        $includes = $res->results;
+        
+        foreach($includes as $link) {
+            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+            $insertQuery->bindValue(':type',      'INCLUDE',      \SQLITE3_TEXT);
+            $insertQuery->execute();
+        }
+        display(count($includes)." inclusions ");
+
+        // Finding extends and implements
+        $query = 'g.V().hasLabel("File").as("file")
+                   .repeat( out() ).emit(hasLabel("Class", "Interface")).times(15)
+                   .hasLabel("Class", "Interface").outE().hasLabel("EXTENDS", "IMPLEMENTS").as("type").inV().in("DEFINITION")
+                   .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
+                   .as("include")
+                   .select("file", "type", "include").by("fullcode").by(label()).by("fullcode")
+                   ';
+        $res = $this->gremlin->query($query);
+        $extends = $res->results;
+        
+        foreach($extends as $link) {
+            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+            $insertQuery->bindValue(':type',      $link->type,    \SQLITE3_TEXT);
+            $insertQuery->execute();
+        }
+        display(count($extends)." extends for classes ");
+
+        // Finding extends for interfaces
+        $query = 'g.V().hasLabel("File").as("file")
+                   .repeat( out() ).emit(hasLabel("Interface")).times(15)
+                   .hasLabel("Interface").out("EXTENDS").in("DEFINITION")
+                   .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
+                   .as("include")
+                   .select("file", "include").by("fullcode").by("fullcode")
+                   ';
+        $res = $this->gremlin->query($query);
+        $extends = $res->results;
+
+        foreach($extends as $link) {
+            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+            $insertQuery->bindValue(':type',      'EXTENDS',      \SQLITE3_TEXT);
+            $insertQuery->execute();
+        }
+        display(count($extends)." extends for interfaces ");
+
+        // traits
+        $query = 'g.V().hasLabel("File").as("file")
+                   .repeat( out() ).emit(hasLabel("Class", "Trait")).times(15)
+                   .hasLabel("Class", "Trait").out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION")
+                   .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
+                   .as("include")
+                   .select("file", "include").by("fullcode").by("fullcode")
+                   ';
+        $res = $this->gremlin->query($query);
+        $uses = $res->results;
+
+        foreach($uses as $link) {
+            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+            $insertQuery->bindValue(':type',      'USE',          \SQLITE3_TEXT);
+            $insertQuery->execute();
+        }
+        display(count($extends)." use ");
+
+        // Functioncall()
+        $query = 'g.V().hasLabel("File").as("file")
+                   .repeat( out() ).emit(hasLabel("Functioncall")).times(15)
+                   .hasLabel("Functioncall").in("DEFINITION")
+                   .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
+                   .as("include")
+                   .select("file", "include").by("fullcode").by("fullcode")
+                   ';
+        $res = $this->gremlin->query($query);
+        $functioncalls = $res->results;
+
+        foreach($functioncalls as $link) {
+            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+            $insertQuery->bindValue(':type',      'FUNCTIONCALL', \SQLITE3_TEXT);
+            $insertQuery->execute();
+        }
+        display(count($functioncalls)." functioncall ");
+        
+        // constants
+        $query = 'g.V().hasLabel("File").as("file")
+                   .repeat( out() ).emit(hasLabel("Identifier")).times(15)
+                   .hasLabel("Identifier").where( __.in("NAME", "CLASS", "SUBNAME", "PROPERTY", "AS", "CONSTANT", "TYPEHINT", "EXTENDS", "USE", "IMPLEMENTS", "INDEX" ).count().is(eq(0)) ).in("DEFINITION")
+                   .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
+                   .as("include")
+                   .select("file", "include").by("fullcode").by("fullcode")
+                   ';
+        $res = $this->gremlin->query($query);
+        $constants = $res->results;
+
+        foreach($constants as $link) {
+            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+            $insertQuery->bindValue(':type',      'CONSTANT',     \SQLITE3_TEXT);
+            $insertQuery->execute();
+        }
+        display(count($constants)." constants ");
+
+        // New
+        $query = 'g.V().hasLabel("File").as("file")
+                   .repeat( out() ).emit(hasLabel("New")).times(15)
+                   .hasLabel("New").out("NEW").in("DEFINITION")
+                   .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
+                   .as("include")
+                   .select("file", "include").by("fullcode").by("fullcode")
+                   ';
+        $res = $this->gremlin->query($query);
+        $news = $res->results;
+
+        foreach($news as $link) {
+            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+            $insertQuery->bindValue(':type',      'NEW',          \SQLITE3_TEXT);
+            $insertQuery->execute();
+        }
+        display(count($news)." new ");
+
+        // static calls (property, constant, method)
+        $query = 'g.V().hasLabel("File").as("file")
+                   .repeat( out() ).emit(hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty")).times(15)
+                   .hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty").as("type").out("CLASS").in("DEFINITION")
+                   .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
+                   .as("include")
+                   .select("file", "type", "include").by("fullcode").by(label()).by("fullcode")
+                   ';
+        $res = $this->gremlin->query($query);
+        $statics = $res->results;
+
+        foreach($statics as $link) {
+            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+            $insertQuery->bindValue(':type',      strtoupper($link->type),    \SQLITE3_TEXT);
+            $insertQuery->execute();
+        }
+        display(count($statics)." static calls CPM");
+        
     }
 }
 
