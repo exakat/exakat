@@ -2052,9 +2052,11 @@ SQL
                 $errors      = array_count_values($readErrors);
                 $errors      = array_keys($errors);
                 $errors      = array_keys(array_count_values($errors));
+                $errors       = '<ul><li>'.implode("</li>\n<li>", $errors).'</li></ul>';
 
                 $total_error = count($files).' (' .number_format(count($files) / $total * 100, 0). '%)';
                 $files       = array_keys(array_count_values($files));
+                $files       = '<ul><li>'.implode("</li>\n<li>", $files).'</li></ul>';
             }
 
             $compilations .= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>\n";
