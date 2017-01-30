@@ -30,14 +30,15 @@ Here is the list of the current recipes supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Dead code <dead-code>`                   | Check the unused code or unreachable code.                                                           |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP70`                      | List features that are incompatible with PHP 7.0. This recipe is helpful for checking compatibility. |
+|:ref:`CompatibilityPHP70`                      | List features that are incompatible with PHP 7.0.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP71`                      | List features that are incompatible with PHP 7.1. This recipe is helpful for forward compatibility,  |
-|                                               | and it currently beta 3.                                                                             |
+|:ref:`CompatibilityPHP71`                      | List features that are incompatible with PHP 7.1.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP56`                      | List features that are incompatible with PHP 5.6. This recipe is helpful for backward compatibility. |
+|:ref:`CompatibilityPHP72`                      | List features that are incompatible with PHP 7.2. It is also known as php-src.                       |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP55`                      | List features that are incompatible with PHP 5.5. This recipe is helpful for backward compatibility. |
+|:ref:`CompatibilityPHP56`                      | List features that are incompatible with PHP 5.6.                                                    |
++-----------------------------------------------+------------------------------------------------------------------------------------------------------+
+|:ref:`CompatibilityPHP55`                      | List features that are incompatible with PHP 5.5.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Performances`                            | Check the code for slow code.                                                                        |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -45,9 +46,9 @@ Here is the list of the current recipes supported by Exakat Engine.
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Wordpress`                               | Check for code used with the Wordpress platform                                                      |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP54`                      | List features that are incompatible with PHP 5.4. This recipe is helpful for backward compatibility. |
+|:ref:`CompatibilityPHP54`                      | List features that are incompatible with PHP 5.4.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
-|:ref:`CompatibilityPHP53`                      | List features that are incompatible with PHP 5.3. This recipe is helpful for backward compatibility. |
+|:ref:`CompatibilityPHP53`                      | List features that are incompatible with PHP 5.3.                                                    |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
 |:ref:`Coding Conventions <coding-conventions>` | List coding conventions violations.                                                                  |
 +-----------------------------------------------+------------------------------------------------------------------------------------------------------+
@@ -59,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 30 Jan 2017 17:13:22 +0000
-.. comment: Generation hash : e94530f135483bfb0f94e7935773f7c52187d57c
+.. comment: Generation date : Mon, 30 Jan 2017 18:30:04 +0000
+.. comment: Generation hash : 6ec0bc9d6741178f004a00950f25c08445ee4acb
 
 
 .. _analyze:
