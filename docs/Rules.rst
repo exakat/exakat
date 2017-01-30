@@ -6830,7 +6830,7 @@ The following structures are evaluated differently in PHP 5 and 7. It is recomme
 
 
 
-See also [http://php.net/manual/en/migration70.incompatible.php](http://php.net/manual/en/migration70.incompatible.php).
+See also `http://php.net/manual/en/migration70.incompatible.php <http://php.net/manual/en/migration70.incompatible.php>`_.
 
 +---------------------+-----------------------+-----------------------+
 | Expression          | PHP 5 interpretation  | PHP 7 interpretation  |
@@ -8232,7 +8232,7 @@ PHP searches for functions in the local namespaces, and in case it fails, makes 
 
 The speed bump range from 2 to 8 %, depending on the availability of functions in the local scope. The overall bump is about 1 µs per functioncall, which makes it a micro optimisation until a lot of function calls are made.
 
-Based on [Marco Pivetti tweet](https://twitter.com/Ocramius/status/811504929357660160), and [veewee](http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/) blog post.
+Based on [Marco Pivetti tweet](https://twitter.com/Ocramius/status/811504929357660160), and `veewee <http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/>`_ blog post.
 
 .. code-block:: php
 
@@ -9459,7 +9459,7 @@ Unkown Regex Options
 ####################
 
 
-PHP's regex support the following list of options : eimsuxADJSUX. They are detailled in the manual : [http://php.net/manual/en/reference.pcre.pattern.modifiers.php](http://php.net/manual/en/reference.pcre.pattern.modifiers.php). 
+PHP's regex support the following list of options : eimsuxADJSUX. They are detailled in the manual : `http://php.net/manual/en/reference.pcre.pattern.modifiers.php <http://php.net/manual/en/reference.pcre.pattern.modifiers.php>`_. 
 
 All other options are not supported, may be ignored or raise an error.
 

@@ -231,42 +231,42 @@ Libraries that are popular, large and often included in repositories are identif
 
 Those libraries, or even some of the, may be included again in the analysis by commenting the ignored_dir[] line, in the projects/<project>/config.ini file. 
 
-* [BBQ](https://github.com/eventio/bbq)
-* [CI xmlRPC](http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html)
-* [CPDF](https://pear.php.net/reference/PhpDocumentor-latest/li_Cpdf.html)
-* [DomPDF](https://github.com/dompdf/dompdf)
-* [FPDF](http://www.fpdf.org/)
-* [gettext Reader](http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html)
-* [jpGraph](http://jpgraph.net/)
-* [HTML2PDF](http://sourceforge.net/projects/phphtml2pdf/)
-* [HTMLPurifier](http://htmlpurifier.org/)
+* `BBQ <https://github.com/eventio/bbq>`_
+* `CI xmlRPC <http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html>`_
+* `CPDF <https://pear.php.net/reference/PhpDocumentor-latest/li_Cpdf.html>`_
+* `DomPDF <https://github.com/dompdf/dompdf>`_
+* `FPDF <http://www.fpdf.org/>`_
+* `gettext Reader <http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html>`_
+* `jpGraph <http://jpgraph.net/>`_
+* `HTML2PDF <http://sourceforge.net/projects/phphtml2pdf/>`_
+* `HTMLPurifier <http://htmlpurifier.org/>`_
 * [http_class]()
-* [IDNA convert](https://github.com/phpWhois/idna-convert)
-* [lessc](http://leafo.net/lessphp/)
-* [lessc](http://leafo.net/lessphp/)
-* [magpieRSS](http://magpierss.sourceforge.net/)
-* [MarkDown Parser](http://processwire.com/apigen/class-Markdown_Parser.html)
-* [Markdown](https://github.com/michelf/php-markdown)
-* [mpdf](http://www.mpdf1.com/mpdf/index.php)
+* `IDNA convert <https://github.com/phpWhois/idna-convert>`_
+* `lessc <http://leafo.net/lessphp/>`_
+* `lessc <http://leafo.net/lessphp/>`_
+* `magpieRSS <http://magpierss.sourceforge.net/>`_
+* `MarkDown Parser <http://processwire.com/apigen/class-Markdown_Parser.html>`_
+* `Markdown <https://github.com/michelf/php-markdown>`_
+* `mpdf <http://www.mpdf1.com/mpdf/index.php>`_
 * [oauthToken]()
 * [passwordHash]()
-* [pChart](http://www.pchart.net/)
-* [pclZip](http://www.phpconcept.net/pclzip/)
-* [Propel](http://propelorm.org/)
-* [phpExecl](https://phpexcel.codeplex.com/)
-* [phpMailer](https://github.com/PHPMailer/PHPMailer)
-* [qrCode](http://phpqrcode.sourceforge.net/)
-* [Services_JSON](https://pear.php.net/package/Services_JSON)
-* [sfYaml](https://github.com/fabpot-graveyard/yaml/blob/master/lib/sfYaml.php)
-* [swift](http://swiftmailer.org/)
-* [Smarty](http://www.smarty.net/)
-* [tcpdf](http://www.tcpdf.org/)
-* [text_diff](https://pear.php.net/package/Text_Diff)
-* [text highlighter](https://pear.php.net/package/Text_Highlighter/)
-* [tfpdf](http://www.fpdf.org/en/script/script92.php)
+* `pChart <http://www.pchart.net/>`_
+* `pclZip <http://www.phpconcept.net/pclzip/>`_
+* `Propel <http://propelorm.org/>`_
+* `phpExecl <https://phpexcel.codeplex.com/>`_
+* `phpMailer <https://github.com/PHPMailer/PHPMailer>`_
+* `qrCode <http://phpqrcode.sourceforge.net/>`_
+* `Services_JSON <https://pear.php.net/package/Services_JSON>`_
+* `sfYaml <https://github.com/fabpot-graveyard/yaml/blob/master/lib/sfYaml.php>`_
+* `swift <http://swiftmailer.org/>`_
+* `Smarty <http://www.smarty.net/>`_
+* `tcpdf <http://www.tcpdf.org/>`_
+* `text_diff <https://pear.php.net/package/Text_Diff>`_
+* `text highlighter <https://pear.php.net/package/Text_Highlighter/>`_
+* `tfpdf <http://www.fpdf.org/en/script/script92.php>`_
 * [UTF8]()
-* [Yii](http://www.yiiframework.com/)
-* [Zend Framework](http://framework.zend.com/)
+* `Yii <http://www.yiiframework.com/>`_
+* `Zend Framework <http://framework.zend.com/>`_
 
 New analyzers
 -------------
@@ -1106,52 +1106,52 @@ External services
 
 List of external services whose configuration files has been commited in the code.
 
-* [Apache](http://www.apache.org/) - .htaccess
-* [Apple](http://www.apple.com/) - .DS_Store
-* [appveyor](http://www.appveyor.com/) - appveyor.yml
-* [ant](https://ant.apache.org/) - build.xml
-* [artisan](http://laravel.com/docs/5.1/artisan) - artisan
-* [atoum](http://atoum.org/) - .bootstrap.atoum.php,.atoum.php
-* [arcanist](https://secure.phabricator.com/book/phabricator/article/arcanist_lint/) - .arclint, .arcconfig
-* [box2](https://github.com/box-project/box2) - box.json
-* [behat](http://docs.behat.org/en/v2.5/) - behat.yml.dist
-* [bower](http://bower.io/) - bower.json, .bowerrc
-* [bazaar](http://bazaar.canonical.com/en/) - .bzr
-* [circleCI](https://circleci.com/) - circle.yml
-* [codeception](http://codeception.com/) - codeception.yml
-* [codeclimate](http://www.codeclimate.com/) - .codeclimate.yml
-* [composer](https://getcomposer.org/) - composer.json, composer.lock
-* [couscous](http://couscous.io/) - couscous.yml
-* [Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) - .php_cs
-* [coveralls](https://coveralls.zendesk.com/) - .coveralls.yml
-* [eslint](http://eslint.org/) - .eslintrc
-* [git](https://git-scm.com/) - .git, .gitignore, .gitattributes, .gitmodules
-* [gulpfile](http://gulpjs.com/) - .js
-* [gush](https://github.com/gushphp/gush) - .gush.yml
-* [mercurial](https://www.mercurial-scm.org/) - .hg, .hgtags
-* [insight](https://insight.sensiolabs.com/) - .sensiolabs.yml
-* [jshint](http://jshint.com/) - .jshintrc
-* [npm](https://www.npmjs.com/) - package.json
-* [phan](https://github.com/etsy/phan) - .phan
-* [pharcc](https://github.com/cbednarski/pharcc) - .pharcc.yml
-* [phpformatter](https://github.com/mmoreram/php-formatter) - .formatter.yml
-* [phpmetrics](http://www.phpmetrics.org/) - .phpmetrics.yml.dist
-* [phpsa](https://github.com/ovr/phpsa) - .phpsa.yml
-* [phpspec](http://www.phpspec.net/en/latest/) - phpspec.yml
-* [phpstan](https://github.com/phpstan) - phpstan.neon
-* [phpswitch](https://github.com/jubianchi/phpswitch) - .phpswitch.yml
-* [phpunit](https://phpunit.de/) - phpunit.xml.dist
-* [psalm](https://getpsalm.org/) - psalm.xml
-* [robo](https://robo.li/) - RoboFile.php
-* [scrutinizer](https://scrutinizer-ci.com/) - .scrutinizer.yml
-* [semantic versioning](http://semver.org/) - .semver
-* [spip](http://www.spip.net/) - paquet.xml
-* [storyplayer](https://datasift.github.io/storyplayer/) - storyplayer.json.dist
-* [styleci](https://styleci.io/) - .styleci.yml
-* [sublimelinter](http://www.sublimelinter.com/en/latest/) - .csslintrc
-* [svn](https://subversion.apache.org/) - svn.revision, .svn
-* [Robots.txt](http://www.robotstxt.org/) - robots.txt
-* [travis](https://travis-ci.org/) - .travis.yml
-* [Vagrant](https://www.vagrantup.com/) - Vagrantfile
-* [Zend_Tool](https://framework.zend.com/) - zfproject.xml
+* `Apache <http://www.apache.org/>`_ - .htaccess
+* `Apple <http://www.apple.com/>`_ - .DS_Store
+* `appveyor <http://www.appveyor.com/>`_ - appveyor.yml
+* `ant <https://ant.apache.org/>`_ - build.xml
+* `artisan <http://laravel.com/docs/5.1/artisan>`_ - artisan
+* `atoum <http://atoum.org/>`_ - .bootstrap.atoum.php,.atoum.php
+* `arcanist <https://secure.phabricator.com/book/phabricator/article/arcanist_lint/>`_ - .arclint, .arcconfig
+* `box2 <https://github.com/box-project/box2>`_ - box.json
+* `behat <http://docs.behat.org/en/v2.5/>`_ - behat.yml.dist
+* `bower <http://bower.io/>`_ - bower.json, .bowerrc
+* `bazaar <http://bazaar.canonical.com/en/>`_ - .bzr
+* `circleCI <https://circleci.com/>`_ - circle.yml
+* `codeception <http://codeception.com/>`_ - codeception.yml
+* `codeclimate <http://www.codeclimate.com/>`_ - .codeclimate.yml
+* `composer <https://getcomposer.org/>`_ - composer.json, composer.lock
+* `couscous <http://couscous.io/>`_ - couscous.yml
+* `Code Sniffer <https://github.com/squizlabs/PHP_CodeSniffer>`_ - .php_cs
+* `coveralls <https://coveralls.zendesk.com/>`_ - .coveralls.yml
+* `eslint <http://eslint.org/>`_ - .eslintrc
+* `git <https://git-scm.com/>`_ - .git, .gitignore, .gitattributes, .gitmodules
+* `gulpfile <http://gulpjs.com/>`_ - .js
+* `gush <https://github.com/gushphp/gush>`_ - .gush.yml
+* `mercurial <https://www.mercurial-scm.org/>`_ - .hg, .hgtags
+* `insight <https://insight.sensiolabs.com/>`_ - .sensiolabs.yml
+* `jshint <http://jshint.com/>`_ - .jshintrc
+* `npm <https://www.npmjs.com/>`_ - package.json
+* `phan <https://github.com/etsy/phan>`_ - .phan
+* `pharcc <https://github.com/cbednarski/pharcc>`_ - .pharcc.yml
+* `phpformatter <https://github.com/mmoreram/php-formatter>`_ - .formatter.yml
+* `phpmetrics <http://www.phpmetrics.org/>`_ - .phpmetrics.yml.dist
+* `phpsa <https://github.com/ovr/phpsa>`_ - .phpsa.yml
+* `phpspec <http://www.phpspec.net/en/latest/>`_ - phpspec.yml
+* `phpstan <https://github.com/phpstan>`_ - phpstan.neon
+* `phpswitch <https://github.com/jubianchi/phpswitch>`_ - .phpswitch.yml
+* `phpunit <https://phpunit.de/>`_ - phpunit.xml.dist
+* `psalm <https://getpsalm.org/>`_ - psalm.xml
+* `robo <https://robo.li/>`_ - RoboFile.php
+* `scrutinizer <https://scrutinizer-ci.com/>`_ - .scrutinizer.yml
+* `semantic versioning <http://semver.org/>`_ - .semver
+* `spip <http://www.spip.net/>`_ - paquet.xml
+* `storyplayer <https://datasift.github.io/storyplayer/>`_ - storyplayer.json.dist
+* `styleci <https://styleci.io/>`_ - .styleci.yml
+* `sublimelinter <http://www.sublimelinter.com/en/latest/>`_ - .csslintrc
+* `svn <https://subversion.apache.org/>`_ - svn.revision, .svn
+* `Robots.txt <http://www.robotstxt.org/>`_ - robots.txt
+* `travis <https://travis-ci.org/>`_ - .travis.yml
+* `Vagrant <https://www.vagrantup.com/>`_ - Vagrantfile
+* `Zend_Tool <https://framework.zend.com/>`_ - zfproject.xml
 
