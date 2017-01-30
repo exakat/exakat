@@ -494,9 +494,9 @@ function generateAnalyzerList() {
     
     $list = "\n";
     foreach($versions as $version => $analyzers) {
-        $list .= '* '.$version."\n";
+        $list .= '* '.$version."\n\n";
         sort($analyzers);
-        $list .= '  * '.implode("\n  * ", $analyzers)."\n";
+        $list .= '  * '.implode("\n  * ", $analyzers)."\n\n";
     }
     $list .= "\n";
 
