@@ -59,8 +59,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 23 Jan 2017 10:37:29 +0000
-.. comment: Generation hash : a327cabf1bfda08b1d18676657e043f2a256b843
+.. comment: Generation date : Mon, 30 Jan 2017 17:13:22 +0000
+.. comment: Generation hash : e94530f135483bfb0f94e7935773f7c52187d57c
 
 
 .. _analyze:
@@ -68,7 +68,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 283 analysis
+Total : 284 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -86,6 +86,7 @@ Total : 283 analysis
 * :ref:`Ambiguous Index <ambiguous-index>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
+* :ref:`Assigned Twice <assigned-twice>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
 * :ref:`Bail Out Early <bail-out-early>`
@@ -95,7 +96,6 @@ Total : 283 analysis
 * :ref:`Buried Assignation <buried-assignation>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Can't Extend Final <can't-extend-final>`
-* :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
@@ -305,6 +305,7 @@ Total : 283 analysis
 * :ref:`Use Class Operator <use-class-operator>`
 * :ref:`Use Constant As Arguments <use-constant-as-arguments>`
 * :ref:`Use Instanceof <use-instanceof>`
+* :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Use Object Api <use-object-api>`
 * :ref:`Use Pathinfo <use-pathinfo>`
 * :ref:`Use Positive Condition <use-positive-condition>`
@@ -394,7 +395,6 @@ Total : 52 analysis
 * :ref:`Binary Glossary <binary-glossary>`
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-* :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
 * :ref:`Const With Array <const-with-array>`
@@ -432,6 +432,7 @@ Total : 52 analysis
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
 * :ref:`Use Const And Functions <use-const-and-functions>`
+* :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
 * :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
@@ -454,7 +455,6 @@ Total : 48 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-* :ref:`Case For Parent, Static And Self <case-for-parent,-static-and-self>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -488,6 +488,7 @@ Total : 48 analysis
 * :ref:`Unicode Escape Partial <unicode-escape-partial>`
 * :ref:`Unicode Escape Syntax <unicode-escape-syntax>`
 * :ref:`Use Const And Functions <use-const-and-functions>`
+* :ref:`Use Lower Case For Parent, Static And Self <use-lower-case-for-parent,-static-and-self>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 * :ref:`Variable Global <variable-global>`
 * :ref:`__debugInfo() usage <\_\_debuginfo()-usage>`
@@ -692,7 +693,7 @@ Total : 45 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 12 analysis
+Total : 14 analysis
 
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
@@ -700,6 +701,8 @@ Total : 12 analysis
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 * :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
+* :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+* :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`Using $this Outside A Class <using-$this-outside-a-class>`

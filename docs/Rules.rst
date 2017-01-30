@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 23 Jan 2017 10:37:29 +0000
-.. comment: Generation hash : a327cabf1bfda08b1d18676657e043f2a256b843
+.. comment: Generation date : Mon, 30 Jan 2017 17:13:22 +0000
+.. comment: Generation hash : e94530f135483bfb0f94e7935773f7c52187d57c
 
 
 .. _$http\_raw\_post\_data:
@@ -654,6 +654,48 @@ Default values will save some instructions in the constructor, and makes the val
 
 
 
+.. _assigned-twice:
+
+Assigned Twice
+##############
+
+
+The same variable is assigned twice in the same function.
+
+While this is possible and quite common, it is also a good practice to avoid changing a value from one literal to another. It is far better to assign the new value to 
+
+Incremental changes to a variables are not reported here.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       // incremental changes of $a;
+       $a = 'a';
+       $a++;
+       $a = uppercase($a);
+       
+       $b = 1;
+       $c = bar($b);
+       // B changed its purpose. Why not call it $d? 
+       $b = array(1,2,3);
+       
+       // This is some forgotten debug
+       $e = $config->getSomeList();
+       $e = array('OneElement');
+   }
+   
+   ?>
+
++--------------+-------------------------------+
+| Command Line | Variables/AssignedTwiceOrMore |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
+
+
+
 .. _avoid-large-array-assignation:
 
 Avoid Large Array Assignation
@@ -1277,24 +1319,6 @@ This also applies to methodcalls, static or not.
 +--------------+-----------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54` |
 +--------------+-----------------------------------------------------+
-
-
-
-.. _case-for-parent,-static-and-self:
-
-Case For Parent, Static And Self
-################################
-
-
-Until PHP 5.5, the special Parent, Static and Self keywords needed to be lowercase to be useable. Otherwise, they would yield a 'PHP Fatal error:  Class 'PARENT' not found'.
-
-Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
-
-+--------------+--------------------------------------------------------------------+
-| Command Line | Php/CaseForPSS                                                     |
-+--------------+--------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP53` |
-+--------------+--------------------------------------------------------------------+
 
 
 
@@ -5113,7 +5137,7 @@ Nested Ifthen
 #############
 
 
-Three levels of ifthen is too much. The method should be split into smaller functions.
+Three levels of ifthen is too much. The method should be `split <http://www.php.net/split>`_ into smaller functions.
 
 .. code-block:: php
 
@@ -6402,7 +6426,28 @@ One Variable String
 ###################
 
 
-These strings only contains one variable (or function call, or methodcall, or array defererence). 
+These strings only contains one variable or property or array. 
+
+.. code-block:: php
+
+   <?php
+   
+   $a = 0;
+   $b = $a; // This is a one-variable string
+   
+   // Better way to write the above
+   $b = (string) $a;
+   
+   // Alternatives : 
+   $b2 = $a[1]; // This is a one-variable string
+   $b3 = $a->b; // This is a one-variable string
+   $c = d;
+   $d = D;
+   $b4 = "{$$c}";
+   $b5 = "{$a->foo()}";
+   
+   ?>
+
 
 If the goal is to convert it to a string, use the type casting (string) operator : it is then clearer to understand the conversion. It is also marginally faster, though very little.
 
@@ -6654,6 +6699,50 @@ List of directives that are removed in PHP 7.1.
 
 
 
+.. _php-7.2-deprecations:
+
+PHP 7.2 Deprecations
+####################
+
+
+PHP 7.2 deprecates several features of the language. 
+
+* parse_str() with no second argument
+* assert() on strings
+* Usage of gmp_random(), create_function(), each()
+* Usage of (unset)
+* Usage of $php_errormsg
+* directive mbstring.func_overload (not supported yet)
+
+Deprecated functions and extensions are reported in a separate analysis.
+
++--------------+---------------------------+
+| Command Line | Php/Php72Deprecation      |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP72` |
++--------------+---------------------------+
+
+
+
+.. _php-7.2-removed-functions:
+
+PHP 7.2 Removed Functions
+#########################
+
+
+The following PHP native functions were removed in PHP 7.2.
+
+* `png2wbmp <http://www.php.net/png2wbmp>`_
+* `jpeg2wbmp <http://www.php.net/jpeg2wbmp>`_
+
++--------------+---------------------------+
+| Command Line | Php/Php72RemovedFunctions |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP72` |
++--------------+---------------------------+
+
+
+
 .. _php-70-removed-functions:
 
 PHP 70 Removed Functions
@@ -6661,6 +6750,31 @@ PHP 70 Removed Functions
 
 
 The following PHP native functions were removed in PHP 7.0.
+
+* `ereg <http://www.php.net/ereg>`_
+* `ereg_replace <http://www.php.net/ereg_replace>`_
+* `eregi <http://www.php.net/eregi>`_
+* `eregi_replace <http://www.php.net/eregi_replace>`_
+* `split <http://www.php.net/split>`_
+* `spliti <http://www.php.net/spliti>`_
+* `sql_regcase <http://www.php.net/sql_regcase>`_
+* `magic_quotes_runtime <http://www.php.net/magic_quotes_runtime>`_
+* `set_magic_quotes_runtime <http://www.php.net/set_magic_quotes_runtime>`_
+* `call_user_method <http://www.php.net/call_user_method>`_
+* `call_user_method_array <http://www.php.net/call_user_method_array>`_
+* `set_socket_blocking <http://www.php.net/set_socket_blocking>`_
+* `mcrypt_ecb <http://www.php.net/mcrypt_ecb>`_
+* `mcrypt_cbc <http://www.php.net/mcrypt_cbc>`_
+* `mcrypt_cfb <http://www.php.net/mcrypt_cfb>`_
+* `mcrypt_ofb <http://www.php.net/mcrypt_ofb>`_
+* `datefmt_set_timezone_id <http://www.php.net/datefmt_set_timezone_id>`_
+* `imagepsbbox <http://www.php.net/imagepsbbox>`_
+* `imagepsencodefont <http://www.php.net/imagepsencodefont>`_
+* `imagepsextendfont <http://www.php.net/imagepsextendfont>`_
+* `imagepsfreefont <http://www.php.net/imagepsfreefont>`_
+* `imagepsloadfont <http://www.php.net/imagepsloadfont>`_
+* `imagepsslantfont <http://www.php.net/imagepsslantfont>`_
+* `imagepstext <http://www.php.net/imagepstext>`_
 
 +--------------+-----------------------------------------------------+
 | Command Line | Php/Php70RemovedFunctions                           |
@@ -8402,6 +8516,27 @@ Static Methods Can't Contain $this
 
 Static methods are also called 'class methods' : they may be called even if the class has no instantiated object. Thus, the local variable $this won't exist, PHP will set it to NULL as usual. 
 
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // Static method may access other static methods, or property, or none. 
+       static function staticBar() {
+           // This is not possible in a static method
+           return self::otherStaticBar() . static::$staticProperty;
+       }
+   
+       static function bar() {
+           // This is not possible in a static method
+           return $this->property;
+       }
+   
+   }
+   
+   ?>
+
+
 Either, this is not a static method (simply remove the static keyword), or replace all $this mention by static properties Class::$property.
 
 +--------------+---------------------------------------------------------------------------------------------+
@@ -10084,6 +10219,23 @@ Use === null
 
 It is faster to use === null instead of is_null().
 
+.. code-block:: php
+
+   <?php
+   
+   // Operator === is fast
+   if ($a === null) {
+   
+   }
+   
+   // Function call is slow 
+   if (is_null($a)) {
+   
+   }
+   
+   
+   ?>
+
 +--------------+---------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/IsnullVsEqualNull                                                                                               |
 +--------------+---------------------------------------------------------------------------------------------------------------------+
@@ -10222,6 +10374,45 @@ The `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operato
 +--------------+-------------------------------+
 | Analyzers    | :ref:`Analyze`,:ref:`Analyze` |
 +--------------+-------------------------------+
+
+
+
+.. _use-lower-case-for-parent,-static-and-self:
+
+Use Lower Case For Parent, Static And Self
+##########################################
+
+
+Until PHP 5.5, the special Parent, Static and Self keywords needed to be lowercase to be useable. Otherwise, they would yield a 'PHP Fatal error:  Class 'PARENT' not found'.
+
+parent, static and self are traditionally written in lowercase only. Mixed case and Upper case are both valid, though.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       const aConstante = 233;
+       
+       function method() {
+           // Wrong case, error with PHP 5.4.* and older
+           echo SELF::aConstante;
+           
+           // Always right. 
+           echo self::aConstante;
+       }
+   }
+   
+   ?>
+
+
+Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
+
++--------------+--------------------------------------------------------------------+
+| Command Line | Php/CaseForPSS                                                     |
++--------------+--------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP53` |
++--------------+--------------------------------------------------------------------+
 
 
 

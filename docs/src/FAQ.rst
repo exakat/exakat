@@ -13,7 +13,7 @@ Summary
 * `Can I run exakat on Windows?`_
 
 
-* `I need special command to get my code`_
+`I need special command to get my code`_
 ------------------------------------------
 
 If Exakat has no documented method to reach your code, you may use this process : 

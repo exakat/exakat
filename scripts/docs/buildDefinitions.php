@@ -204,6 +204,34 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'uksort'                         => 'http://www.php.net/uksort',
                  'uasort'                         => 'http://www.php.net/uasort',
                  'sort'                           => 'http://www.php.net/sort',
+                 
+                 'png2wbmp'                       => 'http://www.php.net/png2wbmp',
+                 'jpeg2wbmp'                      => 'http://www.php.net/jpeg2wbmp',
+
+                 'ereg'                           => 'http://www.php.net/ereg',
+                 'ereg_replace'                   => 'http://www.php.net/ereg_replace',
+                 'eregi'                          => 'http://www.php.net/eregi',
+                 'eregi_replace'                  => 'http://www.php.net/eregi_replace',
+                 'split'                          => 'http://www.php.net/split',
+                 'spliti'                         => 'http://www.php.net/spliti',
+                 'sql_regcase'                    => 'http://www.php.net/sql_regcase',
+                 'magic_quotes_runtime'           => 'http://www.php.net/magic_quotes_runtime',
+                 'set_magic_quotes_runtime'       => 'http://www.php.net/set_magic_quotes_runtime',
+                 'call_user_method'               => 'http://www.php.net/call_user_method',
+                 'call_user_method_array'         => 'http://www.php.net/call_user_method_array',
+                 'set_socket_blocking'            => 'http://www.php.net/set_socket_blocking',
+                 'mcrypt_ecb'                     => 'http://www.php.net/mcrypt_ecb',
+                 'mcrypt_cbc'                     => 'http://www.php.net/mcrypt_cbc',
+                 'mcrypt_cfb'                     => 'http://www.php.net/mcrypt_cfb',
+                 'mcrypt_ofb'                     => 'http://www.php.net/mcrypt_ofb',
+                 'datefmt_set_timezone_id'        => 'http://www.php.net/datefmt_set_timezone_id',
+                 'imagepsbbox'                    => 'http://www.php.net/imagepsbbox',
+                 'imagepsencodefont'              => 'http://www.php.net/imagepsencodefont',
+                 'imagepsextendfont'              => 'http://www.php.net/imagepsextendfont',
+                 'imagepsfreefont'                => 'http://www.php.net/imagepsfreefont',
+                 'imagepsloadfont'                => 'http://www.php.net/imagepsloadfont',
+                 'imagepsslantfont'               => 'http://www.php.net/imagepsslantfont',
+                 'imagepstext'                    => 'http://www.php.net/imagepstext',
 
                  'mail'                           => 'http://www.php.net/mail',
 
@@ -494,9 +522,9 @@ function generateAnalyzerList() {
     
     $list = "\n";
     foreach($versions as $version => $analyzers) {
-        $list .= '* '.$version."\n";
+        $list .= '* '.$version."\n\n";
         sort($analyzers);
-        $list .= '  * '.implode("\n  * ", $analyzers)."\n";
+        $list .= '  * '.implode("\n  * ", $analyzers)."\n\n";
     }
     $list .= "\n";
 

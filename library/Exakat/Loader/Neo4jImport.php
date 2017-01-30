@@ -25,7 +25,7 @@ namespace Exakat\Loader;
 
 use Exakat\Config;
 use Exakat\Datastore;
-use Exakat\Exception\GremlinException;
+use Exakat\Exceptions\GremlinException;
 use Exakat\Graph\Cypher;
 use Exakat\Graph\Gremlin3;
 use Exakat\Tasks\Load;

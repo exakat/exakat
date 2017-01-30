@@ -73,6 +73,9 @@ abstract class Analyzer {
     const T_LONG    = 'Long';    //360';
     
     const PHP_VERSION_ANY = 'Any';
+    
+    const CASE_SENSITIVE = true;
+    const CASE_INSENSITIVE = false;
 
     static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Property', 'Array');
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
@@ -718,30 +721,30 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
         return $this;
     }
 
-    public function codeIs($code, $caseSensitive = false) {
+    public function codeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         return $this->propertyIs('code', $code, $caseSensitive);
     }
 
-    public function codeIsNot($code, $caseSensitive = false) {
+    public function codeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
         return $this->propertyIsNot('code', $code, $caseSensitive);
     }
 
-    public function noDelimiterIs($code, $caseSensitive = false) {
+    public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->addMethod('hasLabel("String")', $code);
         return $this->propertyIs('noDelimiter', $code, $caseSensitive);
     }
 
-    public function noDelimiterIsNot($code, $caseSensitive = false) {
+    public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->addMethod('hasLabel("String")', $code);
         return $this->propertyIsNot('noDelimiter', $code, $caseSensitive);
     }
 
     public function fullnspathIs($code) {
-        return $this->propertyIs('fullnspath', $code, false);
+        return $this->propertyIs('fullnspath', $code, self::CASE_INSENSITIVE);
     }
 
     public function fullnspathIsNot($code) {
-        return $this->propertyIsNot('fullnspath', $code, false);
+        return $this->propertyIsNot('fullnspath', $code, self::CASE_INSENSITIVE);
     }
     
     public function codeIsPositiveInteger() {
@@ -750,8 +753,8 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
         return $this;
     }
 
-    public function samePropertyAs($property, $name, $caseSensitive = false) {
-        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
+    public function samePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
+        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -761,8 +764,8 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
         return $this;
     }
 
-    public function notSamePropertyAs($property, $name, $caseSensitive = false) {
-        if ($caseSensitive === true || $property == 'line' || $property == 'rank') {
+    public function notSamePropertyAs($property, $name, $caseSensitive = self::CASE_INSENSITIVE) {
+        if ($caseSensitive === self::CASE_SENSITIVE || $property == 'line' || $property == 'rank') {
             $caseSensitive = '';
         } else {
             $caseSensitive = '.toLowerCase()';
@@ -796,13 +799,13 @@ GREMLIN
         return $this;
     }
 
-    public function fullcodeIs($code, $caseSensitive = false) {
+    public function fullcodeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->propertyIs('fullcode', $code, $caseSensitive);
         
         return $this;
     }
     
-    public function fullcodeIsNot($code, $caseSensitive = false) {
+    public function fullcodeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
         $this->propertyIsNot('fullcode', $code, $caseSensitive);
         
         return $this;
@@ -1761,8 +1764,8 @@ GREMLIN;
         return $className;
     }
 
-    private function propertyIs($property, $code, $caseSensitive = false) {
-        if ($caseSensitive === true) {
+    private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if ($caseSensitive === self::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {
             $this->tolowercase($code);
@@ -1778,8 +1781,8 @@ GREMLIN;
         return $this;
     }
 
-    private function propertyIsNot($property, $code, $caseSensitive = false) {
-        if ($caseSensitive === true) {
+    private function propertyIsNot($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if ($caseSensitive === self::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {
             $this->tolowercase($code);

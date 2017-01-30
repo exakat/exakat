@@ -11,6 +11,6 @@ $expected     = array('08',
                       '080', 
                       '07');
 
-$expected_not = array();
+$expected_not = array('0.000');
 
 ?>

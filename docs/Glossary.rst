@@ -129,6 +129,14 @@ Glossary
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 
+    + `call_user_method`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `call_user_method_array`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
     + `closure`
 
       + :ref:`Closure May Use $this <closure-may-use-$this>`
@@ -172,6 +180,10 @@ Glossary
     + `date`
 
       + :ref:`Timestamp Difference <timestamp-difference>`
+
+    + `datefmt_set_timezone_id`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `die`
 
@@ -223,6 +235,22 @@ Glossary
       + :ref:`Useless Constructor <useless-constructor>`
       + :ref:`Useless Return <useless-return>`
       + :ref:`parse_str() Warning <parse\_str()-warning>`
+
+    + `ereg`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `ereg_replace`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `eregi`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `eregi_replace`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `error_clear_last`
 
@@ -335,6 +363,34 @@ Glossary
 
       + :ref:`No Isset With Empty <no-isset-with-empty>`
 
+    + `imagepsbbox`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsencodefont`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsextendfont`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsfreefont`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsloadfont`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepsslantfont`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `imagepstext`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
     + `implode`
 
       + :ref:`Join file() <join-file()>`
@@ -376,11 +432,19 @@ Glossary
 
       + :ref:`Join file() <join-file()>`
 
+    + `jpeg2wbmp`
+
+      + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
+
 
 + `M`
     + `Mail`
 
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+
+    + `magic_quotes_runtime`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `mail`
 
@@ -401,6 +465,22 @@ Glossary
     + `mb_substr`
 
       + :ref:`No Substr() One <no-substr()-one>`
+
+    + `mcrypt_cbc`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `mcrypt_cfb`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `mcrypt_ecb`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `mcrypt_ofb`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `microtime`
 
@@ -427,6 +507,10 @@ Glossary
     + `ParseError`
 
       + :ref:`eval() Without Try <eval()-without-try>`
+
+    + `png2wbmp`
+
+      + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 
     + `posix_setrlimit`
 
@@ -483,9 +567,31 @@ Glossary
 
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
 
+    + `set_magic_quotes_runtime`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `set_socket_blocking`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
     + `sleep`
 
       + :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
+
+    + `split`
+
+      + :ref:`Nested Ifthen <nested-ifthen>`
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`Redeclared PHP Functions <redeclared-php-functions>`
+
+    + `spliti`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+
+    + `sql_regcase`
+
+      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `srand`
 

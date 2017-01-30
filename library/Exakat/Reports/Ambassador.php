@@ -43,7 +43,7 @@ class Ambassador extends Reports {
     private $severities        = null;
 
     private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
-                                  'CompatibilityPHP70', 'CompatibilityPHP71',
+                                  'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
                                   '"Dead code"', 'Security', 'Analyze');
 
     const TOPLIMIT = 10;
@@ -61,6 +61,14 @@ class Ambassador extends Reports {
                                  'traits'     => 'Traits',
                                  'namespaces' => 'Namespaces',
                                  'exceptions' => 'Exceptions');
+
+    private $compatibilities = array('53' => 'Compatibility PHP 5.3',
+                                     '54' => 'Compatibility PHP 5.4',
+                                     '55' => 'Compatibility PHP 5.5',
+                                     '56' => 'Compatibility PHP 5.6',
+                                     '70' => 'Compatibility PHP 7.0',
+                                     '71' => 'Compatibility PHP 7.1',
+                                     '72' => 'Compatibility PHP 7.2',);
 
     public function __construct() {
         parent::__construct();
@@ -87,7 +95,13 @@ class Ambassador extends Reports {
             foreach($this->inventories as $fileName => $title) {
                 $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
             }
+            $compatibilities = '';
+            $res = $this->sqlite->query('SELECT SUBSTR(key, -2) FROM hash WHERE key LIKE "Compatibility%"');
+            while($row = $res->fetchArray(\SQLITE3_NUM)) {
+                $compatibilities .= "              <li><a href=\"compatibility_php$row[0].html\"><i class=\"fa fa-circle-o\"></i>{$this->compatibilities[$row[0]]}</a></li>\n";
+            }
             $menu = $this->injectBloc($menu, 'INVENTORIES', $inventories);
+            $menu = $this->injectBloc($menu, 'COMPATIBILITIES', $compatibilities);
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
@@ -135,6 +149,13 @@ class Ambassador extends Reports {
         $this->generateDirectiveList();
         $this->generateAlteredDirectives();
         $this->generateStats();
+
+        // Compatibility
+        $this->generateCompilations();
+        $res = $this->sqlite->query('SELECT SUBSTR(key, -2) FROM hash WHERE key LIKE "Compatibility%"');
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            $this->generateCompatibility($row[0]);
+        }
         
         // Favorites
         $this->generateFavorites();
@@ -238,7 +259,7 @@ class Ambassador extends Reports {
         foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
             $analyzer = Analyzer::getInstance($analyzer);
             $description = $analyzer->getDescription();
-            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'">'.$description->getName().'</a></h2>';
+            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
             
             $badges = array();
             $v = $description->getVersionAdded();
@@ -2001,6 +2022,87 @@ SQL
         $this->putBasedPage('directive_list', $html);
     }
     
+    private function generateCompilations() {
+        $compilations = '';
+
+        $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
+        $info = array();
+        foreach($this->config->other_php_versions as $suffix) {
+            $res = $this->sqlite->querySingle('SELECT name FROM sqlite_master WHERE type="table" AND name="compilation'.$suffix.'"');
+            if (!$res) {
+                continue; // Table was not created
+            }
+
+            $res = $this->sqlite->query('SELECT file FROM compilation'.$suffix);
+            $files = array();
+            while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                $files[] = $row['file'];
+            }
+            $version = $suffix[0].'.'.substr($suffix, 1);
+            if (empty($files)) {
+                $files       = 'No compilation error found.';
+                $errors      = 'N/A';
+                $total_error = 'N/A';
+            } else {
+                $res = $this->sqlite->query('SELECT error FROM compilation'.$suffix);
+                $readErrors = array();
+                while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+                    $readErrors[] = $row['error'];
+                }
+                $errors      = array_count_values($readErrors);
+                $errors      = array_keys($errors);
+                $errors      = array_keys(array_count_values($errors));
+                $errors       = '<ul><li>'.implode("</li>\n<li>", $errors).'</li></ul>';
+
+                $total_error = count($files).' (' .number_format(count($files) / $total * 100, 0). '%)';
+                $files       = array_keys(array_count_values($files));
+                $files       = '<ul><li>'.implode("</li>\n<li>", $files).'</li></ul>';
+            }
+
+            $compilations .= "<tr><td>$version</td><td>$total</td><td>$total_error</td><td>$files</td><td>$errors</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('compatibility_compilations');
+        $html = $this->injectBloc($html, 'COMPILATIONS', $compilations);
+        $html = $this->injectBloc($html, 'TITLE', 'Compilations overview');
+        $this->putBasedPage('compatibility_compilations', $html);
+    }
+        
+    private function generateCompatibility($version) {
+        $compatibility = '';
+
+        $list = Analyzer::getThemeAnalyzers('CompatibilityPHP'.$version);
+        
+        $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
+        $counts = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $counts[$row['analyzer']] = $row['counts'];
+        }
+        
+        foreach($list as $l) {
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$l.'.ini');
+            if (isset($counts[$l])) {
+                $result = (int) $counts[$l];
+            } else {
+                $result = -1;
+            }
+            $result = $this->Compatibility($result);
+            $name = $ini['name'];
+            $link = '<a href="analyzers_doc.html#'.md5($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $compatibility .= "<tr><td>$name $link</td><td>$result</td></tr>\n";
+        }
+
+        $description = <<<HTML
+<i class="fa fa-check-square-o"></i> : Nothing found for this analysis, proceed with caution; <i class="fa fa-warning red"></i> : some issues found, check this; <i class="fa fa-ban"></i> : Can't test this, PHP version incompatible; <i class="fa fa-cogs"></i> : Can't test this, PHP configuration incompatible; 
+HTML;
+
+        $html = $this->getBasedPage('compatibility');
+        $html = $this->injectBloc($html, 'COMPATIBILITY', $compatibility);
+        $html = $this->injectBloc($html, 'TITLE', 'Compatibility PHP '.$version[0].'.'.$version[1]);
+        $html = $this->injectBloc($html, 'DESCRIPTION', $description);
+        $this->putBasedPage('compatibility_php'.$version, $html);
+    }
+    
     private function generateDynamicCode() {
         $dynamicCode = '';
 
@@ -2611,6 +2713,18 @@ HTML;
         
         return $cveHtml;
     }    
+    
+    private function Compatibility($count) {
+        if ($count == Analyzer::VERSION_INCOMPATIBLE) {
+            return '<i class="fa fa-ban"></i>';
+        } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {
+            return '<i class="fa fa-cogs"></i>';
+        } elseif ($count === 0) {
+            return '<i class="fa fa-check-square-o"></i>';
+        } else {
+            return '<i class="fa fa-warning red"></i>&nbsp;'.$count.' warnings';
+        }
+    }
 }
 
 ?>

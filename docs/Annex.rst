@@ -60,6 +60,8 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * PhpCompilation
   * Inventories
   * Clustergrammer
+  * FileDependencies
+  * FileDependenciesHtml
   * ZendFramework
   * RadwellCode
   * FacetedJson
@@ -215,7 +217,8 @@ Frameworks are supported when they is an analysis related to them. Then, a selec
 
 ::
    php exakat.phar analysis -p <project> -T <Framework> 
-   
+
+
 
 * Cakephp
 * Wordpress
@@ -271,30 +274,49 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. 
 
 
+* 0.9.9
+
+  * PHP 7.2 Deprecations (Php/Php72Deprecation)
+  * PHP 7.2 Removed Functions (Php/Php72RemovedFunctions)
+
 * 0.9.8
-  * Variables/AssignedTwiceOrMore (Variables/AssignedTwiceOrMore)
+
+  * Assigned Twice (Variables/AssignedTwiceOrMore)
+  * New Line Style (Structures/NewLineStyle)
+
 * 0.9.7
+
   * Avoid Large Array Assignation (Structures/NoAssignationInFunction)
   * Could Be Protected Property (Classes/CouldBeProtectedProperty)
   * Long Arguments (Structures/LongArguments)
   * ZendF/ZendTypehinting (ZendF/ZendTypehinting)
+
 * 0.9.6
+
   * Fetch One Row Format (Performances/FetchOneRowFormat)
   * Performances/NoGlob (Performances/NoGlob)
+
 * 0.9.5
+
   * Ext/mongodb (Extensions/Extmongodb)
   * One Expression Brackets Consistency (Structures/OneExpressionBracketsConsistency)
   * Should Use Function Use (Php/ShouldUseFunction)
   * ext/zbarcode (Extensions/Extzbarcode)
+
 * 0.9.4
+
   * Class Should Be Final By Ocramius (Classes/FinalByOcramius)
   * String (Extensions/Extstring)
   * ext/mhash (Extensions/Extmhash)
+
 * 0.9.3
+
   * Close Tags Consistency (Php/CloseTagsConsistency)
   * Unset() Or (unset) (Php/UnsetOrCast)
   * Wpdb Prepare Or Not (Wordpress/WpdbPrepareOrNot)
+
 * 0.9.2
+
   * $GLOBALS Or global (Php/GlobalsVsGlobal)
   * Illegal Name For Method (Classes/WrongName)
   * Too Many Local Variables (Functions/TooManyLocalVariables)
@@ -302,7 +324,9 @@ List of analyzers, by version of introduction, newest to oldest.
   * ext/ncurses (Extensions/Extncurses)
   * ext/newt (Extensions/Extnewt)
   * ext/nsapi (Extensions/Extnsapi)
+
 * 0.9.1
+
   * Avoid array_push() (Performances/AvoidArrayPush)
   * Could Return Void (Functions/CouldReturnVoid)
   * Invalid Octal In String (Type/OctalInString)
@@ -316,10 +340,14 @@ List of analyzers, by version of introduction, newest to oldest.
   * Use stdClass (Php/UseStdclass)
   * Zend Interface (ZendF/ZendInterfaces)
   * Zend Trait (ZendF/ZendTrait)
+
 * 0.9.0
+
   * Getting Last Element (Arrays/GettingLastElement)
   * Rethrown Exceptions (Exceptions/Rethrown)
+
 * 0.8.9
+
   * Array() / [  ] Consistence (Arrays/ArrayBracketConsistence)
   * Bail Out Early (Structures/BailOutEarly)
   * Die Exit Consistence (Structures/DieExitConsistance)
@@ -330,25 +358,33 @@ List of analyzers, by version of introduction, newest to oldest.
   * Unitialized Properties (Classes/UnitializedProperties)
   * Use Wordpress Functions (Wordpress/UseWpFunctions)
   * Useless Check (Structures/UselessCheck)
+
 * 0.8.7
+
   * Dont Echo Error (Security/DontEchoError)
   * No Isset With Empty (Structures/NoIssetWithEmpty)
   * Performances/timeVsstrtotime (Performances/timeVsstrtotime)
   * Use Class Operator (Classes/UseClassOperator)
   * Useless Casting (Structures/UselessCasting)
   * ext/rar (Extensions/Extrar)
+
 * 0.8.6
+
   * Boolean Value (Type/BooleanValue)
   * Drop Else After Return (Structures/DropElseAfterReturn)
   * Modernize Empty With Expression (Structures/ModernEmpty)
   * Null Value (Type/NullValue)
   * Use Positive Condition (Structures/UsePositiveCondition)
+
 * 0.8.5
+
   * Is Zend Framework 1 Controller (ZendF/IsController)
   * Is Zend Framework 1 Helper (ZendF/IsHelper)
   * Should Make Ternary (Structures/ShouldMakeTernary)
   * Unused Returned Value (Functions/UnusedReturnedValue)
+
 * 0.8.4
+
   * $HTTP_RAW_POST_DATA (Php/RawPostDataUsage)
   * $this Belongs To Classes Or Traits (Classes/ThisIsForClasses)
   * $this Is Not An Array (Classes/ThisIsNotAnArray)
@@ -365,7 +401,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Accessing Private (Classes/AccessPrivate)
   * Action Should Bin In Controller (ZendF/ActionInController)
   * Adding Zero (Structures/AddZero)
-  * Alias (Namespaces/Alias)
+  * Aliases (Namespaces/Alias)
   * Aliases Usage (Functions/AliasesUsage)
   * All Uppercase Variables (Variables/VariableUppercase)
   * Already Parents Interface (Interfaces/AlreadyParentsInterface)
@@ -381,6 +417,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Arrays Is Read (Arrays/IsRead)
   * Assertions (Php/AssertionUsage)
   * Assign Default To Properties (Classes/MakeDefault)
+  * Autoloading (Php/AutoloadUsage)
   * Avoid Parenthesis (Structures/PrintWithoutParenthesis)
   * Avoid Those Crypto (Security/AvoidThoseCrypto)
   * Avoid array_unique() (Structures/NoArrayUnique)
@@ -400,7 +437,6 @@ List of analyzers, by version of introduction, newest to oldest.
   * Can't Disable Function (Security/CantDisableFunction)
   * Can't Extend Final (Classes/CantExtendFinal)
   * Cant Use Return Value In Write Context (Php/CantUseReturnValueInWriteContext)
-  * Case For Parent, Static And Self (Php/CaseForPSS)
   * Cast To Boolean (Structures/CastToBoolean)
   * Cast Usage (Php/CastingUsage)
   * Catch Overwrite Variable (Structures/CatchShadowsVariable)
@@ -506,7 +542,6 @@ List of analyzers, by version of introduction, newest to oldest.
   * Ext/geoip (Extensions/Extgeoip)
   * External Config Files (Files/Services)
   * Failed Substr Comparison (Structures/FailingSubstrComparison)
-  * Falsy (Structures/Falsy)
   * File Is Component (Files/IsComponent)
   * File Uploads (Structures/FileUploadUsage)
   * File Usage (Structures/FileUsage)
@@ -537,7 +572,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Global Inside Loop (Structures/GlobalOutsideLoop)
   * Global Usage (Structures/GlobalUsage)
   * Globals (Variables/Globals)
-  * Goto (Php/Gotonames)
+  * Goto Names (Php/Gotonames)
   * HTTP Status Code (Type/HttpStatus)
   * Hardcoded Passwords (Functions/HardcodedPasswords)
   * Has Magic Property (Classes/HasMagicProperty)
@@ -798,7 +833,6 @@ List of analyzers, by version of introduction, newest to oldest.
   * Traits (Traits/TraitUsage)
   * Trigger Errors (Php/TriggerErrorUsage)
   * True False Inconsistant Case (Constants/InconsistantCase)
-  * Truthy (Structures/Truthy)
   * Try Catch Usage (Php/TryCatchUsage)
   * Try With Finally (Structures/TryFinally)
   * Typehints (Functions/Typehints)
@@ -860,6 +894,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Use Constant (Structures/UseConstant)
   * Use Constant As Arguments (Functions/UseConstantAsArguments)
   * Use Instanceof (Classes/UseInstanceof)
+  * Use Lower Case For Parent, Static And Self (Php/CaseForPSS)
   * Use Nullable Type (Php/UseNullableType)
   * Use Object Api (Php/UseObjectApi)
   * Use Pathinfo (Php/UsePathinfo)
@@ -1056,11 +1091,13 @@ List of analyzers, by version of introduction, newest to oldest.
   * parse_str() Warning (Security/parseUrlWithoutParameters)
   * preg_match_all() Flag (Php/PregMatchAllFlag)
   * preg_replace With Option e (Structures/pregOptionE)
-  * register_autoload_spl (Php/AutoloadUsage)
   * set_exception_handler() Warning (Php/SetExceptionHandlerPHP7)
   * var_dump()... Usage (Structures/VardumpUsage)
+
 * 0.8.3
+
   * Variable Global (Structures/VariableGlobal)
+
 
 
 

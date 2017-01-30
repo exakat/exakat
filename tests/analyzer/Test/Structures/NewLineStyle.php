@@ -7,10 +7,10 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class Structures_Falsy extends Analyzer {
+class Structures_NewLineStyle extends Analyzer {
     /* 2 methods */
 
-    public function testStructures_Falsy01()  { $this->generic_test('Structures/Falsy.01'); }
-    public function testStructures_Falsy02()  { $this->generic_test('Structures/Falsy.02'); }
+    public function testStructures_NewLineStyle01()  { $this->generic_test('Structures/NewLineStyle.01'); }
+    public function testStructures_NewLineStyle02()  { $this->generic_test('Structures/NewLineStyle.02'); }
 }
 ?>

@@ -26,8 +26,8 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '0.9.6';
-    const BUILD = 518;
+    const VERSION = '0.9.9';
+    const BUILD = 539;
     
     private $gremlin = null;
     private $config = null;
@@ -131,11 +131,6 @@ class Exakat {
 
             case 'update' : 
                 $task = new Tasks\Update($this->gremlin, $this->config);
-                $task->run($config);
-                break;
-
-            case 'onepagereport' : 
-                $task = new Tasks\OnepageReport($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 

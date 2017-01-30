@@ -1,4 +1,4 @@
-Version 0.9.9 (Pilanpo Bodhisattva, Coming up)
+Version 0.10.0 (Azure Lion, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,19 @@ Version 0.9.9 (Pilanpo Bodhisattva, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.9.9 (Pilanpo Bodhisattva, 2017/01/30)
++ Architecture
+    + Moving true/false to constants
++ Report
+    + Ambassador : Added 'Compilation' and Version compatibility reports.
+    + Prepared collection of dependencies in dump
++ Analyzer
+    + New Thema : Compatibility PHP 7.2
+    + New analyzer : Deprecated Features of PHP 7.2
+    + New analyzer : Removed Function for PHP 7.2
+    + New preference : New Line Style
+    + Upgraded analysis : 1781 / 1802 test pass (98.9% pass)
 
 Version 0.9.8 (Multiple Eyed Creature, 2017-01-23)
 + Architecture
