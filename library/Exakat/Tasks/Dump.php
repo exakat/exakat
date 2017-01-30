@@ -373,6 +373,7 @@ SQL;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Class")
+.where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
 .sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
 .sideEffect{ useList = []; }.where(__.out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
@@ -617,7 +618,9 @@ SQL;
         $query = <<<GREMLIN
 g.V().hasLabel("Function")
 .where( __.out("NAME").hasLabel("Void").count().is(eq(0)) )
-.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface", "Trait").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
+.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface", "Trait")
+                                    .where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )
+                                    .sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
 .filter{ classe != '';} // Removes functions, keeps methods
 .map{ 
     x = ['name': it.get().value("fullcode"),
@@ -680,7 +683,9 @@ SQL;
         $query = <<<GREMLIN
 
 g.V().hasLabel("Ppp")
-.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
+.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface")
+                                    .where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )
+                                    .sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
 .filter{ classe != '';} // Removes functions, keeps methods
 .out('PPP')
 .map{ 
@@ -947,16 +952,18 @@ SQL;
                    .select("file", "include").by("fullcode").by("fullcode")
                    ';
         $res = $this->gremlin->query($query);
-        $constants = $res->results;
+        if (isset($res->results)) {
+            $constants = $res->results;
 
-        foreach($constants as $link) {
-            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
-            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
-            $insertQuery->bindValue(':type',      'CONSTANT',     \SQLITE3_TEXT);
-            $insertQuery->execute();
+            foreach($constants as $link) {
+                $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+                $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+                $insertQuery->bindValue(':type',      'CONSTANT',     \SQLITE3_TEXT);
+                $insertQuery->execute();
+            }
+            display(count($constants)." constants ");
         }
-        display(count($constants)." constants ");
-
+        
         // New
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("New")).times(15)
