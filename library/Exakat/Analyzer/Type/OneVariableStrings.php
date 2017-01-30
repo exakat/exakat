@@ -30,7 +30,7 @@ class OneVariableStrings extends Analyzer {
         $this->atomIs('String')
              ->is('count', 1)
              ->outIs('CONCAT')
-             ->atomIs(array('Variable', 'Array', 'Property'));
+             ->atomIs(array('Variable', 'Array', 'Property', 'Methodcall', 'Staticmethodcall'));
         $this->prepareQuery();
     }
 }
