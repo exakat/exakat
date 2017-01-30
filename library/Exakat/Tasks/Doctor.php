@@ -147,7 +147,12 @@ class Doctor extends Tasks {
             if (empty($gremlinPlugin)) {
                 $stats['neo4j']['gremlinJar'] = 'neo4j-gremlin-3.*.jar coudln\'t be found in the '.$this->config->neo4j_folder.'/plugins/* folders. Make sure gremlin is installed, and running gremlin version 3.* (3.2 is recommended).';
             } elseif (count($gremlinPlugin) > 1) {
-                $stats['neo4j']['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin. Only one neo4j-gremlin-3.*.jar is sufficient. ';
+                $versions = array();
+                foreach($gremlinPlugin as $version) {
+                    $v = basename($version);
+                    $versions[] = $v;
+                }
+                $stats['neo4j']['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin : '.join(', ', $versions).'. Only one neo4j-gremlin-3.*.jar is sufficient. ';
             } else {
                 $stats['neo4j']['gremlinJar'] = basename(trim(array_pop($gremlinPlugin)));
             }
@@ -179,7 +184,7 @@ class Doctor extends Tasks {
                     $stats['neo4j']['running here'] = 'No';
                 }
                 
-                if ('{"success":true}' === file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute')) {
+                if ('{"success":true}' === @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute')) {
                     $stats['neo4j']['gremlin'] = 'Yes';
                 } else {
                     $stats['neo4j']['gremlin'] = 'No';
