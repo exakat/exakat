@@ -216,9 +216,9 @@ class Config {
         $inis = array();
         $configFiles = array('/etc/exakat.ini',
                              '/etc/exakat/exakat.ini',
-                             
                              $this->projects_root.'/config/config-default.ini',
                              $this->projects_root.'/config/exakat.ini',
+                             $this->projects_root.'/.codacy.json',
                              ); 
         foreach($configFiles as $id => $configFile) {
             if (file_exists($configFile)) {
@@ -235,7 +235,7 @@ class Config {
 
         // then read the config from the commandline (if any)
         $this->readCommandline();
-        
+
         // then read the config for the project in its folder
         if (isset($this->commandline['project'])) {
             $this->readProjectConfig($this->commandline['project']);
@@ -457,7 +457,6 @@ class Config {
             $this->commandline['file']      = str_replace('/code/', '/reports/', substr($this->commandline['filename'], 0, -4));
             $this->commandline['quiet']     = true;
             $this->commandline['norefresh'] = true;
-            print_r($this->commandline);
         }
     }
 }
