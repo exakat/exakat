@@ -195,6 +195,8 @@ class Phpexec {
         
         // prepare extra tokens
         self::$tokens = $tokens + self::$extraTokens;
+        
+        return self::$tokens;
     }
     
     public function getTokenName($token) {
