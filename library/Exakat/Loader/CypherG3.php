@@ -25,12 +25,12 @@ namespace Exakat\Loader;
 
 use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Exceptions\LoadError;
 use Exakat\Graph\Cypher;
 use Exakat\Graph\Gremlin3;
 use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
 use Exakat\Tasks\Tasks;
-use Exception;
 
 class CypherG3 {
     const CSV_SEPARATOR = ',';
@@ -109,7 +109,7 @@ class CypherG3 {
                     // Integer
                         $extra[] = "$title: toInt(csvLine.$title)";
                     } else {
-                        die('Unexpected option in '.__CLASS__.' : "'.$title.'"');
+                        throw new LoadError('Unexpected option in '.__CLASS__.' : "'.$title.'"');
                     }
                 }
             }
@@ -133,17 +133,12 @@ $extra})
 CYPHER;
             try {
                 $res = $this->cypher->query($queryTemplate);
-                if (isset($res->message)) {
-                    print $queryTemplate."\n";
-                    print_r($res);
-                    die();
-                }
 
                 $this->unlink[] = $file;
                 $e = microtime(true);
             } catch (Exception $e) {
                 $this->cleanCsv(); 
-                die("Couldn't load nodes in the database\n".$e->getMessage());
+                throw new LoadError("Couldn't load nodes in the database\n".$e->getMessage());
             }
         }
         display('Loaded nodes');
@@ -166,16 +161,11 @@ CREATE (token)-[:$edge]->(token2)
 CYPHER;
             try {
                 $res = $this->cypher->query($queryTemplate);
-                if (isset($res->message)) {
-                    print $queryTemplate."\n";
-                    print_r($res);
-                    die();
-                }
                 $this->unlink[] = $file;
                 $e = microtime(true);
             } catch (Exception $e) {
                 $this->cleanCsv(); 
-                die("Couldn't load relations for ".$edge." in the database\n".$e->getMessage());
+                throw new LoadError("Couldn't load '".$edge."'relations in the database\n".$e->getMessage());
             }
 
         }
