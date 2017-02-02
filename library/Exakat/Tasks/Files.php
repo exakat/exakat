@@ -66,6 +66,7 @@ class Files extends Tasks {
                          'reason' => $reason);
         }
         $ignoredFiles = $i;
+        $this->datastore->cleanTable('ignoredFiles');
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
 
         $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
@@ -191,6 +192,7 @@ class Files extends Tasks {
         $files = array_diff($files, array_keys($toRemoveFromFiles));
         unset($toRemoveFromFiles);
         
+        $this->datastore->cleanTable('files');
         $this->datastore->addRow('files', array_map(function ($a) {
                 return array('file'   => $a);
             }, $files));
