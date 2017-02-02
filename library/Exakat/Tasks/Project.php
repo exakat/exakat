@@ -34,7 +34,8 @@ class Project extends Tasks {
     
     private $project_dir = '.';
     
-    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 'CompatibilityPHP70', 'CompatibilityPHP71',
+    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                              'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
                               'Analyze', 'Preferences',
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               );
@@ -62,7 +63,7 @@ class Project extends Tasks {
 
         $this->project_dir = $this->config->projects_root.'/projects/'.$project;
 
-        if ($this->config->project == "default") {
+        if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
 
