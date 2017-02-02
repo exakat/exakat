@@ -239,6 +239,7 @@ class Config {
         // then read the config for the project in its folder
         if (isset($this->commandline['project'])) {
             $this->readProjectConfig($this->commandline['project']);
+            $configFiles[] = $this->projects_root.'/projects/'.$this->commandline['project'].'/config.ini';
             $this->codePath = realpath($this->projects_root.'/projects/'.$this->commandline['project'].'/code');
         }  else {
             $this->codePath = '/No/Path/To/Code';
@@ -301,6 +302,10 @@ class Config {
         }
         
         return $return;
+    }
+
+    public function isProject($name) {
+        return isset($this->projectConfig[$name]);
     }
     
     public function __set($name, $value) {

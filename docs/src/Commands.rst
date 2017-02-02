@@ -259,6 +259,20 @@ Results
 * The `PHP x.y` sections are the PHP binaries used to check the code. 
 * Optional installations (such as svn, zip, etc.) are not necessarily reported if they are not installed.
 
+Options
+#######
+
++-----------+-----+-----------------------------------------------------------------------------+
+| Option    | Req | Description                                                                 |
++-----------+-----+-----------------------------------------------------------------------------+
+| -p        | No  | Displays the project-specific configuration.                                |
+|           |     | Otherwise, only displays general configuration.                             |
++-----------+-----+-----------------------------------------------------------------------------+
+| -json     | No  | Displays the project-specific configuration in json format, to stdout       |
++-----------+-----+-----------------------------------------------------------------------------+
+| -v        | No  | Verbose mode : include helpers configurations                               |
++-----------+-----+-----------------------------------------------------------------------------+
+
 
 help
 ----

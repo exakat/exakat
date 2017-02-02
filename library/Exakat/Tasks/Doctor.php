@@ -36,10 +36,16 @@ class Doctor extends Tasks {
     public function run() {
         $stats = array();
 
-        $stats = array_merge($stats, $this->checkPreRequisite());
-        $stats = array_merge($stats, $this->checkAutoInstall());
-        $stats = array_merge($stats, $this->checkOptional());
+        $stats = array_merge($stats, $this->checkPreRequisite(), $this->checkAutoInstall(), $this->checkPHPs());
+        if ($this->config->verbose === true) {
+            $stats = array_merge($stats, $this->checkOptional());
+        }
 
+        if ($this->config->json === true) {
+            print json_encode($stats);
+            return;
+        }
+        
         $doctor = '';
         foreach($stats as $section => $details) {
             $doctor .= "$section : \n";
@@ -48,27 +54,25 @@ class Doctor extends Tasks {
             }
             $doctor .= "\n";
         }
-        
         print $doctor;
     }
 
     private function checkPreRequisite() {
 // Compulsory
-        $stats['exakat']['version'] = Exakat::VERSION;
-        $stats['exakat']['build'] = Exakat::BUILD;
+        $stats['exakat']['executable'] = $this->config->executable;
+        $stats['exakat']['version']    = Exakat::VERSION;
+        $stats['exakat']['build']      = Exakat::BUILD;
+        $stats['exakat']['exakat.ini'] = $this->array2list($this->config->configFiles);
 
         // check for PHP
-        $stats['PHP']['binary']     = $this->config->php;
-        $stats['PHP']['executable'] = $this->config->executable;
-        $stats['PHP']['version']    = phpversion();
-        $stats['PHP']['curl']       = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
-        $stats['PHP']['hash']       = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
-        $stats['PHP']['phar']       = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
-        $stats['PHP']['sqlite3']    = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
-        $stats['PHP']['tokenizer']  = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
-        $stats['PHP']['mbstring']   = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional, add --enable-mbstring to configure)';
-        $stats['PHP']['json']       = extension_loaded('json')      ? 'Yes' : 'No';
-        $stats['PHP']['exakat.ini'] = implode(",\n                           ", $this->config->configFiles);
+        $stats['PHP']['binary']         = phpversion();
+        $stats['PHP']['ext/curl']       = extension_loaded('curl')      ? 'Yes' : 'No (Compulsory, please install it with --with-curl)';
+        $stats['PHP']['ext/hash']       = extension_loaded('hash')      ? 'Yes' : 'No (Compulsory, please install it with --enable-hash)';
+        $stats['PHP']['ext/phar']       = extension_loaded('phar')      ? 'Yes' : 'No (Needed to run exakat.phar. please install by default)';
+        $stats['PHP']['ext/sqlite3']    = extension_loaded('sqlite3')   ? 'Yes' : 'No (Compulsory, please install it by default (remove --without-sqlite3))';
+        $stats['PHP']['ext/tokenizer']  = extension_loaded('tokenizer') ? 'Yes' : 'No (Compulsory, please install it by default (remove --disable-tokenizer))';
+        $stats['PHP']['ext/mbstring']   = extension_loaded('mbstring')  ? 'Yes' : 'No (Optional, add --enable-mbstring to configure)';
+        $stats['PHP']['ext/json']       = extension_loaded('json')      ? 'Yes' : 'No';
 
         // java
         $res = shell_exec('java -version 2>&1');
@@ -195,6 +199,13 @@ class Doctor extends Tasks {
             $stats['neo4j']['$NEO4J_HOME'] = getenv('NEO4J_HOME');
             $stats['neo4j']['$NEO4J_HOME / config'] = realpath(getenv('NEO4J_HOME')) === realpath($this->config->neo4j_folder) ? 'Same' : 'Different';
         }
+        
+        if ($this->config->project !== 'default') {
+            $stats['project']['name']             = $this->config->project_name;
+            $stats['project']['url']              = $this->config->project_url;
+            $stats['project']['ignored dirs']     = $this->array2line($this->config->ignore_dirs);
+            $stats['project']['file extensions']  = $this->array2line($this->config->file_extensions);
+        }
 
         return $stats;
     }
@@ -316,8 +327,6 @@ INI;
             }
         }
 
-        $stats['folders']['in'] = file_exists($this->config->projects_root.'/in/') ? 'Yes' : 'No';
-        $stats['folders']['out'] = file_exists($this->config->projects_root.'/out/') ? 'Yes' : 'No';
         $stats['folders']['projects/test'] = file_exists($this->config->projects_root.'/projects/test/') ? 'Yes' : 'No';
         $stats['folders']['projects/default'] = file_exists($this->config->projects_root.'/projects/default/') ? 'Yes' : 'No';
         $stats['folders']['projects/onepage'] = file_exists($this->config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
@@ -325,7 +334,7 @@ INI;
         return $stats;
     }
 
-    private function checkOptional() {
+    private function checkPHPs() {
         $stats = array();
 
         // check PHP 5.2
@@ -351,6 +360,12 @@ INI;
 
         // check PHP 7.2
         $stats['PHP 7.2'] = $this->checkPHP($this->config->php72, '7.2');
+
+        return $stats;
+    }
+
+    private function checkOptional() {
+        $stats = array();
 
         // git
         $res = trim(shell_exec('git --version 2>&1'));
@@ -429,6 +444,7 @@ INI;
     
     private function checkPHP($configVersion, $displayedVersion) {
         $stats = array();
+
         if (!$configVersion) {
             $stats['configured'] = 'No';
         } else {
@@ -453,6 +469,13 @@ INI;
         
         return $stats;
     }
-}
+    
+    private function array2list($array) {
+        return implode(",\n                           ", $array);
+    }
 
+    private function array2line($array) {
+        return implode(", ", $array);
+    }
+}
 ?>
