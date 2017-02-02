@@ -44,17 +44,8 @@ class Status extends Tasks {
                     $projectStep = $json->step;
                 } 
                 
-                $log = file_get_contents($this->config->neo4j_folder.'/data/log/console.log');
-                if (strpos($log, 'java.lang.OutOfMemoryError: Java heap space') !== false ) {
-                    $pid = trim(file_get_contents($this->config->neo4j_folder.'/data/neo4j-service.pid'));
-                    $projectStatus = 'Neo4j died : Java heap space. Kill neo4j ('.$pid.') and run exakat again.';
-                    
-                    $inGraph = 'N/A';
-                    $projectStep = 'N/A';
-                } else {
-                    $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-                    $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
-                }
+                $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
+                $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
                 
                 $status = array('Running'  => 'Project',
                                 'project'  => $projectStatus,
@@ -96,6 +87,7 @@ class Status extends Tasks {
         switch($this->config->project_vcs) {
             case 'git' :
                 if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/')) {
+                    $status['git url'] = $this->config->project_url;
                     $status['git status'] = trim(shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD'));
                 }
                 

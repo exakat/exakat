@@ -20,6 +20,7 @@
  *
 */
 
+use Exakat\Config;
 
 class Autoload {
     static public function autoload_library($name) {
@@ -56,12 +57,14 @@ class Autoload {
 }
 
 spl_autoload_register('Autoload::autoload_library');
-require_once __DIR__.'/../vendor/autoload.php'; // depending on your project this may not be necessary
+if (file_exists(__DIR__.'/../vendor/autoload.php')) {
+    require_once __DIR__.'/../vendor/autoload.php'; 
+}
 
 if (isset($argv)) {
-    $config = \Exakat\Config::factory($argv);
+    $config = Config::factory($argv);
 } else {
-    $config = \Exakat\Config::factory($GLOBALS['argv']);
+    $config = Config::factory($GLOBALS['argv']);
 }
 
 include 'helpers.php';

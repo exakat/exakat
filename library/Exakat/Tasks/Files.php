@@ -25,6 +25,9 @@ namespace Exakat\Tasks;
 
 use Exakat\Phpexec;
 use Exakat\Config;
+use Exakat\Exceptions\ProjectNeeded;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoCodeInProject;
 
 class Files extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -43,12 +46,12 @@ class Files extends Tasks {
                        ) ;
         $unknown = array();
 
-        if ($this->config->project === null) {
-            die("Usage : exakat files -p project\nAborting\n");
+        if ($this->config->project === 'default') {
+            throw new ProjectNeeded();
         } elseif (!file_exists($this->config->projects_root.'/projects/'.$dir)) {
-            die("No such project as '{$this->config->projects_root}/projects/$dir'\nAborting\n");
+            throw new NoSuchProject($this->config->project);
         } elseif (!file_exists($this->config->projects_root.'/projects/'.$dir.'/code/')) {
-            die("No code in project '$dir'\nAborting\n");
+            throw new NoCodeInProject($this->config->project);
         }
         
         $this->checkComposer($dir);
@@ -63,6 +66,7 @@ class Files extends Tasks {
                          'reason' => $reason);
         }
         $ignoredFiles = $i;
+        $this->datastore->cleanTable('ignoredFiles');
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
 
         $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
@@ -188,6 +192,7 @@ class Files extends Tasks {
         $files = array_diff($files, array_keys($toRemoveFromFiles));
         unset($toRemoveFromFiles);
         
+        $this->datastore->cleanTable('files');
         $this->datastore->addRow('files', array_map(function ($a) {
                 return array('file'   => $a);
             }, $files));
