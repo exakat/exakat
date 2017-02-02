@@ -341,7 +341,7 @@ class Config {
         // check and default values
         $defaults = array( 'ignore_dirs'        => array('/test', '/tests', '/Tests', '/Test', '/example', '/examples', '/docs', '/doc', '/tmp', '/version', '/vendor', '/js', '/lang', '/data', '/css', '/cache', '/vendor', '/assets', '/spec', '/sql'),
                            'other_php_versions' => $other_php_versions,
-                           'phpversion'         => PHP_VERSION,
+                           'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
                            'loader'             => 'Neo4jImport',
                            );

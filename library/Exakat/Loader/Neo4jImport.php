@@ -107,7 +107,6 @@ SHELL;
         while($indice = fgets($fp)) {
             $queryTemplate = 'CREATE INDEX ON :'.trim($indice).'(id)';
             $cypher->query($queryTemplate);
-            print " * $indice\n";
         }
         
         unset($cypher);

@@ -28,11 +28,13 @@ use Exakat\Analyzer\Analyzer;
 class MarkCallable extends Analyzer {
     public function analyze() {
         $ini = $this->loadIni('php_with_callback.ini');
-        foreach($ini as $key => &$lists) {
-            foreach($lists as $id => &$function) {
+        foreach($ini as &$lists) {
+            foreach($lists as &$function) {
                 $function = '\\' . $function;
             }
+            unset($function);
         }
+        unset($lists);
 
         $positions = array(0, 1, 2, 3, 4, 5, 6);
 

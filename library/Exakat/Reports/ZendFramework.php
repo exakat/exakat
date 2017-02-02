@@ -84,8 +84,7 @@ class ZendFramework extends Devoops {
 
         // Analyze
         $analyze = array();
-        //count > 0 AND 
-        print 'SELECT * FROM resultsCounts WHERE analyzer in '.$this->themesList.' ORDER BY id';
+
         $res = $this->sqlite->query('SELECT * FROM resultsCounts WHERE analyzer in '.$this->themesList);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
