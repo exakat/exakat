@@ -130,8 +130,9 @@ class Initproject extends Tasks {
             
             
             // default initial config. Found in test project.
+            $phpversion = $this->config->phpversion;
             $configIni = <<<INI
-phpversion = 7.1
+phpversion = $phpversion
 
 ignore_dirs[] = /test
 ignore_dirs[] = /tests
