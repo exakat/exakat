@@ -16,7 +16,6 @@
         "source": "https://github.com/exakat/exakat"
     },
     "require": {
-        "guiguiboy/php-cli-progress-bar": "dev-master",
         "consolidation/robo":"0.6.0"
     },
     "require-dev": {
