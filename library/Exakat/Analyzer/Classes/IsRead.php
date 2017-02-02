@@ -85,9 +85,6 @@ class IsRead extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // PHP functions that are passed by value
-        $data = new Methods();
-        
         // Variable that are not a reference in a functioncall
         $this->atomIs($atoms)
              ->hasIn('ARGUMENT')

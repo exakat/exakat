@@ -96,25 +96,21 @@ SHELL;
 
         display('Loaded links');
         
-        $fp = fopen($this->config->projects_root.'/projects/.exakat/nodes.g3.csv', 'r');
-        $index = array();
-        // Skip first line
-        fgetcsv($fp);
-        while($row = fgetcsv($fp)) {
-            $index[$row[1]] = 1;
-        }
-
         $cypher = new Cypher($this->config );
+
         $check = $cypher->query('start n=node(*) match n return count(n)');
         if ($check->data[0][0] < 3) {
             throw new GremlinException('Couldn\'t load any nodes. Return message "'.$res.'"');
         }
-        
-        foreach($index as $indice) {
-            $queryTemplate = 'CREATE INDEX ON :'.$indice.'(id)';
+
+        $fp = fopen($this->config->projects_root.'/projects/.exakat/index.g3.csv', 'r');
+        while($indice = fgets($fp)) {
+            $queryTemplate = 'CREATE INDEX ON :'.trim($indice).'(id)';
             $cypher->query($queryTemplate);
         }
         
+        unset($cypher);
+
         $gremlin = new Gremlin3($this->config);
         // Finish noDelimiter for strings
         $query = <<<GREMLIN
@@ -148,6 +144,7 @@ GREMLIN;
     private function cleanCsv() {
         unlink($this->config->projects_root.'/projects/.exakat/nodes.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/rels.g3.csv');
+        unlink($this->config->projects_root.'/projects/.exakat/index.g3.csv');
     }
 
     private static function saveTokenCounts() {
@@ -283,9 +280,12 @@ GREMLIN;
         }
 
           // Saving atoms
+        $indexList = array();
         foreach($atoms as $id => $atom) {
             if ($id == $id0) { continue; }
             $extra= array();
+
+            $indexList[$atom['atom']] = 1;
             
             foreach($extras as $name => $type) {
                 if ($name == ':ID') {
@@ -311,6 +311,11 @@ GREMLIN;
             }
             $written = fputcsv($fp, $extra);
         }
+        fclose($fp);
+        
+        $fileName = $exakatDir.'/index.g3.csv';
+        $fp = fopen($fileName, 'w+');
+        fwrite($fp, implode("\n", array_keys($indexList)));
         fclose($fp);
         
         $fileName = $exakatDir.'/rels.g3.csv';

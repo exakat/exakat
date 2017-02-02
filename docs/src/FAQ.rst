@@ -7,9 +7,11 @@ Summary
 -------
 
 * `I need special command to get my code`_
+* `Can I checkout that branch?`_
 * `The project is too big`_
 * `Where can I find the report`_
 * `Can I run exakat on local code?`_
+* `I get the error 'The executable 'ansible-playbook' Vagrant is trying to run was not found'`_
 * `Can I run exakat on Windows?`_
 
 
@@ -29,6 +31,22 @@ If Exakat has no documented method to reach your code, you may use this process 
 
 
 Send a message on Github.com/exakat/exakat to mention your specific method.
+
+`Can I checkout that branch?`_
+------------------------------
+
+Currently (Version 0.9.9), there is no way to request a tag or a branche or a revision when cloning the code. 
+
+The best way is to reach the 'code' folder, and make the change there. Unless with 'init' or 'update', exakat doesn't make any change to the code. 
+
+::
+
+    php exakat.phar init -p myProject
+    cd ./projects/myProject/code
+    git branch notMasterBranch
+    cd -
+    php exakat.phar project -p myProject
+
 
 `The project is too big`_
 -------------------------
@@ -72,7 +90,15 @@ Exakat do not modify any existing source code : it only access it for reading pu
 
 * use a symlink 
 
+`I get the error 'The executable 'ansible-playbook' Vagrant is trying to run was not found'`_
+---------------------------------------------------------------------------------------------
+
+This error is displayed when the host machine doesn't have Ansible installed. Install ansible, and try again to provision. 
+
 `Can I run exakat on Windows?`_
-----------------------------------
+-------------------------------
 
 Currently, Windows is not supported, though it might be some day. 
+
+Until then, you may run Exakat with Vagrant, or with Docker. 
+

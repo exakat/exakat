@@ -237,9 +237,10 @@ class Datastore {
 
     public function addRowAnalyzer($analyzer, $key, $value = '') {
         if (is_array($key)) {
-            foreach($key as $k => &$v) {
+            foreach($key as &$v) {
                 $v['analyzer'] = $analyzer;
             }
+            unset($v);
             return $this->addRow('hashAnalyzer', $key);
         } else {
             return $this->addRow('hashAnalyzer', array('analyzer' => $analyzer,

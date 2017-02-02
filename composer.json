@@ -1,7 +1,23 @@
 {
+    "name": "Exakat",
+    "type": "application",
+    "description": "The smart static analyzer for PHP",
+    "keywords": ["Exakat","PHP","audit", "static analysis", "code quality", "code review"],
+    "homepage": "https://www.exakat.io/",
+    "license": "GNU Affero General Public License-3.0+",
+    "authors": [
+        {
+            "name": "The Exakat Team",
+            "email": "contact@exakat.io"
+        }
+    ],
+    "support": {
+        "docs": "https://exakat.readthedocs.org/",
+        "source": "https://github.com/exakat/exakat"
+    },
     "require": {
         "guiguiboy/php-cli-progress-bar": "dev-master"
-    }
+    },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.7.1",
         "phpunit/phpunit": "^5.6.2",

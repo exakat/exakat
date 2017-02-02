@@ -24,9 +24,9 @@
 namespace Exakat\Exceptions;
 
 class InvalidPHPBinary extends \Exception {
-    public function __construct($message = '', $query = '', \Exception $previous = null) {
+    public function __construct($message = '', $code = 0, \Exception $previous = null) {
         
-        parent::__construct("This PHP binary is not valid for running Exakat. You need PHP 5.6 or later, this is $message\nPlease, update config/exakat.ini accordingly.", 1, $previous);
+        parent::__construct("This PHP version ($message) is not valid for running Exakat. You need PHP 7.0 or later.\n", $code, $previous);
     }
 }
 

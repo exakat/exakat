@@ -228,10 +228,7 @@ class Load extends Tasks {
             throw new InvalidPHPBinary($this->php->getVersion());
         }
 
-        $this->php->getTokens();
-
-        Precedence::preloadConstants($this->php->getActualVersion());
-        $this->precedence = new Precedence();
+        $this->precedence = new Precedence($this->config->phpversion);
 
         $this->processing = array(
                             \Exakat\Tasks\T_OPEN_TAG                 => 'processOpenTag',

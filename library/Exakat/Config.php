@@ -216,9 +216,9 @@ class Config {
         $inis = array();
         $configFiles = array('/etc/exakat.ini',
                              '/etc/exakat/exakat.ini',
-                             
                              $this->projects_root.'/config/config-default.ini',
                              $this->projects_root.'/config/exakat.ini',
+                             $this->projects_root.'/.codacy.json',
                              ); 
         foreach($configFiles as $id => $configFile) {
             if (file_exists($configFile)) {
@@ -235,10 +235,11 @@ class Config {
 
         // then read the config from the commandline (if any)
         $this->readCommandline();
-        
+
         // then read the config for the project in its folder
         if (isset($this->commandline['project'])) {
             $this->readProjectConfig($this->commandline['project']);
+            $configFiles[] = $this->projects_root.'/projects/'.$this->commandline['project'].'/config.ini';
             $this->codePath = realpath($this->projects_root.'/projects/'.$this->commandline['project'].'/code');
         }  else {
             $this->codePath = '/No/Path/To/Code';
@@ -302,6 +303,10 @@ class Config {
         
         return $return;
     }
+
+    public function isProject($name) {
+        return isset($this->projectConfig[$name]);
+    }
     
     public function __set($name, $value) {
         display("It is not possible to modify configuration $name with value '$value'\n");
@@ -336,7 +341,7 @@ class Config {
         // check and default values
         $defaults = array( 'ignore_dirs'        => array('/test', '/tests', '/Tests', '/Test', '/example', '/examples', '/docs', '/doc', '/tmp', '/version', '/vendor', '/js', '/lang', '/data', '/css', '/cache', '/vendor', '/assets', '/spec', '/sql'),
                            'other_php_versions' => $other_php_versions,
-                           'phpversion'         => PHP_VERSION,
+                           'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
                            'loader'             => 'Neo4jImport',
                            );
@@ -457,7 +462,6 @@ class Config {
             $this->commandline['file']      = str_replace('/code/', '/reports/', substr($this->commandline['filename'], 0, -4));
             $this->commandline['quiet']     = true;
             $this->commandline['norefresh'] = true;
-            print_r($this->commandline);
         }
     }
 }
