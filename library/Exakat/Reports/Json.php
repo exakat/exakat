@@ -28,10 +28,6 @@ class Json extends Reports {
     const FILE_EXTENSION = 'json';
     const FILE_FILENAME  = 'exakat';
 
-    private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
-                                  'CompatibilityPHP70', 'CompatibilityPHP71',
-                                  '"Dead code"', 'Security', 'Analyze');
-
     public function generate($folder, $name = null) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';

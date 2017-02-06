@@ -39,6 +39,10 @@ abstract class Reports {
                                           'FacetedJson', 'Json', 'OnepageJson', 
                                           );
 
+    protected $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                                    'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
+                                    '"Dead code"', 'Security', 'Analyze');
+
     private $count = 0;
 
     protected $themes     = array(); // cache for themes list
