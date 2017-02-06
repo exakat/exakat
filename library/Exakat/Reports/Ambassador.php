@@ -42,10 +42,6 @@ class Ambassador extends Reports {
     private $themesForAnalyzer = null;
     private $severities        = null;
 
-    private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
-                                  'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
-                                  '"Dead code"', 'Security', 'Analyze');
-
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
 
@@ -1128,7 +1124,11 @@ JAVASCRIPT;
         $totalFile = $this->datastore->getHash('files');
         $totalFileAnalysed = $this->getTotalAnalysedFile();
         $totalFileSansError = $totalFileAnalysed - $totalFile;
-        $percentFile = abs(round($totalFileSansError / $totalFile * 100));
+        if ($totalFile === 0) {
+            $percentFile = 100;
+        } else {
+            $percentFile = abs(round($totalFileSansError / $totalFile * 100));
+        }
 
         // analyzer
         list($totalAnalyzerUsed, $totalAnalyzerReporting) = $this->getTotalAnalyzer();
@@ -2005,6 +2005,9 @@ SQL
             } elseif ($row['analyzer'] == 'Php/UsesEnv') {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
                 $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+            } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
+                $data['Errorlog'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
             } else {
                 $ext = substr($row['analyzer'], 14);
                 if (in_array($ext, $directives)) {
@@ -2341,6 +2344,7 @@ JAVASCRIPT;
                             'Fast CGI'                   => 'Extensions/Extfpm',
                             'IIS'                        => 'Extensions/Extiis',
                             'NSAPI'                      => 'Extensions/Extnsapi',
+                            'Session'                    => 'Extensions/Extsession',
                     ),
 
                     'CLI' => array(

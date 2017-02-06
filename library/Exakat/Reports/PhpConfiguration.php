@@ -95,6 +95,8 @@ SQL
                 $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
             } elseif ($row['analyzer'] == 'Php/UsesEnv') {
                 $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+            } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
+                $data['Error log'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
             } else {
                 $ext = substr($row['analyzer'], 14);
                 if (in_array($ext, $directives)) {
