@@ -274,6 +274,13 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. 
 
 
+* 0.10.0
+
+  * Error_Log() Usage (Php/ErrorLogUsage)
+  * No Boolean As Default (Functions/NoBooleanAsDefault)
+  * Raised Access Level (Classes/RaisedAccessLevel)
+  * Use Prepare With Variables (Wordpress/WpdbPrepareForVariables)
+
 * 0.9.9
 
   * PHP 7.2 Deprecations (Php/Php72Deprecation)
@@ -1097,13 +1104,6 @@ List of analyzers, by version of introduction, newest to oldest.
 * 0.8.3
 
   * Variable Global (Structures/VariableGlobal)
-
-* 0.10.0
-
-  * Error_Log() Usage (Php/ErrorLogUsage)
-  * No Boolean As Default (Functions/NoBooleanAsDefault)
-  * Raised Access Level (Classes/RaisedAccessLevel)
-  * Use Prepare With Variables (Wordpress/WpdbPrepareForVariables)
 
 
 
