@@ -110,6 +110,14 @@ class UselessParenthesis extends Analyzer {
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Multiplication');
         $this->prepareQuery();
+
+        //function foo($c = (PHP_OS == 1 ? 1 : 2) ){}
+        $this->atomIs('Function')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIs('DEFAULT')
+             ->atomIs('Parenthesis');
+        $this->prepareQuery();
         
     }
 }
