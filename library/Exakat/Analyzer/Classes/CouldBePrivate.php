@@ -27,19 +27,17 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Tokenizer\Token;
 
 class CouldBePrivate extends Analyzer {
+    public function dependsOn() {
+        return array('Classes/PropertyUsedBelow');
+    }
+    
     public function analyze() {
         // Searching for properties that are never used outside the definition class or its children
 
         // Non-static properties
-        // Case of property->property (that's another public access)
+        // Case of object->property (that's another public access)
         $publicProperties = $this->query('g.V().hasLabel("Property")
                                               .where( __.out("OBJECT").not(has("code", "\$this")) )
-                                              .out("PROPERTY")
-                                              .hasLabel("Identifier")
-                                              .values("code").unique()');
-
-        $protectedProperties = $this->query('g.V().hasLabel("Property")
-                                              .where( __.out("OBJECT").has("code", "\$this") )
                                               .out("PROPERTY")
                                               .hasLabel("Identifier")
                                               .values("code").unique()');
@@ -47,15 +45,16 @@ class CouldBePrivate extends Analyzer {
         $this->atomIs('Ppp')
              ->hasNoOut('PRIVATE')
              ->hasNoOut('STATIC')
-             ->isNot('', $publicProperties)
-             ->isNot('', $protectedProperties);
+             ->outIs('PPP')
+             ->analyzerIsNot('Classes/PropertyUsedBelow')
+             ->outIsIE('LEFT')
+             ->isNot('propertyname', $publicProperties);
         $this->prepareQuery();
 
         // Static properties
         // Case of property::property (that's another public access)
         $publicStaticProperties = $this->query('g.V().hasLabel("Staticproperty")
                                                      .out("CLASS")
-                                                     .not(has("code", within("self", "static")))
                                                      .as("classe")
                                                      .sideEffect{ fns = it.get().value("fullnspath"); }
                                                      .in("CLASS")
@@ -66,7 +65,6 @@ class CouldBePrivate extends Analyzer {
                                                      .coalesce( hasLabel("File"), filter{it.get().value("fullnspath") != fns; })
                                                      .select("classe", "property").by("fullnspath").by("code")
                                                      .unique()');
-        if (empty($publicStaticProperties)) { return; }
 
         $calls = array();
         foreach($publicStaticProperties as $value) {
@@ -82,7 +80,14 @@ class CouldBePrivate extends Analyzer {
              ->hasNoOut('PRIVATE')
              ->hasOut('STATIC')
              ->outIs('PPP')
-             ->isNot('code', array_keys($calls));
+             ->analyzerIsNot('Classes/PropertyUsedBelow')
+             ->_as('results')
+             ->outIsIE('LEFT')
+             ->isNot('code', array_keys($calls))
+             ->savePropertyAs('code', 'variable')
+             ->goToClass()
+             ->isNotHash('fullnspath', $calls, 'variable')
+             ->back('results');
         $this->prepareQuery();
     }
 }
