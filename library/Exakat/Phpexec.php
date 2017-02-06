@@ -178,9 +178,6 @@ class Phpexec {
     public function getTokens() {
         // prepare the list of tokens
         if ($this->isCurrentVersion) {
-            if (!in_array('tokenizer', get_loaded_extensions())) {
-                return false;
-            }
             $x = get_defined_constants(true);
             $tokens = array_flip($x['tokenizer']);
         } else {
@@ -214,8 +211,9 @@ class Phpexec {
             $tokens = @token_get_all(file_get_contents($file));
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
-            shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; var_export(@token_get_all(file_get_contents(\''.$file.'\'))); print \'; ?>\';" > '.$tmpFile);
+            shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents(\''.$file.'\'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.$tmpFile);
             include $tmpFile;
+            
             unlink($tmpFile);
         }
         
