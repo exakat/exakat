@@ -32,6 +32,7 @@ class UnusedUse extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Use')
+             ->hasNoClassTrait()
              ->outIs('USE')
              ->analyzerIsNot('Namespaces/UsedUse');
         $this->prepareQuery();

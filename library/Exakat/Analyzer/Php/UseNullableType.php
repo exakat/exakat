@@ -36,6 +36,7 @@ class UseNullableType extends Analyzer {
 
         // Argument typehint
         $this->atomIs('Function')
+             ->hasNoOut('NULLABLE')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->hasOut('NULLABLE')
