@@ -16,7 +16,7 @@
         "source": "https://github.com/exakat/exakat"
     },
     "require": {
-        "consolidation/robo":"0.6.0"
+        "guiguiboy/php-cli-progress-bar":"dev-master"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.7.1",

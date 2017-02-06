@@ -168,42 +168,19 @@ LICENCE;
     public function buildRelease()
     {    
         $this->taskExecStack()
-         ->stopOnFail()
-         ->exec('mkdir release')
-         ->exec('mkdir release/config')
-         ->exec('mkdir release/bin')
-         ->exec('cp -r bin/analyze release/bin/')
-         ->exec('cp -r bin/build_root release/bin/')
-         ->exec('cp -r bin/export_analyzer release/bin/')
-         ->exec('cp -r bin/extract_errors release/bin/')
-         ->exec('cp -r bin/files release/bin/')
-         ->exec('cp -r bin/load release/bin/')
-         ->exec('cp -r bin/log2csv release/bin/')
-         ->exec('cp -r bin/magicnumber release/bin/')
-         ->exec('cp -r bin/project release/bin/')
-         ->exec('cp -r bin/project_init release/bin/')
-         ->exec('cp -r bin/report release/bin/')
-         ->exec('cp -r bin/report_all release/bin/')
-         ->exec('cp -r bin/stat release/bin/')
-         ->exec('cp -r bin/tokenizer release/bin/')
-         ->exec('cp -r data release/')
-         ->exec('cp config/config-default.ini release/config/config-default.ini')
-         ->exec('cp -r human release/')
-         ->exec('cp -r library release/')
-         ->exec('mkdir release/log')
-         ->exec('mkdir release/media')
-         ->exec('mkdir release/project')
-         ->exec('cp -r projects/test release/projects/')
-         ->exec('cp -r projects/default release/projects/')
-         ->exec('mkdir release/scripts')
-         ->exec('cp -r scripts/*.sh release/scripts/')
-         ->exec('cp -r scripts/doctor.php release/scripts/')
-//         ->exec('cp -r tests release/')
-         ->exec('cp -r composer.* release/')
-         ->exec('cp -r RoboFile.php release/')
-         ->exec('tar czf release.tgz release')
-         ->exec('mv release.tgz release.'.Exakat::VERSION.'.tgz')
-         ->run();
+             ->stopOnFail()
+             ->exec('mkdir release')
+             ->exec('mkdir release/config')
+             ->exec('cp -r data release/')
+             ->exec('cp config/config-default.ini release/config/config-default.ini')
+             ->exec('cp -r human release/')
+             ->exec('cp -r library release/')
+             ->exec('mkdir release/media')
+             ->exec('mkdir release/project')
+//             ->exec('mkdir release/scripts')
+             ->exec('tar czf release.tgz release')
+             ->exec('mv release.tgz release.'.Exakat::VERSION.'.tgz')
+             ->run();
     }
 
     /**
@@ -222,6 +199,11 @@ LICENCE;
                        ->stub('stub.php');
 //                       ->compress()
 // compress yield a 'too many files open' error
+
+        $composer = file_get_contents('composer.json');
+        $buildComposer = str_replace('        "consolidation/robo":"0.6.0",', '', $composer);
+        file_put_contents('composer.json', $buildComposer);
+        shell_exec('composer update --no-dev');
         
         $this->updateBuild();
 
@@ -233,8 +215,7 @@ LICENCE;
              ->printed(false)
              ->run();
 
-        $folders = array('data', 'human', 'library', 'media/devoops', 'media/devfaceted', 'media/dependencies', 'media/faceted', 'server');
-//        , 'vendor'
+        $folders = array('data', 'human', 'library', 'media/devoops', 'media/devfaceted', 'media/dependencies', 'media/faceted', 'server', 'vendor');
         foreach($folders as $folder) {
             $files = Finder::create()->ignoreVCS(true)
                                      ->files()
@@ -251,6 +232,9 @@ LICENCE;
              ->exec('mv exakat.phar ../release/')
              ->exec('cd ../release/; tar -zcvf exakat-'.Exakat::VERSION.'.tar.gz exakat.phar docs/*')
              ->run();
+
+        file_put_contents('composer.json', $composer);
+        shell_exec('composer update ');
     }
     
     public function checkAll() {
