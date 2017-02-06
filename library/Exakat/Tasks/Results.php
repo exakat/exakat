@@ -51,6 +51,7 @@ class Results extends Tasks {
 g.V().hasLabel("Analysis").has("analyzer", "$analyzer").out().count();
 GREMLIN;
 
+        // This should be a valid result, not processed as a die
         $vertices = $this->gremlin->query($query)->results;
         if (isset($vertices[0]->notCompatibleWithPhpVersion)) {
             die($this->config->program." is not compatible with the running version of PHP. No result available.\n");

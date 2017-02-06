@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Exceptions\DependsOnMustReturnArray;
+use Exakat\Exceptions\NeedsAnalyzerThema;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchThema;
@@ -82,7 +83,7 @@ class Analyze extends Tasks {
 
             $this->datastore->addRow('hash', array($this->config->thema => count($analyzers_class) ) );
         } else {
-            die( "");
+            throw new NeedsAnalyzerThema();
         }
 
         $this->log->log("Analyzing project $project");

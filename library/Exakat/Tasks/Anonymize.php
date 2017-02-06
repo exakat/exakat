@@ -24,6 +24,10 @@
 namespace Exakat\Tasks;
 
 use Exakat\Config;
+use Exakat\Exceptions\NoSuchDir;
+use Exakat\Exceptions\NoSuchFile;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoCodeInProject;
 
 class Anonymize extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -43,7 +47,7 @@ class Anonymize extends Tasks {
             display("Anonymizing file $file\n");
 
             if (!file_exists($file)) {
-                die('Can\'t anonymize '.$file.' as it doesn\'t exist'."\n");
+                throw new NoSuchFile($file);
             }
             
             if (!$this->checkCompilation($file)) {
@@ -58,7 +62,7 @@ class Anonymize extends Tasks {
                 }
 
                 if (!file_exists($dir)) {
-                    die('Can\'t anonymize '.$dir.' as it doesn\'t exist'."\n");
+                    throw new NoSuchDir($file);
                 }
 
                 display("Anonymizing directory $dir\n");
@@ -81,11 +85,11 @@ class Anonymize extends Tasks {
                 $dir = $this->config->projects_root.'/projects/'.$project.'/'.$project;
     
                 if (!file_exists($this->config->projects_root.'/projects/'.$project)) {
-                    die('Can\'t anonymize project '.$project.' as it doesn\'t exist'."\n");
+                    throw new NoSuchProject($project);
                 }
     
                 if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code')) {
-                    die('Can\'t anonymize project '.$project.' as it doesn\'t have code'."\n");
+                    throw new NoCodeInProject($project);
                 }
     
                 $files = $this->datastore->getCol('files', 'file');
