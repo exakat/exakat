@@ -150,8 +150,6 @@ GREMLIN;
         } catch (Exception $e) {
             display('Didn\'t restart neo4j cleanly');
         }
-
-        $this->gremlin->query("g.addV('delete', true)");
     }
     
     private function doRestart() {

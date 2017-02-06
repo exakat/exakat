@@ -24,8 +24,8 @@
 namespace Exakat;
 
 class Project {
-    private $project; 
-    
+    private $project;
+
     public function __construct($project) {
         $this->project = $project;
     }
@@ -34,14 +34,14 @@ class Project {
         if (strpos($this->project, DIRECTORY_SEPARATOR) !== false) {
             return false;
         }
-        
+
         if (in_array($this->project, array('test', 'onepage'))) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     public function __toString() {
         return $this->project;
     }

@@ -30,15 +30,15 @@ class Datastore {
     protected $sqliteRead = null;
     protected $sqliteWrite = null;
     protected $sqlitePath = null;
-    
+
     const CREATE = 1;
     const REUSE = 2;
     const TIMEOUT_WRITE = 500;
     const TIMEOUT_READ = 3000;
-    
+
     public function __construct(Config $config, $create = self::REUSE) {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
-        
+
         // if project dir isn't created, we are about to create it.
         if (!file_exists($config->projects_root.'/projects/'.$config->project)) {
             return;
@@ -48,12 +48,12 @@ class Datastore {
             if (file_exists($this->sqlitePath)) {
                 unlink($this->sqlitePath);
             }
-            // force creation 
+            // force creation
             $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
             $this->sqliteWrite->close();
             $this->sqliteWrite = null;
         }
-        
+
         if ($this->sqliteWrite === null) {
             $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
             $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
@@ -61,7 +61,7 @@ class Datastore {
             $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
             $this->sqliteWrite->busyTimeout(self::TIMEOUT_READ);
         }
-        
+
         if ($create === self::CREATE) {
             $this->cleanTable('hash');
             $this->cleanTable('hashAnalyzer');
@@ -87,25 +87,25 @@ class Datastore {
         }
 
         $this->checkTable($table);
-        
+
         $first = current($data);
         if (is_array($first)) {
             $cols = array_keys($first);
         } else {
             $query = "PRAGMA table_info($table)";
             $res = $this->sqliteRead->query($query);
-            
+
             $cols = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 if ($row['name'] == 'id') { continue; }
                 $cols[] = $row['name'];
             }
-            
+
             if (count($cols) != 2) {
                 throw new Exceptions\WrongNumberOfColsForAHash();
             }
         }
-        
+
         foreach($data as $key => $row) {
             if (is_array($row)) {
                 $d = array_values($row);
@@ -113,7 +113,7 @@ class Datastore {
                     $e = \Sqlite3::escapeString($e);
                 }
                 unset($e);
-                
+
             } else {
                 $d = array($key, \Sqlite3::escapeString($row));
             }
@@ -121,31 +121,31 @@ class Datastore {
             $query = 'REPLACE INTO '.$table.' ('.implode(', ', $cols).") VALUES ('".implode("', '", $d)."')";
             $this->sqliteWrite->querySingle($query);
         }
-        
+
         return true;
     }
-    
+
     public function deleteRow($table, $data) {
         if (empty($data)) {
             return true;
         }
 
         $this->checkTable($table);
-        
+
         $first = current($data);
         if (is_array($first)) {
             $cols = array_keys($first);
         } else {
             $query = "PRAGMA table_info($table)";
             $res = $this->sqliteRead->query($query);
-            
+
             $cols = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 if ($row['name'] == 'id') { continue; }
                 $cols[] = $row['name'];
             }
         }
-        
+
         foreach($data as $col => $row) {
             if (is_array($row)) {
                 $d = array_values($row);
@@ -160,10 +160,10 @@ class Datastore {
             $query = 'DELETE FROM '.$table.' WHERE '.$col." IN ('".implode("', '", $d)."')";
             $this->sqliteWrite->querySingle($query);
         }
-        
+
         return true;
     }
-    
+
     public function getRow($table) {
         $return = array();
         try {
@@ -172,16 +172,16 @@ class Datastore {
         } catch (\Exception $e) {
             return array();
         }
-        
+
         if (!$res) {
             return array();
-        }        
+        }
         $return = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
-        
+
         return $return;
     }
 
@@ -195,11 +195,11 @@ class Datastore {
             return array();
         }
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row[$col];
         }
-        
+
         return $return;
     }
 
@@ -209,7 +209,7 @@ class Datastore {
         $stmt->bindValue(':key', $key, \SQLITE3_TEXT);
         $res = $stmt->execute();
 
-        if (!$res) { 
+        if (!$res) {
             return array();
         } else {
             $row = $res->fetchArray(\SQLITE3_ASSOC);
@@ -223,15 +223,15 @@ class Datastore {
         $stmt->bindValue(':analyzer', $analyzer, \SQLITE3_TEXT);
         $res = $stmt->execute();
 
-        if (!$res) { 
+        if (!$res) {
             return array();
-        } 
-        
+        }
+
         $return = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[$row['key']] = $row['value'];
         }
-        
+
         return $return;
     }
 
@@ -266,11 +266,11 @@ class Datastore {
 
     private function checkTable($table) {
         $res = $this->sqliteWrite->querySingle('SELECT count(*) FROM sqlite_master WHERE name="'.$table.'"');
-        
+
         if ($res == 1) { return true; }
 
         switch($table) {
-           case 'compilation52' : 
+            case 'compilation52' :
                 $createTable = <<<SQLITE
 CREATE TABLE compilation52 (
   id INTEGER PRIMARY KEY,
@@ -281,7 +281,7 @@ CREATE TABLE compilation52 (
 SQLITE;
                 break;
 
-            case 'compilation53' : 
+            case 'compilation53' :
                 $createTable = <<<SQLITE
 CREATE TABLE compilation53 (
   id INTEGER PRIMARY KEY,
@@ -292,7 +292,7 @@ CREATE TABLE compilation53 (
 SQLITE;
                 break;
 
-            case 'compilation54' : 
+            case 'compilation54' :
                 $createTable = <<<SQLITE
 CREATE TABLE compilation54 (
   id INTEGER PRIMARY KEY,
@@ -303,7 +303,7 @@ CREATE TABLE compilation54 (
 SQLITE;
                 break;
 
-            case 'compilation55' : 
+            case 'compilation55' :
                 $createTable = <<<SQLITE
 CREATE TABLE compilation55 (
   id INTEGER PRIMARY KEY,
@@ -314,7 +314,7 @@ CREATE TABLE compilation55 (
 SQLITE;
                 break;
 
-            case 'compilation56' : 
+            case 'compilation56' :
                 $createTable = <<<SQLITE
 CREATE TABLE compilation56 (
   id INTEGER PRIMARY KEY,
@@ -325,7 +325,7 @@ CREATE TABLE compilation56 (
 SQLITE;
                 break;
 
-            case 'compilation70' : 
+            case 'compilation70' :
                 $createTable = <<<SQLITE
 CREATE TABLE compilation70 (
   id INTEGER PRIMARY KEY,
@@ -336,7 +336,7 @@ CREATE TABLE compilation70 (
 SQLITE;
                 break;
 
-            case 'compilation71' : 
+            case 'compilation71' :
                 $createTable = <<<SQLITE
 CREATE TABLE compilation71 (
   id INTEGER PRIMARY KEY,
@@ -347,7 +347,7 @@ CREATE TABLE compilation71 (
 SQLITE;
                 break;
 
-            case 'compilation72' : 
+            case 'compilation72' :
                 $createTable = <<<SQLITE
 CREATE TABLE compilation72 (
   id INTEGER PRIMARY KEY,
@@ -358,7 +358,7 @@ CREATE TABLE compilation72 (
 SQLITE;
                 break;
 
-            case 'shortopentag' : 
+            case 'shortopentag' :
                 $createTable = <<<SQLITE
 CREATE TABLE shortopentag (
   id INTEGER PRIMARY KEY,
@@ -367,7 +367,7 @@ CREATE TABLE shortopentag (
 SQLITE;
                 break;
 
-            case 'files' : 
+            case 'files' :
                 $createTable = <<<SQLITE
 CREATE TABLE files (
   id INTEGER PRIMARY KEY,
@@ -376,7 +376,7 @@ CREATE TABLE files (
 SQLITE;
                 break;
 
-            case 'ignoredFiles' : 
+            case 'ignoredFiles' :
                 $createTable = <<<SQLITE
 CREATE TABLE ignoredFiles (
   id INTEGER PRIMARY KEY,
@@ -386,7 +386,7 @@ CREATE TABLE ignoredFiles (
 SQLITE;
                 break;
 
-            case 'hash' : 
+            case 'hash' :
                 $createTable = <<<SQLITE
 CREATE TABLE hash (
   id INTEGER PRIMARY KEY,
@@ -396,7 +396,7 @@ CREATE TABLE hash (
 SQLITE;
                 break;
 
-            case 'hashAnalyzer' : 
+            case 'hashAnalyzer' :
                 $createTable = <<<SQLITE
 CREATE TABLE hashAnalyzer (
   id INTEGER PRIMARY KEY,
@@ -407,7 +407,7 @@ CREATE TABLE hashAnalyzer (
 SQLITE;
                 break;
 
-            case 'analyzed' : 
+            case 'analyzed' :
                 $createTable = <<<SQLITE
 CREATE TABLE analyzed (
   id INTEGER PRIMARY KEY,
@@ -417,7 +417,7 @@ CREATE TABLE analyzed (
 SQLITE;
                 break;
 
-            case 'tokenCounts' : 
+            case 'tokenCounts' :
                 $createTable = <<<SQLITE
 CREATE TABLE tokenCounts (
   id INTEGER PRIMARY KEY,
@@ -427,7 +427,7 @@ CREATE TABLE tokenCounts (
 SQLITE;
                 break;
 
-            case 'externallibraries' : 
+            case 'externallibraries' :
                 $createTable = <<<SQLITE
 CREATE TABLE externallibraries (
   id INTEGER PRIMARY KEY,
@@ -437,7 +437,7 @@ CREATE TABLE externallibraries (
 SQLITE;
                 break;
 
-            case 'composer' : 
+            case 'composer' :
                 $createTable = <<<SQLITE
 CREATE TABLE composer (
   id INTEGER PRIMARY KEY,
@@ -447,7 +447,7 @@ CREATE TABLE composer (
 SQLITE;
                 break;
 
-            case 'configFiles' : 
+            case 'configFiles' :
                 $createTable = <<<SQLITE
 CREATE TABLE configFiles (
   id INTEGER PRIMARY KEY,
@@ -458,19 +458,19 @@ CREATE TABLE configFiles (
 SQLITE;
                 break;
 
-            default : 
+            default :
                 throw new Exceptions\NoStructureForTable($table);
         }
 
         $this->sqliteWrite->query($createTable);
-        
+
         return true;
     }
-    
+
     public function reload() {
         $this->sqliteRead->close();
         $this->sqliteWrite->close();
-        
+
         $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
         $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
         // open the read connexion AFTER the write, to have the sqlite databse created

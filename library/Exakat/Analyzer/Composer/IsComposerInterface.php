@@ -40,7 +40,7 @@ class IsComposerInterface extends Analyzer {
         
         $this->atomIs('Class')
              ->outIs('IMPLEMENTS', 'EXTENDS')
-             ->isNot('aliased', true)
+             ->isNot('aliased', self::CASE_SENSITIVE)
              ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
 
@@ -48,7 +48,7 @@ class IsComposerInterface extends Analyzer {
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot('Array')
-             ->isNot('aliased', true)
+             ->isNot('aliased', self::CASE_SENSITIVE)
              ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
 
@@ -56,7 +56,7 @@ class IsComposerInterface extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
-             ->isNot('aliased', true)
+             ->isNot('aliased', self::CASE_SENSITIVE)
              ->fullnspathIs($interfacesFullNP);
         $this->prepareQuery();
 

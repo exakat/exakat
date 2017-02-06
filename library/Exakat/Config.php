@@ -28,19 +28,19 @@ use Phar;
 
 class Config {
     static private $singleton      = null;
-           private $configFile     = array();
-           private $commandline    = array();
-           private $argv           = array();
-           public  $dir_root       = '.';
-           public  $projects_root  = '.';
-           public  $codePath       = '.';
-           public  $is_phar        = true;
-           public  $executable     = '';
-           private $projectConfig  = array();
-        
-           private $options = array('configFiles' => array());
+    private $configFile     = array();
+    private $commandline    = array();
+    private $argv           = array();
+    public  $dir_root       = '.';
+    public  $projects_root  = '.';
+    public  $codePath       = '.';
+    public  $is_phar        = true;
+    public  $executable     = '';
+    private $projectConfig  = array();
 
-           private $defaultConfig  = array( // directives with boolean value
+    private $options = array('configFiles' => array());
+
+    private $defaultConfig  = array( // directives with boolean value
                                             'verbose'        => false,
                                             'quick'          => false,
                                             'quiet'          => false,
@@ -59,7 +59,7 @@ class Config {
                                             'table'          => false,
                                             'text'           => false,
                                             'output'         => false,
-                                            
+
                                             'git'            => true,
                                             'svn'            => false,
                                             'bzr'            => false,
@@ -85,7 +85,7 @@ class Config {
                                             'neo4j_folder'   => 'neo4j',
                                             'neo4j_login'    => 'admin',
                                             'neo4j_password' => 'admin',
-                                            
+
                                             'php'           => '',
                                             'php52'         => '',
                                             'php53'         => '',
@@ -95,10 +95,10 @@ class Config {
                                             'php70'         => '',
                                             'php71'         => '',
                                             'php72'         => '',
-                                            
+
                                             'phpversion'    => '7.1',
                                             'token_limit'   => '1000000',
-                                            
+
                                             'configFiles'   => array(),
                                             'command'       => 'version',
 
@@ -110,11 +110,11 @@ class Config {
                                             'project_description' => '',
                                             'project_packagist'   => '',
                                             'other_php_versions'  => '',
-                                            
+
                                             'loader'              => 'Neo4jImport',
                                            );
 
-        private static $BOOLEAN_OPTIONS = array(
+    private static $BOOLEAN_OPTIONS = array(
                                  '-v'         => 'verbose',
                                  '-Q'         => 'quick',
                                  '-q'         => 'quiet',
@@ -136,47 +136,46 @@ class Config {
                                  '-ping'      => 'ping',
                                  '-restart'   => 'restart',
 
-// Vcs
+    // Vcs
                                  '-git'       => 'git',
                                  '-svn'       => 'svn',
                                  '-bzr'       => 'bzr',
                                  '-hg'        => 'hg',
                                  '-composer'  => 'composer',
                                  '-copy'      => 'copy',    // Copy the local dir
-                                 '-symlink'   => 'symlink', // make a symlink 
+                                 '-symlink'   => 'symlink', // make a symlink
 
-// Archive formats
+    // Archive formats
                                  '-tgz'       => 'tgz',
                                  '-tbz'       => 'tbz',
                                  '-zip'       => 'zip',
                                  );
 
-        private static $COMMANDS = array('analyze'       => 1, 
-                                         'anonymize'     => 1, 
-                                         'constantes'    => 1, 
-                                         'clean'         => 1, 
-                                         'cleandb'       => 1, 
-                                         'dump'          => 1, 
-                                         'doctor'        => 1, 
+    private static $COMMANDS = array('analyze'       => 1,
+                                         'anonymize'     => 1,
+                                         'constantes'    => 1,
+                                         'clean'         => 1,
+                                         'cleandb'       => 1,
+                                         'dump'          => 1,
+                                         'doctor'        => 1,
                                          'errors'        => 1,
                                          'export'        => 1,
-                                         'files'         => 1, 
+                                         'files'         => 1,
                                          'findextlib'    => 1,
-                                         'help'          => 1, 
-                                         'init'          => 1, 
+                                         'help'          => 1,
+                                         'init'          => 1,
                                          'catalog'       => 1,
-                                         'remove'        => 1, 
-                                         'server'        => 1, 
-                                         'jobqueue'      => 1, 
-                                         'queue'         => 1, 
-                                         'load'          => 1, 
-                                         'magicnumber'   => 1, 
-                                         'project'       => 1, 
-                                         'phploc'        => 1, 
-                                         'report'        => 1, 
-                                         'results'       => 1, 
-                                         'stat'          => 1, 
-                                         'status'        => 1, 
+                                         'remove'        => 1,
+                                         'server'        => 1,
+                                         'jobqueue'      => 1,
+                                         'queue'         => 1,
+                                         'load'          => 1,
+                                         'magicnumber'   => 1,
+                                         'project'       => 1,
+                                         'report'        => 1,
+                                         'results'       => 1,
+                                         'stat'          => 1,
+                                         'status'        => 1,
                                          'version'       => 1,
                                          'onepage'       => 1,
                                          'onepagereport' => 1,
@@ -184,12 +183,12 @@ class Config {
                                          'update'        => 1,
                                          'upgrade'       => 1,
                                          );
-                               
+
     static private $stack = array();
-     
+
     private function __construct($argv) {
         $this->argv = $argv;
-        
+
         $pharRunning = Phar::Running();
         $this->is_phar  = !empty($pharRunning);
         if ($this->is_phar) {
@@ -198,7 +197,7 @@ class Config {
             $this->dir_root      = 'phar://'.$this->executable;
 
             assert_options(ASSERT_ACTIVE, 0);
-            
+
             error_reporting(0);
             ini_set('display_errors', 0);
         } else {
@@ -208,18 +207,18 @@ class Config {
 
             assert_options(ASSERT_ACTIVE, 1);
             assert_options(ASSERT_BAIL, 1);
-            
+
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
         }
-        
+
         $inis = array();
         $configFiles = array('/etc/exakat.ini',
                              '/etc/exakat/exakat.ini',
                              $this->projects_root.'/config/config-default.ini',
                              $this->projects_root.'/config/exakat.ini',
                              $this->projects_root.'/.codacy.json',
-                             ); 
+                             );
         foreach($configFiles as $id => $configFile) {
             if (file_exists($configFile)) {
                 $inis[] = parse_ini_file($configFile);
@@ -227,7 +226,7 @@ class Config {
                 unset($configFiles[$id]);
             }
         }
-        
+
         $this->configFile = empty($inis) ? array() : call_user_func_array('array_merge', $inis);
         if (empty($this->configFile['php'])) {
             $this->configFile['php'] = !isset($_SERVER['_']) ? $_SERVER['_'] : '/usr/bin/env php ';
@@ -247,15 +246,15 @@ class Config {
 
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->defaultConfig, $this->configFile, $this->projectConfig, $this->commandline);
-        
+
         if ($this->options['neo4j_folder'][0] !== '/') {
             $this->options['neo4j_folder'] = $this->projects_root.'/'.$this->options['neo4j_folder'];
         }
         $this->options['neo4j_folder'] = realpath($this->options['neo4j_folder']);
         $this->options['configFiles'] = $configFiles;
     }
-    
-    static public function factory($argv = array()) {
+
+    public static function factory($argv = array()) {
         if (empty($argv)) {
             if (empty(static::$singleton)) {
                 self::$singleton = new self(array());
@@ -273,41 +272,41 @@ class Config {
         }
     }
 
-    static public function factorySingle($argv = array()) {
+    public static function factorySingle($argv = array()) {
         return new Config($argv);
     }
-    
-    static public function push($argv = array()) {
+
+    public static function push($argv = array()) {
         self::factory($argv);
-        
+
         return self::$singleton;
     }
 
-    static public function pop() {
+    public static function pop() {
         $r = array_pop(self::$stack);
         self::$singleton = self::$stack[count(self::$stack) -1];
-        
+
         return $r;
     }
 
     public function __isset($name) {
         return isset($this->options[$name]);
     }
-    
+
     public function __get($name) {
         if (isset($this->options[$name])) {
             $return = $this->options[$name];
         } else {
             $return = null;
         }
-        
+
         return $return;
     }
 
     public function isProject($name) {
         return isset($this->projectConfig[$name]);
     }
-    
+
     public function __set($name, $value) {
         display("It is not possible to modify configuration $name with value '$value'\n");
     }
@@ -318,7 +317,7 @@ class Config {
         } else {
             $this->projectConfig = parse_ini_file($this->projects_root.'/projects/'.$project.'/config.ini');
         }
-        
+
         // removing empty values in the INI file
         foreach($this->projectConfig as &$value) {
             if (is_array($value) && empty($value[0])) {
@@ -326,7 +325,7 @@ class Config {
             }
         }
         unset($value);
-        
+
         $other_php_versions = array();
         foreach(array('52', '53', '54', '55', '56', '70', '71', '72') as $version) {
             if (empty($this->configFile['php'.$version])) {
@@ -345,13 +344,13 @@ class Config {
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
                            'loader'             => 'Neo4jImport',
                            );
-        
+
         foreach($defaults as $name => $value) {
             if (empty($this->projectConfig[$name])) {
                 $this->projectConfig[$name] = $value;
             }
         }
-        
+
         if (is_string($this->projectConfig['other_php_versions'])) {
             $this->projectConfig['other_php_versions'] = explode(',', $this->projectConfig['other_php_versions']);
             foreach($this->projectConfig['other_php_versions'] as &$version) {
@@ -372,29 +371,29 @@ class Config {
     private function readCommandline() {
         $args = $this->argv;
         unset($args[0]);
-        
+
         if (empty($args)) {
             return array();
         }
-        
+
         foreach(static::$BOOLEAN_OPTIONS as $key => $config) {
             $id = array_search($key, $args);
             if ($id !== false) {
                 $this->commandline[$config] = true;
 
                 unset($args[$id]);
-            } 
+            }
         }
-        
+
         // git is default, so it should be unset if another is set
-        $this->commandline['git'] = (boolean) (true ^ ((isset($this->commandline['svn'])       && $this->commandline['svn'])      || 
-                                                       (isset($this->commandline['hg'])        && $this->commandline['hg'])       || 
-                                                       (isset($this->commandline['bzr'])       && $this->commandline['bzr'])      || 
-                                                       (isset($this->commandline['composer'])  && $this->commandline['composer']) || 
-                                                       (isset($this->commandline['tgz'])       && $this->commandline['tgz'])      || 
-                                                       (isset($this->commandline['tbz'])       && $this->commandline['tbz'])      || 
-                                                       (isset($this->commandline['zip'])       && $this->commandline['zip'])      || 
-                                                       (isset($this->commandline['copy'])      && $this->commandline['copy'])     || 
+        $this->commandline['git'] = (boolean) (true ^ ((isset($this->commandline['svn'])       && $this->commandline['svn'])      ||
+                                                       (isset($this->commandline['hg'])        && $this->commandline['hg'])       ||
+                                                       (isset($this->commandline['bzr'])       && $this->commandline['bzr'])      ||
+                                                       (isset($this->commandline['composer'])  && $this->commandline['composer']) ||
+                                                       (isset($this->commandline['tgz'])       && $this->commandline['tgz'])      ||
+                                                       (isset($this->commandline['tbz'])       && $this->commandline['tbz'])      ||
+                                                       (isset($this->commandline['zip'])       && $this->commandline['zip'])      ||
+                                                       (isset($this->commandline['copy'])      && $this->commandline['copy'])     ||
                                                        (isset($this->commandline['symlink'])   && $this->commandline['symlink']))    );
 
         $optionsValue   = array('-f'            => 'filename',
@@ -406,10 +405,10 @@ class Config {
                                 '-report'       => 'report',
                                 '-format'       => 'format',
                                 '-file'         => 'file',
-                                '-style'        => 'style', 
-                                '-neo4j_host'   => 'neo4j_host', 
-                                '-neo4j_port'   => 'neo4j_port', 
-                                '-neo4j_folder' => 'neo4j_folder', 
+                                '-style'        => 'style',
+                                '-neo4j_host'   => 'neo4j_host',
+                                '-neo4j_port'   => 'neo4j_port',
+                                '-neo4j_folder' => 'neo4j_folder',
                                 '-token_limit'  => 1000000,
                                 '-loader'       => 'Neo4jImport',
                                  );
@@ -430,7 +429,7 @@ class Config {
                         unset($args[$id + 1]);
                     }
                 }
-            } 
+            }
         }
 
         if (count($args) > 0) {
@@ -446,10 +445,10 @@ class Config {
         if (count($args) != 0) {
             $c = count($args);
             if (isset($this->commandline['verbose'])) {
-                print 'Found '.$c.' argument'. ($c > 1 ? 's' : '') .' that '.($c > 1 ? 'are' : 'is') ." not understood.\n\n\"".implode('", "', $args)."\"\n\nIgnoring ". ($c > 1 ? 'them all' : 'it'. ".\n");
+                print 'Found '.$c.' argument'.($c > 1 ? 's' : '').' that '.($c > 1 ? 'are' : 'is')." not understood.\n\n\"".implode('", "', $args)."\"\n\nIgnoring ".($c > 1 ? 'them all' : 'it'.".\n");
             }
         }
-        
+
         if (!isset($this->commandline['command'])) {
             $this->commandline['command'] = 'help'; // Default behavior
         }

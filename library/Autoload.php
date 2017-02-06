@@ -23,31 +23,31 @@
 use Exakat\Config;
 
 class Autoload {
-    static public function autoload_library($name) {
+    public static function autoload_library($name) {
         $file = __DIR__.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
-        
+
         if (file_exists($file)) {
             include $file;
-        } 
+        }
     }
 
-    static public function autoload_test($name) {
+    public static function autoload_test($name) {
         $path = dirname(__DIR__);
-        
+
         $file = $path.'/tests/analyzer/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
-        
+
         if (file_exists($file)) {
             include $file;
-        } 
+        }
 
         $file = $path.'/tests/tokenizer/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
-        
+
         if (file_exists($file)) {
             include $file;
-        } 
+        }
     }
 
-    static public function autoload_phpunit($name) {
+    public static function autoload_phpunit($name) {
         $file = 'Test/'.str_replace('_', '/', str_replace('Test\\', '', $name)).'.php';
 
         if (file_exists($file)) {
@@ -58,7 +58,7 @@ class Autoload {
 
 spl_autoload_register('Autoload::autoload_library');
 if (file_exists(__DIR__.'/../vendor/autoload.php')) {
-    require_once __DIR__.'/../vendor/autoload.php'; 
+    require_once __DIR__.'/../vendor/autoload.php';
 }
 
 if (isset($argv)) {

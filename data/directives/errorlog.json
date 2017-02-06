@@ -1,0 +1,1 @@
+[{"name":"error_log","suggested":"On","documentation":"Besides displaying errors, PHP can also log errors to locations such as a server-specific log, STDERR, or a location specified by the error_log directive"},{"name":"error_log","suggested":"php_errors.log","documentation":"Log errors to specified file. PHP's default behavior is to leave this value empty"}]

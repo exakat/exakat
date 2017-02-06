@@ -23,7 +23,7 @@
 
 function display($text) {
     $config = \Exakat\Config::factory();
-    
+
     if ($config->verbose) {
         echo trim($text), "\n";
     }
@@ -31,18 +31,18 @@ function display($text) {
 
 function display_r($object) {
     static $config;
-    
+
     if ($config === null) {
         $config = \Exakat\Config::factory();
     }
-    
+
     if ($config->verbose) {
         print_r( $object );
     }
 }
 
-function rmdirRecursive($dir) { 
-    if (!file_exists($dir)) { 
+function rmdirRecursive($dir) {
+    if (!file_exists($dir)) {
         // Do nothing
         return 0;
     }
@@ -53,55 +53,55 @@ function rmdirRecursive($dir) {
         return 0;
     }
 
-    if (empty($dir)) { 
+    if (empty($dir)) {
         return 0;
     }
-    
+
     $total = 0;
-    $files = array_diff(scandir($dir), array('.','..')); 
-    
-    foreach ($files as $file) { 
-        $path = $dir . '/' . $file;
+    $files = array_diff(scandir($dir), array('.','..'));
+
+    foreach ($files as $file) {
+        $path = $dir.'/'.$file;
         if (is_dir($path)) {
             $total += rmdirRecursive($path);
         } else {
-            unlink($path); 
+            unlink($path);
             ++$total;
         }
-    } 
+    }
 
     rmdir($dir);
     ++$total;
 
-    return $total; 
-  } 
+    return $total;
+}
 
-function copyDir($src, $dst) { 
-    if (!file_exists($src)) { 
-        throw new \Exakat\Exceptions\NoSuchDir('Can\'t find dir : "' . $src . '"');
+function copyDir($src, $dst) {
+    if (!file_exists($src)) {
+        throw new \Exakat\Exceptions\NoSuchDir('Can\'t find dir : "'.$src.'"');
     }
-    $dir = opendir($src); 
-    if (!$dir) { 
-        throw new \Exakat\Exceptions\NoSuchDir('Can\'t open dir : "' . $src . '"');
+    $dir = opendir($src);
+    if (!$dir) {
+        throw new \Exakat\Exceptions\NoSuchDir('Can\'t open dir : "'.$src.'"');
     }
-    
+
     $total = 0;
     mkdir($dst, 0755);
-    while(false !==  $file = readdir($dir) ) { 
-        if (( $file != '.' ) && ( $file != '..' )) { 
-            if ( is_dir($src . '/' . $file) ) { 
-                $total += copyDir($src . '/' . $file,$dst . '/' . $file); 
-            } else { 
-                copy($src . '/' . $file, $dst . '/' . $file); 
+    while(false !==  $file = readdir($dir) ) {
+        if (( $file != '.' ) && ( $file != '..' )) {
+            if ( is_dir($src.'/'.$file) ) {
+                $total += copyDir($src.'/'.$file,$dst.'/'.$file);
+            } else {
+                copy($src.'/'.$file, $dst.'/'.$file);
                 ++$total;
-            } 
-        } 
-    } 
-    
-    closedir($dir); 
+            }
+        }
+    }
+
+    closedir($dir);
 
     return $total;
-} 
+}
 
 function array_add(&$array1, $array2) {
     foreach($array1 as $k => &$v) {
@@ -129,7 +129,7 @@ function duration($seconds) {
     if ($seconds < 60) {
         return $seconds.' s';
     }
-    
+
     $minuts = floor($seconds / 60);
     $seconds %= 60;
     if ($minuts < 60) {
@@ -139,12 +139,12 @@ function duration($seconds) {
     $hours = floor($minuts / 60);
     $minuts %= 60;
     if ($minuts < 24 ) {
-        return $hours. ' h '.$minuts.' min '.$seconds.' s';
+        return $hours.' h '.$minuts.' min '.$seconds.' s';
     }
 
     $days = floor($hours / 24);
     $hours %= 24;
-    return $days.' d '.$hours. ' h '.$minuts.' min '.$seconds.' s';
+    return $days.' d '.$hours.' h '.$minuts.' min '.$seconds.' s';
 }
 
 

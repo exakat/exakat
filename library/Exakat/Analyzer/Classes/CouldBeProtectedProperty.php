@@ -45,7 +45,8 @@ class CouldBeProtectedProperty extends Analyzer {
         
         // Case of property::property (that's another public access)
         $res = $this->query('g.V().hasLabel("Staticproperty").as("init")
-                                  .out("CLASS").not(has("code", within("self", "static"))).as("classe")
+                                  .out("CLASS").hasLabel("Identifier", "Nsname")
+                                  .not(has("code", within("self", "static"))).as("classe")
                                   .sideEffect{ fnp = it.get().value("fullnspath") }
                                   .in("CLASS")
                                   .where( __.repeat( __.in('.$this->linksDown.')).until(hasLabel("Class", "File"))

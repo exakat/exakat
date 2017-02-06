@@ -58,8 +58,8 @@ class IsModified extends Analyzer {
              ->functionDefinition()
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
-             ->is('reference', true)
+             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
+             ->is('reference', self::CASE_SENSITIVE)
              ->back('results');
         $this->prepareQuery();
 
@@ -104,7 +104,7 @@ class IsModified extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
-             ->is('reference', true)
+             ->is('reference', self::CASE_SENSITIVE)
              ->back('results');
         $this->prepareQuery();
     }

@@ -1544,7 +1544,16 @@ GREMLIN
             
             foreach($this->queriesArguments[$id] as $name => $value) {
                 if (is_array($value)) {
-                    $query = str_replace($name, "['".implode("', '", $value)."']", $query);
+                    if (is_array($value[key($value)])) {
+                        foreach($value as $k => &$v) {
+                            $v = "'''".$k."''':['''".implode("''', '''", $v)."''']";
+                            $v = str_replace('\\', '\\\\', $v);
+                        }
+                        unset($v);
+                        $query = str_replace($name, "[".implode(", ", $value)."]", $query);
+                    } else {
+                        $query = str_replace($name, "['".implode("', '", $value)."']", $query);
+                    }
                 } elseif (is_string($value)) {
                     $query = str_replace($name, "'".str_replace('\\', '\\\\', $value)."'", $query);
                 } elseif (is_int($value)) {

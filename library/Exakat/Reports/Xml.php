@@ -63,10 +63,6 @@ class Xml extends Reports {
     const FILE_EXTENSION = 'xml';
     const FILE_FILENAME  = 'exakat';
     
-    private $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
-                                  'CompatibilityPHP70', 'CompatibilityPHP71',
-                                  '"Dead code"', 'Security', 'Analyze');
-
     /**
      * Generate a partial report for a single processed file.
      *

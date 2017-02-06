@@ -65,15 +65,15 @@ class Phpexec {
     private $version          = null;
     private $actualVersion    = null;
     private $requestedVersion = null;
-    
+
     public function __construct($phpversion = null) {
         $config = Config::factory();
 
         if ($phpversion === null) {
             $phpversion = $config->phpversion;
-        } 
+        }
         $this->requestedVersion = substr($phpversion, 0, 3);
-        
+
         $this->version = $phpversion;
         $phpversion3 = substr($phpversion, 0, 3);
 
@@ -81,51 +81,51 @@ class Phpexec {
         if ($this->isCurrentVersion === true) {
             preg_match('/^(\d\.\d+\.\d+)/', PHP_VERSION, $r);
             $this->actualVersion = $r[1];
-            
+
             if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
                 throw new NoPhpBinary('PHP binary for version '.$this->requestedVersion.' ('.$_SERVER['_'].') doesn\'t have the right middle version : "'.$this->actualVersion.'". Please, check config/exakat.ini');
             }
         }
-        
+
         switch($phpversion3) {
-            case '5.2' : 
+            case '5.2' :
                 $this->phpexec = $config->php52;
                 break 1;
 
-            case '5.3' : 
+            case '5.3' :
                 $this->phpexec = $config->php53;
                 break 1;
 
-            case '5.4' : 
+            case '5.4' :
                 $this->phpexec = $config->php54;
                 break 1;
 
-            case '5.5' : 
+            case '5.5' :
                 $this->phpexec = $config->php55;
                 break 1;
 
-            case '5.6' : 
+            case '5.6' :
                 $this->phpexec = $config->php56;
                 break 1;
 
-            case '7.0' : 
+            case '7.0' :
                 $this->phpexec = $config->php70;
                 break 1;
 
-            case '7.1' : 
+            case '7.1' :
                 $this->phpexec = $config->php71;
                 break 1;
 
-            case '7.2' : 
+            case '7.2' :
                 $this->phpexec = $config->php72;
                 break 1;
 
-            default: 
+            default:
                 $this->phpexec = $config->php;
                 // PHP will be always valid if we use the one that is currently executing us
                 $this->actualVersion = PHP_VERSION;
         }
-        
+
         if (preg_match('/^php:(.+?)$/', $this->phpexec)) {
             $folder = $config->projects_root;
             $res = shell_exec('docker run -it --rm --name php4exakat -v "$PWD":'.$folder.' -w '.$folder.' '.$this->phpexec.' php -v 2>&1');
@@ -174,13 +174,10 @@ class Phpexec {
         }
         $this->config['asp_tags'] = $aspTags;
     }
-    
+
     public function getTokens() {
         // prepare the list of tokens
         if ($this->isCurrentVersion) {
-            if (!in_array('tokenizer', get_loaded_extensions())) {
-                return false;
-            }
             $x = get_defined_constants(true);
             $tokens = array_flip($x['tokenizer']);
         } else {
@@ -192,13 +189,13 @@ class Phpexec {
                 return false;
             }
         }
-        
+
         // prepare extra tokens
         self::$tokens = $tokens + self::$extraTokens;
-        
+
         return self::$tokens;
     }
-    
+
     public function getTokenName($token) {
         return self::$tokens[$token];
     }
@@ -206,19 +203,20 @@ class Phpexec {
     public function getTokenValue($token) {
         return array_search($token, self::$tokens);
     }
-    
+
     public function getTokenFromFile($file) {
         $file = str_replace('$', '\\\$', $file);
-        
+
         if ($this->isCurrentVersion) {
             $tokens = @token_get_all(file_get_contents($file));
         } else {
             $tmpFile = tempnam(sys_get_temp_dir(), 'Phpexec');
-            shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; var_export(@token_get_all(file_get_contents(\''.$file.'\'))); print \'; ?>\';" > '.$tmpFile);
+            shell_exec($this->phpexec.'  -d short_open_tag=1  -r "print \'<?php \\$tokens = \'; \\$code = file_get_contents(\''.$file.'\'); \\$code = strpos(\\$code, \'<?\') === false ? \'\' : \\$code; var_export(@token_get_all(\\$code)); print \'; ?>\';" > '.$tmpFile);
             include $tmpFile;
+
             unlink($tmpFile);
         }
-        
+
         // In case the inclusion failed at parsing time
         if (!isset($tokens)) {
             $tokens = array();
@@ -232,16 +230,16 @@ class Phpexec {
         } else {
             $res = shell_exec($this->phpexec.' -r "print count(@token_get_all(file_get_contents(\''.str_replace("\$", "\\\$", $file).'\'))); ?>" 2>&1    ');
         }
-        
+
         return $res;
     }
-    
+
     public function getExec() {
         return $this->phpexec;
     }
 
     public function isValid() {
-        if (empty($this->phpexec)) { 
+        if (empty($this->phpexec)) {
             return false;
         }
         $res = shell_exec($this->phpexec.' -v 2>&1');
@@ -265,7 +263,7 @@ class Phpexec {
 
         return trim($shell) == 'No syntax errors detected in '.$file;
     }
-    
+
     public function getWhiteCode() {
         return array(
             array_search('T_WHITESPACE',  self::$tokens) => 1,
@@ -283,18 +281,18 @@ class Phpexec {
             return $this->config;
         }
     }
-    
+
     public function getActualVersion() {
         if ($this->actualVersion === null) {
             $this->isValid();
         }
         return $this->actualVersion;
     }
-    
+
     public function getVersion() {
         return shell_exec($this->phpexec.' -r "echo phpversion();" 2>&1');
     }
-    
+
     public function getShortTag() {
         return shell_exec($this->phpexec.' -r "echo ini_get(\'short_open_tags\') ? \'On (Should be Off)\' : \'Off\';" 2>&1');
     }

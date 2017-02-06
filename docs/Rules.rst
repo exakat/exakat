@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 30 Jan 2017 17:13:22 +0000
-.. comment: Generation hash : e94530f135483bfb0f94e7935773f7c52187d57c
+.. comment: Generation date : Mon, 06 Feb 2017 18:08:39 +0000
+.. comment: Generation hash : fcdcceffa7ee743ef68597d256524ed328609c24
 
 
 .. _$http\_raw\_post\_data:
@@ -11213,6 +11213,9 @@ Situations where parenthesis are not necessary, and may be removed.
        ($a = $b) == $c;
        
        ($a++);
+       
+       // No need for parenthesis in default values
+       function foo($c = ( 1 + 2) ) {}
    ?>
 
 +--------------+-------------------------------+
@@ -11579,14 +11582,19 @@ Wpdb Prepare Or Not
 ###################
 
 
-When using $wpdb, it is recommended to use the query() method when the SQL is not using variables.
+When using $wpdb, it is recommended to use directly the query() method when the SQL is not using variables.
+
+
 
 .. code-block:: php
 
    <?php
    
    // No need to prepare this query : it is all known at coding time.
-   $wpdb->prepare('INSERT INTO TABLE values (1,2,3)');
+   $wpdb->prepare('INSERT INTO table VALUES (1,2,3)');
+   
+   // No need to prepare this query : $wpdb->prefix is safe
+   $wpdb->prepare('INSERT INTO {$wpdb->prefix}table values (1,2,3)');
    
    // Don't use query when variable are involved : always use prepare
    $wpdb->query('INSERT INTO TABLE values (1,2,'.$var.')');

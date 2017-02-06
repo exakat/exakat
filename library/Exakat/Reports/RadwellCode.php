@@ -28,7 +28,7 @@ class RadwellCode extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'radwell';
 
-    private $themesToShow = array('RadwellCodes');
+    protected $themesToShow = array('RadwellCodes');
     
     private $descriptions = array(
                              'Structures/NestedIfthen'                      => 'Too many nested if statements',

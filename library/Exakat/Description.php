@@ -30,17 +30,17 @@ class Description {
                          'name'           => '',
                          'clearphp'       => '');
     private $analyzer = null;
-    
+
     public function __construct($analyzer) {
         $config = Config::factory();
         $this->analyzer = $analyzer;
 
         $filename = $config->dir_root.'/human/'.$this->language.'/'.str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $analyzer)).'.ini';
-        
+
         if (file_exists($filename)) {
             $this->ini = parse_ini_file($filename) + $this->ini;
         }
-        
+
         // else is the default values already defined above
     }
 
@@ -54,15 +54,15 @@ class Description {
 
     public function getName() {
         return $this->ini['name'];
-    }    
+    }
 
     public function getClearPHP() {
         return $this->ini['clearphp'];
-    }    
+    }
 
     public function getVersionAdded() {
         return $this->ini['exakatSince'];
-    }    
+    }
 }
 
 ?>

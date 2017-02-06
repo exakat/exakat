@@ -1,10 +1,10 @@
 <?php
 
-$expected     = array('$aThis');
-
-$expected_not = array('$neverUsed', 
-                      '$aNonThis',
+$expected     = array('$neverUsed', 
                       '$dThis', 
+                      '$aThis');
+
+$expected_not = array('$aNonThis',
                       '$dNonThis',
                       '$bThis', 
                       '$bNonThis', 

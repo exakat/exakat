@@ -26,7 +26,7 @@ class Stats {
     private $stats = array();
     private $file_filter = '';
     private $gremlin = '';
-    
+
     public function __construct($gremlin) {
         $this->gremlin = $gremlin;
     }
@@ -37,10 +37,10 @@ class Stats {
 
     public function setFileFilter($file) {
         $this->file_filter = ".has('file', '$file')";
-        
+
         return true;
     }
-    
+
     public function __get($name) {
         if (isset($this->stats[$name])) {
             return $this->stats[$name];
