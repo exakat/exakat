@@ -112,8 +112,8 @@ class IsRead extends Analyzer {
              ->inIs('NAME')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', true)
+             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
+             ->isNot('reference', self::CASE_SENSITIVE)
              ->back('results');
         $this->prepareQuery();
 

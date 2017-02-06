@@ -39,7 +39,7 @@ class IdenticalConditions extends Analyzer {
              ->outIs('LEFT')
              ->outIsIE('CODE')
              ->atomIsNot('Logical')
-             ->samePropertyAs('fullcode', 'left', true)
+             ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -57,7 +57,7 @@ class IdenticalConditions extends Analyzer {
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->samePropertyAs('fullcode', 'right', true)
+             ->samePropertyAs('fullcode', 'right', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -72,7 +72,7 @@ class IdenticalConditions extends Analyzer {
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
              ->outIsIE('CODE')
-             ->samePropertyAs('fullcode', 'left', true)
+             ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -91,7 +91,7 @@ class IdenticalConditions extends Analyzer {
 
              ->outIs('LEFT')
              ->outIsIE('CODE')
-             ->samePropertyAs('fullcode', 'right', true)
+             ->samePropertyAs('fullcode', 'right', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -112,7 +112,7 @@ class IdenticalConditions extends Analyzer {
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
-             ->samePropertyAs('fullcode', 'left', true)
+             ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -130,7 +130,7 @@ class IdenticalConditions extends Analyzer {
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
-             ->samePropertyAs('fullcode', 'left', true)
+             ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -153,7 +153,7 @@ class IdenticalConditions extends Analyzer {
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
-             ->samePropertyAs('fullcode', 'left', true)
+             ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -179,7 +179,7 @@ class IdenticalConditions extends Analyzer {
              ->outIsIE('CODE')
              ->atomIs('Logical')
              ->outIs(array('RIGHT', 'LEFT'))
-             ->samePropertyAs('fullcode', 'left', true)
+             ->samePropertyAs('fullcode', 'left', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
         

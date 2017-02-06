@@ -113,8 +113,8 @@ class IsRead extends Analyzer {
              ->back('method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', true)
+             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
+             ->isNot('reference', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
 
@@ -136,8 +136,8 @@ class IsRead extends Analyzer {
              ->back('method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', true)
-             ->isNot('reference', true)
+             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
+             ->isNot('reference', self::CASE_SENSITIVE)
              ->back('first');
         $this->prepareQuery();
     }

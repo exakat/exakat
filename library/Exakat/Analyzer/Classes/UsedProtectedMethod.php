@@ -42,12 +42,12 @@ class UsedProtectedMethod extends Analyzer {
              ->inIs('NAME')
              ->inIs('ELEMENT')
              ->goToClass()
-             ->goToAllChildren(true)
+             ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('BLOCK')
              ->atomInside('Staticmethodcall')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
-             ->samePropertyAs('code', 'name', true)
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('method');
         $this->prepareQuery();
 
@@ -66,7 +66,7 @@ class UsedProtectedMethod extends Analyzer {
              ->inIs('NAME')
              ->inIs('ELEMENT')
              ->goToClass()
-             ->goToAllChildren(true)
+             ->goToAllChildren(self::EXCLUDE_SELF)
              ->outIs('BLOCK')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
@@ -74,7 +74,7 @@ class UsedProtectedMethod extends Analyzer {
              ->inIs('OBJECT')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
-             ->samePropertyAs('code', 'name', true)
+             ->samePropertyAs('code', 'name', self::CASE_SENSITIVE)
              ->back('method');
         $this->prepareQuery();
     }

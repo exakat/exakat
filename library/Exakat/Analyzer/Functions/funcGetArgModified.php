@@ -47,7 +47,7 @@ class funcGetArgModified extends Analyzer {
              ->outIs('ARGUMENT')
              ->atomIs('Integer')
              ->isNot('intval', null)
-             ->samePropertyAs('intval', 'rank', true)
+             ->samePropertyAs('intval', 'rank', self::CASE_SENSITIVE)
              ->goToFunction()
              ->outIs('BLOCK')
              ->atomInside('Variable')
