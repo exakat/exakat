@@ -1,4 +1,4 @@
-Version 0.10.0 (Azure Lion, Coming up)
+Version 0.10.1 ( king of Wuji Kingdom, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,29 @@ Version 0.10.0 (Azure Lion, Coming up)
     + 
 + Tokenizer
     + 
+    
+Version 0.10.0 (Azure Lion, 2017-02-06)
++ Architecture
+    + Replacement of booleans with constants (WIP)
+    + Removed PHPloc (merged features into load)
+    + Added coding standard for Code Sniffer (ruleset.xml)
+    + PHP version used default to running script version
+    + Now reading Token Constants from the binaries
+    + Doctor reports project configuration if -p is used
++ Report
+    + 
++ Analyzer
+    + New Analyzer : No Boolean As Default 
+    + New Analyzer : Raised Access Level 
+    + New Analyzer : Recommend Wpdb->prepare when variables are in query
+    + Directive suggestion now include error_log
+    + Upgraded analyzer : UselessParenthesis also checks Typehint
+    + Upgraded analysis : 1804 / 1811 test pass (99.6% pass)
++ Tokenizer
+    + Reinforced detection of parsable PHP script
+    + Fixed Files command : it now cleans data before running
+    + Removed warning about memory
+    + Index creation made lighter
 
 Version 0.9.9 (Pilanpo Bodhisattva, 2017/01/30)
 + Architecture
