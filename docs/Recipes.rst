@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 30 Jan 2017 18:30:04 +0000
-.. comment: Generation hash : 6ec0bc9d6741178f004a00950f25c08445ee4acb
+.. comment: Generation date : Mon, 06 Feb 2017 18:08:39 +0000
+.. comment: Generation hash : fcdcceffa7ee743ef68597d256524ed328609c24
 
 
 .. _analyze:
