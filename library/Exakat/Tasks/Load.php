@@ -219,6 +219,11 @@ class Load extends Tasks {
     private $loaderList = array('CypherG3', 'Neo4jImport');
 
     private $processing = array();
+
+    private $stats = array('loc'       => 0, 
+                           'totalLoc'  => 0, 
+                           'files'     => 0, 
+                           'tokens'    => 0);
     
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
@@ -468,6 +473,7 @@ class Load extends Tasks {
                 $this->saveFiles();
                 $this->saveDefinitions();
             }
+            $files = 1;
         } elseif ($dirName = $this->config->dirname) {
             if (!is_dir($dirName)) {
                 throw new MustBeADir($dirName);
@@ -483,6 +489,13 @@ class Load extends Tasks {
 
         static::$client->finalize();
         $this->datastore->addRow('hash', array('status' => 'Load'));
+
+        $stats = array(array('key' => 'loc',         'value' => $this->stats['loc']), 
+                       array('key' => 'locTotal',    'value' => $this->stats['totalLoc']), 
+                       array('key' => 'files',       'value' => $this->stats['files']), 
+                       array('key' => 'tokens',      'value' => $this->stats['tokens']), 
+                       );
+        $this->datastore->addRow('hash', $this->stats);
         
         $this->logTime('LoadFinal');
         $loadFinal = new LoadFinal($this->gremlin, $this->config, self::IS_SUBTASK);
@@ -570,6 +583,8 @@ class Load extends Tasks {
         $this->log->log("$filename");
         $this->filename = $filename;
         
+        ++$this->stats['files'];
+        
         $this->line = 0;
         $log = array();
     
@@ -600,6 +615,7 @@ class Load extends Tasks {
         }
 
         $line = 0;
+        $comments = 0;
         $this->tokens = array();
         foreach($tokens as $t) {
             if (is_array($t)) {
@@ -607,6 +623,7 @@ class Load extends Tasks {
                     $t[0] === \Exakat\Tasks\T_WHITESPACE ||
                     $t[0] === \Exakat\Tasks\T_DOC_COMMENT) {
                     $line += substr_count($t[1], "\n");
+                    $comments += substr_count($t[1], "\n");
                     continue;
                 } else {
                     $line = $t[2];
@@ -618,10 +635,13 @@ class Load extends Tasks {
                                         2 => $line);
             }
         }
+        $this->stats['loc'] -= $comments;
+        
         // Final token
         $this->tokens[] = array(0 => \Exakat\Tasks\T_END,
                                 1 => '/* END */',
                                 2 => $line);
+        $this->stats['tokens'] += count($tokens);
         unset($tokens);
 
         $this->uses   = array('function' => array(),
@@ -661,6 +681,9 @@ class Load extends Tasks {
             $this->reset();
             throw new NoFileToProcess($filename, 'empty');
         }
+        
+        $this->stats['totalLoc'] += $line;
+        $this->stats['loc'] += $line;
 
         return true;
     }

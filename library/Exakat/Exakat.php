@@ -27,7 +27,7 @@ use Exakat\Config;
 
 class Exakat {
     const VERSION = '0.10.0';
-    const BUILD = 540;
+    const BUILD = 545;
     
     private $gremlin = null;
     private $config = null;
@@ -131,11 +131,6 @@ class Exakat {
 
             case 'update' : 
                 $task = new Tasks\Update($this->gremlin, $this->config);
-                $task->run($config);
-                break;
-
-            case 'phploc' : 
-                $task = new Tasks\Phploc($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 

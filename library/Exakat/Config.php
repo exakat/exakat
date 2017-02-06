@@ -172,7 +172,6 @@ class Config {
                                          'load'          => 1,
                                          'magicnumber'   => 1,
                                          'project'       => 1,
-                                         'phploc'        => 1,
                                          'report'        => 1,
                                          'results'       => 1,
                                          'stat'          => 1,

@@ -84,7 +84,7 @@ class Files extends Tasks {
             display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
             
-            $shell = 'cat '.$tmpFileName.'  | xargs -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
+            $shell = 'cat '.$tmpFileName.' | xargs grep --files-with-matches \'<\\?\' | xargs -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
@@ -199,12 +199,6 @@ class Files extends Tasks {
         $this->datastore->reload();
         file_put_contents($tmpFileName, '"'.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"{$this->config->projects_root}/projects/$dir/code", $files).'"');
         
-        display('Counting files');
-        // Also refining the file list with empty, one-tokened and incompilable files.
-        $counting = new Phploc($this->gremlin, $this->config, Tasks::IS_SUBTASK);
-        $counting->run();
-        display('Counted files');
-
         display('Check short tag (normal pass)');
         $stats['php'] = count($files);
         $shell = 'cat '.$tmpFileName.' | xargs -n1 -P5 '.$this->config->php.' -d short_open_tag=0 -d error_reporting=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
