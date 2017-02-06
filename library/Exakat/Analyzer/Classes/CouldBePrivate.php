@@ -47,7 +47,6 @@ class CouldBePrivate extends Analyzer {
              ->hasNoOut('STATIC')
              ->outIs('PPP')
              ->analyzerIsNot('Classes/PropertyUsedBelow')
-             ->outIsIE('LEFT')
              ->isNot('propertyname', $publicProperties);
         $this->prepareQuery();
 
@@ -55,6 +54,7 @@ class CouldBePrivate extends Analyzer {
         // Case of property::property (that's another public access)
         $publicStaticProperties = $this->query('g.V().hasLabel("Staticproperty")
                                                      .out("CLASS")
+                                                     .hasLabel("Identifier", "Nsname")
                                                      .as("classe")
                                                      .sideEffect{ fns = it.get().value("fullnspath"); }
                                                      .in("CLASS")
@@ -65,7 +65,7 @@ class CouldBePrivate extends Analyzer {
                                                      .coalesce( hasLabel("File"), filter{it.get().value("fullnspath") != fns; })
                                                      .select("classe", "property").by("fullnspath").by("code")
                                                      .unique()');
-
+        
         $calls = array();
         foreach($publicStaticProperties as $value) {
             if (isset($calls[$value->property])) {
