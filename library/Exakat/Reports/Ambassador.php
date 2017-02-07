@@ -2209,16 +2209,27 @@ HTML;
                             'Foreach'             => 'Foreach',
                             'While'               => 'While',
                             'Do..while'           => 'Dowhile',
+
                             'New'                 => 'New',
                             'Clone'               => 'Clone',
+                            'Class constant call' => 'Staticconstant',
+                            'Method call'         => 'Methodcall',
+                            'Static method call'  => 'Staticmethodcall',
+                            'Properties usage'    => 'Property',
+                            'Static property'     => 'Staticproperty',
+
                             'Throw'               => 'Throw',
                             'Try'                 => 'Try',
                             'Catch'               => 'Catch',
                             'Finally'             => 'Finally',
+
                             'Yield'               => 'Yield',
+                            'Yield From'          => 'YieldFrom',
+
                             '?  :'                => 'Ternary',
                             '?: '                 => 'Php/Coalesce',
                             '??'                  => 'Php/NullCoalesce',
+
                             'Variables constants' => 'Constants/VariableConstants',
                             'Variables variables' => 'Variables/VariableVariable',
                             'Variables functions' => 'Functions/Dynamiccall',

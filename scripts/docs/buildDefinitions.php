@@ -46,10 +46,11 @@ $extension_list = join("\n", $extension_list);
 $library_list = array();
 $json = json_decode(file_get_contents('data/externallibraries.json'));
 foreach( (array) $json as $library) {
-    if (!isset($library->name)) {
-        print_r($library);
+    if (empty($library->homepage)) {
+        $library_list[] = '* '.$library->name;
+    } else {
+        $library_list[] = '* `'.$library->name.' <'.$library->homepage.'>`_';
     }
-    $library_list[] = '* ['.$library->name.']('.$library->homepage.')';
 }
 $library_list = join("\n", $library_list);
 
@@ -510,7 +511,7 @@ function generateAnalyzerList() {
     foreach($files as $file) {
         $ini = parse_ini_file($file);
         if (empty($ini['exakatSince'])) {
-            print $file."\n";
+            print "No exakatSince in ".$file."\n";
             continue;
         }
         if (isset($versions[$ini['exakatSince']])) {
