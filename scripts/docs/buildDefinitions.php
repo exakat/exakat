@@ -204,6 +204,7 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  'uksort'                         => 'http://www.php.net/uksort',
                  'uasort'                         => 'http://www.php.net/uasort',
                  'sort'                           => 'http://www.php.net/sort',
+                 'error_log'                      => 'http://www.php.net/error_log',
                  
                  'png2wbmp'                       => 'http://www.php.net/png2wbmp',
                  'jpeg2wbmp'                      => 'http://www.php.net/jpeg2wbmp',
@@ -518,7 +519,7 @@ function generateAnalyzerList() {
             $versions[$ini['exakatSince']] = array($ini['name'].' ('.basename(dirname($file)).'/'.substr(basename($file), 0, -4).')');
         }
     }
-    krsort($versions);
+    uksort($versions, function ($a, $b) { return version_compare($b, $a); });
     
     $list = "\n";
     foreach($versions as $version => $analyzers) {

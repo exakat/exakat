@@ -27,16 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class NotNot extends Analyzer {
     public function analyze() {
+        // !!
         $this->atomIs('Not')
+             ->hasNoIn('NOT')
              ->outIs('NOT')
-             ->atomIs('Not')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Not')
-             ->outIs('NOT')
-             ->atomIs('Parenthesis')
-             ->outIs('CODE')
+             ->outIsIE('CODE')  // Parenthesis
              ->atomIs('Not')
              ->back('first');
         $this->prepareQuery();

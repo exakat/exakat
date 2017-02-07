@@ -136,7 +136,7 @@ CYPHER;
 
                 $this->unlink[] = $file;
                 $e = microtime(true);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 throw new LoadError("Couldn't load nodes in the database\n".$e->getMessage());
             }
@@ -163,7 +163,7 @@ CYPHER;
                 $res = $this->cypher->query($queryTemplate);
                 $this->unlink[] = $file;
                 $e = microtime(true);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->cleanCsv(); 
                 throw new LoadError("Couldn't load '".$edge."'relations in the database\n".$e->getMessage());
             }

@@ -2,6 +2,7 @@
 
 $expected     = array('!!$y');
 
-$expected_not = array();
+$expected_not = array('$a = !$b',
+                      '!$b');
 
 ?>

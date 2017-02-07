@@ -26,10 +26,10 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class TryCatchUsage extends Analyzer {
-
     public function analyze() {
         $this->atomIs('Catch')
              ->outIs ('CLASS');
+        $this->prepareQuery();
     }
 }
 

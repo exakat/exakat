@@ -44,7 +44,7 @@ class AssignedTwiceOrMore extends Analyzer {
            .sideEffect{ names = counts.findAll{ a,b -> b > 1}.keySet() }
            .filter{ names.size() > 0;}
            .map{ ["key":it.get().value("code"),"value":names]; }';
-        $variables = $this->queryHash($query, null, 'fullcode', 'variables');
+        $variables = $this->queryHash($query, null);
         
         $this->atomIs('Function')
              ->savePropertyAs('code', 'name')

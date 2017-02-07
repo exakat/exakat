@@ -24,7 +24,7 @@
 namespace Exakat\Exceptions;
 
 class UnableToReachGraphServer extends \RuntimeException {
-    public function __construct($filename = '', $code = 0, \Exception $previous = null) {
+    public function __construct( $code = 0, \Exception $previous = null) {
         parent::__construct("Unable to reach graph server. First, check it by running php exakat.phar cleandb.\nAborting\n", $code, $previous);
     }
 }

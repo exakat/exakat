@@ -96,7 +96,7 @@ class FindExternalLibraries extends Tasks {
         }
 
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/')) {
-            throw new NoSuchProject();
+            throw new NoSuchProject($project);
         }
 
         $dir = $this->config->projects_root.'/projects/'.$project.'/code';
@@ -118,7 +118,6 @@ class FindExternalLibraries extends Tasks {
         $this->php = new Phpexec();
 
         $this->php->getTokens();
-        Precedence::preloadConstants($this->php->getActualVersion());
         
         $r = array();
         $path = $this->config->projects_root.'/projects/'.$project.'/code';
