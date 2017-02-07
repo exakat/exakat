@@ -2224,7 +2224,7 @@ HTML;
                             'Finally'             => 'Finally',
 
                             'Yield'               => 'Yield',
-                            'Yield From'          => 'YieldFrom',
+                            'Yield From'          => 'Yieldfrom',
 
                             '?  :'                => 'Ternary',
                             '?: '                 => 'Php/Coalesce',
