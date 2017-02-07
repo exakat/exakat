@@ -96,7 +96,6 @@ class Analyze extends Tasks {
             $dependencies2 = array();
             foreach($analyzers_class as $a) {
                 $d = Analyzer::getInstance($a);
-                $this->configName = str_replace('/', '_', $a);
                 $d = $d->dependsOn();
                 if (!is_array($d)) {
                     throw new DependsOnMustReturnArray(get_class($this));
@@ -166,7 +165,6 @@ class Analyze extends Tasks {
             }
             $begin = microtime(true);
             $analyzer = Analyzer::getInstance($analyzer_class);
-            $this->configName = str_replace(array('/', '\\', 'Exakat\\Analyzer\\'), array('_', '_', ''),$analyzer_class);    
             
             if ($this->config->noRefresh === true && isset($analyzed[$analyzer_class])) {
                 display( "$analyzer_class is already processed\n");

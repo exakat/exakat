@@ -75,7 +75,7 @@ class Dump extends Tasks {
             $this->sqlite = new \Sqlite3($this->sqliteFile);
         } else {
             $this->sqlite = new \Sqlite3($this->sqliteFile);
-            $this->getAtomCounts($this->sqlite);
+            $this->getAtomCounts();
 
             $this->collectStructures();
             $this->collectLiterals();
