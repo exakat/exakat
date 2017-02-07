@@ -28,11 +28,20 @@ use Exakat\Analyzer\Analyzer;
 class EmptyTrait extends Analyzer {
     
     public function analyze() {
+        // Trait with nothing in it
         $this->atomIs('Trait')
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('ELEMENT')
-             ->atomIs('Void')
+             ->atomIs(array('Void', 'Use'))
+             ->back('first');
+        $this->prepareQuery();
+
+        // Trait has no function nor properties
+        $this->atomIs('Trait')
+             ->outIs('BLOCK')
+             ->isNot('count', 1)
+             ->raw('where( __.out("ELEMENT").hasLabel("Function", "Ppp").count().is(eq(0)) ) ')
              ->back('first');
         $this->prepareQuery();
     }

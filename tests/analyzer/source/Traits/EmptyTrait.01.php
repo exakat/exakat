@@ -7,7 +7,7 @@ trait nonEmptyTrait{
 }
 
 trait nonEmptyTrait2 {
-    use emptyTrait;
+    private $foo = 2;
 }
 
 ?>
