@@ -99,7 +99,7 @@ SQL;
 
     public function getThemesForAnalyzer() {
         $list = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
-                      'CompatibilityPHP70', 'CompatibilityPHP71', 'Compatibility72',
+                      'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
                       'Dead code', 'Security', 'Analyze', 'Preferences');
         $listSqlite3 = '"'.join('", "', $list).'"';
                                           $query = <<<SQL
