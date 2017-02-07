@@ -31,10 +31,10 @@ class GremlinServer extends Graph {
     public function __construct($config) {
         parent::__construct($config);
         
-        $this->gremlinServer = new Server([
+        $this->gremlinServer = new Server(array(
    'host' => 'localhost',
    'graph' => 'graph'
-]);
+));
         $this->gremlinServer->open();
     }
 
