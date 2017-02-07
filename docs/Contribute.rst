@@ -15,4 +15,4 @@ Here are some suggestions of help you may provide to enhance your own usage of E
 * Other ideas...
 
 
-Visit us on the [github repository](https://github.com/exakat/php-static-analysis-tools), or the [slack channel](https://www.exakat.io/slack-invitation/).
+Visit us on the [github repository](https://github.com/exakat/php-static-analysis-tools), or the `slack channel <https://www.exakat.io/slack-invitation/>`_.
