@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 06 Feb 2017 18:08:39 +0000
-.. comment: Generation hash : fcdcceffa7ee743ef68597d256524ed328609c24
+.. comment: Generation date : Tue, 07 Feb 2017 10:55:30 +0000
+.. comment: Generation hash : 729fb1427455008e42201550bcad7a3c182c408d
 
 
 .. _$http\_raw\_post\_data:
@@ -2288,7 +2288,20 @@ Don't Change Incomings
 ######################
 
 
-PHP hands over a lot of information using special variables like $_GET, $_POST, etc... Modifying those variables and those values inside de variables means that the original content will be lost, while it will still look like raw data, and, as such, will be untrustworthy.
+PHP hands over a lot of information using special variables like $_GET, $_POST, etc... Modifying those variables and those values inside de variables means that the original content is lost, while it will still look like raw data, and, as such, will be untrustworthy.
+
+.. code-block:: php
+
+   <?php
+   
+   // filtering and keeping the incoming value. 
+   $_DATA'id'] = (int) $_GET['id'];
+   
+   // filtering and changing the incoming value. 
+   $_GET['id'] = strtolower($_GET['id']);
+   
+   ?>
+
 
 It is recommended to put the modified values in another variable, and keep the original one intact.
 
@@ -2869,7 +2882,24 @@ Empty Traits
 ############
 
 
-List of all `empty <http://www.php.net/empty>`_ trait defined in the code. May be they are RFU.
+List of all `empty <http://www.php.net/empty>`_ trait defined in the code. 
+
+.. code-block:: php
+
+   <?php
+   
+   // empty trait
+   trait t { }
+   
+   // Another empty trait
+   trait t2 {
+       use t; 
+   }
+   
+   ?>
+
+
+Such traits may be reserved for future use. They may also be forgotten, and dead code.
 
 +--------------+-------------------+
 | Command Line | Traits/EmptyTrait |
@@ -3026,7 +3056,26 @@ Exit() Usage
 
 Using `exit <http://www.php.net/exit>`_ or `die() <http://www.php.net/die>`_ in the code makes the code untestable (it will `break <http://php.net/manual/en/control-structures.break.php>`_ unit tests). Morover, if there is no reason or string to display, it may take a long `time <http://www.php.net/time>`_ to spot where the application is stuck. 
 
-Try exiting the function/class, or `throw <http://www.php.net/throw>`_ exception that may be caught later in the code.
+.. code-block:: php
+
+   <?php
+   
+   // Throw an exception, that may be caught somewhere
+   throw new \Exception('error');
+   
+   // Dying with error message. 
+   die('error');
+   
+   function foo() {
+       //exiting the function but not dying
+       if (somethingWrong()) {
+           return true;
+       }
+   }
+   ?>
+
+
+Try exiting the function/class with return, or `throw <http://www.php.net/throw>`_ exception that may be caught later in the code.
 
 +--------------+-------------------------------------------------------------------------------+
 | Command Line | Structures/ExitUsage                                                          |
@@ -4006,6 +4055,16 @@ Incompilable Files
 Files that cannot be compiled, and, as such, be run by PHP. Scripts are linted against PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.0-dev and 7.1. 
 
 This is usually undesirable, as all code must compile before being executed. It may simply be that such files are not compilable because they are not yet ready for an upcoming PHP version.
+
+.. code-block:: php
+
+   <?php
+   
+   // Can't compile this : Print only accepts one argument
+   print $a, $b, $c;
+   
+   ?>
+
 
 Code that is incompilable with older PHP versions means that the code is breaking backward compatibility : good or bad is project decision.
 
@@ -5960,6 +6019,10 @@ PHP 7 doesn't allow the usage of [] with strings. [] is an array-only oeprator.
 
    <?php
    
+   $string = 'abc';
+   
+   // Not possible in PHP 7
+   $string[] = 'd';
    
    ?>
 
@@ -11841,7 +11904,23 @@ error_reporting() With Integers
 ###############################
 
 
-Using named constants with error_reporting is strongly encouraged to ensure compatibility for future versions. As error levels are added, the range of integers increases, so older integer-based error levels will not always behave as expected. (Adapted from the documentation)
+Using named constants with error_reporting is strongly encouraged to ensure compatibility for future versions. As error levels are added, the range of integers increases, so older integer-based error levels will not always behave as expected. (Adapted from the documentation).
+
+.. code-block:: php
+
+   <?php
+   
+   // This is ready for PHP next version
+   error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~E_WARNING);
+   
+   // This is not ready for PHP next version
+   error_reporting(2047);
+   
+   // -1 and 0 are omitted, as they will be valid even is constants changes.
+   error_reporting(-1);
+   error_reporting(0);
+   
+   ?>
 
 +--------------+--------------------------------------+
 | Command Line | Structures/ErrorReportingWithInteger |

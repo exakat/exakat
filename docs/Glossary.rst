@@ -637,6 +637,10 @@ Glossary
 
 
 + `T`
+    + `Throw`
+
+      + :ref:`Exit() Usage <exit()-usage>`
+
     + `Throwable`
 
       + :ref:`Empty Try Catch <empty-try-catch>`

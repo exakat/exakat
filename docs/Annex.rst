@@ -231,42 +231,42 @@ Libraries that are popular, large and often included in repositories are identif
 
 Those libraries, or even some of the, may be included again in the analysis by commenting the ignored_dir[] line, in the projects/<project>/config.ini file. 
 
-* [BBQ](https://github.com/eventio/bbq)
-* [CI xmlRPC](http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html)
-* [CPDF](https://pear.php.net/reference/PhpDocumentor-latest/li_Cpdf.html)
-* [DomPDF](https://github.com/dompdf/dompdf)
-* [FPDF](http://www.fpdf.org/)
-* [gettext Reader](http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html)
-* [jpGraph](http://jpgraph.net/)
-* [HTML2PDF](http://sourceforge.net/projects/phphtml2pdf/)
-* [HTMLPurifier](http://htmlpurifier.org/)
-* [http_class]()
-* [IDNA convert](https://github.com/phpWhois/idna-convert)
-* [lessc](http://leafo.net/lessphp/)
-* [lessc](http://leafo.net/lessphp/)
-* [magpieRSS](http://magpierss.sourceforge.net/)
-* [MarkDown Parser](http://processwire.com/apigen/class-Markdown_Parser.html)
-* [Markdown](https://github.com/michelf/php-markdown)
-* [mpdf](http://www.mpdf1.com/mpdf/index.php)
-* [oauthToken]()
-* [passwordHash]()
-* [pChart](http://www.pchart.net/)
-* [pclZip](http://www.phpconcept.net/pclzip/)
-* [Propel](http://propelorm.org/)
-* [phpExecl](https://phpexcel.codeplex.com/)
-* [phpMailer](https://github.com/PHPMailer/PHPMailer)
-* [qrCode](http://phpqrcode.sourceforge.net/)
-* [Services_JSON](https://pear.php.net/package/Services_JSON)
-* [sfYaml](https://github.com/fabpot-graveyard/yaml/blob/master/lib/sfYaml.php)
-* [swift](http://swiftmailer.org/)
-* [Smarty](http://www.smarty.net/)
-* [tcpdf](http://www.tcpdf.org/)
-* [text_diff](https://pear.php.net/package/Text_Diff)
-* [text highlighter](https://pear.php.net/package/Text_Highlighter/)
-* [tfpdf](http://www.fpdf.org/en/script/script92.php)
-* [UTF8]()
-* [Yii](http://www.yiiframework.com/)
-* [Zend Framework](http://framework.zend.com/)
+* `BBQ <https://github.com/eventio/bbq>`_
+* `CI xmlRPC <http://apigen.juzna.cz/doc/ci-bonfire/Bonfire/class-CI_Xmlrpc.html>`_
+* `CPDF <https://pear.php.net/reference/PhpDocumentor-latest/li_Cpdf.html>`_
+* `DomPDF <https://github.com/dompdf/dompdf>`_
+* `FPDF <http://www.fpdf.org/>`_
+* `gettext Reader <http://pivotx.net/dev/docs/trunk/External/PHP-gettext/gettext_reader.html>`_
+* `jpGraph <http://jpgraph.net/>`_
+* `HTML2PDF <http://sourceforge.net/projects/phphtml2pdf/>`_
+* `HTMLPurifier <http://htmlpurifier.org/>`_
+* http_class
+* `IDNA convert <https://github.com/phpWhois/idna-convert>`_
+* `lessc <http://leafo.net/lessphp/>`_
+* `lessc <http://leafo.net/lessphp/>`_
+* `magpieRSS <http://magpierss.sourceforge.net/>`_
+* `MarkDown Parser <http://processwire.com/apigen/class-Markdown_Parser.html>`_
+* `Markdown <https://github.com/michelf/php-markdown>`_
+* `mpdf <http://www.mpdf1.com/mpdf/index.php>`_
+* oauthToken
+* passwordHash
+* `pChart <http://www.pchart.net/>`_
+* `pclZip <http://www.phpconcept.net/pclzip/>`_
+* `Propel <http://propelorm.org/>`_
+* `phpExecl <https://phpexcel.codeplex.com/>`_
+* `phpMailer <https://github.com/PHPMailer/PHPMailer>`_
+* `qrCode <http://phpqrcode.sourceforge.net/>`_
+* `Services_JSON <https://pear.php.net/package/Services_JSON>`_
+* `sfYaml <https://github.com/fabpot-graveyard/yaml/blob/master/lib/sfYaml.php>`_
+* `swift <http://swiftmailer.org/>`_
+* `Smarty <http://www.smarty.net/>`_
+* `tcpdf <http://www.tcpdf.org/>`_
+* `text_diff <https://pear.php.net/package/Text_Diff>`_
+* `text highlighter <https://pear.php.net/package/Text_Highlighter/>`_
+* `tfpdf <http://www.fpdf.org/en/script/script92.php>`_
+* UTF8
+* `Yii <http://www.yiiframework.com/>`_
+* `Zend Framework <http://framework.zend.com/>`_
 
 New analyzers
 -------------
@@ -290,6 +290,7 @@ List of analyzers, by version of introduction, newest to oldest.
 
   * Assigned Twice (Variables/AssignedTwiceOrMore)
   * New Line Style (Structures/NewLineStyle)
+  * New On Functioncall Or Identifier (Classes/NewOnFunctioncallOrIdentifier)
 
 * 0.9.7
 
@@ -448,6 +449,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Cast Usage (Php/CastingUsage)
   * Catch Overwrite Variable (Structures/CatchShadowsVariable)
   * Caught Exceptions (Exceptions/CaughtExceptions)
+  * Caught Expressions (Php/TryCatchUsage)
   * Class Const With Array (Php/ClassConstWithArray)
   * Class Has Fluent Interface (Classes/HasFluentInterface)
   * Class Name Case Difference (Classes/WrongCase)
@@ -700,6 +702,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * No Public Access (Classes/NoPublicAccess)
   * No Real Comparison (Type/NoRealComparison)
   * No Self Referencing Constant (Classes/NoSelfReferencingConstant)
+  * No String With Append (Php/NoStringWithAppend)
   * No Substr() One (Structures/NoSubstrOne)
   * No array_merge() In Loops (Performances/ArrayMergeInLoops)
   * Non Ascii Variables (Variables/VariableNonascii)
@@ -840,7 +843,6 @@ List of analyzers, by version of introduction, newest to oldest.
   * Traits (Traits/TraitUsage)
   * Trigger Errors (Php/TriggerErrorUsage)
   * True False Inconsistant Case (Constants/InconsistantCase)
-  * Try Catch Usage (Php/TryCatchUsage)
   * Try With Finally (Structures/TryFinally)
   * Typehints (Functions/Typehints)
   * URL list (Type/Url)
