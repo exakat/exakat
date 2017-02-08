@@ -132,8 +132,10 @@ class Initproject extends Tasks {
             // default initial config. Found in test project.
             $phpversion = $this->config->phpversion;
             $configIni = <<<INI
+;Main PHP version for this code.
 phpversion = $phpversion
 
+;Ignored dirs and files, relative to code source root.
 ignore_dirs[] = /test
 ignore_dirs[] = /tests
 ignore_dirs[] = /Tests
@@ -155,8 +157,14 @@ ignore_dirs[] = /assets
 ignore_dirs[] = /spec
 ignore_dirs[] = /sql
 
+;Included dirs or files, relative to code source root. Default to all.
+;Those are added after ignoring directories
+include_dirs[] = /
+
+;Accepted file extensions
 file_extensions =
 
+;Description of the project
 project_name        = "$projectName";
 project_url         = "$repositoryURL";
 project_vcs         = "$vcs";
@@ -192,6 +200,8 @@ INI;
                 // Empty initialization
                 case ($repositoryURL === '' || $repositoryURL === false) :
                     display('Empty initialization');
+                    $skipFiles = true;
+
                     break 1;
 
                 // composer archive (early in the list, as this won't have 'scheme'
