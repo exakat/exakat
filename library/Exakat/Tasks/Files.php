@@ -314,7 +314,7 @@ class Files extends Tasks {
         $ignore_dirs = $config->ignore_dirs;
         $dir = $config->project;
 
-        // Actually finding the files
+        // Regex to ignore files and folders
         $ignoreDirs = array();
         foreach($ignore_dirs as $ignore) {
             if ($ignore[0] == '/') {
@@ -328,11 +328,31 @@ class Files extends Tasks {
             }
         }
         if (empty($ignoreDirs)) {
-            $regex = '';
+            $ignoreDirsRegex = '';
         } else {
-            $regex = '#^('.implode('|', $ignoreDirs).')#';
+            $ignoreDirsRegex = '#^('.implode('|', $ignoreDirs).')#';
         }
 
+        // Regex to include files and folders
+        $includeDirs = array();
+        foreach($config->include_dirs as $include) {
+            if ($include === '/') { continue; }
+            if ($include[0] == '/') {
+                $d = $config->projects_root . '/projects/' . $dir . '/code' . $include;
+                if (!file_exists($d)) {
+                    continue;
+                }
+                $includeDirs[] = $include . '.*';
+            } else {
+                $includeDirs[] = '.*' . $include . '.*';
+            }
+        }
+        if (empty($includeDirs)) {
+            $includeDirsRegex = '';
+        } else {
+            $includeDirsRegex = '#^('.implode('|', $includeDirs).')#';
+        }
+        
         $php = new Phpexec();
         $ignoredFiles = array();
 
@@ -351,13 +371,14 @@ class Files extends Tasks {
         foreach($files as $id => &$file) {
             $file = substr($file, 1);
             $ext = pathinfo($file, PATHINFO_EXTENSION);
-            if (empty($ext)) {
+            if (!empty($includeDirsRegex) && preg_match($includeDirsRegex, $file)) {
+                // Matching the 'include dir' pattern
                 // it's OK.
             } elseif (!in_array($ext, $exts)) {
                 // selection of extensions
                 unset($files[$id]);
                 $ignoredFiles[$file] = "Ignored extension ($ext)";
-            } elseif (!empty($regex) && preg_match($regex, $file)) {
+            } elseif (!empty($ignoreDirsRegex) && preg_match($ignoreDirsRegex, $file)) {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
                 $ignoredFiles[$file] = 'Ignored dir';
