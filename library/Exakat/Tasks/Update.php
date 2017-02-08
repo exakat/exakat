@@ -87,7 +87,9 @@ class Update extends Tasks {
             case file_exists($path.'/code/.svn') :
                 display('SVN update '.$this->config->project);
                 $res = shell_exec('cd '.$path.'/code/; svn update');
-                preg_match('/At revision (\d+)/', $res, $r);
+                if (!preg_match('/Updated to revision (\d+)\./', $res, $r)) {
+                    preg_match('/At revision (\d+)/', $res, $r);
+                } 
 
                 display( "SVN updated to revision $r[1]");
                 
