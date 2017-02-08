@@ -37,6 +37,7 @@ abstract class Reports {
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
                                           'ZendFramework',  'RadwellCode',
                                           'FacetedJson', 'Json', 'OnepageJson', 
+                                          'Codacy',
                                           );
 
     protected $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
