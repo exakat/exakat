@@ -40,7 +40,7 @@ class Project extends Tasks {
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
                               );
 
-    protected $reports = array('Ambassador', 'Devoops');
+    protected $reports = array();
 
     public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subTask);
@@ -50,10 +50,7 @@ class Project extends Tasks {
             $this->themes = $themes;
         }
 
-        $reports = $config->project_reports;
-        if (!empty($reports)) {
-            $this->reports = $reports;
-        }
+        $this->reports = $config->project_reports;
     }
 
     public function run() {
@@ -154,6 +151,9 @@ class Project extends Tasks {
                             6 => '-norefresh',
                             7 => '-u'
                             );
+            if ($this->config->quiet === true) {
+                $args[] = '-q';
+            }
             
             try {
                 $configThema = Config::push($args);
@@ -169,7 +169,7 @@ class Project extends Tasks {
                                 3 => $this->config->project,
                                 4 => '-T',
                                 5 => trim($theme, '"'), // No need to protect anymore, as this is internal
-                                6 => '-u'
+                                6 => '-u',
                             );
 
                 $configThema = Config::push($args);
