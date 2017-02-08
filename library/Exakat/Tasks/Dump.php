@@ -933,15 +933,17 @@ SQL;
                    .select("file", "include").by("fullcode").by("fullcode")
                    ';
         $res = $this->gremlin->query($query);
-        $functioncalls = $res->results;
+        if (isset($res->results)) {
+            $functioncalls = $res->results;
 
-        foreach($functioncalls as $link) {
-            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
-            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
-            $insertQuery->bindValue(':type',      'FUNCTIONCALL', \SQLITE3_TEXT);
-            $insertQuery->execute();
+            foreach($functioncalls as $link) {
+                $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+                $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+                $insertQuery->bindValue(':type',      'FUNCTIONCALL', \SQLITE3_TEXT);
+                $insertQuery->execute();
+            }
+            display(count($functioncalls)." functioncall ");
         }
-        display(count($functioncalls)." functioncall ");
         
         // constants
         $query = 'g.V().hasLabel("File").as("file")
