@@ -22,6 +22,8 @@
 
 use Exakat\Config;
 
+include 'helpers.php';
+
 class Autoload {
     public static function autoload_library($name) {
         $file = __DIR__.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $name).'.php';
@@ -67,6 +69,5 @@ if (isset($argv)) {
     $config = Config::factory($GLOBALS['argv']);
 }
 
-include 'helpers.php';
 
 ?>
