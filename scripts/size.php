@@ -25,7 +25,12 @@ $rows = glob('projects/*', GLOB_ONLYDIR);
 
 $finals = array();
 foreach($rows as $row) {
-    $final = array(basename($row));
+    $project = basename($row);
+    
+    if (in_array($project, array('log', 'test', 'vide'))) {
+        continue;
+    }
+    $final = array($project);
 
     $sqliteFilename = $row.'/datastore.sqlite';
     if (!file_exists($sqliteFilename)) {
@@ -52,10 +57,16 @@ foreach($rows as $row) {
     $finals[] = $final;
 }
 
+usort($finals, function($a, $b) { return $a[2] <=> $b[2]; });
+
 $fp = fopen('size.csv', 'w+');
+$total = 0;
 foreach($finals as $final) {
+    ++$total;
     fputcsv($fp, $final);
 }
 fclose($fp);
+
+print "Written $total sizes in size.csv\n";
 
 ?>
