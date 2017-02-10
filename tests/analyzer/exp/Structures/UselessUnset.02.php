@@ -7,6 +7,6 @@ $expected     = array('(unset) $argByReference',
                       '(unset) $value2',
                       '(unset) $value1');
 
-$expected_not = array();
+$expected_not = array('(unset) $x');
 
 ?>

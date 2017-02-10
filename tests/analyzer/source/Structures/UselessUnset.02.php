@@ -17,8 +17,10 @@ function foo(&$argByReference, $argByValue) {
 		(unset) $value2;
 	}
 
+    $x;
 	foreach($array3 as $value3->property) {
 		(unset) $value3;
+		(unset) $x;
 	}
 }
 
