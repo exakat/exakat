@@ -28,6 +28,7 @@ use Exakat\Config;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoCodeInProject;
+use Exakat\Exceptions\NoFileToProcess;
 
 class Files extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -59,6 +60,10 @@ class Files extends Tasks {
         $ignoredFiles = array();
         $files = array();
         self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles);
+        
+        if (empty($files)) {
+            throw new NoFileToProcess($this->config->project);
+        }
         
         $i = array();
         foreach($ignoredFiles as $file => $reason) {
