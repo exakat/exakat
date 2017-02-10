@@ -619,9 +619,10 @@ class Load extends Tasks {
         $this->tokens = array();
         foreach($tokens as $t) {
             if (is_array($t)) {
-                if ($t[0] === \Exakat\Tasks\T_COMMENT ||
-                    $t[0] === \Exakat\Tasks\T_WHITESPACE ||
-                    $t[0] === \Exakat\Tasks\T_DOC_COMMENT) {
+                if ($t[0] === \Exakat\Tasks\T_WHITESPACE) {
+                    $line += substr_count($t[1], "\n");
+                } elseif ($t[0] === \Exakat\Tasks\T_COMMENT ||
+                          $t[0] === \Exakat\Tasks\T_DOC_COMMENT) {
                     $line += substr_count($t[1], "\n");
                     $comments += substr_count($t[1], "\n");
                     continue;
