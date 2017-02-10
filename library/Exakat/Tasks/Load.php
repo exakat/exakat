@@ -487,15 +487,15 @@ class Load extends Tasks {
 
         $this->logTime('Load in graph');
 
-        static::$client->finalize();
-        $this->datastore->addRow('hash', array('status' => 'Load'));
-
         $stats = array(array('key' => 'loc',         'value' => $this->stats['loc']), 
                        array('key' => 'locTotal',    'value' => $this->stats['totalLoc']), 
                        array('key' => 'files',       'value' => $this->stats['files']), 
                        array('key' => 'tokens',      'value' => $this->stats['tokens']), 
                        );
         $this->datastore->addRow('hash', $this->stats);
+
+        static::$client->finalize();
+        $this->datastore->addRow('hash', array('status' => 'Load'));
         
         $this->logTime('LoadFinal');
         $loadFinal = new LoadFinal($this->gremlin, $this->config, self::IS_SUBTASK);
@@ -637,6 +637,7 @@ class Load extends Tasks {
         }
         $this->stats['loc'] -= $comments;
         
+        
         // Final token
         $this->tokens[] = array(0 => \Exakat\Tasks\T_END,
                                 1 => '/* END */',
@@ -680,11 +681,11 @@ class Load extends Tasks {
         } catch (LoadError $e) {
             $this->reset();
             throw new NoFileToProcess($filename, 'empty');
+        } finally {
+            $this->stats['totalLoc'] += $line;
+            $this->stats['loc'] += $line;
         }
         
-        $this->stats['totalLoc'] += $line;
-        $this->stats['loc'] += $line;
-
         return true;
     }
 
@@ -699,7 +700,7 @@ class Load extends Tasks {
             throw new LoadError('Processing error');
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
-
+        
         return $this->$method();
     }
 
@@ -1810,7 +1811,6 @@ class Load extends Tasks {
         } else {
             $functioncallId = $this->processFCOA($functioncallId);
         }
-
         return $functioncallId;
     }
     
@@ -2245,6 +2245,8 @@ class Load extends Tasks {
     }
 
     private function processFollowingBlock($finals) {
+        $this->exitContext();
+
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             ++$this->id;
             $blockId = $this->processBlock(false);
@@ -2314,7 +2316,9 @@ class Load extends Tasks {
             $this->setAtom($blockId, array('bracket' => false));
             $this->pushExpression($blockId);
         }
-        
+
+        $this->nestContext();
+
         return $blockId;
     }
 

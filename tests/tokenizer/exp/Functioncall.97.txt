@@ -1,0 +1,74 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.97.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          foo
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              call_user_func
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                   
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      A
+                    Label : ELEMENT
+                      $c
+                    Label : ELEMENT
+                      <?=
+                      Label : ARGUMENTS
+                        <?=
+                        Label : ARGUMENT
+                          ob_start
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            ob_start
+                      Label : NAME
+                        <?=
+                    Label : ELEMENT
+                      B
+                    Label : ELEMENT
+                      $d
+                    Label : ELEMENT
+                      <?=
+                      Label : ARGUMENTS
+                        <?=
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        <?=
+                    Label : ELEMENT
+                       {
+			}
+		}
+	
+                    Label : ELEMENT
+                      ++
+                      Label : POSTPLUSPLUS
+                        $a
+                  Label : NAME
+                    Void
+              Label : NAME
+                call_user_func
+          Label : NAME
+            foo
