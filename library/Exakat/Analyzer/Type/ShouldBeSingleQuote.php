@@ -31,7 +31,10 @@ class ShouldBeSingleQuote extends Analyzer {
              ->hasNoOut('CONCAT')
              ->is('delimiter', '"')
              ->regexIsNot('code', "'")
-             ->regexIsNot('code', "\\\\\\\\");
+             ->regexIsNot('code', "\\\\[nrtvef\\\\\\\"\\$]")
+             ->regexIsNot('code', '\\\\\\\\[0-7]')
+             ->regexIsNot('code', '\\\\\\\\x[0-9A-Fa-f]{1,2}')
+             ->regexIsNot('code', '\\\\\\\\u\\\\{[0-9A-Fa-f]+\\\\}');
         $this->prepareQuery();
     }
 }
