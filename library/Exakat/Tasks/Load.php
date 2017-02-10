@@ -1806,7 +1806,11 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncallId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && 
+             $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG &&
+             $this->tokens[$this->id - 1][0] !== \Exakat\Tasks\T_OBJECT_OPERATOR &&
+             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_DOUBLE_COLON
+             ) {
             $this->processSemicolon();
         } else {
             $functioncallId = $this->processFCOA($functioncallId);
