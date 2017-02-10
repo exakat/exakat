@@ -124,143 +124,22 @@ $recipes = array("Analyze",
 $text = '';
 $recipesList = '"'.join('","',$recipes).'"';
 $glossary = array();
-$entries = array('preg_replace'                   => 'http://www.php.net/preg_replace',
-                 'preg_match'                     => 'http://www.php.net/preg_match',
-                 'preg_replace_callback_array'    => 'http://www.php.net/preg_replace_callback_array',
-                 'pow'                            => 'http://www.php.net/pow',
-                 'array_unique'                   => 'http://www.php.net/array_unique',
-                 'array_count_values'             => 'http://www.php.net/array_count_values',
-                 'array_flip'                     => 'http://www.php.net/array_flip',
-                 'array_keys'                     => 'http://www.php.net/array_keys',
-                 'array_merge_recursive'          => 'http://www.php.net/array_merge_recursive',
-                 'array_merge'                    => 'http://www.php.net/array_merge',
-                 'array_diff'                     => 'http://www.php.net/array_diff',
-                 'array_intersect'                     => 'http://www.php.net/array_intersect',
-                 'array_map'                     => 'http://www.php.net/array_map',
-                 'array_search'                     => 'http://www.php.net/array_search',
-                 'array_udiff'                     => 'http://www.php.net/array_udiff',
-                 'array_uintersect'                     => 'http://www.php.net/array_uintersect',
-                 'array_unshift'                     => 'http://www.php.net/array_unshift',
-                 'array_walk'                     => 'http://www.php.net/array_walk',
-                 'in_array'                     => 'http://www.php.net/in_array',
-                 'strstr'                     => 'http://www.php.net/strstr',
-                 'isset'                     => 'http://www.php.net/isset',
-                 'in_array'                     => 'http://www.php.net/in_array',
+$ini = parse_ini_file('./data/php_functions.ini');
+$entries = array_flip($ini['functions']);
+foreach($entries as $f => &$link) {
+    $link = 'http://www.php.net/'.$f;
+}
+unset($link);
 
-                 'strpos'                         => 'http://www.php.net/strpos',
-                 'stripos'                        => 'http://www.php.net/stripos',
-                 'throw'                          => 'http://www.php.net/throw',
-                 'curl_share_strerror'            => 'http://www.php.net/curl_share_strerror',
-                 'curl_multi_errno'               => 'http://www.php.net/curl_multi_errno',
-                 'random_int'                     => 'http://www.php.net/random_int',
-                 'random_bytes'                   => 'http://www.php.net/random_bytes',
-                 'openssl_random_pseudo_bytes'    => 'http://www.php.net/openssl_random_pseudo_bytes',
-                 'rand'                           => 'http://www.php.net/rand',
-                 'srand'                          => 'http://www.php.net/srand',
-                 'mt_rand'                        => 'http://www.php.net/mt_rand',
-                 'mt_srand'                       => 'http://www.php.net/mt_srand',
-                 'set_exception_handler'          => 'http://www.php.net/set_exception_handler',
-                 'join'                           => 'http://www.php.net/join',
-                 'implode'                        => 'http://www.php.net/implode',
-                 'file'                           => 'http://www.php.net/file',
-                 'file_get_contents'              => 'http://www.php.net/file_get_contents',
-                 'file_put_contents'              => 'http://www.php.net/file_put_contents',
-                 'fopen'                          => 'http://www.php.net/fopen',
-                 'fclose'                         => 'http://www.php.net/fclose',
-                 'time'                           => 'http://www.php.net/time',
-                 'strtotime'                      => 'http://www.php.net/strtotime',
-                 'array_key_exists'               => 'http://www.php.net/array_key_exists',
-                 'date'                           => 'http://www.php.net/date',
-                 'microtime'                      => 'http://www.php.net/microtime',
-                 'sleep'                          => 'http://www.php.net/sleep',
-                 'usleep'                         => 'http://www.php.net/usleep',
-                 'abs'                            => 'http://www.php.net/abs',
-                 'count'                          => 'http://www.php.net/count',
-                 'get_resources'                  => 'http://www.php.net/get_resources',
-                 'gc_mem_caches'                  => 'http://www.php.net/gc_mem_caches',
-                 'preg_replace_callback_array'    => 'http://www.php.net/preg_replace_callback_array',
-                 'posix_setrlimit'                => 'http://www.php.net/posix_setrlimit',
-                 'random_bytes'                   => 'http://www.php.net/random_bytes',
-                 'random_int'                     => 'http://www.php.net/random_int',
-                 'intdiv'                         => 'http://www.php.net/intdiv',
-                 'error_clear_last'               => 'http://www.php.net/error_clear_last',
-                 'curl_share_strerror'            => 'http://www.php.net/curl_share_strerror',
-                 'curl_multi_errno'               => 'http://www.php.net/curl_multi_errno',
-                 'curl_share_errno'               => 'http://www.php.net/curl_share_errno',
-                 'mb_ord'                         => 'http://www.php.net/mb_ord',
-                 'mb_chr'                         => 'http://www.php.net/mb_chr',
-                 'mb_scrub'                       => 'http://www.php.net/mb_scrub',
-                 'is_iterable'                    => 'http://www.php.net/is_iterable',
-
-                 'call_user_func_array'           => 'http://www.php.net/call_user_func_array',
-                 'call_user_func'                 => 'http://www.php.net/call_user_func',
-
-                 'strlen'                         => 'http://www.php.net/strlen',
-                 'mb_strlen'                      => 'http://www.php.net/mb_strlen',
-                 'grapheme_strlen'                => 'http://www.php.net/grapheme_strlen',
-                 'iconv_strlen'                   => 'http://www.php.net/iconv_strlen',
-                 'empty'                          => 'http://www.php.net/empty',
-
-                 'usort'                          => 'http://www.php.net/usort',
-                 'uksort'                         => 'http://www.php.net/uksort',
-                 'uasort'                         => 'http://www.php.net/uasort',
-                 'sort'                           => 'http://www.php.net/sort',
-                 'error_log'                      => 'http://www.php.net/error_log',
-                 
-                 'png2wbmp'                       => 'http://www.php.net/png2wbmp',
-                 'jpeg2wbmp'                      => 'http://www.php.net/jpeg2wbmp',
-
-                 'ereg'                           => 'http://www.php.net/ereg',
-                 'ereg_replace'                   => 'http://www.php.net/ereg_replace',
-                 'eregi'                          => 'http://www.php.net/eregi',
-                 'eregi_replace'                  => 'http://www.php.net/eregi_replace',
-                 'split'                          => 'http://www.php.net/split',
-                 'spliti'                         => 'http://www.php.net/spliti',
-                 'sql_regcase'                    => 'http://www.php.net/sql_regcase',
-                 'magic_quotes_runtime'           => 'http://www.php.net/magic_quotes_runtime',
-                 'set_magic_quotes_runtime'       => 'http://www.php.net/set_magic_quotes_runtime',
-                 'call_user_method'               => 'http://www.php.net/call_user_method',
-                 'call_user_method_array'         => 'http://www.php.net/call_user_method_array',
-                 'set_socket_blocking'            => 'http://www.php.net/set_socket_blocking',
-                 'mcrypt_ecb'                     => 'http://www.php.net/mcrypt_ecb',
-                 'mcrypt_cbc'                     => 'http://www.php.net/mcrypt_cbc',
-                 'mcrypt_cfb'                     => 'http://www.php.net/mcrypt_cfb',
-                 'mcrypt_ofb'                     => 'http://www.php.net/mcrypt_ofb',
-                 'datefmt_set_timezone_id'        => 'http://www.php.net/datefmt_set_timezone_id',
-                 'imagepsbbox'                    => 'http://www.php.net/imagepsbbox',
-                 'imagepsencodefont'              => 'http://www.php.net/imagepsencodefont',
-                 'imagepsextendfont'              => 'http://www.php.net/imagepsextendfont',
-                 'imagepsfreefont'                => 'http://www.php.net/imagepsfreefont',
-                 'imagepsloadfont'                => 'http://www.php.net/imagepsloadfont',
-                 'imagepsslantfont'               => 'http://www.php.net/imagepsslantfont',
-                 'imagepstext'                    => 'http://www.php.net/imagepstext',
-
-                 'mail'                           => 'http://www.php.net/mail',
-
-                 'header'                         => 'http://www.php.net/header',
-                 'exit'                           => 'http://www.php.net/exit',
-                 'die'                            => 'http://www.php.net/die',
-                 'trigger_error'                  => 'http://www.php.net/trigger_error',
-
-                 'exec'                           => 'http://www.php.net/exec',
-                 'eval'                           => 'http://www.php.net/eval',
-                 'pcntl_exec'                     => 'http://www.php.net/pcntl_exec',
-
-                 'mb_substr'                      => 'http://www.php.net/mb_substr',
-                 'mb_ord'                         => 'http://www.php.net/mb_ord',
-                 'mb_chr'                         => 'http://www.php.net/mb_chr',
-                 'mb_scrub'                       => 'http://www.php.net/mb_scrub',
-                 'is_iterable'                    => 'http://www.php.net/is_iterable',
-                 
-                 'get_class'                      => 'http://www.php.net/get_class',
-                 'sys_get_temp_dir'               => 'http://php.net/manual/en/function.sys-get-temp-dir.php',
- 
-                 'switch()'                       => 'http://php.net/manual/en/control-structures.switch.php',
+$extras = array( 'switch()'                       => 'http://php.net/manual/en/control-structures.switch.php',
                  'for()'                          => 'http://php.net/manual/en/control-structures.for.php',
                  'foreach()'                      => 'http://php.net/manual/en/control-structures.foreach.php',
                  'while()'                        => 'http://php.net/manual/en/control-structures.while.php',
                  'do..while()'                    => 'http://php.net/manual/en/control-structures.do.while.php',
    
+                 'die'                            => 'http://www.php.net/die',
+                 'exit'                           => 'http://www.php.net/exit',
+                 'isset'                          => 'http://www.php.net/isset',
                  'break'                          => 'http://php.net/manual/en/control-structures.break.php',
                  'continue'                       => 'http://php.net/manual/en/control-structures.continue.php',
                  'instanceof'                     => 'http://php.net/manual/en/language.operators.type.php',
@@ -303,9 +182,8 @@ $entries = array('preg_replace'                   => 'http://www.php.net/preg_re
                  '__NAMESPACE__'              => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__TRAIT__'                  => 'http://php.net/manual/en/language.constants.predefined.php',
                  '__FUNCTION__'               => 'http://php.net/manual/en/language.constants.predefined.php',
-
-                 );
-
+);
+$entries = array_merge($entries, $extras);
 
 $query = 'SELECT a.folder || "/" || a.name AS analyzer,GROUP_CONCAT(c.name) analyzers  
                 FROM categories c
@@ -421,7 +299,7 @@ print count($entries)." defined\n";
 foreach($entries as $name => $url) {
     $letter = strtoupper(trim($name,'\\`'))[0];
     if (!isset($glossary[$letter][$name])) {
-        print $name." $letter\n";
+//        print $name." $letter\n";
     }
 }
 
