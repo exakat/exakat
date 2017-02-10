@@ -11,7 +11,8 @@ $expected     = array('\'a\' . "b"',
                       '8 ^ 9',
                       '\'a\' . Stdclass::c',
                       '8 ** CONSTANTE',
-                      '\'a\' . strtolower("b")'
+                      '\'a\' . strtolower("b")',
+                      'strtolower("b")'
                       );
 
 $expected_not = array('\'a\' . $a',
