@@ -125,9 +125,14 @@ $text = '';
 $recipesList = '"'.join('","',$recipes).'"';
 $glossary = array();
 $ini = parse_ini_file('./data/php_functions.ini');
+foreach($ini['functions'] as &$f) {
+    $f .= '()';
+}
+unset($f);
+
 $entries = array_flip($ini['functions']);
 foreach($entries as $f => &$link) {
-    $link = 'http://www.php.net/'.$f;
+    $link = 'http://www.php.net/'.substr($f, 0, -2);
 }
 unset($link);
 
