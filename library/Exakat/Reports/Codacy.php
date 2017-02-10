@@ -33,13 +33,13 @@ class Codacy extends Reports {
         $list = '"'.join('", "', $list).'"';
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
-        $sqlQuery = 'SELECT file AS filename,
+        $sqlQuery = 'SELECT LTRIM(file, "/") AS filename,
                             line AS line,
                             analyzer AS patternId,
                             "" AS message FROM results WHERE analyzer in ('.$list.')';
         $res = $sqlite->query($sqlQuery);
         
-        $results = array();
+        $results = '';
         $titleCache = array();
         $severityCache = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
@@ -59,11 +59,11 @@ class Codacy extends Reports {
   "line":2
 }
 */
-            $results[] = $row;
+            $results .= json_encode($row, JSON_UNESCAPED_SLASHES)."\n";
         }
         
         // output to stdout
-        print json_encode($results);
+        print $results;
     }
 }
 
