@@ -340,6 +340,9 @@ GREMLIN;
             $query = "g.addV('Analysis').property('analyzer','{$this->analyzerQuoted}')";
             $res = $this->query($query);
             
+            if (!isset($res[0])) {
+                throw new GremlinException();
+            }
             $this->analyzerId = $res[0]->id;
         }
     }
