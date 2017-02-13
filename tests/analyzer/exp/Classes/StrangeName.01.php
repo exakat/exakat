@@ -1,8 +1,6 @@
 <?php
 
-$expected     = array('function __construct() { /**/ } ');
-
-$expected_not = array(  'function isset( ) { /**/ } ',
+$expected     = array('function isset( ) { /**/ } ',
                         'function set_state( ) { /**/ } ',
                         'function set( ) { /**/ } ',
                         'function sleep( ) { /**/ } ',
@@ -15,7 +13,8 @@ $expected_not = array(  'function isset( ) { /**/ } ',
                         'function _consrtuct( ) { /**/ } ',
                         'function __consrtuct( ) { /**/ } ',
                         'function consturct( ) { /**/ } ',
-                        'function __consturct( ) { /**/ } ',
-)
+                        'function __consturct( ) { /**/ } ',);
+
+$expected_not = array(  'function __construct() { /**/ } ');
 
 ?>
