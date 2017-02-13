@@ -1,3 +1,4 @@
+Whole
 Label : PROJECT
   ./tests/tokenizer/source/_Interface.08.php
   Label : FILE
@@ -23,9 +24,9 @@ Label : PROJECT
                 E
               Label : PUBLIC
                 public
-          Label : EXTENDS
-            D
-          Label : EXTENDS
-            C
           Label : NAME
             B
+          Label : EXTENDS
+            C
+          Label : EXTENDS
+            D

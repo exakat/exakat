@@ -24,13 +24,11 @@ Label : PROJECT
           Label : THEN
             ;
             Label : ELEMENT
-              'B'
-            Label : ELEMENT
               print
               Label : ARGUMENTS
                 'B'
                 Label : ARGUMENT
-                  Void
+                  'B'
               Label : NAME
                 print
             Label : ELEMENT

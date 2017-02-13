@@ -30,5 +30,3 @@ Label : PROJECT
                     3
               Label : CONDITION
                 $x
-            Label : ELEMENT
-              Void

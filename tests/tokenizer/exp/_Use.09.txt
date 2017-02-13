@@ -47,7 +47,13 @@ Label : PROJECT
               Label : USE
                 A
                 Label : DEFINITION
-                  A
+                  \
+                  Label : SUBNAME
+                    A
+                  Label : SUBNAME
+                    B
+                  Label : SUBNAME
+                    C
               Label : USE
                 B
             Label : ELEMENT

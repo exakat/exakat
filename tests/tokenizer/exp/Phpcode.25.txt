@@ -22,11 +22,13 @@ Label : PROJECT
           Label : ELSE
             ;
             Label : ELEMENT
+              $counter
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  $counter
+                  Void
               Label : NAME
                 echo
             Label : ELEMENT

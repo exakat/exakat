@@ -94,14 +94,6 @@ Label : PROJECT
                 public
           Label : DEFINITION
             MyPage
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $controller
-            Label : NAME
-              MyPage
-          Label : DEFINITION
-            MyPage
           Label : IMPLEMENTS
             Page
           Label : NAME

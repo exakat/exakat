@@ -32,8 +32,6 @@ Label : PROJECT
                     public
                   Label : STATIC
                     static
-              Label : DEFINITION
-                one_identifier
               Label : NAME
                 one_identifier
             Label : ELEMENT
@@ -56,8 +54,6 @@ Label : PROJECT
                     public
                   Label : STATIC
                     static
-              Label : DEFINITION
-                absolute_path
               Label : NAME
                 absolute_path
             Label : ELEMENT
@@ -80,8 +76,6 @@ Label : PROJECT
                     public
                   Label : STATIC
                     static
-              Label : DEFINITION
-                a1
               Label : NAME
                 one_identifier3
             Label : ELEMENT
@@ -104,10 +98,6 @@ Label : PROJECT
                     public
                   Label : STATIC
                     static
-              Label : DEFINITION
-                \
-                Label : SUBNAME
-                  a1
               Label : NAME
                 a1
           Label : NAME
@@ -136,8 +126,6 @@ Label : PROJECT
                     public
                   Label : STATIC
                     static
-              Label : DEFINITION
-                path
               Label : NAME
                 path
           Label : NAME
@@ -166,8 +154,6 @@ Label : PROJECT
                     public
                   Label : STATIC
                     static
-              Label : DEFINITION
-                path2
               Label : NAME
                 path2
           Label : NAME
@@ -184,22 +170,16 @@ Label : PROJECT
               use
               Label : USE
                 one_identifier
-                Label : DEFINITION
-                  one_identifier
             Label : ELEMENT
               use
               Label : USE
                 \
-                Label : DEFINITION
-                  absolute_path
                 Label : SUBNAME
                   absolute_path
             Label : ELEMENT
               use
               Label : USE
                 \
-                Label : DEFINITION
-                  path
                 Label : SUBNAME
                   complex
                 Label : SUBNAME
@@ -208,8 +188,6 @@ Label : PROJECT
               use
               Label : USE
                 \
-                Label : DEFINITION
-                  path2
                 Label : SUBNAME
                   absolute
                 Label : SUBNAME
@@ -222,8 +200,6 @@ Label : PROJECT
                 as
                 Label : AS
                   a1
-                Label : DEFINITION
-                  a1
                 Label : NAME
                   one_identifier3
             Label : ELEMENT
@@ -231,8 +207,6 @@ Label : PROJECT
               Label : USE
                 as
                 Label : AS
-                  a2
-                Label : DEFINITION
                   a2
                 Label : NAME
                   \
@@ -243,8 +217,6 @@ Label : PROJECT
               Label : USE
                 as
                 Label : AS
-                  a3
-                Label : DEFINITION
                   a3
                 Label : NAME
                   \
@@ -257,8 +229,6 @@ Label : PROJECT
               Label : USE
                 as
                 Label : AS
-                  a4
-                Label : DEFINITION
                   a4
                 Label : NAME
                   \

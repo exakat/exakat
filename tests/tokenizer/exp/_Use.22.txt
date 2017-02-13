@@ -37,25 +37,27 @@ Label : PROJECT
           Label : THEN
             ;
             Label : ELEMENT
+              .
+              Label : CONCAT
+                'G'
+              Label : CONCAT
+                H
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'F'
+                    Label : VARIABLE
+                      $this
+                Label : NAME
+                  H
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'G'
-                  Label : CONCAT
-                    H
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'F'
-                        Label : VARIABLE
-                          $this
-                    Label : NAME
-                      H
+                  Void
               Label : NAME
                 echo
             Label : ELEMENT

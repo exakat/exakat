@@ -21,11 +21,13 @@ Label : PROJECT
             Label : ELEMENT
               Q
             Label : ELEMENT
+              $g
+            Label : ELEMENT
               <?=
               Label : ARGUMENTS
                 <?=
                 Label : ARGUMENT
-                  $g
+                  Void
               Label : NAME
                 <?=
             Label : ELEMENT

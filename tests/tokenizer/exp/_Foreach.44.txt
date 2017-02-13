@@ -16,19 +16,17 @@ Label : PROJECT
               Label : BLOCK
                 ;
                 Label : ELEMENT
-                  .
-                  Label : CONCAT
-                    'H'
-                  Label : CONCAT
-                    $f
-                  Label : CONCAT
-                    'I'
-                Label : ELEMENT
                   print
                   Label : ARGUMENTS
                     'I'
                     Label : ARGUMENT
-                      Void
+                      .
+                      Label : CONCAT
+                        'H'
+                      Label : CONCAT
+                        $f
+                      Label : CONCAT
+                        'I'
                   Label : NAME
                     print
                 Label : ELEMENT
