@@ -25,12 +25,7 @@ namespace Exakat\Analyzer\Wordpress;
 
 use Exakat\Analyzer\Analyzer;
 
-class NoGlobalModification extends Analyzer {
-    public function dependsOn() {
-        return array('Variables/IsModified',
-                     'Arrays/IsModified');
-    }
-
+class AvoidOtherGlobals extends Analyzer {
     public function analyze() {
         $globalNames = $this->loadIni('wp_globals.ini', 'globals');
         
@@ -38,13 +33,7 @@ class NoGlobalModification extends Analyzer {
         $this->atomIs('Global')
              ->outIs('GLOBAL')
              ->atomIs('Variable')
-             ->codeIs($globalNames)
-             ->savePropertyAs('code', 'name')
-             ->goToFunction()
-             ->outIs('BLOCK')
-             ->atomInsideNoAnonymous('Variable')
-             ->samePropertyAs('code', 'name')
-             ->analyzerIs('Variables/IsModified')
+             ->codeIsNot($globalNames)
              ->back('first');
         $this->prepareQuery();
 
@@ -61,7 +50,6 @@ class NoGlobalModification extends Analyzer {
              ->outIs('VARIABLE')
              ->atomIs('Variable')
              ->codeIs('$GLOBALS')
-             ->analyzerIs('Variables/IsModified')
              ->back('first');
         $this->prepareQuery();
     }
