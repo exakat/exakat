@@ -12,11 +12,12 @@
 
 class x {
     function __construct($inX) {
+        return false;
     }
 }
 
 trait t {
-    function clone() {
+    function __clone() {
         return $this;
     }
 }
