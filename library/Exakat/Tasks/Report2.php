@@ -35,7 +35,7 @@ class Report2 extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        if ($this->config->project == "default") {
+        if ($this->config->project === 'default') {
             throw new ProjectNeeded();
         }
 

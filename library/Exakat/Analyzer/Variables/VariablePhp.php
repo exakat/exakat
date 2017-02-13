@@ -40,7 +40,8 @@ class VariablePhp extends Analyzer {
     public function analyze() {
         $this->atomIs('Variable')
              ->analyzerIs('Variables/Variablenames')
-             ->codeIs(VariablePhp::$variables, true);
+             ->codeIs(VariablePhp::$variables, self::CASE_SENSITIVE);
+        $this->prepareQuery();
     }
 }
 

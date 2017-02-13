@@ -37,6 +37,7 @@ class Config {
     public  $is_phar        = true;
     public  $executable     = '';
     private $projectConfig  = array();
+    private $codacyConfig   = array();
 
     private $options = array('configFiles' => array());
 
@@ -76,6 +77,7 @@ class Config {
                                             'program'        => null,
                                             'repository'     => false,
                                             'thema'          => null,
+                                            'analyzers'      => array(), 
                                             'report'         => 'Premier',
                                             'format'         => 'Text',
                                             'file'           => 'stdout',
@@ -99,10 +101,10 @@ class Config {
                                             'phpversion'    => '7.1',
                                             'token_limit'   => '1000000',
 
-                                            'configFiles'   => array(),
                                             'command'       => 'version',
 
                                             'ignore_dirs'         => array(),
+                                            'include_dirs'        => array(),
                                             'file_extensions'     => array(),
                                             'project_name'        => '',
                                             'project_url'         => '',
@@ -112,6 +114,8 @@ class Config {
                                             'other_php_versions'  => '',
 
                                             'loader'              => 'Neo4jImport',
+                                            
+                                            'project_reports'     => array('Ambassador', 'Devoops')
                                            );
 
     private static $BOOLEAN_OPTIONS = array(
@@ -216,15 +220,13 @@ class Config {
         $configFiles = array('/etc/exakat.ini',
                              '/etc/exakat/exakat.ini',
                              $this->projects_root.'/config/config-default.ini',
-                             $this->projects_root.'/config/exakat.ini',
-                             $this->projects_root.'/.codacy.json',
+                             $this->projects_root.'/config/exakat.ini'
                              );
         foreach($configFiles as $id => $configFile) {
             if (file_exists($configFile)) {
                 $inis[] = parse_ini_file($configFile);
-            } else {
-                unset($configFiles[$id]);
-            }
+                $this->options['configFiles'][] = $configFile;
+            } 
         }
 
         $this->configFile = empty($inis) ? array() : call_user_func_array('array_merge', $inis);
@@ -234,24 +236,24 @@ class Config {
 
         // then read the config from the commandline (if any)
         $this->readCommandline();
+        $this->readCodacyConfig();
 
         // then read the config for the project in its folder
         if (isset($this->commandline['project'])) {
             $this->readProjectConfig($this->commandline['project']);
-            $configFiles[] = $this->projects_root.'/projects/'.$this->commandline['project'].'/config.ini';
             $this->codePath = realpath($this->projects_root.'/projects/'.$this->commandline['project'].'/code');
         }  else {
             $this->codePath = '/No/Path/To/Code';
         }
-
+        
         // build the actual config. Project overwrite commandline overwrites config, if any.
-        $this->options = array_merge($this->defaultConfig, $this->configFile, $this->projectConfig, $this->commandline);
+        $this->options = array_merge($this->options, $this->defaultConfig, $this->configFile, $this->projectConfig, $this->codacyConfig, $this->commandline);
+//        var_dump($this->options);die();
 
         if ($this->options['neo4j_folder'][0] !== '/') {
             $this->options['neo4j_folder'] = $this->projects_root.'/'.$this->options['neo4j_folder'];
         }
         $this->options['neo4j_folder'] = realpath($this->options['neo4j_folder']);
-        $this->options['configFiles'] = $configFiles;
     }
 
     public static function factory($argv = array()) {
@@ -328,7 +330,7 @@ class Config {
 
         $other_php_versions = array();
         foreach(array('52', '53', '54', '55', '56', '70', '71', '72') as $version) {
-            if (empty($this->configFile['php'.$version])) {
+            if (empty($this->configFiles['php'.$version])) {
                 continue;
             }
             $php = new Phpexec($version[0].'.'.$version[1]);
@@ -342,7 +344,7 @@ class Config {
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
-                           'loader'             => 'Neo4jImport',
+                           'loader'             => 'Neo4jImport'
                            );
 
         foreach($defaults as $name => $value) {
@@ -462,6 +464,43 @@ class Config {
             $this->commandline['quiet']     = true;
             $this->commandline['norefresh'] = true;
         }
+    }
+    
+    private function readCodacyConfig() {
+        if (!isset($this->commandline['project'])) {
+            return;
+        }
+        
+        $jsonFile = $this->projects_root.'/projects/'.$this->commandline['project'].'/code/.codacy.json';
+        if (!file_exists($jsonFile)) {
+            return; 
+        }
+
+        $codacyConfig = json_decode(file_get_contents($jsonFile));
+        if ($codacyConfig === null) {
+            return;
+        }
+        
+        if (empty($codacyConfig->files)) {
+            $this->codacyConfig['include_dirs'] = array();
+        } else {
+            $this->codacyConfig['include_dirs'] = array_map(function ($x) { return '/'. $x; }, $codacyConfig->files);
+            $this->codacyConfig['ignore_dirs'] = array('/');
+        
+        }
+        
+        foreach($codacyConfig->tools as $tool) {
+            if ($tool->name !== 'exakat') { continue; }
+            
+            foreach($tool->patterns as $analyzer) {
+                $this->codacyConfig['analyzers'][] = $analyzer->patternId;
+            }
+
+            $this->options['configFiles'][]        = '.codacy.json';
+            $this->codacyConfig['project_reports'] = array('Codacy');
+            $this->codacyConfig['project_themes']  = array('Codacy');
+        }
+//        die();
     }
 }
 

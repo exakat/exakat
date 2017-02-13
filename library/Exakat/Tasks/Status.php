@@ -42,7 +42,10 @@ class Status extends Tasks {
                     $json = json_decode(file_get_contents($this->config->projects_root.'/projects/.exakat/Project.json'));
                     $projectStatus = $json->project;
                     $projectStep = $json->step;
-                } 
+                } else {
+                    $projectStatus = '';
+                    $projectStep = '';
+                }
                 
                 $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
                 $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
