@@ -45,7 +45,7 @@ class AvoidOtherGlobals extends Analyzer {
              ->outIs('INDEX')
              ->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->noDelimiterIs($globalNames)
+             ->noDelimiterIsNot($globalNames)
              ->inIs('INDEX')
              ->outIs('VARIABLE')
              ->atomIs('Variable')
