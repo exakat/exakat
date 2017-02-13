@@ -133,6 +133,7 @@ g.V().hasLabel("Functioncall")
      .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
      .has("fullnspath", without(''))
      .where( __.in("NEW", "METHOD", "DEFINITION").count().is(eq(0)))
+     .where( __.out("NAME").has("fullnspath"))
      .sideEffect{ 
         fullnspath = it.get().vertices(OUT, 'NAME').next().value("fullnspath").toString().toLowerCase();
         it.get().property("fullnspath", fullnspath ); 
