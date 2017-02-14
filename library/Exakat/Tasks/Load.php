@@ -863,7 +863,6 @@ class Load extends Tasks {
             $rankCatch = -1;
             while ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_VARIABLE) {
                 $classId = $this->processOneNsname();
-                $this->setAtom($catchId, array('rank' => ++$rankCatch));
                 $this->addLink($catchId, $classId, 'CLASS');
                 $this->setAtom($catchId, array('rank'       => ++$rankCatch));
 
@@ -1487,7 +1486,7 @@ class Load extends Tasks {
         if ($this->isContext(self::CONTEXT_NEW) || 
             $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE ||
             $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
-            $this->tokens[$current - 2][0] === \Exakat\Tasks\T_INSTANCEOF
+            (isset($this->tokens[$current - 2]) && $this->tokens[$current - 2][0] === \Exakat\Tasks\T_INSTANCEOF)
             ) {
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
             $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
@@ -3160,6 +3159,7 @@ class Load extends Tasks {
                     $this->setAtom($namespaceId, array('fullnspath' => $fullnspath,
                                                        'aliased'    => $aliased));
 
+                    $this->addCall('class', $fullnspath, $namespaceId);
                     if ($aliased === self::ALIASED) {
                         $this->addLink($this->usesId['class'][strtolower($this->atoms[$namespaceId]['code'])], $namespaceId, 'DEFINITION');
                     } 
