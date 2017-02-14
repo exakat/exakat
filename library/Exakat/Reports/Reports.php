@@ -33,7 +33,7 @@ abstract class Reports {
     
     static public $FORMATS        = array('Ambassador', 'Devoops', 
                                           'Text', 'Xml', 'Uml',
-                                          'PhpConfiguration', 'PhpCompilation', 'Hardcoded', 
+                                          'PhpConfiguration', 'PhpCompilation', 
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
                                           'ZendFramework',  'RadwellCode',
                                           'FacetedJson', 'Json', 'OnepageJson', 

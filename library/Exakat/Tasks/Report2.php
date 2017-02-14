@@ -71,7 +71,7 @@ class Report2 extends Tasks {
 
         $report = new $reportClass();
         if ($this->config->file === 'stdout') {
-            echo $report->generate( $this->config->projects_root.'/projects/'.$this->config->project);
+            echo $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, 'stdout');
         } else {
             $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, $this->config->file);
         }
