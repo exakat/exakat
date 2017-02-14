@@ -51,7 +51,7 @@ class Upgrade extends Tasks {
         }
         
         if (version_compare(Exakat::VERSION, $r[1]) < 0) {
-            print "This needs some updating (Current : ".Exakat::VERSION.", Latest: $r[1])\n";
+            print "This version needs to be updated (Current : ".Exakat::VERSION.", Latest: $r[1])\n";
             if ($this->config->update === true) {
                 print "  Updating to latest version.\n";
                 preg_match('#<pre id="sha256">(.*?)</pre>#', $html, $r);

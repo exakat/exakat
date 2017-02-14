@@ -918,6 +918,15 @@ SQL
         print "Missing $total definitions\n";
     }
     
+    public function buildCodacy() {
+        $sqlite = new \Sqlite3('data/analyzers.sqlite');
+        
+        $sqlite->query('DELETE FROM "analyzers_categories" WHERE "analyzers_categories"."id_categories"=41');
+        $sqlite->query('INSERT INTO "analyzers_categories" SELECT "analyzers_categories"."id_analyzer", 41 FROM "analyzers_categories" WHERE "analyzers_categories"."id_categories"=2;');
+
+        $sqlite->query('VACUUM');
+    }
+    
     public function checkData() {
         //php_constant_arguments.json
         $functions = json_decode(file_get_contents('data/php_constant_arguments.json'));

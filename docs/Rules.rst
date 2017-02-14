@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 06 Feb 2017 18:08:39 +0000
-.. comment: Generation hash : fcdcceffa7ee743ef68597d256524ed328609c24
+.. comment: Generation date : Tue, 14 Feb 2017 08:41:15 +0000
+.. comment: Generation hash : 5f00dc2792315dc9ade2ee4d316f8e597b9b881d
 
 
 .. _$http\_raw\_post\_data:
@@ -150,6 +150,8 @@ $this Is Not For Static Methods
 ###############################
 
 
+Static methods shouldn't use $this variable.
+
 $this variable represents an object (the current object) and it is not compatible with a static method, which may operate without any object. 
 
 .. code-block:: php
@@ -250,11 +252,14 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
 
 .. _<?=-usage:
 
-<?= usage
+<?= Usage
 #########
 
 
 Usage of the <?= tag, that echo's directly the following content.
+
+<?= $variable; 
+?>
 
 +--------------+------------------+
 | Command Line | Php/EchoTagUsage |
@@ -370,7 +375,28 @@ Aliases Usage
 #############
 
 
-Some functions have several names, and both may be used the same way. However, one of the names is the main name, and the others are aliases. Aliases may be removed or change or dropped in the future. Even if this is not forecast, it is good practice to use the main name, instead of the aliases.
+PHP manual recommends to avoid function aliases.
+
+Some functions have several names, and both may be used the same way. However, one of the names is the main name, and the others are aliases. Aliases may be removed or change or dropped in the future. Even if this is not forecast, it is good practice to use the main name, instead of the aliases. 
+
+.. code-block:: php
+
+   <?php
+   
+   // official way to count an array
+   $n = count($array);
+   
+   // official way to count an array
+   $n = sizeof($array);
+   
+   ?>
+
+
+Aliases are compiled in PHP, and do not provide any performances over the normal function. 
+
+Aliases are more likely to be removed later, but they have been around for a long time.
+
+See documentation : `List of function aliases <http://php.net/manual/en/aliases.php>`_.
 
 +--------------+-------------------------------------------------------------------------------------+
 | Command Line | Functions/AliasesUsage                                                              |
@@ -487,7 +513,7 @@ Always Positive Comparison
 ##########################
 
 
-Some PHP native functions, such as `count() <http://www.php.net/count>`_, `strlen() <http://www.php.net/strlen>`_, or `abs() <http://www.php.net/abs>`_ only returns positive or null values. 
+Some PHP native functions, such as `count() <http://www.php.net/count>`_, strlen(), or `abs() <http://www.php.net/abs>`_ only returns positive or null values. 
 
 When comparing them to 0, the following expressions are always true and should be avoided. 
 
@@ -510,13 +536,13 @@ When comparing them to 0, the following expressions are always true and should b
 
 
 
-.. _ambiguous-index:
+.. _ambiguous-array-index:
 
-Ambiguous Index
-###############
+Ambiguous Array Index
+#####################
 
 
-List of all indexes that are defined in the same array, with different types. 
+Those indexes are defined with different types, in the same array. 
 
 Array indices only accept integers and strings, so any other type of literal is reported. 
 
@@ -553,7 +579,7 @@ Anonymous Classes
 #################
 
 
-Mark anonymous classes.
+Anonymous classes.
 
 .. code-block:: php
 
@@ -612,7 +638,7 @@ Assign Default To Properties
 ############################
 
 
-Properties may be assigned default values at declaration `time <http://www.php.net/time>`_. Such values may be later modified, if needed. 
+Properties may be assigned default values at declaration time. Such values may be later modified, if needed. 
 
 .. code-block:: php
 
@@ -775,6 +801,39 @@ The effect on small arrays (less than 10 elements) is not significant. Arrays wi
 
 
 
+.. _avoid-non-wordpress-globals:
+
+Avoid Non Wordpress Globals
+###########################
+
+
+Refren using any global variable that is not Wordpress's own. 
+
+.. code-block:: php
+
+   <?php
+   
+   my_hook() {
+       // This is a Wordpress global
+       $GLOBALS['is_safari'] = true;
+       
+       // is_iphone7 is not a Wordpress variable
+       global $is_iphone7;
+   }
+   
+   ?>
+
+
+See also `Global Variables <https://codex.wordpress.org/Global_Variables>`_
+
++--------------+-----------------------------+
+| Command Line | Wordpress/AvoidOtherGlobals |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Wordpress`            |
++--------------+-----------------------------+
+
+
+
 .. _avoid-parenthesis:
 
 Avoid Parenthesis
@@ -787,7 +846,7 @@ Among other distinction, those elements cannot be directly used as variable func
 
 The usage of parenthesis actually give some feeling of confort, it won't prevent PHP from combining those argument with any later operators, leading to unexpected results.
 
-Even if most of the `time <http://www.php.net/time>`_, usage of parenthesis is legit, it is recommended to avoid them.
+Even if most of the time, usage of parenthesis is legit, it is recommended to avoid them.
 
 +--------------+------------------------------------+
 | Command Line | Structures/PrintWithoutParenthesis |
@@ -817,16 +876,61 @@ When possible, avoid using them, may it be as PHP functions, or hashing function
 
 
 
+.. _avoid-using-stdclass:
+
+Avoid Using stdClass
+####################
+
+
+stdClass is the default class for PHP. It is instantiated when PHP needs to return a object, but no class is specifically available.
+
+It is recommended to avoid instantiating this class, nor use it is any way.
+
+.. code-block:: php
+
+   <?php
+   
+   $json = '{a:1,b:2,c:3}';
+   $object = json_decode($json);
+   // $object is a stdClass, as returned by json_decode
+   
+   // Fast building of $o
+   $a = [];
+   $a['a'] = 1;
+   $a['b'] = 2;
+   $a['c'] = 3;
+   json_encode( (object) $a);
+   
+   // Slow building of $o
+   $o = new stdClass();
+   $o->a = 1;
+   $o->b = 2;
+   $o->c = 3;
+   json_encode($o);
+   
+   ?>
+
+
+If you need a stdClass object, it is faster to build it as an array, then cast it, than instantiate stdClass. This is a micro-optimisation.
+
++--------------+-----------------+
+| Command Line | Php/UseStdclass |
++--------------+-----------------+
+| Analyzers    | :ref:`Analyze`  |
++--------------+-----------------+
+
+
+
 .. _avoid-array\_push():
 
 Avoid array_push()
 ##################
 
 
-array_push() is slower than the [] operator.
+`array_push() <http://www.php.net/array_push>`_ is slower than the [] operator.
 
-This is also true if the [] operator is called several times, while array_push() may be called only once. 
-And using `count <http://www.php.net/count>`_ after the push is also faster than collecting array_push() return value. 
+This is also true if the [] operator is called several times, while `array_push() <http://www.php.net/array_push>`_ may be called only once. 
+And using count after the push is also faster than collecting `array_push() <http://www.php.net/array_push>`_ return value. 
 
 .. code-block:: php
 
@@ -908,9 +1012,9 @@ Avoid get_class()
 #################
 
 
-`get_class() <http://www.php.net/get_class>`_ should be replaced with the `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator to check the class of an object. 
+get_class() should be replaced with the `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator to check the class of an object. 
 
-`get_class() <http://www.php.net/get_class>`_ will only compare the full namespace name of the object's class, while `instanceof <http://php.net/manual/en/language.operators.type.php>`_ actually resolve the name, using the local namespace and aliases.
+get_class() will only compare the full namespace name of the object's class, while `instanceof <http://php.net/manual/en/language.operators.type.php>`_ actually resolve the name, using the local namespace and aliases.
 
 .. code-block:: php
 
@@ -949,7 +1053,7 @@ Avoid sleep()/usleep()
 
 `sleep() <http://www.php.net/sleep>`_ and `usleep() <http://www.php.net/usleep>`_ help saturate the web server. 
 
-Pausing the script for a specific amount of `time <http://www.php.net/time>`_ means that the Web server is also making all related ressources `sleep <http://www.php.net/sleep>`_, such as database, sockets, session, etc. This may used to set up a DOS on the server.  
+Pausing the script for a specific amount of time means that the Web server is also making all related ressources sleep, such as database, sockets, session, etc. This may used to set up a DOS on the server.  
 
 .. code-block:: php
 
@@ -1271,7 +1375,7 @@ Since PHP fails with a fatal error, this means that the extending class is proba
    ?>
 
 
-In a separate `file <http://www.php.net/file>`_ : 
+In a separate file : 
 
 .. code-block:: php
 
@@ -1400,7 +1504,7 @@ Class Name Case Difference
 
 The spotted classes are used with a different case than their definition. While PHP will accept this, this makes the code harder to read. 
 
-Most of the `time <http://www.php.net/time>`_, this is also a violation of coding conventions.
+Most of the time, this is also a violation of coding conventions.
 
 +--------------+---------------------------------------------------------------+
 | Command Line | Classes/WrongCase                                             |
@@ -1420,7 +1524,9 @@ Class Should Be Final By Ocramius
 
 When a class should be final, as explained by Ocramiux (Marco Pivetti).
 
-Full article : http://ocramius.github.io/blog/when-to-declare-classes-final/
+Full article : `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
+
+
 
 .. code-block:: php
 
@@ -1454,7 +1560,7 @@ Class, Interface Or Trait With Identical Names
 ##############################################
 
 
-The following names are used at the same `time <http://www.php.net/time>`_ for classes, interfaces or traits. For example, 
+The following names are used at the same time for classes, interfaces or traits. For example, 
 
 class a {}
 interface a {}
@@ -1476,7 +1582,7 @@ Classes Mutually Extending Each Other
 #####################################
 
 
-Those classes are extending each other, creating an extension loop. PHP will yield a fatal error at running `time <http://www.php.net/time>`_, even if it is compiling the code.
+Those classes are extending each other, creating an extension loop. PHP will yield a fatal error at running time, even if it is compiling the code.
 
 .. code-block:: php
 
@@ -1543,7 +1649,7 @@ Common Alternatives
 ###################
 
 
-In the following conditional structures, expressions were found that are common to both 'then' and 'else'. It may be interesting, though not always possible, to put them both out of the conditional, and reduce line `count <http://www.php.net/count>`_. 
+In the following conditional structures, expressions were found that are common to both 'then' and 'else'. It may be interesting, though not always possible, to put them both out of the conditional, and reduce line count. 
 
 .. code-block:: php
 
@@ -1596,7 +1702,8 @@ Here is an example
 .. code-block:: php
 
    <?php
-   // more at https://blog.whitehatsec.com/magic-hashes/
+   
+   // The two following passwords hashes matches, while they are not the same. 
    $hashed_password = 0e462097431906509000000000000;
    if (hash('md5','240610708',false) == $hashed_password) {
      print Matched.\n;
@@ -1604,7 +1711,9 @@ Here is an example
    ?>
 
 
-You may also use password_hash and password_verify.
+You may also use `password_hash() <http://www.php.net/password_hash>`_ and `password_verify() <http://www.php.net/password_verify>`_. 
+
+See also `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_.
 
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Command Line | Security/CompareHash                                                                                |
@@ -1735,7 +1844,34 @@ Constant Comparison
 ###################
 
 
-The code seems to follows the convention of putting constant on one of the side of the comparison (either $x == 2 or 2 == $x). This is a list of the violations of this convention.
+Constant to the left or right is a favorite. 
+
+Comparisons are commutative : they may be $a == B or B == $a. The analyzed code show less than 10% of one of the two : for consistency reasons, it is recommended to make them all the same. 
+
+Putting the constant on the left is also called 'Yoda Comparison', as it mimics the famous characters style of speech. It prevents errors like 'B = $a' where the comparison is turned into an assignation. 
+
+The natural way is to put the constant on the right. It is often less surprising. 
+
+Every comparison operator is used when finding the favorite.
+
+.. code-block:: php
+
+   <?php
+   
+   // 
+   if ($a === B) { doSomething(); }
+   if ($c > D) { doSomething(); }
+   if ($e !== G) { doSomething(); }
+   do { doSomething(); } while ($f === B);
+   while ($a === B) { doSomething(); }
+   
+   // be consistent
+   if (B === $a) {}
+   
+   // Compari
+   if (B <= $a) {}
+   
+   ?>
 
 +--------------+------------------------------------------------+
 | Command Line | Structures/ConstantComparisonConsistance       |
@@ -1753,7 +1889,7 @@ Constant Scalar Expressions
 
 Starting with PHP 5.6, it is possible to define constant that are the result of expressions.
 
-Those expressions (using simple operators) may only manipulate other constants, and all values must be known at compile `time <http://www.php.net/time>`_. 
+Those expressions (using simple operators) may only manipulate other constants, and all values must be known at compile time. 
 
 This is not compatible with previous versions.
 
@@ -1771,7 +1907,26 @@ Constants Created Outside Its Namespace
 #######################################
 
 
-Using the define() function, it is possible to create constant outside their namespace, but using the fully qualified namespace.
+Constants Created Outside Its Namespace.
+
+Using the `define() <http://www.php.net/define>`_ function, it is possible to create constant outside their namespace, but using the fully qualified namespace.
+
+.. code-block:: php
+
+   <?php
+   
+   namespace A\B {
+       // define A\B\C as 1
+       define('C', 1);
+   }
+   
+   namespace D\E {
+       // define A\B\C as 1, while outside the A\B namespace
+       define('A\B\C', 1);
+   }
+   
+   ?>
+
 
 However, this makes the code confusing and difficult to debug. It is recommended to move the constant definition to its namespace.
 
@@ -2048,7 +2203,7 @@ Could Use __DIR__
 #################
 
 
-Use `__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ function to access the current `file <http://www.php.net/file>`_'s parent directory. 
+Use `__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ function to access the current file's parent directory. 
 
 .. code-block:: php
 
@@ -2126,11 +2281,41 @@ Dangling Array References
 #########################
 
 
+Always unset a referenced-variable used in a loop.
+
 It is highly recommended to unset blind variables when they are set up as references after a loop. 
+
+.. code-block:: php
+
+   <?php
+   
+   $array = array(1,2,3,4);
+   
+   foreach($array as &$a) {
+       $a += 1;
+   }
+   // This only unset the reference, not the value
+   unset($a);
+   
+   
+   
+   
+   // Dangling array problem
+   foreach($array as &$a) {
+       $a += 1;
+   }
+   //$array === array(3,4,5,6);
+   
+   // This does nothing (apparently)
+   foreach($array as $a) {}
+   //$array === array(3,4,5,6);
+   
+   ?>
+
 
 When omitting this step, the next loop that will also require this variable will deal with garbage values, and produce unexpected results.
 
-Add unset( $as_variable) after the loop.
+See also : `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_.
 
 +--------------+-----------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/DanglingArrayReferences                                                                        |
@@ -2170,7 +2355,7 @@ Define With Array
 #################
 
 
-PHP 7.0 has the ability to define an array as a constant, using the define() native call. This was not possible until that version, only with the const keyword.
+PHP 7.0 has the ability to define an array as a constant, using the `define() <http://www.php.net/define>`_ native call. This was not possible until that version, only with the const keyword.
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Php/DefineWithArray                                                                                     |
@@ -2288,7 +2473,20 @@ Don't Change Incomings
 ######################
 
 
-PHP hands over a lot of information using special variables like $_GET, $_POST, etc... Modifying those variables and those values inside de variables means that the original content will be lost, while it will still look like raw data, and, as such, will be untrustworthy.
+PHP hands over a lot of information using special variables like $_GET, $_POST, etc... Modifying those variables and those values inside de variables means that the original content is lost, while it will still look like raw data, and, as such, will be untrustworthy.
+
+.. code-block:: php
+
+   <?php
+   
+   // filtering and keeping the incoming value. 
+   $_DATA'id'] = (int) $_GET['id'];
+   
+   // filtering and changing the incoming value. 
+   $_GET['id'] = strtolower($_GET['id']);
+   
+   ?>
+
 
 It is recommended to put the modified values in another variable, and keep the original one intact.
 
@@ -2486,7 +2684,7 @@ There seems to be a choice that is not enforced : one form is dominent, (> 90%) 
 
 The analyzed code has less than 10% of one of the three : for consistency reasons, it is recommended to make them all the same. 
 
-It happens that print, echo or <?= are used depending on coding style and files. One `file <http://www.php.net/file>`_ may be consistently using print, while the others are all using echo. 
+It happens that print, echo or <?= are used depending on coding style and files. One file may be consistently using print, while the others are all using echo. 
 
 .. code-block:: php
 
@@ -2523,7 +2721,7 @@ Echo With Concat
 ################
 
 
-Optimize your echo's by not concatenating at echo() `time <http://www.php.net/time>`_, but serving all argument separated. This will save PHP a memory copy.
+Optimize your echo's by not concatenating at echo() time, but serving all argument separated. This will save PHP a memory copy.
 If values (literals and variables) are small enough, this won't have impact. Otherwise, this is less work and less memory waste.
 
 .. code-block:: php
@@ -2599,7 +2797,7 @@ Empty Blocks
 ############
 
 
-The listed control structures are `empty <http://www.php.net/empty>`_, or have one of the commanded block `empty <http://www.php.net/empty>`_. It is recommended to remove those blocks, so as to reduce confusion in the code. 
+The listed control structures are empty, or have one of the commanded block empty. It is recommended to remove those blocks, so as to reduce confusion in the code. 
 
 .. code-block:: php
 
@@ -2639,7 +2837,7 @@ Empty Classes
 #############
 
 
-List of `empty <http://www.php.net/empty>`_ classes. Classes that are directly derived from an exception are omited.
+List of empty classes. Classes that are directly derived from an exception are omited.
 
 .. code-block:: php
 
@@ -2672,7 +2870,7 @@ Empty Function
 ##############
 
 
-Function or method whose body is `empty <http://www.php.net/empty>`_. 
+Function or method whose body is empty. 
 
 Such functions or methods are rarely useful. As a bare minimum, the function should return some useful value, even if constant.
 
@@ -2712,7 +2910,7 @@ Empty Instructions
 ##################
 
 
-Empty instructions are part of the code that have no instructions. This may be trailing semi-colon or `empty <http://www.php.net/empty>`_ blocks for if-then structures.
+Empty instructions are part of the code that have no instructions. This may be trailing semi-colon or empty blocks for if-then structures.
 
 $condition = 3;;;;
 if ($condition) { }
@@ -2731,7 +2929,7 @@ Empty Interfaces
 ################
 
 
-Empty interfaces. Interfaces should contains some function, and not be totally `empty <http://www.php.net/empty>`_.
+Empty interfaces. Interfaces should contains some function, and not be totally empty.
 
 .. code-block:: php
 
@@ -2846,7 +3044,7 @@ Empty Slots In Arrays
 #####################
 
 
-PHP tolerates the last element of an array to be `empty <http://www.php.net/empty>`_.
+PHP tolerates the last element of an array to be empty.
 
 .. code-block:: php
 
@@ -2869,7 +3067,24 @@ Empty Traits
 ############
 
 
-List of all `empty <http://www.php.net/empty>`_ trait defined in the code. May be they are RFU.
+List of all empty trait defined in the code. 
+
+.. code-block:: php
+
+   <?php
+   
+   // empty trait
+   trait t { }
+   
+   // Another empty trait
+   trait t2 {
+       use t; 
+   }
+   
+   ?>
+
+
+Such traits may be reserved for future use. They may also be forgotten, and dead code.
 
 +--------------+-------------------+
 | Command Line | Traits/EmptyTrait |
@@ -2902,7 +3117,7 @@ The code does try, then catch errors but do no act upon the error.
 
 At worst, the error should be logged, so as to measure the actual usage of the catch expression.
 
-catch( Exception $e) (PHP 5) or catch(`Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e) with `empty <http://www.php.net/empty>`_ catch block should be banned, as they will simply ignore any error.
+catch( Exception $e) (PHP 5) or catch(`Throwable <http://php.net/manual/fr/class.throwable.php>`_ $e) with empty catch block should be banned, as they will simply ignore any error.
 
 +--------------+--------------------------+
 | Command Line | Structures/EmptyTryCatch |
@@ -2951,7 +3166,7 @@ Eval() Usage
 ############
 
 
-Using `eval() <http://www.php.net/eval>`_ is bad for performances (compilation `time) <http://www.php.net/time>`_, for caches (it won't be compiled), and for security (if it includes external data).
+Using `eval() <http://www.php.net/eval>`_ is bad for performances (compilation time), for caches (it won't be compiled), and for security (if it includes external data).
 
 .. code-block:: php
 
@@ -2970,8 +3185,8 @@ Using `eval() <http://www.php.net/eval>`_ is bad for performances (compilation `
    ?>
 
 
-Most of the `time <http://www.php.net/time>`_, it is possible to replace the code by some standard PHP, like variable variable for accessing a variable for which you have the name.
-At worse, including a pre-generated `file <http://www.php.net/file>`_ will be faster. 
+Most of the time, it is possible to replace the code by some standard PHP, like variable variable for accessing a variable for which you have the name.
+At worse, including a pre-generated file will be faster. 
 
 For PHP 7.0 and later, it is important to put `eval() <http://www.php.net/eval>`_ in a try..catch expression.
 
@@ -3024,9 +3239,28 @@ Exit() Usage
 ############
 
 
-Using `exit <http://www.php.net/exit>`_ or `die() <http://www.php.net/die>`_ in the code makes the code untestable (it will `break <http://php.net/manual/en/control-structures.break.php>`_ unit tests). Morover, if there is no reason or string to display, it may take a long `time <http://www.php.net/time>`_ to spot where the application is stuck. 
+Using `exit <http://www.php.net/exit>`_ or `die() <http://www.php.net/die>`_ in the code makes the code untestable (it will `break <http://php.net/manual/en/control-structures.break.php>`_ unit tests). Morover, if there is no reason or string to display, it may take a long time to spot where the application is stuck. 
 
-Try exiting the function/class, or `throw <http://www.php.net/throw>`_ exception that may be caught later in the code.
+.. code-block:: php
+
+   <?php
+   
+   // Throw an exception, that may be caught somewhere
+   throw new \Exception('error');
+   
+   // Dying with error message. 
+   die('error');
+   
+   function foo() {
+       //exiting the function but not dying
+       if (somethingWrong()) {
+           return true;
+       }
+   }
+   ?>
+
+
+Try exiting the function/class with return, or throw exception that may be caught later in the code.
 
 +--------------+-------------------------------------------------------------------------------+
 | Command Line | Structures/ExitUsage                                                          |
@@ -3193,7 +3427,7 @@ Foreach Don't Change Pointer
 ############################
 
 
-In PHP 7.0, the foreach loop won't change the internal pointer of the array, but will work on a copy. So, applying array pointer's functions such as current() or next() to the source array won't have the same behavior than in PHP 5.
+In PHP 7.0, the foreach loop won't change the internal pointer of the array, but will work on a copy. So, applying array pointer's functions such as `current() <http://www.php.net/current>`_ or `next() <http://www.php.net/next>`_ to the source array won't have the same behavior than in PHP 5.
 
 This anly applies when a `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ by reference is used.
 
@@ -3372,11 +3606,20 @@ Fully Qualified Constants
 #########################
 
 
-When defining constants with define() function, it is possible to include the actual namespace : 
+Constants defined with their namespace.
 
-define('a\b\c', 1); 
+When defining constants with `define() <http://www.php.net/define>`_ function, it is possible to include the actual namespace : 
 
-However, the name should be fully qualified without the initial \. Here, \a\b\c constant will never be accessible as a namespace constant, though it will be accessible via the constant() function.
+.. code-block:: php
+
+   <?php
+   
+   define('a\b\c', 1); 
+   
+   ?>
+
+
+However, the name should be fully qualified without the initial \. Here, \a\b\c constant will never be accessible as a namespace constant, though it will be accessible via the `constant() <http://www.php.net/constant>`_ function.
 
 Also, the namespace will be absolute, and not a relative namespace of the current one.
 
@@ -3545,7 +3788,7 @@ Getting Last Element
 ####################
 
 
-Getting the last element of an array is done with `count() <http://www.php.net/count>`_ or end().
+Getting the last element of an array is done with `count() <http://www.php.net/count>`_ or `end() <http://www.php.net/end>`_.
 
 .. code-block:: php
 
@@ -3793,7 +4036,7 @@ Htmlentities Calls
 ##################
 
 
-htmlentities() and htmlspecialchars() are used to prevent injecting special characters in HTML code. As a bare minimum, they take a string and encode it for HTML.
+`htmlentities() <http://www.php.net/htmlentities>`_ and `htmlspecialchars() <http://www.php.net/htmlspecialchars>`_ are used to prevent injecting special characters in HTML code. As a bare minimum, they take a string and encode it for HTML.
 
 The second argument of the functions is the type of protection. The protection may apply to quotes or not, to HTML4 or 5, etc. It is highly recommended to set it explicitely.
 
@@ -4007,6 +4250,16 @@ Files that cannot be compiled, and, as such, be run by PHP. Scripts are linted a
 
 This is usually undesirable, as all code must compile before being executed. It may simply be that such files are not compilable because they are not yet ready for an upcoming PHP version.
 
+.. code-block:: php
+
+   <?php
+   
+   // Can't compile this : Print only accepts one argument
+   print $a, $b, $c;
+   
+   ?>
+
+
 Code that is incompilable with older PHP versions means that the code is breaking backward compatibility : good or bad is project decision.
 
 +--------------+-----------------------------------------------------------------------------------------------+
@@ -4068,7 +4321,7 @@ Boolean, Null or float will be converted to their integer or string equivalent.
    
 
 
-Decimal numbers are rounded to the closest integer; Null is transtyped to '' (`empty <http://www.php.net/empty>`_ string); true is 1 and false is 0; Integers in strings are transtyped, while partial numbers or decimals are not analyzed in strings. 
+Decimal numbers are rounded to the closest integer; Null is transtyped to '' (empty string); true is 1 and false is 0; Integers in strings are transtyped, while partial numbers or decimals are not analyzed in strings. 
 
 As a general rule of thumb, only use integers or strings that don\'t look like integers.
 
@@ -4111,7 +4364,7 @@ Instantiating Abstract Class
 ############################
 
 
-Those code will raise a PHP fatal error at execution `time <http://www.php.net/time>`_ : 'Cannot instantiate abstract class'. The classes are actually abstract classes, and should be derived into a concrete class to be instantiated.
+Those code will raise a PHP fatal error at execution time : 'Cannot instantiate abstract class'. The classes are actually abstract classes, and should be derived into a concrete class to be instantiated.
 
 +--------------+------------------------------------+
 | Command Line | Classes/InstantiatingAbstractClass |
@@ -4149,7 +4402,7 @@ Invalid Constant Name
 
 According to PHP's manual, constant names, ' A valid constant name starts with a letter or underscore, followed by any number of letters, numbers, or underscores.'.
 
-Constant, when defined using define() function, must follow this regex :::
+Constant, when defined using `define() <http://www.php.net/define>`_ function, must follow this regex :::
 
    
    /[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/
@@ -4168,7 +4421,7 @@ Invalid Octal In String
 #######################
 
 
-Starting with PHP 7.1, any octal sequence inside a string can't be beyong 7. Those will be a fatal error at parsing `time <http://www.php.net/time>`_. 
+Starting with PHP 7.1, any octal sequence inside a string can't be beyong 7. Those will be a fatal error at parsing time. 
 
 In PHP 7.0 and older, those sequences were silently adapted (divided by 0).
 
@@ -4252,7 +4505,7 @@ Applying `join() <http://www.php.net/join>`_ or `implode() <http://www.php.net/i
    ?>
 
 
-Always use `file_get_contents() <http://www.php.net/file_get_contents>`_ to get the content of a `file <http://www.php.net/file>`_ as a string.
+Always use `file_get_contents() <http://www.php.net/file_get_contents>`_ to get the content of a file as a string.
 
 +--------------+-----------------------+
 | Command Line | Performances/JoinFile |
@@ -4392,6 +4645,8 @@ Logical Mistakes
 
 Spot logical mistakes within logical expressions. 
 
+Sometimes, the logic is not what it seems. It is important to check the actual impact of every part of the logical expression. Do not hesitate to make a table with all possible cases. If those cases are too numerous, it may be time to rethink the whole expression. 
+
 .. code-block:: php
 
    <?php 
@@ -4411,7 +4666,7 @@ Spot logical mistakes within logical expressions.
    ?>
 
 
-Based on article from Andrey Karpov : http://www.viva64.com/en/b/0390/
+Based on article from Andrey Karpov  `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 
 +--------------+----------------------------+
 | Command Line | Structures/LogicalMistakes |
@@ -4600,7 +4855,7 @@ Make One Call
 #############
 
 
-When preg_replace_callback() is called several times in a row on the same string, it is faster to merge all those using `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_, which takes several patterns and callbacks in the the same arguments.
+When preg_replace_callback() is called several times in a row on the same string, it is faster to merge all those using preg_replace_callback_array(), which takes several patterns and callbacks in the the same arguments.
 
 .. code-block:: php
 
@@ -4654,6 +4909,18 @@ Malformed Octal
 
 Those numbers starts with a 0, so they are using the PHP octal convention. Therefore, one can't use 8 or 9 figures in those numbers, as they don't belong to the octal base. The resulting number will be truncated at the first erroneous figure. For example, 090 is actually 0, and 02689 is actually 22. 
 
+.. code-block:: php
+
+   <?php
+   
+   // A long way to write 0 in PHP 5
+   $a = 0890; 
+   
+   // A fatal error since PHP 7
+   
+   ?>
+
+
 Also, note that very large octal, usually with more than 21 figures, will be turned into a real number and undergo a reduction in precision.
 
 +--------------+---------------------+
@@ -4680,11 +4947,13 @@ This was added in PHP 5.4+
 
 
 
-.. _mixed-keys:
+.. _mixed-keys-arrays:
 
-Mixed Keys
-##########
+Mixed Keys Arrays
+#################
 
+
+Avoid mixing constants and literals in array keys.
 
 When defining default values in arrays, it is recommended to avoid mixing constants and literals, as PHP may mistake them and overwrite the previous with the latter.
 
@@ -4790,7 +5059,7 @@ Multiple Class Declarations
 ###########################
 
 
-It is possible to declare several times the same class in the code. PHP will not mention it until execution `time <http://www.php.net/time>`_, since declarations may be conditional. 
+It is possible to declare several times the same class in the code. PHP will not mention it until execution time, since declarations may be conditional. 
 
 .. code-block:: php
 
@@ -4829,11 +5098,11 @@ Multiple Classes In One File
 ############################
 
 
-It is regarded as a bad practice to cram more than one class per `file <http://www.php.net/file>`_. This is usually done to make life of __autoload() easier. 
+It is regarded as a bad practice to cram more than one class per file. This is usually done to make life of __autoload() easier. 
 
-It is often difficult to find class foo in the bar.php `file <http://www.php.net/file>`_. This is also the case for interfaces and traits.
+It is often difficult to find class foo in the bar.php file. This is also the case for interfaces and traits.
 
-One good reason to have multiple classes in one `file <http://www.php.net/file>`_ is to reduce include `time <http://www.php.net/time>`_ by providing everything into one nice include.
+One good reason to have multiple classes in one file is to reduce include time by providing everything into one nice include.
 
 +--------------+------------------------------------------------+
 | Command Line | Classes/MultipleClassesInFile                  |
@@ -5137,7 +5406,7 @@ Nested Ifthen
 #############
 
 
-Three levels of ifthen is too much. The method should be `split <http://www.php.net/split>`_ into smaller functions.
+Three levels of ifthen is too much. The method should be split into smaller functions.
 
 .. code-block:: php
 
@@ -5344,14 +5613,14 @@ New Functions In PHP 7.0
 
 The following functions are now native functions in PHP 7.0. It is advised to change them before moving to this new version.
 
-* `get_resources <http://www.php.net/get_resources>`_
-* `gc_mem_caches <http://www.php.net/gc_mem_caches>`_
-* `preg_replace_callback_array <http://www.php.net/preg_replace_callback_array>`_
-* `posix_setrlimit <http://www.php.net/posix_setrlimit>`_
-* `random_bytes <http://www.php.net/random_bytes>`_
-* `random_int <http://www.php.net/random_int>`_
-* `intdiv <http://www.php.net/intdiv>`_
-* `error_clear_last <http://www.php.net/error_clear_last>`_
+* get_resources
+* gc_mem_caches
+* preg_replace_callback_array
+* posix_setrlimit
+* random_bytes
+* random_int
+* intdiv
+* error_clear_last
 
 +--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/Php70NewFunctions                                                                                                             |
@@ -5369,13 +5638,13 @@ New Functions In PHP 7.1
 
 The following functions are now native functions in PHP 7.1. It is advised to change them before moving to this new version.
 
-* `curl_share_strerror() <http://www.php.net/curl_share_strerror>`_
-* `curl_multi_errno() <http://www.php.net/curl_multi_errno>`_
-* `curl_share_errno() <http://www.php.net/curl_share_errno>`_
-* `mb_ord() <http://www.php.net/mb_ord>`_
-* `mb_chr() <http://www.php.net/mb_chr>`_
-* `mb_scrub() <http://www.php.net/mb_scrub>`_
-* `is_iterable() <http://www.php.net/is_iterable>`_
+* curl_share_strerror()
+* curl_multi_errno()
+* curl_share_errno()
+* mb_ord()
+* mb_chr()
+* mb_scrub()
+* is_iterable()
 
 +--------------+-----------------------------------------------------+
 | Command Line | Php/Php71NewFunctions                               |
@@ -5423,7 +5692,7 @@ No Count With 0
 ###############
 
 
-Comparing `count() <http://www.php.net/count>`_ and `strlen() <http://www.php.net/strlen>`_ to 0 is a waste of resources. There are three distinct situations situations.
+Comparing `count() <http://www.php.net/count>`_ and strlen() to 0 is a waste of resources. There are three distinct situations situations.
 
 When comparing `count() <http://www.php.net/count>`_ with 0, with ===, ==, !==, !=, it is more efficient to use `empty() <http://www.php.net/empty>`_. Empty() is a language constructs that checks if a value is present, while `count() <http://www.php.net/count>`_ actually load the number of element.
 
@@ -5443,7 +5712,7 @@ When comparing `count() <http://www.php.net/count>`_ with 0, with ===, ==, !==, 
    ?>
 
 
-When comparing `count() <http://www.php.net/count>`_ strictly with 0 (>) it is more efficient to use !(`empty() <http://www.php.net/empty>`_)
+When comparing `count() <http://www.php.net/count>`_ strictly with 0 (>) it is more efficient to use !(`empty()) <http://www.php.net/empty>`_
 
 .. code-block:: php
 
@@ -5471,9 +5740,9 @@ When comparing `count() <http://www.php.net/count>`_ strictly with 0 (>) it is m
    ?>
 
 
-Comparing `count() <http://www.php.net/count>`_ and `strlen() <http://www.php.net/strlen>`_ with other values than 0 cannot be replaced with a comparison with `empty() <http://www.php.net/empty>`_.
+Comparing `count() <http://www.php.net/count>`_ and strlen() with other values than 0 cannot be replaced with a comparison with `empty() <http://www.php.net/empty>`_.
 
-Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing `time <http://www.php.net/time>`_ of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops.
+Note that this is a micro-optimisation : since PHP keeps track of the number of elements in arrays (or number of chars in strings), the total computing time of both operations is often lower than a ms. However, both functions tends to be heavily used, and may even be used inside loops.
 
 +--------------+---------------------------+
 | Command Line | Performances/NotCountNull |
@@ -5521,7 +5790,7 @@ No Direct Usage
 
 The results of the following functions shouldn't be used directly, but checked first. 
 
-For example, glob() returns an array, unless some error happens, in which case it returns a boolean (false). In such case, however rare it is, plugging glob() directly in a `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loops will yield errors.
+For example, `glob() <http://www.php.net/glob>`_ returns an array, unless some error happens, in which case it returns a boolean (false). In such case, however rare it is, plugging `glob() <http://www.php.net/glob>`_ directly in a `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loops will yield errors.
 
 .. code-block:: php
 
@@ -5550,7 +5819,23 @@ No Global Modification
 ######################
 
 
-It is recommended not to modify directly any Wordpress globals, but to use the function API instead.
+Avoid modifying directly Wordpress global variables.
+
+It is recommended to use the function API instead.
+
+.. code-block:: php
+
+   <?php
+   
+   my_hook() {
+       // Avoid changing those variables, as Wordpress handles them
+       $GLOBALS['is_safari'] = true;
+   }
+   
+   ?>
+
+
+See also `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 
 +--------------+--------------------------------+
 | Command Line | Wordpress/NoGlobalModification |
@@ -5635,7 +5920,7 @@ No Hardcoded Path
 
 It is not recommended to have literals when accessing files. 
 
-Either use `__FILE__ <http://php.net/manual/en/language.constants.predefined.php>`_ and `__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ to make the path relative to the current `file <http://www.php.net/file>`_; use a DOC_ROOT as a configuration constant that will allow you to move your script later or rely on functions likes `sys_get_temp_dir() <http://php.net/manual/en/function.sys-get-temp-dir.php>`_, to reach special folders.
+Either use `__FILE__ <http://php.net/manual/en/language.constants.predefined.php>`_ and `__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ to make the path relative to the current file; use a DOC_ROOT as a configuration constant that will allow you to move your script later or rely on functions likes `sys_get_temp_dir() <http://www.php.net/sys_get_temp_dir>`_, to reach special folders.
 
 .. code-block:: php
 
@@ -5780,7 +6065,7 @@ No Parenthesis For Language Construct
 
 Some PHP language constructs, such are include, print, echo don't need parenthesis. They will handle parenthesis, but it is may lead to strange situations. 
 
-It it better to avoid using parenthesis with echo, print, return, `throw <http://www.php.net/throw>`_, include and require (and _once).
+It it better to avoid using parenthesis with echo, print, return, throw, include and require (and _once).
 
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/NoParenthesisForLanguageConstruct                                                                                              |
@@ -5960,6 +6245,10 @@ PHP 7 doesn't allow the usage of [] with strings. [] is an array-only oeprator.
 
    <?php
    
+   $string = 'abc';
+   
+   // Not possible in PHP 7
+   $string[] = 'd';
    
    ?>
 
@@ -5979,6 +6268,8 @@ This was possible in PHP 5.*, but is now forbidden in PHP 7.
 No Substr() One
 ###############
 
+
+Use array notation $string[$position] to reach a single byte in a string.
 
 There are two ways to access a byte in a string : substr() and $v[$pos];
 
@@ -6023,7 +6314,7 @@ No array_merge() In Loops
 
 `array_merge() <http://www.php.net/array_merge>`_ is memory intensive : every call will duplicate the arguments in memory, before merging them. 
 
-Since arrays may be quite big, it is recommended to avoid using `array_merge() <http://www.php.net/array_merge>`_ in a loop. Instead, one should use `array_merge() <http://www.php.net/array_merge>`_ with as many arguments as possible, making the merge a on `time <http://www.php.net/time>`_ call.
+Since arrays may be quite big, it is recommended to avoid using `array_merge() <http://www.php.net/array_merge>`_ in a loop. Instead, one should use `array_merge() <http://www.php.net/array_merge>`_ with as many arguments as possible, making the merge a on time call.
 
 .. code-block:: php
 
@@ -6136,8 +6427,8 @@ method statically :
 
 
 It is a bad idea to call non-static method statically. Such method may make use of special
-variable $this, which will be undefined. PHP will not check those calls at compile `time <http://www.php.net/time>`_,
-nor at running `time <http://www.php.net/time>`_. 
+variable $this, which will be undefined. PHP will not check those calls at compile time,
+nor at running time. 
 
 It is recommended to update this situation : make the method actually static, or use it only 
 in object context.
@@ -6171,7 +6462,7 @@ Non-constant Index In Array
 
 In '$array[index]', PHP cannot find index as a constant, but, as a default behavior, turns it into the string 'index'. 
 
-This default behavior raise concerns when a corresponding constant is defined, either using define() or the const keyword (outside a class). The definition of the index constant will modify the behavior of the index, as it will now use the constant definition, and not the 'index' string. 
+This default behavior raise concerns when a corresponding constant is defined, either using `define() <http://www.php.net/define>`_ or the const keyword (outside a class). The definition of the index constant will modify the behavior of the index, as it will now use the constant definition, and not the 'index' string. 
 
 $array[index] = 1; // assign 1 to the element index in $array
 define('index', 2);
@@ -6305,7 +6596,20 @@ The following classes used to have a very specific behavior during instantiation
 
 After issuing a 'new' with those classes, it was important to check if the returned object were null (sic) or not. No exception were thrown.
 
-This inconsistency has been cleaned in PHP 7 : see https://wiki.php.net/rfc/internal_constructor_behaviour.
+.. code-block:: php
+
+   <?php
+   
+   // Example extracted from the wiki below
+   $mf = new MessageFormatter('en_US', '{this was made intentionally incorrect}');
+   if ($mf === null) {
+       echo 'Surprise!';
+   }
+   
+   ?>
+
+
+This inconsistency has been cleaned in PHP 7 : see See `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 
 +--------------+------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/NullOnNew                                                                                                      |
@@ -6339,7 +6643,7 @@ Old Style Constructor
 #####################
 
 
-A long `time <http://www.php.net/time>`_ ago, PHP classes used to have the method bearing the same name as the class acts as the constructor.
+A long time ago, PHP classes used to have the method bearing the same name as the class acts as the constructor.
 
 .. code-block:: php
 
@@ -6372,7 +6676,7 @@ A long `time <http://www.php.net/time>`_ ago, PHP classes used to have the metho
    ?>
 
 
-This is no more the case in PHP 5, which relies on `__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ to do so. Having this old style constructor may bring in confusion, unless you are also supporting old `time <http://www.php.net/time>`_ PHP 4.
+This is no more the case in PHP 5, which relies on `__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ to do so. Having this old style constructor may bring in confusion, unless you are also supporting old time PHP 4.
 
 Note that classes with methods bearing the class name, but inside a namespace are not following this convention, as this is not breaking backward compatibility. Those are excluded from the analyze.
 
@@ -6392,7 +6696,31 @@ Old Style __autoload()
 ######################
 
 
-Do not use the old __autoload() function, but rather the new spl_register_autoload() function.
+Avoid __autoload(). Only use spl_register_autoload().
+
+__autoload() will be deprecated in PHP 7.2 and possibly removed in later version.
+
+__autoload() may only be declared once, and cannot be modified later. This creates potential conflicts between libraries that try to set up their own autoloading schema. 
+
+On the other hand, spl_register_autoload() allows registering and de-registering multiple autoloading functions or methods. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Modern autoloading.
+   function myAutoload($class){}
+   spl_register_autoload('myAutoload');
+   
+   // Old style autoloading.
+   function __autoload($class){}
+   
+   ?>
+
+
+Do not use the old __autoload() function, but rather the new spl_register_autoload() function. 
+
+See also `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_.
 
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Command Line | Php/oldAutoloadUsage                                                                                |
@@ -6467,7 +6795,7 @@ Only Variable Returned By Reference
 
 When a function returns a reference, it is only possible to return variables, properties or static properties. 
 
-Anything else, like literals or static expressions, yield a warning at execution `time <http://www.php.net/time>`_.
+Anything else, like literals or static expressions, yield a warning at execution time.
 
 .. code-block:: php
 
@@ -6707,9 +7035,9 @@ PHP 7.2 Deprecations
 
 PHP 7.2 deprecates several features of the language. 
 
-* parse_str() with no second argument
-* assert() on strings
-* Usage of gmp_random(), create_function(), each()
+* `parse_str() <http://www.php.net/parse_str>`_ with no second argument
+* `assert() <http://www.php.net/assert>`_ on strings
+* Usage of gmp_random(), `create_function() <http://www.php.net/create_function>`_, `each() <http://www.php.net/each>`_
 * Usage of (unset)
 * Usage of $php_errormsg
 * directive mbstring.func_overload (not supported yet)
@@ -6732,8 +7060,8 @@ PHP 7.2 Removed Functions
 
 The following PHP native functions were removed in PHP 7.2.
 
-* `png2wbmp <http://www.php.net/png2wbmp>`_
-* `jpeg2wbmp <http://www.php.net/jpeg2wbmp>`_
+* png2wbmp
+* jpeg2wbmp
 
 +--------------+---------------------------+
 | Command Line | Php/Php72RemovedFunctions |
@@ -6751,30 +7079,30 @@ PHP 70 Removed Functions
 
 The following PHP native functions were removed in PHP 7.0.
 
-* `ereg <http://www.php.net/ereg>`_
-* `ereg_replace <http://www.php.net/ereg_replace>`_
-* `eregi <http://www.php.net/eregi>`_
-* `eregi_replace <http://www.php.net/eregi_replace>`_
-* `split <http://www.php.net/split>`_
-* `spliti <http://www.php.net/spliti>`_
-* `sql_regcase <http://www.php.net/sql_regcase>`_
-* `magic_quotes_runtime <http://www.php.net/magic_quotes_runtime>`_
-* `set_magic_quotes_runtime <http://www.php.net/set_magic_quotes_runtime>`_
-* `call_user_method <http://www.php.net/call_user_method>`_
-* `call_user_method_array <http://www.php.net/call_user_method_array>`_
-* `set_socket_blocking <http://www.php.net/set_socket_blocking>`_
-* `mcrypt_ecb <http://www.php.net/mcrypt_ecb>`_
-* `mcrypt_cbc <http://www.php.net/mcrypt_cbc>`_
-* `mcrypt_cfb <http://www.php.net/mcrypt_cfb>`_
-* `mcrypt_ofb <http://www.php.net/mcrypt_ofb>`_
-* `datefmt_set_timezone_id <http://www.php.net/datefmt_set_timezone_id>`_
-* `imagepsbbox <http://www.php.net/imagepsbbox>`_
-* `imagepsencodefont <http://www.php.net/imagepsencodefont>`_
-* `imagepsextendfont <http://www.php.net/imagepsextendfont>`_
-* `imagepsfreefont <http://www.php.net/imagepsfreefont>`_
-* `imagepsloadfont <http://www.php.net/imagepsloadfont>`_
-* `imagepsslantfont <http://www.php.net/imagepsslantfont>`_
-* `imagepstext <http://www.php.net/imagepstext>`_
+* ereg
+* ereg_replace
+* eregi
+* eregi_replace
+* split
+* spliti
+* sql_regcase
+* magic_quotes_runtime
+* set_magic_quotes_runtime
+* call_user_method
+* call_user_method_array
+* set_socket_blocking
+* mcrypt_ecb
+* mcrypt_cbc
+* mcrypt_cfb
+* mcrypt_ofb
+* datefmt_set_timezone_id
+* imagepsbbox
+* imagepsencodefont
+* imagepsextendfont
+* imagepsfreefont
+* imagepsloadfont
+* imagepsslantfont
+* imagepstext
 
 +--------------+-----------------------------------------------------+
 | Command Line | Php/Php70RemovedFunctions                           |
@@ -6808,6 +7136,8 @@ PHP5 Indirect Variable Expression
 #################################
 
 
+Indirect variable expressions changes between PHP 5 an 7.
+
 The following structures are evaluated differently in PHP 5 and 7. It is recommended to review them or switch to a less ambiguous syntax.
 
 .. code-block:: php
@@ -6829,8 +7159,7 @@ The following structures are evaluated differently in PHP 5 and 7. It is recomme
    ?>
 
 
-
-See also [http://php.net/manual/en/migration70.incompatible.php](http://php.net/manual/en/migration70.incompatible.php).
+See `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 
 +---------------------+-----------------------+-----------------------+
 | Expression          | PHP 5 interpretation  | PHP 7 interpretation  |
@@ -6855,7 +7184,7 @@ PHP7 Dirname
 ############
 
 
-With PHP 7, dirname has a second argument that represents the number of parent folder to follow. This prevent us from using nested dirname() calls to reach an grand-parent direct.
+With PHP 7, dirname has a second argument that represents the number of parent folder to follow. This prevent us from using nested `dirname() <http://www.php.net/dirname>`_ calls to reach an grand-parent direct.
 
 .. code-block:: php
 
@@ -6930,9 +7259,9 @@ Performances/NoGlob
 ###################
 
 
-glob() and scandir() sorts results by default. If you don't need that sorting, save some `time <http://www.php.net/time>`_ by requesting NOSORT with those functions.
+`glob() <http://www.php.net/glob>`_ and `scandir() <http://www.php.net/scandir>`_ sorts results by default. If you don't need that sorting, save some time by requesting NOSORT with those functions.
 
-Besides, whenever possible, use scandir() instead of glob(). 
+Besides, whenever possible, use `scandir() <http://www.php.net/scandir>`_ instead of `glob() <http://www.php.net/glob>`_. 
 
 .. code-block:: php
 
@@ -6953,13 +7282,13 @@ Besides, whenever possible, use scandir() instead of glob().
    ?>
 
 
-Using opendir() and a while loop may be even faster. 
+Using `opendir() <http://www.php.net/opendir>`_ and a while loop may be even faster. 
 
-This analysis skips scandir() and glob() if they are explicitely configured with flags (aka, sorting is explicitely needed).
+This analysis skips `scandir() <http://www.php.net/scandir>`_ and `glob() <http://www.php.net/glob>`_ if they are explicitely configured with flags (aka, sorting is explicitely needed).
 
-Glob() accepts wildchar, that may not easily replaced with scandir() or opendir().
+Glob() accepts wildchar, that may not easily replaced with `scandir() <http://www.php.net/scandir>`_ or `opendir() <http://www.php.net/opendir>`_.
 
-See also : https://www.phparch.com/2010/04/putting-glob-to-the-test/;
+See `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
 
 +--------------+---------------------+
 | Command Line | Performances/NoGlob |
@@ -6975,7 +7304,7 @@ Performances/timeVsstrtotime
 ############################
 
 
-`time() <http://www.php.net/time>`_ is actually faster than `strtotime( <http://www.php.net/strtotime>`_'now').
+time() is actually faster than strtotime('now').
 
 .. code-block:: php
 
@@ -7084,7 +7413,7 @@ Phpinfo
 #######
 
 
-phpinfo() is a great function to learn about the current configuration of the server.
+`phpinfo() <http://www.php.net/phpinfo>`_ is a great function to learn about the current configuration of the server.
 
 .. code-block:: php
 
@@ -7219,6 +7548,25 @@ Preprocessable
 
 The following expression are made of literals or already known values : they may be fully calculated before running PHP.
 
+.. code-block:: php
+
+   <?php
+   
+   // Building an array from a string
+   $name = 'PHP'.' '.'7.2';
+   
+   // Building an array from a string
+   $list = explode(',', 'a,b,c,d,e,f');
+   
+   // Calculating a power
+   $kbytes = $bytes / pow(2, 10);
+   
+   // This will never change
+   $name = ucfirst(strtolower('PARIS'));
+   
+   ?>
+
+
 By doing so, this will reduce the amount of work of PHP.
 
 +--------------+-------------------------------+
@@ -7235,7 +7583,27 @@ Print And Die
 #############
 
 
-When stopping a script with `die() <http://www.php.net/die>`_ and echo(), it is possible to provide a message as first argument, that will be displayed at execution. There is no need to make a specific call to print or echo.
+Die() also prints. 
+
+When stopping a script with `die() <http://www.php.net/die>`_, it is possible to provide a message as first argument, that will be displayed at execution. There is no need to make a specific call to print or echo.
+
+.. code-block:: php
+
+   <?php
+   
+   //  die may do both print and die.
+   echo 'Error message';
+   die();
+   
+   //  exit may do both print and die.
+   print 'Error message';
+   exit;
+   
+   //  exit cannot print integers only : they will be used as status report to the system.
+   print 'Error message';
+   exit 1;
+   
+   ?>
 
 +--------------+------------------------+
 | Command Line | Structures/PrintAndDie |
@@ -7348,9 +7716,43 @@ Queries In Loops
 ################
 
 
-Querying an external database in a loop usually leads to performances problems. 
+Avoid querying databases in a loop. 
 
-It is recommended to reduce the number of queries by making one query, and dispatching the results afterwards. 
+Querying an external database in a loop usually leads to performances problems. This is also called the 'n + 1 problem'. 
+
+It is recommended to reduce the number of queries by making one query, and dispatching the results afterwards. This is true with SQL databases, graph queries, LDAP queries, etc. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Typical N = 1 problem : there will be as many queries as there are elements in $array
+   $ids = array(1,2,3,5,6,10);
+   
+   $db = new SQLite3('mysqlitedb.db');
+   
+   // all the IDS are merged into the query at once
+   $results = $db->query('SELECT bar FROM foo WHERE id  in ('.implode(',', $id).')');
+   while ($row = $results->fetchArray()) {
+       var_dump($row);
+   }
+   
+   
+   // Typical N = 1 problem : there will be as many queries as there are elements in $array
+   $ids = array(1,2,3,5,6,10);
+   
+   $db = new SQLite3('mysqlitedb.db');
+   
+   foreach($ids as $id) {
+       $results = $db->query('SELECT bar FROM foo WHERE id = '.$id);
+       while ($row = $results->fetchArray()) {
+           var_dump($row);
+       }
+   }
+   
+   ?>
+
+
 This is not always possible.
 
 +--------------+--------------------------+
@@ -7367,9 +7769,9 @@ Random Without Try
 ##################
 
 
-`random_int() <http://www.php.net/random_int>`_ and `random_bytes() <http://www.php.net/random_bytes>`_ require a try..catch enclosure.
+random_int() and random_bytes() require a try..catch enclosure.
 
-`random_int() <http://www.php.net/random_int>`_ and `random_bytes() <http://www.php.net/random_bytes>`_ emit Exceptions if they meet a problem. This way, failure can't be mistaken with returning an `empty <http://www.php.net/empty>`_ value, which leads to lower security. 
+random_int() and random_bytes() emit Exceptions if they meet a problem. This way, failure can't be mistaken with returning an empty value, which leads to lower security. 
 
 .. code-block:: php
 
@@ -7427,11 +7829,13 @@ This is possible when managing some backward compatibility, like emulating an ol
 
 
 
-.. _redefined-constants:
+.. _redefined-class-constants:
 
-Redefined Constants
-###################
+Redefined Class Constants
+#########################
 
+
+Redefined class constants.
 
 Class constants may be redefined, though it is prone to errors when using them, as it is now crucial to use the right class name to access the right value.
 
@@ -7471,7 +7875,7 @@ Redefined Default
 #################
 
 
-Classes allows properties to be set with a default value. When those properties get, unconditionally, another value at constructor `time <http://www.php.net/time>`_, then one of the default value are useless. One of those definition should go : it is better to define properties outside the constructor.
+Classes allows properties to be set with a default value. When those properties get, unconditionally, another value at constructor time, then one of the default value are useless. One of those definition should go : it is better to define properties outside the constructor.
 
 .. code-block:: php
 
@@ -7507,7 +7911,7 @@ This lead to security failures, as the variables were often used but not filtere
 Though it is less often found in more recent code, register_globals is sometimes needed in legacy code, that haven't made the move to eradicate this style of coding.
 Backward compatible pieces of code that mimic the register_globals features usually create even greater security risks by being run after scripts startup. At that point, some important variables are already set, and may be overwritten by the incoming call, creating confusion in the script.
 
-Mimicking register_globals is achieved with variables variables, extract(), parse_str() and import_request_variables() (Up to PHP 5.4). 
+Mimicking register_globals is achieved with variables variables, `extract() <http://www.php.net/extract>`_, `parse_str() <http://www.php.net/parse_str>`_ and `import_request_variables() <http://www.php.net/import_request_variables>`_ (Up to PHP 5.4). 
 
 .. code-block:: php
 
@@ -7537,7 +7941,9 @@ Relay Function
 ##############
 
 
-Relay functions (or method) are delegating the actual work to another function or method. They do not have any impact on the results, besides exposing another name for the same feature.
+Relay function only hand workload to another one. 
+
+Relay functions (or methods) are delegating the actual work to another function or method. They do not have any impact on the results, besides exposing another name for the same feature.
 
 .. code-block:: php
 
@@ -7618,7 +8024,7 @@ Results May Be Missing
 ######################
 
 
-`preg_match() <http://www.php.net/preg_match>`_ may return `empty <http://www.php.net/empty>`_ values, if the search fails. It is important to check for the existence of results before assigning them to another variable, or using it.
+preg_match() may return empty values, if the search fails. It is important to check for the existence of results before assigning them to another variable, or using it.
 
 .. code-block:: php
 
@@ -7853,13 +8259,15 @@ It is recommended not to use it.
 
 
 
-.. _setlocale-needs-constants:
+.. _setlocale()-uses-constants:
 
-Setlocale Needs Constants
-#########################
+Setlocale() Uses Constants
+##########################
 
 
-The first argument of setlocale must be one of the valid constants, LC_ALL, LC_COLLATE, LC_CTYPE, LC_MONETARY, LC_NUMERIC, LC_TIME, LC_MESSAGES.
+setlocal() don't use strings.
+
+The first argument of `setlocale() <http://www.php.net/setlocale>`_ must be one of the valid constants, LC_ALL, LC_COLLATE, LC_CTYPE, LC_MONETARY, LC_NUMERIC, LC_TIME, LC_MESSAGES.
 
 .. code-block:: php
 
@@ -7908,7 +8316,7 @@ Short Open Tags
 ###############
 
 
-Usage of short open tags is discouraged. The following files were found to be impacted by the short open tag directive at compilation `time <http://www.php.net/time>`_. They must be reviewed to ensure no &lt;? tags are found in the code.
+Usage of short open tags is discouraged. The following files were found to be impacted by the short open tag directive at compilation time. They must be reviewed to ensure no &lt;? tags are found in the code.
 
 +--------------+--------------------------+
 | Command Line | Php/ShortOpenTagRequired |
@@ -7955,11 +8363,26 @@ Should Be Single Quote
 ######################
 
 
+Use single quote for simple strings.
+
 Static content inside a string, that has no single quotes nor escape sequence (such as \n or \t), should be using single quote delimiter, instead of double quote. 
 
+.. code-block:: php
+
+   <?php
+   
+   $a = abc;
+   
+   // This one is using a special sequence
+   $b = cde\n;
+   
+   // This one is using two special sequences
+   $b = \x03\u{1F418};
+   
+   ?>
 
 
-If you have too many of them, don't loose your `time <http://www.php.net/time>`_ switching them all. If you have a few of them, it may be good for consistence.
+If you have too many of them, don't loose your time switching them all. If you have a few of them, it may be good for consistence.
 
 +--------------+-----------------------------------------------------------------------------------------------+
 | Command Line | Type/ShouldBeSingleQuote                                                                      |
@@ -7977,8 +8400,9 @@ Should Chain Exception
 ######################
 
 
-When catching an exception and rethrowing another one, it is recommended to chain the exception : this means providing the original exception, so that the final recipiend has a chance to track the origin of the problem. 
-This doesn't change the thrown message, but provides more information.
+Chain exception to provide more context.
+
+When catching an exception and rethrowing another one, it is recommended to chain the exception : this means providing the original exception, so that the final recipiend has a chance to track the origin of the problem. This doesn't change the thrown message, but provides more information.
 
 Note : Chaining requires PHP > 5.3.0.
 
@@ -8010,7 +8434,7 @@ Should Make Alias
 
 Long names should be aliased.
 
-Aliased names are easy to read at the beginning of the script; they may be changed at one point, and update the whole code at the same `time <http://www.php.net/time>`_. 
+Aliased names are easy to read at the beginning of the script; they may be changed at one point, and update the whole code at the same time. 
 Finally, short names makes the rest of the code readable. 
 
 .. code-block:: php
@@ -8097,7 +8521,7 @@ Should Typecast
 
 When typecasting, it is better to use the casting operator, such as (int) or (bool).
 
-Functions such as intval() or settype() are always slower.
+Functions such as `intval() <http://www.php.net/intval>`_ or `settype() <http://www.php.net/settype>`_ are always slower.
 
 .. code-block:: php
 
@@ -8111,7 +8535,7 @@ Functions such as intval() or settype() are always slower.
    ?>
 
 
-This is a micro-optimisation, although such conversion may be use multiple `time <http://www.php.net/time>`_, leading to a larger performance increase.
+This is a micro-optimisation, although such conversion may be use multiple time, leading to a larger performance increase.
 
 +--------------+---------------------+
 | Command Line | Type/ShouldTypecast |
@@ -8121,13 +8545,108 @@ This is a micro-optimisation, although such conversion may be use multiple `time
 
 
 
-.. _should-use-$this:
+.. _should-use-coalesce:
 
-Should Use $this
-################
+Should Use Coalesce
+###################
 
 
-Classes' methods should use $this, or call parent::. A static method should call another static method, or a static property. 
+PHP 7 introduced the ?? operator, that replaces longer structures to set default values when a variable is not set.
+
+.. code-block:: php
+
+   <?php
+   
+   // Fetches the request parameter user and results in 'nobody' if it doesn't exist
+   $username = $_GET['user'] ?? 'nobody';
+   // equivalent to: $username = isset($_GET['user']) ? $_GET['user'] : 'nobody';
+    
+   // Calls a hypothetical model-getting function, and uses the provided default if it fails
+   $model = Model::get($id) ?? $default_model;
+   // equivalent to: if (($model = Model::get($id)) === NULL) { $model = $default_model; }
+   
+   ?>
+
+
+Sample extracted from PHP docs `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
+
++--------------+-----------------------+
+| Command Line | Php/ShouldUseCoalesce |
++--------------+-----------------------+
+| Analyzers    | :ref:`Analyze`        |
++--------------+-----------------------+
+
+
+
+.. _should-use-constants:
+
+Should Use Constants
+####################
+
+
+The following functions have related constants that should be used as arguments, instead of scalar literals, such as integers or strings.
+
+For example, $lines = file('file.txt', 2); is less readable than $lines = file('file.txt', FILE_IGNORE_NEW_LINES)
+
++--------------+------------------------------+
+| Command Line | Functions/ShouldUseConstants |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
+
+.. _should-use-function-use:
+
+Should Use Function Use
+#######################
+
+
+Functioncalls that fall back to global scope should be using 'use function' or be fully namespaced. 
+
+PHP searches for functions in the local namespaces, and in case it fails, makes the same search in the global scope. Anytime a native function is referenced this way, the search (and fail) happens. This slows down the scripts.
+
+The speed bump range from 2 to 8 %, depending on the availability of functions in the local scope. The overall bump is about 1 µs per functioncall, which makes it a micro optimisation until a lot of function calls are made.
+
+
+Based on one of `Marco Pivetti tweet <https://twitter.com/Ocramius/status/811504929357660160>`_ and this `blog post <http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/>`_
+
+.. code-block:: php
+
+   <?php
+   
+   namespace X {
+       use function strtolower as strtolower_aliased;
+       
+       // PHP searches for strtolower in X, fails, then falls back to global scope, succeeds.
+       $a = strtolower($b);
+   
+       // PHP searches for strtolower in global scope, succeeds.
+       $a = \strtolower($b);
+   
+       // PHP searches for strtolower_aliased in global scope, succeeds.
+       $a = \strtolower_aliased($b);
+   }
+   
+   ?>
+
++--------------+-----------------------+
+| Command Line | Php/ShouldUseFunction |
++--------------+-----------------------+
+| Analyzers    | :ref:`Performances`   |
++--------------+-----------------------+
+
+
+
+.. _should-use-local-class:
+
+Should Use Local Class
+######################
+
+
+Methods in a class should use the class, or be functions.
+
+Methods should use $this with another method or a property, or call parent::. Static methods should call another static method, or a static property. 
 
 .. code-block:: php
 
@@ -8167,97 +8686,6 @@ Classes' methods should use $this, or call parent::. A static method should call
 +--------------+-----------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                          |
 +--------------+-----------------------------------------------------------------------------------------+
-
-
-
-.. _should-use-coalesce:
-
-Should Use Coalesce
-###################
-
-
-PHP 7 introduced the ?? operator, that replaces longer structures to set default values when a variable is not set.
-
-.. code-block:: php
-
-   <?php
-   
-   // Extract from https://wiki.php.net/rfc/isset_ternary
-   // Fetches the request parameter user and results in 'nobody' if it doesn't exist
-   $username = $_GET['user'] ?? 'nobody';
-   // equivalent to: $username = isset($_GET['user']) ? $_GET['user'] : 'nobody';
-    
-   // Calls a hypothetical model-getting function, and uses the provided default if it fails
-   $model = Model::get($id) ?? $default_model;
-   // equivalent to: if (($model = Model::get($id)) === NULL) { $model = $default_model; }
-   
-   
-   ?>
-
-+--------------+-----------------------+
-| Command Line | Php/ShouldUseCoalesce |
-+--------------+-----------------------+
-| Analyzers    | :ref:`Analyze`        |
-+--------------+-----------------------+
-
-
-
-.. _should-use-constants:
-
-Should Use Constants
-####################
-
-
-The following functions have related constants that should be used as arguments, instead of scalar literals, such as integers or strings.
-
-For example, $lines = `file( <http://www.php.net/file>`_'`file <http://www.php.net/file>`_.txt', 2); is less readable than $lines = `file( <http://www.php.net/file>`_'`file <http://www.php.net/file>`_.txt', FILE_IGNORE_NEW_LINES)
-
-+--------------+------------------------------+
-| Command Line | Functions/ShouldUseConstants |
-+--------------+------------------------------+
-| Analyzers    | :ref:`Analyze`               |
-+--------------+------------------------------+
-
-
-
-.. _should-use-function-use:
-
-Should Use Function Use
-#######################
-
-
-Functioncalls that fall back to global scope should be using 'use function' or be fully namespaced. 
-
-PHP searches for functions in the local namespaces, and in case it fails, makes the same search in the global scope. Anytime a native function is referenced this way, the search (and fail) happens. This slows down the scripts.
-
-The speed bump range from 2 to 8 %, depending on the availability of functions in the local scope. The overall bump is about 1 µs per functioncall, which makes it a micro optimisation until a lot of function calls are made.
-
-Based on [Marco Pivetti tweet](https://twitter.com/Ocramius/status/811504929357660160), and [veewee](http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/) blog post.
-
-.. code-block:: php
-
-   <?php
-   
-   namespace X {
-       use function strtolower as strtolower_aliased;
-       
-       // PHP searches for strtolower in X, fails, then falls back to global scope, succeeds.
-       $a = strtolower($b);
-   
-       // PHP searches for strtolower in global scope, succeeds.
-       $a = \strtolower($b);
-   
-       // PHP searches for strtolower_aliased in global scope, succeeds.
-       $a = \strtolower_aliased($b);
-   }
-   
-   ?>
-
-+--------------+-----------------------+
-| Command Line | Php/ShouldUseFunction |
-+--------------+-----------------------+
-| Analyzers    | :ref:`Performances`   |
-+--------------+-----------------------+
 
 
 
@@ -8444,7 +8872,7 @@ Static Loop
 ###########
 
 
-It looks like the following loops are static : the same code is executed each `time <http://www.php.net/time>`_, without taking into account loop variables.
+It looks like the following loops are static : the same code is executed each time, without taking into account loop variables.
 
 .. code-block:: php
 
@@ -8549,6 +8977,49 @@ Either, this is not a static method (simply remove the static keyword), or repla
 
 
 
+.. _strange-names-for-methods:
+
+Strange Names For Methods
+#########################
+
+
+Those methods should have another name.
+
+Ever wondered why the '__constructor' is never called? Or the '__consturct' ? 
+
+Those errors most often originate from typos, or quick fixes that 'don't require testing'. Some other times, they were badly chosen, or ran into PHP's own reservations. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // The real constructor
+       function __construct() {}
+   
+       // The fake constructor
+       function __constructor() {}
+       
+       // The 'typo'ed' constructor
+       function __consturct() {}
+       
+       // This doesn't clone
+       function clone() {}
+   }
+   
+   ?>
+
+
+Send us your favorite typos on `Exakat.io <https://www.exakat.io/>`_.
+
++--------------+---------------------+
+| Command Line | Classes/StrangeName |
++--------------+---------------------+
+| Analyzers    | :ref:`Wordpress`    |
++--------------+---------------------+
+
+
+
 .. _strict-comparison-with-booleans:
 
 Strict Comparison With Booleans
@@ -8646,7 +9117,7 @@ Strpos Comparison
    ?>
 
 
-It is recommended to check the reslt of `strpos <http://www.php.net/strpos>`_ with === or !==, so as to avoid confusing 0 and false. 
+It is recommended to check the reslt of strpos with === or !==, so as to avoid confusing 0 and false. 
 This analyzer list all the `strpos() <http://www.php.net/strpos>`_ function that are directly compared with == or !=.
 
 +--------------+-----------------------------------------------------------------------------------------------------+
@@ -8785,7 +9256,7 @@ Switch statements hold a number of 'case' that cover all known situations, and a
    ?>
 
 
-Most of the `time <http://www.php.net/time>`_, `switch() <http://php.net/manual/en/control-structures.switch.php>`_ do need a default case, so as to catch the odd situation where the 'value is not what it was expected'. This is a good place to catch unexpected values, to set a default behavior.
+Most of the time, `switch() <http://php.net/manual/en/control-structures.switch.php>`_ do need a default case, so as to catch the odd situation where the 'value is not what it was expected'. This is a good place to catch unexpected values, to set a default behavior.
 
 +--------------+-------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/SwitchWithoutDefault                                                                                   |
@@ -8830,7 +9301,7 @@ Throw Functioncall
 ##################
 
 
-The `throw <http://www.php.net/throw>`_ keyword is excepted to use an exception. Calling a function to prepare that exception before throwing it is possible, but forgetting the new keyword is also possible. 
+The throw keyword is excepted to use an exception. Calling a function to prepare that exception before throwing it is possible, but forgetting the new keyword is also possible. 
 
 .. code-block:: php
 
@@ -8865,7 +9336,7 @@ Throw In Destruct
 #################
 
 
-According to the manual, 'Attempting to `throw <http://www.php.net/throw>`_ an exception from a destructor (called in the `time <http://www.php.net/time>`_ of script termination) causes a fatal error.'
+According to the manual, 'Attempting to throw an exception from a destructor (called in the time of script termination) causes a fatal error.'
 
 The destructor may be called during the lifespan of the script, but it is not certain. If the exception is thrown later, the script may end up with a fatal error. 
 Thus, it is recommended to avoid throwing exceptions within the `__destruct <http://php.net/manual/en/language.oop5.decon.php>`_ method of a class.
@@ -8908,7 +9379,7 @@ Throws An Assignement
 #####################
 
 
-It is possible to `throw <http://www.php.net/throw>`_ an exception, and, in the same `time <http://www.php.net/time>`_, assign this exception to a variable.
+It is possible to throw an exception, and, in the same time, assign this exception to a variable.
 
 .. code-block:: php
 
@@ -8942,9 +9413,9 @@ Timestamp Difference
 ####################
 
 
-`time() <http://www.php.net/time>`_ and `microtime() <http://www.php.net/microtime>`_ shouldn't be used to calculate duration or with durations. 
+time() and `microtime() <http://www.php.net/microtime>`_ shouldn't be used to calculate duration or with durations. 
 
-`time() <http://www.php.net/time>`_ and `microtime() <http://www.php.net/microtime>`_ are subject to variations, depending on system clock variations, such as daylight saving `time <http://www.php.net/time>`_ difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announcec by IERS.
+time() and `microtime() <http://www.php.net/microtime>`_ are subject to variations, depending on system clock variations, such as daylight saving time difference (every spring and fall, one hour variation), or leap seconds, happening on June, 30th or december 31th, as announcec by IERS.
 
 .. code-block:: php
 
@@ -8960,9 +9431,9 @@ Timestamp Difference
    ?>
 
 
-When the difference may be rounded to a larger `time <http://www.php.net/time>`_ unit (rounding the difference to days, or several hours), the variation may be ignored safely.
+When the difference may be rounded to a larger time unit (rounding the difference to days, or several hours), the variation may be ignored safely.
 
-When the difference is very small, it requires a better way to mesure `time <http://www.php.net/time>`_ difference, such as ticks, ext/hrtime, or including a check on the actual `time <http://www.php.net/time>`_ zone (ini_get() with '`date <http://www.php.net/date>`_.timezone').
+When the difference is very small, it requires a better way to mesure time difference, such as ticks, ext/hrtime, or including a check on the actual time zone (`ini_get() <http://www.php.net/ini_get>`_ with 'date.timezone').
 
 +--------------+--------------------------------+
 | Command Line | Structures/TimestampDifference |
@@ -9295,7 +9766,7 @@ Unescaped Variables In Templates
 
 Whenever variables are emitted, they are reported as long as they are not escaped. 
 
-While this is quite a strict rule, it is good to know when variables are not protected at echo `time <http://www.php.net/time>`_. 
+While this is quite a strict rule, it is good to know when variables are not protected at echo time. 
 
 .. code-block:: php
 
@@ -9528,7 +9999,7 @@ Unreachable Code
 
 
 Code may be unreachable, because other instructions prevent its reaching. 
-For example, it be located after `throw <http://www.php.net/throw>`_, return, `exit() <http://www.php.net/exit>`_, `die() <http://www.php.net/die>`_, goto, `break <http://php.net/manual/en/control-structures.break.php>`_ or `continue <http://php.net/manual/en/control-structures.continue.php>`_ : this way, it cannot be reached, as the previous instruction will divert the engine to another part of the code. 
+For example, it be located after throw, return, `exit() <http://www.php.net/exit>`_, `die() <http://www.php.net/die>`_, goto, `break <http://php.net/manual/en/control-structures.break.php>`_ or `continue <http://php.net/manual/en/control-structures.continue.php>`_ : this way, it cannot be reached, as the previous instruction will divert the engine to another part of the code. 
 
 .. code-block:: php
 
@@ -9705,7 +10176,7 @@ Unserialize Second Arg
 ######################
 
 
-Since PHP 7, unserialize() function has a second argument that limits the classes that may be unserialized. In case of a breach, this is limiting the classes accessible from unserialize(). 
+Since PHP 7, `unserialize() <http://www.php.net/unserialize>`_ function has a second argument that limits the classes that may be unserialized. In case of a breach, this is limiting the classes accessible from `unserialize() <http://www.php.net/unserialize>`_. 
 
 On way to exploit unserialize, is to make PHP unserialized the data to an available class, may be one that may be auto-loaded.
 
@@ -10159,6 +10630,8 @@ Unverified Nonce
 ################
 
 
+Those nonces are never checked.
+
 Nonces were created in the code with  wp_nonce_field(), wp_nonce_url() and wp_nonce_create() functions, but they are not verified with wp_verify_nonce() nor check_ajax_referer()
 
 .. code-block:: php
@@ -10201,7 +10674,7 @@ This is especially true for UPDATE, REPLACE, INSERT and DELETE queries.
    ?>
 
 
-See <a href=https://codex.wordpress.org/Class_Reference/wpdb>Class Reference/wpdb</a>.
+See `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 
 +--------------+----------------------+
 | Command Line | Wordpress/UseWpdbApi |
@@ -10217,7 +10690,7 @@ Use === null
 ############
 
 
-It is faster to use === null instead of is_null().
+It is faster to use === null instead of `is_null() <http://www.php.net/is_null>`_.
 
 .. code-block:: php
 
@@ -10254,7 +10727,7 @@ Use Class Operator
 
 Use ::class to hardcode class names, instead of strings.
 
-This is actually faster than strings, which are parsed at executio `time <http://www.php.net/time>`_, while ::class is compiled, making it faster to execute. 
+This is actually faster than strings, which are parsed at executio time, while ::class is compiled, making it faster to execute. 
 
 It is also capable to handle aliases, making the code easier to maintain. 
 
@@ -10329,8 +10802,8 @@ Use Instanceof
 ##############
 
 
-The `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is a better alternative to is_object(). `instanceof <http://php.net/manual/en/language.operators.type.php>`_ checks for an variable to be of a class or its parents or the interfaces it implements. 
-Once `instanceof <http://php.net/manual/en/language.operators.type.php>`_ has been used, the actual attributes available (properties, constants, methods) are known, unlike with is_object().
+The `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is a better alternative to `is_object() <http://www.php.net/is_object>`_. `instanceof <http://php.net/manual/en/language.operators.type.php>`_ checks for an variable to be of a class or its parents or the interfaces it implements. 
+Once `instanceof <http://php.net/manual/en/language.operators.type.php>`_ has been used, the actual attributes available (properties, constants, methods) are known, unlike with `is_object() <http://www.php.net/is_object>`_.
 
 Last, `instanceof <http://php.net/manual/en/language.operators.type.php>`_ may be upgraded to Typehint, by moving it to the method signature. 
 
@@ -10365,9 +10838,9 @@ Last, `instanceof <http://php.net/manual/en/language.operators.type.php>`_ may b
    ?>
 
 
-`instanceof <http://php.net/manual/en/language.operators.type.php>`_ and is_object() may not be always interchangeable. Consider using is_string(), is_integer() or is_scalar(), in particular instead of !is_object().
+`instanceof <http://php.net/manual/en/language.operators.type.php>`_ and `is_object() <http://www.php.net/is_object>`_ may not be always interchangeable. Consider using `is_string() <http://www.php.net/is_string>`_, `is_integer() <http://www.php.net/is_integer>`_ or `is_scalar() <http://www.php.net/is_scalar>`_, in particular instead of !`is_object() <http://www.php.net/is_object>`_.
 
-The `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is also faster than the is_object() functioncall.
+The `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is also faster than the `is_object() <http://www.php.net/is_object>`_ functioncall.
 
 +--------------+-------------------------------+
 | Command Line | Classes/UseInstanceof         |
@@ -10467,9 +10940,9 @@ Use Pathinfo
 ############
 
 
-Use pathinfo() function instead of string manipulations.
+Use `pathinfo() <http://www.php.net/pathinfo>`_ function instead of string manipulations.
 
-pathinfo() is more efficient and readable and string functions.
+`pathinfo() <http://www.php.net/pathinfo>`_ is more efficient and readable and string functions.
 
 .. code-block:: php
 
@@ -10487,7 +10960,7 @@ pathinfo() is more efficient and readable and string functions.
    ?>
 
 
-When the path contains UTF-8 characters, pathinfo() may strip them. There, string functions are necessary.
+When the path contains UTF-8 characters, `pathinfo() <http://www.php.net/pathinfo>`_ may strip them. There, string functions are necessary.
 
 +--------------+-----------------+
 | Command Line | Php/UsePathinfo |
@@ -10554,7 +11027,7 @@ Use System Tmp
 ##############
 
 
-It is recommended to avoid hardcoding the tmp `file <http://www.php.net/file>`_. It is better to rely on the system's tmp folder, which is accessible with `sys_get_temp_dir() <http://php.net/manual/en/function.sys-get-temp-dir.php>`_.
+It is recommended to avoid hardcoding the tmp file. It is better to rely on the system's tmp folder, which is accessible with `sys_get_temp_dir() <http://www.php.net/sys_get_temp_dir>`_.
 
 .. code-block:: php
 
@@ -10587,7 +11060,21 @@ Use With Fully Qualified Name
 #############################
 
 
+Use statement doesn't require a fully qualified name.
+
 PHP manual recommends not to use fully qualified name (starting with \) when using the 'use' statement : they are "the leading backslash is unnecessary and not recommended, as import names must be fully qualified, and are not processed relative to the current namespace".
+
+.. code-block:: php
+
+   <?php
+   
+   // Recommended way to write a use statement.
+   use  A\B\C\D as E;
+   
+   // No need to use the initial \
+   use \A\B\C\D as F;
+   
+   ?>
 
 +--------------+---------------------------------------------------------------+
 | Command Line | Namespaces/UseWithFullyQualifiedNS                            |
@@ -10602,6 +11089,8 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
 Use Wordpress Functions
 #######################
 
+
+Always use Wordpress functions instead of native PHP ones.
 
 Wordpress provides a lot of functions, that replace PHP natives one. It is recommended to used them.
 
@@ -10647,10 +11136,10 @@ Use const
 #########
 
 
-The const keyword may be used to define constant, just like the define() function. 
+The const keyword may be used to define constant, just like the `define() <http://www.php.net/define>`_ function. 
 
-When defining a constant, it is recommended to use 'const' when the features of the constant are not dynamical (name or value are known at compile `time) <http://www.php.net/time>`_. 
-This way, constant will be defined at compile `time <http://www.php.net/time>`_, and not at execution `time <http://www.php.net/time>`_. 
+When defining a constant, it is recommended to use 'const' when the features of the constant are not dynamical (name or value are known at compile time). 
+This way, constant will be defined at compile time, and not at execution time. 
 
 .. code-block:: php
 
@@ -10663,7 +11152,7 @@ This way, constant will be defined at compile `time <http://www.php.net/time>`_,
    ?>
 
 
-define() function is useful when the constant is not known at compile `time <http://www.php.net/time>`_, or when case sensitivity is necessary.
+`define() <http://www.php.net/define>`_ function is useful when the constant is not known at compile time, or when case sensitivity is necessary.
 
 .. code-block:: php
 
@@ -10690,7 +11179,7 @@ Use password_hash()
 ###################
 
 
-PHP 5.5 introduced password_hash() and password_check() to replace the use of crypt() to check password.
+PHP 5.5 introduced `password_hash() <http://www.php.net/password_hash>`_ and password_check() to replace the use of `crypt() <http://www.php.net/crypt>`_ to check password.
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Php/Password55                                                                                          |
@@ -10706,11 +11195,11 @@ Use random_int()
 ################
 
 
-`rand() <http://www.php.net/rand>`_ and `mt_rand() <http://www.php.net/mt_rand>`_ should be replaced with `random_int() <http://www.php.net/random_int>`_.
+`rand() <http://www.php.net/rand>`_ and `mt_rand() <http://www.php.net/mt_rand>`_ should be replaced with random_int().
 
 At worse, `rand() <http://www.php.net/rand>`_ should be replaced with `mt_rand() <http://www.php.net/mt_rand>`_, which is a drop-in replacement and `srand() <http://www.php.net/srand>`_ by `mt_srand() <http://www.php.net/mt_srand>`_. 
 
-`random_int() <http://www.php.net/random_int>`_ replaces `rand() <http://www.php.net/rand>`_, and has no seeding function like `srand() <http://www.php.net/srand>`_.
+random_int() replaces `rand() <http://www.php.net/rand>`_, and has no seeding function like `srand() <http://www.php.net/srand>`_.
 
 .. code-block:: php
 
@@ -10734,42 +11223,14 @@ At worse, `rand() <http://www.php.net/rand>`_ should be replaced with `mt_rand()
    ?>
 
 
-Since PHP 7, `random_int() <http://www.php.net/random_int>`_ along with `random_bytes() <http://www.php.net/random_bytes>`_, provides cryptographically secure pseudo-random bytes, which are good to be used
-when security is involved. `openssl_random_pseudo_bytes() <http://www.php.net/openssl_random_pseudo_bytes>`_ may be used when the OpenSSL extension is available.
+Since PHP 7, random_int() along with random_bytes(), provides cryptographically secure pseudo-random bytes, which are good to be used
+when security is involved. openssl_random_pseudo_bytes() may be used when the OpenSSL extension is available.
 
 +--------------+------------------------------------------------------------------------------------+
 | Command Line | Php/BetterRand                                                                     |
 +--------------+------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`,:ref:`Security`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
 +--------------+------------------------------------------------------------------------------------+
-
-
-
-.. _use-stdclass:
-
-Use stdClass
-############
-
-
-stdClass is the default class for PHP. It is instantiated when PHP needs to return a object, but no class is specifically available.
-
-It is recommended to avoid instantiating this class, nor use it is any way.
-
-.. code-block:: php
-
-   <?php
-   
-   $json = '{a:1,b:2,c:3}';
-   $object = json_decode($json);
-   // $object is a stdClass, as returned by json_decode
-   
-   ?>
-
-+--------------+-----------------+
-| Command Line | Php/UseStdclass |
-+--------------+-----------------+
-| Analyzers    | :ref:`Analyze`  |
-+--------------+-----------------+
 
 
 
@@ -10799,10 +11260,10 @@ In special situations, variables may be used once :
 
 + PHP predefined variables, as they are already initialized. They are omitted in this analyze.
 + Interface function's arguments, since the function has no body; They are omitted in this analyze.
-+ Dynamically created variables ($$x, ${$this->y} or also using extract), as they are runtime values and can't be determined at static code `time <http://www.php.net/time>`_. They are reported for manual review.
++ Dynamically created variables ($$x, ${$this->y} or also using extract), as they are runtime values and can't be determined at static code time. They are reported for manual review.
 + Dynamically included files will provide in-scope extra variables.
 
-The current analyzer `count <http://www.php.net/count>`_ variables at the application level, and not at a method scope level.
+The current analyzer count variables at the application level, and not at a method scope level.
 
 +--------------+----------------------------+
 | Command Line | Variables/VariableUsedOnce |
@@ -11010,7 +11471,7 @@ Useless Constructor
 ###################
 
 
-Class constructor that have `empty <http://www.php.net/empty>`_ bodies are useless. They may be removed.
+Class constructor that have empty bodies are useless. They may be removed.
 
 +--------------+----------------------------+
 | Command Line | Classes/UselessConstructor |
@@ -11343,7 +11804,7 @@ Uses Default Values
 ###################
 
 
-Default values are provided to methods so as to make it convenient to use. However, with new versions, those values may change. For example, in PHP 5.4, htmlentities() switched from Latin1 to UTF-8 default encoding.
+Default values are provided to methods so as to make it convenient to use. However, with new versions, those values may change. For example, in PHP 5.4, `htmlentities() <http://www.php.net/htmlentities>`_ switched from Latin1 to UTF-8 default encoding.
 
 .. code-block:: php
 
@@ -11566,7 +12027,7 @@ It is recommended to use them, instead of writing queries with concatenations.
    ?>
 
 
-See <a href=https://codex.wordpress.org/Class_Reference/wpdb>Class Reference/wpdb</a>.
+See `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 
 +--------------+-------------------------+
 | Command Line | Wordpress/WpdbBestUsage |
@@ -11582,9 +12043,9 @@ Wpdb Prepare Or Not
 ###################
 
 
+Always use $wpdb->prepare() when variables are used in the SQL query.
+
 When using $wpdb, it is recommended to use directly the query() method when the SQL is not using variables.
-
-
 
 .. code-block:: php
 
@@ -11652,6 +12113,8 @@ It is recommended to check the signature of the methods, and fix the arguments.
 Wrong Optional Parameter
 ########################
 
+
+Wrong placement of optional parameters.
 
 PHP parameters are optional when they defined with a default value, like this : 
 
@@ -11809,7 +12272,7 @@ __toString() Throws Exception
 #############################
 
 
-Magical method `__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ can't `throw <http://www.php.net/throw>`_ exceptions, according to the world.
+Magical method `__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ can't throw exceptions, according to the world.
 
 +--------------+------------------------------------+
 | Command Line | Structures/toStringThrowsException |
@@ -11841,7 +12304,23 @@ error_reporting() With Integers
 ###############################
 
 
-Using named constants with error_reporting is strongly encouraged to ensure compatibility for future versions. As error levels are added, the range of integers increases, so older integer-based error levels will not always behave as expected. (Adapted from the documentation)
+Using named constants with error_reporting is strongly encouraged to ensure compatibility for future versions. As error levels are added, the range of integers increases, so older integer-based error levels will not always behave as expected. (Adapted from the documentation).
+
+.. code-block:: php
+
+   <?php
+   
+   // This is ready for PHP next version
+   error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE & ~E_WARNING);
+   
+   // This is not ready for PHP next version
+   error_reporting(2047);
+   
+   // -1 and 0 are omitted, as they will be valid even is constants changes.
+   error_reporting(-1);
+   error_reporting(0);
+   
+   ?>
 
 +--------------+--------------------------------------+
 | Command Line | Structures/ErrorReportingWithInteger |
@@ -11959,7 +12438,7 @@ ext/fdf
 #######
 
 
-Extension ext/fdf
+Extension ext/fdf.
 
 +--------------+------------------------------------------+
 | Command Line | Extensions/Extfdf                        |
@@ -12055,7 +12534,7 @@ fopen() Mode
 ############
 
 
-`fopen <http://www.php.net/fopen>`_ has a few modes, as described in the documentation : 'r', 'r+', for reading;  'w', 'w+' for writing; 'a', 'a+' for appending; 'x', 'x+' for modifying; 'c', 'c+' for writing and locking, 't' for text files and windows only.
+fopen has a few modes, as described in the documentation : 'r', 'r+', for reading;  'w', 'w+' for writing; 'a', 'a+' for appending; 'x', 'x+' for modifying; 'c', 'c+' for writing and locking, 't' for text files and windows only.
 An optional 'b' may be used to make the `fopen() <http://www.php.net/fopen>`_ call more portable and binary safe. 
 
 Any other values are not understood by PHP.
@@ -12074,7 +12553,7 @@ func_get_arg() Modified
 #######################
 
 
-func_get_arg() and func_get_args() used to report the calling value of the argument until PHP 7. Since PHP 7, it is reporting the value of the argument at calling `time <http://www.php.net/time>`_, which may have been modified by a previous instruction. 
+`func_get_arg() <http://www.php.net/func_get_arg>`_ and `func_get_args() <http://www.php.net/func_get_args>`_ used to report the calling value of the argument until PHP 7. Since PHP 7, it is reporting the value of the argument at calling time, which may have been modified by a previous instruction. 
 
 .. code-block:: php
 
@@ -12120,7 +12599,7 @@ include_once() and require_once() functions should be avoided for performances r
    ?>
 
 
-Try using autoload for loading classes, or use include() or require() and make it possible to include several times the same `file <http://www.php.net/file>`_ without errors.
+Try using autoload for loading classes, or use include() or require() and make it possible to include several times the same file without errors.
 
 +--------------+----------------------+
 | Command Line | Structures/OnceUsage |
@@ -12179,7 +12658,7 @@ parse_str() Warning
 ###################
 
 
-The parse_str() function parses a query string and assigns the resulting variables to the local scope. This may create a unexpected number of variables, and even overwrite the existing one.
+The `parse_str() <http://www.php.net/parse_str>`_ function parses a query string and assigns the resulting variables to the local scope. This may create a unexpected number of variables, and even overwrite the existing one.
 
 .. code-block:: php
 
@@ -12196,7 +12675,7 @@ The parse_str() function parses a query string and assigns the resulting variabl
    ?>
 
 
-Always use an `empty <http://www.php.net/empty>`_ variable a second parameter to parse_str(), so as to collect the incoming values, and then, filter them in that array.
+Always use an empty variable a second parameter to `parse_str() <http://www.php.net/parse_str>`_, so as to collect the incoming values, and then, filter them in that array.
 
 +--------------+-------------------------------------------------------------------------------------------------------+
 | Command Line | Security/parseUrlWithoutParameters                                                                    |
@@ -12216,7 +12695,7 @@ preg_match_all() Flag
 
 preg_match_all() has an option to configure the structure of the results : it is either by capturing parenthesis (by default), or by result sets. 
 
-The second option is the most interesting when the following `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loop has to manipulate several captured strings at the same `time <http://www.php.net/time>`_. No need to use an index in the first array and use it in the other arrays.
+The second option is the most interesting when the following `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ loop has to manipulate several captured strings at the same time. No need to use an index in the first array and use it in the other arrays.
 
 .. code-block:: php
 
@@ -12258,7 +12737,7 @@ preg_replace With Option e
 
 `preg_replace() <http://www.php.net/preg_replace>`_ supported the /e option until PHP 7.0. It allowed the use of `eval() <http://www.php.net/eval>`_'ed expression as replacement. This has been dropped in PHP 7.0, for security reasons.
 
-`preg_replace() <http://www.php.net/preg_replace>`_ with /e option may be replaced with preg_replace_callback() and a closure, or `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_ and an array of closures.
+`preg_replace() <http://www.php.net/preg_replace>`_ with /e option may be replaced with preg_replace_callback() and a closure, or preg_replace_callback_array() and an array of closures.
 
 .. code-block:: php
 
@@ -12328,7 +12807,7 @@ var_dump()... Usage
 ###################
 
 
-var_dump(), print_r() or var_export() should not be left in any production code. They are debugging functions.
+`var_dump() <http://www.php.net/var_dump>`_, `print_r() <http://www.php.net/print_r>`_ or `var_export() <http://www.php.net/var_export>`_ should not be left in any production code. They are debugging functions.
 
 .. code-block:: php
 
@@ -12346,7 +12825,7 @@ var_dump(), print_r() or var_export() should not be left in any production code.
    ?>
 
 
-They may be tolerated during development `time <http://www.php.net/time>`_, but must be removed so as not to have any chance to be run in production.
+They may be tolerated during development time, but must be removed so as not to have any chance to be run in production.
 
 +--------------+-------------------------------------------------------------------------------------------+
 | Command Line | Structures/VardumpUsage                                                                   |

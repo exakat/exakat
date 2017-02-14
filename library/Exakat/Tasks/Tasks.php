@@ -85,11 +85,9 @@ abstract class Tasks {
         if ($this->logname === self::LOG_AUTONAMING) {
             $a = get_class($this);
             $this->logname = strtolower(substr($a, strrpos($a, '\\') + 1));
-            display("autolog log with $this->logname\n");
         }
                 
         if ($this->logname != self::LOG_NONE) {
-            display("init log with $this->logname\n");
             $this->log = new Log($this->logname,
                                  $this->config->projects_root.'/projects/'.$this->config->project);
         }

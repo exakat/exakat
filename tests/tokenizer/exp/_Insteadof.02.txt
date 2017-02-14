@@ -1,3 +1,4 @@
+Whole
 Label : PROJECT
   ./tests/tokenizer/source/_Insteadof.02.php
   Label : FILE
@@ -18,9 +19,9 @@ Label : PROJECT
                 Label : ELEMENT
                   insteadof
                   Label : INSTEADOF
-                    g
-                  Label : INSTEADOF
                     f
+                  Label : INSTEADOF
+                    g
                   Label : NAME
                     ::
                     Label : CLASS

@@ -38,7 +38,7 @@ Currently, Docker installation only ships with one PHP version (7.0).
 
 ::
 
-    git pull exakat/exakat
+    docker pull exakat/exakat
 
 * Run exakat : 
 
@@ -201,7 +201,7 @@ Extra PHP-CLI versions allow more checks on the code. They only need to have the
 
 Exakat recommends PHP 7.1.0 (or latest version) to run Exakat. We also recommend the installation of PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.1 and 7.2 (aka php-src master).
 
-To install easily various versions of PHP, use the dotdeb repository. Follow the `dotdeb instruction <https://www.dotdeb.org/instructions/>`_.
+To install easily various versions of PHP, use the ondrej or dotdeb repository. Check `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_ or the `dotdeb instruction <https://www.dotdeb.org/instructions/>`_.
 
 Exakat 
 ######

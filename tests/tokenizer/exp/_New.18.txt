@@ -44,7 +44,7 @@ Label : PROJECT
                     'b'
               Label : NAME
                 a
-          Label : DEFINITION, DEFINITION
+          Label : DEFINITION
             C
           Label : NAME
             C

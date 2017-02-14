@@ -44,15 +44,17 @@ Label : PROJECT
             Label : ELEMENT
               B
             Label : ELEMENT
+              [
+              Label : INDEX
+                'D'
+              Label : VARIABLE
+                $b
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'D'
-                  Label : VARIABLE
-                    $b
+                  Void
               Label : NAME
                 echo
             Label : ELEMENT

@@ -39,7 +39,8 @@ class AlreadyCaught extends Analyzer {
              ->isMore('rank', 'rank')
              ->outIs('CLASS')
              ->classDefinition()
-             ->goToAllParents()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('EXTENDS')
              ->samePropertyAs('fullnspath', 'fnp')
              ->back('first');
         $this->prepareQuery();

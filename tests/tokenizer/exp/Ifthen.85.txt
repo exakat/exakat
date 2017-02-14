@@ -22,11 +22,13 @@ Label : PROJECT
           Label : THEN
             ;
             Label : ELEMENT
+              D
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  D
+                  Void
               Label : NAME
                 echo
             Label : ELEMENT

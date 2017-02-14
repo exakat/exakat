@@ -12,11 +12,13 @@ Label : PROJECT
           Label : BLOCK
             ;
             Label : ELEMENT
+              $e
+            Label : ELEMENT
               <?=
               Label : ARGUMENTS
                 <?=
                 Label : ARGUMENT
-                  $e
+                  Void
               Label : NAME
                 <?=
           Label : SOURCE

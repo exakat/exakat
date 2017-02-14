@@ -1,0 +1,286 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Use.40.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              use
+              Label : USE
+                \
+                Label : DEFINITION
+                  b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    b
+                Label : DEFINITION
+                  b
+                Label : DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
+                Label : DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    e
+                Label : DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
+                Label : DEFINITION, DEFINITION, DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
+                Label : DEFINITION, DEFINITION, DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    e
+                Label : SUBNAME
+                  a
+                Label : SUBNAME
+                  b
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                new
+                Label : NEW
+                  \
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    \
+                    Label : SUBNAME
+                      b
+                    Label : SUBNAME
+                      d
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                new
+                Label : NEW
+                  \
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    \
+                    Label : SUBNAME
+                      b
+                    Label : SUBNAME
+                      e
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $d
+              Label : RIGHT
+                new
+                Label : NEW
+                  b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    b
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                new
+                Label : NEW
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
+            Label : ELEMENT
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                new
+                Label : NEW
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    e
+            Label : ELEMENT
+              var_dump
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  instanceof
+                  Label : CLASS
+                    \
+                    Label : SUBNAME
+                      b
+                    Label : SUBNAME
+                      d
+                  Label : VARIABLE
+                    $c
+              Label : NAME
+                var_dump
+            Label : ELEMENT
+              var_dump
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  instanceof
+                  Label : CLASS
+                    b
+                  Label : VARIABLE
+                    $d
+              Label : NAME
+                var_dump
+          Label : NAME
+            c
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : DEFINITION
+                \
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
+              Label : DEFINITION
+                \
+                Label : SUBNAME
+                  b
+                Label : SUBNAME
+                  d
+              Label : DEFINITION
+                \
+                Label : SUBNAME
+                  b
+                Label : SUBNAME
+                  d
+              Label : DEFINITION, DEFINITION
+                \
+                Label : SUBNAME
+                  b
+                Label : SUBNAME
+                  d
+              Label : NAME
+                d
+              Label : DEFINITION
+                d
+          Label : NAME
+            \
+            Label : SUBNAME
+              a
+            Label : SUBNAME
+              b
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : DEFINITION
+                b
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  b
+              Label : DEFINITION
+                b
+              Label : DEFINITION
+                \
+                Label : DEFINITION
+                  b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    b
+                Label : DEFINITION
+                  b
+                Label : DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
+                Label : DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    e
+                Label : DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
+                Label : DEFINITION, DEFINITION, DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
+                Label : DEFINITION, DEFINITION, DEFINITION, DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    e
+                Label : SUBNAME
+                  a
+                Label : SUBNAME
+                  b
+              Label : NAME
+                b
+          Label : NAME
+            a

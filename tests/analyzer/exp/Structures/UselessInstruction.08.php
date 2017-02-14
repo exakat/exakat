@@ -2,6 +2,7 @@
 
 $expected     = array('W');
 
-$expected_not = array();
+$expected_not = array('V',
+                      'E');
 
 ?>

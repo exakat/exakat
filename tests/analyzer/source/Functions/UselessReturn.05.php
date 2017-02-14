@@ -10,5 +10,16 @@
     function usableReturn() {
     }
 
+class x {
+    function __construct($inX) {
+        return false;
+    }
+}
+
+trait t {
+    function __clone() {
+        return $this;
+    }
+}
 
 ?>

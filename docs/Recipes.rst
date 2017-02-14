@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 06 Feb 2017 18:08:39 +0000
-.. comment: Generation hash : fcdcceffa7ee743ef68597d256524ed328609c24
+.. comment: Generation date : Tue, 14 Feb 2017 08:41:15 +0000
+.. comment: Generation hash : 5f00dc2792315dc9ade2ee4d316f8e597b9b881d
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Total : 284 analysis
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
 * :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
-* :ref:`<?= usage <<?=-usage>`
+* :ref:`<?= Usage <<?=-usage>`
 * :ref:`Abstract Static Methods <abstract-static-methods>`
 * :ref:`Access Protected Structures <access-protected-structures>`
 * :ref:`Accessing Private <accessing-private>`
@@ -84,11 +84,12 @@ Total : 284 analysis
 * :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
 * :ref:`Always Positive Comparison <always-positive-comparison>`
-* :ref:`Ambiguous Index <ambiguous-index>`
+* :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Assigned Twice <assigned-twice>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
+* :ref:`Avoid Using stdClass <avoid-using-stdclass>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
 * :ref:`Bail Out Early <bail-out-early>`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -234,7 +235,7 @@ Total : 284 analysis
 * :ref:`Property/Variable Confusion <property/variable-confusion>`
 * :ref:`Queries In Loops <queries-in-loops>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
-* :ref:`Redefined Constants <redefined-constants>`
+* :ref:`Redefined Class Constants <redefined-class-constants>`
 * :ref:`Redefined Default <redefined-default>`
 * :ref:`Relay Function <relay-function>`
 * :ref:`Repeated print() <repeated-print()>`
@@ -248,9 +249,9 @@ Total : 284 analysis
 * :ref:`Should Make Alias <should-make-alias>`
 * :ref:`Should Make Ternary <should-make-ternary>`
 * :ref:`Should Typecast <should-typecast>`
-* :ref:`Should Use $this <should-use-$this>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
 * :ref:`Should Use Constants <should-use-constants>`
+* :ref:`Should Use Local Class <should-use-local-class>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Silently Cast Integer <silently-cast-integer>`
 * :ref:`Static Loop <static-loop>`
@@ -314,7 +315,6 @@ Total : 284 analysis
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
 * :ref:`Use random_int() <use-random\_int()>`
-* :ref:`Use stdClass <use-stdclass>`
 * :ref:`Used Once Variables (In Scope) <used-once-variables-(in-scope)>`
 * :ref:`Used Once Variables <used-once-variables>`
 * :ref:`Useless Abstract Class <useless-abstract-class>`
@@ -412,7 +412,7 @@ Total : 52 analysis
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Methodcall On New <methodcall-on-new>`
-* :ref:`Mixed Keys <mixed-keys>`
+* :ref:`Mixed Keys Arrays <mixed-keys-arrays>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.4 <new-functions-in-php-5.4>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
@@ -470,7 +470,7 @@ Total : 48 analysis
 * :ref:`List With Appends <list-with-appends>`
 * :ref:`List With Keys <list-with-keys>`
 * :ref:`Magic Visibility <magic-visibility>`
-* :ref:`Mixed Keys <mixed-keys>`
+* :ref:`Mixed Keys Arrays <mixed-keys-arrays>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
 * :ref:`New Functions In PHP 5.5 <new-functions-in-php-5.5>`
 * :ref:`New Functions In PHP 5.6 <new-functions-in-php-5.6>`
@@ -622,7 +622,7 @@ Total : 34 analysis
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
-* :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
+* :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Use password_hash() <use-password\_hash()>`
 * :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
@@ -671,7 +671,7 @@ Total : 45 analysis
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
-* :ref:`Setlocale Needs Constants <setlocale-needs-constants>`
+* :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
 * :ref:`Use Nullable Type <use-nullable-type>`
 * :ref:`Use password_hash() <use-password\_hash()>`
@@ -807,10 +807,12 @@ Total : 19 analysis
 Wordpress
 +++++++++
 
-Total : 8 analysis
+Total : 10 analysis
 
+* :ref:`Avoid Non Wordpress Globals <avoid-non-wordpress-globals>`
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
+* :ref:`Strange Names For Methods <strange-names-for-methods>`
 * :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
 * :ref:`Unverified Nonce <unverified-nonce>`
 * :ref:`Use $wpdb Api <use-$wpdb-api>`

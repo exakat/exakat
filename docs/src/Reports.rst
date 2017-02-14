@@ -141,15 +141,16 @@ Clustergrammer is a visualisation tool that may be found online. After generatio
 Inventories
 --------------
 
-Inventories collects straight values from the code. Straight values are literals : strings, integers, floats, heredoc; Structures names, : classes, interfaces, traits, variables, fonctions, constants, namespaces; and special values : etc) and special messages : error messages, compared literals. 
-It provides the identified value, the file and line where it is present. 
+The inventories report collects literals values from the code. It provides the value, the file and line where it is present. 
+
+Literal values are hardcoded values : strings, integers, floats, heredoc; Structures names, : classes, interfaces, traits, variables, fonctions, constants, namespaces; and special values : etc) and special messages : error messages, compared literals. 
 
 Inventories are great to review spelling, check unusual names and frequencies. 
 
 The result is a directory, containing CSV files. Empty results creates files containing only the headers.
 
 PhpCompilation
-----------------
+---------------
 
 PhpCompilation produces a list of php.ini compilation directives to compile a PHP binary tailored for the code. 
 

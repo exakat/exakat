@@ -32,13 +32,13 @@ class UselessReturn extends Analyzer {
              ->hasClassTrait()
 
              ->outIs('NAME')
-             ->codeIs(array('__construct', '__destruct', '__set', '__clone', '__unset', '__wakeup'), true)
+             ->codeIs(array('__construct', '__destruct', '__set', '__clone', '__unset', '__wakeup'))
              ->inIs('NAME')
 
              // returning null or void is OK to terminate the function
              // May be spot this at other level than 1 of the function (this means after a test or a special branch)
              ->outIs('BLOCK')
-             ->atomInside('Return')
+             ->atomInsideNoAnonymous('Return')
              ->outIs('RETURN')
              ->atomIsNot('Void')
              ->back('first');

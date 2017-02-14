@@ -33,15 +33,16 @@ abstract class Reports {
     
     static public $FORMATS        = array('Ambassador', 'Devoops', 
                                           'Text', 'Xml', 'Uml',
-                                          'PhpConfiguration', 'PhpCompilation',
+                                          'PhpConfiguration', 'PhpCompilation', 
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
                                           'ZendFramework',  'RadwellCode',
                                           'FacetedJson', 'Json', 'OnepageJson', 
+                                          'Codacy',
                                           );
 
-    protected $themesToShow = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+    protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 
                                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
-                                    '"Dead code"', 'Security', 'Analyze');
+                                    '"Dead code"', 'Security', 'Analyze', 'Inventories');
 
     private $count = 0;
 

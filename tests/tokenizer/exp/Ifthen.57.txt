@@ -16,31 +16,37 @@ Label : PROJECT
             Label : ELEMENT
               A
             Label : ELEMENT
+              $b
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  $b
+                  Void
               Label : NAME
                 echo
             Label : ELEMENT
               B
             Label : ELEMENT
+              $c
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  $c
+                  Void
               Label : NAME
                 echo
             Label : ELEMENT
               C
             Label : ELEMENT
+              $d
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  $d
+                  Void
               Label : NAME
                 echo
             Label : ELEMENT

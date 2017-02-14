@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class NoGlobalModification extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsModified');
+        return array('Variables/IsModified',
+                     'Arrays/IsModified');
     }
 
     public function analyze() {
@@ -41,7 +42,7 @@ class NoGlobalModification extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->goToFunction()
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInsideNoAnonymous('Variable')
              ->samePropertyAs('code', 'name')
              ->analyzerIs('Variables/IsModified')
              ->back('first');

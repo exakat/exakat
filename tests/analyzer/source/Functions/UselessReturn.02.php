@@ -1,10 +1,10 @@
 <?php
 
 class x {
-    function __constructor() {
+    function __construct() {
     }
 
-    function __destructor() {
+    function __destruct() {
     }
     
     function usableReturn() {

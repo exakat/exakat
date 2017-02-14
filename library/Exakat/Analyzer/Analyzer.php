@@ -74,7 +74,7 @@ abstract class Analyzer {
     
     const PHP_VERSION_ANY = 'Any';
     
-    const CASE_SENSITIVE = true;
+    const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
 
     static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Property', 'Array');
@@ -340,6 +340,9 @@ GREMLIN;
             $query = "g.addV('Analysis').property('analyzer','{$this->analyzerQuoted}')";
             $res = $this->query($query);
             
+            if (!isset($res[0])) {
+                throw new GremlinException();
+            }
             $this->analyzerId = $res[0]->id;
         }
     }
@@ -557,6 +560,13 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     
     public function atomInside($atom) {
         $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $this->addMethod($gremlin);
+        
+        return $this;
+    }
+
+    public function atomInsideNoAnonymous($atom) {
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Function", "Class")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;

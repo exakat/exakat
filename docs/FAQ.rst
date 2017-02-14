@@ -13,6 +13,7 @@ Summary
 * `Can I run exakat on local code?`_
 * `I get the error 'The executable 'ansible-playbook' Vagrant is trying to run was not found'`_
 * `Can I run exakat on Windows?`_
+* `Does exakat send my code to a central server?`_
 
 
 `I need special command to get my code`_
@@ -102,3 +103,9 @@ Currently, Windows is not supported, though it might be some day.
 
 Until then, you may run Exakat with Vagrant, or with Docker. 
 
+`Does exakat send my code to a central server?`_
+-------------------------------------------------
+
+When run from the sources, Exakat has everything it needs to fulfill its mission. There is no central server that does the job, and requires the transmission of the code.
+
+When running an audit on the Saas service of Exakat, the code is processed on our servers. 

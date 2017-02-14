@@ -45,6 +45,12 @@ class ShouldPreprocess extends Analyzer {
                                              .filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) }.count().is(eq(0)) )')
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
+        
+        $functionListNoArray = array_diff($functionList, array('\\array', '\\defined', '\\error_reporting', '\\extension_loaded', '\\get_defined_vars', '\\print', '\\echo', '\\set_time_limit'));
+        
+        $this->atomFunctionIs($functionListNoArray)
+             ->raw('where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant", true)).count().is(eq(0)) )');
+        $this->prepareQuery();
 
         $this->atomFunctionIs(array('\\join', '\\explode', '\\implode', '\\split'))
              ->noAtomInside($dynamicAtoms)

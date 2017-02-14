@@ -27,17 +27,15 @@ Label : PROJECT
                 C
             Label : ELEMENT
               D
-            Label : ELEMENT
-              ->
-              Label : METHOD
-                F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  F
-              Label : OBJECT
-                $b
         Label : ELEMENT
-          Void
+          ->
+          Label : METHOD
+            F
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              F
+          Label : OBJECT
+            $b

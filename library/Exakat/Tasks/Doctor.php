@@ -63,6 +63,7 @@ class Doctor extends Tasks {
         $stats['exakat']['version']    = Exakat::VERSION;
         $stats['exakat']['build']      = Exakat::BUILD;
         $stats['exakat']['exakat.ini'] = $this->array2list($this->config->configFiles);
+        $stats['exakat']['reports']    = $this->array2list($this->config->project_reports);
 
         // check for PHP
         $stats['PHP']['binary']         = phpversion();
@@ -203,8 +204,10 @@ class Doctor extends Tasks {
         if ($this->config->project !== 'default') {
             $stats['project']['name']             = $this->config->project_name;
             $stats['project']['url']              = $this->config->project_url;
+            $stats['project']['included dirs']    = $this->array2line($this->config->include_dirs);
             $stats['project']['ignored dirs']     = $this->array2line($this->config->ignore_dirs);
             $stats['project']['file extensions']  = $this->array2line($this->config->file_extensions);
+            $stats['project']['analyzers']        = $this->array2line($this->config->analyzers);
         }
 
         return $stats;

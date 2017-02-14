@@ -1,7 +1,7 @@
 <?php
 
 $expected     = array('if(!defined(\'B\')) { /**/ } ', 
-                      'if(ini_get_all( )) { /**/ } ',
+                      'if(getrandmax( )) { /**/ } ',
                       'if(srand(\'C\')) { /**/ } ', 
                       'if(strtolower(\'C\')) { /**/ } ');
 

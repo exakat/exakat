@@ -98,14 +98,6 @@ Label : PROJECT
                 public
           Label : DEFINITION
             MyHelloWorld
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              MyHelloWorld
-          Label : DEFINITION
-            MyHelloWorld
           Label : NAME
             MyHelloWorld
         Label : ELEMENT

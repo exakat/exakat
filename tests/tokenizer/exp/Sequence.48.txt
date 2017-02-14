@@ -8,21 +8,19 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'b'
-            Label : ARGUMENT
-              "c"
-          Label : NAME
-            a
-        Label : ELEMENT
           print
           Label : ARGUMENTS
             )
             Label : ARGUMENT
-              Void
+              a
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'b'
+                Label : ARGUMENT
+                  "c"
+              Label : NAME
+                a
           Label : NAME
             print
         Label : ELEMENT

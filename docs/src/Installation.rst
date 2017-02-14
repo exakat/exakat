@@ -38,7 +38,7 @@ Currently, Docker installation only ships with one PHP version (7.0).
 
 ::
 
-    git pull exakat/exakat
+    docker pull exakat/exakat
 
 * Run exakat : 
 

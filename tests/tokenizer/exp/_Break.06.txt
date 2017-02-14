@@ -12,11 +12,9 @@ Label : PROJECT
           Label : BLOCK
             ;
             Label : ELEMENT
-              1
-            Label : ELEMENT
               break
               Label : BREAK
-                Void
+                1
             Label : ELEMENT
               A
           Label : SOURCE

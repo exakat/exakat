@@ -8,14 +8,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'C'
-          Label : NAME
-            B
-        Label : ELEMENT
           (
           Label : CODE
             'D'
@@ -24,7 +16,13 @@ Label : PROJECT
           Label : ARGUMENTS
             )
             Label : ARGUMENT
-              Void
+              B
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'C'
+              Label : NAME
+                B
           Label : NAME
             include
         Label : ELEMENT

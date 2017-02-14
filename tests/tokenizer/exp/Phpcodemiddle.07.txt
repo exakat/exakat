@@ -65,43 +65,45 @@ Label : PROJECT
               E
 
             Label : ELEMENT
+              ->
+              Label : METHOD
+                F
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    'G'
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'H'
+                        Label : VALUE
+                          $a
+                      Label : ARGUMENT
+                        =>
+                        Label : KEY
+                          'I'
+                        Label : VALUE
+                          ->
+                          Label : OBJECT
+                            $this
+                          Label : PROPERTY
+                            J
+                    Label : NAME
+                      array
+                Label : NAME
+                  F
+              Label : OBJECT
+                $this
+            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  ->
-                  Label : METHOD
-                    F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'G'
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'H'
-                            Label : VALUE
-                              $a
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'I'
-                            Label : VALUE
-                              ->
-                              Label : OBJECT
-                                $this
-                              Label : PROPERTY
-                                J
-                        Label : NAME
-                          array
-                    Label : NAME
-                      F
-                  Label : OBJECT
-                    $this
+                  Void
               Label : NAME
                 echo
             Label : ELEMENT

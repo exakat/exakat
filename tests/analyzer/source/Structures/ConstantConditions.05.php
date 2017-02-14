@@ -9,6 +9,6 @@ if ( srand('C')) { $b++; }
 if ( mt_rand('C')) { $b++; } 
 
 // Testing for void
-if ( ini_get_all()) { $b++; } 
+if ( getrandmax()) { $b++; } 
 
 ?>
