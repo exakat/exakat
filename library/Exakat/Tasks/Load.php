@@ -1804,12 +1804,12 @@ class Load extends Tasks {
         $functioncallId = $this->addAtom('Functioncall');
         if (!$this->isContext(self::CONTEXT_NEW)) {
             list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'function');
+            $this->setAtom($functioncallId, array('fullnspath' => $fullnspath,
+                                                  'aliased'    => $aliased));
             // Probably weak check, since we haven't built fullnspath for functions yet... 
             if ($fullnspath === '\\define') {
                 $this->processDefineAsConstants($argumentsId);
             }
-            $this->setAtom($functioncallId, array('fullnspath' => $fullnspath,
-                                                  'aliased'    => $aliased));
 
             $this->addCall('function', $fullnspath, $functioncallId);
 
@@ -3518,32 +3518,32 @@ class Load extends Tasks {
         if ($this->atoms[$id + 1]['atom'] === 'Nsname') {
             list($fullnspath, $aliased) = $this->getFullnspath($id + 1);
             if ($aliased === self::ALIASED) {
-                $this->addLink($this->usesId['class'][strtolower($this->atoms[$id + 1]['code'])], count($this->atoms), 'DEFINITION');
+                $this->addLink($this->usesId['class'][strtolower($this->atoms[$id + 1]['code'])], max(array_keys($this->atoms)), 'DEFINITION');
             } 
-            // count($this->atoms) is the actual Functioncall
-            $this->setAtom(count($this->atoms), array('fullnspath' => $fullnspath,
+            // max(array_keys($this->atoms)) is the actual Functioncall
+            $this->setAtom(max(array_keys($this->atoms)), array('fullnspath' => $fullnspath,
                                                       'aliased'    => $aliased));
-            $this->addCall('class', $fullnspath, count($this->atoms));
+            $this->addCall('class', $fullnspath, max(array_keys($this->atoms)));
         } elseif ( !empty($this->atoms[$id + 2]['atom']) &&
                    $this->atoms[$id + 2]['atom'] === 'Nsname') {
             list($fullnspath, $aliased) = $this->getFullnspath($id + 2);
             if ($aliased === self::ALIASED) {
-                $this->addLink($this->usesId['class'][strtolower($this->atoms[$id + 2]['code'])], count($this->atoms), 'DEFINITION');
+                $this->addLink($this->usesId['class'][strtolower($this->atoms[$id + 2]['code'])], max(array_keys($this->atoms)), 'DEFINITION');
             } 
-            // count($this->atoms) is the actual Functioncall
-            $this->setAtom(count($this->atoms), array('fullnspath' => $fullnspath,
-                                                      'aliased'    => $aliased));
-            $this->addCall('class', $fullnspath, count($this->atoms));
+            // max(array_keys($this->atoms)) is the actual Functioncall
+            $this->setAtom(max(array_keys($this->atoms)), array('fullnspath' => $fullnspath,
+                                                                'aliased'    => $aliased));
+            $this->addCall('class', $fullnspath, max(array_keys($this->atoms)));
         } elseif ($this->atoms[$id + 1]['atom'] === 'Identifier') {
 
             list($fullnspath, $aliased) = $this->getFullnspath($id + 1);
             if ($aliased === self::ALIASED) {
-                $this->addLink($this->usesId['class'][strtolower($this->atoms[$id + 1]['code'])], count($this->atoms), 'DEFINITION');
+                $this->addLink($this->usesId['class'][strtolower($this->atoms[$id + 1]['code'])], max(array_keys($this->atoms)), 'DEFINITION');
             } 
-            // count($this->atoms) is the actual Functioncall
-            $this->setAtom(count($this->atoms), array('fullnspath' => $fullnspath,
-                                                      'aliased'    => $aliased));
-            $this->addCall('class', $fullnspath, count($this->atoms));
+            // max(array_keys($this->atoms)) is the actual Functioncall
+            $this->setAtom(max(array_keys($this->atoms)), array('fullnspath' => $fullnspath,
+                                                                'aliased'    => $aliased));
+            $this->addCall('class', $fullnspath, max(array_keys($this->atoms)));
         } 
 
         $this->toggleContext(self::CONTEXT_NEW);
