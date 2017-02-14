@@ -16,76 +16,87 @@ Glossary
 
       + :ref:`$this Is Not An Array <$this-is-not-an-array>`
 
-    + `abs`
+    + `abs()`
 
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`No Real Comparison <no-real-comparison>`
 
-    + `array_count_values`
+    + `array_count_values()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_diff`
+    + `array_diff()`
 
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_flip`
+    + `array_flip()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_intersect`
+    + `array_intersect()`
 
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_key_exists`
+    + `array_key_exists()`
 
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_keys`
+    + `array_keys()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_map`
+    + `array_map()`
 
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_merge`
+    + `array_merge()`
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
       + :ref:`Useless Instructions <useless-instructions>`
 
-    + `array_merge_recursive`
+    + `array_merge_recursive()`
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
 
-    + `array_search`
+    + `array_push()`
+
+      + :ref:`Avoid array_push() <avoid-array\_push()>`
+
+    + `array_search()`
 
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_udiff`
+    + `array_sum()`
+
+      + :ref:`For Using Functioncall <for-using-functioncall>`
+
+    + `array_udiff()`
 
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_uintersect`
+    + `array_uintersect()`
 
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_unique`
+    + `array_unique()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
       + :ref:`Slow Functions <slow-functions>`
 
-    + `array_unshift`
-
-      + :ref:`Getting Last Element <getting-last-element>`
-      + :ref:`Slow Functions <slow-functions>`
-
-    + `array_walk`
+    + `array_unshift()`
 
       + :ref:`Slow Functions <slow-functions>`
+
+    + `array_walk()`
+
+      + :ref:`Slow Functions <slow-functions>`
+
+    + `assert()`
+
+      + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
 
 
 + `B`
@@ -109,33 +120,13 @@ Glossary
 
 
 + `C`
-    + `COUNT`
-
-      + :ref:`Wpdb Best Usage <wpdb-best-usage>`
-
     + `Closure`
 
       + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
 
-    + `Count`
+    + `Count()`
 
       + :ref:`Uses Default Values <uses-default-values>`
-
-    + `call_user_func`
-
-      + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-
-    + `call_user_func_array`
-
-      + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-
-    + `call_user_method`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `call_user_method_array`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 
     + `closure`
 
@@ -144,46 +135,49 @@ Glossary
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
+    + `constant()`
+
+      + :ref:`Fully Qualified Constants <fully-qualified-constants>`
+
     + `continue`
 
       + :ref:`Bail Out Early <bail-out-early>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
 
-    + `count`
+    + `count()`
 
       + :ref:`Always Positive Comparison <always-positive-comparison>`
-      + :ref:`Avoid array_push() <avoid-array\_push()>`
-      + :ref:`Common Alternatives <common-alternatives>`
-      + :ref:`For Using Functioncall <for-using-functioncall>`
       + :ref:`Getting Last Element <getting-last-element>`
       + :ref:`No Count With 0 <no-count-with-0>`
-      + :ref:`Static Loop <static-loop>`
-      + :ref:`Used Once Variables <used-once-variables>`
       + :ref:`Uses Default Values <uses-default-values>`
-      + :ref:`Wpdb Best Usage <wpdb-best-usage>`
 
-    + `curl_multi_errno`
+    + `create_function()`
 
-      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+      + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
 
-    + `curl_share_errno`
+    + `crypt()`
 
-      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+      + :ref:`Use password_hash() <use-password\_hash()>`
 
-    + `curl_share_strerror`
+    + `current()`
 
-      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+      + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 
 
 + `D`
-    + `date`
+    + `Die`
 
-      + :ref:`Timestamp Difference <timestamp-difference>`
+      + :ref:`Print And Die <print-and-die>`
 
-    + `datefmt_set_timezone_id`
+    + `define()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
+      + :ref:`Define With Array <define-with-array>`
+      + :ref:`Fully Qualified Constants <fully-qualified-constants>`
+      + :ref:`Invalid Constant Name <invalid-constant-name>`
+      + :ref:`Non-constant Index In Array <non-constant-index-in-array>`
+      + :ref:`Use const <use-const>`
 
     + `die`
 
@@ -195,68 +189,38 @@ Glossary
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
 
+    + `dirname()`
+
+      + :ref:`PHP7 Dirname <php7-dirname>`
+
     + `do..while()`
 
       + :ref:`Bracketless Blocks <bracketless-blocks>`
 
 
 + `E`
-    + `Empty`
+    + `Empty()`
 
-      + :ref:`Empty Blocks <empty-blocks>`
-      + :ref:`Empty Classes <empty-classes>`
-      + :ref:`Empty Instructions <empty-instructions>`
-      + :ref:`Empty Interfaces <empty-interfaces>`
-      + :ref:`Empty List <empty-list>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
-      + :ref:`Useless Instructions <useless-instructions>`
 
-    + `empty`
+    + `each()`
+
+      + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+
+    + `empty()`
 
       + :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-      + :ref:`Empty Blocks <empty-blocks>`
-      + :ref:`Empty Classes <empty-classes>`
-      + :ref:`Empty Function <empty-function>`
-      + :ref:`Empty Instructions <empty-instructions>`
-      + :ref:`Empty Interfaces <empty-interfaces>`
-      + :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
-      + :ref:`Empty Traits <empty-traits>`
-      + :ref:`Empty Try Catch <empty-try-catch>`
       + :ref:`Empty With Expression <empty-with-expression>`
-      + :ref:`Indices Are Int Or String <indices-are-int-or-string>`
       + :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
-      + :ref:`Random Without Try <random-without-try>`
-      + :ref:`Results May Be Missing <results-may-be-missing>`
-      + :ref:`Use Positive Condition <use-positive-condition>`
-      + :ref:`Useless Check <useless-check>`
-      + :ref:`Useless Constructor <useless-constructor>`
-      + :ref:`Useless Return <useless-return>`
-      + :ref:`parse_str() Warning <parse\_str()-warning>`
 
-    + `ereg`
+    + `end()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`Getting Last Element <getting-last-element>`
 
-    + `ereg_replace`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `eregi`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `eregi_replace`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `error_clear_last`
-
-      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
-
-    + `eval`
+    + `eval()`
 
       + :ref:`Eval() Usage <eval()-usage>`
       + :ref:`eval() Without Try <eval()-without-try>`
@@ -266,55 +230,35 @@ Glossary
 
       + :ref:`Dont Echo Error <dont-echo-error>`
       + :ref:`Exit() Usage <exit()-usage>`
+      + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
 
+    + `extract()`
+
+      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
+      + :ref:`Register Globals <register-globals>`
+
 
 + `F`
-    + `File`
-
-      + :ref:`Can't Extend Final <can't-extend-final>`
-
     + `For()`
 
       + :ref:`Sequences In For <sequences-in-for>`
 
-    + `fclose`
+    + `file()`
 
       + :ref:`Join file() <join-file()>`
 
-    + `file`
+    + `file_get_contents()`
 
-      + :ref:`Assign Default To Properties <assign-default-to-properties>`
-      + :ref:`Can't Extend Final <can't-extend-final>`
-      + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
-      + :ref:`Echo Or Print <echo-or-print>`
-      + :ref:`Eval() Usage <eval()-usage>`
       + :ref:`Join file() <join-file()>`
-      + :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
-      + :ref:`No Direct Usage <no-direct-usage>`
-      + :ref:`No Hardcoded Path <no-hardcoded-path>`
-      + :ref:`Should Use Constants <should-use-constants>`
-      + :ref:`Use Pathinfo <use-pathinfo>`
-      + :ref:`Use System Tmp <use-system-tmp>`
-      + :ref:`Use const <use-const>`
-      + :ref:`include_once() Usage <include\_once()-usage>`
 
-    + `file_get_contents`
-
-      + :ref:`$HTTP_RAW_POST_DATA <$http\_raw\_post\_data>`
-      + :ref:`Join file() <join-file()>`
-      + :ref:`No Hardcoded Path <no-hardcoded-path>`
-
-    + `file_put_contents`
+    + `file_put_contents()`
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-      + :ref:`Use System Tmp <use-system-tmp>`
 
-    + `fopen`
+    + `fopen()`
 
-      + :ref:`Assign Default To Properties <assign-default-to-properties>`
-      + :ref:`Join file() <join-file()>`
       + :ref:`fopen() Mode <fopen()-mode>`
 
     + `for()`
@@ -333,72 +277,63 @@ Glossary
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
+    + `func_get_arg()`
+
+      + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
+
+    + `func_get_args()`
+
+      + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
+
 
 + `G`
-    + `gc_mem_caches`
+    + `Glob()`
 
-      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+      + :ref:`Performances/NoGlob <performances/noglob>`
 
-    + `get_class`
+    + `glob()`
 
-      + :ref:`Avoid get_class() <avoid-get\_class()>`
-
-    + `get_resources`
-
-      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+      + :ref:`No Direct Usage <no-direct-usage>`
+      + :ref:`No Hardcoded Path <no-hardcoded-path>`
+      + :ref:`Performances/NoGlob <performances/noglob>`
 
 
 + `H`
-    + `Header`
-
-      + :ref:`Close Tags <close-tags>`
-
-    + `header`
+    + `header()`
 
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+
+    + `htmlentities()`
+
+      + :ref:`Htmlentities Calls <htmlentities-calls>`
+      + :ref:`Uses Default Values <uses-default-values>`
+
+    + `htmlspecialchars()`
+
+      + :ref:`Htmlentities Calls <htmlentities-calls>`
 
 
 + `I`
     + `Isset`
 
       + :ref:`No Isset With Empty <no-isset-with-empty>`
+      + :ref:`Should Use Coalesce <should-use-coalesce>`
 
-    + `imagepsbbox`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `imagepsencodefont`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `imagepsextendfont`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `imagepsfreefont`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `imagepsloadfont`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `imagepsslantfont`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `imagepstext`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `implode`
+    + `implode()`
 
       + :ref:`Join file() <join-file()>`
 
-    + `in_array`
+    + `import_request_variables()`
 
-      + :ref:`Avoid array_unique() <avoid-array\_unique()>`
+      + :ref:`Register Globals <register-globals>`
+
+    + `in_array()`
+
       + :ref:`Slow Functions <slow-functions>`
+
+    + `ini_get()`
+
+      + :ref:`Timestamp Difference <timestamp-difference>`
 
     + `instanceof`
 
@@ -410,13 +345,29 @@ Glossary
       + :ref:`Use Instanceof <use-instanceof>`
       + :ref:`Useless Interfaces <useless-interfaces>`
 
-    + `intdiv`
+    + `intval()`
 
-      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+      + :ref:`Should Typecast <should-typecast>`
 
-    + `is_iterable`
+    + `is_integer()`
 
-      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+      + :ref:`Use Instanceof <use-instanceof>`
+
+    + `is_null()`
+
+      + :ref:`Use === null <use-===-null>`
+
+    + `is_object()`
+
+      + :ref:`Use Instanceof <use-instanceof>`
+
+    + `is_scalar()`
+
+      + :ref:`Use Instanceof <use-instanceof>`
+
+    + `is_string()`
+
+      + :ref:`Use Instanceof <use-instanceof>`
 
     + `isset`
 
@@ -428,79 +379,44 @@ Glossary
 
 
 + `J`
-    + `join`
+    + `join()`
 
       + :ref:`Join file() <join-file()>`
 
-    + `jpeg2wbmp`
-
-      + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
-
 
 + `M`
-    + `Mail`
+    + `mail()`
 
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
 
-    + `magic_quotes_runtime`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `mail`
-
-      + :ref:`Use Wordpress Functions <use-wordpress-functions>`
-
-    + `mb_chr`
-
-      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
-
-    + `mb_ord`
-
-      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
-
-    + `mb_scrub`
-
-      + :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
-
-    + `mb_substr`
+    + `mb_substr()`
 
       + :ref:`No Substr() One <no-substr()-one>`
 
-    + `mcrypt_cbc`
+    + `microtime()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `mcrypt_cfb`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `mcrypt_ecb`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `mcrypt_ofb`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `microtime`
-
-      + :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
       + :ref:`Timestamp Difference <timestamp-difference>`
 
-    + `mt_rand`
+    + `mt_rand()`
 
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
       + :ref:`Use random_int() <use-random\_int()>`
 
-    + `mt_srand`
+    + `mt_srand()`
 
       + :ref:`Use random_int() <use-random\_int()>`
+
+
++ `N`
+    + `next()`
+
+      + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 
 
 + `O`
-    + `openssl_random_pseudo_bytes`
+    + `opendir()`
 
-      + :ref:`Use random_int() <use-random\_int()>`
+      + :ref:`Performances/NoGlob <performances/noglob>`
 
 
 + `P`
@@ -508,120 +424,92 @@ Glossary
 
       + :ref:`eval() Without Try <eval()-without-try>`
 
-    + `png2wbmp`
+    + `parse_str()`
 
-      + :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
+      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
+      + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+      + :ref:`Register Globals <register-globals>`
+      + :ref:`parse_str() Warning <parse\_str()-warning>`
 
-    + `posix_setrlimit`
+    + `password_hash()`
 
-      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
+      + :ref:`Compare Hash <compare-hash>`
+      + :ref:`Use password_hash() <use-password\_hash()>`
 
-    + `pow`
+    + `password_verify()`
+
+      + :ref:`Compare Hash <compare-hash>`
+
+    + `pathinfo()`
+
+      + :ref:`Use Pathinfo <use-pathinfo>`
+
+    + `phpinfo()`
+
+      + :ref:`Eval() Usage <eval()-usage>`
+      + :ref:`Phpinfo <phpinfo>`
+
+    + `pow()`
 
       + :ref:`** For Exponent <**-for-exponent>`
       + :ref:`Negative Power <negative-power>`
 
-    + `preg_match`
+    + `preg_replace()`
 
-      + :ref:`Results May Be Missing <results-may-be-missing>`
-      + :ref:`Simplify Regex <simplify-regex>`
-      + :ref:`Strpos Comparison <strpos-comparison>`
-      + :ref:`Unkown Regex Options <unkown-regex-options>`
-
-    + `preg_replace`
-
-      + :ref:`Eval() Usage <eval()-usage>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
-    + `preg_replace_callback_array`
+    + `print_r()`
 
-      + :ref:`Make One Call <make-one-call>`
-      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
-      + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+      + :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
 
 + `R`
-    + `rand`
+    + `rand()`
 
       + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
-      + :ref:`Unused Returned Value <unused-returned-value>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
-      + :ref:`Use random_int() <use-random\_int()>`
-
-    + `random_bytes`
-
-      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
-      + :ref:`Random Without Try <random-without-try>`
-      + :ref:`Use random_int() <use-random\_int()>`
-
-    + `random_int`
-
-      + :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
-      + :ref:`Random Without Try <random-without-try>`
       + :ref:`Use random_int() <use-random\_int()>`
 
 
 + `S`
-    + `set_exception_handler`
+    + `scandir()`
+
+      + :ref:`Performances/NoGlob <performances/noglob>`
+
+    + `set_exception_handler()`
 
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
 
-    + `set_magic_quotes_runtime`
+    + `setlocale()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 
-    + `set_socket_blocking`
+    + `settype()`
 
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+      + :ref:`Should Typecast <should-typecast>`
 
-    + `sleep`
+    + `sleep()`
 
       + :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 
-    + `split`
-
-      + :ref:`Nested Ifthen <nested-ifthen>`
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-      + :ref:`Redeclared PHP Functions <redeclared-php-functions>`
-
-    + `spliti`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `sql_regcase`
-
-      + :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-
-    + `srand`
+    + `srand()`
 
       + :ref:`Use random_int() <use-random\_int()>`
 
-    + `stripos`
+    + `stripos()`
 
       + :ref:`Simplify Regex <simplify-regex>`
 
-    + `strlen`
-
-      + :ref:`Always Positive Comparison <always-positive-comparison>`
-      + :ref:`Make One Call <make-one-call>`
-      + :ref:`No Count With 0 <no-count-with-0>`
-
-    + `strpos`
+    + `strpos()`
 
       + :ref:`Simplify Regex <simplify-regex>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Strpos Comparison <strpos-comparison>`
-      + :ref:`Use Pathinfo <use-pathinfo>`
-      + :ref:`Useless Casting <useless-casting>`
 
-    + `strstr`
+    + `strstr()`
 
       + :ref:`Slow Functions <slow-functions>`
-
-    + `strtotime`
-
-      + :ref:`Performances/timeVsstrtotime <performances/timevsstrtotime>`
 
     + `switch()`
 
@@ -630,107 +518,55 @@ Glossary
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch Without Default <switch-without-default>`
 
-    + `sys_get_temp_dir`
+    + `sys_get_temp_dir()`
 
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
       + :ref:`Use System Tmp <use-system-tmp>`
 
 
 + `T`
-    + `Throw`
-
-      + :ref:`Exit() Usage <exit()-usage>`
-
     + `Throwable`
 
       + :ref:`Empty Try Catch <empty-try-catch>`
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
 
-    + `throw`
-
-      + :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
-      + :ref:`Exception Order <exception-order>`
-      + :ref:`Exit() Usage <exit()-usage>`
-      + :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
-      + :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
-      + :ref:`Rethrown Exceptions <rethrown-exceptions>`
-      + :ref:`Should Chain Exception <should-chain-exception>`
-      + :ref:`Switch Without Default <switch-without-default>`
-      + :ref:`Throw Functioncall <throw-functioncall>`
-      + :ref:`Throw In Destruct <throw-in-destruct>`
-      + :ref:`Throws An Assignement <throws-an-assignement>`
-      + :ref:`Unreachable Code <unreachable-code>`
-      + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
-
-    + `time`
-
-      + :ref:`Assign Default To Properties <assign-default-to-properties>`
-      + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
-      + :ref:`Avoid Parenthesis <avoid-parenthesis>`
-      + :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
-      + :ref:`Class Name Case Difference <class-name-case-difference>`
-      + :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
-      + :ref:`Classes Mutually Extending Each Other <classes-mutually-extending-each-other>`
-      + :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
-      + :ref:`Echo With Concat <echo-with-concat>`
-      + :ref:`Eval() Usage <eval()-usage>`
-      + :ref:`Exit() Usage <exit()-usage>`
-      + :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
-      + :ref:`Invalid Octal In String <invalid-octal-in-string>`
-      + :ref:`Multiple Class Declarations <multiple-class-declarations>`
-      + :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
-      + :ref:`No Count With 0 <no-count-with-0>`
-      + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-      + :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
-      + :ref:`Old Style Constructor <old-style-constructor>`
-      + :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
-      + :ref:`Performances/NoGlob <performances/noglob>`
-      + :ref:`Performances/timeVsstrtotime <performances/timevsstrtotime>`
-      + :ref:`Redefined Default <redefined-default>`
-      + :ref:`Short Open Tags <short-open-tags>`
-      + :ref:`Should Be Single Quote <should-be-single-quote>`
-      + :ref:`Should Make Alias <should-make-alias>`
-      + :ref:`Should Typecast <should-typecast>`
-      + :ref:`Static Loop <static-loop>`
-      + :ref:`Switch Without Default <switch-without-default>`
-      + :ref:`Throw In Destruct <throw-in-destruct>`
-      + :ref:`Throws An Assignement <throws-an-assignement>`
-      + :ref:`Timestamp Difference <timestamp-difference>`
-      + :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
-      + :ref:`Use Class Operator <use-class-operator>`
-      + :ref:`Use const <use-const>`
-      + :ref:`Used Once Variables <used-once-variables>`
-      + :ref:`Wpdb Prepare Or Not <wpdb-prepare-or-not>`
-      + :ref:`eval() Without Try <eval()-without-try>`
-      + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
-      + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
-      + :ref:`var_dump()... Usage <var\_dump()...-usage>`
-
 
 + `U`
-    + `Usort`
+    + `Usort()`
 
       + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 
-    + `uasort`
+    + `uasort()`
 
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 
-    + `uksort`
+    + `uksort()`
 
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
 
-    + `usleep`
+    + `unserialize()`
+
+      + :ref:`Unserialize Second Arg <unserialize-second-arg>`
+
+    + `usleep()`
 
       + :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
-      + :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 
-    + `usort`
+    + `usort()`
 
       + :ref:`Slow Functions <slow-functions>`
-      + :ref:`Usort Sorting In PHP 7.0 <usort-sorting-in-php-7.0>`
+
+
++ `V`
+    + `var_dump()`
+
+      + :ref:`var_dump()... Usage <var\_dump()...-usage>`
+
+    + `var_export()`
+
+      + :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
 
 + `W`
@@ -780,7 +616,8 @@ Glossary
       + :ref:`Non Ascii Variables <non-ascii-variables>`
       + :ref:`Old Style Constructor <old-style-constructor>`
       + :ref:`Redefined Default <redefined-default>`
-      + :ref:`Should Use $this <should-use-$this>`
+      + :ref:`Should Use Local Class <should-use-local-class>`
+      + :ref:`Strange Names For Methods <strange-names-for-methods>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
       + :ref:`Unitialized Properties <unitialized-properties>`
       + :ref:`Useless Return <useless-return>`

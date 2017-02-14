@@ -274,6 +274,12 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. 
 
 
+* 0.10.1
+
+  * Avoid Non Wordpress Globals (Wordpress/AvoidOtherGlobals)
+  * SQL queries (Type/Sql)
+  * Strange Names For Methods (Classes/StrangeName)
+
 * 0.10.0
 
   * Error_Log() Usage (Php/ErrorLogUsage)
@@ -335,6 +341,7 @@ List of analyzers, by version of introduction, newest to oldest.
 
 * 0.9.1
 
+  * Avoid Using stdClass (Php/UseStdclass)
   * Avoid array_push() (Performances/AvoidArrayPush)
   * Could Return Void (Functions/CouldReturnVoid)
   * Invalid Octal In String (Type/OctalInString)
@@ -345,7 +352,6 @@ List of analyzers, by version of introduction, newest to oldest.
   * Undefined Class 2.4 (ZendF/UndefinedClass24)
   * Undefined Class 2.5 (ZendF/UndefinedClass25)
   * Undefined Class 3.0 (ZendF/UndefinedClass30)
-  * Use stdClass (Php/UseStdclass)
   * Zend Interface (ZendF/ZendInterfaces)
   * Zend Trait (ZendF/ZendTrait)
 
@@ -400,7 +406,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * ** For Exponent (Php/NewExponent)
   * ... Usage (Php/EllipsisUsage)
   * ::class (Php/StaticclassUsage)
-  * <?= usage (Php/EchoTagUsage)
+  * <?= Usage (Php/EchoTagUsage)
   * @ Operator (Structures/Noscream)
   * Abstract Class Usage (Classes/Abstractclass)
   * Abstract Methods Usage (Classes/Abstractmethods)
@@ -416,7 +422,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Altering Foreach Without Reference (Structures/AlteringForeachWithoutReference)
   * Alternative Syntax (Php/AlternativeSyntax)
   * Always Positive Comparison (Structures/NeverNegative)
-  * Ambiguous Index (Arrays/AmbiguousKeys)
+  * Ambiguous Array Index (Arrays/AmbiguousKeys)
   * Anonymous Classes (Classes/Anonymous)
   * Argument Should Be Typehinted (Functions/ShouldBeTypehinted)
   * Arguments (Variables/Arguments)
@@ -658,7 +664,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Methods Names (Classes/MethodDefinition)
   * Methods Without Return (Functions/WithoutReturn)
   * Mime Types (Type/MimeType)
-  * Mixed Keys (Arrays/MixedKeys)
+  * Mixed Keys Arrays (Arrays/MixedKeys)
   * Multidimensional Arrays (Arrays/Multidimensional)
   * Multiple Alias Definitions (Namespaces/MultipleAliasDefinitions)
   * Multiple Catch (Structures/MultipleCatch)
@@ -774,7 +780,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Real Variables (Variables/RealVariables)
   * Recursive Functions (Functions/Recursive)
   * Redeclared PHP Functions (Functions/RedeclaredPhpFunction)
-  * Redefined Constants (Classes/RedefinedConstants)
+  * Redefined Class Constants (Classes/RedefinedConstants)
   * Redefined Default (Classes/RedefinedDefault)
   * Redefined Methods (Classes/RedefinedMethods)
   * Redefined PHP Traits (Traits/Php)
@@ -795,7 +801,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * Scalar Typehint Usage (Php/ScalarTypehintUsage)
   * Sensitive Argument (Security/SensitiveArgument)
   * Sequences In For (Structures/SequenceInFor)
-  * Setlocale Needs Constants (Structures/SetlocaleNeedsConstants)
+  * Setlocale() Uses Constants (Structures/SetlocaleNeedsConstants)
   * Several Instructions On The Same Line (Structures/OneLineTwoInstructions)
   * Shell Usage (Structures/ShellUsage)
   * Short Open Tags (Php/ShortOpenTagRequired)
@@ -804,9 +810,9 @@ List of analyzers, by version of introduction, newest to oldest.
   * Should Chain Exception (Structures/ShouldChainException)
   * Should Make Alias (Namespaces/ShouldMakeAlias)
   * Should Typecast (Type/ShouldTypecast)
-  * Should Use $this (Classes/ShouldUseThis)
   * Should Use Coalesce (Php/ShouldUseCoalesce)
   * Should Use Constants (Functions/ShouldUseConstants)
+  * Should Use Local Class (Classes/ShouldUseThis)
   * Should Use Prepared Statement (Security/ShouldUsePreparedStatement)
   * Silently Cast Integer (Type/SilentlyCastInteger)
   * Simple Global Variable (Php/GlobalWithoutSimpleVariable)

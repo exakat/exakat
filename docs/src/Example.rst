@@ -58,3 +58,67 @@ This update the repository to the last modification, then runs the whole analysi
 Once it is finished, the report are in the same previous folders : `projects/sculpin/report` (HTML version) or `projects/sculpin/faceted` (Faceted version). Simply open the 'index.html' file in a browser.
 
 The reports replace any previous report. If you want to keep a report of a previous version, move it away from the current location, and give it another name.
+
+
+`Text report`_
+--------------------
+
+::
+
+   #If you just ran that, you may skip the two following commands
+   php exakat.phar init -p sculpin -R https://github.com/sculpin/sculpin.git
+   php exakat.phar project -p sculpin 
+
+   #report to file exakat.txt
+   php exakat.phar report -p sculpin -format Text -T Analyze -f 
+
+   #report to stdout
+   php exakat.phar report -p sculpin -format Text -T Analyze -file stdout
+   
+
+`Json report`_
+--------------------
+
+::
+
+   #If you just ran that, you may skip the two following commands
+   php exakat.phar init -p sculpin -R https://github.com/sculpin/sculpin.git
+   php exakat.phar project -p sculpin 
+
+   #report to stdout
+   php exakat.phar report -p sculpin -format Json -T Analyze -file stdout
+
+   #report to file exakat.json
+   php exakat.phar report -p sculpin -format Text -T Analyze 
+
+
+`Inventories report`_
+---------------------
+
+The Inventories report is not a default report. It may be added to config.ini.
+::
+
+   #If you just ran that, you may skip the two following commands
+   php exakat.phar init -p sculpin -R https://github.com/sculpin/sculpin.git
+   php exakat.phar project -p sculpin 
+   php exakat.phar analyze -p sculpin -T Inventories
+
+   #report to inventories folder
+   php exakat.phar report -p sculpin -format Inventories -T Inventories
+
+`Getting One Analysis Results`_
+-------------------------------
+
+Analysis names are in the documentations. Check the ambassador report, or read `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_.
+
+::
+
+   #If you just ran that, you may skip the two following commands
+   php exakat.phar init -p sculpin -R https://github.com/sculpin/sculpin.git
+   php exakat.phar project -p sculpin 
+   php exakat.phar analyze -p sculpin -P Structures/NoDanglingReference 
+
+   #report in Text, for only one analysis
+   php exakat.phar report -p sculpin -format Text -P Structures/NoDanglingReference 
+
+
