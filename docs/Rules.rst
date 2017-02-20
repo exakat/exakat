@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 14 Feb 2017 08:41:15 +0000
-.. comment: Generation hash : 5f00dc2792315dc9ade2ee4d316f8e597b9b881d
+.. comment: Generation date : Mon, 20 Feb 2017 15:17:37 +0000
+.. comment: Generation hash : 4a71e6a5185e3722de39f8ef9cf43fe577b91157
 
 
 .. _$http\_raw\_post\_data:
@@ -1493,6 +1493,38 @@ Constant defined with const keyword may be arrays but only stating with PHP 5.6.
 +--------------+-------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
 +--------------+-------------------------------------------------------------------------------+
+
+
+
+.. _class-function-confusion:
+
+Class Function Confusion
+########################
+
+
+Avoid classes and functions bearing the same name. 
+
+When functions and classes bear the same name, calling them may be confusing. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {}
+   
+   function foo() {}
+   
+   // Forgetting the 'new' operator is easy
+   $object = new foo();
+   $object = foo();
+   
+   ?>
+
++--------------+----------------------------+
+| Command Line | Php/ClassFunctionConfusion |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
 
 
 
@@ -3540,6 +3572,35 @@ Previously, it was compulsory to extract the data from the blind array :
 +--------------+-----------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54` |
 +--------------+-----------------------------------------------------+
+
+
+
+.. _forgotten-thrown:
+
+Forgotten Thrown
+################
+
+
+An exception is instantiated, but not thrown. 
+
+.. code-block:: php
+
+   <?php
+   
+   class MyException() extends \Exception { }
+   
+   if ($error !== false) {
+       // This looks like 'throw' was omitted
+       new MyException();
+   }
+   
+   ?>
+
++--------------+----------------------------+
+| Command Line | Exceptions/ForgottenThrown |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
 
 
 

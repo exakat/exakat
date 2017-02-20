@@ -23,6 +23,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Cakephp
 * Calisthenics
 * ClearPHP
+* Codacy
 * Coding Conventions
 * CompatibilityPHP53
 * CompatibilityPHP54
@@ -67,6 +68,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * FacetedJson
   * Json
   * OnepageJson
+  * Codacy
 
 
 Supported PHP Extensions
@@ -131,6 +133,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/kdm5
 * ext/ldap
 * ext/libevent
+* ext/libsodium
 * ext/libxml
 * ext/lua
 * ext/mail
@@ -273,6 +276,12 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. 
 
+
+* 0.10.2
+
+  * Class Function Confusion (Php/ClassFunctionConfusion)
+  * Forgotten Thrown (Exceptions/ForgottenThrown)
+  * ext/libsodium (Extensions/Extlibsodium)
 
 * 0.10.1
 
