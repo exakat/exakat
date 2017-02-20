@@ -7,7 +7,6 @@ List of commands :
 ------------------
 
 * anonymize
-* analyze
 * catalog
 * clean
 * cleandb

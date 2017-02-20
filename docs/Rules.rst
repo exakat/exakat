@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 20 Feb 2017 15:17:37 +0000
-.. comment: Generation hash : 4a71e6a5185e3722de39f8ef9cf43fe577b91157
+.. comment: Generation date : Mon, 20 Feb 2017 15:40:44 +0000
+.. comment: Generation hash : 067ffa3b3e4bd1a7c4b835ad172d0c224f203e98
 
 
 .. _$http\_raw\_post\_data:
@@ -5341,6 +5341,28 @@ Multiples Identical Case
 
 Some cases are defined multiple times, but only one will be processed. Check the list of cases, and remove the extra one.
 
+Exakat tries to find the value of the case as much as possible, and ignore any dynamic cases (using variables).
+
+.. code-block:: php
+
+   <?php
+   
+   case ($x) {
+       case 1 : 
+           break;
+       case true:    // This is a duplicate of the previous
+           break; 
+       case 1 + 0:   // This is a duplicate of the previous
+           break; 
+       case 1.0 :    // This is a duplicate of the previous
+           break; 
+       case $y  :    // This is not reported.
+           break; 
+       default:
+           
+   }
+   ?>
+
 +--------------+---------------------------------------------------------------------------------------------------+
 | Command Line | Structures/MultipleDefinedCase                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
@@ -5712,6 +5734,46 @@ The following functions are now native functions in PHP 7.1. It is advised to ch
 +--------------+-----------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
 +--------------+-----------------------------------------------------+
+
+
+
+.. _no-boolean-as-default:
+
+No Boolean As Default
+#####################
+
+
+Default values should always be set up with constants.
+
+Class constants or constants improve readability when calling the methods.
+
+.. code-block:: php
+
+   <?php
+   
+   const CASE_INSENSITIVE = true;
+   const CASE_SENSITIVE = false;
+   
+   function foo($case_insensitive = true) {
+       // doSomething()
+   }
+   
+   // Readable code 
+   foo(CASE_INSENSITIVE);
+   foo(CASE_SENSITIVE);
+   
+   
+   // unreadable code  : is true case insensitive or case sensitive ? 
+   foo(true);
+   foo(false);
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Functions/NoBooleanAsDefault |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
 
 
 
@@ -6800,6 +6862,17 @@ One Letter Functions
 
 
 One letter functions seems to be really short for a meaningful name. This may happens for very high usage functions, so as to keep code short, but such functions should be rare.
+
+.. code-block:: php
+
+   <?php
+   
+   // One letter functions are rarely meaningful
+   function f($a, $b) {
+       return $a + $b;
+   }
+   
+   ?>
 
 +--------------+------------------------------+
 | Command Line | Functions/OneLetterFunctions |
@@ -9258,7 +9331,28 @@ Switch With Too Many Default
 ############################
 
 
-Switch statements should only hold one default, not more. Check the code and remove the extra default.
+Switch statements should only hold one default, not more. Check the code and remove the extra default.  
+
+PHP 7.0 won't compile a script that allows for several default cases. 
+
+Multiple default happens often with large `switch() <http://php.net/manual/en/control-structures.switch.php>`_.
+
+.. code-block:: php
+
+   <?php
+   
+   switch($a) {
+       case 1 : 
+           break;
+       default : 
+           break;
+       case 2 : 
+           break;
+       default :  // This default is never reached
+           break;
+   }
+   
+   ?>
 
 +--------------+--------------------------------------+
 | Command Line | Structures/SwitchWithMultipleDefault |
@@ -9646,6 +9740,20 @@ Undefined Class Constants
 
 Class constants that are used, but never defined. This should yield a fatal error upon execution, but no feedback at compile level.
 
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       const A = 1;
+       define('B', 2);
+   }
+   
+   // here, C is not defined in the code and is reported
+   echo foo::A.foo::B.foo::C;
+   
+   ?>
+
 +--------------+-------------------------------+
 | Command Line | Classes/UndefinedConstants    |
 +--------------+-------------------------------+
@@ -9681,7 +9789,22 @@ Undefined Constants
 ###################
 
 
+Constants definition can't be located.
+
 Those constants are not defined in the code, and will raise errors, or use the fallback mechanism of being treated like a string. 
+
+.. code-block:: php
+
+   <?php
+   
+   const A = 1;
+   define('B', 2);
+   
+   // here, C is not defined in the code and is reported
+   echo A.B.C;
+   
+   ?>
+
 
 It is recommended to define them all, or to avoid using them.
 

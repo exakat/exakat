@@ -571,7 +571,7 @@ List of analyzers, by version of introduction, newest to oldest.
   * File Usage (Structures/FileUsage)
   * Final Class Usage (Classes/Finalclass)
   * Final Methods Usage (Classes/Finalmethod)
-  * Fopen Mode (Portability/FopenMode)
+  * Fopen Binary Mode (Portability/FopenMode)
   * For Using Functioncall (Structures/ForWithFunctioncall)
   * Foreach Don't Change Pointer (Php/ForeachDontChangePointer)
   * Foreach Needs Reference Array (Structures/ForeachNeedReferencedSource)

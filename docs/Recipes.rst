@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 20 Feb 2017 15:17:37 +0000
-.. comment: Generation hash : 4a71e6a5185e3722de39f8ef9cf43fe577b91157
+.. comment: Generation date : Mon, 20 Feb 2017 15:40:44 +0000
+.. comment: Generation hash : 067ffa3b3e4bd1a7c4b835ad172d0c224f203e98
 
 
 .. _analyze:
@@ -69,7 +69,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 286 analysis
+Total : 287 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -194,6 +194,7 @@ Total : 286 analysis
 * :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Used Properties <never-used-properties>`
+* :ref:`No Boolean As Default <no-boolean-as-default>`
 * :ref:`No Choice <no-choice>`
 * :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 * :ref:`No Direct Usage <no-direct-usage>`
