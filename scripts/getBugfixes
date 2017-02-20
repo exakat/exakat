@@ -10,89 +10,27 @@ if (file_exists('changelog.7.html')) {
 
 $sqlite = new \Sqlite3('data/methods.sqlite');
 
-if (file_exists('changelog.5.html')) {
-    $changelog5 = file_get_contents('changelog.5.html');
-} else {
-    $changelog5 = file_get_contents('http://php.net/ChangeLog-5.php');
-    file_put_contents('changelog.5.html', $changelog5);
-}
+print "found ".strlen($changelog)." changelog 7\n";
 
-if (file_exists('NEWS.txt')) {
-    $newsDev = file_get_contents('NEWS.txt');
-} else {
-    $newsDev = file_get_contents('https://raw.githubusercontent.com/php/php-src/master/NEWS');
-    file_put_contents('NEWS.txt', $changelog5);
-}
-
-
-
-print "found ".strlen($changelog)." changelog\n";
-
-$exts = array('php_functions', 'session', 'pgsql', 'filter', 'openssl', 'exif', 'mbstring', 'gmp', 'xml');
+$exts = array('php_functions', 'core', 'session', 'pgsql', 'filter', 'openssl', 'exif', 'mbstring', 'gmp', 'xml', 'bcmath', 'calendar', 'date', 'dom', 'fpm', 
+              'ftp', 'gd', 'hash', 'mcrypt', 'mysqli', 'mysqlnd', 'pcre', 'pdo', 'pdo_dblib', 'pdo_pgsql', 'pdo_sqlite', 'posix', 'soap', 'sqlite3', 'standard', 'xmlrpc', 'zip', );
 $functions = array();
 foreach($exts as $ext) {
-    $sf = parse_ini_file('data/'.$ext.'.ini');
+    if (in_array($ext, array('standard'))) { continue; }
+    if (file_exists('data/'.$ext.'.ini')) {
+        $sf = parse_ini_file('data/'.$ext.'.ini');
+    } else {
+        print "No functions for $ext\n";
+    }
     $functions[] = implode('|', $sf['functions']);
 }
 $functions = implode('|', $functions);
 
-//// Preparing PHP 5.* 
-
-$changelog56 = array();
-$changelog55 = array();
-
-preg_match_all('#<section class="version" id=".*?">(.*?)</section>#s', $changelog5, $r);
-$blocks = $r[1];
-
-foreach($blocks as $block) {
-    $total = 0;
-    $bugs = 0;
-    $withFunction = 0;
-
-    if (!preg_match('#<h3>Version (\d\.\d\.\d+)</h3>#s', $block, $r)) {
-        continue; 
-    }
-    $version = $r[1];
-    if (!preg_match('/^5\.[56]/', $version)) {
-        // probably an old version
-        continue;
-    }
-//    print "$version\n";
-
-    $total += preg_match_all('#  <li>#s', $block, $sections, PREG_SET_ORDER);
-
-    preg_match_all('#<li>(.*?):\s<ul>(.*?)</ul></li>#s', $block, $sections, PREG_SET_ORDER);
-    foreach($sections as $section) {
-        $lasection = $section[1];
-        // Process multiple bugs on one line
-        // process CVE indication
-        if ($bugs += preg_match_all('$<a href="http://bugs\.php\.net/(\d+)">#\\1</a> \((.*?)\)\.( \(.{13}(, .{13})*?\))?</li>$s', $section[2], $li, PREG_SET_ORDER)) {
-            foreach($li as $l) {
-                if (preg_match("/\\b(".$functions.")\\b/is", $l[2], $r)) {
-                    ++$withFunction;
-                    $lafunction = $r[0];
-//                    print "$version\t$lasection\t".$lafunction."\t{$l[1]}\t{$l[2]}\n";
-
-                    if (substr($version, 0, 3) === '5.6') {
-                        $changelog56[$l[1]] = $version;
-                    } elseif (substr($version, 0, 3) === '5.5') {
-                        $changelog55[$l[1]] = $version;
-                    } else {
-                        // ignore others
-                    }
-                } 
-            }
-        } else {
-//            print "No results for $lasection\n";
-        }
-    }
-    
-//    print "$version : $withFunction / $bugs / $total \n";
-}
-
-///// Processing PHP 7.1
+///// Processing PHP 7.2
+/*
 $changelogdev = array();
-$newsDev = file_get_contents('https://raw.githubusercontent.com/php/php-src/master/NEWS');
+//$newsDev = file_get_contents('https://raw.githubusercontent.com/php/php-src/master/NEWS');
+$newsDev = $changelog;
 if (empty($newsDev)) {
     print "Warning, no NEWS provided\n";
 }
@@ -100,19 +38,16 @@ $text = $newsDev;
 
 $total     = 0;
 $processed = 0;
-preg_match_all("/- ([^:]+):\s*(  \. .*?)\n\n/s", $text, $sections, PREG_SET_ORDER);
+preg_match_all("/- ([^:]*?):?\s*(  \. .*?)\n\n/s", $text, $sections, PREG_SET_ORDER);
 print count($sections)." sections\n";
+
 foreach($sections as $section) {
     $lasection = $section[1];
     if (!in_array(strtolower($lasection), $exts)) {
-        print "  Missing extension : $lasection\n";
+        print "  Missing extension : |$lasection|\n";
+        die();
     }
     preg_match_all("/  \. (.*?)\n(?!    )/s", $section[2]."\n  . ", $features);
-//    print $lasection." ".count($features[0])."\n";
-//    print_r($features[0]);
-    if ($lasection == 'JSON') {
-//        print $section[2];die();
-    }
     
     foreach($features[0] as $row) {
         $bugfix = trim(str_replace("\n   ", '', str_replace('  . ', '', $row)));
@@ -137,6 +72,7 @@ foreach($sections as $section) {
 }
 
 print "\nFinished with NEWS (Dev) : $processed / $total updates founds\n\n";
+die();
 
 foreach($changelogdev as $bugid => $section) {
     $res = $sqlite->query('SELECT * FROM bugfixes WHERE bugs='.$bugid);
@@ -148,13 +84,16 @@ foreach($changelogdev as $bugid => $section) {
                             VALUES  (null, '$section[title]', 'PHP'      , '$section[function]', '', $bugid, '7.1.0-dev', '', '', '', '', '$section[section]', null);\n";
     }
 }
+*/
 
 ///// Processing PHP 7.*
 
 preg_match_all('#<section class="version" id=".*?">(.*?)</section>#s', $changelog, $r);
 $blocks = $r[1];
 $final = '';
+    $blocks = array_slice($blocks, 0, 2);
 
+$inserts = array();
 foreach($blocks as $block) {
     $total = 0;
     $bugs = 0;
@@ -178,6 +117,8 @@ foreach($blocks as $block) {
     preg_match_all('#<li>(.*?):\s<ul>(.*?)</ul></li>#s', $block, $sections, PREG_SET_ORDER);
     foreach($sections as $section) {
         $lasection = $section[1];
+        
+//        print "$version $lasection\n";continue;
         // Process multiple bugs on one line
         // process CVE indication
         // Process extension-related bugs (see PCRE)
@@ -199,19 +140,31 @@ foreach($blocks as $block) {
                     
                     $title       = $sqlite->escapeString($l[2]);
                     $lasection   = strtolower($lasection);
-                    $solvedInDev = isset($changelogdev[$l[1]]) ? 'dev' : null;
-                    $solvedIn56  = isset($changelog56[$l[1]]) ? $changelog56[$l[1]] : null;
-                    $solvedIn55  = isset($changelog55[$l[1]]) ? $changelog55[$l[1]] : null;
+                    $solvedInDev = null;
+                    $solvedIn56  = null;
+                    $solvedIn55  = null;
 
                     $updates = array();
                     if ($row === false) {
-                        print "INSERT INTO bugfixes ('id', 'title', 'namespace', 'function', 'cve', 'bugs', 'solvedInDev', 'solvedIn71', 'solvedIn70', 'solvedIn56', 'solvedIn55', 'extension', 'analyzer') 
-                                             VALUES (null, '$title', 'PHP'      , '$lafunction', '$cve', $l[1], '$solvedInDev', '$version', '', '$solvedIn56', '$solvedIn55', '$lasection', null);\n";
+                        if (!isset($inserts[$l[1]])) {
+                            $inserts[$l[1]] = array('title'       => $title,
+                                                    'lasection'   => $lasection,
+                                                    'solvedInDev' => null,
+                                                    'solvedIn70'  => null,
+                                                    'solvedIn71'  => null,
+                                                    'cve'         => $cve,
+                                                    'bugfix'      => $l[1]
+                                                    );
+                        }
+
+                        $solvedIn = 'solvedIn'.$version[0].$version[2];
+                        $inserts[$l[1]][$solvedIn] = $version;
+
                         continue;
                     } 
 
                     if ($row['solvedInDev'] != $solvedInDev) {
-                        $updates[] = "solvedInDev = '7.1.0-dev' ";
+                        $updates[] = "solvedInDev = '7.2.0-dev' ";
                     } 
                     if ($row['solvedIn71'] != $version) {
                         $updates[] = "solvedIn71 = '$version' ";
@@ -249,8 +202,13 @@ foreach($blocks as $block) {
     $final .= "$version : $withFunction / $bugs / $total \n";
 }
 
+    foreach($inserts as $insert) {
+        print "INSERT INTO bugfixes ('id', 'title', 'namespace', 'function', 'cve', 'bugs', 'solvedInDev', 'solvedIn71', 'solvedIn70', 'solvedIn56', 'solvedIn55', 'extension', 'analyzer') 
+                             VALUES (null, '$insert[title]', 'PHP'      , '$lafunction', '$insert[cve]', $insert[bugfix], '$insert[solvedInDev]', '$insert[solvedIn71]', '$insert[solvedIn70]', '', '', '$insert[lasection]', null);\n";
+    }
+
 print $final;
-unlink('NEWS.txt');
-unlink('changelog.5.html');
+//unlink('NEWS.txt');
+//unlink('changelog.5.html');
 unlink('changelog.7.html');
 ?>

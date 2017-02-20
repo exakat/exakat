@@ -1,4 +1,4 @@
-Version 0.10.2 (Water Lizard Dragon, Coming up)
+Version 0.10.3 (Dragon King of the Jing River , Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 0.10.2 (Water Lizard Dragon, Coming up)
     + 
 + Tokenizer
     + 
+    
+Version 0.10.2 (Water Lizard Dragon, 2017-02-20)
++ Architecture
+    + 
++ Report
+    + Text format now understand -T, -P to extract only some of the results.
+    + Fixed dump of extends. 
++ Analyzer
+    + Added support for PHP 7.1.2 and PHP 7.0.16
+    + New analyzer : report forgotten 'throw' keyword.
+    + New analyzer : report class / function confusing name
+    + Added support for libsodium
+    + Upgraded PHP Relaxed Keyword : Ignore properties.
+    + Upgraded analysis : 1824 / 1826 test pass (99.9% pass)
++ Tokenizer
+    + Fixed a bug that mistakes native PHP classes for functions
+    + Fixed rare situation with grouped const/function.
     
 Version 0.10.1 (King of Wuji Kingdom, 2017-02-13)
 + Architecture

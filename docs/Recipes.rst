@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 14 Feb 2017 08:41:15 +0000
-.. comment: Generation hash : 5f00dc2792315dc9ade2ee4d316f8e597b9b881d
+.. comment: Generation date : Mon, 20 Feb 2017 15:40:44 +0000
+.. comment: Generation hash : 067ffa3b3e4bd1a7c4b835ad172d0c224f203e98
 
 
 .. _analyze:
@@ -69,7 +69,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 284 analysis
+Total : 287 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -100,6 +100,7 @@ Total : 284 analysis
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
+* :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Class Should Be Final By Ocramius <class-should-be-final-by-ocramius>`
 * :ref:`Class, Interface Or Trait With Identical Names <class,-interface-or-trait-with-identical-names>`
@@ -147,6 +148,7 @@ Total : 284 analysis
 * :ref:`For Using Functioncall <for-using-functioncall>`
 * :ref:`Foreach Needs Reference Array <foreach-needs-reference-array>`
 * :ref:`Foreach Reference Is Not Modified <foreach-reference-is-not-modified>`
+* :ref:`Forgotten Thrown <forgotten-thrown>`
 * :ref:`Forgotten Visibility <forgotten-visibility>`
 * :ref:`Forgotten Whitespace <forgotten-whitespace>`
 * :ref:`Fully Qualified Constants <fully-qualified-constants>`
@@ -192,6 +194,7 @@ Total : 284 analysis
 * :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Used Properties <never-used-properties>`
+* :ref:`No Boolean As Default <no-boolean-as-default>`
 * :ref:`No Choice <no-choice>`
 * :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 * :ref:`No Direct Usage <no-direct-usage>`

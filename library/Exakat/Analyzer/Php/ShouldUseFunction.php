@@ -29,7 +29,9 @@ class ShouldUseFunction extends Analyzer {
         $this->atomIs('Functioncall')
              ->hasNoIn(array('METHOD', 'NEW'))
              ->tokenIsNot(array('T_OPEN_BRACKET', 'T_ARRAY', 'T_PRINT', 'T_ECHO'))
-             ->is('aliased', false);
+             ->outIs('NAME')
+             ->hasNoIn('DEFINITION')
+             ->back('first');
         $this->prepareQuery();
     }
 }

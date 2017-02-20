@@ -112,8 +112,10 @@ Glossary
       + :ref:`Break With Non Integer <break-with-non-integer>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Long Arguments <long-arguments>`
+      + :ref:`Multiples Identical Case <multiples-identical-case>`
       + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
       + :ref:`Switch To Switch <switch-to-switch>`
+      + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
       + :ref:`Switch Without Default <switch-without-default>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Useless Switch <useless-switch>`
@@ -516,6 +518,7 @@ Glossary
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`Switch To Switch <switch-to-switch>`
+      + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
       + :ref:`Switch Without Default <switch-without-default>`
 
     + `sys_get_temp_dir()`

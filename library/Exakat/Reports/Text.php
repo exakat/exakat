@@ -29,8 +29,17 @@ class Text extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        if ($this->config->thema !== NULL) {
+            $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
+            $list = '"'.join('", "', $list).'"';
+        } elseif ($this->config->program !== NULL) {
+            print "analyze\n";
+            $list = '"'.$this->config->program.'"';
+        } else {
+            print "default\n";
+            $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+            $list = '"'.join('", "', $list).'"';
+        }
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';

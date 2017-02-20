@@ -283,7 +283,7 @@ Displays the help section.
 
     php exakat.phar help
 
-results
+Results
 #######
 
 This displays : 
@@ -419,7 +419,7 @@ Command
 #######
 ::
 
-    exakat report -p <project> -format <Format> -file <file> [-v]
+    exakat report -p <project> -format <Format> [-file <file>] [-v]
 
 Options
 #######
@@ -439,6 +439,18 @@ Options
 | -file     | No  | File or directory name for the report. Adapted file extension is added.     |
 |           |     | Report is located in the projects/<project>/ folder                         |
 |           |     | Default is 'stdout', but varies with format.                                |
++-----------+-----+-----------------------------------------------------------------------------+
+| -T        | No  | Thema's results. All the analysers in this thema will be reported.          |
+|           |     | Note that the report format may override this configuration : for example   |
+|           |     | Ambassador manage its own list of analysers.                                |
+|           |     | Uses this with Text format.                                                 |
+|           |     | Has priority over the -P option                                             |
++-----------+-----+-----------------------------------------------------------------------------+
+| -P        | No  | Analyzer's results. Only one analyser's will be reported.                   |
+|           |     | Note that the report format may override this configuration : for example   |
+|           |     | Ambassador manage its own list of analysers.                                |
+|           |     | Uses this with Text format.                                                 |
+|           |     | Has lower priority than the -T option                                       |
 +-----------+-----+-----------------------------------------------------------------------------+
 
 Report formats
