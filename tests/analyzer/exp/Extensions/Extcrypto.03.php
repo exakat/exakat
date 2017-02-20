@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('Hash( )',
-                      'namespace Crypto { /**/ } ');
+                      'namespace Crypto { /**/ } ',
+                      '\crypto\hmac( )');
 
-$expected_not = array('Crypto');
+$expected_not = array('Crypto',
+                      '\crypto\base64( )');
 
 ?>

@@ -27,53 +27,20 @@ use Exakat\Analyzer\Docs;
 use Exakat\Config;
 use Exakat\Data\Methods;
 use Exakat\Tokenizer\Token;
+use Exakat\Exceptions\GremlinException;
 
 class LoadFinal extends Tasks {
     const CONCURENCE = self::ANYTIME;
+    private $linksIn = '';
 
     public function run() {
-        $linksIn = Token::linksAsList();
+        $this->linksIn = Token::linksAsList();
+
         $this->logTime('Start');
 
-        display("\\parent to fullnspath\n");
-        $this->logTime('parent');
-
-        // processing '\parent' fullnspath
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\parent"}
-.where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("EXTENDS") )
-.property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("EXTENDS").values("fullnspath") )
-.where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("EXTENDS").in("DEFINITION") )
-.addE('DEFINITION').from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("EXTENDS").in("DEFINITION") )
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display("\\parent to fullnspath\n");
-        $this->logTime('parent');
-
-        // processing '\self' fullnspath
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\self"}
-.where( __.until( and( hasLabel("Class", "Interface", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)) )
-.property('fullnspath', __.until( and( hasLabel("Class", "Interface", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("NAME").values("fullnspath") )
-.addE('DEFINITION').from( __.until( and( hasLabel("Class", "Interface", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)) )
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display('\\self to fullnspath');
-        $this->logTime('self');
-
-        // processing '\static' fullnspath
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\static"}
-.where( __.until( and( hasLabel("Class", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)) )
-.property('fullnspath', __.until( and( hasLabel("Class", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)).out("NAME").values("fullnspath") )
-.addE('DEFINITION').from( __.until( and( hasLabel("Class", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($linksIn)) )
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display('\\static to fullnspath');
-        $this->logTime('static');
+        $this->makeParentFullnspath();
+        $this->makeSelfFullnspath();
+        $this->makeStaticFullnspath();
 
         // Create link between Class constant and definition
         $query = <<<'GREMLIN'
@@ -232,25 +199,8 @@ GREMLIN;
         display('spot constants that falls back on global constants');
         $this->logTime('fallback to global for constants');
 
-        $functions = call_user_func_array('array_merge', $f);
-        $functions = array_filter($functions, function ($x) { return strpos($x, '\\') === false;});
-        $functions = array_map('strtolower', $functions);
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .not(has("token", "T_OPEN_TAG_WITH_ECHO"))
-     .filter{ it.get().value("code").toLowerCase() in arg1 }
-     .where( __.in("DEFINITION").count().is(eq(0)) )
-     .sideEffect{
-         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
-         it.get().property("fullnspath", fullnspath); 
-     }
-
-GREMLIN;
-        $this->gremlin->query($query, array('arg1' => $functions));
-        display('mark PHP native functions call');
-        $this->logTime('PHP Native functions');
-
+        $this->spotPHPNativeFunctions($f);
+        
         // Define-style constant definitions
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
@@ -424,6 +374,88 @@ GREMLIN;
 
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
+    }
+    
+    private function makeParentFullnspath() {
+        $title = 'parent to fullnspath';
+
+        // calculating fullnspath for 'parent' keyword
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\parent"}
+     .where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS") )
+     .property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS").values("fullnspath") )
+     .where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in(this->linksIn)).out("EXTENDS").in("DEFINITION") )
+     .addE('DEFINITION')
+        .from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS").in("DEFINITION") )
+
+GREMLIN;
+
+        $this->runQuery($query, $title);
+    }
+    
+    private function makeSelfFullnspath() {
+        $title = 'self to fullnspath';
+
+        // calculating fullnspath for 'self' keyword
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\self"}
+.where( __.until( and( hasLabel("Class", "Interface", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)) )
+.property('fullnspath', __.until( and( hasLabel("Class", "Interface", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("NAME").values("fullnspath") )
+.addE('DEFINITION').from( __.until( and( hasLabel("Class", "Interface", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)) )
+
+GREMLIN;
+
+        $this->runQuery($query, $title);
+    }
+
+    private function makeStaticFullnspath() {
+        $title = 'static to fullnspath';
+
+        // calculating fullnspath for 'self' keyword
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\static"}
+     .where( __.until( and( hasLabel("Class", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)) )
+     .property('fullnspath', __.until( and( hasLabel("Class", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("NAME").values("fullnspath") )
+     .addE('DEFINITION').from( __.until( and( hasLabel("Class", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)) )
+
+GREMLIN;
+
+        $this->runQuery($query, $title);
+    }
+
+    private function spotPHPNativeFunctions($f) {
+       $title = 'mark PHP native functions call';
+       $functions = call_user_func_array('array_merge', $f);
+       $functions = array_filter($functions, function ($x) { return strpos($x, '\\') === false;});
+       $functions = array_map('strtolower', $functions);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall")
+     .where( __.in("NEW").count().is(eq(0)) )
+     .not(has("token", "T_OPEN_TAG_WITH_ECHO"))
+     .filter{ it.get().value("code").toLowerCase() in arg1 }
+     .where( __.in("DEFINITION").count().is(eq(0)) )
+     .sideEffect{
+         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+         it.get().property("fullnspath", fullnspath); 
+     }
+
+GREMLIN;
+
+        $this->runQuery($query, $title, array('arg1' => $functions));
+    }
+
+   private function runQuery($query, $title, $args = array()) {
+        display($title);
+        $this->logTime($title);
+        
+        try {
+            $this->gremlin->query($query, $args);
+        } catch (GremlinException $e) {
+        
+        }
+        display('   '.$title);
+        $this->logTime('end '.$title);
     }
 }
 
