@@ -479,10 +479,10 @@ GREMLIN
 
             // Get extends
             if (!empty($row->extends)) {
-                if (isset($extendsId[$row->extends[0]])) {
-                    $extendsId[$row->extends[0]][] = $citId[$row->fullnspath];
+                if (isset($extendsId[$row->extends])) {
+                    $extendsId[$row->extends][] = $citId[$row->fullnspath];
                 } else {
-                    $extendsId[$row->extends[0]] = array($citId[$row->fullnspath]);
+                    $extendsId[$row->extends] = array($citId[$row->fullnspath]);
                 }
             }
 
@@ -823,6 +823,9 @@ g.V().$filter.has('constant', true)
 GREMLIN
 ;
             $res = $this->gremlin->query($query);
+            if (!is_object($res)) {
+                return ;
+            }
             $res = $res->results;
 
             $total = 0;
@@ -857,15 +860,17 @@ SQL;
                    .hasLabel("Include").in("NAME").as("include")
                    .select("file", "include").by("fullcode").by("fullcode")';
         $res = $this->gremlin->query($query);
-        $includes = $res->results;
+        if (isset($res->results)) {
+            $includes = $res->results;
         
-        foreach($includes as $link) {
-            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
-            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
-            $insertQuery->bindValue(':type',      'INCLUDE',      \SQLITE3_TEXT);
-            $insertQuery->execute();
+            foreach($includes as $link) {
+                $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+                $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+                $insertQuery->bindValue(':type',      'INCLUDE',      \SQLITE3_TEXT);
+                $insertQuery->execute();
+            }
+            display(count($includes)." inclusions ");
         }
-        display(count($includes)." inclusions ");
 
         // Finding extends and implements
         $query = 'g.V().hasLabel("File").as("file")
@@ -876,16 +881,18 @@ SQL;
                    .select("file", "type", "include").by("fullcode").by(label()).by("fullcode")
                    ';
         $res = $this->gremlin->query($query);
-        $extends = $res->results;
+        if (isset($res->results)) {
+            $extends = $res->results;
         
-        foreach($extends as $link) {
-            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
-            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
-            $insertQuery->bindValue(':type',      $link->type,    \SQLITE3_TEXT);
-            $insertQuery->execute();
+            foreach($extends as $link) {
+                $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+                $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+                $insertQuery->bindValue(':type',      $link->type,    \SQLITE3_TEXT);
+                $insertQuery->execute();
+            }
+            display(count($extends)." extends for classes ");
         }
-        display(count($extends)." extends for classes ");
-
+        
         // Finding extends for interfaces
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Interface")).times(15)
@@ -895,16 +902,18 @@ SQL;
                    .select("file", "include").by("fullcode").by("fullcode")
                    ';
         $res = $this->gremlin->query($query);
-        $extends = $res->results;
-
-        foreach($extends as $link) {
-            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
-            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
-            $insertQuery->bindValue(':type',      'EXTENDS',      \SQLITE3_TEXT);
-            $insertQuery->execute();
+        if (isset($res->results)) {
+            $extends = $res->results;
+    
+            foreach($extends as $link) {
+                $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+                $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+                $insertQuery->bindValue(':type',      'EXTENDS',      \SQLITE3_TEXT);
+                $insertQuery->execute();
+            }
+            display(count($extends)." extends for interfaces ");
         }
-        display(count($extends)." extends for interfaces ");
-
+        
         // traits
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Class", "Trait")).times(15)
@@ -914,16 +923,18 @@ SQL;
                    .select("file", "include").by("fullcode").by("fullcode")
                    ';
         $res = $this->gremlin->query($query);
-        $uses = $res->results;
-
-        foreach($uses as $link) {
-            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
-            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
-            $insertQuery->bindValue(':type',      'USE',          \SQLITE3_TEXT);
-            $insertQuery->execute();
+        if (isset($res->results)) {
+            $uses = $res->results;
+    
+            foreach($uses as $link) {
+                $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+                $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+                $insertQuery->bindValue(':type',      'USE',          \SQLITE3_TEXT);
+                $insertQuery->execute();
+            }
+            display(count($extends)." use ");
         }
-        display(count($extends)." use ");
-
+        
         // Functioncall()
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Functioncall")).times(15)
@@ -975,15 +986,17 @@ SQL;
                    .select("file", "include").by("fullcode").by("fullcode")
                    ';
         $res = $this->gremlin->query($query);
-        $news = $res->results;
+        if (isset($res->results)) {
+            $news = $res->results;
 
-        foreach($news as $link) {
-            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
-            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
-            $insertQuery->bindValue(':type',      'NEW',          \SQLITE3_TEXT);
-            $insertQuery->execute();
+            foreach($news as $link) {
+                $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+                $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+                $insertQuery->bindValue(':type',      'NEW',          \SQLITE3_TEXT);
+                $insertQuery->execute();
+            }
+            display(count($news)." new ");
         }
-        display(count($news)." new ");
 
         // static calls (property, constant, method)
         $query = 'g.V().hasLabel("File").as("file")
@@ -994,16 +1007,17 @@ SQL;
                    .select("file", "type", "include").by("fullcode").by(label()).by("fullcode")
                    ';
         $res = $this->gremlin->query($query);
-        $statics = $res->results;
-
-        foreach($statics as $link) {
-            $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
-            $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
-            $insertQuery->bindValue(':type',      strtoupper($link->type),    \SQLITE3_TEXT);
-            $insertQuery->execute();
+        if (isset($res->results)) {
+            $statics = $res->results;
+    
+            foreach($statics as $link) {
+                $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
+                $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
+                $insertQuery->bindValue(':type',      strtoupper($link->type),    \SQLITE3_TEXT);
+                $insertQuery->execute();
+            }
+            display(count($statics)." static calls CPM");
         }
-        display(count($statics)." static calls CPM");
-        
     }
 }
 
