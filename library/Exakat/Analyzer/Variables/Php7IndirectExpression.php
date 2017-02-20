@@ -40,11 +40,11 @@ class Php7IndirectExpression extends Analyzer {
         $this->prepareQuery();
 
 //$foo->$bar['baz']	$foo->{$bar['baz']}	($foo->$bar)['baz']
-        $this->atomIs('Property')
+        $this->atomIs('Array')
              ->hasNoIn('NAME')
-             ->outIs('PROPERTY')
-             ->atomIs('Array')
              ->outIs('VARIABLE')
+             ->atomIs('Property')
+             ->outIs('PROPERTY')
              ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();
@@ -52,10 +52,10 @@ class Php7IndirectExpression extends Analyzer {
 //Foo::$bar['baz'](); 
         $this->atomIs('Functioncall')
              ->outIs('NAME')
-             ->atomIs(array('Property', 'Staticproperty'))
-             ->outIs('PROPERTY')
              ->atomIs('Array')
              ->outIs('VARIABLE')
+             ->atomIs(array('Property', 'Staticproperty'))
+             ->outIs('PROPERTY')
              ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();
