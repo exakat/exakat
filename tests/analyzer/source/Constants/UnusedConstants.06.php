@@ -25,6 +25,7 @@ namespace A\B\C\D {
     define('\\A\\B\\C\\D\\FOO', 9);
     define('\\A\\B\\C\\D\\FOO2', 10);
     define('\\A\\B\\C\\D\\FOO5', 11);
+    define('A\\B\\C\\D\\FOO6', 12);
 }
 
 ?>
