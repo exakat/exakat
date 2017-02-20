@@ -1,19 +1,19 @@
 <?php
 
-$expected     = array( '$b->foreach', 
-                       '$d->include', 
-                       '$a->do', 
-                       '$c->while', 
-                       'C::$while', 
-                       'A::$do', 
-                       'B::$then', 
-                       'D::$include', 
-                       'B::then', 
+$expected     = array( 'B::then', 
                        'D::include', 
                        'C::while', 
                        'A::do');
 
-$pxpected_not = array('normal',
+$pxpected_not = array('C::$while', 
+                      'A::$do', 
+                      'B::$then', 
+                      'D::$include', 
+                      '$b->foreach', 
+                      '$d->include', 
+                      '$a->do', 
+                      '$c->while', 
+                      'normal',
                       'normalstatic',
                       '$normalStatic');
 

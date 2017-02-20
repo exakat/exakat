@@ -83,27 +83,12 @@ class Php7RelaxedKeyword extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // Static Property
-        $keywordsVariables = array_map(function ($x) { return '$'.$x; }, $keywords);
-        $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
-             ->codeIs($keywordsVariables)
-             ->back('first');
-        $this->prepareQuery();
-
         //////////////////////////////////////////////////////////////////////
-        // Static usage                                                     //
+        // Normal usage                                                     //
         //////////////////////////////////////////////////////////////////////
         // Methodcall 
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->codeIs($keywords)
-             ->back('first');
-        $this->prepareQuery();
-
-        // Property
-        $this->atomIs('Property')
-             ->outIs('PROPERTY')
              ->codeIs($keywords)
              ->back('first');
         $this->prepareQuery();
