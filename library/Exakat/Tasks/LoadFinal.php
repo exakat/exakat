@@ -276,6 +276,7 @@ GREMLIN;
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .where( __.in("NAME", "SUBNAME", "METHOD", "PROPERTY", "CONSTANT").count().is(eq(0)) )
+     .has("token", without("T_CONST", "T_FUNCTION"))
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')
      .from( 
