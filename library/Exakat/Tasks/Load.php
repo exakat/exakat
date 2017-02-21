@@ -334,7 +334,7 @@ class Load extends Tasks {
                             \Exakat\Tasks\T_NS_SEPARATOR             => 'processNsnameAbsolute',
                             \Exakat\Tasks\T_COALESCE                 => 'processCoalesce',
 
-                            \Exakat\Tasks\T_INLINE_HTML              => 'processInlineHtml',
+                            \Exakat\Tasks\T_INLINE_HTML              => 'processInlinehtml',
 
                             \Exakat\Tasks\T_INC                      => 'processPlusplus',
                             \Exakat\Tasks\T_DEC                      => 'processPlusplus',
@@ -1362,7 +1362,7 @@ class Load extends Tasks {
             in_array($this->tokens[$this->id + 2][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO))) {
     
             ++$this->id;
-            $this->processInlineHtml();
+            $this->processInlinehtml();
         
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
@@ -2864,8 +2864,8 @@ class Load extends Tasks {
         return $id;
     }
 
-    private function processInlineHtml() {
-        $this->processSingle('InlineHtml');
+    private function processInlinehtml() {
+        $this->processSingle('Inlinehtml');
         $this->processSemicolon();
     }
 
