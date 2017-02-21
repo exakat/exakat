@@ -42,6 +42,7 @@ class ShouldUseThis extends Analyzer {
         // Static Methods must use a static call to property or variable (not constant though)
         $this->atomIs('Function')
              ->hasOut('STATIC')
+             ->hasNoOut('ABSTRACT')
              ->hasClassTrait()
              ->noAtomInside(array('Staticproperty', 'Staticmethodcall'))
              ->back('first');
