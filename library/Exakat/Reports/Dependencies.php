@@ -30,7 +30,7 @@ class Dependencies extends Reports {
     const FILE_FILENAME  = 'dependencies';
 
     public function generate($folder, $name= 'dependencies') {
-        $graph = new Gremlin3(Config::factory());
+        $graph = new Gremlin3($this->config);
         
         $links    = array();
         $nodes    = array('class' => array(), 'trait' => array(), 'interface' => array(), 'unknown' => array());

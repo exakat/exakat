@@ -1685,8 +1685,7 @@ GREMLIN;
     }
 
     protected function loadIni($file, $index = null) {
-        $config = Config::factory();
-        $fullpath = $config->dir_root.'/data/'.$file;
+        $fullpath = $this->config->dir_root.'/data/'.$file;
         
         if (!file_exists($fullpath)) {
             return null;
@@ -1702,8 +1701,7 @@ GREMLIN;
     }
 
     protected function loadJson($file) {
-        $config = Config::factory();
-        $fullpath = $config->dir_root.'/data/'.$file;
+        $fullpath = $this->config->dir_root.'/data/'.$file;
 
         if (!file_exists($fullpath)) {
             return null;
@@ -1725,9 +1723,7 @@ GREMLIN;
 
     public function getSeverity() {
         if (Analyzer::$docs === null) {
-            $config = Config::factory();
-            
-            Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
+            Analyzer::$docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
         }
         
         return Analyzer::$docs->getSeverity($this->analyzer);
@@ -1735,9 +1731,7 @@ GREMLIN;
 
     public function getTimeToFix() {
         if (Analyzer::$docs === null) {
-            $config = Config::factory();
-            
-            Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
+            Analyzer::$docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
         }
         
         return Analyzer::$docs->getTimeToFix($this->analyzer);

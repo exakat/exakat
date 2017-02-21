@@ -24,14 +24,12 @@ namespace Exakat\Reports;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Tasks\Project;
-use Exakat\Config;
 
 class Clustergrammer extends Reports {
     const FILE_EXTENSION = 'txt';
     const FILE_FILENAME  = 'clustergrammer';
 
     public function generate($folder, $name= 'txt') {
-        $config = Config::factory();
         $themes = $this->themesToShow;
 
         $analyzers = array();

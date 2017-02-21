@@ -35,8 +35,7 @@ class Incompilable extends Analyzer {
     public function toArray() {
         $report = array();
         
-        $config = Config::factory();
-        foreach($config->other_php_versions as $version) {
+        foreach($this->config->other_php_versions as $version) {
             $r = Analyzer::$datastore->getRow('compilation'.$version);
             
             foreach($r as $l) {
@@ -49,8 +48,7 @@ class Incompilable extends Analyzer {
     }
 
     public function hasResults() {
-        $config = Config::factory();
-        foreach($config->other_php_versions as $version) {
+        foreach($this->config->other_php_versions as $version) {
             $r = Analyzer::$datastore->getRow('compilation'.$version);
             
             if (count($r) > 0) { return true; }
