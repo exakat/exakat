@@ -2,6 +2,7 @@
 
 $expected     = array('-$f');
 
-$expected_not = array();
+$expected_not = array('$a instanceof B',
+                      '$d-e()');
 
 ?>

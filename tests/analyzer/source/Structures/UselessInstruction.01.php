@@ -15,4 +15,6 @@ __DIR__;
 Stdclass::$x;
 Stdclass::x;
 
+$a = Stdclass::x2;
+
 ?>
