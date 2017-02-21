@@ -29,7 +29,7 @@ spl_autoload_register('Autoload::autoload_library');
 $docs = new Docs('./data/analyzers.sqlite');
 $list = $docs->getThemeAnalyzers('Codacy');
 
-const DOC_ROOT = '../docker-codacy/docs';
+const DOC_ROOT = '../docker/docs';
 
 if (file_exists(DOC_ROOT)) {
     print "Removing ".DOC_ROOT."\n";
@@ -37,6 +37,8 @@ if (file_exists(DOC_ROOT)) {
 }
 
 mkdir(DOC_ROOT, 0755);
+mkdir(DOC_ROOT.'/description/', 0755);
+mkdir(DOC_ROOT.'/description/description/', 0755);
 
 $description = array();
 
@@ -52,9 +54,9 @@ foreach($list as $doc) {
     $description[] = (object) $d;
     
     $dir = dirname($doc);
-    if (!file_exists(DOC_ROOT.'/'.$dir)) {
-        print "adding ".DOC_ROOT.'/'.$dir."\n";
-        mkdir(DOC_ROOT.'/'.$dir, 0755);
+    if (!file_exists(DOC_ROOT.'/description/description/'.$dir)) {
+        print "adding ".DOC_ROOT.'/description/description/'.$dir."\n";
+        mkdir(DOC_ROOT.'/description/description/'.$dir, 0755);
     }
     
     $md = preg_replace('/`(.*?)\s+<(.*?)>`_/', '[$1]($2)', $ini['description']);
@@ -64,10 +66,10 @@ foreach($list as $doc) {
     
     //tables
     
-    file_put_contents(DOC_ROOT.'/'.$doc.'.md', $md);
+    file_put_contents(DOC_ROOT.'/description/description/'.$doc.'.md', $md);
 }
 
-$descriptionFile = fopen(DOC_ROOT.'/description.json', 'w+');
+$descriptionFile = fopen(DOC_ROOT.'/description/description.json', 'w+');
 fwrite($descriptionFile, json_encode($description, JSON_UNESCAPED_SLASHES));
 fclose($descriptionFile);
 
