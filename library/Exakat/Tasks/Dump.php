@@ -132,11 +132,18 @@ SQL;
             display('Processing thema : '.$thema);
         } elseif ($this->config->program !== null) {
             $analyzer = $this->config->program;
-            if (!Analyzer::getClass($analyzer)) {
-                throw new NoSuchAnalyzer($analyzer);
-            }            
-            $themes = array($analyzer);
-            display('Processing one analyzer : '.$analyzer);
+            if(!is_array($analyzer)) {
+                $themes = array($analyzer);
+            } else {
+                $themes = $analyzer;
+            }
+            
+            foreach($themes as $a) {
+                if (!Analyzer::getClass($a)) {
+                    throw new NoSuchAnalyzer($a);
+                } 
+            }
+            display('Processing '.count($themes).' analyzer'.(count($themes) > 1 ? 's' : '').' : '.implode(', ', $themes));
         } 
 
         $sqlitePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
