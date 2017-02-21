@@ -45,11 +45,6 @@ class Project extends Tasks {
     public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subTask);
         
-        $themes = $config->project_themes;
-        if (!empty($themes)) {
-            $this->themes = $themes;
-        }
-
         $this->reports = $config->project_reports;
     }
 
@@ -82,9 +77,9 @@ class Project extends Tasks {
         $this->datastore = new Datastore($this->config, Datastore::CREATE);
         
         $audit_start = time();
-        $this->datastore->addRow('hash', array('audit_start' => $audit_start,
+        $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
                                                'exakat_version' => Exakat::VERSION,
-                                               'exakat_build' => Exakat::BUILD,
+                                               'exakat_build'   => Exakat::BUILD,
                                          ));
 
         display("Running project '$project'\n");
@@ -138,72 +133,17 @@ class Project extends Tasks {
 
         // Dump is a child process
         shell_exec($this->config->php . ' '.$this->config->executable.' dump -p '.$this->config->project);
-
-        foreach($this->themes as $theme) {
-            $this->addSnitch(array('step' => 'Analyze : '.$theme, 'project' => $this->config->project));
-            $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
-
-            $args = array ( 1 => 'analyze',
-                            2 => '-p',
-                            3 => $this->config->project,
-                            4 => '-T',
-                            5 => trim($theme, '"'), // No need to protect anymore, as this is internal
-                            6 => '-norefresh',
-                            7 => '-u'
-                            );
-            if ($this->config->quiet === true) {
-                $args[] = '-q';
-            }
-            
-            try {
-                $configThema = Config::push($args);
-
-                $analyze = new Analyze($this->gremlin, $configThema, Tasks::IS_SUBTASK);
-                $analyze->run();
-                unset($analyze);
-                
-                Config::pop();
-
-                $args = array ( 1 => 'dump',
-                                2 => '-p',
-                                3 => $this->config->project,
-                                4 => '-T',
-                                5 => trim($theme, '"'), // No need to protect anymore, as this is internal
-                                6 => '-u',
-                            );
-
-                $configThema = Config::push($args);
-
-                $audit_end = time();
-                $query = "g.V().count()";
-                $res = $this->gremlin->query($query);
-                $nodes = $res->results[0];
-                $query = "g.E().count()";
-                $res = $this->gremlin->query($query);
-                $links = $res->results[0];
-
-                $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
-                                                       'audit_length' => $audit_end - $audit_start,
-                                                       'graphNodes'   => $nodes,
-                                                       'graphLinks'   => $links));
-
-                $dump = new Dump($this->gremlin, $configThema, Tasks::IS_SUBTASK);
-                $dump->run();
-                unset($dump);
-
-                Config::pop();
-            } catch (\Exception $e) {
-                echo "Error while running the Analyze $theme \n",
-                     $e->getMessage(),
-                     "\nTrying next analysis\n";
-                file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
-            }
+        
+        if ($this->config->program !== null) {
+            $this->analyzeOne($this->config->program, $audit_start);
+        } else {
+            $this->analyzeThemes($this->config->themes, $audit_start);
         }
 
         display("Analyzed project\n");
         $this->logTime('Analyze');
-        $this->addSnitch(array('step'   => 'Analyzed', 
-                              'project' => $this->config->project));
+        $this->addSnitch(array('step'    => 'Analyzed', 
+                               'project' => $this->config->project));
 
         $this->logTime('Analyze');
 
@@ -268,6 +208,145 @@ GREMLIN;
 
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
+    }
+    
+    private function analyzeOne($analyzers, $audit_start) {
+        if (!is_array($analyzers)) {
+            $analyzers = array($analyzers);
+        }
+
+        foreach($analyzers as $analyzer) {
+            $this->addSnitch(array('step'    => 'Analyzer : '.$analyzer, 
+                                   'project' => $this->config->project));
+
+            $args = array ( 1 => 'analyze',
+                            2 => '-p',
+                            3 => $this->config->project,
+                            4 => '-P',
+                            5 => $analyzer,
+                            6 => '-norefresh',
+                            7 => '-u'
+                            );
+            if ($this->config->quiet === true) {
+                $args[] = '-q';
+            }
+            
+            try {
+                $configThema = Config::push($args);
+
+                $analyze = new Analyze($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+                $analyze->run();
+                unset($analyze);
+                
+                Config::pop();
+
+                $args = array ( 1 => 'dump',
+                                2 => '-p',
+                                3 => $this->config->project,
+                                4 => '-P',
+                                5 => $analyzer,
+                                6 => '-u',
+                            );
+
+                $configThema = Config::push($args);
+
+                $audit_end = time();
+                $query = "g.V().count()";
+                $res = $this->gremlin->query($query);
+                $nodes = $res->results[0];
+                $query = "g.E().count()";
+                $res = $this->gremlin->query($query);
+                $links = $res->results[0];
+
+                $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
+                                                       'audit_length' => $audit_end - $audit_start,
+                                                       'graphNodes'   => $nodes,
+                                                       'graphLinks'   => $links));
+
+                $dump = new Dump($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+                $dump->run();
+                unset($dump);
+
+                Config::pop();
+            } catch (\Exception $e) {
+                echo "Error while running the Analyzer $theme \n",
+                     $e->getMessage(),
+                     "\nTrying next analysis\n";
+                file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+            }
+        }
+    }
+
+    private function analyzeThemes($themes, $audit_start) {
+        print "Analyzing Themes\n";
+        if (empty($themes)) {
+            $themes = $this->themes;
+        }
+        
+        if (!is_array($themes)) {
+            $themes = array($themes);
+        }
+
+        foreach($themes as $theme) {
+            $this->addSnitch(array('step' => 'Analyze : '.$theme, 'project' => $this->config->project));
+            $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
+
+            $args = array ( 1 => 'analyze',
+                            2 => '-p',
+                            3 => $this->config->project,
+                            4 => '-T',
+                            5 => trim($theme, '"'), // No need to protect anymore, as this is internal
+                            6 => '-norefresh',
+                            7 => '-u'
+                            );
+            if ($this->config->quiet === true) {
+                $args[] = '-q';
+            }
+            
+            try {
+                $configThema = Config::push($args);
+
+                $analyze = new Analyze($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+                $analyze->run();
+                unset($analyze);
+                
+                Config::pop();
+
+                $args = array ( 1 => 'dump',
+                                2 => '-p',
+                                3 => $this->config->project,
+                                4 => '-T',
+                                5 => trim($theme, '"'), // No need to protect anymore, as this is internal
+                                6 => '-u',
+                            );
+
+                $configThema = Config::push($args);
+
+                $audit_end = time();
+                $query = "g.V().count()";
+                $res = $this->gremlin->query($query);
+                $nodes = $res->results[0];
+                $query = "g.E().count()";
+                $res = $this->gremlin->query($query);
+                $links = $res->results[0];
+
+                $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
+                                                       'audit_length' => $audit_end - $audit_start,
+                                                       'graphNodes'   => $nodes,
+                                                       'graphLinks'   => $links));
+
+                $dump = new Dump($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+                $dump->run();
+                unset($dump);
+
+                Config::pop();
+            } catch (\Exception $e) {
+                echo "Error while running the Analyze $theme \n",
+                     $e->getMessage(),
+                     "\nTrying next analysis\n";
+                file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+            }
+        }
     }
 }
 
