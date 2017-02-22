@@ -1,0 +1,115 @@
+<?php
+/*
+ * Copyright 2012-2015 Damien Seguy – Exakat Ltd <contact(at)exakat.io>
+ * This file is part of Exakat.
+ *
+ * Exakat is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Exakat is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Exakat.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * The latest code can be found at <http://exakat.io/>.
+ *
+*/
+
+
+$analyzer1 = $argv[1];
+$analyzer2 = $argv[2];
+
+if (!preg_match('#^([A-Z][a-zA-Z0-9]*)/([A-Z][a-zA-Z0-9]*)$#is', $analyzer1, $parts1) ||
+    !preg_match('#^([A-Z][a-zA-Z0-9]*)/([A-Z][a-zA-Z0-9]*)$#is', $analyzer2, $parts2)
+    ) {
+    print "Usage : renameAnalyzer <Dir>/<Analyzer> <Dir2>/<Analyzer2>\n";
+    
+    $dirs = glob('library/Exakat/Analyzer/*', GLOB_ONLYDIR);
+    $dirs = array_map(function ($dir) { 
+        return str_replace('library/Exakat/Analyzer/', '', $dir); 
+    }, $dirs);
+    print "Dirs : ".implode(', ', $dirs)."\n";
+    die();
+}
+
+list(,$category1, $name1) = $parts1;
+list(,$category2, $name2) = $parts2;
+
+if (!file_exists('library/Exakat/Analyzer/'.$category1)) {
+    print "Usage : renameAnalyzer <Dir>/<Analyzer> <Dir2>/<Analyzer2>\n";
+    print "Dir $category1 doesn't exists\n";
+    
+    $dirs = glob('library/Exakat/Analyzer/*', GLOB_ONLYDIR);
+    $dirs = array_map(function ($dir) { 
+        return str_replace('library/Exakat/Analyzer/', '', $dir); 
+    }, $dirs);
+    print "Dirs : ".implode(', ', $dirs)."\n";
+    die();
+}
+
+if (!file_exists('library/Exakat/Analyzer/'.$category2)) {
+    print "Usage : renameAnalyzer <Dir>/<Analyzer> <Dir2>/<Analyzer2>\n";
+    print "Dir $category2 doesn't exists\n";
+    
+    $dirs = glob('library/Exakat/Analyzer/*', GLOB_ONLYDIR);
+    $dirs = array_map(function ($dir) { 
+        return str_replace('library/Exakat/Analyzer/', '', $dir); 
+    }, $dirs);
+    print "Dirs : ".implode(', ', $dirs)."\n";
+    die();
+}
+
+if (!file_exists('library/Exakat/Analyzer/'.$category1.'/'.$name1.'.php')) {
+    print "Usage : renameAnalyzer <Dir>/<Analyzer> <Dir2>/<Analyzer2>\n";
+    print "Analyzer $category1/$name1 doesn't exist\n";
+    
+    die();
+}
+
+if (file_exists('library/Exakat/Analyzer/'.$category2.'/'.$name2.'.php')) {
+    print "Usage : renameAnalyzer <Dir>/<Analyzer> <Dir2>/<Analyzer2>\n";
+    print "Analyzer $category2/$name2 already exists\n";
+    
+    die();
+}
+
+
+// rename file : 
+rename('library/Exakat/Analyzer/'.$analyzer1.'.php', 'library/Exakat/Analyzer/'.$analyzer2.'.php');
+$php = file_get_contents('library/Exakat/Analyzer/'.$analyzer2.'.php');
+$php = str_replace(array("\\$category1", " $name1 "), array("\\$category2", " $name2 "), $php));
+file_put_contents('library/Exakat/Analyzer/'.$analyzer2.'.php', $php);
+
+rename('human/en/'.$analyzer1.'.ini', 'human/en/'.$analyzer2.'.ini');
+
+// add to sqlite
+$sqlite = new Sqlite3('data/analyzers.sqlite');
+
+$idUnassigned = $sqlite->query("SELECT id FROM categories WHERE name='Unassigned'")->fetchArray();
+$idUnassigned = $idUnassigned[0];
+
+$sqlite->query("UPDATE analyzers SET folder='$category2', name='$name2' WHERE folder='$category1' AND name = '$name1'");
+$id = $sqlite->lastInsertRowID();
+
+// add test
+rename('tests/analyzer/Test/'.$analyzer1.'.php', 'tests/analyzer/Test/'.$analyzer2.'.php');
+$php = file_get_contents('tests/analyzer/Test/'.$analyzer2.'.php');
+$php = str_replace(array($category1, $name1), array($category2, $name2), $php));
+file_put_contents('tests/analyzer/Test/'.$analyzer2.'.php', $php);
+
+$sources = glob('tests/analyzer/source/'.$analyzer1.'.*.php');
+foreach($sources as $source) {
+    rename($source, str_replace(array("/$category1/", "/$name1/"), array("/$category2/", "/$name2/"), $source));
+}
+
+$exps = glob('tests/analyzer/exp/'.$analyzer1.'.*.php');
+foreach($exps as $exp) {
+    rename($exp, str_replace(array("/$category1/", "/$name1/"), array("/$category2/", "/$name2/"), $exp));
+}
+
+?>
