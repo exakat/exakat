@@ -568,9 +568,10 @@ class Load extends Tasks {
     private function reset() {
         $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
         $this->links = array();
-        $this->uses = array('function' => array(),
-                            'const'    => array(),
-                            'class'    => array());;
+        $this->calls = array();
+        $this->uses  = array('function' => array(),
+                             'const'    => array(),
+                             'class'    => array());;
         $this->usesId = array('function' => array(),
                               'const'    => array(),
                               'class'    => array());;
@@ -685,6 +686,7 @@ class Load extends Tasks {
             $this->setAtom($sequenceId, array('root' => true));
             $this->checkTokens($filename);
         } catch (LoadError $e) {
+            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
             $this->reset();
             throw new NoFileToProcess($filename, 'empty');
         } finally {
