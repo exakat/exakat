@@ -1902,6 +1902,7 @@ class Load extends Tasks {
             $this->processNsname();
             $id = $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON &&
+                  !$this->isContext(self::CONTEXT_NEW) &&
                   !in_array($this->tokens[$this->id - 1][0], array(\Exakat\Tasks\T_DOUBLE_COLON, \Exakat\Tasks\T_OBJECT_OPERATOR, \Exakat\Tasks\T_QUESTION, \Exakat\Tasks\T_CASE))) {
             $labelId = $this->addAtom('Label');
             $this->addLink($labelId, $id, 'LABEL');
@@ -3523,7 +3524,7 @@ class Load extends Tasks {
             } 
             // max(array_keys($this->atoms)) is the actual Functioncall
             $this->setAtom(max(array_keys($this->atoms)), array('fullnspath' => $fullnspath,
-                                                      'aliased'    => $aliased));
+                                                                'aliased'    => $aliased));
             $this->addCall('class', $fullnspath, max(array_keys($this->atoms)));
         } elseif ( !empty($this->atoms[$id + 2]['atom']) &&
                    $this->atoms[$id + 2]['atom'] === 'Nsname') {
@@ -3536,11 +3537,11 @@ class Load extends Tasks {
                                                                 'aliased'    => $aliased));
             $this->addCall('class', $fullnspath, max(array_keys($this->atoms)));
         } elseif ($this->atoms[$id + 1]['atom'] === 'Identifier') {
-
             list($fullnspath, $aliased) = $this->getFullnspath($id + 1);
             if ($aliased === self::ALIASED) {
                 $this->addLink($this->usesId['class'][strtolower($this->atoms[$id + 1]['code'])], max(array_keys($this->atoms)), 'DEFINITION');
             } 
+
             // max(array_keys($this->atoms)) is the actual Functioncall
             $this->setAtom(max(array_keys($this->atoms)), array('fullnspath' => $fullnspath,
                                                                 'aliased'    => $aliased));
