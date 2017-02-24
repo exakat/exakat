@@ -1,0 +1,218 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.41.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            =
+            Label : LEFT
+              parts
+              Label : APPEND
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  parts
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                ===
+                Label : LEFT
+                  $part
+                Label : RIGHT
+                  1
+              Label : ELSE
+                $part
+              Label : THEN
+                new
+                Label : NEW
+                  self
+        Label : ELEMENT
+          return
+          Label : RETURN
+            =
+            Label : LEFT
+              parts
+              Label : APPEND
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  parts
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                ===
+                Label : LEFT
+                  $part
+                Label : RIGHT
+                  NULL
+              Label : ELSE
+                $part
+              Label : THEN
+                new
+                Label : NEW
+                  static
+                  Label : ARGUMENTS
+                    Void
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    static
+        Label : ELEMENT
+          return
+          Label : RETURN
+            =
+            Label : LEFT
+              parts
+              Label : APPEND
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  parts
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                ===
+                Label : LEFT
+                  $part
+                Label : RIGHT
+                  NULL
+              Label : ELSE
+                $part
+              Label : THEN
+                new
+                Label : NEW
+                  parent
+        Label : ELEMENT
+          return
+          Label : RETURN
+            =
+            Label : LEFT
+              parts
+              Label : APPEND
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  parts
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                ===
+                Label : LEFT
+                  $part
+                Label : RIGHT
+                  NULL
+              Label : ELSE
+                $part
+              Label : THEN
+                new
+                Label : NEW
+                  X
+        Label : ELEMENT
+          return
+          Label : RETURN
+            =
+            Label : LEFT
+              parts
+              Label : APPEND
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  parts
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                ===
+                Label : LEFT
+                  $part
+                Label : RIGHT
+                  1
+              Label : ELSE
+                $part
+              Label : THEN
+                new
+                Label : NEW
+                  self
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    self
+        Label : ELEMENT
+          return
+          Label : RETURN
+            =
+            Label : LEFT
+              parts
+              Label : APPEND
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  parts
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                ===
+                Label : LEFT
+                  $part
+                Label : RIGHT
+                  1
+              Label : ELSE
+                $part
+              Label : THEN
+                new
+                Label : NEW
+                  self
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      1
+                  Label : NAME
+                    self
+        Label : ELEMENT
+          return
+          Label : RETURN
+            =
+            Label : LEFT
+              parts
+              Label : APPEND
+                ->
+                Label : OBJECT
+                  $this
+                Label : PROPERTY
+                  parts
+            Label : RIGHT
+              ?
+              Label : CONDITION
+                ===
+                Label : LEFT
+                  $part
+                Label : RIGHT
+                  1
+              Label : ELSE
+                $part
+              Label : THEN
+                new
+                Label : NEW
+                  self
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      1
+                    Label : ARGUMENT
+                      2
+                  Label : NAME
+                    self

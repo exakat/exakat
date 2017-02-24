@@ -34,7 +34,7 @@ class InterfaceUsage extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Interface')
-             ->outIs('Extends')
+             ->outIs('EXTENDS')
              ->atomIs(array('Identifier', 'Nsname'));
         $this->prepareQuery();
         

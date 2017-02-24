@@ -74,34 +74,8 @@ Label : PROJECT
                   $z
               Label : NAME
                 echo
-          Label : DEFINITION
-            'f'
           Label : NAME
             f
-          Label : DEFINITION
-            f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                print
-                Label : ARGUMENTS
-                  $e
-                  Label : ARGUMENT
-                    $e
-                Label : NAME
-                  print
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                ltrim
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $r
-                Label : NAME
-                  ltrim
-            Label : NAME
-              f
         Label : ELEMENT
           echo
           Label : ARGUMENTS

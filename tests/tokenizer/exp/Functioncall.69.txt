@@ -10,17 +10,19 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
+          C
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'D'
+          Label : NAME
+            C
+        Label : ELEMENT
           <?=
           Label : ARGUMENTS
             <?=
             Label : ARGUMENT
-              C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'D'
-              Label : NAME
-                C
+              Void
           Label : NAME
             <?=
         Label : ELEMENT

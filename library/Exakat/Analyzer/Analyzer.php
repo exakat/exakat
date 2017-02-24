@@ -467,6 +467,7 @@ GREMLIN;
 ////////////////////////////////////////////////////////////////////////////////
 
     protected function hasNoInstruction($atom = 'Function') {
+        assert($this->assertAtom($atom));
         $this->addMethod('where( 
  __.repeat(__.in(' . $this->linksDown . ')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
    .count().is(eq(0)))');
@@ -475,6 +476,7 @@ GREMLIN;
     }
 
     private function hasNoNamedInstruction($atom = 'Function', $name = null) {
+        assert($this->assertAtom($atom));
         if ($name === null) {
             return $this->hasNoInstruction($atom);
         }
@@ -487,6 +489,7 @@ __.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this
     }
 
     protected function hasInstruction($atom = 'Function') {
+        assert($this->assertAtom($atom));
         $this->addMethod('where( 
 __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
   .count().is(neq(0)))');
@@ -495,38 +498,43 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     protected function goToInstruction($atom = 'Namespace') {
+        assert($this->assertAtom($atom));
         $this->addMethod('repeat( __.in('.$this->linksDown.')).until(hasLabel('.$this->SorA($atom).', "File") )');
         
         return $this;
     }
 
-    public function tokenIs($atom) {
-        $this->addMethod('has("token", within(***))', $atom);
+    public function tokenIs($token) {
+        assert($this->assertLink($token));
+        $this->addMethod('has("token", within(***))', $token);
         
         return $this;
     }
 
-    public function tokenIsNot($atom) {
-        $this->addMethod('not(has("token", within(***)))', $atom);
+    public function tokenIsNot($token) {
+        assert($this->assertToken($token));
+        $this->addMethod('not(has("token", within(***)))', $token);
         
         return $this;
     }
     
     public function atomIs($atom) {
+        assert($this->assertAtom($atom));
         $this->addMethod('hasLabel('.$this->SorA($atom).')');
         
         return $this;
     }
 
     public function atomIsNot($atom) {
+        assert($this->assertAtom($atom));
         $this->addMethod('not(hasLabel('.$this->SorA($atom).'))');
         
         return $this;
     }
 
-    public function atomFunctionIs($atom) {
+    public function atomFunctionIs($fullnspath) {
         $this->atomIs('Functioncall');
-        $this->functioncallIs($atom);
+        $this->functioncallIs($fullnspath);
 
         return $this;
     }
@@ -552,6 +560,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function hasAtomInside($atom) {
+        assert($this->assertAtom($atom));
         $gremlin = 'where( __.emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') )';
         $this->addMethod($gremlin);
         
@@ -559,6 +568,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
     
     public function atomInside($atom) {
+        assert($this->assertAtom($atom));
         $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
@@ -566,6 +576,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function atomInsideNoAnonymous($atom) {
+        assert($this->assertAtom($atom));
         $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Function", "Class")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
@@ -573,6 +584,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function noAtomInside($atom) {
+        assert($this->assertAtom($atom));
         $gremlin = 'where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel('.$this->SorA($atom).') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
@@ -903,22 +915,25 @@ GREMLIN
         return $this;
     }
 
-    protected function outIs($edgeName) {
-        $this->addMethod('out('.$this->SorA($edgeName).')');
+    protected function outIs($link) {
+        assert($this->assertLink($link));
+        $this->addMethod('out('.$this->SorA($link).')');
 
         return $this;
     }
 
     // follows a link if it is there (and do nothing otherwise)
-    protected function outIsIE($edgeName) {
+    protected function outIsIE($link) {
+        assert($this->assertLink($link));
         // alternative : coalesce(out('LEFT'),  __.filter{true} )
-        $this->addMethod("until(__.outE(".$this->SorA($edgeName).").count().is(eq(0))).repeat(out(".$this->SorA($edgeName)."))");
+        $this->addMethod("until(__.outE(".$this->SorA($link).").count().is(eq(0))).repeat(out(".$this->SorA($link)."))");
         
         return $this;
     }
 
-    public function outIsNot($edgeName) {
-        $this->addMethod('where( __.outE('.$this->SorA($edgeName).').count().is(eq(0)))');
+    public function outIsNot($link) {
+        assert($this->assertLink($link));
+        $this->addMethod('where( __.outE('.$this->SorA($link).').count().is(eq(0)))');
         
         return $this;
     }
@@ -947,21 +962,24 @@ GREMLIN
         return $this;
     }
 
-    public function inIs($edgeName) {
-        $this->addMethod('in('.$this->SorA($edgeName).')');
+    public function inIs($link) {
+        assert($this->assertLink($link));
+        $this->addMethod('in('.$this->SorA($link).')');
         
         return $this;
     }
 
     // follows a link if it is there (and do nothing otherwise)
-    protected function inIsIE($edgeName) {
-        $this->addMethod('until(__.inE('.$this->SorA($edgeName).').count().is(eq(0))).repeat(__.in('.$this->SorA($edgeName).'))');
+    protected function inIsIE($link) {
+        assert($this->assertLink($link));
+        $this->addMethod('until(__.inE('.$this->SorA($link).').count().is(eq(0))).repeat(__.in('.$this->SorA($link).'))');
         
         return $this;
     }
 
-    public function inIsNot($edgeName) {
-        $this->addMethod('where( __.inE('.$this->SorA($edgeName).').count().is(eq(0)))');
+    public function inIsNot($link) {
+        assert($this->assertLink($link));
+        $this->addMethod('where( __.inE('.$this->SorA($link).').count().is(eq(0)))');
         
         return $this;
     }
@@ -975,26 +993,30 @@ GREMLIN
         return $this;
     }
 
-    public function hasIn($edgeName) {
-        $this->addMethod('where( __.in('.$this->SorA($edgeName).').count().is(neq(0)) )');
+    public function hasIn($link) {
+        assert($this->assertLink($link));
+        $this->addMethod('where( __.in('.$this->SorA($link).').count().is(neq(0)) )');
         
         return $this;
     }
     
-    public function hasNoIn($edgeName) {
-        $this->addMethod('where( __.in('.$this->SorA($edgeName).').count().is(eq(0)) )');
+    public function hasNoIn($link) {
+        assert($this->assertLink($link));
+        $this->addMethod('where( __.in('.$this->SorA($link).').count().is(eq(0)) )');
         
         return $this;
     }
 
-    public function hasOut($edgeName) {
-        $this->addMethod('where( out('.$this->SorA($edgeName).').count().is(neq(0)) )');
+    public function hasOut($link) {
+        assert($this->assertLink($link));
+        $this->addMethod('where( out('.$this->SorA($link).').count().is(neq(0)) )');
         
         return $this;
     }
     
-    public function hasNoOut($edgeName) {
-        $this->addMethod('where( out('.$this->SorA($edgeName).').count().is(eq(0)) )');
+    public function hasNoOut($link) {
+        assert($this->assertLink($link));
+        $this->addMethod('where( out('.$this->SorA($link).').count().is(eq(0)) )');
         
         return $this;
     }
@@ -1685,8 +1707,7 @@ GREMLIN;
     }
 
     protected function loadIni($file, $index = null) {
-        $config = Config::factory();
-        $fullpath = $config->dir_root.'/data/'.$file;
+        $fullpath = $this->config->dir_root.'/data/'.$file;
         
         if (!file_exists($fullpath)) {
             return null;
@@ -1702,8 +1723,7 @@ GREMLIN;
     }
 
     protected function loadJson($file) {
-        $config = Config::factory();
-        $fullpath = $config->dir_root.'/data/'.$file;
+        $fullpath = $this->config->dir_root.'/data/'.$file;
 
         if (!file_exists($fullpath)) {
             return null;
@@ -1725,9 +1745,7 @@ GREMLIN;
 
     public function getSeverity() {
         if (Analyzer::$docs === null) {
-            $config = Config::factory();
-            
-            Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
+            Analyzer::$docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
         }
         
         return Analyzer::$docs->getSeverity($this->analyzer);
@@ -1735,9 +1753,7 @@ GREMLIN;
 
     public function getTimeToFix() {
         if (Analyzer::$docs === null) {
-            $config = Config::factory();
-            
-            Analyzer::$docs = new Docs($config->dir_root.'/data/analyzers.sqlite');
+            Analyzer::$docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
         }
         
         return Analyzer::$docs->getTimeToFix($this->analyzer);
@@ -1823,6 +1839,39 @@ GREMLIN;
         } else {
             return '"'.$v.'"';
         }
+    }
+
+    private function assertLink($link) {
+        if (is_string($link)) {
+            assert($link === strtoupper($link), 'Wrong format for LINK name : '.$link);
+        } else {
+            foreach($link as $l) {
+                assert($l === strtoupper($l), 'Wrong format for LINK name : '.$l);
+            }
+        }
+        return true;
+    }
+
+    private function assertToken($token) {
+        if (is_string($token)) {
+            assert($token === strtoupper($token) && substr($token, 0, 2) === 'T_', 'Wrong token : '.$token);
+        } else {
+            foreach($token as $t) {
+                assert($t === strtoupper($t) && substr($t, 0, 2) === 'T_', 'Wrong token : '.$t);
+            }
+        }
+        return true;
+    }
+    
+    private function assertAtom($atom) {
+        if (is_string($atom)) {
+            assert($atom === ucfirst(strtolower($atom)), 'Wrong format for atom name : '.$atom);
+        } else {
+            foreach($atom as $a) {
+                assert($a === ucfirst(strtolower($a)), 'Wrong format for atom name : '.$a);
+            }
+        }
+        return true;
     }
 
 }

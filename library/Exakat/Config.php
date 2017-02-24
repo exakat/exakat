@@ -491,13 +491,12 @@ class Config {
         foreach($codacyConfig->tools as $tool) {
             if ($tool->name !== 'exakat') { continue; }
             
-            foreach($tool->patterns as $analyzer) {
-                $this->codacyConfig['analyzers'][] = $analyzer->patternId;
-            }
+            $this->codacyConfig['program'] = array_column($tool->patterns, 'patternId');
 
             $this->options['configFiles'][]        = '.codacy.json';
             $this->codacyConfig['project_reports'] = array('Codacy');
             $this->codacyConfig['project_themes']  = array('Codacy');
+            $this->codacyConfig['quiet']           = true;
         }
     }
 }

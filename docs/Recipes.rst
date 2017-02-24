@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 20 Feb 2017 15:40:44 +0000
-.. comment: Generation hash : 067ffa3b3e4bd1a7c4b835ad172d0c224f203e98
+.. comment: Generation date : Fri, 24 Feb 2017 10:46:42 +0000
+.. comment: Generation hash : 28db0973f4650777bbaa4a9d9d7eadecfd1f7921
 
 
 .. _analyze:
@@ -69,7 +69,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 287 analysis
+Total : 289 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -182,6 +182,7 @@ Total : 287 analysis
 * :ref:`Malformed Octal <malformed-octal>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
 * :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
+* :ref:`Multiple Alias Definitions Per File <multiple-alias-definitions-per-file>`
 * :ref:`Multiple Class Declarations <multiple-class-declarations>`
 * :ref:`Multiple Constant Definition <multiple-constant-definition>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
@@ -256,6 +257,7 @@ Total : 287 analysis
 * :ref:`Should Use Constants <should-use-constants>`
 * :ref:`Should Use Local Class <should-use-local-class>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
+* :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Silently Cast Integer <silently-cast-integer>`
 * :ref:`Static Loop <static-loop>`
 * :ref:`Static Methods Called From Object <static-methods-called-from-object>`
@@ -751,7 +753,7 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 24 analysis
+Total : 25 analysis
 
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
@@ -773,6 +775,7 @@ Total : 24 analysis
 * :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
 * :ref:`Should Use Function Use <should-use-function-use>`
+* :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Simplify Regex <simplify-regex>`
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`Use Class Operator <use-class-operator>`

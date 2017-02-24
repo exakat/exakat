@@ -7,6 +7,6 @@ $expected     = array('1',
                       '0034'
 );
 
-$expected_not = array();
+$expected_not = array('0b11010');
 
 ?>

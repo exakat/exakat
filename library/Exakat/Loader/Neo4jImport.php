@@ -99,8 +99,8 @@ SHELL;
         $cypher = new Cypher($this->config );
 
         $check = $cypher->query('start n=node(*) match n return count(n)');
-        if ($check->data[0][0] < 3) {
-            throw new GremlinException('Couldn\'t load any nodes. Return message "'.$res.'"');
+        if ($check === null || $check->data[0][0] < 3) {
+            throw new GremlinException('Couldn\'t load any nodes. Return message "'.$res.'"'.var_export($check));
         }
 
         $fp = fopen($this->config->projects_root.'/projects/.exakat/index.g3.csv', 'r');
@@ -280,12 +280,16 @@ GREMLIN;
         }
 
           // Saving atoms
+        $ids = array();
+        $starts = array();
+        $ends = array();
         $indexList = array();
         foreach($atoms as $id => $atom) {
             if ($id == $id0) { continue; }
             $extra= array();
 
             $indexList[$atom['atom']] = 1;
+            $ids[$id] = 1;
             
             foreach($extras as $name => $type) {
                 if ($name == ':ID') {
@@ -334,10 +338,23 @@ GREMLIN;
                     assert(!empty($destination),  "Unknown destination for Rel files\n");
                     $csv = $label.'.'.$origin.'.'.$destination;
                     foreach($links as $link) {
+                        $starts[$link['origin']] = 1;
+                        $ends[$link['destination']] = 1;
                         fputcsv($fp, array($link['origin'], $link['destination'], $label), ',', '"', '\\');
                     }
                 }
             }
+        }
+
+        $d = array_diff(array_keys($starts), array_keys($ids));
+        if (!empty($d)) {
+//            print "Starts \n";
+//            print_r($d);
+        }
+        $d = array_diff(array_keys($ends), array_keys($ids));
+        if (!empty($d)) {
+//            print "Ends \n";
+//            print_r($d);
         }
     }
 

@@ -9,6 +9,6 @@ $expected     = array('true',
                       '2 * 3', 
                       '$x->p');
 
-$expected_not = array();
+$expected_not = array('Stdclass::x2');
 
 ?>

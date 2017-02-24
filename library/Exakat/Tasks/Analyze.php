@@ -68,11 +68,16 @@ class Analyze extends Tasks {
         }
 
         if ($this->config->program !== null) {
-            $analyzer = $this->config->program;
-            if (Analyzer::getClass($analyzer)) {
-                $analyzers_class = array($analyzer);
+            if (is_array($this->config->program)) {
+                $analyzers_class = $this->config->program;
             } else {
-                throw new NoSuchAnalyzer($analyzer);
+                $analyzers_class = array($this->config->program);
+            }
+            
+            foreach($analyzers_class as $analyzer) {
+                if (!Analyzer::getClass($analyzer)) {
+                    throw new NoSuchAnalyzer($analyzer);
+                }
             }
         } elseif (is_string($this->config->thema)) {
             $thema = $this->config->thema;

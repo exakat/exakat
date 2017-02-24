@@ -42,7 +42,7 @@ class Php5IndirectExpression extends Analyzer {
              ->outIs('PROPERTY')
              ->atomIs('Array')
              ->outIs('VARIABLE')
-             ->atomIs('T_VARIABLE')
+             ->tokenIs('T_VARIABLE')
              ->back('first');
         $this->prepareQuery();
 

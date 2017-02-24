@@ -21,6 +21,9 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
 
         $analyzerobject = ExakatAnalyzer::getInstance($test_config);
+        if ($analyzerobject === null) {
+            $this->markTestSkipped('Couldn\'t get an analyzer for '.$test_config.'.');
+        }
         if (!$analyzerobject->checkPhpVersion($phpversion)) {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
@@ -55,12 +58,13 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         } else {
             $shell = 'cd ../..; php exakat test    -f ./tests/analyzer/'.$source.' -P '.$analyzer.' -p test -q -o -json';
         }
+
         $shell_res = shell_exec($shell);
         $res = json_decode($shell_res);
         if ($res === null) {
             $this->assertTrue(false, "Json couldn't be decoded : '$shell_res'\n$shell");
         }
-
+        
         if (empty($res)) {
             $list = array();
         } else {

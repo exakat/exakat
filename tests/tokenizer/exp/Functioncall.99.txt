@@ -1,0 +1,21 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Functioncall.99.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      P
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          E
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'R'
+          Label : NAME
+            E
+    Label : ELEMENT
+      S

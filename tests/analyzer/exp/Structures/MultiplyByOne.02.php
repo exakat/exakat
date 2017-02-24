@@ -6,6 +6,6 @@ $expected     = array('$b[$l] * 1',
                       '$e[0] * 1'
 );
 
-$expected_not = array();
+$expected_not = array('$b[$l2] * 10');
 
 ?>

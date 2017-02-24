@@ -28,6 +28,14 @@ Label : PROJECT
                   Label : BLOCK
                     {}
                     Label : ELEMENT
+                      ob_start
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          Void
+                      Label : NAME
+                        ob_start
+                    Label : ELEMENT
                       A
                     Label : ELEMENT
                       $c
@@ -36,13 +44,7 @@ Label : PROJECT
                       Label : ARGUMENTS
                         <?=
                         Label : ARGUMENT
-                          ob_start
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            ob_start
+                          Void
                       Label : NAME
                         <?=
                     Label : ELEMENT

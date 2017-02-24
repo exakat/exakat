@@ -42,7 +42,26 @@ if (!file_exists($sourceFile)) {
 }
 
 $expFile = str_replace('/source/', '/exp/', $sourceFile);
-copy($sourceFile, '../../test.php');
+if (is_dir('../../test.php')) {
+    $files = glob('../../test.php/*');
+    foreach($files as $file) {
+        unlink($file);
+    }
+    rmdir('../../test.php');
+} else {
+    unlink('../../test.php');
+}
+
+if (is_dir($sourceFile)) {
+    mkdir('../../test.php', 0755);
+    $files = glob($sourceFile.'/*');
+    foreach($files as $file) {
+        copy($file, '../../test.php/'.basename($file));
+    }
+} else {
+    print "$sourceFile\n";
+    copy($sourceFile, '../../test.php');
+}
 
 $test = substr($testFile, 7, -4);
 

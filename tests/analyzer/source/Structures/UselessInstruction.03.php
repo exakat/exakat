@@ -14,4 +14,5 @@ silly string
 
 HEREDOC;
 
+$a = 'b';
 ?>

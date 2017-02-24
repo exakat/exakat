@@ -7,6 +7,6 @@ $expected     = array('const TWO = ONE * 2',
                       'public function f($a = ONE + self::THREE) { /**/ } '
                       );
 
-$expected_not = array();
+$expected_not = array('const ONE = 1');
 
 ?>

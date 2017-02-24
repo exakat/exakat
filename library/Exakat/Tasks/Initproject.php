@@ -79,7 +79,7 @@ class Initproject extends Tasks {
             return null;
         }
 
-        $this->datastore = new Datastore(Config::factory(), Datastore::CREATE);
+        $this->datastore = new Datastore($this->config, Datastore::CREATE);
 
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/config.ini')) {
             if ($this->config->symlink === true) {

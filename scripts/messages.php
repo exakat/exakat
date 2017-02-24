@@ -29,7 +29,9 @@ foreach($docs as $iniFile) {
         continue;
     }
     $message = substr($ini['description'], 0, $offset);
-    print $iniFile." : ".$message."\n";
+    $words = count(explode(' ', $message));
+    if ($words < 30) { continue; }
+    print $iniFile." ($words words): ".$message."\n";
 }
 
 ?>

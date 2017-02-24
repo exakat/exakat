@@ -334,7 +334,7 @@ class Load extends Tasks {
                             \Exakat\Tasks\T_NS_SEPARATOR             => 'processNsnameAbsolute',
                             \Exakat\Tasks\T_COALESCE                 => 'processCoalesce',
 
-                            \Exakat\Tasks\T_INLINE_HTML              => 'processInlineHtml',
+                            \Exakat\Tasks\T_INLINE_HTML              => 'processInlinehtml',
 
                             \Exakat\Tasks\T_INC                      => 'processPlusplus',
                             \Exakat\Tasks\T_DEC                      => 'processPlusplus',
@@ -568,9 +568,10 @@ class Load extends Tasks {
     private function reset() {
         $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
         $this->links = array();
-        $this->uses = array('function' => array(),
-                            'const'    => array(),
-                            'class'    => array());;
+        $this->calls = array();
+        $this->uses  = array('function' => array(),
+                             'const'    => array(),
+                             'class'    => array());;
         $this->usesId = array('function' => array(),
                               'const'    => array(),
                               'class'    => array());;
@@ -685,6 +686,7 @@ class Load extends Tasks {
             $this->setAtom($sequenceId, array('root' => true));
             $this->checkTokens($filename);
         } catch (LoadError $e) {
+            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
             $this->reset();
             throw new NoFileToProcess($filename, 'empty');
         } finally {
@@ -1362,7 +1364,7 @@ class Load extends Tasks {
             in_array($this->tokens[$this->id + 2][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO))) {
     
             ++$this->id;
-            $this->processInlineHtml();
+            $this->processInlinehtml();
         
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
@@ -1832,10 +1834,9 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncallId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && 
-             $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG &&
-             $this->tokens[$this->id - 1][0] !== \Exakat\Tasks\T_OBJECT_OPERATOR &&
-             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_DOUBLE_COLON
+        if ( $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG &&
+             $this->tokens[$current - 2][0] !== \Exakat\Tasks\T_OBJECT_OPERATOR &&
+             $this->tokens[$current - 2][0] !== \Exakat\Tasks\T_DOUBLE_COLON
              ) {
             $this->processSemicolon();
         } else {
@@ -1901,6 +1902,7 @@ class Load extends Tasks {
             $this->processNsname();
             $id = $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON &&
+                  !$this->isContext(self::CONTEXT_NEW) &&
                   !in_array($this->tokens[$this->id - 1][0], array(\Exakat\Tasks\T_DOUBLE_COLON, \Exakat\Tasks\T_OBJECT_OPERATOR, \Exakat\Tasks\T_QUESTION, \Exakat\Tasks\T_CASE))) {
             $labelId = $this->addAtom('Label');
             $this->addLink($labelId, $id, 'LABEL');
@@ -2864,8 +2866,8 @@ class Load extends Tasks {
         return $id;
     }
 
-    private function processInlineHtml() {
-        $this->processSingle('InlineHtml');
+    private function processInlinehtml() {
+        $this->processSingle('Inlinehtml');
         $this->processSemicolon();
     }
 
@@ -3522,7 +3524,7 @@ class Load extends Tasks {
             } 
             // max(array_keys($this->atoms)) is the actual Functioncall
             $this->setAtom(max(array_keys($this->atoms)), array('fullnspath' => $fullnspath,
-                                                      'aliased'    => $aliased));
+                                                                'aliased'    => $aliased));
             $this->addCall('class', $fullnspath, max(array_keys($this->atoms)));
         } elseif ( !empty($this->atoms[$id + 2]['atom']) &&
                    $this->atoms[$id + 2]['atom'] === 'Nsname') {
@@ -3535,11 +3537,11 @@ class Load extends Tasks {
                                                                 'aliased'    => $aliased));
             $this->addCall('class', $fullnspath, max(array_keys($this->atoms)));
         } elseif ($this->atoms[$id + 1]['atom'] === 'Identifier') {
-
             list($fullnspath, $aliased) = $this->getFullnspath($id + 1);
             if ($aliased === self::ALIASED) {
                 $this->addLink($this->usesId['class'][strtolower($this->atoms[$id + 1]['code'])], max(array_keys($this->atoms)), 'DEFINITION');
             } 
+
             // max(array_keys($this->atoms)) is the actual Functioncall
             $this->setAtom(max(array_keys($this->atoms)), array('fullnspath' => $fullnspath,
                                                                 'aliased'    => $aliased));

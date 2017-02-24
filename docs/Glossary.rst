@@ -21,6 +21,10 @@ Glossary
       + :ref:`Always Positive Comparison <always-positive-comparison>`
       + :ref:`No Real Comparison <no-real-comparison>`
 
+    + `array_column()`
+
+      + :ref:`Should Use array_column() <should-use-array\_column()>`
+
     + `array_count_values()`
 
       + :ref:`Avoid array_unique() <avoid-array\_unique()>`
@@ -50,6 +54,7 @@ Glossary
 
     + `array_map()`
 
+      + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_merge()`
@@ -92,6 +97,7 @@ Glossary
 
     + `array_walk()`
 
+      + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `assert()`
@@ -247,6 +253,10 @@ Glossary
 
       + :ref:`Sequences In For <sequences-in-for>`
 
+    + `Foreach()`
+
+      + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
+
     + `file()`
 
       + :ref:`Join file() <join-file()>`
@@ -276,6 +286,7 @@ Glossary
       + :ref:`Dont Change The Blind Var <dont-change-the-blind-var>`
       + :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
       + :ref:`No Direct Usage <no-direct-usage>`
+      + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Slow Functions <slow-functions>`
       + :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 
@@ -377,7 +388,9 @@ Glossary
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Isset With Empty <no-isset-with-empty>`
       + :ref:`Should Use Coalesce <should-use-coalesce>`
+      + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Slow Functions <slow-functions>`
+      + :ref:`Use Instanceof <use-instanceof>`
 
 
 + `J`

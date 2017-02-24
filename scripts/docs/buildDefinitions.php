@@ -235,7 +235,7 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
 
         if (isset($a2themes[$name])) {
             $c = array_map('rst_link',$a2themes[$name]);
-            $recipes = implode(',',$c);
+            $recipes = implode(', ',$c);
         } else {
             $recipes = 'none';
         }
