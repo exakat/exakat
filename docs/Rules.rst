@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 20 Feb 2017 15:40:44 +0000
-.. comment: Generation hash : 067ffa3b3e4bd1a7c4b835ad172d0c224f203e98
+.. comment: Generation date : Fri, 24 Feb 2017 10:46:42 +0000
+.. comment: Generation hash : 28db0973f4650777bbaa4a9d9d7eadecfd1f7921
 
 
 .. _$http\_raw\_post\_data:
@@ -32,11 +32,11 @@ Starting at PHP 5.6, $HTTP_RAW_POST_DATA is deprecated, and should be replaced b
    
    ?>
 
-+--------------+----------------------------------------------------------------------------------------------+
-| Command Line | Php/RawPostDataUsage                                                                         |
-+--------------+----------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP56`,:ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+----------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------+
+| Command Line | Php/RawPostDataUsage                                                                            |
++--------------+-------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP56`, :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------+
 
 
 
@@ -195,11 +195,11 @@ PHP 5.6 introduced the operator `** <http://php.net/manual/en/language.operators
 
 If the code needs to be backward compatible to 5.5 or less, don't use the new operator.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Php/NewExponent                                                               |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/NewExponent                                                                 |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -211,11 +211,11 @@ If the code needs to be backward compatible to 5.5 or less, don't use the new op
 
 Usage of the ... keyword, either in function definitions, either in functioncalls.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Php/EllipsisUsage                                                             |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/EllipsisUsage                                                               |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -242,11 +242,11 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
    
    ?>
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/StaticclassUsage                                |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/StaticclassUsage                                 |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
 
 
 
@@ -485,6 +485,8 @@ Altering Foreach Without Reference
 ##################################
 
 
+Foreach() loop 
+
 When using a foreach loop that modifies the original source, it is recommended to use referenced variables, rather than access the original value with $source[$index]. 
 
 Using references is then must faster, and easier to read. 
@@ -492,10 +494,24 @@ Using references is then must faster, and easier to read.
 .. code-block:: php
 
    <?php
+   
+   // Using references in foreach
    foreach($source as $key => &$value) {
        $value = newValue($value, $key);
    }
+   
+   // Avoid foreach : use array_map
+   $source = array_walk($source, 'newValue');
+       // Here, $key MUST be the second argument or newValue
+   
+   // Slow version to update the array
+   foreach($source as $key => &$value) {
+       $source[$key] = newValue($value, $key);
+   }
    ?>
+
+
+You may also use `array_walk() <http://www.php.net/array_walk>`_ or `array_map() <http://www.php.net/array_map>`_ (when $key is not used) to avoid the use of foreach.
 
 +--------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/AlteringForeachWithoutReference                                                                                        |
@@ -590,11 +606,11 @@ Anonymous classes.
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Classes/Anonymous                                                                                       |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/Anonymous                                                                                          |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -1243,11 +1259,11 @@ It is not possible anymore to include a piece of code inside a loop that will th
        }
    ?>
 
-+--------------+--------------------------------------------------------------------+
-| Command Line | Structures/BreakOutsideLoop                                        |
-+--------------+--------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+--------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------+
+| Command Line | Structures/BreakOutsideLoop                                          |
++--------------+----------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------+
 
 
 
@@ -1275,11 +1291,11 @@ Cannot `break <http://php.net/manual/en/control-structures.break.php>`_ 0, as th
    
    ?>
 
-+--------------+------------------------------------------+
-| Command Line | Structures/Break0                        |
-+--------------+------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP53` |
-+--------------+------------------------------------------+
++--------------+-------------------------------------------+
+| Command Line | Structures/Break0                         |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53` |
++--------------+-------------------------------------------+
 
 
 
@@ -1311,11 +1327,11 @@ Other values were acceptable in PHP 5.3 and previous version, but this is now re
    
    ?>
 
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/BreakNonInteger                                                                                                                       |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/BreakNonInteger                                                                                                                            |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -1345,11 +1361,11 @@ PHP doesn't allow when a value is turned into a reference at functioncall, since
 
 Either the function use a reference in its signature, either the reference won't pass.
 
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/CalltimePassByReference                                                                                                               |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/CalltimePassByReference                                                                                                                    |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -1386,11 +1402,11 @@ In a separate file :
        }
    ?>
 
-+--------------+---------------------------------------------+
-| Command Line | Classes/CantExtendFinal                     |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Classes/CantExtendFinal                      |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -1418,11 +1434,11 @@ Until PHP 5.5, it was not possible to use directly function calls inside an `emp
 
 This also applies to methodcalls, static or not.
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/CantUseReturnValueInWriteContext                |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/CantUseReturnValueInWriteContext                 |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
 
 
 
@@ -1488,11 +1504,11 @@ Class Const With Array
 
 Constant defined with const keyword may be arrays but only stating with PHP 5.6. Define never accept arrays : it only accepts scalar values.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Php/ClassConstWithArray                                                       |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/ClassConstWithArray                                                         |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -1538,11 +1554,11 @@ The spotted classes are used with a different case than their definition. While 
 
 Most of the time, this is also a violation of coding conventions.
 
-+--------------+---------------------------------------------------------------+
-| Command Line | Classes/WrongCase                                             |
-+--------------+---------------------------------------------------------------+
-| Analyzers    | :ref:`Coding Conventions <coding-conventions>`,:ref:`Analyze` |
-+--------------+---------------------------------------------------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Classes/WrongCase                                              |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>`, :ref:`Analyze` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -1667,11 +1683,11 @@ When closure were introduced in PHP, they couldn't use the $this variable, makin
 
 This is not the case anymore since PHP 5.4.
 
-+--------------+------------------------------------------+
-| Command Line | Php/ClosureThisSupport                   |
-+--------------+------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP53` |
-+--------------+------------------------------------------+
++--------------+-------------------------------------------+
+| Command Line | Php/ClosureThisSupport                    |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53` |
++--------------+-------------------------------------------+
 
 
 
@@ -1844,11 +1860,11 @@ Const With Array
 
 The const keyword supports array since PHP 5.6.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Php/ConstWithArray                                                            |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/ConstWithArray                                                              |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -1925,11 +1941,11 @@ Those expressions (using simple operators) may only manipulate other constants, 
 
 This is not compatible with previous versions.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Structures/ConstantScalarExpression                                           |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Structures/ConstantScalarExpression                                             |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -2224,7 +2240,7 @@ They looks like a compacted version for = and the operator. This syntax is good 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `use-short-assignations <https://github.com/dseguy/clearPHP/tree/master/rules/use-short-assignations.md>`__ |
 +--------------+-------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances`                                                                          |
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                         |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -2389,11 +2405,11 @@ Define With Array
 
 PHP 7.0 has the ability to define an array as a constant, using the `define() <http://www.php.net/define>`_ native call. This was not possible until that version, only with the const keyword.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Php/DefineWithArray                                                                                     |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/DefineWithArray                                                                                        |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -2402,6 +2418,8 @@ PHP 7.0 has the ability to define an array as a constant, using the `define() <h
 Dependant Trait
 ###############
 
+
+Traits should be autonomous. It is recommended to avoid depending on methods or properties that should be in the using class.
 
 The following traits make usage of methods and properties, static or not, that are not defined in the trait. This means the host class must provide those methods and properties, but there is no way to enforce this. 
 
@@ -2475,11 +2493,11 @@ May be replaced by
 $y = array(4,5,6)[2];
 $y = [4,5,6][2];
 
-+--------------+-----------------------------------------------------+
-| Command Line | Structures/DereferencingAS                          |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Structures/DereferencingAS                           |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
 
 
 
@@ -2597,11 +2615,11 @@ It is recommended to avoid displaying error messages directly to the browser.
 
 Error messages should be logged, but not displayed.
 
-+--------------+--------------------------------+
-| Command Line | Security/DontEchoError         |
-+--------------+--------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security` |
-+--------------+--------------------------------+
++--------------+---------------------------------+
+| Command Line | Security/DontEchoError          |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
@@ -2777,7 +2795,7 @@ instead of
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-unnecessary-string-concatenation <https://github.com/dseguy/clearPHP/tree/master/rules/no-unnecessary-string-concatenation.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Performances`,:ref:`Analyze`                                                                                                    |
+| Analyzers    | :ref:`Performances`, :ref:`Analyze`                                                                                                   |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -2947,11 +2965,11 @@ Empty instructions are part of the code that have no instructions. This may be t
 $condition = 3;;;;
 if ($condition) { }
 
-+--------------+---------------------------------------------+
-| Command Line | Structures/EmptyLines                       |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Dead code <dead-code>`,:ref:`Analyze` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Structures/EmptyLines                        |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++--------------+----------------------------------------------+
 
 
 
@@ -3010,11 +3028,11 @@ Empty list() are not allowed anymore in PHP 7. There must be at least one variab
    
    ?>
 
-+--------------+--------------------------------------------------------------------+
-| Command Line | Php/EmptyList                                                      |
-+--------------+--------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+--------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------+
+| Command Line | Php/EmptyList                                                        |
++--------------+----------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------+
 
 
 
@@ -3065,7 +3083,7 @@ Using bracket-style syntax :
 +--------------+-----------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-empty-namespace <https://github.com/dseguy/clearPHP/tree/master/rules/no-empty-namespace.md>`__ |
 +--------------+-----------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>`                                                         |
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                        |
 +--------------+-----------------------------------------------------------------------------------------------------+
 
 
@@ -3184,11 +3202,11 @@ Empty With Expression
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/EmptyWithExpression                                                                          |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/EmptyWithExpression                                                                             |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -3227,7 +3245,7 @@ For PHP 7.0 and later, it is important to put `eval() <http://www.php.net/eval>`
 +--------------+-------------------------------------------------------------------------------+
 | clearPHP     | `no-eval <https://github.com/dseguy/clearPHP/tree/master/rules/no-eval.md>`__ |
 +--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances`                                            |
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`                                           |
 +--------------+-------------------------------------------------------------------------------+
 
 
@@ -3323,11 +3341,11 @@ Usage of the `** <http://php.net/manual/en/language.operators.arithmetic.php>`_ 
    
    ?>
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Php/ExponentUsage                                                             |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/ExponentUsage                                                               |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -3448,7 +3466,7 @@ This is true with any kind of functioncall that returns the same value throughou
 +--------------+---------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-functioncall-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-functioncall-in-loop.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances`                                                                            |
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                           |
 +--------------+---------------------------------------------------------------------------------------------------------------+
 
 
@@ -3476,11 +3494,11 @@ This anly applies when a `foreach() <http://php.net/manual/en/control-structures
    
    ?>
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/ForeachDontChangePointer                        |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/ForeachDontChangePointer                         |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -3567,11 +3585,11 @@ Previously, it was compulsory to extract the data from the blind array :
        }
    ?>
 
-+--------------+-----------------------------------------------------+
-| Command Line | Structures/ForeachWithList                          |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Structures/ForeachWithList                           |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
 
 
 
@@ -3803,11 +3821,11 @@ When those functions have no other interaction, the code is useless and should b
 
 Loops of size 2, 3 and 4 function are supported by this analyzer.
 
-+--------------+------------------------------------+
-| Command Line | Functions/LoopCalling              |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances` |
-+--------------+------------------------------------+
++--------------+-------------------------------------+
+| Command Line | Functions/LoopCalling               |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
++--------------+-------------------------------------+
 
 
 
@@ -3819,11 +3837,11 @@ Functions Removed In PHP 5.4
 
 Those functions were removed in PHP 5.4.
 
-+--------------+------------------------------------------+
-| Command Line | Php/Php54RemovedFunctions                |
-+--------------+------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP54` |
-+--------------+------------------------------------------+
++--------------+-------------------------------------------+
+| Command Line | Php/Php54RemovedFunctions                 |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54` |
++--------------+-------------------------------------------+
 
 
 
@@ -3967,7 +3985,7 @@ Hardcoding passwords is a bad idea. Not only it make the code difficult to chang
 +--------------+---------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-hardcoded-credential <https://github.com/dseguy/clearPHP/tree/master/rules/no-hardcoded-credential.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security`                                                                                |
+| Analyzers    | :ref:`Analyze`, :ref:`Security`                                                                               |
 +--------------+---------------------------------------------------------------------------------------------------------------+
 
 
@@ -4042,11 +4060,11 @@ Hexadecimal In String
 
 Mark strings that may be confused with hexadecimal.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Type/HexadecimalString                                                        |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Type/HexadecimalString                                                          |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -4498,11 +4516,11 @@ In PHP 7.0 and older, those sequences were silently adapted (divided by 0).
    
    ?>
 
-+--------------+-----------------------------------------------------+
-| Command Line | Type/OctalInString                                  |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Type/OctalInString                                   |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------+
 
 
 
@@ -4529,11 +4547,11 @@ Fatal error: Cannot use `isset() <http://www.php.net/isset>`_ on the result of a
 
 This is a backward incompatibility.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/IssetWithConstant                                                                            |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/IssetWithConstant                                                                               |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4597,11 +4615,11 @@ Usage of short syntax version of list().
    
    ?>
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/ListShortSyntax                                                                                                               |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ListShortSyntax                                                                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4647,11 +4665,11 @@ In PHP 5.6, results are :::
        [2] => 1
    )
 
-+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/ListWithAppends                                                                                                                                                        |
-+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ListWithAppends                                                                                                                                                              |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4672,11 +4690,11 @@ Setting keys when using list() is a PHP 7.1 feature.
    
    ?>
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/ListWithKeys                                                                                                                  |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ListWithKeys                                                                                                                      |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -4690,11 +4708,11 @@ Those properties are defined in a class, and this class doesn't have any method 
 
 While this is syntacticly correct, it is unusual that defined ressources are used in a child class. It may be worth moving the definition to another class, or to move accessing methods to the class.
 
-+--------------+---------------------------------------------+
-| Command Line | Classes/LocallyUnusedProperty               |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Classes/LocallyUnusedProperty                |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -4833,7 +4851,33 @@ Lost References
 ###############
 
 
+Either avoid references, or propagate them correctly.
+
 When assigning a referenced variable with another reference, the initial reference is lost, while the intend was to transfer the content. 
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(&$lostReference, &$keptReference)
+   {
+       $c = 'c';
+   
+       // $lostReference was a reference, but now, it is another
+       $lostReference =& $c;
+       // $keptReference was a reference : now it contains the actual value
+       $keptReference = $c;
+   }
+   
+   $bar = 'bar';
+   $bar2 = 'bar';
+   foo($bar, $bar2); 
+   
+   //displays bar c, instead of bar bar
+   print $bar. ' '.$bar2;
+   
+   ?>
+
 
 Do not reassign a reference with another reference. Assign new content to the reference to change its value.
 
@@ -4853,11 +4897,11 @@ Magic Visibility
 
 The magic methods must have public visibility and cannot be static
 
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Classes/toStringPss                                                                                                                                                                                  |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/toStringPss                                                                                                                                                                                         |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5031,11 +5075,11 @@ Either switch to a newer version of PHP (5.5 or newer), or make sure the resulti
    
    ?>
 
-+--------------+-----------------------------------------------------+
-| Command Line | Arrays/MixedKeys                                    |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Arrays/MixedKeys                                     |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
++--------------+------------------------------------------------------+
 
 
 
@@ -5086,7 +5130,7 @@ Multiple Alias Definitions
 ##########################
 
 
-Some aliases are representing differents classes, leading to potential confusion. 
+Some aliases are representing differents classes across the repository. This leads to potential confusion. 
 
 Across an application, it is recommended to use the same namespace for one alias. Failing to do this lead to the same keyword to represent different values in different files, with different behavior. Those are hard to find bugs. 
 
@@ -5111,6 +5155,39 @@ Across an application, it is recommended to use the same namespace for one alias
 +--------------+-------------------------------------+
 | Analyzers    | :ref:`Analyze`                      |
 +--------------+-------------------------------------+
+
+
+
+.. _multiple-alias-definitions-per-file:
+
+Multiple Alias Definitions Per File
+###################################
+
+
+Avoid aliasing the same name with different aliases. This leads to confusion.
+
+.. code-block:: php
+
+   <?php
+   
+   // first occurrence
+   use name\space\ClasseName;
+   
+   // when this happens, several other uses are mentionned
+   
+   // name\space\ClasseName has now two names
+   use name\space\ClasseName as anotherName;
+   
+   ?>
+
+
+See also `Multiple Alias Definitions`_.
+
++--------------+-------------------------------------------+
+| Command Line | Namespaces/MultipleAliasDefinitionPerFile |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`                            |
++--------------+-------------------------------------------+
 
 
 
@@ -5209,7 +5286,7 @@ However, this is not common programming practise : all arguments should be named
 +--------------+---------------------------------------------------------------------------------------------------------+
 | clearPHP     | `all-unique-arguments <https://github.com/dseguy/clearPHP/tree/master/rules/all-unique-arguments.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71`                                      |
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`                                    |
 +--------------+---------------------------------------------------------------------------------------------------------+
 
 
@@ -5255,11 +5332,11 @@ Starting with PHP 7.1, it is possible to have several distinct exceptions class 
 
 This is a backward incompabitible feature of PHP 7.1.
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Exceptions/MultipleCatch                                                                                                          |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Exceptions/MultipleCatch                                                                                                              |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5648,11 +5725,11 @@ New Functions In PHP 5.4
 
 PHP introduced new functions in PHP 5.4. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/Php54NewFunctions                               |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/Php54NewFunctions                                |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -5664,11 +5741,11 @@ New Functions In PHP 5.5
 
 PHP introduced new functions in PHP 5.5. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Php/Php55NewFunctions                                                         |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP71` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/Php55NewFunctions                                                           |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -5680,11 +5757,11 @@ New Functions In PHP 5.6
 
 PHP introduced new functions in PHP 5.6. If you have already defined functions with such names, you will get a conflict when trying to upgrade. It is advised to change those functions' name.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Php/Php56NewFunctions                                                         |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/Php56NewFunctions                                                           |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -5705,11 +5782,11 @@ The following functions are now native functions in PHP 7.0. It is advised to ch
 * intdiv
 * error_clear_last
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php70NewFunctions                                                                                                             |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php70NewFunctions                                                                                                                 |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5729,11 +5806,11 @@ The following functions are now native functions in PHP 7.1. It is advised to ch
 * mb_scrub()
 * is_iterable()
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/Php71NewFunctions                               |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/Php71NewFunctions                                |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------+
 
 
 
@@ -5990,11 +6067,11 @@ Hashes may be MD5, SHA1, SHA512, Bcrypt or any other. Such values must be easily
    
    ?>
 
-+--------------+--------------------------------+
-| Command Line | Structures/NoHardcodedHash     |
-+--------------+--------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security` |
-+--------------+--------------------------------+
++--------------+---------------------------------+
+| Command Line | Structures/NoHardcodedHash      |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
@@ -6027,11 +6104,11 @@ This may also come handy when testing.
 
 127.0.0.1, ::1 and ::0 are omitted, and not considered as a violation.
 
-+--------------+--------------------------------+
-| Command Line | Structures/NoHardcodedIp       |
-+--------------+--------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security` |
-+--------------+--------------------------------+
++--------------+---------------------------------+
+| Command Line | Structures/NoHardcodedIp        |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
@@ -6084,11 +6161,11 @@ No Hardcoded Port
 
 When connecting to a remove serve, port is an important information. It is recommended to make this configurable (with constant or configuration), to as to be able to change this value without changing the code.
 
-+--------------+--------------------------------+
-| Command Line | Structures/NoHardcodedPort     |
-+--------------+--------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security` |
-+--------------+--------------------------------+
++--------------+---------------------------------+
+| Command Line | Structures/NoHardcodedPort      |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security` |
++--------------+---------------------------------+
 
 
 
@@ -6172,11 +6249,11 @@ No List With String
 
 list() can't be used anymore to access particular offset in a string. This should be done with substr() or $string[$offset] syntax.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Php/NoListWithString                                                                                    |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/NoListWithString                                                                                       |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6378,11 +6455,11 @@ PHP 7 doesn't allow the usage of [] with strings. [] is an array-only oeprator.
 
 This was possible in PHP 5.*, but is now forbidden in PHP 7.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Php/NoStringWithAppend                                                                                  |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/NoStringWithAppend                                                                                     |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6421,11 +6498,11 @@ PHP 7.1 also introduces the support of negative offsets as string index : negati
 
 Beware that substr() and $v[$pos] are similar, while `mb_substr() <http://www.php.net/mb_substr>`_ is not. The first functions works on bytes, while the latter works on characters.
 
-+--------------+--------------------------------------------------------------+
-| Command Line | Structures/NoSubstrOne                                       |
-+--------------+--------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances`,:ref:`CompatibilityPHP71` |
-+--------------+--------------------------------------------------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Structures/NoSubstrOne                                         |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -6481,7 +6558,7 @@ Note that `array_merge_recursive() <http://www.php.net/array_merge_recursive>`_ 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-array_merge-in-loop <https://github.com/dseguy/clearPHP/tree/master/rules/no-array_merge-in-loop.md>`__ |
 +--------------+-------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances`                                                                          |
+| Analyzers    | :ref:`Analyze`, :ref:`Performances`                                                                         |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -6569,11 +6646,11 @@ in-family method.
        } 
    ?>
 
-+--------------+----------------------------------------------------------------------------------------------+
-| Command Line | Classes/NonStaticMethodsCalledStatic                                                         |
-+--------------+----------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+----------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------+
+| Command Line | Classes/NonStaticMethodsCalledStatic                                                            |
++--------------+-------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------+
 
 
 
@@ -6734,11 +6811,11 @@ After issuing a 'new' with those classes, it was important to check if the retur
 
 This inconsistency has been cleaned in PHP 7 : see See `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 
-+--------------+------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Classes/NullOnNew                                                                                                      |
-+--------------+------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/NullOnNew                                                                                                          |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -6927,6 +7004,8 @@ Only Variable Returned By Reference
 ###################################
 
 
+Function can't return literals by reference.
+
 When a function returns a reference, it is only possible to return variables, properties or static properties. 
 
 Anything else, like literals or static expressions, yield a warning at execution time.
@@ -7059,11 +7138,11 @@ PHP 7.0 New Classes
 
 Those classes are now declared natively in PHP 7.0 and should not be declared in custom code.
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php70NewClasses                                                                                                               |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php70NewClasses                                                                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7075,11 +7154,11 @@ PHP 7.0 New Interfaces
 
 The following interfaces are introduced in PHP 7.0. They shouldn't be defined in custom code.
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php70NewInterfaces                                                                                                            |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php70NewInterfaces                                                                                                                |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7091,11 +7170,11 @@ PHP 7.0 Removed Directives
 
 List of directives that are removed in PHP 7.0.
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/Php70RemovedDirective                           |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/Php70RemovedDirective                            |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -7137,11 +7216,11 @@ This is also true with Datetime :
 
 This evolution impacts mostly exact comparisons (== and ===). Non-equality (!= and !==) will probably be always true, and should be reviewed.
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/Php71microseconds                               |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/Php71microseconds                                |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------+
 
 
 
@@ -7153,11 +7232,11 @@ PHP 7.1 Removed Directives
 
 List of directives that are removed in PHP 7.1.
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/Php71RemovedDirective                           |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/Php71RemovedDirective                            |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------+
 
 
 
@@ -7238,11 +7317,11 @@ The following PHP native functions were removed in PHP 7.0.
 * imagepsslantfont
 * imagepstext
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/Php70RemovedFunctions                           |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/Php70RemovedFunctions                            |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -7256,11 +7335,11 @@ PHP has a set of reserved keywords. It is recommended not to use those keywords 
 
 PHP does check that a number of structures, such as classes, methods, interfaces... can't be named or called using one of the keywords. However, in a few other situations, no check are enforced. Using keywords in such situation is confusing.
 
-+--------------+------------------------------------------+
-| Command Line | Php/ReservedNames                        |
-+--------------+------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------+
++--------------+-------------------------------------------+
+| Command Line | Php/ReservedNames                         |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------+
 
 
 
@@ -7304,11 +7383,11 @@ See `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70
 |Foo::$bar['baz']()   |Foo::{$bar['baz']}()   |(Foo::$bar)['baz']()   |
 +---------------------+-----------------------+-----------------------+
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Variables/Php5IndirectExpression                                                                        |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Variables/Php5IndirectExpression                                                                           |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7333,11 +7412,11 @@ With PHP 7, dirname has a second argument that represents the number of parent f
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/PHP7Dirname                                                                                  |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/PHP7Dirname                                                                                     |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7379,11 +7458,11 @@ Using parenthesis around parameters used to silent some internal check. This is 
    
    ?>
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/ParenthesisAsParameter                          |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/ParenthesisAsParameter                           |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -7471,11 +7550,11 @@ Php 7 Indirect Expression
 
 Those are variable indirect expressions that are interpreted differently between PHP 5 and PHP 7. You should check them so they don't behave strangely.
 
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Variables/Php7IndirectExpression                                                                                                  |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP70` |
-+--------------+-----------------------------------------------------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Variables/Php7IndirectExpression                                                                                                      |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP70` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7500,11 +7579,11 @@ The new class is : ReflectionClassConstant. The other class is 'Void' : this is 
    
    ?>
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php71NewClasses                                                                                                                                         |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php71NewClasses                                                                                                                                              |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7533,11 +7612,11 @@ Most of the traditionnal PHP keywords may be used inside classes, trait or inter
 
 This was not the case in PHP 5, and will yield parse errors.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Php7RelaxedKeyword                                                                                  |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php7RelaxedKeyword                                                                                     |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -7595,11 +7674,11 @@ The latter needs an extra memory allocation that costs about 10% of performances
    
    ?>
 
-+--------------+------------------------------------+
-| Command Line | Performances/PrePostIncrement      |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances` |
-+--------------+------------------------------------+
++--------------+-------------------------------------+
+| Command Line | Performances/PrePostIncrement       |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
++--------------+-------------------------------------+
 
 
 
@@ -7703,11 +7782,11 @@ The following expression are made of literals or already known values : they may
 
 By doing so, this will reduce the amount of work of PHP.
 
-+--------------+-------------------------------+
-| Command Line | Structures/ShouldPreprocess   |
-+--------------+-------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Analyze` |
-+--------------+-------------------------------+
++--------------+--------------------------------+
+| Command Line | Structures/ShouldPreprocess    |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Analyze` |
++--------------+--------------------------------+
 
 
 
@@ -8106,23 +8185,19 @@ Repeated print()
 ################
 
 
+Always merge several print or echo in one call.
+
 It is recommended to use echo with multiple arguments, or a concatenation with print, instead of multiple calls to print echo, when outputting several blob of text.
 
-Write : 
-
 .. code-block:: php
 
    <?php
+   
+   //Write : 
      echo 'a', $b, 'c';
      print 'a' . $b . 'c';
-   ?>
-
-
-Don't write :  
-
-.. code-block:: php
-
-   <?php
+   
+   //Don't write :  
      print 'a';
      print $b;
      print 'c';
@@ -8144,11 +8219,11 @@ Reserved Keywords In PHP 7
 
 Php reserved names for class/trait/interface. They won't be available anymore in user space starting with PHP 7.
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/ReservedKeywords7                               |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/ReservedKeywords7                                |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -8355,11 +8430,11 @@ Scalar Typehint Usage
 
 Spot usage of scalar type hint : int, float, boolean and string.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Php/ScalarTypehintUsage                                                                                 |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/ScalarTypehintUsage                                                                                    |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -8420,11 +8495,11 @@ The first argument of `setlocale() <http://www.php.net/setlocale>`_ must be one 
 
 The PHP 5 usage of strings (same name as above, enclosed in ' or ") is not legit anymore in PHP 7 and later.
 
-+--------------+-----------------------------------------------------+
-| Command Line | Structures/SetlocaleNeedsConstants                  |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Structures/SetlocaleNeedsConstants                   |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -8836,7 +8911,48 @@ Building queries with concatenations is not recommended, though not always avoid
 +--------------+-------------------------------------+
 | Command Line | Security/ShouldUsePreparedStatement |
 +--------------+-------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security`      |
+| Analyzers    | :ref:`Analyze`, :ref:`Security`     |
++--------------+-------------------------------------+
+
+
+
+.. _should-use-array\_column():
+
+Should Use array_column()
+#########################
+
+
+Should use `array_column() <http://www.php.net/array_column>`_.
+
+`array_column() <http://www.php.net/array_column>`_ is a native PHP function, that extract a property or a index from a array of object, or a multidimensional array. This prevents the usage of foreach to collect those values.
+
+.. code-block:: php
+
+   <?php
+   
+   $a = array(array('b' => 1), 
+              array('b' => 2, 'c' => 3), 
+              array(          'c' => 4)); // b doesn't always exists
+   
+   $bColumn = array_column($a, 'b');
+   
+   // Slow and cumbersome code
+   $bColumn = array();
+   foreach($a as $k => $v) {
+       if (isset($v['b'])) {
+           $bColumn[] = $v['b'];
+       }
+   }
+   
+   ?>
+
+
+`array_column() <http://www.php.net/array_column>`_ is faster than `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ (with or without the `isset() <http://www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
+
++--------------+-------------------------------------+
+| Command Line | Php/ShouldUseArrayColumn            |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
 +--------------+-------------------------------------+
 
 
@@ -8909,11 +9025,11 @@ The global keyword should only be used with simple variables. Since PHP 7, it ca
    
    ?>
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/GlobalWithoutSimpleVariable                     |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/GlobalWithoutSimpleVariable                      |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -9005,6 +9121,8 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 Static Loop
 ###########
 
+
+Static loop may be preprocessed.
 
 It looks like the following loops are static : the same code is executed each time, without taking into account loop variables.
 
@@ -9367,6 +9485,8 @@ Multiple default happens often with large `switch() <http://php.net/manual/en/co
 Switch Without Default
 ######################
 
+
+Always use a default statement in `switch() <http://php.net/manual/en/control-structures.switch.php>`_.
 
 Switch statements hold a number of 'case' that cover all known situations, and a 'default' one which is executed when all other options are exhausted. 
 
@@ -9754,11 +9874,11 @@ Class constants that are used, but never defined. This should yield a fatal erro
    
    ?>
 
-+--------------+-------------------------------+
-| Command Line | Classes/UndefinedConstants    |
-+--------------+-------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Analyze` |
-+--------------+-------------------------------+
++--------------+--------------------------------+
+| Command Line | Classes/UndefinedConstants     |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Analyze` |
++--------------+--------------------------------+
 
 
 
@@ -9997,11 +10117,11 @@ PHP 7 will halt on partial Unicode Sequences, as it tries to understand them, bu
 
 Is is recommended to check all those strings, and make sure they will behave correctly in PHP 7.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Php/UnicodeEscapePartial                                                                                |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/UnicodeEscapePartial                                                                                   |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10025,11 +10145,11 @@ Usage of the Unicode Escape syntax, with the \u{xxxxx} format, available since P
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Php/UnicodeEscapeSyntax                                                                                 |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/UnicodeEscapeSyntax                                                                                    |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -10232,7 +10352,7 @@ This is dead code, that may be removed.
 +--------------+-----------------------------------------------------------------------------------------+
 | clearPHP     | `no-dead-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-dead-code.md>`__ |
 +--------------+-----------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>`                                             |
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                            |
 +--------------+-----------------------------------------------------------------------------------------+
 
 
@@ -10331,7 +10451,7 @@ Make sure the following classes are well defined.
 +--------------+-----------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-unresolved-instanceof <https://github.com/dseguy/clearPHP/tree/master/rules/no-unresolved-instanceof.md>`__ |
 +--------------+-----------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>`                                                                     |
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                    |
 +--------------+-----------------------------------------------------------------------------------------------------------------+
 
 
@@ -10423,11 +10543,11 @@ Unset applied to the variables of a foreach loop are useless, as they are copies
    
    ?>
 
-+--------------+---------------------------------------------+
-| Command Line | Structures/UnsetInForeach                   |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Dead code <dead-code>`,:ref:`Analyze` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Structures/UnsetInForeach                    |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++--------------+----------------------------------------------+
 
 
 
@@ -10444,7 +10564,7 @@ These are exceptions that are defined in the code but never thrown.
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | clearPHP     | `no-unthrown-exceptions <https://github.com/dseguy/clearPHP/tree/master/rules/no-unthrown-exceptions.md>`__ |
 +--------------+-------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>`                                                                 |
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                                |
 +--------------+-------------------------------------------------------------------------------------------------------------+
 
 
@@ -10490,11 +10610,11 @@ The following classes are never explicitely used in the code.
 Note that this may be valid in case the current code is a library or framework, since it defines classes that are used by other (unprovided) codes.
 Also, this analyzer may find classes that are, in fact, dynamically loaded.
 
-+--------------+---------------------------------------------+
-| Command Line | Classes/UnusedClass                         |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedClass                          |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -10508,11 +10628,11 @@ Those constants are defined in the code but never used. Defining unused constant
 
 It is recommended to comment them out, and only define them when it is necessary.
 
-+--------------+---------------------------------------------+
-| Command Line | Constants/UnusedConstants                   |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Constants/UnusedConstants                    |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -10524,11 +10644,11 @@ Unused Functions
 
 The functions below are unused. They look like deadcode.
 
-+--------------+---------------------------------------------+
-| Command Line | Functions/UnusedFunctions                   |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Functions/UnusedFunctions                    |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -10566,11 +10686,11 @@ Unused Interfaces
 
 Those interfaces are defined but not used. They should be removed.
 
-+--------------+---------------------------------------------+
-| Command Line | Interfaces/UnusedInterfaces                 |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Interfaces/UnusedInterfaces                  |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -10582,11 +10702,11 @@ Unused Label
 
 The following labels have been defined in the code, but they are not used. They may be removed.
 
-+--------------+---------------------------------------------+
-| Command Line | Structures/UnusedLabel                      |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Dead code <dead-code>`,:ref:`Analyze` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Structures/UnusedLabel                       |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Dead code <dead-code>`, :ref:`Analyze` |
++--------------+----------------------------------------------+
 
 
 
@@ -10598,11 +10718,11 @@ Unused Methods
 
 The following methods are never called as methods. They are probably dead code.
 
-+--------------+---------------------------------------------+
-| Command Line | Classes/UnusedMethods                       |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedMethods                        |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -10698,11 +10818,11 @@ It is recommended to add a check on the return value, or remove the call.
 
 Note that this analysis ignores functions that return void (same meaning that PHP 7.1 : return ; or no return in the function body).
 
-+--------------+---------------------------------------------+
-| Command Line | Functions/UnusedReturnedValue               |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Functions/UnusedReturnedValue                |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -10714,11 +10834,11 @@ Unused Static Methods
 
 List of all static methods that are not used. This looks like dead code.
 
-+--------------+---------------------------------------------+
-| Command Line | Classes/UnusedPrivateMethod                 |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedPrivateMethod                  |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -10730,11 +10850,11 @@ Unused Static Properties
 
 List of all static properties that are not used. This looks like dead code.
 
-+--------------+---------------------------------------------+
-| Command Line | Classes/UnusedPrivateProperty               |
-+--------------+---------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>` |
-+--------------+---------------------------------------------+
++--------------+----------------------------------------------+
+| Command Line | Classes/UnusedPrivateProperty                |
++--------------+----------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>` |
++--------------+----------------------------------------------+
 
 
 
@@ -10787,7 +10907,7 @@ List of use statement that are not used in the following code : they may be remo
 +--------------+---------------------------------------------------------------------------------------------+
 | clearPHP     | `no-useless-use <https://github.com/dseguy/clearPHP/tree/master/rules/no-useless-use.md>`__ |
 +--------------+---------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Dead code <dead-code>`                                                 |
+| Analyzers    | :ref:`Analyze`, :ref:`Dead code <dead-code>`                                                |
 +--------------+---------------------------------------------------------------------------------------------+
 
 
@@ -10940,11 +11060,11 @@ This is not possible when building the name of the class with concatenation.
 
 This is a micro-optimization.
 
-+--------------+------------------------------------+
-| Command Line | Classes/UseClassOperator           |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances` |
-+--------------+------------------------------------+
++--------------+-------------------------------------+
+| Command Line | Classes/UseClassOperator            |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
++--------------+-------------------------------------+
 
 
 
@@ -10956,11 +11076,11 @@ Use Const And Functions
 
 Since PHP 5.6 it is possible to import specific functions or constants from other namespaces.
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Namespaces/UseFunctionsConstants                                              |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Namespaces/UseFunctionsConstants                                                |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -10986,7 +11106,9 @@ Use Instanceof
 ##############
 
 
-The `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is a better alternative to `is_object() <http://www.php.net/is_object>`_. `instanceof <http://php.net/manual/en/language.operators.type.php>`_ checks for an variable to be of a class or its parents or the interfaces it implements. 
+The `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is a faster alternative to `is_object() <http://www.php.net/is_object>`_. 
+
+`instanceof <http://php.net/manual/en/language.operators.type.php>`_ checks for an variable to be of a class or its parents or the interfaces it implements. 
 Once `instanceof <http://php.net/manual/en/language.operators.type.php>`_ has been used, the actual attributes available (properties, constants, methods) are known, unlike with `is_object() <http://www.php.net/is_object>`_.
 
 Last, `instanceof <http://php.net/manual/en/language.operators.type.php>`_ may be upgraded to Typehint, by moving it to the method signature. 
@@ -11022,15 +11144,15 @@ Last, `instanceof <http://php.net/manual/en/language.operators.type.php>`_ may b
    ?>
 
 
-`instanceof <http://php.net/manual/en/language.operators.type.php>`_ and `is_object() <http://www.php.net/is_object>`_ may not be always interchangeable. Consider using `is_string() <http://www.php.net/is_string>`_, `is_integer() <http://www.php.net/is_integer>`_ or `is_scalar() <http://www.php.net/is_scalar>`_, in particular instead of !`is_object() <http://www.php.net/is_object>`_.
+`instanceof <http://php.net/manual/en/language.operators.type.php>`_ and `is_object() <http://www.php.net/is_object>`_ may not be always interchangeable. Consider using `isset <http://www.php.net/isset>`_ on a known property for a simple check on object. You may also consider `is_string() <http://www.php.net/is_string>`_, `is_integer() <http://www.php.net/is_integer>`_ or `is_scalar() <http://www.php.net/is_scalar>`_, in particular instead of !`is_object() <http://www.php.net/is_object>`_.
 
 The `instanceof <http://php.net/manual/en/language.operators.type.php>`_ operator is also faster than the `is_object() <http://www.php.net/is_object>`_ functioncall.
 
-+--------------+-------------------------------+
-| Command Line | Classes/UseInstanceof         |
-+--------------+-------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Analyze` |
-+--------------+-------------------------------+
++--------------+--------------------------------+
+| Command Line | Classes/UseInstanceof          |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Analyze` |
++--------------+--------------------------------+
 
 
 
@@ -11065,11 +11187,11 @@ parent, static and self are traditionally written in lowercase only. Mixed case 
 
 Until PHP 5.5, non-lowercase version of those keywords are generating a bug.
 
-+--------------+--------------------------------------------------------------------+
-| Command Line | Php/CaseForPSS                                                     |
-+--------------+--------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP53` |
-+--------------+--------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------+
+| Command Line | Php/CaseForPSS                                                       |
++--------------+----------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP53` |
++--------------+----------------------------------------------------------------------+
 
 
 
@@ -11090,11 +11212,11 @@ The code uses nullable type, available since PHP 7.1.
    }
    ?>
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/UseNullableType                                 |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/UseNullableType                                  |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------+
 
 
 
@@ -11260,11 +11382,11 @@ PHP manual recommends not to use fully qualified name (starting with \) when usi
    
    ?>
 
-+--------------+---------------------------------------------------------------+
-| Command Line | Namespaces/UseWithFullyQualifiedNS                            |
-+--------------+---------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Coding Conventions <coding-conventions>` |
-+--------------+---------------------------------------------------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Namespaces/UseWithFullyQualifiedNS                             |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -11349,11 +11471,11 @@ This way, constant will be defined at compile time, and not at execution time.
      echo b;
    ?>
 
-+--------------+---------------------------------------------------------------+
-| Command Line | Constants/ConstRecommended                                    |
-+--------------+---------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Coding Conventions <coding-conventions>` |
-+--------------+---------------------------------------------------------------+
++--------------+----------------------------------------------------------------+
+| Command Line | Constants/ConstRecommended                                     |
++--------------+----------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Coding Conventions <coding-conventions>` |
++--------------+----------------------------------------------------------------+
 
 
 
@@ -11365,11 +11487,11 @@ Use password_hash()
 
 PHP 5.5 introduced `password_hash() <http://www.php.net/password_hash>`_ and password_check() to replace the use of `crypt() <http://www.php.net/crypt>`_ to check password.
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Php/Password55                                                                                          |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Password55                                                                                             |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -11410,11 +11532,11 @@ random_int() replaces `rand() <http://www.php.net/rand>`_, and has no seeding fu
 Since PHP 7, random_int() along with random_bytes(), provides cryptographically secure pseudo-random bytes, which are good to be used
 when security is involved. openssl_random_pseudo_bytes() may be used when the OpenSSL extension is available.
 
-+--------------+------------------------------------------------------------------------------------+
-| Command Line | Php/BetterRand                                                                     |
-+--------------+------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+------------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------------+
+| Command Line | Php/BetterRand                                                                        |
++--------------+---------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+---------------------------------------------------------------------------------------+
 
 
 
@@ -12041,11 +12163,11 @@ Until PHP 7.1, `$this` may be used as an argument in a function (or a method), a
 
 Starting with PHP 7.1, the PHP engine check thouroughly that $this is used in an appropriate manner, and raise fatal errors in case it isn't.
 
-+--------------+--------------------------------------------------------------------+
-| Command Line | Classes/UsingThisOutsideAClass                                     |
-+--------------+--------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+--------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------+
+| Command Line | Classes/UsingThisOutsideAClass                                       |
++--------------+----------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+----------------------------------------------------------------------+
 
 
 
@@ -12097,11 +12219,11 @@ in PHP 7, the result is :::
        [3] => 6
    )
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Php/UsortSorting                                                                                                                                            |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/UsortSorting                                                                                                                                                 |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12160,11 +12282,11 @@ Variable global such are valid in PHP 5.6, but no in PHP 7.0. They should be rep
    
    ?>
 
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/VariableGlobal                                                                               |
-+--------------+---------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+---------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/VariableGlobal                                                                                  |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12184,11 +12306,11 @@ This code structure is quite old : it should be replace by the more modern and e
        }
    ?>
 
-+--------------+------------------------------------+
-| Command Line | Structures/WhileListEach           |
-+--------------+------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Performances` |
-+--------------+------------------------------------+
++--------------+-------------------------------------+
+| Command Line | Structures/WhileListEach            |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
++--------------+-------------------------------------+
 
 
 
@@ -12197,6 +12319,8 @@ This code structure is quite old : it should be replace by the more modern and e
 Wpdb Best Usage
 ###############
 
+
+Use the adapted API with $wpdb.
 
 Wordpress database API ($wpdb) offers several eponymous methods to safely handle insert, delete, replace and update. 
 
@@ -12442,11 +12566,11 @@ This ends up with :::
      string(6) Secret
    }
 
-+--------------+-------------------------------------------------------------------------------+
-| Command Line | Php/debugInfoUsage                                                            |
-+--------------+-------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55` |
-+--------------+-------------------------------------------------------------------------------+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/debugInfoUsage                                                              |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 
@@ -12474,11 +12598,11 @@ crypt() Without Salt
 
 PHP 5.6 and later require a salt, while previous versions didn't require it. Salt is a simple string, that is usually only known by the application.
 
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/CryptWithoutSalt                                                                                                                      |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/CryptWithoutSalt                                                                                                                           |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12544,11 +12668,11 @@ eval() Without Try
 
 Note that it will catch situations where `eval() <http://www.php.net/eval>`_ is provided with code that can't be used, but it will not catch security problems. Avoid using `eval() <http://www.php.net/eval>`_ with incoming data.
 
-+--------------+------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/EvalWithoutTry                                                                                              |
-+--------------+------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP53`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+------------------------------------------------------------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/EvalWithoutTry                                                                                                  |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12560,11 +12684,11 @@ ext/apc
 
 Extension APC
 
-+--------------+------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Extensions/Extapc                                                                                                      |
-+--------------+------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Extensions/Extapc                                                                                                          |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12592,11 +12716,11 @@ ext/ereg
 
 Extension ext/ereg
 
-+--------------+-----------------------------------------------------+
-| Command Line | Extensions/Extereg                                  |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Extensions/Extereg                                   |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -12624,11 +12748,11 @@ ext/fdf
 
 Extension ext/fdf.
 
-+--------------+------------------------------------------+
-| Command Line | Extensions/Extfdf                        |
-+--------------+------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP53` |
-+--------------+------------------------------------------+
++--------------+-------------------------------------------+
+| Command Line | Extensions/Extfdf                         |
++--------------+-------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP53` |
++--------------+-------------------------------------------+
 
 
 
@@ -12640,11 +12764,11 @@ ext/mcrypt
 
 Extension ext/mcrypt
 
-+--------------+-----------------------------------------------------+
-| Command Line | Extensions/Extmcrypt                                |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Extensions/Extmcrypt                                 |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------+
 
 
 
@@ -12656,11 +12780,11 @@ ext/mhash
 
 Extension mhash (obsolete since PHP 5.3.0).
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Extensions/Extmhash                                                                                                                                         |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56` |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Extensions/Extmhash                                                                                                                                              |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12688,11 +12812,11 @@ ext/mysql
 
 Extension ext/mysql
 
-+--------------+------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Extensions/Extmysql                                                                                                    |
-+--------------+------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+------------------------------------------------------------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Extensions/Extmysql                                                                                                        |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12754,11 +12878,11 @@ func_get_arg() Modified
 
 This code will display 1 in PHP 7, and 0 in PHP 5.
 
-+--------------+--------------------------------------------------------------------+
-| Command Line | Functions/funcGetArgModified                                       |
-+--------------+--------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+--------------------------------------------------------------------+
++--------------+----------------------------------------------------------------------+
+| Command Line | Functions/funcGetArgModified                                         |
++--------------+----------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+----------------------------------------------------------------------+
 
 
 
@@ -12828,11 +12952,11 @@ mcrypt_create_iv used to have MCRYPT_DEV_RANDOM as default values, and in PHP 5.
 
 If the code doesn't have a second argument, it relies on the default value. It is recommended to set explicitely the value, so has to avoid problems while migrating.
 
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/McryptcreateivWithoutOption                                                                                                           |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP54`,:ref:`CompatibilityPHP55`,:ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP56`,:ref:`CompatibilityPHP71` |
-+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/McryptcreateivWithoutOption                                                                                                                |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
++--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12942,11 +13066,11 @@ preg_replace With Option e
                                                  '/[a-b]/' => function ($x) { return strtolower($x[0]); }), $string);
    ?>
 
-+--------------+--------------------------------------------------------------------------------------------------------------+
-| Command Line | Structures/pregOptionE                                                                                       |
-+--------------+--------------------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`CompatibilityPHP70`,:ref:`Security`,:ref:`CompatibilityPHP71`,:ref:`CompatibilityPHP72` |
-+--------------+--------------------------------------------------------------------------------------------------------------+
++--------------+------------------------------------------------------------------------------------------------------------------+
+| Command Line | Structures/pregOptionE                                                                                           |
++--------------+------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
++--------------+------------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -12977,11 +13101,11 @@ When in doubt about backward compatibility, just drop the Typehint. Otherwise, u
    
    ?>
 
-+--------------+-----------------------------------------------------+
-| Command Line | Php/SetExceptionHandlerPHP7                         |
-+--------------+-----------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP70`,:ref:`CompatibilityPHP71` |
-+--------------+-----------------------------------------------------+
++--------------+------------------------------------------------------+
+| Command Line | Php/SetExceptionHandlerPHP7                          |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71` |
++--------------+------------------------------------------------------+
 
 
 
@@ -13016,7 +13140,7 @@ They may be tolerated during development time, but must be removed so as not to 
 +--------------+-------------------------------------------------------------------------------------------+
 | clearPHP     | `no-debug-code <https://github.com/dseguy/clearPHP/tree/master/rules/no-debug-code.md>`__ |
 +--------------+-------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`,:ref:`Security`                                                            |
+| Analyzers    | :ref:`Analyze`, :ref:`Security`                                                           |
 +--------------+-------------------------------------------------------------------------------------------+
 
 

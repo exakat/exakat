@@ -60,7 +60,7 @@ Those libraries, or even some of the, may be included again in the analysis by c
 New analyzers
 -------------
 
-List of analyzers, by version of introduction, newest to oldest. 
+List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 {{ANALYZER_INTRODUCTION}}
 
@@ -70,4 +70,11 @@ External services
 List of external services whose configuration files has been commited in the code.
 
 {{EXTERNAL_SERVICES_LIST}}
+
+External links
+--------------
+
+List of external links mentionned in this documentation.
+
+{{URL_LIST}}
 
