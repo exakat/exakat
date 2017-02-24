@@ -1,10 +1,24 @@
 <?php 
 
-function a1(X $readOnlyA1, X $writenOnlyA1, X $readAndWrittenA1, X $unusedA1) { 
+function a0(X $readOnlyA1, X $readAndWrittenA1) { 
     $writenOnlyA1 = $readOnlyA1 + 1;
     $readAndWrittenA1 = $readAndWrittenA1 * $readOnlyA1;
     $localA1 = 1;
 };
+
+
+function a1(X $readOnlyA1, X $readAndWrittenA1, X $unusedA1) { 
+    $writenOnlyA1 = $readOnlyA1 + 1;
+    $readAndWrittenA1 = $readAndWrittenA1 * $readOnlyA1;
+    $localA1 = 1;
+};
+
+function a12(X $readOnlyA12, X $writenOnlyA12, X $readAndWrittenA12) { 
+    $writenOnlyA1 = $readOnlyA1 + 1;
+    $readAndWrittenA1 = $readAndWrittenA1 * $readOnlyA1;
+    $localA1 = 1;
+};
+
 
 function a2(X &$readOnlyA2, X &$writenOnlyA2, X &$readAndWrittenA2, X &$unusedA2) { 
     $writenOnlyA2 = $readOnlyA2 + 1;
@@ -18,7 +32,13 @@ $a = function () use (&$readOnlyClosureR, &$writenOnlyClosureR, &$readAndWritten
     $localClosureR = 1;
 };
 
-$a = function () use ($readOnlyClosure, $writenOnlyClosure, $readAndWrittenClosure, $unusedUseClosure) { 
+$a = function () use ($readOnlyClosure, $writenOnlyClosure, $readAndWrittenClosure) { 
+    $writenOnlyClosure = $readOnlyClosure + 1;
+    $readAndWrittenClosure = $readAndWrittenClosure * $readOnlyClosure;
+    $localClosure = 1;
+};
+
+$a = function () use ($readOnlyClosure, $readAndWrittenClosure, $unusedUseClosure) { 
     $writenOnlyClosure = $readOnlyClosure + 1;
     $readAndWrittenClosure = $readAndWrittenClosure * $readOnlyClosure;
     $localClosure = 1;
