@@ -476,7 +476,6 @@ class Load extends Tasks {
             }
             if ($this->processFile($filename)) {
                 $this->saveFiles();
-                $this->saveDefinitions();
             }
             $files = 1;
         } elseif ($dirName = $this->config->dirname) {
@@ -1848,7 +1847,7 @@ class Load extends Tasks {
     private function processString($fullnspath = true) {
         if (strtolower($this->tokens[$this->id][1]) === 'null' ) {
             $id = $this->addAtom('Null');
-            $this->setAtom($id, array('boolean' => 1));
+            $this->setAtom($id, array('boolean' => 0));
         } elseif (in_array(strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $id = $this->addAtom('Boolean');
             $this->setAtom($id, array('boolean' => (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true') ));
@@ -4163,8 +4162,8 @@ class Load extends Tasks {
         if (!isset($this->links[$label][$o]))     { $this->links[$label][$o]= array(); }
         if (!isset($this->links[$label][$o][$d])) { $this->links[$label][$o][$d]= array(); }
 
-        $this->links[$label][$o][$d][] = array('origin'      => $origin,
-                                               'destination' => $destination);
+        $this->links[$label][$o][$d]["$origin-$destination"] = array('origin'      => $origin,
+                                                                     'destination' => $destination);
         return true;
     }
 
@@ -4257,7 +4256,7 @@ class Load extends Tasks {
 
     private function saveFiles() {
         self::$client->saveFiles($this->exakatDir, $this->atoms, $this->links, $this->id0);
-
+        $this->saveDefinitions();
         $this->reset();
     }
 
@@ -4277,7 +4276,6 @@ class Load extends Tasks {
         $this->log->log("saveDefinitions\t".(($end - $begin) * 1000)."\t".count($this->calls)."\n");
     }
 
-    
     private function fallbackToGlobal($type) {
         foreach($this->calls[$type] as $fnp => &$usage) {
             if (substr_count($fnp, '\\') < 2) {
@@ -4336,10 +4334,11 @@ class Load extends Tasks {
     }
 
     private function getFullnspath($nameId, $type = 'class') {
+
         // Handle static, self, parent and PHP natives function
         if (isset($this->atoms[$nameId]['absolute']) && ($this->atoms[$nameId]['absolute'] === true)) {
             return array(strtolower($this->atoms[$nameId]['fullcode']), self::NOT_ALIASED);
-        } elseif (!in_array($this->atoms[$nameId]['atom'], array('Nsname', 'Identifier', 'String'))) {
+        } elseif (!in_array($this->atoms[$nameId]['atom'], array('Nsname', 'Identifier', 'String', 'Null', 'Boolean'))) {
             // No fullnamespace for non literal namespaces
             return array('', self::NOT_ALIASED);
         } elseif (in_array($this->atoms[$nameId]['token'], array('T_STATIC', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
@@ -4348,7 +4347,7 @@ class Load extends Tasks {
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
             // namespace\A\B 
             return array(substr($this->namespace, 0, -1).strtolower(substr($this->atoms[$nameId]['fullcode'], 9)), self::NOT_ALIASED);
-        } elseif ($this->atoms[$nameId]['atom'] === 'Identifier') {
+        } elseif (in_array($this->atoms[$nameId]['atom'], array('Identifier', 'Boolean', 'Null'))) {
             // This is an identifier, self or parent
             if (strtolower($this->atoms[$nameId]['code']) === 'self'   || 
                 strtolower($this->atoms[$nameId]['code']) === 'parent') {
@@ -4356,6 +4355,7 @@ class Load extends Tasks {
 
             // This is an identifier
             } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
+                $this->addLink($this->usesId['class'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
                 return array($this->uses['class'][strtolower($this->atoms[$nameId]['code'])], self::ALIASED);
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
                 $this->addLink($this->usesId['const'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
