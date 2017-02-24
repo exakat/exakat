@@ -308,10 +308,21 @@ INI;
                     }
 
                     display('Git initialization');
-                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 ');
+                    if (!isset($repositoryDetails['user'])) {
+                        $repositoryDetails['user'] = 'exakat';
+                    }
+                    if (!isset($repositoryDetails['pass'])) {
+                        $repositoryDetails['pass'] = 'exakat';
+                    }
+                    unset($repositoryDetails['query']);
+                    unset($repositoryDetails['fragment']);
+                    $repositoryNormalizedURL = unparse_url($repositoryDetails);
+                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryNormalizedURL.' code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
-                        display( "An error prevented code initialization : ".trim(substr($res, $offset + 7))."\nNo code was loaded.\n");
+                        $res = str_replace($repositoryNormalizedURL, $repositoryURL, $res);
+                        $res = trim(substr($res, $offset + 7));
+                        display( "An error prevented code initialization : ".$res."\nNo code was loaded.\n");
 
                         $skipFiles = true;
                     }
