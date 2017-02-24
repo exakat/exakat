@@ -1,0 +1,46 @@
+<?php
+
+$expected     = array('self::$a',
+                      'parent::$a',
+                      'static::$a',
+                      'self::A',
+                      'static::A',
+                      'parent::A',
+                      'parent::m( )',
+                      'self::m( )',
+                      'static::m( )',
+                      'new self',
+                      'new static  ',
+                      'new parent',
+                      'new SELF',
+                      'new STATIC  ',
+                      'new PARENT',
+                      'new self( )',
+                      'new static( )',
+                      'new parent( )',
+                      'new self(1)',
+                      'new static(1)',
+                      'new parent(1)',
+);
+
+$expected_not = array('self::mt( )',
+                      'parent::mt( )',
+                      'static::mt( )',
+                      'self::$ac',
+                      'parent::$ac',
+                      'static::$ac',
+                      'self::$at',
+                      'parent::$at',
+                      'static::$at',
+                      'parent::Ac',
+                      'self::Ac',
+                      'self::At',
+                      'static::Ac',
+                      'static::At',
+                      'parent::At',
+                      'self::mc( )',
+                      'static::mc( )',
+                      'parent::mc( )'
+                      );
+
+?>
