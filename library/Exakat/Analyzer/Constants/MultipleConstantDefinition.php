@@ -61,7 +61,6 @@ g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
                               .map{ it.get().value("noDelimiter").toLowerCase()}
 GREMLIN
 );
-
         if ($a = $this->selfCollisions($cisDefinitions)) {
             $this->applyToCisDefine($a);
         }
@@ -93,6 +92,10 @@ GREMLIN
     }
     
     private function applyToCisDefine($array) {
+        if (empty($array)) {
+            return;
+        }
+        
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
@@ -106,6 +109,9 @@ GREMLIN
     }
 
     private function applyToCsDefine($array) {
+        if (empty($array)) {
+            return;
+        }
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
@@ -128,6 +134,10 @@ GREMLIN
     }
 
     private function applyToConst($array) {
+        if (empty($array)) {
+            return;
+        }
+
         $this->atomIs('Const')
              ->hasNoClassTrait()
              ->outIs('CONST')
