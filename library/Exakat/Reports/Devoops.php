@@ -36,31 +36,31 @@ class Devoops extends Reports {
     const FILE_FILENAME  = 'devoops';
 
     const FOLDER_PRIVILEGES = 0755;
-    
+
     const NOT_RUN      = 'Not Run';
     const YES          = 'Yes';
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
-    
+
     protected $dump      = null; // Dump.sqlite
-    
+
     protected $analyzers  = array(); // cache for analyzers [Title] = object
-    
+
     public function generate($folder, $name = 'report') {
         $finalName = $name;
         $name = '.'.$name;
-        
+
         if ($name === null) {
             return "Can't produce Devoops format to stdout";
         }
 
         // Clean final destination
-        if ($folder . '/' . $finalName !== '/') {
-            rmdirRecursive($folder . '/' . $finalName);
+        if ($folder.'/'.$finalName !== '/') {
+            rmdirRecursive($folder.'/'.$finalName);
         }
 
-        if (file_exists($folder . '/' . $finalName)) {
-            display ($folder . '/' . $finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+        if (file_exists($folder.'/'.$finalName)) {
+            display ($folder.'/'.$finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 
@@ -76,11 +76,11 @@ class Devoops extends Reports {
         copyDir($this->config->dir_root.'/media/devoops/img', $folder.'/'.$name.'/img');
         copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
-        
+
         $this->dump      = new \Sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
         // This is an overwriting. Leave it here.
         $this->datastore = new \Sqlite3($folder.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
-        
+
         // Compatibility
         $compatibility = array('Compilation' => 'Compilation');
         foreach($this->config->other_php_versions as $code) {
@@ -100,11 +100,11 @@ class Devoops extends Reports {
         $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$themesList);
         while($row = $res->fetchArray()) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
-            
+
             $this->analyzers[$analyzer->getDescription()->getName()] = $analyzer;
             $analyze[$analyzer->getDescription()->getName()] = 'OneAnalyzer';
         }
-        uksort($analyze, function ($a, $b) { 
+        uksort($analyze, function ($a, $b) {
             return strtolower($a) > strtolower($b) ;
         });
         $analyze = array_merge(array('Results Counts' => 'AnalyzersResultsCounts'), $analyze);
@@ -116,7 +116,7 @@ class Devoops extends Reports {
             $files[$row['file']] = 'OneFile';
         }
         $files = array_merge(array('Files Counts' => 'FilesResultsCounts'), $files);
-        
+
         $summary = array(
             'Report presentation' => array('Audit configuration' => 'AuditConfiguration'),
             'Analysis'            => array('Code Smells'         => 'Dashboard',
@@ -142,14 +142,14 @@ class Devoops extends Reports {
                                            'Analyzers'              => 'Analyzers',
                                            'About This Report'      => 'AboutThisReport'),
         );
-        
+
         $summaryHtml = $this->makeSummary($summary);
-        
+
         $faviconHtml = '';
         if (file_exists($this->config->dir_root.'/projects/'.$this->config->project.'/code/favicon.ico')) {
             // Should be checked and reported
             copy($this->config->dir_root.'/projects/'.$this->config->project.'/code/favicon.ico', $folder.'/'.$name.'/img/'.$this->config->project.'.ico');
-            
+
             $faviconHtml = <<<HTML
 <img src="img/{$this->config->project}.ico" class="img-circle" alt="{$this->config->project} logo" />
 HTML;
@@ -163,7 +163,7 @@ HTML;
 					$faviconHtml
 				</div>
 HTML;
-        } 
+        }
 
         $html = file_get_contents($this->config->dir_root.'/media/devoops/index.exakat.html');
         $html = str_replace('<menu>', $summaryHtml, $html);
@@ -174,7 +174,7 @@ HTML;
         $html = str_replace('PROJECT_FAVICON', $faviconHtml, $html);
 
         file_put_contents($folder.'/'.$name.'/index.html', $html);
-        
+
         foreach($summary as $titleUp => $section) {
             foreach($section as $title => $method) {
                 if (method_exists($this, $method)) {
@@ -185,7 +185,7 @@ HTML;
                 }
 
                 $filename = $this->makeFileName($title);
-                
+
                 $html = <<<HTML
 <script language="javascript">
 if (!document.getElementById("main")) {
@@ -211,17 +211,17 @@ $html
     </div>
 </div>
 HTML;
-                
-                file_put_contents($folder.'/'.$name.'/ajax/'.$filename, 
+
+                file_put_contents($folder.'/'.$name.'/ajax/'.$filename,
                                   $html);
             }
         }
-        
+
         rename($folder.'/'.$name, $folder.'/'.$finalName);
 
         return '';
     }//end generate()
-    
+
     ////////////////////////////////////////////////////////////////////////////////////
     // Utilities
     ////////////////////////////////////////////////////////////////////////////////////
@@ -240,7 +240,7 @@ HTML;
                 $html .= $this->makeSummary($section, $level + 1);
             }
 
-        $html .= '</ul>';
+            $html .= '</ul>';
 
         } else {
             $html = '<ul class="dropdown-menu">';
@@ -256,11 +256,11 @@ HTML;
 
         return $html;
     }
-    
+
     protected function makeFileName($title) {
         // must sync with Template/Section.php
         // @todo : remove this sync!
-        return str_replace(array(' ', '(', ')', ':', '*', '.', '/', '&', '_', '|', '^', ','), 
+        return str_replace(array(' ', '(', ')', ':', '*', '.', '/', '&', '_', '|', '^', ','),
                            array('-', '' , '' , '' , '' , '', '', '', '_', '', '', '' ),
                                $title).'.html';
     }
@@ -273,7 +273,7 @@ HTML;
         }
 
         $jsonFile = json_decode(file_get_contents($fullpath));
-        
+
         return $jsonFile;
     }
 
@@ -291,15 +291,15 @@ HTML;
 
     protected function makeIcon($tag) {
         switch($tag) {
-            case self::YES : 
+            case self::YES :
                 return '<i class="fa fa-check"></i>';
-            case self::NO : 
+            case self::NO :
                 return '&nbsp;';
-            case self::NOT_RUN : 
+            case self::NOT_RUN :
                 return '<i class="fa fa-times-circle-o"></i>';
-            case self::INCOMPATIBLE : 
+            case self::INCOMPATIBLE :
                 return '<i class="fa fa-minus-circle"></i>';
-            default : 
+            default :
                 return '&nbsp;';
         }
     }
@@ -315,14 +315,14 @@ HTML;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
-    /// Formatting methods 
+    /// Formatting methods
     ////////////////////////////////////////////////////////////////////////////////////
     protected function formatCamembert($data, $css) {
         $datajs = '';
         foreach($data as $k => $v) {
             $datajs .= "{label: \"$k\", value: $v[count]},\n";
         }
-        
+
         $html = <<<HTML
  <label class="label label-success">Pie Chart</label>
       <div id="pie-chart" style="height: 200px;" ></div>
@@ -356,7 +356,7 @@ HTML;
 
         return $html;
     }
-    
+
     protected function formatCompilationTable($data, $css) {
         $th = '<tr>';
         foreach($css->titles as $title) {
@@ -368,7 +368,7 @@ HTML;
 HTML;
         }
         $th .= '</tr>';
-        
+
         $text = <<<HTML
 												<table class="table">
 													<thead>
@@ -401,10 +401,10 @@ HTML;
 													</tbody>
 												</table>
 HTML;
-        
+
         return $text;
     }
-    
+
     protected function formatDashboard($data, $css) {
         $camembert = $this->formatCamembert($data['upLeft'], $css);
         $infobox = $this->formatInfobox($data['upRight'], $css);
@@ -418,20 +418,19 @@ HTML;
         $css->title = 'List by Files';
         $css->titles = array('Analyzer', 'Count');
         $top5Files = $this->formatTop5($data['downRight'], $css);
-        
-        return $this->formatRow($camembert, $infobox, $css) . 
-               $this->formatRow($top5Severity, $top5Files, $css);
+
+        return $this->formatRow($camembert, $infobox, $css).$this->formatRow($top5Severity, $top5Files, $css);
     }
-    
+
     protected function formatDefinitions($data, $css) {
         $text = <<<HTML
 													<dl id="dt-list-1" >
 HTML;
-        
-        uksort($data, function ($a, $b) { 
+
+        uksort($data, function ($a, $b) {
             return strtolower($a) > strtolower($b) ;
         });
-        
+
         if (!empty($css->dt->class)) {
             $dt_class = ' class="'.$css->dt->class.'"';
         } else {
@@ -467,7 +466,7 @@ HTML;
 
     protected function formatHashTableLinked($data, $css) {
         static $counter;
-        
+
         if (!isset($counter)) {
             $counter = 1;
         } else {
@@ -478,7 +477,7 @@ HTML;
 <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="hashtable-{$counter}">
 										<thead>
 HTML;
-        
+
         if ($css->displayTitles === true) {
             $text .= '<tr>';
             foreach($css->titles as $title) {
@@ -490,7 +489,7 @@ HTML;
             $text .= '</tr>';
         }
 
-$text .= <<<HTML
+        $text .= <<<HTML
 										</thead>
 
 										<tbody>
@@ -539,13 +538,13 @@ $(document).ready(function() {
 </script>
 
 HTML;
-        
+
         return $text;
     }
-    
+
     protected function formatHorizontal($data, $css) {
         static $counter;
-        
+
         if (!isset($counter)) {
             $counter = 1;
         } else {
@@ -566,7 +565,7 @@ HTML;
 																$title
 															</th>
 HTML;
-        }
+            }
             $html .= '</tr>';
         }
         $html .= <<<HTML
@@ -579,9 +578,9 @@ HTML;
             if (empty($row['Code'])) {
                 $row['Code'] = '&nbsp;';
             }
-            
+
             $row['File'] = $this->makeLink($row['File']);
-$html .= <<<HTML
+            $html .= <<<HTML
 
 										<tr>
 											<td><pre class="prettyprint linenums">{$row['Code']}</pre></td>
@@ -589,8 +588,7 @@ $html .= <<<HTML
 											<td>{$row['Line']}</td>
 										</tr>
 HTML;
-            }
-
+        }
 
         $html .= <<<HTML
 									</tbody>
@@ -622,37 +620,37 @@ HTML;
 
         return $html;
     }
-    
+
     protected function formatInfobox($data, $css) {
         /*
         $text = <<<HTML
-<div class="row">
-HTML;
+        <div class="row">
+        HTML;
         $colors = $this->css->colors;
-        
+
         $i = -1;
         foreach($data as $id => $row) {
             $i = ++$i % count($colors);
             $color = $colors[$i];
-            
+
             $text .= <<<HTML
-  <div class="col-md-1">
-    {$row['icon']}&nbsp;{$row['number']}&nbsp;{$row['content']}
-  </div>
-HTML;
+        <div class="col-md-1">
+        {$row['icon']}&nbsp;{$row['number']}&nbsp;{$row['content']}
+        </div>
+        HTML;
 
         }
 
             $text .= <<<HTML
 								</div>
 
-HTML;
-    */
+        HTML;
+        */
         $html = '&nbsp;';
 
         return $html;
     }
-    
+
     protected function formatRow($left, $right, $css) {
         $html = <<<HTML
         <div class="row">
@@ -670,18 +668,18 @@ HTML;
 
     protected function formatSectionedHashTable($data, $css) {
         static $counter;
-        
+
         if (!isset($counter)) {
             $counter = 1;
         } else {
             ++$counter;
         }
-        
+
         $text = <<<HTML
 <table id="sectionedhashtable-{$counter}" class="table">
 										<thead>
 HTML;
-        
+
         if ($css->displayTitles === true) {
             $text .= '<tr>';
             foreach($css->titles as $title) {
@@ -695,7 +693,7 @@ HTML;
             $text .= '</tr>';
         }
 
-$text .= <<<HTML
+        $text .= <<<HTML
 										</thead>
 
 										<tbody>
@@ -712,7 +710,7 @@ HTML;
 										</tbody>
 									</table>
 HTML;
-        
+
         return $text;
     }
 
@@ -723,12 +721,12 @@ HTML;
         } else {
             ++$counter;
         }
-        
+
         $text = <<<HTML
 <table id="sectionedhashtable-{$counter}" class="table">
 										<thead>
 HTML;
-        
+
         if ($css->displayTitles === true) {
             $text .= '<tr>';
             foreach($css->titles as $title) {
@@ -742,7 +740,7 @@ HTML;
             $text .= '</tr>';
         }
 
-$text .= <<<HTML
+        $text .= <<<HTML
 										</thead>
 
 										<tbody>
@@ -753,10 +751,9 @@ HTML;
         }
 
         foreach($data as $k => $v) {
-            $text .= '<tr><td style="background-color: '.$css->backgroundColor.'">'.$k.'</td>'.
-            str_repeat('<td style="background-color: '.$css->backgroundColor.'">&nbsp;</td>', count($css->titles) -1)."</tr>\n";
-            if (empty($v)) { 
-                continue; 
+            $text .= '<tr><td style="background-color: '.$css->backgroundColor.'">'.$k.'</td>'.str_repeat('<td style="background-color: '.$css->backgroundColor.'">&nbsp;</td>', count($css->titles) -1)."</tr>\n";
+            if (empty($v)) {
+                continue;
             }
 
             foreach($v as $v2) {
@@ -772,14 +769,14 @@ HTML;
 										</tbody>
 									</table>
 HTML;
-        
+
         return $text;
     }
-    
+
 
     protected function formatSimpleTable($data, $css) {
         $th = '';
-        
+
         if ($css->displayTitles === true) {
             $th .= '<tr>';
             foreach($css->titles as $title) {
@@ -787,10 +784,10 @@ HTML;
 <th>$title</th>
 
 HTML;
-        }
+            }
             $th .= '</tr>';
         }
-        
+
         $text = <<<HTML
 				<table class="table">
 					<thead>
@@ -838,7 +835,7 @@ HTML;
 <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="hashtable-{$counter}">
 										<thead>
 HTML;
-        
+
         if ($css->displayTitles === true) {
             $text .= '<tr>';
             foreach($css->titles as $title) {
@@ -850,14 +847,14 @@ HTML;
             $text .= '</tr>';
         }
 
-$text .= <<<HTML
+        $text .= <<<HTML
 										</thead>
 
 										<tbody>
 HTML;
         foreach($data as $k => $v) {
-            if ($v[0] == 'Total') { 
-                continue; 
+            if ($v[0] == 'Total') {
+                continue;
             }
             // below 0 are errors
             if ($v[1] >= 0) {
@@ -870,7 +867,7 @@ HTML;
             }
             $text .= "</tr>\n";
         }
-        
+
         if (isset($v)) {
             $text .= "<tfoot><tr><td>{$v[0]}</td><td>{$v[1]}</td>";
         }
@@ -906,13 +903,13 @@ $(document).ready(function() {
 </script>
 
 HTML;
-        
+
         return $text;
     }
-    
+
     protected function formatText($text, $style = '') {
         $text = $this->prepareText($text);
-        
+
         if (!empty($style)) {
             $class = ' class="'.$style.'"';
         } else {
@@ -925,12 +922,9 @@ HTML;
     protected function formatTextLead($text) {
         $text = $this->prepareText($text);
 
-        return "<article><p class=\"lead\">".$text."</p></article>\n".
-               "<script src=\"plugins/readmore/readmore.js\"></script>\n".
-               "<script src=\"plugins/readmore/jquery.mockjax.js\"></script>\n".
-               "<script>$('article').readmore({collapsedHeight: 90});</script>\n";
+        return "<article><p class=\"lead\">".$text."</p></article>\n"."<script src=\"plugins/readmore/readmore.js\"></script>\n"."<script src=\"plugins/readmore/jquery.mockjax.js\"></script>\n"."<script>$('article').readmore({collapsedHeight: 90});</script>\n";
     }
-    
+
     protected function formatTop5($data, $css) {
         $html = '<p>'.$css->title."</p>\n";
         $html .= <<<HTML
@@ -942,7 +936,7 @@ HTML;
         foreach($css->titles as $columnHeader) {
             $html .= "<th>$columnHeader</th>\n";
         }
-        
+
         $html .= <<<HTML
 						</tr>
 					</thead>
@@ -961,7 +955,7 @@ HTML;
 
 HTML;
         }
-        
+
         $html .= <<<HTML
 					</tbody>
 				</table>
@@ -972,47 +966,46 @@ HTML;
     }
 
     protected function formatThemeList($list) {
-        static $figure2Letters = array(1 => 'one', 
-                                       2 => 'two', 
-                                       3 => 'three', 
-                                       4 => 'four', 
-                                       5 => 'five', 
+        static $figure2Letters = array(1 => 'one',
+                                       2 => 'two',
+                                       3 => 'three',
+                                       4 => 'four',
+                                       5 => 'five',
                                        6 => 'six');
         if (isset($figure2Letters[count($list)])) {
             $count = $figure2Letters[count($list)];
         } else {
             $count = count($list);
         }
-                                       
+
         $html = 'This analysis is part of '.$count.' theme'.(count($list) > 1 ? 's' : '').' : ';
-        
+
         foreach($list as &$title) {
             $title = $this->makeLink($title, 'ajax/'.$this->makeFileName($title));
         }
         unset($title);
-        return $html . implode(', ', $list);
+        return $html.implode(', ', $list);
     }
 
     protected function formatTree($data, $css) {
         $text = "<ul>\n";
         foreach($data as $k => $v) {
             $text .= "    <li>$k";
-            
+
             $text .= "    <ul>\n";
             foreach($v as $k2 => $v2) {
                 $text .= "        <li>$k2 ".$this->makeIcon($v2).'</li>';
             }
             $text .= "    </ul>\n";
-            
-            
+
             $text .= "</li>\n";
         }
         $text .= "</ul>\n";
-        
+
         return $text;
     }
 
-    /// End of Formatting methods 
+    /// End of Formatting methods
 
     ////////////////////////////////////////////////////////////////////////////////////
     /// Content methods
@@ -1034,7 +1027,7 @@ HTML;
 				<p>Twitter - <a href="https://twitter.com/jQuery" target="_blank">https://twitter.com/jQuery</a></p>
 			</div>
 Devoops
-);
+        );
     }
 
     protected function AlteredDirectives() {
@@ -1042,26 +1035,25 @@ Devoops
         $css->displayTitles = true;
         $css->titles = array('Directive');
         $css->readOrder = $css->titles;
-        
+
         $data = array();
         $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Php/DirectivesUsage"');
         while($row = $res->fetchArray()) {
             $data[] = array('Directive' => $row['fullcode']);
         }
-        
+
         return $this->formatText( <<<TEXT
 This is an overview of the directives that are modified inside the application's code. 
 TEXT
-, 'textLead')
-                .$this->formatSimpleTable($data, $css);
+        , 'textLead').$this->formatSimpleTable($data, $css);
     }
-    
+
     protected function Analyzers() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Analyzer');
         $css->readOrder = $css->titles;
-        
+
         $data = array();
         $res = $this->datastore->query('SELECT analyzer FROM analyzed WHERE counts >= 0');
         while($row = $res->fetchArray()) {
@@ -1069,16 +1061,16 @@ TEXT
 
             $data[] = array('Analyzer' => $row['analyzer']);
         }
-        
+
         $return = $this->formatText( <<<TEXT
 This is the list of analyzers that were run. Those that doesn't have result will not be listed in the 'Analyzers' section.
 
 This may be due to PHP version or PHP configuration incompatibilities.
 TEXT
-, 'textLead');
+        , 'textLead');
 
         $return .= $this->formatSimpleTable($data, $css);
-        
+
         return $return;
     }
 
@@ -1099,7 +1091,7 @@ SELECT analyzer, count(*) AS count, severity FROM results
         GROUP BY analyzer
         HAVING count > 0
 SQL
-);
+        );
         $data = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             $analyzer = Analyzer::getInstance($row[0]);
@@ -1110,34 +1102,34 @@ SQL
 
         return $this->formatSimpleTableResultsCount($data, $css);
     }
-    
+
     protected function Appinfo() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File');
         $css->readOrder = $css->titles;
-        
+
         $extensions = array(
                     'PHP' => array(
                             'Short tags'                 => 'Structures/ShortTags',
                             'Echo tags <?='              => 'Php/EchoTagUsage',
                             'Incompilable'               => 'Php/Incompilable',
-                            
+
                             '@ operator'                 => 'Structures/Noscream',
                             'Alternative syntax'         => 'Php/AlternativeSyntax',
                             'Magic constants'            => 'Constants/MagicConstantUsage',
                             'halt compiler'              => 'Php/Haltcompiler',
                             'Assertions'                 => 'Php/AssertionUsage',
-          
+
                             'Casting'                    => 'Php/CastingUsage',
                             'Resources'                  => 'Structures/ResourcesUsage',
                             'Nested Loops'               => 'Structures/NestedLoops',
-            
+
                             'Autoload'                   => 'Php/AutoloadUsage',
                             'inclusion'                  => 'Structures/IncludeUsage',
                             'include_once'               => 'Structures/OnceUsage',
                             'Output control'             => 'Extensions/Extob',
-          
+
                             'Goto'                       => 'Php/Gotonames',
                             'Labels'                     => 'Php/Labelnames',
 
@@ -1217,7 +1209,7 @@ SQL
                             'Traits'            => 'Traits/Traitnames',
 
                             'Static properties' => 'Classes/StaticProperties',
-                            
+
                             'Static methods'    => 'Classes/StaticMethods',
                             'Abstract methods'  => 'Classes/Abstractmethods',
                             'Final methods'     => 'Classes/Finalmethod',
@@ -1255,8 +1247,8 @@ SQL
                             'Heredoc'             => 'Type/Heredoc',
                             'Nowdoc'              => 'Type/Nowdoc',
                      ),
-                    
-                    'Errors' => array(   
+
+                    'Errors' => array(
                             'Throw exceptions'    => 'Php/ThrowUsage',
                             'Try...Catch'         => 'Php/TryCatchUsage',
                             'Multiple catch'      => 'Structures/MultipleCatch',
@@ -1395,7 +1387,7 @@ SQL
                             'ext/zip'        => 'Extensions/Extzip',
                             'ext/zlib'       => 'Extensions/Extzlib',
                             'ext/zmq'        => 'Extensions/Extzmq',
-//                          'ext/skeleton'   => 'Extensions/Extskeleton',
+        //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                 );
 
@@ -1407,7 +1399,7 @@ SQL
             $sources[$row['analyzer']] = $row['count'];
         }
         $data = array();
-        
+
         foreach($extensions as $section => $hash) {
             $data[$section] = array();
 
@@ -1420,21 +1412,21 @@ SQL
                     $data[$section][$name] = self::NOT_RUN;
                     continue;
                 }
-                
+
                 // incompatible
                 if ($sources[$ext] == Analyzer::CONFIGURATION_INCOMPATIBLE) {
                     $data[$section][$name] = self::INCOMPATIBLE;
                     continue ;
-                } 
+                }
 
                 if ($sources[$ext] == Analyzer::VERSION_INCOMPATIBLE) {
                     $data[$section][$name] = self::INCOMPATIBLE;
                     continue ;
-                } 
+                }
 
                 $data[$section][$name] = $sources[$ext] > 0 ? self::YES : self::NO;
             }
-            
+
             if ($section == 'Extensions') {
                 $list = $data[$section];
                 uksort($data[$section], function ($ka, $kb) use ($list) {
@@ -1470,7 +1462,7 @@ This is an overview of your application.
 </ul>
 
 TEXT
-, 'textLead');
+        , 'textLead');
         $return .= $this->formatTree($data, $css);
 
         return $return;
@@ -1481,7 +1473,7 @@ TEXT
         $css->displayTitles = false;
         $css->titles = array(0, 1);
         $css->readOrder = $css->titles;
-        
+
         $info = array(array('Code name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
             $info[] = array('Code description', $this->config->project_description);
@@ -1496,7 +1488,7 @@ TEXT
             $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
             preg_match('#url = (\S+)\s#is', $gitConfig, $r);
             $info[] = array('Git URL', $r[1]);
-            
+
             $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
             $info[] = array('Git branch', trim($res));
 
@@ -1507,19 +1499,19 @@ TEXT
         }
 
         $datastore = new Datastore($this->config);
-        
+
         $info[] = array('Number of PHP files', $datastore->getHash('files'));
         $info[] = array('Number of lines of code', $datastore->getHash('loc'));
         $info[] = array('Number of lines of code with comments', $datastore->getHash('locTotal'));
 
         $info[] = array('Report production date', date('r', strtotime('now')));
-        
+
         $php = new Phpexec($this->config->phpversion);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
-        
-        $info[] = array('Exakat version', Exakat::VERSION. ' ( Build '. Exakat::BUILD . ') ');
-        
+
+        $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
+
         return $this->formatSimpleTable($info, $css);
     }
 
@@ -1531,7 +1523,7 @@ TEXT
 
         $data = new Methods();
         $bugfixes = $data->getBugFixes();
-        
+
         $found = $this->dump->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
         $reported = array();
         $info = array();
@@ -1540,7 +1532,7 @@ TEXT
         while($row = $found->fetchArray()) {
             $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
         }
-        
+
         foreach($bugfixes as $bugfix) {
             if (!empty($bugfix['function'])) {
                 if (!isset($rows[$bugfix['function']])) { continue; }
@@ -1557,7 +1549,7 @@ TEXT
                                 );
             } elseif (!empty($bugfix['analyzer'])) {
                 $subanalyze = $this->dump->querySingle('SELECT COUNT(*) FROM results WHERE analyzer = "'.$bugfix['analyzer'].'"');
-                
+
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
                 if ($subanalyze > 0) {
@@ -1577,7 +1569,7 @@ TEXT
 
         return $this->formatCompilationTable($info, $css);
     }
-    
+
     protected function Bugfixes_cve($cve) {
         if (!empty($cve)) {
             if (strpos($cve, ', ') !== false) {
@@ -1593,7 +1585,7 @@ TEXT
         } else {
             $cveHtml = '-';
         }
-        
+
         return $cveHtml;
     }
 
@@ -1602,7 +1594,7 @@ TEXT
         $css->displayTitles = true;
         $css->titles = array('Version', 'Count', 'Fraction', 'Files', 'Errors');
         $css->readOrder = $css->titles;
-        
+
         $total = $this->datastore->querySingle('SELECT value FROM hash WHERE key = "files"');
         $info = array();
         foreach($this->config->other_php_versions as $suffix) {
@@ -1631,10 +1623,10 @@ TEXT
                 $errors      = array_keys($errors);
                 $errors      = array_keys(array_count_values($errors));
 
-                $total_error = count($files).' (' .number_format(count($files) / $total * 100, 0). '%)';
+                $total_error = count($files).' ('.number_format(count($files) / $total * 100, 0).'%)';
                 $files       = array_keys(array_count_values($files));
             }
-            
+
             $array = array('version'       => $version,
                            'total'         => $total,
                            'total_error'   => $total_error,
@@ -1644,7 +1636,7 @@ TEXT
 
             $info[] = $array;
         }
-        
+
         return $this->formatCompilationTable($info, $css);
     }
 
@@ -1653,15 +1645,15 @@ TEXT
         $css->displayTitles = true;
         $css->titles = array('Feature', 'Status');
         $css->readOrder = $css->titles;
-        
+
         $list = Analyzer::getThemeAnalyzers(str_replace(array(' ', '.'), array('PHP', ''), $title));
-        
+
         $res = $this->datastore->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = $row['counts'];
         }
-        
+
         $config = Config::factory();
         foreach($list as $l) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$l.'.ini');
@@ -1680,19 +1672,19 @@ TEXT
         $css->displayTitles = true;
         $css->titles = array('Library', 'Folder', 'Home page');
         $css->readOrder = $css->titles;
-        
+
         $titles = array('Code Smells'         => 'Analyze',
                         'Dead Code'           => 'Dead code',
                         'Security'            => 'Security',
                         'Performances'        => 'Performances');
-        
+
         $list = Analyzer::getThemeAnalyzers($titles[$title]);
         $where = 'WHERE analyzer in ("'.implode('", "', $list).'")';
 
         $res = $this->dump->query('SELECT severity, count(*) AS nb FROM results '.$where.' GROUP BY severity ORDER BY severity');
         $severities = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $severities[$row['severity']] = array('severity' => $row['severity'], 
+            $severities[$row['severity']] = array('severity' => $row['severity'],
                                                   'count'    => $row['nb']);
         }
 
@@ -1703,7 +1695,7 @@ TEXT
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $listBySeverity[] = array('name'  => $ini['name'],
-                                      'severity' => $row['severity'], 
+                                      'severity' => $row['severity'],
                                       'count' => $row['nb']);
         }
         uasort($listBySeverity, function ($a, $b) {
@@ -1726,12 +1718,12 @@ TEXT
                                   'count' => $row['nb'],
                                   );
         }
-        
+
         $info = array('upLeft'    => $severities,
                       'upRight'   => '&nbsp;',
                       'downLeft'  => $listBySeverity,
                       'downRight' => $listByFile);
-        
+
         return $this->formatDashboard($info, $css);
     }
 
@@ -1742,19 +1734,19 @@ TEXT
         $css->backgroundColor = '#DDDDDD';
         $css->readOrder = array('name', 'suggested', 'documentation');
 
-    // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
-        $directives = array('standard', 'bcmath', 'date', 'file', 
+        // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
+        $directives = array('standard', 'bcmath', 'date', 'file',
                             'fileupload', 'mail', 'ob', 'env',
                             // standard extensions
                             'apc', 'amqp', 'apache', 'assertion', 'curl', 'dba',
                             'filter', 'image', 'intl', 'ldap',
-                            'mbstring', 
+                            'mbstring',
                             'opcache', 'openssl', 'pcre', 'pdo', 'pgsql',
-                            'session', 'sqlite', 'sqlite3', 
+                            'session', 'sqlite', 'sqlite3',
                             // pecl extensions
                             'com', 'eaccelerator',
-                            'geoip', 'ibase', 
-                            'imagick', 'mailparse', 'mongo', 
+                            'geoip', 'ibase',
+                            'imagick', 'mailparse', 'mongo',
                             'trader', 'wincache', 'xcache'
                              );
 
@@ -1765,7 +1757,7 @@ SELECT analyzer FROM resultsCounts
             analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
         AND count > 0
 SQL
-);
+        );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if ($row['analyzer'] == 'Structures/FileUploadUsage') {
                 $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
@@ -1778,7 +1770,7 @@ SQL
                 }
             }
         }
-        
+
         return $this->formatText( <<<TEXT
 This is an overview of the recommended directives for your application. 
 The most important directives have been collected here, for a quick review. 
@@ -1788,39 +1780,38 @@ When an extension is missing from the list below, either it as no specific confi
 or it is not used by the current code. 
 
 TEXT
-, 'textLead')
-                  .$this->formatSectionedTable($data, $css);
+        , 'textLead').$this->formatSectionedTable($data, $css);
     }
 
     protected function Documentation() {
         $css = new \Stdclass();
         $css->displayTitles = true;
-//        $css->titles = array('Library', 'Folder', 'Home page');
-//        $css->readOrder = $css->titles;
+        //        $css->titles = array('Library', 'Folder', 'Home page');
+        //        $css->readOrder = $css->titles;
 
         $data = array();
         foreach($this->analyzers as $analyzer) {
             $description = $analyzer->getDescription();
             $data[$description->getName()] = array('description' => $description->getDescription(),
                                                    'clearphp'    => $description->getClearPHP());
-        
+
         }
 
         return $this->formatDefinitions($data, $css);
     }
-    
+
     protected function DynamicCode() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Code');
         $css->readOrder = $css->titles;
-        
+
         $data = array();
         $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/DynamicCode"');
         while($row = $res->fetchArray()) {
             $data[] = array('Code' => $row['fullcode']);
         }
-        
+
         if (count($data) == 0) {
             return $this->formatText( <<<'TEXT'
 No dynamic calls where found in the code. Dynamic calls may be one of the following : 
@@ -1871,28 +1862,27 @@ No dynamic calls where found in the code. Dynamic calls may be one of the follow
 </ul>
 
 TEXT
-);
+            );
         } else {
             return $this->formatText( <<<TEXT
 This is the list of dynamic call. They are not checked by the static analyzer, and the analysis may be completed with a manual check of that list.
 TEXT
-, 'textLead')
-                  .$this->formatSimpleTable($data, $css);
+            , 'textLead').$this->formatSimpleTable($data, $css);
         }
     }
-    
+
     protected function ErrorMessages() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('Message');
         $css->readOrder = $css->titles;
-        
+
         $data = array();
         $res = $this->dump->query('SELECT fullcode FROM results WHERE analyzer="Structures/ErrorMessages"');
         while($row = $res->fetchArray()) {
             $data[] = array('Message' => $row['fullcode']);
         }
-        
+
         return $this->formatText( <<<TEXT
 Error message when an error is reported in the code. Those messages will be read by whoever is triggering the error, and it has to be helpful. 
 
@@ -1900,8 +1890,7 @@ It is a good excercice to read the messages out of context, and try to understan
 
 Error messages are spotted via die, exit or exception. 
 TEXT
-, 'textLead')
-                .$this->formatSimpleTable($data, $css);
+        , 'textLead').$this->formatSimpleTable($data, $css);
     }
 
     protected function ExternalConfigFiles() {
@@ -1920,16 +1909,16 @@ TEXT
             }
             $data[] = $row;
         }
-        
+
         $return = $this->formatText( <<<TEXT
 List services being used in this code repository, based on config files that are committed. For example, a .git folder is an artefact of a GIT repository.
 TEXT
-, 'textLead');
+        , 'textLead');
 
         $return .= $this->formatSimpleTable($data, $css);
-        
+
         return $return;    }
-    
+
     protected function ExternalLibraries() {
         $css = new \Stdclass();
         $css->displayTitles = true;
@@ -1949,16 +1938,15 @@ TEXT
             }
             $data[] = $row;
         }
-        
+
         $return = $this->formatText( <<<TEXT
 This is the list of analyzers that were run. Those that doesn t have result will not be listed in the 'Analyzers' section.
 
 This may be due to PHP version or PHP configuration incompatibilities.
 
 TEXT
-, 'textLead').
-                  $this->formatSimpleTable($data, $css);
-        
+        , 'textLead').$this->formatSimpleTable($data, $css);
+
         return $return;
     }
 
@@ -1973,7 +1961,7 @@ SELECT file, count(*) AS count FROM results
         WHERE analyzer IN $this->themesList
         GROUP BY file
 SQL
-);
+        );
         $data = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             $data[] = $row;
@@ -1994,14 +1982,13 @@ SQL
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $data[] = $row;
         }
-        
+
         return $this->formatText( <<<TEXT
 Here are the global variables, including the implicit ones : any variable that are used in the global scope, outside methods, are implicitely globals.
 TEXT
-, 'textLead')
-                .$this->formatSimpleTable($data, $css);
+        , 'textLead').$this->formatSimpleTable($data, $css);
     }
-    
+
     protected function OneAnalyzer($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
@@ -2009,7 +1996,7 @@ TEXT
         $css->sort = $css->titles;
 
         $analyzer = $this->analyzers[$title];
-        
+
         $description = $analyzer->getDescription()->getDescription();
         if ($description == '') {
             $description = 'No documentation yet';
@@ -2028,7 +2015,7 @@ TEXT
             $data[] = $row;
         }
         $return .= $this->formatHorizontal($data, $css);
-        
+
         return $return;
     }
 
@@ -2055,16 +2042,16 @@ SQL;
             $data[] = $row;
         }
         $return .= $this->formatHorizontal($data, $css);
-        
+
         return $return;
     }
-        
+
     protected function NonProcessedFiles() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File');
         $css->readOrder = $css->titles;
-        
+
         $data = array();
         $res = $this->datastore->query('SELECT file FROM ignoredFiles');
         while($row = $res->fetchArray()) {
@@ -2072,50 +2059,49 @@ SQL;
 
             $data[] = array('File' => $row['file']);
         }
-        
+
         $return = $this->formatText( <<<TEXT
 This is the list of processed files. Any file that is in the project, but not in the list below was omitted in the analyze. 
 
 This may be due to configuration file, compilation error, wrong extension (including no extension). 
 TEXT
-, 'textLead');
+        , 'textLead');
 
         if (!empty($data)) {
-           $return .= $this->formatSimpleTable($data, $css);
+            $return .= $this->formatSimpleTable($data, $css);
         } else {
-           $return .= $this->formatText('All files and folders were used');
+            $return .= $this->formatText('All files and folders were used');
         }
-        
+
         return $return;
     }
-    
+
     protected function ProcessedFiles() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File');
         $css->readOrder = $css->titles;
-        
+
         $data = array();
         $res = $this->datastore->query('SELECT file FROM files');
         while($row = $res->fetchArray()) {
             $data[] = array('File' => $row['file']);
         }
-        
+
         return $this->formatText( <<<TEXT
 This is the list of processed files. Any file that is in the project, but not in the list below was omitted in the analyze. 
 
 This may be due to configuration file, compilation error, wrong extension (including no extension). 
 TEXT
-, 'textLead')
-                .$this->formatSimpleTable($data, $css);
+        , 'textLead').$this->formatSimpleTable($data, $css);
     }
-    
+
     protected function Stats() {
         $css = new \Stdclass();
         $css->displayTitles = true;
         $css->titles = array('File');
         $css->readOrder = $css->titles;
-        
+
         $extensions = array(
                     'Summary' => array(
                             'Namespaces'     => 'Namespace',
@@ -2134,7 +2120,7 @@ TEXT
                             'Methods'           => 'Classes/NormalMethods',
                             'Static methods'    => 'Classes/StaticMethods',
                             // Spot Abstract methods
-                            // Spot Final Methods 
+                            // Spot Final Methods
                      ),
                     'Structures' => array(
                             'Ifthen'              => 'Ifthen',
@@ -2168,42 +2154,41 @@ TEXT
             $data[$section] = array();
             foreach($hash as $name => $ext) {
                 if (strpos($ext, '/') === false) {
-                    $res = $this->dump->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"'); 
+                    $res = $this->dump->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"');
                     $d = $res->fetchArray(\SQLITE3_ASSOC);
                     $d = (int) $d['count'];
                 } else {
-                    $res = $this->dump->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"'); 
+                    $res = $this->dump->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"');
                     $d = $res->fetchArray(\SQLITE3_ASSOC);
                     $d = (int) $d['count'];
                 }
                 $data[$section][$name] = $d === -2 ? 'N/A' : $d;
             }
         }
-        
+
         return $this->formatText( <<<TEXT
 These are various stats of different structures in your application.
 TEXT
-, 'textLead')
-                .$this->formatSectionedHashTable($data, $css);
+        , 'textLead').$this->formatSectionedHashTable($data, $css);
     }
-    
+
     protected function prepareText($text) {
         $html = nl2br(trim($text));
-        
+
         $html = preg_replace('$(https?://\S+)\.?\s$', '<a href=\"\1\">\1</a>', $html);
-        
+
         // link functions/features to PHP manual
         if (preg_match_all('$[a-z_0-9]+\(\)$s', $html, $r)) {
             $html = preg_replace('$([a-z_0-9]+)\(\)$s', '<a href="http://www.php.net/\1">\1()</a>', $html);
         }
 
         // highlight PHP code
-        
+
         if (preg_match('$(<\?php)$s', $html, $r)) {
             $html = preg_replace_callback('$(<\?php.*?\?'.'>)$s', function ($r) { return substr(highlight_string(str_replace('<br />', '', $r[0]), true), 6, -8); }, $html);
         }
-        
+
         return $html;
     }
-    
+
 }//end class

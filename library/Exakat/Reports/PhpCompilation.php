@@ -36,9 +36,9 @@ class PhpCompilation extends Reports {
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
         }
-        
+
         $configureDirectives = json_decode(file_get_contents($this->config->dir_root.'/data/configure.json'));
-        
+
         // preparing the list of PHP extensions to compile PHP with
         $return = array(<<<TEXT
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -46,8 +46,8 @@ class PhpCompilation extends Reports {
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 TEXT
-,
-'./configure');
+        ,
+        './configure');
         $pecl = array();
         foreach($configureDirectives as $ext => $configure) {
             if (isset($sources[$configure->analysis])) {
@@ -61,10 +61,10 @@ TEXT
                     }
                 } elseif(!empty($configure->deactivate) && $sources[$configure->analysis] == 0) {
                     $return[] = ' '.$configure->deactivate;
-                } 
+                }
             }
         }
-        
+
         $return = array_merge($return, array(
                    '',
                    '; For debug purposes',
@@ -74,7 +74,7 @@ TEXT
                    ';--enable-zend-signals',
                    ';--disable-opcache',
             ));
-        
+
         $final = '';
         if (!empty($pecl)) {
             $c = count($pecl);
@@ -82,14 +82,14 @@ TEXT
             $final .= implode("\n", $pecl)."\n\n";
         }
         $final .= implode("\n", $return);
-        
+
         if ($name === null) {
             return $final ;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $final);
             return true;
         }
-    } 
-} 
+    }
+}
 
 ?>

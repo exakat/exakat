@@ -38,7 +38,7 @@ class Codacy extends Reports {
                             analyzer AS patternId,
                             "" AS message FROM results WHERE analyzer in ('.$list.')';
         $res = $sqlite->query($sqlQuery);
-        
+
         $results = '';
         $titleCache = array();
         $severityCache = array();
@@ -49,19 +49,19 @@ class Codacy extends Reports {
                 $analyzer = Analyzer::getInstance($row['patternId']);
                 $titleCache[$row['patternId']] = $analyzer->getDescription()->getName();
             }
-            
+
             $row['message'] = $titleCache[$row['patternId']];
-/*
-{
-  "filename":"codacy/core/test.js",
-  "message":"found this in your code",
-  "patternId":"latedef",
-  "line":2
-}
-*/
+            /*
+            {
+            "filename":"codacy/core/test.js",
+            "message":"found this in your code",
+            "patternId":"latedef",
+            "line":2
+            }
+            */
             $results .= json_encode($row, JSON_UNESCAPED_SLASHES)."\n";
         }
-        
+
         // output to stdout
         print $results;
     }

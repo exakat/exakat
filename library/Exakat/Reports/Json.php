@@ -35,7 +35,7 @@ class Json extends Reports {
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
         $res = $sqlite->query($sqlQuery);
-        
+
         $results = array();
         $titleCache = array();
         $severityCache = array();
@@ -69,7 +69,7 @@ class Json extends Reports {
             ++$results[ $row['file'] ]['warnings'];
             $this->count();
         }
-        
+
         if ($name === 'stdout') {
             return json_encode($results);
         } else {

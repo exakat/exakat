@@ -36,7 +36,7 @@ class Ambassador extends Reports {
     protected $projectPath     = null;
     protected $finalName       = null;
     private $tmpName           = '';
-    
+
     private $docs              = null;
     private $timesToFix        = null;
     private $themesForAnalyzer = null;
@@ -49,7 +49,7 @@ class Ambassador extends Reports {
     const YES          = 'Yes';
     const NO           = 'No';
     const INCOMPATIBLE = 'Incompatible';
-    
+
     private $inventories = array('constants'  => 'Constants',
                                  'classes'    => 'Classes',
                                  'interfaces' => 'Interfaces',
@@ -76,9 +76,9 @@ class Ambassador extends Reports {
 
     private function getBasedPage($file) {
         static $baseHTML;
-        
+
         if (empty($baseHTML)) {
-            $baseHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/base.html');
+            $baseHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/base.html');
             $title = ($file == 'index') ? 'Dashboard' : $file;
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
@@ -86,7 +86,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
-            $menu = file_get_contents($this->tmpName . '/datas/menu.html');
+            $menu = file_get_contents($this->tmpName.'/datas/menu.html');
             $inventories = '';
             foreach($this->inventories as $fileName => $title) {
                 $inventories .= "              <li><a href=\"inventories_$fileName.html\"><i class=\"fa fa-circle-o\"></i>$title</a></li>\n";
@@ -101,7 +101,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->injectBloc($baseHTML, 'SIDEBARMENU', $menu);
         }
 
-        $subPageHTML = file_get_contents($this->config->dir_root . '/media/devfaceted/datas/' . $file . '.html');
+        $subPageHTML = file_get_contents($this->config->dir_root.'/media/devfaceted/datas/'.$file.'.html');
         $combinePageHTML = $this->injectBloc($baseHTML, 'BLOC-MAIN', $subPageHTML);
 
         return $combinePageHTML;
@@ -112,23 +112,23 @@ class Ambassador extends Reports {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
         $html = str_replace('{{TITLE}}', 'PHP Static analysis for '.$this->config->project, $html);
-        
-        file_put_contents($this->tmpName . '/datas/'.$file.'.html', $html);
+
+        file_put_contents($this->tmpName.'/datas/'.$file.'.html', $html);
     }
 
     private function injectBloc($html, $bloc, $content) {
-        return str_replace("{{" . $bloc . "}}", $content, $html);
+        return str_replace("{{".$bloc."}}", $content, $html);
     }
 
     public function generate($folder, $name = 'report') {
-        $this->finalName = $folder . '/' . $name;
-        $this->tmpName = $folder . '/.' . $name;
+        $this->finalName = $folder.'/'.$name;
+        $this->tmpName = $folder.'/.'.$name;
 
         $this->projectPath = $folder;
-        
+
         $this->initFolder();
         $this->generateSettings();
-        $this->generateProcFiles();  
+        $this->generateProcFiles();
 
         $this->generateDashboard();
         $this->generateExtensionsBreakdown();
@@ -137,7 +137,7 @@ class Ambassador extends Reports {
         $this->generateIssues();
         $this->generateAnalyzersList();
         $this->generateExternalLib();
-        
+
         $this->generateAppinfo();
         $this->generateBugFixes();
         $this->generatePhpConfiguration();
@@ -152,7 +152,7 @@ class Ambassador extends Reports {
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             $this->generateCompatibility($row[0]);
         }
-        
+
         // Favorites
         $this->generateFavorites();
 
@@ -161,11 +161,11 @@ class Ambassador extends Reports {
         $this->generateDynamicCode();
         $this->generateGlobals();
         $this->generateInventories();
-        
+
         // Annex
         $this->generateAnalyzerSettings();
         $this->generateDocumentation();
-        $this->generateCodes();  
+        $this->generateCodes();
 
         // Static files
         $files = array('credits');
@@ -173,7 +173,7 @@ class Ambassador extends Reports {
             $baseHTML = $this->getBasedPage($file);
             $this->putBasedPage($file, $baseHTML);
         }
-        
+
         $this->cleanFolder();
     }
 
@@ -188,13 +188,13 @@ class Ambassador extends Reports {
         }
 
         // Copy template
-        copyDir($this->config->dir_root . '/media/devfaceted', $this->tmpName );
+        copyDir($this->config->dir_root.'/media/devfaceted', $this->tmpName );
     }
 
     private function cleanFolder() {
-        if (file_exists($this->tmpName . '/datas/base.html')) {
-            unlink($this->tmpName . '/datas/base.html');
-            unlink($this->tmpName . '/datas/menu.html');
+        if (file_exists($this->tmpName.'/datas/base.html')) {
+            unlink($this->tmpName.'/datas/base.html');
+            unlink($this->tmpName.'/datas/menu.html');
         }
 
         // Clean final destination
@@ -203,7 +203,7 @@ class Ambassador extends Reports {
         }
 
         if (file_exists($this->finalName)) {
-            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 
@@ -256,7 +256,7 @@ class Ambassador extends Reports {
             $analyzer = Analyzer::getInstance($analyzer);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
-            
+
             $badges = array();
             $v = $description->getVersionAdded();
             if(!empty($v)){
@@ -267,13 +267,13 @@ class Ambassador extends Reports {
             $versionCompatibility = $analyzer->getPhpversion();
             if ($versionCompatibility !== Analyzer::PHP_VERSION_ANY) {
                 if (strpos($versionCompatibility, '+') !== false) {
-                    $versionCompatibility = substr($versionCompatibility, 0, -1) . ' and more recent ';
+                    $versionCompatibility = substr($versionCompatibility, 0, -1).' and more recent ';
                 } elseif (strpos($versionCompatibility, '-') !== false) {
                     $versionCompatibility = ' older than '.substr($versionCompatibility, 0, -1);
-                } 
+                }
                 $badges[] = '[ PHP '.$versionCompatibility.']';
             }
-            
+
             $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
             $analyzersDocHTML.='<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
 
@@ -291,15 +291,15 @@ class Ambassador extends Reports {
 
     private function generateFavorites() {
         $baseHTML = $this->getBasedPage('favorites_dashboard');
-        
+
         $analyzers = Analyzer::getThemeAnalyzers('Preferences');
-        
+
         $donut = array();
         $html = array();
-        
+
         foreach($analyzers as $analyzer) {
             $list = $this->datastore->getHashAnalyzer($analyzer);
-        
+
             $table = '';
             $values = array();
             $object = Analyzer::getInstance($analyzer);
@@ -312,7 +312,7 @@ class Ambassador extends Reports {
                    <div class="block-cell">'.htmlentities($key, ENT_COMPAT | ENT_HTML401, 'UTF-8').'</div>
                    <div class="block-cell text-center">'.$value.'</div>
                  </div>
-';          
+';
                 $values[] = '{label:"'.$key.'", value:'.$value.'}';
                 $total += $value;
             }
@@ -323,7 +323,7 @@ class Ambassador extends Reports {
                    <div class="block-cell">&nbsp;</div>
                    <div class="block-cell text-center">&nbsp;</div>
                  </div>
-';          
+';
             }
             // Ignore if we have no occurrences
             if ($total === 0) { continue; }
@@ -347,7 +347,7 @@ class Ambassador extends Reports {
               </div>
             </div>
 HTML
-;       
+            ;
             if (count($html) % 4 === 0) {
                 $html[] = '          </div>
           <div class="row">';
@@ -651,7 +651,7 @@ JAVASCRIPT;
 
     public function generateDashboard() {
         $baseHTML = $this->getBasedPage('index');
-        
+
         $tags = array();
         $code = array();
 
@@ -676,7 +676,7 @@ JAVASCRIPT;
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
         $analyzerHTML = $this->getTopAnalyzers();
         $finalHTML = $this->injectBloc($finalHTML, 'TOPANALYZER', $analyzerHTML);
-        
+
         $blocjs = <<<JAVASCRIPT
   <script>
     $(document).ready(function() {
@@ -914,7 +914,7 @@ JAVASCRIPT;
         $code[] = $fileOverview['scriptDataNone'];
         $tags[] = 'SCRIPTDATAMINOR';
         $code[] = $fileOverview['scriptDataMinor'];
-        
+
         // Analyzer Overview
         $analyzerOverview = $this->getAnalyzerOverview();
         $tags[] = 'SCRIPTDATAANALYZERLIST';
@@ -933,7 +933,7 @@ JAVASCRIPT;
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' dashboard');
         $this->putBasedPage('index', $finalHTML);
     }
-    
+
     public function generateExtensionsBreakdown() {
         $finalHTML = $this->getBasedPage('extension_list');
 
@@ -944,24 +944,24 @@ WHERE analyzer LIKE "Extensions/Ext%"
 GROUP BY analyzer
 ORDER BY count(*) DESC
 SQL
-);
-//        $fileHTML = $this->getTopFile();
+        );
+        //        $fileHTML = $this->getTopFile();
         $html = '';
         $xAxis = array();
         $data = array();
         while ($value = $res->fetchArray(\SQLITE3_ASSOC)) {
             $shortName = str_replace('Extensions/Ext', 'ext/', $value['analyzer']);
-            $xAxis[] = "'" . $shortName . "'";
+            $xAxis[] = "'".$shortName."'";
             $data[$value['analyzer']] = $value['count'];
-//                    <a href="#" title="' . $value['analyzer'] . '">
+            //                    <a href="#" title="' . $value['analyzer'] . '">
             $html .= '<div class="clearfix">
-                      <div class="block-cell-name">' . $shortName . '</div>
-                      <div class="block-cell-issue text-center">' . $value['count'] . '</div>
+                      <div class="block-cell-name">'.$shortName.'</div>
+                      <div class="block-cell-issue text-center">'.$value['count'].'</div>
                   </div>';
         }
 
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $html);
-        
+
         $blocjs = <<<JAVASCRIPT
   <script>
     $(document).ready(function() {
@@ -1096,13 +1096,13 @@ JAVASCRIPT;
 
         $tags = array();
         $code = array();
-        
+
         // Filename Overview
         $tags[] = 'CALLCOUNT';
         $code[] = implode(', ', $data);
         $tags[] = 'SCRIPTDATAFILES';
         $code[] = implode(', ', $xAxis);
-        
+
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Extensions\' list');
@@ -1144,41 +1144,41 @@ JAVASCRIPT;
                         <div class="row">
                             <div class="sub-div">
                                 <p class="title"><span># of PHP</span> files</p>
-                                <p class="value">' . $info['Number of PHP files'] . '</p>
+                                <p class="value">'.$info['Number of PHP files'].'</p>
                             </div>
                             <div class="sub-div">
                                 <p class="title"><span>PHP</span> Used</p>
-                                <p class="value">' . $info['PHP used'] . '</p>
+                                <p class="value">'.$info['PHP used'].'</p>
                              </div>
                         </div>
                         <div class="row">
                             <div class="sub-div">
                                 <p class="title"><span>PHP</span> LoC</p>
-                                <p class="value">' . $info['Number of lines of code'] . '</p>
+                                <p class="value">'.$info['Number of lines of code'].'</p>
                             </div>
                             <div class="sub-div">
                                 <p class="title"><span>Total</span> LoC</p>
-                                <p class="value">' . $info['Number of lines of code with comments'] . '</p>
+                                <p class="value">'.$info['Number of lines of code with comments'].'</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="sub-div">
                                 <div class="title">Files free of issues (%)</div>
                                 <div class="progress progress-sm">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentFile . '%">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentFile.'%">
                                         '.$totalFileSansError.'
                                     </div><div style="color:black; text-align:center;">'.$totalFileAnalysed.'</div>
                                 </div>
-                                <div class="pourcentage">' . $percentFile . '%</div>
+                                <div class="pourcentage">'.$percentFile.'%</div>
                             </div>
                             <div class="sub-div">
                                 <div class="title">Analyzers free of issues (%)</div>
                                 <div class="progress progress-sm active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: ' . $percentAnalyzer . '%">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: '.$percentAnalyzer.'%">
                                         '.$totalAnalyzerWithoutError.'
                                     </div><div style="color:black; text-align:center;">'.$totalAnalyzerReporting.'</div>
                                 </div>
-                                <div class="pourcentage">' . $percentAnalyzer . '%</div>
+                                <div class="pourcentage">'.$percentAnalyzer.'%</div>
                             </div>
                         </div>
                     </div>
@@ -1216,10 +1216,10 @@ JAVASCRIPT;
 
         foreach ($data as $key => $value) {
             $issuesHtml .= '<div class="clearfix">
-                   <div class="block-cell">' . $value['label'] . '</div>
-                   <div class="block-cell text-center">' . $value['value'] . '</div>
+                   <div class="block-cell">'.$value['label'].'</div>
+                   <div class="block-cell text-center">'.$value['value'].'</div>
                  </div>';
-            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
+            $dataScript .= $dataScript ? ', {label: "'.$value['label'].'", value: '.$value['value'].'}' : '{label: "'.$value['label'].'", value: '.$value['value'].'}';
         }
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
@@ -1229,7 +1229,7 @@ JAVASCRIPT;
                  </div>';
         }
 
-        return array('html'  => $issuesHtml, 
+        return array('html'  => $issuesHtml,
                     'script' => $dataScript);
     }
 
@@ -1247,18 +1247,18 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('label' => $row['severity'], 
+            $data[] = array('label' => $row['severity'],
                             'value' => $row['number']);
         }
-        
+
         $html = '';
         $dataScript = '';
         foreach ($data as $key => $value) {
             $html .= '<div class="clearfix">
-                   <div class="block-cell">' . $value['label'] . '</div>
-                   <div class="block-cell text-center">' . $value['value'] . '</div>
+                   <div class="block-cell">'.$value['label'].'</div>
+                   <div class="block-cell text-center">'.$value['value'].'</div>
                  </div>';
-            $dataScript .= $dataScript ? ', {label: "' . $value['label'] . '", value: ' . $value['value'] . '}' : '{label: "' . $value['label'] . '", value: ' . $value['value'] . '}';
+            $dataScript .= $dataScript ? ', {label: "'.$value['label'].'", value: '.$value['value'].'}' : '{label: "'.$value['label'].'", value: '.$value['value'].'}';
         }
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
@@ -1298,11 +1298,11 @@ SQL;
 
         foreach ($analysers as $analyser) {
             $analyserHTML.= "<tr>";
-            $analyserHTML.='<td>' . $analyser['label'] . '</td>
-                        <td>' . $analyser['recipes'] . '</td>
-                        <td>' . $analyser['issues'] . '</td>
-                        <td>' . $analyser['files'] . '</td>
-                        <td>' . $analyser['severity'] . '</td>';
+            $analyserHTML.='<td>'.$analyser['label'].'</td>
+                        <td>'.$analyser['recipes'].'</td>
+                        <td>'.$analyser['issues'].'</td>
+                        <td>'.$analyser['files'].'</td>
+                        <td>'.$analyser['severity'].'</td>';
             $analyserHTML.= "</tr>";
         }
 
@@ -1357,10 +1357,10 @@ SQL;
 
         foreach ($files as $file) {
             $filesHTML.= "<tr>";
-            $filesHTML.='<td>' . $file['file'] . '</td>
-                        <td>' . $file['loc'] . '</td>
-                        <td>' . $file['issues'] . '</td>
-                        <td>' . $file['analyzers'] . '</td>';
+            $filesHTML.='<td>'.$file['file'].'</td>
+                        <td>'.$file['loc'].'</td>
+                        <td>'.$file['issues'].'</td>
+                        <td>'.$file['analyzers'].'</td>';
             $filesHTML.= "</tr>";
         }
 
@@ -1411,12 +1411,12 @@ SQL;
                     GROUP BY file
                     ORDER BY number DESC ";
         if ($limit !== null) {
-            $query .= " LIMIT " . $limit;
+            $query .= " LIMIT ".$limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('file'  => $row['file'], 
+            $data[] = array('file'  => $row['file'],
                             'value' => $row['number']);
         }
 
@@ -1429,9 +1429,9 @@ SQL;
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="#" title="' . $value['file'] . '">
-                      <div class="block-cell-name">' . $value['file'] . '</div>
-                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
+                    <a href="#" title="'.$value['file'].'">
+                      <div class="block-cell-name">'.$value['file'].'</div>
+                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
                     </a>
                   </div>';
         }
@@ -1455,7 +1455,7 @@ SQL;
         $dataMinor    = array();
         $severities = $this->getSeveritiesNumberBy('file');
         foreach ($data as $value) {
-            $xAxis[] = "'" . $value['file'] . "'";
+            $xAxis[] = "'".$value['file']."'";
             $dataCritical[] = empty($severities[$value['file']]['Critical']) ? 0 : $severities[$value['file']]['Critical'];
             $dataMajor[]    = empty($severities[$value['file']]['Major'])    ? 0 : $severities[$value['file']]['Major'];
             $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
@@ -1486,12 +1486,12 @@ SQL;
                     GROUP BY analyzer
                     ORDER BY number DESC ";
         if ($limit) {
-            $query .= " LIMIT " . $limit;
+            $query .= " LIMIT ".$limit;
         }
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $data[] = array('analyzer' => $row['analyzer'], 
+            $data[] = array('analyzer' => $row['analyzer'],
                             'value'    => $row['number']);
         }
 
@@ -1507,21 +1507,21 @@ SQL;
                     WHERE analyzer IN ($list)
                     GROUP BY analyzer
                     ORDER BY number DESC
-                    LIMIT " . self::TOPLIMIT;
+                    LIMIT ".self::TOPLIMIT;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
-            $data[] = array('label' => $analyzer->getDescription()->getName(), 
+            $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number']);
         }
 
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="#" title="' . $value['label'] . '">
-                      <div class="block-cell-name">' . $value['label'] . '</div>
-                      <div class="block-cell-issue text-center">' . $value['value'] . '</div>
+                    <a href="#" title="'.$value['label'].'">
+                      <div class="block-cell-name">'.$value['label'].'</div>
+                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
                     </a>
                   </div>';
         }
@@ -1553,7 +1553,7 @@ SQL;
 
         return $return;
     }
-    
+
     private function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
@@ -1564,7 +1564,7 @@ SQL;
 
         $severities = $this->getSeveritiesNumberBy('analyzer');
         foreach ($data as $value) {
-            $xAxis[] = "'" . $value['analyzer'] . "'";
+            $xAxis[] = "'".$value['analyzer']."'";
             $dataCritical[] = empty($severities[$value['analyzer']]['Critical']) ? 0 : $severities[$value['analyzer']]['Critical'];
             $dataMajor[]    = empty($severities[$value['analyzer']]['Major'])    ? 0 : $severities[$value['analyzer']]['Major'];
             $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
@@ -1584,7 +1584,7 @@ SQL;
             'scriptDataAnalyzerMinor'    => $dataMinor
         );
     }
-    
+
     private function generateIssues()
     {
         $baseHTML = $this->getBasedPage('issues');
@@ -1675,8 +1675,8 @@ SQL;
             $item['code_plus'] = htmlentities($row['fullcode'], ENT_COMPAT | ENT_HTML401 , 'UTF-8');
             $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
-            $item['severity'] = "<i class=\"fa fa-warning " . $this->severities[$row['analyzer']] . "\"></i>";
-            $item['complexity'] = "<i class=\"fa fa-cog " . $this->timesToFix[$row['analyzer']] . "\"></i>";
+            $item['severity'] = "<i class=\"fa fa-warning ".$this->severities[$row['analyzer']]."\"></i>";
+            $item['complexity'] = "<i class=\"fa fa-cog ".$this->timesToFix[$row['analyzer']]."\"></i>";
             $item['recipe' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
             $lines = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
@@ -1687,7 +1687,7 @@ SQL;
 
         return $items;
     }
-    
+
     private function getClassByType($type)
     {
         if ($type == 'Critical' || $type == 'Long') {
@@ -1701,12 +1701,12 @@ SQL;
         } else {
             $class = 'text-gray';
         }
-        
+
         return $class;
     }
-    
+
     private function generateSettings() {
-       $info = array(array('Code name', $this->config->project_name));
+        $info = array(array('Code name', $this->config->project_name));
         if (!empty($this->config->project_description)) {
             $info[] = array('Code description', $this->config->project_description);
         }
@@ -1720,7 +1720,7 @@ SQL;
             $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
             preg_match('#url = (\S+)\s#is', $gitConfig, $r);
             $info[] = array('Git URL', $r[1]);
-            
+
             $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
             $info[] = array('Git branch', trim($res));
 
@@ -1735,18 +1735,18 @@ SQL;
         $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
 
         $info[] = array('Report production date', date('r', strtotime('now')));
-        
+
         $php = new Phpexec($this->config->phpversion);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
-        
-        $info[] = array('Exakat version', Exakat::VERSION. ' ( Build '. Exakat::BUILD . ') ');
-        
+
+        $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
+
         $settings = '';
         foreach($info as $i) {
             $settings .= "<tr><td>$i[0]</td><td>$i[1]</td></tr>";
-        }        
-        
+        }
+
         $html = $this->getBasedPage('used_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
         $html = $this->injectBloc($html, 'TITLE', 'Analyzer settings\' list');
@@ -1780,11 +1780,11 @@ SQL;
     private function generateAnalyzersList() {
         $analyzers = '';
 
-       foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-           $analyzer = Analyzer::getInstance($analyzer);
-           $description = $analyzer->getDescription();
-    
-           $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
+        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
+            $analyzer = Analyzer::getInstance($analyzer);
+            $description = $analyzer->getDescription();
+
+            $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
         }
 
         $html = $this->getBasedPage('proc_analyzers');
@@ -1823,7 +1823,7 @@ SQL;
 
         $data = new Methods();
         $bugfixes = $data->getBugFixes();
-        
+
         $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
         $reported = array();
         $info = array();
@@ -1832,7 +1832,7 @@ SQL;
         while($row = $found->fetchArray(\SQLITE3_ASSOC)) {
             $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
         }
-        
+
         foreach($bugfixes as $bugfix) {
             if (!empty($bugfix['function'])) {
                 if (!isset($rows[$bugfix['function']])) { continue; }
@@ -1850,7 +1850,7 @@ SQL;
                 </tr>';
             } elseif (!empty($bugfix['analyzer'])) {
                 $subanalyze = $this->sqlite->querySingle('SELECT count FROM resultsCounts WHERE analyzer = "'.$bugfix['analyzer'].'"');
-                
+
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
 
                 if ($subanalyze == 0) { continue; }
@@ -1868,16 +1868,16 @@ SQL;
                 continue; // ignore. Possibly some mis-configuration
             }
         }
-        
+
         $html = $this->getBasedPage('bugfixes');
         $html = $this->injectBloc($html, 'BUG_FIXES', $table);
         $this->putBasedPage('bugfixes', $html);
     }
-    
+
     protected function generatePhpConfiguration() {
         $phpConfiguration = new PhpConfiguration();
         $report = $phpConfiguration->generate(null, null);
-        
+
         $id = strpos($report, "\n\n\n");
         $configline = substr($report, 0, $id);
         $configline = str_replace(array(' ', "\n") , array("&nbsp;", "<br />\n",), $configline);
@@ -1906,7 +1906,7 @@ SQL;
             $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
             preg_match('#url = (\S+)\s#is', $gitConfig, $r);
             $info[] = array('Git URL', $r[1]);
-            
+
             $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
             $info[] = array('Git branch', trim($res));
 
@@ -1919,21 +1919,21 @@ SQL;
         $info[] = array('Number of PHP files', $this->datastore->getHash('files'));
         $info[] = array('Number of lines of code', $this->datastore->getHash('loc'));
         $info[] = array('Number of lines of code with comments', $this->datastore->getHash('locTotal'));
-        
+
         $info[] = array('Analysis execution date', date('r', $this->datastore->getHash('audit_end')));
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', strtotime('now')));
-        
+
         $php = new Phpexec($this->config->phpversion);
-        $info[] = array('PHP used', $this->config->phpversion . ' ('. $php->getActualVersion() . ')');
-        
-        $info[] = array('Exakat version', Exakat::VERSION . ' ( Build '. Exakat::BUILD . ') ');
+        $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
+
+        $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
 
         foreach($info as &$row) {
             $row = '<tr><td>'.implode('</td><td>', $row).'</td></tr>';
         }
         unset($row);
-        
+
         $settings = join('', $info);
 
         $html = $this->getBasedPage('annex_settings');
@@ -1953,7 +1953,7 @@ SQL;
         $html = $this->injectBloc($html, 'ERROR_MESSAGES', $errorMessages);
         $this->putBasedPage('error_messages', $html);
     }
-    
+
     private function generateExternalServices() {
         $externalServices = '';
 
@@ -1972,21 +1972,21 @@ SQL;
         $html = $this->injectBloc($html, 'EXTERNAL_SERVICES', $externalServices);
         $this->putBasedPage('external_services', $html);
     }
-    
+
     private function generateDirectiveList() {
-    // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
-        $directives = array('standard', 'bcmath', 'date', 'file', 
+        // @todo automate this : Each string must be found in Report/Content/Directives/*.php and vice-versa
+        $directives = array('standard', 'bcmath', 'date', 'file',
                             'fileupload', 'mail', 'ob', 'env',
                             // standard extensions
                             'apc', 'amqp', 'apache', 'assertion', 'curl', 'dba',
                             'filter', 'image', 'intl', 'ldap',
-                            'mbstring', 
+                            'mbstring',
                             'opcache', 'openssl', 'pcre', 'pdo', 'pgsql',
-                            'session', 'sqlite', 'sqlite3', 
+                            'session', 'sqlite', 'sqlite3',
                             // pecl extensions
                             'com', 'eaccelerator',
-                            'geoip', 'ibase', 
-                            'imagick', 'mailparse', 'mongo', 
+                            'geoip', 'ibase',
+                            'imagick', 'mailparse', 'mongo',
                             'trader', 'wincache', 'xcache'
                              );
 
@@ -1997,7 +1997,7 @@ SELECT analyzer FROM resultsCounts
             analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
         AND count > 0
 SQL
-);
+        );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if ($row['analyzer'] == 'Structures/FileUploadUsage') {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
@@ -2013,18 +2013,18 @@ SQL
                 if (in_array($ext, $directives)) {
                     $data = json_decode(file_get_contents($this->config->dir_root.'/data/directives/'.$ext.'.json'));
                     $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>$ext</td></tr>\n";
-                    foreach($data as $row) { 
+                    foreach($data as $row) {
                         $directiveList .= "<tr><td>$row->name</td><td>$row->suggested</td><td>$row->documentation</td></tr>\n";
                     }
                 }
             }
         }
-        
+
         $html = $this->getBasedPage('directive_list');
         $html = $this->injectBloc($html, 'DIRECTIVE_LIST', $directiveList);
         $this->putBasedPage('directive_list', $html);
     }
-    
+
     private function generateCompilations() {
         $compilations = '';
 
@@ -2057,7 +2057,7 @@ SQL
                 $errors      = array_keys(array_count_values($errors));
                 $errors       = '<ul><li>'.implode("</li>\n<li>", $errors).'</li></ul>';
 
-                $total_error = count($files).' (' .number_format(count($files) / $total * 100, 0). '%)';
+                $total_error = count($files).' ('.number_format(count($files) / $total * 100, 0).'%)';
                 $files       = array_keys(array_count_values($files));
                 $files       = '<ul><li>'.implode("</li>\n<li>", $files).'</li></ul>';
             }
@@ -2070,18 +2070,18 @@ SQL
         $html = $this->injectBloc($html, 'TITLE', 'Compilations overview');
         $this->putBasedPage('compatibility_compilations', $html);
     }
-        
+
     private function generateCompatibility($version) {
         $compatibility = '';
 
         $list = Analyzer::getThemeAnalyzers('CompatibilityPHP'.$version);
-        
+
         $res = $this->sqlite->query('SELECT analyzer, counts FROM analyzed');
         $counts = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $counts[$row['analyzer']] = $row['counts'];
         }
-        
+
         foreach($list as $l) {
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$l.'.ini');
             if (isset($counts[$l])) {
@@ -2105,7 +2105,7 @@ HTML;
         $html = $this->injectBloc($html, 'DESCRIPTION', $description);
         $this->putBasedPage('compatibility_php'.$version, $html);
     }
-    
+
     private function generateDynamicCode() {
         $dynamicCode = '';
 
@@ -2118,7 +2118,7 @@ HTML;
         $html = $this->injectBloc($html, 'DYNAMIC_CODE', $dynamicCode);
         $this->putBasedPage('dynamic_code', $html);
     }
-    
+
     private function generateGlobals() {
         $theGlobals = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
@@ -2129,7 +2129,7 @@ HTML;
         $html = $this->getBasedPage('globals');
         $html = $this->injectBloc($html, 'GLOBALS', $theGlobals);
         $this->putBasedPage('globals', $html);
-    }    
+    }
 
     private function generateInventories() {
         $definitions = array(
@@ -2165,19 +2165,19 @@ HTML;
             $this->putBasedPage('inventories_'.$fileName, $html);
         }
     }
-    
+
     private function generateAlteredDirectives() {
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $alteredDirectives .= "<tr><td>$row[fullcode]</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
-        
+
         $html = $this->getBasedPage('altered_directives');
         $html = $this->injectBloc($html, 'ALTERED_DIRECTIVES', $alteredDirectives);
         $this->putBasedPage('altered_directives', $html);
-    }    
-    
+    }
+
     private function generateStats() {
         $extensions = array(
                     'Summary' => array(
@@ -2197,7 +2197,7 @@ HTML;
                             'Methods'           => 'Classes/NormalMethods',
                             'Static methods'    => 'Classes/StaticMethods',
                             // Spot Abstract methods
-                            // Spot Final Methods 
+                            // Spot Final Methods
                      ),
                     'Structures' => array(
                             'Ifthen'              => 'Ifthen',
@@ -2243,11 +2243,11 @@ HTML;
 
             foreach($hash as $name => $ext) {
                 if (strpos($ext, '/') === false) {
-                    $res = $this->sqlite->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"'); 
+                    $res = $this->sqlite->query('SELECT count FROM atomsCounts WHERE atom="'.$ext.'"');
                     $d = $res->fetchArray(\SQLITE3_ASSOC);
                     $d = (int) $d['count'];
                 } else {
-                    $res = $this->sqlite->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"'); 
+                    $res = $this->sqlite->query('SELECT count FROM resultsCounts WHERE analyzer="'.$ext.'"');
                     $d = $res->fetchArray(\SQLITE3_ASSOC);
                     $d = (int) $d['count'];
                 }
@@ -2255,12 +2255,12 @@ HTML;
                 $stats .= "<tr><td>$name</td><td>$res</td></tr>\n";
             }
         }
-        
+
         $html = $this->getBasedPage('stats');
         $html = $this->injectBloc($html, 'STATS', $stats);
         $this->putBasedPage('stats', $html);
     }
-    
+
     private function generateCodes() {
         mkdir($this->tmpName.'/datas/sources/', 0755);
 
@@ -2268,13 +2268,13 @@ HTML;
         $files = '';
         foreach($filesList as $row) {
             $id = str_replace('/', '_', $row['file']);
-            
+
             $subdirs = explode('/', dirname($row['file']));
             $dir = $this->tmpName.'/datas/sources';
             foreach($subdirs as $subdir) {
                 $dir .= '/'.$subdir;
-                if (!file_exists($dir)) { 
-                    mkdir($dir, 0755); 
+                if (!file_exists($dir)) {
+                    mkdir($dir, 0755);
                 }
             }
 
@@ -2307,32 +2307,32 @@ JAVASCRIPT;
         $html = $this->getBasedPage('codes');
         $html = $this->injectBloc($html, 'BLOC-JS', $blocjs);
         $html = $this->injectBloc($html, 'FILES', $files);
-        
+
         $this->putBasedPage('codes', $html);
     }
-    
+
     private function generateAppinfo() {
         $extensions = array(
                     'PHP' => array(
                             'Short tags'                 => 'Structures/ShortTags',
                             'Echo tags <?='              => 'Php/EchoTagUsage',
                             'Incompilable'               => 'Php/Incompilable',
-                            
+
                             '@ operator'                 => 'Structures/Noscream',
                             'Alternative syntax'         => 'Php/AlternativeSyntax',
                             'Magic constants'            => 'Constants/MagicConstantUsage',
                             'halt compiler'              => 'Php/Haltcompiler',
                             'Assertions'                 => 'Php/AssertionUsage',
-          
+
                             'Casting'                    => 'Php/CastingUsage',
                             'Resources'                  => 'Structures/ResourcesUsage',
                             'Nested Loops'               => 'Structures/NestedLoops',
-            
+
                             'Autoload'                   => 'Php/AutoloadUsage',
                             'inclusion'                  => 'Structures/IncludeUsage',
                             'include_once'               => 'Structures/OnceUsage',
                             'Output control'             => 'Extensions/Extob',
-          
+
                             'Goto'                       => 'Php/Gotonames',
                             'Labels'                     => 'Php/Labelnames',
 
@@ -2421,7 +2421,7 @@ JAVASCRIPT;
                             'Traits'            => 'Traits/Traitnames',
 
                             'Static properties' => 'Classes/StaticProperties',
-                            
+
                             'Static methods'    => 'Classes/StaticMethods',
                             'Abstract methods'  => 'Classes/Abstractmethods',
                             'Final methods'     => 'Classes/Finalmethod',
@@ -2459,8 +2459,8 @@ JAVASCRIPT;
                             'Heredoc'             => 'Type/Heredoc',
                             'Nowdoc'              => 'Type/Nowdoc',
                      ),
-                    
-                    'Errors' => array(   
+
+                    'Errors' => array(
                             'Throw exceptions'    => 'Php/ThrowUsage',
                             'Try...Catch'         => 'Php/TryCatchUsage',
                             'Multiple catch'      => 'Structures/MultipleCatch',
@@ -2599,7 +2599,7 @@ JAVASCRIPT;
                             'ext/zip'        => 'Extensions/Extzip',
                             'ext/zlib'       => 'Extensions/Extzlib',
                             'ext/zmq'        => 'Extensions/Extzmq',
-//                          'ext/skeleton'   => 'Extensions/Extskeleton',
+        //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
                 );
 
@@ -2611,7 +2611,7 @@ JAVASCRIPT;
             $sources[$row['analyzer']] = $row['count'];
         }
         $data = array();
-        
+
         foreach($extensions as $section => $hash) {
             $data[$section] = array();
 
@@ -2624,21 +2624,21 @@ JAVASCRIPT;
                     $data[$section][$name] = self::NOT_RUN;
                     continue;
                 }
-                
+
                 // incompatible
                 if ($sources[$ext] == Analyzer::CONFIGURATION_INCOMPATIBLE) {
                     $data[$section][$name] = self::INCOMPATIBLE;
                     continue ;
-                } 
+                }
 
                 if ($sources[$ext] == Analyzer::VERSION_INCOMPATIBLE) {
                     $data[$section][$name] = self::INCOMPATIBLE;
                     continue ;
-                } 
+                }
 
                 $data[$section][$name] = $sources[$ext] > 0 ? self::YES : self::NO;
             }
-            
+
             if ($section == 'Extensions') {
                 $list = $data[$section];
                 uksort($data[$section], function ($ka, $kb) use ($list) {
@@ -2662,7 +2662,7 @@ JAVASCRIPT;
         } else {
             unset($data['Composer Packages']);
         }
-        
+
         $list = array();
         foreach($data as $section => $points) {
             $listPoint = array();
@@ -2697,15 +2697,15 @@ HTML;
 
     protected function makeIcon($tag) {
         switch($tag) {
-            case self::YES : 
+            case self::YES :
                 return '<i class="fa fa-check-square-o"></i>';
-            case self::NO : 
+            case self::NO :
                 return '<i class="fa fa-square-o"></i>';
-            case self::NOT_RUN : 
+            case self::NOT_RUN :
                 return '<i class="fa fa-hourglass-o"></i>';
-            case self::INCOMPATIBLE : 
+            case self::INCOMPATIBLE :
                 return '<i class="fa fa-remove"></i>';
-            default : 
+            default :
                 return '&nbsp;';
         }
     }
@@ -2725,10 +2725,10 @@ HTML;
         } else {
             $cveHtml = '-';
         }
-        
+
         return $cveHtml;
-    }    
-    
+    }
+
     private function Compatibility($count) {
         if ($count == Analyzer::VERSION_INCOMPATIBLE) {
             return '<i class="fa fa-ban"></i>';

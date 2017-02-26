@@ -34,10 +34,10 @@ class Faceted2 extends FacetedJson {
         if (file_exists($dirName.'/'.$fileName)) {
             rmdirRecursive($dirName.'/'.$fileName);
         }
-        
+
         $finalName = $fileName;
         $tmpFileName = '.'.$fileName;
-        
+
         mkdir($dirName.'/'.$tmpFileName, self::FOLDER_PRIVILEGES);
 
         // Building index.html
@@ -45,7 +45,7 @@ class Faceted2 extends FacetedJson {
 
         $html = str_replace('PROJECT_NAME', $this->config->project_name, $html);
 
-        file_put_contents($dirName.'/'.$tmpFileName.'/index.html', $html);        
+        file_put_contents($dirName.'/'.$tmpFileName.'/index.html', $html);
 
         // Building app.js
         $js = file_get_contents($this->config->dir_root.'/media/faceted2/app.js');
@@ -60,18 +60,18 @@ class Faceted2 extends FacetedJson {
             $docs[$ini['name']] = $ini['description'];
         }
         $docs = json_encode($docs);
-        
+
         $js = str_replace('__DOCS__', $docs, $js);
         $json = parent::generate($dirName);
         $js = str_replace('DUMP_JSON', $json, $js);
-        print file_put_contents($dirName.'/'.$tmpFileName.'/app.js', $js).' octets écrits';        
+        print file_put_contents($dirName.'/'.$tmpFileName.'/app.js', $js).' octets écrits';
 
         copyDir($this->config->dir_root.'/media/faceted2/bower_components', $dirName.'/'.$tmpFileName.'/bower_components');
         copyDir($this->config->dir_root.'/media/faceted2/node_modules', $dirName.'/'.$tmpFileName.'/node_modules');
         copy($this->config->dir_root.'/media/faceted2/exakat.css', $dirName.'/'.$tmpFileName.'/exakat.css');
 
         $css = file_get_contents($this->config->dir_root.'/media/faceted/faceted.css');
-        file_put_contents($dirName.'/'.$tmpFileName.'/faceted.css', $css);        
+        file_put_contents($dirName.'/'.$tmpFileName.'/faceted.css', $css);
 
         $errors = json_decode($json);
         $docsList = array();
@@ -97,8 +97,8 @@ class Faceted2 extends FacetedJson {
         $docs = file_get_contents($this->config->dir_root.'/media/faceted/docs.html');
         $docs = str_replace('DOCS_LIST', $docsHtml, $docs);
         $docs = str_replace('PROJECT_NAME', $this->config->project_name, $docs);
-        file_put_contents($dirName.'/'.$tmpFileName.'/docs.html', $docs);        
-        
+        file_put_contents($dirName.'/'.$tmpFileName.'/docs.html', $docs);
+
         foreach($filesList as $path => $line) {
             $dirs = explode('/', $path);
             array_pop($dirs); // remove file name
@@ -117,7 +117,7 @@ class Faceted2 extends FacetedJson {
             $html = '<code><a id="1" />1) '.substr($html, 6);
             file_put_contents($dirName.'/'.$tmpFileName.$path.'.html', $html);
         }
-        
+
         if (file_exists($dirName.'/'.$finalName)) {
             rename($dirName.'/'.$finalName, $dirName.'/.'.$tmpFileName);
             rename($dirName.'/'.$tmpFileName, $dirName.'/'.$finalName);

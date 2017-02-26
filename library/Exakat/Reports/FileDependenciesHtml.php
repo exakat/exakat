@@ -31,19 +31,19 @@ class FileDependenciesHtml extends Reports {
     const FILE_FILENAME  = 'dependencies';
 
     public function generate($folder, $name= 'dependencies') {
-        $this->finalName = $folder . '/' . $name;
-        $this->tmpName = $folder . '/.' . $name;
+        $this->finalName = $folder.'/'.$name;
+        $this->tmpName = $folder.'/.'.$name;
 
-        copyDir($this->config->dir_root . '/media/dependencies', $this->tmpName );
+        copyDir($this->config->dir_root.'/media/dependencies', $this->tmpName );
 
         $res = $this->sqlite->query('SELECT * FROM filesDependencies');
-        
+
         $json = new stdClass;
         $json->edges = array();
         $json->nodes = array();
         $in = array();
         $out = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (!isset($json->nodes[$row['including']])){
                 $source = count($json->nodes);
@@ -64,31 +64,31 @@ class FileDependenciesHtml extends Reports {
                 $destination = $json->nodes[$row['included']];
                 ++$out[$destination];
             }
-            
+
             $R = new Stdclass();
             $R->source = $source;
             $R->target = $destination;
             $R->caption = $row['type'];
             $json->edges[] = $R;
         }
-        
+
         $json->nodes = array_flip($json->nodes);
         foreach($in as $id => $i) {
             $json->nodes[$id] = (object) array('id'       => $id,
-                                               'caption'  => $json->nodes[$id], 
+                                               'caption'  => $json->nodes[$id],
                                                'incoming' => $i,
                                                'outgoing' => $out[$id]);
         }
 
         file_put_contents($this->tmpName.'/fidep.json', json_encode($json));
-        
+
         // Finalisation
         if ($this->finalName !== '/') {
             rmdirRecursive($this->finalName);
         }
-        
+
         if (file_exists($this->finalName)) {
-            display($this->finalName . " folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
             return;
         }
 
