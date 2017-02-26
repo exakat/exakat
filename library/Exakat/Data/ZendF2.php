@@ -28,10 +28,10 @@ use Exakat\Config;
 class ZendF2 {
     protected $sqlite = null;
     protected $phar_tmp = null;
-    
+
     public function __construct() {
         $config = Config::factory();
-        
+
         if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf2').'.sqlite';
             copy($config->dir_root.'/data/zendf2.sqlite', $this->phar_tmp);
@@ -57,10 +57,10 @@ class ZendF2 {
         if ($release !== null) {
             $query .= " WHERE releases.release = \"release-$release.0\"";
         }
-        
+
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['class'];
@@ -68,7 +68,7 @@ class ZendF2 {
                 $return[$row['release']] = array($row['class']);
             }
         }
-        
+
         return $return;
     }
 
@@ -84,7 +84,7 @@ class ZendF2 {
         if ($release !== null) {
             $query .= " WHERE releases.release = \"release-$release.0\"";
         }
-        
+
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['interface'];
@@ -92,7 +92,7 @@ class ZendF2 {
                 $return[$row['release']] = array($row['interface']);
             }
         }
-        
+
         return $return;
     }
 
@@ -108,7 +108,7 @@ class ZendF2 {
         if ($release !== null) {
             $query .= " WHERE releases.release = \"release-$release.0\"";
         }
-        
+
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['trait'];
@@ -116,7 +116,7 @@ class ZendF2 {
                 $return[$row['release']] = array($row['trait']);
             }
         }
-        
+
         return $return;
     }
 

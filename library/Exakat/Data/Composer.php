@@ -26,10 +26,10 @@ namespace Exakat\Data;
 class Composer {
     private $sqlite = null;
     private $phar_tmp = null;
-    
+
     public function __construct() {
         $config = \Exakat\Config::factory();
-        
+
         if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exMethods').'.sqlite';
             copy($config->dir_root.'/data/composer.sqlite', $this->phar_tmp);
@@ -51,15 +51,15 @@ class Composer {
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
             $query .= " AND vendor = '$vendor' AND component = '$component'";
-        
+
         }
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = strtolower($row['namespace']);
         }
-        
+
         return $return;
     }
 
@@ -72,11 +72,11 @@ class Composer {
 
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = strtolower($row['classname']);
         }
-        
+
         return $return;
     }
 
@@ -87,15 +87,15 @@ JOIN interfaces ON interfaces.namespace_id = namespaces.id";
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
             $query .= " WHERE vendor = '$vendor' and component = '$component'";
-        
+
         }
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = strtolower($row['interfacename']);
         }
-        
+
         return $return;
     }
 
@@ -106,15 +106,15 @@ JOIN traits ON traits.namespace_id = namespaces.id";
         if ($vendor !== null) {
             list($vendor, $component) = explode('/', $vendor);
             $query .= " WHERE vendor = '$vendor' and component = '$component'";
-        
+
         }
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = strtolower($row['traitname']);
         }
-        
+
         return $return;
     }
 }

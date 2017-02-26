@@ -201,68 +201,7 @@ GREMLIN;
 
         $this->spotPHPNativeFunctions($f);
         
-        // Define-style constant definitions
-        $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .where( __.in("METHOD").count().is(eq(0)))
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-     .has("fullnspath", "\\\\define")
-     .out("ARGUMENTS").out("ARGUMENT").has("rank", 0)
-     .hasLabel("String").has("noDelimiter")
-     .map{ s = it.get().value("noDelimiter").toString().toLowerCase();
-           if ( s.substring(0,1) != "\\\\") {
-               s = "\\\\" + s;
-           }
-           it.get().property("fullnspath", s);
-           s;
-         }.unique();
-GREMLIN;
-
-        $constants = $this->gremlin->query($query);
-        $constants = $constants->results;
-        
-        if (!empty($constants)) {
-            // First round, with full ns path
-            $query = <<<GREMLIN
-g.V().hasLabel("Identifier", "Nsname")
-     .where( __.in("NAME", "SUBNAME", "METHOD", "PROPERTY", "CONSTANT").count().is(eq(0)) )
-     .has("token", without("T_CONST", "T_FUNCTION"))
-     .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
-     .addE('DEFINITION')
-     .from( 
-        g.V().hasLabel("Functioncall")
-              .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-              .has("fullnspath", "\\\\define")
-             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
-             .filter{ it.get().value("fullnspath") == name}.select('a')
-         )
-
-GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $constants));
-
-            // Second round, with fallback to global constants
-            $query = <<<GREMLIN
-g.V().hasLabel("Identifier", "Nsname")
-     .where( __.in("NAME", "SUBNAME").count().is(eq(0)) )
-     .where( __.in("DEFINITION").count().is(eq(0)) )
-     .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); name in arg1 }
-     .addE('DEFINITION')
-     .from( 
-        g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define")
-             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
-             .filter{ it.get().value("fullnspath") == name}.select('a')
-         )
-
-GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $constants));
-            
-            // TODO : handle case-insensitive
-            $this->logTime('Constant definitions');
-
-            display('Link constant definitions');
-        } else {
-            display('Link constant definitions : skipping.');
-        }
+        $this->spotFallbackConstants();
         
         display('Mark literal expressions as constants');
         $query = <<<GREMLIN
@@ -457,6 +396,77 @@ GREMLIN;
         display('   '.$title);
         $this->logTime('end '.$title);
     }
+    
+    private function spotFallbackConstants() {
+        // Define-style constant definitions
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall")
+     .where( __.in("METHOD").count().is(eq(0)))
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+     .has("fullnspath", "\\\\define")
+     .out("ARGUMENTS").out("ARGUMENT").has("rank", 0)
+     .hasLabel("String").has("noDelimiter")
+     .map{ s = it.get().value("noDelimiter").toString().toLowerCase();
+           if ( s.substring(0,1) != "\\\\") {
+               s = "\\\\" + s;
+           }
+           it.get().property("fullnspath", s);
+           s;
+         }.unique();
+GREMLIN;
+
+        $constants = $this->gremlin->query($query);
+        $constants = $constants->results;
+        
+        if (!empty($constants)) {
+            // First round, with full ns path
+            $query = <<<GREMLIN
+g.V().hasLabel("Identifier", "Nsname")
+     .where( __.in("NAME", "SUBNAME", "METHOD", "PROPERTY", "CONSTANT").count().is(eq(0)) )
+     .has("token", without("T_CONST", "T_FUNCTION"))
+     .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
+     .addE('DEFINITION')
+     .from( 
+        g.V().hasLabel("Functioncall")
+              .where( __.in("METHOD").count().is(eq(0)))
+              .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+              .has("fullnspath", "\\\\define")
+             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
+             .filter{ it.get().value("fullnspath") == name}.select('a')
+         )
+
+GREMLIN;
+            $res = $this->gremlin->query($query, array('arg1' => $constants));
+
+            // Second round, with fallback to global constants
+            $query = <<<GREMLIN
+g.V().hasLabel("Identifier", "Nsname")
+     .where( __.in("NAME", "SUBNAME").count().is(eq(0)) )
+     .where( __.in("DEFINITION").count().is(eq(0)) )
+     .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); name in arg1 }
+     .addE('DEFINITION')
+     .from( 
+        g.V().hasLabel("Functioncall")
+             .where( __.in("METHOD").count().is(eq(0)))
+             .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+             .has("fullnspath", "\\\\define")
+             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
+             .filter{ it.get().value("fullnspath") == name}.select('a')
+         )
+
+GREMLIN;
+            $res = $this->gremlin->query($query, array('arg1' => $constants));
+            
+            // TODO : handle case-insensitive
+            $this->logTime('Constant definitions');
+
+            display('Link constant definitions');
+        } else {
+            display('Link constant definitions : skipping.');
+        }
+    }
+
+
 }
 
 ?>

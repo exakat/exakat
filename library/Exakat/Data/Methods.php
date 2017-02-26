@@ -26,10 +26,10 @@ namespace Exakat\Data;
 class Methods {
     private $sqlite = null;
     private $phar_tmp = null;
-    
+
     public function __construct() {
         $config = \Exakat\Config::factory();
-        
+
         if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exMethods').'.sqlite';
             copy($config->dir_root.'/data/methods.sqlite', $this->phar_tmp);
@@ -50,11 +50,11 @@ class Methods {
         $query = 'SELECT class, name, args_min, args_max FROM methods';
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
-        
+
         return $return;
     }
 
@@ -62,11 +62,11 @@ class Methods {
         $query = 'SELECT class, name, args_min, args_max FROM methods WHERE Class = "PHP"';
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
-        
+
         return $return;
     }
 
@@ -80,11 +80,11 @@ class Methods {
                   ";
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
-        
+
         return $return;
     }
 
@@ -98,11 +98,11 @@ class Methods {
                   ";
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row;
         }
-        
+
         return $return;
     }
 
@@ -110,11 +110,11 @@ class Methods {
         $query = 'SELECT name FROM methods WHERE determinist = 1';
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row['name'];
         }
-        
+
         return $return;
     }
 
@@ -122,11 +122,11 @@ class Methods {
         $query = 'SELECT name FROM methods WHERE determinist = 0';
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[] = $row['name'];
         }
-        
+
         return $return;
     }
 
@@ -139,12 +139,12 @@ class Methods {
 SELECT $arg, lower(GROUP_CONCAT('\\' || name)) AS functions FROM args_type WHERE class='PHP' AND $arg IN ('int', 'array', 'bool','string') GROUP BY $arg
 SQL;
             $res = $this->sqlite->query($query);
-            
+
             $position = array();
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $position[$row[$arg]] = explode(',', $row['functions']);
             }
-            
+
             $return[$id] = $position;
         }
 
@@ -173,7 +173,7 @@ SQL;
 SELECT return, lower(GROUP_CONCAT('\\' || name)) AS functions FROM args_type WHERE class='PHP' GROUP BY return
 SQL;
         $res = $this->sqlite->query($query);
-            
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $return[$row['return']] = explode(',', $row['functions']);
         }
