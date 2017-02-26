@@ -31,7 +31,7 @@ use Exakat\Exceptions\NoCodeInProject;
 
 class Anonymize extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     private $lnumberValues = array();
     private $lnumber = 0;
     private $dnumberValues = array();
@@ -42,14 +42,14 @@ class Anonymize extends Tasks {
     private $strings = 'A';
 
     public function run() {
-        
+
         if (($file = $this->config->file) !== 'stdout') {
             display("Anonymizing file $file\n");
 
             if (!file_exists($file)) {
                 throw new NoSuchFile($file);
             }
-            
+
             if (!$this->checkCompilation($file)) {
                 die('Can\'t anonymize '.$file.' as it doesn\'t compile with PHP '.PHP_VERSION."\n");
             }
@@ -83,19 +83,19 @@ class Anonymize extends Tasks {
             } elseif (($project = $this->config->project) !== 'default') {
                 display("Anonymizing project $project\n");
                 $dir = $this->config->projects_root.'/projects/'.$project.'/'.$project;
-    
+
                 if (!file_exists($this->config->projects_root.'/projects/'.$project)) {
                     throw new NoSuchProject($project);
                 }
-    
+
                 if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code')) {
                     throw new NoCodeInProject($project);
                 }
-    
+
                 $files = $this->datastore->getCol('files', 'file');
-        
+
                 $path = $this->config->projects_root.'/projects/'.$this->config->project.'/code';
-    
+
                 $total = 0;
                 if (file_exists($dir.'.anon')) {
                     rmdirRecursive($dir.'.anon');
@@ -115,9 +115,9 @@ class Anonymize extends Tasks {
             }
         }
 
-        display( 'Processing file ' . $file .' into '. $file. ".anon\n");
+        display( 'Processing file '.$file.' into '.$file.".anon\n");
     }
-    
+
     private function processFile($file, $anonFile = null) {
         $php = file_get_contents($file);
         $tokens = token_get_all($php);
@@ -221,9 +221,9 @@ class Anonymize extends Tasks {
                         }
 
                         $heredoc = "\n".$this->stringsNames[$short];
-                
+
                         break;
-                
+
                     case T_END_HEREDOC:
                         $t[1] = $heredoc;
                         unset($heredoc);
@@ -243,7 +243,7 @@ class Anonymize extends Tasks {
 
                     case T_CONST :
                     case T_LIST :
-            
+
                     case T_NAMESPACE :
                     case T_IMPLEMENTS :
 
@@ -296,7 +296,7 @@ class Anonymize extends Tasks {
                     case T_OR_EQUAL :
                     case T_IS_NOT_EQUAL :
                     case T_COALESCE :
-            
+
                     case T_OPEN_TAG_WITH_ECHO :
                     case T_CALLABLE :
                     case T_UNSET :
@@ -388,12 +388,12 @@ class Anonymize extends Tasks {
         if ($anonFile === null) {
             $anonFile = $file.'.anon';
         }
-        
+
         file_put_contents($anonFile, $php);
-        
+
         return true;
     }
-    
+
     private function checkCompilation($file) {
         $res = shell_exec($_SERVER['_'].' -l '.$file.' 2>&1');
         //@todo : differentiate fatal error and non-fatal ones.

@@ -40,13 +40,13 @@ class Analyze extends Tasks {
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         if (!empty($config->thema)) {
             $this->logname = strtolower(str_replace(' ', '_', $config->thema));
-        } 
+        }
         parent::__construct($gremlin, $config, $subtask);
     }
 
     public function run() {
         $project = $this->config->project;
-        
+
         if ($project == 'default') {
             throw new ProjectNeeded($project);
         }
@@ -59,7 +59,7 @@ class Analyze extends Tasks {
         $begin = microtime(true);
 
         Analyzer::$gremlinStatic = $this->gremlin;
-        
+
         // Take this before we clean it up
         $rows = $this->datastore->getRow('analyzed');
         $analyzed = array();
@@ -73,7 +73,7 @@ class Analyze extends Tasks {
             } else {
                 $analyzers_class = array($this->config->program);
             }
-            
+
             foreach($analyzers_class as $analyzer) {
                 if (!Analyzer::getClass($analyzer)) {
                     throw new NoSuchAnalyzer($analyzer);
@@ -143,7 +143,7 @@ class Analyze extends Tasks {
                             unset($diff[$k]);
                         }
                     }
-        
+
                     if (empty($diff)) {
                         $dependencies2[] = $a;
                         unset($dependencies[$a]);
@@ -154,34 +154,33 @@ class Analyze extends Tasks {
                 unset($d);
             }
 
-            assert(empty($dependencies), 
-                   "Dependencies depending on each other : can't finalize. Aborting\n".
-                   print_r($dependencies, true));
+            assert(empty($dependencies),
+                   "Dependencies depending on each other : can't finalize. Aborting\n".print_r($dependencies, true));
         }
 
         $total_results = 0;
         $Php = new Phpexec($this->config->version);
 
         $progressBar = new Progressbar(0, count($dependencies2) + 1, exec('tput cols'));
-        
+
         foreach($dependencies2 as $analyzer_class) {
             if (!$this->config->verbose && !$this->config->quiet) {
                 echo $progressBar->advance();
             }
             $begin = microtime(true);
             $analyzer = Analyzer::getInstance($analyzer_class);
-            
+
             if ($this->config->noRefresh === true && isset($analyzed[$analyzer_class])) {
                 display( "$analyzer_class is already processed\n");
                 continue 1;
             }
             $analyzer->init();
-    
+
             if (!$analyzer->checkPhpVersion($this->config->phpversion)) {
                 $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
-                
+
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
-                
+
                 $query = <<<GREMLIN
 result = g.addV('Noresult').property('code',                        'Not Compatible With PhpVersion')
                            .property('fullcode',                    'Not Compatible With PhpVersion')
@@ -199,7 +198,7 @@ GREMLIN;
             } elseif (!$analyzer->checkPhpConfiguration($Php)) {
                 $analyzerQuoted = str_replace('\\', '\\\\', get_class($analyzer));
                 $analyzer = str_replace('\\', '\\\\', $analyzer_class);
-            
+
                 $query = <<<GREMLIN
 result = g.addV('Noresult').property('code',                              'Not Compatible With Configuration')
                            .property('fullcode',                          'Not Compatible With Configuration')

@@ -31,10 +31,10 @@ use Exakat\Exceptions\NoSuchProject;
 
 class Project extends Tasks {
     const CONCURENCE = self::NONE;
-    
+
     private $project_dir = '.';
-    
-    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+
+    protected $themes = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                               'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
                               'Analyze', 'Preferences',
                               'Appinfo', 'Appcontent', '"Dead code"', 'Security', 'Custom',
@@ -44,7 +44,7 @@ class Project extends Tasks {
 
     public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subTask);
-        
+
         $this->reports = $config->project_reports;
     }
 
@@ -70,12 +70,12 @@ class Project extends Tasks {
         }
 
         $this->logTime('Start');
-        $this->addSnitch(array('step'    => 'Start', 
+        $this->addSnitch(array('step'    => 'Start',
                                'project' => $this->config->project));
 
         // cleaning datastore
         $this->datastore = new Datastore($this->config, Datastore::CREATE);
-        
+
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
                                                'exakat_version' => Exakat::VERSION,
@@ -89,7 +89,7 @@ class Project extends Tasks {
         $analyze->run();
         unset($analyze);
         $this->logTime('CleanDb');
-        $this->addSnitch(array('step'    => 'Clean DB', 
+        $this->addSnitch(array('step'    => 'Clean DB',
                                'project' => $this->config->project));
 
         display("Search for external libraries\n");
@@ -98,13 +98,13 @@ class Project extends Tasks {
                         3 => $this->config->project,
                         4 => '-u',
                         );
-        
+
         $configThema = Config::push($args);
 
         $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
         $analyze->run();
 
-        $this->addSnitch(array('step'   => 'External lib', 
+        $this->addSnitch(array('step'   => 'External lib',
                               'project' => $this->config->project));
 
         Config::pop();
@@ -115,7 +115,7 @@ class Project extends Tasks {
         $analyze->run();
         unset($analyze);
         $this->logTime('Files');
-        $this->addSnitch(array('step'    => 'Files', 
+        $this->addSnitch(array('step'    => 'Files',
                                'project' => $this->config->project));
 
         $this->checkTokenLimit();
@@ -127,13 +127,13 @@ class Project extends Tasks {
         $this->logTime('Loading');
 
         // paralell running
-        exec($this->config->php . ' '.$this->config->executable.' magicnumber -p '.$this->config->project.'   > /dev/null &');
-        $this->addSnitch(array('step'    => 'Magic Numbers', 
+        exec($this->config->php.' '.$this->config->executable.' magicnumber -p '.$this->config->project.'   > /dev/null &');
+        $this->addSnitch(array('step'    => 'Magic Numbers',
                                'project' => $this->config->project));
 
         // Dump is a child process
-        shell_exec($this->config->php . ' '.$this->config->executable.' dump -p '.$this->config->project);
-        
+        shell_exec($this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project);
+
         if ($this->config->program !== null) {
             $this->analyzeOne($this->config->program, $audit_start);
         } else {
@@ -142,7 +142,7 @@ class Project extends Tasks {
 
         display("Analyzed project\n");
         $this->logTime('Analyze');
-        $this->addSnitch(array('step'    => 'Analyzed', 
+        $this->addSnitch(array('step'    => 'Analyzed',
                                'project' => $this->config->project));
 
         $this->logTime('Analyze');
@@ -150,9 +150,9 @@ class Project extends Tasks {
         $oldConfig = Config::factory();
         foreach($this->reports as $format) {
             display("Reporting $format\n");
-            $this->addSnitch(array('step'    => 'Report : '.$format, 
+            $this->addSnitch(array('step'    => 'Report : '.$format,
                                    'project' => $this->config->project));
-            
+
             $args = array ( 1 => 'report',
                             2 => '-p',
                             3 => $this->config->project,
@@ -162,7 +162,7 @@ class Project extends Tasks {
                             7 => $format,
                             );
             $this->config = Config::factory($args);
-            
+
             try {
                 $report = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
                 $report->run();
@@ -177,7 +177,6 @@ class Project extends Tasks {
         Config::factory($oldConfig);
         display("Reported project\n");
 
-                                               
         $query = <<<GREMLIN
 g.V().where( __.sideEffect{x = []; }.in('ANALYZED').sideEffect{ x.add(it.get().value('analyzer')); }.barrier().sideEffect{ y = x.groupBy().findAll{ i,j -> j.size() > 1;};} )
 .filter{ y.size() > 0; }
@@ -209,14 +208,14 @@ GREMLIN;
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
     }
-    
+
     private function analyzeOne($analyzers, $audit_start) {
         if (!is_array($analyzers)) {
             $analyzers = array($analyzers);
         }
 
         foreach($analyzers as $analyzer) {
-            $this->addSnitch(array('step'    => 'Analyzer : '.$analyzer, 
+            $this->addSnitch(array('step'    => 'Analyzer : '.$analyzer,
                                    'project' => $this->config->project));
 
             $args = array ( 1 => 'analyze',
@@ -230,14 +229,14 @@ GREMLIN;
             if ($this->config->quiet === true) {
                 $args[] = '-q';
             }
-            
+
             try {
                 $configThema = Config::push($args);
 
                 $analyze = new Analyze($this->gremlin, $configThema, Tasks::IS_SUBTASK);
                 $analyze->run();
                 unset($analyze);
-                
+
                 Config::pop();
 
                 $args = array ( 1 => 'dump',
@@ -282,7 +281,7 @@ GREMLIN;
         if (empty($themes)) {
             $themes = $this->themes;
         }
-        
+
         if (!is_array($themes)) {
             $themes = array($themes);
         }
@@ -302,14 +301,14 @@ GREMLIN;
             if ($this->config->quiet === true) {
                 $args[] = '-q';
             }
-            
+
             try {
                 $configThema = Config::push($args);
 
                 $analyze = new Analyze($this->gremlin, $configThema, Tasks::IS_SUBTASK);
                 $analyze->run();
                 unset($analyze);
-                
+
                 Config::pop();
 
                 $args = array ( 1 => 'dump',

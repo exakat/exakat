@@ -32,9 +32,9 @@ use Exakat\Tasks\CleanDb;
 
 class Test extends Tasks {
     const CONCURENCE = self::NONE;
-    
+
     private $project_dir = '.';
-    
+
     public function run() {
         $project = 'test';
 
@@ -60,7 +60,7 @@ class Test extends Tasks {
         $load->run();
         unset($load);
         display("Project loaded\n");
-        
+
         $analyze = new Analyze($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
@@ -68,7 +68,7 @@ class Test extends Tasks {
         $results = new Results($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $results->run();
         unset($results);
-        
+
         display("Analyzed project\n");
     }
 }

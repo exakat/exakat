@@ -33,7 +33,7 @@ class Upgrade extends Tasks {
         $options = array(
             'http'=>array(
                 'method' => 'GET',
-                'header' => "User-Agent: exakat-" .Exakat::VERSION
+                'header' => "User-Agent: exakat-".Exakat::VERSION
             )
         );
 
@@ -44,12 +44,12 @@ class Upgrade extends Tasks {
             print "Unable to reach server to fetch the last version. Try again later.\n";
             return;
         }
-        
+
         if (preg_match('/Download exakat version (\d+\.\d+\.\d+) \(Latest\)/s', $html, $r) == 0) {
             print "Unable to find last version. Try again later.\n";
             return;
         }
-        
+
         if (version_compare(Exakat::VERSION, $r[1]) < 0) {
             print "This version needs to be updated (Current : ".Exakat::VERSION.", Latest: $r[1])\n";
             if ($this->config->update === true) {
@@ -58,12 +58,12 @@ class Upgrade extends Tasks {
 
                 $phar = @file_get_contents('http://dist.exakat.io/versions/index.php?file=latest');
                 $sha256 = $r[1];
-                
+
                 if (hash('sha256', $phar) !== $sha256) {
                     print "Error while checking exakat.phar's checksum. Aborting update. Please, try again\n";
                     return;
                 }
-                
+
                 file_put_contents('exakat.1.phar', $phar);
                 print "Setting up exakat.phar\n";
                 rename('exakat.1.phar', 'exakat.phar');

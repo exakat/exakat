@@ -70,7 +70,7 @@ class Magicnumber extends Tasks {
         // export big arrays (more than 10)
         $res = $this->gremlin->query('g.V().hasLabel("Functioncall").has("token", "T_ARRAY").where( __.out("ARGUMENTS").has( "count", is(gte(10))) ).values("fullcode")');
         $res = $res->results;
-        
+
         $outputFile = fopen($this->config->projects_root.'/projects/'.$this->config->project.'/bigArrays.txt', 'w+');
         foreach($res as $v) {
             fwrite($outputFile, $v."\n");

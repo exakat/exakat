@@ -31,14 +31,14 @@ use Exakat\Tokenizer\Token;
 
 class Results extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     public function run() {
         $analyzer = $this->config->program;
 
         if (empty($analyzer)) {
             throw new NeedsAnalyzer();
         }
-        
+
         $analyzerClass = Analyzer::getClass($analyzer);
 
         if ($analyzerClass === false) {

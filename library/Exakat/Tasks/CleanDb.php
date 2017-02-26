@@ -28,9 +28,9 @@ use Exception;
 
 class CleanDb extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     protected $logname = self::LOG_NONE;
-    
+
     public function run() {
         if ($this->config->quick) {
             $this->restartNeo4j();
@@ -43,7 +43,7 @@ g.V().count();
 GREMLIN;
         $result = null;
         $counts = 0;
-        
+
         while($counts < 100 && (!$result instanceof \Stdclass || $result->results === null)) {
             $result = $this->gremlin->query($queryTemplate);
             ++$counts;
@@ -70,7 +70,7 @@ GREMLIN;
             $this->restartNeo4j();
         } else {
             display('Cleaning with gremlin');
-        
+
             $queryTemplate = <<<GREMLIN
 
 g.E().drop();
@@ -82,11 +82,11 @@ GREMLIN;
         }
         $end = microtime(true);
         display(number_format(($end - $begin) * 1000, 0).' ms');
-        
+
         $this->cleanScripts();
         $this->cleanTmpDir();
     }
-    
+
     private function cleanScripts() {
         display('Cleaning scripts');
         $files = array_merge(glob($this->config->neo4j_folder.'/scripts/a*.gremlin'),
@@ -101,11 +101,11 @@ GREMLIN;
         rmdirRecursive($this->config->projects_root.'/projects/.exakat/');
         mkdir($this->config->projects_root.'/projects/.exakat/');
     }
-    
+
     private function restartNeo4j() {
         display('Cleaning with restart');
         $this->config = $this->config;
-        
+
         // preserve data/dbms/auth to preserve authentication
         if (file_exists($this->config->neo4j_folder.'/data/dbms/auth')) {
             $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; mkdir -p data/scripts ';
@@ -117,7 +117,7 @@ GREMLIN;
         if (file_exists($this->config->neo4j_folder.'/data/neo4j-service.pid')) {
             shell_exec('kill -9 $(cat '.$this->config->neo4j_folder.'/data/neo4j-service.pid) 2>>/dev/null; ');
         }
-        
+
         shell_exec('cd '.$this->config->neo4j_folder.'; '.$sshLoad);
 
         if (!file_exists($this->config->neo4j_folder.'/conf/')) {
@@ -132,7 +132,7 @@ GREMLIN;
                 }
             }
         }
-        
+
         // checking that the server has indeed restarted
         if (Tasks::$semaphore !== null) {
             fclose(Tasks::$semaphore);
@@ -151,7 +151,7 @@ GREMLIN;
             display('Didn\'t restart neo4j cleanly');
         }
     }
-    
+
     private function doRestart() {
         $round = 0;
         do {
@@ -168,9 +168,9 @@ GREMLIN;
                     die('Couldn\'t restart neo4j\'s server, though it doesn\'t seem to be running. Please, make sure it is runnable at "'.$this->config->neo4j_folder.'" and try again.');
                 }
             }
-            
+
             echo exec('cd '.$this->config->neo4j_folder.'; ./bin/neo4j start >/dev/null 2>&1 & ');
-            
+
             // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
             // Needs to pick up this error and act
             // also, may be we can wait for the pid to appear?

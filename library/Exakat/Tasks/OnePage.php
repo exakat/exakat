@@ -31,14 +31,14 @@ use Exakat\Tasks\NoReadableWFile;
 
 class OnePage extends Tasks {
     const CONCURENCE = self::NONE;
-    
+
     private $project_dir = '.';
-    
+
     const TOTAL_STEPS = 7;
-    
+
     public function run() {
         $progress = 0;
-        
+
         $begin = microtime(true);
         $this->project_dir = $this->config->projects_root.'/projects/onepage/';
 
@@ -53,10 +53,10 @@ class OnePage extends Tasks {
         if (file_exists($datastorePath)) {
             unlink($datastorePath);
         }
-        
+
         unset($this->datastore);
         $this->datastore = new Datastore($this->config, Datastore::CREATE);
-        
+
         $audit_start = time();
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
                                                'exakat_version' => Exakat::VERSION,
@@ -77,7 +77,7 @@ class OnePage extends Tasks {
 
         $task = new Analyze($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
-        
+
         rename($this->config->projects_root.'/projects/onepage/log/analyze.log',
                $this->config->projects_root.'/projects/onepage/log/analyze.onepage.log');
 

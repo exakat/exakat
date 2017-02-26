@@ -31,267 +31,35 @@ use Exakat\Exceptions\GremlinException;
 
 class LoadFinal extends Tasks {
     const CONCURENCE = self::ANYTIME;
+
     private $linksIn = '';
+
+    private $PHPconstants = array();
+    private $PHPfunctions = array();
 
     public function run() {
         $this->linksIn = Token::linksAsList();
 
         $this->logTime('Start');
 
+        $this->init();
+
         $this->makeParentFullnspath();
         $this->makeSelfFullnspath();
         $this->makeStaticFullnspath();
+        $this->makeClassConstantDefinition();
+        $this->setPropertyname();
 
-        // Create link between Class constant and definition
-        $query = <<<'GREMLIN'
-        g.V().hasLabel('Staticconstant').as('first')
-.out('CONSTANT').sideEffect{name = it.get().value("code");}.select('first')
-.out('CLASS').hasLabel("Identifier", "Nsname").sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
-.where( __.sideEffect{classes = [];}
-          .emit(hasLabel("Class")).repeat( out("EXTENDS").in("DEFINITION") ).times(15)
-          .out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").as('const')
-          .out("NAME").filter{ it.get().value("code") == name; }.select('const')
-          .sideEffect{classes.add(it.get()); }
-          .fold()
-)
-.map{classes[0]}.as('theClass')
-.addE('DEFINITION').from( 'first' )
-GREMLIN;
-        $this->gremlin->query($query);
-        display('Create link between Class constant and definition');
-        $this->logTime('Class::constant definition');
+        $this->fallbackToGlobalFunctions();
+        $this->fallbackToGlobalConstants();
+        $this->findPHPNativeConstants();
 
-        // Create propertyname for Property Definitions
-        $query = <<<GREMLIN
-g.V().hasLabel("Ppp", "Var").out("PPP").as("ppp")
-     .coalesce( out("LEFT"), __.filter{ true } )
-     .sideEffect{ propertyname = it.get().value('code').toString().substring(1, it.get().value('code').size()); }
-     .select("ppp")
-     .sideEffect{ it.get().property('propertyname', propertyname); }
+        $this->spotPHPNativeFunctions();
 
-GREMLIN;
-        $this->gremlin->query($query);
-        display('set propertyname');
-        $this->logTime('propertyname');
+        $this->fallbackToGlobalConstants2();
 
-        // update fullnspath with fallback for functions 
-        $query = <<<GREMLIN
-g.V().hasLabel("Functioncall").as("a")
-     .has("fullnspath", without(''))
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-     .where( __.in("NEW", "METHOD").count().is(eq(0)))
-     .sideEffect{ fullnspath = it.get().value("fullnspath")}
-     .in('DEFINITION')
-     .filter{ it.get().value("fullnspath") != fullnspath}
-     .sideEffect{ fullnspath = it.get().value("fullnspath")}
-     .select("a")
-     .sideEffect{ 
-          it.get().property("fullnspath", fullnspath ); 
-      }
+        $this->spotConstantExpressions();
 
-GREMLIN;
-        $this->gremlin->query($query);
-        display('fallback for global functioncall');
-        $this->logTime('fallback to global f()');
-
-        // update fullnspath with fallback for functions 
-        $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-     .has("fullnspath", without(''))
-     .where( __.in("NEW", "METHOD", "DEFINITION").count().is(eq(0)))
-     .where( __.out("NAME").has("fullnspath"))
-     .sideEffect{ 
-        fullnspath = it.get().vertices(OUT, 'NAME').next().value("fullnspath").toString().toLowerCase();
-        it.get().property("fullnspath", fullnspath ); 
-        it.get().property("fallback", true ); 
-    }
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display('refine functioncall fullnspath');
-        $this->logTime('Refine functioncall');
-
-        // update fullnspath with fallback for functions 
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier", "Nsname").as("a")
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-     .has("fullnspath", without(''))
-     .where( __.in("NEW", "METHOD", "NAME", "SUBNAME").count().is(eq(0)))
-     .sideEffect{ fullnspath = it.get().value("fullnspath")}
-     .in('DEFINITION').out("NAME")
-     .filter{ it.get().value("fullnspath") != fullnspath}
-     .sideEffect{ fullnspath = it.get().value("fullnspath")}
-     .select("a")
-     .sideEffect{ 
-          it.get().property("fullnspath", fullnspath ); 
-      }
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display('fallback for global constants');
-        $this->logTime('fallback to global for constants');
-
-        // fallback for PHP and ext, class, function, constant
-        // update fullnspath with fallback for functions 
-        $pathDocs = $this->config->dir_root.'/data/analyzers.sqlite';
-        $docs = new Docs($pathDocs);
-
-        $exts = $docs->listAllAnalyzer('Extensions');
-        $exts[] = 'php_constants';
-        
-        $c = array();
-        $f = array();
-        foreach($exts as $ext) {
-            $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
-            $fullpath = $this->config->dir_root.'/data/'.$inifile;
-
-            $iniFile = parse_ini_file($fullpath);
-            
-            if (!empty($iniFile['constants'][0])) {
-                $c[] = $iniFile['constants'];
-            }
-
-            if (!empty($iniFile['functions'][0])) {
-                $f[] = $iniFile['functions'];
-            }
-        }
-        $constants = call_user_func_array('array_merge', $c);
-        $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
-        $constants = array_map('strtolower', $constants);
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier")
-     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
-     .filter{ it.get().value("code").toLowerCase() in arg1 }
-     .sideEffect{ 
-        fullnspath = "\\\\" + it.get().value("code").toLowerCase();
-        it.get().property("fullnspath", fullnspath); 
-      }
-
-GREMLIN;
-        $this->gremlin->query($query, array('arg1' => $constants));
-        display('spot PHP / ext constants');
-        $this->logTime('PHP Constants');
-
-        $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() > 0 }.values("code")';
-        $constants = $this->gremlin->query($query);
-        $constantsGlobal = $constants->results;
-
-        $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() == 0 }.values("fullnspath")';
-        $constants = $this->gremlin->query($query);
-        $constantsDefinitions = $constants->results;
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier")
-     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
-     .filter{ it.get().value("code") in arg1 }
-     .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
-     .sideEffect{ name = it.get().value("code"); }
-     .sideEffect{ 
-         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
-         it.get().property("fullnspath", fullnspath); 
-      }
-      .addE("DEFINITION").from( g.V().hasLabel("Const").out("CONST").out("NAME").filter{ it.get().value("code") == name} )
-
-GREMLIN;
-        $this->gremlin->query($query, array('arg1' => $constantsGlobal, 'arg2' => $constantsDefinitions));
-        display('spot constants that falls back on global constants');
-        $this->logTime('fallback to global for constants');
-
-        $this->spotPHPNativeFunctions($f);
-        
-        $this->spotFallbackConstants();
-        
-        display('Mark literal expressions as constants');
-        $query = <<<GREMLIN
-g.V().hasLabel("Integer", "Boolean", "Real", "Null", "Void", "Inlinehtml", "Magicconstant", "Staticconstant", "Void")
-     .sideEffect{ it.get().property("constant", true); }
-
-GREMLIN;
-        $this->gremlin->query($query);
-        $this->logTime('Constant expressions');
-
-        $query = <<<GREMLIN
-g.V().hasLabel("String").where( __.out("CONCAT").count().is(eq(0)))
-     .sideEffect{ it.get().property("constant", true); }
-
-GREMLIN;
-        $this->gremlin->query($query);
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier",  "Nsname").not(hasLabel("Functioncall"))
-     .sideEffect{ it.get().property("constant", true); }
-
-GREMLIN;
-        $this->gremlin->query($query);
-
-        $data = new Methods();
-        $deterministFunctions = $data->getDeterministFunctions();
-        $deterministFunctions = array_map(function ($x) { return '\\'.$x;}, $deterministFunctions);
-
-        for ($i =0; $i < 3; ++$i) {
-        // Cases for Structures (all sub element are constante => structure is constante)
-        $structures = array('Addition'         => array('LEFT', 'RIGHT'),
-                            'Multiplication'   => array('LEFT', 'RIGHT'),
-                            'Bitshift'         => array('LEFT', 'RIGHT'),
-                            'Logical'          => array('LEFT', 'RIGHT'),
-                            'Power'            => array('LEFT', 'RIGHT'),
-                            'Keyvalue'         => array('KEY',  'VALUE'),
-                            'Arguments'        => array('ARGUMENT'),
-//                            'Functioncall'     => array('ARGUMENTS'), // Warning : Some function are not deterministic. Needs to mark them as such (custom or internals...)
-//                            'Methodcall'       => array('METHOD'),
-//                            'Staticmethodcall' => array('METHOD'),
-
-//                            'Function'         => array('BLOCK'),  // Block but one should look for return 
-                            'Sequence'         => array('ELEMENT'),
-                            'Break'            => array('BREAK'),
-                            'Continue'         => array('CONTINUE'),
-                            'Return'           => array('RETURN'),
-                            'Ternary'          => array('CONDITION', 'THEN', 'ELSE'),
-                            'Comparison'       => array('LEFT', 'RIGHT'),
-                            'Noscream'         => array('AT'),
-                            'Not'              => array('NOT'),
-                            'Parenthesis'      => array('CODE'),
-                            'Concatenation'    => array('CONCAT'),
-                            'String'           => array('CONCAT')
-                            );
-        
-            foreach($structures as $atom => $links) {
-                $linksList = "'".implode("', '", $links)."'";
-
-                $query = <<<GREMLIN
-g.V().hasLabel("$atom").where( __.out($linksList).not(has("constant", true)).count().is(eq(0)) )
-    .sideEffect{ it.get().property("constant", true);}
-GREMLIN;
-                $this->gremlin->query($query);
-            }
-        
-            $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .where( __.in("METHOD").count().is(eq(0)))
-     .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_OPEN_BRACKET'))
-     .has('fullnspath') // Skip old names that can be methods since PHP 7.0
-     .filter{ it.get().value("fullnspath") in arg1}
-     .where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant")).count().is(eq(0)) )
-    .sideEffect{ it.get().property("constant", true);}
-GREMLIN;
-            $this->gremlin->query($query, array('arg1' => $deterministFunctions));
-        }
-        display('Mark constants expressions');
-        $this->logTime('Constant expressions');
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Variable").has("code", "\\\$GLOBALS").in("VARIABLE").hasLabel("Array").as("var")
-     .out("INDEX").hasLabel("String").where( __.out("CONCAT").count().is(eq(0)))
-     .sideEffect{ varname = '\$' + it.get().value('noDelimiter');
-                  it.get().property("globalvar", varname);}
-
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display('Mark constants expressions');
         $this->logTime('Final');
     }
 
@@ -314,7 +82,7 @@ GREMLIN;
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
     }
-    
+
     private function makeParentFullnspath() {
         $title = 'parent to fullnspath';
 
@@ -331,7 +99,7 @@ GREMLIN;
 
         $this->runQuery($query, $title);
     }
-    
+
     private function makeSelfFullnspath() {
         $title = 'self to fullnspath';
 
@@ -362,11 +130,11 @@ GREMLIN;
         $this->runQuery($query, $title);
     }
 
-    private function spotPHPNativeFunctions($f) {
-       $title = 'mark PHP native functions call';
-       $functions = call_user_func_array('array_merge', $f);
-       $functions = array_filter($functions, function ($x) { return strpos($x, '\\') === false;});
-       $functions = array_map('strtolower', $functions);
+    private function spotPHPNativeFunctions() {
+        $title = 'mark PHP native functions call';
+        $functions = call_user_func_array('array_merge', $this->PHPfunctions);
+        $functions = array_filter($functions, function ($x) { return strpos($x, '\\') === false;});
+        $functions = array_map('strtolower', $functions);
 
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
@@ -384,19 +152,19 @@ GREMLIN;
         $this->runQuery($query, $title, array('arg1' => $functions));
     }
 
-   private function runQuery($query, $title, $args = array()) {
+    private function runQuery($query, $title, $args = array()) {
         display($title);
         $this->logTime($title);
-        
+
         try {
             $this->gremlin->query($query, $args);
         } catch (GremlinException $e) {
-        
+
         }
-        display('   '.$title);
-        $this->logTime('end '.$title);
+          display('   '.$title);
+          $this->logTime('end '.$title);
     }
-    
+
     private function spotFallbackConstants() {
         // Define-style constant definitions
         $query = <<<GREMLIN
@@ -417,7 +185,7 @@ GREMLIN;
 
         $constants = $this->gremlin->query($query);
         $constants = $constants->results;
-        
+
         if (!empty($constants)) {
             // First round, with full ns path
             $query = <<<GREMLIN
@@ -456,7 +224,7 @@ g.V().hasLabel("Identifier", "Nsname")
 
 GREMLIN;
             $res = $this->gremlin->query($query, array('arg1' => $constants));
-            
+
             // TODO : handle case-insensitive
             $this->logTime('Constant definitions');
 
@@ -466,7 +234,268 @@ GREMLIN;
         }
     }
 
+    private function makeClassConstantDefinition() {
+        // Create link between Class constant and definition
+        $query = <<<'GREMLIN'
+        g.V().hasLabel('Staticconstant').as('first')
+.out('CONSTANT').sideEffect{name = it.get().value("code");}.select('first')
+.out('CLASS').hasLabel("Identifier", "Nsname").sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
+.where( __.sideEffect{classes = [];}
+          .emit(hasLabel("Class")).repeat( out("EXTENDS").in("DEFINITION") ).times(15)
+          .out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").as('const')
+          .out("NAME").filter{ it.get().value("code") == name; }.select('const')
+          .sideEffect{classes.add(it.get()); }
+          .fold()
+)
+.map{classes[0]}.as('theClass')
+.addE('DEFINITION').from( 'first' )
+GREMLIN;
+        $this->gremlin->query($query);
+        display('Create link between Class constant and definition');
+        $this->logTime('Class::constant definition');
+    }
 
+    private function setPropertyname() {
+        // Create propertyname for Property Definitions
+        $query = <<<GREMLIN
+g.V().hasLabel("Ppp", "Var").out("PPP").as("ppp")
+     .coalesce( out("LEFT"), __.filter{ true } )
+     .sideEffect{ propertyname = it.get().value('code').toString().substring(1, it.get().value('code').size()); }
+     .select("ppp")
+     .sideEffect{ it.get().property('propertyname', propertyname); }
+
+GREMLIN;
+        $this->gremlin->query($query);
+        display('set propertyname');
+        $this->logTime('propertyname');
+    }
+
+    private function fallbackToGlobalFunctions() {
+        // update fullnspath with fallback for functions
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall").as("a")
+     .has("fullnspath", without(''))
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+     .where( __.in("NEW", "METHOD").count().is(eq(0)))
+     .sideEffect{ fullnspath = it.get().value("fullnspath")}
+     .in('DEFINITION')
+     .filter{ it.get().value("fullnspath") != fullnspath}
+     .sideEffect{ fullnspath = it.get().value("fullnspath")}
+     .select("a")
+     .sideEffect{ 
+          it.get().property("fullnspath", fullnspath ); 
+      }
+
+GREMLIN;
+        $this->gremlin->query($query);
+        display('fallback for global functioncall');
+        $this->logTime('fallback to global f()');
+
+        // update fullnspath with fallback for functions
+        $query = <<<GREMLIN
+g.V().hasLabel("Functioncall")
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+     .has("fullnspath", without(''))
+     .where( __.in("NEW", "METHOD", "DEFINITION").count().is(eq(0)))
+     .where( __.out("NAME").has("fullnspath"))
+     .sideEffect{ 
+        fullnspath = it.get().vertices(OUT, 'NAME').next().value("fullnspath").toString().toLowerCase();
+        it.get().property("fullnspath", fullnspath ); 
+        it.get().property("fallback", true ); 
+    }
+
+GREMLIN;
+        $this->gremlin->query($query);
+        display('refine functioncall fullnspath');
+        $this->logTime('Refine functioncall');
+    }
+
+    private function fallbackToGlobalConstants() {
+        // update fullnspath with fallback for constants
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier", "Nsname").as("a")
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
+     .has("fullnspath", without(''))
+     .where( __.in("NEW", "METHOD", "NAME", "SUBNAME").count().is(eq(0)))
+     .sideEffect{ fullnspath = it.get().value("fullnspath")}
+     .in('DEFINITION').out("NAME")
+     .filter{ it.get().value("fullnspath") != fullnspath}
+     .sideEffect{ fullnspath = it.get().value("fullnspath")}
+     .select("a")
+     .sideEffect{ 
+          it.get().property("fullnspath", fullnspath ); 
+      }
+
+GREMLIN;
+        $this->gremlin->query($query);
+        display('fallback for global constants');
+        $this->logTime('fallback to global for constants');
+    }
+
+    private function findPHPNativeConstants() {
+        $constants = call_user_func_array('array_merge', $this->PHPconstants);
+        $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
+        $constants = array_map('strtolower', $constants);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier")
+     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
+     .filter{ it.get().value("code").toLowerCase() in arg1 }
+     .sideEffect{ 
+        fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+        it.get().property("fullnspath", fullnspath); 
+      }
+
+GREMLIN;
+        $this->gremlin->query($query, array('arg1' => $constants));
+        display('spot PHP / ext constants');
+        $this->logTime('PHP Constants');
+    }
+
+    private function fallbackToGlobalConstants2() {
+        $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() > 0 }.values("code")';
+        $constants = $this->gremlin->query($query);
+        $constantsGlobal = $constants->results;
+
+        $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() == 0 }.values("fullnspath")';
+        $constants = $this->gremlin->query($query);
+        $constantsDefinitions = $constants->results;
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier")
+     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
+     .filter{ it.get().value("code") in arg1 }
+     .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
+     .sideEffect{ name = it.get().value("code"); }
+     .sideEffect{ 
+         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+         it.get().property("fullnspath", fullnspath); 
+      }
+      .addE("DEFINITION").from( g.V().hasLabel("Const").out("CONST").out("NAME").filter{ it.get().value("code") == name} )
+
+GREMLIN;
+        $this->gremlin->query($query, array('arg1' => $constantsGlobal,
+                                            'arg2' => $constantsDefinitions));
+        display('spot constants that falls back on global constants');
+        $this->logTime('fallback to global for constants 2');
+    }
+
+    private function spotConstantExpressions() {
+        display('Mark literal expressions as constants');
+        $query = <<<GREMLIN
+g.V().hasLabel("Integer", "Boolean", "Real", "Null", "Void", "Inlinehtml", "Magicconstant", "Staticconstant", "Void")
+     .sideEffect{ it.get().property("constant", true); }
+
+GREMLIN;
+        $this->gremlin->query($query);
+        $this->logTime('Constant expressions');
+
+        $query = <<<GREMLIN
+g.V().hasLabel("String").where( __.out("CONCAT").count().is(eq(0)))
+     .sideEffect{ it.get().property("constant", true); }
+
+GREMLIN;
+        $this->gremlin->query($query);
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier",  "Nsname").not(hasLabel("Functioncall"))
+     .sideEffect{ it.get().property("constant", true); }
+
+GREMLIN;
+        $this->gremlin->query($query);
+
+        $data = new Methods();
+        $deterministFunctions = $data->getDeterministFunctions();
+        $deterministFunctions = array_map(function ($x) { return '\\'.$x;}, $deterministFunctions);
+
+        for ($i =0; $i < 3; ++$i) {
+            // Cases for Structures (all sub element are constante => structure is constante)
+            $structures = array('Addition'         => array('LEFT', 'RIGHT'),
+                            'Multiplication'   => array('LEFT', 'RIGHT'),
+                            'Bitshift'         => array('LEFT', 'RIGHT'),
+                            'Logical'          => array('LEFT', 'RIGHT'),
+                            'Power'            => array('LEFT', 'RIGHT'),
+                            'Keyvalue'         => array('KEY',  'VALUE'),
+                            'Arguments'        => array('ARGUMENT'),
+            //                            'Functioncall'     => array('ARGUMENTS'), // Warning : Some function are not deterministic. Needs to mark them as such (custom or internals...)
+            //                            'Methodcall'       => array('METHOD'),
+            //                            'Staticmethodcall' => array('METHOD'),
+
+            //                            'Function'         => array('BLOCK'),  // Block but one should look for return
+                            'Sequence'         => array('ELEMENT'),
+                            'Break'            => array('BREAK'),
+                            'Continue'         => array('CONTINUE'),
+                            'Return'           => array('RETURN'),
+                            'Ternary'          => array('CONDITION', 'THEN', 'ELSE'),
+                            'Comparison'       => array('LEFT', 'RIGHT'),
+                            'Noscream'         => array('AT'),
+                            'Not'              => array('NOT'),
+                            'Parenthesis'      => array('CODE'),
+                            'Concatenation'    => array('CONCAT'),
+                            'String'           => array('CONCAT')
+                            );
+
+            foreach($structures as $atom => $links) {
+                $linksList = "'".implode("', '", $links)."'";
+
+                $query = <<<GREMLIN
+g.V().hasLabel("$atom").where( __.out($linksList).not(has("constant", true)).count().is(eq(0)) )
+    .sideEffect{ it.get().property("constant", true);}
+GREMLIN;
+                $this->gremlin->query($query);
+            }
+
+            $query = <<<GREMLIN
+g.V().hasLabel("Functioncall")
+     .where( __.in("METHOD").count().is(eq(0)))
+     .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
+     .has('token', within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_OPEN_BRACKET'))
+     .has('fullnspath') // Skip old names that can be methods since PHP 7.0
+     .filter{ it.get().value("fullnspath") in arg1}
+     .where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant")).count().is(eq(0)) )
+    .sideEffect{ it.get().property("constant", true);}
+GREMLIN;
+            $this->gremlin->query($query, array('arg1' => $deterministFunctions));
+        }
+        display('Mark constants expressions');
+        $this->logTime('Constant expressions');
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Variable").has("code", "\\\$GLOBALS").in("VARIABLE").hasLabel("Array").as("var")
+     .out("INDEX").hasLabel("String").where( __.out("CONCAT").count().is(eq(0)))
+     .sideEffect{ varname = '\$' + it.get().value('noDelimiter');
+                  it.get().property("globalvar", varname);}
+
+
+GREMLIN;
+        $this->gremlin->query($query);
+        display('Mark constants expressions');
+    }
+
+    private function init() {
+        // fallback for PHP and ext, class, function, constant
+        // update fullnspath with fallback for functions
+        $pathDocs = $this->config->dir_root.'/data/analyzers.sqlite';
+        $docs = new Docs($pathDocs);
+
+        $exts = $docs->listAllAnalyzer('Extensions');
+        $exts[] = 'php_constants';
+
+        foreach($exts as $ext) {
+            $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
+            $fullpath = $this->config->dir_root.'/data/'.$inifile;
+
+            $iniFile = parse_ini_file($fullpath);
+
+            if (!empty($iniFile['constants'][0])) {
+                $this->PHPconstants[] = $iniFile['constants'];
+            }
+
+            if (!empty($iniFile['functions'][0])) {
+                $this->PHPfunctions[] = $iniFile['functions'];
+            }
+        }
+    }
 }
 
 ?>

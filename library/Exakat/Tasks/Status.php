@@ -30,7 +30,7 @@ use Exakat\Reports\Reports;
 
 class Status extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     public function run() {
         $project = $this->config->project;
 
@@ -46,10 +46,10 @@ class Status extends Tasks {
                     $projectStatus = '';
                     $projectStep = '';
                 }
-                
+
                 $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
                 $inGraph = isset($res->results[0]) ? $res->results[0] : '<None>';
-                
+
                 $status = array('Running'  => 'Project',
                                 'project'  => $projectStatus,
                                 'in graph' => $inGraph,
@@ -62,13 +62,13 @@ class Status extends Tasks {
                     $status['Project'] = $res->results[0];
                 }
             }
-            
+
             $this->display($status, $this->config->json);
             return;
         }
 
         $path = $this->config->projects_root.'/projects/'.$project;
-        
+
         if (!file_exists($path.'/')) {
             throw new NoSuchProject($project);
         }
@@ -93,7 +93,7 @@ class Status extends Tasks {
                     $status['git url'] = $this->config->project_url;
                     $status['git status'] = trim(shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD'));
                 }
-                
+
                 if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/')) {
                     $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git remote update; git status -uno | grep \'up-to-date\'');
                     $status['updatable'] = empty($res);
@@ -109,7 +109,7 @@ class Status extends Tasks {
                 } else {
                     $status['hash'] = 'Can\'t read hash';
                 }
-                
+
                 $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'; git remote update; git status -uno | grep \'Nothing to install or update\'');
                 $status['updatable'] = empty($res);
                 break 1;
@@ -125,18 +125,15 @@ class Status extends Tasks {
                 $status['updatable'] = 'N/A';
                 break 1;
         }
-        
-        
 
         // Check the logs
         $errors = $this->getErrors($path);
         if (!empty($errors)) {
             $status['errors'] = $errors;
         }
-        
 
         // Status of progress
-        // errors? 
+        // errors?
 
         $formats = array();
         foreach(Reports::$FORMATS as $format) {
@@ -147,17 +144,17 @@ class Status extends Tasks {
         }
         // Always have formats, even if empty
         $status['formats'] = $formats;
-        
+
         $this->display($status, $this->config->json);
     }
-    
+
     private function display($status, $json = false) {
         // Json publication
         if ($json === true) {
             print json_encode($status);
             return;
-        } 
-        
+        }
+
         // commandline publication
         $text = '';
         $size = 0;
@@ -178,13 +175,13 @@ class Status extends Tasks {
                 }
                 $text .= "\n".$sub."\n";
             } else {
-                $text .= substr($field.str_repeat(' ', $size), 0, $size) . ' : '.$value."\n";
+                $text .= substr($field.str_repeat(' ', $size), 0, $size).' : '.$value."\n";
             }
         }
-        
+
         print $text;
     }
-    
+
     private function getErrors($path) {
         $errors = array();
 
@@ -194,14 +191,14 @@ class Status extends Tasks {
             $errors['init error'] = $e;
             return $errors;
         }
-        
+
         // Size error
         $e = $this->datastore->getHash('token error');
         if (!empty($e)) {
             $errors['init error'] = $e;
             return $errors;
         }
-        
+
         return $errors;
     }
 }

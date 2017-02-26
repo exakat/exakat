@@ -27,9 +27,9 @@ use Exakat\Config;
 
 class EmptyTask extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     public function run() {
-        
+
     }
 }
 

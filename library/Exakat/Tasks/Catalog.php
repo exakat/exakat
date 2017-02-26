@@ -29,7 +29,7 @@ use Exakat\Analyzer\Docs;
 
 class Catalog extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     public function run() {
         $data = array();
 
@@ -40,7 +40,7 @@ class Catalog extends Tasks {
         sort($themas);
         $themas = array_map( function ($x) { if (strpos($x, ' ') !== false) { $x = '"'.$x.'"'; } return $x;}, $themas);
         $data['analysis'] = $themas;
-        
+
         // List of reports
         $reports = Reports::$FORMATS;
         sort($reports);
@@ -52,7 +52,7 @@ class Catalog extends Tasks {
             return $data;
         } else {
             $display = '';
-            
+
             foreach($data as $theme => $list) {
                 $display .= count($list)." $theme : \n";
                 $display .= "   ".implode("\n   ", $list)."\n";

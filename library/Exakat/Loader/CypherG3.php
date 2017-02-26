@@ -34,7 +34,7 @@ use Exakat\Tasks\Tasks;
 
 class CypherG3 {
     const CSV_SEPARATOR = ',';
-    
+
     private $node = null;
     private static $nodes = array();
     private static $file_saved = 0;
@@ -46,7 +46,7 @@ class CypherG3 {
     private static $cols = array();
     private static $count = -1; // id must start at 0 in batch-import
     private $id = 0;
-    
+
     private static $fp_rels       = null;
     private static $fp_nodes      = null;
     private static $fp_nodes_attr = array();
@@ -54,14 +54,14 @@ class CypherG3 {
     private static $tokenCounts   = array();
 
     private $config = null;
-    
+
     private $isLink = false;
-    
+
     private $cypher = null;
-    
+
     public function __construct() {
         $this->config = Config::factory();
-        
+
         // Force autoload
         $this->cypher = new Cypher($this->config );
 
@@ -69,11 +69,11 @@ class CypherG3 {
             $this->unlink = glob($this->config->projects_root.'/projects/.exakat/*.csv');
             $this->cleanCsv();
         }
-        
+
         $node = array('inited' => true);
         $this->node = &$node;
     }
-    
+
     private function cleandDb() {
         display("Cleaning DB in cypher3\n");
         $clean = new CleanDb(new Gremlin3($this->config), $this->config, Tasks::IS_SUBTASK);
@@ -82,9 +82,9 @@ class CypherG3 {
 
     public function finalize() {
         self::saveTokenCounts();
-        
+
         display('loading nodes');
-        
+
         // Load Nodes
         $files = glob($this->config->projects_root.'/projects/.exakat/nodes.g3.*.csv');
         foreach($files as $file) {
@@ -95,18 +95,18 @@ class CypherG3 {
             $this->cypher->query($queryTemplate);
 
             $b = microtime(true);
-            
+
             $extra = array();
             foreach(Load::$PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
                     if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'))) {
-                    // Raw string
+                        // Raw string
                         $extra[] = "$title: csvLine.$title";
                     } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'))) {
-                    // Boolean
+                        // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
                     } elseif (in_array($title, array('count', 'intval', 'args_max', 'args_min'))) {
-                    // Integer
+                        // Integer
                         $extra[] = "$title: toInt(csvLine.$title)";
                     } else {
                         throw new LoadError('Unexpected option in '.__CLASS__.' : "'.$title.'"');
@@ -115,9 +115,9 @@ class CypherG3 {
             }
             $extra = implode(', ', $extra);
             if(!empty($extra)) {
-                $extra = ','. $extra;
+                $extra = ','.$extra;
             }
-            
+
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 1000
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/projects/.exakat/nodes.g3.$atom.csv" AS csvLine
@@ -137,12 +137,12 @@ CYPHER;
                 $this->unlink[] = $file;
                 $e = microtime(true);
             } catch (\Exception $e) {
-                $this->cleanCsv(); 
+                $this->cleanCsv();
                 throw new LoadError("Couldn't load nodes in the database\n".$e->getMessage());
             }
         }
         display('Loaded nodes');
-        
+
         // Load relations
         $files = glob($this->config->projects_root.'/projects/.exakat/rels.g3.*.csv');
         foreach($files as $file) {
@@ -150,7 +150,7 @@ CYPHER;
             $edge = $r[1];
             $origin = $r[2];
             $destination = $r[3];
-            
+
             $b = microtime(true);
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 1000
@@ -164,7 +164,7 @@ CYPHER;
                 $this->unlink[] = $file;
                 $e = microtime(true);
             } catch (\Exception $e) {
-                $this->cleanCsv(); 
+                $this->cleanCsv();
                 throw new LoadError("Couldn't load '".$edge."'relations in the database\n".$e->getMessage());
             }
 
@@ -178,6 +178,7 @@ CYPHER;
     }
 
     private function cleanCsv() {
+        return;
         if (empty($this->unlink)) {
             return ;
         }
@@ -189,25 +190,25 @@ CYPHER;
     private static function saveTokenCounts() {
         $config = Config::factory();
         $datastore = new Datastore($config);
-        
+
         $datastore->addRow('tokenCounts', static::$tokenCounts);
     }
-    
+
     public function makeNode() {
         return new static();
     }
-    
+
     public function setProperty($name, $value) {
         if ($this->isLink) {
             static::$lastLink[$name] = $value;
         } else {
-            if (!isset(static::$cols[$name])) { 
-                static::$cols[$name] = true; 
+            if (!isset(static::$cols[$name])) {
+                static::$cols[$name] = true;
             }
 
             $this->node[$name] = $value;
         }
-        
+
         return $this;
     }
 
@@ -226,7 +227,7 @@ CYPHER;
             return $this->node[$name];
         }
     }
-    
+
     public function save() {
         if (empty($this->id)) {
             ++static::$count;
@@ -235,19 +236,19 @@ CYPHER;
         } else {
             static::$nodes[$this->id] = &$this->node;
         }
-        
+
         $this->isLink = false;
-        
+
         return $this;
     }
 
     public function relateTo($destination, $label) {
-        static::$links[$label][] = array('origin' => $this->id, 
-                                         'destination' => $destination->id, 
+        static::$links[$label][] = array('origin' => $this->id,
+                                         'destination' => $destination->id,
                                          'label' => $label
                                  );
-        
-        if (isset($this->node['index'])) { 
+
+        if (isset($this->node['index'])) {
             static::$indexedId[$this->id] = 1;
         }
 
@@ -265,7 +266,7 @@ CYPHER;
     private function escapeCsv($string) {
         return str_replace(array('\\', '"'), array('\\\\', '\\"'), $string);
     }
-    
+
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
         static $extras = array();
 
@@ -310,17 +311,9 @@ CYPHER;
             } else {
                 $extra = '';
             }
-            
-            $written = fwrite($fp, 
-                              $atom['id'].','.
-                              $atom['atom'].',"'.
-                              $this->escapeCsv( $atom['code'] ).'","'.
-                              $this->escapeCsv( $atom['fullcode']).'",'.
-                              (isset($atom['line']) ? $atom['line'] : 0).',"'.
-                              $this->escapeCsv( isset($atom['token']) ? $atom['token'] : '') .'","'.
-                              (isset($atom['rank']) ? $atom['rank'] : -1).'"'.
-                              $extra.
-                              "\n");
+
+            $written = fwrite($fp,
+                              $atom['id'].','.$atom['atom'].',"'.$this->escapeCsv( $atom['code'] ).'","'.$this->escapeCsv( $atom['fullcode']).'",'.(isset($atom['line']) ? $atom['line'] : 0).',"'.$this->escapeCsv( isset($atom['token']) ? $atom['token'] : '').'","'.(isset($atom['rank']) ? $atom['rank'] : -1).'"'.$extra."\n");
 
             if ($written > 2000000) {
                 print "Warning : Writing a csv line over 2M in $fileName\n";
@@ -328,7 +321,7 @@ CYPHER;
 
             fclose($fp);
         }
-        
+
         // Saving the links between atoms
         foreach($links as $label => $origins) {
             foreach($origins as $origin => $destinations) {
@@ -344,11 +337,11 @@ CYPHER;
                         fputcsv($fp, array('start', 'end'));
                         $extras[$csv] = 1;
                     }
-    
+
                     foreach($links as $link) {
                         fputcsv($fp, array($link['origin'], $link['destination']), ',', '"', '\\');
                     }
-                    
+
                     fclose($fp);
                 }
             }

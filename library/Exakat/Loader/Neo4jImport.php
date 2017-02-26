@@ -34,7 +34,7 @@ use Exception;
 
 class Neo4jImport {
     const CSV_SEPARATOR = ',';
-    
+
     private $node = null;
     private static $nodes = array();
     private static $file_saved = 0;
@@ -46,7 +46,7 @@ class Neo4jImport {
     private static $cols = array();
     private static $count = -1; // id must start at 0 in batch-import
     private $id = 0;
-    
+
     private static $fp_rels       = null;
     private static $fp_nodes      = null;
     private static $fp_nodes_attr = array();
@@ -54,25 +54,25 @@ class Neo4jImport {
     private static $tokenCounts   = array();
 
     private $config = null;
-    
+
     private $isLink = false;
-    
+
     private $cypher = null;
-    
+
     public function __construct() {
         $this->config = Config::factory();
-        
+
         if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.g3.csv') && static::$file_saved == 0) {
             $this->cleanCsv();
         }
-        
+
         $node = array('inited' => true);
         $this->node = &$node;
     }
 
     public function finalize() {
         self::saveTokenCounts();
-        
+
         $shell = <<<SHELL
 cd {$this->config->neo4j_folder};
 ./bin/neo4j stop 2>&1 >/dev/null;
@@ -95,7 +95,7 @@ SHELL;
         }
 
         display('Loaded links');
-        
+
         $cypher = new Cypher($this->config );
 
         $check = $cypher->query('start n=node(*) match n return count(n)');
@@ -108,7 +108,7 @@ SHELL;
             $queryTemplate = 'CREATE INDEX ON :'.trim($indice).'(id)';
             $cypher->query($queryTemplate);
         }
-        
+
         unset($cypher);
 
         $gremlin = new Gremlin3($this->config);
@@ -134,7 +134,7 @@ g.V().has("$property").sideEffect{
 GREMLIN;
             $gremlin->query($query);
         }
-        
+
         $this->cleanCsv();
         display('Cleaning CSV');
 
@@ -150,25 +150,25 @@ GREMLIN;
     private static function saveTokenCounts() {
         $config = Config::factory();
         $datastore = new Datastore($config);
-        
+
         $datastore->addRow('tokenCounts', static::$tokenCounts);
     }
-    
+
     public function makeNode() {
         return new static();
     }
-    
+
     public function setProperty($name, $value) {
         if ($this->isLink) {
             static::$lastLink[$name] = $value;
         } else {
-            if (!isset(static::$cols[$name])) { 
-                static::$cols[$name] = true; 
+            if (!isset(static::$cols[$name])) {
+                static::$cols[$name] = true;
             }
 
             $this->node[$name] = $value;
         }
-        
+
         return $this;
     }
 
@@ -187,7 +187,7 @@ GREMLIN;
             return $this->node[$name];
         }
     }
-    
+
     public function save() {
         if (empty($this->id)) {
             ++static::$count;
@@ -196,19 +196,19 @@ GREMLIN;
         } else {
             static::$nodes[$this->id] = &$this->node;
         }
-        
+
         $this->isLink = false;
-        
+
         return $this;
     }
 
     public function relateTo($destination, $label) {
-        static::$links[$label][] = array('origin' => $this->id, 
-                                         'destination' => $destination->id, 
+        static::$links[$label][] = array('origin' => $this->id,
+                                         'destination' => $destination->id,
                                          'label' => $label
                                  );
-        
-        if (isset($this->node['index'])) { 
+
+        if (isset($this->node['index'])) {
             static::$indexedId[$this->id] = 1;
         }
 
@@ -226,37 +226,37 @@ GREMLIN;
     private function escapeCsv($string) {
         return str_replace(array('\\', '"'), array('\\\\', '\\"'), $string);
     }
-    
+
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
-        static $extras = array(':ID'         => '', 
-                               ':LABEL'      => '', 
-                               'code'        => '', 
-                               'fullcode'    => '', 
+        static $extras = array(':ID'         => '',
+                               ':LABEL'      => '',
+                               'code'        => '',
+                               'fullcode'    => '',
                                'line'        => 'int',
-                               'token'       => '', 
-                               'rank'        => 'int', 
-                               'alternative' => 'int', 
+                               'token'       => '',
+                               'rank'        => 'int',
+                               'alternative' => 'int',
                                'reference'   => 'int',
-                               'heredoc'     => 'int', 
-                               'delimiter'   => '', 
-                               'noDelimiter' => '', 
-                               'variadic'    => 'int', 
-                               'count'       => 'int', 
-                               'fullnspath'  => '', 
-                               'absolute'    => 'int', 
-                               'alias'       => '', 
-                               'origin'      => '', 
-                               'encoding'    => '', 
-                               'intval'      => 'long', 
-                               'strval'      => '', 
+                               'heredoc'     => 'int',
+                               'delimiter'   => '',
+                               'noDelimiter' => '',
+                               'variadic'    => 'int',
+                               'count'       => 'int',
+                               'fullnspath'  => '',
+                               'absolute'    => 'int',
+                               'alias'       => '',
+                               'origin'      => '',
+                               'encoding'    => '',
+                               'intval'      => 'long',
+                               'strval'      => '',
                                'enclosing'   => 'int',
-                               'args_max'    => 'int', 
-                               'args_min'    => 'int', 
-                               'bracket'     => 'int', 
+                               'args_max'    => 'int',
+                               'args_min'    => 'int',
+                               'bracket'     => 'int',
                                'close_tag'   => 'int',
                                'aliased'     => 'int',
                                'boolean'     => 'int');
-        
+
         $fileName = $exakatDir.'/nodes.g3.csv';
         if (file_exists($fileName)) {
             $fp = fopen($fileName, 'a');
@@ -290,7 +290,7 @@ GREMLIN;
 
             $indexList[$atom['atom']] = 1;
             $ids[$id] = 1;
-            
+
             foreach($extras as $name => $type) {
                 if ($name == ':ID') {
                     $name = 'id';
@@ -300,7 +300,7 @@ GREMLIN;
                     if (isset($atom['reference'])) {
                         $atom['reference'] = $atom['reference'] == true ? 1 : -1;
                     }
-                } 
+                }
 
                 if (!isset($atom[$name])) {
                     $extra[] = '';
@@ -310,18 +310,18 @@ GREMLIN;
                     $extra[] = 0;
                     continue;
                 }
-                
+
                 $extra[] = $this->escapeCsv($atom[$name]);
             }
             $written = fputcsv($fp, $extra);
         }
         fclose($fp);
-        
+
         $fileName = $exakatDir.'/index.g3.csv';
         $fp = fopen($fileName, 'w+');
         fwrite($fp, implode("\n", array_keys($indexList)));
         fclose($fp);
-        
+
         $fileName = $exakatDir.'/rels.g3.csv';
         if (file_exists($fileName)) {
             $fp = fopen($fileName, 'a');
@@ -348,13 +348,13 @@ GREMLIN;
 
         $d = array_diff(array_keys($starts), array_keys($ids));
         if (!empty($d)) {
-//            print "Starts \n";
-//            print_r($d);
+            //            print "Starts \n";
+            //            print_r($d);
         }
         $d = array_diff(array_keys($ends), array_keys($ids));
         if (!empty($d)) {
-//            print "Ends \n";
-//            print_r($d);
+            //            print "Ends \n";
+            //            print_r($d);
         }
     }
 

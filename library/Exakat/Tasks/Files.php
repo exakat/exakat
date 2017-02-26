@@ -54,20 +54,20 @@ class Files extends Tasks {
         } elseif (!file_exists($this->config->projects_root.'/projects/'.$dir.'/code/')) {
             throw new NoCodeInProject($this->config->project);
         }
-        
+
         $this->checkComposer($dir);
 
         $ignoredFiles = array();
         $files = array();
         self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles);
-        
+
         if (empty($files)) {
             throw new NoFileToProcess($this->config->project);
         }
-        
+
         $i = array();
         foreach($ignoredFiles as $file => $reason) {
-            $i[] = array('file'   => $file, 
+            $i[] = array('file'   => $file,
                          'reason' => $reason);
         }
         $ignoredFiles = $i;
@@ -83,18 +83,18 @@ class Files extends Tasks {
         $id = array_search($analyzingVersion, $versions);
         unset($versions[$id]);
         $versions[] = $analyzingVersion;
-        
+
         foreach($versions as $version) {
             $toRemoveFromFiles = array();
             display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
-            
+
             $shell = 'cat '.$tmpFileName.' | xargs grep --files-with-matches \'<\\?\' | xargs -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
             $incompilables = array();
-    
+
             foreach($resFiles as $resFile) {
                 if (substr($resFile, 0, 28) == 'No syntax errors detected in') {
                     continue;
@@ -125,7 +125,7 @@ class Files extends Tasks {
                 } elseif (substr($resFile, 0, 13) == 'Fatal error: ') {
                     if (preg_match('#Fatal error: (.+?) in (/.+?) on line (\d+)#', $resFile, $r)) {
                         $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
-                    } 
+                    }
                     // else ignore Fatal error we can't understand
                 } elseif (substr($resFile, 0, 18) == 'PHP Fatal error:  ') {
                     // Actually, a repeat of the previous. We just ignore it.
@@ -188,22 +188,22 @@ class Files extends Tasks {
                     }
                 }
             }
-    
+
             $this->datastore->cleanTable('compilation'.$version);
             $this->datastore->addRow('compilation'.$version, $incompilables);
             $stats['notCompilable'.$version] = count($incompilables);
         }
-        
+
         $files = array_diff($files, array_keys($toRemoveFromFiles));
         unset($toRemoveFromFiles);
-        
+
         $this->datastore->cleanTable('files');
         $this->datastore->addRow('files', array_map(function ($a) {
                 return array('file'   => $a);
-            }, $files));
+        }, $files));
         $this->datastore->reload();
         file_put_contents($tmpFileName, '"'.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"{$this->config->projects_root}/projects/$dir/code", $files).'"');
-        
+
         display('Check short tag (normal pass)');
         $stats['php'] = count($files);
         $shell = 'cat '.$tmpFileName.' | xargs -n1 -P5 '.$this->config->php.' -d short_open_tag=0 -d error_reporting=0 -r "echo count(token_get_all(file_get_contents(\$argv[1]))).\" \$argv[1]\n\";" 2>>/dev/null || true';
@@ -237,7 +237,7 @@ class Files extends Tasks {
             }
             $sot = $sot2;
             unset($sot2);
-    
+
             if (count($nosot) != count($sot)) {
                 $this->log->log('Error in short open tag analyze : not the same number of files '.count($nosot).' / '.count($sot).".\n");
                 display('Short tag KO');
@@ -254,12 +254,12 @@ class Files extends Tasks {
         }
 
         $this->datastore->addRow('hash', $stats);
-        
+
         // check for special files
         display('Check config files');
         $files = glob($this->config->projects_root.'/projects/'.$dir.'/code/{,.}*', GLOB_BRACE);
         $files = array_map('basename', $files);
-        
+
         $services = json_decode(file_get_contents($this->config->dir_root.'/data/serviceConfig.json'));
 
         $configFiles = array();
@@ -276,7 +276,7 @@ class Files extends Tasks {
         // Composer is check previously
 
         display('Done');
-        
+
         if ($this->config->json) {
             if ($unknown) {
                 $stats['unknown'] = $unknown;
@@ -291,30 +291,30 @@ class Files extends Tasks {
         $this->datastore->addRow('hash', array('status' => 'Initproject'));
         $this->checkTokenLimit();
     }
-    
+
     private function checkComposer($dir) {
         // composer.json
         display('Check composer');
         $composerInfo = array();
         if ($composerInfo['composer.json'] = file_exists($this->config->projects_root.'/projects/'.$dir.'/code/composer.json')) {
             $composerInfo['composer.lock'] = file_exists($this->config->projects_root.'/projects/'.$dir.'/code/composer.lock');
-            
+
             $composer = json_decode(file_get_contents($this->config->projects_root.'/projects/'.$dir.'/code/composer.json'));
-            
+
             if (isset($composer->autoload)) {
                 $composerInfo['autoload'] = isset($composer->autoload->{'psr-0'}) ? 'psr-0' : 'psr-4';
             } else {
                 $composerInfo['autoload'] = false;
             }
-            
+
             if (isset($composer->require)) {
                 $this->datastore->addRow('composer', (array) $composer->require);
             }
         }
         $this->datastore->addRow('hash', $composerInfo);
     }
-    
-    static public function findFiles($path, &$files, &$ignoredFiles) {
+
+    public static function findFiles($path, &$files, &$ignoredFiles) {
         $config = Config::factory();
         $ignore_dirs = $config->ignore_dirs;
         $dir = $config->project;
@@ -323,13 +323,13 @@ class Files extends Tasks {
         $ignoreDirs = array();
         foreach($ignore_dirs as $ignore) {
             if ($ignore[0] == '/') {
-                $d = $config->projects_root . '/projects/' . $dir . '/code' . $ignore;
+                $d = $config->projects_root.'/projects/'.$dir.'/code'.$ignore;
                 if (!file_exists($d)) {
                     continue;
                 }
-                $ignoreDirs[] = $ignore . '.*';
+                $ignoreDirs[] = $ignore.'.*';
             } else {
-                $ignoreDirs[] = '.*' . $ignore . '.*';
+                $ignoreDirs[] = '.*'.$ignore.'.*';
             }
         }
         if (empty($ignoreDirs)) {
@@ -343,13 +343,13 @@ class Files extends Tasks {
         foreach($config->include_dirs as $include) {
             if ($include === '/') { continue; }
             if ($include[0] == '/') {
-                $d = $config->projects_root . '/projects/' . $dir . '/code' . $include;
+                $d = $config->projects_root.'/projects/'.$dir.'/code'.$include;
                 if (!file_exists($d)) {
                     continue;
                 }
-                $includeDirs[] = $include . '.*';
+                $includeDirs[] = $include.'.*';
             } else {
-                $includeDirs[] = '.*' . $include . '.*';
+                $includeDirs[] = '.*'.$include.'.*';
             }
         }
         if (empty($includeDirs)) {
@@ -357,13 +357,13 @@ class Files extends Tasks {
         } else {
             $includeDirsRegex = '#^('.implode('|', $includeDirs).')#';
         }
-        
+
         $php = new Phpexec();
         $ignoredFiles = array();
 
         $d = getcwd();
         if (!file_exists($path)) {
-            display( "No such file as " . $path . " when looking for files\n");
+            display( "No such file as ".$path." when looking for files\n");
             $files = array();
             $ignoredFiles = array();
             return ;
@@ -387,7 +387,7 @@ class Files extends Tasks {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
                 $ignoredFiles[$file] = 'Ignored dir';
-            } elseif ($php->countTokenFromFile($path . $file) < 2) {
+            } elseif ($php->countTokenFromFile($path.$file) < 2) {
                 unset($files[$id]);
                 $ignoredFiles[$file] = 'Not a PHP File';
             }
