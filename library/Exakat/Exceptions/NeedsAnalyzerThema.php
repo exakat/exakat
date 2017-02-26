@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class NeedsAnalyzerThema extends \RuntimeException {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
-        
+
         parent::__construct( "One of the options -P <One/rule>|-T <\"Thema\"> is required. None provided.\n", $code, $previous);
     }
 }

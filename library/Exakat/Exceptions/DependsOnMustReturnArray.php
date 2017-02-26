@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class DependsOnMustReturnArray extends \RuntimeException {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
-        
+
         parent::__construct("Method 'dependsOn' of \Exakat\Analyzer\Analyzer's subclasses must return an array. Check $message.\n", $code, $previous);
     }
 }

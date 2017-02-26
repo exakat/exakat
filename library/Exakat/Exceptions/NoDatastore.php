@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class NoDatastore extends \Exception {
     public function __construct($project = '', $code = 0, \Exception $previous = null) {
-        
+
         parent::__construct("No datastore was found for project '$project'.\nRun php exakat.phar clean -p $project first\n", $code, $previous);
     }
 }

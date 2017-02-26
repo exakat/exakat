@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class GremlinException extends \Exception {
     public function __construct($message = '', $query = '', \Exception $previous = null) {
-        
+
         parent::__construct("Error during Gremlin query : '$message'.\nQuery : $query\n", 1, $previous);
     }
 }
