@@ -11,7 +11,9 @@ Here are some suggestions of help you may provide to enhance your own usage of E
 * Suggest new analysis, with examples of target code, and examples of good code
 * Suggest missing external services
 * Report installation or usage problems
+* Suggest missing :ref:`Strange Names For Methods <strange-names-for-methods>`
 * Suggest interesting Coding reference, like Object Calisthenics, PSR, East-Oriented Programming, etc.
+* Translate the documentation into other languages
 * Other ideas...
 
 
