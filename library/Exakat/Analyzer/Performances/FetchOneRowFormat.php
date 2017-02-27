@@ -29,7 +29,7 @@ class FetchOneRowFormat extends Analyzer {
         // $res->fetchRow() : Default is slow
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->atomIs('T_STRING')
+             ->tokenIs('T_STRING')
              ->codeIs('fetchRow')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
@@ -40,7 +40,7 @@ class FetchOneRowFormat extends Analyzer {
         // $res->fetchRow(SQLITE3_BOTH) : SQLITE3_BOTH is the worst. 
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
-             ->atomIs('T_STRING')
+             ->tokenIs('T_STRING')
              ->codeIs('fetchRow')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
