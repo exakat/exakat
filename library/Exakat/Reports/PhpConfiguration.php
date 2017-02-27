@@ -40,30 +40,30 @@ class PhpConfiguration extends Reports {
         }
 
         $shouldDisableFunctions = json_decode(file_get_contents($this->config->dir_root.'/data/shouldDisableFunction.json'));
-        $functionsList = array();
-        $classesList = array();
+        $functionsArray = array();
+        $classesArray = array();
         foreach((array) $shouldDisableFunctions as $ext => $toDisable) {
             if ($sources[$ext] == 0) {
                 if (isset($toDisable->functions)) {
-                    $functionsList[] = $toDisable->functions;
+                    $functionsArray[] = $toDisable->functions;
                 }
                 if (isset($toDisable->classes)) {
-                    $classesList[] = $toDisable->classes;
+                    $classesArray[] = $toDisable->classes;
                 }
             }
         }
 
-        if (empty($functionsList)) {
+        if (empty($functionsArray)) {
             $functionsList = '';
         } else {
-            $functionsList = call_user_func_array('array_merge', $functionsList);
-            $functionsList = join(',', $functionsList);
+            $functionsList = call_user_func_array('array_merge', $functionsArray);
+            $functionsList = join(',', $functionsArray);
         }
-        if (empty($classesList)) {
+        if (empty($classesArray)) {
             $classesList = '';
         } else {
-            $classesList = call_user_func_array('array_merge', $classesList);
-            $classesList = join(',', $classesList);
+            $classesList = call_user_func_array('array_merge', $classesArray);
+            $classesList = join(',', $classesArray);
         }
 
         // preparing the list of PHP directives to review before using this application
