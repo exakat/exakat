@@ -1,0 +1,76 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Boolean.06.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          null
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                __METHOD__
+          Label : NAME
+            null
+        Label : ELEMENT
+          true
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                __METHOD__
+          Label : NAME
+            true
+        Label : ELEMENT
+          false
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              return
+              Label : RETURN
+                __METHOD__
+          Label : NAME
+            false
+        Label : ELEMENT
+          null
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            null
+        Label : ELEMENT
+          true
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            true
+        Label : ELEMENT
+          false
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              Void
+          Label : NAME
+            false
