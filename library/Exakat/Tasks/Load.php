@@ -567,13 +567,20 @@ class Load extends Tasks {
     private function reset() {
         $this->atoms = array($this->id0 => $this->atoms[$this->id0]);
         $this->links = array();
-        $this->calls = array();
+        foreach($this->calls as $type => $names) {
+            foreach($names as $name => $calls) {
+                if (!empty($calls['definitions'])) {
+                    $this->calls[$type][$name]['calls'] = array();
+                }
+            }
+        }
+
         $this->uses  = array('function' => array(),
                              'const'    => array(),
-                             'class'    => array());;
+                             'class'    => array());
         $this->usesId = array('function' => array(),
                               'const'    => array(),
-                              'class'    => array());;
+                              'class'    => array());
         $this->contexts = $contexts = array(self::CONTEXT_CLASS      => false,
                                             self::CONTEXT_INTERFACE  => false,
                                             self::CONTEXT_TRAIT      => false,
@@ -3699,9 +3706,6 @@ class Load extends Tasks {
         }
 
         $this->addLink($staticId, $leftId, 'CLASS');
-        if (isset($this->atoms[$leftId]['fullnspath'])) {
-            $this->addCall('class', $this->atoms[$leftId]['fullnspath'], $leftId);
-        }
         $this->addLink($staticId, $right, $links);
 
         $x = array('code'     => $this->tokens[$current][1],
