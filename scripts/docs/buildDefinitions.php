@@ -90,7 +90,19 @@ foreach($raw as $line) {
     preg_match_all('/(`.*?>`_)/s', $line, $r);
     $urls[] = $r[1];
 }
+
 $urls = array_merge(...$urls);
+
+$files = glob('./human/en/*/*.ini');
+foreach($files as $file) {
+    $ini = parse_ini_file($file);
+
+    if (preg_match('/(`[^`]*?>`_)/s', $ini['description'], $r)) {
+        $urls[] = $r[1];
+    }
+}
+
+$urls = array_keys(array_count_values($urls));
 uasort($urls, function($a, $b) { return strtolower($a) <=> strtolower($b); });
 
 $url_list = "* ".join("\n* ", $urls)."\n";
