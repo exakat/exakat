@@ -459,17 +459,15 @@ Report formats
 +-------------+-----------------------------------------------------------------------------+
 | Report      | Description                                                                 |
 +-------------+-----------------------------------------------------------------------------+
-| Devoops     | HTML format, with all available reports in one compact format.              |
+| Amabassador | HTML format, with all available reports in one compact format.              |
 +-------------+-----------------------------------------------------------------------------+
-| Faceted     | HTML format, with faceted filters                                           |
-+-------------+-----------------------------------------------------------------------------+
-| FacetedJson | JSON format, used by Faceted.                                               |
+| Devoops     | HTML format, deprecated.                                                    |
 +-------------+-----------------------------------------------------------------------------+
 | Json        | JSON format.                                                                |
 +-------------+-----------------------------------------------------------------------------+
 | Text        | Text format. One issue per line, with description, file, line.              |
 +-------------+-----------------------------------------------------------------------------+
-| Text        | Text format. One issue per line, with description, file, line.              |
+| Codesniffer | Text format, similar to Codesniffer report style.                           |
 +-------------+-----------------------------------------------------------------------------+
 | Uml         | Dot format. All classes/interfaces/traits hierarchies, and grouped by name- |
 |             | spaces.                                                                     |

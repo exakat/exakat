@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Fri, 24 Feb 2017 10:46:42 +0000
-.. comment: Generation hash : 28db0973f4650777bbaa4a9d9d7eadecfd1f7921
+.. comment: Generation date : Mon, 27 Feb 2017 16:21:29 +0000
+.. comment: Generation hash : fabc58f81b8c3c9719f673b4641ad295d7a7c2ae
 
 
 .. _analyze:
@@ -69,7 +69,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 289 analysis
+Total : 292 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -236,6 +236,7 @@ Total : 289 analysis
 * :ref:`Print And Die <print-and-die>`
 * :ref:`Property Could Be Private <property-could-be-private>`
 * :ref:`Property Used Below <property-used-below>`
+* :ref:`Property Used In One Method Only <property-used-in-one-method-only>`
 * :ref:`Property/Variable Confusion <property/variable-confusion>`
 * :ref:`Queries In Loops <queries-in-loops>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
@@ -320,6 +321,7 @@ Total : 289 analysis
 * :ref:`Use With Fully Qualified Name <use-with-fully-qualified-name>`
 * :ref:`Use const <use-const>`
 * :ref:`Use random_int() <use-random\_int()>`
+* :ref:`Used Once Property <used-once-property>`
 * :ref:`Used Once Variables (In Scope) <used-once-variables-(in-scope)>`
 * :ref:`Used Once Variables <used-once-variables>`
 * :ref:`Useless Abstract Class <useless-abstract-class>`
@@ -343,6 +345,8 @@ Total : 289 analysis
 * :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
 * :ref:`Wrong Optional Parameter <wrong-optional-parameter>`
 * :ref:`Wrong Parameter Type <wrong-parameter-type>`
+* :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
+* :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 * :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 * :ref:`crypt() Without Salt <crypt()-without-salt>`
 * :ref:`error_reporting() With Integers <error\_reporting()-with-integers>`
@@ -352,7 +356,6 @@ Total : 289 analysis
 * :ref:`ext/fdf`
 * :ref:`ext/mysql`
 * :ref:`ext/sqlite`
-* :ref:`fopen() Mode <fopen()-mode>`
 * :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 * :ref:`include_once() Usage <include\_once()-usage>`
 * :ref:`list() May Omit Variables <list()-may-omit-variables>`
@@ -767,7 +770,7 @@ Total : 25 analysis
 * :ref:`Getting Last Element <getting-last-element>`
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
-* :ref:`Make One Call <make-one-call>`
+* :ref:`Make One Call With Array <make-one-call-with-array>`
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`

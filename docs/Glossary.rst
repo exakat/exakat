@@ -271,7 +271,7 @@ Glossary
 
     + `fopen()`
 
-      + :ref:`fopen() Mode <fopen()-mode>`
+      + :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 
     + `for()`
 
@@ -471,7 +471,18 @@ Glossary
 
     + `preg_replace()`
 
+      + :ref:`Make One Call With Array <make-one-call-with-array>`
       + :ref:`Slow Functions <slow-functions>`
+      + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+
+    + `preg_replace_callback()`
+
+      + :ref:`Make One Call With Array <make-one-call-with-array>`
+      + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+
+    + `preg_replace_callback_array()`
+
+      + :ref:`Make One Call With Array <make-one-call-with-array>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `print_r()`
@@ -512,6 +523,14 @@ Glossary
 
       + :ref:`Use random_int() <use-random\_int()>`
 
+    + `str_ireplace()`
+
+      + :ref:`Make One Call With Array <make-one-call-with-array>`
+
+    + `str_replace()`
+
+      + :ref:`Make One Call With Array <make-one-call-with-array>`
+
     + `stripos()`
 
       + :ref:`Simplify Regex <simplify-regex>`
@@ -525,6 +544,10 @@ Glossary
     + `strstr()`
 
       + :ref:`Slow Functions <slow-functions>`
+
+    + `substr_replace()`
+
+      + :ref:`Make One Call With Array <make-one-call-with-array>`
 
     + `switch()`
 
@@ -601,6 +624,7 @@ Glossary
 
       + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
+      + :ref:`__DIR__ Then Slash <\_\_dir\_\_-then-slash>`
 
     + `__FILE__`
 

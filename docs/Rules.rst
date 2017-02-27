@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Fri, 24 Feb 2017 10:46:42 +0000
-.. comment: Generation hash : 28db0973f4650777bbaa4a9d9d7eadecfd1f7921
+.. comment: Generation date : Mon, 27 Feb 2017 16:21:29 +0000
+.. comment: Generation hash : fabc58f81b8c3c9719f673b4641ad295d7a7c2ae
 
 
 .. _$http\_raw\_post\_data:
@@ -4954,37 +4954,54 @@ Setting the property in the constructor (or in a factory), makes the class easie
 
 
 
-.. _make-one-call:
+.. _make-one-call-with-array:
 
-Make One Call
-#############
+Make One Call With Array
+########################
 
 
-When preg_replace_callback() is called several times in a row on the same string, it is faster to merge all those using preg_replace_callback_array(), which takes several patterns and callbacks in the the same arguments.
+Call preg_replace_call() and `str_replace() <http://www.php.net/str_replace>`_ with an array.  once with `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_.
+
+Calling the same function to chain modifications tends to be slower than calling the same function with all the transformations at the same time. Some PHP functions accept scalars or arrays, and using the later is more efficient.
 
 .. code-block:: php
 
    <?php
-   $subject = 'Aaaaaa Bbb';
    
-   $result = preg_replace_callback_array('~[a]+~i', function ($match) {
-               echo strlen($match[0]), ' matches for a found', PHP_EOL;
-           }, $subject);
+   $string = 'abcdef'; 
    
-   $result = preg_replace_callback_array('~[b]+~i', function ($match) {
-               echo strlen($match[0]), ' matches for b found', PHP_EOL;
-           }, $subject);
+   //str_replace() accepts arrays as arguments
+   $string = str_replace( ['a', 'b', 'c'],
+                          ['A', 'B', 'C'],
+                          $string);
+   
+   // Too many calls to str_replace
+   $string = str_replace( 'a', 'A');
+   $string = str_replace( 'b', 'B');
+   $string = str_replace( 'c', 'C');
    
    ?>
 
 
-This may be rewritten as : 
+Potential replacements : 
+
++-------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Function                                                                | Replacement                                                                       |
++-------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| `str_replace() <http://www.php.net/str_replace>`_                       | `str_replace() <http://www.php.net/str_replace>`_                                 |
+| `str_ireplace() <http://www.php.net/str_ireplace>`_                     | `str_replace() <http://www.php.net/str_replace>`_                                 |
+| `substr_replace() <http://www.php.net/substr_replace>`_                 | `substr_replace() <http://www.php.net/substr_replace>`_                           |
+| `preg_replace() <http://www.php.net/preg_replace>`_                     | `preg_replace() <http://www.php.net/preg_replace>`_                               |
+| `preg_replace_callback() <http://www.php.net/preg_replace_callback>`_   | `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_ |
++-------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 .. code-block:: php
 
    <?php
    $subject = 'Aaaaaa Bbb';
    
+   
+   //preg_replace_callback_array() is better than multiple preg_replace_callback : 
    preg_replace_callback_array(
        [
            '~[a]+~i' => function ($match) {
@@ -4996,6 +5013,25 @@ This may be rewritten as :
        ],
        $subject
    );
+   
+   $result = preg_replace_callback('~[a]+~i', function ($match) {
+               echo strlen($match[0]), ' matches for a found', PHP_EOL;
+           }, $subject);
+   
+   $result = preg_replace_callback('~[b]+~i', function ($match) {
+               echo strlen($match[0]), ' matches for b found', PHP_EOL;
+           }, $subject);
+   
+   //str_replace() accepts arrays as arguments
+   $string = str_replace( ['a', 'b', 'c'],
+                          ['A', 'B', 'C'],
+                          $string);
+   
+   // Too many calls to str_replace
+   $string = str_replace( 'a', 'A');
+   $string = str_replace( 'b', 'B');
+   $string = str_replace( 'c', 'C');
+   
    ?>
 
 +--------------+--------------------------+
@@ -7890,6 +7926,64 @@ This doesn't mark the current class, nor the (grand-)parent ones.
 
 
 
+.. _property-used-in-one-method-only:
+
+Property Used In One Method Only
+################################
+
+
+Properties should be used in several methods. When a property is used in only one method, this should have be of another shape. 
+
+Properties used in one method only may be used several times, and read only. This may be a class constant. Such properties are meant to be overwritten by an extending class, and that's possible with class constants.
+
+Properties that read and written may be converted into a variable, static to the method. This way, they are kept close to the method, and do not pollute the object's properties.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       private $once = 1;
+       const ONCE = 1;
+       private $counter = 0;
+       
+       function bar() {
+           // $this->once is never used anywhere else. 
+           someFunction($this->once);
+           someFunction(self::ONCE);   // Make clear that it is a 
+       }
+   
+       function bar2() {
+           static $localCounter = 0;
+           $this->counter++;
+           
+           // $this->once is only used here, for distinguising calls to someFunction2
+           if ($this->counter > 10) { // $this->counter is used only in bar2, but it may be used several times
+               return false;
+           }
+           someFunction2($this->counter);
+   
+           // $localCounter keeps track for all the calls
+           if ($localCounter > 10) { 
+               return false;
+           }
+           someFunction2($localCounter);
+       }
+   }
+   
+   ?>
+
+
+Note : properties used only once are not returned by this analysis. They are omitted, and are available in the analysis `Used Once Property`_.
+
++--------------+-------------------------------------+
+| Command Line | Classes/PropertyUsedInOneMethodOnly |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`                      |
++--------------+-------------------------------------+
+
+
+
 .. _property/variable-confusion:
 
 Property/Variable Confusion
@@ -9260,9 +9354,6 @@ Those errors most often originate from typos, or quick fixes that 'don't require
    }
    
    ?>
-
-
-Send us your favorite typos on `Exakat.io <https://www.exakat.io/>`_.
 
 +--------------+---------------------+
 | Command Line | Classes/StrangeName |
@@ -10900,7 +10991,18 @@ Unused Use
 ##########
 
 
-List of use statement that are not used in the following code : they may be removed, as they clutter the code and slows PHP by forcing it to search in this list for nothing.
+Unused use statements. They may be removed, as they clutter the code and slows PHP by forcing it to search in this list for nothing.
+
+.. code-block:: php
+
+   <?php
+   
+   use A as B; // Used in a new call.
+   use Unused; // Never used. May be removed
+   
+   $a = new B();
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------+
 | Command Line | Namespaces/UnusedUse                                                                        |
@@ -11537,6 +11639,53 @@ when security is involved. openssl_random_pseudo_bytes() may be used when the Op
 +--------------+---------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
 +--------------+---------------------------------------------------------------------------------------+
+
+
+
+.. _used-once-property:
+
+Used Once Property
+##################
+
+
+Property used once in their defining class. 
+
+Properties used in one method only may be used several times, and read only. This may be a class constant. Such properties are meant to be overwritten by an extending class, and that's possible with class constants. 
+
+Setting properties with default values is a good way to avoid literring the code with literal values, and provide a single point of update (by extension, or by hardcoding) for all those situations. A constant is definitely better suited for this task.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       private $defaultCols = '*';
+       cont DEFAULT_COLUMNS = '*';
+   
+       // $this->defaultCols holds a default value. Should be a constant.
+       function bar($table, $cols) {
+           // This is necessary to activate usage of default values
+           if (empty($cols)) {
+               $cols = $this->defaultCols;
+           }
+           $res = $this->query('SELECT '.$cols.' FROM '.$table);
+           // ....
+       }
+   
+       // Upgraded version of bar, with default values
+       function bar2($table, $cols = self::DEFAULT_COLUMNS) {
+           $res = $this->query('SELECT '.$cols.' FROM '.$table);
+           // .....
+       }
+   }
+   
+   ?>
+
++--------------+--------------------------+
+| Command Line | Classes/UsedOnceProperty |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
 
 
 
@@ -12491,6 +12640,43 @@ The expected parameter is not of the correct type. Check PHP documentation to kn
 
 
 
+.. _wrong-fopen()-mode:
+
+Wrong fopen() Mode
+##################
+
+
+Wrong file opening for `fopen() <http://www.php.net/fopen>`_.
+
+`fopen() <http://www.php.net/fopen>`_ has a few modes, as described in the documentation : 'r', 'r+', for reading;  'w', 'w+' for writing; 'a', 'a+' for appending; 'x', 'x+' for modifying; 'c', 'c+' for writing and locking, 't' for text files and windows only.
+An optional 'b' may be used to make the `fopen() <http://www.php.net/fopen>`_ call more portable and binary safe. 
+
+.. code-block:: php
+
+   <?php
+   
+   // open the file for reading, in binary mode
+   $fp = fopen('/tmp/php.txt', 'rb');
+   
+   // New option e in PHP 7.0.16 and 7.1.2 (beware of compatibility)
+   $fp = fopen('/tmp/php.txt', 'rbe');
+   
+   // Unknown option x
+   $fp = fopen('/tmp/php.txt', 'rbx');
+   
+   ?>
+
+
+Any other values are not understood by PHP.
+
++--------------+----------------+
+| Command Line | Php/FopenMode  |
++--------------+----------------+
+| Analyzers    | :ref:`Analyze` |
++--------------+----------------+
+
+
+
 .. _yoda-comparison:
 
 Yoda Comparison
@@ -12524,6 +12710,41 @@ The objective is to avoid mistaking a comparison to an assignation. If the compa
 +--------------+------------------------------------------------+
 | Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
 +--------------+------------------------------------------------+
+
+
+
+.. _\_\_dir\_\_-then-slash:
+
+__DIR__ Then Slash
+##################
+
+
+`__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ must be concatenated with a string starting with /.
+
+The magic constant `__DIR__ <http://php.net/manual/en/language.constants.predefined.php>`_ holds the name of the current directory, without final /. When it is used to build path, then the following path fragment must start with /. Otherwise, two directories names will be merged together. 
+
+.. code-block:: php
+
+   <?php
+   
+   // __DIR__ = /a/b/c
+   // $filePath = /a/b/c/g.php
+   
+   // /a/b/c/d/e/f.txt : correct path
+   echo __DIR__.'/d/e/f.txt';
+   echo dirname($filePath).'/d/e/f.txt';
+   
+   // /a/b/cd/e/f.txt : most probably incorrect path
+   echo __DIR__.'d/e/f.txt';
+   echo dirname($filePath).'d/e/f.txt';
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Structures/DirThenSlash |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
 
 
 
@@ -12836,25 +13057,6 @@ Extension ext/sqlite3
 
 
 
-.. _fopen()-mode:
-
-fopen() Mode
-############
-
-
-fopen has a few modes, as described in the documentation : 'r', 'r+', for reading;  'w', 'w+' for writing; 'a', 'a+' for appending; 'x', 'x+' for modifying; 'c', 'c+' for writing and locking, 't' for text files and windows only.
-An optional 'b' may be used to make the `fopen() <http://www.php.net/fopen>`_ call more portable and binary safe. 
-
-Any other values are not understood by PHP.
-
-+--------------+----------------+
-| Command Line | Php/FopenMode  |
-+--------------+----------------+
-| Analyzers    | :ref:`Analyze` |
-+--------------+----------------+
-
-
-
 .. _func\_get\_arg()-modified:
 
 func_get_arg() Modified
@@ -13045,7 +13247,7 @@ preg_replace With Option e
 
 `preg_replace() <http://www.php.net/preg_replace>`_ supported the /e option until PHP 7.0. It allowed the use of `eval() <http://www.php.net/eval>`_'ed expression as replacement. This has been dropped in PHP 7.0, for security reasons.
 
-`preg_replace() <http://www.php.net/preg_replace>`_ with /e option may be replaced with preg_replace_callback() and a closure, or preg_replace_callback_array() and an array of closures.
+`preg_replace() <http://www.php.net/preg_replace>`_ with /e option may be replaced with `preg_replace_callback() <http://www.php.net/preg_replace_callback>`_ and a closure, or `preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_ and an array of closures.
 
 .. code-block:: php
 
