@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Extensions_Extffmpeg extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testExtensions_Extffmpeg01()  { $this->generic_test('Extensions_Extffmpeg.01'); }
+    public function testExtensions_Extffmpeg02()  { $this->generic_test('Extensions/Extffmpeg.02'); }
 }
 ?>
