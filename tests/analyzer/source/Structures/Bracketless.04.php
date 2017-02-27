@@ -21,6 +21,8 @@ class B  {
                                         $s->Z,
                                         $t->AA);
         } else { }
+        
+        if ($a0) { $a1; } else ;
     }
 }
 

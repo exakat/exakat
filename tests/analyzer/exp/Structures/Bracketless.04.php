@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('if($a0) { /**/ } else  /**/  ');
 
 $expected_not = array('elseif ( $o == \'U\') { /**/ } ');
 

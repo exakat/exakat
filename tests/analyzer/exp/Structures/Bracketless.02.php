@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('if($a1)  /**/  ');
 
 $expected_not = array('if ($a) { /**/ }',
                       'if ($a2) { /**/ }',
