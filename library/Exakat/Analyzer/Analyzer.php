@@ -962,6 +962,19 @@ GREMLIN
         return $this;
     }
 
+    public function otherSiblings($link = 'ELEMENT', $self = self::EXCLUDE_SELF) {
+        static $sibling = 0; // This is for calling the method multiple times
+        ++$sibling;
+        
+        if ($self === self::EXCLUDE_SELF) {
+            $this->addMethod('as("sibling'.$sibling.'").in("'.$link.'").out("'.$link.'").where(neq("sibling'.$sibling.'"))');
+        } else {
+            $this->addMethod('in("'.$link.'").out("'.$link.'")');
+        }
+
+        return $this;
+    }
+
     public function inIs($link) {
         assert($this->assertLink($link));
         $this->addMethod('in('.$this->SorA($link).')');
@@ -1355,9 +1368,9 @@ GREMLIN
     public function goToAllParents($self = self::EXCLUDE_SELF) {
 //        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
         if ($self === self::INCLUDE_SELF) {
-            $this->addMethod('filter{true}.emit().repeat( sideEffect{ x = it.get(); }.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").filter{ it.get() != x;} ).times('.self::MAX_LOOPING.')');
+            $this->addMethod('filter{true}.emit().repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times('.self::MAX_LOOPING.')');
         } else {
-            $this->addMethod('repeat( sideEffect{ x = it.get(); }.out("EXTENDS", "IMPLEMENTS").in("DEFINITION").filter{ it.get() != x;} ).emit().times('.self::MAX_LOOPING.')');
+            $this->addMethod('repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times('.self::MAX_LOOPING.')');
         }
         
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');
