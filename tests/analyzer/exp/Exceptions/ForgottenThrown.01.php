@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('new A()');
+$expected     = array('new A( )');
 
-$expected_not = array('new B()');
+$expected_not = array('new B( )');
 
 ?>

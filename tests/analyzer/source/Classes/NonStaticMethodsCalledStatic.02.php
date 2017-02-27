@@ -2,7 +2,7 @@
 
 class y {
     public function __construct($a) {}
-    public function b($a) {}
+    public function b() {}
 
 }
 
