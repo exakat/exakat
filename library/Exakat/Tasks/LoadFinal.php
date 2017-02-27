@@ -91,7 +91,7 @@ class LoadFinal extends Tasks {
 g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\parent"}
      .where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS") )
      .property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS").values("fullnspath") )
-     .where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in(this->linksIn)).out("EXTENDS").in("DEFINITION") )
+     .where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS").in("DEFINITION") )
      .addE('DEFINITION')
         .from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS").in("DEFINITION") )
 
