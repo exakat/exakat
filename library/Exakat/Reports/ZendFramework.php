@@ -34,13 +34,13 @@ class ZendFramework extends Devoops {
         parent::__construct();
 
         $this->themes = Analyzer::getThemeAnalyzers('ZendFramework');
-        $this->themesList = '("'.implode('", "', $this->themes).'")';    
+        $this->themesList = '("'.implode('", "', $this->themes).'")';
     }
-    
+
     public function generate($folder, $name = 'report') {
         $finalName = $name;
         $name = '.'.$name;
-        
+
         if ($name === null) {
             return "Can't produce Devoops format to stdout";
         }
@@ -67,12 +67,12 @@ class ZendFramework extends Devoops {
         copyDir($this->config->dir_root.'/media/devoops/img', $folder.'/'.$name.'/img');
         copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
-        
+
         display("Copied media files");
         $this->dump      = new \Sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
-        
+
         $this->datastore = new \sqlite3($folder.'/datastore.sqlite', \SQLITE3_OPEN_READONLY);
-        
+
         // Compatibility
         $compatibility = array('Compilation' => 'Compilation');
         foreach($this->config->other_php_versions as $code) {
@@ -88,14 +88,14 @@ class ZendFramework extends Devoops {
         $res = $this->sqlite->query('SELECT * FROM resultsCounts WHERE analyzer in '.$this->themesList);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
-            
+
             $this->analyzers[$analyzer->getDescription()->getName()] = $analyzer;
             $analyze[$analyzer->getDescription()->getName()] = 'OneAnalyzer';
         }
-        uksort($analyze, function ($a, $b) { 
+        uksort($analyze, function ($a, $b) {
             return -strnatcmp($a,$b) ;
         });
-        $analyze = array_merge(array('Results Counts' => 'AnalyzersResultsCounts'), 
+        $analyze = array_merge(array('Results Counts' => 'AnalyzersResultsCounts'),
                              $analyze);
 
         // Files
@@ -105,7 +105,7 @@ class ZendFramework extends Devoops {
             $files[$row['file']] = 'OneFile';
         }
         $files = array_merge(array('Files Counts' => 'FilesResultsCounts'), $files);
-        
+
         $summary = array(
             'Report presentation' => array('Audit configuration'    => 'AuditConfiguration',
                                            'Processed Files'        => 'ProcessedFiles',
@@ -113,14 +113,14 @@ class ZendFramework extends Devoops {
             ),
             'Zend Framework' => $analyze,
         );
-        
+
         $summaryHtml = $this->makeSummary($summary);
-        
+
         $faviconHtml = '';
         if (file_exists($this->config->dir_root.'/projects/'.$this->config->project.'/code/favicon.ico')) {
             // Should be checked and reported
             copy($this->config->dir_root.'/projects/'.$this->config->project.'/code/favicon.ico', $folder.'/'.$name.'/img/'.$this->config->project.'.ico');
-            
+
             $faviconHtml = <<<HTML
 <img src="img/{$this->config->project}.ico" class="img-circle" alt="{$this->config->project} logo" />
 HTML;
@@ -134,7 +134,7 @@ HTML;
 					$faviconHtml
 				</div>
 HTML;
-        } 
+        }
 
         $html = file_get_contents($this->config->dir_root.'/media/devoops/index.exakat.html');
         $html = str_replace('<menu>', $summaryHtml, $html);
@@ -145,7 +145,7 @@ HTML;
         $html = str_replace('PROJECT_FAVICON', $faviconHtml, $html);
 
         file_put_contents($folder.'/'.$name.'/index.html', $html);
-        
+
         foreach($summary as $titleUp => $section) {
             foreach($section as $title => $method) {
                 if (method_exists($this, $method)) {
@@ -156,7 +156,7 @@ HTML;
                 }
 
                 $filename = $this->makeFileName($title);
-                
+
                 $html = <<<HTML
 <script language="javascript">
 if (!document.getElementById("main")) {
@@ -182,17 +182,17 @@ $html
     </div>
 </div>
 HTML;
-                
-                file_put_contents($folder.'/'.$name.'/ajax/'.$filename, 
+
+                file_put_contents($folder.'/'.$name.'/ajax/'.$filename,
                                   $html);
             }
         }
-        
+
         rename($folder.'/'.$name, $folder.'/'.$finalName);
 
         return '';
     }//end generate()
-    
+
     protected function OneAnalyzer($title) {
         $css = new \Stdclass();
         $css->displayTitles = true;
@@ -200,7 +200,7 @@ HTML;
         $css->sort = $css->titles;
 
         $analyzer = $this->analyzers[$title];
-        
+
         $description = $analyzer->getDescription()->getDescription();
         if ($description == '') {
             $description = 'No documentation yet';
@@ -217,14 +217,14 @@ HTML;
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $data[] = $row;
         }
-        
+
         if (count($data) > 0) {
             $return .= $this->formatThemeList($analyzer->getThemes());
             $return .= $this->formatHorizontal($data, $css);
         } else {
             $return .= $this->formatText('The analyzer reported nothing after execution.');
         }
-        
+
         return $return;
     }
 }

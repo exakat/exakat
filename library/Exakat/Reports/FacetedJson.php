@@ -44,7 +44,7 @@ SELECT  id AS id,
 
 SQL;
         $res = $sqlite->query($sqlQuery);
-        
+
         $config = Config::factory();
 
         $datastore = new Datastore($config);
@@ -53,7 +53,7 @@ SQL;
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
             $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $row['error'] = $ini['name'];
-            
+
             $a = Analyzer::getInstance($row['analyzer']);
             $row['severity'] = $a->getSeverity();
             $row['impact']   = $a->getTimeToFix();
@@ -65,7 +65,7 @@ SQL;
 
         if ($fileName === null) {
             $json = json_encode($items, JSON_PARTIAL_OUTPUT_ON_ERROR);
-            // @todo Log if $json == false 
+            // @todo Log if $json == false
             return $json;
         } else {
             file_put_contents($dirName.'/'.$fileName.'.'.self::FILE_EXTENSION, json_encode($items));

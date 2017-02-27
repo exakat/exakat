@@ -35,7 +35,7 @@ class FindExternalLibraries extends Tasks {
     const WHOLE_DIR   = 1;
     const FILE_ONLY   = 2;
     const PARENT_DIR  = 3; // Whole_dir and parent.
-    
+
     private $php = null;
 
     // classic must be in lower case form.
@@ -102,12 +102,12 @@ class FindExternalLibraries extends Tasks {
         $dir = $this->config->projects_root.'/projects/'.$project.'/code';
         $configFile = $this->config->projects_root.'/projects/'.$project.'/config.ini';
         $ini = parse_ini_file($configFile);
-        
+
         if ($this->config->update && isset($ini['FindExternalLibraries'])) {
             display('Not updating '.$project.'/config.ini. This tool was already run. Please, clean the config.ini file in the project directory, before running it again.');
             return; //Cancel task
         }
-    
+
         display('Processing files');
         $files = $this->datastore->getCol('files', 'file');
         if (empty($files)) {
@@ -118,27 +118,27 @@ class FindExternalLibraries extends Tasks {
         $this->php = new Phpexec();
 
         $this->php->getTokens();
-        
+
         $r = array();
         $path = $this->config->projects_root.'/projects/'.$project.'/code';
         rsort($files);
         $ignore = 'None';
         $ignoreLength = 0;
         foreach($files as $id => $file) {
-            if (substr($file, 0, $ignoreLength) == $ignore) { 
-                print "Ignore $file ($ignore)\n"; continue; 
+            if (substr($file, 0, $ignoreLength) == $ignore) {
+                print "Ignore $file ($ignore)\n"; continue;
             }
             $s = $this->process($path.$file);
-            
-            if (!empty($s)) {
-               $r[] = $s;
-               $ignore = array_pop($s);
-               $ignoreLength = strlen($ignore);
-            }
-       }
 
-       if (!empty($r)) {
-           $newConfigs = call_user_func_array('array_merge', $r);
+            if (!empty($s)) {
+                $r[] = $s;
+                $ignore = array_pop($s);
+                $ignoreLength = strlen($ignore);
+            }
+        }
+
+        if (!empty($r)) {
+            $newConfigs = call_user_func_array('array_merge', $r);
         } else {
             $newConfigs = array();
         }
@@ -170,7 +170,7 @@ class FindExternalLibraries extends Tasks {
             display('Not updating '.$project.'/config.ini. '.count($newConfigs).' external libraries found');
         }
     }
-    
+
     private function process($filename) {
         $return = array();
 
@@ -179,19 +179,19 @@ class FindExternalLibraries extends Tasks {
             return $return;
         }
         $this->log->log("$filename : ".count($tokens));
-        
+
         foreach($tokens as $id => $token) {
             if (is_string($token)) { continue; }
 
             if ($token[0] == T_WHITESPACE)  { continue; }
             if ($token[0] == T_DOC_COMMENT) { continue; }
             if ($token[0] == T_COMMENT)     { continue; }
-            
+
             // If we find a namespace, it is not the global space, and we may skip the rest.
             if ($token[0] == T_NAMESPACE) {
                 return;
             }
-            
+
             if ($token[0] == T_CLASS) {
                 if (!is_array($tokens[$id + 2])) { continue; }
                 $class = $tokens[$id + 2][1];
@@ -214,16 +214,16 @@ class FindExternalLibraries extends Tasks {
                         $return[$class] = $returnPath;
                     }
                 }
-                
+
                 if (is_array($tokens[$id + 4]) && $tokens[$id + 4][0] == T_EXTENDS) {
                     $ix = $id + 6;
                     $extends = '';
-                    
+
                     while($tokens[$ix][0] == T_NS_SEPARATOR || $tokens[$ix][0] == T_STRING ) {
                         $extends .= $tokens[$ix][1];
                         ++$ix;
                     }
-                    
+
                     $extends = trim(strtolower($extends), '\\');
                     if (isset($this->classicTests[$extends])) {
                         if ($this->classicTests[$extends] == static::WHOLE_DIR) {
@@ -236,11 +236,11 @@ class FindExternalLibraries extends Tasks {
                         if ($returnPath != '/') {
                             $return[$class] = $returnPath;
                         }
-                    } 
+                    }
                 }
             }
         }
-    
+
         return $return;
     }
 }

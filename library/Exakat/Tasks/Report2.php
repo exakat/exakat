@@ -42,7 +42,7 @@ class Report2 extends Tasks {
         if (!file_exists($this->config->projects_root.'/projects/')) {
             throw new NoSuchProject($this->config->project);
         }
-        
+
         $reportClass = '\\Exakat\\Reports\\'.$this->config->format;
 
         if (!class_exists($reportClass)) {
@@ -66,7 +66,7 @@ class Report2 extends Tasks {
 
         display( 'Building report for project '.$this->config->project.' in file "'.$this->config->file.'", with format '.$this->config->format."\n");
         $begin = microtime(true);
-        
+
         // Choose format from options
 
         $report = new $reportClass();

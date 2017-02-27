@@ -81,6 +81,34 @@ $external_services_list = join("\n", $external_services_list);
 
 $analyzer_introduction = generateAnalyzerList();
 
+
+/// URL
+
+$raw = explode("\n", shell_exec('grep -r \'>\`_\' '.__DIR__.'/../../docs/src/'));
+$urls = array();
+foreach($raw as $line) {
+    preg_match_all('/(`.*?>`_)/s', $line, $r);
+    $urls[] = $r[1];
+}
+
+$urls = array_merge(...$urls);
+
+$files = glob('./human/en/*/*.ini');
+foreach($files as $file) {
+    $ini = parse_ini_file($file);
+
+    if (preg_match('/(`[^`]*?>`_)/s', $ini['description'], $r)) {
+        $urls[] = $r[1];
+    }
+}
+
+$urls = array_keys(array_count_values($urls));
+uasort($urls, function($a, $b) { return strtolower($a) <=> strtolower($b); });
+
+$url_list = "* ".join("\n* ", $urls)."\n";
+
+/// URL
+
 // More to come,and automate collection too
 $attributes = array('ANALYZERS_COUNT'        => $analyzer_count,
                     'EXTENSION_LIST'         => $extension_list,
@@ -89,6 +117,7 @@ $attributes = array('ANALYZERS_COUNT'        => $analyzer_count,
                     'EXTERNAL_SERVICES_LIST' => $external_services_list,
                     'REPORTS_LIST'           => $reports_list,
                     'THEMES_LIST'            => $themes_list,
+                    'URL_LIST'               => $url_list,
                     );
 
 shell_exec('rm docs/*.rst');
@@ -390,17 +419,37 @@ function glossary($title,$description) {
 function generateAnalyzerList() {
     $files = glob('./human/en/*/*.ini');
     
+    $sqlite = new \sqlite3('data/analyzers.sqlite');
+    
     $versions = array();
     foreach($files as $file) {
+        $folder = basename(dirname($file));
+        $analyzer = substr(basename($file), 0, -4);
+        $name = $folder.'/'.$analyzer;
+        
+        $res = $sqlite->query(<<<SQL
+SELECT GROUP_CONCAT(c.name, ', ') AS categories FROM analyzers a
+    JOIN analyzers_categories ac
+        ON ac.id_analyzer = a.id
+    JOIN categories c
+        ON c.id = ac.id_categories
+    WHERE
+        a.folder = "$folder" AND
+        a.name   = "$analyzer" AND
+        c.name   != 'All'
+SQL
+);
+        $row = $res->fetchArray(\SQLITE3_ASSOC);
+        
         $ini = parse_ini_file($file);
         if (empty($ini['exakatSince'])) {
             print "No exakatSince in ".$file."\n";
             continue;
         }
         if (isset($versions[$ini['exakatSince']])) {
-            $versions[$ini['exakatSince']][] = $ini['name'].' ('.basename(dirname($file)).'/'.substr(basename($file), 0, -4).')';
+            $versions[$ini['exakatSince']][] = $ini['name'].' ('.$name.' ; '.$row['categories'].')';
         } else {
-            $versions[$ini['exakatSince']] = array($ini['name'].' ('.basename(dirname($file)).'/'.substr(basename($file), 0, -4).')');
+            $versions[$ini['exakatSince']] = array($ini['name'].' ('.$name.')');
         }
     }
     uksort($versions, function ($a, $b) { return version_compare($b, $a); });

@@ -26,36 +26,38 @@ Label : PROJECT
                     b
                 Label : DEFINITION
                   b
-                Label : DEFINITION, DEFINITION
+                Label : DEFINITION
+                  b
+                Label : DEFINITION
                   \
                   Label : SUBNAME
                     b
                   Label : SUBNAME
                     d
-                Label : DEFINITION, DEFINITION
+                Label : DEFINITION
                   \
                   Label : SUBNAME
                     b
                   Label : SUBNAME
                     e
-                Label : DEFINITION, DEFINITION
+                Label : DEFINITION
                   \
                   Label : SUBNAME
                     b
                   Label : SUBNAME
                     d
-                Label : DEFINITION, DEFINITION, DEFINITION, DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
-                Label : DEFINITION, DEFINITION, DEFINITION, DEFINITION
+                Label : DEFINITION
                   \
                   Label : SUBNAME
                     b
                   Label : SUBNAME
                     e
+                Label : DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
                 Label : SUBNAME
                   a
                 Label : SUBNAME
@@ -246,36 +248,38 @@ Label : PROJECT
                     b
                 Label : DEFINITION
                   b
-                Label : DEFINITION, DEFINITION
+                Label : DEFINITION
+                  b
+                Label : DEFINITION
                   \
                   Label : SUBNAME
                     b
                   Label : SUBNAME
                     d
-                Label : DEFINITION, DEFINITION
+                Label : DEFINITION
                   \
                   Label : SUBNAME
                     b
                   Label : SUBNAME
                     e
-                Label : DEFINITION, DEFINITION
+                Label : DEFINITION
                   \
                   Label : SUBNAME
                     b
                   Label : SUBNAME
                     d
-                Label : DEFINITION, DEFINITION, DEFINITION, DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
-                Label : DEFINITION, DEFINITION, DEFINITION, DEFINITION
+                Label : DEFINITION
                   \
                   Label : SUBNAME
                     b
                   Label : SUBNAME
                     e
+                Label : DEFINITION
+                  \
+                  Label : SUBNAME
+                    b
+                  Label : SUBNAME
+                    d
                 Label : SUBNAME
                   a
                 Label : SUBNAME

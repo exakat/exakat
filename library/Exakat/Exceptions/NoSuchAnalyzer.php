@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NoSuchAnalyzer extends \RuntimeException {
     public function __construct($analyzer) {
         $die = "Couldn't find '$analyzer'. Aborting\n";
-        
+
         if (preg_match('#[a-z0-9_]+/[a-z0-9_]+$#i', $analyzer)) {
             $r = Analyzer::getSuggestionClass($analyzer);
             if (count($r) > 0) {

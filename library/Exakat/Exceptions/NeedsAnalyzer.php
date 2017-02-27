@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class NeedsAnalyzer extends \RuntimeException {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
-        
+
         parent::__construct( "Provide the analyzer with the option -P <One/Rule>. Aborting\n", $code, $previous);
     }
 }

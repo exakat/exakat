@@ -34,18 +34,18 @@ use Exakat\Tokenizer\Token;
 
 class Dump extends Tasks {
     const CONCURENCE = self::DUMP;
-    
+
     private $sqlite            = null;
     private $stmtResults       = null;
     private $stmtResultsCounts = null;
     private $cleanResults      = null;
-    
+
     private $rounds            = 0;
     private $sqliteFile        = null;
     private $sqliteFileFinal   = null;
-    
+
     const WAITING_LOOP = 1000;
-    
+
     public function run() {
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
             throw new NoSuchProject($this->config->project);
@@ -55,7 +55,7 @@ class Dump extends Tasks {
         if ($res->results[0] !== $this->config->project) {
             throw new NotProjectInGraph($this->config->project, $res->results[0]);
         }
-        
+
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
         $this->sqliteFile = $this->config->projects_root.'/projects/'.$this->config->project.'/.dump.sqlite';
@@ -66,10 +66,10 @@ class Dump extends Tasks {
         }
 
         $this->addSnitch();
-        
+
         Analyzer::initDocs();
         Analyzer::$gremlinStatic = $this->gremlin;
-        
+
         if ($this->config->update === true) {
             copy($this->sqliteFileFinal, $this->sqliteFile);
             $this->sqlite = new \Sqlite3($this->sqliteFile);
@@ -84,7 +84,7 @@ class Dump extends Tasks {
             $this->sqlite->query('CREATE TABLE themas (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    thema STRING
                                                   )');
-        
+
             $this->sqlite->query('CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                     fullcode STRING,
                                                     file STRING,
@@ -101,7 +101,7 @@ class Dump extends Tasks {
                                                            count INTEGER DEFAULT -6)');
             display('Inited tables');
         }
-        
+
         $sqlQuery = <<<SQL
 DELETE FROM results WHERE analyzer = :analyzer
 SQL;
@@ -137,14 +137,14 @@ SQL;
             } else {
                 $themes = $analyzer;
             }
-            
+
             foreach($themes as $a) {
                 if (!Analyzer::getClass($a)) {
                     throw new NoSuchAnalyzer($a);
-                } 
+                }
             }
             display('Processing '.count($themes).' analyzer'.(count($themes) > 1 ? 's' : '').' : '.implode(', ', $themes));
-        } 
+        }
 
         $sqlitePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
 
@@ -159,7 +159,7 @@ SQL;
         $this->log->log( 'counts '.implode(', ', $counts)."\n");
         $datastore->close();
         unset($datastore);
-        
+
         foreach($themes as $id => $thema) {
             if (isset($counts[$thema])) {
                 display( $thema.' : '.($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n");
@@ -189,7 +189,7 @@ SQL;
         $this->stmtResultsCounts->bindValue(':count', $count, \SQLITE3_INTEGER);
 
         $result = $this->stmtResultsCounts->execute();
-        
+
         $this->log->log( "$class : $count\n");
         // No need to go further
         if ($count <= 0) {
@@ -198,9 +198,9 @@ SQL;
 
         $this->stmtResults->bindValue(':class', $class, \SQLITE3_TEXT);
         $analyzer = Analyzer::getInstance($class);
-        
+
         $res = $analyzer->getDump();
-        
+
         $saved = 0;
         $severity = $analyzer->getSeverity( );
         if (!is_array($res)) {
@@ -212,11 +212,11 @@ SQL;
                 $this->log->log("Object expected but not found\n".print_r($result, true)."\n");
                 continue;
             }
-            
+
             if (!isset($result->class)) {
                 continue;
             }
-            
+
             $this->stmtResults->bindValue(':fullcode', $result->fullcode,      \SQLITE3_TEXT);
             $this->stmtResults->bindValue(':file',     $result->file,          \SQLITE3_TEXT);
             $this->stmtResults->bindValue(':line',     $result->line,          \SQLITE3_INTEGER);
@@ -225,12 +225,12 @@ SQL;
             $this->stmtResults->bindValue(':function', $result->function,      \SQLITE3_TEXT);
             $this->stmtResults->bindValue(':analyzer', $class,                 \SQLITE3_TEXT);
             $this->stmtResults->bindValue(':severity', $severity,              \SQLITE3_TEXT);
-            
+
             $this->stmtResults->execute();
             ++$saved;
         }
         $this->log->log("$class : dumped $saved");
-        
+
         if ($count != $saved) {
             display("$saved results saved, $count expected for $class\n");
         } else {
@@ -249,14 +249,11 @@ INSERT INTO atomsCounts ("id", "atom", "count") VALUES (NULL, :atom, :count )
 SQL;
         $insert = $this->sqlite->prepare($sqlQuery);
 
-        
         foreach(Token::$ATOMS as $atom) {
             $query = 'g.V().hasLabel("'.$atom.'").count()';
             $res = $this->gremlin->query($query);
             if (!$res instanceof \stdClass || !isset($res->results)) {
-                $this->log->log( "Couldn't run the query and get a result : \n" .
-                     'Query : ' . $query . " \n".
-                     print_r($res, true));
+                $this->log->log( "Couldn't run the query and get a result : \n".'Query : '.$query." \n".print_r($res, true));
                 continue ;
             }
 
@@ -266,7 +263,7 @@ SQL;
             $insert->execute();
         }
     }
-    
+
     private function finish() {
         $this->stmtResultsCounts->bindValue(':class', 'Project/Dump', \SQLITE3_TEXT);
         $this->stmtResultsCounts->bindValue(':count', $this->rounds, \SQLITE3_INTEGER);
@@ -274,16 +271,16 @@ SQL;
         $this->stmtResultsCounts->execute();
 
         $this->collectDatastore();
-        
+
         rename($this->sqliteFile, $this->sqliteFileFinal);
-        
+
         $this->removeSnitch();
     }
-    
+
     private function collectDatastore() {
         $datastorePath = $this->config->projects_root.'/projects/'.$this->config->project.'/datastore.sqlite';
         $this->sqlite->query('ATTACH "'.$datastorePath.'" AS datastore');
-        
+
         $tables = array('analyzed',
                         'compilation52',
                         'compilation53',
@@ -314,7 +311,7 @@ SQL;
             $this->sqlite->query('REPLACE INTO '.$table['name'].' SELECT * FROM datastore.'.$table['name']);
         }
     }
-    
+
     private function collectStructures() {
 
         // Name spaces
@@ -333,10 +330,10 @@ SQL;
         $query = <<<GREMLIN
 g.V().hasLabel("Namespace").out("NAME").map{ ['name' : it.get().value("fullcode")] };
 GREMLIN
-;
+        ;
         $res = $this->gremlin->query($query);
         $res = $res->results;
-        
+
         $namespacesId = array('' => 1);
         $total = 0;
         foreach($res as $row) {
@@ -396,10 +393,10 @@ g.V().hasLabel("Class")
 }
 
 GREMLIN
-;
+        ;
         $res = $this->gremlin->query($query);
         $res = $res->results;
-        
+
         $total = 0;
         $extendsId = array();
         $implementsId = array();
@@ -413,7 +410,7 @@ GREMLIN
             } else {
                 $namespaceId = 1;
             }
-            
+
             $stmt->bindValue(':class',       $row->name,            \SQLITE3_TEXT);
             $stmt->bindValue(':namespaceId', $namespaceId,          \SQLITE3_INTEGER);
             $stmt->bindValue(':abstract',    (int) $row->abstract , \SQLITE3_INTEGER);
@@ -435,14 +432,14 @@ GREMLIN
             if (!empty($row->implements)) {
                 $implementsId[$citId[$row->fullnspath]] = $row->implements;
             }
-            
+
             // Get use
             if (!empty($row->uses)) {
                 $usesId[$citId[$row->fullnspath]] = $row->uses;
             }
             ++$total;
         }
-        
+
         display("$total classes\n");
 
         // Interfaces
@@ -464,10 +461,10 @@ g.V().hasLabel("Interface")
          ];
 }
 GREMLIN
-;
+        ;
         $res = $this->gremlin->query($query);
         $res = $res->results;
-        
+
         $total = 0;
         foreach($res as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
@@ -519,10 +516,10 @@ g.V().hasLabel("Trait")
 }
 
 GREMLIN
-;
+        ;
         $res = $this->gremlin->query($query);
         $res = $res->results;
-        
+
         $total = 0;
         foreach($res as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
@@ -554,7 +551,7 @@ SQL;
                 foreach($ids as $id) {
                     $stmt->bindValue(':id',       $id,           \SQLITE3_INTEGER);
                     $stmt->bindValue(':class',    $citId[$exId], \SQLITE3_INTEGER);
-                
+
                     $stmt->execute();
                     ++$total;
                 }
@@ -576,7 +573,7 @@ SQL;
                 $stmtImplements->bindValue(':implementing',   $id,          \SQLITE3_INTEGER);
                 if (isset($citId[$fnp])) {
                     $stmtImplements->bindValue(':implements', $citId[$fnp], \SQLITE3_INTEGER);
-                    
+
                     $stmtImplements->execute();
                     ++$total;
                 } // Else ignore. Not in the project
@@ -597,7 +594,7 @@ SQL;
                 }
                 if (isset($citId[$fnp])) {
                     $stmtImplements->bindValue(':implements', $citId[$fnp], \SQLITE3_INTEGER);
-                    
+
                     $stmtImplements->execute();
                     ++$total;
                 } // Else ignore. Not in the project
@@ -643,10 +640,10 @@ g.V().hasLabel("Function")
 }
 
 GREMLIN
-;
+        ;
         $res = $this->gremlin->query($query);
         $res = $res->results;
-        
+
         $total = 0;
         foreach($res as $row) {
             if ($row->public) {
@@ -719,10 +716,10 @@ g.V().hasLabel("Ppp")
 }
 
 GREMLIN
-;
+        ;
         $res = $this->gremlin->query($query);
         $res = $res->results;
-        
+
         $total = 0;
         foreach($res as $row) {
             if ($row->public) {
@@ -774,10 +771,10 @@ g.V().hasLabel("Const")
 }
 
 GREMLIN
-;
+        ;
         $res = $this->gremlin->query($query);
         $res = $res->results;
-        
+
         $total = 0;
         foreach($res as $row) {
             $stmt->bindValue(':constant',  $row->name,                   \SQLITE3_TEXT);
@@ -792,7 +789,7 @@ GREMLIN
 
     private function collectLiterals() {
         $types = array('Integer', 'Real', 'String', 'Heredoc', 'Array');
-        
+
         foreach($types as $type) {
             $this->sqlite->query('DROP TABLE IF EXISTS literal'.$type);
             $this->sqlite->query('CREATE TABLE literal'.$type.' (  
@@ -801,7 +798,7 @@ GREMLIN
                                                    file STRING,
                                                    line INTEGER
                                                  )');
-                                                 
+
             $stmt = $this->sqlite->prepare('INSERT INTO literal'.$type.' (name, file, line) VALUES(:name, :file, :line)');
 
             if ($type == 'Array') {
@@ -828,7 +825,7 @@ g.V().$filter.has('constant', true)
 }
 
 GREMLIN
-;
+            ;
             $res = $this->gremlin->query($query);
             if (!is_object($res)) {
                 return ;
@@ -846,7 +843,7 @@ GREMLIN
             display( "literal$type : $total\n");
         }
     }
-    
+
     function collectFilesDependencies() {
         $this->sqlite->query('DROP TABLE IF EXISTS filesDependencies');
         $this->sqlite->query('CREATE TABLE filesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -860,7 +857,7 @@ INSERT INTO filesDependencies ("id", "including", "included", "type")
                        VALUES ( NULL, :including, :included, :type)
 SQL;
         $insertQuery = $this->sqlite->prepare($sqlQuery);
-    
+
         // Direct inclusion
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Include")).times(15)
@@ -869,7 +866,7 @@ SQL;
         $res = $this->gremlin->query($query);
         if (isset($res->results)) {
             $includes = $res->results;
-        
+
             foreach($includes as $link) {
                 $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
                 $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
@@ -890,7 +887,7 @@ SQL;
         $res = $this->gremlin->query($query);
         if (isset($res->results)) {
             $extends = $res->results;
-        
+
             foreach($extends as $link) {
                 $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
                 $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
@@ -899,7 +896,7 @@ SQL;
             }
             display(count($extends)." extends for classes ");
         }
-        
+
         // Finding extends for interfaces
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Interface")).times(15)
@@ -911,7 +908,7 @@ SQL;
         $res = $this->gremlin->query($query);
         if (isset($res->results)) {
             $extends = $res->results;
-    
+
             foreach($extends as $link) {
                 $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
                 $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
@@ -920,7 +917,7 @@ SQL;
             }
             display(count($extends)." extends for interfaces ");
         }
-        
+
         // traits
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Class", "Trait")).times(15)
@@ -932,7 +929,7 @@ SQL;
         $res = $this->gremlin->query($query);
         if (isset($res->results)) {
             $uses = $res->results;
-    
+
             foreach($uses as $link) {
                 $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
                 $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);
@@ -941,7 +938,7 @@ SQL;
             }
             display(count($extends)." use ");
         }
-        
+
         // Functioncall()
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Functioncall")).times(15)
@@ -962,7 +959,7 @@ SQL;
             }
             display(count($functioncalls)." functioncall ");
         }
-        
+
         // constants
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Identifier")).times(15)
@@ -983,7 +980,7 @@ SQL;
             }
             display(count($constants)." constants ");
         }
-        
+
         // New
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("New")).times(15)
@@ -1016,7 +1013,7 @@ SQL;
         $res = $this->gremlin->query($query);
         if (isset($res->results)) {
             $statics = $res->results;
-    
+
             foreach($statics as $link) {
                 $insertQuery->bindValue(':including', $link->file,    \SQLITE3_TEXT);
                 $insertQuery->bindValue(':included',  $link->include, \SQLITE3_TEXT);

@@ -36,25 +36,25 @@ abstract class Tasks {
 
     protected $gremlin    = null;
     protected $config     = null;
-    
+
     private $is_subtask   = self::IS_NOT_SUBTASK;
 
     protected $exakatDir  = null;
     public    static $semaphore      = null;
     public    static $semaphorePort  = null;
-    
+
     const  NONE    = 1;
     const  ANYTIME = 2;
     const  DUMP    = 3;
     const  QUEUE   = 4;
     const  SERVER  = 5;
-    
+
     const IS_SUBTASK     = true;
     const IS_NOT_SUBTASK = false;
-    
+
     const LOG_NONE = null;
     const LOG_AUTONAMING = '';
-    
+
     public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
         $this->gremlin = $gremlin;
         $this->config  = $config;
@@ -79,19 +79,19 @@ abstract class Tasks {
                 } else {
                     throw new AnotherProcessIsRunning();
                 }
-            } 
-        } 
+            }
+        }
 
         if ($this->logname === self::LOG_AUTONAMING) {
             $a = get_class($this);
             $this->logname = strtolower(substr($a, strrpos($a, '\\') + 1));
         }
-                
+
         if ($this->logname != self::LOG_NONE) {
             $this->log = new Log($this->logname,
                                  $this->config->projects_root.'/projects/'.$this->config->project);
         }
-        
+
         if ($this->config->project != 'default' &&
             file_exists($this->config->projects_root.'/projects/'.$this->config->project)) {
             $this->datastore = new Datastore($this->config);
@@ -100,14 +100,14 @@ abstract class Tasks {
         if (!file_exists($this->config->projects_root.'/projects/')) {
             mkdir($this->config->projects_root.'/projects/', 0700);
         }
-        
+
         if (!file_exists($this->config->projects_root.'/projects/.exakat/')) {
             mkdir($this->config->projects_root.'/projects/.exakat/', 0700);
         }
-        
+
         $this->exakatDir = $this->config->projects_root.'/projects/.exakat/';
     }
-    
+
     public function __destruct() {
         if (static::CONCURENCE !== self::ANYTIME && $this->is_subtask === self::IS_NOT_SUBTASK) {
             fclose(Tasks::$semaphore);
@@ -115,7 +115,7 @@ abstract class Tasks {
             self::$semaphorePort = -1;
         }
     }
-    
+
     protected function checkTokenLimit() {
         $nb_tokens = $this->datastore->getHash('tokens');
 
@@ -124,8 +124,8 @@ abstract class Tasks {
             throw new ProjectTooLarge($nb_tokens, $this->config->token_limit);
         }
     }
-    
-    public abstract function run();
+
+    abstract public function run();
 
     protected function cleanLogForProject($project) {
         $logs = glob($this->config->projects_root.'/projects/'.$project.'/log/*');
@@ -133,29 +133,29 @@ abstract class Tasks {
             unlink($log);
         }
     }
-    
+
     protected function addSnitch($values = array()) {
         static $snitch, $pid, $path;
-        
+
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
             $pid = getmypid();
             $path = $this->config->projects_root.'/projects/.exakat/'.$snitch.'.json';
         }
-        
+
         $values['pid'] = $pid;
         file_put_contents($path, json_encode($values));
     }
 
     protected function removeSnitch() {
         static $snitch, $path;
-        
+
         if ($snitch === null) {
             $snitch = str_replace('Exakat\\Tasks\\', '', get_class($this));
             $pid = getmypid();
             $path = $this->config->projects_root.'/projects/.exakat/'.$snitch.'.json';
         }
-        
+
         unlink($path);
     }
 }

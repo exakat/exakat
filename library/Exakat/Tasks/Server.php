@@ -27,14 +27,14 @@ use Exakat\Config;
 
 class Server extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     public function run() {
         if ($this->config->stop === true) {
             $display = @file_get_contents('http://localhost:7447/stop/');
             display('Shut down server ('.$display.')');
             return;
         }
-        
+
         if (file_exists($this->config->dir_root.'/projects/index.php')) {
             display('A server is already running. Aborting.');
             return;
@@ -45,13 +45,13 @@ class Server extends Tasks {
         $php = str_replace('__PHP__', $this->config->php, $php);
         $php = str_replace('__EXAKAT__', $this->config->executable, $php);
         file_put_contents($this->config->projects_root.'/projects/index.php', $php);
-        
+
         if (!file_exists($this->config->projects_root.'/projects/server.log')) {
             file_put_contents($this->config->projects_root.'/projects/server.log', date('r')."\tCreated file\n");
         }
 
         display('Start server');
-        exec($this->config->php . ' -S 0.0.0.0:7447 -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
+        exec($this->config->php.' -S 0.0.0.0:7447 -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
     }
 }
 

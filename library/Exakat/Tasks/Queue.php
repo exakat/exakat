@@ -32,9 +32,9 @@ use Exakat\Exceptions\ReportAlreadyDone;
 
 class Queue extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     private $pipefile = Jobqueue::PATH;
-    
+
     public function run() {
         if (!file_exists($this->pipefile)) {
             throw new NoJobqueueStarted();

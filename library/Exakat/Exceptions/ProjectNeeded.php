@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class ProjectNeeded extends \RuntimeException {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
-        
+
         parent::__construct( "This command requires a project (option -p).\nAborting\n", $code, $previous);
     }
 }

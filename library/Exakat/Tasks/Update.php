@@ -30,7 +30,7 @@ use Exakat\Exceptions\ProjectNeeded;
 
 class Update extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     protected $logname = self::LOG_NONE;
 
     public function run() {
@@ -39,7 +39,7 @@ class Update extends Tasks {
         }
 
         $path = $this->config->projects_root.'/projects/'.$this->config->project;
-        
+
         if (!file_exists($path)) {
             throw new NoSuchProject($this->config->project);
         }
@@ -47,7 +47,7 @@ class Update extends Tasks {
         if (!file_exists($path.'/code')) {
             throw new NoCodeInProject($this->config->project);
         }
-        
+
         switch(true) {
             // symlink case
             case $this->config->project_vcs === 'symlink' :
@@ -59,7 +59,7 @@ class Update extends Tasks {
                 // Remove and copy again
                 $total = rmdirRecursive($this->config->projects_root.'/projects/'.$this->config->project.'/code/');
                 display("$total files were removed");
-                
+
                 $total = copyDir(realpath($this->config->project_url), $this->config->projects_root.'/projects/'.$this->config->project.'/code');
                 display("$total files were copied");
                 break;
@@ -80,7 +80,7 @@ class Update extends Tasks {
                 } else {
                     display( "No update available (Last commit : $date)");
                 }
-                
+
                 break;
 
             // svn case
@@ -89,10 +89,10 @@ class Update extends Tasks {
                 $res = shell_exec('cd '.$path.'/code/; svn update');
                 if (!preg_match('/Updated to revision (\d+)\./', $res, $r)) {
                     preg_match('/At revision (\d+)/', $res, $r);
-                } 
+                }
 
                 display( "SVN updated to revision $r[1]");
-                
+
                 break;
 
             // bazaar case
@@ -102,7 +102,7 @@ class Update extends Tasks {
                 preg_match('/revision (\d+)/', $res, $r);
 
                 display( "Bazaar updated to revision $r[1]");
-                
+
                 break;
 
             // composer case
@@ -112,10 +112,10 @@ class Update extends Tasks {
 
                 $json = file_get_contents($path.'/code/composer.lock');
                 $json = json_decode($json);
-                
+
                 foreach($json->packages as $package) {
                     if ($package->name == $this->config->project_url) {
-                        display( "Composer updated to revision ".$package->source->reference. ' ( version : '.$package->version.' )');
+                        display( "Composer updated to revision ".$package->source->reference.' ( version : '.$package->version.' )');
                     }
                 }
 

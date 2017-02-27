@@ -31,11 +31,11 @@ class Dependencies extends Reports {
 
     public function generate($folder, $name= 'dependencies') {
         $graph = new Gremlin3($this->config);
-        
+
         $links    = array();
         $nodes    = array('class' => array(), 'trait' => array(), 'interface' => array(), 'unknown' => array());
         $fullcode = array();
-        
+
         $query = <<<GREMLIN
 g.V().hasLabel("Class").map{[it.get().value("fullnspath"), it.get().value("fullcode")]}
 GREMLIN;
@@ -73,11 +73,11 @@ GREMLIN;
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v->origin])) { 
+            if (!isset($nodesId[$v->origin])) {
                 $nodes['unknown'][] = $v->origin;
                 $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v->destination])) { 
+            if (!isset($nodesId[$v->destination])) {
                 $nodes['unknown'][] = $v->destination;
                 $nodesId[$v->destination] = count($nodes) - 1;
             }
@@ -98,11 +98,11 @@ GREMLIN;
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v->origin])) { 
+            if (!isset($nodesId[$v->origin])) {
                 $nodes['unknown'][] = $v->origin;
                 $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v->destination])) { 
+            if (!isset($nodesId[$v->destination])) {
                 $nodes['unknown'][] = $v->destination;
                 $nodesId[$v->destination] = count($nodes) - 1;
             }
@@ -122,11 +122,11 @@ GREMLIN;
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v->origin])) { 
+            if (!isset($nodesId[$v->origin])) {
                 $nodes['unknown'][] = $v->origin;
                 $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v->destination])) { 
+            if (!isset($nodesId[$v->destination])) {
                 $nodes['unknown'][] = $v->destination;
                 $nodesId[$v->destination] = count($nodes) - 1;
             }
@@ -147,11 +147,11 @@ GREMLIN;
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v->origin])) { 
+            if (!isset($nodesId[$v->origin])) {
                 $nodes['unknown'][] = $v->origin;
                 $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v->destination])) { 
+            if (!isset($nodesId[$v->destination])) {
                 $nodes['unknown'][] = $v->destination;
                 $nodesId[$v->destination] = count($nodes) - 1;
             }
@@ -172,11 +172,11 @@ GREMLIN;
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v[0]])) { 
+            if (!isset($nodesId[$v[0]])) {
                 $nodes['unknown'][] = $v[0];
                 $nodesId[$v[0]] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v[1]])) { 
+            if (!isset($nodesId[$v[1]])) {
                 $nodes['unknown'][] = $v[1];
                 $nodesId[$v[1]] = count($nodes) - 1;
             }
@@ -196,11 +196,11 @@ GREMLIN;
         $res = $graph->query($query);
         $total = 0;
         foreach($res->results as $v) {
-            if (!isset($nodesId[$v->origin])) { 
+            if (!isset($nodesId[$v->origin])) {
                 $nodes['unknown'][] = $v->origin;
                 $nodesId[$v->origin] = count($nodes) - 1;
             }
-            if (!isset($nodesId[$v->destination])) { 
+            if (!isset($nodesId[$v->destination])) {
                 $nodes['unknown'][] = $v->destination;
                 $nodesId[$v->destination] = count($nodes) - 1;
             }
@@ -211,8 +211,8 @@ GREMLIN;
 
         print "$total Static methods\n";
 
-// Final preparation
-// Nodes
+        // Final preparation
+        // Nodes
         $colors = array('class' => 'darkorange', 'trait' => 'gold', 'interface' => 'skyblue', 'unknown' => 'gray');
         foreach($nodes as $type => &$someNodes) {
             foreach($someNodes as $id => &$n) {
@@ -227,9 +227,9 @@ DOT;
             unset($n);
         }
         unset($someNodes);
-//        print_r($nodes);
+        //        print_r($nodes);
 
-// Links
+        // Links
         $colors = array('staticmethodcall' => 'firebrick2',
                         'staticconstant'   => 'firebrick2',
                         'staticproperty'   => 'firebrick2',
@@ -241,12 +241,10 @@ DOT;
         $linksDot = array();
         foreach($links as $link => $type) {
             foreach($type as $id => $t) {
-                $linksDot[] = $link.' [shape="none" color="'.$colors[$t].'" label="'.
-                str_replace('"', '\\"', $fullcode[$link][$id]).'"];';
+                $linksDot[] = $link.' [shape="none" color="'.$colors[$t].'" label="'.str_replace('"', '\\"', $fullcode[$link][$id]).'"];';
             }
         }
         unset($type);
-
 
         $dot = "digraph graphname {\n        
         fontname = \"Bitstream Vera Sans\"
@@ -266,11 +264,10 @@ DOT;
                 width = \"2\"
         ]
         
-        ".implode("\n", $nodes['class'])."\n".implode("\n", $nodes['trait'])."\n".implode("\n", $nodes['interface'])."\n".implode("\n", $nodes['unknown']).
-        "\n\n".implode("\n", $linksDot)."\n}\n";
+        ".implode("\n", $nodes['class'])."\n".implode("\n", $nodes['trait'])."\n".implode("\n", $nodes['interface'])."\n".implode("\n", $nodes['unknown'])."\n\n".implode("\n", $linksDot)."\n}\n";
         print strlen($dot);
         print $folder.'/'.$name.'.'.self::FILE_EXTENSION;
-        
+
         file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
     }
 }

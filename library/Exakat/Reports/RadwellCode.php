@@ -29,7 +29,7 @@ class RadwellCode extends Reports {
     const FILE_FILENAME  = 'radwell';
 
     protected $themesToShow = array('RadwellCodes');
-    
+
     private $descriptions = array(
                              'Structures/NestedIfthen'                      => 'Too many nested if statements',
                              'Structures/NoParenthesisForLanguageConstruct' => 'Extra brackets and braces',
@@ -40,14 +40,14 @@ class RadwellCode extends Reports {
                              'Performances/timeVsstrtotime'                 => 'Slow PHP built-in functions',
                              'Performances/SlowFunctions'                   => 'Slow PHP built-in functions',
                              'Php/IsnullVsEqualNull'                        => 'Slow PHP built-in functions',
-//                             '' => 'Long functions',
-//                             '' => 'Too many function arguments',
-//                             '' => 'Long lines',
+    //                             '' => 'Long functions',
+    //                             '' => 'Too many function arguments',
+    //                             '' => 'Long lines',
                              'Structures/SwitchToSwitch'                    => 'Long if-else blocks',
                              'Php/UpperCaseKeyword'                         => 'Wrong function / class name casing',
                              'Classes/WrongCase'                            => 'Wrong function / class name casing',
-//                             '' => 'Lack of coding standards',
-                        
+    //                             '' => 'Lack of coding standards',
+
                              );
 
     public function __construct() {
@@ -61,7 +61,7 @@ class RadwellCode extends Reports {
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
         $res = $sqlite->query($sqlQuery);
-        
+
         $results = array();
         $titleCache = array();
         $severityCache = array();
@@ -94,7 +94,7 @@ class RadwellCode extends Reports {
 
             ++$results[ $row['file'] ]['warnings'];
         }
-        
+
         $text = '';
         foreach($results as $file) {
             foreach($file['messages'] as $line => $column) {
@@ -105,7 +105,7 @@ class RadwellCode extends Reports {
                 }
             }
         }
-        
+
         if ($name === null) {
             return $text;
         } else {

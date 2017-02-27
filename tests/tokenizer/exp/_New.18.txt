@@ -45,7 +45,17 @@ Label : PROJECT
               Label : NAME
                 a
           Label : DEFINITION
-            C
+            ::
+            Label : CLASS
+              C
+            Label : METHOD
+              $y
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                $y
           Label : NAME
             C
         Label : ELEMENT

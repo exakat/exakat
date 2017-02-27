@@ -38,47 +38,47 @@ class PhpConfiguration extends Reports {
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
         }
-        
+
         $shouldDisableFunctions = json_decode(file_get_contents($this->config->dir_root.'/data/shouldDisableFunction.json'));
-        $functionsList = array();
-        $classesList = array();
+        $functionsArray = array();
+        $classesArray = array();
         foreach((array) $shouldDisableFunctions as $ext => $toDisable) {
             if ($sources[$ext] == 0) {
-                if (isset($toDisable->functions)) { 
-                    $functionsList[] = $toDisable->functions;
+                if (isset($toDisable->functions)) {
+                    $functionsArray[] = $toDisable->functions;
                 }
-                if (isset($toDisable->classes)) { 
-                    $classesList[] = $toDisable->classes;
+                if (isset($toDisable->classes)) {
+                    $classesArray[] = $toDisable->classes;
                 }
             }
         }
-        
-        if (empty($functionsList)) {
+
+        if (empty($functionsArray)) {
             $functionsList = '';
         } else {
-            $functionsList = call_user_func_array('array_merge', $functionsList);
-            $functionsList = join(',', $functionsList);
+            $functionsArray = call_user_func_array('array_merge', $functionsArray);
+            $functionsList = join(',', $functionsArray);
         }
-        if (empty($classesList)) {
+        if (empty($classesArray)) {
             $classesList = '';
         } else {
-            $classesList = call_user_func_array('array_merge', $classesList);
-            $classesList = join(',', $classesList);
+            $classesArray = call_user_func_array('array_merge', $classesArray);
+            $classesList = join(',', $classesArray);
         }
 
         // preparing the list of PHP directives to review before using this application
-        $directives = array('standard', 'bcmath', 'date', 'file', 
+        $directives = array('standard', 'bcmath', 'date', 'file',
                             'fileupload', 'mail', 'ob', 'env',
                             // standard extensions
                             'apc', 'amqp', 'apache', 'assertion', 'curl', 'dba',
                             'filter', 'image', 'intl', 'ldap',
-                            'mbstring', 
+                            'mbstring',
                             'opcache', 'openssl', 'pcre', 'pdo', 'pgsql',
-                            'session', 'sqlite', 'sqlite3', 
+                            'session', 'sqlite', 'sqlite3',
                             // pecl extensions
                             'com', 'eaccelerator',
-                            'geoip', 'ibase', 
-                            'imagick', 'mailparse', 'mongo', 
+                            'geoip', 'ibase',
+                            'imagick', 'mailparse', 'mongo',
                             'trader', 'wincache', 'xcache'
                              );
 
@@ -89,7 +89,7 @@ SELECT analyzer FROM resultsCounts
             analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
         AND count > 0
 SQL
-);
+        );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if ($row['analyzer'] == 'Structures/FileUploadUsage') {
                 $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
@@ -104,7 +104,7 @@ SQL
                 }
             }
         }
-        
+
         $directives = <<<TEXT
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -123,7 +123,7 @@ SQL
 TEXT;
         foreach($data as $section => $details) {
             $directives .= "[$section]\n";
-            
+
             foreach((array) $details as $detail) {
                 if ($detail->name == 'Extra configurations') {
                     preg_match('#(https?://[^"]+?)"#is', $detail->documentation, $url);
@@ -139,7 +139,7 @@ $detail->name = $detail->suggested
 ";
                 }
             }
-            
+
             if ($section === 'standard') {
                     $directives .= ";$documentation
 disable_functions = $functionsList
@@ -150,16 +150,16 @@ disable_classes = $classesList
 
             $directives .= "\n\n";
         }
-        
+
         $final .= "\n\n".$directives;
-        
+
         if ($name === null) {
             return $final ;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $final);
             return true;
         }
-    } 
-} 
+    }
+}
 
 ?>

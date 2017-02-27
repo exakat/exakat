@@ -32,7 +32,7 @@ class Clean extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     protected $logname = self::LOG_NONE;
-    
+
     public function run() {
         if ($this->config->project === 'default') {
             throw new ProjectNeeded();
@@ -42,10 +42,9 @@ class Clean extends Tasks {
         if (!file_exists($path)) {
             throw new NoSuchProject($this->config->project);
         }
-        
 
         display( "Cleaning project {$this->config->project}\n" );
-        
+
         $dirsToErase = array('log',
                              'report',
                              'Premier-ace',

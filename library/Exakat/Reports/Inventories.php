@@ -29,7 +29,7 @@ use Exakat\Exakat;
 class Inventories extends Reports {
     const FILE_EXTENSION = 'csv';
     const FILE_FILENAME  = 'inventories';
-    
+
     public function generate($folder, $name = null) {
         if ($name === null) {
             $name = self::FILE_FILENAME;
@@ -40,7 +40,7 @@ class Inventories extends Reports {
             rmdirRecursive($path);
         }
         mkdir($path, 0777);
-        
+
         $this->saveInventory('Constants/Constantnames', "$folder/$name/constants.csv");
         $this->saveInventory('Variables/Variablesnames', "$folder/$name/variables.csv");
         $this->saveInventory('Functions/Functionnames', "$folder/$name/functions.csv");
@@ -51,14 +51,14 @@ class Inventories extends Reports {
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/exceptions.csv");
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/errorMessages.csv");
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/comparedLiterals.csv");
-        
+
         $this->saveAtom('Integer', "$path/integers.csv");
         $this->saveAtom('Array',   "$path/arrays.csv");
         $this->saveAtom('Heredoc', "$path/heredoc.csv");
         $this->saveAtom('Real',    "$path/real.csv");
         $this->saveAtom('String',  "$path/strings.csv");
-    } 
-    
+    }
+
     private function saveInventory($analyzer, $file) {
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="'.$analyzer.'"');
         $fp = fopen($file, 'w+');
@@ -85,6 +85,6 @@ class Inventories extends Reports {
         fclose($fp);
     }
 
-} 
+}
 
 ?>

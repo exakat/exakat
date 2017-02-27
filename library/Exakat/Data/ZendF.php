@@ -28,10 +28,10 @@ use Exakat\Config;
 class ZendF {
     protected $sqlite = null;
     protected $phar_tmp = null;
-    
+
     public function __construct() {
         $config = Config::factory();
-        
+
         if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf').'.sqlite';
             copy($config->dir_root.'/data/zendf.sqlite', $this->phar_tmp);
@@ -57,10 +57,10 @@ class ZendF {
         if ($release !== null) {
             $query .= " WHERE releases.release = \"release-$release.0\"";
         }
-        
+
         $res = $this->sqlite->query($query);
         $return = array();
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['class'];
@@ -68,7 +68,7 @@ class ZendF {
                 $return[$row['release']] = array($row['class']);
             }
         }
-        
+
         return $return;
     }
 
@@ -85,7 +85,7 @@ class ZendF {
             $return = array($release => array());
             $query .= " WHERE releases.release = \"release-$release.0\"";
         }
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['interface'];
@@ -93,7 +93,7 @@ class ZendF {
                 $return[$row['release']] = array($row['interface']);
             }
         }
-        
+
         return $return;
     }
 
@@ -110,7 +110,7 @@ class ZendF {
             $return = array($release => array());
             $query .= " WHERE releases.release = \"release-$release.0\"";
         }
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['trait'];
@@ -118,7 +118,7 @@ class ZendF {
                 $return[$row['release']] = array($row['trait']);
             }
         }
-        
+
         return $return;
     }
 }

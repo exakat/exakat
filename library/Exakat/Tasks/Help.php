@@ -27,7 +27,7 @@ use Exakat\Config;
 
 class Help extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     public function run() {
         print <<<HELP
 [Usage] :   php {$this->config->executable} init -p <Project name> -R <Repository>

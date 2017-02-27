@@ -25,7 +25,7 @@ namespace Exakat\Exceptions;
 
 class WrongNumberOfColsForAHash extends \RuntimeException {
     public function __construct($message = '', $code = 0, \Exception $previous = null) {
-        
+
         parent::__construct("When storing a hash in datastore, table '$message' must have 2 columns (plus id).\n", $code, $previous);
     }
 }

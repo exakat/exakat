@@ -62,19 +62,21 @@ Label : PROJECT
               Label : THEN
                 ;
                 Label : ELEMENT
+                  H
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'I'
+                    Label : ARGUMENT
+                      $b
+                  Label : NAME
+                    H
+                Label : ELEMENT
                   echo
                   Label : ARGUMENTS
                     echo
                     Label : ARGUMENT
-                      H
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'I'
-                        Label : ARGUMENT
-                          $b
-                      Label : NAME
-                        H
+                      Void
                   Label : NAME
                     echo
                 Label : ELEMENT

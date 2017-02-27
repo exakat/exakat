@@ -28,27 +28,27 @@ use Exakat\Config;
 class Jobqueue extends Tasks {
     const CONCURENCE = self::QUEUE;
     const PATH = '/tmp/onepageQueue';
-    
+
     private $pipefile = self::PATH;
     private $jobQueueLog = null;
-    
+
     public function __destruct() {
         $this->log->log('Closed jobQueue');
-        
+
         unlink($this->pipefile);
         fclose($this->jobQueueLog);
-        
+
         parent::__destruct();
     }
-    
+
     public function run() {
         $this->jobQueueLog = fopen($this->config->projects_root.'/projects/log/jobqueue.log', 'a');
         $this->log('Open Job Queue '.date('r')."\n");
-        
+
         $this->log->log('Started jobQueue : '.time()."\n");
 
         $queue = array();
-        
+
         if (!file_exists($this->config->projects_root.'/projects/onepage')) {
             mkdir($this->config->projects_root.'/projects/onepage/', 0755);
             mkdir($this->config->projects_root.'/projects/onepage/code', 0755);
@@ -57,7 +57,7 @@ class Jobqueue extends Tasks {
         if (!file_exists($this->config->projects_root.'/projects/onepage/reports')) {
             mkdir($this->config->projects_root.'/projects/onepage/reports', 0755);
         }
-        
+
         //////// setup our named pipe ////////
         // @todo put this in config
         if(file_exists($this->pipefile)) {
@@ -65,7 +65,7 @@ class Jobqueue extends Tasks {
                 die('unable to remove existing PipeFile "'.$this->pipefile.'". Aborting.'."\n");
             }
         }
-        
+
         umask(0);
         if(!posix_mkfifo($this->pipefile,0666)) {
             die('unable to create named pipe');
@@ -86,7 +86,7 @@ class Jobqueue extends Tasks {
 
             $job = current($queue);
             $jobkey = key($queue);
-            
+
             if($job) {
                 switch($job) {
                     case 'quit' :
@@ -98,9 +98,9 @@ class Jobqueue extends Tasks {
                     case 'ping' :
                         print 'pong'.PHP_EOL;
                         break;
-                        
-                    case file_exists($this->config->projects_root.'/projects/'.$job) : 
-                        display( 'processing project job ' . $job . PHP_EOL);
+
+                    case file_exists($this->config->projects_root.'/projects/'.$job) :
+                        display( 'processing project job '.$job.PHP_EOL);
                         if (file_exists($this->config->projects_root.'/projects/'.$job.'/dump.sqlite')) {
                             $this->log('omitting project ready : '.$job);
                             break;
@@ -109,30 +109,30 @@ class Jobqueue extends Tasks {
                         $b = microtime(true);
                         shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
                         $e = microtime(true);
-                        $this->log('end project : '.$job.' ('.number_format(($e -$b), 2) . ' s)');
-                        display( 'processing project job ' . $job . ' done ('.number_format(($e -$b), 2) . ' s)'. PHP_EOL);
+                        $this->log('end project : '.$job.' ('.number_format(($e -$b), 2).' s)');
+                        display( 'processing project job '.$job.' done ('.number_format(($e -$b), 2).' s)'.PHP_EOL);
                         break;
 
                     case file_exists($this->config->projects_root.'/projects/onepage/code/'.$job.'.php') :
-                        display( 'processing onepage job ' . $job . PHP_EOL);
+                        display( 'processing onepage job '.$job.PHP_EOL);
                         $this->process($job);
                         break;
-                        
-                    default : 
+
+                    default :
                         display('Default order '.$job.'. Ignoring '.PHP_EOL);
-                    }
-                    
+                }
+
                 next($queue);
                 unset($job, $queue[$jobkey]);
             } else {
-                display( 'no jobs to do - waiting...'. PHP_EOL);
+                display( 'no jobs to do - waiting...'.PHP_EOL);
                 stream_set_blocking($pipe, true);
             }
         }
     }
 
-  private function process($job) {
-        $this->log->log('started onepage : ' . $job."\n");
+    private function process($job) {
+        $this->log->log('started onepage : '.$job."\n");
         $b = microtime(true);
 
         // This has already been processed
@@ -150,12 +150,12 @@ class Jobqueue extends Tasks {
         file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
 
         $e = microtime(true);
-        $this->log('end onepage : '.$job.' ('.number_format(($e -$b), 2) . ' s)');
+        $this->log('end onepage : '.$job.' ('.number_format(($e -$b), 2).' s)');
 
         // Clean after self
         shell_exec($this->config->php.' '.$this->config->executable.' cleandb');
     }
-    
+
     private function log($message) {
         fwrite($this->jobQueueLog, date('r')."\t".$message."\n");
     }

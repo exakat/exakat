@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Type_StringInterpolation extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testType_StringInterpolation01()  { $this->generic_test('Type_StringInterpolation.01'); }
+    public function testType_StringInterpolation02()  { $this->generic_test('Type/StringInterpolation.02'); }
 }
 ?>

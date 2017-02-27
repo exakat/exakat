@@ -44,7 +44,7 @@ class Text extends Reports {
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
         $res = $sqlite->query($sqlQuery);
-        
+
         $results = array();
         $titleCache = array();
         $severityCache = array();
@@ -77,7 +77,7 @@ class Text extends Reports {
 
             ++$results[ $row['file'] ]['warnings'];
         }
-        
+
         $text = '';
         foreach($results as $file) {
             foreach($file['messages'] as $line => $column) {
@@ -88,7 +88,7 @@ class Text extends Reports {
                 }
             }
         }
-        
+
         if ($name === 'stdout') {
             return $text;
         } else {

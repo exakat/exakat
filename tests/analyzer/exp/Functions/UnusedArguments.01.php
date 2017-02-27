@@ -1,17 +1,17 @@
 <?php
 
-$expected     = array('&$unusedClosureR',
+$expected     = array( 'function ( ) use ($readOnlyClosure, $readAndWrittenClosure, $unusedUseClosure) { /**/ } ', 
+                       'function ( ) use ($readOnlyClosure, $writenOnlyClosure, $readAndWrittenClosure) { /**/ } ',
 
-                      '$writenOnlyClosure',
-                      '$unusedUseClosure',
+                      'function ( ) use (&$readOnlyClosureR, &$readAndWrittenClosureR, &$unusedClosureR) { /**/ } ',
 
-                      '&$unusedA2',
+                      'function a2(&$readOnlyA2, &$writenOnlyA2, &$readAndWrittenA2, &$unusedA2) { /**/ } ',
 
-                      '$unusedA1',
-                      '$writenOnlyA1',
+                      'function a1($readOnlyA1, $writenOnlyA1, $readAndWrittenA1, $unusedA1) { /**/ } ',
+                      'function a12($readOnlyA1, $writenOnlyA1, $readAndWrittenA1) { /**/ } ',
 
-                      '$traitArgument',
-                      '$ClassArgument',
+                      'function TraitMethod($traitArgument) { /**/ } ',
+                      'function ClassMethod($ClassArgument) { /**/ } ',
 );
 
 $expected_not = array('&$readOnly', 

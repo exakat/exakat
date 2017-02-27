@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class StringInterpolation extends Analyzer {
 
     public function analyze() {
-        $this->atomIs(array('String', 'HereDoc', 'NowDoc'))
+        $this->atomIs(array('String', 'Heredoc'))
              ->outIs('CONCAT')
              ->atomIs(array('Variable', 'Array', 'Property'))
              ->is('enclosing', false)

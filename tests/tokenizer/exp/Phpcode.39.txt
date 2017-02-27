@@ -48,17 +48,19 @@ Label : PROJECT
         Label : ELEMENT
           D
         Label : ELEMENT
+          E
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'F'
+          Label : NAME
+            E
+        Label : ELEMENT
           <?=
           Label : ARGUMENTS
             <?=
             Label : ARGUMENT
-              E
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'F'
-              Label : NAME
-                E
+              Void
           Label : NAME
             <?=
         Label : ELEMENT

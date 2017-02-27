@@ -52,6 +52,14 @@ Label : PROJECT
                 static
           Label : DEFINITION
             a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              a
+          Label : DEFINITION
+            a
           Label : DEFINITION
             a
           Label : NAME

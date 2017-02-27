@@ -32,14 +32,14 @@ use Exakat\Project;
 
 class Initproject extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     public function run() {
         $project = new Project($this->config->project);
 
         if ($project == 'default') {
             throw new ProjectNeeded();
         }
-        
+
         if (!$project->validate()) {
             throw new NoSuchProject($project);
         }
@@ -48,14 +48,14 @@ class Initproject extends Tasks {
 
         if ($this->config->delete === true) {
             display( "Deleting $project\n");
-    
+
             // final wait..., just in case
             sleep(2);
 
             rmdirRecursive($this->config->projects_root.'/projects/'.$project);
         } elseif ($this->config->update === true) {
             display( "Updating $project\n");
-    
+
             shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code/; git pull');
         } else {
             display( "Initializing $project with '$repositoryURL'\n");
@@ -64,7 +64,7 @@ class Initproject extends Tasks {
 
         display( "Done\n");
     }
-    
+
     private function init_project($project, $repositoryURL) {
         if (!file_exists($this->config->projects_root.'/projects/'.$project)) {
             mkdir($this->config->projects_root.'/projects/'.$project, 0755);
@@ -127,8 +127,7 @@ class Initproject extends Tasks {
                 $projectName = basename($repositoryURL);
                 $projectName = preg_replace('.git', '', $projectName);
             }
-            
-            
+
             // default initial config. Found in test project.
             $phpversion = $this->config->phpversion;
             $configIni = <<<INI
@@ -194,7 +193,7 @@ INI;
                 case ($this->config->copy === true) :
                     display('Copy initialization');
                     $total = copyDir(realpath($repositoryURL), $this->config->projects_root.'/projects/'.$project.'/code');
-                    display($total . ' files were copied');
+                    display($total.' files were copied');
                     break 1;
 
                 // Empty initialization
@@ -207,13 +206,13 @@ INI;
                 // composer archive (early in the list, as this won't have 'scheme'
                 case ($this->config->composer === true) :
                     display('Initialization with composer');
-                    
+
                     $res = shell_exec('composer --version');
                     if (strpos($res, 'Composer') === false) {
                         throw new HelperException('Composer');
                     }
 
-                // composer install
+                    // composer install
                     $composer = new \stdClass();
                     $composer->require = new \stdClass();
                     $composer->require->$repositoryURL = 'dev-master';
@@ -308,10 +307,21 @@ INI;
                     }
 
                     display('Git initialization');
-                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryURL.' code 2>&1 ');
+                    if (!isset($repositoryDetails['user'])) {
+                        $repositoryDetails['user'] = 'exakat';
+                    }
+                    if (!isset($repositoryDetails['pass'])) {
+                        $repositoryDetails['pass'] = 'exakat';
+                    }
+                    unset($repositoryDetails['query']);
+                    unset($repositoryDetails['fragment']);
+                    $repositoryNormalizedURL = unparse_url($repositoryDetails);
+                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryNormalizedURL.' code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
-                        display( "An error prevented code initialization : ".trim(substr($res, $offset + 7))."\nNo code was loaded.\n");
+                        $res = str_replace($repositoryNormalizedURL, $repositoryURL, $res);
+                        $res = trim(substr($res, $offset + 7));
+                        display( "An error prevented code initialization : ".$res."\nNo code was loaded.\n");
 
                         $skipFiles = true;
                     }

@@ -9,10 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          :
-          Label : LABEL
-            e
-        Label : ELEMENT
           return
           Label : RETURN
             =
@@ -37,4 +33,4 @@ Label : PROJECT
               Label : THEN
                 new
                 Label : NEW
-                  Void
+                  e

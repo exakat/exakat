@@ -280,6 +280,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.10.3
 
   * Multiple Alias Definitions Per File (Namespaces/MultipleAliasDefinitionPerFile ; Analyze)
+  * Property Used In One Method Only (Classes/PropertyUsedInOneMethodOnly ; Analyze)
+  * Used Once Property (Classes/UsedOnceProperty ; Analyze)
+  * __DIR__ Then Slash (Structures/DirThenSlash ; Analyze)
   * self, parent, static Outside Class (Classes/NoPSSOutsideClass)
 
 * 0.10.2
@@ -669,7 +672,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Magic Visibility (Classes/toStringPss ; Analyze, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, Codacy)
   * Mail Usage (Structures/MailUsage ; Appinfo)
   * Make Global A Property (Classes/MakeGlobalAProperty ; Analyze, Codacy)
-  * Make One Call (Performances/MakeOneCall ; Performances)
+  * Make One Call With Array (Performances/MakeOneCall ; Performances)
   * Malformed Octal (Type/MalformedOctal ; Analyze, Codacy)
   * Mark Callable (Functions/MarkCallable ; Internal)
   * Md5 Strings (Type/Md5String ; Inventory)
@@ -978,6 +981,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Wrong Number Of Arguments In Methods (Functions/WrongNumberOfArgumentsMethods ; OneFile)
   * Wrong Optional Parameter (Functions/WrongOptionalParameter ; Analyze, Codacy)
   * Wrong Parameter Type (Php/InternalParameterType ; Analyze, OneFile, Codacy)
+  * Wrong fopen() Mode (Php/FopenMode ; Analyze, Codacy)
   * Yield From Usage (Php/YieldFromUsage ; Appinfo, Appcontent)
   * Yield Usage (Php/YieldUsage ; Appinfo, Appcontent)
   * Yoda Comparison (Structures/YodaComparison ; Coding Conventions)
@@ -1113,7 +1117,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/yis (Extensions/Extyis ; Appinfo)
   * ext/zip (Extensions/Extzip ; Appinfo)
   * ext/zlib (Extensions/Extzlib ; Appinfo)
-  * fopen() Mode (Php/FopenMode ; Analyze, Codacy)
   * func_get_arg() Modified (Functions/funcGetArgModified ; Analyze, CompatibilityPHP70, CompatibilityPHP71, Codacy)
   * include_once() Usage (Structures/OnceUsage ; Analyze, Appinfo, Codacy)
   * list() May Omit Variables (Structures/ListOmissions ; Analyze, Codacy)
@@ -1191,31 +1194,53 @@ External links
 List of external links mentionned in this documentation.
 
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
+* `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
+* `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
+* `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appendices/3-0-migration-guide.html>`_
+* `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_
+* `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_
+* `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `composer <https://getcomposer.org/>`_
 * `curl <http://www.php.net/curl>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
-* `Exakat  <http://www.exakat.io/>`_
+* `Exakat <http://www.exakat.io/>`_
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
 * `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
+* `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `git <https://git-scm.com/>`_
 * `Github <https://github.com/exakat/exakat>`_
+* `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 * `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plugin>`_
 * `hash <http://www.php.net/hash>`_
 * `hg <https://www.mercurial-scm.org/>`_
+* `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
+* `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
+* `List of function aliases <http://php.net/manual/en/aliases.php>`_
+* `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
+* `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
+* `Marco Pivetti tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Neo4j <http://neo4j.com/>`_
+* `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `phar <https://www.exakat.io/download-exakat/>`_
+* `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
+* `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
+* `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
+* `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Semaphore <http://php.net/manual/en/book.sem.php>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
+* `Suhosin.org <https://suhosin.org/>`_
 * `svn <https://subversion.apache.org/>`_
 * `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
-* `tokenizer <http://www.php.net/tokenizer>`_
+* `Tutorial 1: Let’s learn by example¶ <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
+* `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
+* `XSL extension <http://php.net/manual/en/intro.xsl.php>`_
 
 

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class CharString extends Analyzer {
 
     public function analyze() {
-        $this->atomIs(array('String', 'HereDoc', 'NowDoc'))
+        $this->atomIs(array('String', 'Heredoc'))
              ->tokenIsNot('T_QUOTE');
         $this->prepareQuery();
     }

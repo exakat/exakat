@@ -30,9 +30,9 @@ use Exakat\Phpexec;
 
 class Doctor extends Tasks {
     const CONCURENCE = self::ANYTIME;
-    
+
     protected $logname = self::LOG_NONE;
-    
+
     public function run() {
         $stats = array();
 
@@ -45,7 +45,7 @@ class Doctor extends Tasks {
             print json_encode($stats);
             return;
         }
-        
+
         $doctor = '';
         foreach($stats as $section => $details) {
             $doctor .= "$section : \n";
@@ -58,7 +58,7 @@ class Doctor extends Tasks {
     }
 
     private function checkPreRequisite() {
-// Compulsory
+        // Compulsory
         $stats['exakat']['executable'] = $this->config->executable;
         $stats['exakat']['version']    = Exakat::VERSION;
         $stats['exakat']['build']      = Exakat::BUILD;
@@ -167,7 +167,7 @@ class Doctor extends Tasks {
                 mkdir($this->config->neo4j_folder.'/scripts/', 0755);
                 $stats['neo4j']['scriptFolder'] = file_exists($this->config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
             }
-            
+
             $pidPath = $this->config->neo4j_folder.'/conf/neo4j-service.pid';
             if (file_exists($pidPath)) {
                 $stats['neo4j']['pid'] = file_get_contents($pidPath);
@@ -176,7 +176,7 @@ class Doctor extends Tasks {
                 preg_match('/^\w+\s+(\d+)\s/is', $res, $r);
                 $stats['neo4j']['pid'] = $r[1];
             }
-    
+
             $json = @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/db/data/');
             if (empty($json)) {
                 $stats['neo4j']['running'] = 'No';
@@ -188,7 +188,7 @@ class Doctor extends Tasks {
                 } else {
                     $stats['neo4j']['running here'] = 'No';
                 }
-                
+
                 if ('{"success":true}' === @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute')) {
                     $stats['neo4j']['gremlin'] = 'Yes';
                 } else {
@@ -196,11 +196,11 @@ class Doctor extends Tasks {
                     $stats['neo4j']['gremlin-installation'] = 'Install gremlin plugin for neo4j';
                 }
             }
-            
+
             $stats['neo4j']['$NEO4J_HOME'] = getenv('NEO4J_HOME');
             $stats['neo4j']['$NEO4J_HOME / config'] = realpath(getenv('NEO4J_HOME')) === realpath($this->config->neo4j_folder) ? 'Same' : 'Different';
         }
-        
+
         if ($this->config->project !== 'default') {
             $stats['project']['name']             = $this->config->project_name;
             $stats['project']['url']              = $this->config->project_url;
@@ -212,10 +212,10 @@ class Doctor extends Tasks {
 
         return $stats;
     }
-    
+
     private function checkAutoInstall() {
         $stats = array();
-        
+
         // config
         if (!file_exists($this->config->projects_root.'/config')) {
             mkdir($this->config->projects_root.'/config', 0755);
@@ -223,7 +223,7 @@ class Doctor extends Tasks {
 
         if (!file_exists($this->config->projects_root.'/config/exakat.ini')) {
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
-            
+
             $neo4j_folder = getenv('NEO4J_HOME');
             if (empty($neo4j_folder)) {
                 $neo4j_folder = 'neo4j'; // Local Installation
@@ -305,7 +305,7 @@ loader = Neo4jImport
 INI;
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
         }
-        
+
         if (!file_exists($this->config->projects_root.'/config/')) {
             $stats['folders']['config-folder'] = 'No';
         } elseif (file_exists($this->config->projects_root.'/config/exakat.ini')) {
@@ -326,7 +326,7 @@ INI;
             if (file_exists($this->config->projects_root.'/projects/')) {
                 $stats['folders']['projects folder'] = 'Yes';
             } else {
-            $stats['folders']['projects folder'] = 'No';
+                $stats['folders']['projects folder'] = 'No';
             }
         }
 
@@ -345,7 +345,7 @@ INI;
 
         // check PHP 5.3
         $stats['PHP 5.3'] = $this->checkPHP($this->config->php53, '5.3');
-        
+
         // check PHP 5.4
         $stats['PHP 5.4'] = $this->checkPHP($this->config->php54, '5.4');
 
@@ -354,7 +354,7 @@ INI;
 
         // check PHP 5.6
         $stats['PHP 5.6'] = $this->checkPHP($this->config->php56, '5.6');
-        
+
         // check PHP 7.0
         $stats['PHP 7.0'] = $this->checkPHP($this->config->php70, '7.0');
 
@@ -444,7 +444,7 @@ INI;
 
         return $stats;
     }
-    
+
     private function checkPHP($configVersion, $displayedVersion) {
         $stats = array();
 
@@ -469,10 +469,10 @@ INI;
                 $stats['memory_limit']    = $php->getMemory_limit();
             }
         }
-        
+
         return $stats;
     }
-    
+
     private function array2list($array) {
         return implode(",\n                           ", $array);
     }

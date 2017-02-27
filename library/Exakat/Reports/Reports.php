@@ -30,17 +30,17 @@ use Exakat\Dump;
 abstract class Reports {
     const FILE_EXTENSION = 'undefined';
     const FILE_NAME      = 'undefined';
-    
-    static public $FORMATS        = array('Ambassador', 'Devoops', 
+
+    static public $FORMATS        = array('Ambassador', 'Devoops',
                                           'Text', 'Xml', 'Uml',
-                                          'PhpConfiguration', 'PhpCompilation', 
+                                          'PhpConfiguration', 'PhpCompilation',
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
-                                          'ZendFramework',  'RadwellCode',
-                                          'FacetedJson', 'Json', 'OnepageJson', 
+                                          'ZendFramework',  'RadwellCode', 'Codesniffer', 
+                                          'FacetedJson', 'Json', 'OnepageJson',
                                           'Codacy',
                                           );
 
-    protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 
+    protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55',
                                     'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
                                     '"Dead code"', 'Security', 'Analyze', 'Inventories');
 
@@ -49,10 +49,10 @@ abstract class Reports {
     protected $themes     = array(); // cache for themes list
     protected $themesList = '';      // cache for themes list in SQLITE
     protected $config     = null;
-    
+
     protected $sqlite = null;
     protected $datastore = null;
-    
+
     public function __construct() {
         $this->config = Config::factory();
 
@@ -63,13 +63,13 @@ abstract class Reports {
 
         $this->datastore = new Dump($this->config);
     }
-    
-    public abstract function generate($dirName, $fileName);
-    
+
+    abstract public function generate($dirName, $fileName);
+
     protected function count($step = 1) {
         $this->count += $step;
     }
-    
+
     public function getCount() {
         return $this->count;
     }

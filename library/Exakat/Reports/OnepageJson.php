@@ -33,13 +33,13 @@ class OnepageJson extends Reports {
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in '.$this->themesList;
         $res = $sqlite->query($sqlQuery);
-        
+
         $results = array();
         $titleCache = array();
         $severityCache = array();
-        
+
         $results = array();
-                              
+
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
 
             if (!isset($titleCache[$row['analyzer']])) {
@@ -62,7 +62,7 @@ class OnepageJson extends Reports {
 
             $this->count();
         }
-        
+
         if ($name === null) {
             return json_encode($results);
         } else {

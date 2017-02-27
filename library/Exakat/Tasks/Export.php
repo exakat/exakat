@@ -41,7 +41,7 @@ class Export extends Tasks {
             $vv = array();
             foreach($v->properties as $key => $value) {
                 $vv[$key] = $value[0]->value;
-                
+
                 if ($key === 'token' && $value[0]->value == 'T_WHOLE') {
                     $root = $x;
                 }
@@ -56,11 +56,11 @@ class Export extends Tasks {
         $E = array();
         foreach($edges as $e) {
             $id = $e->outV;
-    
+
             if (!isset($E[$id])) {
                 $E[$id] = array();
             }
-    
+
             $endNodeId = $e->inV;
             if(isset($E[$id][$endNodeId])) {
                 $E[$id][$endNodeId] .= ', '.$e->label;
@@ -89,7 +89,7 @@ class Export extends Tasks {
             echo $text;
         }
     }
-    
+
     private function display_text($V, $E, $root, $level = 0) {
         $r = '';
 
@@ -100,9 +100,9 @@ class Export extends Tasks {
         if (isset($E[$root])) {
             asort($E[$root]);
             uksort($E[$root], function ($a, $b) use ($V) {
-        if (!isset($V[$a]['rank'])) { return 0; }
-        if (!isset($V[$b]['rank'])) { return 0; }
-        return $V[$a]['rank'] > $V[$b]['rank']; });
+                if (!isset($V[$a]['rank'])) { return 0; }
+                if (!isset($V[$b]['rank'])) { return 0; }
+                return $V[$a]['rank'] > $V[$b]['rank']; });
 
             foreach($E[$root] as $id => $label) {
                 $r .= str_repeat('  ', $level).'Label : '.$label."\n".$this->display_text($V, $E, $id, $level + 1);
@@ -126,11 +126,11 @@ class Export extends Tasks {
                 }
             }
              $R = $id.' [label="'.addslashes($v['fullcode']).'"';
-             if (isset($v['atom'])) {
+            if (isset($v['atom'])) {
                 $R .= ' shape=box ';
-             }
+            }
              $R .= "];\n";
-     
+
              $r .= $R;
         }
 

@@ -1,4 +1,4 @@
-Version 0.10.3 (Dragon King of the Jing River , Coming up)
+Version 0.10.4 (Dragon King of the West Sea, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,31 @@ Version 0.10.3 (Dragon King of the Jing River , Coming up)
     + 
 + Tokenizer
     + 
+    
+Version 0.10.3 (Dragon King of the Jing River, 2017-02-27)
++ Architecture
+    + Added URL glossary to Manual.
+    + Extended CS ruleset
+    + Use exakat/exakat as user/login for git. 
+    + New helper to rename analyzers
+    + Project command now accept -P/-T to run one analyzer/Thema directly
++ Report
+    + New report style : Codesniffer
++ Analyzer
+    + New analyzer : suggest usage for array_column()
+    + New analyzer : __DIR__ must be concatenated with a string starting with '/'
+    + New analyzer : report usage of parent, self and static outside a class/trait
+    + New analyzer : report properties used only in one method
+    + New analyzer : report properties used only once at all
+    + New analyzer : multiple aliases per class
+    + Updated analyzer : Fopen() mode support 'e' option (7.1.2 + )
+    + Updated analyzer : Make One Call covers str_replace, substr_replace, preg_replace*
+    + Updated analyzer : Unused arguments : now ignores arguments from interface or parent
++ Tokenizer
+    + Removed double DEFINITION link. Faster loading, less processing.
+    + Fixed an edge case when function name is boolean or null.
+    + Cleaned atom and tokens names
+    + Fixed edge case when object is instantiated in a ternary
     
 Version 0.10.2 (Water Lizard Dragon, 2017-02-20)
 + Architecture

@@ -59,10 +59,10 @@ use Exakat\Exakat;
  */
 class Xml extends Reports {
     private $cachedData = '';
-    
+
     const FILE_EXTENSION = 'xml';
     const FILE_FILENAME  = 'exakat';
-    
+
     /**
      * Generate a partial report for a single processed file.
      *
@@ -139,7 +139,7 @@ class Xml extends Reports {
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.')';
         $res = $sqlite->query($sqlQuery);
-        
+
         $results = array();
         $titleCache = array();
         $severityCache = array();
@@ -172,15 +172,12 @@ class Xml extends Reports {
 
             ++$results[ $row['file'] ]['warnings'];
         }
-        
+
         foreach($results as $file) {
             $this->generateFileReport($file);
         }
-        
-        $return = '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL .
-                  '<phpcs version="'.Exakat::VERSION.'">'.PHP_EOL . 
-                  $this->cachedData . 
-                  '</phpcs>'.PHP_EOL;
+
+        $return = '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.'<phpcs version="'.Exakat::VERSION.'">'.PHP_EOL.$this->cachedData.'</phpcs>'.PHP_EOL;
 
         if ($name === null) {
             return $return;
@@ -188,7 +185,7 @@ class Xml extends Reports {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $return);
             return true;
         }
-    } 
-} 
+    }
+}
 
 ?>

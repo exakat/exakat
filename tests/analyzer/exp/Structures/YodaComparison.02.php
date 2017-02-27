@@ -5,6 +5,6 @@ $expected     = array('$a == +2',
                       '$a == null',
                       '$a == 1.2');
 
-$expected_not = array();
+$expected_not = array('$d[3] != YODA_SOME_CONSTANT');
 
 ?>

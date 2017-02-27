@@ -31,9 +31,9 @@ class FileDependencies extends Reports {
 
     public function generate($folder, $name= 'dependencies') {
         $dot = '';
-        
+
         $res = $this->sqlite->query('SELECT * FROM filesDependencies');
-        
+
         $colors = array('INCLUDE'          => 'green',
                         'STATICMETHODCALL' => 'purple',
                         'STATICCONSTANT'   => 'purple',
@@ -44,15 +44,15 @@ class FileDependencies extends Reports {
                         'IMPLEMENTS'       => 'red',
                         'FUNCTIONCALL'     => 'blue',
                         'CONSTANT'         => 'blue');
-        
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $dot  .= "\"$row[including]\" -> \"$row[included]\" [label=\"$row[type]\" color={$colors[$row['type']]} ];\n";
         }
-        
+
         $dot = " digraph graphname {
     $dot
      }";
-     
+
         file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
     }
 }

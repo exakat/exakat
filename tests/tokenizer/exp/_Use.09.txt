@@ -54,6 +54,8 @@ Label : PROJECT
                     B
                   Label : SUBNAME
                     C
+                Label : DEFINITION
+                  A
               Label : USE
                 B
             Label : ELEMENT

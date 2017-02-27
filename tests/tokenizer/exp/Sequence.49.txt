@@ -8,17 +8,19 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
+          __
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'B'
+          Label : NAME
+            __
+        Label : ELEMENT
           echo
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              __
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'B'
-              Label : NAME
-                __
+              Void
           Label : NAME
             echo
         Label : ELEMENT
@@ -54,17 +56,19 @@ Label : PROJECT
         Label : ELEMENT
           H
         Label : ELEMENT
+          I
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'J'
+          Label : NAME
+            I
+        Label : ELEMENT
           echo
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              I
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'J'
-              Label : NAME
-                I
+              Void
           Label : NAME
             echo
     Label : ELEMENT

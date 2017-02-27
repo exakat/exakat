@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class UnicodeBlock extends Analyzer {
     public function analyze() {
-        $this->atomIs(array('String', 'HereDoc', 'NowDoc'));
+        $this->atomIs(array('String', 'Heredoc'));
     }
 }
 

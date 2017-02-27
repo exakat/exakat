@@ -6,13 +6,7 @@ use Exakat\Exakat;
 include __DIR__.'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
 
-class RoboFile extends \Robo\Tasks
-{
-    public function release()
-    {
-        $this->yell('Releasing Exakat');
-    }
-
+class RoboFile extends \Robo\Tasks{
     public function versionBump($version = null) {
         if (!$version) {
             $versionParts = explode('.', \Exakat::VERSION);
@@ -167,20 +161,7 @@ LICENCE;
      */
     public function buildRelease()
     {    
-        $this->taskExecStack()
-             ->stopOnFail()
-             ->exec('mkdir release')
-             ->exec('mkdir release/config')
-             ->exec('cp -r data release/')
-             ->exec('cp config/config-default.ini release/config/config-default.ini')
-             ->exec('cp -r human release/')
-             ->exec('cp -r library release/')
-             ->exec('mkdir release/media')
-             ->exec('mkdir release/project')
-//             ->exec('mkdir release/scripts')
-             ->exec('tar czf release.tgz release')
-             ->exec('mv release.tgz release.'.Exakat::VERSION.'.tgz')
-             ->run();
+        $this->pharBuild();
     }
 
     /**
@@ -227,14 +208,18 @@ LICENCE;
 
         $packer->run();
 
+        file_put_contents('composer.json', $composer);
+        shell_exec('composer update ');
+    }
+
+    public function localBuild() {
+        $this->pharBuild();
+        
         $this->taskExecStack()
              ->stopOnFail()
              ->exec('mv exakat.phar ../release/')
              ->exec('cd ../release/; tar -zcvf exakat-'.Exakat::VERSION.'.tar.gz exakat.phar docs/*')
              ->run();
-
-        file_put_contents('composer.json', $composer);
-        shell_exec('composer update ');
     }
     
     public function checkAll() {
