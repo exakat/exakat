@@ -26,18 +26,32 @@ use Exakat\Analyzer\Analyzer;
 
 class MakeOneCall extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs('\\preg_replace_callback')
+        // the second argument must match between calls
+        $functionsArg2 = array('\\str_replace', '\\str_ireplace', 
+                               '\\preg_replace_callback', '\\preg_replace');
+        
+        // preg_replace( **, **, x); called several times
+        // str_replace( **, **, x); called several times
+        $this->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->atomFunctionIs($functionsArg2)
+             ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
              ->savePropertyAs('fullcode', 'string')
              ->back('first')
              ->nextSibling()
-             ->functioncallIs('\\preg_replace_callback')
+             ->atomIs('Assignation')
+             ->outIs('RIGHT')
+             ->functioncallIs($functionsArg2)
+             ->samePropertyAs('fullnspath', 'fnp')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
              ->samePropertyAs('fullcode', 'string')
              ->back('first');
         $this->prepareQuery();
+        
+        // same functions, in a foreach? 
     }
 }
 
