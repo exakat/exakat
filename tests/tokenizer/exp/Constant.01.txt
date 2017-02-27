@@ -16,7 +16,7 @@ Label : PROJECT
               'x'
             Label : ARGUMENT
               1
-            Label : DEFINITION, DEFINITION
+            Label : DEFINITION
               x
           Label : NAME
             define

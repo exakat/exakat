@@ -9,12 +9,14 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
+          f
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              8
+          Label : NAME
+            f
+        Label : ELEMENT
           -
           Label : SIGN
-            f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                8
-            Label : NAME
-              f
+            Void

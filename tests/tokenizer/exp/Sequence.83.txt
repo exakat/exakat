@@ -10,6 +10,16 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
+          C
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              1
+          Label : NAME
+            C
+        Label : ELEMENT
           =
           Label : LEFT
             $a
@@ -26,15 +36,7 @@ Label : PROJECT
               Label : NAME
                 C
             Label : CONCAT
-              C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  2
-                Label : ARGUMENT
-                  1
-              Label : NAME
-                C
+              Void
         Label : ELEMENT
           Void
         Label : ELEMENT

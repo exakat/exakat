@@ -16,6 +16,8 @@ Label : PROJECT
               use
               Label : USE
                 \
+                Label : DEFINITION
+                  H
                 Label : SUBNAME
                   D
                 Label : SUBNAME

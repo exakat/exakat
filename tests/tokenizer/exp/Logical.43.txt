@@ -26,30 +26,32 @@ Label : PROJECT
         Label : ELEMENT
           C
         Label : ELEMENT
+          D
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              E
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  'F'
+              Label : NAME
+                E
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'G'
+              Label : CONCAT
+                $a
+              Label : CONCAT
+                'H'
+          Label : NAME
+            D
+        Label : ELEMENT
           echo
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  E
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'F'
-                  Label : NAME
-                    E
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'G'
-                  Label : CONCAT
-                    $a
-                  Label : CONCAT
-                    'H'
-              Label : NAME
-                D
+              Void
           Label : NAME
             echo

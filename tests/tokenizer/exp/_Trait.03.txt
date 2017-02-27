@@ -66,6 +66,12 @@ Label : PROJECT
                 public
           Label : DEFINITION
             TheWorldIsNotEnough
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              TheWorldIsNotEnough
           Label : NAME
             TheWorldIsNotEnough
         Label : ELEMENT

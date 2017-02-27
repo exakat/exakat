@@ -56,6 +56,10 @@ Label : PROJECT
             A
           Label : DEFINITION
             A
+          Label : DEFINITION
+            A
+          Label : DEFINITION
+            A
           Label : NAME
             A
           Label : DEFINITION
@@ -106,6 +110,12 @@ Label : PROJECT
                 bigTalk
               Label : PUBLIC
                 public
+          Label : DEFINITION
+            B
+          Label : DEFINITION
+            B
+          Label : DEFINITION
+            B
           Label : NAME
             B
           Label : DEFINITION

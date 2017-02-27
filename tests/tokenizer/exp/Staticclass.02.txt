@@ -24,6 +24,14 @@ Label : PROJECT
                 ClassName1
               Label : DEFINITION
                 \
+                Label : DEFINITION
+                  ClassName1
+                Label : SUBNAME
+                  NS1
+                Label : SUBNAME
+                  ClassName1
+              Label : DEFINITION
+                \
                 Label : SUBNAME
                   NS1
                 Label : SUBNAME

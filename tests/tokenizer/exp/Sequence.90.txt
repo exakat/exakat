@@ -10,27 +10,29 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
+          I
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                J
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  J
+              Label : OBJECT
+                $a
+          Label : NAME
+            I
+        Label : ELEMENT
           echo
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              I
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
-                    J
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      J
-                  Label : OBJECT
-                    $a
-              Label : NAME
-                I
+              Void
           Label : NAME
             echo
         Label : ELEMENT
@@ -56,31 +58,33 @@ Label : PROJECT
           Label : NAME
             R
         Label : ELEMENT
+          W
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              'X'
+            Label : ARGUMENT
+              'Y'
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                Z
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : NAME
+                  Z
+              Label : OBJECT
+                $b
+          Label : NAME
+            W
+        Label : ELEMENT
           echo
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              W
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'X'
-                Label : ARGUMENT
-                  'Y'
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
-                    Z
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      Z
-                  Label : OBJECT
-                    $b
-              Label : NAME
-                W
+              Void
           Label : NAME
             echo
     Label : ELEMENT

@@ -20,8 +20,18 @@ Label : PROJECT
               return
               Label : RETURN
                 __METHOD__
+          Label : DEFINITION
+            null
           Label : NAME
             null
+          Label : DEFINITION
+            null
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              null
         Label : ELEMENT
           true
           Label : ARGUMENTS
@@ -34,8 +44,18 @@ Label : PROJECT
               return
               Label : RETURN
                 __METHOD__
+          Label : DEFINITION
+            true
           Label : NAME
             true
+          Label : DEFINITION
+            true
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              true
         Label : ELEMENT
           false
           Label : ARGUMENTS
@@ -48,8 +68,18 @@ Label : PROJECT
               return
               Label : RETURN
                 __METHOD__
+          Label : DEFINITION
+            false
           Label : NAME
             false
+          Label : DEFINITION
+            false
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              false
         Label : ELEMENT
           null
           Label : ARGUMENTS

@@ -12,7 +12,7 @@ Label : PROJECT
           define
           Label : ARGUMENTS
             (
-            Label : DEFINITION, DEFINITION
+            Label : DEFINITION
               x
             Label : ARGUMENT
               'x'
