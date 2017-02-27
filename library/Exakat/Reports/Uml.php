@@ -122,16 +122,17 @@ SQL
             arrowhead = "empty"
         ]
  
-        DOT        .$this->subgraphs($dot)."\n\n".implode("\n", $links)."\n}\n";
-
+DOT
+        .$this->subgraphs($dot)."\n\n".implode("\n", $links)."\n}\n";
+    
         file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $dot);
-        }
+    }
 
-        private function str2dot($str) {
+    private function str2dot($str) {
         return htmlspecialchars($str, ENT_COMPAT | ENT_HTML401 , 'UTF-8');
-        }
+    }
 
-        private function subgraphs($array, $level = 1, $nsname = '') {
+    private function subgraphs($array, $level = 1, $nsname = '') {
         static $id = 0;
         $r = '';
 
@@ -152,7 +153,7 @@ SQL
         }
 
         return $r;
-        }
-        }
+    }
+}
 
-        ?>
+?>
