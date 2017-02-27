@@ -533,6 +533,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function atomFunctionIs($fullnspath) {
+        assert('$fullnspath !== null', 'atomFunctionIs can\'t be null');
         $this->atomIs('Functioncall');
         $this->functioncallIs($fullnspath);
 
