@@ -45,7 +45,11 @@ class Project extends Tasks {
     public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subTask);
 
-        $this->reports = $config->project_reports;
+        if (is_array($config->project_reports)) {
+            $this->reports = $config->project_reports;
+        } else {
+            $this->reports = array($config->project_reports);
+        }
     }
 
     public function run() {
