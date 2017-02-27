@@ -34,44 +34,76 @@ class UnusedArguments extends Analyzer {
     }
     
     public function analyze() {
-        $isNotRead = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; }).times('.self::MAX_LOOPING.')
+        $isNotRead = 'where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; }).times('.self::MAX_LOOPING.')
                                           .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead").count().is(eq(1)) )
                                           .count().is(eq(0)) )';
     
-        $isNotUsed = 'where( repeat( out() ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times('.self::MAX_LOOPING.').count().is(eq(0)) )';
-        //                                          .where( __.in("ANALYZED").has("analyzer", within("Analyzer\\\\Variables\\\\IsRead", "Analyzer\\\\Variables\\\\IsModified")).count().is(eq(1)) )
+        $isNotUsed = 'where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times('.self::MAX_LOOPING.').count().is(eq(0)) )';
 
-        // Arguments, not reference
+        // Arguments, not reference, function
         $this->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'varname')
              ->isNot('reference', true)
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Function')
-
-             ->hasNoOut('ABSTRACT')
-             ->hasNoInterface()
-
+             ->_as('results')
+             ->hasNoClassInterfaceTrait()
              ->outIs('BLOCK')
              // this argument must be read at least once
              ->raw($isNotRead)
-             ->back('first');
+             ->back('results');
         $this->prepareQuery();
 
-        // Arguments, reference
+        // Arguments, not reference, method (class, trait)
+        $this->analyzerIs('Variables/Arguments')
+             ->savePropertyAs('code', 'varname')
+             ->isNot('reference', true)
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Function')
+             ->_as('results')
+
+             ->hasClassTrait()
+             ->hasNoOut('ABSTRACT')
+             ->checkInheriting()
+             ->outIs('BLOCK')
+             // this argument must be read at least once
+             ->raw($isNotRead)
+             ->back('results');
+        $this->prepareQuery();
+
+        // Arguments, reference, function
         $this->analyzerIs('Variables/Arguments')
              ->savePropertyAs('code', 'varname')
              ->is('reference', true)
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->atomIs('Function')
-             ->hasNoInterface()
-             ->hasNoOut('ABSTRACT')
-
+             ->_as('results')
+             ->hasNoClassInterfaceTrait()
              ->outIs('BLOCK')
              // this argument must be read or written at least once (in fact, used)
              ->raw($isNotUsed)
-             ->back('first');
+             ->back('results');
+        $this->prepareQuery();
+
+        // Arguments, reference, method
+        $this->analyzerIs('Variables/Arguments')
+             ->savePropertyAs('code', 'varname')
+             ->is('reference', true)
+             ->inIs('ARGUMENT')
+             ->inIs('ARGUMENTS')
+             ->atomIs('Function')
+             ->_as('results')
+
+             ->hasClassTrait()
+             ->hasNoOut('ABSTRACT')
+             ->checkInheriting()
+             ->outIs('BLOCK')
+             // this argument must be read or written at least once (in fact, used)
+             ->raw($isNotUsed)
+             ->back('results');
         $this->prepareQuery();
 
         // Arguments in a USE, not a reference
@@ -79,35 +111,45 @@ class UnusedArguments extends Analyzer {
              ->hasChildren('Void', 'NAME')
              ->outIs('USE')
              ->outIs('ARGUMENT')
-             ->is('reference', false)
+             ->isNot('reference', true)
              ->savePropertyAs('code', 'varname')
-             ->_as('results')
              ->back('first')
 
              ->outIs('BLOCK')
              // this argument must be read or written at least once
              ->raw($isNotRead)
 
-             ->back('results');
+             ->back('first');
         $this->prepareQuery();
 
         // Arguments in a USE, reference
-        // Arguments in a USE, not a reference
         $this->atomIs('Function')
              ->hasChildren('Void', 'NAME')
              ->outIs('USE')
              ->outIs('ARGUMENT')
              ->is('reference', true)
              ->savePropertyAs('code', 'varname')
-             ->_as('results')
              ->back('first')
 
              ->outIs('BLOCK')
              // this argument must be read or written at least once
              ->raw($isNotUsed)
-
-             ->back('results');
+             ->back('first');
         $this->prepareQuery();
+    }
+    
+    private function checkInheriting() {
+        $this->_as('method')
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'name')
+             ->goToClassTrait()
+             ->raw('where( repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times('.self::MAX_LOOPING.')
+                                     .out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ it.get().value("code") == name}
+                                     .count().is(eq(0)) 
+                          )')
+             ->back('method');
+
+        return $this;
     }
 }
 
