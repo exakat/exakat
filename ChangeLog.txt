@@ -16,7 +16,7 @@ Version 0.10.3 (Dragon King of the Jing River, 2017-02-27)
     + New helper to rename analyzers
     + Project command now accept -P/-T to run one analyzer/Thema directly
 + Report
-    + 
+    + New report style : Codesniffer
 + Analyzer
     + New analyzer : suggest usage for array_column()
     + New analyzer : __DIR__ must be concatenated with a string starting with '/'
