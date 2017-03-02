@@ -53,11 +53,14 @@ class Report2 extends Tasks {
             throw new ProjectNotInited($this->config->project);
         }
 
+        $dumpFile = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
+        if (!file_exists($dumpFile)) {
+            throw new NoDump($this->config->project);
+        }
+
         Analyzer::$datastore = $this->datastore;
         // errors, warnings, fixable and filename
         // line number => columnnumber => type, source, severity, fixable, message
-
-        $dumpFile = $this->config->projects_root.'/projects/'.$this->config->project.'/dump.sqlite';
 
         $ProjectDumpSql = 'SELECT count FROM resultsCounts WHERE analyzer LIKE "Project/Dump"';
         $dump = new \Sqlite3($dumpFile, \SQLITE3_OPEN_READONLY);
