@@ -98,8 +98,17 @@ SHELL;
 
         $cypher = new Cypher($this->config );
 
-        $check = $cypher->query('start n=node(*) match n return count(n)');
-        if ($check === null || $check->data[0][0] < 3) {
+        $round = 0;
+        while ($round < 3) {
+            $check = $cypher->query('start n=node(*) match n return count(n)');
+            ++$round;
+            if ($check !== null && $check->data[0][0] > 3) {
+                break 1;
+            }
+            sleep($round);
+        }   
+
+        if ($round > 3) {
             throw new GremlinException('Couldn\'t load any nodes. Return message "'.$res.'"'.var_export($check));
         }
 
