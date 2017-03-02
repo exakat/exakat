@@ -29,8 +29,13 @@ class ZendInterfaces extends Analyzer {
         $regex = '^\\\\\\\\zend(_|\\\\\\\\)';
 
         // In implements
-        $this->atomIs(array('Class', 'Interface'))
-             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
+        $this->atomIs('Class')
+             ->outIs('IMPLEMENTS')
+             ->regexIs('fullnspath', $regex);
+        $this->prepareQuery();
+
+        $this->atomIs('Interface')
+             ->outIs('EXTENDS')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
     }
