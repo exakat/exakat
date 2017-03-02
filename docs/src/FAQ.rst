@@ -11,6 +11,7 @@ Summary
 * `The project is too big`_
 * `Where can I find the report`_
 * `Can I run exakat on local code?`_
+* `Can I ignore a dir or a file?`_
 * `I get the error 'The executable 'ansible-playbook' Vagrant is trying to run was not found'`_
 * `Can I run exakat on Windows?`_
 * `Does exakat send my code to a central server?`_
@@ -89,7 +90,18 @@ Symlink will branch exakat directly into the code; -copy makes a copy of the cod
 
 Exakat do not modify any existing source code : it only access it for reading purpose, then works on a separated database. As a defensive security measure, we suggest that exakat should work on a read-only copy of the code. 
 
-* use a symlink 
+`Can I ignore a dir or a file?`_
+----------------------------------
+
+Yes. After initing a project, open the projects/<project name>/config.ini file, and update the ignore_dir line. For example, to ignore a behat test folder, and to ignore any file called 'license' : 
+
+::
+
+ignore_dir[] = '/behat/';
+ignore_dir[] = 'license';
+
+
+You may also include files, by using the include_dir[] line. Including files is processed after ignoring them, so you may include files in folders that were previously ignored. 
 
 `I get the error 'The executable 'ansible-playbook' Vagrant is trying to run was not found'`_
 ---------------------------------------------------------------------------------------------
