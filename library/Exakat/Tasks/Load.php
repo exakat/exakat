@@ -1890,7 +1890,7 @@ class Load extends Tasks {
             $id = $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON &&
                   !$this->isContext(self::CONTEXT_NEW) &&
-                  !in_array($this->tokens[$this->id - 1][0], array(\Exakat\Tasks\T_DOUBLE_COLON, \Exakat\Tasks\T_OBJECT_OPERATOR, \Exakat\Tasks\T_QUESTION, \Exakat\Tasks\T_CASE))) {
+                  !$this->isContext(self::CONTEXT_NOSEQUENCE)                  ) {
             $labelId = $this->addAtom('Label');
             $this->addLink($labelId, $id, 'LABEL');
             $this->setAtom($labelId, array('code'     => ':',
@@ -2494,9 +2494,11 @@ class Load extends Tasks {
         $caseId = $this->addAtom('Case');
         $current = $this->id;
 
+        $this->nestContext();
         while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COLON, \Exakat\Tasks\T_SEMICOLON))) {
             $this->processNext();
         };
+        $this->exitContext();
 
         $itemId = $this->popExpression();
         $this->addLink($caseId, $itemId, 'CASE');
