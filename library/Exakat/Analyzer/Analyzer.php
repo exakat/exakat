@@ -605,14 +605,14 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
             }
             unset($a);
 
-            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(neq(0)) )', $analyzer);
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)) )', $analyzer);
         } else {
             if ($analyzer === 'self') {
                 $analyzer = self::getName($this->analyzerQuoted);
             } else {
                 $analyzer = self::getName($analyzer);
             }
-            $this->addMethod('where( __.in("ANALYZED").has("analyzer", "'.$analyzer.'").count().is(neq(0)) )');
+            $this->addMethod('where( __.in("ANALYZED").has("analyzer", "'.$analyzer.'") )');
         }
 
         return $this;
@@ -727,7 +727,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function hasChildWithRank($edgeName, $rank = '0') {
-        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs(intval($rank)).').count().is(neq(0)) )');
+        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs(intval($rank)).') )');
 
         return $this;
     }
@@ -1009,7 +1009,7 @@ GREMLIN
 
     public function hasIn($link) {
         assert($this->assertLink($link));
-        $this->addMethod('where( __.in('.$this->SorA($link).').count().is(neq(0)) )');
+        $this->addMethod('where( __.in('.$this->SorA($link).') )');
         
         return $this;
     }
@@ -1023,7 +1023,7 @@ GREMLIN
 
     public function hasOut($link) {
         assert($this->assertLink($link));
-        $this->addMethod('where( out('.$this->SorA($link).').count().is(neq(0)) )');
+        $this->addMethod('where( out('.$this->SorA($link).') )');
         
         return $this;
     }
