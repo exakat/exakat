@@ -37,19 +37,7 @@ class ZendClasses extends Analyzer {
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
         
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', $regex);
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->regexIs('fullnspath', $regex);
-        $this->prepareQuery();
-
-        $this->atomIs('Staticconstant')
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->regexIs('fullnspath', $regex);
@@ -62,7 +50,7 @@ class ZendClasses extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Class')
-             ->outIs(array('EXTENDS', 'IMPLEMENTS'))
+             ->outIs('EXTENDS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
