@@ -75,7 +75,9 @@ class Files extends Tasks {
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
 
         $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
-        file_put_contents($tmpFileName, '"'.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"{$this->config->projects_root}/projects/$dir/code", $files).'"');
+        $path = $this->config->projects_root.'/projects/'.$dir.'/code';
+        $tmpFiles = array_map(function ($file) use ($path) { return $path.escapeshellcmd($file);}, $files);
+        file_put_contents($tmpFileName, implode("\n", $tmpFiles) );
 
         $versions = $this->config->other_php_versions;
 
