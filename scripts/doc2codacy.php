@@ -31,16 +31,20 @@ $list = $docs->getThemeAnalyzers('Codacy');
 
 const DOC_ROOT = '../docker/docs';
 
+rename(DOC_ROOT.'/tests/', '/tmp/codacy-tests/');
 if (file_exists(DOC_ROOT)) {
     print "Removing ".DOC_ROOT."\n";
     rmdirRecursive(DOC_ROOT);
 }
-
 mkdir(DOC_ROOT, 0755);
 mkdir(DOC_ROOT.'/description/', 0755);
-mkdir(DOC_ROOT.'/description/description/', 0755);
+rename('/tmp/codacy-tests/', DOC_ROOT.'/tests/');
 
 $description = array();
+
+$timetofix = array( 'Instant' => 5,
+                    'Quick'   => 15,
+                    'Slow'    => 30);
 
 foreach($list as $doc) {
     $ini = parse_ini_file('./human/en/'.$doc.'.ini');
@@ -49,14 +53,14 @@ foreach($list as $doc) {
     $d['patternId'] = $doc;
     $d['title'] = $ini['name'];
     $d['description'] = $ini['name'];
-    $d['timetofix'] = $docs->getSeverity('\\Exakat\\Analyzer\\'.str_replace('/', '\\', $doc));
+    $d['timetofix'] = $timetofix[$docs->getTimeToFix('Exakat\\Analyzer\\'.str_replace('/', '\\', $doc))];
     
     $description[] = (object) $d;
     
     $dir = dirname($doc);
-    if (!file_exists(DOC_ROOT.'/description/description/'.$dir)) {
-        print "adding ".DOC_ROOT.'/description/description/'.$dir."\n";
-        mkdir(DOC_ROOT.'/description/description/'.$dir, 0755);
+    if (!file_exists(DOC_ROOT.'/description/'.$dir)) {
+        print "adding ".DOC_ROOT.'/description/'.$dir."\n";
+        mkdir(DOC_ROOT.'/description/'.$dir, 0755);
     }
     
     $md = preg_replace('/`(.*?)\s+<(.*?)>`_/', '[$1]($2)', $ini['description']);
@@ -66,11 +70,33 @@ foreach($list as $doc) {
     
     //tables
     
-    file_put_contents(DOC_ROOT.'/description/description/'.$doc.'.md', $md);
+    file_put_contents(DOC_ROOT.'/description/'.$doc.'.md', $md);
 }
 
+print "adding ".DOC_ROOT."/description/description.json\n";
 $descriptionFile = fopen(DOC_ROOT.'/description/description.json', 'w+');
-fwrite($descriptionFile, json_encode($description, JSON_UNESCAPED_SLASHES));
+fwrite($descriptionFile, json_encode($description, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 fclose($descriptionFile);
+
+/// patterns
+
+$patterns = new stdclass();
+$patterns->name = 'exakat';
+
+$patterns->patterns = array();
+
+foreach($list as $doc) {
+    $pattern = new stdclass();
+    $pattern->patternId  = $doc;
+    $pattern->level      = 'Warning';
+    $pattern->category   = 'ErrorProne';
+    $pattern->parameters = array();
+    
+    $patterns->patterns[] = $pattern;
+}
+print "adding ".DOC_ROOT."/patterns.json\n";
+$patternsFile = fopen(DOC_ROOT.'/patterns.json', 'w+');
+fwrite($patternsFile, json_encode($patterns, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+fclose($patternsFile);
 
 print "End\n";
