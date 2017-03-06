@@ -83,11 +83,11 @@ TEXT
         }
         $final .= implode("\n", $return);
 
-        if ($name === null) {
+        if ($name === 'stdout') {
             return $final ;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $final);
-            return true;
+            return '';
         }
     }
 }
