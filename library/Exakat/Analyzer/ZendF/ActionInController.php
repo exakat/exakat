@@ -25,19 +25,18 @@ namespace Exakat\Analyzer\ZendF;
 use Exakat\Analyzer\Analyzer;
 
 class ActionInController extends Analyzer {
+    public function dependsOn() {
+        return array('ZendF/IsController');
+    }
+    
     public function analyze() {
-        $controllers = '["\\\\zend_controller_action", "\\\\zend\\\\mvc\\\\controller\\\\abstractactioncontroller"]';
-        
         // Methods ending with Action must be in controller
         $this->atomIs('Function')
              ->hasClass()
              ->outIs('NAME')
              ->regexIs('code', 'Action\$')
              ->goToClass()
-             ->outIs(array('EXTENDS', 'IMPLEMENTS'))
-             ->raw('where( __.emit().repeat( __.in("DEFINITION").out("EXTENDS", "IMPLEMENTS")).times('.self::MAX_LOOPING.')
-                             .has("fullnspath", within('.$controllers.'))
-                             .count().is(eq(0)) )')
+             ->analyzerIsNot('ZendF/IsController')
              ->back('first');
         $this->prepareQuery();
 
@@ -49,10 +48,7 @@ class ActionInController extends Analyzer {
              ->outIs('NAME')
              ->regexIs('code', 'Action\$')
              ->goToClass()
-             ->outIs(array('EXTENDS', 'IMPLEMENTS'))
-             ->raw('where( __.emit().repeat( __.in("DEFINITION").out("EXTENDS", "IMPLEMENTS")).times('.self::MAX_LOOPING.')
-                             .has("fullnspath", within('.$controllers.'))
-                             .count().is(neq(0)) )')
+             ->analyzerIs('ZendF/IsController')
              ->back('first');
         $this->prepareQuery();
     }

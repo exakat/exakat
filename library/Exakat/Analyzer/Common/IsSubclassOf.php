@@ -33,7 +33,7 @@ class IsSubclassOf extends Analyzer {
 
         $this->atomIs('Class')
              ->goToAllParents(self::INCLUDE_SELF)
-             ->outIs('EXTENDS')
+             ->outIs(array('EXTENDS', 'IMPLEMENTS'))
              ->fullnspathIs($classes)
              ->back('first');
         $this->prepareQuery();
