@@ -9,10 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          :
-          Label : LABEL
-            H
-        Label : ELEMENT
           array
           Label : ARGUMENTS
             (
@@ -51,6 +47,6 @@ Label : PROJECT
                       Label : RIGHT
                         1
                   Label : RIGHT
-                    Void
+                    H
           Label : NAME
             array

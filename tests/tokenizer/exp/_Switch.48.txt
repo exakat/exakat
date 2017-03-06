@@ -9,15 +9,11 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          :
-          Label : LABEL
-            C
-        Label : ELEMENT
           switch
           Label : CASES
              /**/ 
             Label : ELEMENT
-              case B < 3 ? -4 :   :  /**/  
+              case B < 3 ? -4 : C :  /**/  
               Label : CASE
                 ?
                 Label : CONDITION
@@ -27,7 +23,7 @@ Label : PROJECT
                   Label : RIGHT
                     3
                 Label : ELSE
-                  Void
+                  C
                 Label : THEN
                   -4
               Label : CODE

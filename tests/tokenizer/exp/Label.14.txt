@@ -9,19 +9,15 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          :
-          Label : LABEL
-            B
-        Label : ELEMENT
           switch
           Label : CASES
              /**/ 
             Label : ELEMENT
-              case @  :  /**/  
+              case @B :  /**/  
               Label : CASE
                 @
                 Label : AT
-                  Void
+                  B
               Label : CODE
                 ;
                 Label : ELEMENT

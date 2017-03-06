@@ -631,10 +631,6 @@ Label : PROJECT
                                                 Label : RETURN
                                                   9
                                           Label : ELEMENT
-                                            :
-                                            Label : LABEL
-                                              L0
-                                          Label : ELEMENT
                                             do
                                             Label : BLOCK
                                               {}
@@ -765,7 +761,11 @@ Label : PROJECT
                     Label : ARGUMENTS
                       (
                       Label : ARGUMENT
-                        $a
+                        &
+                        Label : LEFT
+                          L0
+                        Label : RIGHT
+                          $a
                         Label : TYPEHINT
                           array
                       Label : ARGUMENT

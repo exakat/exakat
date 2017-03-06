@@ -9,10 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          :
-          Label : LABEL
-            D
-        Label : ELEMENT
           =
           Label : LEFT
             $a
@@ -31,4 +27,4 @@ Label : PROJECT
             Label : THEN
               (float)
               Label : CAST
-                Void
+                D
