@@ -726,7 +726,6 @@ class Load extends Tasks {
 
         $this->pushExpression($labelId);
         $this->processSemicolon();
-        ++$this->id;
         return $labelId;
     }
 
@@ -1901,6 +1900,7 @@ class Load extends Tasks {
                   !$this->isContext(self::CONTEXT_NEW) &&
                   !$this->isContext(self::CONTEXT_NOSEQUENCE)                  ) {
             $this->pushExpression($id);
+            ++$this->id;
             return $this->processColon();
         }
         $this->pushExpression($id);
