@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_PropertyUsedInOneMethodOnly extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testClasses_PropertyUsedInOneMethodOnly01()  { $this->generic_test('Classes/PropertyUsedInOneMethodOnly.01'); }
+    public function testClasses_PropertyUsedInOneMethodOnly02()  { $this->generic_test('Classes/PropertyUsedInOneMethodOnly.02'); }
 }
 ?>
