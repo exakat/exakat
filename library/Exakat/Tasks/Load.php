@@ -471,7 +471,7 @@ class Load extends Tasks {
             if (!is_file($filename)) {
                 throw new MustBeAFile($filename);
             }
-            if ($this->processFile($filename)) {
+            if ($this->processFile($filename, '')) {
                 $this->saveFiles();
             }
             $files = 1;
@@ -515,7 +515,7 @@ class Load extends Tasks {
         $path = $this->config->projects_root.'/projects/'.$project.'/code';
         foreach($files as $file) {
             try {
-                if ($r = $this->processFile($path.$file)) {
+                if ($r = $this->processFile($file, $path)) {
                     $nbTokens += $r;
                     $this->saveFiles();
                 }
@@ -547,7 +547,7 @@ class Load extends Tasks {
         $nbTokens = 0;
         foreach($files as $file) {
             try {
-                if ($r = $this->processFile($dir.$file)) {
+                if ($r = $this->processFile($file, $dir)) {
                     $nbTokens += $r;
                     $this->saveFiles();
                 }
@@ -588,8 +588,10 @@ class Load extends Tasks {
         $this->expressions = array();
     }
 
-    private function processFile($filename) {
-        $this->log->log($filename);
+    private function processFile($filename, $path) {
+        $fullpath = $path.$filename;
+        
+        $this->log->log($fullpath);
         $this->filename = $filename;
 
         ++$this->stats['files'];
@@ -597,26 +599,22 @@ class Load extends Tasks {
         $this->line = 0;
         $log = array();
 
-        if (is_link($filename)) { return true; }
-        if (!file_exists($filename)) {
+        if (is_link($fullpath)) { 
+            return true; 
+        }
+        if (!file_exists($fullpath)) {
             throw new NoSuchFile( $filename );
         }
 
-        $file = realpath($filename);
-        if (strpos($file, '/code/') !== false) {
-            $file = substr($file, strpos($file, '/code/') + 5);
-        } else {
-            $file = $filename;
-        }
-        if (filesize($filename) === 0) {
+        if (filesize($fullpath) === 0) {
             return false;
         }
 
-        if (!$this->php->compile($filename)) {
+        if (!$this->php->compile($fullpath)) {
             throw new NoFileToProcess($filename, 'won\'t compile');
         }
 
-        $tokens = $this->php->getTokenFromFile($filename);
+        $tokens = $this->php->getTokenFromFile($fullpath);
         $log['token_initial'] = count($tokens);
 
         if (count($tokens) === 1) {
@@ -663,7 +661,7 @@ class Load extends Tasks {
 
         $id1 = $this->addAtom('File');
         $this->setAtom($id1, array('code'     => $filename,
-                                   'fullcode' => $file,
+                                   'fullcode' => $filename,
                                    'line'     => -1,
                                    'token'    => 'T_FILENAME'));
         $this->addLink($this->id0, $id1, 'PROJECT');
@@ -1896,13 +1894,7 @@ class Load extends Tasks {
             ++$this->id;
             $this->processNsname();
             $id = $this->popExpression();
-        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON &&
-                  !$this->isContext(self::CONTEXT_NEW) &&
-                  !$this->isContext(self::CONTEXT_NOSEQUENCE)                  ) {
-            $this->pushExpression($id);
-            ++$this->id;
-            return $this->processColon();
-        }
+        } 
         $this->pushExpression($id);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
