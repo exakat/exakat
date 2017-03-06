@@ -1946,7 +1946,7 @@ SQL;
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $errorMessages .= '<tr><td>'.htmlentities($row[fullcode], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $errorMessages .= '<tr><td>'.htmlentities($row['fullcode'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
 
         $html = $this->getBasedPage('error_messages');
