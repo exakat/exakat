@@ -38,12 +38,12 @@ class UndefinedClasses extends Analyzer {
         
     public function analyze() {
         if (in_array($this->release, array('1.5', '1.6', '1.7', '1.8', '1.9', '1.10', '1.11', '1.12'))) {
-            $data = new ZendF();
+            $data = new ZendF($this->config->dir_root.'/data', $this->config->is_phar);
         } elseif (in_array($this->release, array('2.0', '2.1', '2.2', '2.3', '2.4', '2.5', '3.0'))) {
-            $data = new ZendF2();
+            $data = new ZendF2($this->config->dir_root.'/data', $this->config->is_phar);
         } else {
             $this->release = '2.5';
-            $data = new ZendF2();
+            $data = new ZendF2($this->config->dir_root.'/data', $this->config->is_phar);
         }
 
         $classes = $data->getClassByRelease($this->release);

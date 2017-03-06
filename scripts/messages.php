@@ -20,18 +20,31 @@
  *
 */
 $docs = glob('human/en/*/*.ini');
+$clearphp = 0;
+$total = 0;
 foreach($docs as $iniFile) {
+    ++$total;
     $ini = parse_ini_file($iniFile);
     $offset = strpos($ini['description'], '.');
     
+    $clearphp += (bool) empty($ini['clearphp']);
     if (!$offset) {
         print "$iniFile is missing a sentence with a dot.\n";
         continue;
     }
     $message = substr($ini['description'], 0, $offset);
     $words = count(explode(' ', $message));
+
+    if (empty($ini['clearphp']) && !preg_match('/`.*?<.*?>`/is', $ini['description'])) {
+        print "$iniFile has no external link.\n";
+        continue;
+    }
+
     if ($words < 30) { continue; }
     print $iniFile." ($words words): ".$message."\n";
 }
+
+print "\n";
+print $clearphp.'/'.$total." have clearphp link\n";
 
 ?>

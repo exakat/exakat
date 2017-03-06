@@ -9,10 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          :
-          Label : LABEL
-            H
-        Label : ELEMENT
           =
           Label : LEFT
             ->
@@ -45,7 +41,7 @@ Label : PROJECT
                     Label : LEFT
                       G
                     Label : RIGHT
-                      Void
+                      H
               Label : ARGUMENT
                 'J'
             Label : NAME

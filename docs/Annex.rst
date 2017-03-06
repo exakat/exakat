@@ -65,6 +65,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * FileDependenciesHtml
   * ZendFramework
   * RadwellCode
+  * Codesniffer
   * FacetedJson
   * Json
   * OnepageJson
@@ -97,6 +98,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/dba
 * ext/dio
 * ext/dom
+* ext/ds
 * ext/eaccelerator
 * ext/enchant
 * ext/ereg
@@ -277,6 +279,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.10.4
+
+  * No Need For Else (Structures/NoNeedForElse ; Analyze)
+  * Should Regenerate Session Id (ZendF/ShouldRegenerateSessionId ; ZendFramework)
+  * Should Use session_regenerateid() (Security/ShouldUseSessionRegenerateId ; Security)
+  * Use Zend Session (ZendF/UseSession ; Internal)
+  * ext/ds (Extensions/Extds)
+
 * 0.10.3
 
   * Multiple Alias Definitions Per File (Namespaces/MultipleAliasDefinitionPerFile ; Analyze)
@@ -303,7 +313,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Error_Log() Usage (Php/ErrorLogUsage ; Appinfo)
   * No Boolean As Default (Functions/NoBooleanAsDefault ; Analyze)
   * Raised Access Level (Classes/RaisedAccessLevel)
-  * Use Prepare With Variables (Wordpress/WpdbPrepareForVariables ; ZendFramework)
+  * Use Prepare With Variables (Wordpress/WpdbPrepareForVariables ; )
 
 * 0.9.9
 
@@ -1193,7 +1203,9 @@ External links
 
 List of external links mentionned in this documentation.
 
+* `Alternative PHP Cache <http://php.net/apc>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
+* `array_column() <https://benramsey.com/projects/array-column/>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
@@ -1203,6 +1215,7 @@ List of external links mentionned in this documentation.
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `composer <https://getcomposer.org/>`_
 * `curl <http://www.php.net/curl>`_
+* `Data structures <http://docs.php.net/manual/en/book.ds.php>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
@@ -1210,6 +1223,7 @@ List of external links mentionned in this documentation.
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
 * `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
+* `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `git <https://git-scm.com/>`_
 * `Github <https://github.com/exakat/exakat>`_
@@ -1222,15 +1236,19 @@ List of external links mentionned in this documentation.
 * `List of function aliases <http://php.net/manual/en/aliases.php>`_
 * `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
+* `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Marco Pivetti tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Neo4j <http://neo4j.com/>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
+* `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `phar <https://www.exakat.io/download-exakat/>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Semaphore <http://php.net/manual/en/book.sem.php>`_
+* `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
+* `session_regenerateid() <http://php.net/session_regenerate_id>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `svn <https://subversion.apache.org/>`_
@@ -1241,6 +1259,8 @@ List of external links mentionned in this documentation.
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
+* `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_
 * `XSL extension <http://php.net/manual/en/intro.xsl.php>`_
+* `Zend Session <https://docs.zendframework.com/zend-session/manager/>`_
 
 

@@ -77,9 +77,9 @@ class Devoops extends Reports {
         copyDir($this->config->dir_root.'/media/devoops/js', $folder.'/'.$name.'/js');
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
 
-        $this->dump      = new \Sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
+        $this->dump      = new \Sqlite3($folder.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
         // This is an overwriting. Leave it here.
-        $this->datastore = new \Sqlite3($folder.'/datastore.sqlite', SQLITE3_OPEN_READONLY);
+        $this->datastore = new \Sqlite3($folder.'/datastore.sqlite', \SQLITE3_OPEN_READONLY);
 
         // Compatibility
         $compatibility = array('Compilation' => 'Compilation');
@@ -1901,7 +1901,7 @@ TEXT
 
         $data = array();
         $res = $this->datastore->query('SELECT name AS Service, file AS File, homepage AS url FROM configFiles');
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (empty($row['url'])) {
                 $row['Home page'] = '';
             } else {
@@ -1929,7 +1929,7 @@ TEXT
 
         $data = array();
         $res = $this->datastore->query('SELECT library AS Library, file AS Folder FROM externallibraries ORDER BY library');
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $url = $externallibraries->{strtolower($row['Library'])}->homepage;
             if (empty($url)) {
                 $row['Home page'] = '';
@@ -1979,7 +1979,7 @@ SQL
         $data = array();
         $sqlQuery = 'SELECT fullcode AS Code, file AS File, line AS Line  FROM results WHERE analyzer="Structures/GlobalInGlobal" ORDER BY fullcode';
         $res = $this->dump->query($sqlQuery);
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $data[] = $row;
         }
 
@@ -2011,7 +2011,7 @@ TEXT
         $data = array();
         $sqlQuery = 'SELECT fullcode as Code, file AS File, line AS Line FROM results WHERE analyzer="'.$this->dump->escapeString($analyzer->getInBaseName()).'"';
         $res = $this->dump->query($sqlQuery);
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $data[] = $row;
         }
         $return .= $this->formatHorizontal($data, $css);
@@ -2036,7 +2036,7 @@ SELECT fullcode as Code, analyzer AS Analyzer, line AS Line FROM results
 
 SQL;
         $res = $this->dump->query($sqlQuery);
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['Analyzer']);
             $row['File'] = $analyzer->getDescription()->getName();
             $data[] = $row;

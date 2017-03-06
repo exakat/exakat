@@ -69,7 +69,7 @@ class ZendFramework extends Devoops {
         copyDir($this->config->dir_root.'/media/devoops/plugins', $folder.'/'.$name.'/plugins');
 
         display("Copied media files");
-        $this->dump      = new \Sqlite3($folder.'/dump.sqlite', SQLITE3_OPEN_READONLY);
+        $this->dump      = new \Sqlite3($folder.'/dump.sqlite', \SQLITE3_OPEN_READONLY);
 
         $this->datastore = new \sqlite3($folder.'/datastore.sqlite', \SQLITE3_OPEN_READONLY);
 

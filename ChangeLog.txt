@@ -1,4 +1,4 @@
-Version 0.10.4 (Dragon King of the West Sea, Coming up)
+Version 0.10.5 (Immortal of Tiger Power, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 0.10.4 (Dragon King of the West Sea, Coming up)
     + 
 + Tokenizer
     + 
+    
+Version 0.10.4 (Dragon King of the West Sea, 2017-03-06)
++ Architecture
+    + Ignore some classic files by default (README, LICENSE...)
++ Report
+    + Ambassador : protection of HTML values
+    + PHPcompilation : fixed export to stdout
++ Analyzer
+    + New analyzer : report useless else branches
+    + New analyzer : should regenerate session Id, for PHP and Zend Framework
+    + Added support for Extension Data structures (ext/ds)
+    + Upgraded analyzer : Hardcoded Hash
+    + Speed up analysis for extensions
++ Tokenizer
+    + Fixed edge case where a constant was used inside a ternary operator
+    + Fixed processing of labels
     
 Version 0.10.3 (Dragon King of the Jing River, 2017-02-27)
 + Architecture

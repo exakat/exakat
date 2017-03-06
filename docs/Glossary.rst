@@ -119,6 +119,7 @@ Glossary
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Long Arguments <long-arguments>`
       + :ref:`Multiples Identical Case <multiples-identical-case>`
+      + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
@@ -151,6 +152,7 @@ Glossary
 
       + :ref:`Bail Out Early <bail-out-early>`
       + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`Unreachable Code <unreachable-code>`
 
     + `count()`
@@ -357,6 +359,7 @@ Glossary
       + :ref:`Unresolved Instanceof <unresolved-instanceof>`
       + :ref:`Use Instanceof <use-instanceof>`
       + :ref:`Useless Interfaces <useless-interfaces>`
+      + :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 
     + `intval()`
 
@@ -646,6 +649,10 @@ Glossary
 
       + :ref:`Must Return Methods <must-return-methods>`
 
+    + `__clone`
+
+      + :ref:`Magic Visibility <magic-visibility>`
+
     + `__construct`
 
       + :ref:`Anonymous Classes <anonymous-classes>`
@@ -673,6 +680,7 @@ Glossary
 
     + `__get`
 
+      + :ref:`Magic Visibility <magic-visibility>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 
@@ -682,10 +690,12 @@ Glossary
 
     + `__isset`
 
+      + :ref:`Magic Visibility <magic-visibility>`
       + :ref:`Must Return Methods <must-return-methods>`
 
     + `__set`
 
+      + :ref:`Magic Visibility <magic-visibility>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 
     + `__set_state`

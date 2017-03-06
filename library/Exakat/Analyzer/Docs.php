@@ -35,7 +35,7 @@ class Docs {
         } else {
             $docPath = $path;
         }
-        $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
+        $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }
 
     public function __destruct() {
@@ -184,7 +184,7 @@ SELECT 'Analyzer\\' || folder || '\\' || name AS name FROM analyzers WHERE name=
 SQL;
         $stmt = $this->sqlite->prepare($query);
 
-        $stmt->bindValue(':name', $name, SQLITE3_TEXT);
+        $stmt->bindValue(':name', $name, \SQLITE3_TEXT);
         $res = $stmt->execute();
 
         $return = array();
@@ -204,7 +204,7 @@ SQL;
             $query .= ' WHERE folder=:folder';
             $stmt = $this->sqlite->prepare($query);
             
-            $stmt->bindValue(':folder', $folder, SQLITE3_TEXT);
+            $stmt->bindValue(':folder', $folder, \SQLITE3_TEXT);
         } else {
             $stmt = $this->sqlite->prepare($query);
         }
@@ -227,7 +227,7 @@ SQL;
             $query .= ' WHERE name=:name';
             $stmt = $this->sqlite->prepare($query);
             
-            $stmt->bindValue(':name', $theme, SQLITE3_TEXT);
+            $stmt->bindValue(':name', $theme, \SQLITE3_TEXT);
         } else {
             $stmt = $this->sqlite->prepare($query);
         }

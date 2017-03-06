@@ -42,7 +42,7 @@ class Codacy extends Reports {
         $results = '';
         $titleCache = array();
         $severityCache = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $message = array();
 
             if (!isset($titleCache[$row['patternId']])) {

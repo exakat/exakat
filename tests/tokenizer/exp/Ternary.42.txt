@@ -1,0 +1,90 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Ternary.42.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $sum
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              $carry
+            Label : ELSE
+              $sum
+            Label : THEN
+              +
+              Label : LEFT
+                $sum
+              Label : RIGHT
+                MATH_BIGINTEGER_MAX_DIGIT2
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $sum
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              $carry
+            Label : ELSE
+              $sum
+            Label : THEN
+              *
+              Label : LEFT
+                $sum
+              Label : RIGHT
+                MATH_BIGINTEGER_MAX_DIGIT3
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $sum
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              $carry
+            Label : ELSE
+              $sum
+            Label : THEN
+              *
+              Label : LEFT
+                $sum
+              Label : RIGHT
+                ->
+                Label : OBJECT
+                  $a
+                Label : PROPERTY
+                  MATH_BIGINTEGER_MAX_DIGIT4
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $sum
+          Label : RIGHT
+            ?
+            Label : CONDITION
+              $carry
+            Label : ELSE
+              $sum
+            Label : THEN
+              MATH_BIGINTEGER_MAX_DIGIT5
+        Label : ELEMENT
+          switch
+          Label : CASES
+             /**/ 
+            Label : ELEMENT
+              case MATHD :  /**/  
+              Label : CASE
+                MATHD
+              Label : CODE
+                ;
+                Label : ELEMENT
+                  break
+                  Label : BREAK
+                    1
+          Label : NAME
+            $x

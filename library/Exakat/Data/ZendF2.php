@@ -29,17 +29,17 @@ class ZendF2 {
     protected $sqlite = null;
     protected $phar_tmp = null;
 
-    public function __construct() {
+    public function __construct($path, $isPhar) {
         $config = Config::factory();
 
-        if ($config->is_phar) {
+        if ($isPhar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf2').'.sqlite';
-            copy($config->dir_root.'/data/zendf2.sqlite', $this->phar_tmp);
+            copy($path.'/zendf2.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;
         } else {
-            $docPath = $config->dir_root.'/data/zendf2.sqlite';
+            $docPath = $path.'/zendf2.sqlite';
         }
-        $this->sqlite = new \Sqlite3($docPath, SQLITE3_OPEN_READONLY);
+        $this->sqlite = new \Sqlite3($docPath, \SQLITE3_OPEN_READONLY);
     }
 
     public function __destruct() {
@@ -61,7 +61,7 @@ class ZendF2 {
         $res = $this->sqlite->query($query);
         $return = array();
 
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['class'];
             } else {
@@ -85,7 +85,7 @@ class ZendF2 {
             $query .= " WHERE releases.release = \"release-$release.0\"";
         }
 
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['interface'];
             } else {
@@ -109,7 +109,7 @@ class ZendF2 {
             $query .= " WHERE releases.release = \"release-$release.0\"";
         }
 
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['trait'];
             } else {

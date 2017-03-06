@@ -40,7 +40,7 @@ class OnepageJson extends Reports {
 
         $results = array();
 
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
 
             if (!isset($titleCache[$row['analyzer']])) {
                 $analyzer = Analyzer::getInstance($row['analyzer']);

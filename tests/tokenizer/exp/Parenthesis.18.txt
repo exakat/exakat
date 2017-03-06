@@ -9,10 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          :
-          Label : LABEL
-            F
-        Label : ELEMENT
           require
           Label : ARGUMENTS
             $h
@@ -43,7 +39,7 @@ Label : PROJECT
                       Label : PROPERTY
                         e
                     Label : CONCAT
-                      Void
+                      F
               Label : CONCAT
                 $h
           Label : NAME

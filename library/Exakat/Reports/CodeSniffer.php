@@ -48,7 +48,7 @@ class CodeSniffer extends Reports {
         $results = array();
         $titleCache = array();
         $severityCache = array();
-        while($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (!isset($results[$row['file']])) {
                 $file = array('errors'   => 0,
                               'warnings' => 0,

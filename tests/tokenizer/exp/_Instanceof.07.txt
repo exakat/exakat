@@ -9,10 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          :
-          Label : LABEL
-            D
-        Label : ELEMENT
           switch
           Label : CASES
              /**/ 
@@ -37,11 +33,11 @@ Label : PROJECT
                   Label : RETURN
                     Void
             Label : ELEMENT
-              case $c instanceof   :  /**/  
+              case $c instanceof D :  /**/  
               Label : CASE
                 instanceof
                 Label : CLASS
-                  Void
+                  D
                 Label : VARIABLE
                   $c
               Label : CODE

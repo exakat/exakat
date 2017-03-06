@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 27 Feb 2017 16:21:29 +0000
-.. comment: Generation hash : fabc58f81b8c3c9719f673b4641ad295d7a7c2ae
+.. comment: Generation date : Mon, 06 Mar 2017 16:54:08 +0000
+.. comment: Generation hash : 867c3a930b27994c70b784993314e366c8348f56
 
 
 .. _$http\_raw\_post\_data:
@@ -4895,7 +4895,30 @@ Magic Visibility
 ################
 
 
-The magic methods must have public visibility and cannot be static
+The magic methods must have public visibility and cannot be static.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo{
+       // magic method must bt public and non-static
+       public static function __clone($name) {    }
+   
+       // magic method can't be private
+       private function __get($name) {    }
+   
+       // magic method can't be protected
+       private function __set($name, $value) {    }
+   
+       // magic method can't be static
+       public static function __isset($name) {    }
+   
+   }
+   
+   See Magic.
+   
+   ?>
 
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/toStringPss                                                                                                                                                                                         |
@@ -6293,6 +6316,63 @@ list() can't be used anymore to access particular offset in a string. This shoul
 
 
 
+.. _no-need-for-else:
+
+No Need For Else
+################
+
+
+Else is not needed when the Then ends with a `break <http://php.net/manual/en/control-structures.break.php>`_. A `break <http://php.net/manual/en/control-structures.break.php>`_ may be the following keywords : `break <http://php.net/manual/en/control-structures.break.php>`_, `continue <http://php.net/manual/en/control-structures.continue.php>`_, return, goto. Any of these send the execution somewhere in the code. The else block is then executed as the main sequence, only if the condition fails.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       // Else may be in the main sequence.
+       if ($a1) {
+           return $a1;
+       } else {
+           $a++;
+       }
+   
+       // Same as above, but negate the condition : if (!$a2) { return $a2; }
+       if ($a2) {
+           $a++;
+       } else {
+           return $a2;
+       }
+   
+       // This is OK
+       if ($a3) {
+           return;
+       }
+   
+       // This has no break
+       if ($a4) {
+           $a++;
+       } else {
+           $b++;
+       }
+   
+       // This has no else
+       if ($a5) {
+           $a++;
+       }
+   }
+   ?>
+
+
+See also `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_, rule number 2.
+
++--------------+--------------------------+
+| Command Line | Structures/NoNeedForElse |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
+
 .. _no-parenthesis-for-language-construct:
 
 No Parenthesis For Language Construct
@@ -6800,7 +6880,9 @@ Not Not
 #######
 
 
-This is a wrongly done type casting to boolean : 
+Double not makes a boolean, not a true.
+
+This is a wrongly done casting to boolean. PHP supports (boolean) to do the same, faster and cleaner.
 
 .. code-block:: php
 
@@ -8297,11 +8379,13 @@ It is recommended to use echo with multiple arguments, or a concatenation with p
      print 'c';
    ?>
 
-+--------------+--------------------------+
-| Command Line | Structures/RepeatedPrint |
-+--------------+--------------------------+
-| Analyzers    | :ref:`Analyze`           |
-+--------------+--------------------------+
++--------------+---------------------------------------------------------------------------------------------------+
+| Command Line | Structures/RepeatedPrint                                                                          |
++--------------+---------------------------------------------------------------------------------------------------+
+| clearPHP     | `no-repeated-print <https://github.com/dseguy/clearPHP/tree/master/rules/no-repeated-print.md>`__ |
++--------------+---------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`Analyze`                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------+
 
 
 
@@ -9043,11 +9127,54 @@ Should use `array_column() <http://www.php.net/array_column>`_.
 
 `array_column() <http://www.php.net/array_column>`_ is faster than `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ (with or without the `isset() <http://www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
 
+See also ``array_column() <http://www.php.net/array_column>`_ <https://benramsey.com/projects/array-column/>`_.
+
 +--------------+-------------------------------------+
 | Command Line | Php/ShouldUseArrayColumn            |
 +--------------+-------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Performances` |
 +--------------+-------------------------------------+
+
+
+
+.. _should-use-session\_regenerateid():
+
+Should Use session_regenerateid()
+#################################
+
+
+session_regenerateid() should be used when sessions are used.
+
+When using sessions, a session ID is assigned to the user. It is a random number, used to connect the user and its data on the server. Actually, anyone with the session ID may have access to the data. This is why those session ID are so long and complex.
+
+A good approach to protect the session ID is to reduce its lifespan : the shorter the time of use, the better. While changing the session ID at every hit on the page may no be possible, a more reasonable approach is to change the session id when an important action is about to take place. What important means is left to the application to decide.
+
+Based on this philopsophy, a code source that uses Zend\Session but never uses Zend\Session::regenerateId() has to be updated.
+
+.. code-block:: php
+
+   <?php
+   
+       session_start();
+       
+       $id = (int) $_SESSION['id'];
+       // no usage of session_regenerateid() anywhere triggers the analysis
+       
+       // basic regeneration every 20 hits on the page. 
+       if (++$_SESSION['count'] > 20) {
+           session_regenerateid();
+       }
+   
+   ?>
+
+
+See `session_regenerateid() <http://php.net/session_regenerate_id>`_ and `PHP Security Guide: Sessions <http://phpsec.org/projects/guide/4.html>`_.
+
++--------------+---------------------------------------+
+| Command Line | Security/ShouldUseSessionRegenerateId |
++--------------+---------------------------------------+
+| Analyzers    | :ref:`Security`                       |
++--------------+---------------------------------------+
 
 
 
@@ -11530,6 +11657,9 @@ Here is a table of conversion :
    
    ?>
 
+
+See `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_.
+
 +--------------+--------------------------+
 | Command Line | Wordpress/UseWpFunctions |
 +--------------+--------------------------+
@@ -12903,7 +13033,20 @@ ext/apc
 #######
 
 
-Extension APC
+Extension `Alternative PHP Cache <http://php.net/apc>`_.
+
+.. code-block:: php
+
+   <?php
+   $bar = 'BAR';
+   apc_add('foo', $bar);
+   var_dump(apc_fetch('foo'));
+   echo \n;
+   $bar = 'NEVER GETS SET';
+   apc_add('foo', $bar);
+   var_dump(apc_fetch('foo'));
+   echo \n;
+   ?>
 
 +--------------+----------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Extensions/Extapc                                                                                                          |
@@ -13273,6 +13416,57 @@ preg_replace With Option e
 +--------------+------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP70`, :ref:`Security`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
 +--------------+------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _self,-parent,-static-outside-class:
+
+self, parent, static Outside Class
+##################################
+
+
+self, parent and static should be called inside a class or trait. PHP lint won't report those situations. 
+
+self, parent and static may be used in a trait : their actual value will be only known at execution time, when the trait is used.
+
+.. code-block:: php
+
+   <?php
+   // In the examples, self, parent and static may be used interchangeably
+   
+   // This raises a Fatal error
+   //Fatal error: Uncaught Error: Cannot access static:: when no class scope is active
+   new static();
+   
+   // static calls
+   echo self::CONSTANTE;
+   echo self::$property;
+   echo self::method();
+   
+   // as a type hint
+   function foo(static $x) {
+       doSomething();
+   }
+   
+   // as a instanceof
+   if ($x instanceof static) {
+       doSomething();
+   }
+   
+   ?>
+
+
+Such syntax problem is only revealed at execution time : PHP raises a Fatal error. 
+
+The origin of the problem is usually a method that was moved outside a class, at least temporarily.
+
+See also `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_.
+
++--------------+---------------------------+
+| Command Line | Classes/NoPSSOutsideClass |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
 
 
 
