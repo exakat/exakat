@@ -12,6 +12,7 @@ Summary
 * `Where can I find the report`_
 * `Can I run exakat on local code?`_
 * `Can I ignore a dir or a file?`_
+* `Can I run Exakat with PHP 5?`_
 * `I get the error 'The executable 'ansible-playbook' Vagrant is trying to run was not found'`_
 * `Can I run exakat on Windows?`_
 * `Does exakat send my code to a central server?`_
@@ -97,11 +98,35 @@ Yes. After initing a project, open the projects/<project name>/config.ini file, 
 
 ::
 
-ignore_dir[] = '/behat/';
-ignore_dir[] = 'license';
+    ignore_dir[] = '/behat/';
+    ignore_dir[] = 'license';
 
 
 You may also include files, by using the include_dir[] line. Including files is processed after ignoring them, so you may include files in folders that were previously ignored. 
+
+`Can I run Exakat with PHP 5?`_
+-------------------------------
+
+It is recommended to run exakat with PHP 7.0 and more recent. Older version are not so well tested, since they have reached their end of life.
+
+Note that you may test your code on PHP 5.x, while running Exakat on PHP 7.0. There are 2 distinct configuration options in Exakat. 'php' is the path to the PHP binary that runs Exakat : this one should be PHP 7.0+. 'phpxx' are the path to the PHP helpers, that are used to tokenized and lint the target PHP code. This is where PHP 5.x may be configured.
+
+::
+
+    ; where and which PHP executable are available
+    php   = /usr/local/sbin/php71
+    
+    php52 = 
+    php53 = /usr/local/sbin/php53
+    php54 = 
+    php55 = 
+    php56 = 
+    php70 = 
+    php71 = 
+    php72 = 
+
+Above is an example of a exakat configuration file, where Exakat is run with PHP 7.1 and process code with PHP 5.3.
+
 
 `I get the error 'The executable 'ansible-playbook' Vagrant is trying to run was not found'`_
 ---------------------------------------------------------------------------------------------
