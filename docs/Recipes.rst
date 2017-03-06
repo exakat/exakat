@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 27 Feb 2017 16:21:29 +0000
-.. comment: Generation hash : fabc58f81b8c3c9719f673b4641ad295d7a7c2ae
+.. comment: Generation date : Mon, 06 Mar 2017 16:54:08 +0000
+.. comment: Generation hash : 867c3a930b27994c70b784993314e366c8348f56
 
 
 .. _analyze:
@@ -69,7 +69,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 292 analysis
+Total : 294 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -205,6 +205,7 @@ Total : 292 analysis
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`No Implied If <no-implied-if>`
 * :ref:`No Isset With Empty <no-isset-with-empty>`
+* :ref:`No Need For Else <no-need-for-else>`
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
@@ -362,6 +363,7 @@ Total : 292 analysis
 * :ref:`mcrypt_create_iv() With Default Values <mcrypt\_create\_iv()-with-default-values>`
 * :ref:`preg_match_all() Flag <preg\_match\_all()-flag>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+* :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 * :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
 .. _coding-conventions:
@@ -789,7 +791,7 @@ Total : 25 analysis
 Security
 ++++++++
 
-Total : 19 analysis
+Total : 20 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
@@ -805,6 +807,7 @@ Total : 19 analysis
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe CurlOptions <safe-curloptions>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
+* :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`parse_str() Warning <parse\_str()-warning>`
