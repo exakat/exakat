@@ -31,9 +31,6 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\NoSuchFile;
 use Exakat\Exceptions\NoSuchLoader;
-use Exakat\Loader\CypherG3;
-use Exakat\Loader\Neo4jImport;
-use Exakat\Loader\GremlinServerNeo4j;
 use Exakat\Phpexec;
 use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Precedence;
@@ -581,18 +578,18 @@ class Load extends Tasks {
         $this->usesId = array('function' => array(),
                               'const'    => array(),
                               'class'    => array());
-        $this->contexts = $contexts = array(self::CONTEXT_CLASS      => false,
-                                            self::CONTEXT_INTERFACE  => false,
-                                            self::CONTEXT_TRAIT      => false,
-                                            self::CONTEXT_FUNCTION   => false,
-                                            self::CONTEXT_NEW        => false,
-                                            self::CONTEXT_NOSEQUENCE => 0,
+        $this->contexts = array(self::CONTEXT_CLASS      => false,
+                                self::CONTEXT_INTERFACE  => false,
+                                self::CONTEXT_TRAIT      => false,
+                                self::CONTEXT_FUNCTION   => false,
+                                self::CONTEXT_NEW        => false,
+                                self::CONTEXT_NOSEQUENCE => 0,
                          );
         $this->expressions = array();
     }
 
     private function processFile($filename) {
-        $this->log->log("$filename");
+        $this->log->log($filename);
         $this->filename = $filename;
 
         ++$this->stats['files'];
@@ -693,7 +690,7 @@ class Load extends Tasks {
         } catch (LoadError $e) {
             $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
             $this->reset();
-            throw new NoFileToProcess($filename, 'empty');
+            throw new NoFileToProcess($filename, 'empty', 0, $e);
         } finally {
             $this->stats['totalLoc'] += $line;
             $this->stats['loc'] += $line;
@@ -716,9 +713,21 @@ class Load extends Tasks {
 
         return $this->$method();
     }
-
+    
     private function processColon() {
-        return null;// Just ignore
+        $labelId = $this->addAtom('Label');
+        $tagId = $this->popExpression();
+
+        $this->addLink($labelId, $tagId, 'LABEL');
+        $this->setAtom($labelId, array('code'     => ':',
+                                       'fullcode' => $this->atoms[$tagId]['fullcode'].' :',
+                                       'line'     => $this->tokens[$this->id][2],
+                                       'token'    => $this->getToken($this->tokens[$this->id][0])));
+
+        $this->pushExpression($labelId);
+        $this->processSemicolon();
+        ++$this->id;
+        return $labelId;
     }
 
     //////////////////////////////////////////////////////
@@ -1108,7 +1117,6 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($traitId, $blockId, 'BLOCK');
 
-        list($fullnspath, $aliased) = $this->getFullnspath($nameId);
         $this->setAtom($traitId, array('code'       => $this->tokens[$current][1],
                                        'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].static::FULLCODE_BLOCK,
                                        'line'       => $this->tokens[$current][2],
@@ -1116,6 +1124,7 @@ class Load extends Tasks {
                                        'fullnspath' => $this->atoms[$nameId]['fullnspath'],
                                        'aliased'    => $this->atoms[$nameId]['aliased']));
 
+        list($fullnspath,) = $this->getFullnspath($nameId);
         $this->addDefinition('class', $fullnspath, $traitId);
 
         $this->pushExpression($traitId);
@@ -1891,16 +1900,8 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON &&
                   !$this->isContext(self::CONTEXT_NEW) &&
                   !$this->isContext(self::CONTEXT_NOSEQUENCE)                  ) {
-            $labelId = $this->addAtom('Label');
-            $this->addLink($labelId, $id, 'LABEL');
-            $this->setAtom($labelId, array('code'     => ':',
-                                           'fullcode' => $this->atoms[$id]['fullcode'].' :',
-                                           'line'     => $this->tokens[$this->id][2],
-                                           'token'    => $this->getToken($this->tokens[$this->id][0])));
-
-            $this->pushExpression($labelId);
-            $this->processSemicolon();
-            return $labelId;
+            $this->pushExpression($id);
+            return $this->processColon();
         }
         $this->pushExpression($id);
 
