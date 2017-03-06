@@ -321,6 +321,9 @@ class Files extends Tasks {
         $ignore_dirs = $config->ignore_dirs;
         $dir = $config->project;
 
+        $ignore_files = parse_ini_file($config->dir_root.'/data/ignore_files.ini');
+        $ignore_files = array_flip($ignore_files['files']);
+        
         // Regex to ignore files and folders
         $ignoreDirs = array();
         foreach($ignore_dirs as $ignore) {
@@ -371,12 +374,17 @@ class Files extends Tasks {
             return ;
         }
         chdir($path);
-        $files = rglob( '.');
+        $files = rglob('.');
         chdir($d);
         $exts = $config->file_extensions;
 
         foreach($files as $id => &$file) {
-            $file = substr($file, 1);
+            if (isset($ignore_files[basename($file)])) {
+                unset($files[$id]);
+                $ignoredFiles[$file] = "Ignored file (".basename($file).")";
+                continue;
+            }
+            $file = substr($file, 1); // drop the initial /
             $ext = pathinfo($file, PATHINFO_EXTENSION);
             if (!empty($includeDirsRegex) && preg_match($includeDirsRegex, $file)) {
                 // Matching the 'include dir' pattern
