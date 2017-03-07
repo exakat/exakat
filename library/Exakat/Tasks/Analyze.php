@@ -58,8 +58,6 @@ class Analyze extends Tasks {
         $this->checkTokenLimit();
         $begin = microtime(true);
 
-        Analyzer::$gremlinStatic = $this->gremlin;
-
         // Take this before we clean it up
         $rows = $this->datastore->getRow('analyzed');
         $analyzed = array();
@@ -100,7 +98,7 @@ class Analyze extends Tasks {
             $dependencies = array();
             $dependencies2 = array();
             foreach($analyzers_class as $a) {
-                $d = Analyzer::getInstance($a);
+                $d = Analyzer::getInstance($a, $this->gremlin);
                 $d = $d->dependsOn();
                 if (!is_array($d)) {
                     throw new DependsOnMustReturnArray(get_class($this));
@@ -125,7 +123,7 @@ class Analyze extends Tasks {
 
                     foreach($diff as $k => $v) {
                         if (!isset($dependencies[$v])) {
-                            $x = Analyzer::getInstance($v);
+                            $x = Analyzer::getInstance($v, $this->gremlin);
                             if ($x === null) {
                                 display( "No such dependency as '$v'. Ignoring\n");
                                 continue;
@@ -168,7 +166,7 @@ class Analyze extends Tasks {
                 echo $progressBar->advance();
             }
             $begin = microtime(true);
-            $analyzer = Analyzer::getInstance($analyzer_class);
+            $analyzer = Analyzer::getInstance($analyzer_class, $this->gremlin);
 
             if ($this->config->noRefresh === true && isset($analyzed[$analyzer_class])) {
                 display( "$analyzer_class is already processed\n");

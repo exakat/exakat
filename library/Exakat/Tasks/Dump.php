@@ -68,7 +68,6 @@ class Dump extends Tasks {
         $this->addSnitch();
 
         Analyzer::initDocs();
-        Analyzer::$gremlinStatic = $this->gremlin;
 
         if ($this->config->update === true) {
             copy($this->sqliteFileFinal, $this->sqliteFile);
@@ -197,7 +196,7 @@ SQL;
         }
 
         $this->stmtResults->bindValue(':class', $class, \SQLITE3_TEXT);
-        $analyzer = Analyzer::getInstance($class);
+        $analyzer = Analyzer::getInstance($class, $this->gremlin);
 
         $res = $analyzer->getDump();
 

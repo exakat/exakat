@@ -98,15 +98,11 @@ abstract class Analyzer {
     static public $docs = null;
 
     protected $gremlin = null;
-    public static $gremlinStatic = null;
     
     protected $linksDown = '';
 
-    public function __construct($gremlin) {
+    public function __construct($gremlin = null) {
         $this->gremlin = $gremlin;
-        if (self::$gremlinStatic === null) {
-            self::$gremlinStatic = $gremlin;
-        }
         
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
@@ -254,12 +250,12 @@ GREMLIN;
         return $r;
     }
     
-    public static function getInstance($name) {
+    public static function getInstance($name, $gremlin = null) {
         static $instanciated = array();
         
         if ($analyzer = static::getClass($name)) {
             if (!isset($instanciated[$analyzer])) {
-                $instanciated[$analyzer] = new $analyzer(self::$gremlinStatic);
+                $instanciated[$analyzer] = new $analyzer($gremlin);
             }
             return $instanciated[$analyzer];
         } else {
