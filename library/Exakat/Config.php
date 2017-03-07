@@ -507,7 +507,7 @@ class Config {
     }
     
     private function checkSelf() {
-        if (version_compare(PHP_VERSION, '7.0.0') > 0) {
+        if (version_compare(PHP_VERSION, '7.0.0') < 0) {
             throw new InaptPHPBinary('PHP needs to be version 7.0.0 or more to run exakat.('.PHP_VERSION.' provided)');
         }
         $extensions = array('curl', 'mbstring', 'sqlite3', 'hash', 'json');
