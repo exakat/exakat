@@ -24,20 +24,21 @@ namespace Exakat;
 
 use Exakat\Config;
 use Exakat\Phpexec;
+use Exakat\Exceptions\InaptPHPBinary;
 use Phar;
 
 class Config {
     static private $singleton      = null;
-    private $configFile     = array();
-    private $commandline    = array();
-    private $argv           = array();
-    public  $dir_root       = '.';
-    public  $projects_root  = '.';
-    public  $codePath       = '.';
-    public  $is_phar        = true;
-    public  $executable     = '';
-    private $projectConfig  = array();
-    private $codacyConfig   = array();
+    private $configFile            = array();
+    private $commandline           = array();
+    private $argv                  = array();
+    public  $dir_root              = '.';
+    public  $projects_root         = '.';
+    public  $codePath              = '.';
+    public  $is_phar               = true;
+    public  $executable            = '';
+    private $projectConfig         = array();
+    private $codacyConfig          = array();
 
     private $options = array('configFiles' => array());
 
@@ -253,6 +254,11 @@ class Config {
             $this->options['neo4j_folder'] = $this->projects_root.'/'.$this->options['neo4j_folder'];
         }
         $this->options['neo4j_folder'] = realpath($this->options['neo4j_folder']);
+        
+        $this->options['php'] = $_SERVER['_'];
+        if ($this->options['command'] !== 'doctor') {
+            $this->checkSelf();
+        }
     }
 
     public static function factory($argv = array()) {
@@ -489,7 +495,7 @@ class Config {
         }
         
         foreach($codacyConfig->tools as $tool) {
-            if ($tool->name !== 'exakat') { continue; }
+            if (!isset($tool->name) || $tool->name !== 'exakat') { continue; }
             
             $this->codacyConfig['program'] = array_column($tool->patterns, 'patternId');
 
@@ -497,6 +503,19 @@ class Config {
             $this->codacyConfig['project_reports'] = array('Codacy');
             $this->codacyConfig['project_themes']  = array('Codacy');
             $this->codacyConfig['quiet']           = true;
+        }
+    }
+    
+    private function checkSelf() {
+        if (version_compare(PHP_VERSION, '7.0.0') > 0) {
+            throw new InaptPHPBinary('PHP needs to be version 7.0.0 or more to run exakat.('.PHP_VERSION.' provided)');
+        }
+        $extensions = array('curl', 'mbstring', 'sqlite3', 'hash', 'json');
+        
+        foreach($extensions as $extension) {
+            if (!extension_loaded($extension)) {
+                throw new InaptPHPBinary('PHP needs the '.$extension.' extension');
+            }
         }
     }
 }
