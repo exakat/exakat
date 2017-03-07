@@ -27,11 +27,12 @@ Exakat relies on several parts :
 * Neo4j and gremline : exakat uses this graph database, with the Gremlin 3 plugin. 
 * config folder : this is in the working directory, holding the general directive for running exakat.
 * projects folder : this has all the data about the code, including the reports. This project keeps a sub-folder per project.
-* PHP 7.0 to run, and any to tall versions from PHP 5.2 to 7.2 for analysis.
+* PHP 7.0 or later to run. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
+* PHP 5.2 to 7.2 for analysis. Those versions only require the ext/tokenizer extension to be available. 
 * VCS (Version Control Software), such as Git, SVN, bazaar, Mercurial. They all are optional. 
 * Archives, such as zip, tgz, tbz2 may also be opened with optional helpers.
 
-Exakat has beed tested on OSX, Debian and Ubuntu (not 16.04). Exakat should be ported on Linux distributions with little work. Exakat hasn't been tested on Windows at all. 
+Exakat has beed tested on OSX, Debian and Ubuntu (up to 14.04). Exakat should work on Linux distributions, may be with little work. Exakat hasn't been tested on Windows at all. 
 
 Installation guide with Docker
 ------------------------------
@@ -165,15 +166,33 @@ The following shell code install Java 8. Root privileges are needed.
 
 Neo4j
 +++++++++++++++++++++++++++++
-Download Neo4j 2.3.* version (currently, 2.3.7). Neo4j 2.2 are not supported. Neo4j 3.0 has no support for Gremlin at the moment (2016-12-01)
+Download Neo4j 2.3.* version (currently, 2.3.9). Neo4j 2.2 is not supported anymore. Neo4j 3.0 has no support for Gremlin at the moment (2017-03-01)
 
 `Neo4j <http://neo4j.com/>`_
 
 ::
 
-    wget http://dist.neo4j.org/neo4j-community-2.3.7-unix.tar.gz
-    tar -xvf neo4j-community-2.3.7-unix.tar.gz 
-    mv neo4j-community-2.3.7 neo4j
+    wget http://dist.neo4j.org/neo4j-community-2.3.9-unix.tar.gz
+    tar -xvf neo4j-community-2.3.9-unix.tar.gz 
+    mv neo4j-community-2.3.9 neo4j
+
+In the neo4j folder, update the server configuration. The configuration is in the neo4j_home/conf/neo4j-server.properties : 
+
+Activate the gremlin plugin.
+::
+
+#org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.examples.server.unmanaged=/examples/unmanaged
+# add this line below the above one
+org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp
+
+
+You may also disable authentication. If not, do not forget to update the config/exakat.ini file, with the right credential. 
+::
+
+#dbms.security.auth_enabled=true
+dbms.security.auth_enabled=false
+
+
 
 Gremlin plug-in
 +++++++++++++++
@@ -182,11 +201,8 @@ Exakat uses `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plu
 
 Make the following changes in the following files : 
 
-* pom.xml : change the version tag from 2.3.1 to 2.3.7
-* tinkerpop2/pom.xml : change the version tag from 2.3.1 to 2.3.7
 * tinkerpop3/pom.xml
-    + change the version tag from 2.3.1 to 2.3.7
-    + change the tinkerpop-version tag from 3.1.0-incubating to 3.2.2-incubating
+    + change the tinkerpop-version tag from 3.1.0-incubating to 3.2.0-incubating
 
 Then, in command line : 
 
@@ -195,7 +211,7 @@ Then, in command line :
     git clone https://github.com/thinkaurelius/neo4j-gremlin-plugin gremlin
     cd gremlin
     mvn clean package -Dtp.version=3
-    unzip target/neo4j-gremlin-plugin-tp3-2.3.7-server-plugin.zip -d ../neo4j/plugins/gremlin-plugin
+    unzip target/neo4j-gremlin-plugin-tp3-2.3.1-server-plugin.zip -d ../neo4j/plugins/gremlin-plugin
     cd ../neo4j
     bin/neo4j restart
 
