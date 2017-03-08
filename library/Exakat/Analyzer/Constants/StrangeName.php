@@ -29,12 +29,14 @@ class StrangeName extends Analyzer {
         $names = $this->loadIni('php_strange_names.ini', 'constants');
         
         $this->atomIs('Identifier')
+             ->hasNoIn('SUBNAME')
              ->codeIs($names);
         $this->prepareQuery();
 
         $this->atomIs('Nsname')
              ->outWithRank('SUBNAME', 'last')
-             ->codeIs($names);
+             ->codeIs($names)
+             ->back('first');
         $this->prepareQuery();
     }
 }
