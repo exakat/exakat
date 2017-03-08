@@ -76,7 +76,7 @@ class Files extends Tasks {
 
         $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
         $path = $this->config->projects_root.'/projects/'.$dir.'/code';
-        $tmpFiles = array_map(function ($file) use ($path) { return $path.escapeshellcmd($file);}, $files);
+        $tmpFiles = array_map(function ($file) use ($path) { return "'".$path.escapeshellcmd($file)."'";}, $files);
         file_put_contents($tmpFileName, implode("\n", $tmpFiles) );
 
         $versions = $this->config->other_php_versions;
