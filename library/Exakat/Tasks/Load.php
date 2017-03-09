@@ -1549,11 +1549,13 @@ class Load extends Tasks {
             ++$this->id;
         } else {
             $typehintId = 0;
-            $defaultId = 0;
-            $indexId = 0;
-            $args_max = 0;
-            $args_min = 0;
-            $rank = -1;
+            $defaultId  = 0;
+            $indexId    = 0;
+            $args_max   = 0;
+            $args_min   = 0;
+            $rank       = -1;
+            $nullableId = 0;
+            $typehintId = 0;
 
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 $initialId = $this->id;
@@ -3290,10 +3292,13 @@ class Load extends Tasks {
             }
         }
 
+/*
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            print_r($this->tokens[$this->id + 1]);
+            print_r(!$this->isContext(self::CONTEXT_NOSEQUENCE));
             $this->processSemicolon();
         }
-
+*/
         return $id;
     }
 
@@ -3985,7 +3990,7 @@ class Load extends Tasks {
         $current = $this->id;
         --$this->id;
         $nameId = $this->processNextAsIdentifier();
-
+        
         $argumentsId = $this->processArguments(array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
 
         $functioncallId = $this->addAtom('Functioncall');
