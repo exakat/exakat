@@ -16,8 +16,6 @@ Label : PROJECT
               Label : BLOCK
                 ;
                 Label : ELEMENT
-                  'I'
-                Label : ELEMENT
                   echo
                   Label : ARGUMENTS
                     echo
@@ -28,7 +26,7 @@ Label : PROJECT
                       Label : CONCAT
                         $f
                       Label : CONCAT
-                        Void
+                        'I'
                   Label : NAME
                     echo
                 Label : ELEMENT

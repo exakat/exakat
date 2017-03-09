@@ -9,6 +9,7 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
+          +
           Label : LEFT
             1
           Label : RIGHT
