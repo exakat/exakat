@@ -2,6 +2,7 @@
 
 $expected     = array('array_merge($a)');
 
-$expected_not = array('array_merge($a, $b)');
+$expected_not = array('array_merge($a, $b)',
+                      'array_merge(...$c)');
 
 ?>

@@ -73,6 +73,8 @@ class UselessInstruction extends Analyzer {
         $this->atomFunctionIs(array('\\array_merge', '\\array_merge_recursive', '\\array_replace'))
              ->outIs('ARGUMENTS')
              ->isLess('count', 2)
+             ->outWithRank('ARGUMENT',0)
+             ->isNot('variadic', true)
              ->back('first');
         $this->prepareQuery();
 
