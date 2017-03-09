@@ -62,8 +62,8 @@ class ZendF3 {
         }
 
         $res = $this->sqlite->query($query);
-        $return = array();
 
+        $return = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
                 $return[$row['release']][] = $row['class'];
