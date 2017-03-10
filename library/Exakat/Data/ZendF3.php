@@ -48,6 +48,24 @@ class ZendF3 {
         }
     }
 
+    public function getVersions($component = null) {
+        $query = 'SELECT DISTINCT replace(release, "release-","") AS version FROM releases';
+        if ($component !== null) {
+            $query .= "  JOIN components 
+                      ON releases.component_id = components.id 
+ WHERE components.component = \"".$component."\"";
+        }
+        $query .= " ORDER BY 1";
+        $res = $this->sqlite->query($query);
+
+        $return = array();
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            $return[] = $row[0];
+        }
+
+        return $return;
+    }
+    
     public function getClasses($component, $release = null) {
         $query = 'SELECT namespaces.namespace || "\" || class AS class, release FROM classes 
                     JOIN namespaces 
