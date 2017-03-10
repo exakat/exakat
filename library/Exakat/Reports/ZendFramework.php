@@ -2401,10 +2401,10 @@ SQL;
     private function generateAppinfo() {
         $extensions = array(
                     'Components' => array(
-                            'Config'                     => 'ZendF/zf3Config',
-                            'MVC'                        => 'ZendF/zf3Mvc',
-                            'URI'                        => 'ZendF/zf3Uri',
-                            'Validator'                  => 'ZendF/zf3Validator',
+                            'Config'                     => 'ZendF/Zf3Config',
+                            'MVC'                        => 'ZendF/Zf3Mvc',
+                            'URI'                        => 'ZendF/Zf3Uri',
+                            'Validator'                  => 'ZendF/Zf3Validator',
                     ),
                 );
 

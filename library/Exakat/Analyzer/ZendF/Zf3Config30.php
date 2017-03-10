@@ -24,9 +24,14 @@ namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
 
-class Zf3Config extends zf3Component {
+class Zf3Config30 extends Zf3ComponentMissing {
+    public function dependsOn() {
+        return array('ZendF/Zf3Config');
+    }
+
     public function analyze() {
         $this->component = 'zend-config';
+        $this->version = '3.0';
         
         parent::analyze();
     }
