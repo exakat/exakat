@@ -41,6 +41,8 @@ class ClassFunctionConfusion extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Function')
+             ->hasNoClassInterfaceTrait()
+             ->hasName()
              ->fullnspathIs($common);
         $this->prepareQuery();
     }

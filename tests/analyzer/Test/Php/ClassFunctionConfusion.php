@@ -8,8 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Php_ClassFunctionConfusion extends Analyzer {
-    /* 1 methods */
+    /* 3 methods */
 
     public function testPhp_ClassFunctionConfusion01()  { $this->generic_test('Php/ClassFunctionConfusion.01'); }
+    public function testPhp_ClassFunctionConfusion02()  { $this->generic_test('Php/ClassFunctionConfusion.02'); }
+    public function testPhp_ClassFunctionConfusion03()  { $this->generic_test('Php/ClassFunctionConfusion.03'); }
 }
 ?>
