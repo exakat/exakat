@@ -2339,7 +2339,12 @@ JAVASCRIPT;
         $table = '<table class="table table-striped">
         						<tr></tr>
         						<tr><th>Component</th><th>'.implode('</th><th>', $versions).'</th></tr>';
-        						
+
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', array_values($components)).'")');
+        $sources = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $sources[$row['analyzer']] = $row['count'];
+        }
         
         foreach($components as $name => $component) { 
             $rows = array($name);
@@ -2362,6 +2367,11 @@ SQL;
             foreach($versions as $version) {
                 if (!in_array($version, $componentVersion)) {
                     $rows[] = '&nbsp;';
+                    continue;
+                }
+
+                if ($sources[$component] === 0) {
+                    $rows[] = 'N/A';
                     continue;
                 }
 
