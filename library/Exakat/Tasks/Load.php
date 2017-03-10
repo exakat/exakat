@@ -1813,6 +1813,9 @@ class Load extends Tasks {
             if ($fullnspath === '\\array') {
                 $this->setAtom($functioncallId, array('boolean'    => (int) (bool) $this->atoms[$argumentsId]['count']));
             }
+        } else {
+            $fullnspath = isset($this->atoms[$nameId]['fullnspath']) ? $this->atoms[$nameId]['fullnspath'] : self::NO_VALUE;
+            $aliased = isset($this->atoms[$nameId]['aliased']) ? $this->atoms[$nameId]['aliased'] : self::NO_VALUE;
         }
 
         $this->setAtom($functioncallId, array('code'       => $this->atoms[$nameId]['code'],
@@ -1821,8 +1824,8 @@ class Load extends Tasks {
                                               'variadic'   => false,
                                               'reference'  => false,
                                               'token'      => $this->atoms[$nameId]['token'],
-                                              'fullnspath' => isset($this->atoms[$nameId]['fullnspath']) ? $this->atoms[$nameId]['fullnspath'] : self::NO_VALUE,
-                                              'aliased'    => isset($this->atoms[$nameId]['aliased']) ? $this->atoms[$nameId]['aliased'] : self::NO_VALUE
+                                              'fullnspath' => $fullnspath,
+                                              'aliased'    => $aliased
                                               ));
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
@@ -3292,6 +3295,9 @@ class Load extends Tasks {
             }
         }
 
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
+            $this->processFCOA($id);
+        }
 /*
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             print_r($this->tokens[$this->id + 1]);
