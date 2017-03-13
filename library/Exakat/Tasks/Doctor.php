@@ -64,6 +64,7 @@ class Doctor extends Tasks {
         $stats['exakat']['build']      = Exakat::BUILD;
         $stats['exakat']['exakat.ini'] = $this->array2list($this->config->configFiles);
         $stats['exakat']['reports']    = $this->array2list($this->config->project_reports);
+        $stats['exakat']['themes']     = $this->array2list($this->config->project_themes);
 
         // check for PHP
         $stats['PHP']['binary']         = phpversion();
