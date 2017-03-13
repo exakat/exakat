@@ -33,14 +33,19 @@ foreach($docs as $iniFile) {
         continue;
     }
     $message = substr($ini['description'], 0, $offset);
-    $words = count(explode(' ', $message));
+    $messageNoPHPCode = preg_match('/<\?php.*?\?>/is', $message);
+    $messageNoPHPCode = preg_match('/`.*?<.*?>`/is', $message);
+    $words = count(explode(' ', $messageNoPHPCode));
 
     if (empty($ini['clearphp']) && !preg_match('/`.*?<.*?>`/is', $ini['description'])) {
-        print "$iniFile has no external link.\n";
+//        print "$iniFile has no external link.\n";
         continue;
     }
 
-    if ($words < 30) { continue; }
+    if ($words < 30) { 
+        print "Doc is too short in $iniFile ($words words)\n";
+        continue; 
+    }
     print $iniFile." ($words words): ".$message."\n";
 }
 
