@@ -116,7 +116,11 @@ class Config {
 
                                             'loader'              => 'Neo4jImport',
                                             
-                                            'project_reports'     => array('Ambassador', 'Devoops')
+                                            'project_reports'     => array('Ambassador', 'Devoops'),
+                                            'project_themes'      => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                                                                           'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
+                                                                           'Dead code', 'Security', 'Analyze', 'Preferences'),
+                                            
                                            );
 
     private static $BOOLEAN_OPTIONS = array(
@@ -349,8 +353,10 @@ class Config {
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
-                           'loader'             => 'Neo4jImport'
-                           );
+                           'loader'             => 'Neo4jImport',
+                           'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,Dead code,Security,Analyze,Preferences',
+                           'project_reports'    => array('Ambassador', 'Devoops'),
+                        );
 
         foreach($defaults as $name => $value) {
             if (empty($this->projectConfig[$name])) {
@@ -370,6 +376,22 @@ class Config {
             $this->projectConfig['file_extensions'] = explode(',', $this->projectConfig['file_extensions']);
             foreach($this->projectConfig['file_extensions'] as &$ext) {
                 $ext = trim($ext, '. ');
+            }
+            unset($ext);
+        }
+
+        if (is_string($this->projectConfig['project_reports'])) {
+            $this->projectConfig['project_reports'] = explode(',', $this->projectConfig['project_reports']);
+            foreach($this->projectConfig['project_reports'] as &$ext) {
+                $ext = trim($ext);
+            }
+            unset($ext);
+        }
+
+        if (is_string($this->projectConfig['project_themes'])) {
+            $this->projectConfig['project_themes'] = explode(',', $this->projectConfig['project_themes']);
+            foreach($this->projectConfig['project_themes'] as &$ext) {
+                $ext = trim($ext);
             }
             unset($ext);
         }
