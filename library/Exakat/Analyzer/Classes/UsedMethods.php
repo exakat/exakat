@@ -35,33 +35,37 @@ class UsedMethods extends Analyzer {
         
         // Normal Methodcall
         $methods = $this->query('g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()');
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->_as('used')
-             ->outIs('NAME')
-             ->codeIsNot($magicMethods)
-             ->codeIs($methods)
-             ->back('used');
-        $this->prepareQuery();
-
+        if (!empty($methods)) {
+            $this->atomIs('Class')
+                 ->outIs('BLOCK')
+                 ->outIs('ELEMENT')
+                 ->atomIs('Function')
+                 ->_as('used')
+                 ->outIs('NAME')
+                 ->codeIsNot($magicMethods)
+                 ->codeIs($methods)
+                 ->back('used');
+            $this->prepareQuery();
+        }
         // Staticmethodcall
         $staticmethods = $this->query('g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()');
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->_as('used')
-             ->outIs('NAME')
-             ->codeIsNot($magicMethods)
-             ->codeIs($staticmethods)
-             ->back('used');
-        $this->prepareQuery();
+        if (!empty($staticmethods)) {
+            $this->atomIs('Class')
+                 ->outIs('BLOCK')
+                 ->outIs('ELEMENT')
+                 ->atomIs('Function')
+                 ->_as('used')
+                 ->outIs('NAME')
+                 ->codeIsNot($magicMethods)
+                 ->codeIs($staticmethods)
+                 ->back('used');
+            $this->prepareQuery();
+        }
 
         $callables = $this->query(<<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZED")
 .not( hasLabel("Function") )
+.where( or( hasLabel("String"), hasLabel("Arguments")) )
 .map{
     // Strings
     if (it.get().label() == 'String') {
@@ -85,20 +89,21 @@ g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZ
 
 GREMLIN
 );
-
-        // method used statically in a callback with an array
-        $this->atomIs('Class')
-             ->savePropertyAs('fullnspath', 'fullnspath')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->_as('used')
-             ->outIs('NAME')
-             ->codeIsNot($magicMethods)
-             ->codeIs($callables)
-             ->back('used');
-        $this->prepareQuery();
-
+        if (!empty($callables)) {
+            // method used statically in a callback with an array
+            $this->atomIs('Class')
+                 ->savePropertyAs('fullnspath', 'fullnspath')
+                 ->outIs('BLOCK')
+                 ->outIs('ELEMENT')
+                 ->atomIs('Function')
+                 ->_as('used')
+                 ->outIs('NAME')
+                 ->codeIsNot($magicMethods)
+                 ->codeIs($callables)
+                 ->back('used');
+            $this->prepareQuery();
+        }
+        
         // Private constructors
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'fullnspath')

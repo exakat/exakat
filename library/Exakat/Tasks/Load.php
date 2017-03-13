@@ -471,7 +471,7 @@ class Load extends Tasks {
             if (!is_file($filename)) {
                 throw new MustBeAFile($filename);
             }
-            if ($this->processFile($filename)) {
+            if ($this->processFile($filename, '')) {
                 $this->saveFiles();
             }
             $files = 1;
@@ -515,7 +515,7 @@ class Load extends Tasks {
         $path = $this->config->projects_root.'/projects/'.$project.'/code';
         foreach($files as $file) {
             try {
-                if ($r = $this->processFile($path.$file)) {
+                if ($r = $this->processFile($file, $path)) {
                     $nbTokens += $r;
                     $this->saveFiles();
                 }
@@ -547,7 +547,7 @@ class Load extends Tasks {
         $nbTokens = 0;
         foreach($files as $file) {
             try {
-                if ($r = $this->processFile($dir.$file)) {
+                if ($r = $this->processFile($file, $dir)) {
                     $nbTokens += $r;
                     $this->saveFiles();
                 }
@@ -588,8 +588,10 @@ class Load extends Tasks {
         $this->expressions = array();
     }
 
-    private function processFile($filename) {
-        $this->log->log($filename);
+    private function processFile($filename, $path) {
+        $fullpath = $path.$filename;
+        
+        $this->log->log($fullpath);
         $this->filename = $filename;
 
         ++$this->stats['files'];
@@ -597,26 +599,22 @@ class Load extends Tasks {
         $this->line = 0;
         $log = array();
 
-        if (is_link($filename)) { return true; }
-        if (!file_exists($filename)) {
+        if (is_link($fullpath)) { 
+            return true; 
+        }
+        if (!file_exists($fullpath)) {
             throw new NoSuchFile( $filename );
         }
 
-        $file = realpath($filename);
-        if (strpos($file, '/code/') !== false) {
-            $file = substr($file, strpos($file, '/code/') + 5);
-        } else {
-            $file = $filename;
-        }
-        if (filesize($filename) === 0) {
+        if (filesize($fullpath) === 0) {
             return false;
         }
 
-        if (!$this->php->compile($filename)) {
+        if (!$this->php->compile($fullpath)) {
             throw new NoFileToProcess($filename, 'won\'t compile');
         }
 
-        $tokens = $this->php->getTokenFromFile($filename);
+        $tokens = $this->php->getTokenFromFile($fullpath);
         $log['token_initial'] = count($tokens);
 
         if (count($tokens) === 1) {
@@ -663,7 +661,7 @@ class Load extends Tasks {
 
         $id1 = $this->addAtom('File');
         $this->setAtom($id1, array('code'     => $filename,
-                                   'fullcode' => $file,
+                                   'fullcode' => $filename,
                                    'line'     => -1,
                                    'token'    => 'T_FILENAME'));
         $this->addLink($this->id0, $id1, 'PROJECT');
@@ -1551,11 +1549,13 @@ class Load extends Tasks {
             ++$this->id;
         } else {
             $typehintId = 0;
-            $defaultId = 0;
-            $indexId = 0;
-            $args_max = 0;
-            $args_min = 0;
-            $rank = -1;
+            $defaultId  = 0;
+            $indexId    = 0;
+            $args_max   = 0;
+            $args_min   = 0;
+            $rank       = -1;
+            $nullableId = 0;
+            $typehintId = 0;
 
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 $initialId = $this->id;
@@ -1813,6 +1813,9 @@ class Load extends Tasks {
             if ($fullnspath === '\\array') {
                 $this->setAtom($functioncallId, array('boolean'    => (int) (bool) $this->atoms[$argumentsId]['count']));
             }
+        } else {
+            $fullnspath = isset($this->atoms[$nameId]['fullnspath']) ? $this->atoms[$nameId]['fullnspath'] : self::NO_VALUE;
+            $aliased = isset($this->atoms[$nameId]['aliased']) ? $this->atoms[$nameId]['aliased'] : self::NO_VALUE;
         }
 
         $this->setAtom($functioncallId, array('code'       => $this->atoms[$nameId]['code'],
@@ -1821,8 +1824,8 @@ class Load extends Tasks {
                                               'variadic'   => false,
                                               'reference'  => false,
                                               'token'      => $this->atoms[$nameId]['token'],
-                                              'fullnspath' => isset($this->atoms[$nameId]['fullnspath']) ? $this->atoms[$nameId]['fullnspath'] : self::NO_VALUE,
-                                              'aliased'    => isset($this->atoms[$nameId]['aliased']) ? $this->atoms[$nameId]['aliased'] : self::NO_VALUE
+                                              'fullnspath' => $fullnspath,
+                                              'aliased'    => $aliased
                                               ));
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $nameId, 'NAME');
@@ -1840,7 +1843,7 @@ class Load extends Tasks {
         return $functioncallId;
     }
 
-    private function processString($fullnspath = true) {
+    private function processString() {
         if (strtolower($this->tokens[$this->id][1]) === 'null' ) {
             $id = $this->addAtom('Null');
             $this->setAtom($id, array('boolean' => 0));
@@ -1863,7 +1866,9 @@ class Load extends Tasks {
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
             // Just skip this : no need for fullnspat with property or methodcall, static or not
         } elseif ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NEW) {
-            // Do nothing, this will be done at processNew level
+            list($fullnspath, $aliased) = $this->getFullnspath($id, 'class');
+            $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased));
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             // when this is not already done, we prepare the fullnspath as a constant
             list($fullnspath, $aliased) = $this->getFullnspath($id, 'function');
@@ -1896,13 +1901,7 @@ class Load extends Tasks {
             ++$this->id;
             $this->processNsname();
             $id = $this->popExpression();
-        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COLON &&
-                  !$this->isContext(self::CONTEXT_NEW) &&
-                  !$this->isContext(self::CONTEXT_NOSEQUENCE)                  ) {
-            $this->pushExpression($id);
-            ++$this->id;
-            return $this->processColon();
-        }
+        } 
         $this->pushExpression($id);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -1910,6 +1909,8 @@ class Load extends Tasks {
         } else {
             // For functions and constants
             $id = $this->processFCOA($id);
+            $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased));
         }
 
         return $id;
@@ -3298,10 +3299,16 @@ class Load extends Tasks {
             }
         }
 
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
+            $this->processFCOA($id);
+        }
+/*
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            print_r($this->tokens[$this->id + 1]);
+            print_r(!$this->isContext(self::CONTEXT_NOSEQUENCE));
             $this->processSemicolon();
         }
-
+*/
         return $id;
     }
 
@@ -3993,7 +4000,7 @@ class Load extends Tasks {
         $current = $this->id;
         --$this->id;
         $nameId = $this->processNextAsIdentifier();
-
+        
         $argumentsId = $this->processArguments(array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
 
         $functioncallId = $this->addAtom('Functioncall');

@@ -102,8 +102,6 @@ Label : PROJECT
                 Label : ELEMENT
                   I
                 Label : ELEMENT
-                  'N'
-                Label : ELEMENT
                   =
                   Label : LEFT
                     $g
@@ -122,7 +120,7 @@ Label : PROJECT
                           Label : CONCAT
                             $e
                     Label : ELSE
-                      Void
+                      'N'
                     Label : THEN
                       'M'
                 Label : ELEMENT

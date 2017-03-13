@@ -13,12 +13,16 @@
     }
     
     list($dir, $test) = explode('/', $test);
+    if ($dir === 'Test') {
+        $dir = $test[0];
+        $test = $test[1];
+    }
     
     if (substr($test, -4) == '.php') {
         $test = substr($test, 0, -4);
         print "Dropping extension .php from the test name. Now using '$test'\n";
     }
-    
+
     if (!file_exists(dirname(dirname(__DIR__)).'/library/Exakat/Analyzer/'.$dir)) {
         $groups = array_map('basename', glob(dirname(dirname(__DIR__)).'/library/Exakat/Analyzer/*' , GLOB_ONLYDIR));
         $closest = closest_string($dir, $groups);

@@ -1,0 +1,68 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Ternary.01.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              b
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $c
+                Label : ARGUMENT
+                  $d
+                Label : ARGUMENT
+                  $e
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    ->
+                    Label : OBJECT
+                      $f
+                    Label : PROPERTY
+                      g
+                  Label : RIGHT
+                    ?
+                    Label : CONDITION
+                      (
+                      Label : CODE
+                        ==
+                        Label : LEFT
+                          ->
+                          Label : OBJECT
+                            $h
+                          Label : PROPERTY
+                            i
+                        Label : RIGHT
+                          0.0
+                    Label : ELSE
+                      (
+                      Label : CODE
+                        /
+                        Label : LEFT
+                          $K
+                        Label : RIGHT
+                          ->
+                          Label : OBJECT
+                            $d
+                          Label : PROPERTY
+                            f
+                    Label : THEN
+                      NAN
+              Label : NAME
+                b
+              Label : PUBLIC
+                public
+          Label : NAME
+            a

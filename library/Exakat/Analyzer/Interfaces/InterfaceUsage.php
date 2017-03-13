@@ -24,30 +24,14 @@
 namespace Exakat\Analyzer\Interfaces;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\InterfaceUsage as CommonInterfaceUsage;
 
-class InterfaceUsage extends Analyzer {
+class InterfaceUsage extends CommonInterfaceUsage {
 
     public function analyze() {
-        $this->atomIs('Class')
-             ->outIs('IMPLEMENTS')
-             ->atomIs(array('Identifier', 'Nsname'));
-        $this->prepareQuery();
-
-        $this->atomIs('Interface')
-             ->outIs('EXTENDS')
-             ->atomIs(array('Identifier', 'Nsname'));
-        $this->prepareQuery();
+        $this->interfaces = array();
         
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS')
-             ->atomIs(array('Identifier', 'Nsname'));
-        $this->prepareQuery();
-
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT');
-        $this->prepareQuery();
+        parent::analyze();
     }
 }
 

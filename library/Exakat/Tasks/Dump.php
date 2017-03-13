@@ -68,7 +68,6 @@ class Dump extends Tasks {
         $this->addSnitch();
 
         Analyzer::initDocs();
-        Analyzer::$gremlinStatic = $this->gremlin;
 
         if ($this->config->update === true) {
             copy($this->sqliteFileFinal, $this->sqliteFile);
@@ -197,7 +196,7 @@ SQL;
         }
 
         $this->stmtResults->bindValue(':class', $class, \SQLITE3_TEXT);
-        $analyzer = Analyzer::getInstance($class);
+        $analyzer = Analyzer::getInstance($class, $this->gremlin);
 
         $res = $analyzer->getDump();
 
@@ -271,6 +270,19 @@ SQL;
         $this->stmtResultsCounts->execute();
 
         $this->collectDatastore();
+
+        // Redo each time so we update the final counts
+        $res = $this->gremlin->query('g.V().count()');
+        $res = $res->results;
+        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total nodes", '.$res[0].')');
+
+        $res = $this->gremlin->query('g.E().count()');
+        $res = $res->results;
+        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total edges", '.$res[0].')');
+
+        $res = $this->gremlin->query('g.V().properties().count()');
+        $res = $res->results;
+        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total properties", '.$res[0].')');
 
         rename($this->sqliteFile, $this->sqliteFileFinal);
 

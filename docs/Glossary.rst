@@ -55,12 +55,12 @@ Glossary
     + `array_map()`
 
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
+      + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `array_merge()`
 
       + :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-      + :ref:`Useless Instructions <useless-instructions>`
 
     + `array_merge_recursive()`
 
@@ -69,6 +69,10 @@ Glossary
     + `array_push()`
 
       + :ref:`Avoid array_push() <avoid-array\_push()>`
+
+    + `array_replace()`
+
+      + :ref:`Useless Instructions <useless-instructions>`
 
     + `array_search()`
 
@@ -140,6 +144,7 @@ Glossary
     + `closure`
 
       + :ref:`Closure May Use $this <closure-may-use-$this>`
+      + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Hidden Use Expression <hidden-use-expression>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`

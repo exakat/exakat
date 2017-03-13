@@ -27,6 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class MarkCallable extends Analyzer {
     public function analyze() {
+        $atoms = 'String';
+        
         $ini = $this->loadIni('php_with_callback.ini');
         foreach($ini as &$lists) {
             foreach($lists as &$function) {
@@ -79,7 +81,7 @@ GREMLIN;
             $this->atomFunctionIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIs('String')
+                 ->atomIs($atoms)
                  ->tokenIsNot('T_QUOTE')
                  ->raw($apply);
             $this->prepareQuery();
@@ -89,7 +91,7 @@ GREMLIN;
         $this->atomFunctionIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
-             ->atomIs('String')
+             ->atomIs($atoms)
              ->raw($apply);
         $this->prepareQuery();
         
@@ -97,8 +99,35 @@ GREMLIN;
         $this->atomFunctionIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
-             ->atomIs('String')
+             ->atomIs($atoms)
              ->raw($apply);
+        $this->prepareQuery();
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        // working with functions (not methods) : containers
+        $atoms = array('Variable', 'Array', 'Property', 'Staticproperty');
+
+        // callable is in # position
+        foreach($positions as $position) {
+            $this->atomFunctionIs($ini['functions'.$position])
+                 ->outIs('ARGUMENTS')
+                 ->outWithRank('ARGUMENT', $position)
+                 ->atomIs($atoms);
+            $this->prepareQuery();
+        }
+
+        // callable is in last
+        $this->atomFunctionIs($ini['functions_last'])
+             ->outIs('ARGUMENTS')
+             ->outWithRank('ARGUMENT', 'last')
+             ->atomIs($atoms);
+        $this->prepareQuery();
+        
+        // callable is in 2nd to last
+        $this->atomFunctionIs($ini['functions_2last'])
+             ->outIs('ARGUMENTS')
+             ->outWithRank('ARGUMENT', '2last')
+             ->atomIs($atoms);
         $this->prepareQuery();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////

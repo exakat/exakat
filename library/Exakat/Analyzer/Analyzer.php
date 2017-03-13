@@ -98,15 +98,11 @@ abstract class Analyzer {
     static public $docs = null;
 
     protected $gremlin = null;
-    public static $gremlinStatic = null;
     
     protected $linksDown = '';
 
-    public function __construct($gremlin) {
+    public function __construct($gremlin = null) {
         $this->gremlin = $gremlin;
-        if (self::$gremlinStatic === null) {
-            self::$gremlinStatic = $gremlin;
-        }
         
         $this->analyzer = get_class($this);
         $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
@@ -132,6 +128,14 @@ abstract class Analyzer {
         if ($this->path_tmp !== null) {
             unlink($this->path_tmp);
         }
+    }
+    
+    public function setAnalyzer($analyzer) {
+        $this->analyzer = self::getClass($analyzer);
+        if ($this->analyzer === false) {
+            throw new NoSuchAnalyzer($analyzer);
+        }
+        $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
     }
     
     public function getInBaseName() {
@@ -254,12 +258,12 @@ GREMLIN;
         return $r;
     }
     
-    public static function getInstance($name) {
+    public static function getInstance($name, $gremlin = null) {
         static $instanciated = array();
         
         if ($analyzer = static::getClass($name)) {
             if (!isset($instanciated[$analyzer])) {
-                $instanciated[$analyzer] = new $analyzer(self::$gremlinStatic);
+                $instanciated[$analyzer] = new $analyzer($gremlin);
             }
             return $instanciated[$analyzer];
         } else {
@@ -753,6 +757,9 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (empty($code)) {
+            return $this;
+        }
         $this->addMethod('hasLabel("String")', $code);
         return $this->propertyIs('noDelimiter', $code, $caseSensitive);
     }
@@ -1814,6 +1821,10 @@ GREMLIN;
     }
 
     private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (empty($code)) {
+            return $this;
+        }
+
         if ($caseSensitive === self::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {

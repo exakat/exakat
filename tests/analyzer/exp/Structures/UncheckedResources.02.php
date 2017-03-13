@@ -6,6 +6,7 @@ $expected     = array('readdir(opendir(\'uncheckedDir4\'))',
                       '$pspell_new = pspell_new(\'asdfasdf\')', 
                       '$uncheckedDir2 = bzopen(\'.\')');
 
-$expected_not = array();
+$expected_not = array('readdir2(opendir(\'uncheckedDir5\'))',
+                      'readdir(opendir2(\'uncheckedDir6\'))');
 
 ?>

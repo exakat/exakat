@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Files_DefinitionsOnly extends Analyzer {
-    /* 9 methods */
+    /* 10 methods */
 
     public function testFiles_DefinitionsOnly01()  { $this->generic_test('Files_DefinitionsOnly.01'); }
     public function testFiles_DefinitionsOnly02()  { $this->generic_test('Files_DefinitionsOnly.02'); }
@@ -19,5 +19,6 @@ class Files_DefinitionsOnly extends Analyzer {
     public function testFiles_DefinitionsOnly07()  { $this->generic_test('Files_DefinitionsOnly.07'); }
     public function testFiles_DefinitionsOnly08()  { $this->generic_test('Files_DefinitionsOnly.08'); }
     public function testFiles_DefinitionsOnly09()  { $this->generic_test('Files/DefinitionsOnly.09'); }
+    public function testFiles_DefinitionsOnly10()  { $this->generic_test('Files/DefinitionsOnly.10'); }
 }
 ?>

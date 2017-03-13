@@ -97,10 +97,14 @@ SQL;
         return $return;
     }
 
-    public function getThemesForAnalyzer() {
-        $list = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
-                      'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
-                      'Dead code', 'Security', 'Analyze', 'Preferences');
+    public function getThemesForAnalyzer($list = null) {
+        if ($list === null) {
+            $list = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                          'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
+                          'Dead code', 'Security', 'Analyze', 'Preferences');
+        } elseif (is_string($list)) {
+            $list = array($list);
+        }
         $listSqlite3 = '"'.join('", "', $list).'"';
                                           $query = <<<SQL
 SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM categories AS c

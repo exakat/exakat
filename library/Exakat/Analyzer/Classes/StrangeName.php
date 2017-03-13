@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class StrangeName extends Analyzer {
     public function analyze() {
-        $names = $this->loadIni('php_strange_names.ini', 'names');
+        $names = $this->loadIni('php_strange_names.ini', 'classes');
         
         $this->atomIs(array('Class', 'Trait', 'Interface'))
              ->outIs('BLOCK')

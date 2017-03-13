@@ -24,20 +24,21 @@ namespace Exakat;
 
 use Exakat\Config;
 use Exakat\Phpexec;
+use Exakat\Exceptions\InaptPHPBinary;
 use Phar;
 
 class Config {
     static private $singleton      = null;
-    private $configFile     = array();
-    private $commandline    = array();
-    private $argv           = array();
-    public  $dir_root       = '.';
-    public  $projects_root  = '.';
-    public  $codePath       = '.';
-    public  $is_phar        = true;
-    public  $executable     = '';
-    private $projectConfig  = array();
-    private $codacyConfig   = array();
+    private $configFile            = array();
+    private $commandline           = array();
+    private $argv                  = array();
+    public  $dir_root              = '.';
+    public  $projects_root         = '.';
+    public  $codePath              = '.';
+    public  $is_phar               = true;
+    public  $executable            = '';
+    private $projectConfig         = array();
+    private $codacyConfig          = array();
 
     private $options = array('configFiles' => array());
 
@@ -115,7 +116,11 @@ class Config {
 
                                             'loader'              => 'Neo4jImport',
                                             
-                                            'project_reports'     => array('Ambassador', 'Devoops')
+                                            'project_reports'     => array('Ambassador', 'Devoops'),
+                                            'project_themes'      => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+                                                                           'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
+                                                                           'Dead code', 'Security', 'Analyze', 'Preferences'),
+                                            
                                            );
 
     private static $BOOLEAN_OPTIONS = array(
@@ -253,6 +258,11 @@ class Config {
             $this->options['neo4j_folder'] = $this->projects_root.'/'.$this->options['neo4j_folder'];
         }
         $this->options['neo4j_folder'] = realpath($this->options['neo4j_folder']);
+        
+        $this->options['php'] = $_SERVER['_'];
+        if ($this->options['command'] !== 'doctor') {
+            $this->checkSelf();
+        }
     }
 
     public static function factory($argv = array()) {
@@ -343,8 +353,10 @@ class Config {
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
-                           'loader'             => 'Neo4jImport'
-                           );
+                           'loader'             => 'Neo4jImport',
+                           'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,Dead code,Security,Analyze,Preferences',
+                           'project_reports'    => array('Ambassador', 'Devoops'),
+                        );
 
         foreach($defaults as $name => $value) {
             if (empty($this->projectConfig[$name])) {
@@ -364,6 +376,22 @@ class Config {
             $this->projectConfig['file_extensions'] = explode(',', $this->projectConfig['file_extensions']);
             foreach($this->projectConfig['file_extensions'] as &$ext) {
                 $ext = trim($ext, '. ');
+            }
+            unset($ext);
+        }
+
+        if (is_string($this->projectConfig['project_reports'])) {
+            $this->projectConfig['project_reports'] = explode(',', $this->projectConfig['project_reports']);
+            foreach($this->projectConfig['project_reports'] as &$ext) {
+                $ext = trim($ext);
+            }
+            unset($ext);
+        }
+
+        if (is_string($this->projectConfig['project_themes'])) {
+            $this->projectConfig['project_themes'] = explode(',', $this->projectConfig['project_themes']);
+            foreach($this->projectConfig['project_themes'] as &$ext) {
+                $ext = trim($ext);
             }
             unset($ext);
         }
@@ -489,7 +517,7 @@ class Config {
         }
         
         foreach($codacyConfig->tools as $tool) {
-            if ($tool->name !== 'exakat') { continue; }
+            if (!isset($tool->name) || $tool->name !== 'exakat') { continue; }
             
             $this->codacyConfig['program'] = array_column($tool->patterns, 'patternId');
 
@@ -497,6 +525,19 @@ class Config {
             $this->codacyConfig['project_reports'] = array('Codacy');
             $this->codacyConfig['project_themes']  = array('Codacy');
             $this->codacyConfig['quiet']           = true;
+        }
+    }
+    
+    private function checkSelf() {
+        if (version_compare(PHP_VERSION, '7.0.0') < 0) {
+            throw new InaptPHPBinary('PHP needs to be version 7.0.0 or more to run exakat.('.PHP_VERSION.' provided)');
+        }
+        $extensions = array('curl', 'mbstring', 'sqlite3', 'hash', 'json');
+        
+        foreach($extensions as $extension) {
+            if (!extension_loaded($extension)) {
+                throw new InaptPHPBinary('PHP needs the '.$extension.' extension');
+            }
         }
     }
 }

@@ -279,6 +279,34 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.10.5
+
+  * Could Be Typehinted Callable (Functions/CouldBeCallable ; Analyze)
+  * Encoded Simple Letters (Security/EncodedLetters ; Security)
+  * Regex Delimiter (Structures/RegexDelimiter ; Preferences)
+  * Strange Name For Constants (Constants/StrangeName ; Analyze)
+  * Strange Name For Variables (Variables/StrangeName ; Analyze)
+  * Too Many Finds (Classes/TooManyFinds)
+  * ZF3 Component (ZendF/zf3Component ; )
+  * ZendF/Zf3ComponentMissing (ZendF/Zf3ComponentMissing ; Internal)
+  * ZendF/zf3Uri (ZendF/Zf3Uri ; ZendFramework)
+  * ZendF/zf3Validator (ZendF/Zf3Validator ; ZendFramework)
+  * Zend\Config (ZendF/Zf3Config ; ZendFramework)
+  * zend-config 2.5.x (ZendF/Zf3Config25 ; ZendFramework)
+  * zend-config 2.6.x (ZendF/Zf3Config26 ; ZendFramework)
+  * zend-config 3.0.x (ZendF/Zf3Config30 ; ZendFramework)
+  * zend-config 3.1.x (ZendF/Zf3Config31 ; ZendFramework)
+  * zend-mvc (ZendF/Zf3Mvc ; ZendFramework)
+  * zend-mvc 2.5.x (ZendF/Zf3Mvc25 ; ZendFramework)
+  * zend-mvc 2.6.x (ZendF/Zf3Mvc26 ; ZendFramework)
+  * zend-mvc 2.7.x (ZendF/Zf3Mvc27 ; ZendFramework)
+  * zend-mvc 3.0.x (ZendF/Zf3Mvc30 ; ZendFramework)
+  * zend-uri 2.5.x (ZendF/Zf3Uri25 ; ZendFramework)
+  * zend-validator 2.6.x (ZendF/Zf3Validator25 ; ZendFramework)
+  * zend-validator 2.6.x (ZendF/Zf3Validator26 ; ZendFramework)
+  * zend-validator 2.7.x (ZendF/Zf3Validator27 ; ZendFramework)
+  * zend-validator 2.8.x (ZendF/Zf3Validator28 ; ZendFramework)
+
 * 0.10.4
 
   * No Need For Else (Structures/NoNeedForElse ; Analyze)
@@ -1212,6 +1240,8 @@ List of external links mentionned in this documentation.
 * `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appendices/3-0-migration-guide.html>`_
 * `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_
 * `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_
+* `CakePHP <http://www.cakephp.org/>`_
+* `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `composer <https://getcomposer.org/>`_
 * `curl <http://www.php.net/curl>`_
@@ -1219,6 +1249,7 @@ List of external links mentionned in this documentation.
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
+* `Ereg <http://php.net/manual/en/function.ereg.php>`_
 * `Exakat <http://www.exakat.io/>`_
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
@@ -1244,12 +1275,15 @@ List of external links mentionned in this documentation.
 * `phar <https://www.exakat.io/download-exakat/>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
+* `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Semaphore <http://php.net/manual/en/book.sem.php>`_
 * `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
 * `session_regenerateid() <http://php.net/session_regenerate_id>`_
+* `SOAP <http://php.net/manual/en/book.soap.php>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
+* `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `svn <https://subversion.apache.org/>`_
 * `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_
@@ -1259,8 +1293,24 @@ List of external links mentionned in this documentation.
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
+* `Wordpress <http://www.wordpress.org/>`_
 * `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_
+* `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_
 * `XSL extension <http://php.net/manual/en/intro.xsl.php>`_
+* `Zend Framework 1.10 <https://framework.zend.com/manual/1.10/en/manual.html>`_
+* `Zend Framework 1.11 <https://framework.zend.com/manual/1.11/en/manual.html>`_
+* `Zend Framework 1.12 <https://framework.zend.com/manual/1.12/en/manual.html>`_
+* `Zend Framework 1.8 <https://framework.zend.com/manual/1.8/en/index.html>`_
+* `Zend Framework 1.9 <https://framework.zend.com/manual/1.9/en/index.html>`_
+* `Zend Framework 2.0 <https://framework.zend.com/manual/2.0/en/index.html>`_
+* `Zend Framework 2.1 <https://framework.zend.com/manual/2.1/en/index.html>`_
+* `Zend Framework 2.2 <https://framework.zend.com/manual/2.2/en/index.html>`_
+* `Zend Framework 2.3 <https://framework.zend.com/manual/2.3/en/index.html>`_
+* `Zend Framework 2.4 <https://framework.zend.com/manual/2.4/en/index.html>`_
+* `Zend Framework <http://framework.zend.com/>`_
+* `Zend Framework Components <https://framework.zend.com/learn>`_
 * `Zend Session <https://docs.zendframework.com/zend-session/manager/>`_
+* `Zend-config <https://docs.zendframework.com/zend-config/>`_
+* `Zlib <http://php.net/manual/en/book.zlib.php>`_
 
 

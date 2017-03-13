@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 06 Mar 2017 16:54:08 +0000
-.. comment: Generation hash : 867c3a930b27994c70b784993314e366c8348f56
+.. comment: Generation date : Mon, 13 Mar 2017 16:36:58 +0000
+.. comment: Generation hash : 1044170ab7c2fd6004ef8fb98a3caae1fb52dcce
 
 
 .. _analyze:
@@ -69,7 +69,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 294 analysis
+Total : 298 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -116,6 +116,7 @@ Total : 294 analysis
 * :ref:`Could Be Class Constant <could-be-class-constant>`
 * :ref:`Could Be Protected Property <could-be-protected-property>`
 * :ref:`Could Be Static <could-be-static>`
+* :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Use Alias <could-use-alias>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
@@ -264,6 +265,8 @@ Total : 294 analysis
 * :ref:`Static Loop <static-loop>`
 * :ref:`Static Methods Called From Object <static-methods-called-from-object>`
 * :ref:`Static Methods Can't Contain $this <static-methods-can't-contain-$this>`
+* :ref:`Strange Name For Constants <strange-name-for-constants>`
+* :ref:`Strange Name For Variables <strange-name-for-variables>`
 * :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
 * :ref:`Strpos Comparison <strpos-comparison>`
@@ -275,6 +278,7 @@ Total : 294 analysis
 * :ref:`Throw In Destruct <throw-in-destruct>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
+* :ref:`Too Many Finds <too-many-finds>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
@@ -791,13 +795,14 @@ Total : 25 analysis
 Security
 ++++++++
 
-Total : 20 analysis
+Total : 21 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`
 * :ref:`Dont Echo Error <dont-echo-error>`
+* :ref:`Encoded Simple Letters <encoded-simple-letters>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Indirect Injection <indirect-injection>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`

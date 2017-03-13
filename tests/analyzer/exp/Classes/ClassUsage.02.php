@@ -3,6 +3,6 @@
 $expected     = array('AnotherException', 
                       'SomeException');
 
-$expected_not = array();
+$expected_not = array('NotAClass');
 
 ?>

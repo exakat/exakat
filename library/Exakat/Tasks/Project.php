@@ -130,11 +130,6 @@ class Project extends Tasks {
         display("Project loaded\n");
         $this->logTime('Loading');
 
-        // paralell running
-        exec($this->config->php.' '.$this->config->executable.' magicnumber -p '.$this->config->project.'   > /dev/null &');
-        $this->addSnitch(array('step'    => 'Magic Numbers',
-                               'project' => $this->config->project));
-
         // Dump is a child process
         shell_exec($this->config->php.' '.$this->config->executable.' dump -p '.$this->config->project);
 
@@ -281,7 +276,6 @@ GREMLIN;
     }
 
     private function analyzeThemes($themes, $audit_start) {
-        print "Analyzing Themes\n";
         if (empty($themes)) {
             $themes = $this->themes;
         }
@@ -291,7 +285,8 @@ GREMLIN;
         }
 
         foreach($themes as $theme) {
-            $this->addSnitch(array('step' => 'Analyze : '.$theme, 'project' => $this->config->project));
+            $this->addSnitch(array('step'    => 'Analyze : '.$theme, 
+                                   'project' => $this->config->project));
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
 
             $args = array ( 1 => 'analyze',

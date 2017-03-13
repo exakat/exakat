@@ -309,6 +309,10 @@ GREMLIN;
                     if (isset($atom['reference'])) {
                         $atom['reference'] = $atom['reference'] == true ? 1 : -1;
                     }
+                } elseif ($name == 'fullnspath') {
+                    if (isset($atom['fullnspath']) && $atom['fullnspath'] == -1) {
+                        $atom['fullnspath'] = '';
+                    }
                 }
 
                 if (!isset($atom[$name])) {

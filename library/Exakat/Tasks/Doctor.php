@@ -64,6 +64,7 @@ class Doctor extends Tasks {
         $stats['exakat']['build']      = Exakat::BUILD;
         $stats['exakat']['exakat.ini'] = $this->array2list($this->config->configFiles);
         $stats['exakat']['reports']    = $this->array2list($this->config->project_reports);
+        $stats['exakat']['themes']     = $this->array2list($this->config->project_themes);
 
         // check for PHP
         $stats['PHP']['binary']         = phpversion();
@@ -148,9 +149,9 @@ class Doctor extends Tasks {
                 $stats['neo4j']['gremlinPlugin'] = 'Not found. Make sure that "org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp" is in the conf/neo4j-server.property.';
             }
 
-            $gremlinPlugin = glob($this->config->neo4j_folder.'/plugins/*/neo4j-gremlin-3.*.jar');
+            $gremlinPlugin = glob($this->config->neo4j_folder.'/plugins/*/neo4j-gremlin-3.2.0-incubating.jar');
             if (empty($gremlinPlugin)) {
-                $stats['neo4j']['gremlinJar'] = 'neo4j-gremlin-3.*.jar coudln\'t be found in the '.$this->config->neo4j_folder.'/plugins/* folders. Make sure gremlin is installed, and running gremlin version 3.* (3.2 is recommended).';
+                $stats['neo4j']['gremlinJar'] = 'neo4j-gremlin-3.2.0-incubatingcoudln\'t be found in the '.$this->config->neo4j_folder.'/plugins/* folders. Make sure gremlin is installed, and running gremlin version 3.* (3.2.0-incubating is recommended).';
             } elseif (count($gremlinPlugin) > 1) {
                 $versions = array();
                 foreach($gremlinPlugin as $version) {
@@ -167,6 +168,12 @@ class Doctor extends Tasks {
                 mkdir($this->config->neo4j_folder.'/scripts/', 0755);
                 $stats['neo4j']['scriptFolder'] = file_exists($this->config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
             }
+
+            $context = stream_context_create(array('http'=>
+            array(
+                'timeout' => 1,
+                )
+            ));
 
             $pidPath = $this->config->neo4j_folder.'/conf/neo4j-service.pid';
             if (file_exists($pidPath)) {
@@ -194,6 +201,13 @@ class Doctor extends Tasks {
                 } else {
                     $stats['neo4j']['gremlin'] = 'No';
                     $stats['neo4j']['gremlin-installation'] = 'Install gremlin plugin for neo4j';
+                }
+
+                $json = file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute?script='.urlencode('1 + 1'), false, $context);
+                if ($json === '{"success":true,"results":2}') {
+                    $stats['neo4j']['gremlin-status'] = 'OK';
+                } else {
+                    $stats['neo4j']['gremlin-status'] = 'Failed';
                 }
             }
 

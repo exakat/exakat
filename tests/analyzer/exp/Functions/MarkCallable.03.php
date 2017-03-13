@@ -6,6 +6,6 @@ $expected     = array('\'x\'',
                       '\'Y2\', \'x3\'',
 );
 
-$expected_not = array();
+$expected_not = array('\'df\'');
 
 ?>

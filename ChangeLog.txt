@@ -1,4 +1,4 @@
-Version 0.10.5 (Immortal of Tiger Power, Coming up)
+Version 0.10.6 (Immortal of Elk Power, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,35 @@ Version 0.10.5 (Immortal of Tiger Power, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.10.5 (Immortal of Tiger Power, 2017-03-13)
++ Architecture
+    + Collect graph size in dump.sqlite
+    + Collect memory usage in dump.sqlite
+    + Now uses the calling PHP version to run all parts of exakat (no config)
+    + Doctor report the ran gremlin version. 
++ Report
+    + Ported the Zend Framework report to ambassador
+    + Added regex delimiter in favorites.
+    + Ambassador : syntax coloring 
++ Analyzer
+    + New analyzer : could be typehinted 'callable'
+    + New analyzer : encoded letters in strings for security
+    + New analyzer : report arguments that may be callable
+    + New analyzer : report strangely named variables
+    + New analyzer : report strangely named constants
+    + New analyzer : too many FindsBy*() methods
+    + Updated analyzer : Useless Instructions doesn't report array_merge(_recursive) with one argument
+    + Updated analyzer : array_replace handles ... 
+    + Updated analyzer : 7.2 deprecation with assert()
+    + Generalized usage of commons for CIT
+    + Added first 4 set of analysis for Zend Framework 3
+    + Added support for dynamic new $a[i];
++ Tokenizer
+    + Fixed fullnspath with new on functioncall
+    + Reduced the number of fullnspath loaded
+    + Added support for 's'() as functioncall
+    + Fixed case where file names has ' ' in it
     
 Version 0.10.4 (Dragon King of the West Sea, 2017-03-06)
 + Architecture

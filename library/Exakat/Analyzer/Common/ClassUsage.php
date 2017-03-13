@@ -28,31 +28,28 @@ use Exakat\Analyzer\Analyzer;
 class ClassUsage extends Analyzer {
     protected $classes = array();
     
+    public function setClasses($classes) {
+        $this->classes = $classes;
+    }
+    
     public function analyze() {
         $classes =  $this->makeFullNsPath($this->classes);
 
         $this->atomIs('New')
              ->outIs('NEW')
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
+             ->atomIs('Functioncall')
+             ->raw('not(where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall") ) )')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($classes);
         $this->prepareQuery();
+
+        $this->atomIs('New')
+             ->outIs('NEW')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->fullnspathIs($classes);
+        $this->prepareQuery();
         
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
-             ->fullnspathIs($classes);
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
-             ->fullnspathIs($classes);
-        $this->prepareQuery();
-
-        $this->atomIs('Staticconstant')
+        $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->atomIsNot('Array')
@@ -90,6 +87,14 @@ class ClassUsage extends Analyzer {
              ->outIsIE('NAME')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIs($classes);
+        $this->prepareQuery();
+
+        $this->atomFunctionIs('\\class_alias')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->is('rank', 0)
+             ->atomIs('String')
+             ->noDelimiterIs($classes);
         $this->prepareQuery();
     }
 }

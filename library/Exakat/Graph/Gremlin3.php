@@ -66,7 +66,7 @@ class Gremlin3 extends Graph {
     
     private function checkConfiguration() {
         if (!file_exists($this->config->neo4j_folder)) {
-            throw new Neo4jException("Error in the path to the Neo4j folder ($this->config->neo4j_folder). Please, check config/exakat.ini\n");
+            throw new Neo4jException("Error in the path to the Neo4j folder (".$this->config->neo4j_folder."). Please, check config/exakat.ini\n");
         }
 
         if (!file_exists($this->scriptDir)) {
