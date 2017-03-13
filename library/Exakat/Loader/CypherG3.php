@@ -291,16 +291,16 @@ CYPHER;
                         $extras[$atom['atom']][] = $title;
                     }
                 }
+                
                 fputcsv($fp, $headers);
             }
 
             $extra= array();
             foreach($extras[$atom['atom']] as $e) {
-                if ($e == 'variadic' && !isset($atom[$e])) {
-                    display(print_r($atom, true));
-                }
                 if ($e === 'boolean') {
                     $extra[] = isset($atom[$e]) ? '"'.($atom[$e] ? "1" : "").'"' : '""';
+                } elseif ($e === 'fullnspath') {
+                    $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '';
                 } else {
                     $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
                 }
