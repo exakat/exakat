@@ -50,15 +50,15 @@ class DefinitionsOnly extends Analyzer {
              ->outIs('CODE')
              ->raw('coalesce( __.out("ELEMENT").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
              ->raw(<<<GREMLIN
-where(
+not(__.where(
     __
       .out("ELEMENT")
       .where( __.hasLabel($definitionsList).count().is(eq(0)) )
       .where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )
       .where( __.in("ANALYZED").has("analyzer", "Structures/NoDirectAccess").count().is(eq(0)) )
-      .where( __.hasLabel("Functioncall").filter{ it.get().value("fullnspath") in [$definitionsFunctionsList] }.count().is(eq(0)) )
-      .count().is(eq(0))
-)
+      .not(where( __.hasLabel("Functioncall").not(has("fullnspath")) ))
+      .where( __.hasLabel("Functioncall").has("fullnspath").filter{ it.get().value("fullnspath") in [$definitionsFunctionsList] }.count().is(eq(0)) )
+))
 
 GREMLIN
 )
