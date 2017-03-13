@@ -1843,7 +1843,7 @@ class Load extends Tasks {
         return $functioncallId;
     }
 
-    private function processString($fullnspath = true) {
+    private function processString() {
         if (strtolower($this->tokens[$this->id][1]) === 'null' ) {
             $id = $this->addAtom('Null');
             $this->setAtom($id, array('boolean' => 0));
@@ -1866,7 +1866,9 @@ class Load extends Tasks {
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
             // Just skip this : no need for fullnspat with property or methodcall, static or not
         } elseif ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NEW) {
-            // Do nothing, this will be done at processNew level
+            list($fullnspath, $aliased) = $this->getFullnspath($id, 'class');
+            $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased));
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             // when this is not already done, we prepare the fullnspath as a constant
             list($fullnspath, $aliased) = $this->getFullnspath($id, 'function');
@@ -1907,6 +1909,8 @@ class Load extends Tasks {
         } else {
             // For functions and constants
             $id = $this->processFCOA($id);
+            $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased));
         }
 
         return $id;
