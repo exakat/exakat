@@ -130,6 +130,14 @@ abstract class Analyzer {
         }
     }
     
+    public function setAnalyzer($analyzer) {
+        $this->analyzer = self::getClass($analyzer);
+        if ($this->analyzer === false) {
+            throw new NoSuchAnalyzer($analyzer);
+        }
+        $this->analyzerQuoted = str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $this->analyzer));
+    }
+    
     public function getInBaseName() {
         return $this->analyzerQuoted;
     }
@@ -749,6 +757,9 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (empty($code)) {
+            return $this;
+        }
         $this->addMethod('hasLabel("String")', $code);
         return $this->propertyIs('noDelimiter', $code, $caseSensitive);
     }
@@ -1810,6 +1821,10 @@ GREMLIN;
     }
 
     private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (empty($code)) {
+            return $this;
+        }
+
         if ($caseSensitive === self::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {

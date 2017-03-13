@@ -24,57 +24,15 @@
 namespace Exakat\Analyzer\Classes;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\ClassUsage as CommonClassUsage;
 
-class ClassUsage extends Analyzer {
+class ClassUsage extends CommonClassUsage {
 
     public function analyze() {
-        $this->atomIs('New')
-             ->outIs('NEW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array');
-        $this->prepareQuery();
+        // Empty array to handle ALL classes
+        $this->classes = array();
         
-        $this->atomIs('Staticmethodcall')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'));
-        $this->prepareQuery();
-
-        $this->atomIs('Staticproperty')
-             ->outIs('CLASS');
-        $this->prepareQuery();
-
-        $this->atomIs('Staticconstant')
-             ->outIs('CLASS');
-        $this->prepareQuery();
-
-        $this->atomIs('Catch')
-             ->outIs('CLASS');
-        $this->prepareQuery();
-
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->outIs('TYPEHINT');
-        $this->prepareQuery();
-
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS');
-        $this->prepareQuery();
-
-        $this->atomIs('Class')
-             ->outIs(array('EXTENDS', 'IMPLEMENTS'));
-        $this->prepareQuery();
-
-        $this->atomIs('Use')
-             ->outIs('USE');
-        $this->prepareQuery();
-
-        $this->atomFunctionIs('\\class_alias')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
-             ->atomIs('String');
-        $this->prepareQuery();
+        parent::analyze();
     }
 }
 

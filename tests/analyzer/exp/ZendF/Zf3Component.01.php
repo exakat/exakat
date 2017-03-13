@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('Zend\Config\Config($configArray)');
 
-$expected_not = array();
+$expected_not = array('Zend\Config\NotAZendClass($configArray)');
 
 ?>

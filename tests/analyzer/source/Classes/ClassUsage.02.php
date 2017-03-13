@@ -8,4 +8,6 @@ try {
 
 }
 
+$a = NotAClass;
+
 ?>

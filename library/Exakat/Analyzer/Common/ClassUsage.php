@@ -28,6 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class ClassUsage extends Analyzer {
     protected $classes = array();
     
+    public function setClasses($classes) {
+        $this->classes = $classes;
+    }
+    
     public function analyze() {
         $classes =  $this->makeFullNsPath($this->classes);
 
@@ -41,7 +45,7 @@ class ClassUsage extends Analyzer {
 
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIs('Identifier')
+             ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
         
@@ -83,6 +87,14 @@ class ClassUsage extends Analyzer {
              ->outIsIE('NAME')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIs($classes);
+        $this->prepareQuery();
+
+        $this->atomFunctionIs('\\class_alias')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->is('rank', 0)
+             ->atomIs('String')
+             ->noDelimiterIs($classes);
         $this->prepareQuery();
     }
 }
