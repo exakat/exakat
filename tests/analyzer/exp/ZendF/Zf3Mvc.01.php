@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array();
+$expected     = array('Zend\Mvc\Controller\AbstractActionController', 
+                      'AbstractActionController');
 
-$expected_not = array();
+$expected_not = array('AbstractActionController2');
 
 ?>

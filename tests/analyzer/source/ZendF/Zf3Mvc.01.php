@@ -1,5 +1,5 @@
 <?php
-namespace <module name>\Controller;
+namespace ModuleName\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use stcClass as AbstractActionController2;
