@@ -7,9 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class ZendF_zf3Uri extends Analyzer {
+class ZendF_Zf3Uri extends Analyzer {
     /* 1 methods */
 
-    public function testZendF_zf3Uri01()  { $this->generic_test('ZendF/zf3Uri.01'); }
+    public function testZendF_Zf3Uri01()  { $this->generic_test('ZendF/Zf3Uri.01'); }
 }
 ?>

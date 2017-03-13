@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
 
-class Zf3Mvc extends zf3Component {
+class Zf3Mvc extends Zf3Component {
     public function analyze() {
         $this->component = 'zend-mvc';
         
