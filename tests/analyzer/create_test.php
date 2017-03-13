@@ -12,10 +12,10 @@
         die();
     }
     
-    list($dir, $test, $test2) = explode('/', $test);
+    list($dir, $test) = explode('/', $test);
     if ($dir === 'Test') {
-        $dir = $test;
-        $test = $test2;
+        $dir = $test[0];
+        $test = $test[1];
     }
     
     if (substr($test, -4) == '.php') {
