@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
 
-class Zf3Uri extends zf3Component {
+class Zf3Uri extends Zf3Component {
     public function analyze() {
         $this->component = 'zend-uri';
         
