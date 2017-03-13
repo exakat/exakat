@@ -20,7 +20,7 @@ class Y extends Yparent {
 
         // OK (strings)
         array_filter($a, array($this, 'x33'));
-        preg_replace_callback('asd', 'df', array($this, 'x34'));
+        preg_replace_callback('asd', array($this, 'x34'), 'df');
     }
 }
 

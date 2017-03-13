@@ -11,6 +11,12 @@ $expected     = array('\'a\', \'b\'',
                       '$i, \'j\'', 
 );
 
-$expected_not = array();
+$expected_not = array('last',
+                      'a31',
+                      'sssh0',
+                      'sssh1',
+                      'sssh2',
+                      'sssh3'
+                      );
 
 ?>

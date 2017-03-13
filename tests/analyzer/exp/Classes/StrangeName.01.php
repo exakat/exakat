@@ -2,7 +2,6 @@
 
 $expected     = array('function isset( ) { /**/ } ',
                         'function set_state( ) { /**/ } ',
-                        'function set( ) { /**/ } ',
                         'function sleep( ) { /**/ } ',
                         'function tostring( ) { /**/ } ',
                         'function unset( ) { /**/ } ',
@@ -15,6 +14,8 @@ $expected     = array('function isset( ) { /**/ } ',
                         'function consturct( ) { /**/ } ',
                         'function __consturct( ) { /**/ } ',);
 
-$expected_not = array(  'function __construct() { /**/ } ');
+$expected_not = array(  'function __construct() { /**/ } ',
+                        'function set( ) { /**/ } ',
+);
 
 ?>
