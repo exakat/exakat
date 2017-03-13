@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array();
+$expected     = array('Zend\Validator\Module( )', 
+                      'Zend\Validator\Uuid( )', 
+                      'Zend\Validator\Isbn\Isbn10( )');
 
-$expected_not = array();
+$expected_not = array('Zend\Validator\NotZend( )',
+                      'EmailAddress( )');
 
 ?>

@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
 
-class Zf3Validator extends zf3Component {
+class Zf3Validator extends Zf3Component {
     public function analyze() {
         $this->component = 'zend-validator';
         
