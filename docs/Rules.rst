@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 06 Mar 2017 16:54:08 +0000
-.. comment: Generation hash : 867c3a930b27994c70b784993314e366c8348f56
+.. comment: Generation date : Mon, 13 Mar 2017 16:36:58 +0000
+.. comment: Generation hash : 1044170ab7c2fd6004ef8fb98a3caae1fb52dcce
 
 
 .. _$http\_raw\_post\_data:
@@ -414,7 +414,24 @@ All Uppercase Variables
 #######################
 
 
-Usually, global variables are all in uppercase, so as to differentiate them easily. Try to use lowercase variables, $camelCase, $sturdyCase or $snake_case.
+Usually, global variables are all in uppercase, so as to differentiate them easily. Though, this is not always the case, with examples like $argc, $argv or $http_response_header.
+
+When using custom variables, try to use lowercase $variables, $camelCase, $sturdyCase or $snake_case.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP super global, also identified by the initial _
+   $localVariable = $_POST;
+   
+   // PHP globals
+   $localVariable = $GLOBALS['HTTPS'];
+   
+   ?>
+
+
+`Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
 
 +--------------+------------------------------------------------+
 | Command Line | Variables/VariableUppercase                    |
@@ -1520,7 +1537,7 @@ Class Function Confusion
 
 Avoid classes and functions bearing the same name. 
 
-When functions and classes bear the same name, calling them may be confusing. 
+When functions and classes bear the same name, calling them may be confusing. This may also lead to forgotten 'new' keyword.
 
 .. code-block:: php
 
@@ -2119,6 +2136,47 @@ This global is only used in one function or method. It may be called 'static', i
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
+
+
+
+.. _could-be-typehinted-callable:
+
+Could Be Typehinted Callable
+############################
+
+
+Those arguments may use the callable Typehint. 
+
+'callable' is a PHP keyword that represents callback functions. Those may be used in dynamic function call, like $function(); or as callback functions, like with `array_map() <http://www.php.net/array_map>`_;
+
+callable may be a string representing a function name or a static call (including ::), an array with two elements, (a class or object, and a method), or a closure.
+
+When arguments are used to call a function, but are not marked with 'callable', they are reported by this analysis.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(callable $callable) {
+       // very simple callback
+       return $callable();
+   }
+   
+   function foo2($array, $callable) {
+       // very simple callback
+       return array_map($array, $callable);
+   }
+   
+   ?>
+
+
+See also `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_.
+
++--------------+---------------------------+
+| Command Line | Functions/CouldBeCallable |
++--------------+---------------------------+
+| Analyzers    | :ref:`Analyze`            |
++--------------+---------------------------+
 
 
 
@@ -3207,6 +3265,42 @@ Empty With Expression
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71` |
 +--------------+------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _encoded-simple-letters:
+
+Encoded Simple Letters
+######################
+
+
+Some simple letters are written in escape sequence. 
+
+Usually, escape sequences are made to encode unusual characters. Using escape sequences for simple characters, like letters or numbers is suspicious.
+
+.. code-block:: php
+
+   <?php
+   
+   // This escape sequence makes eval hard to spot
+   $a = ev1l;
+   $a('php_info();');
+   
+   // With a PHP 7.0 unicode code point sequence
+   $a = ev\u{41}l;
+   $a('php_info();');
+   
+   // With a PHP 5.0+ hexadecimal sequence
+   $a = ev\x41l;
+   $a('php_info();');
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Security/EncodedLetters |
++--------------+-------------------------+
+| Analyzers    | :ref:`Security`         |
++--------------+-------------------------+
 
 
 
@@ -6848,6 +6942,9 @@ Mark the creation of nonce by Wordpress. Nonce may be created with the Wordpress
    
    ?>
 
+
+See also `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_.
+
 +--------------+-------------------------+
 | Command Line | Wordpress/NonceCreation |
 +--------------+-------------------------+
@@ -9450,6 +9547,63 @@ Either, this is not a static method (simply remove the static keyword), or repla
 
 
 
+.. _strange-name-for-constants:
+
+Strange Name For Constants
+##########################
+
+
+Those constants looks like a typo from other names.
+
+.. code-block:: php
+
+   <?php
+   
+   // This code looks OK : DIRECTORY_SEPARATOR is a native PHP constant
+   $path = $path . DIRECTORY_SEPARATOR . $file;
+   
+   // Strange name DIRECOTRY_SEPARATOR
+   $path = $path . DIRECOTRY_SEPARATOR . $file;
+   
+   ?>
+
++--------------+-----------------------+
+| Command Line | Constants/StrangeName |
++--------------+-----------------------+
+| Analyzers    | none                  |
++--------------+-----------------------+
+
+
+
+.. _strange-name-for-variables:
+
+Strange Name For Variables
+##########################
+
+
+Those variables looks like a typo from other names.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       function bar() {
+           // Strange name $tihs
+           return $tihs;
+       }
+   }
+   
+   ?>
+
++--------------+--------------------------------------------------+
+| Command Line | Variables/StrangeName                            |
++--------------+--------------------------------------------------+
+| Analyzers    | :ref:`Wordpress`, :ref:`Analyze`, :ref:`Analyze` |
++--------------+--------------------------------------------------+
+
+
+
 .. _strange-names-for-methods:
 
 Strange Names For Methods
@@ -9485,7 +9639,7 @@ Those errors most often originate from typos, or quick fixes that 'don't require
 +--------------+---------------------+
 | Command Line | Classes/StrangeName |
 +--------------+---------------------+
-| Analyzers    | :ref:`Wordpress`    |
+| Analyzers    | none                |
 +--------------+---------------------+
 
 
@@ -9933,6 +10087,42 @@ When the difference is very small, it requires a better way to mesure time diffe
 +--------------+--------------------------------+
 | Analyzers    | :ref:`Analyze`                 |
 +--------------+--------------------------------+
+
+
+
+.. _too-many-finds:
+
+Too Many Finds
+##############
+
+
+Too many methods called 'find*' in this class. 
+
+
+.. code-block:: php
+
+   <?php
+   
+   // quite a fishy interface
+   interface UserInterface {
+       public function findByEmail($email);
+       public function findByUsername($username);
+       public function findByFirstName($firstname);
+       public function findByLastName($lastname);
+       public function findByName($name);
+       public function findById($id);
+   
+       public function insert($user);
+       public function update($user);
+   }
+   
+   ?>
+
++--------------+----------------------+
+| Command Line | Classes/TooManyFinds |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
 
 
 
@@ -12144,13 +12334,18 @@ Useless Instructions
 ####################
 
 
-The instructions below are useless, or contains useless parts. For example, running '&lt;?php 1 + 1; ?&gt;' does nothing : the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
+Those instructions are useless, or contains useless parts. 
+
+For example, running '&lt;?php 1 + 1; ?&gt;' does nothing : the addition is actually performed, but not used : not displayed, not stored, not set. Just plain lost. 
 
 Here the useless instructions that are spotted : 
 
 .. code-block:: php
 
    <?php
+   
+   // This is a typo, that PHP turns into a constant, then a string. 
+   conitnue;
    
    // Empty string in a concatenation
    $a = 'abc' . '';
@@ -12163,13 +12358,15 @@ Here the useless instructions that are spotted :
        return $a++;
    }
    
-   // array_merge() with only one argument
-   $merge = array_merge($array);
+   // array_replace() with only one argument
+   $replaced = array_replace($array);
+   // array_replace() is OK with ... 
+   $replaced = array_replace(...$array);
    
    // @ operator on source array, in foreach, or when assigning literals
    $array = @array(1,2,3);
    
-   // Comparisons in a for loop : only the last is actually used.
+   // Multiple comparisons in a for loop : only the last is actually used.
    for($i = 0; $j = 0; $j < 10, $i < 20; ++$j, ++$i) {
        print $i.' '.$j.PHP_EOL;
    }
@@ -13078,7 +13275,20 @@ ext/ereg
 ########
 
 
-Extension ext/ereg
+Extension ext/ereg.
+
+.. code-block:: php
+
+   <?php
+   if (ereg ('([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})', $date, $regs)) {
+       echo $regs[3].'.'.$regs[2].'.'.$regs[1];
+   } else {
+       echo 'Invalid date format: '.$date;
+   }
+   ?>
+
+
+See also `Ereg <http://php.net/manual/en/function.ereg.php>`_.
 
 +--------------+------------------------------------------------------+
 | Command Line | Extensions/Extereg                                   |
