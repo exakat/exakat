@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('"\101"', 
+$expected     = array('\101', 
                       '\x22', 
                       '\x41', 
                       '"\u{41}"');
