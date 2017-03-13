@@ -23,16 +23,18 @@
 namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\ClassUsage;
 use Exakat\Data\ZendF3;
 
-class zf3Component extends Analyzer {
-    protected $classes    = array();
-    protected $interfaces = array();
-    protected $traits     = array();
+class Zf3Component extends Analyzer {
+    protected $component  = null;
     protected $version    = null;
     
     public function analyze() {
         $data = new ZendF3($this->config->dir_root.'/data', $this->config->is_phar);
+        if (empty($this->component)) {
+            return;
+        }
 
         $classes    = $data->getClasses($this->component, $this->version);
         if (!empty($classes)) {
@@ -41,52 +43,16 @@ class zf3Component extends Analyzer {
             $classes    = $this->makeFullNsPath($classes);
     
             if (!empty($classes)) {
-                $this->atomIs('New')
-                     ->outIs('NEW')
-                     ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
-                     ->tokenIs(self::$FUNCTIONS_TOKENS)
-                     ->fullnspathIs($classes);
-                $this->prepareQuery();
-                
-                $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
-                     ->outIs('CLASS')
-                     ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                     ->atomIsNot('Array')
-                     ->fullnspathIs($classes);
-                $this->prepareQuery();
-        
-                $this->atomIs('Catch')
-                     ->outIs('CLASS')
-                     ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                     ->fullnspathIs($classes);
-                $this->prepareQuery();
-        
-                $this->atomIs(array('Nsname', 'Identifier'))
-                     ->hasIn('TYPEHINT')
-                     ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                     ->fullnspathIs($classes);
-                $this->prepareQuery();
-        
-                $this->atomIs('Instanceof')
-                     ->outIs('CLASS')
-                     ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                     ->atomIsNot(array('Array', 'Null', 'Boolean'))
-                     ->fullnspathIs($classes);
-                $this->prepareQuery();
-        
-                $this->atomIs('Class')
-                     ->outIs(array('EXTENDS', 'IMPLEMENTS'))
-                     ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                     ->fullnspathIs($classes);
-                $this->prepareQuery();
-        
-        // Check that... Const/function and aliases
-                $this->atomIs('Use')
-                     ->outIs('USE')
-                     ->outIsIE('NAME')
-                     ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                     ->fullnspathIs($classes);
-                $this->prepareQuery();
+                $classesUsage = new ClassUsage($this->gremlin);
+                $classesUsage->setAnalyzer(get_class($this));
+                $classesUsage->setClasses($classes);
+                $classesUsage->init();
+                $classesUsage->run();
+
+                $this->rowCount        += $classesUsage->getRowCount();
+                $this->processedCount  += $classesUsage->getProcessedCount();
+                $this->queryCount      += $classesUsage->getQueryCount();
+                $this->rawQueryCount   += $classesUsage->getRawQueryCount();
             }
         }
 
