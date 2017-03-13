@@ -28,6 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class TraitUsage extends Analyzer {
     protected $traits = array();
     
+    public function setTraits($traits) {
+        $this->traits = $traits;
+    }
+    
     public function analyze() {
         $traits =  $this->makeFullNsPath($this->traits);
 
@@ -44,13 +48,8 @@ class TraitUsage extends Analyzer {
              ->atomIsNot('Array')
              ->fullnspathIs($traits);
         $this->prepareQuery();
-
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
-             ->fullnspathIs($traits);
-        $this->prepareQuery();
+        
+        // Instanceof doesn't use traits
 
 // Check that... Const/function and aliases
         $this->atomIs('Use')

@@ -24,8 +24,9 @@
 namespace Exakat\Analyzer\Traits;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\TraitUsage as CommonTraitUsage;
 
-class TraitUsage extends Analyzer {
+class TraitUsage extends CommonTraitUsage {
 
     public function analyze() {
         $this->atomIs(array('Class', 'Trait'))
