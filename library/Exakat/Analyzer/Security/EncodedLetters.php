@@ -37,21 +37,21 @@ class EncodedLetters extends Analyzer {
 
         // hex : 20 to 7A
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '\\\\\\\\u\\\\{([2-6][0-9a-fA-F]|7[0-9aA])\\\\}')
              ->back('first');
         $this->prepareQuery();
 
         // unicode codepoint : 20 to 7A
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '\\\\\\\\x([2-6][0-9a-fA-F]|7[0-9aA])')
              ->back('first');
         $this->prepareQuery();
 
         // oct : 40 to 172
         $this->atomIs('String')
-             ->hasNoOut('CONTAINS')
+             ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '\\\\\\\\([4-9][0-9]|1[0-6][0-9]|17[0-2])')
              ->back('first');
         $this->prepareQuery();
