@@ -35,6 +35,8 @@ class CakePHPUsed extends Analyzer {
     public function analyze() {
         $data = new CakePHP($this->config->dir_root.'/data', $this->config->is_phar);
 
+        $this->init();
+        
         $classes    = $data->getClasses($this->component, $this->version);
         if (!empty($classes)) {
             $classes    = array_merge(...array_values($classes));
@@ -45,7 +47,7 @@ class CakePHPUsed extends Analyzer {
                 $classesUsage = new ClassUsage($this->gremlin);
                 $classesUsage->setAnalyzer(get_class($this));
                 $classesUsage->setClasses($classes);
-                $classesUsage->init();
+                $classesUsage->init($this->analyzerId);
                 $classesUsage->run();
 
                 $this->rowCount        += $classesUsage->getRowCount();
@@ -65,7 +67,7 @@ class CakePHPUsed extends Analyzer {
                 $classesUsage = new InterfaceUsage($this->gremlin);
                 $classesUsage->setAnalyzer(get_class($this));
                 $classesUsage->setInterfaces($interfaces);
-                $classesUsage->init();
+                $classesUsage->init($this->analyzerId);
                 $classesUsage->run();
 
                 $this->rowCount        += $classesUsage->getRowCount();
@@ -85,7 +87,7 @@ class CakePHPUsed extends Analyzer {
                 $classesUsage = new TraitUsage($this->gremlin);
                 $classesUsage->setAnalyzer(get_class($this));
                 $classesUsage->setTraits($traits);
-                $classesUsage->init();
+                $classesUsage->init($this->analyzerId);
                 $classesUsage->run();
 
                 $this->rowCount        += $classesUsage->getRowCount();
