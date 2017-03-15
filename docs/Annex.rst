@@ -279,6 +279,21 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.10.6
+
+  * CakePHP 2.5.0 Undefined Classes (Cakephp/Cakephp25 ; Cakephp)
+  * CakePHP 2.6.0 Undefined Classes (Cakephp/Cakephp26 ; Cakephp)
+  * CakePHP 2.7.0 Undefined Classes (Cakephp/Cakephp27 ; Cakephp)
+  * CakePHP 2.8.0 Undefined Classes (Cakephp/Cakephp28 ; Cakephp)
+  * CakePHP 2.9.0 Undefined Classes (Cakephp/Cakephp29 ; Cakephp)
+  * CakePHP 3.0.0 Undefined Classes (Cakephp/Cakephp30 ; Cakephp)
+  * CakePHP 3.1.0 Undefined Classes (Cakephp/Cakephp31 ; Cakephp)
+  * CakePHP 3.2.0 Undefined Classes (Cakephp/Cakephp32 ; Cakephp)
+  * CakePHP 3.3.0 Undefined Classes (Cakephp/Cakephp33 ; Cakephp)
+  * CakePHP 3.4.0 Undefined Classes (Cakephp/Cakephp34 ; Cakephp)
+  * CakePHP Unknown Classes (Cakephp/CakePHPMissing)
+  * CakePHP Used (Cakephp/CakePHPUsed ; Cakephp)
+
 * 0.10.5
 
   * Could Be Typehinted Callable (Functions/CouldBeCallable ; Analyze)
@@ -1231,9 +1246,9 @@ External links
 
 List of external links mentionned in this documentation.
 
+* `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
-* `array_column() <https://benramsey.com/projects/array-column/>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
@@ -1282,6 +1297,7 @@ List of external links mentionned in this documentation.
 * `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
 * `session_regenerateid() <http://php.net/session_regenerate_id>`_
 * `SOAP <http://php.net/manual/en/book.soap.php>`_
+* `Specification pattern <https://en.wikipedia.org/wiki/Specification_pattern>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Suhosin.org <https://suhosin.org/>`_

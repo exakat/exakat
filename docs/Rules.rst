@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 13 Mar 2017 16:36:58 +0000
-.. comment: Generation hash : 1044170ab7c2fd6004ef8fb98a3caae1fb52dcce
+.. comment: Generation date : Wed, 15 Mar 2017 16:54:43 +0000
+.. comment: Generation hash : ff3f005a72948193238ca76ff25c1370771ea6f4
 
 
 .. _$http\_raw\_post\_data:
@@ -9224,7 +9224,7 @@ Should use `array_column() <http://www.php.net/array_column>`_.
 
 `array_column() <http://www.php.net/array_column>`_ is faster than `foreach() <http://php.net/manual/en/control-structures.foreach.php>`_ (with or without the `isset() <http://www.php.net/isset>`_ test) with 3 elements or more, and it is significantly faster beyond 5 elements. Memory consumption is the same.
 
-See also ``array_column() <http://www.php.net/array_column>`_ <https://benramsey.com/projects/array-column/>`_.
+See also `[blog] `array_column() <http://www.php.net/array_column>`_ <https://benramsey.com/projects/array-column/>`_.
 
 +--------------+-------------------------------------+
 | Command Line | Php/ShouldUseArrayColumn            |
@@ -10096,8 +10096,7 @@ Too Many Finds
 ##############
 
 
-Too many methods called 'find*' in this class. 
-
+Too many methods called 'find*' in this class. It is may be time to consider the `Specification pattern <https://en.wikipedia.org/wiki/Specification_pattern>`_.
 
 .. code-block:: php
 
@@ -10117,6 +10116,11 @@ Too many methods called 'find*' in this class.
    }
    
    ?>
+
+
+See also `On Taming Repository Classes in Doctrine <https://beberlei.de/2013/03/04/doctrine_repositories.html>`_ , 
+`On Taming Repository Classes in Doctrine… Among other things. <http://blog.kevingomez.fr/2015/02/07/on-taming-repository-classes-in-doctrine-among-other-things/>`_,
+`specifications <https://slides.pixelart.at/2017-02-04/fosdem/specifications/#/>`_.
 
 +--------------+----------------------+
 | Command Line | Classes/TooManyFinds |
