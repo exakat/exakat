@@ -337,7 +337,6 @@ Glossary
     + `Isset`
 
       + :ref:`No Isset With Empty <no-isset-with-empty>`
-      + :ref:`Should Use Coalesce <should-use-coalesce>`
 
     + `implode()`
 

@@ -51,7 +51,7 @@ abstract class Analyzer {
     static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
     protected $analyzerQuoted = '';
-    private $analyzerId       = 0;
+    protected $analyzerId     = 0;
 
     protected $phpVersion       = self::PHP_VERSION_ANY;
     protected $phpConfiguration = 'Any';
@@ -326,28 +326,32 @@ GREMLIN;
         return $this;
     }
     
-    public function init() {
-        $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'")';
-        $res = $this->query($query);
-        if (isset($res[0])) {
-            $res = $res[0];
-        }
-        
-        if (isset($res->id)) {
-            $this->analyzerId = $res->id;
-
-            // Removing all edges
-            $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").outE("ANALYZED").drop()';
+    public function init($analyzerId = null) {
+        if ($analyzerId === null) {
+            $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'")';
             $res = $this->query($query);
-        } else {
-            // Creating analysis vertex
-            $query = "g.addV('Analysis').property('analyzer','{$this->analyzerQuoted}')";
-            $res = $this->query($query);
-            
-            if (!isset($res[0])) {
-                throw new GremlinException();
+            if (isset($res[0])) {
+                $res = $res[0];
             }
-            $this->analyzerId = $res[0]->id;
+            if (isset($res->id)) {
+                $this->analyzerId = $res->id;
+
+                // Removing all edges
+                $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").outE("ANALYZED").drop()';
+                $res = $this->query($query);
+            } else {
+                // Creating analysis vertex
+                $query = "g.addV('Analysis').property('analyzer','{$this->analyzerQuoted}')";
+                $res = $this->query($query);
+            
+                if (!isset($res[0])) {
+                    throw new GremlinException();
+                }
+
+                $this->analyzerId = $res[0]->id;
+            }
+        } else {
+            $this->analyzerId = $analyzerId;
         }
     }
 

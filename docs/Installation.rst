@@ -181,16 +181,16 @@ In the neo4j folder, update the server configuration. The configuration is in th
 Activate the gremlin plugin.
 ::
 
-#org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.examples.server.unmanaged=/examples/unmanaged
-# add this line below the above one
-org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp
+    #org.neo4j.server.thirdparty_jaxrs_classes=org.neo4j.examples.server.unmanaged=/examples/unmanaged
+    # add this line below the above one
+    org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp
 
 
 You may also disable authentication. If not, do not forget to update the config/exakat.ini file, with the right credential. 
 ::
 
-#dbms.security.auth_enabled=true
-dbms.security.auth_enabled=false
+    #dbms.security.auth_enabled=true
+    dbms.security.auth_enabled=false
 
 
 
