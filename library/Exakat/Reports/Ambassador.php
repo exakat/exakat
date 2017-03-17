@@ -2453,6 +2453,8 @@ JAVASCRIPT;
                             'Octal'               => 'Type/Octal',
                             'Binary'              => 'Type/Binary',
                             'Real'                => 'Type/Real',
+                            'Not-a-Number'        => 'Php/IsNAN',
+                            'Infinity'            => 'Php/IsINF',
                     ),
 
                     'Strings' => array(
