@@ -411,7 +411,7 @@ function glossary($title,$description) {
 
     };
     
-    $description = preg_replace_callback('@([^a-zA-Z_])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])@is',$cbGlossary,' '.$description);
+    $description = preg_replace_callback('@([^a-zA-Z_`])('.$alt.')(\(?\)?)(?=[^a-zA-Z_=])@is', $cbGlossary, ' '.$description);
 
     return $description;
 }
