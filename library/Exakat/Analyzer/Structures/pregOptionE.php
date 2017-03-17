@@ -27,9 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class pregOptionE extends Analyzer {
     public function analyze() {
-        $functions = array('\preg_replace', '\mb_eregi');
+        $functions = '\preg_replace';
         // delimiters
-        $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[';
+        $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[~';
         
         $makeDelimiters = ' sideEffect{ 
     if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
@@ -37,7 +37,7 @@ class pregOptionE extends Analyzer {
     else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
     else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
     else { delimiterFinal = delimiter; } 
-}';
+}.filter{ delimiter != "\\\\\\\\" }';
 
         // preg_match with a string
         $this->atomFunctionIs($functions)
@@ -80,6 +80,15 @@ class pregOptionE extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
+
+        $this->atomFunctionIs(array('\mb_eregi_replace', '\mb_ereg_replace'))
+             ->outIs('ARGUMENTS')
+             ->outWithRank('ARGUMENT', 3)
+             ->atomIs('String')
+             ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
+             ->regexIs('noDelimiter', 'e')
+             ->back('first');
+         $this->prepareQuery();
     }
 }
 
