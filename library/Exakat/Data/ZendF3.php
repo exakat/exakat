@@ -102,12 +102,12 @@ class ZendF3 {
                     JOIN components 
                       ON releases.component_id = components.id 
                     WHERE components.component = "'.$component.'"';
-        $res = $this->sqlite->query($query);
-        $return = array();
-
         if ($release !== null) {
             $query .= " AND releases.release = \"release-$release.0\"";
         }
+
+        $res = $this->sqlite->query($query);
+        $return = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
@@ -129,12 +129,12 @@ class ZendF3 {
                     JOIN components 
                       ON releases.component_id = components.id 
                     WHERE components.component = "'.$component.'"';
-        $res = $this->sqlite->query($query);
-        $return = array();
-
         if ($release !== null) {
             $query .= " AND releases.release = \"release-$release.0\"";
         }
+
+        $res = $this->sqlite->query($query);
+        $return = array();
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if (isset($return[$row['release']])) {
