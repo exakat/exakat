@@ -24,6 +24,8 @@ namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\ClassUsage;
+use Exakat\Analyzer\Common\InterfaceUsage;
+use Exakat\Analyzer\Common\TraitUsage;
 use Exakat\Data\ZendF3;
 
 class Zf3Component extends Analyzer {
