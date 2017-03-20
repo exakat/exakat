@@ -3637,6 +3637,7 @@ class Load extends Tasks {
         list($fullnspath, $aliased) = $this->getFullnspath($leftId, 'class');
         $this->setAtom($leftId, array('fullnspath' => $fullnspath,
                                       'aliased'    => $aliased));
+        $this->addCall('class', $this->atoms[$leftId]['fullnspath'], $leftId);
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals[] = \Exakat\Tasks\T_DOUBLE_COLON;
@@ -3803,7 +3804,6 @@ class Load extends Tasks {
 
         return $staticId;
     }
-
 
     private function processAssignation() {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
