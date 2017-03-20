@@ -3459,6 +3459,11 @@ class Load extends Tasks {
     private function processNew() {
         $this->toggleContext(self::CONTEXT_NEW);
         $id =  $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
+
+        if (isset($this->atoms[$id]['fullnspath'])) {
+            $this->addCall('class', $this->atoms[$id]['fullnspath'], $id);
+        }
+
         $this->toggleContext(self::CONTEXT_NEW);
 
         return $id;
