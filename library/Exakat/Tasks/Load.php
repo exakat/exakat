@@ -94,6 +94,7 @@ class Load extends Tasks {
     private $sequences = array();
 
     private $currentClassTrait = array();
+    private $currentParentClassTrait = array();
 
     private $tokens = array();
     private $id = 0;
@@ -105,6 +106,9 @@ class Load extends Tasks {
 
     const ALIASED           = 1;
     const NOT_ALIASED       = 0;
+
+    const VARIADIC          = 1;
+    const NOT_VARIADIC      = 0;
 
     const NO_VALUE          = -1;
     
@@ -222,7 +226,7 @@ class Load extends Tasks {
     private $sequence = array();
     private $sequenceCurrentRank = 0;
     private $sequenceRank = array();
-
+    
     private $loaderList = array('CypherG3', 'Neo4jImport');
 
     private $processing = array();
@@ -794,7 +798,7 @@ class Load extends Tasks {
                     $this->setAtom($propertyId, array('code'      => $this->tokens[$current][1],
                                                       'fullcode'  => $this->atoms[$objectId]['fullcode'].'->'.$this->atoms[$propertyNameId]['fullcode'],
                                                       'line'      => $this->tokens[$current][2],
-                                                      'variadic'  => false,
+                                                      'variadic'  => self::NOT_VARIADIC,
                                                       'token'     => $this->getToken($this->tokens[$current][0]),
                                                       'enclosing' => false ));
 
@@ -855,7 +859,7 @@ class Load extends Tasks {
         $this->setAtom($nameId, array('code'      => $this->tokens[$current][1],
                                       'fullcode'  => '${'.$this->atoms[$nameId]['fullcode'].'}',
                                       'line'      => $this->tokens[$current][2],
-                                      'variadic'  => false,
+                                      'variadic'  => self::NOT_VARIADIC,
                                       'token'     => $this->getToken($this->tokens[$current][0]),
                                       'enclosing' => true));
 
@@ -1093,7 +1097,7 @@ class Load extends Tasks {
                                              'fullcode' => implode('\\', $fullcode),
                                              'line'     => $this->tokens[$current][2],
                                              'token'    => $this->getToken($this->tokens[$current + 1][0]),
-                                             'variadic' => false,
+                                             'variadic' => self::NOT_VARIADIC,
                                              'absolute' => !$hasPrevious));
             list($fullnspath, $aliased) = $this->getFullnspath($extendsId);
             $this->setAtom($extendsId, array('fullnspath' => $fullnspath,
@@ -1233,6 +1237,8 @@ class Load extends Tasks {
                 $this->addLink($this->usesId['class'][strtolower($this->atoms[$extendsId]['code'])], $extendsId, 'DEFINITION');
             }
             $this->addCall('class', $fullnspath, $extendsId);
+            $this->currentParentClassTrait[] = $extendsId;
+            $isExtended = true;
         }
 
         // Process implements
@@ -1273,6 +1279,9 @@ class Load extends Tasks {
 
         $this->toggleContext(self::CONTEXT_CLASS);
         array_pop($this->currentClassTrait);
+        if (isset($isExtended)) {
+            array_pop($this->currentParentClassTrait);
+        }
 
         return $classId;
     }
@@ -1412,7 +1421,7 @@ class Load extends Tasks {
                                               'fullcode'   => '<?= '.$this->atoms[$argumentsId]['fullcode'],
                                               'line'       => $this->tokens[$current === self::NO_VALUE ? 0 : $current][2],
                                               'token'      => 'T_OPEN_TAG_WITH_ECHO',
-                                              'variadic'   => false,
+                                              'variadic'   => self::NOT_VARIADIC,
                                               'fullnspath' => '\\echo' ));
         $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
         $this->addLink($functioncallId, $echoId, 'NAME');
@@ -1481,7 +1490,7 @@ class Load extends Tasks {
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => implode('\\', $fullcode),
                    'line'     => $this->tokens[$current][2],
-                   'variadic' => false,
+                   'variadic' => self::NOT_VARIADIC,
                    'token'    => $this->getToken($this->tokens[$current][0]),
                    'absolute' => $absolute);
         $this->setAtom($nsnameId, $x);
@@ -1517,7 +1526,7 @@ class Load extends Tasks {
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_ARRAY, \Exakat\Tasks\T_CALLABLE, \Exakat\Tasks\T_STATIC))) {
             $id = $this->processNextAsIdentifier();
             $this->setAtom($id, array('fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ,
-                                      'variadic'   => false));
+                                      'variadic'   => self::NOT_VARIADIC));
             return $id;
         } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR, \Exakat\Tasks\T_STRING, \Exakat\Tasks\T_NAMESPACE))) {
             $id = $this->processOneNsname();
@@ -1684,7 +1693,7 @@ class Load extends Tasks {
                                   'fullcode'   => $this->tokens[$this->id][1],
                                   'line'       => $this->tokens[$this->id][2],
                                   'token'      => $this->getToken($this->tokens[$this->id][0]),
-                                  'variadic'   => false,
+                                  'variadic'   => self::NOT_VARIADIC,
                                   'absolute'   => false));
         if ($getFullnspath === true) {
             list($fullnspath, $aliased) = $this->getFullnspath($id);
@@ -1837,7 +1846,7 @@ class Load extends Tasks {
         $this->setAtom($functioncallId, array('code'       => $this->atoms[$nameId]['code'],
                                               'fullcode'   => $this->atoms[$nameId]['fullcode'].'('.$this->atoms[$argumentsId]['fullcode'].')',
                                               'line'       => $this->tokens[$current][2],
-                                              'variadic'   => false,
+                                              'variadic'   => self::NOT_VARIADIC,
                                               'reference'  => false,
                                               'token'      => $this->atoms[$nameId]['token']
                                               ));
@@ -1871,7 +1880,7 @@ class Load extends Tasks {
         $this->setAtom($id, array('code'       => $this->tokens[$this->id][1],
                                   'fullcode'   => $this->tokens[$this->id][1],
                                   'line'       => $this->tokens[$this->id][2],
-                                  'variadic'   => false,
+                                  'variadic'   => self::NOT_VARIADIC,
                                   'token'      => $this->getToken($this->tokens[$this->id][0]),
                                   'absolute'   => false));
 
@@ -1913,17 +1922,22 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF    ) {
             $id = $this->processSingle('Identifier');
-            $this->setAtom($id, array('fullnspath' => '\\static',
-                                      'variadic'   => false));
+            $fullnspath = $this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath'];
+            $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                      'aliased'    => self::NOT_ALIASED,
+                                      'variadic'   => self::NOT_VARIADIC));
+            
+            $this->addCall('class', $fullnspath, $id);
+
             return $id;
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             $nameId = $this->addAtom('Identifier');
             $this->setAtom($nameId, array('code'       => $this->tokens[$this->id][1],
                                           'fullcode'   => $this->tokens[$this->id][1],
                                           'line'       => $this->tokens[$this->id][2],
-                                          'variadic'   => false,
+                                          'variadic'   => self::NOT_VARIADIC,
                                           'token'      => $this->getToken($this->tokens[$this->id][0]),
-                                          'fullnspath' => '\\static'));
+                                          'fullnspath' => $this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath']));
             $this->pushExpression($nameId);
 
             return $this->processFunctioncall();
@@ -2015,7 +2029,7 @@ class Load extends Tasks {
         $this->addLink($id, $variableId, 'NAME');
         $this->setAtom($variableId, array('code'       => '[',
                                           'fullcode'   => '[',
-                                          'variadic'   => false,
+                                          'variadic'   => self::NOT_VARIADIC,
                                           'line'       => $this->tokens[$this->id][2],
                                           'token'      => $this->getToken($this->tokens[$this->id][0]),
                                           'fullnspath' => '\\array'));
@@ -2027,7 +2041,7 @@ class Load extends Tasks {
         $this->setAtom($id, array('code'       => $this->tokens[$current][1],
                                   'fullcode'   => '['.$this->atoms[$argumentId]['fullcode'].']' ,
                                   'line'       => $this->tokens[$this->id][2],
-                                  'variadic'   => false,
+                                  'variadic'   => self::NOT_VARIADIC,
                                   'token'      => $this->getToken($this->tokens[$current][0]),
                                   'fullnspath' => '\\array',
                                   'boolean'    => (int) (bool) $this->atoms[$argumentId]['count']));
@@ -2071,7 +2085,7 @@ class Load extends Tasks {
         $this->setAtom($id, array('code'      => $opening,
                                   'fullcode'  => $this->atoms[$variableId]['fullcode'].$opening.$this->atoms[$indexId]['fullcode'].$closing ,
                                   'line'      => $this->tokens[$current][2],
-                                  'variadic'  => false,
+                                  'variadic'  => self::NOT_VARIADIC,
                                   'token'     => $this->getToken($this->tokens[$current][0]),
                                   'enclosing' => false));
         $this->pushExpression($id);
@@ -2682,7 +2696,7 @@ class Load extends Tasks {
         $this->addLink($functioncallId, $nameId, 'NAME');
         $this->setAtom($nameId, array('code'     => $this->tokens[$nameTokenId][1],
                                       'fullcode' => $this->tokens[$nameTokenId][1],
-                                      'variadic' => false,
+                                      'variadic' => self::NOT_VARIADIC,
                                       'line'     => $this->tokens[$current][2],
                                       'token'    => $this->getToken($this->tokens[$current][0])));
 
@@ -2702,7 +2716,7 @@ class Load extends Tasks {
             $nameId = $this->addAtom('Identifier');
             $this->setAtom($nameId, array('code'       => $this->tokens[$this->id][1],
                                           'fullcode'   => $this->tokens[$this->id][1],
-                                          'variadic'   => false,
+                                          'variadic'   => self::NOT_VARIADIC,
                                           'line'       => $this->tokens[$this->id][2],
                                           'token'      => $this->getToken($this->tokens[$this->id][0]),
                                           'fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ));
@@ -2722,7 +2736,7 @@ class Load extends Tasks {
             $this->setAtom($functioncallId, array('code'       => $this->atoms[$nameId]['code'],
                                                   'fullcode'   => $this->atoms[$nameId]['fullcode'].' '.($this->atoms[$argumentsId]['atom'] === 'Void' ? self::FULLCODE_VOID :  $this->atoms[$argumentsId]['fullcode']),
                                                   'line'       => $this->tokens[$this->id][2],
-                                                  'variadic'   => false,
+                                                  'variadic'   => self::NOT_VARIADIC,
                                                   'token'      => $this->getToken($this->tokens[$this->id][0]),
                                                   'fullnspath' => '\\'.strtolower($this->atoms[$nameId]['code'])));
             $this->addLink($functioncallId, $argumentsId, 'ARGUMENTS');
@@ -2807,7 +2821,7 @@ class Load extends Tasks {
         }
         $this->setAtom($id, array('code'     => $this->tokens[$this->id][1],
                                   'fullcode' => $this->tokens[$this->id][1],
-                                  'variadic' => false,
+                                  'variadic' => self::NOT_VARIADIC,
                                   'line'     => $this->tokens[$this->id][2],
                                   'token'    => $this->getToken($this->tokens[$this->id][0]) ));
         $this->pushExpression($id);
@@ -3150,7 +3164,7 @@ class Load extends Tasks {
             $this->addCall('class', end($this->currentClassTrait), $variableId);
         }
         $this->setAtom($variableId, array('reference' => false,
-                                          'variadic'  => false,
+                                          'variadic'  => self::NOT_VARIADIC,
                                           'enclosing' => false));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3420,7 +3434,7 @@ class Load extends Tasks {
 
             $x = array('code'     => $this->tokens[$current][1],
                        'fullcode' => $this->tokens[$current][1].'{'.$this->atoms[$expressionId]['fullcode'].'}',
-                       'variadic' => false,
+                       'variadic' => self::NOT_VARIADIC,
                        'line'     => $this->tokens[$current][2],
                        'token'    => $this->getToken($this->tokens[$current][0]));
             $this->setAtom($variableId, $x);
@@ -3436,7 +3450,7 @@ class Load extends Tasks {
             $this->nestContext();
             $this->processSingleOperator('Variable', $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
             $id = $this->popExpression();
-            $this->setAtom($id, array('variadic' => false));
+            $this->setAtom($id, array('variadic' => self::NOT_VARIADIC));
             $this->exitContext();
 
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3669,7 +3683,7 @@ class Load extends Tasks {
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => $this->atoms[$leftId]['fullcode'].'::'.$this->atoms[$right]['fullcode'],
                    'line'     => $this->tokens[$current][2],
-                   'variadic' => false,
+                   'variadic' => self::NOT_VARIADIC,
                    'token'    => $this->getToken($this->tokens[$current][0]));
 
         $this->setAtom($staticId, $x);
@@ -3765,7 +3779,7 @@ class Load extends Tasks {
 
         $x = array('code'      => $this->tokens[$current][1],
                    'fullcode'  => $this->atoms[$left]['fullcode'].'->'.$this->atoms[$right]['fullcode'],
-                   'variadic'  => false,
+                   'variadic'  => self::NOT_VARIADIC,
                    'reference' => false,
                    'line'      => $this->tokens[$current][2],
                    'token'     => $this->getToken($this->tokens[$current][0]));
@@ -3806,7 +3820,7 @@ class Load extends Tasks {
 
         $operandId = $this->popExpression();
         $x = array('fullcode'  => '...'.$this->atoms[$operandId]['fullcode'],
-                   'variadic'  => true);
+                   'variadic'  => self::VARIADIC);
         $this->setAtom($operandId, $x);
 
         $this->pushExpression($operandId);
@@ -3957,7 +3971,7 @@ class Load extends Tasks {
         list($fullnspath, $aliased) = $this->getFullnspath($nameId);
         $this->setAtom($functioncallId, array('code'       => $this->tokens[$current][1],
                                               'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$argumentsId]['fullcode'],
-                                              'variadic'   => false,
+                                              'variadic'   => self::NOT_VARIADIC,
                                               'reference'  => false,
                                               'line'       => $this->tokens[$current][2],
                                               'token'      => $this->getToken($this->tokens[$current][0]),
@@ -4003,7 +4017,7 @@ class Load extends Tasks {
         }
         $this->setAtom($nameId, array('code'      => $this->tokens[$this->id][1],
                                       'fullcode'  => $this->tokens[$this->id][1],
-                                      'variadic'  => false,
+                                      'variadic'  => self::NOT_VARIADIC,
                                       'reference' => false,
                                       'line'      => $this->tokens[$this->id][2],
                                       'token'     => $this->getToken($this->tokens[$this->id][0]) ));
@@ -4030,7 +4044,7 @@ class Load extends Tasks {
         $functioncallId = $this->addAtom('Functioncall');
         $this->setAtom($functioncallId, array('code'       => $this->atoms[$nameId]['code'],
                                               'fullcode'   => $this->atoms[$nameId]['code'].' '.$this->atoms[$argumentsId]['fullcode'],
-                                              'variadic'   => false,
+                                              'variadic'   => self::NOT_VARIADIC,
                                               'line'       => $this->atoms[$nameId]['line'],
                                               'token'      => $this->atoms[$nameId]['token'],
                                               'fullnspath' => '\\'.strtolower($this->atoms[$nameId]['code'])));
@@ -4267,11 +4281,17 @@ class Load extends Tasks {
             return array(substr($this->namespace, 0, -1).strtolower(substr($this->atoms[$nameId]['fullcode'], 9)), self::NOT_ALIASED);
         } elseif (in_array($this->atoms[$nameId]['atom'], array('Identifier', 'Boolean', 'Null'))) {
             // This is an identifier, self or parent
-            if (strtolower($this->atoms[$nameId]['code']) === 'self'   ||
-                strtolower($this->atoms[$nameId]['code']) === 'parent') {
-                return array('\\'.strtolower($this->atoms[$nameId]['code']), self::NOT_ALIASED);
+            if (strtolower($this->atoms[$nameId]['code']) === 'self' || 
+                strtolower($this->atoms[$nameId]['code']) === 'static') {
+                return array($this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath'], self::NOT_ALIASED);
+            } elseif (strtolower($this->atoms[$nameId]['code']) === 'parent') {
+                if (empty($this->currentParentClassTrait)) {
+                    return array('undefined', self::NOT_ALIASED);
+                } else {
+                    return array($this->atoms[$this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]]['fullnspath'], self::NOT_ALIASED);
+                }
 
-                // This is an identifier
+            // This is a normal identifier
             } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
                 $this->addLink($this->usesId['class'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
                 return array($this->uses['class'][strtolower($this->atoms[$nameId]['code'])], self::ALIASED);

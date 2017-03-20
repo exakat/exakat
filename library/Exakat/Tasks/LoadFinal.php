@@ -44,9 +44,6 @@ class LoadFinal extends Tasks {
 
         $this->init();
 
-        $this->makeParentFullnspath();
-        $this->makeSelfFullnspath();
-        $this->makeStaticFullnspath();
         $this->makeClassConstantDefinition();
         $this->setPropertyname();
 
@@ -83,52 +80,6 @@ class LoadFinal extends Tasks {
         $begin = $end;
     }
 
-    private function makeParentFullnspath() {
-        $title = 'parent to fullnspath';
-
-        // calculating fullnspath for 'parent' keyword
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\parent"}
-     .where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS") )
-     .property('fullnspath', __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS").values("fullnspath") )
-     .where( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS").in("DEFINITION") )
-     .addE('DEFINITION')
-        .from( __.until( and( hasLabel("Class"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("EXTENDS").in("DEFINITION") )
-
-GREMLIN;
-
-        $this->runQuery($query, $title);
-    }
-
-    private function makeSelfFullnspath() {
-        $title = 'self to fullnspath';
-
-        // calculating fullnspath for 'self' keyword
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\self"}
-.where( __.until( and( hasLabel("Class", "Interface", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)) )
-.property('fullnspath', __.until( and( hasLabel("Class", "Interface", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("NAME").values("fullnspath") )
-.addE('DEFINITION').from( __.until( and( hasLabel("Class", "Interface", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)) )
-
-GREMLIN;
-
-        $this->runQuery($query, $title);
-    }
-
-    private function makeStaticFullnspath() {
-        $title = 'static to fullnspath';
-
-        // calculating fullnspath for 'self' keyword
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier").has('fullnspath').filter{ it.get().value("fullnspath").toLowerCase() == "\\\\static"}
-     .where( __.until( and( hasLabel("Class", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)) )
-     .property('fullnspath', __.until( and( hasLabel("Class", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)).out("NAME").values("fullnspath") )
-     .addE('DEFINITION').from( __.until( and( hasLabel("Class", "Trait"), __.out("NAME").not(has("atom", "Void")) ) ).repeat(__.in($this->linksIn)) )
-
-GREMLIN;
-
-        $this->runQuery($query, $title);
-    }
 
     private function spotPHPNativeFunctions() {
         $title = 'mark PHP native functions call';
