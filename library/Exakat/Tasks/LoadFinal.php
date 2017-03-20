@@ -269,7 +269,7 @@ g.V().hasLabel("Identifier", "Nsname").as("a")
      .has("fullnspath", without(''))
      .where( __.in("NEW", "METHOD", "NAME", "SUBNAME").count().is(eq(0)))
      .sideEffect{ fullnspath = it.get().value("fullnspath")}
-     .in('DEFINITION').not(hasLabel("As", "Class")).out("NAME")
+     .in('DEFINITION').not(hasLabel("As", "Class", "Interface", "Trait")).out("NAME")
      .filter{ it.get().value("fullnspath") != fullnspath}
      .sideEffect{ fullnspath = it.get().value("fullnspath")}
      .select("a")
