@@ -1928,7 +1928,7 @@ class Load extends Tasks {
                                       'variadic'   => self::NOT_VARIADIC));
             
             $this->addCall('class', $fullnspath, $id);
-
+            
             return $id;
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             $nameId = $this->addAtom('Identifier');
@@ -3676,10 +3676,6 @@ class Load extends Tasks {
             throw new LoadError("Unprocessed atom in static call (right) : ".$this->atoms[$right]['atom']."\n");
         }
 
-        if (isset($this->atoms[$leftId]['fullnspath'])) {
-            $this->addCall('class', $this->atoms[$leftId]['fullnspath'], $leftId);
-        }
-
         $this->addLink($staticId, $leftId, 'CLASS');
         $this->addLink($staticId, $right, $links);
 
@@ -4276,7 +4272,7 @@ class Load extends Tasks {
         } elseif (!in_array($this->atoms[$nameId]['atom'], array('Nsname', 'Identifier', 'String', 'Null', 'Boolean'))) {
             // No fullnamespace for non literal namespaces
             return array('', self::NOT_ALIASED);
-        } elseif (in_array($this->atoms[$nameId]['token'], array('T_STATIC', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
+        } elseif (in_array($this->atoms[$nameId]['token'], array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
             // For language structures, it is always in global space, like eval or list
             return array('\\'.strtolower($this->atoms[$nameId]['code']), self::NOT_ALIASED);
         } elseif (strtolower(substr($this->atoms[$nameId]['fullcode'], 0, 9)) === 'namespace') {
