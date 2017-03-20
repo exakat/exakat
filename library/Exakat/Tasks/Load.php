@@ -107,6 +107,9 @@ class Load extends Tasks {
     const NOT_ALIASED       = 0;
 
     const NO_VALUE          = -1;
+    
+    const WITH_FULLNSPATH      = true;
+    const WITHOUT_FULLNSPATH   = false;
 
     const CONTEXT_CLASS        = 1;
     const CONTEXT_INTERFACE    = 2;
@@ -971,7 +974,7 @@ class Load extends Tasks {
             $nameId = $this->addAtomVoid();
         } else {
             $isClosure = false;
-            $nameId = $this->processNextAsIdentifier();
+            $nameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         }
         $this->addLink($functionId, $nameId, 'NAME');
 
@@ -1079,7 +1082,7 @@ class Load extends Tasks {
                    $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_OPEN_CURLY ) {
                 ++$this->id; // Skip \
 
-                $subnameId = $this->processNextAsIdentifier(false);
+                $subnameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
 
                 $this->setAtom($subnameId, array('rank' => ++$rank));
                 $fullcode[] = $this->atoms[$subnameId]['code'];
@@ -1108,7 +1111,7 @@ class Load extends Tasks {
         $this->currentClassTrait[] = $traitId;
         $this->toggleContext(self::CONTEXT_TRAIT);
 
-        $nameId = $this->processNextAsIdentifier();
+        $nameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($traitId, $nameId, 'NAME');
 
         // Process block
@@ -1142,7 +1145,7 @@ class Load extends Tasks {
         $interfaceId = $this->addAtom('Interface');
         $this->toggleContext(self::CONTEXT_INTERFACE);
 
-        $nameId = $this->processNextAsIdentifier();
+        $nameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($interfaceId, $nameId, 'NAME');
 
         // Process extends
@@ -1200,7 +1203,7 @@ class Load extends Tasks {
         $this->optionsTokens = array();
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING) {
-            $nameId = $this->processNextAsIdentifier();
+            $nameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         } else {
             $nameId = $this->addAtomVoid();
 
@@ -1395,7 +1398,7 @@ class Load extends Tasks {
 
     private function processOpenWithEcho() {
         // Processing ECHO
-        $echoId = $this->processNextAsIdentifier(false);
+        $echoId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $current = $this->id;
 
         $argumentsId = $this->processArguments(array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
@@ -1463,7 +1466,7 @@ class Load extends Tasks {
         }
 
         while ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
-            $subnameId = $this->processNextAsIdentifier(false);
+            $subnameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
 
             $this->setAtom($subnameId, array('rank' => ++$rank));
 
@@ -1675,7 +1678,7 @@ class Load extends Tasks {
         return $argumentsId;
     }
 
-    private function processNextAsIdentifier($getFullnspath = true) {
+    private function processNextAsIdentifier($getFullnspath = self::WITH_FULLNSPATH) {
         ++$this->id;
         $id = $this->addAtom('Identifier');
         $this->setAtom($id, array('code'       => $this->tokens[$this->id][1],
@@ -1812,8 +1815,9 @@ class Load extends Tasks {
             $this->setAtom($functioncallId, array('fullnspath' => $fullnspath,
                                                   'aliased'    => $aliased
                                                   ));
-        } elseif ($this->isContext(self::CONTEXT_NOFULLNSPATH) ||
-                  $this->tokens[$this->id - 2][0] === T_OBJECT_OPERATOR) {
+        } elseif ($this->isContext(self::CONTEXT_NOFULLNSPATH) 
+//                  || $this->tokens[$this->id - 2][0] === T_OBJECT_OPERATOR
+                  ) {
             // Nothing
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'function');
@@ -3627,14 +3631,14 @@ class Load extends Tasks {
                 $this->processSingle('Variable');
                 $right = $this->popExpression();
             } else {
-                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
-                $right = $this->processNextAsIdentifier(false);
-                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
+                $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
             }
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
                 $this->pushExpression($right);
+                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
                 $right = $this->processFunctioncall();
+                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
                 $this->popExpression();
             }
         }
@@ -3733,14 +3737,14 @@ class Load extends Tasks {
                 $this->processSingle('Variable');
                 $right = $this->popExpression();
             } else {
-                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
-                $right = $this->processNextAsIdentifier(false);
-                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
+                $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
             }
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
                 $this->pushExpression($right);
+                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
                 $right = $this->processFunctioncall();
+                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
                 $this->popExpression();
             }
         }
