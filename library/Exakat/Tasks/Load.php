@@ -1398,6 +1398,10 @@ class Load extends Tasks {
             if ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_OPEN_TAG) {
                 $voidId = $this->addAtomVoid();
                 $this->addToSequence($voidId);
+            } elseif ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_SEMICOLON ||
+                      $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_CLOSE_CURLY
+                        ) {
+                // Nothing
             } else {
                 $id = $this->popExpression();
                 $this->addToSequence($id);
