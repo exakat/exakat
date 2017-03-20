@@ -1733,9 +1733,9 @@ class Load extends Tasks {
             $fullcode[] = $this->atoms[$defId]['fullcode'];
 
             list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'const');
-            $this->addDefinition('const', $fullnspath, $defId);
             $this->setAtom($constId, array('fullnspath'     => $fullnspath,
                                            'aliased'        => $aliased));
+            $this->addDefinition('const', $fullnspath, $defId);
 
             $this->addLink($constId, $defId, 'CONST');
         } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_SEMICOLON)));
@@ -3189,9 +3189,12 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
             return $id;
         } elseif (in_array($this->atoms[$id]['atom'], array('Nsname', 'Identifier'))) {
-            list($fullnspath, $aliased) = $this->getFullnspath($id, $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const');
+            $type = $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const';
+            list($fullnspath, $aliased) = $this->getFullnspath($id, $type);
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => $aliased));
+
+            $this->addCall($type, $fullnspath, $id);
             return $id;
         } else {
             return $id;
