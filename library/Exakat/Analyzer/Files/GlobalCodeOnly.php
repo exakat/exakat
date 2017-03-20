@@ -36,7 +36,7 @@ class GlobalCodeOnly extends Analyzer {
              ->outIs('ELEMENT')
              ->outIs('CODE')
              ->raw('coalesce( __.out("ELEMENT").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
-             ->raw('where(__.out("ELEMENT").hasLabel('.$definitionsList.').count().is(eq(0)) )')
+             ->raw('where( __.out("ELEMENT").hasLabel('.$definitionsList.').count().is(eq(0)) )')
              ->raw('where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )')
              ->raw('where( __.in("ANALYZED").not(has("analyzer", "Structures/NoDirectAccess") ).count().is(eq(0)) )')
              ->raw('where( __.hasLabel("Functioncall").filter{ it.get().value("fullnspath") in ['.$definitionsFunctionsList.'] }.count().is(eq(0)) )')
