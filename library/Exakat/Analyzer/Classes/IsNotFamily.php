@@ -36,6 +36,7 @@ class IsNotFamily extends Analyzer {
              ->codeIsNot(array('self', 'parent', 'static'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToClass()
+             ->hasName()
              ->notSamePropertyAs('fullnspath', 'fnp')
              ->raw('where( __.emit().repeat( __.out("EXTENDS").in("DEFINITION") ).times('.self::MAX_LOOPING.')
                              .filter{ it.get().value("fullnspath") == fnp }
@@ -44,6 +45,18 @@ class IsNotFamily extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        // Case of anonymous classes
+        $this->atomIs('Staticmethodcall')
+             ->hasClass()
+             ->outIs('CLASS')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->codeIsNot(array('self', 'parent', 'static'))
+             ->savePropertyAs('fullnspath', 'fnp')
+             ->goToClass()
+             ->hasNoName()
+             ->back('first');
+        $this->prepareQuery();
+        
         // All non-in-class calls are OK
         $this->atomIs('Staticmethodcall')
              ->hasNoClass()

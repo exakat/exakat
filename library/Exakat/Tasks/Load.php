@@ -1120,14 +1120,14 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($traitId, $blockId, 'BLOCK');
 
+        list($fullnspath, $aliased) = $this->getFullnspath($nameId);
         $this->setAtom($traitId, array('code'       => $this->tokens[$current][1],
                                        'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].static::FULLCODE_BLOCK,
                                        'line'       => $this->tokens[$current][2],
                                        'token'      => $this->getToken($this->tokens[$current][0]),
-                                       'fullnspath' => $this->atoms[$nameId]['fullnspath'],
-                                       'aliased'    => $this->atoms[$nameId]['aliased']));
+                                       'fullnspath' => $fullnspath,
+                                       'aliased'    => $aliased));
 
-        list($fullnspath,) = $this->getFullnspath($nameId);
         $this->addDefinition('class', $fullnspath, $traitId);
 
         $this->pushExpression($traitId);
@@ -1176,8 +1176,8 @@ class Load extends Tasks {
                                            'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].(isset($extendsId) ? ' '.$this->tokens[$extends][1].' '.implode(', ', $fullcode) : '').static::FULLCODE_BLOCK,
                                            'line'       => $this->tokens[$current][2],
                                            'token'      => $this->getToken($this->tokens[$current][0]),
-                                           'fullnspath' => $this->atoms[$nameId]['fullnspath'],
-                                           'aliased'    => $this->atoms[$nameId]['aliased']));
+                                           'fullnspath' => $fullnspath,
+                                           'aliased'    => $aliased));
         $this->addDefinition('class', $fullnspath, $interfaceId);
 
         $this->pushExpression($interfaceId);
@@ -1204,6 +1204,10 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING) {
             $nameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
+            list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'class');
+            $this->setAtom($classId, array('fullnspath' => $fullnspath,
+                                            'aliased'    => $aliased));
+            $this->addDefinition('class', $this->atoms[$classId]['fullnspath'], $classId);
         } else {
             $nameId = $this->addAtomVoid();
 
@@ -1259,11 +1263,6 @@ class Load extends Tasks {
                                        'fullcode'   => (!empty($fullcode) ? implode(' ', $fullcode).' ' : '').$this->tokens[$current][1].($this->atoms[$nameId]['atom'] === 'Void' ? '' : ' '.$this->atoms[$nameId]['fullcode']).(isset($argumentsId) ? ' ('.$this->atoms[$argumentsId]['fullcode'].')' : '').(isset($extendsId) ? ' '.$extends.' '.$this->atoms[$extendsId]['fullcode'] : '').(isset($implementsId) ? ' '.$implements.' '.implode(', ', $fullcodeImplements) : '').static::FULLCODE_BLOCK,
                                        'line'       => $this->tokens[$current][2],
                                        'token'      => $this->getToken($this->tokens[$current][0]) ));
-        if (isset($this->atoms[$nameId]['fullnspath'])) {
-            $this->setAtom($classId, array('fullnspath' => $this->atoms[$nameId]['fullnspath'],
-                                           'aliased'    => self::NOT_ALIASED));
-            $this->addDefinition('class', $this->atoms[$nameId]['fullnspath'], $classId);
-        }
 
         $this->pushExpression($classId);
 
