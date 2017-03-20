@@ -3600,6 +3600,9 @@ class Load extends Tasks {
         $current = $this->id;
 
         $leftId = $this->popExpression();
+        list($fullnspath, $aliased) = $this->getFullnspath($leftId, 'class');
+        $this->setAtom($leftId, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased));
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals[] = \Exakat\Tasks\T_DOUBLE_COLON;
