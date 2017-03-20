@@ -353,6 +353,8 @@ GREMLIN;
         } else {
             $this->analyzerId = $analyzerId;
         }
+        
+        return $this->analyzerId;
     }
 
     public function checkphpConfiguration($Php) {
