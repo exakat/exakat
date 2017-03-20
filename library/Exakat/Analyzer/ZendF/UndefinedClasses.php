@@ -70,6 +70,8 @@ class UndefinedClasses extends Analyzer {
         $this->analyzerIs('ZendF/ZendTypehinting')
              ->fullnspathIsNot(array_merge($classes, $interfaces));
         $this->prepareQuery();
+        
+        // Add support for instanceof ? 
     }
 }
 
