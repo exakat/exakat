@@ -777,15 +777,16 @@ class Load extends Tasks {
                 $openId = $this->id + 1;
                 ++$this->id; // Skip {
                 while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_CURLY))) {
-                    $this->processNext();
+                    $id = $this->processNext();
                 };
                 ++$this->id; // Skip }
-
-                $partId = $this->popExpression();
-                $this->setAtom($partId, array('enclosing' => true,
-                                              'fullcode'  => $this->tokens[$openId][1].$this->atoms[$partId]['fullcode'].'}',
-                                              'token'     => $this->getToken($this->tokens[$currentVariableId][0])));
-                $this->pushExpression($partId);
+                
+                $this->popExpression();
+                
+                $this->setAtom($id, array('enclosing' => true,
+                                          'fullcode'  => $this->tokens[$openId][1].$this->atoms[$id]['fullcode'].'}',
+                                          'token'     => $this->getToken($this->tokens[$currentVariableId][0])));
+                $this->pushExpression($id);
             } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
                 $this->processNext();
 
@@ -864,6 +865,11 @@ class Load extends Tasks {
                                       'variadic'  => self::NOT_VARIADIC,
                                       'token'     => $this->getToken($this->tokens[$current][0]),
                                       'enclosing' => true));
+
+        $this->pushExpression($variableId);
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }                                      
 
         return $variableId;
     }
@@ -1263,7 +1269,14 @@ class Load extends Tasks {
 
         // Process block
         ++$this->id;
+        $newContext = $this->isContext(self::CONTEXT_NEW);
+        if ($newContext === true) {
+            $this->toggleContext(self::CONTEXT_NEW);
+        }   
         $blockId = $this->processBlock(false);
+        if ($newContext === true) {
+            $this->toggleContext(self::CONTEXT_NEW);
+        }
         $this->popExpression();
         $this->addLink($classId, $blockId, 'BLOCK');
 
@@ -1398,13 +1411,8 @@ class Load extends Tasks {
             if ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_OPEN_TAG) {
                 $voidId = $this->addAtomVoid();
                 $this->addToSequence($voidId);
-            } elseif ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_SEMICOLON ||
-                      $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_CLOSE_CURLY
-                        ) {
-                // Nothing
             } else {
-                $id = $this->popExpression();
-                $this->addToSequence($id);
+                // do nothing
             }
             ++$this->id;
         }
@@ -3463,11 +3471,12 @@ class Load extends Tasks {
             $this->processSingleOperator('Variable', $this->precedence->get($this->tokens[$this->id][0]), 'NAME');
             $id = $this->popExpression();
             $this->setAtom($id, array('variadic' => self::NOT_VARIADIC));
-            $this->exitContext();
 
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->exitContext();
+            $this->pushExpression($id);
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
-            }
+            }                                      
 
             return $id;
         }
@@ -3650,6 +3659,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOLLAR) {
             ++$this->id; // Skip ::
             $blockId = $this->processDollar();
+            $this->popExpression();
             $right = $this->processFCOA($blockId);
         } else {
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
@@ -4083,7 +4093,6 @@ class Load extends Tasks {
                                   'fullcode'   => self::FULLCODE_VOID,
                                   'line'       => $this->tokens[$this->id][2],
                                   'token'      => \Exakat\Tasks\T_VOID));
-
         return $id;
     }
 
@@ -4126,7 +4135,7 @@ class Load extends Tasks {
 
     private function checkTokens($filename) {
         if (count($this->expressions) > 0) {
-            throw new LoadError("Warning : expression is not empty in $filename\n");
+            throw new LoadError("Warning : expression is not empty in $filename : ".count($this->expressions)."\n");
         }
 
         if ($this->contexts[self::CONTEXT_NOSEQUENCE] > 0) {
@@ -4294,6 +4303,7 @@ class Load extends Tasks {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
+                    print_r($this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]);
                     return array($this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath'], self::NOT_ALIASED);
                 }
 
