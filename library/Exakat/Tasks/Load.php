@@ -1398,7 +1398,6 @@ class Load extends Tasks {
                 ++$this->id; // set to opening tag
             }
         } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_OPEN_TAG, \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO))) {
-
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
                 $this->processOpenWithEcho();
                 if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
@@ -1510,8 +1509,11 @@ class Load extends Tasks {
         $this->setAtom($nsnameId, $x);
         // Review this : most nsname will end up as constants!
 
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE ||
-            $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON) {
+            list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
+            $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
+                                            'aliased'    => $aliased));
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE ||
             (isset($this->tokens[$current - 2]) && $this->tokens[$current - 2][0] === \Exakat\Tasks\T_INSTANCEOF)
             ) {
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
@@ -1900,11 +1902,11 @@ class Load extends Tasks {
 
         $this->pushExpression($id);
 
-        $id = $this->processFCOA($id);
-
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
-        } 
+        } else {
+            $id = $this->processFCOA($id);
+        }
 
         return $id;
     }
@@ -1940,8 +1942,6 @@ class Load extends Tasks {
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => self::NOT_ALIASED,
                                       'variadic'   => self::NOT_VARIADIC));
-            
-            $this->addCall('class', $fullnspath, $id);
             
             return $id;
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
@@ -2291,8 +2291,6 @@ class Load extends Tasks {
     }
 
     private function processFollowingBlock($finals) {
-        $this->exitContext();
-
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             ++$this->id;
             $blockId = $this->processBlock(false);
@@ -2342,7 +2340,7 @@ class Load extends Tasks {
 
             // This may include WHILE in the list of finals for do....while
             $finals = array_merge(array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_ELSE, \Exakat\Tasks\T_END, \Exakat\Tasks\T_CLOSE_CURLY), $finals);
-            $specials = array(\Exakat\Tasks\T_IF, \Exakat\Tasks\T_FOREACH, \Exakat\Tasks\T_SWITCH, \Exakat\Tasks\T_FOR, \Exakat\Tasks\T_TRY, \Exakat\Tasks\T_WHILE);
+            $specials = array(\Exakat\Tasks\T_IF, \Exakat\Tasks\T_FOREACH, \Exakat\Tasks\T_SWITCH, \Exakat\Tasks\T_FOR, \Exakat\Tasks\T_TRY, \Exakat\Tasks\T_WHILE, \Exakat\Tasks\T_EXIT);
             if (in_array($this->tokens[$this->id + 1][0], $specials)) {
                 $this->processNext();
             } else {
@@ -2362,8 +2360,6 @@ class Load extends Tasks {
             $this->setAtom($blockId, array('bracket' => false));
             $this->pushExpression($blockId);
         }
-
-        $this->nestContext();
 
         return $blockId;
     }
@@ -3306,7 +3302,11 @@ class Load extends Tasks {
         }
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
-            $this->processFCOA($id);
+            $id = $this->processFCOA($id);
+        }
+        
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
         }
 
         return $id;
@@ -4033,6 +4033,7 @@ class Load extends Tasks {
         } else {
             $nameId = $this->addAtom('Identifier');
         }
+
         $this->setAtom($nameId, array('code'      => $this->tokens[$this->id][1],
                                       'fullcode'  => $this->tokens[$this->id][1],
                                       'variadic'  => self::NOT_VARIADIC,
@@ -4042,11 +4043,19 @@ class Load extends Tasks {
 
         $argumentsId = $this->addAtom('Arguments');
 
+        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
+
         $fullcode = array();
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $this->processNext();
         };
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
 
         $indexId = $this->popExpression();
         $this->setAtom($indexId, array('rank' => 0));
@@ -4074,6 +4083,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
+        
         return $functioncallId;
     }
 
