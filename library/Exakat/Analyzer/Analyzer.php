@@ -747,7 +747,13 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function hasName() {
-        $this->addMethod('where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )');
+        $this->addMethod('not(where(__.out("NAME").hasLabel("Void")) )');
+
+        return $this;
+    }
+
+    public function hasNoName() {
+        $this->addMethod('where(__.out("NAME").hasLabel("Void"))');
 
         return $this;
     }
