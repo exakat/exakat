@@ -114,6 +114,8 @@ class Load extends Tasks {
     
     const WITH_FULLNSPATH      = true;
     const WITHOUT_FULLNSPATH   = false;
+    
+    const FULLNSPATH_UNDEFINED = 'undefined';
 
     const CONTEXT_CLASS        = 1;
     const CONTEXT_INTERFACE    = 2;
@@ -1922,7 +1924,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF    ) {
             $id = $this->processSingle('Identifier');
-            $fullnspath = $this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath'];
+            list($fullnspath, $aliased) = $this->getFullnspath($id);
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => self::NOT_ALIASED,
                                       'variadic'   => self::NOT_VARIADIC));
@@ -1936,8 +1938,11 @@ class Load extends Tasks {
                                           'fullcode'   => $this->tokens[$this->id][1],
                                           'line'       => $this->tokens[$this->id][2],
                                           'variadic'   => self::NOT_VARIADIC,
-                                          'token'      => $this->getToken($this->tokens[$this->id][0]),
-                                          'fullnspath' => $this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath']));
+                                          'token'      => $this->getToken($this->tokens[$this->id][0])));
+            list($fullnspath, $aliased) = $this->getFullnspath($nameId);
+            $this->setAtom($nameId, array('fullnspath' => $fullnspath,
+                                          'aliased'    => $aliased));
+                                          
             $this->pushExpression($nameId);
 
             return $this->processFunctioncall();
@@ -4282,10 +4287,15 @@ class Load extends Tasks {
             // This is an identifier, self or parent
             if (strtolower($this->atoms[$nameId]['code']) === 'self' || 
                 strtolower($this->atoms[$nameId]['code']) === 'static') {
-                return array($this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath'], self::NOT_ALIASED);
+                if (empty($this->currentClassTrait)) {
+                    return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
+                } else {
+                    return array($this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath'], self::NOT_ALIASED);
+                }
+
             } elseif (strtolower($this->atoms[$nameId]['code']) === 'parent') {
                 if (empty($this->currentParentClassTrait)) {
-                    return array('undefined', self::NOT_ALIASED);
+                    return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
                     return array($this->atoms[$this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]]['fullnspath'], self::NOT_ALIASED);
                 }
