@@ -90,7 +90,7 @@ GREMLIN
                  ->fullnspathIs($uses);
             $this->prepareQuery();
         }
-        
+
         // class used in a String (full string only)
         $strings = $this->query(<<<GREMLIN
 g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
@@ -100,11 +100,13 @@ g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
      .map{ it.get().value("noDelimiter").toLowerCase(); }.unique()
 GREMLIN
 );
-        $this->atomIs('Class')
-             ->outIs('NAME')
-             ->codeIs($strings)
-             ->back('first');
-        $this->prepareQuery();
+        if (!empty($strings)) {
+            $this->atomIs('Class')  
+                 ->outIs('NAME')
+                 ->codeIs($strings)
+                 ->back('first');
+            $this->prepareQuery();
+        }
 
         // class used in a String (string with ::)
         $strings = $this->query(<<<GREMLIN
