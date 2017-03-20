@@ -1,6 +1,7 @@
 <?php
 
 use MyNamespace\MyClass;
+
 use Zend\Uri\UriFactory;
 use Zend\Uri\UriFactoryNotZend;
 
