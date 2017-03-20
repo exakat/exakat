@@ -108,7 +108,7 @@ class Load extends Tasks {
     const NOT_ALIASED       = 0;
 
     const VARIADIC          = 1;
-    const NOT_VARIADIC      = 0;
+    const NOT_VARIADIC      = '';
 
     const NO_VALUE          = -1;
     
@@ -4303,7 +4303,6 @@ class Load extends Tasks {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
-                    print_r($this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]);
                     return array($this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath'], self::NOT_ALIASED);
                 }
 
