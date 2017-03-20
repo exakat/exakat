@@ -38,6 +38,8 @@ class Zf3Component extends Analyzer {
             return;
         }
 
+        $analyzerId = null;
+        
         $classes    = $data->getClasses($this->component, $this->version);
         if (!empty($classes)) {
             $classes    = array_merge(...array_values($classes));
@@ -48,7 +50,7 @@ class Zf3Component extends Analyzer {
                 $classesUsage = new ClassUsage($this->gremlin);
                 $classesUsage->setAnalyzer(get_class($this));
                 $classesUsage->setClasses($classes);
-                $classesUsage->init();
+                $analyzerId = $classesUsage->init($analyzerId);
                 $classesUsage->run();
 
                 $this->rowCount        += $classesUsage->getRowCount();
@@ -65,16 +67,16 @@ class Zf3Component extends Analyzer {
             $interfaces = $this->makeFullNsPath($interfaces);
         
             if (!empty($interfaces)) {
-                $classesUsage = new InterfaceUsage($this->gremlin);
-                $classesUsage->setAnalyzer(get_class($this));
-                $classesUsage->setInterfaces($interfaces);
-                $classesUsage->init();
-                $classesUsage->run();
+                $interfacesUsage = new InterfaceUsage($this->gremlin);
+                $interfacesUsage->setAnalyzer(get_class($this));
+                $interfacesUsage->setInterfaces($interfaces);
+                $analyzerId = $interfacesUsage->init($analyzerId);
+                $interfacesUsage->run();
 
-                $this->rowCount        += $classesUsage->getRowCount();
-                $this->processedCount  += $classesUsage->getProcessedCount();
-                $this->queryCount      += $classesUsage->getQueryCount();
-                $this->rawQueryCount   += $classesUsage->getRawQueryCount();
+                $this->rowCount        += $interfacesUsage->getRowCount();
+                $this->processedCount  += $interfacesUsage->getProcessedCount();
+                $this->queryCount      += $interfacesUsage->getQueryCount();
+                $this->rawQueryCount   += $interfacesUsage->getRawQueryCount();
             }
         }
 
@@ -85,16 +87,16 @@ class Zf3Component extends Analyzer {
             $traits     = $this->makeFullNsPath($traits);
 
             if (!empty($traits)) {
-                $classesUsage = new TraitUsage($this->gremlin);
-                $classesUsage->setAnalyzer(get_class($this));
-                $classesUsage->setTraits($traits);
-                $classesUsage->init();
-                $classesUsage->run();
+                $traitsUsage = new TraitUsage($this->gremlin);
+                $traitsUsage->setAnalyzer(get_class($this));
+                $traitsUsage->setTraits($traits);
+                $analyzerId = $traitsUsage->init($analyzerId);
+                $traitsUsage->run();
 
-                $this->rowCount        += $classesUsage->getRowCount();
-                $this->processedCount  += $classesUsage->getProcessedCount();
-                $this->queryCount      += $classesUsage->getQueryCount();
-                $this->rawQueryCount   += $classesUsage->getRawQueryCount();
+                $this->rowCount        += $traitsUsage->getRowCount();
+                $this->processedCount  += $traitsUsage->getProcessedCount();
+                $this->queryCount      += $traitsUsage->getQueryCount();
+                $this->rawQueryCount   += $traitsUsage->getRawQueryCount();
             }
         }
     }
