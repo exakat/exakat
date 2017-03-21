@@ -1569,6 +1569,12 @@ class Load extends Tasks {
             if (in_array(strtolower($this->tokens[$this->id][1]), array('int', 'bool', 'void', 'float', 'string'))) {
                 $this->setAtom($id, array('fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ));
             } else {
+                list($fullnspath, $aliased) = $this->getFullnspath($id, 'class');
+                $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                          'aliased'    => $aliased,
+                                          'variadic'   => self::NOT_VARIADIC));
+                $this->addCall('class', $fullnspath, $id);
+
                 if ($this->atoms[$id]['aliased'] === self::ALIASED) {
                     $this->addLink($this->usesId['class'][strtolower($this->atoms[$id]['code'])], $id, 'DEFINITION');
                 }
@@ -3236,9 +3242,14 @@ class Load extends Tasks {
             return $id;
         } elseif (in_array($this->atoms[$id]['atom'], array('Nsname', 'Identifier'))) {
             $type = $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const';
+            
             list($fullnspath, $aliased) = $this->getFullnspath($id, $type);
+
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => $aliased));
+            if ($type === 'const') {
+                $this->addCall($type, $fullnspath, $id);
+            }
             return $id;
         } else {
             return $id;
