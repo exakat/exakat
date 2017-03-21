@@ -66,8 +66,6 @@ Label : PROJECT
                 Void
             Label : NAME
               x
-          Label : DEFINITION
-            x
           Label : NAME
             x
         Label : ELEMENT

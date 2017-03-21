@@ -10,23 +10,21 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          ?
-          Label : CONDITION
-            ==
-            Label : LEFT
-              $a
-            Label : RIGHT
-              'C'
-          Label : ELSE
-            'E'
-          Label : THEN
-            'D'
-        Label : ELEMENT
           print
           Label : ARGUMENTS
             'E'
             Label : ARGUMENT
-              Void
+              ?
+              Label : CONDITION
+                ==
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  'C'
+              Label : ELSE
+                'E'
+              Label : THEN
+                'D'
           Label : NAME
             print
         Label : ELEMENT

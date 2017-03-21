@@ -54,8 +54,6 @@ Label : PROJECT
                   absolute_path
               Label : NAME
                 absolute_path
-              Label : DEFINITION
-                absolute_path
             Label : ELEMENT
               class
               Label : BLOCK
@@ -89,8 +87,6 @@ Label : PROJECT
                 Label : SUBNAME
                   a1
               Label : NAME
-                a1
-              Label : DEFINITION
                 a1
           Label : NAME
             Void

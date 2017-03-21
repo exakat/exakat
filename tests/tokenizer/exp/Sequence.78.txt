@@ -621,13 +621,11 @@ Label : PROJECT
             Label : ELEMENT
               CR
             Label : ELEMENT
-              $ag
-            Label : ELEMENT
               <?=
               Label : ARGUMENTS
                 <?=
                 Label : ARGUMENT
-                  Void
+                  $ag
               Label : NAME
                 <?=
             Label : ELEMENT
@@ -699,13 +697,11 @@ Label : PROJECT
             Label : ELEMENT
               CY
             Label : ELEMENT
-              $am
-            Label : ELEMENT
               <?=
               Label : ARGUMENTS
                 <?=
                 Label : ARGUMENT
-                  Void
+                  $am
               Label : NAME
                 <?=
             Label : ELEMENT

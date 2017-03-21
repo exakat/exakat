@@ -13,27 +13,23 @@ Label : PROJECT
           Label : LEFT
             $a
           Label : RIGHT
-            -
-            Label : LEFT
-              .
-              Label : CONCAT
-                (
-                Label : CODE
-                  ?
-                  Label : CONDITION
-                    ===
-                    Label : LEFT
-                      $semicolon
-                    Label : RIGHT
-                      '1'
-                  Label : ELSE
-                    '4'
-                  Label : THEN
-                    '3'
-              Label : CONCAT
-                Void
-            Label : RIGHT
-              1
+            .
+            Label : CONCAT
+              (
+              Label : CODE
+                ?
+                Label : CONDITION
+                  ===
+                  Label : LEFT
+                    $semicolon
+                  Label : RIGHT
+                    '1'
+                Label : ELSE
+                  '4'
+                Label : THEN
+                  '3'
+            Label : CONCAT
+              -1
         Label : ELEMENT
           =
           Label : LEFT
@@ -43,27 +39,23 @@ Label : PROJECT
             Label : ARGUMENTS
               [
               Label : ARGUMENT
-                -
-                Label : LEFT
-                  .
-                  Label : CONCAT
-                    (
-                    Label : CODE
-                      ?
-                      Label : CONDITION
-                        ===
-                        Label : LEFT
-                          $bracket
-                        Label : RIGHT
-                          '1'
-                      Label : ELSE
-                        '4'
-                      Label : THEN
-                        '3'
-                  Label : CONCAT
-                    Void
-                Label : RIGHT
-                  1
+                .
+                Label : CONCAT
+                  (
+                  Label : CODE
+                    ?
+                    Label : CONDITION
+                      ===
+                      Label : LEFT
+                        $bracket
+                      Label : RIGHT
+                        '1'
+                    Label : ELSE
+                      '4'
+                    Label : THEN
+                      '3'
+                Label : CONCAT
+                  -1
             Label : NAME
               [
         Label : ELEMENT
@@ -75,27 +67,23 @@ Label : PROJECT
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                -
-                Label : LEFT
-                  .
-                  Label : CONCAT
-                    (
-                    Label : CODE
-                      ?
-                      Label : CONDITION
-                        ===
-                        Label : LEFT
-                          $closingParenthesis
-                        Label : RIGHT
-                          '1'
-                      Label : ELSE
-                        '4'
-                      Label : THEN
-                        '3'
-                  Label : CONCAT
-                    Void
-                Label : RIGHT
-                  1
+                .
+                Label : CONCAT
+                  (
+                  Label : CODE
+                    ?
+                    Label : CONDITION
+                      ===
+                      Label : LEFT
+                        $closingParenthesis
+                      Label : RIGHT
+                        '1'
+                    Label : ELSE
+                      '4'
+                    Label : THEN
+                      '3'
+                Label : CONCAT
+                  -1
             Label : NAME
               strtolower
         Label : ELEMENT
@@ -107,27 +95,23 @@ Label : PROJECT
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                -
-                Label : LEFT
-                  .
-                  Label : CONCAT
-                    (
-                    Label : CODE
-                      ?
-                      Label : CONDITION
-                        ===
-                        Label : LEFT
-                          $comma
-                        Label : RIGHT
-                          '1'
-                      Label : ELSE
-                        '4'
-                      Label : THEN
-                        '3'
-                  Label : CONCAT
-                    Void
-                Label : RIGHT
-                  1
+                .
+                Label : CONCAT
+                  (
+                  Label : CODE
+                    ?
+                    Label : CONDITION
+                      ===
+                      Label : LEFT
+                        $comma
+                      Label : RIGHT
+                        '1'
+                    Label : ELSE
+                      '4'
+                    Label : THEN
+                      '3'
+                Label : CONCAT
+                  -1
               Label : ARGUMENT
                 2
             Label : NAME

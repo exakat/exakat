@@ -8,6 +8,7 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
+          *=
           Label : LEFT
             $
             Label : NAME

@@ -40,8 +40,6 @@ Label : PROJECT
                 Void
             Label : NAME
               foo
-          Label : DEFINITION
-            foo
           Label : NAME
             foo
         Label : ELEMENT
@@ -72,8 +70,6 @@ Label : PROJECT
                 Void
             Label : NAME
               bar
-          Label : DEFINITION
-            bar
           Label : NAME
             bar
         Label : ELEMENT

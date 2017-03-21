@@ -30,78 +30,76 @@ Label : PROJECT
           Label : THEN
             ;
             Label : ELEMENT
-              ::
-              Label : CLASS
-                D
-              Label : METHOD
-                E
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      F
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        F
-                    Label : OBJECT
-                      $b
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      G
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        G
-                    Label : OBJECT
-                      $c
-                  Label : ARGUMENT
-                    0
-                  Label : ARGUMENT
-                    ?
-                    Label : CONDITION
-                      &&
-                      Label : LEFT
-                        instanceof
-                        Label : CLASS
-                          \
-                          Label : SUBNAME
-                            H
-                        Label : VARIABLE
-                          $d
-                      Label : RIGHT
-                        isset
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            ->
-                            Label : OBJECT
-                              $e
-                            Label : PROPERTY
-                              I
-                        Label : NAME
-                          isset
-                    Label : ELSE
-                      NULL
-                    Label : THEN
-                      ->
-                      Label : OBJECT
-                        $f
-                      Label : PROPERTY
-                        J
-                Label : NAME
-                  E
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  ::
+                  Label : CLASS
+                    D
+                  Label : METHOD
+                    E
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          F
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            F
+                        Label : OBJECT
+                          $b
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          G
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              Void
+                          Label : NAME
+                            G
+                        Label : OBJECT
+                          $c
+                      Label : ARGUMENT
+                        0
+                      Label : ARGUMENT
+                        ?
+                        Label : CONDITION
+                          &&
+                          Label : LEFT
+                            instanceof
+                            Label : CLASS
+                              \
+                              Label : SUBNAME
+                                H
+                            Label : VARIABLE
+                              $d
+                          Label : RIGHT
+                            isset
+                            Label : ARGUMENTS
+                              (
+                              Label : ARGUMENT
+                                ->
+                                Label : OBJECT
+                                  $e
+                                Label : PROPERTY
+                                  I
+                            Label : NAME
+                              isset
+                        Label : ELSE
+                          NULL
+                        Label : THEN
+                          ->
+                          Label : OBJECT
+                            $f
+                          Label : PROPERTY
+                            J
+                    Label : NAME
+                      E
               Label : NAME
                 echo

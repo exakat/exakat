@@ -15,4 +15,6 @@ Label : PROJECT
             Label : LEFT
               $x
             Label : RIGHT
-              +1.2
+              +
+              Label : SIGN
+                1.2

@@ -1,0 +1,46 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Interface.12.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : DEFINITION
+            A
+          Label : NAME
+            A
+          Label : DEFINITION
+            A
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : DEFINITION
+            B
+          Label : NAME
+            B
+          Label : EXTENDS
+            A
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : IMPLEMENTS
+            B
+          Label : IMPLEMENTS
+            A
+          Label : NAME
+            C

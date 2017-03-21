@@ -19,6 +19,8 @@ Label : PROJECT
         Label : ELEMENT
           $
           Label : NAME
-            $
-            Label : NAME
-              Void
+            Void
+        Label : ELEMENT
+          $
+          Label : NAME
+            Void

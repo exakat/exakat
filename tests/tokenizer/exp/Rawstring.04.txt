@@ -14,85 +14,81 @@ Label : PROJECT
           Label : BLOCK
             ;
             Label : ELEMENT
-              ->
-              Label : METHOD
-                C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        =>
-                        Label : KEY
-                          'D'
-                        Label : VALUE
-                          $f
-                    Label : NAME
-                      array
-                Label : NAME
-                  C
-              Label : OBJECT
-                $e
-            Label : ELEMENT
               =
               Label : LEFT
                 $d
               Label : RIGHT
-                Void
+                ->
+                Label : METHOD
+                  C
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      array
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          =>
+                          Label : KEY
+                            'D'
+                          Label : VALUE
+                            $f
+                      Label : NAME
+                        array
+                  Label : NAME
+                    C
+                Label : OBJECT
+                  $e
+            Label : ELEMENT
+              Void
             Label : ELEMENT
               D
-            Label : ELEMENT
-              ::
-              Label : CLASS
-                F
-              Label : METHOD
-                G
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'H'
-                  Label : ARGUMENT
-                    'I'
-                Label : NAME
-                  G
             Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  ::
+                  Label : CLASS
+                    F
+                  Label : METHOD
+                    G
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'H'
+                      Label : ARGUMENT
+                        'I'
+                    Label : NAME
+                      G
               Label : NAME
                 echo
             Label : ELEMENT
               I
             Label : ELEMENT
-              ::
-              Label : CLASS
-                K
-              Label : METHOD
-                L
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $g
-                  Label : ARGUMENT
-                    $h
-                  Label : ARGUMENT
-                    NULL
-                  Label : ARGUMENT
-                    NULL
-                  Label : ARGUMENT
-                    M
-                Label : NAME
-                  L
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  ::
+                  Label : CLASS
+                    K
+                  Label : METHOD
+                    L
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $g
+                      Label : ARGUMENT
+                        $h
+                      Label : ARGUMENT
+                        NULL
+                      Label : ARGUMENT
+                        NULL
+                      Label : ARGUMENT
+                        M
+                    Label : NAME
+                      L
               Label : NAME
                 echo
             Label : ELEMENT

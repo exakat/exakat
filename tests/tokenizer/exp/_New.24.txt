@@ -40,29 +40,25 @@ Label : PROJECT
             Label : ELEMENT
               E
             Label : ELEMENT
-              F
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'G'
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $a
-                  Label : PROPERTY
-                    B
-              Label : NAME
-                F
-            Label : ELEMENT
-              new
-              Label : NEW
-                Void
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  new
+                  Label : NEW
+                    F
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'G'
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $a
+                        Label : PROPERTY
+                          B
+                    Label : NAME
+                      F
               Label : NAME
                 echo
             Label : ELEMENT

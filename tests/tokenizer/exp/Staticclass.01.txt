@@ -77,6 +77,10 @@ Label : PROJECT
                   Label : STATIC
                     static
               Label : DEFINITION
+                self
+              Label : DEFINITION
+                static
+              Label : DEFINITION
                 ClassName
               Label : DEFINITION
                 ClassName
@@ -86,10 +90,6 @@ Label : PROJECT
                   NS
                 Label : SUBNAME
                   ClassName
-              Label : DEFINITION
-                self
-              Label : DEFINITION
-                static
               Label : EXTENDS
                 ParentClass
               Label : NAME

@@ -37,15 +37,15 @@ Label : PROJECT
           Label : ARGUMENTS
             4
             Label : ARGUMENT
-              +
-              Label : LEFT
-                .
-                Label : CONCAT
-                  1
-                Label : CONCAT
+              .
+              Label : CONCAT
+                1
+              Label : CONCAT
+                +
+                Label : LEFT
                   2
-              Label : RIGHT
-                4
+                Label : RIGHT
+                  4
           Label : NAME
             print
         Label : ELEMENT

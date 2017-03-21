@@ -10,16 +10,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          C
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              2
-            Label : ARGUMENT
-              1
-          Label : NAME
-            C
-        Label : ELEMENT
           =
           Label : LEFT
             $a
@@ -36,9 +26,15 @@ Label : PROJECT
               Label : NAME
                 C
             Label : CONCAT
-              Void
-        Label : ELEMENT
-          Void
+              C
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  2
+                Label : ARGUMENT
+                  1
+              Label : NAME
+                C
         Label : ELEMENT
           B
         Label : ELEMENT
@@ -48,27 +44,25 @@ Label : PROJECT
             Label : ELEMENT
               F
             Label : ELEMENT
-              *
-              Label : LEFT
-                (
-                Label : CODE
-                  +
-                  Label : LEFT
-                    $b
-                  Label : RIGHT
-                    4
-              Label : RIGHT
-                [
-                Label : INDEX
-                  'G'
-                Label : VARIABLE
-                  $d
-            Label : ELEMENT
               =
               Label : LEFT
                 $c
               Label : RIGHT
-                Void
+                *
+                Label : LEFT
+                  (
+                  Label : CODE
+                    +
+                    Label : LEFT
+                      $b
+                    Label : RIGHT
+                      4
+                Label : RIGHT
+                  [
+                  Label : INDEX
+                    'G'
+                  Label : VARIABLE
+                    $d
             Label : ELEMENT
               H
             Label : ELEMENT

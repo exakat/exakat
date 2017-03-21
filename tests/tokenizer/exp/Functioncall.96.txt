@@ -42,25 +42,21 @@ Label : PROJECT
                         Label : ELEMENT
                           A
                         Label : ELEMENT
-                          $c
-                        Label : ELEMENT
                           <?=
                           Label : ARGUMENTS
                             <?=
                             Label : ARGUMENT
-                              Void
+                              $c
                           Label : NAME
                             <?=
                         Label : ELEMENT
                           B
                         Label : ELEMENT
-                          $d
-                        Label : ELEMENT
                           <?=
                           Label : ARGUMENTS
                             <?=
                             Label : ARGUMENT
-                              Void
+                              $d
                           Label : NAME
                             <?=
                         Label : ELEMENT

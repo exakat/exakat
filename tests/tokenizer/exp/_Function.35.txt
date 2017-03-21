@@ -26,5 +26,3 @@ Label : PROJECT
                   $a
             Label : NAME
               Void
-        Label : ELEMENT
-          Void

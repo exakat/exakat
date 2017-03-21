@@ -132,10 +132,6 @@ Label : PROJECT
                           fields
                     Label : NAME
                       count
-          Label : DEFINITION
-            foo
-          Label : DEFINITION
-            foo
           Label : NAME
             foo
           Label : DEFINITION

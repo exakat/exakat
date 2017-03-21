@@ -138,14 +138,6 @@ Label : PROJECT
                     $a
                 Label : NAME
                   B
-          Label : DEFINITION
-            B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-            Label : NAME
-              B
           Label : NAME
             B
         Label : ELEMENT

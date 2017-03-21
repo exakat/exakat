@@ -24,11 +24,13 @@ Label : PROJECT
           Label : THEN
             ;
             Label : ELEMENT
+              'B'
+            Label : ELEMENT
               print
               Label : ARGUMENTS
                 'B'
                 Label : ARGUMENT
-                  'B'
+                  Void
               Label : NAME
                 print
             Label : ELEMENT
@@ -36,13 +38,11 @@ Label : PROJECT
         Label : ELEMENT
           C
         Label : ELEMENT
-          $d
-        Label : ELEMENT
           print
           Label : ARGUMENTS
             $d
             Label : ARGUMENT
-              Void
+              $d
           Label : NAME
             print
     Label : ELEMENT

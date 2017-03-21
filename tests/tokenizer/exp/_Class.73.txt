@@ -922,7 +922,5 @@ Label : PROJECT
                 yield
               Label : PUBLIC
                 public
-          Label : DEFINITION
-            static
           Label : NAME
             x

@@ -64,12 +64,6 @@ Label : PROJECT
                                   self
                                 Label : CONSTANT
                                   X
-                                Label : DEFINITION
-                                  const
-                                  Label : NAME
-                                    X
-                                  Label : VALUE
-                                    12
                             Label : CONST
                               ,
                               Label : NAME
@@ -508,12 +502,6 @@ Label : PROJECT
                               private
                             Label : STATIC
                               static
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION
-                          self
                         Label : EXTENDS
                           B
                         Label : IMPLEMENTS
@@ -728,10 +716,6 @@ Label : PROJECT
                               f2
                             Label : PROTECTED
                               protected
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION
-                          A
                         Label : FINAL
                           final
                         Label : NAME
@@ -828,10 +812,6 @@ Label : PROJECT
                             use
                             Label : USE
                               T3
-                        Label : DEFINITION
-                          A
-                        Label : DEFINITION
-                          A
                         Label : NAME
                           A
                     Label : NAME

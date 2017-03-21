@@ -75,13 +75,11 @@ Label : PROJECT
             Label : ELEMENT
               J
             Label : ELEMENT
-              $b
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  $b
               Label : NAME
                 echo
             Label : ELEMENT

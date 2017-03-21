@@ -52,26 +52,6 @@ Label : PROJECT
               Label : NAME
                 H
             Label : ELEMENT
-              ?
-              Label : CONDITION
-                F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $e
-                Label : NAME
-                  F
-              Label : ELSE
-                Void
-              Label : THEN
-                G
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $f
-                Label : NAME
-                  G
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
@@ -86,7 +66,25 @@ Label : PROJECT
                 Label : ARGUMENT
                   'E'
                 Label : ARGUMENT
-                  Void
+                  ?
+                  Label : CONDITION
+                    F
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $e
+                    Label : NAME
+                      F
+                  Label : ELSE
+                    Void
+                  Label : THEN
+                    G
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $f
+                    Label : NAME
+                      G
               Label : NAME
                 echo
             Label : ELEMENT

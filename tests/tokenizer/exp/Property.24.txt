@@ -1,0 +1,151 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.24.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              p
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  return
+                  Label : RETURN
+                    3
+              Label : NAME
+                p
+              Label : PUBLIC
+                public
+          Label : DEFINITION
+            b
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              b
+          Label : DEFINITION
+            \
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              \
+              Label : SUBNAME
+                b
+          Label : DEFINITION
+            b
+          Label : DEFINITION
+            \
+            Label : SUBNAME
+              b
+          Label : NAME
+            b
+        Label : ELEMENT
+          ==
+          Label : LEFT
+            ->
+            Label : METHOD
+              p
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                p
+            Label : OBJECT
+              (
+              Label : CODE
+                new
+                Label : NEW
+                  b
+          Label : RIGHT
+            3
+        Label : ELEMENT
+          ==
+          Label : LEFT
+            ->
+            Label : METHOD
+              p
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                p
+            Label : OBJECT
+              (
+              Label : CODE
+                new
+                Label : NEW
+                  b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    b
+          Label : RIGHT
+            3
+        Label : ELEMENT
+          ==
+          Label : LEFT
+            ->
+            Label : METHOD
+              p
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                p
+            Label : OBJECT
+              (
+              Label : CODE
+                new
+                Label : NEW
+                  \
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    \
+                    Label : SUBNAME
+                      b
+          Label : RIGHT
+            3
+        Label : ELEMENT
+          ==
+          Label : LEFT
+            ->
+            Label : METHOD
+              p
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : NAME
+                p
+            Label : OBJECT
+              (
+              Label : CODE
+                new
+                Label : NEW
+                  \
+                  Label : SUBNAME
+                    b
+          Label : RIGHT
+            3

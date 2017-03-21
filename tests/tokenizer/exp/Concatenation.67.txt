@@ -133,13 +133,11 @@ Label : PROJECT
                 Label : VALUE
                   .
                   Label : CONCAT
+                    $d
+                  Label : CONCAT
                     -
                     Label : LEFT
-                      .
-                      Label : CONCAT
-                        $d
-                      Label : CONCAT
-                        '3'
+                      '3'
                     Label : RIGHT
                       $b3
                   Label : CONCAT

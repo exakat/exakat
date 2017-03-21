@@ -16,55 +16,51 @@ Label : PROJECT
             Label : ELEMENT
               B
             Label : ELEMENT
-              ->
-              Label : METHOD
-                escape
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      slug
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $label
-                      Label : NAME
-                        slug
-                    Label : OBJECT
-                      $tpl
-                Label : NAME
-                  escape
-              Label : OBJECT
-                $tpl
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  ->
+                  Label : METHOD
+                    escape
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          slug
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              $label
+                          Label : NAME
+                            slug
+                        Label : OBJECT
+                          $tpl
+                    Label : NAME
+                      escape
+                  Label : OBJECT
+                    $tpl
               Label : NAME
                 echo
             Label : ELEMENT
               C
             Label : ELEMENT
-              ->
-              Label : METHOD
-                escape
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $label
-                Label : NAME
-                  escape
-              Label : OBJECT
-                $tpl
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  ->
+                  Label : METHOD
+                    escape
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $label
+                    Label : NAME
+                      escape
+                  Label : OBJECT
+                    $tpl
               Label : NAME
                 echo
             Label : ELEMENT

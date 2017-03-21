@@ -64,8 +64,6 @@ Label : PROJECT
                 1000000
             Label : NAME
               generateRange
-          Label : DEFINITION
-            generateRange
           Label : NAME
             generateRange
         Label : ELEMENT

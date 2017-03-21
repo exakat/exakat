@@ -51,8 +51,6 @@ Label : PROJECT
                 Label : AS
                   X
                 Label : DEFINITION
-                  x
-                Label : DEFINITION
                   X
                 Label : NAME
                   \

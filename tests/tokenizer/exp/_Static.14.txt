@@ -43,11 +43,5 @@ Label : PROJECT
               new
               Label : NEW
                 static
-                Label : ARGUMENTS
-                  Void
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  static
           Label : NAME
             y

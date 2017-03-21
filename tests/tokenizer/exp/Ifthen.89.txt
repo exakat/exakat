@@ -114,10 +114,6 @@ Label : PROJECT
                     "\n"
               Label : NAME
                 echo
-          Label : DEFINITION
-            C
-          Label : DEFINITION
-            C
           Label : NAME
             C
           Label : DEFINITION

@@ -18,14 +18,6 @@ Label : PROJECT
                 \
                 Label : DEFINITION
                   b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    b
-                Label : DEFINITION
-                  b
                 Label : DEFINITION
                   b
                 Label : DEFINITION
@@ -200,15 +192,7 @@ Label : PROJECT
                   b
                 Label : SUBNAME
                   d
-              Label : DEFINITION, DEFINITION
-                \
-                Label : SUBNAME
-                  b
-                Label : SUBNAME
-                  d
               Label : NAME
-                d
-              Label : DEFINITION
                 d
           Label : NAME
             \
@@ -238,14 +222,6 @@ Label : PROJECT
                 b
               Label : DEFINITION
                 \
-                Label : DEFINITION
-                  b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    b
                 Label : DEFINITION
                   b
                 Label : DEFINITION

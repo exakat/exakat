@@ -74,10 +74,6 @@ Label : PROJECT
                 2
             Label : NAME
               from
-          Label : DEFINITION
-            from
-          Label : DEFINITION
-            from
           Label : NAME
             from
         Label : ELEMENT
@@ -176,8 +172,6 @@ Label : PROJECT
                 Void
             Label : NAME
               gen
-          Label : DEFINITION
-            gen
           Label : DEFINITION
             "gen"
           Label : NAME

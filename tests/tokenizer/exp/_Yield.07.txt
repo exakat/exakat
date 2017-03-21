@@ -46,8 +46,6 @@ Label : PROJECT
                 Void
             Label : NAME
               B
-          Label : DEFINITION
-            B
           Label : NAME
             B
           Label : RETURNTYPE

@@ -91,14 +91,6 @@ Label : PROJECT
               Label : GROUPUSE
                 \
                 Label : DEFINITION
-                  DF2
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    DF2
-                Label : DEFINITION
                   DF3
                 Label : DEFINITION
                   DF2
@@ -230,8 +222,6 @@ Label : PROJECT
                       __FUNCTION__
                   Label : NAME
                     print
-              Label : DEFINITION
-                DF3
               Label : NAME
                 DF3
               Label : DEFINITION

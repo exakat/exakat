@@ -174,12 +174,6 @@ Label : PROJECT
                   e
             Label : NAME
               c
-          Label : DEFINITION
-            c
-          Label : DEFINITION
-            c
-          Label : DEFINITION
-            c
           Label : NAME
             c
         Label : ELEMENT

@@ -82,7 +82,15 @@ Label : PROJECT
                 x
           Label : DEFINITION
             static
-          Label : DEFINITION
-            static
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                3
+              Label : ARGUMENT
+                4
+            Label : NAME
+              static
           Label : NAME
             B

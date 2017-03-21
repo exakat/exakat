@@ -75,8 +75,6 @@ Label : PROJECT
               Label : NAME
                 echo
           Label : DEFINITION
-            f
-          Label : DEFINITION
             'f'
           Label : NAME
             f

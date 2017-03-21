@@ -32,39 +32,37 @@ Label : PROJECT
             Label : ELEMENT
               C
             Label : ELEMENT
-              ::
-              Label : CLASS
-                D
-              Label : METHOD
-                E
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      F
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'G'
-                      Label : NAME
-                        F
-                    Label : OBJECT
-                      $b
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $b
-                    Label : PROPERTY
-                      H
-                Label : NAME
-                  E
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  ::
+                  Label : CLASS
+                    D
+                  Label : METHOD
+                    E
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          F
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              'G'
+                          Label : NAME
+                            F
+                        Label : OBJECT
+                          $b
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $b
+                        Label : PROPERTY
+                          H
+                    Label : NAME
+                      E
               Label : NAME
                 echo
             Label : ELEMENT

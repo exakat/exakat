@@ -9,8 +9,10 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
+          "3"
+        Label : ELEMENT
           *
           Label : LEFT
             '1'
           Label : RIGHT
-            "3"
+            Void

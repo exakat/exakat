@@ -14,13 +14,11 @@ Label : PROJECT
           Label : THEN
             ;
             Label : ELEMENT
-              3
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  3
               Label : NAME
                 echo
             Label : ELEMENT
