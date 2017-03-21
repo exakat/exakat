@@ -1924,7 +1924,9 @@ class Load extends Tasks {
         $this->pushExpression($id);
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
-            $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF    ) {
+            $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF   ||
+            $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NEW
+            ) {
 
             list($fullnspath, $aliased) = $this->getFullnspath($id, 'class');
             $this->setAtom($id, array('fullnspath' => $fullnspath,
