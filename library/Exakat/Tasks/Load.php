@@ -1972,7 +1972,9 @@ class Load extends Tasks {
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
             // new static; (no parenthesis, as tested above)
 
-            $nameId = $this->processExit();
+            --$this->id;
+            $nameId = $this->processNextAsIdentifier();
+            $this->pushExpression($nameId);
 
             return $nameId;
         } else {
