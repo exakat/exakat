@@ -33,10 +33,12 @@ class UsedInterfaces extends Analyzer {
         $typehints = $this->query('g.V().hasLabel("Function").out("ARGUMENTS").out("ARGUMENT").out("TYPEHINT").values("fullnspath").unique()');
 
         $all = array_merge($classes, $instanceof, $typehints);
-        
+
         if (!empty($all)) {
+            $all = array_keys(array_count_values($all));
             $this->atomIs('Interface')
-                 ->fullnspathIs($all);
+                 ->fullnspathIs($all)
+                 ;
             $this->prepareQuery();
         }
     }
