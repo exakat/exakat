@@ -117,7 +117,6 @@ class Extension extends Analyzer {
         if (!empty($ini['namespaces'])) {
             $namespaces = $this->makeFullNsPath($ini['namespaces']);
             $this->analyzerIs('Namespaces/NamespaceUsage')
-                 ->outIs('NAME')
                  ->fullnspathIs($namespaces)
                  ->back('first');
             $this->prepareQuery();

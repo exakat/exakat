@@ -82,10 +82,11 @@ class ClassUsage extends Analyzer {
         $this->prepareQuery();
 
 // Check that... Const/function and aliases
+        // This points on the use, not the name.
         $this->atomIs('Use')
              ->outIs('USE')
-             ->outIsIE('NAME')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+//             ->outIsIE('NAME')
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_AS'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
 
