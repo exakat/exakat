@@ -1846,9 +1846,8 @@ class Load extends Tasks {
             $this->setAtom($functioncallId, array('fullnspath' => $fullnspath,
                                                   'aliased'    => $aliased
                                                   ));
-        } elseif ($this->isContext(self::CONTEXT_NOFULLNSPATH) 
-//                  || $this->tokens[$this->id - 2][0] === T_OBJECT_OPERATOR
-                  ) {
+            $this->addCall('class', $fullnspath, $functioncallId);
+        } elseif ($this->isContext(self::CONTEXT_NOFULLNSPATH)) {
             // Nothing
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'function');
@@ -3536,16 +3535,25 @@ class Load extends Tasks {
 
     private function processNew() {
         $this->toggleContext(self::CONTEXT_NEW);
-        $id =  $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
-
-        if (isset($this->atoms[$id]['fullnspath'])) {
-            $this->addCall('class', $this->atoms[$id]['fullnspath'], $id);
+        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
 
+        $id =  $this->processSingleOperator('New', $this->precedence->get($this->tokens[$this->id][0]), 'NEW', ' ');
+
         $this->toggleContext(self::CONTEXT_NEW);
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
 
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
+
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+
         return $operatorId;
     }
 
@@ -3561,6 +3569,19 @@ class Load extends Tasks {
             $code *= $this->tokens[$this->id][1].'1';
         }
 
+        if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER || $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
+            $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
+            $operandId = $this->processNext();
+
+            $x = array('code'     => $sign.$this->atoms[$operandId]['code'],
+                       'fullcode' => $sign.$this->atoms[$operandId]['fullcode'],
+                       'line'     => $this->tokens[$this->id][2],
+                       'token'    => $this->getToken($this->tokens[$this->id][0]));
+            $this->setAtom($operandId, $x);
+
+            return $operandId;
+        } 
+        
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
@@ -3592,7 +3613,6 @@ class Load extends Tasks {
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
-
         return $signedId;
     }
 
@@ -3644,9 +3664,19 @@ class Load extends Tasks {
         $breakId = $this->addAtom($this->tokens[$this->id][0] === \Exakat\Tasks\T_BREAK ? 'Break' : 'Continue');
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER) {
-            $this->processNext();
+            $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+            if ($noSequence === false) {
+                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            }
 
-            $breakLevel = $this->popExpression();
+            ++$this->id;
+            $breakLevel = $this->processInteger();
+            $this->popExpression();
+
+            if ($noSequence === false) {
+                $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+            }
+
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             ++$this->id; // skip (
             $this->processNext();
@@ -3665,7 +3695,7 @@ class Load extends Tasks {
         $this->setAtom($breakId, $x);
         $this->pushExpression($breakId);
 
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -3679,7 +3709,7 @@ class Load extends Tasks {
         list($fullnspath, $aliased) = $this->getFullnspath($leftId, 'class');
         $this->setAtom($leftId, array('fullnspath' => $fullnspath,
                                       'aliased'    => $aliased));
-        $this->addCall('class', $this->atoms[$leftId]['fullnspath'], $leftId);
+//        $this->addCall('class', $this->atoms[$leftId]['fullnspath'], $leftId);
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals[] = \Exakat\Tasks\T_DOUBLE_COLON;
@@ -4320,7 +4350,6 @@ class Load extends Tasks {
     }
 
     private function addToSequence($id) {
-        print __METHOD__."\n";
         $this->addLink($this->sequence, $id, 'ELEMENT');
         $this->setAtom($id, array('rank' => ++$this->sequenceRank[$this->sequenceCurrentRank]));
     }
