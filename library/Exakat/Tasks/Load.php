@@ -1113,7 +1113,7 @@ class Load extends Tasks {
                                              'token'    => $this->getToken($this->tokens[$current + 1][0]),
                                              'variadic' => self::NOT_VARIADIC,
                                              'absolute' => !$hasPrevious));
-            list($fullnspath, $aliased) = $this->getFullnspath($extendsId);
+            list($fullnspath, $aliased) = $this->getFullnspath($extendsId, 'class');
             $this->setAtom($extendsId, array('fullnspath' => $fullnspath,
                                              'aliased'    => $aliased));
         } else {
@@ -1132,6 +1132,11 @@ class Load extends Tasks {
         $nameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($traitId, $nameId, 'NAME');
 
+        list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'class');
+        $this->setAtom($traitId, array('fullnspath' => $fullnspath,
+                                       'aliased'    => $aliased));
+        $this->addDefinition('class', $this->atoms[$traitId]['fullnspath'], $traitId);
+
         // Process block
         ++$this->id;
         $blockId = $this->processBlock(false);
@@ -1142,11 +1147,7 @@ class Load extends Tasks {
         $this->setAtom($traitId, array('code'       => $this->tokens[$current][1],
                                        'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].static::FULLCODE_BLOCK,
                                        'line'       => $this->tokens[$current][2],
-                                       'token'      => $this->getToken($this->tokens[$current][0]),
-                                       'fullnspath' => $fullnspath,
-                                       'aliased'    => $aliased));
-
-        $this->addDefinition('class', $fullnspath, $traitId);
+                                       'token'      => $this->getToken($this->tokens[$current][0])));
 
         $this->pushExpression($traitId);
         $this->processSemicolon();
@@ -1161,10 +1162,16 @@ class Load extends Tasks {
     private function processInterface() {
         $current = $this->id;
         $interfaceId = $this->addAtom('Interface');
+        $this->currentClassTrait[] = $interfaceId;
         $this->toggleContext(self::CONTEXT_INTERFACE);
 
         $nameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($interfaceId, $nameId, 'NAME');
+
+        list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'class');
+        $this->setAtom($interfaceId, array('fullnspath' => $fullnspath,
+                                           'aliased'    => $aliased));
+        $this->addDefinition('class', $this->atoms[$interfaceId]['fullnspath'], $interfaceId);
 
         // Process extends
         $rank = 0;
@@ -1189,19 +1196,18 @@ class Load extends Tasks {
         $this->popExpression();
         $this->addLink($interfaceId, $blockId, 'BLOCK');
 
-        list($fullnspath, $aliased) = $this->getFullnspath($nameId);
         $this->setAtom($interfaceId, array('code'       => $this->tokens[$current][1],
                                            'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].(isset($extendsId) ? ' '.$this->tokens[$extends][1].' '.implode(', ', $fullcode) : '').static::FULLCODE_BLOCK,
                                            'line'       => $this->tokens[$current][2],
                                            'token'      => $this->getToken($this->tokens[$current][0]),
                                            'fullnspath' => $fullnspath,
                                            'aliased'    => $aliased));
-        $this->addDefinition('class', $fullnspath, $interfaceId);
 
         $this->pushExpression($interfaceId);
         $this->processSemicolon();
 
         $this->toggleContext(self::CONTEXT_INTERFACE);
+        array_pop($this->currentClassTrait);
 
         return $interfaceId;
     }
@@ -1548,7 +1554,9 @@ class Load extends Tasks {
     private function processTypehint() {
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_ARRAY, \Exakat\Tasks\T_CALLABLE, \Exakat\Tasks\T_STATIC))) {
             $id = $this->processNextAsIdentifier();
-            $this->setAtom($id, array('fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ,
+            list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
+            $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased,
                                       'variadic'   => self::NOT_VARIADIC));
             return $id;
         } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR, \Exakat\Tasks\T_STRING, \Exakat\Tasks\T_NAMESPACE))) {
@@ -1556,7 +1564,6 @@ class Load extends Tasks {
             if (in_array(strtolower($this->tokens[$this->id][1]), array('int', 'bool', 'void', 'float', 'string'))) {
                 $this->setAtom($id, array('fullnspath' => '\\'.strtolower($this->tokens[$this->id][1]) ));
             } else {
-                $this->addCall('class', $this->atoms[$id]['fullnspath'], $id);
                 if ($this->atoms[$id]['aliased'] === self::ALIASED) {
                     $this->addLink($this->usesId['class'][strtolower($this->atoms[$id]['code'])], $id, 'DEFINITION');
                 }
@@ -1719,7 +1726,7 @@ class Load extends Tasks {
                                   'variadic'   => self::NOT_VARIADIC,
                                   'absolute'   => false));
         if ($getFullnspath === true) {
-            list($fullnspath, $aliased) = $this->getFullnspath($id);
+            list($fullnspath, $aliased) = $this->getFullnspath($id, 'class');
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => $aliased));
         }
@@ -1946,10 +1953,11 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF    ) {
             $id = $this->processSingle('Identifier');
-            list($fullnspath, $aliased) = $this->getFullnspath($id);
+            list($fullnspath, $aliased) = $this->getFullnspath($id, 'class');
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => self::NOT_ALIASED,
                                       'variadic'   => self::NOT_VARIADIC));
+//            $this->addCall('class', $fullnspath, $id);
             
             return $id;
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
@@ -3218,8 +3226,6 @@ class Load extends Tasks {
             list($fullnspath, $aliased) = $this->getFullnspath($id, $type);
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => $aliased));
-
-            $this->addCall($type, $fullnspath, $id);
             return $id;
         } else {
             return $id;
@@ -3706,9 +3712,9 @@ class Load extends Tasks {
         $current = $this->id;
 
         $leftId = $this->popExpression();
-        list($fullnspath, $aliased) = $this->getFullnspath($leftId, 'class');
-        $this->setAtom($leftId, array('fullnspath' => $fullnspath,
-                                      'aliased'    => $aliased));
+//        list($fullnspath, $aliased) = $this->getFullnspath($leftId, 'class');
+//        $this->setAtom($leftId, array('fullnspath' => $fullnspath,
+//                                      'aliased'    => $aliased));
 //        $this->addCall('class', $this->atoms[$leftId]['fullnspath'], $leftId);
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
@@ -4032,13 +4038,13 @@ class Load extends Tasks {
         $right = $this->popExpression();
 
         $this->addLink($instanceId, $right, 'CLASS');
-        list($fullnspath, $aliased) = $this->getFullnspath($right, 'class');
-        $this->setAtom($right, array('fullnspath' => $fullnspath,
-                                     'aliased'    => $aliased));
-        $this->addCall('class', $this->atoms[$right]['fullnspath'], $right);
-        if ($aliased === self::ALIASED) {
-            $this->addLink($this->usesId['class'][strtolower($this->atoms[$right]['code'])], $right, 'DEFINITION');
-        }
+//        list($fullnspath, $aliased) = $this->getFullnspath($right, 'class');
+//        $this->setAtom($right, array('fullnspath' => $fullnspath,
+//                                     'aliased'    => $aliased));
+//        $this->addCall('class', $this->atoms[$right]['fullnspath'], $right);
+//        if ($aliased === self::ALIASED) {
+//            $this->addLink($this->usesId['class'][strtolower($this->atoms[$right]['code'])], $right, 'DEFINITION');
+//        }
 
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => $this->atoms[$left]['fullcode'].' '.$this->tokens[$current][1].' '.$this->atoms[$right]['fullcode'],
@@ -4393,6 +4399,7 @@ class Load extends Tasks {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
+                    $this->addCall('class', $this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath'], $nameId);
                     return array($this->atoms[$this->currentClassTrait[count($this->currentClassTrait) - 1]]['fullnspath'], self::NOT_ALIASED);
                 }
 
@@ -4400,12 +4407,14 @@ class Load extends Tasks {
                 if (empty($this->currentParentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
+                    $this->addCall('class', $this->atoms[$this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]]['fullnspath'], $nameId);
                     return array($this->atoms[$this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]]['fullnspath'], self::NOT_ALIASED);
                 }
 
             // This is a normal identifier
             } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
-                $this->addLink($this->usesId['class'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
+                $this->addCall('class', $this->usesId['class'][strtolower($this->atoms[$nameId]['code'])], $nameId);
+//                $this->addLink(, 'DEFINITION');
                 return array($this->uses['class'][strtolower($this->atoms[$nameId]['code'])], self::ALIASED);
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
                 $this->addLink($this->usesId['const'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
