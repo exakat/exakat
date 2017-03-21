@@ -1526,6 +1526,7 @@ class Load extends Tasks {
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
             $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
                                             'aliased'    => $aliased));
+            $this->addCall('class', $fullnspath, $nsnameId);
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE ||
             (isset($this->tokens[$current - 2]) && $this->tokens[$current - 2][0] === \Exakat\Tasks\T_INSTANCEOF)
             ) {
@@ -1912,6 +1913,15 @@ class Load extends Tasks {
 
         $this->pushExpression($id);
 
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
+            $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF    ) {
+
+            list($fullnspath, $aliased) = $this->getFullnspath($id, 'class');
+            $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                      'aliased'    => $aliased));
+            $this->addCall('class', $fullnspath, $id);
+        }
+
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
@@ -1957,7 +1967,6 @@ class Load extends Tasks {
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => self::NOT_ALIASED,
                                       'variadic'   => self::NOT_VARIADIC));
-//            $this->addCall('class', $fullnspath, $id);
             
             return $id;
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
