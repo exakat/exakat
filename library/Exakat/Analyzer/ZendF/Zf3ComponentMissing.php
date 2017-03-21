@@ -26,6 +26,14 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\ZendF3;
 
 class Zf3ComponentMissing extends Analyzer {
+    // MVC are only default values for tests. 
+    protected $component = 'zend-mvc';
+    protected $version = '2.5';
+    
+    public function dependsOn() {
+        return array('ZendF/Zf3Mvc25');
+    }
+    
     public function analyze() {
         $analyzer = $this->dependsOn();
         $analyzer = $analyzer[0];
