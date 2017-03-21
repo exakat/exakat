@@ -27,16 +27,21 @@ use Exakat\Analyzer\Analyzer;
 class ClassFunctionConfusion extends Analyzer {
     public function analyze() {
         $functions = $this->query('g.V().hasLabel("Function")
-                                        .not( where( __.in("ELEMENT").in("BLOCK").not(hasLabel("Class", "Interface", "Trait"))) )
-                                        .out("NAME").not(hasLabel()).values("fullnspath").unique()');
+                                        .not( __.where( __.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface", "Trait") ) )
+                                        .not( __.where( __.out("NAME").hasLabel("Void") ) )
+                                        .values("fullnspath").unique()');
 
         $classes = $this->query('g.V().hasLabel("Class")
-                                        .where( __.out("NAME").not(hasLabel("Void")) )
-                                        .out("NAME").values("fullnspath").unique()');
+                                        .not( __.where( __.out("NAME").hasLabel("Void") ) )
+                                        .values("fullnspath").unique()');
 
         $common = array_intersect($functions, $classes);
 
+        if (empty($common)) {
+            return;
+        }
         $this->atomIs('Class')
+             ->hasName()
              ->fullnspathIs($common);
         $this->prepareQuery();
 
