@@ -44,6 +44,7 @@ class FetchOneRowFormat extends Analyzer {
              ->codeIs('fetchRow')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
+             ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs('\\sqlite3_both')
              ->back('first');
         $this->prepareQuery();

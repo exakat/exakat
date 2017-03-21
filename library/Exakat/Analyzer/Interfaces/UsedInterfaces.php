@@ -37,8 +37,7 @@ class UsedInterfaces extends Analyzer {
         if (!empty($all)) {
             $all = array_keys(array_count_values($all));
             $this->atomIs('Interface')
-                 ->fullnspathIs($all)
-                 ;
+                 ->fullnspathIs($all);
             $this->prepareQuery();
         }
     }
