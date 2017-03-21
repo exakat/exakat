@@ -1171,7 +1171,7 @@ class Load extends Tasks {
         list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'class');
         $this->setAtom($interfaceId, array('fullnspath' => $fullnspath,
                                            'aliased'    => $aliased));
-        $this->addDefinition('class', $this->atoms[$interfaceId]['fullnspath'], $interfaceId);
+        $this->addDefinition('class', $fullnspath, $interfaceId);
 
         // Process extends
         $rank = 0;
@@ -1199,9 +1199,7 @@ class Load extends Tasks {
         $this->setAtom($interfaceId, array('code'       => $this->tokens[$current][1],
                                            'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].(isset($extendsId) ? ' '.$this->tokens[$extends][1].' '.implode(', ', $fullcode) : '').static::FULLCODE_BLOCK,
                                            'line'       => $this->tokens[$current][2],
-                                           'token'      => $this->getToken($this->tokens[$current][0]),
-                                           'fullnspath' => $fullnspath,
-                                           'aliased'    => $aliased));
+                                           'token'      => $this->getToken($this->tokens[$current][0])));
 
         $this->pushExpression($interfaceId);
         $this->processSemicolon();
@@ -1537,9 +1535,13 @@ class Load extends Tasks {
                                             'aliased'    => $aliased));
 
             $this->addCall('class', $fullnspath, $nsnameId);
-        } elseif ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
-                  $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS ||
-                  $this->isContext(self::CONTEXT_NEW)) {
+        } elseif ($this->isContext(self::CONTEXT_NEW)) {
+            list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
+            $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
+                                            'aliased'    => $aliased));
+
+            $this->addCall('class', $fullnspath, $nsnameId);
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             // DO nothing
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'const');
