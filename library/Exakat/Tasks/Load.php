@@ -1555,7 +1555,7 @@ class Load extends Tasks {
     private function processTypehint() {
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_ARRAY, \Exakat\Tasks\T_CALLABLE, \Exakat\Tasks\T_STATIC))) {
             $id = $this->processNextAsIdentifier();
-            list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
+            list($fullnspath, $aliased) = $this->getFullnspath($id, 'class');
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => $aliased,
                                       'variadic'   => self::NOT_VARIADIC));
