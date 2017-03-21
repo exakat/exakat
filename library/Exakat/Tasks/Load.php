@@ -1522,7 +1522,9 @@ class Load extends Tasks {
         $this->setAtom($nsnameId, $x);
         // Review this : most nsname will end up as constants!
 
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON) {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
+            $this->tokens[$this->id - 2][0] === \Exakat\Tasks\T_INSTANCEOF) {
+
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
             $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
                                             'aliased'    => $aliased));
