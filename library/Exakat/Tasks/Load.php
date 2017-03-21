@@ -698,6 +698,8 @@ class Load extends Tasks {
             $this->setAtom($sequenceId, array('root' => true));
             $this->checkTokens($filename);
         } catch (LoadError $e) {
+//            print $e->getMessage();
+//            print_r($this->atoms[$this->expressions[0]]);
             $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
             $this->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
@@ -720,8 +722,12 @@ class Load extends Tasks {
             throw new LoadError('Processing error');
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
-
-        return $this->$method();
+        
+//        print "  $method in\n";
+        $id = $this->$method();
+//        print "  $method out ($id)\n";
+        
+        return $id;
     }
     
     private function processColon() {
@@ -1330,6 +1336,7 @@ class Load extends Tasks {
             --$n;
         }
 
+
         while ($this->id < $n) {
             if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_OPEN_TAG_WITH_ECHO) {
                 --$this->id;
@@ -1871,10 +1878,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncallId);
 
-        if ( $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG &&
-             $this->tokens[$current - 2][0] !== \Exakat\Tasks\T_OBJECT_OPERATOR &&
-             $this->tokens[$current - 2][0] !== \Exakat\Tasks\T_DOUBLE_COLON
-             ) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         } else {
             $functioncallId = $this->processFCOA($functioncallId);
@@ -1928,9 +1932,14 @@ class Load extends Tasks {
             if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
             }
+            
+            return $plusplusId;
         } else {
             // preplusplus
             $this->processSingleOperator('Preplusplus', $this->precedence->get($this->tokens[$this->id][0]), 'PREPLUSPLUS');
+            $operatorId = $this->popExpression();
+            $this->pushExpression($operatorId);
+            return $operatorId;
         }
     }
 
@@ -2687,9 +2696,11 @@ class Load extends Tasks {
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
+        } else {
+            $parentheseId = $this->processFCOA($parentheseId);
         }
 
-        return $this->processFCOA($parentheseId);
+        return $parentheseId;
     }
 
     private function makeFunctioncall($nameTokenId, $argumentsId = 0) {
@@ -3264,7 +3275,7 @@ class Load extends Tasks {
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
-
+        
         return $id;
     }
 
@@ -3307,7 +3318,7 @@ class Load extends Tasks {
             $id = $this->processFCOA($id);
         }
         
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
 
@@ -3351,7 +3362,10 @@ class Load extends Tasks {
     }
 
     private function processCast() {
-        return $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
+        $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
+        $operatorId = $this->popExpression();
+        $this->pushExpression($operatorId);
+        return $operatorId;
     }
 
     private function processReturn() {
@@ -3377,12 +3391,18 @@ class Load extends Tasks {
 
             return $returnId;
         } else {
-            return $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
+            $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
+            $operatorId = $this->popExpression();
+            $this->pushExpression($operatorId);
+            return $operatorId;
         }
     }
 
     private function processThrow() {
-        return $this->processSingleOperator('Throw', $this->precedence->get($this->tokens[$this->id][0]), 'THROW', ' ');
+        $this->processSingleOperator('Throw', $this->precedence->get($this->tokens[$this->id][0]), 'THROW', ' ');
+        $operatorId = $this->popExpression();
+        $this->pushExpression($operatorId);
+        return $operatorId;
     }
 
     private function processYield() {
@@ -3405,16 +3425,25 @@ class Load extends Tasks {
 
             return $returnId;
         } else {
-            return $this->processSingleOperator('Yield', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
+            $this->processSingleOperator('Yield', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
+            $operatorId = $this->popExpression();
+            $this->pushExpression($operatorId);
+            return $operatorId;
         }
     }
 
     private function processYieldfrom() {
-        return $this->processSingleOperator('Yieldfrom', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
+        $this->processSingleOperator('Yieldfrom', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
+        $operatorId = $this->popExpression();
+        $this->pushExpression($operatorId);
+        return $operatorId;
     }
 
     private function processNot() {
-        return $this->processSingleOperator('Not', $this->precedence->get($this->tokens[$this->id][0]), 'NOT');
+        $this->processSingleOperator('Not', $this->precedence->get($this->tokens[$this->id][0]), 'NOT');
+        $operatorId = $this->popExpression();
+        $this->pushExpression($operatorId);
+        return $operatorId;
     }
 
     private function processCurlyExpression() {
@@ -3485,15 +3514,24 @@ class Load extends Tasks {
     }
 
     private function processClone() {
-        return $this->processSingleOperator('Clone', $this->precedence->get($this->tokens[$this->id][0]), 'CLONE', ' ' );
+        $this->processSingleOperator('Clone', $this->precedence->get($this->tokens[$this->id][0]), 'CLONE', ' ' );
+        $operatorId = $this->popExpression();
+        $this->pushExpression($operatorId);
+        return $operatorId;
     }
 
     private function processGoto() {
-        return $this->processSingleOperator('Goto', $this->precedence->get($this->tokens[$this->id][0]), 'GOTO');
+        $this->processSingleOperator('Goto', $this->precedence->get($this->tokens[$this->id][0]), 'GOTO');
+        $operatorId = $this->popExpression();
+        $this->pushExpression($operatorId);
+        return $operatorId;
     }
 
     private function processNoscream() {
-        return $this->processSingleOperator('Noscream', $this->precedence->get($this->tokens[$this->id][0]), 'AT');
+        $this->processSingleOperator('Noscream', $this->precedence->get($this->tokens[$this->id][0]), 'AT');
+        $operatorId = $this->popExpression();
+        $this->pushExpression($operatorId);
+        return $operatorId;
     }
 
     private function processNew() {
@@ -3506,7 +3544,9 @@ class Load extends Tasks {
 
         $this->toggleContext(self::CONTEXT_NEW);
 
-        return $id;
+        $operatorId = $this->popExpression();
+        $this->pushExpression($operatorId);
+        return $operatorId;
     }
 
     //////////////////////////////////////////////////////
@@ -3521,53 +3561,44 @@ class Load extends Tasks {
             $code *= $this->tokens[$this->id][1].'1';
         }
 
-        // -3 ** 3 => -(3 ** 3)
-        if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER || $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
-            $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
-            $operandId = $this->processNext();
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
+        do {
+            $this->processNext();
+        } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
+        $signedId = $this->popExpression();
 
-            $x = array('code'     => $sign.$this->atoms[$operandId]['code'],
-                       'fullcode' => $sign.$this->atoms[$operandId]['fullcode'],
+        for($i = strlen($sign) - 1; $i >= 0; --$i) {
+            $signId = $this->addAtom('Sign');
+            $this->addLink($signId, $signedId, 'SIGN');
+
+            $x = array('code'     => $sign[$i] ,
+                       'fullcode' => $sign[$i].$this->atoms[$signedId]['fullcode'],
                        'line'     => $this->tokens[$this->id][2],
                        'token'    => $this->getToken($this->tokens[$this->id][0]));
-            $this->setAtom($operandId, $x);
+            $this->setAtom($signId, $x);
 
-            return $operandId;
-        } else {
-            $finals = $this->precedence->get($this->tokens[$this->id][0]);
-            // process the actual load
-            $this->nestContext();
-            do {
-                $this->processNext();
-            } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
-            $this->exitContext();
-
-            $signedId = $this->popExpression();
-
-            for($i = strlen($sign) - 1; $i >= 0; --$i) {
-                $signId = $this->addAtom('Sign');
-                $this->addLink($signId, $signedId, 'SIGN');
-
-                $x = array('code'     => $sign[$i] ,
-                           'fullcode' => $sign[$i].$this->atoms[$signedId]['fullcode'],
-                           'line'     => $this->tokens[$this->id][2],
-                           'token'    => $this->getToken($this->tokens[$this->id][0]));
-                $this->setAtom($signId, $x);
-
-                $signedId = $signId;
-            }
-
-            $this->pushExpression($signId);
-
-            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
-                $this->processSemicolon();
-            }
-            return $signId;
+            $signedId = $signId;
         }
+
+        $this->pushExpression($signedId);
+
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+
+        return $signedId;
     }
 
     private function processAddition() {
-        if (!$this->hasExpression()) {
+        if (!$this->hasExpression() ||
+            $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_DOT) {
             return $this->processSign();
         }
         $left = $this->popExpression();
@@ -3727,17 +3758,23 @@ class Load extends Tasks {
         $this->addLink($additionId, $left, $links[0]);
 
         $this->nestContext();
-        $finals = array_merge(array(), $finals);
+        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
         do {
-            $this->processNext();
+            $right = $this->processNext();
 
             if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_EQUAL, \Exakat\Tasks\T_PLUS_EQUAL, \Exakat\Tasks\T_AND_EQUAL, \Exakat\Tasks\T_CONCAT_EQUAL, \Exakat\Tasks\T_DIV_EQUAL, \Exakat\Tasks\T_MINUS_EQUAL, \Exakat\Tasks\T_MOD_EQUAL, \Exakat\Tasks\T_MUL_EQUAL, \Exakat\Tasks\T_OR_EQUAL, \Exakat\Tasks\T_POW_EQUAL, \Exakat\Tasks\T_SL_EQUAL, \Exakat\Tasks\T_SR_EQUAL, \Exakat\Tasks\T_XOR_EQUAL))) {
-                $this->processNext();
+                $right = $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals) );
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
         $this->exitContext();
 
-        $right = $this->popExpression();
+        $this->popExpression();
 
         $this->addLink($additionId, $right, $links[1]);
 
@@ -3820,15 +3857,13 @@ class Load extends Tasks {
     private function processAssignation() {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals = array_merge($finals, array(\Exakat\Tasks\T_EQUAL, \Exakat\Tasks\T_PLUS_EQUAL, \Exakat\Tasks\T_AND_EQUAL, \Exakat\Tasks\T_CONCAT_EQUAL, \Exakat\Tasks\T_DIV_EQUAL, \Exakat\Tasks\T_MINUS_EQUAL, \Exakat\Tasks\T_MOD_EQUAL, \Exakat\Tasks\T_MUL_EQUAL, \Exakat\Tasks\T_OR_EQUAL, \Exakat\Tasks\T_POW_EQUAL, \Exakat\Tasks\T_SL_EQUAL, \Exakat\Tasks\T_SR_EQUAL, \Exakat\Tasks\T_XOR_EQUAL));
-        $this->processOperator('Assignation', $finals);
-
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
-            $this->processSemicolon();
-        }
+        $id = $this->processOperator('Assignation', $finals);
+        
+        return $id;
     }
 
     private function processCoalesce() {
-        $this->processOperator('Coalesce', $this->precedence->get($this->tokens[$this->id][0]));
+        return $this->processOperator('Coalesce', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processEllipsis() {
@@ -3869,19 +3904,19 @@ class Load extends Tasks {
     }
 
     private function processLogical() {
-        $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
+        return $this->processOperator('Logical', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processMultiplication() {
-        $this->processOperator('Multiplication', $this->precedence->get($this->tokens[$this->id][0]));
+        return $this->processOperator('Multiplication', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processPower() {
-        $this->processOperator('Power', $this->precedence->get($this->tokens[$this->id][0]));
+        return $this->processOperator('Power', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processComparison() {
-        $this->processOperator('Comparison', $this->precedence->get($this->tokens[$this->id][0]));
+        return $this->processOperator('Comparison', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processDot() {
@@ -3905,11 +3940,21 @@ class Load extends Tasks {
         unset($finals[$id]);
         $id = array_search(\Exakat\Tasks\T_INCLUDE_ONCE, $finals);
         unset($finals[$id]);
-        while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
-            $this->processNext();
+        $id = array_search(\Exakat\Tasks\T_PLUS, $finals);
+        unset($finals[$id]);
+        $id = array_search(\Exakat\Tasks\T_MINUS, $finals);
+        unset($finals[$id]);
 
+        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
+
+        while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+            $containsId = $this->processNext();
+            
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOT) {
-                $containsId = $this->popExpression();
+                $this->popExpression();
                 $this->addLink($concatenationId, $containsId, 'CONCAT');
                 $fullcode[] = $this->atoms[$containsId]['fullcode'];
                 $this->setAtom($containsId, array('rank' => ++$rank));
@@ -3917,12 +3962,15 @@ class Load extends Tasks {
                 ++$this->id;
             }
         }
-        $this->exitContext();
 
-        $containsId = $this->popExpression();
+        $this->popExpression();
         $this->addLink($concatenationId, $containsId, 'CONCAT');
         $this->setAtom($containsId, array('rank' => ++$rank));
         $fullcode[] = $this->atoms[$containsId]['fullcode'];
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
+        $this->exitContext();
 
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => implode(' . ', $fullcode),
@@ -3977,7 +4025,7 @@ class Load extends Tasks {
     }
 
     private function processBitshift() {
-        $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
+        return $this->processOperator('Bitshift', $this->precedence->get($this->tokens[$this->id][0]));
     }
 
     private function processEcho() {
@@ -4272,6 +4320,7 @@ class Load extends Tasks {
     }
 
     private function addToSequence($id) {
+        print __METHOD__."\n";
         $this->addLink($this->sequence, $id, 'ELEMENT');
         $this->setAtom($id, array('rank' => ++$this->sequenceRank[$this->sequenceCurrentRank]));
     }
