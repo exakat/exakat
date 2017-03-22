@@ -8,6 +8,7 @@ $expected     = array(//'$a1',
                       '\'a\' . $a4',
                       'foreach($a7 as $b => $c) { /**/ } ',);
 
-$expected_not = array('$a2');
+$expected_not = array('$a2',
+                      '$b2');
 
 ?>

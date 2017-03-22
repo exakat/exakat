@@ -1,11 +1,12 @@
 <?php
 
-$expected     = array('$b instanceof noCIT');
+$expected     = array('$b instanceof noCIT',
+                      '$b instanceof TE',);
 
 $expected_not = array('$b instanceof A',
                       '$b instanceof B',
                       '$b instanceof C',
-                      '$b instanceof D',
-                      '$b instanceof TE');
+                      '$b instanceof Di',
+                      '$b instanceof Dc');
 
 ?>

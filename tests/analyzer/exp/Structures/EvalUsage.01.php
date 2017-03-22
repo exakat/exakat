@@ -6,6 +6,6 @@ $expected     = array('eval(\'$y = 4;\')',
                       'create_function(\'$y\', \'$y = 2;\')',
 );
 
-$expected_not = array();
+$expected_not = array('create_function(\'$z\', \'$y = 6;\')');
 
 ?>

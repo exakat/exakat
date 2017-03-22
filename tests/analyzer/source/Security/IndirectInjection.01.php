@@ -13,7 +13,7 @@ $a2 = $_POST;
 shell_exec('a'.$a2);
 
 $b2 = $_POST;
-safeFunction('a'.$b2);
+safeFunction($b2);
 
 $a3 = $_COOKIE['a'];
 shell_exec('a'.$a3);

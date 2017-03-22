@@ -2,7 +2,7 @@
 
 $expected     = array('Mail_mimeDecode', 
                       'Structures_Form_Gtk2', 
-                      'Structures_Graph', 
+                      'Structures_Graph as CUCUMBER', 
                       'NET_Url',
                       'HTML_Common',
                       );
