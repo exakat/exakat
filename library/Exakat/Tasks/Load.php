@@ -1938,7 +1938,6 @@ class Load extends Tasks {
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF   ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NEW
             ) {
-
             list($fullnspath, $aliased) = $this->getFullnspath($id, 'class');
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => $aliased));
@@ -3268,6 +3267,8 @@ class Load extends Tasks {
                     $this->addCall('const', $fullnspath, $id);
             }
             return $this->processBracket();
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON) {
+            return $id;
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
             return $id;
         } elseif (in_array($this->atoms[$id]['atom'], array('Nsname', 'Identifier'))) {
@@ -3780,10 +3781,6 @@ class Load extends Tasks {
         $current = $this->id;
 
         $leftId = $this->popExpression();
-//        list($fullnspath, $aliased) = $this->getFullnspath($leftId, 'class');
-//        $this->setAtom($leftId, array('fullnspath' => $fullnspath,
-//                                      'aliased'    => $aliased));
-//        $this->addCall('class', $this->atoms[$leftId]['fullnspath'], $leftId);
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals[] = \Exakat\Tasks\T_DOUBLE_COLON;
@@ -4099,7 +4096,15 @@ class Load extends Tasks {
         $this->addLink($instanceId, $left, 'VARIABLE');
 
         $right = $this->processOneNsname();
-        
+        list($fullnspath, $aliased) = $this->getFullnspath($right, 'class');
+        $this->setAtom($right, array('fullnspath' => $fullnspath,
+                                     'aliased'    => $aliased));
+        $this->addCall('class', $fullnspath, $right);
+
+        if ($aliased === self::ALIASED) {
+            $this->addLink($this->usesId['class'][strtolower($this->atoms[$right]['code'])], $right, 'DEFINITION');
+        }
+
         $this->addLink($instanceId, $right, 'CLASS');
 
         $x = array('code'     => $this->tokens[$current][1],
@@ -4476,14 +4481,15 @@ class Load extends Tasks {
             
                 $this->addLink($this->usesId['const'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
                 return array($this->uses['const'][strtolower($this->atoms[$nameId]['code'])], self::ALIASED);
-            } elseif ($type === 'const' && isset($this->calls['const']['\\'.strtolower($this->atoms[$nameId]['code'])]['definitions'])) {
+            } elseif ($type === 'const' && !empty($this->calls['const']['\\'.strtolower($this->atoms[$nameId]['code'])]['definitions'])) {
                 // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
                 return array('\\'.strtolower($this->atoms[$nameId]['code']), self::NOT_ALIASED);
             } elseif ($type === 'function' && isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
 
                 $this->addLink($this->usesId['function'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
                 return array($this->uses['function'][strtolower($this->atoms[$nameId]['code'])], self::ALIASED);
-            } elseif ($type === 'function' && isset($this->calls['function']['\\'.strtolower($this->atoms[$nameId]['code'])]['definitions'])) {
+            } elseif ($type === 'function' && !empty($this->calls['function']['\\'.strtolower($this->atoms[$nameId]['code'])]['definitions'])) {
+
                 // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
                 return array('\\'.strtolower($this->atoms[$nameId]['code']), self::NOT_ALIASED);
             } else {
