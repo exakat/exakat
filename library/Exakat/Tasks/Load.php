@@ -1433,7 +1433,14 @@ class Load extends Tasks {
         $echoId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $current = $this->id;
 
+        $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
         $argumentsId = $this->processArguments(array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_END));
+        if ($noSequence === false) {
+            $this->toggleContext(self::CONTEXT_NOSEQUENCE);
+        }
 
         //processArguments goes too far, up to ;
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CLOSE_TAG) {
