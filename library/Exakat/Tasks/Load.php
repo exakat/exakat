@@ -1881,8 +1881,9 @@ class Load extends Tasks {
             list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'function');
             $this->setAtom($functioncallId, array('fullnspath' => $fullnspath,
                                                   'aliased'    => $aliased));
+
             // Probably weak check, since we haven't built fullnspath for functions yet...
-            if ($fullnspath === '\\define') {
+            if (strtolower($this->atoms[$nameId]['code']) === 'define') {
                 $this->processDefineAsConstants($argumentsId);
             }
 
@@ -4468,15 +4469,23 @@ class Load extends Tasks {
 
             // This is a normal identifier
             } elseif ($type === 'class' && isset($this->uses['class'][strtolower($this->atoms[$nameId]['code'])])) {
+
                 $this->addCall('class', $this->usesId['class'][strtolower($this->atoms[$nameId]['code'])], $nameId);
-//                $this->addLink(, 'DEFINITION');
                 return array($this->uses['class'][strtolower($this->atoms[$nameId]['code'])], self::ALIASED);
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($this->atoms[$nameId]['code'])])) {
+            
                 $this->addLink($this->usesId['const'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
                 return array($this->uses['const'][strtolower($this->atoms[$nameId]['code'])], self::ALIASED);
+            } elseif ($type === 'const' && isset($this->calls['const']['\\'.strtolower($this->atoms[$nameId]['code'])]['definitions'])) {
+                // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
+                return array('\\'.strtolower($this->atoms[$nameId]['code']), self::NOT_ALIASED);
             } elseif ($type === 'function' && isset($this->uses['function'][strtolower($this->atoms[$nameId]['code'])])) {
+
                 $this->addLink($this->usesId['function'][strtolower($this->atoms[$nameId]['code'])], $nameId, 'DEFINITION');
                 return array($this->uses['function'][strtolower($this->atoms[$nameId]['code'])], self::ALIASED);
+            } elseif ($type === 'function' && isset($this->calls['function']['\\'.strtolower($this->atoms[$nameId]['code'])]['definitions'])) {
+                // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
+                return array('\\'.strtolower($this->atoms[$nameId]['code']), self::NOT_ALIASED);
             } else {
                 return array($this->namespace.strtolower($this->atoms[$nameId]['fullcode']), self::NOT_ALIASED);
             }
