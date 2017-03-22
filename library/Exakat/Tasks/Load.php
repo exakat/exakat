@@ -123,14 +123,12 @@ class Load extends Tasks {
     const CONTEXT_FUNCTION     = 4;
     const CONTEXT_NEW          = 5;
     const CONTEXT_NOSEQUENCE   = 6;
-    const CONTEXT_NOFULLNSPATH = 7;
     private $contexts = array(self::CONTEXT_CLASS        => false,
                               self::CONTEXT_INTERFACE    => false,
                               self::CONTEXT_TRAIT        => false,
                               self::CONTEXT_FUNCTION     => false,
                               self::CONTEXT_NEW          => false,
-                              self::CONTEXT_NOSEQUENCE   => 0,
-                              self::CONTEXT_NOFULLNSPATH => false,
+                              self::CONTEXT_NOSEQUENCE   => 0
                          );
 
     private $optionsTokens = array();
@@ -594,9 +592,7 @@ class Load extends Tasks {
                                 self::CONTEXT_TRAIT        => false,
                                 self::CONTEXT_FUNCTION     => false,
                                 self::CONTEXT_NEW          => false,
-                                self::CONTEXT_NOSEQUENCE   => 0,
-                                self::CONTEXT_NOFULLNSPATH => false,
-                         );
+                                self::CONTEXT_NOSEQUENCE   => 0                         );
         $this->expressions = array();
     }
 
@@ -1861,7 +1857,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processFunctioncall() {
+    private function processFunctioncall($getFullnspath = self::WITH_FULLNSPATH) {
         $nameId = $this->popExpression();
         ++$this->id; // Skipping the name, set on (
         $current = $this->id;
@@ -1875,7 +1871,7 @@ class Load extends Tasks {
                                                   'aliased'    => $aliased
                                                   ));
             $this->addCall('class', $fullnspath, $functioncallId);
-        } elseif ($this->isContext(self::CONTEXT_NOFULLNSPATH)) {
+        } elseif ($getFullnspath === self::WITHOUT_FULLNSPATH) {
             // Nothing
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($nameId, 'function');
@@ -3806,9 +3802,7 @@ class Load extends Tasks {
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
                 $this->pushExpression($right);
-                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
-                $right = $this->processFunctioncall();
-                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
+                $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
                 $this->popExpression();
             }
         }
@@ -3914,9 +3908,7 @@ class Load extends Tasks {
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
                 $this->pushExpression($right);
-                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
-                $right = $this->processFunctioncall();
-                $this->toggleContext(self::CONTEXT_NOFULLNSPATH);
+                $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
                 $this->popExpression();
             }
         }
