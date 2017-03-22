@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class UndefinedConstants extends Analyzer {
     public function dependsOn() {
         return array('Constants/ConstantUsage',
-                     'Constants/IsExtConstant');
+                     'Constants/IsExtConstant',
+                     'Constants/CustomConstantUsage');
     }
     
     public function analyze() {
