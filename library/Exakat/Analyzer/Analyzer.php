@@ -1833,7 +1833,8 @@ GREMLIN;
     }
 
     private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
-        if (empty($code)) {
+        if ( $code === '' || 
+            (is_array($code) && empty($code))) {
             return $this;
         }
 
