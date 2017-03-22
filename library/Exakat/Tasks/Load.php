@@ -3466,6 +3466,11 @@ class Load extends Tasks {
         $this->processSingleOperator('Yieldfrom', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
+
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+
         return $operatorId;
     }
 
@@ -3473,6 +3478,11 @@ class Load extends Tasks {
         $this->processSingleOperator('Not', $this->precedence->get($this->tokens[$this->id][0]), 'NOT');
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
+
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+
         return $operatorId;
     }
 
