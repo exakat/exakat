@@ -3451,8 +3451,7 @@ class Load extends Tasks {
                        'line'     => $this->tokens[$current][2],
                        'token'    => $this->getToken($this->tokens[$current][0]));
             $this->setAtom($returnId, $x);
-
-            $this->addToSequence($returnId);
+            $this->pushExpression($returnId);
 
             return $returnId;
         } else {
@@ -3562,6 +3561,11 @@ class Load extends Tasks {
         $this->processSingleOperator('Noscream', $this->precedence->get($this->tokens[$this->id][0]), 'AT');
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
+
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        }
+
         return $operatorId;
     }
 
@@ -4064,13 +4068,6 @@ class Load extends Tasks {
         $right = $this->popExpression();
 
         $this->addLink($instanceId, $right, 'CLASS');
-//        list($fullnspath, $aliased) = $this->getFullnspath($right, 'class');
-//        $this->setAtom($right, array('fullnspath' => $fullnspath,
-//                                     'aliased'    => $aliased));
-//        $this->addCall('class', $this->atoms[$right]['fullnspath'], $right);
-//        if ($aliased === self::ALIASED) {
-//            $this->addLink($this->usesId['class'][strtolower($this->atoms[$right]['code'])], $right, 'DEFINITION');
-//        }
 
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => $this->atoms[$left]['fullcode'].' '.$this->tokens[$current][1].' '.$this->atoms[$right]['fullcode'],
@@ -4192,7 +4189,7 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncallId);
 
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
         }
         
