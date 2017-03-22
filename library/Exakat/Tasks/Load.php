@@ -1902,7 +1902,8 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncallId);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG 
+             && $getFullnspath === self::WITH_FULLNSPATH) {
             $this->processSemicolon();
         } else {
             $functioncallId = $this->processFCOA($functioncallId);
@@ -2393,16 +2394,17 @@ class Load extends Tasks {
 
             // This may include WHILE in the list of finals for do....while
             $finals = array_merge(array(\Exakat\Tasks\T_SEMICOLON, \Exakat\Tasks\T_CLOSE_TAG, \Exakat\Tasks\T_ELSE, \Exakat\Tasks\T_END, \Exakat\Tasks\T_CLOSE_CURLY), $finals);
-            $specials = array(\Exakat\Tasks\T_IF, \Exakat\Tasks\T_FOREACH, \Exakat\Tasks\T_SWITCH, \Exakat\Tasks\T_FOR, \Exakat\Tasks\T_TRY, \Exakat\Tasks\T_WHILE, \Exakat\Tasks\T_EXIT);
+            $specials = array(\Exakat\Tasks\T_IF, \Exakat\Tasks\T_FOREACH, \Exakat\Tasks\T_SWITCH, \Exakat\Tasks\T_FOR, \Exakat\Tasks\T_TRY, \Exakat\Tasks\T_WHILE);
+//, \Exakat\Tasks\T_EXIT
             if (in_array($this->tokens[$this->id + 1][0], $specials)) {
                 $this->processNext();
             } else {
                 while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                     $this->processNext();
                 };
+                $expressionId = $this->popExpression();
+                $this->addToSequence($expressionId);
             }
-            $expressionId = $this->popExpression();
-            $this->addToSequence($expressionId);
 
             $this->endSequence();
 
