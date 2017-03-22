@@ -2404,9 +2404,9 @@ class Load extends Tasks {
                 while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                     $this->processNext();
                 };
-                $expressionId = $this->popExpression();
-                $this->addToSequence($expressionId);
             }
+            $expressionId = $this->popExpression();
+            $this->addToSequence($expressionId);
 
             $this->endSequence();
 
