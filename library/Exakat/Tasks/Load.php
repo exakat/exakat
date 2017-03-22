@@ -3250,6 +3250,15 @@ class Load extends Tasks {
             return $this->processAppend();
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET ||
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
+            // Get the fullnspath in case this is a constant
+            if (in_array($this->atoms[$id]['atom'], array('Nsname', 'Identifier'))) {
+                list($fullnspath, $aliased) = $this->getFullnspath($id, 'const');
+
+                $this->setAtom($id, array('fullnspath' => $fullnspath,
+                                          'aliased'    => $aliased));
+
+                    $this->addCall('const', $fullnspath, $id);
+            }
             return $this->processBracket();
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
             return $id;
