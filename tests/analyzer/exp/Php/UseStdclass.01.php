@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('stdClass', 
+$expected     = array('stdClass as Alias', 
                       'alias', 
                       '\stdClass( )');
 

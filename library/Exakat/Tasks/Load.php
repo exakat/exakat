@@ -1537,12 +1537,14 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE ||
             (isset($this->tokens[$current - 2]) && $this->tokens[$current - 2][0] === \Exakat\Tasks\T_INSTANCEOF)
             ) {
+
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
             $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
                                             'aliased'    => $aliased));
 
             $this->addCall('class', $fullnspath, $nsnameId);
         } elseif ($this->isContext(self::CONTEXT_NEW)) {
+
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'class');
             $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
                                             'aliased'    => $aliased));
@@ -1550,6 +1552,7 @@ class Load extends Tasks {
             $this->addCall('class', $fullnspath, $nsnameId);
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             // DO nothing
+
         } else {
             list($fullnspath, $aliased) = $this->getFullnspath($nsnameId, 'const');
             $this->setAtom($nsnameId, array('fullnspath' => $fullnspath,
@@ -1939,6 +1942,10 @@ class Load extends Tasks {
             $this->setAtom($id, array('fullnspath' => $fullnspath,
                                       'aliased'    => $aliased));
             $this->addCall('class', $fullnspath, $id);
+
+            if ($aliased === self::ALIASED) {
+                $this->addLink($this->usesId['class'][strtolower($this->atoms[$id]['code'])], $id, 'DEFINITION');
+            }
         }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -4090,13 +4097,8 @@ class Load extends Tasks {
         $left = $this->popExpression();
         $this->addLink($instanceId, $left, 'VARIABLE');
 
-        $finals = array_merge(array(),  $this->precedence->get($this->tokens[$this->id][0]));
-        do {
-            $this->processNext();
-        } while (!in_array($this->tokens[$this->id + 1][0], $finals));
-
-        $right = $this->popExpression();
-
+        $right = $this->processOneNsname();
+        
         $this->addLink($instanceId, $right, 'CLASS');
 
         $x = array('code'     => $this->tokens[$current][1],
