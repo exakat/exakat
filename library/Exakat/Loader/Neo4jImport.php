@@ -264,7 +264,8 @@ GREMLIN;
                                'bracket'     => 'int',
                                'close_tag'   => 'int',
                                'aliased'     => 'int',
-                               'boolean'     => 'int');
+                               'boolean'     => 'int',
+                               'propertyname'=> '');
 
         $fileName = $exakatDir.'/nodes.g3.csv';
         if (file_exists($fileName)) {

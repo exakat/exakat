@@ -22,6 +22,7 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Docs;
 use Exakat\Config;
 use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Exceptions\LoadError;
@@ -154,6 +155,7 @@ class Load extends Tasks {
     static public $PROP_CLOSETAG    = array('Php');
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
     static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
+    static public $PROP_PROPERTYNAME= array('Variable', 'Assignation');
 
     static public $PROP_OPTIONS = array();
 
@@ -437,6 +439,7 @@ class Load extends Tasks {
                           'close_tag'   => self::$PROP_CLOSETAG,
                           'aliased'     => self::$PROP_ALIASED,
                           'boolean'     => self::$PROP_BOOLEAN,
+                          'propertyname'=> self::$PROP_PROPERTYNAME,
                           );
     }
 
@@ -533,6 +536,7 @@ class Load extends Tasks {
             }
         }
         $this->saveDefinitions();
+//        print_r($this->calls['function']);
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
@@ -2060,6 +2064,11 @@ class Load extends Tasks {
                 $elementId = $this->popExpression();
                 $this->setAtom($elementId, array('rank' => ++$rank));
                 $this->addLink($staticId, $elementId, strtoupper($atom));
+                
+                if ($atom !== 'Global' && $atom !== 'Static') {
+                    preg_match('/^\$([^ ]+)/', $this->atoms[$elementId]['fullcode'], $r);
+                    $this->setAtom($elementId, array('propertyname' => $r[1]));
+                }
 
                 $fullcode[] = $this->atoms[$elementId]['fullcode'];
                 ++$this->id;
@@ -2068,6 +2077,10 @@ class Load extends Tasks {
         $elementId = $this->popExpression();
         $this->addLink($staticId, $elementId, strtoupper($atom));
 
+        if ($atom !== 'Global' && $atom !== 'Static') {
+            preg_match('/^\$([^ ]+)/', $this->atoms[$elementId]['fullcode'], $r);
+            $this->setAtom($elementId, array('propertyname' => $r[1]));
+        }
         $fullcode[] = $this->atoms[$elementId]['fullcode'];
 
         $this->setAtom($staticId, array('code'     => $this->tokens[$current][1],
@@ -3372,12 +3385,10 @@ class Load extends Tasks {
             }
         }
 
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
-            $id = $this->processFCOA($id);
-        }
-        
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
+            $id = $this->processFCOA($id);
         }
 
         return $id;
@@ -4377,6 +4388,7 @@ class Load extends Tasks {
     }
 
     private function fallbackToGlobal($type) {
+        $b = microtime(true);
         foreach($this->calls[$type] as $fnp => &$usage) {
             if (substr_count($fnp, '\\') < 2) {
                 continue;
@@ -4395,6 +4407,7 @@ class Load extends Tasks {
 
             $usage['definitions'] = $this->calls[$type][$globalFnp]['definitions'];
         }
+        $e = microtime(true);
     }
 
     private function startSequence() {
@@ -4590,6 +4603,19 @@ class Load extends Tasks {
     }
 
     private function addNoDelimiterCall($callId) {
+        if (empty($this->atoms[$callId]['noDelimiter'])) {
+            return; // Can't be a class anyway.
+        }
+        if (intval($this->atoms[$callId]['noDelimiter'])) {
+            return; // Can't be a class anyway.
+        }
+        if (strlen($this->atoms[$callId]['noDelimiter']) === 1) {
+            return; 
+        }
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s:=+!`@\-]/is', $this->atoms[$callId]['noDelimiter'])) {
+            return; // Can't be a class anyway.
+        }
+        
         if (strpos($this->atoms[$callId]['noDelimiter'], '::') !== false) {
             $fullnspath = strtolower(substr($this->atoms[$callId]['noDelimiter'], 0, strpos($this->atoms[$callId]['noDelimiter'], '::')) );
 
@@ -4653,7 +4679,6 @@ class Load extends Tasks {
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
     }
-
 }
 
 ?>

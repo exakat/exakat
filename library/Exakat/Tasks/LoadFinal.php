@@ -45,15 +45,15 @@ class LoadFinal extends Tasks {
         $this->init();
 
         $this->makeClassConstantDefinition();
-        $this->setPropertyname();
 
         $this->fallbackToGlobalFunctions();
+
         $this->fallbackToGlobalConstants();
         $this->findPHPNativeConstants();
+        $this->fallbackToGlobalConstants2();
 
         $this->spotPHPNativeFunctions();
 
-        $this->fallbackToGlobalConstants2();
 
         $this->spotConstantExpressions();
 
@@ -89,10 +89,9 @@ class LoadFinal extends Tasks {
 
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
-     .where( __.in("NEW").count().is(eq(0)) )
-     .not(has("token", "T_OPEN_TAG_WITH_ECHO"))
-     .filter{ it.get().value("code").toLowerCase() in arg1 }
+     .has('fullnspath')
      .where( __.in("DEFINITION").count().is(eq(0)) )
+     .filter{ it.get().value("code").toLowerCase() in arg1 }
      .sideEffect{
          fullnspath = "\\\\" + it.get().value("code").toLowerCase();
          it.get().property("fullnspath", fullnspath); 
@@ -206,21 +205,6 @@ GREMLIN;
         $this->logTime('Class::constant definition');
     }
 
-    private function setPropertyname() {
-        // Create propertyname for Property Definitions
-        $query = <<<GREMLIN
-g.V().hasLabel("Ppp", "Var").out("PPP").as("ppp")
-     .coalesce( out("LEFT"), __.filter{ true } )
-     .sideEffect{ propertyname = it.get().value('code').toString().substring(1, it.get().value('code').size()); }
-     .select("ppp")
-     .sideEffect{ it.get().property('propertyname', propertyname); }
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display('set propertyname');
-        $this->logTime('propertyname');
-    }
-
     private function fallbackToGlobalFunctions() {
         // update fullnspath with fallback for functions
         $query = <<<GREMLIN
@@ -290,7 +274,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
-     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
+     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
      .filter{ it.get().value("code").toLowerCase() in arg1 }
      .sideEffect{ 
         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
@@ -314,7 +298,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
-     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME").count().is(eq(0)) )  
+     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
      .filter{ it.get().value("code") in arg1 }
      .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
      .sideEffect{ name = it.get().value("code"); }
