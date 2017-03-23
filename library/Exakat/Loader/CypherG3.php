@@ -102,7 +102,7 @@ class CypherG3 {
                     if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval', 'propertyname'))) {
                         // Raw string
                         $extra[] = "$title: csvLine.$title";
-                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'))) {
+                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant'))) {
                         // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
                     } elseif (in_array($title, array('count', 'intval', 'args_max', 'args_min'))) {
@@ -298,6 +298,8 @@ CYPHER;
             foreach($extras[$atom['atom']] as $e) {
                 if ($e === 'boolean') {
                     $extra[] = isset($atom[$e]) ? '"'.($atom[$e] ? "1" : "").'"' : '""';
+                } elseif ($e === 'constant') {
+                    $extra[] = (isset($atom[$e]) && $atom[$e]) ? '"1"' : '';
                 } elseif ($e === 'fullnspath') {
                     $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '';
                 } elseif ($e === 'propertyname') {
