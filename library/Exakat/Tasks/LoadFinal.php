@@ -54,9 +54,6 @@ class LoadFinal extends Tasks {
 
         $this->spotPHPNativeFunctions();
 
-
-        $this->spotConstantExpressions();
-
         $this->logTime('Final');
     }
 
@@ -313,98 +310,6 @@ GREMLIN;
                                             'arg2' => $constantsDefinitions));
         display('spot constants that falls back on global constants');
         $this->logTime('fallback to global for constants 2');
-    }
-
-    private function spotConstantExpressions() {
-        display('Mark literal expressions as constants');
-        $query = <<<GREMLIN
-g.V().hasLabel("Integer", "Boolean", "Real", "Null", "Void", "Inlinehtml", "Magicconstant", "Staticconstant", "Void")
-     .sideEffect{ it.get().property("constant", true); }
-
-GREMLIN;
-        $this->gremlin->query($query);
-        $this->logTime('Constant expressions');
-
-        $query = <<<GREMLIN
-g.V().hasLabel("String").where( __.out("CONCAT").count().is(eq(0)))
-     .sideEffect{ it.get().property("constant", true); }
-
-GREMLIN;
-        $this->gremlin->query($query);
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier",  "Nsname").not(hasLabel("Functioncall"))
-     .sideEffect{ it.get().property("constant", true); }
-
-GREMLIN;
-        $this->gremlin->query($query);
-
-        $data = new Methods();
-        $deterministFunctions = $data->getDeterministFunctions();
-        $deterministFunctions = array_map(function ($x) { return '\\'.$x;}, $deterministFunctions);
-
-        for ($i =0; $i < 3; ++$i) {
-            // Cases for Structures (all sub element are constante => structure is constante)
-            $structures = array('Addition'         => array('LEFT', 'RIGHT'),
-                            'Multiplication'   => array('LEFT', 'RIGHT'),
-                            'Bitshift'         => array('LEFT', 'RIGHT'),
-                            'Logical'          => array('LEFT', 'RIGHT'),
-                            'Power'            => array('LEFT', 'RIGHT'),
-                            'Keyvalue'         => array('KEY',  'VALUE'),
-                            'Arguments'        => array('ARGUMENT'),
-            //                            'Functioncall'     => array('ARGUMENTS'), // Warning : Some function are not deterministic. Needs to mark them as such (custom or internals...)
-            //                            'Methodcall'       => array('METHOD'),
-            //                            'Staticmethodcall' => array('METHOD'),
-
-            //                            'Function'         => array('BLOCK'),  // Block but one should look for return
-                            'Sequence'         => array('ELEMENT'),
-                            'Break'            => array('BREAK'),
-                            'Continue'         => array('CONTINUE'),
-                            'Return'           => array('RETURN'),
-                            'Ternary'          => array('CONDITION', 'THEN', 'ELSE'),
-                            'Comparison'       => array('LEFT', 'RIGHT'),
-                            'Noscream'         => array('AT'),
-                            'Not'              => array('NOT'),
-                            'Parenthesis'      => array('CODE'),
-                            'Concatenation'    => array('CONCAT'),
-                            'String'           => array('CONCAT')
-                            );
-
-            foreach($structures as $atom => $links) {
-                $linksList = "'".implode("', '", $links)."'";
-
-                $query = <<<GREMLIN
-g.V().hasLabel("$atom").where( __.out($linksList).not(has("constant", true)).count().is(eq(0)) )
-    .sideEffect{ it.get().property("constant", true);}
-GREMLIN;
-                $this->gremlin->query($query);
-            }
-
-            $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .where( __.in("METHOD").count().is(eq(0)))
-     .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_OPEN_BRACKET'))
-     .has('fullnspath') // Skip old names that can be methods since PHP 7.0
-     .filter{ it.get().value("fullnspath") in arg1}
-     .where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant")).count().is(eq(0)) )
-    .sideEffect{ it.get().property("constant", true);}
-GREMLIN;
-            $this->gremlin->query($query, array('arg1' => $deterministFunctions));
-        }
-        display('Mark constants expressions');
-        $this->logTime('Constant expressions');
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Variable").has("code", "\\\$GLOBALS").in("VARIABLE").hasLabel("Array").as("var")
-     .out("INDEX").hasLabel("String").where( __.out("CONCAT").count().is(eq(0)))
-     .sideEffect{ varname = '\$' + it.get().value('noDelimiter');
-                  it.get().property("globalvar", varname);}
-
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display('Mark constants expressions');
     }
 
     private function init() {

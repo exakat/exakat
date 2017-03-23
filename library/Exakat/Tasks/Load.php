@@ -23,6 +23,7 @@
 namespace Exakat\Tasks;
 
 use Exakat\Analyzer\Docs;
+use Exakat\Data\Methods;
 use Exakat\Config;
 use Exakat\Exceptions\InvalidPHPBinary;
 use Exakat\Exceptions\LoadError;
@@ -115,6 +116,9 @@ class Load extends Tasks {
     
     const WITH_FULLNSPATH      = true;
     const WITHOUT_FULLNSPATH   = false;
+
+    const CONSTANT_EXPRESSION       = 1;
+    const NOT_CONSTANT_EXPRESSION   = 0;
     
     const FULLNSPATH_UNDEFINED = 'undefined';
 
@@ -156,6 +160,7 @@ class Load extends Tasks {
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
     static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
     static public $PROP_PROPERTYNAME= array('Variable', 'Assignation');
+    static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence');
 
     static public $PROP_OPTIONS = array();
 
@@ -440,6 +445,7 @@ class Load extends Tasks {
                           'aliased'     => self::$PROP_ALIASED,
                           'boolean'     => self::$PROP_BOOLEAN,
                           'propertyname'=> self::$PROP_PROPERTYNAME,
+                          'constant'    => self::$PROP_CONSTANT,
                           );
     }
 
@@ -752,6 +758,7 @@ class Load extends Tasks {
         $current = $this->id;
         $fullcode = array();
         $rank = -1;
+        $constant = self::CONSTANT_EXPRESSION;
 
         if ($this->tokens[$current][0] === \Exakat\Tasks\T_QUOTE) {
             $stringId = $this->addAtom('String');
@@ -793,6 +800,7 @@ class Load extends Tasks {
                                           'fullcode'  => $this->tokens[$openId][1].$this->atoms[$id]['fullcode'].'}',
                                           'token'     => $this->getToken($this->tokens[$currentVariableId][0])));
                 $this->pushExpression($id);
+                $constant = self::NOT_CONSTANT_EXPRESSION;
             } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
                 $this->processNext();
 
@@ -816,6 +824,7 @@ class Load extends Tasks {
 
                     $this->pushExpression($propertyId);
                 }
+                $constant = self::NOT_CONSTANT_EXPRESSION;
             } else {
                 $this->processNext();
             }
@@ -839,7 +848,8 @@ class Load extends Tasks {
                    'line'     => $this->tokens[$current][2],
                    'token'    => $this->getToken($this->tokens[$current][0]),
                    'count'    => $rank + 1,
-                   'boolean'  => (int) (boolean) ($rank + 1));
+                   'boolean'  => (int) (boolean) ($rank + 1),
+                   'constant' => $constant);
 
         if ($type === \Exakat\Tasks\T_START_HEREDOC) {
             $x['delimiter'] = $closeQuote;
@@ -1478,14 +1488,16 @@ class Load extends Tasks {
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
             ) {
             $nsnameId = $this->addAtom('Boolean');
-            $this->setAtom($nsnameId, array('boolean' => (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true') ));
+            $this->setAtom($nsnameId, array('boolean'  => (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true'),
+                                            'constant' => self::CONSTANT_EXPRESSION));
         } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR  &&
             $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING          &&
             strtolower($this->tokens[$this->id + 1][1]) === 'null' &&
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
             ) {
             $nsnameId = $this->addAtom('Null');
-            $this->setAtom($nsnameId, array('boolean' => 0));
+            $this->setAtom($nsnameId, array('boolean'  => 0,
+                                            'constant' => self::CONSTANT_EXPRESSION));
         } else {
             $nsnameId = $this->addAtom('Nsname');
         }
@@ -1613,10 +1625,12 @@ class Load extends Tasks {
                                                'token'    => $this->getToken($this->tokens[$current][0]),
                                                'count'    => 0,
                                                'args_max' => 0,
-                                               'args_min' => 0));
+                                               'args_min' => 0,
+                                               'constant' => self::CONSTANT_EXPRESSION));
             $this->argumentsId[] = $voidId;
 
             ++$this->id;
+            $constant = self::CONSTANT_EXPRESSION;
         } else {
             $typehintId = 0;
             $defaultId  = 0;
@@ -1626,6 +1640,7 @@ class Load extends Tasks {
             $rank       = -1;
             $nullableId = 0;
             $typehintId = 0;
+            $constant = self::CONSTANT_EXPRESSION;
 
             while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                 $initialId = $this->id;
@@ -1687,6 +1702,7 @@ class Load extends Tasks {
                     }
                     $this->addLink($argumentsId, $indexId, 'ARGUMENT');
                     $fullcode[] = $this->atoms[$indexId]['fullcode'];
+                    $constant &= isset($this->atoms[$indexId]['constant']) && $this->atoms[$indexId]['constant'];
 
                     ++$this->id; // Skipping the comma ,
                     $indexId = 0;
@@ -1717,6 +1733,7 @@ class Load extends Tasks {
                 $this->setAtom($indexId, array('fullcode' => $this->atoms[$indexId]['fullcode'].' = '.$this->atoms[$defaultId]['fullcode']));
             }
             $this->addLink($argumentsId, $indexId, 'ARGUMENT');
+            $constant &= isset($this->atoms[$indexId]['constant']) && $this->atoms[$indexId]['constant'];
 
             $fullcode[] = $this->atoms[$indexId]['fullcode'];
 
@@ -1729,7 +1746,8 @@ class Load extends Tasks {
                                                'token'    => 'T_COMMA',
                                                'count'    => $rank + 1,
                                                'args_max' => $args_max,
-                                               'args_min' => $args_min));
+                                               'args_min' => $args_min,
+                                               'constant' => $constant));
         }
 
         $this->exitContext();
@@ -1889,8 +1907,18 @@ class Load extends Tasks {
 
             $this->addCall('function', $fullnspath, $functioncallId);
 
-            if ($fullnspath === '\\array') {
-                $this->setAtom($functioncallId, array('boolean'    => (int) (bool) $this->atoms[$argumentsId]['count']));
+            static $deterministFunctions; 
+            
+            if ($deterministFunctions === null) {
+                $data = new Methods();
+                $deterministFunctions = $data->getDeterministFunctions();
+                $deterministFunctions = array_map(function ($x) { return '\\'.$x;}, $deterministFunctions);
+                unset($data);
+            }
+            
+            if (in_array($fullnspath, $deterministFunctions)) {
+                $this->setAtom($functioncallId, array('boolean'  => (int) (bool) $this->atoms[$argumentsId]['count'],
+                                                      'constant' => isset($this->atoms[$argumentsId]['constant']) && $this->atoms[$argumentsId]['constant']));
             }
         }
 
@@ -1918,10 +1946,12 @@ class Load extends Tasks {
     private function processString() {
         if (strtolower($this->tokens[$this->id][1]) === 'null' ) {
             $id = $this->addAtom('Null');
-            $this->setAtom($id, array('boolean' => 0));
+            $this->setAtom($id, array('boolean'  => 0,
+                                      'constant' => self::CONSTANT_EXPRESSION));
         } elseif (in_array(strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $id = $this->addAtom('Boolean');
-            $this->setAtom($id, array('boolean' => (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true') ));
+            $this->setAtom($id, array('boolean'  => (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true'),
+                                      'constant' => self::CONSTANT_EXPRESSION));
         } else {
             $id = $this->addAtom('Identifier');
         }
@@ -1950,6 +1980,7 @@ class Load extends Tasks {
         }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->setAtom($id, array('constant' => self::CONSTANT_EXPRESSION));
             $this->processSemicolon();
         } else {
             $id = $this->processFCOA($id);
@@ -2124,7 +2155,8 @@ class Load extends Tasks {
                                   'variadic'   => self::NOT_VARIADIC,
                                   'token'      => $this->getToken($this->tokens[$current][0]),
                                   'fullnspath' => '\\array',
-                                  'boolean'    => (int) (bool) $this->atoms[$argumentId]['count']));
+                                  'boolean'    => (int) (bool) $this->atoms[$argumentId]['count'],
+                                  'constant'   => isset($this->atoms[$argumentId]['constant']) && $this->atoms[$argumentId]['constant']));
         $this->pushExpression($id);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -2222,9 +2254,12 @@ class Load extends Tasks {
     private function processForblock($finals) {
         $this->startSequence();
         $blockId = $this->sequence;
+        $constant = self::CONSTANT_EXPRESSION;
 
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
-            $this->processNext();
+            $elementId = $this->processNext();
+            
+            $constant &= isset($this->atoms[$elementId]['constant']) && $this->atoms[$elementId]['constant'];
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
                 $elementId = $this->popExpression();
@@ -2242,7 +2277,8 @@ class Load extends Tasks {
         $x = array('code'     => $this->atoms[$current]['code'],
                    'fullcode' => self::FULLCODE_SEQUENCE,
                    'line'     => $this->tokens[$this->id][2],
-                   'token'    => $this->getToken($this->tokens[$this->id][0]));
+                   'token'    => $this->getToken($this->tokens[$this->id][0]),
+                   'constant' => $constant);
 
         if ($this->atoms[$current]['count'] === 1) {
             $x['fullcode'] = $this->atoms[$elementId]['fullcode'];
@@ -2747,7 +2783,8 @@ class Load extends Tasks {
         $this->setAtom($parentheseId, array('code'     => '(',
                                             'fullcode' => '('.$this->atoms[$indexId]['fullcode'].')',
                                             'line'     => $this->tokens[$this->id][2],
-                                            'token'    => 'T_OPEN_PARENTHESIS' ));
+                                            'token'    => 'T_OPEN_PARENTHESIS' ,
+                                            'constant' => isset($this->atoms[$indexId]['constant']) && $this->atoms[$indexId]['constant']));
         $this->pushExpression($parentheseId);
         ++$this->id; // Skipping the )
 
@@ -2879,10 +2916,15 @@ class Load extends Tasks {
         $this->addLink($ternaryId, $thenId, 'THEN');
         $this->addLink($ternaryId, $elseId, 'ELSE');
 
+        $constant = isset($this->atoms[$conditionId]['constant']) && $this->atoms[$conditionId]['constant'] &&
+                    isset($this->atoms[$thenId]['constant'])      && $this->atoms[$thenId]['constant'] &&
+                    isset($this->atoms[$elseId]['constant'])      && $this->atoms[$elseId]['constant'];
+
         $x = array('code'     => '?',
                    'fullcode' => $this->atoms[$conditionId]['fullcode'].' ?'.($this->atoms[$thenId]['atom'] === 'Void' ? '' : ' '.$this->atoms[$thenId]['fullcode'].' ' ).': '.$this->atoms[$elseId]['fullcode'],
                    'line'     => $this->tokens[$current][2],
-                   'token'    => 'T_QUESTION');
+                   'token'    => 'T_QUESTION',
+                   'constant' => $constant);
         $this->setAtom($ternaryId, $x);
 
         $this->pushExpression($ternaryId);
@@ -2913,7 +2955,8 @@ class Load extends Tasks {
     }
 
     private function processInlinehtml() {
-        $this->processSingle('Inlinehtml');
+        $id = $this->processSingle('Inlinehtml');
+        $this->setAtom($id, array('constant' => self::CONSTANT_EXPRESSION));
         $this->processSemicolon();
     }
 
@@ -3291,6 +3334,7 @@ class Load extends Tasks {
                                       'aliased'    => $aliased));
             if ($type === 'const') {
                 $this->addCall($type, $fullnspath, $id);
+                $this->setAtom($id, array('constant' => self::CONSTANT_EXPRESSION));
             }
             return $id;
         } else {
@@ -3341,7 +3385,8 @@ class Load extends Tasks {
             $actual = $value;
         }
         $this->setAtom($id, array('intval'  => (abs($actual) > PHP_INT_MAX ? 0 : $actual),
-                                  'boolean' => (int) (boolean) $value));
+                                  'boolean' => (int) (boolean) $value,
+                                  'constant'=> self::CONSTANT_EXPRESSION));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3352,7 +3397,8 @@ class Load extends Tasks {
 
     private function processReal() {
         $id = $this->processSingle('Real');
-        $this->setAtom($id, array('boolean' => (int) (strtolower($this->tokens[$this->id][1]) != 0)));
+        $this->setAtom($id, array('boolean'  => (int) (strtolower($this->tokens[$this->id][1]) != 0),
+                                  'constant' => self::CONSTANT_EXPRESSION));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3376,7 +3422,8 @@ class Load extends Tasks {
             $this->setAtom($id, array('delimiter'   => '',
                                       'noDelimiter' => ''));
         }
-        $this->setAtom($id, array('boolean'   => (int) (bool) $this->atoms[$id]['noDelimiter'] ));
+        $this->setAtom($id, array('boolean'   => (int) (bool) $this->atoms[$id]['noDelimiter'] ,
+                                  'constant'  => self::CONSTANT_EXPRESSION));
 
         if (function_exists('mb_detect_encoding')) {
             $this->setAtom($id, array('encoding' => mb_detect_encoding($this->atoms[$id]['noDelimiter'])));
@@ -3395,7 +3442,9 @@ class Load extends Tasks {
     }
 
     private function processMagicConstant() {
-        return $this->processSingle('Magicconstant');
+        $id = $this->processSingle('Magicconstant');
+        $this->setAtom($id, array('constant' => self::CONSTANT_EXPRESSION));
+        return $id;
     }
 
     //////////////////////////////////////////////////////
@@ -3450,7 +3499,8 @@ class Load extends Tasks {
             $x = array('code'     => $this->tokens[$current][1],
                        'fullcode' => $this->tokens[$current][1].' ;',
                        'line'     => $this->tokens[$current][2],
-                       'token'    => $this->getToken($this->tokens[$current][0]));
+                       'token'    => $this->getToken($this->tokens[$current][0]),
+                       'constant' => self::CONSTANT_EXPRESSION);
             $this->setAtom($returnId, $x);
 
             $this->pushExpression($returnId);
@@ -3460,9 +3510,10 @@ class Load extends Tasks {
 
             return $returnId;
         } else {
-            $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
+            $returnId = $this->processSingleOperator('Return', $this->precedence->get($this->tokens[$this->id][0]), 'RETURN', ' ');
             $operatorId = $this->popExpression();
             $this->pushExpression($operatorId);
+            $this->setAtom($returnId, array('constant' => isset($this->atoms[$operatorId]['constant']) && $this->atoms[$operatorId]['constant'] ));
             return $operatorId;
         }
     }
@@ -3487,15 +3538,18 @@ class Load extends Tasks {
             $x = array('code'     => $this->tokens[$current][1],
                        'fullcode' => $this->tokens[$current][1].' ;',
                        'line'     => $this->tokens[$current][2],
-                       'token'    => $this->getToken($this->tokens[$current][0]));
+                       'token'    => $this->getToken($this->tokens[$current][0]),
+                       'constant' => self::CONSTANT_EXPRESSION);
             $this->setAtom($returnId, $x);
             $this->pushExpression($returnId);
 
             return $returnId;
         } else {
-            $this->processSingleOperator('Yield', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
+            $id = $this->processSingleOperator('Yield', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
             $operatorId = $this->popExpression();
             $this->pushExpression($operatorId);
+            $this->setAtom($operatorId, array('constant' => isset($this->atoms[$id]['constant']) && $this->atoms[$id]['constant']));
+
             return $operatorId;
         }
     }
@@ -3513,9 +3567,10 @@ class Load extends Tasks {
     }
 
     private function processNot() {
-        $this->processSingleOperator('Not', $this->precedence->get($this->tokens[$this->id][0]), 'NOT');
+        $id = $this->processSingleOperator('Not', $this->precedence->get($this->tokens[$this->id][0]), 'NOT');
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
+        $this->setAtom($operatorId, array('constant' => isset($this->atoms[$id]['constant']) && $this->atoms[$id]['constant']));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3606,9 +3661,10 @@ class Load extends Tasks {
     }
 
     private function processNoscream() {
-        $this->processSingleOperator('Noscream', $this->precedence->get($this->tokens[$this->id][0]), 'AT');
+        $id = $this->processSingleOperator('Noscream', $this->precedence->get($this->tokens[$this->id][0]), 'AT');
         $operatorId = $this->popExpression();
         $this->pushExpression($operatorId);
+        $this->setAtom($operatorId, array('constant' => isset($this->atoms[$id]['constant']) && $this->atoms[$id]['constant']));
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3728,11 +3784,15 @@ class Load extends Tasks {
         $right = $this->popExpression();
 
         $this->addLink($additionId, $right, 'RIGHT');
+        
+        $constant = isset($this->atoms[$right]['constant']) && $this->atoms[$right]['constant'] && 
+                    isset( $this->atoms[$left]['constant']) && $this->atoms[$left]['constant'];
 
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => $this->atoms[$left]['fullcode'].' '.$this->tokens[$current][1].' '.$this->atoms[$right]['fullcode'],
                    'line'     => $this->tokens[$current][2],
-                   'token'    => $this->getToken($this->tokens[$current][0]));
+                   'token'    => $this->getToken($this->tokens[$current][0]),
+                   'constant' => $constant);
         $this->setAtom($additionId, $x);
         $this->pushExpression($additionId);
 
@@ -3775,7 +3835,8 @@ class Load extends Tasks {
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => $this->tokens[$current][1].( $this->atoms[$breakLevel]['atom'] !== 'Void' ?  ' '.$this->atoms[$breakLevel]['fullcode'] : ''),
                    'line'     => $this->tokens[$current][2],
-                   'token'    => $this->getToken($this->tokens[$current][0]) );
+                   'token'    => $this->getToken($this->tokens[$current][0]),
+                   'constant' => self::CONSTANT_EXPRESSION );
         $this->setAtom($breakId, $x);
         $this->pushExpression($breakId);
 
@@ -3827,6 +3888,7 @@ class Load extends Tasks {
         } elseif ($this->atoms[$right]['atom'] === 'Identifier') {
             $staticId = $this->addAtom('Staticconstant');
             $links = 'CONSTANT';
+            $this->setAtom($staticId, array('constant' => self::CONSTANT_EXPRESSION));
         } elseif (in_array($this->atoms[$right]['atom'], array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null'))) {
             $staticId = $this->addAtom('Staticproperty');
             $links = 'PROPERTY';
@@ -3885,11 +3947,15 @@ class Load extends Tasks {
         $this->popExpression();
 
         $this->addLink($additionId, $right, $links[1]);
+        
+        $constant = isset($this->atoms[$right]['constant']) && $this->atoms[$right]['constant'] && 
+                    isset( $this->atoms[$left]['constant']) && $this->atoms[$left]['constant'];
 
         $x = array('code'     => $this->tokens[$current][1],
                    'fullcode' => $this->atoms[$left]['fullcode'].' '.$this->tokens[$current][1].' '.$this->atoms[$right]['fullcode'],
                    'line'     => $this->tokens[$current][2],
-                   'token'    => $this->getToken($this->tokens[$current][0]));
+                   'token'    => $this->getToken($this->tokens[$current][0]),
+                   'constant' => $constant);
         $this->setAtom($additionId, $x);
         $this->pushExpression($additionId);
 
@@ -4056,8 +4122,12 @@ class Load extends Tasks {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
         }
 
+        $constant = self::CONSTANT_EXPRESSION;
+
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $containsId = $this->processNext();
+            
+            $constant &= isset($this->atoms[$containsId]['constant']) && $this->atoms[$containsId]['constant'];
             
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOT) {
                 $this->popExpression();
@@ -4082,7 +4152,8 @@ class Load extends Tasks {
                    'fullcode' => implode(' . ', $fullcode),
                    'line'     => $this->tokens[$current][2],
                    'token'    => $this->getToken($this->tokens[$current][0]),
-                   'count'    => $rank);
+                   'count'    => $rank,
+                   'constant' => $constant);
         $this->setAtom($concatenationId, $x);
         $this->pushExpression($concatenationId);
 
@@ -4254,7 +4325,8 @@ class Load extends Tasks {
         $this->setAtom($id, array('code'       => 'Void',
                                   'fullcode'   => self::FULLCODE_VOID,
                                   'line'       => $this->tokens[$this->id][2],
-                                  'token'      => \Exakat\Tasks\T_VOID));
+                                  'token'      => \Exakat\Tasks\T_VOID,
+                                  'constant'   => self::CONSTANT_EXPRESSION));
         return $id;
     }
 
@@ -4416,7 +4488,8 @@ class Load extends Tasks {
                                               'fullcode' => ' '.self::FULLCODE_SEQUENCE.' ',
                                               'line'     => $this->tokens[$this->id][2],
                                               'token'    => 'T_SEMICOLON',
-                                              'bracket'  => false));
+                                              'bracket'  => false,
+                                              'constant' => self::CONSTANT_EXPRESSION));
 
         $this->sequences[]    = $this->sequence;
         $this->sequenceRank[] = -1;
@@ -4425,7 +4498,8 @@ class Load extends Tasks {
 
     private function addToSequence($id) {
         $this->addLink($this->sequence, $id, 'ELEMENT');
-        $this->setAtom($id, array('rank' => ++$this->sequenceRank[$this->sequenceCurrentRank]));
+        $this->setAtom($id, array('rank'     => ++$this->sequenceRank[$this->sequenceCurrentRank]));
+        $this->setAtom($this->sequence, array('constant' => $this->atoms[$this->sequence]['constant'] && isset($this->atoms[$id]['constant']) && $this->atoms[$id]['constant']));
     }
 
     private function endSequence() {
