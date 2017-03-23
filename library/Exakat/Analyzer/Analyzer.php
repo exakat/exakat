@@ -552,9 +552,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     
     public function functioncallIs($fullnspath) {
         $this->atomIs('Functioncall')
-             ->hasNoIn(array('METHOD', 'NEW'))
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
-             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->raw('has("fullnspath")')
              ->fullnspathIs($this->makeFullNsPath($fullnspath));
 
         return $this;

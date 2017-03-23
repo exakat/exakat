@@ -30,9 +30,7 @@ class MultipleConstantDefinition extends Analyzer {
         // case-insensitive constants with Define
         // Search for definitions and count them
         $csDefinitions = $this->query(<<<GREMLIN
-g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
-                              .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
-                              .has("token", within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY') )
+g.V().hasLabel("Functioncall").has("fullnspath")
                               .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
                               .out("ARGUMENTS")
                               .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
@@ -51,9 +49,7 @@ GREMLIN
 );
 
         $cisDefinitions = $this->query(<<<GREMLIN
-g.V().hasLabel("Functioncall").where( __.in("METHOD", "NEW").count().is(eq(0)) )
-                              .has("token", within('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY') )
-                              .where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))
+g.V().hasLabel("Functioncall").has("fullnspath")
                               .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
                               .out("ARGUMENTS")
                               .out("ARGUMENT").has("rank", 2).has("boolean", true).in("ARGUMENT")
