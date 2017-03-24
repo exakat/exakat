@@ -2196,7 +2196,7 @@ class Load extends Tasks {
         $indexId = $this->popExpression();
         $this->addLink($id, $indexId, 'INDEX');
 
-        if ($this->atoms[$variableId]['code'] === '$GLOBALS') {
+        if ($this->atoms[$variableId]['code'] === '$GLOBALS' && !empty($this->atoms[$indexId]['noDelimiter'])) {
             // Build the name of the global, dropping the fi
             $this->setAtom($id, array('globalvar'       => '$'.$this->atoms[$indexId]['noDelimiter']));
         }
