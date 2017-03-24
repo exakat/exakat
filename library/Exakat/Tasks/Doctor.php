@@ -257,10 +257,7 @@ neo4j_folder   = '$neo4j_folder';
 neo4j_login    = 'admin';
 neo4j_password = 'admin';
 
-; where and which PHP executable are available
-php          = "$php"
-
-;php52        = /path/to/php53
+;php52        = /path/to/php52
 ;php53        = /path/to/php53
 ;php54        = /path/to/php54
 ;php55        = /path/to/php55
