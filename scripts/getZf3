@@ -62,6 +62,8 @@ $components = array(
 'zend-view',
 'zend-xml2json',
 'zend-xmlrpc',
+'zend-stdlib',
+'zendxml'
                     );
 
 $begin = microtime(true);
@@ -76,6 +78,7 @@ $end = microtime(true);
 
 $versions = 0;
 foreach($components as $component) {
+    print "Component  \n";
     $sqlite->query('INSERT INTO components VALUES (null, "'.$component.'")');
     $componentId = $sqlite->lastInsertRowID();
     
