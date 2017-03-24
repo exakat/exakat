@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class ZendF_Zf3Cache extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testZendF_Zf3Cache01()  { $this->generic_test('ZendF/Zf3Cache.01'); }
+    public function testZendF_Zf3Cache02()  { $this->generic_test('ZendF/Zf3Cache.02'); }
 }
 ?>

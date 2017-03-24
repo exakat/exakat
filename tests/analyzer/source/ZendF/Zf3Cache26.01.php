@@ -1,7 +1,11 @@
 <?php
 
-$ok = new Zend\Cache\ConfigProvider();
+// 2.7 only
+new Zend\Cache\ConfigProvider();
 
-$ko = new Zend\Cache\Exception\BadMethodCallException();
+// 2.5 to 2.7
+new Zend\Cache\Storage\PostEvent;
 
+// Not zend
+new Zend\Cache\Storage\NotZend;
 ?>

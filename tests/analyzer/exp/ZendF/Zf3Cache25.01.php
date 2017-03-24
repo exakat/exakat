@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('( )');
+$expected     = array('Zend\Cache\ConfigProvider( )');
 
-$expected_not = array('( )');
+$expected_not = array('Zend\Cache\Storage\PostEvent',
+                      'Zend\Cache\Storage\NotZend');
 
 ?>
