@@ -1,0 +1,74 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Interface.13.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+                  Label : TYPEHINT
+                    self
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                foo
+          Label : DEFINITION
+            self
+          Label : NAME
+            c
+        Label : ELEMENT
+          interface
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+                  Label : TYPEHINT
+                    self
+              Label : BLOCK
+                Void
+              Label : NAME
+                foo
+          Label : DEFINITION
+            self
+          Label : NAME
+            i
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  $a
+                  Label : TYPEHINT
+                    self
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                foo
+          Label : DEFINITION
+            self
+          Label : NAME
+            t

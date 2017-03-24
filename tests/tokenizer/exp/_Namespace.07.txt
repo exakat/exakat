@@ -26,6 +26,12 @@ Label : PROJECT
                 {}
                 Label : ELEMENT
                   Void
+              Label : DEFINITION
+                \
+                Label : SUBNAME
+                  MyProject
+                Label : SUBNAME
+                  Connection
               Label : NAME
                 Connection
             Label : ELEMENT

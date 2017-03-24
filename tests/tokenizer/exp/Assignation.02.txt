@@ -9,8 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          "2"
-        Label : ELEMENT
           =
           Label : LEFT
             $x
@@ -19,6 +17,4 @@ Label : PROJECT
             Label : CONCAT
               '1'
             Label : CONCAT
-              Void
-        Label : ELEMENT
-          Void
+              "2"

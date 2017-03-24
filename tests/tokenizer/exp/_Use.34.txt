@@ -22,8 +22,6 @@ Label : PROJECT
                     A
                   Label : SUBNAME
                     F
-                Label : DEFINITION
-                  A
                 Label : SUBNAME
                   N
                 Label : SUBNAME
@@ -262,6 +260,8 @@ Label : PROJECT
                     Void
                 Label : NAME
                   DF2
+              Label : DEFINITION
+                DF2
               Label : NAME
                 DF2
           Label : NAME

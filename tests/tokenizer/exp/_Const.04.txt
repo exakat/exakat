@@ -12,12 +12,10 @@ Label : PROJECT
           const
           Label : CONST
             const
-            Label : NAME
-              C
-            Label : DEFINITION
-              C
             Label : VALUE
               1
+            Label : NAME
+              C
             Label : DEFINITION
               C
         Label : ELEMENT

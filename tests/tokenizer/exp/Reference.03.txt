@@ -22,5 +22,3 @@ Label : PROJECT
                 3
             Label : VARIABLE
               $b
-        Label : ELEMENT
-          Void

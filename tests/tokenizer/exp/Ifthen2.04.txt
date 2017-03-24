@@ -40,6 +40,8 @@ Label : PROJECT
                   ->
                   Label : OBJECT
                     $this
+                  Label : PROPERTY
+                    D
             Label : RIGHT
               &&
               Label : LEFT

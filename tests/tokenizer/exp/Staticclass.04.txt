@@ -71,8 +71,8 @@ Label : PROJECT
               Label : NAME
                 y
           Label : DEFINITION
-            self
-          Label : DEFINITION
             static
+          Label : DEFINITION, DEFINITION
+            self
           Label : NAME
             x

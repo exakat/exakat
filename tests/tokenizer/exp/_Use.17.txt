@@ -36,6 +36,8 @@ Label : PROJECT
                 one_identifier
                 Label : DEFINITION
                   one_identifier
+              Label : DEFINITION
+                one_identifier
               Label : NAME
                 one_identifier
             Label : ELEMENT
@@ -64,6 +66,10 @@ Label : PROJECT
                 \
                 Label : SUBNAME
                   absolute_path
+              Label : DEFINITION
+                \
+                Label : SUBNAME
+                  absolute_path
               Label : NAME
                 absolute_path
             Label : ELEMENT
@@ -86,6 +92,8 @@ Label : PROJECT
                     Void
                 Label : NAME
                   a1
+              Label : DEFINITION
+                a1
               Label : NAME
                 one_identifier3
             Label : ELEMENT
@@ -110,6 +118,10 @@ Label : PROJECT
                   \
                   Label : SUBNAME
                     a1
+              Label : DEFINITION
+                \
+                Label : SUBNAME
+                  a1
               Label : NAME
                 a1
           Label : NAME
@@ -138,6 +150,8 @@ Label : PROJECT
                     Void
                 Label : NAME
                   path
+              Label : DEFINITION
+                path
               Label : DEFINITION
                 \
                 Label : DEFINITION
@@ -174,6 +188,8 @@ Label : PROJECT
                     Void
                 Label : NAME
                   path2
+              Label : DEFINITION
+                path2
               Label : DEFINITION
                 \
                 Label : DEFINITION

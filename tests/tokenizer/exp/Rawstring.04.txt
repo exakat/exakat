@@ -40,8 +40,6 @@ Label : PROJECT
                 Label : OBJECT
                   $e
             Label : ELEMENT
-              Void
-            Label : ELEMENT
               D
             Label : ELEMENT
               echo

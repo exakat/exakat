@@ -19,11 +19,9 @@ Label : PROJECT
             Label : ELEMENT
               yield
               Label : YIELD
-                Void
-            Label : ELEMENT
-              yield
-              Label : YIELD
-                Void
+                yield
+                Label : YIELD
+                  Void
             Label : ELEMENT
               while
               Label : BLOCK

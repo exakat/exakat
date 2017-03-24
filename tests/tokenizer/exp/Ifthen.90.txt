@@ -296,6 +296,8 @@ Label : PROJECT
                                   $b
                               Label : NAME
                                 S
+            Label : ELEMENT
+              Void
           Label : THEN
             {}
             Label : ELEMENT

@@ -9,12 +9,8 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          'y'
-        Label : ELEMENT
           =
           Label : LEFT
             $x
           Label : RIGHT
-            Void
-        Label : ELEMENT
-          Void
+            'y'

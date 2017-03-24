@@ -29,21 +29,23 @@ Label : PROJECT
               Label : NAME
                 <?=
             Label : ELEMENT
-              E
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'T'
-              Label : NAME
-                E
+              Void
             Label : ELEMENT
               <?=
               Label : ARGUMENTS
                 <?=
                 Label : ARGUMENT
-                  Void
+                  E
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      'T'
+                  Label : NAME
+                    E
               Label : NAME
                 <?=
+            Label : ELEMENT
+              Void
           Label : NAME
             B
         Label : ELEMENT

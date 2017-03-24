@@ -33,9 +33,7 @@ Label : PROJECT
                     Label : THEN
                       'D'
                 Label : CONCAT
-                  -
-                  Label : SIGN
-                    0
+                  -0
             Label : ARGUMENT
               Void
           Label : NAME

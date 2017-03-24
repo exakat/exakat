@@ -9,12 +9,12 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          +
-          Label : LEFT
-            .
-            Label : CONCAT
-              1
-            Label : CONCAT
+          .
+          Label : CONCAT
+            1
+          Label : CONCAT
+            +
+            Label : LEFT
               2
-          Label : RIGHT
-            3
+            Label : RIGHT
+              3

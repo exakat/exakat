@@ -13,6 +13,4 @@ Label : PROJECT
           Label : LEFT
             1
           Label : RIGHT
-            -
-            Label : SIGN
-              2
+            -2

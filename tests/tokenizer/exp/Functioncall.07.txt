@@ -9,12 +9,10 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          's'
-        Label : ELEMENT
           echo
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-              Void
+              's'
           Label : NAME
             echo

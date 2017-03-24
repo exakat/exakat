@@ -1,0 +1,20 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          !
+          Label : NOT
+            ->
+            Label : OBJECT
+              $x
+            Label : PROPERTY
+              y
+        Label : ELEMENT
+          Void

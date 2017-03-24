@@ -24,8 +24,6 @@ Label : PROJECT
                   yield
                   Label : YIELD
                     Void
-                Label : ELEMENT
-                  Void
               Label : SOURCE
                 range
                 Label : ARGUMENTS

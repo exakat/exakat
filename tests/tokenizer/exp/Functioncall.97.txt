@@ -46,6 +46,8 @@ Label : PROJECT
                       Label : NAME
                         <?=
                     Label : ELEMENT
+                      Void
+                    Label : ELEMENT
                       B
                     Label : ELEMENT
                       <?=
@@ -55,6 +57,8 @@ Label : PROJECT
                           $d
                       Label : NAME
                         <?=
+                    Label : ELEMENT
+                      Void
                     Label : ELEMENT
                        {
 			}

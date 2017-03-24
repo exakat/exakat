@@ -33,9 +33,7 @@ Label : PROJECT
               Label : VARIABLE
                 $e
             Label : ELSE
-              -
-              Label : SIGN
-                1
+              -1
             Label : THEN
               --
               Label : PREPLUSPLUS
