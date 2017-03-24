@@ -161,6 +161,7 @@ class Load extends Tasks {
     static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
     static public $PROP_PROPERTYNAME= array('Variable', 'Assignation');
     static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence');
+    static public $PROP_GLOBALVAR   = array('Array');
 
     static public $PROP_OPTIONS = array();
 
@@ -446,6 +447,7 @@ class Load extends Tasks {
                           'boolean'     => self::$PROP_BOOLEAN,
                           'propertyname'=> self::$PROP_PROPERTYNAME,
                           'constant'    => self::$PROP_CONSTANT,
+                          'globalvar'   => self::$PROP_GLOBALVAR,
                           );
     }
 
@@ -2148,7 +2150,7 @@ class Load extends Tasks {
         // No need to skip opening bracket
         $argumentId = $this->processArguments(array(\Exakat\Tasks\T_CLOSE_BRACKET));
         $this->addLink($id, $argumentId, 'ARGUMENTS');
-
+        
         $this->setAtom($id, array('code'       => $this->tokens[$current][1],
                                   'fullcode'   => '['.$this->atoms[$argumentId]['fullcode'].']' ,
                                   'line'       => $this->tokens[$this->id][2],
@@ -2193,6 +2195,11 @@ class Load extends Tasks {
 
         $indexId = $this->popExpression();
         $this->addLink($id, $indexId, 'INDEX');
+
+        if ($this->atoms[$variableId]['code'] === '$GLOBALS') {
+            // Build the name of the global, dropping the fi
+            $this->setAtom($id, array('globalvar'       => '$'.$this->atoms[$indexId]['noDelimiter']));
+        }
 
         $this->setAtom($id, array('code'      => $opening,
                                   'fullcode'  => $this->atoms[$variableId]['fullcode'].$opening.$this->atoms[$indexId]['fullcode'].$closing ,
@@ -4683,10 +4690,8 @@ class Load extends Tasks {
         if (intval($this->atoms[$callId]['noDelimiter'])) {
             return; // Can't be a class anyway.
         }
-        if (strlen($this->atoms[$callId]['noDelimiter']) === 1) {
-            return; 
-        }
-        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s:=+!`@\-]/is', $this->atoms[$callId]['noDelimiter'])) {
+        // single : is OK 
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $this->atoms[$callId]['noDelimiter'])) {
             return; // Can't be a class anyway.
         }
         
