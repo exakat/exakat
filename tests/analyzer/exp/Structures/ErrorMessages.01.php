@@ -7,6 +7,8 @@ $expected     = array("'Yes'",
                       '\'Exception A myException\'',
                        "'Exception ' . \$x . 'FullNsPath'",
                       "'Exception myException'",
+                      '"Exception $y Messages"',
+                      '\'Exception Messages\''
                       );
 
 $expected_not = array('a');
