@@ -4178,7 +4178,12 @@ class Load extends Tasks {
         $left = $this->popExpression();
         $this->addLink($instanceId, $left, 'VARIABLE');
 
-        $right = $this->processOneNsname();
+        $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
+            $this->processNext();
+        };
+        $right = $this->popExpression();
+
         list($fullnspath, $aliased) = $this->getFullnspath($right, 'class');
         $this->setAtom($right, array('fullnspath' => $fullnspath,
                                      'aliased'    => $aliased));
