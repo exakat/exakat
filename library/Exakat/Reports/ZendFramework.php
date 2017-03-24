@@ -2327,10 +2327,12 @@ JAVASCRIPT;
 
     private function generateCompatibilities() {
         $components = array(
+                            'Cache'                      => 'ZendF/Zf3Cache',
                             'Config'                     => 'ZendF/Zf3Config',
                             'MVC'                        => 'ZendF/Zf3Mvc',
                             'URI'                        => 'ZendF/Zf3Uri',
                             'Validator'                  => 'ZendF/Zf3Validator',
+                            'View'                       => 'ZendF/Zf3View',
                 );
                 
         $zend3 = new ZendF3($this->config->dir_root.'/data', $this->config->is_phar);
@@ -2401,10 +2403,12 @@ SQL;
     private function generateAppinfo() {
         $extensions = array(
                     'Components' => array(
+                            'Cache'                      => 'ZendF/Zf3Cache',
                             'Config'                     => 'ZendF/Zf3Config',
                             'MVC'                        => 'ZendF/Zf3Mvc',
                             'URI'                        => 'ZendF/Zf3Uri',
                             'Validator'                  => 'ZendF/Zf3Validator',
+                            'View'                       => 'ZendF/Zf3View',
                     ),
                 );
 
