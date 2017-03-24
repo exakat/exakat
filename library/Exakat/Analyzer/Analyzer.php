@@ -544,7 +544,6 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
 
     public function atomFunctionIs($fullnspath) {
         assert('$fullnspath !== null', 'atomFunctionIs can\'t be null');
-        $this->atomIs('Functioncall');
         $this->functioncallIs($fullnspath);
 
         return $this;
@@ -1651,12 +1650,12 @@ GREMLIN
     public function prepareQuery() {
         // @doc This is when the object is a placeholder for others.
         if (count($this->methods) <= 1) { return true; }
-        
+
         if (substr($this->methods[1], 0, 9) == 'hasLabel(') {
-            $first = array_shift($this->methods);
+            $first = $this->methods[1];
+            array_splice($this->methods, 1,1);
             $query = implode('.', $this->methods);
             $query = 'g.V().'.$first.'.groupCount("processed").by(count()).'.$query;
-            unset($this->methods[1]);
         } elseif (substr($this->methods[1], 0, 39) == 'where( __.in("ANALYZED").has("analyzer"') {
             $first = array_shift($this->methods); // remove first 
             $init = array_shift($this->methods); // remove first 
@@ -1808,8 +1807,10 @@ GREMLIN;
         };
         if (is_string($functions)) {
             return $cb($functions);
-        } else {
+        } elseif (is_array($functions)) {
             $r = array_map($cb, $functions);
+        } else {
+            throw new \Exception('Function is of the wrong type : '.var_export($functions));
         }
         return $r;
     }
