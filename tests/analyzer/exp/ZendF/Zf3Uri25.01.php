@@ -1,7 +1,6 @@
 <?php
 
-$expected     = array('Zend\Uri\UriFactoryNotZend'
-);
+$expected     = array();
 
 $expected_not = array('Zend\Uri\UriFactory',
                       'UriFactory', 
