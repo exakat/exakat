@@ -3325,9 +3325,9 @@ class Load extends Tasks {
                     $this->addCall('const', $fullnspath, $id);
             }
             return $this->processBracket();
-        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON) {
-            return $id;
-        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON || 
+                  $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR ||
+                  $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF) {
             return $id;
         } elseif (in_array($this->atoms[$id]['atom'], array('Nsname', 'Identifier'))) {
             $type = $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const';
@@ -4180,10 +4180,6 @@ class Load extends Tasks {
             $this->processNext();
         };
         $right = $this->popExpression();
-
-        if ($this->atoms[$right]['aliased'] === self::ALIASED) {
-            $this->addLink($this->usesId['class'][strtolower($this->atoms[$right]['code'])], $right, 'DEFINITION');
-        }
 
         $this->addLink($instanceId, $right, 'CLASS');
 
