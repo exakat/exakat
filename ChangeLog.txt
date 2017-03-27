@@ -1,4 +1,4 @@
-Version 0.10.6 (Immortal of Elk Power, Coming up)
+Version 0.10.6 (Immortal of Antelope Power, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,28 @@ Version 0.10.6 (Immortal of Elk Power, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.10.6 (Immortal of Elk Power, 2017-03-27)
++ Architecture
+    + Major speed up of loading and analysis
+    + Fixed themes configuration.
++ Report
+    + Ambassador : report cookies usage, infinite and NAN usage
+    + Zend Framework : Report incompatibilites component/version for ZF3
++ Analyzer
+    + Upgraded analysis : 1941 / 1941 test pass (100.00% pass)
+    + New analyzer : Zend Framework 3 Deprecated 
+    + New analyzer : Zend cache, view, db.
+    + New analyzer : Report missing type tests.
+    + New analyzer : suggest setcookie() with safe arguments
+    + New analyzer : Do not cast to Int
+    + New analyzer : CakePHP classes compatibilities from 2.5 to 3.3
+    + Upgraded analyzer : instanceof doesn't report traits anymore
+    + Upgraded analyzer : mb_ereg has options in the 4th arguments
+    + Upgraded analyzer : more strange names 
++ Tokenizer
+    + Reviewed most of the load processing.
+    + Reduced the number of 'fullnspath' properties.
 
 Version 0.10.5 (Immortal of Tiger Power, 2017-03-13)
 + Architecture
