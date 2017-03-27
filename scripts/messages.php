@@ -33,8 +33,9 @@ foreach($docs as $iniFile) {
         continue;
     }
     $message = substr($ini['description'], 0, $offset);
-    $messageNoPHPCode = preg_match('/<\?php.*?\?>/is', $message);
-    $messageNoPHPCode = preg_match('/`.*?<.*?>`/is', $message);
+
+    $messageNoPHPCode = preg_replace('/<\?php.*?\?>/is', '', $ini['description']);
+    $messageNoPHPCode = preg_replace('/`.*?<.*?>`_/is', '', $messageNoPHPCode);
     $words = count(explode(' ', $messageNoPHPCode));
 
     if (empty($ini['clearphp']) && !preg_match('/`.*?<.*?>`/is', $ini['description'])) {
@@ -44,6 +45,7 @@ foreach($docs as $iniFile) {
 
     if ($words < 30) { 
         print "Doc is too short in $iniFile ($words words)\n";
+        
         continue; 
     }
     print $iniFile." ($words words): ".$message."\n";
