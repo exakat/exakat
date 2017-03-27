@@ -7,9 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class CakePHP_CakePHPMissing extends Analyzer {
+class Cakephp_CakePHPMissing extends Analyzer {
     /* 1 methods */
 
-    public function testCakePHP_CakePHPMissing01()  { $this->generic_test('CakePHP/CakePHPMissing.01'); }
+    public function testCakephp_CakePHPMissing01()  { $this->generic_test('Cakephp/CakePHPMissing.01'); }
 }
 ?>

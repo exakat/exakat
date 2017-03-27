@@ -43,18 +43,16 @@ class CakePHPUsed extends Analyzer {
             $classes    = array_keys(array_count_values($classes));
             $classes    = $this->makeFullNsPath($classes);
 
-            if (!empty($classes)) {
-                $classesUsage = new ClassUsage($this->gremlin);
-                $classesUsage->setAnalyzer(get_class($this));
-                $classesUsage->setClasses($classes);
-                $classesUsage->init($this->analyzerId);
-                $classesUsage->run();
+            $classesUsage = new ClassUsage($this->gremlin);
+            $classesUsage->setAnalyzer(get_class($this));
+            $classesUsage->setClasses($classes);
+            $classesUsage->init($this->analyzerId);
+            $classesUsage->run();
 
-                $this->rowCount        += $classesUsage->getRowCount();
-                $this->processedCount  += $classesUsage->getProcessedCount();
-                $this->queryCount      += $classesUsage->getQueryCount();
-                $this->rawQueryCount   += $classesUsage->getRawQueryCount();
-            }
+            $this->rowCount        += $classesUsage->getRowCount();
+            $this->processedCount  += $classesUsage->getProcessedCount();
+            $this->queryCount      += $classesUsage->getQueryCount();
+            $this->rawQueryCount   += $classesUsage->getRawQueryCount();
         }
 
         $interfaces =  $data->getInterfaces($this->component, $this->version);
@@ -63,18 +61,16 @@ class CakePHPUsed extends Analyzer {
             $interfaces = array_keys(array_count_values($interfaces));
             $interfaces = $this->makeFullNsPath($interfaces);
         
-            if (!empty($interfaces)) {
-                $classesUsage = new InterfaceUsage($this->gremlin);
-                $classesUsage->setAnalyzer(get_class($this));
-                $classesUsage->setInterfaces($interfaces);
-                $classesUsage->init($this->analyzerId);
-                $classesUsage->run();
+            $classesUsage = new InterfaceUsage($this->gremlin);
+            $classesUsage->setAnalyzer(get_class($this));
+            $classesUsage->setInterfaces($interfaces);
+            $classesUsage->init($this->analyzerId);
+            $classesUsage->run();
 
-                $this->rowCount        += $classesUsage->getRowCount();
-                $this->processedCount  += $classesUsage->getProcessedCount();
-                $this->queryCount      += $classesUsage->getQueryCount();
-                $this->rawQueryCount   += $classesUsage->getRawQueryCount();
-            }
+            $this->rowCount        += $classesUsage->getRowCount();
+            $this->processedCount  += $classesUsage->getProcessedCount();
+            $this->queryCount      += $classesUsage->getQueryCount();
+            $this->rawQueryCount   += $classesUsage->getRawQueryCount();
         }
 
         $traits     =  $data->getTraits($this->component, $this->version);
@@ -83,18 +79,16 @@ class CakePHPUsed extends Analyzer {
             $traits     = array_keys(array_count_values($traits));
             $traits     = $this->makeFullNsPath($traits);
 
-            if (!empty($traits)) {
-                $classesUsage = new TraitUsage($this->gremlin);
-                $classesUsage->setAnalyzer(get_class($this));
-                $classesUsage->setTraits($traits);
-                $classesUsage->init($this->analyzerId);
-                $classesUsage->run();
-
-                $this->rowCount        += $classesUsage->getRowCount();
-                $this->processedCount  += $classesUsage->getProcessedCount();
-                $this->queryCount      += $classesUsage->getQueryCount();
-                $this->rawQueryCount   += $classesUsage->getRawQueryCount();
-            }
+            $classesUsage = new TraitUsage($this->gremlin);
+            $classesUsage->setAnalyzer(get_class($this));
+            $classesUsage->setTraits($traits);
+            $classesUsage->init($this->analyzerId);
+            $classesUsage->run();
+ 
+            $this->rowCount        += $classesUsage->getRowCount();
+            $this->processedCount  += $classesUsage->getProcessedCount();
+            $this->queryCount      += $classesUsage->getQueryCount();
+            $this->rawQueryCount   += $classesUsage->getRawQueryCount();
         }
     }
 }
