@@ -321,6 +321,7 @@ Glossary
 + `H`
     + `header()`
 
+      + :ref:`Should Use SetCookie() <should-use-setcookie()>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
 
     + `htmlentities()`
@@ -368,6 +369,10 @@ Glossary
     + `intval()`
 
       + :ref:`Should Typecast <should-typecast>`
+
+    + `is_callable()`
+
+      + :ref:`Check All Types <check-all-types>`
 
     + `is_integer()`
 
@@ -514,9 +519,19 @@ Glossary
 
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
 
+    + `setcookie()`
+
+      + :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
+      + :ref:`Should Use SetCookie() <should-use-setcookie()>`
+
     + `setlocale()`
 
       + :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
+
+    + `setrawcookie()`
+
+      + :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
+      + :ref:`Should Use SetCookie() <should-use-setcookie()>`
 
     + `settype()`
 

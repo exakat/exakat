@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 15 Mar 2017 16:54:43 +0000
-.. comment: Generation hash : ff3f005a72948193238ca76ff25c1370771ea6f4
+.. comment: Generation date : Mon, 27 Mar 2017 12:57:11 +0000
+.. comment: Generation hash : b285fd70038481fea8319f7568efea3f64064b3c
 
 
 .. _$http\_raw\_post\_data:
@@ -1510,6 +1510,58 @@ It is recommended to use another name for these catch variables.
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
+
+
+
+.. _check-all-types:
+
+Check All Types
+###############
+
+
+When checking for time, avoid using else. Mention explicitely all tested type, and raise an exception when reaching else.
+
+PHP has a short list of scalar types : null, boolean, integer, real, strings, object, resource and array. When a variable is not holding one the the type, then it may be of any other type. 
+
+Most of the time, when using a simple is_*() / else test, this is relying on the conception of the code. By construction, the arguments may be one of two types : array or string. 
+
+What happens often is that in case of failure in the code (database not working, another class not checking its results), a third type is pushed to the structure, and it ends up breaking the execution. 
+
+The safe way is to check the various types all the time, and use the default case (here, the else) to throw exception() or test an assertion and handle the special case.
+
+.. code-block:: php
+
+   <?php
+   
+   // hasty version
+   if (is_array($argument)) {
+       $out = $argument;
+   } else {
+       // Here, $argument is NOT an array. What if it is an object ? or a NULL ? 
+       $out = array($argument);
+   }
+   
+   // Safe type checking : do not assume that 'not an array' means that it is the other expected type.
+   if (is_array($argument)) {
+       $out = $argument;
+   } elseif (is_string($argument)) {
+       $out = array($argument);
+   } else {
+       assert(false, '$argument is not an array nor a string, as expected!');
+   }
+   
+   ?>
+
+
+Using `is_callable() <http://www.php.net/is_callable>`_, is_iterable() with this structure is fine : when variable is callable or not, while a variable is an integer or else. 
+
+Using a type test without else is also accepted here. This is a special treatment for this test, and all others are ignored. This aspect may vary depending on situations and projects.
+
++--------------+--------------------------+
+| Command Line | Structures/CheckAllTypes |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
 
 
 
@@ -8743,6 +8795,55 @@ It is recommended not to use it.
 
 
 
+.. _set-cookie-safe-arguments:
+
+Set Cookie Safe Arguments
+#########################
+
+
+The last five arguments of `setcookie() <http://www.php.net/setcookie>`_ and `setrawcookie() <http://www.php.net/setrawcookie>`_ are for security. Use them anytime you can.::
+
+   
+       setcookie ( string $name [, string $value =  [, int $expire = 0 [, string $path =  [, string $domain =  [, bool $secure = false [, bool $httponly = false ]]]]]] )
+   
+
+
+The $expire argument sets the date of expiration of the cookie. It is recommended to make it as low as possible, to reduce its chances to be captured. Sometimes, low expiration date may be several days (for preferences), and other times, low expiration date means a few minutes. 
+
+The $path argument limits the transmission of the cookie to URL whose path matches the one mentionned here. By default, it is '/', which means the whole server. If a cookie usage is limited to a part of the application, use it here.
+
+The $domain argument limits the transmission of the cookie to URL whose domain matches the one mentionned here. By default, it is '', which means any server on the internet. At worse, you may use 'mydomain.com' to cover your whole domain, or better, refine it with the actual subdomain of usage.
+
+The $secure argument limits the transmission of the cookie over HTTP (by default) or HTTPS. The second is better, as the transmission of the cookie is crypted. In case HTTPS is still at the planned stage, use '$_SERVER[HTTPS]'. This environnement variable is false on HTTP, and true on HTTPS.
+
+The $httponly argument limits the access of the cookie to Javascript. It is only transmitted to the browser, and retransmitted. This helps reducing XSS and CSRF attacks, though it is disputed. 
+
+.. code-block:: php
+
+   <?php
+   
+   //admin cookie, available only on https://admin.my-domain.com/system/, for the next minute, and not readable by javascript
+   setcookie(admin, $login, time()+60, /system/, admin.my-domain.com, $_SERVER['HTTPS'], 1);
+   
+   //login cookie, available until the browser is closed, over http or https
+   setcookie(login, $login);
+   
+   //removing the login cookie : Those situations are omitted by the analysis
+   setcookie(login, '');
+   
+   ?>
+
+
+See also `setcookie() <http://www.php.net/setcookie>`_ on the manual for more information.
+
++--------------+------------------------+
+| Command Line | Security/SetCookieArgs |
++--------------+------------------------+
+| Analyzers    | :ref:`Security`        |
++--------------+------------------------+
+
+
+
 .. _setlocale()-uses-constants:
 
 Setlocale() Uses Constants
@@ -9188,6 +9289,41 @@ Building queries with concatenations is not recommended, though not always avoid
 +--------------+-------------------------------------+
 | Analyzers    | :ref:`Analyze`, :ref:`Security`     |
 +--------------+-------------------------------------+
+
+
+
+.. _should-use-setcookie():
+
+Should Use SetCookie()
+######################
+
+
+Use `setcookie() <http://www.php.net/setcookie>`_ or `setrawcookie() <http://www.php.net/setrawcookie>`_. Avoid using `header() <http://www.php.net/header>`_ to do so, as the PHP native functions are more convenient and easier to spot during a refactoring.
+
+`setcookie() <http://www.php.net/setcookie>`_ applies some encoding internally, for the value of the cookie and the date of expiration. Rarely, this encoding has to be skipped : then, use setrawencoding().
+
+Both functions help by giving a checklist of important attributes to be used with the cookie. 
+
+.. code-block:: php
+
+   <?php
+   
+   // same as below
+   setcookie(myCookie, 'chocolate', time()+3600, /, , true, true);
+   
+   // same as above. Slots for path and domain are omitted, but should be used whenever possible
+   header('Set-Cookie: myCookie=chocolate; Expires='.date('r', (time()+3600)).'; Secure; HttpOnly');
+   
+   ?>
+
+
+See also : `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_.
+
++--------------+------------------+
+| Command Line | Php/UseSetCookie |
++--------------+------------------+
+| Analyzers    | :ref:`Analyze`   |
++--------------+------------------+
 
 
 

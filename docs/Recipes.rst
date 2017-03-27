@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Wed, 15 Mar 2017 16:54:43 +0000
-.. comment: Generation hash : ff3f005a72948193238ca76ff25c1370771ea6f4
+.. comment: Generation date : Mon, 27 Mar 2017 12:57:11 +0000
+.. comment: Generation hash : b285fd70038481fea8319f7568efea3f64064b3c
 
 
 .. _analyze:
@@ -69,7 +69,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 298 analysis
+Total : 300 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -100,6 +100,7 @@ Total : 298 analysis
 * :ref:`Can't Extend Final <can't-extend-final>`
 * :ref:`Cast To Boolean <cast-to-boolean>`
 * :ref:`Catch Overwrite Variable <catch-overwrite-variable>`
+* :ref:`Check All Types <check-all-types>`
 * :ref:`Class Function Confusion <class-function-confusion>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
 * :ref:`Class Should Be Final By Ocramius <class-should-be-final-by-ocramius>`
@@ -260,6 +261,7 @@ Total : 298 analysis
 * :ref:`Should Use Constants <should-use-constants>`
 * :ref:`Should Use Local Class <should-use-local-class>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
+* :ref:`Should Use SetCookie() <should-use-setcookie()>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
 * :ref:`Silently Cast Integer <silently-cast-integer>`
 * :ref:`Static Loop <static-loop>`
@@ -795,7 +797,7 @@ Total : 25 analysis
 Security
 ++++++++
 
-Total : 21 analysis
+Total : 22 analysis
 
 * :ref:`Avoid Those Crypto <avoid-those-crypto>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
@@ -811,6 +813,7 @@ Total : 21 analysis
 * :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe CurlOptions <safe-curloptions>`
+* :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
