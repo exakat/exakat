@@ -40,12 +40,14 @@ GREMLIN
 );
 
         $inGLobals = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Variable").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").out("INDEX").values("globalvar")
+g.V().hasLabel("Variable").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").values("globalvar")
 GREMLIN
 );
+
         $counts = array_count_values(array_merge($inGLobals, $inglobal));
         $loneGlobal = array_filter($counts, function ($x) { return $x == 1; });
         $loneGlobal = array_keys($loneGlobal);
+        
 
         $this->atomIs('Global')
              ->outIs('GLOBAL')
@@ -57,8 +59,6 @@ GREMLIN
              ->inIs('VARIABLE')
              ->atomIs('Array')
              ->_as('results')
-             ->outIs('INDEX')
-             ->atomIs('String')
              ->is('globalvar', $loneGlobal)
              ->back('results');
         $this->prepareQuery();
