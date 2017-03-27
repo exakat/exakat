@@ -3042,7 +3042,7 @@ class Load extends Tasks {
                    'fullcode'   => $this->tokens[$current][1].' '.$this->atoms[$nameId]['fullcode'].$block,
                    'line'       => $this->tokens[$current][2],
                    'token'      => $this->getToken($this->tokens[$current][0]),
-                   'fullnspath' => $this->atoms[$nameId]['fullnspath'] ?? '\\');
+                   'fullnspath' => isset($this->atoms[$nameId]['fullnspath']) ? $this->atoms[$nameId]['fullnspath'] : '\\');
         $this->setAtom($namespaceId, $x);
 
         return $namespaceId;
