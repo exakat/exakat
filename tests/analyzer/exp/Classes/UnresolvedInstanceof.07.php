@@ -1,8 +1,8 @@
 <?php
 
-$expected     = array('$b instanceof N');
+$expected     = array('$b instanceof E',
+                      '$b instanceof N');
 
-$expected_not = array('$b instanceof E',
-                      '$b instanceof Closure');
+$expected_not = array('$b instanceof Closure');
 
 ?>

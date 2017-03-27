@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Cakephp_CakePHPUsed extends Analyzer {
     /* 1 methods */
 
-    public function testCakePHP_CakephpUsed01()  { $this->generic_test('Cakephp/CakePHPUsed.01'); }
+    public function testCakephp_CakePHPUsed01()  { $this->generic_test('Cakephp/CakePHPUsed.01'); }
 }
 ?>
