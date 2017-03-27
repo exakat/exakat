@@ -915,10 +915,7 @@ class Load extends Tasks {
                 $this->addLink($catchId, $classId, 'CLASS');
                 $this->setAtom($catchId, array('rank'       => ++$rankCatch));
 
-                list($fullnspath, $aliased) = $this->getFullnspath($classId);
-                $this->setAtom($classId, array('fullnspath' => $fullnspath,
-                                               'aliased'    => $aliased));
-                $this->addCall('class', $fullnspath, $classId);
+                $this->addCall('class', $this->atoms[$classId]['fullnspath'], $classId);
                 $catchFullcode[] = $this->atoms[$classId]['fullcode'];
 
                 if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_PIPE) {
@@ -4184,12 +4181,7 @@ class Load extends Tasks {
         };
         $right = $this->popExpression();
 
-        list($fullnspath, $aliased) = $this->getFullnspath($right, 'class');
-        $this->setAtom($right, array('fullnspath' => $fullnspath,
-                                     'aliased'    => $aliased));
-        $this->addCall('class', $fullnspath, $right);
-
-        if ($aliased === self::ALIASED) {
+        if ($this->atoms[$right]['aliased'] === self::ALIASED) {
             $this->addLink($this->usesId['class'][strtolower($this->atoms[$right]['code'])], $right, 'DEFINITION');
         }
 
