@@ -3,7 +3,11 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$component = 'zend-cache';
+$component = 'zend-db';
+
+if (!file_exists('projects/'.$component)){
+    die("No such project as $component. Aborting\n");
+}
 
 processComponent($component);
 
@@ -16,7 +20,6 @@ while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
     print_r($row);
     processRelease($component, str_replace('release-', '', $row['release']));
 }
-die();
 
 function processRelease($component, $version) {
     if (!empty($version)) {
@@ -81,27 +84,28 @@ PHP;
     $exakatVersion = \Exakat\Exakat::VERSION;
     $zend3 = new \Exakat\Data\ZendF3(__DIR__.'/../data/', false);
     
-    $d = explode('.', $version);
-    --$d[1];
-    $previousVersion = implode('.', $d);
-    if ($version === '3.0.0') {
-        $previousVersion = '2.9.0';
-    }
+    $countClasses = getCounts('Classes', $zend3, $component, substr($version, 0, 3));
+    $countInterfaces = getCounts('Interfaces', $zend3, $component, substr($version, 0, 3));
+    $countTraits = getCounts('Traits', $zend3, $component, substr($version, 0, 3));
 
     if (version_compare($version, '2.5.0') > 0) {
-        $new = '';
-        $removed = '';
+        $new = array();
+        $removed = array();
+
+        $versions = $zend3->getVersions($component);
+        $id = array_search($version, $versions);
+        $previousVersion = $versions[$id - 1];
         
         // Classes
         $previousClasses = $zend3->getClasses($component, substr($previousVersion, 0, 3));
         $classes = $zend3->getClasses($component, substr($version, 0, 3));
         $diff = array_diff($classes['release-'.$version], $previousClasses['release-'.$previousVersion]);
         if (!empty($diff)) {
-            $new .= count($diff)." new classe".(count($diff) > 1 ? 's' : '')." \n";
+            $new[] = count($diff)." new classe".(count($diff) > 1 ? 's' : '')." \n";
         }
         $diff = array_diff($previousClasses['release-'.$previousVersion], $classes['release-'.$version]);
         if (!empty($diff)) {
-            $removed .= count($diff)." removed classe".(count($diff) > 1 ? 's' : '')." \n";
+            $removed[] = count($diff)." removed classe".(count($diff) > 1 ? 's' : '')." \n";
         }
 
         // Interfaces
@@ -115,11 +119,11 @@ PHP;
         }
         $diff = array_diff($interfaces['release-'.$version], $previousInterfaces['release-'.$previousVersion]);
         if (!empty($diff)) {
-            $new .= count($diff)." new interface".(count($diff) > 1 ? 's' : '')." \n";
+            $new[] = count($diff)." new interface".(count($diff) > 1 ? 's' : '')." \n";
         }
         $diff = array_diff($previousInterfaces['release-'.$previousVersion], $interfaces['release-'.$version]);
         if (!empty($diff)) {
-            $removed .= count($diff)." removed interface".(count($diff) > 1 ? 's' : '')." \n";
+            $removed[] = count($diff)." removed interface".(count($diff) > 1 ? 's' : '')." \n";
         }
 
         // Traits
@@ -133,24 +137,37 @@ PHP;
         }
         $diff = array_diff($traits['release-'.$version], $previousTraits['release-'.$previousVersion]);
         if (!empty($diff)) {
-            $new .= count($diff)." new trait".(count($diff) > 1 ? 's' : '')." \n";
+            $new[] = count($diff)." new trait".(count($diff) > 1 ? 's' : '')." \n";
         }
         $diff = array_diff($previousTraits['release-'.$previousVersion], $traits['release-'.$version]);
         if (!empty($diff)) {
-            $removed .= count($diff)." removed trait".(count($diff) > 1 ? 's' : '')." \n";
+            $removed[] = count($diff)." removed trait".(count($diff) > 1 ? 's' : '')." \n";
+        }
+        
+        if (empty($new)) {
+            $new = '';
+        } else {
+            $new = implode(', ', $new).'.';
+        }
+        if (empty($removed)) {
+            $removed = '';
+        } else {
+            $removed = implode(', ', $removed).'.';
         }
     } else {
-        $new = '';
+        $new = "";
         $removed = '';
         
         $classes = array( $version => array('File'));
-        $previousClasses = array( $previousVersion => array('AuthEventTestListener'));
+        $previousClasses = array( '2.5.0' => array('AuthEventTestListener'));
     }
     $ini = <<<INI
 name = "$component $version Undefined Classes";
 description = "$component classes, interfaces and traits that are not defined in version $version.
-$new 
-$removed
+
+$component $version has $countClasses classes, $countTraits traits and $countInterfaces interfaces;
+
+$new $removed See also : `$component <https://github.com/zendframework/$component>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
 ";
 clearphp = "";
@@ -166,19 +183,26 @@ INI;
     $allClasses = $zend3->getClasses($component);
     $allClasses = array_merge(...array_values($allClasses));
     $allClasses = array_keys(array_count_values($allClasses));
-    
-    $diff = array_values(array_diff($allClasses, $classes['release-'.$version]));
-    $classOK = $diff[0];
 
-    $diff = array_keys(array_intersect($classes['release-'.$version], $previousClasses['release-'.$previousVersion]));
-    $classKO = $classes['release-'.$version][0];
+    $classes = $zend3->getClasses($component, substr($version, 0 ,3))['release-'.$version];
+    
+    $classOK = $classes[0];
+
+    $diff = array_values(array_diff($allClasses, $classes));
+    if (empty($diff)) {
+        $classKO = '1';
+        $classKO_exp = '';
+    } else {
+        $classKO = 'new '.$diff[0].'()';
+        $classKO_exp = "'".$diff[0]."( )'";
+    }
 
     $php = <<<PHP
 <?php
 
-\$ok = new $classOK();
+\$ok = $classOK();
 
-\$ko = new $classKO();
+\$ko = $classKO;
 
 ?>
 PHP;
@@ -188,9 +212,9 @@ PHP;
     $php = <<<PHP
 <?php
 
-\$expected     = array('$classOK( )');
+\$expected     = array($classKO_exp);
 
-\$expected_not = array('$classKO( )');
+\$expected_not = array('$classOK( )');
 
 ?>
 PHP;
@@ -264,9 +288,28 @@ PHP;
     $exakatVersion = \Exakat\Exakat::VERSION;
     $zend3 = new \Exakat\Data\ZendF3(__DIR__.'/../data/', false);
     
+    $versions = $zend3->getVersions($component);
+    
+    if (count($versions) === 1) {
+        $docVersion = 'This covers version '.$versions[0];
+    } elseif (count($versions) === 2) {
+        $docVersion = 'This covers all two versions '.$versions[0].' and '.$versions[1];
+    } else {
+        $english = [2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven'];
+        $docVersion = 'This covers all '.$english[count($versions)].' versions, from '.$versions[0].' to '.$versions[count($versions) - 1].'.';
+    }
+    
+    $countClasses = getCounts('Classes', $zend3, $component);
+    $countInterfaces = getCounts('Interfaces', $zend3, $component);
+    $countTraits = getCounts('Traits', $zend3, $component);
+    
     $ini = <<<INI
 name = "$component Usage";
-description = "$component usage, based on classes, interfaces and traits. This covers all versions, from 2.5.0.
+description = "$component usage, based on classes, interfaces and traits. $docVersion.
+
+$component has $countClasses classes, $countTraits traits and $countInterfaces interfaces;
+
+See also : `$component <https://github.com/zendframework/$component>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
 ";
 clearphp = "";
@@ -282,7 +325,34 @@ INI;
     $allClasses = $zend3->getClasses($component);
     $allClasses = array_merge(...array_values($allClasses));
     $allClasses = array_keys(array_count_values($allClasses));
+
+    $classOK = $allClasses[0];
+
+    $classKO = $classOK.'\\NotZend';
+
+    $php = <<<PHP
+<?php
+
+\$ok = new $classOK();
+
+\$ko = new $classKO();
+
+?>
+PHP;
     
+    file_put_contents('tests/analyzer/source/ZendF/'.$className.'.01.php', $php);
+
+    $php = <<<PHP
+<?php
+
+\$expected     = array('$classOK( )');
+
+\$expected_not = array('$classKO( )');
+
+?>
+PHP;
+    
+    file_put_contents('tests/analyzer/exp/ZendF/'.$className.'.01.php', $php);    
 // add to sqlite
 $analyzersSqlite = new Sqlite3('data/analyzers.sqlite');
 $category = 'ZendF';
@@ -297,6 +367,17 @@ $analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', '$idZen
 // 38 is id for All
 $analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', 38)"); 
 unset($analyzersSqlite);
+}
+
+function getCounts($type, $zend3, $component, $version = null) {
+    $f = 'get'.$type;
+    $x = $zend3->$f($component, $version);
+    if (empty($x)) {
+        $r = 'no';
+    } else {
+        $r = count(array_unique(array_merge(...array_values($x))));
+    }
+    return $r;
 }
 
 ?>
