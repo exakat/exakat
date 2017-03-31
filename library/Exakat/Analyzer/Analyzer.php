@@ -1014,11 +1014,11 @@ GREMLIN
         return $this;
     }
 
-    public function raw($query) {
+    public function raw($query, $args = null) {
         ++$this->rawQueryCount;
         $query = $this->cleanAnalyzerName($query);
 
-        $this->addMethod($query);
+        $this->addMethod($query, $args);
         
         return $this;
     }
