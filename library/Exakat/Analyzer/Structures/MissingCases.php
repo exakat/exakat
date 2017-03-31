@@ -79,15 +79,9 @@ GREMLIN
             return;
         }
 
-        foreach($commons as &$s) {
-            $s = '["'.implode('", "', $s).'"]'; 
-        }
-        unset($s);
-        $commons = '['.implode(', ', $commons).']';
-
         $this->atomIs('Switch')
              ->raw('sideEffect{ x = []; }.sideEffect( __.out("CASES").out("ELEMENT").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));}).filter{x.size() > 0;}.map{x;}')
-             ->raw('filter{ x in '.$commons.' }')
+             ->raw('filter{ x in ***.values() }', $commons)
              ->back('first');
         $this->prepareQuery();
     }
