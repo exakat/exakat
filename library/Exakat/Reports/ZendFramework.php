@@ -2327,12 +2327,25 @@ JAVASCRIPT;
 
     private function generateCompatibilities() {
         $components = array(
+                    'Components' => array(
+                            'Authentication'             => 'ZendF/Zf3Authentication',
+                            'Barcode'                    => 'ZendF/Zf3Barcode',
+                            'Db'                         => 'ZendF/Zf3Db',
                             'Cache'                      => 'ZendF/Zf3Cache',
                             'Config'                     => 'ZendF/Zf3Config',
+                            'Escaper'                    => 'ZendF/Zf3Escaper',
+                            'Eventmanager'               => 'ZendF/Zf3Eventmanager',
+                            'Filter'                     => 'ZendF/Zf3Filter',
+                            'Feed'                       => 'ZendF/Zf3Feed',
+                            'HTTP'                       => 'ZendF/Zf3Http',
                             'MVC'                        => 'ZendF/Zf3Mvc',
+                            'Session'                    => 'ZendF/Zf3Session',
+                            'Text'                       => 'ZendF/Zf3Text',
+                            'Test'                       => 'ZendF/Zf3Test',
                             'URI'                        => 'ZendF/Zf3Uri',
                             'Validator'                  => 'ZendF/Zf3Validator',
                             'View'                       => 'ZendF/Zf3View',
+                    ),
                 );
                 
         $zend3 = new ZendF3($this->config->dir_root.'/data', $this->config->is_phar);
@@ -2342,13 +2355,13 @@ JAVASCRIPT;
         						<tr></tr>
         						<tr><th>Component</th><th>'.implode('</th><th>', $versions).'</th></tr>';
 
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', array_values($components)).'")');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', array_values($components['Components'])).'")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
         }
         
-        foreach($components as $name => $component) { 
+        foreach($components['Components'] as $name => $component) { 
             $rows = array($name);
             
             $componentVersion = $zend3->getVersions('zend-'.strtolower($name));
@@ -2373,7 +2386,7 @@ SQL;
                 }
 
                 if ($sources[$component] === 0) {
-                    $rows[] = 'N/A';
+                    $rows[] = '<i class="fa fa-eye-slash" style="color: #bbbbbb"></i>';
                     continue;
                 }
 
@@ -2383,7 +2396,7 @@ SQL;
                     continue;
                 }
                 
-                $rows[] = $results[$analyzer] === 0 ? 'OK' : 'KO';
+                $rows[] = $results[$analyzer] === 0 ? '<i class="fa fa-check-square-o"></i>' : '<i class="fa fa-check-o"></i>';
             }
             
             $rows = array_map(function($x) { return "<td>$x</td>";}, $rows);
@@ -2394,8 +2407,12 @@ SQL;
         $table .= '        					</table>';
 
         $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Titre');
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Description');
+        $html = $this->injectBloc($html, 'TITLE', 'Component and compatibility');
+        $html = $this->injectBloc($html, 'DESCRIPTION', '<p>List of the Zend Framework 3 components, broken down by versions, with their compatibility.</p>
+        
+        <p>For each component, classes, interfaces and traits are checked. When all of those that are found in the code, belong to a version, they are ticked. If one of them is missing in the target version, it is unticked. </p>
+        
+        <p>When the component is not found, it is dimmed.</p>');
         $html = $this->injectBloc($html, 'CONTENT', $table);
         $this->putBasedPage('compatibilities', $html);
     }
@@ -2403,9 +2420,20 @@ SQL;
     private function generateAppinfo() {
         $extensions = array(
                     'Components' => array(
+                            'Authentication'             => 'ZendF/Zf3Authentication',
+                            'Barcode'                    => 'ZendF/Zf3Barcode',
+                            'Db'                         => 'ZendF/Zf3Db',
                             'Cache'                      => 'ZendF/Zf3Cache',
                             'Config'                     => 'ZendF/Zf3Config',
+                            'Escaper'                    => 'ZendF/Zf3Escaper',
+                            'Eventmanager'               => 'ZendF/Zf3Eventmanager',
+                            'Feed'                       => 'ZendF/Zf3Feed',
+                            'Filter'                     => 'ZendF/Zf3Filter',
+                            'HTTP'                       => 'ZendF/Zf3Http',
                             'MVC'                        => 'ZendF/Zf3Mvc',
+                            'Session'                    => 'ZendF/Zf3Session',
+                            'Text'                       => 'ZendF/Zf3Text',
+                            'Test'                       => 'ZendF/Zf3Test',
                             'URI'                        => 'ZendF/Zf3Uri',
                             'Validator'                  => 'ZendF/Zf3Validator',
                             'View'                       => 'ZendF/Zf3View',
