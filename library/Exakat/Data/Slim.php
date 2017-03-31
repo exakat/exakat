@@ -49,13 +49,7 @@ class Slim {
     }
 
     public function getVersions() {
-        $query = 'SELECT DISTINCT release AS version FROM releases';
-        if ($component !== null) {
-            $query .= "  JOIN components 
-                      ON releases.component_id = components.id 
- WHERE components.component = \"slim\"";
-        }
-        $query .= " ORDER BY 1";
+        $query = 'SELECT DISTINCT release AS version FROM releases  ORDER BY 1';
         $res = $this->sqlite->query($query);
 
         $return = array();

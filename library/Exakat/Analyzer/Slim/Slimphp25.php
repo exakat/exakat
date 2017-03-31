@@ -23,25 +23,12 @@
 namespace Exakat\Analyzer\Slim;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Data\Slim;
 
-class SlimMissing extends Analyzer {
-    protected $version = '3.8';
-    
-    public function dependsOn() {
-        return array('Slim/UseSlim');
-    }
-    
+class Slimphp25 extends SlimMissing {
     public function analyze() {
-        $slim = new Slim($this->config->dir_root.'/data', $this->config->is_phar);
-        $classes = $slim->getClasses($this->version);
-        $classes = array_pop($classes);
-        $classes = $this->makeFullnspath($classes);
+        $this->version = '2.5';
         
-        $this->analyzerIs('Slim/UseSlim')
-             ->fullnspathIsNot($classes)
-             ->back('first');
-        $this->prepareQuery();
+        parent::analyze();
     }
 }
 
