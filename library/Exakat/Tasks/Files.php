@@ -56,6 +56,7 @@ class Files extends Tasks {
         }
 
         $this->checkComposer($dir);
+        $this->checkLicence($dir);
 
         $ignoredFiles = array();
         $files = array();
@@ -315,6 +316,21 @@ class Files extends Tasks {
         $this->datastore->addRow('hash', $composerInfo);
     }
 
+    private function checkLicence($dir) {
+        $licenses = parse_ini_file($this->config->dir_root.'/data/license.ini');
+        $licenses = $licenses['files'];
+        
+        $path = $this->config->projects_root.'/projects/'.$dir.'/code';
+        foreach($licenses as $file) {
+            if (file_exists($path.'/'.$file)) {
+                $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
+
+                return true;
+            }
+        }
+        $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
+    }
+    
     public static function findFiles($path, &$files, &$ignoredFiles) {
         $config = Config::factory();
         $ignore_dirs = $config->ignore_dirs;
