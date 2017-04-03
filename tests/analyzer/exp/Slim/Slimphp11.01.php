@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('\\Slim_Exception_Pass( )');
 
-$expected_not = array();
+$expected_not = array('\\Cookie( )');
 
 ?>

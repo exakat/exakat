@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('\\CookieJar( )');
 
-$expected_not = array();
+$expected_not = array('\\Cookie( )');
 
 ?>
