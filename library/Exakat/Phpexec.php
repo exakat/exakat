@@ -205,7 +205,7 @@ class Phpexec {
     }
 
     public function getTokenFromFile($file) {
-        $file = str_replace('$', '\\\$', $file);
+        $file = str_replace('$', '\\$', $file);
 
         if ($this->isCurrentVersion) {
             $tokens = @token_get_all(file_get_contents($file));
