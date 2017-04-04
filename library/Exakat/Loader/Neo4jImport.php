@@ -301,6 +301,13 @@ GREMLIN;
 
             $indexList[$atom['atom']] = 1;
             $ids[$id] = 1;
+            
+            if (strlen($atom['code']) > 5000) {
+                $atom['code'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['code']).' chars]';
+            }
+            if (strlen($atom['fullcode']) > 5000) {
+                $atom['fullcode'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['fullcode']).' chars]';
+            }
 
             foreach($extras as $name => $type) {
                 if ($name == ':ID') {

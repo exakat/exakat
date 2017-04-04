@@ -309,6 +309,13 @@ CYPHER;
                 }
             }
 
+            if (strlen($atom['code']) > 5000) {
+                $atom['code'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['code']).' chars]';
+            }
+            if (strlen($atom['fullcode']) > 5000) {
+                $atom['fullcode'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['fullcode']).' chars]';
+            }
+
             if (count($extras[$atom['atom']]) > 0) {
                 $extra = ','.implode(',', $extra);
             } else {
@@ -317,10 +324,6 @@ CYPHER;
 
             $written = fwrite($fp,
                               $atom['id'].','.$atom['atom'].',"'.$this->escapeCsv( $atom['code'] ).'","'.$this->escapeCsv( $atom['fullcode']).'",'.(isset($atom['line']) ? $atom['line'] : 0).',"'.$this->escapeCsv( isset($atom['token']) ? $atom['token'] : '').'","'.(isset($atom['rank']) ? $atom['rank'] : -1).'"'.$extra."\n");
-
-            if ($written > 2000000) {
-                print "Warning : Writing a csv line over 2M in $fileName\n";
-            }
 
             fclose($fp);
         }
