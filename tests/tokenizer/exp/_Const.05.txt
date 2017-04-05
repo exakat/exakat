@@ -1,0 +1,106 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Const.05.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              const
+              Label : PUBLIC
+                public
+              Label : CONST
+                const
+                Label : NAME
+                  a
+                Label : VALUE
+                  1
+            Label : ELEMENT
+              const
+              Label : PROTECTED
+                protected
+              Label : CONST
+                const
+                Label : NAME
+                  B
+                Label : VALUE
+                  1
+            Label : ELEMENT
+              const
+              Label : PRIVATE
+                private
+              Label : CONST
+                const
+                Label : NAME
+                  C
+                Label : VALUE
+                  1
+            Label : ELEMENT
+              const
+              Label : PUBLIC
+                public
+              Label : CONST
+                const
+                Label : NAME
+                  a2
+                Label : VALUE
+                  1
+              Label : CONST
+                ,
+                Label : NAME
+                  a3
+                Label : VALUE
+                  1
+            Label : ELEMENT
+              const
+              Label : PROTECTED
+                protected
+              Label : CONST
+                const
+                Label : NAME
+                  B1
+                Label : VALUE
+                  1
+              Label : CONST
+                ,
+                Label : NAME
+                  B2
+                Label : VALUE
+                  3
+            Label : ELEMENT
+              const
+              Label : PRIVATE
+                private
+              Label : CONST
+                const
+                Label : NAME
+                  C1
+                Label : VALUE
+                  1
+              Label : CONST
+                ,
+                Label : NAME
+                  c2
+                Label : VALUE
+                  2
+              Label : CONST
+                ,
+                Label : NAME
+                  c3
+                Label : VALUE
+                  4
+              Label : CONST
+                ,
+                Label : NAME
+                  c4
+                Label : VALUE
+                  5
+          Label : NAME
+            X
