@@ -102,20 +102,22 @@ Label : PROJECT
           Label : NAME
             echo
         Label : ELEMENT
+           
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              $x
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              Void
+          Label : NAME
+            Void
+        Label : ELEMENT
           echo
           Label : ARGUMENTS
             echo
             Label : ARGUMENT
-               
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $x
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : NAME
-                Void
+              Void
           Label : NAME
             echo

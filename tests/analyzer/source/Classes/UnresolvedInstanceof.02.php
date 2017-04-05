@@ -2,13 +2,14 @@
 
 interface A {}
 class C {}
-interface D {}
-class D {}
+interface Di {}
+class Dc {}
 trait TE {}
 
 $b instanceof A;
 $b instanceof C;
-$b instanceof D;
+$b instanceof Di;
+$b instanceof Dc;
 $b instanceof TE;
 $b instanceof noCIT;
 

@@ -94,6 +94,8 @@ Label : PROJECT
                 Void
             Label : NAME
               MyHelloWorld
+          Label : DEFINITION
+            MyHelloWorld
           Label : NAME
             MyHelloWorld
         Label : ELEMENT

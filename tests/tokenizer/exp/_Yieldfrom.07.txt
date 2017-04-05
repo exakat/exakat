@@ -82,8 +82,6 @@ Label : PROJECT
                 Void
             Label : NAME
               count_to_ten
-          Label : DEFINITION
-            count_to_ten
           Label : NAME
             count_to_ten
         Label : ELEMENT
@@ -116,8 +114,6 @@ Label : PROJECT
                 Void
             Label : NAME
               seven_eight
-          Label : DEFINITION
-            seven_eight
           Label : NAME
             seven_eight
         Label : ELEMENT
@@ -140,8 +136,6 @@ Label : PROJECT
                 Void
             Label : NAME
               eight
-          Label : DEFINITION
-            eight
           Label : NAME
             eight
         Label : ELEMENT

@@ -17,27 +17,23 @@ Label : PROJECT
               Label : KEY
                 'B'
               Label : VALUE
-                -
-                Label : LEFT
-                  .
-                  Label : CONCAT
-                    (
-                    Label : CODE
-                      ?
-                      Label : CONDITION
-                        ===
-                        Label : LEFT
-                          $a
-                        Label : RIGHT
-                          'C'
-                      Label : ELSE
-                        'E'
-                      Label : THEN
-                        'D'
-                  Label : CONCAT
-                    Void
-                Label : RIGHT
-                  0
+                .
+                Label : CONCAT
+                  (
+                  Label : CODE
+                    ?
+                    Label : CONDITION
+                      ===
+                      Label : LEFT
+                        $a
+                      Label : RIGHT
+                        'C'
+                    Label : ELSE
+                      'E'
+                    Label : THEN
+                      'D'
+                Label : CONCAT
+                  -0
             Label : ARGUMENT
               Void
           Label : NAME

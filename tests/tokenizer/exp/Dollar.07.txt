@@ -9,16 +9,16 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          $a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              4
+          $
           Label : NAME
             $a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                4
+            Label : NAME
+              $a
         Label : ELEMENT
           $
           Label : NAME
-            $
-            Label : NAME
-              Void
+            Void

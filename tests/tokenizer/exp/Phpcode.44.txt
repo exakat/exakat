@@ -21,15 +21,15 @@ Label : PROJECT
             Label : ELEMENT
               Q
             Label : ELEMENT
-              $g
-            Label : ELEMENT
               <?=
               Label : ARGUMENTS
                 <?=
                 Label : ARGUMENT
-                  Void
+                  $g
               Label : NAME
                 <?=
+            Label : ELEMENT
+              Void
             Label : ELEMENT
               <?=
               Label : ARGUMENTS
@@ -44,6 +44,8 @@ Label : PROJECT
                     E
               Label : NAME
                 <?=
+            Label : ELEMENT
+              Void
           Label : NAME
             B
         Label : ELEMENT

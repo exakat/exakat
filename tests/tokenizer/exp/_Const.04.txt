@@ -1,0 +1,72 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Const.04.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          const
+          Label : CONST
+            const
+            Label : VALUE
+              1
+            Label : NAME
+              C
+            Label : DEFINITION
+              C
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              method
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  echo
+                  Label : ARGUMENTS
+                    echo
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        __METHOD__
+                      Label : CONCAT
+                        "\n"
+                  Label : NAME
+                    echo
+              Label : NAME
+                method
+              Label : STATIC
+                static
+          Label : DEFINITION
+            C
+          Label : NAME
+            C
+        Label : ELEMENT
+          echo
+          Label : ARGUMENTS
+            echo
+            Label : ARGUMENT
+              C
+          Label : NAME
+            echo
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            C
+          Label : METHOD
+            method
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              method

@@ -51,8 +51,6 @@ Label : PROJECT
                 Label : AS
                   X
                 Label : DEFINITION
-                  x
-                Label : DEFINITION
                   X
                 Label : NAME
                   \
@@ -78,7 +76,7 @@ Label : PROJECT
                   Void
               Label : DEFINITION
                 ParentClass
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 parent
               Label : NAME
                 ParentClass
@@ -135,9 +133,9 @@ Label : PROJECT
                   Label : STATIC
                     static
               Label : DEFINITION
-                self
-              Label : DEFINITION
                 static
+              Label : DEFINITION, DEFINITION
+                self
               Label : EXTENDS
                 ParentClass
               Label : NAME

@@ -11,7 +11,7 @@ function y() {
     $ow2 = 1;
     $ow2 = 2;
 
-    $now1 = 3;
+    $now1 = $ow2 + 2;
 }
 
 ?>

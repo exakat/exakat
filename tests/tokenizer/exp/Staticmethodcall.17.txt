@@ -1,0 +1,398 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Staticmethodcall.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          new
+          Label : NEW
+            self
+        Label : ELEMENT
+          new
+          Label : NEW
+            parent
+        Label : ELEMENT
+          new
+          Label : NEW
+            static
+        Label : ELEMENT
+          new
+          Label : NEW
+            SELF
+        Label : ELEMENT
+          new
+          Label : NEW
+            PARENT
+        Label : ELEMENT
+          new
+          Label : NEW
+            STATIC
+        Label : ELEMENT
+          new
+          Label : NEW
+            self
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              self
+        Label : ELEMENT
+          new
+          Label : NEW
+            parent
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              parent
+        Label : ELEMENT
+          new
+          Label : NEW
+            static
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              static
+        Label : ELEMENT
+          new
+          Label : NEW
+            self
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              self
+        Label : ELEMENT
+          new
+          Label : NEW
+            parent
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              parent
+        Label : ELEMENT
+          new
+          Label : NEW
+            static
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                1
+            Label : NAME
+              static
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            self
+          Label : CONSTANT
+            A
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            parent
+          Label : CONSTANT
+            A
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            static
+          Label : CONSTANT
+            A
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            self
+          Label : METHOD
+            m
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              m
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            parent
+          Label : METHOD
+            m
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              m
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            static
+          Label : METHOD
+            m
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              m
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            self
+          Label : PROPERTY
+            $a
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            parent
+          Label : PROPERTY
+            $a
+        Label : ELEMENT
+          ::
+          Label : CLASS
+            static
+          Label : PROPERTY
+            $a
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  new
+                  Label : NEW
+                    self
+                Label : ELEMENT
+                  new
+                  Label : NEW
+                    parent
+                Label : ELEMENT
+                  new
+                  Label : NEW
+                    static
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    self
+                  Label : CONSTANT
+                    Ac
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    parent
+                  Label : CONSTANT
+                    Ac
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    static
+                  Label : CONSTANT
+                    Ac
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    self
+                  Label : METHOD
+                    mc
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      mc
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    parent
+                  Label : METHOD
+                    mc
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      mc
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    static
+                  Label : METHOD
+                    mc
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      mc
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    self
+                  Label : PROPERTY
+                    $ac
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    parent
+                  Label : PROPERTY
+                    $ac
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    static
+                  Label : PROPERTY
+                    $ac
+              Label : NAME
+                foo
+          Label : DEFINITION
+            static
+          Label : DEFINITION
+            static
+          Label : DEFINITION
+            static
+          Label : DEFINITION
+            static
+          Label : DEFINITION, DEFINITION
+            self
+          Label : DEFINITION, DEFINITION
+            self
+          Label : DEFINITION, DEFINITION
+            self
+          Label : DEFINITION, DEFINITION, DEFINITION
+            self
+          Label : NAME
+            x
+        Label : ELEMENT
+          trait
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  new
+                  Label : NEW
+                    self
+                Label : ELEMENT
+                  new
+                  Label : NEW
+                    parent
+                Label : ELEMENT
+                  new
+                  Label : NEW
+                    static
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    self
+                  Label : CONSTANT
+                    At
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    parent
+                  Label : CONSTANT
+                    At
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    static
+                  Label : CONSTANT
+                    At
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    self
+                  Label : METHOD
+                    mt
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      mt
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    parent
+                  Label : METHOD
+                    mt
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      mt
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    static
+                  Label : METHOD
+                    mt
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : NAME
+                      mt
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    self
+                  Label : PROPERTY
+                    $at
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    parent
+                  Label : PROPERTY
+                    $at
+                Label : ELEMENT
+                  ::
+                  Label : CLASS
+                    static
+                  Label : PROPERTY
+                    $at
+              Label : NAME
+                foo
+          Label : DEFINITION
+            static
+          Label : DEFINITION
+            static
+          Label : DEFINITION
+            static
+          Label : DEFINITION
+            static
+          Label : DEFINITION, DEFINITION
+            self
+          Label : DEFINITION, DEFINITION
+            self
+          Label : DEFINITION, DEFINITION
+            self
+          Label : DEFINITION, DEFINITION, DEFINITION
+            self
+          Label : NAME
+            t

@@ -14,17 +14,15 @@ Label : PROJECT
           Label : THEN
             ;
             Label : ELEMENT
-              +
-              Label : LEFT
-                3
-              Label : RIGHT
-                3
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  +
+                  Label : LEFT
+                    3
+                  Label : RIGHT
+                    3
               Label : NAME
                 echo
             Label : ELEMENT

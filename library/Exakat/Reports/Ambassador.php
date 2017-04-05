@@ -1235,7 +1235,7 @@ JAVASCRIPT;
 
     public function getSeverityBreakdown() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
                 SELECT severity, count(*) AS number
@@ -1314,7 +1314,7 @@ SQL;
 
     protected function getAnalyzersResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
         SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity FROM results
@@ -1328,7 +1328,7 @@ SQL
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
             $row['label'] = $analyzer->getDescription()->getName();
-            $row['recipes' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
             $return[] = $row;
         }
@@ -1373,7 +1373,7 @@ SQL;
 
     private function getFilesResultsCounts() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
@@ -1403,7 +1403,7 @@ SQL;
 
     public function getFilesCount($limit = null) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT file, count(*) AS number
                     FROM results
@@ -1461,11 +1461,11 @@ SQL;
             $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
             $dataNone[]     = empty($severities[$value['file']]['None'])     ? 0 : $severities[$value['file']]['None'];
         }
-        $xAxis        = join(', ', $xAxis);
-        $dataCritical = join(', ', $dataCritical);
-        $dataMajor    = join(', ', $dataMajor);
-        $dataMinor    = join(', ', $dataMinor);
-        $dataNone     = join(', ', $dataNone);
+        $xAxis        = implode(', ', $xAxis);
+        $dataCritical = implode(', ', $dataCritical);
+        $dataMajor    = implode(', ', $dataMajor);
+        $dataMinor    = implode(', ', $dataMinor);
+        $dataNone     = implode(', ', $dataNone);
 
         return array(
             'scriptDataFiles'    => $xAxis,
@@ -1478,7 +1478,7 @@ SQL;
 
     private function getAnalyzersCount($limit) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1500,7 +1500,7 @@ SQL;
 
     private function getTopAnalyzers() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1531,7 +1531,7 @@ SQL;
 
     private function getSeveritiesNumberBy($type = 'file') {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count
@@ -1570,11 +1570,11 @@ SQL;
             $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
             $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['None'];
         }
-        $xAxis = join(', ', $xAxis);
-        $dataCritical = join(', ', $dataCritical);
-        $dataMajor = join(', ', $dataMajor);
-        $dataMinor = join(', ', $dataMinor);
-        $dataNone = join(', ', $dataNone);
+        $xAxis = implode(', ', $xAxis);
+        $dataCritical = implode(', ', $dataCritical);
+        $dataMajor = implode(', ', $dataMajor);
+        $dataMinor = implode(', ', $dataMinor);
+        $dataNone = implode(', ', $dataNone);
 
         return array(
             'scriptDataAnalyzer'         => $xAxis,
@@ -1652,7 +1652,7 @@ JAVASCRIPT;
 
     public function getIssuesFaceted($theme) {
         $list = Analyzer::getThemeAnalyzers($theme);
-        $list = '"'.join('", "', $list).'"';
+        $list = '"'.implode('", "', $list).'"';
 
         $sqlQuery = <<<SQL
             SELECT fullcode, file, line, analyzer
@@ -1677,7 +1677,7 @@ SQL;
             $item['line' ] =  $row['line'];
             $item['severity'] = "<i class=\"fa fa-warning ".$this->severities[$row['analyzer']]."\"></i>";
             $item['complexity'] = "<i class=\"fa fa-cog ".$this->timesToFix[$row['analyzer']]."\"></i>";
-            $item['recipe' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $item['recipe' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
             $lines = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
 
@@ -1934,7 +1934,7 @@ SQL;
         }
         unset($row);
 
-        $settings = join('', $info);
+        $settings = implode('', $info);
 
         $html = $this->getBasedPage('annex_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
@@ -2356,6 +2356,7 @@ JAVASCRIPT;
                             'IIS'                        => 'Extensions/Extiis',
                             'NSAPI'                      => 'Extensions/Extnsapi',
                             'Session'                    => 'Extensions/Extsession',
+                            'Cookies'                    => 'Php/UseCookies',
                     ),
 
                     'CLI' => array(
@@ -2453,6 +2454,8 @@ JAVASCRIPT;
                             'Octal'               => 'Type/Octal',
                             'Binary'              => 'Type/Binary',
                             'Real'                => 'Type/Real',
+                            'Not-a-Number'        => 'Php/IsNAN',
+                            'Infinity'            => 'Php/IsINF',
                     ),
 
                     'Strings' => array(

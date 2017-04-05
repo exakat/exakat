@@ -14,5 +14,3 @@ Label : PROJECT
             $x
           Label : RIGHT
             'y'
-        Label : ELEMENT
-          Void

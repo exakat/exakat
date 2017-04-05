@@ -16,5 +16,3 @@ Label : PROJECT
             !
             Label : NOT
               2
-        Label : ELEMENT
-          Void

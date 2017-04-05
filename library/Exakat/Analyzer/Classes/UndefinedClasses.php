@@ -63,7 +63,7 @@ class UndefinedClasses extends Analyzer {
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIs('parent')
-             ->fullnspathIs('\\parent')
+             ->fullnspathIs('undefined')
              ->back('first');
         $this->prepareQuery();
 
@@ -85,7 +85,7 @@ class UndefinedClasses extends Analyzer {
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIs('parent')
-             ->fullnspathIs('\\parent')
+             ->fullnspathIs('undefined')
              ->back('first');
         $this->prepareQuery();
 
@@ -108,7 +108,7 @@ class UndefinedClasses extends Analyzer {
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIs('parent')
-             ->fullnspathIs('\\parent')
+             ->fullnspathIs('undefined')
              ->back('first');
         $this->prepareQuery();
 

@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('usedFunction');
+$expected     = array('function usedFunction( ) { /**/ } ');
 
-$expected_not = array('unusedFunction',
-                      'unusedTraitMethod',
-                      'usedTraitMethod',
-                      'unusedInterfaceMethod',
-                      'usedInterfaceMethod',
+$expected_not = array('function unusedFunction( ) { /**/ } ',
+                      'function unusedTraitMethod( ) { /**/ } ',
+                      'function usedTraitMethod( ) { /**/ } ',
+                      'function unusedInterfaceMethod( ) { /**/ } ',
+                      'function usedInterfaceMethod( ) { /**/ } ',
                       );
 
 ?>

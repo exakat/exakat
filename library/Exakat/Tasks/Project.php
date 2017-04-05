@@ -23,6 +23,7 @@
 
 namespace Exakat\Tasks;
 
+use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exakat;
@@ -87,6 +88,8 @@ class Project extends Tasks {
                                          ));
 
         display("Running project '$project'\n");
+        display("Running the following analysis : ".implode(', ', $this->config->project_themes));
+        display("Producing the following reports : ".implode(', ', $this->reports));
 
         display("Cleaning DB\n");
         $analyze = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
@@ -136,7 +139,7 @@ class Project extends Tasks {
         if ($this->config->program !== null) {
             $this->analyzeOne($this->config->program, $audit_start);
         } else {
-            $this->analyzeThemes($this->config->themes, $audit_start);
+            $this->analyzeThemes($this->config->project_themes, $audit_start);
         }
 
         display("Analyzed project\n");
@@ -277,12 +280,21 @@ GREMLIN;
 
     private function analyzeThemes($themes, $audit_start) {
         if (empty($themes)) {
-            $themes = $this->themes;
+            $themes = $this->config->project_themes;
         }
 
         if (!is_array($themes)) {
             $themes = array($themes);
         }
+        
+        $availableThemes = Analyzer::listAllThemes();
+
+        $diff = array_diff($themes, $availableThemes);
+        if (!empty($diff)) {
+            display("Ignoring the following unknown themes : ".implode(', ', $diff)."\n");
+        }
+        
+        $themes = array_intersect($availableThemes, $themes);
 
         foreach($themes as $theme) {
             $this->addSnitch(array('step'    => 'Analyze : '.$theme, 
@@ -342,7 +354,7 @@ GREMLIN;
                 echo "Error while running the Analyze $theme \n",
                      $e->getMessage(),
                      "\nTrying next analysis\n";
-                file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
+                file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
             }
         }
     }

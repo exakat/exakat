@@ -1,10 +1,12 @@
 <?php
 
+use \cake\view\celltrait as Celltrait;
+
 // \File is a CakePHP class
 new File($poFile, true);
 
 class foo implements CakeEventListener {
-    use FileConfigTrait;
+    use Celltrait;
 }
 
 // Not Cake classes

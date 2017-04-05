@@ -27,10 +27,6 @@ Label : PROJECT
               Label : NAME
                 echo
             Label : ELEMENT
-              yield
-              Label : YIELD
-                Void
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
@@ -39,7 +35,9 @@ Label : PROJECT
                   Label : LEFT
                     (
                     Label : CODE
-                      Void
+                      yield
+                      Label : YIELD
+                        Void
                   Label : RIGHT
                     1
               Label : NAME
@@ -110,8 +108,6 @@ Label : PROJECT
                 Void
             Label : NAME
               x
-          Label : DEFINITION
-            x
           Label : NAME
             x
         Label : ELEMENT

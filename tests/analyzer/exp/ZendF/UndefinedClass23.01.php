@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('Zend\Cache\Module');
+$expected     = array('Zend\Http\Client\Cookies');
 
-$expected_not = array('Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter');
+$expected_not = array('Zend\Cache\Storage\Adapter\BlackHole( )',
+                      'Zend\Authentication\Adapter\AbstractAdapter');
 
 ?>

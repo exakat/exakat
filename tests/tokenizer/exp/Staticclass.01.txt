@@ -20,7 +20,7 @@ Label : PROJECT
                   Void
               Label : DEFINITION
                 ParentClass
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 parent
               Label : NAME
                 ParentClass
@@ -77,6 +77,8 @@ Label : PROJECT
                   Label : STATIC
                     static
               Label : DEFINITION
+                static
+              Label : DEFINITION
                 ClassName
               Label : DEFINITION
                 ClassName
@@ -86,10 +88,8 @@ Label : PROJECT
                   NS
                 Label : SUBNAME
                   ClassName
-              Label : DEFINITION
+              Label : DEFINITION, DEFINITION
                 self
-              Label : DEFINITION
-                static
               Label : EXTENDS
                 ParentClass
               Label : NAME

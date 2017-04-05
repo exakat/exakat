@@ -115,28 +115,26 @@ Label : PROJECT
                 Label : ARGUMENT
                   (
                   Label : CODE
-                    +
-                    Label : LEFT
-                      .
-                      Label : CONCAT
-                        'H'
-                      Label : CONCAT
-                        ->
-                        Label : OBJECT
-                          $a
-                        Label : PROPERTY
-                          I
-                      Label : CONCAT
-                        Void
-                    Label : RIGHT
-                      (
-                      Label : CODE
-                        ?
-                        Label : CONDITION
-                          true
-                        Label : ELSE
-                          '0'
-                        Label : THEN
-                          '1'
+                    .
+                    Label : CONCAT
+                      'H'
+                    Label : CONCAT
+                      ->
+                      Label : OBJECT
+                        $a
+                      Label : PROPERTY
+                        I
+                    Label : CONCAT
+                      +
+                      Label : SIGN
+                        (
+                        Label : CODE
+                          ?
+                          Label : CONDITION
+                            true
+                          Label : ELSE
+                            '0'
+                          Label : THEN
+                            '1'
               Label : NAME
                 print

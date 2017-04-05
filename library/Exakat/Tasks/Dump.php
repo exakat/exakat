@@ -52,7 +52,7 @@ class Dump extends Tasks {
         }
 
         $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-        if ($res->results[0] !== $this->config->project) {
+        if (!isset($res->results[0]) || $res->results[0] !== $this->config->project) {
             throw new NotProjectInGraph($this->config->project, $res->results[0]);
         }
 

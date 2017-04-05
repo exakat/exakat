@@ -22,5 +22,3 @@ Label : PROJECT
                 2
               Label : VARIABLE
                 $y
-        Label : ELEMENT
-          Void

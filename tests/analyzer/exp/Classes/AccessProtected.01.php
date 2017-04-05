@@ -2,10 +2,11 @@
 
 $expected     = array('a::asmpr( )',
                       'a::$saxpr',
-//                      '$b->ampr( )',
-//                      '$b->$axpr'
                       );
 
-$expected_not = array();
+$expected_not = array('a::asmp( )',
+                      'a::asmpu( )',
+                      'a::$saxpu',
+                      'a::$saxp',);
 
 ?>

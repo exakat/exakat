@@ -64,7 +64,7 @@ Label : PROJECT
                                   self
                                 Label : CONSTANT
                                   X
-                                Label : DEFINITION
+                                Label : DEFINITION, DEFINITION
                                   const
                                   Label : NAME
                                     X
@@ -512,7 +512,7 @@ Label : PROJECT
                           A
                         Label : DEFINITION
                           A
-                        Label : DEFINITION
+                        Label : DEFINITION, DEFINITION
                           self
                         Label : EXTENDS
                           B
@@ -732,6 +732,8 @@ Label : PROJECT
                           A
                         Label : DEFINITION
                           A
+                        Label : DEFINITION, DEFINITION
+                          self
                         Label : FINAL
                           final
                         Label : NAME
@@ -832,6 +834,8 @@ Label : PROJECT
                           A
                         Label : DEFINITION
                           A
+                        Label : DEFINITION, DEFINITION
+                          self
                         Label : NAME
                           A
                     Label : NAME

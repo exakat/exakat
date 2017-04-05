@@ -19,5 +19,11 @@ $b = new class {
     }
 };
 
+class foo {
+    function f() {
+        foo::f();
+    }
+};
+
 A1::f();
 \A2::f();

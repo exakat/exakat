@@ -40,8 +40,6 @@ Label : PROJECT
             Label : THEN
               0
         Label : ELEMENT
-          Void
-        Label : ELEMENT
           F
         Label : ELEMENT
           H

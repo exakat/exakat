@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('unusedFunction');
+$expected     = array('function unusedFunction( ) { /**/ } ');
 
-$expected_not = array('usedFunction',
-                      'unusedMethod',
-                      'usedMethod');
+$expected_not = array('function usedFunction( ) { /**/ } ',
+                      'function unusedMethod( ) { /**/ } ',
+                      'function usedMethod( ) { /**/ } ');
 
 ?>

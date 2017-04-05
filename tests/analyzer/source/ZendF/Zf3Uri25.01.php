@@ -2,7 +2,8 @@
 
 use MyNamespace\MyClass;
 use Zend\Uri\UriFactory;
-use Zend\Uri\UriFactoryNotZend;
+
+$a instanceof Zend\Uri\UriFactoryNotZend;
 
 $uri = Zend\Uri\UriFactory::factory('http:');
 

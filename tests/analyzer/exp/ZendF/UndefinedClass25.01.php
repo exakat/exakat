@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('Zend\Cache\Service\PatternPluginManagerFactory');
+$expected     = array('Zend\Mvc\MiddlewareListener( )');
 
-$expected_not = array('Zend\Authentication\Adapter\DbTable\AbstractAdapter');
+$expected_not = array('Zend\Mvc\MvcEvent( )',
+                      'Zend\Mvc\Controller\AbstractConsoleController');
 
 ?>

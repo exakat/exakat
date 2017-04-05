@@ -11,10 +11,12 @@ Label : PROJECT
         Label : ELEMENT
           $
           Label : NAME
-            $
-            Label : NAME
-              [
-              Label : INDEX
-                2
-              Label : VARIABLE
-                $a
+            [
+            Label : INDEX
+              2
+            Label : VARIABLE
+              $a
+        Label : ELEMENT
+          $
+          Label : NAME
+            Void

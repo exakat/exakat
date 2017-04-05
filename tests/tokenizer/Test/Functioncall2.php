@@ -7,12 +7,14 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 
 class Functioncall2 extends Tokenizer {
-    /* 5 methods */
+    /* 7 methods */
 
     public function testFunctioncall201()  { $this->generic_test('Functioncall2.01'); }
     public function testFunctioncall202()  { $this->generic_test('Functioncall2.02'); }
     public function testFunctioncall203()  { $this->generic_test('Functioncall2.03'); }
     public function testFunctioncall204()  { $this->generic_test('Functioncall2.04'); }
     public function testFunctioncall205()  { $this->generic_test('Functioncall2.05'); }
+    public function testFunctioncall206()  { $this->generic_test('Functioncall2.06'); }
+    public function testFunctioncall207()  { $this->generic_test('Functioncall2.07'); }
 }
 ?>

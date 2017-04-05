@@ -24,8 +24,6 @@ Label : PROJECT
                   yield
                   Label : YIELD
                     Void
-                Label : ELEMENT
-                  Void
               Label : SOURCE
                 range
                 Label : ARGUMENTS
@@ -38,8 +36,6 @@ Label : PROJECT
                   range
               Label : VALUE
                 $i
-          Label : DEFINITION
-            a
           Label : NAME
             a
           Label : DEFINITION

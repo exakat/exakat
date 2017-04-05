@@ -1,0 +1,43 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/Property.23.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php 
+      Label : CODE
+        ;
+        Label : ELEMENT
+          *=
+          Label : LEFT
+            $
+            Label : NAME
+              $ó
+          Label : RIGHT
+            =
+            Label : LEFT
+              ->
+              Label : OBJECT
+                $
+                Label : NAME
+                  $K
+              Label : PROPERTY
+                p
+            Label : RIGHT
+              $
+              Label : NAME
+                $A
+        Label : ELEMENT
+          =
+          Label : LEFT
+            ->
+            Label : OBJECT
+              ->
+              Label : OBJECT
+                $ě
+              Label : PROPERTY
+                ˙
+            Label : PROPERTY
+              ű
+          Label : RIGHT
+            0

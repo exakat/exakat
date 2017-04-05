@@ -36,13 +36,11 @@ Label : PROJECT
         Label : ELEMENT
           C
         Label : ELEMENT
-          $d
-        Label : ELEMENT
           print
           Label : ARGUMENTS
             $d
             Label : ARGUMENT
-              Void
+              $d
           Label : NAME
             print
     Label : ELEMENT

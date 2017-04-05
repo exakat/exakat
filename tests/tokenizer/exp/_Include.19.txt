@@ -16,26 +16,22 @@ Label : PROJECT
           Label : NAME
             B
         Label : ELEMENT
-          (
-          Label : CODE
-            'D'
-        Label : ELEMENT
           include
           Label : ARGUMENTS
             )
             Label : ARGUMENT
-              Void
+              (
+              Label : CODE
+                'D'
           Label : NAME
             include
         Label : ELEMENT
-          (
-          Label : CODE
-            'E'
-        Label : ELEMENT
           include
           Label : ARGUMENTS
             )
             Label : ARGUMENT
-              Void
+              (
+              Label : CODE
+                'E'
           Label : NAME
             include

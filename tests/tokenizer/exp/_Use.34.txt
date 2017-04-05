@@ -22,8 +22,6 @@ Label : PROJECT
                     A
                   Label : SUBNAME
                     F
-                Label : DEFINITION
-                  A
                 Label : SUBNAME
                   N
                 Label : SUBNAME
@@ -90,14 +88,6 @@ Label : PROJECT
               use
               Label : GROUPUSE
                 \
-                Label : DEFINITION
-                  DF2
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    DF2
                 Label : DEFINITION
                   DF3
                 Label : DEFINITION
@@ -230,8 +220,6 @@ Label : PROJECT
                       __FUNCTION__
                   Label : NAME
                     print
-              Label : DEFINITION
-                DF3
               Label : NAME
                 DF3
               Label : DEFINITION
@@ -272,6 +260,8 @@ Label : PROJECT
                     Void
                 Label : NAME
                   DF2
+              Label : DEFINITION
+                DF2
               Label : NAME
                 DF2
           Label : NAME

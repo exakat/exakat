@@ -40,6 +40,7 @@ class UnresolvedInstanceof extends Analyzer {
         $interfaces = $this->makeFullNsPath($interfaces);
         
         //general case
+        // traits are omitted here
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -47,7 +48,6 @@ class UnresolvedInstanceof extends Analyzer {
              ->codeIsNot(array('self', 'static', 'parent'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
-             ->noTraitDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Interfaces/IsExtInterface')
              ->analyzerIsNot('Composer/IsComposerNsname')

@@ -27,6 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class Autoload extends Analyzer {
     public function analyze() {
+        $this->rowCount       = $this->hasResults(); 
+        $this->processedCount = 1; 
+        $this->queryCount     = 0; 
+        $this->rawQueryCount  = 0; 
+
         return true;
     }
 
@@ -43,6 +48,16 @@ class Autoload extends Analyzer {
                   Analyzer::$datastore->getHash('autoload') === 'psr-4' ;
 
         return $report;
+    }
+
+    public function getDump() {
+        if ($this->hasResults()) {
+            return array();
+        }
+
+        return array(
+            array('fullcode' => 'composer.autoload', 'file' => 'composer.json', 'line' => 0, 'namespace' => '', 'class' => '', 'function' => '' )
+        );
     }
 }
 

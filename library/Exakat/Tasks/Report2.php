@@ -29,6 +29,7 @@ use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchFormat;
 use Exakat\Exceptions\ProjectNeeded;
 use Exakat\Exceptions\ProjectNotInited;
+use Exakat\Exceptions\NoDump;
 use Exakat\Reports\Reports as Report;
 
 class Report2 extends Tasks {

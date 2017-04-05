@@ -1,8 +1,11 @@
 <?php
-// 2.3 class
-$a = new Zend\Authentication\Adapter\DbTable\AbstractAdapter();
+// 2.5 / 3.0 class
+$a = new Zend\Mvc\MvcEvent();
 
-// Not a 2.3 class
-$b = $d instanceof Zend\Cache\Service\PatternPluginManagerFactory;
+// 3.0 only class
+$a = new Zend\Mvc\MiddlewareListener();
+
+// 2.5 class
+$b = $d instanceof Zend\Mvc\Controller\AbstractConsoleController;
 
 ?>

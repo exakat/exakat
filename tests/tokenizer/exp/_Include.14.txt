@@ -8,29 +8,25 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          (
-          Label : CODE
-            'a.php'
-        Label : ELEMENT
           include
           Label : ARGUMENTS
             )
             Label : ARGUMENT
-              Void
+              (
+              Label : CODE
+                'a.php'
           Label : NAME
             include
         Label : ELEMENT
           A
         Label : ELEMENT
-          (
-          Label : CODE
-            'b.php'
-        Label : ELEMENT
           include
           Label : ARGUMENTS
             )
             Label : ARGUMENT
-              Void
+              (
+              Label : CODE
+                'b.php'
           Label : NAME
             include
         Label : ELEMENT

@@ -16,8 +16,6 @@ Label : PROJECT
               x
             Label : NAME
               x
-              Label : DEFINITION
-                x
             Label : VALUE
               array
               Label : ARGUMENTS

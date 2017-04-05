@@ -293,6 +293,21 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * CakePHP 3.4.0 Undefined Classes (Cakephp/Cakephp34 ; Cakephp)
   * CakePHP Unknown Classes (Cakephp/CakePHPMissing)
   * CakePHP Used (Cakephp/CakePHPUsed ; Cakephp)
+  * Check All Types (Structures/CheckAllTypes ; Analyze)
+  * Do Not Cast To Int (Php/NoCastToInt ; )
+  * Manipulates INF (Php/IsINF ; )
+  * Manipulates NaN (Php/IsNAN ; )
+  * Set Cookie Safe Arguments (Security/SetCookieArgs ; Security)
+  * Should Use SetCookie() (Php/UseSetCookie ; Analyze)
+  * Use Cookies (Php/UseCookies ; Appcontent)
+  * ZF3 Usage Of Deprecated (ZendF/Zf3DeprecatedUsage ; ZendFramework)
+  * zend-cache Usage (ZendF/Zf3Cache ; ZendFramework, ZendFramework)
+  * zend-view 2.5.0 Undefined Classes (ZendF/Zf3View25 ; ZendFramework)
+  * zend-view 2.6.0 Undefined Classes (ZendF/Zf3View26 ; ZendFramework)
+  * zend-view 2.7.0 Undefined Classes (ZendF/Zf3View27 ; ZendFramework)
+  * zend-view 2.8.0 Undefined Classes (ZendF/Zf3View28 ; ZendFramework)
+  * zend-view 2.9.0 Undefined Classes (ZendF/Zf3View29 ; ZendFramework)
+  * zend-view Usage (ZendF/Zf3View ; ZendFramework)
 
 * 0.10.5
 
@@ -303,10 +318,11 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Strange Name For Variables (Variables/StrangeName ; Analyze)
   * Too Many Finds (Classes/TooManyFinds)
   * ZF3 Component (ZendF/zf3Component ; )
-  * ZendF/Zf3ComponentMissing (ZendF/Zf3ComponentMissing ; Internal)
-  * ZendF/zf3Uri (ZendF/Zf3Uri ; ZendFramework)
-  * ZendF/zf3Validator (ZendF/Zf3Validator ; ZendFramework)
+  * Zend Framework 3 Missing Classes (ZendF/Zf3ComponentMissing ; Internal)
   * Zend\Config (ZendF/Zf3Config ; ZendFramework)
+  * zend-cache 2.5.0 Undefined Classes (ZendF/Zf3Cache25 ; ZendFramework)
+  * zend-cache 2.6.0 Undefined Classes (ZendF/Zf3Cache26 ; ZendFramework)
+  * zend-cache 2.7.0 Undefined Classes (ZendF/Zf3Cache27 ; ZendFramework)
   * zend-config 2.5.x (ZendF/Zf3Config25 ; ZendFramework)
   * zend-config 2.6.x (ZendF/Zf3Config26 ; ZendFramework)
   * zend-config 3.0.x (ZendF/Zf3Config30 ; ZendFramework)
@@ -316,7 +332,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * zend-mvc 2.6.x (ZendF/Zf3Mvc26 ; ZendFramework)
   * zend-mvc 2.7.x (ZendF/Zf3Mvc27 ; ZendFramework)
   * zend-mvc 3.0.x (ZendF/Zf3Mvc30 ; ZendFramework)
+  * zend-uri (ZendF/Zf3Uri ; ZendFramework)
   * zend-uri 2.5.x (ZendF/Zf3Uri25 ; ZendFramework)
+  * zend-validator (ZendF/Zf3Validator ; ZendFramework)
   * zend-validator 2.6.x (ZendF/Zf3Validator25 ; ZendFramework)
   * zend-validator 2.6.x (ZendF/Zf3Validator26 ; ZendFramework)
   * zend-validator 2.7.x (ZendF/Zf3Validator27 ; ZendFramework)
@@ -1259,6 +1277,7 @@ List of external links mentionned in this documentation.
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `composer <https://getcomposer.org/>`_
+* `Cookies <http://php.net/manual/en/features.cookies.php>`_
 * `curl <http://www.php.net/curl>`_
 * `Data structures <http://docs.php.net/manual/en/book.ds.php>`_
 * `Docker <http://www.docker.com/>`_
@@ -1271,12 +1290,14 @@ List of external links mentionned in this documentation.
 * `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
+* `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `git <https://git-scm.com/>`_
 * `Github <https://github.com/exakat/exakat>`_
 * `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 * `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plugin>`_
 * `hash <http://www.php.net/hash>`_
 * `hg <https://www.mercurial-scm.org/>`_
+* `Integers <http://php.net/manual/en/language.types.integer.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `List of function aliases <http://php.net/manual/en/aliases.php>`_
@@ -1284,6 +1305,7 @@ List of external links mentionned in this documentation.
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Marco Pivetti tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
+* `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
 * `Neo4j <http://neo4j.com/>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
@@ -1296,6 +1318,7 @@ List of external links mentionned in this documentation.
 * `Semaphore <http://php.net/manual/en/book.sem.php>`_
 * `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
 * `session_regenerateid() <http://php.net/session_regenerate_id>`_
+* `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_
 * `SOAP <http://php.net/manual/en/book.soap.php>`_
 * `Specification pattern <https://en.wikipedia.org/wiki/Specification_pattern>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_

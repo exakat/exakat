@@ -20,8 +20,6 @@ Label : PROJECT
               return
               Label : RETURN
                 __METHOD__
-          Label : DEFINITION
-            null
           Label : NAME
             null
           Label : DEFINITION
@@ -44,8 +42,6 @@ Label : PROJECT
               return
               Label : RETURN
                 __METHOD__
-          Label : DEFINITION
-            true
           Label : NAME
             true
           Label : DEFINITION
@@ -68,8 +64,6 @@ Label : PROJECT
               return
               Label : RETURN
                 __METHOD__
-          Label : DEFINITION
-            false
           Label : NAME
             false
           Label : DEFINITION

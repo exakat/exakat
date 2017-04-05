@@ -10,6 +10,6 @@ $expected     = array( 'A1::f( )',
                        'B::f( )', 
                        'C::f( )');
 
-$expected_not = array();
+$expected_not = array('foo::f( )');
 
 ?>

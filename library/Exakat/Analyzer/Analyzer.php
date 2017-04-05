@@ -353,6 +353,8 @@ GREMLIN;
         } else {
             $this->analyzerId = $analyzerId;
         }
+        
+        return $this->analyzerId;
     }
 
     public function checkphpConfiguration($Php) {
@@ -542,7 +544,6 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
 
     public function atomFunctionIs($fullnspath) {
         assert('$fullnspath !== null', 'atomFunctionIs can\'t be null');
-        $this->atomIs('Functioncall');
         $this->functioncallIs($fullnspath);
 
         return $this;
@@ -550,9 +551,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     
     public function functioncallIs($fullnspath) {
         $this->atomIs('Functioncall')
-             ->hasNoIn(array('METHOD', 'NEW'))
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
-             ->tokenIs(self::$FUNCTIONS_TOKENS)
+             ->raw('has("fullnspath")')
              ->fullnspathIs($this->makeFullNsPath($fullnspath));
 
         return $this;
@@ -747,7 +746,13 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function hasName() {
-        $this->addMethod('where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )');
+        $this->addMethod('not(where(__.out("NAME").hasLabel("Void")) )');
+
+        return $this;
+    }
+
+    public function hasNoName() {
+        $this->addMethod('where(__.out("NAME").hasLabel("Void"))');
 
         return $this;
     }
@@ -1009,11 +1014,11 @@ GREMLIN
         return $this;
     }
 
-    public function raw($query) {
+    public function raw($query, $args = null) {
         ++$this->rawQueryCount;
         $query = $this->cleanAnalyzerName($query);
 
-        $this->addMethod($query);
+        $this->addMethod($query, $args);
         
         return $this;
     }
@@ -1645,12 +1650,12 @@ GREMLIN
     public function prepareQuery() {
         // @doc This is when the object is a placeholder for others.
         if (count($this->methods) <= 1) { return true; }
-        
+
         if (substr($this->methods[1], 0, 9) == 'hasLabel(') {
-            $first = array_shift($this->methods);
+            $first = $this->methods[1];
+            array_splice($this->methods, 1,1);
             $query = implode('.', $this->methods);
             $query = 'g.V().'.$first.'.groupCount("processed").by(count()).'.$query;
-            unset($this->methods[1]);
         } elseif (substr($this->methods[1], 0, 39) == 'where( __.in("ANALYZED").has("analyzer"') {
             $first = array_shift($this->methods); // remove first 
             $init = array_shift($this->methods); // remove first 
@@ -1802,8 +1807,10 @@ GREMLIN;
         };
         if (is_string($functions)) {
             return $cb($functions);
-        } else {
+        } elseif (is_array($functions)) {
             $r = array_map($cb, $functions);
+        } else {
+            throw new \Exception('Function is of the wrong type : '.var_export($functions));
         }
         return $r;
     }
@@ -1825,7 +1832,8 @@ GREMLIN;
     }
 
     private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
-        if (empty($code)) {
+        if ( $code === '' || 
+            (is_array($code) && empty($code))) {
             return $this;
         }
 

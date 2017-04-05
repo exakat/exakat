@@ -62,7 +62,10 @@ $components = array(
 'zend-view',
 'zend-xml2json',
 'zend-xmlrpc',
+'zend-stdlib',
+'zendxml'
                     );
+//$components = array('zend-session');
 
 $begin = microtime(true);
 $sqlite = new \Sqlite3(dirname(__DIR__).'/data/zendf3.sqlite');
@@ -76,6 +79,7 @@ $end = microtime(true);
 
 $versions = 0;
 foreach($components as $component) {
+    print "Component  \n";
     $sqlite->query('INSERT INTO components VALUES (null, "'.$component.'")');
     $componentId = $sqlite->lastInsertRowID();
     
@@ -121,6 +125,7 @@ function processVersion($component, $version, $versionId) {
     $all = array();
     foreach($dir as $file) {
         $all[] = processFile($file);
+        $all[] = processFileForDeprecated($file);
     }
     $all = call_user_func_array('array_merge_recursive', $all);
     $all['Class']     = array_filter($all['Class'],     function ($k) { return substr($k, 0, 5) === 'Zend\\'; }, ARRAY_FILTER_USE_KEY);
@@ -191,6 +196,20 @@ function save_cit($releaseId, $all) {
             ++$traits;
             $traitId = save($sqlite, 'traits',     array('trait'        => $interfaceName,
                                                          'namespace_id' => $namespaceId));
+        }
+    }
+
+    $deprecated = 0;
+    foreach($all['Deprecated'] as $namespace => $list) {
+        $namespaceId = save($sqlite, 'namespaces', array('namespace'  => $namespace,
+                                                         'release_id' => $releaseId));
+        foreach($list as $d) {
+            ++$deprecated;
+            $traitId = save($sqlite, 'deprecated',     array('namespace_id' => $namespaceId,
+                                                             'type'         => $d['type'],
+                                                             'name'         => $d['name'],
+                                                             'cit'          => $d['cit'],
+                                                             ));
         }
     }
     

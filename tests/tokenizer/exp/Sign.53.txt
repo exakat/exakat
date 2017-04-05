@@ -39,17 +39,15 @@ Label : PROJECT
           Label : RIGHT
             .
             Label : CONCAT
+              '+'
+            Label : CONCAT
               -
               Label : LEFT
-                .
-                Label : CONCAT
-                  '+'
-                Label : CONCAT
-                  ->
-                  Label : OBJECT
-                    $d
-                  Label : PROPERTY
-                    e
+                ->
+                Label : OBJECT
+                  $d
+                Label : PROPERTY
+                  e
               Label : RIGHT
                 1
             Label : CONCAT

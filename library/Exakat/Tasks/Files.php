@@ -56,11 +56,11 @@ class Files extends Tasks {
         }
 
         $this->checkComposer($dir);
+        $this->checkLicence($dir);
 
         $ignoredFiles = array();
         $files = array();
         self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles);
-
         if (empty($files)) {
             throw new NoFileToProcess($this->config->project);
         }
@@ -74,10 +74,11 @@ class Files extends Tasks {
         $this->datastore->cleanTable('ignoredFiles');
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
 
-        $tmpFileName = tempnam(sys_get_temp_dir(), 'exakatFile');
+        $tmpFileName = $this->config->projects_root.'/projects/.exakat/files.'.getmypid().'.txt';
         $path = $this->config->projects_root.'/projects/'.$dir.'/code';
-        $tmpFiles = array_map(function ($file) use ($path) { return "'".$path.escapeshellcmd($file)."'";}, $files);
-        file_put_contents($tmpFileName, implode("\n", $tmpFiles) );
+        $tmpFiles = array_map(function ($file) use ($path) { return str_replace(array('(', ')', ' '), array('\\(', '\\)', '\\ '), $file);}, $files);
+//        $tmpFiles = $files;
+        file_put_contents($tmpFileName, ''.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\n{$this->config->projects_root}/projects/$dir/code", $tmpFiles).'');
 
         $versions = $this->config->other_php_versions;
 
@@ -91,7 +92,7 @@ class Files extends Tasks {
             display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
 
-            $shell = 'cat '.$tmpFileName.' | xargs grep --files-with-matches \'<\\?\' | xargs -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
+            $shell = 'cat '.$tmpFileName.' | tr ">" "\\\\\\\\>" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
@@ -204,7 +205,6 @@ class Files extends Tasks {
                 return array('file'   => $a);
         }, $files));
         $this->datastore->reload();
-        file_put_contents($tmpFileName, '"'.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\"\n\"{$this->config->projects_root}/projects/$dir/code", $files).'"');
 
         display('Check short tag (normal pass)');
         $stats['php'] = count($files);
@@ -316,6 +316,21 @@ class Files extends Tasks {
         $this->datastore->addRow('hash', $composerInfo);
     }
 
+    private function checkLicence($dir) {
+        $licenses = parse_ini_file($this->config->dir_root.'/data/license.ini');
+        $licenses = $licenses['files'];
+        
+        $path = $this->config->projects_root.'/projects/'.$dir.'/code';
+        foreach($licenses as $file) {
+            if (file_exists($path.'/'.$file)) {
+                $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
+
+                return true;
+            }
+        }
+        $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
+    }
+    
     public static function findFiles($path, &$files, &$ignoredFiles) {
         $config = Config::factory();
         $ignore_dirs = $config->ignore_dirs;

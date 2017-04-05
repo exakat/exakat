@@ -29,7 +29,9 @@ Label : PROJECT
                   Label : LEFT
                     $a
                   Label : RIGHT
-                    Void
+                    yield
+                    Label : YIELD
+                      Void
                 Label : ELEMENT
                   if
                   Label : CONDITION

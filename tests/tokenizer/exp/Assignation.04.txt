@@ -9,14 +9,12 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          =
-          Label : LEFT
-            $y
-          Label : RIGHT
-            3
-        Label : ELEMENT
           ===
           Label : LEFT
             $x
           Label : RIGHT
-            Void
+            =
+            Label : LEFT
+              $y
+            Label : RIGHT
+              3

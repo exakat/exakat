@@ -1,12 +1,12 @@
 <?php
 
-$expected     = array('foo',
-                      'foo5',
-                      'foo2',
-                      'foo',
-                      'foo5',
-                      'foo2',);
+$expected     = array('function foo( ) { /**/ } ',
+                      'function foo5( ) { /**/ } ',
+                      'function foo2( ) { /**/ } ',
+                      'function foo( ) { /**/ } ',
+                      'function foo5( ) { /**/ } ',
+                      'function foo2( ) { /**/ } ',);
 
-$expected_not = array('foo4');
+$expected_not = array('function foo4( ) { /**/ } ');
 
 ?>

@@ -388,14 +388,6 @@ Label : PROJECT
                       D
                   Label : OBJECT
                     $this
-          Label : DEFINITION
-            B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $c
-            Label : NAME
-              B
           Label : NAME
             B
         Label : ELEMENT

@@ -27,6 +27,11 @@ use Exakat\Analyzer\Analyzer;
 
 class UseComposerLock extends Analyzer {
     public function analyze() {
+        $this->rowCount       = (int) Analyzer::$datastore->getHash('composer.lock'); 
+        $this->processedCount = 1; 
+        $this->queryCount     = 0; 
+        $this->rawQueryCount  = 0; 
+
         return true;
     }
 
@@ -39,9 +44,19 @@ class UseComposerLock extends Analyzer {
 
     public function hasResults() {
         Analyzer::initDocs();
-        $report = Analyzer::$datastore->getHash('composer.lock') === '1';
+        $report = Analyzer::$datastore->getHash('composer.lock') === 1;
 
         return $report;
+    }
+
+    public function getDump() {
+        if ($this->hasResults()) {
+            return array();
+        }
+
+        return array(
+            array('fullcode' => 'composer.lock', 'file' => 'composer.lock', 'line' => 0, 'namespace' => '', 'class' => '', 'function' => '' )
+        );
     }
 
 }

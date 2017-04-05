@@ -16,89 +16,83 @@ Label : PROJECT
             Label : ELEMENT
               B
             Label : ELEMENT
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
-                  and
-                  Label : LEFT
-                    [
-                    Label : INDEX
-                      'D'
-                    Label : VARIABLE
-                      $c
-                  Label : RIGHT
-                    [
-                    Label : INDEX
-                      'E'
-                    Label : VARIABLE
-                      $d
-              Label : ELSE
-                [
-                Label : INDEX
-                  'J'
-                Label : VARIABLE
-                  $g
-              Label : THEN
-                F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      'G'
-                    Label : CONCAT
-                      [
-                      Label : INDEX
-                        'H'
-                      Label : VARIABLE
-                        $e
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'I'
-                    Label : VARIABLE
-                      $f
-                Label : NAME
-                  F
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  ?
+                  Label : CONDITION
+                    (
+                    Label : CODE
+                      and
+                      Label : LEFT
+                        [
+                        Label : INDEX
+                          'D'
+                        Label : VARIABLE
+                          $c
+                      Label : RIGHT
+                        [
+                        Label : INDEX
+                          'E'
+                        Label : VARIABLE
+                          $d
+                  Label : ELSE
+                    [
+                    Label : INDEX
+                      'J'
+                    Label : VARIABLE
+                      $g
+                  Label : THEN
+                    F
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        .
+                        Label : CONCAT
+                          'G'
+                        Label : CONCAT
+                          [
+                          Label : INDEX
+                            'H'
+                          Label : VARIABLE
+                            $e
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'I'
+                        Label : VARIABLE
+                          $f
+                    Label : NAME
+                      F
               Label : NAME
                 echo
             Label : ELEMENT
               J
             Label : ELEMENT
-              [
-              Label : INDEX
-                'L'
-              Label : VARIABLE
-                $h
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  [
+                  Label : INDEX
+                    'L'
+                  Label : VARIABLE
+                    $h
               Label : NAME
                 echo
             Label : ELEMENT
               L
             Label : ELEMENT
-              [
-              Label : INDEX
-                'N'
-              Label : VARIABLE
-                $i
-            Label : ELEMENT
               echo
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  Void
+                  [
+                  Label : INDEX
+                    'N'
+                  Label : VARIABLE
+                    $i
               Label : NAME
                 echo
             Label : ELEMENT

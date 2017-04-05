@@ -29,7 +29,7 @@ class InstantiatingAbstractClass extends Analyzer {
     public function analyze() {
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIs('Functioncall')
+             ->atomIs(array('Functioncall', 'Identifier', 'Nsname'))
              ->classDefinition()
              ->hasOut('ABSTRACT')
              ->back('first');

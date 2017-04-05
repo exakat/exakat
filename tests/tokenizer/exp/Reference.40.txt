@@ -80,6 +80,8 @@ Label : PROJECT
                           B
                     Label : RIGHT
                       $a
+              Label : ELEMENT
+                Void
             Label : THEN
               {}
               Label : ELEMENT

@@ -99,10 +99,10 @@ class CypherG3 {
             $extra = array();
             foreach(Load::$PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
-                    if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval'))) {
+                    if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval', 'propertyname', 'globalvar'))) {
                         // Raw string
                         $extra[] = "$title: csvLine.$title";
-                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'))) {
+                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant'))) {
                         // Boolean
                         $extra[] = "$title: (csvLine.$title <> \"\")";
                     } elseif (in_array($title, array('count', 'intval', 'args_max', 'args_min'))) {
@@ -178,7 +178,6 @@ CYPHER;
     }
 
     private function cleanCsv() {
-        return;
         if (empty($this->unlink)) {
             return ;
         }
@@ -299,11 +298,22 @@ CYPHER;
             foreach($extras[$atom['atom']] as $e) {
                 if ($e === 'boolean') {
                     $extra[] = isset($atom[$e]) ? '"'.($atom[$e] ? "1" : "").'"' : '""';
+                } elseif ($e === 'constant') {
+                    $extra[] = (isset($atom[$e]) && $atom[$e]) ? '"1"' : '';
                 } elseif ($e === 'fullnspath') {
+                    $extra[] = !empty($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '';
+                } elseif ($e === 'propertyname') {
                     $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '';
                 } else {
                     $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
                 }
+            }
+
+            if (strlen($atom['code']) > 5000) {
+                $atom['code'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['code']).' chars]';
+            }
+            if (strlen($atom['fullcode']) > 5000) {
+                $atom['fullcode'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['fullcode']).' chars]';
             }
 
             if (count($extras[$atom['atom']]) > 0) {
@@ -314,10 +324,6 @@ CYPHER;
 
             $written = fwrite($fp,
                               $atom['id'].','.$atom['atom'].',"'.$this->escapeCsv( $atom['code'] ).'","'.$this->escapeCsv( $atom['fullcode']).'",'.(isset($atom['line']) ? $atom['line'] : 0).',"'.$this->escapeCsv( isset($atom['token']) ? $atom['token'] : '').'","'.(isset($atom['rank']) ? $atom['rank'] : -1).'"'.$extra."\n");
-
-            if ($written > 2000000) {
-                print "Warning : Writing a csv line over 2M in $fileName\n";
-            }
 
             fclose($fp);
         }

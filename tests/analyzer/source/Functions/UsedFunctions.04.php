@@ -1,12 +1,22 @@
 <?php
 
-namespace a {    function b() {} }
-namespace b {    function b() {} }
-namespace c {    function b() {} }
-namespace d {    function b() {} }
-namespace {   \a\b();
-              \b\b();
-              \c\b();
-              \d\b(); }
+namespace a {    function ba() {}
+                 function ca() {}
+                  }
+namespace b {    function bb() {} 
+                 function cb() {}
+}
+namespace c {    function bc() {} 
+                 function cc() {}
+}
+namespace d {    function bd() {} 
+                 function cd() {}
+}
+namespace {   \a\ba();
+              \b\bb();
+              \c\bc();
+              \d\bd(); 
+                 function c() {}
+}
 
 ?>

@@ -46,8 +46,7 @@ class CouldBeStatic extends Analyzer {
                              )')
 
              // This global is only in the current function
-             ->raw('where( g.V().hasLabel("Variable").has("code", "\\$GLOBALS").in("VARIABLE").hasLabel("Array")
-                                .out("INDEX").hasLabel("String").filter{ it.get().value("globalvar") == theGlobal }
+             ->raw('where( g.V().hasLabel("Array").has("globalvar").filter{ it.get().value("globalvar") == theGlobal }
                                 .count().is(eq(0)) 
                              )')
 
