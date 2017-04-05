@@ -1,4 +1,4 @@
-Version 0.10.6 (Immortal of Antelope Power, Coming up)
+Version 0.10.8 (King of Spiritual Touch, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,17 @@ Version 0.10.6 (Immortal of Antelope Power, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.10.7 (Immortal of Antelope Power, 2017-04-03)
++ Report
+    + Ambassador : fixed composer report.
+    + Added report for Composer (beta phase)
+    + Added report for Slim framework.
++ Analyzer
+    + Added support for Slim versions.
+    + Added 10 new components for Zend Framework 3
++ Tokenizer
+    + Fixed support for $ in file names.
 
 Version 0.10.6 (Immortal of Elk Power, 2017-03-27)
 + Architecture
