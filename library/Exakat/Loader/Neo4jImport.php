@@ -279,14 +279,15 @@ GREMLIN;
             }
             fputcsv($fp, $headers);
 
-            $projectRow = array($id0,
-                                $atoms[$id0]['atom'],
-                                $this->escapeCsv( $atoms[$id0]['code'] ),
-                                $this->escapeCsv( $atoms[$id0]['fullcode']),
-                                (isset($atoms[$id0]['line']) ? $atoms[$id0]['line'] : 0),
-                                $this->escapeCsv( isset($atoms[$id0]['token']) ? $atoms[$id0]['token'] : ''),
-                                (isset($atoms[$id0]['rank']) ? $atoms[$id0]['rank'] : -1));
+            $projectRow = array($id0->id,
+                                $id0->atom,
+                                $this->escapeCsv( $id0->code ),
+                                $this->escapeCsv( $id0->fullcode),
+                                (isset($id0->line) ? $id0->line : 0),
+                                $this->escapeCsv( isset($id0->token) ? $id0->token : ''),
+                                (isset($id0->rank) ? $id0->rank : -1));
             $projectRow = array_pad($projectRow, count($headers), '');
+
             $written = fputcsv($fp, $projectRow);
         }
 
@@ -296,17 +297,17 @@ GREMLIN;
         $ends = array();
         $indexList = array();
         foreach($atoms as $id => $atom) {
-            if ($id == $id0) { continue; }
+            if ($atom == $id0) { continue; }
             $extra= array();
 
-            $indexList[$atom['atom']] = 1;
+            $indexList[$atom->atom] = 1;
             $ids[$id] = 1;
             
-            if (strlen($atom['code']) > 5000) {
-                $atom['code'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['code']).' chars]';
+            if (strlen($atom->code) > 5000) {
+                $atom->code = substr($atom->code, 0, 5000).'...[ total '.strlen($atom->code).' chars]';
             }
-            if (strlen($atom['fullcode']) > 5000) {
-                $atom['fullcode'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['fullcode']).' chars]';
+            if (strlen($atom->fullcode) > 5000) {
+                $atom->fullcode = substr($atom->code, 0, 5000).'...[ total '.strlen($atom->fullcode).' chars]';
             }
 
             foreach($extras as $name => $type) {
@@ -315,25 +316,25 @@ GREMLIN;
                 } elseif ($name == ':LABEL') {
                     $name = 'atom';
                 } elseif ($name == 'reference') {
-                    if (isset($atom['reference'])) {
-                        $atom['reference'] = $atom['reference'] == true ? 1 : -1;
+                    if (isset($atom->reference)) {
+                        $atom->reference = $atom->reference == true ? 1 : -1;
                     }
                 } elseif ($name == 'fullnspath') {
-                    if (isset($atom['fullnspath']) && $atom['fullnspath'] == -1) {
-                        $atom['fullnspath'] = '';
+                    if (isset($atom->fullnspath) && $atom->fullnspath == -1) {
+                        $atom->fullnspath = '';
                     }
                 }
 
-                if (!isset($atom[$name])) {
+                if (!isset($atom->$name)) {
                     $extra[] = '';
                     continue;
                 }
-                if ($atom[$name] === false) {
+                if ($atom->$name === false) {
                     $extra[] = 0;
                     continue;
                 }
 
-                $extra[] = $this->escapeCsv($atom[$name]);
+                $extra[] = $this->escapeCsv($atom->$name);
             }
             $written = fputcsv($fp, $extra);
         }
