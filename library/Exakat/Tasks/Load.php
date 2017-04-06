@@ -4540,7 +4540,7 @@ class Load extends Tasks {
                 }
 
             // This is a normal identifier
-            } elseif ($type === 'class' && isset($this->uses['class'][strtolower($name->code)])) {
+            } elseif ($type === 'class' && isset($this->usesId['class'][strtolower($name->code)])) {
 
                 $this->addCall('class', $this->usesId['class'][strtolower($name->code)]->fullnspath, $name);
                 return array($this->uses['class'][strtolower($name->code)], self::ALIASED);

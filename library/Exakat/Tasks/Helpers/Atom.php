@@ -74,10 +74,10 @@ class Atom {
             $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
         }
         
-        $this->code          = addslashes($this->code);
-        $this->fullcode      = addslashes($this->fullcode);
-        $this->strval        = addslashes($this->strval);
-        $this->noDelimiter   = addslashes($this->noDelimiter);
+        $this->code          = addcslashes($this->code       , '\\"');
+        $this->fullcode      = addcslashes($this->fullcode   , '\\"');
+        $this->strval        = addcslashes($this->strval     , '\\"');
+        $this->noDelimiter   = addcslashes($this->noDelimiter, '\\"');
         
         return (array) $this;
     }
@@ -92,11 +92,11 @@ class Atom {
             $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
         }
 
-        $this->code          = addslashes($this->code);
-        $this->fullcode      = addslashes($this->fullcode);
-        $this->strval        = addslashes($this->strval);
-        $this->noDelimiter   = addslashes($this->noDelimiter);
-        
+        $this->code          = addcslashes($this->code       , '\\"');
+        $this->fullcode      = addcslashes($this->fullcode   , '\\"');
+        $this->strval        = addcslashes($this->strval     , '\\"');
+        $this->noDelimiter   = addcslashes($this->noDelimiter, '\\"');
+
         $return = array( $this->id,
                          $this->atom,
                          $this->code,
