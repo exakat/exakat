@@ -3408,7 +3408,6 @@ class Load extends Tasks {
         $literal = $this->processSingle('String');
         
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CONSTANT_ENCAPSED_STRING) {
-            var_dump($literal->code);
             $literal->delimiter   = $literal->code[0];
             if ($literal->delimiter === 'b' || $literal->delimiter === 'B') {
                 $literal->binaryString = $literal->delimiter;
