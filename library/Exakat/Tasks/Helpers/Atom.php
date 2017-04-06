@@ -27,37 +27,39 @@ use Exakat\Tasks\Load;
 class Atom {
     static $atomCount = 0;
     
-    public $atom         = 'No Atom Set';
     public $id           = 0;
+    public $atom         = 'No Atom Set';
     public $code         = '';
     public $fullcode     = '';
-    public $variadic     = Load::NOT_VARIADIC;
     public $line         = Load::NO_LINE;
-    public $constant     = Load::CONSTANT_EXPRESSION;
     public $token        = '';
-    public $intval       = null;
-    public $boolean      = null;
-    public $bracket      = Load::NOT_BRACKET;
-    public $rank         = 0;
-    public $count        = 0;
-    public $root         = false;  // false is on purpose. 
-    public $close_tag    = Load::NO_CLOSING_TAG;
-    public $absolute     = Load::NOT_ABSOLUTE;
-    public $encoding     = '';
+    public $rank         = ''; // Not 0
+    public $alternative  = Load::NOT_ALTERNATIVE;
+    public $reference    = Load::NOT_REFERENCE;
+    public $heredoc      = false;
     public $delimiter    = '';
     public $noDelimiter  = '';
-    public $args_max     = 0;
-    public $args_min     = 0;
-    public $reference    = Load::NOT_REFERENCE;
+    public $variadic     = Load::NOT_VARIADIC;
+    public $count        = 0;
     public $fullnspath   = '';
-    public $aliased      = Load::NOT_ALIASED;
+    public $absolute     = Load::NOT_ABSOLUTE;
     public $alias        = '';
     public $origin       = '';
+    public $encoding     = '';
+    public $intval       = null;
+    public $strval       = '';
     public $enclosing    = Load::NO_ENCLOSING;
-    public $globalvar    = false;
-    public $alternative  = Load::NOT_ALTERNATIVE;
-    public $heredoc      = false;
+    public $args_max     = '';
+    public $args_min     = '';
+    public $bracket      = Load::NOT_BRACKET;
+    public $close_tag    = Load::NO_CLOSING_TAG;
+    public $aliased      = Load::NOT_ALIASED;
+    public $boolean      = null;
     public $propertyname = '';
+    public $constant     = Load::CONSTANT_EXPRESSION;
+
+    public $root         = false;  // false is on purpose. 
+    public $globalvar    = false;
 
     public function __construct($atom) {
         $this->id = ++self::$atomCount;
@@ -66,6 +68,21 @@ class Atom {
     
     public function __set($name, $value) {
         print "Undefined $name property in Atom\n";
+    }
+    
+    public function toArray() {
+           
+        if (strlen($this->code) > 5000) {
+            $this->code = substr($this->code, 0, 5000).'...[ total '.strlen($this->code).' chars]';
+        }
+        if (strlen($this->fullcode) > 5000) {
+            $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
+        }
+        
+        $this->code = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->code);
+        $this->fullcode = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->fullcode);
+        
+        return (array) $this;
     }
 }
 

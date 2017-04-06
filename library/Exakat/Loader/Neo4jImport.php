@@ -151,6 +151,7 @@ GREMLIN;
     }
 
     private function cleanCsv() {
+        return;
         unlink($this->config->projects_root.'/projects/.exakat/nodes.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/rels.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/index.g3.csv');
@@ -266,7 +267,9 @@ GREMLIN;
                                'aliased'     => 'int',
                                'boolean'     => 'int',
                                'propertyname'=> '',
-                               'constant'    => '');
+                               'constant'    => '',
+                               'root'        => 'int',
+                               'globalvar'   => '');
 
         $fileName = $exakatDir.'/nodes.g3.csv';
         if (file_exists($fileName)) {
@@ -298,11 +301,11 @@ GREMLIN;
         $indexList = array();
         foreach($atoms as $id => $atom) {
             if ($atom == $id0) { continue; }
-            $extra= array();
+//            $extra= array();
 
             $indexList[$atom->atom] = 1;
             $ids[$id] = 1;
-            
+        /*            
             if (strlen($atom->code) > 5000) {
                 $atom->code = substr($atom->code, 0, 5000).'...[ total '.strlen($atom->code).' chars]';
             }
@@ -310,33 +313,18 @@ GREMLIN;
                 $atom->fullcode = substr($atom->code, 0, 5000).'...[ total '.strlen($atom->fullcode).' chars]';
             }
 
+
             foreach($extras as $name => $type) {
                 if ($name == ':ID') {
                     $name = 'id';
                 } elseif ($name == ':LABEL') {
                     $name = 'atom';
-                } elseif ($name == 'reference') {
-                    if (isset($atom->reference)) {
-                        $atom->reference = $atom->reference == true ? 1 : -1;
-                    }
-                } elseif ($name == 'fullnspath') {
-                    if (isset($atom->fullnspath) && $atom->fullnspath == -1) {
-                        $atom->fullnspath = '';
-                    }
-                }
-
-                if (!isset($atom->$name)) {
-                    $extra[] = '';
-                    continue;
-                }
-                if ($atom->$name === false) {
-                    $extra[] = 0;
-                    continue;
                 }
 
                 $extra[] = $this->escapeCsv($atom->$name);
             }
-            $written = fputcsv($fp, $extra);
+            */
+            $written = fputcsv($fp, $atom->toArray(), ',', '"', '\\');
         }
         fclose($fp);
 
