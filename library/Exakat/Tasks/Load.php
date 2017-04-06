@@ -4706,7 +4706,7 @@ class Load extends Tasks {
             if (!isset($this->calls[$type][$fullnspath]['calls'][$atom])) {
                 $this->calls[$type][$fullnspath]['calls'][$atom] = array();
             }
-            $this->calls[$type][$fullnspath]['calls'][$atom][] = $call;
+            $this->calls[$type][$fullnspath]['calls'][$atom][] = $call->id;
         }
     }
 

@@ -74,6 +74,11 @@ class Atom {
             $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
         }
         
+        $this->code          = addslashes($this->code);
+        $this->fullcode      = addslashes($this->fullcode);
+        $this->strval        = addslashes($this->strval);
+        $this->noDelimiter   = addslashes($this->noDelimiter);
+        
         return (array) $this;
     }
 
@@ -86,6 +91,11 @@ class Atom {
         if (strlen($this->fullcode) > 5000) {
             $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
         }
+
+        $this->code          = addslashes($this->code);
+        $this->fullcode      = addslashes($this->fullcode);
+        $this->strval        = addslashes($this->strval);
+        $this->noDelimiter   = addslashes($this->noDelimiter);
         
         $return = array( $this->id,
                          $this->atom,
