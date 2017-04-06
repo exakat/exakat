@@ -151,7 +151,6 @@ GREMLIN;
     }
 
     private function cleanCsv() {
-        return;
         unlink($this->config->projects_root.'/projects/.exakat/nodes.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/rels.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/index.g3.csv');

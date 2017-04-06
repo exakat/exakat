@@ -4554,8 +4554,8 @@ class Load extends Tasks {
             // Finally, the case for a nsname
             $prefix = strtolower( substr($name->fullcode, 0, strpos($name->fullcode, '\\')) );
 
-            if (isset($this->uses[$type][$prefix])) {
-                $this->addLink($this->usesId['class'][$prefix], $name, 'DEFINITION');
+            if (isset($this->usesId[$type][$prefix])) {
+                $this->addLink($this->usesId[$type][$prefix], $name, 'DEFINITION');
                 return array($this->uses[$type][$prefix].strtolower( substr($name->fullcode, strlen($prefix)) ) , 0);
             } else {
                 return array($this->namespace.strtolower($name->fullcode), 0);
