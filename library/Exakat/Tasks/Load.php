@@ -564,7 +564,6 @@ class Load extends Tasks {
             }
         }
         $this->saveDefinitions();
-//        print_r($this->calls['function']);
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
@@ -712,10 +711,10 @@ class Load extends Tasks {
             $this->startSequence(); // At least, one sequence available
             $this->id = -1;
             do {
-                $theId = $this->processNext();
+                $theExpression = $this->processNext();
 
-                if ($theId instanceof Atom) {
-                    $this->addToSequence($theId);
+                if ($theExpression instanceof Atom) {
+                    $this->addToSequence($theExpression);
                 }
             } while ($this->id < $n);
 
@@ -728,7 +727,7 @@ class Load extends Tasks {
             $this->checkTokens($filename);
         } catch (LoadError $e) {
 //            print $e->getMessage();
-//            print_r($this->atoms[$this->expressions[0]]);
+//            print_r($this->expressions[0]);
             $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
             $this->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
@@ -987,7 +986,7 @@ class Load extends Tasks {
         }
 
         $try->code     = $this->tokens[$current][1];
-        $try->fullcode = $this->tokens[$current][1].static::FULLCODE_BLOCK.implode('', $fullcodeCatch).( isset($finallyId) ? $finallyId->fullcode : '');
+        $try->fullcode = $this->tokens[$current][1].static::FULLCODE_BLOCK.implode('', $fullcodeCatch).( isset($finallyId) ? $finally->fullcode : '');
         $try->line     = $this->tokens[$current][2];
         $try->token    = $this->getToken($this->tokens[$current][0]);
         $try->count    = $rank;
@@ -1118,7 +1117,7 @@ class Load extends Tasks {
 
             // Previous one
             if ($hasPrevious === true) {
-                $subnameId = $this->popExpression();
+                $subname = $this->popExpression();
                 $subname->rank = ++$rank;
                 $fullcode[] = $subname->code;
                 $this->addLink($extends, $subname, 'SUBNAME');
@@ -1160,7 +1159,7 @@ class Load extends Tasks {
         $this->currentClassTrait[] = $trait;
         $this->toggleContext(self::CONTEXT_TRAIT);
 
-        $nameId = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
+        $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
         $this->addLink($trait, $name, 'NAME');
 
         list($fullnspath, $aliased) = $this->getFullnspath($name, 'class');
@@ -1176,7 +1175,7 @@ class Load extends Tasks {
 
         list($fullnspath, $aliased) = $this->getFullnspath($name);
         $trait->code       = $this->tokens[$current][1];
-        $trait->fullcode   = $this->tokens[$current][1].' '.$nameId->fullcode.static::FULLCODE_BLOCK;
+        $trait->fullcode   = $this->tokens[$current][1].' '.$name->fullcode.static::FULLCODE_BLOCK;
         $trait->line       = $this->tokens[$current][2];
         $trait->token      = $this->getToken($this->tokens[$current][0]);
 
@@ -1356,8 +1355,8 @@ class Load extends Tasks {
 
         // Special case for pretty much empty script (<?php .... END)
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_END) {
-            $voidId = $this->addAtomVoid();
-            $this->addToSequence($voidId);
+            $void = $this->addAtomVoid();
+            $this->addToSequence($void);
 
             $this->addLink($phpcode, $this->sequence, 'CODE');
             $this->endSequence();
@@ -1412,8 +1411,8 @@ class Load extends Tasks {
         }
 
         if ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_OPEN_TAG) {
-            $voidId = $this->addAtomVoid();
-            $this->addToSequence($voidId);
+            $void = $this->addAtomVoid();
+            $this->addToSequence($void);
         }
         $this->addLink($phpcode, $this->sequence, 'CODE');
         $this->endSequence();
@@ -1457,8 +1456,8 @@ class Load extends Tasks {
             }
         } else {
             if ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_OPEN_TAG) {
-                $voidId = $this->addAtomVoid();
-                $this->addToSequence($voidId);
+                $void = $this->addAtomVoid();
+                $this->addToSequence($void);
             } else {
                 // do nothing
             }
@@ -1625,8 +1624,8 @@ class Load extends Tasks {
 
                 $this->addCall('class', $fullnspath, $nsname);
 
-                if ($id->aliased === self::ALIASED) {
-                    $this->addLink($this->usesId['class'][strtolower($id->code)], $nsname, 'DEFINITION');
+                if ($nsname->aliased === self::ALIASED) {
+                    $this->addLink($this->usesId['class'][strtolower($nsname->code)], $nsname, 'DEFINITION');
                 }
             }
             return $nsname;
@@ -1635,7 +1634,7 @@ class Load extends Tasks {
         }
     }
 
-    private function processArguments($finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehint = false) {
+    private function processArguments($finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehintSupport = false) {
         $arguments = $this->addAtom('Arguments');
         $current = $this->id;
         $this->argumentsId = array();
@@ -1670,13 +1669,13 @@ class Load extends Tasks {
                 $initialId = $this->id;
                 ++$args_max;
 
-                if ($typehint === true) {
+                if ($typehintSupport === true) {
                     if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_QUESTION) {
-                        $nullableId = $this->processNextAsIdentifier();
+                        $nullable = $this->processNextAsIdentifier();
                     } else {
-                        $nullableId = 0;
+                        $nullable = 0;
                     }
-                    $typehintId = $this->processTypehint();
+                    $typehint = $this->processTypehint();
 
                     $this->processNext();
                     $index = $this->popExpression();
@@ -1719,7 +1718,7 @@ class Load extends Tasks {
                         $index->fullcode = $typehint->fullcode.' '.$index->fullcode;
                     }
 
-                    if ($default > 0) {
+                    if ($default !== 0) {
                         $this->addLink($index, $default, 'DEFAULT');
                         $index->fullcode = $index->fullcode.' = '.$default->fullcode;
                         $default = 0;
@@ -1744,16 +1743,16 @@ class Load extends Tasks {
             $index->rank = ++$rank;
             $this->argumentsId[] = $index;
 
-            if ($nullable > 0) {
+            if ($nullable !== 0) {
                 $this->addLink($index, $nullable, 'NULLABLE');
                 $this->addLink($index, $typehint, 'TYPEHINT');
                 $index->fullcode = '?'.$typehint->fullcode.' '.$index->fullcode;
-            } elseif ($typehint > 0) {
-                $this->addLink($indexId, $typehintId, 'TYPEHINT');
+            } elseif ($typehint !== 0) {
+                $this->addLink($index, $typehint, 'TYPEHINT');
                 $index->fullcode = $typehint->fullcode.' '.$index->fullcode;
             }
 
-            if ($default > 0) {
+            if ($default !== 0) {
                 $this->addLink($index, $default, 'DEFAULT');
                 $index->fullcode = $index->fullcode.' = '.$default->fullcode;
             }
@@ -1863,46 +1862,46 @@ class Load extends Tasks {
     }
 
     private function processVar() {
-        $id = $this->processOptions('Var');
+        $var = $this->processOptions('Var');
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
-            $pppId = $this->processSGVariable('Ppp');
-            return $pppId;
+            $ppp = $this->processSGVariable('Ppp');
+            return $ppp;
         } else {
-            return $id;
+            return $var;
         }
     }
 
     private function processPublic() {
-        $id = $this->processOptions('Public');
+        $public = $this->processOptions('Public');
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
-            $pppId = $this->processSGVariable('Ppp');
-            return $pppId;
+            $ppp = $this->processSGVariable('Ppp');
+            return $ppp;
         } else {
-            return $id;
+            return $public;
         }
     }
 
     private function processProtected() {
-        $id = $this->processOptions('Protected');
+        $protected = $this->processOptions('Protected');
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
-            $pppId = $this->processSGVariable('Ppp');
-            return $pppId;
+            $ppp = $this->processSGVariable('Ppp');
+            return $ppp;
         } else {
-            return $id;
+            return $protected;
         }
     }
 
     private function processPrivate() {
-        $id = $this->processOptions('Private');
+        $private = $this->processOptions('Private');
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
-            $pppId = $this->processSGVariable('Ppp');
-            return $pppId;
+            $ppp = $this->processSGVariable('Ppp');
+            return $ppp;
         } else {
-            return $id;
+            return $private;
         }
     }
 
@@ -2219,9 +2218,9 @@ class Load extends Tasks {
         $index = $this->popExpression();
         $this->addLink($bracket, $index, 'INDEX');
 
-        if ($variable->code === '$GLOBALS' && !empty($indexId->noDelimiter)) {
+        if ($variable->code === '$GLOBALS' && !empty($index->noDelimiter)) {
             // Build the name of the global, dropping the fi
-            $bracket->globalvar = '$'.$indexId->noDelimiter;
+            $bracket->globalvar = '$'.$index->noDelimiter;
         }
 
         $bracket->code      = $opening;
@@ -2286,9 +2285,9 @@ class Load extends Tasks {
         $constant = self::CONSTANT_EXPRESSION;
 
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
-            $elementId = $this->processNext();
+            $element = $this->processNext();
             
-            $constant &= $elementId->constant;
+            $constant &= $element->constant;
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
                 $element = $this->popExpression();
@@ -2478,8 +2477,8 @@ class Load extends Tasks {
                 while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
                     $this->processNext();
                 };
-                $expressionId = $this->popExpression();
-                $this->addToSequence($expressionId);
+                $expression = $this->popExpression();
+                $this->addToSequence($expression);
             }
 
             $this->endSequence();
@@ -2741,7 +2740,7 @@ class Load extends Tasks {
 
         // Managing else case
         if (in_array($this->tokens[$this->id][0], array(\Exakat\Tasks\T_END, \Exakat\Tasks\T_CLOSE_TAG))) {
-            $else = '';
+            $elseFullcode = '';
             // No else, end of a script
             --$this->id;
             // Back up one unit to allow later processing for sequence
@@ -3017,7 +3016,7 @@ class Load extends Tasks {
             $block = ';';
         } else {
             // Process block
-            $blockId = $this->processFollowingBlock(false);
+            $block = $this->processFollowingBlock(false);
             $this->popExpression();
             $this->addLink($namespace, $block, 'BLOCK');
 
@@ -3071,14 +3070,14 @@ class Load extends Tasks {
     }
 
     private function processInsteadof() {
-        $insteadofId = $this->processOperator('Insteadof', $this->precedence->get($this->tokens[$this->id][0]), array('NAME', 'INSTEADOF'));
+        $insteadof = $this->processOperator('Insteadof', $this->precedence->get($this->tokens[$this->id][0]), array('NAME', 'INSTEADOF'));
         while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
             ++$this->id;
-            $nextId = $this->processOneNsname();
+            $nsname = $this->processOneNsname();
 
-            $this->addLink($insteadofId, $nextId, 'INSTEADOF');
+            $this->addLink($insteadof, $nsname, 'INSTEADOF');
         }
-        return $insteadofId;
+        return $insteadof;
     }
 
     private function processUse() {
@@ -3203,21 +3202,21 @@ class Load extends Tasks {
                         $this->processAs();
                         $alias = $this->popExpression();
 
-                        $nsname->fullnspath = $prefix.strtolower($id->fullcode);
-                        $nsname->origin     = $prefix.strtolower($id->fullcode);
+                        $nsname->fullnspath = $prefix.strtolower($nsname->fullcode);
+                        $nsname->origin     = $prefix.strtolower($nsname->fullcode);
 
-                        $alias->fullnspath  = $prefix.strtolower($id->fullcode);
-                        $alias->origin      = $prefix.strtolower($id->fullcode);
+                        $alias->fullnspath  = $prefix.strtolower($nsname->fullcode);
+                        $alias->origin      = $prefix.strtolower($nsname->fullcode);
 
-                        $alias = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
-                        $alias->alias = $alias;
+                        $aliasName = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
+                        $alias->alias = $aliasName;
                         $this->addLink($use, $alias, 'USE');
                     } else {
                         $this->addLink($use, $nsname, 'USE');
-                        $nsname->fullnspath = $prefix.strtolower($id->fullcode);
-                        $nsname->origin     = $prefix.strtolower($id->fullcode);
+                        $nsname->fullnspath = $prefix.strtolower($nsname->fullcode);
+                        $nsname->origin     = $prefix.strtolower($nsname->fullcode);
 
-                        $alias = $this->addNamespaceUse($nsname, $id, $useType, $alias);
+                        $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $alias);
                         $nsname->alias = $alias;
 
                     }
@@ -3279,7 +3278,10 @@ class Load extends Tasks {
     private function processVariable() {
         $variable = $this->processSingle('Variable');
         if ($this->tokens[$this->id][1] === '$this') {
-            $this->addCall('class', end($this->currentClassTrait)->fullnspath, $variable);
+            $currentClass = end($this->currentClassTrait);
+            if ($currentClass instanceof Atom) {
+                $this->addCall('class', end($this->currentClassTrait)->fullnspath, $variable);
+            }
         }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3468,9 +3470,9 @@ class Load extends Tasks {
 
     private function processCast() {
         $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
-        $operatorId = $this->popExpression();
-        $this->pushExpression($operatorId);
-        return $operatorId;
+        $operator = $this->popExpression();
+        $this->pushExpression($operator);
+        return $operator;
     }
 
     private function processReturn() {
@@ -3507,9 +3509,9 @@ class Load extends Tasks {
 
     private function processThrow() {
         $this->processSingleOperator('Throw', $this->precedence->get($this->tokens[$this->id][0]), 'THROW', ' ');
-        $operatorId = $this->popExpression();
-        $this->pushExpression($operatorId);
-        return $operatorId;
+        $operator = $this->popExpression();
+        $this->pushExpression($operator);
+        return $operator;
     }
 
     private function processYield() {
@@ -3520,7 +3522,7 @@ class Load extends Tasks {
             $returnArg = $this->addAtomVoid();
             $yield = $this->addAtom('Yield');
 
-            $this->addLink($return, $returnArg, 'YIELD');
+            $this->addLink($yield, $returnArg, 'YIELD');
 
             $yield->code     = $this->tokens[$current][1];
             $yield->fullcode = $this->tokens[$current][1].' ;';
@@ -3534,7 +3536,7 @@ class Load extends Tasks {
             $yield = $this->processSingleOperator('Yield', $this->precedence->get($this->tokens[$this->id][0]), 'YIELD', ' ');
             $operator = $this->popExpression();
             $this->pushExpression($operator);
-            $yield->constant = $id->constant;
+            $yield->constant = $operator->constant;
 
             return $operator;
         }
@@ -3604,7 +3606,7 @@ class Load extends Tasks {
             $this->addLink($variable, $expression, 'NAME');
 
             $variable->code     = $this->tokens[$current][1];
-            $variable->fullcode = $this->tokens[$current][1].'{'.$expressionId->fullcode.'}';
+            $variable->fullcode = $this->tokens[$current][1].'{'.$expression->fullcode.'}';
             $variable->line     = $this->tokens[$current][2];
             $variable->token    = $this->getToken($this->tokens[$current][0]);
 
@@ -4020,7 +4022,7 @@ class Load extends Tasks {
         };
 
         $operand = $this->popExpression();
-        $operand->fullcode  = '...'.$operandId->fullcode;
+        $operand->fullcode  = '...'.$operand->fullcode;
         $operand->variadic  = self::VARIADIC;
 
         $this->pushExpression($operand);
@@ -4483,80 +4485,80 @@ class Load extends Tasks {
         return $this->php->getTokenName($token);
     }
 
-    private function getFullnspath($nameId, $type = 'class') {
+    private function getFullnspath($name, $type = 'class') {
 
         // Handle static, self, parent and PHP natives function
-        if (isset($nameId->absolute) && ($nameId->absolute === true)) {
-            return array(strtolower($nameId->fullcode), self::NOT_ALIASED);
-        } elseif (!in_array($nameId->atom, array('Nsname', 'Identifier', 'String', 'Null', 'Boolean'))) {
+        if (isset($name->absolute) && ($name->absolute === true)) {
+            return array(strtolower($name->fullcode), self::NOT_ALIASED);
+        } elseif (!in_array($name->atom, array('Nsname', 'entifier', 'String', 'Null', 'Boolean'))) {
             // No fullnamespace for non literal namespaces
             return array('', self::NOT_ALIASED);
-        } elseif (in_array($nameId->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
+        } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
             // For language structures, it is always in global space, like eval or list
-            return array('\\'.strtolower($nameId->code), self::NOT_ALIASED);
-        } elseif (strtolower(substr($nameId->fullcode, 0, 9)) === 'namespace') {
+            return array('\\'.strtolower($name->code), self::NOT_ALIASED);
+        } elseif (strtolower(substr($name->fullcode, 0, 9)) === 'namespace') {
             // namespace\A\B
-            return array(substr($this->namespace, 0, -1).strtolower(substr($nameId->fullcode, 9)), self::NOT_ALIASED);
-        } elseif (in_array($nameId->atom, array('Identifier', 'Boolean', 'Null'))) {
+            return array(substr($this->namespace, 0, -1).strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
+        } elseif (in_array($name->atom, array('Identifier', 'Boolean', 'Null'))) {
             // This is an identifier, self or parent
-            if (strtolower($nameId->code) === 'self' || 
-                strtolower($nameId->code) === 'static') {
+            if (strtolower($name->code) === 'self' || 
+                strtolower($name->code) === 'static') {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
-                    $this->addCall('class', $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, $nameId);
+                    $this->addCall('class', $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, $name);
                     return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
                 }
 
-            } elseif (strtolower($nameId->code) === 'parent') {
+            } elseif (strtolower($name->code) === 'parent') {
                 if (empty($this->currentParentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
-                    $this->addCall('class', $this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]->fullnspath, $nameId);
+                    $this->addCall('class', $this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]->fullnspath, $name);
                     return array($this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
                 }
 
             // This is a normal identifier
-            } elseif ($type === 'class' && isset($this->uses['class'][strtolower($nameId->code)])) {
+            } elseif ($type === 'class' && isset($this->uses['class'][strtolower($name->code)])) {
 
-                $this->addCall('class', $this->usesId['class'][strtolower($nameId->code)]->fullnspath, $nameId);
-                return array($this->uses['class'][strtolower($nameId->code)], self::ALIASED);
-            } elseif ($type === 'const' && isset($this->uses['const'][strtolower($nameId->code)])) {
+                $this->addCall('class', $this->usesId['class'][strtolower($name->code)]->fullnspath, $name);
+                return array($this->uses['class'][strtolower($name->code)], self::ALIASED);
+            } elseif ($type === 'const' && isset($this->uses['const'][strtolower($name->code)])) {
             
-                $this->addLink($this->usesId['const'][strtolower($nameId->code)], $nameId, 'DEFINITION');
-                return array($this->uses['const'][strtolower($nameId->code)], self::ALIASED);
-            } elseif ($type === 'const' && !empty($this->calls['const']['\\'.strtolower($nameId->code)]['definitions'])) {
+                $this->addLink($this->usesId['const'][strtolower($name->code)], $name, 'DEFINITION');
+                return array($this->uses['const'][strtolower($name->code)], self::ALIASED);
+            } elseif ($type === 'const' && !empty($this->calls['const']['\\'.strtolower($name->code)]['definitions'])) {
                 // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
-                return array('\\'.strtolower($nameId->code), self::NOT_ALIASED);
-            } elseif ($type === 'function' && isset($this->uses['function'][strtolower($nameId->code)])) {
+                return array('\\'.strtolower($name->code), self::NOT_ALIASED);
+            } elseif ($type === 'function' && isset($this->uses['function'][strtolower($name->code)])) {
 
-                $this->addLink($this->usesId['function'][strtolower($nameId->code)], $nameId, 'DEFINITION');
-                return array($this->uses['function'][strtolower($nameId->code)], self::ALIASED);
-            } elseif ($type === 'function' && !empty($this->calls['function']['\\'.strtolower($nameId->code)]['definitions'])) {
+                $this->addLink($this->usesId['function'][strtolower($name->code)], $name, 'DEFINITION');
+                return array($this->uses['function'][strtolower($name->code)], self::ALIASED);
+            } elseif ($type === 'function' && !empty($this->calls['function']['\\'.strtolower($name->code)]['definitions'])) {
 
                 // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
-                return array('\\'.strtolower($nameId->code), self::NOT_ALIASED);
+                return array('\\'.strtolower($name->code), self::NOT_ALIASED);
             } else {
-                return array($this->namespace.strtolower($nameId->fullcode), self::NOT_ALIASED);
+                return array($this->namespace.strtolower($name->fullcode), self::NOT_ALIASED);
             }
-        } elseif ($nameId->atom === 'String' && isset($nameId->noDelimiter)) {
-            if (empty($nameId->noDelimiter)) {
+        } elseif ($name->atom === 'String' && isset($name->noDelimiter)) {
+            if (empty($name->noDelimiter)) {
                 $prefix = '\\';
             } else {
-                $prefix =  ($nameId->noDelimiter[0] === '\\' ? '' : '\\').strtolower($nameId->noDelimiter);
+                $prefix =  ($name->noDelimiter[0] === '\\' ? '' : '\\').strtolower($name->noDelimiter);
             }
 
             // define doesn't care about use...
             return array($prefix, self::NOT_ALIASED);
         } else {
             // Finally, the case for a nsname
-            $prefix = strtolower( substr($nameId->fullcode, 0, strpos($nameId->fullcode, '\\')) );
+            $prefix = strtolower( substr($name->fullcode, 0, strpos($name->fullcode, '\\')) );
 
             if (isset($this->uses[$type][$prefix])) {
-                $this->addLink($this->usesId['class'][$prefix], $nameId, 'DEFINITION');
-                return array($this->uses[$type][$prefix].strtolower( substr($nameId->fullcode, strlen($prefix)) ) , 0);
+                $this->addLink($this->usesId['class'][$prefix], $name, 'DEFINITION');
+                return array($this->uses[$type][$prefix].strtolower( substr($name->fullcode, strlen($prefix)) ) , 0);
             } else {
-                return array($this->namespace.strtolower($nameId->fullcode), 0);
+                return array($this->namespace.strtolower($name->fullcode), 0);
             }
         }
     }
@@ -4578,46 +4580,46 @@ class Load extends Tasks {
         return (boolean) $this->contexts[$context];
     }
 
-    private function makeFullnspath($namespaceAsId) {
-        return strtolower(isset($namespaceAsId->absolute) && $namespaceAsId->absolute === true ? $namespaceAsId->fullcode : '\\'.$namespaceAsId->fullcode) ;
+    private function makeFullnspath($namespaceAs) {
+        return strtolower(isset($namespaceAs->absolute) && $namespaceAs->absolute === true ? $namespaceAs->fullcode : '\\'.$namespaceAs->fullcode) ;
     }
 
-    private function setNamespace($namespaceId = 0) {
-        if ($namespaceId === 0) {
+    private function setNamespace($namespace = 0) {
+        if ($namespace === 0) {
             $this->namespace = '\\';
             $this->uses = array('function' => array(),
                                 'const'    => array(),
                                 'class'    => array());
-            $this->usesId = array('function' => array(),
+            $this->uses = array('function' => array(),
                                   'const'    => array(),
                                   'class'    => array());
-        } elseif ($namespaceId->atom === 'Void') {
+        } elseif ($namespace->atom === 'Void') {
             $this->namespace = '\\';
         } else {
-            $this->namespace = strtolower($namespaceId->fullcode).'\\';
+            $this->namespace = strtolower($namespace->fullcode).'\\';
             if ($this->namespace[0] !== '\\') {
                 $this->namespace = '\\'.$this->namespace;
             }
         }
     }
 
-    private function addNamespaceUse($originId, $aliasId, $useType, $useId) {
-        $fullnspath = $originId->fullnspath;
+    private function addNamespaceUse($origin, $alias, $useType, $use) {
+        $fullnspath = $origin->fullnspath;
 
-        if ($originId !== $aliasId) { // Case of A as B
+        if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
-            $offset = strrpos($aliasId->fullcode, ' ');
-            $alias = strtolower(substr($aliasId->fullcode, $offset + 1));
-        } elseif (($offset = strrpos($aliasId->fullnspath, '\\')) === false) {
+            $offset = strrpos($alias->fullcode, ' ');
+            $alias = strtolower(substr($alias->fullcode, $offset + 1));
+        } elseif (($offset = strrpos($alias->fullnspath, '\\')) === false) {
             // namespace without \
-            $alias = strtolower($aliasId->fullnspath);
+            $alias = strtolower($alias->fullnspath);
         } else {
             // namespace with \
-            $alias = substr($aliasId->fullnspath, $offset + 1);
+            $alias = substr($alias->fullnspath, $offset + 1);
         }
 
         $this->uses[$useType][strtolower($alias)] = $fullnspath;
-        $this->usesId[$useType][strtolower($alias)] = $useId;
+        $this->uses[$useType][strtolower($alias)] = $use;
 
         return $alias;
     }
@@ -4644,20 +4646,20 @@ class Load extends Tasks {
         $this->calls[$type][$fullnspath]['calls'][$atom][] = $call->id;
     }
 
-    private function addNoDelimiterCall($callId) {
-        if (empty($callId->noDelimiter)) {
+    private function addNoDelimiterCall($call) {
+        if (empty($call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
-        if (intval($callId->noDelimiter)) {
+        if (intval($call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
         // single : is OK 
-        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $callId->noDelimiter)) {
+        if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
         
-        if (strpos($callId->noDelimiter, '::') !== false) {
-            $fullnspath = strtolower(substr($callId->noDelimiter, 0, strpos($callId->noDelimiter, '::')) );
+        if (strpos($call->noDelimiter, '::') !== false) {
+            $fullnspath = strtolower(substr($call->noDelimiter, 0, strpos($call->noDelimiter, '::')) );
 
             if (strlen($fullnspath) === 0) {
                 $fullnspath = '\\';
@@ -4668,7 +4670,7 @@ class Load extends Tasks {
         } else {
             $types = array('function', 'class');
 
-            $fullnspath = strtolower($callId->noDelimiter);
+            $fullnspath = strtolower($call->noDelimiter);
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
             }
@@ -4683,7 +4685,7 @@ class Load extends Tasks {
             if (!isset($this->calls[$type][$fullnspath]['calls'][$atom])) {
                 $this->calls[$type][$fullnspath]['calls'][$atom] = array();
             }
-            $this->calls[$type][$fullnspath]['calls'][$atom][] = $callId;
+            $this->calls[$type][$fullnspath]['calls'][$atom][] = $call;
         }
     }
 

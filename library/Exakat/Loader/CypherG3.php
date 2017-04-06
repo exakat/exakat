@@ -178,6 +178,7 @@ CYPHER;
     }
 
     private function cleanCsv() {
+        return;
         if (empty($this->unlink)) {
             return ;
         }
@@ -267,64 +268,31 @@ CYPHER;
     }
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
-        static $extras = array();
-
         // Saving atoms
         foreach($atoms as $atom) {
-            $fileName = $exakatDir.'/nodes.g3.'.$atom['atom'].'.csv';
-            assert(!empty($atom),  "Atom is empty for $atom[atom]\n");
-            if ($atom['atom'] === 'Project' && file_exists($fileName)) {
+            $fileName = $exakatDir.'/nodes.g3.'.$atom->atom.'.csv';
+            if ($atom->atom === 'Project' && file_exists($fileName)) {
                 // Project is saved only once
                 continue;
             }
-            if (isset($extras[$atom['atom']])) {
+            if (isset($extras[$atom->atom])) {
                 $fp = fopen($fileName, 'a');
             } else {
                 $fp = fopen($fileName, 'w+');
                 $headers = array('id', 'atom', 'code', 'fullcode', 'line', 'token', 'rank');
 
-                $extras[$atom['atom']]= array();
+                $extras[$atom->atom]= array();
                 foreach(Load::$PROP_OPTIONS as $title => $atoms) {
-                    if (in_array($atom['atom'], $atoms)) {
+                    if (in_array($atom->atom, $atoms)) {
                         $headers[] = $title;
-                        $extras[$atom['atom']][] = $title;
+                        $extras[$atom->atom][] = $title;
                     }
                 }
                 
                 fputcsv($fp, $headers);
             }
 
-            $extra= array();
-            foreach($extras[$atom['atom']] as $e) {
-                if ($e === 'boolean') {
-                    $extra[] = isset($atom[$e]) ? '"'.($atom[$e] ? "1" : "").'"' : '""';
-                } elseif ($e === 'constant') {
-                    $extra[] = (isset($atom[$e]) && $atom[$e]) ? '"1"' : '';
-                } elseif ($e === 'fullnspath') {
-                    $extra[] = !empty($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '';
-                } elseif ($e === 'propertyname') {
-                    $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '';
-                } else {
-                    $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
-                }
-            }
-
-            if (strlen($atom['code']) > 5000) {
-                $atom['code'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['code']).' chars]';
-            }
-            if (strlen($atom['fullcode']) > 5000) {
-                $atom['fullcode'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['fullcode']).' chars]';
-            }
-
-            if (count($extras[$atom['atom']]) > 0) {
-                $extra = ','.implode(',', $extra);
-            } else {
-                $extra = '';
-            }
-
-            $written = fwrite($fp,
-                              $atom['id'].','.$atom['atom'].',"'.$this->escapeCsv( $atom['code'] ).'","'.$this->escapeCsv( $atom['fullcode']).'",'.(isset($atom['line']) ? $atom['line'] : 0).',"'.$this->escapeCsv( isset($atom['token']) ? $atom['token'] : '').'","'.(isset($atom['rank']) ? $atom['rank'] : -1).'"'.$extra."\n");
-
+            $written = fputcsv($fp, $atom->toLimitedArray($extras[$atom->atom]));
             fclose($fp);
         }
 

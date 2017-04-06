@@ -71,7 +71,6 @@ class Atom {
     }
     
     public function toArray() {
-           
         if (strlen($this->code) > 5000) {
             $this->code = substr($this->code, 0, 5000).'...[ total '.strlen($this->code).' chars]';
         }
@@ -83,6 +82,34 @@ class Atom {
         $this->fullcode = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->fullcode);
         
         return (array) $this;
+    }
+
+    public function toLimitedArray($headers) {
+        $return = array();
+
+        if (strlen($this->code) > 5000) {
+            $this->code = substr($this->code, 0, 5000).'...[ total '.strlen($this->code).' chars]';
+        }
+        if (strlen($this->fullcode) > 5000) {
+            $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
+        }
+        
+        $this->code = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->code);
+        $this->fullcode = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->fullcode);
+
+        $return = array( $this->id,
+                         $this->atom,
+                         $this->code,
+                         $this->fullcode,
+                         $this->line,
+                         $this->token,
+                         $this->rank);
+        
+        foreach($headers as $head) {
+            $return[] = $this->$head;
+        }
+        
+        return $return;
     }
 }
 
