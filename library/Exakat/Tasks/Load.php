@@ -4490,7 +4490,7 @@ class Load extends Tasks {
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === true)) {
             return array(strtolower($name->fullcode), self::NOT_ALIASED);
-        } elseif (!in_array($name->atom, array('Nsname', 'entifier', 'String', 'Null', 'Boolean'))) {
+        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'String', 'Null', 'Boolean'))) {
             // No fullnamespace for non literal namespaces
             return array('', self::NOT_ALIASED);
         } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {

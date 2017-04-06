@@ -312,7 +312,7 @@ CYPHER;
                     }
 
                     foreach($links as $link) {
-                        fputcsv($fp, array($link['origin'], $link['destination']), ',', '"', '\\');
+                        fputcsv($fp, array($link['origin'], $link['destination']));
                     }
 
                     fclose($fp);
@@ -339,7 +339,7 @@ CYPHER;
 
                         foreach($origins as $o) {
                             foreach($destinations as $d) {
-                                fputcsv($fp, array($d, $o), ',', '"', '\\');
+                                fputcsv($fp, array($d, $o));
                             }
                         }
                     }

@@ -80,6 +80,8 @@ class Atom {
         
         $this->code = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->code);
         $this->fullcode = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->fullcode);
+        $this->strval = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->strval);
+        $this->noDelimiter = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->noDelimiter);
         
         return (array) $this;
     }
@@ -96,6 +98,8 @@ class Atom {
         
         $this->code = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->code);
         $this->fullcode = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->fullcode);
+        $this->strval = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->strval);
+        $this->noDelimiter = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->noDelimiter);
 
         $return = array( $this->id,
                          $this->atom,

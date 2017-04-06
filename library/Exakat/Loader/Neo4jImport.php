@@ -151,6 +151,7 @@ GREMLIN;
     }
 
     private function cleanCsv() {
+        return;
         unlink($this->config->projects_root.'/projects/.exakat/nodes.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/rels.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/index.g3.csv');
@@ -304,7 +305,7 @@ GREMLIN;
             $indexList[$atom->atom] = 1;
             $ids[$id] = 1;
 
-            $written = fputcsv($fp, $atom->toArray(), ',', '"', '\\');
+            $written = fputcsv($fp, $atom->toArray());
         }
         fclose($fp);
 
@@ -331,7 +332,7 @@ GREMLIN;
                     foreach($links as $link) {
                         $starts[$link['origin']] = 1;
                         $ends[$link['destination']] = 1;
-                        fputcsv($fp, array($link['origin'], $link['destination'], $label), ',', '"', '\\');
+                        fputcsv($fp, array($link['origin'], $link['destination'], $label));
                     }
                 }
             }
@@ -360,7 +361,7 @@ GREMLIN;
                     foreach($path['definitions'] as $destination => $destinations) {
                         foreach($origins as $o) {
                             foreach($destinations as $d) {
-                                fputcsv($fp, array($d, $o, 'DEFINITION'), ',', '"', '\\');
+                                fputcsv($fp, array($d, $o, 'DEFINITION'));
                             }
                         }
                     }
