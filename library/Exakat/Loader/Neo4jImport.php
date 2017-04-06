@@ -269,7 +269,8 @@ GREMLIN;
                                'propertyname'=> '',
                                'constant'    => '',
                                'root'        => 'int',
-                               'globalvar'   => '');
+                               'globalvar'   => '',
+                               'binaryString'=> '');
 
         $fileName = $exakatDir.'/nodes.g3.csv';
         if (file_exists($fileName)) {

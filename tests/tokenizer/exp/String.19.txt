@@ -1,0 +1,57 @@
+Label : PROJECT
+  ./tests/tokenizer/source/String.19.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $e
+          Label : RIGHT
+            b<<<TEST
+
+            Label : CONCAT
+              ae
+
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $e
+          Label : RIGHT
+            B<<<TEST
+
+            Label : CONCAT
+              ae
+
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $f
+          Label : RIGHT
+            b<<<'TEST'
+
+            Label : CONCAT
+              af
+
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $d
+          Label : RIGHT
+            (binary)
+            Label : CAST
+              <<<XXX
+
+              Label : CONCAT
+                
+
+              Label : CONCAT
+                $ddfdf
+              Label : CONCAT
+                ';
+
+

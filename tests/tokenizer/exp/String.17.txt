@@ -1,0 +1,33 @@
+Label : PROJECT
+  ./tests/tokenizer/source/String.17.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            b"aa"
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a2
+          Label : RIGHT
+            b"a"a2"
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a3
+          Label : RIGHT
+            'a"a3'
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a4
+          Label : RIGHT
+            "aa4"

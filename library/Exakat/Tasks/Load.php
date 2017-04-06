@@ -131,6 +131,7 @@ class Load extends Tasks {
     const NO_CLOSING_TAG   = false;
 
     const NO_VALUE          = -1;
+    const NOT_BINARY        = ''; // other values b, B (binary)
     
     const ABSOLUTE     = true;
     const NOT_ABSOLUTE = false;
@@ -183,6 +184,7 @@ class Load extends Tasks {
     static public $PROP_PROPERTYNAME= array('Variable', 'Assignation');
     static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence');
     static public $PROP_GLOBALVAR   = array('Array');
+    static public $PROP_BINARYSTRING= array('String', 'Heredoc');
 
     static public $PROP_OPTIONS = array();
 
@@ -469,6 +471,7 @@ class Load extends Tasks {
                           'propertyname'=> self::$PROP_PROPERTYNAME,
                           'constant'    => self::$PROP_CONSTANT,
                           'globalvar'   => self::$PROP_GLOBALVAR,
+                          'binaryString'=> self::$PROP_BINARYSTRING,
                           );
     }
 
@@ -798,10 +801,14 @@ class Load extends Tasks {
             $string = $this->addAtom('Heredoc');
             $finalToken = \Exakat\Tasks\T_END_HEREDOC;
             $openQuote = $this->tokens[$this->id][1];
-            if ($this->tokens[$this->id][1][3] === "'") {
-                $closeQuote = substr($this->tokens[$this->id][1], 4, -2);
+            if ($openQuote[0] === 'b' || $openQuote[0] === 'B') {
+                $string->binaryString = $openQuote[0];
+                $openQuote = substr($openQuote, 1);
+            }
+            if ($openQuote[3] === "'") {
+                $closeQuote = substr($openQuote, 4, -2);
             } else {
-                $closeQuote = substr($this->tokens[$this->id][1], 3);
+                $closeQuote = substr($openQuote, 3);
             }
             $type = \Exakat\Tasks\T_START_HEREDOC;
         }
@@ -868,7 +875,7 @@ class Load extends Tasks {
 
         ++$this->id;
         $string->code     = $this->tokens[$current][1];
-        $string->fullcode = $openQuote.implode('', $fullcode).$closeQuote;
+        $string->fullcode = $string->binaryString.$openQuote.implode('', $fullcode).$closeQuote;
         $string->line     = $this->tokens[$current][2];
         $string->token    = $this->getToken($this->tokens[$current][0]);
         $string->count    = $rank + 1;
@@ -3399,10 +3406,22 @@ class Load extends Tasks {
 
     private function processLiteral() {
         $literal = $this->processSingle('String');
-
+        
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CONSTANT_ENCAPSED_STRING) {
+            var_dump($literal->code);
             $literal->delimiter   = $literal->code[0];
-            $literal->noDelimiter = substr($literal->code, 1, -1);
+            if ($literal->delimiter === 'b' || $literal->delimiter === 'B') {
+                $literal->binaryString = $literal->delimiter;
+                $literal->delimiter    = $literal->code[1];
+                $literal->noDelimiter  = substr($literal->code, 2, -1);
+            } elseif ($literal->delimiter === '(' || $literal->delimiter === 'B') {
+                die ('(binary)');
+                $literal->binaryString = $literal->delimiter;
+                $literal->delimiter    = $literal->code[1];
+                $literal->noDelimiter  = substr($literal->code, 2, -1);
+            } else {
+                $literal->noDelimiter = substr($literal->code, 1, -1);
+            }
 
             $this->addNoDelimiterCall($literal);
         } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NUM_STRING) {
@@ -3469,8 +3488,11 @@ class Load extends Tasks {
     }
 
     private function processCast() {
-        $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
+        $cast = $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
         $operator = $this->popExpression();
+        if (strtolower($operator->code) === '(binary)') {
+            $operator->binaryString = $operator->code[1];
+        }
         $this->pushExpression($operator);
         return $operator;
     }

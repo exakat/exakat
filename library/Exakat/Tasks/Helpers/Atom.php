@@ -57,17 +57,13 @@ class Atom {
     public $boolean      = null;
     public $propertyname = '';
     public $constant     = Load::CONSTANT_EXPRESSION;
-
     public $root         = false;  // false is on purpose. 
     public $globalvar    = false;
+    public $binaryString = Load::NOT_BINARY;
 
     public function __construct($atom) {
         $this->id = ++self::$atomCount;
         $this->atom = $atom;
-    }
-    
-    public function __set($name, $value) {
-        print "Undefined $name property in Atom\n";
     }
     
     public function toArray() {
@@ -77,11 +73,6 @@ class Atom {
         if (strlen($this->fullcode) > 5000) {
             $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
         }
-        
-        $this->code = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->code);
-        $this->fullcode = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->fullcode);
-        $this->strval = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->strval);
-        $this->noDelimiter = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->noDelimiter);
         
         return (array) $this;
     }
@@ -96,11 +87,6 @@ class Atom {
             $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
         }
         
-        $this->code = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->code);
-        $this->fullcode = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->fullcode);
-        $this->strval = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->strval);
-        $this->noDelimiter = str_replace(array('\\', '"'), array('\\\\', '\\"'), $this->noDelimiter);
-
         $return = array( $this->id,
                          $this->atom,
                          $this->code,

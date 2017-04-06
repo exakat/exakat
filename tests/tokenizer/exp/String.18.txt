@@ -1,0 +1,25 @@
+Label : PROJECT
+  ./tests/tokenizer/source/String.18.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            (binary)
+            Label : CAST
+              "aa"
+        Label : ELEMENT
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            (BINARY)
+            Label : CAST
+              "ab"
