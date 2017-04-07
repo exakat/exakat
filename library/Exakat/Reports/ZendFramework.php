@@ -192,8 +192,8 @@ MENU;
     }
 
     private function initFolder() {
-        if ($this->finalName === 'stdout') {
-            return "Can't produce Devoops format to stdout";
+        if ($this->finalName === Reports::STDOUT) {
+            return "Can't produce this report format to stdout. It needs a file name.";
         }
 
         // Clean temporary destination

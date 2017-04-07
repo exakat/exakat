@@ -71,7 +71,7 @@ class Composer extends Reports {
         
         $final = json_encode($composer, \JSON_PRETTY_PRINT);
 
-        if ($name === 'stdout') {
+        if ($name === Reports::STDOUT) {
             return $final ;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $final);

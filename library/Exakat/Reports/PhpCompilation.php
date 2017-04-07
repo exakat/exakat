@@ -83,7 +83,7 @@ TEXT
         }
         $final .= implode("\n", $return);
 
-        if ($name === 'stdout') {
+        if ($name === Reports::STDOUT) {
             return $final ;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $final);
