@@ -1216,7 +1216,7 @@ class Load extends Tasks {
         $fullcode= array();
         $extends = $this->id + 1;
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EXTENDS) {
-            $extendsKeyword = $this->tokens[$this->id][1];
+            $extendsKeyword = $this->tokens[$this->id + 1][1];
             do {
                 ++$this->id; // Skip extends or ,
                 $extends = $this->processOneNsname();
@@ -1236,7 +1236,7 @@ class Load extends Tasks {
         $this->addLink($interface, $block, 'BLOCK');
 
         $interface->code       = $this->tokens[$current][1];
-        $interface->fullcode   = $this->tokens[$current][1].' '.$name->fullcode.(isset($$extendsKeyword) ? ' '.$extendsKeyword.' '.implode(', ', $fullcode) : '').static::FULLCODE_BLOCK;
+        $interface->fullcode   = $this->tokens[$current][1].' '.$name->fullcode.(isset($extendsKeyword) ? ' '.$extendsKeyword.' '.implode(', ', $fullcode) : '').static::FULLCODE_BLOCK;
         $interface->line       = $this->tokens[$current][2];
         $interface->token      = $this->getToken($this->tokens[$current][0]);
 
@@ -3173,18 +3173,18 @@ class Load extends Tasks {
                 ++$this->id; // Skip \
 
                 $useTypeGeneric = $useType;
-                $useType = 0;
+                $useTypeAtom = 0;
                 do {
                     ++$this->id; // Skip {
 
                     $useType = $useTypeGeneric;
-                    $useType = 0;
+                    $useTypeAtom = 0;
                     if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CONST) {
                         // use const
                         ++$this->id;
 
                         $this->processSingle('Identifier');
-                        $useType = $this->popExpression();
+                        $useTypeAtom = $this->popExpression();
                         $useType = 'const';
                     }
 
@@ -3193,13 +3193,13 @@ class Load extends Tasks {
                         ++$this->id;
 
                         $this->processSingle('Identifier');
-                        $useType = $this->popExpression();
+                        $useTypeAtom = $this->popExpression();
                         $useType = 'function';
                     }
 
                     $nsname = $this->processOneNsname();
-                    if ($useType !== 0) {
-                        $this->addLink($nsname, $useType, strtoupper($useType));
+                    if ($useTypeAtom !== 0) {
+                        $this->addLink($nsname, $useTypeAtom, strtoupper($useType));
                     }
 
                     if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_AS) {
@@ -3223,7 +3223,7 @@ class Load extends Tasks {
                         $nsname->fullnspath = $prefix.strtolower($nsname->fullcode);
                         $nsname->origin     = $prefix.strtolower($nsname->fullcode);
 
-                        $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $alias);
+                        $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $nsname);
                         $nsname->alias = $alias;
 
                     }
@@ -3261,7 +3261,7 @@ class Load extends Tasks {
                     $alias = $this->addNamespaceUse($alias, $alias, $useType, $namespace);
 
                     $namespace->alias = $alias;
-                    $origin->alias = $fullnspath;
+                    $origin->alias = $alias;
                 }
             }
             // No Else. Default will be dealt with by while() condition
@@ -4319,6 +4319,9 @@ class Load extends Tasks {
     }
 
     private function addLink($origin, $destination, $label) {
+        if (!is_object($origin)) {
+            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
+        }
         $o = $origin->atom;
         assert($origin instanceof Atom);
         if (!is_object($destination)) {
@@ -4540,21 +4543,25 @@ class Load extends Tasks {
                 }
 
             // This is a normal identifier
-            } elseif ($type === 'class' && isset($this->usesId['class'][strtolower($name->code)])) {
+            } elseif ($type === 'class' && isset($this->uses['class'][strtolower($name->code)])) {
 
-                $this->addCall('class', $this->usesId['class'][strtolower($name->code)]->fullnspath, $name);
-                return array($this->uses['class'][strtolower($name->code)], self::ALIASED);
+                $this->addCall('class', $this->uses['class'][strtolower($name->code)]->fullnspath, $name);
+                return array($this->uses['class'][strtolower($name->code)]->fullnspath, self::ALIASED);
+
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($name->code)])) {
             
-                $this->addLink($this->usesId['const'][strtolower($name->code)], $name, 'DEFINITION');
-                return array($this->uses['const'][strtolower($name->code)], self::ALIASED);
+                $this->addLink($this->uses['const'][strtolower($name->code)], $name, 'DEFINITION');
+                return array($this->uses['const'][strtolower($name->code)]->fullnspath, self::ALIASED);
+
             } elseif ($type === 'const' && !empty($this->calls['const']['\\'.strtolower($name->code)]['definitions'])) {
                 // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
                 return array('\\'.strtolower($name->code), self::NOT_ALIASED);
+
             } elseif ($type === 'function' && isset($this->uses['function'][strtolower($name->code)])) {
 
-                $this->addLink($this->usesId['function'][strtolower($name->code)], $name, 'DEFINITION');
-                return array($this->uses['function'][strtolower($name->code)], self::ALIASED);
+                $this->addLink($this->uses['function'][strtolower($name->code)], $name, 'DEFINITION');
+                return array($this->uses['function'][strtolower($name->code)]->fullnspath, self::ALIASED);
+
             } elseif ($type === 'function' && !empty($this->calls['function']['\\'.strtolower($name->code)]['definitions'])) {
 
                 // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
@@ -4639,7 +4646,10 @@ class Load extends Tasks {
             $alias = substr($alias->fullnspath, $offset + 1);
         }
 
-        $this->uses[$useType][strtolower($alias)] = $fullnspath;
+        if (!($use instanceof Atom)) {
+            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
+        }
+        assert($use instanceof Atom);
         $this->uses[$useType][strtolower($alias)] = $use;
 
         return $alias;
@@ -4651,7 +4661,7 @@ class Load extends Tasks {
         }
         
         if (!is_string($fullnspath)) {
-        print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
+            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
         }
         assert(is_string($fullnspath));
         
