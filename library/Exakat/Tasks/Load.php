@@ -85,10 +85,6 @@ class Load extends Tasks {
     private $uses   = array('function' => array(),
                             'const'    => array(),
                             'class'    => array());
-    private $usesId = array('function' => array(),
-                            'const'    => array(),
-                            'class'    => array());
-
     private $filename   = null;
     private $line       = 0;
 
@@ -139,8 +135,8 @@ class Load extends Tasks {
     const WITH_FULLNSPATH      = true;
     const WITHOUT_FULLNSPATH   = false;
 
-    const CONSTANT_EXPRESSION       = 1;
-    const NOT_CONSTANT_EXPRESSION   = 0;
+    const CONSTANT_EXPRESSION       = true;
+    const NOT_CONSTANT_EXPRESSION   = false;
     
     const FULLNSPATH_UNDEFINED = 'undefined';
 
@@ -618,9 +614,6 @@ class Load extends Tasks {
         $this->uses  = array('function' => array(),
                              'const'    => array(),
                              'class'    => array());
-        $this->usesId = array('function' => array(),
-                              'const'    => array(),
-                              'class'    => array());
         $this->contexts = array(self::CONTEXT_CLASS        => false,
                                 self::CONTEXT_INTERFACE    => false,
                                 self::CONTEXT_TRAIT        => false,
@@ -697,9 +690,6 @@ class Load extends Tasks {
         $this->uses   = array('function' => array(),
                               'const'    => array(),
                               'class'    => array());
-        $this->usesId   = array('function' => array(),
-                                'const'    => array(),
-                                'class'    => array());
 
         $id1 = $this->addAtom('File');
         $id1->code     = $filename;
@@ -1291,7 +1281,7 @@ class Load extends Tasks {
             $this->addLink($class, $extends, 'EXTENDS');
             list($fullnspath, $aliased) = $this->getFullnspath($extends);
             if ($aliased === self::ALIASED) {
-                $this->addLink($this->usesId['class'][strtolower($extends->code)], $extends, 'DEFINITION');
+                $this->addLink($this->uses['class'][strtolower($extends->code)], $extends, 'DEFINITION');
             }
             $this->addCall('class', $fullnspath, $extends);
             $this->currentParentClassTrait[] = $extends;
@@ -1310,7 +1300,7 @@ class Load extends Tasks {
 
                 list($fullnspath, $aliased) = $this->getFullnspath($implements);
                 if ($aliased === self::ALIASED) {
-                    $this->addLink($this->usesId['class'][strtolower($implements->code)], $implements, 'DEFINITION');
+                    $this->addLink($this->uses['class'][strtolower($implements->code)], $implements, 'DEFINITION');
                 }
                 $this->addCall('class', $fullnspath, $implements);
             } while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA);
@@ -1524,14 +1514,15 @@ class Load extends Tasks {
 
             $nsname = $this->addAtom('Boolean');
             $nsname->boolean = (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true');
-        } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR  &&
-            $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING          &&
-            strtolower($this->tokens[$this->id + 1][1]) === 'null' &&
-            $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
-            ) {
+            $nsname->constant = self::CONSTANT_EXPRESSION;
+        } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR     &&
+                  $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING       &&
+                  strtolower($this->tokens[$this->id + 1][1]) === 'null'           &&
+                  $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR ) {
 
-            $nsnameI= $this->addAtom('Null');
+            $nsname = $this->addAtom('Null');
             $nsname->boolean = 0;
+            $nsname->constant = self::CONSTANT_EXPRESSION;
         } else {
             $nsname = $this->addAtom('Nsname');
         }
@@ -1632,7 +1623,7 @@ class Load extends Tasks {
                 $this->addCall('class', $fullnspath, $nsname);
 
                 if ($nsname->aliased === self::ALIASED) {
-                    $this->addLink($this->usesId['class'][strtolower($nsname->code)], $nsname, 'DEFINITION');
+                    $this->addLink($this->uses['class'][strtolower($nsname->code)], $nsname, 'DEFINITION');
                 }
             }
             return $nsname;
@@ -1657,10 +1648,10 @@ class Load extends Tasks {
             $arguments->fullcode = self::FULLCODE_VOID;
             $arguments->line     = $this->tokens[$current][2];
             $arguments->token    = $this->getToken($this->tokens[$current][0]);
+            $arguments->constant = self::CONSTANT_EXPRESSION;
             $this->argumentsId[] = $void;
 
             ++$this->id;
-            $constant = self::CONSTANT_EXPRESSION;
         } else {
             $typehint   = 0;
             $default    = 0;
@@ -1733,7 +1724,7 @@ class Load extends Tasks {
 
                     $this->addLink($arguments, $index, 'ARGUMENT');
                     $fullcode[] = $index->fullcode;
-                    $constant &= $index->constant === self::CONSTANT_EXPRESSION;
+                    $constant = $constant && ($index->constant === self::CONSTANT_EXPRESSION);
 
                     ++$this->id; // Skipping the comma ,
                     $index = 0;
@@ -1764,7 +1755,7 @@ class Load extends Tasks {
                 $index->fullcode = $index->fullcode.' = '.$default->fullcode;
             }
             $this->addLink($arguments, $index, 'ARGUMENT');
-            $constant &= $index->constant === self::CONSTANT_EXPRESSION;
+            $constant = $constant && ($index->constant === self::CONSTANT_EXPRESSION);
 
             $fullcode[] = $index->fullcode;
 
@@ -1951,7 +1942,7 @@ class Load extends Tasks {
             
             if (in_array($fullnspath, $deterministFunctions)) {
                 $functioncall->boolean  = (int) (bool) $arguments->count;
-                $functioncall->constant = $arguments->constant === self::CONSTANT_EXPRESSION;
+                $functioncall->constant = ($arguments->constant === self::CONSTANT_EXPRESSION);
             }
         }
 
@@ -1985,6 +1976,7 @@ class Load extends Tasks {
             $string->constant = self::CONSTANT_EXPRESSION;
         } else {
             $string = $this->addAtom('Identifier');
+            $string->constant = self::CONSTANT_EXPRESSION;
         }
 
         $string->code       = $this->tokens[$this->id][1];
@@ -2006,9 +1998,9 @@ class Load extends Tasks {
             $this->addCall('class', $fullnspath, $string);
 
             if ($aliased === self::ALIASED) {
-                $this->addLink($this->usesId['class'][strtolower($string->code)], $string, 'DEFINITION');
+                $this->addLink($this->uses['class'][strtolower($string->code)], $string, 'DEFINITION');
             }
-        }
+        } 
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $string->constant = self::CONSTANT_EXPRESSION;
@@ -2294,7 +2286,7 @@ class Load extends Tasks {
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $element = $this->processNext();
             
-            $constant &= $element->constant;
+            $constant = $constant && $element->constant;
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA) {
                 $element = $this->popExpression();
@@ -2918,13 +2910,11 @@ class Load extends Tasks {
         $this->addLink($ternary, $then, 'THEN');
         $this->addLink($ternary, $else, 'ELSE');
 
-        $constant = $condition->constant && $then->constant && $else->constant;
-
         $ternary->code     = '?';
         $ternary->fullcode = $condition->fullcode.' ?'.($then->atom === 'Void' ? '' : ' '.$then->fullcode.' ' ).': '.$else->fullcode;
         $ternary->line     = $this->tokens[$current][2];
         $ternary->token    = 'T_QUESTION';
-        $ternary->constant = $constant;
+        $ternary->constant = $condition->constant && $then->constant && $else->constant;
 
         $this->pushExpression($ternary);
 
@@ -3240,15 +3230,16 @@ class Load extends Tasks {
 
                     $fullnspath = $this->makeFullnspath($namespace);
                     $namespace->fullnspath = $fullnspath;
+                    $namespace->origin     = $fullnspath;
                     $this->addCall('class', $fullnspath, $namespace);
                 } else {
                     list($fullnspath, $aliased) = $this->getFullnspath($namespace);
                     $namespace->fullnspath = $fullnspath;
                     $namespace->aliased = $aliased;
-
+                    
                     $this->addCall('class', $fullnspath, $namespace);
                     if ($aliased === self::ALIASED) {
-                        $this->addLink($this->usesId['class'][strtolower($namespace->code)], $namespace, 'DEFINITION');
+                        $this->addLink($this->uses['class'][strtolower($namespace->code)], $namespace, 'DEFINITION');
                     }
 
                 }
@@ -3324,6 +3315,7 @@ class Load extends Tasks {
                   $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF) {
             return $nsname;
         } elseif (in_array($nsname->atom, array('Nsname', 'Identifier'))) {
+
             $type = $this->isContext(self::CONTEXT_NEW) ? 'class' : 'const';
             
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, $type);
@@ -3334,6 +3326,7 @@ class Load extends Tasks {
                 $this->addCall($type, $fullnspath, $nsname);
                 $nsname->constant = self::CONSTANT_EXPRESSION;
             }
+
             return $nsname;
         } else {
             return $nsname;
@@ -3384,6 +3377,7 @@ class Load extends Tasks {
         }
         $integer->intval  = abs($actual) > PHP_INT_MAX ? 0 : $actual;
         $integer->boolean = (int) (boolean) $value;
+        $integer->constant = self::CONSTANT_EXPRESSION;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -3406,6 +3400,7 @@ class Load extends Tasks {
 
     private function processLiteral() {
         $literal = $this->processSingle('String');
+        $literal->constant = self::CONSTANT_EXPRESSION;
         
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CONSTANT_ENCAPSED_STRING) {
             $literal->delimiter   = $literal->code[0];
@@ -3789,14 +3784,12 @@ class Load extends Tasks {
 
         $this->addLink($addition, $right, 'RIGHT');
         
-        $constant = isset($right->constant) && $right->constant === self::CONSTANT_EXPRESSION && 
-                    isset($left->constant)  && $right->constant === self::CONSTANT_EXPRESSION;
-
         $addition->code     = $this->tokens[$current][1];
         $addition->fullcode = $left->fullcode.' '.$this->tokens[$current][1].' '.$right->fullcode;
         $addition->line     = $this->tokens[$current][2];
         $addition->token    = $this->getToken($this->tokens[$current][0]);
-        $addition->constant = $constant;
+        $addition->constant = $right->constant === self::CONSTANT_EXPRESSION && $left->constant === self::CONSTANT_EXPRESSION;
+
         $this->pushExpression($addition);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3949,14 +3942,11 @@ class Load extends Tasks {
 
         $this->addLink($operator, $right, $links[1]);
         
-        $constant = ($right->constant === self::CONSTANT_EXPRESSION) && 
-                    ($left->constant === self::CONSTANT_EXPRESSION);
-
         $operator->code      = $this->tokens[$current][1];
         $operator->fullcode  = $left->fullcode.' '.$this->tokens[$current][1].' '.$right->fullcode;
         $operator->line      = $this->tokens[$current][2];
         $operator->token     = $this->getToken($this->tokens[$current][0]);
-        $operator->constant  = $constant;
+        $operator->constant  = ($right->constant === self::CONSTANT_EXPRESSION) && ($left->constant === self::CONSTANT_EXPRESSION);
         $this->pushExpression($operator);
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -4122,7 +4112,7 @@ class Load extends Tasks {
         while (!in_array($this->tokens[$this->id + 1][0], $finals)) {
             $contains = $this->processNext();
             
-            $constant &= $contains->constant;
+            $constant = $constant && $contains->constant;
             
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOT) {
                 $this->popExpression();
@@ -4319,15 +4309,9 @@ class Load extends Tasks {
     }
 
     private function addLink($origin, $destination, $label) {
-        if (!is_object($origin)) {
-            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
-        }
-        $o = $origin->atom;
         assert($origin instanceof Atom);
-        if (!is_object($destination)) {
-            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
-        }
         assert($destination instanceof Atom);
+        $o = $origin->atom;
         $d = $destination->atom;
 
         if (!isset($this->links[$label]))         { $this->links[$label]= array(); }
@@ -4552,11 +4536,11 @@ class Load extends Tasks {
             
                 $this->addLink($this->uses['const'][strtolower($name->code)], $name, 'DEFINITION');
                 return array($this->uses['const'][strtolower($name->code)]->fullnspath, self::ALIASED);
-
+/*
             } elseif ($type === 'const' && !empty($this->calls['const']['\\'.strtolower($name->code)]['definitions'])) {
                 // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
                 return array('\\'.strtolower($name->code), self::NOT_ALIASED);
-
+*/
             } elseif ($type === 'function' && isset($this->uses['function'][strtolower($name->code)])) {
 
                 $this->addLink($this->uses['function'][strtolower($name->code)], $name, 'DEFINITION');
@@ -4582,9 +4566,9 @@ class Load extends Tasks {
             // Finally, the case for a nsname
             $prefix = strtolower( substr($name->fullcode, 0, strpos($name->fullcode, '\\')) );
 
-            if (isset($this->usesId[$type][$prefix])) {
-                $this->addLink($this->usesId[$type][$prefix], $name, 'DEFINITION');
-                return array($this->uses[$type][$prefix].strtolower( substr($name->fullcode, strlen($prefix)) ) , 0);
+            if (isset($this->uses[$type][$prefix])) {
+                $this->addLink($this->uses[$type][$prefix], $name, 'DEFINITION');
+                return array($this->uses[$type][$prefix]->fullnspath.strtolower( substr($name->fullcode, strlen($prefix)) ) , 0);
             } else {
                 return array($this->namespace.strtolower($name->fullcode), 0);
             }
