@@ -54,9 +54,9 @@ class Atom {
     public $bracket      = Load::NOT_BRACKET;
     public $close_tag    = Load::NO_CLOSING_TAG;
     public $aliased      = Load::NOT_ALIASED;
-    public $boolean      = null;
+    public $boolean      = 0;
     public $propertyname = '';
-    public $constant     = Load::CONSTANT_EXPRESSION;
+    public $constant     = Load::NOT_CONSTANT_EXPRESSION;
     public $root         = false;  // false is on purpose. 
     public $globalvar    = false;
     public $binaryString = Load::NOT_BINARY;
@@ -78,6 +78,18 @@ class Atom {
         $this->fullcode      = addcslashes($this->fullcode   , '\\"');
         $this->strval        = addcslashes($this->strval     , '\\"');
         $this->noDelimiter   = addcslashes($this->noDelimiter, '\\"');
+
+        $this->alternative   = $this->alternative ? 'true' : 'false';
+        $this->reference     = $this->reference   ? 'true' : 'false';
+        $this->heredoc       = $this->heredoc     ? 'true' : 'false';
+        $this->variadic      = $this->variadic    ? 'true' : 'false';
+        $this->absolute      = $this->absolute    ? 'true' : 'false';
+        $this->constant      = $this->constant    ? 'true' : 'false';
+        $this->boolean       = $this->boolean     ? 'true' : 'false';
+        $this->enclosing     = $this->enclosing   ? 'true' : 'false';
+        $this->bracket       = $this->bracket     ? 'true' : 'false';
+        $this->close_tag     = $this->close_tag   ? 'true' : 'false';
+        $this->aliased       = $this->aliased     ? 'true' : 'false';
         
         return (array) $this;
     }
@@ -96,6 +108,19 @@ class Atom {
         $this->fullcode      = addcslashes($this->fullcode   , '\\"');
         $this->strval        = addcslashes($this->strval     , '\\"');
         $this->noDelimiter   = addcslashes($this->noDelimiter, '\\"');
+
+//'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'
+        $this->alternative   = $this->alternative ? 1 : '';
+        $this->reference     = $this->reference   ? 1 : '';
+        $this->heredoc       = $this->heredoc     ? 1 : '';
+        $this->variadic      = $this->variadic    ? 1 : '';
+        $this->absolute      = $this->absolute    ? 1 : '';
+        $this->constant      = $this->constant    ? 1 : '';
+        $this->boolean       = $this->boolean     ? 1 : '';
+        $this->enclosing     = $this->enclosing   ? 1 : '';
+        $this->bracket       = $this->bracket     ? 1 : '';
+        $this->close_tag     = $this->close_tag   ? 1 : '';
+        $this->aliased       = $this->aliased     ? 1 : '';
 
         $return = array( $this->id,
                          $this->atom,

@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('FOO',
-                      'FOO',
+$expected     = array('FOO',  // second 
+                      'FOO',  // first
                       'FOO2',
                       'FOO2',
                       'FOO5',

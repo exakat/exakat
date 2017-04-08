@@ -73,7 +73,7 @@ class Neo4jImport {
     public function finalize() {
         self::saveTokenCounts();
 
-        $shell = <<<SHELL
+         $shell = <<<SHELL
 cd {$this->config->neo4j_folder};
 ./bin/neo4j stop 2>&1 >/dev/null;
 rm -rf data;
@@ -133,6 +133,7 @@ GREMLIN;
         $gremlin->query($query);
 
         // Finish noDelimiter for strings
+        /*
         $properties = array('alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean');
         foreach($properties as $property) {
             $query = <<<GREMLIN
@@ -143,6 +144,7 @@ g.V().has("$property").sideEffect{
 GREMLIN;
             $gremlin->query($query);
         }
+        */
 
         $this->cleanCsv();
         display('Cleaning CSV');
@@ -237,6 +239,8 @@ GREMLIN;
         return str_replace(array('\\', '"'), array('\\\\', '\\"'), $string);
     }
 
+//'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'
+
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
         static $extras = array(':ID'         => '',
                                ':LABEL'      => '',
@@ -245,29 +249,29 @@ GREMLIN;
                                'line'        => 'int',
                                'token'       => '',
                                'rank'        => 'int',
-                               'alternative' => 'int',
-                               'reference'   => 'int',
-                               'heredoc'     => 'int',
+                               'alternative' => 'boolean',
+                               'reference'   => 'boolean',
+                               'heredoc'     => 'boolean',
                                'delimiter'   => '',
                                'noDelimiter' => '',
-                               'variadic'    => 'int',
+                               'variadic'    => 'boolean',
                                'count'       => 'int',
                                'fullnspath'  => '',
-                               'absolute'    => 'int',
+                               'absolute'    => 'boolean',
                                'alias'       => '',
                                'origin'      => '',
                                'encoding'    => '',
                                'intval'      => 'long',
                                'strval'      => '',
-                               'enclosing'   => 'int',
+                               'enclosing'   => 'boolean',
                                'args_max'    => 'int',
                                'args_min'    => 'int',
-                               'bracket'     => 'int',
-                               'close_tag'   => 'int',
-                               'aliased'     => 'int',
-                               'boolean'     => 'int',
+                               'bracket'     => 'boolean',
+                               'close_tag'   => 'boolean',
+                               'aliased'     => 'boolean',
+                               'boolean'     => 'boolean',
                                'propertyname'=> '',
-                               'constant'    => '',
+                               'constant'    => 'boolean',
                                'root'        => 'int',
                                'globalvar'   => '',
                                'binaryString'=> '');
