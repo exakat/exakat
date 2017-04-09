@@ -76,6 +76,7 @@ class Atom {
         
         $this->code          = addcslashes($this->code       , '\\"');
         $this->fullcode      = addcslashes($this->fullcode   , '\\"');
+        $this->fullnspath    = addcslashes($this->fullnspath , '\\"');
         $this->strval        = addcslashes($this->strval     , '\\"');
         $this->noDelimiter   = addcslashes($this->noDelimiter, '\\"');
 
@@ -106,21 +107,22 @@ class Atom {
 
         $this->code          = addcslashes($this->code       , '\\"');
         $this->fullcode      = addcslashes($this->fullcode   , '\\"');
+        $this->fullnspath    = addcslashes($this->fullnspath , '\\"');
         $this->strval        = addcslashes($this->strval     , '\\"');
         $this->noDelimiter   = addcslashes($this->noDelimiter, '\\"');
 
 //'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'
-        $this->alternative   = $this->alternative ? 1 : '';
-        $this->reference     = $this->reference   ? 1 : '';
-        $this->heredoc       = $this->heredoc     ? 1 : '';
-        $this->variadic      = $this->variadic    ? 1 : '';
-        $this->absolute      = $this->absolute    ? 1 : '';
-        $this->constant      = $this->constant    ? 1 : '';
-        $this->boolean       = $this->boolean     ? 1 : '';
-        $this->enclosing     = $this->enclosing   ? 1 : '';
-        $this->bracket       = $this->bracket     ? 1 : '';
-        $this->close_tag     = $this->close_tag   ? 1 : '';
-        $this->aliased       = $this->aliased     ? 1 : '';
+        $this->alternative   = $this->alternative ? 1 : 0;
+        $this->reference     = $this->reference   ? 1 : 0;
+        $this->heredoc       = $this->heredoc     ? 1 : 0;
+        $this->variadic      = $this->variadic    ? 1 : 0;
+        $this->absolute      = $this->absolute    ? 1 : 0;
+        $this->constant      = $this->constant    ? 1 : 0;
+        $this->boolean       = $this->boolean     ? 1 : 0;
+        $this->enclosing     = $this->enclosing   ? 1 : 0;
+        $this->bracket       = $this->bracket     ? 1 : 0;
+        $this->close_tag     = $this->close_tag   ? 1 : 0;
+        $this->aliased       = $this->aliased     ? 1 : 0;
 
         $return = array( $this->id,
                          $this->atom,

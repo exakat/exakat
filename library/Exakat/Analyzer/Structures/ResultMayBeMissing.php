@@ -31,6 +31,7 @@ class ResultMayBeMissing extends Analyzer {
              ->outWithRank('ARGUMENT', 2)
              ->savePropertyAs('code', 'results')
              ->back('first')
+             ->hasIn('ELEMENT')
              ->nextSibling()
              ->atomIs('Assignation')
              ->outIs('RIGHT')

@@ -956,25 +956,25 @@ GREMLIN
     }
 
     public function nextSibling($link = 'ELEMENT') {
-        $this->addMethod('sideEffect{sibling = it.get().values("rank").next();}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().values("rank").next()}');
+        $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}');
 
         return $this;
     }
 
     public function nextSiblings($link = 'ELEMENT') {
-        $this->addMethod('sideEffect{sibling = it.get().values("rank").next();}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().values("rank").next() }');
+        $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
 
         return $this;
     }
 
     public function previousSibling($link = 'ELEMENT') {
-        $this->addMethod('sideEffect{sibling = it.get().values("rank").next();}.in("'.$link.'").out("'.$link.'").filter{sibling - 1 == it.get().values("rank").next()}');
+        $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling - 1 == it.get().value("rank")}');
 
         return $this;
     }
 
     public function previousSiblings($link = 'ELEMENT') {
-        $this->addMethod('filter{it.get().values("rank").next() > 0}.sideEffect{sibling = it.get().values("rank").next();}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().values("rank").next() }');
+        $this->addMethod('filter{it.get().value("rank") > 0}.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
 
         return $this;
     }
@@ -1384,10 +1384,10 @@ GREMLIN
 
     public function goToAllParents($self = self::EXCLUDE_SELF) {
 //        $this->addMethod('until(__.out("EXTENDS").in("DEFINITION").count().is(eq(0))).repeat( out("EXTENDS").in("DEFINITION") ).emit()');
-        if ($self === self::INCLUDE_SELF) {
-            $this->addMethod('filter{true}.emit().repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times('.self::MAX_LOOPING.')');
-        } else {
+        if ($self === self::EXCLUDE_SELF) {
             $this->addMethod('repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times('.self::MAX_LOOPING.')');
+        } else {
+            $this->addMethod('filter{true}.emit().repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).times('.self::MAX_LOOPING.')');
         }
         
 //        $this->addMethod('repeat( out("EXTENDS").in("DEFINITION") ).times(4)');

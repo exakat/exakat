@@ -38,7 +38,7 @@ class CurlOptions extends Analyzer {
              ->fullnspathIs($options)
              ->inIs('ARGUMENT')
              ->outWithRank('ARGUMENT', 2)
-             ->is('boolean', false)
+             ->isNot('boolean', true)
              ->back('first');
         $this->prepareQuery();
 
@@ -52,7 +52,7 @@ class CurlOptions extends Analyzer {
              ->fullnspathIs($options)
              ->inIs('KEY')
              ->outIs('VALUE')
-             ->is('boolean', false)
+             ->isNot('boolean', true)
              ->back('first');
         $this->prepareQuery();
     }

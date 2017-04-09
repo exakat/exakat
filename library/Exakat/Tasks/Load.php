@@ -115,7 +115,7 @@ class Load extends Tasks {
     const NOT_REFERENCE     = '';
 
     const BRACKET          = true;
-    const NOT_BRACKET      = '';
+    const NOT_BRACKET      = false;
 
     const ENCLOSING        = true;
     const NO_ENCLOSING     = false;
@@ -2987,6 +2987,7 @@ class Load extends Tasks {
         } else {
             $name = $this->processOneNsname();
         }
+
         $namespace = $this->addAtom('Namespace');
         $this->addLink($namespace, $name, 'NAME');
         $this->setNamespace($name);
@@ -3013,12 +3014,12 @@ class Load extends Tasks {
             $block = ';';
         } else {
             // Process block
-            $block = $this->processFollowingBlock(false);
-            $this->popExpression();
+            $this->processFollowingBlock(false);
+            $block = $this->popExpression();
             $this->addLink($namespace, $block, 'BLOCK');
 
-            $this->pushExpression($namespace);
-            $this->processSemicolon();
+            $this->addToSequence($namespace);
+
             $block = self::FULLCODE_BLOCK;
         }
         $this->setNamespace(0);
@@ -3027,7 +3028,7 @@ class Load extends Tasks {
         $namespace->fullcode   = $this->tokens[$current][1].' '.$name->fullcode.$block;
         $namespace->line       = $this->tokens[$current][2];
         $namespace->token      = $this->getToken($this->tokens[$current][0]);
-        $namespace->fullnspath = isset($name->fullnspath) ? $name->fullnspath : '\\';
+        $namespace->fullnspath = $name->atom === 'Void' ? '\\' : $name->fullnspath;
 
         return $namespace;
     }
@@ -4259,6 +4260,7 @@ class Load extends Tasks {
         }
 
         $index = $this->popExpression();
+        $index->rank = 0;
         $this->addLink($arguments, $index, 'ARGUMENT');
         $fullcode[] = $index->fullcode;
 

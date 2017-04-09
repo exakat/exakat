@@ -104,7 +104,7 @@ class CypherG3 {
                         $extra[] = "$title: csvLine.$title";
                     } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant'))) {
                         // Boolean
-                        $extra[] = "$title: (csvLine.$title <> \"\")";
+                        $extra[] = "$title: (csvLine.$title = \"1\")";
                     } elseif (in_array($title, array('count', 'intval', 'args_max', 'args_min'))) {
                         // Integer
                         $extra[] = "$title: toInt(csvLine.$title)";
@@ -178,6 +178,7 @@ CYPHER;
     }
 
     private function cleanCsv() {
+        return;
         if (empty($this->unlink)) {
             return ;
         }
@@ -267,6 +268,8 @@ CYPHER;
     }
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
+        static $extras = array();
+
         // Saving atoms
         foreach($atoms as $atom) {
             $fileName = $exakatDir.'/nodes.g3.'.$atom->atom.'.csv';
@@ -274,6 +277,7 @@ CYPHER;
                 // Project is saved only once
                 continue;
             }
+
             if (isset($extras[$atom->atom])) {
                 $fp = fopen($fileName, 'a');
             } else {
