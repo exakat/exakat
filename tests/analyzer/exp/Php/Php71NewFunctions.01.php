@@ -1,10 +1,11 @@
 <?php
 
-$expected     = array('mb_scrub',
-                      'is_iterable');
+$expected     = array( 'function is_iterable( ) { /**/ } ', 
+                       'function mb_scrub( ) { /**/ } '
+);
 
-$expected_not = array('mb_ord',
-                      'gmp_root'
+$expected_not = array( 'function mb_ord( ) { /**/ } ', 
+ 'function gmp_root( ) { /**/ } '
 );
 
 ?>
