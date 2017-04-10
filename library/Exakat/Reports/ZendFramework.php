@@ -74,6 +74,8 @@ class ZendFramework extends Reports {
                             'Captcha'                    => 'ZendF/Zf3Captcha',
                             'Code'                       => 'ZendF/Zf3Code',
                             'Config'                     => 'ZendF/Zf3Config',
+                            'Console'                    => 'ZendF/Zf3Console',
+                            'Crypt'                      => 'ZendF/Zf3Crypt',
                             'Db'                         => 'ZendF/Zf3Db',
                             'Escaper'                    => 'ZendF/Zf3Escaper',
                             'Eventmanager'               => 'ZendF/Zf3Eventmanager',
