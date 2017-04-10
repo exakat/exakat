@@ -2250,7 +2250,7 @@ JAVASCRIPT;
     private function generateAppinfo() {
         $extensions = array(
                     'Components' => array(
-                            'Authentication'             => 'Slim/Csrf',
+                            'Slim'             => 'Slim/UseSlim',
                     ),
                 );
 

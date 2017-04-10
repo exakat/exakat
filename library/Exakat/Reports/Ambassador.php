@@ -2373,6 +2373,7 @@ JAVASCRIPT;
                     'Namespaces' => array(
                             'Namespaces'              => 'Namespaces/Namespacesnames',
                             'Alias'                   => 'Namespaces/Alias',
+                            'Group Use'               => 'Php/GroupUseDeclaration',
                     ),
 
                     'Variables' => array(
@@ -2604,6 +2605,12 @@ JAVASCRIPT;
                             'ext/zmq'        => 'Extensions/Extzmq',
         //                          'ext/skeleton'   => 'Extensions/Extskeleton',
                     ),
+
+                    'Frameworks' => array(
+                            'Cake PHP'             => 'Cakephp/CakePHPUsed',
+                            'Slim PHP'             => 'Slim/UseSlim',
+                            'Zend Framework'       => 'ZendF/ZendClasses',
+                    )
                 );
 
         // collecting information for Extensions
@@ -2705,7 +2712,7 @@ HTML;
             case self::NO :
                 return '<i class="fa fa-square-o"></i>';
             case self::NOT_RUN :
-                return '<i class="fa fa-hourglass-o"></i>';
+                return '<i class="fa fa-ban"></i>';
             case self::INCOMPATIBLE :
                 return '<i class="fa fa-remove"></i>';
             default :
