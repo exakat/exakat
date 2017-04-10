@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_CaseForPSS extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_CaseForPSS01()  { $this->generic_test('Php_CaseForPSS.01'); }
+    public function testPhp_CaseForPSS01()  { $this->generic_test('Php/CaseForPSS.01'); }
 }
 ?>

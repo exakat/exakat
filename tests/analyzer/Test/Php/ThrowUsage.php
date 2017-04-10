@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_ThrowUsage extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_ThrowUsage01()  { $this->generic_test('Php_ThrowUsage.01'); }
+    public function testPhp_ThrowUsage01()  { $this->generic_test('Php/ThrowUsage.01'); }
 }
 ?>

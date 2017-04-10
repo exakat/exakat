@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_DirectivesUsage extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_DirectivesUsage01()  { $this->generic_test('Php_DirectivesUsage.01'); }
+    public function testPhp_DirectivesUsage01()  { $this->generic_test('Php/DirectivesUsage.01'); }
 }
 ?>

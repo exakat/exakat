@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_UnicodeEscapePartial extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_UnicodeEscapePartial01()  { $this->generic_test('Php_UnicodeEscapePartial.01'); }
+    public function testPhp_UnicodeEscapePartial01()  { $this->generic_test('Php/UnicodeEscapePartial.01'); }
 }
 ?>

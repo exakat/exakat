@@ -10,7 +10,7 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_GlobalWithoutSimpleVariable extends Analyzer {
     /* 2 methods */
 
-    public function testPhp_GlobalWithoutSimpleVariable01()  { $this->generic_test('Php_GlobalWithoutSimpleVariable.01'); }
-    public function testPhp_GlobalWithoutSimpleVariable02()  { $this->generic_test('Php_GlobalWithoutSimpleVariable.02'); }
+    public function testPhp_GlobalWithoutSimpleVariable01()  { $this->generic_test('Php/GlobalWithoutSimpleVariable.01'); }
+    public function testPhp_GlobalWithoutSimpleVariable02()  { $this->generic_test('Php/GlobalWithoutSimpleVariable.02'); }
 }
 ?>

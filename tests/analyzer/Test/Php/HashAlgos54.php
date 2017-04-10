@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_HashAlgos54 extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_HashAlgos5401()  { $this->generic_test('Php_HashAlgos54.01'); }
+    public function testPhp_HashAlgos5401()  { $this->generic_test('Php/HashAlgos54.01'); }
 }
 ?>

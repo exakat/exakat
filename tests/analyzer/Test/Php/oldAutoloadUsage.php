@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_oldAutoloadUsage extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_oldAutoloadUsage01()  { $this->generic_test('Php_oldAutoloadUsage.01'); }
+    public function testPhp_oldAutoloadUsage01()  { $this->generic_test('Php/oldAutoloadUsage.01'); }
 }
 ?>

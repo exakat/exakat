@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_Gotonames extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_Gotonames01()  { $this->generic_test('Php_Gotonames.01'); }
+    public function testPhp_Gotonames01()  { $this->generic_test('Php/Gotonames.01'); }
 }
 ?>

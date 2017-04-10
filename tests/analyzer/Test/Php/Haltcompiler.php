@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_Haltcompiler extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_Haltcompiler01()  { $this->generic_test('Php_Haltcompiler.01'); }
+    public function testPhp_Haltcompiler01()  { $this->generic_test('Php/Haltcompiler.01'); }
 }
 ?>

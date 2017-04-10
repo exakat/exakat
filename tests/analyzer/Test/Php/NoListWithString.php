@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_NoListWithString extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_NoListWithString01()  { $this->generic_test('Php_NoListWithString.01'); }
+    public function testPhp_NoListWithString01()  { $this->generic_test('Php/NoListWithString.01'); }
 }
 ?>

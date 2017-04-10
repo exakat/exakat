@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_ReturnWithParenthesis extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_ReturnWithParenthesis01()  { $this->generic_test('Php_ReturnWithParenthesis.01'); }
+    public function testPhp_ReturnWithParenthesis01()  { $this->generic_test('Php/ReturnWithParenthesis.01'); }
 }
 ?>

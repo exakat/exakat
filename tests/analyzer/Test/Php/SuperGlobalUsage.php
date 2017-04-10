@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_SuperGlobalUsage extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_SuperGlobalUsage01()  { $this->generic_test('Php_SuperGlobalUsage.01'); }
+    public function testPhp_SuperGlobalUsage01()  { $this->generic_test('Php/SuperGlobalUsage.01'); }
 }
 ?>

@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_RawPostDataUsage extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_RawPostDataUsage01()  { $this->generic_test('Php_RawPostDataUsage.01'); }
+    public function testPhp_RawPostDataUsage01()  { $this->generic_test('Php/RawPostDataUsage.01'); }
 }
 ?>

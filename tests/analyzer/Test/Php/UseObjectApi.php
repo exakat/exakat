@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_UseObjectApi extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_UseObjectApi01()  { $this->generic_test('Php_UseObjectApi.01'); }
+    public function testPhp_UseObjectApi01()  { $this->generic_test('Php/UseObjectApi.01'); }
 }
 ?>

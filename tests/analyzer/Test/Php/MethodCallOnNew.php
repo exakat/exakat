@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_MethodCallOnNew extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_MethodCallOnNew01()  { $this->generic_test('Php_MethodCallOnNew.01'); }
+    public function testPhp_MethodCallOnNew01()  { $this->generic_test('Php/MethodCallOnNew.01'); }
 }
 ?>

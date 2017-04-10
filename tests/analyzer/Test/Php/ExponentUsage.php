@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_ExponentUsage extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_ExponentUsage01()  { $this->generic_test('Php_ExponentUsage.01'); }
+    public function testPhp_ExponentUsage01()  { $this->generic_test('Php/ExponentUsage.01'); }
 }
 ?>

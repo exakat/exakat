@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_Php55NewFunctions extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_Php55NewFunctions01()  { $this->generic_test('Php_Php55NewFunctions.01'); }
+    public function testPhp_Php55NewFunctions01()  { $this->generic_test('Php/Php55NewFunctions.01'); }
 }
 ?>

@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_UnicodeEscapeSyntax extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_UnicodeEscapeSyntax01()  { $this->generic_test('Php_UnicodeEscapeSyntax.01'); }
+    public function testPhp_UnicodeEscapeSyntax01()  { $this->generic_test('Php/UnicodeEscapeSyntax.01'); }
 }
 ?>

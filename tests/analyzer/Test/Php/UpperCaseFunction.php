@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_UpperCaseFunction extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_UpperCaseFunction01()  { $this->generic_test('Php_UpperCaseFunction.01'); }
+    public function testPhp_UpperCaseFunction01()  { $this->generic_test('Php/UpperCaseFunction.01'); }
 }
 ?>

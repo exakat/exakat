@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_DefineWithArray extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_DefineWithArray01()  { $this->generic_test('Php_DefineWithArray.01'); }
+    public function testPhp_DefineWithArray01()  { $this->generic_test('Php/DefineWithArray.01'); }
 }
 ?>

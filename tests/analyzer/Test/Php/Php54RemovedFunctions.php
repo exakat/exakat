@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_Php54RemovedFunctions extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_Php54RemovedFunctions01()  { $this->generic_test('Php_Php54RemovedFunctions.01'); }
+    public function testPhp_Php54RemovedFunctions01()  { $this->generic_test('Php/Php54RemovedFunctions.01'); }
 }
 ?>

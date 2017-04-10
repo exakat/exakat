@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_EmptyList extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_EmptyList01()  { $this->generic_test('Php_EmptyList.01'); }
+    public function testPhp_EmptyList01()  { $this->generic_test('Php/EmptyList.01'); }
 }
 ?>

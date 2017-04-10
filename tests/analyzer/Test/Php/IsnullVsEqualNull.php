@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_IsnullVsEqualNull extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_IsnullVsEqualNull01()  { $this->generic_test('Php_IsnullVsEqualNull.01'); }
+    public function testPhp_IsnullVsEqualNull01()  { $this->generic_test('Php/IsnullVsEqualNull.01'); }
 }
 ?>

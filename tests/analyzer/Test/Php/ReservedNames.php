@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_ReservedNames extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_ReservedNames01()  { $this->generic_test('Php_ReservedNames.01'); }
+    public function testPhp_ReservedNames01()  { $this->generic_test('Php/ReservedNames.01'); }
 }
 ?>

@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_UsortSorting extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_UsortSorting01()  { $this->generic_test('Php_UsortSorting.01'); }
+    public function testPhp_UsortSorting01()  { $this->generic_test('Php/UsortSorting.01'); }
 }
 ?>

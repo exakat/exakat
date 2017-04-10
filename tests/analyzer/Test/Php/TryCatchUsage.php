@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_TryCatchUsage extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_TryCatchUsage01()  { $this->generic_test('Php_TryCatchUsage.01'); }
+    public function testPhp_TryCatchUsage01()  { $this->generic_test('Php/TryCatchUsage.01'); }
 }
 ?>

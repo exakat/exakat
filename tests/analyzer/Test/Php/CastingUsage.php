@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_CastingUsage extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_CastingUsage01()  { $this->generic_test('Php_CastingUsage.01'); }
+    public function testPhp_CastingUsage01()  { $this->generic_test('Php/CastingUsage.01'); }
 }
 ?>

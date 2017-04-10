@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_Php70RemovedDirective extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_Php70RemovedDirective01()  { $this->generic_test('Php_Php70RemovedDirective.01'); }
+    public function testPhp_Php70RemovedDirective01()  { $this->generic_test('Php/Php70RemovedDirective.01'); }
 }
 ?>

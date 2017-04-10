@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_NewExponent extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_NewExponent01()  { $this->generic_test('Php_NewExponent.01'); }
+    public function testPhp_NewExponent01()  { $this->generic_test('Php/NewExponent.01'); }
 }
 ?>

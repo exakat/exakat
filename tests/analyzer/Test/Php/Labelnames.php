@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_Labelnames extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_Labelnames01()  { $this->generic_test('Php_Labelnames.01'); }
+    public function testPhp_Labelnames01()  { $this->generic_test('Php/Labelnames.01'); }
 }
 ?>

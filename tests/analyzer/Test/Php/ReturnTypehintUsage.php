@@ -10,9 +10,9 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_ReturnTypehintUsage extends Analyzer {
     /* 4 methods */
 
-    public function testPhp_ReturnTypehintUsage01()  { $this->generic_test('Php_ReturnTypehintUsage.01'); }
-    public function testPhp_ReturnTypehintUsage02()  { $this->generic_test('Php_ReturnTypehintUsage.02'); }
-    public function testPhp_ReturnTypehintUsage03()  { $this->generic_test('Php_ReturnTypehintUsage.03'); }
-    public function testPhp_ReturnTypehintUsage04()  { $this->generic_test('Php_ReturnTypehintUsage.04'); }
+    public function testPhp_ReturnTypehintUsage01()  { $this->generic_test('Php/ReturnTypehintUsage.01'); }
+    public function testPhp_ReturnTypehintUsage02()  { $this->generic_test('Php/ReturnTypehintUsage.02'); }
+    public function testPhp_ReturnTypehintUsage03()  { $this->generic_test('Php/ReturnTypehintUsage.03'); }
+    public function testPhp_ReturnTypehintUsage04()  { $this->generic_test('Php/ReturnTypehintUsage.04'); }
 }
 ?>

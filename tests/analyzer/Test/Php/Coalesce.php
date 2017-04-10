@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_Coalesce extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_Coalesce01()  { $this->generic_test('Php_Coalesce.01'); }
+    public function testPhp_Coalesce01()  { $this->generic_test('Php/Coalesce.01'); }
 }
 ?>

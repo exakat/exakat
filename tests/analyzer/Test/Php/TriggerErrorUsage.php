@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Php_TriggerErrorUsage extends Analyzer {
     /* 1 methods */
 
-    public function testPhp_TriggerErrorUsage01()  { $this->generic_test('Php_TriggerErrorUsage.01'); }
+    public function testPhp_TriggerErrorUsage01()  { $this->generic_test('Php/TriggerErrorUsage.01'); }
 }
 ?>
