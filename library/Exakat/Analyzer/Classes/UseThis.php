@@ -31,8 +31,9 @@ class UseThis extends Analyzer {
         // parent::
         $this->atomIs('Function')
              ->hasClassTrait()
+             ->hasNoFunction()
              ->outIs('BLOCK')
-             ->atomInside(array('Staticmethodcall', 'Staticconstant', 'Staticproperty'))
+             ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))
              ->outIs('CLASS')
              ->codeIs('parent')
              ->back('first');
@@ -40,10 +41,12 @@ class UseThis extends Analyzer {
 
         // Case for normal methods
         $this->atomIs('Function')
+             ->hasName()
              ->hasClassTrait()
+             ->hasNoFunction()
              ->hasNoOut('STATIC')
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInsideNoAnonymous('Variable')
              ->codeIs('$this', true)
              ->back('first');
         $this->prepareQuery();
@@ -53,22 +56,10 @@ class UseThis extends Analyzer {
              ->hasClassTrait()
              ->hasOut('STATIC')
              ->outIs('BLOCK')
-             ->atomInside(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
+             ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->savePropertyAs('fullnspath', 'classe')
-             ->goToClassTrait()
-             ->samePropertyAs('fullnspath', 'classe')
-             ->back('first');
-        $this->prepareQuery();
-
-        $this->atomIs('Function')
-             ->hasClassTrait()
-             ->hasOut('STATIC')
-             ->outIs('BLOCK')
-             ->atomInside('Staticproperty')
-             ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
+             ->codeIsNot('parent')
              ->savePropertyAs('fullnspath', 'classe')
              ->goToClassTrait()
              ->samePropertyAs('fullnspath', 'classe')
