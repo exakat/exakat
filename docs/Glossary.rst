@@ -122,6 +122,7 @@ Glossary
       + :ref:`Break With Non Integer <break-with-non-integer>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Long Arguments <long-arguments>`
+      + :ref:`Missing Cases In Switch <missing-cases-in-switch>`
       + :ref:`Multiples Identical Case <multiples-identical-case>`
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
@@ -247,6 +248,7 @@ Glossary
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
+      + :ref:`Use Object Api <use-object-api>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
 
     + `extract()`
@@ -501,6 +503,10 @@ Glossary
 
       + :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
+    + `proc_nice()`
+
+      + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
+
 
 + `R`
     + `rand()`
@@ -511,6 +517,10 @@ Glossary
 
 
 + `S`
+    + `Switch()`
+
+      + :ref:`Missing Cases In Switch <missing-cases-in-switch>`
+
     + `scandir()`
 
       + :ref:`Performances/NoGlob <performances/noglob>`
@@ -575,6 +585,7 @@ Glossary
 
       + :ref:`Bracketless Blocks <bracketless-blocks>`
       + :ref:`Break Outside Loop <break-outside-loop>`
+      + :ref:`Missing Cases In Switch <missing-cases-in-switch>`
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
       + :ref:`Switch Without Default <switch-without-default>`

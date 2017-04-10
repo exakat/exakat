@@ -60,8 +60,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 27 Mar 2017 12:57:11 +0000
-.. comment: Generation hash : b285fd70038481fea8319f7568efea3f64064b3c
+.. comment: Generation date : Mon, 10 Apr 2017 17:41:10 +0000
+.. comment: Generation hash : 2e055831c492ea9b9149ff26ffdef3bdc0e2c1ea
 
 
 .. _analyze:
@@ -69,7 +69,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 300 analysis
+Total : 301 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -182,6 +182,7 @@ Total : 300 analysis
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Malformed Octal <malformed-octal>`
+* :ref:`Missing Cases In Switch <missing-cases-in-switch>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
 * :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
 * :ref:`Multiple Alias Definitions Per File <multiple-alias-definitions-per-file>`
@@ -403,7 +404,7 @@ Total : 18 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 52 analysis
+Total : 53 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -421,6 +422,7 @@ Total : 52 analysis
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Function Subscripting <function-subscripting>`
+* :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
@@ -463,7 +465,7 @@ Total : 52 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 48 analysis
+Total : 49 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -480,6 +482,7 @@ Total : 48 analysis
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
+* :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
@@ -519,7 +522,7 @@ Total : 48 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 44 analysis
+Total : 45 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -533,6 +536,7 @@ Total : 44 analysis
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+* :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
@@ -571,7 +575,7 @@ Total : 44 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 36 analysis
+Total : 37 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -579,6 +583,7 @@ Total : 36 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
+* :ref:`Group Use Declaration <group-use-declaration>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
 * :ref:`List With Appends <list-with-appends>`
@@ -710,12 +715,14 @@ Total : 45 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 14 analysis
+Total : 16 analysis
 
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
 * :ref:`Invalid Octal In String <invalid-octal-in-string>`
 * :ref:`Magic Visibility <magic-visibility>`
+* :ref:`New Constants In PHP 7.2 <new-constants-in-php-7.2>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+* :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
 * :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`

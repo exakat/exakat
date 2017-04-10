@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 27 Mar 2017 12:57:11 +0000
-.. comment: Generation hash : b285fd70038481fea8319f7568efea3f64064b3c
+.. comment: Generation date : Mon, 10 Apr 2017 17:41:10 +0000
+.. comment: Generation hash : 2e055831c492ea9b9149ff26ffdef3bdc0e2c1ea
 
 
 .. _$http\_raw\_post\_data:
@@ -502,7 +502,7 @@ Altering Foreach Without Reference
 ##################################
 
 
-Foreach() loop 
+Foreach() loop that should use a reference. 
 
 When using a foreach loop that modifies the original source, it is recommended to use referenced variables, rather than access the original value with $source[$index]. 
 
@@ -3774,11 +3774,11 @@ Forgotten Visibility
 ####################
 
 
-Some classes elements (property, method, and constant in PHP 7.1) are missing their explicit visibility. By default, it is public.
+Some classes elements (property, method, and constant in PHP 7.1) are missing their explicit visibility.
 
-It should at least be mentioned as public, or may be reviewed as protected or private. 
+By default, it is public. It should at least be mentioned as public, or may be reviewed as protected or private. 
 
-final, static and abstract are not counted as visibility. Only public, private and protected.  The PHP 4 var keyword is counted as undefined.
+final, static and abstract are not counted as visibility. Only public, private and protected. The PHP 4 var keyword is counted as undefined.
 
 Traits, classes and interfaces are checked. 
 
@@ -3786,9 +3786,18 @@ Traits, classes and interfaces are checked.
 
    <?php
    
-   // 
+   // Explicit visibility
    class X {
-       const NO_VISIBILITY_CONST = 1; // For PHP 7.1 and later
+       protected sconst NO_VISIBILITY_CONST = 1; // For PHP 7.2 and later
+   
+       private $noVisibilityProperty = 2; 
+       
+       public function Method() {}
+   }
+   
+   // Missing visibility
+   class X {
+       const NO_VISIBILITY_CONST = 1; // For PHP 7.2 and later
    
        var $noVisibilityProperty = 2; // Only with var
        
@@ -4101,6 +4110,50 @@ It is recommended to avoid using global variables, at it makes it very difficult
 +--------------+-----------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                    |
 +--------------+-----------------------------------------------------------------------------------+
+
+
+
+.. _group-use-declaration:
+
+Group Use Declaration
+#####################
+
+
+The group use declaration is used in the code.
+
+.. code-block:: php
+
+   <?php
+   
+   // Adapted from the RFC documentation 
+   // Pre PHP 7 code
+   use some\name_space\ClassA;
+   use some\name_space\ClassB;
+   use some\name_space\ClassC as C;
+   
+   use function some\name_space\fn_a;
+   use function some\name_space\fn_b;
+   use function some\name_space\fn_c;
+   
+   use const some\name_space\ConstA;
+   use const some\name_space\ConstB;
+   use const some\name_space\ConstC;
+   
+   // PHP 7+ code
+   use some\name_space\{ClassA, ClassB, ClassC as C};
+   use function some\name_space\{fn_a, fn_b, fn_c};
+   use const some\name_space\{ConstA, ConstB, ConstC};
+   
+   ?>
+
+
+See also `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_ and `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
+
++--------------+------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/GroupUseDeclaration                                                                                    |
++--------------+------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------+
 
 
 
@@ -5257,6 +5310,53 @@ This was added in PHP 5.4+
 
 
 
+.. _missing-cases-in-switch:
+
+Missing Cases In Switch
+#######################
+
+
+It seems that some cases are missing in this switch structure.
+
+When comparing two differents `switch() <http://php.net/manual/en/control-structures.switch.php>`_ structures, it appears that some cases are missing in one of them. The set of cases are almost identical, but one of the values are missing. 
+
+Switch() structures using strings as literals are compared in this analysis. When the discrepancy between two lists is below 25%, both switches are reported.
+
+.. code-block:: php
+
+   <?php
+   
+   // This switch operates on a, b, c, d and default 
+   switch($a) {
+       case 'a': doSomethingA(); break 1;
+       case 'b': doSomethingB(); break 1;
+       case 'c': doSomethingC(); break 1;
+       case 'd': doSomethingD(); break 1;
+       default: doNothing();
+   }
+   
+   // This switch operates on a, b, d and default 
+   switch($o->p) {
+       case 'a': doSomethingA(); break 1;
+       case 'b': doSomethingB(); break 1;
+   
+       case 'd': doSomethingD(); break 1;
+       default: doNothing();
+   }
+   
+   ?>
+
+
+In the example, one may argue that the 'c' case is actually handled by the 'default' case. Otherwise, business logic may request that omission.
+
++--------------+-------------------------+
+| Command Line | Structures/MissingCases |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
+
 .. _mixed-keys-arrays:
 
 Mixed Keys Arrays
@@ -5814,7 +5914,9 @@ Nested Ternary
 ##############
 
 
-Ternary operators `?...:` are a convenient instruction to apply some condition, and avoid a if() structure. It works best when it is simple, like in a one liner. 
+Ternary operators should not be nested too deep.
+
+They are a convenient instruction to apply some condition, and avoid a if() structure. It works best when it is simple, like in a one liner. 
 
 However, ternary operators tends to make the syntax very difficult to read when they are nested. It is then recommended to use an if() structure, and make the whole code readable.
 
@@ -5922,6 +6024,43 @@ Properties that are never used. They are defined, but never actually used.
 
 
 
+.. _new-constants-in-php-7.2:
+
+New Constants In PHP 7.2
+########################
+
+
+The following constants are now native in PHP 7.2. It is advised to avoid using such names for constant before moving to this new version.
+
+* PHP_OS_FAMILY
+* PHP_FLOAT_DIG
+* PHP_FLOAT_EPSILON
+* PHP_FLOAT_MAX
+* PHP_FLOAT_MIN
+* SQLITE3_DETERMINISTIC
+* CURLSSLOPT_NO_REVOKE
+* CURLOPT_DEFAULT_PROTOCOL
+* CURLOPT_STREAM_WEIGHT
+* CURLMOPT_PUSHFUNCTION
+* CURL_PUSH_OK
+* CURL_PUSH_DENY
+* CURL_HTTP_VERSION_2TLS
+* CURLOPT_TFTP_NO_OPTIONS
+* CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE
+* CURLOPT_CONNECT_TO
+* CURLOPT_TCP_FASTOPEN
+* DNS_CAA
+
+Note : PHP 7.2 is not out yet (2017-04-10). This list is currently temporary and may undergo changes until the final version is out.
+
++--------------+---------------------------+
+| Command Line | Php/Php72NewConstants     |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP72` |
++--------------+---------------------------+
+
+
+
 .. _new-functions-in-php-5.4:
 
 New Functions In PHP 5.4
@@ -6016,6 +6155,28 @@ The following functions are now native functions in PHP 7.1. It is advised to ch
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72` |
 +--------------+------------------------------------------------------+
+
+
+
+.. _new-functions-in-php-7.2:
+
+New Functions In PHP 7.2
+########################
+
+
+The following functions are now native functions in PHP 7.2. It is advised to change them before moving to this new version.
+
+* mb_ord()
+* mb_chr()
+* mb_scrub()
+* stream_isatty()
+* `proc_nice() <http://www.php.net/proc_nice>`_ (Windows only)
+
++--------------+---------------------------+
+| Command Line | Php/Php72NewFunctions     |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP72` |
++--------------+---------------------------+
 
 
 
@@ -6380,7 +6541,7 @@ No Implied If
 #############
 
 
-It is possible to emulate a 'if...then' structure by using the operators 'and' and 'or'. Since optimizations will be applied to them : 
+It is possible to emulate a if/then structure by using the operators 'and' and 'or'. Since optimizations will be applied to them : 
 when the left operand of 'and' is false, the right one is not executed, as its result is useless; 
 when the left operand of 'or' is true, the right one is not executed, as its result is useless; 
 
@@ -7059,9 +7220,9 @@ Null On New
 ###########
 
 
-The following classes used to have a very specific behavior during instantiation : they were able to return NULL on new.
+Until PHP 7.0, some classes instantiation could yield null, instead of throwing an exception. 
 
-After issuing a 'new' with those classes, it was important to check if the returned object were null (sic) or not. No exception were thrown.
+After issuing a 'new' with those classes, it was important to check if the returned object were null or not. No exception were thrown.
 
 .. code-block:: php
 
@@ -7077,6 +7238,8 @@ After issuing a 'new' with those classes, it was important to check if the retur
 
 
 This inconsistency has been cleaned in PHP 7 : see See `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
+
+See also `PHP RFC: Constructor behaviour of internal classes <https://wiki.php.net/rfc/internal_constructor_behaviour>`_.
 
 +--------------+----------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/NullOnNew                                                                                                          |
@@ -11785,9 +11948,57 @@ Use Object Api
 ##############
 
 
-When PHP offers the alternative between procedural and OOP api for the same features, it is recommended to sue the OOP API. 
+When PHP offers the alternative between procedural and OOP api for the same features, it is recommended to use the OOP API. 
 
 Often, this least to more compact code, as methods are shorter, and there is no need to bring the resource around. Lots of new extensions are directly written in OOP form too.
+
+OOP / procedural alternatives are available for `mysqli <http://php.net/manual/en/book.mysqli.php>`_, `tidy <http://php.net/manual/en/book.tidy.php>`_, `cairo <http://php.net/manual/en/book.cairo.php>`_, 'finfo <http://php.net/manual/en/book.fileinfo.php>`_, and some others.
+
+.. code-block:: php
+
+   <?php
+   /// OOP version
+   $mysqli = new mysqli(localhost, my_user, my_password, world);
+   
+   /* check connection */
+   if ($mysqli->connect_errno) {
+       printf(Connect failed: %s\n, $mysqli->connect_error);
+       exit();
+   }
+   
+   /* Create table doesn't return a resultset */
+   if ($mysqli->query(CREATE TEMPORARY TABLE myCity LIKE City) === TRUE) {
+       printf(Table myCity successfully created.\n);
+   }
+   
+   /* Select queries return a resultset */
+   if ($result = $mysqli->query(SELECT Name FROM City LIMIT 10)) {
+       printf(Select returned %d rows.\n, $result->num_rows);
+   
+       /* free result set */
+       $result->close();
+   }
+   ?>
+
+
+.. code-block:: php
+
+   <?php
+   /// Procedural version
+   $link = mysqli_connect(localhost, my_user, my_password, world);
+   
+   /* check connection */
+   if (mysqli_connect_errno()) {
+       printf(Connect failed: %s\n, mysqli_connect_error());
+       exit();
+   }
+   
+   /* Create table doesn't return a resultset */
+   if (mysqli_query($link, CREATE TEMPORARY TABLE myCity LIKE City) === TRUE) {
+       printf(Table myCity successfully created.\n);
+   }
+   
+   ?>
 
 +--------------+---------------------------------------------------------------------------------------------+
 | Command Line | Php/UseObjectApi                                                                            |
