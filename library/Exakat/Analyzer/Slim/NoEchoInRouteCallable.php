@@ -22,13 +22,12 @@
 
 namespace Exakat\Analyzer\Slim;
 
-use Exakat\Analyzer\Analyzer;
+use Exakat\Analyzer\Common\Slim;
 
-class NoEchoInRouteCallable extends Analyzer {
+class NoEchoInRouteCallable extends Slim {
     public function analyze() {
         // Collect variables that 
-        $apps = $this->query('g.V().hasLabel("New").out("NEW").has("fullnspath").has("fullnspath", within("\\\\slim\\\\slim", "\\\\slim\\\\app")).in()
-                                   .in("RIGHT").hasLabel("Assignation").out("LEFT").values("code")');
+        $apps = $this->getAppVariables();
                                    
         // didn't find any application variable. Quit. 
         if (empty($apps)) {

@@ -20,32 +20,21 @@
  *
 */
 
-namespace Exakat\Analyzer\Slim;
 
-use Exakat\Analyzer\Common\Slim;
+namespace Exakat\Analyzer\Common;
 
-class UsedRoutes extends Slim {
-    public function analyze() {
-        // Collect variables that 
-        $apps = $this->getAppVariables();
+use Exakat\Analyzer\Analyzer;
 
-        // didn't find any application variable. Quit. 
-        if (empty($apps)) {
-            return;
-        }
+abstract class Slim extends Analyzer {
+    protected function getAppVariables() {
+        $appClasses = array("\\\\slim\\\\slim", 
+                            "\\\\slim\\\\app");
+                            
+        $appClassesList = '"'.implode('", "', $appClasses).'"';
         
-        // Callable is a closure
-        $this->atomIs('Methodcall')
-             ->outIs('OBJECT')
-             ->atomIs('Variable')
-             ->codeIs($apps)
-             ->back('first')
-             ->outIs('METHOD')
-             ->codeIs(array('get', 'put', 'any', 'patch', 'option', 'delete', 'post'))
-             ->outIs('ARGUMENTS')
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIsNot('Void');
-        $this->prepareQuery();
+        $apps = $this->query('g.V().hasLabel("New").out("NEW").has("fullnspath").has("fullnspath", within('.$appClassesList.')).in()
+                                   .in("RIGHT").hasLabel("Assignation").out("LEFT").values("code")');
+        return $apps;
     }
 }
 
