@@ -7,10 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class ZendF_Zf3Json extends Analyzer {
-    /* 2 methods */
+class ZendF_Zf3Loader extends Analyzer {
+    /* 1 methods */
 
-    public function testZendF_Zf3Json01()  { $this->generic_test('ZendF/Zf3Json.01'); }
-    public function testZendF_Zf3Json02()  { $this->generic_test('ZendF/Zf3Json.02'); }
+    public function testZendF_Zf3Loader01()  { $this->generic_test('ZendF/Zf3Loader.01'); }
 }
 ?>
