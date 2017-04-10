@@ -47,9 +47,6 @@ class CypherG3 {
     private static $count = -1; // id must start at 0 in batch-import
     private $id = 0;
 
-    private static $fp_rels       = null;
-    private static $fp_nodes      = null;
-    private static $fp_nodes_attr = array();
     private static $indexedId     = array();
     private static $tokenCounts   = array();
 
@@ -59,11 +56,11 @@ class CypherG3 {
 
     private $cypher = null;
 
-    public function __construct() {
-        $this->config = Config::factory();
-
+    public function __construct($config) {
+        $this->config = $config;
+        
         // Force autoload
-        $this->cypher = new Cypher($this->config );
+        $this->cypher = new Cypher($this->config);
 
         if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.g3.Project.csv') && static::$file_saved == 0) {
             $this->unlink = glob($this->config->projects_root.'/projects/.exakat/*.csv');

@@ -47,11 +47,9 @@ class Neo4jImport {
     private static $count = -1; // id must start at 0 in batch-import
     private $id = 0;
 
-    private static $fp_rels       = null;
-    private static $fp_nodes      = null;
-    private static $fp_nodes_attr = array();
-    private static $indexedId     = array();
     private static $tokenCounts   = array();
+
+    private $indexList = array();
 
     private $config = null;
 
@@ -59,9 +57,9 @@ class Neo4jImport {
 
     private $cypher = null;
 
-    public function __construct() {
-        $this->config = Config::factory();
-
+    public function __construct($config) {
+        $this->config = $config;
+        
         if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.g3.csv') && static::$file_saved == 0) {
             $this->cleanCsv();
         }
@@ -73,7 +71,7 @@ class Neo4jImport {
     public function finalize() {
         self::saveTokenCounts();
 
-         $shell = <<<SHELL
+        $shell = <<<SHELL
 cd {$this->config->neo4j_folder};
 ./bin/neo4j stop 2>&1 >/dev/null;
 rm -rf data;
@@ -112,8 +110,7 @@ SHELL;
             throw new GremlinException('Couldn\'t load any nodes. Return message "'.$res.'"'.var_export($check));
         }
 
-        $fp = fopen($this->config->projects_root.'/projects/.exakat/index.g3.csv', 'r');
-        while($indice = fgets($fp)) {
+        foreach($this->indexList as $indice => $foo) {
             $queryTemplate = 'CREATE INDEX ON :'.trim($indice).'(id)';
             $cypher->query($queryTemplate);
         }
@@ -153,10 +150,10 @@ GREMLIN;
     }
 
     private function cleanCsv() {
-        return;
+//        return;
         unlink($this->config->projects_root.'/projects/.exakat/nodes.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/rels.g3.csv');
-        unlink($this->config->projects_root.'/projects/.exakat/index.g3.csv');
+//        unlink($this->config->projects_root.'/projects/.exakat/index.g3.csv');
     }
 
     private static function saveTokenCounts() {
@@ -219,10 +216,6 @@ GREMLIN;
                                          'destination' => $destination->id,
                                          'label' => $label
                                  );
-
-        if (isset($this->node['index'])) {
-            static::$indexedId[$this->id] = 1;
-        }
 
         static::$lastLink = &static::$links[$label][count(static::$links[$label]) - 1];
         $this->isLink = true;
@@ -303,20 +296,14 @@ GREMLIN;
         $ids = array();
         $starts = array();
         $ends = array();
-        $indexList = array();
         foreach($atoms as $id => $atom) {
             if ($atom == $id0) { continue; }
 
-            $indexList[$atom->atom] = 1;
+            $this->indexList[$atom->atom] = 1;
             $ids[$id] = 1;
 
             $written = fputcsv($fp, $atom->toArray());
         }
-        fclose($fp);
-
-        $fileName = $exakatDir.'/index.g3.csv';
-        $fp = fopen($fileName, 'w+');
-        fwrite($fp, implode("\n", array_keys($indexList)));
         fclose($fp);
 
         $fileName = $exakatDir.'/rels.g3.csv';

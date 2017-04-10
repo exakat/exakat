@@ -163,7 +163,7 @@ class Load extends Tasks {
     static public $PROP_NODELIMITER = array('String', 'Variable');
     static public $PROP_HEREDOC     = array('Heredoc');
     static public $PROP_COUNT       = array('Sequence', 'Arguments', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
-    static public $PROP_FNSNAME     = array('Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace');
+    static public $PROP_FNSNAME     = array('Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String');
     static public $PROP_ABSOLUTE    = array('Nsname');
     static public $PROP_ALIAS       = array('Nsname', 'Identifier', 'As');
     static public $PROP_ORIGIN      = array('Nsname', 'Identifier', 'As');
@@ -500,7 +500,7 @@ class Load extends Tasks {
             display("Loading with $client\n");
 
             $client = '\\Exakat\\Loader\\'.$client;
-            static::$client = new $client();
+            static::$client = new $client($this->config);
         }
 
         $this->datastore->cleanTable('tokenCounts');
@@ -1825,8 +1825,8 @@ class Load extends Tasks {
             $fullcode[] = $def->fullcode;
 
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'const');
-            $name->fullnspath     = $fullnspath;
-            $name->aliased        = $aliased;
+            $name->fullnspath = $fullnspath;
+            $name->aliased    = $aliased;
 
             $this->addDefinition('const', $fullnspath, $def);
 
@@ -1925,7 +1925,7 @@ class Load extends Tasks {
             $functioncall->aliased    = $aliased;
 
             // Probably weak check, since we haven't built fullnspath for functions yet...
-            if (strtolower($name->code) === 'define') {
+            if ($fullnspath === '\\define') {
                 $this->processDefineAsConstants($arguments);
             }
 
@@ -4407,9 +4407,15 @@ class Load extends Tasks {
     }
 
     private function processDefineAsConstants($argumentsId) {
-        list($fullnspath, $aliased) = $this->getFullnspath($this->argumentsId[0]);
+        if (empty($this->argumentsId[0]->noDelimiter)) {
+            $this->argumentsId[0]->fullnspath = '\\';
+            return;
+        }
+        
+        list($fullnspath, $aliased) = $this->getFullnspath($this->argumentsId[0], 'const');
 
         $this->addDefinition('const', $fullnspath, $argumentsId);
+        $this->argumentsId[0]->fullnspath = $fullnspath;
     }
 
     private function saveFiles() {
@@ -4556,11 +4562,7 @@ class Load extends Tasks {
                 return array($this->namespace.strtolower($name->fullcode), self::NOT_ALIASED);
             }
         } elseif ($name->atom === 'String' && isset($name->noDelimiter)) {
-            if (empty($name->noDelimiter)) {
-                $prefix = '\\';
-            } else {
-                $prefix =  ($name->noDelimiter[0] === '\\' ? '' : '\\').strtolower($name->noDelimiter);
-            }
+            $prefix =  '\\'.stripslashes(strtolower($name->noDelimiter));
 
             // define doesn't care about use...
             return array($prefix, self::NOT_ALIASED);
