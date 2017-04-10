@@ -13,4 +13,10 @@ $zip->addFile($thisdir . "/too.php","/testfromfile.php");
 echo "numfiles: " . $zip->numFiles . "\n";
 echo "status:" . $zip->status . "\n";
 $zip->close();
+
+// Not ZipArchive
+new Zip();
+
+// This is a functioncall! 
+ZipArchive(3);
 ?>
