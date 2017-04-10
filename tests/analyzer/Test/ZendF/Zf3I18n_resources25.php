@@ -7,9 +7,9 @@ spl_autoload_register('Autoload::autoload_test');
 spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
-class ZendF_Zf3I18n-resources extends Analyzer {
+class ZendF_Zf3I18n_resources25 extends Analyzer {
     /* 1 methods */
 
-    public function testZendF_Zf3I18n-resources01()  { $this->generic_test('ZendF/Zf3I18n-resources.01'); }
+    public function testZendF_Zf3I18n_resources2501()  { $this->generic_test('ZendF/Zf3I18n_resources25.01'); }
 }
 ?>

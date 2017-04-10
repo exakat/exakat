@@ -24,9 +24,14 @@ namespace Exakat\Analyzer\ZendF;
 
 use Exakat\Analyzer\Analyzer;
 
-class Zf3I18n-resources extends Zf3Component {
+class Zf3I18n_resources25 extends Zf3ComponentMissing {
+    public function dependsOn() {
+        return array('ZendF/Zf3I18n_resources');
+    }
+
     public function analyze() {
-        $this->component = 'zend-i18n-resources';
+        $this->component = 'zend-i18n_resources';
+        $this->version = '2.5';
         
         parent::analyze();
     }
