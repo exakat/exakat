@@ -1,4 +1,4 @@
-Version 0.10.8 (King of Spiritual Touch, Coming up)
+Version 0.10.9 (Single Horned Rhinoceros King, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,18 @@ Version 0.10.8 (King of Spiritual Touch, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.10.8 (King of Spiritual Touch, 2017-04-10)
++ Report
+    + Slim report : list of routes used. 
++ Analyzer
+    + New analyzer : report Group Use Declaration (PHP 7.0+)
+    + Zend Framework : 30 components are now covered. 
+    + Slim : No echo in route callable and Inventory of routes.
+    + PHP : list of new PHP 7.2 functions.
++ Tokenizer
+    + Sped up loading time by 10%. 
+    + Added support for PHP6 binary string : $a = u'b';
 
 Version 0.10.7 (Immortal of Antelope Power, 2017-04-03)
 + Report
@@ -646,7 +658,7 @@ Version 0.6.5 (Great Sage Who Pacifies Heaven, 2016-05-16)
     + No Choice analysis is now case insensitive
 + Tokenizer
     + Added support for keys in list() (PHP 7.1)
-    + Added support for constant visibility (PHP 7.1)
+    + Added support for constant visibility (PHP 7.2)
     + Added support for Multi catch : catch(A|B $e) (PHP 7.1)
     + Fixed bug with + and instanceof
     + Fixed precedence between :: and ??
