@@ -77,6 +77,8 @@ class ZendFramework extends Reports {
                             'Console'                    => 'ZendF/Zf3Console',
                             'Crypt'                      => 'ZendF/Zf3Crypt',
                             'Db'                         => 'ZendF/Zf3Db',
+                            'Debug'                      => 'ZendF/Zf3Debug',
+                            'DI'                         => 'ZendF/Zf3Di',
                             'Escaper'                    => 'ZendF/Zf3Escaper',
                             'Eventmanager'               => 'ZendF/Zf3Eventmanager',
                             'Filter'                     => 'ZendF/Zf3Filter',
