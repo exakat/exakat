@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NeedsAnalyzer;
+use Exakat\Reports\Reports;
 use Exakat\Tokenizer\Token;
 
 class Results extends Tasks {
@@ -185,20 +186,13 @@ GREMLIN;
                 break 1;
         }
 
-        if ($this->config->file != 'stdout') {
+        if ($this->config->file != Reports::STDOUT) {
             $name = $this->config->file.'.'.$extension;
             if (file_exists($name)) {
                 die( "$name already exists. Aborting\n");
             }
 
-            if ($this->config->format == 'ODT') {
-                $name1 = FILE.'.html';
-                file_put_contents($name1, $text);
-
-                $name = FILE.'.'.$extension;
-                shell_exec('pandoc -o '.$name.' '.$name1);
-                unlink($name1);
-            } elseif ($this->config->format == 'CSV') {
+            if ($this->config->format == 'CSV') {
                 $csvFile = fopen($name, 'w');
                 foreach($text as $t) {
                     fputcsv($csvFile, $t);

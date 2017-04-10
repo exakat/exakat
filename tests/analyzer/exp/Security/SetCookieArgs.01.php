@@ -1,6 +1,7 @@
 <?php
 
-$expected     = array('setcookie($a4, $b4)',
+$expected     = array('setcookie($a3b, "a")',
+                      'setcookie($a4, $b4)',
                       'setcookie($a5, $b5, time( ) + 3600)',
                       'setcookie($a6, $b6, time( ) + 3600, \'/\')',
                       'setcookie($a7, $b7, time( ) + 3600, \'/\', \'domain.com\')',

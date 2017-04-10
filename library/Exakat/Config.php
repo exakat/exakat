@@ -24,6 +24,7 @@ namespace Exakat;
 
 use Exakat\Config;
 use Exakat\Phpexec;
+use Exakat\Reports\Reports;
 use Exakat\Exceptions\InaptPHPBinary;
 use Phar;
 
@@ -81,7 +82,7 @@ class Config {
                                             'analyzers'      => array(), 
                                             'report'         => 'Premier',
                                             'format'         => 'Text',
-                                            'file'           => 'stdout',
+                                            'file'           =>  Reports::STDOUT,
                                             'style'          => 'ALL',
                                             'neo4j_host'     => '127.0.0.1',
                                             'neo4j_port'     => '7474',

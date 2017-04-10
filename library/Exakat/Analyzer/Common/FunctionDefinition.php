@@ -38,7 +38,7 @@ class FunctionDefinition extends Analyzer {
         $fullnspath = $this->makeFullNsPath($this->functions);
         
         $this->atomIs('Function')
-             ->outIs('NAME')
+             ->hasNoClassInterfaceTrait()
              ->analyzerIsNot('Classes/MethodDefinition')
              ->analyzerIsNot('Interfaces/InterfaceMethod')
              ->analyzerIsNot('Traits/TraitMethod')

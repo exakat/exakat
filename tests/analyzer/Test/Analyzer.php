@@ -10,12 +10,11 @@ include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
 class Analyzer extends \PHPUnit_Framework_TestCase {
     public function generic_test($file) {
         list($analyzer, $number) = explode('.', $file);
-        $analyzer = str_replace('_', '/', $analyzer);
-        
+                
         // Test are run with test project.
         $ini = parse_ini_file('../../projects/test/config.ini');
         $phpversion = empty($ini['phpversion']) ? phpversion() : $ini['phpversion'];
-        $test_config = str_replace('_', '/', substr(get_class($this), 5));
+        $test_config = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', substr(get_class($this), 5));
 
         // initialize Config (needed by phpexec)
         $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
@@ -28,14 +27,14 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
 
-        require('exp/'.str_replace('_', '/', $file).'.php');
+        require('exp/'.$file.'.php');
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
-        $res = shell_exec($config->$versionPHP.' -l ./source/'.str_replace('_', '/', $file).'.php 2>/dev/null');
+        $res = shell_exec($config->$versionPHP.' -l ./source/'.$file.'.php 2>/dev/null');
         if (strpos($res, 'No syntax errors detected') === false) {
-            $this->markTestSkipped('Compilation problem : "'.$res.'".');
+            $this->markTestSkipped('Compilation problem : "'.trim($res).'".');
         }
-        
+
         $Php = new Phpexec($phpversion);
         if (!$analyzerobject->checkPhpConfiguration($Php)) {
             $message = array();
@@ -51,7 +50,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         }
         
         $analyzer = escapeshellarg($test_config);
-        $source = 'source/'.str_replace('_', '/', $file).'.php';
+        $source = 'source/'.$file.'.php';
 
         if (is_dir($source)) {
             $shell = 'cd ../..; php exakat test -r -d ./tests/analyzer/'.$source.' -P '.$analyzer.' -p test -q -o -json';

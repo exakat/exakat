@@ -38,16 +38,13 @@ class RepeatedPrint extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Functioncall')
-             ->tokenIs(array('T_PRINT', 'T_ECHO'))
+        $this->atomFunctionIs(array('\print', '\echo'))
              ->isNot('rank', 0)
              ->nextSibling()
-             ->atomIs('Functioncall')
-             ->tokenIs(array('T_PRINT', 'T_ECHO'))
+             ->functioncallIs(array('\print', '\echo'))
              ->back('first')
              ->previousSibling()
-             ->atomIs('Functioncall')
-             ->tokenIsNot(array('T_PRINT', 'T_ECHO'))
+             ->functioncallIsNot(array('\print', '\echo'))
              ->back('first');
         $this->prepareQuery();
     }

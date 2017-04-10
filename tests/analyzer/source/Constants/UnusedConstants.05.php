@@ -1,12 +1,12 @@
 <?php
 
 namespace {
-    const FOO = 1;
+    const FOO = 1;  // first
     echo FOO3;
 }
 
 namespace A\B {
-    const FOO = 2;
+    const FOO = 2;   // second
     const FOO2 = 3;
     const FOO5 = 5;
 }
@@ -22,7 +22,7 @@ namespace A\B\C {
 }
 
 namespace A\B\C\D {
-    const FOO = 9;
+    const FOO = 9;   // third
     const FOO2 = 10;
     const FOO5 = 11;
 }

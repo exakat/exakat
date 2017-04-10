@@ -29,29 +29,30 @@ class Bracketless extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Ifthen')
-             ->is('alternative', false)
+             ->isNot('alternative', true)
              ->outIs(array('ELSE', 'THEN'))
-             ->is('bracket', false)
+             ->isNot('bracket', true)
              ->raw('where( __.not( and(has("count", 1), __.out("ELEMENT").hasLabel("Ifthen") ) ) )')
+             ->tokenIsNot('T_ELSEIF')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('For')
-             ->is('alternative', false)
+             ->isNot('alternative', true)
              ->outIs('BLOCK')
-             ->is('bracket', false)
+             ->isNot('bracket', true)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Foreach')
-             ->is('alternative', false)
+             ->isNot('alternative', true)
              ->outIs('BLOCK')
-             ->is('bracket', false)
+             ->isNot('bracket', true)
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('While')
-             ->is('alternative', false)
+             ->isNot('alternative', true)
              ->outIs('BLOCK')
              ->isNot('bracket', true)
              ->back('first');
@@ -59,7 +60,7 @@ class Bracketless extends Analyzer {
 
         $this->atomIs('Dowhile')
              ->outIs('BLOCK')
-             ->is('bracket', false)
+             ->isNot('bracket', true)
              ->back('first');
         $this->prepareQuery();
     }

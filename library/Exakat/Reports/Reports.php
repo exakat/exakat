@@ -30,6 +30,8 @@ use Exakat\Dump;
 abstract class Reports {
     const FILE_EXTENSION = 'undefined';
     const FILE_NAME      = 'undefined';
+    
+    const STDOUT = 'stdout';
 
     static public $FORMATS        = array('Ambassador', 'Devoops',
                                           'Text', 'Xml', 'Uml',

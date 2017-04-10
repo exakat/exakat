@@ -101,7 +101,6 @@ class CodeSniffer extends Reports {
                 foreach($messages as $message) {
                     $line = $line == -1 ? '  ' : $line;
                     $line = substr( $padding.$line, -$maxSize);
-//                    var_dump($line);die();
                     $text .= ' '.$line.' | '.strtoupper($message['severity']).' | '.$message['message']."\n";
                     $this->count();
                 }
@@ -110,7 +109,7 @@ class CodeSniffer extends Reports {
             $text .= "\n\n\n";
         }
 
-        if ($name === 'stdout') {
+        if ($name === Reports::STDOUT) {
             return $text;
         } else {
             file_put_contents($folder.'/'.$name.'.'.self::FILE_EXTENSION, $text);

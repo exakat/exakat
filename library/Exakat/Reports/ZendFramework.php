@@ -66,6 +66,42 @@ class ZendFramework extends Reports {
                                      '71' => 'Compatibility PHP 7.1',
                                      '72' => 'Compatibility PHP 7.2',);
 
+    private $components = array(
+                    'Components' => array(
+                            'Authentication'             => 'ZendF/Zf3Authentication',
+                            'Barcode'                    => 'ZendF/Zf3Barcode',
+                            'Cache'                      => 'ZendF/Zf3Cache',
+                            'Captcha'                    => 'ZendF/Zf3Captcha',
+                            'Code'                       => 'ZendF/Zf3Code',
+                            'Config'                     => 'ZendF/Zf3Config',
+                            'Console'                    => 'ZendF/Zf3Console',
+                            'Crypt'                      => 'ZendF/Zf3Crypt',
+                            'Db'                         => 'ZendF/Zf3Db',
+                            'Debug'                      => 'ZendF/Zf3Debug',
+                            'DI'                         => 'ZendF/Zf3Di',
+                            'DOM'                        => 'ZendF/Zf3Dom',
+                            'Escaper'                    => 'ZendF/Zf3Escaper',
+                            'Eventmanager'               => 'ZendF/Zf3Eventmanager',
+                            'File'                       => 'ZendF/Zf3File',
+                            'Filter'                     => 'ZendF/Zf3Filter',
+                            'Feed'                       => 'ZendF/Zf3Feed',
+                            'Form'                       => 'ZendF/Zf3Form',
+                            'HTTP'                       => 'ZendF/Zf3Http',
+                            'I18n'                       => 'ZendF/Zf3I18n',
+                            'I18n-resources'             => 'ZendF/Zf3I18n-resources',
+                            'Inputfilter'                => 'ZendF/Zf3Inputfilter',
+                            'Json'                       => 'ZendF/Zf3Json',
+                            'Loader'                     => 'ZendF/Zf3Loader',
+                            'MVC'                        => 'ZendF/Zf3Mvc',
+                            'Session'                    => 'ZendF/Zf3Session',
+                            'Text'                       => 'ZendF/Zf3Text',
+                            'Test'                       => 'ZendF/Zf3Test',
+                            'URI'                        => 'ZendF/Zf3Uri',
+                            'Validator'                  => 'ZendF/Zf3Validator',
+                            'View'                       => 'ZendF/Zf3View',
+                    ),
+                );
+
     public function __construct() {
         parent::__construct();
         $this->themesToShow      = 'ZendFramework';
@@ -192,8 +228,8 @@ MENU;
     }
 
     private function initFolder() {
-        if ($this->finalName === 'stdout') {
-            return "Can't produce Devoops format to stdout";
+        if ($this->finalName === Reports::STDOUT) {
+            return "Can't produce this report format to stdout. It needs a file name.";
         }
 
         // Clean temporary destination
@@ -2326,27 +2362,7 @@ JAVASCRIPT;
     }
 
     private function generateCompatibilities() {
-        $components = array(
-                    'Components' => array(
-                            'Authentication'             => 'ZendF/Zf3Authentication',
-                            'Barcode'                    => 'ZendF/Zf3Barcode',
-                            'Db'                         => 'ZendF/Zf3Db',
-                            'Cache'                      => 'ZendF/Zf3Cache',
-                            'Config'                     => 'ZendF/Zf3Config',
-                            'Escaper'                    => 'ZendF/Zf3Escaper',
-                            'Eventmanager'               => 'ZendF/Zf3Eventmanager',
-                            'Filter'                     => 'ZendF/Zf3Filter',
-                            'Feed'                       => 'ZendF/Zf3Feed',
-                            'HTTP'                       => 'ZendF/Zf3Http',
-                            'MVC'                        => 'ZendF/Zf3Mvc',
-                            'Session'                    => 'ZendF/Zf3Session',
-                            'Text'                       => 'ZendF/Zf3Text',
-                            'Test'                       => 'ZendF/Zf3Test',
-                            'URI'                        => 'ZendF/Zf3Uri',
-                            'Validator'                  => 'ZendF/Zf3Validator',
-                            'View'                       => 'ZendF/Zf3View',
-                    ),
-                );
+        $components = $this->components;
                 
         $zend3 = new ZendF3($this->config->dir_root.'/data', $this->config->is_phar);
 
@@ -2418,27 +2434,7 @@ SQL;
     }
 
     private function generateAppinfo() {
-        $extensions = array(
-                    'Components' => array(
-                            'Authentication'             => 'ZendF/Zf3Authentication',
-                            'Barcode'                    => 'ZendF/Zf3Barcode',
-                            'Db'                         => 'ZendF/Zf3Db',
-                            'Cache'                      => 'ZendF/Zf3Cache',
-                            'Config'                     => 'ZendF/Zf3Config',
-                            'Escaper'                    => 'ZendF/Zf3Escaper',
-                            'Eventmanager'               => 'ZendF/Zf3Eventmanager',
-                            'Feed'                       => 'ZendF/Zf3Feed',
-                            'Filter'                     => 'ZendF/Zf3Filter',
-                            'HTTP'                       => 'ZendF/Zf3Http',
-                            'MVC'                        => 'ZendF/Zf3Mvc',
-                            'Session'                    => 'ZendF/Zf3Session',
-                            'Text'                       => 'ZendF/Zf3Text',
-                            'Test'                       => 'ZendF/Zf3Test',
-                            'URI'                        => 'ZendF/Zf3Uri',
-                            'Validator'                  => 'ZendF/Zf3Validator',
-                            'View'                       => 'ZendF/Zf3View',
-                    ),
-                );
+        $extensions = $this->components;
 
         // collecting information for Extensions
         $themed = Analyzer::getThemeAnalyzers('ZendFramework');

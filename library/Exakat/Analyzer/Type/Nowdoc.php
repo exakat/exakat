@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Nowdoc extends Analyzer {
     public function analyze() {
         $this->atomIs('Heredoc')
-             ->is('heredoc', false);
+             ->isNot('heredoc', true);
         $this->prepareQuery();
     }
 }

@@ -73,6 +73,12 @@ class Slim extends Ambassador {
           <li><a href="appinfo.html"><i class="fa fa-circle-o"></i>Sliminfo()</a></li>
           <li><a href="compatibilities.html"><i class="fa fa-circle-o"></i>Compatibilities</a></li>
           <li class="treeview">
+            <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Inventories</span><i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+              <li><a href="inventories_routes.html"><i class="fa fa-circle-o"></i>Used routes</a></li>
+            </ul>
+          </li>
+          <li class="treeview">
             <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
               <li><a href="annex_settings.html"><i class="fa fa-circle-o"></i>Analyzer Settings</a></li>
@@ -145,13 +151,11 @@ MENU;
 
         // Favorites
         $this->generateFavorites();
+*/
 
         // inventories
-        $this->generateErrorMessages();
-        $this->generateDynamicCode();
-        $this->generateGlobals();
-        $this->generateInventories();
-*/
+        $this->generateRoutes();
+
         // Annex
         $this->generateAnalyzerSettings();
         $this->generateDocumentation();
@@ -168,7 +172,7 @@ MENU;
     }
 
     private function initFolder() {
-        if ($this->finalName === 'stdout') {
+        if ($this->finalName === Reports::STDOUT) {
             return "Can't produce Devoops format to stdout";
         }
 
@@ -1990,17 +1994,27 @@ SQL
         $this->putBasedPage('compatibility_compilations', $html);
     }
 
-    private function generateDynamicCode() {
-        $dynamicCode = '';
+    private function generateRoutes() {
+        $routes = '';
 
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/DynamicCode"');
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Slim/UsedRoutes"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $dynamicCode .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $routes .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
         }
+        
+        $routes = <<<HTML
+        					<table class="table table-striped">
+        						<tr></tr>
+        						<tr><th>Code</th><th>File</th><th>Line</th></tr>
+        						$routes
+        					</table>
+HTML;
 
-        $html = $this->getBasedPage('dynamic_code');
-        $html = $this->injectBloc($html, 'DYNAMIC_CODE', $dynamicCode);
-        $this->putBasedPage('dynamic_code', $html);
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TTILE', 'Used routes');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'List of routes defined in the code');
+        $html = $this->injectBloc($html, 'CONTENT', $routes);
+        $this->putBasedPage('inventories_routes', $html);
     }
 
     private function generateGlobals() {
@@ -2224,7 +2238,7 @@ JAVASCRIPT;
 
         $html = $this->getBasedPage('empty');
         $html = $this->injectBloc($html, 'TITLE', 'Component and compatibility');
-        $html = $this->injectBloc($html, 'DESCRIPTION', '<p>List of the Zend Framework 3 components, broken down by versions, with their compatibility.</p>
+        $html = $this->injectBloc($html, 'DESCRIPTION', '<p>List of the Slim Framework versions, with their compatibility.</p>
         
         <p>For each component, classes, interfaces and traits are checked. When all of those that are found in the code, belong to a version, they are ticked. If one of them is missing in the target version, it is unticked. </p>
         
@@ -2236,28 +2250,12 @@ JAVASCRIPT;
     private function generateAppinfo() {
         $extensions = array(
                     'Components' => array(
-                            'Authentication'             => 'ZendF/Zf3Authentication',
-                            'Barcode'                    => 'ZendF/Zf3Barcode',
-                            'Db'                         => 'ZendF/Zf3Db',
-                            'Cache'                      => 'ZendF/Zf3Cache',
-                            'Config'                     => 'ZendF/Zf3Config',
-                            'Escaper'                    => 'ZendF/Zf3Escaper',
-                            'Eventmanager'               => 'ZendF/Zf3Eventmanager',
-                            'Feed'                       => 'ZendF/Zf3Feed',
-                            'Filter'                     => 'ZendF/Zf3Filter',
-                            'HTTP'                       => 'ZendF/Zf3Http',
-                            'MVC'                        => 'ZendF/Zf3Mvc',
-                            'Session'                    => 'ZendF/Zf3Session',
-                            'Text'                       => 'ZendF/Zf3Text',
-                            'Test'                       => 'ZendF/Zf3Test',
-                            'URI'                        => 'ZendF/Zf3Uri',
-                            'Validator'                  => 'ZendF/Zf3Validator',
-                            'View'                       => 'ZendF/Zf3View',
+                            'Slim'             => 'Slim/UseSlim',
                     ),
                 );
 
         // collecting information for Extensions
-        $themed = Analyzer::getThemeAnalyzers('ZendFramework');
+        $themed = Analyzer::getThemeAnalyzers('Slim');
         $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {

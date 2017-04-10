@@ -47,11 +47,9 @@ class Neo4jImport {
     private static $count = -1; // id must start at 0 in batch-import
     private $id = 0;
 
-    private static $fp_rels       = null;
-    private static $fp_nodes      = null;
-    private static $fp_nodes_attr = array();
-    private static $indexedId     = array();
     private static $tokenCounts   = array();
+
+    private $indexList = array();
 
     private $config = null;
 
@@ -59,9 +57,9 @@ class Neo4jImport {
 
     private $cypher = null;
 
-    public function __construct() {
-        $this->config = Config::factory();
-
+    public function __construct($config) {
+        $this->config = $config;
+        
         if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.g3.csv') && static::$file_saved == 0) {
             $this->cleanCsv();
         }
@@ -112,8 +110,7 @@ SHELL;
             throw new GremlinException('Couldn\'t load any nodes. Return message "'.$res.'"'.var_export($check));
         }
 
-        $fp = fopen($this->config->projects_root.'/projects/.exakat/index.g3.csv', 'r');
-        while($indice = fgets($fp)) {
+        foreach($this->indexList as $indice => $foo) {
             $queryTemplate = 'CREATE INDEX ON :'.trim($indice).'(id)';
             $cypher->query($queryTemplate);
         }
@@ -133,6 +130,7 @@ GREMLIN;
         $gremlin->query($query);
 
         // Finish noDelimiter for strings
+        /*
         $properties = array('alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean');
         foreach($properties as $property) {
             $query = <<<GREMLIN
@@ -143,6 +141,7 @@ g.V().has("$property").sideEffect{
 GREMLIN;
             $gremlin->query($query);
         }
+        */
 
         $this->cleanCsv();
         display('Cleaning CSV');
@@ -151,9 +150,10 @@ GREMLIN;
     }
 
     private function cleanCsv() {
+//        return;
         unlink($this->config->projects_root.'/projects/.exakat/nodes.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/rels.g3.csv');
-        unlink($this->config->projects_root.'/projects/.exakat/index.g3.csv');
+//        unlink($this->config->projects_root.'/projects/.exakat/index.g3.csv');
     }
 
     private static function saveTokenCounts() {
@@ -217,10 +217,6 @@ GREMLIN;
                                          'label' => $label
                                  );
 
-        if (isset($this->node['index'])) {
-            static::$indexedId[$this->id] = 1;
-        }
-
         static::$lastLink = &static::$links[$label][count(static::$links[$label]) - 1];
         $this->isLink = true;
 
@@ -236,6 +232,8 @@ GREMLIN;
         return str_replace(array('\\', '"'), array('\\\\', '\\"'), $string);
     }
 
+//'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'
+
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
         static $extras = array(':ID'         => '',
                                ':LABEL'      => '',
@@ -244,29 +242,32 @@ GREMLIN;
                                'line'        => 'int',
                                'token'       => '',
                                'rank'        => 'int',
-                               'alternative' => 'int',
-                               'reference'   => 'int',
-                               'heredoc'     => 'int',
+                               'alternative' => 'boolean',
+                               'reference'   => 'boolean',
+                               'heredoc'     => 'boolean',
                                'delimiter'   => '',
                                'noDelimiter' => '',
-                               'variadic'    => 'int',
+                               'variadic'    => 'boolean',
                                'count'       => 'int',
                                'fullnspath'  => '',
-                               'absolute'    => 'int',
+                               'absolute'    => 'boolean',
                                'alias'       => '',
                                'origin'      => '',
                                'encoding'    => '',
                                'intval'      => 'long',
                                'strval'      => '',
-                               'enclosing'   => 'int',
+                               'enclosing'   => 'boolean',
                                'args_max'    => 'int',
                                'args_min'    => 'int',
-                               'bracket'     => 'int',
-                               'close_tag'   => 'int',
-                               'aliased'     => 'int',
-                               'boolean'     => 'int',
+                               'bracket'     => 'boolean',
+                               'close_tag'   => 'boolean',
+                               'aliased'     => 'boolean',
+                               'boolean'     => 'boolean',
                                'propertyname'=> '',
-                               'constant'    => '');
+                               'constant'    => 'boolean',
+                               'root'        => 'int',
+                               'globalvar'   => '',
+                               'binaryString'=> '');
 
         $fileName = $exakatDir.'/nodes.g3.csv';
         if (file_exists($fileName)) {
@@ -279,14 +280,15 @@ GREMLIN;
             }
             fputcsv($fp, $headers);
 
-            $projectRow = array($id0,
-                                $atoms[$id0]['atom'],
-                                $this->escapeCsv( $atoms[$id0]['code'] ),
-                                $this->escapeCsv( $atoms[$id0]['fullcode']),
-                                (isset($atoms[$id0]['line']) ? $atoms[$id0]['line'] : 0),
-                                $this->escapeCsv( isset($atoms[$id0]['token']) ? $atoms[$id0]['token'] : ''),
-                                (isset($atoms[$id0]['rank']) ? $atoms[$id0]['rank'] : -1));
+            $projectRow = array($id0->id,
+                                $id0->atom,
+                                $this->escapeCsv( $id0->code ),
+                                $this->escapeCsv( $id0->fullcode),
+                                (isset($id0->line) ? $id0->line : 0),
+                                $this->escapeCsv( isset($id0->token) ? $id0->token : ''),
+                                (isset($id0->rank) ? $id0->rank : -1));
             $projectRow = array_pad($projectRow, count($headers), '');
+
             $written = fputcsv($fp, $projectRow);
         }
 
@@ -294,54 +296,14 @@ GREMLIN;
         $ids = array();
         $starts = array();
         $ends = array();
-        $indexList = array();
         foreach($atoms as $id => $atom) {
-            if ($id == $id0) { continue; }
-            $extra= array();
+            if ($atom == $id0) { continue; }
 
-            $indexList[$atom['atom']] = 1;
+            $this->indexList[$atom->atom] = 1;
             $ids[$id] = 1;
-            
-            if (strlen($atom['code']) > 5000) {
-                $atom['code'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['code']).' chars]';
-            }
-            if (strlen($atom['fullcode']) > 5000) {
-                $atom['fullcode'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['fullcode']).' chars]';
-            }
 
-            foreach($extras as $name => $type) {
-                if ($name == ':ID') {
-                    $name = 'id';
-                } elseif ($name == ':LABEL') {
-                    $name = 'atom';
-                } elseif ($name == 'reference') {
-                    if (isset($atom['reference'])) {
-                        $atom['reference'] = $atom['reference'] == true ? 1 : -1;
-                    }
-                } elseif ($name == 'fullnspath') {
-                    if (isset($atom['fullnspath']) && $atom['fullnspath'] == -1) {
-                        $atom['fullnspath'] = '';
-                    }
-                }
-
-                if (!isset($atom[$name])) {
-                    $extra[] = '';
-                    continue;
-                }
-                if ($atom[$name] === false) {
-                    $extra[] = 0;
-                    continue;
-                }
-
-                $extra[] = $this->escapeCsv($atom[$name]);
-            }
-            $written = fputcsv($fp, $extra);
+            $written = fputcsv($fp, $atom->toArray());
         }
-        fclose($fp);
-
-        $fileName = $exakatDir.'/index.g3.csv';
-        $fp = fopen($fileName, 'w+');
-        fwrite($fp, implode("\n", array_keys($indexList)));
         fclose($fp);
 
         $fileName = $exakatDir.'/rels.g3.csv';
@@ -362,7 +324,7 @@ GREMLIN;
                     foreach($links as $link) {
                         $starts[$link['origin']] = 1;
                         $ends[$link['destination']] = 1;
-                        fputcsv($fp, array($link['origin'], $link['destination'], $label), ',', '"', '\\');
+                        fputcsv($fp, array($link['origin'], $link['destination'], $label));
                     }
                 }
             }
@@ -391,7 +353,7 @@ GREMLIN;
                     foreach($path['definitions'] as $destination => $destinations) {
                         foreach($origins as $o) {
                             foreach($destinations as $d) {
-                                fputcsv($fp, array($d, $o, 'DEFINITION'), ',', '"', '\\');
+                                fputcsv($fp, array($d, $o, 'DEFINITION'));
                             }
                         }
                     }

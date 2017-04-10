@@ -50,6 +50,7 @@ class OneDotOrObjectOperatorPerLine extends Analyzer {
 
         // f('a'.'b', $c->d);
         $this->atomIs('Concatenation')
+             ->hasIn('ARGUMENT')
              ->savePropertyAs('line', 'line')
              ->nextSibling('ARGUMENT')
              ->atomIs(array('Concatenation', 'Methodcall', 'Property'))

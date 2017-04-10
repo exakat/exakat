@@ -14,7 +14,7 @@ $components = array(
 'zend-db',
 'zend-debug',
 'zend-di',
-'zend-diactoros',
+'zend-diactoros',   // ??
 'zend-dom',
 'zend-escaper',
 'zend-eventmanager',
@@ -23,7 +23,7 @@ $components = array(
 'zend-filter',
 'zend-form',
 'zend-http',
-'zend-hydrator',
+'zend-hydrator',   // ??
 'zend-i18n-resources',
 'zend-i18n',
 'zend-inputfilter',

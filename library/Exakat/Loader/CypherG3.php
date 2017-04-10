@@ -47,9 +47,6 @@ class CypherG3 {
     private static $count = -1; // id must start at 0 in batch-import
     private $id = 0;
 
-    private static $fp_rels       = null;
-    private static $fp_nodes      = null;
-    private static $fp_nodes_attr = array();
     private static $indexedId     = array();
     private static $tokenCounts   = array();
 
@@ -59,11 +56,11 @@ class CypherG3 {
 
     private $cypher = null;
 
-    public function __construct() {
-        $this->config = Config::factory();
-
+    public function __construct($config) {
+        $this->config = $config;
+        
         // Force autoload
-        $this->cypher = new Cypher($this->config );
+        $this->cypher = new Cypher($this->config);
 
         if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.g3.Project.csv') && static::$file_saved == 0) {
             $this->unlink = glob($this->config->projects_root.'/projects/.exakat/*.csv');
@@ -99,12 +96,12 @@ class CypherG3 {
             $extra = array();
             foreach(Load::$PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
-                    if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval', 'propertyname', 'globalvar'))) {
+                    if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'strval', 'propertyname', 'globalvar', 'binaryString'))) {
                         // Raw string
                         $extra[] = "$title: csvLine.$title";
                     } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant'))) {
                         // Boolean
-                        $extra[] = "$title: (csvLine.$title <> \"\")";
+                        $extra[] = "$title: (csvLine.$title = \"1\")";
                     } elseif (in_array($title, array('count', 'intval', 'args_max', 'args_min'))) {
                         // Integer
                         $extra[] = "$title: toInt(csvLine.$title)";
@@ -178,6 +175,7 @@ CYPHER;
     }
 
     private function cleanCsv() {
+        return;
         if (empty($this->unlink)) {
             return ;
         }
@@ -271,60 +269,30 @@ CYPHER;
 
         // Saving atoms
         foreach($atoms as $atom) {
-            $fileName = $exakatDir.'/nodes.g3.'.$atom['atom'].'.csv';
-            assert(!empty($atom),  "Atom is empty for $atom[atom]\n");
-            if ($atom['atom'] === 'Project' && file_exists($fileName)) {
+            $fileName = $exakatDir.'/nodes.g3.'.$atom->atom.'.csv';
+            if ($atom->atom === 'Project' && file_exists($fileName)) {
                 // Project is saved only once
                 continue;
             }
-            if (isset($extras[$atom['atom']])) {
+
+            if (isset($extras[$atom->atom])) {
                 $fp = fopen($fileName, 'a');
             } else {
                 $fp = fopen($fileName, 'w+');
                 $headers = array('id', 'atom', 'code', 'fullcode', 'line', 'token', 'rank');
 
-                $extras[$atom['atom']]= array();
+                $extras[$atom->atom]= array();
                 foreach(Load::$PROP_OPTIONS as $title => $atoms) {
-                    if (in_array($atom['atom'], $atoms)) {
+                    if (in_array($atom->atom, $atoms)) {
                         $headers[] = $title;
-                        $extras[$atom['atom']][] = $title;
+                        $extras[$atom->atom][] = $title;
                     }
                 }
                 
                 fputcsv($fp, $headers);
             }
 
-            $extra= array();
-            foreach($extras[$atom['atom']] as $e) {
-                if ($e === 'boolean') {
-                    $extra[] = isset($atom[$e]) ? '"'.($atom[$e] ? "1" : "").'"' : '""';
-                } elseif ($e === 'constant') {
-                    $extra[] = (isset($atom[$e]) && $atom[$e]) ? '"1"' : '';
-                } elseif ($e === 'fullnspath') {
-                    $extra[] = !empty($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '';
-                } elseif ($e === 'propertyname') {
-                    $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '';
-                } else {
-                    $extra[] = isset($atom[$e]) ? '"'.$this->escapeCsv($atom[$e]).'"' : '"-1"';
-                }
-            }
-
-            if (strlen($atom['code']) > 5000) {
-                $atom['code'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['code']).' chars]';
-            }
-            if (strlen($atom['fullcode']) > 5000) {
-                $atom['fullcode'] = substr($atom['code'], 0, 5000).'...[ total '.strlen($atom['fullcode']).' chars]';
-            }
-
-            if (count($extras[$atom['atom']]) > 0) {
-                $extra = ','.implode(',', $extra);
-            } else {
-                $extra = '';
-            }
-
-            $written = fwrite($fp,
-                              $atom['id'].','.$atom['atom'].',"'.$this->escapeCsv( $atom['code'] ).'","'.$this->escapeCsv( $atom['fullcode']).'",'.(isset($atom['line']) ? $atom['line'] : 0).',"'.$this->escapeCsv( isset($atom['token']) ? $atom['token'] : '').'","'.(isset($atom['rank']) ? $atom['rank'] : -1).'"'.$extra."\n");
-
+            $written = fputcsv($fp, $atom->toLimitedArray($extras[$atom->atom]));
             fclose($fp);
         }
 
@@ -345,7 +313,7 @@ CYPHER;
                     }
 
                     foreach($links as $link) {
-                        fputcsv($fp, array($link['origin'], $link['destination']), ',', '"', '\\');
+                        fputcsv($fp, array($link['origin'], $link['destination']));
                     }
 
                     fclose($fp);
@@ -372,7 +340,7 @@ CYPHER;
 
                         foreach($origins as $o) {
                             foreach($destinations as $d) {
-                                fputcsv($fp, array($d, $o), ',', '"', '\\');
+                                fputcsv($fp, array($d, $o));
                             }
                         }
                     }

@@ -257,11 +257,12 @@ g.V().hasLabel("Identifier", "Nsname").as("a")
      .sideEffect{ 
           it.get().property("fullnspath", fullnspath ); 
       }
+      .count();
 
 GREMLIN;
-        $this->gremlin->query($query);
-        display('fallback for global constants');
-        $this->logTime('fallback to global for constants');
+        $res = $this->gremlin->query($query);
+        display('fallback for global constants : '.$res->results[0]);
+        $this->logTime('fallback to global for constants : '.$res->results[0]);
     }
 
     private function findPHPNativeConstants() {
@@ -292,7 +293,14 @@ GREMLIN;
         $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() == 0 }.values("fullnspath")';
         $constants = $this->gremlin->query($query);
         $constantsDefinitions = $constants->results;
-
+/*
+    // Must Get defined too. Can we do that during Load ? 
+        $query = 'g.V().hasLabel("Functioncall").has("fullnspath", "\define").out("ARGUMENTS").out("ARGUMENT").has("rank", 0).hasLabel("String")
+        .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() == 0 }.values("fullnspath")';
+        $constants = $this->gremlin->query($query);
+        $definedConst = $constants->results;
+        print_r($definedConst);
+*/
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
      .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
