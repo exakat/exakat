@@ -50,7 +50,9 @@ class Autoload {
     }
 
     public static function autoload_phpunit($name) {
-        $file = 'Test/'.str_replace('_', '/', str_replace('Test\\', '', $name)).'.php';
+        $fileName = preg_replace('/^([^_]+?)_(.*)$/', '$1'.DIRECTORY_SEPARATOR.'$2', $name);
+        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $fileName);
+        $file = $fileName.'.php';
 
         if (file_exists($file)) {
             include $file;

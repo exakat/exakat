@@ -10,7 +10,7 @@ spl_autoload_register('Autoload::autoload_library');
 class Arrays_IsRead extends Analyzer {
     /* 2 methods */
 
-    public function testArrays_IsRead01()  { $this->generic_test('Arrays_IsRead.01'); }
+    public function testArrays_IsRead01()  { $this->generic_test('Arrays/IsRead.01'); }
     public function testArrays_IsRead02()  { $this->generic_test('Arrays/IsRead.02'); }
 }
 ?>

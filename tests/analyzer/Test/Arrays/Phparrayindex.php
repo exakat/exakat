@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Arrays_Phparrayindex extends Analyzer {
     /* 1 methods */
 
-    public function testArrays_Phparrayindex01()  { $this->generic_test('Arrays_Phparrayindex.01'); }
+    public function testArrays_Phparrayindex01()  { $this->generic_test('Arrays/Phparrayindex.01'); }
 }
 ?>

@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Arrays_CurlyArrays extends Analyzer {
     /* 1 methods */
 
-    public function testArrays_CurlyArrays01()  { $this->generic_test('Arrays_CurlyArrays.01'); }
+    public function testArrays_CurlyArrays01()  { $this->generic_test('Arrays/CurlyArrays.01'); }
 }
 ?>

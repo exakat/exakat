@@ -10,6 +10,6 @@ spl_autoload_register('Autoload::autoload_library');
 class Arrays_Multidimensional extends Analyzer {
     /* 1 methods */
 
-    public function testArrays_Multidimensional01()  { $this->generic_test('Arrays_Multidimensional.01'); }
+    public function testArrays_Multidimensional01()  { $this->generic_test('Arrays/Multidimensional.01'); }
 }
 ?>

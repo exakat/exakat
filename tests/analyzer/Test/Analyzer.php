@@ -9,6 +9,9 @@ include_once(dirname(dirname(dirname(__DIR__))).'/library/Autoload.php');
 
 class Analyzer extends \PHPUnit_Framework_TestCase {
     public function generic_test($file) {
+        if (preg_match('/^\w+_/', $file)) {
+            $file = preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file);
+        }
         list($analyzer, $number) = explode('.', $file);
                 
         // Test are run with test project.
@@ -27,6 +30,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
 
+//        require('exp/'.preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file).'.php');
         require('exp/'.$file.'.php');
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
