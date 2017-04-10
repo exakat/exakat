@@ -99,6 +99,7 @@ class Analyze extends Tasks {
             $dependencies2 = array();
             foreach($analyzers_class as $a) {
                 $d = Analyzer::getInstance($a, $this->gremlin);
+                assert($d !== null, 'Can\'t get instance of analyzer : '.$a);
                 $d = $d->dependsOn();
                 if (!is_array($d)) {
                     throw new DependsOnMustReturnArray(get_class($this));
