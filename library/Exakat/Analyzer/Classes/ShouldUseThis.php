@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldUseThis extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UseThis');
+        return array('Classes/UseThis',
+                     'Classes/MethodIsOverwritten');
     }
     
     public function analyze() {
@@ -38,6 +39,7 @@ class ShouldUseThis extends Analyzer {
              ->hasNoOut('STATIC')
              ->hasNoOut('ABSTRACT')
              ->hasClassTrait()
+             ->analyzerIsNot('Classes/MethodIsOverwritten')
              ->analyzerIsNot('Classes/UseThis');
         $this->prepareQuery();
 
@@ -46,6 +48,7 @@ class ShouldUseThis extends Analyzer {
              ->hasOut('STATIC')
              ->hasNoOut('ABSTRACT')
              ->hasClassTrait()
+             ->analyzerIsNot('Classes/MethodIsOverwritten')
              ->analyzerIsNot('Classes/UseThis');
         $this->prepareQuery();
     }

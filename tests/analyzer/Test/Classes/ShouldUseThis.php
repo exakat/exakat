@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_ShouldUseThis extends Analyzer {
-    /* 9 methods */
+    /* 10 methods */
 
     public function testClasses_ShouldUseThis01()  { $this->generic_test('Classes_ShouldUseThis.01'); }
     public function testClasses_ShouldUseThis02()  { $this->generic_test('Classes_ShouldUseThis.02'); }
@@ -19,5 +19,6 @@ class Classes_ShouldUseThis extends Analyzer {
     public function testClasses_ShouldUseThis07()  { $this->generic_test('Classes_ShouldUseThis.07'); }
     public function testClasses_ShouldUseThis08()  { $this->generic_test('Classes/ShouldUseThis.08'); }
     public function testClasses_ShouldUseThis09()  { $this->generic_test('Classes/ShouldUseThis.09'); }
+    public function testClasses_ShouldUseThis10()  { $this->generic_test('Classes/ShouldUseThis.10'); }
 }
 ?>
