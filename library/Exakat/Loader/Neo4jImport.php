@@ -35,37 +35,20 @@ use Exception;
 class Neo4jImport {
     const CSV_SEPARATOR = ',';
 
-    private $node = null;
-    private static $nodes = array();
-    private static $file_saved = 0;
-    private $unlink = array();
+    private $file_saved = 0;
 
-    private static $links = array();
-    private static $lastLink = array();
-
-    private static $cols = array();
-    private static $count = -1; // id must start at 0 in batch-import
-    private $id = 0;
-
-    private static $tokenCounts   = array();
+    private $tokenCounts   = array();
 
     private $indexList = array();
 
     private $config = null;
 
-    private $isLink = false;
-
-    private $cypher = null;
-
     public function __construct($config) {
         $this->config = $config;
         
-        if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.g3.csv') && static::$file_saved == 0) {
+        if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.g3.csv') && $this->file_saved == 0) {
             $this->cleanCsv();
         }
-
-        $node = array('inited' => true);
-        $this->node = &$node;
     }
 
     public function finalize() {
@@ -129,20 +112,6 @@ g.V().hasLabel("String").not(has("noDelimiter"))
 GREMLIN;
         $gremlin->query($query);
 
-        // Finish noDelimiter for strings
-        /*
-        $properties = array('alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean');
-        foreach($properties as $property) {
-            $query = <<<GREMLIN
-g.V().has("$property").sideEffect{ 
-    it.get().property("$property", it.get().property("$property").value() == 1);
-}
-
-GREMLIN;
-            $gremlin->query($query);
-        }
-        */
-
         $this->cleanCsv();
         display('Cleaning CSV');
 
@@ -150,89 +119,19 @@ GREMLIN;
     }
 
     private function cleanCsv() {
-//        return;
         unlink($this->config->projects_root.'/projects/.exakat/nodes.g3.csv');
         unlink($this->config->projects_root.'/projects/.exakat/rels.g3.csv');
-//        unlink($this->config->projects_root.'/projects/.exakat/index.g3.csv');
     }
 
-    private static function saveTokenCounts() {
-        $config = Config::factory();
-        $datastore = new Datastore($config);
+    private function saveTokenCounts() {
+        $datastore = new Datastore($this->config);
 
-        $datastore->addRow('tokenCounts', static::$tokenCounts);
-    }
-
-    public function makeNode() {
-        return new static();
-    }
-
-    public function setProperty($name, $value) {
-        if ($this->isLink) {
-            static::$lastLink[$name] = $value;
-        } else {
-            if (!isset(static::$cols[$name])) {
-                static::$cols[$name] = true;
-            }
-
-            $this->node[$name] = $value;
-        }
-
-        return $this;
-    }
-
-    public function hasProperty($name) {
-        if ($this->isLink) {
-            return isset(static::$lastLink[$name]);
-        } else {
-            return isset($this->node[$name]);
-        }
-    }
-
-    public function getProperty($name) {
-        if ($this->isLink) {
-            return static::$lastLink[$name];
-        } else {
-            return $this->node[$name];
-        }
-    }
-
-    public function save() {
-        if (empty($this->id)) {
-            ++static::$count;
-            $this->id = static::$count;
-            static::$nodes[$this->id] = &$this->node;
-        } else {
-            static::$nodes[$this->id] = &$this->node;
-        }
-
-        $this->isLink = false;
-
-        return $this;
-    }
-
-    public function relateTo($destination, $label) {
-        static::$links[$label][] = array('origin' => $this->id,
-                                         'destination' => $destination->id,
-                                         'label' => $label
-                                 );
-
-        static::$lastLink = &static::$links[$label][count(static::$links[$label]) - 1];
-        $this->isLink = true;
-
-        return $this;
-    }
-
-    public function escapeString($string) {
-        $x = str_replace("\\", "\\\\", $string);
-        return str_replace("\"", "\\\"", $x);
+        $datastore->addRow('tokenCounts', $this->tokenCounts);
     }
 
     private function escapeCsv($string) {
         return str_replace(array('\\', '"'), array('\\\\', '\\"'), $string);
     }
-
-//'alternative', 'reference', 'heredoc', 'variadic', 'absolute','enclosing', 'bracket', 'close_tag', 'aliased', 'boolean'
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
         static $extras = array(':ID'         => '',
