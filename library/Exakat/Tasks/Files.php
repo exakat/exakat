@@ -404,7 +404,10 @@ class Files extends Tasks {
             if (!empty($includeDirsRegex) && preg_match($includeDirsRegex, $file)) {
                 // Matching the 'include dir' pattern
                 // it's OK.
-            } elseif (!in_array($ext, $exts)) {
+                continue;
+            } 
+            
+            if (!in_array($ext, $exts)) {
                 // selection of extensions
                 unset($files[$id]);
                 $ignoredFiles[$file] = "Ignored extension ($ext)";
