@@ -73,6 +73,11 @@ abstract class Analyzer {
     const T_LONG    = 'Long';    //360';
     
     const PHP_VERSION_ANY = 'Any';
+
+    const COMPATIBLE                 =  0;
+    const UNKNOWN_COMPATIBILITY      = -1;
+    const VERSION_INCOMPATIBLE       = -2;
+    const CONFIGURATION_INCOMPATIBLE = -3;
     
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
@@ -83,12 +88,6 @@ abstract class Analyzer {
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
-
-    private $isCompatible            = self::UNKNOWN_COMPATIBILITY;
-    const COMPATIBLE                 =  0;
-    const UNKNOWN_COMPATIBILITY      = -1;
-    const VERSION_INCOMPATIBLE       = -2;
-    const CONFIGURATION_INCOMPATIBLE = -3;
 
     const CONTEXT_IN_CLOSURE = 1;
     const CONTEXT_OUTSIDE_CLOSURE = 2;
@@ -111,7 +110,9 @@ abstract class Analyzer {
         
         self::initDocs();
         
-        $this->description = new Description($this->analyzer);
+        if (strpos($this->analyzer, '\\Common\\') === false) {
+            $this->description = new Description($this->analyzer);
+        }
         
         $this->_as('first');
         
@@ -163,7 +164,7 @@ abstract class Analyzer {
         // Human shortcut : Class (must be unique among the classes)
 
         if (strpos($name, '\\') !== false) {
-            if (substr($name, 0, 16) == 'Exakat\\Analyzer\\') {
+            if (substr($name, 0, 16) === 'Exakat\\Analyzer\\') {
                 $class = $name;
             } else {
                 $class = 'Exakat\\Analyzer\\'.$name;
@@ -291,10 +292,6 @@ GREMLIN;
         return Analyzer::$docs->getThemeForAnalyzer($analyzer);
     }
 
-    public function getAppinfoHeader($lang = 'en') {
-        return $this->description;
-    }
-    
     static public function getAnalyzers($theme) {
         return Analyzer::$analyzers[$theme];
     }
@@ -613,7 +610,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
             unset($a);
 
             $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)) )', $analyzer);
-        } else {
+        } elseif (is_string($analyzer)) {
             if ($analyzer === 'self') {
                 $analyzer = self::getName($this->analyzerQuoted);
             } else {
@@ -693,9 +690,11 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     public function isMore($property, $value = 0) {
         if (is_int($value)) {
             $this->addMethod("filter{ it.get().value('$property').toLong() > $value}");
-        } else {
+        } elseif (is_string($value)) {
             // this is a variable name
             $this->addMethod("filter{ it.get().value('$property').toLong() > $value;}", $value);
+        } else {
+            assert(false, '$value must be int or string in '.__METHOD__);
         }
 
         return $this;
@@ -704,9 +703,11 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     public function isLess($property, $value = 0) {
         if (is_int($value)) {
             $this->addMethod('filter{ it.get().value("'.$property.'").toLong() < '.$value.'}');
-        } else {
+        } elseif (is_string($value)) {
             // this is a variable name
             $this->addMethod("filter{ it.get().value('$property').toLong() < $value;}", $value);
+        } else {
+            assert(false, '$value must be int or string in '.__METHOD__);
         }
 
         return $this;
@@ -1621,7 +1622,7 @@ GREMLIN
                 } elseif (is_int($value)) {
                     $query = str_replace($name, $value, $query);
                 } else {
-                    die( 'Cannot process argument of type '.gettype($value)."\n".__METHOD__."\n");
+                    assert(false, 'Cannot process argument of type '.gettype($value)."\n".__METHOD__."\n");
                 }
             }
             
@@ -1739,9 +1740,7 @@ GREMLIN;
     protected function loadIni($file, $index = null) {
         $fullpath = $this->config->dir_root.'/data/'.$file;
         
-        if (!file_exists($fullpath)) {
-            return null;
-        }
+        assert(file_exists($fullpath), 'Ini file "'.$fullpath.'" doesn\'t exists.');
 
         $iniFile = parse_ini_file($fullpath);
         
@@ -1755,9 +1754,7 @@ GREMLIN;
     protected function loadJson($file) {
         $fullpath = $this->config->dir_root.'/data/'.$file;
 
-        if (!file_exists($fullpath)) {
-            return null;
-        }
+        assert(file_exists($fullpath), 'JSON file "'.$fullpath.'" doesn\'t exists.');
 
         $jsonFile = json_decode(file_get_contents($fullpath));
         
@@ -1817,7 +1814,7 @@ GREMLIN;
     
     private function tolowercase(&$code) {
         if (is_array($code)) {
-            foreach($code as $k => &$v) {
+            foreach($code as &$v) {
                 $v = strtolower($v);
             }
             unset($v);
