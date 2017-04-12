@@ -39,7 +39,7 @@ class Neo4jImport {
 
     private $tokenCounts   = array();
 
-    private $indexList = array();
+    private $indexList = array('Analysis');
 
     private $config = null;
 
