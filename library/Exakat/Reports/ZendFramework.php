@@ -132,6 +132,7 @@ class ZendFramework extends Reports {
           <li><a href="issues.html"><i class="fa fa-flag"></i> <span>Issues</span></a></li>
           <li><a href="appinfo.html"><i class="fa fa-circle-o"></i>ZendFinfo()</a></li>
           <li><a href="compatibilities.html"><i class="fa fa-circle-o"></i>Compatibilities</a></li>
+          <li><a href="unusedComponents.html"><i class="fa fa-circle-o"></i>Unused Components</a></li>
           <li class="treeview">
             <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
@@ -182,6 +183,7 @@ MENU;
 
         $this->generateAppinfo();
         $this->generateCompatibilities();
+        $this->generateUnusedComponents();
 /*
         $this->generateExtensionsBreakdown();
         $this->generateFiles();
@@ -189,8 +191,6 @@ MENU;
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
-        $this->generateBugFixes();
-        $this->generatePhpConfiguration();
         $this->generateExternalServices();
         $this->generateDirectiveList();
         $this->generateAlteredDirectives();
@@ -203,11 +203,7 @@ MENU;
             $this->generateCompatibility($row[0]);
         }
 
-        // Favorites
-        $this->generateFavorites();
-
         // inventories
-        $this->generateErrorMessages();
         $this->generateDynamicCode();
         $this->generateGlobals();
         $this->generateInventories();
@@ -337,366 +333,6 @@ MENU;
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
 
         $this->putBasedPage('analyzers_doc', $finalHTML);
-    }
-
-    private function generateFavorites() {
-        $baseHTML = $this->getBasedPage('favorites_dashboard');
-
-        $analyzers = Analyzer::getThemeAnalyzers('Preferences');
-
-        $donut = array();
-        $html = array();
-
-        foreach($analyzers as $analyzer) {
-            $list = $this->datastore->getHashAnalyzer($analyzer);
-
-            $table = '';
-            $values = array();
-            $object = Analyzer::getInstance($analyzer);
-            $name = $object->getDescription()->getName();
-
-            $total = 0;
-            foreach($list as $key => $value) {
-                $table .= '
-                <div class="clearfix">
-                   <div class="block-cell">'.htmlentities($key, ENT_COMPAT | ENT_HTML401, 'UTF-8').'</div>
-                   <div class="block-cell text-center">'.$value.'</div>
-                 </div>
-';
-                $values[] = '{label:"'.$key.'", value:'.$value.'}';
-                $total += $value;
-            }
-            $nb = 4 - count($list);
-            for($i = 0; $i < $nb; ++$i) {
-                $table .= '
-                <div class="clearfix">
-                   <div class="block-cell">&nbsp;</div>
-                   <div class="block-cell text-center">&nbsp;</div>
-                 </div>
-';
-            }
-            // Ignore if we have no occurrences
-            if ($total === 0) { continue; }
-            $values = implode(', ', $values);
-
-            $html[] = <<<HTML
-            <div class="col-md-3">
-              <div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title">$name</h3>
-                </div>
-                <div class="box-body chart-responsive">
-                  <div id="donut-chart_$name"></div>
-                  <div class="clearfix">
-                    <div class="block-cell bold">Number</div>
-                    <div class="block-cell bold text-center">Count</div>
-                  </div>
-                  $table
-                </div>
-                <!-- /.box-body -->
-              </div>
-            </div>
-HTML
-            ;
-            if (count($html) % 4 === 0) {
-                $html[] = '          </div>
-          <div class="row">';
-            }
-            $donut[] = <<<JAVASCRIPT
-      Morris.Donut({
-        element: 'donut-chart_$name',
-        resize: true,
-        colors: ["#3c8dbc", "#f56954", "#00a65a", "#1424b8"],
-        data: [$values]
-      });
-
-JAVASCRIPT;
-        }
-        $donut = implode("\n", $donut);
-        $donut = <<<JAVASCRIPT
-  <script>
-    $(document).ready(function() {
-      $donut
-      Highcharts.theme = {
-         colors: ["#F56954", "#f7a35c", "#ffea6f", "#D2D6DE"],
-         chart: {
-            backgroundColor: null,
-            style: {
-               fontFamily: "Dosis, sans-serif"
-            }
-         },
-         title: {
-            style: {
-               fontSize: '16px',
-               fontWeight: 'bold',
-               textTransform: 'uppercase'
-            }
-         },
-         tooltip: {
-            borderWidth: 0,
-            backgroundColor: 'rgba(219,219,216,0.8)',
-            shadow: false
-         },
-         legend: {
-            itemStyle: {
-               fontWeight: 'bold',
-               fontSize: '13px'
-            }
-         },
-         xAxis: {
-            gridLineWidth: 1,
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         yAxis: {
-            minorTickInterval: 'auto',
-            title: {
-               style: {
-                  textTransform: 'uppercase'
-               }
-            },
-            labels: {
-               style: {
-                  fontSize: '12px'
-               }
-            }
-         },
-         plotOptions: {
-            candlestick: {
-               lineColor: '#404048'
-            }
-         },
-
-
-         // General
-         background2: '#F0F0EA'
-      };
-
-      // Apply the theme
-      Highcharts.setOptions(Highcharts.theme);
-
-      $('#filename').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAFILES]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Critical',
-              data: [SCRIPTDATACRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATANONE]
-          }]
-      });
-
-      $('#container').highcharts({
-          credits: {
-            enabled: false
-          },
-
-          exporting: {
-            enabled: false
-          },
-
-          chart: {
-              type: 'column'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: [SCRIPTDATAANALYZERLIST]
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: ''
-              },
-              stackLabels: {
-                  enabled: false,
-                  style: {
-                      fontWeight: 'bold',
-                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                  }
-              }
-          },
-          legend: {
-              align: 'right',
-              x: 0,
-              verticalAlign: 'top',
-              y: -10,
-              floating: false,
-              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-              borderColor: '#CCC',
-              borderWidth: 1,
-              shadow: false
-          },
-          tooltip: {
-              headerFormat: '<b>{point.x}</b><br/>',
-              pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-          },
-          plotOptions: {
-              column: {
-                  stacking: 'normal',
-                  dataLabels: {
-                      enabled: false,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                      style: {
-                          textShadow: '0 0 3px black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              name: 'Critical',
-              data: [SCRIPTDATAANALYZERCRITICAL]
-          }, {
-              name: 'Major',
-              data: [SCRIPTDATAANALYZERMAJOR]
-          }, {
-              name: 'Minor',
-              data: [SCRIPTDATAANALYZERMINOR]
-          }, {
-              name: 'None',
-              data: [SCRIPTDATAANALYZERNONE]
-          }]
-      });
-    });
-  </script>
-
-JAVASCRIPT;
-        $html = '<div class="row">'.implode("\n", $html).'</div>';
-
-        $baseHTML = $this->injectBloc($baseHTML, 'FAVORITES', $html);
-        $baseHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $donut);
-        $baseHTML = $this->injectBloc($baseHTML, 'TITLE', 'Favorites\' dashboard');
-        $this->putBasedPage('favorites_dashboard', $baseHTML);
-
-        $baseHTML = $this->getBasedPage('favorites_issues');
-
-        $preferencesJson = implode(', ', $this->getIssuesFaceted('Preferences'));
-        $blocjs = <<<JAVASCRIPT
- <script src="facetedsearch.js"></script>
-
-
-  <script>
-  "use strict";
-
-    $(document).ready(function() {
-
-      var data_items = [$preferencesJson];
-      var item_template =  
-        '<tr>' +
-          '<td width="20%"><%= obj.analyzer %></td>' +
-          '<td width="20%"><%= obj.file + ":" + obj.line %></td>' +
-          '<td width="18%"><%= obj.code %></td>' + 
-          '<td width="2%"><%= obj.code_detail %></td>' +
-          '<td width="7%" align="center"><%= obj.severity %></td>' +
-          '<td width="7%" align="center"><%= obj.complexity %></td>' +
-          '<td width="16%"><%= obj.recipe %></td>' +
-        '</tr>' +
-        '<tr class="fullcode">' +
-          '<td colspan="7" width="100%"><div class="analyzer_help"><%= obj.analyzer_help %></div><pre><code><%= obj.code_plus %></code><div class="text-right"><a target="_BLANK" href="codes.html?file=<%= obj.link_file %>" class="btn btn-info">View File</a></div></pre></td>' +
-        '</tr>';
-      var settings = { 
-        items           : data_items,
-        facets          : { 
-          'analyzer'  : 'Analyzer',
-          'file'      : 'File',
-          'severity'  : 'Severity',
-          'complexity': 'Complexity',
-          'receipt'   : 'Receipt'
-        },
-        facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
-        facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
-        facetListContainer : '<ul class="facetlist multiselect-container dropdown-menu"></ul>',
-        listItemTemplate   : '<li class=facetitem id="<%= id %>" data-analyzer="<%= data_analyzer %>" data-file="<%= data_file %>"><span class="check"></span><%= name %><span class=facetitemcount>(<%= count %>)</span></li>',
-        bottomContainer    : '<div class=bottomline></div>',  
-        resultSelector   : '#results',
-        facetSelector    : '#facets',
-        resultTemplate   : item_template,
-        paginationCount  : 50
-      }   
-      $.facetelize(settings);
-      
-      var analyzerParam = window.location.search.split('analyzer=')[1];
-      var fileParam = window.location.search.split('file=')[1];
-      if(analyzerParam !== undefined) {
-        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam + "']").click();
-      }
-      if(fileParam !== undefined) {
-        $('#file .facetlist').find("[data-file='" + fileParam + "']").click();
-      }
-    });
-  </script>
-
-JAVASCRIPT;
-
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
-        $baseHTML = $this->injectBloc($baseHTML, 'TITLE', 'Favorites\' issues');
-        $this->putBasedPage('favorites_issues', $finalHTML);
     }
 
     public function generateDashboard() {
@@ -1868,76 +1504,7 @@ SQL;
         $this->putBasedPage('ext_lib', $html);
     }
 
-    protected function generateBugFixes() {
-        $table = '';
 
-        $data = new Methods();
-        $bugfixes = $data->getBugFixes();
-
-        $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
-        $reported = array();
-        $info = array();
-
-        $rows = array();
-        while($row = $found->fetchArray(\SQLITE3_ASSOC)) {
-            $rows[strtolower(substr($row['fullcode'], 0, strpos($row['fullcode'], '(')))] = $row;
-        }
-
-        foreach($bugfixes as $bugfix) {
-            if (!empty($bugfix['function'])) {
-                if (!isset($rows[$bugfix['function']])) { continue; }
-
-                $cve = $this->Bugfixes_cve($bugfix['cve']);
-                $table .= '<tr>
-    <td>'.$bugfix['title'].'</td>
-    <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
-    <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
-    <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
-    <td>'.($bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-').'</td>
-    <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
-    <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
-    <td>'.$cve.'</td>
-                </tr>';
-            } elseif (!empty($bugfix['analyzer'])) {
-                $subanalyze = $this->sqlite->querySingle('SELECT count FROM resultsCounts WHERE analyzer = "'.$bugfix['analyzer'].'"');
-
-                $cve = $this->Bugfixes_cve($bugfix['cve']);
-
-                if ($subanalyze == 0) { continue; }
-                $table .= '<tr>
-    <td>'.$bugfix['title'].'</td>
-    <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
-    <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
-    <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
-    <td>'.($bugfix['solvedIn55']  ? $bugfix['solvedIn55']  : '-').'</td>
-    <td>'.($bugfix['solvedInDev']  ? $bugfix['solvedInDev']  : '-').'</td>
-    <td><a href="https://bugs.php.net/bug.php?id='.$bugfix['bugs'].'">#'.$bugfix['bugs'].'</a></td>
-    <td>'.$cve.'</td>
-                </tr>';
-            } else {
-                continue; // ignore. Possibly some mis-configuration
-            }
-        }
-
-        $html = $this->getBasedPage('bugfixes');
-        $html = $this->injectBloc($html, 'BUG_FIXES', $table);
-        $this->putBasedPage('bugfixes', $html);
-    }
-
-    protected function generatePhpConfiguration() {
-        $phpConfiguration = new PhpConfiguration();
-        $report = $phpConfiguration->generate(null, null);
-
-        $id = strpos($report, "\n\n\n");
-        $configline = substr($report, 0, $id);
-        $configline = str_replace(array(' ', "\n") , array("&nbsp;", "<br />\n",), $configline);
-
-        $html = $this->getBasedPage('php_compilation');
-        $html = $this->injectBloc($html, 'COMPILATION', $configline);
-        $html = $this->injectBloc($html, 'TITLE', 'PHP Configurations\' list');
-
-        $this->putBasedPage('php_compilation', $html);
-    }
 
     protected function generateAnalyzerSettings() {
         $settings = '';
@@ -1989,19 +1556,6 @@ SQL;
         $html = $this->getBasedPage('annex_settings');
         $html = $this->injectBloc($html, 'SETTINGS', $settings);
         $this->putBasedPage('annex_settings', $html);
-    }
-
-    private function generateErrorMessages() {
-        $errorMessages = '';
-
-        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
-        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $errorMessages .= '<tr><td>'.$this->PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
-        }
-
-        $html = $this->getBasedPage('error_messages');
-        $html = $this->injectBloc($html, 'ERROR_MESSAGES', $errorMessages);
-        $this->putBasedPage('error_messages', $html);
     }
 
     private function generateExternalServices() {
@@ -2580,6 +2134,41 @@ HTML;
         $php = substr($php, 0, strrpos($php, '|'));
         return $php;
     }
+    
+    private function generateUnusedComponents() {
+        $composerJson = file_get_contents( $this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.json');
+        $composer = json_decode($composerJson);
+        if ($composer === null) {
+            die('No composer in ');
+        }
+        $require = $composer->require;
+
+        $themed = $this->components['Components'];
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'") ORDER BY analyzer');
+        $sources = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $sources[$row['analyzer']] = $row['count'];
+        }
+
+        $table = '<table class="table table-striped">
+        						<tr></tr>
+        						<tr><th>Component</th><th>composer.json</th><th>used</th></tr>';
+        						
+        foreach($sources as $s => $c) {
+            $composerName = preg_replace('#zendf/zf3(.*?)#', 'zendframework/zend-$1', strtolower($s));
+            print $composerName." $s $c\n";
+            $inComposer = $require->{$composerName} ?? 'N/A';
+            $table .= "						<tr><td>$s</td><td>".$inComposer."</td><td>".($c === 0 ? '<i class="fa fa-square-o"></i>' : '<i class="fa fa-check-square-o"></i>')."</td></tr>\n";
+        }
+        $table .= '        					</table>';
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Components');
+        $html = $this->injectBloc($html, 'DESCRIPTION', '<p>List of Zend Framework components and their usage.</p>');
+        $html = $this->injectBloc($html, 'CONTENT', $table);
+        $this->putBasedPage('unusedComponents', $html);
+    }
+
 }
 
 ?>
