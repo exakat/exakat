@@ -3,7 +3,7 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$component = 'zend-db';
+$component = 'zend-json-server';
 
 if (!file_exists('projects/'.$component)){
     die("No such project as $component. Aborting\n");
@@ -29,7 +29,7 @@ function processRelease($component, $version) {
         $version3 = '';
         $version2 = '';
     }
-    $componentShort = ucfirst(str_replace('zend-', '', $component));
+    $componentShort = ucfirst(str_replace('zend-', '', str_replace('-', '-', $component)));
     $className = 'Zf3'.$componentShort.$version2;
 
     $php = <<<PHP
@@ -238,7 +238,7 @@ unset($analyzersSqlite);
 }
 
 function processComponent($component) {
-    $componentShort = ucfirst(str_replace('zend-', '', $component));
+    $componentShort = ucfirst(str_replace('zend-', '', str_replace('-', '-', $component)));
     $className = 'Zf3'.$componentShort;
 
     $php = <<<PHP
@@ -289,6 +289,8 @@ PHP;
     $zend3 = new \Exakat\Data\ZendF3(__DIR__.'/../data/', false);
     
     $versions = $zend3->getVersions($component);
+    print_r($versions);
+    print_r($component);die();
     
     if (count($versions) === 1) {
         $docVersion = 'This covers version '.$versions[0];
