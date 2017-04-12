@@ -40,6 +40,11 @@ class Description {
         if (file_exists($filename)) {
             $this->ini = parse_ini_file($filename) + $this->ini;
         }
+        
+        assert(isset($this->ini['description']), 'Missing description in '.$analyzer);
+        assert(isset($this->ini['name']), 'Missing name in '.$analyzer);
+        assert(isset($this->ini['exakatSince']), 'Missing exakatSince in '.$analyzer);
+        assert(isset($this->ini['clearphp']), 'Missing clearphp in '.$analyzer);
 
         // else is the default values already defined above
     }
