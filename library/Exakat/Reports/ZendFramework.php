@@ -92,6 +92,8 @@ class ZendFramework extends Reports {
                             'Inputfilter'                => 'ZendF/Zf3Inputfilter',
                             'Json'                       => 'ZendF/Zf3Json',
                             'Loader'                     => 'ZendF/Zf3Loader',
+                            'Log'                        => 'ZendF/Zf3Log',
+                            'Mail'                       => 'ZendF/Zf3Mail',
                             'MVC'                        => 'ZendF/Zf3Mvc',
                             'Session'                    => 'ZendF/Zf3Session',
                             'Text'                       => 'ZendF/Zf3Text',
