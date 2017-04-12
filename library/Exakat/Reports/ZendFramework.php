@@ -94,6 +94,8 @@ class ZendFramework extends Reports {
                             'Loader'                     => 'ZendF/Zf3Loader',
                             'Log'                        => 'ZendF/Zf3Log',
                             'Mail'                       => 'ZendF/Zf3Mail',
+                            'Math'                       => 'ZendF/Zf3Math',
+                            'Memory'                     => 'ZendF/Zf3Memory',
                             'MVC'                        => 'ZendF/Zf3Mvc',
                             'Session'                    => 'ZendF/Zf3Session',
                             'Text'                       => 'ZendF/Zf3Text',
