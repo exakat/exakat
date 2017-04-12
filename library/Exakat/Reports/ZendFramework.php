@@ -2165,7 +2165,11 @@ HTML;
         foreach($sources as $s => $c) {
             $composerName = preg_replace('#zendf/zf3(.*?)#', 'zendframework/zend-$1', strtolower($s));
             print $composerName." $s $c\n";
-            $inComposer = $require->{$composerName} ?? 'N/A';
+            if (isset($require->{'zendframework/zendframework'})) {
+                $inComposer = $require->{'zendframework/zendframework'};
+            } else {
+                $inComposer = $require->{$composerName} ?? 'N/A';
+            }
             $table .= "						<tr><td>$s</td><td>".$inComposer."</td><td>".($c === 0 ? '<i class="fa fa-square-o"></i>' : '<i class="fa fa-check-square-o"></i>')."</td></tr>\n";
         }
         $table .= '        					</table>';
