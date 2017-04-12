@@ -282,6 +282,49 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.10.9
+
+  * Displays Text (Php/Prints ; Internal)
+  * Method Is Overwritten (Classes/MethodIsOverwritten)
+  * Thrown Exceptions (ZendF/ThrownExceptions ; Unassigned)
+  * zend-log 2.5.0 Undefined Classes (ZendF/Zf3Log25 ; ZendFramework)
+  * zend-log 2.6.0 Undefined Classes (ZendF/Zf3Log26 ; ZendFramework)
+  * zend-log 2.7.0 Undefined Classes (ZendF/Zf3Log27 ; ZendFramework)
+  * zend-log 2.8.0 Undefined Classes (ZendF/Zf3Log28 ; ZendFramework)
+  * zend-log 2.9.0 Undefined Classes (ZendF/Zf3Log29 ; ZendFramework)
+  * zend-log Usage (ZendF/Zf3Log ; ZendFramework)
+  * zend-mail 2.5.0 Undefined Classes (ZendF/Zf3Mail25 ; ZendFramework)
+  * zend-mail 2.6.0 Undefined Classes (ZendF/Zf3Mail26 ; ZendFramework)
+  * zend-mail 2.7.0 Undefined Classes (ZendF/Zf3Mail27 ; ZendFramework)
+  * zend-mail Usage (ZendF/Zf3Mail ; ZendFramework)
+  * zend-math 2.5.0 Undefined Classes (ZendF/Zf3Math25 ; ZendFramework)
+  * zend-math 2.6.0 Undefined Classes (ZendF/Zf3Math26 ; ZendFramework)
+  * zend-math 2.7.0 Undefined Classes (ZendF/Zf3Math27 ; ZendFramework)
+  * zend-math 3.0.0 Undefined Classes (ZendF/Zf3Math30 ; ZendFramework)
+  * zend-math Usage (ZendF/Zf3Math ; ZendFramework)
+  * zend-memory 2.5.0 Undefined Classes (ZendF/Zf3Memory25 ; ZendFramework)
+  * zend-memory Usage (ZendF/Zf3Memory ; ZendFramework)
+  * zend-mime 2.5.0 Undefined Classes (ZendF/Zf3Mime25 ; ZendFramework)
+  * zend-mime 2.6.0 Undefined Classes (ZendF/Zf3Mime26 ; ZendFramework)
+  * zend-mime Usage (ZendF/Zf3Mime ; ZendFramework)
+  * zend-modulemanager 2.5.0 Undefined Classes (ZendF/Zf3Modulemanager25 ; ZendFramework)
+  * zend-modulemanager 2.6.0 Undefined Classes (ZendF/Zf3Modulemanager26 ; ZendFramework)
+  * zend-modulemanager 2.7.0 Undefined Classes (ZendF/Zf3Modulemanager27 ; ZendFramework)
+  * zend-modulemanager Usage (ZendF/Zf3Modulemanager ; ZendFramework)
+  * zend-navigation 2.5.0 Undefined Classes (ZendF/Zf3Navigation25 ; ZendFramework)
+  * zend-navigation 2.6.0 Undefined Classes (ZendF/Zf3Navigation26 ; ZendFramework)
+  * zend-navigation 2.7.0 Undefined Classes (ZendF/Zf3Navigation27 ; ZendFramework)
+  * zend-navigation 2.8.0 Undefined Classes (ZendF/Zf3Navigation28 ; ZendFramework)
+  * zend-navigation Usage (ZendF/Zf3Navigation ; ZendFramework)
+  * zend-paginator 2.5.0 Undefined Classes (ZendF/Zf3Paginator25 ; ZendFramework)
+  * zend-paginator 2.6.0 Undefined Classes (ZendF/Zf3Paginator26 ; ZendFramework)
+  * zend-paginator 2.7.0 Undefined Classes (ZendF/Zf3Paginator27 ; ZendFramework)
+  * zend-paginator Usage (ZendF/Zf3Paginator ; ZendFramework)
+
+* 0.10.8
+
+  * zend-i18n-resources 2.5.x (ZendF/Zf3I18n_resources25)
+
 * 0.10.7
 
   * Group Use Declaration (Php/GroupUseDeclaration)
@@ -383,6 +426,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * zend-i18n 2.6.0 Undefined Classes (ZendF/Zf3I18n26 ; ZendFramework)
   * zend-i18n 2.7.0 Undefined Classes (ZendF/Zf3I18n27 ; ZendFramework)
   * zend-i18n Usage (ZendF/Zf3I18n ; ZendFramework)
+  * zend-i18n resources Usage (ZendF/Zf3I18n_resources ; ZendFramework)
   * zend-i18n-resources 2.5.0 Undefined Classes (ZendF/Zf3I18n-resources25 ; )
   * zend-i18n-resources Usage (ZendF/Zf3I18n-resources ; )
   * zend-inputfilter 2.5.0 Undefined Classes (ZendF/Zf3Inputfilter25 ; ZendFramework)
@@ -630,7 +674,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Abstract Static Methods (Classes/AbstractStatic ; Analyze, Codacy, Simple)
   * Access Protected Structures (Classes/AccessProtected ; Analyze, Codacy, Simple)
   * Accessing Private (Classes/AccessPrivate ; Analyze, Codacy, Simple)
-  * Action Should Bin In Controller (ZendF/ActionInController ; ZendFramework)
+  * Action Should Be In Controller (ZendF/ActionInController ; ZendFramework)
   * Adding Zero (Structures/AddZero ; Analyze, OneFile, ClearPHP, Codacy, Simple)
   * Aliases (Namespaces/Alias ; Appinfo)
   * Aliases Usage (Functions/AliasesUsage ; Analyze, OneFile, ClearPHP, Codacy, Simple)
@@ -768,7 +812,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Error Messages (Structures/ErrorMessages ; Appinfo)
   * Eval() Usage (Structures/EvalUsage ; Analyze, Appinfo, Performances, OneFile, ClearPHP, Codacy, Simple)
   * Exception Order (Exceptions/AlreadyCaught ; Dead code)
-  * Exit() Usage (Structures/ExitUsage ; Analyze, Appinfo, OneFile, ClearPHP, Codacy)
+  * Exit() Usage (Structures/ExitUsage ; Analyze, Appinfo, OneFile, ClearPHP, ZendFramework, Codacy)
   * Exit-like Methods (Functions/KillsApp ; Internal)
   * Exponent Usage (Php/ExponentUsage ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * Ext/geoip (Extensions/Extgeoip ; Appinfo)
@@ -1302,6 +1346,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/v8js (Extensions/Extv8js ; Appinfo)
   * ext/wddx (Extensions/Extwddx ; Appinfo)
   * ext/wikidiff2 (Extensions/Extwikidiff2 ; Appinfo)
+  * ext/wincache (Extensions/Extwincache ; Appinfo, Portability)
   * ext/xcache (Extensions/Extxcache ; Appinfo)
   * ext/xdebug (Extensions/Extxdebug ; Appinfo)
   * ext/xdiff (Extensions/Extxdiff ; Appinfo)
@@ -1512,6 +1557,14 @@ List of external links mentionned in this documentation.
 * `zend-inputfilter <https://github.com/zendframework/zend-inputfilter>`_
 * `zend-json <https://github.com/zendframework/zend-json>`_
 * `zend-loader <https://github.com/zendframework/zend-loader>`_
+* `zend-log <https://github.com/zendframework/zend-log>`_
+* `zend-mail <https://github.com/zendframework/zend-mail>`_
+* `zend-math <https://github.com/zendframework/zend-math>`_
+* `zend-memory <https://github.com/zendframework/zend-memory>`_
+* `zend-mime <https://github.com/zendframework/zend-mime>`_
+* `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_
+* `zend-navigation <https://github.com/zendframework/zend-navigation>`_
+* `zend-paginator <https://github.com/zendframework/zend-paginator>`_
 * `zend-session <https://github.com/zendframework/zend-session>`_
 * `zend-test <https://github.com/zendframework/zend-test>`_
 * `zend-text <https://github.com/zendframework/zend-text>`_

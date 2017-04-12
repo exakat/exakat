@@ -131,6 +131,7 @@ Glossary
       + :ref:`Switch Without Default <switch-without-default>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Useless Switch <useless-switch>`
+      + :ref:`ZF3 Usage Of Deprecated <zf3-usage-of-deprecated>`
 
 
 + `C`
@@ -148,6 +149,7 @@ Glossary
       + :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
       + :ref:`Hidden Use Expression <hidden-use-expression>`
       + :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+      + :ref:`Should Use Local Class <should-use-local-class>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
     + `constant()`
@@ -362,10 +364,18 @@ Glossary
       + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Avoid get_class() <avoid-get\_class()>`
       + :ref:`Should Make Alias <should-make-alias>`
+      + :ref:`Undefined Class 2.0 <undefined-class-2.0>`
+      + :ref:`Undefined Class 2.1 <undefined-class-2.1>`
+      + :ref:`Undefined Class 2.2 <undefined-class-2.2>`
+      + :ref:`Undefined Class 2.3 <undefined-class-2.3>`
+      + :ref:`Undefined Class 2.4 <undefined-class-2.4>`
+      + :ref:`Undefined Class 2.5 <undefined-class-2.5>`
+      + :ref:`Undefined Class 3.0 <undefined-class-3.0>`
       + :ref:`Undefined Interfaces <undefined-interfaces>`
       + :ref:`Unresolved Instanceof <unresolved-instanceof>`
       + :ref:`Use Instanceof <use-instanceof>`
       + :ref:`Useless Interfaces <useless-interfaces>`
+      + :ref:`ZendF/ZendTypehinting <zendf/zendtypehinting>`
       + :ref:`self, parent, static Outside Class <self,-parent,-static-outside-class>`
 
     + `intval()`
@@ -498,6 +508,10 @@ Glossary
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
       + :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
+
+    + `print()`
+
+      + :ref:`No Echo In Route Callable <no-echo-in-route-callable>`
 
     + `print_r()`
 

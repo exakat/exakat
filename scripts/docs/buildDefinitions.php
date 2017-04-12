@@ -134,20 +134,23 @@ foreach($files as $file) {
     file_put_contents(str_replace('/src/','/',$file),$rst);
 }
 
-$recipes = array("Analyze",
-                 "CompatibilityPHP72",
-                 "CompatibilityPHP71",
-                 "CompatibilityPHP70",
-                 "CompatibilityPHP56",
-                 "CompatibilityPHP55",
-                 "CompatibilityPHP54",
-                 "CompatibilityPHP53",
-                 "Analyze",
-                 "Security",
-                 "Performances",
-                 "Dead code",
-                 "Coding Conventions",
-                 "Wordpress",
+$recipes = array('Analyze',
+                 'CompatibilityPHP72',
+                 'CompatibilityPHP71',
+                 'CompatibilityPHP70',
+                 'CompatibilityPHP56',
+                 'CompatibilityPHP55',
+                 'CompatibilityPHP54',
+                 'CompatibilityPHP53',
+                 'Analyze',
+                 'Security',
+                 'Performances',
+                 'Dead code',
+                 'Coding Conventions',
+                 'Wordpress',
+                 'Slim',
+                 'ZendFramework',
+                 'Cakephp',
                  );
 
 $text = '';
