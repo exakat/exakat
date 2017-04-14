@@ -295,7 +295,7 @@ class Ambassador extends Reports {
         $analyzers = Analyzer::getThemeAnalyzers('Preferences');
 
         $donut = array();
-        $html = array();
+        $html = array(' ');
 
         foreach($analyzers as $analyzer) {
             $list = $this->datastore->getHashAnalyzer($analyzer);
@@ -348,7 +348,7 @@ class Ambassador extends Reports {
             </div>
 HTML
             ;
-            if (count($html) % 4 === 0) {
+            if (count($html) % 5 === 0) {
                 $html[] = '          </div>
           <div class="row">';
             }
