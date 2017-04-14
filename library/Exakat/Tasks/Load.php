@@ -746,7 +746,7 @@ class Load extends Tasks {
         
 //        print "  $method in\n";
         $id = $this->$method();
-//        print "  $method out ($id)\n";
+//        print "  $method out \n";
         
         return $id;
     }
@@ -1095,12 +1095,12 @@ class Load extends Tasks {
         return $function;
     }
 
-    private function processOneNsname() {
+    private function processOneNsname($getFullnspath = self::WITH_FULLNSPATH) {
         $rank = -1;
         $fullcode = array();
 
         if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_NS_SEPARATOR) {
-            $subname = $this->processNextAsIdentifier();
+            $subname = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
             $this->pushExpression($subname);
 
             $hasPrevious = true;
@@ -1145,6 +1145,13 @@ class Load extends Tasks {
             $extends->aliased    = $aliased;
         } else {
             $extends = $this->popExpression();
+
+            if ($getFullnspath === self::WITH_FULLNSPATH) {
+                list($fullnspath, $aliased) = $this->getFullnspath($extends, 'class');
+                $this->addCall('class', $extends->fullnspath, $extends);
+                $extends->fullnspath = $fullnspath;
+                $extends->aliased    = $aliased;
+            }
         }
 
         return $extends;
@@ -1213,9 +1220,6 @@ class Load extends Tasks {
                 $extends->rank = $rank;
                 $this->addLink($interface, $extends, 'EXTENDS');
                 $fullcode[] = $extends->fullcode;
-
-                list($fullnspath, $aliased) = $this->getFullnspath($extends);
-                $this->addCall('class', $fullnspath, $extends);
             } while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA);
         }
 
@@ -1255,9 +1259,11 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING) {
             $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
+            
             list($fullnspath, $aliased) = $this->getFullnspath($name, 'class');
             $class->fullnspath = $fullnspath;
             $class->aliased    = $aliased;
+
             $this->addDefinition('class', $class->fullnspath, $class);
         } else {
             $name = $this->addAtomVoid();
@@ -1276,14 +1282,11 @@ class Load extends Tasks {
             $extendsKeyword = $this->tokens[$this->id + 1][1];
             ++$this->id; // Skip extends
 
-            $extends = $this->processOneNsname();
+            $extends = $this->processOneNsname(self::WITH_FULLNSPATH);
 
             $this->addLink($class, $extends, 'EXTENDS');
-            list($fullnspath, $aliased) = $this->getFullnspath($extends);
-            if ($aliased === self::ALIASED) {
-                $this->addLink($this->uses['class'][strtolower($extends->code)], $extends, 'DEFINITION');
-            }
-            $this->addCall('class', $fullnspath, $extends);
+            $this->addCall('class', $extends->fullnspath, $extends);
+
             $this->currentParentClassTrait[] = $extends;
             $isExtended = true;
         }
@@ -1299,9 +1302,6 @@ class Load extends Tasks {
                 $fullcodeImplements[] = $implements->fullcode;
 
                 list($fullnspath, $aliased) = $this->getFullnspath($implements);
-                if ($aliased === self::ALIASED) {
-                    $this->addLink($this->uses['class'][strtolower($implements->code)], $implements, 'DEFINITION');
-                }
                 $this->addCall('class', $fullnspath, $implements);
             } while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_COMMA);
         }
@@ -1606,9 +1606,6 @@ class Load extends Tasks {
     private function processTypehint() {
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_ARRAY, \Exakat\Tasks\T_CALLABLE, \Exakat\Tasks\T_STATIC))) {
             $nsname = $this->processNextAsIdentifier();
-            list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
-            $nsname->fullnspath = $fullnspath;
-            $nsname->aliased    = $aliased;
 
             return $nsname;
         } elseif (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR, \Exakat\Tasks\T_STRING, \Exakat\Tasks\T_NAMESPACE))) {
@@ -1619,12 +1616,6 @@ class Load extends Tasks {
                 list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
                 $nsname->fullnspath = $fullnspath;
                 $nsname->aliased    = $aliased;
-
-                $this->addCall('class', $fullnspath, $nsname);
-
-                if ($nsname->aliased === self::ALIASED) {
-                    $this->addLink($this->uses['class'][strtolower($nsname->code)], $nsname, 'DEFINITION');
-                }
             }
             return $nsname;
         } else {
@@ -2002,10 +1993,6 @@ class Load extends Tasks {
             $string->aliased    = $aliased;
 
             $this->addCall('class', $fullnspath, $string);
-
-            if ($aliased === self::ALIASED) {
-                $this->addLink($this->uses['class'][strtolower($string->code)], $string, 'DEFINITION');
-            }
         } 
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -3114,7 +3101,7 @@ class Load extends Tasks {
         --$this->id;
         do {
             ++$this->id;
-            $namespace = $this->processOneNsname();
+            $namespace = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
             // Default case : use A\B
             $alias = $namespace;
             $origin = $namespace;
@@ -3240,15 +3227,7 @@ class Load extends Tasks {
                     $namespace->origin     = $fullnspath;
                     $this->addCall('class', $fullnspath, $namespace);
                 } else {
-                    list($fullnspath, $aliased) = $this->getFullnspath($namespace);
-                    $namespace->fullnspath = $fullnspath;
-                    $namespace->aliased = $aliased;
-                    
-                    $this->addCall('class', $fullnspath, $namespace);
-                    if ($aliased === self::ALIASED) {
-                        $this->addLink($this->uses['class'][strtolower($namespace->code)], $namespace, 'DEFINITION');
-                    }
-
+                    list($fullnspath, $aliased) = $this->getFullnspath($namespace, $useType);
                 }
 
                 $fullcode[] = $namespace->fullcode;
@@ -3412,11 +3391,6 @@ class Load extends Tasks {
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CONSTANT_ENCAPSED_STRING) {
             $literal->delimiter   = $literal->code[0];
             if ($literal->delimiter === 'b' || $literal->delimiter === 'B') {
-                $literal->binaryString = $literal->delimiter;
-                $literal->delimiter    = $literal->code[1];
-                $literal->noDelimiter  = substr($literal->code, 2, -1);
-            } elseif ($literal->delimiter === '(' || $literal->delimiter === 'B') {
-                die ('(binary)');
                 $literal->binaryString = $literal->delimiter;
                 $literal->delimiter    = $literal->code[1];
                 $literal->noDelimiter  = substr($literal->code, 2, -1);
@@ -4542,8 +4516,6 @@ class Load extends Tasks {
 
             // This is a normal identifier
             } elseif ($type === 'class' && isset($this->uses['class'][strtolower($name->code)])) {
-
-                $this->addCall('class', $this->uses['class'][strtolower($name->code)]->fullnspath, $name);
                 return array($this->uses['class'][strtolower($name->code)]->fullnspath, self::ALIASED);
 
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($name->code)])) {
@@ -4568,7 +4540,10 @@ class Load extends Tasks {
                 return array($this->namespace.strtolower($name->fullcode), self::NOT_ALIASED);
             }
         } elseif ($name->atom === 'String' && isset($name->noDelimiter)) {
-            $prefix =  '\\'.stripslashes(strtolower($name->noDelimiter));
+            $prefix =  str_replace('\\\\', '\\', strtolower($name->noDelimiter));
+            if ($prefix[0] !== '\\') {
+                $prefix = '\\'.$prefix;
+            }
 
             // define doesn't care about use...
             return array($prefix, self::NOT_ALIASED);
@@ -4667,7 +4642,7 @@ class Load extends Tasks {
         if (!isset($this->calls[$type][$fullnspath]['calls'][$atom])) {
             $this->calls[$type][$fullnspath]['calls'][$atom] = array();
         }
-
+        
         $this->calls[$type][$fullnspath]['calls'][$atom][] = $call->id;
     }
 
