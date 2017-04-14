@@ -141,7 +141,7 @@ class Phpexec {
             }
 
             if (!file_exists($this->phpexec)) {
-                throw new NoPhpBinary('PHP binary for version '.$phpversion.' is not valid : "'.$this->phpexec.'". Please, check config/exkat.ini');
+                throw new NoPhpBinary('PHP binary for version '.$phpversion.' is not valid : "'.$this->phpexec.'". Please, check config/exakat.ini');
             }
 
             if (!is_executable($this->phpexec)) {
