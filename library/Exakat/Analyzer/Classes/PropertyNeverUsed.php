@@ -40,8 +40,7 @@ class PropertyNeverUsed extends Analyzer {
              ->outIs('PPP')
              ->analyzerIsNot('Classes/PropertyUsedInternally')
              ->analyzerIsNot('Classes/PropertyUsedAbove')
-             ->analyzerIsNot('Classes/PropertyUsedBelow')
-             ;
+             ->analyzerIsNot('Classes/PropertyUsedBelow');
         $this->prepareQuery();
     }
 }
