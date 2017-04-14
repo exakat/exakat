@@ -401,16 +401,17 @@ class Files extends Tasks {
             }
             $file = substr($file, 1); // drop the initial /
             $ext = pathinfo($file, PATHINFO_EXTENSION);
-            if (!empty($includeDirsRegex) && preg_match($includeDirsRegex, $file)) {
-                // Matching the 'include dir' pattern
-                // it's OK.
-                continue;
-            } 
-            
             if (!in_array($ext, $exts)) {
                 // selection of extensions
                 unset($files[$id]);
                 $ignoredFiles[$file] = "Ignored extension ($ext)";
+                continue;
+            }
+
+            if (!empty($includeDirsRegex) && preg_match($includeDirsRegex, $file)) {
+                // Matching the 'include dir' pattern
+                // it's OK.
+                continue;
             } elseif (!empty($ignoreDirsRegex) && preg_match($ignoreDirsRegex, $file)) {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
