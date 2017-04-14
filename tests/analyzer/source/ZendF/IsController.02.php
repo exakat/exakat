@@ -11,5 +11,5 @@ class foo3 extends foo {}
 class foo4 extends foo3 {}
 
 // Not a controller...
-class bar Zend\Mvc\Controller\AbstractActionController {}
+class bar extends NotZend\Mvc\Controller\AbstractActionController {}
 ?>
