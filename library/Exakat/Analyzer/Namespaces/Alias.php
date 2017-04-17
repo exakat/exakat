@@ -29,8 +29,9 @@ class Alias extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Use')
+             ->hasNoClassTrait()
              ->outIs('USE')
-             ->outIs('AS');
+             ->outIs('ALIAS');
         $this->prepareQuery();
     }
 }

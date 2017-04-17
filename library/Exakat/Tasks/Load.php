@@ -2000,7 +2000,13 @@ class Load extends Tasks {
             $string->aliased    = $aliased;
 
             $this->addCall('class', $fullnspath, $string);
-        } 
+        } else {
+            list($fullnspath, $aliased) = $this->getFullnspath($string, 'const');
+            $string->fullnspath = $fullnspath;
+            $string->aliased    = $aliased;
+
+            $this->addCall('const', $fullnspath, $string);
+        }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $string->constant = self::CONSTANT_EXPRESSION;
