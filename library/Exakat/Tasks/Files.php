@@ -60,7 +60,7 @@ class Files extends Tasks {
 
         $ignoredFiles = array();
         $files = array();
-        self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles);
+        self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles, $this->config);
         if (empty($files)) {
             throw new NoFileToProcess($this->config->project);
         }
@@ -331,8 +331,7 @@ class Files extends Tasks {
         $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
     }
     
-    public static function findFiles($path, &$files, &$ignoredFiles) {
-        $config = Config::factory();
+    public static function findFiles($path, &$files, &$ignoredFiles, $config) {
         $ignore_dirs = $config->ignore_dirs;
         $dir = $config->project;
 

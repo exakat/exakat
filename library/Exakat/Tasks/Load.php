@@ -579,7 +579,7 @@ class Load extends Tasks {
         if (substr($dir, -1) === '/') {
             $dir = substr($dir, 0, -1);
         }
-        Files::findFiles($dir, $files, $ignoredFiles);
+        Files::findFiles($dir, $files, $ignoredFiles, $this->config);
 
         $this->reset();
 
