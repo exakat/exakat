@@ -29,10 +29,10 @@ class CodeSniffer extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        if ($this->config->thema !== NULL) {
+        if ($this->config->thema !== null) {
             $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
             $list = '"'.join('", "', $list).'"';
-        } elseif ($this->config->program !== NULL) {
+        } elseif ($this->config->program !== null) {
             print "analyze\n";
             $list = '"'.$this->config->program.'"';
         } else {

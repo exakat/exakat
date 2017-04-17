@@ -78,7 +78,7 @@ class Xml extends Reports {
      * @return boolean
      */
     public function generateFileReport($report) {
-        $out = new XMLWriter;
+        $out = new XMLWriter();
         $out->openMemory();
         $out->setIndent(true);
 

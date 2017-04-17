@@ -132,3 +132,5 @@ class Faceted2 extends FacetedJson {
         }
     }
 }
+
+?>

@@ -38,11 +38,10 @@ class Cypher extends Graph {
 
         static $neo4j_host, $neo4j_auth;
         if (!isset($neo4j_host)) {  
-            $config = \Exakat\Config::factory();
-            $neo4j_host = $config->neo4j_host.':'.$config->neo4j_port;
+            $neo4j_host = $this->config->neo4j_host.':'.$this->config->neo4j_port;
         
-            if ($config->neo4j_login !== '') {
-                $neo4j_auth   = base64_encode($config->neo4j_login.':'.$config->neo4j_password);
+            if ($this->config->neo4j_login !== '') {
+                $neo4j_auth   = base64_encode($this->config->neo4j_login.':'.$this->config->neo4j_password);
             } else {
                 $neo4j_auth   = '';
             }

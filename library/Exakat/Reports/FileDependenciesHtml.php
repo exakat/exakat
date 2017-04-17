@@ -38,7 +38,7 @@ class FileDependenciesHtml extends Reports {
 
         $res = $this->sqlite->query('SELECT * FROM filesDependencies');
 
-        $json = new stdClass;
+        $json = new stdClass();
         $json->edges = array();
         $json->nodes = array();
         $in = array();
