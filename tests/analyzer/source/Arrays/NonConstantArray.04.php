@@ -1,6 +1,6 @@
 <?php
 
-define('\e\f', 32);
+define('e\f', 32);
 
 $a[e\f] = $c['e'];
 

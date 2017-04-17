@@ -3320,14 +3320,14 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET ||
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             // Get the fullnspath in case this is a constant
-            if (in_array($nsname->atom, array('Nsname', 'Identifier'))) {
-                list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'const');
+//            if (in_array($nsname->atom, array('Nsname', 'Identifier'))) {
+//                list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'const');
 
-                $nsname->fullnspath = $fullnspath;
-                $nsname->aliased    = $aliased;
+//                $nsname->fullnspath = $fullnspath;
+//                $nsname->aliased    = $aliased;
 
-                $this->addCall('const', $fullnspath, $nsname);
-            }
+//                $this->addCall('const', $fullnspath, $nsname);
+//            }
             return $this->processBracket();
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON || 
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR ||
@@ -4560,7 +4560,7 @@ class Load extends Tasks {
 
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($name->code)])) {
             
-                $this->addLink($name, $this->uses['const'][strtolower($name->code)], 'DEFINITION');
+                $this->addLink($this->uses['const'][strtolower($name->code)], $name, 'DEFINITION2');
                 return array($this->uses['const'][strtolower($name->code)]->fullnspath, self::ALIASED);
 
             } elseif ($type === 'function' && isset($this->uses['function'][strtolower($name->code)])) {
