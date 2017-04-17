@@ -1800,7 +1800,7 @@ class Load extends Tasks {
         --$this->id; // back one step for the init in the next loop
 
         foreach($this->optionsTokens as $name => $optionId) {
-            $this->addLink($constId, $optionId, strtoupper($name));
+            $this->addLink($const, $optionId, strtoupper($name));
             $fullcode[] = $this->atoms[$optionId]['fullcode'];
         }
         $this->optionsTokens = array();
@@ -3167,7 +3167,7 @@ class Load extends Tasks {
                 $fullcode[] = $namespace->fullcode.' '.$block->fullcode;
 
                 // Several namespaces ? This has to be recalculated inside the block!!
-                $fullnspath = $this->makeFullnspath($namespace);
+                $namespace->fullnspath = $this->makeFullnspath($namespace);
 
                 $this->addLink($use, $namespace, 'USE');
             } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
@@ -3254,22 +3254,25 @@ class Load extends Tasks {
                     if (isset($this->uses['class'][$prefix])) {
                         $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
                     }
-                } else {
-                    if (isset($this->uses['class'][$prefix])) {
-                        $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
-                    }
-                }
 
-                $fullcode[] = $namespace->fullcode;
+                    $namespace->fullnspath = $fullnspath;
 
-                $namespace->fullnspath = $fullnspath;
-                if (!$this->isContext(self::CONTEXT_CLASS) &&
-                    !$this->isContext(self::CONTEXT_TRAIT) ) {
                     $alias = $this->addNamespaceUse($alias, $alias, $useType, $namespace);
 
                     $namespace->alias = $alias;
                     $origin->alias = $alias;
+ 
+                } else {
+                    if (isset($this->uses['class'][$prefix])) {
+                        $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
+                        $namespace->fullnspath = $this->uses['class'][$prefix]->fullnspath;
+                    } else {
+                        $fullnspath = $this->makeFullnspath($namespace);
+                        $namespace->fullnspath      = $fullnspath;
+                    }
                 }
+
+                $fullcode[] = $namespace->fullcode;
             }
             // No Else. Default will be dealt with by while() condition
 
@@ -3340,7 +3343,7 @@ class Load extends Tasks {
             $nsname->aliased    = $aliased;
 
             if ($type === 'const') {
-                $this->addCall($type, $fullnspath, $nsname);
+                $this->addCall('const', $fullnspath, $nsname);
                 $nsname->constant = self::CONSTANT_EXPRESSION;
             }
 
@@ -4557,12 +4560,12 @@ class Load extends Tasks {
 
             } elseif ($type === 'const' && isset($this->uses['const'][strtolower($name->code)])) {
             
-                $this->addLink($this->uses['const'][strtolower($name->code)], 'DEFINITION');
-                return array($name, $this->uses['const'][strtolower($name->code)]->fullnspath, self::ALIASED);
+                $this->addLink($name, $this->uses['const'][strtolower($name->code)], 'DEFINITION');
+                return array($this->uses['const'][strtolower($name->code)]->fullnspath, self::ALIASED);
 
             } elseif ($type === 'function' && isset($this->uses['function'][strtolower($name->code)])) {
 
-                $this->addLink($name, $this->uses['function'][strtolower($name->code)], 'DEFINITION');
+                $this->addLink($this->uses['function'][strtolower($name->code)], $name, 'DEFINITION');
                 return array($this->uses['function'][strtolower($name->code)]->fullnspath, self::ALIASED);
 
             } elseif ($type === 'function' && !empty($this->calls['function']['\\'.strtolower($name->code)]['definitions'])) {
@@ -4574,9 +4577,7 @@ class Load extends Tasks {
             }
         } elseif ($name->atom === 'String' && isset($name->noDelimiter)) {
             $prefix =  str_replace('\\\\', '\\', strtolower($name->noDelimiter));
-            if ($prefix[0] !== '\\') {
-                $prefix = '\\'.$prefix;
-            }
+            $prefix = '\\'.$prefix;
 
             // define doesn't care about use...
             return array($prefix, self::NOT_ALIASED);
@@ -4663,6 +4664,7 @@ class Load extends Tasks {
         }
         
         if (!is_string($fullnspath)) {
+            var_dump($fullnspath);
             print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
         }
         assert(is_string($fullnspath));
