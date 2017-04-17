@@ -3,7 +3,7 @@
 namespace A;
 
     define('B', 1);
-    define('\A\C', 1);
+    define('A\C', 1);
 
     class E {
         const F = 3;

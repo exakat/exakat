@@ -32,7 +32,7 @@ class IsPhpConstant extends Analyzer {
         
         // Namespaced constant (\PATHINFO_BASENAME)
         $this->atomIs(array('Identifier', 'Nsname'))
-             ->hasNoIn(array('DEFINITION', 'NEW', 'USE', 'NAME', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'TYPEHINT', 'FUNCTION', 'GROUPUSE', 'SUBNAME', 'METHOD', 'PROPERTY'))
+             ->hasNoIn(array('DEFINITION', 'NEW', 'USE', 'NAME', 'EXTENDS', 'IMPLEMENTS', 'CLASS', 'CONST', 'TYPEHINT', 'FUNCTION', 'GROUPUSE', 'SUBNAME', 'METHOD', 'PROPERTY', 'ALIAS'))
              ->fullnspathIs($constantsFNP);
         $this->prepareQuery();
 
@@ -41,9 +41,7 @@ class IsPhpConstant extends Analyzer {
              ->hasOut('CONST')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->outIs('NAME')
-             ->fullnspathIs($constantsFNP)
-             ->inIs('NAME');
+             ->fullnspathIs($constantsFNP);
         $this->prepareQuery();
 
         $this->atomIs(array('Identifier', 'Nsname'))
