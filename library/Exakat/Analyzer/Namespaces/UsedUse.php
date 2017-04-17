@@ -31,7 +31,7 @@ class UsedUse extends Analyzer {
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->hasOut('DEFINITION');
+             ->hasIn('DEFINITION');
         $this->prepareQuery();
     }
 }
