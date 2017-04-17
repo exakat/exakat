@@ -3272,9 +3272,13 @@ class Load extends Tasks {
                     if (isset($this->uses['class'][$prefix])) {
                         $this->addLink($namespace, $this->uses['class'][$prefix], 'DEFINITION');
                         $namespace->fullnspath = $this->uses['class'][$prefix]->fullnspath;
+
+                        $this->addCall('class', $namespace->fullnspath, $namespace);
                     } else {
-                        $fullnspath = $this->makeFullnspath($namespace);
+                        list($fullnspath, $aliased) = $this->getFullnspath($namespace, 'class');
+
                         $namespace->fullnspath      = $fullnspath;
+                        $this->addCall('class', $namespace->fullnspath, $namespace);
                     }
                 }
 
