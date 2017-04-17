@@ -8,7 +8,7 @@ $expected_not = array('Cake\Routing\RequestActionTrait2',
                       'B',
                       'C',
                       'D',
-                      'E'
+                      'E',
                       'F',
                       'G');
 

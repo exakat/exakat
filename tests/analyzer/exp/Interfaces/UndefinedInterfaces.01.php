@@ -3,12 +3,15 @@
 $expected     = array('undefinedInterfacet',
                       '\undefinedInterfacet',
                       '\undefinedInterfacei',
-                      'undefinedInterfacei',);
+                      'undefinedInterfacei',
+                      );
 
 
 $expected_not = array('definedInterfacet',
                       '\definedInterfacet',
                       '\definedInterfacei',
-                      'definedInterfacei',);
+                      'definedInterfacei',
+                      'MyInterfacet', 
+                      '\MyInterfacet');
 
 ?>
