@@ -478,6 +478,7 @@ INI;
                 $stats['timezone']        = $php->getTimezone();
                 $stats['tokenizer']       = $php->getTokenizer();
                 $stats['memory_limit']    = $php->getMemory_limit();
+                $stats['assertions']      = $php->getAssertions();
             }
         }
 

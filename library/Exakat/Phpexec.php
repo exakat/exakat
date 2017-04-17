@@ -308,6 +308,10 @@ class Phpexec {
     public function getMemory_limit() {
         return shell_exec($this->phpexec.' -r "echo ini_get(\'memory_limit\');" 2>&1');
     }
+
+    public function getAssertions() {
+        return shell_exec($this->phpexec.' -r "echo ini_get(\'zend.assertions\');" 2>&1');
+    }
 }
 
 ?>
