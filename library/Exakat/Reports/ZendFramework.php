@@ -141,6 +141,8 @@ class ZendFramework extends Reports {
           <li><a href="appinfo.html"><i class="fa fa-circle-o"></i>ZendFinfo()</a></li>
           <li><a href="compatibilities.html"><i class="fa fa-circle-o"></i>Compatibilities</a></li>
           <li><a href="unusedComponents.html"><i class="fa fa-circle-o"></i>Unused Components</a></li>
+          <li><a href="error_messages.html"><i class="fa fa-circle-o"></i>Error Messages</a></li>
+          <li><a href="thrown_exceptions.html"><i class="fa fa-circle-o"></i>Thrown Exceptions</a></li>
           <li class="treeview">
             <a href="#"><i class="fa fa-sticky-note-o"></i> <span>Annexes</span><i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
@@ -188,6 +190,9 @@ MENU;
 
         $this->generateDashboard();
         $this->generateIssues();
+
+        $this->generateErrorMessages();
+        $this->generateExceptionInventory();
 
         $this->generateAppinfo();
         $this->generateCompatibilities();
@@ -2164,7 +2169,8 @@ HTML;
         						
         foreach($sources as $s => $c) {
             $composerName = preg_replace('#zendf/zf3(.*?)#', 'zendframework/zend-$1', strtolower($s));
-            print $composerName." $s $c\n";
+            
+            // if 
             if (isset($require->{'zendframework/zendframework'})) {
                 $inComposer = $require->{'zendframework/zendframework'};
             } else {
@@ -2179,6 +2185,37 @@ HTML;
         $html = $this->injectBloc($html, 'DESCRIPTION', '<p>List of Zend Framework components and their usage.</p>');
         $html = $this->injectBloc($html, 'CONTENT', $table);
         $this->putBasedPage('unusedComponents', $html);
+    }
+
+    private function generateErrorMessages() {
+        $errorMessages = '';
+
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/ErrorMessages"');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $errorMessages .= '<tr><td>'.$this->PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        }
+
+        $html = $this->getBasedPage('error_messages');
+        $html = $this->injectBloc($html, 'ERROR_MESSAGES', $errorMessages);
+        $this->putBasedPage('error_messages', $html);
+    }
+
+    private function generateExceptionInventory() {
+        $exceptionInventory = '';
+
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="ZendF/ThrownExceptions"');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $exceptionInventory .= '<tr><td>'.$this->PHPsyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+        }
+
+        $table = '<table class="table table-striped">
+        						<tr></tr>
+        						<tr><th>Exception</th><th>File</th><th>line</th></tr>'
+        						.$exceptionInventory.
+        						'        					</table>';
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'CONTENT', $table);
+        $this->putBasedPage('thrown_exceptions', $html);
     }
 
 }
