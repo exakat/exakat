@@ -103,12 +103,6 @@ function copyDir($src, $dst) {
     return $total;
 }
 
-function array_add(&$array1, $array2) {
-    foreach($array1 as $k => &$v) {
-        $v += $array2[$k];
-    }
-}
-
 function rglob($pattern, $flags = 0) {
     $files = glob($pattern.'/*', $flags);
     $dirs  = glob($pattern.'/*', GLOB_ONLYDIR | GLOB_NOSORT);

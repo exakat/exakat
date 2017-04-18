@@ -100,3 +100,5 @@ fwrite($patternsFile, json_encode($patterns, JSON_UNESCAPED_SLASHES | JSON_PRETT
 fclose($patternsFile);
 
 print "End\n";
+
+?>
