@@ -1,4 +1,4 @@
-Version 0.10.9 (Single Horned Rhinoceros King, Coming up)
+Version 0.11.0 (Immortal Ruyi, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,26 @@ Version 0.10.9 (Single Horned Rhinoceros King, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.10.9 (Single Horned Rhinoceros King, 2017-04-17)
++ Architecture
+    + File extensions are processed before include/ignore dirs.
+    + Reduced number of DEFINITION links, leading to less processing.
+    + Added several assertion() in the code
+    + Added assertions report in doctor (better leave them out with phar)
++ Report
+    + Added support for PHP 7.0.18 and 7.1.4
+    + Ambassador : better layout for favorites
+    + Zend Framework : 20 new components supported
+    + Zend Framework : now supports zendframework/zendframework too
+    + Zend Framework : report unused components 
++ Analyzer
+    + New analyzer : report nested Use expressions
+    + New analyzer : report repeated regex (to be federated)
+    + New analyzer : report code that output directly to std
+    + Updated analyzer : Should use this now omits overwritten methods
+    + New analyzer : report overwritten methods
+    + Upgraded analysis : 2123 / 2123 test pass (100% pass)
 
 Version 0.10.8 (King of Spiritual Touch, 2017-04-10)
 + Report
