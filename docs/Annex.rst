@@ -286,7 +286,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Displays Text (Php/Prints ; Internal)
   * Method Is Overwritten (Classes/MethodIsOverwritten)
-  * Nested Use (Namespaces/NestedUse ; Analyze)
   * No Class In Global (Php/NoClassInGlobal ; Analyze)
   * Repeated Regex (Structures/RepeatedRegex ; Analyze)
   * Thrown Exceptions (ZendF/ThrownExceptions ; ZendFramework)
@@ -1520,7 +1519,6 @@ List of external links mentionned in this documentation.
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
-* `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_

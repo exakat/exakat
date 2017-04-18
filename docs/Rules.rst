@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 18 Apr 2017 05:20:18 +0000
-.. comment: Generation hash : 8ced50e8b177985dd7a7c87d47c0f1cd352f7a96
+.. comment: Generation date : Tue, 18 Apr 2017 10:59:11 +0000
+.. comment: Generation hash : 4e809472b7397fc7645aa98159fa418a5692892a
 
 
 .. _$http\_raw\_post\_data:
@@ -1940,8 +1940,6 @@ When a class should be final, as explained by Ocramiux (Marco Pivetti).
 
 Full article : `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
 
-
-
 .. code-block:: php
 
    <?php
@@ -1950,7 +1948,8 @@ Full article : `When to declare classes final <http://ocramius.github.io/blog/wh
        function i1() ;
    }
    
-   final class finalClass implements i1 {
+   // Class should final, as its public methods are in an interface
+   class finalClass implements i1 {
        // public interface 
        function i1 () {}
        
@@ -6434,45 +6433,6 @@ However, ternary operators tends to make the syntax very difficult to read when 
 +--------------+---------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
-
-
-
-.. _nested-use:
-
-Nested Use
-##########
-
-
-It is not recommended to build use with previous use statemts.
-
-In PHP, it is possible to use previously declared Use expresssions to build another use statement. PHP use the already defined use to alter the prefixes.
-
-This syntax is error prone. It is recommended to make the use statement clear, by relying on grouped declarations.
-
-.. code-block:: php
-
-   <?php
-   
-   use A\B as C;     // C == A\B 
-   use C\D\E as F;   // F == A\B\D\E
-   use F\G as I;     // I == A\B\D\E\G;
-   
-   // Same a above, less confusing
-   use A\{B, D\E, D\E\F\G}
-   
-   use Z\Z\Y as A;   // A == Z\Z\Y; 
-   // This has no impact on previously defined use
-   
-   ?>
-
-
-See `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
-
-+--------------+----------------------+
-| Command Line | Namespaces/NestedUse |
-+--------------+----------------------+
-| Analyzers    | :ref:`Analyze`       |
-+--------------+----------------------+
 
 
 
@@ -11698,6 +11658,36 @@ Unchecked Resources
 
 Resources are created, but never checked before being used. This is not safe.
 
+Always check that resources are correctly created before using them
+
+.. code-block:: php
+
+   <?php
+   
+   // always check that the resource is created correctly
+   $fp = fopen($d,'r');
+   if ($fp === false) {
+       throw new Exception('File not found');
+   } 
+   $firstLine = fread($fp);
+   
+   // This directory is not checked : the path may not exist and return false
+   $uncheckedDir = opendir($pathToDir);
+   while(readdir($uncheckedDir)) {
+       // do something()
+   }
+   
+   // This file is not checked : the path may not exist or be unreadable and return false
+   $fp = fopen($pathToFile);
+   while($line = freads($fp)) {
+       $text .= $line;
+   }
+   
+   // quick unsafe one-liner : using bzclose on an unchecked resource
+   bzclose(bzopen('file'));
+   
+   ?>
+
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/UncheckedResources                                                                               |
 +--------------+-------------------------------------------------------------------------------------------------------------+
@@ -11717,6 +11707,28 @@ Undefined Caught Exceptions
 Those are exceptions that are caught in the code, but are not defined in the application. 
 
 They may be externally defined, such as in core PHP, extensions or libraries. Make sure those exceptions are usefull to your application : otherwise, they are dead code.
+
+.. code-block:: php
+
+   <?php
+   
+   try {
+       library_function($some, $args);
+       
+   } catch (LibraryException $e) {
+       // This exception is not defined, and probably belongs to Library
+       print Library failed\n;
+   
+   } catch (OtherLibraryException $e) {
+       // This exception is not defined, and probably do not belongs to this code
+       print Library failed\n;
+   
+   } catch (\Exception $e) {
+       // This exception is a PHP standard exception
+       print Something went wrong, but not at Libary level\n;
+   }
+   
+   ?>
 
 +--------------+-------------------------------+
 | Command Line | Exceptions/CaughtButNotThrown |
@@ -11970,12 +11982,30 @@ Undefined Classes
 #################
 
 
-Those classes were used in the code, but there is no way to find a definition of that class in the PHP code.
+Those classes are used in the code, but there are no definition for them.
 
 This may happens under normal conditions, if the application makes use of an unsupported extension, that defines extra classes; 
 or if some external libraries, such as PEAR, are not provided during the analysis.
 
-Otherwise, this should be checked.
+.. code-block:: php
+
+   <?php
+   
+   // FPDF is a classic PDF class, that is usually omitted by Exakat. 
+   $o = new FPDF();
+   
+   // Exakat reports undefined classes in instanceof
+   // PHP ignores them
+   if ($o instanceof SomeClass) {
+       // doSomething();
+   }
+   
+   // Classes may be used in typehint too
+   function foo(TypeHintClass $x) {
+       // doSomething();
+   }
+   
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Classes/UndefinedClasses |
@@ -12026,6 +12056,21 @@ Undefined Functions
 
 Those functions are not defined in the code. This means that the functions are probably defined in a missing library, or in an extension. If not, this will yield a Fatal error at execution.
 
+.. code-block:: php
+
+   <?php
+   
+   // Undefined function 
+   foo($a);
+   
+   // valid function, as it belongs to the ext/yaml extension
+   $parsed = yaml_parse($yaml);
+   
+   // This function is not defined in the a\b\c namespace, nor in the global namespace
+   a\b\c\foo(); 
+   
+   ?>
+
 +--------------+------------------------------+
 | Command Line | Functions/UndefinedFunctions |
 +--------------+------------------------------+
@@ -12041,6 +12086,25 @@ Undefined Interfaces
 
 
 Typehint or `instanceof <http://php.net/manual/en/language.operators.type.php>`_ that are relying on undefined interfaces (or classes) : they will always return false. Any condition based upon them are dead code.
+
+.. code-block:: php
+
+   <?php
+   
+   class var implements undefinedInterface {
+       // If undefinedInterface is undefined, this code lints but doesn't run
+   }
+   
+   if ($o instanceof undefinedInterface) {
+       // This is silent dead code
+   }
+   
+   function foo(undefinedInterface $a) {
+       // This is dead code
+       // it will probably be discovered at execution
+   }
+   
+   ?>
 
 +--------------+--------------------------------+
 | Command Line | Interfaces/UndefinedInterfaces |

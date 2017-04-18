@@ -373,6 +373,7 @@ Glossary
       + :ref:`Undefined Class 2.4 <undefined-class-2.4>`
       + :ref:`Undefined Class 2.5 <undefined-class-2.5>`
       + :ref:`Undefined Class 3.0 <undefined-class-3.0>`
+      + :ref:`Undefined Classes <undefined-classes>`
       + :ref:`Undefined Interfaces <undefined-interfaces>`
       + :ref:`Unresolved Instanceof <unresolved-instanceof>`
       + :ref:`Use Instanceof <use-instanceof>`
