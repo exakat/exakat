@@ -10,4 +10,7 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
 }
 
 print_r($_FILES);
+
+$o->move_uploaded_file($method);
+Classe::move_uploaded_file($staticmethod);
 ?>

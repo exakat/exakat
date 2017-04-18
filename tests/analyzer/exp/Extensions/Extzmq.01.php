@@ -2,6 +2,6 @@
 
 $expected     = array('ZMQSocket( )');
 
-$expected_not = array();
+$expected_not = array('$z');
 
 ?>
