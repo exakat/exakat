@@ -2,6 +2,7 @@
 
 class A implements i {
     function i1() {}
+    function i2() {}
 }
 
 class B extends A {
@@ -17,6 +18,8 @@ final class D extends B {
 }
 
 interface i {
+    function i1() ;
+    function i2() ;
 }
 
 ?>
