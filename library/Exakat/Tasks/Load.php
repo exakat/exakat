@@ -3123,15 +3123,7 @@ class Load extends Tasks {
             $fullnspath = strtolower($namespace->fullcode);
             if ($fullnspath[0] !== '\\') {
                 list($prefix, ) = explode('\\', $fullnspath);
-                if ($prefix === $fullnspath) {
-                    $fullnspath = '\\'.$fullnspath;
-                } else {
-                    if (isset($this->uses['class'][$prefix])) {
-                        $fullnspath = $this->uses['class'][$prefix]->fullnspath.substr($fullnspath, strlen($prefix));
-                    } else {
-                        $fullnspath = '\\'.$fullnspath;
-                    }
-                }
+                $fullnspath = '\\'.$fullnspath;
             }
 
             $this->addCall('class', $fullnspath, $namespace);
