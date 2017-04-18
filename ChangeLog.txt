@@ -17,7 +17,7 @@ Version 0.10.9 (Single Horned Rhinoceros King, 2017-04-17)
 + Report
     + Added support for PHP 7.0.18 and 7.1.4
     + Ambassador : better layout for favorites
-    + Zend Framework : 20 new components supported
+    + Zend Framework : 8 new components supported
     + Zend Framework : now supports zendframework/zendframework too
     + Zend Framework : report unused components 
 + Analyzer

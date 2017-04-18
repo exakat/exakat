@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Wed, 12 Apr 2017 16:22:16 +0000
-.. comment: Generation hash : d15a894ac259b5aa5276b4765e395fb37416a1a4
+.. comment: Generation date : Tue, 18 Apr 2017 05:20:18 +0000
+.. comment: Generation hash : 8ced50e8b177985dd7a7c87d47c0f1cd352f7a96
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 301 analysis
+Total : 304 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -203,9 +203,11 @@ Total : 301 analysis
 * :ref:`Negative Power <negative-power>`
 * :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
+* :ref:`Nested Use <nested-use>`
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`No Boolean As Default <no-boolean-as-default>`
 * :ref:`No Choice <no-choice>`
+* :ref:`No Class In Global <no-class-in-global>`
 * :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 * :ref:`No Direct Usage <no-direct-usage>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
@@ -253,6 +255,7 @@ Total : 301 analysis
 * :ref:`Redefined Class Constants <redefined-class-constants>`
 * :ref:`Redefined Default <redefined-default>`
 * :ref:`Relay Function <relay-function>`
+* :ref:`Repeated Regex <repeated-regex>`
 * :ref:`Repeated print() <repeated-print()>`
 * :ref:`Results May Be Missing <results-may-be-missing>`
 * :ref:`Return True False <return-true-false>`
@@ -916,14 +919,16 @@ Total : 10 analysis
 ZendFramework
 +++++++++++++
 
-Total : 182 analysis
+Total : 184 analysis
 
 * :ref:`Action Should Be In Controller <action-should-be-in-controller>`
+* :ref:`Error Messages <error-messages>`
 * :ref:`Exit() Usage <exit()-usage>`
 * :ref:`Is Zend Framework 1 Controller <is-zend-framework-1-controller>`
 * :ref:`Is Zend Framework 1 Helper <is-zend-framework-1-helper>`
 * :ref:`Should Make Alias <should-make-alias>`
 * :ref:`Should Regenerate Session Id <should-regenerate-session-id>`
+* :ref:`Thrown Exceptions <thrown-exceptions>`
 * :ref:`Undefined Class 2.0 <undefined-class-2.0>`
 * :ref:`Undefined Class 2.1 <undefined-class-2.1>`
 * :ref:`Undefined Class 2.2 <undefined-class-2.2>`

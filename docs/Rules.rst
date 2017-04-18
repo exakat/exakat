@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Wed, 12 Apr 2017 16:22:16 +0000
-.. comment: Generation hash : d15a894ac259b5aa5276b4765e395fb37416a1a4
+.. comment: Generation date : Tue, 18 Apr 2017 05:20:18 +0000
+.. comment: Generation hash : 8ced50e8b177985dd7a7c87d47c0f1cd352f7a96
 
 
 .. _$http\_raw\_post\_data:
@@ -3729,6 +3729,38 @@ Usually, escape sequences are made to encode unusual characters. Using escape se
 
 
 
+.. _error-messages:
+
+Error Messages
+##############
+
+
+Error message when an error is reported in the code. Those messages will be read by whoever is triggering the error, and it has to be helpful. 
+
+It is a good excercice to read the messages out of context, and try to understand what is about.
+
+.. code-block:: php
+
+   <?php
+   
+   // Not so helpful messages
+   die('Here be monsters');
+   exit('An error happened');
+   throw new Exception('Exception thrown at runtime');
+   
+   ?>
+
+
+Error messages are spotted via `die <http://www.php.net/die>`_, `exit <http://www.php.net/exit>`_ or exception.
+
++--------------+--------------------------+
+| Command Line | Structures/ErrorMessages |
++--------------+--------------------------+
+| Analyzers    | :ref:`ZendFramework`     |
++--------------+--------------------------+
+
+
+
 .. _eval()-usage:
 
 Eval() Usage
@@ -5519,7 +5551,7 @@ Magic Visibility
 ################
 
 
-The magic methods must have public visibility and cannot be static.
+The class magic methods must have public visibility and cannot be static.
 
 .. code-block:: php
 
@@ -5537,12 +5569,12 @@ The magic methods must have public visibility and cannot be static.
    
        // magic method can't be static
        public static function __isset($name) {    }
-   
    }
    
-   See Magic.
-   
    ?>
+
+
+See `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_.
 
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/toStringPss                                                                                                                                                                                         |
@@ -6405,6 +6437,45 @@ However, ternary operators tends to make the syntax very difficult to read when 
 
 
 
+.. _nested-use:
+
+Nested Use
+##########
+
+
+It is not recommended to build use with previous use statemts.
+
+In PHP, it is possible to use previously declared Use expresssions to build another use statement. PHP use the already defined use to alter the prefixes.
+
+This syntax is error prone. It is recommended to make the use statement clear, by relying on grouped declarations.
+
+.. code-block:: php
+
+   <?php
+   
+   use A\B as C;     // C == A\B 
+   use C\D\E as F;   // F == A\B\D\E
+   use F\G as I;     // I == A\B\D\E\G;
+   
+   // Same a above, less confusing
+   use A\{B, D\E, D\E\F\G}
+   
+   use Z\Z\Y as A;   // A == Z\Z\Y; 
+   // This has no impact on previously defined use
+   
+   ?>
+
+
+See `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_.
+
++--------------+----------------------+
+| Command Line | Namespaces/NestedUse |
++--------------+----------------------+
+| Analyzers    | :ref:`Analyze`       |
++--------------+----------------------+
+
+
+
 .. _never-used-properties:
 
 Never Used Properties
@@ -6671,6 +6742,38 @@ Either the condition is useless, and may be removed, or the alternatives needs t
 
 +--------------+---------------------+
 | Command Line | Structures/NoChoice |
++--------------+---------------------+
+| Analyzers    | :ref:`Analyze`      |
++--------------+---------------------+
+
+
+
+.. _no-class-in-global:
+
+No Class In Global
+##################
+
+
+Avoid defining structures in Global namespace. Always prefer using a namespace. This will come handy later, either when publishing the code, or when importing a library, or even if PHP reclaims that name. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Code prepared for later
+   namespace Foo {
+       class Bar {}
+   }
+   
+   // Code that may conflict with other names.
+   namespace {
+       class Bar {}
+   }
+   
+   ?>
+
++--------------+---------------------+
+| Command Line | Php/NoClassInGlobal |
 +--------------+---------------------+
 | Analyzers    | :ref:`Analyze`      |
 +--------------+---------------------+
@@ -7548,15 +7651,31 @@ Non-constant Index In Array
 ###########################
 
 
+Undefined constants revert as strings in Arrays. They are also called barewords.
+
 In '$array[index]', PHP cannot find index as a constant, but, as a default behavior, turns it into the string 'index'. 
 
 This default behavior raise concerns when a corresponding constant is defined, either using `define() <http://www.php.net/define>`_ or the const keyword (outside a class). The definition of the index constant will modify the behavior of the index, as it will now use the constant definition, and not the 'index' string. 
 
-$array[index] = 1; // assign 1 to the element index in $array
-define('index', 2);
-$array[index] = 1; // now 1 to the element 2 in $array
+.. code-block:: php
+
+   <?php
+   
+   // assign 1 to the element index in $array
+   // index will fallback to string
+   $array[index] = 1; 
+   
+   define('index', 2);
+    
+    // now 1 to the element 2 in $array
+    $array[index] = 1;
+   
+   ?>
+
 
 It is recommended to make index a real string (with ' or "), or to define the corresponding constant to avoid any future surprise.
+
+Note that PHP 7.2 removes the support for this feature : `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_.
 
 +--------------+-------------------------+
 | Command Line | Arrays/NonConstantArray |
@@ -9129,6 +9248,46 @@ Relay functions are typical of transition API, where an old API have to be prese
 +--------------+-------------------------+
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
+
+
+
+.. _repeated-regex:
+
+Repeated Regex
+##############
+
+
+Repeated regex should be centralized. 
+
+When a regex is repeatedly used in the code, it is getting harder to update. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Regex used several times, at least twice.
+   preg_match('/^abc_|^square$/i', $_GET['x']);
+   
+   //.......
+   
+   preg_match('/^abc_|^square$/i', $row['name']);
+   
+   // This regex is dynamically built, so it is not reported.
+   preg_match('/^circle|^'.$x.'$/i', $string);
+   
+   // This regex is used once, so it is not reported.
+   preg_match('/^circle|^square$/i', $string);
+   
+   ?>
+
+
+Regex that are repeated at least once (aka, used twice or more) are reported. Regex that are dynamically build are not reported.
+
++--------------+--------------------------+
+| Command Line | Structures/RepeatedRegex |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
 
 
 
@@ -11291,6 +11450,35 @@ Thus, it is recommended to avoid throwing exceptions within the `__destruct <htt
 +--------------+-------------------------+
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
+
+
+
+.. _thrown-exceptions:
+
+Thrown Exceptions
+#################
+
+
+All Zend Framework thrown exceptions. 
+
+.. code-block:: php
+
+   <?php
+   
+   //All directly thrown exceptions are reported
+   throw new \RuntimeException('Error while processing');
+   
+   // Zend exceptions are also reported, thrown or not
+   $w = new \Zend\Filter\Exception\ExtensionNotLoadedException();
+   throw $w;
+   
+   ?>
+
++--------------+------------------------+
+| Command Line | ZendF/ThrownExceptions |
++--------------+------------------------+
+| Analyzers    | :ref:`ZendFramework`   |
++--------------+------------------------+
 
 
 
@@ -13954,6 +14142,9 @@ There is no need to declare them individually final.
        }
    
    ?>
+
+
+See also `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_.
 
 +--------------+-------------------------------------------------------------------------------------------------+
 | Command Line | Classes/UselessFinal                                                                            |

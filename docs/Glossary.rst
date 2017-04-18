@@ -200,6 +200,7 @@ Glossary
     + `die`
 
       + :ref:`Dont Echo Error <dont-echo-error>`
+      + :ref:`Error Messages <error-messages>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`No Implied If <no-implied-if>`
       + :ref:`Or Die <or-die>`
@@ -247,6 +248,7 @@ Glossary
     + `exit`
 
       + :ref:`Dont Echo Error <dont-echo-error>`
+      + :ref:`Error Messages <error-messages>`
       + :ref:`Exit() Usage <exit()-usage>`
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`

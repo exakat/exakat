@@ -286,7 +286,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Displays Text (Php/Prints ; Internal)
   * Method Is Overwritten (Classes/MethodIsOverwritten)
-  * Thrown Exceptions (ZendF/ThrownExceptions ; Unassigned)
+  * Nested Use (Namespaces/NestedUse ; Analyze)
+  * No Class In Global (Php/NoClassInGlobal ; Analyze)
+  * Repeated Regex (Structures/RepeatedRegex ; Analyze)
+  * Thrown Exceptions (ZendF/ThrownExceptions ; ZendFramework)
   * zend-log 2.5.0 Undefined Classes (ZendF/Zf3Log25 ; ZendFramework)
   * zend-log 2.6.0 Undefined Classes (ZendF/Zf3Log26 ; ZendFramework)
   * zend-log 2.7.0 Undefined Classes (ZendF/Zf3Log27 ; ZendFramework)
@@ -489,7 +492,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Strange Name For Constants (Constants/StrangeName ; Analyze)
   * Strange Name For Variables (Variables/StrangeName ; Analyze)
   * Too Many Finds (Classes/TooManyFinds)
-  * ZF3 Component (ZendF/zf3Component ; )
+  * ZF3 Component (ZendF/Zf3Component ; Internal)
   * Zend Framework 3 Missing Classes (ZendF/Zf3ComponentMissing ; Internal)
   * Zend\Config (ZendF/Zf3Config ; ZendFramework)
   * zend-cache 2.5.0 Undefined Classes (ZendF/Zf3Cache25 ; ZendFramework)
@@ -537,6 +540,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.10.1
 
+  * All strings (Type/CharString ; Inventory)
   * Avoid Non Wordpress Globals (Wordpress/AvoidOtherGlobals ; Wordpress)
   * SQL queries (Type/Sql ; Inventory)
   * Strange Names For Methods (Classes/StrangeName)
@@ -809,7 +813,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Empty Traits (Traits/EmptyTrait ; Analyze, Codacy, Simple)
   * Empty Try Catch (Structures/EmptyTryCatch ; Analyze, Codacy)
   * Empty With Expression (Structures/EmptyWithExpression ; CompatibilityPHP55, CompatibilityPHP56, OneFile, CompatibilityPHP70, CompatibilityPHP71)
-  * Error Messages (Structures/ErrorMessages ; Appinfo)
+  * Error Messages (Structures/ErrorMessages ; Appinfo, ZendFramework)
   * Eval() Usage (Structures/EvalUsage ; Analyze, Appinfo, Performances, OneFile, ClearPHP, Codacy, Simple)
   * Exception Order (Exceptions/AlreadyCaught ; Dead code)
   * Exit() Usage (Structures/ExitUsage ; Analyze, Appinfo, OneFile, ClearPHP, ZendFramework, Codacy)
@@ -1112,7 +1116,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * True False Inconsistant Case (Constants/InconsistantCase ; Preferences)
   * Try With Finally (Structures/TryFinally ; Appinfo, Internal)
   * Typehints (Functions/Typehints ; Appinfo)
-  * URL list (Type/Url ; Inventory)
+  * URL List (Type/Url ; Inventory)
   * Uncaught Exceptions (Exceptions/UncaughtExceptions ; Analyze, Codacy)
   * Unchecked Resources (Structures/UncheckedResources ; Analyze, ClearPHP, Codacy, Simple)
   * Undefined Caught Exceptions (Exceptions/CaughtButNotThrown ; Dead code)
@@ -1442,6 +1446,8 @@ List of external links mentionned in this documentation.
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
+* `BC Math Functions <http://www.php.net/bcmath>`_
+* `Bzip2 Functions <http://nl1.php.net/manual/en/ref.bzip2.php>`_
 * `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appendices/3-0-migration-guide.html>`_
 * `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_
 * `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_
@@ -1463,6 +1469,7 @@ List of external links mentionned in this documentation.
 * `exif <http://php.net/manual/en/book.exif.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `git <https://git-scm.com/>`_
 * `Github <https://github.com/exakat/exakat>`_
@@ -1486,6 +1493,7 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Packagist <https://packagist.org/>`_
 * `phar <https://www.exakat.io/download-exakat/>`_
+* `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
@@ -1511,7 +1519,8 @@ List of external links mentionned in this documentation.
 * `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
-* `Tutorial 1: Let’s learn by example¶ <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
+* `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
+* `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
@@ -1520,6 +1529,7 @@ List of external links mentionned in this documentation.
 * `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_
 * `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_
 * `Xdebug <https://xdebug.org/>`_
+* `XML Parser <http://www.php.net/manual/en/book.xml.php>`_
 * `XSL extension <http://php.net/manual/en/intro.xsl.php>`_
 * `Zend Framework 1.10 <https://framework.zend.com/manual/1.10/en/manual.html>`_
 * `Zend Framework 1.11 <https://framework.zend.com/manual/1.11/en/manual.html>`_
