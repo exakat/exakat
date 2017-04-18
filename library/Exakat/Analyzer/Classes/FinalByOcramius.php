@@ -25,15 +25,10 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class FinalByOcramius extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $this->atomIs('Class')
              ->hasNoOut('EXTENDS')
+             ->hasNoOut('FINAL')
              ->raw('sideEffect{ interfaces = []; }')
              ->outIs('IMPLEMENTS')
              ->inIs('DEFINITION')
@@ -41,12 +36,14 @@ class FinalByOcramius extends Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Function')
+             ->hasNoOut('ABSTRACT')
              ->outIs('NAME')
              ->raw('sideEffect{ interfaces.add( it.get().value("code")); }')
              ->back('first')
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME").where( __.out("PROTECTED", "PRIVATE").count().is(eq(0)) ).count().is(eq(0)) )')
-             ;
-//        $this->printQuery();
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function")
+                                          .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
+                                          .where( __.out("PROTECTED", "PRIVATE").count().is(eq(0)) )
+                                          .count().is(eq(0)) )');
         $this->prepareQuery();
     }
 }
