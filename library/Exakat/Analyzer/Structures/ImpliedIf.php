@@ -36,6 +36,7 @@ class ImpliedIf extends Analyzer {
              ->inIs('LEFT')
 
              ->inIsIE('CODE')
+             ->hasNoParent('For', array('ELEMENT', 'FINAL', 'INCREMENT', 'INIT'))
              ->hasIn('ELEMENT')
 
              ->back('first');
