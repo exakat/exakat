@@ -98,7 +98,7 @@ class Gremlin3 extends Graph {
                     $gremlin = "{ '".str_replace('$', '\\$', $value)."' }";
 
                     // what about factorise this below? 
-                    $defName = 'a'.crc32($gremlin);
+                    $defName = 'a'.dechex(crc32($gremlin));
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
                     if (file_exists($defFileName)) {
@@ -117,7 +117,7 @@ class Gremlin3 extends Graph {
                     }
                 } elseif (is_array($value)) {
                     $gremlin = $this->toGremlin($value);
-                    $defName = 'a'.crc32($gremlin);
+                    $defName = 'a'.dechex(crc32($gremlin));
                     $defFileName = $this->scriptDir.$defName.'.gremlin';
 
                     if (file_exists($defFileName)) {
@@ -131,7 +131,8 @@ class Gremlin3 extends Graph {
                             $gremlin = <<<GREMLIN
 def $defName() { 
     x = [];
-    new File("$this->scriptDir/$defName.txt").each({ line -> x.push(line)});
+    dir = new File("scripts").absolutePath;
+    new File(dir + "/$defName.txt").each({ line -> x.push(line)});
     x; 
 }
 GREMLIN;
