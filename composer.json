@@ -19,7 +19,7 @@
 		"exakat"
 	],
     "require": {
-        "php": "~7.*",
+        "php": "~7.0",
         "ext-tokenizer": "*",
         "ext-sqlite3": "*",
         "ext-curl": "*",
