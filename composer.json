@@ -1,10 +1,12 @@
 {
-    "name": "Exakat",
+    "name": "exakat/exakat",
     "type": "application",
     "description": "The smart static analyzer for PHP",
     "keywords": ["Exakat","PHP","audit", "static analysis", "code quality", "code review"],
     "homepage": "https://www.exakat.io/",
     "license": "GNU Affero General Public License-3.0+",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
     "authors": [
         {
             "name": "The Exakat Team",
@@ -15,7 +17,15 @@
         "docs": "https://exakat.readthedocs.org/",
         "source": "https://github.com/exakat/exakat"
     },
+	"bin": [
+		"exakat"
+	],
     "require": {
+        "php": "~7.*",
+        "ext-tokenizer": "*",
+        "ext-sqlite3": "*",
+        "ext-curl": "*",
+        "ext-mbstring": "*",
         "guiguiboy/php-cli-progress-bar":"dev-master"
     },
     "require-dev": {
