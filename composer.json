@@ -5,8 +5,6 @@
     "keywords": ["Exakat","PHP","audit", "static analysis", "code quality", "code review"],
     "homepage": "https://www.exakat.io/",
     "license": "GNU Affero General Public License-3.0+",
-	"minimum-stability": "dev",
-	"prefer-stable": true,
     "authors": [
         {
             "name": "The Exakat Team",
