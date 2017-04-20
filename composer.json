@@ -24,7 +24,7 @@
         "ext-sqlite3": "*",
         "ext-curl": "*",
         "ext-mbstring": "*",
-        "guiguiboy/php-cli-progress-bar":"dev-master"
+        "guiguiboy/php-cli-progress-bar":"dev-master@dev"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.7.1",
