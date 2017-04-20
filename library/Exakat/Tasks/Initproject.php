@@ -137,8 +137,6 @@ phpversion = $phpversion
 ;Ignored dirs and files, relative to code source root.
 ignore_dirs[] = /test
 ignore_dirs[] = /tests
-ignore_dirs[] = /Tests
-ignore_dirs[] = /Test
 ignore_dirs[] = /example
 ignore_dirs[] = /examples
 ignore_dirs[] = /docs
@@ -151,7 +149,6 @@ ignore_dirs[] = /lang
 ignore_dirs[] = /data
 ignore_dirs[] = /css
 ignore_dirs[] = /cache
-ignore_dirs[] = /vendor
 ignore_dirs[] = /assets
 ignore_dirs[] = /spec
 ignore_dirs[] = /sql
@@ -214,12 +211,19 @@ INI;
 
                     // composer install
                     $composer = new \stdClass();
+                    $composer->{'minimum-stability'} = 'dev';
                     $composer->require = new \stdClass();
                     $composer->require->$repositoryURL = 'dev-master';
-                    $json = json_encode($composer);
+                    $json = json_encode($composer, JSON_PRETTY_PRINT);
                     mkdir($this->config->projects_root.'/projects/'.$project.'/code', 0755);
                     file_put_contents($this->config->projects_root.'/projects/'.$project.'/code/composer.json', $json);
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code; composer -q install');
+
+                    // Updating config.ini to include the vendor directory
+                    $fp = fopen($this->config->projects_root.'/projects/'.$project.'/config.ini', 'a');
+                    fwrite($fp, "\ninclude_dirs[] = /vendor/$repositoryURL\n");
+                    fclose($fp);
+
                     break 1;
 
                 // SVN
