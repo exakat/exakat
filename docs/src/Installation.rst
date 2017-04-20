@@ -8,7 +8,13 @@ Summary
 
 * `Presentation`_
 * `Requirements`_
+* `Quick installation with OSX`_
+* `Quick installation with Debian/Ubuntu`_
 * `Installation guide with Docker`_
+* `Installation guide with Docker : all on the container`_
+* `Installation with Gremlin server on Docker`_
+* `Installation with PHP on Docker`_
+* `Installation guide with Composer`_
 * `Installation guide with Vagrant and Ansible`_
 * `Installation guide for Debian/Ubuntu`_
 * `Optional installations`_
@@ -18,24 +24,77 @@ Presentation
 
 Exakat is a PHP static analyzer. It relies on PHP to lint and tokenize the target code; a graph database to process the AST and the tokens; a SQLITE database to store the results and produce the various reports.
 
+Exakat itself runs on PHP 7.0 and more recent, with a short selection of extensions. 
+
+.. image:: exakat.architecture.png
+    :alt: exakat architecture
+    
+Source code is imported into exakat using VCS client, like git, SVN, mercurial, tar, zip, bz2 or even symlink. Only reading access is required.
+
+At least one version of PHP have to be used, and it may be the same running Exakat. Extra versions are used to provide linting reports. Only one version is used for analysis. 
+
+The gremlin server is used to query the source code. Once analyzes are all finished, the results are dumped into a SQLITE database and the graph may be removed. Reports are build from this database.
+    
 Requirements
 ------------
 
-Exakat relies on several parts : 
+Exakat relies on several parts. Some are necessary and some are optional. 
 
-* the exakat.phar, which is the main code. This is usually the one invoked.
-* Neo4j and gremline : exakat uses this graph database, with the Gremlin 3 plugin. 
-* config folder : this is in the working directory, holding the general directive for running exakat.
-* projects folder : this has all the data about the code, including the reports. This project keeps a sub-folder per project.
+Basic requirements : 
+
+* exakat.phar, the main code.
+* Neo4j and gremlin : exakat uses this graph database, with the Gremlin 3 plugin. 
 * PHP 7.0 or later to run. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
-* PHP 5.2 to 7.2 for analysis. Those versions only require the ext/tokenizer extension to be available. 
-* VCS (Version Control Software), such as Git, SVN, bazaar, Mercurial. They all are optional. 
+
+Optional requirements : 
+* PHP 5.2 to 7.2 for analysis. Those versions only require the ext/tokenizer extension. 
+* VCS (Version Control Software), such as Git, SVN, bazaar, Mercurial. They all are optional, though git is recommended. 
 * Archives, such as zip, tgz, tbz2 may also be opened with optional helpers.
 
+OS requirements : 
 Exakat has beed tested on OSX, Debian and Ubuntu (up to 14.04). Exakat should work on Linux distributions, may be with little work. Exakat hasn't been tested on Windows at all. 
+
+Quick installation with OSX
+---------------------------
+
+Paste the following commands in a terminal prompt : the first script download the exakat.phar, and the second sets up Gremlin 3 on Neo4j 2.3.
+PHP 7.0 or more recent, curl, homebrew are required.
+
+::
+
+    mkdir exakat
+    cd exakat
+    curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
+    curl -sL https://raw.githubusercontent.com/exakat/gremlin3neo4j2/master/install.osx.sh | sh
+    php exakat.phar doctor
+
+
+Quick installation with Debian/Ubuntu
+-------------------------------------
+
+Paste the following commands in a terminal prompt : the first script download the exakat.phar, and the second sets up Gremlin 3 on Neo4j 2.3.
+PHP 7.0 or more recent, wget are expected.
+
+::
+
+    mkdir exakat
+    cd exakat
+    wget -O exakat.phar http://dist.exakat.io/index.php?file=latest
+    wget -qO- https://raw.githubusercontent.com/exakat/gremlin3neo4j2/master/install.debian.sh | sh
+    php exakat.phar doctor
 
 Installation guide with Docker
 ------------------------------
+
+There are several ways to install Exakat with docker : 
+
+* No docker at all. Then, check a bare-bone install with OSX, Debian or Vagrant.
+* With the various versions of PHP on a container : convenient to have several versions of PHP without installing them. 
+* With Neo4j on a container. Convenient to mask the Gremlin server.
+* All exakat on a container. All packaged in one place.
+
+Installation guide with Docker : all on the container
+-----------------------------------------------------
 
 Installation with docker is easy, and convenient. It hides the dependency on the graph database, and keeps all files in the 'projects' folder, created in the working directory.
 
@@ -82,6 +141,67 @@ You may also create a handy shortcut, by creating an exakat.sh script and put it
     chmod u+x  /etc/local/sbin/exakat.sh
     ./exakat.sh version
 
+Installation with Gremlin server on Docker
+------------------------------------------
+
+It is possible to install Exakat as a phar or source code, and the Gremlin server as a docker image.
+
+This installation script presume that docker is installed and running. 
+
+::
+
+    mkdir exakat
+    cd exakat
+    mkdir -p neo4j/scripts
+    curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
+    chmod u+x exakat.phar
+    php exakat doctor
+
+    sed -i.bak -e "s/neo4j_host     = '127.0.0.1';/neo4j_ip = '`docker-machine ip`';/" config/exakat.ini
+    sed -i.bak -e "s/neo4j_port     = '7474';/neo4j_port     = '7777';/" config/exakat.ini
+    sed -i.bak -e "s/;loader = CypherG3/loader = CypherG3/" config/exakat.ini
+    sed -i.bak -e "s/loader = Neo4jImport/;loader = Neo4jImport/" config/exakat.ini
+    rm config/exakat.ini.bak
+
+    docker pull exakat/gremlin4neo4j 
+    docker run --publish=7777:7777 \
+            -v $(pwd)/projects/.exakat:$(pwd)/projects/.exakat \
+            -v $(pwd)/neo4j/scripts:/usr/src/gremlin/neo4j/scripts \
+            -d exakat/gremlin4neo4j 
+
+    You may now run an exakat project. Restart the docker image to run another project. 
+
+Installation with PHP versions on Docker
+----------------------------------------
+
+It is possible to install various PHP versions, provided as docker images. Check the `docker PHP container <https://hub.docker.com/_/php/>`_ on the docker web site to find the available containers.
+
+In the config/exakat.ini file, mention the PHP version with this format : 
+
+::
+
+; config/exakat.ini 
+php56 = php:5.6
+php71 = php:7.1
+
+
+Installation guide with Composer
+--------------------------------
+
+Exakat is available on packagist. After the composer installation, it initially requires the installation of the graph database. Once gremlin installed, it is rarely updated.
+
+The documentation is written with OSX as target. 
+
+::
+
+    mkdir exakat
+    cd exakat
+    composer require exakat/exakat
+    php vendor/bin/exakat doctor
+    curl -sL https://raw.githubusercontent.com/exakat/gremlin3neo4j2/master/install.osx.sh | sh
+    php vendor/bin/exakat init -p x 
+
+
 Installation guide with Vagrant and Ansible
 -------------------------------------------
 
@@ -113,7 +233,7 @@ Install with Vagrant and Ansible
     vagrant up --provision
     vagrant ssh 
 
-You are now ready to run a project. 
+You are now ready to run a project.
 
 Installation guide for Debian/Ubuntu
 ------------------------------------

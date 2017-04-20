@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 18 Apr 2017 10:59:11 +0000
-.. comment: Generation hash : 4e809472b7397fc7645aa98159fa418a5692892a
+.. comment: Generation date : Thu, 20 Apr 2017 14:01:35 +0000
+.. comment: Generation hash : 676a4425b7dc3a90064cd3a01c8d7f1288522d89
 
 
 .. _$http\_raw\_post\_data:
@@ -18467,6 +18467,394 @@ See also : `zend-paginator <https://github.com/zendframework/zend-paginator>`_ a
 
 
 
+.. _zend-progressbar-2.5.0-undefined-classes:
+
+zend-progressbar 2.5.0 Undefined Classes
+########################################
+
+
+zend-progressbar classes, interfaces and traits that are not defined in version 2.5.0.
+
+zend-progressbar 2.5.0 has 15 classes, no traits and 3 interfaces;
+
+  See also : `zend-progressbar <https://github.com/zendframework/zend-progressbar>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+------------------------+
+| Command Line | ZendF/Zf3Progressbar25 |
++--------------+------------------------+
+| Analyzers    | :ref:`ZendFramework`   |
++--------------+------------------------+
+
+
+
+.. _zend-progressbar-usage:
+
+zend-progressbar Usage
+######################
+
+
+zend-progressbar usage, based on classes, interfaces and traits. This covers version 2.5.0.
+
+zend-progressbar has 15 classes, no traits and 3 interfaces;
+
+See also : `zend-progressbar <https://github.com/zendframework/zend-progressbar>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Progressbar |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-serializer-2.5.0-undefined-classes:
+
+zend-serializer 2.5.0 Undefined Classes
+#######################################
+
+
+zend-serializer classes, interfaces and traits that are not defined in version 2.5.0.
+
+zend-serializer 2.5.0 has 17 classes, no traits and 2 interfaces;
+
+  See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+-----------------------+
+| Command Line | ZendF/Zf3Serializer25 |
++--------------+-----------------------+
+| Analyzers    | :ref:`ZendFramework`  |
++--------------+-----------------------+
+
+
+
+.. _zend-serializer-2.6.0-undefined-classes:
+
+zend-serializer 2.6.0 Undefined Classes
+#######################################
+
+
+zend-serializer classes, interfaces and traits that are not defined in version 2.6.0.
+
+zend-serializer 2.6.0 has 17 classes, no traits and 2 interfaces;
+
+  See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+-----------------------+
+| Command Line | ZendF/Zf3Serializer26 |
++--------------+-----------------------+
+| Analyzers    | :ref:`ZendFramework`  |
++--------------+-----------------------+
+
+
+
+.. _zend-serializer-2.7.0-undefined-classes:
+
+zend-serializer 2.7.0 Undefined Classes
+#######################################
+
+
+zend-serializer classes, interfaces and traits that are not defined in version 2.7.0.
+
+zend-serializer 2.7.0 has 20 classes, no traits and 2 interfaces;
+
+3 new classes 
+.  See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+-----------------------+
+| Command Line | ZendF/Zf3Serializer27 |
++--------------+-----------------------+
+| Analyzers    | :ref:`ZendFramework`  |
++--------------+-----------------------+
+
+
+
+.. _zend-serializer-2.8.0-undefined-classes:
+
+zend-serializer 2.8.0 Undefined Classes
+#######################################
+
+
+zend-serializer classes, interfaces and traits that are not defined in version 2.8.0.
+
+zend-serializer 2.8.0 has 20 classes, no traits and 2 interfaces;
+
+  See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+-----------------------+
+| Command Line | ZendF/Zf3Serializer28 |
++--------------+-----------------------+
+| Analyzers    | :ref:`ZendFramework`  |
++--------------+-----------------------+
+
+
+
+.. _zend-serializer-usage:
+
+zend-serializer Usage
+#####################
+
+
+zend-serializer usage, based on classes, interfaces and traits. This covers all four versions, from 2.5.0 to 2.8.0..
+
+zend-serializer has 20 classes, no traits and 2 interfaces;
+
+See also : `zend-serializer <https://github.com/zendframework/zend-serializer>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Serializer  |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-server-2.5.0-undefined-classes:
+
+zend-server 2.5.0 Undefined Classes
+###################################
+
+
+zend-server classes, interfaces and traits that are not defined in version 2.5.0.
+
+zend-server 2.5.0 has 22 classes, no traits and 4 interfaces;
+
+  See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Server25    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-server-2.6.0-undefined-classes:
+
+zend-server 2.6.0 Undefined Classes
+###################################
+
+
+zend-server classes, interfaces and traits that are not defined in version 2.6.0.
+
+zend-server 2.6.0 has 22 classes, no traits and 4 interfaces;
+
+  See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Server26    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-server-2.7.0-undefined-classes:
+
+zend-server 2.7.0 Undefined Classes
+###################################
+
+
+zend-server classes, interfaces and traits that are not defined in version 2.7.0.
+
+zend-server 2.7.0 has 22 classes, no traits and 4 interfaces;
+
+  See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Server27    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-server-usage:
+
+zend-server Usage
+#################
+
+
+zend-server usage, based on classes, interfaces and traits. This covers all three versions, from 2.5.0 to 2.7.0..
+
+zend-server has 22 classes, no traits and 4 interfaces;
+
+See also : `zend-server <https://github.com/zendframework/zend-server>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Server      |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-servicemanager-2.5.0-undefined-classes:
+
+zend-servicemanager 2.5.0 Undefined Classes
+###########################################
+
+
+zend-servicemanager classes, interfaces and traits that are not defined in version 2.5.0.
+
+zend-servicemanager 2.5.0 has 17 classes, 2 traits and 10 interfaces;
+
+  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+---------------------------+
+| Command Line | ZendF/Zf3Servicemanager25 |
++--------------+---------------------------+
+| Analyzers    | :ref:`ZendFramework`      |
++--------------+---------------------------+
+
+
+
+.. _zend-servicemanager-2.6.0-undefined-classes:
+
+zend-servicemanager 2.6.0 Undefined Classes
+###########################################
+
+
+zend-servicemanager classes, interfaces and traits that are not defined in version 2.6.0.
+
+zend-servicemanager 2.6.0 has 17 classes, 2 traits and 10 interfaces;
+
+  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+---------------------------+
+| Command Line | ZendF/Zf3Servicemanager26 |
++--------------+---------------------------+
+| Analyzers    | :ref:`ZendFramework`      |
++--------------+---------------------------+
+
+
+
+.. _zend-servicemanager-2.7.0-undefined-classes:
+
+zend-servicemanager 2.7.0 Undefined Classes
+###########################################
+
+
+zend-servicemanager classes, interfaces and traits that are not defined in version 2.7.0.
+
+zend-servicemanager 2.7.0 has 18 classes, 2 traits and 10 interfaces;
+
+1 new classe 
+.  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+---------------------------+
+| Command Line | ZendF/Zf3Servicemanager27 |
++--------------+---------------------------+
+| Analyzers    | :ref:`ZendFramework`      |
++--------------+---------------------------+
+
+
+
+.. _zend-servicemanager-3.0.0-undefined-classes:
+
+zend-servicemanager 3.0.0 Undefined Classes
+###########################################
+
+
+zend-servicemanager classes, interfaces and traits that are not defined in version 3.0.0.
+
+zend-servicemanager 3.0.0 has 10 classes, no traits and 12 interfaces;
+
+2 new classes 
+. 10 removed classes 
+, 2 removed traits 
+. See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+---------------------------+
+| Command Line | ZendF/Zf3Servicemanager30 |
++--------------+---------------------------+
+| Analyzers    | :ref:`ZendFramework`      |
++--------------+---------------------------+
+
+
+
+.. _zend-servicemanager-3.1.0-undefined-classes:
+
+zend-servicemanager 3.1.0 Undefined Classes
+###########################################
+
+
+zend-servicemanager classes, interfaces and traits that are not defined in version 3.1.0.
+
+zend-servicemanager 3.1.0 has 11 classes, 1 traits and 12 interfaces;
+
+1 new classe 
+, 1 new trait 
+.  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+---------------------------+
+| Command Line | ZendF/Zf3Servicemanager31 |
++--------------+---------------------------+
+| Analyzers    | :ref:`ZendFramework`      |
++--------------+---------------------------+
+
+
+
+.. _zend-servicemanager-3.2.0-undefined-classes:
+
+zend-servicemanager 3.2.0 Undefined Classes
+###########################################
+
+
+zend-servicemanager classes, interfaces and traits that are not defined in version 3.2.0.
+
+zend-servicemanager 3.2.0 has 17 classes, 1 traits and 12 interfaces;
+
+6 new classes 
+.  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+---------------------------+
+| Command Line | ZendF/Zf3Servicemanager32 |
++--------------+---------------------------+
+| Analyzers    | :ref:`ZendFramework`      |
++--------------+---------------------------+
+
+
+
+.. _zend-servicemanager-3.3.0-undefined-classes:
+
+zend-servicemanager 3.3.0 Undefined Classes
+###########################################
+
+
+zend-servicemanager classes, interfaces and traits that are not defined in version 3.3.0.
+
+zend-servicemanager 3.3.0 has 17 classes, 1 traits and 12 interfaces;
+
+  See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+---------------------------+
+| Command Line | ZendF/Zf3Servicemanager33 |
++--------------+---------------------------+
+| Analyzers    | :ref:`ZendFramework`      |
++--------------+---------------------------+
+
+
+
+.. _zend-servicemanager-usage:
+
+zend-servicemanager Usage
+#########################
+
+
+zend-servicemanager usage, based on classes, interfaces and traits. This covers all seven versions, from 2.5.0 to 3.3.0..
+
+zend-servicemanager has 27 classes, 3 traits and 15 interfaces;
+
+See also : `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+-------------------------+
+| Command Line | ZendF/Zf3Servicemanager |
++--------------+-------------------------+
+| Analyzers    | :ref:`ZendFramework`    |
++--------------+-------------------------+
+
+
+
 .. _zend-session-2.5.0-undefined-classes:
 
 zend-session 2.5.0 Undefined Classes
@@ -18552,6 +18940,251 @@ See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `
 
 
 
+.. _zend-soap-2.5.0-undefined-classes:
+
+zend-soap 2.5.0 Undefined Classes
+#################################
+
+
+zend-soap classes, interfaces and traits that are not defined in version 2.5.0.
+
+zend-soap 2.5.0 has 20 classes, no traits and 3 interfaces;
+
+  See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Soap25      |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-soap-2.6.0-undefined-classes:
+
+zend-soap 2.6.0 Undefined Classes
+#################################
+
+
+zend-soap classes, interfaces and traits that are not defined in version 2.6.0.
+
+zend-soap 2.6.0 has 20 classes, no traits and 3 interfaces;
+
+  See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Soap26      |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-soap-usage:
+
+zend-soap Usage
+###############
+
+
+zend-soap usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
+
+zend-soap has 20 classes, no traits and 3 interfaces;
+
+See also : `zend-soap <https://github.com/zendframework/zend-soap>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Soap        |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-stdlib-2.5.0-undefined-classes:
+
+zend-stdlib 2.5.0 Undefined Classes
+###################################
+
+
+zend-stdlib classes, interfaces and traits that are not defined in version 2.5.0.
+
+zend-stdlib 2.5.0 has 65 classes, 5 traits and 26 interfaces;
+
+  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Stdlib25    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-stdlib-2.6.0-undefined-classes:
+
+zend-stdlib 2.6.0 Undefined Classes
+###################################
+
+
+zend-stdlib classes, interfaces and traits that are not defined in version 2.6.0.
+
+zend-stdlib 2.6.0 has 67 classes, 5 traits and 26 interfaces;
+
+2 new classes 
+.  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Stdlib26    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-stdlib-2.7.0-undefined-classes:
+
+zend-stdlib 2.7.0 Undefined Classes
+###################################
+
+
+zend-stdlib classes, interfaces and traits that are not defined in version 2.7.0.
+
+zend-stdlib 2.7.0 has 68 classes, 5 traits and 26 interfaces;
+
+1 new classe 
+.  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Stdlib27    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-stdlib-3.0.0-undefined-classes:
+
+zend-stdlib 3.0.0 Undefined Classes
+###################################
+
+
+zend-stdlib classes, interfaces and traits that are not defined in version 3.0.0.
+
+zend-stdlib 3.0.0 has 30 classes, 4 traits and 12 interfaces;
+
+ 38 removed classes 
+, 1 removed trait 
+. See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Stdlib30    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-stdlib-3.1.0-undefined-classes:
+
+zend-stdlib 3.1.0 Undefined Classes
+###################################
+
+
+zend-stdlib classes, interfaces and traits that are not defined in version 3.1.0.
+
+zend-stdlib 3.1.0 has 31 classes, 4 traits and 12 interfaces;
+
+1 new classe 
+.  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Stdlib31    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-stdlib-usage:
+
+zend-stdlib Usage
+#################
+
+
+zend-stdlib usage, based on classes, interfaces and traits. This covers all five versions, from 2.5.0 to 3.1.0..
+
+zend-stdlib has 69 classes, 5 traits and 27 interfaces;
+
+See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Stdlib      |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-tag-2.5.0-undefined-classes:
+
+zend-tag 2.5.0 Undefined Classes
+################################
+
+
+zend-tag classes, interfaces and traits that are not defined in version 2.5.0.
+
+zend-tag 2.5.0 has 14 classes, no traits and 4 interfaces;
+
+  See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Tag25       |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-tag-2.6.0-undefined-classes:
+
+zend-tag 2.6.0 Undefined Classes
+################################
+
+
+zend-tag classes, interfaces and traits that are not defined in version 2.6.0.
+
+zend-tag 2.6.0 has 14 classes, no traits and 4 interfaces;
+
+  See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Tag26       |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-tag-usage:
+
+zend-tag Usage
+##############
+
+
+zend-tag usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
+
+zend-tag has 14 classes, no traits and 4 interfaces;
+
+See also : `zend-tag <https://github.com/zendframework/zend-tag>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Tag         |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
 .. _zend-test-2.5.0-undefined-classes:
 
 zend-test 2.5.0 Undefined Classes
@@ -18564,11 +19197,11 @@ zend-test 2.5.0 has 4 classes, no traits and no interfaces;
 
   See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command Line | ZendF/Zf3Test25      |
-+--------------+----------------------+
-| Analyzers    | :ref:`ZendFramework` |
-+--------------+----------------------+
++--------------+--------------------------------------------+
+| Command Line | ZendF/Zf3Test25                            |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
++--------------+--------------------------------------------+
 
 
 
@@ -18584,11 +19217,11 @@ zend-test 2.6.0 has 4 classes, no traits and no interfaces;
 
   See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command Line | ZendF/Zf3Test26      |
-+--------------+----------------------+
-| Analyzers    | :ref:`ZendFramework` |
-+--------------+----------------------+
++--------------+--------------------------------------------+
+| Command Line | ZendF/Zf3Test26                            |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
++--------------+--------------------------------------------+
 
 
 
@@ -18604,11 +19237,11 @@ zend-test 3.0.0 has 4 classes, no traits and no interfaces;
 
   See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command Line | ZendF/Zf3Test30      |
-+--------------+----------------------+
-| Analyzers    | :ref:`ZendFramework` |
-+--------------+----------------------+
++--------------+--------------------------------------------+
+| Command Line | ZendF/Zf3Test30                            |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
++--------------+--------------------------------------------+
 
 
 
@@ -18624,11 +19257,11 @@ zend-test has 4 classes, no traits and no interfaces;
 
 See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command Line | ZendF/Zf3Test        |
-+--------------+----------------------+
-| Analyzers    | :ref:`ZendFramework` |
-+--------------+----------------------+
++--------------+--------------------------------------------+
+| Command Line | ZendF/Zf3Test                              |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
++--------------+--------------------------------------------+
 
 
 
@@ -18880,6 +19513,66 @@ zend-view usage, based on classes, interfaces and traits. This covers all versio
 
 +--------------+----------------------+
 | Command Line | ZendF/Zf3View        |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-xmlrpc-2.5.0-undefined-classes:
+
+zend-xmlrpc 2.5.0 Undefined Classes
+###################################
+
+
+zend-xmlrpc classes, interfaces and traits that are not defined in version 2.5.0.
+
+zend-xmlrpc 2.5.0 has 41 classes, no traits and 4 interfaces;
+
+  See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Xmlrpc25    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-xmlrpc-2.6.0-undefined-classes:
+
+zend-xmlrpc 2.6.0 Undefined Classes
+###################################
+
+
+zend-xmlrpc classes, interfaces and traits that are not defined in version 2.6.0.
+
+zend-xmlrpc 2.6.0 has 41 classes, no traits and 4 interfaces;
+
+  See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Xmlrpc26    |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+
+.. _zend-xmlrpc-usage:
+
+zend-xmlrpc Usage
+#################
+
+
+zend-xmlrpc usage, based on classes, interfaces and traits. This covers all two versions 2.5.0 and 2.6.0.
+
+zend-xmlrpc has 41 classes, no traits and 4 interfaces;
+
+See also : `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Xmlrpc      |
 +--------------+----------------------+
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+

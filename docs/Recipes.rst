@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 18 Apr 2017 10:59:11 +0000
-.. comment: Generation hash : 4e809472b7397fc7645aa98159fa418a5692892a
+.. comment: Generation date : Thu, 20 Apr 2017 14:01:35 +0000
+.. comment: Generation hash : 676a4425b7dc3a90064cd3a01c8d7f1288522d89
 
 
 .. _analyze:
@@ -918,7 +918,7 @@ Total : 10 analysis
 ZendFramework
 +++++++++++++
 
-Total : 184 analysis
+Total : 222 analysis
 
 * :ref:`Action Should Be In Controller <action-should-be-in-controller>`
 * :ref:`Error Messages <error-messages>`
@@ -1080,13 +1080,48 @@ Total : 184 analysis
 * :ref:`zend-paginator 2.6.0 Undefined Classes <zend-paginator-2.6.0-undefined-classes>`
 * :ref:`zend-paginator 2.7.0 Undefined Classes <zend-paginator-2.7.0-undefined-classes>`
 * :ref:`zend-paginator Usage <zend-paginator-usage>`
+* :ref:`zend-progressbar 2.5.0 Undefined Classes <zend-progressbar-2.5.0-undefined-classes>`
+* :ref:`zend-progressbar Usage <zend-progressbar-usage>`
+* :ref:`zend-serializer 2.5.0 Undefined Classes <zend-serializer-2.5.0-undefined-classes>`
+* :ref:`zend-serializer 2.6.0 Undefined Classes <zend-serializer-2.6.0-undefined-classes>`
+* :ref:`zend-serializer 2.7.0 Undefined Classes <zend-serializer-2.7.0-undefined-classes>`
+* :ref:`zend-serializer 2.8.0 Undefined Classes <zend-serializer-2.8.0-undefined-classes>`
+* :ref:`zend-serializer Usage <zend-serializer-usage>`
+* :ref:`zend-server 2.5.0 Undefined Classes <zend-server-2.5.0-undefined-classes>`
+* :ref:`zend-server 2.6.0 Undefined Classes <zend-server-2.6.0-undefined-classes>`
+* :ref:`zend-server 2.7.0 Undefined Classes <zend-server-2.7.0-undefined-classes>`
+* :ref:`zend-server Usage <zend-server-usage>`
+* :ref:`zend-servicemanager 2.5.0 Undefined Classes <zend-servicemanager-2.5.0-undefined-classes>`
+* :ref:`zend-servicemanager 2.6.0 Undefined Classes <zend-servicemanager-2.6.0-undefined-classes>`
+* :ref:`zend-servicemanager 2.7.0 Undefined Classes <zend-servicemanager-2.7.0-undefined-classes>`
+* :ref:`zend-servicemanager 3.0.0 Undefined Classes <zend-servicemanager-3.0.0-undefined-classes>`
+* :ref:`zend-servicemanager 3.1.0 Undefined Classes <zend-servicemanager-3.1.0-undefined-classes>`
+* :ref:`zend-servicemanager 3.2.0 Undefined Classes <zend-servicemanager-3.2.0-undefined-classes>`
+* :ref:`zend-servicemanager 3.3.0 Undefined Classes <zend-servicemanager-3.3.0-undefined-classes>`
+* :ref:`zend-servicemanager Usage <zend-servicemanager-usage>`
 * :ref:`zend-session 2.5.0 Undefined Classes <zend-session-2.5.0-undefined-classes>`
 * :ref:`zend-session 2.6.0 Undefined Classes <zend-session-2.6.0-undefined-classes>`
 * :ref:`zend-session 2.7.0 Undefined Classes <zend-session-2.7.0-undefined-classes>`
 * :ref:`zend-session Usage <zend-session-usage>`
+* :ref:`zend-soap 2.5.0 Undefined Classes <zend-soap-2.5.0-undefined-classes>`
+* :ref:`zend-soap 2.6.0 Undefined Classes <zend-soap-2.6.0-undefined-classes>`
+* :ref:`zend-soap Usage <zend-soap-usage>`
+* :ref:`zend-stdlib 2.5.0 Undefined Classes <zend-stdlib-2.5.0-undefined-classes>`
+* :ref:`zend-stdlib 2.6.0 Undefined Classes <zend-stdlib-2.6.0-undefined-classes>`
+* :ref:`zend-stdlib 2.7.0 Undefined Classes <zend-stdlib-2.7.0-undefined-classes>`
+* :ref:`zend-stdlib 3.0.0 Undefined Classes <zend-stdlib-3.0.0-undefined-classes>`
+* :ref:`zend-stdlib 3.1.0 Undefined Classes <zend-stdlib-3.1.0-undefined-classes>`
+* :ref:`zend-stdlib Usage <zend-stdlib-usage>`
+* :ref:`zend-tag 2.5.0 Undefined Classes <zend-tag-2.5.0-undefined-classes>`
+* :ref:`zend-tag 2.6.0 Undefined Classes <zend-tag-2.6.0-undefined-classes>`
+* :ref:`zend-tag Usage <zend-tag-usage>`
+* :ref:`zend-test 2.5.0 Undefined Classes <zend-test-2.5.0-undefined-classes>`
 * :ref:`zend-test 2.5.0 Undefined Classes <zend-test-2.5.0-undefined-classes>`
 * :ref:`zend-test 2.6.0 Undefined Classes <zend-test-2.6.0-undefined-classes>`
+* :ref:`zend-test 2.6.0 Undefined Classes <zend-test-2.6.0-undefined-classes>`
 * :ref:`zend-test 3.0.0 Undefined Classes <zend-test-3.0.0-undefined-classes>`
+* :ref:`zend-test 3.0.0 Undefined Classes <zend-test-3.0.0-undefined-classes>`
+* :ref:`zend-test Usage <zend-test-usage>`
 * :ref:`zend-test Usage <zend-test-usage>`
 * :ref:`zend-text 2.5.0 Undefined Classes <zend-text-2.5.0-undefined-classes>`
 * :ref:`zend-text 2.6.0 Undefined Classes <zend-text-2.6.0-undefined-classes>`
@@ -1104,4 +1139,7 @@ Total : 184 analysis
 * :ref:`zend-view 2.8.0 Undefined Classes <zend-view-2.8.0-undefined-classes>`
 * :ref:`zend-view 2.9.0 Undefined Classes <zend-view-2.9.0-undefined-classes>`
 * :ref:`zend-view Usage <zend-view-usage>`
+* :ref:`zend-xmlrpc 2.5.0 Undefined Classes <zend-xmlrpc-2.5.0-undefined-classes>`
+* :ref:`zend-xmlrpc 2.6.0 Undefined Classes <zend-xmlrpc-2.6.0-undefined-classes>`
+* :ref:`zend-xmlrpc Usage <zend-xmlrpc-usage>`
 

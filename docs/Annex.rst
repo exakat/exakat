@@ -322,6 +322,44 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * zend-paginator 2.6.0 Undefined Classes (ZendF/Zf3Paginator26 ; ZendFramework)
   * zend-paginator 2.7.0 Undefined Classes (ZendF/Zf3Paginator27 ; ZendFramework)
   * zend-paginator Usage (ZendF/Zf3Paginator ; ZendFramework)
+  * zend-progressbar 2.5.0 Undefined Classes (ZendF/Zf3Progressbar25 ; ZendFramework)
+  * zend-progressbar Usage (ZendF/Zf3Progressbar ; ZendFramework)
+  * zend-serializer 2.5.0 Undefined Classes (ZendF/Zf3Serializer25 ; ZendFramework)
+  * zend-serializer 2.6.0 Undefined Classes (ZendF/Zf3Serializer26 ; ZendFramework)
+  * zend-serializer 2.7.0 Undefined Classes (ZendF/Zf3Serializer27 ; ZendFramework)
+  * zend-serializer 2.8.0 Undefined Classes (ZendF/Zf3Serializer28 ; ZendFramework)
+  * zend-serializer Usage (ZendF/Zf3Serializer ; ZendFramework)
+  * zend-server 2.5.0 Undefined Classes (ZendF/Zf3Server25 ; ZendFramework)
+  * zend-server 2.6.0 Undefined Classes (ZendF/Zf3Server26 ; ZendFramework)
+  * zend-server 2.7.0 Undefined Classes (ZendF/Zf3Server27 ; ZendFramework)
+  * zend-server Usage (ZendF/Zf3Server ; ZendFramework)
+  * zend-servicemanager 2.5.0 Undefined Classes (ZendF/Zf3Servicemanager25 ; ZendFramework)
+  * zend-servicemanager 2.6.0 Undefined Classes (ZendF/Zf3Servicemanager26 ; ZendFramework)
+  * zend-servicemanager 2.7.0 Undefined Classes (ZendF/Zf3Servicemanager27 ; ZendFramework)
+  * zend-servicemanager 3.0.0 Undefined Classes (ZendF/Zf3Servicemanager30 ; ZendFramework)
+  * zend-servicemanager 3.1.0 Undefined Classes (ZendF/Zf3Servicemanager31 ; ZendFramework)
+  * zend-servicemanager 3.2.0 Undefined Classes (ZendF/Zf3Servicemanager32 ; ZendFramework)
+  * zend-servicemanager 3.3.0 Undefined Classes (ZendF/Zf3Servicemanager33 ; ZendFramework)
+  * zend-servicemanager Usage (ZendF/Zf3Servicemanager ; ZendFramework)
+  * zend-soap 2.5.0 Undefined Classes (ZendF/Zf3Soap25 ; ZendFramework)
+  * zend-soap 2.6.0 Undefined Classes (ZendF/Zf3Soap26 ; ZendFramework)
+  * zend-soap Usage (ZendF/Zf3Soap ; ZendFramework)
+  * zend-stdlib 2.5.0 Undefined Classes (ZendF/Zf3Stdlib25 ; ZendFramework)
+  * zend-stdlib 2.6.0 Undefined Classes (ZendF/Zf3Stdlib26 ; ZendFramework)
+  * zend-stdlib 2.7.0 Undefined Classes (ZendF/Zf3Stdlib27 ; ZendFramework)
+  * zend-stdlib 3.0.0 Undefined Classes (ZendF/Zf3Stdlib30 ; ZendFramework)
+  * zend-stdlib 3.1.0 Undefined Classes (ZendF/Zf3Stdlib31 ; ZendFramework)
+  * zend-stdlib Usage (ZendF/Zf3Stdlib ; ZendFramework)
+  * zend-tag 2.5.0 Undefined Classes (ZendF/Zf3Tag25 ; ZendFramework)
+  * zend-tag 2.6.0 Undefined Classes (ZendF/Zf3Tag26 ; ZendFramework)
+  * zend-tag Usage (ZendF/Zf3Tag ; ZendFramework)
+  * zend-test 2.5.0 Undefined Classes (ZendF/Zf3Test25 ; ZendFramework, ZendFramework)
+  * zend-test 2.6.0 Undefined Classes (ZendF/Zf3Test26 ; ZendFramework, ZendFramework)
+  * zend-test 3.0.0 Undefined Classes (ZendF/Zf3Test30 ; ZendFramework, ZendFramework)
+  * zend-test Usage (ZendF/Zf3Test ; ZendFramework, ZendFramework)
+  * zend-xmlrpc 2.5.0 Undefined Classes (ZendF/Zf3Xmlrpc25 ; ZendFramework)
+  * zend-xmlrpc 2.6.0 Undefined Classes (ZendF/Zf3Xmlrpc26 ; ZendFramework)
+  * zend-xmlrpc Usage (ZendF/Zf3Xmlrpc ; ZendFramework)
 
 * 0.10.8
 
@@ -445,10 +483,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * zend-session 2.6.0 Undefined Classes (ZendF/Zf3Session26 ; ZendFramework)
   * zend-session 2.7.0 Undefined Classes (ZendF/Zf3Session27 ; ZendFramework)
   * zend-session Usage (ZendF/Zf3Session ; ZendFramework)
-  * zend-test 2.5.0 Undefined Classes (ZendF/Zf3Test25 ; ZendFramework)
-  * zend-test 2.6.0 Undefined Classes (ZendF/Zf3Test26 ; ZendFramework)
-  * zend-test 3.0.0 Undefined Classes (ZendF/Zf3Test30 ; ZendFramework)
-  * zend-test Usage (ZendF/Zf3Test ; ZendFramework)
   * zend-text 2.5.0 Undefined Classes (ZendF/Zf3Text25 ; ZendFramework)
   * zend-text 2.6.0 Undefined Classes (ZendF/Zf3Text26 ; ZendFramework)
   * zend-text Usage (ZendF/Zf3Text ; ZendFramework)
@@ -1459,6 +1493,7 @@ List of external links mentionned in this documentation.
 * `Data structures <http://docs.php.net/manual/en/book.ds.php>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
+* `docker PHP container <https://hub.docker.com/_/php/>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
 * `Exakat <http://www.exakat.io/>`_
@@ -1573,9 +1608,17 @@ List of external links mentionned in this documentation.
 * `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_
 * `zend-navigation <https://github.com/zendframework/zend-navigation>`_
 * `zend-paginator <https://github.com/zendframework/zend-paginator>`_
+* `zend-progressbar <https://github.com/zendframework/zend-progressbar>`_
+* `zend-serializer <https://github.com/zendframework/zend-serializer>`_
+* `zend-server <https://github.com/zendframework/zend-server>`_
+* `zend-servicemanager <https://github.com/zendframework/zend-servicemanager>`_
 * `zend-session <https://github.com/zendframework/zend-session>`_
+* `zend-soap <https://github.com/zendframework/zend-soap>`_
+* `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_
+* `zend-tag <https://github.com/zendframework/zend-tag>`_
 * `zend-test <https://github.com/zendframework/zend-test>`_
 * `zend-text <https://github.com/zendframework/zend-text>`_
+* `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_
 * `Zlib <http://php.net/manual/en/book.zlib.php>`_
 
 
