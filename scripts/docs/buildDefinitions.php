@@ -134,6 +134,8 @@ foreach($files as $file) {
     file_put_contents(str_replace('/src/','/',$file),$rst);
 }
 
+shell_exec('cp docs/src/*.png docs/');
+
 $recipes = array('Analyze',
                  'CompatibilityPHP72',
                  'CompatibilityPHP71',
