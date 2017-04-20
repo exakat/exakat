@@ -35,38 +35,54 @@ class Update extends Tasks {
 
     public function run() {
         if ($this->config->project === 'default') {
-            throw new ProjectNeeded();
-        }
+            $paths = glob($this->config->projects_root.'/projects/*');
+            $projects = array_map('basename', $paths);
+            $projects = array_diff($projects, array('test'));
+            
+            print "Updating ".count($projects)." projects\n";
+            foreach($projects as $project) {
+                display("updating $project\n");
+                $this->update($project);
+            }
+        } else {
+            $path = $this->config->projects_root.'/projects/'.$this->config->project;
 
-        $path = $this->config->projects_root.'/projects/'.$this->config->project;
+            if (!file_exists($path)) {
+                throw new NoSuchProject($this->config->project);
+            }
 
-        if (!file_exists($path)) {
-            throw new NoSuchProject($this->config->project);
+            if (!file_exists($path.'/code')) {
+                throw new NoCodeInProject($this->config->project);
+            }
+        
+            $this->update($this->config->project);
         }
-
-        if (!file_exists($path.'/code')) {
-            throw new NoCodeInProject($this->config->project);
-        }
+    }
+    
+    private function update($project) {
+        $path = $this->config->projects_root.'/projects/'.$project;
+        
+        $config = Config::factory(array('php', 'exakat', 'update', '-p', $project));
 
         switch(true) {
             // symlink case
-            case $this->config->project_vcs === 'symlink' :
+            case $config->project_vcs === 'symlink' :
                 // Nothing to do, the symlink is here for that
                 break;
 
             // copy case
-            case $this->config->project_vcs === 'copy' :
+            case $config->project_vcs === 'copy' :
                 // Remove and copy again
-                $total = rmdirRecursive($this->config->projects_root.'/projects/'.$this->config->project.'/code/');
+                $total = rmdirRecursive($this->config->projects_root.'/projects/'.$project.'/code/');
                 display("$total files were removed");
 
-                $total = copyDir(realpath($this->config->project_url), $this->config->projects_root.'/projects/'.$this->config->project.'/code');
+                $total = copyDir(realpath($config->project_url), $this->config->projects_root.'/projects/'.$project.'/code');
                 display("$total files were copied");
                 break;
 
             // Git case
             case file_exists($path.'/code/.git') :
-                display('Git pull for '.$this->config->project);
+                display('Git pull for '.$project);
                 $res = shell_exec('cd '.$path.'/code/; git branch | grep \\*');
                 $branch = substr(trim($res), 2);
 
@@ -85,7 +101,7 @@ class Update extends Tasks {
 
             // svn case
             case file_exists($path.'/code/.svn') :
-                display('SVN update '.$this->config->project);
+                display('SVN update '.$project);
                 $res = shell_exec('cd '.$path.'/code/; svn update');
                 if (!preg_match('/Updated to revision (\d+)\./', $res, $r)) {
                     preg_match('/At revision (\d+)/', $res, $r);
@@ -97,7 +113,7 @@ class Update extends Tasks {
 
             // bazaar case
             case file_exists($path.'/code/.bzr') :
-                display('Bazaar update '.$this->config->project);
+                display('Bazaar update '.$project);
                 $res = shell_exec('cd '.$path.'/code/; bzr update 2>&1');
                 preg_match('/revision (\d+)/', $res, $r);
 
@@ -107,25 +123,25 @@ class Update extends Tasks {
 
             // mercurial
             case file_exists($path.'/code/.hg') :
-                display('Mercurial update '.$this->config->project);
+                display('Mercurial update '.$project);
                 $res = shell_exec('cd '.$path.'/code/; hg pull 2>&1; hg update; hg log -l 1');
                 preg_match('/changeset:\s+(\S+)/', $res, $changeset);
                 preg_match("/date:\s+([^\n]+)/", $res, $date);
 
-                display( "Hg updated to revision $changeset[1] ($date[1])");
+                display( "Mercurial updated to revision $changeset[1] ($date[1])");
 
                 break;
 
             // composer case
-            case $this->config->project_vcs === 'composer' :
-                display('Composer update '.$this->config->project);
+            case $config->project_vcs === 'composer' :
+                display('Composer update '.$project);
                 $res = shell_exec('cd '.$path.'/code/; composer -q install ');
 
                 $json = file_get_contents($path.'/code/composer.lock');
                 $json = json_decode($json);
 
                 foreach($json->packages as $package) {
-                    if ($package->name == $this->config->project_url) {
+                    if ($package->name == $config->project_url) {
                         display( "Composer updated to revision ".$package->source->reference.' ( version : '.$package->version.' )');
                     }
                 }
@@ -133,7 +149,7 @@ class Update extends Tasks {
                 break;
 
             default :
-                display('No VCS found to update (git, svn and bazaar are supported. Ask exakat to add more.');
+                display('No VCS found to update. git, mercurial, svn and bazaar are supported.');
         }
     }
 }
