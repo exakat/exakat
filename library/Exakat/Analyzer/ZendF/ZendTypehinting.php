@@ -28,7 +28,7 @@ class ZendTypehinting extends Analyzer {
     public function analyze() {
         $regex = '^\\\\\\\\zend(_|\\\\\\\\)';
 
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
@@ -39,7 +39,8 @@ class ZendTypehinting extends Analyzer {
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->regexIs('fullnspath', $regex);
-        $this->prepareQuery();    }
+        $this->prepareQuery();
+    }
 }
 
 ?>

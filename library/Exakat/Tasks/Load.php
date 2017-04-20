@@ -996,7 +996,15 @@ class Load extends Tasks {
 
     private function processFunction() {
         $current = $this->id;
-        $function = $this->addAtom('Function');
+        
+        if ($this->isContext(self::CONTEXT_CLASS) ||
+            $this->isContext(self::CONTEXT_TRAIT) ||
+            $this->isContext(self::CONTEXT_INTERFACE)) {
+            $function = $this->addAtom('Method');
+        } else {
+            $function = $this->addAtom('Function');
+        }
+
         $this->toggleContext(self::CONTEXT_FUNCTION);
 
         $fullcode = array();
