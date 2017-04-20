@@ -105,10 +105,21 @@ class Update extends Tasks {
 
                 break;
 
+            // mercurial
+            case file_exists($path.'/code/.hg') :
+                display('Mercurial update '.$this->config->project);
+                $res = shell_exec('cd '.$path.'/code/; hg pull 2>&1; hg update; hg log -l 1');
+                preg_match('/changeset:\s+(\S+)/', $res, $changeset);
+                preg_match("/date:\s+([^\n]+)/", $res, $date);
+
+                display( "Hg updated to revision $changeset[1] ($date[1])");
+
+                break;
+
             // composer case
             case $this->config->project_vcs === 'composer' :
                 display('Composer update '.$this->config->project);
-                $res = shell_exec('cd '.$path.'/code/; composer install ');
+                $res = shell_exec('cd '.$path.'/code/; composer -q install ');
 
                 $json = file_get_contents($path.'/code/composer.lock');
                 $json = json_decode($json);
@@ -122,7 +133,7 @@ class Update extends Tasks {
                 break;
 
             default :
-                display('No VCS found to update (Only git, svn and bazaar are supported. Ask exakat to add more.');
+                display('No VCS found to update (git, svn and bazaar are supported. Ask exakat to add more.');
         }
     }
 }
