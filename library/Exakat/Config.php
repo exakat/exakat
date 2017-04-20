@@ -204,7 +204,7 @@ class Config {
         $this->is_phar  = !empty($pharRunning);
         if ($this->is_phar) {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
-            $this->projects_root = substr(dirname(dirname(dirname(__DIR__))), 7);
+            $this->projects_root = getcwd();
             $this->dir_root      = 'phar://'.$this->executable;
 
             assert_options(ASSERT_ACTIVE, 0);
@@ -214,7 +214,7 @@ class Config {
         } else {
             $this->executable    = $_SERVER['SCRIPT_NAME'];
             $this->dir_root      = dirname(dirname(__DIR__));
-            $this->projects_root = dirname(dirname(__DIR__));
+            $this->projects_root = getcwd();
 
             assert_options(ASSERT_ACTIVE, 1);
             assert_options(ASSERT_BAIL, 1);
@@ -226,7 +226,6 @@ class Config {
         $inis = array();
         $configFiles = array('/etc/exakat.ini',
                              '/etc/exakat/exakat.ini',
-                             $this->projects_root.'/config/config-default.ini',
                              $this->projects_root.'/config/exakat.ini'
                              );
         foreach($configFiles as $id => $configFile) {
