@@ -77,7 +77,6 @@ class Files extends Tasks {
         $tmpFileName = $this->config->projects_root.'/projects/.exakat/files.'.getmypid().'.txt';
         $path = $this->config->projects_root.'/projects/'.$dir.'/code';
         $tmpFiles = array_map(function ($file) use ($path) { return str_replace(array('(', ')', ' '), array('\\(', '\\)', '\\ '), $file);}, $files);
-//        $tmpFiles = $files;
         file_put_contents($tmpFileName, ''.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\n{$this->config->projects_root}/projects/$dir/code", $tmpFiles).'');
 
         $versions = $this->config->other_php_versions;
@@ -92,7 +91,7 @@ class Files extends Tasks {
             display('Check compilation for '.$version);
             $stats['notCompilable'.$version] = -1;
 
-            $shell = 'cat '.$tmpFileName.' | tr ">" "\\\\\\\\>" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
+            $shell = 'cat '.$tmpFileName.' | sed "s/>/\\\\\\\\>/g" | tr "\n" "\0" | xargs -0 -n1 -P5 -I {} sh -c "'.$this->config->{'php'.$version}.' -l {} 2>&1 || true "';
             $res = trim(shell_exec($shell));
 
             $resFiles = explode("\n", $res);
