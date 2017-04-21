@@ -31,7 +31,7 @@ class StaticMethods extends Analyzer {
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->_as('function')
              ->outIs('STATIC')
              ->back('function')

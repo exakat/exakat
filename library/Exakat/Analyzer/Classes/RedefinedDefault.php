@@ -37,7 +37,7 @@ class RedefinedDefault extends Analyzer {
              ->inIs('ELEMENT')
 
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->codeIs('__construct')
              ->inIs('NAME')

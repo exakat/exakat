@@ -26,15 +26,8 @@ namespace Exakat\Analyzer\Functions;
 use Exakat\Analyzer\Analyzer;
 
 class HasNotFluentInterface extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/MethodDefinition');
-    }
-    
     public function analyze() {
-        $this->atomIs('Function')
-             ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->inIs('NAME')
+        $this->atomIs('Method')
              ->outIs('BLOCK')
              ->atomInside('Return')
              ->outIs('RETURN')
@@ -42,10 +35,7 @@ class HasNotFluentInterface extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Function')
-             ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->inIs('NAME')
+        $this->atomIs('Method')
              ->outIs('BLOCK')
              ->atomInside('Return')
              ->outIs('RETURN')
@@ -55,10 +45,7 @@ class HasNotFluentInterface extends Analyzer {
         $this->prepareQuery();
 
         // no return == return null!
-        $this->atomIs('Function')
-             ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->inIs('NAME')
+        $this->atomIs('Method')
              ->outIs('BLOCK')
              ->noAtomInside('Return')
              ->back('first');

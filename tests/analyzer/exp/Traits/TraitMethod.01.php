@@ -1,11 +1,11 @@
 <?php
 
-$expected     = array('traitMethod',
-                      'traitMethod2',);
+$expected     = array( 'abstract function traitMethod2( ) ;', 
+                       'function traitMethod( ) { /**/ } ');
 
-$expected_not = array('classMethod',
-                      'classMethod2',
-                      'interfaceMethod', 
-                      'interfaceMethod2');
+$expected_not = array('function classMethod( ) { /**/ } ',
+                      'function classMethod2( ) { /**/ } ',
+                      'function interfaceMethod( ) { /**/ } ', 
+                      'function interfaceMethod2( ) { /**/ } ');
 
 ?>

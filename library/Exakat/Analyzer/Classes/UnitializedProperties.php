@@ -44,7 +44,7 @@ class UnitializedProperties extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
              ->raw('where(
     __.out("BLOCK").emit( hasLabel("Property")).repeat( out() ).times('.self::MAX_LOOPING.')
@@ -68,7 +68,7 @@ class UnitializedProperties extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
              ->raw('where(
     __.out("BLOCK").emit( hasLabel("Staticproperty")).repeat( out() ).times('.self::MAX_LOOPING.')

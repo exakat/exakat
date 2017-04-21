@@ -36,11 +36,11 @@ class IsUpperFamily extends Analyzer {
              ->savePropertyAs('code', 'method')
              
              ->goToClass()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code").toLowerCase() == method.toLowerCase() }.count().is(eq(0)) )')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{it.get().value("code").toLowerCase() == method.toLowerCase() }.count().is(eq(0)) )')
 
              ->goToAllParents()
              ->atomIsNot('Interface')
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{it.get().value("code").toLowerCase() == method.toLowerCase() }.count().is(neq(0)) )')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{it.get().value("code").toLowerCase() == method.toLowerCase() }.count().is(neq(0)) )')
 
              ->back('first');
         $this->prepareQuery();

@@ -28,14 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class Constructor extends Analyzer {
     public function analyze() {
         // __construct is the main constructor of the class
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->_as('constructor')
+        $this->atomIs('Method')
+             ->hasClass()
              ->outIs('NAME')
              ->codeIs('__construct')
-             ->back('constructor');
+             ->back('first');
         $this->prepareQuery();
 
         // if no __construct(), then default back on the method with the class name
@@ -44,9 +41,9 @@ class Constructor extends Analyzer {
              ->savePropertyAs('code', 'code')
              ->back('first')
              ->outIs('BLOCK')
-             ->raw('where( __.out("ELEMENT").hasLabel("Function").out("NAME").has("code", "__construct").count().is(eq(0)) )')
+             ->raw('where( __.out("ELEMENT").hasLabel("Method").out("NAME").has("code", "__construct").count().is(eq(0)) )')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->_as('constructor')
              ->outIs('NAME')
              ->samePropertyAs('code', 'code')

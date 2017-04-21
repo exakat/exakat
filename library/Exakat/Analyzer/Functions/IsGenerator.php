@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class IsGenerator extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('BLOCK')
              ->atomInside(array('Yield', 'Yieldfrom'))
              ->back('first');

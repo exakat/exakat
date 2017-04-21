@@ -30,7 +30,8 @@ class HasMagicProperty extends Analyzer {
         // Nsname that is not used somewhere else
         $this->atomIs('Class')
              ->outIs('BLOCK')
-             ->atomInside('Function')
+             ->outIs('ELEMENT')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->codeIs(array('__call',  '__callStatic',  '__get',  '__set',  '__isset',  '__unset',  '__sleep',  '__wakeup',  '__tostring',  '__invoke',  '__set_state', '__clone', '__debuginfo'))
              ->back('first');

@@ -41,7 +41,7 @@ class EmptyTrait extends Analyzer {
         $this->atomIs('Trait')
              ->outIs('BLOCK')
              ->isNot('count', 1)
-             ->raw('where( __.out("ELEMENT").hasLabel("Function", "Ppp").count().is(eq(0)) ) ')
+             ->raw('where( __.out("ELEMENT").hasLabel("Method", "Ppp").count().is(eq(0)) ) ')
              ->back('first');
         $this->prepareQuery();
     }

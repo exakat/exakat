@@ -25,12 +25,6 @@ namespace Exakat\Analyzer\Security;
 use Exakat\Analyzer\Analyzer;
 
 class EncodedLetters extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         // space to z. Include upper/lower case, some classics punctuation.
         // dec : 32 to 122

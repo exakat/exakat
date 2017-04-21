@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MustReturn extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs('Method')
              ->hasNoOut('ABSTRACT')
              ->hasClassTrait()
              ->outIs('NAME')

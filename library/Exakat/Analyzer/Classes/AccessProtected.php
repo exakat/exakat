@@ -37,7 +37,7 @@ class AccessProtected extends Analyzer {
              ->classDefinition()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->hasOut('PROTECTED')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')

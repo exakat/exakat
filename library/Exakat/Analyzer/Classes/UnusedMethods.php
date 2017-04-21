@@ -27,18 +27,17 @@ use Exakat\Analyzer\Analyzer;
 
 class UnusedMethods extends Analyzer {
     public function dependsOn() {
-        return array('Classes/UsedMethods',
-                     'Classes/MethodDefinition');
+        return array('Classes/UsedMethods');
     }
     
     public function analyze() {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
         // Methods definitions
-        $this->atomIs('Function')
+        $this->atomIs('Method')
+             ->hasClassTrait()
              ->analyzerIsNot('Classes/UsedMethods')
              ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
              ->codeIsNot($magicMethods)
              ->back('first');
         $this->prepareQuery();

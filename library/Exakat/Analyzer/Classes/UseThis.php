@@ -29,8 +29,7 @@ class UseThis extends Analyzer {
     public function analyze() {
         // Valid for both statics and normal
         // parent::
-        $this->atomIs('Function')
-             ->hasClassTrait()
+        $this->atomIs('Method')
              ->hasNoFunction()
              ->outIs('BLOCK')
              ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))
@@ -40,9 +39,7 @@ class UseThis extends Analyzer {
         $this->prepareQuery();
 
         // Case for normal methods
-        $this->atomIs('Function')
-             ->hasName()
-             ->hasClassTrait()
+        $this->atomIs('Method')
              ->hasNoFunction()
              ->hasNoOut('STATIC')
              ->outIs('BLOCK')
@@ -52,8 +49,7 @@ class UseThis extends Analyzer {
         $this->prepareQuery();
 
         // Case for statics methods
-        $this->atomIs('Function')
-             ->hasClassTrait()
+        $this->atomIs('Method')
              ->hasOut('STATIC')
              ->outIs('BLOCK')
              ->atomInsideNoAnonymous(array('Staticmethodcall', 'Staticproperty'))

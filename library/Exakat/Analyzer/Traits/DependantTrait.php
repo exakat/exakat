@@ -39,7 +39,7 @@ class DependantTrait extends Analyzer {
              ->savePropertyAs('code', 'method')
              ->goToTrait()
              ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
-                             .out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
+                             .out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -92,7 +92,7 @@ class DependantTrait extends Analyzer {
              ->savePropertyAs('code', 'method')
              ->goToTrait()
              ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
-                             .out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
+                             .out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 

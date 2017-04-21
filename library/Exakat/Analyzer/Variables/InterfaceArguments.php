@@ -30,7 +30,7 @@ class InterfaceArguments extends Analyzer {
         $this->atomIs('Interface')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable');

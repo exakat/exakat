@@ -26,8 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MethodIsOverwritten extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
-             ->hasClass()
+        $this->atomIs('Method')
              ->outIs('NAME')
              ->atomIsNot('Void')
              ->savePropertyAs('code', 'methodname')
@@ -35,6 +34,7 @@ class MethodIsOverwritten extends Analyzer {
              ->goToAllChildren()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->samePropertyAs('code', 'methodname')
              ->back('first');

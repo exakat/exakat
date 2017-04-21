@@ -41,7 +41,7 @@ class PropertyVariableConfusion extends Analyzer {
              ->inIs('PPP')
              ->inIs('ELEMENT')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->outIs('BLOCK')
              ->atomInside('Variable')
              ->samePropertyAs('code', 'name')

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class IsInterfaceMethod extends Analyzer {
     public function analyze() {
         // interface extended in the local class
-        $this->atomIs('Function')
+        $this->atomIs('Method')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->goToClass()
@@ -36,14 +36,14 @@ class IsInterfaceMethod extends Analyzer {
              ->interfaceDefinition()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
 
         // interface extended in the parent interface
-        $this->atomIs('Function')
+        $this->atomIs('Method')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->goToClass()
@@ -53,14 +53,14 @@ class IsInterfaceMethod extends Analyzer {
              ->interfaceDefinition()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
         
         // interface defined in the parents
-        $this->atomIs('Function')
+        $this->atomIs('Method')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->goToClass()
@@ -69,7 +69,7 @@ class IsInterfaceMethod extends Analyzer {
              ->interfaceDefinition()
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->back('first');
@@ -86,7 +86,7 @@ class IsInterfaceMethod extends Analyzer {
             $methods = explode(',', $methods);
             
             // interface locally implemented
-            $this->atomIs('Function')
+            $this->atomIs('Method')
                  ->outIs('NAME')
                  ->codeIs($methods)
                  ->inIs('NAME')
@@ -99,7 +99,7 @@ class IsInterfaceMethod extends Analyzer {
             $this->prepareQuery();
 
             // interface implemented by parents
-            $this->atomIs('Function')
+            $this->atomIs('Method')
                  ->outIs('NAME')
                  ->codeIs($methods)
                  ->inIs('NAME')

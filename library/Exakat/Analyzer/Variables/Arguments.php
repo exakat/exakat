@@ -28,14 +28,14 @@ use Exakat\Analyzer\Analyzer;
 class Arguments extends Analyzer {
     public function analyze() {
         // Arguments itself
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable');
         $this->prepareQuery();
         
         // Below
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('VARIABLE')

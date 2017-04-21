@@ -76,7 +76,7 @@ class IsModified extends Analyzer {
 
         // function/methods definition : all modified by incoming values
         // simple variable
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Array');

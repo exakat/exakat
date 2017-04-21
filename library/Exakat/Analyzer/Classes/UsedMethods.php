@@ -36,10 +36,7 @@ class UsedMethods extends Analyzer {
         // Normal Methodcall
         $methods = $this->query('g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()');
         if (!empty($methods)) {
-            $this->atomIs('Class')
-                 ->outIs('BLOCK')
-                 ->outIs('ELEMENT')
-                 ->atomIs('Function')
+            $this->atomIs('Method')
                  ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
@@ -50,10 +47,7 @@ class UsedMethods extends Analyzer {
         // Staticmethodcall
         $staticmethods = $this->query('g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()');
         if (!empty($staticmethods)) {
-            $this->atomIs('Class')
-                 ->outIs('BLOCK')
-                 ->outIs('ELEMENT')
-                 ->atomIs('Function')
+            $this->atomIs('Method')
                  ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
@@ -64,7 +58,7 @@ class UsedMethods extends Analyzer {
 
         $callables = $this->query(<<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZED")
-.not( hasLabel("Function") )
+.not( hasLabel("Function", "Method") )
 .where( or( hasLabel("String"), hasLabel("Arguments")) )
 .map{
     // Strings
@@ -91,11 +85,8 @@ GREMLIN
 );
         if (!empty($callables)) {
             // method used statically in a callback with an array
-            $this->atomIs('Class')
-                 ->savePropertyAs('fullnspath', 'fullnspath')
-                 ->outIs('BLOCK')
-                 ->outIs('ELEMENT')
-                 ->atomIs('Function')
+//                 ->savePropertyAs('fullnspath', 'fullnspath')
+            $this->atomIs('Method')
                  ->_as('used')
                  ->outIs('NAME')
                  ->codeIsNot($magicMethods)
@@ -109,7 +100,7 @@ GREMLIN
              ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->hasOut('PRIVATE')
              ->_as('used')
              ->outIs('NAME')
@@ -128,7 +119,7 @@ GREMLIN
              ->savePropertyAs('fullnspath', 'fullnspath')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->hasNoOut('PRIVATE')
              ->_as('used')
              ->outIs('NAME')

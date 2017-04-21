@@ -25,12 +25,6 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class MissingCases extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $switches = $this->query(<<<GREMLIN
 g.V().hasLabel("Switch").sideEffect{ x = []; }.sideEffect( __.out('CASES').out('ELEMENT').out('CASE').hasLabel('String').not(where(out("CONCAT"))).sideEffect{x.add(it.get().value('noDelimiter'));}).filter{x.size() > 0;}.map{x;}

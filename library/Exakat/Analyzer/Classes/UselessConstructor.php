@@ -31,14 +31,14 @@ class UselessConstructor extends Analyzer {
     }
 
     public function analyze() {
-        $checkConstructor = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").where( __.in("ANALYZED").has("analyzer", "Classes/Constructor")).count().is(eq(0)) )';
+        $checkConstructor = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").where( __.in("ANALYZED").has("analyzer", "Classes/Constructor")).count().is(eq(0)) )';
         
         // class a (no extends, no implements)
         $this->atomIs('Class')
              ->hasNoOut(array('EXTENDS', 'IMPLEMENTS'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -51,7 +51,7 @@ class UselessConstructor extends Analyzer {
              ->hasOut('EXTENDS')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -70,7 +70,7 @@ class UselessConstructor extends Analyzer {
              ->hasOut('EXTENDS')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')

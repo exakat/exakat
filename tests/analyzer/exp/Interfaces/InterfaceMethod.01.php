@@ -1,11 +1,12 @@
 <?php
 
-$expected     = array('interfaceMethod', 
-                      'interfaceMethod2');
+$expected     = array( 'function interfaceMethod( ) ;', 
+                       'function interfaceMethod2( ) ;'
+);
 
-$expected_not = array('classMethod',
-                      'classMethod2',
-                      'traitMethod',
-                      'traitMethod2',);
+$expected_not = array('function classMethod( ) ;',
+                      'function classMethod2( ) ;',
+                      'function traitMethod( ) ;',
+                      'function traitMethod2( ) ;',);
 
 ?>

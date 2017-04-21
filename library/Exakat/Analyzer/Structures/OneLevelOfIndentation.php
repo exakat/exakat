@@ -29,7 +29,7 @@ class OneLevelOfIndentation extends Analyzer {
         $atoms = array('Ifthen', 'Foreach', 'For', 'While', 'Dowhile', 'Switch');
         $blocks = array('THEN', 'ELSE', 'BLOCK', 'CASES');
         
-        $this->atomIs('Function')
+        $this->atomIs(array('Function', 'Method'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs($atoms)

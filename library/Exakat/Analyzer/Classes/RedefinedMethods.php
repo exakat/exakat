@@ -30,7 +30,7 @@ class RedefinedMethods extends Analyzer {
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->_as('results')
              ->outIs('NAME')
              ->savePropertyAs('code', 'method')
@@ -41,7 +41,7 @@ class RedefinedMethods extends Analyzer {
              ->hasNoOut('ABSTRACT') // abstract methods are not redefined. 
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->hasNoOut('ABSTRACT') // abstract methods are not redefined. 
              ->outIs('NAME')
              ->samePropertyAs('code', 'method')

@@ -32,9 +32,9 @@ class OnlyStaticMethods extends Analyzer {
              // Avoid empty classes
              ->raw('where( __.out("ELEMENT").count().is(neq(0)) )')
              //There are static methods
-             ->raw('where( __.out("ELEMENT").hasLabel("Function").where(__.out("STATIC").count().is(eq(1)) ).count().is(neq(0)) )')
+             ->raw('where( __.out("ELEMENT").hasLabel("Method").where(__.out("STATIC").count().is(eq(1)) ).count().is(neq(0)) )')
              //There are no non-static methods
-             ->raw('where( __.out("ELEMENT").hasLabel("Function").where(__.out("STATIC").count().is(eq(0)) ).count().is(eq(0)) )')
+             ->raw('where( __.out("ELEMENT").hasLabel("Method").where(__.out("STATIC").count().is(eq(0)) ).count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

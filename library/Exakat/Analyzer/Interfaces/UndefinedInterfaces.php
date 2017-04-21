@@ -39,28 +39,27 @@ class UndefinedInterfaces extends Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->isNot('aliased', true)
-             ->codeIsNot(array('self', 'parent', 'static'))
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->codeIsNot(array('self', 'parent', 'iterable'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Interfaces/IsExtInterface')
              ->analyzerIsNot('Composer/IsComposerClass')
-             ->analyzerIsNot('Composer/IsComposerInterface')
-             ->codeIsNot('iterable');
+             ->analyzerIsNot('Composer/IsComposerInterface');
         $this->prepareQuery();
 
         $this->atomIs(array('Nsname', 'Identifier'))
              ->hasIn('TYPEHINT')
-             ->codeIsNot(array('self', 'parent', 'static'))
+             ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'))
+             ->codeIsNot(array('self', 'parent', 'static', 'iterable'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
+             ->noUseDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Interfaces/IsExtInterface')
              ->analyzerIsNot('Composer/IsComposerClass')
-             ->analyzerIsNot('Composer/IsComposerInterface')
-             ->tokenIsNot(array('T_ARRAY', 'T_CALLABLE'))
-             ->codeIsNot('iterable');
+             ->analyzerIsNot('Composer/IsComposerInterface');
         $this->prepareQuery();
     }
 }

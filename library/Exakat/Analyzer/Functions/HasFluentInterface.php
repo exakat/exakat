@@ -27,16 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class HasFluentInterface extends Analyzer {
     public function dependsOn() {
-        return array('Functions/HasNotFluentInterface',
-                     'Classes/MethodDefinition');
+        return array('Functions/HasNotFluentInterface');
     }
     
     public function analyze() {
-        $this->atomIs('Function')
-             ->analyzerIsNot('Functions/HasNotFluentInterface')
-             ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
-             ->back('first');
+        $this->atomIs('Method')
+             ->analyzerIsNot('Functions/HasNotFluentInterface');
         $this->prepareQuery();
     }
 }

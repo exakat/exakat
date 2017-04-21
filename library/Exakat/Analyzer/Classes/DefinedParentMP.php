@@ -45,7 +45,7 @@ class DefinedParentMP extends Analyzer {
              ->goToAllParents(self::EXCLUDE_SELF)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->hasNoOut('PRIVATE')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')

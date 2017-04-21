@@ -27,15 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class StaticMethodsCalledFromObject extends Analyzer {
     public function dependsOn() {
-        return array('Classes/MethodDefinition',
-                     'Classes/StaticMethods');
+        return array('Classes/StaticMethods');
     }
 
     public function analyze() {
         $methods = $this->query(<<<GREMLIN
-g.V().hasLabel("Function").where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Trait"))
-                          .where(__.out("STATIC").count().is(eq(1)) )
-                          .out("NAME").values("code").unique()
+g.V().hasLabel("Method").where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Trait"))
+                        .where(__.out("STATIC").count().is(eq(1)) )
+                        .out("NAME").values("code").unique()
 GREMLIN
 );
 

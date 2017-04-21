@@ -175,7 +175,7 @@ class WrongCase extends Analyzer {
              ->outIs('ARGUMENT');
         $this->prepareQuery();
 
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')

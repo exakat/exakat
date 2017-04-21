@@ -33,7 +33,7 @@ class MagicMethod extends Analyzer {
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->codeIs($magicMethods);
         $this->prepareQuery();

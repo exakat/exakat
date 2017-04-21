@@ -26,23 +26,16 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class ConditionalStructures extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/MethodDefinition');
-    }
-    
     public function analyze() {
         // classes, interfaces, Traits
         $this->atomIs(array('Class', 'Interface', 'Trait'))
-             ->analyzerIsNot('Classes/MethodDefinition')
              ->hasIfthen()
              ->back('first');
         $this->prepareQuery();
 
         // functions
         $this->atomIs('Function')
-             ->outIs('NAME')
-             ->analyzerIsNot('Classes/MethodDefinition')
-             ->back('first')
+             ->hasName()
              ->hasIfthen()
              ->back('first');
         $this->prepareQuery();

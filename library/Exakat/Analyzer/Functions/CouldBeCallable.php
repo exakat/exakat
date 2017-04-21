@@ -31,7 +31,7 @@ class CouldBeCallable extends Analyzer {
     
     public function analyze() {
         // $arg(...)
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->raw('not(where( __.out("TYPEHINT").has("token", "T_CALLABLE")))')
@@ -49,7 +49,7 @@ class CouldBeCallable extends Analyzer {
         $this->prepareQuery();
 
         // array_map($array, $arg)
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->raw('not(where( __.out("TYPEHINT").has("token", "T_CALLABLE")))')

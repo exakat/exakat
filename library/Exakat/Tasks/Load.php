@@ -146,10 +146,10 @@ class Load extends Tasks {
     const CONTEXT_FUNCTION     = 4;
     const CONTEXT_NEW          = 5;
     const CONTEXT_NOSEQUENCE   = 6;
-    private $contexts = array(self::CONTEXT_CLASS        => false,
+    private $contexts = array(self::CONTEXT_CLASS        => 0,
                               self::CONTEXT_INTERFACE    => false,
                               self::CONTEXT_TRAIT        => false,
-                              self::CONTEXT_FUNCTION     => false,
+                              self::CONTEXT_FUNCTION     => 0,
                               self::CONTEXT_NEW          => false,
                               self::CONTEXT_NOSEQUENCE   => 0
                          );
@@ -997,15 +997,19 @@ class Load extends Tasks {
     private function processFunction() {
         $current = $this->id;
         
-        if ($this->isContext(self::CONTEXT_CLASS) ||
-            $this->isContext(self::CONTEXT_TRAIT) ||
-            $this->isContext(self::CONTEXT_INTERFACE)) {
+        if (($this->isContext(self::CONTEXT_CLASS) ||
+             $this->isContext(self::CONTEXT_TRAIT) ||
+             $this->isContext(self::CONTEXT_INTERFACE)) &&
+             
+             !$this->isContext(self::CONTEXT_FUNCTION)) {
             $function = $this->addAtom('Method');
         } else {
             $function = $this->addAtom('Function');
         }
 
-        $this->toggleContext(self::CONTEXT_FUNCTION);
+        $previousClassContext = $this->contexts[self::CONTEXT_CLASS];
+        $this->contexts[self::CONTEXT_CLASS] = 0;
+        $this->contexts[self::CONTEXT_FUNCTION] = 1;
 
         $fullcode = array();
         foreach($this->optionsTokens as $name => $option) {
@@ -1099,7 +1103,8 @@ class Load extends Tasks {
             $this->processSemicolon();
         }
 
-        $this->toggleContext(self::CONTEXT_FUNCTION);
+        $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
+        $this->exitContext(self::CONTEXT_FUNCTION);
         return $function;
     }
 
@@ -1255,7 +1260,7 @@ class Load extends Tasks {
         $current = $this->id;
         $class = $this->addAtom('Class');
         $this->currentClassTrait[] = $class;
-        $this->toggleContext(self::CONTEXT_CLASS);
+        $this->nestContext(self::CONTEXT_CLASS);
 
         // Should work on Abstract and Final only
         $fullcode= array();
@@ -1343,7 +1348,7 @@ class Load extends Tasks {
             $this->processSemicolon();
         }
 
-        $this->toggleContext(self::CONTEXT_CLASS);
+        $this->exitContext(self::CONTEXT_CLASS);
         array_pop($this->currentClassTrait);
         if (isset($isExtended)) {
             array_pop($this->currentParentClassTrait);
@@ -1619,7 +1624,8 @@ class Load extends Tasks {
         } 
         
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR, \Exakat\Tasks\T_STRING, \Exakat\Tasks\T_NAMESPACE))) {
-            $nsname = $this->processOneNsname();
+            $nsname = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
+
             if (in_array(strtolower($this->tokens[$this->id][1]), array('int', 'bool', 'void', 'float', 'string'))) {
                 $nsname->fullnspath = '\\'.strtolower($this->tokens[$this->id][1]);
             } else {
@@ -1634,7 +1640,7 @@ class Load extends Tasks {
             return $nsname;
         } 
         
-        // Nothing to do, really ? 
+        // Nothing to do, return 0 for the calling method
         return 0;
     }
 
@@ -4595,12 +4601,12 @@ class Load extends Tasks {
         }
     }
 
-    private function nestContext() {
-        return ++$this->contexts[self::CONTEXT_NOSEQUENCE];
+    private function nestContext($context = self::CONTEXT_NOSEQUENCE) {
+        return ++$this->contexts[$context];
     }
 
-    private function exitContext() {
-        return --$this->contexts[self::CONTEXT_NOSEQUENCE];
+    private function exitContext($context = self::CONTEXT_NOSEQUENCE) {
+        return --$this->contexts[$context];
     }
 
     private function toggleContext($context) {

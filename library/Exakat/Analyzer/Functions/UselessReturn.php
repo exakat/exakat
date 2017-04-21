@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UselessReturn extends Analyzer {
     public function analyze() {
         // return in special functions
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->hasClassTrait()
 
              ->outIs('NAME')
@@ -45,7 +45,7 @@ class UselessReturn extends Analyzer {
         $this->prepareQuery();
 
         // function that finally returns void. (the last return is useless)
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->hasNoClassTrait()
              ->outIs('BLOCK')
              ->outWithRank('ELEMENT', 'last')

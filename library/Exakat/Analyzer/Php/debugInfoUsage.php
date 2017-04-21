@@ -29,10 +29,9 @@ class debugInfoUsage extends Analyzer {
     protected $phpVersion = '5.6+';
     
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs('Method')
              ->outIs('NAME')
              ->codeIs('__debugInfo')
-             ->hasClass()
              ->back('first');
         $this->prepareQuery();
     }

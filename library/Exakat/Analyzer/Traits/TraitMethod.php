@@ -31,8 +31,7 @@ class TraitMethod extends Analyzer {
         $this->atomIs('Trait')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->outIs('NAME');
+             ->atomIs('Method');
         $this->prepareQuery();
     }
 }

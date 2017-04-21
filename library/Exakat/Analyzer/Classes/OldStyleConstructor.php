@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class OldStyleConstructor extends Analyzer {
     public function analyze() {
-        $hasNo__construct = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"}.count().is(eq(0)) )';
+        $hasNo__construct = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"}.count().is(eq(0)) )';
 
         $this->atomIs('Class')
              ->outIs('NAME')
@@ -36,7 +36,7 @@ class OldStyleConstructor extends Analyzer {
              ->raw($hasNo__construct)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->goToNamespace()
@@ -51,7 +51,7 @@ class OldStyleConstructor extends Analyzer {
              ->raw($hasNo__construct)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->goToNamespace()

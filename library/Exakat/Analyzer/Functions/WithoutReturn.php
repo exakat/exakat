@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class WithoutReturn extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->hasNoOut('ABSTRACT')
              ->hasNoInterface()
              ->outIs('NAME')

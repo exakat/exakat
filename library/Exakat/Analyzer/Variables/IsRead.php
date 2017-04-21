@@ -126,7 +126,8 @@ class IsRead extends Analyzer {
         // Variable that are not a reference in a functioncall
         $this->atomIs('Variable')
              ->hasIn('ARGUMENT')
-             ->hasNoParent('Function', array('ARGUMENT', 'ARGUMENTS'));
+             ->hasNoParent('Function', array('ARGUMENT', 'ARGUMENTS'))
+             ->hasNoParent('Method', array('ARGUMENT', 'ARGUMENTS'));
         $this->prepareQuery();
     }
 }

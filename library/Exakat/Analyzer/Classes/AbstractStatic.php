@@ -28,14 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class AbstractStatic extends Analyzer {
 
     public function analyze() {
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->atomInside('Function')
-             ->_as('f')
-             ->outIs('ABSTRACT')
-             ->back('f')
-             ->outIs('STATIC')
-             ->back('f');
+        $this->atomIs('Method')
+             ->hasOut('ABSTRACT')
+             ->hasOut('STATIC')
+             ->back('first');
         $this->prepareQuery();
     }
 }

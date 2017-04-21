@@ -27,16 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class StaticCpm extends Analyzer {
     public function analyze() {
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->atomInside('Function')
+        $this->atomIs('Method')
              ->hasOut('STATIC')
              ->outIs('NAME');
         $this->prepareQuery();
 
         $this->atomIs('Class')
              ->outIs('BLOCK')
-             ->atomInside('Ppp')
+             ->outIs('ELEMENT')
+             ->atomIs('Ppp')
              ->hasOut('STATIC')
              ->outIs('PPP');
         $this->prepareQuery();

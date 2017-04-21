@@ -41,7 +41,7 @@ class ConstantScalarExpression extends Analyzer {
         $this->prepareQuery();
 
         // function x( $a = 3 . '3', $b = array())
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')

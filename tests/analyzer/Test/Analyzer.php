@@ -33,11 +33,9 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Needs version '.$analyzerobject->getPhpVersion().'.');
         }
 
-//        require('exp/'.preg_replace('/^([^_]+?)_(.*)$/', '$1/$2', $file).'.php');
         require('exp/'.$file.'.php');
         
         $versionPHP = 'php'.str_replace('.', '', $phpversion);
-        print $config->$versionPHP.' -l ./source/'.$file.'.php 2>/dev/null';
         $res = shell_exec($config->$versionPHP.' -l ./source/'.$file.'.php 2>/dev/null');
         if (strpos($res, 'No syntax errors detected') === false) {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');

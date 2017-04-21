@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class ConditionedFunctions extends Analyzer {
     public function analyze() {
         $this->atomIs('Function')
-             ->hasNoChildren('Void', 'NAME') // Not a closure
-             ->hasNoParent(array('Class', 'Trait'), array('ELEMENT', 'BLOCK')) // Not a method definition
+             ->hasName()
              ->hasIfthen();
         $this->prepareQuery();
     }

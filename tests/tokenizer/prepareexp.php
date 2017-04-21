@@ -2,6 +2,8 @@
 
 $args = $argv;
 
+include '../../library/Autoload.php';
+
 if (count($args) < 2) {
     print "Building exp/* for all tests\n";
 }
@@ -59,8 +61,12 @@ function run($test, $number) {
 
     include_once('../../library/Exakat/Phpexec.php');
     include_once('../../library/Exakat/Config.php');
-    $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
-        
+
+    $pwd = getcwd();
+    chdir('../../');
+    $config = \Exakat\Config::factory(array('test', '-p', 'test'));
+    chdir($pwd);    
+
     $versionPHP = 'php'.str_replace('.', '', $phpversion);
 
     $shell = $config->$versionPHP.' -l ./source/'.$test.'.'.$number.'.php';
@@ -101,4 +107,6 @@ function run($test, $number) {
         return;
     }
 }
+
+print_r(get_declared_classes());
 ?>

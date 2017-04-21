@@ -26,14 +26,9 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class toStringThrowsException extends Analyzer {
-    public function dependsOn() {
-        return array('Classes/MethodDefinition');
-    }
-    
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs('Method')
              ->outIs('NAME')
-             ->analyzerIs('Classes/MethodDefinition')
              ->codeIs('__toString', true)
              ->inIs('NAME')
              ->outIs('BLOCK')

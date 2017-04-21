@@ -30,7 +30,7 @@ class NormalMethods extends Analyzer {
         $this->atomIs(array('Class', 'Trait'))
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->hasNoOut('STATIC')
              ->outIs('NAME');
         $this->prepareQuery();

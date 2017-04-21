@@ -25,12 +25,6 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class GlobalsVsGlobal extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $mapping = <<<GREMLIN
 if (it.get().value('code') == '\$GLOBALS') { 

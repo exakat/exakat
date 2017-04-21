@@ -27,10 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class AccessPrivate extends Analyzer {
     public function analyze() {
-        $hasPrivateMethodDefinition = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function")
+        $hasPrivateMethodDefinition = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Method")
                                                                             .out("NAME").filter{it.get().value("code") == name}.in("NAME")
                                                                             .out("PRIVATE").count().is(eq(1)) )';
-        $notHasPrivateMethodDefinition = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Function")
+        $notHasPrivateMethodDefinition = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Method")
                                                                                .out("NAME").filter{it.get().value("code") == name}.in("NAME")
                                                                                .out("PRIVATE").count().is(eq(0)) )';
 

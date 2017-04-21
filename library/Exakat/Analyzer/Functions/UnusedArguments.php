@@ -46,7 +46,7 @@ class UnusedArguments extends Analyzer {
              ->isNot('reference', true)
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->atomIs('Function')
+             ->atomIs(self::$FUNCTION_METHOD)
              ->_as('results')
              ->hasNoClassInterfaceTrait()
              ->outIs('BLOCK')
@@ -61,7 +61,7 @@ class UnusedArguments extends Analyzer {
              ->isNot('reference', true)
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->atomIs('Function')
+             ->atomIs(self::$FUNCTION_METHOD)
              ->_as('results')
 
              ->hasClassTrait()
@@ -79,7 +79,7 @@ class UnusedArguments extends Analyzer {
              ->is('reference', true)
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->atomIs('Function')
+             ->atomIs(self::$FUNCTION_METHOD)
              ->_as('results')
              ->hasNoClassInterfaceTrait()
              ->outIs('BLOCK')
@@ -94,7 +94,7 @@ class UnusedArguments extends Analyzer {
              ->is('reference', true)
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->atomIs('Function')
+             ->atomIs(self::$FUNCTION_METHOD)
              ->_as('results')
 
              ->hasClassTrait()
@@ -107,7 +107,7 @@ class UnusedArguments extends Analyzer {
         $this->prepareQuery();
 
         // Arguments in a USE, not a reference
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->hasChildren('Void', 'NAME')
              ->outIs('USE')
              ->outIs('ARGUMENT')
@@ -123,7 +123,7 @@ class UnusedArguments extends Analyzer {
         $this->prepareQuery();
 
         // Arguments in a USE, reference
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->hasChildren('Void', 'NAME')
              ->outIs('USE')
              ->outIs('ARGUMENT')
@@ -144,7 +144,7 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->goToClassTrait()
              ->raw('where( repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times('.self::MAX_LOOPING.')
-                                     .out("BLOCK").out("ELEMENT").hasLabel("Function").out("NAME").filter{ it.get().value("code") == name}
+                                     .out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{ it.get().value("code") == name}
                                      .count().is(eq(0)) 
                           )')
              ->back('method');

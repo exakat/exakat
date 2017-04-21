@@ -28,20 +28,10 @@ use Exakat\Analyzer\Analyzer;
 class FunctionDefinition extends Analyzer {
     protected $functions = array();
     
-    public function dependsOn() {
-        return array('Classes/MethodDefinition',
-                     'Interfaces/InterfaceMethod',
-                     'Traits/TraitMethod');
-    }
-    
     public function analyze() {
         $fullnspath = $this->makeFullNsPath($this->functions);
         
         $this->atomIs('Function')
-             ->hasNoClassInterfaceTrait()
-             ->analyzerIsNot('Classes/MethodDefinition')
-             ->analyzerIsNot('Interfaces/InterfaceMethod')
-             ->analyzerIsNot('Traits/TraitMethod')
              ->fullnspathIs($fullnspath);
         $this->prepareQuery();
     }

@@ -1184,13 +1184,13 @@ GREMLIN
     }
 
     public function hasFunctionDefinition() {
-        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function").count().is(eq(1)))');
+        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method").count().is(eq(1)))');
     
         return $this;
     }
 
     public function hasNoFunctionDefinition() {
-        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function").count().is(eq(0)))');
+        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method").count().is(eq(0)))');
     
         return $this;
     }
@@ -1214,7 +1214,7 @@ GREMLIN
     }
 
     public function goToFunction() {
-        $this->addMethod('repeat(__.in('.$this->linksDown.')).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))');
+        $this->addMethod('repeat(__.in('.$this->linksDown.')).until(and(hasLabel("Function", "Method"), where(__.out("NAME").not(hasLabel("Void")) )))');
         
         return $this;
     }
@@ -1255,6 +1255,12 @@ GREMLIN
 
     public function hasClassDefinition() {
         $this->addMethod('where(__.in("DEFINITION").hasLabel("Class").count().is(eq(1)))');
+    
+        return $this;
+    }
+
+    public function noUseDefinition() {
+        $this->addMethod('where(__.out("DEFINITION").in("USE").hasLabel("Use").count().is(eq(0)))');
     
         return $this;
     }

@@ -34,7 +34,7 @@ class UsedPrivateMethod extends Analyzer {
              ->savePropertyAs('fullnspath', 'classname')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->_as('method')
              ->hasOut('PRIVATE')
              ->outIs('NAME')
@@ -53,10 +53,7 @@ class UsedPrivateMethod extends Analyzer {
         $this->prepareQuery();
 
         // method used in a static methodcall static::b() or self
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
+        $this->atomIs('Method')
              ->_as('method')
              ->hasOut('PRIVATE')
              ->outIs('NAME')
@@ -70,15 +67,11 @@ class UsedPrivateMethod extends Analyzer {
              ->inIs('CLASS')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
-             ->back('method');
+             ->back('first');
         $this->prepareQuery();
 
         // method used in a normal methodcall with $this $this->b()
-        $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->_as('method')
+        $this->atomIs('Method')
              ->hasOut('PRIVATE')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
@@ -90,7 +83,7 @@ class UsedPrivateMethod extends Analyzer {
              ->inIs('OBJECT')
              ->outIs('METHOD')
              ->samePropertyAs('code', 'name')
-             ->back('method');
+             ->back('first');
         $this->prepareQuery();
 
         // method used in a new (constructor)
@@ -98,7 +91,7 @@ class UsedPrivateMethod extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->hasOut('PRIVATE')
              ->_as('method')
              ->outIs('NAME')
@@ -117,7 +110,7 @@ class UsedPrivateMethod extends Analyzer {
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->hasOut('PRIVATE')
              ->outIs('NAME')
              ->codeIs('__destruct')

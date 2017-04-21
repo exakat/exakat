@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class StaticContainsThis extends Analyzer {
     
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs('Method')
              ->outIs('STATIC')
              ->back('first')
              ->outIs('BLOCK')

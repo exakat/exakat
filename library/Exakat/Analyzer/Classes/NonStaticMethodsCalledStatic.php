@@ -56,7 +56,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
 
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
+             ->atomIs('Method')
              ->hasNoOut('STATIC')
              ->outIs('NAME')
              ->samePropertyAs('code', 'methodname')
