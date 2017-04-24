@@ -179,6 +179,8 @@ class Project extends Tasks {
         Config::factory($oldConfig);
         display("Reported project\n");
 
+        /*
+            This is dev code, not production
         $query = <<<GREMLIN
 g.V().where( __.sideEffect{x = []; }.in('ANALYZED').sideEffect{ x.add(it.get().value('analyzer')); }.barrier().sideEffect{ y = x.groupBy().findAll{ i,j -> j.size() > 1;};} )
 .filter{ y.size() > 0; }
@@ -189,7 +191,7 @@ GREMLIN;
         if (!empty($res)) {
             file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/doublons.log', var_export($res, true));
         }
-
+        */
         $this->logTime('Final');
         $this->removeSnitch();
         display("End\n");
