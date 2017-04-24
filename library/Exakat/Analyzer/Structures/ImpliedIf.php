@@ -36,8 +36,10 @@ class ImpliedIf extends Analyzer {
              ->inIs('LEFT')
 
              ->inIsIE('CODE')
-             ->hasNoParent('For', array('ELEMENT', 'FINAL', 'INCREMENT', 'INIT'))
-             ->hasIn('ELEMENT')
+             ->inIs('ELEMENT') // Necessary
+             ->hasNoParent('For', 'FINAL')
+             ->hasNoParent('For', 'INCREMENT')
+             ->hasNoParent('For', 'INIT')
 
              ->back('first');
         $this->prepareQuery();
