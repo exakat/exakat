@@ -14,9 +14,15 @@ $expected     = array('Stdclass $yyy',
                       '$yyt = 2', 
                       'Stdclass $yyyt', 
                       '$t', 
-                      '$statictywd');
+                      '$staticxy',
+                      '$statictfy',
+                      '$statictfywd');
 
-$expected_not = array('$staticxy',
-                      '$staticty');
+$expected_not = array('$t',
+                      '$t2',
+                      '$tWithDefault',
+                      '$xWithDefault',
+                      '$x2',
+                      '$x');
 
 ?>
