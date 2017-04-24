@@ -34,11 +34,11 @@ class Cake33DeprecatedStaticmethodcall extends Analyzer {
         $deprecatedClasses = array('\cake\utility\crypto\mcrypt',
                                   );
 
-        $deprecatedInterface = array(
+        $deprecatedInterfaces = array(
                                     );
         
-        $deprecatedTrait = array('\cake\routing\requestactiontrait', //'RequestActionTrait'
-                                );
+        $deprecatedTraits = array('\cake\routing\requestactiontrait', //'RequestActionTrait'
+                                 );
 
         // Static methods calls
         foreach($staticcalls as $class => $methods) {
@@ -59,13 +59,13 @@ class Cake33DeprecatedStaticmethodcall extends Analyzer {
         $this->prepareQuery();
 
         // Interfaces
-        $this->atomIs('Class')
-             ->fullnspathIs($deprecatedClasses);
+        $this->atomIs('Interface')
+             ->fullnspathIs($deprecatedInterface);
         $this->prepareQuery();
 
-        // Classes
-        $this->atomIs('Class')
-             ->fullnspathIs($deprecatedClasses);
+        // Traits
+        $this->atomIs('Trait')
+             ->fullnspathIs($deprecatedTraits);
         $this->prepareQuery();
     }
 }
