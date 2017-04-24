@@ -31,20 +31,42 @@ class QueriesInLoop extends Analyzer {
         $this->atomIs(array('Foreach', 'For', 'While'))
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->codeIs(array('mssql_query',
+             ->codeIs(array('cubrid_query',
+                            'cubrid_prepare',
+                            'cubrid_execute',
+                            'cubrid_bind',
+                            
+                            'mssql_query',
+                            
                             'mysqli_query',
                             'mysqli_unbuffered_query',
                             'mysqli_db_query',
+
+                            'mysqli_stmt_bind_param',
+                            'mysqli_stmt_execute',
+                            'mysqli_prepare',
                             
                             'mysql_query',
                             'mysql_unbuffered_query',
                             'mysql_db_query',
                             
-                            'pg_query',
+                            'oci_execute',
+                            'oci_parse',
+                            'oci_bind_array_by_name',
+                            'oci_bin_by_name',
                             
+                            'pg_query',
+                            'pg_prepare',
+                            'pg_execute',
+                            
+                            'sqlsrv_execute',
+                            'sqlsrv_prepare',
+                            'sqlsrv_query',
+
                             'sqlite_array_query',
                             'sqlite_single_query',
                             'sqlite_unbuffered_query',
+                            
                             ))
              ->back('first');
         $this->prepareQuery();
