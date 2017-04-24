@@ -175,7 +175,7 @@ HTML;
 
         file_put_contents($folder.'/'.$name.'/index.html', $html);
 
-        foreach($summary as $titleUp => $section) {
+        foreach($summary as $section) {
             foreach($section as $title => $method) {
                 if (method_exists($this, $method)) {
                     $html = $this->$method($title);

@@ -103,7 +103,7 @@ class Initproject extends Tasks {
                 $projectName = basename($repositoryURL);
             } elseif ($this->config->bzr === true) {
                 $vcs = 'bzr';
-                list($server, $projectName) = explode(':', $repositoryURL);
+                list(, $projectName) = explode(':', $repositoryURL);
             } elseif ($this->config->hg === true) {
                 $vcs = 'hg';
                 $projectName = basename($repositoryURL);

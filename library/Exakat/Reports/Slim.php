@@ -205,7 +205,7 @@ MENU;
     }
 
     private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter){
-        $lineNumber--; // array index
+        --$lineNumber; // array index
         $lines = array();
         if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath)) {
 
@@ -225,7 +225,7 @@ MENU;
                 }
             }
 
-            for ($i=$startLine; $i < $endLine+1 ; $i++) {
+            for ($i=$startLine; $i < $endLine+1 ; ++$i) {
                 $lines[]= array(
                             'line' => $i + 1,
                             'code' => $fileLines[$i]

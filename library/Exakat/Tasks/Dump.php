@@ -788,7 +788,7 @@ g.V().$filter.has('constant', true)
 GREMLIN
             ;
             $res = $this->gremlin->query($query);
-            if (!is_object($res)) {
+            if (!($res instanceof stdClass)) {
                 continue; 
             }
             $res = $res->results;

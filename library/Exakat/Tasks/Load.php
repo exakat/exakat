@@ -3394,7 +3394,7 @@ class Load extends Tasks {
             $actual = bindec(substr($value, 2));
         } elseif (strtolower(substr($value, 0, 2)) === '0x') {
             $actual = hexdec(substr($value, 2));
-        } elseif (strtolower(substr($value, 0, 1)) === '0') {
+        } elseif (strtolower($value[0]) === '0') {
             // PHP 7 will just stop.
             // PHP 5 will work until it fails
             $actual = octdec(substr($value, 1));
@@ -3503,7 +3503,7 @@ class Load extends Tasks {
     }
 
     private function processCast() {
-        $cast = $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
+        $this->processSingleOperator('Cast', $this->precedence->get($this->tokens[$this->id][0]), 'CAST', ' ');
         $operator = $this->popExpression();
         if (strtolower($operator->code) === '(binary)') {
             $operator->binaryString = $operator->code[1];

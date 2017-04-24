@@ -270,7 +270,7 @@ MENU;
     }
 
     private function getLinesFromFile($filePath,$lineNumber,$numberBeforeAndAfter){
-        $lineNumber--; // array index
+        --$lineNumber; // array index
         $lines = array();
         if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/'.$filePath)) {
 
@@ -290,7 +290,7 @@ MENU;
                 }
             }
 
-            for ($i=$startLine; $i < $endLine+1 ; $i++) {
+            for ($i=$startLine; $i < $endLine+1 ; ++$i) {
                 $lines[]= array(
                             'line' => $i + 1,
                             'code' => $fileLines[$i]
@@ -921,15 +921,14 @@ JAVASCRIPT;
             $dataScript .= $dataScript ? ', {label: "'.$value['label'].'", value: '.$value['value'].'}' : '{label: "'.$value['label'].'", value: '.$value['value'].'}';
         }
         $nb = 4 - count($data);
-        for($i = 0; $i < $nb; ++$i) {
-            $issuesHtml .= '<div class="clearfix">
-                   <div class="block-cell">&nbsp;</div>
-                   <div class="block-cell text-center">&nbsp;</div>
-                 </div>';
-        }
+        $filler = '<div class="clearfix">
+               <div class="block-cell">&nbsp;</div>
+               <div class="block-cell text-center">&nbsp;</div>
+             </div>';
+        $issuesHtml .= str_repeat($filler, $nb);
 
-        return array('html'  => $issuesHtml,
-                    'script' => $dataScript);
+        return array('html'   => $issuesHtml,
+                     'script' => $dataScript);
     }
 
     public function getSeverityBreakdown() {
@@ -960,12 +959,11 @@ SQL;
             $dataScript .= $dataScript ? ', {label: "'.$value['label'].'", value: '.$value['value'].'}' : '{label: "'.$value['label'].'", value: '.$value['value'].'}';
         }
         $nb = 4 - count($data);
-        for($i = 0; $i < $nb; ++$i) {
-            $html .= '<div class="clearfix">
-                   <div class="block-cell">&nbsp;</div>
-                   <div class="block-cell text-center">&nbsp;</div>
-                 </div>';
-        }
+        $filler = '<div class="clearfix">
+               <div class="block-cell">&nbsp;</div>
+               <div class="block-cell text-center">&nbsp;</div>
+             </div>';
+        $issuesHtml .= str_repeat($filler, $nb);
 
         return array('html' => $html, 'script' => $dataScript);
     }
