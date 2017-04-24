@@ -284,10 +284,6 @@ class Config {
         }
     }
 
-    public static function factorySingle($argv = array()) {
-        return new Config($argv);
-    }
-
     public static function push($argv = array()) {
         self::factory($argv);
 
