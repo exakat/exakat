@@ -35,7 +35,6 @@ class UsedFunctions extends Analyzer {
         $functions = $this->query('g.V().hasLabel("Functioncall").has("fullnspath").values("fullnspath").unique()');
         if (!empty($functions)) {
             $this->atomIs('Function')
-                 ->hasNoClassInterfaceTrait()
                  ->hasName()
                  ->fullnspathIs($functions);
             $this->prepareQuery();
@@ -45,7 +44,7 @@ class UsedFunctions extends Analyzer {
         $functionsInStrings = $this->query('g.V().hasLabel("String").has("fullnspath").values("fullnspath").unique()');
         if (!empty($functionsInStrings)) {
             $this->atomIs('Function')
-                 ->hasNoClassInterfaceTrait()
+                 ->hasName()
                  ->fullnspathIs($functionsInStrings);
             $this->prepareQuery();
         }

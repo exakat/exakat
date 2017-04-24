@@ -1184,7 +1184,7 @@ GREMLIN
     }
 
     public function hasFunctionDefinition() {
-        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method").count().is(eq(1)))');
+        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method").count().is(neq(0)))');
     
         return $this;
     }

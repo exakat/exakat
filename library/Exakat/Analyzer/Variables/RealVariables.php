@@ -28,10 +28,12 @@ use Exakat\Analyzer\Analyzer;
 class RealVariables extends Analyzer {
     public function analyze() {
         $this->atomIs('Variable')
-             ->hasNoIn(array('GLOBAL'))
+             ->hasNoIn('GLOBAL')
              ->hasNoParent('Staticproperty', 'PROPERTY')
              ->hasNoParent(array('Class', 'Trait'), array('PPP', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent(array('Class', 'Trait'), array('STATIC', 'ELEMENT', 'BLOCK'))
              ->hasNoParent(array('Class', 'Trait'), array('LEFT', 'PPP', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent(array('Class', 'Trait'), array('LEFT', 'STATIC', 'ELEMENT', 'BLOCK'))
              ->hasNoParent('Ppp', 'PPP');
         $this->prepareQuery();
     }
