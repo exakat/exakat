@@ -195,7 +195,7 @@ GREMLIN;
           .fold()
 )
 .map{classes[0]}.as('theClass')
-.addE('DEFINITION').from( 'first' )
+.addE('DEFINITION').to( 'first' )
 GREMLIN;
         $this->gremlin->query($query);
         display('Create link between Class constant and definition');

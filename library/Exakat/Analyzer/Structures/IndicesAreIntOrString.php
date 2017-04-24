@@ -38,8 +38,30 @@ class IndicesAreIntOrString extends Analyzer {
         $this->atomIs('Array')
              ->outIs('INDEX')
              ->atomIs('String')
+             ->tokenIsNot('T_NUM_STRING')  // a string but a real integer
              ->hasNoOut('CONCAT')
              ->regexIs('noDelimiter', '^[1-9][0-9]*\\$')
+             ->back('first');
+        $this->prepareQuery();
+
+        // $x[a] and const a = 2.3
+        $this->atomIs('Array')
+             ->outIs('INDEX')
+             ->atomIs(array('Identifier', 'Nsname', 'Staticconstant'))
+             ->inIs('DEFINITION')
+             ->outIs('VALUE')
+             ->atomIs(array('Boolean', 'Real', 'Null', 'Functioncall')) // Functioncall is for array
+             ->back('first');
+        $this->prepareQuery();
+
+        // $x[a] and define('a', 2.3)
+        $this->atomIs('Array')
+             ->outIs('INDEX')
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->inIs('DEFINITION')
+             ->outWithRank('ARGUMENT', 1)
+             ->atomIs(array('Boolean', 'Real', 'Null', 'Functioncall')) // Functioncall is for array
+//             ->tokenIs(array('T_STRING', 'T_DNUMBER', 'T_ARRAY', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();
     }

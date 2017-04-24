@@ -1645,7 +1645,7 @@ class Load extends Tasks {
     private function processArguments($finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehintSupport = false) {
         $arguments = $this->addAtom('Arguments');
         $current = $this->id;
-        $this->argumentsId = array();
+        $argumentsId = array();
 
         $this->nestContext();
         $fullcode = array();
@@ -1659,7 +1659,7 @@ class Load extends Tasks {
             $arguments->line     = $this->tokens[$current][2];
             $arguments->token    = $this->getToken($this->tokens[$current][0]);
             $arguments->constant = self::CONSTANT_EXPRESSION;
-            $this->argumentsId[] = $void;
+            $argumentsId[] = $void;
 
             ++$this->id;
         } else {
@@ -1715,7 +1715,6 @@ class Load extends Tasks {
                     }
 
                     $index->rank = ++$rank;
-                    $this->argumentsId[] = $index;
 
                     if ($nullable !== 0) {
                         $this->addLink($index, $nullable, 'NULLABLE');
@@ -1733,6 +1732,7 @@ class Load extends Tasks {
                     }
 
                     $this->addLink($arguments, $index, 'ARGUMENT');
+                    $argumentsId[] = $index;
                     $fullcode[] = $index->fullcode;
                     $constant = $constant && ($index->constant === self::CONSTANT_EXPRESSION);
 
@@ -1749,7 +1749,8 @@ class Load extends Tasks {
                 $index = $this->addAtomVoid();
             }
             $index->rank = ++$rank;
-            $this->argumentsId[] = $index;
+            $argumentsId[] = $index;
+            $this->argumentsId = $argumentsId; // This avoid overwriting when nesting functioncall
 
             if ($nullable !== 0) {
                 $this->addLink($index, $nullable, 'NULLABLE');
@@ -2002,7 +2003,7 @@ class Load extends Tasks {
         $string->absolute   = false;
 
         $this->pushExpression($string);
-
+        
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF   ||
             $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NEW
@@ -2017,7 +2018,7 @@ class Load extends Tasks {
             $string->fullnspath = $fullnspath;
             $string->aliased    = $aliased;
 
-            $this->addCall('const', $fullnspath, $string);
+//            $this->addCall('const', $fullnspath, $string);
         }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -4434,8 +4435,8 @@ class Load extends Tasks {
             return;
         }
         
-        list($fullnspath, $aliased) = $this->getFullnspath($this->argumentsId[0], 'const');
-
+        $fullnspath = '\\'.strtolower($this->argumentsId[0]->noDelimiter);
+        
         $this->addDefinition('const', $fullnspath, $argumentsId);
         $this->argumentsId[0]->fullnspath = $fullnspath;
     }
