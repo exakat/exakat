@@ -187,9 +187,9 @@ class Dump extends Tasks {
         $query = array();
         foreach($res as $id => $result) {
             if (!is_object($result)) {
-                var_dump($result);
                 continue;
             }
+
             $query[] = "(null, '".$this->sqlite->escapeString($result->fullcode)."', '".$this->sqlite->escapeString($result->file)."', 
             ".$this->sqlite->escapeString($result->line).", '".$this->sqlite->escapeString($result->{'namespace'})."', 
             '".$this->sqlite->escapeString($result->class)."', '".$this->sqlite->escapeString($result->function)."',
@@ -296,7 +296,7 @@ class Dump extends Tasks {
         $this->sqlite->query('CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                    namespace STRING
                                                  )');
-        $this->sqlite->query('INSERT INTO namespaces VALUES ( 1, "Global")');
+        $this->sqlite->query('INSERT INTO namespaces VALUES ( 1, "")');
 
         $query = <<<GREMLIN
 g.V().hasLabel("Namespace").out("NAME").map{ ['name' : it.get().value("fullcode")] }.unique();
@@ -308,7 +308,7 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."')";
+            $query[] = "(null, '\\".strtolower($this->sqlite->escapeString($row->name))."')";
             ++$total;
         }
         
@@ -317,18 +317,14 @@ GREMLIN
             $this->sqlite->query($query);
         }
 
-        $query = 'SELECT id, namespace FROM namespaces';
+        $query = 'SELECT id, lower(namespace) AS namespace FROM namespaces';
         $res = $this->sqlite->query($query);
 
         $namespacesId = array('' => 1);
         while($namespace = $res->fetchArray(\SQLITE3_ASSOC)) {
             $namespacesId[$namespace['namespace']] = $namespace['id'];
         }
-
         display("$total namespaces\n");
-
-        // Ids for Classes, Interfaces and Traits
-        $citId = array();
 
         // Classes
         $this->sqlite->query('DROP TABLE IF EXISTS cit');
@@ -386,25 +382,25 @@ GREMLIN
 
             $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$namespaceId.", ".(int) $row->abstract.",".(int) $row->final.", 'class')";
 
-            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
+//            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
 
             // Get extends
             if (!empty($row->extends)) {
                 if (isset($extendsId[$row->extends[0]])) {
-                    $extendsId[$row->extends[0]][] = $citId[$row->fullnspath];
+//                    $extendsId[$row->extends[0]][] = $citId[$row->fullnspath];
                 } else {
-                    $extendsId[$row->extends[0]] = array($citId[$row->fullnspath]);
+//                    $extendsId[$row->extends[0]] = array($citId[$row->fullnspath]);
                 }
             }
 
             // Get implements
             if (!empty($row->implements)) {
-                $implementsId[$citId[$row->fullnspath]] = $row->implements;
+//                $implementsId[$citId[$row->fullnspath]] = $row->implements;
             }
 
             // Get use
             if (!empty($row->uses)) {
-                $usesId[$citId[$row->fullnspath]] = $row->uses;
+//                $usesId[$citId[$row->fullnspath]] = $row->uses;
             }
             ++$total;
         }
@@ -446,20 +442,20 @@ GREMLIN
 
             $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$namespaceId.", 'interface')";
 
-            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
+//            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
 
             // Get extends
             if (!empty($row->extends)) {
                 if (isset($extendsId[$row->extends])) {
-                    $extendsId[$row->extends][] = $citId[$row->fullnspath];
+//                    $extendsId[$row->extends][] = $citId[$row->fullnspath];
                 } else {
-                    $extendsId[$row->extends] = array($citId[$row->fullnspath]);
+//                    $extendsId[$row->extends] = array($citId[$row->fullnspath]);
                 }
             }
 
             // Get implements
             if (!empty($row->implements)) {
-                $implementsId[$citId[$row->fullnspath]] = $row->implements;
+//                $implementsId[$citId[$row->fullnspath]] = $row->implements;
             }
             ++$total;
         }
@@ -499,7 +495,7 @@ GREMLIN
 
             $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$namespaceId.", 'trait')";
 
-            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
+//            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
             ++$total;
         }
 
@@ -508,6 +504,15 @@ GREMLIN
             $this->sqlite->query($query);
         }
         display("$total traits\n");
+
+        $query = 'SELECT namespaces.namespace || "\\" || lower(name) AS name, cit.id FROM cit
+        JOIN namespaces ON cit.namespaceId = namespaces.id ';
+        $res = $this->sqlite->query($query);
+
+        $citId = array();
+        while ($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $citId[$row['name']] = $row['id'];
+        }
 
         // Manage extends
         $sqlQuery = <<<SQL
@@ -580,7 +585,7 @@ SQL;
                                                 static INTEGER,
                                                 final INTEGER,
                                                 abstract INTEGER,
-                                                visibility INTEGER
+                                                visibility STRING
                                                  )');
 
         
@@ -641,7 +646,7 @@ GREMLIN
         $this->sqlite->query('CREATE TABLE properties (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 property INTEGER,
                                                 citId INTEGER,
-                                                visibility INTEGER,
+                                                visibility STRING,
                                                 static INTEGER,
                                                 value TEXT
                                                  )');
@@ -653,6 +658,16 @@ g.V().hasLabel("Ppp")
                                     .where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )
                                     .sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
 .filter{ classe != '';} // Removes functions, keeps methods
+.sideEffect{ 
+    x = ['static':it.get().vertices(OUT, "STATIC").any(),
+
+         'public':it.get().vertices(OUT, "PUBLIC").any(),
+         'protected':it.get().vertices(OUT, "PROTECTED").any(),
+         'private':it.get().vertices(OUT, "PRIVATE").any(),
+         'var':it.get().vertices(OUT, "VAR").any(),
+         
+         'class': classe];
+}
 .out('PPP')
 .map{ 
     if (it.get().label() == 'Variable') { 
@@ -660,21 +675,12 @@ g.V().hasLabel("Ppp")
         v = ''; 
     } else { 
         name = it.get().vertices(OUT, 'LEFT').next().value("code");
-        v = it.get().vertices(OUT, 'RIGHT').next().value("code");
+        v = it.get().vertices(OUT, 'RIGHT').next().value("fullcode");
     }
 
-    x = ['name': name,
-         'value': v,
-         'static':it.get().vertices(OUT, "STATIC").any(),
-
-         'public':it.get().vertices(OUT, "PUBLIC").any(),
-         'protected':it.get().vertices(OUT, "PROTECTED").any(),
-         'private':it.get().vertices(OUT, "PRIVATE").any(),
-         'var':it.get().vertices(OUT, "VAR").any(),
-         
-         'class': classe
-
-         ];
+    x['name'] = name;
+    x['value'] = v;
+    x;
 }
 
 GREMLIN
@@ -691,8 +697,10 @@ GREMLIN
                 $visibility = 'protected';
             } elseif ($row->private) {
                 $visibility = 'private';
-            } else {
+            } elseif ($row->var) {
                 $visibility = '';
+            } else {
+                assert(false, 'Property '.$row->name.' is not defined at all');
             }
 
             $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].
@@ -705,7 +713,7 @@ GREMLIN
             $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static") VALUES '.join(', ', $query);
             $this->sqlite->query($query);
         }
-
+        
         display("$total properties\n");
 
         // Constants
@@ -722,9 +730,8 @@ g.V().hasLabel("Const")
 .filter{ classe != '';} // Removes functions, keeps methods
 .out('CONST')
 .map{ 
-    x = ['name': it.get().vertices(OUT, 'LEFT').next().value("code"),
-         'value': it.get().vertices(OUT, 'RIGHT').next().value("code"),
-         
+    x = ['name': it.get().vertices(OUT, 'NAME').next().value("code"),
+         'value': it.get().vertices(OUT, 'VALUE').next().value("fullcode"),
          'class': classe
          ];
 }
