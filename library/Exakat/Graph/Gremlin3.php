@@ -57,7 +57,7 @@ class Gremlin3 extends Graph {
         }
     }
     
-    function __destruct() {
+    public function __destruct() {
         if ($this->log !== null) {
             fwrite($this->log, "End connexion \n");
             fclose($this->log);

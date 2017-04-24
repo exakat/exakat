@@ -25,7 +25,7 @@ namespace Exakat\Tasks\Helpers;
 use Exakat\Tasks\Load;
 
 class Atom {
-    static $atomCount = 0;
+    static public $atomCount = 0;
     
     public $id           = 0;
     public $atom         = 'No Atom Set';

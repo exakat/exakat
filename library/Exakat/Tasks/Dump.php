@@ -813,7 +813,7 @@ GREMLIN
         }
     }
 
-    function collectFilesDependencies() {
+    private function collectFilesDependencies() {
         $this->sqlite->query('DROP TABLE IF EXISTS filesDependencies');
         $this->sqlite->query('CREATE TABLE filesDependencies ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                                including STRING,
