@@ -1075,9 +1075,7 @@ class Load extends Tasks {
         }
 
         if ( $isClosure === false &&
-            !$this->isContext(self::CONTEXT_CLASS) &&
-            !$this->isContext(self::CONTEXT_TRAIT) &&
-            !$this->isContext(self::CONTEXT_INTERFACE)) {
+             $function->atom === 'Function') {
             list($fullnspath, $aliased) = $this->getFullnspath($name);
             $this->addDefinition('function', $fullnspath, $function);
         } else {
