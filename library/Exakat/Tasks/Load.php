@@ -245,14 +245,14 @@ class Load extends Tasks {
                          '^'  => 'T_CARET',
                          '`'  => 'T_BACKTICK',
                    );
-    private $expressions = array();
-    private $atoms = array();
-    private $atomCount = 0;
-    private $argumentsId = array();
-    private $path;
-    private $sequence = array();
+    private $expressions         = array();
+    private $atoms               = array();
+    private $atomCount           = 0;
+    private $argumentsId         = array();
+    private $path                = '';
+    private $sequence            = array();
     private $sequenceCurrentRank = 0;
-    private $sequenceRank = array();
+    private $sequenceRank        = array();
     
     private $loaderList = array('CypherG3', 'Neo4jImport');
 
