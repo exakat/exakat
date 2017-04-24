@@ -206,7 +206,7 @@ GREMLIN;
         // update fullnspath with fallback for functions
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall").as("a")
-     .has("fullnspath", without(''))
+     .has("fullnspath")
      .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
      .where( __.in("NEW", "METHOD").count().is(eq(0)))
      .sideEffect{ fullnspath = it.get().value("fullnspath")}
@@ -293,14 +293,7 @@ GREMLIN;
         $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() == 0 }.values("fullnspath")';
         $constants = $this->gremlin->query($query);
         $constantsDefinitions = $constants->results;
-/*
-    // Must Get defined too. Can we do that during Load ? 
-        $query = 'g.V().hasLabel("Functioncall").has("fullnspath", "\define").out("ARGUMENTS").out("ARGUMENT").has("rank", 0).hasLabel("String")
-        .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() == 0 }.values("fullnspath")';
-        $constants = $this->gremlin->query($query);
-        $definedConst = $constants->results;
-        print_r($definedConst);
-*/
+
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
      .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
