@@ -57,7 +57,6 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
                 print "\n";
             }
 
-            var_dump($test);
             list($a, $b, $c, $d) = explode('\\', $test);
             $testClass = '\Test\\'.$c.'_'.$d;
 
