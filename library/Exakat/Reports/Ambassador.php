@@ -145,6 +145,7 @@ class Ambassador extends Reports {
         $this->generateDirectiveList();
         $this->generateAlteredDirectives();
         $this->generateStats();
+        $this->generateVisibilitySuggestions();
 
         // Compatibility
         $this->generateCompilations();
@@ -2164,6 +2165,91 @@ HTML;
             $html = $this->injectBloc($html, 'TABLE', $theTable);
             $this->putBasedPage('inventories_'.$fileName, $html);
         }
+    }
+
+    private function generateVisibilitySuggestions() {
+
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivate"');
+        $couldBePrivate = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            preg_match('/class (\S+) /', $row['class'], $classname);
+            $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
+            
+            preg_match('/(\$\S+)/', $row['fullcode'], $code);
+            
+            if (isset($couldBePrivate[$fullnspath])) {
+                $couldBePrivate[$fullnspath][] = $code[1];
+            } else {
+                $couldBePrivate[$fullnspath] = array($code[1]);
+            }
+        }
+
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedProperty"');
+        $couldBeProtected = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            preg_match('/class (\S+) /', $row['class'], $classname);
+            $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
+            
+            preg_match('/(\$\S+)/', $row['fullcode'], $code);
+            
+            if (isset($couldBeProtected[$fullnspath])) {
+                $couldBeProtected[$fullnspath][] = $code[1];
+            } else {
+                $couldBeProtected[$fullnspath] = array($code[1]);
+            }
+        }
+
+        $visibilityTable = '<table style="border: 1px solid black;">
+<tr><td>&nbsp;</td><td>Property</td><td>None (public)</td><td>Public</td><td>Protected</td><td>Private</td><td>Value</td></tr>';
+
+        $res = $this->sqlite->query('SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+         visibility, property, value
+        FROM cit
+        JOIN properties 
+            ON properties.citId = cit.id
+        JOIN namespaces 
+            ON cit.namespaceId = namespaces.id
+         WHERE type="class"
+        ');
+        $theClass = '';
+        $ranking = array('' => 0,
+                         'public' => 1,
+                         'protected' => 2,
+                         'private' => 3);
+                         
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if ($theClass != $row['theClass']) {
+                $visibilityTable .= '<tr><td colspan="6">'.$row['theClass']."</td></tr>\n";
+            }
+
+            $visibilities = ['&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;'];
+            $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
+
+            if (isset($couldBePrivate[$row['fullnspath']]) && 
+                in_array($row['property'], $couldBePrivate[$row['fullnspath']])) {
+                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
+                    $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
+            }
+
+            if (isset($couldBeProtected[$row['fullnspath']]) && 
+                in_array($row['property'], $couldBeProtected[$row['fullnspath']])) {
+                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
+                    $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
+            }
+            
+            $visibilityTable .= '<tr><td>&nbsp;</td><td>'.$row['property'].'</td><td style="border: 1px solid black;">'.
+                                    join('</td><td style="border: 1px solid black;">', $visibilities)
+                                 ."</td></tr>\n";
+        }
+        //<td>'.$this->PHPSyntax($row['value'])."</td>
+        
+        $visibilityTable .= '</table>';
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Titre');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Description');
+        $html = $this->injectBloc($html, 'CONTENT', $visibilityTable);
+        $this->putBasedPage('visibility_suggestions', $html);
     }
 
     private function generateAlteredDirectives() {
