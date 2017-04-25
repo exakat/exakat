@@ -1,4 +1,4 @@
-Version 0.11.0 (Immortal Ruyi, Coming up)
+Version 0.11.1 (Ruler of Women's Country, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 0.11.0 (Immortal Ruyi, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.11.0 (Immortal Ruyi, Coming up)
++ Architecture
+    + Removed prepared statements from loops in dump
+    + made Gremlin cache compatible with 32bits platforms
++ Report
+    + Ambassador : first work on upgrading visibilities for properties.
++ Analyzer
+    + New analyzer : could use str_repeat()
+    + New analyzer : Crc32() Might Be Negative
+    + Update analysis : Queries in loop reports cubrid and sqlsrv, prepared statements.
+    + Update analysis : type mismatch for indices works on constants too.
+    + Update analysis : Loop calling covers less ground
++ Tokenizer
+    + Split function and method entities for differentiated processing
 
 Version 0.10.9 (Single Horned Rhinoceros King, 2017-04-17)
 + Architecture
