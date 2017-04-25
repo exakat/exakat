@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Thu, 20 Apr 2017 14:01:35 +0000
-.. comment: Generation hash : 676a4425b7dc3a90064cd3a01c8d7f1288522d89
+.. comment: Generation date : Tue, 25 Apr 2017 05:47:47 +0000
+.. comment: Generation hash : 630b03d389db8942358124ea6af6b092e6d15d1c
 
 
 .. _$http\_raw\_post\_data:
@@ -890,6 +890,9 @@ Avoid Non Wordpress Globals
 
 
 Refren using any global variable that is not Wordpress's own. 
+
+Global variables are available for write and read across the whole application, making their data both easily accessible, and difficult to track when a unexpected change happen. 
+It is recommended to rely on a mix of arguments passing and classes structures to reduce the code of any variable to a smaller part of the code.
 
 .. code-block:: php
 
@@ -2708,6 +2711,79 @@ It is also routinely used in traits : there, 'self' represents the class in whic
 +--------------+-----------------------+
 | Analyzers    | :ref:`Analyze`        |
 +--------------+-----------------------+
+
+
+
+.. _could-use-str\_repeat():
+
+Could Use str_repeat()
+######################
+
+
+Use `str_repeat() <http://www.php.net/str_repeat>`_ or `str_pad() <http://www.php.net/str_pad>`_ instead of making a loop.
+
+Making a loop to repeat the same concatenation is actually much longer than using str_repeat. As soon as the loop repeats more than twice, `str_repeat() <http://www.php.net/str_repeat>`_ is much faster. With arrays of 30, the difference is significative, though the whole operation is short by itself. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This adds 7 'e' to $x
+   $x .= str_repeat('e', 7);
+   
+   // This is the same as above, 
+   for($a = 3; $a < 10; ++$a) {
+       $x .= 'e';
+   }
+   
+   // here, $default must contains 7 elements to be equivalent to the previous code
+   foreach($default as $c) {
+       $x .= 'e';
+   }
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Structures/CouldUseStrrepeat |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
+
+.. _crc32()-might-be-negative:
+
+Crc32() Might Be Negative
+#########################
+
+
+`crc32() <http://www.php.net/crc32>`_ may return a negative number, on 32bits platforms.
+
+According to the manual : Because PHP\'s integer type is signed many crc32 checksums will result in negative integers on 32bit platforms. On 64bit installations all `crc32() <http://www.php.net/crc32>`_ results will be positive integers though.
+
+.. code-block:: php
+
+   <?php
+   
+   // display the checksum with %u, to make it unsigned
+   echo sprintf('%u', crc32($str));
+   
+   // turn the checksum into an unsigned hexadecimal
+   echo dechex(crc32($str));
+   
+   // avoid concatenating crc32 to a string, as it may be negative on 32bits platforms 
+   echo 'prefix'.crc32($str);
+   
+   ?>
+
+
+See also `crc32() <http://php.net/crc32>`_.
+
++--------------+--------------------------+
+| Command Line | Php/Crc32MightBeNegative |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
 
 
 
@@ -5005,7 +5081,9 @@ Boolean, Null or float will be converted to their integer or string equivalent.
 
 Decimal numbers are rounded to the closest integer; Null is transtyped to '' (empty string); true is 1 and false is 0; Integers in strings are transtyped, while partial numbers or decimals are not analyzed in strings. 
 
-As a general rule of thumb, only use integers or strings that don\'t look like integers.
+As a general rule of thumb, only use integers or strings that don\'t look like integers. 
+
+This analyzer may find constant definitions, when available.
 
 +--------------+----------------------------------+
 | Command Line | Structures/IndicesAreIntOrString |
@@ -6035,12 +6113,19 @@ Multiple Definition Of The Same Argument
 
 A method's signature is holding twice (or more) the same argument. For example, function x ($a, $a) { ... }. 
 
-This is accepted as is by PHP, and the last parameter's value will be assigned to the variable : 
+This is accepted as is by PHP 5, and the last parameter's value will be assigned to the variable. PHP 7.0 and more recent has dropped this feature, and reports a fatal error when linting the code.
 
-function x ($a, $a) { print $a; };
-x(1,2); => will display 2
+.. code-block:: php
+
+   <?php
+     function x ($a, $a) { print $a; };
+     x(1,2); => display 2
+   ?>
+
 
 However, this is not common programming practise : all arguments should be named differently.
+
+See also `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_.
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Functions/MultipleSameArguments                                                                         |
@@ -7624,6 +7709,12 @@ This default behavior raise concerns when a corresponding constant is defined, e
    // assign 1 to the element index in $array
    // index will fallback to string
    $array[index] = 1; 
+   //PHP Notice:  Use of undefined constant index - assumed 'index'
+   
+   echo $array[index];      // display 1 and the above error
+   echo $array[index];    // display 1
+   echo $array[index];  // Syntax error
+   
    
    define('index', 2);
     
@@ -8965,6 +9056,8 @@ Avoid querying databases in a loop.
 
 Querying an external database in a loop usually leads to performances problems. This is also called the 'n + 1 problem'. 
 
+This problem applies also to prepared statement : when such statement are called in a loop, they are slower than one-time large queries.
+
 It is recommended to reduce the number of queries by making one query, and dispatching the results afterwards. This is true with SQL databases, graph queries, LDAP queries, etc. 
 
 .. code-block:: php
@@ -8998,7 +9091,7 @@ It is recommended to reduce the number of queries by making one query, and dispa
    ?>
 
 
-This is not always possible.
+This optimisation is not always possible : for example, some SQL queries may not be prepared, like 'DROP TABLE', or 'DESC'. 'UPDATE' commands often update one row at a time, and grouping such queries may be counter-productive or unsafe.
 
 +--------------+--------------------------+
 | Command Line | Structures/QueriesInLoop |
@@ -12500,14 +12593,19 @@ Unpreprocessed Values
 #####################
 
 
-PHP is good at manipulating data. However, it is also good to preprocess those values, and put them in the code directly as expected, rather than have PHP go the extra step and do it for you.
+Preprocessing values is the preparation of values before PHP executes the code. 
+
+There is no macro language in PHP, that prepares the code before compilation, bringing some confort and short syntax. Most of the time, one uses PHP itself to preprocess data. 
 
 For example : 
 
 .. code-block:: php
 
    <?php
-     $x = explode(',', 'a,b,c,d'); 
+       $days_en = 'monday,tuesday,wednesday,thursday,friday,saturday,sunday';
+       $days_zh = '星期－,星期二,星期三,星期四,星期五,星期六,星期日';
+   
+       $days = explode(',', $lang === 'en' ? $days_en : $days_zh); 
    ?>
 
 
@@ -12516,11 +12614,17 @@ could be written
 .. code-block:: php
 
    <?php
-     $x = array('a', 'b', 'c', 'd');
+       if ($lang === 'en') {
+           $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+       } else {
+           $days = ['星期－', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
+       }
    ?>
 
 
-and avoid preprocessing the string into an array first.
+and avoid preprocessing the string into an array first. 
+
+Preprocessing could be done anytime the script includes all the needed values to process the expression.
 
 +--------------+---------------------------------------------------------------------------------------------------+
 | Command Line | Structures/Unpreprocessed                                                                         |
@@ -14201,14 +14305,14 @@ There is no need to declare them individually final.
        }
    
        class bar {
-           // Usefule final, as the whole class is not final
+           // Useful final, as the whole class is not final
            final function method() { }
        }
    
    ?>
 
 
-See also `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_.
+See also `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_, and `When to declare final <https://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
 
 +--------------+-------------------------------------------------------------------------------------------------+
 | Command Line | Classes/UselessFinal                                                                            |
@@ -14828,7 +14932,30 @@ Wrong Number Of Arguments
 #########################
 
 
-Those functioncalls are made with too many or too few arguments. Some of them will be dropped, or PHP will raise errors when values are missing.
+Those functioncalls are made with too many or too few arguments. 
+
+When the number arguments is wrong for native functions, PHP emits a warning. 
+When the number arguments is too small for custom functions, PHP raises an exception. 
+When the number arguments is too hight for custom functions, PHP ignores the arguments. Such arguments should be handled with the variadic operator, or with `func_get_args() <http://www.php.net/func_get_args>`_ family of functions.
+
+.. code-block:: php
+
+   <?php
+   
+   echo strtoupper('This function is', 'ignoring arguments');
+   //Warning: strtoupper() expects exactly 1 parameter, 2 given in Command line code on line 1
+   
+   echo strtoupper();
+   //Warning: strtoupper() expects exactly 1 parameter, 0 given in Command line code on line 1
+   
+   function foo($argument) {}
+   echo foo();
+   //Fatal error: Uncaught ArgumentCountError: Too few arguments to function foo(), 0 passed in /Users/famille/Desktop/analyzeG3/test.php on line 10 and exactly 1 expected in /Users/famille/Desktop/analyzeG3/test.php:3
+   
+   echo foo('This function is', 'ignoring arguments');
+   
+   ?>
+
 
 It is recommended to check the signature of the methods, and fix the arguments.
 

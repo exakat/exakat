@@ -170,6 +170,10 @@ Glossary
       + :ref:`No Count With 0 <no-count-with-0>`
       + :ref:`Uses Default Values <uses-default-values>`
 
+    + `crc32()`
+
+      + :ref:`Crc32() Might Be Negative <crc32()-might-be-negative>`
+
     + `create_function()`
 
       + :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
@@ -309,6 +313,7 @@ Glossary
 
     + `func_get_args()`
 
+      + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
       + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 
 
@@ -576,6 +581,14 @@ Glossary
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
 
+    + `str_pad()`
+
+      + :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
+
+    + `str_repeat()`
+
+      + :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
+
     + `str_replace()`
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
@@ -593,6 +606,10 @@ Glossary
     + `strstr()`
 
       + :ref:`Slow Functions <slow-functions>`
+
+    + `strtoupper()`
+
+      + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
 
     + `substr_replace()`
 

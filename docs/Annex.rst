@@ -282,6 +282,11 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.11.0
+
+  * Could Use str_repeat() (Structures/CouldUseStrrepeat ; Analyze)
+  * Crc32() Might Be Negative (Php/Crc32MightBeNegative)
+
 * 0.10.9
 
   * Displays Text (Php/Prints ; Internal)
@@ -959,7 +964,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Method Has Fluent Interface (Functions/HasFluentInterface ; )
   * Method Has No Fluent Interface (Functions/HasNotFluentInterface ; )
   * Methodcall On New (Php/MethodCallOnNew ; CompatibilityPHP53)
-  * Methods Names (Classes/MethodDefinition ; )
   * Methods Without Return (Functions/WithoutReturn ; )
   * Mime Types (Type/MimeType ; Inventory)
   * Mixed Keys Arrays (Arrays/MixedKeys ; CompatibilityPHP54, CompatibilityPHP53)
@@ -1489,6 +1493,7 @@ List of external links mentionned in this documentation.
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `composer <https://getcomposer.org/>`_
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
+* `crc32() <http://php.net/crc32>`_
 * `curl <http://www.php.net/curl>`_
 * `Data structures <http://docs.php.net/manual/en/book.ds.php>`_
 * `Docker <http://www.docker.com/>`_
@@ -1521,16 +1526,20 @@ List of external links mentionned in this documentation.
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Marco Pivetti tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
+* `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
 * `Neo4j <http://neo4j.com/>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Packagist <https://packagist.org/>`_
+* `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `phar <https://www.exakat.io/download-exakat/>`_
+* `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
+* `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
 * `PSR7 <http://www.php-fig.org/psr/psr-7/>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_
@@ -1563,6 +1572,7 @@ List of external links mentionned in this documentation.
 * `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_
 * `Xdebug <https://xdebug.org/>`_
 * `XML Parser <http://www.php.net/manual/en/book.xml.php>`_
+* `xmlreader <http://www.php.net/manual/en/book.xmlreader.php>`_
 * `XSL extension <http://php.net/manual/en/intro.xsl.php>`_
 * `Zend Framework 1.10 <https://framework.zend.com/manual/1.10/en/manual.html>`_
 * `Zend Framework 1.11 <https://framework.zend.com/manual/1.11/en/manual.html>`_

@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Thu, 20 Apr 2017 14:01:35 +0000
-.. comment: Generation hash : 676a4425b7dc3a90064cd3a01c8d7f1288522d89
+.. comment: Generation date : Tue, 25 Apr 2017 05:47:47 +0000
+.. comment: Generation hash : 630b03d389db8942358124ea6af6b092e6d15d1c
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 303 analysis
+Total : 305 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -129,6 +129,8 @@ Total : 303 analysis
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
 * :ref:`Could Use self <could-use-self>`
+* :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
+* :ref:`Crc32() Might Be Negative <crc32()-might-be-negative>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
 * :ref:`Dependant Trait <dependant-trait>`
