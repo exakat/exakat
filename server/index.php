@@ -12,8 +12,7 @@ $orders = array('stop', 'init', 'update', 'project', 'onepage', 'report', 'statu
 
 if (!in_array($command, $orders)) {
     serverLog("unknown command : $command");
-    echo "Exakat server (unknown command)";
-    exit;
+    die( 'Exakat server (unknown command)');
 }
 
 $command($commands);
@@ -210,8 +209,7 @@ function autoOnagepageName() {
 }
 
 function error($message) {
-    echo json_encode(array('error' => $message));
-    exit;
+    die( json_encode(array('error' => $message)));
 }
 
 function serverLog($message) {
