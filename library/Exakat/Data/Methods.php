@@ -70,6 +70,26 @@ class Methods {
         return $return;
     }
 
+    public function getFunctionsLastArgsNotBoolean() {
+        $query = <<<SQL
+SELECT '\\' || lower(methods.name) AS fullnspath, args_max - 1 AS position FROM methods 
+JOIN args_type ON args_type.name = methods.name
+WHERE methods.class = "PHP" AND
+      (args_max = 1 AND not instr(arg0, 'bool') AND arg0 != '') OR   
+      (args_max = 2 AND not instr(arg1, 'bool') AND arg1 != '') OR 
+      (args_max = 3 AND not instr(arg2, 'bool') AND arg2 != '') OR 
+      (args_max = 4 AND not instr(arg3, 'bool') AND arg3 != '')	
+SQL;
+        $res = $this->sqlite->query($query);
+        $return = array();
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $return[] = $row['fullnspath'];
+        }
+
+        return $return;
+    }
+
     public function getFunctionsReferenceArgs() {
         $query = "SELECT name AS function, 0 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg0 = 'reference' UNION
                   SELECT name AS function, 1 AS position FROM args_is_ref WHERE Class = 'PHP' AND arg1 = 'reference' UNION
