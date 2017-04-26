@@ -8,7 +8,7 @@ Version 0.11.1 (Ruler of Women's Country, Coming up)
 + Tokenizer
     + 
 
-Version 0.11.0 (Immortal Ruyi, Coming up)
+Version 0.11.0 (Immortal Ruyi, 2017-04-24)
 + Architecture
     + Removed prepared statements from loops in dump
     + made Gremlin cache compatible with 32bits platforms
