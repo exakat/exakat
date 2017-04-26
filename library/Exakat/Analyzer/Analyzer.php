@@ -782,6 +782,7 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function fullnspathIs($code) {
+        $this->addMethod('has("fullnspath")');
         return $this->propertyIs('fullnspath', $code, self::CASE_INSENSITIVE);
     }
 
@@ -959,24 +960,28 @@ GREMLIN
     }
 
     public function nextSibling($link = 'ELEMENT') {
+        $this->hasIn($link);
         $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}');
 
         return $this;
     }
 
     public function nextSiblings($link = 'ELEMENT') {
+        $this->hasIn($link);
         $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
 
         return $this;
     }
 
     public function previousSibling($link = 'ELEMENT') {
+        $this->hasIn($link);
         $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling - 1 == it.get().value("rank")}');
 
         return $this;
     }
 
     public function previousSiblings($link = 'ELEMENT') {
+        $this->hasIn($link);
         $this->addMethod('filter{it.get().value("rank") > 0}.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
 
         return $this;
@@ -1531,9 +1536,7 @@ GREMLIN
     public function isLiteral() {
         // Closures are literal if not using a variable from the context
         $this->addMethod(<<<GREMLIN
-or( __.hasLabel("Integer", "Boolean", "Magicconstant", "Real", "String", "Heredoc", "Function"), 
-    __.hasLabel("Functioncall").has("constant", true).has("fullnspath", "\\\\array")
-)
+hasLabel("Integer", "Boolean", "Magicconstant", "Real", "String", "Heredoc", "Function", "Arrayliteral").has("constant", true)
 
 GREMLIN
 );
