@@ -178,7 +178,7 @@ class Load extends Tasks {
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
     static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
     static public $PROP_PROPERTYNAME= array('Variable', 'Assignation');
-    static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence');
+    static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence', 'Arrayliteral', 'Function');
     static public $PROP_GLOBALVAR   = array('Array');
     static public $PROP_BINARYSTRING= array('String', 'Heredoc');
 
@@ -312,8 +312,8 @@ class Load extends Tasks {
                             \Exakat\Tasks\T_IS_NOT_IDENTICAL         => 'processComparison',
                             \Exakat\Tasks\T_SPACESHIP                => 'processComparison',
 
-                            \Exakat\Tasks\T_OPEN_BRACKET             => 'processArrayBracket',
-                            \Exakat\Tasks\T_ARRAY                    => 'processArray',
+                            \Exakat\Tasks\T_OPEN_BRACKET             => 'processArrayLiteral',
+                            \Exakat\Tasks\T_ARRAY                    => 'processArrayLiteral',
                             \Exakat\Tasks\T_EMPTY                    => 'processArray',
                             \Exakat\Tasks\T_LIST                     => 'processArray',
                             \Exakat\Tasks\T_EVAL                     => 'processArray',
@@ -1045,6 +1045,8 @@ class Load extends Tasks {
             ++$this->id; // Skip (
             $use = $this->processArguments();
             $this->addLink($function, $use, 'USE');
+        } else {
+            $function->constant = self::CONSTANT_EXPRESSION;
         }
 
         // Process return type
@@ -1642,7 +1644,7 @@ class Load extends Tasks {
         return 0;
     }
 
-    private function processArguments($finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehintSupport = false) {
+    private function processArguments($finals = array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), $typehintSupport = false, $allowFinalVoid = false) {
         $arguments = $this->addAtom('Arguments');
         $current = $this->id;
         $argumentsId = array();
@@ -1659,6 +1661,8 @@ class Load extends Tasks {
             $arguments->line     = $this->tokens[$current][2];
             $arguments->token    = $this->getToken($this->tokens[$current][0]);
             $arguments->constant = self::CONSTANT_EXPRESSION;
+            $arguments->args_max = 0;
+            $arguments->args_min = 0;
             $argumentsId[] = $void;
 
             ++$this->id;
@@ -1745,9 +1749,14 @@ class Load extends Tasks {
                 }
             };
 
-            if ($index === 0) {
-                $index = $this->addAtomVoid();
-            }
+            if ($index === 0 && $allowFinalVoid === false) {
+                $fullcode[] = ' ';
+            } else {
+                
+                if ($index === 0) {
+                    $index = $this->addAtomVoid();
+                }
+
             $index->rank = ++$rank;
             $argumentsId[] = $index;
             $this->argumentsId = $argumentsId; // This avoid overwriting when nesting functioncall
@@ -1769,6 +1778,7 @@ class Load extends Tasks {
             $constant = $constant && ($index->constant === self::CONSTANT_EXPRESSION);
 
             $fullcode[] = $index->fullcode;
+            }
 
             // Skip the )
             ++$this->id;
@@ -1925,7 +1935,7 @@ class Load extends Tasks {
         ++$this->id; // Skipping the name, set on (
         $current = $this->id;
 
-        $arguments = $this->processArguments();
+        $arguments = $this->processArguments(array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), false, $name->token === 'T_LIST');
         
         $functioncall = $this->addAtom('Functioncall');
         $functioncall->code      = $name->code;
@@ -2017,8 +2027,6 @@ class Load extends Tasks {
             list($fullnspath, $aliased) = $this->getFullnspath($string, 'const');
             $string->fullnspath = $fullnspath;
             $string->aliased    = $aliased;
-
-//            $this->addCall('const', $fullnspath, $string);
         }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -2174,40 +2182,6 @@ class Load extends Tasks {
 
     private function processGlobalVariable() {
         return $this->processSGVariable('Global');
-    }
-
-    private function processArrayBracket() {
-        $current = $this->id;
-        $array = $this->addAtom('Functioncall');
-
-        $variable = $this->addAtom('Identifier');
-        $this->addLink($array, $variable, 'NAME');
-        $variable->code       = '[';
-        $variable->fullcode   = '[';
-        $variable->line       = $this->tokens[$this->id][2];
-        $variable->token      = $this->getToken($this->tokens[$this->id][0]);
-        $variable->fullnspath = '\\array';
-
-        // No need to skip opening bracket
-        $argument = $this->processArguments(array(\Exakat\Tasks\T_CLOSE_BRACKET));
-        $this->addLink($array, $argument, 'ARGUMENTS');
-        
-        $array->code       = $this->tokens[$current][1];
-        $array->fullcode   = '['.$argument->fullcode.']' ;
-        $array->line       = $this->tokens[$this->id][2];
-        $array->token      = $this->getToken($this->tokens[$current][0]);
-        $array->fullnspath = '\\array';
-        $array->boolean    = (int) (bool) $argument->count;
-        $array->constant   = $argument->constant;
-        $this->pushExpression($array);
-
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
-            $this->processSemicolon();
-        } else {
-            $array = $this->processFCOA($array);
-        }
-
-        return $array;
     }
 
     private function processBracket($followupFCOA = true) {
@@ -2897,6 +2871,39 @@ class Load extends Tasks {
         }
     }
 
+    private function processArrayLiteral() {
+        $array = $this->addAtom('Arrayliteral');
+        $current = $this->id;
+
+        if ($this->tokens[$current][0] === \Exakat\Tasks\T_ARRAY) {
+            ++$this->id; // Skipping the name, set on (
+            $arguments = $this->processArguments();
+        } else {
+            $arguments = $this->processArguments(array(\Exakat\Tasks\T_CLOSE_BRACKET));
+        }
+        $this->addLink($array, $arguments, 'ARGUMENTS');
+        
+        $array->code      = $this->tokens[$current][1];
+        if ($this->tokens[$current][0] === \Exakat\Tasks\T_ARRAY) {
+            $array->fullcode  = $this->tokens[$current][1].'('.$arguments->fullcode.')';
+        } else {
+            $array->fullcode  = '['.$arguments->fullcode.']';
+        }
+        $array->line      = $this->tokens[$current][2];
+        $array->token      = $this->getToken($this->tokens[$current][0]);
+        $array->boolean    = (int) (bool) $arguments->count;
+        $array->constant   = $arguments->constant;
+        $this->pushExpression($array);
+        
+        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+            $this->processSemicolon();
+        } else {
+            $array = $this->processFCOA($array);
+        }
+
+        return $array;
+    }
+
     private function processArray() {
         return $this->processString();
     }
@@ -2955,7 +2962,7 @@ class Load extends Tasks {
         $atom->code     = $this->tokens[$this->id][1];
         $atom->fullcode = $this->tokens[$this->id][1];
         $atom->line     = $this->tokens[$this->id][2];
-        $atom->token    = $this->getToken($this->tokens[$this->id][0]) ;
+        $atom->token    = $this->getToken($this->tokens[$this->id][0]);
 
         $this->pushExpression($atom);
 
