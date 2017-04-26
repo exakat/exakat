@@ -757,7 +757,7 @@ GREMLIN
     }
 
     private function collectLiterals() {
-        $types = array('Integer', 'Real', 'String', 'Heredoc', 'Array');
+        $types = array('Integer', 'Real', 'String', 'Heredoc', 'Arrayliteral');
 
         foreach($types as $type) {
             $this->sqlite->query('DROP TABLE IF EXISTS literal'.$type);
@@ -768,11 +768,8 @@ GREMLIN
                                                    line INTEGER
                                                  )');
 
-            if ($type == 'Array') {
-                $filter = 'hasLabel("Functioncall").has("fullnspath", "\\\\array")';
-            } else {
-                $filter = 'hasLabel("'.$type.'")';
-            }
+            $filter = 'hasLabel("'.$type.'")';
+
             $b = microtime(true);
             $query = <<<GREMLIN
 
