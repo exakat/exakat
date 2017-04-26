@@ -154,4 +154,18 @@ function unparse_url($parsed_url) {
     return "$scheme$user$pass$host$port$path$query$fragment";
 }
 
+function array_array_unique($array) {
+    $return = array();
+    
+    foreach($array as $a) {
+        sort($a);
+        $key = crc32(implode('', $a));
+        
+        $return[$key] = $a;
+    }
+
+    return array_values($return);
+}
+
+
 ?>

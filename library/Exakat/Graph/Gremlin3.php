@@ -137,7 +137,7 @@ def $defName() {
 }
 GREMLIN;
                             file_put_contents($defFileName, $gremlin);
-                            file_put_contents($this->scriptDir.$defName.'.txt', implode("\n", $value) );
+                            file_put_contents($this->scriptDir.$defName.'.txt', $this->toGremlinTxt($value) );
                         } else {
                             file_put_contents($defFileName, $gremlin);
                         }
@@ -260,6 +260,24 @@ GREMLIN;
         } else {
             $array = array_map(function ($x) { return addslashes($x); }, $array);
             $gremlin = "{ ['''".implode("''','''", $array)."'''] }";
+        }
+        
+        return $gremlin;
+    }
+
+    private function toGremlinTxt($array) {
+        $keys = array_keys($array);
+        $key = $keys[0];
+        
+        if (is_array($array[$key])) {
+            $gremlin = array();
+            foreach($array as $key => $value) {
+                $a = array_map(function ($x) { return addslashes($x); }, $value);
+                $gremlin[] = "['''".implode("''','''", $a)."''']";
+            }
+            $gremlin = implode("\n", $gremlin); 
+        } else {
+            $gremlin = implode("\n", $array);
         }
         
         return $gremlin;
