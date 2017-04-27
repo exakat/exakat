@@ -703,6 +703,10 @@ GREMLIN
                 assert(false, 'Property '.$row->name.' is not defined at all');
             }
 
+            // If we haven't found any definition for this class, just ignore it. 
+            if (!isset($citId[$row->class])) {
+                continue; 
+            }
             $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].
                         ", '".$visibility."', '".$this->sqlite->escapeString($row->value)."', ".(int) $row->static.")";
 
