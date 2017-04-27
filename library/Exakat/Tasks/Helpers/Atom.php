@@ -67,11 +67,11 @@ class Atom {
     }
     
     public function toArray() {
-        if (strlen($this->code) > 5000) {
-            $this->code = substr($this->code, 0, 5000).'...[ total '.strlen($this->code).' chars]';
+        if (strlen($this->code) > 500) {
+            $this->code = substr($this->code, 0, 500).'...[ total '.strlen($this->code).' chars]';
         }
-        if (strlen($this->fullcode) > 5000) {
-            $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
+        if (strlen($this->fullcode) > 500) {
+            $this->fullcode = substr($this->fullcode, 0, 500).'...[ total '.strlen($this->fullcode).' chars]';
         }
         
         $this->code          = addcslashes($this->code       , '\\"');
