@@ -29,6 +29,7 @@ class IsUpperFamily extends Analyzer {
         // Staticmethodcall
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
+             ->atomIs(array('Identifier', 'Nsname'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('METHOD')
@@ -48,6 +49,7 @@ class IsUpperFamily extends Analyzer {
         // Staticproperty
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
+             ->atomIs(array('Identifier', 'Nsname'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('PROPERTY')
@@ -55,11 +57,11 @@ class IsUpperFamily extends Analyzer {
              ->savePropertyAs('code', 'property')
              
              ->goToClass()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").out("PPP").coalesce(__.out("LEFT"), __.filter{true; }).filter{it.get().value("code") == property }.count().is(eq(0)) )')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").out("PPP").coalesce(__.out("NAME"), __.filter{true; }).filter{it.get().value("code") == property }.count().is(eq(0)) )')
 
              ->goToAllParents()
              ->atomIsNot('Interface')
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").out("PPP").coalesce(__.out("LEFT"), __.filter{true; }).filter{it.get().value("code") == property }.count().is(neq(0)) )')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").out("PPP").coalesce(__.out("NAME"), __.filter{true; }).filter{it.get().value("code") == property }.count().is(neq(0)) )')
 
              ->back('first');
         $this->prepareQuery();
@@ -67,6 +69,7 @@ class IsUpperFamily extends Analyzer {
         // Staticconstant
         $this->atomIs('Staticconstant')
              ->outIs('CLASS')
+             ->atomIs(array('Identifier', 'Nsname'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
              ->outIs('CONSTANT')
