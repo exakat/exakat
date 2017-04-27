@@ -1281,6 +1281,11 @@ class Load extends Tasks {
         } else {
             $name = $this->addAtomVoid();
 
+            $class->fullnspath = $this->makeAnonymous();
+            $class->aliased    = self::NOT_ALIASED;
+            $this->addDefinition('class', $class->fullnspath, $class);
+
+
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
                 // Process arguments
                 ++$this->id; // Skip arguments
@@ -4779,6 +4784,13 @@ class Load extends Tasks {
 
         fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
         $begin = $end;
+    }
+    
+    private function makeAnonymous($type = 'class') {
+        static $anonymous = 'a';
+        
+        assert(in_array($type, array('class', 'function')), 'Classes and Functions are the only anonymous');
+        return $type.'@'.++$anonymous;
     }
 }
 

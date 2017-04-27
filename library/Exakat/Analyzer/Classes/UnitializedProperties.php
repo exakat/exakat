@@ -31,7 +31,7 @@ class UnitializedProperties extends Analyzer {
     }
     
     public function analyze() {
-        // Normal Properties
+        // Normal Properties (with constructor)
         $this->atomIs('Class')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -54,7 +54,22 @@ class UnitializedProperties extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
-        // Static Properties
+        // without constructor
+        $this->atomIs('Class')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Ppp')
+             ->hasNoOut('STATIC')
+             ->outIs('PPP')
+             ->atomIsNot('Assignation')
+             ->_as('results')
+             ->savePropertyAs('propertyname', 'property')
+             ->back('first')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").in("ANALYZED").has("analyzer", "Classes/Constructor").count().is(eq(0)) )')
+             ->back('results');
+        $this->prepareQuery();
+        
+        // Static Properties (with constructor)
         $this->atomIs('Class')
              ->savePropertyAs('fullnspath', 'classe')
              ->outIs('BLOCK')
@@ -75,6 +90,21 @@ class UnitializedProperties extends Analyzer {
       .hasLabel("Staticproperty").out("CLASS").filter{ it.get().value("fullnspath") == classe}.in("CLASS").where(__.out("PROPERTY").filter{ it.get().value("code") == property})
       .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified").count().is(eq(1)) ).count().is(eq(0))
 )')
+             ->back('results');
+        $this->prepareQuery();
+
+        $this->atomIs('Class')
+             ->savePropertyAs('fullnspath', 'classe')
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Ppp')
+             ->hasOut('STATIC')
+             ->outIs('PPP')
+             ->atomIsNot('Assignation')
+             ->_as('results')
+             ->savePropertyAs('code', 'property')
+             ->back('first')
+             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").in("ANALYZED").has("analyzer", "Classes/Constructor").count().is(eq(0)) )')
              ->back('results');
         $this->prepareQuery();
     }
