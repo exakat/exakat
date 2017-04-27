@@ -43,7 +43,7 @@ class CurlOptions extends Analyzer {
         $this->prepareQuery();
 
         // Via curl_setopt_array (actually, any array with key => value that fit the options
-        $this->atomFunctionIs('\array')
+        $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')

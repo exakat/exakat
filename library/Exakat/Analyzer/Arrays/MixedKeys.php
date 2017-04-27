@@ -32,8 +32,7 @@ class MixedKeys extends Analyzer {
         // build with array()
         $this->atomIs('Ppp')
              ->outIs('PPP')
-             ->atomInside('Functioncall')
-             ->functioncallIs('\\array')
+             ->atomInside('Arrayliteral')
              ->_as('result')
 
              // count keys styles

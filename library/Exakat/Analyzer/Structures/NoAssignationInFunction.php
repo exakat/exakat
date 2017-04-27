@@ -26,10 +26,9 @@ use Exakat\Analyzer\Analyzer;
 
 class NoAssignationInFunction extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs(array('Function', 'Method'))
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
-             ->functioncallIs('\array')
+             ->atomInside('Arrayliteral')
              ->outIs('ARGUMENTS')
              ->isMore('count', 10)
              ->inIs('ARGUMENTS')

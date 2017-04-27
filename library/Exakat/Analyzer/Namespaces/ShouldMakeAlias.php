@@ -29,7 +29,7 @@ class ShouldMakeAlias extends Analyzer {
         // No namespace ? 
         $this->atomIs('Nsname')
              ->hasOut('SUBNAME')
-             ->hasNoIn('USE')
+             ->hasNoIn(array('USE', 'NAME'))
              ->hasNoParent('Namespace', 'NAME')
              ->savePropertyAs('fullnspath', 'fnp')
              ->outWithRank('SUBNAME', 0)

@@ -27,25 +27,17 @@ use Exakat\Analyzer\Analyzer;
 class MissingCases extends Analyzer {
     public function analyze() {
         $switches = $this->query(<<<GREMLIN
-g.V().hasLabel("Switch").sideEffect{ x = []; }.sideEffect( __.out('CASES').out('ELEMENT').out('CASE').hasLabel('String').not(where(out("CONCAT"))).sideEffect{x.add(it.get().value('noDelimiter'));}).filter{x.size() > 0;}.map{x;}
+g.V().hasLabel("Switch")
+     .sideEffect{ x = []; }
+     .sideEffect( __.out('CASES').out('ELEMENT').out('CASE').hasLabel('String').not(where(out("CONCAT"))).sideEffect{x.add(it.get().value('noDelimiter'));})
+     .filter{x != [];}
+     .map{x.sort();}
 GREMLIN
 );
+
         if (empty($switches)) {
             return;
         }
-        
-        /*
-        $arrays = $this->query(<<<GREMLIN
-g.V().hasLabel("Functioncall").has('fullnspath', '\\\\array').sideEffect{ x = []; }.sideEffect( __.out('ARGUMENTS').out('ARGUMENT')
-                              .coalesce(hasLabel('String').not(where(out("CONCAT"))), 
-                                        hasLabel('Keyvalue').out('VALUE').hasLabel('String').not(where(out("CONCAT")))
-                               ).sideEffect{x.add(it.get().value('noDelimiter'));}).filter{ x.size() > 0;}.map{x;}.unique()
-GREMLIN
-);
-        if (empty($arrays)) {
-            return;
-        }
-        */
 
         // Compare switches together. 
         $commons = array();
@@ -68,13 +60,15 @@ GREMLIN
                 $commons[] = $a;
             }
         }
-
+        
         if (empty($commons)) {
             return;
         }
-
+        
+        $commons = array_array_unique($commons);
+        
         $this->atomIs('Switch')
-             ->raw('sideEffect{ x = []; }.sideEffect( __.out("CASES").out("ELEMENT").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));}).filter{x.size() > 0;}.map{x;}')
+             ->raw('sideEffect{ x = []; }.sideEffect( __.out("CASES").out("ELEMENT").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));}).filter{x != [];}.map{x.sort();}')
              ->raw('filter{ x in ***.values() }', $commons)
              ->back('first');
         $this->prepareQuery();

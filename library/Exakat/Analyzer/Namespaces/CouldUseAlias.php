@@ -29,7 +29,9 @@ class CouldUseAlias extends Analyzer {
         // use a\b as C;
         // a\b::D(); and also a\b\d\e
         $this->atomIs(array('Nsname', 'Functioncall'))
-             ->hasNoIn(array('USE', 'NAME', 'METHOD'))
+             ->hasNoIn(array('USE', 'NAME', 'METHOD', 'VARIABLE'))
+             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->codeIsNot('[')
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToNamespace()
              ->outIs('BLOCK')

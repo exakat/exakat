@@ -94,7 +94,7 @@ GREMLIN
         // class used in a String (full string only)
         $strings = $this->query(<<<GREMLIN
 g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
-     .where( __.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\array").count().is(eq(0)) )
+     .where( __.in("ARGUMENT").in("ARGUMENTS").hasLabel("Arrayliteral").count().is(eq(0)) )
      .filter{ it.get().value("noDelimiter").length() < 100}.filter{ it.get().value("noDelimiter").length() > 0}
      .filter{ !(it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\x7f-\xff]/)}
      .map{ it.get().value("noDelimiter").toLowerCase(); }.unique()
@@ -127,7 +127,7 @@ GREMLIN
         // class used in an array
         $arrays = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").out("ARGUMENTS").out("ARGUMENT")
-        .hasLabel("Functioncall").has("fullnspath", "\\\\array")
+        .hasLabel("Arrayliteral")
         .out("ARGUMENTS").where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable").count().is(eq(1)) )
         .has("count", 2).out("ARGUMENT").has("rank", 0).values("noDelimiter").unique()
 GREMLIN

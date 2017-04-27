@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class MultipleIdenticalKeys extends Analyzer {
 
     public function analyze() {
-        $this->atomFunctionIs('\\array')
+        $this->atomIs('Arrayliteral')
              ->raw('where(
     __.sideEffect{ counts = [:]; }
       .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("KEY")

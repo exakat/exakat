@@ -34,7 +34,16 @@ class Arrayindex extends Analyzer {
         $this->prepareQuery();
 
         // list( 'a' => 2) = ['b' => 2];
-        $this->atomFunctionIs(array('\\list', '\\array'))
+        $this->atomFunctionIs('\\list')
+             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->atomIs('Keyvalue')
+             ->outIs('KEY')
+             ->atomIs(self::$LITERALS);
+        $this->prepareQuery();
+
+        // array( 'a' => 2) = ['b' => 2];
+        $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')

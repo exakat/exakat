@@ -86,7 +86,7 @@ class SetExceptionHandlerPHP7 extends Analyzer {
         $this->atomFunctionIs('\set_exception_handler')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
-             ->functioncallIs('\\array')
+             ->AtomIs('Arrayliteral')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('String')

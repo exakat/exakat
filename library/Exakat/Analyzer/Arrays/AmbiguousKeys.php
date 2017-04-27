@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class AmbiguousKeys extends Analyzer {
 
     public function analyze() {
-        $this->atomFunctionIs('\\array')
+        $this->atomIs('Arrayliteral')
              ->raw('where(
     __.sideEffect{ counts = [:]; integers = [:]; strings = [:]; }
       .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("KEY")
@@ -48,7 +48,7 @@ class AmbiguousKeys extends Analyzer {
         $this->prepareQuery();
 
         // $x = [1.0 => 2];
-        $this->atomFunctionIs('\\array')
+        $this->atomIs('Arrayliteral')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')

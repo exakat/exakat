@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ArrayNSUsage extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs('\\array')
+        $this->atomIs('Arrayliteral')
              ->tokenIs('T_OPEN_BRACKET');
         $this->prepareQuery();
     }

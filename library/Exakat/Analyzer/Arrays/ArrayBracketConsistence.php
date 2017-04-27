@@ -35,7 +35,7 @@ GREMLIN;
         $storage = array('array()' => 'T_ARRAY',
                          '[]'      => 'T_OPEN_BRACKET');
         
-        $this->atomFunctionIs('\\array')
+        $this->atomIs('Arrayliteral')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next()');
         $types = (array) $this->rawQuery();
@@ -57,7 +57,7 @@ GREMLIN;
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
         $types = '["'.str_replace('\\', '\\\\', implode('", "', array_keys($types))).'"]';
 
-        $this->atomFunctionIs('\\array')
+        $this->atomIs('Arrayliteral')
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in '.$types.'}')
              ->back('first');

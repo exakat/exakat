@@ -37,7 +37,7 @@ class ListWithKeys extends Analyzer {
         $this->prepareQuery();
 
         // list( 3 => $a);
-        $this->atomFunctionIs('\\array')
+        $this->atomIs('Arrayliteral')
              ->hasIn('LEFT')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')

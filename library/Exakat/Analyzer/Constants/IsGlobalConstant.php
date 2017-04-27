@@ -49,6 +49,7 @@ class IsGlobalConstant extends Analyzer {
         $this->analyzerIs('Constants/ConstantUsage')
              ->atomIsNot(array('Boolean', 'Null'))
              ->tokenIs('T_STRING')
+             ->hasNoIn(array('ALIAS', 'NAME'))
 
              // Exclude PHP constants
              ->fullnspathIsNot($constantsFullNs)

@@ -160,7 +160,7 @@ GREMLIN;
             $this->atomFunctionIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
-                 ->functioncallIs('\\array')
+                 ->atomIs('Arrayliteral')
                  ->raw('sideEffect{ theArrayNode = it.get(); }')
                  ->raw($arrayContainsTwoStrings)
                  ->raw($apply);
@@ -171,7 +171,7 @@ GREMLIN;
         $this->atomFunctionIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
-             ->functioncallIs('\\array')
+             ->atomIs('Arrayliteral')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($arrayContainsTwoStrings)
              ->raw($apply);
@@ -181,7 +181,7 @@ GREMLIN;
         $this->atomFunctionIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
-             ->functioncallIs('\\array')
+             ->atomIs('Arrayliteral')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($arrayContainsTwoStrings)
              ->raw($apply);
@@ -208,7 +208,7 @@ GREMLIN;
             $this->atomFunctionIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
-                 ->functioncallIs('\\array')
+                 ->atomIs('Arrayliteral')
                  ->raw('sideEffect{ theArrayNode = it.get(); }')
                  // 1rst array argument is a $this
                  ->raw($firstArgIsAVariable )
@@ -222,7 +222,7 @@ GREMLIN;
         $this->atomFunctionIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
-             ->functioncallIs('\\array')
+             ->atomIs('Arrayliteral')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($firstArgIsAVariable)
              ->raw($secondArgIsAString)
@@ -233,7 +233,7 @@ GREMLIN;
         $this->atomFunctionIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
-             ->functioncallIs('\\array')
+             ->atomIs('Arrayliteral')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
              ->raw($firstArgIsAVariable)
              ->raw($secondArgIsAString)

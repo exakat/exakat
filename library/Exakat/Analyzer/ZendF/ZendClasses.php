@@ -33,25 +33,23 @@ class ZendClasses extends Analyzer {
 
         $this->atomIs('New')
              ->outIs('NEW')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->raw('has("fullnspath")')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
         
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->raw('has("fullnspath")')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 
         $this->atomIs('Catch')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 
         $this->atomIs('Class')
              ->outIs('EXTENDS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 

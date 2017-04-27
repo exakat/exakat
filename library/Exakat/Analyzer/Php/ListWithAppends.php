@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ListWithAppends extends Analyzer {
     public function analyze() {
-        $this->atomFunctionIs(array('\\list', '\\array'))
+        $this->atomFunctionIs('\\list')
              ->hasIn('LEFT')
 
              // more than one Arrayappend, for initial filtering
