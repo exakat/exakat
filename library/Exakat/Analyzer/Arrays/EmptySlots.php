@@ -29,13 +29,8 @@ class EmptySlots extends Analyzer {
 
     public function analyze() {
         // array(1,2,3, ) or [ 4,5, ];
-        $this->atomIs('Functioncall')
-             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->atomIs('Void')
-             ->isNot('rank', 0) // Empty array is OK
-             ->back('first');
+        $this->atomIs('Arrayliteral')
+             ->regexIs('fullcode', ',  [\\\\)|\\\\]]\$');
         $this->prepareQuery();
     }
 }

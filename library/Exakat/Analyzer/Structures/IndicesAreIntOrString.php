@@ -50,7 +50,7 @@ class IndicesAreIntOrString extends Analyzer {
              ->atomIs(array('Identifier', 'Nsname', 'Staticconstant'))
              ->inIs('DEFINITION')
              ->outIs('VALUE')
-             ->atomIs(array('Boolean', 'Real', 'Null', 'Functioncall')) // Functioncall is for array
+             ->atomIs(array('Boolean', 'Real', 'Null', 'Arrayliteral')) // Functioncall is for array
              ->back('first');
         $this->prepareQuery();
 
@@ -60,8 +60,7 @@ class IndicesAreIntOrString extends Analyzer {
              ->atomIs(array('Identifier', 'Nsname'))
              ->inIs('DEFINITION')
              ->outWithRank('ARGUMENT', 1)
-             ->atomIs(array('Boolean', 'Real', 'Null', 'Functioncall')) // Functioncall is for array
-//             ->tokenIs(array('T_STRING', 'T_DNUMBER', 'T_ARRAY', 'T_OPEN_BRACKET'))
+             ->atomIs(array('Boolean', 'Real', 'Null', 'Arrayliteral'))
              ->back('first');
         $this->prepareQuery();
     }
