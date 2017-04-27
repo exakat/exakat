@@ -60,7 +60,7 @@ class Cake33DeprecatedStaticmethodcall extends Analyzer {
 
         // Interfaces
         $this->atomIs('Interface')
-             ->fullnspathIs($deprecatedInterface);
+             ->fullnspathIs($deprecatedInterfaces);
         $this->prepareQuery();
 
         // Traits
