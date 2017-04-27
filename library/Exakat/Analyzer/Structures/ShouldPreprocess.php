@@ -31,11 +31,11 @@ class ShouldPreprocess extends Analyzer {
         $dynamicAtoms = array('Variable', 'Property', 'Magicconstant', 'Staticmethodcall', 'Staticproperty');
         //'Functioncall' : if they also have only constants.
 
-//'Identifier', 
         $methods = new Methods();
         $functionList = $methods->getDeterministFunctions();
         $functionList = $this->makeFullNsPath($functionList);
 
+        // Operator only working on constants
         $tokenList = '"'.implode('", "', self::$FUNCTIONS_TOKENS).'"';
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
             // Functioncall, that are not authorized
@@ -46,15 +46,12 @@ class ShouldPreprocess extends Analyzer {
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
         
-        $functionListNoArray = array_diff($functionList, array('\\defined', '\\error_reporting', '\\extension_loaded', '\\get_defined_vars', '\\print', '\\echo', '\\set_time_limit'));
+        $functionListNoArray = array_diff($functionList, 
+                array('\\defined', '\\error_reporting', '\\extension_loaded', '\\get_defined_vars', '\\print', '\\echo', '\\set_time_limit'));
         
+        // Function only applied to constants 
         $this->atomFunctionIs($functionListNoArray)
              ->raw('where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant", true)).count().is(eq(0)) )');
-        $this->prepareQuery();
-
-        $this->atomFunctionIs(array('\\join', '\\explode', '\\implode', '\\split'))
-             ->noAtomInside($dynamicAtoms)
-             ->back('first');
         $this->prepareQuery();
     }
 }
