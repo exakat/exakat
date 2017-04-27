@@ -1964,6 +1964,9 @@ class Load extends Tasks {
             $functioncall->fullnspath = $fullnspath;
             $functioncall->aliased    = $aliased;
 
+            $name->fullnspath = $fullnspath;
+            $name->aliased    = $aliased;
+
             // Probably weak check, since we haven't built fullnspath for functions yet...
             if (strtolower($name->code) === 'define') {
                 $this->processDefineAsConstants($arguments);
@@ -1997,6 +2000,7 @@ class Load extends Tasks {
         } else {
             $functioncall = $this->processFCOA($functioncall);
         }
+
         return $functioncall;
     }
 
