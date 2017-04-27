@@ -28,17 +28,13 @@ class ShouldMakeAlias extends Analyzer {
     public function analyze() {
         // No namespace ? 
         $this->atomIs('Nsname')
-             ->hasOut('SUBNAME')
-             ->hasNoIn(array('USE', 'NAME'))
-             ->hasNoParent('Namespace', 'NAME')
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->outWithRank('SUBNAME', 0)
-             ->savePropertyAs('code', 'possibleAlias')
+             ->hasNoIn('USE')
+             ->savePropertyAs('fullnspath', 'possibleAlias')
              ->goToNamespace()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").filter{ it.get().value("alias") == possibleAlias}.count().is(eq(0)) )')
+             ->raw('where( __.out("BLOCK", "CODE").out("ELEMENT").hasLabel("Use").out("USE").filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )')
              ->back('first');
         $this->prepareQuery();
+
     }
 }
 

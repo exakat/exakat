@@ -1528,7 +1528,7 @@ GREMLIN
     }
 
     public function goToNamespace() {
-        $this->goToInstruction('Namespace');
+        $this->goToInstruction(array('Namespace', 'Php'));
         
         return $this;
     }
