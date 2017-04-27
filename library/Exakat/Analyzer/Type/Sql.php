@@ -32,19 +32,18 @@ class Sql extends Analyzer {
         
         // SQL in a literal 'SELECT col FROM table';
         $this->atomIs('String')
+             ->hasNoIn('CONCAT')
              ->regexIs('fullcode', $delimiter.$regex)
              ->inIsIE('CONCAT');
         $this->prepareQuery();
 
         // SQL in a literal 'SELECT col FROM '.$table;
         $this->atomIs('Concatenation')
-             ->regexIs('fullcode', $delimiter.$regex);
-        $this->prepareQuery();
-
-        // SQL in a literal 'SELECT col FROM '.$table;
-        $this->atomIs('Concatenation')
              ->outWithRank('CONCAT', 0)
-             ->regexIs('noDelimiter', $regex);
+             ->atomIs('String')
+             ->hasNoOut('CONCAT')
+             ->regexIs('noDelimiter', $regex)
+             ->back('first');
         $this->prepareQuery();
     }
 }
