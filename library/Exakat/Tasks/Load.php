@@ -1654,6 +1654,8 @@ class Load extends Tasks {
         $current = $this->id;
         $argumentsId = array();
 
+        $newContext = $this->isContext(self::CONTEXT_NEW);
+        $this->contexts[self::CONTEXT_NEW] = 0;
         $this->nestContext();
         $fullcode = array();
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_CLOSE_PARENTHESIS, \Exakat\Tasks\T_CLOSE_BRACKET))) {
@@ -1799,6 +1801,7 @@ class Load extends Tasks {
         }
 
         $this->exitContext();
+        $this->contexts[self::CONTEXT_NEW] = $newContext;
 
         return $arguments;
     }

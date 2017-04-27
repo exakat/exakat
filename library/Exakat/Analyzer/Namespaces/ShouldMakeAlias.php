@@ -29,6 +29,8 @@ class ShouldMakeAlias extends Analyzer {
         // No namespace ? 
         $this->atomIs('Nsname')
              ->hasNoIn('USE')
+             ->hasNoParent('Use', array('NAME', 'USE'))  // use expression
+//             ->hasNoParent('Functioncall', 'NAME')  // a function with a full name
              ->savePropertyAs('fullnspath', 'possibleAlias')
              ->goToNamespace()
              ->raw('where( __.out("BLOCK", "CODE").out("ELEMENT").hasLabel("Use").out("USE").filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )')
