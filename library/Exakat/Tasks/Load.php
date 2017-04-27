@@ -2872,7 +2872,6 @@ class Load extends Tasks {
     }
 
     private function processArrayLiteral() {
-        $array = $this->addAtom('Arrayliteral');
         $current = $this->id;
 
         if ($this->tokens[$current][0] === \Exakat\Tasks\T_ARRAY) {
@@ -2881,16 +2880,28 @@ class Load extends Tasks {
         } else {
             $arguments = $this->processArguments(array(\Exakat\Tasks\T_CLOSE_BRACKET));
         }
-        $this->addLink($array, $arguments, 'ARGUMENTS');
         
-        $array->code      = $this->tokens[$current][1];
-        if ($this->tokens[$current][0] === \Exakat\Tasks\T_ARRAY) {
-            $array->fullcode  = $this->tokens[$current][1].'('.$arguments->fullcode.')';
-        } else {
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EQUAL) {
+            // This is a T_LIST ! 
+            $array  = $this->addAtom('Functioncall');
+            $array->token      = 'T_OPEN_BRACKET';
+            $array->fullnspath = '\list';
             $array->fullcode  = '['.$arguments->fullcode.']';
+        } else {
+            $array = $this->addAtom('Arrayliteral');
+            $array->token      = $this->getToken($this->tokens[$current][0]);
+
+            if ($this->tokens[$current][0] === \Exakat\Tasks\T_ARRAY) {
+                $array->fullcode  = $this->tokens[$current][1].'('.$arguments->fullcode.')';
+            } else {
+                $array->fullcode  = '['.$arguments->fullcode.']';
+            }
         }
+
+        $this->addLink($array, $arguments, 'ARGUMENTS');
+        $array->code      = $this->tokens[$current][1];
+
         $array->line      = $this->tokens[$current][2];
-        $array->token      = $this->getToken($this->tokens[$current][0]);
         $array->boolean    = (int) (bool) $arguments->count;
         $array->constant   = $arguments->constant;
         $this->pushExpression($array);
