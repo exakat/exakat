@@ -37,7 +37,7 @@ abstract class Reports {
                                           'Text', 'Xml', 'Uml',
                                           'PhpConfiguration', 'PhpCompilation',
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
-                                          'ZendFramework',  'RadwellCode', 'Codesniffer', 'Slim',
+                                          'ZendFramework',  'RadwellCode', 'CodeSniffer', 'Slim',
                                           'FacetedJson', 'Json', 'OnepageJson',
                                           'Codacy',
                                           );
