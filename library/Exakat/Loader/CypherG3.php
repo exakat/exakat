@@ -155,6 +155,17 @@ CYPHER;
         }
         display('Loaded links');
 
+        $gremlin = new Gremlin3($this->config);
+        $query = <<<GREMLIN
+g.V().hasLabel("String")
+     .not(has("noDelimiter"))
+     .sideEffect{ 
+         it.get().property("noDelimiter", "" ); 
+     }
+
+GREMLIN;
+        $gremlin->query($query);
+
         $this->cleanCsv();
         display('Cleaning CSV');
 
