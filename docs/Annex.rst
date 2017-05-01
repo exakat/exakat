@@ -285,7 +285,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.11.0
 
   * Could Use str_repeat() (Structures/CouldUseStrrepeat ; Analyze)
-  * Crc32() Might Be Negative (Php/Crc32MightBeNegative)
+  * Crc32() Might Be Negative (Php/Crc32MightBeNegative ; Analyze, PHP recommendations)
+  * Empty Final Element (Arrays/EmptyFinal)
+  * Strings With Strange Space (Type/StringWithStrangeSpace ; Analyze)
+  * Suspicious Comparison (Structures/SuspiciousComparison ; Analyze)
 
 * 0.10.9
 
@@ -1337,7 +1340,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/math (Extensions/Extmath ; Appinfo)
   * ext/mbstring (Extensions/Extmbstring ; Appinfo)
   * ext/mcrypt (Extensions/Extmcrypt ; Appinfo, CompatibilityPHP71, CompatibilityPHP72)
-  * ext/memcache (Extensions/Extmemcache ; Appinfo)
   * ext/memcached (Extensions/Extmemcached ; Appinfo)
   * ext/ming (Extensions/Extming ; Appinfo, CompatibilityPHP53)
   * ext/mongo (Extensions/Extmongo ; Appinfo)
@@ -1480,6 +1482,7 @@ List of external links mentionned in this documentation.
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
+* `Array <http://php.net/manual/en/function.array.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
@@ -1510,9 +1513,11 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
+* `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `git <https://git-scm.com/>`_
 * `Github <https://github.com/exakat/exakat>`_
 * `Global Variables <https://codex.wordpress.org/Global_Variables>`_
+* `Gnupg Function for PHP <http://www.php.net/manual/en/book.gnupg.php>`_
 * `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plugin>`_
 * `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_
 * `hash <http://www.php.net/hash>`_
@@ -1563,8 +1568,10 @@ List of external links mentionned in this documentation.
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
+* `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
+* `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
 * `Wincache extension for PHP <http://www.php.net/wincache>`_
 * `Wordpress <http://www.wordpress.org/>`_

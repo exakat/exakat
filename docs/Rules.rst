@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 25 Apr 2017 05:47:47 +0000
-.. comment: Generation hash : 630b03d389db8942358124ea6af6b092e6d15d1c
+.. comment: Generation date : Mon, 01 May 2017 08:35:48 +0000
+.. comment: Generation hash : 0e6fbf89409e7cd56bce7900c0fb5c61858d7b7f
 
 
 .. _$http\_raw\_post\_data:
@@ -11194,6 +11194,44 @@ However, there are some potential variables in those strings, making it possible
 
 
 
+.. _strings-with-strange-space:
+
+Strings With Strange Space
+##########################
+
+
+An invisible space may be mistaken for a normal space. 
+
+However, PHP does straight comparisons, and may fail at recognizing. This analysis reports when it finds such strange spaces inside strings.
+
+PHP doesn't mistake space and tables for whitespace when tokenizing the code.
+
+This analysis doesn't report Unicode Codepoint Notation : those are clearly visible in the code.
+
+.. code-block:: php
+
+   <?php
+   
+   // PHP 7 notation, 
+   $a = \u{3000};
+   $b = ;
+   
+   // Displays false
+   var_dump($a === $b);
+   
+   ?>
+
+
+See also `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_, and `disallow irregular whitespace (no-irregular-whitespace) <http://eslint.org/docs/rules/no-irregular-whitespace>`_.
+
++--------------+-----------------------------+
+| Command Line | Type/StringWithStrangeSpace |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
+
+
+
 .. _strpos-comparison:
 
 Strpos Comparison
@@ -11237,6 +11275,43 @@ This analyzer list all the `strpos() <http://www.php.net/strpos>`_ function that
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
+
+
+
+.. _suspicious-comparison:
+
+Suspicious Comparison
+#####################
+
+
+The comparison seems to be misplaced.
+
+A comparison happens in the the last argument, while the actual function expect another type : this may be the case of a badly placed parenthesis.
+
+.. code-block:: php
+
+   <?php
+   
+   // trim expect a string, a boolean is given.
+   if (trim($str === '')){
+   
+   }
+   
+   // Just move the first closing parenthesis to give back its actual meaning
+   if (trim($str === '')){
+   
+   }
+   
+   ?>
+
+
+Original idea by Vladimir Reznichenko.
+
++--------------+---------------------------------+
+| Command Line | Structures/SuspiciousComparison |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
 
 
 

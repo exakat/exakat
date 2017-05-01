@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 25 Apr 2017 05:47:47 +0000
-.. comment: Generation hash : 630b03d389db8942358124ea6af6b092e6d15d1c
+.. comment: Generation date : Mon, 01 May 2017 08:35:48 +0000
+.. comment: Generation hash : 0e6fbf89409e7cd56bce7900c0fb5c61858d7b7f
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 305 analysis
+Total : 307 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -282,7 +282,9 @@ Total : 305 analysis
 * :ref:`Strange Name For Variables <strange-name-for-variables>`
 * :ref:`Strict Comparison With Booleans <strict-comparison-with-booleans>`
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
+* :ref:`Strings With Strange Space <strings-with-strange-space>`
 * :ref:`Strpos Comparison <strpos-comparison>`
+* :ref:`Suspicious Comparison <suspicious-comparison>`
 * :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
 * :ref:`Switch Without Default <switch-without-default>`
