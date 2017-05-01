@@ -2172,11 +2172,13 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivate"');
         $couldBePrivate = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/class (\S+) /', $row['class'], $classname);
+            preg_match('/(class|trait) (\S+) /', $row['class'], $classname);
+            assert(isset($classname[1]), 'Missing class in '.$row['class']);
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
             preg_match('/(\$\S+)/', $row['fullcode'], $code);
-            
+            assert(isset($code[1]), 'Missing class in '.$row['fullcode']);
+
             if (isset($couldBePrivate[$fullnspath])) {
                 $couldBePrivate[$fullnspath][] = $code[1];
             } else {
@@ -2187,7 +2189,7 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedProperty"');
         $couldBeProtected = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/class (\S+) /', $row['class'], $classname);
+            preg_match('/(class|trait) (\S+) /', $row['class'], $classname);
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
             preg_match('/(\$\S+)/', $row['fullcode'], $code);
@@ -2199,8 +2201,23 @@ HTML;
             }
         }
 
-        $visibilityTable = '<table style="border: 1px solid black;">
-<tr><td>&nbsp;</td><td>Property</td><td>None (public)</td><td>Public</td><td>Protected</td><td>Private</td><td>Value</td></tr>';
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeClassConstant"');
+        $couldBeConstant = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            preg_match('/(class|trait) (\S+) /', $row['class'], $classname);
+            $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
+            
+            preg_match('/(\$\S+)/', $row['fullcode'], $code);
+            
+            if (isset($couldBeConstant[$fullnspath])) {
+                $couldBeConstant[$fullnspath][] = $code[1];
+            } else {
+                $couldBeConstant[$fullnspath] = array($code[1]);
+            }
+        }
+
+        $visibilityTable = '<table class="table table-striped">
+<tr><td>&nbsp;</td><td>Property</td><td>None (public)</td><td>Public</td><td>Protected</td><td>Private</td><td>Constant</td><td>Value</td></tr>';
 
         $res = $this->sqlite->query('SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
          visibility, property, value
@@ -2212,17 +2229,19 @@ HTML;
          WHERE type="class"
         ');
         $theClass = '';
-        $ranking = array('' => 0,
-                         'public' => 1,
+        $ranking = array(''          => 0,
+                         'public'    => 1,
                          'protected' => 2,
-                         'private' => 3);
+                         'private'   => 3,
+                         'constant'  => 4);
                          
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if ($theClass != $row['theClass']) {
-                $visibilityTable .= '<tr><td colspan="6">'.$row['theClass']."</td></tr>\n";
+                $visibilityTable .= '<tr><td colspan="7">'.$row['theClass']."</td></tr>\n";
+                $theClass = $row['theClass'];
             }
 
-            $visibilities = ['&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;'];
+            $visibilities = ['&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;'];
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) && 
@@ -2236,9 +2255,14 @@ HTML;
                     $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
                     $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
             }
+
+            if (isset($couldBeConstant[$row['fullnspath']]) && 
+                in_array($row['property'], $couldBeConstant[$row['fullnspath']])) {
+                    $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
+            }
             
-            $visibilityTable .= '<tr><td>&nbsp;</td><td>'.$row['property'].'</td><td style="border: 1px solid black;">'.
-                                    join('</td><td style="border: 1px solid black;">', $visibilities)
+            $visibilityTable .= '<tr><td>&nbsp;</td><td>'.$row['property'].'</td><td>'.
+                                    join('</td><td>', $visibilities)
                                  ."</td></tr>\n";
         }
         //<td>'.$this->PHPSyntax($row['value'])."</td>
