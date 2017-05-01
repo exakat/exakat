@@ -1,4 +1,4 @@
-Version 0.11.1 (Ruler of Women's Country, Coming up)
+Version 0.11.1 (Scorpion Demon, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,19 @@ Version 0.11.1 (Ruler of Women's Country, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.11.1 (Ruler of Women's Country, 2017-05-01)
++ Architecture
+    + Fixed handling for large list of data in gremlin queries
+    + Handles static in anonymous classes correctly
++ Report
+    + Reports handle traits like class.
++ Analyzer
+    + New analyzer : ends arrays with , or not (favorite)
+    + New analyzer : suspicious comparison 
+    + New analyzer : strange spaces in strings
++ Tokenizer
+    + Arrays are now Arrayliteral, split from Functioncall
 
 Version 0.11.0 (Immortal Ruyi, 2017-04-24)
 + Architecture
