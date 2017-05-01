@@ -171,8 +171,8 @@ This installation script presume that docker is installed and running.
 
     You may now run an exakat project. Restart the docker image to run another project. 
 
-Installation with PHP versions on Docker
-----------------------------------------
+Installation With PHP On Docker
+-------------------------------
 
 It is possible to install various PHP versions, provided as docker images. Check the `docker PHP container <https://hub.docker.com/_/php/>`_ on the docker web site to find the available containers.
 
@@ -180,9 +180,9 @@ In the config/exakat.ini file, mention the PHP version with this format :
 
 ::
 
-; config/exakat.ini 
-php56 = php:5.6
-php71 = php:7.1
+    ; config/exakat.ini 
+    php56 = php:5.6
+    php71 = php:7.1
 
 
 Installation guide with Composer
