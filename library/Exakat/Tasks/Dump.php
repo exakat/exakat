@@ -627,7 +627,9 @@ GREMLIN
                 $visibility = '';
             }
 
-            
+            if (!isset($citId[$row->class])) {
+                continue;
+            }
             $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].
                         ", ".(int) $row->static.", ".(int) $row->final.", ".(int) $row->abstract.", '".$visibility."')";
 
