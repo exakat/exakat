@@ -769,9 +769,6 @@ __.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('
     }
 
     public function noDelimiterIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
-        if (empty($code)) {
-            return $this;
-        }
         $this->addMethod('hasLabel("String")', $code);
         return $this->propertyIs('noDelimiter', $code, $caseSensitive);
     }
@@ -1840,11 +1837,6 @@ GREMLIN;
     }
 
     private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
-        if ( $code === '' || 
-            (is_array($code) && empty($code))) {
-            return $this;
-        }
-
         if ($caseSensitive === self::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {
