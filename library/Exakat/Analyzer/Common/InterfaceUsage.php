@@ -59,6 +59,11 @@ class InterfaceUsage extends Analyzer {
              ->outIs('TYPEHINT')
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
+        
+        $this->atomIs('Classconstant')
+             ->outIs('CLASS')
+             ->fullnspathIs($interfaces);
+        $this->prepareQuery();
     }
 }
 
