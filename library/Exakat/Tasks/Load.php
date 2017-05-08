@@ -1830,9 +1830,9 @@ class Load extends Tasks {
         $rank = -1;
         --$this->id; // back one step for the init in the next loop
 
-        foreach($this->optionsTokens as $name => $optionId) {
-            $this->addLink($const, $optionId, strtoupper($name));
-            $fullcode[] = $this->atoms[$optionId]['fullcode'];
+        foreach($this->optionsTokens as $name => $option) {
+            $this->addLink($const, $option, strtoupper($name));
+            $fullcode[] = $this->atoms[$option->id]->fullcode;
         }
         $this->optionsTokens = array();
 
