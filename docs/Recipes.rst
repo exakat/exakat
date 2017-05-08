@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 01 May 2017 08:35:48 +0000
-.. comment: Generation hash : 0e6fbf89409e7cd56bce7900c0fb5c61858d7b7f
+.. comment: Generation date : Mon, 08 May 2017 12:17:41 +0000
+.. comment: Generation hash : 6c8dbd2bac31c15ac59e99ce0e6f8cb51dd892e7
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 307 analysis
+Total : 308 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -211,6 +211,7 @@ Total : 307 analysis
 * :ref:`No Class In Global <no-class-in-global>`
 * :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 * :ref:`No Direct Usage <no-direct-usage>`
+* :ref:`No Empty Regex <no-empty-regex>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Path <no-hardcoded-path>`

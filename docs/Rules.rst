@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 01 May 2017 08:35:48 +0000
-.. comment: Generation hash : 0e6fbf89409e7cd56bce7900c0fb5c61858d7b7f
+.. comment: Generation date : Mon, 08 May 2017 12:17:41 +0000
+.. comment: Generation hash : 6c8dbd2bac31c15ac59e99ce0e6f8cb51dd892e7
 
 
 .. _$http\_raw\_post\_data:
@@ -6989,6 +6989,42 @@ See `PSR7 <http://www.php-fig.org/psr/psr-7/>`_ and `PSR 7 and Value Objects <ht
 +--------------+----------------------------+
 | Analyzers    | :ref:`Slim`                |
 +--------------+----------------------------+
+
+
+
+.. _no-empty-regex:
+
+No Empty Regex
+##############
+
+
+PHP regex don't accept empty regex, nor regex with alphanumeric delimiter.
+
+Most of those errors happen at execution time, when the regex is build dynamically, but still may end empty. At compile time, such error are made when the code is not tested before commit.
+
+.. code-block:: php
+
+   <?php
+   
+   // No empty regex
+   preg_match('', $string, $r); 
+   
+   // Delimiter must be non-alphanumerical
+   preg_replace('1abc1', $string, $r); 
+   
+   // Delimiter must be non-alphanumerical
+   preg_replace('1'.$regex.'1', $string, $r); 
+   
+   ?>
+
+
+See also `PCRE <http://php.net/pcre>`_ and `Delimiters <http://php.net/manual/en/regexp.reference.delimiters.php>`_.
+
++--------------+-------------------------+
+| Command Line | Structures/NoEmptyRegex |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
 
 
 
@@ -19274,9 +19310,9 @@ zend-stdlib classes, interfaces and traits that are not defined in version 3.0.0
 
 zend-stdlib 3.0.0 has 30 classes, 4 traits and 12 interfaces;
 
- 38 removed classes 
-, 1 removed trait 
-. See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
+38 removed classes, 1 removed trait. 
+
+See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
 +--------------+----------------------+
 | Command Line | ZendF/Zf3Stdlib30    |
@@ -19296,8 +19332,9 @@ zend-stdlib classes, interfaces and traits that are not defined in version 3.1.0
 
 zend-stdlib 3.1.0 has 31 classes, 4 traits and 12 interfaces;
 
-1 new classe 
-.  See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
+1 new classe.  
+
+See also : `zend-stdlib <https://github.com/zendframework/zend-stdlib>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
 +--------------+----------------------+
 | Command Line | ZendF/Zf3Stdlib31    |

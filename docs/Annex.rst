@@ -282,6 +282,11 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.11.1
+
+  * Difference Consistence (Structures/DifferencePreference)
+  * No Empty Regex (Structures/NoEmptyRegex ; Analyze)
+
 * 0.11.0
 
   * Could Use str_repeat() (Structures/CouldUseStrrepeat ; Analyze)
@@ -1340,6 +1345,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/math (Extensions/Extmath ; Appinfo)
   * ext/mbstring (Extensions/Extmbstring ; Appinfo)
   * ext/mcrypt (Extensions/Extmcrypt ; Appinfo, CompatibilityPHP71, CompatibilityPHP72)
+  * ext/memcache (Extensions/Extmemcache ; Appinfo)
   * ext/memcached (Extensions/Extmemcached ; Appinfo)
   * ext/ming (Extensions/Extming ; Appinfo, CompatibilityPHP53)
   * ext/mongo (Extensions/Extmongo ; Appinfo)
@@ -1488,21 +1494,26 @@ List of external links mentionned in this documentation.
 * `bazaar <http://bazaar.canonical.com/en/>`_
 * `BC Math Functions <http://www.php.net/bcmath>`_
 * `Bzip2 Functions <http://nl1.php.net/manual/en/ref.bzip2.php>`_
+* `Cairo Graphics Library <https://cairographics.org/>`_
 * `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appendices/3-0-migration-guide.html>`_
 * `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_
 * `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_
 * `CakePHP <http://www.cakephp.org/>`_
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
+* `Comparison Operators <http://php.net/manual/en/language.operators.comparison.php>`_
 * `composer <https://getcomposer.org/>`_
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
 * `crc32() <http://php.net/crc32>`_
 * `curl <http://www.php.net/curl>`_
+* `Curl for PHP <http://php.net/manual/en/book.curl.php>`_
 * `Data structures <http://docs.php.net/manual/en/book.ds.php>`_
+* `Date and Time <http://php.net/manual/en/book.datetime.php>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `docker PHP container <https://hub.docker.com/_/php/>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
+* `download <https://www.exakat.io/download-exakat/>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
 * `Exakat <http://www.exakat.io/>`_
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
@@ -1522,6 +1533,8 @@ List of external links mentionned in this documentation.
 * `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_
 * `hash <http://www.php.net/hash>`_
 * `hg <https://www.mercurial-scm.org/>`_
+* `Iconv <http://php.net/iconv>`_
+* `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
@@ -1532,13 +1545,15 @@ List of external links mentionned in this documentation.
 * `Marco Pivetti tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
 * `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
+* `Memcache on PHP <http://www.php.net/manual/en/book.memcache.php>`_
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
 * `Neo4j <http://neo4j.com/>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Packagist <https://packagist.org/>`_
+* `PCRE <http://php.net/pcre>`_
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
-* `phar <https://www.exakat.io/download-exakat/>`_
+* `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
