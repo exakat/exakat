@@ -1,4 +1,4 @@
-bb<?php
+<?php
 
 $expected     = array();
 
