@@ -44,6 +44,7 @@ class UsedMethods extends Analyzer {
                  ->back('used');
             $this->prepareQuery();
         }
+
         // Staticmethodcall
         $staticmethods = $this->query('g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()');
         if (!empty($staticmethods)) {
@@ -83,9 +84,9 @@ g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZ
 
 GREMLIN
 );
+
         if (!empty($callables)) {
             // method used statically in a callback with an array
-//                 ->savePropertyAs('fullnspath', 'fullnspath')
             $this->atomIs('Method')
                  ->_as('used')
                  ->outIs('NAME')
