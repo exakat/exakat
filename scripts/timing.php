@@ -74,7 +74,7 @@ foreach($files as $id => $file) {
     }
 
     $res = array($project, $initialSize, $size, $buildRoot, $tokenizer, $analyze, $final);
-    $regression->addData(floor($final), [floor($size)]);
+    $regression->addData(floor($final), array(floor($size)));
     
     if ($initialSize < $size) {
         print "Tokens grown : $project\n";
@@ -89,7 +89,7 @@ print "Did $total files\n";
 //        print "predict : ".."\n";
         $coefficients = $regression->getCoefficients();
         print_r($coefficients);
-        $intercept = round($regression->predict([0]), 2);
+        $intercept = round($regression->predict(array(0)), 2);
         print "$intercept\n";
 
 ?>

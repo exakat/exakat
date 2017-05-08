@@ -228,17 +228,6 @@ GREMLIN;
                 }
             }
         }
-
-        $d = array_diff(array_keys($starts), array_keys($ids));
-        if (!empty($d)) {
-            //            print "Starts \n";
-            //            print_r($d);
-        }
-        $d = array_diff(array_keys($ends), array_keys($ids));
-        if (!empty($d)) {
-            //            print "Ends \n";
-            //            print_r($d);
-        }
     }
 
     public function saveDefinitions($exakatDir, $calls) {

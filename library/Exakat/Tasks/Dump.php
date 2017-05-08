@@ -385,6 +385,7 @@ GREMLIN
 //            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
 
             // Get extends
+            /*
             if (!empty($row->extends)) {
                 if (isset($extendsId[$row->extends[0]])) {
 //                    $extendsId[$row->extends[0]][] = $citId[$row->fullnspath];
@@ -402,6 +403,7 @@ GREMLIN
             if (!empty($row->uses)) {
 //                $usesId[$citId[$row->fullnspath]] = $row->uses;
             }
+            */
             ++$total;
         }
 
@@ -444,6 +446,7 @@ GREMLIN
 
 //            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
 
+            /*
             // Get extends
             if (!empty($row->extends)) {
                 if (isset($extendsId[$row->extends])) {
@@ -457,6 +460,7 @@ GREMLIN
             if (!empty($row->implements)) {
 //                $implementsId[$citId[$row->fullnspath]] = $row->implements;
             }
+            */
             ++$total;
         }
 
@@ -804,14 +808,14 @@ GREMLIN
             $res = $res->results;
 
             $total = 0;
-            $query = [];
+            $query = array();
             foreach($res as $value => $row) {
                 $query[] = "('".$this->sqlite->escapeString($row->name)."','".$this->sqlite->escapeString($row->file)."',".$row->line.')';
                 ++$total;
                 if ($total % 10000 === 0) {
                     $query = 'INSERT INTO literal'.$type.' (name, file, line) VALUES '.join(', ', $query);
                     $this->sqlite->query($query);
-                    $query = [];
+                    $query = array();
                 }
             }
             

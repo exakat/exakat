@@ -2241,7 +2241,7 @@ HTML;
                 $theClass = $row['theClass'];
             }
 
-            $visibilities = ['&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;'];
+            $visibilities = array('&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) && 

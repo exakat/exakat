@@ -4657,9 +4657,6 @@ class Load extends Tasks {
             $this->uses = array('function' => array(),
                                 'const'    => array(),
                                 'class'    => array());
-            $this->uses = array('function' => array(),
-                                  'const'    => array(),
-                                  'class'    => array());
         } elseif ($namespace->atom === 'Void') {
             $this->namespace = '\\';
         } else {

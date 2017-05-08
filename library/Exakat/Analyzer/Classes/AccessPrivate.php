@@ -35,7 +35,6 @@ class AccessPrivate extends Analyzer {
                                                                                .out("PRIVATE").count().is(eq(0)) )';
 
         $hasPrivateProperty = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(1)) )';
-        $hasNotPrivateProperty = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE").count().is(eq(1)) ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name}.count().is(eq(0)) )';
         
         // methods
         // classname::method() direct class

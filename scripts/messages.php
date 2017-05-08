@@ -44,7 +44,7 @@ foreach($docs as $iniFile) {
     }
 
     if ($words < 30) { 
-        print "Doc is too short in $iniFile ($words words)\n";
+//        print "Doc is too short in $iniFile ($words words)\n";
         
         continue; 
     }

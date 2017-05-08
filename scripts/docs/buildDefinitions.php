@@ -329,7 +329,7 @@ GLOSSARY;
 ksort($glossary);
 
 $found = 0;
-foreach($glossary as $letters => $items) {
+foreach($glossary as $items) {
     $found += count(array_keys($items));
 }
 print "$found found\n";
@@ -337,9 +337,6 @@ print count($entries)." defined\n";
 
 foreach($entries as $name => $url) {
     $letter = strtoupper(trim($name,'\\`'))[0];
-    if (!isset($glossary[$letter][$name])) {
-//        print $name." $letter\n";
-    }
 }
 
 foreach($glossary as $letter => $items) {

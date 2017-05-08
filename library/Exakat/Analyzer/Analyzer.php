@@ -1837,6 +1837,10 @@ GREMLIN;
     }
 
     private function propertyIs($property, $code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (is_array($code) && empty($code) ) {
+            return $this;
+        }
+
         if ($caseSensitive === self::CASE_SENSITIVE) {
             $caseSensitive = '';
         } else {
