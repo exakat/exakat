@@ -272,7 +272,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
-     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
+     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
      .filter{ it.get().value("code").toLowerCase() in arg1 }
      .sideEffect{ 
         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
@@ -296,7 +296,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
-     .where( __.in("DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
+     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
      .filter{ it.get().value("code") in arg1 }
      .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
      .sideEffect{ name = it.get().value("code"); }
