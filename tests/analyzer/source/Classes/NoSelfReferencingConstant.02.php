@@ -12,6 +12,8 @@ class a {
     const D1 = a::D1 + 1; 
     const D3 = a::d3 + 2; 
     const d4 = a::D4 + 3; 
+    
+    const E = 3;
 
 } 
 

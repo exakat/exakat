@@ -11,7 +11,9 @@ class a {
           
           D1 = a::D1 + 1,
           D3 = a::d3 + 2,
-          d4 = a::D4 + 3; 
+          d4 = a::D4 + 3,
+          
+          E = 3;
 } 
 
 print a::C1;

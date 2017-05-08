@@ -6,5 +6,7 @@ namespace A {
     $pgsql = new pgsql();
 
     $db = new customclass;
+
+    $reallyMysqli = new \MYSQLI;
 }
 ?>

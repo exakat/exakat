@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('\MYSQLI');
 
 $expected_not = array(  'mysqli',
                         'mysqli()',

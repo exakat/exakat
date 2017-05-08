@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('class aOK implements i1 { /**/ } ');
 
 $expected_not = array('abstract class abstractClass { /**/ } ',
                       'final class FinalClass { /** / }',

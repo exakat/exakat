@@ -16,4 +16,6 @@ class x3 {
 new x($r1->a, $w1->b);
 new x2($r2->a, $w2->b);
 new x3($r3->a, $w3->b);
+
+$writtenOnly = 3;
 ?>

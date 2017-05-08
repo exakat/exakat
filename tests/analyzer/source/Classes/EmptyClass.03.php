@@ -1,5 +1,7 @@
 <?php
 
+class EmptyClass {}
+
 class X extends Exception {}
 
 class Y extends X {}

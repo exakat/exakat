@@ -7,6 +7,6 @@ $expected     = array('$w1->b',
                       '$w2->b', 
                       '$r1->a');
 
-$expected_not = array();
+$expected_not = array('$writtenOnly');
 
 ?>

@@ -8,6 +8,6 @@ $expected     = array('$read->a',
                       '$read2->c', 
                       '$read3->e');
 
-$expected_not = array();
+$expected_not = array('$writtenOnly');
 
 ?>

@@ -17,6 +17,6 @@ $expected     = array('bcscale($precision + 6)',
                       'bcadd($a, $b)', 
                       'bcmul(4, $t)');
 
-$expected_not = array();
+$expected_not = array('bcpi');
 
 ?>

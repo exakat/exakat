@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('class EmptyClass { /**/ } ');
 
 $expected_not = array('class X extends Exception { /**/ } ',
                       'class Y extends X { /**/ } ',
