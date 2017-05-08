@@ -60,9 +60,12 @@ class InterfaceUsage extends Analyzer {
              ->fullnspathIs($interfaces);
         $this->prepareQuery();
         
-        $this->atomIs('Classconstant')
+        $this->atomIs('Staticconstant')
              ->outIs('CLASS')
-             ->fullnspathIs($interfaces);
+             ->fullnspathIs($interfaces)
+             ->_as('results')
+             ->inIs('DEFINITION')
+             ->atomIs('Interface');
         $this->prepareQuery();
     }
 }

@@ -29,6 +29,7 @@ class OldStyleConstructor extends Analyzer {
     public function analyze() {
         $hasNo__construct = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"}.count().is(eq(0)) )';
 
+        // No mentionned namespaces
         $this->atomIs('Class')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
@@ -40,10 +41,11 @@ class OldStyleConstructor extends Analyzer {
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->goToNamespace()
-             ->atomIs('File') // no namespace => Global
+             ->atomIs('Php') // no namespace => Global
              ->back('first');
         $this->prepareQuery();
 
+        // Namespace is mentionned but empty, so global
         $this->atomIs('Class')
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')

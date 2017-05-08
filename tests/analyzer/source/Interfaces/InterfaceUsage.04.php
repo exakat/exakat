@@ -1,9 +1,9 @@
 <?php
 
-interface T {
+interface I {
     const i = 2;
 }
-echo T::i;
+echo I::i;
 
 class C {
     const i = 3;
