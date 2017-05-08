@@ -2172,11 +2172,11 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivate"');
         $couldBePrivate = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/(class|trait) (\S+) /', $row['class'], $classname);
+            preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             assert(isset($classname[1]), 'Missing class in '.$row['class']);
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
-            preg_match('/(\$\S+)/', $row['fullcode'], $code);
+            preg_match('/(\$\S+)/i', $row['fullcode'], $code);
             assert(isset($code[1]), 'Missing class in '.$row['fullcode']);
 
             if (isset($couldBePrivate[$fullnspath])) {
