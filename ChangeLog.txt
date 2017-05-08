@@ -1,4 +1,4 @@
-Version 0.11.1 (Scorpion Demon, Coming up)
+Version 0.11.3 (Sun Deity of Mao, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,14 @@ Version 0.11.1 (Scorpion Demon, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.11.2 (Scorpion Demon, 2017-05-08)
++ Architecture
+    + Code cleaning, and more stability
++ Analyzer
+    + New analyzer : Report preference between != and <>
+    + New analyzer : report empty regex and wrong delimiters
+    + Added protection for $ in RegexDelimiters 
 
 Version 0.11.1 (Ruler of Women's Country, 2017-05-01)
 + Architecture
