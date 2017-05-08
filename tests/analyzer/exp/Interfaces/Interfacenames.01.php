@@ -2,6 +2,6 @@
 
 $expected     = array('myInterface');
 
-$expected_not = array();
+$expected_not = array('myClass');
 
 ?>
