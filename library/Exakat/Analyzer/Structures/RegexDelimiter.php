@@ -35,6 +35,7 @@ class RegexDelimiter extends Analyzer {
              ->is('rank', 0) // useful if previous is used
              ->atomIs('String')
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
+             ->noDelimiterIsNot('')
              ->raw('map{ it.get().value("noDelimiter").substring(0, 1) }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next()');
         $types = (array) $this->rawQuery();
@@ -65,6 +66,7 @@ class RegexDelimiter extends Analyzer {
              ->is('rank', 0) // useful if previous is used
              ->atomIs('String')
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
+             ->noDelimiterIsNot('')
              ->raw('filter{ it.get().value("noDelimiter").substring(0, 1) in '.$typesList.' }')
              ->back('first');
         $this->prepareQuery();
