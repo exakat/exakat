@@ -955,7 +955,7 @@ GREMLIN
         // constants
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Identifier")).times(15)
-                   .hasLabel("Identifier").where( __.in("NAME", "CLASS", "SUBNAME", "PROPERTY", "AS", "CONSTANT", "TYPEHINT", "EXTENDS", "USE", "IMPLEMENTS", "INDEX" ).count().is(eq(0)) ).in("DEFINITION")
+                   .hasLabel("Identifier").where( __.in("NAME", "CLASS", "PROPERTY", "AS", "CONSTANT", "TYPEHINT", "EXTENDS", "USE", "IMPLEMENTS", "INDEX" ).count().is(eq(0)) ).in("DEFINITION")
                    .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
                    .as("include")
                    .select("file", "include").by("fullcode").by("fullcode")

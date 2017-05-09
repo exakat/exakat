@@ -137,7 +137,7 @@ GREMLIN;
             // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .where( __.in("NAME", "SUBNAME", "METHOD", "PROPERTY", "CONSTANT").count().is(eq(0)) )
+     .where( __.in("NAME", "METHOD", "PROPERTY", "CONSTANT").count().is(eq(0)) )
      .has("token", without("T_CONST", "T_FUNCTION"))
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')
@@ -156,7 +156,7 @@ GREMLIN;
             // Second round, with fallback to global constants
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .where( __.in("NAME", "SUBNAME").count().is(eq(0)) )
+     .where( __.in("NAME").count().is(eq(0)) )
      .where( __.in("DEFINITION").count().is(eq(0)) )
      .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); name in arg1 }
      .addE('DEFINITION')
@@ -248,7 +248,7 @@ GREMLIN;
 g.V().hasLabel("Identifier", "Nsname").as("a")
      .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
      .has("fullnspath", without(''))
-     .where( __.in("NEW", "METHOD", "NAME", "SUBNAME").count().is(eq(0)))
+     .where( __.in("NEW", "METHOD", "NAME").count().is(eq(0)))
      .sideEffect{ fullnspath = it.get().value("fullnspath")}
      .in('DEFINITION').not(hasLabel("As", "Class", "Interface", "Trait")).out("NAME")
      .filter{ it.get().value("fullnspath") != fullnspath}
@@ -272,7 +272,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
-     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
+     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "PROPERTY").count().is(eq(0)) )  
      .filter{ it.get().value("code").toLowerCase() in arg1 }
      .sideEffect{ 
         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
@@ -296,7 +296,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
-     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "SUBNAME", "PROPERTY").count().is(eq(0)) )  
+     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "PROPERTY").count().is(eq(0)) )  
      .filter{ it.get().value("code") in arg1 }
      .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
      .sideEffect{ name = it.get().value("code"); }

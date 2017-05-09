@@ -8,4 +8,6 @@ class bool {}
 trait string {}
 interface true {}
 
+// Null is still OK on function names
+function null() {}
 ?>

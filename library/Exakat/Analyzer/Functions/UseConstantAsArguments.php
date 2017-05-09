@@ -62,14 +62,14 @@ class UseConstantAsArguments extends Analyzer {
 
             foreach($functions->alternative->{$position} as $function => $constants) {
                 // PHP constant but wrong one
+                $regex = strtolower('('.implode('|', $constants).')\$');
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs(array('Identifier', 'Nsname'))
                      ->analyzerIs('Constants/IsPhpConstant')
-                     ->outIsIE('SUBNAME')
-                     ->codeIsNot($constants)
+                     ->regexIsNot('fullnspath', $regex)
                      ->back('first');
                 $this->prepareQuery();
             }
@@ -102,7 +102,7 @@ class UseConstantAsArguments extends Analyzer {
                  ->atomIs('Logical')
                  ->atomInside(array('Identifier', 'Nsname'))
                  ->analyzerIsNot('Constants/IsPhpConstant')
-                 ->hasNoIn(array('SUBNAME', 'NAME'))
+                 ->hasNoIn('NAME')
                  ->back('first');
             $this->prepareQuery();
 
@@ -121,14 +121,14 @@ class UseConstantAsArguments extends Analyzer {
             foreach($functions->combinaison->{$position} as $function => $constants) {
 
                 // if it's a PHP constant, but not a good one for the function
+                $regex = strtolower('('.implode('|', $constants).')\$');
                 $this->atomFunctionIs($function)
                      ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs(array('Identifier', 'Nsname'))
                      ->analyzerIs('Constants/IsPhpConstant')
-                     ->outIsIE('SUBNAME')
-                     ->codeIsNot($constants)
+                     ->regexIsNot('fullnspath', $regex)
                      ->back('first');
                 $this->prepareQuery();
 
@@ -140,8 +140,7 @@ class UseConstantAsArguments extends Analyzer {
                      ->atomIs('Logical')
                      ->atomInside(array('Identifier', 'Nsname'))
                      ->analyzerIs('Constants/IsPhpConstant')
-                     ->outIsIE('SUBNAME')
-                     ->codeIsNot($constants)
+                     ->regexIsNot('fullnspath', $regex)
                      ->back('first');
                 $this->prepareQuery();
             }

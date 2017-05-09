@@ -2,11 +2,11 @@
 
 $expected     = array('false\\null',
                       'int\\float',
-                      'interface true',
-                      'trait string',
-                      'class bool',
+                       'class bool { /**/ } ', 
+                       'interface true { /**/ } ', 
+                       'trait string { /**/ } '
                       );
 
-$expected_not = array();
+$expected_not = array('function null( ) { /**/ }');
 
 ?>

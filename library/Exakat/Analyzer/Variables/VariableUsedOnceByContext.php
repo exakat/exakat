@@ -34,7 +34,7 @@ class VariableUsedOnceByContext extends Analyzer {
     
     public function analyze() {
         $variables = $this->query('g.V().hasLabel("Variable").not(has("code", "\\$this")).where( __.in("PROPERTY").count().is(eq(0)) ).where( 
-repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GLOBAL", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PPP", "POSTPLUSPLUS", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "SUBNAME", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"))
+repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GLOBAL", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PPP", "POSTPLUSPLUS", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"))
 .until(hasLabel("File")).emit().hasLabel("Function").count().is(eq(0))).groupCount("m").by("code").cap("m")
 .toList().get(0).findAll{ a,b -> b == 1}.keySet()');
 

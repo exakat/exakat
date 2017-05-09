@@ -38,8 +38,7 @@ class ReservedKeywords7 extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Nsname')
-             ->outIs('SUBNAME')
-             ->codeIs($keywords)
+             ->regexIs('code', join('|', $keywords))
              ->back('first');
         $this->prepareQuery();
     }

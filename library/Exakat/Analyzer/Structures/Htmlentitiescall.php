@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Htmlentitiescall extends Analyzer {
     public function analyze() {
         // Case with no 2nd argument (using default)
-        $this->atomIs('Functioncall')
-             ->functioncallIs(array('\\htmlentities', '\\htmlspecialchars'))
+        $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
@@ -43,14 +42,16 @@ class Htmlentitiescall extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
+        $constants = array('ENT_COMPAT', 'ENT_QUOTES', 'ENT_NOQUOTES', 'ENT_IGNORE', 'ENT_SUBSTITUTE', 'ENT_DISALLOWED', 'ENT_HTML401', 'ENT_XML1', 'ENT_XHTML', 'ENT_HTML5');
+        $constantsRegex = strtolower('('.join('|', $constants).')\$');
+
         // Case 2nd argument is a constant
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
              ->outIs('ARGUMENTS')
              ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(array('Identifier', 'Nsname'))
-             ->outIsIE('SUBNAME')
-             ->codeIsNot(array('ENT_COMPAT', 'ENT_QUOTES', 'ENT_NOQUOTES', 'ENT_IGNORE', 'ENT_SUBSTITUTE', 'ENT_DISALLOWED', 'ENT_HTML401', 'ENT_XML1', 'ENT_XHTML', 'ENT_HTML5'), true)
+             ->regexIsNot('fullnspath', $constantsRegex)
              ->back('first');
         $this->prepareQuery();
 
@@ -60,9 +61,9 @@ class Htmlentitiescall extends Analyzer {
              ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Logical')
-             ->atomInside(array('Identifier', 'Nsname'))
-             ->outIsIE('SUBNAME')
-             ->codeIsNot(array('ENT_COMPAT', 'ENT_QUOTES', 'ENT_NOQUOTES', 'ENT_IGNORE', 'ENT_SUBSTITUTE', 'ENT_DISALLOWED', 'ENT_HTML401', 'ENT_XML1', 'ENT_XHTML', 'ENT_HTML5'), true)
+             ->outIsIE(array('LEFT', 'RIGHT'))
+             ->atomIs(array('Identifier', 'Nsname'))
+             ->regexIsNot('fullnspath', $constantsRegex)
              ->back('first');
         $this->prepareQuery();
 

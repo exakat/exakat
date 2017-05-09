@@ -364,7 +364,7 @@ class Load extends Tasks {
                             \Exakat\Tasks\T_BOOLEAN_OR               => 'processLogical',
 
                             \Exakat\Tasks\T_QUESTION                 => 'processTernary',
-                            \Exakat\Tasks\T_NS_SEPARATOR             => 'processNsnameAbsolute',
+                            \Exakat\Tasks\T_NS_SEPARATOR             => 'processNsname',
                             \Exakat\Tasks\T_COALESCE                 => 'processCoalesce',
 
                             \Exakat\Tasks\T_INLINE_HTML              => 'processInlinehtml',
@@ -1109,53 +1109,8 @@ class Load extends Tasks {
     }
 
     private function processOneNsname($getFullnspath = self::WITH_FULLNSPATH) {
-        $rank = -1;
-        $fullcode = array();
-
-        if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_NS_SEPARATOR) {
-            $subname = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
-            $this->pushExpression($subname);
-
-            $hasPrevious = true;
-        } else {
-            $hasPrevious = false;
-        }
-        $current = $this->id;
-
-        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
-            $extends = $this->addAtom('Nsname');
-
-            // Previous one
-            if ($hasPrevious === true) {
-                $subname = $this->popExpression();
-                $subname->rank = ++$rank;
-                $fullcode[] = $subname->code;
-                $this->addLink($extends, $subname, 'SUBNAME');
-            } else {
-                $fullcode[] = '';
-            }
-
-            // Next one (at least one)
-            while ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR &&
-                   $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_OPEN_CURLY ) {
-                ++$this->id; // Skip \
-
-                $subname = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
-
-                $subname->rank = ++$rank;
-                $fullcode[] = $subname->code;
-                $this->addLink($extends, $subname, 'SUBNAME');
-            }
-
-            $extends->code     = '\\';
-            $extends->fullcode = implode('\\', $fullcode);
-            $extends->line     = $this->tokens[$current][2];
-            $extends->token    = $this->getToken($this->tokens[$current + 1][0]);
-            $extends->absolute = !$hasPrevious;
-
-        } else {
-            $extends = $this->popExpression();
-        }
+        ++$this->id;
+        $extends = $this->makeNsname();
 
         if ($getFullnspath === self::WITH_FULLNSPATH) {
             list($fullnspath, $aliased) = $this->getFullnspath($extends, 'class');
@@ -1512,20 +1467,11 @@ class Load extends Tasks {
         $this->pushExpression($functioncall);
     }
 
-    private function processNsnameAbsolute() {
-        $nsname = $this->processNsname();
-
-        $nsname->absolute = self::ABSOLUTE;
-        // No need for fullnspath here
-
-        return $nsname;
-    }
-
-    private function processNsname() {
+    private function makeNsname() {
         $current = $this->id;
 
-        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR &&
-            $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING &&
+        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR                  &&
+            $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING                    &&
             in_array(strtolower($this->tokens[$this->id + 1][1]), array('true', 'false')) &&
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
             ) {
@@ -1543,42 +1489,45 @@ class Load extends Tasks {
             $nsname->constant = self::CONSTANT_EXPRESSION;
         } else {
             $nsname = $this->addAtom('Nsname');
+            $nsname->token    = 'T_STRING';
         }
         $fullcode= array();
 
-        $rank = 0;
-        if ($this->hasExpression()) {
-            $left = $this->popExpression();
-            $this->addLink($nsname, $left, 'SUBNAME');
-            $left->rank = $rank;
-            $fullcode[] = $left->code;
+        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_STRING) {
+            $fullcode[] = $this->tokens[$this->id][1];
+            ++$this->id;
 
-            $absolute = false;
+            $nsname->absolute = self::NOT_ABSOLUTE;
         } else {
             $fullcode[] = '';
-            $absolute = true;
+
+            $nsname->absolute = self::ABSOLUTE;
         }
 
-        while ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
-            $subname = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
 
-            $subname->rank = ++$rank;
-
-            $this->addLink($nsname, $subname, 'SUBNAME');
-            $fullcode[] = $subname->code;
+        while ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR &&
+               $this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_OPEN_CURLY) {
+            ++$this->id; // skip \
+            $fullcode[] = $this->tokens[$this->id][1];
 
             // Go to next
             ++$this->id; // skip \
-        }  ;
+            $nsname->token    = 'T_NS_SEPARATOR';
+        };
         // Back up a bit
         --$this->id;
 
-        $nsname->code     = $this->tokens[$current][1];
+        $nsname->code     = implode('\\', $fullcode);
         $nsname->fullcode = implode('\\', $fullcode);
         $nsname->line     = $this->tokens[$current][2];
-        $nsname->token    = $this->getToken($this->tokens[$current][0]);
-        $nsname->absolute = $absolute;
+        
+        return $nsname;
+    }
 
+    private function processNsname() {
+        $current = $this->id;
+        $nsname = $this->makeNsname();
+        
         // Review this : most nsname will end up as constants!
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
@@ -1615,7 +1564,7 @@ class Load extends Tasks {
 
             $this->addCall('const', $fullnspath, $nsname);
         }
-
+        
         $this->pushExpression($nsname);
 
         return $this->processFCOA($nsname);
@@ -2005,10 +1954,8 @@ class Load extends Tasks {
     }
 
     private function processString() {
-        if (strtolower($this->tokens[$this->id][1]) === 'null' ) {
-            $string = $this->addAtom('Null');
-            $string->boolean  = 0;
-            $string->constant = self::CONSTANT_EXPRESSION;
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR ) {
+            return $this->processNsname();
         } elseif (in_array(strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
             $string->boolean  = (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true');
@@ -2022,7 +1969,7 @@ class Load extends Tasks {
         $string->fullcode   = $this->tokens[$this->id][1];
         $string->line       = $this->tokens[$this->id][2];
         $string->token      = $this->getToken($this->tokens[$this->id][0]);
-        $string->absolute   = false;
+        $string->absolute   = self::NOT_ABSOLUTE;
 
         $this->pushExpression($string);
         
@@ -2347,7 +2294,7 @@ class Load extends Tasks {
         if ($isColon) {
             $fullcode = $this->tokens[$current][1].'('.$init->fullcode.' ; '.$final->fullcode.' ; '.$increment->fullcode.') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id + 1][1];
         } else {
-            $fullcode = $this->tokens[$current][1].'('.$init->fullcode.' ; '.$final->fullcode.' ; '.$increment->fullcode.')'.($block->bracket === true ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
+            $fullcode = $this->tokens[$current][1].'('.$init->fullcode.' ; '.$final->fullcode.' ; '.$increment->fullcode.')'.($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
         }
 
         $for->code        = $code;
@@ -2407,7 +2354,7 @@ class Load extends Tasks {
             ++$this->id; // skip endforeach
             $fullcode = $this->tokens[$current][1].'('.$source->fullcode.' '.$as.' '.$value->fullcode.') : '.self::FULLCODE_SEQUENCE.' endforeach';
         } else {
-            $fullcode = $this->tokens[$current][1].'('.$source->fullcode.' '.$as.' '.$value->fullcode.')'.($block->bracket === true ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
+            $fullcode = $this->tokens[$current][1].'('.$source->fullcode.' '.$as.' '.$value->fullcode.')'.($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
         }
 
         $foreach->code        = $this->tokens[$current][1];
@@ -2517,7 +2464,7 @@ class Load extends Tasks {
         $this->addLink($dowhile, $condition, 'CONDITION');
 
         $dowhile->code     = $this->tokens[$current][1];
-        $dowhile->fullcode = $this->tokens[$current][1].( $block->bracket === true ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE).$while.'('.$condition->fullcode.')';
+        $dowhile->fullcode = $this->tokens[$current][1].( $block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE).$while.'('.$condition->fullcode.')';
         $dowhile->line     = $this->tokens[$current][2];
         $dowhile->token    = $this->getToken($this->tokens[$current][0]);
         $this->pushExpression($dowhile);
@@ -2556,7 +2503,7 @@ class Load extends Tasks {
 
             $fullcode = $this->tokens[$current][1].' ('.$condition->fullcode.') : '.self::FULLCODE_SEQUENCE.' '.$this->tokens[$this->id - 1][1];
         } else {
-            $fullcode = $this->tokens[$current][1].' ('.$condition->fullcode.')'.($block->bracket === true ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
+            $fullcode = $this->tokens[$current][1].' ('.$condition->fullcode.')'.($block->bracket === self::BRACKET ? self::FULLCODE_BLOCK : self::FULLCODE_SEQUENCE);
         }
 
         $while->code        = $this->tokens[$current][1];
@@ -3011,7 +2958,7 @@ class Load extends Tasks {
         $block = $this->sequence;
         $this->endSequence();
 
-        $block->code     = '';
+        $block->code     = ' ';
         $block->fullcode = ' '.self::FULLCODE_SEQUENCE.' ';
         $block->line     = $this->tokens[$this->id][2];
         $block->token    = $this->getToken($this->tokens[$this->id][0]);
@@ -3052,7 +2999,7 @@ class Load extends Tasks {
                 $block->fullcode   = self::FULLCODE_BLOCK;
                 $block->line       = $this->tokens[$this->id][2];
                 $block->token      = $this->getToken($this->tokens[$this->id][0]);
-                $block->bracket    = false;
+                $block->bracket    = self::NOT_BRACKET;
 
                 $this->addLink($block, $void, 'ELEMENT');
             } else {
@@ -4214,6 +4161,9 @@ class Load extends Tasks {
         $right = $this->popExpression();
 
         $this->addLink($instanceof, $right, 'CLASS');
+        
+        list($fullnspath, $aliased) = $this->getFullnspath($right);
+        $this->addCall('class', $fullnspath, $right);
 
         $instanceof->code     = $this->tokens[$current][1];
         $instanceof->fullcode = $left->fullcode.' '.$this->tokens[$current][1].' '.$right->fullcode;
@@ -4557,7 +4507,7 @@ class Load extends Tasks {
     private function getFullnspath($name, $type = 'class') {
 
         // Handle static, self, parent and PHP natives function
-        if (isset($name->absolute) && ($name->absolute === true)) {
+        if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             return array(strtolower($name->fullcode), self::NOT_ALIASED);
         } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'String', 'Null', 'Boolean'))) {
             // No fullnamespace for non literal namespaces
@@ -4648,7 +4598,7 @@ class Load extends Tasks {
     }
 
     private function makeFullnspath($namespaceAs) {
-        return strtolower(isset($namespaceAs->absolute) && $namespaceAs->absolute === true ? $namespaceAs->fullcode : '\\'.$namespaceAs->fullcode) ;
+        return strtolower(isset($namespaceAs->absolute) && $namespaceAs->absolute === self::ABSOLUTE ? $namespaceAs->fullcode : '\\'.$namespaceAs->fullcode) ;
     }
 
     private function setNamespace($namespace = 0) {
