@@ -1110,16 +1110,16 @@ class Load extends Tasks {
 
     private function processOneNsname($getFullnspath = self::WITH_FULLNSPATH) {
         ++$this->id;
-        $extends = $this->makeNsname();
-
+         $nsname = $this->makeNsname();
+ 
         if ($getFullnspath === self::WITH_FULLNSPATH) {
-            list($fullnspath, $aliased) = $this->getFullnspath($extends, 'class');
-            $this->addCall('class', $extends->fullnspath, $extends);
-            $extends->fullnspath = $fullnspath;
-            $extends->aliased    = $aliased;
+            list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
+            $this->addCall('class', $nsname->fullnspath, $nsname);
+            $nsname->fullnspath = $fullnspath;
+            $nsname->aliased    = $aliased;
         }
 
-        return $extends;
+        return $nsname;
     }
 
     private function processTrait() {
@@ -1496,6 +1496,10 @@ class Load extends Tasks {
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_STRING) {
             $fullcode[] = $this->tokens[$this->id][1];
             ++$this->id;
+
+            $nsname->absolute = self::NOT_ABSOLUTE;
+        } elseif ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NAMESPACE ) {
+            $fullcode[] = $this->tokens[$this->id - 1][1];
 
             $nsname->absolute = self::NOT_ABSOLUTE;
         } else {
@@ -1959,6 +1963,10 @@ class Load extends Tasks {
         } elseif (in_array(strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
             $string->boolean  = (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true');
+            $string->constant = self::CONSTANT_EXPRESSION;
+        } elseif (strtolower($this->tokens[$this->id][1]) === 'null') {
+            $string = $this->addAtom('Null');
+            $string->boolean  = 0;
             $string->constant = self::CONSTANT_EXPRESSION;
         } else {
             $string = $this->addAtom('Identifier');
@@ -2972,8 +2980,8 @@ class Load extends Tasks {
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             $name = $this->addAtomVoid();
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR) {
-            --$this->id;
             $nsname = $this->processOneNsname();
+
             list($fullnspath, $aliased) = $this->getFullnspath($nsname);
             $nsname->fullnspath = $fullnspath;
             $nsname->aliased    = $aliased;
