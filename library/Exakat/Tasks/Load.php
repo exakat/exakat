@@ -721,7 +721,7 @@ class Load extends Tasks {
         } catch (LoadError $e) {
 //            print $e->getMessage();
 //            print_r($this->expressions[0]);
-            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
+            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
             $this->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
         } finally {
@@ -737,8 +737,8 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_END ||
             !isset($this->processing[ $this->tokens[$this->id][0] ])) {
-            display("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
-            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}'). Ignoring\n");
+            display("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
+            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
 
             throw new LoadError('Processing error');
         }
@@ -1060,7 +1060,7 @@ class Load extends Tasks {
             $returnType = $this->processOneNsname();
             $this->addLink($function, $returnType, 'RETURNTYPE');
         }
-
+        
         // Process block
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_SEMICOLON) {
             $void = $this->addAtomVoid();
@@ -1258,6 +1258,7 @@ class Load extends Tasks {
             $extends = $this->processOneNsname(self::WITH_FULLNSPATH);
 
             $this->addLink($class, $extends, 'EXTENDS');
+            list($fullnspath, $aliased) = $this->getFullnspath($extends, 'class');
             $this->addCall('class', $extends->fullnspath, $extends);
 
             $this->currentParentClassTrait[] = $extends;
@@ -1487,18 +1488,34 @@ class Load extends Tasks {
             $nsname = $this->addAtom('Null');
             $nsname->boolean = 0;
             $nsname->constant = self::CONSTANT_EXPRESSION;
+        } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_CALLABLE) {
+            $nsname = $this->addAtom('Nsname');
+            $nsname->token      = 'T_CALLABLE';
+            $nsname->fullnspath = '\\callable';
+        } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_ARRAY) {
+            $nsname = $this->addAtom('Nsname');
+            $nsname->token      = 'T_ARRAY';
+            $nsname->fullnspath = '\\array';
         } else {
             $nsname = $this->addAtom('Nsname');
-            $nsname->token    = 'T_STRING';
+            $nsname->token     = 'T_STRING';
         }
-        $fullcode= array();
+
+        $fullcode = array();
 
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_STRING) {
             $fullcode[] = $this->tokens[$this->id][1];
             ++$this->id;
 
             $nsname->absolute = self::NOT_ABSOLUTE;
-        } elseif ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NAMESPACE ) {
+        } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_ARRAY    ||
+                  $this->tokens[$this->id][0] === \Exakat\Tasks\T_CALLABLE ) {
+            $fullcode[] = $this->tokens[$this->id][1];
+
+            ++$this->id;
+
+            $nsname->absolute = self::ABSOLUTE;
+        } elseif ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NAMESPACE) {
             $fullcode[] = $this->tokens[$this->id - 1][1];
 
             $nsname->absolute = self::NOT_ABSOLUTE;
@@ -1507,7 +1524,6 @@ class Load extends Tasks {
 
             $nsname->absolute = self::ABSOLUTE;
         }
-
 
         while ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR &&
                $this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_OPEN_CURLY) {
@@ -4577,7 +4593,7 @@ class Load extends Tasks {
             return array($prefix, self::NOT_ALIASED);
         } else {
             // Finally, the case for a nsname
-            $prefix = strtolower( substr($name->fullcode, 0, strpos($name->fullcode, '\\')) );
+            $prefix = strtolower( substr($name->code, 0, strpos($name->code.'\\', '\\')) );
 
             if (isset($this->uses[$type][$prefix])) {
                 $this->addLink( $name, $this->uses[$type][$prefix], 'DEFINITION');

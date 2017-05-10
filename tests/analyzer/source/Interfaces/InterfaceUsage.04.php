@@ -10,5 +10,7 @@ class C {
 }
 echo C::i;
 
+interface J {}
+
 
 ?>

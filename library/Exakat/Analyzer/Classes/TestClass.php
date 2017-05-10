@@ -29,7 +29,7 @@ class TestClass extends Analyzer {
     public function analyze() {
         $testClasses =  $this->loadIni('php_unittest.ini', 'classes');
         $testClasses =  $this->makeFullNsPath($testClasses);
-    
+        
         $this->atomIs('Class')
              ->outIs('EXTENDS')
              ->fullnspathIs($testClasses)

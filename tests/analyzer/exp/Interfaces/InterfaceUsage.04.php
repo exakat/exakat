@@ -3,6 +3,6 @@
 $expected     = array('I',
                       'C');
 
-$expected_not = array();
+$expected_not = array('J');
 
 ?>
