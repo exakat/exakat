@@ -1471,7 +1471,7 @@ class Load extends Tasks {
     private function makeNsname() {
         $current = $this->id;
 
-        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR                  &&
+        if ($this->tokens[$this->id][0]     === \Exakat\Tasks\T_NS_SEPARATOR              &&
             $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING                    &&
             in_array(strtolower($this->tokens[$this->id + 1][1]), array('true', 'false')) &&
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
@@ -1480,7 +1480,7 @@ class Load extends Tasks {
             $nsname = $this->addAtom('Boolean');
             $nsname->boolean = (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true');
             $nsname->constant = self::CONSTANT_EXPRESSION;
-        } elseif ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR     &&
+        } elseif ($this->tokens[$this->id][0]     === \Exakat\Tasks\T_NS_SEPARATOR &&
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING       &&
                   strtolower($this->tokens[$this->id + 1][1]) === 'null'           &&
                   $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR ) {
@@ -1518,15 +1518,16 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_NAMESPACE) {
             $fullcode[] = $this->tokens[$this->id - 1][1];
 
-            $nsname->absolute = self::NOT_ABSOLUTE;
+            $nsname->absolute = self::ABSOLUTE;
         } else {
             $fullcode[] = '';
 
             $nsname->absolute = self::ABSOLUTE;
         }
 
-        while ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NS_SEPARATOR &&
-               $this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_OPEN_CURLY) {
+        while ($this->tokens[$this->id][0]     === \Exakat\Tasks\T_NS_SEPARATOR    &&
+               $this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_OPEN_CURLY
+               ) {
             ++$this->id; // skip \
             $fullcode[] = $this->tokens[$this->id][1];
 
@@ -1591,17 +1592,28 @@ class Load extends Tasks {
     }
 
     private function processTypehint() {
-        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_ARRAY, \Exakat\Tasks\T_CALLABLE, \Exakat\Tasks\T_STATIC))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_ARRAY, 
+                                                            \Exakat\Tasks\T_CALLABLE, 
+                                                            \Exakat\Tasks\T_STATIC))) {
             $nsname = $this->processNextAsIdentifier();
 
             return $nsname;
         } 
         
-        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR, \Exakat\Tasks\T_STRING, \Exakat\Tasks\T_NAMESPACE))) {
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR, 
+                                                            \Exakat\Tasks\T_STRING, 
+                                                            \Exakat\Tasks\T_NAMESPACE))) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NAMESPACE) {
+                ++$this->id;
+            }
             $nsname = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
-
-            if (in_array(strtolower($this->tokens[$this->id][1]), array('int', 'bool', 'void', 'float', 'string'))) {
-                $nsname->fullnspath = '\\'.strtolower($this->tokens[$this->id][1]);
+            
+            if ($this->tokens[$this->id + 1][1] === ',') {
+                ++$this->id;
+            }
+            
+            if (in_array(strtolower($nsname->code), array('int', 'bool', 'void', 'float', 'string'))) {
+                $nsname->fullnspath = '\\'.strtolower($nsname->code);
             } else {
                 list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
 
@@ -1733,27 +1745,27 @@ class Load extends Tasks {
                     $index = $this->addAtomVoid();
                 }
 
-            $index->rank = ++$rank;
-            $argumentsId[] = $index;
-            $this->argumentsId = $argumentsId; // This avoid overwriting when nesting functioncall
-
-            if ($nullable !== 0) {
-                $this->addLink($index, $nullable, 'NULLABLE');
-                $this->addLink($index, $typehint, 'TYPEHINT');
-                $index->fullcode = '?'.$typehint->fullcode.' '.$index->fullcode;
-            } elseif ($typehint !== 0) {
-                $this->addLink($index, $typehint, 'TYPEHINT');
-                $index->fullcode = $typehint->fullcode.' '.$index->fullcode;
-            }
-
-            if ($default !== 0) {
-                $this->addLink($index, $default, 'DEFAULT');
-                $index->fullcode = $index->fullcode.' = '.$default->fullcode;
-            }
-            $this->addLink($arguments, $index, 'ARGUMENT');
-            $constant = $constant && ($index->constant === self::CONSTANT_EXPRESSION);
-
-            $fullcode[] = $index->fullcode;
+                $index->rank = ++$rank;
+                $argumentsId[] = $index;
+                $this->argumentsId = $argumentsId; // This avoid overwriting when nesting functioncall
+    
+                if ($nullable !== 0) {
+                    $this->addLink($index, $nullable, 'NULLABLE');
+                    $this->addLink($index, $typehint, 'TYPEHINT');
+                    $index->fullcode = '?'.$typehint->fullcode.' '.$index->fullcode;
+                } elseif ($typehint !== 0) {
+                    $this->addLink($index, $typehint, 'TYPEHINT');
+                    $index->fullcode = $typehint->fullcode.' '.$index->fullcode;
+                }
+    
+                if ($default !== 0) {
+                    $this->addLink($index, $default, 'DEFAULT');
+                    $index->fullcode = $index->fullcode.' = '.$default->fullcode;
+                }
+                $this->addLink($arguments, $index, 'ARGUMENT');
+                $constant = $constant && ($index->constant === self::CONSTANT_EXPRESSION);
+    
+                $fullcode[] = $index->fullcode;
             }
 
             // Skip the )
