@@ -34,7 +34,7 @@ class DirectInjection extends Analyzer {
         $vars = $this->loadIni('php_incoming.ini');
         $vars = $vars['incoming'];
         
-        $safe = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'SERVER_PORT', 'SERVER_NAME', 'REQUEST_TIME_FLOAT',
+        $safe = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'REQUEST_TIME_FLOAT',
                       'SCRIPT_NAME', 'SERVER_ADMIN', '_');
         $safeIndex = 'or( __.out("VARIABLE").has("code", "\\$_SERVER").count().is(eq(0)), 
                           __.out("INDEX").hasLabel("String")
