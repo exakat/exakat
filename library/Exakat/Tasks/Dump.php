@@ -74,31 +74,47 @@ class Dump extends Tasks {
             $this->sqlite = new \Sqlite3($this->sqliteFile);
         } else {
             $this->sqlite = new \Sqlite3($this->sqliteFile);
+
+            $query = <<<SQL
+CREATE TABLE themas (  id    INTEGER PRIMARY KEY AUTOINCREMENT,
+                       thema STRING
+                    )
+SQL;
+            $this->sqlite->query($query);
+
+            $query = <<<SQL
+CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        fullcode STRING,
+                        file STRING,
+                        line INTEGER,
+                        namespace STRING,
+                        class STRING,
+                        function STRING,
+                        analyzer STRING,
+                        severity STRING
+                     )
+SQL;
+            $this->sqlite->query($query);
+
+            $query = <<<SQL
+CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
+                             analyzer STRING,
+                             count INTEGER DEFAULT -6
+                           )
+SQL;
+            $this->sqlite->query($query);
+
+            display('Inited tables');
+        }
+        
+        if ($this->config->collect === true) {
+            display('Collecting data');
             $this->getAtomCounts();
 
             $this->collectStructures();
             $this->collectLiterals();
             $this->collectFilesDependencies();
-
-            $this->sqlite->query('CREATE TABLE themas (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                   thema STRING
-                                                  )');
-
-            $this->sqlite->query('CREATE TABLE results (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                    fullcode STRING,
-                                                    file STRING,
-                                                    line INTEGER,
-                                                    namespace STRING,
-                                                    class STRING,
-                                                    function STRING,
-                                                    analyzer STRING,
-                                                    severity STRING
-                                                  )');
-
-            $this->sqlite->query('CREATE TABLE resultsCounts (   id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                           analyzer STRING,
-                                                           count INTEGER DEFAULT -6)');
-            display('Inited tables');
+            display('Collecting data finished');
         }
 
         $themes = array();
