@@ -635,10 +635,10 @@ JAVASCRIPT;
       var analyzerParam = window.location.hash.split('analyzer=')[1];
       var fileParam = window.location.hash.split('file=')[1];
       if(analyzerParam !== undefined) {
-        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam + "']").click();
+        $('#analyzer .facetlist').find("[data-analyzer='" + md5(analyzerParam) + "']").click();
       }
       if(fileParam !== undefined) {
-        $('#file .facetlist').find("[data-file='" + fileParam + "']").click();
+        $('#file .facetlist').find("[data-file='" + md5(fileParam) + "']").click();
       }
     });
   </script>
@@ -1637,10 +1637,10 @@ SQL;
       var analyzerParam = window.location.hash.split('analyzer=')[1];
       var fileParam = window.location.hash.split('file=')[1];
       if(analyzerParam !== undefined) {
-        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam + "']").click();
+        $('#analyzer .facetlist').find("[data-analyzer='" + md5(analyzerParam) + "']").click();
       }
       if(fileParam !== undefined) {
-        $('#file .facetlist').find("[data-file='" + fileParam + "']").click();
+        $('#file .facetlist').find("[data-file='" + md5(fileParam) + "']").click();
       }
     });
   </script>
