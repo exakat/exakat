@@ -15,7 +15,7 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
         }
         
         $offset = 0;
-        $number = 1000;
+        $number = 10000;
         $total = 0;
         foreach($tests as $i => $test ) {
             if ($i < $offset) continue;
@@ -63,17 +63,22 @@ class Framework_AllTests extends PHPUnit_Framework_TestSuite {
             $suite->addTestSuite($testClass);
             if ($i > $offset + $number) { 
                 print "Limited at $number element from $offset position\n";
+                self::logCounts($i, $total);
                 return $suite; 
             }
             
             continue;
         }
         
-        $fp = fopen('alltests.csv', 'a');
-        fwrite($fp, "\"".date('r')."\"\t\"$i\"\t\"$total\"\n");
-        fclose($fp);
+        self::logCounts($i, $total);
         
         return $suite;
+    }
+
+    static function logCounts($classes, $total) {
+        $fp = fopen('alltests.csv', 'a');
+        fwrite($fp, "\"".date('r')."\"\t\"$classes\"\t\"$total\"\n");
+        fclose($fp);
     }
 }
 ?>
