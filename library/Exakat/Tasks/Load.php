@@ -1110,6 +1110,9 @@ class Load extends Tasks {
 
     private function processOneNsname($getFullnspath = self::WITH_FULLNSPATH) {
         ++$this->id;
+        if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NAMESPACE) {
+            ++$this->id;
+        }
          $nsname = $this->makeNsname();
  
         if ($getFullnspath === self::WITH_FULLNSPATH) {
@@ -1603,9 +1606,6 @@ class Load extends Tasks {
         if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR, 
                                                             \Exakat\Tasks\T_STRING, 
                                                             \Exakat\Tasks\T_NAMESPACE))) {
-            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NAMESPACE) {
-                ++$this->id;
-            }
             $nsname = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
             
             if ($this->tokens[$this->id + 1][1] === ',') {
