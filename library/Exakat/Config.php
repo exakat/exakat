@@ -146,6 +146,7 @@ class Config {
                                  '-stop'      => 'stop',
                                  '-ping'      => 'ping',
                                  '-restart'   => 'restart',
+                                 '-collect'   => 'collect',
 
     // Vcs
                                  '-git'       => 'git',
@@ -440,16 +441,26 @@ class Config {
                                  );
 
         foreach($optionsValue as $key => $config) {
-            $id = array_search($key, $args);
-            if ( $id !== false) {
+            while( $id = array_search($key, $args) ) {
                 if (isset($args[$id + 1])) {
-                    if (isset($optionsValue[$args[$id + 1]])) {
+                    if (is_string($args[$id + 1]) && isset($optionsValue[$args[$id + 1]])) {
                         // in case this option value is actually the next option (exakat -p -T)
                         // We just ignore it
                         unset($args[$id]);
                     } else {
                         // Normal case is here
-                        $this->commandline[$config] = $args[$id + 1];
+                        if ($config === 'program') {
+                            if (!isset($this->commandline['program'])) {
+                                $this->commandline['program'] = $args[$id + 1];
+                            } elseif (is_string($this->commandline['program'])) {
+                                $this->commandline['program'] = array($this->commandline['program'], 
+                                                                      $args[$id + 1]);
+                            } else {
+                                $this->commandline['program'][] = $args[$id + 1];
+                            }
+                        } else {
+                            $this->commandline[$config] = $args[$id + 1];
+                        }
 
                         unset($args[$id]);
                         unset($args[$id + 1]);
