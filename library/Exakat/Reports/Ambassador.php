@@ -632,8 +632,8 @@ JAVASCRIPT;
       }   
       $.facetelize(settings);
       
-      var analyzerParam = window.location.search.split('analyzer=')[1];
-      var fileParam = window.location.search.split('file=')[1];
+      var analyzerParam = window.location.hash.split('analyzer=')[1];
+      var fileParam = window.location.hash.split('file=')[1];
       if(analyzerParam !== undefined) {
         $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam + "']").click();
       }
@@ -1634,8 +1634,8 @@ SQL;
       }   
       $.facetelize(settings);
       
-      var analyzerParam = window.location.search.split('analyzer=')[1];
-      var fileParam = window.location.search.split('file=')[1];
+      var analyzerParam = window.location.hash.split('analyzer=')[1];
+      var fileParam = window.location.hash.split('file=')[1];
       if(analyzerParam !== undefined) {
         $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam + "']").click();
       }
@@ -1663,6 +1663,17 @@ JAVASCRIPT;
 SQL;
         $result = $this->sqlite->query($sqlQuery);
 
+        $TTFColors = array('Instant'  => '#5f492d',
+                           'Quick'    => '#e8d568',
+                           'Slow'     => '#d06960',
+                           'None'     => '#89070b'
+                           );
+
+        $severityColors = array('Critical' => '#a4af97',
+                                'Major'    => '#a7a9a2',
+                                'Minor'    => '#f23942',
+                                'None'     => '#941d26');
+
         $items = array();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
@@ -1676,8 +1687,8 @@ SQL;
             $item['code_plus'] = $this->PHPSyntax($row['fullcode']);
             $item['link_file'] = $row['file'];
             $item['line' ] =  $row['line'];
-            $item['severity'] = "<i class=\"fa fa-warning ".$this->severities[$row['analyzer']]."\"></i>";
-            $item['complexity'] = "<i class=\"fa fa-cog ".$this->timesToFix[$row['analyzer']]."\"></i>";
+            $item['severity'] = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
+            $item['complexity'] = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
             $item['recipe' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
             $lines = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
@@ -2405,7 +2416,7 @@ HTML;
     $('#filename').html(event.target.text + '  <span class="caret"></span>');
   });
 
-  var fileParam = window.location.search.split('file=')[1];
+  var fileParam = window.location.hash.split('file=')[1];
   if(fileParam !== undefined) {
     $('#results').load("sources/" + fileParam);
     $('#filename').html(fileParam + '  <span class="caret"></span>');
