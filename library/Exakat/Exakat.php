@@ -26,7 +26,7 @@ use Exakat\Tasks;
 use Exakat\Config;
 
 class Exakat {
-    const VERSION = '0.11.2';
+    const VERSION = '0.11.3';
     const BUILD = 579;
 
     private $gremlin = null;
@@ -96,11 +96,6 @@ class Exakat {
 
             case 'project' :
                 $task = new Tasks\Project($this->gremlin, $this->config);
-                $task->run($config);
-                break;
-
-            case 'magicnumber' :
-                $task = new Tasks\Magicnumber($this->gremlin, $this->config);
                 $task->run($config);
                 break;
 

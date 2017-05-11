@@ -182,7 +182,6 @@ class Config {
                                      'jobqueue'      => 1,
                                      'queue'         => 1,
                                      'load'          => 1,
-                                     'magicnumber'   => 1,
                                      'project'       => 1,
                                      'report'        => 1,
                                      'results'       => 1,
