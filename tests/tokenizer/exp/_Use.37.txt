@@ -32,6 +32,10 @@ Label : PROJECT
                 sayHello
               Label : PUBLIC
                 public
+          Label : DEFINITION
+            HelloWorld
+          Label : DEFINITION
+            HelloWorld
           Label : NAME
             HelloWorld
         Label : ELEMENT

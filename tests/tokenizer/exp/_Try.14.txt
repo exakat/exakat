@@ -86,8 +86,6 @@ Label : PROJECT
                       'I'
                     Label : VALUE
                       $i
-                Label : NAME
-                  array
             Label : ELEMENT
               =
               Label : LEFT

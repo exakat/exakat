@@ -17,20 +17,6 @@ Label : PROJECT
               Label : PPP
                 =
                 Label : LEFT
-                  $d
-                Label : RIGHT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    array
-              Label : PUBLIC
-                public
-              Label : PPP
-                =
-                Label : LEFT
                   $b
                 Label : RIGHT
                   array
@@ -122,10 +108,6 @@ Label : PROJECT
                                     4
                                 Label : ARGUMENT
                                   5
-                              Label : NAME
-                                array
-                        Label : NAME
-                          array
                     Label : ARGUMENT
                       =>
                       Label : KEY
@@ -136,14 +118,20 @@ Label : PROJECT
                           (
                           Label : ARGUMENT
                             Void
-                        Label : NAME
-                          array
+              Label : PPP
+                =
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  array
+                  Label : ARGUMENTS
+                    (
                     Label : ARGUMENT
                       Void
-                  Label : NAME
-                    array
               Label : PPP
                 $c
+              Label : PUBLIC
+                public
           Label : EXTENDS
             C
           Label : FINAL

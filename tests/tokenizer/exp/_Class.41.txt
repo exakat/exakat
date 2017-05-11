@@ -20,12 +20,12 @@ Label : PROJECT
                   $c
                 Label : RIGHT
                   3
-              Label : VAR
-                var
               Label : PPP
                 $a
               Label : PPP
                 $b
+              Label : VAR
+                var
             Label : ELEMENT
               var
               Label : PPP
@@ -34,13 +34,13 @@ Label : PROJECT
                   $d2
                 Label : RIGHT
                   3
-              Label : VAR
-                var
               Label : PPP
                 $a2
               Label : PPP
                 $b2
               Label : PPP
                 $c2
+              Label : VAR
+                var
           Label : NAME
             x

@@ -11,15 +11,11 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                D\E
             Label : ELEMENT
               class
               Label : BLOCK
@@ -53,22 +49,10 @@ Label : PROJECT
                       Label : PROTECTED
                         protected
                   Label : USE
-                    \
-                    Label : SUBNAME
-                      H
-                    Label : SUBNAME
-                      I
-                    Label : SUBNAME
-                      J
-                    Label : SUBNAME
-                      K
+                    \H\I\J\K
               Label : EXTENDS
                 G
               Label : NAME
                 F
           Label : NAME
-            \
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+            B\C

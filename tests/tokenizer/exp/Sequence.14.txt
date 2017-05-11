@@ -46,8 +46,6 @@ Label : PROJECT
                       1
                     Label : ARGUMENT
                       2
-                  Label : NAME
-                    array
               Label : VAR
                 var
             Label : ELEMENT
@@ -104,8 +102,6 @@ Label : PROJECT
                       1
                     Label : ARGUMENT
                       2
-                  Label : NAME
-                    array
               Label : VAR
                 var
             Label : ELEMENT
@@ -162,8 +158,6 @@ Label : PROJECT
                       1
                     Label : ARGUMENT
                       2
-                  Label : NAME
-                    array
               Label : VAR
                 var
             Label : ELEMENT

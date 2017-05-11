@@ -27,15 +27,13 @@ Label : PROJECT
               Label : SIGN
                 -
                 Label : LEFT
-                  \
+                  \B
                   Label : ARGUMENTS
                     (
                     Label : ARGUMENT
                       $c
                   Label : NAME
-                    \
-                    Label : SUBNAME
-                      B
+                    \B
                 Label : RIGHT
                   2
           Label : NAME

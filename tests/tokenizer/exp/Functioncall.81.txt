@@ -75,10 +75,6 @@ Label : PROJECT
               Label : NAME
                 echo
           Label : DEFINITION
-            'f'
-          Label : NAME
-            f
-          Label : DEFINITION
             f
             Label : ARGUMENTS
               (
@@ -102,6 +98,10 @@ Label : PROJECT
                   ltrim
             Label : NAME
               f
+          Label : DEFINITION
+            'f'
+          Label : NAME
+            f
         Label : ELEMENT
           echo
           Label : ARGUMENTS

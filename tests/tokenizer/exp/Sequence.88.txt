@@ -53,8 +53,6 @@ Label : PROJECT
                           'J'
                         Label : VALUE
                           1
-                    Label : NAME
-                      array
                 Label : NAME
                   E
             Label : ARGUMENT
@@ -113,8 +111,6 @@ Label : PROJECT
                               'V'
                             Label : VALUE
                               'W'
-                        Label : NAME
-                          array
                     Label : NAME
                       E
                 Label : CONCAT

@@ -36,27 +36,21 @@ Label : PROJECT
             Label : NAME
               b
           Label : DEFINITION
-            \
+            \b
             Label : ARGUMENTS
               (
               Label : ARGUMENT
                 Void
             Label : NAME
-              \
-              Label : SUBNAME
-                b
+              \b
           Label : DEFINITION
             b
           Label : DEFINITION
             b
           Label : DEFINITION
-            \
-            Label : SUBNAME
-              b
+            \b
           Label : DEFINITION
-            \
-            Label : SUBNAME
-              b
+            \b
           Label : NAME
             b
         Label : ELEMENT
@@ -122,15 +116,13 @@ Label : PROJECT
               Label : CODE
                 new
                 Label : NEW
-                  \
+                  \b
                   Label : ARGUMENTS
                     (
                     Label : ARGUMENT
                       Void
                   Label : NAME
-                    \
-                    Label : SUBNAME
-                      b
+                    \b
           Label : RIGHT
             3
         Label : ELEMENT
@@ -150,8 +142,6 @@ Label : PROJECT
               Label : CODE
                 new
                 Label : NEW
-                  \
-                  Label : SUBNAME
-                    b
+                  \b
           Label : RIGHT
             3

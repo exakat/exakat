@@ -39,15 +39,15 @@ Label : PROJECT
             Label : ELEMENT
               static
               Label : PPP
+                $f
+              Label : PPP
+                $g
+              Label : PPP
                 $h
               Label : PUBLIC
                 public
               Label : STATIC
                 static
-              Label : PPP
-                $f
-              Label : PPP
-                $g
             Label : ELEMENT
               x
               Label : ARGUMENTS

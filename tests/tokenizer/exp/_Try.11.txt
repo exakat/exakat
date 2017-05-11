@@ -30,11 +30,7 @@ Label : PROJECT
                     (
                     Label : ARGUMENT
                       Void
-                  Label : NAME
-                    array
             Label : CLASS
-              \
-              Label : SUBNAME
-                Exception
+              \Exception
             Label : VARIABLE
               $e

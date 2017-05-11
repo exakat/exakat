@@ -135,8 +135,6 @@ Label : PROJECT
                 1
               Label : ARGUMENT
                 2
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT
@@ -157,8 +155,6 @@ Label : PROJECT
                 1
               Label : ARGUMENT
                 2
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT
@@ -179,8 +175,6 @@ Label : PROJECT
                 1
               Label : ARGUMENT
                 2
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT
@@ -205,8 +199,6 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT
@@ -231,8 +223,6 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT
@@ -257,8 +247,6 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT
@@ -283,8 +271,6 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT
@@ -309,8 +295,6 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT
@@ -335,8 +319,6 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT
@@ -361,5 +343,3 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : NAME
-              [

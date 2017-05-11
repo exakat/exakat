@@ -127,8 +127,6 @@ Label : PROJECT
                         'aa'
                       Label : VALUE
                         'ab'
-                  Label : NAME
-                    array
               Label : NAME
                 u
           Label : NAME

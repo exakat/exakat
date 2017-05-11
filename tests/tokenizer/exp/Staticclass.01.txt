@@ -83,11 +83,7 @@ Label : PROJECT
               Label : DEFINITION
                 ClassName
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  NS
-                Label : SUBNAME
-                  ClassName
+                \NS\ClassName
               Label : DEFINITION, DEFINITION
                 self
               Label : EXTENDS
@@ -121,11 +117,7 @@ Label : PROJECT
                   Label : CLASS
                     class
                   Label : CLASS
-                    \
-                    Label : SUBNAME
-                      NS
-                    Label : SUBNAME
-                      ClassName
+                    \NS\ClassName
               Label : NAME
                 echo
             Label : ELEMENT
@@ -137,13 +129,7 @@ Label : PROJECT
                   Label : CLASS
                     class
                   Label : CLASS
-                    \
-                    Label : SUBNAME
-                      X
-                    Label : SUBNAME
-                      B
-                    Label : SUBNAME
-                      ClassName
+                    \X\B\ClassName
               Label : NAME
                 echo
             Label : ELEMENT

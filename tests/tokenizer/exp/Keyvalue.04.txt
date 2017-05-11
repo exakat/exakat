@@ -48,5 +48,3 @@ Label : PROJECT
                         1
                   Label : RIGHT
                     H
-          Label : NAME
-            array

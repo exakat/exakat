@@ -11,14 +11,6 @@ Label : PROJECT
         Label : ELEMENT
           instanceof
           Label : CLASS
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
+            \A\B\C\D
           Label : VARIABLE
             $x

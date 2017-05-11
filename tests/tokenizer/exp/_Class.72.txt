@@ -25,9 +25,7 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              b2
+            \b2
           Label : NAME
             a2
         Label : ELEMENT
@@ -49,13 +47,9 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              b3
+            \b3
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              c3
+            \c3
           Label : NAME
             a23
         Label : ELEMENT
@@ -65,15 +59,9 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              b3
+            \b3
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              c3
-            Label : SUBNAME
-              d33
+            c3\d33
           Label : NAME
             a24
         Label : ELEMENT
@@ -115,20 +103,10 @@ Label : PROJECT
           Label : IMPLEMENTS
             b4
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              cc
-            Label : SUBNAME
-              c4
+            \cc\c4
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              d4
+            \d4
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              e5
-            Label : SUBNAME
-              f5
+            e5\f5
           Label : NAME
             a6

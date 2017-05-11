@@ -69,8 +69,6 @@ Label : PROJECT
                                       N
                                   Label : VALUE
                                     O
-                              Label : NAME
-                                array
                           Label : NAME
                             L
                     Label : NAME

@@ -13,13 +13,7 @@ Label : PROJECT
           Label : ARGUMENTS
             f
             Label : ARGUMENT
-              \
-              Label : SUBNAME
-                d
-              Label : SUBNAME
-                e
-              Label : SUBNAME
-                f
+              d\e\f
           Label : NAME
             print
         Label : ELEMENT
@@ -27,13 +21,7 @@ Label : PROJECT
           Label : LEFT
             $x
           Label : RIGHT
-            \
-            Label : SUBNAME
-              g
-            Label : SUBNAME
-              h
-            Label : SUBNAME
-              i
+            g\h\i
         Label : ELEMENT
           =
           Label : LEFT
@@ -41,12 +29,6 @@ Label : PROJECT
           Label : RIGHT
             +
             Label : LEFT
-              \
-              Label : SUBNAME
-                j
-              Label : SUBNAME
-                k
-              Label : SUBNAME
-                l
+              j\k\l
             Label : RIGHT
               1

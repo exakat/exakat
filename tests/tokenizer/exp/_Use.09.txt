@@ -11,12 +11,12 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   I
                 Label : NAME
                   G
@@ -24,61 +24,47 @@ Label : PROJECT
               use
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   F
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    E
+                  \E
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   D
+                Label : DEFINITION
+                  A
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    A
-                  Label : SUBNAME
-                    B
-                  Label : SUBNAME
-                    C
+                  A\B\C
               Label : USE
                 A
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    A
-                  Label : SUBNAME
-                    B
-                  Label : SUBNAME
-                    C
               Label : USE
                 B
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   M
                 Label : NAME
                   L
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   P
                 Label : NAME
                   O
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   Q
                 Label : NAME
                   O
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   T
                 Label : NAME
                   S
@@ -89,8 +75,4 @@ Label : PROJECT
               Label : USE
                 R
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
+            A\B

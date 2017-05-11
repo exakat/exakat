@@ -61,9 +61,7 @@ Label : PROJECT
                 Label : ARGUMENT
                   $e
                   Label : TYPEHINT
-                    \
-                    Label : SUBNAME
-                      Stdclasse
+                    \Stdclasse
               Label : BLOCK
                 {}
                 Label : ELEMENT
@@ -126,6 +124,12 @@ Label : PROJECT
                 Void
             Label : NAME
               B
+          Label : DEFINITION
+            B
+          Label : DEFINITION
+            $this
+          Label : DEFINITION
+            $this
           Label : NAME
             B
         Label : ELEMENT

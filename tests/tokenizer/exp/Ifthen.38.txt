@@ -28,8 +28,6 @@ Label : PROJECT
                   --
                   Label : PREPLUSPLUS
                     $e
-            Label : ELEMENT
-              Void
           Label : THEN
             {}
             Label : ELEMENT

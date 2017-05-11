@@ -110,7 +110,3 @@ Label : PROJECT
                     S
                   Label : PROPERTY
                     $t
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              array

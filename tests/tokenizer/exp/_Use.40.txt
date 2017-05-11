@@ -15,53 +15,7 @@ Label : PROJECT
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    e
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    e
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
-                Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  b
-                Label : SUBNAME
-                  a
-                Label : SUBNAME
-                  b
+                a\b
             Label : ELEMENT
               =
               Label : LEFT
@@ -69,17 +23,15 @@ Label : PROJECT
               Label : RIGHT
                 new
                 Label : NEW
-                  \
+                  b\d
                   Label : ARGUMENTS
                     (
                     Label : ARGUMENT
                       Void
                   Label : NAME
-                    \
-                    Label : SUBNAME
-                      b
-                    Label : SUBNAME
-                      d
+                    b\d
+                    Label : DEFINITION
+                      a\b
             Label : ELEMENT
               =
               Label : LEFT
@@ -87,17 +39,15 @@ Label : PROJECT
               Label : RIGHT
                 new
                 Label : NEW
-                  \
+                  b\e
                   Label : ARGUMENTS
                     (
                     Label : ARGUMENT
                       Void
                   Label : NAME
-                    \
-                    Label : SUBNAME
-                      b
-                    Label : SUBNAME
-                      e
+                    b\e
+                    Label : DEFINITION
+                      a\b
             Label : ELEMENT
               =
               Label : LEFT
@@ -112,6 +62,8 @@ Label : PROJECT
                       Void
                   Label : NAME
                     b
+                    Label : DEFINITION
+                      a\b
             Label : ELEMENT
               =
               Label : LEFT
@@ -119,11 +71,9 @@ Label : PROJECT
               Label : RIGHT
                 new
                 Label : NEW
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
+                  b\d
+                  Label : DEFINITION
+                    a\b
             Label : ELEMENT
               =
               Label : LEFT
@@ -131,11 +81,9 @@ Label : PROJECT
               Label : RIGHT
                 new
                 Label : NEW
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    e
+                  b\e
+                  Label : DEFINITION
+                    a\b
             Label : ELEMENT
               var_dump
               Label : ARGUMENTS
@@ -143,11 +91,9 @@ Label : PROJECT
                 Label : ARGUMENT
                   instanceof
                   Label : CLASS
-                    \
-                    Label : SUBNAME
-                      b
-                    Label : SUBNAME
-                      d
+                    b\d
+                    Label : DEFINITION
+                      a\b
                   Label : VARIABLE
                     $c
               Label : NAME
@@ -160,6 +106,8 @@ Label : PROJECT
                   instanceof
                   Label : CLASS
                     b
+                    Label : DEFINITION
+                      a\b
                   Label : VARIABLE
                     $d
               Label : NAME
@@ -177,43 +125,31 @@ Label : PROJECT
                 Label : ELEMENT
                   Void
               Label : DEFINITION
-                \
+                b\d
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
                     Void
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
+                  b\d
+                  Label : DEFINITION
+                    a\b
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  b
-                Label : SUBNAME
-                  d
+                b\d
+                Label : DEFINITION
+                  a\b
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  b
-                Label : SUBNAME
-                  d
+                b\d
+                Label : DEFINITION
+                  a\b
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  b
-                Label : SUBNAME
-                  d
+                b\d
+                Label : DEFINITION
+                  a\b
               Label : NAME
                 d
           Label : NAME
-            \
-            Label : SUBNAME
-              a
-            Label : SUBNAME
-              b
+            a\b
         Label : ELEMENT
           namespace
           Label : BLOCK
@@ -232,67 +168,19 @@ Label : PROJECT
                     Void
                 Label : NAME
                   b
+                  Label : DEFINITION
+                    a\b
               Label : DEFINITION
                 b
+                Label : DEFINITION
+                  a\b
               Label : DEFINITION
+                a\b
+              Label : DEFINITION, DEFINITION
                 b
-              Label : DEFINITION
-                \
                 Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    e
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    e
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    b
-                  Label : SUBNAME
-                    d
-                Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  b
-                Label : DEFINITION
-                  b
-                Label : SUBNAME
-                  a
-                Label : SUBNAME
-                  b
+                  a\b
               Label : NAME
-                b
-              Label : DEFINITION
-                b
-              Label : DEFINITION
-                b
-              Label : DEFINITION
-                b
-              Label : DEFINITION
                 b
           Label : NAME
             a

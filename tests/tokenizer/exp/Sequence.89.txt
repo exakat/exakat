@@ -48,8 +48,6 @@ Label : PROJECT
                               'I'
                             Label : VALUE
                               'J'
-                        Label : NAME
-                          array
                     Label : NAME
                       F
               Label : NAME

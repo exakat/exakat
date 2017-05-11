@@ -32,7 +32,7 @@ Label : PROJECT
                 sayHello
               Label : PUBLIC
                 public
-          Label : DEFINITION
+          Label : DEFINITION, DEFINITION
             Hello
           Label : NAME
             Hello
@@ -61,11 +61,11 @@ Label : PROJECT
               Label : PUBLIC
                 public
           Label : DEFINITION
+            'World'
+          Label : DEFINITION, DEFINITION
             World
           Label : NAME
             World
-          Label : DEFINITION
-            'World'
         Label : ELEMENT
           class
           Label : BLOCK

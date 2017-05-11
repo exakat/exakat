@@ -1,0 +1,46 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Instanceof.11.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+             
+            Label : ELEMENT
+              instanceof
+              Label : CLASS
+                B
+              Label : VARIABLE
+                $a
+            Label : ELEMENT
+              instanceof
+              Label : CLASS
+                \D
+              Label : VARIABLE
+                $c
+            Label : ELEMENT
+              instanceof
+              Label : CLASS
+                F\G\H
+              Label : VARIABLE
+                $e
+            Label : ELEMENT
+              instanceof
+              Label : CLASS
+                \F1\G1\H1
+              Label : VARIABLE
+                $e1
+            Label : ELEMENT
+              instanceof
+              Label : CLASS
+                namespace\J\K
+              Label : VARIABLE
+                $i
+          Label : NAME
+            A

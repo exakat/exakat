@@ -18,8 +18,6 @@ Label : PROJECT
                 (
                 Label : ARGUMENT
                   'b'
-              Label : NAME
-                array
             Label : ARGUMENT
               'c'
           Label : NAME

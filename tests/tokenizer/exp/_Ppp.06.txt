@@ -11,19 +11,11 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : SUBNAME
-                  B
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  H
+                B\C\D\H
             Label : ELEMENT
               trait
               Label : BLOCK
@@ -51,10 +43,4 @@ Label : PROJECT
               Label : NAME
                 I
           Label : NAME
-            \
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
+            B\C\D

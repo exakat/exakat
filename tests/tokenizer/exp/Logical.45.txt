@@ -38,8 +38,6 @@ Label : PROJECT
                         3
                       Label : RIGHT
                         4
-                Label : NAME
-                  [
               Label : TYPEHINT
                 array
           Label : BLOCK

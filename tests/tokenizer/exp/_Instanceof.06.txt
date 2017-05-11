@@ -17,15 +17,7 @@ Label : PROJECT
             Label : CONDITION
               instanceof
               Label : CLASS
-                \
-                Label : SUBNAME
-                  B
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                \B\C\D\E
               Label : VARIABLE
                 $b
             Label : ELSE

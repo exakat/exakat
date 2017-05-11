@@ -22,7 +22,7 @@ Label : PROJECT
                 Void
               Label : NAME
                 x
-          Label : NAME
-            a
           Label : EXTENDS
             b
+          Label : NAME
+            a

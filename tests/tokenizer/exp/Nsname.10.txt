@@ -9,192 +9,82 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          \
+          \A
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
+            \A
         Label : ELEMENT
-          \
+          \A\B
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
+            \A\B
         Label : ELEMENT
-          \
+          \A\B\C
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+            \A\B\C
         Label : ELEMENT
-          \
+          \A\B\C\D
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
+            \A\B\C\D
         Label : ELEMENT
-          \
+          \A\B\C\D\E
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              E
+            \A\B\C\D\E
         Label : ELEMENT
-          \
+          \A\B\C\D\E\F
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              E
-            Label : SUBNAME
-              F
+            \A\B\C\D\E\F
         Label : ELEMENT
-          \
+          \A\B\C\D\E\F\G
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              E
-            Label : SUBNAME
-              F
-            Label : SUBNAME
-              G
+            \A\B\C\D\E\F\G
         Label : ELEMENT
-          \
+          \A\B\C\D\E\F\G\H
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              E
-            Label : SUBNAME
-              F
-            Label : SUBNAME
-              G
-            Label : SUBNAME
-              H
+            \A\B\C\D\E\F\G\H
         Label : ELEMENT
-          \
+          \A\B\C\D\E\F\G\H\I
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              E
-            Label : SUBNAME
-              F
-            Label : SUBNAME
-              G
-            Label : SUBNAME
-              H
-            Label : SUBNAME
-              I
+            \A\B\C\D\E\F\G\H\I
         Label : ELEMENT
-          \
+          \A\B\C\D\E\F\G\H\I\K
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              E
-            Label : SUBNAME
-              F
-            Label : SUBNAME
-              G
-            Label : SUBNAME
-              H
-            Label : SUBNAME
-              I
-            Label : SUBNAME
-              K
+            \A\B\C\D\E\F\G\H\I\K

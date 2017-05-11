@@ -1,0 +1,34 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Trait.08.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+             
+            Label : ELEMENT
+              trait
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                t2
+            Label : ELEMENT
+              trait
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  use
+                  Label : USE
+                    namespace\t2
+              Label : NAME
+                t
+          Label : NAME
+            A

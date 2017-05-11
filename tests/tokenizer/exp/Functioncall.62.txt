@@ -32,5 +32,3 @@ Label : PROJECT
                 $e
               Label : ARGUMENT
                 $f
-            Label : NAME
-              array

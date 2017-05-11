@@ -48,19 +48,9 @@ Label : PROJECT
                   Label : NAME
                     D
               Label : USE
-                \
-                Label : SUBNAME
-                  F2
-                Label : SUBNAME
-                  F3
+                F2\F3
               Label : USE
-                \
-                Label : SUBNAME
-                  G2
-                Label : SUBNAME
-                  G3
-                Label : SUBNAME
-                  G4
+                G2\G3\G4
           Label : NAME
             B
         Label : ELEMENT

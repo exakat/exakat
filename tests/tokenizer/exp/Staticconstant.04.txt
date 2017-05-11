@@ -11,30 +11,18 @@ Label : PROJECT
         Label : ELEMENT
           ::
           Label : CLASS
-            \
-            Label : SUBNAME
-              A
+            \A
           Label : CONSTANT
             B
         Label : ELEMENT
           ::
           Label : CLASS
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              C
+            \A\C
           Label : CONSTANT
             B
         Label : ELEMENT
           ::
           Label : CLASS
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
+            \A\C\D
           Label : CONSTANT
             B

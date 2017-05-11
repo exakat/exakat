@@ -11,36 +11,18 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                C\D\E
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   J
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    F
-                  Label : SUBNAME
-                    G
-                  Label : SUBNAME
-                    H
-                  Label : SUBNAME
-                    I
+                  F\G\H\I
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
+            A\B

@@ -24,8 +24,6 @@ Label : PROJECT
                     10
                   Label : ARGUMENT
                     20
-                Label : NAME
-                  [
               Label : ARGUMENT
                 [
                 Label : ARGUMENTS
@@ -34,12 +32,6 @@ Label : PROJECT
                     30
                   Label : ARGUMENT
                     40
-                Label : NAME
-                  [
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              [
         Label : ELEMENT
           foreach
           Label : BLOCK

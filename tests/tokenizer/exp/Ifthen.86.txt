@@ -85,8 +85,6 @@ Label : PROJECT
                               'R'
                             Label : VALUE
                               'S'
-                        Label : NAME
-                          array
                     Label : NAME
                       E
               Label : NAME

@@ -24,8 +24,6 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : NAME
-                  array
           Label : BLOCK
             {}
             Label : ELEMENT

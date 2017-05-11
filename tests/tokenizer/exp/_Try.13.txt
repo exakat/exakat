@@ -90,8 +90,6 @@ Label : PROJECT
                             R
                         Label : OBJECT
                           $g
-                Label : NAME
-                  array
             Label : NAME
               G
           Label : OBJECT

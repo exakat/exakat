@@ -51,84 +51,70 @@ Label : PROJECT
               Label : NAME
                 $y3
         Label : ELEMENT
-          \
+          \x1
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               1
           Label : NAME
-            \
-            Label : SUBNAME
-              x1
+            \x1
         Label : ELEMENT
-          \
+          \x2\y2
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               22
           Label : NAME
-            \
+            \x2\y2
             Label : ARGUMENTS
               (
               Label : ARGUMENT
                 2
             Label : NAME
-              \
-              Label : SUBNAME
-                x2
-              Label : SUBNAME
-                y2
+              \x2\y2
         Label : ELEMENT
-          \
+          \x3
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               333
           Label : NAME
-            \
+            \x3
             Label : ARGUMENTS
               (
               Label : ARGUMENT
                 33
             Label : NAME
-              \
+              \x3
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   3
               Label : NAME
-                \
-                Label : SUBNAME
-                  x3
+                \x3
         Label : ELEMENT
-          \
+          \x4\y4\z4
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               4444
           Label : NAME
-            \
+            \x4\y4\z4
             Label : ARGUMENTS
               (
               Label : ARGUMENT
                 444
             Label : NAME
-              \
+              \x4\y4\z4
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   44
               Label : NAME
-                \
+                \x4\y4\z4
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
                     4
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    x4
-                  Label : SUBNAME
-                    y4
-                  Label : SUBNAME
-                    z4
+                  \x4\y4\z4

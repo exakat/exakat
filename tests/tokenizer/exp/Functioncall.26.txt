@@ -27,11 +27,7 @@ Label : PROJECT
               Label : CONSTANT
                 d
             Label : ARGUMENT
-              \
-              Label : SUBNAME
-                e
-              Label : SUBNAME
-                f
+              \e\f
             Label : ARGUMENT
               ::
               Label : CLASS

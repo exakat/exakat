@@ -17,9 +17,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    C
+                  \C
                 Label : VARIABLE
                   $a
               Label : CODE
@@ -33,9 +31,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    E
+                  \E
                 Label : VARIABLE
                   $b
               Label : CODE
@@ -49,9 +45,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    G
+                  \G
                 Label : VARIABLE
                   $c
               Label : CODE
@@ -65,9 +59,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    I
+                  \I
                 Label : VARIABLE
                   $d
               Label : CODE
@@ -81,9 +73,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    K
+                  \K
                 Label : VARIABLE
                   $e
               Label : CODE
@@ -101,7 +91,7 @@ Label : PROJECT
                   Label : THROW
                     new
                     Label : NEW
-                      \
+                      \M
                       Label : ARGUMENTS
                         (
                         Label : ARGUMENT
@@ -121,8 +111,6 @@ Label : PROJECT
                           Label : NAME
                             N
                       Label : NAME
-                        \
-                        Label : SUBNAME
-                          M
+                        \M
           Label : NAME
             B

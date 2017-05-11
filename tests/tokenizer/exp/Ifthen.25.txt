@@ -28,5 +28,3 @@ Label : PROJECT
                 $x
               Label : VALUE
                 $y
-            Label : ELEMENT
-              Void

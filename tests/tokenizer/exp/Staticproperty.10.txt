@@ -46,8 +46,6 @@ Label : PROJECT
                           C
                       Label : OBJECT
                         $this
-                Label : NAME
-                  array
               Label : ARGUMENT
                 array
                 Label : ARGUMENTS
@@ -72,8 +70,6 @@ Label : PROJECT
                           $this
                     Label : NAME
                       D
-                Label : NAME
-                  array
               Label : ARGUMENT
                 D
                 Label : ARGUMENTS

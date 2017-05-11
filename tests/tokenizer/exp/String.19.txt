@@ -1,3 +1,4 @@
+Whole
 Label : PROJECT
   ./tests/tokenizer/source/String.19.php
   Label : FILE

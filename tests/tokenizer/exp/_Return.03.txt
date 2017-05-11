@@ -44,8 +44,6 @@ Label : PROJECT
                           (
                           Label : ARGUMENT
                             $f
-                        Label : NAME
-                          array
                       Label : THEN
                         $e
                   Label : NAME

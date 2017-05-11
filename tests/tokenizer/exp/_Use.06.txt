@@ -11,38 +11,16 @@ Label : PROJECT
         Label : ELEMENT
           use
           Label : USE
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+            \A\B\C
           Label : USE
-            \
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              E
+            \D\E
           Label : USE
-            \
-            Label : SUBNAME
-              Z
-            Label : SUBNAME
-              X
+            \Z\X
           Label : USE
-            \
-            Label : SUBNAME
-              K
+            \K
           Label : USE
-            \
-            Label : SUBNAME
-              L
+            \L
           Label : USE
-            \
-            Label : SUBNAME
-              M
+            \M
           Label : USE
-            \
-            Label : SUBNAME
-              N
+            \N

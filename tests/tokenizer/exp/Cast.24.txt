@@ -17,11 +17,7 @@ Label : PROJECT
             Label : CAST
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  B
-                Label : SUBNAME
-                  C
+                B\C
               Label : METHOD
                 D
                 Label : ARGUMENTS

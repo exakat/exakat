@@ -21,7 +21,7 @@ Label : PROJECT
           Label : NAME
             a
         Label : ELEMENT
-          \
+          \b
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -31,9 +31,7 @@ Label : PROJECT
             Label : ARGUMENT
               0
           Label : NAME
-            \
-            Label : SUBNAME
-              b
+            \b
         Label : ELEMENT
           ::
           Label : CLASS
@@ -67,7 +65,7 @@ Label : PROJECT
           Label : OBJECT
             $d2
         Label : ELEMENT
-          \
+          \e\ee
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -77,11 +75,7 @@ Label : PROJECT
             Label : ARGUMENT
               C
           Label : NAME
-            \
-            Label : SUBNAME
-              e
-            Label : SUBNAME
-              ee
+            \e\ee
         Label : ELEMENT
           $f
           Label : ARGUMENTS

@@ -60,5 +60,3 @@ Label : PROJECT
                           Void
                       Label : NAME
                         z
-            Label : NAME
-              [

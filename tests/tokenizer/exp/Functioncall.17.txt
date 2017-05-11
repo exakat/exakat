@@ -22,8 +22,6 @@ Label : PROJECT
                 2
               Label : ARGUMENT
                 3
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT
@@ -40,7 +38,3 @@ Label : PROJECT
                 3
               Label : ARGUMENT
                 4
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              array

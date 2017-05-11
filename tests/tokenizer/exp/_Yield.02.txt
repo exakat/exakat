@@ -36,8 +36,6 @@ Label : PROJECT
                       3
                     Label : VALUE
                       4
-                Label : NAME
-                  array
             Label : ELEMENT
               foreach
               Label : BLOCK

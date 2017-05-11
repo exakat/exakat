@@ -74,9 +74,7 @@ Label : PROJECT
                           Label : LEFT
                             instanceof
                             Label : CLASS
-                              \
-                              Label : SUBNAME
-                                H
+                              \H
                             Label : VARIABLE
                               $d
                           Label : RIGHT

@@ -234,8 +234,6 @@ Label : PROJECT
                           29
                         Label : VALUE
                           'AJ'
-                    Label : NAME
-                      array
                 Label : ELEMENT
                   if
                   Label : CONDITION
@@ -292,8 +290,6 @@ Label : PROJECT
                             'AO'
                           Label : ARGUMENT
                             'AP'
-                        Label : NAME
-                          array
                       Label : ARGUMENT
                         array
                         Label : ARGUMENTS
@@ -326,8 +322,6 @@ Label : PROJECT
                               AQ
                           Label : ARGUMENT
                             $s
-                        Label : NAME
-                          array
                       Label : ARGUMENT
                         [
                         Label : INDEX

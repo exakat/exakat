@@ -44,10 +44,6 @@ Label : PROJECT
                         'Q'
                       Label : VALUE
                         'R'
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    array
             Label : ELEMENT
               {}
               Label : ELEMENT

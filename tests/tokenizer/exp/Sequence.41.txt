@@ -52,8 +52,6 @@ Label : PROJECT
                         "i"
                       Label : CONCAT
                         $j
-                Label : NAME
-                  array
             Label : NAME
               k
           Label : OBJECT

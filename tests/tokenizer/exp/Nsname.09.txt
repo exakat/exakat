@@ -9,38 +9,26 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          \
+          \A
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
+            \A
         Label : ELEMENT
-          \
+          \A\B
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
+            \A\B
         Label : ELEMENT
-          \
+          \A\B\C
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+            \A\B\C

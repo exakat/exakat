@@ -16,13 +16,7 @@ Label : PROJECT
             Label : CONCAT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  A
-                Label : SUBNAME
-                  B
-                Label : SUBNAME
-                  C
+                \A\B\C
               Label : METHOD
                 d
                 Label : ARGUMENTS

@@ -44,26 +44,18 @@ Label : PROJECT
                             {}
                             Label : ELEMENT
                               $e
-                        Label : ELEMENT
-                          Void
                       Label : THEN
                         {}
                         Label : ELEMENT
                           $d
-                    Label : ELEMENT
-                      Void
                   Label : THEN
                     {}
                     Label : ELEMENT
                       $c
-                Label : ELEMENT
-                  Void
               Label : THEN
                 {}
                 Label : ELEMENT
                   $b
-            Label : ELEMENT
-              Void
           Label : THEN
             {}
             Label : ELEMENT

@@ -34,8 +34,6 @@ Label : PROJECT
                     3
                   Label : ARGUMENT
                     4
-                Label : NAME
-                  [
             Label : ELEMENT
               yield from
               Label : YIELD
@@ -52,8 +50,6 @@ Label : PROJECT
                           5
                         Label : ARGUMENT
                           6
-                      Label : NAME
-                        [
                   Label : NAME
                     ArrayIterator
             Label : ELEMENT

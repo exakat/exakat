@@ -22,5 +22,3 @@ Label : PROJECT
                 'b'
               Label : ARGUMENT
                 'c'
-            Label : NAME
-              [

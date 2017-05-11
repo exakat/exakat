@@ -65,8 +65,6 @@ Label : PROJECT
                                 'K'
                               Label : VALUE
                                 'L'
-                          Label : NAME
-                            array
                       Label : NAME
                         E
                   Label : NAME

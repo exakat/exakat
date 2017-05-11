@@ -39,15 +39,9 @@ Label : PROJECT
                   Label : ELEMENT
                     Void
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    C
-                  Label : SUBNAME
-                    D
+                  C\D
                 Label : VARIABLE
                   $c
-            Label : ELEMENT
-              Void
         Label : ELEMENT
           if
           Label : CONDITION

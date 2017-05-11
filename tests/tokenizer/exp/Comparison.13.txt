@@ -36,5 +36,3 @@ Label : PROJECT
                   'c'
               Label : ARGUMENT
                 2
-            Label : NAME
-              array

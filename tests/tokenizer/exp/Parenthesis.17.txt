@@ -38,10 +38,6 @@ Label : PROJECT
                         'c'
                   Label : NAME
                     d
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              array
         Label : ELEMENT
           unset
           Label : ARGUMENTS

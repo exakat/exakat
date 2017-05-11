@@ -11,11 +11,11 @@ Label : PROJECT
         Label : ELEMENT
           global
           Label : GLOBAL
-            $c
-          Label : GLOBAL
             $a
           Label : GLOBAL
             $b
+          Label : GLOBAL
+            $c
         Label : ELEMENT
           class
           Label : BLOCK
@@ -23,18 +23,18 @@ Label : PROJECT
             Label : ELEMENT
               protected
               Label : PPP
-                $a
-              Label : PROTECTED
-                protected
-              Label : PPP
-                $x
-              Label : PPP
-                $y
-              Label : PPP
                 =
                 Label : LEFT
                   $z
                 Label : RIGHT
                   3
+              Label : PPP
+                $x
+              Label : PPP
+                $y
+              Label : PPP
+                $a
+              Label : PROTECTED
+                protected
           Label : NAME
             x

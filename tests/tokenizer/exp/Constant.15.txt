@@ -13,25 +13,13 @@ Label : PROJECT
           Label : LEFT
             $x
           Label : RIGHT
-            \
-            Label : SUBNAME
-              a
-            Label : SUBNAME
-              b
+            a\b
         Label : ELEMENT
           =
           Label : LEFT
             $x2
           Label : RIGHT
-            \
-            Label : SUBNAME
-              a
-            Label : SUBNAME
-              b
-            Label : SUBNAME
-              c
-            Label : SUBNAME
-              d
+            a\b\c\d
         Label : ELEMENT
           =
           Label : LEFT
@@ -45,11 +33,7 @@ Label : PROJECT
             Label : LEFT
               $x
             Label : RIGHT
-              \
-              Label : SUBNAME
-                a
-              Label : SUBNAME
-                b
+              a\b
           Label : THEN
             {}
             Label : ELEMENT

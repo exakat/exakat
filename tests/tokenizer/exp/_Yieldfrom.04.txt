@@ -33,11 +33,11 @@ Label : PROJECT
                       Label : ELEMENT
                         global
                         Label : GLOBAL
+                          $a
+                        Label : GLOBAL
                           $
                           Label : NAME
                             $b
-                        Label : GLOBAL
-                          $a
                       Label : ELEMENT
                         static
                         Label : STATIC
@@ -156,8 +156,6 @@ Label : PROJECT
                                 'z'
                               Label : VALUE
                                 'c'
-                          Label : NAME
-                            [
                       Label : ELEMENT
                         @
                         Label : AT

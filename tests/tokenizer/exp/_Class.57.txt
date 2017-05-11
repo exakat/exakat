@@ -15,8 +15,6 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : EXTENDS
-            \
-            Label : SUBNAME
-              B
+            \B
           Label : NAME
             A

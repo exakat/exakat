@@ -20,5 +20,3 @@ Label : PROJECT
                 ++
                 Label : POSTPLUSPLUS
                   $b
-            Label : NAME
-              [

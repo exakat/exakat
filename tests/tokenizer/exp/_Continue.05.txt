@@ -40,8 +40,6 @@ Label : PROJECT
                   range
               Label : VALUE
                 $i
-          Label : NAME
-            a
           Label : DEFINITION
             a
             Label : ARGUMENTS
@@ -50,6 +48,8 @@ Label : PROJECT
                 Void
             Label : NAME
               a
+          Label : NAME
+            a
         Label : ELEMENT
           var_dump
           Label : ARGUMENTS

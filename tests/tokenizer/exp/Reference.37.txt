@@ -16,6 +16,12 @@ Label : PROJECT
               const
               Label : CONST
                 const
+                Label : DEFINITION
+                  ::
+                  Label : CLASS
+                    a
+                  Label : CONSTANT
+                    B
                 Label : NAME
                   B
                 Label : VALUE
@@ -104,12 +110,6 @@ Label : PROJECT
                   a
                 Label : CONSTANT
                   B
-                Label : DEFINITION
-                  const
-                  Label : NAME
-                    B
-                  Label : VALUE
-                    1
           Label : NAME
             print
         Label : ELEMENT

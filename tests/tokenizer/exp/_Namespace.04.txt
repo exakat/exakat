@@ -9,12 +9,4 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          \
-          Label : SUBNAME
-            namespace
-          Label : SUBNAME
-            A
-          Label : SUBNAME
-            B
-          Label : SUBNAME
-            C
+          namespace\A\B\C

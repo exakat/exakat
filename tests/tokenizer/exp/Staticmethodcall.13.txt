@@ -11,27 +11,11 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    F
-                  Label : SUBNAME
-                    D
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    F
-                  Label : SUBNAME
-                    K
-                Label : SUBNAME
-                  B
-                Label : SUBNAME
-                  F
+                B\F
             Label : ELEMENT
               class
               Label : BLOCK
@@ -39,21 +23,17 @@ Label : PROJECT
                 Label : ELEMENT
                   Void
               Label : EXTENDS
-                \
-                Label : SUBNAME
-                  F
-                Label : SUBNAME
-                  D
+                F\D
+                Label : DEFINITION
+                  B\F
               Label : NAME
                 D
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  F
-                Label : SUBNAME
-                  K
+                F\K
+                Label : DEFINITION
+                  B\F
               Label : METHOD
                 L
                 Label : ARGUMENTS
@@ -63,10 +43,4 @@ Label : PROJECT
                 Label : NAME
                   L
           Label : NAME
-            \
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
+            B\C\D

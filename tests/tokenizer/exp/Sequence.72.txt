@@ -118,8 +118,6 @@ Label : PROJECT
                       'N'
                     Label : VARIABLE
                       $t
-              Label : NAME
-                array
           Label : NAME
             $q
         Label : ELEMENT

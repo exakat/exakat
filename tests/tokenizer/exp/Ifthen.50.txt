@@ -50,8 +50,6 @@ Label : PROJECT
                             j
                       Label : NAME
                         i
-                Label : ELEMENT
-                  Void
               Label : THEN
                 ;
                 Label : ELEMENT
@@ -68,8 +66,6 @@ Label : PROJECT
                         f
                   Label : NAME
                     e
-            Label : ELEMENT
-              Void
           Label : THEN
             ;
             Label : ELEMENT

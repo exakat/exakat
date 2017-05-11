@@ -46,5 +46,3 @@ Label : PROJECT
                   'i'
                 Label : VALUE
                   'j'
-            Label : NAME
-              [

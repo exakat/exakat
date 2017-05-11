@@ -15,29 +15,17 @@ Label : PROJECT
             Label : ARGUMENT
               $a
               Label : TYPEHINT
-                \
-                Label : SUBNAME
-                  namespace
-                Label : SUBNAME
-                  Stdclass
+                namespace\Stdclass
             Label : ARGUMENT
               $b
               Label : TYPEHINT
-                \
-                Label : SUBNAME
-                  namespace
-                Label : SUBNAME
-                  Stdclass
+                namespace\Stdclass
             Label : ARGUMENT
               $c
               Label : DEFAULT
                 null
               Label : TYPEHINT
-                \
-                Label : SUBNAME
-                  namespace
-                Label : SUBNAME
-                  Stdclass
+                namespace\Stdclass
           Label : BLOCK
             {}
             Label : ELEMENT

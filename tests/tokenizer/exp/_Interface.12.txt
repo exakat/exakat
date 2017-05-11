@@ -16,9 +16,9 @@ Label : PROJECT
               Void
           Label : DEFINITION
             A
-          Label : NAME
-            A
           Label : DEFINITION
+            A
+          Label : NAME
             A
         Label : ELEMENT
           interface
@@ -28,10 +28,10 @@ Label : PROJECT
               Void
           Label : DEFINITION
             B
-          Label : NAME
-            B
           Label : EXTENDS
             A
+          Label : NAME
+            B
         Label : ELEMENT
           class
           Label : BLOCK

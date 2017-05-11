@@ -26,8 +26,6 @@ Label : PROJECT
                 'e'
               Label : ARGUMENT
                 'f'
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT

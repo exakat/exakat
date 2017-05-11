@@ -56,8 +56,6 @@ Label : PROJECT
                       '3'
                 Label : CONCAT
                   -1
-            Label : NAME
-              [
         Label : ELEMENT
           =
           Label : LEFT

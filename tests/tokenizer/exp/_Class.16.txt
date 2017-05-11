@@ -15,12 +15,12 @@ Label : PROJECT
             Label : ELEMENT
               var
               Label : PPP
-                $z
-              Label : VAR
-                var
-              Label : PPP
                 $x
               Label : PPP
                 $y
+              Label : PPP
+                $z
+              Label : VAR
+                var
           Label : NAME
             x

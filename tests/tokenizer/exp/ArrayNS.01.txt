@@ -22,5 +22,3 @@ Label : PROJECT
                   'a'
                 Label : VALUE
                   'b'
-            Label : NAME
-              [

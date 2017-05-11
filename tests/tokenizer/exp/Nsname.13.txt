@@ -15,11 +15,7 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
+            A\B
         Label : ELEMENT
           namespace
           Label : BLOCK
@@ -27,13 +23,7 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+            A\B\C
         Label : ELEMENT
           namespace
           Label : BLOCK
@@ -41,15 +31,7 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
+            A\B\C\D
         Label : ELEMENT
           namespace
           Label : BLOCK
@@ -57,145 +39,79 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              E
+            A\B\C\D\E
         Label : ELEMENT
           namespace
           Label : BLOCK
             {}
             Label : ELEMENT
-              \
+              C\D\E
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   Void
               Label : NAME
-                \
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                C\D\E
             Label : ELEMENT
-              \
+              X\A
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   Void
               Label : NAME
-                \
-                Label : SUBNAME
-                  X
-                Label : SUBNAME
-                  A
+                X\A
             Label : ELEMENT
-              \
+              \G
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   Void
               Label : NAME
-                \
-                Label : SUBNAME
-                  G
+                \G
             Label : ELEMENT
-              \
+              Y\B\C
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   Void
               Label : NAME
-                \
-                Label : SUBNAME
-                  Y
-                Label : SUBNAME
-                  B
-                Label : SUBNAME
-                  C
+                Y\B\C
             Label : ELEMENT
-              \
+              Z\D\E\F
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   Void
               Label : NAME
-                \
-                Label : SUBNAME
-                  Z
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
-                Label : SUBNAME
-                  F
+                Z\D\E\F
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                C\D\E
               Label : CONSTANT
                 K
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                \C\D\E
               Label : CONSTANT
                 K
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  C2
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                C2\D\E
               Label : PROPERTY
                 $k
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  C2
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                \C2\D\E
               Label : PROPERTY
                 $k
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  C3
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                C3\D\E
               Label : METHOD
                 l
                 Label : ARGUMENTS
@@ -207,13 +123,7 @@ Label : PROJECT
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  C3
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
+                \C3\D\E
               Label : METHOD
                 l
                 Label : ARGUMENTS

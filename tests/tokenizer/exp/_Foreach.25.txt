@@ -33,8 +33,6 @@ Label : PROJECT
           Label : SOURCE
             new
             Label : NEW
-              \
-              Label : SUBNAME
-                A
+              \A
           Label : VALUE
             $b

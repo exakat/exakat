@@ -46,8 +46,6 @@ Label : PROJECT
                         'f'
                       Label : ARGUMENT
                         'g'
-                    Label : NAME
-                      array
                 Label : NAME
                   in_array
           Label : THEN

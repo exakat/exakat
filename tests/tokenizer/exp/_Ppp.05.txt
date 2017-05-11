@@ -14,12 +14,12 @@ Label : PROJECT
             {}
             Label : ELEMENT
               protected
-              Label : PROTECTED
-                protected
-              Label : PPP
-                $b
               Label : PPP
                 $a
+              Label : PPP
+                $b
+              Label : PROTECTED
+                protected
             Label : ELEMENT
               C
               Label : ARGUMENTS

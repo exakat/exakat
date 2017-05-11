@@ -58,9 +58,9 @@ Label : PROJECT
                     $d
                   Label : PROPERTY
                     e
-          Label : NAME
-            a
           Label : DEFINITION
             "a"
+          Label : NAME
+            a
         Label : ELEMENT
           Void

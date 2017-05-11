@@ -19,26 +19,16 @@ Label : PROJECT
           Label : LEFT
             $x2
           Label : RIGHT
-            \
-            Label : SUBNAME
-              TRUE
+            \TRUE
         Label : ELEMENT
           =
           Label : LEFT
             $x3
           Label : RIGHT
-            \
-            Label : SUBNAME
-              a
-            Label : SUBNAME
-              TRUE
+            a\TRUE
         Label : ELEMENT
           =
           Label : LEFT
             $x4
           Label : RIGHT
-            \
-            Label : SUBNAME
-              a
-            Label : SUBNAME
-              TRUE
+            \a\TRUE

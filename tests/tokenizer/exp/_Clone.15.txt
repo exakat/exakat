@@ -22,5 +22,3 @@ Label : PROJECT
                   (
                   Label : CODE
                     $a
-            Label : NAME
-              array

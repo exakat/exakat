@@ -66,10 +66,6 @@ Label : PROJECT
                         'B'
                       Label : VALUE
                         'o'
-                  Label : NAME
-                    array
-            Label : NAME
-              array
         Label : ELEMENT
           var_dump
           Label : ARGUMENTS

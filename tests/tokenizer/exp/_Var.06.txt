@@ -44,8 +44,6 @@ Label : PROJECT
                     (
                     Label : ARGUMENT
                       Void
-                  Label : NAME
-                    array
               Label : VAR
                 var
             Label : ELEMENT

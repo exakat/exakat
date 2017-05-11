@@ -96,8 +96,6 @@ Label : PROJECT
                                 $this
                               Label : PROPERTY
                                 J
-                        Label : NAME
-                          array
                     Label : NAME
                       F
                   Label : OBJECT

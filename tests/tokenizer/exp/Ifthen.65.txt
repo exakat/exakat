@@ -46,8 +46,6 @@ Label : PROJECT
                   (
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  array
         Label : ELEMENT
           =
           Label : LEFT
@@ -78,5 +76,3 @@ Label : PROJECT
               (
               Label : ARGUMENT
                 Void
-            Label : NAME
-              array

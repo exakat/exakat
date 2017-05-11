@@ -44,6 +44,8 @@ Label : PROJECT
                       __construct
                     Label : PUBLIC
                       public
+                Label : DEFINITION
+                  $this
                 Label : NAME
                   Void
           Label : NAME

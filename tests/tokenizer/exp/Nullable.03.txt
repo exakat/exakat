@@ -35,8 +35,6 @@ Label : PROJECT
           Label : NULLABLE
             ?
           Label : RETURNTYPE
-            \
-            Label : SUBNAME
-              a
+            \a
         Label : ELEMENT
           Void

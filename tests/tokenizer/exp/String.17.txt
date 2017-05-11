@@ -1,3 +1,4 @@
+Whole
 Label : PROJECT
   ./tests/tokenizer/source/String.17.php
   Label : FILE
@@ -18,7 +19,7 @@ Label : PROJECT
           Label : LEFT
             $a2
           Label : RIGHT
-            b"a"a2"
+            b"a\"a2"
         Label : ELEMENT
           =
           Label : LEFT

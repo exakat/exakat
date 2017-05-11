@@ -15,65 +15,33 @@ Label : PROJECT
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : DEFINITION
-                  \
-                  Label : SUBNAME
-                    A
-                  Label : SUBNAME
-                    F
-                Label : SUBNAME
-                  N
-                Label : SUBNAME
-                  A
+                N\A
               Label : USE
-                \
-                Label : SUBNAME
-                  N
-                Label : SUBNAME
-                  B
+                N\B
             Label : ELEMENT
               use
               Label : FUNCTION
                 function
               Label : USE
-                \
-                Label : SUBNAME
-                  A
-                Label : SUBNAME
-                  F
+                A\F
+                Label : DEFINITION
+                  N\A
               Label : USE
-                \
-                Label : SUBNAME
-                  N
-                Label : SUBNAME
-                  F2
+                N\F2
             Label : ELEMENT
               use
               Label : CONST
                 const
               Label : USE
-                \
+                N\C
                 Label : DEFINITION
                   C
-                Label : SUBNAME
-                  N
-                Label : SUBNAME
-                  C
               Label : USE
-                \
-                Label : SUBNAME
-                  N
-                Label : SUBNAME
-                  C2
+                N\C2
             Label : ELEMENT
               use
               Label : GROUPUSE
-                \
-                Label : SUBNAME
-                  N
-                Label : SUBNAME
-                  D
+                N\D
               Label : USE
                 D
               Label : USE
@@ -87,21 +55,15 @@ Label : PROJECT
             Label : ELEMENT
               use
               Label : GROUPUSE
-                \
-                Label : DEFINITION
-                  DF3
-                Label : DEFINITION
-                  DF2
-                Label : SUBNAME
-                  N2
-                Label : SUBNAME
-                  D2
+                N2\D2
               Label : USE
                 D3
               Label : USE
                 D2
               Label : USE
                 DF3
+                Label : DEFINITION
+                  DF3
                 Label : FUNCTION
                   function
               Label : USE
@@ -115,11 +77,7 @@ Label : PROJECT
             Label : ELEMENT
               use
               Label : GROUPUSE
-                \
-                Label : SUBNAME
-                  some
-                Label : SUBNAME
-                  namespaces
+                some\namespaces
               Label : USE
                 as
                 Label : AS
@@ -135,11 +93,7 @@ Label : PROJECT
               Label : FUNCTION
                 function
               Label : GROUPUSE
-                \
-                Label : SUBNAME
-                  some
-                Label : SUBNAME
-                  namespaces
+                some\namespaces
               Label : USE
                 fn_a
               Label : USE
@@ -151,11 +105,7 @@ Label : PROJECT
               Label : CONST
                 const
               Label : GROUPUSE
-                \
-                Label : SUBNAME
-                  some
-                Label : SUBNAME
-                  namespaces
+                some\namespaces
               Label : USE
                 ConstA
               Label : USE
@@ -180,6 +130,8 @@ Label : PROJECT
                     Void
                 Label : NAME
                   DF2
+                  Label : DEFINITION
+                    DF2
           Label : NAME
             Void
         Label : ELEMENT
@@ -220,8 +172,6 @@ Label : PROJECT
                       __FUNCTION__
                   Label : NAME
                     print
-              Label : NAME
-                DF3
               Label : DEFINITION
                 DF3
                 Label : ARGUMENTS
@@ -230,6 +180,8 @@ Label : PROJECT
                     Void
                 Label : NAME
                   DF3
+              Label : NAME
+                DF3
             Label : ELEMENT
               class
               Label : BLOCK
@@ -260,13 +212,13 @@ Label : PROJECT
                     Void
                 Label : NAME
                   DF2
+                  Label : DEFINITION
+                    DF2
               Label : DEFINITION
                 DF2
+                Label : DEFINITION
+                  DF2
               Label : NAME
                 DF2
           Label : NAME
-            \
-            Label : SUBNAME
-              N2
-            Label : SUBNAME
-              D2
+            N2\D2

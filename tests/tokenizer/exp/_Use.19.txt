@@ -43,11 +43,7 @@ Label : PROJECT
               Label : NAME
                 f
           Label : NAME
-            \
-            Label : SUBNAME
-              Name
-            Label : SUBNAME
-              Space
+            Name\Space
         Label : ELEMENT
           namespace
           Label : BLOCK
@@ -57,143 +53,77 @@ Label : PROJECT
               Label : CONST
                 const
               Label : USE
-                \
-                Label : SUBNAME
-                  Name
-                Label : SUBNAME
-                  Space
-                Label : SUBNAME
-                  c
+                Name\Space\c
             Label : ELEMENT
               use
               Label : FUNCTION
                 function
               Label : USE
-                \
-                Label : SUBNAME
-                  Name
-                Label : SUBNAME
-                  Space
-                Label : SUBNAME
-                  f
+                Name\Space\f
             Label : ELEMENT
               use
               Label : CONST
                 const
               Label : USE
-                \
-                Label : SUBNAME
-                  Name
-                Label : SUBNAME
-                  Space
-                Label : SUBNAME
-                  FOO2
+                Name\Space\FOO2
               Label : USE
-                \
-                Label : SUBNAME
-                  Name
-                Label : SUBNAME
-                  Space
-                Label : SUBNAME
-                  FOO3
+                Name\Space\FOO3
             Label : ELEMENT
               use
               Label : FUNCTION
                 function
               Label : USE
-                \
-                Label : SUBNAME
-                  Name
-                Label : SUBNAME
-                  Space
-                Label : SUBNAME
-                  FOO2
+                Name\Space\FOO2
               Label : USE
-                \
-                Label : SUBNAME
-                  Name
-                Label : SUBNAME
-                  Space
-                Label : SUBNAME
-                  FOO3
+                Name\Space\FOO3
             Label : ELEMENT
               use
               Label : CONST
                 const
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a1
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    Name
-                  Label : SUBNAME
-                    Space
-                  Label : SUBNAME
-                    FOO
+                  Name\Space\FOO
             Label : ELEMENT
               use
               Label : CONST
                 const
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a2
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    Name
-                  Label : SUBNAME
-                    Space
-                  Label : SUBNAME
-                    FOO2
+                  Name\Space\FOO2
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a3
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    Name
-                  Label : SUBNAME
-                    Space
-                  Label : SUBNAME
-                    FOO3
+                  Name\Space\FOO3
             Label : ELEMENT
               use
               Label : CONST
                 const
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a4
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    Name
-                  Label : SUBNAME
-                    Space
-                  Label : SUBNAME
-                    FOO2
+                  Name\Space\FOO2
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a5
                 Label : NAME
                   Name
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a6
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    Name
-                  Label : SUBNAME
-                    Space
-                  Label : SUBNAME
-                    FOO3
+                  Name\Space\FOO3
             Label : ELEMENT
               echo
               Label : ARGUMENTS

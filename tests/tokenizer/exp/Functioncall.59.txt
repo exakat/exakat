@@ -26,8 +26,6 @@ Label : PROJECT
                     'C'
                   Label : ARGUMENT
                     'B'
-                Label : NAME
-                  array
               Label : ARGUMENT
                 'A'
               Label : ARGUMENT

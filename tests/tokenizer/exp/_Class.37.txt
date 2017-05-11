@@ -30,12 +30,12 @@ Label : PROJECT
                 protected
             Label : ELEMENT
               protected
-              Label : PROTECTED
-                protected
-              Label : PPP
-                $d
               Label : PPP
                 $c
+              Label : PPP
+                $d
+              Label : PROTECTED
+                protected
             Label : ELEMENT
               const
               Label : CONST
@@ -52,21 +52,21 @@ Label : PROJECT
                   $f
                 Label : RIGHT
                   2
-              Label : PROTECTED
-                protected
               Label : PPP
                 $e
-            Label : ELEMENT
-              protected
               Label : PROTECTED
                 protected
-              Label : PPP
-                $h
+            Label : ELEMENT
+              protected
               Label : PPP
                 =
                 Label : LEFT
                   $g
                 Label : RIGHT
                   3
+              Label : PPP
+                $h
+              Label : PROTECTED
+                protected
           Label : NAME
             x

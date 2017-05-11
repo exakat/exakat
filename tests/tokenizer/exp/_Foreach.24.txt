@@ -26,8 +26,6 @@ Label : PROJECT
                       $d
                     Label : ARGUMENT
                       $e
-                  Label : NAME
-                    array
               Label : NAME
                 call_user_func_array
           Label : SOURCE

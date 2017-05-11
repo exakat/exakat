@@ -156,7 +156,3 @@ Label : PROJECT
                           AD
                     Label : NAME
                       AC
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              array

@@ -15,11 +15,7 @@ Label : PROJECT
             Label : LEFT
               instanceof
               Label : CLASS
-                \
-                Label : SUBNAME
-                  B
-                Label : SUBNAME
-                  C
+                B\C
               Label : VARIABLE
                 $a
             Label : RIGHT

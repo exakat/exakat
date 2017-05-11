@@ -62,12 +62,10 @@ Label : PROJECT
                     static
               Label : DEFINITION
                 absolute_path
-              Label : DEFINITION
-                \
                 Label : DEFINITION
-                  absolute_path
-                Label : SUBNAME
-                  absolute_path
+                  \absolute_path
+              Label : DEFINITION
+                \absolute_path
               Label : NAME
                 absolute_path
             Label : ELEMENT
@@ -92,6 +90,14 @@ Label : PROJECT
                     static
               Label : DEFINITION
                 a1
+                Label : DEFINITION
+                  as
+                  Label : ALIAS
+                    a1
+                  Label : NAME
+                    one_identifier3
+              Label : DEFINITION
+                one_identifier3
               Label : NAME
                 one_identifier3
             Label : ELEMENT
@@ -115,9 +121,7 @@ Label : PROJECT
                   Label : STATIC
                     static
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  a1
+                \a1
               Label : NAME
                 a1
           Label : NAME
@@ -148,14 +152,10 @@ Label : PROJECT
                     static
               Label : DEFINITION
                 path
-              Label : DEFINITION
-                \
                 Label : DEFINITION
-                  path
-                Label : SUBNAME
-                  complex
-                Label : SUBNAME
-                  path
+                  complex\path
+              Label : DEFINITION
+                complex\path
               Label : NAME
                 path
           Label : NAME
@@ -186,24 +186,14 @@ Label : PROJECT
                     static
               Label : DEFINITION
                 path2
-              Label : DEFINITION
-                \
                 Label : DEFINITION
-                  path2
-                Label : SUBNAME
-                  absolute
-                Label : SUBNAME
-                  complex
-                Label : SUBNAME
-                  path2
+                  \absolute\complex\path2
+              Label : DEFINITION
+                \absolute\complex\path2
               Label : NAME
                 path2
           Label : NAME
-            \
-            Label : SUBNAME
-              absolute
-            Label : SUBNAME
-              complex
+            absolute\complex
         Label : ELEMENT
           namespace
           Label : BLOCK
@@ -212,45 +202,23 @@ Label : PROJECT
               use
               Label : USE
                 one_identifier
-                Label : DEFINITION
-                  one_identifier
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : DEFINITION
-                  absolute_path
-                Label : SUBNAME
-                  absolute_path
+                \absolute_path
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : DEFINITION
-                  path
-                Label : SUBNAME
-                  complex
-                Label : SUBNAME
-                  path
+                complex\path
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : DEFINITION
-                  path2
-                Label : SUBNAME
-                  absolute
-                Label : SUBNAME
-                  complex
-                Label : SUBNAME
-                  path2
+                \absolute\complex\path2
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
-                  a1
-                Label : DEFINITION
+                Label : ALIAS
                   a1
                 Label : NAME
                   one_identifier3
@@ -258,44 +226,26 @@ Label : PROJECT
               use
               Label : USE
                 as
-                Label : AS
-                  a2
-                Label : DEFINITION
+                Label : ALIAS
                   a2
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    absolute_path3
+                  \absolute_path3
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
-                  a3
-                Label : DEFINITION
+                Label : ALIAS
                   a3
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    complex
-                  Label : SUBNAME
-                    path3
+                  complex\path3
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
-                  a4
-                Label : DEFINITION
+                Label : ALIAS
                   a4
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    absolute
-                  Label : SUBNAME
-                    complex
-                  Label : SUBNAME
-                    path32
+                  \absolute\complex\path32
             Label : ELEMENT
               print
               Label : ARGUMENTS
@@ -304,6 +254,8 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     one_identifier
+                    Label : DEFINITION
+                      one_identifier
                   Label : METHOD
                     a
                     Label : ARGUMENTS
@@ -322,6 +274,8 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     absolute_path
+                    Label : DEFINITION
+                      \absolute_path
                   Label : METHOD
                     a
                     Label : ARGUMENTS
@@ -340,6 +294,8 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     path
+                    Label : DEFINITION
+                      complex\path
                   Label : METHOD
                     a
                     Label : ARGUMENTS
@@ -358,6 +314,8 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     path2
+                    Label : DEFINITION
+                      \absolute\complex\path2
                   Label : METHOD
                     a
                     Label : ARGUMENTS
@@ -376,6 +334,12 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     a1
+                    Label : DEFINITION
+                      as
+                      Label : ALIAS
+                        a1
+                      Label : NAME
+                        one_identifier3
                   Label : METHOD
                     a
                     Label : ARGUMENTS
@@ -393,9 +357,7 @@ Label : PROJECT
                 Label : ARGUMENT
                   ::
                   Label : CLASS
-                    \
-                    Label : SUBNAME
-                      a1
+                    \a1
                   Label : METHOD
                     a
                     Label : ARGUMENTS
@@ -432,6 +394,12 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     a2
+                    Label : DEFINITION
+                      as
+                      Label : ALIAS
+                        a2
+                      Label : NAME
+                        \absolute_path3
                   Label : METHOD
                     a
                     Label : ARGUMENTS
@@ -450,6 +418,12 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     a3
+                    Label : DEFINITION
+                      as
+                      Label : ALIAS
+                        a3
+                      Label : NAME
+                        complex\path3
                   Label : METHOD
                     a
                     Label : ARGUMENTS
@@ -468,6 +442,12 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     a4
+                    Label : DEFINITION
+                      as
+                      Label : ALIAS
+                        a4
+                      Label : NAME
+                        \absolute\complex\path32
                   Label : METHOD
                     a
                     Label : ARGUMENTS

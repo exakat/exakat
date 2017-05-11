@@ -22,11 +22,11 @@ Label : PROJECT
                 Void
               Label : NAME
                 x
-          Label : NAME
-            a
           Label : EXTENDS
             b
           Label : EXTENDS
             c
           Label : EXTENDS
             d
+          Label : NAME
+            a

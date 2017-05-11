@@ -42,8 +42,6 @@ Label : PROJECT
                   (
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  array
           Label : SOURCE
             a
             Label : ARGUMENTS
@@ -104,5 +102,3 @@ Label : PROJECT
                   (
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  array

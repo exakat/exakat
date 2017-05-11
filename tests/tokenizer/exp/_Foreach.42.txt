@@ -30,8 +30,6 @@ Label : PROJECT
                 [
                 Label : ARGUMENT
                   Void
-              Label : NAME
-                [
           Label : VALUE
             =>
             Label : KEY
@@ -60,16 +58,12 @@ Label : PROJECT
                 [
                 Label : ARGUMENT
                   Void
-              Label : NAME
-                [
             Label : THEN
               [
               Label : ARGUMENTS
                 [
                 Label : ARGUMENT
                   1
-              Label : NAME
-                [
           Label : VALUE
             =>
             Label : KEY

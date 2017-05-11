@@ -19,8 +19,6 @@ Label : PROJECT
             Label : CONCAT
               __DIR__
             Label : CONCAT
-              \
-              Label : SUBNAME
-                C
+              \C
             Label : CONCAT
               'D'

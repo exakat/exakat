@@ -21,7 +21,7 @@ Label : PROJECT
               Label : RETURN
                 new
                 Label : NEW
-                  \
+                  \C\D\E
                   Label : ARGUMENTS
                     (
                     Label : ARGUMENT
@@ -34,16 +34,8 @@ Label : PROJECT
                             'F'
                           Label : VALUE
                             'G'
-                      Label : NAME
-                        [
                   Label : NAME
-                    \
-                    Label : SUBNAME
-                      C
-                    Label : SUBNAME
-                      D
-                    Label : SUBNAME
-                      E
+                    \C\D\E
           Label : NAME
             B
         Label : ELEMENT

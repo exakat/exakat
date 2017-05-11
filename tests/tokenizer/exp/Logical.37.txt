@@ -34,11 +34,7 @@ Label : PROJECT
               Label : OBJECT
                 ::
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    B
-                  Label : SUBNAME
-                    C
+                  \B\C
                 Label : METHOD
                   d
                   Label : ARGUMENTS

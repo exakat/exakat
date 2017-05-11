@@ -28,8 +28,6 @@ Label : PROJECT
                       $i
                   Label : RIGHT
                     $j
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT
@@ -50,8 +48,6 @@ Label : PROJECT
                       $i
                   Label : RIGHT
                     $j
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT
@@ -72,8 +68,6 @@ Label : PROJECT
                       $i
                   Label : RIGHT
                     $j
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT
@@ -94,5 +88,3 @@ Label : PROJECT
                       $i
                   Label : RIGHT
                     $j
-            Label : NAME
-              array

@@ -56,5 +56,3 @@ Label : PROJECT
                     $i
                 Label : RIGHT
                   1
-            Label : NAME
-              array

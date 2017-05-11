@@ -24,12 +24,12 @@ Label : PROJECT
                 private
             Label : ELEMENT
               private
-              Label : PRIVATE
-                private
-              Label : PPP
-                $d
               Label : PPP
                 $c
+              Label : PPP
+                $d
+              Label : PRIVATE
+                private
             Label : ELEMENT
               const
               Label : CONST
@@ -46,21 +46,21 @@ Label : PROJECT
                   $f
                 Label : RIGHT
                   2
-              Label : PRIVATE
-                private
               Label : PPP
                 $e
-            Label : ELEMENT
-              private
               Label : PRIVATE
                 private
-              Label : PPP
-                $h
+            Label : ELEMENT
+              private
               Label : PPP
                 =
                 Label : LEFT
                   $g
                 Label : RIGHT
                   3
+              Label : PPP
+                $h
+              Label : PRIVATE
+                private
           Label : NAME
             x

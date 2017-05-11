@@ -86,107 +86,107 @@ Label : PROJECT
                 static
             Label : ELEMENT
               public
-              Label : PUBLIC
-                public
-              Label : PPP
-                $e1
-              Label : STATIC
-                static
               Label : PPP
                 $d1
-            Label : ELEMENT
-              static
-              Label : PRIVATE
-                private
               Label : PPP
-                $e2
+                $e1
+              Label : PUBLIC
+                public
               Label : STATIC
                 static
+            Label : ELEMENT
+              static
               Label : PPP
                 $d2
+              Label : PPP
+                $e2
+              Label : PRIVATE
+                private
+              Label : STATIC
+                static
             Label : ELEMENT
               public
-              Label : PUBLIC
-                public
-              Label : PPP
-                $e3
               Label : PPP
                 $d3
-            Label : ELEMENT
-              static
-              Label : STATIC
-                static
               Label : PPP
-                $e4
-              Label : PPP
-                $d4
-            Label : ELEMENT
-              public
+                $e3
               Label : PUBLIC
                 public
+            Label : ELEMENT
+              static
               Label : PPP
-                =
-                Label : LEFT
-                  $g1
-                Label : RIGHT
-                  2
+                $d4
+              Label : PPP
+                $e4
               Label : STATIC
                 static
+            Label : ELEMENT
+              public
               Label : PPP
                 =
                 Label : LEFT
                   $f1
                 Label : RIGHT
                   1
-            Label : ELEMENT
-              static
-              Label : PROTECTED
-                protected
               Label : PPP
                 =
                 Label : LEFT
-                  $g2
+                  $g1
                 Label : RIGHT
-                  3
+                  2
+              Label : PUBLIC
+                public
               Label : STATIC
                 static
+            Label : ELEMENT
+              static
               Label : PPP
                 =
                 Label : LEFT
                   $f2
                 Label : RIGHT
                   2
-            Label : ELEMENT
-              public
-              Label : PUBLIC
-                public
               Label : PPP
                 =
                 Label : LEFT
-                  $g3
+                  $g2
                 Label : RIGHT
                   3
+              Label : PROTECTED
+                protected
+              Label : STATIC
+                static
+            Label : ELEMENT
+              public
               Label : PPP
                 =
                 Label : LEFT
                   $f3
                 Label : RIGHT
                   3
-            Label : ELEMENT
-              static
-              Label : STATIC
-                static
               Label : PPP
                 =
                 Label : LEFT
-                  $g4
+                  $g3
                 Label : RIGHT
-                  5
+                  3
+              Label : PUBLIC
+                public
+            Label : ELEMENT
+              static
               Label : PPP
                 =
                 Label : LEFT
                   $f4
                 Label : RIGHT
                   4
+              Label : PPP
+                =
+                Label : LEFT
+                  $g4
+                Label : RIGHT
+                  5
+              Label : STATIC
+                static
           Label : NAME
             x

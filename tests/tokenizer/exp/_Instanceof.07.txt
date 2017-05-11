@@ -17,9 +17,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    C
+                  \C
                 Label : VARIABLE
                   $a
               Label : CODE
@@ -63,13 +61,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    G
-                  Label : SUBNAME
-                    H
-                  Label : SUBNAME
-                    I
+                  \G\H\I
                 Label : VARIABLE
                   $e
               Label : CODE
@@ -79,15 +71,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    J
-                  Label : SUBNAME
-                    K
-                  Label : SUBNAME
-                    L
-                  Label : SUBNAME
-                    M
+                  \J\K\L\M
                 Label : VARIABLE
                   $f
               Label : CODE
@@ -97,17 +81,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    N
-                  Label : SUBNAME
-                    O
-                  Label : SUBNAME
-                    P
-                  Label : SUBNAME
-                    Q
-                  Label : SUBNAME
-                    R
+                  \N\O\P\Q\R
                 Label : VARIABLE
                   $g
               Label : CODE
@@ -117,17 +91,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    S
-                  Label : SUBNAME
-                    T
-                  Label : SUBNAME
-                    U
-                  Label : SUBNAME
-                    V
-                  Label : SUBNAME
-                    W
+                  S\T\U\V\W
                 Label : VARIABLE
                   $h
               Label : CODE

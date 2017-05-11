@@ -58,7 +58,3 @@ Label : PROJECT
                     7
                   Label : RIGHT
                     8
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              array

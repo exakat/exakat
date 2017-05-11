@@ -10,49 +10,31 @@ Label : PROJECT
         Label : ELEMENT
           use
           Label : USE
-            \
-            Label : SUBNAME
-              Baz
-            Label : SUBNAME
-              ClassNonAbsNonGroupedNonAs
+            Baz\ClassNonAbsNonGroupedNonAs
         Label : ELEMENT
           use
           Label : USE
-            \
-            Label : SUBNAME
-              Baz
-            Label : SUBNAME
-              ClassAbsNonGroupedNonAs
+            Baz\ClassAbsNonGroupedNonAs
         Label : ELEMENT
           use
           Label : USE
             as
-            Label : AS
+            Label : ALIAS
               A1
             Label : NAME
-              \
-              Label : SUBNAME
-                Baz
-              Label : SUBNAME
-                ClassNonAbsNonGroupedAs
+              Baz\ClassNonAbsNonGroupedAs
         Label : ELEMENT
           use
           Label : USE
             as
-            Label : AS
+            Label : ALIAS
               A2
             Label : NAME
-              \
-              Label : SUBNAME
-                Baz
-              Label : SUBNAME
-                ClassAbsNonGroupedAs
+              Baz\ClassAbsNonGroupedAs
         Label : ELEMENT
           use
           Label : GROUPUSE
-            \
-            Label : SUBNAME
-              Baz
+            Baz
           Label : USE
             as
             Label : AS

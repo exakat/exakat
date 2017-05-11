@@ -1,0 +1,54 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Class.77.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          namespace
+          Label : BLOCK
+             
+            Label : ELEMENT
+              interface
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                a
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                b
+            Label : ELEMENT
+              interface
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : NAME
+                d
+            Label : ELEMENT
+              class
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  Void
+              Label : EXTENDS
+                namespace\b
+              Label : IMPLEMENTS
+                namespace\a
+              Label : IMPLEMENTS
+                namespace\d
+              Label : NAME
+                c
+          Label : NAME
+            A

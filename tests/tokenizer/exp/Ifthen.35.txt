@@ -30,8 +30,6 @@ Label : PROJECT
                   $c
                 Label : VALUE
                   $d
-            Label : ELEMENT
-              Void
         Label : ELEMENT
           f
           Label : ARGUMENTS

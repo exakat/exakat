@@ -16,8 +16,6 @@ Label : PROJECT
               [
               Label : ARGUMENT
                 Void
-            Label : NAME
-              [
         Label : ELEMENT
           return
           Label : RETURN
@@ -26,8 +24,6 @@ Label : PROJECT
               [
               Label : ARGUMENT
                 1
-            Label : NAME
-              [
         Label : ELEMENT
           return
           Label : RETURN
@@ -40,8 +36,6 @@ Label : PROJECT
                 3
               Label : ARGUMENT
                 4
-            Label : NAME
-              [
         Label : ELEMENT
           return
           Label : RETURN
@@ -54,23 +48,15 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  [
               Label : ARGUMENT
                 [
                 Label : ARGUMENTS
                   [
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  [
               Label : ARGUMENT
                 [
                 Label : ARGUMENTS
                   [
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  [
-            Label : NAME
-              [

@@ -12,21 +12,15 @@ Label : PROJECT
           use
           Label : USE
             as
-            Label : AS
+            Label : ALIAS
               D
             Label : NAME
-              \
-              Label : SUBNAME
-                A
-              Label : SUBNAME
-                B
-              Label : SUBNAME
-                C
+              A\B\C
         Label : ELEMENT
           use
           Label : USE
             as
-            Label : AS
+            Label : ALIAS
               E
             Label : NAME
               A
@@ -34,9 +28,7 @@ Label : PROJECT
           use
           Label : USE
             as
-            Label : AS
+            Label : ALIAS
               F
             Label : NAME
-              \
-              Label : SUBNAME
-                A
+              \A

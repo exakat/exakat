@@ -11,10 +11,4 @@ Label : PROJECT
         Label : ELEMENT
           use
           Label : USE
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+            \A\B\C

@@ -44,8 +44,6 @@ Label : PROJECT
                             G
                           Label : CONCAT
                             'H'
-                    Label : NAME
-                      array
                   Label : RIGHT
                     include
                     Label : ARGUMENTS

@@ -133,11 +133,7 @@ Label : PROJECT
               Label : ARGUMENT
                 $matches
                 Label : TYPEHINT
-                  \
-                  Label : SUBNAME
-                    x
-                  Label : SUBNAME
-                    d
+                  x\d
             Label : BLOCK
               {}
               Label : ELEMENT
@@ -175,11 +171,7 @@ Label : PROJECT
               Label : ARGUMENT
                 $matches
                 Label : TYPEHINT
-                  \
-                  Label : SUBNAME
-                    x
-                  Label : SUBNAME
-                    d
+                  \x\d
             Label : BLOCK
               {}
               Label : ELEMENT

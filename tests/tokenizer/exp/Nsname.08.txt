@@ -11,18 +11,10 @@ Label : PROJECT
         Label : ELEMENT
           new
           Label : NEW
-            \
+            \a\b\c\d
             Label : ARGUMENTS
               (
               Label : ARGUMENT
                 Void
             Label : NAME
-              \
-              Label : SUBNAME
-                a
-              Label : SUBNAME
-                b
-              Label : SUBNAME
-                c
-              Label : SUBNAME
-                d
+              \a\b\c\d

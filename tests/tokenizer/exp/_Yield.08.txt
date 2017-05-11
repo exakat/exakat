@@ -32,7 +32,5 @@ Label : PROJECT
                       yield
                       Label : YIELD
                         $c
-                Label : NAME
-                  [
           Label : NAME
             a

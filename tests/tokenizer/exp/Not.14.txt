@@ -15,11 +15,7 @@ Label : PROJECT
             Label : NOT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  A
-                Label : SUBNAME
-                  B
+                A\B
               Label : METHOD
                 C
                 Label : ARGUMENTS

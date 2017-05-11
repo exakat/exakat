@@ -11,7 +11,7 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               echo
               Label : ARGUMENTS
@@ -25,11 +25,7 @@ Label : PROJECT
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  \
-                  Label : SUBNAME
-                    SUBNAMESPACED
-                  Label : SUBNAME
-                    CONSTANTE
+                  SUBNAMESPACED\CONSTANTE
               Label : NAME
                 echo
             Label : ELEMENT
@@ -37,13 +33,7 @@ Label : PROJECT
               Label : ARGUMENTS
                 echo
                 Label : ARGUMENT
-                  \
-                  Label : SUBNAME
-                    FULL
-                  Label : SUBNAME
-                    NAMESPACED
-                  Label : SUBNAME
-                    CONSTANTE
+                  \FULL\NAMESPACED\CONSTANTE
               Label : NAME
                 echo
             Label : ELEMENT
@@ -55,31 +45,21 @@ Label : PROJECT
               Label : NAME
                 unqualified_function
             Label : ELEMENT
-              \
+              subnamespaced\fonction
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   Void
               Label : NAME
-                \
-                Label : SUBNAME
-                  subnamespaced
-                Label : SUBNAME
-                  fonction
+                subnamespaced\fonction
             Label : ELEMENT
-              \
+              \full\namespaced\fonction
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
                   Void
               Label : NAME
-                \
-                Label : SUBNAME
-                  full
-                Label : SUBNAME
-                  namespaced
-                Label : SUBNAME
-                  fonction
+                \full\namespaced\fonction
             Label : ELEMENT
               ::
               Label : CLASS
@@ -127,23 +107,13 @@ Label : PROJECT
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  subnamespacec
-                Label : SUBNAME
-                  fooclassc
+                subnamespacec\fooclassc
               Label : CONSTANT
                 FOOCSONTANT
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  fullc
-                Label : SUBNAME
-                  namespacec
-                Label : SUBNAME
-                  fooclassc
+                \fullc\namespacec\fooclassc
               Label : CONSTANT
                 FOOCSONTANT
             Label : ELEMENT
@@ -155,47 +125,29 @@ Label : PROJECT
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  subnamespacep
-                Label : SUBNAME
-                  fooclassp
+                subnamespacep\fooclassp
               Label : PROPERTY
                 $property
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  fullp
-                Label : SUBNAME
-                  namespacep
-                Label : SUBNAME
-                  fooclassp
+                \fullp\namespacep\fooclassp
               Label : PROPERTY
                 $property
             Label : ELEMENT
               new
               Label : NEW
-                \
+                subnamespace\FOO
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
                     Void
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    subnamespace
-                  Label : SUBNAME
-                    FOO
+                  subnamespace\FOO
             Label : ELEMENT
               new
               Label : NEW
-                \
-                Label : SUBNAME
-                  subnamespace
-                Label : SUBNAME
-                  FOO
+                subnamespace\FOO
             Label : ELEMENT
               ::
               Label : CLASS
@@ -211,11 +163,7 @@ Label : PROJECT
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  subnamespacem
-                Label : SUBNAME
-                  fooclassm
+                subnamespacem\fooclassm
               Label : METHOD
                 staticMethod
                 Label : ARGUMENTS
@@ -227,13 +175,7 @@ Label : PROJECT
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  fullm
-                Label : SUBNAME
-                  namespacem
-                Label : SUBNAME
-                  fooclassm
+                \fullm\namespacem\fooclassm
               Label : METHOD
                 staticMethod
                 Label : ARGUMENTS
@@ -245,29 +187,17 @@ Label : PROJECT
             Label : ELEMENT
               new
               Label : NEW
-                \
+                \Foo\Bar\FOO
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
                     Void
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    Foo
-                  Label : SUBNAME
-                    Bar
-                  Label : SUBNAME
-                    FOO
+                  \Foo\Bar\FOO
             Label : ELEMENT
               new
               Label : NEW
-                \
-                Label : SUBNAME
-                  Foo
-                Label : SUBNAME
-                  Bar
-                Label : SUBNAME
-                  FOO
+                \Foo\Bar\FOO
             Label : ELEMENT
               instanceof
               Label : CLASS
@@ -277,28 +207,14 @@ Label : PROJECT
             Label : ELEMENT
               instanceof
               Label : CLASS
-                \
-                Label : SUBNAME
-                  subnamespace
-                Label : SUBNAME
-                  fooclass
+                subnamespace\fooclass
               Label : VARIABLE
                 $x
             Label : ELEMENT
               instanceof
               Label : CLASS
-                \
-                Label : SUBNAME
-                  full
-                Label : SUBNAME
-                  namespacepath
-                Label : SUBNAME
-                  fooclass
+                \full\namespacepath\fooclass
               Label : VARIABLE
                 $x
           Label : NAME
-            \
-            Label : SUBNAME
-              Foo
-            Label : SUBNAME
-              Bar
+            Foo\Bar

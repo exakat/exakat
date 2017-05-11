@@ -34,7 +34,3 @@ Label : PROJECT
                       'D'
                 Label : CONCAT
                   -0
-            Label : ARGUMENT
-              Void
-          Label : NAME
-            array

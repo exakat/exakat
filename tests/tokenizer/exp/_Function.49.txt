@@ -42,8 +42,6 @@ Label : PROJECT
                     'D'
                   Label : ARGUMENT
                     'E'
-                Label : NAME
-                  array
             Label : ELEMENT
               if
               Label : CONDITION
@@ -91,15 +89,13 @@ Label : PROJECT
                   Label : THROW
                     new
                     Label : NEW
-                      \
+                      \K
                       Label : ARGUMENTS
                         (
                         Label : ARGUMENT
                           Void
                       Label : NAME
-                        \
-                        Label : SUBNAME
-                          K
+                        \K
             Label : ELEMENT
               =
               Label : LEFT
@@ -134,8 +130,6 @@ Label : PROJECT
                   (
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  array
             Label : ELEMENT
               =
               Label : LEFT

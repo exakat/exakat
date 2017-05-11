@@ -36,5 +36,3 @@ Label : PROJECT
                     c
                 Label : VALUE
                   $d
-            Label : NAME
-              array

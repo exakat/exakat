@@ -176,8 +176,6 @@ Label : PROJECT
                                         Y
                                   Label : THEN
                                     Void
-                              Label : NAME
-                                [
                           Label : ARGUMENT
                             =>
                             Label : KEY
@@ -188,10 +186,6 @@ Label : PROJECT
                                 [
                                 Label : ARGUMENT
                                   Void
-                              Label : NAME
-                                [
-                        Label : NAME
-                          [
                 Label : ELEMENT
                   case 'AB' :  /**/  
                   Label : CASE
@@ -362,8 +356,6 @@ Label : PROJECT
                                     $e
                                 Label : ARGUMENT
                                   $f
-                              Label : NAME
-                                [
                           Label : ARGUMENT
                             =>
                             Label : KEY
@@ -374,10 +366,6 @@ Label : PROJECT
                                 [
                                 Label : ARGUMENT
                                   Void
-                              Label : NAME
-                                [
-                        Label : NAME
-                          [
               Label : NAME
                 [
                 Label : INDEX

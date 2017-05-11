@@ -11,35 +11,27 @@ Label : PROJECT
         Label : ELEMENT
           new
           Label : NEW
-            \
+            \a\b
             Label : ARGUMENTS
               (
               Label : ARGUMENT
                 Void
             Label : NAME
-              \
-              Label : SUBNAME
-                a
-              Label : SUBNAME
-                b
+              \a\b
         Label : ELEMENT
           new
           Label : NEW
-            \
+            \c\d
             Label : ARGUMENTS
               (
               Label : ARGUMENT
                 1
             Label : NAME
-              \
-              Label : SUBNAME
-                c
-              Label : SUBNAME
-                d
+              \c\d
         Label : ELEMENT
           new
           Label : NEW
-            \
+            \e\f
             Label : ARGUMENTS
               (
               Label : ARGUMENT
@@ -47,8 +39,4 @@ Label : PROJECT
               Label : ARGUMENT
                 2
             Label : NAME
-              \
-              Label : SUBNAME
-                e
-              Label : SUBNAME
-                f
+              \e\f

@@ -19,13 +19,13 @@ Label : PROJECT
               Label : RIGHT
                 new
                 Label : NEW
-                  \
+                  \B
                   Label : ARGUMENTS
                     (
                     Label : ARGUMENT
                       new
                       Label : NEW
-                        \
+                        \C
                         Label : ARGUMENTS
                           (
                           Label : ARGUMENT
@@ -33,27 +33,19 @@ Label : PROJECT
                           Label : ARGUMENT
                             ::
                             Label : CLASS
-                              \
-                              Label : SUBNAME
-                                D
+                              \D
                             Label : CONSTANT
                               E
                         Label : NAME
-                          \
-                          Label : SUBNAME
-                            C
+                          \C
                     Label : ARGUMENT
                       ::
                       Label : CLASS
-                        \
-                        Label : SUBNAME
-                          B
+                        \B
                       Label : CONSTANT
                         G
                   Label : NAME
-                    \
-                    Label : SUBNAME
-                      B
+                    \B
             Label : ELEMENT
               foreach
               Label : BLOCK
@@ -147,9 +139,7 @@ Label : PROJECT
               Label : ELEMENT
                 Void
             Label : CLASS
-              \
-              Label : SUBNAME
-                O
+              \O
             Label : VARIABLE
               $d
         Label : ELEMENT

@@ -12,77 +12,39 @@ Label : PROJECT
           Label : CONST
             const
           Label : USE
-            \
-            Label : SUBNAME
-              FooLibrary
-            Label : SUBNAME
-              Bar
-            Label : SUBNAME
-              Baz
-            Label : SUBNAME
-              ClassNonAbsNonGroupedNonAs
+            FooLibrary\Bar\Baz\ClassNonAbsNonGroupedNonAs
         Label : ELEMENT
           use
           Label : CONST
             const
           Label : USE
-            \
-            Label : SUBNAME
-              FooLibrary
-            Label : SUBNAME
-              Bar
-            Label : SUBNAME
-              Baz
-            Label : SUBNAME
-              ClassAbsNonGroupedNonAs
+            \FooLibrary\Bar\Baz\ClassAbsNonGroupedNonAs
         Label : ELEMENT
           use
           Label : CONST
             const
           Label : USE
             as
-            Label : AS
+            Label : ALIAS
               A1
             Label : NAME
-              \
-              Label : SUBNAME
-                FooLibrary
-              Label : SUBNAME
-                Bar
-              Label : SUBNAME
-                Baz
-              Label : SUBNAME
-                ClassNonAbsNonGroupedAs
+              FooLibrary\Bar\Baz\ClassNonAbsNonGroupedAs
         Label : ELEMENT
           use
           Label : CONST
             const
           Label : USE
             as
-            Label : AS
+            Label : ALIAS
               A2
             Label : NAME
-              \
-              Label : SUBNAME
-                FooLibrary
-              Label : SUBNAME
-                Bar
-              Label : SUBNAME
-                Baz
-              Label : SUBNAME
-                ClassAbsNonGroupedAs
+              \FooLibrary\Bar\Baz\ClassAbsNonGroupedAs
         Label : ELEMENT
           use
           Label : CONST
             const
           Label : GROUPUSE
-            \
-            Label : SUBNAME
-              FooLibrary
-            Label : SUBNAME
-              Bar
-            Label : SUBNAME
-              Baz
+            FooLibrary\Bar\Baz
           Label : USE
             as
             Label : AS

@@ -11,8 +11,8 @@ Label : PROJECT
         Label : ELEMENT
           global
           Label : GLOBAL
-            $c
-          Label : GLOBAL
             $a
           Label : GLOBAL
             $b
+          Label : GLOBAL
+            $c

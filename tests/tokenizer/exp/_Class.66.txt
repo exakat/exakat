@@ -61,20 +61,12 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              C
+            \C
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              D
+            \D
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              E
+            \E
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              F
+            \F
           Label : NAME
             A4

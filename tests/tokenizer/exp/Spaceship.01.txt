@@ -152,16 +152,12 @@ Label : PROJECT
                   [
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  [
               Label : RIGHT
                 [
                 Label : ARGUMENTS
                   [
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  [
           Label : NAME
             echo
         Label : ELEMENT
@@ -180,8 +176,6 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : NAME
-                  [
               Label : RIGHT
                 [
                 Label : ARGUMENTS
@@ -192,8 +186,6 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : NAME
-                  [
           Label : NAME
             echo
         Label : ELEMENT
@@ -212,16 +204,12 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : NAME
-                  [
               Label : RIGHT
                 [
                 Label : ARGUMENTS
                   [
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  [
           Label : NAME
             echo
         Label : ELEMENT
@@ -240,8 +228,6 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : NAME
-                  [
               Label : RIGHT
                 [
                 Label : ARGUMENTS
@@ -252,8 +238,6 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     1
-                Label : NAME
-                  [
           Label : NAME
             echo
         Label : ELEMENT
@@ -272,8 +256,6 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : NAME
-                  [
               Label : RIGHT
                 [
                 Label : ARGUMENTS
@@ -284,8 +266,6 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     4
-                Label : NAME
-                  [
           Label : NAME
             echo
         Label : ELEMENT
@@ -304,8 +284,6 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : NAME
-                [
         Label : ELEMENT
           =
           Label : LEFT
@@ -322,8 +300,6 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : NAME
-                [
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -352,8 +328,6 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : NAME
-                [
         Label : ELEMENT
           =
           Label : LEFT
@@ -370,8 +344,6 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "c"
-              Label : NAME
-                [
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -400,8 +372,6 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "c"
-              Label : NAME
-                [
         Label : ELEMENT
           =
           Label : LEFT
@@ -418,8 +388,6 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : NAME
-                [
         Label : ELEMENT
           echo
           Label : ARGUMENTS
@@ -448,8 +416,6 @@ Label : PROJECT
                     "a"
                   Label : VALUE
                     "b"
-              Label : NAME
-                [
         Label : ELEMENT
           =
           Label : LEFT
@@ -466,8 +432,6 @@ Label : PROJECT
                     "b"
                   Label : VALUE
                     "b"
-              Label : NAME
-                [
         Label : ELEMENT
           echo
           Label : ARGUMENTS

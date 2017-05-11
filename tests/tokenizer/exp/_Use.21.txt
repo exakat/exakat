@@ -41,12 +41,6 @@ Label : PROJECT
               Label : USE
                 G
           Label : EXTENDS
-            \
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
-            Label : SUBNAME
-              E
+            \C\D\E
           Label : NAME
             B

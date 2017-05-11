@@ -28,8 +28,6 @@ Label : PROJECT
                       __CLASS__
                     Label : ARGUMENT
                       'D'
-                  Label : NAME
-                    array
               Label : NAME
                 C
           Label : NAME
@@ -56,8 +54,6 @@ Label : PROJECT
                         __CLASS__
                       Label : ARGUMENT
                         'D'
-                    Label : NAME
-                      array
               Label : NAME
                 echo
           Label : NAME
@@ -82,8 +78,6 @@ Label : PROJECT
                       __CLASS__
                     Label : ARGUMENT
                       'D'
-                  Label : NAME
-                    array
               Label : NAME
                 echo
           Label : NAME

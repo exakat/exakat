@@ -154,11 +154,7 @@ Label : PROJECT
             Label : OBJECT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  W
-                Label : SUBNAME
-                  X
+                \W\X
               Label : METHOD
                 Y
                 Label : ARGUMENTS

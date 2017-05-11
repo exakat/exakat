@@ -52,5 +52,3 @@ Label : PROJECT
                     'i'
                   Label : CONCAT
                     'j'
-            Label : NAME
-              array

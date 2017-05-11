@@ -33,8 +33,6 @@ Label : PROJECT
                             'D'
                           Label : VALUE
                             $f
-                      Label : NAME
-                        array
                   Label : NAME
                     C
                 Label : OBJECT

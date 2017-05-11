@@ -25,19 +25,13 @@ Label : PROJECT
               Label : NULLABLE
                 ?
               Label : TYPEHINT
-                \
-                Label : SUBNAME
-                  a
-                Label : SUBNAME
-                  b
+                \a\b
             Label : ARGUMENT
               $z
               Label : NULLABLE
                 ?
               Label : TYPEHINT
-                \
-                Label : SUBNAME
-                  a
+                \a
           Label : BLOCK
             {}
             Label : ELEMENT

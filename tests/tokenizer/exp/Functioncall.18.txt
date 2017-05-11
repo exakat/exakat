@@ -22,5 +22,3 @@ Label : PROJECT
                   1
                 Label : VALUE
                   2
-            Label : NAME
-              array

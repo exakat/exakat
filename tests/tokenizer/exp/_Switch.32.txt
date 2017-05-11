@@ -110,8 +110,6 @@ Label : PROJECT
                             'w'
                           Label : CONCAT
                             $x
-                      Label : NAME
-                        array
                     Label : THEN
                       [
                       Label : INDEX

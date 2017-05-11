@@ -237,8 +237,6 @@ Label : PROJECT
                               'AK'
                             Label : VALUE
                               'AL'
-                        Label : NAME
-                          array
                     Label : NAME
                       AI
                   Label : OBJECT

@@ -15,10 +15,6 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : IMPLEMENTS
-            \
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+            \B\C
           Label : NAME
             A

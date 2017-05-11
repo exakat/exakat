@@ -19,17 +19,11 @@ Label : PROJECT
               Label : DEFAULT
                 null
               Label : TYPEHINT
-                \
-                Label : SUBNAME
-                  A
+                \A
             Label : ARGUMENT
               $d
               Label : TYPEHINT
-                \
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  D
+                \C\D
           Label : BLOCK
             {}
             Label : ELEMENT
@@ -53,11 +47,7 @@ Label : PROJECT
             Label : ARGUMENT
               $d
               Label : TYPEHINT
-                \
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  D
+                \C\D
           Label : BLOCK
             {}
             Label : ELEMENT

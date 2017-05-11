@@ -116,27 +116,27 @@ Label : PROJECT
                     "\n"
               Label : NAME
                 echo
+          Label : DEFINITION
+            C
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'D'
+              Label : ARGUMENT
+                $c
+            Label : NAME
+              C
+          Label : DEFINITION
+            C
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                'D'
+              Label : ARGUMENT
+                $c
+            Label : NAME
+              C
           Label : NAME
             C
-          Label : DEFINITION
-            C
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'D'
-              Label : ARGUMENT
-                $c
-            Label : NAME
-              C
-          Label : DEFINITION
-            C
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'D'
-              Label : ARGUMENT
-                $c
-            Label : NAME
-              C
         Label : ELEMENT
           Void

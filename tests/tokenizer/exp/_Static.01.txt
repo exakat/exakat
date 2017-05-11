@@ -44,8 +44,6 @@ Label : PROJECT
                     (
                     Label : ARGUMENT
                       Void
-                  Label : NAME
-                    array
               Label : STATIC
                 static
             Label : ELEMENT

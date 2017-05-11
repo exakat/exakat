@@ -12,10 +12,10 @@ Label : PROJECT
           const
           Label : CONST
             const
-            Label : DEFINITION
-              x
             Label : NAME
               x
+              Label : DEFINITION
+                x
             Label : VALUE
               array
               Label : ARGUMENTS
@@ -26,8 +26,6 @@ Label : PROJECT
                   3
                 Label : ARGUMENT
                   4
-              Label : NAME
-                array
         Label : ELEMENT
           echo
           Label : ARGUMENTS

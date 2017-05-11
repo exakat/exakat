@@ -21,7 +21,7 @@ Label : PROJECT
             Label : RIGHT
               new
               Label : NEW
-                \
+                \C
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
@@ -55,15 +55,11 @@ Label : PROJECT
                       Label : PROPERTY
                         H
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    C
+                  \C
           Label : RIGHT
             ::
             Label : CLASS
-              \
-              Label : SUBNAME
-                J
+              \J
             Label : METHOD
               K
               Label : ARGUMENTS

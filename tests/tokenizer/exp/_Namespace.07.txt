@@ -27,11 +27,7 @@ Label : PROJECT
                 Label : ELEMENT
                   Void
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  MyProject
-                Label : SUBNAME
-                  Connection
+                MyProject\Connection
               Label : NAME
                 Connection
             Label : ELEMENT
@@ -45,17 +41,13 @@ Label : PROJECT
                 Label : ELEMENT
                   Void
               Label : DEFINITION
-                \
+                MyProject\connect
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
                     Void
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    MyProject
-                  Label : SUBNAME
-                    connect
+                  MyProject\connect
               Label : NAME
                 connect
           Label : NAME
@@ -77,17 +69,13 @@ Label : PROJECT
               Label : LEFT
                 $a
               Label : RIGHT
-                \
+                MyProject\connect
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
                     Void
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    MyProject
-                  Label : SUBNAME
-                    connect
+                  MyProject\connect
             Label : ELEMENT
               echo
               Label : ARGUMENTS
@@ -95,11 +83,7 @@ Label : PROJECT
                 Label : ARGUMENT
                   ::
                   Label : CLASS
-                    \
-                    Label : SUBNAME
-                      MyProject
-                    Label : SUBNAME
-                      Connection
+                    MyProject\Connection
                   Label : METHOD
                     start
                     Label : ARGUMENTS

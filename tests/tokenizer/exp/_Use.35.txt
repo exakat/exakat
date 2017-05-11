@@ -111,11 +111,13 @@ Label : PROJECT
               Label : PUBLIC
                 public
           Label : DEFINITION
+            'Hello'
+          Label : DEFINITION
+            $this
+          Label : DEFINITION, DEFINITION
             Hello
           Label : NAME
             Hello
-          Label : DEFINITION
-            'Hello'
         Label : ELEMENT
           class
           Label : BLOCK
@@ -172,5 +174,9 @@ Label : PROJECT
                 setWorld
               Label : PUBLIC
                 public
+          Label : DEFINITION
+            $this
+          Label : DEFINITION
+            $this
           Label : NAME
             MyHelloWorld

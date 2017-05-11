@@ -50,8 +50,6 @@ Label : PROJECT
                       $c
                   Label : RIGHT
                     3
-            Label : ELEMENT
-              Void
           Label : THEN
             ;
             Label : ELEMENT

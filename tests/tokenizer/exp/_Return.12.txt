@@ -16,5 +16,3 @@ Label : PROJECT
               (
               Label : ARGUMENT
                 1
-            Label : NAME
-              array

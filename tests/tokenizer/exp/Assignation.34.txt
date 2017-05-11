@@ -21,10 +21,6 @@ Label : PROJECT
               Label : BLOCK
                 {}
                 Label : ELEMENT
-                  yield
-                  Label : YIELD
-                    Void
-                Label : ELEMENT
                   =
                   Label : LEFT
                     $a

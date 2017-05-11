@@ -26,8 +26,6 @@ Label : PROJECT
                     $b
                   Label : RIGHT
                     $c
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT
@@ -54,5 +52,3 @@ Label : PROJECT
                     'e'
               Label : ARGUMENT
                 'g'
-            Label : NAME
-              array

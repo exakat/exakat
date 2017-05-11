@@ -11,19 +11,19 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               use
               Label : GROUPUSE
-                \
-                Label : SUBNAME
-                  a
+                a
               Label : USE
                 A
               Label : USE
                 fa
                 Label : FUNCTION
                   function
+              Label : USE
+                B\D
               Label : USE
                 fb
                 Label : FUNCTION
@@ -40,12 +40,6 @@ Label : PROJECT
                 cd
                 Label : CONST
                   const
-              Label : USE
-                \
-                Label : SUBNAME
-                  B
-                Label : SUBNAME
-                  D
             Label : ELEMENT
               foo
               Label : ARGUMENTS

@@ -40,7 +40,3 @@ Label : PROJECT
                           'c'
                   Label : NAME
                     require_once
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              array

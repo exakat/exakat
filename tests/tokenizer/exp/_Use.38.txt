@@ -57,15 +57,15 @@ Label : PROJECT
           Label : DEFINITION
             A
           Label : DEFINITION
-            A
-          Label : DEFINITION
-            A
-          Label : NAME
-            A
-          Label : DEFINITION
             'a'
           Label : DEFINITION
             'A'
+          Label : DEFINITION, DEFINITION
+            A
+          Label : DEFINITION, DEFINITION
+            A
+          Label : NAME
+            A
         Label : ELEMENT
           trait
           Label : BLOCK
@@ -116,12 +116,16 @@ Label : PROJECT
             B
           Label : DEFINITION
             B
-          Label : NAME
+          Label : DEFINITION
+            B
+          Label : DEFINITION
             B
           Label : DEFINITION
             'b'
           Label : DEFINITION
             'B'
+          Label : NAME
+            B
         Label : ELEMENT
           class
           Label : BLOCK

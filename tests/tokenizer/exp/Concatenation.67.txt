@@ -22,8 +22,6 @@ Label : PROJECT
                   'c'
                 Label : VALUE
                   3
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT
@@ -38,8 +36,6 @@ Label : PROJECT
                   'c2'
                 Label : VALUE
                   4
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT
@@ -88,8 +84,6 @@ Label : PROJECT
                         $b
                   Label : CONCAT
                     $d
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT
@@ -116,8 +110,6 @@ Label : PROJECT
                         $b2
                   Label : CONCAT
                     $d2
-            Label : NAME
-              array
         Label : ELEMENT
           =
           Label : LEFT
@@ -142,8 +134,6 @@ Label : PROJECT
                       $b3
                   Label : CONCAT
                     $d3
-            Label : NAME
-              array
         Label : ELEMENT
           print_r
           Label : ARGUMENTS

@@ -14,38 +14,36 @@ Label : PROJECT
             {}
             Label : ELEMENT
               const
-              Label : PUBLIC
-                public
               Label : CONST
                 const
                 Label : NAME
                   a
                 Label : VALUE
                   1
+              Label : PUBLIC
+                public
             Label : ELEMENT
               const
-              Label : PROTECTED
-                protected
               Label : CONST
                 const
                 Label : NAME
                   B
                 Label : VALUE
                   1
+              Label : PROTECTED
+                protected
             Label : ELEMENT
               const
-              Label : PRIVATE
-                private
               Label : CONST
                 const
                 Label : NAME
                   C
                 Label : VALUE
                   1
+              Label : PRIVATE
+                private
             Label : ELEMENT
               const
-              Label : PUBLIC
-                public
               Label : CONST
                 const
                 Label : NAME
@@ -58,10 +56,10 @@ Label : PROJECT
                   a3
                 Label : VALUE
                   1
+              Label : PUBLIC
+                public
             Label : ELEMENT
               const
-              Label : PROTECTED
-                protected
               Label : CONST
                 const
                 Label : NAME
@@ -74,10 +72,10 @@ Label : PROJECT
                   B2
                 Label : VALUE
                   3
+              Label : PROTECTED
+                protected
             Label : ELEMENT
               const
-              Label : PRIVATE
-                private
               Label : CONST
                 const
                 Label : NAME
@@ -102,5 +100,7 @@ Label : PROJECT
                   c4
                 Label : VALUE
                   5
+              Label : PRIVATE
+                private
           Label : NAME
             X

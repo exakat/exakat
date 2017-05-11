@@ -14,14 +14,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               var
-              Label : VAR
-                var
-              Label : PPP
-                =
-                Label : LEFT
-                  $g
-                Label : RIGHT
-                  6
               Label : PPP
                 =
                 Label : LEFT
@@ -52,5 +44,13 @@ Label : PROJECT
                   $f
                 Label : RIGHT
                   5
+              Label : PPP
+                =
+                Label : LEFT
+                  $g
+                Label : RIGHT
+                  6
+              Label : VAR
+                var
           Label : NAME
             x

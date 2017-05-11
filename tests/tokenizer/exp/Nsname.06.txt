@@ -9,14 +9,10 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          \
+          a\b
           Label : ARGUMENTS
             (
             Label : ARGUMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              a
-            Label : SUBNAME
-              b
+            a\b

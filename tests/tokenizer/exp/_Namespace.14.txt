@@ -11,25 +11,25 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
           Label : NAME
             B
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
           Label : NAME
             C
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
           Label : NAME
             D
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               class
               Label : BLOCK
@@ -253,15 +253,13 @@ Label : PROJECT
                       Label : THROW
                         new
                         Label : NEW
-                          \
+                          \AL
                           Label : ARGUMENTS
                             (
                             Label : ARGUMENT
                               'AM'
                           Label : NAME
-                            \
-                            Label : SUBNAME
-                              AL
+                            \AL
                   Label : NAME
                     F
                   Label : STATIC
@@ -269,8 +267,4 @@ Label : PROJECT
               Label : NAME
                 E
           Label : NAME
-            \
-            Label : SUBNAME
-              C
-            Label : SUBNAME
-              D
+            C\D

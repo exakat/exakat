@@ -26,13 +26,7 @@ Label : PROJECT
                     Label : CONSTANT
                       H
               Label : USE
-                \
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
-                Label : SUBNAME
-                  F
+                \D\E\F
           Label : EXTENDS
             C
           Label : NAME

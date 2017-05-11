@@ -15,10 +15,4 @@ Label : PROJECT
             Label : ELEMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+            A\B\C

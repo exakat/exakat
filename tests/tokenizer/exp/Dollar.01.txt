@@ -20,8 +20,6 @@ Label : PROJECT
                 $
                 Label : NAME
                   $name
-          Label : NAME
-            array
         Label : ELEMENT
           array
           Label : ARGUMENTS
@@ -34,5 +32,3 @@ Label : PROJECT
                 $
                 Label : NAME
                   $name
-          Label : NAME
-            array

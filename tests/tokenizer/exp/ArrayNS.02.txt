@@ -28,5 +28,3 @@ Label : PROJECT
                   'c'
                 Label : VALUE
                   's'
-            Label : NAME
-              [

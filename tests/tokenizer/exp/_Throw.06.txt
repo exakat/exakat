@@ -13,7 +13,7 @@ Label : PROJECT
           Label : THROW
             new
             Label : NEW
-              \
+              \A
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
@@ -33,6 +33,4 @@ Label : PROJECT
                   Label : NAME
                     b
               Label : NAME
-                \
-                Label : SUBNAME
-                  A
+                \A

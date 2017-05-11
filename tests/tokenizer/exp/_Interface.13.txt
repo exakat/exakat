@@ -26,8 +26,6 @@ Label : PROJECT
                   Void
               Label : NAME
                 foo
-          Label : DEFINITION
-            self
           Label : NAME
             c
         Label : ELEMENT
@@ -46,8 +44,6 @@ Label : PROJECT
                 Void
               Label : NAME
                 foo
-          Label : DEFINITION
-            self
           Label : NAME
             i
         Label : ELEMENT
@@ -68,7 +64,5 @@ Label : PROJECT
                   Void
               Label : NAME
                 foo
-          Label : DEFINITION
-            self
           Label : NAME
             t

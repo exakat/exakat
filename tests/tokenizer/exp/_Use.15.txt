@@ -28,6 +28,8 @@ Label : PROJECT
                 one_identifier
               Label : DEFINITION
                 one_identifier
+                Label : DEFINITION
+                  one_identifier
               Label : NAME
                 one_identifier
             Label : ELEMENT
@@ -43,11 +45,11 @@ Label : PROJECT
                     Label : VALUE
                       2
               Label : DEFINITION
-                absolute_path
+                \absolute_path
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  absolute_path
+                absolute_path
+                Label : DEFINITION
+                  \absolute_path
               Label : NAME
                 absolute_path
             Label : ELEMENT
@@ -63,7 +65,15 @@ Label : PROJECT
                     Label : VALUE
                       2
               Label : DEFINITION
+                one_identifier3
+              Label : DEFINITION
                 a1
+                Label : DEFINITION
+                  as
+                  Label : ALIAS
+                    a1
+                  Label : NAME
+                    one_identifier3
               Label : NAME
                 one_identifier3
             Label : ELEMENT
@@ -79,9 +89,7 @@ Label : PROJECT
                     Label : VALUE
                       2
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  a1
+                \a1
               Label : NAME
                 a1
           Label : NAME
@@ -103,13 +111,11 @@ Label : PROJECT
                     Label : VALUE
                       2
               Label : DEFINITION
-                path
+                complex\path
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  complex
-                Label : SUBNAME
-                  path
+                path
+                Label : DEFINITION
+                  complex\path
               Label : NAME
                 path
           Label : NAME
@@ -131,23 +137,15 @@ Label : PROJECT
                     Label : VALUE
                       2
               Label : DEFINITION
-                path2
+                \absolute\complex\path2
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  absolute
-                Label : SUBNAME
-                  complex
-                Label : SUBNAME
-                  path2
+                path2
+                Label : DEFINITION
+                  \absolute\complex\path2
               Label : NAME
                 path2
           Label : NAME
-            \
-            Label : SUBNAME
-              absolute
-            Label : SUBNAME
-              complex
+            absolute\complex
         Label : ELEMENT
           namespace
           Label : BLOCK
@@ -159,32 +157,20 @@ Label : PROJECT
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : SUBNAME
-                  absolute_path
+                \absolute_path
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : SUBNAME
-                  complex
-                Label : SUBNAME
-                  path
+                complex\path
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : SUBNAME
-                  absolute
-                Label : SUBNAME
-                  complex
-                Label : SUBNAME
-                  path2
+                \absolute\complex\path2
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a1
                 Label : NAME
                   one_identifier3
@@ -192,38 +178,26 @@ Label : PROJECT
               use
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a2
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    absolute_path3
+                  \absolute_path3
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a3
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    complex
-                  Label : SUBNAME
-                    path3
+                  complex\path3
             Label : ELEMENT
               use
               Label : USE
                 as
-                Label : AS
+                Label : ALIAS
                   a4
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    absolute
-                  Label : SUBNAME
-                    complex
-                  Label : SUBNAME
-                    path32
+                  \absolute\complex\path32
             Label : ELEMENT
               try
               Label : BLOCK
@@ -238,6 +212,8 @@ Label : PROJECT
                     Void
                 Label : CLASS
                   one_identifier
+                  Label : DEFINITION
+                    one_identifier
                 Label : VARIABLE
                   $e
               Label : CATCH
@@ -248,6 +224,8 @@ Label : PROJECT
                     Void
                 Label : CLASS
                   absolute_path
+                  Label : DEFINITION
+                    \absolute_path
                 Label : VARIABLE
                   $e
               Label : CATCH
@@ -258,6 +236,8 @@ Label : PROJECT
                     Void
                 Label : CLASS
                   path
+                  Label : DEFINITION
+                    complex\path
                 Label : VARIABLE
                   $e
               Label : CATCH
@@ -268,6 +248,8 @@ Label : PROJECT
                     Void
                 Label : CLASS
                   path2
+                  Label : DEFINITION
+                    \absolute\complex\path2
                 Label : VARIABLE
                   $e
               Label : CATCH
@@ -278,6 +260,12 @@ Label : PROJECT
                     Void
                 Label : CLASS
                   a1
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a1
+                    Label : NAME
+                      one_identifier3
                 Label : VARIABLE
                   $e
               Label : CATCH
@@ -287,9 +275,7 @@ Label : PROJECT
                   Label : ELEMENT
                     Void
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    a1
+                  \a1
                 Label : VARIABLE
                   $e
               Label : CATCH
@@ -310,6 +296,12 @@ Label : PROJECT
                     Void
                 Label : CLASS
                   a2
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a2
+                    Label : NAME
+                      \absolute_path3
                 Label : VARIABLE
                   $e
               Label : CATCH
@@ -320,6 +312,12 @@ Label : PROJECT
                     Void
                 Label : CLASS
                   a3
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a3
+                    Label : NAME
+                      complex\path3
                 Label : VARIABLE
                   $e
               Label : CATCH
@@ -330,6 +328,12 @@ Label : PROJECT
                     Void
                 Label : CLASS
                   a4
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a4
+                    Label : NAME
+                      \absolute\complex\path32
                 Label : VARIABLE
                   $e
           Label : NAME

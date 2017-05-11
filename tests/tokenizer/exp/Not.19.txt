@@ -15,9 +15,7 @@ Label : PROJECT
           Label : RIGHT
             ::
             Label : CLASS
-              \
-              Label : SUBNAME
-                b
+              \b
             Label : METHOD
               instance
               Label : ARGUMENTS
@@ -31,9 +29,7 @@ Label : PROJECT
                   Label : NOT
                     instanceof
                     Label : CLASS
-                      \
-                      Label : SUBNAME
-                        E
+                      \E
                     Label : VARIABLE
                       $d
               Label : NAME

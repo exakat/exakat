@@ -11,21 +11,11 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : SUBNAME
-                  D
-                Label : SUBNAME
-                  E
-                Label : SUBNAME
-                  F
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  H
+                D\E\F\C\H
             Label : ELEMENT
               interface
               Label : BLOCK
@@ -42,15 +32,13 @@ Label : PROJECT
                     K
                   Label : PUBLIC
                     public
-              Label : NAME
-                I
               Label : EXTENDS
                 H
+                Label : DEFINITION
+                  D\E\F\C\H
+              Label : NAME
+                I
             Label : ELEMENT
               Void
           Label : NAME
-            \
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
+            B\C

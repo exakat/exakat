@@ -25,15 +25,13 @@ Label : PROJECT
                     Label : THROW
                       new
                       Label : NEW
-                        \
+                        \C
                         Label : ARGUMENTS
                           (
                           Label : ARGUMENT
                             'D'
                         Label : NAME
-                          \
-                          Label : SUBNAME
-                            C
+                          \C
             Label : ELEMENT
               default
               Label : CODE
@@ -45,15 +43,13 @@ Label : PROJECT
                     Label : THROW
                       new
                       Label : NEW
-                        \
+                        \C
                         Label : ARGUMENTS
                           (
                           Label : ARGUMENT
                             'D'
                         Label : NAME
-                          \
-                          Label : SUBNAME
-                            C
+                          \C
           Label : NAME
             >>
             Label : LEFT

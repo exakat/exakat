@@ -18,11 +18,7 @@ Label : PROJECT
             Label : CONDITION
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  C
-                Label : SUBNAME
-                  D
+                \C\D
               Label : METHOD
                 E
                 Label : ARGUMENTS
@@ -48,11 +44,7 @@ Label : PROJECT
             Label : ARGUMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  I
-                Label : SUBNAME
-                  J
+                I\J
               Label : METHOD
                 K
                 Label : ARGUMENTS

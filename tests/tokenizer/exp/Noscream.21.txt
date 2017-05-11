@@ -42,8 +42,6 @@ Label : PROJECT
                         INF
                       Label : ARGUMENT
                         NAN
-                    Label : NAME
-                      [
                 Label : NAME
                   in_array
               Label : THEN

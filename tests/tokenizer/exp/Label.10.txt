@@ -17,9 +17,7 @@ Label : PROJECT
               Label : CASE
                 instanceof
                 Label : CLASS
-                  \
-                  Label : SUBNAME
-                    C
+                  \C
                 Label : VARIABLE
                   $b
               Label : CODE

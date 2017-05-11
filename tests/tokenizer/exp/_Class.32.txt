@@ -17,18 +17,18 @@ Label : PROJECT
               Label : PPP
                 =
                 Label : LEFT
-                  $h
-                Label : RIGHT
-                  5
-              Label : VAR
-                var
-              Label : PPP
-                =
-                Label : LEFT
                   $e
                 Label : RIGHT
                   4
               Label : PPP
+                =
+                Label : LEFT
+                  $h
+                Label : RIGHT
+                  5
+              Label : PPP
                 $g
+              Label : VAR
+                var
           Label : NAME
             x

@@ -62,5 +62,3 @@ Label : PROJECT
                     6
                   Label : VARIABLE
                     $i
-            Label : NAME
-              array

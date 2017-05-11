@@ -45,5 +45,3 @@ Label : PROJECT
                     $c
                   Label : RIGHT
                     $d
-            Label : ELEMENT
-              Void

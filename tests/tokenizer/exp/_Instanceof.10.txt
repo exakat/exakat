@@ -76,5 +76,9 @@ Label : PROJECT
                 C
               Label : PUBLIC
                 public
+          Label : DEFINITION
+            $this
+          Label : DEFINITION
+            $this
           Label : NAME
             B

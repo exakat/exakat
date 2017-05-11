@@ -15,17 +15,17 @@ Label : PROJECT
             Label : ELEMENT
               var
               Label : PPP
-                $h
-              Label : VAR
-                var
-              Label : PPP
-                $e
-              Label : PPP
                 =
                 Label : LEFT
                   $g
                 Label : RIGHT
                   4
+              Label : PPP
+                $e
+              Label : PPP
+                $h
+              Label : VAR
+                var
             Label : ELEMENT
               const
               Label : CONST

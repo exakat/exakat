@@ -22,7 +22,3 @@ Label : PROJECT
                   'B'
                 Label : VALUE
                   0
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              [

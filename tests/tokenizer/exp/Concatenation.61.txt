@@ -42,11 +42,7 @@ Label : PROJECT
                                 'F'
                               Label : VALUE
                                 $b
-                          Label : NAME
-                            array
                       Label : NAME
                         D
                   Label : CONCAT
                     'G'
-            Label : NAME
-              array

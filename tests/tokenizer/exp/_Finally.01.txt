@@ -30,18 +30,6 @@ Label : PROJECT
                   createResource
             Label : ELEMENT
               try
-              Label : FINALLY
-                finally
-                Label : BLOCK
-                  {}
-                  Label : ELEMENT
-                    releaseResource
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $resource
-                    Label : NAME
-                      releaseResource
               Label : BLOCK
                 {}
                 Label : ELEMENT
@@ -210,6 +198,18 @@ Label : PROJECT
                   Exception5
                 Label : VARIABLE
                   $e
+              Label : FINALLY
+                finally
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    releaseResource
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $resource
+                    Label : NAME
+                      releaseResource
           Label : NAME
             doSomething
         Label : ELEMENT

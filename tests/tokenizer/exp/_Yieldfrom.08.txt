@@ -38,7 +38,5 @@ Label : PROJECT
                             Void
                         Label : NAME
                           c
-                Label : NAME
-                  [
           Label : NAME
             a

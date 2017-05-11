@@ -19,11 +19,7 @@ Label : PROJECT
               Label : RIGHT
                 new
                 Label : NEW
-                  \
-                  Label : SUBNAME
-                    namespace
-                  Label : SUBNAME
-                    Another
+                  namespace\Another
           Label : NAME
             A
         Label : ELEMENT

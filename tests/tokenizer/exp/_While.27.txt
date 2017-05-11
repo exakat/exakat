@@ -35,8 +35,6 @@ Label : PROJECT
                               'F'
                             Label : VALUE
                               $a
-                        Label : NAME
-                          array
                     Label : NAME
                       D
               Label : NAME

@@ -53,8 +53,6 @@ Label : PROJECT
                 ;
                 Label : ELEMENT
                   Void
-            Label : ELEMENT
-              Void
           Label : THEN
             ;
             Label : ELEMENT

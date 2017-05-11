@@ -20,8 +20,6 @@ Label : PROJECT
                   (
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  array
             Label : ARGUMENT
               $c
               Label : DEFAULT
@@ -30,8 +28,6 @@ Label : PROJECT
                   (
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  array
             Label : ARGUMENT
               $d
               Label : DEFAULT
@@ -40,8 +36,6 @@ Label : PROJECT
                   (
                   Label : ARGUMENT
                     Void
-                Label : NAME
-                  array
           Label : BLOCK
             {}
             Label : ELEMENT

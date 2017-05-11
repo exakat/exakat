@@ -10,7 +10,7 @@ Label : PROJECT
         Label : ELEMENT
           namespace
           Label : BLOCK
-            
+             
             Label : ELEMENT
               trait
               Label : BLOCK
@@ -20,8 +20,4 @@ Label : PROJECT
               Label : NAME
                 C
           Label : NAME
-            \
-            Label : SUBNAME
-              A
-            Label : SUBNAME
-              B
+            A\B

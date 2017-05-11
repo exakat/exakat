@@ -32,7 +32,7 @@ Label : PROJECT
                 sayHello
               Label : PUBLIC
                 public
-          Label : DEFINITION
+          Label : DEFINITION, DEFINITION
             HelloWorld
           Label : NAME
             HelloWorld

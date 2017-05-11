@@ -32,12 +32,8 @@ Label : PROJECT
                           3
                         Label : ARGUMENT
                           2
-                      Label : NAME
-                        array
                   Label : ARGUMENT
                     3
-                Label : NAME
-                  array
             Label : ARGUMENT
               $c
               Label : DEFAULT

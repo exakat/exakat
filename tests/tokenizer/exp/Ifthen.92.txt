@@ -126,8 +126,6 @@ Label : PROJECT
                         G
                     Label : OBJECT
                       $this
-                Label : ELEMENT
-                  Void
             Label : ELEMENT
               ::
               Label : CLASS

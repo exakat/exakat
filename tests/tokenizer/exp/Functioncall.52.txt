@@ -46,8 +46,6 @@ Label : PROJECT
                     'G'
                   Label : VALUE
                     $c
-              Label : NAME
-                array
           Label : NAME
             D
         Label : ELEMENT

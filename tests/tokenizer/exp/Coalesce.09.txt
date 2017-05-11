@@ -90,8 +90,6 @@ Label : PROJECT
                     2
                   Label : ARGUMENT
                     3
-                Label : NAME
-                  [
             Label : ELEMENT
               =
               Label : LEFT
@@ -132,24 +130,24 @@ Label : PROJECT
                           fields
                     Label : NAME
                       count
+          Label : DEFINITION
+            foo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              foo
+          Label : DEFINITION
+            foo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : NAME
+              foo
           Label : NAME
             foo
-          Label : DEFINITION
-            foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              foo
-          Label : DEFINITION
-            foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
-            Label : NAME
-              foo
         Label : ELEMENT
           var_dump
           Label : ARGUMENTS

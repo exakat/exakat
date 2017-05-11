@@ -40,37 +40,23 @@ Label : PROJECT
                             4
                           Label : ARGUMENT
                             5
-                        Label : NAME
-                          [
                       Label : ARGUMENT
                         [
                         Label : ARGUMENTS
                           [
                           Label : ARGUMENT
                             6
-                        Label : NAME
-                          [
-                    Label : NAME
-                      [
                   Label : ARGUMENT
                     [
                     Label : ARGUMENTS
                       [
                       Label : ARGUMENT
                         7
-                    Label : NAME
-                      [
                   Label : ARGUMENT
                     8
-                Label : NAME
-                  [
               Label : ARGUMENT
                 [
                 Label : ARGUMENTS
                   [
                   Label : ARGUMENT
                     9
-                Label : NAME
-                  [
-            Label : NAME
-              [

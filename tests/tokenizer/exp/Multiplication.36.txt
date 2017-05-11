@@ -25,11 +25,7 @@ Label : PROJECT
             Label : ELEMENT
               ::
               Label : CLASS
-                \
-                Label : SUBNAME
-                  B
-                Label : SUBNAME
-                  C
+                \B\C
               Label : METHOD
                 D
                 Label : ARGUMENTS
@@ -41,15 +37,13 @@ Label : PROJECT
                   Label : ARGUMENT
                     +
                     Label : LEFT
-                      \
+                      \E
                       Label : ARGUMENTS
                         (
                         Label : ARGUMENT
                           Void
                       Label : NAME
-                        \
-                        Label : SUBNAME
-                          E
+                        \E
                     Label : RIGHT
                       *
                       Label : LEFT

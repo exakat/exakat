@@ -44,10 +44,6 @@ Label : PROJECT
                         'Q'
                       Label : VALUE
                         'R'
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    array
               Label : ELEMENT
                 if
                 Label : CONDITION
@@ -184,8 +180,6 @@ Label : PROJECT
                               $this
                             Label : PROPERTY
                               AM
-                        Label : NAME
-                          array
                     Label : NAME
                       AH
                   Label : OBJECT
@@ -472,5 +466,3 @@ Label : PROJECT
                       (
                       Label : ARGUMENT
                         Void
-                    Label : NAME
-                      array

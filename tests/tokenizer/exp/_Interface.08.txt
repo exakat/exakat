@@ -24,9 +24,9 @@ Label : PROJECT
                 E
               Label : PUBLIC
                 public
-          Label : NAME
-            B
           Label : EXTENDS
             C
           Label : EXTENDS
             D
+          Label : NAME
+            B

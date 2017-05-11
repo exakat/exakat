@@ -24,14 +24,10 @@ Label : PROJECT
                 Void
               Label : NAME
                 D
+          Label : EXTENDS
+            B\C
           Label : NAME
             A
-          Label : EXTENDS
-            \
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
         Label : ELEMENT
           interface
           Label : BLOCK
@@ -48,20 +44,12 @@ Label : PROJECT
                 Void
               Label : NAME
                 D
+          Label : EXTENDS
+            B\C
+          Label : EXTENDS
+            G\H
           Label : NAME
             A
-          Label : EXTENDS
-            \
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-          Label : EXTENDS
-            \
-            Label : SUBNAME
-              G
-            Label : SUBNAME
-              H
         Label : ELEMENT
           interface
           Label : BLOCK
@@ -78,23 +66,11 @@ Label : PROJECT
                 Void
               Label : NAME
                 D
+          Label : EXTENDS
+            B\C
+          Label : EXTENDS
+            G\H
+          Label : EXTENDS
+            I\J
           Label : NAME
             A
-          Label : EXTENDS
-            \
-            Label : SUBNAME
-              B
-            Label : SUBNAME
-              C
-          Label : EXTENDS
-            \
-            Label : SUBNAME
-              G
-            Label : SUBNAME
-              H
-          Label : EXTENDS
-            \
-            Label : SUBNAME
-              I
-            Label : SUBNAME
-              J

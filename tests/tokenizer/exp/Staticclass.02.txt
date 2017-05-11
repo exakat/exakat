@@ -20,22 +20,22 @@ Label : PROJECT
                   Void
               Label : DEFINITION
                 X
+                Label : DEFINITION
+                  as
+                  Label : ALIAS
+                    X
+                  Label : NAME
+                    NS1\ClassName1
               Label : DEFINITION
                 ClassName1
-              Label : DEFINITION
-                \
                 Label : DEFINITION
-                  ClassName1
-                Label : SUBNAME
-                  NS1
-                Label : SUBNAME
-                  ClassName1
+                  NS1\ClassName1
               Label : DEFINITION
-                \
-                Label : SUBNAME
-                  NS1
-                Label : SUBNAME
-                  ClassName1
+                NS1\ClassName1
+              Label : DEFINITION
+                NS1\ClassName1
+              Label : DEFINITION
+                \NS1\ClassName1
               Label : NAME
                 ClassName1
           Label : NAME
@@ -48,26 +48,14 @@ Label : PROJECT
               use
               Label : USE
                 as
-                Label : AS
-                  X
-                Label : DEFINITION
+                Label : ALIAS
                   X
                 Label : NAME
-                  \
-                  Label : SUBNAME
-                    NS1
-                  Label : SUBNAME
-                    ClassName1
+                  NS1\ClassName1
             Label : ELEMENT
               use
               Label : USE
-                \
-                Label : DEFINITION
-                  ClassName1
-                Label : SUBNAME
-                  NS1
-                Label : SUBNAME
-                  ClassName1
+                NS1\ClassName1
             Label : ELEMENT
               class
               Label : BLOCK
@@ -150,6 +138,12 @@ Label : PROJECT
                     ::
                     Label : CLASS
                       X
+                      Label : DEFINITION
+                        as
+                        Label : ALIAS
+                          X
+                        Label : NAME
+                          NS1\ClassName1
                     Label : CLASS
                       class
                   Label : CONCAT
@@ -166,6 +160,8 @@ Label : PROJECT
                     ::
                     Label : CLASS
                       ClassName1
+                      Label : DEFINITION
+                        NS1\ClassName1
                     Label : CLASS
                       class
                   Label : CONCAT
@@ -183,11 +179,7 @@ Label : PROJECT
                     Label : CLASS
                       class
                     Label : CLASS
-                      \
-                      Label : SUBNAME
-                        NS1
-                      Label : SUBNAME
-                        ClassName1
+                      NS1\ClassName1
                   Label : CONCAT
                     "\n"
               Label : NAME
@@ -203,11 +195,7 @@ Label : PROJECT
                     Label : CLASS
                       class
                     Label : CLASS
-                      \
-                      Label : SUBNAME
-                        NS1
-                      Label : SUBNAME
-                        ClassName1
+                      \NS1\ClassName1
                   Label : CONCAT
                     "\n"
               Label : NAME
