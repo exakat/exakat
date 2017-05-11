@@ -33,11 +33,7 @@ use Exakat\Tasks\CleanDb;
 class Test extends Tasks {
     const CONCURENCE = self::NONE;
 
-    private $project_dir = '.';
-
     public function run() {
-        $project = 'test';
-
         // Check for requested file
         if (!empty($this->config->filename) && !file_exists($this->config->filename)) {
             throw new NoSuchFile($this->config->filename);
@@ -46,11 +42,10 @@ class Test extends Tasks {
         }
 
         // Check for requested analyze
-        $analyzer = $this->config->program;
-        if (!Analyzer::getClass($analyzer)) {
-            throw new NoSuchAnalyzer($analyzer);
+        $analyzerName = $this->config->program;
+        if (!Analyzer::getClass($analyzerName)) {
+            throw new NoSuchAnalyzer($analyzerName);
         }
-        $analyzers_class = array($analyzer);
 
         display("Cleaning DB\n");
         $clean = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
