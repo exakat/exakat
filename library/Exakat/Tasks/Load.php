@@ -1975,7 +1975,9 @@ class Load extends Tasks {
 
         $this->pushExpression($functioncall);
 
-        if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG 
+        if ($getFullnspath === self::WITHOUT_FULLNSPATH) {
+            return $functioncall;
+        } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG 
              && ($getFullnspath === self::WITH_FULLNSPATH) ) {
             $this->processSemicolon();
         } else {
