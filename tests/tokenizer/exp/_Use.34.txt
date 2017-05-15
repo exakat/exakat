@@ -206,6 +206,10 @@ Label : PROJECT
                     __construct
               Label : DEFINITION
                 DF2
+                Label : DEFINITION
+                  DF2
+              Label : DEFINITION
+                DF2
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
@@ -214,10 +218,6 @@ Label : PROJECT
                   DF2
                   Label : DEFINITION
                     DF2
-              Label : DEFINITION
-                DF2
-                Label : DEFINITION
-                  DF2
               Label : NAME
                 DF2
           Label : NAME

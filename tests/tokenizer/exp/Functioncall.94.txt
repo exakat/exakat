@@ -50,15 +50,15 @@ Label : PROJECT
             $a
         Label : ELEMENT
           ->
-          Label : METHOD
-            x2
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                3
-              Label : ARGUMENT
-                4
-            Label : NAME
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              4
+          Label : NAME
+            ->
+            Label : METHOD
               x2
               Label : ARGUMENTS
                 (
@@ -68,27 +68,27 @@ Label : PROJECT
                   2
               Label : NAME
                 x2
-          Label : OBJECT
-            $a
+            Label : OBJECT
+              $a
         Label : ELEMENT
           ->
-          Label : METHOD
-            x3
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              5
+            Label : ARGUMENT
+              6
+          Label : NAME
+            ->
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                5
+                3
               Label : ARGUMENT
-                6
+                4
             Label : NAME
-              x3
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  3
-                Label : ARGUMENT
-                  4
-              Label : NAME
+              ->
+              Label : METHOD
                 x3
                 Label : ARGUMENTS
                   (
@@ -98,35 +98,35 @@ Label : PROJECT
                     2
                 Label : NAME
                   x3
-          Label : OBJECT
-            $a
+              Label : OBJECT
+                $a
         Label : ELEMENT
           ->
-          Label : METHOD
-            x4
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              7
+            Label : ARGUMENT
+              8
+          Label : NAME
+            ->
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                7
+                5
               Label : ARGUMENT
-                8
+                6
             Label : NAME
-              x4
+              ->
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
-                  5
+                  3
                 Label : ARGUMENT
-                  6
+                  4
               Label : NAME
-                x4
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    3
-                  Label : ARGUMENT
-                    4
-                Label : NAME
+                ->
+                Label : METHOD
                   x4
                   Label : ARGUMENTS
                     (
@@ -136,5 +136,5 @@ Label : PROJECT
                       2
                   Label : NAME
                     x4
-          Label : OBJECT
-            $a
+                Label : OBJECT
+                  $a

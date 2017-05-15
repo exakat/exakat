@@ -24,13 +24,13 @@ Label : PROJECT
               f
         Label : ELEMENT
           ->
-          Label : METHOD
-            c
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
-            Label : NAME
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              1
+          Label : NAME
+            ->
+            Label : METHOD
               c
               Label : ARGUMENTS
                 (
@@ -38,23 +38,23 @@ Label : PROJECT
                   Void
               Label : NAME
                 c
-          Label : OBJECT
-            $c
+            Label : OBJECT
+              $c
         Label : ELEMENT
           ->
-          Label : METHOD
-            c
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              4
+          Label : NAME
+            ->
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                4
+                3
             Label : NAME
-              c
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  3
-              Label : NAME
+              ->
+              Label : METHOD
                 c
                 Label : ARGUMENTS
                   (
@@ -62,29 +62,29 @@ Label : PROJECT
                     2
                 Label : NAME
                   c
-          Label : OBJECT
-            $c
+              Label : OBJECT
+                $c
         Label : ELEMENT
           ->
-          Label : METHOD
-            c
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              5
+          Label : NAME
+            ->
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                5
+                4
             Label : NAME
-              c
+              ->
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
-                  4
+                  3
               Label : NAME
-                c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    3
-                Label : NAME
+                ->
+                Label : METHOD
                   c
                   Label : ARGUMENTS
                     (
@@ -92,5 +92,5 @@ Label : PROJECT
                       2
                   Label : NAME
                     c
-          Label : OBJECT
-            $c
+                Label : OBJECT
+                  $c

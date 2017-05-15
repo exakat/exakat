@@ -24,15 +24,15 @@ Label : PROJECT
               f
         Label : ELEMENT
           ::
-          Label : CLASS
-            D
-          Label : METHOD
-            c
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
-            Label : NAME
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              1
+          Label : NAME
+            ::
+            Label : CLASS
+              D
+            Label : METHOD
               c
               Label : ARGUMENTS
                 (
@@ -42,21 +42,21 @@ Label : PROJECT
                 c
         Label : ELEMENT
           ::
-          Label : CLASS
-            D
-          Label : METHOD
-            c
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              14
+          Label : NAME
+            ::
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                14
+                13
             Label : NAME
-              c
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  13
-              Label : NAME
+              ::
+              Label : CLASS
+                D
+              Label : METHOD
                 c
                 Label : ARGUMENTS
                   (
@@ -66,27 +66,27 @@ Label : PROJECT
                   c
         Label : ELEMENT
           ::
-          Label : CLASS
-            D
-          Label : METHOD
-            c
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              5
+          Label : NAME
+            ::
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                5
+                4
             Label : NAME
-              c
+              ::
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
-                  4
+                  3
               Label : NAME
-                c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    3
-                Label : NAME
+                ::
+                Label : CLASS
+                  D
+                Label : METHOD
                   c
                   Label : ARGUMENTS
                     (

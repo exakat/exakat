@@ -118,14 +118,14 @@ Label : PROJECT
                 public
           Label : DEFINITION
             B
+          Label : DEFINITION
+            B
             Label : ARGUMENTS
               (
               Label : ARGUMENT
                 Void
             Label : NAME
               B
-          Label : DEFINITION
-            B
           Label : DEFINITION
             $this
           Label : DEFINITION

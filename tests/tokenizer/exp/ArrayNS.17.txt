@@ -45,14 +45,12 @@ Label : PROJECT
                 Label : KEY
                   'E'
                 Label : VALUE
-                  ->
-                  Label : OBJECT
-                    $y
-                  Label : PROPERTY
-                    [
-                    Label : INDEX
-                      3
-                    Label : VARIABLE
+                  [
+                  Label : INDEX
+                    3
+                  Label : VARIABLE
+                    ->
+                    Label : METHOD
                       z
                       Label : ARGUMENTS
                         (
@@ -60,3 +58,5 @@ Label : PROJECT
                           Void
                       Label : NAME
                         z
+                    Label : OBJECT
+                      $y

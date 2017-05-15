@@ -50,17 +50,17 @@ Label : PROJECT
               x1
         Label : ELEMENT
           ::
-          Label : CLASS
-            A
-          Label : METHOD
-            x2
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                3
-              Label : ARGUMENT
-                4
-            Label : NAME
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              4
+          Label : NAME
+            ::
+            Label : CLASS
+              A
+            Label : METHOD
               x2
               Label : ARGUMENTS
                 (
@@ -72,25 +72,25 @@ Label : PROJECT
                 x2
         Label : ELEMENT
           ::
-          Label : CLASS
-            A
-          Label : METHOD
-            x3
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              5
+            Label : ARGUMENT
+              6
+          Label : NAME
+            ::
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                5
+                3
               Label : ARGUMENT
-                6
+                4
             Label : NAME
-              x3
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  3
-                Label : ARGUMENT
-                  4
-              Label : NAME
+              ::
+              Label : CLASS
+                A
+              Label : METHOD
                 x3
                 Label : ARGUMENTS
                   (
@@ -102,33 +102,33 @@ Label : PROJECT
                   x3
         Label : ELEMENT
           ::
-          Label : CLASS
-            A
-          Label : METHOD
-            x4
+          Label : ARGUMENTS
+            (
+            Label : ARGUMENT
+              7
+            Label : ARGUMENT
+              8
+          Label : NAME
+            ::
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                7
+                5
               Label : ARGUMENT
-                8
+                6
             Label : NAME
-              x4
+              ::
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
-                  5
+                  3
                 Label : ARGUMENT
-                  6
+                  4
               Label : NAME
-                x4
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    3
-                  Label : ARGUMENT
-                    4
-                Label : NAME
+                ::
+                Label : CLASS
+                  A
+                Label : METHOD
                   x4
                   Label : ARGUMENTS
                     (

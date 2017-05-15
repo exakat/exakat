@@ -29,6 +29,10 @@ Label : PROJECT
                 public
           Label : DEFINITION
             b
+          Label : DEFINITION
+            b
+          Label : DEFINITION
+            b
             Label : ARGUMENTS
               (
               Label : ARGUMENT
@@ -43,10 +47,6 @@ Label : PROJECT
                 Void
             Label : NAME
               \b
-          Label : DEFINITION
-            b
-          Label : DEFINITION
-            b
           Label : DEFINITION
             \b
           Label : DEFINITION

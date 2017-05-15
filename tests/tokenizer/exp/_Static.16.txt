@@ -82,6 +82,8 @@ Label : PROJECT
                 x
           Label : DEFINITION
             static
+          Label : DEFINITION
+            static
             Label : ARGUMENTS
               (
               Label : ARGUMENT
@@ -92,8 +94,6 @@ Label : PROJECT
                 4
             Label : NAME
               static
-          Label : DEFINITION
-            static
           Label : DEFINITION, DEFINITION
             static
           Label : NAME
