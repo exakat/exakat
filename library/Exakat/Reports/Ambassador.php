@@ -334,7 +334,7 @@ class Ambassador extends Reports {
             <div class="col-md-3">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">$name</h3>
+                  <h3 class="box-title"><a href="favorites_issues.html#analyzer=$analyzer" title="$name">$name</a></h3>
                 </div>
                 <div class="box-body chart-responsive">
                   <div id="donut-chart_$name"></div>
@@ -587,7 +587,7 @@ JAVASCRIPT;
 
         $baseHTML = $this->getBasedPage('favorites_issues');
 
-        $preferencesJson = implode(', ', $this->getIssuesFaceted('Preferences'));
+        $preferencesJson = implode(', '. PHP_EOL, $this->getIssuesFaceted('Preferences'));
         $blocjs = <<<JAVASCRIPT
  <script src="facetedsearch.js"></script>
 
@@ -597,7 +597,9 @@ JAVASCRIPT;
 
     $(document).ready(function() {
 
-      var data_items = [$preferencesJson];
+      var data_items = [
+$preferencesJson
+];
       var item_template =  
         '<tr>' +
           '<td width="20%"><%= obj.analyzer %></td>' +
@@ -946,7 +948,6 @@ GROUP BY analyzer
 ORDER BY count(*) DESC
 SQL
         );
-        //        $fileHTML = $this->getTopFile();
         $html = '';
         $xAxis = array();
         $data = array();
@@ -1230,8 +1231,8 @@ JAVASCRIPT;
                  </div>';
         }
 
-        return array('html'  => $issuesHtml,
-                    'script' => $dataScript);
+        return array('html'   => $issuesHtml,
+                     'script' => $dataScript);
     }
 
     public function getSeverityBreakdown() {
@@ -1430,10 +1431,10 @@ SQL;
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="#" title="'.$value['file'].'">
+                    <a href="issues.html#file='.$value['file'].'" title="'.$value['file'].'">
                       <div class="block-cell-name">'.$value['file'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
                     </a>
+                    <div class="block-cell-issue text-center">'.$value['value'].'</div>
                   </div>';
         }
         $nb = 10 - count($data);
@@ -1514,16 +1515,17 @@ SQL;
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer']);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
-                            'value' => $row['number']);
+                            'value' => $row['number'],
+                            'name'  => $row['analyzer']);
         }
 
         $html = '';
         foreach ($data as $value) {
             $html .= '<div class="clearfix">
-                    <a href="#" title="'.$value['label'].'">
-                      <div class="block-cell-name">'.$value['label'].'</div>
-                      <div class="block-cell-issue text-center">'.$value['value'].'</div>
+                    <a href="issues.html#analyzer='.$value['name'].'" title="'.$value['label'].'">
+                      <div class="block-cell-name">'.$value['label'].'</div> 
                     </a>
+                    <div class="block-cell-issue text-center">'.$value['value'].'</div>
                   </div>';
         }
 
@@ -1586,11 +1588,10 @@ SQL;
         );
     }
 
-    private function generateIssues()
-    {
+    private function generateIssues() {
         $baseHTML = $this->getBasedPage('issues');
 
-        $issues = implode(', ', $this->getIssuesFaceted($this->themesToShow));
+        $issues = implode(', '.PHP_EOL, $this->getIssuesFaceted($this->themesToShow));
         $blocjs = <<<JAVASCRIPT
         
   <script src="facetedsearch.js"></script>
@@ -1599,11 +1600,13 @@ SQL;
 
     $(document).ready(function() {
 
-      var data_items = [$issues];
+      var data_items = [
+$issues
+];
       var item_template =  
         '<tr>' +
           '<td width="20%"><%= obj.analyzer %></td>' +
-          '<td width="20%"><%= obj.file + ":" + obj.line %></td>' +
+          '<td width="20%"><a href="<%= "codes.html#file=" + obj.file + "&line=" + obj.line %>" title="Go to code"><%= obj.file + ":" + obj.line %></a></td>' +
           '<td width="18%"><%= obj.code %></td>' + 
           '<td width="2%"><%= obj.code_detail %></td>' +
           '<td width="7%" align="center"><%= obj.severity %></td>' +
@@ -1679,7 +1682,7 @@ SQL;
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $item['analyzer'] =  $ini['name'];
-            $item['analyzer_md5'] = md5($ini['name']);
+            $item['analyzer_md5'] = md5($row['analyzer']);
             $item['file' ] =  $row['file'];
             $item['file_md5' ] =  md5($row['file']);
             $item['code' ] = $this->PHPSyntax($row['fullcode']);
@@ -2200,7 +2203,7 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedProperty"');
         $couldBeProtected = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/(class|trait) (\S+) /', $row['class'], $classname);
+            preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
             preg_match('/(\$\S+)/', $row['fullcode'], $code);
@@ -2215,7 +2218,7 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeClassConstant"');
         $couldBeConstant = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/(class|trait) (\S+) /', $row['class'], $classname);
+            preg_match('/(class|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
             preg_match('/(\$\S+)/', $row['fullcode'], $code);
@@ -2401,7 +2404,9 @@ HTML;
 
             $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
-            file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], substr($source, 6, -8));
+            $source = substr($source, 6, -8);
+            $source = preg_replace_callback('#<br />#is', function($x) { static $i = 0; return '<br /><a name="l'.++$i.'" />'; }, $source);
+            file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], $source);
         }
 
         $blocjs = <<<JAVASCRIPT
@@ -2418,8 +2423,17 @@ HTML;
 
   var fileParam = window.location.hash.split('file=')[1];
   if(fileParam !== undefined) {
+    var limit = fileParam.indexOf('&');
+    if (limit !== -1) {
+        fileParam = fileParam.substr(0, limit);
+    }
     $('#results').load("sources/" + fileParam);
     $('#filename').html(fileParam + '  <span class="caret"></span>');
+  }
+
+  var line = window.location.hash.split('line=')[1];
+  if(line !== undefined) {
+        window.location.hash = 'l' + line;
   }
   
 
@@ -2698,6 +2712,7 @@ JAVASCRIPT;
                             'ext/snmp'       => 'Extensions/Extsnmp',
                             'ext/soap'       => 'Extensions/Extsoap',
                             'ext/sockets'    => 'Extensions/Extsockets',
+                            'ext/sphinx'     => 'Extensions/Extsphinx',
                             'ext/spl'        => 'Extensions/Extspl',
                             'ext/sqlite'     => 'Extensions/Extsqlite',
                             'ext/sqlite3'    => 'Extensions/Extsqlite3',
