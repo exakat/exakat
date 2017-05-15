@@ -1,4 +1,4 @@
-Version 0.11.3 (Sun Deity of Mao, Coming up)
+Version 0.11.4 (Six Eared Macaque, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 0.11.3 (Sun Deity of Mao, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.11.3 (Sun Deity of Mao, 2017-05-15)
++ Architecture
+    + Speed up batch processing for lists of analyzers
+    + Split data collection from the initial dump.
++ Report
+    + Ambassador : Upgraded presentation of issues, and internals links.
++ Analyzer
+    + New analyzer : Sphinx extension
+    + New analyzer : GRPC extension
+    + New analyzer : reports arrays that are randomly sorted.
+    + New analyzer : report multiple catch clauses
+    + Updated analyser : direct injections include all SERVER_* values
+    + Upgrade for PHP 7.1.15 and 7.0.19
++ Tokenizer
+    + Split Functioncall into Functioncall, MethocallCall and Newcall. 
+    + Added support for 'namespace' in any full name.
 
 Version 0.11.2 (Scorpion Demon, 2017-05-08)
 + Architecture
