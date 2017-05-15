@@ -2658,6 +2658,7 @@ JAVASCRIPT;
                             'ext/gmagick'    => 'Extensions/Extgmagick',
                             'ext/gmp'        => 'Extensions/Extgmp',
                             'ext/gnupg'      => 'Extensions/Extgnupg',
+                            'ext/grpc'       => 'Extensions/Extgrpc',
                             'ext/hash'       => 'Extensions/Exthash',
                             'ext/php_http'   => 'Extensions/Exthttp',
                             'ext/ibase'      => 'Extensions/Extibase',
