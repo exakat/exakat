@@ -32,12 +32,12 @@ class NewOnFunctioncallOrIdentifier extends Analyzer {
         $mapping = <<<GREMLIN
 x2 = it.get().label();
 GREMLIN;
-        $storage = array('className()' => 'Functioncall',
+        $storage = array('className()' => 'Newcall',
                          'className'   => 'Identifier');
         
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIs(array('Functioncall', 'Identifier'))
+             ->atomIs(array('Newcall', 'Identifier'))
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next()');
         $types = (array) $this->rawQuery();
@@ -61,7 +61,7 @@ GREMLIN;
 
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIs(array('Functioncall', 'Identifier'))
+             ->atomIs(array('Newcall', 'Identifier'))
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in '.$types.'}')
              ->back('first');

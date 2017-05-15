@@ -53,7 +53,7 @@ class VariableClasses extends Analyzer {
 
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIs('Functioncall')
+             ->atomIs('Newcall')
              ->tokenIs(array('T_VARIABLE', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();

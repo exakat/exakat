@@ -58,7 +58,6 @@ class IsModified extends Analyzer {
         // arguments : reference variable in a custom function
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->hasNoIn('METHOD') // possibly new too
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
@@ -116,8 +115,7 @@ class IsModified extends Analyzer {
         }
 
         // Class constructors (__construct)
-        $this->atomIs('Functioncall')
-             ->hasIn('NEW')
+        $this->atomIs('Newcall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')

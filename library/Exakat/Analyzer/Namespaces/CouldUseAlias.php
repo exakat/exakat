@@ -28,7 +28,7 @@ class CouldUseAlias extends Analyzer {
     public function analyze() {
         // use a\b as C;
         // a\b::D(); and also a\b\d\e
-        $this->atomIs(array('Nsname', 'Functioncall'))
+        $this->atomIs(array('Nsname', 'Newcall'))
              ->hasNoIn(array('USE', 'NAME', 'METHOD', 'VARIABLE'))
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot('[')

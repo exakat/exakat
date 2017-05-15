@@ -40,7 +40,6 @@ class DynamicCalls extends Analyzer {
 
         // dynamic functioncall
         $this->atomIs('Functioncall')
-             ->hasNoIn(array('METHOD', 'NEW'))
              ->outIs('NAME')
              ->tokenIsNot(self::$FUNCTIONS_TOKENS)
              ->back('first');
@@ -99,7 +98,7 @@ class DynamicCalls extends Analyzer {
         $this->atomIs('Staticmethodcall')
              ->analyzerIsNot('self')
              ->outIs('METHOD')
-             ->atomIs('Functioncall')
+             ->atomIs('Methodcallname')
              ->outIs('NAME')
              ->atomIsNot('Identifier')
              ->back('first');

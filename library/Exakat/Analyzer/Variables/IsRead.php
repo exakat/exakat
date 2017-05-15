@@ -101,7 +101,6 @@ class IsRead extends Analyzer {
 
         // arguments : normal variable in a custom function
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD') // possibly new too
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
@@ -117,7 +116,7 @@ class IsRead extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
-        $this->atomFunctionIs('Functioncall')
+        $this->atomFunctionIs(array('Functioncall', 'Methodcallname', 'Newcall'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable');

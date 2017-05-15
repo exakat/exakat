@@ -37,7 +37,7 @@ class DynamicNew extends Analyzer {
         // new $y();
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIs('Functioncall')
+             ->atomIs('Newcall')
              ->outIs('NAME')
              ->atomIs(array('Variable', 'Array'))
              ->back('first');

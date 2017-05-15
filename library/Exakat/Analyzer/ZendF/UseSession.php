@@ -33,15 +33,14 @@ class UseSession extends Analyzer {
 
                 $serviceManager->get('Zend\Session\    ');
                 */
-        $this->atomIs('Functioncall')
+        $this->atomIs('Methodcallname')
              ->tokenIs('T_STRING')
              ->codeIs('get')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->noDelimiterIs('Zend\\Session\\SessionManager')
-             ->back('first')
-             ->inIs('METHOD');
+             ->back('first');
         $this->prepareQuery();
     }
 }

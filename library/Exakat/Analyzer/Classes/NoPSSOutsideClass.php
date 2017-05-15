@@ -38,7 +38,7 @@ class NoPSSOutsideClass extends Analyzer {
         $this->atomIs('New')
              ->hasNoClassTrait()
              ->outIs('NEW')
-             ->atomIs(array('Identifier', 'Functioncall'))
+             ->atomIs(array('Identifier', 'Newcall', 'Nsname'))
              ->codeIs(array('self', 'parent', 'static'))
              ->back('first');
         $this->prepareQuery();

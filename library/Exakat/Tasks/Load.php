@@ -163,7 +163,7 @@ class Load extends Tasks {
     static public $PROP_NODELIMITER = array('String', 'Variable');
     static public $PROP_HEREDOC     = array('Heredoc');
     static public $PROP_COUNT       = array('Sequence', 'Arguments', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
-    static public $PROP_FNSNAME     = array('Functioncall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String');
+    static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Class', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String');
     static public $PROP_ABSOLUTE    = array('Nsname');
     static public $PROP_ALIAS       = array('Nsname', 'Identifier', 'As');
     static public $PROP_ORIGIN      = array('Nsname', 'Identifier', 'As');
@@ -719,8 +719,8 @@ class Load extends Tasks {
 
             $this->checkTokens($filename);
         } catch (LoadError $e) {
-//            print $e->getMessage();
-//            print_r($this->expressions[0]);
+            print $e->getMessage();
+            print_r($this->expressions[0]);
             $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
             $this->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
@@ -1925,8 +1925,16 @@ class Load extends Tasks {
         $current = $this->id;
 
         $arguments = $this->processArguments(array(\Exakat\Tasks\T_CLOSE_PARENTHESIS), false, $name->token === 'T_LIST');
+
+        if ($this->isContext(self::CONTEXT_NEW)) {
+            $atom = 'Newcall';
+        } elseif ($getFullnspath === self::WITH_FULLNSPATH) {
+            $atom = 'Functioncall';
+        } else {
+            $atom = 'Methodcallname';
+        }
         
-        $functioncall = $this->addAtom('Functioncall');
+        $functioncall = $this->addAtom($atom);
         $functioncall->code      = $name->code;
         $functioncall->fullcode  = $name->fullcode.'('.$arguments->fullcode.')';
         $functioncall->line      = $this->tokens[$current][2];
@@ -3887,10 +3895,16 @@ class Load extends Tasks {
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $finals[] = \Exakat\Tasks\T_DOUBLE_COLON;
 
+        $newContext = $this->isContext(self::CONTEXT_NEW);
+        $this->contexts[self::CONTEXT_NEW] = 0;
         $this->nestContext();
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             $block = $this->processCurlyExpression();
-            $right = $this->processFCOA($block);
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
+                $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
+            } else {
+                $right = $this->processFCOA($block);
+            }
             $this->popExpression();
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOLLAR) {
             ++$this->id; // Skip ::
@@ -3912,6 +3926,7 @@ class Load extends Tasks {
                 $this->popExpression();
             }
         }
+        $this->contexts[self::CONTEXT_NEW] = $newContext;
         $this->exitContext();
 
         if ($right->token === 'T_CLASS') {
@@ -3924,7 +3939,7 @@ class Load extends Tasks {
         } elseif (in_array($right->atom, array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null'))) {
             $static = $this->addAtom('Staticproperty');
             $links = 'PROPERTY';
-        } elseif (in_array($right->atom, array('Functioncall'))) {
+        } elseif (in_array($right->atom, array('Methodcallname'))) {
             $static = $this->addAtom('Staticmethodcall');
             $links = 'METHOD';
         } else {
@@ -3997,10 +4012,16 @@ class Load extends Tasks {
 
         $left = $this->popExpression();
 
+        $newContext = $this->isContext(self::CONTEXT_NEW);
+        $this->contexts[self::CONTEXT_NEW] = 0;
         $this->nestContext();
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             $block = $this->processCurlyExpression();
-            $right = $this->processFCOA($block);
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
+                $right = $this->processFunctioncall(self::WITHOUT_FULLNSPATH);
+            } else {
+                $right = $this->processFCOA($block);
+            }
             $this->popExpression();
         } else {
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
@@ -4017,13 +4038,14 @@ class Load extends Tasks {
                 $this->popExpression();
             }
         }
+        $this->contexts[self::CONTEXT_NEW] = $newContext;
         $this->exitContext();
 
         if (in_array($right->atom, array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'Property', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
             $static = $this->addAtom('Property');
             $links = 'PROPERTY';
             $static->enclosing = self::NO_ENCLOSING;
-        } elseif (in_array($right->atom, array('Functioncall', 'Methodcall'))) {
+        } elseif (in_array($right->atom, array('Methodcallname', 'Methodcall'))) {
             $static = $this->addAtom('Methodcall');
             $links = 'METHOD';
         } else {

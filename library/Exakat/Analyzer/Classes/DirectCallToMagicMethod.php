@@ -30,7 +30,7 @@ class DirectCallToMagicMethod extends Analyzer {
         $magicMethods = $this->loadIni('php_magic_methods.ini');
         $magicMethods = $magicMethods['magicMethod'];
 
-        $this->atomIs('Functioncall')
+        $this->atomIs('Methodcallname')
              ->codeIs($magicMethods)
              ->inIs('METHOD')
              ->raw('where( __.out("CLASS").has("code", within("static", "parent", "self")).count().is(eq(0)) )');

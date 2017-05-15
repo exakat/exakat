@@ -36,7 +36,7 @@ class ThrownExceptions extends Analyzer {
         $this->atomIs('New')
              ->hasNoIn('THROW')
              ->outIs('NEW')
-             ->atomIs(array('Identifier', 'Nsname', 'Functioncall'))
+             ->atomIs(array('Identifier', 'Nsname', 'Newcall'))
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->regexIs('fullnspath', 'exception\$')
              ->regexIs('fullnspath', '^\\\\\\\\zend\\\\\\\\');

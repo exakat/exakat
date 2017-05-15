@@ -35,9 +35,7 @@ class ClassUsage extends Analyzer {
     public function analyze() {
         $classes =  $this->makeFullNsPath($this->classes);
 
-        $this->atomIs('New')
-             ->outIs('NEW')
-             ->atomIs('Functioncall')
+        $this->atomIs('Newcall')
              ->raw('not(where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall") ) )')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($classes);

@@ -60,8 +60,7 @@ class DynamicCode extends Analyzer {
 
         //$functioncall(2,3,3);
         //new $classname(); (also done here)
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
+        $this->atomIs(array('Functioncall', 'Newcall'))
              ->outIs('NAME')
              ->tokenIsNot(array_merge(self::$FUNCTIONS_TOKENS, array('T_INCLUDE', 'T_INCLUDE_ONCE', 'T_REQUIRE', 'T_REQUIRE_ONCE', )))
              ->back('first');

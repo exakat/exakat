@@ -34,7 +34,6 @@ class Recursive extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->hasNoIn('METHOD')
              ->samePropertyAs('code', 'name', false)
              ->back('first')
              ->outIs('NAME');

@@ -30,7 +30,6 @@ class IsGlobal extends Analyzer {
     public function analyze() {
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->hasNoIn('METHOD')
              ->hasNoClassInterfaceTrait()
              ->hasNoFunction();
         $this->prepareQuery();

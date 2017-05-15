@@ -44,7 +44,6 @@ class CouldBeCallable extends Analyzer {
              ->samePropertyAs('code', 'argument')
              ->inIs('NAME')
              ->atomIs('Functioncall')
-             ->hasNoIn(array('NEW', 'METHOD'))
              ->back('first');
         $this->prepareQuery();
 
