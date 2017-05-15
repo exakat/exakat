@@ -2172,7 +2172,7 @@ HTML;
             if (isset($require->{'zendframework/zendframework'})) {
                 $inComposer = $require->{'zendframework/zendframework'};
             } else {
-                $inComposer = $require->{$composerName} ?? 'N/A';
+                $inComposer = isset($require->{$composerName}) ? $require->{$composerName} : 'N/A';
             }
             $table .= "						<tr><td>$s</td><td>".$inComposer."</td><td>".($c === 0 ? '<i class="fa fa-square-o"></i>' : '<i class="fa fa-check-square-o"></i>')."</td></tr>\n";
         }

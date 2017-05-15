@@ -39,7 +39,7 @@ class CakePHPUsed extends Analyzer {
         
         $classes    = $data->getClasses($this->component, $this->version);
         if (!empty($classes)) {
-            $classes    = array_merge(...array_values($classes));
+            $classes    = call_user_func_array('array_merge', array_values($classes));
             $classes    = array_keys(array_count_values($classes));
             $classes    = $this->makeFullNsPath($classes);
 
@@ -57,7 +57,7 @@ class CakePHPUsed extends Analyzer {
 
         $interfaces =  $data->getInterfaces($this->component, $this->version);
         if (!empty($interfaces)) {
-            $interfaces = array_merge(...array_values($interfaces));
+            $interfaces = call_user_func_array('array_merge', array_values($interfaces));
             $interfaces = array_keys(array_count_values($interfaces));
             $interfaces = $this->makeFullNsPath($interfaces);
         
@@ -75,7 +75,7 @@ class CakePHPUsed extends Analyzer {
 
         $traits     =  $data->getTraits($this->component, $this->version);
         if (!empty($traits)) {
-            $traits     = array_merge(...array_values($traits));
+            $traits     = call_user_func_array('array_merge', array_values($traits));
             $traits     = array_keys(array_count_values($traits));
             $traits     = $this->makeFullNsPath($traits);
 
