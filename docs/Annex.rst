@@ -124,6 +124,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/gmagick
 * ext/gmp
 * ext/gnupgp
+* Extensions/Extgrpc
 * ext/hash
 * ext/pecl_http
 * ext/ibase
@@ -186,6 +187,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/snmp
 * ext/soap
 * ext/sockets
+* ext/sphinx
 * ext/spl
 * ext/sqlite
 * ext/sqlite3
@@ -281,6 +283,17 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 0.11.3
+
+  * Extensions/Extgrpc (Extensions/Extgrpc)
+  * Try With Multiple Catch (Php/TryMultipleCatch ; Unassigned)
+  * ext/sphinx (Extensions/Extsphinx ; Appinfo)
+
+* 0.11.2
+
+  * Alternative Syntax Consistence (Structures/AlternativeConsistenceByFile ; Analyze)
+  * Randomly Sorted Arrays (Arrays/RandomlySortedLiterals)
 
 * 0.11.1
 
@@ -744,7 +757,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Assign Default To Properties (Classes/MakeDefault ; Analyze, ClearPHP, Codacy, Simple)
   * Autoloading (Php/AutoloadUsage ; Appinfo)
   * Avoid Parenthesis (Structures/PrintWithoutParenthesis ; Analyze, Codacy, Simple)
-  * Avoid Those Crypto (Security/AvoidThoseCrypto ; Security)
+  * Avoid Those Hash Functions (Security/AvoidThoseCrypto ; Security)
   * Avoid array_unique() (Structures/NoArrayUnique ; Performances)
   * Avoid get_class() (Structures/UseInstanceof ; Analyze, Codacy, Simple)
   * Avoid sleep()/usleep() (Security/NoSleep ; Security)
@@ -1485,6 +1498,7 @@ External links
 
 List of external links mentionned in this documentation.
 
+* ` <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
@@ -1519,6 +1533,7 @@ List of external links mentionned in this documentation.
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
 * `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
+* `Exceptions <http://php.net/manual/en/language.exceptions.php>`_
 * `exif <http://php.net/manual/en/book.exif.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
@@ -1529,13 +1544,16 @@ List of external links mentionned in this documentation.
 * `Github <https://github.com/exakat/exakat>`_
 * `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 * `Gnupg Function for PHP <http://www.php.net/manual/en/book.gnupg.php>`_
+* `Goto <http://php.net/manual/en/control-structures.goto.php>`_
 * `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plugin>`_
 * `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_
+* `GRPC <http://www.grpc.io/>`_
 * `hash <http://www.php.net/hash>`_
 * `hg <https://www.mercurial-scm.org/>`_
 * `Iconv <http://php.net/iconv>`_
 * `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
+* `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `List of function aliases <http://php.net/manual/en/aliases.php>`_
@@ -1547,6 +1565,7 @@ List of external links mentionned in this documentation.
 * `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
 * `Memcache on PHP <http://www.php.net/manual/en/book.memcache.php>`_
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
+* `Ncurses Terminal Screen Control <http://php.net/manual/en/book.ncurses.php>`_
 * `Neo4j <http://neo4j.com/>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
@@ -1575,6 +1594,7 @@ List of external links mentionned in this documentation.
 * `SOAP <http://php.net/manual/en/book.soap.php>`_
 * `Sockets <http://php.net/manual/en/book.sockets.php>`_
 * `Specification pattern <https://en.wikipedia.org/wiki/Specification_pattern>`_
+* `Sphinx Client <http://php.net/manual/en/book.sphinx.php>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Suhosin.org <https://suhosin.org/>`_

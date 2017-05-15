@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 08 May 2017 12:17:41 +0000
-.. comment: Generation hash : 6c8dbd2bac31c15ac59e99ce0e6f8cb51dd892e7
+.. comment: Generation date : Mon, 15 May 2017 17:27:05 +0000
+.. comment: Generation hash : 6098c611d2f3e7dab95d00cca452151537cec5b5
 
 
 .. _$http\_raw\_post\_data:
@@ -589,6 +589,41 @@ You may also use `array_walk() <http://www.php.net/array_walk>`_ or `array_map()
 
 
 
+.. _alternative-syntax-consistence:
+
+Alternative Syntax Consistence
+##############################
+
+
+PHP allows for two syntax : the alternative syntax, and the classic syntax. 
+
+The classic syntax is almost always used. When used, the alternative syntax is used in templates. 
+
+This analysis reports files that are using both syntax at the same time. This is confusing.
+
+.. code-block:: php
+
+   <?php
+   
+   // Mixing both syntax is confusing.
+   foreach($array as $item) : 
+       if ($item > 1) {
+           print $item elements\n;
+       } else {
+           print $item element\n;
+       }
+   endforeach;
+   
+   ?>
+
++--------------+-----------------------------------------+
+| Command Line | Structures/AlternativeConsistenceByFile |
++--------------+-----------------------------------------+
+| Analyzers    | :ref:`Analyze`                          |
++--------------+-----------------------------------------+
+
+
+
 .. _always-positive-comparison:
 
 Always Positive Comparison
@@ -941,10 +976,10 @@ Even if most of the time, usage of parenthesis is legit, it is recommended to av
 
 
 
-.. _avoid-those-crypto:
+.. _avoid-those-hash-functions:
 
-Avoid Those Crypto
-##################
+Avoid Those Hash Functions
+##########################
 
 
 The following cryptographic algorithms are considered unsecure, and should be replaced with new and more performant algorithms. 
@@ -952,6 +987,26 @@ The following cryptographic algorithms are considered unsecure, and should be re
 MD2, MD4, MD5, SHA0, SHA1, CRC, DES, 3DES, RC2, RC4. 
 
 When possible, avoid using them, may it be as PHP functions, or hashing function configurations (mcrypt, hash...).
+
+.. code-block:: php
+
+   <?php
+   
+   // Weak cryptographic algorithm
+   echo md5('The quick brown fox jumped over the lazy dog.');
+   
+   // Weak crypotgraphic algorthim, used with a modern PHP extension (easier to update)
+   echo hash('md5', 'The quick brown fox jumped over the lazy dog.');
+   
+   // Strong crypotgraphic algorthim, used with a modern PHP extension
+   echo hash('sha156', 'The quick brown fox jumped over the lazy dog.');
+   
+   ?>
+
+
+Weak crypto are commonly used for hashing values when caching them. In such cases, security is not a primary concern. However, it may later become such, when hackers get access to the cache folders, or if the cached identifier is published. As a preventive protection, it is recommended to always use a secure hashing function.
+
+See also ` <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_.
 
 +--------------+---------------------------+
 | Command Line | Security/AvoidThoseCrypto |
@@ -2163,7 +2218,31 @@ Concrete Visibility
 ###################
 
 
-Methods that implements an interface in a class must be public.
+Methods that implements an interface in a class must be public. 
+
+PHP doesn't lint this, but won't start a script with a Fatal error : 'Access level to c::iPrivate() must be public (as in class i) ';
+
+.. code-block:: php
+
+   <?php
+   
+   interface i {
+       function iPrivate() ;
+       function iProtected() ;
+       function iPublic() ;
+   }
+   
+   class c implements i {
+       // Methods that implements an interface in a class must be public.  
+       private function iPrivate() {}
+       protected function iProtected() {}
+       public function iPublic() {}
+   }
+   
+   ?>
+
+
+See also `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_.
 
 +--------------+-------------------------------+
 | Command Line | Interfaces/ConcreteVisibility |
@@ -8221,7 +8300,29 @@ Overwritten Literals
 ####################
 
 
-In those methods, the same variable is assigned a literal twice. One of them is too much.
+The same variable is assigned a literal twice. It is possible that one of the assignation is too much.
+
+This analysis doesn't take into account the distance between two assignations : it may report false positives when the variable is actually used for several purposes, and, as such, assigned twice with different values.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo() {
+       // Two assignations in a short sequence : one is too many.
+       $a = 1;
+       $a = 2;
+       
+       for($i = 0; $i < 10; $i++) {
+           $a += $i;
+       }
+       $b = $a;
+       
+       // New assignation. $a is now used as an array. 
+       $a = array(0);
+   }
+   
+   ?>
 
 +--------------+-------------------------------+
 | Command Line | Variables/OverwrittenLiterals |
@@ -9168,6 +9269,43 @@ random_int() and random_bytes() emit Exceptions if they meet a problem. This way
 +--------------+-----------------------------+
 | Analyzers    | :ref:`Security`             |
 +--------------+-----------------------------+
+
+
+
+.. _randomly-sorted-arrays:
+
+Randomly Sorted Arrays
+######################
+
+
+Those literals arrays are written in several places, but in various orders. 
+
+This may reduce the reading and proofing of the arrays, and induce confusion.
+
+Unless order is important, it is recommended to always use the same order when defining literal arrays.
+
+.. code-block:: php
+
+   <?php
+   
+   // an array
+   $set = [1,3,5,9,10];
+   
+   function foo() {
+       // an array, with the same values but different order, in a different context
+       $list = [1,3,5,10,9,];
+   }
+   
+   // an array, with the same order than the initial one
+   $inits = [1,3,5,9,10];
+   
+   ?>
+
++--------------+-------------------------------+
+| Command Line | Arrays/RandomlySortedLiterals |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
 
 
 
@@ -13135,7 +13273,35 @@ Unused Interfaces
 #################
 
 
-Those interfaces are defined but not used. They should be removed.
+Some interfaces are defined but not used. 
+
+They should be removed, as they are probably dead code.
+
+.. code-block:: php
+
+   <?php
+   
+   interface used {}
+   interface unused {}
+   
+   // Used by implementation
+   class c implements used {}
+   
+   // Used by extension
+   interface j implements used {}
+   
+   $x = new c;
+   
+   // Used in a instanceof
+   var_dump($x instanceof used); 
+   
+   // Used in a typehint
+   function foo(Used $x) {}
+   
+   ?>
+
+
+See also `Used Interfaces`_.
 
 +--------------+----------------------------------------------+
 | Command Line | Interfaces/UnusedInterfaces                  |
@@ -13151,7 +13317,29 @@ Unused Label
 ############
 
 
-The following labels have been defined in the code, but they are not used. They may be removed.
+Some labels have been defined in the code, but they are not used. They may be removed as they are dead code.
+
+.. code-block:: php
+
+   <?php
+   
+   $a = 0;
+   A: 
+   
+       ++$a;
+       
+       // A loop. A: is used
+       if ($a < 10) { goto A; }
+   
+   // B is never called explicitely. This is useless.
+   B: 
+   
+   ?>
+
+
+There is no analysis for undefined goto call, as PHP checks that goto has a destination label at compile time : 
+
+See also `Goto <http://php.net/manual/en/control-structures.goto.php>`_.
 
 +--------------+----------------------------------------------+
 | Command Line | Structures/UnusedLabel                       |

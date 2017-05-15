@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 08 May 2017 12:17:41 +0000
-.. comment: Generation hash : 6c8dbd2bac31c15ac59e99ce0e6f8cb51dd892e7
+.. comment: Generation date : Mon, 15 May 2017 17:27:05 +0000
+.. comment: Generation hash : 6098c611d2f3e7dab95d00cca452151537cec5b5
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 308 analysis
+Total : 310 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -89,6 +89,7 @@ Total : 308 analysis
 * :ref:`Aliases Usage <aliases-usage>`
 * :ref:`Already Parents Interface <already-parents-interface>`
 * :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
+* :ref:`Alternative Syntax Consistence <alternative-syntax-consistence>`
 * :ref:`Always Positive Comparison <always-positive-comparison>`
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
@@ -253,6 +254,7 @@ Total : 308 analysis
 * :ref:`Property Used In One Method Only <property-used-in-one-method-only>`
 * :ref:`Property/Variable Confusion <property/variable-confusion>`
 * :ref:`Queries In Loops <queries-in-loops>`
+* :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
 * :ref:`Redefined Class Constants <redefined-class-constants>`
 * :ref:`Redefined Default <redefined-default>`
@@ -844,7 +846,7 @@ Security
 
 Total : 22 analysis
 
-* :ref:`Avoid Those Crypto <avoid-those-crypto>`
+* :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 * :ref:`Compare Hash <compare-hash>`
 * :ref:`Direct Injection <direct-injection>`

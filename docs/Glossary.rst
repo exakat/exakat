@@ -381,6 +381,7 @@ Glossary
       + :ref:`Undefined Classes <undefined-classes>`
       + :ref:`Undefined Interfaces <undefined-interfaces>`
       + :ref:`Unresolved Instanceof <unresolved-instanceof>`
+      + :ref:`Unused Interfaces <unused-interfaces>`
       + :ref:`Use Instanceof <use-instanceof>`
       + :ref:`Useless Interfaces <useless-interfaces>`
       + :ref:`ZendF/ZendTypehinting <zendf/zendtypehinting>`
