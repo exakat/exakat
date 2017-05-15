@@ -2602,9 +2602,10 @@ JAVASCRIPT;
                     'Errors' => array(
                             'Throw exceptions'    => 'Php/ThrowUsage',
                             'Try...Catch'         => 'Php/TryCatchUsage',
-                            'Multiple catch'      => 'Structures/MultipleCatch',
+                            'Multiple catch'      => 'Php/TryMultipleCatch',
                             'Multiple Exceptions' => 'Exceptions/MultipleCatch',
                             'Finally'             => 'Structures/TryFinally',
+
                             'Trigger error'       => 'Php/TriggerErrorUsage',
                             'Error messages'      => 'Structures/ErrorMessages',
                      ),
