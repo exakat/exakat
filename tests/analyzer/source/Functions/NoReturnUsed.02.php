@@ -1,14 +1,14 @@
 <?php
 
 class Bar {
-    function foo() {    return 1; }
-    
-    function foo2() { }
-    
-    function foo3() {  return 1;}
-    function foo4() {  return 1;}
-    function Foo5() {  return 1;}
-    function foo6() {  return 1;} // unused..
+    public function foo() {    return 1; }
+
+    public function foo2() { }
+
+    public function foo3() {  return 1;}
+    public function foo4() {  return 1;}
+    public function Foo5() {  return 1;}
+    public function foo6() {  return 1;} // unused..
 }
 
 Bar::foo();
