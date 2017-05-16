@@ -614,10 +614,10 @@ class Load extends Tasks {
         $this->uses  = array('function' => array(),
                              'const'    => array(),
                              'class'    => array());
-        $this->contexts = array(self::CONTEXT_CLASS        => false,
+        $this->contexts = array(self::CONTEXT_CLASS        => 0,
                                 self::CONTEXT_INTERFACE    => false,
                                 self::CONTEXT_TRAIT        => false,
-                                self::CONTEXT_FUNCTION     => false,
+                                self::CONTEXT_FUNCTION     => 0,
                                 self::CONTEXT_NEW          => false,
                                 self::CONTEXT_NOSEQUENCE   => 0                         );
         $this->expressions = array();
@@ -4641,11 +4641,11 @@ class Load extends Tasks {
     }
 
     private function nestContext($context = self::CONTEXT_NOSEQUENCE) {
-        return ++$this->contexts[$context];
+        ++$this->contexts[$context];
     }
 
     private function exitContext($context = self::CONTEXT_NOSEQUENCE) {
-        return --$this->contexts[$context];
+        --$this->contexts[$context];
     }
 
     private function toggleContext($context) {
