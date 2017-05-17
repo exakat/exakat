@@ -6,10 +6,10 @@ $expected     = array('reset(foo( ))',
                       'foo::bar(foo( ), foo( ))', 
                       'foo::bar(null, null)', 
                       'bar(foo( ), foo( ))', 
-                      'bar(foo( ), $b)', 
+                      'bar($a, foo(1), foo(2))', 
+                      'bar($a, foo(1))',
                       'bar(null, null)', 
-                      'bar($a->boo( ), $a->boo( ))', 
-                      'bar(foo( ), $b, $c)');
+                      'bar($a->boo( ), $a->boo( ))');
 
 $expected_not = array('getmxrr($a, foo( ))', );
 
