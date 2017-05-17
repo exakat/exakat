@@ -150,9 +150,13 @@ class Ambassador extends Reports {
         // Compatibility
         $this->generateCompilations();
         $res = $this->sqlite->query('SELECT SUBSTR(key, -2) FROM hash WHERE key LIKE "Compatibility%"');
+        $list = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            $list[] = 'CompatibilityPHP'.$row[0];
             $this->generateCompatibility($row[0]);
         }
+        $this->generateIssuesEngine('compatibility_issues',
+                                    $this->getIssuesFaceted($list));
 
         // Favorites
         $this->generateFavorites();
@@ -268,7 +272,16 @@ class Ambassador extends Reports {
         $analyzersDocHTML = "";
 
         $analyzersList = array_merge(Analyzer::getThemeAnalyzers($this->themesToShow),
-                                     Analyzer::getThemeAnalyzers('Preferences'));
+                                     Analyzer::getThemeAnalyzers('Preferences'),
+                                     Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
+                                     Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
+                                     Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
+                                     Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
+                                     Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
+                                     Analyzer::getThemeAnalyzers('CompatibilityPHP71'),
+                                     Analyzer::getThemeAnalyzers('CompatibilityPHP72')
+                                     );
+        $analyzersList = array_keys(array_count_values($analyzersList));
                                      
         foreach($analyzersList as $analyzerName) {
             $analyzer = Analyzer::getInstance($analyzerName);
@@ -1565,9 +1578,10 @@ SQL;
       var data_items = [
 $issues
 ];
+
       var item_template =  
         '<tr>' +
-          '<td width="20%"><a href="<%= "analyzers_doc.html#" + obj.analyzer_md5 %>" title="Go to code"><%= obj.analyzer %></a></td>' +
+          '<td width="20%"><a href="<%= "analyzers_doc.html#" + obj.analyzer_md5 %>" title="Documentation for <%= obj.analyzer %>"><i class="fa fa-book"></i></a> <%= obj.analyzer %></td>' +
           '<td width="20%"><a href="<%= "codes.html#file=" + obj.file + "&line=" + obj.line %>" title="Go to code"><%= obj.file + ":" + obj.line %></a></td>' +
           '<td width="18%"><%= obj.code %></td>' + 
           '<td width="2%"><%= obj.code_detail %></td>' +
@@ -2066,10 +2080,10 @@ SQL
             } else {
                 $result = -1;
             }
-            $result = $this->Compatibility($result);
+            $result = $this->Compatibility($result, $l);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#'.md5($name).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
-            $compatibility .= "<tr><td>$name $link</td><td>$result</td></tr>\n";
+            $link = '<a href="analyzers_doc.html#'.md5($l).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $compatibility .= "<tr><td>$link $name</td><td>$result</td></tr>\n";
         }
 
         $description = <<<HTML
@@ -2839,15 +2853,15 @@ HTML;
         return $cveHtml;
     }
 
-    private function Compatibility($count) {
+    private function Compatibility($count, $analyzer) {
         if ($count == Analyzer::VERSION_INCOMPATIBLE) {
-            return '<i class="fa fa-ban"></i>';
+            return '<i class="fa fa-ban" style="color: orange"></i>';
         } elseif ($count == Analyzer::CONFIGURATION_INCOMPATIBLE) {
-            return '<i class="fa fa-cogs"></i>';
+            return '<i class="fa fa-cogs" style="color: orange"></i>';
         } elseif ($count === 0) {
-            return '<i class="fa fa-check-square-o"></i>';
+            return '<i class="fa fa-check-square-o" style="color: green"></i>';
         } else {
-            return '<i class="fa fa-warning red"></i>&nbsp;'.$count.' warnings';
+            return '<i class="fa fa-warning" style="color: red"></i>&nbsp;<a href="compatibility_issues.html#analyzer='.$analyzer.'">'.$count.' warnings</a>';
         }
     }
     
