@@ -3331,7 +3331,14 @@ class Load extends Tasks {
     }
 
     private function processVariable() {
-        $variable = $this->processSingle('Variable');
+        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OBJECT_OPERATOR) {
+            $atom = 'Variableobject';
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET) {
+            $atom = 'Variablearray';
+        } else {
+            $atom = 'Variable';
+        }
+        $variable = $this->processSingle($atom);
         if ($this->tokens[$this->id][1] === '$this') {
             $currentClass = end($this->currentClassTrait);
             if ($currentClass instanceof Atom) {

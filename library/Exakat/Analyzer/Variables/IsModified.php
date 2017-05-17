@@ -34,13 +34,13 @@ class IsModified extends Analyzer {
     public function analyze() {
         $atoms = 'Variable';
 
-        $this->atomIs($atoms)
+        $this->atomIs(array('Variablearray', 'Variable'))
              ->inIsIE('VARIABLE')
              ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'DEFINE', 'CAST'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs($atoms)
+        $this->atomIs(array('Variablearray', 'Variable'))
              ->inIsIE(array('VARIABLE', 'APPEND'))
              ->inIs(array('LEFT', 'VARIABLE'))
              ->atomIs(array('Assignation', 'Arrayappend'))
@@ -77,7 +77,7 @@ class IsModified extends Analyzer {
         $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs($atoms);
+             ->atomIs(self::$VARIABLES_ALL);
         $this->prepareQuery();
 
         // simple variable + default value : already done in line 18
@@ -110,7 +110,7 @@ class IsModified extends Analyzer {
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->outIsIE('VARIABLE')
-                 ->atomIs($atoms);
+                 ->atomIs(self::$VARIABLES_ALL);
             $this->prepareQuery();
         }
 

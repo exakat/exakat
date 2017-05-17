@@ -29,7 +29,7 @@ class ThisIsNotAnArray extends Analyzer {
 
     public function analyze() {
         // direct class
-        $this->atomIs('Variable')
+        $this->atomIs('Variablearray')
              ->codeIs('$this')
              ->inIs(array('VARIABLE', 'APPEND'))
              ->_as('results')

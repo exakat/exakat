@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class SuperGlobalUsage extends Analyzer {
     public function analyze() {
         // PHP super global Usage
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs(array('$_GET', '$_POST', '$_REQUEST'), true);
         $this->prepareQuery();
     }

@@ -28,12 +28,12 @@ use Exakat\Analyzer\Analyzer;
 class UseCli extends Analyzer {
     public function analyze() {
         // GPC + R
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs(array('$argv', '$argc'), true);
         $this->prepareQuery();
 
         // $_SERVER + special index
-        $this->atomIs('Variable')
+        $this->atomIs('Variablearray')
              ->codeIs('$_SERVER', true)
              ->inIs('VARIABLE')
              ->outIs('INDEX')

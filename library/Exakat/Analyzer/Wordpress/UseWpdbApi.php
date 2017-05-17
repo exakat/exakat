@@ -30,7 +30,7 @@ class UseWpdbApi extends Analyzer {
         $crudAlternative = join('|', $crud);
 
         // $wpdb->query('delete from sometable') 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->atomIs('Methodcall')
@@ -47,7 +47,7 @@ class UseWpdbApi extends Analyzer {
         $this->prepareQuery();
         
         // $wpdb->query("delete from ".$wpdb->prefix."table") 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->atomIs('Methodcall')
@@ -65,7 +65,7 @@ class UseWpdbApi extends Analyzer {
         $this->prepareQuery();
 
         // $wpdb->query("delete from $wpdb->prefix") 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->atomIs('Methodcall')

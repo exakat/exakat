@@ -31,7 +31,7 @@ class VariableUppercase extends Analyzer {
     }
     
     public function analyze() {
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->analyzerIs('Variables/Variablenames')
              ->codeIsNot(VariablePhp::$variables, true)
              ->codeIsNot('$_', true)

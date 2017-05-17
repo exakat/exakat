@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Variables_StrangeName extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testVariables_StrangeName01()  { $this->generic_test('Variables/StrangeName.01'); }
+    public function testVariables_StrangeName02()  { $this->generic_test('Variables/StrangeName.02'); }
 }
 ?>

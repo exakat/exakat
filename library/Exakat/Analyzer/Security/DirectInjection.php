@@ -50,7 +50,7 @@ class DirectInjection extends Analyzer {
              ->_as('result')
              ->raw($safeIndex)
              ->outIsIE('VARIABLE')
-             ->atomIs('Variable')
+             ->atomIs(self::$VARIABLES_ALL)
              ->codeIs($vars, true)
              ->back('first')
 
@@ -75,7 +75,7 @@ class DirectInjection extends Analyzer {
         $this->prepareQuery();
 
         // $_GET/_POST ... directly as argument of PHP functions
-        $this->atomIs('Variable')
+        $this->atomIs('Variablearray')
              ->codeIs($vars, true)
              ->inIs('VARIABLE')
              ->raw($safeIndex)
@@ -89,7 +89,7 @@ class DirectInjection extends Analyzer {
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
-        $this->atomIs('Variable')
+        $this->atomIs('Variablearray')
              ->codeIs($vars, true)
              ->inIs('VARIABLE')
              ->raw($safeIndex)
@@ -99,7 +99,7 @@ class DirectInjection extends Analyzer {
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs($vars, true)
              ->goToArray()
              ->inIs('SOURCE');

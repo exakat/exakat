@@ -29,7 +29,7 @@ class ThisIsForClasses extends Analyzer {
 
     public function analyze() {
         // General case
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs('$this')
              ->hasNoClass()
              ->hasNoTrait()
@@ -39,7 +39,7 @@ class ThisIsForClasses extends Analyzer {
         // Inside Classes
         // catch, global, static
         // Any cast of $this is bad, unset or else. 
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->hasClassTrait()
              ->codeIs('$this')
              ->inIs(array('VARIABLE', 'STATIC', 'GLOBAL', 'CAST'))
@@ -48,7 +48,7 @@ class ThisIsForClasses extends Analyzer {
         $this->prepareQuery();
 
         // foreach
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs('$this')
              ->hasClassTrait()
              ->inIsIE(array('KEY', 'VALUE'))
@@ -57,7 +57,7 @@ class ThisIsForClasses extends Analyzer {
         $this->prepareQuery();
 
         // unset($this)
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs('$this')
              ->hasClassTrait()
              ->inIs('ARGUMENT')

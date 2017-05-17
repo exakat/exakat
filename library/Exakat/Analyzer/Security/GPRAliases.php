@@ -44,7 +44,7 @@ class GPRAliases extends Analyzer {
              ->outIs('RIGHT')
              ->atomIs('Array')
              ->outIsIE('VARIABLE')
-             ->atomIs('Variable')
+             ->atomIs('Variablearray')
              ->codeIs($webVariables, true)
              ->back('first')
              ->outIs('LEFT');

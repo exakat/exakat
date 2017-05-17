@@ -42,7 +42,7 @@ class IndirectInjection extends Analyzer {
              ->savePropertyAs('rank', 'rank')
              ->_as('result')
              ->outIsIE('VARIABLE')
-             ->atomIs('Variable')
+             ->atomIs(self::$VARIABLES_ALL)
              ->codeIs($vars, true)
              ->back('first')
 
@@ -63,7 +63,7 @@ class IndirectInjection extends Analyzer {
              ->outIs('ARGUMENT')
              ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('CODE')
-             ->atomIs('Variable')
+             ->atomIs(self::$VARIABLES_ALL)
              ->samePropertyAs('code', 'varname')
              ->back('result');
         $this->prepareQuery();
@@ -80,20 +80,20 @@ class IndirectInjection extends Analyzer {
 
         // $_GET/_POST array... inside a string is useless and safe (will print Array)
         // "$_GET/_POST ['index']"... inside a string or a concatenation is unsafe
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs($vars, true)
              ->inIs('CONCAT');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
-        $this->atomIs('Variable')
+        $this->atomIs('Variablearray')
              ->codeIs($vars, true)
              ->inIs('VARIABLE')
              ->inIs('CONCAT');
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs($vars, true)
              ->inIs('SOURCE');
         $this->prepareQuery();

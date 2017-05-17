@@ -29,7 +29,7 @@ class WpdbPrepareForVariables extends Analyzer {
         $methods = array('get_var', 'get_results', 'get_row', 'get_col');
 
         // $wpdb->get_results("insert into table values (1,$variable,3)") 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->_as('results')
@@ -47,7 +47,7 @@ class WpdbPrepareForVariables extends Analyzer {
         $this->prepareQuery();
 
         // $wpdb->get_results("insert into table values (1,".$variable.",3)") 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->_as('results')

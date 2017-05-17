@@ -60,7 +60,7 @@ class Php72Deprecation extends Analyzer {
         $this->prepareQuery();
         
         // usage of $php_errormsg
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->analyzerIs('Variables/Variablenames')
              ->codeIs('$php_errormsg', self::CASE_SENSITIVE);
         $this->prepareQuery();

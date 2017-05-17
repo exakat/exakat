@@ -28,7 +28,7 @@ class WpdbPrepareOrNot extends Analyzer {
     public function analyze() {
         // No variable, don't use prepare
         // $wpdb->prepare("insert into table values (1,2,3)") 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->_as('results')
@@ -44,7 +44,7 @@ class WpdbPrepareOrNot extends Analyzer {
         $this->prepareQuery();
 
         // $wpdb->prepare("insert into $wpdb->prefix values (1,2,3)") 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->_as('results')
@@ -63,7 +63,7 @@ class WpdbPrepareOrNot extends Analyzer {
         $this->prepareQuery();
 
         // $wpdb->prepare(<<<SQL insert into $wpdb->prefix values (1,2,3) SQL;) 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->_as('results')
@@ -82,7 +82,7 @@ class WpdbPrepareOrNot extends Analyzer {
         $this->prepareQuery();
         
         // $wpdb->prepare("insert into ".$wpdb->prefix." values (1,2,3)") 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->_as('results')

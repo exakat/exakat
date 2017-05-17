@@ -29,7 +29,7 @@ class VariableConstant extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Functioncall')
-             ->codeIs('constant')
+             ->fullnspathIs('\\constant')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT');
         $this->prepareQuery();

@@ -33,12 +33,12 @@ class VariableUsedOnceByContext extends Analyzer {
     }
     
     public function analyze() {
-        $variables = $this->query('g.V().hasLabel("Variable").not(has("code", "\\$this")).where( __.in("PROPERTY").count().is(eq(0)) ).where( 
+        $variables = $this->query('g.V().hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")).where( __.in("PROPERTY").count().is(eq(0)) ).where( 
 repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GLOBAL", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PPP", "POSTPLUSPLUS", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"))
 .until(hasLabel("File")).emit().hasLabel("Function").count().is(eq(0))).groupCount("m").by("code").cap("m")
 .toList().get(0).findAll{ a,b -> b == 1}.keySet()');
 
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->hasNoIn(array('PPP'))
              ->raw('where( __.in("LEFT").in("PPP").count().is(eq(0)) )')
              ->hasNoFunction()
@@ -49,8 +49,8 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
              ->raw('where( __
                    .sideEffect{counts = [:]}
                              .repeat( out().where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) ) )
-                             .emit( hasLabel("Variable").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
-                             .hasLabel("Variable").not(has("code", "\\$this"))
+                             .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
+                             .hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this"))
                              .where( __.in("PROPERTY").count().is(eq(0)) )
                              .sideEffect{ k = it.get().value("code"); 
                                          if (counts[k] == null) {
@@ -62,7 +62,7 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
                           )
                    .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
                    .repeat( out().where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) )  )
-                   .emit( hasLabel("Variable").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
+                   .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
                    .filter{ it.get().value("code") in names }');
         $this->prepareQuery();
     }

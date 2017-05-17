@@ -29,7 +29,7 @@ class ThisIsNotForStatic extends Analyzer {
 
     public function analyze() {
         // Check into Class
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs('$this')
              ->goToFunction()
              ->_as('result')

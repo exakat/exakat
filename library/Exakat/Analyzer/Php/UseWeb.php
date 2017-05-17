@@ -28,12 +28,12 @@ use Exakat\Analyzer\Analyzer;
 class UseWeb extends Analyzer {
     public function analyze() {
         // GPC + R
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs(array('$_GET', '$_POST', '$_REQUEST', '$_COOKIE'), true);
         $this->prepareQuery();
 
         // $_SERVER + special index
-        $this->atomIs('Variable')
+        $this->atomIs('Variablearray')
              ->codeIs('$_SERVER', true)
              ->inIs('VARIABLE')
              ->outIs('INDEX')

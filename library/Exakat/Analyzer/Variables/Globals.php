@@ -38,14 +38,14 @@ class Globals extends Analyzer {
         $this->prepareQuery();
 
         // Global in a function
-        $this->atomIs('Variable')
+        $this->atomIs('Variablearray')
              ->codeIs('$GLOBALS')
              ->inIs('VARIABLE')
              ->atomIs('Array');
         $this->prepareQuery();
 
         // implicit global 
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIsNot(array('$GLOBALS', '$_POST'))
              ->hasNoClassInterfaceTrait()
              ->hasNoFunction();

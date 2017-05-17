@@ -30,7 +30,7 @@ class WpdbBestUsage extends Analyzer {
         $ignoreCommandsRegex = join('|', $ignoreCommands);
 
         // $wpdb->get_var("select ".$wpdb->prefix."table") 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->atomIs('Methodcall')
@@ -46,7 +46,7 @@ class WpdbBestUsage extends Analyzer {
         $this->prepareQuery();
 
         // $wpdb->get_var("select {$wpdb->prefix}table") 
-        $this->atomIs('Variable')
+        $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
              ->atomIs('Methodcall')

@@ -40,7 +40,7 @@ GREMLIN
 );
 
         $inGLobals = $this->query(<<<'GREMLIN'
-g.V().hasLabel("Variable").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").values("globalvar")
+g.V().hasLabel("Variable", "Variablearray").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").values("globalvar")
 GREMLIN
 );
 
@@ -54,7 +54,7 @@ GREMLIN
              ->codeIs($loneGlobal);
         $this->prepareQuery();
 
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->codeIs('$GLOBALS')
              ->inIs('VARIABLE')
              ->atomIs('Array')
