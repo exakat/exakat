@@ -28,7 +28,7 @@ use Exakat\Data\Methods;
 
 class ShouldPreprocess extends Analyzer {
     public function analyze() {
-        $dynamicAtoms = array('Variable', 'Property', 'Magicconstant', 'Staticmethodcall', 'Staticproperty');
+        $dynamicAtoms = array('Variable', 'Property', 'Magicconstant', 'Staticmethodcall', 'Staticproperty', 'Methodcall');
         //'Functioncall' : if they also have only constants.
 
         $methods = new Methods();
