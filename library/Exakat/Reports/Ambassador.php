@@ -242,9 +242,23 @@ class Ambassador extends Reports {
         return $lines;
     }
 
+    private function php2html($description){
+        $return = str_replace('<br />', '', $description[0]);
+        $return = htmlentities($return);
+        
+        return '</p><pre><code class="php">'
+                .$return
+                .'</code></pre><p>';
+    }
+
     private function setPHPBlocs($description){
-        $description = str_replace("<?php", '</p><pre><code class="php">&lt;?php', $description);
-        $description = str_replace("?>", '?&gt;</code></pre><p>', $description);
+        $description = nl2br($description);
+
+        $description = preg_replace("#`(.*?) <(.*?)>`_#is", '<a href="$2" title="$1">$1 <i class="fa fa-sign-out"></i></a>', $description);
+        
+        $description = preg_replace_callback("#<\?php(.*?)\?>#is", array($this, 'php2html'), $description);
+        
+
         return $description;
     }
 
@@ -253,10 +267,14 @@ class Ambassador extends Reports {
         $baseHTML = $this->getBasedPage('analyzers_doc');
         $analyzersDocHTML = "";
 
-        foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer);
+        $analyzersList = array_merge(Analyzer::getThemeAnalyzers($this->themesToShow),
+                                     Analyzer::getThemeAnalyzers('Preferences'));
+                                     
+        foreach($analyzersList as $analyzerName) {
+            $analyzer = Analyzer::getInstance($analyzerName);
             $description = $analyzer->getDescription();
-            $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
+
+            $analyzersDocHTML.='<h2><a href="issues.html#analyzer='.$analyzerName.'" id="'.md5($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
 
             $badges = array();
             $v = $description->getVersionAdded();
@@ -276,7 +294,7 @@ class Ambassador extends Reports {
             }
 
             $analyzersDocHTML .= '<p>'.implode(' - ', $badges).'</p>';
-            $analyzersDocHTML.='<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
+            $analyzersDocHTML .= '<p>'.$this->setPHPBlocs($description->getDescription()).'</p>';
 
             $v = $description->getClearPHP();
             if(!empty($v)){
@@ -587,69 +605,8 @@ JAVASCRIPT;
 
         $baseHTML = $this->getBasedPage('favorites_issues');
 
-        $preferencesJson = implode(', '. PHP_EOL, $this->getIssuesFaceted('Preferences'));
-        $blocjs = <<<JAVASCRIPT
- <script src="facetedsearch.js"></script>
-
-
-  <script>
-  "use strict";
-
-    $(document).ready(function() {
-
-      var data_items = [
-$preferencesJson
-];
-      var item_template =  
-        '<tr>' +
-          '<td width="20%"><%= obj.analyzer %></td>' +
-          '<td width="20%"><%= obj.file + ":" + obj.line %></td>' +
-          '<td width="18%"><%= obj.code %></td>' + 
-          '<td width="2%"><%= obj.code_detail %></td>' +
-          '<td width="7%" align="center"><%= obj.severity %></td>' +
-          '<td width="7%" align="center"><%= obj.complexity %></td>' +
-          '<td width="16%"><%= obj.recipe %></td>' +
-        '</tr>' +
-        '<tr class="fullcode">' +
-          '<td colspan="7" width="100%"><div class="analyzer_help"><%= obj.analyzer_help %></div><pre><code><%= obj.code_plus %></code><div class="text-right"><a target="_BLANK" href="codes.html?file=<%= obj.link_file %>" class="btn btn-info">View File</a></div></pre></td>' +
-        '</tr>';
-      var settings = { 
-        items           : data_items,
-        facets          : { 
-          'analyzer'  : 'Analyzer',
-          'file'      : 'File',
-          'severity'  : 'Severity',
-          'complexity': 'Complexity',
-          'receipt'   : 'Receipt'
-        },
-        facetContainer     : '<div class="facetsearch btn-group" id=<%= id %> ></div>',
-        facetTitleTemplate : '<button class="facettitle multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected"><span class="multiselect-selected-text"><%= title %></span><b class="caret"></b></button>',
-        facetListContainer : '<ul class="facetlist multiselect-container dropdown-menu"></ul>',
-        listItemTemplate   : '<li class=facetitem id="<%= id %>" data-analyzer="<%= data_analyzer %>" data-file="<%= data_file %>"><span class="check"></span><%= name %><span class=facetitemcount>(<%= count %>)</span></li>',
-        bottomContainer    : '<div class=bottomline></div>',  
-        resultSelector   : '#results',
-        facetSelector    : '#facets',
-        resultTemplate   : item_template,
-        paginationCount  : 50
-      }   
-      $.facetelize(settings);
-      
-      var analyzerParam = window.location.hash.split('analyzer=')[1];
-      var fileParam = window.location.hash.split('file=')[1];
-      if(analyzerParam !== undefined) {
-        $('#analyzer .facetlist').find("[data-analyzer='" + md5(analyzerParam) + "']").click();
-      }
-      if(fileParam !== undefined) {
-        $('#file .facetlist').find("[data-file='" + md5(fileParam) + "']").click();
-      }
-    });
-  </script>
-
-JAVASCRIPT;
-
-        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
-        $baseHTML = $this->injectBloc($baseHTML, 'TITLE', 'Favorites\' issues');
-        $this->putBasedPage('favorites_issues', $finalHTML);
+        $this->generateIssuesEngine('favorites_issues',
+                                    $this->getIssuesFaceted('Preferences') );
     }
 
     public function generateDashboard() {
@@ -1589,9 +1546,14 @@ SQL;
     }
 
     private function generateIssues() {
-        $baseHTML = $this->getBasedPage('issues');
+        $this->generateIssuesEngine('issues',
+                                    $this->getIssuesFaceted($this->themesToShow) );
+    }
+    
+    private function generateIssuesEngine($filename, $issues) {
+        $baseHTML = $this->getBasedPage($filename, $issues);
 
-        $issues = implode(', '.PHP_EOL, $this->getIssuesFaceted($this->themesToShow));
+        $issues = implode(', '.PHP_EOL, $issues);
         $blocjs = <<<JAVASCRIPT
         
   <script src="facetedsearch.js"></script>
@@ -1605,7 +1567,7 @@ $issues
 ];
       var item_template =  
         '<tr>' +
-          '<td width="20%"><%= obj.analyzer %></td>' +
+          '<td width="20%"><a href="<%= "analyzers_doc.html#" + obj.analyzer_md5 %>" title="Go to code"><%= obj.analyzer %></a></td>' +
           '<td width="20%"><a href="<%= "codes.html#file=" + obj.file + "&line=" + obj.line %>" title="Go to code"><%= obj.file + ":" + obj.line %></a></td>' +
           '<td width="18%"><%= obj.code %></td>' + 
           '<td width="2%"><%= obj.code_detail %></td>' +
@@ -1651,7 +1613,7 @@ JAVASCRIPT;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' list');
-        $this->putBasedPage('issues', $finalHTML);
+        $this->putBasedPage($filename, $finalHTML);
     }
 
     public function getIssuesFaceted($theme) {
