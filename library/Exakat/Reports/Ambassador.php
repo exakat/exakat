@@ -1567,7 +1567,7 @@ SQL;
         $baseHTML = $this->getBasedPage($filename, $issues);
 
         $issues = implode(', '.PHP_EOL, $issues);
-        $blocjs = <<<JAVASCRIPT
+        $blocjs = <<<JAVASCRIPTCODE
         
   <script src="facetedsearch.js"></script>
   <script>
@@ -1623,7 +1623,7 @@ $issues
       }
     });
   </script>
-JAVASCRIPT;
+JAVASCRIPTCODE;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' list');
@@ -2021,9 +2021,11 @@ SQL
 
         $total = $this->sqlite->querySingle('SELECT value FROM hash WHERE key = "files"');
         $info = array();
-        foreach($this->config->other_php_versions as $suffix) {
+        foreach(array_merge(array($this->config->phpversion[0].$this->config->phpversion[2]), $this->config->other_php_versions) as $suffix) {
+            $version = $suffix[0].'.'.$suffix[1];
             $res = $this->sqlite->querySingle('SELECT name FROM sqlite_master WHERE type="table" AND name="compilation'.$suffix.'"');
             if (!$res) {
+                $compilations .= "<tr><td>$version</td><td>N/A</td><td>N/A</td><td>Compilation not tested</td><td>N/A</td></tr>\n";
                 continue; // Table was not created
             }
 
@@ -2032,7 +2034,6 @@ SQL
             while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
                 $files[] = $row['file'];
             }
-            $version = $suffix[0].'.'.substr($suffix, 1);
             if (empty($files)) {
                 $files       = 'No compilation error found.';
                 $errors      = 'N/A';
