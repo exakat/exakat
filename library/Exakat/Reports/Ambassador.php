@@ -345,7 +345,9 @@ class Ambassador extends Reports {
                    <div class="block-cell text-center">'.$value.'</div>
                  </div>
 ';
-                $values[] = '{label:"'.$key.'", value:'.$value.'}';
+                if ($value > 0) {
+                    $values[] = '{label:"'.$key.'", value:'.$value.'}';
+                }
                 $total += $value;
             }
             $nb = 4 - count($list);
