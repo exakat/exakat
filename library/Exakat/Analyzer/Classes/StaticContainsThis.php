@@ -32,7 +32,7 @@ class StaticContainsThis extends Analyzer {
              ->outIs('STATIC')
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInside(self::$VARIABLES_ALL)
              ->codeIs('$this', true)
              ->back('first');
         $this->prepareQuery();

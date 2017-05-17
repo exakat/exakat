@@ -48,7 +48,7 @@ class AvoidOtherGlobals extends Analyzer {
              ->noDelimiterIsNot($globalNames)
              ->inIs('INDEX')
              ->outIs('VARIABLE')
-             ->atomIs('Variable')
+             ->atomIs('Variablearray')
              ->codeIs('$GLOBALS')
              ->back('first');
         $this->prepareQuery();

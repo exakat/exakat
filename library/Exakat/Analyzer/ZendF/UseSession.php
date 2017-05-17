@@ -33,7 +33,8 @@ class UseSession extends Analyzer {
 
                 $serviceManager->get('Zend\Session\    ');
                 */
-        $this->atomIs('Methodcallname')
+        $this->atomIs('Methodcall')
+             ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->codeIs('get')
              ->outIs('ARGUMENTS')

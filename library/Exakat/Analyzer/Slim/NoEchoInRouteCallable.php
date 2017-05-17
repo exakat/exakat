@@ -37,7 +37,7 @@ class NoEchoInRouteCallable extends Slim {
         // In a closure
         $this->atomIs('Methodcall')
              ->outIs('OBJECT')
-             ->atomIs('Variable')
+             ->atomIs('Variableobject')
              ->codeIs($apps)
              ->back('first')
              ->outIs('METHOD')
@@ -55,7 +55,7 @@ class NoEchoInRouteCallable extends Slim {
         // In a invoked class
         $this->atomIs('Methodcall')
              ->outIs('OBJECT')
-             ->atomIs('Variable')
+             ->atomIs('Variableobject')
              ->codeIs($apps)
              ->back('first')
              ->outIs('METHOD')

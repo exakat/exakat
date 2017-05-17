@@ -37,7 +37,7 @@ class UsedRoutes extends Slim {
         // Callable is a closure
         $this->atomIs('Methodcall')
              ->outIs('OBJECT')
-             ->atomIs('Variable')
+             ->atomIs('Variableobject')
              ->codeIs($apps)
              ->back('first')
              ->outIs('METHOD')

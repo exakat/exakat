@@ -59,7 +59,7 @@ class NoGlobalModification extends Analyzer {
              ->noDelimiterIs($globalNames)
              ->inIs('INDEX')
              ->outIs('VARIABLE')
-             ->atomIs('Variable')
+             ->atomIs('Variablearray')
              ->codeIs('$GLOBALS')
              ->analyzerIs('Variables/IsModified')
              ->back('first');

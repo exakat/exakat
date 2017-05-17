@@ -45,7 +45,7 @@ class SuperGlobalContagion extends Analyzer {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIsNot('Variable')
-             ->atomInside('Variable')
+             ->atomInside('Variablearray')
              ->codeIs($vars)
              ->back('first')
              ->outIs('LEFT')
@@ -64,7 +64,7 @@ class SuperGlobalContagion extends Analyzer {
              ->outIs('LEFT')
              ->_as('result')
              ->atomIsNot('Variable')
-             ->atomInside('Variable')
+             ->atomInside('Variablearray')
              ->codeIsNot($vars)
              ->back('result');
         $this->prepareQuery();
@@ -73,13 +73,13 @@ class SuperGlobalContagion extends Analyzer {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIsNot('Variable')
-             ->atomInside('Variable')
+             ->atomInside('Variablearray')
              ->codeIs($vars)
              ->back('first')
              ->outIs('LEFT')
              ->_as('result')
              ->atomIsNot('Variable')
-             ->atomInside('Variable')
+             ->atomInside('Variablearray')
              ->codeIsNot($vars)
              ->back('result');
         $this->prepareQuery();
