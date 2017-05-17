@@ -86,6 +86,7 @@ abstract class Analyzer {
     static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Property', 'Array');
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
+    static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray');
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
