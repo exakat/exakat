@@ -62,21 +62,19 @@ class Update extends Tasks {
     private function update($project) {
         $path = $this->config->projects_root.'/projects/'.$project;
         
-        $config = Config::factory(array('php', 'exakat', 'update', '-p', $project));
-
         switch(true) {
             // symlink case
-            case $config->project_vcs === 'symlink' :
+            case $this->config->project_vcs === 'symlink' :
                 // Nothing to do, the symlink is here for that
                 break;
 
             // copy case
-            case $config->project_vcs === 'copy' :
+            case $this->config->project_vcs === 'copy' :
                 // Remove and copy again
                 $total = rmdirRecursive($this->config->projects_root.'/projects/'.$project.'/code/');
                 display("$total files were removed");
 
-                $total = copyDir(realpath($config->project_url), $this->config->projects_root.'/projects/'.$project.'/code');
+                $total = copyDir(realpath($this->config->project_url), $this->config->projects_root.'/projects/'.$project.'/code');
                 display("$total files were copied");
                 break;
 
@@ -133,7 +131,7 @@ class Update extends Tasks {
                 break;
 
             // composer case
-            case $config->project_vcs === 'composer' :
+            case $this->config->project_vcs === 'composer' :
                 display('Composer update '.$project);
                 $res = shell_exec('cd '.$path.'/code/; composer -q install ');
 
@@ -141,7 +139,7 @@ class Update extends Tasks {
                 $json = json_decode($json);
 
                 foreach($json->packages as $package) {
-                    if ($package->name == $config->project_url) {
+                    if ($package->name == $this->config->project_url) {
                         display( "Composer updated to revision ".$package->source->reference.' ( version : '.$package->version.' )');
                     }
                 }
