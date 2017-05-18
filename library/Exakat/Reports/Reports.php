@@ -39,6 +39,7 @@ abstract class Reports {
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
                                           'ZendFramework',  'RadwellCode', 'CodeSniffer', 'Slim',
                                           'FacetedJson', 'Json', 'OnepageJson',
+                                          'Codeflower', 
                                           'Codacy',
                                           );
 

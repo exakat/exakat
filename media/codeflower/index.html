@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <!-- Use the Source, Luke -->
+  <head>
+    <title>CodeFlower Source code visualization</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link type="text/css" rel="stylesheet" href="stylesheets/bootstrap.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Rosario:400,700' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
+    <style type="text/css">
+circle.node {
+  cursor: pointer;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
+circle.node.directory {
+  stroke: #9ecae1;
+  stroke-width: 2px;
+}
+
+circle.node.collapsed {
+  stroke: #555;
+}
+
+.nodetext {
+  fill: #252929;
+  font-weight: bold;
+  text-shadow: 0 0 0.2em white;
+}
+
+line.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+}
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="container">
+        <h1>CodeFlower Source code visualization</h1>
+        <p class="lead">This experiment visualizes source repositories using an interactive tree. Each disc represents a file, with a radius proportional to the number of lines of code (loc). All rendering is done client-side, in JavaScript. Try hovering on nodes to see the loc number, clicking on directory nodes to fold them, dragging nodes to rearrange the layout, and changing project to see different tree structures. Built with <a href="https://github.com/mbostock/d3">d3.js</a>. Inspired by <a href="https://code.google.com/p/codeswarm/">Code Swarm</a> and <a href="https://code.google.com/p/gource/">Gource</a>.</p>
+        <form class="form-inline">
+          <fieldset>
+          <label>Flower presentation of your code :</label>
+          <select id="project">
+            <SELECT>
+          </select>
+          </fieldset>
+        </form>
+        <div id="visualization"></div>
+        
+    </div>
+    <script type="text/javascript" src="javascripts/d3/d3.js"></script>
+    <script type="text/javascript" src="javascripts/d3/d3.geom.js"></script>
+    <script type="text/javascript" src="javascripts/d3/d3.layout.js"></script>
+    <script type="text/javascript" src="javascripts/CodeFlower.js"></script>
+    <script type="text/javascript" src="javascripts/dataConverter.js"></script>
+    <script type="text/javascript">
+      var currentCodeFlower;
+      var createCodeFlower = function(json) {
+        // update the jsonData textarea
+//        document.getElementById('jsonData').value = JSON.stringify(json);
+        // remove previous flower to save memory
+        if (currentCodeFlower) currentCodeFlower.cleanup();
+        // adapt layout size to the total number of elements
+        var total = countElements(json);
+        w = parseInt(Math.sqrt(total) * 30, 10) + 100;
+        h = parseInt(Math.sqrt(total) * 30, 10) + 100;
+        // create a new CodeFlower
+        currentCodeFlower = new CodeFlower("#visualization", w, h).update(json);
+      };
+
+      d3.json('data/namespaces.json', createCodeFlower);
+
+      document.getElementById('project').addEventListener('change', function() {
+        d3.json(this.value, createCodeFlower);
+      });
+
+    </script>
+  </body>
+</html>
