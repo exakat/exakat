@@ -2593,6 +2593,8 @@ JAVASCRIPT;
 
                             'Trigger error'       => 'Php/TriggerErrorUsage',
                             'Error messages'      => 'Structures/ErrorMessages',
+                            
+                            'Uses debug'          => 'Structures/UseDebug',
                      ),
 
                     'External systems' => array(
