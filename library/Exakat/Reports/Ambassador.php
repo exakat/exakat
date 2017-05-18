@@ -1987,7 +1987,9 @@ SQL;
         $res = $this->sqlite->query(<<<SQL
 SELECT analyzer FROM resultsCounts 
     WHERE ( analyzer LIKE "Extensions/Ext%" OR 
-            analyzer IN ("Structures/FileUploadUsage", "Php/UsesEnv"))
+            analyzer IN ("Structures/FileUploadUsage", 
+                         "Php/UsesEnv",
+                         "Php/UseBrowscap"))
         AND count > 0
 SQL
         );
@@ -1998,6 +2000,9 @@ SQL
             } elseif ($row['analyzer'] == 'Php/UsesEnv') {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
                 $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/env.json'));
+            } elseif ($row['analyzer'] == 'Php/UseBrowscap') {
+                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Browser</td></tr>\n";
+                $data['Environnement'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/browscap.json'));
             } elseif ($row['analyzer'] == 'Php/ErrorLogUsage') {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Error Log</td></tr>\n";
                 $data['Errorlog'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/errorlog.json'));
@@ -2471,6 +2476,7 @@ JAVASCRIPT;
                             'NSAPI'                      => 'Extensions/Extnsapi',
                             'Session'                    => 'Extensions/Extsession',
                             'Cookies'                    => 'Php/UseCookies',
+                            'Browscap'                   => 'Php/UseBrowscap',
                     ),
 
                     'CLI' => array(
