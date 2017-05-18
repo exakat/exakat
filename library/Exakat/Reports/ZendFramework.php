@@ -963,7 +963,7 @@ SQL;
                <div class="block-cell">&nbsp;</div>
                <div class="block-cell text-center">&nbsp;</div>
              </div>';
-        $issuesHtml .= str_repeat($filler, $nb);
+        $html .= str_repeat($filler, $nb);
 
         return array('html' => $html, 'script' => $dataScript);
     }
