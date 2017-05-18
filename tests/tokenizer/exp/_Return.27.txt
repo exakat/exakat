@@ -1,0 +1,36 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Return.27.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          return
+          Label : RETURN
+            array
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'Jan'
+                Label : VALUE
+                  ''
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'Feb'
+                Label : VALUE
+                  ''
+              Label : ARGUMENT
+                =>
+                Label : KEY
+                  'Mar'
+                Label : VALUE
+                  ''
+        Label : ELEMENT
+          Void
