@@ -32,7 +32,7 @@ class StaticLoop extends Analyzer {
         $nonDeterminist = $methods->getNonDeterministFunctions();
         $nonDeterminist = "'\\\\" . implode("', '\\\\", $nonDeterminist)."'";
 
-        $whereNonDeterminist = 'where( __.repeat( __.out() ).emit( hasLabel("Functioncall") ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").where(__.in("METHOD", "NEW").count().is(eq(0))).has("token", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") in ['.$nonDeterminist.']}.count().is(eq(0)) )';
+        $whereNonDeterminist = 'where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Functioncall") ).times('.self::MAX_LOOPING.').hasLabel("Functioncall").where(__.in("METHOD", "NEW").count().is(eq(0))).has("token", within("T_STRING", "T_NS_SEPARATOR")).filter{ it.get().value("fullnspath") in ['.$nonDeterminist.']}.count().is(eq(0)) )';
         
         // foreach with only one value
         $this->atomIs('Foreach')
@@ -43,7 +43,7 @@ class StaticLoop extends Analyzer {
              ->outIs('BLOCK')
 
              // Check that blind variable are not mentionned 
-             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == blind}.count().is(eq(0)) )')
+             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == blind}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->raw($whereNonDeterminist)
@@ -67,7 +67,7 @@ class StaticLoop extends Analyzer {
              ->outIs('BLOCK')
              
              // Check that blind variables are not mentionned 
-             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") in [v, k]}.count().is(eq(0)) )')
+             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") in [v, k]}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->raw($whereNonDeterminist)
@@ -84,11 +84,11 @@ class StaticLoop extends Analyzer {
 
         $this->atomIs('For')
              // collect all variables in INCREMENT and INIT (ignore FINAL)
-             ->raw('where( __.sideEffect{ blind = []}.out("INCREMENT", "INIT").repeat( out() ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').sideEffect{ blind.push(it.get().value("code")); }.fold() )')
+             ->raw('where( __.sideEffect{ blind = []}.out("INCREMENT", "INIT").repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').sideEffect{ blind.push(it.get().value("code")); }.fold() )')
              
              ->outIs('BLOCK')
              // check if the variables are used here
-             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") in blind}.count().is(eq(0)) )')
+             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") in blind}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->raw($whereNonDeterminist)
@@ -101,11 +101,11 @@ class StaticLoop extends Analyzer {
         // do...while
         $this->atomIs('Dowhile')
              // collect all variables
-             ->raw('where( __.sideEffect{ blind = []}.out("CONDITION").repeat( out() ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').sideEffect{ blind.push(it.get().value("code")); }.fold() )')
+             ->raw('where( __.sideEffect{ blind = []}.out("CONDITION").repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').sideEffect{ blind.push(it.get().value("code")); }.fold() )')
 
              ->outIs('BLOCK')
              // check if the variables are used here
-             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") in blind}.count().is(eq(0)) )')
+             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") in blind}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->raw($whereNonDeterminist)
@@ -119,11 +119,11 @@ class StaticLoop extends Analyzer {
         $this->atomIs('While')
 
              // collect all variables
-             ->raw('where( __.sideEffect{ blind = []}.out("CONDITION").repeat( out() ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').sideEffect{ blind.push(it.get().value("code")); }.fold() )')
+             ->raw('where( __.sideEffect{ blind = []}.out("CONDITION").repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').sideEffect{ blind.push(it.get().value("code")); }.fold() )')
 
              ->outIs('BLOCK')
              // check if the variables are used here
-             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") in blind}.count().is(eq(0)) )')
+             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") in blind}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
              ->raw($whereNonDeterminist)

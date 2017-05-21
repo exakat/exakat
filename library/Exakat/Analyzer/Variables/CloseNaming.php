@@ -45,7 +45,7 @@ GREMLIN
 );
 
         $this->atomIs('Function')
-             ->raw('where( __.sideEffect{ variables = []}.out("BLOCK").repeat( out() ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').filter{ it.get().value("code").length() > 3}.sideEffect{ variables.push(it.get().value("code")); }.fold() )')
+             ->raw('where( __.sideEffect{ variables = []}.out("BLOCK").repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable")).times('.self::MAX_LOOPING.').filter{ it.get().value("code").length() > 3}.sideEffect{ variables.push(it.get().value("code")); }.fold() )')
              ->raw('sideEffect{ 
     variables = variables.unique().sort();
     found = []; 

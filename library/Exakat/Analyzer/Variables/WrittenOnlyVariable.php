@@ -47,7 +47,7 @@ class WrittenOnlyVariable extends Analyzer {
              ->raw('sideEffect{ name = it.get().value("code"); }')
              
              ->goToFunction()
-             ->raw('where( __.out("BLOCK").repeat( __.out()).emit(hasLabel("Variable", "Variableobject", "Variablearray")).times('.self::MAX_LOOPING.')
+             ->raw('where( __.out("BLOCK").repeat( __.out('.$this->linksDown.')).emit(hasLabel("Variable", "Variableobject", "Variablearray")).times('.self::MAX_LOOPING.')
                              .filter{ it.get().value("code") == name}
                              .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead").count().is(neq(0)) )
                              .count().is(eq(0)) )')

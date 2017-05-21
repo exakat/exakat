@@ -40,7 +40,7 @@ class UsedPrivateProperty extends Analyzer {
              ->hasName()
              ->savePropertyAs('fullnspath', 'classe')
              ->outIs('BLOCK')
-             ->raw('where( __.repeat( __.out() ).emit( hasLabel("Staticproperty") ).times('.self::MAX_LOOPING.')
+             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Staticproperty") ).times('.self::MAX_LOOPING.')
                                                            .out("CLASS").filter{ it.get().value("token") in ["T_STRING", "T_NS_SEPARATOR", "T_STATIC" ] }.filter{ it.get().value("fullnspath") == classe }.in("CLASS")
                                                            .out("PROPERTY").filter{ it.get().value("code") == property }
                                                            .count().is(neq(0)) )')

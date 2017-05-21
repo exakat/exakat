@@ -34,7 +34,7 @@ class AlternativeConsistenceByFile extends Analyzer {
             normal = 0;
             alternative = 0;
             }')
-            ->raw('repeat( __.out()).emit(__.hasLabel('.$atomsList.')).times('.self::MAX_LOOPING.')
+            ->raw('repeat( __.out('.$this->linksDown.')).emit(__.hasLabel('.$atomsList.')).times('.self::MAX_LOOPING.')
                                     .hasLabel('.$atomsList.')')
             ->raw('sideEffect{ if (it.get().value("alternative")) { alternative = alternative + 1; } else { normal = normal + 1;}
                               }')

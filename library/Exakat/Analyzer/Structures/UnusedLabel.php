@@ -33,7 +33,7 @@ class UnusedLabel extends Analyzer {
              ->outIs('LABEL')
              ->savePropertyAs('code', 'name')
              ->goToFunction()
-             ->raw('where( __.out("BLOCK").repeat( __.out()).emit( hasLabel("Goto") ).times('.self::MAX_LOOPING.').out("GOTO").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
+             ->raw('where( __.out("BLOCK").repeat( __.out('.$this->linksDown.')).emit( hasLabel("Goto") ).times('.self::MAX_LOOPING.').out("GOTO").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 

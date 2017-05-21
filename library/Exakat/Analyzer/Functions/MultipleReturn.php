@@ -29,7 +29,7 @@ class MultipleReturn extends Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              ->hasName()
-             ->raw('where( __.repeat( __.out().not( hasLabel("Function", "Class")) ).emit( hasLabel("Return") ).times('.self::MAX_LOOPING.').count().is(gt(1)))');
+             ->raw('where( __.repeat( __.out('.$this->linksDown.').not( hasLabel("Function", "Class")) ).emit( hasLabel("Return") ).times('.self::MAX_LOOPING.').count().is(gt(1)))');
         $this->prepareQuery();
     }
 }

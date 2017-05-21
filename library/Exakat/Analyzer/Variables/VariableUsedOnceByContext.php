@@ -48,7 +48,7 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
         $this->atomIs('Function')
              ->raw('where( __
                    .sideEffect{counts = [:]}
-                             .repeat( out().where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) ) )
+                             .repeat( out('.$this->linksDown.').where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) ) )
                              .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
                              .hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this"))
                              .where( __.in("PROPERTY").count().is(eq(0)) )
@@ -61,7 +61,7 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
                               }.fold()
                           )
                    .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
-                   .repeat( out().where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) )  )
+                   .repeat( out('.$this->linksDown.').where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) )  )
                    .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
                    .filter{ it.get().value("code") in names }');
         $this->prepareQuery();

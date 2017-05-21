@@ -36,7 +36,7 @@ class PropertyUsedBelow extends Analyzer {
              ->savePropertyAs('propertyname', 'propertyname')
              ->goToClass()
              ->raw('where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
-                             .where( __.out("BLOCK").repeat( __.out()).emit(hasLabel("Property")).times('.self::MAX_LOOPING.')
+                             .where( __.out("BLOCK").repeat( __.out('.$this->linksDown.')).emit(hasLabel("Property")).times('.self::MAX_LOOPING.')
                                        .out("OBJECT").has("code", "\\$this").in("OBJECT")
                                        .out("PROPERTY").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == propertyname.toLowerCase()}
                               )
@@ -55,7 +55,7 @@ class PropertyUsedBelow extends Analyzer {
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->raw('where( __.repeat( out("DEFINITION").in("EXTENDS") ).emit().times('.self::MAX_LOOPING.')
-                             .where( __.out("BLOCK").repeat( __.out()).emit(hasLabel("Staticproperty")).times('.self::MAX_LOOPING.')
+                             .where( __.out("BLOCK").repeat( __.out('.$this->linksDown.')).emit(hasLabel("Staticproperty")).times('.self::MAX_LOOPING.')
                                        .out("PROPERTY").has("token", "T_VARIABLE").filter{ it.get().value("code").toLowerCase() == property.toLowerCase()}
                               )
                              .count().is(neq(0)) )')

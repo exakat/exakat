@@ -35,11 +35,11 @@ class TooManyLocalVariables extends Analyzer {
 
              // Collect all global keywords
              ->raw('where( __.sideEffect{ globals = [];}
-.optional( __.repeat( __.out() ).emit( hasLabel("Global") ).times(15).hasLabel("Global").out("GLOBAL").hasLabel("Variable").sideEffect{ globals.add(it.get().value("code")); }
+.optional( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Global") ).times('.self::MAX_LOOPING.').hasLabel("Global").out("GLOBAL").hasLabel("Variable").sideEffect{ globals.add(it.get().value("code")); }
 .barrier().select("block") ) )')
 
              ->raw('where( __.sideEffect{ x = [:];}
-.repeat( __.out() ).emit( hasLabel("Variable") ).times(15).hasLabel("Variable")
+.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').hasLabel("Variable")
 .filter{ !(it.get().value("code") in globals) }
 .filter{ !(it.get().value("code") in arguments) }
 .sideEffect{ 
