@@ -230,6 +230,7 @@ SQL;
     }
 
     private function getAtomCounts() {
+        $this->sqlite->query('DROP TABLE IF EXISTS atomsCounts');
         $this->sqlite->query('CREATE TABLE atomsCounts (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                     atom STRING,
                                                     count INTEGER
@@ -353,6 +354,7 @@ GREMLIN
                                                    namespaceId INTEGER DEFAULT 1
                                                  )');
 
+        $this->sqlite->query('DROP TABLE IF EXISTS cit_implements');
         $this->sqlite->query('CREATE TABLE cit_implements (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                              implementing INTEGER,
                                                              implements INTEGER,
@@ -372,7 +374,8 @@ g.V().hasLabel("Class")
          'final':it.get().vertices(OUT, "FINAL").any(),
          'extends':extendList,
          'implements':implementList,
-         'uses':useList
+         'uses':useList,
+         'type':'class'
          ];
 }
 
@@ -385,7 +388,10 @@ GREMLIN
         $extendsId = array();
         $implementsId = array();
         $usesId = array();
-        $query = array();
+        
+        $cit = array();
+        $citId = array();
+        $citCount = 0;
 
         foreach($res as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
@@ -395,37 +401,11 @@ GREMLIN
             } else {
                 $namespaceId = 1;
             }
-
-            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$namespaceId.", ".(int) $row->abstract.",".(int) $row->final.", 'class')";
-
-//            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
-
-            // Get extends
-            /*
-            if (!empty($row->extends)) {
-                if (isset($extendsId[$row->extends[0]])) {
-//                    $extendsId[$row->extends[0]][] = $citId[$row->fullnspath];
-                } else {
-//                    $extendsId[$row->extends[0]] = array($citId[$row->fullnspath]);
-                }
-            }
-
-            // Get implements
-            if (!empty($row->implements)) {
-//                $implementsId[$citId[$row->fullnspath]] = $row->implements;
-            }
-
-            // Get use
-            if (!empty($row->uses)) {
-//                $usesId[$citId[$row->fullnspath]] = $row->uses;
-            }
-            */
+            
+            $cit[] = $row;
+            $citId[$row->fullnspath] = ++$citCount;
+            
             ++$total;
-        }
-
-        if (!empty($query)) { 
-            $query = 'INSERT INTO cit ("id", "name", "namespaceId", "abstract", "final", "type") VALUES '.join(', ', $query);
-            $this->sqlite->query($query);
         }
 
         display("$total classes\n");
@@ -439,7 +419,10 @@ g.V().hasLabel("Interface")
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
          'extends':extendList,
-         'implements':implementList
+         'implements':implementList,
+         'type':'interface',
+         'abstract':0,
+         'final':0
          ];
 }
 GREMLIN
@@ -447,7 +430,6 @@ GREMLIN
         $res = $this->gremlin->query($query);
         $res = $res->results;
 
-        $query = array();
         $total = 0;
         foreach($res as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
@@ -457,33 +439,13 @@ GREMLIN
             } else {
                 $namespaceId = 1;
             }
+            
+            $cit[] = $row;
+            $citId[$row->fullnspath] = ++$citCount;
 
-            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$namespaceId.", 'interface')";
-
-//            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
-
-            /*
-            // Get extends
-            if (!empty($row->extends)) {
-                if (isset($extendsId[$row->extends])) {
-//                    $extendsId[$row->extends][] = $citId[$row->fullnspath];
-                } else {
-//                    $extendsId[$row->extends] = array($citId[$row->fullnspath]);
-                }
-            }
-
-            // Get implements
-            if (!empty($row->implements)) {
-//                $implementsId[$citId[$row->fullnspath]] = $row->implements;
-            }
-            */
             ++$total;
         }
 
-        if (!empty($query)) { 
-            $query = 'INSERT INTO cit ("id", "name", "namespaceId", "type") VALUES '.join(', ', $query);
-            $this->sqlite->query($query);
-        }
         display("$total interfaces\n");
 
         // Traits
@@ -493,7 +455,10 @@ g.V().hasLabel("Trait")
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
-         'uses':useList
+         'uses':useList,
+         'type':'trait',
+         'abstract':0,
+         'final':0
          ];
 }
 
@@ -503,7 +468,6 @@ GREMLIN
         $res = $res->results;
 
         $total = 0;
-        $query = array();
         foreach($res as $row) {
             $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
 
@@ -512,67 +476,75 @@ GREMLIN
             } else {
                 $namespaceId = 1;
             }
+            
+            $cit[] = $row;
+            $citId[$row->fullnspath] = ++$citCount;
 
-            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$namespaceId.", 'trait')";
-
-//            $citId[$row->fullnspath] = $this->sqlite->lastInsertRowID();
             ++$total;
         }
-
-        if (!empty($query)) { 
-            $query = 'INSERT INTO cit ("id", "name", "namespaceId", "type") VALUES '.join(', ', $query);
-            $this->sqlite->query($query);
-        }
+        
         display("$total traits\n");
-
-        $query = 'SELECT namespaces.namespace || "\\" || lower(name) AS name, cit.id FROM cit
-        JOIN namespaces ON cit.namespaceId = namespaces.id ';
-        $res = $this->sqlite->query($query);
-
-        $citId = array();
-        while ($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $citId[$row['name']] = $row['id'];
-        }
-
-        // Manage extends
-        $sqlQuery = <<<SQL
-UPDATE cit SET extends = :class WHERE id = :id
-SQL;
-        $stmt = $this->sqlite->prepare($sqlQuery);
-
-        $total = 0;
-        foreach($extendsId as $exId => $ids) {
-            if (isset($citId[$exId])) {
-                foreach($ids as $id) {
-                    $stmt->bindValue(':id',       $id,           \SQLITE3_INTEGER);
-                    $stmt->bindValue(':class',    $citId[$exId], \SQLITE3_INTEGER);
-
-                    $stmt->execute();
-                    ++$total;
+        
+        if (!empty($cit)) { 
+            $query = array();
+            
+            foreach($cit as $row) {
+                if (empty($row->extends)) {
+                    $extends = "''";
+                } elseif (isset($citId[$row->extends])) {
+                    $extends = $citId[$row->extends];
+                } else {
+                    $extends = '"'.$this->sqlite->escapeString($row->extends).'"';
                 }
-            } // Else ignore. Not in the project
-        }
-        display("$total extends \n");
+                $query[] = "(".$citId[$row->fullnspath].", '".$this->sqlite->escapeString($row->name)."', ".$namespacesId[$namespace].", ".(int) $row->abstract.",".(int) $row->final.", '"
+                                .$row->type."', ".$extends.")";
+            }
 
-        // Manage implements
+            if (!empty($query)) {
+                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends") VALUES '.join(', ', $query);
+                $this->sqlite->query($query);
+            }
 
-        $total = 0;
-        $query = array();
-        foreach($implementsId as $id => $implementsFNP) {
-            foreach($implementsFNP as $fnp) {
-                if (isset($citId[$fnp])) {
-                    $query[] = "(null, $id, $citId[$fnp], 'implements')";
+            $query = array();
+            foreach($cit as $row) {
+                if (empty($row->implements)) {
+                    continue;
+                }
 
-                    ++$total;
-                } // Else ignore. Not in the project
+                foreach($row->implements as $implements) {
+                    if (isset($citId[$implements])) {
+                        $query[] = "(null, ".$citId[$row->fullnspath].", $citId[$implements], 'implements')";
+                    } else {
+                        $query[] = "(null, ".$citId[$row->fullnspath].", '".$this->sqlite->escapeString($row->name)."', 'implements')";
+                    }
+                }
+            }
+
+            if (!empty($query)) {
+                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.join(', ', $query);
+                $this->sqlite->query($query);
+            }
+
+            $query = array();
+            foreach($cit as $row) {
+                if (empty($row->uses)) {
+                    continue;
+                }
+
+                foreach($row->uses as $uses) {
+                    if (isset($citId[$uses])) {
+                        $query[] = "(null, ".$citId[$row->fullnspath].", $citId[$uses], 'use')";
+                    } else {
+                        $query[] = "(null, ".$citId[$row->fullnspath].", '".$this->sqlite->escapeString($row->name)."', 'use')";
+                    }
+                }
+            }
+
+            if (!empty($query)) {
+                $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.join(', ', $query);
+                $this->sqlite->query($query);
             }
         }
-
-        if (!empty($query)) { 
-            $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.join(', ', $query);
-            $this->sqlite->query($query);
-        }
-        display("$total implements \n");
 
         // Manage use (traits)
         // Same SQL than for implements
@@ -722,7 +694,7 @@ GREMLIN
             } elseif ($row->var) {
                 $visibility = '';
             } else {
-                assert(false, 'Property '.$row->name.' is not defined at all');
+                continue;
             }
 
             // If we haven't found any definition for this class, just ignore it. 
@@ -732,7 +704,6 @@ GREMLIN
             $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].
                         ", '".$visibility."', '".$this->sqlite->escapeString($row->value)."', ".(int) $row->static.")";
 
-            $result = $stmt->execute();
             ++$total;
         }
         if (!empty($query)) { 
