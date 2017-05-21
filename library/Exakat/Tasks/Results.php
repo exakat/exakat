@@ -34,34 +34,33 @@ class Results extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        $analyzer = $this->config->program;
+        if ($this->config->program !== null) {
+            if (is_array($this->config->program)) {
+                $analyzersClass = $this->config->program;
+            } else {
+                $analyzersClass = array($this->config->program);
+            }
 
-        if (empty($analyzer)) {
-            throw new NeedsAnalyzer();
+            foreach($analyzersClass as $analyzer) {
+                if (!Analyzer::getClass($analyzer)) {
+                    throw new NoSuchAnalyzer($analyzer);
+                }
+            }
+        } elseif (is_string($this->config->thema)) {
+            $thema = $this->config->thema;
+
+            if (!$analyzersClass = Analyzer::getThemeAnalyzers($thema)) {
+                throw new NoSuchAnalyzer($thema);
+            }
+
+            $this->datastore->addRow('hash', array($this->config->thema => count($analyzersClass) ) );
+        } else {
+            throw new NeedsAnalyzerThema();
         }
-
-        $analyzerClass = Analyzer::getClass($analyzer);
-
-        if ($analyzerClass === false) {
-            throw new NoSuchAnalyzer($analyzer);
-        }
-
-        $analyzer = Analyzer::getName($analyzerClass);
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", "$analyzer").out().count();
-GREMLIN;
-
-        // This should be a valid result, not processed as a die
-        $vertices = $this->gremlin->query($query)->results;
-        if (isset($vertices[0]->notCompatibleWithPhpVersion)) {
-            die($this->config->program." is not compatible with the running version of PHP. No result available.\n");
-        }
-
-        if (isset($vertices[0]->notCompatibleWithPhpConfiguration)) {
-            die($this->config->program." is not compatible with the compilation of the running version of PHP. No result available.\n");
-        }
-
+        
+        $analyzersClassList1 = '"'.join('", "', array_slice($analyzersClass, 0, 250)).'"';
+        $analyzersClassList2 = '"'.join('", "', array_slice($analyzersClass, 250, 250)).'"';
+        
         $return = array();
         if ($this->config->style == 'BOOLEAN') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out().count().is(gt(0))';
@@ -76,8 +75,19 @@ GREMLIN;
         } elseif ($this->config->style == 'ALL') {
             $linksDown = Token::linksAsList();
 
+
+/*
+g.V().hasLabel("Analysis").or(has("analyzer", within($analyzersClassList1)),
+                              has("analyzer", within($analyzersClassList2))
+                              ).out('ANALYZED')
+
+g.V().hasLabel("Analysis").has("analyzer", within($analyzersClassList)).out('ANALYZED')
+*/
+
             $query = <<<GREMLIN
-g.V().hasLabel("Analysis").has("analyzer", "{$analyzer}").out('ANALYZED')
+g.V().hasLabel("Analysis").or(has("analyzer", within($analyzersClassList1)),
+                              has("analyzer", within($analyzersClassList2))
+                              ).out('ANALYZED')
 .sideEffect{ line = it.get().value('line');
              fullcode = it.get().value('fullcode');
              file='None'; 
@@ -161,6 +171,17 @@ GREMLIN;
                     $text .= implode(', ', $v)."\n";
                 }
             }
+        }
+
+        if ($this->config->thema === 'Codacy') {
+            foreach($return as $r) {
+                $s = array('filename' => $r[1],
+                           'line'     => $r[2],
+                           'patternId' => 'XXX/YYY',
+                           'message'   => 'MMMMMMMMMM' );
+                echo json_encode( (object) $s), "\n";
+            }
+            die();
         }
 
         if ($this->config->output) {
