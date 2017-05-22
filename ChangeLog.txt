@@ -1,4 +1,4 @@
-Version 0.11.4 (Six Eared Macaque, Coming up)
+Version 0.11.4 (Intelligent Stone Monkey, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 0.11.4 (Six Eared Macaque, Coming up)
     + 
 + Tokenizer
     + 
+ 
+Version 0.11.4 (Six Eared Macaque, 2017-05-22)
++ Architecture
+    + Results : returns now multiple results at once
++ Report
+    + New report : codeflower
+    + Ambassador : report usage of Debug functions, browscap
+    + Ambassador : omits 0 in donuts
+    + Ambassador : faceted search for compatiblity
++ Analyzer
+    + New analyzer : report functions whose return is not used
+    + New analyzer : only variable can be passed by reference
+    + Added limits to all in-depth searches
+    + Checked unit tests : 2216 / 2216 test pass (100% pass). 
++ Tokenizer
+    + Fixed edge case, where return is finished by a close tag
+    + Split Variables into Variables, Objects and Arrays.
 
 Version 0.11.3 (Sun Deity of Mao, 2017-05-15)
 + Architecture
