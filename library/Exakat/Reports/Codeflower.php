@@ -54,38 +54,35 @@ SQL
         );
 
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if (isset($files[$row['included']])) {
-                $files[$row['included']][] = $row['including'];
+            if (isset($files[$row['including']])) {
+                $files[$row['including']][] = $row['included'];
             } else {
-                $files[$row['included']] = array($row['including']);
+                $files[$row['including']] = array($row['included']);
             }
         }
 
         $root = new \Stdclass();
-        $root->name = '\\';
-        $root->size = 10;
+        $root->name = '';
+        $root->size = 200;
         $root->children = array();
 
         foreach($files as $including => $included) {
             $c = new \Stdclass();
             $c->name = $including;
-            $c->type = '';
             $c->size = 100;
             $c->children = array();
             
             foreach($included as $i) {
                 $d = new \Stdclass();
                 $d->name = $i;
-                $d->type = '';
                 $d->size = 100;
-                $d->children = array();
                 
                 $c->children[] = $d;
             }
             
             $root->children[] = $c;
         }
-
+        
         file_put_contents($this->tmpName.'/data/inclusions.json', json_encode($root));
         $this->select['By inclusions'] = 'inclusions.json';
     }
@@ -119,36 +116,40 @@ SQL
             }
         }
         
-        print_r($classes);
-        
         $root = new \Stdclass();
-        $root->name = '\\';
-        $root->size = 10;
+        $root->name = '';
+        $root->size = 200;
         $root->children = array();
         $ns = array('' => $root);
         foreach($classes as $name => $extends) {
-            $c = new \Stdclass();
-            $c->name = $name;
-            $c->size = 100;
+            if ($name === '') {
+                $c = $root;
+            } else {
+                $c = new \Stdclass();
+                $c->name = $name;
+                $c->size = 50;
+
+                $root->children[] = $c;
+            }
             
             foreach($extends as $e => $extends2) {
                 $d = new \Stdclass();
                 $d->name = $e;
-                $d->size = 100;
+                $d->size = 50;
 
-                $c->children[] = $d;
                 if (!empty($extends2)) {
                     foreach($extends2 as $e3 => $extends3) {
                         $d3 = new \Stdclass();
                         $d3->name = $e3;
-                        $d3->size = 100;
+                        $d3->size = 50;
                         
                         $d->children[] = $d3;
                     }
                 }
+
+                $c->children[] = $d;
             }
 
-            $root->children[] = $c;
         }
 
         file_put_contents($this->tmpName.'/data/classes.json', json_encode($root));
@@ -166,14 +167,14 @@ SQL
 
         $root = new \Stdclass();
         $root->name = '\\';
-        $root->size = 10;
+        $root->size = 200;
         $root->children = array();
         $ns = array('' => $root);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $c = new \Stdclass();
             $c->name = $row['namespace'].'\\'.$row['name'];
             $c->type = $row['type'];
-            $c->size = 100;
+            $c->size = 50;
             
             if (!isset($ns[$row['namespace']])) {
                 $d = explode('\\', $row['namespace']);
@@ -188,6 +189,7 @@ SQL
 
                     $n = new \Stdclass();
                     $n->name = $name;
+                    $n->size = $name;
                     $n->type = 'namespace';
                     $n->children = array();
                     

@@ -36,13 +36,99 @@ line.link {
   stroke: #9ecae1;
   stroke-width: 1.5px;
 }
+
+@import url('http://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background: #f0f0f0;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/* The ribbons */
+
+.corner-ribbon{
+  width: 200px;
+  background: #e43;
+  position: absolute;
+  top: 25px;
+  left: -50px;
+  text-align: center;
+  line-height: 50px;
+  letter-spacing: 1px;
+  color: #f0f0f0;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+/* Custom styles */
+
+.corner-ribbon.sticky{
+  position: fixed;
+}
+
+.corner-ribbon.shadow{
+  box-shadow: 0 0 3px rgba(0,0,0,.3);
+}
+
+/* Different positions */
+
+.corner-ribbon.top-left{
+  top: 25px;
+  left: -50px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.corner-ribbon.top-right{
+  top: 25px;
+  right: -50px;
+  left: auto;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.corner-ribbon.bottom-left{
+  top: auto;
+  bottom: 25px;
+  left: -50px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.corner-ribbon.bottom-right{
+  top: auto;
+  right: -50px;
+  bottom: 25px;
+  left: auto;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+/* Colors */
+
+.corner-ribbon.white{background: #f0f0f0; color: #555;}
+.corner-ribbon.black{background: #333;}
+.corner-ribbon.grey{background: #999;}
+.corner-ribbon.blue{background: #39d;}
+.corner-ribbon.green{background: #2c7;}
+.corner-ribbon.turquoise{background: #1b9;}
+.corner-ribbon.purple{background: #95b;}
+.corner-ribbon.red{background: #e43;}
+.corner-ribbon.orange{background: #e82;}
+.corner-ribbon.yellow{background: #ec0;}
+
     </style>
   </head>
   <body>
+    <div class="corner-ribbon top-right sticky blue">Beta version</div>
     <div class="content">
       <div class="container">
         <h1>CodeFlower Source code visualization</h1>
-        <p class="lead">This experiment visualizes source repositories using an interactive tree. Each disc represents a file, with a radius proportional to the number of lines of code (loc). All rendering is done client-side, in JavaScript. Try hovering on nodes to see the loc number, clicking on directory nodes to fold them, dragging nodes to rearrange the layout, and changing project to see different tree structures. Built with <a href="https://github.com/mbostock/d3">d3.js</a>. Inspired by <a href="https://code.google.com/p/codeswarm/">Code Swarm</a> and <a href="https://code.google.com/p/gource/">Gource</a>.</p>
         <form class="form-inline">
           <fieldset>
           <label>Flower presentation of your code :</label>
@@ -52,7 +138,13 @@ line.link {
           </fieldset>
         </form>
         <div id="visualization"></div>
-        
+        <p class="lead">
+        <ul>
+            <li>By namespace : hierarchical view of the namespaces, starting from root '\'. </li>
+            <li>By inclusion : hierarchical view of the file inclusion. The root is the large node, and every link include the following node.</li>
+            <li>By class hierarchy : hierarchical view of classes extensions. Extension is based on extends, and not implements. The large node is the start, but is not a class : it links to every class that is not extending anything </li>
+        </ul></p>
+        <p class="lead">This report is based on the <a href="http://www.redotheweb.com/CodeFlower/">Code flower</a> from <a href="http://www.redotheweb.com/">Francois Zaninoto</a>.</p>
     </div>
     <script type="text/javascript" src="javascripts/d3/d3.js"></script>
     <script type="text/javascript" src="javascripts/d3/d3.geom.js"></script>
@@ -71,7 +163,7 @@ line.link {
         w = parseInt(Math.sqrt(total) * 30, 10) + 100;
         h = parseInt(Math.sqrt(total) * 30, 10) + 100;
         // create a new CodeFlower
-        currentCodeFlower = new CodeFlower("#visualization", w, h).update(json);
+        currentCodeFlower = new CodeFlower("#visualization", 800, 800).update(json);
       };
 
       d3.json('data/namespaces.json', createCodeFlower);
