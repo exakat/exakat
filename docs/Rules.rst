@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 15 May 2017 17:27:05 +0000
-.. comment: Generation hash : 6098c611d2f3e7dab95d00cca452151537cec5b5
+.. comment: Generation date : Mon, 22 May 2017 08:10:47 +0000
+.. comment: Generation hash : 93a7490db1670b8b3607967043dde5943a49de46
 
 
 .. _$http\_raw\_post\_data:
@@ -1994,7 +1994,7 @@ Class Should Be Final By Ocramius
 
 'Make your classes always final, if they implement an interface, and no other public methods are defined'.
 
-When a class should be final, as explained by Ocramiux (Marco Pivetti).
+When a class should be final, as explained by Ocramiux (Marco Pivetta).
 
 Full article : `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_.
 
@@ -4383,7 +4383,19 @@ Forgotten Whitespace
 
 Those are white space that are at either end of a script : at the beginning or the end. 
 
-Usually, such white space are forgotten, and may end up summoning the infamous 'headers already sent' error. It is better to remove them.
+.. code-block:: php
+
+   <?php
+       // This script has no forgotten whitespace, not at the beginning
+       function foo() {}
+   
+       // This script has no forgotten whitespace, not at the end
+   ?>
+
+
+Usually, such white space are forgotten, and may end up summoning the infamous 'headers already sent' error. It is better to remove them. 
+
+See also `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_.
 
 +--------------+--------------------------------+
 | Command Line | Structures/ForgottenWhiteSpace |
@@ -4496,50 +4508,6 @@ Since PHP 5.4, it is now possible use function results as an array, and access d
 +--------------+------------------------------------+
 | Analyzers    | :ref:`Analyze`                     |
 +--------------+------------------------------------+
-
-
-
-.. _functions-in-loop-calls:
-
-Functions In Loop Calls
-#######################
-
-
-The following functions call each-other in a loop fashion : A -> B -> A.
-
-When those functions have no other interaction, the code is useless and should be dropped.
-
-.. code-block:: php
-
-   <?php
-   
-   function foo1($a) {
-       if ($a < 1000) {
-           return foo2($a + 1);
-       }
-       return $a;
-   }
-   
-   function foo2($a) {
-       if ($a < 1000) {
-           return foo1($a + 1);
-       }
-       return $a;
-   }
-   
-   // if foo1 nor foo2 are called, then this is dead code. 
-   // if foo1 or foo2 are called, this recursive call should be investigated.
-   
-   ?>
-
-
-Loops of size 2, 3 and 4 function are supported by this analyzer.
-
-+--------------+-------------------------------------+
-| Command Line | Functions/LoopCalling               |
-+--------------+-------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`Performances` |
-+--------------+-------------------------------------+
 
 
 
@@ -7720,13 +7688,7 @@ Non Ascii Variables
 ###################
 
 
-PHP supports variables with certain characters.::
-
-    
-   [a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*
-   
-   
-
+PHP supports variables with certain characters. The variable name must only include letters, figures, underscores and ASCII characters from 128 to 255. 
 
 In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more care when editing the code or passing it from OS to OS. 
 
@@ -7744,6 +7706,9 @@ In practice, letters outside the scope of a-zA-Z0-9 are rare, and require more c
    $people = new 人();
    
    ?>
+
+
+See also `Variables <http://php.net/manual/en/language.variables.basics.php>`_.
 
 +--------------+----------------------------+
 | Command Line | Variables/VariableNonascii |
@@ -8175,6 +8140,37 @@ If the goal is to convert it to a string, use the type casting (string) operator
 +--------------+-------------------------+
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
+
+
+
+.. _only-variable-passed-by-reference:
+
+Only Variable Passed By Reference
+#################################
+
+
+When an argument is expected by reference, it is compulsory to provide a container. A container may be a variable, an array, a property or a static property. 
+
+This may be linted by PHP, when the function definition is in the same file as the function usage. This is silently linted if definition and usage are separated, if the call is dynamical or made as a method.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo(&$bar) { /**/ }
+   
+   foo(strtolower($string));
+   
+   ?>
+
+
+This analysis currently covers functioncalls and static methodcalls, but omits methodcalls.
+
++--------------+-----------------------------------------+
+| Command Line | Functions/OnlyVariablePassedByReference |
++--------------+-----------------------------------------+
+| Analyzers    | :ref:`Analyze`                          |
++--------------+-----------------------------------------+
 
 
 
@@ -9931,7 +9927,9 @@ Short Syntax For Arrays
 #######################
 
 
-Arrays written the new PHP 5.4 short syntax. 
+Arrays written with the new PHP 5.4 short syntax. 
+
+PHP 5.4 introduced the new short syntax, with square brackets. The previous syntax, based on the array() keyword is still available.
 
 .. code-block:: php
 
@@ -9946,7 +9944,7 @@ Arrays written the new PHP 5.4 short syntax.
    ?>
 
 
-This is mainly important for backward-compatibility.
+See also `Arrays <http://php.net/manual/en/language.types.array.php>`_.
 
 +--------------+---------------------------+
 | Command Line | Arrays/ArrayNSUsage       |
@@ -10245,7 +10243,7 @@ PHP searches for functions in the local namespaces, and in case it fails, makes 
 The speed bump range from 2 to 8 %, depending on the availability of functions in the local scope. The overall bump is about 1 µs per functioncall, which makes it a micro optimisation until a lot of function calls are made.
 
 
-Based on one of `Marco Pivetti tweet <https://twitter.com/Ocramius/status/811504929357660160>`_ and this `blog post <http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/>`_
+Based on one of `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_ and this `blog post <http://veewee.github.io/blog/optimizing-php-performance-by-fq-function-calls/>`_
 
 .. code-block:: php
 
@@ -12990,6 +12988,19 @@ Unresolved Classes
 The following classes are instantiated in the code, but their definition couldn't be found. 
 
 Check for namespaces and aliases and make sure they are correctly configured.
+
+.. code-block:: php
+
+   <?php
+   
+   class Foo extends Bar {
+       private function foobar() {
+           // here, parent is not resolved, as Bar is not defined in the code.
+           return parent::$prop;
+       }
+   }
+   
+   ?>
 
 +--------------+---------------------------+
 | Command Line | Classes/UnresolvedClasses |
@@ -15770,7 +15781,39 @@ __toString() Throws Exception
 #############################
 
 
-Magical method `__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ can't throw exceptions, according to the world.
+Magical method `__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ can't throw exceptions.
+
+In fact, `__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ may not let an exception pass. If it throw an exception, but must catch it. If an underlying method throws an exception, it must be caught.
+
+.. code-block:: php
+
+   <?php
+   
+   class myString {
+       private $string = null;
+       
+       public function __construct($string) {
+           $this->string = $string;
+       }
+       
+       public function __toString() {
+           // Do not throw exceptions in __toString
+           if (!is_string($this->string)) {
+               throw new Exception('$this->string is not a string!!');
+           }
+           
+           return $this->string;
+       }
+   }   
+   
+   ?>
+
+
+A fatal error is displayed, when an exception is not intercepted in the `__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ function. 
+
+PHP Fatal error:  Method myString::`__toString() <http://php.net/manual/en/language.oop5.magic.php>`_ must not throw an exception, caught Exception: 'Exception message' in file.php
+
+See also `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_.
 
 +--------------+------------------------------------+
 | Command Line | Structures/toStringThrowsException |
@@ -15946,7 +15989,37 @@ ext/fann
 ########
 
 
-Extension fann
+Extension fann.
+
+PHP binding for FANN (Fast Artificial Neural Network) Library which implements multilayer artificial neural networks with support for both fully connected and sparsely connected networks.
+
+.. code-block:: php
+
+   <?php
+   $num_input = 2;
+   $num_output = 1;
+   $num_layers = 3;
+   $num_neurons_hidden = 3;
+   $desired_error = 0.001;
+   $max_epochs = 500000;
+   $epochs_between_reports = 1000;
+   
+   $ann = fann_create_standard($num_layers, $num_input, $num_neurons_hidden, $num_output);
+   
+   if ($ann) {
+       fann_set_activation_function_hidden($ann, FANN_SIGMOID_SYMMETRIC);
+       fann_set_activation_function_output($ann, FANN_SIGMOID_SYMMETRIC);
+   
+       $filename = dirname(__FILE__) . '/xor.data';
+       if (fann_train_on_file($ann, $filename, $max_epochs, $epochs_between_reports, $desired_error))
+           fann_save($ann, dirname(__FILE__) . '/xor_float.net');
+   
+       fann_destroy($ann);
+   }
+   ?>
+
+
+See also `extension FANN <http://php.net/manual/en/book.fann.php>`_ and `lib FANN <http://leenissen.dk/>`_.
 
 +--------------+--------------------+
 | Command Line | Extensions/Extfann |
@@ -16042,7 +16115,25 @@ ext/sqlite
 ##########
 
 
-Extension ext/sqlite3
+Extension Sqlite 2.
+
+Support for SQLite version 2 databases. The support for this version of Sqlite is not maintained anymore. It is recommended to use `SQLite3`_.
+
+.. code-block:: php
+
+   <?php
+   if ($db = sqlite_open('mysqlitedb', 0666, $sqliteerror)) { 
+       sqlite_query($db, 'CREATE TABLE foo (bar varchar(10))');
+       sqlite_query($db, 'INSERT INTO foo VALUES (fnord)');
+       $result = sqlite_query($db, 'select bar from foo');
+       var_dump(sqlite_fetch_array($result)); 
+   } else {
+       die($sqliteerror);
+   }
+   ?>
+
+
+See also `SQLite <http://php.net/manual/en/book.sqlite.php>`_ and `Sqlite <http://sqlite.org/>`_.
 
 +--------------+----------------------+
 | Command Line | Extensions/Extsqlite |

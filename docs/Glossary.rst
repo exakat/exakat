@@ -8,6 +8,7 @@ Glossary
       + :ref:`** For Exponent <**-for-exponent>`
       + :ref:`Exponent Usage <exponent-usage>`
       + :ref:`Negative Power <negative-power>`
+      + :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
       + :ref:`Unused Traits <unused-traits>`
 
 
@@ -211,6 +212,7 @@ Glossary
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+      + :ref:`ext/sqlite <ext/sqlite>`
 
     + `dirname()`
 
@@ -698,6 +700,7 @@ Glossary
 
       + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
+      + :ref:`ext/fann <ext/fann>`
 
     + `__METHOD__`
 
@@ -733,6 +736,7 @@ Glossary
       + :ref:`Throw In Destruct <throw-in-destruct>`
       + :ref:`Unitialized Properties <unitialized-properties>`
       + :ref:`Useless Return <useless-return>`
+      + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`
 
     + `__debugInfo`
 

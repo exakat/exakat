@@ -67,11 +67,13 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * FileDependenciesHtml
   * ZendFramework
   * RadwellCode
-  * Codesniffer
+  * CodeSniffer
   * Slim
   * FacetedJson
   * Json
   * OnepageJson
+  * Codeflower
+  * Dependencywheel
   * Codacy
 
 
@@ -284,9 +286,16 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.11.4
+
+  * Use Browscap (Php/UseBrowscap)
+  * Use Debug (Structures/UseDebug ; Appinfo)
+
 * 0.11.3
 
   * Extensions/Extgrpc (Extensions/Extgrpc)
+  * No Return Used (Functions/NoReturnUsed ; Unassigned)
+  * Only Variable Passed By Reference (Functions/OnlyVariablePassedByReference ; Analyze)
   * Try With Multiple Catch (Php/TryMultipleCatch ; Unassigned)
   * ext/sphinx (Extensions/Extsphinx ; Appinfo)
 
@@ -900,7 +909,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Function Subscripting, Old Style (Structures/FunctionPreSubscripting ; Analyze, Codacy)
   * Functioncall Is Global (Functions/IsGlobal ; Internal)
   * Functions Glossary (Functions/Functionnames ; Appinfo)
-  * Functions In Loop Calls (Functions/LoopCalling ; Analyze, Performances, Codacy)
+  * Functions In Loop Calls (Functions/LoopCalling ; Unassigned)
   * Functions Removed In PHP 5.4 (Php/Php54RemovedFunctions ; Analyze, CompatibilityPHP54, Codacy)
   * Functions Removed In PHP 5.5 (Php/Php55RemovedFunctions ; CompatibilityPHP55)
   * Functions Using Reference (Functions/FunctionsUsingReference ; Appinfo, Appcontent)
@@ -1500,13 +1509,18 @@ List of external links mentionned in this documentation.
 
 * ` <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
+* `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
+* `Apache <http://php.net/manual/en/book.apache.php>`_
+* `Aronduby Dump <https://github.com/aronduby/dump>`_
 * `Array <http://php.net/manual/en/function.array.php>`_
+* `Arrays <http://php.net/manual/en/language.types.array.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
 * `BC Math Functions <http://www.php.net/bcmath>`_
+* `browscap <http://browscap.org/>`_
 * `Bzip2 Functions <http://nl1.php.net/manual/en/ref.bzip2.php>`_
 * `Cairo Graphics Library <https://cairographics.org/>`_
 * `Cake 3.0 migration guide <http://book.cakephp.org/3.0/en/appendices/3-0-migration-guide.html>`_
@@ -1521,6 +1535,7 @@ List of external links mentionned in this documentation.
 * `crc32() <http://php.net/crc32>`_
 * `curl <http://www.php.net/curl>`_
 * `Curl for PHP <http://php.net/manual/en/book.curl.php>`_
+* `Data filtering <http://php.net/manual/en/book.filter.php>`_
 * `Data structures <http://docs.php.net/manual/en/book.ds.php>`_
 * `Date and Time <http://php.net/manual/en/book.datetime.php>`_
 * `Docker <http://www.docker.com/>`_
@@ -1535,7 +1550,9 @@ List of external links mentionned in this documentation.
 * `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
 * `Exceptions <http://php.net/manual/en/language.exceptions.php>`_
 * `exif <http://php.net/manual/en/book.exif.php>`_
+* `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
+* `extension FANN <http://php.net/manual/en/book.fann.php>`_
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
@@ -1550,7 +1567,9 @@ List of external links mentionned in this documentation.
 * `GRPC <http://www.grpc.io/>`_
 * `hash <http://www.php.net/hash>`_
 * `hg <https://www.mercurial-scm.org/>`_
+* `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
 * `Iconv <http://php.net/iconv>`_
+* `Image Processing and GD <http://php.net/manual/en/book.image.php>`_
 * `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
@@ -1560,7 +1579,7 @@ List of external links mentionned in this documentation.
 * `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
-* `Marco Pivetti tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
+* `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
 * `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
 * `Memcache on PHP <http://www.php.net/manual/en/book.memcache.php>`_
@@ -1579,10 +1598,13 @@ List of external links mentionned in this documentation.
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
+* `Pspell <http://php.net/manual/en/book.pspell.php>`_
 * `PSR7 <http://www.php-fig.org/psr/psr-7/>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_
 * `Regular Expressions (Perl-Compatible) <http://php.net/manual/en/book.pcre.php>`_
+* `RFC 7159 <http://www.faqs.org/rfcs/rfc7159>`_
+* `RFC 959 <http://www.faqs.org/rfcs/rfc959>`_
 * `Routing <https://www.slimframework.com/docs/objects/router.html>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Semaphore <http://php.net/manual/en/book.sem.php>`_
@@ -1595,6 +1617,8 @@ List of external links mentionned in this documentation.
 * `Sockets <http://php.net/manual/en/book.sockets.php>`_
 * `Specification pattern <https://en.wikipedia.org/wiki/Specification_pattern>`_
 * `Sphinx Client <http://php.net/manual/en/book.sphinx.php>`_
+* `SQLite <http://php.net/manual/en/book.sqlite.php>`_
+* `SQLite3 <http://php.net/manual/en/book.sqlite3.php>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
@@ -1602,10 +1626,12 @@ List of external links mentionned in this documentation.
 * `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
+* `tokyo_tyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
+* `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
 * `Wincache extension for PHP <http://www.php.net/wincache>`_

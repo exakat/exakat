@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 15 May 2017 17:27:05 +0000
-.. comment: Generation hash : 6098c611d2f3e7dab95d00cca452151537cec5b5
+.. comment: Generation date : Mon, 22 May 2017 08:10:47 +0000
+.. comment: Generation hash : 93a7490db1670b8b3607967043dde5943a49de46
 
 
 .. _analyze:
@@ -164,7 +164,6 @@ Total : 310 analysis
 * :ref:`Forgotten Whitespace <forgotten-whitespace>`
 * :ref:`Fully Qualified Constants <fully-qualified-constants>`
 * :ref:`Function Subscripting, Old Style <function-subscripting,-old-style>`
-* :ref:`Functions In Loop Calls <functions-in-loop-calls>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Global Usage <global-usage>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
@@ -237,6 +236,7 @@ Total : 310 analysis
 * :ref:`Old Style __autoload() <old-style-\_\_autoload()>`
 * :ref:`One Letter Functions <one-letter-functions>`
 * :ref:`One Variable String <one-variable-string>`
+* :ref:`Only Variable Passed By Reference <only-variable-passed-by-reference>`
 * :ref:`Only Variable Returned By Reference <only-variable-returned-by-reference>`
 * :ref:`Or Die <or-die>`
 * :ref:`Overwriting Variable <overwriting-variable>`
@@ -811,7 +811,7 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 25 analysis
+Total : 24 analysis
 
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
@@ -821,7 +821,6 @@ Total : 25 analysis
 * :ref:`Eval() Usage <eval()-usage>`
 * :ref:`Fetch One Row Format <fetch-one-row-format>`
 * :ref:`For Using Functioncall <for-using-functioncall>`
-* :ref:`Functions In Loop Calls <functions-in-loop-calls>`
 * :ref:`Getting Last Element <getting-last-element>`
 * :ref:`Global Inside Loop <global-inside-loop>`
 * :ref:`Join file() <join-file()>`
