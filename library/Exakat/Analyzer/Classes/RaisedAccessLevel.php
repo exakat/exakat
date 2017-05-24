@@ -63,6 +63,40 @@ class RaisedAccessLevel extends Analyzer {
              ->samePropertyAs('code', 'property')
              ->back('results');
         $this->prepareQuery();
+
+        // raised to private method
+        $this->atomIs('Method')
+             ->hasNoOut('PRIVATE')
+             ->_as('results')
+             ->outIsIE('NAME')
+             ->savePropertyAs('code', 'property')
+             ->goToClass()
+             ->goToAllChildren(self::EXCLUDE_SELF)
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Method')
+             ->hasOut('PRIVATE')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'property')
+             ->back('results');
+        $this->prepareQuery();
+
+        // raised to protected method
+        $this->atomIs('Method')
+             ->hasNoOut(array('PRIVATE', 'PROTECTED'))
+             ->_as('results')
+             ->outIsIE('NAME')
+             ->savePropertyAs('code', 'property')
+             ->goToClass()
+             ->goToAllChildren(self::EXCLUDE_SELF)
+             ->outIs('BLOCK')
+             ->outIs('ELEMENT')
+             ->atomIs('Method')
+             ->hasOut('PROTECTED')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'property')
+             ->back('results');
+        $this->prepareQuery();
     }
 }
 
