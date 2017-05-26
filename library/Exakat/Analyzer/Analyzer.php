@@ -1051,7 +1051,7 @@ GREMLIN
     
     public function hasNoOut($link) {
         assert($this->assertLink($link));
-        $this->addMethod('where( out('.$this->SorA($link).').count().is(eq(0)) )');
+        $this->addMethod('not(where( __.out('.$this->SorA($link).') ))');
         
         return $this;
     }
@@ -1410,7 +1410,7 @@ GREMLIN
 
     public function goToAllChildren($self = self::INCLUDE_SELF) {
         if ($self === self::INCLUDE_SELF) {
-            $this->addMethod('repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit().times('.self::MAX_LOOPING.')');
+            $this->addMethod('repeat( __.out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).emit().times('.self::MAX_LOOPING.')');
         } else {
             $this->addMethod('filter{true}.emit().repeat( out("DEFINITION").in("EXTENDS", "IMPLEMENTS") ).times('.self::MAX_LOOPING.')');
         }
@@ -1424,6 +1424,13 @@ GREMLIN
         } else {
             $this->addMethod('emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
         }
+        
+        return $this;
+    }
+
+    public function goToAllImplements() {
+        $this->addMethod('out("IMPLEMENTS").in("DEFINITION").emit(hasLabel("Interface")).
+                repeat( __.out("EXTENDS").in("DEFINITION") ).times('.self::MAX_LOOPING.')');
         
         return $this;
     }
