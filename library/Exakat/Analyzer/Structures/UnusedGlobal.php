@@ -28,9 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class UnusedGlobal extends Analyzer {
     public function analyze() {
         // global in a function
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
-             ->atomIs('Variable')
+        $this->atomIs('Globaldefinition')
              ->_as('result')
              ->savePropertyAs('code', 'theGlobal')
              ->goToFunction()
@@ -43,9 +41,7 @@ class UnusedGlobal extends Analyzer {
         $this->prepareQuery();
 
         // global in the global space
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
-             ->atomIs('Variable')
+        $this->atomIs('Globaldefinition')
              ->_as('result')
              ->savePropertyAs('code', 'theGlobal')
              ->hasNoFunction()

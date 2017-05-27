@@ -31,7 +31,7 @@ class GlobalWithoutSimpleVariable extends Analyzer {
     public function analyze() {
         $this->atomIs('Global')
              ->outIs('GLOBAL')
-             ->tokenIs('T_DOLLAR')
+             ->tokenIs(array('T_DOLLAR', 'T_OBJECT_OPERATOR'))
              ->back('first');
         $this->prepareQuery();
     }

@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class GlobalInGlobal extends Analyzer {
     public function analyze() {
         // any variable outside anything else (except namespaces)
-        $this->atomIs('Variable')
+        $this->atomIs(array('Variable', 'Globaldefinition'))
              ->hasNoFunction()
              ->hasNoClass()
              ->hasNoTrait()

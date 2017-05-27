@@ -28,15 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class GlobalUsage extends Analyzer {
     public function analyze() {
         // global
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
-             ->atomIs('Variable');
-        $this->prepareQuery();
-
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
-             ->atomIs('Assignation')
-             ->outIs('LEFT');
+        $this->atomIs('Globaldefinition');
         $this->prepareQuery();
 
         // $GLOBALS as a whole

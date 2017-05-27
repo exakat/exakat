@@ -27,28 +27,25 @@ use Exakat\Analyzer\Analyzer;
 class Globals extends Analyzer {
     public function analyze() {
         // Global in a function
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
-             ->atomIs('Variable')
+        $this->atomIs('Globaldefinition')
              ->savePropertyAs('code', 'name')
-             ->goToFunction()
+             ->goToFunction(array('Function', 'Method', 'Closure'))
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInside(self::$VARIABLES_ALL)
              ->samePropertyAs('code', 'name');
         $this->prepareQuery();
 
         // Global in a function
         $this->atomIs('Variablearray')
              ->codeIs('$GLOBALS')
-             ->inIs('VARIABLE')
-             ->atomIs('Array');
+             ->inIs('VARIABLE');
         $this->prepareQuery();
 
         // implicit global 
         $this->atomIs(self::$VARIABLES_ALL)
              ->codeIsNot(array('$GLOBALS', '$_POST'))
              ->hasNoClassInterfaceTrait()
-             ->hasNoFunction();
+             ->hasNoFunction(array('Function', 'Method', 'Closure'));
         $this->prepareQuery();
     }
 }

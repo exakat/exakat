@@ -32,15 +32,16 @@ class CouldBeStatic extends Analyzer {
     
     public function analyze() {
 
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
+        $this->atomIs('Globaldefinition')
              ->savePropertyAs('code', 'theGlobal')
+             ->hasFunction()
              ->goToFunction()
+
              ->outIs('NAME')
              ->savePropertyAs('code', 'theFunction')
              
              // This global is only in the current function
-             ->raw('where( g.V().hasLabel("Global").out("GLOBAL").filter{ it.get().value("code") == theGlobal }
+             ->raw('where( g.V().hasLabel("Globaldefinition").filter{ it.get().value("code") == theGlobal }
                              .repeat(__.in()).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))
                              .out("NAME").filter{ it.get().value("code") != theFunction }.count().is(eq(0)) 
                              )')
@@ -51,11 +52,12 @@ class CouldBeStatic extends Analyzer {
                              )')
 
              // This global is only in the current function
-             ->raw('where( g.V().hasLabel("Variable").filter{ it.get().value("code") == theGlobal }
+             ->raw('where( g.V().hasLabel("Variable", "Globaldefinition").filter{ it.get().value("code") == theGlobal }
                              .where( __.in("ANALYZED").has("analyzer", "Structures/GlobalInGlobal").count().is(neq(0)) )
                              .count().is(eq(0)) 
                              )')
-             ->back('first');
+             ->back('first')
+             ->inIs('GLOBAL');
         $this->prepareQuery();
     }
 }

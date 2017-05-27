@@ -35,9 +35,7 @@ class NoGlobalModification extends Analyzer {
         $globalNames = $this->loadIni('wp_globals.ini', 'globals');
         
         // global $post => $post++;
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
-             ->atomIs('Variable')
+        $this->atomIs('Globaldefinition')
              ->codeIs($globalNames)
              ->savePropertyAs('code', 'name')
              ->goToFunction()
@@ -45,7 +43,8 @@ class NoGlobalModification extends Analyzer {
              ->atomInsideNoAnonymous('Variable')
              ->samePropertyAs('code', 'name')
              ->analyzerIs('Variables/IsModified')
-             ->back('first');
+             ->back('first')
+             ->inIs('GLOBAL');
         $this->prepareQuery();
 
         // Drop the $ from variable names

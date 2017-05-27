@@ -1259,7 +1259,7 @@ GREMLIN
         return $this;
     }
 
-    public function hasClassDefinition() {
+    public function hasClassDefinition($type = 'Class') {
         $this->addMethod('where(__.in("DEFINITION").hasLabel("Class").count().is(eq(1)))');
     
         return $this;
@@ -1312,8 +1312,8 @@ GREMLIN
         return $this;
     }
     
-    public function goToClass() {
-        $this->goToInstruction('Class');
+    public function goToClass($type = 'Class') {
+        $this->goToInstruction($type);
         
         return $this;
     }

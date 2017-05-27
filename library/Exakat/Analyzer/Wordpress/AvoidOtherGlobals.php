@@ -30,11 +30,10 @@ class AvoidOtherGlobals extends Analyzer {
         $globalNames = $this->loadIni('wp_globals.ini', 'globals');
         
         // global $post => $post++;
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
-             ->atomIs('Variable')
+        $this->atomIs('Globaldefinition')
              ->codeIsNot($globalNames)
-             ->back('first');
+             ->back('first')
+             ->inIs('GLOBAL');
         $this->prepareQuery();
 
         // Drop the $ from variable names
