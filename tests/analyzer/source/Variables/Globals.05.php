@@ -6,7 +6,7 @@ $explicitGlobal++;
 $GLOBALS['globalInGLOBALS2'] = 1;
 $GLOBALS = [3];
 
-function a() {
+$x = function () {
     global $explicitGlobalFunction;
     
     $explicitGlobalFunction++;

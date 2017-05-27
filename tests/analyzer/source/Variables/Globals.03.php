@@ -6,6 +6,7 @@ $explicitGlobal++;
 $GLOBALS['globalInGLOBALS2'] = 1;
 $GLOBALS = [3];
 
+trait t {
 function a() {
     global $explicitGlobalFunction;
     
@@ -14,5 +15,6 @@ function a() {
 
     $localVariableFunction = 2;
     $_POST[3];
+}
 }
 ?>

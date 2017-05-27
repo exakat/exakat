@@ -8,4 +8,5 @@ Foreach($GLOBALS as $x) {}
 
 $GLOBALS['G'] = $GLOBALS['H']['I'] + $GLOBALS['J']['I']['K'];
 
+$z = 2;
 ?>

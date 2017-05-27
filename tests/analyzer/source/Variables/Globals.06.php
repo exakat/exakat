@@ -2,15 +2,15 @@
 
 $implicitGlobal = 1;
 global $explicitGlobal;
-$explicitGlobal++;
-$GLOBALS['globalInGLOBALS2'] = 1;
+$explicitGlobal->B;
+$GLOBALS['globalInGLOBALS2']->b = 1;
 $GLOBALS = [3];
 
 function a() {
     global $explicitGlobalFunction;
     
-    $explicitGlobalFunction++;
-    $GLOBALS['globalInGLOBALS'] = 1;
+    $explicitGlobalFunction->A;
+    $GLOBALS['globalInGLOBALS']->a = 1;
 
     $localVariableFunction = 2;
     $_POST[3];

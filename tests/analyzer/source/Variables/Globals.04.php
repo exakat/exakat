@@ -6,6 +6,8 @@ $explicitGlobal++;
 $GLOBALS['globalInGLOBALS2'] = 1;
 $GLOBALS = [3];
 
+class X {
+function foo () {
 function a() {
     global $explicitGlobalFunction;
     
@@ -14,5 +16,7 @@ function a() {
 
     $localVariableFunction = 2;
     $_POST[3];
+}
+}
 }
 ?>

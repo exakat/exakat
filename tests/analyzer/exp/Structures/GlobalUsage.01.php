@@ -12,6 +12,6 @@ $expected     = array('$a',
                       "'H'",
                       "'J'");
 
-$expected_not = array();
+$expected_not = array('$z');
 
 ?>

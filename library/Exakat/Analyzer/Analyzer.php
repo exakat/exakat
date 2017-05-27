@@ -87,6 +87,9 @@ abstract class Analyzer {
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray');
+    static public $FUNCTIONS_ALL    = array('Function', 'Method', 'Closure');
+    static public $FUNCTIONS_NAMED  = array('Function', 'Method');
+    
     
     const INCLUDE_SELF = false;
     const EXCLUDE_SELF = true;
@@ -215,7 +218,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALY
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File') ).repeat( 
     __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Function', 'Method']) { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class', 'Trait']) { theClass = it.get().value('fullcode')} }
       .sideEffect{ if (it.get().label() == 'Namespace') { theNamespace = it.get().value('fullnspath')} }
        )
@@ -501,7 +504,7 @@ __.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this
     protected function hasInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
         $this->addMethod('where( 
-__.repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
+__.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('.$this->SorA($atom).')).hasLabel('.$this->SorA($atom).')
   .count().is(neq(0)))');
         
         return $this;
@@ -1216,14 +1219,14 @@ GREMLIN
         return $this;
     }
 
-    public function goToFunction() {
-        $this->addMethod('repeat(__.in('.$this->linksDown.')).until(and(hasLabel("Function", "Method"), where(__.out("NAME").not(hasLabel("Void")) )))');
+    public function goToFunction($type = array('Function', 'Method')) {
+        $this->addMethod('repeat(__.in('.$this->linksDown.')).until(hasLabel('.$this->SorA($type).') )');
         
         return $this;
     }
 
-    public function hasNoFunction() {
-        return $this->hasNoInstruction('Function');
+    public function hasNoFunction($type = 'Function') {
+        return $this->hasNoInstruction($type);
     }
 
     public function hasNoNamedFunction($name) {
@@ -1442,7 +1445,7 @@ GREMLIN
     }
 
     public function hasFunction() {
-        $this->hasInstruction('Function');
+        $this->hasInstruction(array('Function', 'Method'));
         
         return $this;
     }
