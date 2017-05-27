@@ -1,0 +1,98 @@
+Whole
+Label : PROJECT
+  ./tests/tokenizer/source/_Function.72.php
+  Label : FILE
+    ;
+    Label : ELEMENT
+      <?php
+
+      Label : CODE
+        ;
+        Label : ELEMENT
+          class
+          Label : BLOCK
+            {}
+            Label : ELEMENT
+              foo
+              Label : ARGUMENTS
+                (
+                Label : ARGUMENT
+                  Void
+              Label : BLOCK
+                {}
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    function
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        Void
+                    Label : STATIC
+                      static
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    function
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $x
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        Void
+                    Label : STATIC
+                      static
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    function
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $g
+                      Label : ARGUMENT
+                        $f
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        Void
+                    Label : STATIC
+                      static
+                Label : ELEMENT
+                  =
+                  Label : LEFT
+                    $x
+                  Label : RIGHT
+                    function
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        $g
+                        Label : DEFAULT
+                          4
+                      Label : ARGUMENT
+                        $f
+                        Label : DEFAULT
+                          3
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        Void
+                    Label : STATIC
+                      static
+              Label : NAME
+                foo
+          Label : NAME
+            x
