@@ -67,7 +67,7 @@ Label : PROJECT
                 Label : RIGHT
                   +
                   Label : LEFT
-                     
+                    function
                     Label : ARGUMENTS
                       (
                       Label : ARGUMENT
@@ -76,8 +76,6 @@ Label : PROJECT
                       {}
                       Label : ELEMENT
                         Void
-                    Label : NAME
-                      Void
                   Label : RIGHT
                     "
                     Label : CONCAT

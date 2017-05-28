@@ -15,7 +15,7 @@ Label : PROJECT
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                 
+                function
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
@@ -26,8 +26,6 @@ Label : PROJECT
                     ++
                     Label : POSTPLUSPLUS
                       $self
-                Label : NAME
-                  Void
                 Label : USE
                   (
                   Label : ARGUMENT
@@ -41,7 +39,7 @@ Label : PROJECT
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                 
+                function
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
@@ -52,7 +50,5 @@ Label : PROJECT
                     ++
                     Label : POSTPLUSPLUS
                       $self
-                Label : NAME
-                  Void
             Label : NAME
               static

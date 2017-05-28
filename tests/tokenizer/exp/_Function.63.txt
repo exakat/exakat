@@ -9,7 +9,7 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -22,8 +22,6 @@ Label : PROJECT
               ++
               Label : POSTPLUSPLUS
                 $a
-          Label : NAME
-            Void
         Label : ELEMENT
           ->
           Label : METHOD

@@ -25,7 +25,7 @@ Label : PROJECT
                   Label : ARGUMENTS
                     (
                     Label : ARGUMENT
-                       
+                      function
                       Label : ARGUMENTS
                         (
                         Label : ARGUMENT
@@ -168,8 +168,6 @@ Label : PROJECT
                                 F
                             Label : OBJECT
                               $b
-                      Label : NAME
-                        Void
                       Label : USE
                         (
                         Label : ARGUMENT

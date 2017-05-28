@@ -13,7 +13,7 @@ Label : PROJECT
           Label : ARGUMENTS
             (
             Label : ARGUMENT
-               
+              function
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
@@ -24,7 +24,5 @@ Label : PROJECT
                   return
                   Label : RETURN
                     1
-              Label : NAME
-                Void
           Label : NAME
             c

@@ -40,5 +40,3 @@ Label : PROJECT
                       main
                     Label : PUBLIC
                       public
-                Label : NAME
-                  Void

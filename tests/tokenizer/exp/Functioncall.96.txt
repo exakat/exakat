@@ -24,7 +24,7 @@ Label : PROJECT
                   Label : ARGUMENTS
                     (
                     Label : ARGUMENT
-                       
+                      function
                       Label : ARGUMENTS
                         (
                         Label : ARGUMENT
@@ -72,8 +72,6 @@ Label : PROJECT
                           ++
                           Label : POSTPLUSPLUS
                             $a
-                      Label : NAME
-                        Void
                   Label : NAME
                     call_user_func
               Label : NAME

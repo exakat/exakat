@@ -23,7 +23,7 @@ Label : PROJECT
                   Label : LEFT
                     $a
                   Label : RIGHT
-                     
+                    function
                     Label : ARGUMENTS
                       (
                       Label : ARGUMENT
@@ -186,7 +186,5 @@ Label : PROJECT
                         yield from
                         Label : YIELD
                           $x
-                    Label : NAME
-                      Void
           Label : NAME
             assert

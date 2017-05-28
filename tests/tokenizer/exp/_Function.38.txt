@@ -13,7 +13,7 @@ Label : PROJECT
           Label : LEFT
             $x
           Label : RIGHT
-             
+            function
             Label : ARGUMENTS
               (
               Label : ARGUMENT
@@ -28,5 +28,3 @@ Label : PROJECT
                 ++
                 Label : POSTPLUSPLUS
                   $a
-            Label : NAME
-              Void

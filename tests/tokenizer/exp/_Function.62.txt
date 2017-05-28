@@ -11,7 +11,7 @@ Label : PROJECT
         Label : ELEMENT
           +
           Label : LEFT
-             
+            function
             Label : ARGUMENTS
               (
               Label : ARGUMENT
@@ -24,8 +24,6 @@ Label : PROJECT
                 ++
                 Label : POSTPLUSPLUS
                   $a
-            Label : NAME
-              Void
           Label : RIGHT
             ->
             Label : METHOD
@@ -53,7 +51,7 @@ Label : PROJECT
         Label : ELEMENT
           -
           Label : LEFT
-             
+            function
             Label : ARGUMENTS
               (
               Label : ARGUMENT
@@ -66,8 +64,6 @@ Label : PROJECT
                 ++
                 Label : POSTPLUSPLUS
                   $a
-            Label : NAME
-              Void
           Label : RIGHT
             ->
             Label : METHOD

@@ -33,7 +33,7 @@ Label : PROJECT
               Label : KEY
                 'C'
               Label : VALUE
-                 
+                function
                 Label : ARGUMENTS
                   (
                   Label : ARGUMENT
@@ -90,7 +90,5 @@ Label : PROJECT
                               'F'
                       Label : VARIABLE
                         $e
-                Label : NAME
-                  Void
             Label : ARGUMENT
               1

@@ -46,7 +46,5 @@ Label : PROJECT
                       public
                 Label : DEFINITION
                   $this
-                Label : NAME
-                  Void
           Label : NAME
             var_dump

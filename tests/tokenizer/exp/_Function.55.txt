@@ -63,7 +63,7 @@ Label : PROJECT
           Label : NAME
             i
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -72,12 +72,10 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : RETURNTYPE
             Stdclass
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -86,10 +84,8 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -98,8 +94,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : RETURNTYPE
             Stdclass
           Label : USE
@@ -107,7 +101,7 @@ Label : PROJECT
             Label : ARGUMENT
               $y
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -116,8 +110,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : USE
             (
             Label : ARGUMENT
@@ -177,7 +169,7 @@ Label : PROJECT
           Label : NAME
             i
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -186,12 +178,10 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : RETURNTYPE
             Stdclass
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -200,10 +190,8 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -212,8 +200,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : RETURNTYPE
             Stdclass
           Label : USE
@@ -221,7 +207,7 @@ Label : PROJECT
             Label : ARGUMENT
               $y
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -230,8 +216,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : USE
             (
             Label : ARGUMENT

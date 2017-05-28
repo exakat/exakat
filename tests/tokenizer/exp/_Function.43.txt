@@ -9,7 +9,7 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -28,8 +28,6 @@ Label : PROJECT
                   f
               Label : OBJECT
                 $e
-          Label : NAME
-            Void
           Label : USE
             (
             Label : ARGUMENT

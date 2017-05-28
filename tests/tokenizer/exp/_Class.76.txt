@@ -48,8 +48,6 @@ Label : PROJECT
                               foo
                         Label : NAME
                           bInAnomyous
-                    Label : NAME
-                      Void
               Label : NAME
                 a
           Label : NAME

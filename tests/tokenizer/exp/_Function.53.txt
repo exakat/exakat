@@ -9,7 +9,7 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -18,10 +18,8 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -30,5 +28,3 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void

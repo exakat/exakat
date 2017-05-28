@@ -8,7 +8,7 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -23,5 +23,3 @@ Label : PROJECT
                   $b
                 Label : RIGHT
                   NULL
-          Label : NAME
-            Void

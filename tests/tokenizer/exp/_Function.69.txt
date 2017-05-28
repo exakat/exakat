@@ -62,7 +62,7 @@ Label : PROJECT
           Label : NAME
             s3
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -71,10 +71,8 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -83,10 +81,8 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -97,10 +93,8 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -113,8 +107,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
         Label : ELEMENT
           =
           Label : LEFT

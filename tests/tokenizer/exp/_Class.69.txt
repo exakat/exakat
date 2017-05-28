@@ -42,8 +42,6 @@ Label : PROJECT
                       public
                 Label : EXTENDS
                   ConsoleProgram
-                Label : NAME
-                  Void
         Label : ELEMENT
           return
           Label : RETURN
@@ -72,8 +70,6 @@ Label : PROJECT
                     public
               Label : IMPLEMENTS
                 Page
-              Label : NAME
-                Void
         Label : ELEMENT
           class
           Label : BLOCK
@@ -134,5 +130,3 @@ Label : PROJECT
                   Void
               Label : EXTENDS
                 DirectoryIterator
-              Label : NAME
-                Void

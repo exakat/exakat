@@ -1246,6 +1246,7 @@ class Load extends Tasks {
             $class->aliased    = $aliased;
 
             $this->addDefinition('class', $class->fullnspath, $class);
+            $this->addLink($class, $name, 'NAME');
         } else {
             $class->fullnspath = $this->makeAnonymous();
             $class->aliased    = self::NOT_ALIASED;
@@ -1258,7 +1259,6 @@ class Load extends Tasks {
                 $this->addLink($class, $arguments, 'ARGUMENTS');
             }
         }
-        $this->addLink($class, $name, 'NAME');
 
         // Process extends
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EXTENDS) {
@@ -1304,7 +1304,7 @@ class Load extends Tasks {
         $this->addLink($class, $block, 'BLOCK');
 
         $class->code       = $this->tokens[$current][1];
-        $class->fullcode   = (!empty($fullcode) ? implode(' ', $fullcode).' ' : '').$this->tokens[$current][1].($name->atom === 'Void' ? '' : ' '.$name->fullcode)
+        $class->fullcode   = (!empty($fullcode) ? implode(' ', $fullcode).' ' : '').$this->tokens[$current][1].($class->atom === 'Classanonymous' ? '' : ' '.$name->fullcode)
                              .(isset($arguments) ? ' ('.$arguments->fullcode.')' : '')
                              .(isset($extends) ? ' '.$extendsKeyword.' '.$extends->fullcode : '')
                              .(isset($implements) ? ' '.$implementsKeyword.' '.implode(', ', $fullcodeImplements) : '')
@@ -2144,7 +2144,7 @@ class Load extends Tasks {
         }
         
         foreach($this->optionsTokens as $name => $option) {
-            $this->addLink($static, $option, $link);
+            $this->addLink($static, $option, strtoupper($name));
             $fullcodePrefix[] = $option->fullcode;
         }
         $fullcodePrefix = implode(' ', $fullcodePrefix);

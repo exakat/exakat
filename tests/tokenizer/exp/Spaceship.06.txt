@@ -81,7 +81,7 @@ Label : PROJECT
             Label : ARGUMENT
               $data
             Label : ARGUMENT
-               
+              function
               Label : ARGUMENTS
                 (
                 Label : ARGUMENT
@@ -106,7 +106,5 @@ Label : PROJECT
                         1
                       Label : VARIABLE
                         $right
-              Label : NAME
-                Void
           Label : NAME
             usort

@@ -9,7 +9,7 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -18,14 +18,12 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : USE
             (
             Label : ARGUMENT
               $a1
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -34,14 +32,12 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : USE
             (
             Label : ARGUMENT
               $bq
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -50,8 +46,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : USE
             (
             Label : ARGUMENT
@@ -59,7 +53,7 @@ Label : PROJECT
             Label : ARGUMENT
               $d
         Label : ELEMENT
-           
+          function
           Label : ARGUMENTS
             (
             Label : ARGUMENT
@@ -68,8 +62,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               Void
-          Label : NAME
-            Void
           Label : USE
             (
             Label : ARGUMENT
