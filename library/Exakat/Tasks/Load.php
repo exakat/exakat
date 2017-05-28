@@ -177,7 +177,7 @@ class Load extends Tasks {
     static public $PROP_CLOSETAG    = array('Php');
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
     static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
-    static public $PROP_PROPERTYNAME= array('Variable', 'Assignation');
+    static public $PROP_PROPERTYNAME= array('Propertydefinition', 'Assignation');
     static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence', 'Arrayliteral', 'Function');
     static public $PROP_GLOBALVAR   = array('Array');
     static public $PROP_BINARYSTRING= array('String', 'Heredoc');
@@ -719,8 +719,8 @@ class Load extends Tasks {
 
             $this->checkTokens($filename);
         } catch (LoadError $e) {
-            print $e->getMessage();
-            print_r($this->expressions[0]);
+//            print $e->getMessage();
+//            print_r($this->expressions[0]);
             $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
             $this->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
@@ -2172,7 +2172,7 @@ class Load extends Tasks {
                 $element->rank = +$rank;
                 $this->addLink($static, $element, $link);
                 
-                if ($atom !== 'Global' && $atom !== 'Static') {
+                if ($atom === 'Propertydefinition') {
                     preg_match('/^\$([^ ]+)/', $element->fullcode, $r);
                     $element->propertyname = $r[1];
                 }
@@ -2180,11 +2180,11 @@ class Load extends Tasks {
                 $fullcode[] = $element->fullcode;
                 ++$this->id;
             }
-        } ;
+        };
         $element = $this->popExpression();
         $this->addLink($static, $element, $link);
 
-        if ($atom !== 'Global' && $atom !== 'Static') {
+        if ($atom === 'Propertydefinition') {
             preg_match('/^\$([^ ]+)/', $element->fullcode, $r);
             $element->propertyname = $r[1];
         }

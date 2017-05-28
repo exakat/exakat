@@ -29,10 +29,7 @@ class Anonymous extends Analyzer {
     protected $phpVersion = '7.0+';
     
     public function analyze() {
-        $this->atomIs('Class')
-             ->outIs('NAME')
-             ->atomIs('Void')
-             ->back('first');
+        $this->atomIs('Classanonymous');
         $this->prepareQuery();
     }
 }
