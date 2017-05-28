@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class RawPostDataUsage extends Analyzer {
     public function analyze() {
         $this->atomIs(self::$VARIABLES_ALL)
-             ->codeIs('$HTTP_RAW_POST_DATA');
+             ->codeIs('$HTTP_RAW_POST_DATA', true);
         $this->prepareQuery();
     }
 }
