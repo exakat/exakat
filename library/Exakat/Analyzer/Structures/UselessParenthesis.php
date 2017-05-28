@@ -39,6 +39,12 @@ class UselessParenthesis extends Analyzer {
              ->atomIs('Parenthesis');
         $this->prepareQuery();
 
+        // yield
+        $this->atomIs(array('Yield', 'Yieldfrom'))
+             ->outIs('YIELD')
+             ->atomIs('Parenthesis');
+        $this->prepareQuery();
+
         // while
         $this->atomIs('While')
              ->outIs('CONDITION')

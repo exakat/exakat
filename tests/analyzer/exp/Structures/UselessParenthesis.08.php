@@ -3,7 +3,7 @@
 $expected     = array('$z',
                       '($z)');
 
-$expected_not = array('$y'
+$expected_not = array('$y',
                       'clone $y');
 
 ?>
