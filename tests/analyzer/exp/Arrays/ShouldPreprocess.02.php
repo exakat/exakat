@@ -6,6 +6,7 @@ $expected     = array('$d = array( )',
                       '$x->y = array( )', 
                       '$b = array( )');
 
-$expected_not = array();
+$expected_not = array('$c++',
+                      '$e = array( )');
 
 ?>

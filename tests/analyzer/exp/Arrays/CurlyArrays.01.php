@@ -5,6 +5,6 @@ $expected     = array('$a{1}',
                       '$a{1}{3}{6}',
                       '$a{1}{3}[]{4}');
 
-$expected_not = array();
+$expected_not = array('$x[1]');
 
 ?>

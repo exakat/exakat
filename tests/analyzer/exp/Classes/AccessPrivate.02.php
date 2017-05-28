@@ -5,6 +5,9 @@ $expected     = array('parent::$x',
                       'parent::y( )',
                       'a::y( )',);
 
-$expected_not = array();
+$expected_not = array('parent::$xp',
+                      'a::$xp',
+                      'parent::yp( )',
+                      'a::yp( )',);
 
 ?>
