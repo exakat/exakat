@@ -61,10 +61,6 @@ class Files extends Tasks {
         $ignoredFiles = array();
         $files = array();
         self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles, $this->config);
-        if (empty($files)) {
-            throw new NoFileToProcess($this->config->project);
-        }
-
         $i = array();
         foreach($ignoredFiles as $file => $reason) {
             $i[] = array('file'   => $file,
@@ -74,12 +70,18 @@ class Files extends Tasks {
         $this->datastore->cleanTable('ignoredFiles');
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
 
+        $this->datastore->addRow('hash', array('files' => count($files)));
+        if (empty($files)) {
+            throw new NoFileToProcess($this->config->project);
+        }
+
         $tmpFileName = $this->config->projects_root.'/projects/.exakat/files.'.getmypid().'.txt';
         $path = $this->config->projects_root.'/projects/'.$dir.'/code';
         $tmpFiles = array_map(function ($file) use ($path) { return str_replace(array('(', ')', ' '), array('\\(', '\\)', '\\ '), $file);}, $files);
         file_put_contents($tmpFileName, ''.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\n{$this->config->projects_root}/projects/$dir/code", $tmpFiles).'');
 
         $versions = $this->config->other_php_versions;
+        $versions = array('54', '55', '56', '70', '71', '72');
 
         $analyzingVersion = $this->config->phpversion[0].$this->config->phpversion[2];
         $id = array_search($analyzingVersion, $versions);
