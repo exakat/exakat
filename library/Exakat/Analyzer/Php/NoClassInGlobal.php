@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class NoClassInGlobal extends Analyzer {
     public function analyze() {
         $this->atomIs(array('Class', 'Trait', 'Interface', 'Function'))
-             ->hasName()
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]+\$');
         $this->prepareQuery();
     }

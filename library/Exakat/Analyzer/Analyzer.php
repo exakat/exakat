@@ -89,6 +89,8 @@ abstract class Analyzer {
     static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray');
     static public $FUNCTIONS_ALL    = array('Function', 'Method', 'Closure');
     static public $FUNCTIONS_NAMED  = array('Function', 'Method');
+    static public $CLASSES_ALL      = array('Class', 'Closure');
+    static public $CLASSES_NAMED    = 'Class';
     
     
     const INCLUDE_SELF = false;
@@ -1253,14 +1255,14 @@ GREMLIN
         return $this;
     }
 
-    public function noClassDefinition() {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel("Class").count().is(eq(0)))');
+    public function noClassDefinition($type = 'Class') {
+        $this->addMethod('not(where(__.in("DEFINITION").hasLabel('.$this->SorA($type).') ) )');
     
         return $this;
     }
 
     public function hasClassDefinition($type = 'Class') {
-        $this->addMethod('where(__.in("DEFINITION").hasLabel("Class").count().is(eq(1)))');
+        $this->addMethod('where(__.in("DEFINITION").hasLabel('.$this->SorA($type).') )');
     
         return $this;
     }

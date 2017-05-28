@@ -35,7 +35,6 @@ class Php72Deprecation extends Analyzer {
         // Definition of \\__autoload
         $this->atomIs('Function')
              ->hasNoClassTrait()
-             ->hasName()
              ->fullnspathIs('\\__autoload')
              ->back('first');
         $this->prepareQuery();
