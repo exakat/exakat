@@ -31,7 +31,7 @@ class PropertyDefinition extends Analyzer {
         $this->atomIs('Ppp')
              ->outIs('PPP')
              ->outIsIE('LEFT')
-             ->atomIs('Variable');
+             ->atomIs('Propertydefinition');
         $this->prepareQuery();
     }
 }

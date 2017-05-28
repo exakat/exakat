@@ -58,8 +58,7 @@ class UselessInstruction extends Analyzer {
         // closures that are not assigned to something (argument or variable)
         $this->atomIs('Sequence')
              ->outIs('ELEMENT')
-             ->atomIs('Function')
-             ->isLambda();
+             ->atomIs('Closure');
         $this->prepareQuery();
 
         // return $a++;

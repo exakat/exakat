@@ -27,10 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class StaticVariables extends Analyzer {
     public function analyze() {
-        $this->atomIs('Variable')
-             ->inIsIE('LEFT')
-             ->inIs('STATIC')
-             ->back('first');
+        $this->atomIs('Staticdefinition');
         $this->prepareQuery();
     }
 }

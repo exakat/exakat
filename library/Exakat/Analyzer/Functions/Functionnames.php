@@ -29,7 +29,6 @@ class Functionnames extends Analyzer {
     // Function definitions, not in a CIT
     public function analyze() {
         $this->atomIs('Function')
-             ->isNotLambda()
              ->hasNoClassInterfaceTrait()
              ->outIs('NAME');
         $this->prepareQuery();

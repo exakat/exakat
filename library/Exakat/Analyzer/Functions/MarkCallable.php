@@ -248,7 +248,7 @@ GREMLIN;
             $this->atomFunctionIs($ini['functions'.$position])
                  ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIs('Function');
+                 ->atomIs('Closure');
             $this->prepareQuery();
         }
 
@@ -256,14 +256,14 @@ GREMLIN;
         $this->atomFunctionIs($ini['functions_last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
-             ->atomIs('Function');
+             ->atomIs('Closure');
         $this->prepareQuery();
 
         // callable is in 2nd to last
         $this->atomFunctionIs($ini['functions_2last'])
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
-             ->atomIs('Function');
+             ->atomIs('Closure');
         $this->prepareQuery();
     }
 }

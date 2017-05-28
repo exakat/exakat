@@ -29,7 +29,7 @@ class GlobalInGlobal extends Analyzer {
     public function analyze() {
         // any variable outside anything else (except namespaces)
         $this->atomIs(array('Variable', 'Globaldefinition'))
-             ->hasNoFunction()
+             ->hasNoFunction(self::$FUNCTIONS_ALL)
              ->hasNoClass()
              ->hasNoTrait()
              ->hasNoInterface();

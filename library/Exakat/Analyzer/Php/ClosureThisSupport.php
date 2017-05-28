@@ -29,8 +29,7 @@ class ClosureThisSupport extends Analyzer {
     protected $phpVersion = '5.4-';
     
     public function analyze() {
-        $this->atomIs('Function')
-             ->isLambda()
+        $this->atomIs('Closure')
              ->outIs('BLOCK')
              ->atomInside('Variable')
              ->codeIs('$this', true)

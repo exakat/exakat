@@ -178,7 +178,7 @@ class Load extends Tasks {
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
     static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
     static public $PROP_PROPERTYNAME= array('Propertydefinition', 'Assignation');
-    static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence', 'Arrayliteral', 'Function');
+    static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence', 'Arrayliteral', 'Function', 'Closure');
     static public $PROP_GLOBALVAR   = array('Array');
     static public $PROP_BINARYSTRING= array('String', 'Heredoc');
 
@@ -1014,6 +1014,7 @@ class Load extends Tasks {
         }
 
         $previousClassContext = $this->contexts[self::CONTEXT_CLASS];
+        $previousFunctionContext = $this->contexts[self::CONTEXT_FUNCTION];
         $this->contexts[self::CONTEXT_CLASS] = 0;
         $this->contexts[self::CONTEXT_FUNCTION] = 1;
 
@@ -1110,7 +1111,7 @@ class Load extends Tasks {
         }
 
         $this->contexts[self::CONTEXT_CLASS] = $previousClassContext;
-        $this->exitContext(self::CONTEXT_FUNCTION);
+        $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
         return $function;
     }
 

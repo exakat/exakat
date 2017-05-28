@@ -107,8 +107,7 @@ class UnusedArguments extends Analyzer {
         $this->prepareQuery();
 
         // Arguments in a USE, not a reference
-        $this->atomIs(self::$FUNCTION_METHOD)
-             ->hasChildren('Void', 'NAME')
+        $this->atomIs('Closure')
              ->outIs('USE')
              ->outIs('ARGUMENT')
              ->isNot('reference', true)
@@ -123,8 +122,7 @@ class UnusedArguments extends Analyzer {
         $this->prepareQuery();
 
         // Arguments in a USE, reference
-        $this->atomIs(self::$FUNCTION_METHOD)
-             ->hasChildren('Void', 'NAME')
+        $this->atomIs('Closure')
              ->outIs('USE')
              ->outIs('ARGUMENT')
              ->is('reference', true)

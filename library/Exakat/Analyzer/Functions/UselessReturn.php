@@ -28,9 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class UselessReturn extends Analyzer {
     public function analyze() {
         // return in special functions
-        $this->atomIs(self::$FUNCTION_METHOD)
-             ->hasClassTrait()
-
+        $this->atomIs('Method')
+             ->hasClassTrait() // avoid interfaces
              ->outIs('NAME')
              ->codeIs(array('__construct', '__destruct', '__set', '__clone', '__unset', '__wakeup'))
              ->inIs('NAME')
@@ -45,8 +44,12 @@ class UselessReturn extends Analyzer {
         $this->prepareQuery();
 
         // function that finally returns void. (the last return is useless)
-        $this->atomIs(self::$FUNCTION_METHOD)
-             ->hasNoClassTrait()
+        $this->atomIs('Function')
+
+             ->outIs('NAME')
+             ->codeIsNot(array('__construct', '__destruct', '__set', '__clone', '__unset', '__wakeup'))
+             ->inIs('NAME')
+
              ->outIs('BLOCK')
              ->outWithRank('ELEMENT', 'last')
              ->atomIs('Return')

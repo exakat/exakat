@@ -82,14 +82,14 @@ abstract class Analyzer {
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
 
-    static public $FUNCTION_METHOD  = array('Function', 'Method');
+    static public $FUNCTION_METHOD  = array('Function', 'Closure', 'Method');
     static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Property', 'Array');
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
-    static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray');
+    static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition');
     static public $FUNCTIONS_ALL    = array('Function', 'Method', 'Closure');
     static public $FUNCTIONS_NAMED  = array('Function', 'Method');
-    static public $CLASSES_ALL      = array('Class', 'Closure');
+    static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
     
     
@@ -589,7 +589,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
 
     public function atomInsideNoAnonymous($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Function", "Class")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
@@ -1167,18 +1167,6 @@ GREMLIN
         return $this;
     }
 
-    public function isLambda() {
-        $this->hasChildren('Void', 'NAME');
-        
-        return $this;
-    }
-    
-    public function isNotLambda() {
-        $this->hasNoChildren('Void', 'NAME');
-        
-        return $this;
-    }
-        
     public function hasConstantDefinition() {
         $this->addMethod('where( __.in("DEFINITION"))');
     
@@ -1545,7 +1533,7 @@ GREMLIN
     public function isLiteral() {
         // Closures are literal if not using a variable from the context
         $this->addMethod(<<<GREMLIN
-hasLabel("Integer", "Boolean", "Magicconstant", "Real", "String", "Heredoc", "Function", "Arrayliteral").has("constant", true)
+hasLabel("Integer", "Boolean", "Magicconstant", "Real", "String", "Heredoc", "Closure", "Arrayliteral").has("constant", true)
 
 GREMLIN
 );

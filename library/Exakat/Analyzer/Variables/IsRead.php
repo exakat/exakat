@@ -40,7 +40,7 @@ class IsRead extends Analyzer {
         $this->prepareQuery();
 
         // Reading inside an assignation
-        $this->atomIs('Variable')
+        $this->atomIs(self::$VARIABLES_ALL)
              ->inIs('LEFT')
              ->atomIs('Assignation')
              ->codeIs('=')
@@ -125,6 +125,7 @@ class IsRead extends Analyzer {
         // Variable that are not a reference in a functioncall
         $this->atomIs('Variable')
              ->hasIn('ARGUMENT')
+             ->hasNoParent('Closure', array('ARGUMENT', 'ARGUMENTS'))
              ->hasNoParent('Function', array('ARGUMENT', 'ARGUMENTS'))
              ->hasNoParent('Method', array('ARGUMENT', 'ARGUMENTS'));
         $this->prepareQuery();

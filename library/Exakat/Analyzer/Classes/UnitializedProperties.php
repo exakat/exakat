@@ -32,7 +32,7 @@ class UnitializedProperties extends Analyzer {
     
     public function analyze() {
         // Normal Properties (with constructor)
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
@@ -55,7 +55,7 @@ class UnitializedProperties extends Analyzer {
         $this->prepareQuery();
 
         // without constructor
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
@@ -65,12 +65,12 @@ class UnitializedProperties extends Analyzer {
              ->_as('results')
              ->savePropertyAs('propertyname', 'property')
              ->back('first')
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").in("ANALYZED").has("analyzer", "Classes/Constructor").count().is(eq(0)) )')
+             ->raw('not( where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").in("ANALYZED").has("analyzer", "Classes/Constructor") ) )')
              ->back('results');
         $this->prepareQuery();
         
         // Static Properties (with constructor)
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->savePropertyAs('fullnspath', 'classe')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -87,13 +87,14 @@ class UnitializedProperties extends Analyzer {
              ->analyzerIs('Classes/Constructor')
              ->raw('where(
     __.out("BLOCK").emit( hasLabel("Staticproperty")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
-      .hasLabel("Staticproperty").out("CLASS").filter{ it.get().value("fullnspath") == classe}.in("CLASS").where(__.out("PROPERTY").filter{ it.get().value("code") == property})
+      .hasLabel("Staticproperty").out("CLASS").filter{ it.get().value("fullnspath") == classe}.in("CLASS")
+      .where(__.out("PROPERTY").filter{ it.get().value("code") == property})
       .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified").count().is(eq(1)) ).count().is(eq(0))
 )')
              ->back('results');
         $this->prepareQuery();
 
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->savePropertyAs('fullnspath', 'classe')
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
@@ -104,7 +105,7 @@ class UnitializedProperties extends Analyzer {
              ->_as('results')
              ->savePropertyAs('code', 'property')
              ->back('first')
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").in("ANALYZED").has("analyzer", "Classes/Constructor").count().is(eq(0)) )')
+             ->raw('not( where( __.out("BLOCK").out("ELEMENT").hasLabel("Method").in("ANALYZED").has("analyzer", "Classes/Constructor") ) )')
              ->back('results');
         $this->prepareQuery();
     }

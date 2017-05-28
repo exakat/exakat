@@ -1,8 +1,8 @@
 <?php
 
 $a = new class implements Logger { 
-    private $foo;
-    private $foo2 = 1;
+    private static $foo;
+    private static $foo2 = 1;
 
     function foo() {
         A::$foo = 2;

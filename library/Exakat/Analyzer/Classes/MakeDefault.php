@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MakeDefault extends Analyzer {
     public function analyze() {
-        $this->atomIs('Class')
+        $this->atomIs(self::$CLASSES_ALL)
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
              ->atomIs('Method')

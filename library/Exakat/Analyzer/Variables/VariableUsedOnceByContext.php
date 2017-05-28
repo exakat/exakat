@@ -33,10 +33,17 @@ class VariableUsedOnceByContext extends Analyzer {
     }
     
     public function analyze() {
-        $variables = $this->query('g.V().hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")).where( __.in("PROPERTY").count().is(eq(0)) ).where( 
-repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK", "BREAK", "CASE", "CASES", "CAST", "CATCH", "CLASS", "CLONE", "CODE", "CONCAT", "CONDITION", "CONST", "CONSTANT", "CONTINUE", "DECLARE", "ELEMENT", "ELSE", "EXTENDS", "FILE", "FINAL", "FINALLY", "FUNCTION", "GLOBAL", "GOTO", "GROUPUSE", "IMPLEMENTS", "INCREMENT", "INDEX", "INIT", "KEY", "LABEL", "LEFT", "METHOD", "NAME", "NEW", "NOT", "OBJECT", "PPP", "POSTPLUSPLUS", "PREPLUSPLUS", "PRIVATE", "PROJECT", "PROPERTY", "PROTECTED", "PUBLIC", "RETURN", "RETURNTYPE", "RIGHT", "SIGN", "SOURCE", "STATIC", "THEN", "THROW", "TYPEHINT", "USE", "VALUE", "VAR", "VARIABLE", "YIELD"))
-.until(hasLabel("File")).emit().hasLabel("Function").count().is(eq(0))).groupCount("m").by("code").cap("m")
-.toList().get(0).findAll{ a,b -> b == 1}.keySet()');
+        $query = <<<GREMLIN
+g.V().hasLabel("Variable", "Variablearray", "Variableobject")
+     .not(has("code", "\\\$this"))
+     .where( __.in("PROPERTY").count().is(eq(0)) )
+               .where( repeat( __.in({$this->linksDown}))
+                            .until(hasLabel("File")).emit(hasLabel("Function")).hasLabel("Function")
+                            .count().is(eq(0))
+                     ).groupCount("m").by("code").cap("m")
+                      .toList().get(0).findAll{ a,b -> b == 1}.keySet()
+GREMLIN;
+        $variables = $this->query($query);
 
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasNoIn(array('PPP'))
@@ -45,10 +52,10 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
              ->codeIs($variables);
         $this->prepareQuery();
 
-        $this->atomIs('Function')
+        $this->atomIs(array('Function', 'Closure'))
              ->raw('where( __
                    .sideEffect{counts = [:]}
-                             .repeat( out('.$this->linksDown.').where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) ) )
+                             .repeat( out('.$this->linksDown.').not( where( __.hasLabel("Function", "Closure") ) ) )
                              .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
                              .hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this"))
                              .where( __.in("PROPERTY").count().is(eq(0)) )
@@ -61,7 +68,7 @@ repeat(__.in("ABSTRACT", "APPEND", "ARGUMENT", "ARGUMENTS", "AS", "AT", "BLOCK",
                               }.fold()
                           )
                    .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
-                   .repeat( out('.$this->linksDown.').where( __.hasLabel("Function").out("NAME").hasLabel("Void").count().is(eq(0)) )  )
+                   .repeat( out('.$this->linksDown.').not( where( __.hasLabel("Function", "Closure") ) )  )
                    .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
                    .filter{ it.get().value("code") in names }');
         $this->prepareQuery();

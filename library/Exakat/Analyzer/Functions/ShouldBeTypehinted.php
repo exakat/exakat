@@ -53,7 +53,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->isNotLambda()
+             ->atomIsNot('Closure')
              ->outIs('BLOCK')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')

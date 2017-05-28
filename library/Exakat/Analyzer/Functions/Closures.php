@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Closures extends Analyzer {
     // function ($x) {}
     public function analyze() {
-        $this->atomIs('Function')
-             ->isLambda();
+        $this->atomIs('Closure');
         $this->prepareQuery();
     }
 }
