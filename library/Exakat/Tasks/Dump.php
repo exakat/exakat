@@ -496,6 +496,7 @@ GREMLIN
                 } else {
                     $extends = '"'.$this->sqlite->escapeString($row->extends).'"';
                 }
+                $namespace = preg_replace('/\\\\[^\\\\]*?$/', '', $row->fullnspath);
                 $query[] = "(".$citId[$row->fullnspath].", '".$this->sqlite->escapeString($row->name)."', ".$namespacesId[$namespace].", ".(int) $row->abstract.",".(int) $row->final.", '"
                                 .$row->type."', ".$extends.")";
             }
@@ -649,7 +650,6 @@ GREMLIN
 
 g.V().hasLabel("Ppp")
 .sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface")
-                                    .where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )
                                     .sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
 .filter{ classe != '';} // Removes functions, keeps methods
 .sideEffect{ 
@@ -664,7 +664,7 @@ g.V().hasLabel("Ppp")
 }
 .out('PPP')
 .map{ 
-    if (it.get().label() == 'Variable') { 
+    if (it.get().label() == 'Propertydefinition') { 
         name = it.get().value("code");
         v = ''; 
     } else { 
