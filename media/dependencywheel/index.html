@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us" prefix="og: http://ogp.me/ns#">
+  <!-- Use the Source, Luke -->
+  <head>
+    <title>DependencyWheel:</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Rosario:400,700' rel='stylesheet' type='text/css'>
+  <style>
+
+h1, p, li {
+  font-family: 'Rosario', sans-serif;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: 300;
+  letter-spacing: -2px;
+  line-height: 1em;
+  margin: 1em 0;
+}
+
+#chart_placeholder {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dependencyWheel {
+  font: 10px sans-serif;
+}
+
+form .btn-primary {
+  margin-top: 25px;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>DependencyWheel for <PROJECT></h1>
+
+    <p>This wheel presents all classes, traits and interfaces dependencies : one class may depends on others via extends, implements and use keyword.</p>
+
+    <div id="chart_placeholder"></div>
+
+    <p>This wheel is build buy <a href="">Exakat</a> and the <a href="https://github.com/fzaninotto/DependencyWheel">DependencyWheel</a>, from F. Zaninoto.</p>
+
+  <script src="js/d3.v4.min.js"></script>
+  <script src="js/d3.dependencyWheel.js"></script>
+  <script src="js/composerBuilder.js"></script>
+  <script>
+  var gitHubApiUrl = 'https://api.github.com/repos/';
+  var getData = function(target, callback) {
+    var responses = {
+      composerjson: null,
+      composerlock: null
+    };
+    var checkFinished = function() {
+      if (responses.composerjson && responses.composerlock) {
+        callback(responses.composerjson, responses.composerlock);
+      }
+    }
+    d3.xhr(gitHubApiUrl + target + '/contents/composer.json', 'application/vnd.github.VERSION.raw', function(err, composerjson) {
+      responses.composerjson = JSON.parse(composerjson.responseText);
+      checkFinished();
+    });
+    d3.xhr(gitHubApiUrl + target + '/contents/composer.lock', 'application/vnd.github.VERSION.raw', function(err, composerlock) {
+      responses.composerlock = JSON.parse(composerlock.responseText);
+      checkFinished();
+    });
+  };
+
+  var chart = d3.chart.dependencyWheel();
+
+var data = {
+  packageNames: <PACKAGENAMES>,
+  matrix: <MATRIX>
+};
+      d3.select('#chart_placeholder')
+        .datum(data)
+        .call(chart);
+
+  document.getElementById('composerRedraw').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var composerjson = JSON.parse(document.getElementById('composerJson').value);
+    var composerlock = JSON.parse(document.getElementById('composerLock').value);
+    var data = buildMatrixFromComposerJsonAndLock(composerjson, composerlock);
+    d3.select('#chart_placeholder svg').remove();
+    d3.select('#chart_placeholder')
+      .datum(data)
+      .call(chart);
+  }, false);
+
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26354577-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

@@ -516,7 +516,7 @@ GREMLIN
                     if (isset($citId[$implements])) {
                         $query[] = "(null, ".$citId[$row->fullnspath].", $citId[$implements], 'implements')";
                     } else {
-                        $query[] = "(null, ".$citId[$row->fullnspath].", '".$this->sqlite->escapeString($row->name)."', 'implements')";
+                        $query[] = "(null, ".$citId[$row->fullnspath].", '".$this->sqlite->escapeString($implements)."', 'implements')";
                     }
                 }
             }
