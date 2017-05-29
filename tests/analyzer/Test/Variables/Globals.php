@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Variables_Globals extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testVariables_Globals01()  { $this->generic_test('Variables/Globals.01'); }
     public function testVariables_Globals02()  { $this->generic_test('Variables/Globals.02'); }
@@ -18,5 +18,6 @@ class Variables_Globals extends Analyzer {
     public function testVariables_Globals06()  { $this->generic_test('Variables/Globals.06'); }
     public function testVariables_Globals07()  { $this->generic_test('Variables/Globals.07'); }
     public function testVariables_Globals08()  { $this->generic_test('Variables/Globals.08'); }
+    public function testVariables_Globals09()  { $this->generic_test('Variables/Globals.09'); }
 }
 ?>

@@ -1,11 +1,14 @@
 <?php
 
 $expected     = array('$explicitGlobal',
+                      '$explicitGlobal',
                       '$implicitGlobal',
                       '$GLOBALS[\'globalInGLOBALS2\']',
                       '$GLOBALS[\'globalInGLOBALS\']',
                       '$explicitGlobalFunction',
-                      '$x');
+                      '$explicitGlobalFunction',
+                      '$x',
+                      );
 
 $expected_not = array('$localVariableFunction',
                       '$GLOBALS',

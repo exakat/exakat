@@ -4,6 +4,7 @@ $expected     = array('mysqli_connect("localhost", "my_user", "my_password", "wo
                       'mysqli_connect_errno( )',
                       'mysqli_connect_error( )');
 
-$expected_not = array();
+$expected_not = array('printf',
+                      'exit( )');
 
 ?>

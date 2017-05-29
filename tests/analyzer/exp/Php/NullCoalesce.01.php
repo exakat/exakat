@@ -7,6 +7,6 @@ $expected     = array('$a2 ?? $a22 ?? $a222 ?? \'2222\'',
                       '0 || 2 ?? 3',
 );
 
-$expected_not = array();
+$expected_not = array('$a ?? \'44\'');
 
 ?>

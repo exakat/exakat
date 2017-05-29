@@ -55,7 +55,7 @@ class MakeDefault extends Analyzer {
              ->outIs('ELEMENT')
              ->atomIs('Ppp')
              ->outIs('PPP')
-             ->atomIs('Variable')
+             ->atomIs('Propertydefinition')
              ->samePropertyAs('propertyname', 'propriete')
              
              ->back('result');
