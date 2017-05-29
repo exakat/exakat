@@ -50,6 +50,34 @@ class MakeOneCall extends Analyzer {
              ->samePropertyAs('fullcode', 'string')
              ->back('first');
         $this->prepareQuery();
+
+        // Nesting str_replace calls
+        // First level calling
+        $this->atomFunctionIs($functionsArg2)
+             ->hasNoIn('ARGUMENT')
+             ->savePropertyAs('fullnspath', 'function')
+             ->outIs('ARGUMENTS')
+             ->outWithRank('ARGUMENT', 2)
+             ->atomIs('Functioncall')
+             ->samePropertyAs('fullnspath', 'function')
+             ->back('first');
+        $this->prepareQuery();
+
+        //Calling from another functioncall
+        $this->atomFunctionIs($functionsArg2)
+             ->hasIn('ARGUMENT')
+             ->savePropertyAs('fullnspath', 'function')
+             ->inIs('ARGUMENT')
+             ->hasIn('ARGUMENTS')
+             ->atomIs('Functioncall')
+             ->samePropertyAs('fullnspath', 'function')
+             ->back('first')
+             ->outIs('ARGUMENTS')
+             ->outWithRank('ARGUMENT', 2)
+             ->atomIs('Functioncall')
+             ->samePropertyAs('fullnspath', 'function')
+             ->back('first');
+        $this->prepareQuery();
         
         // same functions, in a foreach? 
     }
