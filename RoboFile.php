@@ -258,6 +258,9 @@ LICENCE;
 
         print "Check Compatibility themes\n";
         $this->checkCompatibilityThemes();
+        
+        print "Check Extension documentations\n";
+        $this->checkExtIni();
 
         print "Check Docs\n";
         $this->checkDoc();
@@ -911,7 +914,41 @@ SQL
 
         $sqlite->query('VACUUM');
     }
+
+    public function checkExtIni() {
+        $entries = array('traits', 'classes', 'functions', 'constants', 'interfaces', 'namespaces', 'directives');
+
+        $files = glob('library/Exakat/Analyzer/Extensions/Ext*.php');
+        $errors = 0;
+        $total = 0;
+        foreach($files as $file) {
+            ++$total;
+            $ext = substr($file, 38, -4);
+            
+            if (!file_exists('data/'.$ext.'.ini')) {
+                print "Missing $ext.ini file\n";
+                ++$errors;
+                continue;
+            }
+
+            $ini = parse_ini_file('data/'.$ext.'.ini');
+            $keys = array_keys($ini);
+        
+            $diff = array_diff($keys, $entries);
+            if (!empty($diff)) {
+                print count($diff)." entries are missing in data/$ext.ini : ".implode(', ', $diff)."\n";
+                $errors += count($diff);
+            }
     
+            $diff = array_diff($entries, $keys);
+            if (!empty($diff)) {
+                print count($diff)." entries are missing in data/$ext.ini : ".implode(', ', $diff)."\n";
+                $errors += count($diff);
+            }
+        }
+        print "$total extensions, $errors error found\n";
+    }
+        
     public function checkData() {
         //php_constant_arguments.json
         $functions = json_decode(file_get_contents('data/php_constant_arguments.json'));
