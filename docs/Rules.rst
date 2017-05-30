@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 22 May 2017 08:10:47 +0000
-.. comment: Generation hash : 93a7490db1670b8b3607967043dde5943a49de46
+.. comment: Generation date : Tue, 30 May 2017 13:55:32 +0000
+.. comment: Generation hash : e8b51c67affc003e155a153f69ab7b34e40db1a0
 
 
 .. _$http\_raw\_post\_data:
@@ -2644,6 +2644,43 @@ The following functions may bear the Void return typeHint.
 
 
 
+.. _could-typehint:
+
+Could Typehint
+##############
+
+
+Arguments that are tested with `instanceof <http://php.net/manual/en/language.operators.type.php>`_ gain from making it a Typehint.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a, $b) {
+       // $a is tested for B with instanceof. 
+       if (!$a instanceof B) {
+           return;
+       }
+       
+       // More code
+   }
+   
+   function foo(B $a, $b) {
+       // May omit the initial test
+       
+       // More code
+   }
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Functions/CouldTypehint |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
+
 .. _could-use-alias:
 
 Could Use Alias
@@ -5029,6 +5066,42 @@ When deriving classes, implements should be used for interfaces, and extends wit
 
 
 
+.. _implemented-methods-are-public:
+
+Implemented Methods Are Public
+##############################
+
+
+Class methods that are defined in an interface must be public. They cannot be either private, nor protected.
+
+This error is not reported by lint, but is reported at execution time.
+
+.. code-block:: php
+
+   <?php
+   
+   interface i {
+       function foo();
+   }
+   
+   class X {
+       // This method is defined in the interface : it must be public
+       protected function foo() {}
+       
+       // other methods may be private
+       private function bar() {}
+   }
+   
+   ?>
+
++--------------+-------------------------------------+
+| Command Line | Classes/ImplementedMethodsArePublic |
++--------------+-------------------------------------+
+| Analyzers    | :ref:`Analyze`                      |
++--------------+-------------------------------------+
+
+
+
 .. _implicit-global:
 
 Implicit Global
@@ -5779,9 +5852,12 @@ Calling the same function to chain modifications tends to be slower than calling
                           $string);
    
    // Too many calls to str_replace
-   $string = str_replace( 'a', 'A');
-   $string = str_replace( 'b', 'B');
-   $string = str_replace( 'c', 'C');
+   $string = str_replace( 'a', 'A', $string);
+   $string = str_replace( 'b', 'B', $string);
+   $string = str_replace( 'c', 'C', $string);
+   
+   // Too many nested calls to str_replace
+   $string = str_replace( 'a', 'A', str_replace( 'b', 'B', str_replace( 'c', 'C', $string)));
    
    ?>
 
@@ -6840,6 +6916,50 @@ Either the condition is useless, and may be removed, or the alternatives needs t
 
 
 
+.. _no-class-as-typehint:
+
+No Class As Typehint
+####################
+
+
+Avoid using whole classes as typehint. Always use interfaces, so that you may use different classes, or versions of classes. 
+
+.. code-block:: php
+
+   <?php
+   
+   class X {
+       function foo() {}
+   }
+   
+   interface i {
+       function foo();
+   }
+   
+   // X is a class : any update in the code requires changing / subclassing X or the rest of the code.
+   function bar(X $x) {
+       $x->foo();
+   }
+   
+   // I is an interface : X may implements this interface without refactoring and pass
+   // later, newer versions of X may get another name, but still implement I, and still pass
+   function bar2(I $x) {
+       $x->foo();
+   }
+   
+   ?>
+
+
+See also ``_.
+
++--------------+-----------------------------+
+| Command Line | Functions/NoClassAsTypehint |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
+
+
+
 .. _no-class-in-global:
 
 No Class In Global
@@ -7511,6 +7631,50 @@ Use precision formulas with `abs() <http://www.php.net/abs>`_ to approximate val
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
+
+
+
+.. _no-return-used:
+
+No Return Used
+##############
+
+
+The return value of the following functions are never used. The return argument may be dropped from the code, as it is dead code.
+
+This analysis supports functions and static methods, when a definition may be found. It doesn't support method calls.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a = 1;) { return 1; }
+   foo();
+   foo();
+   foo();
+   foo();
+   foo();
+   foo();
+   
+   // This function doesn't return anything. 
+   function foo2() { }
+   
+   // The following function are used in an expression, thus the return is important
+   function foo3() {  return 1;}
+   function foo4() {  return 1;}
+   function foo5() {  return 1;}
+   
+   foo3() + 1; 
+   $a = foo4();
+   foo(foo5());
+   
+   ?>
+
++--------------+------------------------+
+| Command Line | Functions/NoReturnUsed |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
 
 
 
@@ -11447,6 +11611,41 @@ This analyzer list all the `strpos() <http://www.php.net/strpos>`_ function that
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
+
+
+
+.. _structures/noreferenceonleft:
+
+Structures/NoReferenceOnLeft
+############################
+
+
+Do not use references as the right element in an assignation. 
+
+.. code-block:: php
+
+   <?php
+   
+   $b = 2;
+   $c = 3;
+   
+   $a = &$b + $c;
+   // $a === 2 === $b;
+   
+   $a = $b + $c;
+   // $a === 5
+   
+   ?>
+
+
+This is the case for most situations : addition, multiplication, bitshift, logical, power, concatenation.
+Note that PHP won't compile the code if the operator is a short operator (+=, .=, etc.), nor if the & is on the right side of the operator.
+
++--------------+------------------------------+
+| Command Line | Structures/NoReferenceOnLeft |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
 
 
 

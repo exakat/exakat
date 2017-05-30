@@ -372,6 +372,7 @@ Glossary
 
       + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Avoid get_class() <avoid-get\_class()>`
+      + :ref:`Could Typehint <could-typehint>`
       + :ref:`Should Make Alias <should-make-alias>`
       + :ref:`Undefined Class 2.0 <undefined-class-2.0>`
       + :ref:`Undefined Class 2.1 <undefined-class-2.1>`

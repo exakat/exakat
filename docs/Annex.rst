@@ -286,17 +286,24 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.11.5
+
+  * Could Typehint (Functions/CouldTypehint ; Analyze)
+  * Implemented Methods Are Public (Classes/ImplementedMethodsArePublic)
+  * Structures/NoReferenceOnLeft (Structures/NoReferenceOnLeft ; Analyze)
+
 * 0.11.4
 
-  * Use Browscap (Php/UseBrowscap)
+  * No Class As Typehint (Functions/NoClassAsTypehint)
+  * Use Browscap (Php/UseBrowscap ; Appinfo)
   * Use Debug (Structures/UseDebug ; Appinfo)
 
 * 0.11.3
 
   * Extensions/Extgrpc (Extensions/Extgrpc)
-  * No Return Used (Functions/NoReturnUsed ; Unassigned)
+  * No Return Used (Functions/NoReturnUsed ; Analyze)
   * Only Variable Passed By Reference (Functions/OnlyVariablePassedByReference ; Analyze)
-  * Try With Multiple Catch (Php/TryMultipleCatch ; Unassigned)
+  * Try With Multiple Catch (Php/TryMultipleCatch ; Appinfo)
   * ext/sphinx (Extensions/Extsphinx ; Appinfo)
 
 * 0.11.2

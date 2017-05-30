@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 22 May 2017 08:10:47 +0000
-.. comment: Generation hash : 93a7490db1670b8b3607967043dde5943a49de46
+.. comment: Generation date : Tue, 30 May 2017 13:55:32 +0000
+.. comment: Generation hash : e8b51c67affc003e155a153f69ab7b34e40db1a0
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 310 analysis
+Total : 315 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -126,6 +126,7 @@ Total : 310 analysis
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
 * :ref:`Could Return Void <could-return-void>`
+* :ref:`Could Typehint <could-typehint>`
 * :ref:`Could Use Alias <could-use-alias>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
@@ -175,6 +176,7 @@ Total : 310 analysis
 * :ref:`Iffectations`
 * :ref:`Illegal Name For Method <illegal-name-for-method>`
 * :ref:`Implement Is For Interface <implement-is-for-interface>`
+* :ref:`Implemented Methods Are Public <implemented-methods-are-public>`
 * :ref:`Implicit Global <implicit-global>`
 * :ref:`Incompilable Files <incompilable-files>`
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
@@ -208,6 +210,7 @@ Total : 310 analysis
 * :ref:`Never Used Properties <never-used-properties>`
 * :ref:`No Boolean As Default <no-boolean-as-default>`
 * :ref:`No Choice <no-choice>`
+* :ref:`No Class As Typehint <no-class-as-typehint>`
 * :ref:`No Class In Global <no-class-in-global>`
 * :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
 * :ref:`No Direct Usage <no-direct-usage>`
@@ -222,6 +225,7 @@ Total : 310 analysis
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
+* :ref:`No Return Used <no-return-used>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
@@ -287,6 +291,7 @@ Total : 310 analysis
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
 * :ref:`Strings With Strange Space <strings-with-strange-space>`
 * :ref:`Strpos Comparison <strpos-comparison>`
+* :ref:`Structures/NoReferenceOnLeft`
 * :ref:`Suspicious Comparison <suspicious-comparison>`
 * :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch With Too Many Default <switch-with-too-many-default>`
