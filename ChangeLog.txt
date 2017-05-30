@@ -1,4 +1,4 @@
-Version 0.11.4 (Intelligent Stone Monkey, Coming up)
+Version 0.11.6 (Red Bottomed Horse Monkey, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 0.11.4 (Intelligent Stone Monkey, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.11.5 (Intelligent Stone Monkey, 2017-05-30)
++ Report
+    + Ambassador : fixed visibility suggestion
+    + New report : Dependency wheel
++ Analyzer
+    + New analyzer : avoid typehinting with classes
+    + New analyzer : implemented methods must be public
+    + New analyzer : no reference on left of assignement
+    + New analyzer : Could typehint with instanceof
+    + Updated analysis : Useless parenthesis cover clone, yield, yield from.
+    + Updated analysis : Make One Call also reports nested calls
++ Tokenizer
+    + Split functions and closures, 
+    + Split classes and anonymous classes
+    + Split variable with definitions (Property, Static and Global)
+    + File count is always reported (even 0)
  
 Version 0.11.4 (Six Eared Macaque, 2017-05-22)
 + Architecture
