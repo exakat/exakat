@@ -311,18 +311,25 @@ INI;
                     }
 
                     display('Git initialization');
-                    if (!isset($repositoryDetails['user'])) {
+                    if (isset($repositoryDetails['user'])) {
+                        $repositoryDetails['user'] = escapeshellarg($repositoryDetails['user']);
+                    } else {
                         $repositoryDetails['user'] = 'exakat';
                     }
-                    if (!isset($repositoryDetails['pass'])) {
+                    if (isset($repositoryDetails['pass'])) {
+                        $repositoryDetails['pass'] = escapeshellarg($repositoryDetails['pass']);
+                    } else {
                         $repositoryDetails['pass'] = 'exakat';
                     }
+                    
                     unset($repositoryDetails['query']);
                     unset($repositoryDetails['fragment']);
                     $repositoryNormalizedURL = unparse_url($repositoryDetails);
+                    print 'cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryNormalizedURL.' code 2>&1 ';
                     $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryNormalizedURL.' code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
+                        var_dump(trim(substr($res, $offset + 7))); 
                         $res = str_replace($repositoryNormalizedURL, $repositoryURL, $res);
                         $res = trim(substr($res, $offset + 7));
                         display( "An error prevented code initialization : ".$res."\nNo code was loaded.\n");
