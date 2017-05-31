@@ -60,7 +60,8 @@ class Files extends Tasks {
 
         $ignoredFiles = array();
         $files = array();
-        self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles, $this->config);
+        $tokens = 0;
+        self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles, $this->config, $tokens);
         $i = array();
         foreach($ignoredFiles as $file => $reason) {
             $i[] = array('file'   => $file,
@@ -70,7 +71,8 @@ class Files extends Tasks {
         $this->datastore->cleanTable('ignoredFiles');
         $this->datastore->addRow('ignoredFiles', $ignoredFiles);
 
-        $this->datastore->addRow('hash', array('files' => count($files)));
+        $this->datastore->addRow('hash', array('files'  => count($files),
+                                               'tokens' => $tokens));
         if (empty($files)) {
             throw new NoFileToProcess($this->config->project);
         }
@@ -332,7 +334,7 @@ class Files extends Tasks {
         $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
     }
     
-    public static function findFiles($path, &$files, &$ignoredFiles, $config) {
+    public static function findFiles($path, &$files, &$ignoredFiles, $config, &$tokens) {
         $ignore_dirs = $config->ignore_dirs;
         $dir = $config->project;
 
@@ -416,9 +418,11 @@ class Files extends Tasks {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
                 $ignoredFiles[$file] = 'Ignored dir';
-            } elseif ($php->countTokenFromFile($path.$file) < 2) {
+            } elseif (($t = $php->countTokenFromFile($path.$file)) < 2) {
                 unset($files[$id]);
                 $ignoredFiles[$file] = 'Not a PHP File';
+            } else {
+                $tokens += $t;
             }
         }
     }
