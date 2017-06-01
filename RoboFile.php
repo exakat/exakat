@@ -196,7 +196,17 @@ LICENCE;
              ->printed(false)
              ->run();
 
-        $folders = array('data', 'human', 'library', 'media/devoops', 'media/devfaceted', 'media/dependencies', 'media/faceted', 'server', 'vendor');
+        $folders = array('data', 
+                         'human', 
+                         'library', 
+                         'media/devoops', 
+                         'media/devfaceted', 
+                         'media/dependencywheel', 
+                         'media/codeflower', 
+                         'media/dependencies', 
+                         'media/faceted', 
+                         'server', 
+                         'vendor');
         foreach($folders as $folder) {
             $files = Finder::create()->ignoreVCS(true)
                                      ->files()
