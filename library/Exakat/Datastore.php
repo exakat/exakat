@@ -56,10 +56,12 @@ class Datastore {
 
         if ($this->sqliteWrite === null) {
             $this->sqliteWrite = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READWRITE | \SQLITE3_OPEN_CREATE);
+            $this->sqliteWrite->enableExceptions(true);
             $this->sqliteWrite->busyTimeout(self::TIMEOUT_WRITE);
             // open the read connexion AFTER the write, to have the sqlite databse created
             $this->sqliteRead = new \Sqlite3($this->sqlitePath, \SQLITE3_OPEN_READONLY);
-            $this->sqliteWrite->busyTimeout(self::TIMEOUT_READ);
+            $this->sqliteRead->enableExceptions(true);
+            $this->sqliteRead->busyTimeout(self::TIMEOUT_READ);
         }
 
         if ($create === self::CREATE) {
