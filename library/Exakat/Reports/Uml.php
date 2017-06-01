@@ -92,7 +92,7 @@ SQL
             $dotr[] = $R;
 
             if (!empty($row['extends'])) {
-                $links[] = " $id -> $row[extends] [label=\"extends\"];";
+                $links[] = " $id -> \"$row[extends]\" [label=\"extends\"];";
             }
         }
 
@@ -101,7 +101,7 @@ SELECT implementing, implements, type FROM cit_implements
 SQL
         );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $links[] = $ids[$row['implementing']]." -> ".$ids[$row['implements']]." [label=\"$row[type]\"];";
+            $links[] = $ids[$row['implementing']]." -> \"".$ids[$row['implements']]."\" [label=\"$row[type]\"];";
         }
 
         $dot = <<<DOT
