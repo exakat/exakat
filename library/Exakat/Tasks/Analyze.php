@@ -160,8 +160,10 @@ class Analyze extends Tasks {
         $total_results = 0;
         $Php = new Phpexec($this->config->version);
 
-        $progressBar = new Progressbar(0, count($dependencies2) + 1, exec('tput cols'));
-
+        if (!$this->config->verbose && !$this->config->quiet) {
+           $progressBar = new Progressbar(0, count($dependencies2) + 1, exec('tput cols'));
+        }
+        
         foreach($dependencies2 as $analyzer_class) {
             if (!$this->config->verbose && !$this->config->quiet) {
                 echo $progressBar->advance();
