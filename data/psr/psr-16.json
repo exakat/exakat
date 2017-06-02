@@ -1,0 +1,88 @@
+{
+    "interfaces": [
+        {
+            "name": "CacheInterface",
+            "namespace": "Psr\\SimpleCache",
+            "methods": [
+                {
+                    "name": "get",
+                    "arguments": [
+                        {
+                            "name": "$key"
+                        },
+                        {
+                            "name": "$default",
+                            "default": "null"
+                        }
+                    ]
+                },
+                {
+                    "name": "set",
+                    "arguments": [
+                        {
+                            "name": "$key"
+                        },
+                        {
+                            "name": "$value"
+                        },
+                        {
+                            "name": "$type",
+                            "default": "null"
+                        }
+                    ]
+                },
+                {
+                    "name": "delete",
+                    "arguments": [
+                        {
+                            "name": "$key"
+                        }
+                    ]
+                },
+                {
+                    "name": "clear",
+                    "arguments": []
+                },
+                {
+                    "name": "setMultiple",
+                    "arguments": [
+                        {
+                            "name": "$values"
+                        },
+                        {
+                            "name": "$ttl",
+                            "default": "null"
+                        }
+                    ]
+                },
+                {
+                    "name": "deleteMultiple",
+                    "arguments": [
+                        {
+                            "name": "$keys"
+                        }
+                    ]
+                },
+                {
+                    "name": "has",
+                    "arguments": [
+                        {
+                            "name": "$key"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "CacheException",
+            "namespace": "Psr\\SimpleCache",
+            "methods": []
+        },
+        {
+            "name": "InvalidArgumentException",
+            "namespace": "Psr\\SimpleCache",
+            "extends": "Psr\\SimpleCache\\CacheException",
+            "methods": []
+        }
+    ]
+}

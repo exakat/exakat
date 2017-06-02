@@ -2490,6 +2490,11 @@ JAVASCRIPT;
                     // filled later
                     'Composer Packages' => array(),
 
+                    // filled later
+                    'PSR-compatibility' => array(
+                        'PSR-16 (simple cache)'              => 'Psr/Psr16Usage',
+                    ),
+
                     'Namespaces' => array(
                             'Namespaces'              => 'Namespaces/Namespacesnames',
                             'Alias'                   => 'Namespaces/Alias',
