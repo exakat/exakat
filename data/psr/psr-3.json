@@ -1,0 +1,145 @@
+{
+    "interfaces": [
+        {
+            "name": "LoggerInterface",
+            "namespace": "Psr\\Log",
+            "methods": [
+                {
+                    "name": "emergency",
+                    "parameters": [
+                        {
+                            "name": "$message"
+                        },
+                        {
+                            "name": "$context",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "alert",
+                    "parameters": [
+                        {
+                            "name": "$message"
+                        },
+                        {
+                            "name": "$context",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "critical",
+                    "parameters": [
+                        {
+                            "name": "$message"
+                        },
+                        {
+                            "name": "$context",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "parameters": [
+                        {
+                            "name": "$message"
+                        },
+                        {
+                            "name": "$context",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "warning",
+                    "parameters": [
+                        {
+                            "name": "$message"
+                        },
+                        {
+                            "name": "$context",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "notice",
+                    "parameters": [
+                        {
+                            "name": "$message"
+                        },
+                        {
+                            "name": "$context",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "info",
+                    "parameters": [
+                        {
+                            "name": "$message"
+                        },
+                        {
+                            "name": "$context",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "debug",
+                    "parameters": [
+                        {
+                            "name": "$message"
+                        },
+                        {
+                            "name": "$context",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "log",
+                    "parameters": [
+                        {
+                            "name": "$level"
+                        },
+                        {
+                            "name": "$message"
+                        },
+                        {
+                            "name": "$context",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "LoggerAwareInterface",
+            "namespace": "Psr\\Log",
+            "methods": [
+                {
+                    "name": "setLogger",
+                    "parameters": [
+                        {
+                            "name": "$logger",
+                            "type": "Psr\\Log\\LoggerInterface"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
