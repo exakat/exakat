@@ -2492,8 +2492,9 @@ JAVASCRIPT;
 
                     // filled later
                     'PSR-compatibility' => array(
+                        'PSR-6  (Caching)'                   => 'Psr/Psr6Usage',
                         'PSR-7  (HTTP message)'              => 'Psr/Psr7Usage',
-                        'PSR-16 (simple cache)'              => 'Psr/Psr16Usage',
+                        'PSR-16 (Simple cache)'              => 'Psr/Psr16Usage',
                     ),
 
                     'Namespaces' => array(

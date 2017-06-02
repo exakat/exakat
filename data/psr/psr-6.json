@@ -1,0 +1,134 @@
+{
+    "interfaces": [
+        {
+            "name": "CacheItemInterface",
+            "namespace": "Psr\\Cache",
+            "methods": [
+                {
+                    "name": "getKey",
+                    "parameters": []
+                },
+                {
+                    "name": "get",
+                    "parameters": []
+                },
+                {
+                    "name": "isHit",
+                    "parameters": []
+                },
+                {
+                    "name": "set",
+                    "parameters": [
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "expiresAt",
+                    "parameters": [
+                        {
+                            "name": "$expiration"
+                        }
+                    ]
+                },
+                {
+                    "name": "expiresAfter",
+                    "parameters": [
+                        {
+                            "name": "$time"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "CacheItemPoolInterface",
+            "namespace": "Psr\\Cache",
+            "methods": [
+                {
+                    "name": "getItem",
+                    "parameters": [
+                        {
+                            "name": "$key"
+                        }
+                    ]
+                },
+                {
+                    "name": "getItems",
+                    "parameters": [
+                        {
+                            "name": "$keys",
+                            "default": [],
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "hasItem",
+                    "parameters": [
+                        {
+                            "name": "$key"
+                        }
+                    ]
+                },
+                {
+                    "name": "clear",
+                    "parameters": []
+                },
+                {
+                    "name": "deleteItem",
+                    "parameters": [
+                        {
+                            "name": "$key"
+                        }
+                    ]
+                },
+                {
+                    "name": "deleteItems",
+                    "parameters": [
+                        {
+                            "name": "$keys",
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "save",
+                    "parameters": [
+                        {
+                            "name": "$item",
+                            "type": "Psr\\Cache\\CacheItemInterface"
+                        }
+                    ]
+                },
+                {
+                    "name": "saveDeferred",
+                    "parameters": [
+                        {
+                            "name": "$item",
+                            "type": "Psr\\Cache\\CacheItemInterface"
+                        }
+                    ]
+                },
+                {
+                    "name": "commit",
+                    "parameters": []
+                }
+            ]
+        },
+        {
+            "name": "CacheException",
+            "namespace": "Psr\\Cache",
+            "methods": []
+        },
+        {
+            "name": "InvalidArgumentException",
+            "namespace": "Psr\\Cache",
+            "methods": [],
+            "extends": [
+                "Psr\\Cache\\CacheException"
+            ]
+        }
+    ]
+}
