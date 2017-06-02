@@ -4466,24 +4466,10 @@ class Load extends Tasks {
         $total = 0;
         foreach($this->atoms as $id => $atom) {
             if ($id === 1) { continue; }
-            if (!isset($D[$id])) {
-                print "Warning : forgotten atom $id in $this->filename : \n";
-                print_r($atom);
-                print "\n";
-                ++$total;
-            } elseif ($D[$id] > 1) {
-                print "Warning : too linked atom $id : \n";
-                print_r($atom);
-                print "\n";
-                ++$total;
-            }
+            assert(isset($D[$id]), "Warning : forgotten atom $id in $this->filename");
+            assert($D[$id] <= 1, "Warning : too linked atom $id : \n");
 
-            if (!isset($atom->line)) {
-                print "Warning : missing line atom $id : \n";
-                print_r($atom);
-                print "\n";
-                ++$total;
-            }
+            assert(isset($atom->line), "Warning : missing line atom $id : \n");
 
             if (!isset($atom->code)) {
                 print "Warning : code atom $id : \n";
@@ -4738,10 +4724,6 @@ class Load extends Tasks {
             return;
         }
         
-        if (!is_string($fullnspath)) {
-            var_dump($fullnspath);
-            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
-        }
         assert(is_string($fullnspath));
         
         if (!isset($this->calls[$type][$fullnspath])) {
