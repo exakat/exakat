@@ -23,7 +23,11 @@
 
 $rows = glob('projects/*');
 
-$finals = [['project', 'Duree', 'Tokens', 'LoC', 'Neo4jSize']];
+$fp = fopen('timing3.csv', 'w+');
+
+$finals = ['project', 'Duree', 'Build', 'Files', 'Loc', 'Tokens'];
+fputcsv($fp, $finals);
+
 foreach($rows as $row) {
     $final = array(basename($row));
     
@@ -48,34 +52,14 @@ foreach($rows as $row) {
     
     $sqlite = new \Sqlite3($sqliteFilename);
 
-    $res = $sqlite->query('SELECT * FROM hash WHERE key = "tokens";');
-    $sqlRow = $res->fetchArray();
-    $final[] = $sqlRow['value'];
-
-    $res = $sqlite->query('SELECT * FROM hash WHERE key = "loc";');
-    $sqlRow = $res->fetchArray();
-    $final[] = $sqlRow['value'];
-
-    $res = $sqlite->query('SELECT * FROM hash WHERE key = "neo4jSize";');
-    $sqlRow = $res->fetchArray();
-    if (is_array($sqlRow)) {
-        preg_match('/\d+[KMG]/', $sqlRow['value'], $size);
-        $size = $size[0];
-        $size = str_replace('K', '000', $size);
-        $size = str_replace('M', '000000', $size);
-        $size = str_replace('G', '000000000', $size);
-        $final[] = $size;
-    } else {
-        $final[] = '';
+    $res = $sqlite->query('SELECT * FROM hash WHERE key in ("tokens", "files", "loc", "exakat_build") ORDER BY key;');
+    while($sqlRow = $res->fetchArray()) {
+        $final[] = $sqlRow['value'];
     }
-    
-    $finals[] = $final;
-}
 
-$fp = fopen('timing3.csv', 'w+');
-foreach($finals as $final) {
     fputcsv($fp, $final);
 }
+
 fclose($fp);
 
 ?>
