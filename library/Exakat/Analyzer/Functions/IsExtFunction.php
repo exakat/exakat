@@ -36,7 +36,7 @@ class IsExtFunction extends Analyzer {
             $inifile = str_replace('Extensions\\Ext', '', $ext).'.ini';
             $ini = $this->loadIni($inifile, 'functions');
             
-            if (!empty($ini)) {
+            if (!empty($ini[0])) {
                 $f[] = $ini;
             }
         }
