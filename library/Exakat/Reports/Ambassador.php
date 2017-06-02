@@ -2495,6 +2495,7 @@ JAVASCRIPT;
                         'PSR-6  (Caching)'                   => 'Psr/Psr6Usage',
                         'PSR-7  (HTTP message)'              => 'Psr/Psr7Usage',
                         'PSR-11 (Dependency container)'      => 'Psr/Psr11Usage',
+                        'PSR-13 (Link)'                      => 'Psr/Psr13Usage',
                         'PSR-16 (Simple cache)'              => 'Psr/Psr16Usage',
                     ),
 

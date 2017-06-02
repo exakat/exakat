@@ -1,0 +1,126 @@
+{
+    "interfaces": [
+        {
+            "name": "LinkInterface",
+            "namespace": "Psr\\Link",
+            "methods": [
+                {
+                    "name": "getHref",
+                    "arguments": []
+                },
+                {
+                    "name": "isTemplated",
+                    "arguments": []
+                },
+                {
+                    "name": "getRels",
+                    "arguments": []
+                },
+                {
+                    "name": "getAttributes",
+                    "arguments": []
+                }
+            ]
+        },
+        {
+            "name": "EvolvableLinkInterface",
+            "namespace": "Psr\\Link",
+            "extends": "Psr\\Link\\LinkInterface",
+            "methods": [
+                {
+                    "name": "getHref",
+                    "arguments": [
+                        {
+                            "name": "$withHref"
+                        }
+                    ]
+                },
+                {
+                    "name": "withRel",
+                    "arguments": [
+                        {
+                            "name": "$rel"
+                        }
+                    ]
+                },
+                {
+                    "name": "withoutRel",
+                    "arguments": [
+                        {
+                            "name": "$rel"
+                        }
+                    ]
+                },
+                {
+                    "name": "withAttribute",
+                    "arguments": [
+                        {
+                            "name": "$attribute"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withoutAttribute",
+                    "arguments": [
+                        {
+                            "name": "$attribute"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "LinkProviderInterface",
+            "namespace": "Psr\\Link",
+            "methods": [
+                {
+                    "name": "getLinks",
+                    "arguments": []
+                },
+                {
+                    "name": "getLinkByRel",
+                    "arguments": [
+                        {
+                            "name": "$rel"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "EvolvableLinkProviderInterface",
+            "namespace": "Psr\\Link",
+            "methods": [
+                {
+                    "name": "withLink",
+                    "arguments": [
+                        {
+                            "name": "$link",
+                            "typehint": "Psr\\Link\\LinkInterface"
+                        }
+                    ]
+                },
+                {
+                    "name": "withoutLink",
+                    "arguments": [
+                        {
+                            "name": "$link",
+                            "typehint": "Psr\\Link\\LinkInterface"
+                        }
+                    ]
+                },
+                {
+                    "name": "getLinkByRel",
+                    "arguments": [
+                        {
+                            "name": "$rel"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
