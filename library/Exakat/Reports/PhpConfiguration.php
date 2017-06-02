@@ -57,13 +57,13 @@ class PhpConfiguration extends Reports {
             $functionsList = '';
         } else {
             $functionsArray = call_user_func_array('array_merge', $functionsArray);
-            $functionsList = join(',', $functionsArray);
+            $functionsList = implode(',', $functionsArray);
         }
         if (empty($classesArray)) {
             $classesList = '';
         } else {
             $classesArray = call_user_func_array('array_merge', $classesArray);
-            $classesList = join(',', $classesArray);
+            $classesList = implode(',', $classesArray);
         }
 
         // preparing the list of PHP directives to review before using this application

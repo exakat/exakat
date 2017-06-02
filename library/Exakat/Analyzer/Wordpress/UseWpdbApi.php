@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class UseWpdbApi extends Analyzer {
     public function analyze() {
         $crud = array('INSERT', 'UPDATE', 'DELETE', 'REPLACE');
-        $crudAlternative = join('|', $crud);
+        $crudAlternative = implode('|', $crud);
 
         // $wpdb->query('delete from sometable') 
         $this->atomIs('Variableobject')
