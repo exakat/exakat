@@ -39,7 +39,7 @@ foreach($ext as $f) {
     $ini = parse_ini_file($f);
     $extension_list[] = '* '.$ini['name'];
 }
-$extension_list = join("\n", $extension_list);
+$extension_list = implode("\n", $extension_list);
 
 // library services
 /////////////////////////
@@ -52,14 +52,14 @@ foreach( (array) $json as $library) {
         $library_list[] = '* `'.$library->name.' <'.$library->homepage.'>`_';
     }
 }
-$library_list = join("\n", $library_list);
+$library_list = implode("\n", $library_list);
 
 // reports
 /////////////////////////
 $reports_list = array();
 include(__DIR__.'/../../library/Exakat/Reports/Reports.php');
 $reports_list = \Exakat\Reports\Reports::$FORMATS;
-$reports_list = '  * '.join("\n  * ", $reports_list)."\n";
+$reports_list = '  * '.implode("\n  * ", $reports_list)."\n";
 
 // themes
 /////////////////////////
@@ -68,7 +68,7 @@ $res = $sqlite->query('SELECT name FROM categories c ORDER BY name');
 while($row = $res->fetchArray(\SQLITE3_NUM)) {
     $themes_list[] = '* '.$row[0];
 }
-$themes_list = join("\n", $themes_list);
+$themes_list = implode("\n", $themes_list);
 
 // themes
 /////////////////////////
@@ -77,7 +77,7 @@ $json = json_decode(file_get_contents('data/serviceConfig.json'));
 foreach( (array) $json as $name => $service) {
     $external_services_list[] = '* ['.$name.']('.$service->homepage.') - '.implode(', ', $service->file);
 }
-$external_services_list = join("\n", $external_services_list);
+$external_services_list = implode("\n", $external_services_list);
 
 $analyzer_introduction = generateAnalyzerList();
 
@@ -105,7 +105,7 @@ foreach($files as $file) {
 $urls = array_keys(array_count_values($urls));
 uasort($urls, function($a, $b) { return strtolower($a) <=> strtolower($b); });
 
-$url_list = "* ".join("\n* ", $urls)."\n";
+$url_list = "* ".implode("\n* ", $urls)."\n";
 
 /// URL
 
@@ -156,7 +156,7 @@ $recipes = array('Analyze',
                  );
 
 $text = '';
-$recipesList = '"'.join('","',$recipes).'"';
+$recipesList = '"'.implode('","',$recipes).'"';
 $glossary = array();
 $ini = parse_ini_file('./data/php_functions.ini');
 foreach($ini['functions'] as &$f) {
@@ -345,7 +345,7 @@ foreach($glossary as $letter => $items) {
     foreach($items as $key => $urls) {
         ksort($urls);
         $glossaryRst .= "    + `".stripslashes($key)."`\n
-      + ".join("\n      + ",array_keys($urls))."\n\n";
+      + ".implode("\n      + ",array_keys($urls))."\n\n";
     }
     $glossaryRst .= "\n";
 }
