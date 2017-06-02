@@ -86,8 +86,6 @@ class Dependencywheel extends Reports {
             foreach($extends as $extend) {
                 if ($extend === '') {
                     continue;
-                    $e = 0;
-                    $extend = 'Main';
                 } elseif ((int) $extend == 0) {
                     $e = $dict[$extend];
                 } else {
