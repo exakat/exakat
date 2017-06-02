@@ -2492,6 +2492,7 @@ JAVASCRIPT;
 
                     // filled later
                     'PSR-compatibility' => array(
+                        'PSR-3  (Log)'                       => 'Psr/Psr3Usage',
                         'PSR-6  (Caching)'                   => 'Psr/Psr6Usage',
                         'PSR-7  (HTTP message)'              => 'Psr/Psr7Usage',
                         'PSR-11 (Dependency container)'      => 'Psr/Psr11Usage',
