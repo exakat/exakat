@@ -1,0 +1,785 @@
+{
+    "interfaces": [
+        {
+            "name": "MessageInterface",
+            "namespace": "Psr\\Http\\Message",
+            "methods": [
+                {
+                    "name": "getProtocolVersion",
+                    "parameters": []
+                },
+                {
+                    "name": "withProtocolVersion",
+                    "parameters": [
+                        {
+                            "name": "$version"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeaders",
+                    "parameters": []
+                },
+                {
+                    "name": "hasHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeaderLine",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "withHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withAddedHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withoutHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getBody",
+                    "parameters": []
+                },
+                {
+                    "name": "withBody",
+                    "parameters": [
+                        {
+                            "name": "$body",
+                            "type": "Psr\\Http\\Message\\StreamInterface"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "RequestInterface",
+            "namespace": "Psr\\Http\\Message",
+            "methods": [
+                {
+                    "name": "getRequestTarget",
+                    "parameters": []
+                },
+                {
+                    "name": "withRequestTarget",
+                    "parameters": [
+                        {
+                            "name": "$requestTarget"
+                        }
+                    ]
+                },
+                {
+                    "name": "getMethod",
+                    "parameters": []
+                },
+                {
+                    "name": "withMethod",
+                    "parameters": [
+                        {
+                            "name": "$method"
+                        }
+                    ]
+                },
+                {
+                    "name": "getUri",
+                    "parameters": []
+                },
+                {
+                    "name": "withUri",
+                    "parameters": [
+                        {
+                            "name": "$uri",
+                            "type": "Psr\\Http\\Message\\UriInterface"
+                        },
+                        {
+                            "name": "$preserveHost",
+                            "default": false
+                        }
+                    ]
+                },
+                {
+                    "name": "getProtocolVersion",
+                    "parameters": []
+                },
+                {
+                    "name": "withProtocolVersion",
+                    "parameters": [
+                        {
+                            "name": "$version"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeaders",
+                    "parameters": []
+                },
+                {
+                    "name": "hasHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeaderLine",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "withHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withAddedHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withoutHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getBody",
+                    "parameters": []
+                },
+                {
+                    "name": "withBody",
+                    "parameters": [
+                        {
+                            "name": "$body",
+                            "type": "Psr\\Http\\Message\\StreamInterface"
+                        }
+                    ]
+                }
+            ],
+            "extends": [
+                "Psr\\Http\\Message\\MessageInterface"
+            ]
+        },
+        {
+            "name": "ServerRequestInterface",
+            "namespace": "Psr\\Http\\Message",
+            "methods": [
+                {
+                    "name": "getServerParams",
+                    "parameters": []
+                },
+                {
+                    "name": "getCookieParams",
+                    "parameters": []
+                },
+                {
+                    "name": "withCookieParams",
+                    "parameters": [
+                        {
+                            "name": "$cookies",
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "getQueryParams",
+                    "parameters": []
+                },
+                {
+                    "name": "withQueryParams",
+                    "parameters": [
+                        {
+                            "name": "$query",
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "getUploadedFiles",
+                    "parameters": []
+                },
+                {
+                    "name": "withUploadedFiles",
+                    "parameters": [
+                        {
+                            "name": "$uploadedFiles",
+                            "type": "array"
+                        }
+                    ]
+                },
+                {
+                    "name": "getParsedBody",
+                    "parameters": []
+                },
+                {
+                    "name": "withParsedBody",
+                    "parameters": [
+                        {
+                            "name": "$data"
+                        }
+                    ]
+                },
+                {
+                    "name": "getAttributes",
+                    "parameters": []
+                },
+                {
+                    "name": "getAttribute",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$default",
+                            "default": null
+                        }
+                    ]
+                },
+                {
+                    "name": "withAttribute",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withoutAttribute",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getRequestTarget",
+                    "parameters": []
+                },
+                {
+                    "name": "withRequestTarget",
+                    "parameters": [
+                        {
+                            "name": "$requestTarget"
+                        }
+                    ]
+                },
+                {
+                    "name": "getMethod",
+                    "parameters": []
+                },
+                {
+                    "name": "withMethod",
+                    "parameters": [
+                        {
+                            "name": "$method"
+                        }
+                    ]
+                },
+                {
+                    "name": "getUri",
+                    "parameters": []
+                },
+                {
+                    "name": "withUri",
+                    "parameters": [
+                        {
+                            "name": "$uri",
+                            "type": "Psr\\Http\\Message\\UriInterface"
+                        },
+                        {
+                            "name": "$preserveHost",
+                            "default": false
+                        }
+                    ]
+                },
+                {
+                    "name": "getProtocolVersion",
+                    "parameters": []
+                },
+                {
+                    "name": "withProtocolVersion",
+                    "parameters": [
+                        {
+                            "name": "$version"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeaders",
+                    "parameters": []
+                },
+                {
+                    "name": "hasHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeaderLine",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "withHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withAddedHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withoutHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getBody",
+                    "parameters": []
+                },
+                {
+                    "name": "withBody",
+                    "parameters": [
+                        {
+                            "name": "$body",
+                            "type": "Psr\\Http\\Message\\StreamInterface"
+                        }
+                    ]
+                }
+            ],
+            "extends": [
+                "Psr\\Http\\Message\\RequestInterface",
+                "Psr\\Http\\Message\\MessageInterface"
+            ]
+        },
+        {
+            "name": "ResponseInterface",
+            "namespace": "Psr\\Http\\Message",
+            "methods": [
+                {
+                    "name": "getStatusCode",
+                    "parameters": []
+                },
+                {
+                    "name": "withStatus",
+                    "parameters": [
+                        {
+                            "name": "$code"
+                        },
+                        {
+                            "name": "$reasonPhrase",
+                            "default": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "getReasonPhrase",
+                    "parameters": []
+                },
+                {
+                    "name": "getProtocolVersion",
+                    "parameters": []
+                },
+                {
+                    "name": "withProtocolVersion",
+                    "parameters": [
+                        {
+                            "name": "$version"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeaders",
+                    "parameters": []
+                },
+                {
+                    "name": "hasHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getHeaderLine",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "withHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withAddedHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        },
+                        {
+                            "name": "$value"
+                        }
+                    ]
+                },
+                {
+                    "name": "withoutHeader",
+                    "parameters": [
+                        {
+                            "name": "$name"
+                        }
+                    ]
+                },
+                {
+                    "name": "getBody",
+                    "parameters": []
+                },
+                {
+                    "name": "withBody",
+                    "parameters": [
+                        {
+                            "name": "$body",
+                            "type": "Psr\\Http\\Message\\StreamInterface"
+                        }
+                    ]
+                }
+            ],
+            "extends": [
+                "Psr\\Http\\Message\\MessageInterface"
+            ]
+        },
+        {
+            "name": "StreamInterface",
+            "namespace": "Psr\\Http\\Message",
+            "methods": [
+                {
+                    "name": "__toString",
+                    "parameters": []
+                },
+                {
+                    "name": "close",
+                    "parameters": []
+                },
+                {
+                    "name": "detach",
+                    "parameters": []
+                },
+                {
+                    "name": "getSize",
+                    "parameters": []
+                },
+                {
+                    "name": "tell",
+                    "parameters": []
+                },
+                {
+                    "name": "eof",
+                    "parameters": []
+                },
+                {
+                    "name": "isSeekable",
+                    "parameters": []
+                },
+                {
+                    "name": "seek",
+                    "parameters": [
+                        {
+                            "name": "$offset"
+                        },
+                        {
+                            "name": "$whence",
+                            "default": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "rewind",
+                    "parameters": []
+                },
+                {
+                    "name": "isWritable",
+                    "parameters": []
+                },
+                {
+                    "name": "write",
+                    "parameters": [
+                        {
+                            "name": "$string"
+                        }
+                    ]
+                },
+                {
+                    "name": "isReadable",
+                    "parameters": []
+                },
+                {
+                    "name": "read",
+                    "parameters": [
+                        {
+                            "name": "$length"
+                        }
+                    ]
+                },
+                {
+                    "name": "getContents",
+                    "parameters": []
+                },
+                {
+                    "name": "getMetadata",
+                    "parameters": [
+                        {
+                            "name": "$key",
+                            "default": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "UriInterface",
+            "namespace": "Psr\\Http\\Message",
+            "methods": [
+                {
+                    "name": "getScheme",
+                    "parameters": []
+                },
+                {
+                    "name": "getAuthority",
+                    "parameters": []
+                },
+                {
+                    "name": "getUserInfo",
+                    "parameters": []
+                },
+                {
+                    "name": "getHost",
+                    "parameters": []
+                },
+                {
+                    "name": "getPort",
+                    "parameters": []
+                },
+                {
+                    "name": "getPath",
+                    "parameters": []
+                },
+                {
+                    "name": "getQuery",
+                    "parameters": []
+                },
+                {
+                    "name": "getFragment",
+                    "parameters": []
+                },
+                {
+                    "name": "withScheme",
+                    "parameters": [
+                        {
+                            "name": "$scheme"
+                        }
+                    ]
+                },
+                {
+                    "name": "withUserInfo",
+                    "parameters": [
+                        {
+                            "name": "$user"
+                        },
+                        {
+                            "name": "$password",
+                            "default": null
+                        }
+                    ]
+                },
+                {
+                    "name": "withHost",
+                    "parameters": [
+                        {
+                            "name": "$host"
+                        }
+                    ]
+                },
+                {
+                    "name": "withPort",
+                    "parameters": [
+                        {
+                            "name": "$port"
+                        }
+                    ]
+                },
+                {
+                    "name": "withPath",
+                    "parameters": [
+                        {
+                            "name": "$path"
+                        }
+                    ]
+                },
+                {
+                    "name": "withQuery",
+                    "parameters": [
+                        {
+                            "name": "$query"
+                        }
+                    ]
+                },
+                {
+                    "name": "withFragment",
+                    "parameters": [
+                        {
+                            "name": "$fragment"
+                        }
+                    ]
+                },
+                {
+                    "name": "__toString",
+                    "parameters": []
+                }
+            ]
+        },
+        {
+            "name": "UploadedFileInterface",
+            "namespace": "Psr\\Http\\Message",
+            "methods": [
+                {
+                    "name": "getStream",
+                    "parameters": []
+                },
+                {
+                    "name": "moveTo",
+                    "parameters": [
+                        {
+                            "name": "$targetPath"
+                        }
+                    ]
+                },
+                {
+                    "name": "getSize",
+                    "parameters": []
+                },
+                {
+                    "name": "getError",
+                    "parameters": []
+                },
+                {
+                    "name": "getClientFilename",
+                    "parameters": []
+                },
+                {
+                    "name": "getClientMediaType",
+                    "parameters": []
+                }
+            ]
+        }
+    ]
+}

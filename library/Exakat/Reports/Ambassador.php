@@ -2492,6 +2492,7 @@ JAVASCRIPT;
 
                     // filled later
                     'PSR-compatibility' => array(
+                        'PSR-7  (HTTP message)'              => 'Psr/Psr7Usage',
                         'PSR-16 (simple cache)'              => 'Psr/Psr16Usage',
                     ),
 
