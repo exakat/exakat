@@ -46,8 +46,6 @@ class LoadFinal extends Tasks {
 
         $this->makeClassConstantDefinition();
 
-        $this->fallbackToGlobalFunctions();
-
         $this->fallbackToGlobalConstants();
         $this->findPHPNativeConstants();
         $this->fallbackToGlobalConstants2();
@@ -87,7 +85,6 @@ class LoadFinal extends Tasks {
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has('fullnspath')
-     .where( __.in("DEFINITION", "NEW").count().is(eq(0)) )
      .filter{ it.get().value("code").toLowerCase() in arg1 }
      .sideEffect{
          fullnspath = "\\\\" + it.get().value("code").toLowerCase();
@@ -202,46 +199,6 @@ GREMLIN;
         $this->logTime('Class::constant definition');
     }
 
-    private function fallbackToGlobalFunctions() {
-        // update fullnspath with fallback for functions
-        $query = <<<GREMLIN
-g.V().hasLabel("Functioncall").as("a")
-     .has("fullnspath")
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-     .where( __.in("NEW", "METHOD").count().is(eq(0)))
-     .sideEffect{ fullnspath = it.get().value("fullnspath")}
-     .in('DEFINITION')
-     .filter{ it.get().value("fullnspath") != fullnspath}
-     .sideEffect{ fullnspath = it.get().value("fullnspath")}
-     .select("a")
-     .sideEffect{ 
-          it.get().property("fullnspath", fullnspath ); 
-      }
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display('fallback for global functioncall');
-        $this->logTime('fallback to global f()');
-
-        // update fullnspath with fallback for functions
-        $query = <<<GREMLIN
-g.V().hasLabel("Functioncall")
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-     .has("fullnspath", without(''))
-     .where( __.in("NEW", "METHOD", "DEFINITION").count().is(eq(0)))
-     .where( __.out("NAME").has("fullnspath"))
-     .sideEffect{ 
-        fullnspath = it.get().vertices(OUT, 'NAME').next().value("fullnspath").toString().toLowerCase();
-        it.get().property("fullnspath", fullnspath ); 
-        it.get().property("fallback", true ); 
-    }
-
-GREMLIN;
-        $this->gremlin->query($query);
-        display('refine functioncall fullnspath');
-        $this->logTime('Refine functioncall');
-    }
-
     private function fallbackToGlobalConstants() {
         // update fullnspath with fallback for constants
         $query = <<<GREMLIN
@@ -321,6 +278,7 @@ GREMLIN;
 
         $exts = $docs->listAllAnalyzer('Extensions');
         $exts[] = 'php_constants';
+        $exts[] = 'php_functions';
 
         foreach($exts as $ext) {
             $inifile = str_replace('Extensions\Ext', '', $ext).'.ini';
