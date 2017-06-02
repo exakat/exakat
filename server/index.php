@@ -41,7 +41,7 @@ function init($args) {
         if (empty($project)) {
             $project = '';
         } elseif (file_exists(__DIR__.'/'.$project)) {
-            error('Project already exists');
+            error('Project already exists', $project);
         }
     } else {
         $project = '';
@@ -50,7 +50,7 @@ function init($args) {
     if (isset($_REQUEST['vcs'])) {
         $url = parse_url($_REQUEST['vcs']);
         if (!isset($url['scheme'], $url['host'], $url['path'])) {
-            error('Malformed VCS');
+            error('Malformed VCS', '');
         }
         
         $vcs = $url['scheme'].'://'.$url['host'].(!empty($url['port']) ? ':'.$url['port'] : '').$url['path'];
@@ -59,11 +59,11 @@ function init($args) {
             $project = autoprojectname();
         }
 
-        shell_exec('__PHP__ __EXAKAT__ init -p '.$project.' -R '.escapeshellarg($vcs));
+        shell_exec('/usr/bin/php exakat.phar init -p '.$project.' -R '.escapeshellarg($vcs));
     } elseif (isset($_REQUEST['code'])) {
         $php = $_REQUEST['code'];
         if (strpos($php, '<?php') === false) {
-            error('Invalide code');
+            error('Invalide code', '');
         }
 
         if (empty($project)) {
@@ -71,9 +71,9 @@ function init($args) {
         }
         
         file_put_contents(__DIR__.'/onepage/code/'.$project.'.php', $php);
-        shell_exec('__PHP__ __EXAKAT__ queue -f '.$project);
+        shell_exec('/usr/bin/php exakat.phar queue -f '.$project);
     } else {
-        error('Missing VCS/code');
+        error('Missing VCS/code', '');
     }
 
     echo json_encode(array('project' => $project));
@@ -83,17 +83,17 @@ function update($args) {
     if (isset($_REQUEST['project'])) {
         $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $_REQUEST['project']);
         if (empty($project)) {
-            error('Missing project');
+            error('Missing project', '');
         }
 
         if (!file_exists(__DIR__.'/'.$project)) {
-            error('No such project');
+            error('No such project', $project);
         }
     } else {
-        error('No such project');
+        error('No such project', '');
     }
 
-    shell_exec('__PHP__ __EXAKAT__ update -p '.$project);
+    shell_exec('/usr/bin/php exakat.phar update -p '.$project);
     echo json_encode(array('project' => $project));
 }
 
@@ -101,17 +101,17 @@ function project($args) {
     if (isset($args[0])) {
         $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $args[0]);
         if (empty($project)) {
-            error('Missing project');
+            error('Missing project', '');
         }
 
         if (!file_exists(__DIR__.'/'.$project)) {
-            error('No such project');
+            error('No such project', '');
         }
     } else {
-        error('No such project');
+        error('No such project', '');
     }
     
-    echo shell_exec('__PHP__ __EXAKAT__ queue -p '.$project);
+    echo shell_exec('/usr/bin/php exakat.phar queue -p '.$project);
     echo json_encode(array('project' => $project));
 }
 
@@ -119,18 +119,18 @@ function onepage($args) {
     if (isset($args[0])) {
         $file = preg_replace('/[^a-zA-Z0-9-_]/', '', $args[0]);
         if (empty($file)) {
-            error('Missing file');
+            error('Missing file', '');
         }
 
         if (!file_exists(__DIR__.'/onepage/code/'.$file.'.php')) {
-            error('No such file');
+            error('No such file', '');
         }
     } else {
-        error('No such file');
+        error('No such file', '');
     }
 
     if (!file_exists(__DIR__.'/onepage/reports/'.$file.'.json')) {
-        error('No such results');
+        error('No such results', '');
     }
     
     readfile(__DIR__.'/onepage/reports/'.$file.'.json');
@@ -140,19 +140,19 @@ function report($args) {
     if (isset($args[0])) {
         $project = preg_replace('/[^a-zA-Z0-9-_]/', '', $args[0]);
         if (empty($project)) {
-            error('Missing project');
+            error('Missing project', '');
         }
 
         if (!file_exists(__DIR__.'/'.$project)) {
-            error('No such project');
+            error('No such project', $project);
         }
     } else {
-        error('No such project');
+        error('No such project', '');
     }
     
     // Check on report, then get dump.sqlite.
     if (!file_exists(__DIR__.'/'.$project.'/report')) {
-        error('No report available');
+        error('No report available', $project);
     }
     
     readfile(__DIR__.'/'.$project.'/dump.sqlite');
@@ -162,11 +162,15 @@ function status($args) {
     global $initTime;
     
     if (isset($args[0]) && !empty($args[0])) {
-        if (file_exists(__DIR__.'/'.$args[0].'/')) {
-            $json = shell_exec('__PHP__ __EXAKAT__ status -p '.$args[0].' -json');
+        if (!file_exists(__DIR__.'/'.$args[0])) {
+    	    error('No such project', $args[0]);
+	    } elseif (!file_exists(__DIR__.'/'.$args[0].'/code/')) {
+            error('No code found', $args[0]);
+        } elseif (file_exists(__DIR__.'/'.$args[0].'/')) {
+            $json = shell_exec('/usr/bin/php exakat.phar status -p '.$args[0].' -json');
             echo $json;
         } else {
-            error('No such project');
+            error('No such project', $args[0]);
         }
     } else {
         $status = array(
@@ -208,8 +212,9 @@ function autoOnagepageName() {
     return 'o'.count($files);
 }
 
-function error($message) {
-    die( json_encode(array('error' => $message)));
+function error($message, $project) {
+    die(json_encode(array('error' => $message,
+                          'project' => $project)));
 }
 
 function serverLog($message) {
