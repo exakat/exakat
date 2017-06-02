@@ -1,0 +1,39 @@
+{
+    "interfaces": [
+        {
+            "name": "ContainerInterface",
+            "namespace": "Psr\\Container",
+            "methods": [
+                {
+                    "name": "get",
+                    "parameters": [
+                        {
+                            "name": "$id"
+                        }
+                    ]
+                },
+                {
+                    "name": "has",
+                    "parameters": [
+                        {
+                            "name": "$id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ContainerExceptionInterface",
+            "namespace": "Psr\\Container",
+            "methods": []
+        },
+        {
+            "name": "NotFoundExceptionInterface",
+            "namespace": "Psr\\Container",
+            "methods": [],
+            "extends": [
+                "Psr\\Container\\ContainerExceptionInterface"
+            ]
+        }
+    ]
+}
