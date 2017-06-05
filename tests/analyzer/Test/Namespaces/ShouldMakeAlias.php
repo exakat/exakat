@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Namespaces_ShouldMakeAlias extends Analyzer {
-    /* 7 methods */
+    /* 8 methods */
 
     public function testNamespaces_ShouldMakeAlias01()  { $this->generic_test('Namespaces/ShouldMakeAlias.01'); }
     public function testNamespaces_ShouldMakeAlias02()  { $this->generic_test('Namespaces/ShouldMakeAlias.02'); }
@@ -17,5 +17,6 @@ class Namespaces_ShouldMakeAlias extends Analyzer {
     public function testNamespaces_ShouldMakeAlias05()  { $this->generic_test('Namespaces/ShouldMakeAlias.05'); }
     public function testNamespaces_ShouldMakeAlias06()  { $this->generic_test('Namespaces/ShouldMakeAlias.06'); }
     public function testNamespaces_ShouldMakeAlias07()  { $this->generic_test('Namespaces/ShouldMakeAlias.07'); }
+    public function testNamespaces_ShouldMakeAlias08()  { $this->generic_test('Namespaces/ShouldMakeAlias.08'); }
 }
 ?>

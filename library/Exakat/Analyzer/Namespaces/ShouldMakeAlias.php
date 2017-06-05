@@ -28,8 +28,10 @@ class ShouldMakeAlias extends Analyzer {
     public function analyze() {
         // No namespace ? 
         $this->atomIs('Nsname')
+             ->tokenIs('T_NS_SEPARATOR')
              ->hasNoIn('USE')
              ->hasNoParent('Use', array('NAME', 'USE'))  // use expression
+             ->hasNoParent('Namespace', 'NAME')  // use expression
              ->savePropertyAs('fullnspath', 'possibleAlias')
              ->goToNamespace()
              ->raw('where( __.out("BLOCK", "CODE").out("ELEMENT").hasLabel("Use").out("USE").filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )')

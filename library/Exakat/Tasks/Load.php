@@ -1123,7 +1123,7 @@ class Load extends Tasks {
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_NAMESPACE) {
             ++$this->id;
         }
-         $nsname = $this->makeNsname();
+        $nsname = $this->makeNsname();
  
         if ($getFullnspath === self::WITH_FULLNSPATH) {
             list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
