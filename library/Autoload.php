@@ -62,7 +62,7 @@ class Autoload {
 
 spl_autoload_register('Autoload::autoload_library');
 if (file_exists(__DIR__.'/../vendor/autoload.php')) {
-    require_once __DIR__.'/../vendor/autoload.php';
+    include __DIR__.'/../vendor/autoload.php';
 }
 
 $config = new Config($GLOBALS['argv']);

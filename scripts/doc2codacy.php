@@ -23,7 +23,7 @@
 use Exakat\Analyzer\Docs;
 use Exakat\Config;
 
-include_once(dirname(__DIR__).'/library/Autoload.php');
+include dirname(__DIR__).'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
 
 $docs = new Docs('./data/analyzers.sqlite');

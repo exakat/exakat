@@ -25,7 +25,7 @@ function display($text) {
     $config = \Exakat\Config::factory();
 
     if ($config->verbose) {
-        echo trim($text), "\n";
+        echo trim($text), PHP_EOL;
     }
 }
 
