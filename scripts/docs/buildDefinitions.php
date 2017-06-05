@@ -279,7 +279,7 @@ while($row = $res->fetchArray(SQLITE3_ASSOC)) {
         $recipes     = str_pad($recipes,$lineSize,' ');
         $separator   = '+--------------+-'.str_pad('',$lineSize,'-').'-+';
         if (!empty($clearPHP)) {
-            $clearPHP    = '| clearPHP     | '.str_pad($clearPHP,$lineSize,' ')." |\n$separator\n";
+            $clearPHP    = '| clearPHP     | '.str_pad($clearPHP,$lineSize,' ').' |'.PHP_EOL.$separator.PHP_EOL;
         }
 
         $desc .= <<<RST
@@ -306,7 +306,7 @@ RST;
 $rules = '';
 ksort($analyzers);
 foreach($analyzers as $title => $desc) {
-    $rules .= rst_level($title,3)."\n\n$desc\n\n";
+    $rules .= rst_level($title,3).PHP_EOL.PHP_EOL.$desc.PHP_EOL;
 }
 
 $rst = file_get_contents('docs/src/Recipes.rst');
@@ -402,11 +402,11 @@ function glossary($title,$description) {
         global $glossary,$entries;
         
         $letter = strtoupper($r[2]{0});
-        $glossary[$letter][$r[2]][":ref:`$title <".rst_anchor($title).">`"] = 1;
+        $glossary[$letter][$r[2]][':ref:`'.$title.' <'.rst_anchor($title).'>`'] = 1;
         
         if (isset($entries[$r[2]])) {
             $url = $entries[$r[2]];
-            return $r[1]."`$r[2]$r[3] <$url>`_";//.$r[4];
+            return $r[1].'`\''.$r[2].$r[3].' <'.$url.'>`_';
         } else {
             return $r[0];
         }

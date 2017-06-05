@@ -108,7 +108,7 @@ shell_exec( 'bbedit library/Exakat/Analyzer/'.$analyzer.'.php'."\n");
 print 'php exakat analyze -p project -P '.$analyzer.' -v'."\n";
 
 $exakat = file_get_contents('library/Exakat/Exakat.php');
-preg_match('/const VERSION = \'(\d+.\d+.\d+)\';/', $exakat, $r);
+preg_match('/const VERSION = \'(\d+.\d+.\d+).*?\';/', $exakat, $r);
 $version = $r[1];
 
 // add documentation

@@ -98,9 +98,7 @@ SQL
     }
     
     if (empty($versionId)) {
-        print "Couldn't find versions for '$v'\n";
-        print "SELECT id FROM versions WHERE component_id = $componentId AND version= '$v';\n$version requested\n";
-        die();
+        die("Couldn't find versions for '$v'\n");
     }
 
     if ($dir === '') {
