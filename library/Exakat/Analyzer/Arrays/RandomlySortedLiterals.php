@@ -27,25 +27,40 @@ use Exakat\Analyzer\Analyzer;
 class RandomlySortedLiterals extends Analyzer {
     public function analyze() {
         $arrays = $this->query(<<<GREMLIN
-g.V().hasLabel('Arrayliteral')
-     .has('constant', true)
-     .out('ARGUMENTS')
+g.V().hasLabel("Arrayliteral")
+     .has("constant", true)
+     .out("ARGUMENTS")
+     .not(hasLabel("Void"))
      .where( __.sideEffect{ liste = [];}
-               .out('ARGUMENT')
-               .sideEffect{ liste.add(it.get().value('noDelimiter')); }
+               .out("ARGUMENT")
+               .sideEffect{ 
+                    if (it.get().label() == "String" || it.get().label() == "Void" ) {
+                        liste.add(it.get().value("noDelimiter"));
+                     } else {
+                        liste.add(it.get().value("fullcode"));
+                     }
+                }
                .count()
           )
      .map{ liste.sort(false); }
-     .groupCount('m').cap('m').toList()[0].findAll{ a,b -> b > 1}.keySet();
+     .groupCount("m").cap("m").toList()[0].findAll{ a,b -> b > 1}.keySet();
 GREMLIN
 );
 
         $this->atomIs('Arrayliteral')
              ->is('constant', true)
              ->outIs('ARGUMENTS')
+             ->atomIsNot('Void')
              ->raw('where( __.sideEffect{ liste = [];}
                              .out("ARGUMENT")
-                             .sideEffect{ liste.add(it.get().value("noDelimiter")); }
+                             .not(hasLabel("Void"))
+                             .sideEffect{ 
+                                  if (it.get().label() == "String"|| it.get().label() == "Void" ) {
+                                    liste.add(it.get().value("noDelimiter"));
+                                 } else {
+                                    liste.add(it.get().value("fullcode"));
+                                }
+                             }
                              .count())')
              ->raw('filter{ liste.sort() in ***.values(); }', $arrays)
              ->back('first');
