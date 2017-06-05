@@ -7,6 +7,6 @@ $expected     = array('php_version( )',
                       'fopen(\'php://stderr\', \'w\')',
 );
 
-$expected_not = array();
+$expected_not = array('fopen(\'file://etc/test.php\', \'r\');');
 
 ?>

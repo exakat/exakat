@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('$x = stripos($b, $c)');
+$expected     = array('stripos($b, $c)');
 
-$expected_not = array();
+$expected_not = array('stripos($b2, $c2)',
+                      'stripos($b3, $c3)');
 
 ?>

@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('$x = strpos($b, $c)');
+$expected     = array('strpos($b, $c)',
+                      'strpos($b2, $c2)');
 
-$expected_not = array();
+$expected_not = array('strpos($b3, $c3)');
 
 ?>

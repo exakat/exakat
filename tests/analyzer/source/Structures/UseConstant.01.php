@@ -14,4 +14,6 @@ $a->php_version();
 
 \a\b\PHP_sapi();
 
+fopen('file://etc/test.php', 'r');
+
 ?>

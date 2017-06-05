@@ -73,13 +73,15 @@ class UnknownPregOption extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
+             ->_as('concat')
              ->outWithRank('CONCAT', 0)
              ->atomIs('String')
              ->outIsIE('CONCAT') // In case it is an interpolated string
              ->is('rank', 0)     // Same as above, but may be double when there is no interpolation
+             ->atomIs('String')
              ->raw('sideEffect{ delimiter = it.get().value("noDelimiter").substring(0, 1); }')
-             ->inIs('CONCAT')
              ->raw($prepareDelimiters)
+             ->back('concat')
              ->regexIs('fullcode', '^.(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.').\\$')
              ->back('first');
         $this->prepareQuery();

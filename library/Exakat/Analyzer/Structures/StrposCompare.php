@@ -28,49 +28,59 @@ use Exakat\Analyzer\Analyzer;
 class StrposCompare extends Analyzer {
     public function analyze() {
         $operator = $this->loadIni('php_may_return_boolean_or_zero.ini', 'functions');
+        $fullnspaths = $this->makeFullnspath($operator);
         
         // if (.. == strpos(..)) {}
-        $this->atomIs('Functioncall')
-             ->_as('result')
-             ->codeIs($operator)
+        $this->atomFunctionIs($fullnspaths)
              ->inIs('RIGHT')
              ->atomIs('Comparison')
              ->codeIs(array('==', '!='))
              ->outIs('LEFT')
              ->codeIs(array('0', "''", '""', 'null', 'false'))
-             ->back('result');
+             ->back('first');
         $this->prepareQuery();
 
         // if (strpos(..) == ..) {}
-        $this->atomIs('Functioncall')
-             ->_as('result')
-             ->codeIs($operator)
+        $this->atomFunctionIs($fullnspaths)
              ->inIs('LEFT')
              ->atomIs('Comparison')
              ->codeIs(array('==', '!='))
              ->outIs('RIGHT')
              ->codeIs(array('0', "''", '""', 'null', 'false'))
-             ->back('result');
+             ->back('first');
         $this->prepareQuery();
 
         // if (strpos(..)) {}
-        $this->atomIs('Functioncall')
-             ->_as('result')
-             ->codeIs($operator)
+        $this->atomFunctionIs($fullnspaths)
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
-             ->back('result');
+             ->back('first');
         $this->prepareQuery();
 
         // if ($x = strpos(..)) {}
-        $this->atomIs('Functioncall')
-             ->codeIs($operator)
+        $this->atomFunctionIs($fullnspaths)
              ->inIs('RIGHT')
-             ->_as('result')
              ->atomIs('Assignation')
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
-             ->back('result');
+             ->back('first');
+        $this->prepareQuery();
+
+        // if (($x = strpos(..)) == false) {}
+        $this->atomFunctionIs($fullnspaths)
+             ->inIs('RIGHT')
+             ->_as('result')
+             ->atomIs('Assignation')
+             ->inIs('CODE')
+             ->inIs(array('RIGHT', 'LEFT'))
+             ->atomIs('Comparison')
+             ->outIs(array('RIGHT', 'LEFT'))
+             ->codeIs(array('0', "''", '""', 'null', 'false'))
+             ->inIs(array('RIGHT', 'LEFT'))
+             ->codeIs(array('==', '!='))
+             ->inIs('CONDITION')
+             ->atomIs(array('Ifthen', 'While', 'Dowhile'))
+             ->back('first');
         $this->prepareQuery();
     }
 }
