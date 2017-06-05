@@ -27,17 +27,6 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldChainException extends Analyzer {
     public function analyze() {
-        // omitted 3rd argument
-        $this->atomIs('Catch')
-             ->outIs('BLOCK')
-             ->atomInside('Throw')
-             ->outIs('THROW')
-             ->outIs('NEW')
-             ->outIs('ARGUMENTS')
-             ->noChildWithRank('ARGUMENT', 2)
-             ->back('first');
-        $this->prepareQuery();
-
         // Throw again, but not the caught variable
         $this->atomIs('Catch')
              ->outIs('VARIABLE')
@@ -47,10 +36,7 @@ class ShouldChainException extends Analyzer {
              ->atomInside('Throw')
              ->outIs('THROW')
              ->outIs('NEW')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 2)
-             ->notSamePropertyAs('code', 'caught')
+             ->raw('not(where( __.out("ARGUMENTS").out("ARGUMENT").filter{ it.get().value("code") == caught} ))')
              ->back('first');
         $this->prepareQuery();
     }
