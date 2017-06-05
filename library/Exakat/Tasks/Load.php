@@ -623,6 +623,7 @@ class Load extends Tasks {
     }
 
     private function processFile($filename, $path) {
+        $begin = microtime(true);
         $fullpath = $path.$filename;
         
         $this->log->log($fullpath);
@@ -727,6 +728,9 @@ class Load extends Tasks {
             $this->stats['totalLoc'] += $line;
             $this->stats['loc'] += $line;
         }
+
+        $end = microtime(true);
+        $this->log->log("processFile\t".(($end - $begin) * 1000)."\t".$log['token_initial']."\n");
 
         return true;
     }
