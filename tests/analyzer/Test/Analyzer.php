@@ -22,10 +22,10 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
         // initialize Config (needed by phpexec)
         $pwd = getcwd();
         chdir('../../');
-        $config = \Exakat\Config::factory(array('foo', '-p', 'test'));
+        $config = new \Exakat\Config(array('foo', '-p', 'test'));
         chdir($pwd);
 
-        $analyzerobject = ExakatAnalyzer::getInstance($test_config);
+        $analyzerobject = ExakatAnalyzer::getInstance($test_config, null, $config);
         if ($analyzerobject === null) {
             $this->markTestSkipped('Couldn\'t get an analyzer for '.$test_config.'.');
         }
@@ -41,7 +41,7 @@ class Analyzer extends \PHPUnit_Framework_TestCase {
             $this->markTestSkipped('Compilation problem : "'.trim($res).'".');
         }
 
-        $Php = new Phpexec($phpversion);
+        $Php = new Phpexec($phpversion, $config);
         if (!$analyzerobject->checkPhpConfiguration($Php)) {
             $message = array();
             $confs = $analyzerobject->getPhpConfiguration();
