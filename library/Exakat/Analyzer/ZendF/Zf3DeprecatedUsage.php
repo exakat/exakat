@@ -33,7 +33,7 @@ class Zf3DeprecatedUsage extends Analyzer {
     }
     
     public function analyze() {
-        $zend3 = new ZendF3($this->config->dir_root.'/data', $this->config->is_phar);
+        $zend3 = new ZendF3($this->config->dir_root.'/data', $this->config);
 
         $list = $zend3->getDeprecated();
         

@@ -198,7 +198,7 @@ class Config {
 
     static private $stack = array();
 
-    private function __construct($argv) {
+    public function __construct($argv) {
         $this->argv = $argv;
 
         $pharRunning = Phar::Running();
@@ -265,6 +265,11 @@ class Config {
         if ($this->options['command'] !== 'doctor') {
             $this->checkSelf();
         }
+        
+        if (empty(self::$singleton)){
+            self::$singleton = $this;
+            self::$stack[] = self::$singleton;
+        }
     }
 
     public static function factory($argv = array()) {
@@ -293,7 +298,7 @@ class Config {
 
     public static function pop() {
         $r = array_pop(self::$stack);
-        self::$singleton = self::$stack[count(self::$stack) -1];
+        self::$singleton = self::$stack[count(self::$stack) -1 ];
 
         return $r;
     }
@@ -340,7 +345,7 @@ class Config {
             if (empty($this->configFiles['php'.$version])) {
                 continue;
             }
-            $php = new Phpexec($version[0].'.'.$version[1]);
+            $php = new Phpexec($version[0].'.'.$version[1], $this);
             if ($php->isValid()) {
                 $other_php_versions[] = $version;
             }

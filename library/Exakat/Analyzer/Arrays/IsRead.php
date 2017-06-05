@@ -103,7 +103,7 @@ class IsRead extends Analyzer {
         $this->prepareQuery();
 
         // PHP functions that are passed by value
-        $data = new Methods();
+        $data = new Methods($this->config);
         
         $functions = $data->getFunctionsValueArgs();
         $references = array();

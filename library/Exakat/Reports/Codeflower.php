@@ -108,9 +108,9 @@ SQL
         foreach($classes as $id => $extends) {
             if (!is_int($id)) { continue; }
             
-            foreach($classes as $id2 => $extends2) {
+            foreach($classes as $id2 => &$extends2) {
                 if (isset($extends2[$classesId[$id]])) {
-                    $classes[$id2][$classesId[$id]] = $classes[$id];
+                    $extends2[$classesId[$id]] = $classes[$id];
                     unset($classes[$id]);
                 }
             }
@@ -137,14 +137,12 @@ SQL
                 $d->name = $e;
                 $d->size = 50;
 
-                if (!empty($extends2)) {
-                    foreach($extends2 as $e3 => $extends3) {
-                        $d3 = new \Stdclass();
-                        $d3->name = $e3;
-                        $d3->size = 50;
-                        
-                        $d->children[] = $d3;
-                    }
+                foreach($extends2 as $e3 => $extends3) {
+                    $d3 = new \Stdclass();
+                    $d3->name = $e3;
+                    $d3->size = 50;
+                    
+                    $d->children[] = $d3;
                 }
 
                 $c->children[] = $d;

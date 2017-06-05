@@ -28,7 +28,7 @@ use Exakat\Data\Composer;
 
 class IsComposerNsname extends Analyzer {
     public function analyze() {
-        $data = new Composer();
+        $data = new Composer($this->config);
 
         $packagistNamespaces = $data->getComposerNamespaces();
         $packagistNamespacesFullNS = $this->makeFullNsPath($packagistNamespaces);

@@ -29,10 +29,8 @@ class Slim {
     protected $sqlite = null;
     protected $phar_tmp = null;
 
-    public function __construct($path, $isPhar) {
-        $config = Config::factory();
-
-        if ($isPhar) {
+    public function __construct($path, $config) {
+        if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exslim').'.sqlite';
             copy($path.'/slim.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;

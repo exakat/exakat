@@ -28,7 +28,7 @@ use Exakat\Data\Methods;
 
 class StaticLoop extends Analyzer {
     public function analyze() {
-        $methods = new Methods();
+        $methods = new Methods($this->config);
         $nonDeterminist = $methods->getNonDeterministFunctions();
         $nonDeterminist = "'\\\\" . implode("', '\\\\", $nonDeterminist)."'";
 

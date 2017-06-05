@@ -29,10 +29,8 @@ class ZendF2 {
     protected $sqlite = null;
     protected $phar_tmp = null;
 
-    public function __construct($path, $isPhar) {
-        $config = Config::factory();
-
-        if ($isPhar) {
+    public function __construct($path, $config) {
+        if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exzendf2').'.sqlite';
             copy($path.'/zendf2.sqlite', $this->phar_tmp);
             $docPath = $this->phar_tmp;

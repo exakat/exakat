@@ -1814,7 +1814,7 @@ SQL;
     protected function generateBugFixes() {
         $table = '';
 
-        $data = new Methods();
+        $data = new Methods($this->config);
         $bugfixes = $data->getBugFixes();
 
         $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');

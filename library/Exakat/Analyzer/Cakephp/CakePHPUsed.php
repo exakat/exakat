@@ -33,7 +33,7 @@ class CakePHPUsed extends Analyzer {
     protected $version    = null;
     
     public function analyze() {
-        $data = new CakePHP($this->config->dir_root.'/data', $this->config->is_phar);
+        $data = new CakePHP($this->config->dir_root.'/data', $this->config);
 
         $this->init();
         
@@ -43,7 +43,7 @@ class CakePHPUsed extends Analyzer {
             $classes    = array_keys(array_count_values($classes));
             $classes    = $this->makeFullNsPath($classes);
 
-            $classesUsage = new ClassUsage($this->gremlin);
+            $classesUsage = new ClassUsage($this->gremlin, $this->config);
             $classesUsage->setAnalyzer(get_class($this));
             $classesUsage->setClasses($classes);
             $classesUsage->init($this->analyzerId);
@@ -61,7 +61,7 @@ class CakePHPUsed extends Analyzer {
             $interfaces = array_keys(array_count_values($interfaces));
             $interfaces = $this->makeFullNsPath($interfaces);
         
-            $classesUsage = new InterfaceUsage($this->gremlin);
+            $classesUsage = new InterfaceUsage($this->gremlin, $this->config);
             $classesUsage->setAnalyzer(get_class($this));
             $classesUsage->setInterfaces($interfaces);
             $classesUsage->init($this->analyzerId);
@@ -79,7 +79,7 @@ class CakePHPUsed extends Analyzer {
             $traits     = array_keys(array_count_values($traits));
             $traits     = $this->makeFullNsPath($traits);
 
-            $classesUsage = new TraitUsage($this->gremlin);
+            $classesUsage = new TraitUsage($this->gremlin, $this->config);
             $classesUsage->setAnalyzer(get_class($this));
             $classesUsage->setTraits($traits);
             $classesUsage->init($this->analyzerId);

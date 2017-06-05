@@ -380,7 +380,7 @@ class Files extends Tasks {
             $includeDirsRegex = '#^('.implode('|', $includeDirs).')#';
         }
 
-        $php = new Phpexec();
+        $php = new Phpexec($config->phpversion, $config);
         $ignoredFiles = array();
 
         $d = getcwd();

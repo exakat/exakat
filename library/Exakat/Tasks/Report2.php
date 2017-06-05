@@ -73,7 +73,7 @@ class Report2 extends Tasks {
 
         // Choose format from options
 
-        $report = new $reportClass();
+        $report = new $reportClass($this->config);
         if ($this->config->file === Report::STDOUT) {
             echo $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, Report::STDOUT);
         } else {

@@ -28,10 +28,6 @@ class Uml extends Reports {
     const FILE_EXTENSION = 'dot';
     const FILE_FILENAME  = 'exakat.uml';
 
-public function __construct() {
-    parent::__construct();
-}
-
 public function generate($folder, $name= 'uml') {
 
         $res = $this->sqlite->query(<<<SQL

@@ -28,7 +28,7 @@ class MiddleVersion extends Analyzer {
     private $bugfixes = array();
 
     public function dependsOn() {
-        $data = new Methods();
+        $data = new Methods($this->config);
         $this->bugfixes = $data->getBugFixes();
         
         $depends = array();

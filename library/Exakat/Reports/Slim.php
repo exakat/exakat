@@ -247,7 +247,7 @@ MENU;
         $analyzersDocHTML = "";
 
         foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzerName) {
-            $analyzer = Analyzer::getInstance($analyzerName);
+            $analyzer = Analyzer::getInstance($analyzerName, $this->config);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
 
@@ -296,7 +296,7 @@ MENU;
 
             $table = '';
             $values = array();
-            $object = Analyzer::getInstance($analyzer);
+            $object = Analyzer::getInstance($analyzer, $this->config);
             $name = $object->getDescription()->getName();
 
             $total = 0;
@@ -1105,7 +1105,7 @@ JAVASCRIPT;
     }
 
     public function getHashData() {
-        $php = new Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config);
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
@@ -1320,7 +1320,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer'], $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -1505,7 +1505,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer'], $this->config);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number']);
         }
@@ -1713,7 +1713,7 @@ SQL;
 
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
 
@@ -1758,7 +1758,7 @@ SQL;
         $analyzers = '';
 
         foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzerName) {
-            $analyzer = Analyzer::getInstance($analyzerName);
+            $analyzer = Analyzer::getInstance($analyzerName, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
@@ -1774,7 +1774,7 @@ SQL;
     protected function generateBugFixes() {
         $table = '';
 
-        $data = new Methods();
+        $data = new Methods($this->config);
         $bugfixes = $data->getBugFixes();
 
         $found = $this->sqlite->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
@@ -1877,7 +1877,7 @@ SQL;
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config);
         $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');

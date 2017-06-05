@@ -31,14 +31,15 @@ class Description {
                          'clearphp'       => '');
     private $analyzer = null;
 
-    public function __construct($analyzer) {
-        $config = Config::factory();
+    public function __construct($analyzer, $config) {
         $this->analyzer = $analyzer;
 
         $filename = $config->dir_root.'/human/'.$this->language.'/'.str_replace('\\', '/', str_replace('Exakat\\Analyzer\\', '', $analyzer)).'.ini';
 
         if (file_exists($filename)) {
-            $this->ini = parse_ini_file($filename) + $this->ini;
+            $ini = parse_ini_file($filename);
+            $ini = empty($ini) ? array() : $ini;
+            $this->ini = $ini + $this->ini;
         }
         
         assert(isset($this->ini['description']), 'Missing description in '.$analyzer);

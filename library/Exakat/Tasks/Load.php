@@ -249,7 +249,6 @@ class Load extends Tasks {
     private $atoms               = array();
     private $atomCount           = 0;
     private $argumentsId         = array();
-    private $path                = '';
     private $sequence            = array();
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
@@ -266,12 +265,12 @@ class Load extends Tasks {
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
 
-        $this->php = new Phpexec();
+        $this->php = new Phpexec($this->config->phpversion, $this->config);
         if (!$this->php->isValid()) {
             throw new InvalidPHPBinary($this->php->getVersion());
         }
 
-        $this->precedence = new Precedence($this->config->phpversion);
+        $this->precedence = new Precedence($this->config->phpversion, $this->config);
 
         $this->processing = array(
                             \Exakat\Tasks\T_OPEN_TAG                 => 'processOpenTag',
@@ -1489,7 +1488,7 @@ class Load extends Tasks {
             ) {
 
             $nsname = $this->addAtom('Boolean');
-            $nsname->boolean = (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true');
+            $nsname->boolean = (int) (strtolower($this->tokens[$this->id ][1]) === 'true');
             $nsname->constant = self::CONSTANT_EXPRESSION;
         } elseif ($this->tokens[$this->id][0]     === \Exakat\Tasks\T_NS_SEPARATOR &&
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING       &&
@@ -1727,7 +1726,7 @@ class Load extends Tasks {
 
                     if ($default !== 0) {
                         $this->addLink($index, $default, 'DEFAULT');
-                        $index->fullcode = $index->fullcode.' = '.$default->fullcode;
+                        $index->fullcode .= ' = '.$default->fullcode;
                         $default = 0;
                     }
 
@@ -1768,7 +1767,7 @@ class Load extends Tasks {
     
                 if ($default !== 0) {
                     $this->addLink($index, $default, 'DEFAULT');
-                    $index->fullcode = $index->fullcode.' = '.$default->fullcode;
+                    $index->fullcode .= ' = '.$default->fullcode;
                 }
                 $this->addLink($arguments, $index, 'ARGUMENT');
                 $constant = $constant && ($index->constant === self::CONSTANT_EXPRESSION);
@@ -1974,7 +1973,7 @@ class Load extends Tasks {
             static $deterministFunctions; 
             
             if ($deterministFunctions === null) {
-                $data = new Methods();
+                $data = new Methods($this->config);
                 $deterministFunctions = $data->getDeterministFunctions();
                 $deterministFunctions = array_map(function ($x) { return '\\'.$x;}, $deterministFunctions);
                 unset($data);
@@ -2008,7 +2007,7 @@ class Load extends Tasks {
             return $this->processNsname();
         } elseif (in_array(strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
-            $string->boolean  = (int) (bool) (strtolower($this->tokens[$this->id ][1]) === 'true');
+            $string->boolean  = (int) (strtolower($this->tokens[$this->id ][1]) === 'true');
             $string->constant = self::CONSTANT_EXPRESSION;
         } elseif (strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null');
@@ -2137,7 +2136,7 @@ class Load extends Tasks {
         if ($atom === 'Global' || $atom === 'Static') {
             $fullcodePrefix = array($this->tokens[$this->id][1]);
             $link = strtoupper($atom);
-            $atom = $atom.'definition';
+            $atom .= 'definition';
         } else {
             $fullcodePrefix= array();
             $link = 'PPP';
@@ -4393,11 +4392,13 @@ class Load extends Tasks {
 
     private function addAtomVoid() {
         $void = $this->addAtom('Void');
-        $void->code       = 'Void';
-        $void->fullcode   = self::FULLCODE_VOID;
-        $void->line       = $this->tokens[$this->id][2];
-        $void->token      = \Exakat\Tasks\T_VOID;
-        $void->constant   = self::CONSTANT_EXPRESSION;
+        $void->code        = 'Void';
+        $void->fullcode    = self::FULLCODE_VOID;
+        $void->line        = $this->tokens[$this->id][2];
+        $void->token       = \Exakat\Tasks\T_VOID;
+        $void->constant    = self::CONSTANT_EXPRESSION;
+        $void->noDelimiter = '';
+        $void->delimiter   = '';
 
         return $void;
     }

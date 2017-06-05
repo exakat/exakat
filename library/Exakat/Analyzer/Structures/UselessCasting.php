@@ -35,7 +35,7 @@ class UselessCasting extends Analyzer {
                        'T_DOUBLE_CAST'  => 'real'
                   );
         
-        $data = new Methods();
+        $data = new Methods($this->config);
         $returnTypes = $data->getFunctionsByReturn();
         
         foreach($casts as $token => $type) {

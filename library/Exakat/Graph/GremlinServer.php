@@ -39,22 +39,17 @@ class GremlinServer extends Graph {
     }
 
     public function query($query, $params = array(), $load = array()) {
-        //$result = $db->send('g.addV("name", "PHP")'); //result = [10]
         try {
-//            $query = addslashes($query);
-//            $query = str_replace("\n", " ", $query);
             print $query."\n";
             $result = $this->gremlinServer->send($query); //result = [10]
         } catch( \Brightzone\GremlinDriver\ServerException $e) {
             // Do nothing
-            print "Catch exception\n";
-            print $e->getMessage();
+            print "Catch exception\n".$e->getMessage();
 
             $result = array();
         } 
         print $query;
         print_r($result);
-//        die(GREMLIN);
     }
 
     public function queryOne($query, $params = array(), $load = array()) {}
@@ -69,8 +64,7 @@ class GremlinServer extends Graph {
             $result = $this->gremlinServer->send('graph.cypher("'.$query.'");'); //result = [10]
         } catch( \Brightzone\GremlinDriver\ServerException $e) {
             // Do nothing
-            print "Catch exception\n";
-            print $e->getMessage();
+            print "Catch exception\n".$e->getMessage();
 
             $result = array();
         } 

@@ -31,7 +31,7 @@ class ShouldPreprocess extends Analyzer {
         $dynamicAtoms = array('Variable', 'Property', 'Magicconstant', 'Staticmethodcall', 'Staticproperty', 'Methodcall');
         //'Functioncall' : if they also have only constants.
 
-        $methods = new Methods();
+        $methods = new Methods($this->config);
         $functionList = $methods->getDeterministFunctions();
         $functionList = $this->makeFullNsPath($functionList);
 

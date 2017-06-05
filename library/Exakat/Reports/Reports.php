@@ -56,8 +56,8 @@ abstract class Reports {
     protected $sqlite = null;
     protected $datastore = null;
 
-    public function __construct() {
-        $this->config = Config::factory();
+    public function __construct($config) {
+        $this->config = $config;
 
         $analyzers = Analyzer::getThemeAnalyzers($this->config->thema);
         $this->themesList = '("'.implode('", "', $analyzers).'")';

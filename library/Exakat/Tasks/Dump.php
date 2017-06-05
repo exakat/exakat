@@ -36,9 +36,6 @@ class Dump extends Tasks {
     const CONCURENCE = self::DUMP;
 
     private $sqlite            = null;
-    private $stmtResults       = null;
-    private $stmtResultsCounts = null;
-    private $cleanResults      = null;
 
     private $rounds            = 0;
     private $sqliteFile        = null;
@@ -191,7 +188,7 @@ SQL;
             return;
         }
 
-        $analyzer = Analyzer::getInstance($class, $this->gremlin);
+        $analyzer = Analyzer::getInstance($class, $this->gremlin, $this->config);
         $res = $analyzer->getDump();
         if (!is_array($res)) {
             return;
@@ -789,7 +786,7 @@ g.V().$filter.has('constant', true)
 GREMLIN
             ;
             $res = $this->gremlin->query($query);
-            if (!($res instanceof stdClass)) {
+            if (!($res instanceof \stdClass)) {
                 continue; 
             }
             $res = $res->results;

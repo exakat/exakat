@@ -65,11 +65,7 @@ if (file_exists(__DIR__.'/../vendor/autoload.php')) {
     require_once __DIR__.'/../vendor/autoload.php';
 }
 
-if (isset($argv)) {
-    $config = Config::factory($argv);
-} else {
-    $config = Config::factory($GLOBALS['argv']);
-}
+$config = new Config($GLOBALS['argv']);
 
 
 ?>

@@ -99,7 +99,7 @@ class Devoops extends Reports {
 
         $res = $this->dump->query('SELECT * FROM resultsCounts WHERE count > 0 AND analyzer in '.$themesList);
         while($row = $res->fetchArray()) {
-            $analyzer = Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
 
             $this->analyzers[$analyzer->getDescription()->getName()] = $analyzer;
             $analyze[$analyzer->getDescription()->getName()] = 'OneAnalyzer';
@@ -1094,7 +1094,7 @@ SQL
         );
         $data = array();
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
-            $analyzer = Analyzer::getInstance($row[0]);
+            $analyzer = Analyzer::getInstance($row[0], null, $this->config);
             $row[0] = $analyzer->getDescription()->getName();
 
             $data[] = $row;
@@ -1506,7 +1506,7 @@ TEXT
 
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
 
@@ -1521,7 +1521,7 @@ TEXT
         $css->titles = array('Title', 'Solved In 7.0', 'Solved In 5.6', 'Solved In 5.5', 'Solved In php-src', 'bugs.php.net', 'CVE');
         $css->readOrder = $css->titles;
 
-        $data = new Methods();
+        $data = new Methods($this->config);
         $bugfixes = $data->getBugFixes();
 
         $found = $this->dump->query('SELECT * FROM results WHERE analyzer = "Php/MiddleVersion"');
@@ -1654,9 +1654,8 @@ TEXT
             $counts[$row['analyzer']] = $row['counts'];
         }
 
-        $config = Config::factory();
         foreach($list as $l) {
-            $ini = parse_ini_file($config->dir_root.'/human/en/'.$l.'.ini');
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$l.'.ini');
             if (isset($counts[$l])) {
                 $info[ $ini['name'] ] = array('result' => (int) $counts[$l]);
             } else {
@@ -1691,9 +1690,8 @@ TEXT
         $res = $this->dump->query('SELECT analyzer, count(*) AS nb, severity AS severity FROM results '.$where.' GROUP BY analyzer');
         $listBySeverity = array();
 
-        $config = Config::factory();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $listBySeverity[] = array('name'  => $ini['name'],
                                       'severity' => $row['severity'],
                                       'count' => $row['nb']);
@@ -2037,8 +2035,12 @@ SELECT fullcode as Code, analyzer AS Analyzer, line AS Line FROM results
 SQL;
         $res = $this->dump->query($sqlQuery);
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['Analyzer']);
-            $row['File'] = $analyzer->getDescription()->getName();
+            $analyzer = Analyzer::getInstance($row['Analyzer'], null, $this->config);
+            if ($analyzer->getDescription() === null) {
+                $row['File'] = '';
+            } else {
+                $row['File'] = $analyzer->getDescription()->getName();
+            }
             $data[] = $row;
         }
         $return .= $this->formatHorizontal($data, $css);

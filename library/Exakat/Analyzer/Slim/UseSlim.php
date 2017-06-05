@@ -30,7 +30,7 @@ use Exakat\Data\Slim;
 
 class UseSlim extends Analyzer {
     public function analyze() {
-        $data = new Slim($this->config->dir_root.'/data', $this->config->is_phar);
+        $data = new Slim($this->config->dir_root.'/data', $this->config);
 
         $analyzerId = null;
         
@@ -41,7 +41,7 @@ class UseSlim extends Analyzer {
             $classes    = $this->makeFullNsPath($classes);
     
             if (!empty($classes)) {
-                $classesUsage = new ClassUsage($this->gremlin);
+                $classesUsage = new ClassUsage($this->gremlin, $this->config);
                 $classesUsage->setAnalyzer(get_class($this));
                 $classesUsage->setClasses($classes);
                 $analyzerId = $classesUsage->init($analyzerId);
@@ -61,7 +61,7 @@ class UseSlim extends Analyzer {
             $interfaces = $this->makeFullNsPath($interfaces);
         
             if (!empty($interfaces)) {
-                $interfacesUsage = new InterfaceUsage($this->gremlin);
+                $interfacesUsage = new InterfaceUsage($this->gremlin, $this->config);
                 $interfacesUsage->setAnalyzer(get_class($this));
                 $interfacesUsage->setInterfaces($interfaces);
                 $analyzerId = $interfacesUsage->init($analyzerId);
@@ -81,7 +81,7 @@ class UseSlim extends Analyzer {
             $traits     = $this->makeFullNsPath($traits);
 
             if (!empty($traits)) {
-                $traitsUsage = new TraitUsage($this->gremlin);
+                $traitsUsage = new TraitUsage($this->gremlin, $this->config);
                 $traitsUsage->setAnalyzer(get_class($this));
                 $traitsUsage->setTraits($traits);
                 $analyzerId = $traitsUsage->init($analyzerId);

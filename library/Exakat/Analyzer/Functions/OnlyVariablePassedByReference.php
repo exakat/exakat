@@ -65,7 +65,7 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        $methods = new Methods();
+        $methods = new Methods($this->config);
         $functions = $methods->getFunctionsReferenceArgs();
         $references = array();
         

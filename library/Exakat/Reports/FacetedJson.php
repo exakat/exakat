@@ -45,16 +45,14 @@ SELECT  id AS id,
 SQL;
         $res = $sqlite->query($sqlQuery);
 
-        $config = Config::factory();
-
-        $datastore = new Datastore($config);
+        $datastore = new Datastore($this->config);
 
         $items = array();
         while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-            $ini = parse_ini_file($config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
+            $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
             $row['error'] = $ini['name'];
 
-            $a = Analyzer::getInstance($row['analyzer']);
+            $a = Analyzer::getInstance($row['analyzer'], $this->config);
             $row['severity'] = $a->getSeverity();
             $row['impact']   = $a->getTimeToFix();
             $row['recipes']  = $a->getThemes();

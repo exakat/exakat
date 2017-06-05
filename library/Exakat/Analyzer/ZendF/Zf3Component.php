@@ -33,7 +33,7 @@ class Zf3Component extends Analyzer {
     protected $version    = null;
     
     public function analyze() {
-        $data = new ZendF3($this->config->dir_root.'/data', $this->config->is_phar);
+        $data = new ZendF3($this->config->dir_root.'/data', $this->config);
         if (empty($this->component)) {
             return;
         }
@@ -47,7 +47,7 @@ class Zf3Component extends Analyzer {
             $classes    = $this->makeFullNsPath($classes);
     
             if (!empty($classes)) {
-                $classesUsage = new ClassUsage($this->gremlin);
+                $classesUsage = new ClassUsage($this->gremlin, $this->config);
                 $classesUsage->setAnalyzer(get_class($this));
                 $classesUsage->setClasses($classes);
                 $analyzerId = $classesUsage->init($analyzerId);
@@ -67,7 +67,7 @@ class Zf3Component extends Analyzer {
             $interfaces = $this->makeFullNsPath($interfaces);
         
             if (!empty($interfaces)) {
-                $interfacesUsage = new InterfaceUsage($this->gremlin);
+                $interfacesUsage = new InterfaceUsage($this->gremlin, $this->config);
                 $interfacesUsage->setAnalyzer(get_class($this));
                 $interfacesUsage->setInterfaces($interfaces);
                 $analyzerId = $interfacesUsage->init($analyzerId);
@@ -87,7 +87,7 @@ class Zf3Component extends Analyzer {
             $traits     = $this->makeFullNsPath($traits);
 
             if (!empty($traits)) {
-                $traitsUsage = new TraitUsage($this->gremlin);
+                $traitsUsage = new TraitUsage($this->gremlin, $this->config);
                 $traitsUsage->setAnalyzer(get_class($this));
                 $traitsUsage->setTraits($traits);
                 $analyzerId = $traitsUsage->init($analyzerId);

@@ -98,6 +98,9 @@ class Dependencywheel extends Reports {
         
         $res = $this->sqlite->query('SELECT * FROM cit_implements');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (!isset($ids[$row['implements']])) {
+                continue;
+            }
             $I = $ids[$row['implements']];
             $i = $dict[$I];
     
@@ -114,6 +117,7 @@ class Dependencywheel extends Reports {
                 $result[0] = 1;
             }
         }
+        unset($result);
 
         $this->matrix = json_encode($results);
         $this->packagenames = json_encode($packagenames);

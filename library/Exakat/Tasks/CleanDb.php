@@ -89,8 +89,13 @@ GREMLIN;
 
     private function cleanScripts() {
         display('Cleaning scripts');
-        $files = array_merge(glob($this->config->neo4j_folder.'/scripts/a*.gremlin'),
-                             glob($this->config->neo4j_folder.'/scripts/a*.txt'));
+        $aGremlin = glob($this->config->neo4j_folder.'/scripts/a*.gremlin');
+        $aTxt = glob($this->config->neo4j_folder.'/scripts/a*.txt');
+        
+        $aTxt = empty($aTxt) ? array() : $aTxt;
+        $aGremlin = empty($aGremlin) ? array() : $aGremlin;
+        
+        $files = array_merge($aGremlin, $aTxt);
         foreach($files as $file) {
             unlink($file);
         }

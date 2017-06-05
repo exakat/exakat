@@ -27,9 +27,7 @@ class Methods {
     private $sqlite = null;
     private $phar_tmp = null;
 
-    public function __construct() {
-        $config = \Exakat\Config::factory();
-
+    public function __construct($config) {
         if ($config->is_phar) {
             $this->phar_tmp = tempnam(sys_get_temp_dir(), 'exMethods').'.sqlite';
             copy($config->dir_root.'/data/methods.sqlite', $this->phar_tmp);

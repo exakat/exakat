@@ -83,7 +83,7 @@ class IsModified extends Analyzer {
         $this->prepareQuery();
 
         // PHP functions that are references
-        $data = new Methods();
+        $data = new Methods($this->config);
         
         $functions = $data->getFunctionsReferenceArgs();
         $references = array();

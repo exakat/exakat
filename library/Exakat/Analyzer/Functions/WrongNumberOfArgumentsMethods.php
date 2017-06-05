@@ -29,7 +29,7 @@ use Exakat\Data\Methods;
 class WrongNumberOfArgumentsMethods extends Analyzer {
     
     public function analyze() {
-        $data = new Methods();
+        $data = new Methods($this->config);
         
         $methods = $data->getMethodsArgsInterval();
         $argsMins = array();

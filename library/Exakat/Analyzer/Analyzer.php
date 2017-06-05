@@ -107,7 +107,7 @@ abstract class Analyzer {
     
     protected $linksDown = '';
 
-    public function __construct($gremlin = null) {
+    public function __construct($gremlin = null, $config = null) {
         $this->gremlin = $gremlin;
         
         $this->analyzer = get_class($this);
@@ -117,13 +117,18 @@ abstract class Analyzer {
         
         self::initDocs();
         
-        if (strpos($this->analyzer, '\\Common\\') === false) {
-            $this->description = new Description($this->analyzer);
-        }
-        
         $this->_as('first');
         
-        $this->config = Config::factory();
+        if ($config === null) {
+            print_r($this);
+            debug_print_backtrace();
+            die();
+        }
+        $this->config = $config;
+
+        if (strpos($this->analyzer, '\\Common\\') === false) {
+            $this->description = new Description($this->analyzer, $config);
+        }
         
         if (!isset(self::$datastore)) {
             self::$datastore = new Datastore($this->config);
@@ -267,12 +272,12 @@ GREMLIN;
         return $r;
     }
     
-    public static function getInstance($name, $gremlin = null) {
+    public static function getInstance($name, $gremlin = null, $config = null) {
         static $instanciated = array();
         
         if ($analyzer = static::getClass($name)) {
             if (!isset($instanciated[$analyzer])) {
-                $instanciated[$analyzer] = new $analyzer($gremlin);
+                $instanciated[$analyzer] = new $analyzer($gremlin, $config);
             }
             return $instanciated[$analyzer];
         } else {
@@ -396,11 +401,7 @@ GREMLIN;
         // version range 1.2.3-4.5.6
         if (strpos($this->phpVersion, '-') !== false) {
             list($lower, $upper) = explode('-', $this->phpVersion);
-            if (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0);
         }
         
         // One version only
@@ -1775,7 +1776,7 @@ GREMLIN;
     }
 
     public function hasResults() {
-        return (bool) ($this->rowCount > 0);
+        return ($this->rowCount > 0);
     }
 
     public function getSeverity() {

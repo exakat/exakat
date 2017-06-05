@@ -27,9 +27,9 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\Type;
 
 class BooleanValue extends Type {
-    public function __construct($gremlin) {
+    public function __construct($gremlin, $config) {
         $this->type = 'Boolean';
-        parent::__construct($gremlin);
+        parent::__construct($gremlin, $config);
     }
 
     public function analyze() {

@@ -59,7 +59,7 @@ class Text extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = Analyzer::getInstance($row['analyzer']);
+                $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
             }

@@ -46,7 +46,7 @@ class Codacy extends Reports {
             $message = array();
 
             if (!isset($titleCache[$row['patternId']])) {
-                $analyzer = Analyzer::getInstance($row['patternId']);
+                $analyzer = Analyzer::getInstance($row['patternId'], $this->config);
                 $titleCache[$row['patternId']] = $analyzer->getDescription()->getName();
             }
 

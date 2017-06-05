@@ -98,7 +98,7 @@ class Analyze extends Tasks {
             $dependencies = array();
             $dependencies2 = array();
             foreach($analyzers_class as $a) {
-                $d = Analyzer::getInstance($a, $this->gremlin);
+                $d = Analyzer::getInstance($a, $this->gremlin, $this->config);
                 assert($d !== null, 'Can\'t get instance of analyzer : '.$a);
                 $d = $d->dependsOn();
                 if (!is_array($d)) {
@@ -124,7 +124,7 @@ class Analyze extends Tasks {
 
                     foreach($diff as $k => $v) {
                         if (!isset($dependencies[$v])) {
-                            $x = Analyzer::getInstance($v, $this->gremlin);
+                            $x = Analyzer::getInstance($v, $this->gremlin, $this->config);
                             if ($x === null) {
                                 display( "No such dependency as '$v'. Ignoring\n");
                                 continue;
@@ -158,7 +158,7 @@ class Analyze extends Tasks {
         }
 
         $total_results = 0;
-        $Php = new Phpexec($this->config->version);
+        $Php = new Phpexec($this->config->version, $this->config);
 
         if (!$this->config->verbose && !$this->config->quiet) {
            $progressBar = new Progressbar(0, count($dependencies2) + 1, exec('tput cols'));
@@ -169,7 +169,7 @@ class Analyze extends Tasks {
                 echo $progressBar->advance();
             }
             $begin = microtime(true);
-            $analyzer = Analyzer::getInstance($analyzer_class, $this->gremlin);
+            $analyzer = Analyzer::getInstance($analyzer_class, $this->gremlin, $this->config);
 
             if ($this->config->noRefresh === true && isset($analyzed[$analyzer_class])) {
                 display( "$analyzer_class is already processed\n");
@@ -215,7 +215,7 @@ GREMLIN;
                 display( "$analyzer is not compatible with PHP configuration of this version. Ignoring\n");
             } else {
                 display( "$analyzer_class running\n");
-                $analyzer->run();
+                $analyzer->run($this->config);
 
                 $count = $analyzer->getRowCount();
                 $processed = $analyzer->getProcessedCount();

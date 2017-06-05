@@ -115,7 +115,7 @@ class FindExternalLibraries extends Tasks {
             return;
         }
 
-        $this->php = new Phpexec();
+        $this->php = new Phpexec($this->config->phpversion, $this->config);
 
         $this->php->getTokens();
 

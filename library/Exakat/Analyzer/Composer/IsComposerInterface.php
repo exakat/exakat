@@ -33,7 +33,7 @@ class IsComposerInterface extends Analyzer {
     }
     
     public function analyze() {
-        $data = new Composer();
+        $data = new Composer($this->config);
 
         $interfaces = $data->getComposerInterfaces();
         $interfacesFullNP = $this->makeFullNsPath($interfaces);

@@ -27,9 +27,9 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\Type;
 
 class Real extends Type {
-    public function __construct($gremlin) {
+    public function __construct($gremlin, $config) {
         $this->type = 'Real';
-        parent::__construct($gremlin);
+        parent::__construct($gremlin, $config);
     }
 
     public function analyze() {

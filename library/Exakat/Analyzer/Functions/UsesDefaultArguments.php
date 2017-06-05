@@ -28,7 +28,7 @@ use Exakat\Data\Methods;
 
 class UsesDefaultArguments extends Analyzer {
     public function analyze() {
-        $data = new Methods();
+        $data = new Methods($this->config);
         $functions = $data->getFunctionsArgsInterval();
 
         $positions = array();

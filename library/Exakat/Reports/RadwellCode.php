@@ -50,10 +50,6 @@ class RadwellCode extends Reports {
 
                              );
 
-    public function __construct() {
-        parent::__construct();
-    }
-
     public function generate($folder, $name = null) {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.join('", "', $list).'"';
@@ -76,7 +72,7 @@ class RadwellCode extends Reports {
             }
 
             if (!isset($titleCache[$row['analyzer']])) {
-                $analyzer = Analyzer::getInstance($row['analyzer']);
+                $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
                 $titleCache[$row['analyzer']] = $analyzer->getDescription()->getName();
                 $severityCache[$row['analyzer']] = $analyzer->getSeverity();
             }

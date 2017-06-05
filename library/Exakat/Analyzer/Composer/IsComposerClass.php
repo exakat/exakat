@@ -28,7 +28,7 @@ use Exakat\Data\Composer;
 
 class IsComposerClass extends Analyzer {
     public function analyze() {
-        $data = new Composer();
+        $data = new Composer($this->config);
 
         $classes = $data->getComposerClasses();
         $classesFullNP = $this->makeFullNsPath($classes);
