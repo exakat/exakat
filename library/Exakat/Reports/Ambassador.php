@@ -66,8 +66,8 @@ class Ambassador extends Reports {
                                      '71' => 'Compatibility PHP 7.1',
                                      '72' => 'Compatibility PHP 7.2',);
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct($config) {
+        parent::__construct($config);
         $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
         $this->timesToFix        = $this->docs->getTimesToFix();
         $this->themesForAnalyzer = $this->docs->getThemesForAnalyzer();
@@ -284,7 +284,7 @@ class Ambassador extends Reports {
         $analyzersList = array_keys(array_count_values($analyzersList));
                                      
         foreach($analyzersList as $analyzerName) {
-            $analyzer = Analyzer::getInstance($analyzerName);
+            $analyzer = Analyzer::getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzersDocHTML.='<h2><a href="issues.html#analyzer='.$analyzerName.'" id="'.md5($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
@@ -334,7 +334,7 @@ class Ambassador extends Reports {
 
             $table = '';
             $values = array();
-            $object = Analyzer::getInstance($analyzer);
+            $object = Analyzer::getInstance($analyzer, null, $this->config);
             $name = $object->getDescription()->getName();
 
             $total = 0;
@@ -1085,7 +1085,7 @@ JAVASCRIPT;
     }
 
     public function getHashData() {
-        $php = new Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config);
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
@@ -1300,7 +1300,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
             $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -1485,7 +1485,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer']);
+            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number'],
                             'name'  => $row['analyzer']);
@@ -1729,7 +1729,7 @@ SQL;
 
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
 
@@ -1774,7 +1774,7 @@ SQL;
         $analyzers = '';
 
         foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer);
+            $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
@@ -1868,7 +1868,7 @@ SQL;
     }
 
     protected function generatePhpConfiguration() {
-        $phpConfiguration = new PhpConfiguration();
+        $phpConfiguration = new PhpConfiguration($this->config);
         $report = $phpConfiguration->generate(null, null);
 
         $id = strpos($report, "\n\n\n");
@@ -1917,7 +1917,7 @@ SQL;
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion);
+        $php = new Phpexec($this->config->phpversion, $this->config);
         $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
@@ -2718,6 +2718,7 @@ JAVASCRIPT;
                             'ext/sqlsrv'     => 'Extensions/Extsqlsrv',
                             'ext/ssh2'       => 'Extensions/Extssh2',
                             'ext/standard'   => 'Extensions/Extstandard',
+                            'ext/stats'      => 'Extensions/Extstats',
                             'ext/tidy'       => 'Extensions/Exttidy',
                             'ext/tokenizer'  => 'Extensions/Exttokenizer',
                             'ext/trader'     => 'Extensions/Exttrader',
