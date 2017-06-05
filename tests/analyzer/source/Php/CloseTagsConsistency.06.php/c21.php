@@ -1,0 +1,1 @@
+<?php $a++; __HALT_COMPILER; 

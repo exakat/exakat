@@ -32,24 +32,32 @@ class CitSameName extends Analyzer {
         $interfaces = $this->query('g.V().hasLabel("Interface").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
         $traits = $this->query('g.V().hasLabel("Trait").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
         
+        $names = array_merge($classes, $interfaces, $traits);
+        $counts = array_count_values($names);
+        $doubles = array_keys(array_filter($counts, function ($x) { return $x > 1; }));
+        
+        if (empty($doubles)) {
+            return;
+        }
+        
         // Classes
         $this->atomIs('Class')
              ->outIs('NAME')
-             ->codeIs(array_merge($interfaces, $traits))
+             ->codeIs($doubles)
              ->back('first');
         $this->prepareQuery();
 
         // Trait
         $this->atomIs('Trait')
              ->outIs('NAME')
-             ->codeIs(array_merge($classes, $interfaces))
+             ->codeIs($doubles)
              ->back('first');
         $this->prepareQuery();
 
         // Interfaces
         $this->atomIs('Interface')
              ->outIs('NAME')
-             ->codeIs(array_merge($classes, $traits))
+             ->codeIs($doubles)
              ->back('first');
         $this->prepareQuery();
     }
