@@ -496,7 +496,7 @@ class Load extends Tasks {
                 throw new NoSuchLoader($client, $this->loaderList);
             }
 
-            display("Loading with $client\n");
+            display('Loading with '.$client.PHP_EOL);
 
             $client = '\\Exakat\\Loader\\'.$client;
             static::$client = new $client($this->config);
@@ -578,7 +578,8 @@ class Load extends Tasks {
         if (substr($dir, -1) === '/') {
             $dir = substr($dir, 0, -1);
         }
-        Files::findFiles($dir, $files, $ignoredFiles, $this->config);
+        $tokens = 0;
+        Files::findFiles($dir, $files, $ignoredFiles, $this->config, $tokens);
 
         $this->reset();
 
@@ -721,7 +722,7 @@ class Load extends Tasks {
         } catch (LoadError $e) {
 //            print $e->getMessage();
 //            print_r($this->expressions[0]);
-            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
+            $this->log->log('Can\'t process file \''.$this->filename.'\' during load (\''.$this->tokens[$this->id][0].'\', line \''.$this->tokens[$this->id][2].'\'). Ignoring'.PHP_EOL);
             $this->reset();
             throw new NoFileToProcess($filename, 'empty', 0, $e);
         } finally {
@@ -730,7 +731,7 @@ class Load extends Tasks {
         }
 
         $end = microtime(true);
-        $this->log->log("processFile\t".(($end - $begin) * 1000)."\t".$log['token_initial']."\n");
+        $this->log->log("processFile\t".(($end - $begin) * 1000)."\t".$log['token_initial'].PHP_EOL);
 
         return true;
     }
@@ -740,16 +741,16 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id][0] === \Exakat\Tasks\T_END ||
             !isset($this->processing[ $this->tokens[$this->id][0] ])) {
-            display("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
-            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring\n");
+            display("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring".PHP_EOL);
+            $this->log->log("Can't process file '$this->filename' during load ('{$this->tokens[$this->id][0]}', line {$this->tokens[$this->id][2]}). Ignoring".PHP_EOL);
 
             throw new LoadError('Processing error');
         }
         $method = $this->processing[ $this->tokens[$this->id][0] ];
         
-//        print "  $method in\n";
+//        print "  $method in".PHP_EOL;
         $id = $this->$method();
-//        print "  $method out \n";
+//        print "  $method out ".PHP_EOL;
         
         return $id;
     }
@@ -2997,7 +2998,7 @@ class Load extends Tasks {
     private function processSingle($atom) {
         $atom = $this->addAtom($atom);
         if (strlen($this->tokens[$this->id][1]) > 100000) {
-            $this->tokens[$this->id][1] = substr($this->tokens[$this->id][1], 0, 100000)."\n[.... 100000 / ".strlen($this->tokens[$this->id][1])."]\n";
+            $this->tokens[$this->id][1] = substr($this->tokens[$this->id][1], 0, 100000).PHP_EOL."[.... 100000 / ".strlen($this->tokens[$this->id][1])."]".PHP_EOL;
         }
         $atom->code     = $this->tokens[$this->id][1];
         $atom->fullcode = $this->tokens[$this->id][1];
@@ -3978,7 +3979,7 @@ class Load extends Tasks {
             $static = $this->addAtom('Staticmethodcall');
             $links = 'METHOD';
         } else {
-            throw new LoadError("Unprocessed atom in static call (right) : ".$right->atom."\n");
+            throw new LoadError("Unprocessed atom in static call (right) : ".$right->atom.PHP_EOL);
         }
 
         $this->addLink($static, $left, 'CLASS');
@@ -4084,7 +4085,7 @@ class Load extends Tasks {
             $static = $this->addAtom('Methodcall');
             $links = 'METHOD';
         } else {
-            throw new LoadError("Unprocessed atom in object call (right) : ".$right->atom."\n");
+            throw new LoadError("Unprocessed atom in object call (right) : ".$right->atom.PHP_EOL);
         }
 
         $this->addLink($static, $left, 'OBJECT');
@@ -4444,11 +4445,11 @@ class Load extends Tasks {
 
     private function checkTokens($filename) {
         if (count($this->expressions) > 0) {
-            throw new LoadError("Warning : expression is not empty in $filename : ".count($this->expressions)."\n");
+            throw new LoadError("Warning : expression is not empty in $filename : ".count($this->expressions).PHP_EOL);
         }
 
         if ($this->contexts[self::CONTEXT_NOSEQUENCE] > 0) {
-            throw new LoadError("Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE]."\n");
+            throw new LoadError("Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE].PHP_EOL);
         }
 
         // All node has one incoming or one outgoing link (outgoing or incoming).
@@ -4472,21 +4473,21 @@ class Load extends Tasks {
         foreach($this->atoms as $id => $atom) {
             if ($id === 1) { continue; }
             assert(isset($D[$id]), "Warning : forgotten atom $id in $this->filename");
-            assert($D[$id] <= 1, "Warning : too linked atom $id : \n");
+            assert($D[$id] <= 1, "Warning : too linked atom $id : ".PHP_EOL);
 
-            assert(isset($atom->line), "Warning : missing line atom $id : \n");
+            assert(isset($atom->line), "Warning : missing line atom $id : ".PHP_EOL);
 
             if (!isset($atom->code)) {
-                print "Warning : code atom $id : \n";
+                print "Warning : code atom $id : ".PHP_EOL;
                 print_r($atom);
-                print "\n";
+                print PHP_EOL;
                 ++$total;
             }
 
             if (!isset($atom->token)) {
-                print "Warning : token atom $id : \n";
+                print "Warning : token atom $id : ".PHP_EOL;
                 print_r($atom);
-                print "\n";
+                print PHP_EOL;
                 ++$total;
             }
         }
@@ -4523,7 +4524,7 @@ class Load extends Tasks {
         static::$client->saveDefinitions($this->exakatDir, $this->calls);
 
         $end = microtime(true);
-        $this->log->log("saveDefinitions\t".(($end - $begin) * 1000)."\t".count($this->calls)."\n");
+        $this->log->log("saveDefinitions\t".(($end - $begin) * 1000)."\t".count($this->calls).PHP_EOL);
     }
 
     private function fallbackToGlobal($type) {
@@ -4815,7 +4816,7 @@ class Load extends Tasks {
             $start = $end;
         }
 
-        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
+        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start).PHP_EOL);
         $begin = $end;
     }
     

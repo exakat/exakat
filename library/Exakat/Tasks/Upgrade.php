@@ -41,42 +41,42 @@ class Upgrade extends Tasks {
         $html = file_get_contents('http://dist.exakat.io/versions/index.php', true, $context);
 
         if (empty($html)) {
-            print "Unable to reach server to fetch the last version. Try again later.\n";
+            print 'Unable to reach server to fetch the last version. Try again later.' . PHP_EOL;
             return;
         }
 
         if (preg_match('/Download exakat version (\d+\.\d+\.\d+) \(Latest\)/s', $html, $r) == 0) {
-            print "Unable to find last version. Try again later.\n";
+            print 'Unable to find last version. Try again later.'.PHP_EOL;
             return;
         }
 
         if (version_compare(Exakat::VERSION, $r[1]) < 0) {
-            print "This version needs to be updated (Current : ".Exakat::VERSION.", Latest: $r[1])\n";
+            print 'This version needs to be updated (Current : '.Exakat::VERSION.', Latest: '.$r[1].')'.PHP_EOL;
             if ($this->config->update === true) {
-                print "  Updating to latest version.\n";
+                print '  Updating to latest version.'.PHP_EOL;
                 preg_match('#<pre id="sha256">(.*?)</pre>#', $html, $r);
 
                 $phar = @file_get_contents('http://dist.exakat.io/versions/index.php?file=latest');
                 $sha256 = $r[1];
 
                 if (hash('sha256', $phar) !== $sha256) {
-                    print "Error while checking exakat.phar's checksum. Aborting update. Please, try again\n";
+                    print 'Error while checking exakat.phar\'s checksum. Aborting update. Please, try again'.PHP_EOL;
                     return;
                 }
 
                 file_put_contents('exakat.1.phar', $phar);
-                print "Setting up exakat.phar\n";
+                print 'Setting up exakat.phar'.PHP_EOL;
                 rename('exakat.1.phar', 'exakat.phar');
                 return;
             } else {
-                print "  You may run this command with -u option to upgrade to the latest exakat version.\n";
+                print '  You may run this command with -u option to upgrade to the latest exakat version.'.PHP_EOL;
                 return;
             }
         } elseif (version_compare(Exakat::VERSION, $r[1]) === 0) {
-            print "This is the latest version (".Exakat::VERSION.")\n";
+            print 'This is the latest version ('.Exakat::VERSION.')'.PHP_EOL;;
             return;
         } else {
-            print "This version is ahead of the latest publication (Current : ".Exakat::VERSION.", Latest: $r[1])\n";
+            print 'This version is ahead of the latest publication (Current : '.Exakat::VERSION.', Latest: '.$r[1].')'.PHP_EOL;
             return;
         }
     }

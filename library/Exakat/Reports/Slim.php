@@ -1495,13 +1495,16 @@ SQL;
     private function getTopAnalyzers() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
+        $toplimit = self::TOPLIMIT;
 
-        $query = "SELECT analyzer, count(*) AS number
+        $query = <<<SQL
+SELECT analyzer, count(*) AS number
                     FROM results
                     WHERE analyzer IN ($list)
                     GROUP BY analyzer
                     ORDER BY number DESC
-                    LIMIT ".self::TOPLIMIT;
+                    LIMIT $toplimit
+SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
@@ -1998,7 +2001,7 @@ SQL
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Slim/UsedRoutes"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $routes .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $routes .= '<tr><td>'.$this->PHPSyntax($row['fullcode']).'</td><td>'.$row[file].'</td><td>'.$row[line].'</td></tr>'.PHP_EOL;
         }
         
         $routes = <<<HTML
@@ -2020,7 +2023,7 @@ HTML;
         $theGlobals = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Structures/GlobalInGlobal"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $theGlobals .= '<tr><td>'.$this->PHPSyntax($row['fullcode'])."</td><td>$row[file]</td><td>$row[line]</td></tr>\n";
+            $theGlobals .= '<tr><td>'.$this->PHPSyntax($row['fullcode']).'</td><td>'.$row[file].'</td><td>'.$row[line].'</td></tr>'.PHP_EOL;
         }
 
         $html = $this->getBasedPage('globals');
