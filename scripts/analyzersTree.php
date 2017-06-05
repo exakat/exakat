@@ -20,9 +20,8 @@
  *
 */
 
-include_once(dirname(__DIR__).'/library/Autoload.php');
+include dirname(__DIR__).'/library/Autoload.php';
 spl_autoload_register('Autoload::autoload_library');
-
 
 $analyzers = \Analyzer\Analyzer::getThemeAnalyzers();
 

@@ -27,7 +27,7 @@ foreach($docs as $iniFile) {
     $ini = parse_ini_file($iniFile);
     $offset = strpos($ini['description'], '.');
     
-    $clearphp += (bool) empty($ini['clearphp']);
+    $clearphp += empty($ini['clearphp']);
     if (!$offset) {
         print "$iniFile is missing a sentence with a dot.\n";
         continue;
