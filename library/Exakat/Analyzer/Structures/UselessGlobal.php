@@ -35,7 +35,7 @@ class UselessGlobal extends Analyzer {
 
         // Global are unused if used only once
         $inglobal = $this->query(<<<GREMLIN
-g.V().hasLabel("Global").out("GLOBAL").values("code")
+g.V().hasLabel("Globaldefinition").values("code")
 GREMLIN
 );
 
@@ -44,17 +44,21 @@ g.V().hasLabel("Variable", "Variablearray").has("code", "\$GLOBALS").in("VARIABL
 GREMLIN
 );
 
-        $counts = array_count_values(array_merge($inGLobals, $inglobal));
+        $implicitGLobals = $this->query(<<<'GREMLIN'
+g.V().hasLabel("Php").out('CODE').repeat(__.out().not(hasLabel("Function", "Class", "Classanonymous", "Closure", "Trait", "Interface")) ).emit(hasLabel("Variable")).times(15).values('code')
+GREMLIN
+);
+
+        $counts = array_count_values(array_merge($inGLobals, $inglobal, $implicitGLobals));
         $loneGlobal = array_filter($counts, function ($x) { return $x == 1; });
         $loneGlobal = array_keys($loneGlobal);
         
 
-        $this->atomIs('Global')
-             ->outIs('GLOBAL')
+        $this->atomIs('Globaldefinition')
              ->codeIs($loneGlobal);
         $this->prepareQuery();
 
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(array("Variable", "Variablearray"))
              ->codeIs('$GLOBALS')
              ->inIs('VARIABLE')
              ->atomIs('Array')
