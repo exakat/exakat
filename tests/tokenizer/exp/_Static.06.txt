@@ -10,47 +10,45 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $b
-                Label : RIGHT
-                  1
-              Label : PUBLIC
-                public
-              Label : STATIC
-                static
-            Label : ELEMENT
-              private
-              Label : PPP
-                =
-                Label : LEFT
-                  $d
-                Label : RIGHT
-                  '2'
-              Label : PRIVATE
-                private
-              Label : STATIC
-                static
-            Label : ELEMENT
-              protected
-              Label : PPP
-                =
-                Label : LEFT
-                  $c
-                Label : RIGHT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-              Label : PROTECTED
-                protected
-              Label : STATIC
-                static
           Label : NAME
             a
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                1
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
+          Label : PPP
+            private
+            Label : PPP
+              =
+              Label : LEFT
+                $d
+              Label : RIGHT
+                '2'
+            Label : PRIVATE
+              private
+            Label : STATIC
+              static
+          Label : PPP
+            protected
+            Label : PPP
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+            Label : PROTECTED
+              protected
+            Label : STATIC
+              static

@@ -10,43 +10,41 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            TRUE
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  TRUE
+            Label : NAME
               TRUE
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    TRUE
-              Label : NAME
-                TRUE
-              Label : PUBLIC
-                public
-              Label : STATIC
-                static
-            Label : ELEMENT
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
+          Label : METHOD
+            FALSE
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  FALSE
+            Label : NAME
               FALSE
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    FALSE
-              Label : NAME
-                FALSE
-              Label : PUBLIC
-                public
-              Label : STATIC
-                static
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
           Label : NAME
             x

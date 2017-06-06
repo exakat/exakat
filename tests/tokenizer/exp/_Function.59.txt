@@ -14,446 +14,444 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+              Label : METHOD
+                D
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $b
+                    Label : TYPEHINT
+                      E
+                  Label : ARGUMENT
+                    $c
+                    Label : TYPEHINT
+                      E
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      G
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $b
+                        Label : ARGUMENT
+                          $c
+                      Label : NAME
+                        G
+                Label : NAME
                   D
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $b
-                      Label : TYPEHINT
-                        E
-                    Label : ARGUMENT
-                      $c
-                      Label : TYPEHINT
-                        E
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        G
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $b
-                          Label : ARGUMENT
-                            $c
-                        Label : NAME
-                          G
-                  Label : NAME
-                    D
-                  Label : RETURNTYPE
-                    array
-                  Label : STATIC
-                    static
-                Label : ELEMENT
+                Label : RETURNTYPE
+                  array
+                Label : STATIC
+                  static
+              Label : METHOD
+                H
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $b
+                    Label : TYPEHINT
+                      E
+                  Label : ARGUMENT
+                    $d
+                    Label : TYPEHINT
+                      array
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      K
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $b
+                        Label : ARGUMENT
+                          $d
+                      Label : NAME
+                        K
+                Label : NAME
                   H
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $b
-                      Label : TYPEHINT
-                        E
-                    Label : ARGUMENT
-                      $d
-                      Label : TYPEHINT
-                        array
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        K
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $b
-                          Label : ARGUMENT
-                            $d
-                        Label : NAME
-                          K
-                  Label : NAME
-                    H
-                  Label : RETURNTYPE
-                    E
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  L
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                      Label : TYPEHINT
-                        E
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      if
-                      Label : CONDITION
-                        ===
-                        Label : LEFT
-                          N
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $c
-                          Label : NAME
-                            N
-                        Label : RIGHT
-                          1
-                      Label : THEN
-                        {}
-                        Label : ELEMENT
-                          return
-                          Label : RETURN
-                            [
-                            Label : ARGUMENTS
-                              [
-                              Label : ARGUMENT
-                                Void
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        G
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'P'
-                          Label : ARGUMENT
-                            $c
-                        Label : NAME
-                          G
-                  Label : NAME
-                    L
-                  Label : RETURNTYPE
-                    array
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  Q
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $d
-                      Label : TYPEHINT
-                        array
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        K
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            T
-                          Label : ARGUMENT
-                            $d
-                        Label : NAME
-                          K
-                  Label : NAME
-                    Q
-                  Label : RETURNTYPE
-                    E
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  U
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                      Label : TYPEHINT
-                        E
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      if
-                      Label : CONDITION
-                        ===
-                        Label : LEFT
-                          N
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $c
-                          Label : NAME
-                            N
-                        Label : RIGHT
-                          1
-                      Label : THEN
-                        {}
-                        Label : ELEMENT
-                          return
-                          Label : RETURN
-                            [
-                            Label : ARGUMENTS
-                              [
-                              Label : ARGUMENT
-                                Void
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        X
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'Y'
-                          Label : ARGUMENT
-                            $c
-                        Label : NAME
-                          X
-                  Label : NAME
-                    U
-                  Label : RETURNTYPE
-                    array
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  Z
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $d
-                      Label : TYPEHINT
-                        array
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        K
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'AC'
-                          Label : ARGUMENT
-                            $d
-                        Label : NAME
-                          K
-                  Label : NAME
-                    Z
-                  Label : RETURNTYPE
-                    E
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  AD
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                      Label : TYPEHINT
-                        E
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        AF
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $c
-                        Label : NAME
-                          AF
-                  Label : NAME
-                    AD
-                  Label : RETURNTYPE
-                    array
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  AG
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $d
-                      Label : TYPEHINT
-                        array
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        K
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'AJ'
-                          Label : ARGUMENT
-                            $d
-                        Label : NAME
-                          K
-                  Label : NAME
-                    AG
-                  Label : RETURNTYPE
-                    E
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  AK
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $e
-                      Label : TYPEHINT
-                        AL
-                    Label : ARGUMENT
-                      $c
-                      Label : TYPEHINT
-                        E
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      =
+                Label : RETURNTYPE
+                  E
+                Label : STATIC
+                  static
+              Label : METHOD
+                L
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                    Label : TYPEHINT
+                      E
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    if
+                    Label : CONDITION
+                      ===
                       Label : LEFT
-                        $f
+                        N
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            $c
+                        Label : NAME
+                          N
+                      Label : RIGHT
+                        1
+                    Label : THEN
+                      {}
+                      Label : ELEMENT
+                        return
+                        Label : RETURN
+                          [
+                          Label : ARGUMENTS
+                            [
+                            Label : ARGUMENT
+                              Void
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      G
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'P'
+                        Label : ARGUMENT
+                          $c
+                      Label : NAME
+                        G
+                Label : NAME
+                  L
+                Label : RETURNTYPE
+                  array
+                Label : STATIC
+                  static
+              Label : METHOD
+                Q
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $d
+                    Label : TYPEHINT
+                      array
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      K
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          T
+                        Label : ARGUMENT
+                          $d
+                      Label : NAME
+                        K
+                Label : NAME
+                  Q
+                Label : RETURNTYPE
+                  E
+                Label : STATIC
+                  static
+              Label : METHOD
+                U
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                    Label : TYPEHINT
+                      E
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    if
+                    Label : CONDITION
+                      ===
+                      Label : LEFT
+                        N
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            $c
+                        Label : NAME
+                          N
+                      Label : RIGHT
+                        1
+                    Label : THEN
+                      {}
+                      Label : ELEMENT
+                        return
+                        Label : RETURN
+                          [
+                          Label : ARGUMENTS
+                            [
+                            Label : ARGUMENT
+                              Void
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      X
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'Y'
+                        Label : ARGUMENT
+                          $c
+                      Label : NAME
+                        X
+                Label : NAME
+                  U
+                Label : RETURNTYPE
+                  array
+                Label : STATIC
+                  static
+              Label : METHOD
+                Z
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $d
+                    Label : TYPEHINT
+                      array
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      K
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'AC'
+                        Label : ARGUMENT
+                          $d
+                      Label : NAME
+                        K
+                Label : NAME
+                  Z
+                Label : RETURNTYPE
+                  E
+                Label : STATIC
+                  static
+              Label : METHOD
+                AD
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                    Label : TYPEHINT
+                      E
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      AF
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $c
+                      Label : NAME
+                        AF
+                Label : NAME
+                  AD
+                Label : RETURNTYPE
+                  array
+                Label : STATIC
+                  static
+              Label : METHOD
+                AG
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $d
+                    Label : TYPEHINT
+                      array
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      K
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          'AJ'
+                        Label : ARGUMENT
+                          $d
+                      Label : NAME
+                        K
+                Label : NAME
+                  AG
+                Label : RETURNTYPE
+                  E
+                Label : STATIC
+                  static
+              Label : METHOD
+                AK
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $e
+                    Label : TYPEHINT
+                      AL
+                  Label : ARGUMENT
+                    $c
+                    Label : TYPEHINT
+                      E
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    =
+                    Label : LEFT
+                      $f
+                    Label : RIGHT
+                      'AJ'
+                  Label : ELEMENT
+                    for
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        .=
+                        Label : LEFT
+                          $f
+                        Label : RIGHT
+                          $c
+                    Label : FINAL
+                      ;
+                      Label : ELEMENT
+                        <
+                        Label : LEFT
+                          $g
+                        Label : RIGHT
+                          $e
+                    Label : INCREMENT
+                      ;
+                      Label : ELEMENT
+                        ++
+                        Label : POSTPLUSPLUS
+                          $g
+                    Label : INIT
+                      ;
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $g
+                        Label : RIGHT
+                          1
+                      Label : ELEMENT
+                        =
+                        Label : LEFT
+                          $h
+                        Label : RIGHT
+                          N
+                          Label : ARGUMENTS
+                            (
+                            Label : ARGUMENT
+                              $c
+                          Label : NAME
+                            N
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      $f
+                Label : NAME
+                  AK
+                Label : RETURNTYPE
+                  E
+                Label : STATIC
+                  static
+              Label : METHOD
+                AQ
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                    Label : TYPEHINT
+                      E
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      AU
+                      Label : ARGUMENTS
+                        (
+                        Label : ARGUMENT
+                          $c
+                      Label : NAME
+                        AU
+                Label : NAME
+                  AQ
+                Label : RETURNTYPE
+                  E
+                Label : STATIC
+                  static
+              Label : METHOD
+                AV
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                    Label : TYPEHINT
+                      E
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  AV
+                Label : RETURNTYPE
+                  E
+                Label : STATIC
+                  static
+              Label : METHOD
+                list
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                    Label : TYPEHINT
+                      E
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  list
+                Label : RETURNTYPE
+                  E
+                Label : STATIC
+                  static
+              Label : METHOD
+                empty
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                    Label : TYPEHINT
+                      E
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    return
+                    Label : RETURN
+                      ===
+                      Label : LEFT
+                        $c
                       Label : RIGHT
                         'AJ'
-                    Label : ELEMENT
-                      for
-                      Label : BLOCK
-                        {}
-                        Label : ELEMENT
-                          .=
-                          Label : LEFT
-                            $f
-                          Label : RIGHT
-                            $c
-                      Label : FINAL
-                        ;
-                        Label : ELEMENT
-                          <
-                          Label : LEFT
-                            $g
-                          Label : RIGHT
-                            $e
-                      Label : INCREMENT
-                        ;
-                        Label : ELEMENT
-                          ++
-                          Label : POSTPLUSPLUS
-                            $g
-                      Label : INIT
-                        ;
-                        Label : ELEMENT
-                          =
-                          Label : LEFT
-                            $g
-                          Label : RIGHT
-                            1
-                        Label : ELEMENT
-                          =
-                          Label : LEFT
-                            $h
-                          Label : RIGHT
-                            N
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                $c
-                            Label : NAME
-                              N
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        $f
-                  Label : NAME
-                    AK
-                  Label : RETURNTYPE
-                    E
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  AQ
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                      Label : TYPEHINT
-                        E
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        AU
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $c
-                        Label : NAME
-                          AU
-                  Label : NAME
-                    AQ
-                  Label : RETURNTYPE
-                    E
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  AV
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                      Label : TYPEHINT
-                        E
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    AV
-                  Label : RETURNTYPE
-                    E
-                  Label : STATIC
-                    static
-                Label : ELEMENT
-                  list
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                      Label : TYPEHINT
-                        E
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    list
-                  Label : RETURNTYPE
-                    E
-                  Label : STATIC
-                    static
-                Label : ELEMENT
+                Label : NAME
                   empty
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                      Label : TYPEHINT
-                        E
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      return
-                      Label : RETURN
-                        ===
-                        Label : LEFT
-                          $c
-                        Label : RIGHT
-                          'AJ'
-                  Label : NAME
-                    empty
-                  Label : RETURNTYPE
-                    E
-                  Label : STATIC
-                    static
+                Label : RETURNTYPE
+                  E
+                Label : STATIC
+                  static
               Label : NAME
                 C
           Label : NAME

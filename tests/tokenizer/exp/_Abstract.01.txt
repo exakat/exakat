@@ -12,19 +12,17 @@ Label : PROJECT
           class
           Label : ABSTRACT
             abstract
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              x
-              Label : ABSTRACT
-                abstract
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
+          Label : METHOD
+            x
+            Label : ABSTRACT
+              abstract
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
                 Void
-              Label : NAME
-                x
+            Label : BLOCK
+              Void
+            Label : NAME
+              x
           Label : NAME
             x

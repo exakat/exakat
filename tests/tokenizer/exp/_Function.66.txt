@@ -9,53 +9,51 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
-                  Label : TYPEHINT
-                    C
-                Label : ARGUMENT
-                  $c
-                  Label : DEFAULT
-                    null
-                  Label : TYPEHINT
-                    D
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  print
-                  Label : ARGUMENTS
-                    )
-                    Label : ARGUMENT
+          Label : METHOD
+            echo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $b
+                Label : TYPEHINT
+                  C
+              Label : ARGUMENT
+                $c
+                Label : DEFAULT
+                  null
+                Label : TYPEHINT
+                  D
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                print
+                Label : ARGUMENTS
+                  )
+                  Label : ARGUMENT
+                    E
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        'F'
+                      Label : ARGUMENT
+                        $c
+                    Label : NAME
                       E
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'F'
-                        Label : ARGUMENT
-                          $c
-                      Label : NAME
-                        E
-                  Label : NAME
-                    print
-                Label : ELEMENT
+                Label : NAME
                   print
-                  Label : ARGUMENTS
-                    'G'
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        $b
-                      Label : CONCAT
-                        'G'
-                  Label : NAME
-                    print
-              Label : NAME
-                echo
+              Label : ELEMENT
+                print
+                Label : ARGUMENTS
+                  'G'
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      $b
+                    Label : CONCAT
+                      'G'
+                Label : NAME
+                  print
+            Label : NAME
+              echo
           Label : NAME
             B

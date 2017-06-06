@@ -10,51 +10,49 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              var
-              Label : PPP
-                =
-                Label : LEFT
-                  $b
-                Label : RIGHT
-                  1
-              Label : VAR
-                var
-            Label : ELEMENT
-              var
-              Label : PPP
-                =
-                Label : LEFT
-                  $c
-                Label : RIGHT
-                  -2
-              Label : VAR
-                var
-            Label : ELEMENT
-              var
-              Label : PPP
-                =
-                Label : LEFT
-                  $d
-                Label : RIGHT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-              Label : VAR
-                var
-            Label : ELEMENT
-              var
-              Label : PPP
-                =
-                Label : LEFT
-                  $e
-                Label : RIGHT
-                  '23'
-              Label : VAR
-                var
           Label : NAME
             a
+          Label : PPP
+            var
+            Label : PPP
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                1
+            Label : VAR
+              var
+          Label : PPP
+            var
+            Label : PPP
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                -2
+            Label : VAR
+              var
+          Label : PPP
+            var
+            Label : PPP
+              =
+              Label : LEFT
+                $d
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+            Label : VAR
+              var
+          Label : PPP
+            var
+            Label : PPP
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                '23'
+            Label : VAR
+              var

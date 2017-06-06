@@ -10,80 +10,74 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'D'
-                  Label : NAME
-                    echo
-              Label : NAME
-                C
-              Label : PUBLIC
-                public
+                  Label : ARGUMENT
+                    'D'
+                Label : NAME
+                  echo
+            Label : NAME
+              C
+            Label : PUBLIC
+              public
           Label : NAME
             B
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              F
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  ::
-                  Label : CLASS
-                    G
-                  Label : METHOD
-                    H
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      H
-                Label : ELEMENT
-                  echo
+          Label : METHOD
+            F
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                ::
+                Label : CLASS
+                  G
+                Label : METHOD
+                  H
                   Label : ARGUMENTS
-                    echo
+                    (
                     Label : ARGUMENT
-                      'I'
+                      Void
                   Label : NAME
-                    echo
-              Label : NAME
-                F
-              Label : PUBLIC
-                public
+                    H
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'I'
+                Label : NAME
+                  echo
+            Label : NAME
+              F
+            Label : PUBLIC
+              public
           Label : NAME
             E
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : USE
-                L
           Label : EXTENDS
             K
           Label : NAME
             J
+          Label : USE
+            use
+            Label : USE
+              L
         Label : ELEMENT
           =
           Label : LEFT

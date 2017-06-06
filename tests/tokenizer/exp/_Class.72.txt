@@ -10,30 +10,18 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             b
           Label : NAME
             a
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             \b2
           Label : NAME
             a2
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             b3
           Label : IMPLEMENTS
@@ -42,10 +30,6 @@ Label : PROJECT
             a3
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             \b3
           Label : IMPLEMENTS
@@ -54,10 +38,6 @@ Label : PROJECT
             a23
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             \b3
           Label : IMPLEMENTS
@@ -66,10 +46,6 @@ Label : PROJECT
             a24
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             b4
           Label : IMPLEMENTS
@@ -80,10 +56,6 @@ Label : PROJECT
             a4
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             b4
           Label : IMPLEMENTS
@@ -96,10 +68,6 @@ Label : PROJECT
             a5
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             b4
           Label : IMPLEMENTS

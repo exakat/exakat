@@ -18,24 +18,22 @@ Label : PROJECT
                 D\E\F\C\H
             Label : ELEMENT
               interface
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  K
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    Void
-                  Label : NAME
-                    K
-                  Label : PUBLIC
-                    public
               Label : EXTENDS
                 H
                 Label : DEFINITION
                   D\E\F\C\H
+              Label : METHOD
+                K
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  Void
+                Label : NAME
+                  K
+                Label : PUBLIC
+                  public
               Label : NAME
                 I
             Label : ELEMENT

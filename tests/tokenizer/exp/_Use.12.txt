@@ -14,80 +14,58 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    a
-                  Label : PUBLIC
-                    public
-                  Label : STATIC
-                    static
               Label : DEFINITION
                 one_identifier
                 Label : DEFINITION
                   one_identifier
               Label : DEFINITION
                 one_identifier
+              Label : METHOD
+                a
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  a
+                Label : PUBLIC
+                  public
+                Label : STATIC
+                  static
               Label : NAME
                 one_identifier
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    a
-                  Label : PUBLIC
-                    public
-                  Label : STATIC
-                    static
               Label : DEFINITION
                 absolute_path
                 Label : DEFINITION
                   \absolute_path
               Label : DEFINITION
                 \absolute_path
+              Label : METHOD
+                a
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  a
+                Label : PUBLIC
+                  public
+                Label : STATIC
+                  static
               Label : NAME
                 absolute_path
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    a
-                  Label : PUBLIC
-                    public
-                  Label : STATIC
-                    static
               Label : DEFINITION
                 a1
                 Label : DEFINITION
@@ -98,30 +76,44 @@ Label : PROJECT
                     one_identifier3
               Label : DEFINITION
                 one_identifier3
+              Label : METHOD
+                a
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  a
+                Label : PUBLIC
+                  public
+                Label : STATIC
+                  static
               Label : NAME
                 one_identifier3
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    a
-                  Label : PUBLIC
-                    public
-                  Label : STATIC
-                    static
               Label : DEFINITION
                 \a1
+              Label : METHOD
+                a
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  a
+                Label : PUBLIC
+                  public
+                Label : STATIC
+                  static
               Label : NAME
                 a1
           Label : NAME
@@ -132,30 +124,28 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    a
-                  Label : PUBLIC
-                    public
-                  Label : STATIC
-                    static
               Label : DEFINITION
                 path
                 Label : DEFINITION
                   complex\path
               Label : DEFINITION
                 complex\path
+              Label : METHOD
+                a
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  a
+                Label : PUBLIC
+                  public
+                Label : STATIC
+                  static
               Label : NAME
                 path
           Label : NAME
@@ -166,30 +156,28 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    a
-                  Label : PUBLIC
-                    public
-                  Label : STATIC
-                    static
               Label : DEFINITION
                 path2
                 Label : DEFINITION
                   \absolute\complex\path2
               Label : DEFINITION
                 \absolute\complex\path2
+              Label : METHOD
+                a
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  a
+                Label : PUBLIC
+                  public
+                Label : STATIC
+                  static
               Label : NAME
                 path2
           Label : NAME

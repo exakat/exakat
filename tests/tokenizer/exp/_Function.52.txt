@@ -10,57 +10,55 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-                Label : ELEMENT
-                  =
-                  Label : LEFT
-                    ::
-                    Label : CLASS
-                      static
-                    Label : PROPERTY
-                      $a
-                  Label : RIGHT
-                    new
-                    Label : NEW
-                      C
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        C
-                Label : ELEMENT
-                  ->
-                  Label : METHOD
-                    D
+          Label : DEFINITION
+            static
+          Label : DEFINITION
+            static
+          Label : METHOD
+            B
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  ::
+                  Label : CLASS
+                    static
+                  Label : PROPERTY
+                    $a
+                Label : RIGHT
+                  new
+                  Label : NEW
+                    C
                     Label : ARGUMENTS
                       (
                       Label : ARGUMENT
                         Void
                     Label : NAME
-                      D
-                  Label : OBJECT
-                    ::
-                    Label : CLASS
-                      static
-                    Label : PROPERTY
-                      $a
-              Label : NAME
-                B
-          Label : DEFINITION
-            static
-          Label : DEFINITION
-            static
+                      C
+              Label : ELEMENT
+                ->
+                Label : METHOD
+                  D
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : NAME
+                    D
+                Label : OBJECT
+                  ::
+                  Label : CLASS
+                    static
+                  Label : PROPERTY
+                    $a
+            Label : NAME
+              B
           Label : NAME
             x

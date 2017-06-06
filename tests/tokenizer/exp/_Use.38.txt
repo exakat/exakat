@@ -10,48 +10,6 @@ Label : PROJECT
         ;
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              smallTalk
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'a'
-                  Label : NAME
-                    echo
-              Label : NAME
-                smallTalk
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              bigTalk
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'A'
-                  Label : NAME
-                    echo
-              Label : NAME
-                bigTalk
-              Label : PUBLIC
-                public
           Label : DEFINITION
             A
           Label : DEFINITION
@@ -64,52 +22,50 @@ Label : PROJECT
             A
           Label : DEFINITION, DEFINITION
             A
+          Label : METHOD
+            smallTalk
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'a'
+                Label : NAME
+                  echo
+            Label : NAME
+              smallTalk
+            Label : PUBLIC
+              public
+          Label : METHOD
+            bigTalk
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'A'
+                Label : NAME
+                  echo
+            Label : NAME
+              bigTalk
+            Label : PUBLIC
+              public
           Label : NAME
             A
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              smallTalk
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'b'
-                  Label : NAME
-                    echo
-              Label : NAME
-                smallTalk
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              bigTalk
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'B'
-                  Label : NAME
-                    echo
-              Label : NAME
-                bigTalk
-              Label : PUBLIC
-                public
           Label : DEFINITION
             B
           Label : DEFINITION
@@ -124,83 +80,119 @@ Label : PROJECT
             'b'
           Label : DEFINITION
             'B'
+          Label : METHOD
+            smallTalk
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'b'
+                Label : NAME
+                  echo
+            Label : NAME
+              smallTalk
+            Label : PUBLIC
+              public
+          Label : METHOD
+            bigTalk
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'B'
+                Label : NAME
+                  echo
+            Label : NAME
+              bigTalk
+            Label : PUBLIC
+              public
           Label : NAME
             B
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  insteadof
-                  Label : INSTEADOF
-                    A
-                  Label : NAME
-                    ::
-                    Label : CLASS
-                      B
-                    Label : CONSTANT
-                      smallTalk
-                Label : ELEMENT
-                  insteadof
-                  Label : INSTEADOF
-                    B
-                  Label : NAME
-                    ::
-                    Label : CLASS
-                      A
-                    Label : CONSTANT
-                      bigTalk
-              Label : USE
-                A
-              Label : USE
-                B
           Label : NAME
             Talker
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                insteadof
+                Label : INSTEADOF
+                  A
+                Label : NAME
+                  ::
+                  Label : CLASS
+                    B
+                  Label : CONSTANT
+                    smallTalk
+              Label : ELEMENT
+                insteadof
+                Label : INSTEADOF
+                  B
+                Label : NAME
+                  ::
+                  Label : CLASS
+                    A
+                  Label : CONSTANT
+                    bigTalk
+            Label : USE
+              A
+            Label : USE
+              B
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  insteadof
-                  Label : INSTEADOF
-                    A
-                  Label : NAME
-                    ::
-                    Label : CLASS
-                      B
-                    Label : CONSTANT
-                      smallTalk
-                Label : ELEMENT
-                  insteadof
-                  Label : INSTEADOF
-                    B
-                  Label : NAME
-                    ::
-                    Label : CLASS
-                      A
-                    Label : CONSTANT
-                      bigTalk
-                Label : ELEMENT
-                  as
-                  Label : AS
-                    talk
-                  Label : NAME
-                    ::
-                    Label : CLASS
-                      B
-                    Label : CONSTANT
-                      bigTalk
-              Label : USE
-                A
-              Label : USE
-                B
           Label : NAME
             Aliased_Talker
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                insteadof
+                Label : INSTEADOF
+                  A
+                Label : NAME
+                  ::
+                  Label : CLASS
+                    B
+                  Label : CONSTANT
+                    smallTalk
+              Label : ELEMENT
+                insteadof
+                Label : INSTEADOF
+                  B
+                Label : NAME
+                  ::
+                  Label : CLASS
+                    A
+                  Label : CONSTANT
+                    bigTalk
+              Label : ELEMENT
+                as
+                Label : AS
+                  talk
+                Label : NAME
+                  ::
+                  Label : CLASS
+                    B
+                  Label : CONSTANT
+                    bigTalk
+            Label : USE
+              A
+            Label : USE
+              B

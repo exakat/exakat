@@ -18,23 +18,21 @@ Label : PROJECT
             $c
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              protected
-              Label : PPP
-                =
-                Label : LEFT
-                  $z
-                Label : RIGHT
-                  3
-              Label : PPP
-                $x
-              Label : PPP
-                $y
-              Label : PPP
-                $a
-              Label : PROTECTED
-                protected
           Label : NAME
             x
+          Label : PPP
+            protected
+            Label : PPP
+              =
+              Label : LEFT
+                $z
+              Label : RIGHT
+                3
+            Label : PPP
+              $x
+            Label : PPP
+              $y
+            Label : PPP
+              $a
+            Label : PROTECTED
+              protected

@@ -14,16 +14,14 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+              Label : CONST
+                const
+                Label : CONST
                   const
-                  Label : CONST
-                    const
-                    Label : NAME
-                      a
-                    Label : VALUE
-                      2
+                  Label : NAME
+                    a
+                  Label : VALUE
+                    2
               Label : DEFINITION
                 one_identifier
                 Label : DEFINITION
@@ -34,16 +32,14 @@ Label : PROJECT
                 one_identifier
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+              Label : CONST
+                const
+                Label : CONST
                   const
-                  Label : CONST
-                    const
-                    Label : NAME
-                      a
-                    Label : VALUE
-                      2
+                  Label : NAME
+                    a
+                  Label : VALUE
+                    2
               Label : DEFINITION
                 \absolute_path
               Label : DEFINITION
@@ -52,16 +48,14 @@ Label : PROJECT
                 absolute_path
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+              Label : CONST
+                const
+                Label : CONST
                   const
-                  Label : CONST
-                    const
-                    Label : NAME
-                      a
-                    Label : VALUE
-                      2
+                  Label : NAME
+                    a
+                  Label : VALUE
+                    2
               Label : DEFINITION
                 a1
                 Label : DEFINITION
@@ -76,16 +70,14 @@ Label : PROJECT
                 one_identifier3
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+              Label : CONST
+                const
+                Label : CONST
                   const
-                  Label : CONST
-                    const
-                    Label : NAME
-                      a
-                    Label : VALUE
-                      2
+                  Label : NAME
+                    a
+                  Label : VALUE
+                    2
               Label : DEFINITION
                 \a1
               Label : NAME
@@ -98,16 +90,14 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+              Label : CONST
+                const
+                Label : CONST
                   const
-                  Label : CONST
-                    const
-                    Label : NAME
-                      a
-                    Label : VALUE
-                      2
+                  Label : NAME
+                    a
+                  Label : VALUE
+                    2
               Label : DEFINITION
                 path
                 Label : DEFINITION
@@ -124,16 +114,14 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+              Label : CONST
+                const
+                Label : CONST
                   const
-                  Label : CONST
-                    const
-                    Label : NAME
-                      a
-                    Label : VALUE
-                      2
+                  Label : NAME
+                    a
+                  Label : VALUE
+                    2
               Label : DEFINITION
                 path2
                 Label : DEFINITION

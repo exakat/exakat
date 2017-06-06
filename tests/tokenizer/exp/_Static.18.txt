@@ -14,49 +14,47 @@ Label : PROJECT
             $inGlobal
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              static
-              Label : PPP
-                =
-                Label : LEFT
-                  $ps
-                Label : RIGHT
-                  1
-              Label : PUBLIC
-                public
-              Label : STATIC
+          Label : METHOD
+            y
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
                 static
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $sp
-                Label : RIGHT
-                  2
-              Label : PUBLIC
-                public
-              Label : STATIC
-                static
-            Label : ELEMENT
+                Label : STATIC
+                  =
+                  Label : LEFT
+                    $inFunction
+                  Label : RIGHT
+                    1
+            Label : NAME
               y
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  static
-                  Label : STATIC
-                    =
-                    Label : LEFT
-                      $inFunction
-                    Label : RIGHT
-                      1
-              Label : NAME
-                y
           Label : NAME
             a
+          Label : PPP
+            static
+            Label : PPP
+              =
+              Label : LEFT
+                $ps
+              Label : RIGHT
+                1
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $sp
+              Label : RIGHT
+                2
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static

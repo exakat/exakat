@@ -10,25 +10,23 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              var
-              Label : PPP
-                =
-                Label : LEFT
-                  $g
-                Label : RIGHT
-                  4
-              Label : PPP
-                =
-                Label : LEFT
-                  $h
-                Label : RIGHT
-                  5
-              Label : PPP
-                $e
-              Label : VAR
-                var
           Label : NAME
             x
+          Label : PPP
+            var
+            Label : PPP
+              =
+              Label : LEFT
+                $g
+              Label : RIGHT
+                4
+            Label : PPP
+              =
+              Label : LEFT
+                $h
+              Label : RIGHT
+                5
+            Label : PPP
+              $e
+            Label : VAR
+              var

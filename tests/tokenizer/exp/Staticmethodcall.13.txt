@@ -18,10 +18,6 @@ Label : PROJECT
                 B\F
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : EXTENDS
                 F\D
                 Label : DEFINITION

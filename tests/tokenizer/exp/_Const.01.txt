@@ -10,69 +10,67 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              private
-              Label : PPP
-                =
-                Label : LEFT
-                  $a
-                Label : RIGHT
-                  'b'
-              Label : PRIVATE
-                private
-            Label : ELEMENT
+          Label : CONST
+            const
+            Label : CONST
               const
-              Label : CONST
-                const
-                Label : NAME
-                  C
-                Label : VALUE
-                  1
-            Label : ELEMENT
-              const
-              Label : CONST
-                const
-                Label : NAME
-                  D
-                Label : VALUE
-                  '2'
-            Label : ELEMENT
-              const
-              Label : CONST
-                const
-                Label : NAME
-                  E
-                Label : VALUE
-                  ::
-                  Label : CLASS
-                    F
-                  Label : CONSTANT
-                    G
-            Label : ELEMENT
-              static
-              Label : PPP
-                $E
-              Label : PROTECTED
-                protected
-              Label : STATIC
-                static
-            Label : ELEMENT
-              f
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : NAME
-                f
-              Label : PUBLIC
-                public
-              Label : STATIC
-                static
+                C
+              Label : VALUE
+                1
+          Label : CONST
+            const
+            Label : CONST
+              const
+              Label : NAME
+                D
+              Label : VALUE
+                '2'
+          Label : CONST
+            const
+            Label : CONST
+              const
+              Label : NAME
+                E
+              Label : VALUE
+                ::
+                Label : CLASS
+                  F
+                Label : CONSTANT
+                  G
+          Label : METHOD
+            f
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
+              f
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
           Label : NAME
             x
+          Label : PPP
+            private
+            Label : PPP
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                'b'
+            Label : PRIVATE
+              private
+          Label : PPP
+            static
+            Label : PPP
+              $E
+            Label : PROTECTED
+              protected
+            Label : STATIC
+              static

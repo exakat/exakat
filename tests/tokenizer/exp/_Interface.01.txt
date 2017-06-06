@@ -10,9 +10,5 @@ Label : PROJECT
         ;
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : NAME
             a

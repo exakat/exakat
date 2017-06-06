@@ -18,41 +18,39 @@ Label : PROJECT
                 D\E
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  use
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      as
-                      Label : AS
-                        Void
-                      Label : NAME
-                        L
-                      Label : PUBLIC
-                        public
-                    Label : ELEMENT
-                      as
-                      Label : AS
-                        Void
-                      Label : NAME
-                        M
-                      Label : PRIVATE
-                        private
-                    Label : ELEMENT
-                      as
-                      Label : AS
-                        Void
-                      Label : NAME
-                        N
-                      Label : PROTECTED
-                        protected
-                  Label : USE
-                    \H\I\J\K
               Label : EXTENDS
                 G
               Label : NAME
                 F
+              Label : USE
+                use
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    as
+                    Label : AS
+                      Void
+                    Label : NAME
+                      L
+                    Label : PUBLIC
+                      public
+                  Label : ELEMENT
+                    as
+                    Label : AS
+                      Void
+                    Label : NAME
+                      M
+                    Label : PRIVATE
+                      private
+                  Label : ELEMENT
+                    as
+                    Label : AS
+                      Void
+                    Label : NAME
+                      N
+                    Label : PROTECTED
+                      protected
+                Label : USE
+                  \H\I\J\K
           Label : NAME
             B\C

@@ -10,42 +10,38 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              static
-              Label : PPP
-                =
-                Label : LEFT
-                  $bar
-                Label : RIGHT
-                  'Nar'
-              Label : STATIC
-                static
           Label : DEFINITION
             Foo
           Label : DEFINITION
             Foo
           Label : NAME
             Foo
+          Label : PPP
+            static
+            Label : PPP
+              =
+              Label : LEFT
+                $bar
+              Label : RIGHT
+                'Nar'
+            Label : STATIC
+              static
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              static
-              Label : PPP
-                =
-                Label : LEFT
-                  $e
-                Label : RIGHT
-                  'yes'
-              Label : STATIC
-                static
           Label : DEFINITION
             'Nar'
           Label : NAME
             Nar
+          Label : PPP
+            static
+            Label : PPP
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                'yes'
+            Label : STATIC
+              static
         Label : ELEMENT
           echo
           Label : ARGUMENTS

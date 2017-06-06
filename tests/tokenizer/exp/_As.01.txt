@@ -9,25 +9,23 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  as
-                  Label : AS
-                    I
-                  Label : NAME
-                    ::
-                    Label : CLASS
-                      F
-                    Label : CONSTANT
-                      H
-              Label : USE
-                \D\E\F
           Label : EXTENDS
             C
           Label : NAME
             B
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                as
+                Label : AS
+                  I
+                Label : NAME
+                  ::
+                  Label : CLASS
+                    F
+                  Label : CONSTANT
+                    H
+            Label : USE
+              \D\E\F

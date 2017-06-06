@@ -10,29 +10,27 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              protected
-              Label : PPP
-                $a
-              Label : PPP
-                $b
-              Label : PROTECTED
-                protected
-            Label : ELEMENT
+          Label : METHOD
+            C
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  $c
+            Label : NAME
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    $c
-              Label : NAME
-                C
           Label : NAME
             B
+          Label : PPP
+            protected
+            Label : PPP
+              $a
+            Label : PPP
+              $b
+            Label : PROTECTED
+              protected

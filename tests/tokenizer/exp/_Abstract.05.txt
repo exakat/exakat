@@ -12,59 +12,57 @@ Label : PROJECT
           class
           Label : ABSTRACT
             abstract
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            a
+            Label : ABSTRACT
+              abstract
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              Void
+            Label : NAME
               a
-              Label : ABSTRACT
-                abstract
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
                 Void
-              Label : NAME
-                a
-            Label : ELEMENT
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : NAME
-                b
-              Label : PROTECTED
-                protected
-            Label : ELEMENT
-              c
-              Label : ABSTRACT
-                abstract
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
+            Label : PROTECTED
+              protected
+          Label : METHOD
+            c
+            Label : ABSTRACT
+              abstract
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
                 Void
-              Label : NAME
-                c
-            Label : ELEMENT
+            Label : BLOCK
+              Void
+            Label : NAME
+              c
+          Label : METHOD
+            d
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
               d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : NAME
-                d
-              Label : STATIC
-                static
+            Label : STATIC
+              static
           Label : NAME
             x

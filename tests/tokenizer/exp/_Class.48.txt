@@ -10,45 +10,43 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              static
-              Label : PPP
-                $a
-              Label : PUBLIC
-                public
-              Label : STATIC
-                static
-            Label : ELEMENT
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : NAME
-                b
-              Label : PUBLIC
-                public
-              Label : STATIC
-                static
-            Label : ELEMENT
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
               c
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : NAME
-                c
-              Label : PUBLIC
-                public
+            Label : PUBLIC
+              public
           Label : NAME
             x
+          Label : PPP
+            static
+            Label : PPP
+              $a
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static

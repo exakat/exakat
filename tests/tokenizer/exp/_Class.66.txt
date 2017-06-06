@@ -10,10 +10,6 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : EXTENDS
             B
           Label : IMPLEMENTS
@@ -24,10 +20,6 @@ Label : PROJECT
             A1
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : EXTENDS
             B
           Label : IMPLEMENTS
@@ -40,10 +32,6 @@ Label : PROJECT
             A2
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             C
           Label : IMPLEMENTS
@@ -56,10 +44,6 @@ Label : PROJECT
             A3
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             \C
           Label : IMPLEMENTS

@@ -184,26 +184,6 @@ Label : PROJECT
                 DF3
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  __construct
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      print
-                      Label : ARGUMENTS
-                        __METHOD__
-                        Label : ARGUMENT
-                          __METHOD__
-                      Label : NAME
-                        print
-                  Label : NAME
-                    __construct
               Label : DEFINITION
                 DF2
                 Label : DEFINITION
@@ -218,6 +198,24 @@ Label : PROJECT
                   DF2
                   Label : DEFINITION
                     DF2
+              Label : METHOD
+                __construct
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    print
+                    Label : ARGUMENTS
+                      __METHOD__
+                      Label : ARGUMENT
+                        __METHOD__
+                    Label : NAME
+                      print
+                Label : NAME
+                  __construct
               Label : NAME
                 DF2
           Label : NAME

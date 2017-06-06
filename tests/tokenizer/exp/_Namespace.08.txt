@@ -36,10 +36,6 @@ Label : PROJECT
                   1
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : DEFINITION
                 MyProject\Connection
               Label : NAME

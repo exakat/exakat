@@ -10,71 +10,65 @@ Label : PROJECT
         ;
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              sayHello
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+          Label : DEFINITION
+            HelloWorld
+          Label : DEFINITION
+            HelloWorld
+          Label : METHOD
+            sayHello
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'Hello World!'
-                  Label : NAME
-                    echo
-              Label : NAME
-                sayHello
-              Label : PUBLIC
-                public
-          Label : DEFINITION
-            HelloWorld
-          Label : DEFINITION
-            HelloWorld
+                  Label : ARGUMENT
+                    'Hello World!'
+                Label : NAME
+                  echo
+            Label : NAME
+              sayHello
+            Label : PUBLIC
+              public
           Label : NAME
             HelloWorld
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  as
-                  Label : AS
-                    Void
-                  Label : NAME
-                    sayHello
-                  Label : PROTECTED
-                    protected
-              Label : USE
-                HelloWorld
           Label : NAME
             MyClass1
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                as
+                Label : AS
+                  Void
+                Label : NAME
+                  sayHello
+                Label : PROTECTED
+                  protected
+            Label : USE
+              HelloWorld
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  as
-                  Label : AS
-                    myPrivateHello
-                  Label : NAME
-                    sayHello
-                  Label : PRIVATE
-                    private
-              Label : USE
-                HelloWorld
           Label : NAME
             MyClass2
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                as
+                Label : AS
+                  myPrivateHello
+                Label : NAME
+                  sayHello
+                Label : PRIVATE
+                  private
+            Label : USE
+              HelloWorld

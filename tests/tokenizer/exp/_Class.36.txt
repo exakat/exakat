@@ -10,19 +10,17 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : CONST
+            const
+            Label : CONST
               const
-              Label : CONST
-                const
-                Label : NAME
-                  a
-                Label : VALUE
-                  ::
-                  Label : CLASS
-                    b
-                  Label : CONSTANT
-                    c
+              Label : NAME
+                a
+              Label : VALUE
+                ::
+                Label : CLASS
+                  b
+                Label : CONSTANT
+                  c
           Label : NAME
             x

@@ -10,10 +10,6 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             a
           Label : IMPLEMENTS

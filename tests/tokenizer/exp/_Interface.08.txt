@@ -10,23 +10,21 @@ Label : PROJECT
         ;
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              E
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                Void
-              Label : NAME
-                E
-              Label : PUBLIC
-                public
           Label : EXTENDS
             C
           Label : EXTENDS
             D
+          Label : METHOD
+            E
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              Void
+            Label : NAME
+              E
+            Label : PUBLIC
+              public
           Label : NAME
             B

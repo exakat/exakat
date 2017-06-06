@@ -12,53 +12,51 @@ Label : PROJECT
           class
           Label : ABSTRACT
             abstract
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : FINAL
+              final
+            Label : NAME
               a
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : FINAL
-                final
-              Label : NAME
-                a
-            Label : ELEMENT
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : FINAL
+              final
+            Label : NAME
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : FINAL
-                final
-              Label : NAME
-                b
-              Label : PUBLIC
-                public
-            Label : ELEMENT
+            Label : PUBLIC
+              public
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : FINAL
+              final
+            Label : NAME
               c
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : FINAL
-                final
-              Label : NAME
-                c
-              Label : STATIC
-                static
+            Label : STATIC
+              static
           Label : NAME
             x

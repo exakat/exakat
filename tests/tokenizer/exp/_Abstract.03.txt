@@ -12,49 +12,47 @@ Label : PROJECT
           class
           Label : ABSTRACT
             abstract
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            a
+            Label : ABSTRACT
+              abstract
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              Void
+            Label : NAME
               a
-              Label : ABSTRACT
-                abstract
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
+            Label : PUBLIC
+              public
+          Label : METHOD
+            b
+            Label : ABSTRACT
+              abstract
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
                 Void
-              Label : NAME
-                a
-              Label : PUBLIC
-                public
-            Label : ELEMENT
+            Label : BLOCK
+              Void
+            Label : NAME
               b
-              Label : ABSTRACT
-                abstract
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
+            Label : PROTECTED
+              protected
+          Label : METHOD
+            d
+            Label : ABSTRACT
+              abstract
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
                 Void
-              Label : NAME
-                b
-              Label : PROTECTED
-                protected
-            Label : ELEMENT
+            Label : BLOCK
+              Void
+            Label : NAME
               d
-              Label : ABSTRACT
-                abstract
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                Void
-              Label : NAME
-                d
-              Label : STATIC
-                static
+            Label : STATIC
+              static
           Label : NAME
             x

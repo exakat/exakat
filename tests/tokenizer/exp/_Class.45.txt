@@ -120,41 +120,39 @@ Label : PROJECT
             define
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              var
-              Label : PPP
-                =
-                Label : LEFT
-                  $a
-                Label : RIGHT
-                  0
-              Label : VAR
-                var
-            Label : ELEMENT
-              var
-              Label : PPP
-                $b
-              Label : VAR
-                var
-            Label : ELEMENT
-              var
-              Label : PPP
-                $c
-              Label : VAR
-                var
-            Label : ELEMENT
-              var
-              Label : PPP
-                $d
-              Label : VAR
-                var
-            Label : ELEMENT
-              var
-              Label : PPP
-                $e
-              Label : VAR
-                var
           Label : NAME
             dbstuff
+          Label : PPP
+            var
+            Label : PPP
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                0
+            Label : VAR
+              var
+          Label : PPP
+            var
+            Label : PPP
+              $b
+            Label : VAR
+              var
+          Label : PPP
+            var
+            Label : PPP
+              $c
+            Label : VAR
+              var
+          Label : PPP
+            var
+            Label : PPP
+              $d
+            Label : VAR
+              var
+          Label : PPP
+            var
+            Label : PPP
+              $e
+            Label : VAR
+              var

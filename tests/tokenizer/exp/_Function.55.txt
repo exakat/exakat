@@ -36,30 +36,28 @@ Label : PROJECT
             x2
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            x3
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $a
+            Label : BLOCK
+              Void
+            Label : NAME
               x3
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a
-              Label : BLOCK
-                Void
-              Label : NAME
-                x3
-            Label : ELEMENT
+          Label : METHOD
+            x4
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $b
+            Label : BLOCK
+              Void
+            Label : NAME
               x4
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
-              Label : BLOCK
-                Void
-              Label : NAME
-                x4
-              Label : RETURNTYPE
-                Stdclass
+            Label : RETURNTYPE
+              Stdclass
           Label : NAME
             i
         Label : ELEMENT
@@ -142,30 +140,28 @@ Label : PROJECT
             x2r
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            x3r
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $a
+            Label : BLOCK
+              Void
+            Label : NAME
               x3r
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a
-              Label : BLOCK
-                Void
-              Label : NAME
-                x3r
-            Label : ELEMENT
+          Label : METHOD
+            x4r
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $b
+            Label : BLOCK
+              Void
+            Label : NAME
               x4r
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
-              Label : BLOCK
-                Void
-              Label : NAME
-                x4r
-              Label : RETURNTYPE
-                Stdclass
+            Label : RETURNTYPE
+              Stdclass
           Label : NAME
             i
         Label : ELEMENT

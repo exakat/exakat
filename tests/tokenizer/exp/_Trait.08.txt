@@ -14,21 +14,15 @@ Label : PROJECT
              
             Label : ELEMENT
               trait
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : NAME
                 t2
             Label : ELEMENT
               trait
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  use
-                  Label : USE
-                    namespace\t2
               Label : NAME
                 t
+              Label : USE
+                use
+                Label : USE
+                  namespace\t2
           Label : NAME
             A

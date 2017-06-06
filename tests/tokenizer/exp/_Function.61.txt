@@ -14,36 +14,34 @@ Label : PROJECT
              
             Label : ELEMENT
               interface
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+              Label : METHOD
+                do
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $b
+                    Label : TYPEHINT
+                      D
+                Label : BLOCK
+                  Void
+                Label : NAME
                   do
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $b
-                      Label : TYPEHINT
-                        D
-                  Label : BLOCK
-                    Void
-                  Label : NAME
-                    do
-                  Label : PUBLIC
-                    public
-                Label : ELEMENT
+                Label : PUBLIC
+                  public
+              Label : METHOD
+                foreach
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $c
+                  Label : ARGUMENT
+                    $d
+                Label : BLOCK
+                  Void
+                Label : NAME
                   foreach
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                    Label : ARGUMENT
-                      $d
-                  Label : BLOCK
-                    Void
-                  Label : NAME
-                    foreach
-                  Label : PUBLIC
-                    public
+                Label : PUBLIC
+                  public
               Label : NAME
                 C
           Label : NAME

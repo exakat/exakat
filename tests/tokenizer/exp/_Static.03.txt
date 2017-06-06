@@ -10,31 +10,29 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              public
-              Label : PPP
-                $b
-              Label : PUBLIC
-                public
-              Label : STATIC
-                static
-            Label : ELEMENT
-              private
-              Label : PPP
-                $d
-              Label : PRIVATE
-                private
-              Label : STATIC
-                static
-            Label : ELEMENT
-              protected
-              Label : PPP
-                $c
-              Label : PROTECTED
-                protected
-              Label : STATIC
-                static
           Label : NAME
             a
+          Label : PPP
+            public
+            Label : PPP
+              $b
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
+          Label : PPP
+            private
+            Label : PPP
+              $d
+            Label : PRIVATE
+              private
+            Label : STATIC
+              static
+          Label : PPP
+            protected
+            Label : PPP
+              $c
+            Label : PROTECTED
+              protected
+            Label : STATIC
+              static

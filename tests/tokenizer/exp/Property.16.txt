@@ -10,21 +10,19 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $bar
-                Label : RIGHT
-                  <<<'EOT'
-
-                  Label : CONCAT
-                    bar
-
-              Label : PUBLIC
-                public
           Label : NAME
             foo
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $bar
+              Label : RIGHT
+                <<<'EOT'
+
+                Label : CONCAT
+                  bar
+
+            Label : PUBLIC
+              public

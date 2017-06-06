@@ -24,24 +24,22 @@ Label : PROJECT
               new
               Label : NEW
                 class
-                Label : BLOCK
-                  {}
-                  Label : ELEMENT
-                    main
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : BLOCK
-                      {}
-                      Label : ELEMENT
-                        Void
-                    Label : NAME
-                      main
-                    Label : PUBLIC
-                      public
                 Label : EXTENDS
                   ConsoleProgram
+                Label : METHOD
+                  main
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      Void
+                  Label : NAME
+                    main
+                  Label : PUBLIC
+                    public
         Label : ELEMENT
           return
           Label : RETURN
@@ -52,42 +50,24 @@ Label : PROJECT
                 (
                 Label : ARGUMENT
                   $controller
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  __construct
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $controller
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    __construct
-                  Label : PUBLIC
-                    public
               Label : IMPLEMENTS
                 Page
+              Label : METHOD
+                __construct
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    $controller
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  __construct
+                Label : PUBLIC
+                  public
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              __construct
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $controller
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : NAME
-                __construct
-              Label : PUBLIC
-                public
           Label : DEFINITION
             MyPage
           Label : DEFINITION
@@ -100,6 +80,20 @@ Label : PROJECT
               MyPage
           Label : IMPLEMENTS
             Page
+          Label : METHOD
+            __construct
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $controller
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
+              __construct
+            Label : PUBLIC
+              public
           Label : NAME
             MyPage
         Label : ELEMENT
@@ -124,9 +118,5 @@ Label : PROJECT
                 (
                 Label : ARGUMENT
                   $path
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : EXTENDS
                 DirectoryIterator

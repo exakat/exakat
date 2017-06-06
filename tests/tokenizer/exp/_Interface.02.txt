@@ -10,17 +10,15 @@ Label : PROJECT
         ;
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              y
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
+          Label : METHOD
+            y
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
                 Void
-              Label : NAME
-                y
+            Label : BLOCK
+              Void
+            Label : NAME
+              y
           Label : NAME
             x

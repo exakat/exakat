@@ -9,67 +9,61 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            __clone
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : FINAL
+              final
+            Label : NAME
               __clone
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : FINAL
-                final
-              Label : NAME
-                __clone
-              Label : PRIVATE
-                private
+            Label : PRIVATE
+              private
           Label : NAME
             x
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            __clone
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : FINAL
+              final
+            Label : NAME
               __clone
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : FINAL
-                final
-              Label : NAME
-                __clone
-              Label : PUBLIC
-                public
+            Label : PUBLIC
+              public
           Label : NAME
             x2
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            __clone
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : FINAL
+              final
+            Label : NAME
               __clone
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : FINAL
-                final
-              Label : NAME
-                __clone
-              Label : PROTECTED
-                protected
+            Label : PROTECTED
+              protected
           Label : NAME
             x3

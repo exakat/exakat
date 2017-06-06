@@ -14,10 +14,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : DEFINITION
                 ParentClass
               Label : DEFINITION, DEFINITION
@@ -26,56 +22,6 @@ Label : PROJECT
                 ParentClass
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  x
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      echo
-                      Label : ARGUMENTS
-                        echo
-                        Label : ARGUMENT
-                          ::
-                          Label : CLASS
-                            self
-                          Label : CLASS
-                            class
-                      Label : NAME
-                        echo
-                    Label : ELEMENT
-                      echo
-                      Label : ARGUMENTS
-                        echo
-                        Label : ARGUMENT
-                          ::
-                          Label : CLASS
-                            static
-                          Label : CLASS
-                            class
-                      Label : NAME
-                        echo
-                    Label : ELEMENT
-                      echo
-                      Label : ARGUMENTS
-                        echo
-                        Label : ARGUMENT
-                          ::
-                          Label : CLASS
-                            parent
-                          Label : CLASS
-                            class
-                      Label : NAME
-                        echo
-                  Label : NAME
-                    x
-                  Label : STATIC
-                    static
               Label : DEFINITION
                 static
               Label : DEFINITION
@@ -88,6 +34,54 @@ Label : PROJECT
                 self
               Label : EXTENDS
                 ParentClass
+              Label : METHOD
+                x
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    echo
+                    Label : ARGUMENTS
+                      echo
+                      Label : ARGUMENT
+                        ::
+                        Label : CLASS
+                          self
+                        Label : CLASS
+                          class
+                    Label : NAME
+                      echo
+                  Label : ELEMENT
+                    echo
+                    Label : ARGUMENTS
+                      echo
+                      Label : ARGUMENT
+                        ::
+                        Label : CLASS
+                          static
+                        Label : CLASS
+                          class
+                    Label : NAME
+                      echo
+                  Label : ELEMENT
+                    echo
+                    Label : ARGUMENTS
+                      echo
+                      Label : ARGUMENT
+                        ::
+                        Label : CLASS
+                          parent
+                        Label : CLASS
+                          class
+                    Label : NAME
+                      echo
+                Label : NAME
+                  x
+                Label : STATIC
+                  static
               Label : NAME
                 ClassName
             Label : ELEMENT

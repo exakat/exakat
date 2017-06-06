@@ -20,31 +20,29 @@ Label : PROJECT
                   (
                   Label : ARGUMENT
                     $i
-                Label : BLOCK
-                  {}
-                  Label : ELEMENT
-                    __construct
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $i
-                    Label : BLOCK
-                      {}
-                      Label : ELEMENT
-                        =
-                        Label : LEFT
-                          ->
-                          Label : OBJECT
-                            $this
-                          Label : PROPERTY
-                            i
-                        Label : RIGHT
-                          $i
-                    Label : NAME
-                      __construct
-                    Label : PUBLIC
-                      public
                 Label : DEFINITION
                   $this
+                Label : METHOD
+                  __construct
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $i
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      =
+                      Label : LEFT
+                        ->
+                        Label : OBJECT
+                          $this
+                        Label : PROPERTY
+                          i
+                      Label : RIGHT
+                        $i
+                  Label : NAME
+                    __construct
+                  Label : PUBLIC
+                    public
           Label : NAME
             var_dump

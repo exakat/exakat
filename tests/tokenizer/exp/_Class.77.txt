@@ -14,34 +14,18 @@ Label : PROJECT
              
             Label : ELEMENT
               interface
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : NAME
                 a
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : NAME
                 b
             Label : ELEMENT
               interface
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : NAME
                 d
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : EXTENDS
                 namespace\b
               Label : IMPLEMENTS

@@ -10,21 +10,19 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              protected
-              Label : PPP
-                =
-                Label : LEFT
-                  $a
-                Label : RIGHT
-                  ::
-                  Label : CLASS
-                    b
-                  Label : CONSTANT
-                    c
-              Label : PROTECTED
-                protected
           Label : NAME
             x
+          Label : PPP
+            protected
+            Label : PPP
+              =
+              Label : LEFT
+                $a
+              Label : RIGHT
+                ::
+                Label : CLASS
+                  b
+                Label : CONSTANT
+                  c
+            Label : PROTECTED
+              protected

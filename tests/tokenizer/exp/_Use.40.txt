@@ -120,10 +120,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : DEFINITION
                 b\d
                 Label : ARGUMENTS
@@ -156,10 +152,6 @@ Label : PROJECT
             {}
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : DEFINITION
                 b
                 Label : DEFINITION

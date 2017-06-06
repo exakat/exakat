@@ -14,34 +14,32 @@ Label : PROJECT
              
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  exit
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      exit
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          ->
-                          Label : OBJECT
-                            $this
-                          Label : PROPERTY
-                            d
-                      Label : NAME
-                        exit
-                  Label : NAME
-                    exit
-                  Label : PROTECTED
-                    protected
               Label : DEFINITION
                 $this
+              Label : METHOD
+                exit
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    exit
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        ->
+                        Label : OBJECT
+                          $this
+                        Label : PROPERTY
+                          d
+                    Label : NAME
+                      exit
+                Label : NAME
+                  exit
+                Label : PROTECTED
+                  protected
               Label : NAME
                 b
           Label : NAME

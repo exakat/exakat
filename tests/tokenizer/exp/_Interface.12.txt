@@ -10,10 +10,6 @@ Label : PROJECT
         ;
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : DEFINITION
             A
           Label : DEFINITION
@@ -22,10 +18,6 @@ Label : PROJECT
             A
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : DEFINITION
             B
           Label : EXTENDS
@@ -34,10 +26,6 @@ Label : PROJECT
             B
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : IMPLEMENTS
             B
           Label : IMPLEMENTS

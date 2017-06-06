@@ -10,24 +10,28 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              a
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  new
-                  Label : NEW
-                    class
+          Label : METHOD
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                new
+                Label : NEW
+                  class
+                  Label : METHOD
+                    bInAnomyous
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
                     Label : BLOCK
                       {}
                       Label : ELEMENT
-                        bInAnomyous
+                        foo
                         Label : ARGUMENTS
                           (
                           Label : ARGUMENT
@@ -35,20 +39,12 @@ Label : PROJECT
                         Label : BLOCK
                           {}
                           Label : ELEMENT
-                            foo
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
-                            Label : BLOCK
-                              {}
-                              Label : ELEMENT
-                                Void
-                            Label : NAME
-                              foo
+                            Void
                         Label : NAME
-                          bInAnomyous
-              Label : NAME
-                a
+                          foo
+                    Label : NAME
+                      bInAnomyous
+            Label : NAME
+              a
           Label : NAME
             x

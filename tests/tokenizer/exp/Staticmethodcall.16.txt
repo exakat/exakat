@@ -20,36 +20,34 @@ Label : PROJECT
               1
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              method
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        __METHOD__
-                      Label : CONCAT
-                        "\n"
-                  Label : NAME
-                    echo
-              Label : NAME
-                method
-              Label : STATIC
-                static
           Label : DEFINITION
             C
           Label : DEFINITION
             \C
+          Label : METHOD
+            method
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      __METHOD__
+                    Label : CONCAT
+                      "\n"
+                Label : NAME
+                  echo
+            Label : NAME
+              method
+            Label : STATIC
+              static
           Label : NAME
             C
         Label : ELEMENT

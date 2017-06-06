@@ -22,10 +22,6 @@ Label : PROJECT
                   1
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : NAME
                 Connection
             Label : ELEMENT
@@ -56,10 +52,6 @@ Label : PROJECT
                   1
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : NAME
                 Connection
             Label : ELEMENT

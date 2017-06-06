@@ -1,6 +1,6 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Interface.13.php
+  ./tests/tokenizer/source/_Interface.15.php
   Label : FILE
     ;
     Label : ELEMENT
@@ -9,54 +9,54 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          class
-          Label : METHOD
-            foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-                Label : TYPEHINT
-                  self
-            Label : BLOCK
-              {}
-              Label : ELEMENT
-                Void
-            Label : NAME
-              foo
-          Label : NAME
-            c
-        Label : ELEMENT
           interface
           Label : METHOD
-            foo
+            D
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                $a
+                $f
                 Label : TYPEHINT
-                  self
+                  E
             Label : BLOCK
               Void
             Label : NAME
-              foo
+              D
           Label : NAME
-            i
+            A
         Label : ELEMENT
           trait
           Label : METHOD
-            foo
+            D
             Label : ARGUMENTS
               (
               Label : ARGUMENT
-                $a
+                $f
                 Label : TYPEHINT
-                  self
+                  E
             Label : BLOCK
               {}
               Label : ELEMENT
                 Void
             Label : NAME
-              foo
+              D
           Label : NAME
             t
+        Label : ELEMENT
+          class
+          Label : METHOD
+            D
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $f
+                Label : TYPEHINT
+                  E
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
+              D
+          Label : NAME
+            c

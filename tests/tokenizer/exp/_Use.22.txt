@@ -9,10 +9,6 @@ Label : PROJECT
       Label : CODE
         ;
         Label : ELEMENT
-          use
-          Label : USE
-            B\C\D
-        Label : ELEMENT
           E
         Label : ELEMENT
           if
@@ -53,4 +49,6 @@ Label : PROJECT
               Label : NAME
                 echo
             Label : ELEMENT
-              Void
+              use
+              Label : USE
+                B\C\D

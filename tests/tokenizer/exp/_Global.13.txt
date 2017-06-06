@@ -10,85 +10,83 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              static
-              Label : PPP
-                $staticClass
-              Label : PPP
+          Label : METHOD
+            foo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                global
+                Label : GLOBAL
+                  $global
+              Label : ELEMENT
                 static
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $x
-                Label : RIGHT
-                  1
-              Label : PPP
-                $b
-              Label : PPP
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $b2
-                Label : RIGHT
-                  2
-              Label : PPP
-                $x2
-              Label : PPP
-                public
-            Label : ELEMENT
-              private
-              Label : PPP
-                =
-                Label : LEFT
-                  $private2
-                Label : RIGHT
-                  2
-              Label : PPP
-                private
-              Label : PPP
-                $private1
-              Label : PPP
-                $private3
-            Label : ELEMENT
-              protected
-              Label : PPP
-                =
-                Label : LEFT
-                  $protected2
-                Label : RIGHT
-                  2
-              Label : PPP
-                $protected1
-              Label : PPP
-                $protected3
-              Label : PPP
-                protected
-            Label : ELEMENT
+                Label : STATIC
+                  $staticFunction
+            Label : NAME
               foo
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  global
-                  Label : GLOBAL
-                    $global
-                Label : ELEMENT
-                  static
-                  Label : STATIC
-                    $staticFunction
-              Label : NAME
-                foo
-              Label : PUBLIC
-                public
+            Label : PUBLIC
+              public
           Label : NAME
             x
+          Label : PPP
+            static
+            Label : PPP
+              $staticClass
+            Label : STATIC
+              static
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $x
+              Label : RIGHT
+                1
+            Label : PPP
+              $b
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $b2
+              Label : RIGHT
+                2
+            Label : PPP
+              $x2
+            Label : PUBLIC
+              public
+          Label : PPP
+            private
+            Label : PPP
+              =
+              Label : LEFT
+                $private2
+              Label : RIGHT
+                2
+            Label : PPP
+              $private1
+            Label : PPP
+              $private3
+            Label : PRIVATE
+              private
+          Label : PPP
+            protected
+            Label : PPP
+              =
+              Label : LEFT
+                $protected2
+              Label : RIGHT
+                2
+            Label : PPP
+              $protected1
+            Label : PPP
+              $protected3
+            Label : PROTECTED
+              protected

@@ -10,29 +10,27 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  as
-                  Label : AS
-                    d
-                  Label : NAME
-                    ::
-                    Label : CLASS
-                      c
-                    Label : CONSTANT
-                      reset
-              Label : USE
-                b
-            Label : ELEMENT
-              protected
-              Label : PPP
-                $e
-              Label : PROTECTED
-                protected
           Label : NAME
             a
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                as
+                Label : AS
+                  d
+                Label : NAME
+                  ::
+                  Label : CLASS
+                    c
+                  Label : CONSTANT
+                    reset
+            Label : USE
+              b
+          Label : PPP
+            protected
+            Label : PPP
+              $e
+            Label : PROTECTED
+              protected

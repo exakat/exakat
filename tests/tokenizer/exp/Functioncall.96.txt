@@ -9,72 +9,70 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              foo
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  call_user_func
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      function
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : BLOCK
-                        {}
-                        Label : ELEMENT
+          Label : METHOD
+            foo
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                call_user_func
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    function
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                    Label : BLOCK
+                      {}
+                      Label : ELEMENT
+                        ob_start
+                        Label : ARGUMENTS
+                          (
+                          Label : ARGUMENT
+                            Void
+                        Label : NAME
                           ob_start
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            ob_start
-                        Label : ELEMENT
-                          A
-                        Label : ELEMENT
+                      Label : ELEMENT
+                        A
+                      Label : ELEMENT
+                        <?=
+                        Label : ARGUMENTS
                           <?=
-                          Label : ARGUMENTS
-                            <?=
-                            Label : ARGUMENT
-                              $c
-                          Label : NAME
-                            <?=
-                        Label : ELEMENT
-                          Void
-                        Label : ELEMENT
-                          B
-                        Label : ELEMENT
+                          Label : ARGUMENT
+                            $c
+                        Label : NAME
                           <?=
-                          Label : ARGUMENTS
-                            <?=
-                            Label : ARGUMENT
-                              $d
-                          Label : NAME
-                            <?=
-                        Label : ELEMENT
-                          Void
-                        Label : ELEMENT
-                           {
+                      Label : ELEMENT
+                        Void
+                      Label : ELEMENT
+                        B
+                      Label : ELEMENT
+                        <?=
+                        Label : ARGUMENTS
+                          <?=
+                          Label : ARGUMENT
+                            $d
+                        Label : NAME
+                          <?=
+                      Label : ELEMENT
+                        Void
+                      Label : ELEMENT
+                         {
 			}
 		}
 	
-                        Label : ELEMENT
-                          ++
-                          Label : POSTPLUSPLUS
-                            $a
-                  Label : NAME
-                    call_user_func
-              Label : NAME
-                foo
+                      Label : ELEMENT
+                        ++
+                        Label : POSTPLUSPLUS
+                          $a
+                Label : NAME
+                  call_user_func
+            Label : NAME
+              foo
           Label : NAME
             foo

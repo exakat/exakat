@@ -10,122 +10,120 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              static
-              Label : PPP
-                =
-                Label : LEFT
-                  $b
-                Label : RIGHT
-                  'C'
-              Label : STATIC
-                static
-            Label : ELEMENT
-              D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  =
-                  Label : LEFT
-                    $b
-                  Label : RIGHT
-                    'E'
-                Label : ELEMENT
-                  =
-                  Label : LEFT
-                    $c
-                  Label : RIGHT
-                    'F'
-                Label : ELEMENT
-                  ::
-                  Label : CLASS
-                    static
-                  Label : METHOD
-                    $b
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $c
-                    Label : NAME
-                      $b
-                Label : ELEMENT
-                  ::
-                  Label : CLASS
-                    B
-                  Label : METHOD
-                    $b
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $c
-                    Label : NAME
-                      $b
-              Label : NAME
-                D
-              Label : STATIC
-                static
-            Label : ELEMENT
-              H
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $d
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        __METHOD__
-                      Label : CONCAT
-                        'I'
-                  Label : NAME
-                    echo
-              Label : NAME
-                H
-              Label : STATIC
-                static
-            Label : ELEMENT
-              J
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $d
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        __METHOD__
-                      Label : CONCAT
-                        'I'
-                  Label : NAME
-                    echo
-              Label : NAME
-                J
-              Label : STATIC
-                static
           Label : DEFINITION
             static
           Label : DEFINITION
             B
           Label : DEFINITION
             B
+          Label : METHOD
+            D
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  'E'
+              Label : ELEMENT
+                =
+                Label : LEFT
+                  $c
+                Label : RIGHT
+                  'F'
+              Label : ELEMENT
+                ::
+                Label : CLASS
+                  static
+                Label : METHOD
+                  $b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    $b
+              Label : ELEMENT
+                ::
+                Label : CLASS
+                  B
+                Label : METHOD
+                  $b
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      $c
+                  Label : NAME
+                    $b
+            Label : NAME
+              D
+            Label : STATIC
+              static
+          Label : METHOD
+            H
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $d
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      __METHOD__
+                    Label : CONCAT
+                      'I'
+                Label : NAME
+                  echo
+            Label : NAME
+              H
+            Label : STATIC
+              static
+          Label : METHOD
+            J
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                $d
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      __METHOD__
+                    Label : CONCAT
+                      'I'
+                Label : NAME
+                  echo
+            Label : NAME
+              J
+            Label : STATIC
+              static
           Label : NAME
             B
+          Label : PPP
+            static
+            Label : PPP
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                'C'
+            Label : STATIC
+              static
         Label : ELEMENT
           ::
           Label : CLASS

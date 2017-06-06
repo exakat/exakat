@@ -10,60 +10,32 @@ Label : PROJECT
         ;
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              sayHello
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'Hello World!'
-                  Label : NAME
-                    echo
-              Label : NAME
-                sayHello
-              Label : PUBLIC
-                public
           Label : DEFINITION, DEFINITION
             HelloWorld
+          Label : METHOD
+            sayHello
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'Hello World!'
+                Label : NAME
+                  echo
+            Label : NAME
+              sayHello
+            Label : PUBLIC
+              public
           Label : NAME
             HelloWorld
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : USE
-                HelloWorld
-            Label : ELEMENT
-              sayHello
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'Hello Universe!'
-                  Label : NAME
-                    echo
-              Label : NAME
-                sayHello
-              Label : PUBLIC
-                public
           Label : DEFINITION
             TheWorldIsNotEnough
           Label : DEFINITION
@@ -74,8 +46,32 @@ Label : PROJECT
                 Void
             Label : NAME
               TheWorldIsNotEnough
+          Label : METHOD
+            sayHello
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'Hello Universe!'
+                Label : NAME
+                  echo
+            Label : NAME
+              sayHello
+            Label : PUBLIC
+              public
           Label : NAME
             TheWorldIsNotEnough
+          Label : USE
+            use
+            Label : USE
+              HelloWorld
         Label : ELEMENT
           =
           Label : LEFT

@@ -42,44 +42,38 @@ Label : PROJECT
             ;
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  var
-                  Label : PPP
-                    =
-                    Label : LEFT
-                      $a
-                    Label : RIGHT
-                      array
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                  Label : VAR
-                    var
-                Label : ELEMENT
-                  var
-                  Label : PPP
-                    =
-                    Label : LEFT
-                      $b
-                    Label : RIGHT
-                      array
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                  Label : VAR
-                    var
               Label : NAME
                 F
+              Label : PPP
+                var
+                Label : PPP
+                  =
+                  Label : LEFT
+                    $a
+                  Label : RIGHT
+                    array
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                Label : VAR
+                  var
+              Label : PPP
+                var
+                Label : PPP
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    array
+                    Label : ARGUMENTS
+                      (
+                      Label : ARGUMENT
+                        Void
+                Label : VAR
+                  var
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
               Label : EXTENDS
                 H
               Label : NAME

@@ -10,9 +10,5 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : NAME
             x

@@ -9,52 +9,44 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : DEFINITION
+            a
+          Label : NAME
+            a
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $p
+              Label : RIGHT
+                1
+            Label : PUBLIC
               public
-              Label : PPP
-                =
-                Label : LEFT
-                  $p
-                Label : RIGHT
-                  1
-              Label : PUBLIC
-                public
-          Label : DEFINITION
-            a
-          Label : NAME
-            a
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : DEFINITION
+            b
+          Label : METHOD
+            p
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  3
+            Label : NAME
               p
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    3
-              Label : NAME
-                p
-              Label : PUBLIC
-                public
-          Label : DEFINITION
-            b
+            Label : PUBLIC
+              public
           Label : NAME
             b
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : DEFINITION
             c
           Label : NAME

@@ -9,24 +9,6 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              p
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    3
-              Label : NAME
-                p
-              Label : PUBLIC
-                public
           Label : DEFINITION
             b
           Label : DEFINITION
@@ -51,6 +33,22 @@ Label : PROJECT
             \b
           Label : DEFINITION
             \b
+          Label : METHOD
+            p
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  3
+            Label : NAME
+              p
+            Label : PUBLIC
+              public
           Label : NAME
             b
         Label : ELEMENT

@@ -9,50 +9,48 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  as
-                  Label : AS
-                    E
-                  Label : NAME
-                    D
-              Label : USE
-                C
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  as
-                  Label : AS
-                    E
-                  Label : NAME
-                    D
-              Label : USE
-                F
-              Label : USE
-                G
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  as
-                  Label : AS
-                    E
-                  Label : NAME
-                    D
-              Label : USE
-                F2\F3
-              Label : USE
-                G2\G3\G4
           Label : NAME
             B
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                as
+                Label : AS
+                  E
+                Label : NAME
+                  D
+            Label : USE
+              C
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                as
+                Label : AS
+                  E
+                Label : NAME
+                  D
+            Label : USE
+              F
+            Label : USE
+              G
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                as
+                Label : AS
+                  E
+                Label : NAME
+                  D
+            Label : USE
+              F2\F3
+            Label : USE
+              G2\G3\G4
         Label : ELEMENT
           {}
           Label : ELEMENT

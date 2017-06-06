@@ -10,29 +10,27 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  print
-                  Label : ARGUMENTS
-                    'Yes'
-                    Label : ARGUMENT
-                      'Yes'
-                  Label : NAME
-                    print
-              Label : NAME
-                d
           Label : IMPLEMENTS
             B
           Label : IMPLEMENTS
             C
+          Label : METHOD
+            d
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                print
+                Label : ARGUMENTS
+                  'Yes'
+                  Label : ARGUMENT
+                    'Yes'
+                Label : NAME
+                  print
+            Label : NAME
+              d
           Label : NAME
             A

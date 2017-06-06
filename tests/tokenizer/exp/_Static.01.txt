@@ -10,51 +10,49 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              static
-              Label : PPP
-                =
-                Label : LEFT
-                  $b
-                Label : RIGHT
-                  1
-              Label : STATIC
-                static
-            Label : ELEMENT
-              static
-              Label : PPP
-                =
-                Label : LEFT
-                  $c
-                Label : RIGHT
-                  -2
-              Label : STATIC
-                static
-            Label : ELEMENT
-              static
-              Label : PPP
-                =
-                Label : LEFT
-                  $d
-                Label : RIGHT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-              Label : STATIC
-                static
-            Label : ELEMENT
-              static
-              Label : PPP
-                =
-                Label : LEFT
-                  $e
-                Label : RIGHT
-                  '23'
-              Label : STATIC
-                static
           Label : NAME
             a
+          Label : PPP
+            static
+            Label : PPP
+              =
+              Label : LEFT
+                $b
+              Label : RIGHT
+                1
+            Label : STATIC
+              static
+          Label : PPP
+            static
+            Label : PPP
+              =
+              Label : LEFT
+                $c
+              Label : RIGHT
+                -2
+            Label : STATIC
+              static
+          Label : PPP
+            static
+            Label : PPP
+              =
+              Label : LEFT
+                $d
+              Label : RIGHT
+                array
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+            Label : STATIC
+              static
+          Label : PPP
+            static
+            Label : PPP
+              =
+              Label : LEFT
+                $e
+              Label : RIGHT
+                '23'
+            Label : STATIC
+              static

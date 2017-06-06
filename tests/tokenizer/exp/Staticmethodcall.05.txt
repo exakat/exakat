@@ -44,15 +44,13 @@ Label : PROJECT
               d
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              static
-              Label : PPP
-                $g
-              Label : PROTECTED
-                protected
-              Label : STATIC
-                static
           Label : NAME
             f
+          Label : PPP
+            static
+            Label : PPP
+              $g
+            Label : PROTECTED
+              protected
+            Label : STATIC
+              static

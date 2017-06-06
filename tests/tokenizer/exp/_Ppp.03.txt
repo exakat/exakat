@@ -10,55 +10,53 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            a
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
               a
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : NAME
-                a
-              Label : PUBLIC
-                public
-              Label : STATIC
-                static
-            Label : ELEMENT
+            Label : PUBLIC
+              public
+            Label : STATIC
+              static
+          Label : METHOD
+            b
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : NAME
-                b
-              Label : PRIVATE
-                private
-              Label : STATIC
-                static
-            Label : ELEMENT
+            Label : PRIVATE
+              private
+            Label : STATIC
+              static
+          Label : METHOD
+            c
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                Void
+            Label : NAME
               c
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  Void
-              Label : NAME
-                c
-              Label : PROTECTED
-                protected
-              Label : STATIC
-                static
+            Label : PROTECTED
+              protected
+            Label : STATIC
+              static
           Label : NAME
             x

@@ -10,657 +10,655 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $abstract
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $and
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $array
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $as
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $break
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $case
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $catch
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $class
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $clone
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $const
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $continue
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $declare
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $default
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $die
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $do
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $echo
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $else
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $elseif
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $empty
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $enddeclare
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $endfor
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $endforeach
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $endif
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $endswitch
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $endwhile
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $eval
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $exit
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $extends
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $final
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $finally
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $for
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $foreach
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $function
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $global
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $goto
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $if
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $implements
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $include
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $include_once
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $instanceof
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $insteadof
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $interface
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $isset
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $list
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $namespace
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $new
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $or
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $print
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $private
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $protected
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $public
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $require
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $require_once
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $return
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $static
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $switch
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $throw
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $trait
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $try
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $unset
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $use
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $var
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $while
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $xor
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
-            Label : ELEMENT
-              public
-              Label : PPP
-                =
-                Label : LEFT
-                  $yield
-                Label : RIGHT
-                  3
-              Label : PUBLIC
-                public
           Label : NAME
             x2
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $abstract
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $and
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $array
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $as
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $break
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $case
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $catch
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $class
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $clone
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $const
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $continue
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $declare
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $default
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $die
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $do
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $echo
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $else
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $elseif
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $empty
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $enddeclare
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $endfor
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $endforeach
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $endif
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $endswitch
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $endwhile
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $eval
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $exit
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $extends
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $final
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $finally
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $for
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $foreach
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $function
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $global
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $goto
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $if
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $implements
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $include
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $include_once
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $instanceof
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $insteadof
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $interface
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $isset
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $list
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $namespace
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $new
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $or
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $print
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $private
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $protected
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $public
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $require
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $require_once
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $return
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $static
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $switch
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $throw
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $trait
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $try
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $unset
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $use
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $var
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $while
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $xor
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public
+          Label : PPP
+            public
+            Label : PPP
+              =
+              Label : LEFT
+                $yield
+              Label : RIGHT
+                3
+            Label : PUBLIC
+              public

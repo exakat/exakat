@@ -24,21 +24,19 @@ Label : PROJECT
             DefinedWithAReference
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : METHOD
+            MethodDefinedWithAReference
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                return
+                Label : RETURN
+                  $x
+            Label : NAME
               MethodDefinedWithAReference
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    $x
-              Label : NAME
-                MethodDefinedWithAReference
           Label : NAME
             x

@@ -10,82 +10,70 @@ Label : PROJECT
         ;
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : DEFINITION, DEFINITION
+            Hello
+          Label : METHOD
+            sayHello
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'Hello '
+                Label : NAME
+                  echo
+            Label : NAME
               sayHello
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'Hello '
-                  Label : NAME
-                    echo
-              Label : NAME
-                sayHello
-              Label : PUBLIC
-                public
-          Label : DEFINITION, DEFINITION
-            Hello
+            Label : PUBLIC
+              public
           Label : NAME
             Hello
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
+          Label : DEFINITION, DEFINITION
+            World
+          Label : METHOD
+            sayWorld
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'World!'
+                Label : NAME
+                  echo
+            Label : NAME
               sayWorld
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'World!'
-                  Label : NAME
-                    echo
-              Label : NAME
-                sayWorld
-              Label : PUBLIC
-                public
-          Label : DEFINITION, DEFINITION
-            World
+            Label : PUBLIC
+              public
           Label : NAME
             World
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : USE
-                Hello
-              Label : USE
-                World
           Label : DEFINITION, DEFINITION
             HelloWorld
           Label : NAME
             HelloWorld
+          Label : USE
+            use
+            Label : USE
+              Hello
+            Label : USE
+              World
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : USE
-                HelloWorld
           Label : DEFINITION
             MyHelloWorld
           Label : DEFINITION
@@ -98,6 +86,10 @@ Label : PROJECT
               MyHelloWorld
           Label : NAME
             MyHelloWorld
+          Label : USE
+            use
+            Label : USE
+              HelloWorld
         Label : ELEMENT
           =
           Label : LEFT

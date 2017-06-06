@@ -44,29 +44,27 @@ Label : PROJECT
             x
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              tx
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
+          Label : METHOD
+            tx
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                print
+                Label : ARGUMENTS
+                  class
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      inTraitMethodScope
+                    Label : CLASS
+                      class
+                Label : NAME
                   print
-                  Label : ARGUMENTS
-                    class
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        inTraitMethodScope
-                      Label : CLASS
-                        class
-                  Label : NAME
-                    print
-              Label : NAME
-                tx
+            Label : NAME
+              tx
           Label : NAME
             t

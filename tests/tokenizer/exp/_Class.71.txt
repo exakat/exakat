@@ -24,19 +24,17 @@ Label : PROJECT
               new
               Label : NEW
                 class
-                Label : BLOCK
-                  {}
-                  Label : ELEMENT
+                Label : METHOD
+                  main
+                  Label : ARGUMENTS
+                    (
+                    Label : ARGUMENT
+                      Void
+                  Label : BLOCK
+                    {}
+                    Label : ELEMENT
+                      Void
+                  Label : NAME
                     main
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : BLOCK
-                      {}
-                      Label : ELEMENT
-                        Void
-                    Label : NAME
-                      main
-                    Label : PUBLIC
-                      public
+                  Label : PUBLIC
+                    public

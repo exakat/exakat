@@ -10,92 +10,60 @@ Label : PROJECT
         ;
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              sayHello
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'Hello '
-                  Label : NAME
-                    echo
-              Label : NAME
-                sayHello
-              Label : PUBLIC
-                public
           Label : DEFINITION, DEFINITION
             Hello
+          Label : METHOD
+            sayHello
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'Hello '
+                Label : NAME
+                  echo
+            Label : NAME
+              sayHello
+            Label : PUBLIC
+              public
           Label : NAME
             Hello
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              sayWorld
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'World'
-                  Label : NAME
-                    echo
-              Label : NAME
-                sayWorld
-              Label : PUBLIC
-                public
           Label : DEFINITION
             'World'
           Label : DEFINITION, DEFINITION
             World
+          Label : METHOD
+            sayWorld
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    'World'
+                Label : NAME
+                  echo
+            Label : NAME
+              sayWorld
+            Label : PUBLIC
+              public
           Label : NAME
             World
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : USE
-                Hello
-              Label : USE
-                World
-            Label : ELEMENT
-              sayExclamationMark
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      '!'
-                  Label : NAME
-                    echo
-              Label : NAME
-                sayExclamationMark
-              Label : PUBLIC
-                public
           Label : DEFINITION
             MyHelloWorld
           Label : DEFINITION
@@ -106,8 +74,34 @@ Label : PROJECT
                 Void
             Label : NAME
               MyHelloWorld
+          Label : METHOD
+            sayExclamationMark
+            Label : ARGUMENTS
+              (
+              Label : ARGUMENT
+                Void
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                echo
+                Label : ARGUMENTS
+                  echo
+                  Label : ARGUMENT
+                    '!'
+                Label : NAME
+                  echo
+            Label : NAME
+              sayExclamationMark
+            Label : PUBLIC
+              public
           Label : NAME
             MyHelloWorld
+          Label : USE
+            use
+            Label : USE
+              Hello
+            Label : USE
+              World
         Label : ELEMENT
           =
           Label : LEFT

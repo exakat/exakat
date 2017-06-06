@@ -10,18 +10,10 @@ Label : PROJECT
         ;
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : NAME
             i
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : DEFINITION
             i1
           Label : DEFINITION
@@ -32,10 +24,6 @@ Label : PROJECT
             i1
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : DEFINITION
             i3
           Label : EXTENDS
@@ -46,10 +34,6 @@ Label : PROJECT
             i3
         Label : ELEMENT
           interface
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : EXTENDS
             i1
           Label : EXTENDS

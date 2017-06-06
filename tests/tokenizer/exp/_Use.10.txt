@@ -9,22 +9,20 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              use
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  as
-                  Label : AS
-                    E
-                  Label : NAME
-                    D
-              Label : USE
-                C
           Label : NAME
             B
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : ELEMENT
+                as
+                Label : AS
+                  E
+                Label : NAME
+                  D
+            Label : USE
+              C
         Label : ELEMENT
           {}
           Label : ELEMENT

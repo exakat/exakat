@@ -18,24 +18,22 @@ Label : PROJECT
                 F\G\H\I
             Label : ELEMENT
               class
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  M
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      Void
-                  Label : NAME
-                    M
               Label : EXTENDS
                 K
               Label : IMPLEMENTS
                 L
+              Label : METHOD
+                M
+                Label : ARGUMENTS
+                  (
+                  Label : ARGUMENT
+                    Void
+                Label : BLOCK
+                  {}
+                  Label : ELEMENT
+                    Void
+                Label : NAME
+                  M
               Label : NAME
                 J
           Label : NAME

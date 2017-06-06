@@ -10,9 +10,5 @@ Label : PROJECT
         ;
         Label : ELEMENT
           trait
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
           Label : NAME
             A

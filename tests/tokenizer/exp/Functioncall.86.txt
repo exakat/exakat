@@ -10,20 +10,18 @@ Label : PROJECT
         ;
         Label : ELEMENT
           class
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              private
-              Label : PPP
-                $x
-              Label : PPP
-                $y
-              Label : PPP
-                $z
-              Label : PRIVATE
-                private
           Label : NAME
             x
+          Label : PPP
+            private
+            Label : PPP
+              $x
+            Label : PPP
+              $y
+            Label : PPP
+              $z
+            Label : PRIVATE
+              private
         Label : ELEMENT
           array
           Label : ARGUMENTS
