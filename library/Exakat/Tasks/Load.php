@@ -1106,7 +1106,7 @@ class Load extends Tasks {
 
         $this->pushExpression($function);
 
-        if ($function->atom !== 'Closure') {
+        if ($function->atom === 'Function' ) {
             $this->processSemicolon();
         }
 
@@ -1151,10 +1151,7 @@ class Load extends Tasks {
         $this->addDefinition('class', $trait->fullnspath, $trait);
 
         // Process block
-        ++$this->id;
-        $block = $this->processBlock(false);
-        $this->popExpression();
-        $this->addLink($trait, $block, 'BLOCK');
+        $this->makeCitBody($trait);
 
         list($fullnspath, $aliased) = $this->getFullnspath($name);
         $trait->code       = $this->tokens[$current][1];
@@ -1206,10 +1203,7 @@ class Load extends Tasks {
         }
 
         // Process block
-        ++$this->id;
-        $block = $this->processBlock(false);
-        $this->popExpression();
-        $this->addLink($interface, $block, 'BLOCK');
+        $block = $this->makeCitBody($interface);
 
         $interface->code       = $this->tokens[$current][1];
         $interface->fullcode   = $this->tokens[$current][1].' '.$name->fullcode.(isset($extendsKeyword) ? ' '.$extendsKeyword.' '.implode(', ', $fullcode) : '').static::FULLCODE_BLOCK;
@@ -1225,6 +1219,81 @@ class Load extends Tasks {
         return $interface;
     }
 
+    private function makeCitBody($class) {
+        print_r($this->tokens[$this->id + 1]);
+        ++$this->id;
+        $rank = -1;
+        while($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_CLOSE_CURLY) {
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_SEMICOLON) {
+                ++$this->id;
+                continue;
+            } 
+            
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_PRIVATE) {
+                ++$this->id;
+                $cpm = $this->processPrivate();
+                if ($cpm->atom === 'Ppp'){
+                    $cpm->rank = ++$rank;
+                    $this->addLink($class, $cpm, strtoupper($cpm->atom));
+                }
+
+                continue; 
+            }
+
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_PUBLIC) {
+                ++$this->id;
+                $cpm = $this->processPublic();
+                if ($cpm->atom === 'Ppp'){
+                    $cpm->rank = ++$rank;
+                    $this->addLink($class, $cpm, strtoupper($cpm->atom));
+                }
+
+                continue; 
+            }
+
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_PROTECTED) {
+                ++$this->id;
+                $cpm = $this->processProtected();
+                if ($cpm->atom === 'Ppp'){
+                    $cpm->rank = ++$rank;
+                    $this->addLink($class, $cpm, strtoupper($cpm->atom));
+                }
+
+                continue; 
+            }
+
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_FINAL) {
+                ++$this->id;
+                $cpm = $this->processFinal();
+                continue; 
+            }
+
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_ABSTRACT) {
+                ++$this->id;
+                $cpm = $this->processAbstract();
+                continue; 
+            }
+
+            if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STATIC) {
+                ++$this->id;
+                $cpm = $this->processStatic();
+                if ($cpm->atom === 'Ppp'){
+                    $cpm->rank = ++$rank;
+                    $this->addLink($class, $cpm, strtoupper($cpm->atom));
+                }
+                continue; 
+            }
+            
+            $cpm = $this->processNext();
+            $this->popExpression();
+
+            $cpm->rank = ++$rank;
+            $this->addLink($class, $cpm, strtoupper($cpm->atom));
+        }
+        
+        ++$this->id;
+    }
+    
     private function processClass() {
         $current = $this->id;
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING) {
@@ -1234,6 +1303,8 @@ class Load extends Tasks {
         }
         $this->currentClassTrait[] = $class;
         $this->nestContext(self::CONTEXT_CLASS);
+        $previousFunctionContext = $this->contexts[self::CONTEXT_FUNCTION];
+        $this->contexts[self::CONTEXT_FUNCTION] = 0;
 
         // Should work on Abstract and Final only
         $fullcode= array();
@@ -1296,18 +1367,17 @@ class Load extends Tasks {
         }
 
         // Process block
-        ++$this->id;
         $newContext = $this->isContext(self::CONTEXT_NEW);
         if ($newContext === true) {
             $this->toggleContext(self::CONTEXT_NEW);
         }   
-        $block = $this->processBlock(false);
+        
+        $this->makeCitBody($class);
+        
         if ($newContext === true) {
             $this->toggleContext(self::CONTEXT_NEW);
         }
-        $this->popExpression();
-        $this->addLink($class, $block, 'BLOCK');
-
+        
         $class->code       = $this->tokens[$current][1];
         $class->fullcode   = (!empty($fullcode) ? implode(' ', $fullcode).' ' : '').$this->tokens[$current][1].($class->atom === 'Classanonymous' ? '' : ' '.$name->fullcode)
                              .(isset($arguments) ? ' ('.$arguments->fullcode.')' : '')
@@ -1330,6 +1400,8 @@ class Load extends Tasks {
             array_pop($this->currentParentClassTrait);
         }
 
+        $this->contexts[self::CONTEXT_FUNCTION] = $previousFunctionContext;
+        
         return $class;
     }
 
@@ -1823,12 +1895,14 @@ class Load extends Tasks {
         $rank = -1;
         --$this->id; // back one step for the init in the next loop
 
+        $options = array();
         foreach($this->optionsTokens as $name => $option) {
             $this->addLink($const, $option, strtoupper($name));
-            $fullcode[] = $this->atoms[$option->id]->fullcode;
+            $options[] = $this->atoms[$option->id]->fullcode;
         }
         $this->optionsTokens = array();
 
+        $fullcode = array();
         do {
             ++$this->id;
             $constId = $this->id;
@@ -1862,7 +1936,7 @@ class Load extends Tasks {
         } while (!in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_SEMICOLON)));
 
         $const->code     = $this->tokens[$current][1];
-        $const->fullcode = $this->tokens[$current][1].' '.implode(', ', $fullcode);
+        $const->fullcode = (empty($options) ? '' : join(' ', $options).' ').$this->tokens[$current][1].' '.implode(', ', $fullcode);
         $const->line     = $this->tokens[$current][2];
         $const->token    = $this->getToken($this->tokens[$current][0]);
         $const->count    = $rank + 1;
@@ -1903,6 +1977,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
+            $this->popExpression();
             return $ppp;
         } else {
             return $public;
@@ -1914,6 +1989,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
+            $this->popExpression();
             return $ppp;
         } else {
             return $protected;
@@ -1925,6 +2001,7 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
             $ppp = $this->processSGVariable('Ppp');
+            $this->popExpression();
             return $ppp;
         } else {
             return $private;
@@ -2116,7 +2193,10 @@ class Load extends Tasks {
                 // something like public static
                 $this->processOptions('Static');
 
-                return $this->processSGVariable('Ppp');
+                $ppp = $this->processSGVariable('Ppp');
+                $this->popExpression();
+
+                return $ppp;
             } else {
                 return $this->processStaticVariable();
             }
@@ -4472,8 +4552,8 @@ class Load extends Tasks {
         $total = 0;
         foreach($this->atoms as $id => $atom) {
             if ($id === 1) { continue; }
-            assert(isset($D[$id]), "Warning : forgotten atom $id in $this->filename");
-            assert($D[$id] <= 1, "Warning : too linked atom $id : ".PHP_EOL);
+            assert(isset($D[$id]), "Warning : forgotten atom $id in $this->filename : ".print_r($this->atoms[$id], true));
+            assert($D[$id] <= 1, "Warning : too linked atom $id : ".$this->atoms[$id]->atom.PHP_EOL);
 
             assert(isset($atom->line), "Warning : missing line atom $id : ".PHP_EOL);
 
