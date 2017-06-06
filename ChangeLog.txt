@@ -1,4 +1,4 @@
-Version 0.11.6 (Red Bottomed Horse Monkey, Coming up)
+Version 0.11.7 (Long Armed Ape Monkey, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,18 @@ Version 0.11.6 (Red Bottomed Horse Monkey, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.11.6 (Red Bottomed Horse Monkey, 20017-06-05)
++ Architecture
+    + Removed singleton to Config. WIP
++ Report
+    + Ambassador : reports usage of PSR 3,6,7,11,13,16.
+    + UML : report now protects file names
++ Analyzer
+    + New analyzer : Ext stats
+    + New analyzer : report mixed concatenation / interpolation strings
+    + Updated analyzer : htmlentities actually uses combinaison, not alternatives, 
+    + Updated analyzer : Close Tag consistency ignores __HALT_COMPILER files
 
 Version 0.11.5 (Intelligent Stone Monkey, 2017-05-30)
 + Report
