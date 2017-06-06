@@ -34,8 +34,7 @@ class DefinedConstants extends Analyzer {
     
     public function analyze() {
         $containsConstantDefinition = <<<GREMLIN
-where( __.out("BLOCK")
-         .out("ELEMENT")
+where( __.out("CONST")
          .hasLabel("Const")
          .out("CONST")
          .out("NAME")

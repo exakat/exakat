@@ -142,7 +142,7 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->goToClassTrait()
              ->raw('where( repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times('.self::MAX_LOOPING.')
-                                     .out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{ it.get().value("code") == name}
+                                     .out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == name}
                                      .count().is(eq(0)) 
                           )')
              ->back('method');

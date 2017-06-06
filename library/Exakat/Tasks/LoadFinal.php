@@ -186,7 +186,7 @@ GREMLIN;
 .out('CLASS').hasLabel("Identifier", "Nsname").sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
 .where( __.sideEffect{classes = [];}
           .emit(hasLabel("Class")).repeat( out("EXTENDS").in("DEFINITION") ).times(15)
-          .out("BLOCK").out("ELEMENT").hasLabel("Const").out("CONST").as('const')
+          .out("CONST").hasLabel("Const").out("CONST").as('const')
           .out("NAME").filter{ it.get().value("code") == name; }.select('const')
           .sideEffect{classes.add(it.get()); }
           .fold()

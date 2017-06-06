@@ -54,7 +54,7 @@ class UselessAbstract extends Analyzer {
         $this->atomIs('Class')
              ->hasOut('ABSTRACT')
              ->hasOut('DEFINITION')
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Method", "Void").count().is(eq(0)) )');
+             ->raw('not( where( __.out("METHOD").hasLabel("Method", "Void") ) )');
         $this->prepareQuery();
      }
 }

@@ -28,15 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class ConstantClass extends Analyzer {
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->raw('where( __.out("ELEMENT").not(hasLabel("Const")).count().is(eq(0)))')
-             ->back('first');
+             ->raw('not(where( __.out("METHOD", "PPP")))');
         $this->prepareQuery();
 
         $this->atomIs('Interface')
-             ->outIs('BLOCK')
-             ->raw('where( __.out("ELEMENT").not(hasLabel("Const")).count().is(eq(0)))')
-             ->back('first');
+             ->raw('not(where( __.out("METHOD")))');
         $this->prepareQuery();
     }
 }

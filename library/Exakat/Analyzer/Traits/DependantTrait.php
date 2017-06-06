@@ -28,6 +28,7 @@ class DependantTrait extends Analyzer {
     public function analyze() {
         // Case for $this->method()
         $this->atomIs('Trait')
+             ->outIs('METHOD')
              ->outIs('BLOCK')
              ->atomInside('Methodcall')
              ->outIs('OBJECT')
@@ -38,13 +39,14 @@ class DependantTrait extends Analyzer {
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'method')
              ->goToTrait()
-             ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
-                             .out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
+             ->raw('where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+                             .out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
         // Case for $this->$properties
         $this->atomIs('Trait')
+             ->outIs('METHOD')
              ->outIs('BLOCK')
              ->atomInside('Property')
              ->outIs('OBJECT')
@@ -56,14 +58,15 @@ class DependantTrait extends Analyzer {
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'property')
              ->goToTrait()
-             ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
-                             .out("BLOCK").out("ELEMENT").hasLabel("Ppp").out("PPP").filter{ it.get().value("propertyname") == property }.count().is(eq(0)) )')
+             ->raw('where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+                             .out("PPP").hasLabel("Ppp").out("PPP").filter{ it.get().value("propertyname") == property }.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
         // Case for class::$properties
         $this->atomIs('Trait')
              ->savePropertyAs('fullnspath', 'fnp')
+             ->outIs('METHOD')
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
              ->outIs('CLASS')
@@ -73,14 +76,15 @@ class DependantTrait extends Analyzer {
              ->tokenIs('T_VARIABLE')
              ->savePropertyAs('code', 'property')
              ->goToTrait()
-             ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
-                             .out("BLOCK").out("ELEMENT").hasLabel("Ppp").out("PPP").coalesce(__.out("LEFT"), __.filter{ true }).filter{ it.get().value("code") == property }.count().is(eq(0)) )')
+             ->raw('where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+                             .out("PPP").hasLabel("Ppp").out("PPP").coalesce(__.out("LEFT"), __.filter{ true }).filter{ it.get().value("code") == property }.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
         // Case for class::methodcall
         $this->atomIs('Trait')
              ->savePropertyAs('fullnspath', 'fnp')
+             ->outIs('METHOD')
              ->outIs('BLOCK')
              ->atomInside('Staticmethodcall')
              ->outIs('CLASS')
@@ -91,8 +95,8 @@ class DependantTrait extends Analyzer {
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'method')
              ->goToTrait()
-             ->raw('where( __.emit(hasLabel("Trait")).repeat( out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
-                             .out("BLOCK").out("ELEMENT").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
+             ->raw('where( __.emit(hasLabel("Trait")).repeat( out("USE").hasLabel("Use").out("USE").in("DEFINITION") ).times('.self::MAX_LOOPING.')
+                             .out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == method }.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 

@@ -363,7 +363,7 @@ g.V().hasLabel("Class")
 .where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
 .sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
-.sideEffect{ useList = []; }.where(__.out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
@@ -448,7 +448,7 @@ GREMLIN
         // Traits
         $query = <<<GREMLIN
 g.V().hasLabel("Trait")
-.sideEffect{ useList = []; }.where(__.out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
+.sideEffect{ useList = []; }.where(__.out("USE").hasLabel("Use").out("USE").sideEffect{ useList.push( it.get().value("fullnspath"));}.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
@@ -891,7 +891,7 @@ GREMLIN
         // traits
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Class", "Trait")).times(15)
-                   .hasLabel("Class", "Trait").out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE").in("DEFINITION")
+                   .hasLabel("Class", "Trait").out("USE").hasLabel("Use").out("USE").in("DEFINITION")
                    .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
                    .as("include")
                    .select("file", "include").by("fullcode").by("fullcode")

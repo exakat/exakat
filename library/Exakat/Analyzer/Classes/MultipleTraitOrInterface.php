@@ -51,7 +51,7 @@ GREMLIN
              $this->atomIs('Class')
              ->raw(<<<'GREMLIN'
 where( __.sideEffect{counts = [:]}
-         .out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE")
+         .out("USE").hasLabel("Use").out("USE")
          .sideEffect{ k = it.get().value("fullnspath"); 
                     if (counts[k] == null) {
                        counts[k] = 1;
@@ -61,7 +61,7 @@ where( __.sideEffect{counts = [:]}
          }.fold()
        )
        .sideEffect{ names = counts.findAll{ a,b -> b > 1}.keySet() }
-       .out("BLOCK").out("ELEMENT").hasLabel("Use").out("USE")
+       .out("USE").hasLabel("Use").out("USE")
        .filter{ it.get().value("fullnspath") in names }
 GREMLIN
 )

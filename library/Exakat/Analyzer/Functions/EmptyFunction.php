@@ -59,7 +59,7 @@ class EmptyFunction extends Analyzer {
 
              // Ignore methods that are overwriting a parent class, unless it is abstract or private
              ->raw('where( __.repeat( out("EXTENDS").in("DEFINITION") ).emit(hasLabel("Class") ).times('.self::MAX_LOOPING.')
-                             .out("BLOCK").out("ELEMENT").hasLabel("Method")
+                             .out("METHOD").hasLabel("Method")
                              .where( __.out("ABSTRACT", "PRIVATE").count().is(eq(0)) ) 
                              .out("NAME").filter{ it.get().value("code").toLowerCase() == name.toLowerCase()}
                              .count().is(eq(0)) )')

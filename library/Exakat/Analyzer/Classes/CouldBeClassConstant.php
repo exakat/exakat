@@ -52,7 +52,7 @@ class CouldBeClassConstant extends Analyzer {
              ->goToClass()
 
              ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs('BLOCK')
+             ->outIs('METHOD')
 
                 // usage as property with $this
              ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Property") ).times('.self::MAX_LOOPING.')

@@ -35,7 +35,7 @@ class DefinedStaticMP extends Analyzer {
              ->outIs('METHOD')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(1)) )')
+             ->raw('where( __.out("METHOD").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(1)) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -48,7 +48,7 @@ class DefinedStaticMP extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->goToClass()
              ->goToAllParents()
-             ->raw('where( __.out("BLOCK").out("ELEMENT").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(1)) )')
+             ->raw('where( __.out("METHOD").out("NAME").filter{ it.get().value("code") == name}.count().is(eq(1)) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -61,8 +61,7 @@ class DefinedStaticMP extends Analyzer {
              ->outIsIE('VARIABLE')
              ->savePropertyAs('code', 'name')
              ->goToClass()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->outIsIE('LEFT')
@@ -80,8 +79,7 @@ class DefinedStaticMP extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->goToClass()
              ->goToAllParents()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->outIsIE('LEFT')
