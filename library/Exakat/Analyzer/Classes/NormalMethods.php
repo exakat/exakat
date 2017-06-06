@@ -28,9 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NormalMethods extends Analyzer {
     public function analyze() {
         $this->atomIs(array('Class', 'Trait'))
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
-             ->atomIs('Method')
+             ->outIs('METHOD')
              ->hasNoOut('STATIC')
              ->outIs('NAME');
         $this->prepareQuery();

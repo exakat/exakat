@@ -29,8 +29,7 @@ class ZendTrait extends Analyzer {
         $regex = '^\\\\\\\\zend(_|\\\\\\\\)';
 
         $this->atomIs(array('Class', 'Trait'))
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('USE')
              ->atomIs('Use')
              ->outIs('USE')
              ->regexIs('fullnspath', $regex);

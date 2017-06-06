@@ -28,14 +28,9 @@ use Exakat\Analyzer\Analyzer;
 class Variablenames extends Analyzer {
     public function analyze() {
         // $x
-        $this->atomIs(self::$VARIABLES_ALL)
+        $this->atomIs(array('Variable', 'Variableobject', 'Variablearray'))
              ->hasNoParent('Functioncall', array('NAME'))
 
-             ->hasNoParent('Class', array('PPP', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent('Class', array('LEFT', 'PPP', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent('Class', array('STATIC', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent('Class', array('LEFT', 'STATIC', 'ELEMENT', 'BLOCK'))
-             
              ->hasNoParent('Staticproperty', 'PROPERTY')
              ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
              ->hasNoParent('Staticproperty', array('VARIABLE', 'VARIABLE', 'PROPERTY'));

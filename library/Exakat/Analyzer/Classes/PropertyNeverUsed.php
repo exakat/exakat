@@ -34,8 +34,7 @@ class PropertyNeverUsed extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->analyzerIsNot('Classes/PropertyUsedInternally')

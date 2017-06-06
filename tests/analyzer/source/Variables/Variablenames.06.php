@@ -6,5 +6,7 @@ class x {
 
 function y () {
     static $staticVariable = 3;
+    
+    $variable = 3;
 }
 ?>

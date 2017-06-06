@@ -37,10 +37,10 @@ class CouldBePrivate extends Analyzer {
         // Non-static properties
         // Case of object->property (that's another public access)
         $publicProperties = $this->query('g.V().hasLabel("Property")
-                                              .where( __.out("OBJECT").not(has("code", "\$this")) )
-                                              .out("PROPERTY")
-                                              .hasLabel("Identifier")
-                                              .values("code").unique()');
+                                               .where( __.out("OBJECT").not(has("code", "\$this")) )
+                                               .out("PROPERTY")
+                                               .hasLabel("Identifier")
+                                               .values("code").unique()');
 
         $this->atomIs('Ppp')
              ->hasNoOut('PRIVATE')
