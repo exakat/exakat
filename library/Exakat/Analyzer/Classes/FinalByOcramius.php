@@ -33,17 +33,16 @@ class FinalByOcramius extends Analyzer {
              ->outIs('IMPLEMENTS')
              ->inIs('DEFINITION')
              ->atomIs('Interface')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->hasNoOut('ABSTRACT')
              ->outIs('NAME')
              ->raw('sideEffect{ interfaces.add( it.get().value("code")); }')
              ->back('first')
-             ->raw('where( __.out("BLOCK").out("ELEMENT").hasLabel("Method")
-                                          .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
-                                          .where( __.out("PROTECTED", "PRIVATE").count().is(eq(0)) )
-                                          .count().is(eq(0)) )');
+             ->raw('where( __.out("METHOD").hasLabel("Method")
+                             .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
+                             .where( __.out("PROTECTED", "PRIVATE").count().is(eq(0)) )
+                             .count().is(eq(0)) )');
         $this->prepareQuery();
     }
 }

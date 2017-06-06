@@ -1220,7 +1220,6 @@ class Load extends Tasks {
     }
 
     private function makeCitBody($class) {
-        print_r($this->tokens[$this->id + 1]);
         ++$this->id;
         $rank = -1;
         while($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_CLOSE_CURLY) {
@@ -3428,10 +3427,6 @@ class Load extends Tasks {
 
         $this->pushExpression($use);
 
-        if ($this->tokens[$this->id + 1][0] !== \Exakat\Tasks\T_SEMICOLON) {
-            $this->processSemicolon();
-        }
-
         return $use;
     }
 
@@ -4557,19 +4552,9 @@ class Load extends Tasks {
 
             assert(isset($atom->line), "Warning : missing line atom $id : ".PHP_EOL);
 
-            if (!isset($atom->code)) {
-                print "Warning : code atom $id : ".PHP_EOL;
-                print_r($atom);
-                print PHP_EOL;
-                ++$total;
-            }
+            assert(isset($atom->code), "Warning : forgotten code for atom $id in $this->filename : ".print_r($this->atoms[$id], true));
 
-            if (!isset($atom->token)) {
-                print "Warning : token atom $id : ".PHP_EOL;
-                print_r($atom);
-                print PHP_EOL;
-                ++$total;
-            }
+            assert(isset($atom->code), "Warning : forgotten token for atom $id in $this->filename : ".print_r($this->atoms[$id], true));
         }
     }
 

@@ -29,8 +29,7 @@ class Abstractmethods extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->atomInside('Method')
+             ->outIs('METHOD')
              ->hasOut('ABSTRACT');
         $this->prepareQuery();
     }

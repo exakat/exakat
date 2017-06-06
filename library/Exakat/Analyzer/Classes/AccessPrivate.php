@@ -27,14 +27,16 @@ use Exakat\Analyzer\Analyzer;
 
 class AccessPrivate extends Analyzer {
     public function analyze() {
-        $hasPrivateMethodDefinition = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Method")
-                                                                            .out("NAME").filter{it.get().value("code") == name}.in("NAME")
-                                                                            .out("PRIVATE") )';
-        $notHasPrivateMethodDefinition = 'not( where( __.out("BLOCK").out("ELEMENT").hasLabel("Method")
-                                                                               .out("NAME").filter{it.get().value("code") == name}.in("NAME")
-                                                                               .out("PRIVATE") ) ) ';
+        $hasPrivateMethodDefinition = 'where( __.out("METHOD").hasLabel("Method")
+                                                .out("NAME").filter{it.get().value("code") == name}.in("NAME")
+                                                .out("PRIVATE") )';
+        $notHasPrivateMethodDefinition = 'not( where( __.out("METHOD").hasLabel("Method")
+                                                        .out("NAME").filter{it.get().value("code") == name}.in("NAME")
+                                                        .out("PRIVATE") ) ) ';
 
-        $hasPrivateProperty = 'where( __.out("BLOCK").out("ELEMENT").hasLabel("Ppp").where( __.out("PRIVATE") ).out("PPP").coalesce(out("LEFT"),  __.filter{true} ).filter{it.get().value("code") == name} )';
+        $hasPrivateProperty = 'where( __.out("PPP").hasLabel("Ppp")
+                                        .where( __.out("PRIVATE") ).out("PPP").coalesce(out("LEFT"),  __.filter{true} )
+                                        .filter{it.get().value("code") == name} )';
         
         // methods
         // classname::method() direct class

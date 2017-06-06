@@ -37,8 +37,7 @@ class AvoidUsing extends Analyzer {
 
         // class may be used in a class
         $this->atomIs('Class')
-             ->fullnspathIs($classesPath)
-             ->back('first');
+             ->fullnspathIs($classesPath);
         $this->prepareQuery();
         
         // class may be used in a new
@@ -57,7 +56,7 @@ class AvoidUsing extends Analyzer {
         $this->prepareQuery();
 
         // class may be used in a typehint
-        $this->atomIs('Function')
+        $this->atomIs(array('Function', 'Method', 'Closure'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
