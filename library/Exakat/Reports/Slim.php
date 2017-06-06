@@ -197,7 +197,7 @@ MENU;
         }
 
         if (file_exists($this->finalName)) {
-            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report\n");
+            display($this->finalName." folder was not cleaned. Please, remove it before producing the report. Aborting report".PHP_EOL);
             return;
         }
 
@@ -321,7 +321,7 @@ MENU;
             }
             // Ignore if we have no occurrences
             if ($total === 0) { continue; }
-            $values = implode(', ', $values);
+            $values = makeList($values, '');
 
             $html[] = <<<HTML
             <div class="col-md-3">
@@ -356,7 +356,7 @@ HTML
 
 JAVASCRIPT;
         }
-        $donut = implode("\n", $donut);
+        $donut = implode(PHP_EOL, $donut);
         $donut = <<<JAVASCRIPT
   <script>
     $(document).ready(function() {
@@ -571,7 +571,7 @@ JAVASCRIPT;
   </script>
 
 JAVASCRIPT;
-        $html = '<div class="row">'.implode("\n", $html).'</div>';
+        $html = '<div class="row">'.implode(PHP_EOL, $html).'</div>';
 
         $baseHTML = $this->injectBloc($baseHTML, 'FAVORITES', $html);
         $baseHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $donut);
@@ -580,7 +580,7 @@ JAVASCRIPT;
 
         $baseHTML = $this->getBasedPage('favorites_issues');
 
-        $preferencesJson = implode(', ', $this->getIssuesFaceted('Preferences'));
+        $preferencesJson = makeList($this->getIssuesFaceted('Preferences'), '');
         $blocjs = <<<JAVASCRIPT
  <script src="facetedsearch.js"></script>
 
@@ -1093,9 +1093,9 @@ JAVASCRIPT;
 
         // Filename Overview
         $tags[] = 'CALLCOUNT';
-        $code[] = implode(', ', $data);
+        $code[] = makeList($data, '');
         $tags[] = 'SCRIPTDATAFILES';
-        $code[] = implode(', ', $xAxis);
+        $code[] = makeList($xAxis, '');
 
         $blocjs = str_replace($tags, $code, $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS',  $blocjs);
@@ -1189,7 +1189,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ("'.implode('", "', Analyzer::getThemeAnalyzers($categorie)).'")';
+            $list = 'IN ('.makeList(Analyzer::getThemeAnalyzers($categorie).')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
@@ -1228,8 +1228,8 @@ JAVASCRIPT;
     }
 
     public function getSeverityBreakdown() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = makeList($listArray);
 
         $query = <<<SQL
                 SELECT severity, count(*) AS number
@@ -1307,8 +1307,8 @@ SQL;
     }
 
     protected function getAnalyzersResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = makeList($listArray);
 
         $result = $this->sqlite->query(<<<SQL
         SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity FROM results
@@ -1322,7 +1322,7 @@ SQL
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $analyzer = Analyzer::getInstance($row['analyzer'], $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
-            $row['recipes' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $row['recipes' ] =  makeList($this->themesForAnalyzer[$row['analyzer']], '');
 
             $return[] = $row;
         }
@@ -1366,8 +1366,8 @@ SQL;
     }
 
     private function getFilesResultsCounts() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = makeList($listArray);
 
         $result = $this->sqlite->query(<<<SQL
 SELECT file AS file, line AS loc, count(*) AS issues, count(distinct analyzer) AS analyzers FROM results
@@ -1396,8 +1396,8 @@ SQL;
     }
 
     public function getFilesCount($limit = null) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = makeList($listArray);
 
         $query = "SELECT file, count(*) AS number
                     FROM results
@@ -1455,11 +1455,11 @@ SQL;
             $dataMinor[]    = empty($severities[$value['file']]['Minor'])    ? 0 : $severities[$value['file']]['Minor'];
             $dataNone[]     = empty($severities[$value['file']]['None'])     ? 0 : $severities[$value['file']]['None'];
         }
-        $xAxis        = implode(', ', $xAxis);
-        $dataCritical = implode(', ', $dataCritical);
-        $dataMajor    = implode(', ', $dataMajor);
-        $dataMinor    = implode(', ', $dataMinor);
-        $dataNone     = implode(', ', $dataNone);
+        $xAxis        = makeList($xAxis, '');
+        $dataCritical = makeList($dataCritical, '');
+        $dataMajor    = makeList($dataMajor, '');
+        $dataMinor    = makeList($dataMinor, '');
+        $dataNone     = makeList($dataNone, '');
 
         return array(
             'scriptDataFiles'    => $xAxis,
@@ -1471,8 +1471,8 @@ SQL;
     }
 
     private function getAnalyzersCount($limit) {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = makeList($listArray);
 
         $query = "SELECT analyzer, count(*) AS number
                     FROM results
@@ -1493,8 +1493,8 @@ SQL;
     }
 
     private function getTopAnalyzers() {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = makeList($listArray);
         $toplimit = self::TOPLIMIT;
 
         $query = <<<SQL
@@ -1527,8 +1527,8 @@ SQL;
     }
 
     private function getSeveritiesNumberBy($type = 'file') {
-        $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = '"'.implode('", "', $list).'"';
+        $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = makeList($listArray);
 
         $query = <<<SQL
 SELECT $type, severity, count(*) AS count
@@ -1567,11 +1567,11 @@ SQL;
             $dataMinor[]    = empty($severities[$value['analyzer']]['Minor'])    ? 0 : $severities[$value['analyzer']]['Minor'];
             $dataNone[]     = empty($severities[$value['analyzer']]['None'])     ? 0 : $severities[$value['analyzer']]['None'];
         }
-        $xAxis        = implode(', ', $xAxis);
-        $dataCritical = implode(', ', $dataCritical);
-        $dataMajor    = implode(', ', $dataMajor);
-        $dataMinor    = implode(', ', $dataMinor);
-        $dataNone     = implode(', ', $dataNone);
+        $xAxis        = makeList($xAxis, '');
+        $dataCritical = makeList($dataCritical, '');
+        $dataMajor    = makeList($dataMajor, '');
+        $dataMinor    = makeList($dataMinor, '');
+        $dataNone     = makeList($dataNone, '');
 
         return array(
             'scriptDataAnalyzer'         => $xAxis,
@@ -1586,7 +1586,7 @@ SQL;
     {
         $baseHTML = $this->getBasedPage('issues');
 
-        $issues = implode(', ', $this->getIssuesFaceted($this->themesToShow));
+        $issues = makeList($this->getIssuesFaceted($this->themesToShow), '');
         $blocjs = <<<JAVASCRIPT
         
   <script src="facetedsearch.js"></script>
@@ -1674,8 +1674,8 @@ SQL;
             $item['line' ] =  $row['line'];
             $item['severity'] = "<i class=\"fa fa-warning ".$this->severities[$row['analyzer']]."\"></i>";
             $item['complexity'] = "<i class=\"fa fa-cog ".$this->timesToFix[$row['analyzer']]."\"></i>";
-            $item['recipe' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
-            $lines = explode("\n", $ini['description']);
+            $item['recipe' ] =  makeList($this->themesForAnalyzer[$row['analyzer']], '');
+            $lines = explode(PHP_EOL, $ini['description']);
             $item['analyzer_help' ] = $lines[0];
 
             $items[] = json_encode($item);
@@ -1718,7 +1718,7 @@ SQL;
 
         $php = new Phpexec($this->config->phpversion, $this->config);
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
-        $info[] = array('Ignored files/folders', implode(', ', $this->config->ignore_dirs));
+        $info[] = array('Ignored files/folders', makeList($this->config->ignore_dirs), '');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');
 
@@ -1738,7 +1738,7 @@ SQL;
         $files = '';
         $fileList = $this->datastore->getCol('files', 'file');
         foreach($fileList as $file) {
-            $files .= "<tr><td>$file</td></tr>\n";
+            $files .= '<tr><td>'.$file.'</td></tr>'.PHP_EOL;
         }
 
         $nonFiles = '';
@@ -1746,7 +1746,7 @@ SQL;
         foreach($ignoredFiles as $row) {
             if (empty($row['file'])) { continue; }
 
-            $nonFiles .= "<tr><td>{$row['file']}</td><td>{$row['reason']}</td></tr>\n";
+            $nonFiles .= '<tr><td>'.$row['file'].'</td><td>'.$row['reason'].'</td></tr>'.PHP_EOL;
         }
 
         $html = $this->getBasedPage('proc_files');
@@ -1764,7 +1764,7 @@ SQL;
             $analyzer = Analyzer::getInstance($analyzerName, $this->config);
             $description = $analyzer->getDescription();
 
-            $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
+            $analyzers .= '<tr><td>'.$description->getName().'</td></tr>'.PHP_EOL;
         }
 
         $html = $this->getBasedPage('proc_analyzers');
@@ -1834,9 +1834,9 @@ SQL;
         $phpConfiguration = new PhpConfiguration();
         $report = $phpConfiguration->generate(null, null);
 
-        $id = strpos($report, "\n\n\n");
+        $id = strpos($report, PHP_EOL.PHP_EOL.PHP_EOL);
         $configline = substr($report, 0, $id);
-        $configline = str_replace(array(' ', "\n") , array("&nbsp;", "<br />\n",), $configline);
+        $configline = str_replace(array(' ', PHP_EOL) , array('&nbsp;', '<br />'.PHP_EOL,), $configline);
 
         $html = $this->getBasedPage('php_compilation');
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
@@ -1925,7 +1925,7 @@ SQL
         );
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if ($row['analyzer'] == 'Structures/FileUploadUsage') {
-                $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>\n";
+                $directiveList .= '<tr><td colspan=3 bgcolor=#AAA>File Upload</td></tr>'.PHP_EOL;
                 $data['File Upload'] = (array) json_decode(file_get_contents($this->config->dir_root.'/data/directives/fileupload.json'));
             } elseif ($row['analyzer'] == 'Php/UsesEnv') {
                 $directiveList .= "<tr><td colspan=3 bgcolor=#AAA>Environnement</td></tr>\n";
