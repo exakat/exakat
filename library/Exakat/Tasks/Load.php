@@ -163,7 +163,7 @@ class Load extends Tasks {
     static public $PROP_NODELIMITER = array('String', 'Variable');
     static public $PROP_HEREDOC     = array('Heredoc');
     static public $PROP_COUNT       = array('Sequence', 'Arguments', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
-    static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String');
+    static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String');
     static public $PROP_ABSOLUTE    = array('Nsname');
     static public $PROP_ALIAS       = array('Nsname', 'Identifier', 'As');
     static public $PROP_ORIGIN      = array('Nsname', 'Identifier', 'As');
@@ -1088,9 +1088,14 @@ class Load extends Tasks {
         if ( $function->atom === 'Function') {
             list($fullnspath, $aliased) = $this->getFullnspath($name);
             $this->addDefinition('function', $fullnspath, $function);
-        } else {
-            $fullnspath = '';
+        } elseif ( $function->atom === 'Closure') {
+            $fullnspath = $this->makeAnonymous('function');
             $aliased    = self::NOT_ALIASED;
+        } elseif ( $function->atom === 'Method') {
+            $fullnspath = end($this->currentClassTrait)->fullnspath.':'.$name->code;
+            $aliased    = self::NOT_ALIASED;
+        } else {
+            assert(false, 'Wrong type of function '.$function->atom);
         }
 
         $function->code       = $function->atom === 'Closure' ? 'function' : $name->fullcode;

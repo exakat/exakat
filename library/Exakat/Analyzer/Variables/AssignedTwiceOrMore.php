@@ -26,11 +26,15 @@ use Exakat\Analyzer\Analyzer;
 
 class AssignedTwiceOrMore extends Analyzer {
     public function analyze() {
-        $query = 'g.V().hasLabel("Function").where( 
+        $list = makeList(self::$FUNCTIONS_ALL);
+        $maxLooping = self::MAX_LOOPING;
+
+        $query = <<<GREMLIN
+g.V().hasLabel($list).where( 
             __.sideEffect{counts = [:]; names = [];}
-              .out("BLOCK").repeat( __.out('.$this->linksDown.')).emit(hasLabel("Assignation")).times('.self::MAX_LOOPING.')
+              .out("BLOCK").repeat( __.out({$this->linksDown})).emit(hasLabel("Assignation")).times($maxLooping)
               .hasLabel("Assignation").has("code", "=")
-              .out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Herdoc").in("RIGHT")
+              .out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Heredoc").in("RIGHT")
               .out("LEFT").hasLabel("Variable")
               .sideEffect{ k = it.get().value("fullcode"); 
                            if (counts[k] == null) {
@@ -43,11 +47,12 @@ class AssignedTwiceOrMore extends Analyzer {
             )
            .sideEffect{ names = counts.findAll{ a,b -> b > 1}.keySet() }
            .filter{ names.size() > 0;}
-           .map{ ["key":it.get().value("code"),"value":names]; }';
+           .map{ ["key":it.get().value("fullnspath"),"value":names]; }
+GREMLIN;
         $variables = $this->queryHash($query, null);
         
-        $this->atomIs('Function')
-             ->savePropertyAs('code', 'name')
+        $this->atomIs(self::$FUNCTIONS_ALL)
+             ->savePropertyAs('fullnspath', 'name')
              ->outIs('BLOCK')
              ->atomInside('Assignation')
              ->outIs('LEFT')
