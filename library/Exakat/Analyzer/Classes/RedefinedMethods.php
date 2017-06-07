@@ -28,19 +28,15 @@ use Exakat\Analyzer\Analyzer;
 class RedefinedMethods extends Analyzer {
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->_as('results')
              ->outIs('NAME')
              ->savePropertyAs('code', 'method')
-             ->inIs('NAME')
-             ->inIs('ELEMENT')
-             ->inIs('BLOCK')
+             ->back('first')
              ->goToAllParents()
              ->hasNoOut('ABSTRACT') // abstract methods are not redefined. 
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->hasNoOut('ABSTRACT') // abstract methods are not redefined. 
              ->outIs('NAME')

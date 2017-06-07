@@ -32,8 +32,9 @@ class UsedOnceProperty extends Analyzer {
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')
              ->goToClass()
-             ->outIs('BLOCK')
-             ->raw('where( __.repeat( out('.$this->linksDown.') ).emit(hasLabel("Property")).times(30).hasLabel("Property").out("PROPERTY").filter{ it.get().value("code") == name}.count().is(eq(1)))')
+             ->raw('where( __.repeat( out('.$this->linksDown.') ).emit(hasLabel("Property")).times('.self::MAX_LOOPING.')
+                             .hasLabel("Property").out("PROPERTY").filter{ it.get().value("code") == name}
+                             .count().is(eq(1)))')
              ->back('results');
         $this->prepareQuery();
     }

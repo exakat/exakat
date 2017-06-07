@@ -54,8 +54,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
              ->classDefinition()
              ->goToAllParents(self::INCLUDE_SELF)
 
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->hasNoOut('STATIC')
              ->outIs('NAME')

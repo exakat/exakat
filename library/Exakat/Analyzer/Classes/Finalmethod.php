@@ -29,8 +29,7 @@ class Finalmethod extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->hasOut('FINAL');
         $this->prepareQuery();

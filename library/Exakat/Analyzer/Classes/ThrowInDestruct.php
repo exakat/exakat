@@ -27,8 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class ThrowInDestruct extends Analyzer {
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
              ->codeIs('__destruct')

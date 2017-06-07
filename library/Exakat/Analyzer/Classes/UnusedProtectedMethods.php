@@ -31,8 +31,7 @@ class UnusedProtectedMethods extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->hasOut('PROTECTED')
              ->analyzerIsNot('Classes/UsedProtectedMethod');

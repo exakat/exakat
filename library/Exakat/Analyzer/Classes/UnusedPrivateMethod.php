@@ -32,9 +32,7 @@ class UnusedPrivateMethod extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->_as('block')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->hasOut('PRIVATE')
              ->analyzerIsNot('Classes/UsedPrivateMethod');

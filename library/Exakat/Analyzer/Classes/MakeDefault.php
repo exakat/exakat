@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class MakeDefault extends Analyzer {
     public function analyze() {
         $this->atomIs(self::$CLASSES_ALL)
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
              ->codeIs('__construct')
@@ -51,8 +50,7 @@ class MakeDefault extends Analyzer {
              
              // search for property definition
              ->goToClass()
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->atomIs('Propertydefinition')

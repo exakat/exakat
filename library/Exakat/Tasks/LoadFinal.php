@@ -85,6 +85,7 @@ class LoadFinal extends Tasks {
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
      .has('fullnspath')
+     .not(where( __.in("DEFINITION")))
      .filter{ it.get().value("code").toLowerCase() in arg1 }
      .sideEffect{
          fullnspath = "\\\\" + it.get().value("code").toLowerCase();

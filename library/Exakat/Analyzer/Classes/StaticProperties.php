@@ -29,8 +29,7 @@ class StaticProperties extends Analyzer {
 
     public function analyze() {
         $this->atomIs(array('Class', 'Trait'))
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('PPP')
              ->atomIs('Ppp')
              ->hasOut('STATIC');
         $this->prepareQuery();

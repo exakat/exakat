@@ -29,8 +29,7 @@ class UselessFinal extends Analyzer {
     public function analyze() {
         $this->atomIs('Class')
              ->hasOut('FINAL')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->hasOut('FINAL');
         $this->prepareQuery();

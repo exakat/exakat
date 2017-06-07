@@ -42,7 +42,7 @@ GREMLIN
 );
 
         $constDefinitions = $this->query(<<<GREMLIN
-g.V().hasLabel("Const").where( __.in("ELEMENT").in("BLOCK").hasLabel("Class", "Trait").count().is(eq(0)) )
+g.V().hasLabel("Const").where( __.in("CONST").hasLabel("Class", "Trait").count().is(eq(0)) )
                        .out("CONST")
                        .out("NAME").values("code")
 GREMLIN

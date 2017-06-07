@@ -28,7 +28,7 @@ class MakeGlobalAProperty extends Analyzer {
     public function analyze() {
         // class x { function y() {global $a;}}
         $this->atomIs('Class')
-             ->outIs('BLOCK')
+             ->outIs('METHOD')
              ->atomInside('Global')
              ->_as('results')
              ->goToFunction()
@@ -39,7 +39,7 @@ class MakeGlobalAProperty extends Analyzer {
 
         // class x { function y() {$GLOBALS['a']...;}}
         $this->atomIs('Class')
-             ->outIs('BLOCK')
+             ->outIs('METHOD')
              ->atomInside('Array')
              ->outIs('VARIABLE')
              ->codeIs('$GLOBALS')

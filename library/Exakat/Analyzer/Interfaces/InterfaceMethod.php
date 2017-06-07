@@ -29,8 +29,7 @@ class InterfaceMethod extends Analyzer {
 
     public function analyze() {
         $this->atomIs('Interface')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method');
         $this->prepareQuery();
     }

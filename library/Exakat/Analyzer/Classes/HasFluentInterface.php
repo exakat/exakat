@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class HasFluentInterface extends Analyzer {
     public function analyze() {
         $this->atomIs('Class')
-             ->outIs('BLOCK')
+             ->outIs('METHOD')
              ->atomInside('Return')
              ->outIs('RETURN')
              ->atomIs('Variable')

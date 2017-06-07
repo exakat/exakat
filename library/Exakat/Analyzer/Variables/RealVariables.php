@@ -30,10 +30,10 @@ class RealVariables extends Analyzer {
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasNoIn('GLOBAL')
              ->hasNoParent('Staticproperty', 'PROPERTY')
-             ->hasNoParent(array('Class', 'Trait'), array('PPP', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent(array('Class', 'Trait'), array('STATIC', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent(array('Class', 'Trait'), array('LEFT', 'PPP', 'ELEMENT', 'BLOCK'))
-             ->hasNoParent(array('Class', 'Trait'), array('LEFT', 'STATIC', 'ELEMENT', 'BLOCK'))
+             ->hasNoParent(array('Class', 'Classanonymous', 'Trait'), array('PPP', 'PPP'))
+             ->hasNoParent(array('Class', 'Classanonymous', 'Trait'), array('STATIC', 'PPP'))
+             ->hasNoParent(array('Class', 'Classanonymous', 'Trait'), array('LEFT', 'PPP', 'PPP'))
+             ->hasNoParent(array('Class', 'Classanonymous', 'Trait'), array('LEFT', 'STATIC', 'PPP'))
              ->hasNoParent('Ppp', 'PPP');
         $this->prepareQuery();
     }

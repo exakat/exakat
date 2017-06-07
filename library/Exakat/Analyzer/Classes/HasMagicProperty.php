@@ -27,13 +27,14 @@ use Exakat\Analyzer\Analyzer;
 
 class HasMagicProperty extends Analyzer {
     public function analyze() {
+        $methods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
+        
         // Nsname that is not used somewhere else
         $this->atomIs('Class')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('NAME')
-             ->codeIs(array('__call',  '__callStatic',  '__get',  '__set',  '__isset',  '__unset',  '__sleep',  '__wakeup',  '__tostring',  '__invoke',  '__set_state', '__clone', '__debuginfo'))
+             ->codeIs($methods)
              ->back('first');
         $this->prepareQuery();
     }

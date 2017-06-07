@@ -30,19 +30,7 @@ class EmptyTrait extends Analyzer {
     public function analyze() {
         // Trait with nothing in it
         $this->atomIs('Trait')
-             ->outIs('BLOCK')
-             ->is('count', 1)
-             ->outIs('ELEMENT')
-             ->atomIs(array('Void', 'Use'))
-             ->back('first');
-        $this->prepareQuery();
-
-        // Trait has no function nor properties
-        $this->atomIs('Trait')
-             ->outIs('BLOCK')
-             ->isNot('count', 1)
-             ->raw('where( __.out("ELEMENT").hasLabel("Method", "Ppp").count().is(eq(0)) ) ')
-             ->back('first');
+             ->raw('not( where( __.out("METHOD", "PPP") ) )');
         $this->prepareQuery();
     }
 }

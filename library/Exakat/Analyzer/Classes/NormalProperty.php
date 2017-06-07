@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NormalProperty extends Analyzer {
     public function analyze() {
         $this->atomIs(array('Class', 'Trait'))
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('PPP')
              ->atomIs('Ppp')
              ->hasNoOut('STATIC')
              ->outIs('PPP')

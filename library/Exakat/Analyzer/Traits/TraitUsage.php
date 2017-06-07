@@ -30,8 +30,7 @@ class TraitUsage extends CommonTraitUsage {
 
     public function analyze() {
         $this->atomIs(array('Class', 'Trait'))
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('USE')
              ->atomIs('Use');
         $this->prepareQuery();
     }

@@ -30,11 +30,19 @@ class HiddenUse extends Analyzer {
         $this->atomIs('Use')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ELEMENT')
-             ->raw('where( __.out("ELEMENT").not(hasLabel("Use")).filter{ it.get().value("rank") < rank}.count().is(eq(1)) )')
+             ->raw('where( __.out("ELEMENT").not(hasLabel("Use")).filter{ it.get().value("rank") < rank} )')
              ->back('first');
         $this->prepareQuery();
         
         // rank = 0 use are OK
+        // inside a class/trait
+        $this->atomIs('Use')
+             ->savePropertyAs('rank', 'rank')
+             ->inIs('USE')
+             ->raw('where( __.out("CONST", "METHOD", "PPP").filter{ it.get().value("rank") < rank} )')
+             ->back('first');
+        $this->prepareQuery();
+        
     }
 }
 

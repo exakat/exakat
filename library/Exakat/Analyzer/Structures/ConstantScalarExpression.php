@@ -50,7 +50,7 @@ class ConstantScalarExpression extends Analyzer {
 
         // in property's default value
         $this->atomIs(array('Class', 'Trait'))
-             ->outIs('METHOD')
+             ->outIs('PPP')
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->outIs('RIGHT')

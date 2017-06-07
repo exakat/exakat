@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class InterfaceArguments extends Analyzer {
     public function analyze() {
         $this->atomIs('Interface')
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')

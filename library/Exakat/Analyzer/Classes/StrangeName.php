@@ -29,8 +29,7 @@ class StrangeName extends Analyzer {
         $names = $this->loadIni('php_strange_names.ini', 'classes');
         
         $this->atomIs(array('Class', 'Trait', 'Interface'))
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('METHOD')
              ->atomIs('Method')
              ->_as('results')
              ->outIs('NAME')

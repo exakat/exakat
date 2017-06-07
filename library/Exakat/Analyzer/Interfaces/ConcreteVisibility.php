@@ -34,8 +34,8 @@ class ConcreteVisibility extends Analyzer {
              ->goToClass()
              ->outIs('IMPLEMENTS')
              ->interfaceDefinition()
-             ->outIs('BLOCK')
-             ->atomInside('Method')
+             ->outIs('METHOD')
+             ->atomIs('Method')
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->back('first');

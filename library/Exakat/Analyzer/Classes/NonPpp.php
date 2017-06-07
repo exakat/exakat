@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class NonPpp extends Analyzer {
     public function analyze() {
         $this->atomIs(array('Class', 'Interface', 'Trait'))
-             ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs(array('METHOD', 'PPP', 'CONST'))
              ->atomIs(array('Method', 'Ppp', 'Static', 'Var'))
              ->hasNoOut(array('PUBLIC', 'PROTECTED', 'PRIVATE'));
         $this->prepareQuery();

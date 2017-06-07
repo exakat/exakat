@@ -44,10 +44,12 @@ class UnitializedProperties extends Analyzer {
              ->outIs('METHOD')
              ->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
-             ->raw('where(
-    __.out("METHOD").out("BLOCK").emit( hasLabel("Property")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
-      .hasLabel("Property").where(__.out("PROPERTY").has("token", "T_STRING").filter{ it.get().value("code") == property})
-      .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified").count().is(eq(1)) ).count().is(eq(0))
+             ->raw('not(where(
+    __.out("BLOCK").emit( hasLabel("Property")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
+                   .hasLabel("Property")
+                   .where(__.out("PROPERTY").has("token", "T_STRING").filter{ it.get().value("code") == property})
+                   .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
+                   ))
 )')
              ->back('results');
         $this->prepareQuery();
