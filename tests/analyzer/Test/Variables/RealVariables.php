@@ -8,9 +8,10 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Variables_RealVariables extends Analyzer {
-    /* 2 methods */
+    /* 3 methods */
 
     public function testVariables_RealVariables01()  { $this->generic_test('Variables/RealVariables.01'); }
     public function testVariables_RealVariables02()  { $this->generic_test('Variables/RealVariables.02'); }
+    public function testVariables_RealVariables03()  { $this->generic_test('Variables/RealVariables.03'); }
 }
 ?>

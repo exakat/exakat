@@ -12,6 +12,12 @@ $expected_not = array('$privateStaticM7',
                       '$privateStaticM5', 
                       '$privateStaticM4', 
                       '$privateStaticM3', 
-                      '$privateM');
+                      '$privateM',
+                      '$privateStaticM3 = 3', 
+                      '$privateM = 1', 
+                      '$privateStaticM5 = 7', 
+                      '$privateStaticM4 = 5', 
+                      '$privateStaticM7 = 11', 
+                      '$privateStaticM6 = 9');
 
 ?>

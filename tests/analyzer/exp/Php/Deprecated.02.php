@@ -9,6 +9,7 @@ $expected     = array("split(':', 'global namespace')",
                       );
 
 $expected_not = array( "SPLITI(':', 'Namespace C')",
+                       'SPLITI(\':\', \'Namespace C\')',
                        "explode(':', 'global namespace')",);
 
 ?>
