@@ -4669,7 +4669,7 @@ class Load extends Tasks {
         } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
             // For language structures, it is always in global space, like eval or list
             return array('\\'.strtolower($name->code), self::NOT_ALIASED);
-        } elseif (strtolower(substr($name->fullcode, 0, 9)) === 'namespace') {
+        } elseif (strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
             // namespace\A\B
             return array(substr($this->namespace, 0, -1).strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
         } elseif (in_array($name->atom, array('Identifier', 'Boolean', 'Null'))) {
