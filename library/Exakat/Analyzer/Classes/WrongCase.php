@@ -204,6 +204,19 @@ class WrongCase extends Analyzer {
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first');
         $this->prepareQuery();
+
+// use
+        $this->atomIs('Use')
+             ->hasIn('ELEMENT') // Namespace USE only
+             ->outIs('USE')
+             ->outIsIE('NAME')
+             ->raw($readFinalPart)
+             ->inIs('DEFINITION')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'classe')
+             ->notSamePropertyAs('code', 'classe', true)
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 
