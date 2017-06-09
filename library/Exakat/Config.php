@@ -99,6 +99,7 @@ class Config {
                                             'php70'         => '',
                                             'php71'         => '',
                                             'php72'         => '',
+                                            'php73'         => '',
 
                                             'phpversion'    => '7.1',
                                             'token_limit'   => '1000000',
@@ -119,7 +120,7 @@ class Config {
                                             
                                             'project_reports'     => array('Ambassador', 'Devoops'),
                                             'project_themes'      => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
-                                                                           'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
+                                                                           'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
                                                                            'Dead code', 'Security', 'Analyze', 'Preferences',
                                                                            'Appinfo', 'Appcontent'),
                                             
@@ -341,7 +342,7 @@ class Config {
         unset($value);
 
         $other_php_versions = array();
-        foreach(array('52', '53', '54', '55', '56', '70', '71', '72') as $version) {
+        foreach(array('52', '53', '54', '55', '56', '70', '71', '72', '73') as $version) {
             if (empty($this->configFiles['php'.$version])) {
                 continue;
             }
@@ -357,7 +358,7 @@ class Config {
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
                            'loader'             => 'Neo4jImport',
-                           'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
+                           'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
                            'project_reports'    => array('Ambassador', 'Devoops'),
                         );
 

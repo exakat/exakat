@@ -265,6 +265,7 @@ neo4j_password = 'admin';
 ;php70        = /path/to/php70
 ;php71        = /path/to/php71
 ;php72        = /path/to/php72
+;php73        = /path/to/php73
 php$version        = {$_SERVER['_']}
 
 ; Default themes to run
@@ -275,6 +276,7 @@ php$version        = {$_SERVER['_']}
 project_themes[] = 'CompatibilityPHP70';
 project_themes[] = 'CompatibilityPHP71';
 project_themes[] = 'CompatibilityPHP72';
+;project_themes[] = 'CompatibilityPHP73';
 project_themes[] = 'Analyze';
 project_themes[] = 'Preferences';
 project_themes[] = 'Appinfo';

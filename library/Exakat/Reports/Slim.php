@@ -1796,6 +1796,7 @@ SQL;
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
                 $table .= '<tr>
     <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
     <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
     <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
     <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
@@ -1812,6 +1813,7 @@ SQL;
                 if ($subanalyze == 0) { continue; }
                 $table .= '<tr>
     <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
     <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
     <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
     <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>

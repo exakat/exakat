@@ -64,7 +64,9 @@ class ZendFramework extends Reports {
                                      '56' => 'Compatibility PHP 5.6',
                                      '70' => 'Compatibility PHP 7.0',
                                      '71' => 'Compatibility PHP 7.1',
-                                     '72' => 'Compatibility PHP 7.2',);
+                                     '72' => 'Compatibility PHP 7.2',
+                                     '73' => 'Compatibility PHP 7.3',
+                                     );
 
     private $components = array(
                     'Components' => array(

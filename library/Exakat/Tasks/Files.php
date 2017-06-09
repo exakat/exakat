@@ -44,6 +44,7 @@ class Files extends Tasks {
                        'notCompilable70' => 'N/C',
                        'notCompilable71' => 'N/C',
                        'notCompilable72' => 'N/C',
+                       'notCompilable73' => 'N/C',
                        ) ;
         $unknown = array();
 
@@ -83,7 +84,7 @@ class Files extends Tasks {
         file_put_contents($tmpFileName, ''.$this->config->projects_root.'/projects/'.$dir.'/code'.implode("\n{$this->config->projects_root}/projects/$dir/code", $tmpFiles).'');
 
         $versions = $this->config->other_php_versions;
-        $versions = array('54', '55', '56', '70', '71', '72');
+        $versions = array('54', '55', '56', '70', '71', '72', '73');
 
         $analyzingVersion = $this->config->phpversion[0].$this->config->phpversion[2];
         $id = array_search($analyzingVersion, $versions);
@@ -117,7 +118,7 @@ class Files extends Tasks {
                     }
                 } elseif (substr($resFile, 0, 13) == 'Parse error: ') {
                     // Actually, almost a repeat of the previous. We just ignore it. (Except in PHP 5.4)
-                    if ($version == '52' || $version == '71' || $version == '72') {
+                    if ($version == '52' || $version == '71' || $version == '72' || $version == '73') {
                         preg_match('#Parse error: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
                         $incompilables[] = array('error' => $r[1], 'file' => str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]), 'line' => $r[3]);
                     }

@@ -64,7 +64,9 @@ class Ambassador extends Reports {
                                      '56' => 'Compatibility PHP 5.6',
                                      '70' => 'Compatibility PHP 7.0',
                                      '71' => 'Compatibility PHP 7.1',
-                                     '72' => 'Compatibility PHP 7.2',);
+                                     '72' => 'Compatibility PHP 7.2',
+                                     '73' => 'Compatibility PHP 7.3',
+                                     );
 
     public function __construct($config) {
         parent::__construct($config);
@@ -279,7 +281,8 @@ class Ambassador extends Reports {
                                      Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
                                      Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
                                      Analyzer::getThemeAnalyzers('CompatibilityPHP71'),
-                                     Analyzer::getThemeAnalyzers('CompatibilityPHP72')
+                                     Analyzer::getThemeAnalyzers('CompatibilityPHP72'),
+                                     Analyzer::getThemeAnalyzers('CompatibilityPHP73')
                                      );
         $analyzersList = array_keys(array_count_values($analyzersList));
                                      
@@ -1833,6 +1836,7 @@ SQL;
                 $cve = $this->Bugfixes_cve($bugfix['cve']);
                 $table .= '<tr>
     <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
     <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
     <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
     <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>
@@ -1849,6 +1853,7 @@ SQL;
                 if ($subanalyze == 0) { continue; }
                 $table .= '<tr>
     <td>'.$bugfix['title'].'</td>
+    <td>'.($bugfix['solvedIn72']  ? $bugfix['solvedIn72']  : '-').'</td>
     <td>'.($bugfix['solvedIn71']  ? $bugfix['solvedIn71']  : '-').'</td>
     <td>'.($bugfix['solvedIn70']  ? $bugfix['solvedIn70']  : '-').'</td>
     <td>'.($bugfix['solvedIn56']  ? $bugfix['solvedIn56']  : '-').'</td>

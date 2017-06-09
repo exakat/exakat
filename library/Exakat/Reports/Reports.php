@@ -44,7 +44,7 @@ abstract class Reports {
                                           );
 
     protected $themesToShow = array('CompatibilityPHP56', //'CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55',
-                                    'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72',
+                                    'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
                                     '"Dead code"', 'Security', 'Analyze', 'Inventories');
 
     private $count = 0;

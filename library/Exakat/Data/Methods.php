@@ -173,7 +173,7 @@ SQL;
         $return = array();
 
         $query = <<<SQL
-SELECT * FROM bugfixes ORDER BY SUBSTR(solvedIn71, 5) + 0 DESC, SUBSTR(solvedIn70, 5) + 0 DESC, SUBSTR(56, 5) + 0 DESC 
+SELECT * FROM bugfixes ORDER BY SUBSTR(solvedIn72, 5) + 0 DESC, SUBSTR(solvedIn71, 5) + 0 DESC, SUBSTR(solvedIn70, 5) + 0 DESC, SUBSTR(56, 5) + 0 DESC 
 SQL;
         $res = $this->sqlite->query($query);
 
