@@ -1,4 +1,4 @@
-Version 0.11.7 (Long Armed Ape Monkey, Coming up)
+Version 0.11.8 (Xiaozuanfeng, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,21 @@ Version 0.11.7 (Long Armed Ape Monkey, Coming up)
 + Tokenizer
     + 
 
-Version 0.11.6 (Red Bottomed Horse Monkey, 20017-06-05)
+Version 0.11.7 (Long Armed Ape Monkey, 2017-06-13)
++ Report
+    + Ambassador : report detected patterns (2 firsts)
+    + None report : for when dump is sufficient
++ Analyzer
+    + New analyzer : could factor functioncalls
+    + New analyzers : PSR-* usage
+    + New analyzers : support for Judy and Gender extensions
+    + Added thema for Compatibility PHP 7.3
+    + Added thema for Dependency Injection 
++ Tokenizer
+    + Fixed edge case where classes starting with 'namespace' where mistakenly processed
+    + Removed Block from CIT 
+
+Version 0.11.6 (Red Bottomed Horse Monkey, 2017-06-05)
 + Architecture
     + Removed singleton to Config. WIP
 + Report
