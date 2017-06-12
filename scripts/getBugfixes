@@ -152,6 +152,7 @@ foreach($blocks as $block) {
                                                     'solvedInDev' => null,
                                                     'solvedIn70'  => null,
                                                     'solvedIn71'  => null,
+                                                    'solvedIn72'  => null,
                                                     'cve'         => $cve,
                                                     'bugfix'      => $l[1]
                                                     );
@@ -165,6 +166,9 @@ foreach($blocks as $block) {
 
                     if ($row['solvedInDev'] != $solvedInDev) {
                         $updates[] = "solvedInDev = '7.2.0-dev' ";
+                    } 
+                    if ($row['solvedIn72'] != $version) {
+                        $updates[] = "solvedIn72 = '$version' ";
                     } 
                     if ($row['solvedIn71'] != $version) {
                         $updates[] = "solvedIn71 = '$version' ";
@@ -203,8 +207,8 @@ foreach($blocks as $block) {
 }
 
     foreach($inserts as $insert) {
-        print "INSERT INTO bugfixes ('id', 'title', 'namespace', 'function', 'cve', 'bugs', 'solvedInDev', 'solvedIn71', 'solvedIn70', 'solvedIn56', 'solvedIn55', 'extension', 'analyzer') 
-                             VALUES (null, '$insert[title]', 'PHP'      , '$lafunction', '$insert[cve]', $insert[bugfix], '$insert[solvedInDev]', '$insert[solvedIn71]', '$insert[solvedIn70]', '', '', '$insert[lasection]', null);\n";
+        print "INSERT INTO bugfixes ('id', 'title', 'namespace', 'function', 'cve', 'bugs', 'solvedInDev', 'solvedIn72', 'solvedIn71', 'solvedIn70', 'solvedIn56', 'solvedIn55', 'extension', 'analyzer') 
+                             VALUES (null, '$insert[title]', 'PHP'      , '$lafunction', '$insert[cve]', $insert[bugfix], '$insert[solvedInDev]', '$insert[solvedIn72]', '$insert[solvedIn71]', '$insert[solvedIn70]', '', '', '$insert[lasection]', null);\n";
     }
 
 print $final;
