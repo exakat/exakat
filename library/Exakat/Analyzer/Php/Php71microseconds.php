@@ -28,7 +28,7 @@ class Php71microseconds extends Analyzer {
     public function analyze() {
         // $now == date_create())
         $this->atomIs('Comparison')
-             ->codeIs(array('==', '===', '!==', '==')) 
+             ->codeIs(array('==', '===', '!==', '=='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->functioncallIs('\\date_create')
              ->back('first');
@@ -36,7 +36,7 @@ class Php71microseconds extends Analyzer {
 
         // $now == $a->format('u'))
         $this->atomIs('Comparison')
-             ->codeIs(array('==', '===')) 
+             ->codeIs(array('==', '==='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Methodcall')
              ->outIs('METHOD')

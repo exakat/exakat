@@ -28,12 +28,12 @@ class Cake33DeprecatedStaticmethodcall extends Analyzer {
     public function analyze() {
         $staticcalls = array('\cake\routing\router' => array('mapResources', 'redirect', 'parseNamedParams'));
 
-        $methodcalls = array(array('statusCode', 
-                                   'encoding', 
-                                   'header', 
-                                   'cookie', 
+        $methodcalls = array(array('statusCode',
+                                   'encoding',
+                                   'header',
+                                   'cookie',
                                    'version'), //'\cake\http\client\response'
-                            ); 
+                            );
 
         $deprecatedClasses = array('\cake\utility\crypto\mcrypt');
 

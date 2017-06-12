@@ -42,7 +42,7 @@ class StaticLoop extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
 
-             // Check that blind variable are not mentionned 
+             // Check that blind variable are not mentionned
              ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == blind}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.
@@ -66,7 +66,7 @@ class StaticLoop extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              
-             // Check that blind variables are not mentionned 
+             // Check that blind variables are not mentionned
              ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Variable") ).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") in [v, k]}.count().is(eq(0)) )')
 
              // check if there are non-deterministic function : calling them in a loop is non-static.

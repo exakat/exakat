@@ -241,7 +241,7 @@ GREMLIN;
         $this->prepareQuery();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Closures 
+        // Closures
 
         // callable is in # position
         foreach($positions as $position) {

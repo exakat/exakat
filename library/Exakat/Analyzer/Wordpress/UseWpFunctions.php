@@ -26,8 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class UseWpFunctions extends Analyzer {
     public function analyze() {
-        $functions = array('\\mail', 
-                           '\\die', '\\exit', 
+        $functions = array('\\mail',
+                           '\\die', '\\exit',
                            '\\header',
                            '\\rand', '\\mt_rand'
                            );

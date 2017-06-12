@@ -33,7 +33,7 @@ class CouldReturnVoid extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // function foo() { } // always return ; 
+        // function foo() { } // always return ;
         $this->atomIs('Function')
              ->outIs('BLOCK')
              ->hasAtomInside('Return')

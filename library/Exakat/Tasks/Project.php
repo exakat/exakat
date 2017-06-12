@@ -298,7 +298,7 @@ GREMLIN;
         display("Running the following themes : ".implode(', ', $diff)."\n");
 
         foreach($themes as $theme) {
-            $this->addSnitch(array('step'    => 'Analyze : '.$theme, 
+            $this->addSnitch(array('step'    => 'Analyze : '.$theme,
                                    'project' => $this->config->project));
             $themeForFile = strtolower(str_replace(' ', '_', trim($theme, '"')));
 

@@ -27,7 +27,7 @@ class AlreadyCaught extends Analyzer {
     public function analyze() {
         // Check that the class of on catch is not a parent of of the next catch
         // class A, class B extends A
-        // catch(A $a) {} catch (B $b) <= then Catch A is wrong 
+        // catch(A $a) {} catch (B $b) <= then Catch A is wrong
         $this->atomIs('Try')
              ->outIs('CATCH')
              ->savePropertyAs('rank', 'rank')

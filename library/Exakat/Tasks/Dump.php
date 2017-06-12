@@ -210,7 +210,7 @@ SQL;
             ++$saved;
         }
 
-        if (!empty($query)) { 
+        if (!empty($query)) {
             $query = 'REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
              VALUES '.join(', ', $query);
             $this->sqlite->query($query);
@@ -326,7 +326,7 @@ GREMLIN
             ++$total;
         }
         
-        if (!empty($query)) { 
+        if (!empty($query)) {
             $query = 'INSERT INTO namespaces ("id", "namespace") VALUES '.join(', ', $query);
             $this->sqlite->query($query);
         }
@@ -482,7 +482,7 @@ GREMLIN
         
         display("$total traits\n");
         
-        if (!empty($cit)) { 
+        if (!empty($cit)) {
             $query = array();
             
             foreach($cit as $row) {
@@ -561,7 +561,7 @@ GREMLIN
                 } // Else ignore. Not in the project
             }
         }
-        if (!empty($query)) { 
+        if (!empty($query)) {
             $query = 'INSERT INTO cit_implements ("id", "implementing", "implements", "type") VALUES '.join(', ', $query);
             $this->sqlite->query($query);
         }
@@ -626,7 +626,7 @@ GREMLIN
             ++$total;
         }
 
-        if (!empty($query)) { 
+        if (!empty($query)) {
             $query = 'INSERT INTO methods ("id", "method", "citId", "static", "final", "abstract", "visibility") VALUES '.join(', ', $query);
             $this->sqlite->query($query);
         }
@@ -694,16 +694,16 @@ GREMLIN
                 continue;
             }
 
-            // If we haven't found any definition for this class, just ignore it. 
+            // If we haven't found any definition for this class, just ignore it.
             if (!isset($citId[$row->class])) {
-                continue; 
+                continue;
             }
             $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].
                         ", '".$visibility."', '".$this->sqlite->escapeString($row->value)."', ".(int) $row->static.")";
 
             ++$total;
         }
-        if (!empty($query)) { 
+        if (!empty($query)) {
             $query = 'INSERT INTO properties ("id", "property", "citId", "visibility", "value", "static") VALUES '.join(', ', $query);
             $this->sqlite->query($query);
         }
@@ -743,7 +743,7 @@ GREMLIN
             ++$total;
         }
 
-        if (!empty($query)) { 
+        if (!empty($query)) {
             $query = 'INSERT INTO constants ("id", "constant", "citId", "value") VALUES '.join(', ', $query);
             $this->sqlite->query($query);
         }
@@ -787,7 +787,7 @@ GREMLIN
             ;
             $res = $this->gremlin->query($query);
             if (!($res instanceof \stdClass)) {
-                continue; 
+                continue;
             }
             $res = $res->results;
 
@@ -833,7 +833,7 @@ GREMLIN
                 $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'INCLUDE')";
             }
 
-            if (!empty($query)) { 
+            if (!empty($query)) {
                 $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
                 $this->sqlite->query($query);
             }
@@ -857,7 +857,7 @@ GREMLIN
                 $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', '".$link->type."')";
             }
 
-            if (!empty($query)) { 
+            if (!empty($query)) {
                 $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
                 $this->sqlite->query($query);
             }
@@ -881,7 +881,7 @@ GREMLIN
                 $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'EXTENDS')";
             }
 
-            if (!empty($query)) { 
+            if (!empty($query)) {
                 $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
                 $this->sqlite->query($query);
             }
@@ -905,7 +905,7 @@ GREMLIN
                 $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'USE')";
             }
 
-            if (!empty($query)) { 
+            if (!empty($query)) {
                 $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
                 $this->sqlite->query($query);
             }
@@ -929,7 +929,7 @@ GREMLIN
                 $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'FUNCTIONCALL')";
             }
 
-            if (!empty($query)) { 
+            if (!empty($query)) {
                 $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
                 $this->sqlite->query($query);
             }
@@ -953,7 +953,7 @@ GREMLIN
                 $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'CONSTANT')";
             }
 
-            if (!empty($query)) { 
+            if (!empty($query)) {
                 $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
                 $this->sqlite->query($query);
             }
@@ -977,7 +977,7 @@ GREMLIN
                 $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'NEW')";
             }
 
-            if (!empty($query)) { 
+            if (!empty($query)) {
                 $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
                 $this->sqlite->query($query);
             }
@@ -1001,7 +1001,7 @@ GREMLIN
                 $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', '".strtoupper($link->type)."')";
             }
 
-            if (!empty($query)) { 
+            if (!empty($query)) {
                 $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
                 $this->sqlite->query($query);
             }

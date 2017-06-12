@@ -31,9 +31,9 @@ class Incompilable extends Analyzer {
         $r = Analyzer::$datastore->getRow('compilation'.$this->config->phpversion[0].$this->config->phpversion[2]);
 
         $this->rowCount       = count($r);
-        $this->processedCount = 1; 
-        $this->queryCount     = 0; 
-        $this->rawQueryCount  = 0; 
+        $this->processedCount = 1;
+        $this->queryCount     = 0;
+        $this->rawQueryCount  = 0;
 
         // This is not actually done here....
         return true;

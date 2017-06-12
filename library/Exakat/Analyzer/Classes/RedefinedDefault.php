@@ -42,7 +42,7 @@ class RedefinedDefault extends Analyzer {
              ->outIs('BLOCK')
              ->outIs('ELEMENT')
 // Not using atomInside, to avoid values in a condition
-//             ->atomInside('Assignation') 
+//             ->atomInside('Assignation')
              ->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')

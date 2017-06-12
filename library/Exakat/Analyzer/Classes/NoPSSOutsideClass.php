@@ -34,7 +34,7 @@ class NoPSSOutsideClass extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // new self; 
+        // new self;
         $this->atomIs('New')
              ->hasNoClassTrait()
              ->outIs('NEW')
@@ -43,7 +43,7 @@ class NoPSSOutsideClass extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $x instanceof self; 
+        // $x instanceof self;
         $this->atomIs('Instanceof')
              ->hasNoClassTrait()
              ->outIs('CLASS')

@@ -70,7 +70,7 @@ class PropertyUsedInternally extends Analyzer {
              ->back('ppp');
         $this->prepareQuery();
 
-// Test for arrays ? 
+// Test for arrays ?
 
     }
 }

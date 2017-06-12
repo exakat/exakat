@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\ZendF3;
 
 class Zf3ComponentMissing extends Analyzer {
-    // MVC are only default values for tests. 
+    // MVC are only default values for tests.
     protected $component = 'zend-mvc';
     protected $version = '2.5';
     

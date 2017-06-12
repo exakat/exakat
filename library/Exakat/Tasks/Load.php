@@ -635,8 +635,8 @@ class Load extends Tasks {
         $this->line = 0;
         $log = array();
 
-        if (is_link($fullpath)) { 
-            return true; 
+        if (is_link($fullpath)) {
+            return true;
         }
         if (!file_exists($fullpath)) {
             throw new NoSuchFile( $filename );
@@ -909,7 +909,7 @@ class Load extends Tasks {
         $this->pushExpression($variable);
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
-        }                                      
+        }
 
         return $variable;
     }
@@ -1037,7 +1037,7 @@ class Load extends Tasks {
         }
 
         if ($function->atom === 'Closure') {
-            ++$this->id; 
+            ++$this->id;
         } else {
             $name = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
             $this->addLink($function, $name, 'NAME');
@@ -1231,7 +1231,7 @@ class Load extends Tasks {
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_SEMICOLON) {
                 ++$this->id;
                 continue;
-            } 
+            }
             
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_PRIVATE) {
                 ++$this->id;
@@ -1241,7 +1241,7 @@ class Load extends Tasks {
                     $this->addLink($class, $cpm, strtoupper($cpm->atom));
                 }
 
-                continue; 
+                continue;
             }
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_PUBLIC) {
@@ -1252,7 +1252,7 @@ class Load extends Tasks {
                     $this->addLink($class, $cpm, strtoupper($cpm->atom));
                 }
 
-                continue; 
+                continue;
             }
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_PROTECTED) {
@@ -1263,19 +1263,19 @@ class Load extends Tasks {
                     $this->addLink($class, $cpm, strtoupper($cpm->atom));
                 }
 
-                continue; 
+                continue;
             }
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_FINAL) {
                 ++$this->id;
                 $cpm = $this->processFinal();
-                continue; 
+                continue;
             }
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_ABSTRACT) {
                 ++$this->id;
                 $cpm = $this->processAbstract();
-                continue; 
+                continue;
             }
 
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STATIC) {
@@ -1285,7 +1285,7 @@ class Load extends Tasks {
                     $cpm->rank = ++$rank;
                     $this->addLink($class, $cpm, strtoupper($cpm->atom));
                 }
-                continue; 
+                continue;
             }
             
             $cpm = $this->processNext();
@@ -1374,7 +1374,7 @@ class Load extends Tasks {
         $newContext = $this->isContext(self::CONTEXT_NEW);
         if ($newContext === true) {
             $this->toggleContext(self::CONTEXT_NEW);
-        }   
+        }
         
         $this->makeCitBody($class);
         
@@ -1683,16 +1683,16 @@ class Load extends Tasks {
     }
 
     private function processTypehint() {
-        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_ARRAY, 
-                                                            \Exakat\Tasks\T_CALLABLE, 
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_ARRAY,
+                                                            \Exakat\Tasks\T_CALLABLE,
                                                             \Exakat\Tasks\T_STATIC))) {
             $nsname = $this->processNextAsIdentifier();
 
             return $nsname;
-        } 
+        }
         
-        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR, 
-                                                            \Exakat\Tasks\T_STRING, 
+        if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_NS_SEPARATOR,
+                                                            \Exakat\Tasks\T_STRING,
                                                             \Exakat\Tasks\T_NAMESPACE))) {
             $nsname = $this->processOneNsname(self::WITHOUT_FULLNSPATH);
             
@@ -1712,7 +1712,7 @@ class Load extends Tasks {
             }
             
             return $nsname;
-        } 
+        }
         
         // Nothing to do, return 0 for the calling method
         return 0;
@@ -2056,7 +2056,7 @@ class Load extends Tasks {
 
             $this->addCall('function', $fullnspath, $functioncall);
 
-            static $deterministFunctions; 
+            static $deterministFunctions;
             
             if ($deterministFunctions === null) {
                 $data = new Methods($this->config);
@@ -2078,7 +2078,7 @@ class Load extends Tasks {
 
         if ($getFullnspath === self::WITHOUT_FULLNSPATH) {
             return $functioncall;
-        } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG 
+        } elseif ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG
              && ($getFullnspath === self::WITH_FULLNSPATH) ) {
             $this->processSemicolon();
         } else {
@@ -2996,7 +2996,7 @@ class Load extends Tasks {
         }
         
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_EQUAL) {
-            // This is a T_LIST ! 
+            // This is a T_LIST !
             $array  = $this->addAtom('Functioncall');
             $array->token      = 'T_OPEN_BRACKET';
             $array->fullnspath = '\list';
@@ -3470,7 +3470,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET ||
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_CURLY) {
             return $this->processBracket();
-        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON || 
+        } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOUBLE_COLON ||
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR ||
                   $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_INSTANCEOF   ||
                   $this->tokens[$this->id - 1][0] === \Exakat\Tasks\T_AS) {
@@ -3802,7 +3802,7 @@ class Load extends Tasks {
             $this->pushExpression($variable);
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
                 $this->processSemicolon();
-            }                                      
+            }
 
             return $variable;
         }
@@ -3881,7 +3881,7 @@ class Load extends Tasks {
             $operand->token    = $this->getToken($this->tokens[$this->id][0]);
 
             return $operand;
-        } 
+        }
         
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
         $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
@@ -4675,7 +4675,7 @@ class Load extends Tasks {
         } elseif (in_array($name->atom, array('Identifier', 'Boolean', 'Null'))) {
 
             // This is an identifier, self or parent
-            if (strtolower($name->code) === 'self' || 
+            if (strtolower($name->code) === 'self' ||
                 strtolower($name->code) === 'static') {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
@@ -4821,7 +4821,7 @@ class Load extends Tasks {
         if (intval($call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
-        // single : is OK 
+        // single : is OK
         if (preg_match('/[$ #?;%^\*\'\"\. <>~&,|\(\){}\[\]\/\s=+!`@\-]/is', $call->noDelimiter)) {
             return; // Can't be a class anyway.
         }

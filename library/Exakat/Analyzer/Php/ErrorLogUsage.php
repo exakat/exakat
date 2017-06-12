@@ -28,7 +28,7 @@ use Exakat\Analyzer\Common\FunctionUsage;
 class ErrorLogUsage extends FunctionUsage {
     public function analyze() {
         $this->functions = array('error_log' );
-        parent::analyze();    
+        parent::analyze();
     }
 }
 

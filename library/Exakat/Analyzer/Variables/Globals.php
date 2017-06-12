@@ -42,7 +42,7 @@ class Globals extends Analyzer {
              ->inIs('VARIABLE');
         $this->prepareQuery();
 
-        // implicit global 
+        // implicit global
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
         $this->atomIs(array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition'))
              ->codeIsNot($superglobals, true)

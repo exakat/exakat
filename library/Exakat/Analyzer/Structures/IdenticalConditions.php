@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 class IdenticalConditions extends Analyzer {
     public function analyze() {
 
-        // $a || $a 
+        // $a || $a
         // ($a) && ($a)
         $this->atomIs('Logical')
              ->hasNoIn(array('LEFT', 'RIGHT'))
@@ -183,7 +183,7 @@ class IdenticalConditions extends Analyzer {
              ->back('first');
         $this->prepareQuery();
         
-        // TODO : also adding situations like ($a and !$a) ? 
+        // TODO : also adding situations like ($a and !$a) ?
     }
 }
 

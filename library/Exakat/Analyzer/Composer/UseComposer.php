@@ -27,10 +27,10 @@ use Exakat\Analyzer\Analyzer;
 
 class UseComposer extends Analyzer {
     public function analyze() {
-        $this->rowCount       = (int) Analyzer::$datastore->getHash('composer.json'); 
-        $this->processedCount = 1; 
-        $this->queryCount     = 0; 
-        $this->rawQueryCount  = 0; 
+        $this->rowCount       = (int) Analyzer::$datastore->getHash('composer.json');
+        $this->processedCount = 1;
+        $this->queryCount     = 0;
+        $this->rawQueryCount  = 0;
 
         return true;
     }

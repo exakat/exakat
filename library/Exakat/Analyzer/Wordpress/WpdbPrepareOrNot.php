@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class WpdbPrepareOrNot extends Analyzer {
     public function analyze() {
         // No variable, don't use prepare
-        // $wpdb->prepare("insert into table values (1,2,3)") 
+        // $wpdb->prepare("insert into table values (1,2,3)")
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
@@ -43,7 +43,7 @@ class WpdbPrepareOrNot extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
-        // $wpdb->prepare("insert into $wpdb->prefix values (1,2,3)") 
+        // $wpdb->prepare("insert into $wpdb->prefix values (1,2,3)")
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
@@ -62,7 +62,7 @@ class WpdbPrepareOrNot extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
-        // $wpdb->prepare(<<<SQL insert into $wpdb->prefix values (1,2,3) SQL;) 
+        // $wpdb->prepare(<<<SQL insert into $wpdb->prefix values (1,2,3) SQL;)
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
@@ -81,7 +81,7 @@ class WpdbPrepareOrNot extends Analyzer {
              ->back('results');
         $this->prepareQuery();
         
-        // $wpdb->prepare("insert into ".$wpdb->prefix." values (1,2,3)") 
+        // $wpdb->prepare("insert into ".$wpdb->prefix." values (1,2,3)")
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')

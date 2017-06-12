@@ -99,7 +99,7 @@ SQL;
 
     public function getThemesForAnalyzer($list = null) {
         if ($list === null) {
-            $list = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
+            $list = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
                           'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
                           'Dead code', 'Security', 'Analyze', 'Preferences');
         } elseif (is_string($list)) {

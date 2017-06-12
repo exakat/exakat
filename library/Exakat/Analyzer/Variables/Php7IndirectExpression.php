@@ -49,7 +49,7 @@ class Php7IndirectExpression extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-//Foo::$bar['baz'](); 
+//Foo::$bar['baz']();
         $this->atomIs('Functioncall')
              ->outIs('NAME')
              ->atomIs('Array')

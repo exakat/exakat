@@ -121,7 +121,7 @@ class Extension extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
             
-            // Can a namespace be used in a nsname (as prefix) ? 
+            // Can a namespace be used in a nsname (as prefix) ?
         }
 
         if (!empty($ini['directives'])) {
@@ -131,7 +131,7 @@ class Extension extends Analyzer {
                  ->noDelimiterIs($ini['directives']);
             $this->prepareQuery();
             
-            // Can a namespace be used in a nsname (as prefix) ? 
+            // Can a namespace be used in a nsname (as prefix) ?
         }
     }
 }

@@ -69,7 +69,7 @@ class UncheckedResources extends Analyzer {
                      // checked as the condition in a if/then or while
                      ->raw('where( __.in("CONDITION").hasLabel("Ifthen", "While" ).count().is(eq(0)) )')
 
-                     // checked with a $variable && 
+                     // checked with a $variable &&
                      ->raw('where( __.in("LEFT", "RIGHT").hasLabel("Logical").count().is(eq(0)) )')
                      
                      // checked with a if ($resource == false) or while($resource == false)

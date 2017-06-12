@@ -313,7 +313,7 @@ GREMLIN;
         if ($arguments === null) { // empty
             $this->methods[] = $method;
             return $this;
-        } 
+        }
         
         if (func_num_args() >= 2) {
             $arguments = func_get_args();
@@ -326,7 +326,7 @@ GREMLIN;
             }
             $this->methods[] = call_user_func_array('sprintf', $argnames);
             return $this;
-        } 
+        }
 
         // one argument
         $argname = 'arg'.count($this->arguments);
@@ -1667,8 +1667,8 @@ GREMLIN
             $query = implode('.', $this->methods);
             $query = 'g.V().'.$first.'.groupCount("processed").by(count()).'.$query;
         } elseif (substr($this->methods[1], 0, 39) == 'where( __.in("ANALYZED").has("analyzer"') {
-            $first = array_shift($this->methods); // remove first 
-            $init = array_shift($this->methods); // remove first 
+            $first = array_shift($this->methods); // remove first
+            $init = array_shift($this->methods); // remove first
             preg_match('#"([^"\/]+?/[^"]+?)"#', $init, $r);
             $query = implode('.', $this->methods);
             $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$r[1].'").out("ANALYZED").as("first").groupCount("processed").by(count()).'.$query;
@@ -1833,7 +1833,7 @@ GREMLIN;
     }
     
     public static function makeBaseName($className) {
-        // No Exakat, no Analyzer, using / instead of \ 
+        // No Exakat, no Analyzer, using / instead of \
         return $className;
     }
 

@@ -29,7 +29,7 @@ class UseWpdbApi extends Analyzer {
         $crud = array('INSERT', 'UPDATE', 'DELETE', 'REPLACE');
         $crudAlternative = implode('|', $crud);
 
-        // $wpdb->query('delete from sometable') 
+        // $wpdb->query('delete from sometable')
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
@@ -46,7 +46,7 @@ class UseWpdbApi extends Analyzer {
              ->back('results');
         $this->prepareQuery();
         
-        // $wpdb->query("delete from ".$wpdb->prefix."table") 
+        // $wpdb->query("delete from ".$wpdb->prefix."table")
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
@@ -64,7 +64,7 @@ class UseWpdbApi extends Analyzer {
              ->back('results');
         $this->prepareQuery();
 
-        // $wpdb->query("delete from $wpdb->prefix") 
+        // $wpdb->query("delete from $wpdb->prefix")
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')

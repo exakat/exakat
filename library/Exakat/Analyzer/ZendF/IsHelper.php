@@ -26,7 +26,7 @@ use Exakat\Analyzer\Common\IsSubclassOf;
 
 class IsHelper extends IsSubclassOf {
     public function analyze() {
-        $this->classes = array('\\zend_view_helper_abstract', 
+        $this->classes = array('\\zend_view_helper_abstract',
                                '\\zend\\form\\view\\helper\\abstracthelper',
                                '\\zend\\view\\helper\\abstracthelper',
                                '\\zend\i18n\\view\\helper\\abstracttranslatorhelper',

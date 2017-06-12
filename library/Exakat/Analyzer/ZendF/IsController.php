@@ -26,7 +26,7 @@ use Exakat\Analyzer\Common\IsSubclassOf;
 
 class IsController extends IsSubclassOf {
     public function analyze() {
-        $this->classes = array('\\zend_controller_action', 
+        $this->classes = array('\\zend_controller_action',
                                '\\zend\\mvc\\controller\\abstractactioncontroller',
                                '\\zend\\mvc\\controller\\abstractrestfulcontroller',
                                '\\zend\\mvc\\controller\\abstractconsolecontroller',

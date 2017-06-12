@@ -26,8 +26,8 @@ use Exakat\Analyzer\Analyzer;
 
 class CouldCentralize extends Analyzer {
     public function analyze() {
-        $excluded = array('\\\\echo', '\\\\print', 
-                          '\\\\define', '\\\\defined', '\\\\extension_loaded', 
+        $excluded = array('\\\\echo', '\\\\print',
+                          '\\\\define', '\\\\defined', '\\\\extension_loaded',
                           '\\\\include', '\\\\include_once', '\\\\require', '\\\\require_once',);
         $excludedList = makeList($excluded);
         

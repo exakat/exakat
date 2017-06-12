@@ -101,7 +101,7 @@ g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
 GREMLIN
 );
         if (!empty($strings)) {
-            $this->atomIs('Class')  
+            $this->atomIs('Class')
                  ->outIs('NAME')
                  ->codeIs($strings)
                  ->back('first');

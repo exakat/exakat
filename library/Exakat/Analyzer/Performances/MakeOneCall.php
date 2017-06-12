@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class MakeOneCall extends Analyzer {
     public function analyze() {
         // the second argument must match between calls
-        $functionsArg2 = array('\\str_replace', '\\str_ireplace', 
+        $functionsArg2 = array('\\str_replace', '\\str_ireplace',
                                '\\preg_replace_callback', '\\preg_replace');
         
         // preg_replace( **, **, x); called several times
@@ -79,7 +79,7 @@ class MakeOneCall extends Analyzer {
              ->back('first');
         $this->prepareQuery();
         
-        // same functions, in a foreach? 
+        // same functions, in a foreach?
     }
 }
 

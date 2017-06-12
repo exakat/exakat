@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class RepeatedRegex extends Analyzer {
     public function analyze() {
         // pcre_last_error is too much here
-        $functions = $this->loadINI('pcre.ini', 'functions'); 
+        $functions = $this->loadINI('pcre.ini', 'functions');
         $functionsList = '"\\\\'.implode('", "\\\\', $functions).'"';
     
         $repeatedRegex = $this->query('g.V().hasLabel("Functioncall").has("fullnspath", within('.$functionsList.'))

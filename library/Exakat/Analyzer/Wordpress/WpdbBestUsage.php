@@ -29,7 +29,7 @@ class WpdbBestUsage extends Analyzer {
         $ignoreCommands = array('SHOW TABLES', 'RENAME TABLE', 'ALTER TABLE', 'CREATE TABLE', 'DROP TABLE', 'DESC', 'TRUNCATE');
         $ignoreCommandsRegex = join('|', $ignoreCommands);
 
-        // $wpdb->get_var("select ".$wpdb->prefix."table") 
+        // $wpdb->get_var("select ".$wpdb->prefix."table")
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')
@@ -45,7 +45,7 @@ class WpdbBestUsage extends Analyzer {
              ->raw('where( __.out("CONCAT").hasLabel("String").has("rank", 0).filter{(it.get().value("noDelimiter") =~ "^('.$ignoreCommandsRegex.') ").getCount() == 0} )');
         $this->prepareQuery();
 
-        // $wpdb->get_var("select {$wpdb->prefix}table") 
+        // $wpdb->get_var("select {$wpdb->prefix}table")
         $this->atomIs('Variableobject')
              ->codeIs('$wpdb')
              ->inIs('OBJECT')

@@ -127,10 +127,10 @@ class LogicalMistakes extends Analyzer {
 
         $this->prepareQuery();
         
-        // Extension to this rule : 
+        // Extension to this rule :
         // Check for methodcalls, function calls
         // add support for xor (although, it is rare)
-        // may be invert == and != ? 
+        // may be invert == and != ?
     }
 }
 

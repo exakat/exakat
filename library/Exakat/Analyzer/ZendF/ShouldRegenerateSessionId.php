@@ -45,7 +45,7 @@ class ShouldRegenerateSessionId extends Analyzer {
                                            .count()');
                                            
         if ($regenerateid[0] !== 0) {
-            return; 
+            return;
         }
 
         $this->atomIs('Project');

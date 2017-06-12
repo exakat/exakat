@@ -32,7 +32,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
     }
     
     public function analyze() {
-        // check outside the class to undefined Class : report it as pb. 
+        // check outside the class to undefined Class : report it as pb.
         $this->atomIs('Staticmethodcall')
              ->analyzerIs('Classes/UndefinedClasses')
              ->back('first');

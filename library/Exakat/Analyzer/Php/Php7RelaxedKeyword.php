@@ -86,7 +86,7 @@ class Php7RelaxedKeyword extends Analyzer {
         //////////////////////////////////////////////////////////////////////
         // Normal usage                                                     //
         //////////////////////////////////////////////////////////////////////
-        // Methodcall 
+        // Methodcall
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs($keywords)

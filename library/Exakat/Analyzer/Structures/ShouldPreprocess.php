@@ -46,10 +46,10 @@ class ShouldPreprocess extends Analyzer {
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
         
-        $functionListNoArray = array_diff($functionList, 
+        $functionListNoArray = array_diff($functionList,
                 array('\\defined', '\\error_reporting', '\\extension_loaded', '\\get_defined_vars', '\\print', '\\echo', '\\set_time_limit'));
         
-        // Function only applied to constants 
+        // Function only applied to constants
         $this->atomFunctionIs($functionListNoArray)
              ->raw('where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant", true)).count().is(eq(0)) )');
         $this->prepareQuery();

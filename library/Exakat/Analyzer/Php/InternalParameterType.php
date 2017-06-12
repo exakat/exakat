@@ -62,10 +62,10 @@ class InternalParameterType extends Analyzer {
                      // only include literals (and closures and literal array)
                      ->isLiteral()
 
-                    // Constant (Identifier), logical, concatenation, addition ? 
+                    // Constant (Identifier), logical, concatenation, addition ?
                     // Those will have to be replaced after more research
 
-                    // All string equivalents 
+                    // All string equivalents
                      ->atomIsNot($typeConversion[$type])
                      ->back('first');
                 $this->prepareQuery();

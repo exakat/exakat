@@ -33,7 +33,7 @@ class FopenMode extends Analyzer {
              ->hasNoOut('CONCAT')
              ->noDelimiterIsNot(array('r', 'r+', 'w', 'w+', 'a', 'a+', 'x', 'x+', 'c', 'c+', 't', 't+', 'e', 'e+', // Normal
                                       'rb', 'rb+', 'wb', 'wb+', 'ab', 'ab+', 'xb', 'xb+', 'cb', 'cb+', 'eb', 'eb+',  // binary post
-                                      'br', 'br+', 'bw', 'bw+', 'ba', 'ba+', 'bx', 'bx+', 'bc', 'bc+', 'be', 'be+'))  // binary pre 
+                                      'br', 'br+', 'bw', 'bw+', 'ba', 'ba+', 'bx', 'bx+', 'bc', 'bc+', 'be', 'be+'))  // binary pre
              ->back('first');
         $this->prepareQuery();
     }

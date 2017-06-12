@@ -37,7 +37,7 @@ class FetchOneRowFormat extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // $res->fetchRow(SQLITE3_BOTH) : SQLITE3_BOTH is the worst. 
+        // $res->fetchRow(SQLITE3_BOTH) : SQLITE3_BOTH is the worst.
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->tokenIs('T_STRING')

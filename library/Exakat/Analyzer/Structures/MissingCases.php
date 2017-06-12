@@ -39,7 +39,7 @@ GREMLIN
             return;
         }
 
-        // Compare switches together. 
+        // Compare switches together.
         $commons = array();
         foreach($switches as $s) {
             foreach($switches as $a) {

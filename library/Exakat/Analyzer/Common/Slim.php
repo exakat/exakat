@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 abstract class Slim extends Analyzer {
     protected function getAppVariables() {
-        $appClasses = array("\\\\slim\\\\slim", 
+        $appClasses = array("\\\\slim\\\\slim",
                             "\\\\slim\\\\app");
                             
         $appClassesList = makeList($appClasses);

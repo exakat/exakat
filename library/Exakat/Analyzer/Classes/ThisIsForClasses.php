@@ -38,7 +38,7 @@ class ThisIsForClasses extends Analyzer {
 
         // Inside Classes
         // catch, global, static
-        // Any cast of $this is bad, unset or else. 
+        // Any cast of $this is bad, unset or else.
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasClassTrait()
              ->codeIs('$this')

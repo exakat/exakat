@@ -71,7 +71,7 @@ class UndefinedClasses extends Analyzer {
              ->fullnspathIsNot(array_merge($classes, $interfaces));
         $this->prepareQuery();
         
-        // Add support for instanceof ? 
+        // Add support for instanceof ?
     }
 }
 
