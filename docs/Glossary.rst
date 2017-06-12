@@ -727,6 +727,7 @@ Glossary
       + :ref:`Anonymous Classes <anonymous-classes>`
       + :ref:`Assign Default To Properties <assign-default-to-properties>`
       + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
+      + :ref:`Courrier Anti-Pattern <courrier-anti-pattern>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`
@@ -735,6 +736,7 @@ Glossary
       + :ref:`Should Use Local Class <should-use-local-class>`
       + :ref:`Strange Names For Methods <strange-names-for-methods>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
+      + :ref:`Too Many Injections <too-many-injections>`
       + :ref:`Unitialized Properties <unitialized-properties>`
       + :ref:`Useless Return <useless-return>`
       + :ref:`__toString() Throws Exception <\_\_tostring()-throws-exception>`

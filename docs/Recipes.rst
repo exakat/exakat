@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 30 May 2017 13:55:32 +0000
-.. comment: Generation hash : e8b51c67affc003e155a153f69ab7b34e40db1a0
+.. comment: Generation date : Mon, 12 Jun 2017 12:25:46 +0000
+.. comment: Generation hash : a5a2ac1abd382a4787b99a82206b10cc539b56d7
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 315 analysis
+Total : 319 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
@@ -125,6 +125,7 @@ Total : 315 analysis
 * :ref:`Could Be Protected Property <could-be-protected-property>`
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
+* :ref:`Could Make A Function <could-make-a-function>`
 * :ref:`Could Return Void <could-return-void>`
 * :ref:`Could Typehint <could-typehint>`
 * :ref:`Could Use Alias <could-use-alias>`
@@ -132,6 +133,7 @@ Total : 315 analysis
 * :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
 * :ref:`Could Use self <could-use-self>`
 * :ref:`Could Use str_repeat() <could-use-str\_repeat()>`
+* :ref:`Courrier Anti-Pattern <courrier-anti-pattern>`
 * :ref:`Crc32() Might Be Negative <crc32()-might-be-negative>`
 * :ref:`Dangling Array References <dangling-array-references>`
 * :ref:`Deep Definitions <deep-definitions>`
@@ -193,6 +195,7 @@ Total : 315 analysis
 * :ref:`Make Global A Property <make-global-a-property>`
 * :ref:`Malformed Octal <malformed-octal>`
 * :ref:`Missing Cases In Switch <missing-cases-in-switch>`
+* :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
 * :ref:`Multiple Alias Definitions <multiple-alias-definitions>`
 * :ref:`Multiple Alias Definitions Per File <multiple-alias-definitions-per-file>`
@@ -302,6 +305,7 @@ Total : 315 analysis
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
 * :ref:`Too Many Finds <too-many-finds>`
+* :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
@@ -332,9 +336,9 @@ Total : 315 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Private Properties <unused-private-properties>`
 * :ref:`Unused Returned Value <unused-returned-value>`
 * :ref:`Unused Static Methods <unused-static-methods>`
-* :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Traits <unused-traits>`
 * :ref:`Unused Use <unused-use>`
 * :ref:`Use === null <use-===-null>`
@@ -423,7 +427,7 @@ Total : 17 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 18 analysis
+Total : 19 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
@@ -434,6 +438,7 @@ Total : 18 analysis
 * :ref:`Echo Or Print <echo-or-print>`
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
 * :ref:`Interpolation`
+* :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
 * :ref:`No Plus One <no-plus-one>`
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
@@ -779,6 +784,28 @@ Total : 16 analysis
 * :ref:`ext/mhash`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
 
+.. _compatibilityphp73:
+
+CompatibilityPHP73
+++++++++++++++++++
+
+Total : 14 analysis
+
+* :ref:`Hexadecimal In String <hexadecimal-in-string>`
+* :ref:`Invalid Octal In String <invalid-octal-in-string>`
+* :ref:`New Constants In PHP 7.2 <new-constants-in-php-7.2>`
+* :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
+* :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
+* :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
+* :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
+* :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+* :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
+* :ref:`Php 71 New Classes <php-71-new-classes>`
+* :ref:`Php/Php73NewFunctions`
+* :ref:`Use random_int() <use-random\_int()>`
+* :ref:`ext/mcrypt`
+* :ref:`ext/mhash`
+
 .. _dead-code:
 
 Dead code
@@ -804,10 +831,10 @@ Total : 24 analysis
 * :ref:`Unused Interfaces <unused-interfaces>`
 * :ref:`Unused Label <unused-label>`
 * :ref:`Unused Methods <unused-methods>`
+* :ref:`Unused Private Properties <unused-private-properties>`
 * :ref:`Unused Protected Methods <unused-protected-methods>`
 * :ref:`Unused Returned Value <unused-returned-value>`
 * :ref:`Unused Static Methods <unused-static-methods>`
-* :ref:`Unused Static Properties <unused-static-properties>`
 * :ref:`Unused Use <unused-use>`
 * :ref:`Used Protected Method <used-protected-method>`
 
