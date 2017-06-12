@@ -44,11 +44,12 @@ class DependencyInjection extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->atomInside('Variable')
+             ->samePropertyAs('code', 'arg')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->outIs('LEFT')
              ->atomIs('Property')
-             ->outIs('CLASS')
+             ->outIs('OBJECT')
              ->codeIs('$this')
              ->back('result');
         $this->prepareQuery();
@@ -70,6 +71,7 @@ class DependencyInjection extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->atomInside('Variable')
+             ->samePropertyAs('code', 'arg')
              ->inIs('RIGHT')
              ->atomIs('Assignation')
              ->outIs('LEFT')

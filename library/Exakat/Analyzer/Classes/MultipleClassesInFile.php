@@ -28,11 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class MultipleClassesInFile extends Analyzer {
     public function analyze() {
         $this->atomIs('File')
-             ->savePropertyAs('code', 'filename')
              ->outIs('FILE')
-             ->raw('where( __.repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
+             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
                              .emit( hasLabel("Class", "Interface", "Trait") )
-                             .where(__.out("NAME").hasLabel("Void").count().is(eq(0)) ).count().is(gt(1)) )')
+                             .hasLabel("Class", "Interface", "Trait")
+                             .count().is(gt(1)) )')
              ->back('first');
         $this->prepareQuery();
     }

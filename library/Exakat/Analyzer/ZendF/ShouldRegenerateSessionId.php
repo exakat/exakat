@@ -38,7 +38,7 @@ class ShouldRegenerateSessionId extends Analyzer {
             return ;
         }
         
-        $sessionsList = '"'.join('", "', $sessions).'"';
+        $sessionsList = makeList($sessions);
         $sessionsList = str_replace('$', '\\$', $sessionsList);
         $regenerateid = $this->query('g.V().hasLabel("Methodcall").out("METHOD").filter{it.get().value("code").toLowerCase() == "regenerateid"}.in("METHOD")
                                            .out("OBJECT").has("fullcode", within('.$sessionsList.'))

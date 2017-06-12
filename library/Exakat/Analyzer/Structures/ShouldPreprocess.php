@@ -36,7 +36,7 @@ class ShouldPreprocess extends Analyzer {
         $functionList = $this->makeFullNsPath($functionList);
 
         // Operator only working on constants
-        $tokenList = '"'.implode('", "', self::$FUNCTIONS_TOKENS).'"';
+        $tokenList = makeList( self::$FUNCTIONS_TOKENS );
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
             // Functioncall, that are not authorized
              ->raw('where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel("Functioncall").has("fullnspath") ).times('.self::MAX_LOOPING.')

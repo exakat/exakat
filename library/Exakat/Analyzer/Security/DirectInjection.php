@@ -39,7 +39,7 @@ class DirectInjection extends Analyzer {
         $safeIndex = 'or( __.out("VARIABLE").has("code", "\\$_SERVER").count().is(eq(0)), 
                           __.out("INDEX").hasLabel("String")
                             .where(__.out("CONCAT").count().is(eq(0)) )
-                            .not(has("noDelimiter", within(["' . implode('", "', $safe) . '"])))
+                            .not(has("noDelimiter", within([' . makeList($safe) . '])))
                             .count().is(neq(0)))';
 
         // Relayed call to another function

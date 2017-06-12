@@ -60,7 +60,7 @@ GREMLIN;
                  ->goToClass()
                  ->savePropertyAs('fullnspath', 'fnp')
                  ->back('ppp')
-                 ->raw('filter{ !(fnp + "::" + it.get().value("code") in ["'.str_replace('$', '\\$', str_replace("\\", "\\\\", implode('", "', $staticproperties))).'"] )}')
+                 ->raw('filter{ !(fnp + "::" + it.get().value("code") in ['.str_replace('$', '\\$', str_replace("\\", "\\\\", makeList($staticproperties))).'] )}')
                  ->back('results');
             $this->prepareQuery();
         }

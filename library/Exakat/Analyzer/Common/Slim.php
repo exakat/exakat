@@ -30,7 +30,7 @@ abstract class Slim extends Analyzer {
         $appClasses = array("\\\\slim\\\\slim", 
                             "\\\\slim\\\\app");
                             
-        $appClassesList = '"'.implode('", "', $appClasses).'"';
+        $appClassesList = makeList($appClasses);
         
         $apps = $this->query('g.V().hasLabel("New").out("NEW").has("fullnspath").has("fullnspath", within('.$appClassesList.')).in()
                                    .in("RIGHT").hasLabel("Assignation").out("LEFT").values("code")');

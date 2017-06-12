@@ -1877,7 +1877,7 @@ GREMLIN;
     
     protected function SorA($v) {
         if (is_array($v)) {
-            return '"'.implode('", "', $v).'"';
+            return makeList($v);
         } else {
             return '"'.$v.'"';
         }
