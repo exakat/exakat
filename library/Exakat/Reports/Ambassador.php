@@ -2495,7 +2495,6 @@ JAVASCRIPT;
                     // filled later
                     'Composer Packages' => array(),
 
-                    // filled later
                     'PSR-compatibility' => array(
                         'PSR-3  (Log)'                       => 'Psr/Psr3Usage',
                         'PSR-6  (Caching)'                   => 'Psr/Psr6Usage',
@@ -2503,6 +2502,11 @@ JAVASCRIPT;
                         'PSR-11 (Dependency container)'      => 'Psr/Psr11Usage',
                         'PSR-13 (Link)'                      => 'Psr/Psr13Usage',
                         'PSR-16 (Simple cache)'              => 'Psr/Psr16Usage',
+                    ),
+
+                    'Patterns' => array(
+                        'Dependency Injection'               => 'Patterns/DependencyInjection',
+                        'Courrier Anti-pattern'              => 'Patterns/CourrierAntiPattern',
                     ),
 
                     'Namespaces' => array(
