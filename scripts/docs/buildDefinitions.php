@@ -137,6 +137,7 @@ foreach($files as $file) {
 shell_exec('cp docs/src/*.png docs/');
 
 $recipes = array('Analyze',
+                 'CompatibilityPHP73',
                  'CompatibilityPHP72',
                  'CompatibilityPHP71',
                  'CompatibilityPHP70',
@@ -144,7 +145,6 @@ $recipes = array('Analyze',
                  'CompatibilityPHP55',
                  'CompatibilityPHP54',
                  'CompatibilityPHP53',
-                 'Analyze',
                  'Security',
                  'Performances',
                  'Dead code',
