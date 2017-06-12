@@ -42,8 +42,8 @@ class Slim extends Ambassador {
     private $themesForAnalyzer = null;
     private $severities        = null;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct($config) {
+        parent::__construct($config);
         $this->themesToShow      = 'Slim';
         $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
         $this->timesToFix        = $this->docs->getTimesToFix();
