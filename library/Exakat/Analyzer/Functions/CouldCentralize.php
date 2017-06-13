@@ -46,13 +46,13 @@ GREMLIN;
             $functions = array();
             $args = array();
             foreach($res as $key => $count) {
-                preg_match('/^\[(\S+), (.*?)\]$/', $key, $r);
-                
-                $functions[] = $r[1];
-                if (isset($args[$r[1]])) {
-                    $args[$r[1]][] = $r[2];
-                } else {
-                    $args[$r[1]] = array($r[2]);
+                if (preg_match('/^\[(\S+), (.*?)\]$/is', $key, $r)) {
+                    $functions[] = $r[1];
+                    if (isset($args[$r[1]])) {
+                        $args[$r[1]][] = $r[2];
+                    } else {
+                        $args[$r[1]] = array($r[2]);
+                    }
                 }
             }
             
