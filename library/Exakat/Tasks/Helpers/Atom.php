@@ -46,6 +46,7 @@ class Atom {
     public $alias        = '';
     public $origin       = '';
     public $encoding     = '';
+    public $block        = '';
     public $intval       = null;
     public $strval       = '';
     public $enclosing    = Load::NO_ENCLOSING;

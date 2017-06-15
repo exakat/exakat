@@ -3590,8 +3590,9 @@ class Load extends Tasks {
 
         if (function_exists('mb_detect_encoding')) {
             $literal->encoding = mb_detect_encoding($literal->noDelimiter);
-            if ($literal->encoding === 'UTF8') {
-                $literal->block = unicode_block($literal->noDelimiter);
+            if ($literal->encoding === 'UTF-8') {
+                $blocks = unicode_blocks($literal->noDelimiter);
+                $literal->block = array_keys($blocks)[0];
             }
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET) {
                 $literal = $this->processBracket();

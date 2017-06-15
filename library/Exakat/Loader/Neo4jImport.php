@@ -153,6 +153,7 @@ GREMLIN;
                                'alias'       => '',
                                'origin'      => '',
                                'encoding'    => '',
+                               'block'       => '',
                                'intval'      => 'long',
                                'strval'      => '',
                                'enclosing'   => 'boolean',
