@@ -25,12 +25,6 @@ namespace Exakat\Analyzer\Interfaces;
 use Exakat\Analyzer\Analyzer;
 
 class CouldUseInterface extends Analyzer {
-    /* Remove this if useless
-    public function dependsOn() {
-        return array('MethodDefinition');
-    }
-    */
-    
     public function analyze() {
         $query = <<<GREMLIN
 g.V().hasLabel('Interface').where( out('METHOD') ).group('m').by(out('NAME').properties('code').value())
