@@ -168,6 +168,7 @@ class Load extends Tasks {
     static public $PROP_ALIAS       = array('Nsname', 'Identifier', 'As');
     static public $PROP_ORIGIN      = array('Nsname', 'Identifier', 'As');
     static public $PROP_ENCODING    = array('String');
+    static public $PROP_BLOCK       = array('String');
     static public $PROP_INTVAL      = array('Integer');
     static public $PROP_STRVAL      = array('String');
     static public $PROP_ENCLOSING   = array('Variable', 'Array', 'Property');
@@ -454,6 +455,7 @@ class Load extends Tasks {
                           'alias'       => self::$PROP_ALIAS,
                           'origin'      => self::$PROP_ORIGIN,
                           'encoding'    => self::$PROP_ENCODING,
+                          'block'       => self::$PROP_BLOCK,
                           'intval'      => self::$PROP_INTVAL,
                           'strval'      => self::$PROP_STRVAL,
                           'enclosing'   => self::$PROP_ENCLOSING,
@@ -3588,6 +3590,9 @@ class Load extends Tasks {
 
         if (function_exists('mb_detect_encoding')) {
             $literal->encoding = mb_detect_encoding($literal->noDelimiter);
+            if ($literal->encoding === 'UTF8') {
+                $literal->block = unicode_block($literal->noDelimiter);
+            }
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_BRACKET) {
                 $literal = $this->processBracket();
             }
