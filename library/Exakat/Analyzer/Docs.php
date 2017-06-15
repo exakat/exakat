@@ -180,6 +180,21 @@ SQL;
 
         return $return;
     }
+
+    public function getFrequences() {
+        $query = "SELECT analyzers.folder||'/'||analyzers.name AS analyzer, frequence / 100 AS frequence 
+            FROM  analyzers
+            LEFT JOIN analyzers_popularity 
+                ON analyzers_popularity.id = analyzers.id";
+
+        $return = array();
+        $res = $this->sqlite->query($query);
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $return[$row['analyzer']] = empty($row['frequence']) ? 0 : $row['frequence'];
+        }
+
+        return $return;
+    }
     
     public function guessAnalyzer($name) {
         $query = <<<'SQL'

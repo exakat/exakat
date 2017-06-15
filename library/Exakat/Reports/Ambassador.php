@@ -37,10 +37,11 @@ class Ambassador extends Reports {
     protected $finalName       = null;
     private $tmpName           = '';
 
-    private $docs              = null;
-    private $timesToFix        = null;
-    private $themesForAnalyzer = null;
-    private $severities        = null;
+    private $docs              = array();
+    private $frequences        = array();
+    private $timesToFix        = array();
+    private $themesForAnalyzer = array();
+    private $severities        = array();
 
     const TOPLIMIT = 10;
     const LIMITGRAPHE = 40;
@@ -71,6 +72,7 @@ class Ambassador extends Reports {
     public function __construct($config) {
         parent::__construct($config);
         $this->docs              = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
+        $this->frequences        = $this->docs->getFrequences();
         $this->timesToFix        = $this->docs->getTimesToFix();
         $this->themesForAnalyzer = $this->docs->getThemesForAnalyzer();
         $this->severities        = $this->docs->getSeverities();
@@ -1279,7 +1281,8 @@ SQL;
                         <td>'.$analyser['recipes'].'</td>
                         <td>'.$analyser['issues'].'</td>
                         <td>'.$analyser['files'].'</td>
-                        <td>'.$analyser['severity'].'</td>';
+                        <td>'.$analyser['severity'].'</td>
+                        <td>'.$this->frequences[$analyser['analyzer']].' %</td>';
             $analyserHTML.= "</tr>";
         }
 
@@ -1294,7 +1297,8 @@ SQL;
         $list = '"'.implode('", "', $list).'"';
 
         $result = $this->sqlite->query(<<<SQL
-        SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity FROM results
+        SELECT analyzer, count(*) AS issues, count(distinct file) AS files, severity AS severity 
+        FROM results
         WHERE analyzer IN ($list)
         GROUP BY analyzer
         HAVING Issues > 0
