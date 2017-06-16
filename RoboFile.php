@@ -382,7 +382,10 @@ JOIN categories
                           'CompatibilityPHP55',
                           'CompatibilityPHP56',
                           'CompatibilityPHP70',
-                          'CompatibilityPHP71'
+                          'CompatibilityPHP71',
+                          'CompatibilityPHP72',
+                          'CompatibilityPHP73',
+                          
                           );
         $analyzeList = '("'.implode('", "', $analyzes).'")';
 
@@ -412,7 +415,10 @@ JOIN categories
                           'CompatibilityPHP55',
                           'CompatibilityPHP56',
                           'CompatibilityPHP70',
-                          'CompatibilityPHP71'
+                          'CompatibilityPHP71',
+                          'CompatibilityPHP72',
+                          'CompatibilityPHP73',
+                          
                           );
         $analyzeList = '("'.implode('", "', $analyzes).'")';
         
@@ -633,7 +639,7 @@ JOIN categories
     public function checkCompatibilityThemes() {
         $sqlite = new Sqlite3('./data/analyzers.sqlite');
         
-        $themes = array('53', '54', '55', '56', '70', '71');
+        $themes = array('53', '54', '55', '56', '70', '71', '72', '73');
         $first = $themes[0];
         $last = $themes[count($themes) - 1];
         
