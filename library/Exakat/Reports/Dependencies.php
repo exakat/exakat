@@ -227,7 +227,6 @@ DOT;
             unset($n);
         }
         unset($someNodes);
-        //        print_r($nodes);
 
         // Links
         $colors = array('staticmethodcall' => 'firebrick2',

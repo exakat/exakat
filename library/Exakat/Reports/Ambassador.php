@@ -2757,7 +2757,12 @@ JAVASCRIPT;
 
                     'Frameworks' => array(
                             'Cake PHP'             => 'Cakephp/CakePHPUsed',
+                            'Codeigniter'          => 'Vendors/Codeigniter',
+                            'Laravel'              => 'Vendors/Laravel',
                             'Slim PHP'             => 'Slim/UseSlim',
+                            'Symfony'              => 'Vendors/Symfony',
+                            'Wordpress'            => 'ZendF/ZendClasses',
+                            'Yii'                  => 'Vendors/Yii',
                             'Zend Framework'       => 'ZendF/ZendClasses',
                     )
                 );

@@ -1189,7 +1189,7 @@ JAVASCRIPT;
 
         $data = array();
         foreach ($receipt AS $key => $categorie) {
-            $list = 'IN ('.makeList(Analyzer::getThemeAnalyzers($categorie).')';
+            $list = 'IN ('.makeList(Analyzer::getThemeAnalyzers($categorie)).')';
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
