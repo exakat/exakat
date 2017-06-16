@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class WrongOptionalParameter extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->hasOut('DEFAULT')
