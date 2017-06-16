@@ -36,7 +36,7 @@ class toStringPss extends Analyzer {
         }
         unset($method);
         
-        $this->atomIs('Function')
+        $this->atomIs('Method')
              ->hasClass()
              ->outIs('NAME')
              ->codeIs($methods)
@@ -45,7 +45,7 @@ class toStringPss extends Analyzer {
              ->back('first');
             $this->prepareQuery();
 
-        $this->atomIs('Function')
+        $this->atomIs('Method')
              ->hasClass()
              ->outIs('NAME')
              ->codeIs($methods)

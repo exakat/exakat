@@ -58,8 +58,11 @@ g.V().hasLabel("{$this->type}")
 GREMLIN;
 
         $res = $this->gremlin->query($query);
-
-        return $res->results;
+        if (!$res === null) {
+            return array();
+        } else {
+            return $res->results;
+        }
     }
 }
 

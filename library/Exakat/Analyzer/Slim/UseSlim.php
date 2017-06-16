@@ -26,73 +26,23 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\ClassUsage;
 use Exakat\Analyzer\Common\InterfaceUsage;
 use Exakat\Analyzer\Common\TraitUsage;
+use Exakat\Analyzer\Common\UsesFramework;
 use Exakat\Data\Slim;
 
-class UseSlim extends Analyzer {
+class UseSlim extends UsesFramework {
     public function analyze() {
         $data = new Slim($this->config->dir_root.'/data', $this->config);
 
-        $analyzerId = null;
+        $this->classes    = call_user_func_array('array_merge', array_values($data->getClasses()));
+        $this->classes    = array_keys(array_count_values($this->classes));
+
+        $this->interfaces = call_user_func_array('array_merge', array_values($data->getInterfaces()));
+        $this->interfaces = array_keys(array_count_values($this->interfaces));
+
+        $this->traits = call_user_func_array('array_merge', array_values($data->getTraits()));
+        $this->traits = array_keys(array_count_values($this->traits));
         
-        $classes    = $data->getClasses();
-        if (!empty($classes)) {
-            $classes    = call_user_func_array('array_merge', array_values($classes));
-            $classes    = array_keys(array_count_values($classes));
-            $classes    = $this->makeFullNsPath($classes);
-    
-            if (!empty($classes)) {
-                $classesUsage = new ClassUsage($this->gremlin, $this->config);
-                $classesUsage->setAnalyzer(get_class($this));
-                $classesUsage->setClasses($classes);
-                $analyzerId = $classesUsage->init($analyzerId);
-                $classesUsage->run();
-
-                $this->rowCount        += $classesUsage->getRowCount();
-                $this->processedCount  += $classesUsage->getProcessedCount();
-                $this->queryCount      += $classesUsage->getQueryCount();
-                $this->rawQueryCount   += $classesUsage->getRawQueryCount();
-            }
-        }
-
-        $interfaces =  $data->getInterfaces();
-        if (!empty($interfaces)) {
-            $interfaces = call_user_func_array('array_merge', array_values($interfaces));
-            $interfaces = array_keys(array_count_values($interfaces));
-            $interfaces = $this->makeFullNsPath($interfaces);
-        
-            if (!empty($interfaces)) {
-                $interfacesUsage = new InterfaceUsage($this->gremlin, $this->config);
-                $interfacesUsage->setAnalyzer(get_class($this));
-                $interfacesUsage->setInterfaces($interfaces);
-                $analyzerId = $interfacesUsage->init($analyzerId);
-                $interfacesUsage->run();
-
-                $this->rowCount        += $interfacesUsage->getRowCount();
-                $this->processedCount  += $interfacesUsage->getProcessedCount();
-                $this->queryCount      += $interfacesUsage->getQueryCount();
-                $this->rawQueryCount   += $interfacesUsage->getRawQueryCount();
-            }
-        }
-
-        $traits     =  $data->getTraits();
-        if (!empty($traits)) {
-            $traits     = call_user_func_array('array_merge', array_values($traits));
-            $traits     = array_keys(array_count_values($traits));
-            $traits     = $this->makeFullNsPath($traits);
-
-            if (!empty($traits)) {
-                $traitsUsage = new TraitUsage($this->gremlin, $this->config);
-                $traitsUsage->setAnalyzer(get_class($this));
-                $traitsUsage->setTraits($traits);
-                $analyzerId = $traitsUsage->init($analyzerId);
-                $traitsUsage->run();
-
-                $this->rowCount        += $traitsUsage->getRowCount();
-                $this->processedCount  += $traitsUsage->getProcessedCount();
-                $this->queryCount      += $traitsUsage->getQueryCount();
-                $this->rawQueryCount   += $traitsUsage->getRawQueryCount();
-            }
-        }
+        parent::analyze();
     }
 }
 
