@@ -1753,7 +1753,7 @@ GREMLIN;
 
         $iniFile = parse_ini_file($fullpath);
         
-        if ($index != null && isset($iniFile[$index])) {
+        if ($index !== null && isset($iniFile[$index])) {
             return $iniFile[$index];
         }
         
