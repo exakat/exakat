@@ -26,7 +26,7 @@ namespace Exakat\Analyzer\Namespaces;
 use Exakat\Analyzer\Analyzer;
 
 class UseFunctionsConstants extends Analyzer {
-    protected $phpversion = '5.6+';
+    protected $phpVersion = '5.6+';
     
     public function analyze() {
         $this->atomIs('Use')
