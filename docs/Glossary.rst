@@ -136,10 +136,6 @@ Glossary
 
 
 + `C`
-    + `Closure`
-
-      + :ref:`Argument Should Be Typehinted <argument-should-be-typehinted>`
-
     + `Count()`
 
       + :ref:`Uses Default Values <uses-default-values>`
@@ -182,6 +178,7 @@ Glossary
     + `crypt()`
 
       + :ref:`Use password_hash() <use-password\_hash()>`
+      + :ref:`crypt() Without Salt <crypt()-without-salt>`
 
     + `current()`
 
@@ -212,7 +209,6 @@ Glossary
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
-      + :ref:`ext/sqlite <ext/sqlite>`
 
     + `dirname()`
 
@@ -290,6 +286,7 @@ Glossary
 
     + `fopen()`
 
+      + :ref:`@ Operator <@-operator>`
       + :ref:`Wrong fopen() Mode <wrong-fopen()-mode>`
 
     + `for()`
@@ -597,6 +594,10 @@ Glossary
 
       + :ref:`Make One Call With Array <make-one-call-with-array>`
 
+    + `stream_socket_server()`
+
+      + :ref:`@ Operator <@-operator>`
+
     + `stripos()`
 
       + :ref:`Simplify Regex <simplify-regex>`
@@ -639,6 +640,10 @@ Glossary
 
       + :ref:`Empty Try Catch <empty-try-catch>`
       + :ref:`set_exception_handler() Warning <set\_exception\_handler()-warning>`
+
+    + `token_get_all()`
+
+      + :ref:`@ Operator <@-operator>`
 
 
 + `U`
@@ -701,7 +706,6 @@ Glossary
 
       + :ref:`Could Use __DIR__ <could-use-\_\_dir\_\_>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
-      + :ref:`ext/fann <ext/fann>`
 
     + `__METHOD__`
 
@@ -727,7 +731,6 @@ Glossary
       + :ref:`Anonymous Classes <anonymous-classes>`
       + :ref:`Assign Default To Properties <assign-default-to-properties>`
       + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
-      + :ref:`Courrier Anti-Pattern <courrier-anti-pattern>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`
