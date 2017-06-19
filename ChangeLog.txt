@@ -1,4 +1,4 @@
-Version 0.11.8 (Xiaozuanfeng, Coming up)
+Version 0.11.9 (Manjusri, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,24 @@ Version 0.11.8 (Xiaozuanfeng, Coming up)
 + Tokenizer
     + 
 
-Version 0.11.7 (Long Armed Ape Monkey, 2017-06-13)
+Version 0.11.8 (Xiaozuanfeng, Coming up)
++ Architecture
+    + Starte working on JanusGraph to add to Neo4j/Gremlin3
++ Report
+    + Ambassador : reports Strings encoding and Unicode-block (when available)
+    + Ambassador : reports framework founds (first 6, more as we go).
+    + Ambassador : reports how frequently an analysis yield results to compare with current situation
++ Analyzer
+    + New analyzer : Classes where declaration order differs from : use, const, properties and methods.
+    + New analyzer : Could use interface (but implements is missing)
+    + New analyzer : Cant Inherit Abstract Method (PHP 7.2 upgrade)
+    + New analyzer : use session_start() options
+    + Updated analyzer : Dynamica method calls cover {} too
+    + Checked unit tests : 2305 / 2305 test pass (100% pass). 
++ Tokenizer
+    + Checked code on early PHP 7.2 version
+
+Version 0.11.7 (Long Armed Ape Monkey, 2017-06-12)
 + Report
     + Ambassador : report detected patterns (2 firsts)
     + None report : for when dump is sufficient
