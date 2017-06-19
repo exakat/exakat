@@ -27,17 +27,19 @@ use Exakat\Analyzer\Analyzer;
 
 class DynamicMethodCall extends Analyzer {
     public function analyze() {
+        // $object->$name() 
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->atomIs('Variable')
+             ->atomIs(array('Variable', 'Block'))
              ->back('first');
         $this->prepareQuery();
 
+        // $class::$name() 
         $this->atomIs('Staticmethodcall')
              ->outIs('METHOD')
              ->outIs('NAME')
-             ->atomIs('Variable')
+             ->atomIs(array('Variable', 'Block'))
              ->back('first');
         $this->prepareQuery();
     }
