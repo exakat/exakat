@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class UseSessionStartOptions extends Analyzer {
+    protected $phpVersion = '7.0+';
+    
     public function analyze() {
         // ini_set() then session_start
         $this->atomFunctionIs('\\ini_set')

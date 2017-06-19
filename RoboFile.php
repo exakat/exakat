@@ -256,6 +256,9 @@ LICENCE;
         
         print "Check anonymize's token list\n";
         $this->checkToken();
+        
+        print "Check protected $phpVersion definitions\n";
+        $this->checkphpVersion();
 
         print "Check Data/*.ini consistency\n";
         $this->checkData();
@@ -636,6 +639,16 @@ JOIN categories
         }
     }
 
+    public function checkphpVersion() {
+        $res = shell_exec('grep -r phpversion library/Exakat/Analyzer/ | grep protected');
+        
+        if (trim($res) !== '') {
+            print substr_count($res, "\n")." phpversion were found in the code : \n$res\n";
+        } else {
+            print "protected \$phpVersion are all OK\n";
+        }
+    }
+    
     public function checkCompatibilityThemes() {
         $sqlite = new Sqlite3('./data/analyzers.sqlite');
         

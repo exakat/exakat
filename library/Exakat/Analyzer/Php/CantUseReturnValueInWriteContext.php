@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class CantUseReturnValueInWriteContext extends Analyzer {
-    protected $phpversion = '5.5+';
+    protected $phpVersion = '5.5+';
 
     public function analyze() {
         $this->atomFunctionIs('\empty')
