@@ -417,9 +417,15 @@ class Appinfo extends Data {
         }
 
         // Special case for the encodings : one tick each. 
-        $res = $this->sqlite->query('SELECT encoding, block FROM stringEncodings');
+        $res = $this->sqlite->query('SELECT encoding, block FROM stringEncodings ORDER BY encoding, block');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $this->values['Strings'][$row['encoding']] = Ambassador::YES;
+            if (empty($row['encoding'])) {
+                $this->values['Strings']['Unknown encoding'] = Ambassador::YES;
+            } elseif (empty($row['block'])) {
+                $this->values['Strings'][$row['encoding']] = Ambassador::YES;
+            } else {
+                $this->values['Strings'][$row['encoding'] . ' ('. $row['block'].')' ] = Ambassador::YES;
+            }
         }
         
         return true;
