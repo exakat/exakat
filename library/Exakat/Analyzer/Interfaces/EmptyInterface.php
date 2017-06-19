@@ -29,7 +29,7 @@ class EmptyInterface extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Interface')
-             ->raw('not(where( __.out() ))');
+             ->raw('not(where( __.out("CONST", "METHOD") ))');
         $this->prepareQuery();
     }
 }

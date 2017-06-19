@@ -45,12 +45,11 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
              ->raw('not(where(
-    __.out("BLOCK").emit( hasLabel("Property")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
+    __.out("BLOCK").repeat( out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.')
                    .hasLabel("Property")
-                   .where(__.out("PROPERTY").has("token", "T_STRING").filter{ it.get().value("code") == property})
+                   .where( __.out("PROPERTY").has("token", "T_STRING").filter{ it.get().value("code") == property} )
                    .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-                   ))
-)')
+                   ))')
              ->back('results');
         $this->prepareQuery();
 
@@ -67,7 +66,7 @@ class UnitializedProperties extends Analyzer {
              ->raw('not( where( __.out("METHOD").hasLabel("Method").in("ANALYZED").has("analyzer", "Classes/Constructor") ) )')
              ->back('results');
         $this->prepareQuery();
-        
+
         // Static Properties (with constructor)
         $this->atomIs(self::$CLASSES_ALL)
              ->savePropertyAs('fullnspath', 'classe')
@@ -83,12 +82,14 @@ class UnitializedProperties extends Analyzer {
              ->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
              ->raw('where(
-    __.out("METHOD").out("BLOCK").emit( hasLabel("Staticproperty")).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
-      .hasLabel("Staticproperty").out("CLASS").filter{ it.get().value("fullnspath") == classe}.in("CLASS")
-      .where(__.out("PROPERTY").filter{ it.get().value("code") == property})
-      .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified").count().is(eq(1)) ).count().is(eq(0))
+    __.out("BLOCK").repeat( out('.$this->linksDown.') ).emit().times('.self::MAX_LOOPING.')
+      .hasLabel("Staticproperty")
+      .where( __.out("CLASS").filter{ it.get().value("fullnspath") == classe} )
+      .where( __.out("PROPERTY").filter{ it.get().value("code") == property}  )
+      .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") ).count().is(eq(0))
 )')
-             ->back('results');
+             ->back('results')
+             ;
         $this->prepareQuery();
 
         $this->atomIs(self::$CLASSES_ALL)

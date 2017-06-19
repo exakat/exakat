@@ -33,7 +33,7 @@ class DynamicConstantCall extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
-             ->regexIs('code', '::')
+             ->regexIs('fullcode', '::')
              ->back('first');
         $this->prepareQuery();
 

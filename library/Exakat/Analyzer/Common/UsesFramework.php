@@ -36,7 +36,7 @@ class UsesFramework extends Analyzer {
     public function analyze() {
         $analyzerId = null;
         
-        if (!empty($this->classes)) {
+        if (!empty($this->classes[0])) {
             $classes    = $this->makeFullNsPath($this->classes);
     
             if (!empty($classes)) {
@@ -53,7 +53,7 @@ class UsesFramework extends Analyzer {
             }
         }
 
-        if (!empty($this->interfaces)) {
+        if (!empty($this->interfaces[0])) {
             $interfaces = $this->makeFullNsPath($this->interfaces);
         
             if (!empty($interfaces)) {
@@ -70,7 +70,7 @@ class UsesFramework extends Analyzer {
             }
         }
 
-        if (!empty($this->traits)) {
+        if (!empty($this->traits[0])) {
             $traits     = $this->makeFullNsPath($this->traits);
 
             if (!empty($traits)) {
@@ -87,7 +87,7 @@ class UsesFramework extends Analyzer {
             }
         }
 
-        if (!empty($this->namespaces)) {
+        if (!empty($this->namespaces[0])) {
             $namespaces     = $this->makeFullNsPath($this->namespaces);
 
             if (!empty($namespaces)) {

@@ -6,7 +6,7 @@ class A {
         A::$c = $c;
         self::$d = $d;
         A::$e = $e;
-        $this->f = $f->toString();
+        $this->f = $f;
         $this->g = $g;
     }
 
