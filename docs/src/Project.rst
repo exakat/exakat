@@ -43,7 +43,7 @@ The Zend Framework analysis and report are not configured by default. Open the p
 Running a report for WordPress
 ------------------------------
 
-There is a set of rules and a specific report for `Wordpress <http://www.wordpress.org/>`_. It covers various recommendations from the manual. 
+There is a set of rules and a specific report for `Wordpress <https://www.wordpress.org/>`_. It covers various recommendations from the manual. 
 
 The Wordpress analysis is not configured by default. There is no specific report format for Wordpress : we suggest Text (for reading) or Json (for reuse). 
 
@@ -55,7 +55,7 @@ Open the projects/<project>/config.ini file, and use the following in the file :
 Running a report for CakePHP
 ------------------------------
 
-There is a set of rules and a specific report for `CakePHP <http://www.cakephp.org/>`_. It covers migration recommendations from the manual, for CakePHP 3.x. 
+There is a set of rules and a specific report for `CakePHP <https://www.cakephp.org/>`_. It covers migration recommendations from the manual, for CakePHP 3.x. 
 
 The CakePHP analysis is not configured by default. There is no specific report format for CakePHP : we suggest Text (for reading) or Json (for reuse). 
 
