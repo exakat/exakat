@@ -809,6 +809,47 @@ GREMLIN
             }
             display( "literal$type : $total\n");
         }
+
+       $this->sqlite->query('DROP TABLE IF EXISTS stringEncodings');
+       $this->sqlite->query('CREATE TABLE stringEncodings (  
+                                              id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                              encoding STRING,
+                                              block STRING,
+                                              CONSTRAINT "encoding" UNIQUE (encoding, block)
+                                            )');
+
+            $query = <<<GREMLIN
+            
+g.V().hasLabel('String').map{ x = ['encoding':it.get().values('encoding')[0]];
+    if (it.get().values('block').size() != 0) {
+        x['block'] = it.get().values('block')[0];
+    }
+    x;
+}
+
+GREMLIN;
+        $res = $this->gremlin->query($query);
+        if (!($res instanceof \stdClass)) {
+            return;
+        }
+        $res = $res->results;
+        
+        $total = 0;
+        $query = array();
+        foreach($res as $value => $row) {
+            if (isset($row->block)){
+                $query[] = "('$row->encoding', '$row->block')";
+            } else {
+                $query[] = "('$row->encoding', '')";
+            }
+        }
+       
+       if (!empty($query)) {
+           $query = 'REPLACE INTO stringEncodings ("encoding", "block") VALUES '.join(', ', $query);
+        print $query;
+           $this->sqlite->query($query);
+           echo $this->sqlite->lastErrorMsg();
+       }
     }
 
     private function collectFilesDependencies() {

@@ -415,6 +415,12 @@ class Appinfo extends Data {
         } else {
             unset($this->values['Composer Packages']);
         }
+
+        // Special case for the encodings : one tick each. 
+        $res = $this->sqlite->query('SELECT encoding, block FROM stringEncodings');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $this->values['Strings'][$row['encoding']] = Ambassador::YES;
+        }
         
         return true;
     }
