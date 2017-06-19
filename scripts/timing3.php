@@ -25,7 +25,7 @@ $rows = glob('projects/*');
 
 $fp = fopen('timing3.csv', 'w+');
 
-$finals = ['project', 'Duree', 'Build', 'Files', 'Loc', 'Tokens'];
+$finals = array('project', 'Duree', 'Build', 'Files', 'Loc', 'Tokens');
 fputcsv($fp, $finals);
 
 foreach($rows as $row) {

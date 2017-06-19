@@ -27,10 +27,10 @@ preg_match_all('#(\d+) \[label="([^"]+?)" shape=box \]#is', $dot, $nodes);
 
 $total = 0;
 $fp = fopen('neo4j/wp_functions.csv', 'w+');
-fputcsv($fp, ['Fid:ID(Function)', 'name']);
+fputcsv($fp, array('Fid:ID(Function)', 'name'));
 foreach($nodes[1] as $id => $n) {
     ++$total;
-    fputcsv($fp, [$nodes[1][$id], $nodes[2][$id]]);
+    fputcsv($fp, array($nodes[1][$id], $nodes[2][$id]));
 }
 fclose($fp);
 print "Created $total nodes\n";
@@ -39,10 +39,10 @@ preg_match_all('#(\d+) -> (\d+) \[label="CALLS"\];#is', $dot, $rels);
 
 $total = 0;
 $fp = fopen('neo4j/wp_calls.csv', 'w+');
-fputcsv($fp, [':START_ID(Function)', ':TYPE', ':END_ID(Function)']);
+fputcsv($fp, array(':START_ID(Function)', ':TYPE', ':END_ID(Function)') );
 foreach($rels[1] as $id => $n) {
     ++$total;
-    fputcsv($fp, [$rels[1][$id], 'CALLS', $rels[2][$id]]);
+    fputcsv($fp, array($rels[1][$id], 'CALLS', $rels[2][$id]));
 }
 fclose($fp);
 print "Created $total relations\n";

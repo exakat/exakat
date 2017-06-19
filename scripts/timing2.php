@@ -27,7 +27,7 @@ print $res;
 $finals = array();
 $rows = explode("\n", trim($res));
 foreach($rows as $row) {
-    $final = [];
+    $final = array();
     
     //projects/anchor-cms/log//analyze.analyze.log:Structures/AlteringForeachWithoutReference	0.067572116851807	3	111	1	0
     if (!preg_match('#^(projects/(.*?)/.*?):(.*?)\t([\.\d]+)\t(\d+)\t(\d+)\t(\d+)\t(\d+)#', $row, $r)) {
