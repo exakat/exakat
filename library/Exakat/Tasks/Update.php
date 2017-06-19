@@ -39,9 +39,9 @@ class Update extends Tasks {
             $projects = array_map('basename', $paths);
             $projects = array_diff($projects, array('test'));
             
-            print "Updating ".count($projects)." projects\n";
+            print "Updating ".count($projects)." projects".PHP_EOL;
             foreach($projects as $project) {
-                display("updating $project\n");
+                display("updating $project".PHP_EOL);
                 $this->update($project);
             }
         } else {

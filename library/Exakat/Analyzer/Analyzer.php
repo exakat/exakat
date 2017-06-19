@@ -281,7 +281,7 @@ GREMLIN;
             }
             return $instanciated[$analyzer];
         } else {
-            display( "No such class as '" . $name . "'\n");
+            display( "No such class as '" . $name . "'".PHP_EOL);
             return null;
         }
     }
@@ -730,7 +730,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
         } elseif ($rank === '2last') {
             $this->addMethod('map( __.out("'.$link.'").order().by("rank").tail(2) )');
         } else {
-            $this->addMethod('out("'.$link.'").has("rank", eq('.abs(intval($rank)).'))');
+            $this->addMethod('out("'.$link.'").has("rank", eq('.abs((int) $rank).'))');
         }
 
         return $this;
@@ -743,13 +743,13 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
 
     public function hasChildWithRank($edgeName, $rank = '0') {
-        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs(intval($rank)).') )');
+        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs((int) $rank).') )');
 
         return $this;
     }
 
     public function noChildWithRank($edgeName, $rank = '0') {
-        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs(intval($rank)).').count().is(eq(0)) )');
+        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs((int) $rank).').count().is(eq(0)) )');
 
         return $this;
     }
@@ -1610,7 +1610,7 @@ GREMLIN
         $this->prepareQuery();
         
         foreach($this->queries as $id => $query) {
-            echo $id, ")\n", print_r($query, true), print_r($this->queriesArguments[$id], true), "\n";
+            echo $id, ")", PHP_EOL, print_r($query, true), print_r($this->queriesArguments[$id], true), PHP_EOL;
 
             krsort($this->queriesArguments[$id]);
             
@@ -1631,11 +1631,11 @@ GREMLIN
                 } elseif (is_int($value)) {
                     $query = str_replace($name, $value, $query);
                 } else {
-                    assert(false, 'Cannot process argument of type '.gettype($value)."\n".__METHOD__."\n");
+                    assert(false, 'Cannot process argument of type '.gettype($value)."".PHP_EOL.__METHOD__."".PHP_EOL);
                 }
             }
             
-            echo $query, "\n\n";
+            echo $query, PHP_EOL, PHP_EOL;
         }
         die();
     }
@@ -1650,7 +1650,7 @@ GREMLIN
             $this->arguments = array_slice($arguments, 0, $i);
             $this->prepareQuery();
             $this->execQuery();
-            print $this->rowCount."\n";
+            echo  $this->rowCount, PHP_EOL;
             $this->rowCount = 0;
         }
 
@@ -1687,7 +1687,7 @@ GREMLIN;
         $query .= '.dedup().groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
-// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";
+// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v".PHP_EOL;
 
         $this->queries[] = $query;
         $this->queriesArguments[] = $this->arguments;
@@ -1705,7 +1705,7 @@ GREMLIN;
                  $query.
                  '
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
-// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v\n";
+// php '.$this->config->executable." analyze -p ".$this->config->project.' -P '.$this->analyzerQuoted." -v".PHP_EOL;
 
         $arguments = $this->arguments;
 

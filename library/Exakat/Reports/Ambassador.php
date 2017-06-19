@@ -346,7 +346,7 @@ class Ambassador extends Reports {
             foreach($list as $key => $value) {
                 $table .= '
                 <div class="clearfix">
-                   <div class="block-cell">'.htmlentities($key, ENT_COMPAT | ENT_HTML401, 'UTF-8').'</div>
+                   <div class="block-cell">'.$this->toHtmlEncoding($key).'</div>
                    <div class="block-cell text-center">'.$value.'</div>
                  </div>
 ';
@@ -2396,7 +2396,7 @@ HTML;
             }
 
             $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
-            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.htmlentities($row['file'], ENT_COMPAT | ENT_HTML401 , 'UTF-8')."</a></li>\n";
+            $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.$this->toHtmlEncoding($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function($x) { static $i = 0; return '<br /><a name="l'.++$i.'" />'; }, $source);
             file_put_contents($this->tmpName.'/datas/sources/'.$row['file'], $source);
@@ -2526,6 +2526,10 @@ HTML;
         $php = substr($php, strpos($php, '|') + 1);
         $php = substr($php, 0, strrpos($php, '|'));
         return $php;
+    }
+    
+    private function toHtmlEncoding($text) {
+        return htmlentities($text, ENT_COMPAT | ENT_HTML401, 'UTF-8');
     }
 }
 

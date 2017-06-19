@@ -4824,7 +4824,7 @@ class Load extends Tasks {
         if (empty($call->noDelimiter)) {
             return; // Can't be a class anyway.
         }
-        if (intval($call->noDelimiter)) {
+        if ((int) $call->noDelimiter) {
             return; // Can't be a class anyway.
         }
         // single : is OK

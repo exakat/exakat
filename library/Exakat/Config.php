@@ -447,7 +447,7 @@ class Config {
                                  );
 
         foreach($optionsValue as $key => $config) {
-            while( $id = array_search($key, $args) ) {
+            while( ($id = array_search($key, $args)) !== false ) {
                 if (isset($args[$id + 1])) {
                     if (is_string($args[$id + 1]) && isset($optionsValue[$args[$id + 1]])) {
                         // in case this option value is actually the next option (exakat -p -T)

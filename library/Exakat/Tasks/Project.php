@@ -85,11 +85,11 @@ class Project extends Tasks {
                                                'exakat_build'   => Exakat::BUILD,
                                          ));
 
-        display("Running project '$project'\n");
+        display("Running project '$project'".PHP_EOL);
         display("Running the following analysis : ".implode(', ', $this->config->project_themes));
         display("Producing the following reports : ".implode(', ', $this->reports));
 
-        display("Cleaning DB\n");
+        display("Cleaning DB".PHP_EOL);
         $analyze = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
@@ -97,7 +97,7 @@ class Project extends Tasks {
         $this->addSnitch(array('step'    => 'Clean DB',
                                'project' => $this->config->project));
 
-        display("Search for external libraries\n");
+        display("Search for external libraries".PHP_EOL);
         $args = array ( 1 => 'findextlib',
                         2 => '-p',
                         3 => $this->config->project,
@@ -115,7 +115,7 @@ class Project extends Tasks {
         Config::pop();
         unset($analyze);
 
-        display("Running files\n");
+        display("Running files".PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
@@ -128,7 +128,7 @@ class Project extends Tasks {
         $analyze = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $analyze->run();
         unset($analyze);
-        display("Project loaded\n");
+        display("Project loaded".PHP_EOL);
         $this->logTime('Loading');
 
         // Dump is a child process
@@ -145,7 +145,7 @@ class Project extends Tasks {
             $this->analyzeThemes($this->config->project_themes, $audit_start);
         }
 
-        display("Analyzed project\n");
+        display("Analyzed project".PHP_EOL);
         $this->logTime('Analyze');
         $this->addSnitch(array('step'    => 'Analyzed',
                                'project' => $this->config->project));
@@ -154,7 +154,7 @@ class Project extends Tasks {
 
         $oldConfig = Config::factory();
         foreach($this->reports as $format) {
-            display("Reporting $format\n");
+            display("Reporting $format".PHP_EOL);
             $this->addSnitch(array('step'    => 'Report : '.$format,
                                    'project' => $this->config->project));
 
@@ -173,14 +173,14 @@ class Project extends Tasks {
                 $report->run();
                 unset($report);
             } catch (\Exception $e) {
-                echo "Error while building $format in $format \n",
+                echo "Error while building $format in $format ".PHP_EOL,
                      $e->getMessage(),
-                     "\nTrying next report\n";
+                     PHP_EOL."Trying next report".PHP_EOL;
             }
         }
 
         Config::factory($oldConfig);
-        display("Reported project\n");
+        display("Reported project".PHP_EOL);
 
         /*
             This is dev code, not production
@@ -197,7 +197,7 @@ GREMLIN;
         */
         $this->logTime('Final');
         $this->removeSnitch();
-        display("End\n");
+        display("End".PHP_EOL);
     }
 
     private function logTime($step) {
@@ -212,7 +212,7 @@ GREMLIN;
             $start = $end;
         }
 
-        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start)."\n");
+        fwrite($log, $step."\t".($end - $begin)."\t".($end - $start).PHP_EOL);
         $begin = $end;
     }
 
@@ -271,9 +271,9 @@ GREMLIN;
 
             Config::pop();
         } catch (\Exception $e) {
-            echo "Error while running the Analyzer $theme \n",
+            echo "Error while running the Analyzer $theme ".PHP_EOL,
                  $e->getMessage(),
-                 "\nTrying next analysis\n";
+                 PHP_EOL."Trying next analysis".PHP_EOL;
             file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
         }
     }
@@ -291,11 +291,11 @@ GREMLIN;
 
         $diff = array_diff($themes, $availableThemes);
         if (!empty($diff)) {
-            display("Ignoring the following unknown themes : ".implode(', ', $diff)."\n");
+            display("Ignoring the following unknown themes : ".implode(', ', $diff).PHP_EOL);
         }
         
         $themes = array_intersect($availableThemes, $themes);
-        display("Running the following themes : ".implode(', ', $diff)."\n");
+        display("Running the following themes : ".implode(', ', $diff).PHP_EOL);
 
         foreach($themes as $theme) {
             $this->addSnitch(array('step'    => 'Analyze : '.$theme,
@@ -353,9 +353,9 @@ GREMLIN;
 
                 Config::pop();
             } catch (\Exception $e) {
-                echo "Error while running the Analyze $theme \n",
+                echo "Error while running the Analyze $theme ".PHP_EOL,
                      $e->getMessage(),
-                     "\nTrying next analysis\n";
+                     PHP_EOL."Trying next analysis".PHP_EOL;
                 file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
             }
         }
