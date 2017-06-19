@@ -8,10 +8,11 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_UselessCasting extends Analyzer {
-    /* 3 methods */
+    /* 4 methods */
 
     public function testStructures_UselessCasting01()  { $this->generic_test('Structures/UselessCasting.01'); }
     public function testStructures_UselessCasting02()  { $this->generic_test('Structures/UselessCasting.02'); }
     public function testStructures_UselessCasting03()  { $this->generic_test('Structures/UselessCasting.03'); }
+    public function testStructures_UselessCasting04()  { $this->generic_test('Structures/UselessCasting.04'); }
 }
 ?>
