@@ -549,13 +549,14 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
 
     public function atomFunctionIs($fullnspath) {
-        assert('$fullnspath !== null', 'atomFunctionIs can\'t be null');
+        assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
         $this->functioncallIs($fullnspath);
 
         return $this;
     }
     
     public function functioncallIs($fullnspath) {
+        assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
         $this->atomIs('Functioncall')
              ->raw('has("fullnspath")')
              ->fullnspathIs($this->makeFullNsPath($fullnspath));
@@ -564,6 +565,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
 
     public function functioncallIsNot($fullnspath) {
+        assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
         $this->atomIs('Functioncall')
              ->raw('where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
