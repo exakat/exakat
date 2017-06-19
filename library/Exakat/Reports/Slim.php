@@ -2220,7 +2220,7 @@ JAVASCRIPT;
                     ),
                 );
                 
-        $zend3 = new SlimData($this->config->dir_root.'/data', $this->config->is_phar);
+        $zend3 = new SlimData($this->config->dir_root.'/data', $this->config);
 
         $versions = $zend3->getVersions();
         $table = '<table class="table table-striped">
