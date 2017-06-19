@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array('WP_Http');
+$expected     = array('WP_Http( )');
 
-$expected_not = array('WP_HtttP');
+$expected_not = array('WP_HtttP( )');
 
 ?>

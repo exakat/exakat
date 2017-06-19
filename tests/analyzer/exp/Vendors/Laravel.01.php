@@ -7,6 +7,6 @@ $expected     = array('App\Http\Controllers\Controller',
 
 $expected_not = array('show',
                       'view',
-                      'findOrFail);
+                      'findOrFail');
 
 ?>
