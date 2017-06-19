@@ -102,7 +102,15 @@ class Status extends Tasks {
                 break 1;
 
             case 'composer' :
-                $json = @json_decode(@file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.lock'));
+                $composerLockPath = $this->config->projects_root.'/projects/'.$this->config->project.'/code/composer.lock';
+                if (!file_exists($composerLockPath)) {
+                    $status['updatable'] = false;
+                    $status['hash'] = 'No composer.lock';
+                }
+
+                $composerLock = @file_get_contents($composerLockPath);
+                
+                $json = json_decode($composerLock);
                 if (isset($json->hash)) {
                     $status['hash'] = $json->hash;
                 } else {
