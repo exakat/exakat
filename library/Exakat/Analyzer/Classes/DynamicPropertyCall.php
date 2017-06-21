@@ -27,22 +27,22 @@ use Exakat\Analyzer\Analyzer;
 
 class DynamicPropertyCall extends Analyzer {
     public function analyze() {
-        $this->atomIs('Property')
-             ->outIs('PROPERTY')
+        $this->atomIs('Member')
+             ->outIs('MEMBER')
              ->tokenIsNot('T_STRING')
              ->back('first');
         $this->prepareQuery();
 
         // Classe::$$a
         $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->tokenIs('T_DOLLAR')
              ->back('first');
         $this->prepareQuery();
 
         // Classe::{$a}
         $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->atomIs('Block')
              ->back('first');
         $this->prepareQuery();

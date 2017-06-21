@@ -33,17 +33,17 @@ class OverwrittenLiterals extends Analyzer {
     public function analyze() {
         $assignations = $this->query(<<<GREMLIN
 g.V().hasLabel("Assignation").has("code", "=")
-     .where( __.in("ELEMENT").in("INIT").count().is(eq(0)) )
+     .where( __.in("EXPRESSION").in("INIT").count().is(eq(0)) )
      .where( __.in("PPP").count().is(eq(0)) )
      .out("RIGHT").hasLabel("Integer", "String", "Real", "Null", "Boolean").in("RIGHT")
-     .out("LEFT").hasLabel("Variable", "Array", "Property", "Staticproperty")
+     .out("LEFT").hasLabel("Variable", "Array", "Member", "Staticproperty")
      .groupCount("m").by("fullcode").cap("m").next().findAll{ it.value > 1; }.keySet()
 GREMLIN
 );
 
         $this->atomIs('Assignation')
              ->codeIs('=')
-             ->raw('where( __.in("ELEMENT").in("INIT").count().is(eq(0)) )')
+             ->raw('where( __.in("EXPRESSION").in("INIT").count().is(eq(0)) )')
              ->raw('where( __.in("PPP").count().is(eq(0)) )')
              ->outIs('RIGHT')
              ->atomIs(array('Integer', 'String', 'Real', 'Null', 'Boolean'))

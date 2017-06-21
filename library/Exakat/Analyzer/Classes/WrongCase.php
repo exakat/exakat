@@ -207,7 +207,7 @@ class WrongCase extends Analyzer {
 
 // use
         $this->atomIs('Use')
-             ->hasIn('ELEMENT') // Namespace USE only
+             ->hasIn('EXPRESSION') // Namespace USE only
              ->outIs('USE')
              ->outIsIE('NAME')
              ->raw($readFinalPart)

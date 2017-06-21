@@ -30,7 +30,7 @@ class DynamicNew extends Analyzer {
         // new $y->d();
         $this->atomIs('New')
              ->outIs('NEW')
-             ->atomIs(array('Staticproperty', 'Property', 'Array'))
+             ->atomIs(array('Staticproperty', 'Member', 'Array'))
              ->back('first');
         $this->prepareQuery();
 

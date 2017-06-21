@@ -35,7 +35,7 @@ class ShouldUseConstants extends Analyzer {
                  ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
-                 ->atomIsNot(array('Logical', 'Variable', 'Array', 'Property', 'Identifier', 'Nsname', 'Staticproperty', 'Staticconstant', 'Staticmethodcall', 'Methodcall'))
+                 ->atomIsNot(array('Logical', 'Variable', 'Array', 'Member', 'Identifier', 'Nsname', 'Staticproperty', 'Staticconstant', 'Staticmethodcall', 'Methodcall'))
                  ->back('first');
             $this->prepareQuery();
 

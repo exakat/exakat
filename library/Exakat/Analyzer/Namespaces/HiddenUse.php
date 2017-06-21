@@ -29,8 +29,8 @@ class HiddenUse extends Analyzer {
         // only for uses with rank of 1 or later
         $this->atomIs('Use')
              ->savePropertyAs('rank', 'rank')
-             ->inIs('ELEMENT')
-             ->raw('where( __.out("ELEMENT").not(hasLabel("Use")).filter{ it.get().value("rank") < rank} )')
+             ->inIs('EXPRESSION')
+             ->raw('where( __.out("EXPRESSION").not(hasLabel("Use")).filter{ it.get().value("rank") < rank} )')
              ->back('first');
         $this->prepareQuery();
         

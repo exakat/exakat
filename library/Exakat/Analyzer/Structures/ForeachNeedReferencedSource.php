@@ -29,7 +29,7 @@ class ForeachNeedReferencedSource extends Analyzer {
     public function analyze() {
         $this->atomIs('Foreach')
              ->outIs('SOURCE')
-             ->atomIsNot(array('Variable', 'Array', 'Staticproperty', 'Property'))
+             ->atomIsNot(array('Variable', 'Array', 'Staticproperty', 'Member'))
              ->inIs('SOURCE')
              ->outIs('VALUE')
              ->is('reference', true)

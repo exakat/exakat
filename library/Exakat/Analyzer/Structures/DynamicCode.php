@@ -36,8 +36,8 @@ class DynamicCode extends Analyzer {
         $this->prepareQuery();
 
         // $o->$p
-        $this->atomIs('Property')
-             ->outIs('PROPERTY')
+        $this->atomIs('Member')
+             ->outIs('MEMBER')
              ->tokenIsNot(array('T_STRING', 'T_NS_SEPARATOR'))
              ->back('first');
         $this->prepareQuery();

@@ -32,7 +32,7 @@ class IsModified extends Analyzer {
     }
     
     public function analyze() {
-        $atoms = array('Property', 'Staticproperty');
+        $atoms = array('Member', 'Staticproperty');
 
         $this->atomIs($atoms)
              ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'DEFINE', 'CAST'))

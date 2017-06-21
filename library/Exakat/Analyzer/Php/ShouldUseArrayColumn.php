@@ -28,13 +28,13 @@ class ShouldUseArrayColumn extends Analyzer {
     public function analyze() {
         $this->atomIs('Foreach')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomInside('Assignation')
              ->outIs('LEFT')
              ->atomIs('Arrayappend')
              ->inIs('LEFT')
              ->outIs('RIGHT')
-             ->atomIs(array('Array', 'Property'))
+             ->atomIs(array('Array', 'Member'))
              ->back('first');
         $this->prepareQuery();
     }

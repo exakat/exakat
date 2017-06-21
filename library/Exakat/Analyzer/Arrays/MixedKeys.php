@@ -38,7 +38,7 @@ class MixedKeys extends Analyzer {
              // count keys styles
              ->raw('where(
    __.sideEffect{ counts = [:]; }
-      .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("KEY")
+      .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
       .hasLabel("String", "Integer", "Real", "Boolean", "Staticconstant", "Identifier").where(__.out("CONCAT").count().is(eq(0)))
       .sideEffect{ 
             if (it.get().label() in ["Identifier", "Staticconstant"] ) { k = "a"; } else { k = "b"; }

@@ -38,7 +38,7 @@ GREMLIN;
 
         $this->atomIs('File')
              ->outIs('FILE')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Php')
              ->noAtomInside('Haltcompiler')
              ->raw('map{ '.$mapping.' }')
@@ -63,7 +63,7 @@ GREMLIN;
 
         $this->atomIs('File')
              ->outIs('FILE')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Php')
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in '.$types.'}')

@@ -40,8 +40,8 @@ class LocallyUsedProperty extends Analyzer {
              ->goToClass()
              ->outIs('METHOD')
              ->outIs('BLOCK')
-             ->atomInside('Property')
-             ->outIs('PROPERTY')
+             ->atomInside('Member')
+             ->outIs('MEMBER')
              ->outIsIE('VARIABLE')
              ->samePropertyAs('code', 'property')
              ->back('ppp');
@@ -58,7 +58,7 @@ class LocallyUsedProperty extends Analyzer {
              ->outIs('METHOD')
              ->outIs('BLOCK')
              ->atomInside('Staticproperty')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->outIsIE(array('VARIABLE', 'APPEND'))
              ->samePropertyAs('code', 'property')
              ->back('ppp');

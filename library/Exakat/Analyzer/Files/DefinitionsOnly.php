@@ -45,14 +45,14 @@ class DefinitionsOnly extends Analyzer {
         // one or several namespaces
         $this->atomIs('File')
              ->outIs('FILE')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
 //             ->atomIs('Php')
              ->outIs('CODE')
-             ->raw('coalesce( __.out("ELEMENT").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
+             ->raw('coalesce( __.out("EXPRESSION").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
              ->raw(<<<GREMLIN
 not(__.where(
     __
-      .out("ELEMENT")
+      .out("EXPRESSION")
       .where( __.hasLabel($definitionsList).count().is(eq(0)) )
       .where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )
       .where( __.in("ANALYZED").has("analyzer", "Structures/NoDirectAccess").count().is(eq(0)) )

@@ -29,12 +29,12 @@ class SwitchToSwitch extends Analyzer {
         $this->atomIs('Ifthen')
              ->tokenIs('T_IF')
              ->outIs('ELSE')
-             ->raw('coalesce( __.hasLabel("Sequence").has("count", 1).out("ELEMENT"), __.filter{ true; } )')
+             ->raw('coalesce( __.hasLabel("Sequence").has("count", 1).out("EXPRESSION"), __.filter{ true; } )')
 
              ->atomIs('Ifthen')
              ->outIs('ELSE')
-             ->outIsIE('ELEMENT')
-             ->raw('coalesce( __.hasLabel("Sequence").has("count", 1).out("ELEMENT"), __.filter{ true; } )')
+             ->outIsIE('EXPRESSION')
+             ->raw('coalesce( __.hasLabel("Sequence").has("count", 1).out("EXPRESSION"), __.filter{ true; } )')
 
              ->atomIs('Ifthen')
              ->back('first');

@@ -35,7 +35,7 @@ class VariableGlobal extends Analyzer {
              ->tokenIs('T_DOLLAR')
              ->isNot('bracket', true)
              ->outIs('NAME')
-             ->atomIs('Property')
+             ->atomIs('Member')
              ->back('first');
         $this->prepareQuery();
     }

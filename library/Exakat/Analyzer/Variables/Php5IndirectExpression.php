@@ -38,8 +38,8 @@ class Php5IndirectExpression extends Analyzer {
         $this->prepareQuery();
 
 //$foo->$bar['baz']	$foo->{$bar['baz']}	($foo->$bar)['baz']
-        $this->atomIs('Property')
-             ->outIs('PROPERTY')
+        $this->atomIs('Member')
+             ->outIs('MEMBER')
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->tokenIs('T_VARIABLE')

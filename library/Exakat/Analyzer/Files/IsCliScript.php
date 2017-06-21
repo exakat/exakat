@@ -28,7 +28,7 @@ class IsCliScript extends Analyzer {
         $this->atomIs('File')
              ->outIs('FILE')
              ->atomIs('Sequence')
-             ->outWithRank('ELEMENT', 0)
+             ->outWithRank('EXPRESSION', 0)
              ->tokenIs('T_INLINE_HTML')
              ->regexIs('code', '^#')
              ->back('first');

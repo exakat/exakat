@@ -31,11 +31,11 @@ class NoNeedForElse extends Analyzer {
         $this->atomIs('Ifthen')
              ->hasOut('ELSE')
              ->outIs('THEN')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs($breaks)
              ->back('first')
              ->outIs('ELSE')
-             ->raw('where( __.out("ELEMENT").hasLabel("Return", "Break", "Continue").count().is(eq(0)) )')
+             ->raw('where( __.out("EXPRESSION").hasLabel("Return", "Break", "Continue").count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -43,11 +43,11 @@ class NoNeedForElse extends Analyzer {
         $this->atomIs('Ifthen')
              ->hasOut('ELSE')
              ->outIs('ELSE')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs($breaks)
              ->back('first')
              ->outIs('THEN')
-             ->raw('where( __.out("ELEMENT").hasLabel("Return", "Break", "Continue").count().is(eq(0)) )')
+             ->raw('where( __.out("EXPRESSION").hasLabel("Return", "Break", "Continue").count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

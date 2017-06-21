@@ -29,14 +29,14 @@ class EmptyLines extends Analyzer {
     public function analyze() {
         // one void in the sequence
         $this->atomIs('Void')
-             ->hasIn('ELEMENT')
+             ->hasIn('EXPRESSION')
              ->isNot('rank', 0);
         $this->prepareQuery();
 
         // if the void is only one, we must check if this is a condition
         $this->atomIs('Void')
              ->is('rank', 0)
-             ->inIs('ELEMENT')
+             ->inIs('EXPRESSION')
              ->isNot('count', 1)
              ->back('first');
         $this->prepareQuery();

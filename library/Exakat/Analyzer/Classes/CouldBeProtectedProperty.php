@@ -27,14 +27,14 @@ use Exakat\Analyzer\Analyzer;
 class CouldBeProtectedProperty extends Analyzer {
     public function analyze() {
         // Case of property->property (that's another public access)
-        $publicProperties = $this->query('g.V().hasLabel("Property")
+        $publicProperties = $this->query('g.V().hasLabel("Member")
                                               .where( __.out("OBJECT").not(has("code", "\$this")) )
-                                              .out("PROPERTY")
+                                              .out("MEMBER")
                                               .hasLabel("Identifier")
                                               .values("code").unique()');
         
         if (!empty($publicProperties)) {
-            // Property that is not used outside this class or its children
+            // Member that is not used outside this class or its children
             $this->atomIs('Ppp')
                  ->hasNoOut(array('PROTECTED', 'PRIVATE'))
                  ->hasNoOut('STATIC')
@@ -53,7 +53,7 @@ class CouldBeProtectedProperty extends Analyzer {
                                             .or(hasLabel("File"), 
                                                 hasLabel("Class").filter{ it.get().values("fullnspath") == fnp; }) 
                                         )
-                                  .out("PROPERTY").hasLabel("Variable").as("variable")
+                                  .out("MEMBER").hasLabel("Variable").as("variable")
                                   .select("classe", "variable").by("fullnspath").by("code")
                                   .unique();
                                   ');
@@ -68,7 +68,7 @@ class CouldBeProtectedProperty extends Analyzer {
         }
         
         if (!empty($publicStaticProperties)) {
-            // Property that is not used outside this class or its children
+            // Member that is not used outside this class or its children
             $this->atomIs('Ppp')
                  ->hasNoOut(array('PROTECTED', 'PRIVATE'))
                  ->hasOut('STATIC')

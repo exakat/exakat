@@ -29,8 +29,8 @@ class NoPublicAccess extends Analyzer {
     public function analyze() {
 
         $gremlin = <<<GREMLIN
-g.V().hasLabel("Property").out("OBJECT").not(has("code", "\$this")).in("OBJECT")
-     .out("PROPERTY").hasLabel("Identifier").map{ it.get().value("code"); }.unique();
+g.V().hasLabel("Member").out("OBJECT").not(has("code", "\$this")).in("OBJECT")
+     .out("MEMBER").hasLabel("Identifier").map{ it.get().value("code"); }.unique();
 GREMLIN;
         $properties = $this->query($gremlin);
         
@@ -45,7 +45,7 @@ GREMLIN;
 
         $gremlin = <<<GREMLIN
 g.V().hasLabel("Staticproperty").out("CLASS").has("token", within("T_STRING", "T_NS_SEPARATOR")).not(has("code", within(["self", "static"]))).sideEffect{fnp = it.get().value("fullnspath");}.in("CLASS")
-     .out("PROPERTY").hasLabel("Variable").map{ fnp + '::' + it.get().value("code"); }.unique();
+     .out("MEMBER").hasLabel("Variable").map{ fnp + '::' + it.get().value("code"); }.unique();
 GREMLIN;
         $staticproperties = $this->query($gremlin);
         

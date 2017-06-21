@@ -29,7 +29,7 @@ class DoubleAssignation extends Analyzer {
     public function analyze() {
         $this->atomIs('Assignation')
              ->outIs('LEFT')
-             ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
+             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
              ->savePropertyAs('fullcode', 'name')
              ->inIs('LEFT')
              ->nextSibling()
@@ -40,7 +40,7 @@ class DoubleAssignation extends Analyzer {
              ->inIs('LEFT')
              ->outIs('RIGHT')
              // No self assignation (after operation)
-             ->raw('where( __.repeat( out('.$this->linksDown.') ).emit(hasLabel("Variable", "Array", "Property", "Staticproperty")).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == name}.count().is(eq(0)) )')
+             ->raw('where( __.repeat( out('.$this->linksDown.') ).emit(hasLabel("Variable", "Array", "Member", "Staticproperty")).times('.self::MAX_LOOPING.').filter{ it.get().value("fullcode") == name}.count().is(eq(0)) )')
              ->back('first');
         $this->prepareQuery();
     }

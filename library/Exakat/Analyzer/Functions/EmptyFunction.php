@@ -34,7 +34,7 @@ class EmptyFunction extends Analyzer {
         // standalone function : empty is empty. Same for closure.
         $this->atomIs(array('Function', 'Closure'))
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();
@@ -48,7 +48,7 @@ class EmptyFunction extends Analyzer {
              ->inIs('NAME')
              ->outIs('BLOCK')
              ->is('count', 1)
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Void')
              ->goToClass()
 

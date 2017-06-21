@@ -95,9 +95,9 @@ class AccessPrivate extends Analyzer {
         // properties
         // className::$property direct call
         $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
-             ->inIs('PROPERTY')
+             ->inIs('MEMBER')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_STATIC'))
              ->codeIsNot(array('parent', 'static', 'self'))
@@ -111,9 +111,9 @@ class AccessPrivate extends Analyzer {
 
         // parent::$property
         $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
-             ->inIs('PROPERTY')
+             ->inIs('MEMBER')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_STATIC'))
              ->codeIs('parent')

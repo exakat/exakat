@@ -29,7 +29,7 @@ class NoCastToInt extends Analyzer {
         $this->atomIs('Cast')
              ->tokenIs('T_INT_CAST')
              ->outIs('CAST')
-             ->atomIsNot(array('Variable', 'Functioncall', 'Property', 'Staticproperty', 'Real', 'Multiplication', 'Addition'))
+             ->atomIsNot(array('Variable', 'Functioncall', 'Member', 'Staticproperty', 'Real', 'Multiplication', 'Addition'))
              ->atomInside('Real')
              ->back('first');
         $this->prepareQuery();

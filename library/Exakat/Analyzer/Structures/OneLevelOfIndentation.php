@@ -31,12 +31,12 @@ class OneLevelOfIndentation extends Analyzer {
         
         $this->atomIs(array('Function', 'Method'))
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs($atoms)
              ->outIs($blocks)
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->outIsIE('CODE')
-             ->outIsIE('ELEMENT')
+             ->outIsIE('EXPRESSION')
              ->atomIs($atoms)
              ->back('first');
         $this->prepareQuery();

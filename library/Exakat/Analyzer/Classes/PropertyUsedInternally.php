@@ -37,11 +37,11 @@ class PropertyUsedInternally extends Analyzer {
              ->goToClass()
              ->outIs('METHOD')
              ->outIs('BLOCK')
-             ->atomInside('Property')
+             ->atomInside('Member')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->samePropertyAs('code','propertyname')
              ->back('ppp');
         $this->prepareQuery();
@@ -65,7 +65,7 @@ class PropertyUsedInternally extends Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
              ->samePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->samePropertyAs('code','property')
              ->back('ppp');
         $this->prepareQuery();

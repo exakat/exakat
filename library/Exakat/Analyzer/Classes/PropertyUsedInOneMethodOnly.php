@@ -38,8 +38,8 @@ class PropertyUsedInOneMethodOnly extends Analyzer {
              ->savePropertyAs('propertyname', 'name')
              ->goToClass()
              ->raw('where( __.out("METHOD").hasLabel("Method").out("BLOCK")
-             .where( __.map(__.repeat( out('.$this->linksDown.') ).emit(hasLabel("Property")).times('.self::MAX_LOOPING.')
-                                .hasLabel("Property").out("PROPERTY").filter{ it.get().value("code") == name}.count()).is(neq(0)) )
+             .where( __.map(__.repeat( out('.$this->linksDown.') ).emit().times('.self::MAX_LOOPING.')
+                                .hasLabel("Member").out("MEMBER").filter{ it.get().value("code") == name}.count()).is(neq(0)) )
              .count().is(eq(1)) )')
              ->back('results');
         $this->prepareQuery();

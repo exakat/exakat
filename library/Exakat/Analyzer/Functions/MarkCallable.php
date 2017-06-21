@@ -105,7 +105,7 @@ GREMLIN;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
         // working with functions (not methods) : containers
-        $atoms = array('Variable', 'Array', 'Property', 'Staticproperty');
+        $atoms = array('Variable', 'Array', 'Member', 'Staticproperty');
 
         // callable is in # position
         foreach($positions as $position) {

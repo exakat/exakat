@@ -43,7 +43,7 @@ class PropertyVariableConfusion extends Analyzer {
              ->outIs('BLOCK')
              ->atomInside('Variable')
              ->samePropertyAs('code', 'name')
-             ->hasNoIn('PROPERTY')
+             ->hasNoIn('MEMBER')
              ->analyzerIsNot('Variables/Arguments')
              ->back('ppp');
         $this->prepareQuery();

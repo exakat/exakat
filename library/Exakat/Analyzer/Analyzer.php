@@ -83,7 +83,7 @@ abstract class Analyzer {
     const CASE_INSENSITIVE = false;
 
     static public $FUNCTION_METHOD  = array('Function', 'Closure', 'Method');
-    static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Property', 'Array');
+    static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition');
@@ -739,7 +739,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
 
     public function outWithoutLastRank() {
-        $this->addMethod('sideEffect{dernier = it.get().value("count") - 1;}.out("ELEMENT").filter{ it.get().value("rank") < dernier}');
+        $this->addMethod('sideEffect{dernier = it.get().value("count") - 1;}.out("EXPRESSION").filter{ it.get().value("rank") < dernier}');
 
         return $this;
     }
@@ -964,35 +964,35 @@ GREMLIN
         return $this;
     }
 
-    public function nextSibling($link = 'ELEMENT') {
+    public function nextSibling($link = 'EXPRESSION') {
         $this->hasIn($link);
         $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 == it.get().value("rank")}');
 
         return $this;
     }
 
-    public function nextSiblings($link = 'ELEMENT') {
+    public function nextSiblings($link = 'EXPRESSION') {
         $this->hasIn($link);
         $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
 
         return $this;
     }
 
-    public function previousSibling($link = 'ELEMENT') {
+    public function previousSibling($link = 'EXPRESSION') {
         $this->hasIn($link);
         $this->addMethod('sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling - 1 == it.get().value("rank")}');
 
         return $this;
     }
 
-    public function previousSiblings($link = 'ELEMENT') {
+    public function previousSiblings($link = 'EXPRESSION') {
         $this->hasIn($link);
         $this->addMethod('filter{it.get().value("rank") > 0}.sideEffect{sibling = it.get().value("rank");}.in("'.$link.'").out("'.$link.'").filter{sibling + 1 <= it.get().value("rank") }');
 
         return $this;
     }
 
-    public function otherSiblings($link = 'ELEMENT', $self = self::EXCLUDE_SELF) {
+    public function otherSiblings($link = 'EXPRESSION', $self = self::EXCLUDE_SELF) {
         static $sibling = 0; // This is for calling the method multiple times
         ++$sibling;
         
@@ -1887,9 +1887,11 @@ GREMLIN;
 
     private function assertLink($link) {
         if (is_string($link)) {
+            assert(!in_array($link, array('KEY', 'ELEMENT', 'PROPERTY')), $link.' is no more');
             assert($link === strtoupper($link), 'Wrong format for LINK name : '.$link);
         } else {
             foreach($link as $l) {
+                assert(!in_array($l, array('KEY', 'ELEMENT', 'PROPERTY')), $l.' is no more');
                 assert($l === strtoupper($l), 'Wrong format for LINK name : '.$l);
             }
         }
@@ -1909,9 +1911,11 @@ GREMLIN;
     
     private function assertAtom($atom) {
         if (is_string($atom)) {
+            assert($atom !== 'Property', 'Property is no more');
             assert($atom === ucfirst(strtolower($atom)), 'Wrong format for atom name : '.$atom);
         } else {
             foreach($atom as $a) {
+                assert($a !== 'Property', 'Property is no more');
                 assert($a === ucfirst(strtolower($a)), 'Wrong format for atom name : '.$a);
             }
         }

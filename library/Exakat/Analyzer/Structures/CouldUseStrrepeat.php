@@ -33,7 +33,7 @@ class CouldUseStrrepeat extends Analyzer {
              ->is('constant', true)
              ->inIs('RIGHT')
              ->is('rank', 0)
-             ->inIs('ELEMENT')
+             ->inIs('EXPRESSION')
              ->is('count', 1)
              ->inIs('BLOCK')
              ->atomIs(array('For', 'Foreach'))

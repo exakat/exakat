@@ -33,7 +33,7 @@ class OnlyVariableReturnedByReference extends Analyzer {
              ->atomInside('Return')
              ->outIs('RETURN')
              ->outIsIE('CODE') // ignore parenthesis
-             ->atomIsNot(array('Staticproperty', 'Variable', 'Array', 'Property'));
+             ->atomIsNot(array('Staticproperty', 'Variable', 'Array', 'Member'));
         $this->prepareQuery();
     }
 }

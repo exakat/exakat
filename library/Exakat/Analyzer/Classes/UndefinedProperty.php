@@ -33,10 +33,10 @@ class UndefinedProperty extends Analyzer {
     
     public function analyze() {
         // only for calls internal to the class. External calls still needs some work
-        $this->atomIs('Property')
-             ->outIs('PROPERTY')
+        $this->atomIs('Member')
+             ->outIs('MEMBER')
              ->tokenIs('T_STRING')
-             ->inIs('PROPERTY')
+             ->inIs('MEMBER')
              ->analyzerIsNot('Classes/DefinedProperty')
              ->outIs('OBJECT')
              ->codeIs('$this')

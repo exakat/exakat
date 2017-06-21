@@ -32,7 +32,7 @@ class NoReturnUsed extends Analyzer {
              ->atomInside('Return')
              ->back('first')
              ->raw('where( __.out("DEFINITION") )')
-             ->raw('not(where( __.out("DEFINITION").not(where( __.in("ELEMENT")))) )');
+             ->raw('not(where( __.out("DEFINITION").not(where( __.in("EXPRESSION")))) )');
         $this->prepareQuery();
 
         // Functions
@@ -43,7 +43,7 @@ class NoReturnUsed extends Analyzer {
              ->back('first')
              ->goToClass()
              ->raw('where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == method; } )')
-             ->raw('not(where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == method; }.in("METHOD").not(where( __.in("ELEMENT"))) ) )')
+             ->raw('not(where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == method; }.in("METHOD").not(where( __.in("EXPRESSION"))) ) )')
              ->back('first');
         $this->prepareQuery();
     }

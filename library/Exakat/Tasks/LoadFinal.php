@@ -82,15 +82,17 @@ class LoadFinal extends Tasks {
         $functions = array_filter($functions, function ($x) { return strpos($x, '\\') === false;});
         $functions = array_map('strtolower', $functions);
 
+        $functions = array_slice($functions, 0, 14300);
+        
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
-     .has('fullnspath')
+     .has("fullnspath")
      .not(where( __.in("DEFINITION")))
      .filter{ it.get().value("code").toLowerCase() in arg1 }
      .sideEffect{
          fullnspath = "\\\\" + it.get().value("code").toLowerCase();
          it.get().property("fullnspath", fullnspath); 
-     }
+     }.count();
 
 GREMLIN;
 
@@ -99,15 +101,17 @@ GREMLIN;
 
     private function runQuery($query, $title, $args = array()) {
         display($title);
+
         $this->logTime($title);
 
         try {
-            $this->gremlin->query($query, $args);
+            $res = $this->gremlin->query($query, $args);
         } catch (GremlinException $e) {
-
+            // This should be handled nicely!!!
         }
-          display('   '.$title);
-          $this->logTime('end '.$title);
+
+        display('   /'.$title);
+        $this->logTime('end '.$title);
     }
 
     private function spotFallbackConstants() {
@@ -135,7 +139,7 @@ GREMLIN;
             // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .where( __.in("NAME", "METHOD", "PROPERTY", "CONSTANT").count().is(eq(0)) )
+     .where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT").count().is(eq(0)) )
      .has("token", without("T_CONST", "T_FUNCTION"))
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')
@@ -230,7 +234,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
-     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "PROPERTY").count().is(eq(0)) )  
+     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "MEMBER").count().is(eq(0)) )  
      .filter{ it.get().value("code").toLowerCase() in arg1 }
      .sideEffect{ 
         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
@@ -254,7 +258,7 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
-     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "PROPERTY").count().is(eq(0)) )  
+     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "MEMBER").count().is(eq(0)) )  
      .filter{ it.get().value("code") in arg1 }
      .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
      .sideEffect{ name = it.get().value("code"); }

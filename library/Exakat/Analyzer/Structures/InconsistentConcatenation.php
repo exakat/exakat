@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class InconsistentConcatenation extends Analyzer {
     public function analyze() {
         $this->atomIs('Concatenation')
-             ->raw('where( __.out("CONCAT").hasLabel("Variable", "Array", "Functioncall", "Property", "Methodcall", "Staticmethodcall", "Staticconsant", "Staticproperty").count().is(neq(0)) )')
+             ->raw('where( __.out("CONCAT").hasLabel("Variable", "Array", "Functioncall", "Member", "Methodcall", "Staticmethodcall", "Staticconsant", "Staticproperty").count().is(neq(0)) )')
              ->outIs('CONCAT')
              ->atomIs('String')
              ->hasOut('CONCAT')

@@ -29,7 +29,7 @@ class OneLineTwoInstructions extends Analyzer {
     public function analyze() {
         // Two expressions in a row
         $this->atomIs('Sequence')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->_as('report')
              ->atomIsNot(array('Ppp', 'Global', 'Const', 'Inlinehtml'))
              ->savePropertyAs('line', 'line_number')
@@ -41,7 +41,7 @@ class OneLineTwoInstructions extends Analyzer {
 
         // Two expressions with HTML between
         $this->atomIs('Sequence')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->_as('report')
              ->atomIsNot(array('Ppp', 'Global', 'Const', 'Inlinehtml'))
              ->savePropertyAs('line', 'line_number')

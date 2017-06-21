@@ -30,11 +30,11 @@ class DefinedProperty extends Analyzer {
     public function analyze() {
         // locally defined
         // defined in parents (Extended)
-        $this->atomIs('Property')
+        $this->atomIs('Member')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->goToAllParents(self::INCLUDE_SELF)
@@ -46,11 +46,11 @@ class DefinedProperty extends Analyzer {
         $this->prepareQuery();
 
         // defined in traits (via use)
-        $this->atomIs('Property')
+        $this->atomIs('Member')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->goToTraits()

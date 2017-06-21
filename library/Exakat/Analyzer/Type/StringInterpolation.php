@@ -30,7 +30,7 @@ class StringInterpolation extends Analyzer {
     public function analyze() {
         $this->atomIs(array('String', 'Heredoc'))
              ->outIs('CONCAT')
-             ->atomIs(array('Variable', 'Array', 'Property'))
+             ->atomIs(array('Variable', 'Array', 'Member'))
              ->isNot('enclosing', true)
              ->nextSibling('CONCAT')
              ->regexIs('code', '^(->|\\\\[|\\\\{|::)')

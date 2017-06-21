@@ -45,7 +45,7 @@ class UselessAbstract extends Analyzer {
              ->hasOut('ABSTRACT')
              ->hasOut('DEFINITION')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Void')
              ->back('first');
         $this->prepareQuery();

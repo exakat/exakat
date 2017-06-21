@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ShouldPreprocess extends Analyzer {
     public function analyze() {
-        $variables = array('Variable', 'Property', 'Staticproperty');
+        $variables = array('Variable', 'Member', 'Staticproperty');
         
         // $a = array(); $a[1] = 2;
         $this->atomIs('Assignation')
@@ -53,13 +53,13 @@ class ShouldPreprocess extends Analyzer {
         $this->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')
-             ->atomIs(array('Property', 'Staticproperty'))
+             ->atomIs(array('Member', 'Staticproperty'))
              ->outIs(array('OBJECT', 'CLASS'))
              ->savePropertyAs('fullcode', 'object')
              ->inIs(array('OBJECT', 'CLASS'))
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('fullcode', 'property')
-             ->inIs('PROPERTY')
+             ->inIs('MEMBER')
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomIs('Arrayliteral')
@@ -70,11 +70,11 @@ class ShouldPreprocess extends Analyzer {
              ->outIs('LEFT')
              ->atomIs('Array')
              ->outIs('VARIABLE')
-             ->atomIs(array('Property', 'Staticproperty'))
+             ->atomIs(array('Member', 'Staticproperty'))
              ->outIs(array('OBJECT', 'CLASS'))
              ->samePropertyAs('fullcode', 'object')
              ->inIs(array('OBJECT', 'CLASS'))
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->samePropertyAs('fullcode', 'property')
              ->back('first');
         $this->prepareQuery();
@@ -104,13 +104,13 @@ class ShouldPreprocess extends Analyzer {
         $this->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')
-             ->atomIs('Property')
+             ->atomIs('Member')
              ->outIs('OBJECT')
              ->savePropertyAs('fullcode', 'object')
              ->inIs('OBJECT')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('fullcode', 'property')
-             ->inIs('PROPERTY')
+             ->inIs('MEMBER')
              ->inIs('LEFT')
              ->outIs('RIGHT')
              ->atomIs('Arrayliteral')
@@ -119,11 +119,11 @@ class ShouldPreprocess extends Analyzer {
              ->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')
-             ->atomIs('Property')
+             ->atomIs('Member')
              ->outIs('OBJECT')
              ->samePropertyAs('fullcode', 'object')
              ->inIs('OBJECT')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->atomIs('Arrayappend')
              ->outIs('APPEND')
              ->samePropertyAs('fullcode', 'property')

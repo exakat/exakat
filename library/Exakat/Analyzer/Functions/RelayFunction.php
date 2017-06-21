@@ -33,7 +33,7 @@ class RelayFunction extends Analyzer {
              ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
              ->is('count', 1)
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->outIsIE('RETURN')
              ->atomIs(array('Functioncall', 'Staticmethodcall','Methodcall'))
              ->outIsIE('METHOD')

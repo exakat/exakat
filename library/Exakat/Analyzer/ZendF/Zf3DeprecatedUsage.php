@@ -52,8 +52,8 @@ class Zf3DeprecatedUsage extends Analyzer {
         $deprecated = call_user_func_array('array_merge', array_values($list['property']));
         $properties = array_column($deprecated, 'name');
         if (!empty($methods)) {
-            $this->atomIs('Property')
-                 ->outIs('PROPERTY')
+            $this->atomIs('Member')
+                 ->outIs('MEMBER')
                  ->codeIs($properties, self::CASE_SENSITIVE)
                  ->back('first');
             $this->prepareQuery();

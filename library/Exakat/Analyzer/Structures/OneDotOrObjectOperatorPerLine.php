@@ -28,11 +28,11 @@ use Exakat\Analyzer\Analyzer;
 class OneDotOrObjectOperatorPerLine extends Analyzer {
     public function analyze() {
         // Two expressions in a row
-        $this->atomIs(array('Property', 'Methodcall'))
+        $this->atomIs(array('Member', 'Methodcall'))
              ->hasNoIn('OBJECT')
              ->savePropertyAs('line', 'line')
              ->outIs('OBJECT')
-             ->atomIs(array('Property', 'Methodcall'))
+             ->atomIs(array('Member', 'Methodcall'))
              ->samePropertyAs('line', 'line')
              ->back('first');
         $this->prepareQuery();
@@ -53,7 +53,7 @@ class OneDotOrObjectOperatorPerLine extends Analyzer {
              ->hasIn('ARGUMENT')
              ->savePropertyAs('line', 'line')
              ->nextSibling('ARGUMENT')
-             ->atomIs(array('Concatenation', 'Methodcall', 'Property'))
+             ->atomIs(array('Concatenation', 'Methodcall', 'Member'))
              ->samePropertyAs('line', 'line')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS');

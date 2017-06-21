@@ -40,7 +40,7 @@ class ShouldBeTypehinted extends Analyzer {
              ->inIs('ARGUMENTS')
              ->hasNoChildren('Void', 'NAME')
              ->outIs('BLOCK')
-             ->atomInside('Property')
+             ->atomInside('Member')
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'name')
              ->back('first');

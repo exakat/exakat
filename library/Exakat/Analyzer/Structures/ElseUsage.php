@@ -32,7 +32,7 @@ class ElseUsage extends Analyzer {
              ->outIs('ELSE')
              ->tokenIsNot('T_ELSEIF')
              ->is('count', 1)
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->tokenIsNot('T_IF')
              ->back('first');
         $this->prepareQuery();

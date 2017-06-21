@@ -33,7 +33,7 @@ class MultipleAliasDefinitionPerFile extends Analyzer {
              ->savePropertyAs('origin', 'origin')
              ->savePropertyAs('fullcode', 'fullcode')
              ->inIs('USE')
-             ->otherSiblings('ELEMENT', self::INCLUDE_SELF)
+             ->otherSiblings('EXPRESSION', self::INCLUDE_SELF)
              ->atomIs('Use')
              ->outIs('USE')
              ->samePropertyAs('origin', 'origin')

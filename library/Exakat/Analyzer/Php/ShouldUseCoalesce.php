@@ -116,7 +116,7 @@ class ShouldUseCoalesce extends Analyzer {
              ->inIs(array('LEFT', 'RIGHT'))
              ->inIs('CONDITION')
              ->outIs('THEN')
-             ->outWithRank('ELEMENT', 0)
+             ->outWithRank('EXPRESSION', 0)
              ->outIs('LEFT')
              ->samePropertyAs('fullcode', 'variable')
              ->back('first');

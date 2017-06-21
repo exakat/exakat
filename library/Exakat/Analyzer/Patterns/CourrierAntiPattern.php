@@ -39,8 +39,8 @@ class CourrierAntiPattern extends Analyzer {
              ->samePropertyAs('code', 'arg')
              ->inIs('RIGHT')
              ->outIs('LEFT')
-             ->atomIs('Property')
-             ->outIs('PROPERTY')
+             ->atomIs('Member')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->outIs('METHOD')
@@ -49,8 +49,8 @@ class CourrierAntiPattern extends Analyzer {
              ->outIs('NEW')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Property')
-             ->outIs('PROPERTY')
+             ->atomIs('Member')
+             ->outIs('MEMBER')
              ->samePropertyAs('code', 'property')
              ->back('first');
         $this->prepareQuery();

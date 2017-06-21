@@ -32,7 +32,7 @@ class Rethrown extends Analyzer {
              ->savePropertyAs('code', 'rethrow')
              ->inIs('VARIABLE')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Throw')
              ->outIs('THROW')
              ->samePropertyAs('code', 'rethrow')

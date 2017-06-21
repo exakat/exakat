@@ -35,7 +35,7 @@ class IsRead extends Analyzer {
         $this->atomIs('Array')
              ->hasNoIn('VARIABLE')
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
-                           'KEY', 'VALUE', 'NAME', 'DEFINE', 'PROPERTY', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
+                           'INDEX', 'VALUE', 'NAME', 'DEFINE', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
                            'CASE', 'CLONE', 'FINAL', 'CLASS'));
             // note : NAME is for Switch!!
         $this->prepareQuery();
@@ -72,7 +72,7 @@ class IsRead extends Analyzer {
 
         // variable in a sequence (also useless...)
         $this->atomIs('Array')
-             ->inIs('ELEMENT')
+             ->inIs('EXPRESSION')
              ->atomIs('Sequence')
              ->back('first');
         $this->prepareQuery();
@@ -141,7 +141,7 @@ class IsRead extends Analyzer {
              ->hasIn('NEW')
              ->classDefinition()
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->_as('method')
              ->analyzerIs('Classes/Constructor')
              ->back('method')
@@ -163,7 +163,7 @@ class IsRead extends Analyzer {
              ->hasIn('NEW')
              ->classDefinition()
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->_as('method')
              ->outIs('NAME')
              ->analyzerIs('Classes/Constructor')

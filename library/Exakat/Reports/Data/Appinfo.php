@@ -346,6 +346,7 @@ class Appinfo extends Data {
                             'Cake PHP'             => 'Cakephp/CakePHPUsed',
                             'Codeigniter'          => 'Vendors/Codeigniter',
                             'Ez'                   => 'Vendors/Ez',
+                            'Joomla'               => 'Vendors/Joomla',
                             'Laravel'              => 'Vendors/Laravel',
                             'Slim PHP'             => 'Slim/UseSlim',
                             'Symfony'              => 'Vendors/Symfony',

@@ -37,7 +37,7 @@ class Php7RelaxedKeyword extends Analyzer {
         // Method names
         $this->atomIs('Class')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Function')
              ->outIs('NAME')
              ->codeIs($keywords)
@@ -47,7 +47,7 @@ class Php7RelaxedKeyword extends Analyzer {
         // Constant names
         $this->atomIs('Class')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Const')
              ->outIs('CONST')
              ->outIs('NAME')
@@ -58,7 +58,7 @@ class Php7RelaxedKeyword extends Analyzer {
         // Constant names
         $this->atomIs('Class')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Const')
              ->outIs('CONST')
              ->outIs('NAME')

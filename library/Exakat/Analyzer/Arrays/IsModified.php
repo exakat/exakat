@@ -116,7 +116,7 @@ class IsModified extends Analyzer {
              ->back('first')
              ->classDefinition()
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')

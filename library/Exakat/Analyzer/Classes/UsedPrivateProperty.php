@@ -42,7 +42,7 @@ class UsedPrivateProperty extends Analyzer {
              ->outIs('METHOD')
              ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Staticproperty") ).times('.self::MAX_LOOPING.')
                              .out("CLASS").filter{ it.get().value("token") in ["T_STRING", "T_NS_SEPARATOR", "T_STATIC" ] }.filter{ it.get().value("fullnspath") == classe }.in("CLASS")
-                             .out("PROPERTY").filter{ it.get().value("code") == property }
+                             .out("MEMBER").filter{ it.get().value("code") == property }
                              .count().is(neq(0)) )')
              ->back('ppp');
         $this->prepareQuery();
@@ -64,7 +64,7 @@ class UsedPrivateProperty extends Analyzer {
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_STATIC'))
              ->fullnspathIs('fnp')
              ->inIs('CLASS')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->atomIs('Array')
              ->outIs('VARIABLE')
              ->samePropertyAs('code', 'x')
@@ -81,11 +81,11 @@ class UsedPrivateProperty extends Analyzer {
              ->_as('ppp')
              ->back('first')
              ->outIs('METHOD')
-             ->atomInside('Property')
+             ->atomInside('Member')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->samePropertyAs('code', 'x')
              ->back('ppp');
         $this->prepareQuery();

@@ -35,7 +35,7 @@ class CouldUseAlias extends Analyzer {
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToNamespace()
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Use')
              ->outIs('USE')
              ->isNot('absolute', true)

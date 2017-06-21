@@ -43,8 +43,8 @@ class Php7IndirectExpression extends Analyzer {
         $this->atomIs('Array')
              ->hasNoIn('NAME')
              ->outIs('VARIABLE')
-             ->atomIs('Property')
-             ->outIs('PROPERTY')
+             ->atomIs('Member')
+             ->outIs('MEMBER')
              ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();
@@ -54,8 +54,8 @@ class Php7IndirectExpression extends Analyzer {
              ->outIs('NAME')
              ->atomIs('Array')
              ->outIs('VARIABLE')
-             ->atomIs(array('Property', 'Staticproperty'))
-             ->outIs('PROPERTY')
+             ->atomIs(array('Member', 'Staticproperty'))
+             ->outIs('MEMBER')
              ->atomIs('Variable')
              ->back('first');
         $this->prepareQuery();

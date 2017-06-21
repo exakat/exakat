@@ -49,7 +49,7 @@ class ObjectReferences extends Analyzer {
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
-             ->atomInside(array('Methodcall', 'Property'))
+             ->atomInside(array('Methodcall', 'Member'))
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'variable');
         $this->prepareQuery();
@@ -61,7 +61,7 @@ class ObjectReferences extends Analyzer {
              ->savePropertyAs('code', 'variable')
              ->back('first')
              ->outIs('BLOCK')
-             ->atomInside(array('Methodcall', 'Property'))
+             ->atomInside(array('Methodcall', 'Member'))
              ->outIs('OBJECT')
              ->samePropertyAs('code', 'variable');
         $this->prepareQuery();

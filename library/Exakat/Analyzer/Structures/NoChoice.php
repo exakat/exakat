@@ -52,11 +52,11 @@ class NoChoice extends Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('THEN')
              ->atomIs('Sequence')
-             ->raw('sideEffect{ sthen = []; it.get().vertices(OUT, "ELEMENT").sort{it.value("rank")}.each{ sthen.add(it.value("fullcode"));} }')
+             ->raw('sideEffect{ sthen = []; it.get().vertices(OUT, "EXPRESSION").sort{it.value("rank")}.each{ sthen.add(it.value("fullcode"));} }')
              ->inIs('THEN')
              ->outIs('ELSE')
              ->atomIs('Sequence')
-             ->raw('sideEffect{ selse = []; it.get().vertices(OUT, "ELEMENT").sort{it.value("rank")}.each{ selse.add(it.value("fullcode"));} }')
+             ->raw('sideEffect{ selse = []; it.get().vertices(OUT, "EXPRESSION").sort{it.value("rank")}.each{ selse.add(it.value("fullcode"));} }')
              ->filter('sthen.join(";") == selse.join(";")')
              ->back('first');
         $this->prepareQuery();

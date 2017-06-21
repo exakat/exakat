@@ -31,7 +31,7 @@ class OnlyVariablePassedByReference extends Analyzer {
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIsNot(array('Variable', 'Property', 'Staticproperty', 'Array'))
+             ->atomIsNot(array('Variable', 'Member', 'Staticproperty', 'Array'))
              ->savePropertyAs('rank', 'position')
              ->back('first')
              ->functionDefinition()
@@ -49,7 +49,7 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->savePropertyAs('code', 'method')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIsNot(array('Variable', 'Property', 'Staticproperty', 'Array'))
+             ->atomIsNot(array('Variable', 'Member', 'Staticproperty', 'Array'))
              ->savePropertyAs('rank', 'position')
              ->back('first')
              ->outIs('CLASS')
@@ -82,7 +82,7 @@ class OnlyVariablePassedByReference extends Analyzer {
                  ->fullnspathIs($functions)
                  ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
-                 ->atomIsNot(array('Variable', 'Property', 'Staticproperty', 'Array'))
+                 ->atomIsNot(array('Variable', 'Member', 'Staticproperty', 'Array'))
                  ->back('first');
             $this->prepareQuery();
         }

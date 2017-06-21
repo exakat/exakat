@@ -31,7 +31,7 @@ class UnsetInForeach extends Analyzer {
         // Only valid : Objects (unset on properties) or arrays (if the blind variable is reference)
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE(array('KEY', 'VALUE'))
+             ->outIsIE(array('INDEX', 'VALUE'))
              ->atomIs('Variable')
              ->savePropertyAs('code', 'blind')
              ->savePropertyAs('reference', 'reference')
@@ -44,7 +44,7 @@ class UnsetInForeach extends Analyzer {
              ->outIsIE(array('VARIABLE', 'OBJECT'))
              ->samePropertyAs('code', 'blind')
              ->inIsIE(array('VARIABLE', 'OBJECT'))
-             ->atomIsNot('Property')
+             ->atomIsNot('Member')
              ->raw('filter{ !(it.get().label() == "Array" && reference == true) }')
              ->back('first');
         $this->prepareQuery();
@@ -54,7 +54,7 @@ class UnsetInForeach extends Analyzer {
 ////////////////////////////////////////////////////////////
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE(array('KEY', 'VALUE'))
+             ->outIsIE(array('INDEX', 'VALUE'))
              ->atomIs('Variable')
              ->savePropertyAs('code', 'blind')
              ->savePropertyAs('reference', 'reference')
@@ -66,7 +66,7 @@ class UnsetInForeach extends Analyzer {
              ->outIsIE(array('VARIABLE', 'OBJECT'))
              ->samePropertyAs('code', 'blind')
              ->inIsIE(array('VARIABLE', 'OBJECT'))
-             ->atomIsNot('Property')
+             ->atomIsNot('Member')
              ->raw('filter{ !(it.get().label() == "Array" && reference == true) }')
              ->back('first');
         $this->prepareQuery();

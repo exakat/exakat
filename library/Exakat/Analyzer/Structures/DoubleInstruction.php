@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class DoubleInstruction extends Analyzer {
     public function analyze() {
         $this->atomIs('Sequence')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIsNot(array('Ifthen', 'Function', 'Class', 'Postplusplus', 'Preplusplus'))
              ->savePropertyAs('fullcode', 'code')
              ->_as('result')

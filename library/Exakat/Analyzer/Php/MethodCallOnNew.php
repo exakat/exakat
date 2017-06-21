@@ -34,7 +34,7 @@ class MethodCallOnNew extends Analyzer {
              ->atomIs('New')
              ->inIs('CODE')
              ->inIs('OBJECT')
-             ->atomIs(array('Property', 'Methodcall'))
+             ->atomIs(array('Member', 'Methodcall'))
              ->back('first');
         $this->prepareQuery();
     }

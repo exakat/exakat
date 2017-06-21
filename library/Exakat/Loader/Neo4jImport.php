@@ -43,8 +43,9 @@ class Neo4jImport {
 
     private $config = null;
 
-    public function __construct($config) {
+    public function __construct($gremlin, $config) {
         $this->config = $config;
+        $this->gremlin = $gremlin;
         
         if (file_exists($this->config->projects_root.'/projects/.exakat/nodes.g3.csv') && $this->file_saved == 0) {
             $this->cleanCsv();
@@ -100,7 +101,6 @@ SHELL;
 
         unset($cypher);
 
-        $gremlin = new Gremlin3($this->config);
         // Finish noDelimiter for strings
         $query = <<<GREMLIN
 g.V().hasLabel("String").not(has("noDelimiter"))
@@ -110,7 +110,7 @@ g.V().hasLabel("String").not(has("noDelimiter"))
                         }
 
 GREMLIN;
-        $gremlin->query($query);
+        $this->gremlin->query($query);
 
         $this->cleanCsv();
         display('Cleaning CSV');

@@ -39,9 +39,9 @@ class AlteringForeachWithoutReference extends Analyzer {
 
              ->outIs('VALUE')
              ->atomIs('Keyvalue')
-             ->outIs('KEY')
+             ->outIs('INDEX')
              ->savePropertyAs('code', 'k')
-             ->inIs('KEY')
+             ->inIs('INDEX')
              ->inIs('VALUE')
 
              ->outIs('BLOCK')

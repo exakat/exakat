@@ -29,7 +29,7 @@ class RealVariables extends Analyzer {
     public function analyze() {
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasNoIn('GLOBAL')
-             ->hasNoParent('Staticproperty', 'PROPERTY')
+             ->hasNoParent('Staticproperty', 'MEMBER')
              ->hasNoParent(array('Class', 'Classanonymous', 'Trait'), array('PPP', 'PPP'))
              ->hasNoParent(array('Class', 'Classanonymous', 'Trait'), array('STATIC', 'PPP'))
              ->hasNoParent(array('Class', 'Classanonymous', 'Trait'), array('LEFT', 'PPP', 'PPP'))

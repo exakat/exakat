@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Blind extends Analyzer {
     
     public function analyze() {
-        $blinds = array('Variable', 'Staticproperty', 'Property', 'Array');
+        $blinds = array('Variable', 'Staticproperty', 'Member', 'Array');
         
 // foreach($source as $blind)
         $this->atomIs($blinds)
@@ -53,7 +53,7 @@ class Blind extends Analyzer {
 
         $this->atomIs($blinds)
              ->_as('x')
-             ->inIs('KEY')
+             ->inIs('INDEX')
              ->atomIs('Keyvalue')
              ->inIs('VALUE')
              ->atomIs('Foreach')

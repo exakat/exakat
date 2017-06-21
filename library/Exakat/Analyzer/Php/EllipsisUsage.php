@@ -29,7 +29,7 @@ class EllipsisUsage extends Analyzer {
     protected $phpVersion = '5.6+';
     
     public function analyze() {
-        $this->atomIs(array('Variable', 'Property', 'Array', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname'))
+        $this->atomIs(array('Variable', 'Member', 'Array', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname'))
              ->is('variadic', true);
         $this->prepareQuery();
     }

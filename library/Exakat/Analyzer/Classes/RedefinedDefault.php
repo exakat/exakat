@@ -40,17 +40,17 @@ class RedefinedDefault extends Analyzer {
              ->codeIs('__construct')
              ->inIs('NAME')
              ->outIs('BLOCK')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
 // Not using atomInside, to avoid values in a condition
 //             ->atomInside('Assignation')
              ->atomIs('Assignation')
              ->codeIs('=')
              ->outIs('LEFT')
-             ->atomIs('Property')
+             ->atomIs('Member')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->samePropertyAs('code', 'name')
              
              // sameParameterAs

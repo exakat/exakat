@@ -32,7 +32,7 @@ class DontChangeBlindKey extends Analyzer {
     public function analyze() {
         $this->atomIs('Foreach')
              ->outIs('VALUE')
-             ->outIsIE(array('KEY', 'VALUE'))
+             ->outIsIE(array('INDEX', 'VALUE'))
              ->is('reference', false)
              ->savePropertyAs('fullcode', 'blind')
              ->back('first')

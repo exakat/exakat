@@ -74,7 +74,7 @@ class NoDirectAccess extends Analyzer {
              ->functioncallIs('\\defined')
              ->back('first')
              ->outIs('THEN')
-             ->outWithRank('ELEMENT', 0)
+             ->outWithRank('EXPRESSION', 0)
              ->atomIs('Return')
              ->back('first');
         $this->prepareQuery();
@@ -87,7 +87,7 @@ class NoDirectAccess extends Analyzer {
              ->functioncallIs('\\defined')
              ->back('first')
              ->outIs('THEN')
-             ->outWithRank('ELEMENT', 0)
+             ->outWithRank('EXPRESSION', 0)
              ->atomIs('Return')
              ->back('first');
         $this->prepareQuery();

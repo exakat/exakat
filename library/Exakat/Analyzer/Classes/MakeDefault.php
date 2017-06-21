@@ -40,12 +40,12 @@ class MakeDefault extends Analyzer {
              ->atomIs(array('String', 'Integer', 'Boolean', 'Real'))
              ->inIs('RIGHT')
              ->outIs('LEFT')
-             ->atomIs('Property')
+             ->atomIs('Member')
              ->_as('result')
              ->outIs('OBJECT')
              ->codeIs('$this', true)
              ->inIs('OBJECT')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'propriete')
              
              // search for property definition

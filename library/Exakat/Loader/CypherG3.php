@@ -45,9 +45,11 @@ class CypherG3 {
     private $config = null;
 
     private $cypher = null;
+    private $gremlin = null;
 
-    public function __construct($config) {
+    public function __construct($gremlin, $config) {
         $this->config = $config;
+        $this->gremlin = $gremlin;
         
         // Force autoload
         $this->cypher = new Cypher($this->config);
@@ -60,7 +62,7 @@ class CypherG3 {
 
     private function cleandDb() {
         display("Cleaning DB in cypher3\n");
-        $clean = new CleanDb(new Gremlin3($this->config), $this->config, Tasks::IS_SUBTASK);
+        $clean = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $clean->run();
     }
 
@@ -155,7 +157,6 @@ CYPHER;
         }
         display('Loaded links');
 
-        $gremlin = new Gremlin3($this->config);
         $query = <<<GREMLIN
 g.V().hasLabel("String")
      .not(has("noDelimiter"))
@@ -164,7 +165,7 @@ g.V().hasLabel("String")
      }
 
 GREMLIN;
-        $gremlin->query($query);
+        $this->gremlin->query($query);
 
         $this->cleanCsv();
         display('Cleaning CSV');
@@ -192,6 +193,17 @@ GREMLIN;
     }
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
+
+//        print_r($atoms);
+//        print_r($links);
+        
+        $php = '<'.'?php '.PHP_EOL;
+        $php .= '$atoms = '.var_export((array) $atoms, true).';'.PHP_EOL;
+        $php .= '$links = '.var_export($links, true).';'.PHP_EOL;
+        $php .= '?'.'>';
+
+        file_put_contents( '/tmp/export.php', $php );
+        
         static $extras = array();
 
         // Saving atoms

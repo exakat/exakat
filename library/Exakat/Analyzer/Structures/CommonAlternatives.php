@@ -29,14 +29,14 @@ class CommonAlternatives extends Analyzer {
         $this->atomIs('Ifthen')
              ->outIs('THEN')
              ->atomIs('Sequence')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->_as('results')
              ->savePropertyAs('fullcode', 'expression')
-             ->inIs('ELEMENT')
+             ->inIs('EXPRESSION')
              ->inIs('THEN')
              ->outIs('ELSE')
              ->atomIs('Sequence')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->samePropertyAs('fullcode', 'expression')
              ->back('results');
         $this->prepareQuery();

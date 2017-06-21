@@ -76,7 +76,7 @@ class UsePathinfo extends Analyzer {
              ->nextSibling()
              ->atomIs('Ifthen')
              ->outIs('THEN')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Assignation')
              ->outIs('RIGHT')
              ->functioncallIs('\\array_pop')

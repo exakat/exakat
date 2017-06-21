@@ -39,7 +39,7 @@ class UselessCheck extends Analyzer {
              ->back('first')
              ->outIs('THEN')
              ->is('count', 1)
-             ->outWithRank('ELEMENT', 0)
+             ->outWithRank('EXPRESSION', 0)
              ->atomIs('Foreach')
              ->outIs('SOURCE')
              ->samePropertyAs('fullcode', 'var')

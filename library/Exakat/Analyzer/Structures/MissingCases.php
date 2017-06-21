@@ -29,7 +29,7 @@ class MissingCases extends Analyzer {
         $switches = $this->query(<<<GREMLIN
 g.V().hasLabel("Switch")
      .sideEffect{ x = []; }
-     .sideEffect( __.out('CASES').out('ELEMENT').out('CASE').hasLabel('String').not(where(out("CONCAT"))).sideEffect{x.add(it.get().value('noDelimiter'));})
+     .sideEffect( __.out('CASES').out('EXPRESSION').out('CASE').hasLabel('String').not(where(out("CONCAT"))).sideEffect{x.add(it.get().value('noDelimiter'));})
      .filter{x != [];}
      .map{x.sort();}
 GREMLIN
@@ -68,7 +68,7 @@ GREMLIN
         $commons = array_array_unique($commons);
         
         $this->atomIs('Switch')
-             ->raw('sideEffect{ x = []; }.sideEffect( __.out("CASES").out("ELEMENT").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));}).filter{x != [];}.map{x.sort();}')
+             ->raw('sideEffect{ x = []; }.sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));}).filter{x != [];}.map{x.sort();}')
              ->raw('filter{ x in ***.values() }', $commons)
              ->back('first');
         $this->prepareQuery();

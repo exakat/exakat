@@ -582,7 +582,7 @@ GREMLIN
         $query = <<<GREMLIN
 g.V().hasLabel("Method")
 .where( __.out("NAME").hasLabel("Void").count().is(eq(0)) )
-.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface", "Trait")
+.sideEffect{ classe = ''; }.where(__.in("   ").in("BLOCK").hasLabel("Class", "Interface", "Trait")
                                     .where(__.out("NAME").hasLabel("Void").count().is(eq(0)) )
                                     .sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
 .filter{ classe != '';} // Removes functions, keeps methods
@@ -646,7 +646,7 @@ GREMLIN
         $query = <<<GREMLIN
 
 g.V().hasLabel("Ppp")
-.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface")
+.sideEffect{ classe = ''; }.where(__.in("EXPRESSION").in("BLOCK").hasLabel("Class", "Interface")
                                     .sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
 .filter{ classe != '';} // Removes functions, keeps methods
 .sideEffect{ 
@@ -720,7 +720,7 @@ GREMLIN
 
         $query = <<<GREMLIN
 g.V().hasLabel("Const")
-.sideEffect{ classe = ''; }.where(__.in("ELEMENT").in("BLOCK").hasLabel("Class", "Interface").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
+.sideEffect{ classe = ''; }.where(__.in("EXPRESSION").in("BLOCK").hasLabel("Class", "Interface").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
 .filter{ classe != '';} // Removes functions, keeps methods
 .out('CONST')
 .map{ 
@@ -980,7 +980,7 @@ GREMLIN;
         // constants
         $query = 'g.V().hasLabel("File").as("file")
                    .repeat( out() ).emit(hasLabel("Identifier")).times(15)
-                   .hasLabel("Identifier").where( __.in("NAME", "CLASS", "PROPERTY", "AS", "CONSTANT", "TYPEHINT", "EXTENDS", "USE", "IMPLEMENTS", "INDEX" ).count().is(eq(0)) ).in("DEFINITION")
+                   .hasLabel("Identifier").where( __.in("NAME", "CLASS", "MEMBER", "AS", "CONSTANT", "TYPEHINT", "EXTENDS", "USE", "IMPLEMENTS", "INDEX" ).count().is(eq(0)) ).in("DEFINITION")
                    .repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File")
                    .as("include")
                    .select("file", "include").by("fullcode").by("fullcode")

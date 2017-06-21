@@ -33,10 +33,10 @@ class GlobalCodeOnly extends Analyzer {
         // one or several namespaces
         $this->atomIs('File')
              ->outIs('FILE')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->outIs('CODE')
-             ->raw('coalesce( __.out("ELEMENT").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
-             ->raw('where( __.out("ELEMENT").hasLabel('.$definitionsList.').count().is(eq(0)) )')
+             ->raw('coalesce( __.out("EXPRESSION").hasLabel("Namespace").out("BLOCK"), __.filter{ true; } )')
+             ->raw('where( __.out("EXPRESSION").hasLabel('.$definitionsList.').count().is(eq(0)) )')
              ->raw('where( __.hasLabel("Function").where( __.out("NAME").hasLabel("Void").count().is(eq(0))).count().is(eq(0)) )')
              ->raw('where( __.in("ANALYZED").not(has("analyzer", "Structures/NoDirectAccess") ).count().is(eq(0)) )')
              ->raw('where( __.hasLabel("Functioncall").filter{ it.get().value("fullnspath") in ['.$definitionsFunctionsList.'] }.count().is(eq(0)) )')

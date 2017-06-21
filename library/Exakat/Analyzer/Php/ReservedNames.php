@@ -66,7 +66,7 @@ class ReservedNames extends Analyzer {
         $this->prepareQuery();
 
         // property
-        $this->atomIs('Property')
+        $this->atomIs('Member')
              ->outIs('METHOD')
              ->codeIs($reservedNames)
              ->back('first');

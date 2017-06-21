@@ -47,10 +47,10 @@ class CurlOptions extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
-             ->outIs('KEY')
+             ->outIs('INDEX')
              ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs($options)
-             ->inIs('KEY')
+             ->inIs('INDEX')
              ->outIs('VALUE')
              ->isNot('boolean', true)
              ->back('first');

@@ -157,8 +157,8 @@ class Load extends Tasks {
     private $optionsTokens = array();
 
     static public $PROP_ALTERNATIVE = array('Declare', 'Ifthen', 'For', 'Foreach', 'Switch', 'While');
-    static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Property', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
-    static public $PROP_VARIADIC    = array('Variable', 'Array', 'Property', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
+    static public $PROP_REFERENCE   = array('Variable', 'Variableobject', 'Variablearray', 'Member', 'Array', 'Function', 'Closure', 'Method', 'Functioncall', 'Methodcall');
+    static public $PROP_VARIADIC    = array('Variable', 'Array', 'Member', 'Staticproperty', 'Staticconstant', 'Methodcall', 'Staticmethodcall', 'Functioncall', 'Identifier', 'Nsname');
     static public $PROP_DELIMITER   = array('String', 'Heredoc');
     static public $PROP_NODELIMITER = array('String', 'Variable');
     static public $PROP_HEREDOC     = array('Heredoc');
@@ -171,7 +171,7 @@ class Load extends Tasks {
     static public $PROP_BLOCK       = array('String');
     static public $PROP_INTVAL      = array('Integer');
     static public $PROP_STRVAL      = array('String');
-    static public $PROP_ENCLOSING   = array('Variable', 'Array', 'Property');
+    static public $PROP_ENCLOSING   = array('Variable', 'Array', 'Member');
     static public $PROP_ARGS_MAX    = array('Arguments');
     static public $PROP_ARGS_MIN    = array('Arguments');
     static public $PROP_BRACKET     = array('Sequence');
@@ -254,7 +254,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     
-    private $loaderList = array('CypherG3', 'Neo4jImport');
+    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph');
 
     private $processing = array();
 
@@ -501,7 +501,7 @@ class Load extends Tasks {
             display('Loading with '.$client.PHP_EOL);
 
             $client = '\\Exakat\\Loader\\'.$client;
-            static::$client = new $client($this->config);
+            static::$client = new $client($this->gremlin, $this->config);
         }
 
         $this->datastore->cleanTable('tokenCounts');
@@ -563,7 +563,7 @@ class Load extends Tasks {
                 // ignoring empty files
             }
         }
-        $this->saveDefinitions();
+//        $this->saveDefinitions();
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
@@ -596,7 +596,7 @@ class Load extends Tasks {
                 // Ignoring
             }
         }
-        $this->saveDefinitions();
+//        $this->saveDefinitions();
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
@@ -605,6 +605,7 @@ class Load extends Tasks {
     private function reset() {
         $this->atoms = array($this->id0->id => $this->id0);
         $this->links = array();
+        /*
         foreach($this->calls as $type => $names) {
             foreach($names as $name => $calls) {
                 if (!empty($calls['definitions'])) {
@@ -612,6 +613,7 @@ class Load extends Tasks {
                 }
             }
         }
+        */
 
         $this->uses  = array('function' => array(),
                              'const'    => array(),
@@ -838,7 +840,7 @@ class Load extends Tasks {
 
                     $propertyName = $this->processNextAsIdentifier();
 
-                    $property = $this->addAtom('Property');
+                    $property = $this->addAtom('Member');
                     $property->code      = $this->tokens[$current][1];
                     $property->fullcode  = $object->fullcode.'->'.$propertyName->fullcode;
                     $property->line      = $this->tokens[$current][2];
@@ -846,7 +848,7 @@ class Load extends Tasks {
                     $property->enclosing = self::NO_ENCLOSING;
 
                     $this->addLink($property, $object, 'OBJECT');
-                    $this->addLink($property, $propertyName, 'PROPERTY');
+                    $this->addLink($property, $propertyName, 'MEMBER');
 
                     $this->pushExpression($property);
                 }
@@ -2786,7 +2788,7 @@ class Load extends Tasks {
         $rank = 0;
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_PARENTHESIS) {
             $void = $this->addAtomVoid();
-            $this->addLink($cases, $void, 'ELEMENT');
+            $this->addLink($cases, $void, 'EXPRESSION');
             $void->rank = $rank;
 
             ++$this->id;
@@ -2802,7 +2804,7 @@ class Load extends Tasks {
                 $this->processNext();
 
                 $case = $this->popExpression();
-                $this->addLink($cases, $case, 'ELEMENT');
+                $this->addLink($cases, $case, 'EXPRESSION');
                 $case->rank = ++$rank;
             };
         }
@@ -3158,7 +3160,7 @@ class Load extends Tasks {
                 $block->token      = $this->getToken($this->tokens[$this->id][0]);
                 $block->bracket    = self::NOT_BRACKET;
 
-                $this->addLink($block, $void, 'ELEMENT');
+                $this->addLink($block, $void, 'EXPRESSION');
             } else {
                 $block = $this->processNamespaceBlock();
             }
@@ -4060,7 +4062,7 @@ class Load extends Tasks {
             $static->constant = self::CONSTANT_EXPRESSION;
         } elseif (in_array($right->atom, array('Variable', 'Array', 'Arrayappend', 'MagicConstant', 'Concatenation', 'Block', 'Boolean', 'Null'))) {
             $static = $this->addAtom('Staticproperty');
-            $links = 'PROPERTY';
+            $links = 'MEMBER';
         } elseif (in_array($right->atom, array('Methodcallname'))) {
             $static = $this->addAtom('Staticmethodcall');
             $links = 'METHOD';
@@ -4163,9 +4165,9 @@ class Load extends Tasks {
         $this->contexts[self::CONTEXT_NEW] = $newContext;
         $this->exitContext();
 
-        if (in_array($right->atom, array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'Property', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
-            $static = $this->addAtom('Property');
-            $links = 'PROPERTY';
+        if (in_array($right->atom, array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'Member', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
+            $static = $this->addAtom('Member');
+            $links = 'MEMBER';
             $static->enclosing = self::NO_ENCLOSING;
         } elseif (in_array($right->atom, array('Methodcallname', 'Methodcall'))) {
             $static = $this->addAtom('Methodcall');
@@ -4358,7 +4360,7 @@ class Load extends Tasks {
     }
 
     private function processKeyvalue() {
-        return $this->processOperator('Keyvalue', $this->precedence->get($this->tokens[$this->id][0]), array('KEY', 'VALUE'));
+        return $this->processOperator('Keyvalue', $this->precedence->get($this->tokens[$this->id][0]), array('INDEX', 'VALUE'));
     }
 
     private function processBitshift() {
@@ -4588,7 +4590,6 @@ class Load extends Tasks {
     }
 
     private function saveDefinitions() {
-        $begin = microtime(true);
         // Fallback to global if local namespace function doesn't exists
         if (isset($this->calls['function'])) {
             $this->fallbackToGlobal('function');
@@ -4599,12 +4600,10 @@ class Load extends Tasks {
 
         static::$client->saveDefinitions($this->exakatDir, $this->calls);
 
-        $end = microtime(true);
-        $this->log->log("saveDefinitions\t".(($end - $begin) * 1000)."\t".count($this->calls).PHP_EOL);
+//        $this->log->log("saveDefinitions\t".(($end - $begin) * 1000)."\t".count($this->calls).PHP_EOL);
     }
 
     private function fallbackToGlobal($type) {
-        $b = microtime(true);
         foreach($this->calls[$type] as $fnp => &$usage) {
             if (substr_count($fnp, '\\') < 2) {
                 continue;
@@ -4614,6 +4613,7 @@ class Load extends Tasks {
             }
             $foo = explode('\\', $fnp);
             $globalFnp = '\\'.array_pop($foo);
+
             if (!isset($this->calls[$type][$globalFnp])) {
                 continue;
             }
@@ -4623,7 +4623,6 @@ class Load extends Tasks {
 
             $usage['definitions'] = $this->calls[$type][$globalFnp]['definitions'];
         }
-        $e = microtime(true);
     }
 
     private function startSequence() {
@@ -4641,7 +4640,7 @@ class Load extends Tasks {
     }
 
     private function addToSequence($id) {
-        $this->addLink($this->sequence, $id, 'ELEMENT');
+        $this->addLink($this->sequence, $id, 'EXPRESSION');
         $id->rank = ++$this->sequenceRank[$this->sequenceCurrentRank];
         $this->sequence->constant = $this->sequence->constant && isset($id->constant) && $id->constant === self::CONSTANT_EXPRESSION;
     }

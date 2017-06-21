@@ -38,7 +38,7 @@ class Arrayindex extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
-             ->outIs('KEY')
+             ->outIs('INDEX')
              ->atomIs(self::$LITERALS);
         $this->prepareQuery();
 
@@ -47,7 +47,7 @@ class Arrayindex extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
-             ->outIs('KEY')
+             ->outIs('INDEX')
              ->atomIs(self::$LITERALS);
         $this->prepareQuery();
     }

@@ -34,7 +34,7 @@ class MailUsage extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Newcall')
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Property", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
+             ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIs($mailerClasses);
         $this->prepareQuery();

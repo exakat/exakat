@@ -28,7 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class BuriedAssignation extends Analyzer {
     public function analyze() {
         $this->atomIs('Assignation')
-             ->hasNoIn('ELEMENT')
+             ->hasNoIn('EXPRESSION')
              ->codeIs('=')
 
              // avoid chained assignation
@@ -44,7 +44,7 @@ class BuriedAssignation extends Analyzer {
         $this->atomIs('For')
              ->outIs(array('INIT', 'FINAL', 'INCREMENT'))
              ->isMore('count', 1)
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Assignation');
         $this->prepareQuery();
     }

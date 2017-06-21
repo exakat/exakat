@@ -34,7 +34,7 @@ class ShouldMakeAlias extends Analyzer {
              ->hasNoParent('Namespace', 'NAME')  // use expression
              ->savePropertyAs('fullnspath', 'possibleAlias')
              ->goToNamespace()
-             ->raw('where( __.out("BLOCK", "CODE").out("ELEMENT").hasLabel("Use").out("USE").filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )')
+             ->raw('where( __.out("BLOCK", "CODE").out("EXPRESSION").hasLabel("Use").out("USE").filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )')
              ->back('first');
         $this->prepareQuery();
 

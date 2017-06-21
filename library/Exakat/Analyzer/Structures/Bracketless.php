@@ -32,7 +32,7 @@ class Bracketless extends Analyzer {
              ->isNot('alternative', true)
              ->outIs(array('ELSE', 'THEN'))
              ->isNot('bracket', true)
-             ->raw('where( __.not( and(has("count", 1), __.out("ELEMENT").hasLabel("Ifthen") ) ) )')
+             ->raw('where( __.not( and(has("count", 1), __.out("EXPRESSION").hasLabel("Ifthen") ) ) )')
              ->tokenIsNot('T_ELSEIF')
              ->back('first');
         $this->prepareQuery();

@@ -46,8 +46,8 @@ class UnitializedProperties extends Analyzer {
              ->analyzerIs('Classes/Constructor')
              ->raw('not(where(
     __.out("BLOCK").repeat( out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.')
-                   .hasLabel("Property")
-                   .where( __.out("PROPERTY").has("token", "T_STRING").filter{ it.get().value("code") == property} )
+                   .hasLabel("Member")
+                   .where( __.out("MEMBER").has("token", "T_STRING").filter{ it.get().value("code") == property} )
                    .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
                    ))')
              ->back('results');
@@ -85,7 +85,7 @@ class UnitializedProperties extends Analyzer {
     __.out("BLOCK").repeat( out('.$this->linksDown.') ).emit().times('.self::MAX_LOOPING.')
       .hasLabel("Staticproperty")
       .where( __.out("CLASS").filter{ it.get().value("fullnspath") == classe} )
-      .where( __.out("PROPERTY").filter{ it.get().value("code") == property}  )
+      .where( __.out("MEMBER").filter{ it.get().value("code") == property}  )
       .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") ).count().is(eq(0))
 )')
              ->back('results')

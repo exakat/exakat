@@ -51,7 +51,7 @@ class UselessReturn extends Analyzer {
              ->inIs('NAME')
 
              ->outIs('BLOCK')
-             ->outWithRank('ELEMENT', 'last')
+             ->outWithRank('EXPRESSION', 'last')
              ->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Void')

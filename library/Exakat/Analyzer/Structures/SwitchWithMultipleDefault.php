@@ -30,7 +30,7 @@ class SwitchWithMultipleDefault extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Switch')
-             ->raw('where( __.out("CASES").out("ELEMENT").hasLabel("Default").count().is(gt(1)) )')
+             ->raw('where( __.out("CASES").out("EXPRESSION").hasLabel("Default").count().is(gt(1)) )')
              ->back('first');
         $this->prepareQuery();
     }

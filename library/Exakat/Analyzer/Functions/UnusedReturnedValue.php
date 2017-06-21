@@ -36,7 +36,7 @@ class UnusedReturnedValue extends Analyzer {
              ->atomIsNot('Void')
              ->back('first')
              ->outIs('DEFINITION')
-             ->hasIn('ELEMENT');
+             ->hasIn('EXPRESSION');
         $this->prepareQuery();
     }
 }

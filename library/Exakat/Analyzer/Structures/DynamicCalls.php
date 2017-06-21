@@ -56,14 +56,14 @@ class DynamicCalls extends Analyzer {
         // $$o->p or $$o->m() are variable variable, not variable object
         // property
         // $o->{$p}
-        $this->atomIs('Property')
-             ->outIs('PROPERTY')
+        $this->atomIs('Member')
+             ->outIs('MEMBER')
              ->tokenIsNot(array('T_STRING', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();
 
-        $this->atomIs('Property')
-             ->outIs('PROPERTY')
+        $this->atomIs('Member')
+             ->outIs('MEMBER')
              ->atomIs('Block')
              ->back('first');
         $this->prepareQuery();

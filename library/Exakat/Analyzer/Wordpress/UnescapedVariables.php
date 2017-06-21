@@ -34,9 +34,9 @@ class UnescapedVariables extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
-             ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty', 'Concatenation'))
+             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty', 'Concatenation'))
              ->outIsIE('CONCAT')
-             ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
+             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
              ->back('first');
         $this->prepareQuery();
 

@@ -31,9 +31,9 @@ class Variablenames extends Analyzer {
         $this->atomIs(array('Variable', 'Variableobject', 'Variablearray'))
              ->hasNoParent('Functioncall', array('NAME'))
 
-             ->hasNoParent('Staticproperty', 'PROPERTY')
-             ->hasNoParent('Staticproperty', array('VARIABLE', 'PROPERTY'))
-             ->hasNoParent('Staticproperty', array('VARIABLE', 'VARIABLE', 'PROPERTY'));
+             ->hasNoParent('Staticproperty', 'MEMBER')
+             ->hasNoParent('Staticproperty', array('VARIABLE', 'MEMBER'))
+             ->hasNoParent('Staticproperty', array('VARIABLE', 'VARIABLE', 'MEMBER'));
         $this->prepareQuery();
 
         // $x()
@@ -50,8 +50,8 @@ class Variablenames extends Analyzer {
         $this->prepareQuery();
 
         // $object->$x or $object->{$x}
-        $this->atomIs('Property')
-             ->outIs('PROPERTY')
+        $this->atomIs('Member')
+             ->outIs('MEMBER')
              ->tokenIs('T_VARIABLE');
         $this->prepareQuery();
     }

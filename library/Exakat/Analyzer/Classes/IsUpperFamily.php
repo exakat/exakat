@@ -52,7 +52,7 @@ class IsUpperFamily extends Analyzer {
              ->atomIs(array('Identifier', 'Nsname'))
              ->savePropertyAs('fullnspath', 'fnp')
              ->inIs('CLASS')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->tokenIs('T_VARIABLE')
              ->savePropertyAs('code', 'property')
              

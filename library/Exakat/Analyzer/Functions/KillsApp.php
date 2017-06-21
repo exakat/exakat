@@ -31,7 +31,7 @@ class KillsApp extends Analyzer {
         $this->atomIs('Function')
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->functioncallIs(array('\\die', '\\exit'))
              ->back('first');
         $this->prepareQuery();
@@ -40,7 +40,7 @@ class KillsApp extends Analyzer {
         $this->atomIs('Function')
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
              ->analyzerIs('self')
@@ -51,7 +51,7 @@ class KillsApp extends Analyzer {
         $this->atomIs('Function')
              ->outIs('BLOCK')
              // We need this straight in the main sequence, not deep in a condition
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functionDefinition()
              ->inIs('NAME')

@@ -30,7 +30,7 @@ class MultipleDefinedCase extends Analyzer {
         // Check that fullcode is the same or not
         $this->atomIs('Switch')
              ->raw('where( __.sideEffect{ counts = [:]; }
-                             .out("CASES").out("ELEMENT").hasLabel("Case").out("CASE").not(hasLabel("String"))
+                             .out("CASES").out("EXPRESSION").hasLabel("Case").out("CASE").not(hasLabel("String"))
                              .sideEffect{ k = it.get().value("fullcode"); if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }}
                              .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
                               )');
@@ -39,7 +39,7 @@ class MultipleDefinedCase extends Analyzer {
         // Special case for strings (avoiding ' and ")
         $this->atomIs('Switch')
              ->raw('where( __.sideEffect{ counts = [:]; }
-                             .out("CASES").out("ELEMENT").hasLabel("Case").out("CASE").hasLabel("String").where( __.out("CONCAT").count().is(eq(0)) )
+                             .out("CASES").out("EXPRESSION").hasLabel("Case").out("CASE").hasLabel("String").where( __.out("CONCAT").count().is(eq(0)) )
                              .sideEffect{ k = it.get().value("noDelimiter"); if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }}
                              .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
                               )');

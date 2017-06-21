@@ -55,9 +55,9 @@ class StaticLoop extends Analyzer {
              ->outIs('VALUE')
              ->atomIs('Keyvalue')
 
-             ->outIs('KEY')
+             ->outIs('INDEX')
              ->savePropertyAs('fullcode', 'k')
-             ->inIs('KEY')
+             ->inIs('INDEX')
 
              ->outIs('VALUE')
              ->savePropertyAs('code', 'v')

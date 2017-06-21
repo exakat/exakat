@@ -36,7 +36,7 @@ class VariableUsedOnceByContext extends Analyzer {
         $query = <<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject")
      .not(has("code", "\\\$this"))
-     .where( __.in("PROPERTY").count().is(eq(0)) )
+     .where( __.in("MEMBER").count().is(eq(0)) )
                .where( repeat( __.in({$this->linksDown}))
                             .until(hasLabel("File")).emit(hasLabel("Function")).hasLabel("Function")
                             .count().is(eq(0))
@@ -58,7 +58,7 @@ GREMLIN;
                              .repeat( out('.$this->linksDown.').not( where( __.hasLabel("Function", "Closure") ) ) )
                              .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
                              .hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this"))
-                             .where( __.in("PROPERTY").count().is(eq(0)) )
+                             .where( __.in("MEMBER").count().is(eq(0)) )
                              .sideEffect{ k = it.get().value("code"); 
                                          if (counts[k] == null) {
                                             counts[k] = 1;

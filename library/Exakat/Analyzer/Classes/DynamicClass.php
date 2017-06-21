@@ -29,13 +29,13 @@ class DynamicClass extends Analyzer {
     public function analyze() {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
-             ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
+             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
-             ->atomIs(array('Variable', 'Array', 'Property', 'Staticproperty'))
+             ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
              ->back('first');
         $this->prepareQuery();
         

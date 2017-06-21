@@ -75,11 +75,11 @@ class UnreachableCode extends Analyzer {
 
         $this->atomIs('Ifthen')
              ->outIs('THEN')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs(array('Return', 'Continue', 'Break'))
              ->back('first')
              ->outIs('ELSE')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs(array('Return', 'Continue', 'Break'))
              ->back('first')
              ->nextSibling()

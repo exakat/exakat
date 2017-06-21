@@ -30,8 +30,8 @@ class UselessInstruction extends Analyzer {
         // Structures that should be put somewhere, and never left alone
         $this->atomIs('Sequence')
              ->hasNoIn('FINAL')
-             ->outIs('ELEMENT')
-             ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
+             ->outIs('EXPRESSION')
+             ->atomIs(array('Array', 'Addition', 'Multiplication', 'Member', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
@@ -42,7 +42,7 @@ class UselessInstruction extends Analyzer {
         $this->atomIs('For')
              ->outIs('FINAL')
              ->outWithoutLastRank()
-             ->atomIs(array('Array', 'Addition', 'Multiplication', 'Property', 'Staticproperty', 'Boolean',
+             ->atomIs(array('Array', 'Addition', 'Multiplication', 'Member', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
@@ -57,7 +57,7 @@ class UselessInstruction extends Analyzer {
 
         // closures that are not assigned to something (argument or variable)
         $this->atomIs('Sequence')
-             ->outIs('ELEMENT')
+             ->outIs('EXPRESSION')
              ->atomIs('Closure');
         $this->prepareQuery();
 

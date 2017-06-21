@@ -36,9 +36,9 @@ class CouldBePrivate extends Analyzer {
 
         // Non-static properties
         // Case of object->property (that's another public access)
-        $publicProperties = $this->query('g.V().hasLabel("Property")
+        $publicProperties = $this->query('g.V().hasLabel("Member")
                                                .where( __.out("OBJECT").not(has("code", "\$this")) )
-                                               .out("PROPERTY")
+                                               .out("MEMBER")
                                                .hasLabel("Identifier")
                                                .values("code").unique()');
 
@@ -58,7 +58,7 @@ class CouldBePrivate extends Analyzer {
                                                      .as("classe")
                                                      .sideEffect{ fns = it.get().value("fullnspath"); }
                                                      .in("CLASS")
-                                                     .out("PROPERTY")
+                                                     .out("MEMBER")
                                                      .hasLabel("Variable")
                                                      .as("property")
                                                      .repeat( __.in('.$this->linksDown.')).until(hasLabel("Class", "File") )

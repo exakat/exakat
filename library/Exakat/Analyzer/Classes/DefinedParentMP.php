@@ -90,10 +90,10 @@ class DefinedParentMP extends Analyzer {
         
         // parent::$property
         $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'name')
-             ->inIs('PROPERTY')
+             ->inIs('MEMBER')
              ->outIs('CLASS')
              ->codeIs('parent')
              ->goToClass()
@@ -118,9 +118,9 @@ class DefinedParentMP extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
-             ->inIs('PROPERTY')
+             ->inIs('MEMBER')
              ->outIs('CLASS')
              ->codeIs('parent')
              ->goToClass()
@@ -129,9 +129,9 @@ class DefinedParentMP extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
-             ->inIs('PROPERTY')
+             ->inIs('MEMBER')
              ->outIs('CLASS')
              ->codeIs('parent')
              ->goToClass()
@@ -141,11 +141,11 @@ class DefinedParentMP extends Analyzer {
         $this->prepareQuery();
         
         // defined in traits (via use)
-        $this->atomIs('Property')
+        $this->atomIs('Member')
              ->outIs('OBJECT')
              ->codeIs('$this')
              ->inIs('OBJECT')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'property')
              ->goToClass()
              ->goToTraits()

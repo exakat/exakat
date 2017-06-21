@@ -48,7 +48,7 @@ class AccessProtected extends Analyzer {
 
         // class::$property
         $this->atomIs('Staticproperty')
-             ->outIs('PROPERTY')
+             ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->outIs('CLASS')
