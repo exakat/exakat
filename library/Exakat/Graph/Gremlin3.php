@@ -394,7 +394,7 @@ GREMLIN;
         if ($counts === 100)  {
             display('No connexion to gremlin : forcing restart ('.$counts.')');
             // Can't connect to gremlin. Forcing restart.
-            $this->restart();
+            $this->doRestart();
             $this->cleanScripts();
             return ;
         } else {
