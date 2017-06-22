@@ -101,7 +101,7 @@ g.V().hasLabel("Analysis").or(has("analyzer", within($analyzersClassList1)),
              }
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('Project') ).repeat( 
-    __.in()
+    __.in($linksDown)
       .sideEffect{ if (it.get().label() == 'Function') { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() == 'Class') { theClass = it.get().value('fullcode')} }
       .sideEffect{ if (it.get().label() == 'File') { file = it.get().value('fullcode')} }
