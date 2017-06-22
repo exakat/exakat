@@ -32,9 +32,9 @@ class AmbiguousKeys extends Analyzer {
              ->raw('where(
     __.sideEffect{ counts = [:]; integers = [:]; strings = [:]; }
       .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
-      .hasLabel("String", "Integer").where(__.out("CONCAT").count().is(eq(0)))
+      .hasLabel("String", "Integer").not( where(__.out("CONCAT") ) )
       .sideEffect{ 
-            if ("noDelimiter" in it.get().keys() ) { 
+            if (it.get().label() == "String" && "noDelimiter" in it.get().keys()) { 
                 k = it.get().value("noDelimiter"); 
                 if (counts[k] == null) { counts[k] = ["string"]; } else { counts[k].add("string"); }
             } else { 

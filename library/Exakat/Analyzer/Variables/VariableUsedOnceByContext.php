@@ -47,7 +47,7 @@ GREMLIN;
 
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasNoIn(array('PPP'))
-             ->raw('where( __.in("LEFT").in("PPP").count().is(eq(0)) )')
+             ->raw('not( where( __.in("LEFT").in("PPP") ) )')
              ->hasNoFunction()
              ->codeIs($variables);
         $this->prepareQuery();

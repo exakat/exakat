@@ -1540,7 +1540,18 @@ GREMLIN
     public function isLiteral() {
         // Closures are literal if not using a variable from the context
         $this->addMethod(<<<GREMLIN
-hasLabel("Integer", "Boolean", "Magicconstant", "Real", "String", "Heredoc", "Closure", "Arrayliteral").has("constant", true)
+hasLabel("Integer", "Boolean", "Null", "Magicconstant", "Real", "String", "Heredoc", "Closure", "Arrayliteral").has("constant", true)
+
+GREMLIN
+);
+
+        return $this;
+    }
+    
+    public function isNotLiteral() {
+        // Closures are literal if not using a variable from the context
+        $this->addMethod(<<<GREMLIN
+not( hasLabel("Integer", "Boolean", "Null", "Magicconstant", "Real", "String", "Heredoc", "Closure", "Arrayliteral").has("constant", true) )
 
 GREMLIN
 );

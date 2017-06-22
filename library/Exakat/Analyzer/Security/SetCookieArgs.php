@@ -30,11 +30,23 @@ class SetCookieArgs extends Analyzer {
              ->outIs('ARGUMENTS')
              ->hasChildWithRank('ARGUMENT', 1) // so the cookie is not destroyed
              ->outWithRank('ARGUMENT', 1)
+             ->isNotLiteral()
+             ->inIs('ARGUMENT')
+             ->noChildWithRank('ARGUMENT', 6) // so httponly is omitted
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomFunctionIs(array('\\setcookie', '\\setrawcookie'))
+             ->outIs('ARGUMENTS')
+             ->hasChildWithRank('ARGUMENT', 1) // so the cookie is not destroyed
+             ->outWithRank('ARGUMENT', 1)
+             ->isLiteral()
              ->isNot('boolean', false)
              ->inIs('ARGUMENT')
              ->noChildWithRank('ARGUMENT', 6) // so httponly is omitted
              ->back('first');
         $this->prepareQuery();
+
     }
 }
 
