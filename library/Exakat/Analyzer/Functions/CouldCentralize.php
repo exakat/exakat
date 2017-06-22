@@ -35,14 +35,18 @@ class CouldCentralize extends Analyzer {
             $query = <<<GREMLIN
 g.V().hasLabel('Functioncall')
      .has('fullnspath', without($excludedList))
-     .sideEffect{x = [it.get().value('fullnspath')];}.out('ARGUMENTS').out('ARGUMENT').has('rank', $i)
-     .hasLabel('String')
-     .sideEffect{x.add(it.get().value('code')); }
+     .where( 
+      __.sideEffect{x = [it.get().value('fullnspath')];}
+        .out('ARGUMENTS').out('ARGUMENT').has('rank', $i)
+        .hasLabel('String').sideEffect{x.add(it.get().value('code')); }
+      )
+     .map{ x; }
      .groupCount('m').by{x;}.cap('m').toList()[0]
      .findAll{a,b -> b > 3}
      .sort{ e1, e2 -> e1.value <=> e2.value };
 GREMLIN;
             $res = $this->query($query);
+            
             $functions = array();
             $args = array();
             foreach($res as $key => $count) {
@@ -55,6 +59,7 @@ GREMLIN;
                     }
                 }
             }
+            
             
             $this->atomFunctionIs($functions)
                  ->analyzerIsNot('Functions/CouldCentralize')
