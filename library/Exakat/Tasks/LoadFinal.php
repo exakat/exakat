@@ -46,10 +46,7 @@ class LoadFinal extends Tasks {
 
         $this->makeClassConstantDefinition();
 
-        $this->fallbackToGlobalConstants();
-        $this->findPHPNativeConstants();
-        $this->fallbackToGlobalConstants2();
-
+        $this->spotPHPNativeConstants();
         $this->spotPHPNativeFunctions();
 
         $this->logTime('Final');
@@ -76,12 +73,37 @@ class LoadFinal extends Tasks {
     }
 
 
+    private function spotPHPNativeConstants() {
+        $title = 'mark PHP native constants call';
+        $constants = call_user_func_array('array_merge', $this->PHPconstants);
+        $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
+        $constants = array_map('strtolower', $constants);
+
+        // This weird trick for janusgraph...
+        $constants = array_slice($constants, 0, 14300);
+        
+        $query = <<<GREMLIN
+g.V().hasLabel("Identifier")
+     .has("fullnspath")
+     .not(where( __.in("DEFINITION")))
+     .filter{ it.get().value("code").toLowerCase() in arg1 }
+     .sideEffect{
+         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+         it.get().property("fullnspath", fullnspath); 
+     }.count();
+
+GREMLIN;
+
+        $this->runQuery($query, $title, array('arg1' => $constants));
+    }
+    
     private function spotPHPNativeFunctions() {
         $title = 'mark PHP native functions call';
         $functions = call_user_func_array('array_merge', $this->PHPfunctions);
         $functions = array_filter($functions, function ($x) { return strpos($x, '\\') === false;});
         $functions = array_map('strtolower', $functions);
 
+        // This weird trick for janusgraph...
         $functions = array_slice($functions, 0, 14300);
         
         $query = <<<GREMLIN
@@ -202,77 +224,6 @@ GREMLIN;
         $this->gremlin->query($query);
         display('Create link between Class constant and definition');
         $this->logTime('Class::constant definition');
-    }
-
-    private function fallbackToGlobalConstants() {
-        // update fullnspath with fallback for constants
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier", "Nsname").as("a")
-     .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
-     .has("fullnspath", without(''))
-     .where( __.in("NEW", "METHOD", "NAME").count().is(eq(0)))
-     .sideEffect{ fullnspath = it.get().value("fullnspath")}
-     .in('DEFINITION').not(hasLabel("As", "Class", "Interface", "Trait")).out("NAME")
-     .filter{ it.get().value("fullnspath") != fullnspath}
-     .sideEffect{ fullnspath = it.get().value("fullnspath")}
-     .select("a")
-     .sideEffect{ 
-          it.get().property("fullnspath", fullnspath ); 
-      }
-      .count();
-
-GREMLIN;
-        $res = $this->gremlin->query($query);
-        display('fallback for global constants : '.$res->results[0]);
-        $this->logTime('fallback to global for constants : '.$res->results[0]);
-    }
-
-    private function findPHPNativeConstants() {
-        $constants = call_user_func_array('array_merge', $this->PHPconstants);
-        $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
-        $constants = array_map('strtolower', $constants);
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier")
-     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "MEMBER").count().is(eq(0)) )  
-     .filter{ it.get().value("code").toLowerCase() in arg1 }
-     .sideEffect{ 
-        fullnspath = "\\\\" + it.get().value("code").toLowerCase();
-        it.get().property("fullnspath", fullnspath); 
-      }
-
-GREMLIN;
-        $this->gremlin->query($query, array('arg1' => $constants));
-        display('spot PHP / ext constants');
-        $this->logTime('PHP Constants');
-    }
-
-    private function fallbackToGlobalConstants2() {
-        $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() > 0 }.values("code")';
-        $constants = $this->gremlin->query($query);
-        $constantsGlobal = $constants->results;
-
-        $query = 'g.V().hasLabel("Const").out("CONST").out("NAME").filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$" ).getCount() == 0 }.values("fullnspath")';
-        $constants = $this->gremlin->query($query);
-        $constantsDefinitions = $constants->results;
-
-        $query = <<<GREMLIN
-g.V().hasLabel("Identifier")
-     .where( __.in("ALIAS", "DEFINITION", "NEW", "USE", "NAME", "EXTENDS", "IMPLEMENTS", "CLASS", "CONST", "CONSTANT", "TYPEHINT", "FUNCTION", "GROUPUSE", "MEMBER").count().is(eq(0)) )  
-     .filter{ it.get().value("code") in arg1 }
-     .filter{ !(it.get().value("fullnspath").toLowerCase() in arg2) }
-     .sideEffect{ name = it.get().value("code"); }
-     .sideEffect{ 
-         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
-         it.get().property("fullnspath", fullnspath); 
-      }
-      .addE("DEFINITION").from( g.V().hasLabel("Const").out("CONST").out("NAME").filter{ it.get().value("code") == name} )
-
-GREMLIN;
-        $this->gremlin->query($query, array('arg1' => $constantsGlobal,
-                                            'arg2' => $constantsDefinitions));
-        display('spot constants that falls back on global constants');
-        $this->logTime('fallback to global for constants 2');
     }
 
     private function init() {

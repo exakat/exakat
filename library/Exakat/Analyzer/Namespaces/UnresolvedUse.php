@@ -39,10 +39,8 @@ class UnresolvedUse extends Analyzer {
              ->outIs('USE')
              ->analyzerIsNot(array('Classes/IsExtClass', 'Interfaces/IsExtInterface', 'Traits/IsExtTrait', 'Composer/IsComposerNsname'))
              ->savePropertyAs('fullnspath', 'fnp')
-             ->raw('where( g.V().hasLabel("Class").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
-             ->raw('where( g.V().hasLabel("Interface").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
-             ->raw('where( g.V().hasLabel("Trait").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )')
-             ->raw('where( g.V().hasLabel("Namespace").filter{ it.get().value("fullnspath") == fnp}.count().is(eq(0)) )');
+             ->raw('not( where( g.V().hasLabel("Class", "Interface", "Trait").filter{ it.get().value("fullnspath") == fnp} ) )')
+             ->raw('not( where( g.V().hasLabel("Namespace").filter{ it.get().value("fullnspath") == fnp} ) )');
         $this->prepareQuery();
     }
 }

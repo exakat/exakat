@@ -11,6 +11,7 @@ $expected     = array('E as B2',
                       'F');
 
 $expected_not = array('D',
-                      'D2 as D3');
+                      'D2 as D3',
+                      'F' ); // No second 'F'
 
 ?>

@@ -46,7 +46,7 @@ class ClassUsage extends Analyzer {
              ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs($classes);
         $this->prepareQuery();
-        
+
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
@@ -83,7 +83,6 @@ class ClassUsage extends Analyzer {
         // This points on the use, not the name.
         $this->atomIs('Use')
              ->outIs('USE')
-//             ->outIsIE('NAME')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR', 'T_AS'))
              ->fullnspathIs($classes);
         $this->prepareQuery();

@@ -7,6 +7,11 @@ $expected     = array('x::e',
                       'x::method( )', 
                       '\x::method( )');
 
-$expected_not = array();
+$expected_not = array('b::e', 
+                      'self::e', 
+                      'self::$p', 
+                      'b::$p', 
+                      'b::method( )', 
+                      'self::method( )');
 
 ?>

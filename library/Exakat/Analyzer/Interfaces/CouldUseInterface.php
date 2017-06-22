@@ -27,20 +27,32 @@ use Exakat\Analyzer\Analyzer;
 class CouldUseInterface extends Analyzer {
     public function analyze() {
         $query = <<<GREMLIN
-g.V().hasLabel('Interface').where( out('METHOD') ).group('m').by(out('NAME').properties('code').value())
-                                                             .by( out('METHOD').out('NAME').properties('code').value().aggregate('c').cap('c'))
-                                                             .cap('m')
+
+g.V().hasLabel("Interface").as('i').out("NAME").as('name').in("NAME")
+                           .out("METHOD").out("NAME").as("method")
+        .select('name', 'method').by('code').by('code');
+
 GREMLIN;
 
-        $interfaces = $this->query($query);
-        if (empty($interfaces)) {
+        $res = $this->query($query);
+
+        if (empty($res)) {
             return;
+        }
+        
+        $interfaces = array();
+        foreach($res as $row) {
+            if (isset($interfaces[$row->name])) {
+                $interfaces[$row->name][] = $row->method;
+            } else {
+                $interfaces[$row->name] = array($row->method);
+            }
         }
 
         $this->atomIs('Class')
              ->hasOut('METHOD')
              ->raw('sideEffect{ x = []; }')
-             ->raw('sideEffect{ i = *** }', (array) $interfaces[0])
+             ->raw('sideEffect{ i = *** }', $interfaces)
              ->raw('where( __.out("METHOD").out("NAME").sideEffect{ x.add(it.get().value("code")) ; }.barrier() )')
              ->raw('filter{ 
                             a = false;

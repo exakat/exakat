@@ -85,7 +85,6 @@ g.V().hasLabel("Analysis").or(has("analyzer", within($analyzersClassList1)),
 
 g.V().hasLabel("Analysis").has("analyzer", within($analyzersClassList)).out('ANALYZED')
 
-$linksDown is removed
 */
 
             $query = <<<GREMLIN

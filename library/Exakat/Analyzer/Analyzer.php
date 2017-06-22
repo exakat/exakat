@@ -751,7 +751,11 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
 
     public function noChildWithRank($edgeName, $rank = '0') {
-        $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs((int) $rank).').count().is(eq(0)) )');
+        if (is_int($rank)) {
+            $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').has("rank", '.abs((int) $rank).') ) )');
+        } else {
+            $this->addMethod('not( where( __.out('.$this->SorA($edgeName).').filter{it.get().value("rank") == '.$rank.'; } ) )');
+        }
 
         return $this;
     }
@@ -1045,7 +1049,7 @@ GREMLIN
     
     public function hasNoIn($link) {
         assert($this->assertLink($link));
-        $this->addMethod('where( __.in('.$this->SorA($link).').count().is(eq(0)) )');
+        $this->addMethod('not( where( __.in('.$this->SorA($link).') ) )');
         
         return $this;
     }
@@ -1115,7 +1119,7 @@ GREMLIN
             $in = implode('', $in);
         }
         
-        $this->addMethod('where( __'.$in.'.hasLabel('.$this->SorA($parentClass).').count().is(eq(0)) )');
+        $this->addMethod('not( where( __'.$in.'.hasLabel('.$this->SorA($parentClass).') ) )');
         
         return $this;
     }

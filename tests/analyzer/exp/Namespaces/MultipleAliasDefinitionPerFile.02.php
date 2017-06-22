@@ -8,10 +8,12 @@ $expected     = array('F',
                       'A', 
                       'F as B4', 
                       'E as B2', 
-                      'E as C2');
+                      'E as C2',
+                      );
 
 $expected_not = array('D',
-                      'D2 as D3'
+                      'D2 as D3',
+                      'F',
 );
 
 ?>

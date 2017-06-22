@@ -57,7 +57,7 @@ class IsUpperFamily extends Analyzer {
              ->savePropertyAs('code', 'property')
              
              ->goToClass()
-             ->raw('where( __.out("PPP").hasLabel("Ppp").out("PPP").coalesce(__.out("NAME"), __.filter{true; }).filter{it.get().value("code") == property }.count().is(eq(0)) )')
+             ->raw('not( where( __.out("PPP").hasLabel("Ppp").out("PPP").coalesce(__.out("NAME"), __.filter{true; }).filter{it.get().value("code") == property } ) )')
 
              ->goToAllParents()
              ->atomIsNot('Interface')
@@ -77,7 +77,7 @@ class IsUpperFamily extends Analyzer {
              ->savePropertyAs('code', 'constant')
              
              ->goToClass()
-             ->raw('where( __.out("CONST").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constant }.count().is(eq(0)) )')
+             ->raw('not( where( __.out("CONST").hasLabel("Const").out("CONST").out("NAME").filter{it.get().value("code") == constant } ) )')
 
              ->goToAllParents()
              ->atomIsNot('Interface')

@@ -34,7 +34,7 @@ class IsRead extends Analyzer {
     public function analyze() {
         $this->atomIs('Array')
              ->hasNoIn('VARIABLE')
-             ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
+             ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'CONDITION', 'THEN', 'ELSE',
                            'INDEX', 'VALUE', 'NAME', 'DEFINE', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
                            'CASE', 'CLONE', 'FINAL', 'CLASS'));
             // note : NAME is for Switch!!
@@ -84,51 +84,10 @@ class IsRead extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // arguments : normal variable in a custom function
-        $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD') // possibly new too
+        $this->atomIs(array('Functioncall', 'Methodcallname', 'Newcall'))
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Array')
-             ->savePropertyAs('rank', 'rank')
-             ->_as('results')
-             ->back('first')
-             ->functionDefinition()
-             ->inIs('NAME')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
-             ->isNot('reference', self::CASE_SENSITIVE)
-             ->back('first');
-        $this->prepareQuery();
-
-        // PHP functions that are passed by value
-        $data = new Methods($this->config);
-        
-        $functions = $data->getFunctionsValueArgs();
-        $references = array();
-        
-        foreach($functions as $function) {
-            if (!isset($references[$function['position']])) {
-                $references[$function['position']] = array('\\'.$function['function']);
-            } else {
-                $references[$function['position']][] = '\\'.$function['function'];
-            }
-        }
-        
-        foreach($references as $position => $functions) {
-            $this->atomFunctionIs($functions)
-                 ->outIs('ARGUMENTS')
-                 ->outIs('ARGUMENT')
-                 ->atomIs('Variable')
-                 ->is('rank', $position);
-            $this->prepareQuery();
-        }
-
-        // Array in a functioncall
-        $this->atomIs('Array')
-             ->hasIn(array('ARGUMENT'))
-             ->hasNoParent('Function', array('ARGUMENTS', 'ARGUMENT'));
+             ->atomIs('Array');
         $this->prepareQuery();
 
         // Class constructors (__construct)

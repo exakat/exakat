@@ -38,7 +38,7 @@ class UsesFramework extends Analyzer {
         
         if (!empty($this->classes[0])) {
             $classes    = $this->makeFullNsPath($this->classes);
-    
+
             if (!empty($classes)) {
                 $classesUsage = new ClassUsage($this->gremlin, $this->config);
                 $classesUsage->setAnalyzer(get_class($this));
