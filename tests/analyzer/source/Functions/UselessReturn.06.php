@@ -7,5 +7,11 @@ interface x {
     function usableReturn();
 }
 
+class x {
+    function __construct($x){return false;}
+    function __destruct() {return true;}
+    function usableReturnX() {return null;}
+}
+
 
 ?>

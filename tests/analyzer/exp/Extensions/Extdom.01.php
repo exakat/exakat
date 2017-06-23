@@ -5,6 +5,6 @@ $expected     = array('DOMDocument',
                       'DOMNODELIST',
                       "DOMText('new content')");
 
-$expected_not = array();
+$expected_not = array('DOMNotReallyAClass');
 
 ?>

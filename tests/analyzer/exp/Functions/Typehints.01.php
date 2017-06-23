@@ -12,6 +12,6 @@ $expected     = array(  'Class1',
                         'Class43',
 );
 
-$expected_not = array();
+$expected_not = array('b0');
 
 ?>
