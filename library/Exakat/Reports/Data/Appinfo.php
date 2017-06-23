@@ -29,33 +29,34 @@ use Exakat\Reports\Reports;
 class Appinfo extends Data {
         private $extensions = array(
                     'PHP' => array(
-                            'Short tags'                 => 'Structures/ShortTags',
-                            'Echo tags <?='              => 'Php/EchoTagUsage',
-                            'Incompilable'               => 'Php/Incompilable',
+                            'Short tags'                    => 'Structures/ShortTags',
+                            'Echo tags <?='                 => 'Php/EchoTagUsage',
+                            'Incompilable'                  => 'Php/Incompilable',
+   
+                            '@ operator'                    => 'Structures/Noscream',
+                            'Alternative syntax'            => 'Php/AlternativeSyntax',
+                            'Magic constants'               => 'Constants/MagicConstantUsage',
+                            'halt compiler'                 => 'Php/Haltcompiler',
+   
+                            'Casting'                       => 'Php/CastingUsage',
+                            'Resources'                     => 'Structures/ResourcesUsage',
+                            'Nested Loops'                  => 'Structures/NestedLoops',
+   
+                            'Autoload'                      => 'Php/AutoloadUsage',
+                            'include'                       => 'Structures/IncludeUsage',
+                            'include_once'                  => 'Structures/OnceUsage',
+                            'Output control'                => 'Extensions/Extob',
+   
+                            'Goto'                          => 'Php/Gotonames',
+                            'Labels'                        => 'Php/Labelnames',
+   
+                            'Coalesce'                      => 'Php/Coalesce',
+                            'Null Coalesce'                 => 'Php/NullCoalesce',
+   
+                            'File upload'                   => 'Structures/FileUploadUsage',
+                            'Environnement Variables'       => 'Php/UsesEnv',
 
-                            '@ operator'                 => 'Structures/Noscream',
-                            'Alternative syntax'         => 'Php/AlternativeSyntax',
-                            'Magic constants'            => 'Constants/MagicConstantUsage',
-                            'halt compiler'              => 'Php/Haltcompiler',
-                            'Assertions'                 => 'Php/AssertionUsage',
-
-                            'Casting'                    => 'Php/CastingUsage',
-                            'Resources'                  => 'Structures/ResourcesUsage',
-                            'Nested Loops'               => 'Structures/NestedLoops',
-
-                            'Autoload'                   => 'Php/AutoloadUsage',
-                            'inclusion'                  => 'Structures/IncludeUsage',
-                            'include_once'               => 'Structures/OnceUsage',
-                            'Output control'             => 'Extensions/Extob',
-
-                            'Goto'                       => 'Php/Gotonames',
-                            'Labels'                     => 'Php/Labelnames',
-
-                            'Coalesce'                   => 'Php/Coalesce',
-                            'Null Coalesce'              => 'Php/NullCoalesce',
-
-                            'File upload'                => 'Structures/FileUploadUsage',
-                            'Environnement Variables'    => 'Php/UsesEnv',
+                            'Non Breakable Spaces In Names' => 'Structures/NonBreakableSpaceInNames',
                     ),
 
                     'Composer' => array(
@@ -121,15 +122,16 @@ class Appinfo extends Data {
                     ),
 
                     'Functions' => array(
-                            'Functions'                => 'Functions/Functionnames',
-                            'Redeclared PHP Functions' => 'Functions/RedeclaredPhpFunction',
-                            'Closures'             => 'Functions/Closures',
-
-                            'Typehint'             => 'Functions/Typehints',
-                            'Scalar Typehint'      => 'Php/ScalarTypehintUsage',
-                            'Return Typehint'      => 'Php/ReturnTypehintUsage',
-                            'Nullable Typehint'    => 'Php/UseNullableType',
-                            'Static variables'     => 'Variables/StaticVariables',
+                            'Functions'                   => 'Functions/Functionnames',
+                            'Redeclared PHP Functions'    => 'Functions/RedeclaredPhpFunction',
+                            'Redeclared Custom Functions' => 'Functions/MultipleDeclarations',
+                            'Closures'                    => 'Functions/Closures',
+       
+                            'Typehint'                    => 'Functions/Typehints',
+                            'Scalar Typehint'             => 'Php/ScalarTypehintUsage',
+                            'Return Typehint'             => 'Php/ReturnTypehintUsage',
+                            'Nullable Typehint'           => 'Php/UseNullableType',
+                            'Static variables'            => 'Variables/StaticVariables',
 
                             'Function dereferencing'     => 'Structures/FunctionSubscripting',
                             'Constant scalar expression' => 'Structures/ConstantScalarExpression',
@@ -203,6 +205,8 @@ class Appinfo extends Data {
 
                             'Trigger error'       => 'Php/TriggerErrorUsage',
                             'Error messages'      => 'Structures/ErrorMessages',
+
+                            'Assertions'          => 'Php/AssertionUsage',
                             
                             'Uses debug'          => 'Structures/UseDebug',
                      ),
