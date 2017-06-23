@@ -1822,7 +1822,7 @@ GREMLIN;
     
     public function makeFullNsPath($functions) {
         $cb = function ($x) {
-            $r = strtolower($x);
+            $r = mb_strtolower($x);
             if (isset($r[0]) && $r[0] != '\\') {
                 $r = '\\' . $r;
             }
@@ -1841,11 +1841,11 @@ GREMLIN;
     private function tolowercase(&$code) {
         if (is_array($code)) {
             foreach($code as &$v) {
-                $v = strtolower($v);
+                $v = mb_strtolower($v);
             }
             unset($v);
         } else {
-            $code = strtolower($code);
+            $code = mb_strtolower($code);
         }
     }
     
@@ -1927,11 +1927,11 @@ GREMLIN;
     private function assertAtom($atom) {
         if (is_string($atom)) {
             assert($atom !== 'Property', 'Property is no more');
-            assert($atom === ucfirst(strtolower($atom)), 'Wrong format for atom name : '.$atom);
+            assert($atom === ucfirst(mb_strtolower($atom)), 'Wrong format for atom name : '.$atom);
         } else {
             foreach($atom as $a) {
                 assert($a !== 'Property', 'Property is no more');
-                assert($a === ucfirst(strtolower($a)), 'Wrong format for atom name : '.$a);
+                assert($a === ucfirst(mb_strtolower($a)), 'Wrong format for atom name : '.$a);
             }
         }
         return true;

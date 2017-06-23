@@ -1568,16 +1568,16 @@ class Load extends Tasks {
 
         if ($this->tokens[$this->id][0]     === \Exakat\Tasks\T_NS_SEPARATOR              &&
             $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING                    &&
-            in_array(strtolower($this->tokens[$this->id + 1][1]), array('true', 'false')) &&
+            in_array(mb_strtolower($this->tokens[$this->id + 1][1]), array('true', 'false')) &&
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR
             ) {
 
             $nsname = $this->addAtom('Boolean');
-            $nsname->boolean = (int) (strtolower($this->tokens[$this->id ][1]) === 'true');
+            $nsname->boolean = (int) (mb_strtolower($this->tokens[$this->id ][1]) === 'true');
             $nsname->constant = self::CONSTANT_EXPRESSION;
         } elseif ($this->tokens[$this->id][0]     === \Exakat\Tasks\T_NS_SEPARATOR &&
                   $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_STRING       &&
-                  strtolower($this->tokens[$this->id + 1][1]) === 'null'           &&
+                  mb_strtolower($this->tokens[$this->id + 1][1]) === 'null'           &&
                   $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_NS_SEPARATOR ) {
 
             $nsname = $this->addAtom('Null');
@@ -1704,8 +1704,8 @@ class Load extends Tasks {
                 ++$this->id;
             }
             
-            if (in_array(strtolower($nsname->code), array('int', 'bool', 'void', 'float', 'string'))) {
-                $nsname->fullnspath = '\\'.strtolower($nsname->code);
+            if (in_array(mb_strtolower($nsname->code), array('int', 'bool', 'void', 'float', 'string'))) {
+                $nsname->fullnspath = '\\'.mb_strtolower($nsname->code);
             } else {
                 list($fullnspath, $aliased) = $this->getFullnspath($nsname, 'class');
 
@@ -2054,7 +2054,7 @@ class Load extends Tasks {
             $name->aliased    = $aliased;
 
             // Probably weak check, since we haven't built fullnspath for functions yet...
-            if (strtolower($name->code) === 'define') {
+            if (mb_strtolower($name->code) === 'define') {
                 $this->processDefineAsConstants($arguments);
             }
 
@@ -2095,11 +2095,11 @@ class Load extends Tasks {
     private function processString() {
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_NS_SEPARATOR ) {
             return $this->processNsname();
-        } elseif (in_array(strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
+        } elseif (in_array(mb_strtolower($this->tokens[$this->id][1]), array('true', 'false'))) {
             $string = $this->addAtom('Boolean');
-            $string->boolean  = (int) (strtolower($this->tokens[$this->id ][1]) === 'true');
+            $string->boolean  = (int) (mb_strtolower($this->tokens[$this->id ][1]) === 'true');
             $string->constant = self::CONSTANT_EXPRESSION;
-        } elseif (strtolower($this->tokens[$this->id][1]) === 'null') {
+        } elseif (mb_strtolower($this->tokens[$this->id][1]) === 'null') {
             $string = $this->addAtom('Null');
             $string->boolean  = 0;
             $string->constant = self::CONSTANT_EXPRESSION;
@@ -2944,7 +2944,7 @@ class Load extends Tasks {
             $name->fullcode   = $this->tokens[$this->id][1];
             $name->line       = $this->tokens[$this->id][2];
             $name->token      = $this->getToken($this->tokens[$this->id][0]);
-            $name->fullnspath = '\\'.strtolower($this->tokens[$this->id][1]);
+            $name->fullnspath = '\\'.mb_strtolower($this->tokens[$this->id][1]);
 
             $void = $this->addAtomVoid();
             $void->rank = 0;
@@ -2962,7 +2962,7 @@ class Load extends Tasks {
             $functioncall->fullcode   = $name->fullcode.' '.($arguments->atom === 'Void' ? self::FULLCODE_VOID :  $arguments->fullcode);
             $functioncall->line       = $this->tokens[$this->id][2];
             $functioncall->token      = $this->getToken($this->tokens[$this->id][0]);
-            $functioncall->fullnspath = '\\'.strtolower($name->code);
+            $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
 
             $this->addLink($functioncall, $arguments, 'ARGUMENTS');
             $this->addLink($functioncall, $name, 'NAME');
@@ -3269,7 +3269,7 @@ class Load extends Tasks {
             $alias = $namespace;
             $origin = $namespace;
             
-            $fullnspath = strtolower($namespace->fullcode);
+            $fullnspath = mb_strtolower($namespace->fullcode);
             if ($fullnspath[0] !== '\\') {
                 list($prefix, ) = explode('\\', $fullnspath);
                 $fullnspath = '\\'.$fullnspath;
@@ -3365,19 +3365,19 @@ class Load extends Tasks {
                         $this->processAs();
                         $alias = $this->popExpression();
 
-                        $nsname->fullnspath = $prefix.strtolower($nsname->fullcode);
-                        $nsname->origin     = $prefix.strtolower($nsname->fullcode);
+                        $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
+                        $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
 
-                        $alias->fullnspath  = $prefix.strtolower($nsname->fullcode);
-                        $alias->origin      = $prefix.strtolower($nsname->fullcode);
+                        $alias->fullnspath  = $prefix.mb_strtolower($nsname->fullcode);
+                        $alias->origin      = $prefix.mb_strtolower($nsname->fullcode);
 
                         $aliasName = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
                         $alias->alias = $aliasName;
                         $this->addLink($use, $alias, 'USE');
                     } else {
                         $this->addLink($use, $nsname, 'USE');
-                        $nsname->fullnspath = $prefix.strtolower($nsname->fullcode);
-                        $nsname->origin     = $prefix.strtolower($nsname->fullcode);
+                        $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
+                        $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
 
                         $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $nsname);
                         $nsname->alias = $alias;
@@ -3606,7 +3606,7 @@ class Load extends Tasks {
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
             $literal = $this->processFCOA($literal);
         }
-
+        
         return $literal;
     }
 
@@ -4459,7 +4459,7 @@ class Load extends Tasks {
         $functioncall->fullcode   = $name->code.' '.$arguments->fullcode;
         $functioncall->line       = $name->line;
         $functioncall->token      = $name->token;
-        $functioncall->fullnspath = '\\'.strtolower($name->code);
+        $functioncall->fullnspath = '\\'.mb_strtolower($name->code);
 
         $this->addLink($functioncall, $arguments, 'ARGUMENTS');
         $this->addLink($functioncall, $name, 'NAME');
@@ -4577,7 +4577,7 @@ class Load extends Tasks {
             return;
         }
         
-        $fullnspath = '\\'.strtolower($this->argumentsId[0]->noDelimiter);
+        $fullnspath = '\\'.mb_strtolower($this->argumentsId[0]->noDelimiter);
         
         $this->addDefinition('const', $fullnspath, $argumentsId);
         $this->argumentsId[0]->fullnspath = $fullnspath;
@@ -4667,21 +4667,21 @@ class Load extends Tasks {
 
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
-            return array(strtolower($name->fullcode), self::NOT_ALIASED);
+            return array(mb_strtolower($name->fullcode), self::NOT_ALIASED);
         } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'String', 'Null', 'Boolean'))) {
             // No fullnamespace for non literal namespaces
             return array('', self::NOT_ALIASED);
         } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
             // For language structures, it is always in global space, like eval or list
-            return array('\\'.strtolower($name->code), self::NOT_ALIASED);
-        } elseif (strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
+            return array('\\'.mb_strtolower($name->code), self::NOT_ALIASED);
+        } elseif (mb_strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
             // namespace\A\B
-            return array(substr($this->namespace, 0, -1).strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
+            return array(substr($this->namespace, 0, -1).mb_strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
         } elseif (in_array($name->atom, array('Identifier', 'Boolean', 'Null'))) {
 
             // This is an identifier, self or parent
-            if (strtolower($name->code) === 'self' ||
-                strtolower($name->code) === 'static') {
+            if (mb_strtolower($name->code) === 'self' ||
+                mb_strtolower($name->code) === 'static') {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
@@ -4689,7 +4689,7 @@ class Load extends Tasks {
                     return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
                 }
 
-            } elseif (strtolower($name->code) === 'parent') {
+            } elseif (mb_strtolower($name->code) === 'parent') {
                 if (empty($this->currentParentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
@@ -4698,43 +4698,43 @@ class Load extends Tasks {
                 }
 
             // This is a normal identifier
-            } elseif ($type === 'class' && isset($this->uses['class'][strtolower($name->code)])) {
+            } elseif ($type === 'class' && isset($this->uses['class'][mb_strtolower($name->code)])) {
 
-                $this->addLink($name, $this->uses['class'][strtolower($name->code)], 'DEFINITION');
-                return array($this->uses['class'][strtolower($name->code)]->fullnspath, self::ALIASED);
+                $this->addLink($name, $this->uses['class'][mb_strtolower($name->code)], 'DEFINITION');
+                return array($this->uses['class'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
 
-            } elseif ($type === 'const' && isset($this->uses['const'][strtolower($name->code)])) {
+            } elseif ($type === 'const' && isset($this->uses['const'][mb_strtolower($name->code)])) {
             
-                $this->addLink($this->uses['const'][strtolower($name->code)], $name, 'DEFINITION');
-                return array($this->uses['const'][strtolower($name->code)]->fullnspath, self::ALIASED);
+                $this->addLink($this->uses['const'][mb_strtolower($name->code)], $name, 'DEFINITION');
+                return array($this->uses['const'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
 
-            } elseif ($type === 'function' && isset($this->uses['function'][strtolower($name->code)])) {
+            } elseif ($type === 'function' && isset($this->uses['function'][mb_strtolower($name->code)])) {
 
-                $this->addLink($this->uses['function'][strtolower($name->code)], $name, 'DEFINITION');
-                return array($this->uses['function'][strtolower($name->code)]->fullnspath, self::ALIASED);
+                $this->addLink($this->uses['function'][mb_strtolower($name->code)], $name, 'DEFINITION');
+                return array($this->uses['function'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
 
-            } elseif ($type === 'function' && !empty($this->calls['function']['\\'.strtolower($name->code)]['definitions'])) {
+            } elseif ($type === 'function' && !empty($this->calls['function']['\\'.mb_strtolower($name->code)]['definitions'])) {
 
                 // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
-                return array('\\'.strtolower($name->code), self::NOT_ALIASED);
+                return array('\\'.mb_strtolower($name->code), self::NOT_ALIASED);
             } else {
-                return array($this->namespace.strtolower($name->fullcode), self::NOT_ALIASED);
+                return array($this->namespace.mb_strtolower($name->fullcode), self::NOT_ALIASED);
             }
         } elseif ($name->atom === 'String' && isset($name->noDelimiter)) {
-            $prefix =  str_replace('\\\\', '\\', strtolower($name->noDelimiter));
+            $prefix =  str_replace('\\\\', '\\', mb_strtolower($name->noDelimiter));
             $prefix = '\\'.$prefix;
 
             // define doesn't care about use...
             return array($prefix, self::NOT_ALIASED);
         } else {
             // Finally, the case for a nsname
-            $prefix = strtolower( substr($name->code, 0, strpos($name->code.'\\', '\\')) );
+            $prefix = mb_strtolower( substr($name->code, 0, strpos($name->code.'\\', '\\')) );
 
             if (isset($this->uses[$type][$prefix])) {
                 $this->addLink( $name, $this->uses[$type][$prefix], 'DEFINITION');
-                return array($this->uses[$type][$prefix]->fullnspath.strtolower( substr($name->fullcode, strlen($prefix)) ) , 0);
+                return array($this->uses[$type][$prefix]->fullnspath.mb_strtolower( substr($name->fullcode, strlen($prefix)) ) , 0);
             } else {
-                return array($this->namespace.strtolower($name->fullcode), 0);
+                return array($this->namespace.mb_strtolower($name->fullcode), 0);
             }
         }
     }
@@ -4757,7 +4757,7 @@ class Load extends Tasks {
     }
 
     private function makeFullnspath($namespaceAs) {
-        return strtolower(isset($namespaceAs->absolute) && $namespaceAs->absolute === self::ABSOLUTE ? $namespaceAs->fullcode : '\\'.$namespaceAs->fullcode) ;
+        return mb_strtolower(isset($namespaceAs->absolute) && $namespaceAs->absolute === self::ABSOLUTE ? $namespaceAs->fullcode : '\\'.$namespaceAs->fullcode) ;
     }
 
     private function setNamespace($namespace = 0) {
@@ -4769,7 +4769,7 @@ class Load extends Tasks {
         } elseif ($namespace->atom === 'Void') {
             $this->namespace = '\\';
         } else {
-            $this->namespace = strtolower($namespace->fullcode).'\\';
+            $this->namespace = mb_strtolower($namespace->fullcode).'\\';
             if ($this->namespace[0] !== '\\') {
                 $this->namespace = '\\'.$this->namespace;
             }
@@ -4782,10 +4782,10 @@ class Load extends Tasks {
         if ($origin !== $alias) { // Case of A as B
             // Alias is the 'As' expression.
             $offset = strrpos($alias->fullcode, ' ');
-            $alias = strtolower($alias->code);
+            $alias = mb_strtolower($alias->code);
         } elseif (($offset = strrpos($alias->fullnspath, '\\')) === false) {
             // namespace without \
-            $alias = strtolower($alias->fullnspath);
+            $alias = mb_strtolower($alias->fullnspath);
         } else {
             // namespace with \
             $alias = substr($alias->fullnspath, $offset + 1);
@@ -4795,7 +4795,7 @@ class Load extends Tasks {
             print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
         }
         assert($use instanceof Atom);
-        $this->uses[$useType][strtolower($alias)] = $use;
+        $this->uses[$useType][mb_strtolower($alias)] = $use;
 
         return $alias;
     }
@@ -4832,7 +4832,7 @@ class Load extends Tasks {
         }
         
         if (strpos($call->noDelimiter, '::') !== false) {
-            $fullnspath = strtolower(substr($call->noDelimiter, 0, strpos($call->noDelimiter, '::')) );
+            $fullnspath = mb_strtolower(substr($call->noDelimiter, 0, strpos($call->noDelimiter, '::')) );
 
             if (strlen($fullnspath) === 0) {
                 $fullnspath = '\\';
@@ -4843,7 +4843,7 @@ class Load extends Tasks {
         } else {
             $types = array('function', 'class');
 
-            $fullnspath = strtolower($call->noDelimiter);
+            $fullnspath = mb_strtolower($call->noDelimiter);
             if (empty($fullnspath) || $fullnspath[0] !== '\\') {
                 $fullnspath = '\\'.$fullnspath;
             }
