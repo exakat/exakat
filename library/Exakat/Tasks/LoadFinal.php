@@ -140,7 +140,7 @@ GREMLIN;
         // Define-style constant definitions
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
-     .where( __.in("METHOD").count().is(eq(0)))
+     .not( where( __.in("METHOD") ) )
      .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
      .has("fullnspath", "\\\\define")
      .out("ARGUMENTS").out("ARGUMENT").has("rank", 0)
@@ -161,13 +161,13 @@ GREMLIN;
             // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT").count().is(eq(0)) )
+     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT") ) )
      .has("token", without("T_CONST", "T_FUNCTION"))
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')
      .from( 
         g.V().hasLabel("Functioncall")
-              .where( __.in("METHOD").count().is(eq(0)))
+              .not( where( __.in("METHOD") ) )
               .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
               .has("fullnspath", "\\\\define")
              .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
@@ -180,13 +180,12 @@ GREMLIN;
             // Second round, with fallback to global constants
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .where( __.in("NAME").count().is(eq(0)) )
-     .where( __.in("DEFINITION").count().is(eq(0)) )
+     .not( where( __.in("NAME", "DEFINITION") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); name in arg1 }
      .addE('DEFINITION')
      .from( 
         g.V().hasLabel("Functioncall")
-             .where( __.in("METHOD").count().is(eq(0)))
+             .not( where( __.in("METHOD") ) )
              .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
              .has("fullnspath", "\\\\define")
              .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
