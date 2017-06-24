@@ -21,14 +21,14 @@
 */
 
 
-namespace Exakat\Analyzer\Classes;
+namespace Exakat\Analyzer\Functions;
 
 use Exakat\Analyzer\Analyzer;
 use Exakat\Analyzer\Common\MultipleDeclarations as CommonMultipleDeclarations;
 
 class MultipleDeclarations extends CommonMultipleDeclarations {
     public function analyze() {
-        $this->atom = 'Class';
+        $this->atom = 'Function';
         
         parent::analyze();
     }

@@ -21,16 +21,29 @@
 */
 
 
-namespace Exakat\Analyzer\Classes;
+namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\MultipleDeclarations as CommonMultipleDeclarations;
 
-class MultipleDeclarations extends CommonMultipleDeclarations {
+class MultipleDeclarations extends Analyzer {
+    protected $atom = 'Class';
+    
     public function analyze() {
-        $this->atom = 'Class';
+        // case-insensitive constants
+
+        $query = <<<GREMLIN
+g.V().hasLabel("$this->atom").groupCount("m").by("fullnspath").cap("m")
+GREMLIN;
+        $res = $this->query($query);
+        $multiples = array_filter( (array) $res[0], function ($x) { return $x > 1; });
         
-        parent::analyze();
+        if (empty($multiples)) {
+            return;
+        }
+
+        $this->atomIs($this->atom)
+             ->fullnspathIs($multiples);
+        $this->prepareQuery();
     }
 }
 
