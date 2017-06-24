@@ -45,27 +45,38 @@ class IsComposerNsname extends Analyzer {
         ////////////////////////////////////////////////
         // Use
         // namespaces in Composer
-        $this->atomIs('Use')
-             ->outIs('USE')
-             ->is('originpath', array_merge($packagistNamespacesFullNS, $packagistClassesFullNS, $packagistInterfacesFullNs, $packagistTraitsFullNs));
-        $this->prepareQuery();
+        $list = array_merge($packagistNamespacesFullNS, $packagistClassesFullNS, $packagistInterfacesFullNs, $packagistTraitsFullNs);
+        $n = floor(count($list) / 10000);
+        for($i = 0; $i < $n; ++$i) {
+            $this->atomIs('Use')
+                 ->outIs('USE')
+                 ->is('originpath', array_slice($list, $i * 10000, ($i + 1) * 10000));
+            $this->prepareQuery();
+        }
 
         ////////////////////////////////////////////////
         // Classes extends or implements
         // Classes in Composer
-        $this->atomIs('Class')
-             ->outIs(array('IMPLEMENTS', 'EXTENDS'))
-             ->fullnspathIs(array_merge($packagistInterfacesFullNs, $packagistClassesFullNS));
-        $this->prepareQuery();
+        $list = array_merge($packagistInterfacesFullNs, $packagistClassesFullNS);
+        $n = floor(count($list) / 10000);
+        for($i = 0; $i < $n; ++$i) {
+            $this->atomIs('Class')
+                 ->outIs(array('IMPLEMENTS', 'EXTENDS'))
+                 ->fullnspathIs(array_slice($list, $i * 10000, ($i + 1) * 10000));
+            $this->prepareQuery();
+        }
 
         ////////////////////////////////////////////////
         // Instanceof
         // Classes or interfaces in Composer
-        $this->atomIs('Instanceof')
-             ->outIs('CLASS')
-             ->atomIs(array('Nsname', 'Identifier'))
-             ->fullnspathIs($packagistInterfacesFullNs);
-        $this->prepareQuery();
+        $n = floor(count($list) / 10000);
+        for($i = 0; $i < $n; ++$i) {
+            $this->atomIs('Instanceof')
+                 ->outIs('CLASS')
+                 ->atomIs(array('Nsname', 'Identifier'))
+                 ->fullnspathIs(array_slice($packagistInterfacesFullNs, $i * 10000, ($i + 1) * 10000));
+            $this->prepareQuery();
+        }
 
     }
 }

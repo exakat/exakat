@@ -41,13 +41,11 @@ class ClassFunctionConfusion extends Analyzer {
             return;
         }
         $this->atomIs('Class')
-             ->hasName()
              ->fullnspathIs($common);
         $this->prepareQuery();
 
         $this->atomIs('Function')
              ->hasNoClassInterfaceTrait()
-             ->hasName()
              ->fullnspathIs($common);
         $this->prepareQuery();
     }

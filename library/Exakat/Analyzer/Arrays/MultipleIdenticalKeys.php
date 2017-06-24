@@ -32,21 +32,29 @@ class MultipleIdenticalKeys extends Analyzer {
              ->raw('where(
     __.sideEffect{ counts = [:]; }
       .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
-      .hasLabel("String", "Integer", "Real", "Boolean", "Null", "Staticconstant").where(__.out("CONCAT").count().is(eq(0)))
+      .hasLabel("String", "Integer", "Real", "Boolean", "Null", "Staticconstant").not(where(__.out("CONCAT")) )
       .sideEffect{ 
-            if ("noDelimiter" in it.get().keys() ) { 
+            if (it.get().label() == "String" && "noDelimiter" in it.get().keys() ) { 
                 k = it.get().value("noDelimiter"); 
                 if (k.isInteger()) {
                     k = k.toInteger();
                 }
             } 
-            else if (it.get().label() == "Real" ) { k = Float.parseFloat(it.get().value("code")).round(); } 
+            else if (it.get().label() == "Real" )           { k = Float.parseFloat(it.get().value("code")).round(); } 
             else if (it.get().label() == "Staticconstant" ) { k = it.get().value("fullcode"); } 
-            else if (it.get().label() == "Null" ) { k = 0; } 
-            else if (it.get().label() == "Boolean" ) { 
-                if (it.get().value("fullcode").toLowerCase() in ["\\false", "false"] ) { k = 0; } else { k = 1; } 
+            else if (it.get().label() == "Null" )           { k = 0; } 
+            else if (it.get().label() == "Boolean" )        { 
+                if (it.get().value("fullcode").toLowerCase() in ["\\false", "false"] ) { 
+                    k = 0; 
+                } else { 
+                    k = 1; 
+                } 
             } else { k = it.get().value("intval").toInteger(); }
-            if (counts[k] == null) { counts[k] = 1; } else { counts[k]++; }
+            if (counts[k] == null) { 
+                counts[k] = 1; 
+            } else { 
+                counts[k]++; 
+            }
         }
         .map{ counts.findAll{it.value > 1}; }.unfold().count().is(neq(0))
 )')

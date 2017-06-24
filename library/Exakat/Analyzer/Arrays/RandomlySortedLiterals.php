@@ -30,7 +30,7 @@ class RandomlySortedLiterals extends Analyzer {
 g.V().hasLabel("Arrayliteral")
      .has("constant", true)
      .out("ARGUMENTS")
-     .not(hasLabel("Void"))
+     .not( hasLabel("Void") )
      .where( __.sideEffect{ liste = [];}
                .out("ARGUMENT")
                .sideEffect{ 
@@ -46,6 +46,10 @@ g.V().hasLabel("Arrayliteral")
      .groupCount("m").cap("m").toList()[0].findAll{ a,b -> b > 1}.keySet();
 GREMLIN
 );
+        
+        if (empty($arrays)) {
+            return;
+        }
 
         $this->atomIs('Arrayliteral')
              ->is('constant', true)
@@ -53,7 +57,7 @@ GREMLIN
              ->atomIsNot('Void')
              ->raw('where( __.sideEffect{ liste = [];}
                              .out("ARGUMENT")
-                             .not(hasLabel("Void"))
+                             .not( hasLabel("Void") )
                              .sideEffect{ 
                                   if (it.get().label() == "String"|| it.get().label() == "Void" ) {
                                     liste.add(it.get().value("noDelimiter"));
@@ -62,7 +66,16 @@ GREMLIN
                                 }
                              }
                              .count())')
-             ->raw('filter{ liste.sort() in ***.values(); }', $arrays)
+             ->raw('filter{ x = ***; 
+            if (x.getClass() == "java.util.ArrayList" ) {
+                a = liste.sort() in x.values(); 
+            } else {
+              a = liste.sort() in x; 
+            }
+            a;
+            }
+
+', $arrays)
              ->back('first');
         $this->prepareQuery();
     }

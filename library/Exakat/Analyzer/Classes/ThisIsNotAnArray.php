@@ -36,9 +36,9 @@ class ThisIsNotAnArray extends Analyzer {
              ->atomIs(array('Array', 'Arrayappend'))
              // class may be \ArrayAccess
              ->goToClass()
-             ->raw('where( __.out("IMPLEMENTS").has("fullnspath", "\\\\arrayaccess").count().is(eq(0)) )')
-             ->raw('where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION")).emit().times('.self::MAX_LOOPING.')
-                        .out("IMPLEMENTS").has("fullnspath", "\\\\arrayaccess").count().is(eq(0)) )')
+             ->raw('not( where( __.out("IMPLEMENTS").has("fullnspath", "\\\\arrayaccess") ) )')
+             ->raw('not( where( __.repeat( __.out("IMPLEMENTS", "EXTENDS").in("DEFINITION")).emit().times('.self::MAX_LOOPING.')
+                        .out("IMPLEMENTS").has("fullnspath", "\\\\arrayaccess") ) )')
              ->back('results');
         $this->prepareQuery();
     }

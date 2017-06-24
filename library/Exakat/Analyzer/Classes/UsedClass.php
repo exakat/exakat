@@ -94,9 +94,9 @@ GREMLIN
         // class used in a String (full string only)
         $strings = $this->query(<<<GREMLIN
 g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
-     .where( __.in("ARGUMENT").in("ARGUMENTS").hasLabel("Arrayliteral").count().is(eq(0)) )
+     .not(where( __.in("ARGUMENT").in("ARGUMENTS").hasLabel("Arrayliteral") ) )
      .filter{ it.get().value("noDelimiter").length() < 100}.filter{ it.get().value("noDelimiter").length() > 0}
-     .filter{ !(it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\x7f-\xff]/)}
+     .filter{ (it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\\x7f-\\xff]/).getCount() == 0}
      .map{ it.get().value("noDelimiter").toLowerCase(); }.unique()
 GREMLIN
 );
@@ -110,7 +110,7 @@ GREMLIN
 
         // class used in a String (string with ::)
         $strings = $this->query(<<<GREMLIN
-g.V().hasLabel("String").where( __.out("CONCAT").count().is(eq(0)) )
+g.V().hasLabel("String").not( where( __.out("CONCAT") ) )
                         .filter{ (it.get().value("noDelimiter") =~ "::" ).getCount() == 1 }
                         .where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable") )
                         .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
@@ -128,7 +128,7 @@ GREMLIN
         $arrays = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").out("ARGUMENTS").out("ARGUMENT")
         .hasLabel("Arrayliteral")
-        .out("ARGUMENTS").where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable").count().is(eq(1)) )
+        .out("ARGUMENTS").where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable") )
         .has("count", 2).out("ARGUMENT").has("rank", 0).values("noDelimiter").unique()
 GREMLIN
 );

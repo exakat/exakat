@@ -32,8 +32,6 @@ class UnusedFunctions extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Function')
-             ->hasNoClassInterfaceTrait()
-             ->hasName()
              ->fullnspathIsNot('\\__autoload')
              ->analyzerIsNot('Functions/UsedFunctions');
         $this->prepareQuery();

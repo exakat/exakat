@@ -58,7 +58,7 @@ class WpdbBestUsage extends Analyzer {
              ->tokenIs('T_QUOTE')
              ->hasOut('CONCAT')
              // If it's a property, we accept $wpdb
-             ->raw('where( __.out("CONCAT").hasLabel("Member").out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )')
+             ->raw('not( where( __.out("CONCAT").hasLabel("Member").out("OBJECT").has("code", "\$wpdb") ) )')
              // Some queries won't accept prepared statements
              ->raw('where( __.out("CONCAT").hasLabel("String").has("rank", 0).filter{(it.get().value("noDelimiter") =~ "^('.$ignoreCommandsRegex.') ").getCount() == 0} )');
         $this->prepareQuery();

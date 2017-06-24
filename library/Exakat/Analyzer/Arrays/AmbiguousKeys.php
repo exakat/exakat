@@ -36,7 +36,11 @@ class AmbiguousKeys extends Analyzer {
       .sideEffect{ 
             if (it.get().label() == "String" && "noDelimiter" in it.get().keys()) { 
                 k = it.get().value("noDelimiter"); 
-                if (counts[k] == null) { counts[k] = ["string"]; } else { counts[k].add("string"); }
+                if (counts[k] == null) { 
+                    counts[k] = ["string"]; 
+                } else { 
+                    counts[k].add("string"); 
+                }
             } else { 
                 k = it.get().value("code"); 
                 if (counts[k] == null) { counts[k] = ["integer"]; } else { counts[k].add("integer"); }

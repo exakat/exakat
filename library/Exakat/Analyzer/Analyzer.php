@@ -484,9 +484,9 @@ GREMLIN;
 
     protected function hasNoInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
-        $this->addMethod('where( 
+        $this->addMethod('not( where( 
  __.repeat(__.in(' . $this->linksDown . ')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
-   .count().is(eq(0)))');
+ ) )');
         
         return $this;
     }
@@ -497,9 +497,9 @@ GREMLIN;
             return $this->hasNoInstruction($atom);
         }
 
-        $this->addMethod('where( 
+        $this->addMethod('not( where( 
 __.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'")
-  .count().is(eq(0)))');
+  ) )');
         
         return $this;
     }
@@ -508,7 +508,7 @@ __.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this
         assert($this->assertAtom($atom));
         $this->addMethod('where( 
 __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('.$this->SorA($atom).')).hasLabel('.$this->SorA($atom).')
-  .count().is(neq(0)))');
+    )');
         
         return $this;
     }
@@ -567,7 +567,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     public function functioncallIsNot($fullnspath) {
         assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
         $this->atomIs('Functioncall')
-             ->raw('where( __.out("NAME").hasLabel("Array", "Variable").count().is(eq(0)))')
+             ->raw('not( where( __.out("NAME").hasLabel("Array", "Variable")) )')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
              ->fullnspathIsNot($this->makeFullNsPath($fullnspath));
 
@@ -600,7 +600,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
 
     public function noAtomInside($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel('.$this->SorA($atom).') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
+        $gremlin = 'not( where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel('.$this->SorA($atom).') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
         $this->addMethod($gremlin);
         
         return $this;
@@ -639,14 +639,14 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
             }
             unset($a);
 
-            $this->addMethod('where( __.in("ANALYZED").has("analyzer", within(***)).count().is(eq(0)) )', $analyzer);
+            $this->addMethod('not( where( __.in("ANALYZED").has("analyzer", within(***))) )', $analyzer);
         } else {
             if ($analyzer === 'self') {
                 $analyzer = self::getName($this->analyzerQuoted);
             } else {
                 $analyzer = self::getName($analyzer);
             }
-            $this->addMethod('where( __.in("ANALYZED").has("analyzer", "'.$analyzer.'").count().is(eq(0)) )');
+            $this->addMethod('not( where( __.in("ANALYZED").has("analyzer", "'.$analyzer.'") ) )');
         }
         
         return $this;
@@ -929,7 +929,7 @@ GREMLIN
 
     public function regexIs($column, $regex) {
         $this->addMethod(<<<GREMLIN
-filter{ (it.get().value('$column') =~ "$regex" ).getCount() > 0 }
+filter{ (it.get().value('$column') =~ "$regex" ).getCount() != 0 }
 GREMLIN
 );
 
@@ -956,14 +956,14 @@ GREMLIN
     protected function outIsIE($link) {
         assert($this->assertLink($link));
         // alternative : coalesce(out('LEFT'),  __.filter{true} )
-        $this->addMethod("until(__.outE(".$this->SorA($link).").count().is(eq(0))).repeat(out(".$this->SorA($link)."))");
+        $this->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
         
         return $this;
     }
 
     public function outIsNot($link) {
         assert($this->assertLink($link));
-        $this->addMethod('where( __.outE('.$this->SorA($link).').count().is(eq(0)))');
+        $this->addMethod('not( where( __.outE('.$this->SorA($link).') ) )');
         
         return $this;
     }
@@ -1263,7 +1263,7 @@ GREMLIN
     }
 
     public function noUseDefinition() {
-        $this->addMethod('where(__.out("DEFINITION").in("USE").hasLabel("Use").count().is(eq(0)))');
+        $this->addMethod('not( where(__.out("DEFINITION").in("USE").hasLabel("Use")) )');
     
         return $this;
     }

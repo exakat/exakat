@@ -41,15 +41,14 @@ g.V().hasLabel('Functioncall')
         .hasLabel('String').sideEffect{x.add(it.get().value('code')); }
       )
      .map{ x; }
-     .groupCount('m').by{x;}.cap('m').toList()[0]
-     .findAll{a,b -> b > 3}
-     .sort{ e1, e2 -> e1.value <=> e2.value };
+     .groupCount('m').by{x;}.cap('m')
 GREMLIN;
             $res = $this->query($query);
             
             $functions = array();
             $args = array();
-            foreach($res as $key => $count) {
+            foreach($res[0] as $key => $count) {
+                if ($count < 4) { continue; }
                 if (preg_match('/^\[(\S+), (.*?)\]$/is', $key, $r)) {
                     $functions[] = $r[1];
                     if (isset($args[$r[1]])) {
@@ -59,7 +58,6 @@ GREMLIN;
                     }
                 }
             }
-            
             
             $this->atomFunctionIs($functions)
                  ->analyzerIsNot('Functions/CouldCentralize')

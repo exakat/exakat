@@ -27,7 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class OldStyleConstructor extends Analyzer {
     public function analyze() {
-        $hasNo__construct = 'where( __.out("METHOD").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"}.count().is(eq(0)) )';
+        $hasNo__construct = 'not( where( __.out("METHOD").out("NAME").filter{ it.get().value("code").toLowerCase() == "__construct"} ) )';
 
         // No mentionned namespaces
         $this->atomIs('Class')

@@ -34,11 +34,11 @@ class UnusedArguments extends Analyzer {
     }
     
     public function analyze() {
-        $isNotRead = 'where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; }).times('.self::MAX_LOOPING.')
-                                          .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead").count().is(eq(1)) )
-                                          .count().is(eq(0)) )';
+        $isNotRead = 'not( where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; }).times('.self::MAX_LOOPING.')
+                                          .where( __.in("ANALYZED").has("analyzer", "Variables/IsRead") )
+                                          ) )';
     
-        $isNotUsed = 'where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times('.self::MAX_LOOPING.').count().is(eq(0)) )';
+        $isNotUsed = 'not( where( repeat( out('.$this->linksDown.') ).emit( hasLabel("Variable").filter{ it.get().value("code") == varname; } ).times('.self::MAX_LOOPING.') ) )';
 
         // Arguments, not reference, function
         $this->analyzerIs('Variables/Arguments')
@@ -141,9 +141,9 @@ class UnusedArguments extends Analyzer {
              ->outIs('NAME')
              ->savePropertyAs('code', 'name')
              ->goToClassTrait()
-             ->raw('where( repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times('.self::MAX_LOOPING.')
+             ->raw('not( where( repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times('.self::MAX_LOOPING.')
                                      .out("METHOD").hasLabel("Method").out("NAME").filter{ it.get().value("code") == name}
-                                     .count().is(eq(0)) 
+                              )
                           )')
              ->back('method');
 

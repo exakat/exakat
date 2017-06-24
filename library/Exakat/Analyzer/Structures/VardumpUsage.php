@@ -27,13 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class VardumpUsage extends Analyzer {
     public function analyze() {
-        $debug_functions = array('var_dump', 'print_r', 'var_export');
+        $debugFunctions       = array('var_dump', 'print_r', 'var_export');
+        $returnDebugFunctions = array('\\print_r', '\\var_export');
         
         // print_r (but not print_r($a, 1))
-        $this->atomFunctionIs(array('\\print_r', '\\var_export'))
+        $this->atomFunctionIs($debugFunctions)
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->is('boolean', false)
+             ->atomIsNot(self::$CONTAINERS)
              ->back('first');
         $this->prepareQuery();
         
@@ -42,8 +44,7 @@ class VardumpUsage extends Analyzer {
         $this->prepareQuery();
 
         // (well, we need to check if the result string is not printed now...)
-        $this->atomIs('Functioncall')
-             ->functioncallIs(array('\\var_export', '\\print_r'))
+        $this->atomFunctionIs($returnDebugFunctions)
              ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
@@ -54,7 +55,7 @@ class VardumpUsage extends Analyzer {
              ->tokenIs(array('T_ECHO', 'T_PRINT'))
              ->outIs('ARGUMENTS')
              ->atomInside('Functioncall')
-             ->functioncallIs(array('\\var_export', '\\print_r'))
+             ->functioncallIs($returnDebugFunctions)
              ->outIs('ARGUMENTS')
              ->back('first');
         $this->prepareQuery();
@@ -69,7 +70,7 @@ class VardumpUsage extends Analyzer {
              ->is('rank', 0)
              ->atomIs('String')
              ->tokenIsNot('T_QUOTE')
-             ->noDelimiterIs($debug_functions)
+             ->noDelimiterIs($debugFunctions)
              ->back('first');
         $this->prepareQuery();
     }

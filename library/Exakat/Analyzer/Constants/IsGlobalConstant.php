@@ -45,6 +45,7 @@ class IsGlobalConstant extends Analyzer {
         }
         $constants = call_user_func_array('array_merge', $c);
         $constantsFullNs = $this->makeFullNsPath($constants);
+        $constantsFullNs = array_slice($constantsFullNs, 0, 10);
 
         $this->analyzerIs('Constants/ConstantUsage')
              ->atomIsNot(array('Boolean', 'Null'))
@@ -52,7 +53,7 @@ class IsGlobalConstant extends Analyzer {
              ->hasNoIn(array('ALIAS', 'NAME'))
 
              // Exclude PHP constants
-             ->fullnspathIsNot($constantsFullNs)
+//             ->fullnspathIsNot($constantsFullNs)
 
             // Check that the final fullnspath is actually \something (no multiple \)
              ->regexIs('fullnspath', '^\\\\\\\\[^\\\\\\\\]*\\$')

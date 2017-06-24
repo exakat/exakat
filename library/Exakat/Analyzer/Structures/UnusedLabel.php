@@ -33,7 +33,7 @@ class UnusedLabel extends Analyzer {
              ->outIs('LABEL')
              ->savePropertyAs('code', 'name')
              ->goToFunction()
-             ->raw('where( __.out("BLOCK").repeat( __.out('.$this->linksDown.')).emit( hasLabel("Goto") ).times('.self::MAX_LOOPING.').out("GOTO").filter{ it.get().value("code") == name}.count().is(eq(0)) )')
+             ->raw('not( where( __.out("BLOCK").repeat( __.out('.$this->linksDown.')).emit( hasLabel("Goto") ).times('.self::MAX_LOOPING.').out("GOTO").filter{ it.get().value("code") == name} ) )')
              ->back('first');
         $this->prepareQuery();
 
@@ -44,11 +44,11 @@ class UnusedLabel extends Analyzer {
              ->outIs('LABEL')
              ->savePropertyAs('code', 'name')
              ->hasNoFunction()
-             ->raw('where( g.V().hasLabel("Goto").out("GOTO").filter{ it.get().value("code") == name}
-                            .where( repeat(__.in('.$this->linksDown.'))
+             ->raw('not( where( g.V().hasLabel("Goto").out("GOTO").filter{ it.get().value("code") == name}
+                            .not( where( repeat(__.in('.$this->linksDown.'))
                                     .until(hasLabel("File")).emit()
-                                    .hasLabel("Function").count().is(eq(0)) 
-                            ).count().is(eq(0)) )')
+                                    .hasLabel("Function") ) 
+                            ) ) )')
              ->back('first');
         $this->prepareQuery();
 

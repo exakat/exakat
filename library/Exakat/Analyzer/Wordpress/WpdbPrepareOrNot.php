@@ -56,9 +56,9 @@ class WpdbPrepareOrNot extends Analyzer {
              ->atomIs('String')
              ->tokenIs('T_QUOTE')
              // If it's a property, we accept $wpdb
-             ->raw('where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
+             ->raw('not( where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
                              .where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )
-                             .count().is(eq(0)) )')
+                             ) )')
              ->back('results');
         $this->prepareQuery();
 
@@ -77,7 +77,7 @@ class WpdbPrepareOrNot extends Analyzer {
              // If it's a property, we accept $wpdb
              ->raw('where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
                              .where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )
-                             .count().is(neq(0)) )')
+                              )')
              ->back('results');
         $this->prepareQuery();
         
@@ -93,17 +93,17 @@ class WpdbPrepareOrNot extends Analyzer {
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              // If it's a property, we accept $wpdb
-             ->raw('where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
+             ->raw('not( where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
                              .where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )
-                             .count().is(eq(0)) )')
+                             ) )')
              ->outIs('CONCAT')
              ->atomIs('String')
              ->tokenIs('T_QUOTE')
              // If it's a property, we accept $wpdb
-             ->raw('where( __.out("CONCAT").hasLabel("String").has("token", "T_QUOTE")
+             ->raw('not( where( __.out("CONCAT").hasLabel("String").has("token", "T_QUOTE")
                              .out("CONCAT").hasLabel("Variable", "Array", "Member")
                              .where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )
-                             .count().is(eq(0)) )')
+                             ) )')
              ->back('results');
         $this->prepareQuery();
     }
