@@ -33,10 +33,10 @@ class UnusedGlobal extends Analyzer {
              ->savePropertyAs('code', 'theGlobal')
              ->goToFunction()
              // Not used as a variable
-             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit(hasLabel("Variable", "Variablearray", "Variableobject"))
+             ->raw('not( where( __.repeat( __.out('.$this->linksDown.') ).emit(hasLabel("Variable", "Variablearray", "Variableobject"))
                              .times('.self::MAX_LOOPING.')
                              .hasLabel("Variable", "Variablearray", "Variableobject")
-                             .where( __.in("GLOBAL").count().is(eq(0)) ).filter{ it.get().value("code") == theGlobal}.count().is(eq(0)) )')
+                             .not( where( __.in("GLOBAL") ) ).filter{ it.get().value("code") == theGlobal} ) )')
              ->back('result');
         $this->prepareQuery();
 

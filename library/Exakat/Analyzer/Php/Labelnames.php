@@ -28,8 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class Labelnames extends Analyzer {
 
     public function analyze() {
-        $this->atomIs('Label')
-             ->outIs('LABEL');
+        $this->atomIs('Gotolabel')
+             ->outIs('GOTOLABEL');
         $this->prepareQuery();
     }
 }

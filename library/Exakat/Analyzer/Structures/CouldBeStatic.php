@@ -41,20 +41,17 @@ class CouldBeStatic extends Analyzer {
              ->savePropertyAs('code', 'theFunction')
              
              // This global is only in the current function
-             ->raw('where( g.V().hasLabel("Globaldefinition").filter{ it.get().value("code") == theGlobal }
+             ->raw('not( where( g.V().hasLabel("Globaldefinition").filter{ it.get().value("code") == theGlobal }
                              .repeat(__.in()).until(and(hasLabel("Function"), where(__.out("NAME").not(hasLabel("Void")) )))
-                             .out("NAME").filter{ it.get().value("code") != theFunction }.count().is(eq(0)) 
-                             )')
+                             .out("NAME").filter{ it.get().value("code") != theFunction }
+                             ) )')
 
              // This global is only in the current function
-             ->raw('where( g.V().hasLabel("Array").has("globalvar").filter{ it.get().value("globalvar") == theGlobal }
-                                .count().is(eq(0)) 
-                             )')
+             ->raw('not( where( g.V().hasLabel("Array").has("globalvar").filter{ it.get().value("globalvar") == theGlobal } ) )')
 
              // This global is only in the current function
-             ->raw('where( g.V().hasLabel("Variable", "Globaldefinition").filter{ it.get().value("code") == theGlobal }
-                             .where( __.in("ANALYZED").has("analyzer", "Structures/GlobalInGlobal").count().is(neq(0)) )
-                             .count().is(eq(0)) 
+             ->raw('not( where( g.V().hasLabel("Variable", "Globaldefinition").filter{ it.get().value("code") == theGlobal }
+                             .where( __.in("ANALYZED").has("analyzer", "Structures/GlobalInGlobal") ) )
                              )')
              ->back('first')
              ->inIs('GLOBAL');

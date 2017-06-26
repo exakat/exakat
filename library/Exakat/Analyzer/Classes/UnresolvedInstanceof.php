@@ -50,7 +50,7 @@ class UnresolvedInstanceof extends Analyzer {
              ->noInterfaceDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Interfaces/IsExtInterface')
-             ->analyzerIsNot('Composer/IsComposerNsname')
+//             ->analyzerIsNot('Composer/IsComposerNsname')
              ->fullnspathIsNot(array_merge($classes, $interfaces))
              ->back('first');
         $this->prepareQuery();
@@ -63,7 +63,7 @@ class UnresolvedInstanceof extends Analyzer {
              ->tokenIs('T_STRING')
              ->codeIs('parent')
              ->goToClass()
-             ->raw('where( __.out("EXTENDS").count().is(eq(0)) )')
+             ->raw('not(where( __.out("EXTENDS") ) )')
              ->back('first');
         $this->prepareQuery();
     }

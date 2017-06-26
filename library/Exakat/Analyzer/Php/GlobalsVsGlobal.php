@@ -39,8 +39,11 @@ GREMLIN;
         $this->atomIs(self::$VARIABLES_ALL)
              ->raw('or( has("code", "\$GLOBALS"), __.in("GLOBAL")) ')
              ->raw('map{ '.$mapping.' }')
-             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next()');
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = (array) $this->rawQuery();
+        if ($types[0] instanceof \Stdclass) {
+            $types = (array) $types[0];
+        }
 
         $store = array();
         $total = 0;

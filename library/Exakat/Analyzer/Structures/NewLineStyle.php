@@ -44,8 +44,11 @@ GREMLIN;
                               __.hasLabel("String").has("code", "\"\\\\n\"")
                              )')
              ->raw('map{ '.$mapping.' }')
-             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }.next()');
+             ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = (array) $this->rawQuery();
+        if ($types[0] instanceof \Stdclass) {
+            $types = (array) $types[0];
+        }
 
         $store = array();
         $total = 0;

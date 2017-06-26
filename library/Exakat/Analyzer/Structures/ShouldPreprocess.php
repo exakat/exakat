@@ -39,19 +39,22 @@ class ShouldPreprocess extends Analyzer {
         $tokenList = makeList( self::$FUNCTIONS_TOKENS );
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
             // Functioncall, that are not authorized
-             ->raw('where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel("Functioncall").has("fullnspath") ).times('.self::MAX_LOOPING.')
+             ->raw('not( where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel("Functioncall").has("fullnspath") ).times('.self::MAX_LOOPING.')
                                              .hasLabel("Functioncall")
                                              .has("token", within('.$tokenList.'))
-                                             .filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) }.count().is(eq(0)) )')
+                                             .filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) } ) )')
              ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
         
         $functionListNoArray = array_diff($functionList,
                 array('\\defined', '\\error_reporting', '\\extension_loaded', '\\get_defined_vars', '\\print', '\\echo', '\\set_time_limit'));
+        $functionListNoArray = array_values($functionListNoArray);
         
         // Function only applied to constants
         $this->atomFunctionIs($functionListNoArray)
-             ->raw('where( __.out("ARGUMENTS").out("ARGUMENT").not(has("constant", true)).count().is(eq(0)) )');
+             ->outIs('ARGUMENTS')
+             ->is('constant', true)
+             ->back('first');
         $this->prepareQuery();
     }
 }

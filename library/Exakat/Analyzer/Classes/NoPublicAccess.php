@@ -29,13 +29,14 @@ class NoPublicAccess extends Analyzer {
     public function analyze() {
 
         $gremlin = <<<GREMLIN
-g.V().hasLabel("Member").out("OBJECT").not(has("code", "\$this")).in("OBJECT")
+g.V().hasLabel("Member").out("OBJECT").not(where( __.has("code", "\$this"))).in("OBJECT")
      .out("MEMBER").hasLabel("Identifier")
-     .map{ it.get().value("code"); }.unique();
+     .values('code').unique();
 GREMLIN;
         $properties = $this->query($gremlin);
         
         if(!empty($properties)) {
+            $properties = array_values($properties);
             $this->atomIs('Ppp')
                  ->hasOut('PUBLIC')
                  ->hasNoOut('STATIC')
@@ -47,23 +48,32 @@ GREMLIN;
         }
 
         $gremlin = <<<GREMLIN
-g.V().hasLabel("Staticproperty").out("CLASS").has("token", within("T_STRING", "T_NS_SEPARATOR")).not(has("code", within(["self", "static"]))).sideEffect{fnp = it.get().value("fullnspath");}.in("CLASS")
+g.V().hasLabel("Staticproperty")
+     .where( 
+     __.out("CLASS")
+         .has("token", within("T_STRING", "T_NS_SEPARATOR"))
+         .not(has("code", within(["self", "static"])))
+         .sideEffect{fnp = it.get().value("fullnspath");}
+     .in("CLASS")
      .out("MEMBER").hasLabel("Variable")
-     .map{ fnp + '::' + it.get().value("code"); }.unique();
+     .map{ full = fnp + '::' + it.get().value("code"); }
+     )
+     .map{ full; }
+     .unique();
 GREMLIN;
         $staticproperties = $this->query($gremlin);
         
         if (!empty($staticproperties)) {
+            $staticproperties = array_values($staticproperties);
             $this->atomIs('Ppp')
                  ->hasOut('PUBLIC')
                  ->hasOut('STATIC')
+                 ->inIs('PPP')
+                 ->savePropertyAs('fullnspath', 'fnp')
+                 ->back('first')
                  ->outIs('PPP')
                  ->_as('results')
                  ->outIsIE('LEFT')
-                 ->_as('ppp')
-                 ->goToClass()
-                 ->savePropertyAs('fullnspath', 'fnp')
-                 ->back('ppp')
                  ->raw('filter{ !(fnp + "::" + it.get().value("code") in ***) }', $staticproperties)
                  ->back('results');
             $this->prepareQuery();

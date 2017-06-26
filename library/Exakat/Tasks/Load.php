@@ -760,10 +760,10 @@ class Load extends Tasks {
     }
     
     private function processColon() {
-        $label = $this->addAtom('Label');
+        $label = $this->addAtom('Gotolabel');
         $tag = $this->popExpression();
 
-        $this->addLink($label, $tag, 'LABEL');
+        $this->addLink($label, $tag, 'GOTOLABEL');
         $label->code     = ':';
         $label->fullcode = $tag->fullcode.' :';
         $label->line     = $this->tokens[$this->id][2];

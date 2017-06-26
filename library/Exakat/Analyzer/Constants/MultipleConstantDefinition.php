@@ -30,19 +30,18 @@ class MultipleConstantDefinition extends Analyzer {
         // case-insensitive constants with Define
         // Search for definitions and count them
         $csDefinitions = $this->query(<<<GREMLIN
-g.V().hasLabel("Functioncall").has("fullnspath")
-                              .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
+g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define")
                               .out("ARGUMENTS")
                               .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
                                    __.out("ARGUMENT").has("rank", 2).has('boolean', false),
                                   )
-                              .out("ARGUMENT").has("rank", 0).hasLabel("String").where(__.out("CONCAT").count().is(eq(0)) )
+                              .out("ARGUMENT").has("rank", 0).hasLabel("String").not(where(__.out("CONCAT") ) )
                               .values("noDelimiter")
 GREMLIN
 );
 
         $constDefinitions = $this->query(<<<GREMLIN
-g.V().hasLabel("Const").where( __.in("CONST").hasLabel("Class", "Trait").count().is(eq(0)) )
+g.V().hasLabel("Const").not( where( __.in("CONST").hasLabel("Class", "Trait") ) )
                        .out("CONST")
                        .out("NAME").values("code")
 GREMLIN
@@ -91,6 +90,7 @@ GREMLIN
         if (empty($array)) {
             return;
         }
+        $array = array_values($array);
         
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
@@ -108,6 +108,8 @@ GREMLIN
         if (empty($array)) {
             return;
         }
+        $array = array_values($array);
+
         $this->atomFunctionIs('\\define')
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
@@ -133,6 +135,7 @@ GREMLIN
         if (empty($array)) {
             return;
         }
+        $array = array_values($array);
 
         $this->atomIs('Const')
              ->hasNoClassTrait()

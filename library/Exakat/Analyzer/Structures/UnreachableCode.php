@@ -32,35 +32,36 @@ class UnreachableCode extends Analyzer {
     
     public function analyze() {
         // code after a halt_compiler is expected to be unreachable.
+        $finalTokens = array('Gotolabel', 'Class', 'Function', 'Interface', 'Trait');
 
         $this->atomIs('Return')
              ->nextSiblings()
-             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
+             ->atomIsNot($finalTokens);
         $this->prepareQuery();
 
         $this->atomIs('Throw')
              ->nextSiblings()
-             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
+             ->atomIsNot($finalTokens);
         $this->prepareQuery();
 
         $this->atomIs('Break')
              ->nextSiblings()
-             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
+             ->atomIsNot($finalTokens);
         $this->prepareQuery();
 
         $this->atomIs('Continue')
              ->nextSiblings()
-             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
+             ->atomIsNot($finalTokens);
         $this->prepareQuery();
 
         $this->atomIs('Goto')
              ->nextSiblings()
-             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
+             ->atomIsNot($finalTokens);
         $this->prepareQuery();
 
         $this->atomFunctionIs(array('\\exit', '\\die'))
              ->nextSiblings()
-             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
+             ->atomIsNot($finalTokens);
         $this->prepareQuery();
 
         $this->atomIs('Functioncall')
@@ -70,7 +71,7 @@ class UnreachableCode extends Analyzer {
              ->analyzerIs('Functions/KillsApp')
              ->back('first')
              ->nextSibling()
-             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'));
+             ->atomIsNot($finalTokens);
         $this->prepareQuery();
 
         $this->atomIs('Ifthen')
@@ -83,7 +84,7 @@ class UnreachableCode extends Analyzer {
              ->atomIs(array('Return', 'Continue', 'Break'))
              ->back('first')
              ->nextSibling()
-             ->atomIsNot(array('Label', 'Class', 'Function', 'Interface', 'Trait'))
+             ->atomIsNot($finalTokens)
              ->back('first');
         $this->prepareQuery();
     }

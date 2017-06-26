@@ -29,8 +29,8 @@ use Exakat\Tokenizer\Token;
 class UnusedLabel extends Analyzer {
     public function analyze() {
         // inside functions
-        $this->atomIs('Label')
-             ->outIs('LABEL')
+        $this->atomIs('Gotolabel')
+             ->outIs('GOTOLABEL')
              ->savePropertyAs('code', 'name')
              ->goToFunction()
              ->raw('not( where( __.out("BLOCK").repeat( __.out('.$this->linksDown.')).emit( hasLabel("Goto") ).times('.self::MAX_LOOPING.').out("GOTO").filter{ it.get().value("code") == name} ) )')
@@ -40,8 +40,8 @@ class UnusedLabel extends Analyzer {
         // inside namespaces are not processed here.
 
         // in the global space
-        $this->atomIs('Label')
-             ->outIs('LABEL')
+        $this->atomIs('Gotolabel')
+             ->outIs('GOTOLABEL')
              ->savePropertyAs('code', 'name')
              ->hasNoFunction()
              ->raw('not( where( g.V().hasLabel("Goto").out("GOTO").filter{ it.get().value("code") == name}

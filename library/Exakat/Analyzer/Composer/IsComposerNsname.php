@@ -69,11 +69,13 @@ class IsComposerNsname extends Analyzer {
         ////////////////////////////////////////////////
         // Instanceof
         // Classes or interfaces in Composer
-        $n = floor(count($list) / 10000);
+        $n = floor(count($packagistInterfacesFullNs) / 10000);
         for($i = 0; $i < $n; ++$i) {
             $this->atomIs('Instanceof')
                  ->outIs('CLASS')
                  ->atomIs(array('Nsname', 'Identifier'))
+                 ->tokenIsNot('T_STATIC')
+                 ->analyzerIsNot('self')
                  ->fullnspathIs(array_slice($packagistInterfacesFullNs, $i * 10000, ($i + 1) * 10000));
             $this->prepareQuery();
         }

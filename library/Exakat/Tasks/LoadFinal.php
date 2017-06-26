@@ -49,6 +49,8 @@ class LoadFinal extends Tasks {
         $this->spotPHPNativeConstants();
         $this->spotPHPNativeFunctions();
 
+        $this->spotFallbackConstants();
+
         $this->logTime('Final');
     }
 
@@ -94,7 +96,7 @@ g.V().hasLabel("Identifier")
 
 GREMLIN;
 
-        $this->runQuery($query, $title, array('arg1' => $constants));
+        $res = $this->runQuery($query, $title, array('arg1' => $constants));
     }
     
     private function spotPHPNativeFunctions() {
@@ -155,9 +157,25 @@ g.V().hasLabel("Functioncall")
 GREMLIN;
 
         $constants = $this->gremlin->query($query);
-        $constants = $constants->results;
+        $constantsDefine = $constants->results;
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Const")
+     .not( where( __.in("CONST") ) ) 
+     .out("CONST")
+     .out("NAME")
+     .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }
+     .values('fullnspath').unique();
+
+GREMLIN;
+
+        $constants = $this->gremlin->query($query);
+        $constantsConst = $constants->results;
+        
+        $constants = array_merge($constantsConst, $constantsDefine);
 
         if (!empty($constants)) {
+        /*
             // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
@@ -172,13 +190,16 @@ g.V().hasLabel("Identifier", "Nsname")
               .has("fullnspath", "\\\\define")
              .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
-         )
+         ).count();
 
 GREMLIN;
             $res = $this->gremlin->query($query, array('arg1' => $constants));
-
+*/
             // Second round, with fallback to global constants
-            $query = <<<GREMLIN
+            // Based on define() definitions
+
+            if (!empty($constantsDefine)) {
+                $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "DEFINITION") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); name in arg1 }
@@ -191,6 +212,33 @@ g.V().hasLabel("Identifier", "Nsname")
              .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
          )
+         .sideEffect{
+            fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+             it.get().property("fullnspath", fullnspath); 
+         }.count()
+
+GREMLIN;
+                $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
+            }
+
+            // Based on const definitions
+            $query = <<<GREMLIN
+g.V().hasLabel("Identifier", "Nsname")
+     .not( where( __.in("NAME", "DEFINITION") ) )
+     .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); 
+              name in arg1; }
+     .sideEffect{
+         it.get().property("fullnspath", name); 
+     }
+     .addE('DEFINITION')
+     .from( 
+        g.V().hasLabel("Const")
+             .not( where( __.in("CONST") ) ) 
+             .out("CONST")
+             .out("NAME")
+             .filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }
+       )
+       .count()
 
 GREMLIN;
             $res = $this->gremlin->query($query, array('arg1' => $constants));
