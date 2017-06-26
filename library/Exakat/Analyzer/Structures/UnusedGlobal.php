@@ -49,10 +49,10 @@ class UnusedGlobal extends Analyzer {
              ->hasNoInterface()
              ->hasNoTrait()
              // Not used as a variable
-             ->raw('where( g.V().out("FILE").out("EXPRESSION").out("CODE").out("EXPRESSION").not(hasLabel("Global", "Function", "Trait", "Class", "Interface"))
+             ->raw('not( where( g.V().out("FILE").out("EXPRESSION").out("CODE").out("EXPRESSION").not(hasLabel("Global", "Function", "Trait", "Class", "Interface"))
                                 .repeat( __.out('.$this->linksDown.') ).emit(hasLabel("Variable", "Variablearray", "Variableobject"))
-                                .times('.self::MAX_LOOPING.').where( __.in("GLOBAL").count().is(eq(0)) )
-                                .filter{ it.get().value("code") == theGlobal}.count().is(eq(0)) )')
+                                .times('.self::MAX_LOOPING.').not( where( __.in("GLOBAL") ) )
+                                .filter{ it.get().value("code") == theGlobal} ) )')
              ->back('result');
         $this->prepareQuery();
     }
