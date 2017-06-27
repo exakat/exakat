@@ -946,6 +946,7 @@ GREMLIN
     }
 
     protected function outIs($link) {
+        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
         assert($this->assertLink($link));
         $this->addMethod('out('.$this->SorA($link).')');
 
@@ -954,6 +955,7 @@ GREMLIN
 
     // follows a link if it is there (and do nothing otherwise)
     protected function outIsIE($link) {
+        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
         assert($this->assertLink($link));
         // alternative : coalesce(out('LEFT'),  __.filter{true} )
         $this->addMethod("until( __.not(outE(".$this->SorA($link).")) ).repeat(out(".$this->SorA($link)."))");
@@ -962,6 +964,7 @@ GREMLIN
     }
 
     public function outIsNot($link) {
+        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
         assert($this->assertLink($link));
         $this->addMethod('not( where( __.outE('.$this->SorA($link).') ) )');
         
@@ -1011,6 +1014,7 @@ GREMLIN
 
     public function inIs($link) {
         assert($this->assertLink($link));
+        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
         $this->addMethod('in('.$this->SorA($link).')');
         
         return $this;
