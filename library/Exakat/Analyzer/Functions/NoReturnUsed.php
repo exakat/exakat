@@ -30,20 +30,25 @@ class NoReturnUsed extends Analyzer {
         $this->atomIs('Function')
              ->outIs('BLOCK')
              ->atomInside('Return')
+             ->outIs('RETURN')
+             ->atomIsNot('Void')
              ->back('first')
              ->raw('where( __.out("DEFINITION") )')
              ->raw('not(where( __.out("DEFINITION").not(where( __.in("EXPRESSION")))) )');
         $this->prepareQuery();
 
-        // Functions
+        // Methods
         $this->atomIs('Method')
+             ->hasOut('STATIC')
              ->savePropertyAs('code', 'method')
              ->outIs('BLOCK')
              ->atomInside('Return')
+             ->outIs('RETURN')
+             ->atomIsNot('Void')
              ->back('first')
              ->goToClass()
-             ->raw('where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == method; } )')
-             ->raw('not(where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == method; }.in("METHOD").not(where( __.in("EXPRESSION"))) ) )')
+             ->raw('where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == method.toLowerCase(); } )')
+             ->raw('not(where( __.out("DEFINITION").in("CLASS").hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").filter{ it.get().value("code").toLowerCase() == method.toLowerCase(); }.in("METHOD").not(where( __.in("EXPRESSION"))) ) )')
              ->back('first');
         $this->prepareQuery();
     }
