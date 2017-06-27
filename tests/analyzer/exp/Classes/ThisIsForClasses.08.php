@@ -5,6 +5,6 @@ $expected     = array('$this',
                       '$this', 
                       '$this');
 
-$expected_not = array();
+$expected_not = array('$this'); // The last is a source in foreach
 
 ?>

@@ -21,6 +21,8 @@ class xGoodOrder {
 // Good
 class xWrongOrder {
     use traits;
+
+    public function foo3() {}
     
     const CONSTANTS = 1;
     
@@ -30,10 +32,9 @@ class xWrongOrder {
     
     public function foo() {}
     public function foo2() {}
-    public function foo3() {}
+    const CONSTANTS2 = 1;
     public function foo4() {}
 
-    const CONSTANTS2 = 1;
     const CONSTANTS3 = 1;
 }
 

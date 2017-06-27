@@ -17,6 +17,10 @@ trait t {
     function foo() {
         foreach($a as $this) {}
     }
+
+    function foo2() {
+        foreach($this as $a) {}
+    }
 }
 
 ?>

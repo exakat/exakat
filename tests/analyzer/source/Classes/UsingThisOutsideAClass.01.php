@@ -22,6 +22,6 @@ class c {
 
 trait t {
     function d() {
-        $this->e;
+        $this->ef;
     }
 }
