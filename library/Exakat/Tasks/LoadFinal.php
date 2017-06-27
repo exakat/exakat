@@ -41,6 +41,7 @@ class LoadFinal extends Tasks {
         $this->linksIn = Token::linksAsList();
 
         $this->logTime('Start');
+        display('Start load final');return;
 
         $this->init();
 
@@ -51,6 +52,7 @@ class LoadFinal extends Tasks {
 
         $this->spotFallbackConstants();
 
+        display('End load final');
         $this->logTime('Final');
     }
 
@@ -81,7 +83,7 @@ class LoadFinal extends Tasks {
         $constants = array_filter($constants, function ($x) { return strpos($x, '\\') === false;});
         $constants = array_map('strtolower', $constants);
 
-        // This weird trick for janusgraph...
+        // May be array_keys
         $constants = array_slice($constants, 0, 14300);
         
         $query = <<<GREMLIN
@@ -139,6 +141,7 @@ GREMLIN;
     }
 
     private function spotFallbackConstants() {
+        $this->logTime('spotFallbackConstants');
         // Define-style constant definitions
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")
@@ -173,9 +176,9 @@ GREMLIN;
         $constantsConst = $constants->results;
         
         $constants = array_merge($constantsConst, $constantsDefine);
+        $this->logTime('constants : '.count($constants));
 
         if (!empty($constants)) {
-        /*
             // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
@@ -194,10 +197,11 @@ g.V().hasLabel("Identifier", "Nsname")
 
 GREMLIN;
             $res = $this->gremlin->query($query, array('arg1' => $constants));
-*/
+
             // Second round, with fallback to global constants
             // Based on define() definitions
 
+            $this->logTime('constants define : '.count($constantsDefine));
             if (!empty($constantsDefine)) {
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
@@ -221,6 +225,8 @@ GREMLIN;
                 $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
             }
 
+            $this->logTime('constants const : '.count($constantsConst));
+            if (!empty($constantsConst)) {
             // Based on const definitions
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
@@ -242,7 +248,8 @@ g.V().hasLabel("Identifier", "Nsname")
 
 GREMLIN;
             $res = $this->gremlin->query($query, array('arg1' => $constants));
-
+            }
+            
             // TODO : handle case-insensitive
             $this->logTime('Constant definitions');
 

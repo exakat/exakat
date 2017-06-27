@@ -605,7 +605,7 @@ class Load extends Tasks {
     private function reset() {
         $this->atoms = array($this->id0->id => $this->id0);
         $this->links = array();
-        /*
+
         foreach($this->calls as $type => $names) {
             foreach($names as $name => $calls) {
                 if (!empty($calls['definitions'])) {
@@ -613,7 +613,6 @@ class Load extends Tasks {
                 }
             }
         }
-        */
 
         $this->uses  = array('function' => array(),
                              'const'    => array(),
@@ -3448,12 +3447,6 @@ class Load extends Tasks {
             $atom = 'Variable';
         }
         $variable = $this->processSingle($atom);
-        if ($this->tokens[$this->id][1] === '$this') {
-            $currentClass = end($this->currentClassTrait);
-            if ($currentClass instanceof Atom) {
-                $this->addCall('class', end($this->currentClassTrait)->fullnspath, $variable);
-            }
-        }
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
             $this->processSemicolon();
@@ -4597,7 +4590,7 @@ class Load extends Tasks {
         if (isset($this->calls['constant'])) {
             $this->fallbackToGlobal('constant');
         }
-
+        
         static::$client->saveDefinitions($this->exakatDir, $this->calls);
 
 //        $this->log->log("saveDefinitions\t".(($end - $begin) * 1000)."\t".count($this->calls).PHP_EOL);
@@ -4685,7 +4678,7 @@ class Load extends Tasks {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
-                    $this->addCall('class', $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, $name);
+//                    $this->addCall('class', $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, $name);
                     return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
                 }
 
@@ -4693,7 +4686,7 @@ class Load extends Tasks {
                 if (empty($this->currentParentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
-                    $this->addCall('class', $this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]->fullnspath, $name);
+//                    $this->addCall('class', $this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]->fullnspath, $name);
                     return array($this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
                 }
 
