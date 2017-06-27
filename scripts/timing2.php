@@ -64,9 +64,11 @@ foreach($rows as $row) {
 }
 
 $fp = fopen('timing2.csv', 'w+');
-foreach($finals as $final) {
-    fputcsv($fp, $final);
+if ($fp === false) {
+    foreach($finals as $final) {
+        fputcsv($fp, $final);
+    }
+    fclose($fp);
 }
-fclose($fp);
 
 ?>

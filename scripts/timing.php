@@ -29,6 +29,9 @@ use mcordingley\Regression\RegressionAlgorithm\LinearLeastSquares;
 
 $files = glob('projects/*');
 $fp = fopen('timing.csv', 'w+');
+if ($fp === false) {
+    die('Could not open timing.csv');
+}
 fputcsv($fp, array('project', 'initialSize', 'size', 'buildRoot', 'tokenizer', 'analyze', 'final'));
 
 $total = 0;

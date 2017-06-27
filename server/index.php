@@ -198,8 +198,13 @@ function pushToQueue($id) {
     }
     
     $fp = fopen(PIPEFILE, 'a');
-    fwrite($fp, "$id\n");
-    fclose($fp);
+    if ($fp !== false) {
+        fwrite($fp, "$id\n");
+        fclose($fp);
+    } else {
+        echo json_encode(array('status' => 'Could not push to queue'));
+        return;
+    }
 }
 
 function autoProjectName() {
@@ -219,8 +224,10 @@ function error($message, $project) {
 
 function serverLog($message) {
     $fp = fopen(__DIR__.'/server.log', 'a');
-    fwrite($fp, date('r')."\t$message\n");
-    fclose($fp);
+    if (!fp !== false) {
+        fwrite($fp, date('r')."\t$message\n");
+        fclose($fp);
+    }
 }
 
 ?>
