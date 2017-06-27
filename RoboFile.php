@@ -257,7 +257,7 @@ LICENCE;
         print "Check anonymize's token list\n";
         $this->checkToken();
         
-        print "Check protected $phpVersion definitions\n";
+        print "Check protected \$phpVersion definitions\n";
         $this->checkphpVersion();
 
         print "Check Data/*.ini consistency\n";
