@@ -528,6 +528,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
 
     public function tokenIsNot($token) {
+        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
         assert($this->assertToken($token));
         $this->addMethod('not(has("token", within(***)))', $token);
         
@@ -535,6 +536,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
     
     public function atomIs($atom) {
+        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
         assert($this->assertAtom($atom));
         $this->addMethod('hasLabel('.$this->SorA($atom).')');
         
@@ -542,6 +544,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
 
     public function atomIsNot($atom) {
+        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
         assert($this->assertAtom($atom));
         $this->addMethod('not(hasLabel('.$this->SorA($atom).'))');
         
@@ -549,6 +552,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
 
     public function atomFunctionIs($fullnspath) {
+        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
         assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
         $this->functioncallIs($fullnspath);
 
@@ -556,6 +560,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     }
     
     public function functioncallIs($fullnspath) {
+        assert(func_get_args() !== 1, "Too many arguments for ".__METHOD__);
         assert($fullnspath !== null, 'fullnspath can\'t be null in '.__METHOD__);
         $this->atomIs('Functioncall')
              ->raw('has("fullnspath")')
