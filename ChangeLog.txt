@@ -1,4 +1,4 @@
-Version 0.11.9 (Manjusri, Coming up)
+Version 0.12.1 (Yellow Toothed Elephant, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,22 @@ Version 0.11.9 (Manjusri, Coming up)
 + Tokenizer
     + 
 
-Version 0.11.8 (Xiaozuanfeng, Coming up)
+Version 0.12.0 (Manjusri, 2017-06-26)
++ Architecture
+    + Added support for Janusgraph (Gremlin 3)
+    + Refactored dump's data collection for speed.bb
++ Report
+    + Added support for Wordpress and Joomla as Frameworks
++ Analyzer
+    + New analyzer : Avoid Optional properties
+    + New analyzer : Multiple declarations of functions
+    + New analyzer : Non breakable spaces in names
+    + New analyzer : Favorite Heredoc delimiter
+    + New analyzer : ext/swoole
++ Tokenizer
+    + Modified several nodes/links names, for compatibility purposes
+
+Version 0.11.8 (Xiaozuanfeng, 2017-06-19)
 + Architecture
     + Starte working on JanusGraph to add to Neo4j/Gremlin3
 + Report
