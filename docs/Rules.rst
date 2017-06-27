@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 19 Jun 2017 13:01:03 +0000
-.. comment: Generation hash : 71cc00c840146650ff0bd2bf084819ef8596e301
+.. comment: Generation date : Tue, 27 Jun 2017 10:24:50 +0000
+.. comment: Generation hash : 7410c4c48e6e63eb38245fe1479bf53d3dee4328
 
 
 .. _$http\_raw\_post\_data:
@@ -928,6 +928,52 @@ See also `Global Variables <https://codex.wordpress.org/Global_Variables>`_
 +--------------+-----------------------------+
 | Analyzers    | :ref:`Wordpress`            |
 +--------------+-----------------------------+
+
+
+.. _avoid-optional-properties:
+
+Avoid Optional Properties
+#########################
+
+
+Avoid optional properties, to prevent litering the code with existence checks. 
+
+When a property has to be checked once for existence, it is safer to check it each time. This leads to a decrease in readability.
+
+Either make sure the property is set with an actual object rather than with null, or use a void object. A void object offers the same interface than the expected object, but does nothing. It allows calling its methods, without running into a Fatal error, nor testing it. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Example is courtesy 'The Coding Machine' : it has been adapted from its original form. See link below.
+   
+   class MyMailer {
+       private $logger;
+   
+       public function '__construct(LoggerInterface $logger = null) {
+           $this->logger = $logger;
+       }
+   
+       private function sendMail(Mail $mail) {
+           // Since $this->logger may be null, it must be tested anytime it is used.
+           if ($this->logger) {
+               $this->logger->info('Mail successfully sent.');
+           }
+       }
+   }
+   
+   ?>
+
+
+See also `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_,
+`The Null Object Pattern – Polymorphism in Domain Models <https://www.sitepoint.com/the-null-object-pattern-polymorphism-in-domain-models/>`_, and `Practical PHP Refactoring: Introduce Null Object <https://dzone.com/articles/practical-php-refactoring-26>`_.
+
++--------------+---------------------------------+
+| Command Line | Classes/AvoidOptionalProperties |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
 
 
 .. _avoid-parenthesis:
@@ -2084,21 +2130,6 @@ Those classes are extending each other, creating an extension loop. PHP will yie
 +--------------+-------------------------+
 | Analyzers    | :ref:`Analyze`          |
 +--------------+-------------------------+
-
-
-.. _classes/orderofdeclaration:
-
-Classes/OrderOfDeclaration
-##########################
-
-
-
-
-+--------------+------------------------------------------------+
-| Command Line | Classes/OrderOfDeclaration                     |
-+--------------+------------------------------------------------+
-| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
-+--------------+------------------------------------------------+
 
 
 .. _close-tags:
@@ -4805,6 +4836,79 @@ List of hash algorithms incompatible with PHP 5.4 and 5.5. They were introduced 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
+.. _heredoc-delimiter:
+
+Heredoc Delimiter
+#################
+
+
+Heredoc and Nowdoc expressions may use a variety of delimiters. 
+
+There seems to be a standard delimiter in the code, and some exceptions : one or severals forms are dominent (> 90%), while the others are rare. 
+
+The analyzed code has less than 10% of the rare delimiters. For consistency reasons, it is recommended to make them all the same. 
+
+Generally, one or two delimiters are used, with generic value. It is recommended to use a humanly readable delimiter : SQL, HTML, XML, GREMLIN, etc. This helps readability in the code.
+
+.. code-block:: php
+
+   <?php
+   
+   echo <<<SQL
+   SELECT * FROM table1;
+   SQL;
+   
+   echo <<<SQL
+   SELECT * FROM table2;
+   SQL;
+   
+   echo <<<SQL
+   SELECT * FROM table3;
+   SQL;
+   
+   echo <<<SQL
+   SELECT * FROM table4;
+   SQL;
+   
+   echo <<<SQL
+   SELECT * FROM table5;
+   SQL;
+   
+   echo <<<SQL
+   SELECT * FROM table11;
+   SQL;
+   
+   echo <<<SQL
+   SELECT * FROM table12;
+   SQL;
+   
+   echo <<<SQL
+   SELECT * FROM table13;
+   SQL;
+   
+   // Nowdoc
+   echo <<<'SQL'
+   SELECT * FROM table14;
+   SQL;
+   
+   echo <<<SQL
+   SELECT * FROM table15;
+   SQL;
+   
+   
+   echo <<<HEREDOC
+   SELECT * FROM table215;
+   HEREDOC;
+   
+   ?>
+
++--------------+------------------------------------------------+
+| Command Line | Structures/HeredocDelimiterFavorite            |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
+
+
 .. _hexadecimal-in-string:
 
 Hexadecimal In String
@@ -6857,6 +6961,25 @@ The following functions are now native functions in PHP 7.2. It is advised to ch
 +--------------+------------------------------------------------------+
 
 
+.. _new-functions-in-php-7.3:
+
+New Functions In PHP 7.3
+########################
+
+
+This documentation is still empty.
+
+The following functions are now native functions in PHP 7.3. It is advised to change them before moving to this new version.
+
+*
+
++--------------+---------------------------+
+| Command Line | Php/Php73NewFunctions     |
++--------------+---------------------------+
+| Analyzers    | :ref:`CompatibilityPHP73` |
++--------------+---------------------------+
+
+
 .. _no-boolean-as-default:
 
 No Boolean As Default
@@ -6961,7 +7084,7 @@ Avoid using whole classes as typehint. Always use interfaces, so that you may us
    ?>
 
 
-See also ``_.
+See also `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_.
 
 +--------------+-----------------------------+
 | Command Line | Functions/NoClassAsTypehint |
@@ -8052,6 +8175,25 @@ Not Definitions Only
 
 Files should only include definitions (class, functions, traits, interfaces, constants), or global instructions, but not both. 
 
+.. code-block:: php
+
+   <?php
+   // This whole script is a file
+   
+   // It contains definitions and global code
+   class foo {
+       static public $foo = null;
+   }
+   //This can be a singleton creation
+   foo::$foo = new foo();
+   
+   trait t {}
+   
+   class bar {}
+   
+   ?>
+
+
 Within this context, globals, use, and namespaces instructions are not considered a warning.
 
 +--------------+--------------------------+
@@ -8391,6 +8533,47 @@ Interrupting a script will leave the application with a blank page, will make yo
 +--------------+-------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                            |
 +--------------+-------------------------------------------------------------------------------------------+
+
+
+.. _order-of-declaration:
+
+Order Of Declaration
+####################
+
+
+The order used to declare members and methods has a great impact on readability and maintenance. However, practices varies greatly. As usual, being consistent is the most important and useful.
+
+The suggested order is the following : traits, constants, properties, methods. 
+Optional characteristics, like final, static... are not specified. Special methods names are not specified. 
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       use traits;
+       
+       const CONSTANTS = 1;
+       const CONSTANTS2 = 1;
+       const CONSTANTS3 = 1;
+       
+       private $property = 2;
+       private $property2 = 2;
+       private $property3 = 2;
+       
+       public function foo() {}
+       public function foo2() {}
+       public function foo3() {}
+       public function foo4() {}
+   }
+   
+   ?>
+
++--------------+------------------------------------------------+
+| Command Line | Classes/OrderOfDeclaration                     |
++--------------+------------------------------------------------+
+| Analyzers    | :ref:`Coding Conventions <coding-conventions>` |
++--------------+------------------------------------------------+
 
 
 .. _overwriting-variable:
@@ -8915,21 +9098,6 @@ The new class is : ReflectionClassConstant. The other class is 'Void' : this is 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP73` |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-.. _php/php73newfunctions:
-
-Php/Php73NewFunctions
-#####################
-
-
-
-
-+--------------+---------------------------+
-| Command Line | Php/Php73NewFunctions     |
-+--------------+---------------------------+
-| Analyzers    | :ref:`CompatibilityPHP73` |
-+--------------+---------------------------+
 
 
 .. _php7-relaxed-keyword:
@@ -16000,7 +16168,33 @@ ext/dba
 #######
 
 
-Extension ext/dba
+Extension ext/dba.
+
+These functions build the foundation for accessing Berkeley DB style databases.
+
+.. code-block:: php
+
+   <?php
+   
+   $id = dba_open('/tmp/test.db', 'n', 'db2');
+   
+   if (!$id) {
+       echo 'dba_open failed'.PHP_EOL;
+       'exit;
+   }
+   
+   dba_replace('key', 'This is an example!', $id);
+   
+   if (dba_exists('key', $id)) {
+       echo dba_fetch('key', $id);
+       dba_delete('key', $id);
+   }
+   
+   dba_close($id);
+   ?>
+
+
+See also `Database (dbm-style) Abstraction Layer <http://php.net/manual/en/book.dba.php>`_.
 
 +--------------+---------------------------+
 | Command Line | Extensions/Extdba         |

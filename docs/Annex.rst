@@ -207,6 +207,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/stats
 * String
 * ext/suhosin
+* ext/swoole
 * ext/tidy
 * ext/tokenizer
 * ext/tokyotyrant
@@ -295,21 +296,30 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.12.0
+
+  * Avoid Optional Properties (Classes/AvoidOptionalProperties)
+  * Heredoc Delimiter (Structures/HeredocDelimiterFavorite ; Coding Conventions)
+  * Multiple Functions Declarations (Functions/MultipleDeclarations ; Appinfo)
+  * Non Breakable Space In Names (Structures/NonBreakableSpaceInNames ; Appcontent)
+  * ext/swoole (Extensions/Extswoole ; Appinfo)
+
 * 0.11.8
 
   * Cant Inherit Abstract Method (Classes/CantInheritAbstractMethod)
   * Codeigniter usage (Vendors/Codeigniter ; Appinfo)
   * Ez cms usage (Vendors/Ez ; Appinfo)
+  * Joomla usage (Vendors/Joomla ; Appinfo, Appcontent)
   * Laravel usage (Vendors/Laravel ; Appinfo, Appcontent)
   * Symfony usage (Vendors/Symfony ; Appinfo)
   * Use session_start() Options (Php/UseSessionStartOptions ; Suggestions)
-  * Wordpress usage (Vendors/Wordpress ; Unassigned)
+  * Wordpress usage (Vendors/Wordpress ; Appinfo)
   * Yii usage (Vendors/Yii ; Appinfo, Appcontent)
 
 * 0.11.7
 
-  * Classes/OrderOfDeclaration (Classes/OrderOfDeclaration)
   * Forgotten Interface (Interfaces/CouldUseInterface ; Analyze)
+  * Order Of Declaration (Classes/OrderOfDeclaration)
 
 * 0.11.6
 
@@ -323,10 +333,9 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * PSR-3 Usage (Psr/Psr3Usage ; Appinfo)
   * PSR-6 Usage (Psr/Psr6Usage ; Appinfo)
   * PSR-7 Usage (Psr/Psr7Usage ; Appinfo)
-  * Php/Php73NewFunctions (Php/Php73NewFunctions ; Unassigned, CompatibilityPHP73)
   * Too Many Injections (Classes/TooManyInjections)
-  * ext/gender (Extensions/Extgender ; Appcontent)
-  * ext/judy (Extensions/Extjudy ; Appcontent)
+  * ext/gender (Extensions/Extgender ; Appinfo)
+  * ext/judy (Extensions/Extjudy ; Appinfo)
 
 * 0.11.5
 
@@ -335,7 +344,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Mixed Concat And Interpolation (Structures/MixedConcatInterpolation ; Analyze, Coding Conventions)
   * PSR-11 Usage (Psr/Psr11Usage ; Appinfo)
   * Structures/NoReferenceOnLeft (Structures/NoReferenceOnLeft ; Analyze)
-  * ext/stats (Extensions/Extstats ; Appcontent)
+  * ext/stats (Extensions/Extstats ; Appinfo)
 
 * 0.11.4
 
@@ -458,6 +467,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Missing Cases In Switch (Structures/MissingCases ; Analyze)
   * New Constants In PHP 7.2 (Php/Php72NewConstants ; CompatibilityPHP72, CompatibilityPHP73)
   * New Functions In PHP 7.2 (Php/Php72NewFunctions ; CompatibilityPHP72, CompatibilityPHP73)
+  * New Functions In PHP 7.3 (Php/Php73NewFunctions ; CompatibilityPHP73)
   * No Echo In Route Callable (Slim/NoEchoInRouteCallable ; Slim)
   * Slim Missing Classes (Slim/SlimMissing ; Internal)
   * SlimPHP 1.0.0 Undefined Classes (Slim/Slimphp10 ; Slim)
@@ -1559,6 +1569,7 @@ External links
 
 List of external links mentionned in this documentation.
 
+* ` <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
 * ` <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_
@@ -1570,6 +1581,7 @@ List of external links mentionned in this documentation.
 * `Array <http://php.net/manual/en/function.array.php>`_
 * `Arrays <http://php.net/manual/en/language.types.array.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
+* `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
 * `bazaar <http://bazaar.canonical.com/en/>`_
 * `BC Math Functions <http://www.php.net/bcmath>`_
@@ -1593,6 +1605,7 @@ List of external links mentionned in this documentation.
 * `Curl for PHP <http://php.net/manual/en/book.curl.php>`_
 * `Data filtering <http://php.net/manual/en/book.filter.php>`_
 * `Data structures <http://docs.php.net/manual/en/book.ds.php>`_
+* `Database (dbm-style) Abstraction Layer <http://php.net/manual/en/book.dba.php>`_
 * `Date and Time <http://php.net/manual/en/book.datetime.php>`_
 * `DCDFLIB <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
 * `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_
@@ -1623,6 +1636,7 @@ List of external links mentionned in this documentation.
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
+* `Gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `git <https://git-scm.com/>`_
 * `Github <https://github.com/exakat/exakat>`_
 * `Global Variables <https://codex.wordpress.org/Global_Variables>`_
@@ -1642,6 +1656,7 @@ List of external links mentionned in this documentation.
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
+* `Joomla <http://www.joomla.org/>`_
 * `Judy C library <http://judy.sourceforge.net/>`_
 * `Laravel <http://www.lavarel.com/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
@@ -1707,12 +1722,14 @@ List of external links mentionned in this documentation.
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `svn <https://subversion.apache.org/>`_
+* `Swoole <https://github.com/swoole/swoole-src>`_
 * `Symfony <http://www.symfony.com/>`_
 * `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
 * `tokyo_tyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
+* `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_

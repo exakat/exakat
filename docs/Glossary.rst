@@ -256,6 +256,7 @@ Glossary
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Use Object Api <use-object-api>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+      + :ref:`ext/dba <ext/dba>`
 
     + `extract()`
 
@@ -731,6 +732,7 @@ Glossary
       + :ref:`Anonymous Classes <anonymous-classes>`
       + :ref:`Assign Default To Properties <assign-default-to-properties>`
       + :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
+      + :ref:`Avoid Optional Properties <avoid-optional-properties>`
       + :ref:`Illegal Name For Method <illegal-name-for-method>`
       + :ref:`Make Global A Property <make-global-a-property>`
       + :ref:`Non Ascii Variables <non-ascii-variables>`

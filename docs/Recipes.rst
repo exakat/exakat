@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 19 Jun 2017 13:01:03 +0000
-.. comment: Generation hash : 71cc00c840146650ff0bd2bf084819ef8596e301
+.. comment: Generation date : Tue, 27 Jun 2017 10:24:50 +0000
+.. comment: Generation hash : 7410c4c48e6e63eb38245fe1479bf53d3dee4328
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 298 analysis
+Total : 299 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -94,6 +94,7 @@ Total : 298 analysis
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Assigned Twice <assigned-twice>`
+* :ref:`Avoid Optional Properties <avoid-optional-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
 * :ref:`Avoid Using stdClass <avoid-using-stdclass>`
 * :ref:`Avoid get_class() <avoid-get\_class()>`
@@ -406,22 +407,23 @@ Total : 17 analysis
 Coding Conventions
 ++++++++++++++++++
 
-Total : 20 analysis
+Total : 21 analysis
 
 * :ref:`All Uppercase Variables <all-uppercase-variables>`
 * :ref:`Bracketless Blocks <bracketless-blocks>`
 * :ref:`Class Name Case Difference <class-name-case-difference>`
-* :ref:`Classes/OrderOfDeclaration`
 * :ref:`Close Tags <close-tags>`
 * :ref:`Constant Comparison <constant-comparison>`
 * :ref:`Curly Arrays <curly-arrays>`
 * :ref:`Echo Or Print <echo-or-print>`
 * :ref:`Empty Slots In Arrays <empty-slots-in-arrays>`
+* :ref:`Heredoc Delimiter <heredoc-delimiter>`
 * :ref:`Interpolation`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Multiple Classes In One File <multiple-classes-in-one-file>`
 * :ref:`No Plus One <no-plus-one>`
 * :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
+* :ref:`Order Of Declaration <order-of-declaration>`
 * :ref:`Return With Parenthesis <return-with-parenthesis>`
 * :ref:`Should Be Single Quote <should-be-single-quote>`
 * :ref:`Unusual Case For PHP Functions <unusual-case-for-php-functions>`
@@ -843,6 +845,7 @@ Total : 46 analysis
 * :ref:`New Constants In PHP 7.2 <new-constants-in-php-7.2>`
 * :ref:`New Functions In PHP 7.1 <new-functions-in-php-7.1>`
 * :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
+* :ref:`New Functions In PHP 7.3 <new-functions-in-php-7.3>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
@@ -854,7 +857,6 @@ Total : 46 analysis
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 71 New Classes <php-71-new-classes>`
-* :ref:`Php/Php73NewFunctions`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
 * :ref:`Simple Global Variable <simple-global-variable>`
