@@ -36,7 +36,7 @@ class IsModified extends Analyzer {
 
         $this->atomIs(array('Variablearray', 'Variable'))
              ->inIsIE('VARIABLE')
-             ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'DEFINE', 'CAST'))
+             ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'CAST'))
              ->back('first');
         $this->prepareQuery();
 

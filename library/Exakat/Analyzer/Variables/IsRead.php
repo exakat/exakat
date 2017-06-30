@@ -34,7 +34,7 @@ class IsRead extends Analyzer {
     public function analyze() {
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
-                           'INDEX', 'VALUE', 'NAME', 'DEFINE', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
+                           'INDEX', 'VALUE', 'NAME', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
                            'CASE', 'CLONE', 'FINAL', 'CLASS', 'GLOBAL', 'PPP'))
             ->codeIsNot('$this');
         $this->prepareQuery();
@@ -45,7 +45,7 @@ class IsRead extends Analyzer {
              ->atomIs('Assignation')
              ->codeIs('=')
              ->hasIn(array('NOT', 'AT', 'OBJECT', 'NEW', 'RETURN', 'CONCAT', 'SOURCE', 'CODE', 'INDEX', 'CONDITION', 'THEN', 'ELSE',
-                           'INDEX', 'VALUE', 'NAME', 'DEFINE', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
+                           'INDEX', 'VALUE', 'NAME', 'MEMBER', 'METHOD', 'VARIABLE', 'SIGN', 'THROW', 'CAST',
                            'CASE', 'CLONE', 'FINAL', 'CLASS', 'PPP'))
              ->back('first');
             // note : NAME is for Switch!!

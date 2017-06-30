@@ -36,7 +36,7 @@ class BuriedAssignation extends Analyzer {
              
              // in a property definition
              ->inIsIE('CODE')
-             ->hasNoIn(array('DEFINE', 'CONST', 'CONDITION', 'PPP', 'STATIC'))
+             ->hasNoIn(array('CONST', 'CONDITION', 'PPP', 'STATIC'))
              ->back('first');
         $this->prepareQuery();
         
