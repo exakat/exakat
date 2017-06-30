@@ -27,29 +27,38 @@ use Exakat\Analyzer\Analyzer;
 
 class AddZero extends Analyzer {
     public function analyze() {
-        $zeros = array(0, '+0', '-0');
-        
         // $x += 0
         $this->atomIs('Assignation')
              ->codeIs(array('+=', '-='))
              ->outIs('RIGHT')
-             ->codeIs($zeros)
+             ->is('intval', 0)
              ->back('first');
         $this->prepareQuery();
 
         // 0 + 2
         $this->atomIs('Addition')
-             ->tokenIs('T_PLUS')
-             ->outIs('LEFT')
-             ->codeIs($zeros)
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->is('intval', 0)
              ->back('first');
         $this->prepareQuery();
 
-        // $x +- 2
-        $this->atomIs('Addition')
+        // $a = 0; $c = $a + 2;
+        $this->atomIs('Assignation')
              ->outIs('RIGHT')
-             ->codeIs($zeros)
-             ->back('first');
+             ->is('intval', 0)
+             ->back('first')
+             ->outIs('LEFT')
+             ->atomIs('Variable')
+             ->savePropertyAs('fullcode', 'varname')
+             ->back('first')
+             ->inIs('EXPRESSION')
+             ->outIs('EXPRESSION')
+             ->atomIsNot(array('Function', 'Class', 'Trait'))
+             ->atomInside('Addition')
+             ->_as('results')
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->samePropertyAs('fullcode', 'varname')
+             ->back('results');
         $this->prepareQuery();
     }
 }
