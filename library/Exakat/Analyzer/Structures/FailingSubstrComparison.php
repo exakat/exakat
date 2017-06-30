@@ -41,7 +41,14 @@ class FailingSubstrComparison extends Analyzer {
              ->hasNoOut('CONCAT')
              
              // Substring is actually as long as length
-             ->raw('filter{ it.get().value("noDelimiter").length() != length.toInteger().abs();}');
+             ->raw('filter{ 
+    if (it.get().value("delimiter") == \'"\') {
+        it.get().value("noDelimiter").replace("\\\\", "").length() != length.toInteger().abs();
+    } else {  // delimiter is \' or none
+        it.get().value("noDelimiter").length() != length.toInteger().abs();
+    } 
+}
+');
         $this->prepareQuery();
     }
 }
