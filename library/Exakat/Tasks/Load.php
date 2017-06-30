@@ -37,6 +37,7 @@ use Exakat\Phpexec;
 use Exakat\Tasks\LoadFinal;
 use Exakat\Tasks\Precedence;
 use Exakat\Tasks\Helpers\Atom;
+use Exakat\Tokenizer\Token;
 
 const T_BANG                         = '!';
 const T_CLOSE_BRACKET                = ']';
@@ -169,7 +170,7 @@ class Load extends Tasks {
     static public $PROP_ORIGIN      = array('Nsname', 'Identifier', 'As');
     static public $PROP_ENCODING    = array('String');
     static public $PROP_BLOCK       = array('String');
-    static public $PROP_INTVAL      = array('Integer');
+    static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null');
     static public $PROP_STRVAL      = array('String');
     static public $PROP_ENCLOSING   = array('Variable', 'Array', 'Member');
     static public $PROP_ARGS_MAX    = array('Arguments');
@@ -3546,7 +3547,9 @@ class Load extends Tasks {
 
     private function processReal() {
         $real = $this->processSingle('Real');
+        // (int) is for loading into the database
         $real->boolean  = (int) (strtolower($this->tokens[$this->id][1]) != 0);
+        $real->intval   = (int) (strtolower($this->tokens[$this->id][1]) != 0);
         $real->constant = self::CONSTANT_EXPRESSION;
 
         if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
@@ -4470,6 +4473,7 @@ class Load extends Tasks {
     /// generic methods
     //////////////////////////////////////////////////////
     private function addAtom($atom) {
+        assert(in_array($atom, Token::$ATOMS), 'Undefined atom '.$atom);
         $a = new Atom($atom);
         $this->atoms[$a->id] = $a;
         
@@ -4490,6 +4494,7 @@ class Load extends Tasks {
     }
 
     private function addLink($origin, $destination, $label) {
+        assert(in_array($label, array_merge(Token::$LINKS, Token::$LINKS_EXAKAT)), 'Undefined link '.$label);
         if (!($destination instanceof Atom)) {
             print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
         }
