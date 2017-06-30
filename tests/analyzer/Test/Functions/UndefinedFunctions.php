@@ -8,11 +8,13 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_UndefinedFunctions extends Analyzer {
-    /* 4 methods */
+    /* 6 methods */
 
     public function testFunctions_UndefinedFunctions01()  { $this->generic_test('Functions_UndefinedFunctions.01'); }
     public function testFunctions_UndefinedFunctions02()  { $this->generic_test('Functions/UndefinedFunctions.02'); }
     public function testFunctions_UndefinedFunctions03()  { $this->generic_test('Functions/UndefinedFunctions.03'); }
     public function testFunctions_UndefinedFunctions04()  { $this->generic_test('Functions/UndefinedFunctions.04'); }
+    public function testFunctions_UndefinedFunctions05()  { $this->generic_test('Functions/UndefinedFunctions.05'); }
+    public function testFunctions_UndefinedFunctions06()  { $this->generic_test('Functions/UndefinedFunctions.06'); }
 }
 ?>
