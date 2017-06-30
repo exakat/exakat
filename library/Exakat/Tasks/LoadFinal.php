@@ -41,7 +41,7 @@ class LoadFinal extends Tasks {
         $this->linksIn = Token::linksAsList();
 
         $this->logTime('Start');
-        display('Start load final');return;
+        display('Start load final');
 
         $this->init();
 
@@ -108,7 +108,7 @@ GREMLIN;
         $functions = array_map('strtolower', $functions);
 
         // This weird trick for janusgraph...
-        $functions = array_slice($functions, 0, 14300);
+        $functions = array_values($functions);
         
         $query = <<<GREMLIN
 g.V().hasLabel("Functioncall")

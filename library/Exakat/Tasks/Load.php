@@ -539,7 +539,6 @@ class Load extends Tasks {
         static::$client->finalize();
         $this->datastore->addRow('hash', array('status' => 'Load'));
 
-        $this->logTime('LoadFinal');
         $loadFinal = new LoadFinal($this->gremlin, $this->config, self::IS_SUBTASK);
         $this->logTime('LoadFinal new');
         $loadFinal->run();
