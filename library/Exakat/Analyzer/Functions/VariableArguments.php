@@ -28,15 +28,15 @@ use Exakat\Analyzer\Analyzer;
 class VariableArguments extends Analyzer {
     public function analyze() {
         // Using function_get_args
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('BLOCK')
-             ->atomInside('Functioncall')
+             ->atomInsideNoDefinition('Functioncall')
              ->functioncallIs(array('\\func_get_arg', '\\func_get_args', '\\func_num_args'))
              ->back('first');
         $this->prepareQuery();
         
         // Using function_get_args
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('VARIABLE')
