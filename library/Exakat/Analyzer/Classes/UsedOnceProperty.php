@@ -28,6 +28,7 @@ class UsedOnceProperty extends Analyzer {
     public function analyze() {
         $this->atomIs('Ppp')
              ->hasClass()
+             ->hasNoOut('PUBLIC')
              ->outIs('PPP')
              ->_as('results')
              ->savePropertyAs('propertyname', 'name')

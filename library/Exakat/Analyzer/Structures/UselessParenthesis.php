@@ -91,7 +91,8 @@ class UselessParenthesis extends Analyzer {
         $this->atomIs('Functioncall')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-             ->atomIs('Parenthesis');
+             ->atomIs('Parenthesis')
+             ->back('first');
         $this->prepareQuery();
         
         // (expression);
@@ -104,7 +105,8 @@ class UselessParenthesis extends Analyzer {
              ->outIs('CODE')
              ->atomIs(array('Integer', 'Real', 'Boolean', 'Identifier', 'Variable',
                             'Magicconstant', 'Null', 'Functioncall', 'Member', 'Methodcall',
-                            'Staticmethodcall', 'Staticconstant', 'Staticproperty'));
+                            'Staticmethodcall', 'Staticconstant', 'Staticproperty'))
+             ->back('first');
         $this->prepareQuery();
 
         //$d = ((($a)+$b)+$c);
@@ -112,7 +114,8 @@ class UselessParenthesis extends Analyzer {
              ->inIs('CODE')
              ->atomIs('Parenthesis')
              ->inIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Addition');
+             ->atomIs('Addition')
+             ->back('first');
         $this->prepareQuery();
 
         //$d = ((($a)*$b)*$c);
@@ -120,7 +123,8 @@ class UselessParenthesis extends Analyzer {
              ->inIs('CODE')
              ->atomIs('Parenthesis')
              ->inIs(array('LEFT', 'RIGHT'))
-             ->atomIs('Multiplication');
+             ->atomIs('Multiplication')
+             ->back('first');
         $this->prepareQuery();
 
         //function foo($c = (PHP_OS == 1 ? 1 : 2) ){}
@@ -128,7 +132,8 @@ class UselessParenthesis extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
-             ->atomIs('Parenthesis');
+             ->atomIs('Parenthesis')
+             ->back('first');
         $this->prepareQuery();
         
     }
