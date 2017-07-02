@@ -343,6 +343,7 @@ GREMLIN;
             if (isset($res[0])) {
                 $res = $res[0];
             }
+
             if (isset($res->id)) {
                 $this->analyzerId = $res->id;
 
@@ -351,13 +352,13 @@ GREMLIN;
                 $res = $this->query($query);
             } else {
                 // Creating analysis vertex
-                $query = "g.addV('Analysis').property('analyzer','{$this->analyzerQuoted}')";
+                $query = 'g.addV("Analysis").property("analyzer", "'.$this->analyzerQuoted.'")';
                 $res = $this->query($query);
             
                 if (!isset($res[0])) {
                     throw new GremlinException();
                 }
-
+                
                 $this->analyzerId = $res[0]->id;
             }
         } else {
@@ -435,7 +436,7 @@ GREMLIN;
             return array();
         }
         
-        return $result->results;
+        return (array) $result->results;
     }
 
     public function queryHash($queryString, $arguments = null) {
@@ -598,6 +599,14 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     public function atomInsideNoAnonymous($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $this->addMethod($gremlin);
+        
+        return $this;
+    }
+
+    public function atomInsideNoDefinition($atom) {
+        assert($this->assertAtom($atom));
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
@@ -1936,7 +1945,7 @@ GREMLIN;
     private function assertAtom($atom) {
         if (is_string($atom)) {
             assert($atom !== 'Property', 'Property is no more');
-            assert($atom === ucfirst(mb_strtolower($atom)), 'Wrong format for atom name : '.$atom);
+            assert($atom === ucfirst(mb_strtolower($atom)), 'Wrong format for atom name : "'.$atom.'"');
         } else {
             foreach($atom as $a) {
                 assert($a !== 'Property', 'Property is no more');
