@@ -182,7 +182,7 @@ GREMLIN;
             // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT") ) )
+     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION") ) )
      .has("token", without("T_CONST", "T_FUNCTION"))
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')
@@ -205,8 +205,12 @@ GREMLIN;
             if (!empty($constantsDefine)) {
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .not( where( __.in("NAME", "DEFINITION") ) )
+     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); name in arg1 }
+     .sideEffect{
+        fullnspath = "\\\\" + it.get().value("code").toLowerCase();
+        it.get().property("fullnspath", fullnspath); 
+     }
      .addE('DEFINITION')
      .from( 
         g.V().hasLabel("Functioncall")
@@ -215,11 +219,7 @@ g.V().hasLabel("Identifier", "Nsname")
              .has("fullnspath", "\\\\define")
              .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
-         )
-         .sideEffect{
-            fullnspath = "\\\\" + it.get().value("code").toLowerCase();
-             it.get().property("fullnspath", fullnspath); 
-         }.count()
+      ).count()
 
 GREMLIN;
                 $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
