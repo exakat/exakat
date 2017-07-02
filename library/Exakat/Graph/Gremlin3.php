@@ -351,7 +351,7 @@ GREMLIN;
                 }
             }
 
-            echo exec('cd '.$this->config->neo4j_folder.'; ./bin/neo4j start >/dev/null 2>&1 & ');
+            exec('cd '.$this->config->neo4j_folder.'; ./bin/neo4j start >/dev/null 2>&1 & ');
 
             // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
             // Needs to pick up this error and act
