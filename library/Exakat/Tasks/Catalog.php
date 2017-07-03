@@ -48,8 +48,6 @@ class Catalog extends Tasks {
 
         if ($this->config->json === true) {
             print json_encode($data);
-        } elseif ($this->config->json === true) {
-            return $data;
         } else {
             $display = '';
 
