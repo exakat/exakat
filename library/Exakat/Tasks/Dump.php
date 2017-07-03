@@ -527,8 +527,6 @@ GREMLIN
                     continue;
                 }
                 
-                print_r($row);
-
                 foreach($row->uses as $uses) {
                     if (isset($citId[$uses])) {
                         $query[] = "(null, ".$citId[$row->fullnspath].", $citId[$uses], 'use')";
