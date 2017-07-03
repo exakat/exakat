@@ -351,7 +351,7 @@ class Ambassador extends Reports {
                  </div>
 ';
                 if ($value > 0) {
-                    $values[] = '{label:"'.$key.'", value:'.$value.'}';
+                    $values[] = '{label:"'.$key.'", value:'.( (int) $value).'}';
                 }
                 $total += $value;
             }
@@ -1178,8 +1178,9 @@ JAVASCRIPT;
             $query = "SELECT sum(count) FROM resultsCounts WHERE analyzer $list AND count > 0";
             $total = $this->sqlite->querySingle($query);
 
-            $data[] = array('label' => $key, 'value' => $total);
+            $data[] = array('label' => $key, 'value' => (int) $total);
         }
+
         // ordonné DESC par valeur
         uasort($data, function ($a, $b) {
             if ($a['value'] > $b['value']) {
@@ -1191,15 +1192,17 @@ JAVASCRIPT;
             }
         });
         $issuesHtml = '';
-        $dataScript = '';
+        $dataScript = array();
 
         foreach ($data as $key => $value) {
             $issuesHtml .= '<div class="clearfix">
                    <div class="block-cell">'.$value['label'].'</div>
                    <div class="block-cell text-center">'.$value['value'].'</div>
                  </div>';
-            $dataScript .= $dataScript ? ', {label: "'.$value['label'].'", value: '.$value['value'].'}' : '{label: "'.$value['label'].'", value: '.$value['value'].'}';
+            $dataScript[] = '{label: "'.$value['label'].'", value: '.( (int) $value['value']).'}';
         }
+        $dataScript = join(', ', $dataScript);
+        
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
             $issuesHtml .= '<div class="clearfix">
@@ -1214,6 +1217,7 @@ JAVASCRIPT;
 
     public function getSeverityBreakdown() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
+        $list = array_slice($list, 0, 5);
         $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
@@ -1224,6 +1228,7 @@ JAVASCRIPT;
                     ORDER BY number DESC
 SQL;
         $result = $this->sqlite->query($query);
+
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $data[] = array('label' => $row['severity'],
@@ -1231,14 +1236,16 @@ SQL;
         }
 
         $html = '';
-        $dataScript = '';
+        $dataScript = array();
         foreach ($data as $key => $value) {
             $html .= '<div class="clearfix">
                    <div class="block-cell">'.$value['label'].'</div>
                    <div class="block-cell text-center">'.$value['value'].'</div>
                  </div>';
-            $dataScript .= $dataScript ? ', {label: "'.$value['label'].'", value: '.$value['value'].'}' : '{label: "'.$value['label'].'", value: '.$value['value'].'}';
+            $dataScript[] = '{label: "'.$value['label'].'", value: '.( (int) $value['value']).'}';
         }
+        $dataScript = join(', ', $dataScript);
+
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
             $html .= '<div class="clearfix">
@@ -2241,7 +2248,7 @@ HTML;
                          'protected' => 2,
                          'private'   => 3,
                          'constant'  => 4);
-                         
+
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             if ($theClass != $row['theClass']) {
                 $visibilityTable .= '<tr><td colspan="7">'.$row['theClass']."</td></tr>\n";
@@ -2444,13 +2451,27 @@ JAVASCRIPT;
         $data->prepare();
         
         $list = array();
+        $originals = $data->originals();
         foreach($data->values() as $section => $points) {
             $listPoint = array();
             foreach($points as $point => $status) {
-                $listPoint[] = '<li>'.$this->makeIcon($status).'&nbsp;'.$point.'</li>';
+                
+                if (isset($originals[$section][$point]) && isset($this->frequences[$originals[$section][$point]])) {
+                    $percentage = $this->frequences[$originals[$section][$point]];
+                    $percentageDisplay = $percentage;
+                } else {
+                    $percentage = 0;
+                    $percentageDisplay = 'N/A';
+                }
+                
+                $statusIcon = $this->makeIcon($status);
+                $htmlPoint = $this->toHtmlEncoding($point);
+                $listPoint[] = <<<HTML
+<li><div style="width: 90%; text-align: left;display: inline-block;">$statusIcon&nbsp;$htmlPoint&nbsp;</div><div style="display: inline-block; width: 10%;"><span class="progress progress-sm"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: $percentage%; color:black;">$percentageDisplay %</div><div>&nbsp;</div></span></li>
+HTML;
             }
 
-            $listPoint = implode("\n", $listPoint);
+            $listPoint = implode(PHP_EOL, $listPoint);
             $list[] = <<<HTML
         <ul class="sidebar-menu">
           <li class="treeview">

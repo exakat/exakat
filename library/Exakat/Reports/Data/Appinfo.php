@@ -359,7 +359,11 @@ class Appinfo extends Data {
                             'Zend Framework'       => 'ZendF/ZendClasses',
                     )
                 );
-        
+
+        public function originals() {
+            return $this->extensions;
+        }
+
         public function prepare() {
             // collecting information for Extensions
             $themed = Analyzer::getThemeAnalyzers('Appinfo');
