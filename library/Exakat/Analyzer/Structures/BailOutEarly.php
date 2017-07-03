@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class BailOutEarly extends Analyzer {
     public function analyze() {
-        $bailout = array('Return', 'Continue', 'Break', 'Throw');
+        $bailout = array('Return', 'Continue', 'Break', 'Throw', 'Goto');
 
         // if ($a) { return; } else { not return; }
         $this->atomIs('Ifthen')
