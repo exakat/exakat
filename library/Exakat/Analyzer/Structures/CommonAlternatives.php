@@ -30,6 +30,7 @@ class CommonAlternatives extends Analyzer {
              ->outIs('THEN')
              ->atomIs('Sequence')
              ->outIs('EXPRESSION')
+             ->atomIsNot(array('For', 'Foreach', 'Ifthen', 'Dowhile', 'While', 'Switch'))
              ->_as('results')
              ->savePropertyAs('fullcode', 'expression')
              ->inIs('EXPRESSION')
@@ -37,6 +38,7 @@ class CommonAlternatives extends Analyzer {
              ->outIs('ELSE')
              ->atomIs('Sequence')
              ->outIs('EXPRESSION')
+             ->atomIsNot(array('For', 'Foreach', 'Ifthen', 'Dowhile', 'While', 'Switch'))
              ->samePropertyAs('fullcode', 'expression')
              ->back('results');
         $this->prepareQuery();
