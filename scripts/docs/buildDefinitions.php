@@ -57,7 +57,7 @@ $library_list = implode("\n", $library_list);
 // reports
 /////////////////////////
 $reports_list = array();
-include(__DIR__.'/../../library/Exakat/Reports/Reports.php');
+include __DIR__.'/../../library/Exakat/Reports/Reports.php' ;
 $reports_list = \Exakat\Reports\Reports::$FORMATS;
 $reports_list = '  * '.implode("\n  * ", $reports_list)."\n";
 

@@ -402,7 +402,7 @@ GREMLIN;
         // version range 1.2.3-4.5.6
         if (strpos($this->phpVersion, '-') !== false) {
             list($lower, $upper) = explode('-', $this->phpVersion);
-            return (version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0);
+            return version_compare($version, $lower) >= 0 && version_compare($version, $upper) <= 0;
         }
         
         // One version only
@@ -1811,7 +1811,7 @@ GREMLIN;
     }
 
     public function hasResults() {
-        return ($this->rowCount > 0);
+        return $this->rowCount > 0;
     }
 
     public function getSeverity() {
