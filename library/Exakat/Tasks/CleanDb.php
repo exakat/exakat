@@ -34,7 +34,7 @@ class CleanDb extends Tasks {
     public function run() {
         if ($this->config->quick) {
             $this->gremlin->cleanWithRestart();
-        $this->cleanTmpDir();
+            $this->cleanTmpDir();
             return ;
         }
 

@@ -47,22 +47,22 @@ class Initproject extends Tasks {
         $repositoryURL = $this->config->repository;
 
         if ($this->config->delete === true) {
-            display( "Deleting $project\n");
+            display('Deleting $project');
 
             // final wait..., just in case
             sleep(2);
 
             rmdirRecursive($this->config->projects_root.'/projects/'.$project);
         } elseif ($this->config->update === true) {
-            display( "Updating $project\n");
+            display('Updating $project');
 
             shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code/; git pull');
         } else {
-            display( "Initializing $project with '$repositoryURL'\n");
+            display('Initializing $project with '$repositoryURL'');
             $this->init_project($project, $repositoryURL);
         }
 
-        display( "Done\n");
+        display('Done');
     }
 
     private function init_project($project, $repositoryURL) {
@@ -328,7 +328,7 @@ INI;
                         var_dump(trim(substr($res, $offset + 7)));
                         $res = str_replace($repositoryNormalizedURL, $repositoryURL, $res);
                         $res = trim(substr($res, $offset + 7));
-                        display( "An error prevented code initialization : ".$res."\nNo code was loaded.\n");
+                        display('An error prevented code initialization : '.$res.PHP_EOL.'No code was loaded.');
 
                         $skipFiles = true;
                     }
@@ -338,14 +338,14 @@ INI;
                     display('No Initialization');
             }
         } elseif (file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
-            display( "Code folder is already there. Leaving it intact.\n");
+            display('Code folder is already there. Leaving it intact.');
         }
 
-        display( "Counting files\n");
+        display('Counting files');
         $this->datastore->addRow('hash', array('status' => 'Initproject'));
 
         if (!$skipFiles) {
-            display("Running files\n");
+            display('Running files');
             $analyze = new Files($this->gremlin, $this->config);
             $analyze->run();
             unset($analyze);

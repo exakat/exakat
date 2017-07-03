@@ -68,7 +68,7 @@ class Report2 extends Tasks {
         $res = $dump->query($ProjectDumpSql);
         $row = $res->fetchArray(\SQLITE3_NUM);
 
-        display( 'Building report for project '.$this->config->project.' in file "'.$this->config->file.'", with format '.$this->config->format."\n");
+        display('Building report for project '.$this->config->project.' in file "'.$this->config->file.'", with format '.$this->config->format."\n");
         $begin = microtime(true);
 
         // Choose format from options
@@ -79,12 +79,12 @@ class Report2 extends Tasks {
         } else {
             $report->generate( $this->config->projects_root.'/projects/'.$this->config->project, $this->config->file);
         }
-        display("Reported ".$report->getCount()." messages in {$this->config->format}\n");
+        display('Reported '.$report->getCount().' messages in '.$this->config->format);
         $end = microtime(true);
 
-        display( "Processing time : ".number_format($end - $begin, 2)." s\n");
+        display('Processing time : '.number_format($end - $begin, 2).'s');
         $this->datastore->addRow('hash', array($this->config->format => $this->config->file));
-        display( "Done\n");
+        display('Done');
     }
 }
 

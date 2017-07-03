@@ -63,16 +63,16 @@ class OnePage extends Tasks {
                                                'exakat_build'   => Exakat::BUILD,
                                                ));
 
-        display("Cleaning DB\n");
+        display('Cleaning DB');
         $task = new CleanDb($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
 
-        display("Running project 'onepage'\n");
+        display('Running project "onepage"');
 
         $task = new Load($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
 
-        display("Project loaded\n");
+        display('Project loaded');
         $this->logTime('Loading');
 
         $task = new Analyze($this->gremlin, $this->config, Tasks::IS_SUBTASK);
@@ -81,16 +81,16 @@ class OnePage extends Tasks {
         rename($this->config->projects_root.'/projects/onepage/log/analyze.log',
                $this->config->projects_root.'/projects/onepage/log/analyze.onepage.log');
 
-        display("Project analyzed\n");
+        display('Project analyzed');
         $this->logTime('Analyze');
 
         $task = new Dump($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
-        display("Project dumped\n");
+        display('Project dumped');
 
         $task = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
         $task->run();
-        display("Project reported\n");
+        display('Project reported');
         $this->logTime('Report');
 
         $audit_end = time();
@@ -98,7 +98,7 @@ class OnePage extends Tasks {
                                                'audit_length' => $audit_end - $audit_start));
 
         $this->logTime('Final');
-        display("End 2\n");
+        display('End 2');
         $end = microtime(true);
     }
 
