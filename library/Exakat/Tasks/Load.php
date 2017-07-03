@@ -2177,6 +2177,7 @@ class Load extends Tasks {
             $identifier = $this->processSingle('Identifier');
             list($fullnspath, $aliased) = $this->getFullnspath($identifier, 'class');
             $identifier->fullnspath = $fullnspath;
+            $this->addCall('class', $fullnspath, $identifier);
             
             return $identifier;
         } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_OPEN_PARENTHESIS) {
