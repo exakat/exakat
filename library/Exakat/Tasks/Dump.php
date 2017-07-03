@@ -410,12 +410,10 @@ GREMLIN
         $query = <<<GREMLIN
 g.V().hasLabel("Interface")
 .sideEffect{ extendList = ''; }.where(__.out("EXTENDS").sideEffect{ extendList = it.get().value("fullnspath"); }.fold() )
-.sideEffect{ implementList = []; }.where(__.out("IMPLEMENTS").sideEffect{ implementList.push( it.get().value("fullnspath"));}.fold() )
 .map{ 
         ['fullnspath':it.get().value("fullnspath"),
          'name': it.get().vertices(OUT, "NAME").next().value("code"),
          'extends':extendList,
-         'implements':implementList,
          'type':'interface',
          'abstract':0,
          'final':0
@@ -473,6 +471,7 @@ GREMLIN
                 $namespaceId = 1;
             }
             
+            $row->implements = array(); // always empty
             $cit[] = $row;
             $citId[$row->fullnspath] = ++$citCount;
 
@@ -498,7 +497,7 @@ GREMLIN
             }
 
             if (!empty($query)) {
-                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends") VALUES '.join(', ', $query);
+                $query = 'INSERT OR IGNORE INTO cit ("id", "name", "namespaceId", "abstract", "final", "type", "extends") VALUES '.join(", \n", $query);
                 $this->sqlite->query($query);
             }
 
@@ -527,6 +526,8 @@ GREMLIN
                 if (empty($row->uses)) {
                     continue;
                 }
+                
+                print_r($row);
 
                 foreach($row->uses as $uses) {
                     if (isset($citId[$uses])) {
@@ -580,7 +581,7 @@ GREMLIN
         
         $query = <<<GREMLIN
 g.V().hasLabel("Method").as('method')
-     .in("METHOD").hasLabel("Class", "Interface", "Trait").out('NAME').sideEffect{classe = it.get().value('code'); }
+     .in("METHOD").hasLabel("Class", "Interface", "Trait").sideEffect{classe = it.get().value('fullnspath'); }
      .select('method')
 .map{ 
     x = ['name': it.get().value("fullcode"),
@@ -640,11 +641,9 @@ GREMLIN
                                                  )');
 
         $query = <<<GREMLIN
-
-g.V().hasLabel("Ppp")
-.sideEffect{ classe = ''; }.where(__.in("EXPRESSION").in("BLOCK").hasLabel("Class", "Interface")
-                                    .sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
-.filter{ classe != '';} // Removes functions, keeps methods
+g.V().hasLabel("Class", "Interface", "Trait")
+     .sideEffect{classe = it.get().value('fullnspath'); }
+     .out('PPP') // Out of the CIT
 .sideEffect{ 
     x = ['static':it.get().vertices(OUT, "STATIC").any(),
 
@@ -655,18 +654,18 @@ g.V().hasLabel("Ppp")
          
          'class': classe];
 }
-.out('PPP')
+.out('PPP') // out to the details
 .map{ 
     if (it.get().label() == 'Propertydefinition') { 
         name = it.get().value("code");
         v = ''; 
     } else { 
-        name = it.get().vertices(OUT, 'LEFT').next().value("code");
-        v = it.get().vertices(OUT, 'RIGHT').next().value("fullcode");
+        name = it.get().vertices(OUT, "LEFT").next().value("code");
+        v = it.get().vertices(OUT, "RIGHT").next().value("fullcode");
     }
 
-    x['name'] = name;
-    x['value'] = v;
+    x["name"] = name;
+    x["value"] = v;
     x;
 }
 
@@ -715,10 +714,10 @@ GREMLIN
                                                  )');
 
         $query = <<<GREMLIN
-g.V().hasLabel("Const")
-.sideEffect{ classe = ''; }.where(__.in("EXPRESSION").in("BLOCK").hasLabel("Class", "Interface").sideEffect{ classe = it.get().value("fullnspath"); }.fold() )
-.filter{ classe != '';} // Removes functions, keeps methods
-.out('CONST')
+g.V().hasLabel("Class", "Interface", "Trait")
+     .sideEffect{classe = it.get().value('fullnspath'); }
+     .out('CONST')
+     .out('CONST')
 .map{ 
     x = ['name': it.get().vertices(OUT, 'NAME').next().value("code"),
          'value': it.get().vertices(OUT, 'VALUE').next().value("fullcode"),
