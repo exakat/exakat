@@ -30,13 +30,13 @@ class ConstantScalarExpression extends Analyzer {
     
     public function analyze() {
         $validAtoms = self::$LITERALS;
+//        $validAtoms[] = 'Arrayliteral';
 
         // const x = 1 + 2;
         $this->atomIs('Const')
              ->outIs('CONST')
              ->outIs('VALUE')
              ->atomIsNot($validAtoms)
-             ->tokenIsNot(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();
 
@@ -46,7 +46,6 @@ class ConstantScalarExpression extends Analyzer {
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->atomIsNot($validAtoms)
-             ->tokenIsNot(array('T_ARRAY', 'T_OPEN_BRACKET'))
              ->back('first');
         $this->prepareQuery();
     }
