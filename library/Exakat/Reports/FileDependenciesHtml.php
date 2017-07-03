@@ -22,8 +22,8 @@
 
 namespace Exakat\Reports;
 
-use \Exakat\Graph\Gremlin3;
-use \Exakat\Config;
+use Exakat\Graph\Gremlin3;
+use Exakat\Config;
 use stdClass;
 
 class FileDependenciesHtml extends Reports {
