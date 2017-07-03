@@ -1666,7 +1666,7 @@ GREMLIN
                 } elseif (is_int($value)) {
                     $query = str_replace($name, $value, $query);
                 } else {
-                    assert(false, 'Cannot process argument of type '.gettype($value)."".PHP_EOL.__METHOD__."".PHP_EOL);
+                    assert(false, 'Cannot process argument of type '.gettype($value).PHP_EOL.__METHOD__.PHP_EOL);
                 }
             }
             

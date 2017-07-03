@@ -73,7 +73,7 @@ class Inventories extends Reports {
     }
 
     private function saveAtom($atom, $file) {
-        $res = $this->sqlite->query('SELECT name, file, line FROM literal'.$atom.'');
+        $res = $this->sqlite->query('SELECT name, file, line FROM literal'.$atom);
         $fp = fopen($file, 'w+');
         fputcsv($fp, array('Name', 'File', 'Line'));
         $step = 0;
