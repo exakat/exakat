@@ -22,7 +22,6 @@
 
 namespace Exakat\Tasks;
 
-use Exakat\Exceptions\NoConstFile;
 use Exakat\Exceptions\NoPrecedence;
 use Exakat\Phpexec;
 
@@ -173,7 +172,7 @@ class Precedence {
             foreach($this->precedence as $k1 => $p1) {
                 $cache[$k1] = array();
                 foreach($this->precedence as $k2 => $p2) {
-                    if ($p1 <= $p2 && ($itself === true || $k1 !== $k2) ) {// && (!in_array($token, [T_COALESCE]) || $token !== $k2)
+                    if ($p1 <= $p2 && ($itself === true || $k1 !== $k2) ) {
                         $cache[$k1][] = $k2;
                     }
                 }
