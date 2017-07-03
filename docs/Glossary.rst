@@ -126,6 +126,7 @@ Glossary
       + :ref:`Missing Cases In Switch <missing-cases-in-switch>`
       + :ref:`Multiples Identical Case <multiples-identical-case>`
       + :ref:`No Need For Else <no-need-for-else>`
+      + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
@@ -158,6 +159,7 @@ Glossary
       + :ref:`Bail Out Early <bail-out-early>`
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`No Need For Else <no-need-for-else>`
+      + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Unreachable Code <unreachable-code>`
 
     + `count()`

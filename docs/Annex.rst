@@ -64,6 +64,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Text
   * Xml
   * Uml
+  * PlantUml
   * None
   * PhpConfiguration
   * PhpCompilation
@@ -296,12 +297,17 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.12.1
+
+  * Const Or Define (Structures/ConstDefineFavorite)
+  * No Return Or Throw In Finally (Structures/NoReturnInFinally ; Security)
+
 * 0.12.0
 
   * Avoid Optional Properties (Classes/AvoidOptionalProperties)
   * Heredoc Delimiter (Structures/HeredocDelimiterFavorite ; Coding Conventions)
   * Multiple Functions Declarations (Functions/MultipleDeclarations ; Appinfo)
-  * Non Breakable Space In Names (Structures/NonBreakableSpaceInNames ; Appcontent)
+  * Non Breakable Space In Names (Structures/NonBreakableSpaceInNames ; Appinfo, Appcontent)
   * ext/swoole (Extensions/Extswoole ; Appinfo)
 
 * 0.11.8
@@ -325,7 +331,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Concatenation Interpolation Consistence (Structures/ConcatenationInterpolationFavorite ; Preferences)
   * Could Make A Function (Functions/CouldCentralize ; Analyze, Suggestions)
-  * Courrier Anti-Pattern (Patterns/CourrierAntiPattern ; Appcontent, Dismell)
+  * Courrier Anti-Pattern (Patterns/CourrierAntiPattern ; Appinfo, Appcontent, Dismell)
   * DI Cyclic Dependencies (Classes/TypehintCyclicDependencies ; Dismell)
   * Dependency Injection (Patterns/DependencyInjection ; Appinfo)
   * PSR-13 Usage (Psr/Psr13Usage ; Appinfo)
@@ -600,8 +606,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * CakePHP Used (Cakephp/CakePHPUsed ; Appinfo, Cakephp)
   * Check All Types (Structures/CheckAllTypes ; Analyze)
   * Do Not Cast To Int (Php/NoCastToInt ; )
-  * Manipulates INF (Php/IsINF ; )
-  * Manipulates NaN (Php/IsNAN ; )
+  * Manipulates INF (Php/IsINF ; Appinfo)
+  * Manipulates NaN (Php/IsNAN ; Appinfo)
   * Set Cookie Safe Arguments (Security/SetCookieArgs ; Security)
   * Should Use SetCookie() (Php/UseSetCookie ; Analyze)
   * Use Cookies (Php/UseCookies ; Appinfo, Appcontent)
@@ -1035,7 +1041,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Join file() (Performances/JoinFile ; Performances)
   * Labels (Php/Labelnames ; Appinfo)
   * Linux Only Files (Portability/LinuxOnlyFiles ; Portability)
-  * List Short Syntax (Php/ListShortSyntax ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, Internal, CompatibilityPHP53, CompatibilityPHP70)
+  * List Short Syntax (Php/ListShortSyntax ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, Internal, CompatibilityPHP53, CompatibilityPHP70)
   * List With Appends (Php/ListWithAppends ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
   * List With Keys (Php/ListWithKeys ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, Appcontent, CompatibilityPHP53, CompatibilityPHP70)
   * Locally Unused Property (Classes/LocallyUnusedProperty ; Analyze, Dead code, Codacy, Simple)
@@ -1304,7 +1310,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Use Constant As Arguments (Functions/UseConstantAsArguments ; Analyze, Codacy, Simple)
   * Use Instanceof (Classes/UseInstanceof ; Analyze, Codacy, Simple)
   * Use Lower Case For Parent, Static And Self (Php/CaseForPSS ; CompatibilityPHP54, CompatibilityPHP53, Codacy)
-  * Use Nullable Type (Php/UseNullableType ; CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
+  * Use Nullable Type (Php/UseNullableType ; Appinfo, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Use Object Api (Php/UseObjectApi ; Analyze, ClearPHP, Codacy, Simple)
   * Use Pathinfo (Php/UsePathinfo ; Analyze, Codacy, Simple)
   * Use System Tmp (Structures/UseSystemTmp ; Analyze, Codacy, Simple)
@@ -1633,6 +1639,7 @@ List of external links mentionned in this documentation.
 * `extension FANN <http://php.net/manual/en/book.fann.php>`_
 * `Ez <https://ez.no/>`_
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
@@ -1673,8 +1680,10 @@ List of external links mentionned in this documentation.
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
 * `Ncurses Terminal Screen Control <http://php.net/manual/en/book.ncurses.php>`_
 * `Neo4j <http://neo4j.com/>`_
+* `New features <http://php.net/manual/en/migration56.new-features.php>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
+* `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
 * `Packagist <https://packagist.org/>`_
@@ -1702,6 +1711,7 @@ List of external links mentionned in this documentation.
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_
 * `Regular Expressions (Perl-Compatible) <http://php.net/manual/en/book.pcre.php>`_
+* `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_
 * `RFC 7159 <http://www.faqs.org/rfcs/rfc7159>`_
 * `RFC 7230 <https://tools.ietf.org/html/rfc7230>`_
 * `RFC 959 <http://www.faqs.org/rfcs/rfc959>`_
@@ -1720,6 +1730,7 @@ List of external links mentionned in this documentation.
 * `Sphinx Client <http://php.net/manual/en/book.sphinx.php>`_
 * `sqlite3 <http://www.php.net/sqlite3>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
+* `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `svn <https://subversion.apache.org/>`_
 * `Swoole <https://github.com/swoole/swoole-src>`_
@@ -1745,7 +1756,9 @@ List of external links mentionned in this documentation.
 * `xcache <https://xcache.lighttpd.net/>`_
 * `Xdebug <https://xdebug.org/>`_
 * `XML Parser <http://www.php.net/manual/en/book.xml.php>`_
+* `XML-RPC <http://www.php.net/manual/en/book.xmlrpc.php>`_
 * `xmlreader <http://www.php.net/manual/en/book.xmlreader.php>`_
+* `XMLWriter <http://php.net/manual/en/book.xmlwriter.php>`_
 * `XSL extension <http://php.net/manual/en/intro.xsl.php>`_
 * `YAML Ain't Markup Language <http://www.yaml.org/>`_
 * `Yii <http://www.yiiframework.com/>`_
@@ -1804,6 +1817,7 @@ List of external links mentionned in this documentation.
 * `zend-test <https://github.com/zendframework/zend-test>`_
 * `zend-text <https://github.com/zendframework/zend-text>`_
 * `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_
+* `Zip <http://php.net/manual/en/book.zip.php>`_
 * `Zlib <http://php.net/manual/en/book.zlib.php>`_
 
 

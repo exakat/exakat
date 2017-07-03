@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 27 Jun 2017 10:24:50 +0000
-.. comment: Generation hash : 7410c4c48e6e63eb38245fe1479bf53d3dee4328
+.. comment: Generation date : Mon, 03 Jul 2017 16:40:56 +0000
+.. comment: Generation hash : 8e5bfefecde91083cc1fbcf7dbcb1c29eb53b8f0
 
 
 .. _analyze:
@@ -944,7 +944,7 @@ Total : 24 analysis
 Security
 ++++++++
 
-Total : 22 analysis
+Total : 23 analysis
 
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
@@ -957,6 +957,7 @@ Total : 22 analysis
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
+* :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
 * :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe CurlOptions <safe-curloptions>`

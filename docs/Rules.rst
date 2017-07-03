@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 27 Jun 2017 10:24:50 +0000
-.. comment: Generation hash : 7410c4c48e6e63eb38245fe1479bf53d3dee4328
+.. comment: Generation date : Mon, 03 Jul 2017 16:40:56 +0000
+.. comment: Generation hash : 8e5bfefecde91083cc1fbcf7dbcb1c29eb53b8f0
 
 
 .. _$http\_raw\_post\_data:
@@ -413,7 +413,7 @@ Adding Zero
 ###########
 
 
-Adding 0 is useless, as 0 is the neutral element for addition. It may trigger a cast (to integer), though behavior changes from PHP 7.0 to PHP 7.1. 
+Adding 0 is useless, as 0 is the neutral element for addition. It triggers a cast to integer, though behavior changes from PHP 7.0 to PHP 7.1. 
 
 .. code-block:: php
 
@@ -425,6 +425,9 @@ Adding 0 is useless, as 0 is the neutral element for addition. It may trigger a 
    // Also works with minus
    $b = 0 - $c; // drop the 0, but keep the minus
    $b = $c - 0; // drop the 0 and the minus
+   
+   $a += 0;
+   $a -= 0;
    
    ?>
 
@@ -1245,12 +1248,12 @@ Bail Out Early
 ##############
 
 
-When using conditions, it is recommended to return in the then, and avoid else clause. 
+When using conditions, it is recommended to quit in the current context, and avoid else clause altoghter. 
 
 The main benefit is to make clear the method applies a condition, and stop quickly went it is not satisfied. 
 The main sequence is then focused on the useful code. 
 
-This works with `'break <http://php.net/manual/en/control-structures.break.php>`_, `'continue <http://php.net/manual/en/control-structures.continue.php>`_ too, inside loops. 
+This works with the `'break <http://php.net/manual/en/control-structures.break.php>`_, `'continue <http://php.net/manual/en/control-structures.continue.php>`_, throw and goto keywords too, depending on situations.
 
 .. code-block:: php
 
@@ -7766,6 +7769,66 @@ Use precision formulas with `'abs() <http://www.php.net/abs>`_ to approximate va
 +--------------+-----------------------------------------------------------------------------------------------------+
 
 
+.. _no-return-or-throw-in-finally:
+
+No Return Or Throw In Finally
+#############################
+
+
+Avoid using return and throw in a finally block. Both command will interrupt the processing of the try catch block, and any exception that was emitted will not be processed. This leads to unprocessed exceptions, leaving the application in an unstable state.
+
+Note that PHP prevents the usage of goto, `'break <http://php.net/manual/en/control-structures.break.php>`_ and `'continue <http://php.net/manual/en/control-structures.continue.php>`_ within the finally block at linting phase. This is categorized as a Security problem.
+
+.. code-block:: php
+
+   <?php
+   function foo() {
+           try {
+               // Exception is thrown here 
+               throw new \Exception();
+           } catch (Exception $e) {
+               // This is executed AFTER finally
+               return 'Exception';
+           } finally {
+               // This is executed BEFORE catch
+               return 'Finally';
+           }
+       }
+   }
+   
+   // Displays 'Finally'. No exception
+   echo foo();
+   
+   function bar() {
+           try {
+               // Exception is thrown here 
+               throw new \Exception();
+           } catch (Exception $e) {
+               // Process the exception. 
+               return 'Exception';
+           } finally {
+               // clean the current situation
+               // Keep running the current function
+           }
+           return 'Finally';
+       }
+   }
+   
+   // Displays 'Exception', with processed Exception
+   echo bar();
+   
+   ?>
+
+
+See also `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_.
+
++--------------+------------------------------+
+| Command Line | Structures/NoReturnInFinally |
++--------------+------------------------------+
+| Analyzers    | :ref:`Security`              |
++--------------+------------------------------+
+
+
 .. _no-return-used:
 
 No Return Used
@@ -11642,7 +11705,7 @@ Strpos Comparison
 #################
 
 
-`'strpos() <http://www.php.net/strpos>`_ returns a string position, starting at 0, or false, in case of failure. 
+`'strpos() <http://www.php.net/strpos>`_, and several PHP native functions, returns a string position, starting at 0, or false, in case of failure. 
 
 .. code-block:: php
 
@@ -11670,7 +11733,8 @@ Strpos Comparison
 
 
 It is recommended to check the reslt of strpos with === or !==, so as to avoid confusing 0 and false. 
-This analyzer list all the `'strpos() <http://www.php.net/strpos>`_ function that are directly compared with == or !=.
+
+This analyzer list all the `'strpos() <http://www.php.net/strpos>`_-like functions that are directly compared with == or !=. preg_match(), when its first argument is a literal, is omitted : this function only returns NULL in case of regex error.
 
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Command Line | Structures/StrposCompare                                                                            |
@@ -14928,7 +14992,10 @@ Here the useless instructions that are spotted :
 
    <?php
    
-   // This is a typo, that PHP turns into a constant, then a string. 
+   // Concatenating with an empty string is useless.
+   $string = 'This part '.$is.' usefull but '.$not.'';
+   
+   // This is a typo, that PHP turns into a constant, then a string, then nothing.
    conitnue;
    
    // Empty string in a concatenation
