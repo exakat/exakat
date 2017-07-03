@@ -28,6 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class StrposCompare extends Analyzer {
     public function analyze() {
         $operator = $this->loadIni('php_may_return_boolean_or_zero.ini', 'functions');
+
+        $notPregMatchWithLiteral = 'not( where( __.has("fullnspath", "\\\\preg_match").out("ARGUMENTS").out("ARGUMENT").has("rank", 0).hasLabel("String").not( where( __.out("CONCAT")) ) ) )';
         $fullnspaths = $this->makeFullnspath($operator);
         
         // if (.. == strpos(..)) {}
@@ -37,7 +39,8 @@ class StrposCompare extends Analyzer {
              ->codeIs(array('==', '!='))
              ->outIs('LEFT')
              ->codeIs(array('0', "''", '""', 'null', 'false'))
-             ->back('first');
+             ->back('first')
+             ->raw($notPregMatchWithLiteral);
         $this->prepareQuery();
 
         // if (strpos(..) == ..) {}
@@ -47,14 +50,16 @@ class StrposCompare extends Analyzer {
              ->codeIs(array('==', '!='))
              ->outIs('RIGHT')
              ->codeIs(array('0', "''", '""', 'null', 'false'))
-             ->back('first');
+             ->back('first')
+             ->raw($notPregMatchWithLiteral);
         $this->prepareQuery();
 
         // if (strpos(..)) {}
         $this->atomFunctionIs($fullnspaths)
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
-             ->back('first');
+             ->back('first')
+             ->raw($notPregMatchWithLiteral);
         $this->prepareQuery();
 
         // if ($x = strpos(..)) {}
@@ -63,7 +68,8 @@ class StrposCompare extends Analyzer {
              ->atomIs('Assignation')
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
-             ->back('first');
+             ->back('first')
+             ->raw($notPregMatchWithLiteral);
         $this->prepareQuery();
 
         // if (($x = strpos(..)) == false) {}
@@ -80,7 +86,8 @@ class StrposCompare extends Analyzer {
              ->codeIs(array('==', '!='))
              ->inIs('CONDITION')
              ->atomIs(array('Ifthen', 'While', 'Dowhile'))
-             ->back('first');
+             ->back('first')
+             ->raw($notPregMatchWithLiteral);
         $this->prepareQuery();
     }
 }
