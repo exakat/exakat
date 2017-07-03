@@ -30,9 +30,11 @@ class Php73NewFunctions extends FunctionDefinition {
     protected $phpVersion = '7.3-';
     
     public function analyze() {
-        $this->functions = array(
-
-    );
+        $this->functions = array();
+    
+        if(empty($this->functions)) {
+            return;
+        }
         parent::analyze();
     }
 }
