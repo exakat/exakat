@@ -26,9 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Analyzer\Analyzer;
 use Exakat\Config;
 use Exakat\Exceptions\NoSuchAnalyzer;
-use Exakat\Exceptions\NeedsAnalyzer;
 use Exakat\Exceptions\NeedsAnalyzerThema;
-
 use Exakat\Reports\Reports;
 use Exakat\Tokenizer\Token;
 
