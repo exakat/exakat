@@ -1,4 +1,4 @@
-Version 0.12.1 (Yellow Toothed Elephant, Coming up)
+Version 0.12.2 (Samantabhadra, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,19 @@ Version 0.12.1 (Yellow Toothed Elephant, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.12.1 (Yellow Toothed Elephant, 2017-07-03)
++ Architecture
+    + Refactored structures extractions in dump
++ Report
+    + New report : PlantUML
+    + Ambassador : Appinfo now reports how popular is a feature
++ Analyzer
+    + New analysis : Const / Define() favorite for constants
+    + New analysis : do not return in finally
+    + Upgraded analysis : Add Zero was refactored
++ Tokenizer
+    + Prepared list of tokens and relations
 
 Version 0.12.0 (Manjusri, 2017-06-26)
 + Architecture
