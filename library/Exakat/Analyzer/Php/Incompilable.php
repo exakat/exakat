@@ -54,11 +54,36 @@ class Incompilable extends Analyzer {
         return $report;
     }
 
+    public function getDump() {
+        if ($this->hasResults()) {
+            return array();
+        }
+        
+        // Collect version from datastore
+        $r = Analyzer::$datastore->getHash('php_version');
+        $version = $r[0].$r[2];
+        $r = Analyzer::$datastore->getRow('compilation'.$version);
+        
+        foreach($r as $l) {
+            $l['fullcode']  = $l['error'];
+            $l['code']      = $l['error'];
+            $l['namespace'] = '';
+            $l['class']     = '';
+            $l['function']  = '';
+            
+            $report[] = (object) $l;
+        }
+        
+        return $report;
+    }
+
     public function hasResults() {
         foreach($this->config->other_php_versions as $version) {
             $r = Analyzer::$datastore->getRow('compilation'.$version);
             
-            if (count($r) > 0) { return true; }
+            if (count($r) > 0) { 
+                return true; 
+            }
         }
         return false;
     }
