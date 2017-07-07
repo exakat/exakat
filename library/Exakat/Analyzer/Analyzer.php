@@ -223,7 +223,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALY
              theNamespace=''; 
              }
 .sideEffect{ line = it.get().value('line'); }
-.until( hasLabel('File') ).repeat( 
+.until( hasLabel('File', 'Project') ).repeat( 
     __.in($this->linksDown)
       .sideEffect{ if (it.get().label() in ['Function', 'Method']) { theFunction = it.get().value('code')} }
       .sideEffect{ if (it.get().label() in ['Class', 'Trait']) { theClass = it.get().value('fullcode')} }
@@ -235,11 +235,13 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALY
 
 GREMLIN;
         $res = $this->gremlin->query($query);
-        if (!isset($res->results)) {
-            return ;
+        if (isset($res->results)) {
+            return $res->results;
+        } elseif (is_array($res)) {
+            return $res;
+        } else {
+            return array();
         }
-
-        return $res->results;
     }
 
     public static function getSuggestionThema($thema) {
@@ -309,8 +311,8 @@ GREMLIN;
         return Analyzer::$analyzers[$theme];
     }
 
-    private function addMethod($method, $arguments = null) {
-        if ($arguments === null) { // empty
+    private function addMethod($method, $arguments = array()) {
+        if ($arguments === array()) { // empty
             $this->methods[] = $method;
             return $this;
         }
@@ -340,6 +342,7 @@ GREMLIN;
         if ($analyzerId === null) {
             $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'")';
             $res = $this->query($query);
+
             if (isset($res[0])) {
                 $res = $res[0];
             }
@@ -352,7 +355,7 @@ GREMLIN;
                 $res = $this->query($query);
             } else {
                 // Creating analysis vertex
-                $query = 'g.addV("Analysis").property("analyzer", "'.$this->analyzerQuoted.'")';
+                $query = 'g.addV("Analysis").property("analyzer", "'.$this->analyzerQuoted.'").property("atom", "Analysis")';
                 $res = $this->query($query);
             
                 if (!isset($res[0])) {
@@ -420,7 +423,7 @@ GREMLIN;
         return array();
     }
     
-    public function query($queryString, $arguments = null) {
+    public function query($queryString, $arguments = array()) {
         try {
             $result = $this->gremlin->query($queryString, $arguments);
         } catch (GremlinException $e) {
@@ -432,6 +435,10 @@ GREMLIN;
             return array($result);
         }
 
+        if (is_array($result)) {
+            return $result;
+        }
+        
         if (!isset($result->results)) {
             return array();
         }
@@ -439,7 +446,7 @@ GREMLIN;
         return (array) $result->results;
     }
 
-    public function queryHash($queryString, $arguments = null) {
+    public function queryHash($queryString, $arguments = array()) {
         try {
             $result = $this->gremlin->query($queryString, $arguments);
         } catch (GremlinException $e) {
@@ -914,7 +921,7 @@ GREMLIN
         return str_replace($dependencies, $fullNames, $gremlin);
     }
 
-    public function filter($filter, $arguments = null) {
+    public function filter($filter, $arguments = array()) {
         $filter = $this->cleanAnalyzerName($filter);
         $this->addMethod("filter{ $filter }", $arguments);
 
@@ -1049,7 +1056,7 @@ GREMLIN
         return $this;
     }
 
-    public function raw($query, $args = null) {
+    public function raw($query, $args = array()) {
         ++$this->rawQueryCount;
         $query = $this->cleanAnalyzerName($query);
 
@@ -1765,7 +1772,7 @@ GREMLIN;
         foreach($this->queries as $id => $query) {
             $r = $this->query($query, $this->queriesArguments[$id]);
             ++$this->queryCount;
-
+            
             if (isset($r[0]->processed->{1})) {
                 $this->processedCount += $r[0]->processed->{1};
                 $this->rowCount       += isset($r[0]->total->{1}) ? $r[0]->total->{1} : 0;

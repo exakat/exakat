@@ -160,7 +160,11 @@ g.V().hasLabel("Functioncall")
 GREMLIN;
 
         $constants = $this->gremlin->query($query);
-        $constantsDefine = $constants->results;
+        if (is_array($constants)) {
+            $constantsDefine = $constants;
+        } else {
+            $constantsDefine = $constants->results;
+        }
 
         $query = <<<GREMLIN
 g.V().hasLabel("Const")
@@ -173,7 +177,11 @@ g.V().hasLabel("Const")
 GREMLIN;
 
         $constants = $this->gremlin->query($query);
-        $constantsConst = $constants->results;
+        if (is_array($constants)) {
+            $constantsConst = $constants;
+        } else {
+            $constantsConst = $constants->results;
+        }
         
         $constants = array_merge($constantsConst, $constantsDefine);
         $this->logTime('constants : '.count($constants));

@@ -186,10 +186,11 @@ class Analyze extends Tasks {
 result = g.addV('Noresult').property('code',                        'Not Compatible With PhpVersion')
                            .property('fullcode',                    'Not Compatible With PhpVersion')
                            .property('virtual',                      true)
+                           .property('atom',                         'Noresult')
                            .property('notCompatibleWithPhpVersion', '{$this->config->phpversion}')
                            .property('token',                       'T_INCOMPATIBLE');
 
-g.addV('Analysis').property('analyzer', '$analyzerQuoted').addE('ANALYZED').to(result);
+g.addV('Analysis').property('analyzer', '$analyzerQuoted').property("Atom", "Analysis").addE('ANALYZED').to(result);
 
 GREMLIN;
                 $this->gremlin->query($query);
@@ -204,10 +205,11 @@ GREMLIN;
 result = g.addV('Noresult').property('code',                              'Not Compatible With Configuration')
                            .property('fullcode',                          'Not Compatible With Configuration')
                            .property('virtual',                            true)
+                           .property('atom',                         'Noresult')
                            .property('notCompatibleWithPhpConfiguration', '{$this->config->phpversion}')
                            .property('token',                             'T_INCOMPATIBLE');
 
-index = g.addV('Analysis').property('analyzer', '$analyzerQuoted').addE('ANALYZED').to(result);
+index = g.addV('Analysis').property('analyzer', '$analyzerQuoted').property("Atom", "Analysis").addE('ANALYZED').to(result);
 GREMLIN;
                 $this->gremlin->query($query);
                 $this->datastore->addRow('analyzed', array($analyzer_class => -1 ) );

@@ -32,7 +32,11 @@ class Export extends Tasks {
         $queryTemplate = 'g.V().not(hasId(0))';
 
         $result = $this->gremlin->query($queryTemplate);
-        $vertices = (array) $result->results;
+        if (is_object($result)) {
+            $vertices = (array) $result->results;
+        } else {
+            $vertices = $result;
+        }
 
         $V = array();
         $root = 0;
@@ -51,7 +55,11 @@ class Export extends Tasks {
 
         $queryTemplate = 'g.E()';
         $result = $this->gremlin->query($queryTemplate);
-        $edges = (array) $result->results;
+        if (is_object($result)) {
+            $edges = (array) $result->results;
+        } else {
+            $edges = $result;
+        }
 
         $E = array();
         foreach($edges as $e) {

@@ -47,18 +47,18 @@ class Initproject extends Tasks {
         $repositoryURL = $this->config->repository;
 
         if ($this->config->delete === true) {
-            display('Deleting $project');
+            display('Deleting '.$project);
 
             // final wait..., just in case
             sleep(2);
 
             rmdirRecursive($this->config->projects_root.'/projects/'.$project);
         } elseif ($this->config->update === true) {
-            display('Updating $project');
+            display('Updating '.$project);
 
             shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code/; git pull');
         } else {
-            display('Initializing $project with '$repositoryURL'');
+            display('Initializing '.$project.' with '.$repositoryURL);
             $this->init_project($project, $repositoryURL);
         }
 
@@ -75,7 +75,7 @@ class Initproject extends Tasks {
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/log/')) {
             mkdir($this->config->projects_root.'/projects/'.$project.'/log/', 0755);
         } else {
-            display( $this->config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring'."\n");
+            display( $this->config->projects_root.'/projects/'.$project.'/log/ already exists. Ignoring');
             return null;
         }
 
@@ -167,7 +167,7 @@ INI;
 
             file_put_contents($this->config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
         } else {
-            display( $this->config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring'."\n");
+            display( $this->config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring');
         }
 
         shell_exec('chmod -R g+w '.$this->config->projects_root.'/projects/'.$project);
@@ -321,7 +321,7 @@ INI;
                     unset($repositoryDetails['query']);
                     unset($repositoryDetails['fragment']);
                     $repositoryNormalizedURL = unparse_url($repositoryDetails);
-                    print 'cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryNormalizedURL.' code 2>&1 ';
+
                     $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryNormalizedURL.' code 2>&1 ');
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
@@ -338,7 +338,7 @@ INI;
                     display('No Initialization');
             }
         } elseif (file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
-            display('Code folder is already there. Leaving it intact.');
+            display('Folder "code" is already existing. Leaving it intact.');
         }
 
         display('Counting files');

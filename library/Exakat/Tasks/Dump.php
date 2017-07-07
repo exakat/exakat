@@ -49,7 +49,11 @@ class Dump extends Tasks {
         }
 
         $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-        if (!isset($res->results[0]) || $res->results[0] !== $this->config->project) {
+        if (isset($res->results[0]) && $res->results[0] === $this->config->project) {
+            // Go!
+        } elseif (is_array($res) && $res[0] === $this->config->project) {
+            // Go!
+        } else {
             throw new NotProjectInGraph($this->config->project, $res->results[0]);
         }
 
@@ -155,7 +159,7 @@ SQL;
         $this->log->log( 'counts '.implode(', ', $counts)."\n");
         $datastore->close();
         unset($datastore);
-
+        
         foreach($themes as $id => $thema) {
             if (isset($counts[$thema])) {
                 display( $thema.' : '.($counts[$thema] >= 0 ? 'Yes' : 'N/A')."\n");
@@ -199,7 +203,7 @@ SQL;
 
         $query = array();
         foreach($res as $id => $result) {
-            if (!is_object($result)) {
+            if (empty($result)) {
                 continue;
             }
 
@@ -209,7 +213,7 @@ SQL;
             '".$this->sqlite->escapeString($class)."','".$this->sqlite->escapeString($severity)."')";
             ++$saved;
         }
-
+        
         if (!empty($query)) {
             $query = 'REPLACE INTO results ("id", "fullcode", "file", "line", "namespace", "class", "function", "analyzer", "severity") 
              VALUES '.join(', ', $query);
@@ -218,8 +222,8 @@ SQL;
 
         $this->log->log("$class : dumped $saved");
 
-
         if ($count != $saved) {
+            assert($count == $saved, 'results were not correctly dumped in '.$class. ' '.$saved.'/'.$count);
             display("$saved results saved, $count expected for $class\n");
         } else {
             display("All $saved results saved for $class\n");
@@ -235,9 +239,14 @@ SQL;
 
         $query = 'g.V().groupCount("b").by(label).cap("b");';
         $res = $this->gremlin->query($query);
+        if (isset($res->results)) {
+            $res = $res->results[0];
+        } else {
+            $res = (object) $res[0];
+        }
 
         $query = array();
-        foreach($res->results[0] as $atom => $count) {
+        foreach($res as $atom => $count) {
             $query[] = "(null, '$atom', $count)";
         }
         
@@ -252,16 +261,28 @@ SQL;
 
         // Redo each time so we update the final counts
         $res = $this->gremlin->query('g.V().count()');
-        $res = $res->results;
-        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total nodes", '.$res[0].')');
+        if (isset($res->results)) {
+            $res = $res->results[0];
+        } else {
+            $res = $res[0];
+        }
+        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total nodes", '.$res.')');
 
         $res = $this->gremlin->query('g.E().count()');
-        $res = $res->results;
-        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total edges", '.$res[0].')');
+        if (isset($res->results)) {
+            $res = $res->results[0];
+        } else {
+            $res = $res[0];
+        }
+        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total edges", '.$res.')');
 
         $res = $this->gremlin->query('g.V().properties().count()');
-        $res = $res->results;
-        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total properties", '.$res[0].')');
+        if (isset($res->results)) {
+            $res = $res->results[0];
+        } else {
+            $res = $res[0];
+        }
+        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total properties", '.$res.')');
 
         rename($this->sqliteFile, $this->sqliteFileFinal);
 
@@ -317,7 +338,12 @@ g.V().hasLabel("Namespace").out("NAME").map{ ['name' : it.get().value("fullcode"
 GREMLIN
         ;
         $res = $this->gremlin->query($query);
-        $res = $res->results;
+        if (isset($res->results)) {
+            $res = $res->results;
+        } else {
+            $res = (object) $res;
+        }
+//        $res = $res->results;
 
         $total = 0;
         $query = array();
@@ -378,7 +404,11 @@ g.V().hasLabel("Class")
 GREMLIN
         ;
         $res = $this->gremlin->query($query);
-        $res = $res->results;
+        if (isset($res->results)) {
+            $res = $res->results;
+        } else {
+            $res = (object) $res;
+        }
 
         $total = 0;
         $extendsId = array();
@@ -422,7 +452,11 @@ g.V().hasLabel("Interface")
 GREMLIN
         ;
         $res = $this->gremlin->query($query);
-        $res = $res->results;
+        if (isset($res->results)) {
+            $res = $res->results;
+        } else {
+            $res = (object) $res;
+        }
 
         $total = 0;
         foreach($res as $row) {
@@ -459,7 +493,11 @@ g.V().hasLabel("Trait")
 GREMLIN
         ;
         $res = $this->gremlin->query($query);
-        $res = $res->results;
+        if (isset($res->results)) {
+            $res = $res->results;
+        } else {
+            $res = (object) $res;
+        }
 
         $total = 0;
         foreach($res as $row) {
@@ -597,7 +635,11 @@ g.V().hasLabel("Method").as('method')
 GREMLIN
         ;
         $res = $this->gremlin->query($query);
-        $res = $res->results;
+        if (isset($res->results)) {
+            $res = $res->results;
+        } else {
+            $res = (object) $res;
+        }
 
         $total = 0;
         $query = array();
@@ -670,7 +712,11 @@ g.V().hasLabel("Class", "Interface", "Trait")
 GREMLIN
         ;
         $res = $this->gremlin->query($query);
-        $res = $res->results;
+        if (isset($res->results)) {
+            $res = $res->results;
+        } else {
+            $res = (object) $res;
+        }
 
         $total = 0;
         $query = array();
@@ -726,7 +772,11 @@ g.V().hasLabel("Class", "Interface", "Trait")
 GREMLIN
         ;
         $res = $this->gremlin->query($query);
-        $res = $res->results;
+        if (isset($res->results)) {
+            $res = $res->results;
+        } else {
+            $res = (object) $res;
+        }
 
         $total = 0;
         $query = array();

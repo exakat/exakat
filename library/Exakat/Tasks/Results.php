@@ -107,7 +107,13 @@ g.V().hasLabel("Analysis").or(has("analyzer", within($analyzersClassList1)),
 .map{ ['line':line, 'file':file, 'fullcode':fullcode, 'function':theFunction, 'class':theClass, 'namespace':theNamespace]; }
 GREMLIN;
 
-            $vertices = $this->gremlin->query($query)->results;
+            $vertices = $this->gremlin->query($query);
+            if (isset($vertices->results)) {
+                $vertices = $vertices->results;
+            } else {
+                // $vertices is an array
+                $vertices = $vertices;
+            }
 
             $return = array();
             foreach($vertices as $k => $v) {

@@ -255,7 +255,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     
-    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph');
+    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph');
 
     private $processing = array();
 
@@ -489,6 +489,7 @@ class Load extends Tasks {
 
         $this->id0 = $this->addAtom('Project');
         $this->id0->code      = 'Whole';
+        $this->id0->atom      = 'Project';
         $this->id0->fullcode  = $this->config->project;
         $this->id0->token     = 'T_WHOLE';
 
@@ -604,6 +605,7 @@ class Load extends Tasks {
 
     private function reset() {
         $this->atoms = array($this->id0->id => $this->id0);
+//        $this->atoms = array();
         $this->links = array();
 
         foreach($this->calls as $type => $names) {
@@ -4496,7 +4498,8 @@ class Load extends Tasks {
     private function addLink($origin, $destination, $label) {
         assert(in_array($label, array_merge(Token::$LINKS, Token::$LINKS_EXAKAT)), 'Undefined link '.$label);
         if (!($destination instanceof Atom)) {
-            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
+            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+            die();
         }
         assert($origin instanceof Atom);
         assert($destination instanceof Atom);
