@@ -59,6 +59,7 @@ class Appinfo extends Data {
                             'Non Breakable Spaces In Names' => 'Structures/NonBreakableSpaceInNames',
                             'strict_types'                  => 'Php/DeclareStrictType',
                             'encoding'                      => 'Php/DeclareEncoding',
+                            'ticks'                         => 'Php/DeclareTicks',
                     ),
 
                     'Composer' => array(
