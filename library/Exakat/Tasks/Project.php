@@ -83,6 +83,7 @@ class Project extends Tasks {
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
                                                'exakat_version' => Exakat::VERSION,
                                                'exakat_build'   => Exakat::BUILD,
+                                               'php_version'    => $this->config->phpversion
                                          ));
 
         display("Running project '$project'".PHP_EOL);
@@ -337,10 +338,18 @@ GREMLIN;
                 $audit_end = time();
                 $query = "g.V().count()";
                 $res = $this->gremlin->query($query);
-                $nodes = $res->results[0];
+                if (isset($res->results)) {
+                    $nodes = $res->results[0];
+                } else {
+                    $nodes = $res[0];
+                }
                 $query = "g.E().count()";
                 $res = $this->gremlin->query($query);
-                $links = $res->results[0];
+                if (isset($res->results)) {
+                    $links = $res->results[0];
+                } else {
+                    $links = $res[0];
+                }
 
                 $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                                        'audit_length' => $audit_end - $audit_start,
