@@ -57,6 +57,7 @@ class Appinfo extends Data {
                             'Environnement Variables'       => 'Php/UsesEnv',
 
                             'Non Breakable Spaces In Names' => 'Structures/NonBreakableSpaceInNames',
+                            'strict_types'                  => 'Php/DeclareStrictType',
                     ),
 
                     'Composer' => array(
