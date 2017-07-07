@@ -283,7 +283,7 @@ GREMLIN;
             }
             return $instanciated[$analyzer];
         } else {
-            display( "No such class as '" . $name . "'".PHP_EOL);
+            display( 'No such class as "' . $name . '"'.PHP_EOL);
             return null;
         }
     }
@@ -832,7 +832,12 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
         } else {
             $caseSensitive = '.toLowerCase()';
         }
-        $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' == '.$name.$caseSensitive.'}');
+
+        if ($property === 'label') {
+            $this->addMethod('filter{ it.get().label()'.$caseSensitive.' == '.$name.$caseSensitive.'}');
+        } else {
+            $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' == '.$name.$caseSensitive.'}');
+        }
 
         return $this;
     }
@@ -843,7 +848,12 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
         } else {
             $caseSensitive = '.toLowerCase()';
         }
-        $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' != '.$name.$caseSensitive.'}');
+        
+        if ($property === 'label') {
+            $this->addMethod('filter{ it.get().label()'.$caseSensitive.' != '.$name.$caseSensitive.'}');
+        } else {
+            $this->addMethod('filter{ it.get().value("'.$property.'")'.$caseSensitive.' != '.$name.$caseSensitive.'}');
+        }
 
         return $this;
     }
@@ -867,7 +877,11 @@ GREMLIN
     }
 
     public function savePropertyAs($property, $name) {
-        $this->addMethod("sideEffect{ $name = it.get().value('$property'); }");
+        if ($property === 'label') {
+            $this->addMethod("sideEffect{ $name = it.get().label(); }");
+        } else {
+            $this->addMethod('sideEffect{ $name = it.get().value("'.$property.'"); }');
+        }
 
         return $this;
     }
