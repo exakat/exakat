@@ -46,7 +46,7 @@ class pregOptionE extends Analyzer {
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->raw(' sideEffect{ delimiter = it.get().value("noDelimiter")[0]; }')
              ->raw($makeDelimiters)
-             ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*)\\$')
+             ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([^" + delimiterFinal + "]*?e[^" + delimiterFinal + "]*?)\\$')
              ->back('first');
         $this->prepareQuery();
 
