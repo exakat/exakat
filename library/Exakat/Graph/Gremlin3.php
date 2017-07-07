@@ -394,7 +394,15 @@ GREMLIN;
         if ($counts === 100)  {
             display('No connexion to gremlin : forcing restart ('.$counts.')');
             // Can't connect to gremlin. Forcing restart.
-            $this->doRestart();
+            // checking that the server has indeed restarted
+            if (Tasks::$semaphore !== null) {
+                fclose(Tasks::$semaphore);
+                $this->doRestart();
+                Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
+            } else {
+                $this->doRestart();
+            }
+
             $this->cleanScripts();
             return ;
         } else {
