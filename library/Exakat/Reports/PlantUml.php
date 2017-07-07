@@ -102,7 +102,6 @@ SQL
             } elseif ($row['type'] === 'extends') {
                 $link = '<|--';
             } else { 
-                var_dump($row['type']);
                 $link = '--';
             }
             
