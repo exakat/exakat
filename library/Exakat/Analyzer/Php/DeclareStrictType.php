@@ -25,6 +25,8 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class DeclareStrictType extends Analyzer {
+    protected $phpVersion = '7.0+';
+
     // Declare( strict_type = 1)
     public function analyze() {
         $this->atomIs('File')

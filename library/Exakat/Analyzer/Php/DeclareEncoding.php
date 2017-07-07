@@ -24,7 +24,7 @@ namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
 
-class DeclareStrictType extends Analyzer {
+class DeclareEncoding extends Analyzer {
     // Declare( encoding = 'UTF-8')
     public function analyze() {
         $this->atomIs('File')

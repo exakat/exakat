@@ -26,6 +26,7 @@ namespace Exakat\Analyzer\Php;
 use Exakat\Analyzer\Analyzer;
 
 class DeclareStrict extends Analyzer {
+    protected $phpVersion = '7.0+';
 
     public function analyze() {
         $mapping = <<<GREMLIN
