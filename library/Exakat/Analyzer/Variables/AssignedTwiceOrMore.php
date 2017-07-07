@@ -49,7 +49,11 @@ g.V().hasLabel($list).where(
            .filter{ names.size() > 0;}
            .map{ ["key":it.get().value("fullnspath"),"value":names]; }
 GREMLIN;
-        $variables = $this->queryHash($query, null);
+        $variables = $this->queryHash($query);
+        
+        if (empty($variables)) {
+            return;
+        }
         
         $this->atomIs(self::$FUNCTIONS_ALL)
              ->savePropertyAs('fullnspath', 'name')

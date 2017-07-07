@@ -29,6 +29,10 @@ class MultipleAliasDefinitions extends Analyzer {
         // alias with varied values
         $aliases = $this->query('g.V().hasLabel("Use").out("USE").has("alias").group("a").by("alias").by("origin").cap("a").next().findAll{a,b -> b.unique().size() > 1}.keySet()');
         
+        if (empty($aliases)) {
+            return ;
+        }
+
         $this->atomIs('Use')
              ->outIs('USE')
              ->is('alias', $aliases)

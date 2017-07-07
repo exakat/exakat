@@ -60,8 +60,10 @@ GREMLIN;
         $res = $this->gremlin->query($query);
         if (!$res === null) {
             return array();
-        } else {
+        } elseif (isset($res->results)) {
             return $res->results;
+        } else {
+            return $res;
         }
     }
 }

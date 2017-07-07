@@ -36,8 +36,10 @@ class ShouldUseSessionRegenerateId extends Analyzer {
         if (empty($sessions)) {
             return ;
         }
-        $regenerateid = $this->query('g.V().hasLabel("Functioncall").has("fullnspath").has("fullnspath", "\\\\session_regenerate_id")
-                                                   .count()');
+        $regenerateid = $this->query('g.V().hasLabel("Functioncall")
+                                           .has("fullnspath")
+                                           .has("fullnspath", "\\\\session_regenerate_id")
+                                           .count()');
                                            
         if ($regenerateid[0] !== 0) {
             return;

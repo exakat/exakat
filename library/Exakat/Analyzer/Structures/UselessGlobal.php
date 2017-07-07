@@ -53,19 +53,20 @@ GREMLIN
         $loneGlobal = array_filter($counts, function ($x) { return $x == 1; });
         $loneGlobal = array_keys($loneGlobal);
         
+        if (!empty($loneGlobal)) {
+            $this->atomIs('Globaldefinition')
+                 ->codeIs($loneGlobal);
+            $this->prepareQuery();
 
-        $this->atomIs('Globaldefinition')
-             ->codeIs($loneGlobal);
-        $this->prepareQuery();
-
-        $this->atomIs(array("Variable", "Variablearray"))
-             ->codeIs('$GLOBALS')
-             ->inIs('VARIABLE')
-             ->atomIs('Array')
-             ->_as('results')
-             ->is('globalvar', $loneGlobal)
-             ->back('results');
-        $this->prepareQuery();
+            $this->atomIs(array("Variable", "Variablearray"))
+                 ->codeIs('$GLOBALS')
+                 ->inIs('VARIABLE')
+                 ->atomIs('Array')
+                 ->_as('results')
+                 ->is('globalvar', $loneGlobal)
+                 ->back('results');
+            $this->prepareQuery();
+        }
 
         // used only once
 

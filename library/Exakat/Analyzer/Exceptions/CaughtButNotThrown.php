@@ -35,6 +35,10 @@ class CaughtButNotThrown extends Analyzer {
                                      .repeat( out("EXTENDS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.').values("fullnspath").unique()');
         $thrown = array_merge($thrown1, $thrown2);
         
+        if (empty($thrown)) {
+            return;
+        }
+        
         $this->atomIs('Catch')
              ->outIs('CLASS')
              ->fullnspathIsNot($this->makeFullNsPath($phpExceptions))

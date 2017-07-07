@@ -32,6 +32,9 @@ class UncaughtExceptions extends Analyzer {
     public function analyze() {
         $caught = $this->query('g.V().hasLabel("Catch").out("CLASS").values("fullnspath").unique()');
         
+        if (empty($caught)) {
+            return ;
+        }
         $this->atomIs('Throw')
              ->outIs('THROW')
              ->atomIs('New')

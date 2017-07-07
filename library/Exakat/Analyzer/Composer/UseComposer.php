@@ -55,7 +55,12 @@ class UseComposer extends Analyzer {
         }
 
         return array(
-            (object) array('fullcode' => 'composer.json', 'file' => 'composer.json', 'line' => 0, 'namespace' => '', 'class' => '', 'function' => '' )
+            (object) array('fullcode'  => 'composer.json', 
+                           'file'      => 'composer.json', 
+                           'line'      => 0, 
+                           'namespace' => '', 
+                           'class'     => '', 
+                           'function'  => '' )
         );
     }
 

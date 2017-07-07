@@ -44,19 +44,25 @@ class Autoload extends Analyzer {
 
     public function hasResults() {
         Analyzer::initDocs();
-        $report = Analyzer::$datastore->getHash('autoload') === 'psr-0' ||
-                  Analyzer::$datastore->getHash('autoload') === 'psr-4' ;
+        $res = Analyzer::$datastore->getHash('autoload');
+
+        $report = $res === 'psr-0' || $res === 'psr-4' ;
 
         return $report;
     }
 
     public function getDump() {
-        if ($this->hasResults()) {
+        if (!$this->hasResults()) {
             return array();
         }
 
-        return array(
-            array('fullcode' => 'composer.autoload', 'file' => 'composer.json', 'line' => 0, 'namespace' => '', 'class' => '', 'function' => '' )
+        return array( 
+            (object) array('fullcode'  => 'composer.autoload', 
+                           'file'      => 'composer.json', 
+                           'line'      => 0, 
+                           'namespace' => '', 
+                           'class'     => '', 
+                           'function'  => '' )
         );
     }
 }

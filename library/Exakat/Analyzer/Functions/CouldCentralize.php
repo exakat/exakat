@@ -59,6 +59,10 @@ GREMLIN;
                 }
             }
             
+            if (empty($args)) {
+                continue;
+            }
+            
             $this->atomFunctionIs($functions)
                  ->analyzerIsNot('Functions/CouldCentralize')
                  ->savePropertyAs('fullnspath', 'name')

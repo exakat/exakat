@@ -55,22 +55,30 @@ class UndefinedClasses extends Analyzer {
         $traits = $data->getTraitByRelease($this->release);
         $traits = $this->makeFullNsPath(array_pop($traits));
         
-        $this->analyzerIs('ZendF/ZendClasses')
-             ->fullnspathIsNot($classes);
-        $this->prepareQuery();
+        if (!empty($classes)) {
+            $this->analyzerIs('ZendF/ZendClasses')
+                 ->fullnspathIsNot($classes);
+            $this->prepareQuery();
+        }
 
-        $this->analyzerIs('ZendF/ZendTrait')
-             ->fullnspathIsNot($traits);
-        $this->prepareQuery();
+        if (!empty($traits)) {
+            $this->analyzerIs('ZendF/ZendTrait')
+                 ->fullnspathIsNot($traits);
+            $this->prepareQuery();
+        }
 
-        $this->analyzerIs('ZendF/ZendInterfaces')
-             ->fullnspathIsNot($interfaces);
-        $this->prepareQuery();
+        if (!empty($interfaces)) {
+            $this->analyzerIs('ZendF/ZendInterfaces')
+                 ->fullnspathIsNot($interfaces);
+            $this->prepareQuery();
+        }
 
-        $this->analyzerIs('ZendF/ZendTypehinting')
-             ->fullnspathIsNot(array_merge($classes, $interfaces));
-        $this->prepareQuery();
-        
+        $classesInterfaces = array_merge($classes, $interfaces);
+        if (!empty($classesInterfaces)) {
+            $this->analyzerIs('ZendF/ZendTypehinting')
+                 ->fullnspathIsNot($classesInterfaces);
+            $this->prepareQuery();
+        }
         // Add support for instanceof ?
     }
 }

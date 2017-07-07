@@ -33,6 +33,10 @@ class Unthrown extends Analyzer {
     public function analyze() {
         $thrown = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").values("fullnspath").unique()');
 
+        if (empty($thrown)) {
+            return;
+        }
+
         $this->atomIs('Class')
              ->analyzerIs('Exceptions/DefinedExceptions')
              ->fullnspathIsNot($thrown);

@@ -42,13 +42,15 @@ class CouldBePrivate extends Analyzer {
                                                .hasLabel("Identifier")
                                                .values("code").unique()');
 
-        $this->atomIs('Ppp')
-             ->hasNoOut('PRIVATE')
-             ->hasNoOut('STATIC')
-             ->outIs('PPP')
-             ->analyzerIsNot('Classes/PropertyUsedBelow')
-             ->isNot('propertyname', $publicProperties);
-        $this->prepareQuery();
+        if (!empty($publicProperties)) {
+            $this->atomIs('Ppp')
+                 ->hasNoOut('PRIVATE')
+                 ->hasNoOut('STATIC')
+                 ->outIs('PPP')
+                 ->analyzerIsNot('Classes/PropertyUsedBelow')
+                 ->isNot('propertyname', $publicProperties);
+            $this->prepareQuery();
+        }
 
         // Static properties
         // Case of property::property (that's another public access)
@@ -66,29 +68,31 @@ class CouldBePrivate extends Analyzer {
                                                      .select("classe", "property").by("fullnspath").by("code")
                                                      .unique()');
         
-        $calls = array();
-        foreach($publicStaticProperties as $value) {
-            if (isset($calls[$value->property])) {
-                $calls[$value->property][] = $value->classe;
-            } else {
-                $calls[$value->property] = array($value->classe);
+        if (!empty($publicStaticProperties)) {
+            $calls = array();
+            foreach($publicStaticProperties as $value) {
+                if (isset($calls[$value->property])) {
+                    $calls[$value->property][] = $value->classe;
+                } else {
+                    $calls[$value->property] = array($value->classe);
+                }
             }
+            
+            // Property that is not used outside this class or its children
+            $this->atomIs('Ppp')
+                 ->hasNoOut('PRIVATE')
+                 ->hasOut('STATIC')
+                 ->outIs('PPP')
+                 ->analyzerIsNot('Classes/PropertyUsedBelow')
+                 ->_as('results')
+                 ->outIsIE('LEFT')
+                 ->isNot('code', array_keys($calls))
+                 ->savePropertyAs('code', 'variable')
+                 ->goToClass()
+                 ->isNotHash('fullnspath', $calls, 'variable')
+                 ->back('results');
+            $this->prepareQuery();
         }
-        
-        // Property that is not used outside this class or its children
-        $this->atomIs('Ppp')
-             ->hasNoOut('PRIVATE')
-             ->hasOut('STATIC')
-             ->outIs('PPP')
-             ->analyzerIsNot('Classes/PropertyUsedBelow')
-             ->_as('results')
-             ->outIsIE('LEFT')
-             ->isNot('code', array_keys($calls))
-             ->savePropertyAs('code', 'variable')
-             ->goToClass()
-             ->isNotHash('fullnspath', $calls, 'variable')
-             ->back('results');
-        $this->prepareQuery();
     }
 }
 

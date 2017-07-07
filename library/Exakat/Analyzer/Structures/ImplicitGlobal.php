@@ -31,9 +31,13 @@ class ImplicitGlobal extends Analyzer {
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
 
         $globalGlobal = $this->query('g.V().hasLabel("Global").out("GLOBAL")
-.where( repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel("Function").count().is(eq(0)) )
+.not( where( repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel("Function") ) )
 .values("code").unique()');
-
+        
+        if (empty($globalGlobal)) {
+            return;
+        }
+        
         $this->atomIs('Global')
              ->hasFunction()
              ->outIs('GLOBAL')

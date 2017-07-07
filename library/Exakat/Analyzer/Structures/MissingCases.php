@@ -38,6 +38,12 @@ GREMLIN
         if (empty($switches)) {
             return;
         }
+        
+        if ($switches[0] instanceof \stdClass) {
+            foreach($switches as &$switch) {
+                $switch = (array) $switch;
+            }
+        }
 
         // Compare switches together.
         $commons = array();

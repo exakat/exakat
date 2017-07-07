@@ -31,47 +31,57 @@ class UnusedConstants extends Analyzer {
     }
     
     public function analyze() {
-        $constants = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Constants/ConstantUsage").out("ANALYZED").values("code").unique()');
+        $query = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer", "Constants/ConstantUsage").out("ANALYZED").values("code").unique()
+GREMLIN;
+        $constants = $this->query($query);
 
-        // Const from a define (case insensitive)
-        $this->atomFunctionIs('\define')
-             ->outIs('ARGUMENTS')
-             ->noChildWithRank('ARGUMENT', 2) // default, case sensitive
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->noDelimiterIsNot($constants, true);
-        $this->prepareQuery();
-
-        $this->atomFunctionIs('\define')
-             ->outIs('ARGUMENTS')
-             ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
-             ->is('boolean', false)
-             ->inIs('ARGUMENT')
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->noDelimiterIsNot($constants, true);
-        $this->prepareQuery();
-
-        // Const from a define (case sensitive)
-        $constantsLC = array_map(function ($x) { return strtolower($x); }, $constants);
-        $this->atomFunctionIs('\define')
-             ->outIs('ARGUMENTS')
-             ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
-             ->is('boolean', true)
-             ->inIs('ARGUMENT')
-             ->outWithRank('ARGUMENT', 0)
-             ->atomIs('String')
-             ->noDelimiterIsNot($constantsLC);
-        $this->prepareQuery();
+        if (!empty($constants)) {   
+            // Const from a define (case insensitive)
+            $this->atomFunctionIs('\define')
+                 ->outIs('ARGUMENTS')
+                 ->noChildWithRank('ARGUMENT', 2) // default, case sensitive
+                 ->outWithRank('ARGUMENT', 0)
+                 ->atomIs('String')
+                 ->hasNoOut('CONCAT')
+                 ->noDelimiterIsNot($constants, true);
+            $this->prepareQuery();
+    
+            $this->atomFunctionIs('\define')
+                 ->outIs('ARGUMENTS')
+                 ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
+                 ->is('boolean', false)
+                 ->inIs('ARGUMENT')
+                 ->outWithRank('ARGUMENT', 0)
+                 ->atomIs('String')
+                 ->hasNoOut('CONCAT')
+                 ->noDelimiterIsNot($constants, true);
+            $this->prepareQuery();
+    
+            // Const from a define (case sensitive)
+            $constantsLC = array_map(function ($x) { return strtolower($x); }, $constants);
+            $this->atomFunctionIs('\define')
+                 ->outIs('ARGUMENTS')
+                 ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
+                 ->is('boolean', true)
+                 ->inIs('ARGUMENT')
+                 ->outWithRank('ARGUMENT', 0)
+                 ->atomIs('String')
+                 ->hasNoOut('CONCAT')
+                 ->noDelimiterIsNot($constantsLC);
+            $this->prepareQuery();
+        }
 
         $constConstants = $this->query('g.V().hasLabel("Analysis").has("analyzer", "Constants/ConstantUsage").out("ANALYZED").values("fullnspath").unique()');
-        // Const from a const
-        $this->atomIs('Const')
-             ->hasNoClassInterface()
-             ->outIs('CONST')
-             ->outIs('NAME')
-             ->fullnspathIsNot($constConstants);
-        $this->prepareQuery();
+        if (!empty($constConstants)) {
+            // Const from a const
+            $this->atomIs('Const')
+                 ->hasNoClassInterface()
+                 ->outIs('CONST')
+                 ->outIs('NAME')
+                 ->fullnspathIsNot($constConstants);
+            $this->prepareQuery();
+        }
       }
 }
 

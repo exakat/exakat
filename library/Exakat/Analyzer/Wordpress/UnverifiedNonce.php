@@ -63,6 +63,10 @@ GREMLIN
 );
         $list = array_merge($list, $list2);
         
+        if (empty($list)) {
+            return;
+        }
+        
         $this->analyzerIs('Wordpress/NonceCreation')
              ->noDelimiterIsNot($list);
         $this->prepareQuery();

@@ -34,13 +34,18 @@ if (it.get().vertices(OUT, "LEFT").next().label() in [$literalsList]) {
     x2 = "left"; 
 } else if (it.get().vertices(OUT, "RIGHT").next().label() in [$literalsList]) { 
     x2 = "right"; 
-} // else, ignore. 
+} else {
+    x2 = it.get().value("fullcode");
+}
 
 GREMLIN;
         $storage = array('To the left'  => 'left',
                          'To the right' => 'right');
 
         $this->atomIs('Comparison')
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs(self::$LITERALS)
+             ->back('first')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = (array) $this->rawQuery();
@@ -61,13 +66,20 @@ GREMLIN;
         if ($total == 0) {
             return;
         }
-
+        
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
-        $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
+        $types = array_keys($types);
+        
+        if (empty($types)) {
+            return;
+        }
 
         $this->atomIs('Comparison')
-             ->raw('sideEffect{ '.$mapping.' }')
-             ->raw('filter{ x2 in '.$types.'}')
+             ->outIs(array('LEFT', 'RIGHT'))
+             ->atomIs(self::$LITERALS)
+             ->back('first')
+             ->raw('sideEffect{ '.$mapping.'; }')
+             ->raw('filter{ x2 in *** ; }', $types)
              ->back('first');
         $this->prepareQuery();
     }
