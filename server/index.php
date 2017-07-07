@@ -224,7 +224,7 @@ function error($message, $project) {
 
 function serverLog($message) {
     $fp = fopen(__DIR__.'/server.log', 'a');
-    if (!fp !== false) {
+    if ($fp !== false) {
         fwrite($fp, date('r')."\t$message\n");
         fclose($fp);
     }
