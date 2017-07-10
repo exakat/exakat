@@ -35,11 +35,18 @@ class IsModified extends Analyzer {
         $atoms = array('Member', 'Staticproperty');
 
         $this->atomIs($atoms)
-             ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS', 'CAST'))
+             ->hasIn(array('PREPLUSPLUS', 'POSTPLUSPLUS'))
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs($atoms)
+             ->inIs('CAST')
+             ->tokenIs('T_UNSET_CAST')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs($atoms)
+             ->inIsIE(array('VARIABLE', 'APPEND'))
              ->inIs(array('LEFT', 'APPEND'))
              ->atomIs(array('Assignation', 'Arrayappend'))
              ->back('first');
