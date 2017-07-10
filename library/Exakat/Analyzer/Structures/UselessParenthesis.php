@@ -36,13 +36,15 @@ class UselessParenthesis extends Analyzer {
         // clone
         $this->atomIs('Clone')
              ->outIs('CLONE')
-             ->atomIs('Parenthesis');
+             ->atomIs('Parenthesis')
+             ->back('first');
         $this->prepareQuery();
 
         // yield
         $this->atomIs(array('Yield', 'Yieldfrom'))
              ->outIs('YIELD')
-             ->atomIs('Parenthesis');
+             ->atomIs('Parenthesis')
+             ->back('first');
         $this->prepareQuery();
 
         // while

@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array('$z',
+$expected     = array('clone ($z)',
                       '($z)');
 
 $expected_not = array('$y',
