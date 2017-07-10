@@ -52,21 +52,22 @@ class CouldBeClassConstant extends Analyzer {
              ->goToClass()
 
              ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs('METHOD')
 
                 // usage as property with $this
-             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Member")
+             ->raw('not( __.out("METHOD")
+                           .where( __.repeat( __.out('.$this->linksDown.') ).emit( ).times('.self::MAX_LOOPING.').hasLabel("Member")
                                                 .where( __.out("OBJECT").has("code", "\$this") )
                                                 .where( __.out("MEMBER").filter{ it.get().value("code").toLowerCase() == name.toLowerCase() } )
                                                 .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-                             .count().is(eq(0)) )')
+                             ) )')
 
                 // usage as static property with (namespace, self or static)
-             ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Staticproperty") ).times('.self::MAX_LOOPING.')
+             ->raw('not( __.out("METHOD")
+                           .where( __.repeat( __.out('.$this->linksDown.') ).emit( hasLabel("Staticproperty") ).times('.self::MAX_LOOPING.')
                                                 .where( __.out("CLASS").filter{ it.get().value("fullnspath") == fnp } )
                                                 .where( __.out("MEMBER").filter{ it.get().value("code").toLowerCase() == staticName.toLowerCase() } )
                                                 .where( __.in("ANALYZED").has("analyzer", "Classes/IsModified") )
-                             .count().is(eq(0)) )')
+                             ) )')
 
              ->back('first');
              
