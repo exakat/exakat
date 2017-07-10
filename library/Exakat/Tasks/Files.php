@@ -126,11 +126,12 @@ class Files extends Tasks {
                     }
                 } elseif (substr($resFile, 0, 13) == 'Parse error: ') {
                     // Actually, almost a repeat of the previous. We just ignore it. (Except in PHP 5.4)
-                    if ($version == '52' || $version == '71' || $version == '72' || $version == '73') {
+                    if (in_array($version, array('52', '70', '71', '72', '73'))) {
                         preg_match('#Parse error: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
                         $fileName = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
                         if (isset($incompilables[$fileName])) {
                             continue;
+
                         }
                         $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
                     }
@@ -156,6 +157,7 @@ class Files extends Tasks {
                     // else ignore Fatal error we can't understand
                 } elseif (substr($resFile, 0, 18) == 'PHP Fatal error:  ') {
                     // Actually, a repeat of the previous. We just ignore it.
+                    continue;
                 } elseif (substr($resFile, 0, 23) == 'PHP Strict standards:  ') {
                     preg_match('#PHP Strict standards:  (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
                     $file = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
@@ -232,16 +234,9 @@ class Files extends Tasks {
                         $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
                     }
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
-                    //Errors parsing /projects/slims7_cendana/code//lib/phpbarcode/bin/nix/genbarcode64
-                    preg_match('#Errors parsing (.+)#', $resFile, $r);
-                    $fileName = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[1]);
-                    if (!isset($toRemoveFromFiles['/'.$file])) {
-                        $toRemoveFromFiles['/'.$fileName] = 1;
-                        if (isset($incompilables[$fileName])) {
-                            continue;
-                        }
-                        $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[1]);
-                    }
+                    continue; 
+                } else {
+                    assert(false,  $resFile."\n");
                 }
             }
 
