@@ -878,9 +878,9 @@ GREMLIN
 
     public function savePropertyAs($property, $name) {
         if ($property === 'label') {
-            $this->addMethod("sideEffect{ $name = it.get().label(); }");
+            $this->addMethod('sideEffect{ '.$name.' = it.get().label(); }');
         } else {
-            $this->addMethod('sideEffect{ $name = it.get().value("'.$property.'"); }');
+            $this->addMethod('sideEffect{ '.$name.' = it.get().value("'.$property.'"); }');
         }
 
         return $this;

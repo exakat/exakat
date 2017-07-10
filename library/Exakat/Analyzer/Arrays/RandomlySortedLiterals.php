@@ -66,16 +66,7 @@ GREMLIN
                                 }
                              }
                              .count())')
-             ->raw('filter{ x = ***; 
-            if (x.getClass() == "java.util.ArrayList" ) {
-                a = liste.sort() in x.values(); 
-            } else {
-              a = liste.sort() in x; 
-            }
-            a;
-            }
-
-', $arrays)
+             ->raw('filter{ x = ***;  liste.sort() in x.values(); }', $arrays)
              ->back('first');
         $this->prepareQuery();
     }
