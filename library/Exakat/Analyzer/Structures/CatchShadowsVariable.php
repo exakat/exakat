@@ -29,11 +29,26 @@ class CatchShadowsVariable extends Analyzer {
     public function analyze() {
         // Catch inside a function
         $this->atomIs('Catch')
+             ->hasFunction()
+             ->outIs('VARIABLE')
+             ->savePropertyAs('code', 'catchVariable')
+             ->goToFunction()
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Variable')
+             ->samePropertyAs('code', 'catchVariable')
+             ->hasNoIn('VARIABLE')
+             ->hasNoCatch()
+             ->back('first');
+        $this->prepareQuery();
+
+        // Catch outside a function
+        $this->atomIs('Catch')
+             ->hasNoFunction(array('Function', 'Method', 'Closure'))
              ->outIs('VARIABLE')
              ->savePropertyAs('code', 'catchVariable')
              ->goToFile()
              ->outIs('FILE')
-             ->atomInside('Variable')
+             ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'catchVariable')
              ->hasNoIn('VARIABLE')
              ->hasNoCatch()
