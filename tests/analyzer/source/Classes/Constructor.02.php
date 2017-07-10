@@ -36,6 +36,6 @@ trait t {
     function __construct() {} // useless because no constructor anywhere
 }
 
-function __construct() {} // This is a function
+function __construct($a) {} // This is a function
 
  ?>

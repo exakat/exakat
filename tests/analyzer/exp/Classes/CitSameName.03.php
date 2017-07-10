@@ -7,6 +7,8 @@ $expected     = array('interface T { /**/ } ',
                       'trait T { /**/ } ',
                       );
 
-$expected_not = array();
+$expected_not = array('function T( ) { /**/ } ',
+                      'trait T2 { /**/ } ',
+);
 
 ?>

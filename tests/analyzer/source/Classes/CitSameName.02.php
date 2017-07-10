@@ -9,6 +9,8 @@ namespace A {
 
 namespace B {
     trait T {}
+    
+    function T() {}
 }
 
 ?>

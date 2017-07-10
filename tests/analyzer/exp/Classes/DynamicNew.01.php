@@ -6,6 +6,7 @@ $expected     = array('new $classe( )',
                       'new Classe::$staticproperty',
 );
 
-$expected_not = array();
+$expected_not = array('new class { /**/ } ',
+                      'new stdClass( )');
 
 ?>

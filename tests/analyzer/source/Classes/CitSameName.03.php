@@ -13,6 +13,9 @@ namespace {
 
 namespace B {
     trait T {}
+    trait T2 {}
+
+    function T() {}
 }
 
 ?>

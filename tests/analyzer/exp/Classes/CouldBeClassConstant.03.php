@@ -7,6 +7,6 @@ $expected     = array('static $nonEmptyArray = array(1)',
                       'static $integer = 1'
                       );
 
-$expected_not = array();
+$expected_not = array('static $string = \'Indeed a string\'');
 
 ?>
