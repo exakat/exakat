@@ -3,13 +3,13 @@
 global $explicitGlobalVar; // explicit global variable
 $implicitGlobalVar; // naturally global var
 
-function x () {
+function ($a) {
     global $explicitGlobalVar, $implicitGlobalVar;
     
-}
+};
 
-function x2 () {
+function ($b) {
     global $explicitGlobalVar, $implicitGlobalVar;
-}
+};
 
 ?>

@@ -28,22 +28,25 @@ use Exakat\Tokenizer\Token;
 
 class ImplicitGlobal extends Analyzer {
     public function analyze() {
-        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
+        $query = <<<GREMLIN
+g.V().hasLabel("Global").out("GLOBAL")
+     .has("token", "T_VARIABLE")
+     .not( where( repeat(__.in({$this->linksDown})).emit().until(hasLabel("File")).hasLabel("Function", "Method", "Closure") ) )
+     .values("code").unique()
+GREMLIN;
+        $globalGlobal = $this->query($query);
 
-        $globalGlobal = $this->query('g.V().hasLabel("Global").out("GLOBAL")
-.not( where( repeat(__.in('.$this->linksDown.')).until(hasLabel("File")).emit().hasLabel("Function") ) )
-.values("code").unique()');
-        
-        if (empty($globalGlobal)) {
-            return;
-        }
+        // can't bail out here : if $globalGlobal is empty, no global was declared outside functions. 
+        // This is still useful
+
+        $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');
+        $globalGlobal = array_merge( $superglobals, $globalGlobal);
         
         $this->atomIs('Global')
              ->hasFunction()
              ->outIs('GLOBAL')
              ->tokenIs('T_VARIABLE')
-             ->codeIsNot($globalGlobal)
-             ->codeIsNot($superglobals);
+             ->codeIsNot($globalGlobal);
         $this->prepareQuery();
     }
 }

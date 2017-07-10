@@ -1481,7 +1481,7 @@ GREMLIN
     }
 
     public function hasFunction() {
-        $this->hasInstruction(array('Function', 'Method'));
+        $this->hasInstruction(array('Function', 'Method', 'Closure'));
         
         return $this;
     }

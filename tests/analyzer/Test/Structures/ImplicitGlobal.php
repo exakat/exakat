@@ -8,10 +8,12 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_ImplicitGlobal extends Analyzer {
-    /* 3 methods */
+    /* 5 methods */
 
     public function testStructures_ImplicitGlobal01()  { $this->generic_test('Structures_ImplicitGlobal.01'); }
     public function testStructures_ImplicitGlobal02()  { $this->generic_test('Structures_ImplicitGlobal.02'); }
     public function testStructures_ImplicitGlobal03()  { $this->generic_test('Structures_ImplicitGlobal.03'); }
+    public function testStructures_ImplicitGlobal04()  { $this->generic_test('Structures/ImplicitGlobal.04'); }
+    public function testStructures_ImplicitGlobal05()  { $this->generic_test('Structures/ImplicitGlobal.05'); }
 }
 ?>

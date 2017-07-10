@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('finally { /**/ } ');
 
-$expected_not = array();
+$expected_not = array('finally { /**/ } '); // The second one
 
 ?>
