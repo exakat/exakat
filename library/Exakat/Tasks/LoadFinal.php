@@ -190,7 +190,7 @@ GREMLIN;
             // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION") ) )
+     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .has("token", without("T_CONST", "T_FUNCTION"))
      .filter{ it.get().value("fullnspath") in arg1 }.sideEffect{name = it.get().value("fullnspath"); }
      .addE('DEFINITION')
@@ -213,7 +213,7 @@ GREMLIN;
             if (!empty($constantsDefine)) {
                 $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
-     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION") ) )
+     .not( where( __.in("NAME", "METHOD", "MEMBER", "CONSTANT", "ALIAS", "CLASS", "DEFINITION", "GROUPUSE") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); name in arg1 }
      .sideEffect{
         fullnspath = "\\\\" + it.get().value("code").toLowerCase();
