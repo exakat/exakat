@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_UnresolvedInstanceof extends Analyzer {
-    /* 7 methods */
+    /* 9 methods */
 
     public function testClasses_UnresolvedInstanceof01()  { $this->generic_test('Classes_UnresolvedInstanceof.01'); }
     public function testClasses_UnresolvedInstanceof02()  { $this->generic_test('Classes_UnresolvedInstanceof.02'); }
@@ -17,5 +17,7 @@ class Classes_UnresolvedInstanceof extends Analyzer {
     public function testClasses_UnresolvedInstanceof05()  { $this->generic_test('Classes_UnresolvedInstanceof.05'); }
     public function testClasses_UnresolvedInstanceof06()  { $this->generic_test('Classes_UnresolvedInstanceof.06'); }
     public function testClasses_UnresolvedInstanceof07()  { $this->generic_test('Classes/UnresolvedInstanceof.07'); }
+    public function testClasses_UnresolvedInstanceof08()  { $this->generic_test('Classes/UnresolvedInstanceof.08'); }
+    public function testClasses_UnresolvedInstanceof09()  { $this->generic_test('Classes/UnresolvedInstanceof.09'); }
 }
 ?>
