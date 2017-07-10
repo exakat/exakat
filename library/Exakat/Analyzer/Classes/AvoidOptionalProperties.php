@@ -31,26 +31,56 @@ class AvoidOptionalProperties extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Member')
+             ->outIs('OBJECT')
+             ->codeIs('$this')
+             ->back('first')
              ->hasIn('CONDITION')
              ->back('first');
         $this->prepareQuery();
 
+        // if (empty($this->a)) 
         $this->atomIs('Member')
+             ->outIs('OBJECT')
+             ->codeIs('$this')
+             ->back('first')
+             ->outIs('MEMBER')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
              ->inIs('ARGUMENT')
              ->inIs('ARGUMENTS')
-             ->functioncallIs('\\empty');
+             ->functioncallIs(array('\\empty', '\\isset', '\\is_null'))
+             ->_as('results')
+             ->goToClass()
+             ->outIs('PPP')
+             ->outIs('PPP')
+             ->raw('filter{ it.get().value("propertyname") == name; }')
+             ->raw('or( __.not(where( __.out("RIGHT") )), __.out("RIGHT").hasLabel("Null") )')
+             ->back('results');
         $this->prepareQuery();
 
+        // $this->a == null
         $this->atomIs('Member')
+             ->outIs('OBJECT')
+             ->codeIs('$this')
+             ->back('first')
+             ->outIs('MEMBER')
+             ->savePropertyAs('code', 'name')
+             ->back('first')
              ->inIs(array('LEFT', 'RIGHT'))
              ->atomIs('Comparison')
              ->_as('results')
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs('Null')
+             ->back('results')
+             ->goToClass()
+             ->outIs('PPP')
+             ->outIs('PPP')
+             ->raw('filter{ it.get().value("propertyname") == name; }')
+             ->raw('or( __.not(where( __.out("RIGHT") )), __.out("RIGHT").hasLabel("Null") )')
              ->back('results');
         $this->prepareQuery();
 
-        $this->atomIs('Member')
+        $this->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
@@ -63,4 +93,3 @@ class AvoidOptionalProperties extends Analyzer {
 }
 
 ?>
-
