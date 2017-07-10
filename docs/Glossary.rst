@@ -448,6 +448,10 @@ Glossary
 
       + :ref:`Timestamp Difference <timestamp-difference>`
 
+    + `mkdir()`
+
+      + :ref:`Mkdir Default <mkdir-default>`
+
     + `mt_rand()`
 
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`

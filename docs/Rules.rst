@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 03 Jul 2017 16:40:56 +0000
-.. comment: Generation hash : 8e5bfefecde91083cc1fbcf7dbcb1c29eb53b8f0
+.. comment: Generation date : Mon, 10 Jul 2017 16:44:17 +0000
+.. comment: Generation hash : aa2b2b976dc82410678158d1a8a5ded6dd368d45
 
 
 .. _$http\_raw\_post\_data:
@@ -6077,6 +6077,40 @@ This was added in PHP 5.4+
 +--------------+---------------------------+
 
 
+.. _mismatched-ternary-alternatives:
+
+Mismatched Ternary Alternatives
+###############################
+
+
+A ternary operator should yield the same type on both branches.
+
+Ternary operator applies a condition, and yield two different results. Those results will then be processed by code that expects the same types. It is recommended to match the types on both branches of the ternary operator.
+
+.. code-block:: php
+
+   <?php
+   
+   // $object may end up in a very unstable state
+   $object = ($type == 'Type') ? new $type() : null;
+   
+   //same result are provided by both alternative, though process is very different
+   $result = ($type == 'Addition') ? $a + $b : $a * $b;
+   
+   //Currently, this is omitted
+   $a = 1;
+   $result = empty($condition) ? $a : 'default value';
+   $result = empty($condition) ? $a : getDefaultValue();
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Structures/MismatchedTernary |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
 .. _missing-cases-in-switch:
 
 Missing Cases In Switch
@@ -6187,6 +6221,39 @@ Either switch to a newer version of PHP (5.5 or newer), or make sure the resulti
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +--------------+------------------------------------------------------+
+
+
+.. _mkdir-default:
+
+Mkdir Default
+#############
+
+
+`'mkdir() <http://www.php.net/mkdir>`_ gives universal access to created folders, by default. It is recommended to gives a more limited set of rights (0755, 0700), or to explicitely set the rights to 0777. 
+
+.. code-block:: php
+
+   <?php
+   
+   // By default, this dir is 777
+   mkdir('/path/to/dir');
+   
+   // Explicitely, this is wanted. It may also be audited easily
+   mkdir('/path/to/dir', 0777);
+   
+   // This dir is limited to the current user. 
+   mkdir('/path/to/dir', 0700);
+   
+   ?>
+
+
+See also `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_.
+
++--------------+-----------------------+
+| Command Line | Security/MkdirDefault |
++--------------+-----------------------+
+| Analyzers    | :ref:`Security`       |
++--------------+-----------------------+
 
 
 .. _modernize-empty-with-expression:

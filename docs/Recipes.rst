@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 03 Jul 2017 16:40:56 +0000
-.. comment: Generation hash : 8e5bfefecde91083cc1fbcf7dbcb1c29eb53b8f0
+.. comment: Generation date : Mon, 10 Jul 2017 16:44:17 +0000
+.. comment: Generation hash : aa2b2b976dc82410678158d1a8a5ded6dd368d45
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 299 analysis
+Total : 300 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -185,6 +185,7 @@ Total : 299 analysis
 * :ref:`Long Arguments <long-arguments>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
+* :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
 * :ref:`Missing Cases In Switch <missing-cases-in-switch>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
@@ -944,7 +945,7 @@ Total : 24 analysis
 Security
 ++++++++
 
-Total : 23 analysis
+Total : 24 analysis
 
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
@@ -954,6 +955,7 @@ Total : 23 analysis
 * :ref:`Encoded Simple Letters <encoded-simple-letters>`
 * :ref:`Hardcoded Passwords <hardcoded-passwords>`
 * :ref:`Indirect Injection <indirect-injection>`
+* :ref:`Mkdir Default <mkdir-default>`
 * :ref:`No Hardcoded Hash <no-hardcoded-hash>`
 * :ref:`No Hardcoded Ip <no-hardcoded-ip>`
 * :ref:`No Hardcoded Port <no-hardcoded-port>`

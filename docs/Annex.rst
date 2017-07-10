@@ -148,6 +148,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/json
 * ext/judy
 * ext/kdm5
+* ext/lapack
 * ext/ldap
 * ext/libevent
 * ext/libsodium
@@ -297,9 +298,19 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.12.2
+
+  * Mkdir Default (Security/MkdirDefault ; Security)
+  * ext/lapack (Extensions/Extlapack)
+  * strict_types Preference (Php/DeclareStrict ; Preferences)
+
 * 0.12.1
 
-  * Const Or Define (Structures/ConstDefineFavorite)
+  * Const Or Define (Structures/ConstDefineFavorite ; Appinfo)
+  * Declare encoding Usage (Php/DeclareEncoding)
+  * Declare strict_types Usage (Php/DeclareStrictType ; Appinfo, Preferences)
+  * Declare ticks Usage (Php/DeclareTicks ; Preferences)
+  * Mismatched Ternary Alternatives (Structures/MismatchedTernary ; Analyze)
   * No Return Or Throw In Finally (Structures/NoReturnInFinally ; Security)
 
 * 0.12.0
@@ -1614,6 +1625,7 @@ List of external links mentionned in this documentation.
 * `Database (dbm-style) Abstraction Layer <http://php.net/manual/en/book.dba.php>`_
 * `Date and Time <http://php.net/manual/en/book.datetime.php>`_
 * `DCDFLIB <https://people.sc.fsu.edu/~jburkardt/c_src/cdflib/cdflib.html>`_
+* `declare <http://php.net/manual/en/control-structures.declare.php>`_
 * `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
 * `Docker <http://www.docker.com/>`_
@@ -1665,7 +1677,9 @@ List of external links mentionned in this documentation.
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `Joomla <http://www.joomla.org/>`_
 * `Judy C library <http://judy.sourceforge.net/>`_
+* `Lapack <http://php.net/manual/en/book.lapack.php>`_
 * `Laravel <http://www.lavarel.com/>`_
+* `libevent <http://www.libevent.org/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
 * `List of function aliases <http://php.net/manual/en/aliases.php>`_
 * `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
@@ -1680,6 +1694,7 @@ List of external links mentionned in this documentation.
 * `mysqli <http://php.net/manual/en/book.mysqli.php>`_
 * `Ncurses Terminal Screen Control <http://php.net/manual/en/book.ncurses.php>`_
 * `Neo4j <http://neo4j.com/>`_
+* `Net SNMP <http://www.net-snmp.org/>`_
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
@@ -1714,6 +1729,7 @@ List of external links mentionned in this documentation.
 * `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_
 * `RFC 7159 <http://www.faqs.org/rfcs/rfc7159>`_
 * `RFC 7230 <https://tools.ietf.org/html/rfc7230>`_
+* `RFC 822 (MIME)<http://www.faqs.org/rfcs/rfc822.html>`_
 * `RFC 959 <http://www.faqs.org/rfcs/rfc959>`_
 * `Routing <https://www.slimframework.com/docs/objects/router.html>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
@@ -1731,6 +1747,7 @@ List of external links mentionned in this documentation.
 * `sqlite3 <http://www.php.net/sqlite3>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
+* `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `svn <https://subversion.apache.org/>`_
 * `Swoole <https://github.com/swoole/swoole-src>`_
@@ -1749,6 +1766,7 @@ List of external links mentionned in this documentation.
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
 * `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
+* `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_
 * `Wincache extension for PHP <http://www.php.net/wincache>`_
 * `Wordpress <https://www.wordpress.org/>`_
 * `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_
@@ -1817,6 +1835,8 @@ List of external links mentionned in this documentation.
 * `zend-test <https://github.com/zendframework/zend-test>`_
 * `zend-text <https://github.com/zendframework/zend-text>`_
 * `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_
+* `ZeroMQ <http://zeromq.org/>`_
+* `ZHprof Documentation <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_
 * `Zip <http://php.net/manual/en/book.zip.php>`_
 * `Zlib <http://php.net/manual/en/book.zlib.php>`_
 
