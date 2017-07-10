@@ -31,12 +31,18 @@ class StaticMethodsCalledFromObject extends Analyzer {
     }
 
     public function analyze() {
-        $methods = $this->query(<<<GREMLIN
-g.V().hasLabel("Method").where(__.in("METHOD").hasLabel("Class", "Trait"))
-                        .where(__.out("STATIC").count().is(eq(1)) )
-                        .out("NAME").values("code").unique()
-GREMLIN
-);
+        $query = <<<GREMLIN
+g.V().hasLabel("Method")
+     .where( __.in("METHOD").hasLabel("Class", "Trait") )
+     .where( __.out("STATIC") )
+     .out("NAME")
+     .values("code")
+     .unique()
+GREMLIN;
+        $methods = $this->query($query);
+        if (empty($methods)) {
+            return;
+        }
 
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
