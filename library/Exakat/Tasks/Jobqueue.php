@@ -109,8 +109,8 @@ class Jobqueue extends Tasks {
                         $b = microtime(true);
                         shell_exec($this->config->php.' '.$this->config->executable.' project -p '.$job);
                         $e = microtime(true);
-                        $this->log('end project : '.$job.' ('.number_format(($e -$b), 2).' s)');
-                        display( 'processing project job '.$job.' done ('.number_format(($e -$b), 2).' s)'.PHP_EOL);
+                        $this->log('end project : '.$job.' ('.number_format($e -$b, 2).' s)');
+                        display( 'processing project job '.$job.' done ('.number_format($e -$b, 2).' s)'.PHP_EOL);
                         break;
 
                     case file_exists($this->config->projects_root.'/projects/onepage/code/'.$job.'.php') :
@@ -150,7 +150,7 @@ class Jobqueue extends Tasks {
         file_put_contents($this->config->projects_root.'/progress/jobqueue.exakat', json_encode($progress));
 
         $e = microtime(true);
-        $this->log('end onepage : '.$job.' ('.number_format(($e -$b), 2).' s)');
+        $this->log('end onepage : '.$job.' ('.number_format($e -$b, 2).' s)');
 
         // Clean after self
         shell_exec($this->config->php.' '.$this->config->executable.' cleandb');

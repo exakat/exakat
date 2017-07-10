@@ -274,7 +274,7 @@ INI;
                     $archiveFile = tempnam(sys_get_temp_dir(), 'archiveTgz').'.tgz';
                     file_put_contents($archiveFile, $binary);
                     display('Unarchive');
-                    mkdir($this->config->projects_root.'/projects/'.$project.'/code/');
+                    mkdir($this->config->projects_root.'/projects/'.$project.'/code/', 0755);
                     shell_exec('tar -zxf '.$archiveFile.' -C '.$this->config->projects_root.'/projects/'.$project.'/code/');
                     display('Cleanup');
                     unlink($archiveFile);

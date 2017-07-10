@@ -2072,7 +2072,7 @@ class Load extends Tasks {
             
             if (in_array($fullnspath, $deterministFunctions)) {
                 $functioncall->boolean  = (int) (bool) $arguments->count;
-                $functioncall->constant = ($arguments->constant === self::CONSTANT_EXPRESSION);
+                $functioncall->constant = $arguments->constant === self::CONSTANT_EXPRESSION;
             }
         }
 
