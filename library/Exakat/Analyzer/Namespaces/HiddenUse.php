@@ -26,11 +26,18 @@ use Exakat\Analyzer\Analyzer;
 
 class HiddenUse extends Analyzer {
     public function analyze() {
+        $previous = <<<GREMLIN
+where( __.out("EXPRESSION")
+         .filter{ it.get().value("rank") < rank}
+         .not(hasLabel("Use"))
+         .not(has("token", within("T_INCLUDE", "T_INCLUDE_ONCE", "T_REQUIRE", "T_REQUIRE_ONCE")) )
+      )
+GREMLIN;
         // only for uses with rank of 1 or later
         $this->atomIs('Use')
              ->savePropertyAs('rank', 'rank')
              ->inIs('EXPRESSION')
-             ->raw('where( __.out("EXPRESSION").not(hasLabel("Use")).filter{ it.get().value("rank") < rank} )')
+             ->raw($previous)
              ->back('first');
         $this->prepareQuery();
         
