@@ -30,7 +30,7 @@ class RedefinedDefault extends Analyzer {
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->savePropertyAs('propertyname', 'name')
-             ->inIsIE('LEFT')
+             ->hasOut('LEFT')
              ->_as('results')
              ->back('first')
 
