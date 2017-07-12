@@ -33,8 +33,8 @@ class Datastore {
 
     const CREATE = 1;
     const REUSE = 2;
-    const TIMEOUT_WRITE = 500;
-    const TIMEOUT_READ = 3000;
+    const TIMEOUT_WRITE = 5000;
+    const TIMEOUT_READ = 6000;
 
     public function __construct(Config $config, $create = self::REUSE) {
         $this->sqlitePath = $config->projects_root.'/projects/'.$config->project.'/datastore.sqlite';
