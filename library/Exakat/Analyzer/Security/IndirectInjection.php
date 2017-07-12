@@ -32,7 +32,16 @@ class IndirectInjection extends Analyzer {
     }
     
     public function analyze() {
-        $vars = $this->query('g.V().hasLabel("Analysis").has("analyzer","Security/GPRAliases").out("ANALYZED").values("fullcode").unique()');
+        $query = <<<GREMLIN
+g.V().hasLabel("Analysis").has("analyzer","Security/GPRAliases")
+     .out("ANALYZED")
+     .values("fullcode").unique()
+GREMLIN;
+        $vars = $this->query($query);
+        
+        if (empty($vars)) {
+            return;
+        }
 
         // Relayed via variable to sensitive function
         // $a = $_GET['a']; f($a); function f($a) { exec($a);}
