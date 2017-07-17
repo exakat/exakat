@@ -73,6 +73,15 @@ class Cypher extends Graph {
 
         return json_decode($result);
     }
+    
+    public function start() {}
+    public function stop()  {}
+    
+    public function serverInfo() {}
+
+    public function clean() {}
+
+    public function checkConnection() {}
 }
 
 ?>

@@ -30,6 +30,19 @@ abstract class Graph {
     }
 
     abstract public function query($query, $params = array(), $load = array()); 
+
+    abstract public function start(); 
+    abstract public function stop(); 
+             public function restart() {
+        $this->stop();
+        $this->start();
+    }
+    
+    abstract public function serverInfo(); 
+    abstract public function checkConnection(); 
+
+    abstract public function clean(); 
+
 }
 
 ?>
