@@ -116,8 +116,18 @@ class Config {
                                             'project_packagist'   => '',
                                             'other_php_versions'  => '',
 
+//                                            'gremlin'             => 'Tinkergraph',
+//                                            'loader'              => 'Tinkergraph',
+
+                                            'gremlin'             => 'Gremlin3',
                                             'loader'              => 'Neo4jImport',
-                                            
+
+//                                            'gremlin'             => 'GSNeo4j',
+//                                            'loader'              => 'GSNeo4j',
+
+//                                            'gremlin'             => 'Janusgraph',
+//                                            'loader'              => 'Janusgraph',
+
                                             'project_reports'     => array('Ambassador', 'Devoops'),
                                             'project_themes'      => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                                                            'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
@@ -357,7 +367,7 @@ class Config {
                            'other_php_versions' => $other_php_versions,
                            'phpversion'         => substr(PHP_VERSION, 0, 3),
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
-                           'loader'             => 'Neo4jImport',
+//                           'loader'             => 'Neo4jImport',
                            'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
                            'project_reports'    => array('Ambassador', 'Devoops'),
                         );
@@ -443,7 +453,7 @@ class Config {
                                 '-neo4j_port'   => 'neo4j_port',
                                 '-neo4j_folder' => 'neo4j_folder',
                                 '-token_limit'  => 1000000,
-                                '-loader'       => 'Neo4jImport',
+//                                '-loader'       => 'Neo4jImport',
                                  );
 
         foreach($optionsValue as $key => $config) {
