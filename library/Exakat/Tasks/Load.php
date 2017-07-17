@@ -183,6 +183,7 @@ class Load extends Tasks {
     static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence', 'Arrayliteral', 'Function', 'Closure');
     static public $PROP_GLOBALVAR   = array('Array');
     static public $PROP_BINARYSTRING= array('String', 'Heredoc');
+    static public $PROP_ROOT        = array('File');
 
     static public $PROP_OPTIONS = array();
 
@@ -255,7 +256,7 @@ class Load extends Tasks {
     private $sequenceCurrentRank = 0;
     private $sequenceRank        = array();
     
-    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph');
+    private $loaderList = array('CypherG3', 'Neo4jImport', 'Janusgraph', 'Tinkergraph', 'GSNeo4j');
 
     private $processing = array();
 
@@ -470,6 +471,7 @@ class Load extends Tasks {
                           'constant'    => self::$PROP_CONSTANT,
                           'globalvar'   => self::$PROP_GLOBALVAR,
                           'binaryString'=> self::$PROP_BINARYSTRING,
+                          'root'        => self::$PROP_ROOT,
                           );
     }
 
@@ -3355,35 +3357,41 @@ class Load extends Tasks {
                         $useType = 'function';
                     }
 
-                    $nsname = $this->processOneNsname();
-                    if ($useTypeAtom !== 0) {
-                        $this->addLink($nsname, $useTypeAtom, strtoupper($useType));
-                    }
-
-                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_AS) {
-                        // A\B as C
-                        ++$this->id;
-                        $this->pushExpression($nsname);
-                        $this->processAs();
-                        $alias = $this->popExpression();
-
-                        $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
-                        $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
-
-                        $alias->fullnspath  = $prefix.mb_strtolower($nsname->fullcode);
-                        $alias->origin      = $prefix.mb_strtolower($nsname->fullcode);
-
-                        $aliasName = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
-                        $alias->alias = $aliasName;
-                        $this->addLink($use, $alias, 'USE');
+                    if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_CURLY) {
+                        $nsname = $this->addAtomVoid();
+                        $this->addLink($use, $nsname, 'TRAILING');
                     } else {
-                        $this->addLink($use, $nsname, 'USE');
-                        $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
-                        $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
+                        $nsname = $this->processOneNsname();
 
-                        $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $nsname);
-                        $nsname->alias = $alias;
-
+                        if ($useTypeAtom !== 0) {
+                            $this->addLink($nsname, $useTypeAtom, strtoupper($useType));
+                        }
+    
+                        if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_AS) {
+                            // A\B as C
+                            ++$this->id;
+                            $this->pushExpression($nsname);
+                            $this->processAs();
+                            $alias = $this->popExpression();
+    
+                            $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
+                            $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
+    
+                            $alias->fullnspath  = $prefix.mb_strtolower($nsname->fullcode);
+                            $alias->origin      = $prefix.mb_strtolower($nsname->fullcode);
+    
+                            $aliasName = $this->addNamespaceUse($nsname, $alias, $useType, $alias);
+                            $alias->alias = $aliasName;
+                            $this->addLink($use, $alias, 'USE');
+                        } else {
+                            $this->addLink($use, $nsname, 'USE');
+                            $nsname->fullnspath = $prefix.mb_strtolower($nsname->fullcode);
+                            $nsname->origin     = $prefix.mb_strtolower($nsname->fullcode);
+    
+                            $alias = $this->addNamespaceUse($nsname, $nsname, $useType, $nsname);
+                            $nsname->alias = $alias;
+    
+                        }
                     }
                 } while (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_COMMA)));
 

@@ -45,6 +45,7 @@ class LoadFinal extends Tasks {
 
         $this->init();
 
+
         $this->makeClassConstantDefinition();
 
         $this->spotPHPNativeConstants();
@@ -149,12 +150,12 @@ g.V().hasLabel("Functioncall")
      .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
      .has("fullnspath", "\\\\define")
      .out("ARGUMENTS").out("ARGUMENT").has("rank", 0)
-     .hasLabel("String").has("noDelimiter")
-     .map{ s = it.get().value("noDelimiter").toString().toLowerCase();
+     .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
+     .map{ 
+           s = it.get().value("noDelimiter").toString().toLowerCase();
            if ( s.substring(0,1) != "\\\\") {
                s = "\\\\" + s;
            }
-           it.get().property("fullnspath", s);
            s;
          }.unique();
 GREMLIN;
@@ -182,7 +183,7 @@ GREMLIN;
         } else {
             $constantsConst = $constants->results;
         }
-        
+
         $constants = array_merge($constantsConst, $constantsDefine);
         $this->logTime('constants : '.count($constants));
 
@@ -204,7 +205,7 @@ g.V().hasLabel("Identifier", "Nsname")
          ).count();
 
 GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
+//            $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
 
             // Second round, with fallback to global constants
             // Based on define() definitions
@@ -230,7 +231,7 @@ g.V().hasLabel("Identifier", "Nsname")
       ).count()
 
 GREMLIN;
-                $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
+//                $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
             }
 
             $this->logTime('constants const : '.count($constantsConst));
@@ -255,7 +256,7 @@ g.V().hasLabel("Identifier", "Nsname")
        .count()
 
 GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $constantsConst));
+//            $res = $this->gremlin->query($query, array('arg1' => $constantsConst));
             }
             
             // TODO : handle case-insensitive
