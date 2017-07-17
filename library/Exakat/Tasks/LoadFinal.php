@@ -186,7 +186,7 @@ GREMLIN;
         $constants = array_merge($constantsConst, $constantsDefine);
         $this->logTime('constants : '.count($constants));
 
-        if (!empty($constants)) {
+        if (!empty($constantsConst)) {
             // First round, with full ns path
             $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
@@ -204,7 +204,7 @@ g.V().hasLabel("Identifier", "Nsname")
          ).count();
 
 GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $constants));
+            $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
 
             // Second round, with fallback to global constants
             // Based on define() definitions
@@ -255,7 +255,7 @@ g.V().hasLabel("Identifier", "Nsname")
        .count()
 
 GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $constants));
+            $res = $this->gremlin->query($query, array('arg1' => $constantsConst));
             }
             
             // TODO : handle case-insensitive
