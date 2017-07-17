@@ -32,14 +32,14 @@ class CleanDb extends Tasks {
     protected $logname = self::LOG_NONE;
 
     public function run() {
-        if ($this->config->quick) {
-            $this->gremlin->cleanWithRestart();
-            $this->cleanTmpDir();
-            return ;
-        }
-
-        $this->gremlin->cleanDatabase();
         $this->cleanTmpDir();
+         if (Tasks::$semaphore !== null) {
+            fclose(Tasks::$semaphore);
+            $this->gremlin->clean();
+            Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
+        } else {
+            $this->gremlin->clean();
+        }
     }
 
     private function cleanTmpDir() {
