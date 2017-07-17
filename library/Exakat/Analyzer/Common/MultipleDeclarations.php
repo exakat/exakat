@@ -32,10 +32,10 @@ class MultipleDeclarations extends Analyzer {
         // case-insensitive constants
 
         $query = <<<GREMLIN
-g.V().hasLabel("$this->atom").groupCount("m").by("fullnspath").cap("m")
+g.V().hasLabel(atom).groupCount("m").by("fullnspath").cap("m")
 GREMLIN;
-        $res = $this->query($query);
-        $multiples = array_filter( (array) $res[0], function ($x) { return $x > 1; });
+        $res = $this->query($query, array('atom' => $this->atom) );
+        $multiples = array_keys(array_filter( (array) $res[0], function ($x) { return $x > 1; }));
         
         if (empty($multiples)) {
             return;
