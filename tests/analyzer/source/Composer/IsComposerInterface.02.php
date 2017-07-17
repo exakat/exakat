@@ -1,7 +1,7 @@
 <?php
 
 namespace GuzzleHttp;
-use  GuzzleHttp\BatchResults as BR;
+use  \Boris\Inspector as BR;
 
 class a implements  BatchResults{}  // composer
 

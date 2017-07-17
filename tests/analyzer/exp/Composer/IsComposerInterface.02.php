@@ -1,7 +1,12 @@
 <?php
 
-$expected     = array();
+$expected     = array('\Boris\Inspector as BR', 
+                      'BR', 
+                      'BR',
+                      );
 
-$expected_not = array();
+$expected_not = array('NotBatchResults',
+                      '\\BatchResults',
+                      );
 
 ?>

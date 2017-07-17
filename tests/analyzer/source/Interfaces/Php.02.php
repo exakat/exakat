@@ -1,5 +1,5 @@
 <?php
 
-class x implements ArrayAccess, Serializable {}
+class x implements ArrayAccess, Serializable, NotPHP {}
 
 ?>

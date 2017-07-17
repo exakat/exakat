@@ -1,7 +1,8 @@
 <?php
 
-$expected     = array('ArrayAccess', 'Serializable');
+$expected     = array('ArrayAccess', 
+                      'Serializable',);
 
-$expected_not = array();
+$expected_not = array('NotPHP');
 
 ?>
