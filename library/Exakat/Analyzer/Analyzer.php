@@ -621,7 +621,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
 
     public function noAtomInside($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'not( where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel('.$this->SorA($atom).') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
+        $gremlin = 'not( where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
         $this->addMethod($gremlin);
         
         return $this;
