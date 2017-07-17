@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('UndefinedClass::Yes( )',
-                      'y::b( )');
+$expected     = array('y::b( )');
 
-$expected_not = array('parent::__construct($a)',
+$expected_not = array('UndefinedClass::Yes( )',
+                      'parent::__construct($a)',
                       'self::b( )');
 
 ?>
