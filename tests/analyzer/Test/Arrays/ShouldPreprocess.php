@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Arrays_ShouldPreprocess extends Analyzer {
-    /* 8 methods */
+    /* 9 methods */
 
     public function testArrays_ShouldPreprocess01()  { $this->generic_test('Arrays/ShouldPreprocess.01'); }
     public function testArrays_ShouldPreprocess02()  { $this->generic_test('Arrays/ShouldPreprocess.02'); }
@@ -18,5 +18,6 @@ class Arrays_ShouldPreprocess extends Analyzer {
     public function testArrays_ShouldPreprocess06()  { $this->generic_test('Arrays/ShouldPreprocess.06'); }
     public function testArrays_ShouldPreprocess07()  { $this->generic_test('Arrays/ShouldPreprocess.07'); }
     public function testArrays_ShouldPreprocess08()  { $this->generic_test('Arrays/ShouldPreprocess.08'); }
+    public function testArrays_ShouldPreprocess09()  { $this->generic_test('Arrays/ShouldPreprocess.09'); }
 }
 ?>
