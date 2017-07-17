@@ -29,7 +29,7 @@ class MissingCases extends Analyzer {
         $switches = $this->query(<<<GREMLIN
 g.V().hasLabel("Switch")
      .sideEffect{ x = []; }
-     .sideEffect( __.out('CASES').out('EXPRESSION').out('CASE').hasLabel('String').not(where(out("CONCAT"))).sideEffect{x.add(it.get().value('noDelimiter'));})
+     .sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));})
      .filter{x != [];}
      .map{x.sort();}
 GREMLIN
@@ -75,7 +75,7 @@ GREMLIN
         
         $this->atomIs('Switch')
              ->raw('sideEffect{ x = []; }.sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));}).filter{x != [];}.map{x.sort();}')
-             ->raw('filter{ x in *** }', $commons)
+             ->raw('filter{ y = ***; (x in y.values()) || (x in y); }', $commons)
              ->back('first');
         $this->prepareQuery();
     }

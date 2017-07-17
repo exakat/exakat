@@ -27,13 +27,21 @@ use Exakat\Analyzer\Analyzer;
 
 abstract class Slim extends Analyzer {
     protected function getAppVariables() {
-        $appClasses = array("\\\\slim\\\\slim",
-                            "\\\\slim\\\\app");
+        $appClasses = array('\\\\slim\\\\slim',
+                            '\\\\slim\\\\app');
                             
         $appClassesList = makeList($appClasses);
         
-        $apps = $this->query('g.V().hasLabel("New").out("NEW").has("fullnspath").has("fullnspath", within('.$appClassesList.')).in()
-                                   .in("RIGHT").hasLabel("Assignation").out("LEFT").values("code")');
+        $query = <<<GREMLIN
+g.V().hasLabel("New").out("NEW")
+     .has("fullnspath").has("fullnspath", within(***))
+     .in()
+     .in("RIGHT").hasLabel("Assignation")
+     .out("LEFT")
+     .values("code")
+GREMLIN;
+
+        $apps = $this->query($query, $appClasses);
         return $apps;
     }
 }

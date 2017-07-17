@@ -32,12 +32,6 @@ class NonStaticMethodsCalledStatic extends Analyzer {
     }
     
     public function analyze() {
-        // check outside the class to undefined Class : report it as pb.
-        $this->atomIs('Staticmethodcall')
-             ->analyzerIs('Classes/UndefinedClasses')
-             ->back('first');
-        $this->prepareQuery();
-
         // check outside the class : the first found class has not method
         // Here, we find methods that are in the grand parents, and not static.
 
@@ -51,6 +45,7 @@ class NonStaticMethodsCalledStatic extends Analyzer {
 
              ->outIs('CLASS')
              ->codeIsNot(array('parent', 'self', 'static'))
+             ->analyzerIsNot('Classes/UndefinedClasses')
              ->classDefinition()
              ->goToAllParents(self::INCLUDE_SELF)
 
