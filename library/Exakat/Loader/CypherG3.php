@@ -80,8 +80,6 @@ class CypherG3 {
             $queryTemplate = 'CREATE INDEX ON :'.$atom.'(eid)';
             $this->cypher->query($queryTemplate);
 
-            $b = microtime(true);
-
             $extra = array();
             foreach(Load::$PROP_OPTIONS as $title => $atoms) {
                 if (in_array($atom, $atoms)) {
@@ -121,7 +119,6 @@ CYPHER;
                 $res = $this->cypher->query($queryTemplate);
 
                 $this->unlink[] = $file;
-                $e = microtime(true);
             } catch (\Exception $e) {
                 $this->cleanCsv();
                 throw new LoadError("Couldn't load nodes in the database\n".$e->getMessage());
@@ -137,7 +134,6 @@ CYPHER;
             $origin = $r[2];
             $destination = $r[3];
 
-            $b = microtime(true);
             $queryTemplate = <<<CYPHER
 USING PERIODIC COMMIT 1000
 LOAD CSV WITH HEADERS FROM "file:{$this->config->projects_root}/projects/.exakat/rels.g3.$edge.$origin.$destination.csv" AS csvLine
@@ -148,7 +144,6 @@ CYPHER;
             try {
                 $res = $this->cypher->query($queryTemplate);
                 $this->unlink[] = $file;
-                $e = microtime(true);
             } catch (\Exception $e) {
                 $this->cleanCsv();
                 throw new LoadError("Couldn't load '".$edge."'relations in the database\n".$e->getMessage());
