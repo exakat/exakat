@@ -222,10 +222,14 @@ GREMLIN;
 
             if ($this->config->format == 'CSV') {
                 $csvFile = fopen($name, 'w');
-                foreach($text as $t) {
-                    fputcsv($csvFile, $t);
+                if (is_resource($csvFile)) {
+                    foreach($text as $t) {
+                        fputcsv($csvFile, $t);
+                    }
+                    fclose($csvFile);
+                } else {
+                    die( "Couldn't open $name file for writing. Aborting\n");
                 }
-                fclose($csvFile);
             } else {
                 file_put_contents($name, $text);
             }

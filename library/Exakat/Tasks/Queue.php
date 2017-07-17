@@ -67,8 +67,12 @@ class Queue extends Tasks {
 
             display('Adding project '.$this->config->project.' to the queue');
             $queuePipe = fopen($this->pipefile, 'w');
-            fwrite($queuePipe, $this->config->project."\n");
-            fclose($queuePipe);
+            if (is_resource($queuePipe)) {
+                fwrite($queuePipe, $this->config->project."\n");
+                fclose($queuePipe);
+            } else {
+                print "Couldn't write to queue\n";
+            }
         } elseif (!empty($this->config->filename)) {
             if (!file_exists($this->config->projects_root.'/projects/onepage/code/'.$this->config->filename.'.php')) {
                 throw new NoSuchFile('No such file "'.$this->config->filename.'" in /in/ folder');
@@ -81,8 +85,13 @@ class Queue extends Tasks {
             display('Adding file '.$this->config->project.' to the queue');
 
             $queuePipe = fopen($this->pipefile, 'w');
-            fwrite($queuePipe, $this->config->filename."\n");
-            fclose($queuePipe);
+            if (is_resource($queuePipe)) {
+                fwrite($queuePipe, $this->config->filename."\n");
+                fclose($queuePipe);
+            } else {
+                print "Couldn't write to queue\n";
+            }
+            
         }
 
         display('Done');
