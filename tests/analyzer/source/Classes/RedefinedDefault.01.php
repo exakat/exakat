@@ -10,7 +10,7 @@ class x {
     
     public function __construct() {
         $this->redefined = 2;
-        $this->redefined2 = $this->Notredefined;
+        $this->redefined2 = 'C';
 
         $this->updated += time();
     }
