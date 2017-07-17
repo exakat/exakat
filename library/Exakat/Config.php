@@ -120,7 +120,7 @@ class Config {
 //                                            'loader'              => 'Tinkergraph',
 
                                             'gremlin'             => 'Gremlin3',
-                                            'loader'              => 'Neo4jImport',
+                                            'loader'              => 'CypherG3',
 
 //                                            'gremlin'             => 'GSNeo4j',
 //                                            'loader'              => 'GSNeo4j',

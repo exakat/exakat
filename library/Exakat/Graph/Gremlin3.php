@@ -222,12 +222,26 @@ GREMLIN;
         }
     }
 
+    public function checkConnection() {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,            'http://'.$this->neo4j_host.'/tp/gremlin/execute?script=Gremlin.version()');
+        curl_setopt($ch, CURLOPT_URL, 'http://'.$this->config->neo4j_host);
+        curl_setopt($ch, CURLOPT_PORT, $this->config->neo4j_port);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $res = curl_exec($ch);
+        curl_close($ch);
+        
+        return !empty($res);
+    }
+    
     public function serverInfo() {
         if ($this->status === self::UNCHECKED) {
             $this->checkConfiguration();
         }
 
         $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,            'http://'.$this->neo4j_host.'/tp/gremlin/execute?script=Gremlin.version()');
         curl_setopt($ch, CURLOPT_URL, 'http://'.$this->config->neo4j_host);
         curl_setopt($ch, CURLOPT_PORT, $this->config->neo4j_port);
         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -284,57 +298,7 @@ GREMLIN;
         return $gremlin;
     }
     
-    public function cleanWithRestart() {
-        display('Cleaning with restart');
-        $this->cleanScripts();
-
-        // preserve data/dbms/auth to preserve authentication
-        if (file_exists($this->config->neo4j_folder.'/data/dbms/auth')) {
-            $sshLoad =  'mv data/dbms/auth ../auth; rm -rf data; mkdir -p data/dbms; mv ../auth data/dbms/auth; mkdir -p data/log; mkdir -p data/scripts ';
-        } else {
-            $sshLoad =  'rm -rf data; mkdir -p data; mkdir -p data/log; mkdir -p data/scripts ';
-        }
-
-        // if neo4j-service.pid exists, we kill the process once
-        if (file_exists($this->config->neo4j_folder.'/data/neo4j-service.pid')) {
-            shell_exec('kill -9 $(cat '.$this->config->neo4j_folder.'/data/neo4j-service.pid) 2>>/dev/null; ');
-        }
-
-        shell_exec('cd '.$this->config->neo4j_folder.'; '.$sshLoad);
-
-        if (!file_exists($this->config->neo4j_folder.'/conf/')) {
-            print "No conf folder in {$this->config->neo4j_folder}\n";
-        } elseif (!file_exists($this->config->neo4j_folder.'/conf/neo4j-server.properties')) {
-            print "No neo4j-server.properties file in {$this->config->neo4j_folder}/conf/\n";
-        } else {
-            $neo4j_config = file_get_contents($this->config->neo4j_folder.'/conf/neo4j-server.properties');
-            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/m', $neo4j_config, $r)) {
-                if ($r[1] != $this->config->neo4j_port) {
-                    print "Warning : Exakat's port and Neo4j's port are not the same ($r[1] / {$this->config->neo4j_port})\n";
-                }
-            }
-        }
-
-        // checking that the server has indeed restarted
-        if (Tasks::$semaphore !== null) {
-            fclose(Tasks::$semaphore);
-            $this->doRestart();
-            Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
-        } else {
-            $this->doRestart();
-        }
-
-        display('Database cleaned with restart');
-
-        try {
-            $res = $this->serverInfo();
-            display('Restarted Neo4j cleanly');
-        } catch (Exception $e) {
-            display('Didn\'t restart neo4j cleanly');
-        }
-    }
-
-    private function doRestart() {
+    public function start() {
         $round = 0;
         do {
             ++$round;
@@ -353,12 +317,18 @@ GREMLIN;
 
             exec('cd '.$this->config->neo4j_folder.'; ./bin/neo4j start >/dev/null 2>&1 & ');
 
-            // Might be : Another server-process is running with [49633], cannot start a new one. Exiting.
-            // Needs to pick up this error and act
-            // also, may be we can wait for the pid to appear?
+            $res = $this->checkConnection();
+        } while ( empty($res));
+    }
 
-            $res = $this->serverInfo();
-        } while ( $res === false);
+    public function stop() {
+        $round = -1;
+        
+        while (file_exists($this->config->neo4j_folder.'/data/neo4j-service.pid') && $round < 10) {
+            exec('cd '.$this->config->neo4j_folder.'; ./bin/neo4j stop >/dev/null 2>&1');
+            
+            sleep(++$round);
+        } 
     }
 
     public function cleanScripts() {
@@ -376,61 +346,65 @@ GREMLIN;
         display('   Cleaned '.count($files).' gremlin scripts');
     }
     
-    public function cleanDatabase() {
+    public function clean() {
         $this->cleanScripts();
-
-        $queryTemplate = <<<GREMLIN
-g.V().count();
-GREMLIN;
-        $result = null;
-        $counts = 0;
-
-        while($counts < 100 && (!$result instanceof \Stdclass || $result->results === null)) {
-            $result = $this->query($queryTemplate);
-            ++$counts;
-            usleep(100000);
+        
+        if (!$this->checkConnection()) {
+            $this->forceRestart();
+            return;
         }
-
-        if ($counts === 100)  {
-            display('No connexion to gremlin : forcing restart ('.$counts.')');
-            // Can't connect to gremlin. Forcing restart.
-            // checking that the server has indeed restarted
-            if (Tasks::$semaphore !== null) {
-                fclose(Tasks::$semaphore);
-                $this->doRestart();
-                Tasks::$semaphore = @stream_socket_server("udp://0.0.0.0:".Tasks::$semaphorePort, $errno, $errstr, STREAM_SERVER_BIND);
-            } else {
-                $this->doRestart();
-            }
-
-            $this->cleanScripts();
-            return ;
-        } else {
-            display('Connexion to gremlin (Neo4j) found ('.$counts.')');
+        
+        try {
+            $res = $this->query('g.V().count()');
+        } catch (GremlinException $e) {
+            $this->forceRestart();
+            return;
         }
-        $nodes = $result->results[0];
-        display($nodes.' nodes in the database');
+        $nodes = $res->results[0];
 
-        $begin = microtime(true);
-        if ($nodes == 0) {
+        if ($nodes === 0) {
             display('No nodes in Gremlin. No need to clean');
+            return;
         } elseif ($nodes > 10000) {
-            display($nodes.'nodes : forcing restart');
-            $this->cleanWithRestart();
-        } else {
-            display('Cleaning with gremlin');
+            display($nodes.' nodes : forcing restart');
+            $this->forceRestart();
+            return;
+        } 
+        
+        display('Cleaning with gremlin');
 
-            $queryTemplate = <<<GREMLIN
-
-g.E().drop();
-g.V().drop();
-
-GREMLIN;
-            $this->query($queryTemplate);
-            display('Database cleaned');
+        try {
+            $begin = microtime(true);
+            $this->query('g.E().drop(); g.V().drop()');
+        } catch (GremlinException $e) {
+            $this->forceRestart();
+            return;
         }
         $end = microtime(true);
+
         display(number_format(($end - $begin) * 1000, 0).' ms');
+    }
+    
+    private function forceRestart() {
+        $this->stop();
+
+    // preserve data/dbms/auth to preserve authentication
+        if (file_exists($this->config->neo4j_folder.'/data/dbms/auth')) {
+            display('Preserving auth folder');
+            rename($this->config->neo4j_folder.'/data/dbms/auth', $this->config->neo4j_folder.'/auth');
+        } 
+    
+        rmdirRecursive($this->config->neo4j_folder.'/data/');
+        mkdir($this->config->neo4j_folder.'/data/', 0755);
+        mkdir($this->config->neo4j_folder.'/data/log', 0755);
+        mkdir($this->config->neo4j_folder.'/data/scripts', 0755);
+
+        if (file_exists($this->config->neo4j_folder.'/auth')) {
+            rename($this->config->neo4j_folder.'/auth', $this->config->neo4j_folder.'/data/dbms/auth');
+        } 
+
+        $this->start();
+        display('Database restarted');
     }
 }
 

@@ -86,7 +86,7 @@ class CypherG3 {
                     if (in_array($title, array('delimiter', 'noDelimiter', 'fullnspath', 'alias', 'origin', 'encoding', 'block', 'strval', 'propertyname', 'globalvar', 'binaryString'))) {
                         // Raw string
                         $extra[] = "$title: csvLine.$title";
-                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant'))) {
+                    } elseif (in_array($title, array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant', 'root'))) {
                         // Boolean
                         $extra[] = "$title: (csvLine.$title = \"1\")";
                     } elseif (in_array($title, array('count', 'intval', 'args_max', 'args_min'))) {
@@ -169,6 +169,7 @@ GREMLIN;
     }
 
     private function cleanCsv() {
+        return;
         if (empty($this->unlink)) {
             return ;
         }
