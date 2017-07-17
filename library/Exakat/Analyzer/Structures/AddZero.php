@@ -53,7 +53,7 @@ class AddZero extends Analyzer {
              ->back('first')
              ->inIs('EXPRESSION')
              ->outIs('EXPRESSION')
-             ->atomIsNot(array('Function', 'Class', 'Trait'))
+             ->atomIsNot(array('Function', 'Class', 'Trait', 'Dowhile', 'While', 'Foreach', 'For'))
              ->atomInsideNoDefinition('Addition')
              ->_as('results')
              ->outIs(array('LEFT', 'RIGHT'))
