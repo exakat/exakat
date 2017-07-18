@@ -72,7 +72,6 @@ class NoEchoInRouteCallable extends Slim {
              ->functioncallIs(array('echo', 'print', 'var_dump', 'print_r'))
              ->back('first');
         $this->prepareQuery();
-
     }
 }
 

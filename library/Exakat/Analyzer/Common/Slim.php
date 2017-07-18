@@ -34,14 +34,14 @@ abstract class Slim extends Analyzer {
         
         $query = <<<GREMLIN
 g.V().hasLabel("New").out("NEW")
-     .has("fullnspath").has("fullnspath", within(***))
+     .has("fullnspath").has("fullnspath", within($appClassesList))
      .in()
      .in("RIGHT").hasLabel("Assignation")
      .out("LEFT")
      .values("code")
 GREMLIN;
 
-        $apps = $this->query($query, $appClasses);
+        $apps = $this->query($query);
         return $apps;
     }
 }
