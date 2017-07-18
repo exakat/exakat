@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 10 Jul 2017 16:44:17 +0000
-.. comment: Generation hash : aa2b2b976dc82410678158d1a8a5ded6dd368d45
+.. comment: Generation date : Tue, 18 Jul 2017 05:30:49 +0000
+.. comment: Generation hash : cdaf05f99340b77febddf3ec62720e86e22b2193
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 300 analysis
+Total : 302 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -185,7 +185,9 @@ Total : 300 analysis
 * :ref:`Long Arguments <long-arguments>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
+* :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
+* :ref:`Mismatched Typehint <mismatched-typehint>`
 * :ref:`Missing Cases In Switch <missing-cases-in-switch>`
 * :ref:`Mixed Concat And Interpolation <mixed-concat-and-interpolation>`
 * :ref:`Modernize Empty With Expression <modernize-empty-with-expression>`
@@ -437,7 +439,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 55 analysis
+Total : 56 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -457,6 +459,7 @@ Total : 55 analysis
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Function Subscripting <function-subscripting>`
 * :ref:`Group Use Declaration <group-use-declaration>`
+* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
@@ -500,7 +503,7 @@ Total : 55 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 52 analysis
+Total : 53 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -519,6 +522,7 @@ Total : 52 analysis
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Group Use Declaration <group-use-declaration>`
+* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Isset With Constant <isset-with-constant>`
@@ -560,7 +564,7 @@ Total : 52 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 50 analysis
+Total : 51 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -577,6 +581,7 @@ Total : 50 analysis
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Group Use Declaration <group-use-declaration>`
+* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Isset With Constant <isset-with-constant>`
@@ -618,7 +623,7 @@ Total : 50 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 43 analysis
+Total : 44 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -630,6 +635,7 @@ Total : 43 analysis
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Group Use Declaration <group-use-declaration>`
+* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Isset With Constant <isset-with-constant>`
@@ -669,7 +675,7 @@ Total : 43 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 39 analysis
+Total : 40 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -681,6 +687,7 @@ Total : 39 analysis
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -716,7 +723,7 @@ Total : 39 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 50 analysis
+Total : 51 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -728,6 +735,7 @@ Total : 50 analysis
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
+* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`

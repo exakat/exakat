@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 10 Jul 2017 16:44:17 +0000
-.. comment: Generation hash : aa2b2b976dc82410678158d1a8a5ded6dd368d45
+.. comment: Generation date : Tue, 18 Jul 2017 05:30:49 +0000
+.. comment: Generation hash : cdaf05f99340b77febddf3ec62720e86e22b2193
 
 
 .. _$http\_raw\_post\_data:
@@ -3260,26 +3260,39 @@ Dont Change The Blind Var
 #########################
 
 
-When using a `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_, the blind variables are a copy. It is confusing to change them. 
+When using a `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_, the blind variables hold a copy of the original value. It is confusing to modify them, as it seems that the original value may be changed.
+
+When actually changing the original value, use the reference in the foreach definition to make it obvious, and save the final reassignation.
+
+When the value has to be prepared before usage, then save the filtered value in a separate variable. This makes the clean value obivous, and preserve the original value for a future usage.
 
 .. code-block:: php
 
    <?php
    
+   // $bar is duplicated and kept 
    $foo = [1, 2, 3];
    foreach($foo as $bar) {
-       // $bar is updated but its final value is lost
-       print $bar . ' => ' . ($bar + 1) . PHP_EOL;
-       // if $bar + 1 is repeated several times, consider assigning it to a variable.
-       foobar($bar + 1);
-   
+       // $bar is updated but its original value is kept
+       $nextBar = $bar + 1;
+       print $bar . ' => ' . ($nextBar) . PHP_EOL;
+       foobar($nextBar);
    }
    
+   // $bar is updated and lost
    $foo = [1, 2, 3];
    foreach($foo as $bar) {
        // $bar is updated but its final value is lost
        print $bar . ' => ' . (++$bar) . PHP_EOL;
        // Now that $bar is reused, it is easy to confuse its value
+       foobar($bar);
+   }
+   
+   // $bar is updated and kept
+   $foo = [1, 2, 3];
+   foreach($foo as &$bar) {
+       // $bar is updated and keept
+       print $bar . ' => ' . (++$bar) . PHP_EOL;
        foobar($bar);
    }
    
@@ -4749,6 +4762,38 @@ See also `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarat
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
+.. _groupuse-trailing-comma:
+
+GroupUse Trailing Comma
+#######################
+
+
+In PHP 7.2, the usage of a final empty slot was allowed with use statements.
+
+Although this empty instruction is ignored at execution, this allows for clean presentation of code, and short diff when committing in a VCS.
+
+.. code-block:: php
+
+   <?php
+   
+   use a\b\{c, 
+            d, 
+            e, 
+            f,
+           };
+   
+   ?>
+
+
+See also ` <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_ and `Revisit trailing commas in function arguments <https://www.mail-archive.com/internals@lists.php.net/msg81138.html>`_.
+
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/GroupUseTrailingComma                                                                                                                                        |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 .. _hardcoded-passwords:
 
 Hardcoded Passwords
@@ -6077,6 +6122,40 @@ This was added in PHP 5.4+
 +--------------+---------------------------+
 
 
+.. _mismatched-default-arguments:
+
+Mismatched Default Arguments
+############################
+
+
+Arguments are relayed from one method to the other, and the arguments have different default values. 
+
+Although it is possible to have different default values, it is worth checking why this is actually the case.
+
+.. code-block:: php
+
+   <?php
+   
+   function foo($a = null, $b = array() ) {
+       // foo method calls directly bar. 
+       // When argument are provided, it's OK
+       // When argument are omited, the default value is not the same as the next method
+       bar($a, $b);
+   }
+   
+   function bar($c = 1, $d = array() ) {
+   
+   }
+   
+   ?>
+
++--------------+--------------------------------------+
+| Command Line | Functions/MismatchedDefaultArguments |
++--------------+--------------------------------------+
+| Analyzers    | :ref:`Analyze`                       |
++--------------+--------------------------------------+
+
+
 .. _mismatched-ternary-alternatives:
 
 Mismatched Ternary Alternatives
@@ -6106,6 +6185,43 @@ Ternary operator applies a condition, and yield two different results. Those res
 
 +--------------+------------------------------+
 | Command Line | Structures/MismatchedTernary |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
+.. _mismatched-typehint:
+
+Mismatched Typehint
+###################
+
+
+Relayed arguments don't have the same typehint.
+
+Typehint acts as a filter method. When an object is checked with a first class, and then checked again with a second distinct class, the whole process is always false : $a can't be of two different classes at the same time.
+
+.. code-block:: php
+
+   <?php
+   
+   // Foo() calls bar()
+   function foo(A $a, B $b) {
+       bar($a, $b);
+   }
+   
+   // $a is of A typehint in both methods, but 
+   // $b is of B then BB typehing
+   function bar(A $a, BB $b) {
+   
+   }
+   
+   ?>
+
+
+Note : This analysis currently doesn't check generalisation of classes : for example, when B is a child of BB, it is still reported as a mismatch.
+
++--------------+------------------------------+
+| Command Line | Functions/MismatchedTypehint |
 +--------------+------------------------------+
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+

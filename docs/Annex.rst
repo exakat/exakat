@@ -79,6 +79,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * FacetedJson
   * Json
   * OnepageJson
+  * Marmelab
   * Codeflower
   * Dependencywheel
   * Codacy
@@ -298,11 +299,18 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.12.3
+
+  * GroupUse Trailing Comma (Php/GroupUseTrailingComma ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, Unassigned, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
+  * Mismatched Default Arguments (Functions/MismatchedDefaultArguments ; Analyze)
+  * Mismatched Typehint (Functions/MismatchedTypehint ; Analyze)
+  * Scalar Or Object Property (Classes/ScalarOrObjectProperty)
+
 * 0.12.2
 
   * Mkdir Default (Security/MkdirDefault ; Security)
   * ext/lapack (Extensions/Extlapack)
-  * strict_types Preference (Php/DeclareStrict ; Preferences)
+  * strict_types Preference (Php/DeclareStrict ; Appinfo, Preferences)
 
 * 0.12.1
 
@@ -1588,6 +1596,7 @@ List of external links mentionned in this documentation.
 
 * ` <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
 * ` <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
+* ` <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
@@ -1634,13 +1643,16 @@ List of external links mentionned in this documentation.
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
+* `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
+* `Ev <http://php.net/manual/en/book.ev.php>`_
 * `Exakat <http://www.exakat.io/>`_
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
 * `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
 * `Exceptions <http://php.net/manual/en/language.exceptions.php>`_
 * `exif <http://php.net/manual/en/book.exif.php>`_
+* `expect <http://php.net/manual/en/book.expect.php>`_
 * `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/gender <http://php.net/manual/en/book.gender.php>`_
 * `ext/lua <http://php.net/manual/en/book.lua.php>`_
@@ -1651,14 +1663,17 @@ List of external links mentionned in this documentation.
 * `extension FANN <http://php.net/manual/en/book.fann.php>`_
 * `Ez <https://ez.no/>`_
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
+* `GeoIP <http://php.net/manual/en/book.geoip.php>`_
 * `Gettext <https://www.gnu.org/software/gettext/manual/gettext.html>`_
 * `git <https://git-scm.com/>`_
 * `Github <https://github.com/exakat/exakat>`_
 * `Global Variables <https://codex.wordpress.org/Global_Variables>`_
+* `GMP <http://php.net/manual/en/book.gmp.php>`_
 * `Gnupg Function for PHP <http://www.php.net/manual/en/book.gnupg.php>`_
 * `Goto <http://php.net/manual/en/control-structures.goto.php>`_
 * `gremlin plug-in <https://github.com/thinkaurelius/neo4j-gremlin-plugin>`_
@@ -1697,6 +1712,7 @@ List of external links mentionned in this documentation.
 * `Net SNMP <http://www.net-snmp.org/>`_
 * `New features <http://php.net/manual/en/migration56.new-features.php>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
+* `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_

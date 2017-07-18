@@ -8,6 +8,7 @@ Summary
 
 * `I need special command to get my code`_
 * `Can I checkout that branch?`_
+* `Can I clone with my ssh keys?`_
 * `The project is too big`_
 * `Where can I find the report`_
 * `Can I run exakat on local code?`_
@@ -38,15 +39,30 @@ Send a message on Github.com/exakat/exakat to mention your specific method.
 `Can I checkout that branch?`_
 ------------------------------
 
-Currently (Version 0.9.9), there is no way to request a tag or a branche or a revision when cloning the code. 
+Currently (Version 0.12.2), there is no way to request a tag or a branche or a revision when cloning the code. 
 
 The best way is to reach the 'code' folder, and make the change there. Unless with 'init' or 'update', exakat doesn't make any change to the code. 
 
 ::
 
-    php exakat.phar init -p myProject
+    php exakat.phar init -p myProject -R url://my/git/repository 
     cd ./projects/myProject/code
     git branch notMasterBranch
+    cd -
+    php exakat.phar project -p myProject
+
+`Can I clone with my ssh keys?`_
+---------------------------------
+
+When using git, or any vcs, the current shell user's SSH keys may be used to access the repository. When using a remote installation, or a docker image, the keys won't be accessible. 
+
+The fallback solution is to init an empty project, clone the code from the Shell (with the keys), and then run project.
+
+::
+
+    php exakat.phar init -p myProject
+    cd ./projects/myProject
+    git clone url://myprivate/git/repository code 
     cd -
     php exakat.phar project -p myProject
 
