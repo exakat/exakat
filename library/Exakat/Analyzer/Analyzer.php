@@ -133,8 +133,6 @@ abstract class Analyzer {
         if (!isset(self::$datastore)) {
             self::$datastore = new Datastore($this->config);
         }
-        
-        $this->linksDown = Token::linksAsList();
     }
     
     public function __destruct() {
@@ -622,7 +620,8 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     public function noAtomInside($atom) {
         assert($this->assertAtom($atom));
         // Cannot use not() here : 'This traverser does not support loops: org.apache.tinkerpop.gremlin.process.traversal.traverser.B_O_Traverser'.
-        $gremlin = 'where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
+        $gremlin = 'not( where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
+//        $gremlin = 'where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
         return $this;
