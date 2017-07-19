@@ -42,12 +42,9 @@ class Arguments extends Analyzer {
              ->outIsIE('LEFT')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'arg')
-             ->inIsIE('LEFT')
-             ->inIsIE('VARIABLE')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
+             ->back('first')
              ->outIs('BLOCK')
-             ->atomInside('Variable')
+             ->atomInsideNoDefinition('Variable')
              ->samePropertyAs('code', 'arg');
         $this->prepareQuery();
     }
