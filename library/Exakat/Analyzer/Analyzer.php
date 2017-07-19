@@ -133,6 +133,8 @@ abstract class Analyzer {
         if (!isset(self::$datastore)) {
             self::$datastore = new Datastore($this->config);
         }
+        
+        $this->linksDown = Token::linksAsList();
     }
     
     public function __destruct() {
@@ -491,7 +493,7 @@ GREMLIN;
     protected function hasNoInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
         $this->addMethod('not( where( 
- __.repeat(__.in(' . $this->linksDown . ')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
+ __.repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
  ) )');
         
         return $this;
@@ -504,7 +506,7 @@ GREMLIN;
         }
 
         $this->addMethod('not( where( 
-__.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'")
+__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'")
   ) )');
         
         return $this;
@@ -513,7 +515,7 @@ __.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this
     protected function hasInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
         $this->addMethod('where( 
-__.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('.$this->SorA($atom).')).hasLabel('.$this->SorA($atom).')
+__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit(hasLabel('.$this->SorA($atom).')).hasLabel('.$this->SorA($atom).')
     )');
         
         return $this;
@@ -521,7 +523,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
 
     protected function goToInstruction($atom = 'Namespace') {
         assert($this->assertAtom($atom));
-        $this->addMethod('repeat( __.in('.$this->linksDown.')).until(hasLabel('.$this->SorA($atom).', "File") )');
+        $this->addMethod('repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel('.$this->SorA($atom).', "File") )');
         
         return $this;
     }
@@ -611,7 +613,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
 
     public function atomInsideNoDefinition($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $gremlin = 'emit( ).repeat( __.out( ).not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
@@ -620,8 +622,8 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     public function noAtomInside($atom) {
         assert($this->assertAtom($atom));
         // Cannot use not() here : 'This traverser does not support loops: org.apache.tinkerpop.gremlin.process.traversal.traverser.B_O_Traverser'.
-        $gremlin = 'not( where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
-//        $gremlin = 'where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
+//        $gremlin = 'not( where( __.emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
+        $gremlin = 'where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
         return $this;
@@ -1256,7 +1258,7 @@ GREMLIN
     }
 
     public function goToFunction($type = array('Function', 'Method')) {
-        $this->addMethod('repeat(__.in('.$this->linksDown.')).until(hasLabel('.$this->SorA($type).') )');
+        $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel('.$this->SorA($type).') )');
         
         return $this;
     }
