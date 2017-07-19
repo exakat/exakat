@@ -169,7 +169,6 @@ GREMLIN;
     }
 
     private function cleanCsv() {
-        return;
         if (empty($this->unlink)) {
             return ;
         }
