@@ -77,7 +77,6 @@ class LoadFinal extends Tasks {
         $begin = $end;
     }
 
-
     private function spotPHPNativeConstants() {
         $title = 'mark PHP native constants call';
         $constants = call_user_func_array('array_merge', $this->PHPconstants);
@@ -85,7 +84,7 @@ class LoadFinal extends Tasks {
         $constants = array_map('strtolower', $constants);
 
         // May be array_keys
-        $constants = array_slice($constants, 0, 14300);
+        $constants = array_values($constants);
         
         $query = <<<GREMLIN
 g.V().hasLabel("Identifier")
@@ -273,7 +272,8 @@ GREMLIN;
         $query = <<<'GREMLIN'
         g.V().hasLabel('Staticconstant').as('first')
 .out('CONSTANT').sideEffect{name = it.get().value("code");}.select('first')
-.out('CLASS').hasLabel("Identifier", "Nsname").sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
+.out('CLASS').hasLabel("Identifier", "Nsname").has('fullnspath')
+.sideEffect{classe = it.get().value("fullnspath");}.in('DEFINITION')
 .where( __.sideEffect{classes = [];}
           .emit(hasLabel("Class")).repeat( out("EXTENDS").in("DEFINITION") ).times(15)
           .out("CONST").hasLabel("Const").out("CONST").as('const')
