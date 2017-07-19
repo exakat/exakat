@@ -25,6 +25,7 @@ namespace Exakat\Tasks\Helpers;
 use Exakat\Tasks\Load;
 
 class Atom {
+    const STRING_MAX_SIZE = 500;
     static public $atomCount = 0;
     
     public $id           = 0;
@@ -68,11 +69,11 @@ class Atom {
     }
     
     public function toArray() {
-        if (strlen($this->code) > 500) {
-            $this->code = substr($this->code, 0, 500).'...[ total '.strlen($this->code).' chars]';
+        if (strlen($this->code) > self::STRING_MAX_SIZE) {
+            $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
         }
-        if (strlen($this->fullcode) > 500) {
-            $this->fullcode = substr($this->fullcode, 0, 500).'...[ total '.strlen($this->fullcode).' chars]';
+        if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
+            $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
         
         $this->code          = addcslashes($this->code       , '\\"');
@@ -99,11 +100,11 @@ class Atom {
     public function toLimitedArray($headers) {
         $return = array();
 
-        if (strlen($this->code) > 5000) {
-            $this->code = substr($this->code, 0, 5000).'...[ total '.strlen($this->code).' chars]';
+        if (strlen($this->code) > self::STRING_MAX_SIZE) {
+            $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
         }
-        if (strlen($this->fullcode) > 5000) {
-            $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
+        if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
+            $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
 
         $this->code          = addcslashes($this->code       , '\\"');
