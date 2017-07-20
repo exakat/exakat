@@ -37,7 +37,7 @@ class ZendTypehinting extends Analyzer {
 
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
-             ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->atomIs(array('Identifier', 'Nsname'))
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
     }
