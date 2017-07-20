@@ -93,6 +93,8 @@ class Atom {
         $this->bracket       = $this->bracket     ? 'true' : 'false';
         $this->close_tag     = $this->close_tag   ? 'true' : 'false';
         $this->aliased       = $this->aliased     ? 'true' : 'false';
+
+        $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
         
         return (array) $this;
     }
@@ -125,6 +127,8 @@ class Atom {
         $this->bracket       = (int) $this->bracket    ;
         $this->close_tag     = (int) $this->close_tag  ;
         $this->aliased       = (int) $this->aliased    ;
+
+        $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
 
         $return = array( $this->id,
                          $this->atom,
