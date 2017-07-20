@@ -116,7 +116,7 @@ class Tinkergraph {
 
         $jsonText = '';
         foreach($this->json as $j) {
-            $jsonText .= html_entity_decode(json_encode($j)).PHP_EOL;
+            $jsonText .= $this->json_encode($j).PHP_EOL;
             assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg());
         }
         
@@ -179,6 +179,11 @@ class Tinkergraph {
                     !in_array($label, Load::$PROP_OPTIONS[$l])) {
                     continue;
                 };
+
+                if (in_array($l, array('globalvar')) && 
+                    !$value) {
+                    continue;
+                };
         
                 if (in_array($l, $booleanValues)) {
                     $value = (boolean) $value;
@@ -228,7 +233,7 @@ class Tinkergraph {
             } elseif ($j->label === 'Project') {
                 // Just continue;
             } else {
-                $jsonText .= json_encode($j).PHP_EOL;
+                $jsonText .= $this->json_encode($j).PHP_EOL;
                 assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
             }
         }
@@ -241,6 +246,19 @@ class Tinkergraph {
     public function saveDefinitions($exakatDir, $calls) {
         //each time...
         $this->calls = $calls;
+    }
+    
+    public function json_encode($object) {
+        if (isset($object->properties['fullcode'])) {
+            $object->properties['fullcode'][0]->value = utf8_encode($object->properties['fullcode'][0]->value);
+        }
+        if (isset($object->properties['code'])) {
+            $object->properties['code'][0]->value = utf8_encode($object->properties['code'][0]->value);
+        }
+        if (isset($object->properties['noDelimiter'])) {
+            $object->properties['noDelimiter'][0]->value = utf8_encode($object->properties['noDelimiter'][0]->value);
+        }
+        return json_encode($object);
     }
 }
 
