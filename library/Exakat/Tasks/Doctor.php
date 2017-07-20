@@ -249,73 +249,11 @@ class Doctor extends Tasks {
             }
             $php = $this->config->php;
 
-            $ini = <<<INI
-; where and which PHP executable are available
-neo4j_host     = '127.0.0.1';
-neo4j_port     = '7474';
-neo4j_folder   = '$neo4j_folder';
-neo4j_login    = 'admin';
-neo4j_password = 'admin';
+            $ini = file_get_contents($this->config->dir_root.'/server/exakat.ini');
+            $ini = str_replace(array('{$version}', '{$version_path}'),
+                               array( $version,     $_SERVER['_']), 
+                               $ini);
 
-;php52        = /path/to/php52
-;php53        = /path/to/php53
-;php54        = /path/to/php54
-;php55        = /path/to/php55
-;php56        = /path/to/php56
-;php70        = /path/to/php70
-;php71        = /path/to/php71
-;php72        = /path/to/php72
-;php73        = /path/to/php73
-php$version        = {$_SERVER['_']}
-
-; Default themes to run
-#project_themes[] = 'CompatibilityPHP53';
-#project_themes[] = 'CompatibilityPHP54';
-#project_themes[] = 'CompatibilityPHP55';
-#project_themes[] = 'CompatibilityPHP56';
-project_themes[] = 'CompatibilityPHP70';
-project_themes[] = 'CompatibilityPHP71';
-project_themes[] = 'CompatibilityPHP72';
-;project_themes[] = 'CompatibilityPHP73';
-project_themes[] = 'Analyze';
-project_themes[] = 'Preferences';
-project_themes[] = 'Appinfo';
-project_themes[] = 'Appcontent';
-project_themes[] = '"Dead code"';
-project_themes[] = 'Security';
-project_themes[] = 'Custom';
-
-; Default reports to generate
-; General reports
-project_reports[] = 'Ambassador';
-; project_reports[] = 'Text';
-; project_reports[] = 'Xml';
-; project_reports[] = 'Csv';
-
-; Focused reports
-project_reports[] = 'PhpConfiguration';
-project_reports[] = 'PhpCompilation';
-; project_reports[] = 'Inventories';
-; project_reports[] = 'Uml';
-; project_reports[] = 'Clustergrammer';
-
-; Special reports
-project_reports[] = 'RadwellCode';
-project_reports[] = 'ZendFramework';
-
-;Old reports (soon to be dropped)
-; project_reports[] = 'Devoops';
-; project_reports[] = 'Faceted';
-
-; Limit the size of a project to 1000 k tokens (about 100 k LOC)
-token_limit = 1000000
-
-; Loader
-loader = Neo4jImport
-;loader = CypherG3
-
-
-INI;
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
         }
 
