@@ -29,20 +29,23 @@ class ScalarTypehintUsage extends Analyzer {
     protected $phpVersion = '7.0+';
 
     public function analyze() {
+        $scalars = $this->loadIni('php_scalar_types.ini', 'types');
+        
         // in Arguments
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
+             ->_as('results')
              ->outIs('TYPEHINT')
-             ->fullnspathIs(array('\\int', '\\float', '\\bool', '\\string'))
-             ->inIs('TYPEHINT');
+             ->fullnspathIs($scalars)
+             ->back('results');
         $this->prepareQuery();
 
         // in Return
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTION_METHOD)
              ->outIs('RETURNTYPE')
-             ->fullnspathIs(array('\\int', '\\float', '\\bool', '\\string'))
-             ->inIs('RETURNTYPE');
+             ->fullnspathIs($scalars)
+             ->back('first');
         $this->prepareQuery();
     }
 }

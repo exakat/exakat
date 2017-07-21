@@ -30,6 +30,8 @@ class DependencyInjection extends Analyzer {
     }
     
     public function analyze() {
+        $scalars = $this->loadIni('php_scalar_types.ini', 'types');
+        
         // Assigned to a property at constructor
         $this->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
@@ -37,7 +39,7 @@ class DependencyInjection extends Analyzer {
              ->outIs('ARGUMENT')
              ->_as('result')
              ->outIs('TYPEHINT')
-             ->fullnspathIsNot(array('\callable', '\array', '\string', '\int', '\float', '\bool'))
+             ->fullnspathIsNot($scalars)
              ->inIs('TYPEHINT')
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'arg')
@@ -61,7 +63,7 @@ class DependencyInjection extends Analyzer {
              ->outIs('ARGUMENT')
              ->_as('result')
              ->outIs('TYPEHINT')
-             ->fullnspathIsNot(array('\callable', '\array', '\string', '\int', '\float', '\bool'))
+             ->fullnspathIsNot($scalars)
              ->inIs('TYPEHINT')
              ->outIsIE('LEFT')
              ->savePropertyAs('code', 'arg')
