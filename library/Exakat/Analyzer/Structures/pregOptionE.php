@@ -31,20 +31,33 @@ class pregOptionE extends Analyzer {
         // delimiters
         $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[~';
         
-        $makeDelimiters = ' sideEffect{ 
+        $fetchDelimiter = <<<GREMLIN
+sideEffect{ 
+    delimiter = it.get().value("noDelimiter")[0];
+    if (delimiter == '\\\\') {
+        delimiter = "\\\\\\\\" + it.get().value("noDelimiter")[1];
+    }
+
+}
+GREMLIN;
+        
+        $makeDelimiters = <<<GREMLIN
+sideEffect{ 
     if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
     else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
     else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
     else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
     else { delimiterFinal = delimiter; } 
-}.filter{ delimiter != "\\\\\\\\" }';
+}
+.filter{ delimiter != "\\\\\\\\" }
+GREMLIN;
 
         // preg_match with a string
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->raw(' sideEffect{ delimiter = it.get().value("noDelimiter")[0]; }')
+             ->raw($fetchDelimiter)
              ->raw($makeDelimiters)
              ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([^" + delimiterFinal + "]*?e[^" + delimiterFinal + "]*?)\\$')
              ->back('first');
