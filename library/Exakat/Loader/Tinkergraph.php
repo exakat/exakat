@@ -31,6 +31,7 @@ use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
 use Exakat\Tasks\Tasks;
 use Exakat\Tokenizer\Token;
+use Exakat\Tasks\Helpers\Atom;
 
 class Tinkergraph {
     const CSV_SEPARATOR = ',';
@@ -61,6 +62,7 @@ class Tinkergraph {
         // Force autoload
         $this->tinkergraph = new Graph($this->config);
         $this->path = $this->config->projects_root.'/projects/.exakat/tinkergraph.graphson';
+        $this->pathDefinition = $this->config->projects_root.'/projects/.exakat/tinkergraph.definition.graphson';
         
         $this->cleanCsv();
     }
@@ -81,57 +83,51 @@ class Tinkergraph {
 
         self::saveTokenCounts();
 
-        foreach($this->calls as $type => $fnp) {
-            foreach($fnp as $directions) {
-                foreach($directions['definitions'] as $origin) {
-                    foreach($origin as $ot) {
-                        foreach($directions['calls'] as $destination) {
-                            foreach($destination as $dt) {
-                                if (isset($json[$ot]->outE->DEFINITION)) {
-                                    $this->json[$ot]->outE->DEFINITION[] = (object) ["id" => $this->id++,"inV" => $dt];
-                                } else {
-                                    if (!isset($this->json[$ot])) {
-                                        print "ID $ot doesn't exists\n";
-                                    }
-                                    if (!isset($this->json[$ot]->outE)) {
-                                        print "ID $ot has no outE\n";
-                                    }
-                                    $this->json[$ot]->outE->DEFINITION = [ (object) ["id" => $this->id++,"inV" => $dt]];
-                                }
-
-                                if (isset($this->json[$dt]->inE->DEFINITION)) {
-                                    $this->json[$dt]->inE->DEFINITION[] = (object) ["id" => $this->id++,"outV" => $ot];
-                                } else {
-                                    if (!isset($this->json[$dt])) {
-                                        print "ID $dt doesn't exists\n";
-                                    }
-                                    $this->json[$dt]->inE->DEFINITION = [ (object) ["id" => $this->id++,"outV" => $ot]];
-                                }
-                            }
-                        }
-                    }
+        $links = array();
+        foreach($this->calls as $type => $fnps) {
+            foreach($fnps as $fnp => $usage) {
+                if (empty($usage['definitions'])) { continue; }
+                if (empty($usage['calls'])) { continue; }
+                
+                $calls = array_merge(...array_values($usage['calls']));
+                $definitions = array_merge(...array_values($usage['definitions']));
+                
+                foreach($calls as $call) {
+                    $links[$call] = $definitions;
                 }
             }
         }
 
-        $jsonText = '';
-        foreach($this->json as $j) {
-            $jsonText .= $this->json_encode($j).PHP_EOL;
-            assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg());
-        }
-        
         $fp = fopen($this->path, 'a');
-        $json = fwrite($fp, $jsonText);
-        fclose($fp);
+        $fpDefinitions = fopen($this->pathDefinition, 'r');
+        while(!feof($fpDefinitions)) {
+            $row = fgets($fpDefinitions);
+            if (empty($row)) {continue; }
+            $json = json_decode($row);
+            
+            if (!isset($links[$json->id])) {
+                fwrite($fp, $row);
+                continue; 
+            }
 
+            $json->inE->DEFINITION = array();
+            foreach($links[$json->id] as $d) {
+                $json->inE->DEFINITION[] = (object) ["id" => $this->id++,"outV" => $d];
+            }
+            
+            fwrite($fp, json_encode($json).PHP_EOL);
+        }
+        fclose($fp);
+        fclose($fpDefinitions);
+        unlink($this->pathDefinition);
+        
         display('loading nodes');
 
-//        $begin = microtime(true);
+        $begin = microtime(true);
         $res = $this->tinkergraph->query('graph.io(IoCore.graphson()).readGraph("'.$this->path.'"); g.V().count();');
         $end = microtime(true);
-//        print 'Loading time : ' .number_format(($end - $begin) * 1000, 2)." ms \n";
-//        print_r($res);
-        display('loaded nodes');
+
+        display('loaded nodes (duration : '.number_format( ($end - $begin) * 1000, 2).' ms)');
 
         $this->cleanCsv();
         display('Cleaning CSV');
@@ -141,7 +137,10 @@ class Tinkergraph {
 
     private function cleanCsv() {
         if (file_exists($this->path)) {
-//            unlink($this->path);
+            unlink($this->path);
+        }
+        if (file_exists($this->pathDefinition)) {
+            unlink($this->pathDefinition);
         }
     }
 
@@ -224,23 +223,25 @@ class Tinkergraph {
             }
         }
         
-        $jsonText = '';
+        $fp = fopen($this->path, 'a');
+        $fpDefinition = fopen($this->pathDefinition, 'a');
+
         foreach($json as $j) {
             if (in_array($j->label, array('Functioncall', 'Function', 'Class', 'Classanonymous', 'Newcall', 'Variableobject', 
                                           'Identifier', 'Nsname', 'Interface', 'Trait', 'String', 'Constant', 'Arguments',
                                           'Variable', 'Variablearray', ))) {
-                $this->json[$j->id] = $j;
+                assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
+                fwrite($fpDefinition, $this->json_encode($j).PHP_EOL);
             } elseif ($j->label === 'Project') {
                 // Just continue;
             } else {
-                $jsonText .= $this->json_encode($j).PHP_EOL;
                 assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
+                fwrite($fp, $this->json_encode($j).PHP_EOL);
             }
         }
 
-        $fp = fopen($this->path, 'a');
-        $json = fwrite($fp, $jsonText);
         fclose($fp);
+        fclose($fpDefinition);
     }
 
     public function saveDefinitions($exakatDir, $calls) {
