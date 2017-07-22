@@ -7,7 +7,7 @@ usedInGlobalLabel :
 
 goto usedInGlobalLabel;
 
-function y() {
+function ($a = 3) {
     usedInYLabel : 
 
     unusedInYLabel : 
@@ -16,6 +16,6 @@ function y() {
     goto usedInYLabel;
     goto usedLabel2;
     goto usedLabel2;
-}
+};
 
 ?>

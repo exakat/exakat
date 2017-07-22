@@ -87,7 +87,7 @@ abstract class Analyzer {
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition');
-    static public $FUNCTIONS_ALL    = array('Function', 'Method', 'Closure');
+    static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method');
     static public $FUNCTIONS_NAMED  = array('Function', 'Method');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
@@ -1257,13 +1257,13 @@ GREMLIN
         return $this;
     }
 
-    public function goToFunction($type = array('Function', 'Method')) {
+    public function goToFunction($type = array('Function', 'Method', 'Closure')) {
         $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel('.$this->SorA($type).') )');
         
         return $this;
     }
 
-    public function hasNoFunction($type = 'Function') {
+    public function hasNoFunction($type = array('Function', 'Closure', 'Method')) {
         return $this->hasNoInstruction($type);
     }
 
