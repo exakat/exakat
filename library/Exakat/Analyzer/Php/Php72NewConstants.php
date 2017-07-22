@@ -28,27 +28,30 @@ use Exakat\Analyzer\Common\ConstantDefinition;
 
 class Php72NewConstants extends ConstantDefinition {
     protected $phpVersion = '7.2-';
-    
+
     public function analyze() {
-        $this->constants = array(
-'PHP_OS_FAMILY',
-'PHP_FLOAT_DIG',
-'PHP_FLOAT_EPSILON',
-'PHP_FLOAT_MAX',
-'PHP_FLOAT_MIN',
-'SQLITE3_DETERMINISTIC',
-'CURLSSLOPT_NO_REVOKE',
-'CURLOPT_DEFAULT_PROTOCOL',
-'CURLOPT_STREAM_WEIGHT',
-'CURLMOPT_PUSHFUNCTION',
-'CURL_PUSH_OK',
-'CURL_PUSH_DENY',
-'CURL_HTTP_VERSION_2TLS',
-'CURLOPT_TFTP_NO_OPTIONS',
-'CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE',
-'CURLOPT_CONNECT_TO',
-'CURLOPT_TCP_FASTOPEN',
-'DNS_CAA',
+        $this->constants = array('PHP_OS_FAMILY',
+                                 'PHP_FLOAT_DIG',
+                                 'PHP_FLOAT_EPSILON',
+                                 'PHP_FLOAT_MAX',
+                                 'PHP_FLOAT_MIN',
+                                 'DATE_RFC7231',
+                                 'PREG_UNMATCHED_AS_NULL',
+                                 'SQLITE3_DETERMINISTIC',
+                                 'CURLSSLOPT_NO_REVOKE',
+                                 'CURLOPT_DEFAULT_PROTOCOL',
+                                 'CURLOPT_STREAM_WEIGHT',
+                                 'CURLMOPT_PUSHFUNCTION',
+                                 'CURL_PUSH_OK',
+                                 'CURL_PUSH_DENY',
+                                 'CURL_HTTP_VERSION_2TLS',
+                                 'CURLOPT_TFTP_NO_OPTIONS',
+                                 'CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE',
+                                 'CURLOPT_CONNECT_TO',
+                                 'CURLOPT_TCP_FASTOPEN',
+                                 'JSON_INVALID_UTF8_IGNORE',
+                                 'JSON_INVALID_UTF8_SUBSTITUTE',
+                                 'DNS_CAA',
         );
         parent::analyze();
     }

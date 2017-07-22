@@ -30,13 +30,24 @@ class Php72NewFunctions extends FunctionDefinition {
     protected $phpVersion = '7.2-';
     
     public function analyze() {
-        $this->functions = array(
-'mb_ord',
-'mb_chr',
-'mb_scrub',
-'stream_isatty',
-'proc_nice',
-    );
+        $this->functions = array( 'mb_ord',
+                                  'mb_chr',
+                                  'mb_scrub',
+                                  'stream_isatty',
+                                  'sapi_windows_vt100_support',
+                                  'imagesetclip',
+                                  'imagegetclip',
+                                  'imageopenpolygon',
+                                  'imageresolution',
+                                  'imagecreatefrombmp', 
+                                  'imagebmp',
+                                  'oci_register_taf_callback',
+                                  'oci_disable_taf_callback',
+                                  'socket_addrinfo_lookup',
+                                  'socket_addrinfo_connect',
+                                  'socket_addrinfo_bind',
+                                  'socket_addrinfo_explain',
+                                );
         parent::analyze();
     }
 }
