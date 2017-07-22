@@ -34,13 +34,22 @@ class UnresolvedUse extends Analyzer {
     }
 
     public function analyze() {
+        $cits = $this->query('g.V().hasLabel("Class", "Interface", "Trait").values("fullnspath").unique()');
+        $namespaces = $this->query('g.V().hasLabel("Namespace").values("fullnspath").unique()');
+        
+        $all = array_merge($cits, $namespaces);
+        if (empty($all)) {
+            return;
+        }
+        
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->analyzerIsNot(array('Classes/IsExtClass', 'Interfaces/IsExtInterface', 'Traits/IsExtTrait', 'Composer/IsComposerNsname'))
-             ->savePropertyAs('fullnspath', 'fnp')
-             ->raw('not( where( g.V().hasLabel("Class", "Interface", "Trait").filter{ it.get().value("fullnspath") == fnp} ) )')
-             ->raw('not( where( g.V().hasLabel("Namespace").filter{ it.get().value("fullnspath") == fnp} ) )');
+             ->analyzerIsNot(array('Classes/IsExtClass', 
+                                   'Interfaces/IsExtInterface', 
+                                   'Traits/IsExtTrait', 
+                                   'Composer/IsComposerNsname'))
+             ->fullnspathIsNot($all);
         $this->prepareQuery();
     }
 }
