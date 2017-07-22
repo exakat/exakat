@@ -29,7 +29,6 @@ use Exakat\Exceptions\GremlinException;
 use Exakat\Tasks\Tasks;
 use Brightzone\GremlinDriver\Connection;
 use Brightzone\GremlinDriver\Message;
-use Exakat\Graph\Helpers\Websocket as Client;
 
 class Tinkergraph extends Graph {
     const CHECKED = true;
@@ -55,8 +54,8 @@ class Tinkergraph extends Graph {
     }
     
     private function checkConfiguration() {
-        $this->db->open();
         $this->db->timeout = 1200;
+        $this->db->open();
     }
 
     public function query($query, $params = array(), $load = array()) {
