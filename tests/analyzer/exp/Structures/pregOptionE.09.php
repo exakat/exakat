@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('\'/(a)(\'.$kw.\')(b)/sie\'');
+$expected     = array('preg_replace(\'/(a)(\' . $kw . \')(b)/sie\', \'c\' . $d . \'e\', $data)'
+                     );
 
-$expected_not = array('\'/(a)(\'.$kw.\')(b)/si\'');
+$expected_not = array('preg_replace(\'/(a)(\' . $kw . \')(b)/si\', \'c\' . $d . \'e\', $data)'
+                      );
 
 ?>

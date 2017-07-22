@@ -26,12 +26,7 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class pregOptionE extends Analyzer {
-    public function analyze() {
-        $functions = '\preg_replace';
-        // delimiters
-        $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[~';
-        
-        $fetchDelimiter = <<<GREMLIN
+        const FETCH_DELIMITER = <<<GREMLIN
 sideEffect{ 
     delimiter = it.get().value("noDelimiter")[0];
     if (delimiter == '\\\\') {
@@ -41,24 +36,31 @@ sideEffect{
 }
 GREMLIN;
         
-        $makeDelimiters = <<<GREMLIN
+        const MAKE_DELIMITER_FINAL = <<<GREMLIN
 sideEffect{ 
     if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
     else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
     else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
     else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
+    else if (delimiter == "|") { delimiter = "\\\\|"; delimiterFinal = "\\\\|"; } 
     else { delimiterFinal = delimiter; } 
 }
 .filter{ delimiter != "\\\\\\\\" }
 GREMLIN;
+
+    public function analyze() {
+        $functions = '\preg_replace';
+        // delimiters
+        $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[~';
+        
 
         // preg_match with a string
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->raw($fetchDelimiter)
-             ->raw($makeDelimiters)
+             ->raw(self::FETCH_DELIMITER)
+             ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([^" + delimiterFinal + "]*?e[^" + delimiterFinal + "]*?)\\$')
              ->back('first');
         $this->prepareQuery();
@@ -69,9 +71,9 @@ GREMLIN;
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->outWithRank('CONCAT', 0)
-             ->raw($fetchDelimiter)
+             ->raw(self::FETCH_DELIMITER)
              ->inIs('CONCAT')
-             ->raw($makeDelimiters)
+             ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();
@@ -86,9 +88,9 @@ GREMLIN;
              ->outIsIE('CONCAT')
              ->atomIs('String')
              ->is('rank', 0)
-             ->raw($fetchDelimiter)
+             ->raw(self::FETCH_DELIMITER)
              ->inIsIE('CONCAT')
-             ->raw($makeDelimiters)
+             ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();

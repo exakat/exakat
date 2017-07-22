@@ -36,7 +36,8 @@ class RegexDelimiter extends Analyzer {
              ->atomIs('String')
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
              ->noDelimiterIsNot('')
-             ->raw('map{ it.get().value("noDelimiter").substring(0, 1) }')
+             ->raw(pregOptionE::FETCH_DELIMITER)
+             ->raw('map{ delimiter; }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = (array) $this->rawQuery();
         if ($types[0] instanceof \Stdclass) {
