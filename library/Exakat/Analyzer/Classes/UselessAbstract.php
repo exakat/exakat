@@ -36,7 +36,7 @@ class UselessAbstract extends Analyzer {
              ->analyzerIsNot('Classes/OnlyStaticMethods')
              ->hasOut('ABSTRACT')
              ->savePropertyAs('fullnspath', 'fnp')
-             ->hasNoOut("DEFINITION")
+             ->hasNoOut('DEFINITION')
              ->back('first');
         $this->prepareQuery();
 
