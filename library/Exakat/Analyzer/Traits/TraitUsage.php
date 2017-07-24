@@ -29,7 +29,7 @@ use Exakat\Analyzer\Common\TraitUsage as CommonTraitUsage;
 class TraitUsage extends CommonTraitUsage {
 
     public function analyze() {
-        $this->atomIs(array('Class', 'Trait'))
+        $this->atomIs(array('Class', 'Classanonymous', 'Trait'))
              ->outIs('USE')
              ->atomIs('Use');
         $this->prepareQuery();
