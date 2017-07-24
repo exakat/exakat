@@ -8,4 +8,6 @@ try {
 } catch (Exception $e) {
 
 }
+
+new someException();
 ?>
