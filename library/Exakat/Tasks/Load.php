@@ -98,7 +98,7 @@ class Load extends Tasks {
 
     private $tokens = array();
     private $id = 0;
-    private $id0 = 0;
+    private $id0 = null;
 
     const FULLCODE_SEQUENCE = ' /**/ ';
     const FULLCODE_BLOCK    = ' { /**/ } ';
@@ -218,39 +218,8 @@ class Load extends Tasks {
                      '`' => \Exakat\Tasks\T_BACKTICK,
                    );
 
-    static public $TOKENNAMES = array(
-                         ';'  => 'T_SEMICOLON',
-                         '+'  => 'T_PLUS',
-                         '-'  => 'T_MINUS',
-                         '/'  => 'T_SLASH',
-                         '*'  => 'T_STAR',
-                         '.'  => 'T_DOT',
-                         '['  => 'T_OPEN_BRACKET',
-                         ']'  => 'T_CLOSE_BRACKET',
-                         '('  => 'T_OPEN_PARENTHESIS',
-                         ')'  => 'T_CLOSE_PARENTHESIS',
-                         '{'  => 'T_OPEN_CURLY',
-                         '}'  => 'T_CLOSE_CURLY',
-                         '='  => 'T_EQUAL',
-                         ','  => 'T_COMMA',
-                         '!'  => 'T_BANG',
-                         '~'  => 'T_TILDE',
-                         '@'  => 'T_AT',
-                         '?'  => 'T_QUESTION',
-                         ':'  => 'T_COLON',
-                         '<'  => 'T_SMALLER',
-                         '>'  => 'T_GREATER',
-                         '%'  => 'T_PERCENTAGE',
-                         '"'  => 'T_QUOTE',
-                         '$'  => 'T_DOLLAR',
-                         '&'  => 'T_AND',
-                         '|'  => 'T_PIPE',
-                         '^'  => 'T_CARET',
-                         '`'  => 'T_BACKTICK',
-                   );
     private $expressions         = array();
     private $atoms               = array();
-    private $atomCount           = 0;
     private $argumentsId         = array();
     private $sequence            = array();
     private $sequenceCurrentRank = 0;
@@ -599,7 +568,6 @@ class Load extends Tasks {
                 // Ignoring
             }
         }
-//        $this->saveDefinitions();
 
         return array('files'  => count($files),
                      'tokens' => $nbTokens);
@@ -607,7 +575,6 @@ class Load extends Tasks {
 
     private function reset() {
         $this->atoms = array($this->id0->id => $this->id0);
-//        $this->atoms = array();
         $this->links = array();
 
         foreach($this->calls as $type => $names) {
@@ -2381,7 +2348,7 @@ class Load extends Tasks {
         $block->fullcode = static::FULLCODE_BLOCK;
         $block->line     = $this->tokens[$this->id][2];
         $block->token    = $this->getToken($this->tokens[$this->id][0]);
-        $block->bracket  = Load::BRACKET;
+        $block->bracket  = self::BRACKET;
 
         ++$this->id; // skip }
 
