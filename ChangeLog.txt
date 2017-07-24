@@ -1,4 +1,4 @@
-Version 0.12.4 (Golden Winged Great Peng , Coming up)
+Version 0.12.5 (White Deer Spirit, Coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,26 @@ Version 0.12.4 (Golden Winged Great Peng , Coming up)
 + Tokenizer
     + 
 
-Version 0.12.3 (Golden Winged Great Peng , 2017-07-17)
+Version 0.12.4 (peacock Mahamayuri, 2017-07-24)
++ Architecture
+    + Optimized performances for large projects (over 2M tokens)
+    + Support Neo4j as a driver for Tinkgerpop
++ Report
+    + Now covering all PHP 7.2 features
++ Analyzer
+    + New analyzer : Extension xattr
+    + New analyzer : report 'object' as a class name
+    + New analyzer : No Array for magic property
+    + New analyzer : suggest reducing code for isset
+    + New favorite : and / &&
+    + Updated analyzer : fetch correct delimiter, even if escaped.
+    + Extended coverage for several analyzers
+    + Removed several nested-subqueries (bad for performances)
++ Tokenizer
+    + Tinkergraph/Neo4j : reworked loading data from disk.
+    + Added protection for $ in filename
+
+Version 0.12.3 (Golden Winged Great Peng, 2017-07-17)
 + Architecture
     + Prepared options for several back servers : Tinkergraph, Gremlin-Server/Neo4j, Janusgraph
 + Report
