@@ -191,10 +191,10 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/readline
 * ext/recode
 * ext/redis
-* ext/reflexion
+* ext/reflection
 * ext/runkit
 * ext/sem
-* ext/sockets
+* ext/session
 * ext/shmop
 * ext/simplexml
 * ext/snmp
@@ -219,6 +219,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/wddx
 * ext/wikidiff2
 * ext/wincache
+* ext/xattr
 * ext/xcache
 * ext/xdebug
 * ext/xdiff
@@ -299,9 +300,21 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.12.4
+
+  * Assign With And (Php/AssignAnd ; Analyze)
+  * Child Class Remove Typehint (Classes/ChildRemoveTypehint)
+  * Isset Multiple Arguments (Php/IssetMultipleArgs ; Suggestions)
+  * Logical Operators Favorite (Php/LetterCharsLogicalFavorite ; Preferences)
+  * No Magic With Array (Classes/NoMagicWithArray ; Analyze)
+  * PHP 7.2 Object Keyword (Php/Php72ObjectKeyword ; CompatibilityPHP72, CompatibilityPHP73)
+  * PHP 72 Removed Classes (Php/Php72RemovedClasses ; Unassigned)
+  * PHP 72 Removed Interfaces (Php/Php72RemovedInterfaces ; Unassigned)
+  * ext/xattr (Extensions/Extxattr ; Appinfo)
+
 * 0.12.3
 
-  * GroupUse Trailing Comma (Php/GroupUseTrailingComma ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, Unassigned, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
+  * GroupUse Trailing Comma (Php/GroupUseTrailingComma ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
   * Mismatched Default Arguments (Functions/MismatchedDefaultArguments ; Analyze)
   * Mismatched Typehint (Functions/MismatchedTypehint ; Analyze)
   * Scalar Or Object Property (Classes/ScalarOrObjectProperty)
@@ -1481,14 +1494,14 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/readline (Extensions/Extreadline ; Appinfo)
   * ext/recode (Extensions/Extrecode ; Appinfo)
   * ext/redis (Extensions/Extredis ; Appinfo)
-  * ext/reflexion (Extensions/Extreflection ; Appinfo)
+  * ext/reflection (Extensions/Extreflection ; Appinfo)
   * ext/runkit (Extensions/Extrunkit ; Appinfo)
   * ext/sem (Extensions/Extsem ; Appinfo)
+  * ext/session (Extensions/Extsession ; Appinfo)
   * ext/shmop (Extensions/Extshmop ; Appinfo)
   * ext/simplexml (Extensions/Extsimplexml ; Appinfo)
   * ext/snmp (Extensions/Extsnmp ; Appinfo)
   * ext/soap (Extensions/Extsoap ; Appinfo)
-  * ext/sockets (Extensions/Extsession ; Appinfo)
   * ext/sockets (Extensions/Extsockets ; Appinfo)
   * ext/spl (Extensions/Extspl ; Appinfo)
   * ext/sqlite (Extensions/Extsqlite ; Appinfo, Codacy)
@@ -1655,6 +1668,7 @@ List of external links mentionned in this documentation.
 * `expect <http://php.net/manual/en/book.expect.php>`_
 * `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/gender <http://php.net/manual/en/book.gender.php>`_
+* `ext/inotify <http://php.net/manual/en/book.inotify.php>`_
 * `ext/lua <http://php.net/manual/en/book.lua.php>`_
 * `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
@@ -1686,9 +1700,11 @@ List of external links mentionned in this documentation.
 * `ICU <http://site.icu-project.org/>`_
 * `Image Processing and GD <http://php.net/manual/en/book.image.php>`_
 * `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
+* `IMAP <http://www.php.net/imap>`_
 * `Integers <http://php.net/manual/en/language.types.integer.php>`_
 * `Interfaces <http://php.net/manual/en/language.oop5.interfaces.php>`_
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
+* `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `Joomla <http://www.joomla.org/>`_
 * `Judy C library <http://judy.sourceforge.net/>`_
@@ -1697,7 +1713,9 @@ List of external links mentionned in this documentation.
 * `libevent <http://www.libevent.org/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
 * `List of function aliases <http://php.net/manual/en/aliases.php>`_
+* `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_
 * `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
+* `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
@@ -1716,9 +1734,12 @@ List of external links mentionned in this documentation.
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
+* `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
+* `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_
 * `Packagist <https://packagist.org/>`_
 * `PCRE <http://php.net/pcre>`_
+* `pecl crypto <https://pecl.php.net/package/crypto>`_
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
@@ -1732,6 +1753,7 @@ List of external links mentionned in this documentation.
 * `Predefined Variables <http://php.net/manual/en/reserved.variables.php>`_
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
 * `Process Control <http://php.net/manual/en/book.pcntl.php>`_
+* `proctitle <http://php.net/manual/en/book.proctitle.php>`_
 * `Pspell <http://php.net/manual/en/book.pspell.php>`_
 * `PSR-11 : Dependency injection container <https://github.com/container-interop/fig-standards/blob/master/proposed/container.md>`_
 * `PSR-13 : Link definition interface <http://www.php-fig.org/psr/psr-13/>`_
@@ -1741,6 +1763,7 @@ List of external links mentionned in this documentation.
 * `PSR7 <http://www.php-fig.org/psr/psr-7/>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_
+* `Reflection <http://php.net/manual/en/book.reflection.php>`_
 * `Regular Expressions (Perl-Compatible) <http://php.net/manual/en/book.pcre.php>`_
 * `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_
 * `RFC 7159 <http://www.faqs.org/rfcs/rfc7159>`_
@@ -1751,6 +1774,7 @@ List of external links mentionned in this documentation.
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Semaphore <http://php.net/manual/en/book.sem.php>`_
 * `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
+* `Session <http://php.net/manual/en/book.session.php>`_
 * `session_regenerateid() <http://php.net/session_regenerate_id>`_
 * `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_
 * `Simplexml <http://php.net/manual/en/book.simplexml.php>`_
@@ -1763,6 +1787,7 @@ List of external links mentionned in this documentation.
 * `sqlite3 <http://www.php.net/sqlite3>`_
 * `SSH2 functions <http://php.net/manual/en/book.ssh2.php>`_
 * `Standard PHP Library (SPL) <http://www.php.net/manual/en/book.spl.php>`_
+* `static keyword <http://php.net/manual/en/language.oop5.static.php>`_
 * `String functions <http://php.net/manual/en/ref.strings.php>`_
 * `Suhosin.org <https://suhosin.org/>`_
 * `svn <https://subversion.apache.org/>`_
@@ -1776,6 +1801,7 @@ List of external links mentionned in this documentation.
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
+* `V8 Javascript Engine <https://bugs.chromium.org/p/v8/issues/list>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
@@ -1783,12 +1809,15 @@ List of external links mentionned in this documentation.
 * `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
 * `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_
+* `wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `Wincache extension for PHP <http://www.php.net/wincache>`_
 * `Wordpress <https://www.wordpress.org/>`_
 * `Wordpress Functions <https://codex.wordpress.org/Function_Reference>`_
 * `Wordpress Nonce <https://codex.wordpress.org/WordPress_Nonces>`_
+* `xattr <http://php.net/manual/en/book.xattr.php>`_
 * `xcache <https://xcache.lighttpd.net/>`_
 * `Xdebug <https://xdebug.org/>`_
+* `xdiff <http://php.net/manual/en/book.xdiff.php>`_
 * `XML Parser <http://www.php.net/manual/en/book.xml.php>`_
 * `XML-RPC <http://www.php.net/manual/en/book.xmlrpc.php>`_
 * `xmlreader <http://www.php.net/manual/en/book.xmlreader.php>`_

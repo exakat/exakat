@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Tue, 18 Jul 2017 05:30:49 +0000
-.. comment: Generation hash : cdaf05f99340b77febddf3ec62720e86e22b2193
+.. comment: Generation date : Mon, 24 Jul 2017 08:47:17 +0000
+.. comment: Generation hash : 15698d8166c67b02369f10d15b4f883b73c9ef72
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 302 analysis
+Total : 305 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -93,6 +93,7 @@ Total : 302 analysis
 * :ref:`Always Positive Comparison <always-positive-comparison>`
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
+* :ref:`Assign With And <assign-with-and>`
 * :ref:`Assigned Twice <assigned-twice>`
 * :ref:`Avoid Optional Properties <avoid-optional-properties>`
 * :ref:`Avoid Parenthesis <avoid-parenthesis>`
@@ -217,6 +218,7 @@ Total : 302 analysis
 * :ref:`No Hardcoded Port <no-hardcoded-port>`
 * :ref:`No Implied If <no-implied-if>`
 * :ref:`No Isset With Empty <no-isset-with-empty>`
+* :ref:`No Magic With Array <no-magic-with-array>`
 * :ref:`No Need For Else <no-need-for-else>`
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Public Access <no-public-access>`
@@ -263,6 +265,7 @@ Total : 302 analysis
 * :ref:`Results May Be Missing <results-may-be-missing>`
 * :ref:`Return True False <return-true-false>`
 * :ref:`Same Conditions <same-conditions>`
+* :ref:`Scalar Or Object Property <scalar-or-object-property>`
 * :ref:`Sequences In For <sequences-in-for>`
 * :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
 * :ref:`Short Open Tags <short-open-tags>`
@@ -439,7 +442,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 56 analysis
+Total : 57 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -449,6 +452,7 @@ Total : 56 analysis
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
+* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
 * :ref:`Const With Array <const-with-array>`
@@ -503,7 +507,7 @@ Total : 56 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 53 analysis
+Total : 54 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -513,6 +517,7 @@ Total : 53 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
+* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -564,7 +569,7 @@ Total : 53 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 51 analysis
+Total : 52 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -572,6 +577,7 @@ Total : 51 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
+* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -623,13 +629,14 @@ Total : 51 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 44 analysis
+Total : 45 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
+* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
@@ -675,13 +682,14 @@ Total : 44 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 40 analysis
+Total : 41 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
+* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
@@ -723,13 +731,14 @@ Total : 40 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 51 analysis
+Total : 52 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
+* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
@@ -782,7 +791,7 @@ Total : 51 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 45 analysis
+Total : 46 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -808,6 +817,7 @@ Total : 45 analysis
 * :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+* :ref:`PHP 7.2 Object Keyword <php-7.2-object-keyword>`
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
@@ -835,7 +845,7 @@ Total : 45 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 46 analysis
+Total : 47 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -861,6 +871,7 @@ Total : 46 analysis
 * :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`PHP 7.2 Deprecations <php-7.2-deprecations>`
+* :ref:`PHP 7.2 Object Keyword <php-7.2-object-keyword>`
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`

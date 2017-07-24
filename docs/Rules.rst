@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Tue, 18 Jul 2017 05:30:49 +0000
-.. comment: Generation hash : cdaf05f99340b77febddf3ec62720e86e22b2193
+.. comment: Generation date : Mon, 24 Jul 2017 08:47:17 +0000
+.. comment: Generation hash : 15698d8166c67b02369f10d15b4f883b73c9ef72
 
 
 .. _$http\_raw\_post\_data:
@@ -777,6 +777,42 @@ Default values will save some instructions in the constructor, and makes the val
 +--------------+---------------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                                            |
 +--------------+---------------------------------------------------------------------------------------------------------------------------+
+
+
+.. _assign-with-and:
+
+Assign With And
+###############
+
+
+The lettered logical operators yield to assignation.
+
+It is recommended to use the &&, ^ and || operators, instead of and, or and xor, to prevent confusion.
+
+.. code-block:: php
+
+   <?php
+   
+   // The expected behavior is 
+   // The following are equivalent
+    $a =  $b  && $c;
+    $a = ($b && $c);
+   
+   // The unexpected behavior is 
+   // The following are equivalent
+    $a = $b  and $c;
+   ($a = $b) and $c;
+   
+   ?>
+
+
+See also `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_.
+
++--------------+----------------+
+| Command Line | Php/AssignAnd  |
++--------------+----------------+
+| Analyzers    | :ref:`Analyze` |
++--------------+----------------+
 
 
 .. _assigned-twice:
@@ -1962,6 +1998,35 @@ Using a type test without else is also accepted here. This is a special treatmen
 +--------------+--------------------------+
 | Analyzers    | :ref:`Analyze`           |
 +--------------+--------------------------+
+
+
+.. _child-class-remove-typehint:
+
+Child Class Remove Typehint
+###########################
+
+
+PHP 7.2 introduced the ability to remove a typehint when overloarding a method. This is not valid code for older versions.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       function foobar(foo $a) {}
+   }
+   
+   class bar extends foo {
+       function foobar($a) {}
+   }
+   
+   ?>
+
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Classes/ChildRemoveTypehint                                                                                                                                      |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 .. _class-const-with-array:
@@ -7762,6 +7827,60 @@ See also `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migrat
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
+.. _no-magic-with-array:
+
+No Magic With Array
+###################
+
+
+Magic method `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ doesn't work for array syntax. 
+
+When overloading properties, they can only be used for scalar values, excluding arrays. Under the hood, PHP uses `'__get() <http://php.net/manual/en/language.oop5.magic.php>`_ to reach for the name of the property, and doesn't recognize the following index as an array. It yields an error : Indirect modification of overloaded property.
+
+.. code-block:: php
+
+   <?php
+   
+   class c {
+       private $a;
+       private $o = array();
+   
+       function '__get($name) {
+           return $this->o[$name];
+       }
+       
+       function foo() {
+           // property b doesn't exists
+           $this->b['a'] = 3;
+           
+           print_r($this);
+       }
+   
+       // This method has no impact on the issue
+       function '__set($name, $value) {
+           $this->o[$name] = $value;
+       }
+   }
+   
+   $c = new c();
+   $c->foo();
+   
+   ?>
+
+
+This is not reported by linting.
+
+In this analysis, only properties that are found to be magic are reported. For example, using the b property outside the class scope is not reported, as it would yield too many false-positives.
+
+See also `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_.
+
++--------------+--------------------------+
+| Command Line | Classes/NoMagicWithArray |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
 .. _no-need-for-else:
 
 No Need For Else
@@ -8263,7 +8382,9 @@ Non Static Methods Called In A Static
 Static methods have to be declared as such (using the static keyword). Then, 
 one may call them without instantiating the object.
 
-However, PHP doesn't check that a method is static or not : at any point, you may call one
+PHP 7.0, and more recent versions, yield a deprecated error : 'Non-static method A::B() should not be called statically' .
+
+PHP 5 and older doesn't check that a method is static or not : at any point, you may call one
 method statically : 
 
 .. code-block:: php
@@ -8297,6 +8418,9 @@ in-family method.
            public function bar( ) { echo '__METHOD__.\n; }
        } 
    ?>
+
+
+See also `static keyword <http://php.net/manual/en/language.oop5.static.php>`_.
 
 +--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/NonStaticMethodsCalledStatic                                                                                                                  |
@@ -9030,6 +9154,35 @@ Deprecated functions and extensions are reported in a separate analysis.
 
 +--------------+------------------------------------------------------+
 | Command Line | Php/Php72Deprecation                                 |
++--------------+------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
++--------------+------------------------------------------------------+
+
+
+.. _php-7.2-object-keyword:
+
+PHP 7.2 Object Keyword
+######################
+
+
+Since PHP 7.2, 'object' is a keyword. It can't be used for class, interface or trait name. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Valid until PHP 7.2
+   class object {}
+   
+   // Altough it is really weird anyway...
+   
+   ?>
+
+
+See also `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_.
+
++--------------+------------------------------------------------------+
+| Command Line | Php/Php72ObjectKeyword                               |
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
 +--------------+------------------------------------------------------+
@@ -10291,6 +10444,78 @@ Several If then else structures are chained, and some conditions are identical. 
 +--------------+---------------------------+
 | Analyzers    | :ref:`Analyze`            |
 +--------------+---------------------------+
+
+
+.. _scalar-or-object-property:
+
+Scalar Or Object Property
+#########################
+
+
+Property shouldn't use both object and scalar syntaxes. When a property may be an object, it is recommended to implement the Null Object pattern : instead of checking if the property is scalar, make it always object. 
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       public $display = 'echo';
+       
+       function foo($string) {
+           if (is_string($this->display)) {
+               echo $this->string;
+           } elseif ($this->display 'instanceof myDisplayInterface) {
+               $display->display();
+           } else {
+               print Error when displaying\n;
+           }
+       }
+   }
+   
+   interface myDisplayInterface {
+       public function display($string); // does the display in its own way
+   }
+   
+   class nullDisplay implements myDisplayInterface {
+       // implements myDisplayInterface but does nothing
+       public function display($string) {}
+   }
+   
+   class x2 {
+       public $display = null;
+       
+       public function '__construct() {
+           $this->display = new nullDisplay();
+       }
+       
+       function foo($string) {
+           // Keep the check, as $display is public, and may get wrong values
+           if ($this->display 'instanceof myDisplayInterface) {
+               $display->display();
+           } else {
+               print Error when displaying\n;
+           }
+       }
+   }
+   
+   // Simple class for echo
+   class echoDisplay implements myDisplayInterface {
+       // implements myDisplayInterface but does nothing
+       public function display($string) {
+           echo $string;
+       }
+   }
+   
+   ?>
+
+
+See also `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_. and `The Null Object Pattern <https://www.sitepoint.com/the-null-object-pattern-polymorphism-in-domain-models/>`_.
+
++--------------+--------------------------------+
+| Command Line | Classes/ScalarOrObjectProperty |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
 
 
 .. _scalar-typehint-usage:
