@@ -36,14 +36,12 @@ class UseComposer extends Analyzer {
     }
 
     public function toArray() {
-        Analyzer::initDocs();
         $report = array('composer.json' => Analyzer::$datastore->getHash('composer.json'));
 
         return $report;
     }
 
     public function hasResults() {
-        Analyzer::initDocs();
         $report = Analyzer::$datastore->getHash('composer.json') === 1;
 
         return $report;

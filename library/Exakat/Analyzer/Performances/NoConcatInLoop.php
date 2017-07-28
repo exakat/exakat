@@ -20,36 +20,18 @@
  *
 */
 
-
-namespace Exakat\Analyzer\Composer;
+namespace Exakat\Analyzer\Performances;
 
 use Exakat\Analyzer\Analyzer;
 
-class PackagesNames extends Analyzer {
-    private $report = null;
-    
+class NoConcatInLoop extends Analyzer {
     public function analyze() {
-        return true;
+        $this->atomIs(array('Foreach', 'For'))
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Assignation')
+             ->codeIs('.=');
+        $this->prepareQuery();
     }
-
-    public function toArray() {
-        if ($this->report === null) {
-            $this->hasResult();
-        }
-
-        return $this->report;
-    }
-
-    public function hasResults() {
-        $data = Analyzer::$datastore->getRow('composer');
-        $this->report = array();
-        foreach($data as $d) {
-            $this->report[$d['component']. ' ('.$d['version'].')'] = true;
-        }
-        
-        return count($this->report) > 0;
-    }
-
 }
 
 ?>
