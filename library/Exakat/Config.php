@@ -258,7 +258,7 @@ class Config {
         if (empty($this->configFile['graphdb']) ||
             !in_array($this->configFile['graphdb'], array_keys($this->GREMLINS)) ) {
             // stick to legacy names
-            $this->configFile['graphdb'] = 'neo4j';
+            $this->configFile['graphdb'] = 'gsneo4j';
         }
         $this->configFile['gremlin'] = $this->GREMLINS[$this->configFile['graphdb']];
         $this->configFile['loader']  = $this->LOADERS[$this->configFile['graphdb']];
@@ -293,37 +293,7 @@ class Config {
             self::$singleton = $this;
             self::$stack[] = self::$singleton;
         }
-    }
-
-    public static function factory($argv = array()) {
-        if (empty($argv)) {
-            if (empty(static::$singleton)) {
-                self::$singleton = new self(array());
-                self::$stack[] = self::$singleton;
-            }
-            return static::$singleton;
-        } else {
-            if ($argv instanceof Config) {
-                self::$singleton = $argv;
-            } else {
-                self::$singleton = new self($argv);
-            }
-            self::$stack[] = self::$singleton;
-            return self::$singleton;
-        }
-    }
-
-    public static function push($argv = array()) {
-        self::factory($argv);
-
-        return self::$singleton;
-    }
-
-    public static function pop() {
-        $r = array_pop(self::$stack);
-        self::$singleton = self::$stack[count(self::$stack) -1 ];
-
-        return $r;
+        
     }
 
     public function __isset($name) {

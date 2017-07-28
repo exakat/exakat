@@ -46,7 +46,8 @@ abstract class Analyzer {
     private $methods          = array();
     private $arguments        = array();
     
-    protected $config         = null;
+    public static $staticConfig         = null;
+    public $config         = null;
     
     static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
@@ -119,7 +120,7 @@ abstract class Analyzer {
         
         $this->_as('first');
         
-        if ($config === null) {
+        if($config === null) {
             print_r($this);
             debug_print_backtrace();
             die();
@@ -157,9 +158,7 @@ abstract class Analyzer {
     
     static public function initDocs() {
         if (Analyzer::$docs === null) {
-            $config = Config::factory();
-            
-            $pathDocs = $config->dir_root.'/data/analyzers.sqlite';
+            $pathDocs = self::$staticConfig->dir_root.'/data/analyzers.sqlite';
             self::$docs = new Docs($pathDocs);
         }
     }
@@ -303,6 +302,7 @@ GREMLIN;
     }
 
     public function getThemes() {
+        self::initDocs();
         $analyzer = self::getName($this->analyzerQuoted);
         return Analyzer::$docs->getThemeForAnalyzer($analyzer);
     }
@@ -1838,18 +1838,12 @@ GREMLIN;
     }
 
     public function getSeverity() {
-        if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        }
-        
+        self::initDocs();
         return Analyzer::$docs->getSeverity($this->analyzer);
     }
 
     public function getTimeToFix() {
-        if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        }
-        
+        self::initDocs();
         return Analyzer::$docs->getTimeToFix($this->analyzer);
     }
 

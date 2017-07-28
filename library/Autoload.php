@@ -66,6 +66,7 @@ if (file_exists(__DIR__.'/../vendor/autoload.php')) {
 }
 
 $config = new Config($GLOBALS['argv']);
+\Exakat\Analyzer\Analyzer::$staticConfig = $config;
 
 
 ?>

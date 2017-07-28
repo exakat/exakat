@@ -22,21 +22,17 @@
 
 
 function display($text) {
-    $config = \Exakat\Config::factory();
-
-    if ($config->verbose) {
+    global $VERBOSE;
+    
+    if ($VERBOSE) {
         echo trim($text), PHP_EOL;
     }
 }
 
 function display_r($object) {
-    static $config;
-
-    if ($config === null) {
-        $config = \Exakat\Config::factory();
-    }
-
-    if ($config->verbose) {
+    global $VERBOSE;
+    
+    if ($VERBOSE) {
         print_r( $object );
     }
 }

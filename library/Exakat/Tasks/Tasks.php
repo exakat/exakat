@@ -25,6 +25,7 @@ namespace Exakat\Tasks;
 
 use Exakat\Config;
 use Exakat\Datastore;
+use Exakat\Graph\Graph;
 use Exakat\Exceptions\AnotherProcessIsRunning;
 use Exakat\Exceptions\ProjectTooLarge;
 use Exakat\Log;
@@ -55,7 +56,7 @@ abstract class Tasks {
     const LOG_NONE = null;
     const LOG_AUTONAMING = '';
 
-    public function __construct($gremlin, $config, $subTask = self::IS_NOT_SUBTASK) {
+    public function __construct(Graph $gremlin, Config $config, $subTask = self::IS_NOT_SUBTASK) {
         $this->gremlin = $gremlin;
         $this->config  = $config;
         $this->is_subtask = $subTask;
