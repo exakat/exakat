@@ -523,7 +523,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
 
     protected function goToInstruction($atom = 'Namespace') {
         assert($this->assertAtom($atom));
-        $this->addMethod('repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel('.$this->SorA($atom).', "File") )');
+        $this->addMethod('repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel('.$this->SorA($atom).', "File") ).hasLabel('.$this->SorA($atom).')');
         
         return $this;
     }
