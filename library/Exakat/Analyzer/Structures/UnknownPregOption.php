@@ -31,7 +31,7 @@ class UnknownPregOption extends Analyzer {
         $options = '[a-zA-Z]*[^eimsuxADJSUX][a-zA-Z]*';
         
         // function list
-        $functions = array('\preg_match', '\preg_match_all', '\preg_replace', '\preg_replace_callback', '\preg_filter', '\preg_split', '\preg_quote', '\preg_grep');
+        $functions = array('\preg_match', '\preg_match_all', '\preg_replace', '\preg_replace_callback', '\preg_filter', '\preg_split', '\preg_grep');
 
         // preg_match with a string
         $this->atomFunctionIs($functions)
