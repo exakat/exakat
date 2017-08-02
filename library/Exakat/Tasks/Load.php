@@ -3860,6 +3860,7 @@ class Load extends Tasks {
             $operand->fullcode = $signExpression.$operand->fullcode;
             $operand->line     = $this->tokens[$this->id][2];
             $operand->token    = $this->getToken($this->tokens[$this->id][0]);
+            $operand->intval   *= $code;
 
             return $operand;
         }
@@ -4536,8 +4537,10 @@ class Load extends Tasks {
         $total = 0;
         foreach($this->atoms as $id => $atom) {
             if ($id === 1) { continue; }
-            assert(isset($D[$id]), "Warning : forgotten atom $id in $this->filename : ".print_r($this->atoms[$id], true));
-            assert($D[$id] <= 1, "Warning : too linked atom $id : ".$this->atoms[$id]->atom.PHP_EOL);
+
+            assert(isset($D[$id])    , "Warning : forgotten atom $id in $this->filename : ".print_r($this->atoms[$id], true));
+
+            assert($D[$id] <= 1      , "Warning : too linked atom $id : ".$this->atoms[$id]->atom.PHP_EOL);
 
             assert(isset($atom->line), "Warning : missing line atom $id : ".PHP_EOL);
 

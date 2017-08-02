@@ -89,13 +89,13 @@ class Atom {
         $this->absolute      = $this->absolute    ? 'true' : 'false';
         $this->constant      = $this->constant    ? 'true' : 'false';
         $this->boolean       = $this->boolean     ? 'true' : 'false';
-        $this->enclosing     = $this->enclosing   ? 'true' : 'false';
+        $this->enclosing     = $this->enclosing   ?  null  : 'false';
         $this->bracket       = $this->bracket     ? 'true' : 'false';
         $this->close_tag     = $this->close_tag   ? 'true' : 'false';
         $this->aliased       = $this->aliased     ? 'true' : 'false';
 
         $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
-        
+
         return (array) $this;
     }
 
@@ -123,11 +123,11 @@ class Atom {
         $this->absolute      = (int) $this->absolute   ;
         $this->constant      = (int) $this->constant   ;
         $this->boolean       = (int) $this->boolean    ;
-        $this->enclosing     = (int) $this->enclosing  ;
         $this->bracket       = (int) $this->bracket    ;
         $this->close_tag     = (int) $this->close_tag  ;
         $this->aliased       = (int) $this->aliased    ;
 
+        $this->enclosing     = !$this->enclosing  ? null : 1;
         $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
 
         $return = array( $this->id,
@@ -143,6 +143,43 @@ class Atom {
         }
         
         return $return;
+    }
+    
+    public function toGraphsonLine(&$id) {
+        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant');
+        $integerValues = array('count', 'intval', 'args_max', 'args_min');
+        $falseValues = array('globalvar', 'variadic', 'enclosing', 'heredoc', 'aliased', 'alternative', 'reference');
+        
+        $object = array('id'    => $this->id,
+                        'label' => $this->atom,
+                        'outE'  => new \stdClass(),
+                        'inE'   => new \stdClass());
+        
+        $properties = array();
+        foreach($this as $l => $value) {
+            if ($l === 'id') { continue; }
+            if ($value === null) { continue; }
+            
+            if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) && 
+                !in_array($this->atom, Load::$PROP_OPTIONS[$l])) {
+                continue;
+            };
+    
+            if (in_array($l, $falseValues) && 
+                !$value) {
+                continue;
+            };
+        
+            if (in_array($l, $booleanValues)) {
+                $value = (boolean) $value;
+            } elseif (in_array($l, $integerValues)) {
+                $value = (integer) $value;
+            }
+            $properties[$l] = [(object) ['id' => $id++, 'value' => $value]];
+        }
+        
+        $object['properties'] = $properties;
+        return (object) $object;
     }
 }
 

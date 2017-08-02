@@ -155,47 +155,12 @@ class Tinkergraph {
     }
 
     public function saveFiles($exakatDir, $atoms, $links, $id0) {
-        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant');
-        $integerValues = array('count', 'intval', 'args_max', 'args_min');
-        
         $json = array();
         foreach($atoms as $atom) {
-            $atom = (array) $atom;
-            $label = $atom['atom'];
-            $this->labels[$label] = 1;
-            
-            $object = array('id'    => $atom['id'],
-                            'label' => $label,
-                            'outE'  => new \stdClass(),
-                            'inE'   => new \stdClass());
-        
-            $properties = array();
-            foreach($atom as $l => $value) {
-                if ($l === 'id') { continue; }
-                if ($value === null) { continue; }
-                
-                if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) && 
-                    !in_array($label, Load::$PROP_OPTIONS[$l])) {
-                    continue;
-                };
-
-                if (in_array($l, array('globalvar')) && 
-                    !$value) {
-                    continue;
-                };
-        
-                if (in_array($l, $booleanValues)) {
-                    $value = (boolean) $value;
-                } elseif (in_array($l, $integerValues)) {
-                    $value = (integer) $value;
-                }
-                $properties[$l] = [(object) ['id' => $this->id++, 'value' => $value]];
-            }
-        
-            $object['properties'] = $properties;
-            $json[$atom['id']] = (object) $object;
+            $this->labels[$atom->atom] = 1;
+            $json[$atom->id] = $atom->toGraphsonLine($this->id);
         }
-
+        
         if ($this->project === null) {
             $this->project = $json[1];
         }
