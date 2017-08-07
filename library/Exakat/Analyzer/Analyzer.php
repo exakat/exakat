@@ -675,6 +675,12 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         return $this;
     }
 
+    public function has($property) {
+        $this->addMethod('has("'.$property.'")');
+        
+        return $this;
+    }
+    
     public function is($property, $value = true) {
         if ($value === null) {
             $this->addMethod('has("'.$property.'", null)');
