@@ -233,10 +233,30 @@ class Files extends Tasks {
                         }
                         $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
                     }
+                } elseif (substr($resFile, 0, 8) == 'Notice: ') {
+                    preg_match('#Notice: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
+                    $fileName = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    if (!isset($toRemoveFromFiles['/'.$fileName])) {
+                        $toRemoveFromFiles['/'.$fileName] = 1;
+                        if (isset($incompilables[$fileName])) {
+                            continue;
+                        }
+                        $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+                    }
+                } elseif (substr($resFile, 0, 12) == 'PHP Notice: ') {
+                    preg_match('#PHP Notice: (.+?) in (/.+?) on line (\d+)#', $resFile, $r);
+                    $fileName = str_replace($this->config->projects_root.'/projects/'.$dir.'/code/', '', $r[2]);
+                    if (!isset($toRemoveFromFiles['/'.$fileName])) {
+                        $toRemoveFromFiles['/'.$fileName] = 1;
+                        if (isset($incompilables[$fileName])) {
+                            continue;
+                        }
+                        $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
+                    }
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
                     continue; 
                 } else {
-                    assert(false,  $resFile."\n");
+                    assert(false,  "'".print_r($resFile, true)."'\n");
                 }
             }
 
