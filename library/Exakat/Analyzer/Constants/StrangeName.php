@@ -34,6 +34,7 @@ class StrangeName extends Analyzer {
 
         $regex = strtolower('\\\\\\\\('.implode('|', $names).')\\$');
         $this->atomIs('Nsname')
+             ->has('fullnspath')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
     }

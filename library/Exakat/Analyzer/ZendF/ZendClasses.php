@@ -33,13 +33,13 @@ class ZendClasses extends Analyzer {
 
         $this->atomIs('New')
              ->outIs('NEW')
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
         
         $this->atomIs(array('Staticmethodcall', 'Staticproperty', 'Staticconstant'))
              ->outIs('CLASS')
-             ->raw('has("fullnspath")')
+             ->has('fullnspath')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
 

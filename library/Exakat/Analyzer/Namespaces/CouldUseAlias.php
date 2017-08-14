@@ -32,6 +32,7 @@ class CouldUseAlias extends Analyzer {
              ->hasNoIn(array('USE', 'NAME', 'METHOD', 'VARIABLE'))
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->codeIsNot('[')
+             ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'fnp')
              ->goToNamespace()
              ->outIs('BLOCK')

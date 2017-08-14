@@ -29,7 +29,7 @@ class OneExpressionBracketsConsistency extends Analyzer {
 
     public function analyze() {
         $mapping = <<<GREMLIN
-if (it.get().value('bracket') == true) { 
+if (it.get().properties('bracket').size() > 0) {
     x2 = 'with'; 
 } else {
     x2 = 'without'; 

@@ -38,6 +38,7 @@ class UnknownPregOption extends Analyzer {
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
+             ->isNot('noDelimiter', '')
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->regexIs('noDelimiter', '^(" + delimiter + ").*(?<!\\\\\\\\)(" + delimiterFinal + ")('.$options.')\\$')
@@ -52,6 +53,7 @@ class UnknownPregOption extends Analyzer {
              ->hasOut('CONCAT')
              ->outWithRank('CONCAT', 0)
              ->atomIs('String')
+             ->isNot('noDelimiter', '')
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->inIs('CONCAT')
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
@@ -70,6 +72,7 @@ class UnknownPregOption extends Analyzer {
              ->outIsIE('CONCAT') // In case it is an interpolated string
              ->is('rank', 0)     // Same as above, but may be double when there is no interpolation
              ->atomIs('String')
+             ->isNot('noDelimiter', '')
              ->raw(pregOptionE::FETCH_DELIMITER)
              ->raw(pregOptionE::MAKE_DELIMITER_FINAL)
              ->back('concat')

@@ -53,12 +53,12 @@ GREMLIN;
         // delimiters
         $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[~';
         
-
         // preg_match with a string
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
+             ->isNot('noDelimiter', '')
              ->raw(self::FETCH_DELIMITER)
              ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([^" + delimiterFinal + "]*?e[^" + delimiterFinal + "]*?)\\$')
@@ -71,13 +71,14 @@ GREMLIN;
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->outWithRank('CONCAT', 0)
+             ->isNot('noDelimiter', '')
              ->raw(self::FETCH_DELIMITER)
              ->inIs('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();
-
+return;
         // with a concatenation
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
@@ -88,6 +89,7 @@ GREMLIN;
              ->outIsIE('CONCAT')
              ->atomIs('String')
              ->is('rank', 0)
+             ->isNot('noDelimiter', '')
              ->raw(self::FETCH_DELIMITER)
              ->inIsIE('CONCAT')
              ->raw(self::MAKE_DELIMITER_FINAL)

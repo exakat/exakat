@@ -47,6 +47,7 @@ class UnescapedVariables extends Analyzer {
              ->outIsIE('CODE')
              ->outIsIE('CONCAT')
              ->atomIs('Functioncall')
+             ->has('fullnspath')
              ->fullnspathIsNot($escFunctions)
              ->back('first');
         $this->prepareQuery();
