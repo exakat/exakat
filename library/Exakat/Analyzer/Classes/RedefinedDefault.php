@@ -25,14 +25,12 @@ use Exakat\Analyzer\Analyzer;
 
 class RedefinedDefault extends Analyzer {
     public function analyze() {
-        $this->atomIs('Class')
-             ->outIs('PPP')
-             ->atomIs('Ppp')
+        $this->atomIs('Ppp')
              ->outIs('PPP')
              ->savePropertyAs('propertyname', 'name')
              ->hasOut('LEFT')
              ->_as('results')
-             ->back('first')
+             ->goToClass()
 
              ->outIs('METHOD')
              ->atomIs('Method')
