@@ -119,7 +119,7 @@ class Initproject extends Tasks {
                 $vcs = 'composer';
                 $projectName = str_replace('/', '_', $repositoryURL);
             } else {
-                $vcs = 'git';
+                $vcs = '';
                 $projectName = basename($repositoryURL);
                 $projectName = preg_replace('.git', '', $projectName);
             }
