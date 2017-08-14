@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 24 Jul 2017 08:47:17 +0000
-.. comment: Generation hash : 15698d8166c67b02369f10d15b4f883b73c9ef72
+.. comment: Generation date : Mon, 14 Aug 2017 15:50:02 +0000
+.. comment: Generation hash : 596eb24f53a8c46db66ef3f9821b41d4393af84f
 
 
 .. _$http\_raw\_post\_data:
@@ -854,6 +854,44 @@ Incremental changes to a variables are not reported here.
 +--------------+-------------------------------+
 | Analyzers    | :ref:`Analyze`                |
 +--------------+-------------------------------+
+
+
+.. _avoid-concat-in-loop:
+
+Avoid Concat In Loop
+####################
+
+
+Concatenations inside a loop generate a lot of temporary variables. They are accumulated and tend to raise the memory usage, leading to slower performances.
+
+It is recommended to store the values in an array, and then use `'implode() <http://www.php.net/implode>`_ on that array to make the concatenation at once.
+
+.. code-block:: php
+
+   <?php
+   
+   // Concatenation in one operation
+   $tmp = array();
+   foreach(data_source() as $data) {
+       $tmp[] = $data;
+   }
+   $final = implode('', $tmp);
+   
+   // Concatenation in many operations
+   foreach(data_source() as $data) {
+       $final .= $data;
+   }
+   
+   ?>
+
+
+The same doesn't apply to += or *=, with `'array_sum() <http://www.php.net/array_sum>`_ and array_multiply(), as addition and multiplication works on the current memory allocation, and don't need to allocate new memory at each step.
+
++--------------+-----------------------------+
+| Command Line | Performances/NoConcatInLoop |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Performances`         |
++--------------+-----------------------------+
 
 
 .. _avoid-large-array-assignation:
@@ -8240,6 +8278,35 @@ This was possible in PHP 5.*, but is now forbidden in PHP 7.
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
+.. _no-substr-minus-one:
+
+No Substr Minus One
+###################
+
+
+Negative index were introduced in PHP 7.1. This syntax is not compatible with PHP 7.0 and older.
+
+.. code-block:: php
+
+   <?php
+   $string = 'abc';
+   
+   echo $string[-1]; // c
+   
+   echo $string[1]; // a
+   
+   ?>
+
+
+Seel also `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_.
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/NoSubstrMinusOne                                                                                                                  |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
 .. _no-substr()-one:
 
 No Substr() One
@@ -9246,6 +9313,42 @@ The following PHP native functions were removed in PHP 7.0.
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
+.. _php-72-removed-classes:
+
+PHP 72 Removed Classes
+######################
+
+
+The following PHP native classes were removed in PHP 7.2.
+
+* SessionHandler
+
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php72RemovedClasses                                                                                                                                          |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+.. _php-72-removed-interfaces:
+
+PHP 72 Removed Interfaces
+#########################
+
+
+The following PHP native interfaces were removed in PHP 7.2.
+
+* SessionHandlerInterface
+* SessionIdInterface
+* SessionUpdateTimestampHandlerInterface
+
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Command Line | Php/Php72RemovedInterfaces                                                                                                                                       |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP56` |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
 .. _php-keywords-as-names:
 
 PHP Keywords As Names
@@ -9254,13 +9357,30 @@ PHP Keywords As Names
 
 PHP has a set of reserved keywords. It is recommended not to use those keywords for names structures. 
 
-PHP does check that a number of structures, such as classes, methods, interfaces... can't be named or called using one of the keywords. However, in a few other situations, no check are enforced. Using keywords in such situation is confusing.
+PHP does check that a number of structures, such as classes, methods, interfaces... can't be named or called using one of the keywords. However, in a few other situations, no check are enforced. Using keywords in such situation is confusing. 
 
-+--------------+-------------------------------------------------------------------------------------------------+
-| Command Line | Php/ReservedNames                                                                               |
-+--------------+-------------------------------------------------------------------------------------------------+
-| Analyzers    | :ref:`Analyze`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
-+--------------+-------------------------------------------------------------------------------------------------+
+.. code-block:: php
+
+   <?php
+   
+   // This keyword is reserved since PHP 7.2
+   class object {
+       // _POST is used by PHP for the $_POST variable
+       // This methods name is probably confusing, 
+       // and may attract more than its share of attention
+       function _POST() {
+       
+       }
+   
+   }
+   
+   ?>
+
++--------------+-------------------+
+| Command Line | Php/ReservedNames |
++--------------+-------------------+
+| Analyzers    | :ref:`Analyze`    |
++--------------+-------------------+
 
 
 .. _php5-indirect-variable-expression:
@@ -9738,8 +9858,37 @@ Property Could Be Private
 #########################
 
 
-The following properties are never used outside their class of definition or their children (for the protected). 
-Given the analyzed code, they could be set as private. 
+The following properties are never used outside their class of definition  Given the analyzed code, they could be set as private. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public $couldBePrivate = 1;
+       public $cantdBePrivate = 1;
+       
+       function bar() {
+           // couldBePrivate is used internally. 
+           $this->couldBePrivate = 3;
+       }
+   }
+   
+   class foo2 extends foo {
+       function bar2() {
+           // cantdBePrivate is used in a child class. 
+           $this->cantdBePrivate = 3;
+       }
+   }
+   
+   //$couldBePrivate is not used outside 
+   $foo = new foo();
+   
+   //$cantdBePrivate is used outside the class
+   $foo->cantdBePrivate = 2;
+   
+   ?>
+
 
 Note that dynamic properties (such as $x->$y) are not taken into account.
 
@@ -11774,6 +11923,7 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
    
    ?>
 
+
 +--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
 | Slow Function                                                |  Faster                                                                                                                  | 
 +--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
@@ -11784,7 +11934,6 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 | `'array_search() <http://www.php.net/array_search>`_         |  `'array_flip() <http://www.php.net/array_flip>`_ and `'isset() <http://www.php.net/isset>`_                             | 
 | `'array_udiff() <http://www.php.net/array_udiff>`_           |  Use another way                                                                                                         | 
 | `'array_uintersect() <http://www.php.net/array_uintersect>`_ |  Use another way                                                                                                         | 
-| `'array_unique() <http://www.php.net/array_unique>`_         |  `'array_keys() <http://www.php.net/array_keys>`_ and `'array_count_values() <http://www.php.net/array_count_values>`_   | 
 | `'array_unshift() <http://www.php.net/array_unshift>`_       |  Use another way                                                                                                         | 
 | `'array_walk() <http://www.php.net/array_walk>`_             |  `'foreach() <http://php.net/manual/en/control-structures.foreach.php>`_                                                 | 
 | `'in_array() <http://www.php.net/in_array>`_                 |  `'isset() <http://www.php.net/isset>`_                                                                                  | 
@@ -11793,7 +11942,10 @@ Avoid using those slow native PHP functions, and replace them with alternatives.
 | `'uasort() <http://www.php.net/uasort>`_                     |  Use another way                                                                                                         | 
 | `'uksort() <http://www.php.net/uksort>`_                     |  Use another way                                                                                                         | 
 | `'usort() <http://www.php.net/usort>`_                       |  Use another way                                                                                                         | 
+| `'array_unique() <http://www.php.net/array_unique>`_         |  `'array_keys() <http://www.php.net/array_keys>`_ and `'array_count_values() <http://www.php.net/array_count_values>`_   | 
 +--------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+
+`'array_unique() <http://www.php.net/array_unique>`_ has been accelerated in PHP 7.2 and may be used directly.
 
 +--------------+---------------------------------------------------------------------------------------------------------------------+
 | Command Line | Performances/SlowFunctions                                                                                          |
@@ -16714,6 +16866,26 @@ ext/fdf
 
 Extension ext/fdf.
 
+Forms Data Format (`FDF <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_) is a format for handling forms within PDF documents.
+
+.. code-block:: php
+
+   <?php
+   $outfdf = fdf_create();
+   fdf_set_value($outfdf, 'volume', $volume, 0);
+   
+   fdf_set_file($outfdf, 'http:/testfdf/resultlabel.pdf');
+   fdf_save($outfdf, 'outtest.fdf');
+   fdf_close($outfdf);
+   Header('Content-type: application/vnd.fdf');
+   $fp = fopen('outtest.fdf', 'r');
+   fpassthru($fp);
+   unlink('outtest.fdf');
+   ?>
+
+
+See also `Form Data Format <http://php.net/manual/en/book.fdf.php>`_.
+
 +--------------+---------------------------+
 | Command Line | Extensions/Extfdf         |
 +--------------+---------------------------+
@@ -16744,6 +16916,21 @@ ext/mhash
 
 Extension mhash (obsolete since PHP 5.3.0).
 
+This extension provides functions, intended to work with `mhash <http://mhash.sourceforge.net/>`_.
+
+.. code-block:: php
+
+   <?php
+   $input = 'what do ya want for nothing?';
+   $hash = mhash(MHASH_MD5, $input);
+   echo 'The hash is ' . bin2hex($hash) . '<br />'.PHP_EOL;
+   $hash = mhash(MHASH_MD5, $input, 'Jefe');
+   echo 'The hmac is ' . bin2hex($hash) . '<br />'.PHP_EOL;
+   ?>
+
+
+See also `mhash <http://php.net/manual/en/book.mhash.php>`_.
+
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Extensions/Extmhash                                                                                                                                                                         |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -16758,6 +16945,52 @@ ext/ming
 
 
 Extension ext/ming, to create swf files with PHP.
+
+Ming is an open-source (LGPL) library which allows you to create SWF ('Flash') format movies. 
+
+.. code-block:: php
+
+   <?php
+     $s = new SWFShape();
+     $f = $s->addFill(0xff, 0, 0);
+     $s->setRightFill($f);
+   
+     $s->movePenTo(-500, -500);
+     $s->drawLineTo(500, -500);
+     $s->drawLineTo(500, 500);
+     $s->drawLineTo(-500, 500);
+     $s->drawLineTo(-500, -500);
+   
+     $p = new SWFSprite();
+     $i = $p->add($s);
+     $i->setDepth(1);
+     $p->nextFrame();
+   
+     for ($n=0; $n<5; ++$n) {
+       $i->rotate(-15);
+       $p->nextFrame();
+     }
+   
+     $m = new SWFMovie();
+     $m->setBackground(0xff, 0xff, 0xff);
+     $m->setDimension(6000, 4000);
+   
+     $i = $m->add($p);
+     $i->setDepth(1);
+     $i->moveTo(-500,2000);
+     $i->setName('box');
+   
+     $m->add(new SWFAction('/box.x += 3;'));
+     $m->nextFrame();
+     $m->add(new SWFAction('gotoFrame(0); play();'));
+     $m->nextFrame();
+   
+     header('Content-type: application/x-shockwave-flash');
+     $m->output();
+   ?>
+
+
+See also `Ming (flash) <http://www.libming.org/>`_ and `Ming <http://www.libming.org/> `_.
 
 +--------------+---------------------------+
 | Command Line | Extensions/Extming        |
@@ -16871,9 +17104,24 @@ mcrypt_create_iv() With Default Values
 ######################################
 
 
-mcrypt_create_iv used to have MCRYPT_DEV_RANDOM as default values, and in PHP 5.6, it now uses MCRYPT_DEV_URANDOM.
+mcrypt_create_iv() used to have MCRYPT_DEV_RANDOM as default values, and in PHP 5.6, it now uses MCRYPT_DEV_URANDOM.
+
+.. code-block:: php
+
+   <?php
+       $size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB);
+       // mcrypt_create_iv is missing the second argument
+       $iv = mcrypt_create_iv($size);
+   
+   // Identical to the line below
+   //    $iv = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
+   
+   ?>
+
 
 If the code doesn't have a second argument, it relies on the default value. It is recommended to set explicitely the value, so has to avoid problems while migrating.
+
+See also `mcrypt_create_iv() <http://php.net/manual/en/function.mcrypt-create-iv.php>`.
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/McryptcreateivWithoutOption                                                                                                                                                      |

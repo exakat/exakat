@@ -81,6 +81,7 @@ Glossary
 
     + `array_sum()`
 
+      + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
       + :ref:`For Using Functioncall <for-using-functioncall>`
 
     + `array_udiff()`
@@ -354,6 +355,7 @@ Glossary
 
     + `implode()`
 
+      + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
       + :ref:`Join file() <join-file()>`
 
     + `import_request_variables()`

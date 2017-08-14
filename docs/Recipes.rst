@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 24 Jul 2017 08:47:17 +0000
-.. comment: Generation hash : 15698d8166c67b02369f10d15b4f883b73c9ef72
+.. comment: Generation date : Mon, 14 Aug 2017 15:50:02 +0000
+.. comment: Generation hash : 596eb24f53a8c46db66ef3f9821b41d4393af84f
 
 
 .. _analyze:
@@ -442,7 +442,7 @@ Total : 21 analysis
 CompatibilityPHP53
 ++++++++++++++++++
 
-Total : 57 analysis
+Total : 60 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -480,9 +480,12 @@ Total : 57 analysis
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`No String With Append <no-string-with-append>`
+* :ref:`No Substr Minus One <no-substr-minus-one>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
+* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
@@ -507,7 +510,7 @@ Total : 57 analysis
 CompatibilityPHP54
 ++++++++++++++++++
 
-Total : 54 analysis
+Total : 57 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -543,9 +546,12 @@ Total : 54 analysis
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`No String With Append <no-string-with-append>`
+* :ref:`No Substr Minus One <no-substr-minus-one>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
+* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
@@ -569,7 +575,7 @@ Total : 54 analysis
 CompatibilityPHP55
 ++++++++++++++++++
 
-Total : 52 analysis
+Total : 55 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
 * :ref:`... Usage <...-usage>`
@@ -601,9 +607,12 @@ Total : 52 analysis
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`No String With Append <no-string-with-append>`
+* :ref:`No Substr Minus One <no-substr-minus-one>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
+* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
@@ -629,7 +638,7 @@ Total : 52 analysis
 CompatibilityPHP56
 ++++++++++++++++++
 
-Total : 45 analysis
+Total : 48 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Anonymous Classes <anonymous-classes>`
@@ -655,10 +664,13 @@ Total : 45 analysis
 * :ref:`New Functions In PHP 7.0 <new-functions-in-php-7.0>`
 * :ref:`No List With String <no-list-with-string>`
 * :ref:`No String With Append <no-string-with-append>`
+* :ref:`No Substr Minus One <no-substr-minus-one>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`Null On New <null-on-new>`
 * :ref:`PHP 7.0 New Classes <php-7.0-new-classes>`
 * :ref:`PHP 7.0 New Interfaces <php-7.0-new-interfaces>`
+* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
+* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`PHP5 Indirect Variable Expression <php5-indirect-variable-expression>`
 * :ref:`PHP7 Dirname <php7-dirname>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
@@ -682,7 +694,7 @@ Total : 45 analysis
 CompatibilityPHP70
 ++++++++++++++++++
 
-Total : 41 analysis
+Total : 44 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -705,9 +717,12 @@ Total : 41 analysis
 * :ref:`Magic Visibility <magic-visibility>`
 * :ref:`Multiple Definition Of The Same Argument <multiple-definition-of-the-same-argument>`
 * :ref:`Multiple Exceptions Catch() <multiple-exceptions-catch()>`
+* :ref:`No Substr Minus One <no-substr-minus-one>`
 * :ref:`Non Static Methods Called In A Static <non-static-methods-called-in-a-static>`
 * :ref:`PHP 7.0 Removed Directives <php-7.0-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
+* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
+* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 7 Indirect Expression <php-7-indirect-expression>`
 * :ref:`Php 71 New Classes <php-71-new-classes>`
@@ -731,7 +746,7 @@ Total : 41 analysis
 CompatibilityPHP71
 ++++++++++++++++++
 
-Total : 52 analysis
+Total : 53 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -764,7 +779,8 @@ Total : 52 analysis
 * :ref:`PHP 7.1 Microseconds <php-7.1-microseconds>`
 * :ref:`PHP 7.1 Removed Directives <php-7.1-removed-directives>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-* :ref:`PHP Keywords As Names <php-keywords-as-names>`
+* :ref:`PHP 72 Removed Classes <php-72-removed-classes>`
+* :ref:`PHP 72 Removed Interfaces <php-72-removed-interfaces>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
@@ -791,7 +807,7 @@ Total : 52 analysis
 CompatibilityPHP72
 ++++++++++++++++++
 
-Total : 46 analysis
+Total : 45 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -820,7 +836,6 @@ Total : 46 analysis
 * :ref:`PHP 7.2 Object Keyword <php-7.2-object-keyword>`
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-* :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
 * :ref:`Setlocale() Uses Constants <setlocale()-uses-constants>`
@@ -845,7 +860,7 @@ Total : 46 analysis
 CompatibilityPHP73
 ++++++++++++++++++
 
-Total : 47 analysis
+Total : 46 analysis
 
 * :ref:`$HTTP_RAW_POST_DATA`
 * :ref:`Break Outside Loop <break-outside-loop>`
@@ -874,7 +889,6 @@ Total : 47 analysis
 * :ref:`PHP 7.2 Object Keyword <php-7.2-object-keyword>`
 * :ref:`PHP 7.2 Removed Functions <php-7.2-removed-functions>`
 * :ref:`PHP 70 Removed Functions <php-70-removed-functions>`
-* :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parenthesis As Parameter <parenthesis-as-parameter>`
 * :ref:`Php 71 New Classes <php-71-new-classes>`
 * :ref:`Reserved Keywords In PHP 7 <reserved-keywords-in-php-7>`
@@ -932,8 +946,9 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 24 analysis
+Total : 25 analysis
 
+* :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
