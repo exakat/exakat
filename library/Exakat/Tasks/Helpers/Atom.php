@@ -148,6 +148,7 @@ class Atom {
     public function toGraphsonLine(&$id) {
         $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant');
         $integerValues = array('count', 'intval', 'args_max', 'args_min');
+
         $falseValues = array('globalvar', 'variadic', 'enclosing', 'heredoc', 'aliased', 'alternative', 'reference');
         
         $object = array('id'    => $this->id,
@@ -167,6 +168,15 @@ class Atom {
     
             if (in_array($l, $falseValues) && 
                 !$value) {
+                continue;
+            };
+
+            if (!in_array($l, array('noDelimiter')) && 
+                $value === '') {
+                continue;
+            };
+
+            if ($value === false) {
                 continue;
             };
         
