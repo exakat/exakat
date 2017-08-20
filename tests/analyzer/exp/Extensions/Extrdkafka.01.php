@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array();
+$expected     = array('rd_kafka_get_err_descs( )',
+                      'RdKafka\Producer( )',
+                      );
 
-$expected_not = array();
+$expected_not = array('rd_kafka_not_function( )',
+                     );
 
 ?>

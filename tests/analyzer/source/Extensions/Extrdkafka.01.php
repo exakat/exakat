@@ -1,6 +1,8 @@
 <?php
 
 rd_kafka_get_err_descs();
+rd_kafka_not_function( );
+
 
 $rk = new RdKafka\Producer();
 $rk->setLogLevel(LOG_DEBUG);
