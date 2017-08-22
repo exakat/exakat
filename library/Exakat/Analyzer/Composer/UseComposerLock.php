@@ -36,14 +36,12 @@ class UseComposerLock extends Analyzer {
     }
 
     public function toArray() {
-        Analyzer::initDocs();
         $report = array('composer.lock' => Analyzer::$datastore->getHash('composer.lock'));
 
         return $report;
     }
 
     public function hasResults() {
-        Analyzer::initDocs();
         $report = Analyzer::$datastore->getHash('composer.lock') === 1;
 
         return $report;

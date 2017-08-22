@@ -36,7 +36,8 @@ class RegexDelimiter extends Analyzer {
              ->atomIs('String')
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
              ->noDelimiterIsNot('')
-             ->raw('map{ it.get().value("noDelimiter").substring(0, 1) }')
+             ->raw(pregOptionE::FETCH_DELIMITER)
+             ->raw('map{ delimiter; }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = (array) $this->rawQuery();
         if ($types[0] instanceof \Stdclass) {
@@ -60,8 +61,10 @@ class RegexDelimiter extends Analyzer {
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
-        $typesList = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
-        $typesList = str_replace('$', '\\$', $typesList);
+        $types =  array_keys($types);
+        if (empty($types)) {
+            return;
+        }
 
         $this->atomFunctionIs($pregFunctions)
              ->outIs('ARGUMENTS')
@@ -71,7 +74,7 @@ class RegexDelimiter extends Analyzer {
              ->atomIs('String')
              ->tokenIs(array('T_CONSTANT_ENCAPSED_STRING', 'T_ENCAPSED_AND_WHITESPACE'))
              ->noDelimiterIsNot('')
-             ->raw('filter{ it.get().value("noDelimiter").substring(0, 1) in '.$typesList.' }')
+             ->raw('filter{ it.get().value("noDelimiter").substring(0, 1) in *** }', $types)
              ->back('first');
         $this->prepareQuery();
     }

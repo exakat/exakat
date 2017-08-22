@@ -1,6 +1,6 @@
 <?php
 
-$expected     = array();
+$expected     = array('15 aNd 16');
 
 $expected_not = array('1 && 2',
                       '3 || 4',

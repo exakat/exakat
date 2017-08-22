@@ -1,4 +1,4 @@
-Version 0.12.2 (Samantabhadra, Coming up)
+Version 0.12.5 (White Deer Spirit, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,56 @@ Version 0.12.2 (Samantabhadra, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.12.4 (peacock Mahamayuri, 2017-07-24)
++ Architecture
+    + Optimized performances for large projects (over 2M tokens)
+    + Support Neo4j as a driver for Tinkgerpop
++ Report
+    + Now covering all PHP 7.2 features
++ Analyzer
+    + New analyzer : Extension xattr
+    + New analyzer : report 'object' as a class name
+    + New analyzer : No Array for magic property
+    + New analyzer : suggest reducing code for isset
+    + New favorite : and / &&
+    + Updated analyzer : fetch correct delimiter, even if escaped.
+    + Extended coverage for several analyzers
+    + Removed several nested-subqueries (bad for performances)
++ Tokenizer
+    + Tinkergraph/Neo4j : reworked loading data from disk.
+    + Added protection for $ in filename
+
+Version 0.12.3 (Golden Winged Great Peng, 2017-07-17)
++ Architecture
+    + Prepared options for several back servers : Tinkergraph, Gremlin-Server/Neo4j, Janusgraph
++ Report
+    + New report : Marmelab (GraphQL server)
++ Analyzer
+    + New analyzer : Report when a property is used as object or scalar
+    + New analyzer : Mismatched Typehint 
+    + New analyzer : Mismatched Default values 
+    + Upgraded analysis : 
+    + Fixed a gremlin bug in noAtomInside
++ Tokenizer
+    + Added support for trailing comma in group use (PHP 7.2)
+    + Fixed building of constants' values
+
+Version 0.12.2 (Samantabhadra, 2017-07-10)
++ Architecture
+    + Added support for Tinkergraph as graph backend
++ Report
+    + Ambassador : reports callback/closures, all 3 declares (ticks, encoding, strict_types)
+    + Ambassador : reports strict_types as favorite
+    + PlantUML : upgraded report
++ Analyzer
+    + New analyzer : Mismatched ternary branches
+    + New analyzer : mkdir, by default, uses 777. 
+    + New analyzer : ext/lapack
+    + Upgraded analysis : option E for preg_match, refined results
+    + Checked unit tests : 2337 / 2366 test pass (99% pass). 
++ Tokenizer
+    + Added support for Instanceof and GROUPUSE with Nsname
 
 Version 0.12.1 (Yellow Toothed Elephant, 2017-07-03)
 + Architecture

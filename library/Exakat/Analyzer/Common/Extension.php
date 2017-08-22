@@ -65,7 +65,7 @@ class Extension extends Analyzer {
             $this->atomIs('New')
                  ->outIs('NEW')
                  ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-                 ->raw('has("fullnspath")')
+                 ->has('fullnspath')
                  ->fullnspathIs($classes);
             $this->prepareQuery();
 

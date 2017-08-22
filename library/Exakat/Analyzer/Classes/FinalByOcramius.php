@@ -40,8 +40,8 @@ class FinalByOcramius extends Analyzer {
              ->raw('sideEffect{ interfaces.add( it.get().value("code")); }')
              ->back('first')
              ->raw('not( where( __.out("METHOD").hasLabel("Method")
-                             .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
-                             .where( __.out("PROTECTED", "PRIVATE").count().is(eq(0)) )
+                                  .out("NAME").filter{ !(it.get().value("code") in interfaces)}.in("NAME")
+                                  .where( __.out("PROTECTED", "PRIVATE").count().is(eq(0)) )
                              )
                        )');
         $this->prepareQuery();

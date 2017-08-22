@@ -32,6 +32,7 @@ class ShouldMakeAlias extends Analyzer {
              ->hasNoIn('USE')
              ->hasNoParent('Use', array('NAME', 'USE'))  // use expression
              ->hasNoParent('Namespace', 'NAME')  // use expression
+             ->has('fullnspath')
              ->savePropertyAs('fullnspath', 'possibleAlias')
              ->goToNamespace()
              ->raw('where( __.out("BLOCK", "CODE").out("EXPRESSION").hasLabel("Use").out("USE").filter{ (possibleAlias =~ "^" + it.get().value("origin").replace("\\\\", "\\\\\\\\") ).getCount() > 0} )')

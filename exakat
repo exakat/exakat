@@ -9,8 +9,8 @@ try {
         require_once $isPhar.'/library/Autoload.php';
     }
 
-    $graphDB = new \Exakat\Graph\Gremlin3($config);
-    //$graphDB = new \Exakat\Graph\GremlinServer($config);
+    $graphDBClass = '\\Exakat\\Graph\\'.$config->gremlin; 
+    $graphDB = new $graphDBClass($config);
 
     $exakat = new \Exakat\Exakat($graphDB, $config);
     $exakat->execute($config);

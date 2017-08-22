@@ -2,6 +2,8 @@
 
 foreach(\glob() as $x) {}
 
+\parse_ini_file('./someIni2.ini');
+
 f(\parse_ini_file('./someIni.ini'));
 
 f($x->file('./someIni.ini'));

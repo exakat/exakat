@@ -25,6 +25,7 @@ namespace Exakat\Tasks\Helpers;
 use Exakat\Tasks\Load;
 
 class Atom {
+    const STRING_MAX_SIZE = 500;
     static public $atomCount = 0;
     
     public $id           = 0;
@@ -68,11 +69,11 @@ class Atom {
     }
     
     public function toArray() {
-        if (strlen($this->code) > 500) {
-            $this->code = substr($this->code, 0, 500).'...[ total '.strlen($this->code).' chars]';
+        if (strlen($this->code) > self::STRING_MAX_SIZE) {
+            $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
         }
-        if (strlen($this->fullcode) > 500) {
-            $this->fullcode = substr($this->fullcode, 0, 500).'...[ total '.strlen($this->fullcode).' chars]';
+        if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
+            $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
         
         $this->code          = addcslashes($this->code       , '\\"');
@@ -88,22 +89,24 @@ class Atom {
         $this->absolute      = $this->absolute    ? 'true' : 'false';
         $this->constant      = $this->constant    ? 'true' : 'false';
         $this->boolean       = $this->boolean     ? 'true' : 'false';
-        $this->enclosing     = $this->enclosing   ? 'true' : 'false';
+        $this->enclosing     = $this->enclosing   ?  null  : 'false';
         $this->bracket       = $this->bracket     ? 'true' : 'false';
         $this->close_tag     = $this->close_tag   ? 'true' : 'false';
         $this->aliased       = $this->aliased     ? 'true' : 'false';
-        
+
+        $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
+
         return (array) $this;
     }
 
     public function toLimitedArray($headers) {
         $return = array();
 
-        if (strlen($this->code) > 5000) {
-            $this->code = substr($this->code, 0, 5000).'...[ total '.strlen($this->code).' chars]';
+        if (strlen($this->code) > self::STRING_MAX_SIZE) {
+            $this->code = substr($this->code, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->code).' chars]';
         }
-        if (strlen($this->fullcode) > 5000) {
-            $this->fullcode = substr($this->code, 0, 5000).'...[ total '.strlen($this->fullcode).' chars]';
+        if (strlen($this->fullcode) > self::STRING_MAX_SIZE) {
+            $this->fullcode = substr($this->fullcode, 0, self::STRING_MAX_SIZE).'...[ total '.strlen($this->fullcode).' chars]';
         }
 
         $this->code          = addcslashes($this->code       , '\\"');
@@ -120,10 +123,12 @@ class Atom {
         $this->absolute      = (int) $this->absolute   ;
         $this->constant      = (int) $this->constant   ;
         $this->boolean       = (int) $this->boolean    ;
-        $this->enclosing     = (int) $this->enclosing  ;
         $this->bracket       = (int) $this->bracket    ;
         $this->close_tag     = (int) $this->close_tag  ;
         $this->aliased       = (int) $this->aliased    ;
+
+        $this->enclosing     = !$this->enclosing  ? null : 1;
+        $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
 
         $return = array( $this->id,
                          $this->atom,
@@ -138,6 +143,53 @@ class Atom {
         }
         
         return $return;
+    }
+    
+    public function toGraphsonLine(&$id) {
+        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant');
+        $integerValues = array('count', 'intval', 'args_max', 'args_min');
+
+        $falseValues = array('globalvar', 'variadic', 'enclosing', 'heredoc', 'aliased', 'alternative', 'reference');
+        
+        $object = array('id'    => $this->id,
+                        'label' => $this->atom,
+                        'outE'  => new \stdClass(),
+                        'inE'   => new \stdClass());
+        
+        $properties = array();
+        foreach($this as $l => $value) {
+            if ($l === 'id') { continue; }
+            if ($value === null) { continue; }
+            
+            if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) && 
+                !in_array($this->atom, Load::$PROP_OPTIONS[$l])) {
+                continue;
+            };
+    
+            if (in_array($l, $falseValues) && 
+                !$value) {
+                continue;
+            };
+
+            if (!in_array($l, array('noDelimiter')) && 
+                $value === '') {
+                continue;
+            };
+
+            if ($value === false) {
+                continue;
+            };
+        
+            if (in_array($l, $booleanValues)) {
+                $value = (boolean) $value;
+            } elseif (in_array($l, $integerValues)) {
+                $value = (integer) $value;
+            }
+            $properties[$l] = [(object) ['id' => $id++, 'value' => $value]];
+        }
+        
+        $object['properties'] = $properties;
+        return (object) $object;
     }
 }
 

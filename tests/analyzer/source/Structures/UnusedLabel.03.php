@@ -3,8 +3,14 @@
 unusedLabel: 
 usedInYLabel : 
 
+usedInGlobalLabel : 
+
+goto usedInGlobalLabel;
+
 function y() {
     usedInYLabel : 
+
+    unusedInYLabel : 
 
     usedLabel2 : 
     goto usedInYLabel;
@@ -12,5 +18,4 @@ function y() {
     goto usedLabel2;
 }
 
-
- ?>
+?>

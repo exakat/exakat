@@ -39,11 +39,12 @@ class ShouldPreprocess extends Analyzer {
         $tokenList = makeList( self::$FUNCTIONS_TOKENS );
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
             // Functioncall, that are not authorized
-             ->raw('not( where( __.repeat( out('.$this->linksDown.') ).emit( hasLabel("Functioncall").has("fullnspath") ).times('.self::MAX_LOOPING.')
-                                             .hasLabel("Functioncall")
-                                             .has("token", within('.$tokenList.'))
-                                             .filter{ !(it.get().value("fullnspath") in ['.str_replace('\\', '\\\\', $this->SorA($functionList)).']) } ) )')
-             ->noAtomInside($dynamicAtoms);
+             ->raw('not( where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
+                                          .hasLabel("Functioncall").has("fullnspath")
+                                          .has("token", within('.$tokenList.'))
+                                          .filter{ !(it.get().value("fullnspath") in ***) } ) )', $functionList)
+             ->noAtomInside($dynamicAtoms)
+             ;
         $this->prepareQuery();
         
         $functionListNoArray = array_diff($functionList,

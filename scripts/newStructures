@@ -30,6 +30,7 @@ foreach($newConstants as $ext => $newExtConstants) {
 }
 $d = array_merge(...$d);
 print "New Constants (".count($d).")\n";
+print_r($d);
 
 $d = array();
 foreach($oldConstants as $ext => $oldExtConstants) {

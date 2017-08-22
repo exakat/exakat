@@ -38,7 +38,7 @@ abstract class Reports {
                                           'PhpConfiguration', 'PhpCompilation',
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
                                           'ZendFramework',  'RadwellCode', 'CodeSniffer', 'Slim',
-                                          'FacetedJson', 'Json', 'OnepageJson', 'Marmelab',
+                                          'FacetedJson', 'Json', 'OnepageJson', 'Marmelab', 'Simpletable',
                                           'Codeflower', 'Dependencywheel',
                                           'Codacy',
                                           );

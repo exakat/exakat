@@ -41,8 +41,6 @@ class PackagesNames extends Analyzer {
     }
 
     public function hasResults() {
-        Analyzer::initDocs();
-        
         $data = Analyzer::$datastore->getRow('composer');
         $this->report = array();
         foreach($data as $d) {

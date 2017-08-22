@@ -1,8 +1,11 @@
 <?php
 
 $expected     = array('myException',
-                      'Exception');
+                      'Exception',
+                      );
 
-$expected_not = array();
+$expected_not = array('someException',
+                      'someException( )',
+                      );
 
 ?>

@@ -14,6 +14,8 @@ class x {
         
         static::$nonEmptyArray;
         static::$emptyArray;
+        
+        $a::$robustTest = 3;
     }
 }
 

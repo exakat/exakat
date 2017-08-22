@@ -38,6 +38,7 @@ class NamespaceUsage extends Analyzer {
 
         $this->atomIs(array('Nsname', 'Identifier'))
              ->hasNoIn(array('NAME' , 'MEMBER', 'CONSTANT', 'ALIAS', 'CLASS'))
+             ->has('fullnspath')
              ->regexIs('fullnspath', $regex);
         $this->prepareQuery();
     }

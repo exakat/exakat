@@ -46,7 +46,8 @@ abstract class Analyzer {
     private $methods          = array();
     private $arguments        = array();
     
-    protected $config         = null;
+    public static $staticConfig         = null;
+    public $config         = null;
     
     static public $analyzers  = array();
     private $analyzer         = '';       // Current class of the analyzer (called from below)
@@ -87,7 +88,7 @@ abstract class Analyzer {
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
     static public $VARIABLES_ALL    = array('Variable', 'Variableobject', 'Variablearray', 'Globaldefinition', 'Staticdefinition', 'Propertydefinition');
-    static public $FUNCTIONS_ALL    = array('Function', 'Method', 'Closure');
+    static public $FUNCTIONS_ALL    = array('Function', 'Closure', 'Method');
     static public $FUNCTIONS_NAMED  = array('Function', 'Method');
     static public $CLASSES_ALL      = array('Class', 'Classanonymous');
     static public $CLASSES_NAMED    = 'Class';
@@ -119,7 +120,7 @@ abstract class Analyzer {
         
         $this->_as('first');
         
-        if ($config === null) {
+        if($config === null) {
             print_r($this);
             debug_print_backtrace();
             die();
@@ -157,9 +158,7 @@ abstract class Analyzer {
     
     static public function initDocs() {
         if (Analyzer::$docs === null) {
-            $config = Config::factory();
-            
-            $pathDocs = $config->dir_root.'/data/analyzers.sqlite';
+            $pathDocs = self::$staticConfig->dir_root.'/data/analyzers.sqlite';
             self::$docs = new Docs($pathDocs);
         }
     }
@@ -303,6 +302,7 @@ GREMLIN;
     }
 
     public function getThemes() {
+        self::initDocs();
         $analyzer = self::getName($this->analyzerQuoted);
         return Analyzer::$docs->getThemeForAnalyzer($analyzer);
     }
@@ -493,7 +493,7 @@ GREMLIN;
     protected function hasNoInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
         $this->addMethod('not( where( 
- __.repeat(__.in(' . $this->linksDown . ')).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
+ __.repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit().hasLabel('.$this->SorA($atom).')
  ) )');
         
         return $this;
@@ -506,7 +506,7 @@ GREMLIN;
         }
 
         $this->addMethod('not( where( 
-__.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'")
+__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).hasLabel('.$this->SorA($atom).').has("code", "'.$name.'")
   ) )');
         
         return $this;
@@ -515,7 +515,7 @@ __.repeat( __.in('.$this->linksDown.')).until(hasLabel("File")).hasLabel('.$this
     protected function hasInstruction($atom = 'Function') {
         assert($this->assertAtom($atom));
         $this->addMethod('where( 
-__.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('.$this->SorA($atom).')).hasLabel('.$this->SorA($atom).')
+__.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLabel("File")).emit(hasLabel('.$this->SorA($atom).')).hasLabel('.$this->SorA($atom).')
     )');
         
         return $this;
@@ -523,7 +523,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
 
     protected function goToInstruction($atom = 'Namespace') {
         assert($this->assertAtom($atom));
-        $this->addMethod('repeat( __.in('.$this->linksDown.')).until(hasLabel('.$this->SorA($atom).', "File") )');
+        $this->addMethod('repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel('.$this->SorA($atom).', "File") ).hasLabel('.$this->SorA($atom).')');
         
         return $this;
     }
@@ -613,7 +613,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
 
     public function atomInsideNoDefinition($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $gremlin = 'emit( ).repeat( __.out( ).not(hasLabel("Closure", "Classanonymous", "Function", "Class", "Trait")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
@@ -622,6 +622,7 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
     public function noAtomInside($atom) {
         assert($this->assertAtom($atom));
         // Cannot use not() here : 'This traverser does not support loops: org.apache.tinkerpop.gremlin.process.traversal.traverser.B_O_Traverser'.
+//        $gremlin = 'not( where( __.emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
         $gremlin = 'where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
@@ -674,6 +675,12 @@ __.repeat( __.in('.$this->linksDown.') ).until(hasLabel("File")).emit(hasLabel('
         return $this;
     }
 
+    public function has($property) {
+        $this->addMethod('has("'.$property.'")');
+        
+        return $this;
+    }
+    
     public function is($property, $value = true) {
         if ($value === null) {
             $this->addMethod('has("'.$property.'", null)');
@@ -1256,13 +1263,13 @@ GREMLIN
         return $this;
     }
 
-    public function goToFunction($type = array('Function', 'Method')) {
-        $this->addMethod('repeat(__.in('.$this->linksDown.')).until(hasLabel('.$this->SorA($type).') )');
+    public function goToFunction($type = array('Function', 'Method', 'Closure')) {
+        $this->addMethod('repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel('.$this->SorA($type).') )');
         
         return $this;
     }
 
-    public function hasNoFunction($type = 'Function') {
+    public function hasNoFunction($type = array('Function', 'Closure', 'Method')) {
         return $this->hasNoInstruction($type);
     }
 
@@ -1837,18 +1844,12 @@ GREMLIN;
     }
 
     public function getSeverity() {
-        if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        }
-        
+        self::initDocs();
         return Analyzer::$docs->getSeverity($this->analyzer);
     }
 
     public function getTimeToFix() {
-        if (Analyzer::$docs === null) {
-            Analyzer::$docs = new Docs($this->config->dir_root.'/data/analyzers.sqlite');
-        }
-        
+        self::initDocs();
         return Analyzer::$docs->getTimeToFix($this->analyzer);
     }
 

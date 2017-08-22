@@ -34,10 +34,13 @@ class AlternativeConsistenceByFile extends Analyzer {
             normal = 0;
             alternative = 0;
             }')
-            ->raw('repeat( __.out('.$this->linksDown.')).emit(__.hasLabel('.$atomsList.')).times('.self::MAX_LOOPING.')
-                                    .hasLabel('.$atomsList.')')
-            ->raw('sideEffect{ if (it.get().value("alternative")) { alternative = alternative + 1; } else { normal = normal + 1;}
-                              }')
+            ->raw('where( 
+    __
+    .repeat( __.out()).emit().times('.self::MAX_LOOPING.').hasLabel('.$atomsList.')
+    .or( __.has("alternative").sideEffect{ alternative = alternative + 1; },
+         __.sideEffect{ normal = normal + 1; })
+    .count().is(gt(0))
+    )')
             ->filter('normal > 0 && alternative > 0')
             ->back('first');
         $this->prepareQuery();

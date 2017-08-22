@@ -75,7 +75,7 @@ GREMLIN
         
         $this->atomIs('Switch')
              ->raw('sideEffect{ x = []; }.sideEffect( __.out("CASES").out("EXPRESSION").out("CASE").hasLabel("String").not(where(out("CONCAT"))).sideEffect{x.add(it.get().value("noDelimiter"));}).filter{x != [];}.map{x.sort();}')
-             ->raw('filter{ y = ***; (x in y.values()) || (x in y); }', $commons)
+             ->raw('filter{ y = ***; if (y.getClass() == "java.util.ArrayList") { x in y.values();} else { x in y; } }', $commons)
              ->back('first');
         $this->prepareQuery();
     }

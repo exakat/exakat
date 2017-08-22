@@ -36,11 +36,15 @@ class CouldBePrivate extends Analyzer {
 
         // Non-static properties
         // Case of object->property (that's another public access)
-        $publicProperties = $this->query('g.V().hasLabel("Member")
-                                               .where( __.out("OBJECT").not(has("code", "\$this")) )
-                                               .out("MEMBER")
-                                               .hasLabel("Identifier")
-                                               .values("code").unique()');
+$query = <<<GREMLIN
+g.V().hasLabel("Member")
+     .not( where( __.out("OBJECT").has("code", "\\\$this")) )
+     .out("MEMBER")
+     .hasLabel("Identifier")
+     .values("code")
+     .unique()
+GREMLIN;
+        $publicProperties = $this->query($query);
 
         if (!empty($publicProperties)) {
             $this->atomIs('Ppp')
@@ -54,19 +58,27 @@ class CouldBePrivate extends Analyzer {
 
         // Static properties
         // Case of property::property (that's another public access)
-        $publicStaticProperties = $this->query('g.V().hasLabel("Staticproperty")
-                                                     .out("CLASS")
-                                                     .hasLabel("Identifier", "Nsname")
-                                                     .as("classe")
-                                                     .sideEffect{ fns = it.get().value("fullnspath"); }
-                                                     .in("CLASS")
-                                                     .out("MEMBER")
-                                                     .hasLabel("Variable")
-                                                     .as("property")
-                                                     .repeat( __.in('.$this->linksDown.')).until(hasLabel("Class", "File") )
-                                                     .coalesce( hasLabel("File"), filter{it.get().value("fullnspath") != fns; })
-                                                     .select("classe", "property").by("fullnspath").by("code")
-                                                     .unique()');
+        $query = <<<GREMLIN
+g.V().hasLabel("Staticproperty")
+     .out("CLASS")
+     .hasLabel("Identifier", "Nsname")
+     .as("classe")
+     .sideEffect{ fns = it.get().value("fullnspath"); }
+     .in("CLASS")
+     .out("MEMBER")
+     .hasLabel("Variable")
+     .sideEffect{ name = it.get().value("code"); }
+     .as("property")
+     .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("Class", "File") )
+     .or( hasLabel("File"), 
+        __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times(15)
+          .where( __.out("PPP").out("PPP").filter{ it.get().value("code") == name; } )
+          .filter{it.get().value("fullnspath") != fns; }
+        )
+     .select("classe", "property").by("fullnspath").by("code")
+     .unique()
+GREMLIN;
+        $publicStaticProperties = $this->query($query);
         
         if (!empty($publicStaticProperties)) {
             $calls = array();

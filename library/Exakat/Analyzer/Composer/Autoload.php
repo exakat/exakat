@@ -36,14 +36,12 @@ class Autoload extends Analyzer {
     }
 
     public function toArray() {
-        Analyzer::initDocs();
         $report = array('composer' => Analyzer::$datastore->getHash('autoload'));
 
         return $report;
     }
 
     public function hasResults() {
-        Analyzer::initDocs();
         $res = Analyzer::$datastore->getHash('autoload');
 
         $report = $res === 'psr-0' || $res === 'psr-4' ;

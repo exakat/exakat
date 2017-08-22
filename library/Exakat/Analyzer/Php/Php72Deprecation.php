@@ -34,13 +34,18 @@ class Php72Deprecation extends Analyzer {
     public function analyze() {
         // Definition of \\__autoload
         $this->atomIs('Function')
-             ->hasNoClassTrait()
              ->fullnspathIs('\\__autoload')
              ->back('first');
         $this->prepareQuery();
 
         // Usage of \\create_function
-        $this->atomFunctionIs(array('\\create_function', '\\gmp_random', '\\each'));
+        $this->atomFunctionIs(array('\\create_function', '\\gmp_random', '\\each', '\\png2wbmp', '\\jpeg2wbmp', '\\read_exif_data'));
+        $this->prepareQuery();
+
+        // usage of INTL_IDNA_VARIANT_2003
+        $this->atomIs(array('Identifier', 'Nsname'))
+             ->hasNoIn(array('METHOD', 'MEMBER', 'NEW', 'NAME'))
+             ->fullnspathIs('\\intl_idna_variant_2003');
         $this->prepareQuery();
         
         // Usage of \\parse_str with no 2nd argument

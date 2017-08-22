@@ -105,7 +105,7 @@ class Project extends Tasks {
                         4 => '-u',
                         );
 
-        $configThema = Config::push($args);
+        $configThema = new Config($args);
 
         $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
         $analyze->run();
@@ -113,7 +113,6 @@ class Project extends Tasks {
         $this->addSnitch(array('step'   => 'External lib',
                               'project' => $this->config->project));
 
-        Config::pop();
         unset($analyze);
 
         display("Running files".PHP_EOL);
@@ -153,7 +152,6 @@ class Project extends Tasks {
 
         $this->logTime('Analyze');
 
-        $oldConfig = Config::factory();
         foreach($this->reports as $format) {
             display("Reporting $format".PHP_EOL);
             $this->addSnitch(array('step'    => 'Report : '.$format,
@@ -167,10 +165,10 @@ class Project extends Tasks {
                             6 => '-format',
                             7 => $format,
                             );
-            $this->config = Config::factory($args);
+            $reportConfig = new Config($args);
 
             try {
-                $report = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
+                $report = new Report2($this->gremlin, $reportConfig, Tasks::IS_SUBTASK);
                 $report->run();
                 unset($report);
             } catch (\Exception $e) {
@@ -178,24 +176,11 @@ class Project extends Tasks {
                      $e->getMessage(),
                      PHP_EOL."Trying next report".PHP_EOL;
             }
+            unset($reportConfig);
         }
 
-        Config::factory($oldConfig);
         display("Reported project".PHP_EOL);
 
-        /*
-            This is dev code, not production
-        $query = <<<GREMLIN
-g.V().where( __.sideEffect{x = []; }.in('ANALYZED').sideEffect{ x.add(it.get().value('analyzer')); }.barrier().sideEffect{ y = x.groupBy().findAll{ i,j -> j.size() > 1;};} )
-.filter{ y.size() > 0; }
-.map{ y; };
-GREMLIN;
-
-        $res = $this->gremlin->query($query);
-        if (!empty($res)) {
-            file_put_contents($this->config->projects_root.'/projects/'.$project.'/log/doublons.log', var_export($res, true));
-        }
-        */
         $this->logTime('Final');
         $this->removeSnitch();
         display("End".PHP_EOL);
@@ -234,14 +219,13 @@ GREMLIN;
         }
 
         try {
-            $configThema = Config::push($args);
+            $analyzeConfig = Config($args);
 
-            $analyze = new Analyze($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+            $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
             $analyze->run();
             unset($analyze);
+            unset($analyzeConfig);
             $this->logTime('Analyze : '.(is_array($analyzers) ? implode(', ', $analyzers) : $analyzers));
-
-            Config::pop();
 
             $args = array ( 1 => 'dump',
                             2 => '-p',
@@ -251,7 +235,7 @@ GREMLIN;
                             6 => '-u',
                         );
 
-            $configThema = Config::push($args);
+            $dumpConfig = new Config($args);
 
             $audit_end = time();
             $query = "g.V().count()";
@@ -266,11 +250,11 @@ GREMLIN;
                                                    'graphNodes'   => $nodes,
                                                    'graphLinks'   => $links));
 
-            $dump = new Dump($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+            $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
             $dump->run();
             unset($dump);
+            unset($dumpConfig);
 
-            Config::pop();
         } catch (\Exception $e) {
             echo "Error while running the Analyzer $theme ".PHP_EOL,
                  $e->getMessage(),
@@ -298,6 +282,9 @@ GREMLIN;
         $themes = array_intersect($availableThemes, $themes);
         display("Running the following themes : ".implode(', ', $diff).PHP_EOL);
 
+        global $VERBOSE;
+        $oldVerbose = $VERBOSE;
+        $VERBOSE = false;
         foreach($themes as $theme) {
             $this->addSnitch(array('step'    => 'Analyze : '.$theme,
                                    'project' => $this->config->project));
@@ -316,14 +303,13 @@ GREMLIN;
             }
 
             try {
-                $configThema = Config::push($args);
+                $analyzeConfig = new Config($args);
 
-                $analyze = new Analyze($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+                $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
                 $analyze->run();
                 unset($analyze);
+                unset($analyzeConfig);
                 $this->logTime('Analyze : '.$theme);
-
-                Config::pop();
 
                 $args = array ( 1 => 'dump',
                                 2 => '-p',
@@ -333,7 +319,7 @@ GREMLIN;
                                 6 => '-u',
                             );
 
-                $configThema = Config::push($args);
+                $dumpConfig = new Config($args);
 
                 $audit_end = time();
                 $query = "g.V().count()";
@@ -356,11 +342,10 @@ GREMLIN;
                                                        'graphNodes'   => $nodes,
                                                        'graphLinks'   => $links));
 
-                $dump = new Dump($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+                $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
                 $dump->run();
                 unset($dump);
-
-                Config::pop();
+                unset($dumpConfig);
             } catch (\Exception $e) {
                 echo "Error while running the Analyze $theme ".PHP_EOL,
                      $e->getMessage(),
@@ -368,6 +353,7 @@ GREMLIN;
                 file_put_contents($this->config->projects_root.'/projects/'.$this->config->project.'/log/analyze.'.$themeForFile.'.final.log', $e->getMessage());
             }
         }
+        $VERBOSE = $oldVerbose;
     }
 }
 

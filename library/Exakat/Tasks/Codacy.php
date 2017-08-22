@@ -99,7 +99,6 @@ class Codacy extends Tasks {
 
         $this->logTime('Analyze');
 
-        $oldConfig = Config::factory();
         foreach($this->reports as $format) {
             display("Reporting $format\n");
             $this->addSnitch(array('step'    => 'Report : '.$format,
@@ -113,7 +112,7 @@ class Codacy extends Tasks {
                             6 => '-format',
                             7 => $format,
                             );
-            $this->config = Config::factory($args);
+            $reportConfig = new Config($args);
 
             try {
                 $report = new Report2($this->gremlin, $this->config, Tasks::IS_SUBTASK);
@@ -126,7 +125,6 @@ class Codacy extends Tasks {
             }
         }
 
-        Config::factory($oldConfig);
         display("Reported project\n");
 
         $this->logTime('Final');
@@ -167,14 +165,12 @@ class Codacy extends Tasks {
         }
         
         try {
-            $configThema = Config::push($args);
+            $analyzeConfig = new Config($args);
 
-            $analyze = new Analyze($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+            $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
             $analyze->run();
             unset($analyze);
             $this->logTime('Analyze : '.(is_array($analyzers) ? implode(', ', $analyzers) : $analyzers));
-
-            Config::pop();
 
             $args = array ( 1 => 'dump',
                             2 => '-p',
@@ -184,7 +180,7 @@ class Codacy extends Tasks {
                             6 => '-u',
                         );
 
-            $configThema = Config::push($args);
+            $dumpConfig = new Config($args);
 
             $audit_end = time();
             $query = "g.V().count()";
@@ -199,11 +195,9 @@ class Codacy extends Tasks {
                                                    'graphNodes'   => $nodes,
                                                    'graphLinks'   => $links));
 
-            $dump = new Dump($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+            $dump = new Dump($this->gremlin, $dumpConfig, Tasks::IS_SUBTASK);
             $dump->run();
             unset($dump);
-
-            Config::pop();
         } catch (\Exception $e) {
             echo "Error while running the Analyzer $theme \n",
                  $e->getMessage(),

@@ -68,8 +68,6 @@ class Dump extends Tasks {
 
         $this->addSnitch();
 
-        Analyzer::initDocs();
-
         if ($this->config->update === true) {
             copy($this->sqliteFileFinal, $this->sqliteFile);
             $this->sqlite = new \Sqlite3($this->sqliteFile);

@@ -116,18 +116,6 @@ class Config {
                                             'project_packagist'   => '',
                                             'other_php_versions'  => '',
 
-//                                            'gremlin'             => 'Tinkergraph',
-//                                            'loader'              => 'Tinkergraph',
-
-                                            'gremlin'             => 'Gremlin3',
-                                            'loader'              => 'CypherG3',
-
-//                                            'gremlin'             => 'GSNeo4j',
-//                                            'loader'              => 'GSNeo4j',
-
-//                                            'gremlin'             => 'Janusgraph',
-//                                            'loader'              => 'Janusgraph',
-
                                             'project_reports'     => array('Ambassador', 'Devoops'),
                                             'project_themes'      => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                                                            'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
@@ -135,6 +123,22 @@ class Config {
                                                                            'Appinfo', 'Appcontent'),
                                             
                                            );
+
+    private $GREMLINS = array( 'neo4j'       => 'Gremlin3',
+                               'tinkergraph' => 'Tinkergraph',
+                               'gsneo4j'     => 'GSNeo4j',
+                               'janusgraph'  => 'Janusgraph',
+                               'januscaes'   => 'JanusCaES',
+                               'nogremlin'   => 'NoGremlin',
+                               );
+
+    private $LOADERS = array( 'neo4j'       => 'CypherG3', // Could be Neo4jImport
+                              'tinkergraph' => 'Tinkergraph',
+                              'gsneo4j'     => 'GSNeo4j',
+                              'janusgraph'  => 'Janusgraph',
+                              'januscaes'   => 'JanusCaES',
+                              'nogremlin'   => 'NoLoader',
+                              );
 
     private static $BOOLEAN_OPTIONS = array(
                                  '-v'         => 'verbose',
@@ -251,6 +255,13 @@ class Config {
         if (empty($this->configFile['php'])) {
             $this->configFile['php'] = !isset($_SERVER['_']) ? $_SERVER['_'] : '/usr/bin/env php ';
         }
+        if (empty($this->configFile['graphdb']) ||
+            !in_array($this->configFile['graphdb'], array_keys($this->GREMLINS)) ) {
+            // stick to legacy names
+            $this->configFile['graphdb'] = 'gsneo4j';
+        }
+        $this->configFile['gremlin'] = $this->GREMLINS[$this->configFile['graphdb']];
+        $this->configFile['loader']  = $this->LOADERS[$this->configFile['graphdb']];
 
         // then read the config from the commandline (if any)
         $this->readCommandline();
@@ -267,10 +278,11 @@ class Config {
         // build the actual config. Project overwrite commandline overwrites config, if any.
         $this->options = array_merge($this->options, $this->defaultConfig, $this->configFile, $this->projectConfig, $this->codacyConfig, $this->commandline);
 
-        if ($this->options['neo4j_folder'][0] !== '/') {
-            $this->options['neo4j_folder'] = $this->projects_root.'/'.$this->options['neo4j_folder'];
+        $graphdb = $this->options['graphdb'];
+        if ($this->options[$graphdb.'_folder'][0] !== '/') {
+            $this->options[$graphdb.'_folder'] = $this->projects_root.'/'.$this->options[$graphdb.'_folder'];
         }
-        $this->options['neo4j_folder'] = realpath($this->options['neo4j_folder']);
+        $this->options[$graphdb.'_folder'] = realpath($this->options[$graphdb.'_folder']);
         
         $this->options['php'] = $_SERVER['_'];
         if ($this->options['command'] !== 'doctor') {
@@ -281,37 +293,7 @@ class Config {
             self::$singleton = $this;
             self::$stack[] = self::$singleton;
         }
-    }
-
-    public static function factory($argv = array()) {
-        if (empty($argv)) {
-            if (empty(static::$singleton)) {
-                self::$singleton = new self(array());
-                self::$stack[] = self::$singleton;
-            }
-            return static::$singleton;
-        } else {
-            if ($argv instanceof Config) {
-                self::$singleton = $argv;
-            } else {
-                self::$singleton = new self($argv);
-            }
-            self::$stack[] = self::$singleton;
-            return self::$singleton;
-        }
-    }
-
-    public static function push($argv = array()) {
-        self::factory($argv);
-
-        return self::$singleton;
-    }
-
-    public static function pop() {
-        $r = array_pop(self::$stack);
-        self::$singleton = self::$stack[count(self::$stack) -1 ];
-
-        return $r;
+        
     }
 
     public function __isset($name) {

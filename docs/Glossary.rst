@@ -81,6 +81,7 @@ Glossary
 
     + `array_sum()`
 
+      + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
       + :ref:`For Using Functioncall <for-using-functioncall>`
 
     + `array_udiff()`
@@ -354,6 +355,7 @@ Glossary
 
     + `implode()`
 
+      + :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
       + :ref:`Join file() <join-file()>`
 
     + `import_request_variables()`
@@ -373,6 +375,7 @@ Glossary
       + :ref:`Already Parents Interface <already-parents-interface>`
       + :ref:`Avoid get_class() <avoid-get\_class()>`
       + :ref:`Could Typehint <could-typehint>`
+      + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Make Alias <should-make-alias>`
       + :ref:`Undefined Class 2.0 <undefined-class-2.0>`
       + :ref:`Undefined Class 2.1 <undefined-class-2.1>`
@@ -744,6 +747,7 @@ Glossary
       + :ref:`Non Ascii Variables <non-ascii-variables>`
       + :ref:`Old Style Constructor <old-style-constructor>`
       + :ref:`Redefined Default <redefined-default>`
+      + :ref:`Scalar Or Object Property <scalar-or-object-property>`
       + :ref:`Should Use Local Class <should-use-local-class>`
       + :ref:`Strange Names For Methods <strange-names-for-methods>`
       + :ref:`Throw In Destruct <throw-in-destruct>`
@@ -766,6 +770,7 @@ Glossary
       + :ref:`Magic Visibility <magic-visibility>`
       + :ref:`Must Return Methods <must-return-methods>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+      + :ref:`No Magic With Array <no-magic-with-array>`
 
     + `__invoke`
 
@@ -780,6 +785,7 @@ Glossary
 
       + :ref:`Magic Visibility <magic-visibility>`
       + :ref:`No Direct Call To Magic Method <no-direct-call-to-magic-method>`
+      + :ref:`No Magic With Array <no-magic-with-array>`
 
     + `__set_state`
 

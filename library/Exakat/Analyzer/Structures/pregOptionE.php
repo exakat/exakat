@@ -26,26 +26,41 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class pregOptionE extends Analyzer {
+        const FETCH_DELIMITER = <<<GREMLIN
+sideEffect{ 
+    delimiter = it.get().value("noDelimiter")[0];
+    if (delimiter == '\\\\') {
+        delimiter = "\\\\\\\\" + it.get().value("noDelimiter")[1];
+    }
+
+}
+GREMLIN;
+        
+        const MAKE_DELIMITER_FINAL = <<<GREMLIN
+sideEffect{ 
+    if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
+    else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
+    else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
+    else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
+    else if (delimiter == "|") { delimiter = "\\\\|"; delimiterFinal = "\\\\|"; } 
+    else { delimiterFinal = delimiter; } 
+}
+.filter{ delimiter != "\\\\\\\\" }
+GREMLIN;
+
     public function analyze() {
         $functions = '\preg_replace';
         // delimiters
         $delimiters = '=~/|`%#\\$\\*!,@\\\\{\\\\(\\\\[~';
         
-        $makeDelimiters = ' sideEffect{ 
-    if (delimiter == "{") { delimiter = "\\\\{"; delimiterFinal = "\\\\}"; } 
-    else if (delimiter == "(") { delimiter = "\\\\("; delimiterFinal = "\\\\)"; } 
-    else if (delimiter == "[") { delimiter = "\\\\["; delimiterFinal = "\\\\]"; } 
-    else if (delimiter == "*") { delimiter = "\\\\*"; delimiterFinal = "\\\\*"; } 
-    else { delimiterFinal = delimiter; } 
-}.filter{ delimiter != "\\\\\\\\" }';
-
         // preg_match with a string
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
-             ->raw(' sideEffect{ delimiter = it.get().value("noDelimiter")[0]; }')
-             ->raw($makeDelimiters)
+             ->isNot('noDelimiter', '')
+             ->raw(self::FETCH_DELIMITER)
+             ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('noDelimiter', '^(" + delimiter + ").*(" + delimiterFinal + ")([^" + delimiterFinal + "]*?e[^" + delimiterFinal + "]*?)\\$')
              ->back('first');
         $this->prepareQuery();
@@ -56,13 +71,14 @@ class pregOptionE extends Analyzer {
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->outWithRank('CONCAT', 0)
-             ->raw('sideEffect{delimiter = it.get().value("noDelimiter")[0]; }')
+             ->isNot('noDelimiter', '')
+             ->raw(self::FETCH_DELIMITER)
              ->inIs('CONCAT')
-             ->raw($makeDelimiters)
+             ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();
-
+return;
         // with a concatenation
         $this->atomFunctionIs($functions)
              ->outIs('ARGUMENTS')
@@ -73,9 +89,10 @@ class pregOptionE extends Analyzer {
              ->outIsIE('CONCAT')
              ->atomIs('String')
              ->is('rank', 0)
-             ->raw('sideEffect{delimiter = it.get().value("noDelimiter")[0]; }')
+             ->isNot('noDelimiter', '')
+             ->raw(self::FETCH_DELIMITER)
              ->inIsIE('CONCAT')
-             ->raw($makeDelimiters)
+             ->raw(self::MAKE_DELIMITER_FINAL)
              ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();

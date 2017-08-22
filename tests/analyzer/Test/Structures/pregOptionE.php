@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_pregOptionE extends Analyzer {
-    /* 7 methods */
+    /* 9 methods */
 
     public function testStructures_pregOptionE01()  { $this->generic_test('Structures_pregOptionE.01'); }
     public function testStructures_pregOptionE02()  { $this->generic_test('Structures/pregOptionE.02'); }
@@ -17,5 +17,7 @@ class Structures_pregOptionE extends Analyzer {
     public function testStructures_pregOptionE05()  { $this->generic_test('Structures/pregOptionE.05'); }
     public function testStructures_pregOptionE06()  { $this->generic_test('Structures/pregOptionE.06'); }
     public function testStructures_pregOptionE07()  { $this->generic_test('Structures/pregOptionE.07'); }
+    public function testStructures_pregOptionE08()  { $this->generic_test('Structures/pregOptionE.08'); }
+    public function testStructures_pregOptionE09()  { $this->generic_test('Structures/pregOptionE.09'); }
 }
 ?>

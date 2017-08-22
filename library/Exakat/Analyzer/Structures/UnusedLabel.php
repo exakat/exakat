@@ -28,27 +28,43 @@ use Exakat\Tokenizer\Token;
 
 class UnusedLabel extends Analyzer {
     public function analyze() {
+        $max = self::MAX_LOOPING;
+        $noGotoUsage = <<<GREMLIN
+not( where( __.out("BLOCK").repeat( __.out( ) ).emit( ).times( $max )
+              .hasLabel("Goto").out("GOTO")
+              .filter{ it.get().value("code") == name} ) 
+    )
+GREMLIN;
         // inside functions
         $this->atomIs('Gotolabel')
              ->outIs('GOTOLABEL')
              ->savePropertyAs('code', 'name')
              ->goToFunction()
-             ->raw('not( where( __.out("BLOCK").repeat( __.out('.$this->linksDown.')).emit( hasLabel("Goto") ).times('.self::MAX_LOOPING.').out("GOTO").filter{ it.get().value("code") == name} ) )')
+             ->raw($noGotoUsage)
              ->back('first');
         $this->prepareQuery();
 
         // inside namespaces are not processed here.
 
         // in the global space
+        $query = <<<GREMLIN
+g.V().hasLabel("Goto").out("GOTO")
+      .not( where( repeat(__.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("File")).emit()
+                    .hasLabel("Function", "Method", "Closure") ) )
+      .values("code")
+      .unique();
+GREMLIN;
+        $globalLabels = $this->query($query);
+
+        if (empty($globalLabels)) {
+            return;
+        }
+        
         $this->atomIs('Gotolabel')
              ->outIs('GOTOLABEL')
              ->savePropertyAs('code', 'name')
              ->hasNoFunction()
-             ->raw('not( where( g.V().hasLabel("Goto").out("GOTO").filter{ it.get().value("code") == name}
-                            .not( where( repeat(__.in('.$this->linksDown.'))
-                                    .until(hasLabel("File")).emit()
-                                    .hasLabel("Function") ) 
-                            ) ) )')
+             ->codeIsNot($globalLabels)
              ->back('first');
         $this->prepareQuery();
 
