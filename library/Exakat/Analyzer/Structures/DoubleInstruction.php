@@ -29,7 +29,7 @@ class DoubleInstruction extends Analyzer {
     public function analyze() {
         $this->atomIs('Sequence')
              ->outIs('EXPRESSION')
-             ->atomIsNot(array('Ifthen', 'Function', 'Class', 'Postplusplus', 'Preplusplus'))
+             ->atomIsNot(array('Ifthen', 'Function', 'Class', 'Postplusplus', 'Preplusplus', 'Void'))
              ->savePropertyAs('fullcode', 'code')
              ->_as('result')
              ->nextSibling()

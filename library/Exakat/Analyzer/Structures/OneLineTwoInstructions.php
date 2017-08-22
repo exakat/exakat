@@ -30,6 +30,7 @@ class OneLineTwoInstructions extends Analyzer {
         // Two expressions in a row
         $this->atomIs('Sequence')
              ->outIs('EXPRESSION')
+             ->atomIsNot('Void')
              ->_as('report')
              ->atomIsNot(array('Ppp', 'Global', 'Const', 'Inlinehtml'))
              ->savePropertyAs('line', 'line_number')
@@ -42,6 +43,7 @@ class OneLineTwoInstructions extends Analyzer {
         // Two expressions with HTML between
         $this->atomIs('Sequence')
              ->outIs('EXPRESSION')
+             ->atomIsNot('Void')
              ->_as('report')
              ->atomIsNot(array('Ppp', 'Global', 'Const', 'Inlinehtml'))
              ->savePropertyAs('line', 'line_number')
