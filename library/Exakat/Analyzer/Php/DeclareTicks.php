@@ -33,7 +33,6 @@ class DeclareTicks extends Analyzer {
              ->outIs('CODE')
              ->outIs('EXPRESSION')
              ->atomIs('Declare')
-             ->outIs('DECLARE')
              ->outIs('ARGUMENT')
              ->regexIs('fullcode', '^ticks = ')
              ->back('first');
