@@ -37,7 +37,6 @@ class UseWpdbApi extends Analyzer {
              ->_as('results')
              ->outIs('METHOD')
              ->codeIs(array('query', 'prepare'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              // If it's a property, we accept $wpdb
@@ -54,7 +53,6 @@ class UseWpdbApi extends Analyzer {
              ->_as('results')
              ->outIs('METHOD')
              ->codeIs(array('query', 'prepare'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              // If it's a property, we accept $wpdb
@@ -72,7 +70,6 @@ class UseWpdbApi extends Analyzer {
              ->_as('results')
              ->outIs('METHOD')
              ->codeIs(array('query', 'prepare'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_QUOTE')

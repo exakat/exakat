@@ -29,7 +29,6 @@ class ZendTypehinting extends Analyzer {
         $regex = '^\\\\\\\\zend(_|\\\\\\\\)';
 
         $this->atomIs(self::$FUNCTION_METHOD)
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->regexIs('fullnspath', $regex);

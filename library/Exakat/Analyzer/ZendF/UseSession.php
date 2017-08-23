@@ -37,7 +37,6 @@ class UseSession extends Analyzer {
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->codeIs('get')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->noDelimiterIs('Zend\\Session\\SessionManager')

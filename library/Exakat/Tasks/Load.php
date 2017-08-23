@@ -163,7 +163,7 @@ class Load extends Tasks {
     static public $PROP_DELIMITER   = array('String', 'Heredoc');
     static public $PROP_NODELIMITER = array('String', 'Variable');
     static public $PROP_HEREDOC     = array('Heredoc');
-    static public $PROP_COUNT       = array('Sequence', 'Functioncall', 'Methodcall', 'Arrayliteral', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
+    static public $PROP_COUNT       = array('Sequence', 'Functioncall', 'Methodcallname', 'Arrayliteral', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
     static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String');
     static public $PROP_ABSOLUTE    = array('Nsname');
     static public $PROP_ALIAS       = array('Nsname', 'Identifier', 'As');
@@ -173,8 +173,8 @@ class Load extends Tasks {
     static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null');
     static public $PROP_STRVAL      = array('String');
     static public $PROP_ENCLOSING   = array('Variable', 'Array', 'Member');
-    static public $PROP_ARGS_MAX    = array('Functioncall', 'Methodcall', 'Arrayliteral', );
-    static public $PROP_ARGS_MIN    = array('Functioncall', 'Methodcall', 'Arrayliteral', );
+    static public $PROP_ARGS_MAX    = array('Functioncall', 'Methodcallname', 'Arrayliteral', );
+    static public $PROP_ARGS_MIN    = array('Functioncall', 'Methodcallname', 'Arrayliteral', );
     static public $PROP_BRACKET     = array('Sequence');
     static public $PROP_CLOSETAG    = array('Php');
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');

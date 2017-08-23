@@ -35,7 +35,6 @@ class WpdbPrepareOrNot extends Analyzer {
              ->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs('prepare')
-             ->outIs('ARGUMENTS')
              ->is('count', 1)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('String', 'Heredoc'))
@@ -51,13 +50,12 @@ class WpdbPrepareOrNot extends Analyzer {
              ->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs('prepare')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_QUOTE')
              // If it's a property, we accept $wpdb
              ->raw('not( where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
-                             .where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )
+                             .not( where( __.out("OBJECT").has("code", "\$wpdb") ) )
                              ) )')
              ->back('results');
         $this->prepareQuery();
@@ -70,13 +68,12 @@ class WpdbPrepareOrNot extends Analyzer {
              ->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs('prepare')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Heredoc')
              ->is('heredoc', true)
              // If it's a property, we accept $wpdb
              ->raw('where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
-                             .where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )
+                             .not( where( __.out("OBJECT").has("code", "\$wpdb") ) )
                               )')
              ->back('results');
         $this->prepareQuery();
@@ -89,12 +86,11 @@ class WpdbPrepareOrNot extends Analyzer {
              ->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs('prepare')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              // If it's a property, we accept $wpdb
              ->raw('not( where( __.out("CONCAT").hasLabel("Variable", "Array", "Member")
-                             .where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )
+                             .not( where( __.out("OBJECT").has("code", "\$wpdb") ) )
                              ) )')
              ->outIs('CONCAT')
              ->atomIs('String')
@@ -102,7 +98,7 @@ class WpdbPrepareOrNot extends Analyzer {
              // If it's a property, we accept $wpdb
              ->raw('not( where( __.out("CONCAT").hasLabel("String").has("token", "T_QUOTE")
                              .out("CONCAT").hasLabel("Variable", "Array", "Member")
-                             .where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )
+                             .not( __.where( __.out("OBJECT").has("code", "\$wpdb")))
                              ) )')
              ->back('results');
         $this->prepareQuery();
