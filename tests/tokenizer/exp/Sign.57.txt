@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.57.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             **
@@ -18,17 +17,15 @@ Label : PROJECT
               ->
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   c
               Label : OBJECT
                 $b
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           -
           Label : LEFT
             **
@@ -40,15 +37,13 @@ Label : PROJECT
                 b
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   c
           Label : RIGHT
             4
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : SIGN
             **
@@ -56,7 +51,7 @@ Label : PROJECT
               1
             Label : RIGHT
               3
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : SIGN
             **

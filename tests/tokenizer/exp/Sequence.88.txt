@@ -1,141 +1,130 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.88.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'B'
-              Label : VARIABLE
-                $a
-            Label : ARGUMENT
-              'C'
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                D
-              Label : METHOD
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'B'
+            Label : VARIABLE
+              $a
+          Label : ARGUMENT
+            'C'
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              D
+            Label : METHOD
+              E
+              Label : ARGUMENT
+                'F'
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                array
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'G'
+                  Label : VALUE
+                    'H'
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'I'
+                  Label : VALUE
+                    0
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'J'
+                  Label : VALUE
+                    1
+              Label : NAME
                 E
-                Label : ARGUMENTS
-                  (
+          Label : ARGUMENT
+            'K'
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              $c
+            Label : ELSE
+              'T'
+            Label : THEN
+              .
+              Label : CONCAT
+                'L'
+              Label : CONCAT
+                [
+                Label : INDEX
+                  'M'
+                Label : VARIABLE
+                  $d
+              Label : CONCAT
+                'N'
+              Label : CONCAT
+                [
+                Label : INDEX
+                  'O'
+                Label : VARIABLE
+                  $d
+              Label : CONCAT
+                'C'
+              Label : CONCAT
+                ::
+                Label : CLASS
+                  D
+                Label : METHOD
+                  E
                   Label : ARGUMENT
-                    'F'
+                    'S'
                   Label : ARGUMENT
-                    $b
+                    'T'
                   Label : ARGUMENT
                     array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        =>
-                        Label : KEY
-                          'G'
-                        Label : VALUE
-                          'H'
-                      Label : ARGUMENT
-                        =>
-                        Label : KEY
-                          'I'
-                        Label : VALUE
-                          0
-                      Label : ARGUMENT
-                        =>
-                        Label : KEY
-                          'J'
-                        Label : VALUE
-                          1
-                Label : NAME
-                  E
-            Label : ARGUMENT
-              'K'
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                $c
-              Label : ELSE
-                'T'
-              Label : THEN
-                .
-                Label : CONCAT
-                  'L'
-                Label : CONCAT
-                  [
-                  Label : INDEX
-                    'M'
-                  Label : VARIABLE
-                    $d
-                Label : CONCAT
-                  'N'
-                Label : CONCAT
-                  [
-                  Label : INDEX
-                    'O'
-                  Label : VARIABLE
-                    $d
-                Label : CONCAT
-                  'C'
-                Label : CONCAT
-                  ::
-                  Label : CLASS
-                    D
-                  Label : METHOD
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'J'
+                      Label : VALUE
+                        2
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'V'
+                      Label : VALUE
+                        'W'
+                  Label : NAME
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'S'
-                      Label : ARGUMENT
-                        'T'
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'J'
-                            Label : VALUE
-                              2
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'V'
-                            Label : VALUE
-                              'W'
-                    Label : NAME
-                      E
-                Label : CONCAT
-                  'X'
-                Label : CONCAT
-                  $c
-                Label : CONCAT
-                  'K'
+              Label : CONCAT
+                'X'
+              Label : CONCAT
+                $c
+              Label : CONCAT
+                'K'
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           AA
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ->
+            Label : MEMBER
+              AC
             Label : OBJECT
               [
               Label : INDEX
                 'AB'
               Label : VARIABLE
                 $e
-            Label : PROPERTY
-              AC
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               AD

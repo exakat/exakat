@@ -1,28 +1,27 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $i
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           while
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $x
-            Label : ELEMENT
+            Label : EXPRESSION
               ?
               Label : CONDITION
                 $a

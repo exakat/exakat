@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             (
@@ -54,11 +53,9 @@ Label : PROJECT
                           $h
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               a
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'b'
+              Label : ARGUMENT
+                'b'
               Label : NAME
                 a

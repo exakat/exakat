@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             1
@@ -30,5 +29,5 @@ Label : PROJECT
                     5
                   Label : RIGHT
                     6
-        Label : ELEMENT
+        Label : EXPRESSION
           'd'

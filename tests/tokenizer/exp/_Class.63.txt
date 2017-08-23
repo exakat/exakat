@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.63.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             x
@@ -107,17 +106,17 @@ Label : PROJECT
           Label : PPP
             public
             Label : PPP
-              $d3
-            Label : PPP
               $e3
+            Label : PPP
+              $d3
             Label : PUBLIC
               public
           Label : PPP
             static
             Label : PPP
-              $d4
-            Label : PPP
               $e4
+            Label : PPP
+              $d4
             Label : STATIC
               static
           Label : PPP
@@ -161,13 +160,13 @@ Label : PROJECT
             Label : PPP
               =
               Label : LEFT
-                $f3
+                $g3
               Label : RIGHT
                 3
             Label : PPP
               =
               Label : LEFT
-                $g3
+                $f3
               Label : RIGHT
                 3
             Label : PUBLIC
@@ -177,14 +176,14 @@ Label : PROJECT
             Label : PPP
               =
               Label : LEFT
-                $f4
-              Label : RIGHT
-                4
-            Label : PPP
-              =
-              Label : LEFT
                 $g4
               Label : RIGHT
                 5
+            Label : PPP
+              =
+              Label : LEFT
+                $f4
+              Label : RIGHT
+                4
             Label : STATIC
               static

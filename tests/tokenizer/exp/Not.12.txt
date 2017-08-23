@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Not.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
@@ -20,17 +19,17 @@ Label : PROJECT
               A
             Label : CONCAT
               ->
+              Label : MEMBER
+                c
               Label : OBJECT
                 $b
-              Label : PROPERTY
-                c
             Label : CONCAT
               $d
             Label : CONCAT
               B
             Label : CONCAT
               ->
+              Label : MEMBER
+                f
               Label : OBJECT
                 $e
-              Label : PROPERTY
-                f

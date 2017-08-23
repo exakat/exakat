@@ -1,26 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           f
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              new
-              Label : NEW
+          Label : ARGUMENT
+            new
+            Label : NEW
+              Stdclass
+              Label : ARGUMENT
+                Void
+              Label : NAME
                 Stdclass
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  Stdclass
           Label : NAME
             f

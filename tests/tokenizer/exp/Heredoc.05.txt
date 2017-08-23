@@ -1,52 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Heredoc.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-              Label : DEFAULT
-                true
+          Label : ARGUMENT
+            $b
+            Label : DEFAULT
+              true
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  <<< C
+              Label : ARGUMENT
+                <<< C
 
-                  Label : CONCAT
-                    D
+                Label : CONCAT
+                  D
 
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               ob_flush
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 ob_flush
-            Label : ELEMENT
+            Label : EXPRESSION
               exit
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 exit
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

@@ -1,29 +1,26 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Try.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ::
-                Label : CLASS
-                  B
-                Label : CONSTANT
-                  D
+            Label : ARGUMENT
+              ::
+              Label : CLASS
+                B
+              Label : CONSTANT
+                D
             Label : NAME
               a
           Label : OBJECT
             $this
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
@@ -31,17 +28,17 @@ Label : PROJECT
               $b
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               throw
               Label : THROW
                 new
                 Label : NEW
                   A
-        Label : ELEMENT
+        Label : EXPRESSION
           try
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ==
@@ -55,33 +52,29 @@ Label : PROJECT
                   't'
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     g
-                    Label : ARGUMENTS
-                      (
+                    Label : ARGUMENT
+                      t
                       Label : ARGUMENT
+                        'h'
+                      Label : NAME
                         t
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'h'
-                        Label : NAME
-                          t
                     Label : NAME
                       g
                   Label : OBJECT
                     ->
+                    Label : MEMBER
+                      f
                     Label : OBJECT
                       $this
-                    Label : PROPERTY
-                      f
           Label : CATCH
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : CLASS
               Router_ArgNoExist
@@ -91,7 +84,7 @@ Label : PROJECT
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : CLASS
               Ugmanager_GroupNoExist
@@ -101,54 +94,46 @@ Label : PROJECT
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 ->
                 Label : METHOD
                   e
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
+                  Label : ARGUMENT
+                    f
+                    Label : NAME
                       f
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          t
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'g'
-                          Label : NAME
-                            t
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'i'
-                          Label : VARIABLE
-                            $h
+                    Label : ARGUMENT
+                      t
+                      Label : ARGUMENT
+                        'g'
                       Label : NAME
-                        f
+                        t
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'i'
+                      Label : VARIABLE
+                        $h
                   Label : NAME
                     e
                 Label : OBJECT
                   ->
+                  Label : MEMBER
+                    a
                   Label : OBJECT
                     $d
-                  Label : PROPERTY
-                    a
-              Label : ELEMENT
+              Label : EXPRESSION
                 if
                 Label : CONDITION
                   $x
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     ->
                     Label : METHOD
                       d
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         d
                     Label : OBJECT

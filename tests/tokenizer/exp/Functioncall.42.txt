@@ -1,52 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.42.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             intval
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                /
-                Label : LEFT
-                  @
-                  Label : AT
-                    (
-                    Label : CODE
-                      +
-                      Label : LEFT
-                        [
-                        Label : INDEX
-                          'c'
-                        Label : VARIABLE
-                          $b
-                      Label : RIGHT
-                        $d
-                Label : RIGHT
+            Label : ARGUMENT
+              /
+              Label : LEFT
+                @
+                Label : AT
+                  (
+                  Label : CODE
+                    +
+                    Label : LEFT
+                      [
+                      Label : INDEX
+                        'c'
+                      Label : VARIABLE
+                        $b
+                    Label : RIGHT
+                      $d
+              Label : RIGHT
+                abs
+                Label : ARGUMENT
+                  +
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      'f'
+                    Label : VARIABLE
+                      $e
+                  Label : RIGHT
+                    $g
+                Label : NAME
                   abs
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      +
-                      Label : LEFT
-                        [
-                        Label : INDEX
-                          'f'
-                        Label : VARIABLE
-                          $e
-                      Label : RIGHT
-                        $g
-                  Label : NAME
-                    abs
             Label : NAME
               intval

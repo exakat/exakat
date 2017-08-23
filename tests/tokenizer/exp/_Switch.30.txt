@@ -1,40 +1,39 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.30.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'b' :  /**/  
               Label : CASE
                 'b'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'c'
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'd' :  /**/  
               Label : CASE
                 'd'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $e
                   Label : RIGHT
                     'f'
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ::
@@ -42,37 +41,35 @@ Label : PROJECT
                       G
                     Label : METHOD
                       h
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'i'
+                      Label : ARGUMENT
+                        'i'
                       Label : NAME
                         h
                   Label : THEN
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       .=
                       Label : LEFT
                         $j
                       Label : RIGHT
                         "k"
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     $l
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'm' :  /**/  
               Label : CASE
                 'm'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $n
                   Label : RIGHT
                     'o'
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ::
@@ -80,29 +77,27 @@ Label : PROJECT
                       P
                     Label : METHOD
                       q
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'r'
+                      Label : ARGUMENT
+                        'r'
                       Label : NAME
                         q
                   Label : THEN
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       .=
                       Label : LEFT
                         $s
                       Label : RIGHT
                         "t"
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     $u
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'v'

@@ -1,36 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.66.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           array
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'B'
-              Label : VALUE
-                .
-                Label : CONCAT
-                  (
-                  Label : CODE
-                    ?
-                    Label : CONDITION
-                      ===
-                      Label : LEFT
-                        $a
-                      Label : RIGHT
-                        'C'
-                    Label : ELSE
-                      'E'
-                    Label : THEN
-                      'D'
-                Label : CONCAT
-                  -0
+          Label : ARGUMENT
+            =>
+            Label : INDEX
+              'B'
+            Label : VALUE
+              .
+              Label : CONCAT
+                (
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    ===
+                    Label : LEFT
+                      $a
+                    Label : RIGHT
+                      'C'
+                  Label : ELSE
+                    'E'
+                  Label : THEN
+                    'D'
+              Label : CONCAT
+                -0

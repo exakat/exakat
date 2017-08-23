@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.29.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -21,20 +20,18 @@ Label : PROJECT
               .
               Label : CONCAT
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      d
-                    Label : CONCAT
-                      (int)
-                      Label : CAST
-                        [
-                        Label : INDEX
-                          'f'
-                        Label : VARIABLE
-                          $e
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    d
+                  Label : CONCAT
+                    (int)
+                    Label : CAST
+                      [
+                      Label : INDEX
+                        'f'
+                      Label : VARIABLE
+                        $e
                 Label : NAME
                   c
               Label : CONCAT

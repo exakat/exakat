@@ -1,45 +1,36 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Static.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           [
-          Label : ARGUMENTS
-            [
-            Label : ARGUMENT
-              new
-              Label : NEW
-                static
-            Label : ARGUMENT
-              $method
-        Label : ELEMENT
+          Label : ARGUMENT
+            new
+            Label : NEW
+              static
+          Label : ARGUMENT
+            $method
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              new
-              Label : NEW
+          Label : ARGUMENT
+            new
+            Label : NEW
+              static
+              Label : ARGUMENT
+                Void
+              Label : NAME
                 static
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  static
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           y
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              new
-              Label : NEW
-                static
+          Label : ARGUMENT
+            new
+            Label : NEW
+              static
           Label : NAME
             y

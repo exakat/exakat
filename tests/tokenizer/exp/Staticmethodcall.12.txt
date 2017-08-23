@@ -1,51 +1,44 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticmethodcall.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             $a
           Label : METHOD
             {}
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               {}
               Label : CODE
                 __FILE__
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             {}
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               {}
               Label : CODE
                 __FILE__
           Label : OBJECT
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             $c
           Label : METHOD
             {}
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               {}
               Label : CODE

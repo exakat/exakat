@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.40.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             0
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               +=
               Label : LEFT
                 $a
@@ -26,10 +25,10 @@ Label : PROJECT
                 *
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    $b
                   Label : OBJECT
                     $this
-                  Label : PROPERTY
-                    $b
                 Label : RIGHT
                   $c
           Label : SOURCE
@@ -40,25 +39,23 @@ Label : PROJECT
               C
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $b
             Label : VALUE
               $c
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d
           Label : RIGHT
             D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                'E'
-              Label : ARGUMENT
-                'F'
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              'E'
+            Label : ARGUMENT
+              'F'
             Label : NAME
               D

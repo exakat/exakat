@@ -1,148 +1,131 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Block.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    D
+                Label : ARGUMENT
+                  D
                 Label : NAME
                   C
               Label : OBJECT
                 ::
                 Label : CLASS
                   B
-                Label : PROPERTY
+                Label : MEMBER
                   $b
-            Label : ELEMENT
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     C
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        G
+                    Label : ARGUMENT
+                      G
                     Label : NAME
                       C
                   Label : OBJECT
                     ::
                     Label : CLASS
                       B
-                    Label : PROPERTY
+                    Label : MEMBER
                       $b
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     I
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $c
+                    Label : ARGUMENT
+                      $c
                     Label : NAME
                       I
                   Label : OBJECT
                     ::
                     Label : CLASS
                       B
-                    Label : PROPERTY
+                    Label : MEMBER
                       $b
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     K
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       K
                   Label : OBJECT
                     ::
                     Label : CLASS
                       B
-                    Label : PROPERTY
+                    Label : MEMBER
                       $b
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     C
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        N
+                    Label : ARGUMENT
+                      N
                     Label : NAME
                       C
                   Label : OBJECT
                     ::
                     Label : CLASS
                       B
-                    Label : PROPERTY
+                    Label : MEMBER
                       $b
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     I
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $d
+                    Label : ARGUMENT
+                      $d
                     Label : NAME
                       I
                   Label : OBJECT
                     ::
                     Label : CLASS
                       B
-                    Label : PROPERTY
+                    Label : MEMBER
                       $b
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     K
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       K
                   Label : OBJECT
                     ::
                     Label : CLASS
                       B
-                    Label : PROPERTY
+                    Label : MEMBER
                       $b
-              Label : ELEMENT
+              Label : EXPRESSION
                 ->
                 Label : METHOD
                   K
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     K
                 Label : OBJECT
                   ::
                   Label : CLASS
                     B
-                  Label : PROPERTY
+                  Label : MEMBER
                     $b

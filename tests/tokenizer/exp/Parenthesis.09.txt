@@ -1,34 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Parenthesis.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $x
+            Label : ARGUMENT
+              $x
             Label : NAME
               list
           Label : RIGHT
             @
             Label : AT
               d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  2
-                Label : ARGUMENT
-                  3
-                Label : ARGUMENT
-                  5
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                3
+              Label : ARGUMENT
+                5
               Label : NAME
                 d

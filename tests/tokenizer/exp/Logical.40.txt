@@ -1,32 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.40.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ||
           Label : LEFT
             ==
             Label : LEFT
               ->
+              Label : MEMBER
+                B
               Label : OBJECT
                 $a
-              Label : PROPERTY
-                B
             Label : RIGHT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $b
-                  Label : PROPERTY
-                    D
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  D
+                Label : OBJECT
+                  $b
               Label : NAME
                 C
           Label : RIGHT
@@ -35,15 +32,15 @@ Label : PROJECT
               {
               Label : INDEX
                 ->
+                Label : MEMBER
+                  F
                 Label : OBJECT
                   $d
-                Label : PROPERTY
-                  F
               Label : VARIABLE
                 ->
+                Label : MEMBER
+                  E
                 Label : OBJECT
                   $c
-                Label : PROPERTY
-                  E
             Label : RIGHT
               'G'

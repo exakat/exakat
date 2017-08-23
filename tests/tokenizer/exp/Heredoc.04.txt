@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Heredoc.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
@@ -20,10 +19,10 @@ Label : PROJECT
             Label : CONCAT
               <<<eof
 
+              Label : MEMBER
+                c
               Label : OBJECT
                 $b
-              Label : PROPERTY
-                c
             Label : CONCAT
               
 d

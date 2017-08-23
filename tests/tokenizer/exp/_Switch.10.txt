@@ -1,30 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'b' :  /**/  
               Label : CASE
                 'b'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     $c
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $d

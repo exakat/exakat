@@ -1,50 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Noscream.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'c'
-              Label : VARIABLE
-                $b
-            Label : ARGUMENT
-              -1
           Label : NAME
             a
-        Label : ELEMENT
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'c'
+            Label : VARIABLE
+              $b
+          Label : ARGUMENT
+            -1
+        Label : EXPRESSION
           ->
           Label : METHOD
             e
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'f'
+            Label : ARGUMENT
+              'f'
             Label : NAME
               e
           Label : OBJECT
             $d
-        Label : ELEMENT
+        Label : EXPRESSION
           @
           Label : AT
             g
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $h
+            Label : ARGUMENT
+              $h
             Label : NAME
               g
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             false

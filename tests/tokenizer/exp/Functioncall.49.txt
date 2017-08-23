@@ -1,55 +1,48 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.49.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                (
-                Label : CODE
-                  +
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    0
-              Label : CONCAT
-                'B'
-              Label : CONCAT
-                D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'E'
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      G
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'H'
-                      Label : NAME
-                        G
-                    Label : OBJECT
-                      $b
-                Label : NAME
-                  D
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                'J'
-              Label : CONCAT
-                'L'
-              Label : CONCAT
-                'N'
           Label : NAME
             echo
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              (
+              Label : CODE
+                +
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  0
+            Label : CONCAT
+              'B'
+            Label : CONCAT
+              D
+              Label : NAME
+                D
+              Label : ARGUMENT
+                'E'
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  G
+                  Label : ARGUMENT
+                    'H'
+                  Label : NAME
+                    G
+                Label : OBJECT
+                  $b
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              'J'
+            Label : CONCAT
+              'L'
+            Label : CONCAT
+              'N'

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.45.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -18,16 +17,16 @@ Label : PROJECT
               -
               Label : LEFT
                 ->
-                Label : OBJECT
-                  $b
-                Label : PROPERTY
+                Label : MEMBER
                   {}
                   Label : CODE
                     ->
+                    Label : MEMBER
+                      B
                     Label : OBJECT
                       $c
-                    Label : PROPERTY
-                      B
+                Label : OBJECT
+                  $b
               Label : RIGHT
                 $d
             Label : RIGHT

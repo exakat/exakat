@@ -1,28 +1,27 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.24.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             ->
+            Label : MEMBER
+              c
             Label : OBJECT
               $b
-            Label : PROPERTY
-              c
-        Label : ELEMENT
+        Label : EXPRESSION
           while
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : CONDITION
             !==
@@ -32,46 +31,40 @@ Label : PROJECT
               ->
               Label : METHOD
                 e
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   e
               Label : OBJECT
                 $d
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !=
             Label : LEFT
               ->
+              Label : MEMBER
+                g
               Label : OBJECT
                 $f
-              Label : PROPERTY
-                g
             Label : RIGHT
               strlen
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $h
-                  Label : PROPERTY
-                    i
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  i
+                Label : OBJECT
+                  $h
               Label : NAME
                 strlen
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 k
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   k
               Label : OBJECT

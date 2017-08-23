@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Noscream.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             @
@@ -16,15 +15,13 @@ Label : PROJECT
               !
               Label : NOT
                 function_exists
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'gzopen'
+                Label : ARGUMENT
+                  'gzopen'
                 Label : NAME
                   function_exists
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $x

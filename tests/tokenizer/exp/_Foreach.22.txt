@@ -1,25 +1,22 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 e
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $f
+                Label : ARGUMENT
+                  $f
                 Label : NAME
                   e
               Label : OBJECT
@@ -28,7 +25,7 @@ Label : PROJECT
             $a
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $b
             Label : VALUE
               $c

@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Dowhile.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           do
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        1
+                    Label : ARGUMENT
+                      1
                     Label : NAME
                       E
                   Label : OBJECT
@@ -31,24 +28,20 @@ Label : PROJECT
                 ===
                 Label : LEFT
                   B
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'C'
-                    Label : ARGUMENT
-                      ->
-                      Label : METHOD
-                        D
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          D
-                      Label : OBJECT
-                        $a
                   Label : NAME
                     B
+                  Label : ARGUMENT
+                    'C'
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      D
+                      Label : ARGUMENT
+                        Void
+                      Label : NAME
+                        D
+                    Label : OBJECT
+                      $a
                 Label : RIGHT
                   0
           Label : CONDITION

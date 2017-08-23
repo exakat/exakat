@@ -1,44 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 1 :  /**/  
               Label : CASE
                 1
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $b
                   Label : RIGHT
                     2
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $b
@@ -46,7 +45,7 @@ Label : PROJECT
                     3
           Label : NAME
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c

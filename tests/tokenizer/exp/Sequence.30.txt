@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.30.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
+          Label : ARGUMENT
+            $b
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
@@ -24,43 +21,41 @@ Label : PROJECT
                   $c
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     false
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 ->
                 Label : METHOD
                   f
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      .
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      "a"
+                    Label : CONCAT
+                      b
+                    Label : CONCAT
+                      "
                       Label : CONCAT
-                        "a"
+                        c
                       Label : CONCAT
-                        b
+                        $d
                       Label : CONCAT
-                        "
-                        Label : CONCAT
-                          c
-                        Label : CONCAT
-                          $d
-                        Label : CONCAT
-                          '
+                        '
                   Label : NAME
                     f
                 Label : OBJECT
                   ->
+                  Label : MEMBER
+                    e
                   Label : OBJECT
                     $d
-                  Label : PROPERTY
-                    e
           Label : DEFINITION
             "a"
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

@@ -1,70 +1,63 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'b' :  /**/  
               Label : CASE
                 'b'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $c
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $d
-                Label : ELEMENT
+                Label : EXPRESSION
                   require_once
-                  Label : ARGUMENTS
-                    )
+                  Label : ARGUMENT
+                    e
                     Label : ARGUMENT
+                      'f'
+                    Label : NAME
                       e
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'f'
-                      Label : NAME
-                        e
                   Label : NAME
                     require_once
-                Label : ELEMENT
+                Label : EXPRESSION
                   g
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'h'
+                  Label : ARGUMENT
+                    'h'
                   Label : NAME
                     g
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'i' :  /**/  
               Label : CASE
                 'i'
               Label : CODE
                 ;
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'j' :  /**/  
               Label : CASE
                 'j'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     1

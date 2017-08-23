@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Not.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
@@ -18,19 +17,17 @@ Label : PROJECT
                 $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
+                Label : ARGUMENT
+                  $c
                 Label : NAME
                   B
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             @
@@ -40,15 +37,13 @@ Label : PROJECT
                 $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
+                Label : ARGUMENT
+                  $c
                 Label : NAME
                   B

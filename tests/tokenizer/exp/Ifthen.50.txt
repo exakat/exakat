@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.50.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
@@ -16,7 +15,7 @@ Label : PROJECT
               $a
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ==
@@ -26,7 +25,7 @@ Label : PROJECT
                   1
               Label : ELSE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ==
@@ -36,57 +35,43 @@ Label : PROJECT
                       2
                   Label : THEN
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       i
-                      Label : ARGUMENTS
-                        (
+                      Label : ARGUMENT
+                        j
                         Label : ARGUMENT
+                          "l"
+                        Label : NAME
                           j
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              "l"
-                          Label : NAME
-                            j
                       Label : NAME
                         i
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   e
-                  Label : ARGUMENTS
-                    (
+                  Label : ARGUMENT
+                    f
                     Label : ARGUMENT
+                      "g"
+                    Label : NAME
                       f
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          "g"
-                      Label : NAME
-                        f
                   Label : NAME
                     e
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               b
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                _
                 Label : ARGUMENT
+                  "C"
+                Label : NAME
                   _
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      "C"
-                  Label : NAME
-                    _
               Label : NAME
                 b
-        Label : ELEMENT
+        Label : EXPRESSION
           exit
-          Label : ARGUMENTS
+          Label : ARGUMENT
             Void
-            Label : ARGUMENT
-              Void
           Label : NAME
             exit

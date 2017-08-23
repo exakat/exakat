@@ -1,58 +1,51 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Array.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            }
-            Label : ARGUMENT
-              {
-              Label : INDEX
-                2
-              Label : VARIABLE
-                [
-                Label : INDEX
-                  1
-                Label : VARIABLE
-                  $x
-          Label : NAME
-            print
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            }
-            Label : ARGUMENT
-              {
-              Label : INDEX
-                2
-              Label : VARIABLE
-                {
-                Label : INDEX
-                  1
-                Label : VARIABLE
-                  $x
-          Label : NAME
-            print
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
+          Label : ARGUMENT
+            {
+            Label : INDEX
+              2
+            Label : VARIABLE
               [
               Label : INDEX
-                2
+                1
               Label : VARIABLE
-                {
-                Label : INDEX
-                  1
-                Label : VARIABLE
-                  $x
+                $x
+          Label : NAME
+            print
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            {
+            Label : INDEX
+              2
+            Label : VARIABLE
+              {
+              Label : INDEX
+                1
+              Label : VARIABLE
+                $x
+          Label : NAME
+            print
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              2
+            Label : VARIABLE
+              {
+              Label : INDEX
+                1
+              Label : VARIABLE
+                $x
           Label : NAME
             print

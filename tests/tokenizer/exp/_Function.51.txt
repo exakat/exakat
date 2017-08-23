@@ -1,48 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.51.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 B\E
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 F
-            Label : ELEMENT
+            Label : EXPRESSION
               G
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a
+              Label : ARGUMENT
+                $a
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     H
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'I'
-                      Label : ARGUMENT
-                        $a
                     Label : NAME
                       H
+                    Label : ARGUMENT
+                      'I'
+                    Label : ARGUMENT
+                      $a
               Label : NAME
                 G
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             B\C

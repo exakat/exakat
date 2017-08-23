@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/String.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             .
@@ -53,24 +52,22 @@ Label : PROJECT
               ->
               Label : METHOD
                 I
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      'J'
-                    Label : CONCAT
-                      [
-                      Label : INDEX
-                        1
-                      Label : VARIABLE
-                        $g
-                    Label : CONCAT
-                      [
-                      Label : INDEX
-                        2
-                      Label : VARIABLE
-                        $h
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    'J'
+                  Label : CONCAT
+                    [
+                    Label : INDEX
+                      1
+                    Label : VARIABLE
+                      $g
+                  Label : CONCAT
+                    [
+                    Label : INDEX
+                      2
+                    Label : VARIABLE
+                      $h
                 Label : NAME
                   I
               Label : OBJECT

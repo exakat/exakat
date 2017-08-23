@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 ?
@@ -30,14 +27,12 @@ Label : PROJECT
                         $b
                       Label : RIGHT
                         c
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            ->
-                            Label : OBJECT
-                              $d
-                            Label : PROPERTY
-                              e
+                        Label : ARGUMENT
+                          ->
+                          Label : MEMBER
+                            e
+                          Label : OBJECT
+                            $d
                         Label : NAME
                           c
                   Label : RIGHT
@@ -46,29 +41,25 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     h
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
-                          i
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              "J"
-                          Label : NAME
-                            i
-                        Label : OBJECT
-                          $this
-                      Label : ARGUMENT
-                        9
                     Label : NAME
                       h
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        i
+                        Label : ARGUMENT
+                          "J"
+                        Label : NAME
+                          i
+                      Label : OBJECT
+                        $this
+                    Label : ARGUMENT
+                      9
                   Label : OBJECT
                     $g
                 Label : THEN
                   $f
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

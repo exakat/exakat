@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Variable.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           $
           Label : NAME
             [
@@ -20,7 +19,7 @@ Label : PROJECT
                 'bar'
               Label : VARIABLE
                 $foo
-        Label : ELEMENT
+        Label : EXPRESSION
           $
           Label : NAME
             [
@@ -32,21 +31,19 @@ Label : PROJECT
                 'bar'
               Label : VARIABLE
                 $foo
-        Label : ELEMENT
+        Label : EXPRESSION
           [
           Label : INDEX
             'baz'
           Label : VARIABLE
             ->
+            Label : MEMBER
+              $bar
             Label : OBJECT
               $foo
-            Label : PROPERTY
-              $bar
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
-          Label : OBJECT
-            $foo
-          Label : PROPERTY
+          Label : MEMBER
             {}
             Label : CODE
               [
@@ -54,30 +51,28 @@ Label : PROJECT
                 'baz'
               Label : VARIABLE
                 $bar
-        Label : ELEMENT
+          Label : OBJECT
+            $foo
+        Label : EXPRESSION
           [
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             [
             Label : INDEX
               'baz'
             Label : VARIABLE
               ->
+              Label : MEMBER
+                $bar
               Label : OBJECT
                 $foo
-              Label : PROPERTY
-                $bar
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             {}
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               {}
               Label : CODE
@@ -88,12 +83,10 @@ Label : PROJECT
                   $bar
           Label : OBJECT
             $foo
-        Label : ELEMENT
+        Label : EXPRESSION
           [
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             [
             Label : INDEX
@@ -102,18 +95,16 @@ Label : PROJECT
               ::
               Label : CLASS
                 Foo
-              Label : PROPERTY
+              Label : MEMBER
                 $bar
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             Foo
           Label : METHOD
             {}
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               {}
               Label : CODE

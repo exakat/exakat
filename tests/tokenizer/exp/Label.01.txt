@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Label.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             =
@@ -18,7 +17,7 @@ Label : PROJECT
               $b
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ?
               Label : CONDITION
                 (
@@ -40,23 +39,21 @@ Label : PROJECT
                   $e
                 Label : RIGHT
                   'f'
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $i
               Label : RIGHT
                 1
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'j'
-                  Label : CONCAT
-                    $k
-                  Label : CONCAT
-                    'l'
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  'j'
+                Label : CONCAT
+                  $k
+                Label : CONCAT
+                  'l'
               Label : NAME
                 echo

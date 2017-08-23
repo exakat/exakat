@@ -1,29 +1,28 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.29.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             ::
             Label : CLASS
               a
-            Label : PROPERTY
+            Label : MEMBER
               $b
           Label : RIGHT
             *
             Label : LEFT
               ->
+              Label : MEMBER
+                d
               Label : OBJECT
                 $c
-              Label : PROPERTY
-                d
             Label : RIGHT
               *
               Label : LEFT
@@ -40,7 +39,7 @@ Label : PROJECT
                       $e
               Label : RIGHT
                 ->
+                Label : MEMBER
+                  h
                 Label : OBJECT
                   $g
-                Label : PROPERTY
-                  h

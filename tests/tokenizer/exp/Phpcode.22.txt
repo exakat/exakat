@@ -1,98 +1,83 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 C
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   D
               Label : OBJECT
                 $this
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 E
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  E
-            Label : ELEMENT
-              F
-              Label : ARGUMENTS
-                (
                 Label : ARGUMENT
                   Void
+                Label : NAME
+                  E
+            Label : EXPRESSION
+              F
+              Label : ARGUMENT
+                Void
               Label : NAME
                 F
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 G
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'H'
-                  Label : ARGUMENT
-                    'I'
-                  Label : ARGUMENT
-                    $b
-                Label : NAME
-                  G
-            Label : ELEMENT
-              Void
-            Label : ELEMENT
-              J
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                echo
+                Label : ARGUMENT
+                  'H'
+                Label : ARGUMENT
+                  'I'
                 Label : ARGUMENT
                   $b
+                Label : NAME
+                  G
+            Label : EXPRESSION
+              Void
+            Label : EXPRESSION
+              J
+            Label : EXPRESSION
+              echo
+              Label : ARGUMENT
+                $b
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               K
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               L
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

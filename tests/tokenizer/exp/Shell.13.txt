@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Shell.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             str_replace
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                "b"
-              Label : ARGUMENT
-                "c"
-              Label : ARGUMENT
-                `
-                Label : CONCAT
-                  /bin/cat d
+            Label : ARGUMENT
+              "b"
+            Label : ARGUMENT
+              "c"
+            Label : ARGUMENT
+              `
+              Label : CONCAT
+                /bin/cat d
             Label : NAME
               str_replace

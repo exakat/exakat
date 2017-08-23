@@ -1,216 +1,187 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Nsname.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  UNQUALIFIED_CONSTANT
+              Label : ARGUMENT
+                UNQUALIFIED_CONSTANT
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  SUBNAMESPACED\CONSTANTE
+              Label : ARGUMENT
+                SUBNAMESPACED\CONSTANTE
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  \FULL\NAMESPACED\CONSTANTE
+              Label : ARGUMENT
+                \FULL\NAMESPACED\CONSTANTE
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               unqualified_function
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 unqualified_function
-            Label : ELEMENT
+            Label : EXPRESSION
               subnamespaced\fonction
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 subnamespaced\fonction
-            Label : ELEMENT
+            Label : EXPRESSION
               \full\namespaced\fonction
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 \full\namespaced\fonction
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 staticallyCalling
               Label : METHOD
                 staticallyCalledMethod
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   staticallyCalledMethod
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 objectCalledMethod
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   objectCalledMethod
               Label : OBJECT
                 $object
-            Label : ELEMENT
+            Label : EXPRESSION
               new
               Label : NEW
                 FOO
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   FOO
-            Label : ELEMENT
+            Label : EXPRESSION
               new
               Label : NEW
                 FOO
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 fooclassc
               Label : CONSTANT
                 FOOCSONTANT
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 subnamespacec\fooclassc
               Label : CONSTANT
                 FOOCSONTANT
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 \fullc\namespacec\fooclassc
               Label : CONSTANT
                 FOOCSONTANT
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 fooclassp
-              Label : PROPERTY
+              Label : MEMBER
                 $property
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 subnamespacep\fooclassp
-              Label : PROPERTY
+              Label : MEMBER
                 $property
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 \fullp\namespacep\fooclassp
-              Label : PROPERTY
+              Label : MEMBER
                 $property
-            Label : ELEMENT
+            Label : EXPRESSION
               new
               Label : NEW
                 subnamespace\FOO
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   subnamespace\FOO
-            Label : ELEMENT
+            Label : EXPRESSION
               new
               Label : NEW
                 subnamespace\FOO
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 fooclassm
               Label : METHOD
                 staticMethod
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   staticMethod
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 subnamespacem\fooclassm
               Label : METHOD
                 staticMethod
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   staticMethod
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 \fullm\namespacem\fooclassm
               Label : METHOD
                 staticMethod
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   staticMethod
-            Label : ELEMENT
+            Label : EXPRESSION
               new
               Label : NEW
                 \Foo\Bar\FOO
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   \Foo\Bar\FOO
-            Label : ELEMENT
+            Label : EXPRESSION
               new
               Label : NEW
                 \Foo\Bar\FOO
-            Label : ELEMENT
+            Label : EXPRESSION
               instanceof
               Label : CLASS
                 fooclass
               Label : VARIABLE
                 $x
-            Label : ELEMENT
+            Label : EXPRESSION
               instanceof
               Label : CLASS
                 subnamespace\fooclass
               Label : VARIABLE
                 $x
-            Label : ELEMENT
+            Label : EXPRESSION
               instanceof
               Label : CLASS
                 \full\namespacepath\fooclass

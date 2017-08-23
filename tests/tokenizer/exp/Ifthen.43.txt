@@ -1,61 +1,52 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.43.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 cc
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    ee
+                    Label : ARGUMENT
+                      'ff'
+                    Label : NAME
                       ee
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'ff'
-                      Label : NAME
-                        ee
-                    Label : OBJECT
-                      $dd
+                  Label : OBJECT
+                    $dd
                 Label : NAME
                   cc
               Label : OBJECT
                 $bb
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    e
+                    Label : ARGUMENT
+                      'f'
+                    Label : NAME
                       e
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'f'
-                      Label : NAME
-                        e
-                    Label : OBJECT
-                      $d
+                  Label : OBJECT
+                    $d
                 Label : NAME
                   c
               Label : OBJECT

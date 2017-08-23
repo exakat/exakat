@@ -1,57 +1,48 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.62.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              isset
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  b
+                Label : OBJECT
+                  $a
+              Label : NAME
                 isset
-                Label : ARGUMENTS
-                  (
+            Label : ELSE
+              'I'
+            Label : THEN
+              htmlspecialchars
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  d
                   Label : ARGUMENT
                     ->
+                    Label : MEMBER
+                      f
                     Label : OBJECT
-                      $a
-                    Label : PROPERTY
-                      b
-                Label : NAME
-                  isset
-              Label : ELSE
-                'I'
-              Label : THEN
+                      $e
+                  Label : NAME
+                    d
+                Label : OBJECT
+                  $c
+              Label : ARGUMENT
+                G
+              Label : ARGUMENT
+                'H'
+              Label : NAME
                 htmlspecialchars
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      d
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          ->
-                          Label : OBJECT
-                            $e
-                          Label : PROPERTY
-                            f
-                      Label : NAME
-                        d
-                    Label : OBJECT
-                      $c
-                  Label : ARGUMENT
-                    G
-                  Label : ARGUMENT
-                    'H'
-                Label : NAME
-                  htmlspecialchars
           Label : NAME
             echo

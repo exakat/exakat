@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Parenthesis.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ::
@@ -16,17 +15,15 @@ Label : PROJECT
               x
             Label : METHOD
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'c'
-                Label : ARGUMENT
-                  3
               Label : NAME
                 b
+              Label : ARGUMENT
+                'c'
+              Label : ARGUMENT
+                3
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a

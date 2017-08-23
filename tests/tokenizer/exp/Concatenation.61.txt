@@ -1,48 +1,41 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.61.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'B'
-                Label : VALUE
-                  .
-                  Label : CONCAT
-                    'C'
-                  Label : CONCAT
-                    new
-                    Label : NEW
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'B'
+              Label : VALUE
+                .
+                Label : CONCAT
+                  'C'
+                Label : CONCAT
+                  new
+                  Label : NEW
+                    D
+                    Label : NAME
                       D
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'E'
-                        Label : ARGUMENT
-                          array
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              =>
-                              Label : KEY
-                                'F'
-                              Label : VALUE
-                                $b
-                      Label : NAME
-                        D
-                  Label : CONCAT
-                    'G'
+                    Label : ARGUMENT
+                      'E'
+                    Label : ARGUMENT
+                      array
+                      Label : ARGUMENT
+                        =>
+                        Label : INDEX
+                          'F'
+                        Label : VALUE
+                          $b
+                Label : CONCAT
+                  'G'

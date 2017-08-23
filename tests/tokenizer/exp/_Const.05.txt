@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Const.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : CONST
             const
@@ -42,6 +41,8 @@ Label : PROJECT
               private
           Label : CONST
             const
+            Label : PUBLIC
+              public
             Label : CONST
               const
               Label : NAME
@@ -54,10 +55,10 @@ Label : PROJECT
                 a3
               Label : VALUE
                 1
-            Label : PUBLIC
-              public
           Label : CONST
             const
+            Label : PROTECTED
+              protected
             Label : CONST
               const
               Label : NAME
@@ -70,8 +71,6 @@ Label : PROJECT
                 B2
               Label : VALUE
                 3
-            Label : PROTECTED
-              protected
           Label : CONST
             const
             Label : CONST

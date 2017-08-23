@@ -1,16 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.49.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B\C
-        Label : ELEMENT
+        Label : EXPRESSION
           -
           Label : SIGN
             (
@@ -20,11 +19,11 @@ Label : PROJECT
                 4
               Label : RIGHT
                 3
-        Label : ELEMENT
+        Label : EXPRESSION
           MY_CONSTANT
-        Label : ELEMENT
+        Label : EXPRESSION
           "String"
-        Label : ELEMENT
+        Label : EXPRESSION
           <<<HEREDOC
 
           Label : CONCAT

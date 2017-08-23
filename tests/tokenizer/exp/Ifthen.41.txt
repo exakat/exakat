@@ -1,77 +1,66 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.41.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               A
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $b
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   B
-                Label : ELEMENT
+                Label : EXPRESSION
                   print
-                  Label : ARGUMENTS
+                  Label : ARGUMENT
                     $c
-                    Label : ARGUMENT
-                      $c
                   Label : NAME
                     print
-                Label : ELEMENT
+                Label : EXPRESSION
                   C
-                Label : ELEMENT
+                Label : EXPRESSION
                   print
-                  Label : ARGUMENTS
-                    )
+                  Label : ARGUMENT
+                    t
                     Label : ARGUMENT
+                      'd'
+                    Label : NAME
                       t
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'd'
+                  Label : NAME
+                    print
+                Label : EXPRESSION
+                  D
+                Label : EXPRESSION
+                  print
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      t
+                      Label : ARGUMENT
+                        'e'
                       Label : NAME
                         t
+                    Label : CONCAT
+                      $f
                   Label : NAME
                     print
-                Label : ELEMENT
-                  D
-                Label : ELEMENT
-                  print
-                  Label : ARGUMENTS
-                    $f
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        t
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'e'
-                        Label : NAME
-                          t
-                      Label : CONCAT
-                        $f
-                  Label : NAME
-                    print
-                Label : ELEMENT
+                Label : EXPRESSION
                   F
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               G
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

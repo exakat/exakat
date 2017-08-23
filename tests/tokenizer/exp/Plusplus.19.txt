@@ -1,26 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Plusplus.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              a
             Label : OBJECT
               $this
-            Label : PROPERTY
-              a
           Label : RIGHT
             ++
             Label : POSTPLUSPLUS
               ::
               Label : CLASS
                 self
-              Label : PROPERTY
+              Label : MEMBER
                 $b

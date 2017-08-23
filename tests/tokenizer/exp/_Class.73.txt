@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.73.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
+          Label : NAME
+            x
           Label : METHOD
             abstract
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               abstract
@@ -26,29 +25,23 @@ Label : PROJECT
               public
           Label : METHOD
             and
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               and
             Label : PUBLIC
               public
-          Label : NAME
-            x
           Label : METHOD
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               array
@@ -56,13 +49,11 @@ Label : PROJECT
               public
           Label : METHOD
             as
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               as
@@ -70,13 +61,11 @@ Label : PROJECT
               public
           Label : METHOD
             break
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               break
@@ -84,13 +73,11 @@ Label : PROJECT
               public
           Label : METHOD
             case
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               case
@@ -98,13 +85,11 @@ Label : PROJECT
               public
           Label : METHOD
             catch
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               catch
@@ -112,13 +97,11 @@ Label : PROJECT
               public
           Label : METHOD
             class
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               class
@@ -126,13 +109,11 @@ Label : PROJECT
               public
           Label : METHOD
             clone
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               clone
@@ -140,13 +121,11 @@ Label : PROJECT
               public
           Label : METHOD
             const
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               const
@@ -154,13 +133,11 @@ Label : PROJECT
               public
           Label : METHOD
             continue
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               continue
@@ -168,13 +145,11 @@ Label : PROJECT
               public
           Label : METHOD
             declare
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               declare
@@ -182,13 +157,11 @@ Label : PROJECT
               public
           Label : METHOD
             default
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               default
@@ -196,13 +169,11 @@ Label : PROJECT
               public
           Label : METHOD
             die
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               die
@@ -210,13 +181,11 @@ Label : PROJECT
               public
           Label : METHOD
             do
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               do
@@ -224,13 +193,11 @@ Label : PROJECT
               public
           Label : METHOD
             echo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               echo
@@ -238,13 +205,11 @@ Label : PROJECT
               public
           Label : METHOD
             else
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               else
@@ -252,13 +217,11 @@ Label : PROJECT
               public
           Label : METHOD
             elseif
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               elseif
@@ -266,13 +229,11 @@ Label : PROJECT
               public
           Label : METHOD
             empty
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               empty
@@ -280,13 +241,11 @@ Label : PROJECT
               public
           Label : METHOD
             enddeclare
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               enddeclare
@@ -294,13 +253,11 @@ Label : PROJECT
               public
           Label : METHOD
             endfor
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               endfor
@@ -308,13 +265,11 @@ Label : PROJECT
               public
           Label : METHOD
             endforeach
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               endforeach
@@ -322,13 +277,11 @@ Label : PROJECT
               public
           Label : METHOD
             endif
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               endif
@@ -336,13 +289,11 @@ Label : PROJECT
               public
           Label : METHOD
             endswitch
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               endswitch
@@ -350,13 +301,11 @@ Label : PROJECT
               public
           Label : METHOD
             endwhile
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               endwhile
@@ -364,13 +313,11 @@ Label : PROJECT
               public
           Label : METHOD
             eval
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               eval
@@ -378,13 +325,11 @@ Label : PROJECT
               public
           Label : METHOD
             exit
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               exit
@@ -392,13 +337,11 @@ Label : PROJECT
               public
           Label : METHOD
             extends
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               extends
@@ -406,13 +349,11 @@ Label : PROJECT
               public
           Label : METHOD
             final
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               final
@@ -420,13 +361,11 @@ Label : PROJECT
               public
           Label : METHOD
             finally
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               finally
@@ -434,13 +373,11 @@ Label : PROJECT
               public
           Label : METHOD
             for
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               for
@@ -448,13 +385,11 @@ Label : PROJECT
               public
           Label : METHOD
             foreach
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               foreach
@@ -462,13 +397,11 @@ Label : PROJECT
               public
           Label : METHOD
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               function
@@ -476,13 +409,11 @@ Label : PROJECT
               public
           Label : METHOD
             global
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               global
@@ -490,13 +421,11 @@ Label : PROJECT
               public
           Label : METHOD
             goto
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               goto
@@ -504,13 +433,11 @@ Label : PROJECT
               public
           Label : METHOD
             if
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               if
@@ -518,13 +445,11 @@ Label : PROJECT
               public
           Label : METHOD
             implements
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               implements
@@ -532,13 +457,11 @@ Label : PROJECT
               public
           Label : METHOD
             include
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               include
@@ -546,13 +469,11 @@ Label : PROJECT
               public
           Label : METHOD
             include_once
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               include_once
@@ -560,13 +481,11 @@ Label : PROJECT
               public
           Label : METHOD
             instanceof
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               instanceof
@@ -574,13 +493,11 @@ Label : PROJECT
               public
           Label : METHOD
             insteadof
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               insteadof
@@ -588,13 +505,11 @@ Label : PROJECT
               public
           Label : METHOD
             interface
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               interface
@@ -602,13 +517,11 @@ Label : PROJECT
               public
           Label : METHOD
             isset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               isset
@@ -616,13 +529,11 @@ Label : PROJECT
               public
           Label : METHOD
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               list
@@ -630,13 +541,11 @@ Label : PROJECT
               public
           Label : METHOD
             namespace
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               namespace
@@ -644,13 +553,11 @@ Label : PROJECT
               public
           Label : METHOD
             new
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               new
@@ -658,13 +565,11 @@ Label : PROJECT
               public
           Label : METHOD
             or
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               or
@@ -672,13 +577,11 @@ Label : PROJECT
               public
           Label : METHOD
             print
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               print
@@ -686,13 +589,11 @@ Label : PROJECT
               public
           Label : METHOD
             private
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               private
@@ -700,13 +601,11 @@ Label : PROJECT
               public
           Label : METHOD
             protected
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               protected
@@ -714,13 +613,11 @@ Label : PROJECT
               public
           Label : METHOD
             public
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               public
@@ -728,13 +625,11 @@ Label : PROJECT
               public
           Label : METHOD
             require
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               require
@@ -742,13 +637,11 @@ Label : PROJECT
               public
           Label : METHOD
             require_once
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               require_once
@@ -756,13 +649,11 @@ Label : PROJECT
               public
           Label : METHOD
             return
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               return
@@ -770,13 +661,11 @@ Label : PROJECT
               public
           Label : METHOD
             static
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               static
@@ -784,13 +673,11 @@ Label : PROJECT
               public
           Label : METHOD
             switch
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               switch
@@ -798,13 +685,11 @@ Label : PROJECT
               public
           Label : METHOD
             throw
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               throw
@@ -812,13 +697,11 @@ Label : PROJECT
               public
           Label : METHOD
             trait
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               trait
@@ -826,13 +709,11 @@ Label : PROJECT
               public
           Label : METHOD
             try
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               try
@@ -840,13 +721,11 @@ Label : PROJECT
               public
           Label : METHOD
             unset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               unset
@@ -854,13 +733,11 @@ Label : PROJECT
               public
           Label : METHOD
             use
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               use
@@ -868,13 +745,11 @@ Label : PROJECT
               public
           Label : METHOD
             var
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               var
@@ -882,13 +757,11 @@ Label : PROJECT
               public
           Label : METHOD
             while
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               while
@@ -896,13 +769,11 @@ Label : PROJECT
               public
           Label : METHOD
             xor
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               xor
@@ -910,13 +781,11 @@ Label : PROJECT
               public
           Label : METHOD
             yield
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               yield

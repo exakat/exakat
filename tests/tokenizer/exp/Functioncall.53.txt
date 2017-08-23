@@ -1,161 +1,136 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.53.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  0
-                Label : VALUE
-                  array
-                  Label : ARGUMENTS
-                    (
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                0
+              Label : VALUE
+                array
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'B'
+                  Label : VALUE
+                    'C'
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'D'
+                  Label : VALUE
+                    array
                     Label : ARGUMENT
                       =>
-                      Label : KEY
-                        'B'
+                      Label : INDEX
+                        1
                       Label : VALUE
-                        'C'
+                        2
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'E'
+                  Label : VALUE
+                    array
                     Label : ARGUMENT
                       =>
-                      Label : KEY
-                        'D'
+                      Label : INDEX
+                        'F'
                       Label : VALUE
-                        array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              1
-                            Label : VALUE
-                              2
+                        'G'
                     Label : ARGUMENT
                       =>
-                      Label : KEY
-                        'E'
+                      Label : INDEX
+                        'H'
                       Label : VALUE
-                        array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'F'
-                            Label : VALUE
-                              'G'
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'H'
-                            Label : VALUE
-                              'I'
+                        'I'
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'J'
+                  Label : VALUE
+                    array
                     Label : ARGUMENT
                       =>
-                      Label : KEY
-                        'J'
+                      Label : INDEX
+                        'K'
                       Label : VALUE
                         array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'K'
-                            Label : VALUE
-                              array
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  =>
-                                  Label : KEY
-                                    3
-                                  Label : VALUE
-                                    4
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'L'
-                            Label : VALUE
-                              array
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  Void
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'M'
-                            Label : VALUE
-                              array
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  =>
-                                  Label : KEY
-                                    5
-                                  Label : VALUE
-                                    6
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'N'
-                            Label : VALUE
-                              array
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  =>
-                                  Label : KEY
-                                    7
-                                  Label : VALUE
-                                    8
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'O'
-                            Label : VALUE
-                              array
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  =>
-                                  Label : KEY
-                                    9
-                                  Label : VALUE
-                                    10
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            3
+                          Label : VALUE
+                            4
                     Label : ARGUMENT
                       =>
-                      Label : KEY
-                        'P'
+                      Label : INDEX
+                        'L'
                       Label : VALUE
                         array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'Q'
-                            Label : VALUE
-                              array
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  =>
-                                  Label : KEY
-                                    11
-                                  Label : VALUE
-                                    12
+                        Label : ARGUMENT
+                          Void
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'M'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            5
+                          Label : VALUE
+                            6
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'N'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            7
+                          Label : VALUE
+                            8
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'O'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            9
+                          Label : VALUE
+                            10
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'P'
+                  Label : VALUE
+                    array
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'Q'
+                      Label : VALUE
+                        array
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            11
+                          Label : VALUE
+                            12

@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           [
           Label : INDEX
             'c'
           Label : VARIABLE
             ->
+            Label : MEMBER
+              b
             Label : OBJECT
               $a
-            Label : PROPERTY
-              b

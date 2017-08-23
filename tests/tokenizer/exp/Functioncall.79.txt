@@ -1,63 +1,50 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.79.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           eval
-          Label : ARGUMENTS
+          Label : ARGUMENT
             (
-            Label : ARGUMENT
-              (
-              Label : CODE
-                $
+            Label : CODE
+              $
+              Label : NAME
+                $a
+                Label : ARGUMENT
+                  'B'
                 Label : NAME
                   $a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'B'
-                  Label : NAME
-                    $a
           Label : NAME
             eval
-        Label : ELEMENT
+        Label : EXPRESSION
           C
-          Label : ARGUMENTS
+          Label : ARGUMENT
             (
-            Label : ARGUMENT
-              (
-              Label : CODE
-                $
+            Label : CODE
+              $
+              Label : NAME
+                $a
+                Label : ARGUMENT
+                  'B'
                 Label : NAME
                   $a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'B'
-                  Label : NAME
-                    $a
           Label : NAME
             C
-        Label : ELEMENT
+        Label : EXPRESSION
           eval
-          Label : ARGUMENTS
+          Label : ARGUMENT
             (
-            Label : ARGUMENT
-              (
-              Label : CODE
-                $a
+            Label : CODE
+              $a
           Label : NAME
             eval
-        Label : ELEMENT
+        Label : EXPRESSION
           $b
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              0
+          Label : ARGUMENT
+            0
           Label : NAME
             $b

@@ -1,64 +1,59 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $z
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a'
-                Label : VALUE
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'a'
+              Label : VALUE
+                [
+                Label : INDEX
+                  3
+                Label : VARIABLE
+                  $f
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'b'
+              Label : VALUE
+                intval
+                Label : ARGUMENT
                   [
                   Label : INDEX
-                    3
+                    4
                   Label : VARIABLE
-                    $f
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'b'
-                Label : VALUE
+                    $g
+                Label : NAME
                   intval
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        4
-                      Label : VARIABLE
-                        $g
-                  Label : NAME
-                    intval
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'c'
-                Label : VALUE
-                  [
-                  Label : INDEX
-                    5
-                  Label : VARIABLE
-                    $h
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'd'
-                Label : VALUE
-                  [
-                  Label : INDEX
-                    6
-                  Label : VARIABLE
-                    $i
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'c'
+              Label : VALUE
+                [
+                Label : INDEX
+                  5
+                Label : VARIABLE
+                  $h
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'd'
+              Label : VALUE
+                [
+                Label : INDEX
+                  6
+                Label : VARIABLE
+                  $i

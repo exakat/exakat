@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.56.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -30,87 +29,81 @@ Label : PROJECT
                   '3'
             Label : CONCAT
               -1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             [
-            Label : ARGUMENTS
-              [
-              Label : ARGUMENT
-                .
-                Label : CONCAT
-                  (
-                  Label : CODE
-                    ?
-                    Label : CONDITION
-                      ===
-                      Label : LEFT
-                        $bracket
-                      Label : RIGHT
-                        '1'
-                    Label : ELSE
-                      '4'
-                    Label : THEN
-                      '3'
-                Label : CONCAT
-                  -1
-        Label : ELEMENT
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                (
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    ===
+                    Label : LEFT
+                      $bracket
+                    Label : RIGHT
+                      '1'
+                  Label : ELSE
+                    '4'
+                  Label : THEN
+                    '3'
+              Label : CONCAT
+                -1
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             strtolower
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                .
-                Label : CONCAT
-                  (
-                  Label : CODE
-                    ?
-                    Label : CONDITION
-                      ===
-                      Label : LEFT
-                        $closingParenthesis
-                      Label : RIGHT
-                        '1'
-                    Label : ELSE
-                      '4'
-                    Label : THEN
-                      '3'
-                Label : CONCAT
-                  -1
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                (
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    ===
+                    Label : LEFT
+                      $closingParenthesis
+                    Label : RIGHT
+                      '1'
+                  Label : ELSE
+                    '4'
+                  Label : THEN
+                    '3'
+              Label : CONCAT
+                -1
             Label : NAME
               strtolower
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                .
-                Label : CONCAT
-                  (
-                  Label : CODE
-                    ?
-                    Label : CONDITION
-                      ===
-                      Label : LEFT
-                        $comma
-                      Label : RIGHT
-                        '1'
-                    Label : ELSE
-                      '4'
-                    Label : THEN
-                      '3'
-                Label : CONCAT
-                  -1
-              Label : ARGUMENT
-                2
             Label : NAME
               f
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                (
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    ===
+                    Label : LEFT
+                      $comma
+                    Label : RIGHT
+                      '1'
+                  Label : ELSE
+                    '4'
+                  Label : THEN
+                    '3'
+              Label : CONCAT
+                -1
+            Label : ARGUMENT
+              2

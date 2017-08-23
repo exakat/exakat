@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.46.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
@@ -17,35 +16,33 @@ Label : PROJECT
               $b
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 B
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $a
-            Label : ELEMENT
+            Label : EXPRESSION
               [
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  34
+              Label : ARGUMENT
+                34
               Label : NAME
                 [
                 Label : INDEX
                   d
                 Label : VARIABLE
                   ->
+                  Label : MEMBER
+                    c
                   Label : OBJECT
                     $b
-                  Label : PROPERTY
-                    c
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
               Label : RIGHT
                 1
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

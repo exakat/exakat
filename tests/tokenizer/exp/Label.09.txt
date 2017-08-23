@@ -1,31 +1,30 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Label.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             =
             Label : LEFT
               ->
+              Label : MEMBER
+                b
               Label : OBJECT
                 $a
-              Label : PROPERTY
-                b
             Label : RIGHT
               ?
               Label : CONDITION
                 ->
+                Label : MEMBER
+                  d
                 Label : OBJECT
                   $c
-                Label : PROPERTY
-                  d
               Label : ELSE
                 new
                 Label : NEW

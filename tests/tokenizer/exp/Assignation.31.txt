@@ -1,23 +1,22 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Assignation.31.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ===
             Label : LEFT
               ->
+              Label : MEMBER
+                B
               Label : OBJECT
                 $a
-              Label : PROPERTY
-                B
             Label : RIGHT
               ::
               Label : CLASS
@@ -30,10 +29,10 @@ Label : PROJECT
               ===
               Label : LEFT
                 ->
+                Label : MEMBER
+                  E
                 Label : OBJECT
                   $c
-                Label : PROPERTY
-                  E
               Label : RIGHT
                 ::
                 Label : CLASS
@@ -42,7 +41,7 @@ Label : PROJECT
                   G
             Label : ELSE
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $l
@@ -50,17 +49,15 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     P
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       P
                   Label : OBJECT
                     $m
             Label : THEN
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $d
@@ -68,55 +65,47 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     H
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       H
                   Label : OBJECT
                     $e
-              Label : ELEMENT
+              Label : EXPRESSION
                 if
                 Label : CONDITION
                   !==
                   Label : LEFT
                     I
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
-                          J
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            J
-                        Label : OBJECT
-                          $f
-                      Label : ARGUMENT
-                        $g
-                      Label : ARGUMENT
-                        K
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $h
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        J
+                        Label : ARGUMENT
+                          Void
                         Label : NAME
-                          K
+                          J
+                      Label : OBJECT
+                        $f
+                    Label : ARGUMENT
+                      $g
+                    Label : ARGUMENT
+                      K
+                      Label : ARGUMENT
+                        $h
+                      Label : NAME
+                        K
                     Label : NAME
                       I
                   Label : RIGHT
                     0
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       L
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $i
@@ -124,33 +113,27 @@ Label : PROJECT
                   (string)
                   Label : CAST
                     M
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
-                          N
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            N
-                        Label : OBJECT
-                          $j
-                      Label : ARGUMENT
-                        O
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $k
-                        Label : NAME
-                          O
                     Label : NAME
                       M
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        N
+                        Label : ARGUMENT
+                          Void
+                        Label : NAME
+                          N
+                      Label : OBJECT
+                        $j
+                    Label : ARGUMENT
+                      O
+                      Label : ARGUMENT
+                        $k
+                      Label : NAME
+                        O
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $b

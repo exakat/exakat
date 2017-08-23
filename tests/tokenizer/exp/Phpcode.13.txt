@@ -1,15 +1,14 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
@@ -17,29 +16,23 @@ Label : PROJECT
               ->
               Label : METHOD
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   C
               Label : OBJECT
                 $a
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
+              Label : ARGUMENT
+                D
                 Label : ARGUMENT
+                  'E'
+                Label : NAME
                   D
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'E'
-                  Label : NAME
-                    D
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           H

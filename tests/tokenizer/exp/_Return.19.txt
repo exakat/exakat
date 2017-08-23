@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Return.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 ?
@@ -30,10 +27,8 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $f
+                    Label : ARGUMENT
+                      $f
                     Label : NAME
                       F
                   Label : OBJECT
@@ -42,15 +37,13 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $d
+                    Label : ARGUMENT
+                      $d
                     Label : NAME
                       E
                   Label : OBJECT
                     $c
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

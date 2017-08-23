@@ -1,38 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.47.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           DefinedWithAReference
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 $x
           Label : NAME
             DefinedWithAReference
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             MethodDefinedWithAReference
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   $x

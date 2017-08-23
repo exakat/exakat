@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.32.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           (
           Label : CODE
             &&
@@ -32,31 +31,27 @@ Label : PROJECT
                       B
                   Label : RIGHT
                     ->
+                    Label : MEMBER
+                      c
                     Label : OBJECT
                       $this
-                    Label : PROPERTY
-                      c
             Label : RIGHT
               preg_match
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $this
-                  Label : PROPERTY
-                    d
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
-                    f
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      f
-                  Label : OBJECT
-                    $e
               Label : NAME
                 preg_match
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  d
+                Label : OBJECT
+                  $this
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  f
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
+                    f
+                Label : OBJECT
+                  $e

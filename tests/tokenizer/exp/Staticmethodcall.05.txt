@@ -1,48 +1,41 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticmethodcall.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               defined
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'A'
+              Label : ARGUMENT
+                'A'
               Label : NAME
                 defined
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               exit
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'B'
+              Label : ARGUMENT
+                'B'
               Label : NAME
                 exit
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             C
           Label : METHOD
             d
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'e'
+            Label : ARGUMENT
+              'e'
             Label : NAME
               d
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             f

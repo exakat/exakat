@@ -1,33 +1,28 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               unlink
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  d
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     d
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      d
-                  Label : OBJECT
-                    $c
+                Label : OBJECT
+                  $c
               Label : NAME
                 unlink
           Label : SOURCE

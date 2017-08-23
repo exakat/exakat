@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.31.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
@@ -16,33 +15,31 @@ Label : PROJECT
               $index
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     !
                     Label : NOT
                       isset
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            $index
-                          Label : VARIABLE
-                            $row
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          $index
+                        Label : VARIABLE
+                          $row
                       Label : NAME
                         isset
                   Label : THEN
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       continue
                       Label : CONTINUE
                         Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     [
@@ -64,21 +61,19 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     fetch
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $fetchMode
+                    Label : ARGUMENT
+                      $fetchMode
                     Label : NAME
                       fetch
                   Label : OBJECT
                     $this
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $result
@@ -94,10 +89,8 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     fetch
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $fetchMode
+                    Label : ARGUMENT
+                      $fetchMode
                     Label : NAME
                       fetch
                   Label : OBJECT

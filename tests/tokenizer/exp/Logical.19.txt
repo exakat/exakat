@@ -1,27 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
             Label : LEFT
               isset
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'opt'
-                  Label : VARIABLE
-                    $_REQUEST
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'opt'
+                Label : VARIABLE
+                  $_REQUEST
               Label : NAME
                 isset
             Label : RIGHT
@@ -36,5 +33,5 @@ Label : PROJECT
                 1
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               '1'

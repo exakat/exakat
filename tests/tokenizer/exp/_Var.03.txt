@@ -1,23 +1,22 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Var.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             a
           Label : PPP
             var
             Label : PPP
-              $b
-            Label : PPP
               $c
+            Label : PPP
+              $b
             Label : PPP
               $d
             Label : PPP

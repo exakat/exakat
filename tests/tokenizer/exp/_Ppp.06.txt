@@ -1,0 +1,43 @@
+Whole
+Label : PROJECT
+  Label : FILE
+    ;
+    Label : EXPRESSION
+      <?php
+
+      Label : CODE
+        ;
+        Label : EXPRESSION
+          namespace
+          Label : BLOCK
+             
+            Label : EXPRESSION
+              use
+              Label : USE
+                B\C\D\H
+            Label : EXPRESSION
+              trait
+              Label : NAME
+                I
+              Label : USE
+                use
+                Label : BLOCK
+                  {}
+                  Label : EXPRESSION
+                    as
+                    Label : AS
+                      L
+                    Label : NAME
+                      K
+                    Label : PRIVATE
+                      private
+                Label : USE
+                  H
+              Label : PPP
+                protected
+                Label : PPP
+                  $a
+                Label : PROTECTED
+                  protected
+          Label : NAME
+            B\C\D

@@ -1,60 +1,49 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Parenthesis.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a'
-                Label : VALUE
-                  d
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        b
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            __FILE__
-                        Label : NAME
-                          b
-                      Label : CONCAT
-                        'c'
-                  Label : NAME
-                    d
-        Label : ELEMENT
-          unset
-          Label : ARGUMENTS
-            (
             Label : ARGUMENT
-              $
-              Label : NAME
-                .
-                Label : CONCAT
-                  b
-                  Label : ARGUMENTS
-                    (
+              =>
+              Label : INDEX
+                'a'
+              Label : VALUE
+                d
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    b
                     Label : ARGUMENT
                       __FILE__
-                  Label : NAME
-                    b
-                Label : CONCAT
-                  'c'
+                    Label : NAME
+                      b
+                  Label : CONCAT
+                    'c'
+                Label : NAME
+                  d
+        Label : EXPRESSION
+          unset
+          Label : ARGUMENT
+            $
+            Label : NAME
+              .
+              Label : CONCAT
+                b
+                Label : ARGUMENT
+                  __FILE__
+                Label : NAME
+                  b
+              Label : CONCAT
+                'c'
           Label : NAME
             unset

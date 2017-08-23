@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticmethodcall.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             ::
@@ -16,10 +15,8 @@ Label : PROJECT
               a
             Label : METHOD
               {}
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $c
+              Label : ARGUMENT
+                $c
               Label : NAME
                 {}
                 Label : CODE

@@ -1,31 +1,26 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.36.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
-          Label : DEFINITION, DEFINITION
+          Label : DEFINITION
             Hello
           Label : METHOD
             sayHello
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    'Hello '
+                Label : ARGUMENT
+                  'Hello '
                 Label : NAME
                   echo
             Label : NAME
@@ -34,24 +29,20 @@ Label : PROJECT
               public
           Label : NAME
             Hello
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
-          Label : DEFINITION, DEFINITION
+          Label : DEFINITION
             World
           Label : METHOD
             sayWorld
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    'World!'
+                Label : ARGUMENT
+                  'World!'
                 Label : NAME
                   echo
             Label : NAME
@@ -60,9 +51,9 @@ Label : PROJECT
               public
           Label : NAME
             World
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
-          Label : DEFINITION, DEFINITION
+          Label : DEFINITION
             HelloWorld
           Label : NAME
             HelloWorld
@@ -72,16 +63,14 @@ Label : PROJECT
               Hello
             Label : USE
               World
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             MyHelloWorld
           Label : DEFINITION
             MyHelloWorld
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               MyHelloWorld
           Label : NAME
@@ -90,7 +79,7 @@ Label : PROJECT
             use
             Label : USE
               HelloWorld
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $o
@@ -98,32 +87,26 @@ Label : PROJECT
             new
             Label : NEW
               MyHelloWorld
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 MyHelloWorld
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             sayHello
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               sayHello
           Label : OBJECT
             $o
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             sayWorld
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               sayWorld
           Label : OBJECT

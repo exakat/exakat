@@ -1,62 +1,55 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              "b"
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $this
-              Label : PROPERTY
-                c
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                Stdclass
-              Label : CONSTANT
-                d
-            Label : ARGUMENT
-              \e\f
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                Stdclass
-              Label : PROPERTY
-                $g
-            Label : ARGUMENT
-              ->
-              Label : METHOD
+          Label : ARGUMENT
+            "b"
+          Label : ARGUMENT
+            ->
+            Label : MEMBER
+              c
+            Label : OBJECT
+              $this
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              Stdclass
+            Label : CONSTANT
+              d
+          Label : ARGUMENT
+            \e\f
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              Stdclass
+            Label : MEMBER
+              $g
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              h
+              Label : ARGUMENT
+                Void
+              Label : NAME
                 h
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  h
-              Label : OBJECT
-                $this
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                Stdclass
-              Label : METHOD
+            Label : OBJECT
+              $this
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              Stdclass
+            Label : METHOD
+              i
+              Label : ARGUMENT
+                Void
+              Label : NAME
                 i
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  i
           Label : NAME
             a

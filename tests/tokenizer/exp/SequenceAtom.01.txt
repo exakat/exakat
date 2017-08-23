@@ -1,92 +1,87 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/SequenceAtom.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                ==
-                Label : LEFT
-                  @
-                  Label : AT
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              ==
+              Label : LEFT
+                @
+                Label : AT
+                  [
+                  Label : INDEX
+                    'f'
+                  Label : VARIABLE
                     [
                     Label : INDEX
-                      'f'
+                      [
+                      Label : INDEX
+                        'e'
+                      Label : VARIABLE
+                        $d
                     Label : VARIABLE
                       [
                       Label : INDEX
-                        [
-                        Label : INDEX
-                          'e'
-                        Label : VARIABLE
-                          $d
+                        $c
                       Label : VARIABLE
-                        [
-                        Label : INDEX
-                          $c
-                        Label : VARIABLE
-                          ::
-                          Label : CLASS
-                            a
-                          Label : PROPERTY
-                            $b
-                Label : RIGHT
-                  'g'
-              Label : ELSE
-                'i'
-              Label : THEN
-                'h'
+                        ::
+                        Label : CLASS
+                          a
+                        Label : MEMBER
+                          $b
+              Label : RIGHT
+                'g'
+            Label : ELSE
+              'i'
+            Label : THEN
+              'h'
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           J
 
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                ==
-                Label : LEFT
-                  @
-                  Label : AT
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              ==
+              Label : LEFT
+                @
+                Label : AT
+                  [
+                  Label : INDEX
+                    'F'
+                  Label : VARIABLE
                     [
                     Label : INDEX
-                      'F'
+                      [
+                      Label : INDEX
+                        'E'
+                      Label : VARIABLE
+                        $D
                     Label : VARIABLE
                       [
                       Label : INDEX
-                        [
-                        Label : INDEX
-                          'E'
-                        Label : VARIABLE
-                          $D
+                        $C
                       Label : VARIABLE
-                        [
-                        Label : INDEX
-                          $C
-                        Label : VARIABLE
-                          ::
-                          Label : CLASS
-                            A
-                          Label : PROPERTY
-                            $B
-                Label : RIGHT
-                  'G'
-              Label : ELSE
-                'I'
-              Label : THEN
-                'H'
+                        ::
+                        Label : CLASS
+                          A
+                        Label : MEMBER
+                          $B
+              Label : RIGHT
+                'G'
+            Label : ELSE
+              'I'
+            Label : THEN
+              'H'
           Label : NAME
             echo

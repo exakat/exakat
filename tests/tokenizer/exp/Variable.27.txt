@@ -1,0 +1,18 @@
+Whole
+Label : PROJECT
+  Label : FILE
+    ;
+    Label : EXPRESSION
+      <?php 
+      Label : CODE
+        ;
+        Label : EXPRESSION
+          foo
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+          Label : ARGUMENT
+            3
+          Label : NAME
+            foo

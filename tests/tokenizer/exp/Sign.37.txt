@@ -1,61 +1,52 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.37.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             b
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                -
-                Label : SIGN
-                  ->
-                  Label : METHOD
+            Label : ARGUMENT
+              -
+              Label : SIGN
+                ->
+                Label : METHOD
+                  d
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     d
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      d
-                  Label : OBJECT
-                    $c
-              Label : ARGUMENT
-                -
-                Label : SIGN
-                  ->
-                  Label : METHOD
+                Label : OBJECT
+                  $c
+            Label : ARGUMENT
+              -
+              Label : SIGN
+                ->
+                Label : METHOD
+                  f
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     f
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      f
-                  Label : OBJECT
-                    $e
-              Label : ARGUMENT
-                -
-                Label : SIGN
-                  ->
-                  Label : METHOD
+                Label : OBJECT
+                  $e
+            Label : ARGUMENT
+              -
+              Label : SIGN
+                ->
+                Label : METHOD
+                  h
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     h
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      h
-                  Label : OBJECT
-                    $g
+                Label : OBJECT
+                  $g
             Label : NAME
               b
           Label : OBJECT

@@ -1,48 +1,45 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             [
-            Label : ARGUMENTS
-              [
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                true
-              Label : ARGUMENT
-                1.2
-              Label : ARGUMENT
-                +
-                Label : LEFT
-                  2
-                Label : RIGHT
-                  2
-              Label : ARGUMENT
-                *
-                Label : LEFT
-                  4
-                Label : RIGHT
-                  4
-              Label : ARGUMENT
-                ==
-                Label : LEFT
-                  '2'
-                Label : RIGHT
-                  2
-              Label : ARGUMENT
-                >>
-                Label : LEFT
-                  3
-                Label : RIGHT
-                  4
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              true
+            Label : ARGUMENT
+              1.2
+            Label : ARGUMENT
+              +
+              Label : LEFT
+                2
+              Label : RIGHT
+                2
+            Label : ARGUMENT
+              *
+              Label : LEFT
+                4
+              Label : RIGHT
+                4
+            Label : ARGUMENT
+              ==
+              Label : LEFT
+                '2'
+              Label : RIGHT
+                2
+            Label : ARGUMENT
+              >>
+              Label : LEFT
+                3
+              Label : RIGHT
+                4

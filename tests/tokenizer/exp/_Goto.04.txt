@@ -1,46 +1,41 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Goto.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           goto
           Label : GOTO
             a1
-        Label : ELEMENT
+        Label : EXPRESSION
           goto
           Label : GOTO
             a2
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              'Foo'
+          Label : ARGUMENT
+            'Foo'
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             a1
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             a2
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             a3
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              'Bar'
+          Label : ARGUMENT
+            'Bar'
           Label : NAME
             echo

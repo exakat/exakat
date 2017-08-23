@@ -1,108 +1,93 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.74.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'C'
+              Label : ARGUMENT
+                'C'
               Label : NAME
                 B
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               exit
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'D'
+              Label : ARGUMENT
+                'D'
               Label : NAME
                 exit
-        Label : ELEMENT
+        Label : EXPRESSION
           E
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'F'
-            Label : ARGUMENT
-              G
           Label : NAME
             E
-        Label : ELEMENT
+          Label : ARGUMENT
+            'F'
+          Label : ARGUMENT
+            G
+        Label : EXPRESSION
           =
           Label : LEFT
             @
             Label : AT
               list
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'H'
-                  Label : VARIABLE
-                    $a
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'I'
-                  Label : VARIABLE
-                    $b
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'J'
-                  Label : VARIABLE
-                    $c
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'K'
-                  Label : VARIABLE
-                    $d
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'L'
-                  Label : VARIABLE
-                    $e
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'H'
+                Label : VARIABLE
+                  $a
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'I'
+                Label : VARIABLE
+                  $b
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'J'
+                Label : VARIABLE
+                  $c
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'K'
+                Label : VARIABLE
+                  $d
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'L'
+                Label : VARIABLE
+                  $e
               Label : NAME
                 list
           Label : RIGHT
             M
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
+            Label : ARGUMENT
+              N
+              Label : NAME
                 N
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'O'
-                  Label : ARGUMENT
-                    P
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'Q'
-                        Label : VARIABLE
-                          $f
-                    Label : NAME
-                      P
+              Label : ARGUMENT
+                'O'
+              Label : ARGUMENT
+                P
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'Q'
+                  Label : VARIABLE
+                    $f
                 Label : NAME
-                  N
+                  P
             Label : NAME
               M

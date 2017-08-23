@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Try.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           try
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $d
@@ -20,46 +19,38 @@ Label : PROJECT
                 new
                 Label : NEW
                   DateTime
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $a
-                    Label : ARGUMENT
-                      new
-                      Label : NEW
-                        DateTimeZone
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $b
-                        Label : NAME
-                          DateTimeZone
                   Label : NAME
                     DateTime
+                  Label : ARGUMENT
+                    $a
+                  Label : ARGUMENT
+                    new
+                    Label : NEW
+                      DateTimeZone
+                      Label : ARGUMENT
+                        $b
+                      Label : NAME
+                        DateTimeZone
           Label : CATCH
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $c
                 Label : RIGHT
                   date
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'Y-m-d-H-i-s'
-                    Label : ARGUMENT
-                      strtotime
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $d
-                      Label : NAME
-                        strtotime
                   Label : NAME
                     date
+                  Label : ARGUMENT
+                    'Y-m-d-H-i-s'
+                  Label : ARGUMENT
+                    strtotime
+                    Label : ARGUMENT
+                      $d
+                    Label : NAME
+                      strtotime
             Label : CLASS
               Exception
             Label : VARIABLE

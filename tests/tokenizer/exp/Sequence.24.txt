@@ -1,47 +1,40 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.24.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              -
+          Label : ARGUMENT
+            -
+            Label : LEFT
+              +
               Label : LEFT
-                +
-                Label : LEFT
-                  $a
-                Label : RIGHT
-                  2
+                $a
               Label : RIGHT
-                [
-                Label : INDEX
+                2
+            Label : RIGHT
+              [
+              Label : INDEX
+                b
+                Label : ARGUMENT
+                  'c'
+                Label : NAME
                   b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'c'
-                  Label : NAME
-                    b
-                Label : VARIABLE
-                  $y
+              Label : VARIABLE
+                $y
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           b
 
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              $c
+          Label : ARGUMENT
+            $c
           Label : NAME
             echo

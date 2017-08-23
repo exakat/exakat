@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticconstant.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
@@ -18,7 +17,7 @@ Label : PROJECT
               A
             Label : CONSTANT
               const
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b

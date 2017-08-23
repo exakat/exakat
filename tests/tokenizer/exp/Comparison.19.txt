@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Comparison.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             >
@@ -22,10 +21,10 @@ Label : PROJECT
               -
               Label : LEFT
                 ->
+                Label : MEMBER
+                  d
                 Label : OBJECT
                   $c
-                Label : PROPERTY
-                  d
               Label : RIGHT
                 *
                 Label : LEFT
@@ -34,15 +33,15 @@ Label : PROJECT
                     'g'
                   Label : VARIABLE
                     ->
+                    Label : MEMBER
+                      f
                     Label : OBJECT
                       $e
-                    Label : PROPERTY
-                      f
                 Label : RIGHT
                   1
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 I

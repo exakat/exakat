@@ -1,21 +1,20 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.28.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : USE
             Baz\ClassNonAbsNonGroupedNonAs
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : USE
             Baz\ClassAbsNonGroupedNonAs
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : USE
             as
@@ -23,7 +22,7 @@ Label : PROJECT
               A1
             Label : NAME
               Baz\ClassNonAbsNonGroupedAs
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : USE
             as
@@ -31,15 +30,15 @@ Label : PROJECT
               A2
             Label : NAME
               Baz\ClassAbsNonGroupedAs
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : GROUPUSE
             Baz
+          Label : USE
+            ClassNonAbsGroupedNonAs
           Label : USE
             as
             Label : AS
               A3
             Label : NAME
               ClassNonAbsGroupedAs
-          Label : USE
-            ClassNonAbsGroupedNonAs

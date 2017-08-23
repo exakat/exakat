@@ -1,59 +1,54 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Break.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
               
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 empty
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'columns'
-                    Label : VARIABLE
-                      $swimlane
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'columns'
+                  Label : VARIABLE
+                    $swimlane
                 Label : NAME
                   empty
               Label : ELSE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                               
-                Label : ELEMENT
+                Label : EXPRESSION
                   <?=
-                  Label : ARGUMENTS
-                    <?=
-                    Label : ARGUMENT
-                      $this
+                  Label : ARGUMENT
+                    $this
                   Label : NAME
                     <?=
-                Label : ELEMENT
+                Label : EXPRESSION
                           
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-                Label : ELEMENT
+                Label : EXPRESSION
                           
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : SOURCE
             $a
           Label : VALUE
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

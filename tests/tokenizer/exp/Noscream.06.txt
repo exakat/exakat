@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Noscream.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           @
           Label : AT
             ->
+            Label : MEMBER
+              t
             Label : OBJECT
               $x
-            Label : PROPERTY
-              t

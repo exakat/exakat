@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -16,15 +15,13 @@ Label : PROJECT
               $a
             Label : RIGHT
               is_array
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
+              Label : ARGUMENT
+                $b
               Label : NAME
                 is_array
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -34,15 +31,13 @@ Label : PROJECT
                   $d
                 Label : RIGHT
                   array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-            Label : ELEMENT
+                  Label : ARGUMENT
+                    Void
+            Label : EXPRESSION
               foreach
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $f
@@ -56,7 +51,7 @@ Label : PROJECT
                       $k
                     Label : CONCAT
                       '}'
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $g
@@ -68,23 +63,21 @@ Label : PROJECT
                 $e
               Label : VALUE
                 =>
-                Label : KEY
+                Label : INDEX
                   $k
                 Label : VALUE
                   $v
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $h
               Label : RIGHT
                 str_replace
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $i
-                  Label : ARGUMENT
-                    $j
-                  Label : ARGUMENT
-                    $k
+                Label : ARGUMENT
+                  $i
+                Label : ARGUMENT
+                  $j
+                Label : ARGUMENT
+                  $k
                 Label : NAME
                   str_replace

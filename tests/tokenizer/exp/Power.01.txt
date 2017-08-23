@@ -1,26 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Power.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           **=
           Label : LEFT
             $a
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -30,11 +29,9 @@ Label : PROJECT
               $a
             Label : RIGHT
               3
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
+          Label : ARGUMENT
             $a
-            Label : ARGUMENT
-              $a
           Label : NAME
             print

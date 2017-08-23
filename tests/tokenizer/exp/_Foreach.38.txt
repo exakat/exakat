@@ -1,62 +1,57 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.38.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $x
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
                 Label : INDEX
                   d
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
+                  Label : ARGUMENT
+                    $c
                   Label : NAME
                     d
                 Label : VARIABLE
                   ->
+                  Label : MEMBER
+                    b
                   Label : OBJECT
                     $a
-                  Label : PROPERTY
-                    b
               Label : RIGHT
                 true
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               foreach
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     [
                     Label : INDEX
                       d
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $c
+                      Label : ARGUMENT
+                        $c
                       Label : NAME
                         d
                     Label : VARIABLE
                       ->
+                      Label : MEMBER
+                        b
                       Label : OBJECT
                         $a
-                      Label : PROPERTY
-                        b
                   Label : RIGHT
                     true
               Label : SOURCE

@@ -1,67 +1,60 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.50.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 1 :  /**/  
               Label : CASE
                 1
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     throw
                     Label : THROW
                       new
                       Label : NEW
                         \C
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'D'
+                        Label : ARGUMENT
+                          'D'
                         Label : NAME
                           \C
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     throw
                     Label : THROW
                       new
                       Label : NEW
                         \C
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'D'
+                        Label : ARGUMENT
+                          'D'
                         Label : NAME
                           \C
           Label : NAME
             >>
             Label : LEFT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    $b
-                  Label : VARIABLE
-                    $a
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  $b
+                Label : VARIABLE
+                  $a
               Label : NAME
                 B
             Label : RIGHT

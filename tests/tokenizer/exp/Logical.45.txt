@@ -1,52 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.45.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $c
-              Label : TYPEHINT
-                b
-            Label : ARGUMENT
-              $d
-              Label : TYPEHINT
-                array
-            Label : ARGUMENT
-              $e
-              Label : DEFAULT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    (
-                    Label : CODE
-                      &
-                      Label : LEFT
-                        3
-                      Label : RIGHT
-                        4
-              Label : TYPEHINT
-                array
+          Label : ARGUMENT
+            $c
+            Label : TYPEHINT
+              b
+          Label : ARGUMENT
+            $d
+            Label : TYPEHINT
+              array
+          Label : ARGUMENT
+            $e
+            Label : DEFAULT
+              [
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  &
+                  Label : LEFT
+                    3
+                  Label : RIGHT
+                    4
+            Label : TYPEHINT
+              array
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               for
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $i
@@ -58,7 +53,7 @@ Label : PROJECT
                       $g
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   <
                   Label : LEFT
                     $i
@@ -66,21 +61,19 @@ Label : PROJECT
                     10
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   <
                   Label : LEFT
                     $i
                   Label : RIGHT
                     count
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
+                    Label : ARGUMENT
+                      $a
                     Label : NAME
                       count
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $i

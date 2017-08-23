@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.38.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : CONST
             const
@@ -33,9 +32,9 @@ Label : PROJECT
           Label : PPP
             private
             Label : PPP
-              $c
-            Label : PPP
               $d
+            Label : PPP
+              $c
             Label : PRIVATE
               private
           Label : PPP
@@ -53,12 +52,12 @@ Label : PROJECT
           Label : PPP
             private
             Label : PPP
+              $h
+            Label : PPP
               =
               Label : LEFT
                 $g
               Label : RIGHT
                 3
-            Label : PPP
-              $h
             Label : PRIVATE
               private

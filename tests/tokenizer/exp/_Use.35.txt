@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.35.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             MyClass1
@@ -16,7 +15,7 @@ Label : PROJECT
             use
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 as
                 Label : AS
                   Void
@@ -24,7 +23,7 @@ Label : PROJECT
                   sayHello
                 Label : PROTECTED
                   protected
-              Label : ELEMENT
+              Label : EXPRESSION
                 insteadof
                 Label : INSTEADOF
                   A
@@ -36,7 +35,7 @@ Label : PROJECT
                     smallTalk
             Label : USE
               HelloWorld
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             MyClass2
@@ -44,7 +43,7 @@ Label : PROJECT
             use
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 as
                 Label : AS
                   myPrivateHello
@@ -54,42 +53,34 @@ Label : PROJECT
                   private
             Label : USE
               HelloWorld
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
           Label : DEFINITION
             'Hello'
           Label : DEFINITION
-            $this
-          Label : DEFINITION, DEFINITION
             Hello
           Label : METHOD
             sayHelloWorld
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      'Hello'
-                    Label : CONCAT
-                      ->
-                      Label : METHOD
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    'Hello'
+                  Label : CONCAT
+                    ->
+                    Label : METHOD
+                      getWorld
+                      Label : ARGUMENT
+                        Void
+                      Label : NAME
                         getWorld
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          getWorld
-                      Label : OBJECT
-                        $this
+                    Label : OBJECT
+                      $this
                 Label : NAME
                   echo
             Label : NAME
@@ -100,10 +91,8 @@ Label : PROJECT
             getWorld
             Label : ABSTRACT
               abstract
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               Void
             Label : NAME
@@ -112,48 +101,40 @@ Label : PROJECT
               public
           Label : NAME
             Hello
-        Label : ELEMENT
+        Label : EXPRESSION
           class
-          Label : DEFINITION
-            $this
-          Label : DEFINITION
-            $this
           Label : METHOD
             getWorld
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   ->
+                  Label : MEMBER
+                    world
                   Label : OBJECT
                     $this
-                  Label : PROPERTY
-                    world
             Label : NAME
               getWorld
             Label : PUBLIC
               public
           Label : METHOD
             setWorld
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $val
+            Label : ARGUMENT
+              $val
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    world
                   Label : OBJECT
                     $this
-                  Label : PROPERTY
-                    world
                 Label : RIGHT
                   $val
             Label : NAME

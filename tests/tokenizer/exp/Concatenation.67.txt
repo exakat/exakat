@@ -1,144 +1,131 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.67.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'c'
-                Label : VALUE
-                  3
-        Label : ELEMENT
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'c'
+              Label : VALUE
+                3
+        Label : EXPRESSION
           =
           Label : LEFT
             $b2
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'c2'
-                Label : VALUE
-                  4
-        Label : ELEMENT
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'c2'
+              Label : VALUE
+                4
+        Label : EXPRESSION
           =
           Label : LEFT
             $b3
           Label : RIGHT
             5
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d
           Label : RIGHT
             'D'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d2
           Label : RIGHT
             'D2'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d3
           Label : RIGHT
             'D3'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a'
-                Label : VALUE
-                  .
-                  Label : CONCAT
-                    -
-                    Label : SIGN
-                      [
-                      Label : INDEX
-                        'c'
-                      Label : VARIABLE
-                        $b
-                  Label : CONCAT
-                    $d
-        Label : ELEMENT
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'a'
+              Label : VALUE
+                .
+                Label : CONCAT
+                  -
+                  Label : SIGN
+                    [
+                    Label : INDEX
+                      'c'
+                    Label : VARIABLE
+                      $b
+                Label : CONCAT
+                  $d
+        Label : EXPRESSION
           =
           Label : LEFT
             $a2
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a2'
-                Label : VALUE
-                  .
-                  Label : CONCAT
-                    -
-                    Label : LEFT
-                      2
-                    Label : RIGHT
-                      [
-                      Label : INDEX
-                        'c2'
-                      Label : VARIABLE
-                        $b2
-                  Label : CONCAT
-                    $d2
-        Label : ELEMENT
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'a2'
+              Label : VALUE
+                .
+                Label : CONCAT
+                  -
+                  Label : LEFT
+                    2
+                  Label : RIGHT
+                    [
+                    Label : INDEX
+                      'c2'
+                    Label : VARIABLE
+                      $b2
+                Label : CONCAT
+                  $d2
+        Label : EXPRESSION
           =
           Label : LEFT
             $a3
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a3'
-                Label : VALUE
-                  .
-                  Label : CONCAT
-                    $d
-                  Label : CONCAT
-                    -
-                    Label : LEFT
-                      '3'
-                    Label : RIGHT
-                      $b3
-                  Label : CONCAT
-                    $d3
-        Label : ELEMENT
-          print_r
-          Label : ARGUMENTS
-            (
             Label : ARGUMENT
-              $a3
+              =>
+              Label : INDEX
+                'a3'
+              Label : VALUE
+                .
+                Label : CONCAT
+                  $d
+                Label : CONCAT
+                  -
+                  Label : LEFT
+                    '3'
+                  Label : RIGHT
+                    $b3
+                Label : CONCAT
+                  $d3
+        Label : EXPRESSION
+          print_r
+          Label : ARGUMENT
+            $a3
           Label : NAME
             print_r

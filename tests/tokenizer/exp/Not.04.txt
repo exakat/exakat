@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Not.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           !
           Label : NOT
             [
@@ -16,7 +15,7 @@ Label : PROJECT
               1
             Label : VARIABLE
               $x
-        Label : ELEMENT
+        Label : EXPRESSION
           !
           Label : NOT
             [
@@ -28,7 +27,7 @@ Label : PROJECT
                 1
               Label : VARIABLE
                 $x
-        Label : ELEMENT
+        Label : EXPRESSION
           !
           Label : NOT
             [
@@ -44,7 +43,7 @@ Label : PROJECT
                   1
                 Label : VARIABLE
                   $x
-        Label : ELEMENT
+        Label : EXPRESSION
           !
           Label : NOT
             {

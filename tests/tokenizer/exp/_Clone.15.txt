@@ -1,24 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Clone.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                clone
-                Label : CLONE
-                  (
-                  Label : CODE
-                    $a
+            Label : ARGUMENT
+              clone
+              Label : CLONE
+                (
+                Label : CODE
+                  $a

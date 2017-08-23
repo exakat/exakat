@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Assignation.32.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           &
           Label : LEFT
             $a
@@ -18,13 +17,11 @@ Label : PROJECT
               $b
             Label : RIGHT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $c
+              Label : ARGUMENT
+                $c
               Label : NAME
                 B
-        Label : ELEMENT
+        Label : EXPRESSION
           &
           Label : LEFT
             (
@@ -40,13 +37,11 @@ Label : PROJECT
               $d
             Label : RIGHT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $e
+              Label : ARGUMENT
+                $e
               Label : NAME
                 B
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $h
@@ -56,24 +51,20 @@ Label : PROJECT
               $f
             Label : RIGHT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $g
+              Label : ARGUMENT
+                $g
               Label : NAME
                 B
-        Label : ELEMENT
+        Label : EXPRESSION
           &
           Label : LEFT
             i
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                &&
-                Label : LEFT
-                  $a
-                Label : RIGHT
-                  $b
+            Label : ARGUMENT
+              &&
+              Label : LEFT
+                $a
+              Label : RIGHT
+                $b
             Label : NAME
               i
           Label : RIGHT
@@ -82,9 +73,7 @@ Label : PROJECT
               $d
             Label : RIGHT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $e
+              Label : ARGUMENT
+                $e
               Label : NAME
                 B

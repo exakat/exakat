@@ -1,47 +1,40 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.44.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               isset
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a
+              Label : ARGUMENT
+                $a
               Label : NAME
                 isset
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
+              Label : ARGUMENT
                 'B'
-                Label : ARGUMENT
-                  'B'
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-        Label : ELEMENT
+        Label : EXPRESSION
           C
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
+          Label : ARGUMENT
             $d
-            Label : ARGUMENT
-              $d
           Label : NAME
             print
-    Label : ELEMENT
+    Label : EXPRESSION
       B

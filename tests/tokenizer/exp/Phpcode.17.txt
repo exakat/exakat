@@ -1,53 +1,46 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?=
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              (
-              Label : CODE
-                ?
-                Label : CONDITION
-                  $a
-                Label : ELSE
-                  'c'
-                Label : THEN
-                  'b'
-          Label : NAME
-            <?=
-        Label : ELEMENT
-          <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
+          Label : ARGUMENT
+            (
+            Label : CODE
               ?
               Label : CONDITION
-                (
-                Label : CODE
-                  &&
-                  Label : LEFT
-                    d
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'e'
-                    Label : NAME
-                      d
-                  Label : RIGHT
-                    !
-                    Label : NOT
-                      $f
+                $a
               Label : ELSE
-                'h'
+                'c'
               Label : THEN
-                "g"
+                'b'
+          Label : NAME
+            <?=
+        Label : EXPRESSION
+          <?=
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              (
+              Label : CODE
+                &&
+                Label : LEFT
+                  d
+                  Label : ARGUMENT
+                    'e'
+                  Label : NAME
+                    d
+                Label : RIGHT
+                  !
+                  Label : NOT
+                    $f
+            Label : ELSE
+              'h'
+            Label : THEN
+              "g"
           Label : NAME
             <?=

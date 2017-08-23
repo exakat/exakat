@@ -1,38 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yieldfrom.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               yield from
               Label : YIELD
                 yield from
                 Label : YIELD
                   foo
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     foo
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
               Label : CONDITION
                 yield from
@@ -40,44 +35,36 @@ Label : PROJECT
                   !==
                   Label : LEFT
                     foo
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       foo
                   Label : RIGHT
                     null
           Label : DEFINITION
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               B
           Label : NAME
             B
           Label : RETURNTYPE
             Generator
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $c
+              Label : ARGUMENT
+                $c
               Label : NAME
                 var_dump
           Label : SOURCE
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               B
           Label : VALUE

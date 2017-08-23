@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.57.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -15,10 +14,8 @@ Label : PROJECT
               $type
             Label : RIGHT
               is_array
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $type
+              Label : ARGUMENT
+                $type
               Label : NAME
                 is_array
           Label : ELSE
@@ -27,7 +24,7 @@ Label : PROJECT
               $type
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 .=
                 Label : LEFT
                   $sql
@@ -37,15 +34,13 @@ Label : PROJECT
                     ' AND thread.thread_type='
                   Label : CONCAT
                     db_input
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $type
+                    Label : ARGUMENT
+                      $type
                     Label : NAME
                       db_input
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               .=
               Label : LEFT
                 $sql
@@ -55,19 +50,15 @@ Label : PROJECT
                   ' AND thread.thread_type IN('
                 Label : CONCAT
                   implode
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      ','
-                    Label : ARGUMENT
-                      db_input
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $type
-                      Label : NAME
-                        db_input
                   Label : NAME
                     implode
+                  Label : ARGUMENT
+                    ','
+                  Label : ARGUMENT
+                    db_input
+                    Label : ARGUMENT
+                      $type
+                    Label : NAME
+                      db_input
                 Label : CONCAT
                   ')'

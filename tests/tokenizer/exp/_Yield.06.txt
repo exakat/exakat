@@ -1,60 +1,51 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yield.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
+              Label : ARGUMENT
+                yield
+                Label : YIELD
+                  -1
+              Label : NAME
                 echo
-                Label : ARGUMENT
-                  yield
-                  Label : YIELD
+            Label : EXPRESSION
+              echo
+              Label : ARGUMENT
+                -
+                Label : LEFT
+                  (
+                  Label : CODE
+                    yield
+                    Label : YIELD
+                      Void
+                Label : RIGHT
+                  1
+              Label : NAME
+                echo
+            Label : EXPRESSION
+              echo
+              Label : ARGUMENT
+                yield
+                Label : YIELD
+                  (
+                  Label : CODE
                     -1
               Label : NAME
                 echo
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  -
-                  Label : LEFT
-                    (
-                    Label : CODE
-                      yield
-                      Label : YIELD
-                        Void
-                  Label : RIGHT
-                    1
-              Label : NAME
-                echo
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  yield
-                  Label : YIELD
-                    (
-                    Label : CODE
-                      -1
-              Label : NAME
-                echo
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 or
@@ -62,13 +53,11 @@ Label : PROJECT
                   $foo
                 Label : RIGHT
                   die
-                  Label : ARGUMENTS
+                  Label : ARGUMENT
                     Void
-                    Label : ARGUMENT
-                      Void
                   Label : NAME
                     die
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 (
@@ -78,13 +67,11 @@ Label : PROJECT
                     $foo
                   Label : RIGHT
                     die
-                    Label : ARGUMENTS
+                    Label : ARGUMENT
                       Void
-                      Label : ARGUMENT
-                        Void
                     Label : NAME
                       die
-            Label : ELEMENT
+            Label : EXPRESSION
               or
               Label : LEFT
                 (
@@ -94,40 +81,32 @@ Label : PROJECT
                     $foo
               Label : RIGHT
                 die
-                Label : ARGUMENTS
+                Label : ARGUMENT
                   Void
-                  Label : ARGUMENT
-                    Void
                 Label : NAME
                   die
           Label : DEFINITION
             x
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               x
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $y
+              Label : ARGUMENT
+                $y
               Label : NAME
                 var_dump
           Label : SOURCE
             x
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               x
           Label : VALUE

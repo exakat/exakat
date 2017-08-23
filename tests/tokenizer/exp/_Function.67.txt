@@ -1,105 +1,88 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.67.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
+          Label : NAME
+            B
           Label : METHOD
             exit
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-                Label : TYPEHINT
-                  C
-              Label : ARGUMENT
-                $c
-                Label : DEFAULT
-                  null
-                Label : TYPEHINT
-                  D
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 print
-                Label : ARGUMENTS
-                  )
-                  Label : ARGUMENT
+                Label : ARGUMENT
+                  E
+                  Label : NAME
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'F'
-                      Label : ARGUMENT
-                        $c
-                    Label : NAME
-                      E
-                Label : NAME
-                  print
-              Label : ELEMENT
-                print
-                Label : ARGUMENTS
-                  'G'
                   Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      $b
-                    Label : CONCAT
-                      'G'
+                    'F'
+                  Label : ARGUMENT
+                    $c
                 Label : NAME
                   print
+              Label : EXPRESSION
+                print
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    $b
+                  Label : CONCAT
+                    'G'
+                Label : NAME
+                  print
+            Label : ARGUMENT
+              $b
+              Label : TYPEHINT
+                C
+            Label : ARGUMENT
+              $c
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                D
             Label : NAME
               exit
           Label : METHOD
             die
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-                Label : TYPEHINT
-                  C
-              Label : ARGUMENT
-                $c
-                Label : DEFAULT
-                  null
-                Label : TYPEHINT
-                  D
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 print
-                Label : ARGUMENTS
-                  )
-                  Label : ARGUMENT
+                Label : ARGUMENT
+                  E
+                  Label : NAME
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'F'
-                      Label : ARGUMENT
-                        $c
-                    Label : NAME
-                      E
-                Label : NAME
-                  print
-              Label : ELEMENT
-                print
-                Label : ARGUMENTS
-                  'G'
                   Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      $b
-                    Label : CONCAT
-                      'G'
+                    'F'
+                  Label : ARGUMENT
+                    $c
                 Label : NAME
                   print
+              Label : EXPRESSION
+                print
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    $b
+                  Label : CONCAT
+                    'G'
+                Label : NAME
+                  print
+            Label : ARGUMENT
+              $b
+              Label : TYPEHINT
+                C
+            Label : ARGUMENT
+              $c
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                D
             Label : NAME
               die
-          Label : NAME
-            B

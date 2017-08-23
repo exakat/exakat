@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.34.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 N\A
               Label : USE
                 N\B
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : FUNCTION
                 function
@@ -28,7 +27,7 @@ Label : PROJECT
                   N\A
               Label : USE
                 N\F2
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : CONST
                 const
@@ -38,7 +37,7 @@ Label : PROJECT
                   C
               Label : USE
                 N\C2
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : GROUPUSE
                 N\D
@@ -52,7 +51,7 @@ Label : PROJECT
                 DC
                 Label : CONST
                   const
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : GROUPUSE
                 N2\D2
@@ -74,21 +73,21 @@ Label : PROJECT
                   const
               Label : USE
                 DC2
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : GROUPUSE
                 some\namespaces
+              Label : USE
+                ClassA
+              Label : USE
+                ClassB
               Label : USE
                 as
                 Label : AS
                   C
                 Label : NAME
                   ClassC
-              Label : USE
-                ClassA
-              Label : USE
-                ClassB
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : FUNCTION
                 function
@@ -100,7 +99,7 @@ Label : PROJECT
                 fn_b
               Label : USE
                 fn_c
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : CONST
                 const
@@ -112,77 +111,63 @@ Label : PROJECT
                 ConstB
               Label : USE
                 ConstC
-            Label : ELEMENT
+            Label : EXPRESSION
               DF3
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 DF3
-            Label : ELEMENT
+            Label : EXPRESSION
               new
               Label : NEW
                 DF2
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   DF2
                   Label : DEFINITION
                     DF2
           Label : NAME
             Void
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               DF2
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   print
-                  Label : ARGUMENTS
+                  Label : ARGUMENT
                     __FUNCTION__
-                    Label : ARGUMENT
-                      __FUNCTION__
                   Label : NAME
                     print
               Label : NAME
                 DF2
-            Label : ELEMENT
+            Label : EXPRESSION
               DF3
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   print
-                  Label : ARGUMENTS
+                  Label : ARGUMENT
                     __FUNCTION__
-                    Label : ARGUMENT
-                      __FUNCTION__
                   Label : NAME
                     print
               Label : DEFINITION
                 DF3
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   DF3
               Label : NAME
                 DF3
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
                 DF2
@@ -190,28 +175,22 @@ Label : PROJECT
                   DF2
               Label : DEFINITION
                 DF2
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   DF2
                   Label : DEFINITION
                     DF2
               Label : METHOD
                 __construct
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     print
-                    Label : ARGUMENTS
+                    Label : ARGUMENT
                       __METHOD__
-                      Label : ARGUMENT
-                        __METHOD__
                     Label : NAME
                       print
                 Label : NAME

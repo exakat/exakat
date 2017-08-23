@@ -1,15 +1,14 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.86.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       B
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -17,33 +16,29 @@ Label : PROJECT
             .
             Label : CONCAT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  0
-                Label : ARGUMENT
-                  1
               Label : NAME
                 C
+              Label : ARGUMENT
+                0
+              Label : ARGUMENT
+                1
             Label : CONCAT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  2
-                Label : ARGUMENT
-                  1
               Label : NAME
                 C
-        Label : ELEMENT
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                1
+        Label : EXPRESSION
           B
-        Label : ELEMENT
+        Label : EXPRESSION
           for
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               F
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -63,15 +58,15 @@ Label : PROJECT
                     'G'
                   Label : VARIABLE
                     $d
-            Label : ELEMENT
+            Label : EXPRESSION
               H
-            Label : ELEMENT
+            Label : EXPRESSION
               for
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   I
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $f
@@ -93,9 +88,9 @@ Label : PROJECT
                             'J'
                           Label : VARIABLE
                             $d
-                Label : ELEMENT
+                Label : EXPRESSION
                   I
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $g
@@ -117,89 +112,75 @@ Label : PROJECT
                       'N'
                     Label : THEN
                       'M'
-                Label : ELEMENT
+                Label : EXPRESSION
                   O
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      $g
+                  Label : ARGUMENT
+                    $g
                   Label : NAME
                     echo
-                Label : ELEMENT
+                Label : EXPRESSION
                   P
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      $c
+                  Label : ARGUMENT
+                    $c
                   Label : NAME
                     echo
-                Label : ELEMENT
+                Label : EXPRESSION
                   Q
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
+                  Label : ARGUMENT
+                    R
                     Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'S'
+                      Label : VARIABLE
+                        $f
+                    Label : ARGUMENT
+                      T
+                    Label : ARGUMENT
+                      'U'
+                    Label : NAME
                       R
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'S'
-                          Label : VARIABLE
-                            $f
-                        Label : ARGUMENT
-                          T
-                        Label : ARGUMENT
-                          'U'
-                      Label : NAME
-                        R
                   Label : NAME
                     echo
-                Label : ELEMENT
+                Label : EXPRESSION
                   V
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
+                  Label : ARGUMENT
+                    R
                     Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'X'
+                      Label : VARIABLE
+                        $f
+                    Label : ARGUMENT
+                      T
+                    Label : ARGUMENT
+                      'U'
+                    Label : NAME
                       R
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'X'
-                          Label : VARIABLE
-                            $f
-                        Label : ARGUMENT
-                          T
-                        Label : ARGUMENT
-                          'U'
-                      Label : NAME
-                        R
                   Label : NAME
                     echo
-                Label : ELEMENT
+                Label : EXPRESSION
                   AA
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      $c
+                  Label : ARGUMENT
+                    $c
                   Label : NAME
                     echo
-                Label : ELEMENT
+                Label : EXPRESSION
                   AB
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   <
                   Label : LEFT
                     $e
@@ -207,23 +188,23 @@ Label : PROJECT
                     3
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $e
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $e
                   Label : RIGHT
                     2
-            Label : ELEMENT
+            Label : EXPRESSION
               AC
           Label : FINAL
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               <
               Label : LEFT
                 $b
@@ -231,13 +212,13 @@ Label : PROJECT
                 3
           Label : INCREMENT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $b
           Label : INIT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b

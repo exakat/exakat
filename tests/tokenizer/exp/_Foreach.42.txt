@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.42.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $b
@@ -26,21 +25,19 @@ Label : PROJECT
                 $b
             Label : RIGHT
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $c
             Label : VALUE
               $d
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $b
@@ -54,19 +51,15 @@ Label : PROJECT
                 $e
             Label : ELSE
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
             Label : THEN
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  1
+              Label : ARGUMENT
+                1
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $c
             Label : VALUE
               $d

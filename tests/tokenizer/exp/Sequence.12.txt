@@ -1,104 +1,103 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d
           Label : RIGHT
             4
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $e
           Label : RIGHT
             5
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $f
           Label : RIGHT
             6
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $g
           Label : RIGHT
             7
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $h
           Label : RIGHT
             8
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a1
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b1
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c1
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d1
           Label : RIGHT
             4
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $e1
           Label : RIGHT
             5
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $f1
           Label : RIGHT
             6
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $g1
           Label : RIGHT
             7
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $h1

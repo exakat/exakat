@@ -1,121 +1,98 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.75.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               h
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  yield
-                  Label : YIELD
-                    3
+              Label : ARGUMENT
+                yield
+                Label : YIELD
+                  3
               Label : NAME
                 h
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           a2
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               $handler
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  yield
-                  Label : YIELD
-                    ->
-                    Label : METHOD
+              Label : ARGUMENT
+                yield
+                Label : YIELD
+                  ->
+                  Label : METHOD
+                    b
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
                       b
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        b
-                    Label : OBJECT
-                      $a
+                  Label : OBJECT
+                    $a
               Label : NAME
                 $handler
           Label : NAME
             a2
-        Label : ELEMENT
+        Label : EXPRESSION
           a3
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               $handler
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  yield
-                  Label : YIELD
-                    ->
-                    Label : METHOD
+              Label : ARGUMENT
+                yield
+                Label : YIELD
+                  ->
+                  Label : METHOD
+                    accept
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
                       accept
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        accept
-                    Label : OBJECT
-                      $server
+                  Label : OBJECT
+                    $server
               Label : NAME
                 $handler
           Label : NAME
             a3
-        Label : ELEMENT
+        Label : EXPRESSION
           a4
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               $handler
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  yield
-                  Label : YIELD
-                    ::
-                    Label : CLASS
-                      $server
-                    Label : METHOD
+              Label : ARGUMENT
+                yield
+                Label : YIELD
+                  ::
+                  Label : CLASS
+                    $server
+                  Label : METHOD
+                    accept
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
                       accept
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        accept
               Label : NAME
                 $handler
           Label : NAME
             a4
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

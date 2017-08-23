@@ -1,25 +1,22 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Multiplication.34.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            2
-            Label : ARGUMENT
-              *
+          Label : ARGUMENT
+            *
+            Label : LEFT
+              1
+            Label : RIGHT
+              =
               Label : LEFT
-                1
+                $a
               Label : RIGHT
-                =
-                Label : LEFT
-                  $a
-                Label : RIGHT
-                  2
+                2
           Label : NAME
             print

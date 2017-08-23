@@ -1,78 +1,69 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.65.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           global
           Label : GLOBAL
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           global
           Label : GLOBAL
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'E'
+                Label : VARIABLE
                   [
                   Label : INDEX
-                    'E'
+                    'C'
                   Label : VARIABLE
-                    [
-                    Label : INDEX
-                      'C'
-                    Label : VARIABLE
-                      $c
+                    $c
               Label : NAME
                 B
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-        Label : ELEMENT
+                Label : ARGUMENT
+                  Void
+        Label : EXPRESSION
           =
           Label : LEFT
             $d
           Label : RIGHT
             G
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'J'
+              Label : VARIABLE
                 [
                 Label : INDEX
-                  'J'
+                  'H'
                 Label : VARIABLE
-                  [
-                  Label : INDEX
-                    'H'
-                  Label : VARIABLE
-                    $e
+                  $e
             Label : NAME
               G
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $f
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void

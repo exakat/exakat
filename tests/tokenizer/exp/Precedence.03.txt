@@ -1,58 +1,49 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Precedence.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            5
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                +
-                Label : LEFT
-                  1
-                Label : RIGHT
-                  2
-              Label : CONCAT
-                5
-          Label : NAME
-            print
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            "\n"
-            Label : ARGUMENT
-              "\n"
-          Label : NAME
-            print
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            4
-            Label : ARGUMENT
-              .
-              Label : CONCAT
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              +
+              Label : LEFT
                 1
-              Label : CONCAT
-                +
-                Label : LEFT
-                  2
-                Label : RIGHT
-                  4
+              Label : RIGHT
+                2
+            Label : CONCAT
+              5
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
+          Label : ARGUMENT
             "\n"
-            Label : ARGUMENT
-              "\n"
+          Label : NAME
+            print
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              1
+            Label : CONCAT
+              +
+              Label : LEFT
+                2
+              Label : RIGHT
+                4
+          Label : NAME
+            print
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            "\n"
           Label : NAME
             print

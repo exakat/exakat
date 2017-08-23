@@ -1,89 +1,74 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.27.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
+              Label : ARGUMENT
+                D
                 Label : ARGUMENT
+                  $d
+                Label : NAME
                   D
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $d
+              Label : ARGUMENT
+                'E'
+              Label : ARGUMENT
+                ?
+                Label : CONDITION
+                  F
+                  Label : ARGUMENT
+                    $e
                   Label : NAME
-                    D
-                Label : ARGUMENT
-                  'E'
-                Label : ARGUMENT
-                  ?
-                  Label : CONDITION
                     F
-                    Label : ARGUMENTS
-                      (
+                Label : ELSE
+                  H
+                  Label : ARGUMENT
+                    'I'
+                  Label : ARGUMENT
+                    'J'
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      K
+                    Label : METHOD
+                      L
+                      Label : NAME
+                        L
                       Label : ARGUMENT
-                        $e
-                    Label : NAME
-                      F
-                  Label : ELSE
+                        $g
+                      Label : ARGUMENT
+                        array
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            ::
+                            Label : CLASS
+                              M
+                            Label : CONSTANT
+                              N
+                          Label : VALUE
+                            O
+                  Label : NAME
                     H
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'I'
-                      Label : ARGUMENT
-                        'J'
-                      Label : ARGUMENT
-                        ::
-                        Label : CLASS
-                          K
-                        Label : METHOD
-                          L
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $g
-                            Label : ARGUMENT
-                              array
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  =>
-                                  Label : KEY
-                                    ::
-                                    Label : CLASS
-                                      M
-                                    Label : CONSTANT
-                                      N
-                                  Label : VALUE
-                                    O
-                          Label : NAME
-                            L
-                    Label : NAME
-                      H
-                  Label : THEN
+                Label : THEN
+                  G
+                  Label : ARGUMENT
+                    $f
+                  Label : NAME
                     G
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $f
-                    Label : NAME
-                      G
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               O
           Label : SOURCE
             [
@@ -93,7 +78,7 @@ Label : PROJECT
               $a
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $b
             Label : VALUE
               $c

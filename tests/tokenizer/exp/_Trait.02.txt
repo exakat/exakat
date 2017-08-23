@@ -1,29 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Trait.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             C
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    'D'
+                Label : ARGUMENT
+                  'D'
                 Label : NAME
                   echo
             Label : NAME
@@ -32,34 +27,28 @@ Label : PROJECT
               public
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
           Label : METHOD
             F
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   G
                 Label : METHOD
                   H
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     H
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    'I'
+                Label : ARGUMENT
+                  'I'
                 Label : NAME
                   echo
             Label : NAME
@@ -68,7 +57,7 @@ Label : PROJECT
               public
           Label : NAME
             E
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : EXTENDS
             K
@@ -78,7 +67,7 @@ Label : PROJECT
             use
             Label : USE
               L
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -86,20 +75,16 @@ Label : PROJECT
             new
             Label : NEW
               M
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 M
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             N
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               N
           Label : OBJECT

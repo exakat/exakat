@@ -1,58 +1,49 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Precedence.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            4
-            Label : ARGUMENT
-              +
+          Label : ARGUMENT
+            +
+            Label : LEFT
+              2
+            Label : RIGHT
+              *
               Label : LEFT
-                2
-              Label : RIGHT
-                *
-                Label : LEFT
-                  3
-                Label : RIGHT
-                  4
-          Label : NAME
-            print
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            "\n"
-            Label : ARGUMENT
-              "\n"
-          Label : NAME
-            print
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            4
-            Label : ARGUMENT
-              +
-              Label : LEFT
-                *
-                Label : LEFT
-                  2
-                Label : RIGHT
-                  3
+                3
               Label : RIGHT
                 4
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
+          Label : ARGUMENT
             "\n"
-            Label : ARGUMENT
-              "\n"
+          Label : NAME
+            print
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            +
+            Label : LEFT
+              *
+              Label : LEFT
+                2
+              Label : RIGHT
+                3
+            Label : RIGHT
+              4
+          Label : NAME
+            print
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            "\n"
           Label : NAME
             print

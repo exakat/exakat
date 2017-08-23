@@ -1,134 +1,113 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.68.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             require
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-                Label : TYPEHINT
-                  C
-              Label : ARGUMENT
-                $c
-                Label : DEFAULT
-                  null
-                Label : TYPEHINT
-                  D
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 print
-                Label : ARGUMENTS
-                  )
-                  Label : ARGUMENT
+                Label : ARGUMENT
+                  E
+                  Label : NAME
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'F'
-                      Label : ARGUMENT
-                        $c
-                    Label : NAME
-                      E
+                  Label : ARGUMENT
+                    'F'
+                  Label : ARGUMENT
+                    $c
                 Label : NAME
                   print
+            Label : ARGUMENT
+              $b
+              Label : TYPEHINT
+                C
+            Label : ARGUMENT
+              $c
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                D
             Label : NAME
               require
           Label : METHOD
             require_once
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-                Label : TYPEHINT
-                  C
-              Label : ARGUMENT
-                $c
-                Label : DEFAULT
-                  null
-                Label : TYPEHINT
-                  D
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 print
-                Label : ARGUMENTS
-                  'G'
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      $b
-                    Label : CONCAT
-                      'G'
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    $b
+                  Label : CONCAT
+                    'G'
                 Label : NAME
                   print
+            Label : ARGUMENT
+              $b
+              Label : TYPEHINT
+                C
+            Label : ARGUMENT
+              $c
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                D
             Label : NAME
               require_once
           Label : METHOD
             include
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-                Label : TYPEHINT
-                  C
+            Label : ARGUMENT
+              $b
+              Label : TYPEHINT
+                C
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 print
-                Label : ARGUMENTS
-                  )
-                  Label : ARGUMENT
+                Label : ARGUMENT
+                  E
+                  Label : NAME
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'F'
-                      Label : ARGUMENT
-                        $c
-                    Label : NAME
-                      E
+                  Label : ARGUMENT
+                    'F'
+                  Label : ARGUMENT
+                    $c
                 Label : NAME
                   print
             Label : NAME
               include
           Label : METHOD
             include_once
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-                Label : TYPEHINT
-                  C
-              Label : ARGUMENT
-                $c
-                Label : DEFAULT
-                  null
-                Label : TYPEHINT
-                  D
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 print
-                Label : ARGUMENTS
-                  'G'
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      $b
-                    Label : CONCAT
-                      'G'
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    $b
+                  Label : CONCAT
+                    'G'
                 Label : NAME
                   print
+            Label : ARGUMENT
+              $b
+              Label : TYPEHINT
+                C
+            Label : ARGUMENT
+              $c
+              Label : DEFAULT
+                null
+              Label : TYPEHINT
+                D
             Label : NAME
               include_once
           Label : NAME

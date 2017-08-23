@@ -1,52 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Block.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             isset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'C'
-                Label : VARIABLE
-                  ->
-                  Label : OBJECT
-                    $this
-                  Label : PROPERTY
-                    B
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'C'
+              Label : VARIABLE
+                ->
+                Label : MEMBER
+                  B
+                Label : OBJECT
+                  $this
             Label : NAME
               isset
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $b
                 Label : RIGHT
                   array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'Q'
-                      Label : VALUE
-                        'R'
-            Label : ELEMENT
+                  Label : ARGUMENT
+                    =>
+                    Label : INDEX
+                      'Q'
+                    Label : VALUE
+                      'R'
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $d
@@ -54,21 +49,19 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     AW
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $c
-                        Label : PROPERTY
-                          AX
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        AX
+                      Label : OBJECT
+                        $c
                     Label : NAME
                       AW
                   Label : OBJECT
                     $this
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $a

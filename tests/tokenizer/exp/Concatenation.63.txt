@@ -1,137 +1,114 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.63.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !==
             Label : LEFT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'C'
-                Label : ARGUMENT
-                  D
               Label : NAME
                 B
+              Label : ARGUMENT
+                'C'
+              Label : ARGUMENT
+                D
             Label : RIGHT
               'E'
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               Z
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               F
-            Label : ELEMENT
+            Label : EXPRESSION
               .
               Label : CONCAT
                 G
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'H'
-                  Label : ARGUMENT
-                    'I'
                 Label : NAME
                   G
+                Label : ARGUMENT
+                  'H'
+                Label : ARGUMENT
+                  'I'
               Label : CONCAT
                 'J'
               Label : CONCAT
                 K
-                Label : ARGUMENTS
-                  (
+                Label : ARGUMENT
+                  B
                   Label : ARGUMENT
+                    'M'
+                  Label : NAME
                     B
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'M'
-                    Label : NAME
-                      B
                 Label : NAME
                   K
               Label : CONCAT
                 'N'
-            Label : ELEMENT
+            Label : EXPRESSION
               O
-            Label : ELEMENT
+            Label : EXPRESSION
               G
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'Q'
-                Label : ARGUMENT
-                  'I'
               Label : NAME
                 G
-            Label : ELEMENT
+              Label : ARGUMENT
+                'Q'
+              Label : ARGUMENT
+                'I'
+            Label : EXPRESSION
               S
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  $a
+              Label : ARGUMENT
+                $a
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               T
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 isset
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $b
+                Label : ARGUMENT
+                  $b
                 Label : NAME
                   isset
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      U
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $b
-                      Label : NAME
-                        U
-                  Label : NAME
-                    echo
-            Label : ELEMENT
-              V
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  U
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'X'
-                      Label : VARIABLE
-                        $c
-                  Label : NAME
+                  Label : ARGUMENT
                     U
+                    Label : ARGUMENT
+                      $b
+                    Label : NAME
+                      U
+                  Label : NAME
+                    echo
+            Label : EXPRESSION
+              V
+            Label : EXPRESSION
+              echo
+              Label : ARGUMENT
+                U
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'X'
+                  Label : VARIABLE
+                    $c
+                Label : NAME
+                  U
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               Y
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

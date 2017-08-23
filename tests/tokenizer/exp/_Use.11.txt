@@ -1,23 +1,20 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
                 one_identifier
-                Label : DEFINITION
-                  one_identifier
               Label : DEFINITION
                 one_identifier
               Label : NAME
@@ -34,14 +31,12 @@ Label : PROJECT
                   public
                 Label : STATIC
                   static
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
-                absolute_path
-                Label : DEFINITION
-                  \absolute_path
-              Label : DEFINITION
                 \absolute_path
+              Label : DEFINITION
+                absolute_path
               Label : NAME
                 absolute_path
               Label : PPP
@@ -56,8 +51,10 @@ Label : PROJECT
                   public
                 Label : STATIC
                   static
-            Label : ELEMENT
+            Label : EXPRESSION
               class
+              Label : DEFINITION
+                one_identifier3
               Label : DEFINITION
                 a1
                 Label : DEFINITION
@@ -66,8 +63,6 @@ Label : PROJECT
                     a1
                   Label : NAME
                     one_identifier3
-              Label : DEFINITION
-                one_identifier3
               Label : NAME
                 one_identifier3
               Label : PPP
@@ -82,7 +77,7 @@ Label : PROJECT
                   public
                 Label : STATIC
                   static
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
                 \a1
@@ -102,18 +97,16 @@ Label : PROJECT
                   static
           Label : NAME
             Void
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
-                path
-                Label : DEFINITION
-                  complex\path
-              Label : DEFINITION
                 complex\path
+              Label : DEFINITION
+                path
               Label : NAME
                 path
               Label : PPP
@@ -130,18 +123,16 @@ Label : PROJECT
                   static
           Label : NAME
             complex
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
-                path2
-                Label : DEFINITION
-                  \absolute\complex\path2
-              Label : DEFINITION
                 \absolute\complex\path2
+              Label : DEFINITION
+                path2
               Label : NAME
                 path2
               Label : PPP
@@ -158,27 +149,27 @@ Label : PROJECT
                   static
           Label : NAME
             absolute\complex
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 one_identifier
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 \absolute_path
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 complex\path
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 \absolute\complex\path2
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -186,7 +177,7 @@ Label : PROJECT
                   a1
                 Label : NAME
                   one_identifier3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -194,7 +185,7 @@ Label : PROJECT
                   a2
                 Label : NAME
                   \absolute_path3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -202,7 +193,7 @@ Label : PROJECT
                   a3
                 Label : NAME
                   complex\path3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -210,156 +201,128 @@ Label : PROJECT
                   a4
                 Label : NAME
                   \absolute\complex\path32
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    one_identifier
-                    Label : DEFINITION
-                      one_identifier
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  one_identifier
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    absolute_path
-                    Label : DEFINITION
-                      \absolute_path
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  absolute_path
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    path
-                    Label : DEFINITION
-                      complex\path
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  path
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    path2
-                    Label : DEFINITION
-                      \absolute\complex\path2
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  path2
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    a1
-                    Label : DEFINITION
-                      as
-                      Label : ALIAS
-                        a1
-                      Label : NAME
-                        one_identifier3
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  a1
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a1
+                    Label : NAME
+                      one_identifier3
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    \a1
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  \a1
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    one_identifier3
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  one_identifier3
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    a2
-                    Label : DEFINITION
-                      as
-                      Label : ALIAS
-                        a2
-                      Label : NAME
-                        \absolute_path3
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  a2
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a2
+                    Label : NAME
+                      \absolute_path3
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    a3
-                    Label : DEFINITION
-                      as
-                      Label : ALIAS
-                        a3
-                      Label : NAME
-                        complex\path3
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  a3
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a3
+                    Label : NAME
+                      complex\path3
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $a
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    a4
-                    Label : DEFINITION
-                      as
-                      Label : ALIAS
-                        a4
-                      Label : NAME
-                        \absolute\complex\path32
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  a4
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a4
+                    Label : NAME
+                      \absolute\complex\path32
+                Label : MEMBER
+                  $a
               Label : NAME
                 print
           Label : NAME

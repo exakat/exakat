@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
@@ -16,17 +15,15 @@ Label : PROJECT
             (
             Label : CODE
               chr
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  |
+              Label : ARGUMENT
+                |
+                Label : LEFT
+                  0xC0
+                Label : RIGHT
+                  >>
                   Label : LEFT
-                    0xC0
+                    $char
                   Label : RIGHT
-                    >>
-                    Label : LEFT
-                      $char
-                    Label : RIGHT
-                      12
+                    12
               Label : NAME
                 chr

@@ -1,54 +1,49 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Keyvalue.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a'
-                Label : VALUE
-                  ==
-                  Label : LEFT
-                    $b
-                  Label : RIGHT
-                    $c
-        Label : ELEMENT
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'a'
+              Label : VALUE
+                ==
+                Label : LEFT
+                  $b
+                Label : RIGHT
+                  $c
+        Label : EXPRESSION
           =
           Label : LEFT
             $y
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'b'
-                Label : VALUE
-                  ?
-                  Label : CONDITION
-                    >=
-                    Label : LEFT
-                      $c
-                    Label : RIGHT
-                      $d
-                  Label : ELSE
-                    'f'
-                  Label : THEN
-                    'e'
-              Label : ARGUMENT
-                'g'
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'b'
+              Label : VALUE
+                ?
+                Label : CONDITION
+                  >=
+                  Label : LEFT
+                    $c
+                  Label : RIGHT
+                    $d
+                Label : ELSE
+                  'f'
+                Label : THEN
+                  'e'
+            Label : ARGUMENT
+              'g'

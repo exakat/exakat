@@ -1,31 +1,28 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'b' :  /**/  
               Label : CASE
                 'b'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   require
-                  Label : ARGUMENTS
-                    )
-                    Label : ARGUMENT
-                      (
-                      Label : CODE
-                        'c.php'
+                  Label : ARGUMENT
+                    (
+                    Label : CODE
+                      'c.php'
                   Label : NAME
                     require
           Label : NAME

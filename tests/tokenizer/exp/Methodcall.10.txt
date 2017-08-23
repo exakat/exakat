@@ -1,73 +1,60 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Methodcall.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               B
           Label : OBJECT
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             G
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : METHOD
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                H
+                Label : ARGUMENT
+                  'I'
+                Label : NAME
                   H
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'I'
-                  Label : NAME
-                    H
-                Label : OBJECT
-                  $d
+              Label : OBJECT
+                $d
             Label : NAME
               G
           Label : OBJECT
             ->
             Label : METHOD
               E
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'F'
+              Label : ARGUMENT
+                'F'
               Label : NAME
                 E
             Label : OBJECT
               ->
               Label : METHOD
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    D
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
                       D
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        D
-                    Label : OBJECT
-                      $c
+                  Label : OBJECT
+                    $c
                 Label : NAME
                   C
               Label : OBJECT

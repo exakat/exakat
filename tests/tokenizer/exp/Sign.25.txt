@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -26,19 +25,19 @@ Label : PROJECT
                       'd'
                     Label : VARIABLE
                       ->
+                      Label : MEMBER
+                        c
                       Label : OBJECT
                         $b
-                      Label : PROPERTY
-                        c
                   Label : RIGHT
                     [
                     Label : INDEX
                       'g'
                     Label : VARIABLE
                       ->
+                      Label : MEMBER
+                        f
                       Label : OBJECT
                         $e
-                      Label : PROPERTY
-                        f
               Label : RIGHT
                 2

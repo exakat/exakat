@@ -1,158 +1,139 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.76.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'B'
-                Label : VALUE
-                  ::
-                  Label : CLASS
-                    C
-                  Label : METHOD
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'B'
+              Label : VALUE
+                ::
+                Label : CLASS
+                  C
+                Label : METHOD
+                  D
+                  Label : ARGUMENT
+                    'E'
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      F
+                    Label : CONSTANT
+                      G
+                  Label : ARGUMENT
+                    H
+                  Label : NAME
                     D
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'E'
-                      Label : ARGUMENT
-                        ::
-                        Label : CLASS
-                          F
-                        Label : CONSTANT
-                          G
-                      Label : ARGUMENT
-                        H
-                    Label : NAME
-                      D
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'I'
-                Label : VALUE
-                  ?
-                  Label : CONDITION
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'I'
+              Label : VALUE
+                ?
+                Label : CONDITION
+                  isset
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'J'
+                    Label : VARIABLE
+                      $b
+                  Label : NAME
                     isset
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'J'
-                        Label : VARIABLE
-                          $b
-                    Label : NAME
-                      isset
-                  Label : ELSE
-                    L
-                  Label : THEN
-                    K
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'M'
-                Label : VALUE
+                Label : ELSE
+                  L
+                Label : THEN
+                  K
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'M'
+              Label : VALUE
+                ::
+                Label : CLASS
+                  N
+                Label : METHOD
+                  O
+                  Label : NAME
+                    O
+                  Label : ARGUMENT
+                    'P'
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      Q
+                    Label : CONSTANT
+                      R
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'S'
+              Label : VALUE
+                T
+                Label : ARGUMENT
                   ::
                   Label : CLASS
-                    N
+                    U
                   Label : METHOD
-                    O
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'P'
-                      Label : ARGUMENT
-                        ::
-                        Label : CLASS
-                          Q
-                        Label : CONSTANT
-                          R
+                    V
                     Label : NAME
-                      O
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'S'
-                Label : VALUE
-                  T
-                  Label : ARGUMENTS
-                    (
+                      V
+                    Label : ARGUMENT
+                      'W'
                     Label : ARGUMENT
                       ::
                       Label : CLASS
-                        U
-                      Label : METHOD
-                        V
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'W'
-                          Label : ARGUMENT
-                            ::
-                            Label : CLASS
-                              X
-                            Label : CONSTANT
-                              Y
-                        Label : NAME
-                          V
-                  Label : NAME
-                    T
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'Z'
-                Label : VALUE
-                  ?
-                  Label : CONDITION
-                    AA
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'AB'
-                        Label : VARIABLE
-                          $c
-                    Label : NAME
-                      AA
-                  Label : ELSE
+                        X
+                      Label : CONSTANT
+                        Y
+                Label : NAME
+                  T
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'Z'
+              Label : VALUE
+                ?
+                Label : CONDITION
+                  AA
+                  Label : ARGUMENT
                     [
                     Label : INDEX
-                      'AF'
+                      'AB'
                     Label : VARIABLE
-                      $e
-                  Label : THEN
+                      $c
+                  Label : NAME
+                    AA
+                Label : ELSE
+                  [
+                  Label : INDEX
+                    'AF'
+                  Label : VARIABLE
+                    $e
+                Label : THEN
+                  AC
+                  Label : NAME
                     AC
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        0
-                      Label : ARGUMENT
-                        AD
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            [
-                            Label : INDEX
-                              'AE'
-                            Label : VARIABLE
-                              $d
-                        Label : NAME
-                          AD
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    AD
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'AE'
+                      Label : VARIABLE
+                        $d
                     Label : NAME
-                      AC
+                      AD

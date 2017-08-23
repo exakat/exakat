@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -24,13 +23,11 @@ Label : PROJECT
                     2
               Label : DEFINITION
                 one_identifier
-              Label : DEFINITION, DEFINITION
+              Label : DEFINITION
                 one_identifier
-                Label : DEFINITION
-                  one_identifier
               Label : NAME
                 one_identifier
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -42,13 +39,11 @@ Label : PROJECT
                     2
               Label : DEFINITION
                 \absolute_path
-              Label : DEFINITION, DEFINITION
+              Label : DEFINITION
                 absolute_path
-                Label : DEFINITION
-                  \absolute_path
               Label : NAME
                 absolute_path
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -60,7 +55,7 @@ Label : PROJECT
                     2
               Label : DEFINITION
                 one_identifier3
-              Label : DEFINITION, DEFINITION
+              Label : DEFINITION
                 a1
                 Label : DEFINITION
                   as
@@ -70,7 +65,7 @@ Label : PROJECT
                     one_identifier3
               Label : NAME
                 one_identifier3
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -80,17 +75,17 @@ Label : PROJECT
                     a
                   Label : VALUE
                     2
-              Label : DEFINITION, DEFINITION
+              Label : DEFINITION
                 \a1
               Label : NAME
                 a1
           Label : NAME
             Void
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -102,19 +97,17 @@ Label : PROJECT
                     2
               Label : DEFINITION
                 complex\path
-              Label : DEFINITION, DEFINITION
+              Label : DEFINITION
                 path
-                Label : DEFINITION
-                  complex\path
               Label : NAME
                 path
           Label : NAME
             complex
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -126,35 +119,33 @@ Label : PROJECT
                     2
               Label : DEFINITION
                 \absolute\complex\path2
-              Label : DEFINITION, DEFINITION
+              Label : DEFINITION
                 path2
-                Label : DEFINITION
-                  \absolute\complex\path2
               Label : NAME
                 path2
           Label : NAME
             absolute\complex
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 one_identifier
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 \absolute_path
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 complex\path
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 \absolute\complex\path2
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -162,7 +153,7 @@ Label : PROJECT
                   a1
                 Label : NAME
                   one_identifier3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -170,7 +161,7 @@ Label : PROJECT
                   a2
                 Label : NAME
                   \absolute_path3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -178,7 +169,7 @@ Label : PROJECT
                   a3
                 Label : NAME
                   complex\path3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -186,156 +177,128 @@ Label : PROJECT
                   a4
                 Label : NAME
                   \absolute\complex\path32
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    one_identifier
-                    Label : DEFINITION
-                      one_identifier
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  one_identifier
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    absolute_path
-                    Label : DEFINITION
-                      \absolute_path
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  absolute_path
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    path
-                    Label : DEFINITION
-                      complex\path
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  path
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    path2
-                    Label : DEFINITION
-                      \absolute\complex\path2
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  path2
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    a1
-                    Label : DEFINITION
-                      as
-                      Label : ALIAS
-                        a1
-                      Label : NAME
-                        one_identifier3
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  a1
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a1
+                    Label : NAME
+                      one_identifier3
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    \a1
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  \a1
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    one_identifier3
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  one_identifier3
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    a2
-                    Label : DEFINITION
-                      as
-                      Label : ALIAS
-                        a2
-                      Label : NAME
-                        \absolute_path3
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  a2
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a2
+                    Label : NAME
+                      \absolute_path3
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    a3
-                    Label : DEFINITION
-                      as
-                      Label : ALIAS
-                        a3
-                      Label : NAME
-                        complex\path3
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  a3
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a3
+                    Label : NAME
+                      complex\path3
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    a4
-                    Label : DEFINITION
-                      as
-                      Label : ALIAS
-                        a4
-                      Label : NAME
-                        \absolute\complex\path32
-                  Label : VARIABLE
-                    $x
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  a4
+                  Label : DEFINITION
+                    as
+                    Label : ALIAS
+                      a4
+                    Label : NAME
+                      \absolute\complex\path32
+                Label : VARIABLE
+                  $x
               Label : NAME
                 var_dump
           Label : NAME

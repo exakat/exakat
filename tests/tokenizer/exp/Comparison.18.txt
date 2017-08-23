@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Comparison.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -20,14 +19,12 @@ Label : PROJECT
                   ==
                   Label : LEFT
                     substr
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
-                      Label : ARGUMENT
-                        0
-                      Label : ARGUMENT
-                        1
+                    Label : ARGUMENT
+                      $a
+                    Label : ARGUMENT
+                      0
+                    Label : ARGUMENT
+                      1
                     Label : NAME
                       substr
                   Label : RIGHT
@@ -38,22 +35,18 @@ Label : PROJECT
                     -
                     Label : LEFT
                       substr
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $b
-                        Label : ARGUMENT
-                          2
-                        Label : ARGUMENT
-                          3
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        2
+                      Label : ARGUMENT
+                        3
                       Label : NAME
                         substr
                     Label : RIGHT
                       time
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         time
                   Label : RIGHT
@@ -62,49 +55,41 @@ Label : PROJECT
               ==
               Label : LEFT
                 substr
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                  Label : ARGUMENT
-                    4
-                  Label : ARGUMENT
-                    5
+                Label : ARGUMENT
+                  $c
+                Label : ARGUMENT
+                  4
+                Label : ARGUMENT
+                  5
                 Label : NAME
                   substr
               Label : RIGHT
                 substr
-                Label : ARGUMENTS
-                  (
+                Label : ARGUMENT
+                  md5
                   Label : ARGUMENT
-                    md5
-                    Label : ARGUMENTS
-                      (
+                    .
+                    Label : CONCAT
+                      substr
+                      Label : NAME
+                        substr
                       Label : ARGUMENT
-                        .
-                        Label : CONCAT
-                          substr
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $d
-                            Label : ARGUMENT
-                              6
-                          Label : NAME
-                            substr
-                        Label : CONCAT
-                          $e
-                    Label : NAME
-                      md5
-                  Label : ARGUMENT
-                    7
-                  Label : ARGUMENT
-                    8
+                        $d
+                      Label : ARGUMENT
+                        6
+                    Label : CONCAT
+                      $e
+                  Label : NAME
+                    md5
+                Label : ARGUMENT
+                  7
+                Label : ARGUMENT
+                  8
                 Label : NAME
                   substr
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $x
@@ -112,7 +97,7 @@ Label : PROJECT
                 3
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $x

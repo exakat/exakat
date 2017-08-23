@@ -1,86 +1,75 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.73.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           k
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-            Label : ARGUMENT
-              $b
-            Label : ARGUMENT
-              {
-              Label : INDEX
-                $i
-              Label : VARIABLE
-                $c
+          Label : ARGUMENT
+            $a
+          Label : ARGUMENT
+            $b
+          Label : ARGUMENT
+            {
+            Label : INDEX
+              $i
+            Label : VARIABLE
+              $c
           Label : NAME
             k
-        Label : ELEMENT
+        Label : EXPRESSION
           l
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $d
-            Label : ARGUMENT
-              {
-              Label : INDEX
-                $i
-              Label : VARIABLE
-                $e
           Label : NAME
             l
-        Label : ELEMENT
+          Label : ARGUMENT
+            $d
+          Label : ARGUMENT
+            {
+            Label : INDEX
+              $i
+            Label : VARIABLE
+              $e
+        Label : EXPRESSION
           m
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              {
-              Label : INDEX
-                $i
-              Label : VARIABLE
-                $f
-            Label : ARGUMENT
-              $g
           Label : NAME
             m
-        Label : ELEMENT
+          Label : ARGUMENT
+            {
+            Label : INDEX
+              $i
+            Label : VARIABLE
+              $f
+          Label : ARGUMENT
+            $g
+        Label : EXPRESSION
           n
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-            Label : ARGUMENT
-              {
-              Label : INDEX
-                $i
-              Label : VARIABLE
-                $h
-            Label : ARGUMENT
-              $j
+          Label : ARGUMENT
+            $b
+          Label : ARGUMENT
+            {
+            Label : INDEX
+              $i
+            Label : VARIABLE
+              $h
+          Label : ARGUMENT
+            $j
           Label : NAME
             n
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              $a
-            Label : ARGUMENT
-              $b
-            Label : ARGUMENT
-              {
-              Label : INDEX
-                $i
-              Label : VARIABLE
-                $c
+          Label : ARGUMENT
+            $a
+          Label : ARGUMENT
+            $b
+          Label : ARGUMENT
+            {
+            Label : INDEX
+              $i
+            Label : VARIABLE
+              $c
           Label : NAME
             echo

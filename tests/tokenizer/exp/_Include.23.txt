@@ -1,21 +1,58 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Include.23.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             "a"
           Label : CONCAT
             require_once
-            Label : ARGUMENTS
-              "b"
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                (
+                Label : CODE
+                  .
+                  Label : CONCAT
+                    B
+                  Label : CONCAT
+                    'C'
+              Label : CONCAT
+                "b"
+            Label : NAME
+              require_once
+        Label : EXPRESSION
+          ?
+          Label : CONDITION
+            $c
+          Label : ELSE
+            .
+            Label : CONCAT
+              "a"
+            Label : CONCAT
+              require
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  B
+                Label : CONCAT
+                  'C'
+                Label : CONCAT
+                  "b"
+              Label : NAME
+                require
+          Label : THEN
+            .
+            Label : CONCAT
+              "a"
+            Label : CONCAT
+              include
               Label : ARGUMENT
                 .
                 Label : CONCAT
@@ -28,49 +65,5 @@ Label : PROJECT
                       'C'
                 Label : CONCAT
                   "b"
-            Label : NAME
-              require_once
-        Label : ELEMENT
-          ?
-          Label : CONDITION
-            $c
-          Label : ELSE
-            .
-            Label : CONCAT
-              "a"
-            Label : CONCAT
-              require
-              Label : ARGUMENTS
-                "b"
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    B
-                  Label : CONCAT
-                    'C'
-                  Label : CONCAT
-                    "b"
-              Label : NAME
-                require
-          Label : THEN
-            .
-            Label : CONCAT
-              "a"
-            Label : CONCAT
-              include
-              Label : ARGUMENTS
-                "b"
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    (
-                    Label : CODE
-                      .
-                      Label : CONCAT
-                        B
-                      Label : CONCAT
-                        'C'
-                  Label : CONCAT
-                    "b"
               Label : NAME
                 include

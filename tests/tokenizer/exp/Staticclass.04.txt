@@ -1,73 +1,64 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticclass.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
-            static
-          Label : DEFINITION, DEFINITION
             self
+          Label : DEFINITION
+            static
           Label : METHOD
             y
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      ::
-                      Label : CLASS
-                        parent
-                      Label : CLASS
-                        class
-                    Label : CONCAT
-                      "\n"
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    ::
+                    Label : CLASS
+                      parent
+                    Label : CLASS
+                      class
+                  Label : CONCAT
+                    "\n"
                 Label : NAME
                   echo
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      ::
-                      Label : CLASS
-                        self
-                      Label : CLASS
-                        class
-                    Label : CONCAT
-                      "\n"
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    ::
+                    Label : CLASS
+                      self
+                    Label : CLASS
+                      class
+                  Label : CONCAT
+                    "\n"
                 Label : NAME
                   echo
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      ::
-                      Label : CLASS
-                        static
-                      Label : CLASS
-                        class
-                    Label : CONCAT
-                      "\n"
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    ::
+                    Label : CLASS
+                      static
+                    Label : CLASS
+                      class
+                  Label : CONCAT
+                    "\n"
                 Label : NAME
                   echo
             Label : NAME

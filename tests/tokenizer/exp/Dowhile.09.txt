@@ -1,28 +1,27 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Dowhile.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           do
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               for
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $c
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   <
                   Label : LEFT
                     $a
@@ -30,13 +29,13 @@ Label : PROJECT
                     10
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $a
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $a

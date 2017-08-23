@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.87.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
@@ -22,15 +21,13 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     B
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       B
                   Label : OBJECT
                     $b
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 ?
@@ -48,131 +45,125 @@ Label : PROJECT
                       <
                       Label : LEFT
                         C
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            ->
-                            Label : METHOD
+                        Label : ARGUMENT
+                          ->
+                          Label : METHOD
+                            F
+                            Label : ARGUMENT
+                              Void
+                            Label : NAME
                               F
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  Void
+                          Label : OBJECT
+                            ::
+                            Label : CLASS
+                              D
+                            Label : METHOD
+                              E
+                              Label : ARGUMENT
+                                Void
                               Label : NAME
-                                F
-                            Label : OBJECT
-                              ::
-                              Label : CLASS
-                                D
-                              Label : METHOD
                                 E
-                                Label : ARGUMENTS
-                                  (
-                                  Label : ARGUMENT
-                                    Void
-                                Label : NAME
-                                  E
                         Label : NAME
                           C
                       Label : RIGHT
                         $d
-            Label : ELEMENT
+            Label : EXPRESSION
               break
               Label : BREAK
                 Void
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 1
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   $a
-                Label : ELEMENT
+                Label : EXPRESSION
                   $b
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               foreach
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   $a
-                Label : ELEMENT
+                Label : EXPRESSION
                   $b
               Label : SOURCE
                 $a
               Label : VALUE
                 $b
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               switch
               Label : CASES
                  /**/ 
-                Label : ELEMENT
+                Label : EXPRESSION
                   case 'a' :  /**/  
                   Label : CASE
                     'a'
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $a
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $b
-                Label : ELEMENT
+                Label : EXPRESSION
                   case 'b' :  /**/  
                   Label : CASE
                     'b'
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $a
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $b
-                Label : ELEMENT
+                Label : EXPRESSION
                   default
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $a
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $b
               Label : NAME
                 $a
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               for
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   $a
-                Label : ELEMENT
+                Label : EXPRESSION
                   $b
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $i
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   --
                   Label : POSTPLUSPLUS
                     $i
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   $i
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   $a
-                Label : ELEMENT
+                Label : EXPRESSION
                   $b
               Label : CONDITION
                 $a

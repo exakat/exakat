@@ -1,33 +1,30 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Methodcall.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : SOURCE
             ->
             Label : METHOD
               c
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 c
             Label : OBJECT
               ->
+              Label : MEMBER
+                b
               Label : OBJECT
                 $a
-              Label : PROPERTY
-                b
           Label : VALUE
             $d

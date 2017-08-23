@@ -1,17 +1,16 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Throw.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           throw
           Label : THROW
             $x
-        Label : ELEMENT
+        Label : EXPRESSION
           throw
           Label : THROW
             (

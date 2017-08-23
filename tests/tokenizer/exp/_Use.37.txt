@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.37.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
           Label : DEFINITION
             HelloWorld
@@ -16,18 +15,14 @@ Label : PROJECT
             HelloWorld
           Label : METHOD
             sayHello
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    'Hello World!'
+                Label : ARGUMENT
+                  'Hello World!'
                 Label : NAME
                   echo
             Label : NAME
@@ -36,7 +31,7 @@ Label : PROJECT
               public
           Label : NAME
             HelloWorld
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             MyClass1
@@ -44,7 +39,7 @@ Label : PROJECT
             use
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 as
                 Label : AS
                   Void
@@ -54,7 +49,7 @@ Label : PROJECT
                   protected
             Label : USE
               HelloWorld
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             MyClass2
@@ -62,7 +57,7 @@ Label : PROJECT
             use
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 as
                 Label : AS
                   myPrivateHello

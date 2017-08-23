@@ -1,124 +1,101 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.45.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'a'
-            Label : ARGUMENT
-              0
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'a'
+          Label : ARGUMENT
+            0
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'b'
-            Label : ARGUMENT
-              0
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'b'
+          Label : ARGUMENT
+            0
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'c'
-            Label : ARGUMENT
-              4
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'c'
+          Label : ARGUMENT
+            4
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'd'
-            Label : ARGUMENT
-              1
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'd'
+          Label : ARGUMENT
+            1
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'e'
-            Label : ARGUMENT
-              2
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'e'
+          Label : ARGUMENT
+            2
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'f'
-            Label : ARGUMENT
-              3
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'f'
+          Label : ARGUMENT
+            3
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'g'
-            Label : ARGUMENT
-              4
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'g'
+          Label : ARGUMENT
+            4
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'h'
-            Label : ARGUMENT
-              5
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'h'
+          Label : ARGUMENT
+            5
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'i'
-            Label : ARGUMENT
-              6
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'i'
+          Label : ARGUMENT
+            6
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'j'
-            Label : ARGUMENT
-              7
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'j'
+          Label : ARGUMENT
+            7
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'k'
-            Label : ARGUMENT
-              8
           Label : NAME
             define
-        Label : ELEMENT
+          Label : ARGUMENT
+            'k'
+          Label : ARGUMENT
+            8
+        Label : EXPRESSION
           class
           Label : NAME
             dbstuff

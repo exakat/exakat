@@ -1,95 +1,86 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.86.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ->
+            Label : MEMBER
+              C
             Label : OBJECT
               [
               Label : INDEX
                 'B'
               Label : VARIABLE
                 $a
-            Label : PROPERTY
-              C
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    D
-                  Label : METHOD
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  D
+                Label : METHOD
+                  E
+                  Label : ARGUMENT
+                    F
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      G
+                    Label : METHOD
+                      H
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'K'
+                        Label : VARIABLE
+                          [
+                          Label : INDEX
+                            'J'
+                          Label : VARIABLE
+                            ::
+                            Label : CLASS
+                              I
+                            Label : MEMBER
+                              $b
+                      Label : ARGUMENT
+                        'L'
+                      Label : ARGUMENT
+                        M
+                      Label : NAME
+                        H
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'N'
+                      Label : VALUE
+                        'O'
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'P'
+                      Label : VALUE
+                        'Q'
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'R'
+                      Label : VALUE
+                        'S'
+                  Label : NAME
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        F
-                      Label : ARGUMENT
-                        ::
-                        Label : CLASS
-                          G
-                        Label : METHOD
-                          H
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              [
-                              Label : INDEX
-                                'K'
-                              Label : VARIABLE
-                                [
-                                Label : INDEX
-                                  'J'
-                                Label : VARIABLE
-                                  ::
-                                  Label : CLASS
-                                    I
-                                  Label : PROPERTY
-                                    $b
-                            Label : ARGUMENT
-                              'L'
-                            Label : ARGUMENT
-                              M
-                          Label : NAME
-                            H
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'N'
-                            Label : VALUE
-                              'O'
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'P'
-                            Label : VALUE
-                              'Q'
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'R'
-                            Label : VALUE
-                              'S'
-                    Label : NAME
-                      E
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               S
-    Label : ELEMENT
+    Label : EXPRESSION
       T

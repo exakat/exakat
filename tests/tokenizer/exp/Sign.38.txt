@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.38.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $z
@@ -17,81 +16,63 @@ Label : PROJECT
               *
               Label : LEFT
                 sin
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $a
+                Label : ARGUMENT
+                  $a
                 Label : NAME
                   sin
               Label : RIGHT
                 sin
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $b
+                Label : ARGUMENT
+                  $b
                 Label : NAME
                   sin
             Label : RIGHT
               *
               Label : LEFT
                 cos
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
+                Label : ARGUMENT
+                  $c
                 Label : NAME
                   cos
               Label : RIGHT
                 *
                 Label : LEFT
                   cos
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $d
+                  Label : ARGUMENT
+                    $d
                   Label : NAME
                     cos
                 Label : RIGHT
                   cos
-                  Label : ARGUMENTS
-                    (
+                  Label : ARGUMENT
+                    deg2rad
                     Label : ARGUMENT
-                      deg2rad
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          abs
-                          Label : ARGUMENTS
-                            (
+                      abs
+                      Label : ARGUMENT
+                        -
+                        Label : LEFT
+                          ->
+                          Label : METHOD
+                            d
                             Label : ARGUMENT
-                              -
-                              Label : LEFT
-                                ->
-                                Label : METHOD
-                                  d
-                                  Label : ARGUMENTS
-                                    (
-                                    Label : ARGUMENT
-                                      Void
-                                  Label : NAME
-                                    d
-                                Label : OBJECT
-                                  $c
-                              Label : RIGHT
-                                ->
-                                Label : METHOD
-                                  getX
-                                  Label : ARGUMENTS
-                                    (
-                                    Label : ARGUMENT
-                                      Void
-                                  Label : NAME
-                                    getX
-                                Label : OBJECT
-                                  $e
-                          Label : NAME
-                            abs
+                              Void
+                            Label : NAME
+                              d
+                          Label : OBJECT
+                            $c
+                        Label : RIGHT
+                          ->
+                          Label : METHOD
+                            getX
+                            Label : ARGUMENT
+                              Void
+                            Label : NAME
+                              getX
+                          Label : OBJECT
+                            $e
                       Label : NAME
-                        deg2rad
+                        abs
+                    Label : NAME
+                      deg2rad
                   Label : NAME
                     cos

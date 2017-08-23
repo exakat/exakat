@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen2.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -18,10 +17,8 @@ Label : PROJECT
                 ->
                 Label : METHOD
                   B
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'C'
+                  Label : ARGUMENT
+                    'C'
                   Label : NAME
                     B
                 Label : OBJECT
@@ -30,18 +27,16 @@ Label : PROJECT
                 ->
                 Label : METHOD
                   B
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'F'
+                  Label : ARGUMENT
+                    'F'
                   Label : NAME
                     B
                 Label : OBJECT
                   ->
+                  Label : MEMBER
+                    D
                   Label : OBJECT
                     $this
-                  Label : PROPERTY
-                    D
             Label : RIGHT
               &&
               Label : LEFT
@@ -50,10 +45,8 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     B
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'H'
+                    Label : ARGUMENT
+                      'H'
                     Label : NAME
                       B
                   Label : OBJECT
@@ -62,43 +55,35 @@ Label : PROJECT
                 <=
                 Label : LEFT
                   I
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      ->
-                      Label : METHOD
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      B
+                      Label : ARGUMENT
+                        'K'
+                      Label : NAME
                         B
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'K'
-                        Label : NAME
-                          B
-                      Label : OBJECT
-                        $b
+                    Label : OBJECT
+                      $b
                   Label : NAME
                     I
                 Label : RIGHT
                   I
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      ->
-                      Label : METHOD
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      M
+                      Label : ARGUMENT
+                        'N'
+                      Label : NAME
                         M
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'N'
-                        Label : NAME
-                          M
-                      Label : OBJECT
-                        $c
+                    Label : OBJECT
+                      $c
                   Label : NAME
                     I
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               (
               Label : CODE
                 ?
@@ -108,10 +93,8 @@ Label : PROJECT
                     ->
                     Label : METHOD
                       B
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'P'
+                      Label : ARGUMENT
+                        'P'
                       Label : NAME
                         B
                     Label : OBJECT
@@ -128,10 +111,8 @@ Label : PROJECT
                         ->
                         Label : METHOD
                           B
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'P'
+                          Label : ARGUMENT
+                            'P'
                           Label : NAME
                             B
                         Label : OBJECT
@@ -148,7 +129,7 @@ Label : PROJECT
                   ++
                   Label : POSTPLUSPLUS
                     $d
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ===
@@ -158,7 +139,7 @@ Label : PROJECT
               1
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               (
               Label : CODE
                 ++

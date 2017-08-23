@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Label.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -18,37 +17,35 @@ Label : PROJECT
               $d
             Label : VARIABLE
               ->
+              Label : MEMBER
+                c
               Label : OBJECT
                 $b
-              Label : PROPERTY
-                c
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $e
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             F
-        Label : ELEMENT
+        Label : EXPRESSION
           --
           Label : PREPLUSPLUS
             $g
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $h
           Label : RIGHT
             strlen
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $i
+            Label : ARGUMENT
+              $i
             Label : NAME
               strlen
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $m
@@ -56,10 +53,8 @@ Label : PROJECT
             ->
             Label : METHOD
               k
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $l
+              Label : ARGUMENT
+                $l
               Label : NAME
                 k
             Label : OBJECT

@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Assignation.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           >>=
           Label : LEFT
             $a
           Label : RIGHT
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           >>=
           Label : LEFT
             $a
@@ -24,7 +23,7 @@ Label : PROJECT
               $b
             Label : RIGHT
               $c
-        Label : ELEMENT
+        Label : EXPRESSION
           >>=
           Label : LEFT
             $a

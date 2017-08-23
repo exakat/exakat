@@ -1,96 +1,77 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticproperty.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             $b
           Label : METHOD
             $c
-            Label : ARGUMENTS
-              (
+            Label : ARGUMENT
+              array
               Label : ARGUMENT
-                array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      ->
-                      Label : METHOD
-                        B
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          B
-                      Label : OBJECT
-                        $this
-                    Label : VALUE
-                      ->
-                      Label : METHOD
-                        C
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          C
-                      Label : OBJECT
-                        $this
-              Label : ARGUMENT
-                array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    D
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'E'
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
-                          F
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            F
-                        Label : OBJECT
-                          $this
+                =>
+                Label : INDEX
+                  ->
+                  Label : METHOD
+                    B
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
-                      D
+                      B
+                  Label : OBJECT
+                    $this
+                Label : VALUE
+                  ->
+                  Label : METHOD
+                    C
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
+                      C
+                  Label : OBJECT
+                    $this
+            Label : ARGUMENT
+              array
               Label : ARGUMENT
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'H'
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      F
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        F
-                    Label : OBJECT
-                      $this
-                  Label : ARGUMENT
-                    $d
                 Label : NAME
                   D
+                Label : ARGUMENT
+                  'E'
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    F
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
+                      F
+                  Label : OBJECT
+                    $this
+            Label : ARGUMENT
+              D
+              Label : ARGUMENT
+                'H'
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  F
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
+                    F
+                Label : OBJECT
+                  $this
+              Label : ARGUMENT
+                $d
+              Label : NAME
+                D
             Label : NAME
               $c

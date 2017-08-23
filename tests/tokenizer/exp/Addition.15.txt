@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Addition.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -18,17 +17,13 @@ Label : PROJECT
               1
             Label : RIGHT
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
+              Label : ARGUMENT
+                substr
+                Label : NAME
                   substr
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                    Label : ARGUMENT
-                      1
-                  Label : NAME
-                    substr
+                Label : ARGUMENT
+                  $c
+                Label : ARGUMENT
+                  1
               Label : NAME
                 b

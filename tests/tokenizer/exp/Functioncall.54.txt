@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.54.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -22,67 +21,55 @@ Label : PROJECT
                   !
                   Label : NOT
                     isset
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $b
+                    Label : ARGUMENT
+                      $b
                     Label : NAME
                       isset
                 Label : RIGHT
                   empty
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
+                  Label : ARGUMENT
+                    $c
                   Label : NAME
                     empty
             Label : ELSE
               $d
             Label : THEN
               'B'
-        Label : ELEMENT
+        Label : EXPRESSION
           C
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                'D'
-              Label : CONCAT
-                $e
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              'D'
+            Label : CONCAT
+              $e
           Label : NAME
             C
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            'E'
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
-                  &&
-                  Label : LEFT
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              (
+              Label : CODE
+                &&
+                Label : LEFT
+                  isset
+                  Label : ARGUMENT
+                    $f
+                  Label : NAME
                     isset
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $f
+                Label : RIGHT
+                  !
+                  Label : NOT
+                    empty
+                    Label : ARGUMENT
+                      $g
                     Label : NAME
-                      isset
-                  Label : RIGHT
-                    !
-                    Label : NOT
                       empty
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $g
-                      Label : NAME
-                        empty
-              Label : ELSE
-                'E'
-              Label : THEN
-                $h
+            Label : ELSE
+              'E'
+            Label : THEN
+              $h
           Label : NAME
             print

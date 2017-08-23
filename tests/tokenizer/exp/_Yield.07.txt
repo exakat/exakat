@@ -1,32 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yield.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 yield
                 Label : YIELD
                   Void
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
               Label : CONDITION
                 yield
@@ -38,34 +35,28 @@ Label : PROJECT
                     null
           Label : DEFINITION
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               B
           Label : NAME
             B
           Label : RETURNTYPE
             Generator
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $c
+              Label : ARGUMENT
+                $c
               Label : NAME
                 var_dump
           Label : SOURCE
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               B
           Label : VALUE

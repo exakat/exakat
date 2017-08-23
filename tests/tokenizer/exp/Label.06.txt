@@ -1,72 +1,71 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Label.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             A
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             D
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             E
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $e
           Label : RIGHT
             4
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             F
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $f
           Label : RIGHT
             5
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             G
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $g

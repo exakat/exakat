@@ -1,30 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Block.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           {}
-          Label : ELEMENT
+          Label : EXPRESSION
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 1
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $a
-        Label : ELEMENT
+        Label : EXPRESSION
           {}
-          Label : ELEMENT
+          Label : EXPRESSION
             =
             Label : LEFT
               $d
@@ -32,7 +31,7 @@ Label : PROJECT
               ++
               Label : POSTPLUSPLUS
                 $e
-          Label : ELEMENT
+          Label : EXPRESSION
             +=
             Label : LEFT
               [

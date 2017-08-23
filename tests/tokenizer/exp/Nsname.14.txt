@@ -1,32 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Nsname.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             TRUE
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x2
           Label : RIGHT
             \TRUE
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x3
           Label : RIGHT
             a\TRUE
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x4

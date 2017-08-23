@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.27.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             B
@@ -15,7 +14,7 @@ Label : PROJECT
             use
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 as
                 Label : AS
                   E
@@ -27,7 +26,7 @@ Label : PROJECT
             use
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 as
                 Label : AS
                   E
@@ -41,7 +40,7 @@ Label : PROJECT
             use
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 as
                 Label : AS
                   E
@@ -51,9 +50,9 @@ Label : PROJECT
               F2\F3
             Label : USE
               G2\G3\G4
-        Label : ELEMENT
+        Label : EXPRESSION
           {}
-          Label : ELEMENT
+          Label : EXPRESSION
             ++
             Label : POSTPLUSPLUS
               $a

@@ -1,34 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             1
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 true
-        Label : ELEMENT
+        Label : EXPRESSION
           require_once
-          Label : ARGUMENTS
-            )
+          Label : ARGUMENT
+            b
             Label : ARGUMENT
+              'c'
+            Label : NAME
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'c'
-              Label : NAME
-                b
           Label : NAME
             require_once

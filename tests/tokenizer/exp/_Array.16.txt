@@ -1,34 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Array.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                1
-              Label : VARIABLE
-                '123'
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              '123'
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                2
-              Label : VARIABLE
-                '456'
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              2
+            Label : VARIABLE
+              '456'
           Label : NAME
             print

@@ -1,42 +1,41 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Instanceof.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               instanceof
               Label : CLASS
                 B
               Label : VARIABLE
                 $a
-            Label : ELEMENT
+            Label : EXPRESSION
               instanceof
               Label : CLASS
                 \D
               Label : VARIABLE
                 $c
-            Label : ELEMENT
+            Label : EXPRESSION
               instanceof
               Label : CLASS
                 F\G\H
               Label : VARIABLE
                 $e
-            Label : ELEMENT
+            Label : EXPRESSION
               instanceof
               Label : CLASS
                 \F1\G1\H1
               Label : VARIABLE
                 $e1
-            Label : ELEMENT
+            Label : EXPRESSION
               instanceof
               Label : CLASS
                 namespace\J\K

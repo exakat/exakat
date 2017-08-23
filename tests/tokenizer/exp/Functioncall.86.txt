@@ -1,92 +1,85 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.86.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             x
           Label : PPP
             private
             Label : PPP
-              $x
-            Label : PPP
               $y
+            Label : PPP
+              $x
             Label : PPP
               $z
             Label : PRIVATE
               private
-        Label : ELEMENT
+        Label : EXPRESSION
           array
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'C'
-              Label : VALUE
-                function
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                  Label : ARGUMENT
-                    $d
-                Label : BLOCK
-                  {}
-                  Label : ELEMENT
-                    global
-                    Label : GLOBAL
-                      $e
-                    Label : GLOBAL
-                      $f
-                  Label : ELEMENT
-                    return
-                    Label : RETURN
-                      [
-                      Label : INDEX
-                        .
-                        Label : CONCAT
-                          'D'
-                        Label : CONCAT
-                          (
-                          Label : CODE
-                            ?
-                            Label : CONDITION
-                              empty
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  [
-                                  Label : INDEX
-                                    'E'
-                                  Label : VARIABLE
-                                    $c
-                              Label : NAME
-                                empty
-                            Label : ELSE
+          Label : ARGUMENT
+            =>
+            Label : INDEX
+              'C'
+            Label : VALUE
+              function
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                $d
+              Label : BLOCK
+                {}
+                Label : EXPRESSION
+                  global
+                  Label : GLOBAL
+                    $e
+                  Label : GLOBAL
+                    $f
+                Label : EXPRESSION
+                  return
+                  Label : RETURN
+                    [
+                    Label : INDEX
+                      .
+                      Label : CONCAT
+                        'D'
+                      Label : CONCAT
+                        (
+                        Label : CODE
+                          ?
+                          Label : CONDITION
+                            empty
+                            Label : ARGUMENT
                               [
                               Label : INDEX
-                                [
-                                Label : INDEX
-                                  'E'
-                                Label : VARIABLE
-                                  $c
+                                'E'
                               Label : VARIABLE
-                                [
-                                Label : INDEX
-                                  'G'
-                                Label : VARIABLE
-                                  $f
-                            Label : THEN
-                              'F'
-                      Label : VARIABLE
-                        $e
-            Label : ARGUMENT
-              1
+                                $c
+                            Label : NAME
+                              empty
+                          Label : ELSE
+                            [
+                            Label : INDEX
+                              [
+                              Label : INDEX
+                                'E'
+                              Label : VARIABLE
+                                $c
+                            Label : VARIABLE
+                              [
+                              Label : INDEX
+                                'G'
+                              Label : VARIABLE
+                                $f
+                          Label : THEN
+                            'F'
+                    Label : VARIABLE
+                      $e
+          Label : ARGUMENT
+            1

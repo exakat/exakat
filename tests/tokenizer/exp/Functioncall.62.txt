@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.62.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -18,17 +17,15 @@ Label : PROJECT
               $a
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $c
-              Label : ARGUMENT
-                >
-                Label : LEFT
-                  $d
-                Label : RIGHT
-                  0
-              Label : ARGUMENT
-                $e
-              Label : ARGUMENT
-                $f
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              >
+              Label : LEFT
+                $d
+              Label : RIGHT
+                0
+            Label : ARGUMENT
+              $e
+            Label : ARGUMENT
+              $f

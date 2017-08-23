@@ -1,26 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Assignation.27.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              a
             Label : OBJECT
               $this
-            Label : PROPERTY
-              a
           Label : RIGHT
             ++
             Label : PREPLUSPLUS
               ::
               Label : CLASS
                 self
-              Label : PROPERTY
+              Label : MEMBER
                 $b

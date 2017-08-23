@@ -1,18 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Include.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           require_once
-          Label : ARGUMENTS
+          Label : ARGUMENT
             "literal"
-            Label : ARGUMENT
-              "literal"
           Label : NAME
             require_once

@@ -1,25 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.30.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : FUNCTION
             function
           Label : USE
             FooLibrary\Bar\Baz\ClassNonAbsNonGroupedNonAs
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : FUNCTION
             function
           Label : USE
             \FooLibrary\Bar\Baz\ClassAbsNonGroupedNonAs
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : FUNCTION
             function
@@ -29,7 +28,7 @@ Label : PROJECT
               A1
             Label : NAME
               FooLibrary\Bar\Baz\ClassNonAbsNonGroupedAs
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : FUNCTION
             function
@@ -39,17 +38,17 @@ Label : PROJECT
               A2
             Label : NAME
               \FooLibrary\Bar\Baz\ClassAbsNonGroupedAs
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : FUNCTION
             function
           Label : GROUPUSE
             FooLibrary\Bar\Baz
           Label : USE
+            ClassNonAbsGroupedNonAs
+          Label : USE
             as
             Label : AS
               A3
             Label : NAME
               ClassNonAbsGroupedAs
-          Label : USE
-            ClassNonAbsGroupedNonAs

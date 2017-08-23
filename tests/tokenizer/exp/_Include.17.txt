@@ -1,42 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Include.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a'
-                Label : VALUE
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'a'
+              Label : VALUE
+                require
+                Label : ARGUMENT
+                  (
+                  Label : CODE
+                    .
+                    Label : CONCAT
+                      dirname
+                      Label : ARGUMENT
+                        __FILE__
+                      Label : NAME
+                        dirname
+                    Label : CONCAT
+                      'c'
+                Label : NAME
                   require
-                  Label : ARGUMENTS
-                    )
-                    Label : ARGUMENT
-                      (
-                      Label : CODE
-                        .
-                        Label : CONCAT
-                          dirname
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              __FILE__
-                          Label : NAME
-                            dirname
-                        Label : CONCAT
-                          'c'
-                  Label : NAME
-                    require

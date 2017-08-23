@@ -1,42 +1,37 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.68.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                .
-                Label : CONCAT
-                  'F'
-                Label : CONCAT
-                  instanceof
-                  Label : CLASS
-                    G
-                  Label : VARIABLE
-                    $b
-              Label : ELSE
-                'I'
-              Label : THEN
-                ->
-                Label : METHOD
-                  H
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    H
-                Label : OBJECT
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              .
+              Label : CONCAT
+                'F'
+              Label : CONCAT
+                instanceof
+                Label : CLASS
+                  G
+                Label : VARIABLE
                   $b
+            Label : ELSE
+              'I'
+            Label : THEN
+              ->
+              Label : METHOD
+                H
+                Label : ARGUMENT
+                  Void
+                Label : NAME
+                  H
+              Label : OBJECT
+                $b
           Label : NAME
             B

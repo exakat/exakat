@@ -1,54 +1,53 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.83.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $x
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $x2
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $c
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $d
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $x2
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $b
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $a

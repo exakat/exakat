@@ -1,25 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Break.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               break
               Label : BREAK
                 1
-            Label : ELEMENT
+            Label : EXPRESSION
               A
           Label : SOURCE
             $as
           Label : VALUE
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

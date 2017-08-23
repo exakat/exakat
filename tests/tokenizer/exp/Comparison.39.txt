@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Comparison.39.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             =
@@ -18,21 +17,19 @@ Label : PROJECT
               ===
               Label : LEFT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'C'
-                  Label : ARGUMENT
-                    $c
                 Label : NAME
                   B
+                Label : ARGUMENT
+                  'C'
+                Label : ARGUMENT
+                  $c
               Label : RIGHT
                 NULL
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               1
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &
@@ -42,17 +39,15 @@ Label : PROJECT
               ===
               Label : LEFT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'C'
-                  Label : ARGUMENT
-                    $c
                 Label : NAME
                   B
+                Label : ARGUMENT
+                  'C'
+                Label : ARGUMENT
+                  $c
               Label : RIGHT
                 NULL
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               2

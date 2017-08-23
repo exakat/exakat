@@ -1,46 +1,39 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.73.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           require_once
-          Label : ARGUMENTS
-            'C'
-            Label : ARGUMENT
-              .
-              Label : CONCAT
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              B
+              Label : ARGUMENT
+                __FILE__
+              Label : NAME
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    __FILE__
-                Label : NAME
-                  B
-              Label : CONCAT
-                'C'
+            Label : CONCAT
+              'C'
           Label : NAME
             require_once
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'E'
+              Label : ARGUMENT
+                'E'
               Label : NAME
                 D
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : NAME
                 F
@@ -52,10 +45,8 @@ Label : PROJECT
                     $a
                   Label : RIGHT
                     array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                 Label : VAR
                   var
               Label : PPP
@@ -66,17 +57,15 @@ Label : PROJECT
                     $b
                   Label : RIGHT
                     array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                 Label : VAR
                   var
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : EXTENDS
                 H
               Label : NAME
                 G
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

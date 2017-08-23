@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Variable.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           do
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 AND
@@ -20,10 +19,8 @@ Label : PROJECT
                   ==
                   Label : LEFT
                     B
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
+                    Label : ARGUMENT
+                      $a
                     Label : NAME
                       B
                   Label : RIGHT
@@ -32,23 +29,21 @@ Label : PROJECT
                   !==
                   Label : LEFT
                     C
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $b
-                      Label : ARGUMENT
-                        "
-                        Label : CONCAT
-                          $c
-                        Label : CONCAT
-                          D
                     Label : NAME
                       C
+                    Label : ARGUMENT
+                      $b
+                    Label : ARGUMENT
+                      "
+                      Label : CONCAT
+                        $c
+                      Label : CONCAT
+                        D
                   Label : RIGHT
                     E
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $d

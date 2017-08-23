@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Var.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             E
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $e
+            Label : ARGUMENT
+              $e
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 for
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     =
                     Label : LEFT
                       [
@@ -32,25 +29,21 @@ Label : PROJECT
                         $h
                     Label : RIGHT
                       H
-                      Label : ARGUMENTS
-                        (
+                      Label : ARGUMENT
+                        I
                         Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'G'
+                          Label : VARIABLE
+                            $i
+                        Label : NAME
                           I
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              [
-                              Label : INDEX
-                                'G'
-                              Label : VARIABLE
-                                $i
-                          Label : NAME
-                            I
                       Label : NAME
                         H
                 Label : FINAL
                   ;
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     <
                     Label : LEFT
                       $f
@@ -62,19 +55,19 @@ Label : PROJECT
                         $g
                 Label : INCREMENT
                   ;
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     ++
                     Label : POSTPLUSPLUS
                       $f
                 Label : INIT
                   ;
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     =
                     Label : LEFT
                       $f
                     Label : RIGHT
                       0
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   $j
@@ -90,10 +83,8 @@ Label : PROJECT
                 $b
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
             Label : PPP
               $a
             Label : VAR

@@ -1,28 +1,27 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Halt.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $y
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           __HALT_COMPILER
-    Label : ELEMENT
+    Label : EXPRESSION
        
 
 ?>

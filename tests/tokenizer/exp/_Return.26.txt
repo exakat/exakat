@@ -1,27 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Return.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             empty
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
+            Label : ARGUMENT
+              $b
             Label : NAME
               empty
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 Void

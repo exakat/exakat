@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Noscream.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           try
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $result
@@ -26,58 +25,48 @@ Label : PROJECT
                       1.0
                     Label : RIGHT
                       0
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 in_array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $result
-                  Label : ARGUMENT
-                    [
-                    Label : ARGUMENTS
-                      [
-                      Label : ARGUMENT
-                        INF
-                      Label : ARGUMENT
-                        NAN
                 Label : NAME
                   in_array
+                Label : ARGUMENT
+                  $result
+                Label : ARGUMENT
+                  [
+                  Label : ARGUMENT
+                    INF
+                  Label : ARGUMENT
+                    NAN
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   throw
                   Label : THROW
                     new
                     Label : NEW
                       DivisionByZeroError
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'Division by zero error'
+                      Label : ARGUMENT
+                        'Division by zero error'
                       Label : NAME
                         DivisionByZeroError
           Label : CATCH
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    getMessage
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
                       getMessage
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        getMessage
-                    Label : OBJECT
-                      $e
+                  Label : OBJECT
+                    $e
                 Label : NAME
                   echo
             Label : CLASS

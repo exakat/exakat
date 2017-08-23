@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Property.24.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             b
@@ -15,33 +14,27 @@ Label : PROJECT
             b
           Label : DEFINITION
             b
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               b
           Label : DEFINITION
             \b
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+          Label : DEFINITION
+            \b
+            Label : ARGUMENT
+              Void
             Label : NAME
               \b
           Label : DEFINITION
             \b
-          Label : DEFINITION
-            \b
           Label : METHOD
             p
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   3
@@ -51,16 +44,14 @@ Label : PROJECT
               public
           Label : NAME
             b
-        Label : ELEMENT
+        Label : EXPRESSION
           ==
           Label : LEFT
             ->
             Label : METHOD
               p
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 p
             Label : OBJECT
@@ -71,16 +62,14 @@ Label : PROJECT
                   b
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           ==
           Label : LEFT
             ->
             Label : METHOD
               p
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 p
             Label : OBJECT
@@ -89,24 +78,20 @@ Label : PROJECT
                 new
                 Label : NEW
                   b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     b
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           ==
           Label : LEFT
             ->
             Label : METHOD
               p
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 p
             Label : OBJECT
@@ -115,24 +100,20 @@ Label : PROJECT
                 new
                 Label : NEW
                   \b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     \b
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           ==
           Label : LEFT
             ->
             Label : METHOD
               p
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 p
             Label : OBJECT

@@ -1,58 +1,51 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.70.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
             Label : LEFT
               isset
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'B'
-                  Label : VARIABLE
-                    $a
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'B'
+                Label : VARIABLE
+                  $a
               Label : NAME
                 isset
             Label : RIGHT
               &&
               Label : LEFT
                 isset
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'C'
-                    Label : VARIABLE
-                      $b
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'C'
+                  Label : VARIABLE
+                    $b
                 Label : NAME
                   isset
               Label : RIGHT
                 isset
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'D'
-                    Label : VARIABLE
-                      $c
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'D'
+                  Label : VARIABLE
+                    $c
                 Label : NAME
                   isset
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 &&
@@ -60,10 +53,10 @@ Label : PROJECT
                   ==
                   Label : LEFT
                     ->
+                    Label : MEMBER
+                      E
                     Label : OBJECT
                       $d
-                    Label : PROPERTY
-                      E
                   Label : RIGHT
                     $e
                 Label : RIGHT
@@ -72,46 +65,40 @@ Label : PROJECT
                     ==
                     Label : LEFT
                       ->
+                      Label : MEMBER
+                        F
                       Label : OBJECT
                         $f
-                      Label : PROPERTY
-                        F
                     Label : RIGHT
                       $g
                   Label : RIGHT
                     &&
                     Label : LEFT
                       G
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          ->
-                          Label : OBJECT
-                            $h
-                          Label : PROPERTY
-                            H
-                        Label : ARGUMENT
-                          array
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'I'
-                            Label : ARGUMENT
-                              'J'
                       Label : NAME
                         G
+                      Label : ARGUMENT
+                        ->
+                        Label : MEMBER
+                          H
+                        Label : OBJECT
+                          $h
+                      Label : ARGUMENT
+                        array
+                        Label : ARGUMENT
+                          'I'
+                        Label : ARGUMENT
+                          'J'
                     Label : RIGHT
                       ->
                       Label : METHOD
                         K
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'L'
-                          Label : ARGUMENT
-                            'M'
                         Label : NAME
                           K
+                        Label : ARGUMENT
+                          'L'
+                        Label : ARGUMENT
+                          'M'
                       Label : OBJECT
                         $i
               Label : ELSE
@@ -120,141 +107,115 @@ Label : PROJECT
                   !=
                   Label : LEFT
                     ->
+                    Label : MEMBER
+                      Y
                     Label : OBJECT
                       $m
-                    Label : PROPERTY
-                      Y
                   Label : RIGHT
                     'Z'
                 Label : ELSE
                   ;
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     ->
                     Label : METHOD
                       AE
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
+                      Label : ARGUMENT
+                        AF
+                        Label : NAME
                           AF
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'AG'
-                            Label : ARGUMENT
-                              'AH'
-                          Label : NAME
-                            AF
+                        Label : ARGUMENT
+                          'AG'
+                        Label : ARGUMENT
+                          'AH'
                       Label : NAME
                         AE
                     Label : OBJECT
                       $o
                 Label : THEN
                   ;
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     ->
                     Label : METHOD
                       AA
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
+                      Label : ARGUMENT
+                        AB
+                        Label : NAME
                           AB
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'AC'
-                            Label : ARGUMENT
-                              'AD'
-                          Label : NAME
-                            AB
+                        Label : ARGUMENT
+                          'AC'
+                        Label : ARGUMENT
+                          'AD'
                       Label : NAME
                         AA
                     Label : OBJECT
                       $n
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     N
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
+                    Label : ARGUMENT
+                      O
+                      Label : NAME
                         O
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'P'
-                          Label : ARGUMENT
-                            'Q'
-                        Label : NAME
-                          O
+                      Label : ARGUMENT
+                        'P'
+                      Label : ARGUMENT
+                        'Q'
                     Label : NAME
                       N
                   Label : OBJECT
                     $j
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     R
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
+                    Label : ARGUMENT
+                      S
+                      Label : NAME
                         S
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'T'
-                          Label : ARGUMENT
-                            'U'
-                        Label : NAME
-                          S
+                      Label : ARGUMENT
+                        'T'
+                      Label : ARGUMENT
+                        'U'
                     Label : NAME
                       R
                   Label : OBJECT
                     $k
-                Label : ELEMENT
+                Label : EXPRESSION
                   V
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'W'
-                    Label : ARGUMENT
-                      ->
-                      Label : OBJECT
-                        $l
-                      Label : PROPERTY
-                        X
                   Label : NAME
                     V
-            Label : ELEMENT
+                  Label : ARGUMENT
+                    'W'
+                  Label : ARGUMENT
+                    ->
+                    Label : MEMBER
+                      X
+                    Label : OBJECT
+                      $l
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               AI
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                AJ
                 Label : ARGUMENT
-                  AJ
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      AK
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'AL'
-                      Label : NAME
-                        AK
+                  AK
+                  Label : ARGUMENT
+                    'AL'
                   Label : NAME
-                    AJ
+                    AK
+                Label : NAME
+                  AJ
               Label : NAME
                 AI
-            Label : ELEMENT
+            Label : EXPRESSION
               exit
-              Label : ARGUMENTS
+              Label : ARGUMENT
                 Void
-                Label : ARGUMENT
-                  Void
               Label : NAME
                 exit
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

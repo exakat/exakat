@@ -1,81 +1,72 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticclass.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
-                ParentClass
-              Label : DEFINITION, DEFINITION
                 parent
+              Label : DEFINITION
+                ParentClass
               Label : NAME
                 ParentClass
-            Label : ELEMENT
+            Label : EXPRESSION
               class
+              Label : DEFINITION
+                self
               Label : DEFINITION
                 static
               Label : DEFINITION
                 ClassName
               Label : DEFINITION
-                ClassName
-              Label : DEFINITION
                 \NS\ClassName
-              Label : DEFINITION, DEFINITION
-                self
+              Label : DEFINITION
+                ClassName
               Label : EXTENDS
                 ParentClass
               Label : METHOD
                 x
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     echo
-                    Label : ARGUMENTS
-                      echo
-                      Label : ARGUMENT
-                        ::
-                        Label : CLASS
-                          self
-                        Label : CLASS
-                          class
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        self
+                      Label : CLASS
+                        class
                     Label : NAME
                       echo
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     echo
-                    Label : ARGUMENTS
-                      echo
-                      Label : ARGUMENT
-                        ::
-                        Label : CLASS
-                          static
-                        Label : CLASS
-                          class
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        static
+                      Label : CLASS
+                        class
                     Label : NAME
                       echo
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     echo
-                    Label : ARGUMENTS
-                      echo
-                      Label : ARGUMENT
-                        ::
-                        Label : CLASS
-                          parent
-                        Label : CLASS
-                          class
+                    Label : ARGUMENT
+                      ::
+                      Label : CLASS
+                        parent
+                      Label : CLASS
+                        class
                     Label : NAME
                       echo
                 Label : NAME
@@ -84,64 +75,54 @@ Label : PROJECT
                   static
               Label : NAME
                 ClassName
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    ClassName
-                  Label : CLASS
-                    class
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  ClassName
+                Label : CLASS
+                  class
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $x
               Label : RIGHT
                 'ClassName'
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    class
-                  Label : CLASS
-                    \NS\ClassName
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  \NS\ClassName
+                Label : CLASS
+                  class
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    class
-                  Label : CLASS
-                    \X\B\ClassName
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  \X\B\ClassName
+                Label : CLASS
+                  class
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    ClassName
-                  Label : METHOD
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  ClassName
+                Label : METHOD
+                  x
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     x
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      x
               Label : NAME
                 echo
           Label : NAME

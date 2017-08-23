@@ -1,34 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Bitshift.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           f
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              <<
-              Label : LEFT
-                1
-              Label : RIGHT
-                2
+          Label : ARGUMENT
+            <<
+            Label : LEFT
+              1
+            Label : RIGHT
+              2
           Label : NAME
             f
-        Label : ELEMENT
+        Label : EXPRESSION
           g
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              >>
-              Label : LEFT
-                2
-              Label : RIGHT
-                3
+          Label : ARGUMENT
+            >>
+            Label : LEFT
+              2
+            Label : RIGHT
+              3
           Label : NAME
             g

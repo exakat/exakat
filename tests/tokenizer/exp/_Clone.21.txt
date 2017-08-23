@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Clone.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -22,17 +21,15 @@ Label : PROJECT
               ->
               Label : METHOD
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   D
               Label : OBJECT
                 $b
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -46,25 +43,23 @@ Label : PROJECT
                       $d
                     Label : ELSE
                       ->
+                      Label : MEMBER
+                        E
                       Label : OBJECT
                         $e
-                      Label : PROPERTY
-                        E
                     Label : THEN
                       Void
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $g
+                Label : ARGUMENT
+                  $g
                 Label : NAME
                   F
               Label : OBJECT
                 $f
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 $h

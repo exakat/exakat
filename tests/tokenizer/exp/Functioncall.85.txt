@@ -1,116 +1,91 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.85.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           $y
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              1
+          Label : ARGUMENT
+            1
           Label : NAME
             $y
-        Label : ELEMENT
+        Label : EXPRESSION
           $y
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              2
           Label : NAME
             $y
-        Label : ELEMENT
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+        Label : EXPRESSION
           x1
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              2
           Label : NAME
             x1
-        Label : ELEMENT
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            2
+        Label : EXPRESSION
           x2
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              3
-            Label : ARGUMENT
-              4
           Label : NAME
             x2
-            Label : ARGUMENTS
-              (
+            Label : NAME
+              x2
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              2
+          Label : ARGUMENT
+            3
+          Label : ARGUMENT
+            4
+        Label : EXPRESSION
+          x3
+          Label : NAME
+            x3
+            Label : NAME
+              x3
+              Label : NAME
+                x3
               Label : ARGUMENT
                 1
               Label : ARGUMENT
                 2
-            Label : NAME
-              x2
-        Label : ELEMENT
-          x3
-          Label : ARGUMENTS
-            (
             Label : ARGUMENT
-              5
+              3
             Label : ARGUMENT
-              6
+              4
+          Label : ARGUMENT
+            5
+          Label : ARGUMENT
+            6
+        Label : EXPRESSION
+          x4
           Label : NAME
-            x3
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                3
-              Label : ARGUMENT
-                4
+            x4
             Label : NAME
-              x3
-              Label : ARGUMENTS
-                (
+              x4
+              Label : NAME
+                x4
+                Label : NAME
+                  x4
                 Label : ARGUMENT
                   1
                 Label : ARGUMENT
                   2
-              Label : NAME
-                x3
-        Label : ELEMENT
-          x4
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              7
-            Label : ARGUMENT
-              8
-          Label : NAME
-            x4
-            Label : ARGUMENTS
-              (
               Label : ARGUMENT
-                5
+                3
               Label : ARGUMENT
-                6
-            Label : NAME
-              x4
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  3
-                Label : ARGUMENT
-                  4
-              Label : NAME
-                x4
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                Label : NAME
-                  x4
+                4
+            Label : ARGUMENT
+              5
+            Label : ARGUMENT
+              6
+          Label : ARGUMENT
+            7
+          Label : ARGUMENT
+            8

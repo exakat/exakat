@@ -1,36 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.59.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             str_replace
-            Label : ARGUMENTS
-              (
+            Label : ARGUMENT
+              array
               Label : ARGUMENT
-                array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'D'
-                  Label : ARGUMENT
-                    'C'
-                  Label : ARGUMENT
-                    'B'
+                'D'
               Label : ARGUMENT
-                'A'
+                'C'
               Label : ARGUMENT
-                (string)
-                Label : CAST
-                  $c
+                'B'
+            Label : ARGUMENT
+              'A'
+            Label : ARGUMENT
+              (string)
+              Label : CAST
+                $c
             Label : NAME
               str_replace

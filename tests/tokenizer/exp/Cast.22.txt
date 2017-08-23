@@ -1,32 +1,27 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Cast.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             array_merge
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                (array)
-                Label : CAST
-                  $c
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    $c
             Label : NAME
               array_merge
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              (array)
+              Label : CAST
+                $c
+                Label : ARGUMENT
+                  Void
+                Label : NAME
+                  $c

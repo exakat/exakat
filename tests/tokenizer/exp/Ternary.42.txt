@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.42.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $sum
@@ -24,7 +23,7 @@ Label : PROJECT
                 $sum
               Label : RIGHT
                 MATH_BIGINTEGER_MAX_DIGIT2
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $sum
@@ -40,7 +39,7 @@ Label : PROJECT
                 $sum
               Label : RIGHT
                 MATH_BIGINTEGER_MAX_DIGIT3
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $sum
@@ -56,11 +55,11 @@ Label : PROJECT
                 $sum
               Label : RIGHT
                 ->
+                Label : MEMBER
+                  MATH_BIGINTEGER_MAX_DIGIT4
                 Label : OBJECT
                   $a
-                Label : PROPERTY
-                  MATH_BIGINTEGER_MAX_DIGIT4
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $sum
@@ -72,17 +71,17 @@ Label : PROJECT
               $sum
             Label : THEN
               MATH_BIGINTEGER_MAX_DIGIT5
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case MATHD :  /**/  
               Label : CASE
                 MATHD
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     1

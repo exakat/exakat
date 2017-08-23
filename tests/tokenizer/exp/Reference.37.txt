@@ -1,19 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.37.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : CONST
             const
             Label : CONST
               const
+              Label : DEFINITION
+                ::
+                Label : CLASS
+                  a
+                Label : CONSTANT
+                  B
               Label : NAME
                 B
               Label : VALUE
@@ -22,25 +27,21 @@ Label : PROJECT
             a
           Label : DEFINITION
             a
-          Label : DEFINITION
-            a
-          Label : DEFINITION
-            a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               a
+          Label : DEFINITION
+            a
+          Label : DEFINITION
+            a
           Label : METHOD
             d
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   1
@@ -48,13 +49,11 @@ Label : PROJECT
               d
           Label : METHOD
             e
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   1
@@ -64,7 +63,7 @@ Label : PROJECT
               static
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c
@@ -72,39 +71,33 @@ Label : PROJECT
             new
             Label : NEW
               a
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 a
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            B
-            Label : ARGUMENT
-              &
-              Label : LEFT
-                ->
-                Label : METHOD
+          Label : ARGUMENT
+            &
+            Label : LEFT
+              ->
+              Label : METHOD
+                d
+                Label : ARGUMENT
+                  Void
+                Label : NAME
                   d
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    d
-                Label : OBJECT
-                  $c
-              Label : RIGHT
-                ::
-                Label : CLASS
-                  a
-                Label : CONSTANT
-                  B
+              Label : OBJECT
+                $c
+            Label : RIGHT
+              ::
+              Label : CLASS
+                a
+              Label : CONSTANT
+                B
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $e
@@ -114,9 +107,7 @@ Label : PROJECT
               a
             Label : METHOD
               e
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 e

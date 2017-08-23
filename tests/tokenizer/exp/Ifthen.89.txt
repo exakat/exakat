@@ -1,142 +1,125 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.89.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
           Label : RIGHT
             0
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $b
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
+              Label : ARGUMENT
+                C
+                Label : NAME
                   C
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'D'
-                    Label : ARGUMENT
-                      $c
-                  Label : NAME
-                    C
+                Label : ARGUMENT
+                  'D'
+                Label : ARGUMENT
+                  $c
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               E
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $b
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $c
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
+              Label : ARGUMENT
+                C
+                Label : NAME
                   C
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'D'
-                    Label : ARGUMENT
-                      $c
-                  Label : NAME
-                    C
+                Label : ARGUMENT
+                  'D'
+                Label : ARGUMENT
+                  $c
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               F
-        Label : ELEMENT
+        Label : EXPRESSION
           C
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-            Label : ARGUMENT
-              $b
+          Label : ARGUMENT
+            $a
+          Label : ARGUMENT
+            $b
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    __METHOD__
-                  Label : CONCAT
-                    "\n"
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  __METHOD__
+                Label : CONCAT
+                  "\n"
               Label : NAME
                 echo
           Label : DEFINITION
             C
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'D'
-              Label : ARGUMENT
-                $c
             Label : NAME
               C
+            Label : ARGUMENT
+              'D'
+            Label : ARGUMENT
+              $c
           Label : DEFINITION
             C
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'D'
-              Label : ARGUMENT
-                $c
             Label : NAME
               C
+            Label : ARGUMENT
+              'D'
+            Label : ARGUMENT
+              $c
           Label : NAME
             C
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

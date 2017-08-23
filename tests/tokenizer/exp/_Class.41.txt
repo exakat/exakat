@@ -1,44 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.41.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             x
           Label : PPP
             var
             Label : PPP
+              $b
+            Label : PPP
+              $a
+            Label : PPP
               =
               Label : LEFT
                 $c
               Label : RIGHT
                 3
-            Label : PPP
-              $a
-            Label : PPP
-              $b
             Label : VAR
               var
           Label : PPP
             var
+            Label : PPP
+              $b2
+            Label : PPP
+              $a2
+            Label : PPP
+              $c2
             Label : PPP
               =
               Label : LEFT
                 $d2
               Label : RIGHT
                 3
-            Label : PPP
-              $a2
-            Label : PPP
-              $b2
-            Label : PPP
-              $c2
             Label : VAR
               var

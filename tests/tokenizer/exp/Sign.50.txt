@@ -1,32 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.50.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           for
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $f
               Label : RIGHT
                 g
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $h
+                Label : ARGUMENT
+                  $h
                 Label : NAME
                   g
           Label : FINAL
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               <=
               Label : LEFT
                 $b
@@ -44,13 +41,13 @@ Label : PROJECT
                   1
           Label : INCREMENT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $e
           Label : INIT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a

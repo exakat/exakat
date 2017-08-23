@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?=
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'e'
-              Label : VARIABLE
-                $d
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'e'
+            Label : VARIABLE
+              $d
           Label : NAME
             <?=
-    Label : ELEMENT
+    Label : EXPRESSION
       B
 

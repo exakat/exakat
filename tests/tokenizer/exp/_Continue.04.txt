@@ -1,19 +1,18 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Continue.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ==
@@ -23,49 +22,43 @@ Label : PROJECT
                   $c
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   continue
                   Label : CONTINUE
                     Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
-            Label : ELEMENT
+            Label : EXPRESSION
               C
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    D
-                  Label : METHOD
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  D
+                Label : METHOD
+                  E
+                  Label : NAME
                     E
-                    Label : ARGUMENTS
-                      (
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      F
                       Label : ARGUMENT
-                        ->
-                        Label : METHOD
-                          F
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'G'
-                          Label : NAME
-                            F
-                        Label : OBJECT
-                          $b
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $b
-                        Label : PROPERTY
-                          H
-                    Label : NAME
-                      E
+                        'G'
+                      Label : NAME
+                        F
+                    Label : OBJECT
+                      $b
+                  Label : ARGUMENT
+                    ->
+                    Label : MEMBER
+                      H
+                    Label : OBJECT
+                      $b
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               I
           Label : SOURCE
             $a

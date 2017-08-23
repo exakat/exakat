@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Throw.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           throw
           Label : THROW
             (
@@ -16,9 +15,7 @@ Label : PROJECT
               new
               Label : NEW
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    1
+                Label : ARGUMENT
+                  1
                 Label : NAME
                   C

@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             1
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
@@ -28,13 +27,11 @@ Label : PROJECT
                   $x
               Label : RIGHT
                 b
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
+                Label : ARGUMENT
+                  $c
                 Label : NAME
                   b
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -60,11 +57,11 @@ Label : PROJECT
                           4
                         Label : VARIABLE
                           $y
-        Label : ELEMENT
+        Label : EXPRESSION
           while
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : CONDITION
             ==

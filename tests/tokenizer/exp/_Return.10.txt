@@ -1,24 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Return.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           cmp1
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-            Label : ARGUMENT
-              $b
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ==
@@ -36,11 +29,15 @@ Label : PROJECT
                     $b
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     0
+          Label : ARGUMENT
+            $a
+          Label : ARGUMENT
+            $b
           Label : NAME
             cmp1
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

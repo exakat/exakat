@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.48.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -18,7 +17,7 @@ Label : PROJECT
               B
             Label : CONSTANT
               TRUE
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c
@@ -28,9 +27,7 @@ Label : PROJECT
               D
             Label : METHOD
               false
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 false

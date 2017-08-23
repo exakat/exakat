@@ -1,124 +1,105 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yieldfrom.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foo
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 1
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 yield from
                 Label : YIELD
                   bar
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     bar
           Label : DEFINITION
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               foo
           Label : NAME
             foo
-        Label : ELEMENT
+        Label : EXPRESSION
           bar
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 2
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 3
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 4
           Label : DEFINITION
             bar
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               bar
           Label : NAME
             bar
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $baz
           Label : RIGHT
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               foo
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  $element
-                Label : ARGUMENT
-                  "\n"
               Label : NAME
                 echo
+              Label : ARGUMENT
+                $element
+              Label : ARGUMENT
+                "\n"
           Label : SOURCE
             $baz
           Label : VALUE
             $element
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                getReturn
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  getReturn
-              Label : OBJECT
-                $baz
-            Label : ARGUMENT
-              "\n"
           Label : NAME
             echo
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              getReturn
+              Label : ARGUMENT
+                Void
+              Label : NAME
+                getReturn
+            Label : OBJECT
+              $baz
+          Label : ARGUMENT
+            "\n"

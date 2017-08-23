@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.33.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             x
@@ -21,12 +20,12 @@ Label : PROJECT
               Label : RIGHT
                 4
             Label : PPP
+              $e
+            Label : PPP
               =
               Label : LEFT
                 $h
               Label : RIGHT
                 5
-            Label : PPP
-              $e
             Label : VAR
               var

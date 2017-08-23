@@ -1,133 +1,112 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.48.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              a
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  'b'
+                Label : CONCAT
+                  ->
+                  Label : MEMBER
+                    d
+                  Label : OBJECT
+                    $c
+              Label : ARGUMENT
+                e
+                Label : ARGUMENT
+                  ?
+                  Label : CONDITION
+                    ==
+                    Label : LEFT
+                      ->
+                      Label : MEMBER
+                        g
+                      Label : OBJECT
+                        $f
+                    Label : RIGHT
+                      'h'
+                  Label : ELSE
+                    'j'
+                  Label : THEN
+                    'i'
+                Label : NAME
+                  e
+              Label : ARGUMENT
+                'k'
+              Label : NAME
+                a
+            Label : CONCAT
+              'l'
+          Label : NAME
             echo
+        Label : EXPRESSION
+          M
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            n
+            Label : NAME
+              n
             Label : ARGUMENT
               .
               Label : CONCAT
-                a
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      'b'
-                    Label : CONCAT
-                      ->
-                      Label : OBJECT
-                        $c
-                      Label : PROPERTY
-                        d
-                  Label : ARGUMENT
-                    e
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ?
-                        Label : CONDITION
-                          ==
-                          Label : LEFT
-                            ->
-                            Label : OBJECT
-                              $f
-                            Label : PROPERTY
-                              g
-                          Label : RIGHT
-                            'h'
-                        Label : ELSE
-                          'j'
-                        Label : THEN
-                          'i'
-                    Label : NAME
-                      e
-                  Label : ARGUMENT
-                    'k'
-                Label : NAME
-                  a
+                'o'
               Label : CONCAT
-                'l'
-          Label : NAME
-            echo
-        Label : ELEMENT
-          M
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
+                ->
+                Label : MEMBER
+                  q
+                Label : OBJECT
+                  $p
             Label : ARGUMENT
-              n
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'o'
-                  Label : CONCAT
-                    ->
-                    Label : OBJECT
-                      $p
-                    Label : PROPERTY
-                      q
-                Label : ARGUMENT
-                  r
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      's'
-                  Label : NAME
-                    r
+              r
+              Label : ARGUMENT
+                's'
               Label : NAME
-                n
+                r
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           T
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
+          Label : ARGUMENT
+            u
             Label : ARGUMENT
-              u
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'v'
-                  Label : CONCAT
-                    ->
-                    Label : OBJECT
-                      $w
-                    Label : PROPERTY
-                      x
-                Label : ARGUMENT
-                  y
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'z'
-                  Label : NAME
-                    y
-                Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'aa'
-                      Label : VALUE
-                        'ab'
+              .
+              Label : CONCAT
+                'v'
+              Label : CONCAT
+                ->
+                Label : MEMBER
+                  x
+                Label : OBJECT
+                  $w
+            Label : ARGUMENT
+              y
+              Label : ARGUMENT
+                'z'
               Label : NAME
-                u
+                y
+            Label : ARGUMENT
+              array
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  'aa'
+                Label : VALUE
+                  'ab'
+            Label : NAME
+              u
           Label : NAME
             echo

@@ -1,46 +1,45 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.97.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
             Label : LEFT
               ->
+              Label : MEMBER
+                B
               Label : OBJECT
                 $this
-              Label : PROPERTY
-                B
             Label : RIGHT
               'C'
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $d
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $a
               Label : ELSE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $d
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $e

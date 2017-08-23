@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              instanceof
-              Label : CLASS
-                c
-              Label : VARIABLE
-                $b
+          Label : ARGUMENT
+            instanceof
+            Label : CLASS
+              c
+            Label : VARIABLE
+              $b
           Label : NAME
             a

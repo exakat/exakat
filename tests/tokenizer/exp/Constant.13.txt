@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Constant.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,26 +15,22 @@ Label : PROJECT
             ->
             Label : METHOD
               b
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  __NAMESPACE__
+                Label : CONCAT
+                  '\C'
+              Label : ARGUMENT
+                array
                 Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    __NAMESPACE__
-                  Label : CONCAT
-                    '\C'
-                Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                Label : ARGUMENT
-                  ''
-                Label : ARGUMENT
-                  false
-                Label : ARGUMENT
-                  false
+                  Void
+              Label : ARGUMENT
+                ''
+              Label : ARGUMENT
+                false
+              Label : ARGUMENT
+                false
               Label : NAME
                 b
             Label : OBJECT

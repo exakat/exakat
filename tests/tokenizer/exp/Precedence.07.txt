@@ -1,60 +1,51 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Precedence.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            $c
-            Label : ARGUMENT
-              |
-              Label : LEFT
-                $a
-              Label : RIGHT
-                &
-                Label : LEFT
-                  $b
-                Label : RIGHT
-                  $c
-          Label : NAME
-            print
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            "\n"
-            Label : ARGUMENT
-              "\n"
-          Label : NAME
-            print
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            $c
-            Label : ARGUMENT
+          Label : ARGUMENT
+            |
+            Label : LEFT
+              $a
+            Label : RIGHT
               &
               Label : LEFT
-                (
-                Label : CODE
-                  |
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    $b
+                $b
               Label : RIGHT
                 $c
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
+          Label : ARGUMENT
             "\n"
-            Label : ARGUMENT
-              "\n"
+          Label : NAME
+            print
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            &
+            Label : LEFT
+              (
+              Label : CODE
+                |
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  $b
+            Label : RIGHT
+              $c
+          Label : NAME
+            print
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            "\n"
           Label : NAME
             print

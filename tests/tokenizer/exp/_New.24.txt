@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_New.24.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -15,51 +14,45 @@ Label : PROJECT
               !
               Label : NOT
                 empty
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $a
-                    Label : PROPERTY
-                      B
+                Label : ARGUMENT
+                  ->
+                  Label : MEMBER
+                    B
+                  Label : OBJECT
+                    $a
                 Label : NAME
                   empty
             Label : RIGHT
               ==
               Label : LEFT
                 ->
+                Label : MEMBER
+                  C
                 Label : OBJECT
                   $a
-                Label : PROPERTY
-                  C
               Label : RIGHT
                 'D'
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               E
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  new
-                  Label : NEW
+              Label : ARGUMENT
+                new
+                Label : NEW
+                  F
+                  Label : NAME
                     F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'G'
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $a
-                        Label : PROPERTY
-                          B
-                    Label : NAME
-                      F
+                  Label : ARGUMENT
+                    'G'
+                  Label : ARGUMENT
+                    ->
+                    Label : MEMBER
+                      B
+                    Label : OBJECT
+                      $a
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               I

@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.36.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -22,21 +21,21 @@ Label : PROJECT
                 "
                 Label : CONCAT
                   ->
+                  Label : MEMBER
+                    e
                   Label : OBJECT
                     $d
-                  Label : PROPERTY
-                    e
                 Label : CONCAT
                   :
                 Label : CONCAT
                   ->
+                  Label : MEMBER
+                    g
                   Label : OBJECT
                     $f
-                  Label : PROPERTY
-                    g
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b

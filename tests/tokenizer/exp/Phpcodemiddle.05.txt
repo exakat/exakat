@@ -1,31 +1,28 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcodemiddle.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
+            Label : ARGUMENT
+              $a
             Label : NAME
               B
           Label : ELSE
             ;
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $b
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-    Label : ELEMENT
+    Label : EXPRESSION
       I

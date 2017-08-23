@@ -1,39 +1,36 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.33.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
                 Label : NOT
                   isset
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        $e
-                      Label : VARIABLE
-                        $d
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      $e
+                    Label : VARIABLE
+                      $d
                   Label : NAME
                     isset
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   continue
                   Label : CONTINUE
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ||
@@ -51,7 +48,7 @@ Label : PROJECT
                     'C'
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   continue
                   Label : CONTINUE
                     Void
@@ -59,7 +56,7 @@ Label : PROJECT
             $a
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $b
             Label : VALUE
               $c

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticproperty.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           [
           Label : INDEX
             'b'
@@ -16,5 +15,5 @@ Label : PROJECT
             ::
             Label : CLASS
               self
-            Label : PROPERTY
+            Label : MEMBER
               $a

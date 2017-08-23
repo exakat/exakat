@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.30.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           while
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $result
@@ -28,10 +27,8 @@ Label : PROJECT
               ->
               Label : METHOD
                 fetch
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $fetchMode
+                Label : ARGUMENT
+                  $fetchMode
                 Label : NAME
                   fetch
               Label : OBJECT

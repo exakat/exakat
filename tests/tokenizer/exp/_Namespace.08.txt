@@ -1,32 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Namespace.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           declare
+          Label : ARGUMENT
+            =
+            Label : LEFT
+              ticks
+            Label : RIGHT
+              1
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-          Label : DECLARE
-            (
-            Label : ARGUMENT
-              =
-              Label : LEFT
-                ticks
-              Label : RIGHT
-                1
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               const
               Label : CONST
                 const
@@ -34,74 +31,62 @@ Label : PROJECT
                   CONNECT_OK
                 Label : VALUE
                   1
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
                 MyProject\Connection
               Label : NAME
                 Connection
-            Label : ELEMENT
+            Label : EXPRESSION
               connect
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
               Label : DEFINITION
                 MyProject\connect
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   MyProject\connect
               Label : NAME
                 connect
           Label : NAME
             MyProject
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               session_start
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 session_start
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
               Label : RIGHT
                 MyProject\connect
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   MyProject\connect
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    MyProject\Connection
-                  Label : METHOD
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  MyProject\Connection
+                Label : METHOD
+                  start
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     start
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      start
               Label : NAME
                 echo
           Label : NAME

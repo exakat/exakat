@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticconstant.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           [
           Label : INDEX
             1
@@ -18,7 +17,7 @@ Label : PROJECT
               \A
             Label : CONSTANT
               B
-        Label : ELEMENT
+        Label : EXPRESSION
           [
           Label : INDEX
             3
@@ -32,7 +31,7 @@ Label : PROJECT
                 \A\C
               Label : CONSTANT
                 B
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             \A\C\D

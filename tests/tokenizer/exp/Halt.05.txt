@@ -1,32 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Halt.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           try
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : CATCH
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : CLASS
               Exception
             Label : VARIABLE
               $e
-        Label : ELEMENT
+        Label : EXPRESSION
           __halt_compiler
-    Label : ELEMENT
+    Label : EXPRESSION
       
 
 ?>

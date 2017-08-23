@@ -1,106 +1,91 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.35.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $array
           Label : RIGHT
             [
-            Label : ARGUMENTS
+            Label : ARGUMENT
               [
               Label : ARGUMENT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    10
-                  Label : ARGUMENT
-                    20
+                10
               Label : ARGUMENT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    30
-                  Label : ARGUMENT
-                    40
-        Label : ELEMENT
+                20
+            Label : ARGUMENT
+              [
+              Label : ARGUMENT
+                30
+              Label : ARGUMENT
+                40
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  "
-                  Label : CONCAT
-                    First: 
-                  Label : CONCAT
-                    $a1
-                  Label : CONCAT
-                    ; Second: 
-                  Label : CONCAT
-                    $b2
-                  Label : CONCAT
-                    \n
+              Label : ARGUMENT
+                "
+                Label : CONCAT
+                  First: 
+                Label : CONCAT
+                  $a1
+                Label : CONCAT
+                  ; Second: 
+                Label : CONCAT
+                  $b2
+                Label : CONCAT
+                  \n
               Label : NAME
                 echo
           Label : SOURCE
             $array
           Label : VALUE
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a1
-              Label : ARGUMENT
-                $b2
             Label : NAME
               list
-        Label : ELEMENT
+            Label : ARGUMENT
+              $a1
+            Label : ARGUMENT
+              $b2
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  "
-                  Label : CONCAT
-                    First: 
-                  Label : CONCAT
-                    $a3
-                  Label : CONCAT
-                    ; Second: 
-                  Label : CONCAT
-                    $b4
-                  Label : CONCAT
-                    \n
+              Label : ARGUMENT
+                "
+                Label : CONCAT
+                  First: 
+                Label : CONCAT
+                  $a3
+                Label : CONCAT
+                  ; Second: 
+                Label : CONCAT
+                  $b4
+                Label : CONCAT
+                  \n
               Label : NAME
                 echo
           Label : SOURCE
             $array
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $id
             Label : VALUE
               list
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a3
-                Label : ARGUMENT
-                  $b4
               Label : NAME
                 list
+              Label : ARGUMENT
+                $a3
+              Label : ARGUMENT
+                $b4

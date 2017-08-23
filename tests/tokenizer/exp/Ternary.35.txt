@@ -1,101 +1,92 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.35.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ?
-                  Label : CONDITION
-                    (
-                    Label : CODE
-                      and
-                      Label : LEFT
-                        [
-                        Label : INDEX
-                          'D'
-                        Label : VARIABLE
-                          $c
-                      Label : RIGHT
-                        [
-                        Label : INDEX
-                          'E'
-                        Label : VARIABLE
-                          $d
-                  Label : ELSE
+              Label : ARGUMENT
+                ?
+                Label : CONDITION
+                  (
+                  Label : CODE
+                    and
+                    Label : LEFT
+                      [
+                      Label : INDEX
+                        'D'
+                      Label : VARIABLE
+                        $c
+                    Label : RIGHT
+                      [
+                      Label : INDEX
+                        'E'
+                      Label : VARIABLE
+                        $d
+                Label : ELSE
+                  [
+                  Label : INDEX
+                    'J'
+                  Label : VARIABLE
+                    $g
+                Label : THEN
+                  F
+                  Label : NAME
+                    F
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      'G'
+                    Label : CONCAT
+                      [
+                      Label : INDEX
+                        'H'
+                      Label : VARIABLE
+                        $e
+                  Label : ARGUMENT
                     [
                     Label : INDEX
-                      'J'
+                      'I'
                     Label : VARIABLE
-                      $g
-                  Label : THEN
-                    F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        .
-                        Label : CONCAT
-                          'G'
-                        Label : CONCAT
-                          [
-                          Label : INDEX
-                            'H'
-                          Label : VARIABLE
-                            $e
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'I'
-                        Label : VARIABLE
-                          $f
-                    Label : NAME
-                      F
+                      $f
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               J
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'L'
-                  Label : VARIABLE
-                    $h
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'L'
+                Label : VARIABLE
+                  $h
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               L
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'N'
-                  Label : VARIABLE
-                    $i
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'N'
+                Label : VARIABLE
+                  $i
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               N
           Label : SOURCE
             $a

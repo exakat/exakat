@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Multiplication.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -18,23 +17,21 @@ Label : PROJECT
               $a
           Label : RIGHT
             number_format
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                *
-                Label : LEFT
-                  /
-                  Label : LEFT
-                    true
-                  Label : RIGHT
-                    [
-                    Label : INDEX
-                      'g'
-                    Label : VARIABLE
-                      $f
-                Label : RIGHT
-                  1
-              Label : ARGUMENT
-                2
             Label : NAME
               number_format
+            Label : ARGUMENT
+              *
+              Label : LEFT
+                /
+                Label : LEFT
+                  true
+                Label : RIGHT
+                  [
+                  Label : INDEX
+                    'g'
+                  Label : VARIABLE
+                    $f
+              Label : RIGHT
+                1
+            Label : ARGUMENT
+              2

@@ -1,34 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              (int)
-              Label : CAST
-                '3'
+          Label : ARGUMENT
+            (int)
+            Label : CAST
+              '3'
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              (string)
-              Label : CAST
-                3
-            Label : ARGUMENT
-              (array)
-              Label : CAST
-                4
           Label : NAME
             x
+          Label : ARGUMENT
+            (string)
+            Label : CAST
+              3
+          Label : ARGUMENT
+            (array)
+            Label : CAST
+              4

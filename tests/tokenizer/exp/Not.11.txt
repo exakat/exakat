@@ -1,32 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Not.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               $x
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  1
-                Label : ARGUMENT
-                  2
-                Label : ARGUMENT
-                  3
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                3
               Label : NAME
                 $x
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $x

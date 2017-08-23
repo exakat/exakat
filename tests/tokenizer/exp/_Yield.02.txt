@@ -1,50 +1,45 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yield.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $y
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      1
-                    Label : VALUE
-                      2
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      3
-                    Label : VALUE
-                      4
-            Label : ELEMENT
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    1
+                  Label : VALUE
+                    2
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    3
+                  Label : VALUE
+                    4
+            Label : EXPRESSION
               foreach
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   yield
                   Label : YIELD
                     =>
-                    Label : KEY
+                    Label : INDEX
                       $k
                     Label : VALUE
                       $v
@@ -52,51 +47,45 @@ Label : PROJECT
                 $y
               Label : VALUE
                 =>
-                Label : KEY
+                Label : INDEX
                   $k
                 Label : VALUE
                   $v
           Label : DEFINITION
             x
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               x
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
+              Label : ARGUMENT
                 "
-                Label : ARGUMENT
-                  "
-                  Label : CONCAT
-                    $k
-                  Label : CONCAT
-                     => 
-                  Label : CONCAT
-                    $v
-                  Label : CONCAT
-                    \n
+                Label : CONCAT
+                  $k
+                Label : CONCAT
+                   => 
+                Label : CONCAT
+                  $v
+                Label : CONCAT
+                  \n
               Label : NAME
                 print
           Label : SOURCE
             x
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               x
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $k
             Label : VALUE
               $v

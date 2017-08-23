@@ -1,111 +1,92 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.23.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               a
           Label : ELSE
             ;
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               	
-            Label : ELEMENT
+            Label : EXPRESSION
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'c'
+              Label : ARGUMENT
+                'c'
               Label : NAME
                 b
-            Label : ELEMENT
+            Label : EXPRESSION
               	
-            Label : ELEMENT
+            Label : EXPRESSION
               d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 d
-            Label : ELEMENT
+            Label : EXPRESSION
               		
-            Label : ELEMENT
+            Label : EXPRESSION
               e
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 e
-            Label : ELEMENT
+            Label : EXPRESSION
               		
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   g
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     g
-                Label : ELEMENT
+                Label : EXPRESSION
                   			
-                Label : ELEMENT
+                Label : EXPRESSION
                   h
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      '1'
-                    Label : ARGUMENT
-                      '2'
                   Label : NAME
                     h
-                Label : ELEMENT
+                  Label : ARGUMENT
+                    '1'
+                  Label : ARGUMENT
+                    '2'
+                Label : EXPRESSION
                   		
               Label : CONDITION
                 f
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  f
-            Label : ELEMENT
-              	
-            Label : ELEMENT
-              k
-              Label : ARGUMENTS
-                (
                 Label : ARGUMENT
                   Void
+                Label : NAME
+                  f
+            Label : EXPRESSION
+              	
+            Label : EXPRESSION
+              k
+              Label : ARGUMENT
+                Void
               Label : NAME
                 k
-            Label : ELEMENT
+            Label : EXPRESSION
               	
-            Label : ELEMENT
+            Label : EXPRESSION
               l
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'm'
+              Label : ARGUMENT
+                'm'
               Label : NAME
                 l
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

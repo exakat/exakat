@@ -1,45 +1,38 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               isset
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $counter
+              Label : ARGUMENT
+                $counter
               Label : NAME
                 isset
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  $counter
+              Label : ARGUMENT
+                $counter
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  '0'
+              Label : ARGUMENT
+                '0'
               Label : NAME
                 echo
-    Label : ELEMENT
+    Label : EXPRESSION
       A

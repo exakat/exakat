@@ -1,56 +1,49 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.29.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 isset
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'C'
-                    Label : VARIABLE
-                      $a
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'C'
+                  Label : VARIABLE
+                    $a
                 Label : NAME
                   isset
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     isset
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'D'
-                        Label : VARIABLE
-                          $b
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'D'
+                      Label : VARIABLE
+                        $b
                     Label : NAME
                       isset
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     .
@@ -60,15 +53,13 @@ Label : PROJECT
                       ->
                       Label : METHOD
                         E
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
+                        Label : ARGUMENT
+                          Void
                         Label : NAME
                           E
                       Label : OBJECT
                         $this
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $d
@@ -78,26 +69,24 @@ Label : PROJECT
                 Label : CONCAT
                   
 
-            Label : ELEMENT
+            Label : EXPRESSION
               .=
               Label : LEFT
                 $d
               Label : RIGHT
                 'G'
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 &&
                 Label : LEFT
                   isset
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'H'
-                      Label : VARIABLE
-                        $a
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'H'
+                    Label : VARIABLE
+                      $a
                   Label : NAME
                     isset
                 Label : RIGHT
@@ -114,14 +103,12 @@ Label : PROJECT
                       'J'
                   Label : RIGHT
                     isset
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'K'
-                        Label : VARIABLE
-                          $a
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'K'
+                      Label : VARIABLE
+                        $a
                     Label : NAME
                       isset
               Label : ELSE
@@ -130,14 +117,12 @@ Label : PROJECT
                   !
                   Label : NOT
                     isset
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'L'
-                        Label : VARIABLE
-                          $a
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'L'
+                      Label : VARIABLE
+                        $a
                     Label : NAME
                       isset
                 Label : ELSE
@@ -146,83 +131,73 @@ Label : PROJECT
                     !
                     Label : NOT
                       isset
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'M'
-                          Label : VARIABLE
-                            $a
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'M'
+                        Label : VARIABLE
+                          $a
                       Label : NAME
                         isset
                   Label : ELSE
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           N
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             N
-        Label : ELEMENT
+        Label : EXPRESSION
           O
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
               Label : RIGHT
                 P
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'Q'
-                    Label : VARIABLE
-                      $b
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'Q'
+                  Label : VARIABLE
+                    $b
                 Label : NAME
                   P
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $f
               Label : RIGHT
                 R
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $e
+                Label : ARGUMENT
+                  $e
                 Label : NAME
                   R
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $g
@@ -236,19 +211,17 @@ Label : PROJECT
                   $eU
                 Label : CONCAT
                   $eV
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $h
               Label : RIGHT
                 W
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $g
+                Label : ARGUMENT
+                  $g
                 Label : NAME
                   W
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
@@ -256,49 +229,41 @@ Label : PROJECT
                   $h
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   X
-                  Label : ARGUMENTS
-                    (
+                  Label : ARGUMENT
+                    Y
                     Label : ARGUMENT
+                      Void
+                    Label : NAME
                       Y
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        Y
                   Label : NAME
                     X
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     ->
                     Label : METHOD
                       E
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         E
                     Label : OBJECT
                       $this
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
                 Label : NOT
                   AA
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $h
+                  Label : ARGUMENT
+                    $h
                   Label : NAME
                     AA
               Label : ELSE
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $i
@@ -316,11 +281,11 @@ Label : PROJECT
                     Label : CONCAT
                       AH
 
-                Label : ELEMENT
+                Label : EXPRESSION
                   while
                   Label : BLOCK
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $g
@@ -336,31 +301,27 @@ Label : PROJECT
                             $j
                         Label : CONCAT
                           AL
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $k
                       Label : RIGHT
                         W
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $g
+                        Label : ARGUMENT
+                          $g
                         Label : NAME
                           W
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $l
                       Label : RIGHT
                         AI
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $k
+                        Label : ARGUMENT
+                          $k
                         Label : NAME
                           AI
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       .=
                       Label : LEFT
                         $i
@@ -370,7 +331,7 @@ Label : PROJECT
                         Label : CONCAT
                           AP
 
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       if
                       Label : CONDITION
                         [
@@ -380,7 +341,7 @@ Label : PROJECT
                           $j
                       Label : THEN
                         {}
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           .=
                           Label : LEFT
                             $i
@@ -396,7 +357,7 @@ Label : PROJECT
                                 $j
                             Label : CONCAT
                               AU
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       if
                       Label : CONDITION
                         ==
@@ -410,7 +371,7 @@ Label : PROJECT
                           0
                       Label : THEN
                         {}
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           if
                           Label : CONDITION
                             <>
@@ -424,7 +385,7 @@ Label : PROJECT
                               0
                           Label : ELSE
                             ;
-                            Label : ELEMENT
+                            Label : EXPRESSION
                               .=
                               Label : LEFT
                                 $i
@@ -474,7 +435,7 @@ Label : PROJECT
                                   BD
                           Label : THEN
                             ;
-                            Label : ELEMENT
+                            Label : EXPRESSION
                               .=
                               Label : LEFT
                                 $i
@@ -506,7 +467,7 @@ Label : PROJECT
                                     $j
                                 Label : CONCAT
                                   BD
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       .=
                       Label : LEFT
                         $i
@@ -518,13 +479,11 @@ Label : PROJECT
                       $j
                     Label : RIGHT
                       AI
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $h
+                      Label : ARGUMENT
+                        $h
                       Label : NAME
                         AI
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     .
@@ -534,34 +493,28 @@ Label : PROJECT
                       ->
                       Label : METHOD
                         E
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
+                        Label : ARGUMENT
+                          Void
                         Label : NAME
                           E
                       Label : OBJECT
                         $this
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   AB
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'AC'
+                  Label : ARGUMENT
+                    'AC'
                   Label : NAME
                     AB
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     ->
                     Label : METHOD
                       E
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         E
                     Label : OBJECT

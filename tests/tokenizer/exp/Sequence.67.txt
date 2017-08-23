@@ -1,25 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.67.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             0
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 S
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 =
@@ -31,17 +30,15 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     B
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $c
+                    Label : ARGUMENT
+                      $c
                     Label : NAME
                       B
                   Label : OBJECT
                     $b
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     [
@@ -53,47 +50,43 @@ Label : PROJECT
                     (string)
                     Label : CAST
                       ->
+                      Label : MEMBER
+                        E
                       Label : OBJECT
                         ->
+                        Label : MEMBER
+                          D
                         Label : OBJECT
                           $e
-                        Label : PROPERTY
-                          D
-                      Label : PROPERTY
-                        E
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $f
               Label : RIGHT
                 F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $g
-                  Label : ARGUMENT
-                    G
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          ->
-                          Label : OBJECT
-                            $h
-                          Label : PROPERTY
-                            H
-                        Label : PROPERTY
-                          I
-                    Label : NAME
-                      G
                 Label : NAME
                   F
-            Label : ELEMENT
+                Label : ARGUMENT
+                  $g
+                Label : ARGUMENT
+                  G
+                  Label : ARGUMENT
+                    ->
+                    Label : MEMBER
+                      I
+                    Label : OBJECT
+                      ->
+                      Label : MEMBER
+                        H
+                      Label : OBJECT
+                        $h
+                  Label : NAME
+                    G
+            Label : EXPRESSION
               for
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $m
@@ -103,15 +96,15 @@ Label : PROJECT
                       $o
                     Label : VARIABLE
                       ->
+                      Label : MEMBER
+                        K
                       Label : OBJECT
                         ->
+                        Label : MEMBER
+                          J
                         Label : OBJECT
                           $n
-                        Label : PROPERTY
-                          J
-                      Label : PROPERTY
-                        K
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $p
@@ -119,45 +112,39 @@ Label : PROJECT
                     +
                     Label : LEFT
                       array
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            'L'
-                          Label : VALUE
-                            NULL
+                      Label : ARGUMENT
+                        =>
+                        Label : INDEX
+                          'L'
+                        Label : VALUE
+                          NULL
                     Label : RIGHT
                       ->
                       Label : METHOD
                         M
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            N
+                        Label : ARGUMENT
+                          N
                         Label : NAME
                           M
                       Label : OBJECT
                         $q
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $r
                   Label : RIGHT
                     array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                Label : ELEMENT
+                    Label : ARGUMENT
+                      Void
+                Label : EXPRESSION
                   foreach
                   Label : BLOCK
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       foreach
                       Label : BLOCK
                         ;
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           =
                           Label : LEFT
                             [
@@ -187,17 +174,15 @@ Label : PROJECT
                         ->
                         Label : METHOD
                           O
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $w
+                          Label : ARGUMENT
+                            $w
                           Label : NAME
                             O
                         Label : OBJECT
                           $v
                       Label : VALUE
                         =>
-                        Label : KEY
+                        Label : INDEX
                           $x
                         Label : VALUE
                           $y
@@ -205,11 +190,11 @@ Label : PROJECT
                     $s
                   Label : VALUE
                     =>
-                    Label : KEY
+                    Label : INDEX
                       $t
                     Label : VALUE
                       $u
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     ]
@@ -223,7 +208,7 @@ Label : PROJECT
                     $af
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   <
                   Label : LEFT
                     $j
@@ -231,43 +216,39 @@ Label : PROJECT
                     $k
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $l
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $i
                   Label : RIGHT
                     1
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             V
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $ag
-              Label : ARGUMENT
-                $ah
             Label : NAME
               V
+            Label : ARGUMENT
+              $ag
+            Label : ARGUMENT
+              $ah
           Label : OBJECT
             ::
             Label : CLASS
               T
             Label : METHOD
               U
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 U
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             $ai

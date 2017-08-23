@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Methodcall.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,15 +15,13 @@ Label : PROJECT
             ->
             Label : METHOD
               {}
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  1
-                Label : ARGUMENT
-                  2
               Label : NAME
                 {}
                 Label : CODE
                   'c'
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
             Label : OBJECT
               $b

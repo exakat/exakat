@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Comparison.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             !==
@@ -16,10 +15,8 @@ Label : PROJECT
               ->
               Label : METHOD
                 Execute
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $sql
+                Label : ARGUMENT
+                  $sql
                 Label : NAME
                   Execute
               Label : OBJECT

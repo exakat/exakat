@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yieldfrom.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 =
@@ -28,38 +25,34 @@ Label : PROJECT
                     ->
                     Label : METHOD
                       C
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $c
+                      Label : ARGUMENT
+                        $c
                       Label : NAME
                         C
                     Label : OBJECT
                       $this
               Label : ELSE
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     $d
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     list
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $d
-                        Label : PROPERTY
-                          D
-                      Label : ARGUMENT
-                        $e
                     Label : NAME
                       list
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        D
+                      Label : OBJECT
+                        $d
+                    Label : ARGUMENT
+                      $e
                   Label : RIGHT
                     $b
           Label : NAME

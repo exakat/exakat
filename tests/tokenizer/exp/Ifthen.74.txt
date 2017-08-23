@@ -1,121 +1,104 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.74.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
             Label : LEFT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'D'
+              Label : ARGUMENT
+                'D'
               Label : NAME
                 C
             Label : RIGHT
               'E'
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               N
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               E
-            Label : ELEMENT
+            Label : EXPRESSION
               G
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'H'
-                Label : ARGUMENT
-                  'I'
               Label : NAME
                 G
-            Label : ELEMENT
+              Label : ARGUMENT
+                'H'
+              Label : ARGUMENT
+                'I'
+            Label : EXPRESSION
               I
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 isset
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'K'
-                    Label : VARIABLE
-                      $a
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'K'
+                  Label : VARIABLE
+                    $a
                 Label : NAME
                   isset
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
+                  Label : ARGUMENT
+                    L
                     Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'M'
+                      Label : VARIABLE
+                        $b
+                    Label : NAME
                       L
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'M'
-                          Label : VARIABLE
-                            $b
-                      Label : NAME
-                        L
                   Label : NAME
                     echo
-            Label : ELEMENT
+            Label : EXPRESSION
               M
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-        Label : ELEMENT
+        Label : EXPRESSION
           O
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             isset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'Q'
-                Label : VARIABLE
-                  $c
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'Q'
+              Label : VARIABLE
+                $c
             Label : NAME
               isset
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
+              Label : ARGUMENT
+                R
                 Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'S'
+                  Label : VARIABLE
+                    $d
+                Label : NAME
                   R
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'S'
-                      Label : VARIABLE
-                        $d
-                  Label : NAME
-                    R
               Label : NAME
                 echo
-    Label : ELEMENT
+    Label : EXPRESSION
       S

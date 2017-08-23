@@ -1,59 +1,56 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.42.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           or
           Label : LEFT
             =
             Label : LEFT
               ->
+              Label : MEMBER
+                B
               Label : OBJECT
                 $a
-              Label : PROPERTY
-                B
             Label : RIGHT
               new
               Label : NEW
                 \C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'E'
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $b
-                      Label : PROPERTY
-                        D
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'G'
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $c
-                      Label : PROPERTY
-                        F
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'I'
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $d
-                      Label : PROPERTY
-                        H
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'E'
+                  Label : VARIABLE
+                    ->
+                    Label : MEMBER
+                      D
+                    Label : OBJECT
+                      $b
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'G'
+                  Label : VARIABLE
+                    ->
+                    Label : MEMBER
+                      F
+                    Label : OBJECT
+                      $c
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'I'
+                  Label : VARIABLE
+                    ->
+                    Label : MEMBER
+                      H
+                    Label : OBJECT
+                      $d
                 Label : NAME
                   \C
           Label : RIGHT
@@ -62,9 +59,7 @@ Label : PROJECT
               \J
             Label : METHOD
               K
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'L'
+              Label : ARGUMENT
+                'L'
               Label : NAME
                 K

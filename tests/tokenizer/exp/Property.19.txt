@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Property.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             a
@@ -23,19 +22,17 @@ Label : PROJECT
                 1
             Label : PUBLIC
               public
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             b
           Label : METHOD
             p
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   3
@@ -45,42 +42,38 @@ Label : PROJECT
               public
           Label : NAME
             b
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             c
           Label : NAME
             c
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ==
-              Label : LEFT
-                ->
-                Label : OBJECT
-                  (
-                  Label : CODE
-                    new
-                    Label : NEW
-                      a
-                Label : PROPERTY
-                  p
-              Label : RIGHT
-                2
+          Label : ARGUMENT
+            ==
+            Label : LEFT
+              ->
+              Label : MEMBER
+                p
+              Label : OBJECT
+                (
+                Label : CODE
+                  new
+                  Label : NEW
+                    a
+            Label : RIGHT
+              2
           Label : NAME
             var_dump
-        Label : ELEMENT
+        Label : EXPRESSION
           ==
           Label : LEFT
             ->
             Label : METHOD
               p
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 p
             Label : OBJECT
@@ -91,7 +84,7 @@ Label : PROJECT
                   b
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c

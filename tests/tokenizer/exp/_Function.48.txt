@@ -1,64 +1,55 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.48.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  b
                 Label : OBJECT
                   $a
-                Label : PROPERTY
-                  b
               Label : RIGHT
                 function
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       array
-                      Label : ARGUMENTS
-                        (
+                      Label : ARGUMENT
+                        array
                         Label : ARGUMENT
-                          array
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              =>
-                              Label : KEY
-                                'c'
-                              Label : VALUE
-                                'd'
-                            Label : ARGUMENT
-                              =>
-                              Label : KEY
-                                'e'
-                              Label : VALUE
-                                'f'
-            Label : ELEMENT
+                          =>
+                          Label : INDEX
+                            'c'
+                          Label : VALUE
+                            'd'
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            'e'
+                          Label : VALUE
+                            'f'
+            Label : EXPRESSION
               return
               Label : RETURN
                 3
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

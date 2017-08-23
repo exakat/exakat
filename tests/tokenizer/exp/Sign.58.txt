@@ -1,40 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.58.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
+          Label : ARGUMENT
+            C
             Label : ARGUMENT
+              $b
+            Label : NAME
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
-              Label : NAME
-                C
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            -
+            Label : SIGN
               -
-              Label : SIGN
-                -
-                Label : LEFT
+              Label : LEFT
+                \B
+                Label : ARGUMENT
+                  $c
+                Label : NAME
                   \B
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
-                  Label : NAME
-                    \B
-                Label : RIGHT
-                  2
+              Label : RIGHT
+                2
           Label : NAME
             B

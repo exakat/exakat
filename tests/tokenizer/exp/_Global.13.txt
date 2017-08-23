@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Global.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 global
                 Label : GLOBAL
                   $global
-              Label : ELEMENT
+              Label : EXPRESSION
                 static
                 Label : STATIC
                   $staticFunction
@@ -41,13 +38,13 @@ Label : PROJECT
           Label : PPP
             public
             Label : PPP
+              $b
+            Label : PPP
               =
               Label : LEFT
                 $x
               Label : RIGHT
                 1
-            Label : PPP
-              $b
             Label : PUBLIC
               public
           Label : PPP

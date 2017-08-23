@@ -1,38 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.55.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-              (
-              Label : CODE
-                "
-                Label : CONCAT
-                  B
-                Label : CONCAT
-                  $aC
-                Label : CONCAT
-                  $bD
-                Label : CONCAT
-                  $cE
+          Label : ARGUMENT
+            (
+            Label : CODE
+              "
+              Label : CONCAT
+                B
+              Label : CONCAT
+                $aC
+              Label : CONCAT
+                $bD
+              Label : CONCAT
+                $cE
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-              (
-              Label : CODE
-                0
+          Label : ARGUMENT
+            (
+            Label : CODE
+              0
           Label : NAME
             print

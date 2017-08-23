@@ -1,38 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.23.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                0
-              Label : VARIABLE
-                $like_locale
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              0
+            Label : VARIABLE
+              $like_locale
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           ', '
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                1
-              Label : VARIABLE
-                $like_locale
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              $like_locale
           Label : NAME
             echo
-    Label : ELEMENT
+    Label : EXPRESSION
       '],
 

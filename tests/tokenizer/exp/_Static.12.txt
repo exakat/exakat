@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Static.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             ::
             Label : CLASS
               static
-            Label : PROPERTY
+            Label : MEMBER
               $B
           Label : RIGHT
             +
@@ -30,9 +29,7 @@ Label : PROJECT
                 static
               Label : METHOD
                 d
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   d

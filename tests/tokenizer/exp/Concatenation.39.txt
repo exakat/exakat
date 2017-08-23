@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.39.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           .=
           Label : LEFT
             $a
@@ -18,14 +17,12 @@ Label : PROJECT
               >
               Label : LEFT
                 ord
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      $i
-                    Label : VARIABLE
-                      $b
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    $i
+                  Label : VARIABLE
+                    $b
                 Label : NAME
                   ord
               Label : RIGHT

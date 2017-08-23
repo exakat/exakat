@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.43.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'C' :  /**/  
               Label : CASE
                 'C'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   switch
                   Label : CASES
                      /**/ 
@@ -26,15 +25,13 @@ Label : PROJECT
                     ->
                     Label : METHOD
                       D
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         D
                     Label : OBJECT
                       $b
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     =
@@ -44,23 +41,21 @@ Label : PROJECT
                       ->
                       Label : METHOD
                         E
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $e
+                        Label : ARGUMENT
+                          $e
                         Label : NAME
                           E
                       Label : OBJECT
                         $d
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
@@ -68,10 +63,8 @@ Label : PROJECT
             ->
             Label : METHOD
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 B
             Label : OBJECT

@@ -1,54 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Static.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             static
-            Label : ARGUMENTS
-              (
+            Label : ARGUMENT
+              function
               Label : ARGUMENT
-                function
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $fulfill
-                Label : BLOCK
-                  {}
-                  Label : ELEMENT
-                    ++
-                    Label : POSTPLUSPLUS
-                      $self
-                Label : USE
-                  (
-                  Label : ARGUMENT
+                $fulfill
+              Label : BLOCK
+                {}
+                Label : EXPRESSION
+                  ++
+                  Label : POSTPLUSPLUS
                     $self
+              Label : USE
+                $self
             Label : NAME
               static
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             static
-            Label : ARGUMENTS
-              (
+            Label : ARGUMENT
+              function
               Label : ARGUMENT
-                function
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $fulfill
-                Label : BLOCK
-                  {}
-                  Label : ELEMENT
-                    ++
-                    Label : POSTPLUSPLUS
-                      $self
+                $fulfill
+              Label : BLOCK
+                {}
+                Label : EXPRESSION
+                  ++
+                  Label : POSTPLUSPLUS
+                    $self
             Label : NAME
               static

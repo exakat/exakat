@@ -1,29 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.23.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           b
 
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              $c
+          Label : ARGUMENT
+            $c
           Label : NAME
             echo

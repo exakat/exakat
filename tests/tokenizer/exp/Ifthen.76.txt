@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.76.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ||
@@ -28,51 +25,47 @@ Label : PROJECT
                   !
                   Label : NOT
                     C
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $c
+                    Label : ARGUMENT
+                      $c
                     Label : NAME
                       C
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     D
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 E
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $d
-                    Label : PROPERTY
-                      F
-                  Label : ARGUMENT
-                    $e
                 Label : NAME
                   E
+                Label : ARGUMENT
+                  ->
+                  Label : MEMBER
+                    F
+                  Label : OBJECT
+                    $d
+                Label : ARGUMENT
+                  $e
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     G
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ->
+                Label : MEMBER
+                  H
                 Label : OBJECT
                   $f
-                Label : PROPERTY
-                  H
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     !
@@ -80,23 +73,21 @@ Label : PROJECT
                       !
                       Label : NOT
                         I
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            ->
-                            Label : OBJECT
-                              $g
-                            Label : PROPERTY
-                              J
-                          Label : ARGUMENT
-                            $h
                         Label : NAME
                           I
-            Label : ELEMENT
+                        Label : ARGUMENT
+                          ->
+                          Label : MEMBER
+                            J
+                          Label : OBJECT
+                            $g
+                        Label : ARGUMENT
+                          $h
+            Label : EXPRESSION
               return
               Label : RETURN
                 K
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

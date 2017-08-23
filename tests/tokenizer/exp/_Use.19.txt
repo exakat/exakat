@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               const
               Label : CONST
                 const
@@ -20,47 +19,43 @@ Label : PROJECT
                   FOO
                 Label : VALUE
                   42
-            Label : ELEMENT
+            Label : EXPRESSION
               f
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        __FUNCTION__
-                      Label : CONCAT
-                        "\n"
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      __FUNCTION__
+                    Label : CONCAT
+                      "\n"
                   Label : NAME
                     echo
               Label : NAME
                 f
           Label : NAME
             Name\Space
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : CONST
                 const
               Label : USE
                 Name\Space\c
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : FUNCTION
                 function
               Label : USE
                 Name\Space\f
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : CONST
                 const
@@ -68,7 +63,7 @@ Label : PROJECT
                 Name\Space\FOO2
               Label : USE
                 Name\Space\FOO3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : FUNCTION
                 function
@@ -76,7 +71,7 @@ Label : PROJECT
                 Name\Space\FOO2
               Label : USE
                 Name\Space\FOO3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : CONST
                 const
@@ -86,7 +81,7 @@ Label : PROJECT
                   a1
                 Label : NAME
                   Name\Space\FOO
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : CONST
                 const
@@ -102,7 +97,7 @@ Label : PROJECT
                   a3
                 Label : NAME
                   Name\Space\FOO3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : CONST
                 const
@@ -124,24 +119,20 @@ Label : PROJECT
                   a6
                 Label : NAME
                   Name\Space\FOO3
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    FOO
-                  Label : CONCAT
-                    "\n"
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  FOO
+                Label : CONCAT
+                  "\n"
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               f2
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 f2
           Label : NAME

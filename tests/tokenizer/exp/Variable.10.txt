@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Variable.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,7 +15,7 @@ Label : PROJECT
             "
             Label : CONCAT
               $y
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c
@@ -24,7 +23,7 @@ Label : PROJECT
             "
             Label : CONCAT
               z
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d
@@ -32,7 +31,7 @@ Label : PROJECT
             "
             Label : CONCAT
               $a
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $e
@@ -44,7 +43,7 @@ Label : PROJECT
               $y
             Label : CONCAT
               z
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $f

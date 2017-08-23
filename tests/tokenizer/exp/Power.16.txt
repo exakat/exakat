@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Power.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             '1'
@@ -18,7 +17,7 @@ Label : PROJECT
               $s
             Label : RIGHT
               1
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             **

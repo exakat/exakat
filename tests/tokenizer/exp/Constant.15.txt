@@ -1,32 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Constant.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             a\b
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x2
           Label : RIGHT
             a\b\c\d
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $y
           Label : RIGHT
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -36,7 +35,7 @@ Label : PROJECT
               a\b
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $y

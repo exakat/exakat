@@ -1,166 +1,121 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall2.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           g
-          Label : ARGUMENTS
-            (
+          Label : ARGUMENT
+            f
+            Label : ARGUMENT
+              print
+              Label : ARGUMENT
+                $e
+              Label : NAME
+                print
+            Label : ARGUMENT
+              $f
+            Label : ARGUMENT
+              ltrim
+              Label : ARGUMENT
+                $r
+              Label : NAME
+                ltrim
+            Label : NAME
+              f
+          Label : NAME
+            g
+        Label : EXPRESSION
+          h
+          Label : ARGUMENT
+            g
             Label : ARGUMENT
               f
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                print
                 Label : ARGUMENT
+                  $e
+                Label : NAME
                   print
-                  Label : ARGUMENTS
-                    $e
-                    Label : ARGUMENT
-                      $e
-                  Label : NAME
-                    print
+              Label : ARGUMENT
+                $f
+              Label : ARGUMENT
+                ltrim
+                Label : ARGUMENT
+                  $r
+                Label : NAME
+                  ltrim
+              Label : NAME
+                f
+            Label : NAME
+              g
+          Label : NAME
+            h
+        Label : EXPRESSION
+          h
+          Label : ARGUMENT
+            i
+            Label : ARGUMENT
+              g
+              Label : ARGUMENT
+                f
                 Label : ARGUMENT
                   $f
                 Label : ARGUMENT
+                  print
+                  Label : ARGUMENT
+                    $e
+                  Label : NAME
+                    print
+                Label : ARGUMENT
                   ltrim
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $r
+                  Label : ARGUMENT
+                    $r
                   Label : NAME
                     ltrim
-              Label : NAME
-                f
-          Label : NAME
-            g
-        Label : ELEMENT
-          h
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              g
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
+                Label : NAME
                   f
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      print
-                      Label : ARGUMENTS
-                        $e
-                        Label : ARGUMENT
-                          $e
-                      Label : NAME
-                        print
-                    Label : ARGUMENT
-                      $f
-                    Label : ARGUMENT
-                      ltrim
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $r
-                      Label : NAME
-                        ltrim
-                  Label : NAME
-                    f
               Label : NAME
                 g
+            Label : NAME
+              i
           Label : NAME
             h
-        Label : ELEMENT
+        Label : EXPRESSION
           h
-          Label : ARGUMENTS
-            (
+          Label : ARGUMENT
+            i
             Label : ARGUMENT
-              i
-              Label : ARGUMENTS
-                (
+              j
+              Label : ARGUMENT
+                g
                 Label : ARGUMENT
+                  f
+                  Label : ARGUMENT
+                    ltrim
+                    Label : ARGUMENT
+                      $r
+                    Label : NAME
+                      ltrim
+                  Label : ARGUMENT
+                    print
+                    Label : ARGUMENT
+                      $e
+                    Label : NAME
+                      print
+                  Label : ARGUMENT
+                    $f
+                  Label : NAME
+                    f
+                Label : NAME
                   g
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      f
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $f
-                        Label : ARGUMENT
-                          print
-                          Label : ARGUMENTS
-                            $e
-                            Label : ARGUMENT
-                              $e
-                          Label : NAME
-                            print
-                        Label : ARGUMENT
-                          ltrim
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $r
-                          Label : NAME
-                            ltrim
-                      Label : NAME
-                        f
-                  Label : NAME
-                    g
               Label : NAME
-                i
-          Label : NAME
-            h
-        Label : ELEMENT
-          h
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
+                j
+            Label : NAME
               i
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  j
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      g
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          f
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              ltrim
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $r
-                              Label : NAME
-                                ltrim
-                            Label : ARGUMENT
-                              print
-                              Label : ARGUMENTS
-                                $e
-                                Label : ARGUMENT
-                                  $e
-                              Label : NAME
-                                print
-                            Label : ARGUMENT
-                              $f
-                          Label : NAME
-                            f
-                      Label : NAME
-                        g
-                  Label : NAME
-                    j
-              Label : NAME
-                i
           Label : NAME
             h

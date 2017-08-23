@@ -1,22 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.89.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       B
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           <<<C
 
           Label : CONCAT
             D
 
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -24,49 +23,39 @@ Label : PROJECT
             new
             Label : NEW
               E
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  new
-                  Label : NEW
+              Label : ARGUMENT
+                new
+                Label : NEW
+                  F
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'G'
+                      Label : VALUE
+                        'H'
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'I'
+                      Label : VALUE
+                        'J'
+                  Label : NAME
                     F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'G'
-                            Label : VALUE
-                              'H'
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'I'
-                            Label : VALUE
-                              'J'
-                    Label : NAME
-                      F
               Label : NAME
                 E
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              ->
-              Label : METHOD
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              K
+              Label : ARGUMENT
+                'G'
+              Label : NAME
                 K
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'G'
-                Label : NAME
-                  K
-              Label : OBJECT
-                $a
+            Label : OBJECT
+              $a
           Label : NAME
             echo

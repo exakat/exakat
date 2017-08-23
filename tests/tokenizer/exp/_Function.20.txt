@@ -1,50 +1,41 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-              Label : DEFAULT
-                array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      2
-                    Label : VALUE
-                      array
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          3
-                        Label : ARGUMENT
-                          2
+          Label : ARGUMENT
+            $b
+            Label : DEFAULT
+              array
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  2
+                Label : VALUE
+                  array
                   Label : ARGUMENT
                     3
+                  Label : ARGUMENT
+                    2
+              Label : ARGUMENT
+                3
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               print_r
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
+              Label : ARGUMENT
+                $b
               Label : NAME
                 print_r
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

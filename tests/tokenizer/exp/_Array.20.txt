@@ -1,144 +1,157 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Array.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : CONST
             const
             Label : CONST
               const
-              Label : NAME
-                A
-              Label : VALUE
-                array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      2
-                    Label : VALUE
-                      3
-          Label : DEFINITION
-            x
-          Label : DEFINITION
-            x
-          Label : DEFINITION
-            x
-          Label : DEFINITION
-            x
-          Label : NAME
-            x
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                +
-                Label : LEFT
-                  4.3
-                Label : RIGHT
-                  7
-              Label : VARIABLE
+              Label : DEFINITION
                 ::
                 Label : CLASS
                   x
                 Label : CONSTANT
                   A
+              Label : DEFINITION
+                ::
+                Label : CLASS
+                  x
+                Label : CONSTANT
+                  A
+              Label : DEFINITION
+                ::
+                Label : CLASS
+                  x
+                Label : CONSTANT
+                  A
+              Label : DEFINITION
+                ::
+                Label : CLASS
+                  x
+                Label : CONSTANT
+                  A
+              Label : NAME
+                A
+              Label : VALUE
+                array
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    2
+                  Label : VALUE
+                    3
+          Label : DEFINITION
+            x
+          Label : DEFINITION
+            x
+          Label : DEFINITION
+            x
+          Label : DEFINITION
+            x
+          Label : NAME
+            x
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              +
+              Label : LEFT
+                4.3
+              Label : RIGHT
+                7
+            Label : VARIABLE
+              ::
+              Label : CLASS
+                x
+              Label : CONSTANT
+                A
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              +
+              Label : LEFT
+                $x
+              Label : RIGHT
+                7
+            Label : VARIABLE
               [
               Label : INDEX
-                +
-                Label : LEFT
-                  $x
-                Label : RIGHT
-                  7
+                3
               Label : VARIABLE
                 [
                 Label : INDEX
-                  3
+                  2
                 Label : VARIABLE
-                  [
-                  Label : INDEX
-                    2
-                  Label : VARIABLE
-                    ::
-                    Label : CLASS
-                      x
-                    Label : CONSTANT
-                      A
+                  ::
+                  Label : CLASS
+                    x
+                  Label : CONSTANT
+                    A
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              +
+              Label : LEFT
+                null
+              Label : RIGHT
+                7
+            Label : VARIABLE
               [
               Label : INDEX
-                +
-                Label : LEFT
-                  null
-                Label : RIGHT
-                  7
+                3
               Label : VARIABLE
                 [
                 Label : INDEX
-                  3
+                  2
                 Label : VARIABLE
-                  [
-                  Label : INDEX
-                    2
-                  Label : VARIABLE
-                    ::
-                    Label : CLASS
-                      x
-                    Label : CONSTANT
-                      A
+                  ::
+                  Label : CLASS
+                    x
+                  Label : CONSTANT
+                    A
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              +
+              Label : LEFT
+                true
+              Label : RIGHT
+                7
+            Label : VARIABLE
               [
               Label : INDEX
-                +
-                Label : LEFT
-                  true
-                Label : RIGHT
-                  7
+                3
               Label : VARIABLE
                 [
                 Label : INDEX
-                  3
+                  2
                 Label : VARIABLE
-                  [
-                  Label : INDEX
-                    2
-                  Label : VARIABLE
-                    ::
-                    Label : CLASS
-                      x
-                    Label : CONSTANT
-                      A
+                  ::
+                  Label : CLASS
+                    x
+                  Label : CONSTANT
+                    A
           Label : NAME
             print

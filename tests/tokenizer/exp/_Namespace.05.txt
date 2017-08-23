@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Namespace.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               const
               Label : CONST
                 const
@@ -20,29 +19,27 @@ Label : PROJECT
                   CONNECT_OK
                 Label : VALUE
                   1
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : NAME
                 Connection
-            Label : ELEMENT
+            Label : EXPRESSION
               connect
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
               Label : NAME
                 connect
           Label : NAME
             MyProject
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               const
               Label : CONST
                 const
@@ -50,23 +47,21 @@ Label : PROJECT
                   CONNECT_OK
                 Label : VALUE
                   1
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : NAME
                 Connection
-            Label : ELEMENT
+            Label : EXPRESSION
               connect
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
               Label : NAME
                 connect
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             AnotherProject

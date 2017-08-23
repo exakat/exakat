@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Coalesce.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -18,10 +17,8 @@ Label : PROJECT
               [
               Label : INDEX
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $a
+                Label : ARGUMENT
+                  $a
                 Label : NAME
                   C
               Label : VARIABLE

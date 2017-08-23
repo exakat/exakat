@@ -1,140 +1,139 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'a' :  /**/  
               Label : CASE
                 'a'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
                   Label : RIGHT
                     1
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'b' :  /**/  
               Label : CASE
                 'b'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
                   Label : RIGHT
                     2
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'c' :  /**/  
               Label : CASE
                 'c'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
                   Label : RIGHT
                     3
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'd' :  /**/  
               Label : CASE
                 'd'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
                   Label : RIGHT
                     4
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'e' :  /**/  
               Label : CASE
                 'e'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
                   Label : RIGHT
                     5
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'f' :  /**/  
               Label : CASE
                 'f'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
                   Label : RIGHT
                     6
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'g' :  /**/  
               Label : CASE
                 'g'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
                   Label : RIGHT
                     7
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'h' :  /**/  
               Label : CASE
                 'h'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
                   Label : RIGHT
                     8
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'i' :  /**/  
               Label : CASE
                 'i'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
                   Label : RIGHT
                     9
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'j' :  /**/  
               Label : CASE
                 'j'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x

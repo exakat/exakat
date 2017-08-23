@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.43.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -24,12 +23,12 @@ Label : PROJECT
                 !=
                 Label : LEFT
                   ->
-                  Label : OBJECT
-                    $c
-                  Label : PROPERTY
+                  Label : MEMBER
                     {}
                     Label : CODE
                       $d
+                  Label : OBJECT
+                    $c
                 Label : RIGHT
                   null
               Label : RIGHT
@@ -42,26 +41,26 @@ Label : PROJECT
                       C
                     Label : VARIABLE
                       ->
-                      Label : OBJECT
-                        $c
-                      Label : PROPERTY
+                      Label : MEMBER
                         {}
                         Label : CODE
                           $d
+                      Label : OBJECT
+                        $c
                   Label : RIGHT
                     >
                     Label : LEFT
                       ->
+                      Label : MEMBER
+                        D
                       Label : OBJECT
                         ->
-                        Label : OBJECT
-                          $c
-                        Label : PROPERTY
+                        Label : MEMBER
                           {}
                           Label : CODE
                             $d
-                      Label : PROPERTY
-                        D
+                        Label : OBJECT
+                          $c
                     Label : RIGHT
                       1
                 Label : RIGHT
@@ -72,25 +71,23 @@ Label : PROJECT
                       E
                     Label : METHOD
                       F
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'G'
-                        Label : ARGUMENT
-                          ->
-                          Label : OBJECT
-                            $c
-                          Label : PROPERTY
-                            {}
-                            Label : CODE
-                              $d
-                        Label : ARGUMENT
-                          $e
+                      Label : ARGUMENT
+                        'G'
+                      Label : ARGUMENT
+                        ->
+                        Label : MEMBER
+                          {}
+                          Label : CODE
+                            $d
+                        Label : OBJECT
+                          $c
+                      Label : ARGUMENT
+                        $e
                       Label : NAME
                         F
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $f

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_For.23.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ||
@@ -16,24 +15,22 @@ Label : PROJECT
               ==
               Label : LEFT
                 ->
+                Label : MEMBER
+                  B
                 Label : OBJECT
                   $a
-                Label : PROPERTY
-                  B
               Label : RIGHT
                 'C'
             Label : RIGHT
               ==
               Label : LEFT
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $a
-                    Label : PROPERTY
-                      E
+                Label : ARGUMENT
+                  ->
+                  Label : MEMBER
+                    E
+                  Label : OBJECT
+                    $a
                 Label : NAME
                   D
               Label : RIGHT
@@ -44,33 +41,31 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       F
                   Label : OBJECT
                     $a
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $e
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               for
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $d
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   <
                   Label : LEFT
                     $b
@@ -78,13 +73,13 @@ Label : PROJECT
                     $c
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $b
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $b

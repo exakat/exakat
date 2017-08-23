@@ -1,40 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Addition.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             sprintf
-            Label : ARGUMENTS
-              (
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              str_replace
               Label : ARGUMENT
-                $b
+                C
               Label : ARGUMENT
+                'd'
+              Label : ARGUMENT
+                __FILE__
+              Label : NAME
                 str_replace
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    C
-                  Label : ARGUMENT
-                    'd'
-                  Label : ARGUMENT
-                    __FILE__
-                Label : NAME
-                  str_replace
-              Label : ARGUMENT
-                -
-                Label : LEFT
-                  __LINE__
-                Label : RIGHT
-                  1
+            Label : ARGUMENT
+              -
+              Label : LEFT
+                __LINE__
+              Label : RIGHT
+                1
             Label : NAME
               sprintf

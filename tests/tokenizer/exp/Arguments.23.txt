@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.23.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             b
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                <<<EOF
+            Label : ARGUMENT
+              <<<EOF
 
-                Label : CONCAT
-                  A 
-                Label : CONCAT
-                  $b
-                Label : CONCAT
-                   C
+              Label : CONCAT
+                A 
+              Label : CONCAT
+                $b
+              Label : CONCAT
+                 C
 
             Label : NAME
               b

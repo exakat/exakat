@@ -1,38 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Block.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $c
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $h
                 Label : RIGHT
                   array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'a'
-                      Label : VALUE
-                        'b'
-            Label : ELEMENT
+                  Label : ARGUMENT
+                    =>
+                    Label : INDEX
+                      'a'
+                    Label : VALUE
+                      'b'
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $i
@@ -40,19 +37,17 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     c
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $d
-                        Label : PROPERTY
-                          e
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        e
+                      Label : OBJECT
+                        $d
                     Label : NAME
                       c
                   Label : OBJECT
                     $this
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void

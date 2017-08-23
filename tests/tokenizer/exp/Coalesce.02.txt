@@ -1,86 +1,79 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Coalesce.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             NULL
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $y
           Label : RIGHT
             NULL
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $z
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
+          Label : ARGUMENT
+            ??
+            Label : LEFT
+              $x
+            Label : RIGHT
               ??
               Label : LEFT
-                $x
+                $y
               Label : RIGHT
-                ??
-                Label : LEFT
-                  $y
-                Label : RIGHT
-                  $z
+                $z
           Label : NAME
             var_dump
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             [
-            Label : ARGUMENTS
-              [
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  "c"
-                Label : VALUE
-                  "d"
-        Label : ELEMENT
-          var_dump
-          Label : ARGUMENTS
-            (
             Label : ARGUMENT
+              =>
+              Label : INDEX
+                "c"
+              Label : VALUE
+                "d"
+        Label : EXPRESSION
+          var_dump
+          Label : ARGUMENT
+            ??
+            Label : LEFT
+              [
+              Label : INDEX
+                "e"
+              Label : VARIABLE
+                $x
+            Label : RIGHT
               ??
               Label : LEFT
                 [
                 Label : INDEX
-                  "e"
+                  "f"
                 Label : VARIABLE
                   $x
               Label : RIGHT
-                ??
-                Label : LEFT
-                  [
-                  Label : INDEX
-                    "f"
-                  Label : VARIABLE
-                    $x
-                Label : RIGHT
-                  [
-                  Label : INDEX
-                    "g"
-                  Label : VARIABLE
-                    $x
+                [
+                Label : INDEX
+                  "g"
+                Label : VARIABLE
+                  $x
           Label : NAME
             var_dump

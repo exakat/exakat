@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             'a'
@@ -66,10 +65,8 @@ Label : PROJECT
                         "ac"
                       Label : CONCAT
                         ad
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'ae'
+                        Label : ARGUMENT
+                          'ae'
                         Label : NAME
                           ad
                       Label : CONCAT
@@ -80,10 +77,8 @@ Label : PROJECT
                         "y"
                       Label : CONCAT
                         z
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'aa'
+                        Label : ARGUMENT
+                          'aa'
                         Label : NAME
                           z
                       Label : CONCAT
@@ -92,10 +87,8 @@ Label : PROJECT
                   "ag"
                 Label : CONCAT
                   ah
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'ai'
+                  Label : ARGUMENT
+                    'ai'
                   Label : NAME
                     ah
                 Label : CONCAT
@@ -118,20 +111,16 @@ Label : PROJECT
                       $h
                 Label : CONCAT
                   j
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'k'
+                  Label : ARGUMENT
+                    'k'
                   Label : NAME
                     j
                 Label : CONCAT
                   "l"
                 Label : CONCAT
                   m
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'n'
+                  Label : ARGUMENT
+                    'n'
                   Label : NAME
                     m
                 Label : CONCAT

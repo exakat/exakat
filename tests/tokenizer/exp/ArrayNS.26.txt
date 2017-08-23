@@ -1,62 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             [
-            Label : ARGUMENTS
+            Label : ARGUMENT
+              Void
+        Label : EXPRESSION
+          return
+          Label : RETURN
+            [
+            Label : ARGUMENT
+              1
+        Label : EXPRESSION
+          return
+          Label : RETURN
+            [
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              4
+        Label : EXPRESSION
+          return
+          Label : RETURN
+            [
+            Label : ARGUMENT
               [
               Label : ARGUMENT
                 Void
-        Label : ELEMENT
-          return
-          Label : RETURN
-            [
-            Label : ARGUMENTS
+            Label : ARGUMENT
               [
               Label : ARGUMENT
-                1
-        Label : ELEMENT
-          return
-          Label : RETURN
-            [
-            Label : ARGUMENTS
+                Void
+            Label : ARGUMENT
               [
               Label : ARGUMENT
-                2
-              Label : ARGUMENT
-                3
-              Label : ARGUMENT
-                4
-        Label : ELEMENT
-          return
-          Label : RETURN
-            [
-            Label : ARGUMENTS
-              [
-              Label : ARGUMENT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    Void
-              Label : ARGUMENT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    Void
-              Label : ARGUMENT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    Void
+                Void

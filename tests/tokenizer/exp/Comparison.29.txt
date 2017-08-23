@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Comparison.29.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ||
@@ -16,10 +15,8 @@ Label : PROJECT
               &&
               Label : LEFT
                 defined
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'a'
+                Label : ARGUMENT
+                  'a'
                 Label : NAME
                   defined
               Label : RIGHT
@@ -34,14 +31,12 @@ Label : PROJECT
                       $b
                   Label : CONCAT
                     d
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        E
-                      Label : ARGUMENT
-                        1
                     Label : NAME
                       d
+                    Label : ARGUMENT
+                      E
+                    Label : ARGUMENT
+                      1
                 Label : RIGHT
                   [
                   Label : INDEX
@@ -54,10 +49,8 @@ Label : PROJECT
                 !
                 Label : NOT
                   defined
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'H'
+                  Label : ARGUMENT
+                    'H'
                   Label : NAME
                     defined
               Label : RIGHT
@@ -70,39 +63,35 @@ Label : PROJECT
                     $i
                 Label : RIGHT
                   substr
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'l'
-                      Label : VARIABLE
-                        $k
-                    Label : ARGUMENT
-                      0
-                    Label : ARGUMENT
-                      +
-                      Label : LEFT
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'l'
+                    Label : VARIABLE
+                      $k
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    +
+                    Label : LEFT
+                      strrpos
+                      Label : NAME
                         strrpos
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            [
-                            Label : INDEX
-                              'n'
-                            Label : VARIABLE
-                              $m
-                          Label : ARGUMENT
-                            'n'
-                        Label : NAME
-                          strrpos
-                      Label : RIGHT
-                        1
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'n'
+                        Label : VARIABLE
+                          $m
+                      Label : ARGUMENT
+                        'n'
+                    Label : RIGHT
+                      1
                   Label : NAME
                     substr
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $x

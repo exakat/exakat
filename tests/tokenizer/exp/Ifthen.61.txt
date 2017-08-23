@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.61.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             true
@@ -17,11 +16,11 @@ Label : PROJECT
               EMPTY_TRASH_DAYS
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 ++
                 Label : POSTPLUSPLUS
                   $b
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               EMPTY_TRASH_DAYS

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.78.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -18,25 +17,23 @@ Label : PROJECT
               'B'
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'D'
+                Label : ARGUMENT
+                  'D'
                 Label : NAME
                   C
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
               Label : RIGHT
                 'E'
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -46,7 +43,7 @@ Label : PROJECT
               'F'
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
@@ -56,27 +53,25 @@ Label : PROJECT
                   'G'
                 Label : CONCAT
                   H
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'I'
+                  Label : ARGUMENT
+                    'I'
                   Label : NAME
                     H
                 Label : CONCAT
                   'J'
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $f
               Label : RIGHT
                 'K'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $g
           Label : RIGHT
             0
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -94,13 +89,13 @@ Label : PROJECT
                 $i
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $j
               Label : RIGHT
                 1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $k
@@ -110,15 +105,13 @@ Label : PROJECT
               'N'
             Label : CONCAT
               O
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'P'
+              Label : ARGUMENT
+                'P'
               Label : NAME
                 O
             Label : CONCAT
               'Q'
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -132,7 +125,7 @@ Label : PROJECT
               'S'
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $m
@@ -142,15 +135,13 @@ Label : PROJECT
                   'T'
                 Label : CONCAT
                   U
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'V'
+                  Label : ARGUMENT
+                    'V'
                   Label : NAME
                     U
                 Label : CONCAT
                   'W'
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -164,7 +155,7 @@ Label : PROJECT
               'Y'
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $o
@@ -174,249 +165,201 @@ Label : PROJECT
                   'Z'
                 Label : CONCAT
                   AA
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'AB'
+                  Label : ARGUMENT
+                    'AB'
                   Label : NAME
                     AA
                 Label : CONCAT
                   'AC'
-        Label : ELEMENT
+        Label : EXPRESSION
           AC
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            AE
             Label : ARGUMENT
+              [
+              Label : INDEX
+                'AF'
+              Label : VARIABLE
+                $p
+            Label : NAME
               AE
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'AF'
-                  Label : VARIABLE
-                    $p
-              Label : NAME
-                AE
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           AF
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'AH'
-              Label : VARIABLE
-                $q
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'AH'
+            Label : VARIABLE
+              $q
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           AH
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'AJ'
-              Label : VARIABLE
-                $r
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'AJ'
+            Label : VARIABLE
+              $r
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           AJ
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             isset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'AL'
-                Label : VARIABLE
-                  $s
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'AL'
+              Label : VARIABLE
+                $s
             Label : NAME
               isset
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               AL
-            Label : ELEMENT
+            Label : EXPRESSION
               <?=
-              Label : ARGUMENTS
-                <?=
+              Label : ARGUMENT
+                AN
                 Label : ARGUMENT
+                  'AO'
+                Label : NAME
                   AN
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'AO'
-                  Label : NAME
-                    AN
               Label : NAME
                 <?=
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               AO
-        Label : ELEMENT
+        Label : EXPRESSION
           AP
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            AR
             Label : ARGUMENT
+              'AT'
+            Label : NAME
               AR
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'AT'
-              Label : NAME
-                AR
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           AT
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'AV'
+            Label : VARIABLE
+              $t
+          Label : NAME
             <?=
+        Label : EXPRESSION
+          AV
+        Label : EXPRESSION
+          AW
+        Label : EXPRESSION
+          <?=
+          Label : ARGUMENT
+            AY
+            Label : ARGUMENT
+              'AZ'
+            Label : NAME
+              AY
+          Label : NAME
+            <?=
+        Label : EXPRESSION
+          AZ
+        Label : EXPRESSION
+          <?=
+          Label : ARGUMENT
+            BB
             Label : ARGUMENT
               [
               Label : INDEX
-                'AV'
+                'BC'
               Label : VARIABLE
-                $t
-          Label : NAME
-            <?=
-        Label : ELEMENT
-          AV
-        Label : ELEMENT
-          AW
-        Label : ELEMENT
-          <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              AY
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'AZ'
-              Label : NAME
-                AY
-          Label : NAME
-            <?=
-        Label : ELEMENT
-          AZ
-        Label : ELEMENT
-          <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
+                $u
+            Label : NAME
               BB
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'BC'
-                  Label : VARIABLE
-                    $u
-              Label : NAME
-                BB
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           BC
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            BE
             Label : ARGUMENT
+              'BF'
+            Label : NAME
               BE
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'BF'
-              Label : NAME
-                BE
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           BF
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            BH
             Label : ARGUMENT
+              [
+              Label : INDEX
+                'BI'
+              Label : VARIABLE
+                $v
+            Label : NAME
               BH
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'BI'
-                  Label : VARIABLE
-                    $v
-              Label : NAME
-                BH
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           BI
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            BK
             Label : ARGUMENT
+              'BL'
+            Label : NAME
               BK
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'BL'
-              Label : NAME
-                BK
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           BL
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              $w
+          Label : ARGUMENT
+            $w
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           BM
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            BO
             Label : ARGUMENT
+              'BP'
+            Label : NAME
               BO
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'BP'
-              Label : NAME
-                BO
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           BP
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             [
@@ -426,75 +369,59 @@ Label : PROJECT
               $x
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
+              Label : ARGUMENT
+                BS
                 Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'BT'
+                  Label : VARIABLE
+                    $y
+                Label : NAME
                   BS
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'BT'
-                      Label : VARIABLE
-                        $y
-                  Label : NAME
-                    BS
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           BT
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            BV
             Label : ARGUMENT
+              'BW'
+            Label : NAME
               BV
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'BW'
-              Label : NAME
-                BV
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           BW
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            BY
             Label : ARGUMENT
+              $z
+            Label : NAME
               BY
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $z
-              Label : NAME
-                BY
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           BY
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            CA
             Label : ARGUMENT
+              'CB'
+            Label : NAME
               CA
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'CB'
-              Label : NAME
-                CA
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           CB
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             [
@@ -504,95 +431,75 @@ Label : PROJECT
               $aa
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
+              Label : ARGUMENT
+                CE
                 Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'CF'
+                  Label : VARIABLE
+                    $ab
+                Label : NAME
                   CE
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'CF'
-                      Label : VARIABLE
-                        $ab
-                  Label : NAME
-                    CE
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           CF
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            CH
             Label : ARGUMENT
+              'CI'
+            Label : NAME
               CH
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'CI'
-              Label : NAME
-                CH
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           CI
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              $ac
+          Label : ARGUMENT
+            $ac
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           CJ
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            CL
             Label : ARGUMENT
+              'CM'
+            Label : NAME
               CL
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'CM'
-              Label : NAME
-                CL
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           CM
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              $ad
+          Label : ARGUMENT
+            $ad
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           CN
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            CP
             Label : ARGUMENT
+              'CQ'
+            Label : NAME
               CP
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'CQ'
-              Label : NAME
-                CP
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           CQ
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -614,37 +521,33 @@ Label : PROJECT
                   3
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               CR
-            Label : ELEMENT
+            Label : EXPRESSION
               <?=
-              Label : ARGUMENTS
-                <?=
-                Label : ARGUMENT
-                  $ag
+              Label : ARGUMENT
+                $ag
               Label : NAME
                 <?=
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               CS
-        Label : ELEMENT
+        Label : EXPRESSION
           CT
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'CV'
-              Label : VARIABLE
-                $ah
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'CV'
+            Label : VARIABLE
+              $ah
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           CV
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -666,11 +569,11 @@ Label : PROJECT
                   5
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               CW
-        Label : ELEMENT
+        Label : EXPRESSION
           CX
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -692,33 +595,29 @@ Label : PROJECT
                   7
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               CY
-            Label : ELEMENT
+            Label : EXPRESSION
               <?=
-              Label : ARGUMENTS
-                <?=
-                Label : ARGUMENT
-                  $am
+              Label : ARGUMENT
+                $am
               Label : NAME
                 <?=
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               CZ
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                'DB'
-              Label : VARIABLE
-                $an
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'DB'
+            Label : VARIABLE
+              $an
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -740,7 +639,7 @@ Label : PROJECT
                   9
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               DB
-    Label : ELEMENT
+    Label : EXPRESSION
       DC

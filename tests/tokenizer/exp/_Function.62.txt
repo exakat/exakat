@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.62.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                $g
+            Label : ARGUMENT
+              $f
+            Label : ARGUMENT
+              $g
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 ++
                 Label : POSTPLUSPLUS
                   $a
@@ -28,10 +25,8 @@ Label : PROJECT
             ->
             Label : METHOD
               d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'e'
+              Label : ARGUMENT
+                'e'
               Label : NAME
                 d
             Label : OBJECT
@@ -40,27 +35,23 @@ Label : PROJECT
                 new
                 Label : NEW
                   A
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $b
-                    Label : ARGUMENT
-                      $c
                   Label : NAME
                     A
-        Label : ELEMENT
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    $c
+        Label : EXPRESSION
           -
           Label : LEFT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                $g
+            Label : ARGUMENT
+              $f
+            Label : ARGUMENT
+              $g
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 ++
                 Label : POSTPLUSPLUS
                   $a
@@ -68,10 +59,8 @@ Label : PROJECT
             ->
             Label : METHOD
               d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'e'
+              Label : ARGUMENT
+                'e'
               Label : NAME
                 d
             Label : OBJECT
@@ -80,11 +69,9 @@ Label : PROJECT
                 new
                 Label : NEW
                   A
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $b
-                    Label : ARGUMENT
-                      $c
                   Label : NAME
                     A
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    $c

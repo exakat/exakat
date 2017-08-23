@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Throw.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           throw
           Label : THROW
             new
             Label : NEW
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'C'
+              Label : ARGUMENT
+                'C'
               Label : NAME
                 B
-        Label : ELEMENT
+        Label : EXPRESSION
           throw
           Label : THROW
             .
@@ -28,10 +25,8 @@ Label : PROJECT
               new
               Label : NEW
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'C'
+                Label : ARGUMENT
+                  'C'
                 Label : NAME
                   B
             Label : CONCAT
@@ -40,21 +35,19 @@ Label : PROJECT
                 'F'
               Label : VARIABLE
                 $b
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             G
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'F'
-              Label : ARGUMENT
-                $b
             Label : NAME
               G
+            Label : ARGUMENT
+              'F'
+            Label : ARGUMENT
+              $b
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               throw
               Label : THROW
                 .
@@ -62,10 +55,8 @@ Label : PROJECT
                   new
                   Label : NEW
                     B
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'C'
+                    Label : ARGUMENT
+                      'C'
                     Label : NAME
                       B
                 Label : CONCAT

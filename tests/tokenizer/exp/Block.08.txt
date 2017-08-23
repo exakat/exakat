@@ -1,74 +1,67 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Block.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             isset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'C'
-                Label : VARIABLE
-                  ->
-                  Label : OBJECT
-                    $this
-                  Label : PROPERTY
-                    B
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'C'
+              Label : VARIABLE
+                ->
+                Label : MEMBER
+                  B
+                Label : OBJECT
+                  $this
             Label : NAME
               isset
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $b
                 Label : RIGHT
                   array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'Q'
-                      Label : VALUE
-                        'R'
-              Label : ELEMENT
+                  Label : ARGUMENT
+                    =>
+                    Label : INDEX
+                      'Q'
+                    Label : VALUE
+                      'R'
+              Label : EXPRESSION
                 if
                 Label : CONDITION
                   isset
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'U'
+                    Label : VARIABLE
                       [
                       Label : INDEX
-                        'U'
+                        'T'
                       Label : VARIABLE
-                        [
-                        Label : INDEX
-                          'T'
-                        Label : VARIABLE
-                          ->
-                          Label : OBJECT
-                            $this
-                          Label : PROPERTY
-                            B
+                        ->
+                        Label : MEMBER
+                          B
+                        Label : OBJECT
+                          $this
                   Label : NAME
                     isset
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     =
                     Label : LEFT
                       [
@@ -86,35 +79,33 @@ Label : PROJECT
                           'T'
                         Label : VARIABLE
                           ->
+                          Label : MEMBER
+                            B
                           Label : OBJECT
                             $this
-                          Label : PROPERTY
-                            B
-              Label : ELEMENT
+              Label : EXPRESSION
                 if
                 Label : CONDITION
                   isset
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'AB'
+                    Label : VARIABLE
                       [
                       Label : INDEX
-                        'AB'
+                        'T'
                       Label : VARIABLE
-                        [
-                        Label : INDEX
-                          'T'
-                        Label : VARIABLE
-                          ->
-                          Label : OBJECT
-                            $this
-                          Label : PROPERTY
-                            B
+                        ->
+                        Label : MEMBER
+                          B
+                        Label : OBJECT
+                          $this
                   Label : NAME
                     isset
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     =
                     Label : LEFT
                       [
@@ -132,11 +123,11 @@ Label : PROJECT
                           'T'
                         Label : VARIABLE
                           ->
+                          Label : MEMBER
+                            B
                           Label : OBJECT
                             $this
-                          Label : PROPERTY
-                            B
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $c
@@ -144,137 +135,127 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     AH
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'AI'
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            ->
-                            Label : OBJECT
-                              $this
-                            Label : PROPERTY
-                              AJ
-                          Label : ARGUMENT
-                            ->
-                            Label : OBJECT
-                              $this
-                            Label : PROPERTY
-                              AK
-                          Label : ARGUMENT
-                            0
-                          Label : ARGUMENT
-                            $b
-                          Label : ARGUMENT
-                            ->
-                            Label : OBJECT
-                              $this
-                            Label : PROPERTY
-                              AL
-                          Label : ARGUMENT
-                            ->
-                            Label : OBJECT
-                              $this
-                            Label : PROPERTY
-                              AM
                     Label : NAME
                       AH
+                    Label : ARGUMENT
+                      'AI'
+                    Label : ARGUMENT
+                      array
+                      Label : ARGUMENT
+                        ->
+                        Label : MEMBER
+                          AJ
+                        Label : OBJECT
+                          $this
+                      Label : ARGUMENT
+                        ->
+                        Label : MEMBER
+                          AK
+                        Label : OBJECT
+                          $this
+                      Label : ARGUMENT
+                        0
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        ->
+                        Label : MEMBER
+                          AL
+                        Label : OBJECT
+                          $this
+                      Label : ARGUMENT
+                        ->
+                        Label : MEMBER
+                          AM
+                        Label : OBJECT
+                          $this
                   Label : OBJECT
                     ->
+                    Label : MEMBER
+                      AG
                     Label : OBJECT
                       $this
-                    Label : PROPERTY
-                      AG
-              Label : ELEMENT
+              Label : EXPRESSION
                 if
                 Label : CONDITION
                   ->
+                  Label : MEMBER
+                    AN
                   Label : OBJECT
                     $c
-                  Label : PROPERTY
-                    AN
                 Label : ELSE
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     ->
                     Label : METHOD
                       AP
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         AP
                     Label : OBJECT
                       $a
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     =
                     Label : LEFT
                       ->
+                      Label : MEMBER
+                        AT
                       Label : OBJECT
                         $this
-                      Label : PROPERTY
-                        AT
                     Label : RIGHT
                       ->
+                      Label : MEMBER
+                        AT
                       Label : OBJECT
                         $c
-                      Label : PROPERTY
-                        AT
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       !
                       Label : NOT
                         empty
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            ->
-                            Label : OBJECT
-                              $this
-                            Label : PROPERTY
-                              B
+                        Label : ARGUMENT
+                          ->
+                          Label : MEMBER
+                            B
+                          Label : OBJECT
+                            $this
                         Label : NAME
                           empty
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     if
                     Label : CONDITION
                       ===
                       Label : LEFT
                         ->
+                        Label : MEMBER
+                          AO
                         Label : OBJECT
                           $c
-                        Label : PROPERTY
-                          AO
                       Label : RIGHT
                         1
                     Label : THEN
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         ->
                         Label : METHOD
                           AP
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
+                          Label : ARGUMENT
+                            Void
                           Label : NAME
                             AP
                         Label : OBJECT
                           $a
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         return
                         Label : RETURN
                           AQ
-            Label : ELEMENT
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $d
@@ -282,19 +263,17 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     AW
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $c
-                        Label : PROPERTY
-                          AX
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        AX
+                      Label : OBJECT
+                        $c
                     Label : NAME
                       AW
                   Label : OBJECT
                     $this
-              Label : ELEMENT
+              Label : EXPRESSION
                 if
                 Label : CONDITION
                   ===
@@ -304,15 +283,15 @@ Label : PROJECT
                       'AZ'
                     Label : VARIABLE
                       ->
+                      Label : MEMBER
+                        B
                       Label : OBJECT
                         $this
-                      Label : PROPERTY
-                        B
                   Label : RIGHT
                     $d
                 Label : ELSE
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     =
                     Label : LEFT
                       [
@@ -320,33 +299,31 @@ Label : PROJECT
                         'AZ'
                       Label : VARIABLE
                         ->
+                        Label : MEMBER
+                          B
                         Label : OBJECT
                           $this
-                        Label : PROPERTY
-                          B
                     Label : RIGHT
                       $d
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     ->
                     Label : METHOD
                       AP
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         AP
                     Label : OBJECT
                       $a
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       AQ
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 >
@@ -356,31 +333,27 @@ Label : PROJECT
                     ->
                     Label : METHOD
                       D
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         D
                     Label : OBJECT
                       $a
                   Label : RIGHT
                     ->
+                    Label : MEMBER
+                      E
                     Label : OBJECT
                       $this
-                    Label : PROPERTY
-                      E
                 Label : RIGHT
                   F
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     F
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     !==
@@ -390,79 +363,71 @@ Label : PROJECT
                         'C'
                       Label : VARIABLE
                         ->
+                        Label : MEMBER
+                          B
                         Label : OBJECT
                           $this
-                        Label : PROPERTY
-                          B
                     Label : RIGHT
                       [
                       Label : INDEX
                         'J'
                       Label : VARIABLE
                         ->
+                        Label : MEMBER
+                          B
                         Label : OBJECT
                           $this
-                        Label : PROPERTY
-                          B
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       ->
                       Label : METHOD
                         K
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            [
-                            Label : INDEX
-                              'C'
-                            Label : VARIABLE
-                              ->
-                              Label : OBJECT
-                                $this
-                              Label : PROPERTY
-                                B
+                        Label : ARGUMENT
+                          [
+                          Label : INDEX
+                            'C'
+                          Label : VARIABLE
+                            ->
+                            Label : MEMBER
+                              B
+                            Label : OBJECT
+                              $this
                         Label : NAME
                           K
                       Label : OBJECT
                         $this
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       return
                       Label : RETURN
                         ->
                         Label : METHOD
                           N
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
+                          Label : ARGUMENT
+                            Void
                           Label : NAME
                             N
                         Label : OBJECT
                           $this
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     O
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       O
                   Label : OBJECT
                     $a
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     ->
+                    Label : MEMBER
+                      B
                     Label : OBJECT
                       $this
-                    Label : PROPERTY
-                      B
                   Label : RIGHT
                     array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void

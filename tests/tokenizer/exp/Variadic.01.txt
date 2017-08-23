@@ -1,116 +1,93 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Variadic.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           $a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              __FILE__
+          Label : ARGUMENT
+            __FILE__
           Label : NAME
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           $b
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              0
+          Label : ARGUMENT
+            0
           Label : NAME
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           $c
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              B
+          Label : ARGUMENT
+            B
           Label : NAME
             $c
-        Label : ELEMENT
+        Label : EXPRESSION
           $d
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              null
+          Label : ARGUMENT
+            null
           Label : NAME
             $d
-        Label : ELEMENT
+        Label : EXPRESSION
           $e
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              C
+          Label : ARGUMENT
+            C
           Label : NAME
             $e
-        Label : ELEMENT
+        Label : EXPRESSION
           $f
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $g
-              Label : PROPERTY
-                D
+          Label : ARGUMENT
+            ->
+            Label : MEMBER
+              D
+            Label : OBJECT
+              $g
           Label : NAME
             $f
-        Label : ELEMENT
+        Label : EXPRESSION
           $h
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ->
-              Label : METHOD
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              E
+              Label : ARGUMENT
+                Void
+              Label : NAME
                 E
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  E
-              Label : OBJECT
-                $i
+            Label : OBJECT
+              $i
           Label : NAME
             $h
-        Label : ELEMENT
+        Label : EXPRESSION
           $j
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                F
-              Label : PROPERTY
-                $k
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              F
+            Label : MEMBER
+              $k
           Label : NAME
             $j
-        Label : ELEMENT
+        Label : EXPRESSION
           $l
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                G
-              Label : CONSTANT
-                H
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              G
+            Label : CONSTANT
+              H
           Label : NAME
             $l
-        Label : ELEMENT
+        Label : EXPRESSION
           $m
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                I
-              Label : CONSTANT
-                J
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              I
+            Label : CONSTANT
+              J
           Label : NAME
             $m

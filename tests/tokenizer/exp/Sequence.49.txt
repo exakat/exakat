@@ -1,36 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.49.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
+          Label : ARGUMENT
+            __
             Label : ARGUMENT
+              'B'
+            Label : NAME
               __
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'B'
-              Label : NAME
-                __
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           A
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             g
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               g
           Label : OBJECT
@@ -39,33 +32,25 @@ Label : PROJECT
               C
             Label : METHOD
               D
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                __
                 Label : ARGUMENT
+                  'F'
+                Label : NAME
                   __
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'F'
-                  Label : NAME
-                    __
               Label : NAME
                 D
-        Label : ELEMENT
+        Label : EXPRESSION
           H
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
+          Label : ARGUMENT
+            I
             Label : ARGUMENT
+              'J'
+            Label : NAME
               I
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'J'
-              Label : NAME
-                I
           Label : NAME
             echo
-    Label : ELEMENT
+    Label : EXPRESSION
       K

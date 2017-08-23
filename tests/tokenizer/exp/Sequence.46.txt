@@ -1,51 +1,46 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.46.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $z
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
                 Label : NOT
                   empty
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'd'
+                    Label : VARIABLE
                       [
                       Label : INDEX
-                        'd'
+                        'c'
                       Label : VARIABLE
-                        [
-                        Label : INDEX
-                          'c'
-                        Label : VARIABLE
-                          $b
+                        $b
                   Label : NAME
                     empty
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 f
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $g
+                Label : ARGUMENT
+                  $g
                 Label : NAME
                   f
               Label : OBJECT

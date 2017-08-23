@@ -1,21 +1,18 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.69.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             bootstrap
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               bootstrap
           Label : OBJECT
@@ -28,67 +25,57 @@ Label : PROJECT
                   ConsoleProgram
                 Label : METHOD
                   main
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : BLOCK
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
                   Label : NAME
                     main
                   Label : PUBLIC
                     public
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             new
             Label : NEW
               class
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $controller
+              Label : ARGUMENT
+                $controller
               Label : IMPLEMENTS
                 Page
               Label : METHOD
                 __construct
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $controller
+                Label : ARGUMENT
+                  $controller
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : NAME
                   __construct
                 Label : PUBLIC
                   public
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             MyPage
           Label : DEFINITION
             MyPage
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $controller
+            Label : ARGUMENT
+              $controller
             Label : NAME
               MyPage
           Label : IMPLEMENTS
             Page
           Label : METHOD
             __construct
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $controller
+            Label : ARGUMENT
+              $controller
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               __construct
@@ -96,27 +83,23 @@ Label : PROJECT
               public
           Label : NAME
             MyPage
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             new
             Label : NEW
               MyPage
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $controller
+              Label : ARGUMENT
+                $controller
               Label : NAME
                 MyPage
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             new
             Label : NEW
               class
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $path
+              Label : ARGUMENT
+                $path
               Label : EXTENDS
                 DirectoryIterator

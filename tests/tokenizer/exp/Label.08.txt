@@ -1,48 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Label.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              b
             Label : OBJECT
               $a
-            Label : PROPERTY
-              b
           Label : RIGHT
             c
-            Label : ARGUMENTS
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
               (
-              Label : ARGUMENT
-                $d
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  ?
-                  Label : CONDITION
+              Label : CODE
+                ?
+                Label : CONDITION
+                  e
+                  Label : ARGUMENT
+                    'f'
+                  Label : NAME
                     e
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'f'
-                    Label : NAME
-                      e
-                  Label : ELSE
-                    I
-                  Label : THEN
-                    |
-                    Label : LEFT
-                      G
-                    Label : RIGHT
-                      H
-              Label : ARGUMENT
-                'J'
+                Label : ELSE
+                  I
+                Label : THEN
+                  |
+                  Label : LEFT
+                    G
+                  Label : RIGHT
+                    H
+            Label : ARGUMENT
+              'J'
             Label : NAME
               c

@@ -1,56 +1,55 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $g
                   Label : RIGHT
                     1
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $h
                   Label : RIGHT
                     2
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $i
                   Label : RIGHT
                     3
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     $a
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $j
                       Label : RIGHT
                         2
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       foreach
                       Label : BLOCK
                         {}
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           if
                           Label : CONDITION
                             =
@@ -60,7 +59,7 @@ Label : PROJECT
                               $e
                           Label : THEN
                             {}
-                            Label : ELEMENT
+                            Label : EXPRESSION
                               =
                               Label : LEFT
                                 $f
@@ -70,11 +69,11 @@ Label : PROJECT
                         $a
                       Label : VALUE
                         =>
-                        Label : KEY
+                        Label : INDEX
                           $b
                         Label : VALUE
                           $c
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void

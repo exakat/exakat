@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Cast.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
@@ -18,5 +17,5 @@ Label : PROJECT
               ::
               Label : CLASS
                 $a
-              Label : PROPERTY
+              Label : MEMBER
                 $b

@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.45.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
@@ -22,10 +21,10 @@ Label : PROJECT
                     d 
                   Label : CONCAT
                     "
+                    Label : MEMBER
+                      f
                     Label : OBJECT
                       $e
-                    Label : PROPERTY
-                      f
                   Label : CONCAT
                      
                   Label : CONCAT
@@ -38,43 +37,37 @@ Label : PROJECT
                   $items
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
           Label : SOURCE
             a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               a
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $b
             Label : VALUE
               $c
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'j'
-                  Label : VARIABLE
-                    $i
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'j'
+                Label : VARIABLE
+                  $i
               Label : NAME
                 empty
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
@@ -84,10 +77,10 @@ Label : PROJECT
                     k 
                   Label : CONCAT
                     "
+                    Label : MEMBER
+                      m
                     Label : OBJECT
                       $l
-                    Label : PROPERTY
-                      m
                   Label : CONCAT
                      
                   Label : CONCAT
@@ -98,7 +91,5 @@ Label : PROJECT
                   $items
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void

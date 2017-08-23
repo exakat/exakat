@@ -1,32 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Instanceof.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
-          Label : DEFINITION
-            $this
-          Label : DEFINITION
-            $this
           Label : METHOD
             C
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                $c
-                Label : TYPEHINT
-                  array
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              $c
+              Label : TYPEHINT
+                array
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 if
                 Label : CONDITION
                   ===
@@ -36,44 +29,40 @@ Label : PROJECT
                       $d
                     Label : VARIABLE
                       ->
+                      Label : MEMBER
+                        E
                       Label : OBJECT
                         ->
                         Label : METHOD
                           D
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
+                          Label : ARGUMENT
+                            Void
                           Label : NAME
                             D
                         Label : OBJECT
                           $this
-                      Label : PROPERTY
-                        E
                   Label : RIGHT
                     F
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       ->
                       Label : METHOD
                         H
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $e
-                          Label : ARGUMENT
-                            $f
                         Label : NAME
                           H
+                        Label : ARGUMENT
+                          $e
+                        Label : ARGUMENT
+                          $f
                       Label : OBJECT
                         ->
+                        Label : MEMBER
+                          G
                         Label : OBJECT
                           $this
-                        Label : PROPERTY
-                          G
             Label : NAME
               C
             Label : PUBLIC

@@ -1,36 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Throw.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           throw
           Label : THROW
             new
             Label : NEW
               \A
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                b
                 Label : ARGUMENT
+                  'C'
+                Label : ARGUMENT
+                  ->
+                  Label : MEMBER
+                    e
+                  Label : OBJECT
+                    $d
+                Label : ARGUMENT
+                  $f
+                Label : NAME
                   b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'C'
-                    Label : ARGUMENT
-                      ->
-                      Label : OBJECT
-                        $d
-                      Label : PROPERTY
-                        e
-                    Label : ARGUMENT
-                      $f
-                  Label : NAME
-                    b
               Label : NAME
                 \A

@@ -1,45 +1,38 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Include.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           !
           Label : NOT
             @
             Label : AT
               include
-              Label : ARGUMENTS
-                )
-                Label : ARGUMENT
-                  (
-                  Label : CODE
-                    '../scripts/'
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  '../scripts/'
               Label : NAME
                 include
-        Label : ELEMENT
+        Label : EXPRESSION
           include
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-              or
-              Label : LEFT
-                'd'
-              Label : RIGHT
+          Label : ARGUMENT
+            or
+            Label : LEFT
+              'd'
+            Label : RIGHT
+              die
+              Label : ARGUMENT
+                Void
+              Label : NAME
                 die
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  die
           Label : NAME
             include
-    Label : ELEMENT
+    Label : EXPRESSION
       
 

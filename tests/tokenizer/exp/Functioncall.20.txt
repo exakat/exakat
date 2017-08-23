@@ -1,64 +1,61 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  $a
-                Label : VALUE
-                  $b
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  [
-                  Label : INDEX
-                    'd'
-                  Label : VARIABLE
-                    $c
-                Label : VALUE
-                  [
-                  Label : INDEX
-                    'f'
-                  Label : VARIABLE
-                    $e
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  -4
-                Label : VALUE
-                  -5
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  ->
-                  Label : OBJECT
-                    $f
-                  Label : PROPERTY
-                    g
-                Label : VALUE
-                  ->
-                  Label : OBJECT
-                    $h
-                  Label : PROPERTY
-                    i
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  \k\l
-                Label : VALUE
-                  \m\n
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                $a
+              Label : VALUE
+                $b
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                [
+                Label : INDEX
+                  'd'
+                Label : VARIABLE
+                  $c
+              Label : VALUE
+                [
+                Label : INDEX
+                  'f'
+                Label : VARIABLE
+                  $e
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                -4
+              Label : VALUE
+                -5
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                ->
+                Label : MEMBER
+                  g
+                Label : OBJECT
+                  $f
+              Label : VALUE
+                ->
+                Label : MEMBER
+                  i
+                Label : OBJECT
+                  $h
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                \k\l
+              Label : VALUE
+                \m\n

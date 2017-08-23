@@ -1,36 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.52.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'C'
-                  Label : VARIABLE
-                    ::
-                    Label : CLASS
-                      B
-                    Label : PROPERTY
-                      $b
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'C'
+                Label : VARIABLE
+                  ::
+                  Label : CLASS
+                    B
+                  Label : MEMBER
+                    $b
               Label : NAME
                 empty
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               &&
               Label : LEFT
                 D
@@ -40,175 +37,155 @@ Label : PROJECT
                   E
                 Label : METHOD
                   F
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        'G'
-                      Label : CONCAT
-                        H
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            ::
-                            Label : CLASS
-                              B
-                            Label : PROPERTY
-                              $b
-                          Label : ARGUMENT
-                            J
-                        Label : NAME
-                          H
-                    Label : ARGUMENT
-                      'K'
                   Label : NAME
                     F
-            Label : ELEMENT
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      'G'
+                    Label : CONCAT
+                      H
+                      Label : NAME
+                        H
+                      Label : ARGUMENT
+                        ::
+                        Label : CLASS
+                          B
+                        Label : MEMBER
+                          $b
+                      Label : ARGUMENT
+                        J
+                  Label : ARGUMENT
+                    'K'
+            Label : EXPRESSION
               switch
               Label : CASES
                  /**/ 
-                Label : ELEMENT
+                Label : EXPRESSION
                   case 'N' :  /**/  
                   Label : CASE
                     'N'
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $c
                       Label : RIGHT
                         O
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'P'
-                          Label : ARGUMENT
-                            $d
-                          Label : ARGUMENT
-                            1
+                        Label : ARGUMENT
+                          'P'
+                        Label : ARGUMENT
+                          $d
+                        Label : ARGUMENT
+                          1
                         Label : NAME
                           O
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       if
                       Label : CONDITION
                         !
                         Label : NOT
                           empty
-                          Label : ARGUMENTS
-                            (
+                          Label : ARGUMENT
+                            [
+                            Label : INDEX
+                              2
+                            Label : VARIABLE
+                              $c
+                          Label : NAME
+                            empty
+                      Label : THEN
+                        {}
+                        Label : EXPRESSION
+                          ::
+                          Label : CLASS
+                            B
+                          Label : METHOD
+                            R
                             Label : ARGUMENT
                               [
                               Label : INDEX
                                 2
                               Label : VARIABLE
                                 $c
-                          Label : NAME
-                            empty
-                      Label : THEN
-                        {}
-                        Label : ELEMENT
-                          ::
-                          Label : CLASS
-                            B
-                          Label : METHOD
-                            R
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                [
-                                Label : INDEX
-                                  2
-                                Label : VARIABLE
-                                  $c
                             Label : NAME
                               R
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       return
                       Label : RETURN
                         [
-                        Label : ARGUMENTS
-                          [
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'C'
-                            Label : VALUE
-                              'T'
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'T'
-                            Label : VALUE
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            'C'
+                          Label : VALUE
+                            'T'
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            'T'
+                          Label : VALUE
+                            [
+                            Label : ARGUMENT
                               [
-                              Label : ARGUMENTS
+                              Label : INDEX
+                                'N'
+                              Label : VARIABLE
+                                ::
+                                Label : CLASS
+                                  B
+                                Label : MEMBER
+                                  $b
+                            Label : ARGUMENT
+                              ?
+                              Label : CONDITION
                                 [
-                                Label : ARGUMENT
-                                  [
-                                  Label : INDEX
-                                    'N'
-                                  Label : VARIABLE
-                                    ::
-                                    Label : CLASS
-                                      B
-                                    Label : PROPERTY
-                                      $b
-                                Label : ARGUMENT
-                                  ?
-                                  Label : CONDITION
-                                    [
-                                    Label : INDEX
-                                      3
-                                    Label : VARIABLE
-                                      $c
-                                  Label : ELSE
-                                    ::
-                                    Label : CLASS
-                                      X
-                                    Label : METHOD
-                                      Y
-                                      Label : ARGUMENTS
-                                        (
-                                        Label : ARGUMENT
-                                          'Z'
-                                      Label : NAME
-                                        Y
-                                  Label : THEN
-                                    Void
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'AA'
-                            Label : VALUE
-                              [
-                              Label : ARGUMENTS
-                                [
-                                Label : ARGUMENT
-                                  Void
-                Label : ELEMENT
+                                Label : INDEX
+                                  3
+                                Label : VARIABLE
+                                  $c
+                              Label : ELSE
+                                ::
+                                Label : CLASS
+                                  X
+                                Label : METHOD
+                                  Y
+                                  Label : ARGUMENT
+                                    'Z'
+                                  Label : NAME
+                                    Y
+                              Label : THEN
+                                Void
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            'AA'
+                          Label : VALUE
+                            [
+                            Label : ARGUMENT
+                              Void
+                Label : EXPRESSION
                   case 'AB' :  /**/  
                   Label : CASE
                     'AB'
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $c
                       Label : RIGHT
                         O
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'P'
-                          Label : ARGUMENT
-                            $d
-                          Label : ARGUMENT
-                            4
+                        Label : ARGUMENT
+                          'P'
+                        Label : ARGUMENT
+                          $d
+                        Label : ARGUMENT
+                          4
                         Label : NAME
                           O
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $e
@@ -218,14 +195,12 @@ Label : PROJECT
                           !
                           Label : NOT
                             empty
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                [
-                                Label : INDEX
-                                  3
-                                Label : VARIABLE
-                                  $c
+                            Label : ARGUMENT
+                              [
+                              Label : INDEX
+                                3
+                              Label : VARIABLE
+                                $c
                             Label : NAME
                               empty
                         Label : ELSE
@@ -234,10 +209,8 @@ Label : PROJECT
                             X
                           Label : METHOD
                             Y
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                'AG'
+                            Label : ARGUMENT
+                              'AG'
                             Label : NAME
                               Y
                         Label : THEN
@@ -246,7 +219,7 @@ Label : PROJECT
                             3
                           Label : VARIABLE
                             $c
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $f
@@ -256,14 +229,12 @@ Label : PROJECT
                           !
                           Label : NOT
                             empty
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                [
-                                Label : INDEX
-                                  2
-                                Label : VARIABLE
-                                  $c
+                            Label : ARGUMENT
+                              [
+                              Label : INDEX
+                                2
+                              Label : VARIABLE
+                                $c
                             Label : NAME
                               empty
                         Label : ELSE
@@ -272,10 +243,8 @@ Label : PROJECT
                             X
                           Label : METHOD
                             Y
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                'Z'
+                            Label : ARGUMENT
+                              'Z'
                             Label : NAME
                               Y
                         Label : THEN
@@ -284,88 +253,78 @@ Label : PROJECT
                             2
                           Label : VARIABLE
                             $c
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       if
                       Label : CONDITION
                         !
                         Label : NOT
                           empty
-                          Label : ARGUMENTS
-                            (
+                          Label : ARGUMENT
+                            [
+                            Label : INDEX
+                              1
+                            Label : VARIABLE
+                              $c
+                          Label : NAME
+                            empty
+                      Label : THEN
+                        {}
+                        Label : EXPRESSION
+                          ::
+                          Label : CLASS
+                            B
+                          Label : METHOD
+                            R
                             Label : ARGUMENT
                               [
                               Label : INDEX
                                 1
                               Label : VARIABLE
                                 $c
-                          Label : NAME
-                            empty
-                      Label : THEN
-                        {}
-                        Label : ELEMENT
-                          ::
-                          Label : CLASS
-                            B
-                          Label : METHOD
-                            R
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                [
-                                Label : INDEX
-                                  1
-                                Label : VARIABLE
-                                  $c
                             Label : NAME
                               R
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       return
                       Label : RETURN
                         [
-                        Label : ARGUMENTS
-                          [
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'C'
-                            Label : VALUE
-                              'T'
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'T'
-                            Label : VALUE
-                              [
-                              Label : ARGUMENTS
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            'C'
+                          Label : VALUE
+                            'T'
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            'T'
+                          Label : VALUE
+                            [
+                            Label : ARGUMENT
+                              .
+                              Label : CONCAT
                                 [
-                                Label : ARGUMENT
-                                  .
-                                  Label : CONCAT
-                                    [
-                                    Label : INDEX
-                                      'AB'
-                                    Label : VARIABLE
-                                      ::
-                                      Label : CLASS
-                                        B
-                                      Label : PROPERTY
-                                        $b
-                                  Label : CONCAT
-                                    'AR'
-                                  Label : CONCAT
-                                    $e
-                                Label : ARGUMENT
-                                  $f
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'AA'
-                            Label : VALUE
-                              [
-                              Label : ARGUMENTS
-                                [
-                                Label : ARGUMENT
-                                  Void
+                                Label : INDEX
+                                  'AB'
+                                Label : VARIABLE
+                                  ::
+                                  Label : CLASS
+                                    B
+                                  Label : MEMBER
+                                    $b
+                              Label : CONCAT
+                                'AR'
+                              Label : CONCAT
+                                $e
+                            Label : ARGUMENT
+                              $f
+                        Label : ARGUMENT
+                          =>
+                          Label : INDEX
+                            'AA'
+                          Label : VALUE
+                            [
+                            Label : ARGUMENT
+                              Void
               Label : NAME
                 [
                 Label : INDEX
@@ -374,9 +333,9 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     B
-                  Label : PROPERTY
+                  Label : MEMBER
                     $b
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             AU

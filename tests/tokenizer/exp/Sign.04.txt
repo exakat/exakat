@@ -1,12 +1,11 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           -+1

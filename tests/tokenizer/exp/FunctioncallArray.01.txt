@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/FunctioncallArray.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           [
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              34
+          Label : ARGUMENT
+            34
           Label : NAME
             [
             Label : INDEX
               d
             Label : VARIABLE
               ->
+              Label : MEMBER
+                c
               Label : OBJECT
                 $b
-              Label : PROPERTY
-                c

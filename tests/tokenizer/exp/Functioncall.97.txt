@@ -1,73 +1,60 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.97.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foo
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               call_user_func
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                function
                 Label : ARGUMENT
-                  function
-                  Label : ARGUMENTS
-                    (
+                  Void
+                Label : BLOCK
+                  {}
+                  Label : EXPRESSION
+                    ob_start
                     Label : ARGUMENT
                       Void
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
+                    Label : NAME
                       ob_start
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        ob_start
-                    Label : ELEMENT
-                      A
-                    Label : ELEMENT
+                  Label : EXPRESSION
+                    A
+                  Label : EXPRESSION
+                    <?=
+                    Label : ARGUMENT
+                      $c
+                    Label : NAME
                       <?=
-                      Label : ARGUMENTS
-                        <?=
-                        Label : ARGUMENT
-                          $c
-                      Label : NAME
-                        <?=
-                    Label : ELEMENT
-                      Void
-                    Label : ELEMENT
-                      B
-                    Label : ELEMENT
+                  Label : EXPRESSION
+                    Void
+                  Label : EXPRESSION
+                    B
+                  Label : EXPRESSION
+                    <?=
+                    Label : ARGUMENT
+                      $d
+                    Label : NAME
                       <?=
-                      Label : ARGUMENTS
-                        <?=
-                        Label : ARGUMENT
-                          $d
-                      Label : NAME
-                        <?=
-                    Label : ELEMENT
-                      Void
-                    Label : ELEMENT
-                       {
+                  Label : EXPRESSION
+                    Void
+                  Label : EXPRESSION
+                     {
 			}
 		}
 	
-                    Label : ELEMENT
-                      ++
-                      Label : POSTPLUSPLUS
-                        $a
+                  Label : EXPRESSION
+                    ++
+                    Label : POSTPLUSPLUS
+                      $a
               Label : NAME
                 call_user_func
           Label : NAME

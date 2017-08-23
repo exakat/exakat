@@ -1,24 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/String.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              "
-              Label : CONCAT
-                $a
-              Label : CONCAT
-                 b 
-              Label : CONCAT
-                $c
+          Label : ARGUMENT
+            "
+            Label : CONCAT
+              $a
+            Label : CONCAT
+               b 
+            Label : CONCAT
+              $c
           Label : NAME
             echo

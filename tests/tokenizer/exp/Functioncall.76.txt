@@ -1,60 +1,49 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.76.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           throw
           Label : THROW
             new
             Label : NEW
               a
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                sprintf
                 Label : ARGUMENT
+                  'b'
+                Label : ARGUMENT
+                  ::
+                  Label : CLASS
+                    C
+                  Label : CLASS
+                    class
+                Label : ARGUMENT
+                  ?
+                  Label : CONDITION
+                    is_object
+                    Label : ARGUMENT
+                      $d
+                    Label : NAME
+                      is_object
+                  Label : ELSE
+                    gettype
+                    Label : ARGUMENT
+                      $f
+                    Label : NAME
+                      gettype
+                  Label : THEN
+                    get_class
+                    Label : ARGUMENT
+                      $e
+                    Label : NAME
+                      get_class
+                Label : NAME
                   sprintf
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'b'
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        C
-                      Label : CLASS
-                        class
-                    Label : ARGUMENT
-                      ?
-                      Label : CONDITION
-                        is_object
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $d
-                        Label : NAME
-                          is_object
-                      Label : ELSE
-                        gettype
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $f
-                        Label : NAME
-                          gettype
-                      Label : THEN
-                        get_class
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $e
-                        Label : NAME
-                          get_class
-                  Label : NAME
-                    sprintf
               Label : NAME
                 a
