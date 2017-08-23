@@ -64,7 +64,7 @@ function run($test, $number) {
 
     $pwd = getcwd();
     chdir('../../');
-    $config = \Exakat\Config::factory(array('test', '-p', 'test'));
+    $config = new \Exakat\Config(array('test', '-p', 'test'));
     chdir($pwd);    
 
     $versionPHP = 'php'.str_replace('.', '', $phpversion);
