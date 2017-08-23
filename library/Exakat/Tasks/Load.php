@@ -163,7 +163,7 @@ class Load extends Tasks {
     static public $PROP_DELIMITER   = array('String', 'Heredoc');
     static public $PROP_NODELIMITER = array('String', 'Variable');
     static public $PROP_HEREDOC     = array('Heredoc');
-    static public $PROP_COUNT       = array('Sequence', 'Arguments', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
+    static public $PROP_COUNT       = array('Sequence', 'Functioncall', 'Methodcall', 'Arrayliteral', 'Heredoc', 'Shell', 'String', 'Try', 'Catch', 'Const', 'Ppp', 'Global', 'Static');
     static public $PROP_FNSNAME     = array('Functioncall', 'Newcall', 'Function', 'Closure', 'Method', 'Class', 'Classanonymous', 'Trait', 'Interface', 'Identifier', 'Nsname', 'As', 'Void', 'Static', 'Namespace', 'String');
     static public $PROP_ABSOLUTE    = array('Nsname');
     static public $PROP_ALIAS       = array('Nsname', 'Identifier', 'As');
@@ -173,14 +173,14 @@ class Load extends Tasks {
     static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null');
     static public $PROP_STRVAL      = array('String');
     static public $PROP_ENCLOSING   = array('Variable', 'Array', 'Member');
-    static public $PROP_ARGS_MAX    = array('Arguments');
-    static public $PROP_ARGS_MIN    = array('Arguments');
+    static public $PROP_ARGS_MAX    = array('Functioncall', 'Methodcall', 'Arrayliteral', );
+    static public $PROP_ARGS_MIN    = array('Functioncall', 'Methodcall', 'Arrayliteral', );
     static public $PROP_BRACKET     = array('Sequence');
     static public $PROP_CLOSETAG    = array('Php');
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
     static public $PROP_BOOLEAN     = array('Boolean', 'Null', 'Integer', 'String', 'Functioncall', 'Real');
     static public $PROP_PROPERTYNAME= array('Propertydefinition', 'Assignation');
-    static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Arguments', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence', 'Arrayliteral', 'Function', 'Closure');
+    static public $PROP_CONSTANT    = array('Integer', 'Boolean', 'Real', 'Null', 'Void', 'Inlinehtml', 'String', 'Magicconstant', 'Staticconstant', 'Void', 'Addition', 'Nsname', 'Bitshift', 'Multiplication', 'Power', 'Comparison', 'Logical', 'Keyvalue', 'Functioncall', 'Methodcall', 'Break', 'Continue', 'Return', 'Comparison', 'Ternary', 'Parenthesis', 'Noscream', 'Not', 'Yield', 'Identifier', 'Functioncall', 'Concatenation', 'Sequence', 'Arrayliteral', 'Function', 'Closure');
     static public $PROP_GLOBALVAR   = array('Array');
     static public $PROP_BINARYSTRING= array('String', 'Heredoc');
     static public $PROP_ROOT        = array('File');
