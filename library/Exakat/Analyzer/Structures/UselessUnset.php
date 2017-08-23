@@ -33,7 +33,6 @@ class UselessUnset extends Analyzer {
     public function analyze() {
         // unset on arguments, reference or value
         $this->atomFunctionIs('\\unset')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->analyzerIs('Variables/Arguments')
@@ -42,7 +41,6 @@ class UselessUnset extends Analyzer {
 
         // unset on global
         $this->atomFunctionIs('\\unset')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'varname')
@@ -56,7 +54,6 @@ class UselessUnset extends Analyzer {
 
         // unset on static
         $this->atomFunctionIs('\\unset')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->savePropertyAs('code', 'varname')
@@ -79,7 +76,6 @@ class UselessUnset extends Analyzer {
              ->atomInside('Functioncall')
              ->functioncallIs('\\unset')
              ->_as('result')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('OBJECT')
              ->samePropertyAs('code', 'varname')
@@ -102,7 +98,6 @@ class UselessUnset extends Analyzer {
              ->atomInside('Functioncall')
              ->functioncallIs('\\unset')
              ->_as('result')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('OBJECT')
              ->samePropertyAs('code', 'varname')
@@ -121,7 +116,6 @@ class UselessUnset extends Analyzer {
              ->outIs('BLOCK')
              ->atomFunctionIs('\\unset')
              ->_as('result')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'varname')
              ->back('result');

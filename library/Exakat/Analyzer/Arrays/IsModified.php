@@ -59,7 +59,6 @@ class IsModified extends Analyzer {
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->hasNoIn('METHOD') // possibly new too
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Array')
              ->savePropertyAs('rank', 'rank')
@@ -67,7 +66,6 @@ class IsModified extends Analyzer {
              ->back('first')
              ->functionDefinition()
              ->inIs('NAME')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
              ->is('reference', self::CASE_SENSITIVE)
@@ -77,7 +75,6 @@ class IsModified extends Analyzer {
         // function/methods definition : all modified by incoming values
         // simple variable
         $this->atomIs(self::$FUNCTION_METHOD)
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Array');
         $this->prepareQuery();
@@ -98,7 +95,6 @@ class IsModified extends Analyzer {
         
         foreach($references as $position => $functions) {
             $this->atomFunctionIs($functions)
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position);
             $this->prepareQuery();
@@ -109,7 +105,6 @@ class IsModified extends Analyzer {
              ->hasIn('NEW')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Array')
              ->savePropertyAs('rank', 'rank')
@@ -118,7 +113,6 @@ class IsModified extends Analyzer {
              ->outIs('BLOCK')
              ->outIs('EXPRESSION')
              ->analyzerIs('Classes/Constructor')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
              ->is('reference', self::CASE_SENSITIVE)

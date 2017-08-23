@@ -55,14 +55,12 @@ class IsModified extends Analyzer {
         // arguments : reference variable in a custom function
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->_as('results')
              ->back('first')
              ->functionDefinition()
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
              ->is('reference', self::CASE_SENSITIVE)
@@ -85,7 +83,6 @@ class IsModified extends Analyzer {
         
         foreach($references as $position => $functions) {
             $this->atomFunctionIs($functions)
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs($atoms);
@@ -95,7 +92,6 @@ class IsModified extends Analyzer {
         // Class constructors (__construct)
         $this->atomIs('Newcall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
@@ -104,7 +100,6 @@ class IsModified extends Analyzer {
              ->classDefinition()
              ->outIs('METHOD')
              ->analyzerIs('Classes/Constructor')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
              ->is('reference', self::CASE_SENSITIVE)

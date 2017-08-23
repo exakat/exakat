@@ -101,7 +101,6 @@ class IsRead extends Analyzer {
 
         // arguments : normal variable in a custom function
         $this->atomIs('Functioncall')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->savePropertyAs('rank', 'rank')
@@ -109,7 +108,6 @@ class IsRead extends Analyzer {
              ->back('first')
              ->functionDefinition()
              ->inIs('NAME')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
              ->isNot('reference', self::CASE_SENSITIVE)
@@ -117,7 +115,6 @@ class IsRead extends Analyzer {
         $this->prepareQuery();
 
         $this->atomFunctionIs(array('Functioncall', 'Methodcallname', 'Newcall'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable');
         $this->prepareQuery();
@@ -125,9 +122,9 @@ class IsRead extends Analyzer {
         // Variable that are not a reference in a functioncall
         $this->atomIs('Variable')
              ->hasIn('ARGUMENT')
-             ->hasNoParent('Closure', array('ARGUMENT', 'ARGUMENTS'))
-             ->hasNoParent('Function', array('ARGUMENT', 'ARGUMENTS'))
-             ->hasNoParent('Method', array('ARGUMENT', 'ARGUMENTS'));
+             ->hasNoParent('Closure',  'ARGUMENT')
+             ->hasNoParent('Function', 'ARGUMENT')
+             ->hasNoParent('Method',   'ARGUMENT');
         $this->prepareQuery();
     }
 }
