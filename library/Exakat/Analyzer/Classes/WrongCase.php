@@ -150,8 +150,7 @@ class WrongCase extends Analyzer {
         $this->prepareQuery();
 
 // Typehint
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->tokenIs('T_STRING')
@@ -162,12 +161,10 @@ class WrongCase extends Analyzer {
              ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT');
         $this->prepareQuery();
 
         $this->atomIs(self::$FUNCTION_METHOD)
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->tokenIs('T_NS_SEPARATOR')
@@ -177,7 +174,6 @@ class WrongCase extends Analyzer {
              ->samePropertyAs('code', 'classe')
              ->notSamePropertyAs('code', 'classe', true)
              ->back('first')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT');
         $this->prepareQuery();
 
