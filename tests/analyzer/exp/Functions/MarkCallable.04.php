@@ -1,16 +1,16 @@
 <?php
 
-$expected     = array('\'a\', \'b\'', 
-                      '$c, \'d\'', 
-                      '$e, \'f\'', 
-                      '$g, \'$h\'', 
-                      '$sssh4, \'sssh4\'', 
-                      '$sssh5, \'sssh5\'', 
-                      '$sssh6, \'sssh6\'', 
-                      '$k, \'l\'', 
-                      '$i, \'j\'', 
+$expected     = array( '[$i, \'j\']', 
+                       '[$k, \'l\']', 
+                       '[$sssh6, \'sssh6\']', 
+                       '[$sssh5, \'sssh5\']', 
+                       '[$sssh4, \'sssh4\']', 
+                       '[$g, \'$h\']', 
+                       '[$c, \'d\']', 
+                       '[$e, \'f\']', 
+                       '[\'a\', \'b\']',
 );
 
-$expected_not = array();
+$expected_not = array('[\'a2\', \'b2\']',);
 
 ?>

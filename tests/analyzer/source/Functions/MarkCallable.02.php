@@ -52,3 +52,7 @@ class Z2 extends Z2parent {
 class Z2parent {
     static function x3() {}
 }
+
+strtolower(array('Y2', 'parent2::x2'));
+
+?>

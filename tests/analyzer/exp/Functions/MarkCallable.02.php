@@ -1,19 +1,21 @@
 <?php
 
 $expected     = array("'x'",
-                      "'Y', 'parent::x'",  
-                      "'NoSuchClass', 'parent::x'",
-                      "'NoParent', 'parent::x'",
-                      "'Y2', 'parent::x3'",
-                      "'Z2', 'parent::x3'",
-                      "'Z2', 'parent::x3'",
-                      "'Y2', 'parent::x3'",
-                      "'X2', 'parent::x3'", 
-                      "'X2', 'parent::x3'", 
-                      "'Y2', 'x3'",
-                      '$this, \'x\'', 
-                      '$a, \'x2\'');
+                      'array($this, \'x\')', 
+                      'array($a, \'x2\')', 
+                      'array(\'Z2\', \'parent::x3\')', 
+                      'array(\'X2\', \'parent::x3\')', 
+                      'array(\'Y2\', \'x3\')', 
+                      'array(\'Y2\', \'parent::x3\')', 
+                      'array(\'Y\', \'parent::x\')', 
+                      'array(\'NoParent\', \'parent::x\')', 
+                      'array(\'NoSuchClass\', \'parent::x\')', 
+                      'array(\'Y2\', \'parent::x3\')', 
+                      'array(\'X2\', \'parent::x3\')', 
+                      'array(\'Z2\', \'parent::x3\')',
+                      );
 
-$expected_not = array();
+$expected_not = array('array(\'Y2\', \'parent2::x2\')', 
+                     );
 
 ?>
