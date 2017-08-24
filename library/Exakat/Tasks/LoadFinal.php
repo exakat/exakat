@@ -148,7 +148,7 @@ g.V().hasLabel("Functioncall")
      .not( where( __.in("METHOD") ) )
      .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
      .has("fullnspath", "\\\\define")
-     .out("ARGUMENTS").out("ARGUMENT").has("rank", 0)
+     .out("ARGUMENT").has("rank", 0)
      .hasLabel("String").has("noDelimiter").not( has("noDelimiter", '') )
      .map{ 
            s = it.get().value("noDelimiter").toString().toLowerCase();
@@ -199,8 +199,8 @@ g.V().hasLabel("Identifier", "Nsname")
               .not( where( __.in("METHOD") ) )
               .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
               .has("fullnspath", "\\\\define")
-             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
-             .filter{ it.get().value("fullnspath") == name}.select('a')
+              .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
+              .filter{ it.get().value("fullnspath") == name}.select('a')
          ).count();
 
 GREMLIN;
@@ -225,7 +225,7 @@ g.V().hasLabel("Identifier", "Nsname")
              .not( where( __.in("METHOD") ) )
              .has('token', within('T_STRING', 'T_NS_SEPARATOR'))
              .has("fullnspath", "\\\\define")
-             .out("ARGUMENTS").as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
+             .as("a").out("ARGUMENT").has("rank", 0).hasLabel("String").has('fullnspath')
              .filter{ it.get().value("fullnspath") == name}.select('a')
       ).count()
 

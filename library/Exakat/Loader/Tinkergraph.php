@@ -193,7 +193,7 @@ class Tinkergraph {
 
         foreach($json as $j) {
             if (in_array($j->label, array('Functioncall', 'Function', 'Class', 'Classanonymous', 'Newcall', 'Variableobject', 
-                                          'Identifier', 'Nsname', 'Interface', 'Trait', 'String', 'Constant', 'Arguments',
+                                          'Identifier', 'Nsname', 'Interface', 'Trait', 'String', 'Constant', 
                                           'Variable', 'Variablearray', ))) {
                 assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
                 fwrite($fpDefinition, $this->json_encode($j).PHP_EOL);

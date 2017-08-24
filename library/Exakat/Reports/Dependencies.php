@@ -138,10 +138,10 @@ GREMLIN;
 
         // Typehint
         $query = <<<GREMLIN
-g.V().hasLabel("Function").as('fullcode')
-.out('ARGUMENTS').out("ARGUMENT").out("TYPEHINT").as('destination')
-.repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as('origin')
-.select('origin', 'destination', 'fullcode').by('fullnspath').by('fullnspath').by('fullcode')
+g.V().hasLabel("Function").as("fullcode")
+.out("ARGUMENT").out("TYPEHINT").as("destination")
+.repeat(__.in()).until(hasLabel("Class", "Trait", "Interface")).as("origin")
+.select("origin", "destination", "fullcode").by("fullnspath").by("fullnspath").by("fullcode")
 
 GREMLIN;
         $res = $graph->query($query);

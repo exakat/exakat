@@ -120,6 +120,10 @@ class GSNeo4j {
         fclose($fp);
         fclose($fpDefinitions);
         unlink($this->pathDefinition);
+
+        $this->calls = array();
+        $this->json = array();
+        gc_collect_cycles();
         
         display('loading nodes');
 
@@ -137,10 +141,10 @@ class GSNeo4j {
 
     private function cleanCsv() {
         if (file_exists($this->path)) {
-//            unlink($this->path);
+            unlink($this->path);
         }
         if (file_exists($this->pathDefinition)) {
-//            unlink($this->pathDefinition);
+            unlink($this->pathDefinition);
         }
     }
 
@@ -161,40 +165,9 @@ class GSNeo4j {
         
         $json = array();
         foreach($atoms as $atom) {
-            $atom = (array) $atom;
-            $label = $atom['atom'];
-            $this->labels[$label] = 1;
-            
-            $object = array('id'    => $atom['id'],
-                            'label' => $label,
-                            'outE'  => new \stdClass(),
-                            'inE'   => new \stdClass());
-        
-            $properties = array();
-            foreach($atom as $l => $value) {
-                if ($l === 'id') { continue; }
-                if ($value === null) { continue; }
-                
-                if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) && 
-                    !in_array($label, Load::$PROP_OPTIONS[$l])) {
-                    continue;
-                };
+            $this->labels[$atom->atom] = 1;
 
-                if (in_array($l, array('globalvar')) && 
-                    !$value) {
-                    continue;
-                };
-        
-                if (in_array($l, $booleanValues)) {
-                    $value = (boolean) $value;
-                } elseif (in_array($l, $integerValues)) {
-                    $value = (integer) $value;
-                }
-                $properties[$l] = [(object) ['id' => $this->id++, 'value' => $value]];
-            }
-        
-            $object['properties'] = $properties;
-            $json[$atom['id']] = (object) $object;
+            $json[$atom->id] = $atom->toGraphsonLine($this->id);
         }
 
         if ($this->project === null) {
@@ -229,15 +202,17 @@ class GSNeo4j {
 
         foreach($json as $j) {
             if (in_array($j->label, array('Functioncall', 'Function', 'Class', 'Classanonymous', 'Newcall', 'Variableobject', 
-                                          'Identifier', 'Nsname', 'Interface', 'Trait', 'String', 'Constant', 'Arguments',
+                                          'Identifier', 'Nsname', 'Interface', 'Trait', 'String', 'Constant', 
                                           'Variable', 'Variablearray', ))) {
-                assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
-                fwrite($fpDefinition, $this->json_encode($j).PHP_EOL);
+                $X = $this->json_encode($j);
+                assert(!json_last_error(), 'Error encoding for definition '.$j->label.' : '.json_last_error_msg()."\n".' '.print_r($j, true));
+                fwrite($fpDefinition, $X.PHP_EOL);
             } elseif ($j->label === 'Project') {
                 // Just continue;
             } else {
-                assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
-                fwrite($fp, $this->json_encode($j).PHP_EOL);
+                $X = $this->json_encode($j);
+                assert(!json_last_error(), 'Error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
+                fwrite($fp, $X.PHP_EOL);
             }
         }
 
@@ -259,6 +234,9 @@ class GSNeo4j {
         }
         if (isset($object->properties['noDelimiter'])) {
             $object->properties['noDelimiter'][0]->value = utf8_encode($object->properties['noDelimiter'][0]->value);
+        }
+        if (isset($object->properties['globalvar'])) {
+            $object->properties['globalvar'][0]->value = utf8_encode($object->properties['globalvar'][0]->value);
         }
         return json_encode($object);
     }
