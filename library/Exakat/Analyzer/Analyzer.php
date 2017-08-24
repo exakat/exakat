@@ -623,7 +623,9 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         assert($this->assertAtom($atom));
         // Cannot use not() here : 'This traverser does not support loops: org.apache.tinkerpop.gremlin.process.traversal.traverser.B_O_Traverser'.
 //        $gremlin = 'not( where( __.emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
-        $gremlin = 'where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
+        // Check with Structures/Unpreprocessed
+        $gremlin = 'where( __.repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).emit()
+                          .times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
         return $this;
