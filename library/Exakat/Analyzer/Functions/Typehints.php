@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class Typehints extends Analyzer {
     public function analyze() {
         // List all typehints in the code
-        $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT');
         $this->prepareQuery();
