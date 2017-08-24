@@ -173,8 +173,8 @@ class Load extends Tasks {
     static public $PROP_INTVAL      = array('Integer', 'Boolean', 'Real', 'Null');
     static public $PROP_STRVAL      = array('String');
     static public $PROP_ENCLOSING   = array('Variable', 'Array', 'Member');
-    static public $PROP_ARGS_MAX    = array('Functioncall', 'Methodcallname', 'Arrayliteral', );
-    static public $PROP_ARGS_MIN    = array('Functioncall', 'Methodcallname', 'Arrayliteral', );
+    static public $PROP_ARGS_MAX    = array('Function', 'Method', 'Closure', 'Arrayliteral', );
+    static public $PROP_ARGS_MIN    = array('Function', 'Method', 'Closure', 'Arrayliteral', );
     static public $PROP_BRACKET     = array('Sequence');
     static public $PROP_CLOSETAG    = array('Php');
     static public $PROP_ALIASED     = array('Function', 'Interface', 'Trait', 'Class');
@@ -1028,7 +1028,6 @@ class Load extends Tasks {
         // Process use
         if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_USE) {
             ++$this->id; // Skip use
-//            ++$this->id; // Skip (
 
             $rank = 0;
             $useFullcode = array();
