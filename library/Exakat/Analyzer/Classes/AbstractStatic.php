@@ -26,12 +26,12 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class AbstractStatic extends Analyzer {
+    protected $phpVersion = '7.0-';
 
     public function analyze() {
         $this->atomIs('Method')
              ->hasOut('ABSTRACT')
-             ->hasOut('STATIC')
-             ->back('first');
+             ->hasOut('STATIC');
         $this->prepareQuery();
     }
 }
