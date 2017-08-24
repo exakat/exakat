@@ -37,7 +37,6 @@ class NoHardcodedPath extends Analyzer {
         // string literal fopen('a', 'r');
         // may need some regex to exclude protocol...
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
@@ -47,7 +46,6 @@ class NoHardcodedPath extends Analyzer {
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\glob')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
@@ -60,7 +58,6 @@ class NoHardcodedPath extends Analyzer {
         // string literal fopen("a$b", 'r');
         // may need some regex to exclude http...
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->is('constant', true)
@@ -75,7 +72,6 @@ class NoHardcodedPath extends Analyzer {
         // string literal fopen('a'.$b, 'r');
         // may need some regex to exclude http...
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->is('constant', true)

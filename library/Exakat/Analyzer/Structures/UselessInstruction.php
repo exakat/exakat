@@ -71,7 +71,6 @@ class UselessInstruction extends Analyzer {
 
         // array_merge($a); one argument is useless.
         $this->atomFunctionIs('\\array_replace')
-             ->outIs('ARGUMENTS')
              ->isLess('count', 2)
              ->outWithRank('ARGUMENT',0)
              ->isNot('variadic', true)

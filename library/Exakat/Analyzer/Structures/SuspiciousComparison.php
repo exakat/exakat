@@ -34,7 +34,6 @@ class SuspiciousComparison extends Analyzer {
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->fullnspathIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Comparison')
              ->back('first');

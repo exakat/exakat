@@ -55,8 +55,7 @@ class OneDotOrObjectOperatorPerLine extends Analyzer {
              ->nextSibling('ARGUMENT')
              ->atomIs(array('Concatenation', 'Methodcall', 'Member'))
              ->samePropertyAs('line', 'line')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
+             ->inIs('ARGUMENT');
         $this->prepareQuery();
     }
 }

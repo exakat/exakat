@@ -53,7 +53,6 @@ class ShouldPreprocess extends Analyzer {
         
         // Function only applied to constants
         $this->atomFunctionIs($functionListNoArray)
-             ->outIs('ARGUMENTS')
              ->is('constant', true)
              ->back('first');
         $this->prepareQuery();

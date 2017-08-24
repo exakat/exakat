@@ -29,7 +29,6 @@ class RegexDelimiter extends Analyzer {
         $pregFunctions = array('\\preg_match_all', '\\preg_match', '\\preg_replace', '\\preg_replace_callback', '\\preg_relace_callback_array');
 
         $this->atomFunctionIs($pregFunctions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->outIsIE('CONCAT')
              ->is('rank', 0) // useful if previous is used
@@ -67,7 +66,6 @@ class RegexDelimiter extends Analyzer {
         }
 
         $this->atomFunctionIs($pregFunctions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->outIsIE('CONCAT')
              ->is('rank', 0) // useful if previous is used

@@ -41,7 +41,6 @@ class UncheckedResources extends Analyzer {
                 // readdir(opendir('uncheckedDir4'));
                 $this->atomFunctionIs($creation)
                      ->inIs('ARGUMENT')
-                     ->inIs('ARGUMENTS')
                      ->hasNoIn('METHOD')
                      ->fullnspathIs($functions);
                 $this->prepareQuery();
@@ -62,7 +61,7 @@ class UncheckedResources extends Analyzer {
                      ->samePropertyAs('code', 'tmpvar')
 
                      // checked with a is_resource
-                     ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\is_resource").count().is(eq(0)) )')
+                     ->raw('where( __.in("ARGUMENT").has("fullnspath", "\\\\is_resource").count().is(eq(0)) )')
                      // checked with a !$variable
                      ->hasNoIn('NOT')
 
@@ -74,7 +73,6 @@ class UncheckedResources extends Analyzer {
                      
                      // checked with a if ($resource == false) or while($resource == false)
                      ->hasNoComparison()
-                    // ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").in("RIGHT").in("CODE").in("RIGHT").has("atom", "Comparison").in("CONDITION").count().is(eq(0)) )')
                      ->back('result');
                 $this->prepareQuery();
             }

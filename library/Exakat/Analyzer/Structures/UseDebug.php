@@ -45,7 +45,6 @@ class UseDebug extends Analyzer {
 
         // Using constants
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
