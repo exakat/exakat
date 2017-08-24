@@ -624,7 +624,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         // Cannot use not() here : 'This traverser does not support loops: org.apache.tinkerpop.gremlin.process.traversal.traverser.B_O_Traverser'.
 //        $gremlin = 'not( where( __.emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
         // Check with Structures/Unpreprocessed
-        $gremlin = 'where( __.repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).emit()
+        $gremlin = 'where( __.repeat( __.out().not(hasLabel("Closure", "Classanonymous", '.$this->SorA($atom).')) ).emit()
                           .times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
@@ -868,13 +868,19 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         return $this;
     }
 
-    public function saveArglistAs($name) {
+    public function saveOutAs($name, $out = "ARGUMENT", $sort = 'rank') {
         // Calculate the arglist, normalized it, then put it in a variable
         // This needs to be in Arguments, (both Functioncall or Function)
+        if (empty($sort)) {
+            $sortStep = '';
+        } else {
+            $sortStep = '.sort{it.value("'.$sort.'")}';
+        }
+
         $this->addMethod(<<<GREMLIN
 sideEffect{ 
     s = [];
-    it.get().vertices(OUT, 'ARGUMENT').sort{it.value('rank')}.each{ 
+    it.get().vertices(OUT, "$out")$sortStep.each{ 
         s.push(it.value('code'));
     };
     $name = s.join(', ');
