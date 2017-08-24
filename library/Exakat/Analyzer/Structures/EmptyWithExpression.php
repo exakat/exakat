@@ -43,7 +43,6 @@ class EmptyWithExpression extends Analyzer {
              ->nextSiblings()
              ->atomInside('Functioncall')
              ->functioncallIs('\\empty')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Variable')
              ->samePropertyAs('code', 'storage')

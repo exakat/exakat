@@ -33,7 +33,6 @@ class UnsetOnArguments extends Analyzer {
     public function analyze() {
         // unset($argument);
         $this->atomFunctionIs('\unset')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->analyzerIs('Variables/Arguments')
              ->back('first');

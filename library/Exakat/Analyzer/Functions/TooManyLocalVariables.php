@@ -28,7 +28,7 @@ class TooManyLocalVariables extends Analyzer {
     public function analyze() {
         $this->atomIs('Function')
              // Collect all arguments
-             ->raw('where( __.sideEffect{ arguments = [];}.out("ARGUMENTS").out("ARGUMENT").optional( out("LEFT")).sideEffect{ arguments.add(it.get().value("code")); }.barrier().select("first") ) ')
+             ->raw('where( __.sideEffect{ arguments = [];}.out("ARGUMENT").optional( out("LEFT")).sideEffect{ arguments.add(it.get().value("code")); }.barrier().select("first") ) ')
 
              ->outIs('BLOCK')
              ->_as("block")

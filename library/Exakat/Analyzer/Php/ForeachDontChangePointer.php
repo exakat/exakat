@@ -39,9 +39,7 @@ class ForeachDontChangePointer extends Analyzer {
              ->back('first')
              ->outIs('BLOCK')
              ->functioncallIs(array('\\current', '\\next', '\\prev', '\\each', '\\end'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
-//             ->samePropertyAs('fullcode', 'source')
              ->back('first');
         $this->prepareQuery();
     }

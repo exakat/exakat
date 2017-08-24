@@ -30,7 +30,6 @@ class UseSessionStartOptions extends Analyzer {
     public function analyze() {
         // ini_set() then session_start
         $this->atomFunctionIs('\\ini_set')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->regexIs('fullcode', '^.session\\\\.')
@@ -46,7 +45,6 @@ class UseSessionStartOptions extends Analyzer {
              ->nextSibling()
              ->atomIs('Functioncall')
              ->fullnspathIs('\\ini_set')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->regexIs('fullcode', '^.session\\\\.')

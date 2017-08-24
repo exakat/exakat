@@ -61,7 +61,6 @@ class ThisIsForClasses extends Analyzer {
              ->codeIs('$this')
              ->hasClassTrait()
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->functioncallIs('\\unset')
              ->hasNoIn('METHOD')
              ->back('first');

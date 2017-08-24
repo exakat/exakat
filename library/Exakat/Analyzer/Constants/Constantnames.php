@@ -29,7 +29,6 @@ class Constantnames extends Analyzer {
     public function analyze() {
         // with define
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->is('constant', true);

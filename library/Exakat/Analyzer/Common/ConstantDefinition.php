@@ -40,7 +40,6 @@ class ConstantDefinition extends Analyzer {
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')

@@ -28,16 +28,13 @@ use Exakat\Analyzer\Analyzer;
 class RelayFunction extends Analyzer {
     public function analyze() {
         $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
              ->saveArglistAs('args')
-             ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
              ->is('count', 1)
              ->outIs('EXPRESSION')
              ->outIsIE('RETURN')
              ->atomIs(array('Functioncall', 'Staticmethodcall','Methodcall'))
              ->outIsIE('METHOD')
-             ->outIs('ARGUMENTS')
              ->samePropertyAs('fullcode', 'args')
              ->back('first');
         $this->prepareQuery();

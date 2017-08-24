@@ -30,7 +30,6 @@ class DynamicConstantCall extends Analyzer {
         //constant("ThingIDs::$thing");
         // probably too weak. Needs to be completed with a check on variables built before
         $this->atomFunctionIs('\\constant')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->regexIs('fullcode', '::')

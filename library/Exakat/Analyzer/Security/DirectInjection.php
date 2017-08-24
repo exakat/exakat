@@ -44,7 +44,6 @@ class DirectInjection extends Analyzer {
 
         // Relayed call to another function
         $this->atomIs('Functioncall')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->_as('result')
@@ -55,17 +54,14 @@ class DirectInjection extends Analyzer {
              ->back('first')
 
              ->functionDefinition()
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
 
              ->savePropertyAs('code', 'varname')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
 
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('CODE')
@@ -82,8 +78,7 @@ class DirectInjection extends Analyzer {
              ->goToArray()
              ->inIsIE('CODE')
              ->analyzerIs('Security/SensitiveArgument')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
+             ->inIs('ARGUMENT');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!

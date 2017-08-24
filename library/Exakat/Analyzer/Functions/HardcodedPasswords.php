@@ -56,7 +56,6 @@ class HardcodedPasswords extends Analyzer {
 
         foreach($positions as $position => $function) {
             $this->atomFunctionIs($function)
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('String')
                  ->back('first');

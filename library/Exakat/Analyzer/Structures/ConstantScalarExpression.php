@@ -41,7 +41,6 @@ class ConstantScalarExpression extends Analyzer {
 
         // in argument's default value
         $this->atomIs(self::$FUNCTION_METHOD)
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->atomIsNot($authorizedAtoms)

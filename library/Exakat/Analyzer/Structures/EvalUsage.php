@@ -34,7 +34,6 @@ class EvalUsage extends Analyzer {
         // eval($a . ' -s la');
         // OK for constants
         $this->atomFunctionIs(array('\\eval', '\\create_function'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->analyzerIsNot('Constants/ConstantUsage')

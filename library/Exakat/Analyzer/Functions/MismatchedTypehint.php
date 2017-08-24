@@ -28,7 +28,6 @@ class MismatchedTypehint extends Analyzer {
     public function analyze() {
         // Based on calls to a function
         $this->atomIs(array('Function', 'Method', 'Closure'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->savePropertyAs('code', 'name')
              ->_as('results')
@@ -41,7 +40,6 @@ class MismatchedTypehint extends Analyzer {
              ->has('rank')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->atomIs('Functioncall')
              ->inIs('DEFINITION')
              ->checkDefinition()
@@ -52,7 +50,6 @@ class MismatchedTypehint extends Analyzer {
         
         // Based on staticmethodcall
         $this->atomIs(array('Function', 'Method', 'Closure'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->savePropertyAs('code', 'name')
              ->_as('results')
@@ -65,7 +62,6 @@ class MismatchedTypehint extends Analyzer {
              ->has('rank')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->savePropertyAs('code', 'method')
              ->inIs('METHOD')
              ->atomIs('Staticmethodcall')
@@ -81,8 +77,7 @@ class MismatchedTypehint extends Analyzer {
     }
     
     private function checkDefinition() {
-        $this->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
+        $this->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
              ->outIs('TYPEHINT')
              ->notSamePropertyAs('fullnspath', 'typehint');

@@ -38,7 +38,6 @@ class NoClassAsTypehint extends Analyzer {
 
         // Classes reused as typehint
         $this->atomIs(array('Function', 'Method'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->analyzerIs('Classes/IsExtClass');

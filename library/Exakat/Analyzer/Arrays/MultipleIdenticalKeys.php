@@ -31,7 +31,7 @@ class MultipleIdenticalKeys extends Analyzer {
         $this->atomIs('Arrayliteral')
              ->raw('where(
     __.sideEffect{ counts = [:]; }
-      .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
+      .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
       .hasLabel("String", "Integer", "Real", "Boolean", "Null", "Staticconstant").not(where(__.out("CONCAT")) )
       .sideEffect{ 
             if (it.get().label() == "String" && "noDelimiter" in it.get().keys() ) { 

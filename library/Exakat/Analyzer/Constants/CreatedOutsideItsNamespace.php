@@ -28,7 +28,6 @@ use Exakat\Analyzer\Analyzer;
 class CreatedOutsideItsNamespace extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->regexIs('noDelimiter', '\\\\\\\\')

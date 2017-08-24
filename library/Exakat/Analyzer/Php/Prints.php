@@ -33,14 +33,12 @@ class Prints extends Analyzer {
 
         // print_r($a);
         $this->atomFunctionIs($this->makeFullnspath($prints['functionsArg1']))
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
 
         // print_r($a, false);
         $this->atomFunctionIs($this->makeFullnspath($prints['functionsArg1']))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->is('boolean', false)
              ->back('first');

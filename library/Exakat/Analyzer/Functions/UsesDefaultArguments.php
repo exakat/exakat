@@ -41,7 +41,6 @@ class UsesDefaultArguments extends Analyzer {
         
         foreach($positions as $position => $f) {
             $this->atomFunctionIs($f)
-                 ->outIs('ARGUMENTS')
                  ->noChildWithRank('ARGUMENT', $position)
                  ->back('first');
             $this->prepareQuery();

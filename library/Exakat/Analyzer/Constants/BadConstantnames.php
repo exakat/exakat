@@ -29,7 +29,6 @@ class BadConstantnames extends Analyzer {
     public function analyze() {
         // with define
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->is('constant', true)
              ->atomIs('String')

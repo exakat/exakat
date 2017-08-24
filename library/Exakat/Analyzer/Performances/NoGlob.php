@@ -28,14 +28,12 @@ class NoGlob extends Analyzer {
     public function analyze() {
         // glob() with no second argument (without GLOB_NOSORT)
         $this->atomFunctionIs('\\glob')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
 
         // glob() with second argument (without GLOB_NOSORT)
         $this->atomFunctionIs('\\glob')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIsNot('\glob_nosort')
@@ -44,7 +42,6 @@ class NoGlob extends Analyzer {
 
         // glob() with second argument (without GLOB_NOSORT)
         $this->atomFunctionIs('\\glob')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Logical')
              ->raw('where( __.out("LEFT", "RIGHT").hasLabel("Identifier").has("fullnspath", "\\\\glob_nosort").count().is(eq(0)) )')
@@ -53,7 +50,6 @@ class NoGlob extends Analyzer {
 
         // scandir() wit no second argument (without GLOB_NOSORT)
         $this->atomFunctionIs('\\scandir')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();

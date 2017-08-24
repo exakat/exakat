@@ -39,7 +39,6 @@ GREMLIN;
         if (!empty($constants)) {   
             // Const from a define (case insensitive)
             $this->atomFunctionIs('\define')
-                 ->outIs('ARGUMENTS')
                  ->noChildWithRank('ARGUMENT', 2) // default, case sensitive
                  ->outWithRank('ARGUMENT', 0)
                  ->atomIs('String')
@@ -48,7 +47,6 @@ GREMLIN;
             $this->prepareQuery();
     
             $this->atomFunctionIs('\define')
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
                  ->is('boolean', false)
                  ->inIs('ARGUMENT')
@@ -61,7 +59,6 @@ GREMLIN;
             // Const from a define (case sensitive)
             $constantsLC = array_map(function ($x) { return strtolower($x); }, $constants);
             $this->atomFunctionIs('\define')
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', 2) // explicit, case sensitive
                  ->is('boolean', true)
                  ->inIs('ARGUMENT')

@@ -31,7 +31,6 @@ class DontEchoError extends Analyzer {
         $errorMessageFunctions = $this->makeFullNsPath($errorMessageFunctions);
         
         $this->atomFunctionIs(array('\\echo', '\\print', '\\die', '\\exit'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Functioncall')
              ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
@@ -42,7 +41,6 @@ class DontEchoError extends Analyzer {
 
         // echo 'error '.pg_error();
         $this->atomFunctionIs(array('\\echo', '\\print', '\\die', '\\exit'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Concatenation')
              ->outIs('CONCAT')

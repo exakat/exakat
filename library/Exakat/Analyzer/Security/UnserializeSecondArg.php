@@ -29,7 +29,6 @@ class UnserializeSecondArg extends Analyzer {
     
     public function analyze() {
         $this->atomFunctionIs('\\unserialize')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();

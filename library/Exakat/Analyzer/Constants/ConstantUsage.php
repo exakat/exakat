@@ -49,7 +49,6 @@ class ConstantUsage extends Analyzer {
         
         // defined('constant') : then the string is a constant
         $this->atomFunctionIs(array('\defined', '\constant'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String');
         $this->prepareQuery();

@@ -54,7 +54,6 @@ class RegisterGlobals extends Analyzer {
 
         // With extract and overwriting option
         $this->atomFunctionIs('\\extract')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->codeIs($superGlobals, true)
              ->inIs('ARGUMENT')
@@ -66,7 +65,6 @@ class RegisterGlobals extends Analyzer {
 
         // With extract and default option (EXTR_OVERWRITE)
         $this->atomFunctionIs('\\extract')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->outWithRank('ARGUMENT', 0)
              ->codeIs($superGlobals, true)
@@ -75,7 +73,6 @@ class RegisterGlobals extends Analyzer {
 
         // With parse_url and no final argument
         $this->atomFunctionIs('\\parse_str')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();

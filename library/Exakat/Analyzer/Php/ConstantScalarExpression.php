@@ -42,7 +42,6 @@ class ConstantScalarExpression extends Analyzer {
 
         // function x( $a = 3 . '3', $b = array())
         $this->atomIs(self::$FUNCTION_METHOD)
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->atomIsNot($validAtoms)

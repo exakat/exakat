@@ -34,7 +34,6 @@ class UsedDirective extends Analyzer {
 
         // ini_set('string'
         $this->atomFunctionIs(array('\\ini_set', '\\ini_get', '\\ini_restore', '\\ini_alter', '\\iconv_set_encoding'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->noDelimiterIs($this->directives)

@@ -28,7 +28,6 @@ class CouldTypehint extends Analyzer {
     public function analyze() {
         // An argument is processed with a instanceof later
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->hasNoOut('TYPEHINT')
              ->outIsIE('LEFT')

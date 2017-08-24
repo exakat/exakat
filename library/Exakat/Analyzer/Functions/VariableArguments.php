@@ -37,7 +37,6 @@ class VariableArguments extends Analyzer {
         
         // Using function_get_args
         $this->atomIs(self::$FUNCTIONS_ALL)
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('VARIABLE')
              ->atomIs('Variable')

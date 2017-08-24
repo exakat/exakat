@@ -55,7 +55,6 @@ class IsExtInterface extends Analyzer {
         $this->prepareQuery();
 
         $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIs($interfaces);

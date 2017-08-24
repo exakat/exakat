@@ -29,13 +29,11 @@ class OnlyVariablePassedByReference extends Analyzer {
     public function analyze() {
         // Functioncalls
         $this->atomIs('Functioncall')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIsNot(array('Variable', 'Member', 'Staticproperty', 'Array'))
              ->savePropertyAs('rank', 'position')
              ->back('first')
              ->functionDefinition()
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'position')
              ->is('reference', true)
@@ -47,7 +45,6 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->savePropertyAs('code', 'method')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIsNot(array('Variable', 'Member', 'Staticproperty', 'Array'))
              ->savePropertyAs('rank', 'position')
@@ -57,7 +54,6 @@ class OnlyVariablePassedByReference extends Analyzer {
              ->outIs('METHOD')
              ->atomIs('Method')
              ->samePropertyAs('code', 'method')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'position')
              ->is('reference', true)
@@ -80,7 +76,6 @@ class OnlyVariablePassedByReference extends Analyzer {
             // Functioncalls
             $this->atomIs('Functioncall')
                  ->fullnspathIs($functions)
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIsNot(array('Variable', 'Member', 'Staticproperty', 'Array'))
                  ->back('first');

@@ -36,7 +36,6 @@ class UsePathinfo extends Analyzer {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->functioncallIs(array('\\explode', '\\split'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING') // could be T_VARIABLE, T_QUOTE, T_OBJECT_OPERATOR, T_DOUBLE_COLON
@@ -49,7 +48,6 @@ class UsePathinfo extends Analyzer {
              ->atomIs('Assignation')
              ->outIs('RIGHT')
              ->functioncallIs('\\array_pop')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('code', 'tmpvar')
              ->back('first');
@@ -65,7 +63,6 @@ class UsePathinfo extends Analyzer {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->functioncallIs(array('\\explode', '\\split'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING') // could be T_VARIABLE, T_QUOTE, T_OBJECT_OPERATOR, T_DOUBLE_COLON
              ->noDelimiterIs('.')
@@ -80,7 +77,6 @@ class UsePathinfo extends Analyzer {
              ->atomIs('Assignation')
              ->outIs('RIGHT')
              ->functioncallIs('\\array_pop')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('code', 'tmpvar')
              ->back('first');

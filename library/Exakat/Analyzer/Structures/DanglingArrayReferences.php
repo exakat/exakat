@@ -35,7 +35,7 @@ class DanglingArrayReferences extends Analyzer {
              ->nextSibling()
 
             // is it unset($x); ?
-             ->raw('not( where( __.hasLabel("Functioncall").has("fullnspath", "\\\\unset").out("ARGUMENTS").out("ARGUMENT").filter{ it.get().value("code") == array } ) )')
+             ->raw('not( where( __.hasLabel("Functioncall").has("fullnspath", "\\\\unset").out("ARGUMENT").filter{ it.get().value("code") == array } ) )')
 
             // is is (unset) $x;?
              ->raw('not( where( __.hasLabel("Cast").has("token", "T_UNSET_CAST").out("CAST").filter{ it.get().value("code") == array } ) )')

@@ -28,7 +28,6 @@ use Exakat\Analyzer\Analyzer;
 class ParenthesisAsParameter extends Analyzer {
     public function analyze() {
         $this->atomIs('Functioncall')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Parenthesis')
              ->back('first');

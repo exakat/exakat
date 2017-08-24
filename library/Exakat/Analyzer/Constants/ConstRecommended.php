@@ -33,7 +33,6 @@ class ConstRecommended extends Analyzer {
     public function analyze() {
         // define('const', literal);
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->_as('args')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
@@ -46,7 +45,6 @@ class ConstRecommended extends Analyzer {
 
         // define('const', other constant);
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->_as('args')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
@@ -59,7 +57,6 @@ class ConstRecommended extends Analyzer {
 
         // define('const', expression);
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->_as('args')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')

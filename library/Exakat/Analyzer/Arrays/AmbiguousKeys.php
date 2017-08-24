@@ -31,7 +31,7 @@ class AmbiguousKeys extends Analyzer {
         $this->atomIs('Arrayliteral')
              ->raw('where(
     __.sideEffect{ counts = [:]; integers = [:]; strings = [:]; }
-      .out("ARGUMENTS").out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
+      .out("ARGUMENT").hasLabel("Keyvalue").out("INDEX")
       .hasLabel("String", "Integer").not( where(__.out("CONCAT") ) )
       .sideEffect{ 
             if (it.get().label() == "String" && "noDelimiter" in it.get().keys()) { 
@@ -53,7 +53,6 @@ class AmbiguousKeys extends Analyzer {
 
         // $x = [1.0 => 2];
         $this->atomIs('Arrayliteral')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')

@@ -42,7 +42,6 @@ class UsedRoutes extends Slim {
              ->back('first')
              ->outIs('METHOD')
              ->codeIs(array('get', 'put', 'any', 'patch', 'option', 'delete', 'post'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIsNot('Void');
         $this->prepareQuery();

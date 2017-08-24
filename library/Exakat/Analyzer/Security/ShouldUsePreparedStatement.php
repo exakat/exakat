@@ -49,7 +49,6 @@ class ShouldUsePreparedStatement extends Analyzer {
         
         // dynamic type in the code : mysql_query($res, "select ".$a." from table");
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Concatenation')
              ->back('first');
@@ -57,7 +56,6 @@ class ShouldUsePreparedStatement extends Analyzer {
 
         // dynamic type in the code : mysql_query($res, "select $a from table");
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('String')
              ->hasOut('CONCAT')
@@ -66,7 +64,6 @@ class ShouldUsePreparedStatement extends Analyzer {
 
         // dynamic type in the code : mysql_query($res, <<<HEREDOC select $a from table HEREDOC);
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Heredoc')
              ->is('heredoc', true)
@@ -78,7 +75,6 @@ class ShouldUsePreparedStatement extends Analyzer {
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs('query')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->back('first');
@@ -88,7 +84,6 @@ class ShouldUsePreparedStatement extends Analyzer {
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs('query')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasOut('CONCAT')
@@ -99,7 +94,6 @@ class ShouldUsePreparedStatement extends Analyzer {
         $this->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs('query')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Heredoc')
              ->is('heredoc', true)

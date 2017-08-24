@@ -45,7 +45,6 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'varname')
              ->isNot('reference', true)
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->atomIs(self::$FUNCTION_METHOD)
              ->_as('results')
              ->hasNoClassInterfaceTrait()
@@ -60,7 +59,6 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'varname')
              ->isNot('reference', true)
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->atomIs(self::$FUNCTION_METHOD)
              ->_as('results')
 
@@ -78,7 +76,6 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'varname')
              ->is('reference', true)
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->atomIs(self::$FUNCTION_METHOD)
              ->_as('results')
              ->hasNoClassInterfaceTrait()
@@ -93,7 +90,6 @@ class UnusedArguments extends Analyzer {
              ->savePropertyAs('code', 'varname')
              ->is('reference', true)
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->atomIs(self::$FUNCTION_METHOD)
              ->_as('results')
 

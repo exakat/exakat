@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class MkdirDefault extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\mkdir')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();

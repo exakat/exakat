@@ -76,7 +76,6 @@ class Extension extends Analyzer {
             $this->prepareQuery();
 
             $this->atomIs('Function')
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->outIs('TYPEHINT')
                  ->fullnspathIs($classes);
@@ -126,7 +125,6 @@ class Extension extends Analyzer {
 
         if (!empty($ini['directives'])) {
             $this->analyzerIs('Php/DirectivesUsage')
-                 ->outIs('ARGUMENTS')
                  ->outWithRank("ARGUMENT", 0)
                  ->noDelimiterIs($ini['directives']);
             $this->prepareQuery();

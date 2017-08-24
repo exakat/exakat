@@ -42,7 +42,6 @@ class NoEchoInRouteCallable extends Slim {
              ->back('first')
              ->outIs('METHOD')
              ->codeIs(array('get', 'put', 'any', 'patch', 'option', 'delete', 'post'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Closure')
              ->outIs('BLOCK')
@@ -59,7 +58,6 @@ class NoEchoInRouteCallable extends Slim {
              ->back('first')
              ->outIs('METHOD')
              ->codeIs(array('get', 'put', 'any', 'patch', 'option', 'delete', 'post'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Staticclass')
              

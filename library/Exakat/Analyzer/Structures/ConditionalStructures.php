@@ -44,7 +44,6 @@ class ConditionalStructures extends Analyzer {
         $this->atomFunctionIs('\\define')
              ->hasIfthen()
              ->back('first')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0);
         $this->prepareQuery();
     }

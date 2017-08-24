@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class timeVsstrtotime extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\strtotime')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT',0)
              ->noDelimiterIs('now')
              ->back('first');

@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class NoBooleanAsDefault extends Analyzer {
     public function analyze() {
         $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('RIGHT')
              ->outIsIE(array('THEN', 'ELSE'))

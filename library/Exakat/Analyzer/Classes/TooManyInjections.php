@@ -31,7 +31,7 @@ class TooManyInjections extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Method')
-             ->raw('where( __.out("ARGUMENTS").out("ARGUMENT")
+             ->raw('where( __.out("ARGUMENT")
                              .where(__.in("ANALYZED").has("analyzer", "Patterns/DependencyInjection") )
                              .count().is(gt(4)) 
                           )');

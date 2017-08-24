@@ -31,7 +31,6 @@ class FailingSubstrComparison extends Analyzer {
              ->codeIs(array('==', '==='))
              ->outIs(array('LEFT', 'RIGHT'))
              ->functioncallIs('\substr')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
              ->atomIs('Integer')
              ->savePropertyAs('code', 'length')

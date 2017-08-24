@@ -32,7 +32,6 @@ class UseCookies extends Analyzer {
 
         // with header
         $this->atomFunctionIs('\\header')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs(array('String', 'Concatenation'))
              ->regexIs('fullcode', '[Ss]et-[Cc]ookie')
