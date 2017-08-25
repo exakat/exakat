@@ -132,7 +132,7 @@ class Config {
                                'nogremlin'   => 'NoGremlin',
                                );
 
-    private $LOADERS = array( 'neo4j'       => 'CypherG3', // Could be Neo4jImport
+    private $LOADERS = array( 'neo4j'       => 'Neo4jImport', // Could be Neo4jImport, CypherG3
                               'tinkergraph' => 'Tinkergraph',
                               'gsneo4j'     => 'GSNeo4j',
                               'janusgraph'  => 'Janusgraph',
@@ -279,7 +279,8 @@ class Config {
         $this->options = array_merge($this->options, $this->defaultConfig, $this->configFile, $this->projectConfig, $this->codacyConfig, $this->commandline);
 
         $graphdb = $this->options['graphdb'];
-        if ($this->options[$graphdb.'_folder'][0] !== '/') {
+        if (isset($this->options[$graphdb.'_folder']) && 
+            $this->options[$graphdb.'_folder'][0] !== '/') {
             $this->options[$graphdb.'_folder'] = $this->projects_root.'/'.$this->options[$graphdb.'_folder'];
         }
         $this->options[$graphdb.'_folder'] = realpath($this->options[$graphdb.'_folder']);
@@ -323,6 +324,10 @@ class Config {
             $this->projectConfig = array();
         } else {
             $this->projectConfig = parse_ini_file($this->projects_root.'/projects/'.$project.'/config.ini');
+            if (file_exists($this->projects_root.'/projects/'.$project.'/config.cache')) {
+                $this->projectConfig = array_merge($this->projectConfig,
+                                                   parse_ini_file($this->projects_root.'/projects/'.$project.'/config.cache'));
+            }
         }
 
         // removing empty values in the INI file

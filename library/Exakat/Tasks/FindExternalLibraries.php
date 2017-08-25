@@ -100,11 +100,10 @@ class FindExternalLibraries extends Tasks {
         }
 
         $dir = $this->config->projects_root.'/projects/'.$project.'/code';
-        $configFile = $this->config->projects_root.'/projects/'.$project.'/config.ini';
-        $ini = parse_ini_file($configFile);
+        $cacheFile = $this->config->projects_root.'/projects/'.$project.'/config.cache';
 
-        if ($this->config->update && isset($ini['FindExternalLibraries'])) {
-            display('Not updating '.$project.'/config.ini. This tool was already run. Please, clean the config.ini file in the project directory, before running it again.');
+        if (file_exists($cacheFile)) {
+            display($project.' has already a file cache. Omitting.');
             return; //Cancel task
         }
 
@@ -158,16 +157,14 @@ class FindExternalLibraries extends Tasks {
         $this->datastore->cleanTable('externallibraries');
         $this->datastore->addRow('externallibraries', $store);
 
-        if ($this->config->update === true && !empty($newConfigs)) {
-             display('Updating '.$project.'/config.ini');
-             $ini = file_get_contents($configFile);
-             $ini = preg_replace("#(ignore_dirs\[\] = \/.*?\n)\n#is", '$1'."\n".';Ignoring external libraries'."\n".'ignore_dirs[] = '.implode("\n".'ignore_dirs[] = ', $newConfigs)."\n;Ignoring external libraries\n\n", $ini);
+        if ($this->config->update === true) {
+             display('Updating '.$project.'/config.cache');
+             $ini =';This file is auto-generated. Do not edit manually. Remove it to generate it.'.PHP_EOL.
+                   'ignore_dirs[] = '.implode("\n".'ignore_dirs[] = ', $newConfigs).PHP_EOL;
 
-             $ini .= "\nFindExternalLibraries = 1\n";
-
-             file_put_contents($configFile, $ini);
+             file_put_contents($cacheFile, $ini);
         } else {
-            display('Not updating '.$project.'/config.ini. '.count($newConfigs).' external libraries found');
+            display('Not updating '.$project.'/config.cache. '.count($newConfigs).' external libraries found');
         }
     }
 
