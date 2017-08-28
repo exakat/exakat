@@ -72,6 +72,27 @@ class Project extends Tasks {
             unlink($log);
         }
 
+
+
+        display("Search for external libraries".PHP_EOL);
+        if (file_exists($this->config->projects_root.'/projects/'.$project.'/config.cache')) {
+            unlink($this->config->projects_root.'/projects/'.$project.'/config.cache');
+        }
+        $args = array ( 1 => 'findextlib',
+                        2 => '-p',
+                        3 => $this->config->project,
+                        4 => '-u',
+                        );
+
+        $configThema = new Config($args);
+
+        $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+        $analyze->run();
+
+        $this->addSnitch(array('step'   => 'External lib',
+                              'project' => $this->config->project));
+        unset($analyze);
+
         $this->logTime('Start');
         $this->addSnitch(array('step'    => 'Start',
                                'project' => $this->config->project));
@@ -97,23 +118,6 @@ class Project extends Tasks {
         $this->logTime('CleanDb');
         $this->addSnitch(array('step'    => 'Clean DB',
                                'project' => $this->config->project));
-
-        display("Search for external libraries".PHP_EOL);
-        $args = array ( 1 => 'findextlib',
-                        2 => '-p',
-                        3 => $this->config->project,
-                        4 => '-u',
-                        );
-
-        $configThema = new Config($args);
-
-        $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
-        $analyze->run();
-
-        $this->addSnitch(array('step'   => 'External lib',
-                              'project' => $this->config->project));
-
-        unset($analyze);
 
         display("Running files".PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
