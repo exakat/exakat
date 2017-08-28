@@ -27,6 +27,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MustReturn extends Analyzer {
     public function analyze() {
+        // class foo { function __callStatic($name, $foo) { $name; } }
         $this->atomIs('Method')
              ->hasNoOut('ABSTRACT')
              ->hasClassTrait()
