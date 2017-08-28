@@ -61,6 +61,7 @@ Supported Reports
 Exakat produces various reports. Some are general, covering various aspects in a reference way; others focus on one aspect. 
 
   * Ambassador
+  * AmbassadorNoMenu
   * Devoops
   * Text
   * Xml
@@ -121,6 +122,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/event
 * ext/exif
 * ext/expect
+* ext/fam
 * ext/fann
 * ext/fdf
 * ext/ffmpeg
@@ -137,7 +139,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/gmagick
 * ext/gmp
 * ext/gnupgp
-* Extensions/Extgrpc
+* ext/grpc
 * ext/hash
 * ext/pecl_http
 * ext/ibase
@@ -190,6 +192,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/proctitle
 * ext/pspell
 * ext/rar
+* ext/rdkafka
 * ext/readline
 * ext/recode
 * ext/redis
@@ -302,6 +305,19 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.12.9
+
+  * Shell Favorite (Php/ShellFavorite)
+
+* 0.12.8
+
+  * ext/fam (Extensions/Extfam)
+  * ext/rdkafka (Extensions/Extrdkafka ; Appinfo)
+
+* 0.12.7
+
+  * Should Use Foreach (Structures/ShouldUseForeach)
+
 * 0.12.5
 
   * Logical To in_array (Performances/LogicalToInArray)
@@ -323,7 +339,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.12.3
 
-  * GroupUse Trailing Comma (Php/GroupUseTrailingComma ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
+  * Group Use Trailing Comma (Php/GroupUseTrailingComma ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
   * Mismatched Default Arguments (Functions/MismatchedDefaultArguments ; Analyze)
   * Mismatched Typehint (Functions/MismatchedTypehint ; Analyze)
   * Scalar Or Object Property (Classes/ScalarOrObjectProperty)
@@ -337,11 +353,11 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.12.1
 
   * Const Or Define (Structures/ConstDefineFavorite ; Appinfo)
-  * Declare encoding Usage (Php/DeclareEncoding)
   * Declare strict_types Usage (Php/DeclareStrictType ; Appinfo, Preferences)
-  * Declare ticks Usage (Php/DeclareTicks ; Preferences)
+  * Encoding Usage (Php/DeclareEncoding)
   * Mismatched Ternary Alternatives (Structures/MismatchedTernary ; Analyze)
   * No Return Or Throw In Finally (Structures/NoReturnInFinally ; Security)
+  * Ticks Usage (Php/DeclareTicks ; Preferences)
 
 * 0.12.0
 
@@ -389,8 +405,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Typehint (Functions/CouldTypehint ; Analyze)
   * Implemented Methods Are Public (Classes/ImplementedMethodsArePublic)
   * Mixed Concat And Interpolation (Structures/MixedConcatInterpolation ; Analyze, Coding Conventions)
+  * No Reference On Left Side (Structures/NoReferenceOnLeft ; Analyze)
   * PSR-11 Usage (Psr/Psr11Usage ; Appinfo)
-  * Structures/NoReferenceOnLeft (Structures/NoReferenceOnLeft ; Analyze)
   * ext/stats (Extensions/Extstats ; Appinfo)
 
 * 0.11.4
@@ -401,10 +417,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.11.3
 
-  * Extensions/Extgrpc (Extensions/Extgrpc)
   * No Return Used (Functions/NoReturnUsed ; Analyze)
   * Only Variable Passed By Reference (Functions/OnlyVariablePassedByReference ; Analyze)
   * Try With Multiple Catch (Php/TryMultipleCatch ; Appinfo)
+  * ext/grpc (Extensions/Extgrpc)
   * ext/sphinx (Extensions/Extsphinx ; Appinfo)
 
 * 0.11.2
@@ -749,8 +765,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.9.6
 
+  * Avoid glob() Usage (Performances/NoGlob ; Performances)
   * Fetch One Row Format (Performances/FetchOneRowFormat)
-  * Performances/NoGlob (Performances/NoGlob ; Performances)
 
 * 0.9.5
 
@@ -1116,7 +1132,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Multiple Exceptions Catch() (Exceptions/MultipleCatch ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70)
   * Multiple Identical Trait Or Interface (Classes/MultipleTraitOrInterface ; Analyze, OneFile, Codacy, Simple)
   * Multiple Index Definition (Arrays/MultipleIdenticalKeys ; Analyze, OneFile, Codacy, Simple)
-  * Multiple Return (Functions/MultipleReturn ; )
+  * Multiple Returns (Functions/MultipleReturn ; )
   * Multiples Identical Case (Structures/MultipleDefinedCase ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
   * Multiply By One (Structures/MultiplyByOne ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
   * Must Return Methods (Functions/MustReturn ; Analyze, Codacy, Simple)
@@ -1213,7 +1229,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Property Names (Classes/PropertyDefinition ; Appinfo)
   * Property Used Above (Classes/PropertyUsedAbove ; Internal)
   * Property Used Below (Classes/PropertyUsedBelow ; Analyze, Codacy, Simple)
-  * Property/Variable Confusion (Structures/PropertyVariableConfusion ; Analyze, Codacy, Simple)
+  * Property Variable Confusion (Structures/PropertyVariableConfusion ; Analyze, Codacy, Simple)
   * Queries In Loops (Structures/QueriesInLoop ; Analyze, OneFile, Codacy, Simple, Level 1)
   * Random Without Try (Structures/RandomWithoutTry ; Security)
   * Real Functions (Functions/RealFunctions ; Appcontent)
@@ -1237,7 +1253,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Return True False (Structures/ReturnTrueFalse ; Analyze, Codacy, Simple, Level 1)
   * Return Typehint Usage (Php/ReturnTypehintUsage ; Appinfo, Internal)
   * Return With Parenthesis (Php/ReturnWithParenthesis ; Coding Conventions, PHP recommendations)
-  * Safe CurlOptions (Security/CurlOptions ; Security)
+  * Safe Curl Options (Security/CurlOptions ; Security)
   * Same Conditions (Structures/SameConditions ; Analyze, Codacy, Simple)
   * Scalar Typehint Usage (Php/ScalarTypehintUsage ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Sensitive Argument (Security/SensitiveArgument ; Internal)
@@ -1287,7 +1303,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Too Many Children (Classes/TooManyChildren ; )
   * Trait Methods (Traits/TraitMethod ; )
   * Trait Names (Traits/Traitnames ; Appinfo)
-  * Traits (Traits/TraitUsage ; Appinfo)
+  * Traits Usage (Traits/TraitUsage ; Appinfo)
   * Trigger Errors (Php/TriggerErrorUsage ; Appinfo)
   * True False Inconsistant Case (Constants/InconsistantCase ; Preferences)
   * Try With Finally (Structures/TryFinally ; Appinfo, Internal)
@@ -1619,6 +1635,7 @@ List of external links mentionned in this documentation.
 * ` <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
 * ` <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
 * ` <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
+* `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
@@ -1627,9 +1644,10 @@ List of external links mentionned in this documentation.
 * `Apache <http://php.net/manual/en/book.apache.php>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
-* `Array <http://php.net/manual/en/function.array.php>`_
+* `Array <http://php.net/manual/en/function.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
+* `Array <http://php.net/manual/en/language.types.array.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
-* `Arrays <http://php.net/manual/en/language.types.array.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
@@ -1685,15 +1703,18 @@ List of external links mentionned in this documentation.
 * `ext/gender <http://php.net/manual/en/book.gender.php>`_
 * `ext/inotify <http://php.net/manual/en/book.inotify.php>`_
 * `ext/lua <http://php.net/manual/en/book.lua.php>`_
+* `ext/mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
 * `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
 * `ext/sqlite <http://php.net/manual/en/book.sqlite.php>`_
 * `ext/sqlite3 <http://php.net/manual/en/book.sqlite3.php>`_
 * `extension FANN <http://php.net/manual/en/book.fann.php>`_
 * `Ez <https://ez.no/>`_
+* `FAM <http://oss.sgi.com/projects/fam/>`_
 * `FastCGI Process Manager <http://php.net/fpm>`_
 * `FDF <http://www.adobe.com/devnet/acrobat/fdftoolkit.html>`_
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
+* `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
@@ -1712,6 +1733,7 @@ List of external links mentionned in this documentation.
 * `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarations>`_
 * `GRPC <http://www.grpc.io/>`_
 * `hash <http://www.php.net/hash>`_
+* `HASH Message Digest Framework <http://www.php.net/manual/en/book.hash.php>`_
 * `hg <https://www.mercurial-scm.org/>`_
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
 * `Iconv <http://php.net/iconv>`_
@@ -1727,10 +1749,12 @@ List of external links mentionned in this documentation.
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
 * `Joomla <http://www.joomla.org/>`_
 * `Judy C library <http://judy.sourceforge.net/>`_
+* `Kafka client for PHP <https://github.com/arnaud-lb/php-rdkafka>`_
 * `Lapack <http://php.net/manual/en/book.lapack.php>`_
 * `Laravel <http://www.lavarel.com/>`_
 * `libevent <http://www.libevent.org/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
+* `libxml <http://www.php.net/manual/en/book.libxml.php>`_
 * `List of function aliases <http://php.net/manual/en/aliases.php>`_
 * `List of HTTP header fields <https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_
 * `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_
@@ -1744,6 +1768,7 @@ List of external links mentionned in this documentation.
 * `Mbstring <http://www.php.net/manual/en/book.mbstring.php>`_
 * `Memcache on PHP <http://www.php.net/manual/en/book.memcache.php>`_
 * `mhash <http://mhash.sourceforge.net/>`_
+* `Microsoft SQL Server <http://www.php.net/manual/en/book.mssql.php>`_
 * `Microsoft SQL Server Driver <http://php.net/sqlsrv>`_
 * `Ming (flash) <http://www.libming.org/>`_
 * `mongodb Driver <ext/mongo>`_
@@ -1757,19 +1782,25 @@ List of external links mentionned in this documentation.
 * `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
+* `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
+* `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_
 * `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_
 * `Packagist <https://packagist.org/>`_
+* `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
 * `PCRE <http://php.net/pcre>`_
+* `PEAR <http://pear.php.net/>`_
 * `pecl crypto <https://pecl.php.net/package/crypto>`_
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
+* `PHP Data Object <http://php.net/manual/en/book.pdo.php>`_
 * `PHP extension for libsodium <https://github.com/jedisct1/libsodium-php>`_
 * `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
+* `PHP Options/Info Functions <http://php.net/manual/en/ref.info.php>`_
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
@@ -1788,14 +1819,16 @@ List of external links mentionned in this documentation.
 * `PSR7 <http://www.php-fig.org/psr/psr-7/>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_
+* `References <http://php.net/references>`_
 * `Reflection <http://php.net/manual/en/book.reflection.php>`_
 * `Regular Expressions (Perl-Compatible) <http://php.net/manual/en/book.pcre.php>`_
 * `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_
 * `RFC 7159 <http://www.faqs.org/rfcs/rfc7159>`_
 * `RFC 7230 <https://tools.ietf.org/html/rfc7230>`_
-* `RFC 822 (MIME)<http://www.faqs.org/rfcs/rfc822.html>`_
+* `RFC 822 (MIME) <http://www.faqs.org/rfcs/rfc822.html>`_
 * `RFC 959 <http://www.faqs.org/rfcs/rfc959>`_
 * `Routing <https://www.slimframework.com/docs/objects/router.html>`_
+* `runkit <http://php.net/manual/en/book.runkit.php>`_
 * `Scope Resolution Operator (::) <http://php.net/manual/en/language.oop5.paamayim-nekudotayim.php>`_
 * `Semaphore <http://php.net/manual/en/book.sem.php>`_
 * `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
@@ -1803,6 +1836,7 @@ List of external links mentionned in this documentation.
 * `session_regenerateid() <http://php.net/session_regenerate_id>`_
 * `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_
 * `Simplexml <http://php.net/manual/en/book.simplexml.php>`_
+* `Single Function Exit Point <http://wiki.c2.com/?SingleFunctionExitPoint>`_
 * `Slim <https://www.slimframework.com/>`_
 * `SlimPHP <https://www.slimframework.com/>`_
 * `SOAP <http://php.net/manual/en/book.soap.php>`_
@@ -1824,6 +1858,7 @@ List of external links mentionned in this documentation.
 * `tokenizer <http://www.php.net/tokenizer>`_
 * `tokyo_tyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
 * `trader <https://pecl.php.net/package/trader>`_
+* `Traits <http://php.net/trait>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
@@ -1836,6 +1871,7 @@ List of external links mentionned in this documentation.
 * `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
 * `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_
+* `Why does PHP 5.2+ disallow abstract static class methods? <https://stackoverflow.com/questions/999066/why-does-php-5-2-disallow-abstract-static-class-methods>`_
 * `wikidiff2 <https://www.mediawiki.org/wiki/Extension:Wikidiff2>`_
 * `Wincache extension for PHP <http://www.php.net/wincache>`_
 * `Wordpress <https://www.wordpress.org/>`_

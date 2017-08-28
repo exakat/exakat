@@ -212,6 +212,7 @@ Glossary
       + :ref:`Print And Die <print-and-die>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Use Wordpress Functions <use-wordpress-functions>`
+      + :ref:`ext/mysql <ext/mysql>`
 
     + `dirname()`
 
@@ -275,6 +276,7 @@ Glossary
     + `Foreach()`
 
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
+      + :ref:`Should Use Foreach <should-use-foreach>`
 
     + `file()`
 
@@ -323,13 +325,13 @@ Glossary
 + `G`
     + `Glob()`
 
-      + :ref:`Performances/NoGlob <performances/noglob>`
+      + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
 
     + `glob()`
 
+      + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
       + :ref:`No Direct Usage <no-direct-usage>`
       + :ref:`No Hardcoded Path <no-hardcoded-path>`
-      + :ref:`Performances/NoGlob <performances/noglob>`
 
 
 + `H`
@@ -364,6 +366,7 @@ Glossary
 
     + `in_array()`
 
+      + :ref:`Logical To in_array <logical-to-in\_array>`
       + :ref:`Slow Functions <slow-functions>`
 
     + `ini_get()`
@@ -474,7 +477,7 @@ Glossary
 + `O`
     + `opendir()`
 
-      + :ref:`Performances/NoGlob <performances/noglob>`
+      + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
 
 
 + `P`
@@ -556,7 +559,7 @@ Glossary
 
     + `scandir()`
 
-      + :ref:`Performances/NoGlob <performances/noglob>`
+      + :ref:`Avoid glob() Usage <avoid-glob()-usage>`
 
     + `set_exception_handler()`
 
