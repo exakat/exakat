@@ -31,7 +31,7 @@ class DefineWithArray extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\define')
              ->outWithRank('ARGUMENT', 1)
-             ->tokenIs(array('T_ARRAY', 'T_OPEN_BRACKET'))
+             ->atomIs('Arrayliteral')
              ->back('first');
         $this->prepareQuery();
 
