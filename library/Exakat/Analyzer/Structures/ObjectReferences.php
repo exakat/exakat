@@ -30,7 +30,7 @@ class ObjectReferences extends Analyzer {
 
         $scalars = $this->loadIni('php_scalar_types.ini', 'types');
         // f(stdclass &$x)
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIsNot($scalars)
@@ -41,7 +41,7 @@ class ObjectReferences extends Analyzer {
 
         // f(&$x) and $x->y();
         // f(&$x) and $x->y;
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->is('reference', true)
              ->savePropertyAs('code', 'variable') // Avoid &
