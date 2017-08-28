@@ -40,7 +40,7 @@ class Simpletable extends Reports {
     }
     
     private function generateData($folder, $name = 'table') {
-        $list = Analyzer::getThemeAnalyzers(array('Performances'));
+        $list = Analyzer::getThemeAnalyzers('Analyze');
         $list = '"'.join('", "', $list).'"';
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
@@ -48,36 +48,42 @@ class Simpletable extends Reports {
         $res = $sqlite->query($sqlQuery);
         
         while($row = $res->fetchArray(\SQLITE3_ASSOC)){
-            $results[$row['analyzer']][] = array('code' => $row['fullcode'], 
-                                                 'file' => $row['file'].':'.$row['line']);
+            $results[$row['analyzer']][] = array('code' => $this->syntaxColoring($row['fullcode']), 
+                                                 'file' => $row['file'],
+                                                 'line' => $row['line']);
         }
 
         $table = '';
         foreach($results as $section => $lines) {
+            $rows = array();
+            
+            foreach($lines as $line) {
+                $rows[] = <<<HTML
+			<tr>
+				<td>{$line['code']}</td>
+				<td>{$line['file']}</td>
+				<td>{$line['line']}</td>
+			</tr>
+
+HTML;
+            }
+            
+            $ini = parse_ini_file($this->config->doc_root.'human/en/'.$section.'.ini');
+            $title = htmlentities($ini['name'], ENT_COMPAT | ENT_HTML401, 'UTF-8');
+
+            $rows = join('', $rows);
+            $c = count($lines);
             $table .= <<<HTML
 		<tbody class="labels">
 			<tr>
 				<td colspan="5">
-					<label for="$section">$section</label>
+					<label for="$section">($c) $title</label>
 					<input type="checkbox" name="accounting" id="$section" data-toggle="toggle">
 				</td>
 			</tr>
 		</tbody>
 		<tbody class="hide">
-			<tr>
-				<td>Australia</td>
-				<td>$7,685.00</td>
-				<td>$3,544.00</td>
-				<td>$5,834.00</td>
-				<td>$10,583.00</td>
-			</tr>
-			<tr>
-				<td>Central America</td>
-				<td>$7,685.00</td>
-				<td>$3,544.00</td>
-				<td>$5,834.00</td>
-				<td>$10,583.00</td>
-			</tr>
+		    $rows
 		</tbody>
 HTML;
         }
@@ -116,6 +122,16 @@ HTML;
         }
     }
 
+    private function syntaxColoring($source) {
+        $colored = highlight_string('<?php '.$source.' ;?>', true);
+        $colored = substr($colored, 79, -65);
+
+        if ($colored[0] === '$') {
+            $colored = '<span style="color: #0000BB">'.$colored;
+        }
+
+        return $colored;
+    }
 }
 
 ?>
