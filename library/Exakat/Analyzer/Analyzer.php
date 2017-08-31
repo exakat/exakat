@@ -457,13 +457,13 @@ GREMLIN;
             $result->total = 0;
             return array($result);
         }
-
-        if (!isset($result->results)) {
-            return array();
+        
+        if (isset($result->results)) {
+            $result = $result->results;
         }
         
         $return = array();
-        foreach($result->results as $row) {
+        foreach($result as $row) {
             $return[$row->key] = $row->value;
         }
         return $return;
@@ -817,6 +817,10 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
     }
 
     public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (is_array($code) && empty($code)) {
+            return $this;
+        }
+        
         $this->addMethod('hasLabel("String")', $code);
         return $this->propertyIsNot('noDelimiter', $code, $caseSensitive);
     }
@@ -1242,19 +1246,19 @@ GREMLIN
     }
 
     public function hasFunctionDefinition() {
-        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method").count().is(neq(0)))');
+        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") )');
     
         return $this;
     }
 
     public function hasNoFunctionDefinition() {
-        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method").count().is(eq(0)))');
+        $this->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method") ) )');
     
         return $this;
     }
 
     public function functionDefinition() {
-        $this->addMethod('in("DEFINITION")');
+        $this->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Closure")');
     
         return $this;
     }
