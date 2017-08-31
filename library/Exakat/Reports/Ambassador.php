@@ -1217,7 +1217,6 @@ JAVASCRIPT;
 
     public function getSeverityBreakdown() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-        $list = array_slice($list, 0, 5);
         $list = '"'.implode('", "', $list).'"';
 
         $query = <<<SQL
@@ -1664,10 +1663,11 @@ SQL;
                            'None'     => '#89070b'
                            );
 
-        $severityColors = array('Critical' => '#a4af97',
-                                'Major'    => '#a7a9a2',
-                                'Minor'    => '#f23942',
-                                'None'     => '#941d26');
+        $severityColors = array('Critical' => '#ff0000',   // red 
+                                'Major'    => '#FFA500',   // Orange
+                                'Minor'    => '#BDB76B',   // darkkhaki
+                                'None'     => '#D3D3D3',   // lightgrey
+                                );
 
         $items = array();
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
