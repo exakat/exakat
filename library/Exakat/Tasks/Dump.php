@@ -220,11 +220,11 @@ SQL;
 
         $this->log->log("$class : dumped $saved");
 
-        if ($count != $saved) {
+        if ($count == $saved) {
+            display("All $saved results saved for $class\n");
+        } else {
             assert($count == $saved, 'results were not correctly dumped in '.$class. ' '.$saved.'/'.$count);
             display("$saved results saved, $count expected for $class\n");
-        } else {
-            display("All $saved results saved for $class\n");
         }
     }
 
@@ -1043,11 +1043,11 @@ GREMLIN;
 
         // New
         $query = <<<GREMLIN
-g.V().hasLabel("New").out('NEW')
-     .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value('fullcode'); })
+g.V().hasLabel("New").out("NEW")
+     .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value("fullcode"); })
      .in("DEFINITION")
-     .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
-     .map{ [ 'file':calling, 'include':called];}
+     .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value("fullcode"); })
+     .map{ [ "file":calling, "include":called];}
 GREMLIN;
         $res = $this->gremlin->query($query);
         $query = array();

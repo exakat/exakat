@@ -105,7 +105,7 @@ SQL;
         } elseif (is_string($list)) {
             $list = array($list);
         }
-        $listSqlite3 = '"'.join('", "', $list).'"';
+        $listSqlite3 = '"'.implode('", "', $list).'"';
                                           $query = <<<SQL
 SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM categories AS c
     JOIN analyzers_categories AS ac
