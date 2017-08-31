@@ -72,8 +72,6 @@ class Project extends Tasks {
             unlink($log);
         }
 
-
-
         display("Search for external libraries".PHP_EOL);
         if (file_exists($this->config->projects_root.'/projects/'.$project.'/config.cache')) {
             unlink($this->config->projects_root.'/projects/'.$project.'/config.cache');
@@ -223,7 +221,7 @@ class Project extends Tasks {
         }
 
         try {
-            $analyzeConfig = Config($args);
+            $analyzeConfig = new Config($args);
 
             $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
             $analyze->run();
@@ -244,10 +242,18 @@ class Project extends Tasks {
             $audit_end = time();
             $query = "g.V().count()";
             $res = $this->gremlin->query($query);
-            $nodes = $res->results[0];
+            if (is_object($res)) {
+                $nodes = $res->results[0];
+            } else {
+                $nodes = $res[0];
+            }
             $query = "g.E().count()";
             $res = $this->gremlin->query($query);
-            $links = $res->results[0];
+            if (is_object($res)) {
+                $links = $res->results[0];
+            } else {
+                $links = $res[0];
+            }
 
             $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                                    'audit_length' => $audit_end - $audit_start,
