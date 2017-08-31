@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Phpexec;
 use Exakat\Tasks\Precedence;
+use Exakat\Exceptions\MissingFile;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\ProjectNeeded;
 
@@ -108,10 +109,21 @@ class FindExternalLibraries extends Tasks {
         }
 
         display('Processing files');
+        $path = $this->config->projects_root.'/projects/'.$project.'/code';
         $files = $this->datastore->getCol('files', 'file');
         if (empty($files)) {
             display('No files to process. Aborting');
             return;
+        }
+
+        $missing = array();
+        foreach($files as $file) {
+            if (!file_exists($path.$file)) {
+                $missing[] = $file;
+            }
+        }
+        if (!empty($missing)) {
+            throw new MissingFile($missing);
         }
 
         $this->php = new Phpexec($this->config->phpversion, $this->config);
@@ -119,7 +131,6 @@ class FindExternalLibraries extends Tasks {
         $this->php->getTokens();
 
         $r = array();
-        $path = $this->config->projects_root.'/projects/'.$project.'/code';
         rsort($files);
         $ignore = 'None';
         $ignoreLength = 0;
