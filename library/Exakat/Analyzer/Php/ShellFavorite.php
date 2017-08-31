@@ -43,6 +43,7 @@ GREMLIN;
                          '`backtick`' => 'backtick');
 
         $this->atomIs(array('Functioncall', 'Shell'))
+             ->raw('or( hasLabel("Shell"), has("fullnspath", within("\\\\exec", "\\\\shell_exec")))')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = (array) $this->rawQuery();
@@ -67,6 +68,7 @@ GREMLIN;
         $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
 
         $this->atomIs(array('Functioncall', 'Shell'))
+             ->raw('or( hasLabel("Shell"), has("fullnspath", within("\\\\exec", "\\\\shell_exec")))')
              ->raw('sideEffect{ '.$mapping.' }')
              ->raw('filter{ x2 in '.$types.'}')
              ->back('first');

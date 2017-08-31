@@ -28,8 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class UnresolvedInstanceof extends Analyzer {
     public function dependsOn() {
         return array('Classes/IsExtClass',
-//                     'Composer/IsComposerNsname',
-                     'Interfaces/IsExtInterface');
+                     'Interfaces/IsExtInterface',
+                    );
     }
 
     public function analyze() {
@@ -44,13 +44,12 @@ class UnresolvedInstanceof extends Analyzer {
         $this->atomIs('Instanceof')
              ->outIs('CLASS')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->atomIsNot('Array')
+             ->atomIsNot(array('Array', 'Boolean', 'Null'))
              ->codeIsNot(array('self', 'static', 'parent'))
              ->noClassDefinition()
              ->noInterfaceDefinition()
              ->analyzerIsNot('Classes/IsExtClass')
              ->analyzerIsNot('Interfaces/IsExtInterface')
-//             ->analyzerIsNot('Composer/IsComposerNsname')
              ->fullnspathIsNot(array_merge($classes, $interfaces))
              ->back('first');
         $this->prepareQuery();

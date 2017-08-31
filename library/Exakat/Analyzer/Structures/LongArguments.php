@@ -27,8 +27,7 @@ use Exakat\Analyzer\Analyzer;
 class LongArguments extends Analyzer {
     public function analyze() {
         // foo('123456789012345678901234567890123456789012345678901234567890 (50)');
-        $this->atomIs(array('Functioncall', 'Methodcallname', 'Newcall'))
-             ->outIs('ARGUMENTS')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->atomIs(array('String', 'Heredoc'))
              ->fullcodeLength(' > 50')
