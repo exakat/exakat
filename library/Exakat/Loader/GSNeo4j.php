@@ -221,9 +221,14 @@ GROUP BY calls.id
         $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant');
         $integerValues = array('count', 'intval', 'args_max', 'args_min');
         
+        $fileName = 'unknown';
+        
         $json = array();
         foreach($atoms as $atom) {
             $this->labels[$atom->atom] = 1;
+            if ($atom->atom === 'File') {
+                $fileName = $atom->code;
+            }
 
             $json[$atom->id] = $atom->toGraphsonLine($this->id);
         }
@@ -268,13 +273,13 @@ GROUP BY calls.id
 //                                          'Variable', 'Variablearray', 'Variableobject', 
                                           ))) {
                 $X = $this->json_encode($j);
-                assert(!json_last_error(), 'Error encoding for definition '.$j->label.' : '.json_last_error_msg()."\n".' '.print_r($j, true));
+                assert(!json_last_error(), $fileName.' : error encoding for definition '.$j->label.' : '.json_last_error_msg()."\n".' '.print_r($j, true));
                 fwrite($fpDefinition, $X.PHP_EOL);
             } elseif ($j->label === 'Project') {
                 // Just continue;
             } else {
                 $X = $this->json_encode($j);
-                assert(!json_last_error(), 'Error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
+                assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
                 fwrite($fp, $X.PHP_EOL);
             }
         }
