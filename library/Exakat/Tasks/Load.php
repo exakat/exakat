@@ -864,7 +864,6 @@ SQL;
             $fullcode[] = $part->fullcode;
 
             $this->addLink($string, $part, 'CONCAT');
-            print_r($string);
         }
 
         ++$this->id;
@@ -4163,6 +4162,9 @@ SQL;
             if ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_VARIABLE) {
                 ++$this->id;
                 $this->processSingle('Variable');
+                $right = $this->popExpression();
+            } elseif ($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DOLLAR) {
+                $this->processNext();
                 $right = $this->popExpression();
             } else {
                 $right = $this->processNextAsIdentifier(self::WITHOUT_FULLNSPATH);
