@@ -149,6 +149,10 @@ class Update extends Tasks {
             default :
                 display('No VCS found to update. git, mercurial, svn and bazaar are supported.');
         }
+        
+        display('Running files');
+        $updateCache = new Files($this->gremlin, $this->config);
+        $updateCache->run();
     }
 }
 
