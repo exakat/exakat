@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class UndefinedProperty extends Analyzer {
     public function dependsOn() {
         return array('Classes/DefinedProperty',
-                     'Classes/HasMagicProperty');
+                     'Classes/HasMagicProperty',
+                    );
     }
     
     public function analyze() {

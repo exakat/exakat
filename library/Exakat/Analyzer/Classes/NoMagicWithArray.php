@@ -25,10 +25,19 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class NoMagicWithArray extends Analyzer {
+    public function dependsOn() {
+        return array('Classes/DefinedProperty');
+    }
+    
     public function analyze() {
         $this->atomIs(array('Array', 'Arrayappend'))
              ->outIs(array('VARIABLE', 'APPEND'))
              ->atomIs('Member')
+
+             // Property is not defined
+             // Can't use Classes/UndefinedProperty, which avoid classes with __get
+             ->analyzerIsNot('Classes/DefinedProperty')
+
              ->_as('object')
              ->outIs('OBJECT')
              ->codeIs('$this')
@@ -36,10 +45,12 @@ class NoMagicWithArray extends Analyzer {
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'name')
              ->back('first')
-             ->raw('not( where( __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).emit().times('.self::MAX_LOOPING.')
-                                             .hasLabel("Class")
-                                             .out("PPP").out("PPP")
-                                             .filter{ it.get().value("propertyname") == name; } ) )');
+
+             // __get is defined
+             ->raw('where( __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).emit().times('.self::MAX_LOOPING.')
+                                        .hasLabel("Class")
+                                        .out("METHOD").out("NAME")
+                                        .filter{ it.get().value("code") == "__get"; } )');
         $this->prepareQuery();
     }
 }
