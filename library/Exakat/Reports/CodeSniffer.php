@@ -31,14 +31,12 @@ class CodeSniffer extends Reports {
     public function generate($folder, $name = self::FILE_FILENAME) {
         if ($this->config->thema !== null) {
             $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
-            $list = '"'.join('", "', $list).'"';
+            $list = makeList($list);
         } elseif ($this->config->program !== null) {
-            print "analyze\n";
             $list = '"'.$this->config->program.'"';
         } else {
-            print "default\n";
             $list = Analyzer::getThemeAnalyzers($this->themesToShow);
-            $list = '"'.join('", "', $list).'"';
+            $list = makeList($list);
         }
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');

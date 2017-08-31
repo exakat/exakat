@@ -30,10 +30,10 @@ class Marmelab extends Reports {
 
     public function generate($folder, $name = self::FILE_FILENAME) {
         $list = Analyzer::getThemeAnalyzers($this->config->thema ?? 'Analyze');
-        $list = '"'.join('", "', $list).'"';
+        $list = makeList($list);
         
         $analyzers = array();
-        $files = array();
+        $files     = array();
 
         $sqlQuery = 'SELECT id, fullcode, file, line, analyzer AS analyzer_id FROM results WHERE analyzer in ('.$list.')';
         $res = $this->sqlite->query($sqlQuery);

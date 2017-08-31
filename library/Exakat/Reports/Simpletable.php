@@ -43,7 +43,7 @@ class Simpletable extends Reports {
     
     private function generateData($folder, $name = 'table') {
         $list = Analyzer::getThemeAnalyzers('Analyze');
-        $list = '"'.join('", "', $list).'"';
+        $list = makeList($list);
 
         $sqlite = new \Sqlite3($folder.'/dump.sqlite');
         $sqlQuery = 'SELECT * FROM results WHERE analyzer in ('.$list.') ORDER BY analyzer';
