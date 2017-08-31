@@ -25,10 +25,11 @@ namespace Exakat\Tasks;
 
 use Exakat\Phpexec;
 use Exakat\Config;
-use Exakat\Exceptions\ProjectNeeded;
-use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\MissingFile;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoFileToProcess;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
 
 class Files extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -85,6 +86,16 @@ class Files extends Tasks {
 
         $versions = $this->config->other_php_versions;
         $versions = array('54', '55', '56', '70', '71', '72', '73');
+
+        $missing = array();
+        foreach($files as $file) {
+            if (!file_exists($path.$file)) {
+                $missing[] = $file;
+            }
+        }
+        if (!empty($missing)) {
+            throw new MissingFile($missing);
+        }
 
         $analyzingVersion = $this->config->phpversion[0].$this->config->phpversion[2];
         $id = array_search($analyzingVersion, $versions);
