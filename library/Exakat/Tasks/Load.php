@@ -80,7 +80,7 @@ class Load extends Tasks {
 
     private $precedence;
 
-    private $calls = array();
+    private $callsSqlite = null;
 
     private $namespace = '\\';
     private $uses   = array('function' => array(),
@@ -207,15 +207,16 @@ class Load extends Tasks {
                      '@'  => \Exakat\Tasks\T_AT,
                      '?'  => \Exakat\Tasks\T_QUESTION,
                      ':'  => \Exakat\Tasks\T_COLON,
-                     '<' => \Exakat\Tasks\T_SMALLER,
-                     '>' => \Exakat\Tasks\T_GREATER,
-                     '%' => \Exakat\Tasks\T_PERCENTAGE,
-                     '"' => \Exakat\Tasks\T_QUOTE,
-                     '$' => \Exakat\Tasks\T_DOLLAR,
-                     '&' => \Exakat\Tasks\T_AND,
-                     '|' => \Exakat\Tasks\T_PIPE,
-                     '^' => \Exakat\Tasks\T_CARET,
-                     '`' => \Exakat\Tasks\T_BACKTICK,
+                     '<'  => \Exakat\Tasks\T_SMALLER,
+                     '>'  => \Exakat\Tasks\T_GREATER,
+                     '%'  => \Exakat\Tasks\T_PERCENTAGE,
+                     '"'  => \Exakat\Tasks\T_QUOTE,
+                     'b"' => \Exakat\Tasks\T_QUOTE,
+                     '$'  => \Exakat\Tasks\T_DOLLAR,
+                     '&'  => \Exakat\Tasks\T_AND,
+                     '|'  => \Exakat\Tasks\T_PIPE,
+                     '^'  => \Exakat\Tasks\T_CARET,
+                     '`'  => \Exakat\Tasks\T_BACKTICK,
                    );
 
     private $expressions         = array();
@@ -442,8 +443,33 @@ class Load extends Tasks {
                           'binaryString'=> self::$PROP_BINARYSTRING,
                           'root'        => self::$PROP_ROOT,
                           );
-    }
 
+        if (file_exists($this->config->projects_root.'/projects/.exakat/calls.sqlite')) {
+            unlink($this->config->projects_root.'/projects/.exakat/calls.sqlite');
+        }
+        $this->callsSqlite = new \Sqlite3($this->config->projects_root.'/projects/.exakat/calls.sqlite');
+        $calls = <<<SQL
+CREATE TABLE calls (
+    type STRING,
+    fullnspath STRING,
+    globalpath STRING,
+    atom STRING,
+    id INTEGER
+ )
+SQL;
+        $this->callsSqlite->query($calls);
+
+        $definitions = <<<SQL
+CREATE TABLE definitions (
+    type STRING,
+    fullnspath STRING,
+    atom STRING,
+    id INTEGER
+ )
+SQL;
+        $this->callsSqlite->query($definitions);
+    }
+    
     public function run() {
         $this->logTime('Start');
         if (!file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/config.ini')) {
@@ -577,23 +603,16 @@ class Load extends Tasks {
         $this->atoms = array($this->id0->id => $this->id0);
         $this->links = array();
 
-        foreach($this->calls as $type => $names) {
-            foreach($names as $name => $calls) {
-                if (!empty($calls['definitions'])) {
-                    $this->calls[$type][$name]['calls'] = array();
-                }
-            }
-        }
-
         $this->uses  = array('function' => array(),
                              'const'    => array(),
                              'class'    => array());
-        $this->contexts = array(self::CONTEXT_CLASS        => 0,
-                                self::CONTEXT_INTERFACE    => false,
-                                self::CONTEXT_TRAIT        => false,
-                                self::CONTEXT_FUNCTION     => 0,
-                                self::CONTEXT_NEW          => false,
-                                self::CONTEXT_NOSEQUENCE   => 0                         );
+        $this->contexts = array(self::CONTEXT_CLASS      => 0,
+                                self::CONTEXT_INTERFACE  => false,
+                                self::CONTEXT_TRAIT      => false,
+                                self::CONTEXT_FUNCTION   => 0,
+                                self::CONTEXT_NEW        => false,
+                                self::CONTEXT_NOSEQUENCE => 0,
+                                );
         $this->expressions = array();
     }
 
@@ -759,6 +778,12 @@ class Load extends Tasks {
             $openQuote = '"';
             $closeQuote = '"';
             $type = \Exakat\Tasks\T_QUOTE;
+
+            $openQuote = $this->tokens[$this->id][1];
+            if ($this->tokens[$current][1][0] === 'b' || $this->tokens[$current][1][0] === 'B') {
+                $string->binaryString = $openQuote[0];
+                $openQuote = '"';
+            }
         } elseif ($this->tokens[$current][0] === \Exakat\Tasks\T_BACKTICK) {
             $string = $this->addAtom('Shell');
             $finalToken = \Exakat\Tasks\T_BACKTICK;
@@ -839,6 +864,7 @@ class Load extends Tasks {
             $fullcode[] = $part->fullcode;
 
             $this->addLink($string, $part, 'CONCAT');
+            print_r($string);
         }
 
         ++$this->id;
@@ -1866,7 +1892,8 @@ class Load extends Tasks {
     private function processNextAsIdentifier($getFullnspath = self::WITH_FULLNSPATH) {
         ++$this->id;
 
-        $identifier = $this->addAtom('Identifier');
+        $identifier = $this->addAtom($getFullnspath === self::WITH_FULLNSPATH ? 'Identifier' : 'Name');
+//        $identifier = $this->addAtom('Identifier');
         $identifier->code       = $this->tokens[$this->id][1];
         $identifier->fullcode   = $this->tokens[$this->id][1];
         $identifier->line       = $this->tokens[$this->id][2];
@@ -4041,7 +4068,7 @@ class Load extends Tasks {
         if ($right->token === 'T_CLASS') {
             $static = $this->addAtom('Staticclass');
             $links = 'CLASS';
-        } elseif ($right->atom === 'Identifier') {
+        } elseif ($right->atom === 'Name') {
             $static = $this->addAtom('Staticconstant');
             $links = 'CONSTANT';
             $static->constant = self::CONSTANT_EXPRESSION;
@@ -4052,7 +4079,7 @@ class Load extends Tasks {
             $static = $this->addAtom('Staticmethodcall');
             $links = 'METHOD';
         } else {
-            throw new LoadError("Unprocessed atom in static call (right) : ".$right->atom.PHP_EOL);
+            assert(false, "Unprocessed atom in static call (right) : ".$right->atom);
         }
 
         $this->addLink($static, $left, 'CLASS');
@@ -4150,7 +4177,7 @@ class Load extends Tasks {
         $this->contexts[self::CONTEXT_NEW] = $newContext;
         $this->exitContext();
 
-        if (in_array($right->atom, array('Variable', 'Array', 'Identifier', 'Concatenation', 'Arrayappend', 'Member', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
+        if (in_array($right->atom, array('Variable', 'Array', 'Name', 'Concatenation', 'Arrayappend', 'Member', 'MagicConstant', 'Block', 'Boolean', 'Null'))) {
             $static = $this->addAtom('Member');
             $links = 'MEMBER';
             $static->enclosing = self::NO_ENCLOSING;
@@ -4158,7 +4185,7 @@ class Load extends Tasks {
             $static = $this->addAtom('Methodcall');
             $links = 'METHOD';
         } else {
-            throw new LoadError("Unprocessed atom in object call (right) : ".$right->atom.PHP_EOL);
+            assert(false, "Unprocessed atom in object call (right) : ".$right->atom);
         }
 
         $this->addLink($static, $left, 'OBJECT');
@@ -4510,13 +4537,9 @@ class Load extends Tasks {
     }
 
     private function checkTokens($filename) {
-        if (count($this->expressions) > 0) {
-            throw new LoadError("Warning : expression is not empty in $filename : ".count($this->expressions).PHP_EOL);
-        }
+        assert(empty($this->expressions), "Warning : expression is not empty in $filename : ".count($this->expressions).PHP_EOL);
 
-        if ($this->contexts[self::CONTEXT_NOSEQUENCE] > 0) {
-            throw new LoadError("Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE].PHP_EOL);
-        }
+        assert(empty($this->contexts[self::CONTEXT_NOSEQUENCE]), "Warning : context for sequence is not back to 0 in $filename : it is ".$this->contexts[self::CONTEXT_NOSEQUENCE].PHP_EOL);
 
         // All node has one incoming or one outgoing link (outgoing or incoming).
         $O = $D= array();
@@ -4570,39 +4593,7 @@ class Load extends Tasks {
     }
 
     private function saveDefinitions() {
-        // Fallback to global if local namespace function doesn't exists
-        if (isset($this->calls['function'])) {
-            $this->fallbackToGlobal('function');
-        }
-        if (isset($this->calls['constant'])) {
-            $this->fallbackToGlobal('constant');
-        }
-        
-        static::$client->saveDefinitions($this->exakatDir, $this->calls);
-
-//        $this->log->log("saveDefinitions\t".(($end - $begin) * 1000)."\t".count($this->calls).PHP_EOL);
-    }
-
-    private function fallbackToGlobal($type) {
-        foreach($this->calls[$type] as $fnp => &$usage) {
-            if (substr_count($fnp, '\\') < 2) {
-                continue;
-            }
-            if (!empty($usage['definitions'])) {
-                continue;
-            }
-            $foo = explode('\\', $fnp);
-            $globalFnp = '\\'.array_pop($foo);
-
-            if (!isset($this->calls[$type][$globalFnp])) {
-                continue;
-            }
-            if (empty($this->calls[$type][$globalFnp]['definitions'])) {
-                continue;
-            }
-
-            $usage['definitions'] = $this->calls[$type][$globalFnp]['definitions'];
-        }
+        static::$client->saveDefinitions($this->exakatDir, array());
     }
 
     private function startSequence() {
@@ -4648,7 +4639,7 @@ class Load extends Tasks {
         // Handle static, self, parent and PHP natives function
         if (isset($name->absolute) && ($name->absolute === self::ABSOLUTE)) {
             return array(mb_strtolower($name->fullcode), self::NOT_ALIASED);
-        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'String', 'Null', 'Boolean'))) {
+        } elseif (!in_array($name->atom, array('Nsname', 'Identifier', 'Name', 'String', 'Null', 'Boolean'))) {
             // No fullnamespace for non literal namespaces
             return array('', self::NOT_ALIASED);
         } elseif (in_array($name->token, array('T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY'))) {
@@ -4657,7 +4648,7 @@ class Load extends Tasks {
         } elseif (mb_strtolower(substr($name->fullcode, 0, 10)) === 'namespace\\') {
             // namespace\A\B
             return array(substr($this->namespace, 0, -1).mb_strtolower(substr($name->fullcode, 9)), self::NOT_ALIASED);
-        } elseif (in_array($name->atom, array('Identifier', 'Boolean', 'Null'))) {
+        } elseif (in_array($name->atom, array('Identifier', 'Name', 'Boolean', 'Null'))) {
 
             // This is an identifier, self or parent
             if (mb_strtolower($name->code) === 'self' ||
@@ -4665,7 +4656,6 @@ class Load extends Tasks {
                 if (empty($this->currentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
-//                    $this->addCall('class', $this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, $name);
                     return array($this->currentClassTrait[count($this->currentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
                 }
 
@@ -4673,7 +4663,6 @@ class Load extends Tasks {
                 if (empty($this->currentParentClassTrait)) {
                     return array(self::FULLNSPATH_UNDEFINED, self::NOT_ALIASED);
                 } else {
-//                    $this->addCall('class', $this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]->fullnspath, $name);
                     return array($this->currentParentClassTrait[count($this->currentParentClassTrait) - 1]->fullnspath, self::NOT_ALIASED);
                 }
 
@@ -4693,10 +4682,6 @@ class Load extends Tasks {
                 $this->addLink($this->uses['function'][mb_strtolower($name->code)], $name, 'DEFINITION');
                 return array($this->uses['function'][mb_strtolower($name->code)]->fullnspath, self::ALIASED);
 
-            } elseif ($type === 'function' && !empty($this->calls['function']['\\'.mb_strtolower($name->code)]['definitions'])) {
-
-                // This is a fall back ONLY if we already know about the constant (aka, if it is defined later, then no fallback)
-                return array('\\'.mb_strtolower($name->code), self::NOT_ALIASED);
             } else {
                 return array($this->namespace.mb_strtolower($name->fullcode), self::NOT_ALIASED);
             }
@@ -4772,7 +4757,8 @@ class Load extends Tasks {
         }
 
         if (!($use instanceof Atom)) {
-            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);die();
+            print debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+            die();
         }
         assert($use instanceof Atom);
         $this->uses[$useType][mb_strtolower($alias)] = $use;
@@ -4786,17 +4772,21 @@ class Load extends Tasks {
         }
         
         assert(is_string($fullnspath));
-        
-        if (!isset($this->calls[$type][$fullnspath])) {
-            $this->calls[$type][$fullnspath] = array('calls'       => array(),
-                                                     'definitions' => array());
-        }
-        $atom = $call->atom;
-        if (!isset($this->calls[$type][$fullnspath]['calls'][$atom])) {
-            $this->calls[$type][$fullnspath]['calls'][$atom] = array();
+        if ($fullnspath === 'undefined') {
+            $globalpath = '';
+        } else {
+            preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r);
+            $globalpath = $r[1];
         }
         
-        $this->calls[$type][$fullnspath]['calls'][$atom][] = $call->id;
+        $query = 'INSERT INTO calls VALUES ("'.$type.'",
+                                            "'.$this->callsSqlite->escapeString($fullnspath).'",
+                                            "'.$this->callsSqlite->escapeString($globalpath).'",
+                                            "'.$call->atom.'",
+                                            "'.$call->id.'"
+         )';
+
+        $this->callsSqlite->query($query);
     }
 
     private function addNoDelimiterCall($call) {
@@ -4830,15 +4820,24 @@ class Load extends Tasks {
         }
 
         $atom = 'String';
-        foreach($types  as $type) {
-            if (!isset($this->calls[$type][$fullnspath])) {
-                $this->calls[$type][$fullnspath] = array('calls' => array(), 'definitions' => array());
-            }
 
-            if (!isset($this->calls[$type][$fullnspath]['calls'][$atom])) {
-                $this->calls[$type][$fullnspath]['calls'][$atom] = array();
+        foreach($types  as $type) {
+            if ($fullnspath === 'undefined') {
+                $globalpath = '';
+            } elseif (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
+                $globalpath = $r[1];
+            } else {
+                $globalpath = '';
             }
-            $this->calls[$type][$fullnspath]['calls'][$atom][] = $call->id;
+            
+            $query = 'INSERT INTO calls VALUES ("'.$type.'",
+                                                "'.$this->callsSqlite->escapeString($fullnspath).'",
+                                                "'.$this->callsSqlite->escapeString($globalpath).'",
+                                                "'.$atom.'",
+                                                "'.$call->id.'"
+             )';
+
+            $this->callsSqlite->query($query);
         }
     }
 
@@ -4847,15 +4846,13 @@ class Load extends Tasks {
             return;
         }
 
-        if (!isset($this->calls[$type][$fullnspath])) {
-            $this->calls[$type][$fullnspath] = array('calls'       => array(),
-                                                     'definitions' => array());
-        }
-        $atom = $definition->atom;
-        if (!isset($this->calls[$type][$fullnspath]['definitions'][$atom])) {
-            $this->calls[$type][$fullnspath]['definitions'][$atom] = array();
-        }
-        $this->calls[$type][$fullnspath]['definitions'][$atom][] = $definition->id;
+        $query = 'INSERT INTO definitions VALUES ("'.$type.'",
+                                            "'.$this->callsSqlite->escapeString($fullnspath).'",
+                                            "'.$definition->atom.'",
+                                            "'.$definition->id.'"
+         )';
+
+        $this->callsSqlite->query($query);
     }
 
     private function logTime($step) {
