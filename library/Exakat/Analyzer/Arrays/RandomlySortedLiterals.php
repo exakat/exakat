@@ -29,6 +29,7 @@ class RandomlySortedLiterals extends Analyzer {
         $arrays = $this->query(<<<GREMLIN
 g.V().hasLabel("Arrayliteral")
      .has("constant", true)
+     .not( where( out("ARGUMENT").has("rank", 0).hasLabel("Void")) )
      .where( __.sideEffect{ liste = [];}
                .out("ARGUMENT")
                .not( hasLabel("Void") )
@@ -55,7 +56,9 @@ GREMLIN
 
         $this->atomIs('Arrayliteral')
              ->is('constant', true)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIsNot('Void')
+             ->back('first')
              ->raw('where( __.sideEffect{ liste = [];}
                              .out("ARGUMENT")
                              .not( hasLabel("Void") )
