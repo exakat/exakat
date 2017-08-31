@@ -28,7 +28,9 @@ class Codeflower extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'codeflower';
     
-    private $select = array();
+    private $select      = array();
+    private $tmpName     = '';
+    private $finalName   = '';
 
     public function generate($folder, $name= 'codeflower') {
         $this->finalName = $folder.'/'.$name;

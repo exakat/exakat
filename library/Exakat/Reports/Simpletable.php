@@ -29,6 +29,8 @@ class Simpletable extends Reports {
     const FILE_FILENAME  = 'table';
     
     private $select = array();
+    private $tmpName     = '';
+    private $finalName   = '';
 
     public function generate($folder, $name= 'table') {
         $this->finalName = $folder.'/'.$name;

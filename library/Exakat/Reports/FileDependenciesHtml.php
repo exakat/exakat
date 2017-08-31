@@ -31,6 +31,8 @@ class FileDependenciesHtml extends Reports {
     const FILE_FILENAME  = 'dependencies';
     
     private $finalName   = '';
+    private $tmpName     = '';
+    private $finalName   = '';
 
     public function generate($folder, $name= 'dependencies') {
         $this->finalName = $folder.'/'.$name;
