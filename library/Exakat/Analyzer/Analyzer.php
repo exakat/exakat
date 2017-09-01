@@ -831,6 +831,10 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
     }
 
     public function fullnspathIsNot($code) {
+        if (empty($code)) {
+            return $this;
+        }
+
         return $this->propertyIsNot('fullnspath', $code, self::CASE_INSENSITIVE);
     }
     
