@@ -8,7 +8,7 @@ $commands = explode('/', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
 unset($commands[0]);
 $command = array_shift($commands);
 
-$orders = array('stop', 'init', 'update', 'project', 'onepage', 'report', 'status', 'list', 'stop');
+$orders = array('stop', 'init', 'update', 'project', 'onepage', 'report', 'status', 'list', 'stop', 'config');
 
 if (!in_array($command, $orders)) {
     serverLog("unknown command : $command");
@@ -181,6 +181,49 @@ function status($args) {
         );
         echo json_encode($status);
     }
+}
+
+function config($args) {
+    $project = $args[0];
+    
+    if (empty($project)) {
+        return;
+    }
+    
+    if (!file_exists(__DIR__.'/'.$project.'/config.ini')) {
+        return;
+    }
+    
+    $ini = file_get_contents(__DIR__.'/'.$project.'/config.ini');
+    $php_versions = array('7.2', '7.1', '7.0', '5.6', '5.5', '5.4', '5.3');
+    if (!empty($_REQUEST['phpversion']) &&
+        in_array($_REQUEST['phpversion'], $php_versions)) {
+        $ini = preg_replace("/phpversion = .+?\n/", 'phpversion = '.$_REQUEST['phpversion'], $ini);
+    }
+
+    if (!empty($_REQUEST['file_extensions'])) {
+        $extensions = explode(',', $_REQUEST['file_extensions']);
+        $extensions = array_filter($extensions, function ($x) { return preg_match('/^\.[a-zA-Z0-9]+$/', $x); });
+
+        if (!empty($extensions)) {
+            $extensions = join(',', $extensions);
+            $ini = preg_replace("/file_extensions = .+?\n/", 'file_extensions = '.$extensions, $ini);
+        }
+    }
+
+    if (!empty($_REQUEST['ignore_dirs']) && 
+        is_array($_REQUEST['ignore_dirs'])) {
+
+        $ini = preg_replace("/(ignore_dirs\[\] = .+?\n)+/s", 
+                            'ignore_dirs[] = '.implode(PHP_EOL.'ignore_dirs[] = ', $_REQUEST['ignore_dirs']).PHP_EOL, 
+                            $ini);
+    }
+    
+//    file_put_contents(__DIR__.'/'.$project.'/config.ini', $ini);
+    print '<pre>'.$ini.'</pre>';
+    
+    print "Project $project\n";
+    print_r($_REQUEST);
 }
 
 
