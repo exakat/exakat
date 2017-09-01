@@ -11,4 +11,10 @@ $a9 = $b or $c;
 $a10 = $b OR $c;
 $a = $b || $c;
 
+// Those don't count
+$A = $B | $C;
+$A = $B & $C;
+$A = $B ^ $C;
+
+
 ?>

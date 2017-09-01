@@ -8,6 +8,9 @@ $expected_not = array('$b and $c',
                       '$b or $c',
                       '$b OR $c',
                       '$b aND $c',
+                      '$B | $C',
+                      '$B & $C',
+                      '$B ^ $C',
                      );
 
 ?>
