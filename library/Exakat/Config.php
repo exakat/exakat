@@ -90,6 +90,9 @@ class Config {
                                             'neo4j_login'    => 'admin',
                                             'neo4j_password' => 'admin',
 
+                                            'branch'         => 'master',
+                                            'tag'            => '',
+
                                             'php'           => '',
                                             'php52'         => '',
                                             'php53'         => '',
@@ -439,7 +442,9 @@ class Config {
                                 '-neo4j_host'   => 'neo4j_host',
                                 '-neo4j_port'   => 'neo4j_port',
                                 '-neo4j_folder' => 'neo4j_folder',
-                                '-token_limit'  => 1000000,
+                                '-token_limit'  => 'token_limit',
+                                '-branch'       => 'branch',
+                                '-tag'          => 'tag',
 //                                '-loader'       => 'Neo4jImport',
                                  );
 
