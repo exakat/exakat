@@ -80,7 +80,7 @@ class UselessUnset extends Analyzer {
              ->outIsIE('OBJECT')
              ->samePropertyAs('code', 'varname')
              ->inIsIE('OBJECT')
-             ->raw('where( out("OBJECT").hasLabel("Member").count().is(eq(0)) )')
+             ->raw('not( where( out("OBJECT").hasLabel("Member") ) )')
              ->back('result');
         $this->prepareQuery();
 
@@ -102,7 +102,7 @@ class UselessUnset extends Analyzer {
              ->outIsIE('OBJECT')
              ->samePropertyAs('code', 'varname')
              ->inIsIE('OBJECT')
-             ->raw('where( out("OBJECT").hasLabel("Member").count().is(eq(0)) )')
+             ->raw('not( where( out("OBJECT").hasLabel("Member") ) )')
              ->back('result');
         $this->prepareQuery();
 
