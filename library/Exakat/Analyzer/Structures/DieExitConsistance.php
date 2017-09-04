@@ -56,11 +56,11 @@ GREMLIN;
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
-        $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
+//        $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
 
         $this->atomFunctionIs(array('\\die', '\\exit'))
              ->raw('sideEffect{ '.$mapping.' }')
-             ->raw('filter{ x2 in '.$types.'}')
+             ->raw('filter{ x2 in ***}', $types)
              ->back('first');
         $this->prepareQuery();
     }

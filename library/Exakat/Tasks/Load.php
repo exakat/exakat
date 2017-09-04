@@ -2999,7 +2999,8 @@ SQL;
             ++$this->id; // Skipping the name, set on (
             $array = $this->processArguments('Arrayliteral');
             $argumentsFullcode = $array->fullcode;
-            $array->fullcode  = $this->tokens[$current][1].'('.$argumentsFullcode.')';
+            $array->token    = 'T_ARRAY';
+            $array->fullcode = $this->tokens[$current][1].'('.$argumentsFullcode.')';
         } else {
             $bracket = 1;
             $id = $this->id;
