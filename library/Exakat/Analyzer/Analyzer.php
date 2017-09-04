@@ -692,9 +692,12 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
             $this->addMethod('has("'.$property.'", false)');
         } elseif (is_int($value)) {
             $this->addMethod('has("'.$property.'", '.$value.')');
+        } elseif (is_array($value)) {
+            if (!empty($value)) {
+                $this->addMethod('has("'.$property.'", within(***))', $value);
+            }
         } else {
-            // $value is an array
-            $this->addMethod('has("'.$property.'", within(***))', $value);
+            assert(false, 'Not understood type for is : '.gettype($value));
         }
 
         return $this;
@@ -721,8 +724,12 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
             $this->addMethod('not(has("'.$property.'", false))');
         } elseif (is_int($value)) {
             $this->addMethod('not(has("'.$property.'", '.$value.'))');
+        } elseif (is_array($value)) {
+            if (!empty($value)) {
+                $this->addMethod('not(has("'.$property.'", within(***)))', $value);
+            }
         } else {
-            $this->addMethod('not(has("'.$property.'", within(***)))', $value);
+            assert(false, 'Not understood type for isNot : '.get_type($value));
         }
         
         return $this;

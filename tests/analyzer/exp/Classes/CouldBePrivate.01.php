@@ -5,9 +5,11 @@ $expected     = array('$aspublicButSBPrivateFull',
                       '$aspublicButSBPrivateStatic',
                       '$aspublicButSBPrivateSelf',
                       '$aprotected',
-                      '$asprotected');
+                      '$asprotected',
+                     );
 
 $expected_not = array('$apublicButReally', 
-                      '$apublicButReally2',);
+                      '$apublicButReally2',
+                     );
 
 ?>

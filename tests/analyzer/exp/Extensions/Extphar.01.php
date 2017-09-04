@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("Phar('/chemin/vers/phar.phar')");
+$expected     = array("Phar('/chemin/vers/phar.phar')",
+                     );
 
-$expected_not = array("$a->addFile('/chemin/complet/vers/fichier')");
+$expected_not = array('$a->addFile(\'/chemin/complet/vers/fichier\')',
+                     );
 
 ?>
