@@ -2279,6 +2279,7 @@ SQL;
                 
                 if ($atom === 'Propertydefinition') {
                     preg_match('/^\$([^ ]+)/', $element->fullcode, $r);
+                    assert(!empty($r), 'Couldn\'t find the property definition in '.__METHOD__.':'.__LINE__);
                     $element->propertyname = $r[1];
                 }
 
@@ -2291,6 +2292,7 @@ SQL;
 
         if ($atom === 'Propertydefinition') {
             preg_match('/^\$([^ ]+)/', $element->fullcode, $r);
+            assert(!empty($r), 'Couldn\'t find the property definition in '.__METHOD__.':'.__LINE__);
             $element->propertyname = $r[1];
         }
         $fullcode[] = $element->fullcode;
@@ -4780,8 +4782,11 @@ SQL;
         if ($fullnspath === 'undefined') {
             $globalpath = '';
         } else {
-            preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r);
-            $globalpath = $r[1];
+            if (preg_match('/(\\\\[^\\\\]+)$/', $fullnspath, $r)) {
+                $globalpath = $r[1];
+            } else {
+                $globalpath = '';
+            }
         }
         
         $query = 'INSERT INTO calls VALUES ("'.$type.'",
