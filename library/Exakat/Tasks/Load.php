@@ -2081,7 +2081,9 @@ SQL;
             
             if (in_array($fullnspath, $deterministFunctions)) {
                 $functioncall->boolean  = (int) (bool) $functioncall->count;
-                $functioncall->constant = $functioncall->constant === self::CONSTANT_EXPRESSION;
+                $functioncall->constant = ($functioncall->constant === self::CONSTANT_EXPRESSION);
+            } else {
+                $functioncall->constant  = self::NOT_CONSTANT_EXPRESSION;
             }
         }
 

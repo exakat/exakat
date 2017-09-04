@@ -5,6 +5,7 @@ $expected     = array(  'if(1) { /**/ } elseif(2) { /**/ } else { /**/ } ',
                         'if(A === B) { /**/ } else { /**/ } ',
                         );
 
-$expected_not = array('if($a == 2) { /**/ }');
+$expected_not = array('if($a == 2) { /**/ }',
+                     );
 
 ?>
