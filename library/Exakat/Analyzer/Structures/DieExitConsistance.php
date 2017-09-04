@@ -56,7 +56,11 @@ GREMLIN;
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
-//        $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
+        $types = array_keys($types);
+        
+        if (empty($types)) {
+            return;
+        }
 
         $this->atomFunctionIs(array('\\die', '\\exit'))
              ->raw('sideEffect{ '.$mapping.' }')
