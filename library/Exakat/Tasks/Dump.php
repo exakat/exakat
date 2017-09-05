@@ -683,14 +683,11 @@ g.V().hasLabel("Class", "Interface", "Trait")
      .sideEffect{classe = it.get().value('fullnspath'); }
      .out('PPP') // Out of the CIT
 .sideEffect{ 
-    x = ['static':it.get().vertices(OUT, "STATIC").any(),
-
-         'public':it.get().vertices(OUT, "PUBLIC").any(),
-         'protected':it.get().vertices(OUT, "PROTECTED").any(),
-         'private':it.get().vertices(OUT, "PRIVATE").any(),
-         'var':it.get().vertices(OUT, "VAR").any(),
-         
-         'class': classe];
+    x_static = it.get().vertices(OUT, "STATIC").any();
+    x_public = it.get().vertices(OUT, "PUBLIC").any();
+    x_protected = it.get().vertices(OUT, "PROTECTED").any();
+    x_private = it.get().vertices(OUT, "PRIVATE").any();
+    x_var = it.get().vertices(OUT, "VAR").any();
 }
 .out('PPP') // out to the details
 .map{ 
@@ -702,9 +699,14 @@ g.V().hasLabel("Class", "Interface", "Trait")
         v = it.get().vertices(OUT, "RIGHT").next().value("fullcode");
     }
 
-    x["name"] = name;
-    x["value"] = v;
-    x;
+    x = ["class":classe,
+         "static":x_static,
+         "public":x_public,
+         "protected":x_protected,
+         "private":x_private,
+         "var":x_var,
+         "name": name,
+         "value": v];
 }
 
 GREMLIN
