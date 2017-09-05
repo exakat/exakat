@@ -124,48 +124,6 @@ class Initproject extends Tasks {
                 $projectName = preg_replace('.git', '', $projectName);
             }
 
-            // default initial config. Found in test project.
-            $phpversion = $this->config->phpversion;
-            $configIni = <<<INI
-;Main PHP version for this code.
-phpversion = $phpversion
-
-;Ignored dirs and files, relative to code source root.
-ignore_dirs[] = /test
-ignore_dirs[] = /tests
-ignore_dirs[] = /example
-ignore_dirs[] = /examples
-ignore_dirs[] = /docs
-ignore_dirs[] = /doc
-ignore_dirs[] = /tmp
-ignore_dirs[] = /version
-ignore_dirs[] = /vendor
-ignore_dirs[] = /js
-ignore_dirs[] = /lang
-ignore_dirs[] = /data
-ignore_dirs[] = /css
-ignore_dirs[] = /cache
-ignore_dirs[] = /assets
-ignore_dirs[] = /spec
-ignore_dirs[] = /sql
-
-;Included dirs or files, relative to code source root. Default to all.
-;Those are added after ignoring directories
-include_dirs[] = /
-
-;Accepted file extensions
-file_extensions =
-
-;Description of the project
-project_name        = "$projectName";
-project_url         = "$repositoryURL";
-project_vcs         = "$vcs";
-project_description = "";
-project_packagist   = "";
-
-INI;
-
-            file_put_contents($this->config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
         } else {
             display( $this->config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring');
         }
@@ -173,7 +131,12 @@ INI;
         shell_exec('chmod -R g+w '.$this->config->projects_root.'/projects/'.$project);
         $repositoryDetails = parse_url($repositoryURL);
 
-        $skipFiles = false;
+        $skipFiles           = false;
+        $repositoryPackagist = '';
+        $repositoryBranch    = '';
+        $repositoryTag       = '';
+        $include_dirs        = '';
+
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
             switch (true) {
                 // Symlink
@@ -182,7 +145,7 @@ INI;
                     symlink(realpath($repositoryURL), $this->config->projects_root.'/projects/'.$project.'/code');
                     break 1;
 
-                // Empty initialization
+                // Initialization by copy
                 case ($this->config->copy === true) :
                     display('Copy initialization');
                     $total = copyDir(realpath($repositoryURL), $this->config->projects_root.'/projects/'.$project.'/code');
@@ -216,10 +179,7 @@ INI;
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code; composer -q install');
 
                     // Updating config.ini to include the vendor directory
-                    $fp = fopen($this->config->projects_root.'/projects/'.$project.'/config.ini', 'a');
-                    fwrite($fp, "\ninclude_dirs[] = /vendor/$repositoryURL\n");
-                    fclose($fp);
-
+                    $include_dirs = "include_dirs[] = /vendor/$repositoryURL";
                     break 1;
 
                 // SVN
@@ -305,7 +265,7 @@ INI;
                     if (strpos($res, 'git') === false) {
                         throw new HelperException('git');
                     }
-
+                    
                     display('Git initialization');
                     if (isset($repositoryDetails['user'])) {
                         $repositoryDetails['user'] = escapeshellarg($repositoryDetails['user']);
@@ -322,7 +282,27 @@ INI;
                     unset($repositoryDetails['fragment']);
                     $repositoryNormalizedURL = unparse_url($repositoryDetails);
 
-                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryNormalizedURL.' code 2>&1 ');
+                    $shell = 'cd '.$this->config->projects_root.'/projects/'.$project.'; git clone -q '.$repositoryNormalizedURL;
+                    if (!empty($this->config->branch) &&
+                        $this->config->branch !== 'master') {
+                        display("Check out with branch ".$this->config->branch);
+                        $shell .= ' -b '.$this->config->branch.' ';
+
+                        $repositoryBranch =  $this->config->branch;
+                        $repositoryTag =  '';
+                    } elseif (!empty($this->config->tag)) {
+                        display("Check out with tag ".$this->config->tag);
+                        $shell .= ' -b '.$this->config->tag.' ';
+
+                        $repositoryBranch =  '';
+                        $repositoryTag =  $this->config->tag;
+                    } else {
+                        $repositoryBranch =  'master';
+                        $repositoryTag =  '';
+                    }
+                    $shell .= ' code 2>&1 ';
+                    $res = shell_exec($shell);
+
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
                         $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
                         var_dump(trim(substr($res, $offset + 7)));
@@ -341,6 +321,52 @@ INI;
             display('Folder "code" is already existing. Leaving it intact.');
         }
 
+        // default initial config. Found in test project.
+        $phpversion = $this->config->phpversion;
+        $configIni = <<<INI
+;Main PHP version for this code.
+phpversion = $phpversion
+
+;Ignored dirs and files, relative to code source root.
+ignore_dirs[] = /assets
+ignore_dirs[] = /cache
+ignore_dirs[] = /css
+ignore_dirs[] = /data
+ignore_dirs[] = /doc
+ignore_dirs[] = /docs
+ignore_dirs[] = /example
+ignore_dirs[] = /examples
+ignore_dirs[] = /js
+ignore_dirs[] = /lang
+ignore_dirs[] = /spec
+ignore_dirs[] = /sql
+ignore_dirs[] = /test
+ignore_dirs[] = /tests
+ignore_dirs[] = /tmp
+ignore_dirs[] = /vendor
+ignore_dirs[] = /version
+
+;Included dirs or files, relative to code source root. Default to all.
+;Those are added after ignoring directories
+include_dirs[] = /
+$include_dirs
+
+;Accepted file extensions
+file_extensions = .php,.php3,.inc,.tpl,.phtml,.tmpl,.phps,.ctp
+
+;Description of the project
+project_name        = "$projectName";
+project_url         = "$repositoryURL";
+project_vcs         = "$vcs";
+project_description = "";
+project_packagist   = "$repositoryPackagist";
+project_branch      = "$repositoryBranch";
+project_tag         = "$repositoryTag";
+
+INI;
+
+        file_put_contents($this->config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
+
         display('Counting files');
         $this->datastore->addRow('hash', array('status' => 'Initproject'));
 
@@ -352,5 +378,6 @@ INI;
         }
     }
 }
+
 
 ?>
