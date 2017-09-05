@@ -194,11 +194,14 @@ function config($args) {
         return;
     }
     
+    $status = array();
+    
     $ini = file_get_contents(__DIR__.'/'.$project.'/config.ini');
     $php_versions = array('7.2', '7.1', '7.0', '5.6', '5.5', '5.4', '5.3');
     if (!empty($_REQUEST['phpversion']) &&
         in_array($_REQUEST['phpversion'], $php_versions)) {
         $ini = preg_replace("/phpversion = .+?\n/", 'phpversion = '.$_REQUEST['phpversion'], $ini);
+        $status[] = 'phpversion';
     }
 
     if (!empty($_REQUEST['file_extensions'])) {
@@ -209,6 +212,7 @@ function config($args) {
             $extensions = join(',', $extensions);
             $ini = preg_replace("/file_extensions = .+?\n/", 'file_extensions = '.$extensions, $ini);
         }
+        $status[] = 'file_extensions';
     }
 
     if (!empty($_REQUEST['ignore_dirs']) && 
@@ -217,13 +221,50 @@ function config($args) {
         $ini = preg_replace("/(ignore_dirs\[\] = .+?\n)+/s", 
                             'ignore_dirs[] = '.implode(PHP_EOL.'ignore_dirs[] = ', $_REQUEST['ignore_dirs']).PHP_EOL, 
                             $ini);
+        $status[] = 'ignore_dirs';
     }
+
+    if (!empty($_REQUEST['include_dirs']) && 
+        is_array($_REQUEST['include_dirs'])) {
+
+        $ini = preg_replace("/(include_dirs\[\] = .+?\n)+/s", 
+                            'include_dirs[] = '.implode(PHP_EOL.'include_dirs[] = ', $_REQUEST['include_dirs']).PHP_EOL, 
+                            $ini);
+        $status[] = 'include_dirs';
+    }
+
+    if (!empty($_REQUEST['userpass']) && 
+        preg_match('/^[^:\s]*:[^:\s]*$/', $_REQUEST['userpass'])) {
+        if (preg_match('/project_url\s*=\s*"(.*?)";\s/s', $ini, $r)) {
+            $url = $r[1];
+            list($user, $pass) = explode(':', $_REQUEST['userpass']);
+            
+            $details = parse_url($url);
+            if (empty($user) && empty($pass)) {
+                unset($details['user'], $details['pass']);
+            } else {
+                $details['user'] = escapeshellarg($user);
+                $details['pass'] = escapeshellarg($pass);
+            }
+            $url = unparse_url($details);
+
+            $ini = preg_replace('/project_url\s*=\s*"(.*?)";\s/s', 
+                                'project_url         = "'.$url.'";'.PHP_EOL, 
+                                $ini);
+        }
+        $status[] = 'userpass';
+    }
+
+    if (empty($status)) {
+        echo json_encode($status);
+        die();
+    }
+    $size = file_put_contents(__DIR__.'/'.$project.'/config.ini', $ini);
     
-//    file_put_contents(__DIR__.'/'.$project.'/config.ini', $ini);
-    print '<pre>'.$ini.'</pre>';
-    
-    print "Project $project\n";
-    print_r($_REQUEST);
+    $status = array('saved' => $size, 
+                    'options' => $status);
+    echo json_encode($status);
+    die();
 }
 
 
@@ -271,6 +312,19 @@ function serverLog($message) {
         fwrite($fp, date('r')."\t$message\n");
         fclose($fp);
     }
+}
+
+function unparse_url($parsed_url) {
+    $scheme   = isset($parsed_url['scheme'])   ? $parsed_url['scheme'].'://' : '';
+    $host     = isset($parsed_url['host'])     ? $parsed_url['host']           : '';
+    $port     = isset($parsed_url['port'])     ? ':'.$parsed_url['port']     : '';
+    $user     = isset($parsed_url['user'])     ? $parsed_url['user']           : '';
+    $pass     = isset($parsed_url['pass'])     ? ':'.$parsed_url['pass']     : '';
+    $pass     = ($user || $pass)               ? $pass.'@'                      : '';
+    $path     = isset($parsed_url['path'])     ? $parsed_url['path']           : '';
+    $query    = isset($parsed_url['query'])    ? '?'.$parsed_url['query']    : '';
+    $fragment = isset($parsed_url['fragment']) ? '#'.$parsed_url['fragment'] : '';
+    return $scheme.$user.$pass.$host.$port.$path.$query.$fragment;
 }
 
 ?>
