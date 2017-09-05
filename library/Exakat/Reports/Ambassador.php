@@ -2279,7 +2279,6 @@ HTML;
                                     join('</td><td>', $visibilities)
                                  ."</td></tr>\n";
         }
-        //<td>'.$this->PHPSyntax($row['value'])."</td>
         
         $visibilityTable .= '</table>';
 
