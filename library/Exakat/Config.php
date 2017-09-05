@@ -84,11 +84,20 @@ class Config {
                                             'format'         => 'Text',
                                             'file'           =>  Reports::STDOUT,
                                             'style'          => 'ALL',
+
                                             'neo4j_host'     => '127.0.0.1',
                                             'neo4j_port'     => '7474',
                                             'neo4j_folder'   => 'neo4j',
                                             'neo4j_login'    => 'admin',
                                             'neo4j_password' => 'admin',
+
+                                            'gsneo4j_host'   => '127.0.0.1',
+                                            'gsneo4j_port'   => '7474',
+                                            'gsneo4j_folder' => 'tinkergraph',
+                                            
+                                            'tinkergraph_host'   => '127.0.0.1',
+                                            'tinkergraph_port'   => '7474',
+                                            'tinkergraph_folder' => 'tinkergraph',
 
                                             'branch'         => 'master',
                                             'tag'            => '',
@@ -119,7 +128,7 @@ class Config {
                                             'project_packagist'   => '',
                                             'other_php_versions'  => '',
 
-                                            'project_reports'     => array('Ambassador', 'Devoops'),
+                                            'project_reports'     => array('Ambassador'),
                                             'project_themes'      => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                                                            'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
                                                                            'Dead code', 'Security', 'Analyze', 'Preferences',
@@ -359,7 +368,7 @@ class Config {
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
 //                           'loader'             => 'Neo4jImport',
                            'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
-                           'project_reports'    => array('Ambassador', 'Devoops'),
+                           'project_reports'    => array('Ambassador'),
                         );
 
         foreach($defaults as $name => $value) {
