@@ -815,10 +815,18 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
     }
 
     public function codeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (is_array($code) && empty($code)) {
+            return $this;
+        }
+
         return $this->propertyIs('code', $code, $caseSensitive);
     }
 
     public function codeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (is_array($code) && empty($code)) {
+            return $this;
+        }
+
         return $this->propertyIsNot('code', $code, $caseSensitive);
     }
 
