@@ -25,8 +25,6 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ConstantUsedBelow extends Analyzer {
-    protected $phpVersion = '7.1+';
-    
     public function analyze() {
         //////////////////////////////////////////////////////////////////
         // constant + CLASS::constant (no check on class itself)

@@ -8,6 +8,6 @@ $expected     = array('$usedProtectedByBelowF',
 $expected_not = array('$usedProtectedByAbove',
                       '$unusedProtected',
                       '$unusedProtectedByBelowD'
-);
+                     );
 
 ?>
