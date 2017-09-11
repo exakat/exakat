@@ -28,13 +28,13 @@ use Exakat\Analyzer\Analyzer;
 class Arguments extends Analyzer {
     public function analyze() {
         // Arguments itself
-        $this->atomIs(self::$FUNCTION_METHOD)
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->atomIs('Variable');
         $this->prepareQuery();
         
         // Below
-        $this->atomIs(self::$FUNCTION_METHOD)
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIsIE('VARIABLE')
              ->outIsIE('LEFT')

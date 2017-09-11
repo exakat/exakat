@@ -32,7 +32,7 @@ class ScalarTypehintUsage extends Analyzer {
         $scalars = $this->loadIni('php_scalar_types.ini', 'types');
         
         // in Arguments
-        $this->atomIs(self::$FUNCTION_METHOD)
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->_as('results')
              ->outIs('TYPEHINT')
@@ -41,7 +41,7 @@ class ScalarTypehintUsage extends Analyzer {
         $this->prepareQuery();
 
         // in Return
-        $this->atomIs(self::$FUNCTION_METHOD)
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('RETURNTYPE')
              ->fullnspathIs($scalars)
              ->back('first');

@@ -164,7 +164,7 @@ class WrongCase extends Analyzer {
              ->outIs('ARGUMENT');
         $this->prepareQuery();
 
-        $this->atomIs(self::$FUNCTION_METHOD)
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->tokenIs('T_NS_SEPARATOR')

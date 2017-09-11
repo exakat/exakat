@@ -83,7 +83,6 @@ abstract class Analyzer {
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
 
-    static public $FUNCTION_METHOD  = array('Function', 'Closure', 'Method');
     static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');

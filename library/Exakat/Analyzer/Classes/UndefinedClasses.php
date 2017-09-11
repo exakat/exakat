@@ -128,7 +128,7 @@ class UndefinedClasses extends Analyzer {
 
         // in a typehint f(someClass $c)
         $types = $this->loadIni('php_reserved_types.ini', 'type');
-        $this->atomIs(self::$FUNCTION_METHOD)
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->analyzerIsNot('Composer/IsComposerNsname')

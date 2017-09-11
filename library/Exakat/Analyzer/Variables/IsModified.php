@@ -78,7 +78,7 @@ class IsModified extends Analyzer {
 
         // function/methods definition : all modified by incoming values
         // simple variable
-        $this->atomIs(self::$FUNCTION_METHOD)
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->atomIs(self::$VARIABLES_ALL);
         $this->prepareQuery();
@@ -86,7 +86,7 @@ class IsModified extends Analyzer {
         // simple variable + default value : already done in line 18
 
         // typehint
-        $this->atomIs(self::$FUNCTION_METHOD)
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIs($atoms);
