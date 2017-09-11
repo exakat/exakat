@@ -200,7 +200,7 @@ function config($args) {
     $php_versions = array('7.2', '7.1', '7.0', '5.6', '5.5', '5.4', '5.3');
     if (!empty($_REQUEST['phpversion']) &&
         in_array($_REQUEST['phpversion'], $php_versions)) {
-        $ini = preg_replace("/phpversion = .+?\n/", 'phpversion = '.$_REQUEST['phpversion'], $ini);
+        $ini = preg_replace("/phpversion = .+?\n/", 'phpversion = '.$_REQUEST['phpversion'].PHP_EOL, $ini);
         $status[] = 'phpversion';
     }
 
@@ -210,7 +210,7 @@ function config($args) {
 
         if (!empty($extensions)) {
             $extensions = join(',', $extensions);
-            $ini = preg_replace("/file_extensions = .+?\n/", 'file_extensions = '.$extensions, $ini);
+            $ini = preg_replace("/file_extensions = .+?\n/", 'file_extensions = "'.$extensions.'";'.PHP_EOL, $ini);
         }
         $status[] = 'file_extensions';
     }
@@ -224,6 +224,38 @@ function config($args) {
         $status[] = 'ignore_dirs';
     }
 
+    $regexBranchTag = '/^[a-zA-Z0-9_\.-]+$/';
+    if (!empty($_REQUEST['branch']) && 
+        preg_match($regexBranchTag, $_REQUEST['branch'])) {
+
+        $ini = preg_replace("/project_branch\s*=\s*\"[^\"]*?\";\n/s", 
+                            'project_branch      = "'.$_REQUEST['branch'].'";'.PHP_EOL, 
+                            $ini);
+        $ini = preg_replace("/project_tag\s*=\s*\"\w*\";\n/s", 
+                            'project_tag         = "";'.PHP_EOL, 
+                            $ini);
+        $status[] = 'branch';
+    } elseif (!empty($_REQUEST['tag']) && 
+        preg_match($regexBranchTag, $_REQUEST['tag'])) {
+
+        $ini = preg_replace("/project_branch\s*=\s*\"[^\"]*?\";\n/s", 
+                            'project_branch      = "";'.PHP_EOL, 
+                            $ini);
+        $ini = preg_replace("/project_tag\s*=\s*\"\w*\";\n/s", 
+                            'project_tag         = "'.$_REQUEST['tag'].'";'.PHP_EOL, 
+                            $ini);
+        $status[] = 'tag';
+    }
+    
+    if (!empty($_REQUEST['name']) && 
+        preg_match($regexBranchTag, $_REQUEST['name'])) {
+
+        $ini = preg_replace("/project_name\s*=\s*\"[^\"]*?\";\n/s", 
+                            'project_name        = "'.$_REQUEST['name'].'";'.PHP_EOL, 
+                            $ini);
+        $status[] = 'name';
+    }
+    
     if (!empty($_REQUEST['include_dirs']) && 
         is_array($_REQUEST['include_dirs'])) {
 
@@ -261,7 +293,7 @@ function config($args) {
     }
     $size = file_put_contents(__DIR__.'/'.$project.'/config.ini', $ini);
     
-    $status = array('saved' => $size, 
+    $status = array('saved'   => $size, 
                     'options' => $status);
     echo json_encode($status);
     die();
