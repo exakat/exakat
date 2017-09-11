@@ -224,8 +224,8 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALY
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File', 'Project') ).repeat( 
     __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() in ['Function', 'Method']) { theFunction = it.get().value('code')} }
-      .sideEffect{ if (it.get().label() in ['Class', 'Trait']) { theClass = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() in ['Function', 'Method', 'Closure']) { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Class', 'Trait', 'Interface', 'Classanonymous']) { theClass = it.get().value('fullcode')} }
       .sideEffect{ if (it.get().label() == 'Namespace') { theNamespace = it.get().value('fullnspath')} }
        )
 .sideEffect{  file = it.get().value('fullcode');}
