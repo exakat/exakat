@@ -1201,7 +1201,7 @@ JAVASCRIPT;
                  </div>';
             $dataScript[] = '{label: "'.$value['label'].'", value: '.( (int) $value['value']).'}';
         }
-        $dataScript = join(', ', $dataScript);
+        $dataScript = implode(', ', $dataScript);
         
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
@@ -1243,7 +1243,7 @@ SQL;
                  </div>';
             $dataScript[] = '{label: "'.$value['label'].'", value: '.( (int) $value['value']).'}';
         }
-        $dataScript = join(', ', $dataScript);
+        $dataScript = implode(', ', $dataScript);
 
         $nb = 4 - count($data);
         for($i = 0; $i < $nb; ++$i) {
@@ -2182,6 +2182,210 @@ HTML;
     }
 
     private function generateVisibilitySuggestions() {
+        $constants  = $this->generateVisibilityConstantSuggestions();
+        $properties = $this->generateVisibilityPropertySuggestions();
+        $methods    = $this->generateVisibilityMethodsSuggestions();
+        
+        $classes = array_unique(array_merge(array_keys($constants),
+                                            array_keys($properties),
+                                            array_keys($methods)));
+        
+        $visibilityTable = <<<HTML
+<table class="table table-striped">
+    <tr>
+        <td>&nbsp;</td>
+        <td>Name</td>
+        <td>Value</td>
+        <td>None (public)</td>
+        <td>Public</td>
+        <td>Protected</td>
+        <td>Private</td>
+        <td>Constant</td>
+    </tr>
+HTML;
+
+        foreach($classes as $id) {
+            list($path, $class) = explode(':', $id);
+            $visibilityTable .= '<tr><td colspan="9">class '.$class.'</td></tr>'.PHP_EOL.
+                                (isset($constants[$id])  ? implode('', $constants[$id])  : '').
+                                (isset($properties[$id]) ? implode('', $properties[$id]) : '').
+                                (isset($methods[$id])    ? implode('', $methods[$id])    : '');
+            
+        }
+
+        $visibilityTable .= '</table>';
+
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Titre');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Description');
+        $html = $this->injectBloc($html, 'CONTENT', $visibilityTable);
+        $this->putBasedPage('visibility_suggestions', $html);
+    }
+
+    private function generateVisibilityMethodsSuggestions() {
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateMethod"');
+        $couldBePrivate = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            preg_match('/(class|interface) (\S+) /i', $row['class'], $classname);
+            $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
+
+            if (isset($couldBePrivate[$fullnspath])) {
+                $couldBePrivate[$fullnspath][] = $row['fullcode'];
+            } else {
+                $couldBePrivate[$fullnspath] = array($row['fullcode']);
+            }
+        }
+
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedMethod"');
+        $couldBeProtected = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            preg_match('/(class|interface) (\S+) /i', $row['class'], $classname);
+            $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
+            
+            if (isset($couldBeProtected[$fullnspath])) {
+                $couldBeProtected[$fullnspath][] = $row['fullcode'];
+            } else {
+                $couldBeProtected[$fullnspath] = array($row['fullcode']);
+            }
+        }
+        
+        $res = $this->sqlite->query('
+        SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+         visibility, method
+        FROM cit
+        JOIN methods 
+            ON methods.citId = cit.id
+        JOIN namespaces 
+            ON cit.namespaceId = namespaces.id
+         WHERE type="class"
+        ');
+        $ranking = array(''          => 0,
+                         'public'    => 1,
+                         'protected' => 2,
+                         'private'   => 3);
+
+        $return = array();
+        $theClass = '';
+        $aClass = array();
+
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if ($theClass != $row['fullnspath'].':'.$row['theClass']) {
+                $return[$theClass] = $aClass;
+                $theClass = $row['fullnspath'].':'.$row['theClass'];
+                $aClass = array();
+            }
+
+            $visibilities = array('&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
+            $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
+
+            if (isset($couldBePrivate[$row['fullnspath']]) && 
+                in_array($row['method'], $couldBePrivate[$row['fullnspath']])) {
+                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
+                    $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
+            }
+
+            if (isset($couldBeProtected[$row['fullnspath']]) && 
+                in_array($row['method'], $couldBeProtected[$row['fullnspath']])) {
+                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
+                    $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
+            }
+
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.$row['method'].'</td><td>'.
+                                    implode('</td><td>', $visibilities)
+                                 .'</td></tr>'.PHP_EOL;
+        }
+
+        $return[$theClass] = $aClass;
+        unset($return['']);
+        
+        return $return;
+    }
+    
+    private function generateVisibilityConstantSuggestions() {
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateConstante"');
+        $couldBePrivate = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            preg_match('/class (\S+) /i', $row['class'], $classname);
+
+            $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
+            
+            preg_match('/^(\w+) = /i', $row['fullcode'], $code);
+
+            if (isset($couldBePrivate[$fullnspath])) {
+                $couldBePrivate[$fullnspath][] = $code[1];
+            } else {
+                $couldBePrivate[$fullnspath] = array($code[1]);
+            }
+        }
+
+        $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedConstant"');
+        $couldBeProtected = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            preg_match('/class (\S+) /i', $row['class'], $classname);
+            $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
+            
+            preg_match('/^(\w+) = /i', $row['fullcode'], $code);
+            
+            if (isset($couldBeProtected[$fullnspath])) {
+                $couldBeProtected[$fullnspath][] = $code[1];
+            } else {
+                $couldBeProtected[$fullnspath] = array($code[1]);
+            }
+        }
+
+        $res = $this->sqlite->query('
+        SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
+         visibility, constant, value
+        FROM cit
+        JOIN constants 
+            ON constants.citId = cit.id
+        JOIN namespaces 
+            ON cit.namespaceId = namespaces.id
+         WHERE type="class"
+        ');
+        $theClass = '';
+        $ranking = array(''          => 1,
+                         'public'    => 2,
+                         'protected' => 3,
+                         'private'   => 4,
+                         'constant'  => 5);
+        $return = array();
+
+        $aClass = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if ($theClass != $row['fullnspath'].':'.$row['theClass']) {
+                $return[$theClass] = $aClass;
+                $theClass = $row['fullnspath'].':'.$row['theClass'];
+                $aClass = array();
+            }
+
+            $visibilities = array($row['value'], '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
+            $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
+
+            if (isset($couldBePrivate[$row['fullnspath']]) && 
+                in_array($row['constant'], $couldBePrivate[$row['fullnspath']])) {
+                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
+                    $visibilities[$ranking['private']] = '<i class="fa fa-star" style="color:green"></i>';
+            }
+
+            if (isset($couldBeProtected[$row['fullnspath']]) && 
+                in_array($row['constant'], $couldBeProtected[$row['fullnspath']])) {
+                    $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:red"></i>';
+                    $visibilities[$ranking['protected']] = '<i class="fa fa-star" style="color:#FFA700"></i>';
+            }
+        
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.$row['constant'].'</td><td>'.
+                                    implode('</td><td>', $visibilities)
+                                 .'</td></tr>'.PHP_EOL;
+        }
+
+        $return[$theClass] = $aClass;
+        unset($return['']);
+
+        return $return;
+    }
+
+    private function generateVisibilityPropertySuggestions() {
 
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivate"');
         $couldBePrivate = array();
@@ -2230,9 +2434,6 @@ HTML;
             }
         }
 
-        $visibilityTable = '<table class="table table-striped">
-<tr><td>&nbsp;</td><td>Property</td><td>None (public)</td><td>Public</td><td>Protected</td><td>Private</td><td>Constant</td><td>Value</td></tr>';
-
         $res = $this->sqlite->query('SELECT cit.name AS theClass, namespaces.namespace || "\\" || lower(cit.name) AS fullnspath,
          visibility, property, value
         FROM cit
@@ -2243,19 +2444,22 @@ HTML;
          WHERE type="class"
         ');
         $theClass = '';
-        $ranking = array(''          => 0,
-                         'public'    => 1,
-                         'protected' => 2,
-                         'private'   => 3,
-                         'constant'  => 4);
+        $ranking = array(''          => 1,
+                         'public'    => 2,
+                         'protected' => 3,
+                         'private'   => 4,
+                         'constant'  => 5);
+        $return = array();
 
+        $aClass = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            if ($theClass != $row['theClass']) {
-                $visibilityTable .= '<tr><td colspan="7">'.$row['theClass']."</td></tr>\n";
-                $theClass = $row['theClass'];
+            if ($theClass != $row['fullnspath'].':'.$row['theClass']) {
+                $return[$theClass] = $aClass;
+                $theClass = $row['fullnspath'].':'.$row['theClass'];
+                $aClass = array();
             }
 
-            $visibilities = array('&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
+            $visibilities = array($row['value'], '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;', '&nbsp;');
             $visibilities[$ranking[$row['visibility']]] = '<i class="fa fa-star" style="color:green"></i>';
 
             if (isset($couldBePrivate[$row['fullnspath']]) && 
@@ -2275,20 +2479,16 @@ HTML;
                     $visibilities[$ranking['constant']] = '<i class="fa fa-star" style="color:black"></i>';
             }
             
-            $visibilityTable .= '<tr><td>&nbsp;</td><td>'.$row['property'].'</td><td>'.
-                                    join('</td><td>', $visibilities)
-                                 ."</td></tr>\n";
+            $aClass[] = '<tr><td>&nbsp;</td><td>'.$row['property'].'</td><td>'.
+                            implode('</td><td>', $visibilities)
+                            .'</td></tr>'.PHP_EOL;
         }
-        
-        $visibilityTable .= '</table>';
+        $return[$theClass] = $aClass;
+        unset($return['']);
 
-        $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Titre');
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Description');
-        $html = $this->injectBloc($html, 'CONTENT', $visibilityTable);
-        $this->putBasedPage('visibility_suggestions', $html);
+        return $return;
     }
-
+    
     private function generateAlteredDirectives() {
         $alteredDirectives = '';
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Php/DirectivesUsage"');
