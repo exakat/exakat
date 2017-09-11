@@ -87,7 +87,7 @@ class Ambassador extends Reports {
 
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_VERSION', Exakat::VERSION);
             $baseHTML = $this->injectBloc($baseHTML, 'EXAKAT_BUILD', Exakat::BUILD);
-            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project);
+            $baseHTML = $this->injectBloc($baseHTML, 'PROJECT', $this->config->project_name);
             $baseHTML = $this->injectBloc($baseHTML, 'PROJECT_LETTER', strtoupper($this->config->project{0}));
 
             $menu = file_get_contents($this->tmpName.'/datas/menu.html');
