@@ -754,18 +754,26 @@ GREMLIN
         $this->sqlite->query('CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 constant INTEGER,
                                                 citId INTEGER,
+                                                visibility STRING,
                                                 value TEXT
                                                  )');
 
         $query = <<<GREMLIN
-g.V().hasLabel("Class", "Interface", "Trait")
-     .sideEffect{classe = it.get().value('fullnspath'); }
+g.V().hasLabel("Class")
      .out('CONST')
+.sideEffect{ 
+    x_public = it.get().vertices(OUT, "PUBLIC").any();
+    x_protected = it.get().vertices(OUT, "PROTECTED").any();
+    x_private = it.get().vertices(OUT, "PRIVATE").any();
+}
      .out('CONST')
-.map{ 
+     .map{ 
     x = ['name': it.get().vertices(OUT, 'NAME').next().value("code"),
          'value': it.get().vertices(OUT, 'VALUE').next().value("fullcode"),
-         'class': classe
+         "public":x_public,
+         "protected":x_protected,
+         "private":x_private,
+         'class': it.get().vertices(IN, 'CONST').next().vertices(IN, 'CONST').next().value("fullnspath")
          ];
 }
 
@@ -781,13 +789,23 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].", '".$this->sqlite->escapeString($row->value)."')";
+            if ($row->public) {
+                $visibility = 'public';
+            } elseif ($row->protected) {
+                $visibility = 'protected';
+            } elseif ($row->private) {
+                $visibility = 'private';
+            } else {
+                $visibility = '';
+            }
+
+            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].", '".$visibility."', '".$this->sqlite->escapeString($row->value)."')";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "citId", "value") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES '.join(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total constants\n");
