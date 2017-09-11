@@ -16,4 +16,6 @@ $run_id = $xhprof_runs->save_run($xhprof_data, "xhprof_testing");
 
 echo "http://localhost/xhprof/xhprof_html/index.php?run={$run_id}&source=xhprof_testing\n";
 
+xhprof::xhprof_disable(2);
+
 ?>

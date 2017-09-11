@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array('function  ( ) { /**/ } ');
+$expected     = array('function  ( ) { /**/ } ',
+                     );
 
-$expected_not = array();
+$expected_not = array('public function dontGetClosure( ) { /**/ } ',
+                      'function  ($value) { /**/ } ',
+                      );
 
 ?>
