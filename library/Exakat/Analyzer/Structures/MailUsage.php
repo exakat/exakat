@@ -27,12 +27,12 @@ use Exakat\Analyzer\Analyzer;
 
 class MailUsage extends Analyzer {
     public function analyze() {
-        $mailerClasses = array('\\Swift', '\\PHPMailer');
-
-        $this->atomFunctionIs('\mail')
+        $mailerFunctions = $this->loadIni('mailer.ini', 'functions');
+        $this->atomFunctionIs($mailerFunctions)
              ->back('first');
         $this->prepareQuery();
 
+        $mailerClasses = $this->loadIni('mailer.ini', 'classes');
         $this->atomIs('Newcall')
              ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->tokenIs(self::$FUNCTIONS_TOKENS)
