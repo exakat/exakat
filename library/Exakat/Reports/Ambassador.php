@@ -1096,7 +1096,7 @@ JAVASCRIPT;
             'Number of PHP files'                   => $this->datastore->getHash('files'),
             'Number of lines of code'               => $this->datastore->getHash('loc'),
             'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
-            'PHP used' => $php->getActualVersion() //.' (version '.$this->config->phpversion.' configured)'
+            'PHP used'                              => $php->getActualVersion() //.' (version '.$this->config->phpversion.' configured)'
         );
 
         // fichier
@@ -1113,6 +1113,8 @@ JAVASCRIPT;
         list($totalAnalyzerUsed, $totalAnalyzerReporting) = $this->getTotalAnalyzer();
         $totalAnalyzerWithoutError = $totalAnalyzerUsed - $totalAnalyzerReporting;
         $percentAnalyzer = abs(round($totalAnalyzerWithoutError / $totalAnalyzerUsed * 100));
+        
+        $audit_date = date('r', strtotime('now'));
 
         $html = '<div class="box">
                     <div class="box-header with-border">
@@ -1158,6 +1160,14 @@ JAVASCRIPT;
                                     </div><div style="color:black; text-align:center;">'.$totalAnalyzerReporting.'</div>
                                 </div>
                                 <div class="pourcentage">'.$percentAnalyzer.'%</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="sub-div">
+                                <p>Date of audit : '.$audit_date.'</p>
+                            </div>
+                            <div class="sub-div">
+                                <p>Revision : '.$this->datastore->getHash('revision').'</p>
                             </div>
                         </div>
                     </div>
@@ -1723,16 +1733,19 @@ SQL;
         if (!empty($this->config->project_url)) {
             $info[] = array('Home page', '<a href="'.$this->config->project_url.'">'.$this->config->project_url.'</a>');
         }
-        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
-            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
-            $info[] = array('Git URL', $r[1]);
+        $vcs_type = $this->datastore->gethash('vcs_type');
+        if ($vcs_type === 'git') {
+            $info[] = array('Git URL', $this->datastore->gethash('vcs_url'));
 
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
-            $info[] = array('Git branch', trim($res));
+            $res = $this->datastore->gethash('vcs_branch');
+            if (!empty($res)) { 
+                $info[] = array('Git branch', trim($res));
+            }
 
-            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
-            $info[] = array('Git commit', trim($res));
+            $res = $this->datastore->gethash('vcs_revision');
+            if (!empty($res)) { 
+                $info[] = array('Git commit', trim($res));
+            }
         } else {
             $info[] = array('Repository URL', 'Downloaded archive');
         }
@@ -2321,7 +2334,9 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedConstant"');
         $couldBeProtected = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/class (\S+) /i', $row['class'], $classname);
+            if (!preg_match('/class (\S+) /i', $row['class'], $classname)) {
+                continue; // it is an interface or a trait
+            }
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
             preg_match('/^(\w+) = /i', $row['fullcode'], $code);
