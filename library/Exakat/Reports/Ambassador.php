@@ -2318,7 +2318,9 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateConstante"');
         $couldBePrivate = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/class (\S+) /i', $row['class'], $classname);
+            if (!preg_match('/class (\S+) /i', $row['class'], $classname)) {
+                continue; // it is an interface or a trait
+            }
 
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
