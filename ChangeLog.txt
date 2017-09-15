@@ -1,4 +1,4 @@
-Version 0.12.10 (Golden Nosed Albino Rat Spirit, Coming up)
+Version 0.12.12 (Ruler of the Kingdom of Miefa, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,31 @@ Version 0.12.10 (Golden Nosed Albino Rat Spirit, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.12.11 (Half-Guanyin, 2017-09-11)
++ Architecture
+    + Added support options for branches and tags
+    + Added support for config in server mode
++ Report
+    + Fixed methods dump for interfaces.
++ Analyzer
+    + Added all analysis to report could be private/protected for 
++ Tokenizer
+    + Fixed handling of '<' char in paths
+
+Version 0.12.10 (Golden Nosed Albino Rat Spirit, 2017-09-04)
++ Architecture
+    + Upgraded server version with config alteration features.
+    + New generated config-cache
++ Report
+    + Fixed property names in Visibility report
++ Analyzer
+    + Arrays/IsModified : arrays are not modified unless in a (unset)
++ Tokenizer
+    + Fixed 'constant' for functioncalls
+    + Introduced 'Name' for Identifier without a fullnspath
+    + Added support for branches and tags in init
+    + Fixed edge case with $o->$$b
 
 Version 0.12.9 (Lady Earth Flow, 2017-08-28)
 + Architecture
