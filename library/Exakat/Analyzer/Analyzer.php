@@ -1390,18 +1390,18 @@ GREMLIN
         return $this;
     }
     
-    public function goToClass($type = 'Class') {
+    public function goToClass($type = array('Class', 'Classanonymous')) {
         $this->goToInstruction($type);
         
         return $this;
     }
     
     public function hasNoClass() {
-        return $this->hasNoInstruction('Class');
+        return $this->hasNoInstruction(self::$CLASSES_ALL);
     }
 
     public function hasClass() {
-        $this->hasInstruction('Class');
+        $this->hasInstruction(self::$CLASSES_ALL);
         
         return $this;
     }
@@ -1427,33 +1427,33 @@ GREMLIN
     }
 
     public function goToClassTrait() {
-        $this->goToInstruction(array('Trait', 'Class'));
+        $this->goToInstruction(array('Trait', 'Class', 'Classanonymous'));
         
         return $this;
     }
 
     public function hasNoClassTrait() {
-        return $this->hasNoInstruction(array('Class', 'Trait'));
+        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Trait'));
     }
 
     public function goToClassInterface() {
-        $this->goToInstruction(array('Interface', 'Class'));
+        $this->goToInstruction(array('Interface', 'Class', 'Classanonymous'));
         
         return $this;
     }
 
     public function hasNoClassInterface() {
-        return $this->hasNoInstruction(array('Class', 'Interface'));
+        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Interface'));
     }
 
     public function goToClassInterfaceTrait() {
-        $this->goToInstruction(array('Interface', 'Class', 'Trait'));
+        $this->goToInstruction(array('Interface', 'Class', 'Classanonymous', 'Trait'));
         
         return $this;
     }
 
     public function hasNoClassInterfaceTrait() {
-        return $this->hasNoInstruction(array('Class', 'Interface', 'Trait'));
+        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Interface', 'Trait'));
     }
     
     public function goToExtends() {
@@ -1529,13 +1529,13 @@ GREMLIN
     }
 
     public function hasClassTrait() {
-        $this->hasInstruction(array('Class', 'Trait'));
+        $this->hasInstruction(array('Class', 'Classanonymous', 'Trait'));
         
         return $this;
     }
 
     public function hasClassInterface() {
-        $this->hasInstruction(array('Class', 'Interface'));
+        $this->hasInstruction(array('Class', 'Classanonymous', 'Interface'));
         
         return $this;
     }

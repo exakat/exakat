@@ -1,5 +1,7 @@
 <?php
 
+self::B3;
+
 class x extends y {
     const A = 4;
     
