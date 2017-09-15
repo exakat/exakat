@@ -1,0 +1,12 @@
+Whole
+Label : PROJECT
+  Label : FILE
+    ;
+    Label : EXPRESSION
+      <?php 
+      Label : CODE
+        ;
+        Label : EXPRESSION
+          ++
+          Label : POSTPLUSPLUS
+            $a

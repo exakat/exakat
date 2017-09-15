@@ -2178,6 +2178,10 @@ SQL;
             $operator = $this->popExpression();
             $this->pushExpression($operator);
 
+            if ( !$this->isContext(self::CONTEXT_NOSEQUENCE) && $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_CLOSE_TAG) {
+                $this->processSemicolon();
+            }
+
             return $operator;
         }
     }
