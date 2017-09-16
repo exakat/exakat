@@ -81,7 +81,11 @@ class Files extends Tasks {
 
         $tmpFileName = $this->config->projects_root.'/projects/.exakat/files.'.getmypid().'.txt';
         $path = $this->config->projects_root.'/projects/'.$dir.'/code';
-        $tmpFiles = array_map(function ($file) use ($path) { return str_replace(array('(', ')', ' ', '$', '<'), array('\\(', '\\)', '\\ ', '\\$', '\\<'), '.'.$file);}, $files);
+        $tmpFiles = array_map(function ($file) use ($path) { 
+            return str_replace(array('(', ')', ' ', '$', '<', "'"), 
+                               array('\\(', '\\)', '\\ ', '\\$', '\\<', "\\'"), 
+                               '.'.$file);
+                               }, $files);
         file_put_contents($tmpFileName, implode("\n", $tmpFiles));
 
         $versions = $this->config->other_php_versions;
