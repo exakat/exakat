@@ -37,15 +37,15 @@ g.V().hasLabel("Methodcall")
 GREMLIN;
         $publicMethods = $this->query($query);
         
-            // Member that is not used outside this class or its children
-            $this->atomIs('Method')
-                 ->hasNoOut(array('PROTECTED', 'PRIVATE'))
-                 ->hasNoOut('STATIC')
-                 ->hasClass()
-                 ->outIs('NAME')
-                 ->isNot('code', $publicMethods)
-                 ->back('first');
-            $this->prepareQuery();
+        // Member that is not used outside this class or its children
+        $this->atomIs('Method')
+             ->hasNoOut(array('PROTECTED', 'PRIVATE'))
+             ->hasNoOut('STATIC')
+             ->hasClass()
+             ->outIs('NAME')
+             ->isNot('code', $publicMethods)
+             ->back('first');
+        $this->prepareQuery();
         
         // Case of property::property (that's another public access)
         $res = $this->query('g.V().hasLabel("Staticmethodcall").as("init")
@@ -53,9 +53,9 @@ GREMLIN;
                                   .not(has("code", within("self", "static"))).as("classe")
                                   .sideEffect{ fnp = it.get().value("fullnspath") }
                                   .in("CLASS")
-                                  .where( __.repeat( __.in('.$this->linksDown.')).until(hasLabel("Class", "File"))
+                                  .where( __.repeat( __.in()).until(hasLabel("Class", "Classanonymous", "File"))
                                             .or(hasLabel("File"), 
-                                                hasLabel("Class").filter{ it.get().values("fullnspath") == fnp; }) 
+                                                hasLabel("Class", "Classanonymous").filter{ it.get().values("fullnspath") == fnp; }) 
                                         )
                                   .out("METHOD").hasLabel("Methodcallname").as("method")
                                   .select("classe", "method").by("fullnspath").by("code")
@@ -71,7 +71,6 @@ GREMLIN;
             }
         }
 
-        
         if (!empty($publicStaticMethods)) {
             // Member that is not used outside this class or its children
             $this->atomIs('Method')

@@ -21,15 +21,15 @@ class a {
         $this->apublicButSBProtected() + $this->aprotected() + $this->aprivate();
         $a->apublicButReally();
         
-        self::$aspublicButSBProtectedSelf();
-        static::$aspublicButSBProtectedStatic();
-        \a::$aspublicButSBProtectedFull();
+        self::aspublicButSBProtectedSelf();
+        static::aspublicButSBProtectedStatic();
+        \a::aspublicButSBProtectedFull();
     }
 }
 
 $b->apublicButReally2();
 $c->aprivate(); // Some other class
 
-\a::$aspublicButReally();
-b::$aspublicButReally2();
+\a::aspublicButReally();
+b::aspublicButReally2();
 ?>
