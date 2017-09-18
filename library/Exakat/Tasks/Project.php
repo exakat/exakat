@@ -105,6 +105,24 @@ class Project extends Tasks {
                                                'php_version'    => $this->config->phpversion
                                          ));
 
+        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
+            $info = array();
+            $info['vcs_type'] = 'git';
+            
+            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
+            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
+            $info['vcs_url'] = $r[1];
+
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
+            $info['vcs_branch'] = trim($res, " *\n");
+
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
+            $info['vcs_revision'] = trim($res);
+        } else {
+            $info['vcs_type'] = 'Downloaded archive';
+        }
+        $this->datastore->addRow('hash', $info);
+
         display("Running project '$project'".PHP_EOL);
         display("Running the following analysis : ".implode(', ', $this->config->project_themes));
         display("Producing the following reports : ".implode(', ', $this->reports));
