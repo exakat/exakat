@@ -425,7 +425,6 @@ JOIN categories
                           );
         $analyzeList = '("'.implode('", "', $analyzes).'")';
         
-        include __DIR__.'/library/Exakat/Analyzer/Analyzer.php';
         $oClass = new ReflectionClass('\Exakat\Analyzer\Analyzer');
         $analyzerConstants = array_keys($oClass->getConstants());
 
@@ -860,7 +859,7 @@ SQL
 
     public function checkReportFormat() {
         $php = file_get_contents('library/Exakat/Reports/Reports.php');
-        preg_match('/    CONST FORMATS        = \[(.*?)\];/is', $php, $r);
+        preg_match('/static public \\$FORMATS        = array\(([^\)]+)\);/is', $php, $r);
         
         $formats = explode(',', $r[1]);
         $formats = array_map(function($x) { return trim($x, "' "); }, $formats);
@@ -873,13 +872,13 @@ SQL
         $missing = array_diff($files, $formats);
         if (count($missing) > 0) {
             print count($missing).' format are missing in ./library/Exakat/Reports/Reports.php : '.implode(', ', $missing)."\n";
-            print "    CONST FORMATS = ['".implode("', '", $files)."'];\n";
+            print "static public \$FORMATS        = array\('".implode("', '", $files)."');\n";
         }
 
         $toomany = array_diff($formats, $files);
         if (count($toomany) > 0) {
             print count($toomany).' format are too many in ./library/Exakat/Reports/Reports.php : '.implode(', ', $toomany)."\n";
-            print "    CONST FORMATS        = ['".implode("', '", $files)."'];\n";
+            print "static public \$FORMATS        = array\('".implode("', '", $files)."');\n";
         }
     }
     
