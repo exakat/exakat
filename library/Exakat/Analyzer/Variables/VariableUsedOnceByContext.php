@@ -36,7 +36,7 @@ class VariableUsedOnceByContext extends Analyzer {
         $query = <<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject")
      .not(has("code", "\\\$this"))
-     .where( __.in("MEMBER").count().is(eq(0)) )
+     .not(where( __.in("MEMBER") ) )
                .where( repeat( __.in({$this->linksDown}))
                             .until(hasLabel("File")).emit(hasLabel("Function")).hasLabel("Function")
                             .count().is(eq(0))
@@ -52,13 +52,13 @@ GREMLIN;
              ->codeIs($variables);
         $this->prepareQuery();
 
-        $this->atomIs(array('Function', 'Closure'))
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->raw('where( __
                    .sideEffect{counts = [:]}
-                             .repeat( out('.$this->linksDown.').not( where( __.hasLabel("Function", "Closure") ) ) )
-                             .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
+                             .repeat( out().not( where( __.hasLabel("Function", "Closure", "Method") ) ) )
+                             .emit( ).times('.self::MAX_LOOPING.')
                              .hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this"))
-                             .where( __.in("MEMBER").count().is(eq(0)) )
+                             .not( where( __.in("MEMBER") ) )
                              .sideEffect{ k = it.get().value("code"); 
                                          if (counts[k] == null) {
                                             counts[k] = 1;
@@ -69,8 +69,10 @@ GREMLIN;
                           )
                    .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
                    .repeat( out('.$this->linksDown.').not( where( __.hasLabel("Function", "Closure") ) )  )
-                   .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) ).times('.self::MAX_LOOPING.')
-                   .filter{ it.get().value("code") in names }');
+                   .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) )
+                   .times('.self::MAX_LOOPING.')
+                   .filter{ it.get().value("code") in names }
+                   ');
         $this->prepareQuery();
     }
 }
