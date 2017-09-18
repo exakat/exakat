@@ -2239,7 +2239,7 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateMethod"');
         $couldBePrivate = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/(class|interface) (\S+) /i', $row['class'], $classname);
+            preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
 
             if (isset($couldBePrivate[$fullnspath])) {
@@ -2252,7 +2252,7 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedMethod"');
         $couldBeProtected = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/(class|interface) (\S+) /i', $row['class'], $classname);
+            preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname);
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
             
             if (isset($couldBeProtected[$fullnspath])) {
