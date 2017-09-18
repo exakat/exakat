@@ -4,9 +4,10 @@ $expected     = array('function definedTwiceMethod( ) { /**/ } ',
                       'function definedTwiceMethod( ) { /**/ } ',
                       'function usedMethod( ) { /**/ } ',
                       'function usedMethodNoCase( ) { /**/ } ',
-                      'function usedMethodStatically( ) { /**/ } '
+                      'function usedMethodStatically( ) { /**/ } ',
                       );
 
-$expected_not = array();
+$expected_not = array('function unusedMethod( ) { /**/ } ', 
+                     );
 
 ?>
