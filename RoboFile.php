@@ -357,6 +357,10 @@ JOIN categories
                 if (strpos($ini['description'], '<?php') === false) {
                     print 'human/en/'.$row['name'].'.ini'. " has no example in the docs\n";
                 } 
+
+                if (strpos($ini['description'], 'See also') === false) {
+                    print 'human/en/'.$row['name'].'.ini'. " has no external links in the docs\n";
+                } 
                 
                 $title = str_replace(array('PHP', 'autoload', 'const', 'HTTP'), '', $ini['name']);  
                 $title = preg_replace('#__\S+#', '', $title);
