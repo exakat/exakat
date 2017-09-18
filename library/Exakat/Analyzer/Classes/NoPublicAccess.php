@@ -29,12 +29,13 @@ class NoPublicAccess extends Analyzer {
     public function analyze() {
 
         $gremlin = <<<GREMLIN
-g.V().hasLabel("Member").out("OBJECT").not(where( __.has("code", "\$this"))).in("OBJECT")
-     .out("MEMBER").hasLabel("Identifier")
+g.V().hasLabel("Member")
+     .not(where( __.out("OBJECT").has("code", "\$this")) )
+     .out("MEMBER").hasLabel("Name")
      .values('code').unique();
 GREMLIN;
         $properties = $this->query($gremlin);
-        
+
         if(!empty($properties)) {
             $properties = array_values($properties);
             $this->atomIs('Ppp')
