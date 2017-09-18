@@ -36,14 +36,16 @@ g.V().hasLabel("Methodcall")
      .unique()
 GREMLIN;
         $publicMethods = $this->query($query);
-        
+
+        $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
+
         // Member that is not used outside this class or its children
         $this->atomIs('Method')
              ->hasNoOut(array('PROTECTED', 'PRIVATE'))
              ->hasNoOut('STATIC')
              ->hasClass()
              ->outIs('NAME')
-             ->isNot('code', $publicMethods)
+             ->isNot('code', array_merge($publicMethods, $magicMethods))
              ->back('first');
         $this->prepareQuery();
         

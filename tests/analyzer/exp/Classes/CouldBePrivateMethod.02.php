@@ -11,6 +11,9 @@ $expected_not = array('public function apublicButReally() { /**/ } ',
                       'public function __construct() { /**/ } ',
                       'public function __clone() { /**/ } ',
                       'public function __toString() { /**/ } ',
+                      'public function __construct() { /**/ } ',
+                      'public function __clone() { /**/ } ',
+                      'public function __toString() { /**/ } ',
                      );
 
 ?>
