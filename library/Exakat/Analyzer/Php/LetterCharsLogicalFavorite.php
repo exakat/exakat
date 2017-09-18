@@ -39,7 +39,7 @@ GREMLIN;
                          'and, or, xor' => 'letters');
 
         $this->atomIs('Logical')
-             ->tokenIs(array('T_LOGICAL_AND', 'T_LOGICAL_XOR', 'T_LOGICAL_OR', 
+             ->tokenIs(array('T_LOGICAL_AND', 'T_LOGICAL_XOR', 'T_LOGICAL_OR',
                              'T_BOOLEAN_AND',                  'T_BOOLEAN_OR', ))
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
@@ -68,7 +68,7 @@ GREMLIN;
         $types = array_keys($types);
 
         $this->atomIs('Logical')
-             ->tokenIs(array('T_LOGICAL_AND', 'T_LOGICAL_XOR', 'T_LOGICAL_OR', 
+             ->tokenIs(array('T_LOGICAL_AND', 'T_LOGICAL_XOR', 'T_LOGICAL_OR',
                              'T_BOOLEAN_AND',                  'T_BOOLEAN_OR', ))
              ->raw('map{ '.$mapping.' }')
              ->raw('filter{ x2 in *** ; }', $types)

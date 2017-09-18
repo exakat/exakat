@@ -31,7 +31,7 @@ class UsePathinfoArgs extends Analyzer {
         $this->atomFunctionIs('\\pathinfo')
              ->noChildWithRank('ARGUMENT', 1)
              ->goToFunction()
-             // 2 indices are used at least 
+             // 2 indices are used at least
              ->raw('where( __.out("BLOCK").emit().repeat( __.out() ).times('.self::MAX_LOOPING.')
                              .hasLabel("Array").out("INDEX").hasLabel("String")
                              .has("noDelimiter", within("dirname", "basename", "extension", "filename"))

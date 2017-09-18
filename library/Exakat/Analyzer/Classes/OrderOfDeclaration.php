@@ -48,8 +48,8 @@ class OrderOfDeclaration extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-    // static / normal ? 
-    // private / property / public 
+    // static / normal ?
+    // private / property / public
     }
 }
 

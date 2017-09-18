@@ -39,7 +39,7 @@ class Php72NewFunctions extends FunctionDefinition {
                                   'imagegetclip',
                                   'imageopenpolygon',
                                   'imageresolution',
-                                  'imagecreatefrombmp', 
+                                  'imagecreatefrombmp',
                                   'imagebmp',
                                   'oci_register_taf_callback',
                                   'oci_disable_taf_callback',

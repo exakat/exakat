@@ -36,7 +36,7 @@ g.V().hasLabel("Global").out("GLOBAL")
 GREMLIN;
         $globalGlobal = $this->query($query);
 
-        // can't bail out here : if $globalGlobal is empty, no global was declared outside functions. 
+        // can't bail out here : if $globalGlobal is empty, no global was declared outside functions.
         // This is still useful
 
         $superglobals = $this->loadIni('php_superglobals.ini', 'superglobal');

@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class ClassFunctionConfusion extends Analyzer {
     public function analyze() {
-        // class foo{}; function foo(); 
+        // class foo{}; function foo();
         // possible confusion
         $functions = $this->query('g.V().hasLabel("Function")
                                         .values("fullnspath").unique()');

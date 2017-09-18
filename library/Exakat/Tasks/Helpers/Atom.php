@@ -157,17 +157,17 @@ class Atom {
             if ($l === 'id') { continue; }
             if ($value === null) { continue; }
             
-            if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) && 
+            if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) &&
                 !in_array($this->atom, Load::$PROP_OPTIONS[$l])) {
                 continue;
             };
     
-            if (in_array($l, $falseValues) && 
+            if (in_array($l, $falseValues) &&
                 !$value) {
                 continue;
             };
 
-            if (!in_array($l, array('noDelimiter')) && 
+            if (!in_array($l, array('noDelimiter')) &&
                 $value === '') {
                 continue;
             };

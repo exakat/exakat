@@ -81,9 +81,9 @@ class Files extends Tasks {
 
         $tmpFileName = $this->config->projects_root.'/projects/.exakat/files.'.getmypid().'.txt';
         $path = $this->config->projects_root.'/projects/'.$dir.'/code';
-        $tmpFiles = array_map(function ($file) use ($path) { 
-            return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ), 
-                               array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', ), 
+        $tmpFiles = array_map(function ($file) use ($path) {
+            return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ),
+                               array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', ),
                                '.'.$file);
                                }, $files);
         file_put_contents($tmpFileName, implode("\n", $tmpFiles));
@@ -109,7 +109,7 @@ class Files extends Tasks {
         foreach($versions as $version) {
             if (empty($this->config->{'php'.$version})) {
                 // This version is not defined
-                continue; 
+                continue;
             }
             $toRemoveFromFiles = array();
             display('Check compilation for '.$version);
@@ -269,7 +269,7 @@ class Files extends Tasks {
                         $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
                     }
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
-                    continue; 
+                    continue;
                 } else {
                     assert(false,  "'".print_r($resFile, true)."'\n");
                 }

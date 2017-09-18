@@ -81,8 +81,8 @@ class Incompilable extends Analyzer {
         foreach($this->config->other_php_versions as $version) {
             $r = Analyzer::$datastore->getRow('compilation'.$version);
             
-            if (count($r) > 0) { 
-                return true; 
+            if (count($r) > 0) {
+                return true;
             }
         }
         return false;

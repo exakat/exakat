@@ -3016,7 +3016,7 @@ SQL;
                     --$bracket;
                 } elseif ($this->tokens[$id][0] === \Exakat\Tasks\T_OPEN_BRACKET) {
                     ++$bracket;
-                } 
+                }
             }
 
             if ($this->tokens[$id + 1][0] === \Exakat\Tasks\T_EQUAL) {

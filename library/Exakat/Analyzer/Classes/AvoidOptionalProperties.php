@@ -38,7 +38,7 @@ class AvoidOptionalProperties extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // if (empty($this->a)) 
+        // if (empty($this->a))
         $this->atomIs('Member')
              ->outIs('OBJECT')
              ->codeIs('$this')

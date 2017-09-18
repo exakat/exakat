@@ -84,7 +84,7 @@ class DontEchoError extends Analyzer {
              ->_as('results')
              ->fullnspathIs($displayFunctions)
              ->outIs('ARGUMENT')
-             ->outIsIE('CONCAT') 
+             ->outIsIE('CONCAT')
              ->atomIs('Variable')
              ->samePropertyAs('code', 'exception')
              ->back('results');
