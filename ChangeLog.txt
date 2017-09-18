@@ -1,4 +1,4 @@
-Version 0.12.12 (Ruler of the Kingdom of Miefa, Coming up)
+Version 0.12.13 (King of the Southern Hill, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 0.12.12 (Ruler of the Kingdom of Miefa, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.12.12 (Ruler of the Kingdom of Miefa, 2017-09-18)
++ Report
+    + Ambassador : fixed collect of interfaces and trait names
++ Analyzer
+    + New analyzer : ext/Parle
+    + New analyzer : help optimize pathinfo() usage
+    + New analyzer : catch array_values() usage with list and pathinfo()
+    + Updated analyzer : Don't show error messages with catch->getMessage();
+    + Updated analyzer : No concat in loop handles $x = $c . $x;
+    + Checked unit tests : 2456 / 2461 test pass (99% pass). 
++ Tokenizer
+    + Added support for ', " and > in file names. Still missing support for \
+    + Restaured fallback to global constants.
+    + Fixed special case : <?php ++$x ?>
 
 Version 0.12.11 (Half-Guanyin, 2017-09-11)
 + Architecture
