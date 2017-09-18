@@ -105,7 +105,6 @@ class UnusedArguments extends Analyzer {
         // Arguments in a USE, not a reference
         $this->atomIs('Closure')
              ->outIs('USE')
-             ->outIs('ARGUMENT')
              ->isNot('reference', true)
              ->savePropertyAs('code', 'varname')
              ->back('first')
@@ -120,7 +119,6 @@ class UnusedArguments extends Analyzer {
         // Arguments in a USE, reference
         $this->atomIs('Closure')
              ->outIs('USE')
-             ->outIs('ARGUMENT')
              ->is('reference', true)
              ->savePropertyAs('code', 'varname')
              ->back('first')

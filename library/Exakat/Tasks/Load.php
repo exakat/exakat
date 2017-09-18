@@ -1115,7 +1115,7 @@ SQL;
         $function->code       = $function->atom === 'Closure' ? 'function' : $name->fullcode;
         $function->fullcode   = implode(' ', $fullcode).$this->tokens[$current][1].' '.($function->reference ? '&' : '').
                                 ($function->atom === 'Closure' ? '' : $name->fullcode).'('.$argumentFullcode.')'.
-                                (isset($useFullcode) ? ' use ('.implode(',', $useFullcode).')' : '').// No space before use
+                                (isset($useFullcode) ? ' use ('.implode(', ', $useFullcode).')' : '').// No space before use
                                 (isset($returnType) ? ' : '.(isset($nullable) ? '?' : '').$returnType->fullcode : '').
                                 (isset($block) ? self::FULLCODE_BLOCK : ' ;');
         $function->line       = $this->tokens[$current][2];
