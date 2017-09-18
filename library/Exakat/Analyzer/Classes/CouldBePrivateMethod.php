@@ -45,6 +45,8 @@ g.V().hasLabel("Methodcall")
      .unique()
 GREMLIN;
         $publicMethods = $this->query($query);
+        
+        $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
 
         if (!empty($publicMethods)) {
             $this->atomIs('Method')
@@ -52,7 +54,7 @@ GREMLIN;
                  ->hasNoOut('STATIC')
                  ->analyzerIsNot('Classes/MethodUsedBelow')
                  ->outIs('NAME')
-                 ->isNot('code', $publicMethods)
+                 ->isNot('code', array_merge($publicMethods, $magicMethods))
                  ->back('first');
             $this->prepareQuery();
         }

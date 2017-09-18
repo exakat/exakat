@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Classes_CouldBePrivateMethod extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testClasses_CouldBePrivateMethod01()  { $this->generic_test('Classes/CouldBePrivateMethod.01'); }
+    public function testClasses_CouldBePrivateMethod02()  { $this->generic_test('Classes/CouldBePrivateMethod.02'); }
 }
 ?>
