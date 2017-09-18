@@ -8,8 +8,10 @@ $expected     = array("dio_open('/dev/ttyS0', O_RDWR | O_NOCTTY | O_NONBLOCK)",
                       'O_NONBLOCK', 
                       'F_SETFL', 
                       'O_SYNC', 
-                      'O_RDWR');
+                      'O_RDWR',
+                      );
 
-$expected_not = array();
+$expected_not = array('echo',
+                     );
 
 ?>
