@@ -181,6 +181,7 @@ PHP extensions should be provided with the list of structures they define (funct
 * ext/odbc
 * ext/opcache
 * ext/openssl
+* ext/parle
 * ext/parsekit
 * ext/pcntl
 * ext/pcre
@@ -304,6 +305,24 @@ New analyzers
 
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
+
+* 0.12.12
+
+  * Use pathinfo() Arguments (Php/UsePathinfoArgs ; Performances)
+  * ext/parle (Extensions/Extparle)
+
+* 0.12.11
+
+  * Could Be Protected Class Constant (Classes/CouldBeProtectedConstant ; Analyze)
+  * Could Be Protected Method (Classes/CouldBeProtectedMethod ; Analyze)
+  * Method Used Below (Classes/MethodUsedBelow ; Analyze)
+  * Pathinfo() Returns May Vary (Php/PathinfoReturns ; Analyze)
+  * Property Could Be Private Method (Classes/CouldBePrivateMethod)
+
+* 0.12.10
+
+  * Constant Used Below (Classes/ConstantUsedBelow)
+  * Could Be Private Class Constant (Classes/CouldBePrivateConstante ; Analyze)
 
 * 0.12.9
 
@@ -862,7 +881,6 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * $this Is Not An Array (Classes/ThisIsNotAnArray ; Analyze, Codacy)
   * $this Is Not For Static Methods (Classes/ThisIsNotForStatic ; Analyze, Codacy)
   * ** For Exponent (Php/NewExponent ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
-  * ... Usage (Php/EllipsisUsage ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * ::class (Php/StaticclassUsage ; CompatibilityPHP54, CompatibilityPHP53)
   * <?= Usage (Php/EchoTagUsage ; Analyze, Appinfo, Codacy, Simple)
   * @ Operator (Structures/Noscream ; Analyze, Appinfo, ClearPHP)
@@ -992,6 +1010,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Dynamically Called Classes (Classes/VariableClasses ; Appinfo)
   * Echo Or Print (Structures/EchoPrintConsistance ; Coding Conventions, Preferences)
   * Echo With Concat (Structures/EchoWithConcat ; Analyze, Performances, Codacy, Simple)
+  * Ellipsis Usage (Php/EllipsisUsage ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * Else If Versus Elseif (Structures/ElseIfElseif ; Analyze, Codacy, Simple)
   * Else Usage (Structures/ElseUsage ; Appinfo, Appcontent, Calisthenics)
   * Email Addresses (Type/Email ; Inventory)
@@ -1223,12 +1242,12 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Preprocess Arrays (Arrays/ShouldPreprocess ; Analyze, Codacy, Simple)
   * Preprocessable (Structures/ShouldPreprocess ; Analyze, Codacy)
   * Print And Die (Structures/PrintAndDie ; Analyze, Codacy, Simple)
-  * Property Could Be Private (Classes/CouldBePrivate ; Analyze, Codacy)
+  * Property Could Be Private Property (Classes/CouldBePrivate ; Analyze, Codacy)
   * Property Is Modified (Classes/IsModified ; Internal)
   * Property Is Read (Classes/IsRead ; Internal)
   * Property Names (Classes/PropertyDefinition ; Appinfo)
   * Property Used Above (Classes/PropertyUsedAbove ; Internal)
-  * Property Used Below (Classes/PropertyUsedBelow ; Analyze, Codacy, Simple)
+  * Property Used Below (Classes/PropertyUsedBelow ; Internal)
   * Property Variable Confusion (Structures/PropertyVariableConfusion ; Analyze, Codacy, Simple)
   * Queries In Loops (Structures/QueriesInLoop ; Analyze, OneFile, Codacy, Simple, Level 1)
   * Random Without Try (Structures/RandomWithoutTry ; Security)
@@ -1517,7 +1536,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/proctitle (Extensions/Extproctitle ; Appinfo)
   * ext/pspell (Extensions/Extpspell ; Appinfo)
   * ext/readline (Extensions/Extreadline ; Appinfo)
-  * ext/recode (Extensions/Extrecode ; Appinfo)
+  * ext/recode (Extensions/Extrecode ; Appinfo, Portability)
   * ext/redis (Extensions/Extredis ; Appinfo)
   * ext/reflection (Extensions/Extreflection ; Appinfo)
   * ext/runkit (Extensions/Extrunkit ; Appinfo)
@@ -1640,13 +1659,14 @@ List of external links mentionned in this documentation.
 * `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
+* `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `Apache <http://php.net/manual/en/book.apache.php>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
 * `Array <http://php.net/manual/en/function.types.array.php>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
@@ -1661,9 +1681,11 @@ List of external links mentionned in this documentation.
 * `Cake 3.3 migration guide <http://book.cakephp.org/3.0/en/appendices/3-3-migration-guide.html>`_
 * `CakePHP <https://www.cakephp.org/>`_
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
+* `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `Classes abstraction <http://php.net/abstract>`_
 * `Codeigniter <https://codeigniter.com/>`_
+* `COM and .Net (Windows) <http://php.net/manual/en/book.com.php>`_
 * `Comparison Operators <http://php.net/manual/en/language.operators.comparison.php>`_
 * `composer <https://getcomposer.org/>`_
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
@@ -1687,6 +1709,7 @@ List of external links mentionned in this documentation.
 * `Document Object Model <http://php.net/manual/en/book.dom.php>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
 * `download <https://www.exakat.io/download-exakat/>`_
+* `Eaccelerator <http://eaccelerator.net/>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
 * `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
@@ -1704,8 +1727,10 @@ List of external links mentionned in this documentation.
 * `ext/inotify <http://php.net/manual/en/book.inotify.php>`_
 * `ext/lua <http://php.net/manual/en/book.lua.php>`_
 * `ext/mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_
+* `ext/memcached <http://php.net/manual/en/book.memcached.php>`_
 * `ext/OpenSSL <http://php.net/manual/en/book.openssl.php>`_
 * `ext/readline <http://php.net/manual/en/book.readline.php>`_
+* `ext/recode <http://www.php.net/manual/en/book.recode.php>`_
 * `ext/sqlite <http://php.net/manual/en/book.sqlite.php>`_
 * `ext/sqlite3 <http://php.net/manual/en/book.sqlite3.php>`_
 * `extension FANN <http://php.net/manual/en/book.fann.php>`_
@@ -1738,6 +1763,7 @@ List of external links mentionned in this documentation.
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
+* `IIS Administration <http://www.php.net/manual/en/book.iisfunc.php>`_
 * `Image Processing and GD <http://php.net/manual/en/book.image.php>`_
 * `Imagick for PHP <http://php.net/manual/en/book.imagick.php>`_
 * `IMAP <http://www.php.net/imap>`_
@@ -1750,18 +1776,22 @@ List of external links mentionned in this documentation.
 * `Joomla <http://www.joomla.org/>`_
 * `Judy C library <http://judy.sourceforge.net/>`_
 * `Kafka client for PHP <https://github.com/arnaud-lb/php-rdkafka>`_
+* `Kerberos V <http://php.net/manual/en/book.kadm5.php>`_
 * `Lapack <http://php.net/manual/en/book.lapack.php>`_
 * `Laravel <http://www.lavarel.com/>`_
 * `libevent <http://www.libevent.org/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
 * `libxml <http://www.php.net/manual/en/book.libxml.php>`_
+* `list <http://php.net/manual/en/function.list.php>`_
 * `List of function aliases <http://php.net/manual/en/aliases.php>`_
 * `List of HTTP header fields <https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_
 * `List of Keywords <http://php.net/manual/en/reserved.keywords.php>`_
+* `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_
 * `Logical Expressions in C/C++. Mistakes Made by Professionals <http://www.viva64.com/en/b/0390/>`_
 * `Logical Operators <http://php.net/manual/en/language.operators.logical.php>`_
 * `Magic Hashes <https://blog.whitehatsec.com/magic-hashes/>`_
 * `Magic methods <http://php.net/manual/en/language.oop5.magic.php>`_
+* `Mail related functions <http://www.php.net/manual/en/book.mail.php>`_
 * `Marco Pivetta tweet <https://twitter.com/Ocramius/status/811504929357660160>`_
 * `Math predefined constants <http://php.net/manual/en/math.constants.php>`_
 * `Mathematical Functions <http://php.net/manual/en/book.math.php>`_
@@ -1787,8 +1817,11 @@ List of external links mentionned in this documentation.
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
 * `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_
+* `Output Buffering Control <http://php.net/manual/en/book.outcontrol.php>`_
 * `Overload <http://php.net/manual/en/language.oop5.overloading.php#object.get>`_
 * `Packagist <https://packagist.org/>`_
+* `Parsekit <http://www.php.net/manual/en/book.parsekit.php>`_
+* `Parsing and Lexing <http://php.net/manual/en/book.parle.php>`_
 * `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_
 * `PCRE <http://php.net/pcre>`_
 * `PEAR <http://pear.php.net/>`_
@@ -1803,6 +1836,7 @@ List of external links mentionned in this documentation.
 * `PHP Options/Info Functions <http://php.net/manual/en/ref.info.php>`_
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
+* `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_
 * `PHP Tags <http://php.net/manual/en/language.basic-syntax.phptags.php>`_
 * `php-zbarcode <https://github.com/mkoppanen/php-zbarcode>`_
 * `PostgreSQL <http://php.net/manual/en/book.pgsql.php>`_
@@ -1858,6 +1892,7 @@ List of external links mentionned in this documentation.
 * `tokenizer <http://www.php.net/tokenizer>`_
 * `tokyo_tyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
 * `trader <https://pecl.php.net/package/trader>`_
+* `Traits <http://php.net/manual/en/language.oop5.traits.php>`_
 * `Traits <http://php.net/trait>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_

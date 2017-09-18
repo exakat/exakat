@@ -101,6 +101,10 @@ Glossary
 
       + :ref:`Slow Functions <slow-functions>`
 
+    + `array_values()`
+
+      + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
+
     + `array_walk()`
 
       + :ref:`Altering Foreach Without Reference <altering-foreach-without-reference>`
@@ -115,6 +119,10 @@ Glossary
     + `Break`
 
       + :ref:`Break With 0 <break-with-0>`
+
+    + `basename()`
+
+      + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 
     + `break`
 
@@ -217,6 +225,7 @@ Glossary
     + `dirname()`
 
       + :ref:`PHP7 Dirname <php7-dirname>`
+      + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 
     + `do..while()`
 
@@ -318,6 +327,7 @@ Glossary
 
     + `func_get_args()`
 
+      + :ref:`Ellipsis Usage <ellipsis-usage>`
       + :ref:`Wrong Number Of Arguments <wrong-number-of-arguments>`
       + :ref:`func_get_arg() Modified <func\_get\_arg()-modified>`
 
@@ -492,6 +502,10 @@ Glossary
       + :ref:`Register Globals <register-globals>`
       + :ref:`parse_str() Warning <parse\_str()-warning>`
 
+    + `parse_url()`
+
+      + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
+
     + `password_hash()`
 
       + :ref:`Compare Hash <compare-hash>`
@@ -503,7 +517,9 @@ Glossary
 
     + `pathinfo()`
 
+      + :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
       + :ref:`Use Pathinfo <use-pathinfo>`
+      + :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 
     + `phpinfo()`
 
