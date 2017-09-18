@@ -30,7 +30,7 @@ class DontEchoError extends Analyzer {
         $errorMessageFunctions = $this->loadIni('errorMessageFunctions.ini', 'functions');
         $errorMessageFunctions = $this->makeFullNsPath($errorMessageFunctions);
         
-        $displayFunctions = array('\\echo', '\\print', '\\die', '\\exit');
+        $displayFunctions = $this->loadIni('displayFunctions.ini', 'functions');
         
         $this->atomFunctionIs($displayFunctions)
              ->outIs('ARGUMENT')
