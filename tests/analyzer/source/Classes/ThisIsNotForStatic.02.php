@@ -1,7 +1,15 @@
 <?php
 
 class x {
-    function staticMethod() {
+    static function staticMethodUsingThis() {
+        self::$property;
+        self::methodCall();
+        $this->method();
+        
+        function () { return self::$property; };
+    }
+
+    static function staticMethod() {
         self::$property;
         self::methodCall();
         
@@ -17,7 +25,15 @@ class x {
 }
 
 trait t {
-    function staticMethodInTrait() {
+    static function staticTraitMethodUsingThis() {
+        self::$property;
+        self::methodCall();
+        $this->method();
+        
+        function () { return self::$property; };
+    }
+
+    static function staticMethodInTrait() {
         self::$propertyInTrait;
         self::methodCallInTrait();
         
