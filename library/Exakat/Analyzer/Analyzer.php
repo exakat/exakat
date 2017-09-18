@@ -726,7 +726,11 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         } elseif (is_int($value)) {
             $this->addMethod('not(has("'.$property.'", ***))', $value);
         } elseif (is_string($value)) {
-            $this->addMethod('has("'.$property.'", ***)', $value);
+            if (empty($value)) {
+                $this->addMethod('not(has("'.$property.'", ""))');
+            } else {
+                $this->addMethod('not(has("'.$property.'", ***))', $value);
+            }
         } elseif (is_array($value)) {
             if (!empty($value)) {
                 $this->addMethod('not(has("'.$property.'", within(***)))', $value);
