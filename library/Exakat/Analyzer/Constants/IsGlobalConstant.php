@@ -49,14 +49,15 @@ class IsGlobalConstant extends Analyzer {
         $this->analyzerIs('Constants/ConstantUsage')
              ->tokenIs('T_STRING')
              ->atomIsNot(array('Boolean', 'Null'))
-             ->hasNoIn(array('ALIAS', 'NAME'))
+             ->hasNoIn('ALIAS')
+             ->raw('not( where( __.in("NAME").hasLabel("Constant")) )')
 
              // Exclude PHP constants
              ->fullnspathIsNot($constantsFullNs)
 
             // Check that the final fullnspath is actually \something (no multiple \)
-             ->raw('filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }');
-
+             ->raw('filter{ (it.get().value("fullnspath") =~ "^\\\\\\\\[^\\\\\\\\]+\\$").getCount() == 1 }')
+             ;
         $this->prepareQuery();
     }
 }
