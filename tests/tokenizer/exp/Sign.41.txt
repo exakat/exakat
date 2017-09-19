@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.41.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-            Label : ARGUMENT
-              -
-              Label : LEFT
-                -1
-              Label : RIGHT
-                $c
-            Label : ARGUMENT
-              D
+          Label : ARGUMENT
+            $b
+          Label : ARGUMENT
+            -
+            Label : LEFT
+              -1
+            Label : RIGHT
+              $c
+          Label : ARGUMENT
+            D
           Label : NAME
             a

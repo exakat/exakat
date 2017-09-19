@@ -1,34 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            EOL
-            Label : ARGUMENT
-              <<<EOL
+          Label : ARGUMENT
+            <<<EOL
 
-              Label : CONCAT
-                a
-              Label : CONCAT
-                b
-              Label : CONCAT
-                "  "
-              Label : CONCAT
-                [
-                Label : INDEX
-                  $d
-                Label : VARIABLE
-                  c
-              Label : CONCAT
-                "
+            Label : CONCAT
+              a
+            Label : CONCAT
+              b
+            Label : CONCAT
+              "  "
+            Label : CONCAT
+              [
+              Label : INDEX
+                $d
+              Label : VARIABLE
+                c
+            Label : CONCAT
+              "
 
           Label : NAME
             print

@@ -1,124 +1,107 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.70.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
           Label : RIGHT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-                Label : DEFAULT
-                  3
-            Label : BLOCK
-              {}
-              Label : ELEMENT
-                Void
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $b
-          Label : RIGHT
-            function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-                Label : DEFAULT
-                  2
-            Label : BLOCK
-              {}
-              Label : ELEMENT
-                Void
-        Label : ELEMENT
-          b1
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
-          Label : NAME
-            b1
-        Label : ELEMENT
-          b2
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
-          Label : NAME
-            b2
-        Label : ELEMENT
-          b3
-          Label : ARGUMENTS
-            (
             Label : ARGUMENT
               $a
               Label : DEFAULT
                 3
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              Void
-          Label : NAME
-            b3
-        Label : ELEMENT
-          b4
-          Label : ARGUMENTS
-            (
+            Label : BLOCK
+              {}
+              Label : EXPRESSION
+                Void
+        Label : EXPRESSION
+          =
+          Label : LEFT
+            $b
+          Label : RIGHT
+            function
             Label : ARGUMENT
               $b
               Label : DEFAULT
                 2
+            Label : BLOCK
+              {}
+              Label : EXPRESSION
+                Void
+        Label : EXPRESSION
+          b1
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
+              Void
+          Label : NAME
+            b1
+        Label : EXPRESSION
+          b2
+          Label : ARGUMENT
+            Void
+          Label : BLOCK
+            {}
+            Label : EXPRESSION
+              Void
+          Label : NAME
+            b2
+        Label : EXPRESSION
+          b3
+          Label : ARGUMENT
+            $a
+            Label : DEFAULT
+              3
+          Label : BLOCK
+            {}
+            Label : EXPRESSION
+              Void
+          Label : NAME
+            b3
+        Label : EXPRESSION
+          b4
+          Label : ARGUMENT
+            $b
+            Label : DEFAULT
+              2
+          Label : BLOCK
+            {}
+            Label : EXPRESSION
               Void
           Label : NAME
             b4
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

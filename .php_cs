@@ -1,20 +1,20 @@
 <?php
-$finder = Symfony\CS\Finder\DefaultFinder::create()
-    ->files()
-    ->in('library/Tokenizer')
-    ->in('library/Analyzer')
-    ->in('library/Tasks')
+
+$finder = PhpCsFixer\Finder::create()
+    ->in('./library/Exakat/Tokenizer')
+    ->in('./library/Exakat/Analyzer')
+    ->in('./library/Exakat/Tasks')
     ->name('*.php');
 
-return Symfony\CS\Config\Config::create()
-    ->level(\Symfony\CS\FixerInterface::NONE_LEVEL)
-    ->fixers(
+return PhpCsFixer\Config::create()
+    ->setRules(        
         array(
-        'encoding',
-        'eof_ending',
-        'elseif',
-        'trailing_spaces',
-        'indentation'
+        'encoding' => true,
+        'line_ending' => true,
+        'elseif' => true,
+        'no_trailing_whitespace' => true,
+        'indentation_type' => true
         )
     )
-    ->finder($finder);
+    ->setFinder($finder)
+;

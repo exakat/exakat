@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             [
@@ -17,63 +16,53 @@ Label : PROJECT
               $a
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
+              Label : ARGUMENT
+                'I'
+              Label : ARGUMENT
+                J
                 Label : ARGUMENT
-                  'I'
-                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'K'
+                  Label : VARIABLE
+                    $d
+                Label : NAME
                   J
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'K'
-                      Label : VARIABLE
-                        $d
-                  Label : NAME
-                    J
-                Label : ARGUMENT
-                  'L'
+              Label : ARGUMENT
+                'L'
               Label : NAME
                 echo
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'D'
+                Label : VARIABLE
+                  $b
+              Label : NAME
                 echo
+            Label : EXPRESSION
+              D
+            Label : EXPRESSION
+              echo
+              Label : ARGUMENT
+                F
                 Label : ARGUMENT
                   [
                   Label : INDEX
-                    'D'
+                    'G'
                   Label : VARIABLE
-                    $b
-              Label : NAME
-                echo
-            Label : ELEMENT
-              D
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
+                    $c
+                Label : NAME
                   F
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'G'
-                      Label : VARIABLE
-                        $c
-                  Label : NAME
-                    F
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               G

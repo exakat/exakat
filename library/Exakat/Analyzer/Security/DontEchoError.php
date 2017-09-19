@@ -30,8 +30,9 @@ class DontEchoError extends Analyzer {
         $errorMessageFunctions = $this->loadIni('errorMessageFunctions.ini', 'functions');
         $errorMessageFunctions = $this->makeFullNsPath($errorMessageFunctions);
         
-        $this->atomFunctionIs(array('\\echo', '\\print', '\\die', '\\exit'))
-             ->outIs('ARGUMENTS')
+        $displayFunctions = $this->loadIni('displayFunctions.ini', 'functions');
+        
+        $this->atomFunctionIs($displayFunctions)
              ->outIs('ARGUMENT')
              ->atomIs('Functioncall')
              ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
@@ -41,8 +42,7 @@ class DontEchoError extends Analyzer {
         $this->prepareQuery();
 
         // echo 'error '.pg_error();
-        $this->atomFunctionIs(array('\\echo', '\\print', '\\die', '\\exit'))
-             ->outIs('ARGUMENTS')
+        $this->atomFunctionIs($displayFunctions)
              ->outIs('ARGUMENT')
              ->atomIs('Concatenation')
              ->outIs('CONCAT')
@@ -50,6 +50,44 @@ class DontEchoError extends Analyzer {
              ->raw('where( __.out("NAME").hasLabel("Array", "Variable", "Member", "Staticproperty", "Methodcall", "Staticmethodcall").count().is(eq(0)))')
              ->fullnspathIs($errorMessageFunctions)
              ->back('first');
+        $this->prepareQuery();
+        
+        // try {} catch ($e) { echo $e->getMessage(); }
+        $this->atomIs('Try')
+             ->outIs('CATCH')
+             ->outIs('VARIABLE')
+             ->savePropertyAs('code', 'exception')
+             ->inIs('VARIABLE')
+             ->outIs('BLOCK')
+             ->atomInside('Methodcall')
+             ->outIs('OBJECT')
+             ->samePropertyAs('code', 'exception')
+             ->inIs('OBJECT')
+             ->outIs('METHOD')
+             ->codeIs(array('getMessage', 'getTraceAsString'))
+             ->inIs('METHOD')
+             ->inIs('ARGUMENT')
+             ->atomIs('Functioncall')
+             ->has('fullnspath')
+             ->fullnspathIs($displayFunctions);
+        $this->prepareQuery();
+
+        // try {} catch ($e) { echo $e.PHP_EOL; }
+        $this->atomIs('Try')
+             ->outIs('CATCH')
+             ->outIs('VARIABLE')
+             ->savePropertyAs('code', 'exception')
+             ->inIs('VARIABLE')
+             ->outIs('BLOCK')
+             ->atomInside('Functioncall')
+             ->has('fullnspath')
+             ->_as('results')
+             ->fullnspathIs($displayFunctions)
+             ->outIs('ARGUMENT')
+             ->outIsIE('CONCAT')
+             ->atomIs('Variable')
+             ->samePropertyAs('code', 'exception')
+             ->back('results');
         $this->prepareQuery();
     }
 }

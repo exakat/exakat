@@ -82,7 +82,7 @@ if (file_exists('library/Exakat/Analyzer/'.$category2.'/'.$name2.'.php')) {
 // rename file : 
 rename('library/Exakat/Analyzer/'.$analyzer1.'.php', 'library/Exakat/Analyzer/'.$analyzer2.'.php');
 $php = file_get_contents('library/Exakat/Analyzer/'.$analyzer2.'.php');
-$php = str_replace(array("\\$category1", " $name1 "), array("\\$category2", " $name2 "), $php));
+$php = str_replace(array("\\$category1", " $name1 "), array("\\$category2", " $name2 "), $php);
 file_put_contents('library/Exakat/Analyzer/'.$analyzer2.'.php', $php);
 
 rename('human/en/'.$analyzer1.'.ini', 'human/en/'.$analyzer2.'.ini');
@@ -99,7 +99,7 @@ $id = $sqlite->lastInsertRowID();
 // add test
 rename('tests/analyzer/Test/'.$analyzer1.'.php', 'tests/analyzer/Test/'.$analyzer2.'.php');
 $php = file_get_contents('tests/analyzer/Test/'.$analyzer2.'.php');
-$php = str_replace(array($category1, $name1), array($category2, $name2), $php));
+$php = str_replace(array($category1, $name1), array($category2, $name2), $php);
 file_put_contents('tests/analyzer/Test/'.$analyzer2.'.php', $php);
 
 $sources = glob('tests/analyzer/source/'.$analyzer1.'.*.php');

@@ -1,35 +1,32 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Ternary.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             b
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $c
-              Label : ARGUMENT
-                $d
-              Label : ARGUMENT
-                $e
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              $e
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    g
                   Label : OBJECT
                     $f
-                  Label : PROPERTY
-                    g
                 Label : RIGHT
                   ?
                   Label : CONDITION
@@ -38,10 +35,10 @@ Label : PROJECT
                       ==
                       Label : LEFT
                         ->
+                        Label : MEMBER
+                          i
                         Label : OBJECT
                           $h
-                        Label : PROPERTY
-                          i
                       Label : RIGHT
                         0.0
                   Label : ELSE
@@ -52,10 +49,10 @@ Label : PROJECT
                         $K
                       Label : RIGHT
                         ->
+                        Label : MEMBER
+                          f
                         Label : OBJECT
                           $d
-                        Label : PROPERTY
-                          f
                   Label : THEN
                     NAN
             Label : NAME

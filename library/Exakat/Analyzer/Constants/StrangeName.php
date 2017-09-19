@@ -28,7 +28,7 @@ class StrangeName extends Analyzer {
     public function analyze() {
         $names = $this->loadIni('php_strange_names.ini', 'constants');
         
-        $this->atomIs('Identifier')
+        $this->atomIs(array('Identifier', 'Name'))
              ->codeIs($names);
         $this->prepareQuery();
 

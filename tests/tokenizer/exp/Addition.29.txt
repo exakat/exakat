@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Addition.29.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $maxSize
@@ -22,18 +21,14 @@ Label : PROJECT
                   /
                   Label : LEFT
                     log
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        PHP_INT_MAX
+                    Label : ARGUMENT
+                      PHP_INT_MAX
                     Label : NAME
                       log
                   Label : RIGHT
                     log
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        2
+                    Label : ARGUMENT
+                      2
                     Label : NAME
                       log
               Label : RIGHT

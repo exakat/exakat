@@ -1,42 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Parenthesis.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'a'
-                Label : VALUE
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'a'
+              Label : VALUE
+                require_once
+                Label : ARGUMENT
+                  (
+                  Label : CODE
+                    .
+                    Label : CONCAT
+                      b
+                      Label : ARGUMENT
+                        __FILE__
+                      Label : NAME
+                        b
+                    Label : CONCAT
+                      'c'
+                Label : NAME
                   require_once
-                  Label : ARGUMENTS
-                    )
-                    Label : ARGUMENT
-                      (
-                      Label : CODE
-                        .
-                        Label : CONCAT
-                          b
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              __FILE__
-                          Label : NAME
-                            b
-                        Label : CONCAT
-                          'c'
-                  Label : NAME
-                    require_once

@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           header
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                'a'
-              Label : CONCAT
-                'b'
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              'a'
+            Label : CONCAT
+              'b'
           Label : NAME
             header

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.44.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ||
@@ -16,10 +15,10 @@ Label : PROJECT
               ===
               Label : LEFT
                 ->
+                Label : MEMBER
+                  B
                 Label : OBJECT
                   $a
-                Label : PROPERTY
-                  B
               Label : RIGHT
                 ::
                 Label : CLASS
@@ -32,10 +31,10 @@ Label : PROJECT
                 ==
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    E
                   Label : OBJECT
                     $b
-                  Label : PROPERTY
-                    E
                 Label : RIGHT
                   +
                   Label : SIGN
@@ -48,10 +47,10 @@ Label : PROJECT
                 ===
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    H
                   Label : OBJECT
                     $c
-                  Label : PROPERTY
-                    H
                 Label : RIGHT
                   ::
                   Label : CLASS
@@ -60,14 +59,14 @@ Label : PROJECT
                     J
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  N
                 Label : OBJECT
                   $e
-                Label : PROPERTY
-                  N
               Label : RIGHT
                 ::
                 Label : CLASS
@@ -76,14 +75,14 @@ Label : PROJECT
                   P
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  K
                 Label : OBJECT
                   $d
-                Label : PROPERTY
-                  K
               Label : RIGHT
                 ::
                 Label : CLASS

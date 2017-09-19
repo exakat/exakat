@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.60.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -26,7 +25,7 @@ Label : PROJECT
                 E
             Label : ELSE
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $b
@@ -38,33 +37,31 @@ Label : PROJECT
                     $f
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 .
                 Label : CONCAT
                   C
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      *
-                      Label : LEFT
-                        (
-                        Label : CODE
-                          /
-                          Label : LEFT
-                            0
-                          Label : RIGHT
-                            $c
-                      Label : RIGHT
-                        $d
-                    Label : ARGUMENT
-                      $e
                   Label : NAME
                     C
+                  Label : ARGUMENT
+                    *
+                    Label : LEFT
+                      (
+                      Label : CODE
+                        /
+                        Label : LEFT
+                          0
+                        Label : RIGHT
+                          $c
+                    Label : RIGHT
+                      $d
+                  Label : ARGUMENT
+                    $e
                 Label : CONCAT
                   'D'
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
@@ -72,23 +69,21 @@ Label : PROJECT
                 .
                 Label : CONCAT
                   C
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      *
-                      Label : LEFT
-                        (
-                        Label : CODE
-                          /
-                          Label : LEFT
-                            0
-                          Label : RIGHT
-                            $c
-                      Label : RIGHT
-                        $d
-                    Label : ARGUMENT
-                      $e
                   Label : NAME
                     C
+                  Label : ARGUMENT
+                    *
+                    Label : LEFT
+                      (
+                      Label : CODE
+                        /
+                        Label : LEFT
+                          0
+                        Label : RIGHT
+                          $c
+                    Label : RIGHT
+                      $d
+                  Label : ARGUMENT
+                    $e
                 Label : CONCAT
                   'D'

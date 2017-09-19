@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.34.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -30,31 +29,27 @@ Label : PROJECT
               ->
               Label : METHOD
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      ::
-                      Label : CLASS
-                        D
-                      Label : METHOD
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    ::
+                    Label : CLASS
+                      D
+                    Label : METHOD
+                      E
+                      Label : ARGUMENT
+                        Void
+                      Label : NAME
                         E
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          E
-                    Label : CONCAT
-                      'F'
+                  Label : CONCAT
+                    'F'
                 Label : NAME
                   C
               Label : OBJECT
                 $c
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $d

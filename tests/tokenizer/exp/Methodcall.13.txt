@@ -1,399 +1,324 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Methodcall.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               B
           Label : OBJECT
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               D
           Label : OBJECT
             ->
             Label : METHOD
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 C
             Label : OBJECT
               $b
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             H
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               H
           Label : OBJECT
             ->
             Label : METHOD
               G
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 G
             Label : OBJECT
               ->
               Label : METHOD
                 F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   F
               Label : OBJECT
                 $e
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             H1
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               H1
           Label : OBJECT
             ->
             Label : METHOD
               G1
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  B1
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     B1
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      B1
-                  Label : OBJECT
-                    $a1
+                Label : OBJECT
+                  $a1
               Label : NAME
                 G1
             Label : OBJECT
               ->
               Label : METHOD
                 F1
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   F1
               Label : OBJECT
                 $e1
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             H2
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : METHOD
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                B2
+                Label : ARGUMENT
+                  Void
+                Label : NAME
                   B2
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    B2
-                Label : OBJECT
-                  $a2
+              Label : OBJECT
+                $a2
             Label : NAME
               H2
           Label : OBJECT
             ->
             Label : METHOD
               G2
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 G2
             Label : OBJECT
               ->
               Label : METHOD
                 F2
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   F2
               Label : OBJECT
                 $e2
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             H3
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               H3
           Label : OBJECT
             ->
             Label : METHOD
               G3
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 G3
             Label : OBJECT
               ->
               Label : METHOD
                 F3
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : METHOD
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    B3
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
                       B3
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        B3
-                    Label : OBJECT
-                      $a3
+                  Label : OBJECT
+                    $a3
                 Label : NAME
                   F3
               Label : OBJECT
                 $e3
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             H4
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               H4
           Label : OBJECT
             ->
             Label : METHOD
               G4
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 G4
             Label : OBJECT
               ->
               Label : METHOD
                 F4
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
+                Label : ARGUMENT
+                  ->
+                  Label : METHOD
+                    C4
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
+                      C4
+                  Label : OBJECT
                     ->
                     Label : METHOD
-                      C4
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      B4
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
-                        C4
-                    Label : OBJECT
-                      ->
-                      Label : METHOD
                         B4
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          B4
-                      Label : OBJECT
-                        $a4
+                    Label : OBJECT
+                      $a4
                 Label : NAME
                   F4
               Label : OBJECT
                 $e4
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             I5
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : METHOD
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                K5
+                Label : ARGUMENT
+                  Void
+                Label : NAME
                   K5
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    K5
-                Label : OBJECT
-                  $j
+              Label : OBJECT
+                $j
             Label : NAME
               I5
           Label : OBJECT
             ->
             Label : METHOD
               H5
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 H5
             Label : OBJECT
               ->
               Label : METHOD
                 G5
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   G5
               Label : OBJECT
                 ->
                 Label : METHOD
                   F5
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      C5
+                      Label : ARGUMENT
+                        Void
+                      Label : NAME
+                        C5
+                    Label : OBJECT
                       ->
                       Label : METHOD
-                        C5
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
+                        B5
+                        Label : ARGUMENT
+                          Void
                         Label : NAME
-                          C5
-                      Label : OBJECT
-                        ->
-                        Label : METHOD
                           B5
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            B5
-                        Label : OBJECT
-                          $a5
+                      Label : OBJECT
+                        $a5
                   Label : NAME
                     F5
                 Label : OBJECT
                   $e5
-        Label : ELEMENT
+        Label : EXPRESSION
           [
           Label : INDEX
             ->
             Label : METHOD
               I5
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  K5
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     K5
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      K5
-                  Label : OBJECT
-                    $j
+                Label : OBJECT
+                  $j
               Label : NAME
                 I5
             Label : OBJECT
               ->
               Label : METHOD
                 H5
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   H5
               Label : OBJECT
                 ->
                 Label : METHOD
                   G5
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     G5
                 Label : OBJECT
                   ->
                   Label : METHOD
                     F5
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        C5
+                        Label : ARGUMENT
+                          Void
+                        Label : NAME
+                          C5
+                      Label : OBJECT
                         ->
                         Label : METHOD
-                          C5
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
+                          B5
+                          Label : ARGUMENT
+                            Void
                           Label : NAME
-                            C5
-                        Label : OBJECT
-                          ->
-                          Label : METHOD
                             B5
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
-                            Label : NAME
-                              B5
-                          Label : OBJECT
-                            $a5
+                        Label : OBJECT
+                          $a5
                     Label : NAME
                       F5
                   Label : OBJECT

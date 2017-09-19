@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.63.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             is_null
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $y
+            Label : ARGUMENT
+              $y
             Label : NAME
               is_null
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 [
@@ -32,7 +29,7 @@ Label : PROJECT
                     2
                 Label : VARIABLE
                   $x
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             1

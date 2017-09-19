@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 1 :  /**/  
               Label : CASE
                 1
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
@@ -26,13 +25,13 @@ Label : PROJECT
                     1
           Label : NAME
             $x
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $x
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $y

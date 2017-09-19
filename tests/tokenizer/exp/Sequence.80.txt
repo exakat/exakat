@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.80.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'C'
+              Label : ARGUMENT
+                'C'
               Label : NAME
                 B
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
@@ -30,47 +27,43 @@ Label : PROJECT
                   $a
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   D
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $a
-                    Label : ARGUMENT
-                      $b
-                    Label : ARGUMENT
-                      $c
-                      Label : DEFAULT
-                        0
-                    Label : ARGUMENT
-                      $d
-                      Label : DEFAULT
-                        E
+                  Label : ARGUMENT
+                    $a
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    $c
+                    Label : DEFAULT
+                      0
+                  Label : ARGUMENT
+                    $d
+                    Label : DEFAULT
+                      E
                   Label : BLOCK
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
                   Label : NAME
                     D
-            Label : ELEMENT
+            Label : EXPRESSION
               F
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $e
-                Label : ARGUMENT
-                  $f
-                Label : ARGUMENT
-                  $g
-                Label : ARGUMENT
-                  $h
-                  Label : DEFAULT
-                    'G'
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                $f
+              Label : ARGUMENT
+                $g
+              Label : ARGUMENT
+                $h
+                Label : DEFAULT
+                  'G'
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
               Label : NAME
                 F
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

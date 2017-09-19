@@ -1,78 +1,71 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 C
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 empty
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $a
-                    Label : PROPERTY
-                      D
+                Label : ARGUMENT
+                  ->
+                  Label : MEMBER
+                    D
+                  Label : OBJECT
+                    $a
                 Label : NAME
                   empty
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     Void
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           D
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              =
-              Label : LEFT
-                $b
-              Label : RIGHT
-                F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $c
-                    Label : PROPERTY
-                      G
-                Label : NAME
-                  F
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                >
-                Label : LEFT
-                  $d
-                Label : RIGHT
-                  0
-              Label : ELSE
-                'I'
-              Label : THEN
-                'H'
           Label : NAME
             echo
-    Label : ELEMENT
+          Label : ARGUMENT
+            =
+            Label : LEFT
+              $b
+            Label : RIGHT
+              F
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  G
+                Label : OBJECT
+                  $c
+              Label : NAME
+                F
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              >
+              Label : LEFT
+                $d
+              Label : RIGHT
+                0
+            Label : ELSE
+              'I'
+            Label : THEN
+              'H'
+    Label : EXPRESSION
       I

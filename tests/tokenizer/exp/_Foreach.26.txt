@@ -1,68 +1,63 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 is_array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
+                Label : ARGUMENT
+                  ->
+                  Label : MEMBER
+                    f
+                  Label : OBJECT
                     ->
+                    Label : MEMBER
+                      e
                     Label : OBJECT
-                      ->
-                      Label : OBJECT
-                        $d
-                      Label : PROPERTY
-                        e
-                    Label : PROPERTY
-                      f
+                      $d
                 Label : NAME
                   is_array
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $g
                   Label : RIGHT
                     h
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $i
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          ->
-                          Label : OBJECT
-                            $j
-                          Label : PROPERTY
-                            k
-                        Label : PROPERTY
-                          l
                     Label : NAME
                       h
+                    Label : ARGUMENT
+                      $i
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        l
+                      Label : OBJECT
+                        ->
+                        Label : MEMBER
+                          k
+                        Label : OBJECT
+                          $j
           Label : SOURCE
             ->
+            Label : MEMBER
+              b
             Label : OBJECT
               $a
-            Label : PROPERTY
-              b
           Label : VALUE
             $c
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $m
@@ -70,9 +65,7 @@ Label : PROJECT
             new
             Label : NEW
               m
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $o
+              Label : ARGUMENT
+                $o
               Label : NAME
                 m

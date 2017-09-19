@@ -30,7 +30,6 @@ class ListWithKeys extends Analyzer {
     public function analyze() {
         // list( 3 => $a);
         $this->atomFunctionIs('\\list')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->back('first');
@@ -39,7 +38,6 @@ class ListWithKeys extends Analyzer {
         // list( 3 => $a);
         $this->atomIs('Arrayliteral')
              ->hasIn('LEFT')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->back('first');

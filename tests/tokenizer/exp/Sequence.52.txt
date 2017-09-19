@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.52.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a
+              Label : ARGUMENT
+                $a
               Label : NAME
                 empty
           Label : ELSE
@@ -25,86 +22,74 @@ Label : PROJECT
               !
               Label : NOT
                 empty
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
+                Label : ARGUMENT
+                  $c
                 Label : NAME
                   empty
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 F
     
-              Label : ELEMENT
+              Label : EXPRESSION
                 print
-                Label : ARGUMENTS
+                Label : ARGUMENT
                   $d
-                  Label : ARGUMENT
-                    $d
                 Label : NAME
                   print
-              Label : ELEMENT
+              Label : EXPRESSION
                 G
 
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               D
     
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
+              Label : ARGUMENT
                 $b
-                Label : ARGUMENT
-                  $b
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               E
 
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-        Label : ELEMENT
+        Label : EXPRESSION
           H
 
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $e
+              Label : ARGUMENT
+                $e
               Label : NAME
                 empty
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               J
     
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                $h
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  f
+                  Label : ARGUMENT
+                    'g'
+                  Label : NAME
                     f
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'g'
-                    Label : NAME
-                      f
-                  Label : CONCAT
-                    $h
+                Label : CONCAT
+                  $h
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               K
 
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

@@ -1,184 +1,151 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_For.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           for
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               C
-            Label : ELEMENT
+            Label : EXPRESSION
               D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 D
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'E'
-                  Label : CONCAT
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  'E'
+                Label : CONCAT
+                  F
+                  Label : ARGUMENT
+                    'G'
+                  Label : NAME
                     F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'G'
-                    Label : NAME
-                      F
-                  Label : CONCAT
-                    'H'
+                Label : CONCAT
+                  'H'
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               I
-            Label : ELEMENT
+            Label : EXPRESSION
               J
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 J
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 K
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'L'
+                Label : ARGUMENT
+                  'L'
                 Label : NAME
                   K
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   M
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      F
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'O'
-                      Label : NAME
-                        F
-                  Label : NAME
-                    echo
-                Label : ELEMENT
-                  Void
-                Label : ELEMENT
-                  P
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      Q
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : NAME
-                        Q
-                  Label : NAME
-                    echo
-            Label : ELEMENT
-              R
-            Label : ELEMENT
-              S
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'T'
-                Label : ARGUMENT
-                  F
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'V'
-                  Label : NAME
+                  Label : ARGUMENT
                     F
-                Label : ARGUMENT
-                  'W'
-              Label : NAME
-                S
-            Label : ELEMENT
-              X
-            Label : ELEMENT
-              Y
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : NAME
-                Y
-            Label : ELEMENT
-              Z
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  0
-              Label : NAME
-                Z
-            Label : ELEMENT
-              AA
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'AB'
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'AD'
+                    Label : ARGUMENT
+                      'O'
                     Label : NAME
                       F
-                  Label : CONCAT
-                    'AE'
+                  Label : NAME
+                    echo
+                Label : EXPRESSION
+                  Void
+                Label : EXPRESSION
+                  P
+                Label : EXPRESSION
+                  echo
+                  Label : ARGUMENT
+                    Q
+                    Label : ARGUMENT
+                      Void
+                    Label : NAME
+                      Q
+                  Label : NAME
+                    echo
+            Label : EXPRESSION
+              R
+            Label : EXPRESSION
+              S
+              Label : ARGUMENT
+                'T'
+              Label : ARGUMENT
+                F
                 Label : ARGUMENT
-                  'AF'
-                Label : ARGUMENT
-                  'AG'
+                  'V'
+                Label : NAME
+                  F
+              Label : ARGUMENT
+                'W'
+              Label : NAME
+                S
+            Label : EXPRESSION
+              X
+            Label : EXPRESSION
+              Y
+              Label : ARGUMENT
+                Void
+              Label : NAME
+                Y
+            Label : EXPRESSION
+              Z
+              Label : ARGUMENT
+                0
+              Label : NAME
+                Z
+            Label : EXPRESSION
+              AA
+              Label : ARGUMENT
+                'AB'
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  F
+                  Label : ARGUMENT
+                    'AD'
+                  Label : NAME
+                    F
+                Label : CONCAT
+                  'AE'
+              Label : ARGUMENT
+                'AF'
+              Label : ARGUMENT
+                'AG'
               Label : NAME
                 AA
-            Label : ELEMENT
+            Label : EXPRESSION
               AH
           Label : FINAL
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 B
           Label : INCREMENT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : INIT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               Void

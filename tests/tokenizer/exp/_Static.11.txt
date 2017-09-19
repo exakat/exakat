@@ -1,16 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Static.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             static
-          Label : PROPERTY
+          Label : MEMBER
             $B

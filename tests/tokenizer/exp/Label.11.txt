@@ -1,48 +1,45 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Label.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             0
-        Label : ELEMENT
+        Label : EXPRESSION
           try
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 C
           Label : CATCH
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : CLASS
               \D
             Label : VARIABLE
               $b
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             E
-        Label : ELEMENT
+        Label : EXPRESSION
           $c

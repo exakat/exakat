@@ -2,11 +2,12 @@
 
 $expected     = array("'callableString'", 
                      "'MyClass::myCallbackMethod'", 
-                     "'string', 'string'",
+                     'array(\'string\', \'string\')',
                      '$c1',
                      '$c2',
                      '$array4',
-                     '$array2');
+                     '$array2',
+                     );
 
 $expected_not = array( '$c3',
                        'c3',
@@ -15,7 +16,7 @@ $expected_not = array( '$c3',
                        '$array2', 
                        '\'b\'',
                        '$a1',
-                       '$a2'
+                       '$a2',
                        );
 
 ?>

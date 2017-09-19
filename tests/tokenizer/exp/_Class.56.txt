@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.56.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : ABSTRACT
             abstract
           Label : METHOD
             a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $x
@@ -38,10 +35,8 @@ Label : PROJECT
             b
             Label : ABSTRACT
               abstract
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               Void
             Label : NAME

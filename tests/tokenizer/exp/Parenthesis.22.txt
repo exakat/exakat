@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Parenthesis.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ?
               Label : CONDITION
                 (
@@ -20,10 +19,8 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     B
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       B
                   Label : OBJECT
@@ -32,18 +29,14 @@ Label : PROJECT
                 @
                 Label : AT
                   D
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
+                  Label : ARGUMENT
+                    $c
                   Label : NAME
                     D
               Label : THEN
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
+                Label : ARGUMENT
+                  $c
                 Label : NAME
                   C
           Label : SOURCE

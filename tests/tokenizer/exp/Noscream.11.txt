@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Noscream.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -18,10 +17,8 @@ Label : PROJECT
               @
               Label : AT
                 function_exists
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'b'
+                Label : ARGUMENT
+                  'b'
                 Label : NAME
                   function_exists
             Label : ELSE

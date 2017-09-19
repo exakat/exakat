@@ -1,45 +1,36 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.69.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       B
-    Label : ELEMENT
+    Label : EXPRESSION
       <?=
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            C
             Label : ARGUMENT
+              'D'
+            Label : NAME
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'D'
-              Label : NAME
-                C
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            E
             Label : ARGUMENT
+              'F'
+            Label : NAME
               E
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'F'
-              Label : NAME
-                E
           Label : NAME
             <?=
-        Label : ELEMENT
+        Label : EXPRESSION
           G
-        Label : ELEMENT
+        Label : EXPRESSION
           ++
           Label : POSTPLUSPLUS
             $a

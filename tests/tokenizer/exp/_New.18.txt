@@ -1,32 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_New.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $y
           Label : RIGHT
             'a'
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             C
           Label : METHOD
             a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   'b'
@@ -46,7 +43,7 @@ Label : PROJECT
               public
             Label : STATIC
               static
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
@@ -58,9 +55,7 @@ Label : PROJECT
                 C
               Label : METHOD
                 $y
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   $y

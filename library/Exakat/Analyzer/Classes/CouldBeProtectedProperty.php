@@ -27,22 +27,24 @@ use Exakat\Analyzer\Analyzer;
 class CouldBeProtectedProperty extends Analyzer {
     public function analyze() {
         // Case of property->property (that's another public access)
-        $publicProperties = $this->query('g.V().hasLabel("Member")
-                                              .where( __.out("OBJECT").not(has("code", "\$this")) )
-                                              .out("MEMBER")
-                                              .hasLabel("Identifier")
-                                              .values("code").unique()');
+        $query = <<<GREMLIN
+g.V().hasLabel("Member")
+     .not( __.where( __.out("OBJECT").has("code", "\\\$this") ) )
+     .out("MEMBER")
+     .hasLabel("Name")
+          .values("fullcode").unique()
+GREMLIN;
+        $publicProperties = $this->query($query);
         
-        if (!empty($publicProperties)) {
             // Member that is not used outside this class or its children
             $this->atomIs('Ppp')
                  ->hasNoOut(array('PROTECTED', 'PRIVATE'))
                  ->hasNoOut('STATIC')
+                 ->hasClass()
                  ->outIs('PPP')
                  ->isNot('propertyname', $publicProperties);
             $this->prepareQuery();
-        }
-        
+
         // Case of property::property (that's another public access)
         $res = $this->query('g.V().hasLabel("Staticproperty").as("init")
                                   .out("CLASS").hasLabel("Identifier", "Nsname")
@@ -57,7 +59,7 @@ class CouldBeProtectedProperty extends Analyzer {
                                   .select("classe", "variable").by("fullnspath").by("code")
                                   .unique();
                                   ');
-
+        
         $publicStaticProperties = array();
         foreach($res as $value) {
             if (isset($publicStaticProperties[$value->classe])) {

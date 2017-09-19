@@ -13,8 +13,9 @@ $expected     = array('true ? $x : $y',
                       '[\'a\' => 123, \'b\' => 456] ? $x : $y',
                       '[\'a\', \'b\', \'c\'] ? $x : $y',
                       'array(\'a\', \'b\', \'c\') ? $x : $y',
-);
+                      );
 
-$expected_not = array('$a ? $x : $y');
+$expected_not = array('$a ? $x : $y',
+                     );
 
 ?>

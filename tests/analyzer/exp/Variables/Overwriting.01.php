@@ -10,8 +10,10 @@ $expected     = array('$m = static::M($m, $n)',
                       '$b = B($b, \'J\', K)', 
                       '$p = str_replace(\'X\', \'Y\', $p)', 
                       '$e = $f . $g . $h . $e . $i . $j', 
-                      '$m = self::M($m, $n)');
+                      '$m = self::M($m, $n)',
+                      );
 
-$expected_not = array('$o = (array) $o');
+$expected_not = array('$o = (array) $o',
+                     );
 
 ?>

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Comparison.24.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -26,22 +25,20 @@ Label : PROJECT
                   -
                   Label : LEFT
                     c
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        .
+                        Label : CONCAT
+                          'f'
+                        Label : CONCAT
+                          $g
+                      Label : VARIABLE
                         [
                         Label : INDEX
-                          .
-                          Label : CONCAT
-                            'f'
-                          Label : CONCAT
-                            $g
+                          'e'
                         Label : VARIABLE
-                          [
-                          Label : INDEX
-                            'e'
-                          Label : VARIABLE
-                            $d
+                          $d
                     Label : NAME
                       c
                   Label : RIGHT
@@ -50,13 +47,11 @@ Label : PROJECT
                   0
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               i
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'j'
-                Label : ARGUMENT
-                  'k'
               Label : NAME
                 i
+              Label : ARGUMENT
+                'j'
+              Label : ARGUMENT
+                'k'

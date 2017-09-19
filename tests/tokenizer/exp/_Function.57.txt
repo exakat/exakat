@@ -1,97 +1,74 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.57.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               C
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                array
                 Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      __CLASS__
-                    Label : ARGUMENT
-                      'D'
+                  __CLASS__
+                Label : ARGUMENT
+                  'D'
               Label : NAME
                 C
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           B1
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                )
-                Label : ARGUMENT
-                  (
-                  Label : CODE
-                    array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        __CLASS__
-                      Label : ARGUMENT
-                        'D'
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  array
+                  Label : ARGUMENT
+                    __CLASS__
+                  Label : ARGUMENT
+                    'D'
               Label : NAME
                 print
           Label : NAME
             B1
-        Label : ELEMENT
+        Label : EXPRESSION
           B2
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               C
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                array
                 Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      __CLASS__
-                    Label : ARGUMENT
-                      'D'
+                  __CLASS__
+                Label : ARGUMENT
+                  'D'
               Label : NAME
                 C
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                )
+              Label : ARGUMENT
+                array
                 Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      __CLASS__
-                    Label : ARGUMENT
-                      'D'
+                  __CLASS__
+                Label : ARGUMENT
+                  'D'
               Label : NAME
                 print
           Label : NAME

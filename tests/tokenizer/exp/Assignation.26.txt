@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Assignation.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
@@ -16,9 +15,9 @@ Label : PROJECT
             instanceof
             Label : CLASS
               ->
+              Label : MEMBER
+                c
               Label : OBJECT
                 $z
-              Label : PROPERTY
-                c
             Label : VARIABLE
               $y

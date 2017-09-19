@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array("break 0");
+$expected     = array("break 0",
+                     );
 
-$expected_not = array();
+$expected_not = array('break null',
+                     );
 
 ?>

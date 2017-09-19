@@ -3,9 +3,11 @@
 $expected     = array('function e( ) { /**/ } ',
                       'function b( ) { /**/ } ',
                       'function c( ) { /**/ } ',
-                      'function d( ) { /**/ } ');
+                      'function d( ) { /**/ } ',
+                     );
 
 $expected_not = array('function f( ) { /**/ } ',
-                      'function g( ) { /**/ } ');
+                      'function g( ) { /**/ } ',
+                     );
 
 ?>

@@ -1,22 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 D\E\F\C\H
-            Label : ELEMENT
+            Label : EXPRESSION
               interface
               Label : EXTENDS
                 H
@@ -24,10 +23,8 @@ Label : PROJECT
                   D\E\F\C\H
               Label : METHOD
                 K
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : BLOCK
                   Void
                 Label : NAME

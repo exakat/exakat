@@ -1,33 +1,28 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.24.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               call_user_func_array
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $c
-                Label : ARGUMENT
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      $e
               Label : NAME
                 call_user_func_array
+              Label : ARGUMENT
+                $c
+              Label : ARGUMENT
+                array
+                Label : ARGUMENT
+                  $d
+                Label : ARGUMENT
+                  $e
           Label : SOURCE
             $a
           Label : VALUE

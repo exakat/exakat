@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Block.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             setOptions
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $options
+            Label : ARGUMENT
+              $options
             Label : NAME
               setOptions
           Label : OBJECT
             $r
-        Label : ELEMENT
+        Label : EXPRESSION
           {}
-          Label : ELEMENT
+          Label : EXPRESSION
             =
             Label : LEFT
               $b

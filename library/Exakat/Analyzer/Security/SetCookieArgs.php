@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class SetCookieArgs extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs(array('\\setcookie', '\\setrawcookie'))
-             ->outIs('ARGUMENTS')
              ->hasChildWithRank('ARGUMENT', 1) // so the cookie is not destroyed
              ->outWithRank('ARGUMENT', 1)
              ->isNotLiteral()
@@ -37,7 +36,6 @@ class SetCookieArgs extends Analyzer {
         $this->prepareQuery();
 
         $this->atomFunctionIs(array('\\setcookie', '\\setrawcookie'))
-             ->outIs('ARGUMENTS')
              ->hasChildWithRank('ARGUMENT', 1) // so the cookie is not destroyed
              ->outWithRank('ARGUMENT', 1)
              ->isLiteral()

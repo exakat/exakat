@@ -30,4 +30,8 @@ array_udiff_uassoc($a1, $a2, $a32, [$i, 'j'], last);
 // last arg
 array_udiff($a1, $a2, $a33, [$k, 'l']);
 
+// Notpe
+strtolower(['a2', 'b2']);
+
+
 ?>

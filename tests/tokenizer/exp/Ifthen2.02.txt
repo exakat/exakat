@@ -1,27 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen2.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
             Label : LEFT
               isset
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'B'
-                  Label : VARIABLE
-                    $a
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'B'
+                Label : VARIABLE
+                  $a
               Label : NAME
                 isset
             Label : RIGHT
@@ -30,19 +27,17 @@ Label : PROJECT
                 C
               Label : METHOD
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'B'
-                    Label : VARIABLE
-                      $a
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'B'
+                  Label : VARIABLE
+                    $a
                 Label : NAME
                   D
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
@@ -50,13 +45,13 @@ Label : PROJECT
                 'G'
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 F
-        Label : ELEMENT
+        Label : EXPRESSION
           ?
           Label : CONDITION
             (

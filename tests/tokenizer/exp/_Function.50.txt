@@ -1,24 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.50.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             null
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   ''
@@ -30,17 +27,15 @@ Label : PROJECT
               static
           Label : NAME
             C
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             null
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   ''

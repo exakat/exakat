@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           .=
           Label : LEFT
             $x
@@ -20,25 +19,17 @@ Label : PROJECT
               C
             Label : METHOD
               b
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                [
                 Label : ARGUMENT
-                  [
-                  Label : ARGUMENTS
-                    [
-                    Label : ARGUMENT
-                      Void
+                  Void
+              Label : ARGUMENT
+                [
                 Label : ARGUMENT
-                  [
-                  Label : ARGUMENTS
-                    [
-                    Label : ARGUMENT
-                      Void
+                  Void
+              Label : ARGUMENT
+                [
                 Label : ARGUMENT
-                  [
-                  Label : ARGUMENTS
-                    [
-                    Label : ARGUMENT
-                      Void
+                  Void
               Label : NAME
                 b

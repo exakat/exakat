@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Assignation.30.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'C' :  /**/  
               Label : CASE
                 'C'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $b
@@ -26,45 +25,41 @@ Label : PROJECT
                     (string)
                     Label : CAST
                       D
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'E'
-                          Label : VARIABLE
-                            $c
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'E'
+                        Label : VARIABLE
+                          $c
                       Label : NAME
                         D
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $d
                   Label : RIGHT
                     ->
+                    Label : MEMBER
+                      G
                     Label : OBJECT
                       ->
+                      Label : MEMBER
+                        F
                       Label : OBJECT
                         $e
-                      Label : PROPERTY
-                        F
-                    Label : PROPERTY
-                      G
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     H
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $f
-                      Label : ARGUMENT
-                        'I'
                     Label : NAME
                       H
+                    Label : ARGUMENT
+                      $f
+                    Label : ARGUMENT
+                      'I'
                   Label : ELSE
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $h
@@ -72,13 +67,13 @@ Label : PROJECT
                         'K'
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $g
                       Label : RIGHT
                         'J'
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void

@@ -100,7 +100,7 @@ class DynamicCalls extends Analyzer {
              ->outIs('METHOD')
              ->atomIs('Methodcallname')
              ->outIs('NAME')
-             ->atomIsNot('Identifier')
+             ->atomIsNot('Name')
              ->back('first');
         $this->prepareQuery();
 

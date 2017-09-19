@@ -1,62 +1,53 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.38.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $siteurl
           Label : RIGHT
             a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                .
-                Label : CONCAT
-                  'b'
-                Label : CONCAT
-                  [
-                  Label : INDEX
-                    'd'
-                  Label : VARIABLE
-                    $c
-                Label : CONCAT
-                  preg_replace
-                  Label : ARGUMENTS
-                    (
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'b'
+              Label : CONCAT
+                [
+                Label : INDEX
+                  'd'
+                Label : VARIABLE
+                  $c
+              Label : CONCAT
+                preg_replace
+                Label : ARGUMENT
+                  "e"
+                Label : ARGUMENT
+                  ''
+                Label : ARGUMENT
+                  substr
+                  Label : ARGUMENT
+                    $f
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    strrpos
+                    Label : NAME
+                      strrpos
                     Label : ARGUMENT
-                      "e"
+                      $g
                     Label : ARGUMENT
-                      ''
-                    Label : ARGUMENT
-                      substr
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $f
-                        Label : ARGUMENT
-                          0
-                        Label : ARGUMENT
-                          strrpos
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $g
-                            Label : ARGUMENT
-                              'h'
-                          Label : NAME
-                            strrpos
-                      Label : NAME
-                        substr
+                      'h'
                   Label : NAME
-                    preg_replace
-                Label : CONCAT
-                  'i'
+                    substr
+                Label : NAME
+                  preg_replace
+              Label : CONCAT
+                'i'
             Label : NAME
               a

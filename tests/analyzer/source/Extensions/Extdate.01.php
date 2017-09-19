@@ -1,3 +1,3 @@
 <?php
-$y = timezone_version_get();
+$y = var_dump(timezone_version_get());
 ?>

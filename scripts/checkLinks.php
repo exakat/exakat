@@ -33,7 +33,7 @@ foreach($files as $file) {
     ++$totalFile;
     $html = file_get_contents($file);
     
-    preg_match_all('$href="\#?(.*?)"$is', $html, $r);
+    preg_match_all('/href="\#?(.*?)"/is', $html, $r);
     
     $links = array_filter($r[1], function ($x) {
         if (empty($x)) { return false; }

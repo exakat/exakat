@@ -1,23 +1,20 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Not.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           !
           Label : NOT
             ->
             Label : METHOD
               e
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'f'
+              Label : ARGUMENT
+                'f'
               Label : NAME
                 e
             Label : OBJECT
@@ -26,9 +23,7 @@ Label : PROJECT
                 C
               Label : METHOD
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'd'
+                Label : ARGUMENT
+                  'd'
                 Label : NAME
                   D

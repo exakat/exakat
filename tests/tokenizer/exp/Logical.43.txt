@@ -1,53 +1,44 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.43.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           or
           Label : LEFT
             $a
           Label : RIGHT
             print
-            Label : ARGUMENTS
-              )
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  'B'
+            Label : ARGUMENT
+              (
+              Label : CODE
+                'B'
             Label : NAME
               print
-        Label : ELEMENT
+        Label : EXPRESSION
           C
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
+          Label : ARGUMENT
+            D
+            Label : NAME
               D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  E
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'F'
-                  Label : NAME
-                    E
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'G'
-                  Label : CONCAT
-                    $a
-                  Label : CONCAT
-                    'H'
+            Label : ARGUMENT
+              E
+              Label : ARGUMENT
+                'F'
               Label : NAME
-                D
+                E
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'G'
+              Label : CONCAT
+                $a
+              Label : CONCAT
+                'H'
           Label : NAME
             echo

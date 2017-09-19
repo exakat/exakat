@@ -1,44 +1,41 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.50.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
                 Label : NOT
                   isset
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'w'
-                      Label : VARIABLE
-                        $v
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'w'
+                    Label : VARIABLE
+                      $v
                   Label : NAME
                     isset
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   continue
                   Label : CONTINUE
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               try
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $d
@@ -46,7 +43,7 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     continue
                     Label : CONTINUE
                       Void
@@ -54,17 +51,17 @@ Label : PROJECT
                   Exception
                 Label : VARIABLE
                   $e
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $a
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 2
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c

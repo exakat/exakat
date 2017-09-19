@@ -1,20 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Include.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           include_once
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-              (
-              Label : CODE
-                "literal"
+          Label : ARGUMENT
+            (
+            Label : CODE
+              "literal"
           Label : NAME
             include_once

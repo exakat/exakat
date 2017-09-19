@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Cast.24.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -20,13 +19,11 @@ Label : PROJECT
                 B\C
               Label : METHOD
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      $b
-                    Label : CONCAT
-                      'E'
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    $b
+                  Label : CONCAT
+                    'E'
                 Label : NAME
                   D

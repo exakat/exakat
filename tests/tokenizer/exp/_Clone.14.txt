@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Clone.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,38 +15,32 @@ Label : PROJECT
             ?
             Label : CONDITION
               isset
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'd'
-                  Label : VARIABLE
-                    ->
-                    Label : OBJECT
-                      $b
-                    Label : PROPERTY
-                      c
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'd'
+                Label : VARIABLE
+                  ->
+                  Label : MEMBER
+                    c
+                  Label : OBJECT
+                    $b
               Label : NAME
                 isset
             Label : ELSE
               ->
               Label : METHOD
                 h
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'i'
+                Label : ARGUMENT
+                  'i'
                 Label : NAME
                   h
               Label : OBJECT
                 ->
                 Label : METHOD
                   g
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     g
                 Label : OBJECT
@@ -60,7 +53,7 @@ Label : PROJECT
                   'e'
                 Label : VARIABLE
                   ->
+                  Label : MEMBER
+                    d
                   Label : OBJECT
                     $c
-                  Label : PROPERTY
-                    d

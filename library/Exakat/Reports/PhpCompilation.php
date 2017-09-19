@@ -54,7 +54,7 @@ TEXT
                 if(!empty($configure->activate) && $sources[$configure->analysis] != 0) {
                     $return[] = ' '.$configure->activate;
                     if (!empty($configure->others)) {
-                        $return[] = "   ".join("\n    ", $configure->others);
+                        $return[] = '   '.implode(PHP_EOL.'    ', $configure->others);
                     }
                     if (!empty($configure->pecl)) {
                         $pecl[] = '#pecl install '.basename($configure->pecl).' ('.$configure->pecl.')';

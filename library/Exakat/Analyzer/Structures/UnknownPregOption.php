@@ -35,7 +35,6 @@ class UnknownPregOption extends Analyzer {
 
         // preg_match with a string
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->isNot('noDelimiter', '')
@@ -47,7 +46,6 @@ class UnknownPregOption extends Analyzer {
 
         // With an interpolated string "a $x b"
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_QUOTE')
              ->hasOut('CONCAT')
@@ -63,7 +61,6 @@ class UnknownPregOption extends Analyzer {
 
         // with a concatenation
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->_as('concat')

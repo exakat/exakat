@@ -1,60 +1,53 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Interface.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-                Label : TYPEHINT
-                  self
+            Label : ARGUMENT
+              $a
+              Label : TYPEHINT
+                self
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               foo
           Label : NAME
             c
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : METHOD
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-                Label : TYPEHINT
-                  self
+            Label : ARGUMENT
+              $a
+              Label : TYPEHINT
+                self
             Label : BLOCK
               Void
             Label : NAME
               foo
           Label : NAME
             i
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
           Label : METHOD
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-                Label : TYPEHINT
-                  self
+            Label : ARGUMENT
+              $a
+              Label : TYPEHINT
+                self
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               foo

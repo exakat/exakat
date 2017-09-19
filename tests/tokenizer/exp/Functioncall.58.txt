@@ -1,70 +1,57 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.58.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-              &&
-              Label : LEFT
+          Label : ARGUMENT
+            &&
+            Label : LEFT
+              (
+              Label : CODE
+                "foo"
+            Label : RIGHT
+              print
+              Label : ARGUMENT
                 (
                 Label : CODE
-                  "foo"
-              Label : RIGHT
+                  "bar"
+              Label : NAME
                 print
-                Label : ARGUMENTS
-                  )
-                  Label : ARGUMENT
-                    (
-                    Label : CODE
-                      "bar"
-                Label : NAME
-                  print
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
+          Label : ARGUMENT
             "\n"
-            Label : ARGUMENT
-              "\n"
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
-              and
-              Label : LEFT
+          Label : ARGUMENT
+            and
+            Label : LEFT
+              (
+              Label : CODE
+                "foo"
+            Label : RIGHT
+              print
+              Label : ARGUMENT
                 (
                 Label : CODE
-                  "foo"
-              Label : RIGHT
+                  "bar"
+              Label : NAME
                 print
-                Label : ARGUMENTS
-                  )
-                  Label : ARGUMENT
-                    (
-                    Label : CODE
-                      "bar"
-                Label : NAME
-                  print
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
+          Label : ARGUMENT
             "\n"
-            Label : ARGUMENT
-              "\n"
           Label : NAME
             print

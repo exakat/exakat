@@ -1,50 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Keyvalue.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           array
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              =>
-              Label : KEY
-                'a'
-              Label : VALUE
-                ?
-                Label : CONDITION
-                  [
-                  Label : INDEX
-                    'c'
-                  Label : VARIABLE
-                    $b
-                Label : ELSE
-                  2
-                Label : THEN
-                  -
+          Label : ARGUMENT
+            =>
+            Label : INDEX
+              'a'
+            Label : VALUE
+              ?
+              Label : CONDITION
+                [
+                Label : INDEX
+                  'c'
+                Label : VARIABLE
+                  $b
+              Label : ELSE
+                2
+              Label : THEN
+                -
+                Label : LEFT
+                  +
                   Label : LEFT
-                    +
+                    [
+                    Label : INDEX
+                      'e'
+                    Label : VARIABLE
+                      $d
+                  Label : RIGHT
+                    *
                     Label : LEFT
                       [
                       Label : INDEX
-                        'e'
+                        'g'
                       Label : VARIABLE
-                        $d
+                        $f
                     Label : RIGHT
-                      *
-                      Label : LEFT
-                        [
-                        Label : INDEX
-                          'g'
-                        Label : VARIABLE
-                          $f
-                      Label : RIGHT
-                        1
-                  Label : RIGHT
-                    H
+                      1
+                Label : RIGHT
+                  H

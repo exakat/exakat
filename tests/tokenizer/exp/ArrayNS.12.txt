@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -26,21 +25,17 @@ Label : PROJECT
                 $a
           Label : RIGHT
             chop
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
+            Label : ARGUMENT
+              substr
+              Label : NAME
                 substr
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $e
-                  Label : ARGUMENT
-                    1
-                Label : NAME
-                  substr
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                1
             Label : NAME
               chop
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [

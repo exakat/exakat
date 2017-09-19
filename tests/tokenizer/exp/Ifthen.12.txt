@@ -1,38 +1,37 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             0
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
               Label : RIGHT
                 1
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 2
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
               Label : RIGHT
                 3
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
@@ -42,35 +41,31 @@ Label : PROJECT
                   $d
               Label : RIGHT
                 f
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'h'
-                    Label : VARIABLE
-                      $g
-                  Label : ARGUMENT
-                    +
-                    Label : LEFT
-                      i
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'k'
-                          Label : VARIABLE
-                            $j
-                        Label : ARGUMENT
-                          'l'
-                      Label : NAME
-                        i
-                    Label : RIGHT
-                      1
                 Label : NAME
                   f
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'h'
+                  Label : VARIABLE
+                    $g
+                Label : ARGUMENT
+                  +
+                  Label : LEFT
+                    i
+                    Label : NAME
+                      i
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'k'
+                      Label : VARIABLE
+                        $j
+                    Label : ARGUMENT
+                      'l'
+                  Label : RIGHT
+                    1
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void

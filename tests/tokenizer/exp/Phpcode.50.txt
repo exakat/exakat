@@ -1,23 +1,20 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.50.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
-            Label : ARGUMENT
-              $v
+          Label : ARGUMENT
+            $v
           Label : NAME
             <?=

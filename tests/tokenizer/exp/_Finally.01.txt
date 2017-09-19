@@ -1,50 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Finally.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           doSomething
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $resource
               Label : RIGHT
                 createResource
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   createResource
-            Label : ELEMENT
+            Label : EXPRESSION
               try
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $result
                   Label : RIGHT
                     useResource
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $resource
+                    Label : ARGUMENT
+                      $resource
                     Label : NAME
                       useResource
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     $result
@@ -52,25 +45,21 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     log
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        getMessage
+                        Label : ARGUMENT
+                          Void
+                        Label : NAME
                           getMessage
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            getMessage
-                        Label : OBJECT
-                          $e
+                      Label : OBJECT
+                        $e
                     Label : NAME
                       log
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     throw
                     Label : THROW
                       $e
@@ -82,25 +71,21 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     log
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        getMessage
+                        Label : ARGUMENT
+                          Void
+                        Label : NAME
                           getMessage
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            getMessage
-                        Label : OBJECT
-                          $e
+                      Label : OBJECT
+                        $e
                     Label : NAME
                       log
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     throw
                     Label : THROW
                       $e
@@ -112,25 +97,21 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     log
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        getMessage
+                        Label : ARGUMENT
+                          Void
+                        Label : NAME
                           getMessage
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            getMessage
-                        Label : OBJECT
-                          $e
+                      Label : OBJECT
+                        $e
                     Label : NAME
                       log
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     throw
                     Label : THROW
                       $e
@@ -142,25 +123,21 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     log
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        getMessage
+                        Label : ARGUMENT
+                          Void
+                        Label : NAME
                           getMessage
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            getMessage
-                        Label : OBJECT
-                          $e
+                      Label : OBJECT
+                        $e
                     Label : NAME
                       log
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     throw
                     Label : THROW
                       $e
@@ -172,25 +149,21 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     log
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        getMessage
+                        Label : ARGUMENT
+                          Void
+                        Label : NAME
                           getMessage
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            getMessage
-                        Label : OBJECT
-                          $e
+                      Label : OBJECT
+                        $e
                     Label : NAME
                       log
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     throw
                     Label : THROW
                       $e
@@ -202,15 +175,13 @@ Label : PROJECT
                 finally
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     releaseResource
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $resource
+                    Label : ARGUMENT
+                      $resource
                     Label : NAME
                       releaseResource
           Label : NAME
             doSomething
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

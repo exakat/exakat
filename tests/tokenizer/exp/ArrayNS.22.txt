@@ -1,62 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             [
-            Label : ARGUMENTS
+            Label : ARGUMENT
               [
               Label : ARGUMENT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    0
-                  Label : ARGUMENT
-                    [
-                    Label : ARGUMENTS
-                      [
-                      Label : ARGUMENT
-                        1
-                      Label : ARGUMENT
-                        2
-                      Label : ARGUMENT
-                        [
-                        Label : ARGUMENTS
-                          [
-                          Label : ARGUMENT
-                            3
-                          Label : ARGUMENT
-                            4
-                          Label : ARGUMENT
-                            5
-                      Label : ARGUMENT
-                        [
-                        Label : ARGUMENTS
-                          [
-                          Label : ARGUMENT
-                            6
-                  Label : ARGUMENT
-                    [
-                    Label : ARGUMENTS
-                      [
-                      Label : ARGUMENT
-                        7
-                  Label : ARGUMENT
-                    8
+                0
               Label : ARGUMENT
                 [
-                Label : ARGUMENTS
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  2
+                Label : ARGUMENT
                   [
                   Label : ARGUMENT
-                    9
+                    3
+                  Label : ARGUMENT
+                    4
+                  Label : ARGUMENT
+                    5
+                Label : ARGUMENT
+                  [
+                  Label : ARGUMENT
+                    6
+              Label : ARGUMENT
+                [
+                Label : ARGUMENT
+                  7
+              Label : ARGUMENT
+                8
+            Label : ARGUMENT
+              [
+              Label : ARGUMENT
+                9

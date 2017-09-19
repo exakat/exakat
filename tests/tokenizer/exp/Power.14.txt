@@ -1,30 +1,27 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Power.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           **
           Label : LEFT
             ->
             Label : METHOD
               x
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  1
+              Label : ARGUMENT
+                1
               Label : NAME
                 x
             Label : OBJECT
               $a
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           **
           Label : LEFT
             2
@@ -32,24 +29,20 @@ Label : PROJECT
             ->
             Label : METHOD
               x
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  1
+              Label : ARGUMENT
+                1
               Label : NAME
                 x
             Label : OBJECT
               $a
-        Label : ELEMENT
+        Label : EXPRESSION
           **
           Label : LEFT
             ->
             Label : METHOD
               x2
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  12
+              Label : ARGUMENT
+                12
               Label : NAME
                 x2
             Label : OBJECT
@@ -58,10 +51,8 @@ Label : PROJECT
             ->
             Label : METHOD
               x
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  1
+              Label : ARGUMENT
+                1
               Label : NAME
                 x
             Label : OBJECT

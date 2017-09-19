@@ -1,35 +1,34 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_For.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           for
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $c
               Label : ELSE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $e
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $d
           Label : FINAL
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               <
               Label : LEFT
                 $i
@@ -37,33 +36,31 @@ Label : PROJECT
                 $b
           Label : INCREMENT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : PREPLUSPLUS
                 $i
           Label : INIT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $i
               Label : RIGHT
                 0
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $f
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
-        Label : ELEMENT
+            Label : ARGUMENT
+              Void
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $k
@@ -83,11 +80,11 @@ Label : PROJECT
             $g
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $h
             Label : VALUE
               $i
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             $n

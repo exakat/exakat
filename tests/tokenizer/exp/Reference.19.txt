@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             $b
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $c
-              Label : ARGUMENT
-                $d
-              Label : ARGUMENT
-                $e
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              $e
             Label : NAME
               $b

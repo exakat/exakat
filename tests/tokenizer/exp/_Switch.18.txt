@@ -1,78 +1,73 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'a' :  /**/  
               Label : CASE
                 'a'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $count
                   Label : RIGHT
                     0
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $indexed
                   Label : RIGHT
                     array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                Label : ELEMENT
+                    Label : ARGUMENT
+                      Void
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $associative
                   Label : RIGHT
                     array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                Label : ELEMENT
+                    Label : ARGUMENT
+                      Void
+                Label : EXPRESSION
                   foreach
                   Label : BLOCK
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
                   Label : SOURCE
                     $data
                   Label : VALUE
                     =>
-                    Label : KEY
+                    Label : INDEX
                       $key
                     Label : VALUE
                       $value
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     $c
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       ++
                       Label : POSTPLUSPLUS
                         $d
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'e'

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/VariableDollar.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
@@ -24,9 +23,7 @@ Label : PROJECT
                   "_1"
             Label : METHOD
               foo
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 foo

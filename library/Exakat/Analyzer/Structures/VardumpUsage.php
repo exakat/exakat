@@ -32,7 +32,6 @@ class VardumpUsage extends Analyzer {
         
         // print_r (but not print_r($a, 1))
         $this->atomFunctionIs($debugFunctions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->is('boolean', false)
              ->atomIsNot(self::$CONTAINERS)
@@ -45,7 +44,6 @@ class VardumpUsage extends Analyzer {
 
         // (well, we need to check if the result string is not printed now...)
         $this->atomFunctionIs($returnDebugFunctions)
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
@@ -53,19 +51,15 @@ class VardumpUsage extends Analyzer {
         // echo '<pre>'.print_r($a, 1);
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_ECHO', 'T_PRINT'))
-             ->outIs('ARGUMENTS')
              ->atomInside('Functioncall')
              ->functioncallIs($returnDebugFunctions)
-             ->outIs('ARGUMENTS')
              ->back('first');
         $this->prepareQuery();
         
 //         call_user_func_array('var_dump', )
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
              ->functioncallIs(array('\\call_user_func_array', '\\call_user_func'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->atomIs('String')

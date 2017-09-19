@@ -1,34 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ]
-                Label : APPEND
-                  [
-                  Label : INDEX
-                    'b'
-                  Label : VARIABLE
-                    $a
+            Label : ARGUMENT
+              ]
+              Label : APPEND
+                [
+                Label : INDEX
+                  'b'
+                Label : VARIABLE
+                  $a
             Label : NAME
               list
           Label : RIGHT
             c
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $d
+            Label : ARGUMENT
+              $d
             Label : NAME
               c

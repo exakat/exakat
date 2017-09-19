@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           while
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               .=
               Label : LEFT
                 $c
@@ -28,19 +27,15 @@ Label : PROJECT
                   $a
                 Label : RIGHT
                   fread
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $b
-                    Label : ARGUMENT
-                      1
                   Label : NAME
                     fread
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    1
             Label : RIGHT
               chr
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  2
+              Label : ARGUMENT
+                2
               Label : NAME
                 chr

@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Include.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ::
             Label : CLASS
               B
-            Label : PROPERTY
+            Label : MEMBER
               $a
           Label : RIGHT
             ::
@@ -22,35 +21,29 @@ Label : PROJECT
               C
             Label : METHOD
               D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  include
-                  Label : ARGUMENTS
-                    'F'
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        E
-                      Label : CONCAT
-                        'F'
-                  Label : NAME
-                    include
-                Label : ARGUMENT
-                  include
-                  Label : ARGUMENTS
-                    'I'
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        G
-                      Label : CONCAT
-                        'H'
-                      Label : CONCAT
-                        $b
-                      Label : CONCAT
-                        'I'
-                  Label : NAME
-                    include
               Label : NAME
                 D
+              Label : ARGUMENT
+                include
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    E
+                  Label : CONCAT
+                    'F'
+                Label : NAME
+                  include
+              Label : ARGUMENT
+                include
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    G
+                  Label : CONCAT
+                    'H'
+                  Label : CONCAT
+                    $b
+                  Label : CONCAT
+                    'I'
+                Label : NAME
+                  include

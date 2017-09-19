@@ -1,17 +1,16 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcodemiddle.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -21,77 +20,67 @@ Label : PROJECT
                   $d
                 Label : VARIABLE
                   ->
+                  Label : MEMBER
+                    B
                   Label : OBJECT
                     $this
-                  Label : PROPERTY
-                    B
-            Label : ELEMENT
+            Label : EXPRESSION
               C
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  +
-                  Label : LEFT
-                    $d
-                  Label : RIGHT
-                    0
+              Label : ARGUMENT
+                +
+                Label : LEFT
+                  $d
+                Label : RIGHT
+                  0
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               D
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ->
+                Label : MEMBER
+                  F
                 Label : OBJECT
                   ->
                   Label : METHOD
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       E
                   Label : OBJECT
                     $this
-                Label : PROPERTY
-                  F
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'G'
+                  Label : ARGUMENT
+                    'G'
                   Label : NAME
                     echo
-            Label : ELEMENT
+            Label : EXPRESSION
               H
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  I
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     I
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      I
-                  Label : OBJECT
-                    $c
+                Label : OBJECT
+                  $c
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               J
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : PREPLUSPLUS
                 $d
@@ -99,5 +88,5 @@ Label : PROJECT
             $a
           Label : VALUE
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

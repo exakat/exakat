@@ -60,7 +60,7 @@ class ScalarOrObjectProperty extends Analyzer {
              ->back('first')
              
              ->findAssignation('New')
-             ->findAssignation($literals) 
+             ->findAssignation($literals)
              
              ->back('results');
         $this->prepareQuery();

@@ -1,28 +1,27 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticproperty.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             \A
-          Label : PROPERTY
+          Label : MEMBER
             $B
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             \A\C
-          Label : PROPERTY
+          Label : MEMBER
             $B
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             \A\C\D
-          Label : PROPERTY
+          Label : MEMBER
             $B

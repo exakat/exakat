@@ -1,42 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.27.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       B
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           while
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  new
-                  Label : NEW
+              Label : ARGUMENT
+                new
+                Label : NEW
+                  D
+                  Label : NAME
                     D
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'E'
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'F'
-                            Label : VALUE
-                              $a
-                    Label : NAME
-                      D
+                  Label : ARGUMENT
+                    'E'
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'F'
+                      Label : VALUE
+                        $a
               Label : NAME
                 echo
           Label : CONDITION
@@ -47,10 +40,8 @@ Label : PROJECT
               ->
               Label : METHOD
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   C
               Label : OBJECT

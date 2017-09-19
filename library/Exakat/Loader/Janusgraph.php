@@ -269,7 +269,7 @@ GREMLIN;
         foreach($json as $j) {
 
             if (in_array($j->label, array('Functioncall', 'Function', 'Class', 'Classanonymous', 'Newcall', 'Variableobject', 
-                                          'Identifier', 'Nsname', 'Interface', 'Trait', 'String', 'Constant', 'Arguments',
+                                          'Identifier', 'Nsname', 'Interface', 'Trait', 'String', 'Constant', 
                                           'Variable', 'Variablearray', ))) {
                 $this->json[$j->id] = $j;
             } elseif ($j->id === 1) {

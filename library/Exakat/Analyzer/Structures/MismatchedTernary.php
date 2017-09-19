@@ -26,7 +26,7 @@ use Exakat\Analyzer\Analyzer;
 
 class MismatchedTernary extends Analyzer {
     public function analyze() {
-        $excludedAtoms = array('Variable', 'Array', 'Member', 'Staticproperty', 
+        $excludedAtoms = array('Variable', 'Array', 'Member', 'Staticproperty',
                                'Functioncall', 'Methodcall', 'Staticmethodcall',
                                'Void', 'Ternary');
         

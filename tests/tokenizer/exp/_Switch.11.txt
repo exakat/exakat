@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'a' :  /**/  
               Label : CASE
                 'a'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   &&
                   Label : LEFT
                     [
@@ -36,7 +35,7 @@ Label : PROJECT
                       $e
                     Label : RIGHT
                       'f'
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void

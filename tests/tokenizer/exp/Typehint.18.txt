@@ -1,138 +1,125 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Typehint.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-              Label : TYPEHINT
-                Stdclass
-            Label : ARGUMENT
-              $b
-            Label : ARGUMENT
-              $c
-              Label : TYPEHINT
-                Stdclass
+          Label : ARGUMENT
+            $a
+            Label : TYPEHINT
+              Stdclass
+          Label : ARGUMENT
+            $b
+          Label : ARGUMENT
+            $c
+            Label : TYPEHINT
+              Stdclass
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 1
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           x1
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-              Label : TYPEHINT
-                namespace\Stdclass
-            Label : ARGUMENT
-              $b
-              Label : TYPEHINT
-                namespace\Stdclass
-            Label : ARGUMENT
-              $c
-              Label : DEFAULT
-                null
-              Label : TYPEHINT
-                namespace\Stdclass
+          Label : ARGUMENT
+            $a
+            Label : TYPEHINT
+              namespace\Stdclass
+          Label : ARGUMENT
+            $b
+            Label : TYPEHINT
+              namespace\Stdclass
+          Label : ARGUMENT
+            $c
+            Label : DEFAULT
+              null
+            Label : TYPEHINT
+              namespace\Stdclass
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             x1
-        Label : ELEMENT
+        Label : EXPRESSION
           x2
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-              Label : TYPEHINT
-                string
-            Label : ARGUMENT
-              $a
-              Label : TYPEHINT
-                namespace\b\Stdclass
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 1
+          Label : ARGUMENT
+            $b
+            Label : TYPEHINT
+              string
+          Label : ARGUMENT
+            $a
+            Label : TYPEHINT
+              namespace\b\Stdclass
           Label : NAME
             x2
-        Label : ELEMENT
+        Label : EXPRESSION
           x3
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-              Label : TYPEHINT
-                string
-            Label : ARGUMENT
-              $a
-              Label : TYPEHINT
-                d\b\Stdclass
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 1
+          Label : ARGUMENT
+            $b
+            Label : TYPEHINT
+              string
+          Label : ARGUMENT
+            $a
+            Label : TYPEHINT
+              d\b\Stdclass
           Label : NAME
             x3
-        Label : ELEMENT
+        Label : EXPRESSION
           x4
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-              Label : TYPEHINT
-                string
-            Label : ARGUMENT
-              $a
-              Label : TYPEHINT
-                Stdclass
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 1
+          Label : ARGUMENT
+            $b
+            Label : TYPEHINT
+              string
+          Label : ARGUMENT
+            $a
+            Label : TYPEHINT
+              Stdclass
           Label : NAME
             x4
-        Label : ELEMENT
+        Label : EXPRESSION
           x5
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-              Label : TYPEHINT
-                string
-            Label : ARGUMENT
-              $a
-              Label : TYPEHINT
-                \Stdclass
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 1
+          Label : ARGUMENT
+            $b
+            Label : TYPEHINT
+              string
+          Label : ARGUMENT
+            $a
+            Label : TYPEHINT
+              \Stdclass
           Label : NAME
             x5
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

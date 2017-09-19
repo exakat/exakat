@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.84.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ||
@@ -15,10 +14,8 @@ Label : PROJECT
               ==
               Label : LEFT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'C'
+                Label : ARGUMENT
+                  'C'
                 Label : NAME
                   B
               Label : RIGHT
@@ -27,10 +24,8 @@ Label : PROJECT
               !
               Label : NOT
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   D
           Label : ELSE
@@ -47,35 +42,33 @@ Label : PROJECT
                   $c
             Label : ELSE
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 switch
                 Label : CASES
                    /**/ 
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     case 0 :  /**/  
                     Label : CASE
                       0
                     Label : CODE
                       ;
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         =
                         Label : LEFT
                           $t
                         Label : RIGHT
                           AA
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
+                          Label : ARGUMENT
+                            Void
                           Label : NAME
                             AA
                 Label : NAME
                   $s
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 if
                 Label : CONDITION
                   &&
@@ -101,123 +94,101 @@ Label : PROJECT
                         $o
                     Label : THEN
                       ;
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         X
-                        Label : ARGUMENTS
-                          (
+                        Label : ARGUMENT
+                          Y
                           Label : ARGUMENT
+                            'Z'
+                          Label : NAME
                             Y
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                'Z'
-                            Label : NAME
-                              Y
-                          Label : ARGUMENT
-                            $p
-                          Label : ARGUMENT
-                            $q
-                          Label : ARGUMENT
-                            $r
+                        Label : ARGUMENT
+                          $p
+                        Label : ARGUMENT
+                          $q
+                        Label : ARGUMENT
+                          $r
                         Label : NAME
                           X
                   Label : THEN
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       U
-                      Label : ARGUMENTS
-                        (
+                      Label : ARGUMENT
+                        V
                         Label : ARGUMENT
+                          'W'
+                        Label : NAME
                           V
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'W'
-                          Label : NAME
-                            V
-                        Label : ARGUMENT
-                          $l
-                        Label : ARGUMENT
-                          $m
-                        Label : ARGUMENT
-                          $n
+                      Label : ARGUMENT
+                        $l
+                      Label : ARGUMENT
+                        $m
+                      Label : ARGUMENT
+                        $n
                       Label : NAME
                         U
                 Label : THEN
                   ;
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     R
-                    Label : ARGUMENTS
-                      (
+                    Label : ARGUMENT
+                      S
                       Label : ARGUMENT
+                        'T'
+                      Label : NAME
                         S
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'T'
-                        Label : NAME
-                          S
-                      Label : ARGUMENT
-                        $f
-                      Label : ARGUMENT
-                        $g
-                      Label : ARGUMENT
-                        $h
-                      Label : ARGUMENT
-                        $i
-                      Label : ARGUMENT
-                        $j
+                    Label : ARGUMENT
+                      $f
+                    Label : ARGUMENT
+                      $g
+                    Label : ARGUMENT
+                      $h
+                    Label : ARGUMENT
+                      $i
+                    Label : ARGUMENT
+                      $j
                     Label : NAME
                       R
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               D
-            Label : ELEMENT
+            Label : EXPRESSION
               F
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'G'
+              Label : ARGUMENT
+                'G'
               Label : NAME
                 F
-            Label : ELEMENT
+            Label : EXPRESSION
               G
-            Label : ELEMENT
+            Label : EXPRESSION
               I
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'J'
+              Label : ARGUMENT
+                'J'
               Label : NAME
                 I
-            Label : ELEMENT
+            Label : EXPRESSION
               J
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
+              Label : ARGUMENT
+                L
                 Label : ARGUMENT
+                  'M'
+                Label : NAME
                   L
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'M'
-                  Label : NAME
-                    L
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               M
-            Label : ELEMENT
+            Label : EXPRESSION
               O
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'P'
+              Label : ARGUMENT
+                'P'
               Label : NAME
                 O
-            Label : ELEMENT
+            Label : EXPRESSION
               P
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

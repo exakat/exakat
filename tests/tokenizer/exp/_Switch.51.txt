@@ -1,21 +1,18 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.51.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
+            Label : ARGUMENT
+              $b
             Label : NAME
               B
           Label : ELSE
@@ -44,31 +41,31 @@ Label : PROJECT
                     $b
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     while
                     Label : BLOCK
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         ++
                         Label : POSTPLUSPLUS
                           $e
                     Label : CONDITION
                       $d
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   for
                   Label : BLOCK
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       ++
                       Label : POSTPLUSPLUS
                         $e
                   Label : FINAL
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       <
                       Label : LEFT
                         $d
@@ -76,13 +73,13 @@ Label : PROJECT
                         3
                   Label : INCREMENT
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       ++
                       Label : POSTPLUSPLUS
                         $d
                   Label : INIT
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $d
@@ -90,11 +87,11 @@ Label : PROJECT
                         1
             Label : THEN
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 foreach
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     ++
                     Label : POSTPLUSPLUS
                       $e
@@ -104,67 +101,63 @@ Label : PROJECT
                   $e
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               switch
               Label : CASES
                  /**/ 
-                Label : ELEMENT
+                Label : EXPRESSION
                   case 1 :  /**/  
                   Label : CASE
                     1
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $b
                       Label : RIGHT
                         NULL
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       break
                       Label : BREAK
                         Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   case 2 :  /**/  
                   Label : CASE
                     2
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $b
                       Label : RIGHT
                         D
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $b
+                        Label : ARGUMENT
+                          $b
                         Label : NAME
                           D
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       break
                       Label : BREAK
                         Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   default
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $c
                       Label : RIGHT
                         'E'
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       break
                       Label : BREAK
                         Void
               Label : NAME
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $b
+                Label : ARGUMENT
+                  $b
                 Label : NAME
                   C

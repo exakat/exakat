@@ -1,16 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/LimitCase.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
-            "1 2 这个就是中文"
+            "1 2 è¿ä¸ªå°±æ¯ä¸­æ"

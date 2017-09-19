@@ -1,55 +1,48 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.58.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ->
             Label : METHOD
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 b
             Label : OBJECT
               $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               declare
+              Label : ARGUMENT
+                =
+                Label : LEFT
+                  ticks
+                Label : RIGHT
+                  1
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
-              Label : DECLARE
-                (
-                Label : ARGUMENT
-                  =
-                  Label : LEFT
-                    ticks
-                  Label : RIGHT
-                    1
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     b
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       b
                   Label : OBJECT

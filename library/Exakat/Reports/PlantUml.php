@@ -83,7 +83,7 @@ SQL
             $puml[] = $object;
         }
         
-        $puml = join("\n", $puml)."\n\n";
+        $puml = implode("\n", $puml)."\n\n";
 
         foreach($extends as $extends => $extended) {
             $puml .= "Class{$ids[$extended]} <|-- Class{$extends}\n";

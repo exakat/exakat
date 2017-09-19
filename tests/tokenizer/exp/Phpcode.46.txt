@@ -1,12 +1,11 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.46.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

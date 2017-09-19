@@ -28,7 +28,6 @@ class DirectiveName extends Analyzer {
         $directives = $this->loadIni('directives.ini', 'directives');
 
         $this->atomFunctionIs(array('\\ini_set', '\\ini_get'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')

@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.75.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             empty
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
+            Label : ARGUMENT
+              $a
             Label : NAME
               empty
           Label : ELSE
@@ -25,75 +22,61 @@ Label : PROJECT
               $b
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 F
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
+                Label : ARGUMENT
+                  H
+                  Label : NAME
                     H
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $c
-                      Label : ARGUMENT
-                        'I'
-                    Label : NAME
-                      H
+                  Label : ARGUMENT
+                    $c
+                  Label : ARGUMENT
+                    'I'
                 Label : NAME
                   echo
-              Label : ELEMENT
+              Label : EXPRESSION
                 I
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
+              Label : ARGUMENT
+                D
                 Label : ARGUMENT
+                  'E'
+                Label : NAME
                   D
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'E'
-                  Label : NAME
-                    D
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               E
-        Label : ELEMENT
+        Label : EXPRESSION
           J
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             empty
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $d
+            Label : ARGUMENT
+              $d
             Label : NAME
               empty
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               K
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
+              Label : ARGUMENT
+                M
                 Label : ARGUMENT
+                  'N'
+                Label : NAME
                   M
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'N'
-                  Label : NAME
-                    M
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               N

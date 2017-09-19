@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Plusplus.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             --
@@ -18,7 +17,7 @@ Label : PROJECT
             ++
             Label : POSTPLUSPLUS
               $y
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             ++

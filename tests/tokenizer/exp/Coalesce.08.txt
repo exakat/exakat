@@ -1,54 +1,49 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Coalesce.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-              Label : TYPEHINT
-                C
+          Label : ARGUMENT
+            $b
+            Label : TYPEHINT
+              C
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
                 Label : NOT
                   E
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'F'
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'G'
-                      Label : VARIABLE
-                        $c
                   Label : NAME
                     E
+                  Label : ARGUMENT
+                    'F'
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'G'
+                    Label : VARIABLE
+                      $c
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $d
               Label : RIGHT
                 'H'
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
@@ -56,17 +51,17 @@ Label : PROJECT
                 ??
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    J
                   Label : OBJECT
                     ->
+                    Label : MEMBER
+                      I
                     Label : OBJECT
                       $b
-                    Label : PROPERTY
-                      I
-                  Label : PROPERTY
-                    J
                 Label : RIGHT
                   1
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $f
@@ -74,7 +69,7 @@ Label : PROJECT
                 yield
                 Label : YIELD
                   $c
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
@@ -82,6 +77,8 @@ Label : PROJECT
                 ??
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    J
                   Label : OBJECT
                     (
                     Label : CODE
@@ -90,11 +87,9 @@ Label : PROJECT
                         Bb
                       Label : CONSTANT
                         I
-                  Label : PROPERTY
-                    J
                 Label : RIGHT
                   1
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
@@ -108,17 +103,15 @@ Label : PROJECT
                       Bb
                     Label : METHOD
                       I
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         I
                   Label : CONSTANT
                     J
                 Label : RIGHT
                   1
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
@@ -126,12 +119,16 @@ Label : PROJECT
                 ??
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    J
                   Label : OBJECT
                     [
                     Label : INDEX
                       '4'
                     Label : VARIABLE
                       ->
+                      Label : MEMBER
+                        I
                       Label : OBJECT
                         [
                         Label : INDEX
@@ -142,10 +139,6 @@ Label : PROJECT
                             3
                         Label : VARIABLE
                           $b
-                      Label : PROPERTY
-                        I
-                  Label : PROPERTY
-                    J
                 Label : RIGHT
                   1
           Label : NAME

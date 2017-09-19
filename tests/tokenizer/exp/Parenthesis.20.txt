@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Parenthesis.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
@@ -24,43 +23,39 @@ Label : PROJECT
                     2
                   Label : RIGHT
                     3
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ->
+            Label : MEMBER
+              B
             Label : OBJECT
               $b
-            Label : PROPERTY
-              B
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               (
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
+              Label : ARGUMENT
+                $b
               Label : NAME
                 (
                 Label : CODE
                   ->
+                  Label : MEMBER
+                    B
                   Label : OBJECT
                     $b
-                  Label : PROPERTY
-                    B
-        Label : ELEMENT
+        Label : EXPRESSION
           (
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $c
-            Label : ARGUMENT
-              $d
           Label : NAME
             (
             Label : CODE
               ->
+              Label : MEMBER
+                C
               Label : OBJECT
                 $c
-              Label : PROPERTY
-                C
+          Label : ARGUMENT
+            $c
+          Label : ARGUMENT
+            $d

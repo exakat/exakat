@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Clone.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
@@ -18,7 +17,7 @@ Label : PROJECT
               (
               Label : CODE
                 ->
+                Label : MEMBER
+                  z
                 Label : OBJECT
                   $y
-                Label : PROPERTY
-                  z

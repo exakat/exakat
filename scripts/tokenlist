@@ -24,7 +24,7 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$config = \Exakat\Config::factory($argv);
+$config = new \Exakat\Config($argv);
 
 $file = $config->filename;
 
@@ -40,7 +40,7 @@ if (!is_readable($file)) {
     print "Usage : tokenlist <file>\n '$file' is not readable.\n\n";
 }
 
-$Php = new \Exakat\Phpexec();
+$Php = new \Exakat\Phpexec(null, $config);
 
 $res = shell_exec($config->phpexec.' -l '.$file);
 if (strpos($res, 'No syntax errors') !== 0) {
@@ -48,6 +48,7 @@ if (strpos($res, 'No syntax errors') !== 0) {
 }
 
 $tokens = $Php->getTokenFromFile($file);
+$Php->getTokens();
 
 foreach($tokens as $id => $token) { 
     if(count($token) == 3) { 

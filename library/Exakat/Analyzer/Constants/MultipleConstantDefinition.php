@@ -31,7 +31,6 @@ class MultipleConstantDefinition extends Analyzer {
         // Search for definitions and count them
         $csDefinitions = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").has("fullnspath", "\\\\define")
-                              .out("ARGUMENTS")
                               .or( __.out("ARGUMENT").has("rank", 2).count().is(eq(0)),
                                    __.out("ARGUMENT").has("rank", 2).has('boolean', false),
                                   )
@@ -50,7 +49,6 @@ GREMLIN
         $cisDefinitions = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").has("fullnspath")
                               .filter{it.get().value("fullnspath").toLowerCase() == '\\\\define'}
-                              .out("ARGUMENTS")
                               .out("ARGUMENT").has("rank", 2).has("boolean", true).in("ARGUMENT")
                               .out("ARGUMENT").has("rank", 0)
                               .map{ it.get().value("noDelimiter").toLowerCase()}
@@ -93,7 +91,6 @@ GREMLIN
         $array = array_values($array);
         
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
              ->is('boolean', true)
              ->inIs('ARGUMENT')
@@ -111,7 +108,6 @@ GREMLIN
         $array = array_values($array);
 
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
              ->is('boolean', false)
              ->inIs('ARGUMENT')
@@ -122,7 +118,6 @@ GREMLIN
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')

@@ -1,34 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.40.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                $c
-              Label : ARGUMENT
-                $d
-              Label : ARGUMENT
-                $e
-                Label : DEFAULT
-                  2
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              $e
+              Label : DEFAULT
+                2
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 ++
                 Label : POSTPLUSPLUS
                   $a

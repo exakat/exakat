@@ -1,218 +1,177 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.55.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             x
           Label : RETURNTYPE
             Stdclass
-        Label : ELEMENT
+        Label : EXPRESSION
           x2
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             x2
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
+          Label : NAME
+            i
           Label : METHOD
             x3
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
+            Label : ARGUMENT
+              $a
             Label : BLOCK
               Void
             Label : NAME
               x3
           Label : METHOD
             x4
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
+            Label : ARGUMENT
+              $b
             Label : BLOCK
               Void
             Label : NAME
               x4
             Label : RETURNTYPE
               Stdclass
-          Label : NAME
-            i
-        Label : ELEMENT
+        Label : EXPRESSION
           function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : RETURNTYPE
             Stdclass
-        Label : ELEMENT
+        Label : EXPRESSION
           function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-        Label : ELEMENT
+        Label : EXPRESSION
           function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : RETURNTYPE
             Stdclass
           Label : USE
-            (
-            Label : ARGUMENT
-              $y
-        Label : ELEMENT
+            $y
+        Label : EXPRESSION
           function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : USE
-            (
-            Label : ARGUMENT
-              $y
-        Label : ELEMENT
+            $y
+        Label : EXPRESSION
           xr
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             xr
           Label : RETURNTYPE
             Stdclass
-        Label : ELEMENT
+        Label : EXPRESSION
           x2r
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             x2r
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
+          Label : NAME
+            i
           Label : METHOD
             x3r
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
+            Label : ARGUMENT
+              $a
             Label : BLOCK
               Void
             Label : NAME
               x3r
           Label : METHOD
             x4r
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
+            Label : ARGUMENT
+              $b
             Label : BLOCK
               Void
             Label : NAME
               x4r
             Label : RETURNTYPE
               Stdclass
-          Label : NAME
-            i
-        Label : ELEMENT
+        Label : EXPRESSION
           function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : RETURNTYPE
             Stdclass
-        Label : ELEMENT
+        Label : EXPRESSION
           function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-        Label : ELEMENT
+        Label : EXPRESSION
           function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : RETURNTYPE
             Stdclass
           Label : USE
-            (
-            Label : ARGUMENT
-              $y
-        Label : ELEMENT
+            $y
+        Label : EXPRESSION
           function
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : USE
-            (
-            Label : ARGUMENT
-              $y
+            $y

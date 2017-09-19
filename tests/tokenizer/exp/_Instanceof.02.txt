@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Instanceof.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
@@ -18,22 +17,20 @@ Label : PROJECT
                 ||
                 Label : LEFT
                   is_array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      ->
-                      Label : OBJECT
-                        [
-                        Label : INDEX
-                          $c
-                        Label : VARIABLE
-                          ->
-                          Label : OBJECT
-                            $a
-                          Label : PROPERTY
-                            b
-                      Label : PROPERTY
-                        d
+                  Label : ARGUMENT
+                    ->
+                    Label : MEMBER
+                      d
+                    Label : OBJECT
+                      [
+                      Label : INDEX
+                        $c
+                      Label : VARIABLE
+                        ->
+                        Label : MEMBER
+                          b
+                        Label : OBJECT
+                          $a
                   Label : NAME
                     is_array
                 Label : RIGHT
@@ -42,21 +39,21 @@ Label : PROJECT
                     ArrayAccess
                   Label : VARIABLE
                     ->
+                    Label : MEMBER
+                      h
                     Label : OBJECT
                       [
                       Label : INDEX
                         $g
                       Label : VARIABLE
                         ->
+                        Label : MEMBER
+                          f
                         Label : OBJECT
                           $e
-                        Label : PROPERTY
-                          f
-                    Label : PROPERTY
-                      h
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $x

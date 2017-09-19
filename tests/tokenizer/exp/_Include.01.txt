@@ -1,42 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Include.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           include_once
-          Label : ARGUMENTS
+          Label : ARGUMENT
             'path'
-            Label : ARGUMENT
-              'path'
           Label : NAME
             include_once
-        Label : ELEMENT
+        Label : EXPRESSION
           include
-          Label : ARGUMENTS
+          Label : ARGUMENT
             'path'
-            Label : ARGUMENT
-              'path'
           Label : NAME
             include
-        Label : ELEMENT
+        Label : EXPRESSION
           require_once
-          Label : ARGUMENTS
+          Label : ARGUMENT
             'path'
-            Label : ARGUMENT
-              'path'
           Label : NAME
             require_once
-        Label : ELEMENT
+        Label : EXPRESSION
           require
-          Label : ARGUMENTS
+          Label : ARGUMENT
             'path'
-            Label : ARGUMENT
-              'path'
           Label : NAME
             require

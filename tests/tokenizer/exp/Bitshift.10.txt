@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Bitshift.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -30,7 +29,7 @@ Label : PROJECT
                     (
                     Label : CODE
                       $d
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a

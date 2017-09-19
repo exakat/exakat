@@ -33,10 +33,9 @@ class UnverifiedNonce extends Analyzer {
         // Search for wp_verify_nonce usage
         $list = $this->query(<<<GREMLIN
 g.V().hasLabel("Functioncall").as("first")
-     .where( __.in("METHOD", "NEW").count().is(eq(0)) )
      .has("token", within("T_STRING", "T_NS_SEPARATOR") )
      .has("fullnspath", within("\\\\wp_nonce_field", "\\\\wp_verify_nonce") )
-     .out("ARGUMENTS").out("ARGUMENT")
+     .out("ARGUMENT")
      .has("rank", 0)
      .hasLabel("Array")
      .where( __.out("VARIABLE").has("code", within("\\\$_GET", "\\\$_POST", "\\\$_REQUEST")) )
@@ -51,10 +50,9 @@ GREMLIN
         $list2 = $this->query(<<<GREMLIN
 
 g.V().hasLabel("Functioncall").as("first")
-     .where( __.in("METHOD", "NEW").count().is(eq(0)) )
      .has("token", within("T_STRING", "T_NS_SEPARATOR") )
      .has("fullnspath", within("\\\\wp_nonce_field", "\\\\check_ajax_referer", "\\\\check_admin_referer") )
-     .out("ARGUMENTS").out("ARGUMENT")
+     .out("ARGUMENT")
      .has("rank", 0)
      .hasLabel("String")
      .values("noDelimiter")

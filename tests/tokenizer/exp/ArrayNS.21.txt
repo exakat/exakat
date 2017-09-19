@@ -1,34 +1,27 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             [
-            Label : ARGUMENTS
+            Label : ARGUMENT
               [
               Label : ARGUMENT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    0
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
+                0
               Label : ARGUMENT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    3
+                1
+              Label : ARGUMENT
+                2
+            Label : ARGUMENT
+              [
+              Label : ARGUMENT
+                3

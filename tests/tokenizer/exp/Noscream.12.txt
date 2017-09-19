@@ -1,34 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Noscream.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              a
             Label : OBJECT
               $this
-            Label : PROPERTY
-              a
           Label : RIGHT
             @
             Label : AT
               $b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    $host
-                  Label : CONCAT
-                    'a'
-                Label : ARGUMENT
-                  'b'
               Label : NAME
                 $b
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  $host
+                Label : CONCAT
+                  'a'
+              Label : ARGUMENT
+                'b'

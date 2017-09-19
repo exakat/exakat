@@ -1,77 +1,76 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.72.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : IMPLEMENTS
             b
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : IMPLEMENTS
             \b2
           Label : NAME
             a2
-        Label : ELEMENT
+        Label : EXPRESSION
           class
-          Label : IMPLEMENTS
-            b3
           Label : IMPLEMENTS
             c3
+          Label : IMPLEMENTS
+            b3
           Label : NAME
             a3
-        Label : ELEMENT
+        Label : EXPRESSION
           class
-          Label : IMPLEMENTS
-            \b3
           Label : IMPLEMENTS
             \c3
-          Label : NAME
-            a23
-        Label : ELEMENT
-          class
           Label : IMPLEMENTS
             \b3
-          Label : IMPLEMENTS
-            c3\d33
           Label : NAME
-            a24
-        Label : ELEMENT
+            a23
+        Label : EXPRESSION
           class
           Label : IMPLEMENTS
-            b4
+            c3\d33
+          Label : IMPLEMENTS
+            \b3
+          Label : NAME
+            a24
+        Label : EXPRESSION
+          class
           Label : IMPLEMENTS
             c4
+          Label : IMPLEMENTS
+            b4
           Label : IMPLEMENTS
             d4
           Label : NAME
             a4
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : IMPLEMENTS
-            b4
-          Label : IMPLEMENTS
             c4
+          Label : IMPLEMENTS
+            b4
           Label : IMPLEMENTS
             d4
           Label : IMPLEMENTS
             e5
           Label : NAME
             a5
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : IMPLEMENTS
-            b4
-          Label : IMPLEMENTS
             \cc\c4
+          Label : IMPLEMENTS
+            b4
           Label : IMPLEMENTS
             \d4
           Label : IMPLEMENTS

@@ -1,42 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Nsname.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             \a\b
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               \a\b
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             \c\d
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
+            Label : ARGUMENT
+              1
             Label : NAME
               \c\d
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             \e\f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                3
-              Label : ARGUMENT
-                2
             Label : NAME
               \e\f
+            Label : ARGUMENT
+              3
+            Label : ARGUMENT
+              2

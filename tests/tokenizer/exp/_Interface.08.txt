@@ -1,25 +1,22 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Interface.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : EXTENDS
-            C
-          Label : EXTENDS
             D
+          Label : EXTENDS
+            C
           Label : METHOD
             E
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               Void
             Label : NAME

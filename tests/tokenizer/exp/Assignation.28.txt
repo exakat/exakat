@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Assignation.28.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             (int)
@@ -16,9 +15,7 @@ Label : PROJECT
               $a
           Label : RIGHT
             array_pop
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
+            Label : ARGUMENT
+              $b
             Label : NAME
               array_pop

@@ -1,90 +1,81 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.51.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a1
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'b'
-                Label : VALUE
-                  -
-                  Label : LEFT
-                    ++
-                    Label : POSTPLUSPLUS
-                      $i
-                  Label : RIGHT
-                    $j
-        Label : ELEMENT
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'b'
+              Label : VALUE
+                -
+                Label : LEFT
+                  ++
+                  Label : POSTPLUSPLUS
+                    $i
+                Label : RIGHT
+                  $j
+        Label : EXPRESSION
           =
           Label : LEFT
             $a2
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'c'
-                Label : VALUE
-                  -
-                  Label : LEFT
-                    ++
-                    Label : PREPLUSPLUS
-                      $i
-                  Label : RIGHT
-                    $j
-        Label : ELEMENT
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'c'
+              Label : VALUE
+                -
+                Label : LEFT
+                  ++
+                  Label : PREPLUSPLUS
+                    $i
+                Label : RIGHT
+                  $j
+        Label : EXPRESSION
           =
           Label : LEFT
             $a3
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'd'
-                Label : VALUE
-                  -
-                  Label : LEFT
-                    --
-                    Label : POSTPLUSPLUS
-                      $i
-                  Label : RIGHT
-                    $j
-        Label : ELEMENT
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'd'
+              Label : VALUE
+                -
+                Label : LEFT
+                  --
+                  Label : POSTPLUSPLUS
+                    $i
+                Label : RIGHT
+                  $j
+        Label : EXPRESSION
           =
           Label : LEFT
             $a4
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'e'
-                Label : VALUE
-                  -
-                  Label : LEFT
-                    --
-                    Label : PREPLUSPLUS
-                      $i
-                  Label : RIGHT
-                    $j
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'e'
+              Label : VALUE
+                -
+                Label : LEFT
+                  --
+                  Label : PREPLUSPLUS
+                    $i
+                Label : RIGHT
+                  $j

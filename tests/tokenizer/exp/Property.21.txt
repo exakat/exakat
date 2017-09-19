@@ -1,19 +1,20 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Property.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
             Label : LEFT
               ->
+              Label : MEMBER
+                C
               Label : OBJECT
                 $
                 Label : NAME
@@ -26,13 +27,11 @@ Label : PROJECT
                       $b
                     Label : VARIABLE
                       $a
-              Label : PROPERTY
-                C
             Label : RIGHT
               D
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -46,12 +45,14 @@ Label : PROJECT
                     $b
                   Label : VARIABLE
                     $a
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             =
             Label : LEFT
               ->
+              Label : MEMBER
+                C
               Label : OBJECT
                 $
                 Label : NAME
@@ -64,13 +65,11 @@ Label : PROJECT
                       $b
                     Label : VARIABLE
                       $a
-              Label : PROPERTY
-                C
             Label : RIGHT
               D
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c

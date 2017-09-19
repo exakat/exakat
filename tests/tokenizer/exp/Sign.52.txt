@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.52.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             instanceof
@@ -18,7 +17,7 @@ Label : PROJECT
               $a
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 -
@@ -28,7 +27,7 @@ Label : PROJECT
                 '-'
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -36,10 +35,8 @@ Label : PROJECT
                 ->
                 Label : METHOD
                   e
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     e
                 Label : OBJECT

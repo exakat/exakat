@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.38.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -18,19 +17,19 @@ Label : PROJECT
               'b'
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $d
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   --
                   Label : PREPLUSPLUS
                     $e
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $c

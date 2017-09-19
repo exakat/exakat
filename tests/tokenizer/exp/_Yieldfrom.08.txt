@@ -1,42 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yieldfrom.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
               Label : RIGHT
                 [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    =
-                    Label : LEFT
-                      $b
-                    Label : RIGHT
-                      yield from
-                      Label : YIELD
+                Label : ARGUMENT
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    yield from
+                    Label : YIELD
+                      c
+                      Label : ARGUMENT
+                        Void
+                      Label : NAME
                         c
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          c
           Label : NAME
             a

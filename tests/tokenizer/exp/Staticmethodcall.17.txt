@@ -1,392 +1,353 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticmethodcall.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             self
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             parent
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             static
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             SELF
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             PARENT
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             STATIC
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             self
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               self
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             parent
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               parent
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             static
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               static
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             self
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
+            Label : ARGUMENT
+              1
             Label : NAME
               self
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             parent
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
+            Label : ARGUMENT
+              1
             Label : NAME
               parent
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             static
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
+            Label : ARGUMENT
+              1
             Label : NAME
               static
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             self
           Label : CONSTANT
             A
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             parent
           Label : CONSTANT
             A
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             static
           Label : CONSTANT
             A
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             self
           Label : METHOD
             m
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               m
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             parent
           Label : METHOD
             m
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               m
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             static
           Label : METHOD
             m
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               m
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             self
-          Label : PROPERTY
+          Label : MEMBER
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             parent
-          Label : PROPERTY
+          Label : MEMBER
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             static
-          Label : PROPERTY
+          Label : MEMBER
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
-            static
+            self
+          Label : DEFINITION
+            self
           Label : DEFINITION
             static
           Label : DEFINITION
-            static
+            self
           Label : DEFINITION
             static
-          Label : DEFINITION, DEFINITION
+          Label : DEFINITION
             self
-          Label : DEFINITION, DEFINITION
-            self
-          Label : DEFINITION, DEFINITION
-            self
-          Label : DEFINITION, DEFINITION, DEFINITION
-            self
+          Label : DEFINITION
+            static
           Label : METHOD
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 new
                 Label : NEW
                   self
-              Label : ELEMENT
+              Label : EXPRESSION
                 new
                 Label : NEW
                   parent
-              Label : ELEMENT
+              Label : EXPRESSION
                 new
                 Label : NEW
                   static
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   self
                 Label : CONSTANT
                   Ac
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   parent
                 Label : CONSTANT
                   Ac
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   static
                 Label : CONSTANT
                   Ac
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   self
                 Label : METHOD
                   mc
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     mc
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   parent
                 Label : METHOD
                   mc
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     mc
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   static
                 Label : METHOD
                   mc
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     mc
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   self
-                Label : PROPERTY
+                Label : MEMBER
                   $ac
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   parent
-                Label : PROPERTY
+                Label : MEMBER
                   $ac
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   static
-                Label : PROPERTY
+                Label : MEMBER
                   $ac
             Label : NAME
               foo
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
           Label : DEFINITION
-            static
+            self
+          Label : DEFINITION
+            self
           Label : DEFINITION
             static
           Label : DEFINITION
-            static
+            self
           Label : DEFINITION
             static
-          Label : DEFINITION, DEFINITION
+          Label : DEFINITION
             self
-          Label : DEFINITION, DEFINITION
-            self
-          Label : DEFINITION, DEFINITION
-            self
-          Label : DEFINITION, DEFINITION, DEFINITION
-            self
+          Label : DEFINITION
+            static
           Label : METHOD
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 new
                 Label : NEW
                   self
-              Label : ELEMENT
+              Label : EXPRESSION
                 new
                 Label : NEW
                   parent
-              Label : ELEMENT
+              Label : EXPRESSION
                 new
                 Label : NEW
                   static
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   self
                 Label : CONSTANT
                   At
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   parent
                 Label : CONSTANT
                   At
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   static
                 Label : CONSTANT
                   At
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   self
                 Label : METHOD
                   mt
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     mt
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   parent
                 Label : METHOD
                   mt
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     mt
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   static
                 Label : METHOD
                   mt
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     mt
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   self
-                Label : PROPERTY
+                Label : MEMBER
                   $at
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   parent
-                Label : PROPERTY
+                Label : MEMBER
                   $at
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   static
-                Label : PROPERTY
+                Label : MEMBER
                   $at
             Label : NAME
               foo

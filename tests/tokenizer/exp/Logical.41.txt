@@ -1,32 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.41.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ||
           Label : LEFT
             ==
             Label : LEFT
               ->
+              Label : MEMBER
+                B
               Label : OBJECT
                 $a1
-              Label : PROPERTY
-                B
             Label : RIGHT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $b
-                  Label : PROPERTY
-                    D
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  D
+                Label : OBJECT
+                  $b
               Label : NAME
                 C
           Label : RIGHT
@@ -35,38 +32,36 @@ Label : PROJECT
               {
               Label : INDEX
                 ->
+                Label : MEMBER
+                  F
                 Label : OBJECT
                   $d
-                Label : PROPERTY
-                  F
               Label : VARIABLE
                 ::
                 Label : CLASS
                   c
-                Label : PROPERTY
+                Label : MEMBER
                   $E1
             Label : RIGHT
               'G1'
-        Label : ELEMENT
+        Label : EXPRESSION
           ||
           Label : LEFT
             ==
             Label : LEFT
               ->
+              Label : MEMBER
+                B
               Label : OBJECT
                 $a2
-              Label : PROPERTY
-                B
             Label : RIGHT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $b
-                  Label : PROPERTY
-                    D
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  D
+                Label : OBJECT
+                  $b
               Label : NAME
                 C
           Label : RIGHT
@@ -75,38 +70,36 @@ Label : PROJECT
               [
               Label : INDEX
                 ->
+                Label : MEMBER
+                  F
                 Label : OBJECT
                   $d
-                Label : PROPERTY
-                  F
               Label : VARIABLE
                 ::
                 Label : CLASS
                   c
-                Label : PROPERTY
+                Label : MEMBER
                   $E2
             Label : RIGHT
               'G2'
-        Label : ELEMENT
+        Label : EXPRESSION
           ||
           Label : LEFT
             ==
             Label : LEFT
               ->
+              Label : MEMBER
+                B
               Label : OBJECT
                 $a3
-              Label : PROPERTY
-                B
             Label : RIGHT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $b
-                  Label : PROPERTY
-                    D
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  D
+                Label : OBJECT
+                  $b
               Label : NAME
                 C
           Label : RIGHT
@@ -117,14 +110,12 @@ Label : PROJECT
                 c
               Label : METHOD
                 E3
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $d
-                    Label : PROPERTY
-                      F
+                Label : ARGUMENT
+                  ->
+                  Label : MEMBER
+                    F
+                  Label : OBJECT
+                    $d
                 Label : NAME
                   E3
             Label : RIGHT

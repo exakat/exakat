@@ -31,7 +31,6 @@ class PrintAndDie extends Analyzer {
              ->tokenIs(array('T_PRINT', 'T_ECHO'))
              ->nextSibling()
              ->tokenIs('T_EXIT')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Void')
              ->back('first');

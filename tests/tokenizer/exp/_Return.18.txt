@@ -1,48 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Return.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               isset
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    0
-                  Label : VARIABLE
-                    $a
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  0
+                Label : VARIABLE
+                  $a
               Label : NAME
                 isset
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 &&
                 Label : LEFT
                   isset
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'c'
+                    Label : VARIABLE
                       [
                       Label : INDEX
-                        'c'
+                        0
                       Label : VARIABLE
-                        [
-                        Label : INDEX
-                          0
-                        Label : VARIABLE
-                          $b
+                        $b
                   Label : NAME
                     isset
                 Label : RIGHT
@@ -57,7 +52,7 @@ Label : PROJECT
                       $d
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 null

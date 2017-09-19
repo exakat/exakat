@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class ResultMayBeMissing extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\preg_match')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
              ->savePropertyAs('code', 'results')
              ->back('first')

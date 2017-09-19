@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Return.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
@@ -16,29 +15,27 @@ Label : PROJECT
               ->
               Label : METHOD
                 b
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $c
-                    Label : PROPERTY
-                      d
+                Label : ARGUMENT
+                  ->
+                  Label : MEMBER
+                    d
+                  Label : OBJECT
+                    $c
                 Label : NAME
                   b
               Label : OBJECT
                 $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 =
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    f
                   Label : OBJECT
                     $e
-                  Label : PROPERTY
-                    f
                 Label : RIGHT
                   'g'

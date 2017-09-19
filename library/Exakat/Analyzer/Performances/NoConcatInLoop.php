@@ -26,10 +26,26 @@ use Exakat\Analyzer\Analyzer;
 
 class NoConcatInLoop extends Analyzer {
     public function analyze() {
+        //'foreach($a as $b) { $d .= $b; } ',
         $this->atomIs(array('Foreach', 'For'))
              ->outIs('BLOCK')
              ->atomInsideNoDefinition('Assignation')
-             ->codeIs('.=');
+             ->codeIs('.=')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs(array('Foreach', 'For'))
+             ->outIs('BLOCK')
+             ->atomInsideNoDefinition('Concatenation')
+             ->outIs('CONCAT')
+             ->savePropertyAs('fullcode', 'variable')
+             ->inIs('CONCAT')
+             ->inIs('RIGHT')
+             ->atomIs('Assignation')
+             ->codeIs('=')
+             ->outIs('LEFT')
+             ->samePropertyAs('fullcode', 'variable')
+             ->back('first');
         $this->prepareQuery();
     }
 }

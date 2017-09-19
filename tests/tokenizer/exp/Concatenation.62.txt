@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.62.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -16,14 +15,12 @@ Label : PROJECT
               ==
               Label : LEFT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'C'
-                  Label : ARGUMENT
-                    'D'
                 Label : NAME
                   B
+                Label : ARGUMENT
+                  'C'
+                Label : ARGUMENT
+                  'D'
               Label : RIGHT
                 'E'
             Label : RIGHT
@@ -42,7 +39,7 @@ Label : PROJECT
                     $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
@@ -50,91 +47,81 @@ Label : PROJECT
                 new
                 Label : NEW
                   Stdclass
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     Stdclass
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  I
                 Label : OBJECT
                   $a
-                Label : PROPERTY
-                  I
               Label : RIGHT
                 'I'
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                'b2'
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'a2'
-                  Label : CONCAT
-                    'b2'
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  'a2'
+                Label : CONCAT
+                  'b2'
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                'c3'
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'a3'
-                  Label : CONCAT
-                    'b3'
-                  Label : CONCAT
-                    'c3'
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  'a3'
+                Label : CONCAT
+                  'b3'
+                Label : CONCAT
+                  'c3'
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                'd4'
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'a4'
-                  Label : CONCAT
-                    'b4'
-                  Label : CONCAT
-                    'c4'
-                  Label : CONCAT
-                    'd4'
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  'a4'
+                Label : CONCAT
+                  'b4'
+                Label : CONCAT
+                  'c4'
+                Label : CONCAT
+                  'd4'
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                )
-                Label : ARGUMENT
-                  (
-                  Label : CODE
-                    .
-                    Label : CONCAT
-                      'H'
-                    Label : CONCAT
-                      ->
-                      Label : OBJECT
-                        $a
-                      Label : PROPERTY
-                        I
-                    Label : CONCAT
-                      +
-                      Label : SIGN
-                        (
-                        Label : CODE
-                          ?
-                          Label : CONDITION
-                            true
-                          Label : ELSE
-                            '0'
-                          Label : THEN
-                            '1'
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  .
+                  Label : CONCAT
+                    'H'
+                  Label : CONCAT
+                    ->
+                    Label : MEMBER
+                      I
+                    Label : OBJECT
+                      $a
+                  Label : CONCAT
+                    +
+                    Label : SIGN
+                      (
+                      Label : CODE
+                        ?
+                        Label : CONDITION
+                          true
+                        Label : ELSE
+                          '0'
+                        Label : THEN
+                          '1'
               Label : NAME
                 print

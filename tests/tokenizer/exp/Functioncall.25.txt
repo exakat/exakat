@@ -1,170 +1,145 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              Void
             Label : NAME
               list
           Label : RIGHT
             range
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                2
             Label : NAME
               range
-        Label : ELEMENT
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              2
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              Void
             Label : NAME
               list
           Label : RIGHT
             range
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                2
             Label : NAME
               range
-        Label : ELEMENT
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              2
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                $b
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              $b
             Label : NAME
               list
           Label : RIGHT
             range
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                2
             Label : NAME
               range
-        Label : ELEMENT
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              2
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               list
           Label : RIGHT
             range
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                2
             Label : NAME
               range
-        Label : ELEMENT
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              2
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                $b
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              $b
             Label : NAME
               list
           Label : RIGHT
             range
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                2
             Label : NAME
               range
-        Label : ELEMENT
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              2
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                $a
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                Void
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              $a
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               list
           Label : RIGHT
             range
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                2
             Label : NAME
               range
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              2

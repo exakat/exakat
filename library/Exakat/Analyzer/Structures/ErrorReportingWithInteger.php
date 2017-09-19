@@ -30,7 +30,6 @@ class ErrorReportingWithInteger extends Analyzer {
         $allowedIntegers = array(-1, 0);
         
         $this->atomFunctionIs('\\error_reporting')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('Integer', 'Addition'))
              ->codeIsNot($allowedIntegers)
@@ -38,7 +37,6 @@ class ErrorReportingWithInteger extends Analyzer {
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\ini_set')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIsNot('T_QUOTE')

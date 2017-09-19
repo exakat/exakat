@@ -40,8 +40,7 @@ class ConstantScalarExpression extends Analyzer {
         $this->prepareQuery();
 
         // in argument's default value
-        $this->atomIs(self::$FUNCTION_METHOD)
-             ->outIs('ARGUMENTS')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('DEFAULT')
              ->atomIsNot($authorizedAtoms)

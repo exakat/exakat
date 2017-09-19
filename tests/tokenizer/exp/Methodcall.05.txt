@@ -1,32 +1,27 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Methodcall.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             ->
             Label : METHOD
               d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 d
             Label : OBJECT
               a
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  $c
               Label : NAME
                 a
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                $c

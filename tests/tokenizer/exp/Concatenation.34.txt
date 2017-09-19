@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.34.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
@@ -20,13 +19,13 @@ Label : PROJECT
                 'prefix'
               Label : VARIABLE
                 ->
+                Label : MEMBER
+                  properties
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  properties
             Label : CONCAT
               ->
+              Label : MEMBER
+                id
               Label : OBJECT
                 $node
-              Label : PROPERTY
-                id

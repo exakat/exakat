@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.42.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -18,55 +17,51 @@ Label : PROJECT
               'b'
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $d
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $c
-        Label : ELEMENT
+        Label : EXPRESSION
           &&
           Label : LEFT
             !
             Label : NOT
               e
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $f
+              Label : ARGUMENT
+                $f
               Label : NAME
                 e
           Label : RIGHT
             g
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $h
-              Label : ARGUMENT
-                $i
-              Label : ARGUMENT
-                $j
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                'k'
-              Label : ARGUMENT
+            Label : ARGUMENT
+              $h
+            Label : ARGUMENT
+              $i
+            Label : ARGUMENT
+              $j
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              'k'
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                $o
+              Label : VARIABLE
                 [
                 Label : INDEX
-                  $o
+                  'n'
                 Label : VARIABLE
                   [
                   Label : INDEX
-                    'n'
+                    'm'
                   Label : VARIABLE
-                    [
-                    Label : INDEX
-                      'm'
-                    Label : VARIABLE
-                      $l
+                    $l
             Label : NAME
               g

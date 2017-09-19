@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.23.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $x
@@ -30,37 +29,37 @@ Label : PROJECT
                     $t
                   Label : ELSE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $zz
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $zz2
                   Label : THEN
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $tt
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $tt2
                 Label : THEN
                   ;
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     $uu
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     $uu2
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   $vv
-                Label : ELEMENT
+                Label : EXPRESSION
                   $vv2
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 $ww
-              Label : ELEMENT
+              Label : EXPRESSION
                 $ww2
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               $y
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

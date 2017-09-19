@@ -1,50 +1,45 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Coalesce.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                ??
-                Label : LEFT
-                  2
-                Label : RIGHT
-                  3
-              Label : ELSE
-                5
-              Label : THEN
-                4
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              ??
+              Label : LEFT
+                2
+              Label : RIGHT
+                3
+            Label : ELSE
+              5
+            Label : THEN
+              4
           Label : NAME
             var_dump
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                ??
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              ??
+              Label : LEFT
+                ||
                 Label : LEFT
-                  ||
-                  Label : LEFT
-                    0
-                  Label : RIGHT
-                    2
+                  0
                 Label : RIGHT
-                  3
-              Label : ELSE
-                5
-              Label : THEN
-                4
+                  2
+              Label : RIGHT
+                3
+            Label : ELSE
+              5
+            Label : THEN
+              4
           Label : NAME
             var_dump

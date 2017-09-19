@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.44.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a1
@@ -18,7 +17,7 @@ Label : PROJECT
               1
             Label : RIGHT
               $b1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a2
@@ -28,7 +27,7 @@ Label : PROJECT
               2
             Label : RIGHT
               $b2
-        Label : ELEMENT
+        Label : EXPRESSION
           and
           Label : LEFT
             =
@@ -38,7 +37,7 @@ Label : PROJECT
               3
           Label : RIGHT
             $b3
-        Label : ELEMENT
+        Label : EXPRESSION
           or
           Label : LEFT
             =
@@ -48,7 +47,7 @@ Label : PROJECT
               4
           Label : RIGHT
             $b4
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a5

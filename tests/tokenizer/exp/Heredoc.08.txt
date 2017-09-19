@@ -1,47 +1,44 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Heredoc.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $c22
               Label : ELSE
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $b2
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $a2
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $room
           Label : RIGHT
             <<<'HEREDOCE'
 
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $room
@@ -51,7 +48,7 @@ Label : PROJECT
             Label : CONCAT
               D
 
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $room
@@ -61,34 +58,32 @@ Label : PROJECT
             Label : CONCAT
               F
 
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $room
           Label : RIGHT
             <<<HEREDOCE
 
-        Label : ELEMENT
+        Label : EXPRESSION
           b
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $c2
               Label : ELSE
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $b
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $a

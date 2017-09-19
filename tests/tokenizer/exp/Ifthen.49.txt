@@ -1,48 +1,45 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.49.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
               Label : RIGHT
                 preg_replace
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    "
-                    Label : CONCAT
-                      /x
-                    Label : CONCAT
-                      $y
-                    Label : CONCAT
-                      /
-                  Label : ARGUMENT
-                    "z"
-                  Label : ARGUMENT
-                    $f
+                Label : ARGUMENT
+                  "
+                  Label : CONCAT
+                    /x
+                  Label : CONCAT
+                    $y
+                  Label : CONCAT
+                    /
+                Label : ARGUMENT
+                  "z"
+                Label : ARGUMENT
+                  $f
                 Label : NAME
                   preg_replace
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $b
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               .=
               Label : LEFT
                 $f
@@ -52,7 +49,7 @@ Label : PROJECT
                   $g
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               .=
               Label : LEFT
                 $c

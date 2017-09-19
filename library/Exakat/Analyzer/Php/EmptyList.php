@@ -31,7 +31,6 @@ class EmptyList extends Analyzer {
     public function analyze() {
         // list()
         $this->atomFunctionIs('\\list')
-             ->outIs('ARGUMENTS')
              ->is('count', 1)
              ->outIs('ARGUMENT')
              ->atomIs('Void')
@@ -40,7 +39,7 @@ class EmptyList extends Analyzer {
 
         // list( , )
         $this->atomFunctionIs('\\list')
-             ->raw('where( __.out("ARGUMENTS").out("ARGUMENT").not(hasLabel("Void")).count().is(eq(0)) )');
+             ->raw('where( __.out("ARGUMENT").not(hasLabel("Void")).count().is(eq(0)) )');
         $this->prepareQuery();
     }
 }

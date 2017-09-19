@@ -1,36 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.52.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ===
                 Label : LEFT
                   C
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      $b
                   Label : NAME
                     C
+                  Label : ARGUMENT
+                    $d
+                  Label : ARGUMENT
+                    $b
                 Label : RIGHT
                   0
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $e
@@ -38,19 +35,17 @@ Label : PROJECT
                     .
                     Label : CONCAT
                       D
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'E'
-                        Label : ARGUMENT
-                          F
-                        Label : ARGUMENT
-                          $d
+                      Label : ARGUMENT
+                        'E'
+                      Label : ARGUMENT
+                        F
+                      Label : ARGUMENT
+                        $d
                       Label : NAME
                         D
                     Label : CONCAT
                       'G'
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ===
@@ -60,16 +55,28 @@ Label : PROJECT
                       null
                   Label : ELSE
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       foreach
                       Label : BLOCK
                         {}
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           if
                           Label : CONDITION
                             J
-                            Label : ARGUMENTS
-                              (
+                            Label : ARGUMENT
+                              .
+                              Label : CONCAT
+                                $g
+                              Label : CONCAT
+                                F
+                              Label : CONCAT
+                                $e
+                            Label : NAME
+                              J
+                          Label : THEN
+                            {}
+                            Label : EXPRESSION
+                              require
                               Label : ARGUMENT
                                 .
                                 Label : CONCAT
@@ -78,25 +85,9 @@ Label : PROJECT
                                   F
                                 Label : CONCAT
                                   $e
-                            Label : NAME
-                              J
-                          Label : THEN
-                            {}
-                            Label : ELEMENT
-                              require
-                              Label : ARGUMENTS
-                                $e
-                                Label : ARGUMENT
-                                  .
-                                  Label : CONCAT
-                                    $g
-                                  Label : CONCAT
-                                    F
-                                  Label : CONCAT
-                                    $e
                               Label : NAME
                                 require
-                            Label : ELEMENT
+                            Label : EXPRESSION
                               return
                               Label : RETURN
                                 I
@@ -108,7 +99,7 @@ Label : PROJECT
                         $g
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       if
                       Label : CONDITION
                         =
@@ -116,23 +107,19 @@ Label : PROJECT
                           $f
                         Label : RIGHT
                           H
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $e
+                          Label : ARGUMENT
+                            $e
                           Label : NAME
                             H
                       Label : THEN
                         {}
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           require
-                          Label : ARGUMENTS
+                          Label : ARGUMENT
                             $f
-                            Label : ARGUMENT
-                              $f
                           Label : NAME
                             require
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           return
                           Label : RETURN
                             I
@@ -140,11 +127,11 @@ Label : PROJECT
             ::
             Label : CLASS
               B
-            Label : PROPERTY
+            Label : MEMBER
               $a
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $b
             Label : VALUE
               $c

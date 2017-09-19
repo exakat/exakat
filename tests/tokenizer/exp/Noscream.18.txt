@@ -1,64 +1,57 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Noscream.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             C
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'D'
+            Label : ARGUMENT
+              'D'
             Label : NAME
               C
           Label : OBJECT
             ->
+            Label : MEMBER
+              B
             Label : OBJECT
               $a
-            Label : PROPERTY
-              B
-        Label : ELEMENT
+        Label : EXPRESSION
           OR
           Label : LEFT
             E
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                .
-                Label : CONCAT
-                  F
-                Label : CONCAT
-                  'G'
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                F
+              Label : CONCAT
+                'G'
             Label : NAME
               E
           Label : RIGHT
             @
             Label : AT
               H
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    I
-                  Label : CONCAT
-                    'J'
-                Label : ARGUMENT
-                  0
               Label : NAME
                 H
-        Label : ELEMENT
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  I
+                Label : CONCAT
+                  'J'
+              Label : ARGUMENT
+                0
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $e
@@ -66,7 +59,7 @@ Label : PROJECT
             $b
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $c
             Label : VALUE
               $d

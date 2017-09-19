@@ -1,0 +1,33 @@
+Whole
+Label : PROJECT
+  Label : FILE
+    ;
+    Label : EXPRESSION
+      <?php
+
+      Label : CODE
+        ;
+        Label : EXPRESSION
+          class
+          Label : NAME
+            a
+          Label : USE
+            use
+            Label : BLOCK
+              {}
+              Label : EXPRESSION
+                insteadof
+                Label : INSTEADOF
+                  f
+                Label : NAME
+                  ::
+                  Label : CLASS
+                    e
+                  Label : CONSTANT
+                    foo
+            Label : USE
+              b
+            Label : USE
+              c
+            Label : USE
+              d

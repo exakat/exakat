@@ -1,60 +1,53 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.57.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             class_exists
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $d
+            Label : ARGUMENT
+              $d
             Label : NAME
               class_exists
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
                 Label : NOT
                   isset
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      ->
-                      Label : OBJECT
-                        $a
-                      Label : PROPERTY
-                        b
+                  Label : ARGUMENT
+                    ->
+                    Label : MEMBER
+                      b
+                    Label : OBJECT
+                      $a
                   Label : NAME
                     isset
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $c
-            Label : ELEMENT
+            Label : EXPRESSION
               new
               Label : NEW
                 $a
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $b
-                  Label : ARGUMENT
-                    (array)
-                    Label : CAST
-                      (
-                      Label : CODE
-                        $c
                 Label : NAME
                   $a
+                Label : ARGUMENT
+                  $b
+                Label : ARGUMENT
+                  (array)
+                  Label : CAST
+                    (
+                    Label : CODE
+                      $c

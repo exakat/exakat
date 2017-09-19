@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Clone.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             F
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
+            Label : ARGUMENT
+              $a
             Label : NAME
               F
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b

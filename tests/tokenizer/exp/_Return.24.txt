@@ -1,42 +1,37 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Return.24.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           __static__construct
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 >
                 Label : LEFT
                   count
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        K
-                      Label : PROPERTY
-                        $load_paths
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      K
+                    Label : MEMBER
+                      $load_paths
                   Label : NAME
                     count
                 Label : RIGHT
                   0
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     Void

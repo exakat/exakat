@@ -1,39 +1,34 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Foreach.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : SOURCE
             ?
             Label : CONDITION
               is_array
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a
+              Label : ARGUMENT
+                $a
               Label : NAME
                 is_array
             Label : ELSE
               explode
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'd'
-                Label : ARGUMENT
-                  $d
               Label : NAME
                 explode
+              Label : ARGUMENT
+                'd'
+              Label : ARGUMENT
+                $d
             Label : THEN
               $b
           Label : VALUE

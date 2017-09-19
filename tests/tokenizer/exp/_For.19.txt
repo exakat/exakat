@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_For.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -19,35 +18,31 @@ Label : PROJECT
               (string)
               Label : CAST
                 $b
-        Label : ELEMENT
+        Label : EXPRESSION
           for
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : FINAL
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               <
               Label : LEFT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   B
               Label : RIGHT
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $e
+                Label : ARGUMENT
+                  $e
                 Label : NAME
                   C
           Label : INCREMENT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $f
@@ -55,37 +50,29 @@ Label : PROJECT
                   $f
               Label : RIGHT
                 D
-                Label : ARGUMENTS
-                  (
+                Label : ARGUMENT
+                  E
                   Label : ARGUMENT
-                    E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $g
-                      Label : ARGUMENT
-                        F
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $h
-                        Label : NAME
-                          F
-                      Label : ARGUMENT
-                        0
+                    $g
+                  Label : ARGUMENT
+                    F
+                    Label : ARGUMENT
+                      $h
                     Label : NAME
-                      E
+                      F
+                  Label : ARGUMENT
+                    0
+                  Label : NAME
+                    E
                 Label : NAME
                   D
           Label : INIT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void

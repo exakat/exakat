@@ -84,11 +84,23 @@ class Config {
                                             'format'         => 'Text',
                                             'file'           =>  Reports::STDOUT,
                                             'style'          => 'ALL',
+
                                             'neo4j_host'     => '127.0.0.1',
                                             'neo4j_port'     => '7474',
                                             'neo4j_folder'   => 'neo4j',
                                             'neo4j_login'    => 'admin',
                                             'neo4j_password' => 'admin',
+
+                                            'gsneo4j_host'   => '127.0.0.1',
+                                            'gsneo4j_port'   => '7474',
+                                            'gsneo4j_folder' => 'tinkergraph',
+                                            
+                                            'tinkergraph_host'   => '127.0.0.1',
+                                            'tinkergraph_port'   => '7474',
+                                            'tinkergraph_folder' => 'tinkergraph',
+
+                                            'branch'         => 'master',
+                                            'tag'            => '',
 
                                             'php'           => '',
                                             'php52'         => '',
@@ -116,7 +128,7 @@ class Config {
                                             'project_packagist'   => '',
                                             'other_php_versions'  => '',
 
-                                            'project_reports'     => array('Ambassador', 'Devoops'),
+                                            'project_reports'     => array('Ambassador'),
                                             'project_themes'      => array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56', 
                                                                            'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
                                                                            'Dead code', 'Security', 'Analyze', 'Preferences',
@@ -132,7 +144,7 @@ class Config {
                                'nogremlin'   => 'NoGremlin',
                                );
 
-    private $LOADERS = array( 'neo4j'       => 'CypherG3', // Could be Neo4jImport
+    private $LOADERS = array( 'neo4j'       => 'Neo4jImport', // Could be Neo4jImport, CypherG3
                               'tinkergraph' => 'Tinkergraph',
                               'gsneo4j'     => 'GSNeo4j',
                               'janusgraph'  => 'Janusgraph',
@@ -279,7 +291,8 @@ class Config {
         $this->options = array_merge($this->options, $this->defaultConfig, $this->configFile, $this->projectConfig, $this->codacyConfig, $this->commandline);
 
         $graphdb = $this->options['graphdb'];
-        if ($this->options[$graphdb.'_folder'][0] !== '/') {
+        if (isset($this->options[$graphdb.'_folder']) && 
+            $this->options[$graphdb.'_folder'][0] !== '/') {
             $this->options[$graphdb.'_folder'] = $this->projects_root.'/'.$this->options[$graphdb.'_folder'];
         }
         $this->options[$graphdb.'_folder'] = realpath($this->options[$graphdb.'_folder']);
@@ -323,6 +336,10 @@ class Config {
             $this->projectConfig = array();
         } else {
             $this->projectConfig = parse_ini_file($this->projects_root.'/projects/'.$project.'/config.ini');
+            if (file_exists($this->projects_root.'/projects/'.$project.'/config.cache')) {
+                $this->projectConfig = array_merge($this->projectConfig,
+                                                   parse_ini_file($this->projects_root.'/projects/'.$project.'/config.cache'));
+            }
         }
 
         // removing empty values in the INI file
@@ -351,7 +368,7 @@ class Config {
                            'file_extensions'    => array('php', 'php3', 'inc', 'tpl', 'phtml', 'tmpl', 'phps', 'ctp'),
 //                           'loader'             => 'Neo4jImport',
                            'project_themes'     => 'CompatibilityPHP53,CompatibilityPHP54,CompatibilityPHP55,CompatibilityPHP56,CompatibilityPHP70,CompatibilityPHP71,CompatibilityPHP72,CompatibilityPHP73,Dead code,Security,Analyze,Preferences,Appinfo,Appcontent',
-                           'project_reports'    => array('Ambassador', 'Devoops'),
+                           'project_reports'    => array('Ambassador'),
                         );
 
         foreach($defaults as $name => $value) {
@@ -434,7 +451,9 @@ class Config {
                                 '-neo4j_host'   => 'neo4j_host',
                                 '-neo4j_port'   => 'neo4j_port',
                                 '-neo4j_folder' => 'neo4j_folder',
-                                '-token_limit'  => 1000000,
+                                '-token_limit'  => 'token_limit',
+                                '-branch'       => 'branch',
+                                '-tag'          => 'tag',
 //                                '-loader'       => 'Neo4jImport',
                                  );
 

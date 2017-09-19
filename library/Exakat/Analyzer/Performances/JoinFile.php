@@ -28,7 +28,6 @@ use Exakat\Analyzer\Analyzer;
 class JoinFile extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs(array('\\join', '\\implode'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->functioncallIs('\\file')
              ->back('first');
@@ -46,7 +45,6 @@ class JoinFile extends Analyzer {
              ->nextSibling()
              ->atomInside('Functioncall')
              ->functioncallIs(array('\\join', '\\implode'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->samePropertyAs('fullcode', 'variable')
              ->back('first');

@@ -28,8 +28,7 @@ use Exakat\Analyzer\Analyzer;
 class PHP7Dirname extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\dirname')
-             ->raw('not( where( __.in("ARGUMENT").in("ARGUMENTS").has("fullnspath", "\\\\dirname") ) )')
-             ->outIs('ARGUMENTS')
+             ->raw('not( where( __.in("ARGUMENT").has("fullnspath", "\\\\dirname") ) )')
              ->noChildWithRank('ARGUMENT', 1)
              ->outWithRank('ARGUMENT', 0)
              ->functioncallIs('\\dirname')

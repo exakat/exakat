@@ -1,60 +1,53 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Block.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             empty
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
+            Label : ARGUMENT
+              $a
             Label : NAME
               empty
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 strrchr
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                  Label : ARGUMENT
-                    'd'
                 Label : NAME
                   strrchr
-        Label : ELEMENT
+                Label : ARGUMENT
+                  $c
+                Label : ARGUMENT
+                  'd'
+        Label : EXPRESSION
           =
           Label : LEFT
             $e
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $f
+              Label : ARGUMENT
+                $f
               Label : NAME
                 empty
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [

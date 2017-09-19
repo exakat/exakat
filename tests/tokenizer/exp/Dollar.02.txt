@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Dollar.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             [
@@ -21,17 +20,15 @@ Label : PROJECT
               $s
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  $C
+              Label : ARGUMENT
+                $C
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             [
@@ -51,17 +48,15 @@ Label : PROJECT
                   D
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  $C
+              Label : ARGUMENT
+                $C
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             [
@@ -81,16 +76,14 @@ Label : PROJECT
                   D
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  $C
+              Label : ARGUMENT
+                $C
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-    Label : ELEMENT
+    Label : EXPRESSION
       
 

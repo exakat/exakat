@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -30,7 +29,7 @@ Label : PROJECT
               $a
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $y

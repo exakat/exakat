@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.44.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,43 +15,41 @@ Label : PROJECT
             @
             Label : AT
               unpack
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'b'
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    {
-                    Label : INDEX
-                      +
-                      Label : LEFT
-                        $d
-                      Label : RIGHT
-                        4
-                    Label : VARIABLE
-                      $c
-                  Label : CONCAT
-                    {
-                    Label : INDEX
-                      +
-                      Label : LEFT
-                        $f
-                      Label : RIGHT
-                        5
-                    Label : VARIABLE
-                      $e
-                  Label : CONCAT
-                    {
-                    Label : INDEX
-                      +
-                      Label : LEFT
-                        $h
-                      Label : RIGHT
-                        6
-                    Label : VARIABLE
-                      $g
-                  Label : CONCAT
-                    "i"
               Label : NAME
                 unpack
+              Label : ARGUMENT
+                'b'
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  {
+                  Label : INDEX
+                    +
+                    Label : LEFT
+                      $d
+                    Label : RIGHT
+                      4
+                  Label : VARIABLE
+                    $c
+                Label : CONCAT
+                  {
+                  Label : INDEX
+                    +
+                    Label : LEFT
+                      $f
+                    Label : RIGHT
+                      5
+                  Label : VARIABLE
+                    $e
+                Label : CONCAT
+                  {
+                  Label : INDEX
+                    +
+                    Label : LEFT
+                      $h
+                    Label : RIGHT
+                      6
+                  Label : VARIABLE
+                    $g
+                Label : CONCAT
+                  "i"

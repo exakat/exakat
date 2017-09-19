@@ -1,42 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 new
                 Label : NEW
                   \C\D\E
-                  Label : ARGUMENTS
-                    (
+                  Label : ARGUMENT
+                    [
                     Label : ARGUMENT
-                      [
-                      Label : ARGUMENTS
-                        [
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            'F'
-                          Label : VALUE
-                            'G'
+                      =>
+                      Label : INDEX
+                        'F'
+                      Label : VALUE
+                        'G'
                   Label : NAME
                     \C\D\E
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

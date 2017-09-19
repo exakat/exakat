@@ -1,76 +1,69 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Namespace.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 D\E
-            Label : ELEMENT
+            Label : EXPRESSION
               class
+              Label : NAME
+                F
               Label : METHOD
                 G
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       ->
+                      Label : MEMBER
+                        H
                       Label : OBJECT
                         $a
-                      Label : PROPERTY
-                        H
                 Label : NAME
                   G
                 Label : PUBLIC
                   public
               Label : METHOD
                 I
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     ->
                     Label : METHOD
                       J
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         J
                     Label : OBJECT
                       $b
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       ->
+                      Label : MEMBER
+                        K
                       Label : OBJECT
                         $c
-                      Label : PROPERTY
-                        K
                 Label : NAME
                   I
                 Label : PUBLIC
                   public
-              Label : NAME
-                F
           Label : NAME
             B\C

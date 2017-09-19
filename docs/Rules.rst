@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 14 Aug 2017 15:50:02 +0000
-.. comment: Generation hash : 596eb24f53a8c46db66ef3f9821b41d4393af84f
+.. comment: Generation date : Mon, 18 Sep 2017 14:01:44 +0000
+.. comment: Generation hash : 37d41fabfd7365f6bfb548d4b775665f4084d953
 
 
 .. _$http\_raw\_post\_data:
@@ -198,21 +198,6 @@ If the code needs to be backward compatible to 5.5 or less, don't use the new op
 +--------------+---------------------------------------------------------------------------------+
 
 
-.. _...-usage:
-
-... Usage
-#########
-
-
-Usage of the ... keyword, either in function definitions, either in functioncalls.
-
-+--------------+---------------------------------------------------------------------------------+
-| Command Line | Php/EllipsisUsage                                                               |
-+--------------+---------------------------------------------------------------------------------+
-| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
-+--------------+---------------------------------------------------------------------------------+
-
-
 .. _\:\:class:
 
 ::class
@@ -304,7 +289,23 @@ Abstract Static Methods
 
 Methods cannot be both abstract and static. Static methods belong to a class, and will not be overridden by the child class. For normal methods, PHP will start at the object level, then go up the hierarchy to find the method. With static, you have to mention the name, or use Late Static Binding, with self or static. Hence, it is useless to have an abstract static method : it should be a simple static method.
 
-A child class is able to declare a method with the same name than a static method in the parent, but those two methods will stay independant.
+A child class is able to declare a method with the same name than a static method in the parent, but those two methods will stay independant. 
+
+This is not the case anymore in PHP 7.0+.
+
+.. code-block:: php
+
+   <?php
+   
+   abstract class foo {
+       // This is not possible
+       static abstract function bar() ;
+   }
+   
+   ?>
+
+
+See also `Why does PHP 5.2+ disallow abstract static class methods? <https://stackoverflow.com/questions/999066/why-does-php-5-2-disallow-abstract-static-class-methods>`_.
 
 +--------------+------------------------+
 | Command Line | Classes/AbstractStatic |
@@ -864,7 +865,7 @@ Avoid Concat In Loop
 
 Concatenations inside a loop generate a lot of temporary variables. They are accumulated and tend to raise the memory usage, leading to slower performances.
 
-It is recommended to store the values in an array, and then use `'implode() <http://www.php.net/implode>`_ on that array to make the concatenation at once.
+It is recommended to store the values in an array, and then use `'implode() <http://www.php.net/implode>`_ on that array to make the concatenation at once. The effect is positive when the source array has at least 50 elements. 
 
 .. code-block:: php
 
@@ -1062,6 +1063,19 @@ Avoid Parenthesis
 Avoid Parenthesis for language construct. Languages constructs are a few PHP native elements, that looks like functions but are not. 
 
 Among other distinction, those elements cannot be directly used as variable function call, and they may be used with or without parenthesis.
+
+.. code-block:: php
+
+   <?php
+   
+   // normal usage of include
+   include 'file.php';
+   
+   // This looks like a function and is not
+   include('file2.php');
+   
+   ?>
+
 
 The usage of parenthesis actually give some feeling of confort, it won't prevent PHP from combining those argument with any later operators, leading to unexpected results.
 
@@ -1276,6 +1290,50 @@ get_class() will only compare the full namespace name of the object's class, whi
 +--------------+--------------------------+
 | Analyzers    | none                     |
 +--------------+--------------------------+
+
+
+.. _avoid-glob()-usage:
+
+Avoid glob() Usage
+##################
+
+
+`'glob() <http://www.php.net/glob>`_ and `'scandir() <http://www.php.net/scandir>`_ sorts results by default. If you don't need that sorting, save some time by requesting NOSORT with those functions.
+
+Besides, whenever possible, use `'scandir() <http://www.php.net/scandir>`_ instead of `'glob() <http://www.php.net/glob>`_. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Scandir without sorting is the fastest. 
+   scandir('docs/', SCANDIR_SORT_NONE);
+   
+   // Scandir sorts files by default. Same as above, but with sorting
+   scandir('docs/');
+   
+   // glob sorts files by default. Same as below, but no sorting
+   glob('docs/*', GLOB_NOSORT);
+   
+   // glob sorts files by default. This is the slowest version
+   glob('docs/*');
+   
+   ?>
+
+
+Using `'opendir() <http://www.php.net/opendir>`_ and a while loop may be even faster. 
+
+This analysis skips `'scandir() <http://www.php.net/scandir>`_ and `'glob() <http://www.php.net/glob>`_ if they are explicitely configured with flags (aka, sorting is explicitely needed).
+
+Glob() accepts wildchar, that may not easily replaced with `'scandir() <http://www.php.net/scandir>`_ or `'opendir() <http://www.php.net/opendir>`_.
+
+See also `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
+
++--------------+---------------------+
+| Command Line | Performances/NoGlob |
++--------------+---------------------+
+| Analyzers    | :ref:`Performances` |
++--------------+---------------------+
 
 
 .. _avoid-sleep()/usleep():
@@ -1551,7 +1609,22 @@ Buried Assignation
 ##################
 
 
-Those assignations are buried in the code, and placed in unexpected situations. They will be difficult to spot, and may be confusing. It is advised to place them in a more visible place.
+Those assignations are buried in the code, and placed in unexpected situations. 
+
+They are difficult to spot, and may be confusing. It is advised to place them in a more visible place.
+
+.. code-block:: php
+
+   <?php
+   
+   // $b may be assigned before processing $a
+   $a = $c && ($b = 2);
+   
+   // legit syntax, but the double assignation is not obvious.
+   for($i = 2, $j = 3; $j < 10; $j++) {
+       
+   }
+   ?>
 
 +--------------+------------------------------+
 | Command Line | Structures/BuriedAssignation |
@@ -2651,6 +2724,142 @@ Starting with PHP 5.6, even array() may be defined as constants.
 +--------------+------------------------------+
 
 
+.. _could-be-private-class-constant:
+
+Could Be Private Class Constant
+###############################
+
+
+Class constant may use 'private' visibility. 
+
+Since PHP 7.1, constants may also have a public/protected/private visibility. This restrict their usage to anywhere, class and children or class. 
+
+As a general rule, it is recommended to make constant 'private' by default, and to relax this restriction as needed. PHP makes them public by default.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // pre-7.1 style
+       const PRE_71_CONSTANT = 1;
+       
+       // post-7.1 style
+       private const PRIVATE_CONSTANT = 2;
+       public const PUBLIC_CONSTANT = 3;
+       
+       function bar() {
+           // PRIVATE CONSTANT may only be used in its class
+           echo self::PRIVATE_CONSTANT;
+       }
+   }
+   
+   // Other constants may be used anywhere
+   function x($a = foo::PUBLIC_CONSTANT) {
+       echo $a.' '.foo:PRE_71_CONSTANT;
+   }
+   
+   ?>
+
++--------------+---------------------------------+
+| Command Line | Classes/CouldBePrivateConstante |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
+
+
+.. _could-be-protected-class-constant:
+
+Could Be Protected Class Constant
+#################################
+
+
+Class constant may use 'protected' visibility. 
+
+Since PHP 7.1, constants may also have a public/protected/private visibility. This restrict their usage to anywhere, class and children or class. 
+
+As a general rule, it is recommended to make constant 'private' by default, and to relax this restriction as needed. PHP makes them public by default.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // pre-7.1 style
+       const PRE_71_CONSTANT = 1;
+       
+       // post-7.1 style
+       protected const PROTECTED_CONSTANT = 2;
+       public const PUBLIC_CONSTANT = 3;
+   }
+   
+   class foo2 extends foo {
+       function bar() {
+           // PROTECTED_CONSTANT may only be used in its class or its children
+           echo self::PROTECTED_CONSTANT;
+       }
+   }
+   
+   class foo3 extends foo {
+       function bar() {
+           // PROTECTED_CONSTANT may only be used in its class or any of its children
+           echo self::PROTECTED_CONSTANT;
+       }
+   }
+   
+   // Other constants may be used anywhere
+   function x($a = foo::PUBLIC_CONSTANT) {
+       echo $a.' '.foo:PRE_71_CONSTANT;
+   }
+   
+   ?>
+
++--------------+----------------------------------+
+| Command Line | Classes/CouldBeProtectedConstant |
++--------------+----------------------------------+
+| Analyzers    | :ref:`Analyze`                   |
++--------------+----------------------------------+
+
+
+.. _could-be-protected-method:
+
+Could Be Protected Method
+#########################
+
+
+Those methods are declared public, but are never used publicly. They may be made protected. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // Public, and used publicly
+       public publicMethod() {}
+   
+       // Public, but never used outside the class or its children
+       public protectedMethod() {}
+       
+       private function bar() {
+           $this->protectedMethod();
+       }
+   }
+   
+   $foo = new Foo();
+   $foo->publicMethod();
+   
+   ?>
+
+
+These properties may even be made private.
+
++--------------+--------------------------------+
+| Command Line | Classes/CouldBeProtectedMethod |
++--------------+--------------------------------+
+| Analyzers    | :ref:`Analyze`                 |
++--------------+--------------------------------+
+
+
 .. _could-be-protected-property:
 
 Could Be Protected Property
@@ -2988,7 +3197,7 @@ Could Use str_repeat()
 
 Use `'str_repeat() <http://www.php.net/str_repeat>`_ or `'str_pad() <http://www.php.net/str_pad>`_ instead of making a loop.
 
-Making a loop to repeat the same concatenation is actually much longer than using str_repeat. As soon as the loop repeats more than twice, `'str_repeat() <http://www.php.net/str_repeat>`_ is much faster. With arrays of 30, the difference is significative, though the whole operation is short by itself. 
+Making a loop to repeat the same concatenation is actually much longer than using `'str_repeat() <http://www.php.net/str_repeat>`_. As soon as the loop repeats more than twice, `'str_repeat() <http://www.php.net/str_repeat>`_ is much faster. With arrays of 30, the difference is significative, though the whole operation is short by itself. 
 
 .. code-block:: php
 
@@ -3059,7 +3268,22 @@ Curly Arrays
 
 It is possible to access individual elements in an array by using its offset between square brackets [] or curly brackets {}. 
 
+.. code-block:: php
+
+   <?php
+   
+   $array = ['a', 'b', 'c', 'd', 'e'];
+   
+   print $array[2]; // displays 'b';
+   print $array{3}; // displays 'c';
+   
+   
+   ?>
+
+
 Curly brackets are seldom used, and will probably confuse or surprise the reader. It is recommended not to used them.
+
+See also `array <http://php.net/manual/en/language.types.array.php>`_.
 
 +--------------+------------------------------------------------+
 | Command Line | Arrays/CurlyArrays                             |
@@ -3147,6 +3371,15 @@ Define With Array
 
 
 PHP 7.0 has the ability to define an array as a constant, using the `'define() <http://www.php.net/define>`_ native call. This was not possible until that version, only with the const keyword.
+
+.. code-block:: php
+
+   <?php
+   
+   //Defining an array as a constant
+   define('MY_PRIMES', [2, 3, 5, 7, 11]);
+   
+   ?>
 
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/DefineWithArray                                                                                        |
@@ -3298,12 +3531,16 @@ Dereferencing String And Arrays
 
 PHP 5.5 introduced the direct dereferencing of strings and array. No need anymore for an intermediate variable between a string and array (or any expression generating such value) and accessing an index.
 
-$x = array(4,5,6); 
-$y = $x[2] ; // is 6
+.. code-block:: php
 
-May be replaced by 
-$y = array(4,5,6)[2];
-$y = [4,5,6][2];
+   <?php
+   $x = array(4,5,6); 
+   $y = $x[2] ; // is 6
+   
+   May be replaced by 
+   $y = array(4,5,6)[2];
+   $y = [4,5,6][2];
+   ?>
 
 +--------------+------------------------------------------------------+
 | Command Line | Structures/DereferencingAS                           |
@@ -3319,6 +3556,21 @@ Direct Injection
 
 
 The following code act directly upon PHP incoming variables like $_GET and $_POST. This make those snippet very unsafe.
+
+.. code-block:: php
+
+   <?php
+   
+   // Direct injection
+   echo Hello.$_GET['user']., welcome.;
+   
+   // less direct injection
+   foo($_GET['user']);
+   function foo($user) {
+       echo Hello.$user., welcome.;
+   }
+   
+   ?>
 
 +--------------+--------------------------+
 | Command Line | Security/DirectInjection |
@@ -3613,6 +3865,36 @@ instead of
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Performances`, :ref:`Analyze`                                                                                                   |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
+
+
+.. _ellipsis-usage:
+
+Ellipsis Usage
+##############
+
+
+Usage of the ... keyword. It may be in function definitions, either in functioncalls.
+
+... allows for packing or unpacking arguments into an array.
+
+.. code-block:: php
+
+   <?php
+   
+   $args = [1, 2, 3];
+   foo(...$args); 
+   // Identical to foo(1,2,3);
+   
+   function bar(...$a) {
+       // Identical to : $a = 'func_get_args();
+   }
+   ?>
+
++--------------+---------------------------------------------------------------------------------+
+| Command Line | Php/EllipsisUsage                                                               |
++--------------+---------------------------------------------------------------------------------+
+| Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54`, :ref:`CompatibilityPHP55` |
++--------------+---------------------------------------------------------------------------------+
 
 
 .. _else-if-versus-elseif:
@@ -4525,7 +4807,7 @@ Forgotten Visibility
 ####################
 
 
-Some classes elements (property, method, and constant in PHP 7.1) are missing their explicit visibility.
+Some classes elements (property, method, and constant since PHP 7.1) are missing their explicit visibility.
 
 By default, it is public. It should at least be mentioned as public, or may be reviewed as protected or private. 
 
@@ -4865,10 +5147,10 @@ See also `Group Use Declaration RFC <https://wiki.php.net/rfc/group_use_declarat
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
-.. _groupuse-trailing-comma:
+.. _group-use-trailing-comma:
 
-GroupUse Trailing Comma
-#######################
+Group Use Trailing Comma
+########################
 
 
 In PHP 7.2, the usage of a final empty slot was allowed with use statements.
@@ -5828,6 +6110,26 @@ Those properties are defined in a class, and this class doesn't have any method 
 
 While this is syntacticly correct, it is unusual that defined ressources are used in a child class. It may be worth moving the definition to another class, or to move accessing methods to the class.
 
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public $unused, $used;// property $unused is never used in this class
+       
+       function bar() {
+           $this->used++; // property $used is used in this method
+       }
+   }
+   
+   class foofoo extends foo {
+       function bar() {
+           $this->unused++; // property $unused is used in this method, but defined in the parent class
+       }
+   }
+   
+   ?>
+
 +--------------+----------------------------------------------+
 | Command Line | Classes/LocallyUnusedProperty                |
 +--------------+----------------------------------------------+
@@ -5890,6 +6192,53 @@ It is recommended to use the symbol operators, rather than the letter ones.
 +--------------+---------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                    |
 +--------------+---------------------------------------------------------------------------------------------------+
+
+
+.. _logical-to-in\_array:
+
+Logical To in_array
+###################
+
+
+Multiples exclusive comparisons may be replaced by `'in_array() <http://www.php.net/in_array>`_.
+
+`'in_array() <http://www.php.net/in_array>`_ makes the alternatives more readable, especially when the number of alternatives is large. In fact, the list of alternative may even be set in a variable, and centralized for easier management.
+
+Even two 'or' comparisons are slower than using a `'in_array() <http://www.php.net/in_array>`_ call. More calls are even slower than just two. This is a micro-optimisation : speed gain is low, and marginal. Code centralisation is a more significant advantage.
+
+.. code-block:: php
+
+   <?php
+   
+   // Set the list of alternative in a variable, property or constant. 
+   $valid_values = array(1, 2, 3, 4);
+   if (in_array($a, $valid_values) ) {
+       // doSomething()
+   }
+   
+   if ($a == 1 || $a == 2 || $a == 3 || $a == 4) {
+       // doSomething()
+   }
+   
+   // in_array also works with strict comparisons
+   if (in_array($a, $valid_values, true) ) {
+       // doSomething()
+   }
+   
+   if ($a === 1 || $a === 2 || $a === 3 || $a === 4) {
+       // doSomething()
+   }
+   
+   ?>
+
+
+See also `in_array() <http://php.net/in_array>`_.
+
++--------------+-------------------------------+
+| Command Line | Performances/LogicalToInArray |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Analyze`                |
++--------------+-------------------------------+
 
 
 .. _lone-blocks:
@@ -6210,13 +6559,79 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
+.. _method-used-below:
+
+Method Used Below
+#################
+
+
+Mark methods that are used in children classes.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       // This method is used in children
+       protected function protectedMethod() {}
+       
+       // This method is not used in children
+       protected function localProtectedMethod() {}
+   
+       private function foobar() {
+           // protectedMethod is used here, but defined in parent
+           $this->localProtectedMethod();
+       }
+   }
+   
+   class foofoo extends foo {
+       private function bar() {
+           // protectedMethod is used here, but defined in parent
+           $this->protectedMethod();
+       }
+   }
+   
+   ?>
+
+
+This doesn't mark the current class, nor the (grand-)parent ones.
+
++--------------+-------------------------+
+| Command Line | Classes/MethodUsedBelow |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
 .. _methodcall-on-new:
 
 Methodcall On New
 #################
 
 
-This was added in PHP 5.4+
+It is possible to call a method right at object instanciation. 
+
+This syntax was added in PHP 5.4+. Before, this was not possible : the object had to be stored in a variable first.
+
+.. code-block:: php
+
+   <?php
+   
+   // Data is collected
+   $data = data_source();
+   
+   // Data is saved, but won't be reused from this databaseRow object. It may be ignored.
+   $result = (new databaseRow($data))->save();
+   
+   // The actual result of the save() is collected and tested.
+   if ($result !== true) {
+       processSaveError($data);
+   }
+   
+   ?>
+
+
+This syntax is interesting when the object is not reused, and may be discarded
 
 +--------------+---------------------------+
 | Command Line | Php/MethodCallOnNew       |
@@ -8109,6 +8524,40 @@ Use precision formulas with `'abs() <http://www.php.net/abs>`_ to approximate va
 +--------------+-----------------------------------------------------------------------------------------------------+
 
 
+.. _no-reference-on-left-side:
+
+No Reference On Left Side
+#########################
+
+
+Do not use references as the right element in an assignation. 
+
+.. code-block:: php
+
+   <?php
+   
+   $b = 2;
+   $c = 3;
+   
+   $a = &$b + $c;
+   // $a === 2 === $b;
+   
+   $a = $b + $c;
+   // $a === 5
+   
+   ?>
+
+
+This is the case for most situations : addition, multiplication, bitshift, logical, power, concatenation.
+Note that PHP won't compile the code if the operator is a short operator (+=, .=, etc.), nor if the & is on the right side of the operator.
+
++--------------+------------------------------+
+| Command Line | Structures/NoReferenceOnLeft |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
 .. _no-return-or-throw-in-finally:
 
 No Return Or Throw In Finally
@@ -8710,6 +9159,31 @@ Objects Don't Need References
 
 
 There is no need to create references for objects, as those are always passed by reference when used as arguments.
+
+.. code-block:: php
+
+   <?php
+       
+       $object = new stdClass();
+       $object->name = 'a';
+       
+       foo($object);
+       print $object->name; // Name is 'b'
+       
+       // No need to make $o a reference
+       function foo(&$o) {
+           $o->name = 'b';
+       }
+       
+       $array = array($object);
+       foreach($array as &$o) { // No need to make this a reference
+           $o->name = 'c';
+       }
+   
+   ?>
+
+
+See also `Passing by reference <http://php.net/manual/en/language.references.pass.php>`_.
 
 +--------------+-----------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/ObjectReferences                                                                                     |
@@ -9466,6 +9940,28 @@ Parent, Static Or Self Outside Class
 
 Parent, static and self keywords must be used within a class or a trait. They make no sens outside a class or trait scope, as self and static refers to the current class and parent refers to one of parent above.
 
+PHP 7.0 and later detect their usage at compile time, and emits a fatal error.
+
+.. code-block:: php
+
+   <?php
+   
+   class x {
+       const Y = 1;
+       
+       function foo() {
+           // self is \x
+           echo self::Y;
+       }
+   }
+   
+   const Z = 1;
+   // This doesn't compile anymore
+   echo self::Z;
+   
+   ?>
+
+
 Static may be used in a function or a closure, but not globally.
 
 +--------------+-------------------------+
@@ -9502,47 +9998,45 @@ Using parenthesis around parameters used to silent some internal check. This is 
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
-.. _performances/noglob:
+.. _pathinfo()-returns-may-vary:
 
-Performances/NoGlob
-###################
+Pathinfo() Returns May Vary
+###########################
 
 
-`'glob() <http://www.php.net/glob>`_ and `'scandir() <http://www.php.net/scandir>`_ sorts results by default. If you don't need that sorting, save some time by requesting NOSORT with those functions.
-
-Besides, whenever possible, use `'scandir() <http://www.php.net/scandir>`_ instead of `'glob() <http://www.php.net/glob>`_. 
+`'pathinfo() <http://www.php.net/pathinfo>`_ function returns an array whose content may vary. It is recommended to collect the values after check, rather than directly.
 
 .. code-block:: php
 
    <?php
    
-   // Scandir without sorting is the fastest. 
-   scandir('docs/', SCANDIR_SORT_NONE);
+   $file = '/a/b/.c';
+   //$extension may be missing, leading to empty $filename and filename in $extension
+   list( $dirname, $basename, $extension, $filename ) = array_values( pathinfo($file) );
    
-   // Scandir sorts files by default. Same as above, but with sorting
-   scandir('docs/');
-   
-   // glob sorts files by default. Same as below, but no sorting
-   glob('docs/*', GLOB_NOSORT);
-   
-   // glob sorts files by default. This is the slowest version
-   glob('docs/*');
+   //Use PHP 7.1 list() syntax to assign correctly the values, and skip 'array_values()
+   //This emits a warning in case of missing index
+   ['dirname'   => $dirname, 
+    'basename'  => $basename, 
+    'extension' => $extension, 
+    'filename'  => $filename ] = pathinfo($file);
+    
+   //This works without warning
+   $details = pathinfo($file);
+   $dirname   = $details['dirname'] ?? getpwd();
+   $basename  = $details['basename'] ?? '';
+   $extension = $details['extension'] ?? '';
+   $filename  = $details['filename'] ?? '';
    
    ?>
 
 
-Using `'opendir() <http://www.php.net/opendir>`_ and a while loop may be even faster. 
-
-This analysis skips `'scandir() <http://www.php.net/scandir>`_ and `'glob() <http://www.php.net/glob>`_ if they are explicitely configured with flags (aka, sorting is explicitely needed).
-
-Glob() accepts wildchar, that may not easily replaced with `'scandir() <http://www.php.net/scandir>`_ or `'opendir() <http://www.php.net/opendir>`_.
-
-See `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_.
+The same applies to `'parse_url() <http://www.php.net/parse_url>`_, which returns an array with various index.
 
 +--------------+---------------------+
-| Command Line | Performances/NoGlob |
+| Command Line | Php/PathinfoReturns |
 +--------------+---------------------+
-| Analyzers    | :ref:`Performances` |
+| Analyzers    | :ref:`Analyze`      |
 +--------------+---------------------+
 
 
@@ -9582,7 +10076,36 @@ Php 7 Indirect Expression
 #########################
 
 
-Those are variable indirect expressions that are interpreted differently between PHP 5 and PHP 7. You should check them so they don't behave strangely.
+Those are variable indirect expressions that are interpreted differently in PHP 5 and PHP 7. 
+
+You should check them so they don't behave strangely.
+
+.. code-block:: php
+
+   <?php
+   
+   // Ambiguous expression : 
+   $b = $$foo['bar']['baz'];
+   echo $b;
+   
+   $foo = array('bar' => array('baz' => 'bat'));
+   $bat = 'PHP 5.6';
+   
+   // In PHP 5, the expression above means : 
+   $b = $\{$foo['bar']['baz']};
+   $b = 'PHP 5.6';
+   
+   $foo = 'a';
+   $a = array('bar' => array('baz' => 'bat'));
+   
+   // In PHP 7, the expression above means : 
+   $b = ($$foo)['bar']['baz'];
+   $b = 'bat';
+   
+   ?>
+
+
+See also `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_.
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Variables/Php7IndirectExpression                                                                                                      |
@@ -9852,10 +10375,57 @@ When stopping a script with `'die() <http://www.php.net/die>`_, it is possible t
 +--------------+------------------------+
 
 
-.. _property-could-be-private:
+.. _property-could-be-private-method:
 
-Property Could Be Private
-#########################
+Property Could Be Private Method
+################################
+
+
+The following method are never used outside their class of definition. Given the analyzed code, they could be set as private. 
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public function couldBePrivate() {}
+       public function cantdBePrivate() {}
+       
+       function bar() {
+           // couldBePrivate is used internally. 
+           $this->couldBePrivate();
+       }
+   }
+   
+   class foo2 extends foo {
+       function bar2() {
+           // cantdBePrivate is used in a child class. 
+           $this->cantdBePrivate();
+       }
+   }
+   
+   //couldBePrivate() is not used outside 
+   $foo = new foo();
+   
+   //cantdBePrivate is used outside the class
+   $foo->cantdBePrivate();
+   
+   ?>
+
+
+Note that dynamic properties (such as $x->$y) are not taken into account.
+
++--------------+------------------------------+
+| Command Line | Classes/CouldBePrivateMethod |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
+.. _property-could-be-private-property:
+
+Property Could Be Private Property
+##################################
 
 
 The following properties are never used outside their class of definition  Given the analyzed code, they could be set as private. 
@@ -9897,50 +10467,6 @@ Note that dynamic properties (such as $x->$y) are not taken into account.
 +--------------+------------------------+
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
-
-
-.. _property-used-below:
-
-Property Used Below
-###################
-
-
-Mark properties that are used in children classes.
-
-.. code-block:: php
-
-   <?php
-   
-   class foo {
-       // This property is used in children
-       protected protectedProperty = 1;
-       
-       // This property is not used in children
-       protected localProtectedProperty = 1;
-   
-       private function foobar() {
-           // protectedProperty is used here, but defined in parent
-           $this->localProtectedProperty = 3;
-       }
-   }
-   
-   class foofoo extends foo {
-       private function bar() {
-           // protectedProperty is used here, but defined in parent
-           $this->protectedProperty = 3;
-       }
-   }
-   
-   ?>
-
-
-This doesn't mark the current class, nor the (grand-)parent ones.
-
-+--------------+---------------------------+
-| Command Line | Classes/PropertyUsedBelow |
-+--------------+---------------------------+
-| Analyzers    | :ref:`Analyze`            |
-+--------------+---------------------------+
 
 
 .. _property-used-in-one-method-only:
@@ -10000,13 +10526,13 @@ Note : properties used only once are not returned by this analysis. They are omi
 +--------------+-------------------------------------+
 
 
-.. _property/variable-confusion:
+.. _property-variable-confusion:
 
-Property/Variable Confusion
+Property Variable Confusion
 ###########################
 
 
-Within a class, there is both a property and some variables bearing the same name. 
+Within a class, there is both a property and variables bearing the same name. 
 
 .. code-block:: php
 
@@ -10021,7 +10547,7 @@ Within a class, there is both a property and some variables bearing the same nam
    ?>
 
 
-the property and the variable may easily be confused one for another and lead to a bug. 
+The property and the variable may easily be confused one for another and lead to a bug. 
 
 Sometimes, when the property is going to be replaced by the incoming argument, or data based on that argument, this naming schema is made on purpose, indicating that the current argument will eventually end up in the property. When the argument has the same name as the property, no warning is reported.
 
@@ -10399,6 +10925,20 @@ Reserved Keywords In PHP 7
 
 Php reserved names for class/trait/interface. They won't be available anymore in user space starting with PHP 7.
 
+For example, string, float, false, true, null, resource,... are not acceptable as class name. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This doesn't compile in PHP 7.0 and more recent
+   class null { }
+   
+   ?>
+
+
+See also `List of other reserved words <http://php.net/manual/en/reserved.other-reserved-words.php>`_.
+
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/ReservedKeywords7                                                                                      |
 +--------------+------------------------------------------------------------------------------------------------------------+
@@ -10530,10 +11070,10 @@ PHP tolerates parenthesis for the argument of a return statement, but it is reco
 +--------------+------------------------------------------------+
 
 
-.. _safe-curloptions:
+.. _safe-curl-options:
 
-Safe CurlOptions
-################
+Safe Curl Options
+#################
 
 
 It is advised to always use CURLOPT_SSL_VERIFYPEER and CURLOPT_SSL_VERIFYHOST when requesting a SSL connexion. 
@@ -10674,6 +11214,23 @@ Scalar Typehint Usage
 
 
 Spot usage of scalar type hint : int, float, boolean and string.
+
+Scalar typehint are PHP 7.0 and more recent. Some, like object, is 7.2.
+
+Scalar typehint were not supported in PHP 5 and older. Then, the typehint is treated as a classname. 
+
+.. code-block:: php
+
+   <?php
+   
+   function withScalarTypehint(string $x) {}
+   
+   function withoutScalarTypehint(someClass $x) {}
+   
+   ?>
+
+
+See also `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints>`_ and `Type declarations <http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration>`_.
 
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/ScalarTypehintUsage                                                                                    |
@@ -10846,7 +11403,7 @@ PHP 5.4 introduced the new short syntax, with square brackets. The previous synt
    ?>
 
 
-See also `Arrays <http://php.net/manual/en/language.types.array.php>`_.
+See also `Array <http://php.net/manual/en/language.types.array.php>`_.
 
 +--------------+---------------------------+
 | Command Line | Arrays/ArrayNSUsage       |
@@ -11121,6 +11678,44 @@ For example, $lines = file('file.txt', 2); is less readable than $lines = file('
 +--------------+------------------------------+
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
+
+
+.. _should-use-foreach:
+
+Should Use Foreach
+##################
+
+
+Use foreach instead of for when traversing an array.
+
+Foreach() is the modern loop : it maps automatically every element of the array to a blind variable, and loop over it. This is faster and safer.
+
+.. code-block:: php
+
+   <?php
+   
+   // Foreach version
+   foreach($array as $element) {
+       doSomething($element);
+   }
+   
+   // The above case may even be upgraded with array_map and a callback, 
+   // for the simplest one of them
+   $array = array_map('doSomething', $array);
+   
+   // For version (one of various alternatives)
+   for($i = 0; $i < count($array); $i++) {
+       $element = $array[$i];
+       doSomething($element);
+   }
+   
+   ?>
+
++--------------+-----------------------------+
+| Command Line | Structures/ShouldUseForeach |
++--------------+-----------------------------+
+| Analyzers    | :ref:`Analyze`              |
++--------------+-----------------------------+
 
 
 .. _should-use-function-use:
@@ -12305,40 +12900,6 @@ This analyzer list all the `'strpos() <http://www.php.net/strpos>`_-like functio
 +--------------+-----------------------------------------------------------------------------------------------------+
 
 
-.. _structures/noreferenceonleft:
-
-Structures/NoReferenceOnLeft
-############################
-
-
-Do not use references as the right element in an assignation. 
-
-.. code-block:: php
-
-   <?php
-   
-   $b = 2;
-   $c = 3;
-   
-   $a = &$b + $c;
-   // $a === 2 === $b;
-   
-   $a = $b + $c;
-   // $a === 5
-   
-   ?>
-
-
-This is the case for most situations : addition, multiplication, bitshift, logical, power, concatenation.
-Note that PHP won't compile the code if the operator is a short operator (+=, .=, etc.), nor if the & is on the right side of the operator.
-
-+--------------+------------------------------+
-| Command Line | Structures/NoReferenceOnLeft |
-+--------------+------------------------------+
-| Analyzers    | :ref:`Analyze`               |
-+--------------+------------------------------+
-
-
 .. _suspicious-comparison:
 
 Suspicious Comparison
@@ -12897,6 +13458,27 @@ Uncaught Exceptions
 
 
 The following exceptions are thrown in the code, but are never caught. 
+
+.. code-block:: php
+
+   <?php
+   
+   // This exception is throw, but not caught. It will lead to a fatal error.
+   if ($message = check_for_error()) {
+       throw new My\Exception($message);
+   }
+   
+   // This exception is throw, and caught. 
+   try {
+       if ($message = check_for_error()) {
+           throw new My\Exception($message);
+       }
+   } catch (\Exception $e) {
+       doSomething();
+   }
+   
+   ?>
+
 
 Either they will lead to a fatal error, or they have to be caught by a larger application.
 
@@ -14101,7 +14683,21 @@ Unused Constants
 ################
 
 
-Those constants are defined in the code but never used. Defining unused constants will slow down the application, has they are executed and stored in PHP hashtables. 
+Those constants are defined in the code but never used. Defining unused constants slow down the application, as they are executed and stored in PHP hashtables. 
+
+.. code-block:: php
+
+   <?php
+   
+   // const-defined constant
+   const USED_CONSTANT  = 0;
+   const UNUSED_CONSTANT = 1 + USED_CONSTANT;
+   
+   // define-defined constant
+   define('ANOTHER_UNUSED_CONSTANT', 3);
+   
+   ?>
+
 
 It is recommended to comment them out, and only define them when it is necessary.
 
@@ -14185,9 +14781,6 @@ They should be removed, as they are probably dead code.
    
    ?>
 
-
-See also `Used Interfaces`_.
-
 +--------------+----------------------------------------------+
 | Command Line | Interfaces/UnusedInterfaces                  |
 +--------------+----------------------------------------------+
@@ -14238,7 +14831,34 @@ Unused Methods
 ##############
 
 
-The following methods are never called as methods. They are probably dead code.
+Those methods are never called as methods. 
+
+They are probably dead code, unless they are called dynamically.
+
+.. code-block:: php
+
+   <?php
+   
+   class foo {
+       public function used() {
+           $this->used();
+       }
+   
+       public function unused() {
+           $this->used();
+       }
+   }
+   
+   class bar extends foo {
+       public function some() {
+           $this->used();
+       }
+   }
+   
+   $a = new foo();
+   $a->used();
+   
+   ?>
 
 +--------------+----------------------------------------------+
 | Command Line | Classes/UnusedMethods                        |
@@ -15102,6 +15722,54 @@ PHP 5.5 introduced `'password_hash() <http://www.php.net/password_hash>`_ and pa
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP55`, :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP56`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+.. _use-pathinfo()-arguments:
+
+Use pathinfo() Arguments
+########################
+
+
+`'pathinfo() <http://www.php.net/pathinfo>`_ has a second argument to select only useful data. 
+
+It is twice faster to get only one element from `'pathinfo() <http://www.php.net/pathinfo>`_ than get the four of them, and use only one.
+
+This analysis reports `'pathinfo() <http://www.php.net/pathinfo>`_ usage, without second argument, where only one or two indices are used, afte the call.
+
+.. code-block:: php
+
+   <?php
+   
+   // This could use only PATHINFO_BASENAME
+   function foo_db() {
+       $a = pathinfo($file2);
+       return $a['basename'];
+   }
+   
+   // This could be 2 calls, with PATHINFO_BASENAME and PATHINFO_DIRNAME.
+   function foo_de() {
+       $a = pathinfo($file3);
+       return $a['dirname'].'/'.$a['basename'];
+   }
+   
+   // This is OK : 3 calls to 'pathinfo() is slower than array access.
+   function foo_deb() {
+       $a = pathinfo($file4);
+       return  $a['dirname'].'/'.$a['filename'].'.'.$a['extension'];
+   }
+   
+   ?>
+
+
+Depending on the situation, the functions `'dirname() <http://www.php.net/dirname>`_ and `'basename() <http://www.php.net/basename>`_ may also be used. They are even faster, when only fetching those data.
+
+See also `list <http://php.net/manual/en/function.list.php>`_.
+
++--------------+---------------------+
+| Command Line | Php/UsePathinfoArgs |
++--------------+---------------------+
+| Analyzers    | :ref:`Performances` |
++--------------+---------------------+
 
 
 .. _use-random\_int():
@@ -16059,6 +16727,20 @@ Written Only Variables
 
 Those variables are being written, but never read. This way, they are useless and should be removed, or read at some point.
 
+.. code-block:: php
+
+   <?php
+   
+   // $a is used multiple times, but never read
+   $a = 'a';
+   $a .= 'b';
+   
+   $b = 3; 
+   //$b is actually read once
+   $a .= $b + 3; 
+   
+   ?>
+
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Command Line | Variables/WrittenOnlyVariable                                                                       |
 +--------------+-----------------------------------------------------------------------------------------------------+
@@ -16767,20 +17449,28 @@ ext/apc
 #######
 
 
-Extension `Alternative PHP Cache <http://php.net/apc>`_.
+Extension Alternative PHP Cache.
+
+The Alternative PHP Cache (APC) is a free and open opcode cache for PHP. Its goal is to provide a free, open, and robust framework for caching and optimizing PHP intermediate code.
+
+This extension is considered unmaintained and dead. 
 
 .. code-block:: php
 
    <?php
-   $bar = 'BAR';
-   apc_add('foo', $bar);
-   var_dump(apc_fetch('foo'));
-   echo \n;
-   $bar = 'NEVER GETS SET';
-   apc_add('foo', $bar);
-   var_dump(apc_fetch('foo'));
-   echo \n;
+      $bar = 'BAR';
+      apc_add('foo', $bar);
+      var_dump(apc_fetch('foo'));
+      echo PHP_EOL;
+   
+      $bar = 'NEVER GETS SET';
+      apc_add('foo', $bar);
+      var_dump(apc_fetch('foo'));
+      echo PHP_EOL;
    ?>
+
+
+See also `Alternative PHP Cache <http://php.net/apc>`_.
 
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Extensions/Extapc                                                                                                                                                |
@@ -16899,7 +17589,72 @@ ext/mcrypt
 ##########
 
 
-Extension ext/mcrypt
+Extension for mcrypt.
+
+This extension has been deprecated as of PHP 7.1.0 and moved to PECL as of PHP 7.2.0.
+
+This is an interface to the mcrypt library, which supports a wide variety of block algorithms such as DES, TripleDES, Blowfish (default), 3-WAY, SAFER-SK64, SAFER-SK128, TWOFISH, TEA, RC2 and GOST in CBC, OFB, CFB and ECB cipher modes. Additionally, it supports RC6 and IDEA which are considered 'non-free'. CFB/OFB are 8bit by default.
+
+.. code-block:: php
+
+   <?php
+       # --- ENCRYPTION ---
+   
+       # the key should be random binary, use scrypt, bcrypt or PBKDF2 to
+       # convert a string into a key
+       # key is specified using hexadecimal
+       $key = pack('H*', 'bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3');
+       
+       # show key size use either 16, 24 or 32 byte keys for AES-128, 192
+       # and 256 respectively
+       $key_size =  strlen($key);
+       echo 'Key size: ' . $key_size . PHP_EOL;
+       
+       $plaintext = 'This string was AES-256 / CBC / ZeroBytePadding encrypted.';
+   
+       # create a random IV to use with CBC encoding
+       $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+       $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+       
+       # creates a cipher text compatible with AES (Rijndael block size = 128)
+       # to keep the text confidential 
+       # only suitable for encoded input that never ends with value 00h
+       # (because of default zero padding)
+       $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key,
+                                    $plaintext, MCRYPT_MODE_CBC, $iv);
+   
+       # prepend the IV for it to be available for decryption
+       $ciphertext = $iv . $ciphertext;
+       
+       # encode the resulting cipher text so it can be represented by a string
+       $ciphertext_base64 = base64_encode($ciphertext);
+   
+       echo  $ciphertext_base64 . PHP_EOL;
+   
+       # === WARNING ===
+   
+       # Resulting cipher text has no integrity or authenticity added
+       # and is not protected against padding oracle attacks.
+       
+       # --- DECRYPTION ---
+       
+       $ciphertext_dec = base64_decode($ciphertext_base64);
+       
+       # retrieves the IV, iv_size should be created using mcrypt_get_iv_size()
+       $iv_dec = substr($ciphertext_dec, 0, $iv_size);
+       
+       # retrieves the cipher text (everything except the $iv_size in the front)
+       $ciphertext_dec = substr($ciphertext_dec, $iv_size);
+   
+       # may remove 00h valued characters from end of plain text
+       $plaintext_dec = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key,
+                                       $ciphertext_dec, MCRYPT_MODE_CBC, $iv_dec);
+       
+       echo  $plaintext_dec . PHP_EOL;
+   ?>
+
+
+See also `ext/mcrypt <http://www.php.net/manual/en/book.mcrypt.php>`_ and `mcrypt <http://mcrypt.sourceforge.net/>`_.
 
 +--------------+---------------------------------------------------------------------------------+
 | Command Line | Extensions/Extmcrypt                                                            |
@@ -16929,7 +17684,7 @@ This extension provides functions, intended to work with `mhash <http://mhash.so
    ?>
 
 
-See also `mhash <http://php.net/manual/en/book.mhash.php>`_.
+See also `Extension mhash <http://php.net/manual/en/book.mhash.php>`_.
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Extensions/Extmhash                                                                                                                                                                         |
@@ -16990,7 +17745,7 @@ Ming is an open-source (LGPL) library which allows you to create SWF ('Flash') f
    ?>
 
 
-See also `Ming (flash) <http://www.libming.org/>`_ and `Ming <http://www.libming.org/> `_.
+See also `Ming (flash) <http://www.libming.org/>`_ and `Ming <http://www.libming.org/>`_.
 
 +--------------+---------------------------+
 | Command Line | Extensions/Extming        |
@@ -17005,7 +17760,22 @@ ext/mysql
 #########
 
 
-Extension ext/mysql
+Extension for MySQL (Original MySQL API).
+
+This extension is deprecated as of PHP 5.5.0, and has been removed as of PHP 7.0.0. Instead, either the mysqli or PDO_MySQL extension should be used. See also the MySQL API Overview for further help while choosing a MySQL API.
+
+.. code-block:: php
+
+   <?php
+   $result = mysql_query('SELECT * WHERE 1=1');
+   if (!$result) {
+       'die('Invalid query: ' . mysql_error());
+   }
+   
+   ?>
+
+
+See also `Original MySQL API <http://www.php.net/manual/en/book.mysql.php>`_ and `MySQL <http://www.mysql.com/>`_.
 
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Extensions/Extmysql                                                                                                                                              |

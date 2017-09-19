@@ -30,7 +30,6 @@ class MultipleSameArguments extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
              ->raw(<<<'GREMLIN'
 filter{ 
     s = [:];

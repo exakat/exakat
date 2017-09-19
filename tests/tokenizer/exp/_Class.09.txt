@@ -1,19 +1,18 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : IMPLEMENTS
-            a
-          Label : IMPLEMENTS
             b
+          Label : IMPLEMENTS
+            a
           Label : IMPLEMENTS
             c
           Label : IMPLEMENTS

@@ -1,72 +1,61 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Array.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           const
           Label : CONST
             const
             Label : NAME
               x
-              Label : DEFINITION
-                x
             Label : VALUE
               array
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  2
-                Label : ARGUMENT
-                  3
-                Label : ARGUMENT
-                  4
-        Label : ELEMENT
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                3
+              Label : ARGUMENT
+                4
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              x
+          Label : NAME
             echo
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                1
-              Label : VARIABLE
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              ->
+              Label : MEMBER
                 x
+              Label : OBJECT
+                $a
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                1
-              Label : VARIABLE
-                ->
-                Label : OBJECT
-                  $a
-                Label : PROPERTY
-                  x
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                1
-              Label : VARIABLE
-                ::
-                Label : CLASS
-                  b
-                Label : CONSTANT
-                  x
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              1
+            Label : VARIABLE
+              ::
+              Label : CLASS
+                b
+              Label : CONSTANT
+                x
           Label : NAME
             echo

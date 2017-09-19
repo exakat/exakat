@@ -1,6 +1,7 @@
 <?php
 
-$expected     = array('$b ^ $c');
+$expected     = array('$b || $c',
+                     );
 
 $expected_not = array('$b and $c',
                       '$b And $c',

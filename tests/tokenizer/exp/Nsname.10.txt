@@ -1,90 +1,69 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Nsname.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           \A
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A\B
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B\C
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A\B\C
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B\C\D
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A\B\C\D
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B\C\D\E
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A\B\C\D\E
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B\C\D\E\F
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A\B\C\D\E\F
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B\C\D\E\F\G
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A\B\C\D\E\F\G
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B\C\D\E\F\G\H
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A\B\C\D\E\F\G\H
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B\C\D\E\F\G\H\I
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A\B\C\D\E\F\G\H\I
-        Label : ELEMENT
+        Label : EXPRESSION
           \A\B\C\D\E\F\G\H\I\K
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             \A\B\C\D\E\F\G\H\I\K

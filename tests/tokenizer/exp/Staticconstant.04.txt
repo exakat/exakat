@@ -1,26 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticconstant.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             \A
           Label : CONSTANT
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             \A\C
           Label : CONSTANT
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             \A\C\D

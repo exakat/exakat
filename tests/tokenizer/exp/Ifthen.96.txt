@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.96.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ||
@@ -33,53 +32,43 @@ Label : PROJECT
                   'D'
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
+              Label : ARGUMENT
+                E
+                Label : NAME
                   E
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'F'
-                    Label : ARGUMENT
-                      G
-                  Label : NAME
-                    E
+                Label : ARGUMENT
+                  'F'
+                Label : ARGUMENT
+                  G
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 isset
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $b
+                Label : ARGUMENT
+                  $b
                 Label : NAME
                   isset
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
+                  Label : ARGUMENT
+                    H
+                    Label : NAME
                       H
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'I'
-                        Label : ARGUMENT
-                          $b
-                      Label : NAME
-                        H
+                    Label : ARGUMENT
+                      'I'
+                    Label : ARGUMENT
+                      $b
                   Label : NAME
                     echo
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
-            Label : ELEMENT
+            Label : EXPRESSION
               Void

@@ -36,15 +36,15 @@ class DirectInjection extends Analyzer {
         
         $safe = array('DOCUMENT_ROOT', 'REQUEST_TIME', 'REQUEST_TIME_FLOAT',
                       'SCRIPT_NAME', 'SERVER_ADMIN', '_');
-        $safeIndex = 'or( __.out("VARIABLE").has("code", "\\$_SERVER").count().is(eq(0)), 
+        $safeIndex = 'or( __.hasLabel("Variable"), 
+                          __.out("VARIABLE").not(has("code", "\\$_SERVER")), 
                           __.out("INDEX").hasLabel("String")
-                            .where(__.out("CONCAT").count().is(eq(0)) )
+                            .not(where(__.out("CONCAT") ) )
                             .not(has("noDelimiter", within([' . makeList($safe) . '])))
-                            .count().is(neq(0)))';
+                         )';
 
         // Relayed call to another function
         $this->atomIs('Functioncall')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->_as('result')
@@ -55,23 +55,21 @@ class DirectInjection extends Analyzer {
              ->back('first')
 
              ->functionDefinition()
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
 
              ->savePropertyAs('code', 'varname')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
 
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('CODE')
              ->atomIs('Variable')
              ->samePropertyAs('code', 'varname')
-             ->back('result');
+             ->back('result')
+             ;
         $this->prepareQuery();
 
         // $_GET/_POST ... directly as argument of PHP functions
@@ -82,8 +80,7 @@ class DirectInjection extends Analyzer {
              ->goToArray()
              ->inIsIE('CODE')
              ->analyzerIs('Security/SensitiveArgument')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
+             ->inIs('ARGUMENT');
         $this->prepareQuery();
 
         // "$_GET/_POST ['index']"... inside an operation is probably OK if not concatenation!
@@ -95,7 +92,8 @@ class DirectInjection extends Analyzer {
              ->raw($safeIndex)
              ->goToArray()
              ->inIsIE('CODE')
-             ->inIs('CONCAT');
+             ->inIs('CONCAT')
+             ;
         $this->prepareQuery();
 
         // foreach (looping on incoming variables)

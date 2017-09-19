@@ -1,67 +1,60 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Interface.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : EXTENDS
             B\C
           Label : METHOD
             D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $f
-                Label : TYPEHINT
-                  E
+            Label : ARGUMENT
+              $f
+              Label : TYPEHINT
+                E
             Label : BLOCK
               Void
             Label : NAME
               D
           Label : NAME
             A
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : EXTENDS
-            B\C
-          Label : EXTENDS
             G\H
+          Label : EXTENDS
+            B\C
           Label : METHOD
             D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $f
-                Label : TYPEHINT
-                  E
+            Label : ARGUMENT
+              $f
+              Label : TYPEHINT
+                E
             Label : BLOCK
               Void
             Label : NAME
               D
           Label : NAME
             A
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : EXTENDS
-            B\C
-          Label : EXTENDS
             G\H
+          Label : EXTENDS
+            B\C
           Label : EXTENDS
             I\J
           Label : METHOD
             D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $f
-                Label : TYPEHINT
-                  E
+            Label : ARGUMENT
+              $f
+              Label : TYPEHINT
+                E
             Label : BLOCK
               Void
             Label : NAME

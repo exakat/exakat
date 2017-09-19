@@ -33,20 +33,35 @@ class UnsetInForeach extends Analyzer {
              ->outIs('VALUE')
              ->outIsIE(array('INDEX', 'VALUE'))
              ->atomIs('Variable')
-             ->savePropertyAs('code', 'blind')
              ->is('reference', true)
-             ->savePropertyAs('reference', 'reference')
-             ->back('first')
+             ->savePropertyAs('code', 'blind')
+             ->inIsIE(array('INDEX', 'VALUE'))
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
              ->tokenIs('T_UNSET')
-             ->outIs('ARGUMENTS')
+             ->outIs('ARGUMENT')
+             ->outIsIE(array('VARIABLE', 'OBJECT'))
+             ->samePropertyAs('code', 'blind')
+             ->inIsIE(array('VARIABLE', 'OBJECT'))
+             ->atomIsNot(array('Member', 'Array'))
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE(array('INDEX', 'VALUE'))
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'blind')
+             ->isNot('reference', true)
+             ->inIsIE(array('INDEX', 'VALUE'))
+             ->outIs('BLOCK')
+             ->atomInside('Functioncall')
+             ->tokenIs('T_UNSET')
              ->outIs('ARGUMENT')
              ->outIsIE(array('VARIABLE', 'OBJECT'))
              ->samePropertyAs('code', 'blind')
              ->inIsIE(array('VARIABLE', 'OBJECT'))
              ->atomIsNot('Member')
-             ->raw('filter{ !(it.get().label() == "Array" && reference == true) }')
              ->back('first');
         $this->prepareQuery();
 
@@ -59,8 +74,25 @@ class UnsetInForeach extends Analyzer {
              ->atomIs('Variable')
              ->savePropertyAs('code', 'blind')
              ->is('reference', true)
-             ->savePropertyAs('reference', 'reference')
-             ->back('first')
+             ->inIsIE(array('INDEX', 'VALUE'))
+             ->outIs('BLOCK')
+             ->atomInside('Cast')
+             ->tokenIs('T_UNSET_CAST')
+             ->outIs('CAST')
+             ->outIsIE(array('VARIABLE', 'OBJECT'))
+             ->samePropertyAs('code', 'blind')
+             ->inIsIE(array('VARIABLE', 'OBJECT'))
+             ->atomIsNot(array('Member', 'Array'))
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Foreach')
+             ->outIs('VALUE')
+             ->outIsIE(array('INDEX', 'VALUE'))
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'blind')
+             ->isNot('reference', true)
+             ->inIsIE(array('INDEX', 'VALUE'))
              ->outIs('BLOCK')
              ->atomInside('Cast')
              ->tokenIs('T_UNSET_CAST')
@@ -69,7 +101,6 @@ class UnsetInForeach extends Analyzer {
              ->samePropertyAs('code', 'blind')
              ->inIsIE(array('VARIABLE', 'OBJECT'))
              ->atomIsNot('Member')
-             ->raw('filter{ !(it.get().label() == "Array" && reference == true) }')
              ->back('first');
         $this->prepareQuery();
     }

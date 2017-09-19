@@ -1,21 +1,20 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Dowhile.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           do
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               do
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
               Label : CONDITION
                 1

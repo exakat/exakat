@@ -1,45 +1,40 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.59.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : METHOD
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $b
-                    Label : TYPEHINT
-                      E
-                  Label : ARGUMENT
-                    $c
-                    Label : TYPEHINT
-                      E
+                Label : ARGUMENT
+                  $b
+                  Label : TYPEHINT
+                    E
+                Label : ARGUMENT
+                  $c
+                  Label : TYPEHINT
+                    E
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       G
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $b
-                        Label : ARGUMENT
-                          $c
                       Label : NAME
                         G
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        $c
                 Label : NAME
                   D
                 Label : RETURNTYPE
@@ -48,30 +43,26 @@ Label : PROJECT
                   static
               Label : METHOD
                 H
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $b
-                    Label : TYPEHINT
-                      E
-                  Label : ARGUMENT
-                    $d
-                    Label : TYPEHINT
-                      array
+                Label : ARGUMENT
+                  $b
+                  Label : TYPEHINT
+                    E
+                Label : ARGUMENT
+                  $d
+                  Label : TYPEHINT
+                    array
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       K
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $b
-                        Label : ARGUMENT
-                          $d
                       Label : NAME
                         K
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        $d
                 Label : NAME
                   H
                 Label : RETURNTYPE
@@ -80,50 +71,42 @@ Label : PROJECT
                   static
               Label : METHOD
                 L
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                    Label : TYPEHINT
-                      E
+                Label : ARGUMENT
+                  $c
+                  Label : TYPEHINT
+                    E
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     if
                     Label : CONDITION
                       ===
                       Label : LEFT
                         N
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $c
+                        Label : ARGUMENT
+                          $c
                         Label : NAME
                           N
                       Label : RIGHT
                         1
                     Label : THEN
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         return
                         Label : RETURN
                           [
-                          Label : ARGUMENTS
-                            [
-                            Label : ARGUMENT
-                              Void
-                  Label : ELEMENT
+                          Label : ARGUMENT
+                            Void
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       G
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'P'
-                        Label : ARGUMENT
-                          $c
                       Label : NAME
                         G
+                      Label : ARGUMENT
+                        'P'
+                      Label : ARGUMENT
+                        $c
                 Label : NAME
                   L
                 Label : RETURNTYPE
@@ -132,26 +115,22 @@ Label : PROJECT
                   static
               Label : METHOD
                 Q
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
-                    Label : TYPEHINT
-                      array
+                Label : ARGUMENT
+                  $d
+                  Label : TYPEHINT
+                    array
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       K
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          T
-                        Label : ARGUMENT
-                          $d
                       Label : NAME
                         K
+                      Label : ARGUMENT
+                        T
+                      Label : ARGUMENT
+                        $d
                 Label : NAME
                   Q
                 Label : RETURNTYPE
@@ -160,50 +139,42 @@ Label : PROJECT
                   static
               Label : METHOD
                 U
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                    Label : TYPEHINT
-                      E
+                Label : ARGUMENT
+                  $c
+                  Label : TYPEHINT
+                    E
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     if
                     Label : CONDITION
                       ===
                       Label : LEFT
                         N
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $c
+                        Label : ARGUMENT
+                          $c
                         Label : NAME
                           N
                       Label : RIGHT
                         1
                     Label : THEN
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         return
                         Label : RETURN
                           [
-                          Label : ARGUMENTS
-                            [
-                            Label : ARGUMENT
-                              Void
-                  Label : ELEMENT
+                          Label : ARGUMENT
+                            Void
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       X
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'Y'
-                        Label : ARGUMENT
-                          $c
                       Label : NAME
                         X
+                      Label : ARGUMENT
+                        'Y'
+                      Label : ARGUMENT
+                        $c
                 Label : NAME
                   U
                 Label : RETURNTYPE
@@ -212,26 +183,22 @@ Label : PROJECT
                   static
               Label : METHOD
                 Z
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
-                    Label : TYPEHINT
-                      array
+                Label : ARGUMENT
+                  $d
+                  Label : TYPEHINT
+                    array
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       K
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'AC'
-                        Label : ARGUMENT
-                          $d
                       Label : NAME
                         K
+                      Label : ARGUMENT
+                        'AC'
+                      Label : ARGUMENT
+                        $d
                 Label : NAME
                   Z
                 Label : RETURNTYPE
@@ -240,22 +207,18 @@ Label : PROJECT
                   static
               Label : METHOD
                 AD
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                    Label : TYPEHINT
-                      E
+                Label : ARGUMENT
+                  $c
+                  Label : TYPEHINT
+                    E
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       AF
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $c
+                      Label : ARGUMENT
+                        $c
                       Label : NAME
                         AF
                 Label : NAME
@@ -266,26 +229,22 @@ Label : PROJECT
                   static
               Label : METHOD
                 AG
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
-                    Label : TYPEHINT
-                      array
+                Label : ARGUMENT
+                  $d
+                  Label : TYPEHINT
+                    array
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       K
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'AJ'
-                        Label : ARGUMENT
-                          $d
                       Label : NAME
                         K
+                      Label : ARGUMENT
+                        'AJ'
+                      Label : ARGUMENT
+                        $d
                 Label : NAME
                   AG
                 Label : RETURNTYPE
@@ -294,29 +253,27 @@ Label : PROJECT
                   static
               Label : METHOD
                 AK
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $e
-                    Label : TYPEHINT
-                      AL
-                  Label : ARGUMENT
-                    $c
-                    Label : TYPEHINT
-                      E
+                Label : ARGUMENT
+                  $e
+                  Label : TYPEHINT
+                    AL
+                Label : ARGUMENT
+                  $c
+                  Label : TYPEHINT
+                    E
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     =
                     Label : LEFT
                       $f
                     Label : RIGHT
                       'AJ'
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     for
                     Label : BLOCK
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         .=
                         Label : LEFT
                           $f
@@ -324,7 +281,7 @@ Label : PROJECT
                           $c
                     Label : FINAL
                       ;
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         <
                         Label : LEFT
                           $g
@@ -332,31 +289,29 @@ Label : PROJECT
                           $e
                     Label : INCREMENT
                       ;
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         ++
                         Label : POSTPLUSPLUS
                           $g
                     Label : INIT
                       ;
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         =
                         Label : LEFT
                           $g
                         Label : RIGHT
                           1
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         =
                         Label : LEFT
                           $h
                         Label : RIGHT
                           N
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $c
+                          Label : ARGUMENT
+                            $c
                           Label : NAME
                             N
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       $f
@@ -368,22 +323,18 @@ Label : PROJECT
                   static
               Label : METHOD
                 AQ
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                    Label : TYPEHINT
-                      E
+                Label : ARGUMENT
+                  $c
+                  Label : TYPEHINT
+                    E
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       AU
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $c
+                      Label : ARGUMENT
+                        $c
                       Label : NAME
                         AU
                 Label : NAME
@@ -394,15 +345,13 @@ Label : PROJECT
                   static
               Label : METHOD
                 AV
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                    Label : TYPEHINT
-                      E
+                Label : ARGUMENT
+                  $c
+                  Label : TYPEHINT
+                    E
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : NAME
                   AV
@@ -412,15 +361,13 @@ Label : PROJECT
                   static
               Label : METHOD
                 list
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                    Label : TYPEHINT
-                      E
+                Label : ARGUMENT
+                  $c
+                  Label : TYPEHINT
+                    E
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : NAME
                   list
@@ -430,15 +377,13 @@ Label : PROJECT
                   static
               Label : METHOD
                 empty
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                    Label : TYPEHINT
-                      E
+                Label : ARGUMENT
+                  $c
+                  Label : TYPEHINT
+                    E
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       ===

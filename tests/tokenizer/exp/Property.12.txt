@@ -1,18 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Property.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
-          Label : OBJECT
-            $obj
-          Label : PROPERTY
+          Label : MEMBER
             {}
             Label : CODE
               [
@@ -20,3 +17,5 @@ Label : PROJECT
                 'method'
               Label : VARIABLE
                 $extend
+          Label : OBJECT
+            $obj

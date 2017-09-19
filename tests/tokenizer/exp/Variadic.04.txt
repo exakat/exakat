@@ -1,24 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Variadic.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-              Label : TYPEHINT
-                array
+          Label : ARGUMENT
+            $a
+            Label : TYPEHINT
+              array
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             a

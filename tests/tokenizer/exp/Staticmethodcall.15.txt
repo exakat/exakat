@@ -1,96 +1,73 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticmethodcall.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           f
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              2
+          Label : ARGUMENT
+            2
           Label : NAME
             f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
-            Label : NAME
-              f
-        Label : ELEMENT
-          ::
-          Label : ARGUMENTS
-            (
             Label : ARGUMENT
               1
+            Label : NAME
+              f
+        Label : EXPRESSION
+          ::
+          Label : ARGUMENT
+            1
           Label : NAME
             ::
             Label : CLASS
               D
             Label : METHOD
               c
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 c
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              14
+          Label : ARGUMENT
+            14
           Label : NAME
             ::
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                13
+            Label : ARGUMENT
+              13
             Label : NAME
               ::
               Label : CLASS
                 D
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    12
+                Label : ARGUMENT
+                  12
                 Label : NAME
                   c
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              5
+          Label : ARGUMENT
+            5
           Label : NAME
             ::
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                4
+            Label : ARGUMENT
+              4
             Label : NAME
               ::
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  3
+              Label : ARGUMENT
+                3
               Label : NAME
                 ::
                 Label : CLASS
                   D
                 Label : METHOD
                   c
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      2
+                  Label : ARGUMENT
+                    2
                   Label : NAME
                     c

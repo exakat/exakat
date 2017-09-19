@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Cast.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           (int)
           Label : CAST
             $x
-        Label : ELEMENT
+        Label : EXPRESSION
           (integer)
           Label : CAST
             $y

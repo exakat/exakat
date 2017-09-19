@@ -39,13 +39,15 @@ GREMLIN;
                          'and, or, xor' => 'letters');
 
         $this->atomIs('Logical')
+             ->tokenIs(array('T_LOGICAL_AND', 'T_LOGICAL_XOR', 'T_LOGICAL_OR',
+                             'T_BOOLEAN_AND',                  'T_BOOLEAN_OR', ))
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
         $types = (array) $this->rawQuery();
         if ($types[0] instanceof \Stdclass) {
             $types = (array) $types[0];
         }
-
+        
         $store = array();
         $total = 0;
         foreach($storage as $key => $v) {
@@ -66,6 +68,8 @@ GREMLIN;
         $types = array_keys($types);
 
         $this->atomIs('Logical')
+             ->tokenIs(array('T_LOGICAL_AND', 'T_LOGICAL_XOR', 'T_LOGICAL_OR',
+                             'T_BOOLEAN_AND',                  'T_BOOLEAN_OR', ))
              ->raw('map{ '.$mapping.' }')
              ->raw('filter{ x2 in *** ; }', $types)
              ->back('first');

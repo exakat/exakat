@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Comparison.38.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              !=
+          Label : ARGUMENT
+            !=
+            Label : LEFT
+              <
               Label : LEFT
-                <
-                Label : LEFT
-                  $b
-                Label : RIGHT
-                  1
+                $b
               Label : RIGHT
-                'B'
+                1
+            Label : RIGHT
+              'B'
           Label : NAME
             var_dump

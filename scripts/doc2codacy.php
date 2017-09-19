@@ -48,12 +48,12 @@ $timetofix = array( 'Instant' => 5,
 
 foreach($list as $doc) {
     $ini = parse_ini_file('./human/en/'.$doc.'.ini');
-    $d = array();
-    
-    $d['patternId'] = $doc;
-    $d['title'] = $ini['name'];
-    $d['description'] = $ini['name'];
-    $d['timetofix'] = $timetofix[$docs->getTimeToFix('Exakat\\Analyzer\\'.str_replace('/', '\\', $doc))];
+    $d = array(
+        'patternId'   => $doc,
+        'title'       => $ini['name'],
+        'description' => $ini['name'],
+        'timetofix'   => $timetofix[$docs->getTimeToFix('Exakat\\Analyzer\\'.str_replace('/', '\\', $doc))],
+    );
     
     $description[] = (object) $d;
     

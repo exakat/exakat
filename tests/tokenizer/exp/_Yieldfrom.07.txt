@@ -1,161 +1,134 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yieldfrom.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           count_to_ten
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 1
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 2
-            Label : ELEMENT
+            Label : EXPRESSION
               yield from
               Label : YIELD
                 [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    3
-                  Label : ARGUMENT
-                    4
-            Label : ELEMENT
+                Label : ARGUMENT
+                  3
+                Label : ARGUMENT
+                  4
+            Label : EXPRESSION
               yield from
               Label : YIELD
                 new
                 Label : NEW
                   ArrayIterator
-                  Label : ARGUMENTS
-                    (
+                  Label : ARGUMENT
+                    [
                     Label : ARGUMENT
-                      [
-                      Label : ARGUMENTS
-                        [
-                        Label : ARGUMENT
-                          5
-                        Label : ARGUMENT
-                          6
+                      5
+                    Label : ARGUMENT
+                      6
                   Label : NAME
                     ArrayIterator
-            Label : ELEMENT
+            Label : EXPRESSION
               yield from
               Label : YIELD
                 seven_eight
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   seven_eight
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 9
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 10
           Label : DEFINITION
             count_to_ten
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               count_to_ten
           Label : NAME
             count_to_ten
-        Label : ELEMENT
+        Label : EXPRESSION
           seven_eight
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 7
-            Label : ELEMENT
+            Label : EXPRESSION
               yield from
               Label : YIELD
                 eight
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   eight
           Label : DEFINITION
             seven_eight
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               seven_eight
           Label : NAME
             seven_eight
-        Label : ELEMENT
+        Label : EXPRESSION
           eight
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 8
           Label : DEFINITION
             eight
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               eight
           Label : NAME
             eight
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  "
-                  Label : CONCAT
-                    $num
-                  Label : CONCAT
-                     
+              Label : ARGUMENT
+                "
+                Label : CONCAT
+                  $num
+                Label : CONCAT
+                   
               Label : NAME
                 echo
           Label : SOURCE
             count_to_ten
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               count_to_ten
           Label : VALUE

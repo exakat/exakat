@@ -1,44 +1,39 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.36.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            'E'
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                ==
-                Label : LEFT
-                  $a
-                Label : RIGHT
-                  'C'
-              Label : ELSE
-                'E'
-              Label : THEN
-                'D'
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              ==
+              Label : LEFT
+                $a
+              Label : RIGHT
+                'C'
+            Label : ELSE
+              'E'
+            Label : THEN
+              'D'
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           E
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               G
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
+              Label : ARGUMENT
+                $b
               Label : NAME
                 G
           Label : ELSE
@@ -51,91 +46,81 @@ Label : PROJECT
                 'J'
             Label : ELSE
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 K
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 J
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               G
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
+              Label : ARGUMENT
                 $c
-                Label : ARGUMENT
-                  $c
               Label : NAME
                 print
-            Label : ELEMENT
+            Label : EXPRESSION
               H
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-        Label : ELEMENT
+        Label : EXPRESSION
           L
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
+          Label : ARGUMENT
             $e
-            Label : ARGUMENT
-              $e
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           M
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            )
+          Label : ARGUMENT
+            O
             Label : ARGUMENT
-              O
-              Label : ARGUMENTS
+              .
+              Label : CONCAT
                 (
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    (
-                    Label : CODE
-                      ?
-                      Label : CONDITION
-                        empty
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            [
-                            Label : INDEX
-                              'P'
-                            Label : VARIABLE
-                              $f
-                        Label : NAME
-                          empty
-                      Label : ELSE
-                        'R'
-                      Label : THEN
-                        'Q'
-                  Label : CONCAT
-                    'S'
-                  Label : CONCAT
-                    [
-                    Label : INDEX
-                      'T'
-                    Label : VARIABLE
-                      $g
-                  Label : CONCAT
-                    [
-                    Label : INDEX
-                      'U'
-                    Label : VARIABLE
-                      $h
-              Label : NAME
-                O
+                Label : CODE
+                  ?
+                  Label : CONDITION
+                    empty
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'P'
+                      Label : VARIABLE
+                        $f
+                    Label : NAME
+                      empty
+                  Label : ELSE
+                    'R'
+                  Label : THEN
+                    'Q'
+              Label : CONCAT
+                'S'
+              Label : CONCAT
+                [
+                Label : INDEX
+                  'T'
+                Label : VARIABLE
+                  $g
+              Label : CONCAT
+                [
+                Label : INDEX
+                  'U'
+                Label : VARIABLE
+                  $h
+            Label : NAME
+              O
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           U
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $i
@@ -143,23 +128,19 @@ Label : PROJECT
             ->
             Label : METHOD
               Z
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'AA'
-                Label : ARGUMENT
-                  null
               Label : NAME
                 Z
+              Label : ARGUMENT
+                'AA'
+              Label : ARGUMENT
+                null
             Label : OBJECT
               ::
               Label : CLASS
                 \W\X
               Label : METHOD
                 Y
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   Y

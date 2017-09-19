@@ -1,54 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           E
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             isset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'F'
-                Label : VARIABLE
-                  $this
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'F'
+              Label : VARIABLE
+                $this
             Label : NAME
               isset
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'G'
-                  Label : CONCAT
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  'G'
+                Label : CONCAT
+                  H
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'F'
+                    Label : VARIABLE
+                      $this
+                  Label : NAME
                     H
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'F'
-                        Label : VARIABLE
-                          $this
-                    Label : NAME
-                      H
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 B\C\D

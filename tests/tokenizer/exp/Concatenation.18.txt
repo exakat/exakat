@@ -1,40 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                'a'
-              Label : CONCAT
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              'a'
+            Label : CONCAT
+              date
+              Label : NAME
                 date
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    "Y"
-                  Label : ARGUMENT
-                    strtotime
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $b
-                    Label : NAME
-                      strtotime
+              Label : ARGUMENT
+                "Y"
+              Label : ARGUMENT
+                strtotime
+                Label : ARGUMENT
+                  $b
                 Label : NAME
-                  date
+                  strtotime
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x

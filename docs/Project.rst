@@ -5,6 +5,8 @@ Running an audit
 
 Once installed, running an audit with Exakat is as simple as : 
 
+::
+
     php exakat.phar project -p <project> -v 
     
 This runs the default report for the target project. There are other targets that may be run.
@@ -14,10 +16,14 @@ General configuration
 
 Open the projects/<project>/config.ini file, and use the following in the file : 
 
+::
+
     project_reports = ZendFramework
     project_themes = ZendFramework
-    
+
 You may build several reports in a call by separating them with commas, or with the array notation. 
+
+::
 
     ; Comma-separated lists
     project_reports = ZendFramework,Text
@@ -36,8 +42,11 @@ There is a set of rules and a specific report for the `Zend Framework <http://fr
 
 The Zend Framework analysis and report are not configured by default. Open the projects/<project>/config.ini file, and use the following in the file : 
 
+::
+
     project_reports = ZendFramework
     project_themes = ZendFramework
+
 
 
 Running a report for WordPress
@@ -49,8 +58,12 @@ The Wordpress analysis is not configured by default. There is no specific report
 
 Open the projects/<project>/config.ini file, and use the following in the file : 
 
+::
+
     project_themes = Wordpress
     project_reports = Text
+
+
 
 Running a report for CakePHP
 ------------------------------
@@ -61,8 +74,11 @@ The CakePHP analysis is not configured by default. There is no specific report f
 
 Open the projects/<project>/config.ini file, and use the following in the file : 
 
+::
+
     project_themes = Cakephp
     project_reports = Text
+
 
 Phases of running an exakat audit
 ---------------------------------

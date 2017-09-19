@@ -1,6 +1,8 @@
 <?php
 
-$expected     = array();
+$expected     = array('static function staticMethodUsingThis( ) { /**/ } ',
+                      'static function staticTraitMethodUsingThis( ) { /**/ } ',
+                     );
 
 $expected_not = array('static function staticMethod( ) { /**/ } ',
                       'static function staticMethodInTrait( ) { /**/ } ',

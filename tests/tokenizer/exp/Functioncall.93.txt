@@ -1,29 +1,40 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.93.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            'O'
-            Label : ARGUMENT
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              >
+              Label : LEFT
+                .
+                Label : CONCAT
+                  'B'
+                Label : CONCAT
+                  $b
+                Label : CONCAT
+                  'C'
+                Label : CONCAT
+                  $b
+              Label : RIGHT
+                1
+            Label : ELSE
               ?
               Label : CONDITION
                 >
                 Label : LEFT
                   .
                   Label : CONCAT
-                    'B'
+                    'E'
                   Label : CONCAT
-                    $b
-                  Label : CONCAT
-                    'C'
+                    'F'
                   Label : CONCAT
                     $b
                 Label : RIGHT
@@ -35,50 +46,34 @@ Label : PROJECT
                   Label : LEFT
                     .
                     Label : CONCAT
-                      'E'
+                      'H'
                     Label : CONCAT
-                      'F'
+                      'I'
+                    Label : CONCAT
+                      J
+                      Label : NAME
+                        J
+                      Label : ARGUMENT
+                        'K'
+                      Label : ARGUMENT
+                        $c
+                    Label : CONCAT
+                      'L'
                     Label : CONCAT
                       $b
                   Label : RIGHT
                     1
                 Label : ELSE
-                  ?
-                  Label : CONDITION
-                    >
-                    Label : LEFT
-                      .
-                      Label : CONCAT
-                        'H'
-                      Label : CONCAT
-                        'I'
-                      Label : CONCAT
-                        J
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'K'
-                          Label : ARGUMENT
-                            $c
-                        Label : NAME
-                          J
-                      Label : CONCAT
-                        'L'
-                      Label : CONCAT
-                        $b
-                    Label : RIGHT
-                      1
-                  Label : ELSE
-                    .
-                    Label : CONCAT
-                      'N'
-                    Label : CONCAT
-                      'O'
-                  Label : THEN
-                    'M'
+                  .
+                  Label : CONCAT
+                    'N'
+                  Label : CONCAT
+                    'O'
                 Label : THEN
-                  'G'
+                  'M'
               Label : THEN
-                'D'
+                'G'
+            Label : THEN
+              'D'
           Label : NAME
             print

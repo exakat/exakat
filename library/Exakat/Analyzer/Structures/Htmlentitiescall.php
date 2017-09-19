@@ -29,14 +29,12 @@ class Htmlentitiescall extends Analyzer {
     public function analyze() {
         // Case with no 2nd argument (using default)
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
 
         // Case with no 3rd argument (using default)
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
-             ->outIs('ARGUMENTS')
              ->hasChildWithRank('ARGUMENT', 1)
              ->noChildWithRank('ARGUMENT', 2)
              ->back('first');
@@ -47,7 +45,6 @@ class Htmlentitiescall extends Analyzer {
 
         // Case 2nd argument is a constant
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
-             ->outIs('ARGUMENTS')
              ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(array('Identifier', 'Nsname'))
@@ -57,7 +54,6 @@ class Htmlentitiescall extends Analyzer {
 
         // Case 2nd argument is a combinaison
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
-             ->outIs('ARGUMENTS')
              ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('Logical')
@@ -69,7 +65,6 @@ class Htmlentitiescall extends Analyzer {
 
         // Case 3rd argument is one of the following value
         $this->atomFunctionIs(array('\\htmlentities', '\\htmlspecialchars'))
-             ->outIs('ARGUMENTS')
              ->hasChildWithRank('ARGUMENT', 2)
              ->outWithRank('ARGUMENT', 2)
              ->atomIs('String')

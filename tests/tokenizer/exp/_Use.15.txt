@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -26,11 +25,9 @@ Label : PROJECT
                 one_identifier
               Label : DEFINITION
                 one_identifier
-                Label : DEFINITION
-                  one_identifier
               Label : NAME
                 one_identifier
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -44,11 +41,9 @@ Label : PROJECT
                 \absolute_path
               Label : DEFINITION
                 absolute_path
-                Label : DEFINITION
-                  \absolute_path
               Label : NAME
                 absolute_path
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -70,7 +65,7 @@ Label : PROJECT
                     one_identifier3
               Label : NAME
                 one_identifier3
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -86,11 +81,11 @@ Label : PROJECT
                 a1
           Label : NAME
             Void
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -104,17 +99,15 @@ Label : PROJECT
                 complex\path
               Label : DEFINITION
                 path
-                Label : DEFINITION
-                  complex\path
               Label : NAME
                 path
           Label : NAME
             complex
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : CONST
                 const
@@ -128,33 +121,31 @@ Label : PROJECT
                 \absolute\complex\path2
               Label : DEFINITION
                 path2
-                Label : DEFINITION
-                  \absolute\complex\path2
               Label : NAME
                 path2
           Label : NAME
             absolute\complex
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 one_identifier
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 \absolute_path
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 complex\path
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 \absolute\complex\path2
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -162,7 +153,7 @@ Label : PROJECT
                   a1
                 Label : NAME
                   one_identifier3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -170,7 +161,7 @@ Label : PROJECT
                   a2
                 Label : NAME
                   \absolute_path3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -178,7 +169,7 @@ Label : PROJECT
                   a3
                 Label : NAME
                   complex\path3
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -186,65 +177,57 @@ Label : PROJECT
                   a4
                 Label : NAME
                   \absolute\complex\path32
-            Label : ELEMENT
+            Label : EXPRESSION
               try
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
               Label : CATCH
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   one_identifier
-                  Label : DEFINITION
-                    one_identifier
                 Label : VARIABLE
                   $e
               Label : CATCH
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   absolute_path
-                  Label : DEFINITION
-                    \absolute_path
                 Label : VARIABLE
                   $e
               Label : CATCH
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   path
-                  Label : DEFINITION
-                    complex\path
                 Label : VARIABLE
                   $e
               Label : CATCH
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   path2
-                  Label : DEFINITION
-                    \absolute\complex\path2
                 Label : VARIABLE
                   $e
               Label : CATCH
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   a1
@@ -260,7 +243,7 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   \a1
@@ -270,7 +253,7 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   one_identifier3
@@ -280,7 +263,7 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   a2
@@ -296,7 +279,7 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   a3
@@ -312,7 +295,7 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     Void
                 Label : CLASS
                   a4

@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.59.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $d
@@ -22,29 +21,29 @@ Label : PROJECT
                   'e'
                 Label : CONCAT
                   ->
+                  Label : MEMBER
+                    g
                   Label : OBJECT
                     $f
-                  Label : PROPERTY
-                    g
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $h
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   .=
                   Label : LEFT
                     $i
                   Label : RIGHT
                     'j'
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $k
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   .=
                   Label : LEFT
                     $l
@@ -54,5 +53,5 @@ Label : PROJECT
             $a
           Label : VALUE
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Addition.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             1
@@ -18,13 +17,13 @@ Label : PROJECT
               2
             Label : RIGHT
               7
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             3
           Label : RIGHT
             4
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : LEFT
             5

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $unzip
@@ -16,36 +15,30 @@ Label : PROJECT
             new
             Label : NEW
               SimpleUnzip
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 SimpleUnzip
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $backupdir
           Label : RIGHT
             substr
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $datafile_server
-              Label : ARGUMENT
-                8
-              Label : ARGUMENT
-                13
+            Label : ARGUMENT
+              $datafile_server
+            Label : ARGUMENT
+              8
+            Label : ARGUMENT
+              13
             Label : NAME
               substr
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             ReadFile
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $datafile_server
+            Label : ARGUMENT
+              $datafile_server
             Label : NAME
               ReadFile
           Label : OBJECT

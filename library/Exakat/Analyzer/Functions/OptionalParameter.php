@@ -29,7 +29,6 @@ class OptionalParameter extends Analyzer {
     public function analyze() {
         $this->atomIs('Method')
              ->hasClass()
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->hasOut('TYPEHINT')
              ->outIs('DEFAULT')

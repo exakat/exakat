@@ -1,46 +1,39 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Comparison.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             b
-            Label : ARGUMENTS
-              (
+            Label : ARGUMENT
+              trim
               Label : ARGUMENT
+                $c
+              Label : NAME
                 trim
-                Label : ARGUMENTS
-                  (
+            Label : ARGUMENT
+              >
+              Label : LEFT
+                ->
+                Label : METHOD
+                  e
                   Label : ARGUMENT
-                    $c
-                Label : NAME
-                  trim
-              Label : ARGUMENT
-                >
-                Label : LEFT
-                  ->
-                  Label : METHOD
+                    Void
+                  Label : NAME
                     e
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      e
-                  Label : OBJECT
-                    $d
-                Label : RIGHT
-                  'f'
-              Label : ARGUMENT
-                G
+                Label : OBJECT
+                  $d
+              Label : RIGHT
+                'f'
+            Label : ARGUMENT
+              G
             Label : NAME
               b

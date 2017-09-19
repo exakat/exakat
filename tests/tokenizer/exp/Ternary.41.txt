@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.41.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             =
@@ -16,10 +15,10 @@ Label : PROJECT
               parts
               Label : APPEND
                 ->
+                Label : MEMBER
+                  parts
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  parts
             Label : RIGHT
               ?
               Label : CONDITION
@@ -34,7 +33,7 @@ Label : PROJECT
                 new
                 Label : NEW
                   self
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             =
@@ -42,10 +41,10 @@ Label : PROJECT
               parts
               Label : APPEND
                 ->
+                Label : MEMBER
+                  parts
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  parts
             Label : RIGHT
               ?
               Label : CONDITION
@@ -60,7 +59,7 @@ Label : PROJECT
                 new
                 Label : NEW
                   static
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             =
@@ -68,10 +67,10 @@ Label : PROJECT
               parts
               Label : APPEND
                 ->
+                Label : MEMBER
+                  parts
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  parts
             Label : RIGHT
               ?
               Label : CONDITION
@@ -86,7 +85,7 @@ Label : PROJECT
                 new
                 Label : NEW
                   parent
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             =
@@ -94,10 +93,10 @@ Label : PROJECT
               parts
               Label : APPEND
                 ->
+                Label : MEMBER
+                  parts
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  parts
             Label : RIGHT
               ?
               Label : CONDITION
@@ -112,7 +111,7 @@ Label : PROJECT
                 new
                 Label : NEW
                   X
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             =
@@ -120,10 +119,10 @@ Label : PROJECT
               parts
               Label : APPEND
                 ->
+                Label : MEMBER
+                  parts
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  parts
             Label : RIGHT
               ?
               Label : CONDITION
@@ -138,13 +137,11 @@ Label : PROJECT
                 new
                 Label : NEW
                   self
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     self
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             =
@@ -152,10 +149,10 @@ Label : PROJECT
               parts
               Label : APPEND
                 ->
+                Label : MEMBER
+                  parts
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  parts
             Label : RIGHT
               ?
               Label : CONDITION
@@ -170,13 +167,11 @@ Label : PROJECT
                 new
                 Label : NEW
                   self
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      1
+                  Label : ARGUMENT
+                    1
                   Label : NAME
                     self
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             =
@@ -184,10 +179,10 @@ Label : PROJECT
               parts
               Label : APPEND
                 ->
+                Label : MEMBER
+                  parts
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  parts
             Label : RIGHT
               ?
               Label : CONDITION
@@ -202,11 +197,9 @@ Label : PROJECT
                 new
                 Label : NEW
                   self
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      1
-                    Label : ARGUMENT
-                      2
                   Label : NAME
                     self
+                  Label : ARGUMENT
+                    1
+                  Label : ARGUMENT
+                    2

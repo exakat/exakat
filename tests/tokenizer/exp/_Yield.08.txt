@@ -1,36 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yield.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
               Label : RIGHT
                 [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    =
-                    Label : LEFT
-                      $b
-                    Label : RIGHT
-                      yield
-                      Label : YIELD
-                        $c
+                Label : ARGUMENT
+                  =
+                  Label : LEFT
+                    $b
+                  Label : RIGHT
+                    yield
+                    Label : YIELD
+                      $c
           Label : NAME
             a

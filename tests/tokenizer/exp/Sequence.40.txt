@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.40.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               @
               Label : AT
                 $b
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c

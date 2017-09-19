@@ -1,47 +1,40 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Typehint.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
+          Label : ARGUMENT
+            a
+            Label : NAME
               a
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  $c
-              Label : NAME
-                a
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              $c
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           A
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
-        Label : ELEMENT
+            Label : ARGUMENT
+              Void
+        Label : EXPRESSION
           if
           Label : CONDITION
             $e
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $f
@@ -49,9 +42,7 @@ Label : PROJECT
                   $f
               Label : RIGHT
                 g
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $h
+                Label : ARGUMENT
+                  $h
                 Label : NAME
                   g

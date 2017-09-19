@@ -1,22 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.40.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 a\b
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -24,15 +23,11 @@ Label : PROJECT
                 new
                 Label : NEW
                   b\d
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     b\d
-                    Label : DEFINITION
-                      a\b
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -40,15 +35,11 @@ Label : PROJECT
                 new
                 Label : NEW
                   b\e
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     b\e
-                    Label : DEFINITION
-                      a\b
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $d
@@ -56,15 +47,11 @@ Label : PROJECT
                 new
                 Label : NEW
                   b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     b
-                    Label : DEFINITION
-                      a\b
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
@@ -72,9 +59,7 @@ Label : PROJECT
                 new
                 Label : NEW
                   b\d
-                  Label : DEFINITION
-                    a\b
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
@@ -82,96 +67,68 @@ Label : PROJECT
                 new
                 Label : NEW
                   b\e
-                  Label : DEFINITION
-                    a\b
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    b\d
-                    Label : DEFINITION
-                      a\b
-                  Label : VARIABLE
-                    $c
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  b\d
+                Label : VARIABLE
+                  $c
               Label : NAME
                 var_dump
-            Label : ELEMENT
+            Label : EXPRESSION
               var_dump
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  instanceof
-                  Label : CLASS
-                    b
-                    Label : DEFINITION
-                      a\b
-                  Label : VARIABLE
-                    $d
+              Label : ARGUMENT
+                instanceof
+                Label : CLASS
+                  b
+                Label : VARIABLE
+                  $d
               Label : NAME
                 var_dump
           Label : NAME
             c
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
                 b\d
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+              Label : DEFINITION
+                b\d
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   b\d
-                  Label : DEFINITION
-                    a\b
               Label : DEFINITION
                 b\d
-                Label : DEFINITION
-                  a\b
               Label : DEFINITION
                 b\d
-                Label : DEFINITION
-                  a\b
-              Label : DEFINITION
-                b\d
-                Label : DEFINITION
-                  a\b
               Label : NAME
                 d
           Label : NAME
             a\b
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : DEFINITION
-                b
-                Label : DEFINITION
-                  a\b
+                a\b
               Label : DEFINITION
                 b
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+              Label : DEFINITION
+                b
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   b
-                  Label : DEFINITION
-                    a\b
               Label : DEFINITION
-                a\b
-              Label : DEFINITION, DEFINITION
                 b
-                Label : DEFINITION
-                  a\b
               Label : NAME
                 b
           Label : NAME

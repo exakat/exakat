@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/String.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -24,7 +23,7 @@ Label : PROJECT
               $b
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $y
@@ -38,7 +37,7 @@ Label : PROJECT
                 $b
             Label : CONCAT
               zC
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $z
@@ -52,7 +51,7 @@ Label : PROJECT
                 $b
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -68,13 +67,11 @@ Label : PROJECT
                   +
                   Label : LEFT
                     function
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : BLOCK
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         Void
                   Label : RIGHT
                     "
@@ -86,7 +83,7 @@ Label : PROJECT
                 $b
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a2
@@ -104,7 +101,7 @@ Label : PROJECT
                 $b
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a2
@@ -134,7 +131,7 @@ Label : PROJECT
                 $b1
             Label : CONCAT
               C1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a2

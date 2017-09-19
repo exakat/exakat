@@ -1,38 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Dowhile.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           do
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
                 Label : NOT
                   empty
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $line
+                  Label : ARGUMENT
+                    $line
                   Label : NAME
                     empty
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   .=
                   Label : LEFT
                     $output
                   Label : RIGHT
                     '='
-            Label : ELEMENT
+            Label : EXPRESSION
               .=
               Label : LEFT
                 $output
@@ -42,9 +39,7 @@ Label : PROJECT
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $line
+              Label : ARGUMENT
+                $line
               Label : NAME
                 empty

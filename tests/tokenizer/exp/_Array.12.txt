@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Array.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -18,10 +17,8 @@ Label : PROJECT
                 ->
                 Label : METHOD
                   d
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $e
+                  Label : ARGUMENT
+                    $e
                   Label : NAME
                     d
                 Label : OBJECT
@@ -34,25 +31,23 @@ Label : PROJECT
                 $a
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                +
-                Label : LEFT
-                  [
-                  Label : INDEX
-                    $h
-                  Label : VARIABLE
-                    $g
-                Label : RIGHT
-                  1
-              Label : ARGUMENT
-                -
-                Label : LEFT
-                  [
-                  Label : INDEX
-                    $j
-                  Label : VARIABLE
-                    $i
-                Label : RIGHT
-                  1
+            Label : ARGUMENT
+              +
+              Label : LEFT
+                [
+                Label : INDEX
+                  $h
+                Label : VARIABLE
+                  $g
+              Label : RIGHT
+                1
+            Label : ARGUMENT
+              -
+              Label : LEFT
+                [
+                Label : INDEX
+                  $j
+                Label : VARIABLE
+                  $i
+              Label : RIGHT
+                1

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Parenthesis.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             ?
@@ -34,25 +33,21 @@ Label : PROJECT
                       C
             Label : ELSE
               G
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'H'
-                Label : ARGUMENT
-                  'F'
-                Label : ARGUMENT
-                  $b
+              Label : ARGUMENT
+                'H'
+              Label : ARGUMENT
+                'F'
+              Label : ARGUMENT
+                $b
               Label : NAME
                 G
             Label : THEN
               D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'E'
-                Label : ARGUMENT
-                  'F'
-                Label : ARGUMENT
-                  $b
+              Label : ARGUMENT
+                'E'
+              Label : ARGUMENT
+                'F'
+              Label : ARGUMENT
+                $b
               Label : NAME
                 D

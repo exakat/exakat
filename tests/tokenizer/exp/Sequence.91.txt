@@ -1,177 +1,152 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.91.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 new
                 Label : NEW
                   C
-                  Label : ARGUMENTS
-                    (
+                  Label : ARGUMENT
+                    function
                     Label : ARGUMENT
-                      function
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
-                      Label : BLOCK
-                        {}
-                        Label : ELEMENT
-                          =
-                          Label : LEFT
-                            $b
-                          Label : RIGHT
-                            ->
-                            Label : METHOD
-                              D
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  Void
-                              Label : NAME
-                                D
-                            Label : OBJECT
-                              $this
-                        Label : ELEMENT
+                      Void
+                    Label : BLOCK
+                      {}
+                      Label : EXPRESSION
+                        =
+                        Label : LEFT
+                          $b
+                        Label : RIGHT
                           ->
                           Label : METHOD
-                            E
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
+                            D
+                            Label : ARGUMENT
+                              Void
                             Label : NAME
-                              E
+                              D
                           Label : OBJECT
-                            $b
-                        Label : ELEMENT
-                          for
-                          Label : BLOCK
-                            ;
-                            Label : ELEMENT
-                              ->
-                              Label : METHOD
-                                G
-                                Label : ARGUMENTS
-                                  (
-                                  Label : ARGUMENT
-                                    Void
-                                Label : NAME
-                                  G
-                              Label : OBJECT
-                                $b
-                          Label : FINAL
-                            ;
-                            Label : ELEMENT
-                              &&
-                              Label : LEFT
-                                <
-                                Label : LEFT
-                                  $c
-                                Label : RIGHT
-                                  $a
-                              Label : RIGHT
-                                ->
-                                Label : METHOD
-                                  F
-                                  Label : ARGUMENTS
-                                    (
-                                    Label : ARGUMENT
-                                      Void
-                                  Label : NAME
-                                    F
-                                Label : OBJECT
-                                  $b
-                          Label : INCREMENT
-                            ;
-                            Label : ELEMENT
-                              ++
-                              Label : PREPLUSPLUS
-                                $c
-                          Label : INIT
-                            ;
-                            Label : ELEMENT
-                              =
-                              Label : LEFT
-                                $c
-                              Label : RIGHT
-                                0
-                        Label : ELEMENT
-                          while
-                          Label : BLOCK
-                            {}
-                            Label : ELEMENT
-                              yield
-                              Label : YIELD
-                                =>
-                                Label : KEY
-                                  ->
-                                  Label : METHOD
-                                    I
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        Void
-                                    Label : NAME
-                                      I
-                                  Label : OBJECT
-                                    $b
-                                Label : VALUE
-                                  ->
-                                  Label : METHOD
-                                    J
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        Void
-                                    Label : NAME
-                                      J
-                                  Label : OBJECT
-                                    $b
-                            Label : ELEMENT
-                              ->
-                              Label : METHOD
-                                G
-                                Label : ARGUMENTS
-                                  (
-                                  Label : ARGUMENT
-                                    Void
-                                Label : NAME
-                                  G
-                              Label : OBJECT
-                                $b
-                          Label : CONDITION
+                            $this
+                      Label : EXPRESSION
+                        ->
+                        Label : METHOD
+                          E
+                          Label : ARGUMENT
+                            Void
+                          Label : NAME
+                            E
+                        Label : OBJECT
+                          $b
+                      Label : EXPRESSION
+                        for
+                        Label : BLOCK
+                          ;
+                          Label : EXPRESSION
                             ->
                             Label : METHOD
-                              F
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  Void
+                              G
+                              Label : ARGUMENT
+                                Void
                               Label : NAME
-                                F
+                                G
                             Label : OBJECT
                               $b
-                      Label : USE
-                        (
-                        Label : ARGUMENT
-                          $a
+                        Label : FINAL
+                          ;
+                          Label : EXPRESSION
+                            &&
+                            Label : LEFT
+                              <
+                              Label : LEFT
+                                $c
+                              Label : RIGHT
+                                $a
+                            Label : RIGHT
+                              ->
+                              Label : METHOD
+                                F
+                                Label : ARGUMENT
+                                  Void
+                                Label : NAME
+                                  F
+                              Label : OBJECT
+                                $b
+                        Label : INCREMENT
+                          ;
+                          Label : EXPRESSION
+                            ++
+                            Label : PREPLUSPLUS
+                              $c
+                        Label : INIT
+                          ;
+                          Label : EXPRESSION
+                            =
+                            Label : LEFT
+                              $c
+                            Label : RIGHT
+                              0
+                      Label : EXPRESSION
+                        while
+                        Label : BLOCK
+                          {}
+                          Label : EXPRESSION
+                            yield
+                            Label : YIELD
+                              =>
+                              Label : INDEX
+                                ->
+                                Label : METHOD
+                                  I
+                                  Label : ARGUMENT
+                                    Void
+                                  Label : NAME
+                                    I
+                                Label : OBJECT
+                                  $b
+                              Label : VALUE
+                                ->
+                                Label : METHOD
+                                  J
+                                  Label : ARGUMENT
+                                    Void
+                                  Label : NAME
+                                    J
+                                Label : OBJECT
+                                  $b
+                          Label : EXPRESSION
+                            ->
+                            Label : METHOD
+                              G
+                              Label : ARGUMENT
+                                Void
+                              Label : NAME
+                                G
+                            Label : OBJECT
+                              $b
+                        Label : CONDITION
+                          ->
+                          Label : METHOD
+                            F
+                            Label : ARGUMENT
+                              Void
+                            Label : NAME
+                              F
+                          Label : OBJECT
+                            $b
+                    Label : USE
+                      $a
                   Label : NAME
                     C
           Label : NAME

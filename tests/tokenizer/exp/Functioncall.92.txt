@@ -1,23 +1,20 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.92.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ?
           Label : CONDITION
             ->
             Label : METHOD
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 B
             Label : OBJECT
@@ -26,9 +23,7 @@ Label : PROJECT
             null
           Label : THEN
             die
-            Label : ARGUMENTS
+            Label : ARGUMENT
               Void
-              Label : ARGUMENT
-                Void
             Label : NAME
               die

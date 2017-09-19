@@ -1,44 +1,39 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.23.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                ->
-                Label : METHOD
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              ->
+              Label : METHOD
+                b
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    d
+                  Label : VARIABLE
+                    $c
+                Label : NAME
                   b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        d
-                      Label : VARIABLE
-                        $c
-                  Label : NAME
-                    b
-                Label : OBJECT
-                  $a
-              Label : CONCAT
-                'e'
-              Label : CONCAT
-                [
-                Label : INDEX
-                  'g'
-                Label : VARIABLE
-                  $f
-              Label : CONCAT
-                'h'
+              Label : OBJECT
+                $a
+            Label : CONCAT
+              'e'
+            Label : CONCAT
+              [
+              Label : INDEX
+                'g'
+              Label : VARIABLE
+                $f
+            Label : CONCAT
+              'h'
           Label : NAME
             echo

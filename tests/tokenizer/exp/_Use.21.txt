@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : EXTENDS
             \C\D\E
@@ -18,7 +17,7 @@ Label : PROJECT
             use
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 insteadof
                 Label : INSTEADOF
                   F
@@ -28,7 +27,7 @@ Label : PROJECT
                     G
                   Label : CONSTANT
                     I
-              Label : ELEMENT
+              Label : EXPRESSION
                 insteadof
                 Label : INSTEADOF
                   G

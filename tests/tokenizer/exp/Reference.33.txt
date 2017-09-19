@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.33.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &
@@ -21,5 +20,5 @@ Label : PROJECT
               $c
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void

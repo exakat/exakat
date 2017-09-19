@@ -1,35 +1,32 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.85.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ->
+            Label : MEMBER
+              C
             Label : OBJECT
               [
               Label : INDEX
                 'B'
               Label : VARIABLE
                 $a
-            Label : PROPERTY
-              C
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  D
+              Label : ARGUMENT
+                D
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               S
-    Label : ELEMENT
+    Label : EXPRESSION
       T

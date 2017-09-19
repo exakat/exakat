@@ -1,56 +1,51 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Typehint.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-              Label : TYPEHINT
-                C
-            Label : ARGUMENT
-              $b
-              Label : TYPEHINT
-                D
-            Label : ARGUMENT
-              $c
-              Label : TYPEHINT
-                callable
+          Label : ARGUMENT
+            $a
+            Label : TYPEHINT
+              C
+          Label : ARGUMENT
+            $b
+            Label : TYPEHINT
+              D
+          Label : ARGUMENT
+            $c
+            Label : TYPEHINT
+              callable
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 E
               Label : METHOD
                 F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
-                  Label : ARGUMENT
-                    $e
                 Label : NAME
                   F
-            Label : ELEMENT
+                Label : ARGUMENT
+                  $d
+                Label : ARGUMENT
+                  $e
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  G
                 Label : OBJECT
                   $f
-                Label : PROPERTY
-                  G
               Label : RIGHT
                 $g
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

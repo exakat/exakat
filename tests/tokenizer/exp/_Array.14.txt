@@ -1,39 +1,34 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Array.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           {
           Label : INDEX
             -
             Label : LEFT
               strlen
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $aa
+              Label : ARGUMENT
+                $aa
               Label : NAME
                 strlen
             Label : RIGHT
               1
           Label : VARIABLE
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           {
           Label : INDEX
             -
             Label : LEFT
               strlen
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $bb
+              Label : ARGUMENT
+                $bb
               Label : NAME
                 strlen
             Label : RIGHT
@@ -44,16 +39,14 @@ Label : PROJECT
               2
             Label : VARIABLE
               $b
-        Label : ELEMENT
+        Label : EXPRESSION
           {
           Label : INDEX
             -
             Label : LEFT
               strlen
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $cc
+              Label : ARGUMENT
+                $cc
               Label : NAME
                 strlen
             Label : RIGHT
@@ -68,16 +61,14 @@ Label : PROJECT
                 3
               Label : VARIABLE
                 $c
-        Label : ELEMENT
+        Label : EXPRESSION
           {
           Label : INDEX
             -
             Label : LEFT
               strlen
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $dd
+              Label : ARGUMENT
+                $dd
               Label : NAME
                 strlen
             Label : RIGHT
@@ -92,16 +83,14 @@ Label : PROJECT
                 3
               Label : VARIABLE
                 $d
-        Label : ELEMENT
+        Label : EXPRESSION
           {
           Label : INDEX
             -
             Label : LEFT
               strlen
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $ee
+              Label : ARGUMENT
+                $ee
               Label : NAME
                 strlen
             Label : RIGHT
@@ -112,16 +101,14 @@ Label : PROJECT
               6
             Label : VARIABLE
               $e
-        Label : ELEMENT
+        Label : EXPRESSION
           {
           Label : INDEX
             -
             Label : LEFT
               strlen
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $dd
+              Label : ARGUMENT
+                $dd
               Label : NAME
                 strlen
             Label : RIGHT

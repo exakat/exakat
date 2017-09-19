@@ -1,21 +1,68 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Assignation.35.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'D'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'C'
+                  Label : VARIABLE
+                    [
+                    Label : INDEX
+                      'B'
+                    Label : VARIABLE
+                      $b
+              Label : NAME
+                empty
+          Label : THEN
+            {}
+            Label : EXPRESSION
+              =
+              Label : LEFT
+                list
+                Label : NAME
+                  list
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'F'
+                  Label : VARIABLE
+                    ->
+                    Label : MEMBER
+                      E
+                    Label : OBJECT
+                      $c
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'H'
+                  Label : VARIABLE
+                    ->
+                    Label : MEMBER
+                      E
+                    Label : OBJECT
+                      $c
+              Label : RIGHT
+                I
+                Label : NAME
+                  I
+                Label : ARGUMENT
+                  'J'
                 Label : ARGUMENT
                   [
                   Label : INDEX
@@ -30,57 +77,3 @@ Label : PROJECT
                         'B'
                       Label : VARIABLE
                         $b
-              Label : NAME
-                empty
-          Label : THEN
-            {}
-            Label : ELEMENT
-              =
-              Label : LEFT
-                list
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'F'
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $c
-                      Label : PROPERTY
-                        E
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'H'
-                    Label : VARIABLE
-                      ->
-                      Label : OBJECT
-                        $c
-                      Label : PROPERTY
-                        E
-                Label : NAME
-                  list
-              Label : RIGHT
-                I
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'J'
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'D'
-                    Label : VARIABLE
-                      [
-                      Label : INDEX
-                        'C'
-                      Label : VARIABLE
-                        [
-                        Label : INDEX
-                          'B'
-                        Label : VARIABLE
-                          $b
-                Label : NAME
-                  I

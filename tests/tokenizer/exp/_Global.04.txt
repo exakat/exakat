@@ -1,22 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Global.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           global
           Label : GLOBAL
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           global
           Label : GLOBAL
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           global
           Label : GLOBAL
             $d

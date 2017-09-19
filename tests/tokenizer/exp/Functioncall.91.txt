@@ -1,195 +1,158 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.91.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           eval
-          Label : ARGUMENTS
+          Label : ARGUMENT
             (
-            Label : ARGUMENT
-              (
-              Label : CODE
-                $
+            Label : CODE
+              $
+              Label : NAME
+                $a
+                Label : ARGUMENT
+                  'B'
                 Label : NAME
                   $a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'B'
-                  Label : NAME
-                    $a
           Label : NAME
             eval
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $
-                Label : NAME
-                  $a2
+            Label : ARGUMENT
+              $
+              Label : NAME
+                $a2
             Label : NAME
               list
           Label : RIGHT
             $d
-        Label : ELEMENT
+        Label : EXPRESSION
           die
-          Label : ARGUMENTS
+          Label : ARGUMENT
             (
-            Label : ARGUMENT
-              (
-              Label : CODE
-                $
+            Label : CODE
+              $
+              Label : NAME
+                $a3
+                Label : ARGUMENT
+                  'B3'
                 Label : NAME
                   $a3
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'B3'
-                  Label : NAME
-                    $a3
           Label : NAME
             die
-        Label : ELEMENT
+        Label : EXPRESSION
           empty
-          Label : ARGUMENTS
+          Label : ARGUMENT
             (
-            Label : ARGUMENT
-              (
-              Label : CODE
-                $
+            Label : CODE
+              $
+              Label : NAME
+                $a4
+                Label : ARGUMENT
+                  'B4'
                 Label : NAME
                   $a4
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'B4'
-                  Label : NAME
-                    $a4
           Label : NAME
             empty
-        Label : ELEMENT
+        Label : EXPRESSION
           C
-          Label : ARGUMENTS
+          Label : ARGUMENT
             (
+            Label : CODE
+              $
+              Label : NAME
+                $a
+                Label : ARGUMENT
+                  'B'
+                Label : NAME
+                  $a
+          Label : NAME
+            C
+        Label : EXPRESSION
+          eval
+          Label : ARGUMENT
+            (
+            Label : CODE
+              $a
+          Label : NAME
+            eval
+        Label : EXPRESSION
+          $b
+          Label : ARGUMENT
+            0
+          Label : NAME
+            $b
+        Label : EXPRESSION
+          ->
+          Label : METHOD
+            eval
             Label : ARGUMENT
               (
               Label : CODE
                 $
                 Label : NAME
                   $a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'B'
+                  Label : ARGUMENT
+                    'B'
                   Label : NAME
                     $a
-          Label : NAME
-            C
-        Label : ELEMENT
-          eval
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              (
-              Label : CODE
-                $a
-          Label : NAME
-            eval
-        Label : ELEMENT
-          $b
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              0
-          Label : NAME
-            $b
-        Label : ELEMENT
-          ->
-          Label : METHOD
-            eval
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  $
-                  Label : NAME
-                    $a
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'B'
-                    Label : NAME
-                      $a
             Label : NAME
               eval
           Label : OBJECT
             $e
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             C
-            Label : ARGUMENTS
+            Label : ARGUMENT
               (
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  $
+              Label : CODE
+                $
+                Label : NAME
+                  $a
+                  Label : ARGUMENT
+                    'B'
                   Label : NAME
                     $a
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'B'
-                    Label : NAME
-                      $a
             Label : NAME
               C
           Label : OBJECT
             $f
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             eval
-            Label : ARGUMENTS
+            Label : ARGUMENT
               (
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  $a
+              Label : CODE
+                $a
             Label : NAME
               eval
           Label : OBJECT
             $g
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             $b
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
+            Label : ARGUMENT
+              0
             Label : NAME
               $b
           Label : OBJECT
             $h
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $a
+            Label : ARGUMENT
+              $a
             Label : NAME
               list
           Label : OBJECT

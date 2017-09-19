@@ -1,146 +1,129 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.49.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-            Label : ARGUMENT
-              $b
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
               Label : RIGHT
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   C
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $e
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'D'
-                  Label : ARGUMENT
-                    'E'
-            Label : ELEMENT
+                Label : ARGUMENT
+                  'D'
+                Label : ARGUMENT
+                  'E'
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
                 Label : NOT
                   F
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $f
-                    Label : ARGUMENT
-                      $g
                   Label : NAME
                     F
+                  Label : ARGUMENT
+                    $f
+                  Label : ARGUMENT
+                    $g
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $h
                   Label : RIGHT
                     'G'
-                Label : ELEMENT
+                Label : EXPRESSION
                   H
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $i
-                    Label : ARGUMENT
-                      $j
-                    Label : ARGUMENT
+                  Label : ARGUMENT
+                    $i
+                  Label : ARGUMENT
+                    $j
+                  Label : ARGUMENT
+                    I
+                    Label : NAME
                       I
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'J'
-                        Label : ARGUMENT
-                          $k
-                      Label : NAME
-                        I
+                    Label : ARGUMENT
+                      'J'
+                    Label : ARGUMENT
+                      $k
                   Label : NAME
                     H
-                Label : ELEMENT
+                Label : EXPRESSION
                   throw
                   Label : THROW
                     new
                     Label : NEW
                       \K
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         \K
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  L
                 Label : OBJECT
                   $l
-                Label : PROPERTY
-                  L
               Label : RIGHT
                 $m
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  M
                 Label : OBJECT
                   $n
-                Label : PROPERTY
-                  M
               Label : RIGHT
                 $o
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  N
                 Label : OBJECT
                   $p
-                Label : PROPERTY
-                  N
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-            Label : ELEMENT
+                Label : ARGUMENT
+                  Void
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  O
                 Label : OBJECT
                   $q
-                Label : PROPERTY
-                  O
               Label : RIGHT
                 null
+          Label : ARGUMENT
+            $a
+          Label : ARGUMENT
+            $b
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

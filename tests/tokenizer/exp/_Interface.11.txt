@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Interface.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : NAME
             i
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : DEFINITION
             i1
@@ -22,22 +21,22 @@ Label : PROJECT
             i2
           Label : NAME
             i1
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : DEFINITION
             i3
           Label : EXTENDS
-            i1
-          Label : EXTENDS
             i2
+          Label : EXTENDS
+            i1
           Label : NAME
             i3
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : EXTENDS
-            i1
-          Label : EXTENDS
             i2
+          Label : EXTENDS
+            i1
           Label : EXTENDS
             i3
           Label : NAME

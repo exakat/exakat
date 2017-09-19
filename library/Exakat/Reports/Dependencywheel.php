@@ -29,6 +29,8 @@ class Dependencywheel extends Reports {
     const FILE_FILENAME  = 'wheel';
     
     private $select = array();
+    private $tmpName     = '';
+    private $finalName   = '';
 
     public function generate($folder, $name= 'wheel') {
         $this->finalName = $folder.'/'.$name;

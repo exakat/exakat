@@ -1,52 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Try.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             'B'
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  $c
               Label : NAME
                 C
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                $c
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               throw
               Label : THROW
                 new
                 Label : NEW
                   D
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'E'
+                  Label : ARGUMENT
+                    'E'
                   Label : NAME
                     D
-        Label : ELEMENT
+        Label : EXPRESSION
           try
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $d
@@ -54,39 +49,35 @@ Label : PROJECT
                 new
                 Label : NEW
                   F
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $e
+                  Label : ARGUMENT
+                    $e
                   Label : NAME
                     F
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $f
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'G'
-                    Label : VALUE
-                      $g
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'H'
-                    Label : VALUE
-                      $h
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'I'
-                    Label : VALUE
-                      $i
-            Label : ELEMENT
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'G'
+                  Label : VALUE
+                    $g
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'H'
+                  Label : VALUE
+                    $h
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    'I'
+                  Label : VALUE
+                    $i
+            Label : EXPRESSION
               =
               Label : LEFT
                 $j
@@ -94,35 +85,31 @@ Label : PROJECT
                 new
                 Label : NEW
                   J
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        K
-                      Label : PROPERTY
-                        $k
-                  Label : NAME
-                    J
-            Label : ELEMENT
-              ->
-              Label : METHOD
-                L
-                Label : ARGUMENTS
-                  (
                   Label : ARGUMENT
                     ::
                     Label : CLASS
-                      M
-                    Label : PROPERTY
-                      $m
-                  Label : ARGUMENT
-                    'N'
+                      K
+                    Label : MEMBER
+                      $k
+                  Label : NAME
+                    J
+            Label : EXPRESSION
+              ->
+              Label : METHOD
+                L
                 Label : NAME
                   L
+                Label : ARGUMENT
+                  ::
+                  Label : CLASS
+                    M
+                  Label : MEMBER
+                    $m
+                Label : ARGUMENT
+                  'N'
               Label : OBJECT
                 $l
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $n
@@ -130,17 +117,15 @@ Label : PROJECT
                 ->
                 Label : METHOD
                   O
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'P'
-                    Label : ARGUMENT
-                      $p
                   Label : NAME
                     O
+                  Label : ARGUMENT
+                    'P'
+                  Label : ARGUMENT
+                    $p
                 Label : OBJECT
                   $o
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 [
@@ -152,16 +137,14 @@ Label : PROJECT
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 throw
                 Label : THROW
                   new
                   Label : NEW
                     S
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'T'
+                    Label : ARGUMENT
+                      'T'
                     Label : NAME
                       S
             Label : CLASS
@@ -172,28 +155,26 @@ Label : PROJECT
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 throw
                 Label : THROW
                   new
                   Label : NEW
                     V
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        .
-                        Label : CONCAT
-                          'W'
-                        Label : CONCAT
-                          [
-                          Label : INDEX
-                            'Y'
-                          Label : VARIABLE
-                            ->
-                            Label : OBJECT
-                              $t
-                            Label : PROPERTY
-                              X
+                    Label : ARGUMENT
+                      .
+                      Label : CONCAT
+                        'W'
+                      Label : CONCAT
+                        [
+                        Label : INDEX
+                          'Y'
+                        Label : VARIABLE
+                          ->
+                          Label : MEMBER
+                            X
+                          Label : OBJECT
+                            $t
                     Label : NAME
                       V
             Label : CLASS
@@ -204,26 +185,22 @@ Label : PROJECT
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 throw
                 Label : THROW
                   new
                   Label : NEW
                     AA
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        AB
+                        Label : ARGUMENT
+                          Void
+                        Label : NAME
                           AB
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            AB
-                        Label : OBJECT
-                          $v
+                      Label : OBJECT
+                        $v
                     Label : NAME
                       AA
             Label : CLASS
@@ -234,26 +211,22 @@ Label : PROJECT
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 throw
                 Label : THROW
                   new
                   Label : NEW
                     AD
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        AE
+                        Label : ARGUMENT
+                          Void
+                        Label : NAME
                           AE
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            AE
-                        Label : OBJECT
-                          $x
+                      Label : OBJECT
+                        $x
                     Label : NAME
                       AD
             Label : CLASS
@@ -264,16 +237,14 @@ Label : PROJECT
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 throw
                 Label : THROW
                   new
                   Label : NEW
                     AG
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'AH'
+                    Label : ARGUMENT
+                      'AH'
                     Label : NAME
                       AG
             Label : CLASS

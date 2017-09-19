@@ -32,7 +32,6 @@ class LinuxOnlyFiles extends Analyzer {
 
         // string literal fopen('a', 'r');
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')

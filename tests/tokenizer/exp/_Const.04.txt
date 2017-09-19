@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Const.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           const
           Label : CONST
             const
@@ -18,28 +17,24 @@ Label : PROJECT
               C
             Label : VALUE
               1
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             C
           Label : METHOD
             method
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      __METHOD__
-                    Label : CONCAT
-                      "\n"
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    __METHOD__
+                  Label : CONCAT
+                    "\n"
                 Label : NAME
                   echo
             Label : NAME
@@ -48,23 +43,19 @@ Label : PROJECT
               static
           Label : NAME
             C
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              C
+          Label : ARGUMENT
+            C
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             C
           Label : METHOD
             method
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               method

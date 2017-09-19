@@ -34,7 +34,7 @@ class ClassConstWithArray extends Analyzer {
              ->outIs('CONST')
              ->_as('results')
              ->outIs('VALUE')
-             ->tokenIs(array('T_OPEN_BRACKET', 'T_ARRAY'))
+             ->atomIs('Arrayliteral')
              ->back('results');
         $this->prepareQuery();
     }

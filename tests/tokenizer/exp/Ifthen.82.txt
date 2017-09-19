@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.82.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           for
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               A
-            Label : ELEMENT
+            Label : EXPRESSION
               for
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $i
@@ -38,7 +37,7 @@ Label : PROJECT
                           $k
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   <=
                   Label : LEFT
                     $f
@@ -46,23 +45,23 @@ Label : PROJECT
                     $g
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $h
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $e
                   Label : RIGHT
                     1
-            Label : ELEMENT
+            Label : EXPRESSION
               B
           Label : FINAL
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               <=
               Label : LEFT
                 $b
@@ -70,13 +69,13 @@ Label : PROJECT
                 $c
           Label : INCREMENT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $d
           Label : INIT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a

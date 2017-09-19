@@ -1,40 +1,39 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             1
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $y
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $z
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a

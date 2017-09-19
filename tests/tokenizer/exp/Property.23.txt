@@ -1,43 +1,42 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Property.23.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           *=
           Label : LEFT
             $
             Label : NAME
-              $ó
+              $Ã³
           Label : RIGHT
             =
             Label : LEFT
               ->
+              Label : MEMBER
+                p
               Label : OBJECT
                 $
                 Label : NAME
                   $K
-              Label : PROPERTY
-                p
             Label : RIGHT
               $
               Label : NAME
                 $A
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              Å±
             Label : OBJECT
               ->
+              Label : MEMBER
+                Ë
               Label : OBJECT
-                $ě
-              Label : PROPERTY
-                ˙
-            Label : PROPERTY
-              ű
+                $Ä
           Label : RIGHT
             0

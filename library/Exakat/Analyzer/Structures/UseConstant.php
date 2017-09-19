@@ -32,7 +32,6 @@ class UseConstant extends Analyzer {
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\fopen')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->noDelimiterIs(array('php://stdin', 'php://stdout', 'php://stderr'))
              ->back('first');
@@ -40,7 +39,6 @@ class UseConstant extends Analyzer {
         
         // dirname(__FILE__) => __DIR__
         $this->atomFunctionIs('\\dirname')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Magicconstant')
              ->codeIs('__FILE__')

@@ -1,17 +1,16 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Namespace.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : NAME
                 C

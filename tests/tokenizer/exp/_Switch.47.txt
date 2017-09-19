@@ -1,40 +1,39 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.47.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'h' :  /**/  
               Label : CASE
                 'h'
               Label : CODE
                 ;
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'H' :  /**/  
               Label : CASE
                 'H'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     ->
+                    Label : MEMBER
+                      level
                     Label : OBJECT
                       $enc
-                    Label : PROPERTY
-                      level
                   Label : RIGHT
                     QR_ECLEVEL_H
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void

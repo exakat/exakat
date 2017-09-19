@@ -1,31 +1,28 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.31.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             ?
             Label : CONDITION
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $a
-                  Label : PROPERTY
-                    C
-                Label : ARGUMENT
-                  $b
               Label : NAME
                 B
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  C
+                Label : OBJECT
+                  $a
+              Label : ARGUMENT
+                $b
             Label : ELSE
               D
             Label : THEN

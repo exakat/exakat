@@ -2,11 +2,13 @@
 
 $expected     = array("die('e')", 
                       "die( )", 
-                      "die  ", 
+                      "die ", 
                       "exit('f')", 
-                      "exit( )", 
-                      "exit  ");
+                      'exit( )', 
+                      'exit ',
+                     );
 
-$expected_not = array();
+$expected_not = array('exit(3)', 
+                     );
 
 ?>

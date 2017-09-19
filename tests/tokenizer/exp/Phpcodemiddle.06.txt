@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcodemiddle.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -21,10 +20,10 @@ Label : PROJECT
                 'B'
               Label : VARIABLE
                 $b
-        Label : ELEMENT
+        Label : EXPRESSION
           XC
 
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -32,10 +31,8 @@ Label : PROJECT
               ->
               Label : METHOD
                 D
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   D
               Label : OBJECT
@@ -48,59 +45,53 @@ Label : PROJECT
               1
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               C
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
               Label : RIGHT
                 1
-            Label : ELEMENT
+            Label : EXPRESSION
               df
 
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               E
 
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  F
+                  Label : NAME
                     F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'G'
-                      Label : ARGUMENT
-                        array
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'H'
-                            Label : VALUE
-                              $a
-                          Label : ARGUMENT
-                            =>
-                            Label : KEY
-                              'I'
-                            Label : VALUE
-                              ->
-                              Label : OBJECT
-                                $this
-                              Label : PROPERTY
-                                J
-                    Label : NAME
-                      F
-                  Label : OBJECT
-                    $this
+                  Label : ARGUMENT
+                    'G'
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'H'
+                      Label : VALUE
+                        $a
+                    Label : ARGUMENT
+                      =>
+                      Label : INDEX
+                        'I'
+                      Label : VALUE
+                        ->
+                        Label : MEMBER
+                          J
+                        Label : OBJECT
+                          $this
+                Label : OBJECT
+                  $this
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

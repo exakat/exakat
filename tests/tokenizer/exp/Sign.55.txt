@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.55.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             'a'
@@ -18,17 +17,15 @@ Label : PROJECT
               ->
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   c
               Label : OBJECT
                 $b
             Label : RIGHT
               'e'
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             'a2'
@@ -40,15 +37,13 @@ Label : PROJECT
                 b
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   c
             Label : RIGHT
               'e2'
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             'a'
@@ -58,17 +53,15 @@ Label : PROJECT
               ->
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   c
               Label : OBJECT
                 $b
             Label : RIGHT
               1
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             'a2'
@@ -80,15 +73,13 @@ Label : PROJECT
                 b
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   c
             Label : RIGHT
               2
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             'a'
@@ -98,17 +89,15 @@ Label : PROJECT
               ->
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   c
               Label : OBJECT
                 $b
             Label : RIGHT
               1
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             'a2'
@@ -120,10 +109,8 @@ Label : PROJECT
                 b
               Label : METHOD
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $d
                 Label : NAME
                   c
             Label : RIGHT

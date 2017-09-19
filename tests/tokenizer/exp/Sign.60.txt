@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.60.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           -
           Label : SIGN
             **
@@ -16,25 +15,25 @@ Label : PROJECT
               3
             Label : RIGHT
               3
-        Label : ELEMENT
+        Label : EXPRESSION
           **
           Label : LEFT
             4
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           **
           Label : LEFT
             0.2e10
           Label : RIGHT
             10
-        Label : ELEMENT
+        Label : EXPRESSION
           **
           Label : LEFT
             $x
           Label : RIGHT
             $y
-        Label : ELEMENT
+        Label : EXPRESSION
           -
           Label : SIGN
             **
@@ -42,7 +41,7 @@ Label : PROJECT
               0.3e10
             Label : RIGHT
               3
-        Label : ELEMENT
+        Label : EXPRESSION
           +
           Label : SIGN
             **
@@ -50,23 +49,21 @@ Label : PROJECT
               0.2e10
             Label : RIGHT
               3
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $s
           Label : RIGHT
             3
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              -
-              Label : SIGN
-                **
-                Label : LEFT
-                  $s
-                Label : RIGHT
-                  2
+          Label : ARGUMENT
+            -
+            Label : SIGN
+              **
+              Label : LEFT
+                $s
+              Label : RIGHT
+                2
           Label : NAME
             echo

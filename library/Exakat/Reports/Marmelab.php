@@ -29,10 +29,11 @@ class Marmelab extends Reports {
     const FILE_FILENAME  = 'exakat';
 
     public function generate($folder, $name = self::FILE_FILENAME) {
-        $list = Analyzer::getThemeAnalyzers($this->config->thema ?? 'Analyze');
-        $list = '"'.join('", "', $list).'"';
+        $list = Analyzer::getThemeAnalyzers(isset($this->config->thema) ? $this->config->thema : 'Analyze');
+        $list = makeList($list);
         
         $analyzers = array();
+        $files     = array();
 
         $sqlQuery = 'SELECT id, fullcode, file, line, analyzer AS analyzer_id FROM results WHERE analyzer in ('.$list.')';
         $res = $this->sqlite->query($sqlQuery);
@@ -53,15 +54,25 @@ class Marmelab extends Reports {
             
                 $analyzers[$row['analyzer_id']] = (object) $a;
             }
+
+            if (!isset($files[$row['file']])) {
+                $a = array('id'   => count($files) + 1,
+                           'file' => $row['file']);
+                
+                $files[$row['file']] = (object) $a;
+            }
+            $row['files_id'] = $files[$row['file']]->id;
+            unset($row['file']);
             
             $x = (object) $row;
-
             $results[] = $x;
+
             $this->count();
         }
         
         $results = (object) [ 'reports'   => $results,
-                              'analyzers' => array_values($analyzers)];
+                              'analyzers' => array_values($analyzers),
+                              'files'     => $files];
         
         if ($name === Reports::STDOUT) {
             return json_encode($results, JSON_PRETTY_PRINT);

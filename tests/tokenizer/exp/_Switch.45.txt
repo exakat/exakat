@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.45.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'C' :  /**/  
               Label : CASE
                 'C'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $b
@@ -28,39 +27,37 @@ Label : PROJECT
                       D
                     Label : CONSTANT
                       E
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $c
                   Label : RIGHT
                     $d
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     isset
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $e
-                        Label : PROPERTY
-                          F
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        F
+                      Label : OBJECT
+                        $e
                     Label : NAME
                       isset
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $f
                       Label : RIGHT
                         ->
+                        Label : MEMBER
+                          G
                         Label : OBJECT
                           $g
-                        Label : PROPERTY
-                          G
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $h
@@ -68,19 +65,17 @@ Label : PROJECT
                         ->
                         Label : METHOD
                           H
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              [
-                              Label : INDEX
-                                'I'
-                              Label : VARIABLE
-                                $j
+                          Label : ARGUMENT
+                            [
+                            Label : INDEX
+                              'I'
+                            Label : VARIABLE
+                              $j
                           Label : NAME
                             H
                         Label : OBJECT
                           $i
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $k
@@ -90,17 +85,17 @@ Label : PROJECT
                           'J'
                         Label : VARIABLE
                           $l
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'K' :  /**/  
               Label : CASE
                 'K'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $m
@@ -110,7 +105,7 @@ Label : PROJECT
                       L
                     Label : CONSTANT
                       M
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $n
@@ -128,17 +123,17 @@ Label : PROJECT
                       P
                     Label : THEN
                       O
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'Q' :  /**/  
               Label : CASE
                 'Q'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $p
@@ -148,7 +143,7 @@ Label : PROJECT
                       R
                     Label : CONSTANT
                       S
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $q
@@ -160,23 +155,21 @@ Label : PROJECT
                         'T'
                       Label : VARIABLE
                         $r
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ==
                     Label : LEFT
                       U
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $s
+                      Label : ARGUMENT
+                        $s
                       Label : NAME
                         U
                     Label : RIGHT
                       $t
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $u
@@ -184,7 +177,7 @@ Label : PROJECT
                         (integer)
                         Label : CAST
                           $v
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $w
@@ -194,17 +187,17 @@ Label : PROJECT
                       V
                     Label : CONSTANT
                       W
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'X' :  /**/  
               Label : CASE
                 'X'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $x
@@ -214,7 +207,7 @@ Label : PROJECT
                       Y
                     Label : CONSTANT
                       Z
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $y
@@ -226,23 +219,21 @@ Label : PROJECT
                         'AA'
                       Label : VARIABLE
                         $z
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ==
                     Label : LEFT
                       AB
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $aa
+                      Label : ARGUMENT
+                        $aa
                       Label : NAME
                         AB
                     Label : RIGHT
                       $ab
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $ac
@@ -250,7 +241,7 @@ Label : PROJECT
                         (integer)
                         Label : CAST
                           $ad
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $ae
@@ -260,17 +251,17 @@ Label : PROJECT
                       AC
                     Label : CONSTANT
                       AD
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'AE' :  /**/  
               Label : CASE
                 'AE'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $af
@@ -280,7 +271,7 @@ Label : PROJECT
                       AF
                     Label : CONSTANT
                       AG
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $ag
@@ -292,23 +283,21 @@ Label : PROJECT
                         'AH'
                       Label : VARIABLE
                         $ah
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ==
                     Label : LEFT
                       AI
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $ai
+                      Label : ARGUMENT
+                        $ai
                       Label : NAME
                         AI
                     Label : RIGHT
                       $aj
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       if
                       Label : CONDITION
                         =
@@ -320,7 +309,7 @@ Label : PROJECT
                             $al
                       Label : ELSE
                         ;
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           =
                           Label : LEFT
                             $ao
@@ -330,7 +319,7 @@ Label : PROJECT
                               $ap
                       Label : THEN
                         ;
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           =
                           Label : LEFT
                             $am
@@ -338,17 +327,17 @@ Label : PROJECT
                             (integer)
                             Label : CAST
                               $an
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'AJ' :  /**/  
               Label : CASE
                 'AJ'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $aq
@@ -358,7 +347,7 @@ Label : PROJECT
                       AK
                     Label : CONSTANT
                       AL
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $ar
@@ -366,71 +355,61 @@ Label : PROJECT
                     new
                     Label : NEW
                       AM
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'AN'
-                          Label : VARIABLE
-                            $as
-                        Label : ARGUMENT
-                          $at
                       Label : NAME
                         AM
-                Label : ELEMENT
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'AN'
+                        Label : VARIABLE
+                          $as
+                      Label : ARGUMENT
+                        $at
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     AO
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $av
+                    Label : ARGUMENT
+                      $av
                     Label : NAME
                       AO
                   Label : OBJECT
                     $au
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     list
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $aw
-                      Label : ARGUMENT
-                        $ax
-                      Label : ARGUMENT
-                        $ay
-                      Label : ARGUMENT
-                        $az
-                      Label : ARGUMENT
-                        $ba
-                      Label : ARGUMENT
-                        $bb
+                    Label : ARGUMENT
+                      $aw
+                    Label : ARGUMENT
+                      $ax
+                    Label : ARGUMENT
+                      $ay
+                    Label : ARGUMENT
+                      $az
+                    Label : ARGUMENT
+                      $ba
+                    Label : ARGUMENT
+                      $bb
                     Label : NAME
                       list
                   Label : RIGHT
                     AP
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'AQ'
-                      Label : ARGUMENT
-                        ->
-                        Label : METHOD
-                          AR
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'AT'
-                          Label : NAME
-                            AR
-                        Label : OBJECT
-                          $bc
                     Label : NAME
                       AP
-                Label : ELEMENT
+                    Label : ARGUMENT
+                      'AQ'
+                    Label : ARGUMENT
+                      ->
+                      Label : METHOD
+                        AR
+                        Label : ARGUMENT
+                          'AT'
+                        Label : NAME
+                          AR
+                      Label : OBJECT
+                        $bc
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $bd
@@ -440,23 +419,21 @@ Label : PROJECT
                       AU
                     Label : METHOD
                       AV
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $be
-                        Label : ARGUMENT
-                          $bf
-                        Label : ARGUMENT
-                          $bg
-                        Label : ARGUMENT
-                          $bh
-                        Label : ARGUMENT
-                          $bi
-                        Label : ARGUMENT
-                          $bj
+                      Label : ARGUMENT
+                        $be
+                      Label : ARGUMENT
+                        $bf
+                      Label : ARGUMENT
+                        $bg
+                      Label : ARGUMENT
+                        $bh
+                      Label : ARGUMENT
+                        $bi
+                      Label : ARGUMENT
+                        $bj
                       Label : NAME
                         AV
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     !=
@@ -464,15 +441,13 @@ Label : PROJECT
                       $bk
                     Label : RIGHT
                       AW
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $bl
+                      Label : ARGUMENT
+                        $bl
                       Label : NAME
                         AW
                   Label : ELSE
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $bn
@@ -484,7 +459,7 @@ Label : PROJECT
                           BD
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $bm
@@ -504,17 +479,17 @@ Label : PROJECT
                             BA
                           Label : CONSTANT
                             BB
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'BE' :  /**/  
               Label : CASE
                 'BE'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $bo
@@ -524,7 +499,7 @@ Label : PROJECT
                       BF
                     Label : CONSTANT
                       BG
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $bp
@@ -534,43 +509,35 @@ Label : PROJECT
                       BH
                     Label : METHOD
                       BI
-                      Label : ARGUMENTS
-                        (
+                      Label : ARGUMENT
+                        BJ
                         Label : ARGUMENT
-                          BJ
-                          Label : ARGUMENTS
-                            (
+                          .
+                          Label : CONCAT
+                            'BK'
+                          Label : CONCAT
+                            BL
+                            Label : NAME
+                              BL
                             Label : ARGUMENT
-                              .
-                              Label : CONCAT
-                                'BK'
-                              Label : CONCAT
-                                BL
-                                Label : ARGUMENTS
-                                  (
-                                  Label : ARGUMENT
-                                    'BM'
-                                  Label : ARGUMENT
-                                    BN
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        [
-                                        Label : INDEX
-                                          'BO'
-                                        Label : VARIABLE
-                                          $bq
-                                      Label : ARGUMENT
-                                        'BP'
-                                    Label : NAME
-                                      BN
-                                Label : NAME
-                                  BL
-                          Label : NAME
-                            BJ
+                              'BM'
+                            Label : ARGUMENT
+                              BN
+                              Label : NAME
+                                BN
+                              Label : ARGUMENT
+                                [
+                                Label : INDEX
+                                  'BO'
+                                Label : VARIABLE
+                                  $bq
+                              Label : ARGUMENT
+                                'BP'
+                        Label : NAME
+                          BJ
                       Label : NAME
                         BI
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $br
@@ -580,7 +547,7 @@ Label : PROJECT
                       BQ
                     Label : CONSTANT
                       BR
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void

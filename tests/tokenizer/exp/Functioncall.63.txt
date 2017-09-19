@@ -1,34 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.63.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           f
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              1
-            Label : ARGUMENT
-              'a'
-            Label : ARGUMENT
-              <<<HEREDOC
+          Label : ARGUMENT
+            1
+          Label : ARGUMENT
+            'a'
+          Label : ARGUMENT
+            <<<HEREDOC
 
-              Label : CONCAT
-                a
+            Label : CONCAT
+              a
 
-            Label : ARGUMENT
-              <<<'NOWDOC'
+          Label : ARGUMENT
+            <<<'NOWDOC'
 
-              Label : CONCAT
-                BadFunctionCallException
+            Label : CONCAT
+              BadFunctionCallException
 
-            Label : ARGUMENT
-              5
+          Label : ARGUMENT
+            5
           Label : NAME
             f

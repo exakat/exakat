@@ -1,122 +1,101 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.81.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $f
           Label : RIGHT
             'f'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $e
           Label : RIGHT
             'e'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $r
           Label : RIGHT
             'r'
-        Label : ELEMENT
+        Label : EXPRESSION
           f
-          Label : ARGUMENTS
-            (
+          Label : ARGUMENT
+            print
+            Label : ARGUMENT
+              $e
+            Label : NAME
+              print
+          Label : ARGUMENT
+            $f
+          Label : ARGUMENT
+            ltrim
+            Label : ARGUMENT
+              $r
+            Label : NAME
+              ltrim
+          Label : NAME
+            f
+        Label : EXPRESSION
+          f
+          Label : ARGUMENT
+            $x
+          Label : ARGUMENT
+            $y
+          Label : ARGUMENT
+            $z
+          Label : BLOCK
+            {}
+            Label : EXPRESSION
+              echo
+              Label : ARGUMENT
+                $x
+              Label : ARGUMENT
+                $y
+              Label : ARGUMENT
+                $z
+              Label : NAME
+                echo
+          Label : DEFINITION
+            'f'
+          Label : DEFINITION
+            f
             Label : ARGUMENT
               print
-              Label : ARGUMENTS
+              Label : ARGUMENT
                 $e
-                Label : ARGUMENT
-                  $e
               Label : NAME
                 print
             Label : ARGUMENT
               $f
             Label : ARGUMENT
               ltrim
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $r
+              Label : ARGUMENT
+                $r
               Label : NAME
                 ltrim
-          Label : NAME
-            f
-        Label : ELEMENT
-          f
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $x
-            Label : ARGUMENT
-              $y
-            Label : ARGUMENT
-              $z
-          Label : BLOCK
-            {}
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  $x
-                Label : ARGUMENT
-                  $y
-                Label : ARGUMENT
-                  $z
-              Label : NAME
-                echo
-          Label : DEFINITION
-            f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                print
-                Label : ARGUMENTS
-                  $e
-                  Label : ARGUMENT
-                    $e
-                Label : NAME
-                  print
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                ltrim
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $r
-                Label : NAME
-                  ltrim
             Label : NAME
               f
-          Label : DEFINITION
-            'f'
           Label : NAME
             f
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
+          Label : ARGUMENT
+            $a
+          Label : ARGUMENT
+            print
             Label : ARGUMENT
-              $a
-            Label : ARGUMENT
+              $b
+            Label : NAME
               print
-              Label : ARGUMENTS
-                $b
-                Label : ARGUMENT
-                  $b
-              Label : NAME
-                print
-            Label : ARGUMENT
-              $c
+          Label : ARGUMENT
+            $c
           Label : NAME
             echo

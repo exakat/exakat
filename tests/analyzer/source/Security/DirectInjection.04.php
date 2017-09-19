@@ -46,3 +46,6 @@ function f6($a, $b) {
 }
 
 f6($_SERVER['DOCUMENT_ROOT'], $_SERVER['QUERY_STRING']);
+
+// No function definition
+f7($_SERVER['HTTP_HOST'], $_SERVER['HTTP_PORT']);

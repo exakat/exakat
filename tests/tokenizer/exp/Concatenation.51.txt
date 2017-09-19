@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.51.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
           Label : RIGHT
             'c'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -26,23 +25,19 @@ Label : PROJECT
                 $b
             Label : CONCAT
               'a'
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : NAME
             var_dump
-        Label : ELEMENT
+        Label : EXPRESSION
           die
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             die
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -52,14 +47,12 @@ Label : PROJECT
               !
               Label : NOT
                 empty
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'd'
-                    Label : VARIABLE
-                      $b
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'd'
+                  Label : VARIABLE
+                    $b
                 Label : NAME
                   empty
             Label : ELSE
@@ -70,15 +63,13 @@ Label : PROJECT
                 'f'
               Label : CONCAT
                 $g
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'h'
+                Label : ARGUMENT
+                  'h'
                 Label : NAME
                   $g
               Label : CONCAT
                 'i'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -88,14 +79,12 @@ Label : PROJECT
               !
               Label : NOT
                 empty
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'd'
-                    Label : VARIABLE
-                      $b
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'd'
+                  Label : VARIABLE
+                    $b
                 Label : NAME
                   empty
             Label : ELSE
@@ -106,13 +95,11 @@ Label : PROJECT
                 'f'
               Label : CONCAT
                 $g
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'h'
+                Label : ARGUMENT
+                  'h'
                 Label : NAME
                   $g
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -124,14 +111,12 @@ Label : PROJECT
                 !
                 Label : NOT
                   empty
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'd'
-                      Label : VARIABLE
-                        $b
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'd'
+                    Label : VARIABLE
+                      $b
                   Label : NAME
                     empty
               Label : CONCAT
@@ -144,13 +129,11 @@ Label : PROJECT
                 'f'
               Label : CONCAT
                 $g
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'h'
+                Label : ARGUMENT
+                  'h'
                 Label : NAME
                   $g
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -170,15 +153,13 @@ Label : PROJECT
                 'f'
               Label : CONCAT
                 $g
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'h'
+                Label : ARGUMENT
+                  'h'
                 Label : NAME
                   $g
               Label : CONCAT
                 'i'
-        Label : ELEMENT
+        Label : EXPRESSION
           .=
           Label : LEFT
             $a
@@ -188,14 +169,12 @@ Label : PROJECT
               >
               Label : LEFT
                 ord
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      $i
-                    Label : VARIABLE
-                      $b
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    $i
+                  Label : VARIABLE
+                    $b
                 Label : NAME
                   ord
               Label : RIGHT

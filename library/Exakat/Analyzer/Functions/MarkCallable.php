@@ -76,7 +76,6 @@ GREMLIN;
         // callable is in # position
         foreach($positions as $position) {
             $this->atomFunctionIs($ini['functions'.$position])
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs($atoms)
                  ->tokenIsNot('T_QUOTE')
@@ -86,7 +85,6 @@ GREMLIN;
 
         // callable is in last
         $this->atomFunctionIs($ini['functions_last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs($atoms)
              ->raw($apply);
@@ -94,7 +92,6 @@ GREMLIN;
         
         // callable is in 2nd to last
         $this->atomFunctionIs($ini['functions_2last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
              ->atomIs($atoms)
              ->raw($apply);
@@ -107,7 +104,6 @@ GREMLIN;
         // callable is in # position
         foreach($positions as $position) {
             $this->atomFunctionIs($ini['functions'.$position])
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs($atoms);
             $this->prepareQuery();
@@ -115,14 +111,12 @@ GREMLIN;
 
         // callable is in last
         $this->atomFunctionIs($ini['functions_last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs($atoms);
         $this->prepareQuery();
         
         // callable is in 2nd to last
         $this->atomFunctionIs($ini['functions_2last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
              ->atomIs($atoms);
         $this->prepareQuery();
@@ -131,7 +125,7 @@ GREMLIN;
         // array('Class', 'method');
 
         $apply = <<<GREMLIN
-out("ARGUMENTS").out('ARGUMENT').has('rank', 0).sideEffect{ cbClassNode = it.get(); }
+out('ARGUMENT').has('rank', 0).sideEffect{ cbClassNode = it.get(); }
 .in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }.in("ARGUMENT")
 .sideEffect{
     cbClass = cbClassNode.value('noDelimiter').toLowerCase(); //.replaceAll( "\\\\\\\\", "\\\\" );
@@ -147,15 +141,14 @@ out("ARGUMENTS").out('ARGUMENT').has('rank', 0).sideEffect{ cbClassNode = it.get
 GREMLIN;
 
         $arrayContainsTwoStrings = <<<GREMLIN
-where( __.out('ARGUMENTS').out('ARGUMENT').count().is(eq(2)) )
-.where( __.out('ARGUMENTS').out('ARGUMENT').hasLabel('String').where( __.out('CONCAT').count().is(eq(0))).count().is(eq(2)) )
+where( __.out("ARGUMENT").count().is(eq(2)) )
+.where( __.out("ARGUMENT").hasLabel("String").where( __.out("CONCAT").count().is(eq(0))).count().is(eq(2)) )
 
 GREMLIN;
 
         // callable is in # position
         foreach($positions as $position) {
             $this->atomFunctionIs($ini['functions'.$position])
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Arrayliteral')
                  ->raw('sideEffect{ theArrayNode = it.get(); }')
@@ -166,7 +159,6 @@ GREMLIN;
 
         // callable is in last
         $this->atomFunctionIs($ini['functions_last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Arrayliteral')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
@@ -176,7 +168,6 @@ GREMLIN;
 
         // callable is in 2nd to last
         $this->atomFunctionIs($ini['functions_2last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
              ->atomIs('Arrayliteral')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
@@ -187,7 +178,7 @@ GREMLIN;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // array($object, 'method'); Also, [$object, 'method']
         $apply = <<<GREMLIN
-out("ARGUMENTS").out('ARGUMENT').has('rank', 0).sideEffect{ cbObjectNode = it.get(); }
+out('ARGUMENT').has('rank', 0).sideEffect{ cbObjectNode = it.get(); }
 .in("ARGUMENT").out('ARGUMENT').has('rank', 1).sideEffect{ cbMethodNode = it.get(); }.in("ARGUMENT")
 .sideEffect{
     // 
@@ -197,13 +188,12 @@ out("ARGUMENTS").out('ARGUMENT').has('rank', 0).sideEffect{ cbObjectNode = it.ge
 
 GREMLIN;
 
-        $firstArgIsAVariable = 'where ( __.out("ARGUMENTS").out("ARGUMENT").has("rank", 0).hasLabel("Variable"))';
-        $secondArgIsAString = 'where ( __.out("ARGUMENTS").out("ARGUMENT").has("rank", 1).hasLabel("String").where( __.out("CONCAT").count().is(eq(0))) )';
+        $firstArgIsAVariable = 'where ( __.out("ARGUMENT").has("rank", 0).hasLabel("Variable"))';
+        $secondArgIsAString = 'where ( __.out("ARGUMENT").has("rank", 1).hasLabel("String").where( __.out("CONCAT").count().is(eq(0))) )';
         
         // callable is in # position
         foreach($positions as $position) {
             $this->atomFunctionIs($ini['functions'.$position])
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Arrayliteral')
                  ->raw('sideEffect{ theArrayNode = it.get(); }')
@@ -217,7 +207,6 @@ GREMLIN;
 
         // callable is in last
         $this->atomFunctionIs($ini['functions_last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Arrayliteral')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
@@ -228,7 +217,6 @@ GREMLIN;
 
         // callable is in 2nd to last
         $this->atomFunctionIs($ini['functions_2last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
              ->atomIs('Arrayliteral')
              ->raw('sideEffect{ theArrayNode = it.get(); }')
@@ -243,7 +231,6 @@ GREMLIN;
         // callable is in # position
         foreach($positions as $position) {
             $this->atomFunctionIs($ini['functions'.$position])
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $position)
                  ->atomIs('Closure');
             $this->prepareQuery();
@@ -251,14 +238,12 @@ GREMLIN;
 
         // callable is in last
         $this->atomFunctionIs($ini['functions_last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 'last')
              ->atomIs('Closure');
         $this->prepareQuery();
 
         // callable is in 2nd to last
         $this->atomFunctionIs($ini['functions_2last'])
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', '2last')
              ->atomIs('Closure');
         $this->prepareQuery();

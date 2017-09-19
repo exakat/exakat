@@ -1,54 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.30.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           &&
           Label : LEFT
             ->
             Label : METHOD
               c
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'e'
-                  Label : VARIABLE
-                    $d
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'e'
+                Label : VARIABLE
+                  $d
               Label : NAME
                 c
             Label : OBJECT
               ->
+              Label : MEMBER
+                b
               Label : OBJECT
                 ::
                 Label : CLASS
                   C
                 Label : METHOD
                   a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     a
-              Label : PROPERTY
-                b
           Label : RIGHT
             f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'h'
-                Label : VARIABLE
-                  $g
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'h'
+              Label : VARIABLE
+                $g
             Label : NAME
               f

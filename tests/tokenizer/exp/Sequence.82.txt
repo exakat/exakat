@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.82.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ===
@@ -16,10 +15,8 @@ Label : PROJECT
               ->
               Label : METHOD
                 b
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   b
               Label : OBJECT
@@ -28,38 +25,36 @@ Label : PROJECT
               'c'
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $h
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               `
               Label : CONCAT
                 ls -1 
               Label : CONCAT
                 $g
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 d
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    .
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    ::
+                    Label : CLASS
+                      self
+                    Label : CONSTANT
+                      E
+                  Label : CONCAT
+                    "
                     Label : CONCAT
-                      ::
-                      Label : CLASS
-                        self
-                      Label : CONSTANT
-                        E
+                       
                     Label : CONCAT
-                      "
-                      Label : CONCAT
-                         
-                      Label : CONCAT
-                        $d
+                      $d
                 Label : NAME
                   d
               Label : OBJECT

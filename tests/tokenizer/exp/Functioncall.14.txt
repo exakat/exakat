@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             isset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $x
+            Label : ARGUMENT
+              $x
             Label : NAME
               isset
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               $y
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               $x

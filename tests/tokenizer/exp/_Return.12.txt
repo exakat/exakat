@@ -1,18 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Return.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
+            Label : ARGUMENT
+              1

@@ -34,7 +34,7 @@ class DereferencingAS extends Analyzer {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomIs('Arrayliteal') // or some array-returning function
-             ->raw('filter{ it.out("ARGUMENTS").out("ARGUMENT").has("atom", "Void").any() == false}')
+             ->raw('filter{ it.out("ARGUMENT").has("atom", "Void").any() == false}')
              ->inIs('RIGHT')
              ->outIs('LEFT')
              ->savePropertyAs('code', 'storage')

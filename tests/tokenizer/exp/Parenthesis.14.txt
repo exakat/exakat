@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Parenthesis.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             (
@@ -16,37 +15,33 @@ Label : PROJECT
               new
               Label : NEW
                 Date
-                Label : ARGUMENTS
-                  (
+                Label : ARGUMENT
+                  mktime
                   Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    +
+                    Label : LEFT
+                      ->
+                      Label : MEMBER
+                        month
+                      Label : OBJECT
+                        $a
+                    Label : RIGHT
+                      1
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    ->
+                    Label : MEMBER
+                      year
+                    Label : OBJECT
+                      $b
+                  Label : NAME
                     mktime
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        0
-                      Label : ARGUMENT
-                        0
-                      Label : ARGUMENT
-                        0
-                      Label : ARGUMENT
-                        +
-                        Label : LEFT
-                          ->
-                          Label : OBJECT
-                            $a
-                          Label : PROPERTY
-                            month
-                        Label : RIGHT
-                          1
-                      Label : ARGUMENT
-                        0
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $b
-                        Label : PROPERTY
-                          year
-                    Label : NAME
-                      mktime
                 Label : NAME
                   Date

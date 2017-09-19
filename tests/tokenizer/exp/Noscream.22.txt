@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Noscream.22.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           @
           Label : AT
             ->
+            Label : MEMBER
+              d
             Label : OBJECT
               [
               Label : INDEX
                 1
               Label : VARIABLE
                 $x
-            Label : PROPERTY
-              d
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

@@ -1,22 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Cast.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           (real)
           Label : CAST
             ::
             Label : CLASS
               x
-            Label : PROPERTY
+            Label : MEMBER
               $y
-        Label : ELEMENT
+        Label : EXPRESSION
           (float)
           Label : CAST
             ::
@@ -24,11 +23,11 @@ Label : PROJECT
               y
             Label : CONSTANT
               y
-        Label : ELEMENT
+        Label : EXPRESSION
           (double)
           Label : CAST
             ->
+            Label : MEMBER
+              h
             Label : OBJECT
               $z
-            Label : PROPERTY
-              h

@@ -83,7 +83,6 @@ abstract class Analyzer {
     const CASE_SENSITIVE   = true;
     const CASE_INSENSITIVE = false;
 
-    static public $FUNCTION_METHOD  = array('Function', 'Closure', 'Method');
     static public $CONTAINERS       = array('Variable', 'Staticproperty', 'Member', 'Array');
     static public $LITERALS         = array('Integer', 'Real', 'Null', 'Boolean', 'String');
     static public $FUNCTIONS_TOKENS = array('T_STRING', 'T_NS_SEPARATOR', 'T_ARRAY', 'T_EVAL', 'T_ISSET', 'T_EXIT', 'T_UNSET', 'T_ECHO', 'T_OPEN_TAG_WITH_ECHO', 'T_PRINT', 'T_LIST', 'T_EMPTY', 'T_OPEN_BRACKET');
@@ -224,8 +223,8 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALY
 .sideEffect{ line = it.get().value('line'); }
 .until( hasLabel('File', 'Project') ).repeat( 
     __.in($this->linksDown)
-      .sideEffect{ if (it.get().label() in ['Function', 'Method']) { theFunction = it.get().value('code')} }
-      .sideEffect{ if (it.get().label() in ['Class', 'Trait']) { theClass = it.get().value('fullcode')} }
+      .sideEffect{ if (it.get().label() in ['Function', 'Method', 'Closure']) { theFunction = it.get().value('code')} }
+      .sideEffect{ if (it.get().label() in ['Class', 'Trait', 'Interface', 'Classanonymous']) { theClass = it.get().value('fullcode')} }
       .sideEffect{ if (it.get().label() == 'Namespace') { theNamespace = it.get().value('fullnspath')} }
        )
 .sideEffect{  file = it.get().value('fullcode');}
@@ -457,13 +456,13 @@ GREMLIN;
             $result->total = 0;
             return array($result);
         }
-
-        if (!isset($result->results)) {
-            return array();
+        
+        if (isset($result->results)) {
+            $result = $result->results;
         }
         
         $return = array();
-        foreach($result->results as $row) {
+        foreach($result as $row) {
             $return[$row->key] = $row->value;
         }
         return $return;
@@ -623,7 +622,9 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         assert($this->assertAtom($atom));
         // Cannot use not() here : 'This traverser does not support loops: org.apache.tinkerpop.gremlin.process.traversal.traverser.B_O_Traverser'.
 //        $gremlin = 'not( where( __.emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
-        $gremlin = 'where( __.emit( ).repeat( __.out('.$this->linksDown.') ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
+        // Check with Structures/Unpreprocessed
+        $gremlin = 'where( __.repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).emit()
+                          .times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).').count().is(eq(0)) )';
         $this->addMethod($gremlin);
         
         return $this;
@@ -689,10 +690,15 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         } elseif ($value === false) {
             $this->addMethod('has("'.$property.'", false)');
         } elseif (is_int($value)) {
-            $this->addMethod('has("'.$property.'", '.$value.')');
+            $this->addMethod('has("'.$property.'", ***)', $value);
+        } elseif (is_string($value)) {
+            $this->addMethod('has("'.$property.'", ***)', $value);
+        } elseif (is_array($value)) {
+            if (!empty($value)) {
+                $this->addMethod('has("'.$property.'", within(***))', $value);
+            }
         } else {
-            // $value is an array
-            $this->addMethod('has("'.$property.'", within(***))', $value);
+            assert(false, 'Not understood type for is : '.gettype($value));
         }
 
         return $this;
@@ -718,9 +724,19 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         } elseif ($value === false) {
             $this->addMethod('not(has("'.$property.'", false))');
         } elseif (is_int($value)) {
-            $this->addMethod('not(has("'.$property.'", '.$value.'))');
+            $this->addMethod('not(has("'.$property.'", ***))', $value);
+        } elseif (is_string($value)) {
+            if (empty($value)) {
+                $this->addMethod('not(has("'.$property.'", ""))');
+            } else {
+                $this->addMethod('not(has("'.$property.'", ***))', $value);
+            }
+        } elseif (is_array($value)) {
+            if (!empty($value)) {
+                $this->addMethod('not(has("'.$property.'", within(***)))', $value);
+            }
         } else {
-            $this->addMethod('not(has("'.$property.'", within(***)))', $value);
+            assert(false, 'Not understood type for isNot : '.get_type($value));
         }
         
         return $this;
@@ -802,10 +818,18 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
     }
 
     public function codeIs($code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (is_array($code) && empty($code)) {
+            return $this;
+        }
+
         return $this->propertyIs('code', $code, $caseSensitive);
     }
 
     public function codeIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (is_array($code) && empty($code)) {
+            return $this;
+        }
+
         return $this->propertyIsNot('code', $code, $caseSensitive);
     }
 
@@ -815,6 +839,10 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
     }
 
     public function noDelimiterIsNot($code, $caseSensitive = self::CASE_INSENSITIVE) {
+        if (is_array($code) && empty($code)) {
+            return $this;
+        }
+        
         $this->addMethod('hasLabel("String")', $code);
         return $this->propertyIsNot('noDelimiter', $code, $caseSensitive);
     }
@@ -825,6 +853,10 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
     }
 
     public function fullnspathIsNot($code) {
+        if (empty($code)) {
+            return $this;
+        }
+
         return $this->propertyIsNot('fullnspath', $code, self::CASE_INSENSITIVE);
     }
     
@@ -866,13 +898,19 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         return $this;
     }
 
-    public function saveArglistAs($name) {
+    public function saveOutAs($name, $out = "ARGUMENT", $sort = 'rank') {
         // Calculate the arglist, normalized it, then put it in a variable
         // This needs to be in Arguments, (both Functioncall or Function)
+        if (empty($sort)) {
+            $sortStep = '';
+        } else {
+            $sortStep = '.sort{it.value("'.$sort.'")}';
+        }
+
         $this->addMethod(<<<GREMLIN
 sideEffect{ 
     s = [];
-    it.get().vertices(OUT, 'ARGUMENT').sort{it.value('rank')}.each{ 
+    it.get().vertices(OUT, "$out")$sortStep.each{ 
         s.push(it.value('code'));
     };
     $name = s.join(', ');
@@ -1234,19 +1272,19 @@ GREMLIN
     }
 
     public function hasFunctionDefinition() {
-        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method").count().is(neq(0)))');
+        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method", "Closure") )');
     
         return $this;
     }
 
     public function hasNoFunctionDefinition() {
-        $this->addMethod('where( __.in("DEFINITION").hasLabel("Function", "Method").count().is(eq(0)))');
+        $this->addMethod('not( where( __.in("DEFINITION").hasLabel("Function", "Method") ) )');
     
         return $this;
     }
 
     public function functionDefinition() {
-        $this->addMethod('in("DEFINITION")');
+        $this->addMethod('in("DEFINITION").hasLabel("Function", "Method", "Closure")');
     
         return $this;
     }
@@ -1356,18 +1394,18 @@ GREMLIN
         return $this;
     }
     
-    public function goToClass($type = 'Class') {
+    public function goToClass($type = array('Class', 'Classanonymous')) {
         $this->goToInstruction($type);
         
         return $this;
     }
     
     public function hasNoClass() {
-        return $this->hasNoInstruction('Class');
+        return $this->hasNoInstruction(self::$CLASSES_ALL);
     }
 
     public function hasClass() {
-        $this->hasInstruction('Class');
+        $this->hasInstruction(self::$CLASSES_ALL);
         
         return $this;
     }
@@ -1393,33 +1431,33 @@ GREMLIN
     }
 
     public function goToClassTrait() {
-        $this->goToInstruction(array('Trait', 'Class'));
+        $this->goToInstruction(array('Trait', 'Class', 'Classanonymous'));
         
         return $this;
     }
 
     public function hasNoClassTrait() {
-        return $this->hasNoInstruction(array('Class', 'Trait'));
+        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Trait'));
     }
 
     public function goToClassInterface() {
-        $this->goToInstruction(array('Interface', 'Class'));
+        $this->goToInstruction(array('Interface', 'Class', 'Classanonymous'));
         
         return $this;
     }
 
     public function hasNoClassInterface() {
-        return $this->hasNoInstruction(array('Class', 'Interface'));
+        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Interface'));
     }
 
     public function goToClassInterfaceTrait() {
-        $this->goToInstruction(array('Interface', 'Class', 'Trait'));
+        $this->goToInstruction(array('Interface', 'Class', 'Classanonymous', 'Trait'));
         
         return $this;
     }
 
     public function hasNoClassInterfaceTrait() {
-        return $this->hasNoInstruction(array('Class', 'Interface', 'Trait'));
+        return $this->hasNoInstruction(array('Class', 'Classanonymous', 'Interface', 'Trait'));
     }
     
     public function goToExtends() {
@@ -1495,13 +1533,13 @@ GREMLIN
     }
 
     public function hasClassTrait() {
-        $this->hasInstruction(array('Class', 'Trait'));
+        $this->hasInstruction(array('Class', 'Classanonymous', 'Trait'));
         
         return $this;
     }
 
     public function hasClassInterface() {
-        $this->hasInstruction(array('Class', 'Interface'));
+        $this->hasInstruction(array('Class', 'Classanonymous', 'Interface'));
         
         return $this;
     }

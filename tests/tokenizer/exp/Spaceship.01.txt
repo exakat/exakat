@@ -1,274 +1,221 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Spaceship.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                1
-              Label : RIGHT
-                1
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              1
+            Label : RIGHT
+              1
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              1
+            Label : RIGHT
+              2
+          Label : NAME
             echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              2
+            Label : RIGHT
+              1
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              1.5
+            Label : RIGHT
+              1.5
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              1.5
+            Label : RIGHT
+              2.5
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              2.5
+            Label : RIGHT
+              1.5
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              "a"
+            Label : RIGHT
+              "a"
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              "a"
+            Label : RIGHT
+              "b"
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              "b"
+            Label : RIGHT
+              "a"
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              "a"
+            Label : RIGHT
+              "aa"
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              "zz"
+            Label : RIGHT
+              "aa"
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              [
+              Label : ARGUMENT
+                Void
+            Label : RIGHT
+              [
+              Label : ARGUMENT
+                Void
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              [
+              Label : ARGUMENT
                 1
-              Label : RIGHT
+              Label : ARGUMENT
                 2
+              Label : ARGUMENT
+                3
+            Label : RIGHT
+              [
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                3
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              [
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
                 2
-              Label : RIGHT
+              Label : ARGUMENT
+                3
+            Label : RIGHT
+              [
+              Label : ARGUMENT
+                Void
+          Label : NAME
+            echo
+        Label : EXPRESSION
+          echo
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              [
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                3
+            Label : RIGHT
+              [
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
                 1
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                1.5
-              Label : RIGHT
-                1.5
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              [
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                3
+            Label : RIGHT
+              [
+              Label : ARGUMENT
+                1
+              Label : ARGUMENT
+                2
+              Label : ARGUMENT
+                4
           Label : NAME
             echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                1.5
-              Label : RIGHT
-                2.5
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                2.5
-              Label : RIGHT
-                1.5
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                "a"
-              Label : RIGHT
-                "a"
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                "a"
-              Label : RIGHT
-                "b"
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                "b"
-              Label : RIGHT
-                "a"
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                "a"
-              Label : RIGHT
-                "aa"
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                "zz"
-              Label : RIGHT
-                "aa"
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    Void
-              Label : RIGHT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    Void
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    3
-              Label : RIGHT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    3
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    3
-              Label : RIGHT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    Void
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    3
-              Label : RIGHT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    1
-          Label : NAME
-            echo
-        Label : ELEMENT
-          echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    3
-              Label : RIGHT
-                [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    4
-          Label : NAME
-            echo
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -276,15 +223,13 @@ Label : PROJECT
             (object)
             Label : CAST
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  "a"
+                Label : VALUE
+                  "b"
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
@@ -292,27 +237,23 @@ Label : PROJECT
             (object)
             Label : CAST
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  "a"
+                Label : VALUE
+                  "b"
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                $a
-              Label : RIGHT
-                $b
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              $a
+            Label : RIGHT
+              $b
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -320,15 +261,13 @@ Label : PROJECT
             (object)
             Label : CAST
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  "a"
+                Label : VALUE
+                  "b"
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
@@ -336,27 +275,23 @@ Label : PROJECT
             (object)
             Label : CAST
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "c"
-        Label : ELEMENT
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  "a"
+                Label : VALUE
+                  "c"
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                $a
-              Label : RIGHT
-                $b
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              $a
+            Label : RIGHT
+              $b
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -364,15 +299,13 @@ Label : PROJECT
             (object)
             Label : CAST
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "c"
-        Label : ELEMENT
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  "a"
+                Label : VALUE
+                  "c"
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
@@ -380,27 +313,23 @@ Label : PROJECT
             (object)
             Label : CAST
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  "a"
+                Label : VALUE
+                  "b"
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                $a
-              Label : RIGHT
-                $b
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              $a
+            Label : RIGHT
+              $b
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -408,15 +337,13 @@ Label : PROJECT
             (object)
             Label : CAST
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    "a"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  "a"
+                Label : VALUE
+                  "b"
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
@@ -424,23 +351,19 @@ Label : PROJECT
             (object)
             Label : CAST
               [
-              Label : ARGUMENTS
-                [
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    "b"
-                  Label : VALUE
-                    "b"
-        Label : ELEMENT
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  "b"
+                Label : VALUE
+                  "b"
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <=>
-              Label : LEFT
-                $a
-              Label : RIGHT
-                $b
+          Label : ARGUMENT
+            <=>
+            Label : LEFT
+              $a
+            Label : RIGHT
+              $b
           Label : NAME
             echo

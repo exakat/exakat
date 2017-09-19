@@ -1,33 +1,48 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Array.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : CONST
             const
             Label : CONST
               const
+              Label : DEFINITION
+                ::
+                Label : CLASS
+                  x
+                Label : CONSTANT
+                  A
+              Label : DEFINITION
+                ::
+                Label : CLASS
+                  x
+                Label : CONSTANT
+                  A
+              Label : DEFINITION
+                ::
+                Label : CLASS
+                  x
+                Label : CONSTANT
+                  A
               Label : NAME
                 A
               Label : VALUE
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      2
-                    Label : VALUE
-                      3
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  =>
+                  Label : INDEX
+                    2
+                  Label : VALUE
+                    3
           Label : DEFINITION
             x
           Label : DEFINITION
@@ -36,14 +51,30 @@ Label : PROJECT
             x
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              0
+            Label : VARIABLE
+              ::
+              Label : CLASS
+                x
+              Label : CONSTANT
+                A
+          Label : NAME
+            print
+        Label : EXPRESSION
+          print
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              3
+            Label : VARIABLE
               [
               Label : INDEX
-                0
+                2
               Label : VARIABLE
                 ::
                 Label : CLASS
@@ -52,11 +83,17 @@ Label : PROJECT
                   A
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              +
+              Label : LEFT
+                4
+              Label : RIGHT
+                7
+            Label : VARIABLE
               [
               Label : INDEX
                 3
@@ -70,33 +107,5 @@ Label : PROJECT
                     x
                   Label : CONSTANT
                     A
-          Label : NAME
-            print
-        Label : ELEMENT
-          print
-          Label : ARGUMENTS
-            ]
-            Label : ARGUMENT
-              [
-              Label : INDEX
-                +
-                Label : LEFT
-                  4
-                Label : RIGHT
-                  7
-              Label : VARIABLE
-                [
-                Label : INDEX
-                  3
-                Label : VARIABLE
-                  [
-                  Label : INDEX
-                    2
-                  Label : VARIABLE
-                    ::
-                    Label : CLASS
-                      x
-                    Label : CONSTANT
-                      A
           Label : NAME
             print

@@ -1,24 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Assignation.25.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             include
-            Label : ARGUMENTS
-              )
-              Label : ARGUMENT
-                (
-                Label : CODE
-                  'y.php'
+            Label : ARGUMENT
+              (
+              Label : CODE
+                'y.php'
             Label : NAME
               include

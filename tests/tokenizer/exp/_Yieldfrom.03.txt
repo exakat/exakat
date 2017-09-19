@@ -1,26 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yieldfrom.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           from
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $off
+          Label : ARGUMENT
+            $off
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               try
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   yield
                   Label : YIELD
                     +
@@ -32,25 +29,23 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     print
-                    Label : ARGUMENTS
+                    Label : ARGUMENT
                       "
-                      Label : ARGUMENT
-                        "
-                        Label : CONCAT
-                          catch in from()\n
-                        Label : CONCAT
-                          $e
-                        Label : CONCAT
-                          \n
+                      Label : CONCAT
+                        catch in from()\n
+                      Label : CONCAT
+                        $e
+                      Label : CONCAT
+                        \n
                     Label : NAME
                       print
                 Label : CLASS
                   Exception
                 Label : VARIABLE
                   $e
-            Label : ELEMENT
+            Label : EXPRESSION
               yield
               Label : YIELD
                 +
@@ -60,39 +55,33 @@ Label : PROJECT
                   2
           Label : DEFINITION
             from
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
+            Label : ARGUMENT
+              0
             Label : NAME
               from
           Label : DEFINITION
             from
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                2
+            Label : ARGUMENT
+              2
             Label : NAME
               from
           Label : NAME
             from
-        Label : ELEMENT
+        Label : EXPRESSION
           gen
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               try
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   yield
                   Label : YIELD
                     =>
-                    Label : KEY
+                    Label : INDEX
                       "gen"
                     Label : VALUE
                       0
@@ -100,205 +89,177 @@ Label : PROJECT
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     print
-                    Label : ARGUMENTS
+                    Label : ARGUMENT
                       "
-                      Label : ARGUMENT
-                        "
-                        Label : CONCAT
-                          catch in gen()\n
-                        Label : CONCAT
-                          $e
-                        Label : CONCAT
-                          \n
+                      Label : CONCAT
+                        catch in gen()\n
+                      Label : CONCAT
+                        $e
+                      Label : CONCAT
+                        \n
                     Label : NAME
                       print
                 Label : CLASS
                   Exception
                 Label : VARIABLE
                   $e
-            Label : ELEMENT
+            Label : EXPRESSION
               try
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   yield from
                   Label : YIELD
                     from
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        0
+                    Label : ARGUMENT
+                      0
                     Label : NAME
                       from
               Label : CATCH
                 catch
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     print
-                    Label : ARGUMENTS
+                    Label : ARGUMENT
                       "
-                      Label : ARGUMENT
-                        "
-                        Label : CONCAT
-                          catch in gen()\n
-                        Label : CONCAT
-                          $e
-                        Label : CONCAT
-                          \n
+                      Label : CONCAT
+                        catch in gen()\n
+                      Label : CONCAT
+                        $e
+                      Label : CONCAT
+                        \n
                     Label : NAME
                       print
                 Label : CLASS
                   Exception
                 Label : VARIABLE
                   $e
-            Label : ELEMENT
+            Label : EXPRESSION
               yield from
               Label : YIELD
                 from
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    2
+                Label : ARGUMENT
+                  2
                 Label : NAME
                   from
           Label : DEFINITION
+            "gen"
+          Label : DEFINITION
             gen
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               gen
-          Label : DEFINITION
-            "gen"
           Label : NAME
             gen
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $i
           Label : RIGHT
             0
-        Label : ELEMENT
+        Label : EXPRESSION
           try
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               for
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   var_dump
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      ->
-                      Label : METHOD
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      current
+                      Label : ARGUMENT
+                        Void
+                      Label : NAME
                         current
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          current
-                      Label : OBJECT
-                        $gen
+                    Label : OBJECT
+                      $gen
                   Label : NAME
                     var_dump
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     valid
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       valid
                   Label : OBJECT
                     $gen
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     throw
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        new
-                        Label : NEW
+                    Label : ARGUMENT
+                      new
+                      Label : NEW
+                        Exception
+                        Label : ARGUMENT
+                          ++
+                          Label : POSTPLUSPLUS
+                            (string)
+                            Label : CAST
+                              $i
+                        Label : NAME
                           Exception
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              ++
-                              Label : POSTPLUSPLUS
-                                (string)
-                                Label : CAST
-                                  $i
-                          Label : NAME
-                            Exception
                     Label : NAME
                       throw
                   Label : OBJECT
                     $gen
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $gen
                   Label : RIGHT
                     gen
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       gen
           Label : CATCH
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 print
-                Label : ARGUMENTS
+                Label : ARGUMENT
                   "
-                  Label : ARGUMENT
-                    "
-                    Label : CONCAT
-                      catch in {main}\n
-                    Label : CONCAT
-                      $e
-                    Label : CONCAT
-                      \n
+                  Label : CONCAT
+                    catch in {main}\n
+                  Label : CONCAT
+                    $e
+                  Label : CONCAT
+                    \n
                 Label : NAME
                   print
             Label : CLASS
               Exception
             Label : VARIABLE
               $e
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ->
-              Label : METHOD
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              valid
+              Label : ARGUMENT
+                Void
+              Label : NAME
                 valid
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  valid
-              Label : OBJECT
-                $gen
+            Label : OBJECT
+              $gen
           Label : NAME
             var_dump

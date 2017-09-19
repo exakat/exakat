@@ -4,4 +4,6 @@
 
    # Doesn't work:
    print_r( mb_split("/\s/", "hello world") );
+   $a->mb_strtolower("/\s/");
+   
 ?>

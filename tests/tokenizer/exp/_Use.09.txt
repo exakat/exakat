@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -20,7 +19,7 @@ Label : PROJECT
                   I
                 Label : NAME
                   G
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 as
@@ -28,8 +27,12 @@ Label : PROJECT
                   F
                 Label : NAME
                   \E
-            Label : ELEMENT
+            Label : EXPRESSION
               use
+              Label : USE
+                A
+              Label : USE
+                B
               Label : USE
                 as
                 Label : ALIAS
@@ -38,18 +41,18 @@ Label : PROJECT
                   A
                 Label : NAME
                   A\B\C
-              Label : USE
-                A
-              Label : USE
-                B
-            Label : ELEMENT
+            Label : EXPRESSION
               use
+              Label : USE
+                K
               Label : USE
                 as
                 Label : ALIAS
                   M
                 Label : NAME
                   L
+              Label : USE
+                N
               Label : USE
                 as
                 Label : ALIAS
@@ -63,16 +66,12 @@ Label : PROJECT
                 Label : NAME
                   O
               Label : USE
+                R
+              Label : USE
                 as
                 Label : ALIAS
                   T
                 Label : NAME
                   S
-              Label : USE
-                K
-              Label : USE
-                N
-              Label : USE
-                R
           Label : NAME
             A\B

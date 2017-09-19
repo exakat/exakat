@@ -34,7 +34,7 @@ class WrongNumberOfArguments extends Analyzer {
     public function analyze() {
         // this is for functions defined within PHP
         $data = new Methods($this->config);
-        
+
         $functions = $data->getFunctionsArgsInterval();
         $argsMins = array();
         $argsMaxs = array();
@@ -50,7 +50,6 @@ class WrongNumberOfArguments extends Analyzer {
 
         foreach($argsMins as $nb => $f) {
             $this->atomFunctionIs($f)
-                 ->outIs('ARGUMENTS')
                  ->isLess('count', $nb)
                  ->back('first');
             $this->prepareQuery();
@@ -58,7 +57,6 @@ class WrongNumberOfArguments extends Analyzer {
         
         foreach($argsMaxs as $nb => $f) {
             $this->atomFunctionIs($f)
-                 ->outIs('ARGUMENTS')
                  ->isMore('count', $nb)
                  ->back('first');
             $this->prepareQuery();
@@ -66,27 +64,19 @@ class WrongNumberOfArguments extends Analyzer {
 
         // this is for custom functions
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-             ->outIs('ARGUMENTS')
              ->savePropertyAs('count', 'args_count')
-             ->inIs('ARGUMENTS')
              ->functionDefinition()
              ->analyzerIsNot('Functions/VariableArguments')
-             ->outIs('ARGUMENTS')
              ->isMore('args_min', 'args_count')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomIs('Functioncall')
-             ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING','T_NS_SEPARATOR'))
-             ->outIs('ARGUMENTS')
              ->savePropertyAs('count', 'args_count')
-             ->inIs('ARGUMENTS')
              ->functionDefinition()
              ->analyzerIsNot('Functions/VariableArguments')
-             ->outIs('ARGUMENTS')
              ->isLess('args_max', 'args_count')
              ->back('first');
         $this->prepareQuery();

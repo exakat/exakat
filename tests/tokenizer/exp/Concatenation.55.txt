@@ -1,38 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.55.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             c
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                .
-                Label : CONCAT
-                  'D'
-                Label : CONCAT
-                  $e
-              Label : ARGUMENT
-                f
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  f
             Label : NAME
               c
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'D'
+              Label : CONCAT
+                $e
+            Label : ARGUMENT
+              f
+              Label : ARGUMENT
+                Void
+              Label : NAME
+                f
           Label : OBJECT
             ->
+            Label : MEMBER
+              b
             Label : OBJECT
               $a
-            Label : PROPERTY
-              b

@@ -1,88 +1,79 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.80.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-            Label : ELEMENT
+                Label : ARGUMENT
+                  Void
+            Label : EXPRESSION
               foreach
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ->
                     Label : METHOD
                       D
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         D
                     Label : OBJECT
                       $d
                   Label : THEN
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         [
                         Label : INDEX
                           ->
+                          Label : MEMBER
+                            E
                           Label : OBJECT
                             $f
-                          Label : PROPERTY
-                            E
                         Label : VARIABLE
                           $e
                       Label : RIGHT
                         $g
               Label : SOURCE
                 ->
+                Label : MEMBER
+                  C
                 Label : OBJECT
                   $b
-                Label : PROPERTY
-                  C
               Label : VALUE
                 $c
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'G'
-                  Label : ARGUMENT
-                    $h
                 Label : NAME
                   F
+                Label : ARGUMENT
+                  'G'
+                Label : ARGUMENT
+                  $h
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

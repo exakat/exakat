@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/String.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a0
@@ -19,7 +18,7 @@ Label : PROJECT
               $b
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a1
@@ -33,7 +32,7 @@ Label : PROJECT
               c
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a2
@@ -45,7 +44,7 @@ Label : PROJECT
               $b2
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a3
@@ -53,17 +52,17 @@ Label : PROJECT
             +
             Label : LEFT
               ->
+              Label : MEMBER
+                $c3
               Label : OBJECT
                 $b3
-              Label : PROPERTY
-                $c3
             Label : RIGHT
               ->
+              Label : MEMBER
+                $e3
               Label : OBJECT
                 $d3
-              Label : PROPERTY
-                $e3
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a4
@@ -77,7 +76,7 @@ Label : PROJECT
               $c
             Label : CONCAT
               $d4
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a5
@@ -89,7 +88,7 @@ Label : PROJECT
               $b
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a6
@@ -103,7 +102,7 @@ Label : PROJECT
               c6
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a7
@@ -117,7 +116,7 @@ Label : PROJECT
               c
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a8
@@ -129,7 +128,7 @@ Label : PROJECT
               $b8
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a9
@@ -143,7 +142,7 @@ Label : PROJECT
               c
             Label : CONCAT
               C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a10
@@ -151,13 +150,13 @@ Label : PROJECT
             +
             Label : LEFT
               ->
+              Label : MEMBER
+                $c10
               Label : OBJECT
                 $b10
-              Label : PROPERTY
-                $c10
             Label : RIGHT
               ->
+              Label : MEMBER
+                $e10
               Label : OBJECT
                 $d10
-              Label : PROPERTY
-                $e10

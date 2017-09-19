@@ -1,21 +1,20 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.72.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !
@@ -27,51 +26,43 @@ Label : PROJECT
                     $c
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
+                  Label : ARGUMENT
+                    E
                     Label : ARGUMENT
-                      E
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          .
-                          Label : CONCAT
-                            'F'
-                          Label : CONCAT
-                            [
-                            Label : INDEX
-                              'G'
-                            Label : VARIABLE
-                              $d
-                          Label : CONCAT
-                            'H'
-                        Label : ARGUMENT
-                          I
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'J'
-                          Label : NAME
-                            I
-                        Label : ARGUMENT
-                          array
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              =>
-                              Label : KEY
-                                'K'
-                              Label : VALUE
-                                'L'
+                      .
+                      Label : CONCAT
+                        'F'
+                      Label : CONCAT
+                        [
+                        Label : INDEX
+                          'G'
+                        Label : VARIABLE
+                          $d
+                      Label : CONCAT
+                        'H'
+                    Label : ARGUMENT
+                      I
+                      Label : ARGUMENT
+                        'J'
                       Label : NAME
-                        E
+                        I
+                    Label : ARGUMENT
+                      array
+                      Label : ARGUMENT
+                        =>
+                        Label : INDEX
+                          'K'
+                        Label : VALUE
+                          'L'
+                    Label : NAME
+                      E
                   Label : NAME
                     echo
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
-            Label : ELEMENT
+            Label : EXPRESSION
               L
           Label : SOURCE
             $a

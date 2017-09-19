@@ -1,118 +1,105 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.43.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            $c
-            Label : ARGUMENT
-              +
-              Label : LEFT
-                (
-                Label : CODE
-                  +
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    $b
-              Label : RIGHT
-                $c
+          Label : ARGUMENT
+            +
+            Label : LEFT
+              (
+              Label : CODE
+                +
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  $b
+            Label : RIGHT
+              $c
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              +
-              Label : LEFT
-                (
-                Label : CODE
-                  +
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    $b
-              Label : RIGHT
-                $c
+          Label : ARGUMENT
+            +
+            Label : LEFT
+              (
+              Label : CODE
+                +
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  $b
+            Label : RIGHT
+              $c
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            $c
-            Label : ARGUMENT
-              *
-              Label : LEFT
-                (
-                Label : CODE
-                  +
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    $b
-              Label : RIGHT
-                $c
+          Label : ARGUMENT
+            *
+            Label : LEFT
+              (
+              Label : CODE
+                +
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  $b
+            Label : RIGHT
+              $c
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            $c
-            Label : ARGUMENT
-              &
-              Label : LEFT
-                (
-                Label : CODE
-                  +
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    $b
-              Label : RIGHT
-                $c
+          Label : ARGUMENT
+            &
+            Label : LEFT
+              (
+              Label : CODE
+                +
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  $b
+            Label : RIGHT
+              $c
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            $c
-            Label : ARGUMENT
-              %
-              Label : LEFT
-                (
-                Label : CODE
-                  +
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    $b
-              Label : RIGHT
-                $c
+          Label : ARGUMENT
+            %
+            Label : LEFT
+              (
+              Label : CODE
+                +
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  $b
+            Label : RIGHT
+              $c
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            $c
-            Label : ARGUMENT
-              >>
-              Label : LEFT
-                (
-                Label : CODE
-                  +
-                  Label : LEFT
-                    $a
-                  Label : RIGHT
-                    $b
-              Label : RIGHT
-                $c
+          Label : ARGUMENT
+            >>
+            Label : LEFT
+              (
+              Label : CODE
+                +
+                Label : LEFT
+                  $a
+                Label : RIGHT
+                  $b
+            Label : RIGHT
+              $c
           Label : NAME
             print

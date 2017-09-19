@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.67.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,66 +15,56 @@ Label : PROJECT
             ->
             Label : METHOD
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'D'
+              Label : ARGUMENT
+                'D'
               Label : NAME
                 C
             Label : OBJECT
               ->
               Label : METHOD
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    0
+                Label : ARGUMENT
+                  0
                 Label : NAME
                   B
               Label : OBJECT
                 $b
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ->
             Label : METHOD
               F
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'G'
+              Label : ARGUMENT
+                'G'
               Label : NAME
                 F
             Label : OBJECT
               $c
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 ->
                 Label : METHOD
                   L
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     L
                 Label : OBJECT
                   $e
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 ->
                 Label : METHOD
                   I
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'J'
+                  Label : ARGUMENT
+                    'J'
                   Label : NAME
                     I
                 Label : OBJECT

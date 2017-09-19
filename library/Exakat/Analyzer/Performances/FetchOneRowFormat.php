@@ -31,7 +31,6 @@ class FetchOneRowFormat extends Analyzer {
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->codeIs('fetchRow')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Void')
              ->back('first');
@@ -42,7 +41,6 @@ class FetchOneRowFormat extends Analyzer {
              ->outIs('METHOD')
              ->tokenIs('T_STRING')
              ->codeIs('fetchRow')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs('\\sqlite3_both')

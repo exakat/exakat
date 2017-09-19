@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Property.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
           Label : RIGHT
             'b'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $o
@@ -22,7 +21,7 @@ Label : PROJECT
             new
             Label : NEW
               stdclass
-        Label : ELEMENT
+        Label : EXPRESSION
           const
           Label : CONST
             const
@@ -34,66 +33,62 @@ Label : PROJECT
               D
             Label : VALUE
               1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              C
             Label : OBJECT
               $o
-            Label : PROPERTY
-              C
           Label : RIGHT
             D
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'b'
-                Label : VALUE
-                  array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'B'
-                      Label : VALUE
-                        'o'
-        Label : ELEMENT
-          var_dump
-          Label : ARGUMENTS
-            (
             Label : ARGUMENT
-              ->
-              Label : OBJECT
-                $
-                Label : NAME
-                  [
+              =>
+              Label : INDEX
+                'b'
+              Label : VALUE
+                array
+                Label : ARGUMENT
+                  =>
                   Label : INDEX
                     'B'
+                  Label : VALUE
+                    'o'
+        Label : EXPRESSION
+          var_dump
+          Label : ARGUMENT
+            ->
+            Label : MEMBER
+              C
+            Label : OBJECT
+              $
+              Label : NAME
+                [
+                Label : INDEX
+                  'B'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    $b
                   Label : VARIABLE
-                    [
-                    Label : INDEX
-                      $b
-                    Label : VARIABLE
-                      $a
-              Label : PROPERTY
-                C
+                    $a
           Label : NAME
             var_dump
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
             Label : LEFT
               ->
+              Label : MEMBER
+                C
               Label : OBJECT
                 $
                 Label : NAME
@@ -106,13 +101,11 @@ Label : PROJECT
                       $b
                     Label : VARIABLE
                       $a
-              Label : PROPERTY
-                C
             Label : RIGHT
               D
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c

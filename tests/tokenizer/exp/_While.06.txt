@@ -1,26 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_While.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           while
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
               Label : CONDITION
                 2

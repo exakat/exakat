@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Logical.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ||
@@ -28,10 +27,8 @@ Label : PROJECT
                     ->
                     Label : METHOD
                       e
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         e
                     Label : OBJECT
@@ -48,10 +45,8 @@ Label : PROJECT
                     ->
                     Label : METHOD
                       h
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         h
                     Label : OBJECT
@@ -64,7 +59,7 @@ Label : PROJECT
                     4.1
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 $d

@@ -1,55 +1,48 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.51.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              *
-              Label : LEFT
-                (
-                Label : CODE
-                  /
-                  Label : LEFT
-                    C
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        D
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            ->
-                            Label : OBJECT
-                              [
-                              Label : INDEX
-                                'E'
-                              Label : VARIABLE
-                                $a
-                            Label : PROPERTY
-                              F
-                          Label : ARGUMENT
-                            'G'
-                          Label : ARGUMENT
-                            H
-                        Label : NAME
-                          D
+          Label : ARGUMENT
+            *
+            Label : LEFT
+              (
+              Label : CODE
+                /
+                Label : LEFT
+                  C
+                  Label : ARGUMENT
+                    D
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        F
+                      Label : OBJECT
+                        [
+                        Label : INDEX
+                          'E'
+                        Label : VARIABLE
+                          $a
+                    Label : ARGUMENT
+                      'G'
+                    Label : ARGUMENT
+                      H
                     Label : NAME
-                      C
-                  Label : RIGHT
-                    0
-              Label : RIGHT
-                1
+                      D
+                  Label : NAME
+                    C
+                Label : RIGHT
+                  0
+            Label : RIGHT
+              1
           Label : NAME
             echo
-    Label : ELEMENT
+    Label : EXPRESSION
       H

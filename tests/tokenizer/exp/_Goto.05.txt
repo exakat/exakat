@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Goto.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           GOTO
           Label : GOTO
             cleanupCookie
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             cleanupCookie

@@ -1,20 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.69.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           &&
           Label : LEFT
             !==
@@ -28,41 +27,35 @@ Label : PROJECT
                   $c
                 Label : RIGHT
                   C
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      'D'
                   Label : NAME
                     C
+                  Label : ARGUMENT
+                    $d
+                  Label : ARGUMENT
+                    'D'
           Label : RIGHT
             =
             Label : LEFT
               $e
             Label : RIGHT
               E
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $f
-                Label : ARGUMENT
-                  +
-                  Label : LEFT
-                    $g
-                  Label : RIGHT
-                    0
               Label : NAME
                 E
-        Label : ELEMENT
+              Label : ARGUMENT
+                $f
+              Label : ARGUMENT
+                +
+                Label : LEFT
+                  $g
+                Label : RIGHT
+                  0
+        Label : EXPRESSION
           return
           Label : RETURN
             F
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $h
-              Label : ARGUMENT
-                'G'
             Label : NAME
               F
+            Label : ARGUMENT
+              $h
+            Label : ARGUMENT
+              'G'

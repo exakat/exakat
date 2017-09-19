@@ -1,62 +1,61 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             1
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 2
               Label : ELSE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     3
                   Label : ELSE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       if
                       Label : CONDITION
                         4
                       Label : ELSE
                         ;
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           if
                           Label : CONDITION
                             5
                           Label : ELSE
                             {}
-                            Label : ELEMENT
+                            Label : EXPRESSION
                               $f
                           Label : THEN
                             {}
-                            Label : ELEMENT
+                            Label : EXPRESSION
                               $e
                       Label : THEN
                         {}
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           $d
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $c
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   $b
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               $a

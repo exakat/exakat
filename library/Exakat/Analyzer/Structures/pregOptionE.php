@@ -55,7 +55,6 @@ GREMLIN;
         
         // preg_match with a string
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->isNot('noDelimiter', '')
@@ -67,7 +66,6 @@ GREMLIN;
 
         // With an interpolated string "a $x b"
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->outWithRank('CONCAT', 0)
@@ -78,10 +76,9 @@ GREMLIN;
              ->regexIs('fullcode', '^.(" + delimiter + ").*(" + delimiterFinal + ")(.*e.*).\\$')
              ->back('first');
         $this->prepareQuery();
-return;
+
         // with a concatenation
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->outWithRank('CONCAT', 0)
@@ -99,7 +96,6 @@ return;
 // Actual letters used for Options in PHP imsxeuADSUXJ (others may yield an error) case is important
 
         $this->atomFunctionIs(array('\mb_eregi_replace', '\mb_ereg_replace'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 3)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')

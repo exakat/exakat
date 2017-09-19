@@ -32,7 +32,6 @@ class ListOmissions extends Analyzer {
     
     public function analyze() {
         $this->atomFunctionIs('\\list')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->analyzerIs('Variables/VariableUsedOnceByContext');
         $this->prepareQuery();

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticmethodcall.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -22,13 +21,11 @@ Label : PROJECT
               C
             Label : METHOD
               D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'E'
+              Label : ARGUMENT
+                'E'
               Label : NAME
                 D
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -42,13 +39,11 @@ Label : PROJECT
               G
             Label : METHOD
               H
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'I'
+              Label : ARGUMENT
+                'I'
               Label : NAME
                 H
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ::
@@ -56,15 +51,13 @@ Label : PROJECT
               J
             Label : METHOD
               K
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'L'
+              Label : ARGUMENT
+                'L'
               Label : NAME
                 K
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
@@ -78,31 +71,27 @@ Label : PROJECT
                   N
                 Label : METHOD
                   O
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'P'
+                  Label : ARGUMENT
+                    'P'
                   Label : NAME
                     O
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : OBJECT
-                    $d
-                  Label : PROPERTY
-                    Q
+              Label : ARGUMENT
+                ->
+                Label : MEMBER
+                  Q
+                Label : OBJECT
+                  $d
               Label : NAME
                 empty
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
@@ -112,39 +101,33 @@ Label : PROJECT
                   $e
               Label : RIGHT
                 ->
+                Label : MEMBER
+                  S
                 Label : OBJECT
                   $f
-                Label : PROPERTY
-                  S
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             T
           Label : METHOD
             U
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                W
+                Label : ARGUMENT
+                  $h
+                Label : NAME
+                  W
+              Label : OBJECT
                 ->
                 Label : METHOD
-                  W
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $h
+                  V
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
-                    W
-                Label : OBJECT
-                  ->
-                  Label : METHOD
                     V
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      V
-                  Label : OBJECT
-                    $g
+                Label : OBJECT
+                  $g
             Label : NAME
               U

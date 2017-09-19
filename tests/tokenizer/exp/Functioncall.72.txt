@@ -1,94 +1,81 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.72.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    C
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  C
+                Label : MEMBER
+                  $a
               Label : NAME
                 B
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 Void
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ::
             Label : CLASS
               C
-            Label : PROPERTY
+            Label : MEMBER
               $a
           Label : RIGHT
             E
-            Label : ARGUMENTS
-              (
+            Label : ARGUMENT
+              include
               Label : ARGUMENT
-                include
-                Label : ARGUMENTS
+                .
+                Label : CONCAT
+                  __DIR__
+                Label : CONCAT
                   'F'
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      __DIR__
-                    Label : CONCAT
-                      'F'
-                Label : NAME
-                  include
-              Label : ARGUMENT
+              Label : NAME
                 include
-                Label : ARGUMENTS
+            Label : ARGUMENT
+              include
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  __DIR__
+                Label : CONCAT
                   'G'
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      __DIR__
-                    Label : CONCAT
-                      'G'
-                Label : NAME
-                  include
-              Label : ARGUMENT
+              Label : NAME
                 include
-                Label : ARGUMENTS
+            Label : ARGUMENT
+              include
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  __DIR__
+                Label : CONCAT
                   'H'
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      __DIR__
-                    Label : CONCAT
-                      'H'
-                Label : NAME
-                  include
-              Label : ARGUMENT
+              Label : NAME
                 include
-                Label : ARGUMENTS
+            Label : ARGUMENT
+              include
+              Label : ARGUMENT
+                .
+                Label : CONCAT
+                  __DIR__
+                Label : CONCAT
                   'I'
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      __DIR__
-                    Label : CONCAT
-                      'I'
-                Label : NAME
-                  include
+              Label : NAME
+                include
             Label : NAME
               E

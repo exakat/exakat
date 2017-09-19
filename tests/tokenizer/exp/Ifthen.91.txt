@@ -1,29 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.91.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $a
+                Label : ARGUMENT
+                  $a
                 Label : NAME
                   C
               Label : ELSE
@@ -38,78 +33,64 @@ Label : PROJECT
                   elseif
                   Label : CONDITION
                     G
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
+                    Label : ARGUMENT
+                      $a
                     Label : NAME
                       G
                   Label : ELSE
                     elseif
                     Label : CONDITION
                       H
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $a
+                      Label : ARGUMENT
+                        $a
                       Label : NAME
                         H
                     Label : ELSE
                       elseif
                       Label : CONDITION
                         AF
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $a
+                        Label : ARGUMENT
+                          $a
                         Label : NAME
                           AF
                       Label : THEN
                         {}
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           throw
                           Label : THROW
                             new
                             Label : NEW
                               P
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  .
-                                  Label : CONCAT
-                                    'AH'
-                                  Label : CONCAT
+                              Label : ARGUMENT
+                                .
+                                Label : CONCAT
+                                  'AH'
+                                Label : CONCAT
+                                  AI
+                                  Label : ARGUMENT
+                                    $a
+                                  Label : NAME
                                     AI
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        $a
-                                    Label : NAME
-                                      AI
                               Label : NAME
                                 P
                     Label : THEN
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         I
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $a
+                        Label : ARGUMENT
+                          $a
                         Label : NAME
                           I
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         foreach
                         Label : BLOCK
                           {}
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             if
                             Label : CONDITION
                               J
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $b
+                              Label : ARGUMENT
+                                $b
                               Label : NAME
                                 J
                             Label : ELSE
@@ -118,37 +99,31 @@ Label : PROJECT
                                 &&
                                 Label : LEFT
                                   H
-                                  Label : ARGUMENTS
-                                    (
-                                    Label : ARGUMENT
-                                      $c
+                                  Label : ARGUMENT
+                                    $c
                                   Label : NAME
                                     H
                                 Label : RIGHT
                                   L
-                                  Label : ARGUMENTS
-                                    (
-                                    Label : ARGUMENT
-                                      'O'
-                                    Label : ARGUMENT
-                                      $c
                                   Label : NAME
                                     L
+                                  Label : ARGUMENT
+                                    'O'
+                                  Label : ARGUMENT
+                                    $c
                               Label : ELSE
                                 {}
-                                Label : ELEMENT
+                                Label : EXPRESSION
                                   =
                                   Label : LEFT
                                     $d
                                   Label : RIGHT
                                     [
-                                    Label : ARGUMENTS
-                                      [
-                                      Label : ARGUMENT
-                                        Void
+                                    Label : ARGUMENT
+                                      Void
                               Label : THEN
                                 {}
-                                Label : ELEMENT
+                                Label : EXPRESSION
                                   =
                                   Label : LEFT
                                     $d
@@ -156,29 +131,25 @@ Label : PROJECT
                                     ?
                                     Label : CONDITION
                                       isset
-                                      Label : ARGUMENTS
-                                        (
-                                        Label : ARGUMENT
-                                          [
-                                          Label : INDEX
-                                            'R'
-                                          Label : VARIABLE
-                                            $c
+                                      Label : ARGUMENT
+                                        [
+                                        Label : INDEX
+                                          'R'
+                                        Label : VARIABLE
+                                          $c
                                       Label : NAME
                                         isset
                                     Label : ELSE
                                       [
-                                      Label : ARGUMENTS
-                                        [
-                                        Label : ARGUMENT
-                                          Void
+                                      Label : ARGUMENT
+                                        Void
                                     Label : THEN
                                       [
                                       Label : INDEX
                                         'R'
                                       Label : VARIABLE
                                         $c
-                                Label : ELEMENT
+                                Label : EXPRESSION
                                   =
                                   Label : LEFT
                                     $c
@@ -190,7 +161,7 @@ Label : PROJECT
                                       $c
                             Label : THEN
                               {}
-                              Label : ELEMENT
+                              Label : EXPRESSION
                                 if
                                 Label : CONDITION
                                   ||
@@ -198,10 +169,8 @@ Label : PROJECT
                                     !
                                     Label : NOT
                                       H
-                                      Label : ARGUMENTS
-                                        (
-                                        Label : ARGUMENT
-                                          $c
+                                      Label : ARGUMENT
+                                        $c
                                       Label : NAME
                                         H
                                   Label : RIGHT
@@ -210,41 +179,35 @@ Label : PROJECT
                                       !
                                       Label : NOT
                                         L
-                                        Label : ARGUMENTS
-                                          (
-                                          Label : ARGUMENT
-                                            'M'
-                                          Label : ARGUMENT
-                                            $c
                                         Label : NAME
                                           L
+                                        Label : ARGUMENT
+                                          'M'
+                                        Label : ARGUMENT
+                                          $c
                                     Label : RIGHT
                                       !
                                       Label : NOT
                                         L
-                                        Label : ARGUMENTS
-                                          (
-                                          Label : ARGUMENT
-                                            'O'
-                                          Label : ARGUMENT
-                                            $c
                                         Label : NAME
                                           L
+                                        Label : ARGUMENT
+                                          'O'
+                                        Label : ARGUMENT
+                                          $c
                                 Label : THEN
                                   {}
-                                  Label : ELEMENT
+                                  Label : EXPRESSION
                                     throw
                                     Label : THROW
                                       new
                                       Label : NEW
                                         P
-                                        Label : ARGUMENTS
-                                          (
-                                          Label : ARGUMENT
-                                            'Q'
+                                        Label : ARGUMENT
+                                          'Q'
                                         Label : NAME
                                           P
-                              Label : ELEMENT
+                              Label : EXPRESSION
                                 =
                                 Label : LEFT
                                   $d
@@ -252,29 +215,25 @@ Label : PROJECT
                                   ?
                                   Label : CONDITION
                                     isset
-                                    Label : ARGUMENTS
-                                      (
-                                      Label : ARGUMENT
-                                        [
-                                        Label : INDEX
-                                          'R'
-                                        Label : VARIABLE
-                                          $c
+                                    Label : ARGUMENT
+                                      [
+                                      Label : INDEX
+                                        'R'
+                                      Label : VARIABLE
+                                        $c
                                     Label : NAME
                                       isset
                                   Label : ELSE
                                     [
-                                    Label : ARGUMENTS
-                                      [
-                                      Label : ARGUMENT
-                                        Void
+                                    Label : ARGUMENT
+                                      Void
                                   Label : THEN
                                     [
                                     Label : INDEX
                                       'R'
                                     Label : VARIABLE
                                       $c
-                              Label : ELEMENT
+                              Label : EXPRESSION
                                 =
                                 Label : LEFT
                                   $b
@@ -284,7 +243,7 @@ Label : PROJECT
                                     'M'
                                   Label : VARIABLE
                                     $c
-                              Label : ELEMENT
+                              Label : EXPRESSION
                                 =
                                 Label : LEFT
                                   $c
@@ -294,50 +253,42 @@ Label : PROJECT
                                     'O'
                                   Label : VARIABLE
                                     $c
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             ->
                             Label : METHOD
                               AB
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $b
+                              Label : ARGUMENT
+                                $b
                               Label : NAME
                                 AB
                             Label : OBJECT
                               $this
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             ->
                             Label : METHOD
                               AC
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $d
+                              Label : ARGUMENT
+                                $d
                               Label : NAME
                                 AC
                             Label : OBJECT
                               $this
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             ->
                             Label : METHOD
                               B
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $c
+                              Label : ARGUMENT
+                                $c
                               Label : NAME
                                 B
                             Label : OBJECT
                               $this
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             ->
                             Label : METHOD
                               AE
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  Void
+                              Label : ARGUMENT
+                                Void
                               Label : NAME
                                 AE
                             Label : OBJECT
@@ -346,43 +297,39 @@ Label : PROJECT
                           $a
                         Label : VALUE
                           =>
-                          Label : KEY
+                          Label : INDEX
                             $b
                           Label : VALUE
                             $c
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     ->
                     Label : METHOD
                       F
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $this
+                      Label : ARGUMENT
+                        $this
                       Label : NAME
                         F
                     Label : OBJECT
                       $a
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     D
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
+                    Label : ARGUMENT
+                      $a
                     Label : NAME
                       D
                   Label : OBJECT
                     $this
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

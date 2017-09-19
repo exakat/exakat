@@ -1,27 +1,24 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.40.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ?
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    1
-                  Label : VARIABLE
-                    $b
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  1
+                Label : VARIABLE
+                  $b
               Label : NAME
                 empty
           Label : ELSE
@@ -62,34 +59,30 @@ Label : PROJECT
                     $b
               Label : CONCAT
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'D'
-                  Label : ARGUMENT
-                    'B'
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      2
-                    Label : VARIABLE
-                      $b
+                Label : ARGUMENT
+                  'D'
+                Label : ARGUMENT
+                  'B'
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    2
+                  Label : VARIABLE
+                    $b
                 Label : NAME
                   C
-        Label : ELEMENT
+        Label : EXPRESSION
           ?
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    1
-                  Label : VARIABLE
-                    $b
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  1
+                Label : VARIABLE
+                  $b
               Label : NAME
                 empty
           Label : ELSE
@@ -128,18 +121,16 @@ Label : PROJECT
                     $b
               Label : CONCAT
                 C
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'D'
-                  Label : ARGUMENT
-                    'B'
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      2
-                    Label : VARIABLE
-                      $b
+                Label : ARGUMENT
+                  'D'
+                Label : ARGUMENT
+                  'B'
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    2
+                  Label : VARIABLE
+                    $b
                 Label : NAME
                   C
           Label : THEN

@@ -33,7 +33,6 @@ class HashAlgos53 extends Analyzer {
                              $this->loadIni('hash_algos.ini', 'new56'));
         
         $this->atomFunctionIs(self::$functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->noDelimiterIs($algos);

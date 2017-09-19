@@ -35,7 +35,6 @@ class DependencyInjection extends Analyzer {
         // Assigned to a property at constructor
         $this->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->_as('result')
              ->outIs('TYPEHINT')
@@ -59,7 +58,6 @@ class DependencyInjection extends Analyzer {
         // Assigned to a property at constructor
         $this->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->_as('result')
              ->outIs('TYPEHINT')

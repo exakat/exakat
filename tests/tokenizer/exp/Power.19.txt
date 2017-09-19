@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Power.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -18,29 +17,27 @@ Label : PROJECT
               $a
           Label : RIGHT
             number_format
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                /
-                Label : LEFT
-                  (int)
-                  Label : CAST
-                    [
-                    Label : INDEX
-                      'e'
-                    Label : VARIABLE
-                      $d
-                Label : RIGHT
-                  **
-                  Label : LEFT
-                    [
-                    Label : INDEX
-                      'g'
-                    Label : VARIABLE
-                      $f
-                  Label : RIGHT
-                    1
-              Label : ARGUMENT
-                2
             Label : NAME
               number_format
+            Label : ARGUMENT
+              /
+              Label : LEFT
+                (int)
+                Label : CAST
+                  [
+                  Label : INDEX
+                    'e'
+                  Label : VARIABLE
+                    $d
+              Label : RIGHT
+                **
+                Label : LEFT
+                  [
+                  Label : INDEX
+                    'g'
+                  Label : VARIABLE
+                    $f
+                Label : RIGHT
+                  1
+            Label : ARGUMENT
+              2

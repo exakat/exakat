@@ -1,68 +1,59 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.41.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 c
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'd'
-                  Label : ARGUMENT
-                    $e
                 Label : NAME
                   c
-        Label : ELEMENT
+                Label : ARGUMENT
+                  'd'
+                Label : ARGUMENT
+                  $e
+        Label : EXPRESSION
           ->
           Label : METHOD
             k
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $f
-              Label : ARGUMENT
-                array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    =>
-                    Label : KEY
-                      'g'
-                    Label : VALUE
-                      .
-                      Label : CONCAT
-                        H
-                      Label : CONCAT
-                        "i"
-                      Label : CONCAT
-                        $j
             Label : NAME
               k
+            Label : ARGUMENT
+              $f
+            Label : ARGUMENT
+              array
+              Label : ARGUMENT
+                =>
+                Label : INDEX
+                  'g'
+                Label : VALUE
+                  .
+                  Label : CONCAT
+                    H
+                  Label : CONCAT
+                    "i"
+                  Label : CONCAT
+                    $j
           Label : OBJECT
             ::
             Label : CLASS
               M
             Label : METHOD
               l
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'e'
+              Label : ARGUMENT
+                'e'
               Label : NAME
                 l

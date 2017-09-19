@@ -1,0 +1,48 @@
+Whole
+Label : PROJECT
+  Label : FILE
+    ;
+    Label : EXPRESSION
+      <?php 
+      Label : CODE
+        ;
+        Label : EXPRESSION
+          ->
+          Label : MEMBER
+            $
+            Label : NAME
+              $b
+              Label : ARGUMENT
+                Void
+              Label : NAME
+                $b
+          Label : OBJECT
+            $a
+        Label : EXPRESSION
+          =
+          Label : LEFT
+            ->
+            Label : MEMBER
+              $
+              Label : NAME
+                $b
+                Label : APPEND
+                  $b
+            Label : OBJECT
+              $a
+          Label : RIGHT
+            3
+        Label : EXPRESSION
+          =
+          Label : LEFT
+            ->
+            Label : MEMBER
+              }
+              Label : APPEND
+                $
+                Label : NAME
+                  $b
+            Label : OBJECT
+              $a
+          Label : RIGHT
+            4

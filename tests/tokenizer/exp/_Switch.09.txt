@@ -1,54 +1,53 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'b' :  /**/  
               Label : CASE
                 'b'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'c'
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'd' :  /**/  
               Label : CASE
                 'd'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'e'
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'f'
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void

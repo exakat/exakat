@@ -33,7 +33,7 @@ abstract class Reports {
     
     const STDOUT = 'stdout';
 
-    static public $FORMATS        = array('Ambassador', 'Devoops',
+    static public $FORMATS        = array('Ambassador', 'AmbassadorNoMenu', 'Devoops',
                                           'Text', 'Xml', 'Uml', 'PlantUml', 'None',
                                           'PhpConfiguration', 'PhpCompilation',
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',

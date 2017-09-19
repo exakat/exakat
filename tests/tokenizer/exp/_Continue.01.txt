@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Continue.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               continue
               Label : CONTINUE
                 Void
@@ -20,11 +19,11 @@ Label : PROJECT
             $a
           Label : VALUE
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               continue
               Label : CONTINUE
                 1
@@ -32,15 +31,15 @@ Label : PROJECT
             $a2
           Label : VALUE
             $b
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               foreach
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   continue
                   Label : CONTINUE
                     2

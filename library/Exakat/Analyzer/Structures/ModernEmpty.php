@@ -38,7 +38,6 @@ class ModernEmpty extends Analyzer {
              ->nextSibling()
              ->atomInside('Functioncall')
              ->functioncallIs('\\empty')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'variable')
              ->back('first');

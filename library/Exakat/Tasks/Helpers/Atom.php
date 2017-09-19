@@ -23,6 +23,7 @@
 namespace Exakat\Tasks\Helpers;
 
 use Exakat\Tasks\Load;
+use Exakat\Tasks\Helpers\Property;
 
 class Atom {
     const STRING_MAX_SIZE = 500;
@@ -151,27 +152,22 @@ class Atom {
 
         $falseValues = array('globalvar', 'variadic', 'enclosing', 'heredoc', 'aliased', 'alternative', 'reference');
         
-        $object = array('id'    => $this->id,
-                        'label' => $this->atom,
-                        'outE'  => new \stdClass(),
-                        'inE'   => new \stdClass());
-        
         $properties = array();
         foreach($this as $l => $value) {
             if ($l === 'id') { continue; }
             if ($value === null) { continue; }
             
-            if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) && 
+            if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) &&
                 !in_array($this->atom, Load::$PROP_OPTIONS[$l])) {
                 continue;
             };
     
-            if (in_array($l, $falseValues) && 
+            if (in_array($l, $falseValues) &&
                 !$value) {
                 continue;
             };
 
-            if (!in_array($l, array('noDelimiter')) && 
+            if (!in_array($l, array('noDelimiter')) &&
                 $value === '') {
                 continue;
             };
@@ -185,10 +181,16 @@ class Atom {
             } elseif (in_array($l, $integerValues)) {
                 $value = (integer) $value;
             }
-            $properties[$l] = [(object) ['id' => $id++, 'value' => $value]];
+            $properties[$l] = [ new Property($id++, $value) ];
         }
         
-        $object['properties'] = $properties;
+        $object = array('id'         => $this->id,
+                        'label'      => $this->atom,
+                        'inE'        => new \stdClass(),
+                        'outE'       => new \stdClass(),
+                        'properties' => $properties,
+                        );
+
         return (object) $object;
     }
 }

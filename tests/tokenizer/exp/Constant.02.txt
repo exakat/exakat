@@ -1,20 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Constant.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           define
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'x'
-            Label : ARGUMENT
-              1
           Label : NAME
             define
+          Label : ARGUMENT
+            'x'
+          Label : ARGUMENT
+            1

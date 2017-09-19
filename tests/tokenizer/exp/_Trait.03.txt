@@ -1,31 +1,26 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Trait.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
-          Label : DEFINITION, DEFINITION
+          Label : DEFINITION
             HelloWorld
           Label : METHOD
             sayHello
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    'Hello World!'
+                Label : ARGUMENT
+                  'Hello World!'
                 Label : NAME
                   echo
             Label : NAME
@@ -34,32 +29,26 @@ Label : PROJECT
               public
           Label : NAME
             HelloWorld
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             TheWorldIsNotEnough
           Label : DEFINITION
             TheWorldIsNotEnough
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               TheWorldIsNotEnough
           Label : METHOD
             sayHello
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    'Hello Universe!'
+                Label : ARGUMENT
+                  'Hello Universe!'
                 Label : NAME
                   echo
             Label : NAME
@@ -72,7 +61,7 @@ Label : PROJECT
             use
             Label : USE
               HelloWorld
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $o
@@ -80,20 +69,16 @@ Label : PROJECT
             new
             Label : NEW
               TheWorldIsNotEnough
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 TheWorldIsNotEnough
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             sayHello
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               sayHello
           Label : OBJECT

@@ -1,24 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Include.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           require_once
-          Label : ARGUMENTS
-            L
-            Label : ARGUMENT
-              .
-              Label : CONCAT
-                J
-              Label : CONCAT
-                'K'
-              Label : CONCAT
-                L
+          Label : ARGUMENT
+            .
+            Label : CONCAT
+              J
+            Label : CONCAT
+              'K'
+            Label : CONCAT
+              L
           Label : NAME
             require_once

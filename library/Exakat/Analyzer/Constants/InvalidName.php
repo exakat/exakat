@@ -29,7 +29,6 @@ class InvalidName extends Analyzer {
     public function analyze() {
         // Invalid characters
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
@@ -42,7 +41,6 @@ class InvalidName extends Analyzer {
         
         // reserved keywords
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')

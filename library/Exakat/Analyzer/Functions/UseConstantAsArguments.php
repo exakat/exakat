@@ -43,7 +43,6 @@ class UseConstantAsArguments extends Analyzer {
 
             // Not a PHP constant
             $this->atomFunctionIs($fullnspath)
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs(array('Identifier', 'Nsname'))
@@ -53,7 +52,6 @@ class UseConstantAsArguments extends Analyzer {
 
             // unwanted guests
             $this->atomFunctionIs($fullnspath)
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs(array('Boolean', 'Null', 'Integer', 'Real', 'String', 'Concatenation', 'Logical'))
@@ -64,7 +62,6 @@ class UseConstantAsArguments extends Analyzer {
                 // PHP constant but wrong one
                 $regex = strtolower('('.implode('|', $constants).')\$');
                 $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs(array('Identifier', 'Nsname'))
@@ -86,7 +83,6 @@ class UseConstantAsArguments extends Analyzer {
             
             // if it's a constant, but not a PHP one
             $this->atomFunctionIs($fullnspath)
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs(array('Identifier', 'Nsname'))
@@ -96,7 +92,6 @@ class UseConstantAsArguments extends Analyzer {
 
             // in a logical combinaison, check that constants are at least PHP's one
             $this->atomFunctionIs($fullnspath)
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('Logical')
@@ -108,7 +103,6 @@ class UseConstantAsArguments extends Analyzer {
 
            // unwanted guests
            $this->atomFunctionIs($fullnspath)
-                ->outIs('ARGUMENTS')
                 ->outIs('ARGUMENT')
                 ->is('rank', $position)
                 ->atomIs(array('Boolean', 'Null', 'Integer', 'Real'))
@@ -123,7 +117,6 @@ class UseConstantAsArguments extends Analyzer {
                 // if it's a PHP constant, but not a good one for the function
                 $regex = strtolower('('.implode('|', $constants).')\$');
                 $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs(array('Identifier', 'Nsname'))
@@ -134,7 +127,6 @@ class UseConstantAsArguments extends Analyzer {
 
                 // in a logical combinaison, check that constants are the one for the function
                 $this->atomFunctionIs($function)
-                     ->outIs('ARGUMENTS')
                      ->outIs('ARGUMENT')
                      ->is('rank', $position)
                      ->atomIs('Logical')

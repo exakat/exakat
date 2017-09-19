@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Try.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           throw
           Label : THROW
             new
             Label : NEW
               a
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  "
-                  Label : CONCAT
-                    b '
-                  Label : CONCAT
-                    $c
-                  Label : CONCAT
-                    ' d
+              Label : ARGUMENT
+                "
+                Label : CONCAT
+                  b '
+                Label : CONCAT
+                  $c
+                Label : CONCAT
+                  ' d
               Label : NAME
                 a

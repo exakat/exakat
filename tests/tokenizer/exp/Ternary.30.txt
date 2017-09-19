@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.30.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $number
@@ -105,7 +104,7 @@ Label : PROJECT
                         $temp
                     Label : RIGHT
                       64
-        Label : ELEMENT
+        Label : EXPRESSION
           .=
           Label : LEFT
             $out

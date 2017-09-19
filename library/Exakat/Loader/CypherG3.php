@@ -74,7 +74,8 @@ class CypherG3 {
         // Load Nodes
         $files = glob($this->config->projects_root.'/projects/.exakat/nodes.g3.*.csv');
         foreach($files as $file) {
-            preg_match('/nodes\.g3\.(.*)\.csv$/', $file, $r);
+            if (!preg_match('/nodes\.g3\.(.*)\.csv$/', $file, $r)) { continue; }
+            
             $atom = $r[1];
 
             $queryTemplate = 'CREATE INDEX ON :'.$atom.'(eid)';

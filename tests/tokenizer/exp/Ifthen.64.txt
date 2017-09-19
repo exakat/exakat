@@ -1,34 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.64.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a
+              Label : ARGUMENT
+                $a
               Label : NAME
                 empty
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               .=
               Label : LEFT
                 $b
               Label : RIGHT
                 'B'
-        Label : ELEMENT
+        Label : EXPRESSION
           .=
           Label : LEFT
             $c
@@ -42,10 +39,8 @@ Label : PROJECT
               'F'
             Label : CONCAT
               H
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $e
+              Label : ARGUMENT
+                $e
               Label : NAME
                 H
             Label : CONCAT

@@ -1,36 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_For.02.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $j
           Label : RIGHT
             0
-        Label : ELEMENT
+        Label : EXPRESSION
           for
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $j
           Label : FINAL
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               <
               Label : LEFT
                 $i
               Label : RIGHT
                 5
-            Label : ELEMENT
+            Label : EXPRESSION
               <
               Label : LEFT
                 $k
@@ -38,23 +37,23 @@ Label : PROJECT
                 6
           Label : INCREMENT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $i
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $k
           Label : INIT
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $i
               Label : RIGHT
                 0
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $k

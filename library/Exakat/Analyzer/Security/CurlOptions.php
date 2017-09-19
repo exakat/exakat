@@ -32,7 +32,6 @@ class CurlOptions extends Analyzer {
         
         // Via curl_setopt
         $this->atomFunctionIs('\curl_setopt')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs($options)
@@ -44,7 +43,6 @@ class CurlOptions extends Analyzer {
 
         // Via curl_setopt_array (actually, any array with key => value that fit the options
         $this->atomIs('Arrayliteral')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')

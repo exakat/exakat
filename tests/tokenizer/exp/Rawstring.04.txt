@@ -1,19 +1,18 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Rawstring.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $d
@@ -21,133 +20,117 @@ Label : PROJECT
                 ->
                 Label : METHOD
                   C
-                  Label : ARGUMENTS
-                    (
+                  Label : ARGUMENT
+                    array
                     Label : ARGUMENT
-                      array
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          =>
-                          Label : KEY
-                            'D'
-                          Label : VALUE
-                            $f
+                      =>
+                      Label : INDEX
+                        'D'
+                      Label : VALUE
+                        $f
                   Label : NAME
                     C
                 Label : OBJECT
                   $e
-            Label : ELEMENT
+            Label : EXPRESSION
               D
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    F
-                  Label : METHOD
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  F
+                Label : METHOD
+                  G
+                  Label : NAME
                     G
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'H'
-                      Label : ARGUMENT
-                        'I'
-                    Label : NAME
-                      G
+                  Label : ARGUMENT
+                    'H'
+                  Label : ARGUMENT
+                    'I'
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               I
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    K
-                  Label : METHOD
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  K
+                Label : METHOD
+                  L
+                  Label : ARGUMENT
+                    $g
+                  Label : ARGUMENT
+                    $h
+                  Label : ARGUMENT
+                    NULL
+                  Label : ARGUMENT
+                    NULL
+                  Label : ARGUMENT
+                    M
+                  Label : NAME
                     L
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $g
-                      Label : ARGUMENT
-                        $h
-                      Label : ARGUMENT
-                        NULL
-                      Label : ARGUMENT
-                        NULL
-                      Label : ARGUMENT
-                        M
-                    Label : NAME
-                      L
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               M
-            Label : ELEMENT
+            Label : EXPRESSION
               foreach
               Label : BLOCK
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   N
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        P
-                      Label : METHOD
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      P
+                    Label : METHOD
+                      Q
+                      Label : ARGUMENT
+                        "
+                        Label : CONCAT
+                          $k
+                        Label : CONCAT
+                          R
+                        Label : CONCAT
+                          $l
+                      Label : ARGUMENT
+                        "
+                        Label : CONCAT
+                          $m
+                        Label : CONCAT
+                          S
+                        Label : CONCAT
+                          $n
+                      Label : ARGUMENT
+                        NULL
+                      Label : ARGUMENT
+                        NULL
+                      Label : ARGUMENT
+                        T
+                      Label : NAME
                         Q
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            "
-                            Label : CONCAT
-                              $k
-                            Label : CONCAT
-                              R
-                            Label : CONCAT
-                              $l
-                          Label : ARGUMENT
-                            "
-                            Label : CONCAT
-                              $m
-                            Label : CONCAT
-                              S
-                            Label : CONCAT
-                              $n
-                          Label : ARGUMENT
-                            NULL
-                          Label : ARGUMENT
-                            NULL
-                          Label : ARGUMENT
-                            T
-                        Label : NAME
-                          Q
                   Label : NAME
                     echo
-                Label : ELEMENT
+                Label : EXPRESSION
                   T
               Label : SOURCE
                 $i
               Label : VALUE
                 $j
-            Label : ELEMENT
+            Label : EXPRESSION
               U
           Label : SOURCE
             $a
           Label : VALUE
             =>
-            Label : KEY
+            Label : INDEX
               $b
             Label : VALUE
               $c
-    Label : ELEMENT
+    Label : EXPRESSION
       V

@@ -1,21 +1,18 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Multiplication.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           *
           Label : LEFT
             x
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
+            Label : ARGUMENT
+              1
             Label : NAME
               x
           Label : RIGHT

@@ -1,74 +1,67 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.90.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ->
+            Label : MEMBER
+              B
             Label : OBJECT
               $b
-            Label : PROPERTY
-              B
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               (
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
+              Label : ARGUMENT
+                $b
               Label : NAME
                 (
                 Label : CODE
                   ->
+                  Label : MEMBER
+                    B
                   Label : OBJECT
                     $b
-                  Label : PROPERTY
-                    B
-            Label : ELEMENT
+            Label : EXPRESSION
               (
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b2
+              Label : ARGUMENT
+                $b2
               Label : NAME
                 (
                 Label : CODE
                   ->
+                  Label : MEMBER
+                    B2
                   Label : OBJECT
                     $b2
-                  Label : PROPERTY
-                    B2
-            Label : ELEMENT
+            Label : EXPRESSION
               (
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b3
+              Label : ARGUMENT
+                $b3
               Label : NAME
                 (
                 Label : CODE
                   ->
+                  Label : MEMBER
+                    B3
                   Label : OBJECT
                     $b3
-                  Label : PROPERTY
-                    B3
-            Label : ELEMENT
+            Label : EXPRESSION
               [
               Label : INDEX
                 (
                 Label : CODE
                   ->
+                  Label : MEMBER
+                    B3
                   Label : OBJECT
                     $b3
-                  Label : PROPERTY
-                    B3
               Label : VARIABLE
                 $x

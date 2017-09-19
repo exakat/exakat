@@ -1,144 +1,131 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.56.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              *
-              Label : LEFT
-                (
-                Label : CODE
+          Label : ARGUMENT
+            *
+            Label : LEFT
+              (
+              Label : CODE
+                -
+                Label : LEFT
+                  $a
+                Label : RIGHT
                   -
                   Label : LEFT
-                    $a
+                    4
                   Label : RIGHT
-                    -
-                    Label : LEFT
-                      4
-                    Label : RIGHT
-                      $b
-              Label : RIGHT
-                $c
+                    $b
+            Label : RIGHT
+              $c
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              -
-              Label : LEFT
-                (
-                Label : CODE
+          Label : ARGUMENT
+            -
+            Label : LEFT
+              (
+              Label : CODE
+                -
+                Label : LEFT
+                  $a
+                Label : RIGHT
                   -
                   Label : LEFT
-                    $a
+                    4
                   Label : RIGHT
-                    -
-                    Label : LEFT
-                      4
-                    Label : RIGHT
-                      $b
-              Label : RIGHT
-                $c
+                    $b
+            Label : RIGHT
+              $c
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              **
-              Label : LEFT
-                (
-                Label : CODE
+          Label : ARGUMENT
+            **
+            Label : LEFT
+              (
+              Label : CODE
+                -
+                Label : LEFT
+                  $a
+                Label : RIGHT
                   -
                   Label : LEFT
-                    $a
+                    4
                   Label : RIGHT
-                    -
-                    Label : LEFT
-                      4
-                    Label : RIGHT
-                      $b
-              Label : RIGHT
-                $c
+                    $b
+            Label : RIGHT
+              $c
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              <<
-              Label : LEFT
-                (
-                Label : CODE
+          Label : ARGUMENT
+            <<
+            Label : LEFT
+              (
+              Label : CODE
+                -
+                Label : LEFT
+                  $a
+                Label : RIGHT
                   -
                   Label : LEFT
-                    $a
+                    4
                   Label : RIGHT
-                    -
-                    Label : LEFT
-                      4
-                    Label : RIGHT
-                      $b
-              Label : RIGHT
-                $c
+                    $b
+            Label : RIGHT
+              $c
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              &&
-              Label : LEFT
-                (
-                Label : CODE
+          Label : ARGUMENT
+            &&
+            Label : LEFT
+              (
+              Label : CODE
+                -
+                Label : LEFT
+                  $a
+                Label : RIGHT
                   -
                   Label : LEFT
-                    $a
+                    4
                   Label : RIGHT
-                    -
-                    Label : LEFT
-                      4
-                    Label : RIGHT
-                      $b
-              Label : RIGHT
-                $c
+                    $b
+            Label : RIGHT
+              $c
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              ?
-              Label : CONDITION
-                (
-                Label : CODE
+          Label : ARGUMENT
+            ?
+            Label : CONDITION
+              (
+              Label : CODE
+                -
+                Label : LEFT
+                  $a
+                Label : RIGHT
                   -
                   Label : LEFT
-                    $a
+                    4
                   Label : RIGHT
-                    -
-                    Label : LEFT
-                      4
-                    Label : RIGHT
-                      $b
-              Label : ELSE
-                2
-              Label : THEN
-                1
+                    $b
+            Label : ELSE
+              2
+            Label : THEN
+              1
           Label : NAME
             echo

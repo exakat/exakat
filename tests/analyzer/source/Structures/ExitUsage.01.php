@@ -12,4 +12,6 @@ exit();
 
 exit;
 
+$a->exit(3);
+
 ?>

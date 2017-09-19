@@ -1,17 +1,16 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Continue.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 !==
@@ -19,40 +18,34 @@ Label : PROJECT
                   0
                 Label : RIGHT
                   C
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      ->
-                      Label : METHOD
-                        D
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
-                        Label : NAME
-                          D
-                      Label : OBJECT
-                        $c
-                    Label : ARGUMENT
-                      'E'
                   Label : NAME
                     C
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      D
+                      Label : ARGUMENT
+                        Void
+                      Label : NAME
+                        D
+                    Label : OBJECT
+                      $c
+                  Label : ARGUMENT
+                    'E'
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   continue
                   Label : CONTINUE
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : SOURCE
             ->
             Label : METHOD
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 B
             Label : OBJECT

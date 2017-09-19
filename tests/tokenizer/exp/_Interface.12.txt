@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Interface.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : DEFINITION
             A
@@ -16,7 +15,7 @@ Label : PROJECT
             A
           Label : NAME
             A
-        Label : ELEMENT
+        Label : EXPRESSION
           interface
           Label : DEFINITION
             B
@@ -24,11 +23,11 @@ Label : PROJECT
             A
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : IMPLEMENTS
-            B
-          Label : IMPLEMENTS
             A
+          Label : IMPLEMENTS
+            B
           Label : NAME
             C

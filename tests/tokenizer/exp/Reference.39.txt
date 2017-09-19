@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.39.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &
@@ -16,21 +15,19 @@ Label : PROJECT
               ~
               Label : NOT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   B
             Label : RIGHT
               $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 C
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &
@@ -38,21 +35,19 @@ Label : PROJECT
               !
               Label : NOT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   B
             Label : RIGHT
               $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 C
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &
@@ -60,37 +55,33 @@ Label : PROJECT
               @
               Label : AT
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   B
             Label : RIGHT
               $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 C
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &
             Label : LEFT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 B
             Label : RIGHT
               $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 C

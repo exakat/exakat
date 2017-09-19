@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.26.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           |
           Label : LEFT
             $a
@@ -22,7 +21,7 @@ Label : PROJECT
                 1
             Label : RIGHT
               $d
-        Label : ELEMENT
+        Label : EXPRESSION
           |
           Label : LEFT
             $a
@@ -36,7 +35,7 @@ Label : PROJECT
                 1.2
             Label : RIGHT
               $d
-        Label : ELEMENT
+        Label : EXPRESSION
           |
           Label : LEFT
             $a

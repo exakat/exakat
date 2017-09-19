@@ -46,7 +46,6 @@ GREMLIN;
         // Relayed via variable to sensitive function
         // $a = $_GET['a']; f($a); function f($a) { exec($a);}
         $this->atomIs('Functioncall')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->_as('result')
@@ -58,17 +57,14 @@ GREMLIN;
              ->functionDefinition()
              ->inIs('NAME')
 
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
 
              ->savePropertyAs('code', 'varname')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
 
              ->outIs('BLOCK')
              ->atomInside('Functioncall')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->analyzerIs('Security/SensitiveArgument')
              ->outIsIE('CODE')
@@ -83,8 +79,7 @@ GREMLIN;
              ->codeIs($vars, true)
              ->analyzerIs('Security/SensitiveArgument')
              ->inIsIE('CODE')
-             ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS');
+             ->inIs('ARGUMENT');
         $this->prepareQuery();
 
         // $_GET/_POST array... inside a string is useless and safe (will print Array)

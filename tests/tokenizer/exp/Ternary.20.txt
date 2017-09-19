@@ -1,32 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              (
-              Label : CODE
+          Label : ARGUMENT
+            (
+            Label : CODE
+              ?
+              Label : CONDITION
+                true
+              Label : ELSE
                 ?
                 Label : CONDITION
-                  true
+                  false
                 Label : ELSE
-                  ?
-                  Label : CONDITION
-                    false
-                  Label : ELSE
-                    'f'
-                  Label : THEN
-                    't'
+                  'f'
                 Label : THEN
-                  'true'
+                  't'
+              Label : THEN
+                'true'
           Label : NAME
             echo

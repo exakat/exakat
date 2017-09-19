@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.32.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case "b" :  /**/  
               Label : CASE
                 "b"
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $c
@@ -26,41 +25,37 @@ Label : PROJECT
                     ->
                     Label : METHOD
                       e
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $f
+                      Label : ARGUMENT
+                        $f
                       Label : NAME
                         e
                     Label : OBJECT
                       $d
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     $g
                   Label : THEN
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       return
                       Label : RETURN
                         $h
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     list
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                      Label : ARGUMENT
-                        $i
-                      Label : ARGUMENT
-                        $j
+                    Label : ARGUMENT
+                      Void
+                    Label : ARGUMENT
+                      $i
+                    Label : ARGUMENT
+                      $j
                     Label : NAME
                       list
                   Label : RIGHT
                     $k
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ==
@@ -70,13 +65,13 @@ Label : PROJECT
                       "%"
                   Label : THEN
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $m
                       Label : RIGHT
                         "n"
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $o
@@ -84,55 +79,49 @@ Label : PROJECT
                     ?
                     Label : CONDITION
                       isset
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            $r
-                          Label : VARIABLE
-                            ->
-                            Label : OBJECT
-                              $p
-                            Label : PROPERTY
-                              q
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          $r
+                        Label : VARIABLE
+                          ->
+                          Label : MEMBER
+                            q
+                          Label : OBJECT
+                            $p
                       Label : NAME
                         isset
                     Label : ELSE
                       array
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $v
-                        Label : ARGUMENT
-                          .
-                          Label : CONCAT
-                            'w'
-                          Label : CONCAT
-                            $x
+                      Label : ARGUMENT
+                        $v
+                      Label : ARGUMENT
+                        .
+                        Label : CONCAT
+                          'w'
+                        Label : CONCAT
+                          $x
                     Label : THEN
                       [
                       Label : INDEX
                         $u
                       Label : VARIABLE
                         ->
+                        Label : MEMBER
+                          t
                         Label : OBJECT
                           $s
-                        Label : PROPERTY
-                          t
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     is_callable
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $y
+                    Label : ARGUMENT
+                      $y
                     Label : NAME
                       is_callable
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
           Label : NAME
             $a

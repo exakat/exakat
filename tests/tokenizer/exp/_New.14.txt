@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_New.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           new
           Label : NEW
             {
@@ -18,22 +17,20 @@ Label : PROJECT
               [
               Label : INDEX
                 d
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      3
-                    Label : VARIABLE
-                      $x
-                  Label : ARGUMENT
-                    ->
-                    Label : OBJECT
-                      $y
-                    Label : PROPERTY
-                      d
                 Label : NAME
                   d
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    3
+                  Label : VARIABLE
+                    $x
+                Label : ARGUMENT
+                  ->
+                  Label : MEMBER
+                    d
+                  Label : OBJECT
+                    $y
               Label : VARIABLE
                 [
                 Label : INDEX

@@ -47,7 +47,6 @@ class CourrierAntiPattern extends Analyzer {
              ->outIs('BLOCK')
              ->atomInside('New')
              ->outIs('NEW')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Member')
              ->outIs('MEMBER')

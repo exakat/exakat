@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.66.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : EXTENDS
             B
@@ -18,7 +17,7 @@ Label : PROJECT
             D
           Label : NAME
             A1
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : EXTENDS
             B
@@ -30,24 +29,24 @@ Label : PROJECT
             E
           Label : NAME
             A2
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : IMPLEMENTS
-            C
-          Label : IMPLEMENTS
             D
+          Label : IMPLEMENTS
+            C
           Label : IMPLEMENTS
             E
           Label : IMPLEMENTS
             F
           Label : NAME
             A3
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : IMPLEMENTS
-            \C
-          Label : IMPLEMENTS
             \D
+          Label : IMPLEMENTS
+            \C
           Label : IMPLEMENTS
             \E
           Label : IMPLEMENTS

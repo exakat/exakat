@@ -29,7 +29,6 @@ class ConstantFullyQualified extends Analyzer {
     public function analyze() {
         // define('\\full\\namespace\\path', 'value');
         $this->atomFunctionIs('\\define')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
              ->regexIs('noDelimiter', '^(\\\\\\\\)')

@@ -31,14 +31,12 @@ class SetExceptionHandlerPHP7 extends Analyzer {
     public function analyze() {
         // With function name in a string
         $this->atomFunctionIs('\set_exception_handler')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
              ->regexIsNot('noDelimiter', '::')
              ->analyzerIs('Functions/MarkCallable')
              ->functionDefinition()
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIsNot('\\throwable')
@@ -47,7 +45,6 @@ class SetExceptionHandlerPHP7 extends Analyzer {
 
         // With class::method name in a string
         $this->atomFunctionIs('\set_exception_handler')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
@@ -60,7 +57,6 @@ class SetExceptionHandlerPHP7 extends Analyzer {
              ->outIs('NAME')
              ->samePropertyAs('code', 'methode')
              ->inIs('NAME')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIsNot('\\throwable')
@@ -71,10 +67,8 @@ class SetExceptionHandlerPHP7 extends Analyzer {
 
         // With closure
         $this->atomFunctionIs('\set_exception_handler')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Closure')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIsNot('\\throwable')
@@ -83,10 +77,8 @@ class SetExceptionHandlerPHP7 extends Analyzer {
 
         // With array (class + method)
         $this->atomFunctionIs('\set_exception_handler')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->AtomIs('Arrayliteral')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('String')
              ->hasNoOut('CONCAT')
@@ -99,7 +91,6 @@ class SetExceptionHandlerPHP7 extends Analyzer {
              ->outIs('NAME')
              ->samePropertyAs('code', 'methode')
              ->inIs('NAME')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIsNot('\\throwable')

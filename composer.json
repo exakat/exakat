@@ -24,10 +24,14 @@
         "ext-sqlite3": "*",
         "ext-curl": "*",
         "ext-mbstring": "*",
-        "guiguiboy/php-cli-progress-bar":"dev-master@dev"
+        "guiguiboy/php-cli-progress-bar":"dev-master@dev",
+        "friendsofphp/php-cs-fixer": "*",
+        "brightzone/gremlin-php": "2.*"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.7.1",
-        "phpunit/phpunit": "^5.7.9"
+        "phpunit/phpunit": "^5.7.9",
+        "jakub-onderka/php-parallel-lint": "^0.9.2",
+        "etsy/phan": "^0.9.1"
     }
 }

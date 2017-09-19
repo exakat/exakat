@@ -28,10 +28,8 @@ class GettingLastElement extends Analyzer {
     public function analyze() {
         // current(array_slice($a, -1));
         $this->atomFunctionIs('\\current')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->functioncallIs('\\array_slice')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->codeIs('-1')
              ->back('first');
@@ -44,7 +42,6 @@ class GettingLastElement extends Analyzer {
              ->back('first')
              ->outIs('VARIABLE')
              ->functioncallIs(array('\\array_slice', '\\array_reverse'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->codeIs('-1')
              ->back('first');
@@ -64,7 +61,6 @@ class GettingLastElement extends Analyzer {
         $this->atomIs('Assignation')
              ->outIs('RIGHT')
              ->atomFunctionIs('\\array_pop')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->savePropertyAs('code', 'var')
              ->back('first')

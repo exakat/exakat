@@ -1,22 +1,19 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Parenthesis.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 (
@@ -26,41 +23,35 @@ Label : PROJECT
                     (
                     Label : CODE
                       ->
+                      Label : MEMBER
+                        b
                       Label : OBJECT
                         $a
-                      Label : PROPERTY
-                        b
                   Label : ELSE
                     f
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       f
                   Label : THEN
                     c
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $d
-                        Label : PROPERTY
-                          e
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        e
+                      Label : OBJECT
+                        $d
                     Label : NAME
                       c
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           b
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 (
@@ -76,35 +67,29 @@ Label : PROJECT
                         b
                   Label : ELSE
                     f
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       f
                   Label : THEN
                     c
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $d
-                        Label : PROPERTY
-                          e
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        e
+                      Label : OBJECT
+                        $d
                     Label : NAME
                       c
           Label : NAME
             b
-        Label : ELEMENT
+        Label : EXPRESSION
           c
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 (
@@ -116,65 +101,55 @@ Label : PROJECT
                       ::
                       Label : CLASS
                         a
-                      Label : PROPERTY
+                      Label : MEMBER
                         $b
                   Label : ELSE
                     f
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       f
                   Label : THEN
                     c
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $d
-                        Label : PROPERTY
-                          e
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        e
+                      Label : OBJECT
+                        $d
                     Label : NAME
                       c
           Label : DEFINITION
             c
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  e
+            Label : ARGUMENT
+              ->
+              Label : MEMBER
+                e
+              Label : OBJECT
+                $d
             Label : NAME
               c
           Label : DEFINITION
             c
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  e
+            Label : ARGUMENT
+              ->
+              Label : MEMBER
+                e
+              Label : OBJECT
+                $d
             Label : NAME
               c
           Label : DEFINITION
             c
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $d
-                Label : PROPERTY
-                  e
+            Label : ARGUMENT
+              ->
+              Label : MEMBER
+                e
+              Label : OBJECT
+                $d
             Label : NAME
               c
           Label : NAME
             c
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

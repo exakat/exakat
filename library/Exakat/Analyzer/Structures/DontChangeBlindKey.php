@@ -33,14 +33,15 @@ class DontChangeBlindKey extends Analyzer {
         $this->atomIs('Foreach')
              ->outIs('VALUE')
              ->outIsIE(array('INDEX', 'VALUE'))
-             ->is('reference', false)
-             ->savePropertyAs('fullcode', 'blind')
+             ->isNot('reference', true) // That won't happen to INDEX, but may to VALUE
+             ->savePropertyAs('fullcode', 'blind') // use fullcode to handle arrays or properties
              ->back('first')
              ->outIs('BLOCK')
              ->atomInside('Variable')
              ->samePropertyAs('fullcode', 'blind')
              ->analyzerIs('Variables/IsModified')
-             ->back('first');
+             ->back('first')
+             ;
         $this->prepareQuery();
     }
 }

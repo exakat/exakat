@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Try.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           try
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
@@ -20,37 +19,33 @@ Label : PROJECT
                 new
                 Label : NEW
                   \B
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      new
-                      Label : NEW
-                        \C
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $b
-                          Label : ARGUMENT
-                            ::
-                            Label : CLASS
-                              \D
-                            Label : CONSTANT
-                              E
-                        Label : NAME
-                          \C
-                    Label : ARGUMENT
-                      ::
-                      Label : CLASS
-                        \B
-                      Label : CONSTANT
-                        G
                   Label : NAME
                     \B
-            Label : ELEMENT
+                  Label : ARGUMENT
+                    new
+                    Label : NEW
+                      \C
+                      Label : NAME
+                        \C
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        ::
+                        Label : CLASS
+                          \D
+                        Label : CONSTANT
+                          E
+                  Label : ARGUMENT
+                    ::
+                    Label : CLASS
+                      \B
+                    Label : CONSTANT
+                      G
+            Label : EXPRESSION
               foreach
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ==
@@ -58,10 +53,8 @@ Label : PROJECT
                       ->
                       Label : METHOD
                         H
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            Void
+                        Label : ARGUMENT
+                          Void
                         Label : NAME
                           H
                       Label : OBJECT
@@ -70,20 +63,18 @@ Label : PROJECT
                       'I'
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       continue
                       Label : CONTINUE
                         Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   ?
                   Label : CONDITION
                     ->
                     Label : METHOD
                       J
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         J
                     Label : OBJECT
@@ -92,40 +83,32 @@ Label : PROJECT
                     @
                     Label : AT
                       M
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          ->
-                          Label : METHOD
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          L
+                          Label : ARGUMENT
+                            Void
+                          Label : NAME
                             L
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
-                            Label : NAME
-                              L
-                          Label : OBJECT
-                            $c
+                        Label : OBJECT
+                          $c
                       Label : NAME
                         M
                   Label : THEN
                     @
                     Label : AT
                       K
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          ->
-                          Label : METHOD
+                      Label : ARGUMENT
+                        ->
+                        Label : METHOD
+                          L
+                          Label : ARGUMENT
+                            Void
+                          Label : NAME
                             L
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                Void
-                            Label : NAME
-                              L
-                          Label : OBJECT
-                            $c
+                        Label : OBJECT
+                          $c
                       Label : NAME
                         K
               Label : SOURCE
@@ -136,27 +119,25 @@ Label : PROJECT
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : CLASS
               \O
             Label : VARIABLE
               $d
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $e
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               @
               Label : AT
                 M
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $b
+                Label : ARGUMENT
+                  $b
                 Label : NAME
                   M

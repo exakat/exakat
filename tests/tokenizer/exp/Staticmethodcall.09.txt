@@ -1,21 +1,18 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticmethodcall.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             d
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               d
           Label : OBJECT
@@ -26,5 +23,5 @@ Label : PROJECT
               ::
               Label : CLASS
                 self
-              Label : PROPERTY
+              Label : MEMBER
                 $a

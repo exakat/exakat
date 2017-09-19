@@ -40,6 +40,7 @@ class UncaughtExceptions extends Analyzer {
              ->atomIs('New')
              ->outIs('NEW')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
+             ->has('fullnspath')
              ->fullnspathIsNot($caught)
              ->back('first');
         $this->prepareQuery();

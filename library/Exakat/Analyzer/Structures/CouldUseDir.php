@@ -27,7 +27,6 @@ use Exakat\Analyzer\Analyzer;
 class CouldUseDir extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\dirname')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Magicconstant')
              ->codeIs('__FILE__')

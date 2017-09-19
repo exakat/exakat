@@ -1,22 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Return.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             ->
+            Label : MEMBER
+              x
             Label : OBJECT
               $this
-            Label : PROPERTY
-              x
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             ::
@@ -24,25 +23,23 @@ Label : PROJECT
               a
             Label : CONSTANT
               y
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             ::
             Label : CLASS
               b
-            Label : PROPERTY
+            Label : MEMBER
               $y
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $x
-              Label : ARGUMENT
-                $y
-              Label : ARGUMENT
-                $z
+            Label : ARGUMENT
+              $x
+            Label : ARGUMENT
+              $y
+            Label : ARGUMENT
+              $z
             Label : NAME
               f

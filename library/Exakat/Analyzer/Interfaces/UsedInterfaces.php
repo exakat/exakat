@@ -30,7 +30,7 @@ class UsedInterfaces extends Analyzer {
         // interface used in a class definition
         $classes = $this->query('g.V().hasLabel("Class", "Interface").out("IMPLEMENTS", "EXTENDS").values("fullnspath").unique()');
         $instanceof = $this->query('g.V().hasLabel("Instanceof").out("CLASS").values("fullnspath").unique()');
-        $typehints = $this->query('g.V().hasLabel("Function").out("ARGUMENTS").out("ARGUMENT").out("TYPEHINT").values("fullnspath").unique()');
+        $typehints = $this->query('g.V().hasLabel("Function").out("ARGUMENT").out("TYPEHINT").values("fullnspath").unique()');
 
         $all = array_merge($classes, $instanceof, $typehints);
 

@@ -1,79 +1,70 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.33.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'b' :  /**/  
               Label : CASE
                 'b'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     !
                     Label : NOT
                       ->
+                      Label : MEMBER
+                        d
                       Label : OBJECT
                         $c
-                      Label : PROPERTY
-                        d
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       exit
-                      Label : ARGUMENTS
+                      Label : ARGUMENT
                         Void
-                        Label : ARGUMENT
-                          Void
                       Label : NAME
                         exit
-                Label : ELEMENT
+                Label : EXPRESSION
                   e
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'f'
-                    Label : ARGUMENT
-                      round
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          /
-                          Label : LEFT
-                            [
-                            Label : INDEX
-                              'h'
-                            Label : VARIABLE
-                              $g
-                          Label : RIGHT
-                            /
-                            Label : LEFT
-                              2
-                            Label : RIGHT
-                              3
-                        Label : ARGUMENT
-                          4
-                      Label : NAME
-                        round
                   Label : NAME
                     e
-                Label : ELEMENT
-                  exit
-                  Label : ARGUMENTS
-                    Void
+                  Label : ARGUMENT
+                    'f'
+                  Label : ARGUMENT
+                    round
+                    Label : NAME
+                      round
                     Label : ARGUMENT
-                      Void
+                      /
+                      Label : LEFT
+                        [
+                        Label : INDEX
+                          'h'
+                        Label : VARIABLE
+                          $g
+                      Label : RIGHT
+                        /
+                        Label : LEFT
+                          2
+                        Label : RIGHT
+                          3
+                    Label : ARGUMENT
+                      4
+                Label : EXPRESSION
+                  exit
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     exit
           Label : NAME

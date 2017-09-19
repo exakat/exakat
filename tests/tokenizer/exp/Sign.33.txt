@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.33.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,68 +15,66 @@ Label : PROJECT
             ->
             Label : METHOD
               c
-              Label : ARGUMENTS
+              Label : ARGUMENT
                 (
-                Label : ARGUMENT
-                  (
-                  Label : CODE
-                    /
-                    Label : LEFT
-                      (
-                      Label : CODE
+                Label : CODE
+                  /
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      -
+                      Label : LEFT
+                        $d
+                      Label : RIGHT
+                        $e
+                  Label : RIGHT
+                    $f
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  /
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      -
+                      Label : LEFT
+                        $g
+                      Label : RIGHT
+                        $h
+                  Label : RIGHT
+                    $i
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  /
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      -
+                      Label : SIGN
                         -
                         Label : LEFT
-                          $d
+                          $j
                         Label : RIGHT
-                          $e
-                    Label : RIGHT
-                      $f
-                Label : ARGUMENT
-                  (
-                  Label : CODE
-                    /
-                    Label : LEFT
-                      (
-                      Label : CODE
+                          $k
+                  Label : RIGHT
+                    $l
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  /
+                  Label : LEFT
+                    (
+                    Label : CODE
+                      -
+                      Label : SIGN
                         -
                         Label : LEFT
-                          $g
+                          $m
                         Label : RIGHT
-                          $h
-                    Label : RIGHT
-                      $i
-                Label : ARGUMENT
-                  (
-                  Label : CODE
-                    /
-                    Label : LEFT
-                      (
-                      Label : CODE
-                        -
-                        Label : SIGN
-                          -
-                          Label : LEFT
-                            $j
-                          Label : RIGHT
-                            $k
-                    Label : RIGHT
-                      $l
-                Label : ARGUMENT
-                  (
-                  Label : CODE
-                    /
-                    Label : LEFT
-                      (
-                      Label : CODE
-                        -
-                        Label : SIGN
-                          -
-                          Label : LEFT
-                            $m
-                          Label : RIGHT
-                            $n
-                    Label : RIGHT
-                      $o
+                          $n
+                  Label : RIGHT
+                    $o
               Label : NAME
                 c
             Label : OBJECT

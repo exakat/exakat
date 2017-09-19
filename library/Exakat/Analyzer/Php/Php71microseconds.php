@@ -41,7 +41,6 @@ class Php71microseconds extends Analyzer {
              ->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs('format')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('String')
              ->regexIs('noDelimiter', 'u')

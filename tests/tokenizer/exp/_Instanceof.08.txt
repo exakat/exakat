@@ -1,103 +1,88 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Instanceof.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : METHOD
+            Label : ARGUMENT
+              ->
+              Label : METHOD
+                C
+                Label : ARGUMENT
+                  Void
+                Label : NAME
                   C
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    C
-                Label : OBJECT
-                  $a
+              Label : OBJECT
+                $a
             Label : NAME
               B
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    D
-                  Label : METHOD
-                    E
-                    Label : ARGUMENTS
-                      (
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  D
+                Label : METHOD
+                  E
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      F
                       Label : ARGUMENT
-                        ->
-                        Label : METHOD
-                          F
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            F
-                        Label : OBJECT
-                          $b
+                        Void
+                      Label : NAME
+                        F
+                    Label : OBJECT
+                      $b
+                  Label : ARGUMENT
+                    ->
+                    Label : METHOD
+                      G
                       Label : ARGUMENT
-                        ->
-                        Label : METHOD
-                          G
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            G
-                        Label : OBJECT
-                          $c
-                      Label : ARGUMENT
-                        0
-                      Label : ARGUMENT
-                        ?
-                        Label : CONDITION
-                          &&
-                          Label : LEFT
-                            instanceof
-                            Label : CLASS
-                              \H
-                            Label : VARIABLE
-                              $d
-                          Label : RIGHT
-                            isset
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                ->
-                                Label : OBJECT
-                                  $e
-                                Label : PROPERTY
-                                  I
-                            Label : NAME
-                              isset
-                        Label : ELSE
-                          NULL
-                        Label : THEN
+                        Void
+                      Label : NAME
+                        G
+                    Label : OBJECT
+                      $c
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    ?
+                    Label : CONDITION
+                      &&
+                      Label : LEFT
+                        instanceof
+                        Label : CLASS
+                          \H
+                        Label : VARIABLE
+                          $d
+                      Label : RIGHT
+                        isset
+                        Label : ARGUMENT
                           ->
+                          Label : MEMBER
+                            I
                           Label : OBJECT
-                            $f
-                          Label : PROPERTY
-                            J
-                    Label : NAME
-                      E
+                            $e
+                        Label : NAME
+                          isset
+                    Label : ELSE
+                      NULL
+                    Label : THEN
+                      ->
+                      Label : MEMBER
+                        J
+                      Label : OBJECT
+                        $f
+                  Label : NAME
+                    E
               Label : NAME
                 echo

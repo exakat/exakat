@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Multiplication.35.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $b
@@ -20,13 +19,11 @@ Label : PROJECT
                 B
             Label : RIGHT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $c
@@ -38,13 +35,11 @@ Label : PROJECT
                 D
             Label : RIGHT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 C
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d
@@ -56,9 +51,7 @@ Label : PROJECT
                 E
             Label : RIGHT
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 C

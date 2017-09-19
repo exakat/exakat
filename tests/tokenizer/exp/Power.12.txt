@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Power.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ?
           Label : CONDITION
             **
@@ -20,7 +19,7 @@ Label : PROJECT
             3
           Label : THEN
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           ?
           Label : CONDITION
             $y
@@ -38,7 +37,7 @@ Label : PROJECT
               2
           Label : THEN
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           ?
           Label : CONDITION
             $y

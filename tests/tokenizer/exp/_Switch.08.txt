@@ -1,74 +1,73 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               switch
               Label : CASES
                  /**/ 
-                Label : ELEMENT
+                Label : EXPRESSION
                   case 'A' :  /**/  
                   Label : CASE
                     'A'
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $b
                       Label : RIGHT
                         $c
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       break
                       Label : BREAK
                         Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   case 'B' :  /**/  
                   Label : CASE
                     'B'
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $b
                       Label : RIGHT
                         $d
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       break
                       Label : BREAK
                         1
-                Label : ELEMENT
+                Label : EXPRESSION
                   case 'C' :  /**/  
                   Label : CASE
                     'C'
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $b
                       Label : RIGHT
                         $d
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       break
                       Label : BREAK
                         2
-                Label : ELEMENT
+                Label : EXPRESSION
                   default
                   Label : CODE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $b
@@ -76,7 +75,7 @@ Label : PROJECT
                         @
                         Label : AT
                           $e
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       break
                       Label : BREAK
                         Void

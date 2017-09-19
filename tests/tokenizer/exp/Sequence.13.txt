@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             x
@@ -90,12 +89,10 @@ Label : PROJECT
                 $h
               Label : RIGHT
                 array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  2
             Label : VAR
               var
           Label : PPP

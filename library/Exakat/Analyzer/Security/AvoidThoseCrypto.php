@@ -30,7 +30,6 @@ class AvoidThoseCrypto extends Analyzer {
     public function analyze() {
         // in hashing functions
         $this->atomFunctionIs(HashAlgos::$functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')

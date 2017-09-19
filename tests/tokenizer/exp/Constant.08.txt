@@ -1,20 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Constant.08.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           chdir
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              __DIR__
-            Label : ARGUMENT
-              __FILE__
           Label : NAME
             chdir
+          Label : ARGUMENT
+            __DIR__
+          Label : ARGUMENT
+            __FILE__

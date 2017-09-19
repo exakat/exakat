@@ -1,29 +1,26 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Rawstring.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               A
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  $location
+              Label : ARGUMENT
+                $location
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

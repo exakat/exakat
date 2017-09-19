@@ -1,44 +1,37 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/String.20.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foo
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  __METHOD__
+              Label : ARGUMENT
+                __METHOD__
               Label : NAME
                 echo
           Label : DEFINITION
             'foo'
           Label : NAME
             foo
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             'foo'
-        Label : ELEMENT
+        Label : EXPRESSION
           $x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : NAME
             $x

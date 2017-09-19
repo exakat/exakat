@@ -1,114 +1,101 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.92.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-              Label : DEFAULT
-                null
+          Label : ARGUMENT
+            $a
+            Label : DEFAULT
+              null
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 C
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   D
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'E'
-                    Label : ARGUMENT
-                      __METHOD__
                   Label : NAME
                     D
-            Label : ELEMENT
+                  Label : ARGUMENT
+                    'E'
+                  Label : ARGUMENT
+                    __METHOD__
+            Label : EXPRESSION
               if
               Label : CONDITION
                 F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $a
+                Label : ARGUMENT
+                  $a
                 Label : NAME
                   F
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   switch
                   Label : CASES
                      /**/ 
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       case 'H' :  /**/  
                       Label : CASE
                         'H'
                       Label : CODE
                         ;
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           =
                           Label : LEFT
                             $a
                           Label : RIGHT
                             I
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                'J'
+                            Label : ARGUMENT
+                              'J'
                             Label : NAME
                               I
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           break
                           Label : BREAK
                             Void
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       case 'K' :  /**/  
                       Label : CASE
                         'K'
                       Label : CODE
                         ;
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           =
                           Label : LEFT
                             $a
                           Label : RIGHT
                             L
-                            Label : ARGUMENTS
-                              (
+                            Label : ARGUMENT
+                              M
                               Label : ARGUMENT
+                                ->
+                                Label : MEMBER
+                                  N
+                                Label : OBJECT
+                                  $this
+                              Label : NAME
                                 M
-                                Label : ARGUMENTS
-                                  (
-                                  Label : ARGUMENT
-                                    ->
-                                    Label : OBJECT
-                                      $this
-                                    Label : PROPERTY
-                                      N
-                                Label : NAME
-                                  M
                             Label : NAME
                               L
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           break
                           Label : BREAK
                             Void
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       default
                       Label : CODE
                         ;
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           =
                           Label : LEFT
                             $a
@@ -118,27 +105,23 @@ Label : PROJECT
                     ->
                     Label : METHOD
                       G
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         G
                     Label : OBJECT
                       $this
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 P
               Label : METHOD
                 B
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $a
+                Label : ARGUMENT
+                  $a
                 Label : NAME
                   B
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

@@ -88,7 +88,7 @@ class IsRead extends Analyzer {
         // Variable that are not a reference in a functioncall
         $this->atomIs($atoms)
              ->hasIn('ARGUMENT')
-             ->raw('where( __.in("ARGUMENT").in("ARGUMENTS").hasLabel("Function").count().is(eq(0)) )')
+             ->raw('where( __.in("ARGUMENT").hasLabel("Function").count().is(eq(0)) )')
              ->analyzerIsNot('Variables/IsRead');
         $this->prepareQuery();
 
@@ -100,7 +100,6 @@ class IsRead extends Analyzer {
              ->hasIn('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->atomIs('Functioncall')
              ->codeIs('self')
              ->hasIn('NEW')
@@ -111,7 +110,6 @@ class IsRead extends Analyzer {
              ->outIs('NAME')
              ->analyzerIs('Classes/Constructor')
              ->back('method')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
              ->isNot('reference', self::CASE_SENSITIVE)
@@ -123,7 +121,6 @@ class IsRead extends Analyzer {
              ->hasIn('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->atomIs('Functioncall')
              ->codeIs('self')
              ->hasIn('NEW')
@@ -134,7 +131,6 @@ class IsRead extends Analyzer {
              ->outIs('NAME')
              ->analyzerIs('Classes/Constructor')
              ->back('method')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank', self::CASE_SENSITIVE)
              ->isNot('reference', self::CASE_SENSITIVE)

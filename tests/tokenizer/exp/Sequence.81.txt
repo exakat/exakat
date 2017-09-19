@@ -1,24 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.81.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $c
-              Label : TYPEHINT
-                b
+          Label : ARGUMENT
+            $c
+            Label : TYPEHINT
+              b
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ==
@@ -30,17 +27,15 @@ Label : PROJECT
                     d
                   Label : METHOD
                     e
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $f
+                    Label : ARGUMENT
+                      $f
                     Label : NAME
                       e
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   false
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

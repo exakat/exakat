@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.27.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
@@ -15,11 +14,11 @@ Label : PROJECT
               $a
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $b
-        Label : ELEMENT
+        Label : EXPRESSION
           ?
           Label : CONDITION
             (
@@ -27,33 +26,29 @@ Label : PROJECT
               $a
           Label : ELSE
             f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $g
-                Label : PROPERTY
-                  h
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $i
-                Label : PROPERTY
-                  j
             Label : NAME
               f
+            Label : ARGUMENT
+              ->
+              Label : MEMBER
+                h
+              Label : OBJECT
+                $g
+            Label : ARGUMENT
+              ->
+              Label : MEMBER
+                j
+              Label : OBJECT
+                $i
           Label : THEN
             b
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                ->
-                Label : OBJECT
-                  $c
-                Label : PROPERTY
-                  d
-              Label : ARGUMENT
-                $e
             Label : NAME
               b
+            Label : ARGUMENT
+              ->
+              Label : MEMBER
+                d
+              Label : OBJECT
+                $c
+            Label : ARGUMENT
+              $e

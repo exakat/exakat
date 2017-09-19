@@ -72,6 +72,25 @@ class Project extends Tasks {
             unlink($log);
         }
 
+        display("Search for external libraries".PHP_EOL);
+        if (file_exists($this->config->projects_root.'/projects/'.$project.'/config.cache')) {
+            unlink($this->config->projects_root.'/projects/'.$project.'/config.cache');
+        }
+        $args = array ( 1 => 'findextlib',
+                        2 => '-p',
+                        3 => $this->config->project,
+                        4 => '-u',
+                        );
+
+        $configThema = new Config($args);
+
+        $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
+        $analyze->run();
+
+        $this->addSnitch(array('step'   => 'External lib',
+                              'project' => $this->config->project));
+        unset($analyze);
+
         $this->logTime('Start');
         $this->addSnitch(array('step'    => 'Start',
                                'project' => $this->config->project));
@@ -86,6 +105,24 @@ class Project extends Tasks {
                                                'php_version'    => $this->config->phpversion
                                          ));
 
+        if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
+            $info = array();
+            $info['vcs_type'] = 'git';
+            
+            $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
+            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
+            $info['vcs_url'] = $r[1];
+
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
+            $info['vcs_branch'] = trim($res, " *\n");
+
+            $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD');
+            $info['vcs_revision'] = trim($res);
+        } else {
+            $info['vcs_type'] = 'Downloaded archive';
+        }
+        $this->datastore->addRow('hash', $info);
+
         display("Running project '$project'".PHP_EOL);
         display("Running the following analysis : ".implode(', ', $this->config->project_themes));
         display("Producing the following reports : ".implode(', ', $this->reports));
@@ -97,23 +134,6 @@ class Project extends Tasks {
         $this->logTime('CleanDb');
         $this->addSnitch(array('step'    => 'Clean DB',
                                'project' => $this->config->project));
-
-        display("Search for external libraries".PHP_EOL);
-        $args = array ( 1 => 'findextlib',
-                        2 => '-p',
-                        3 => $this->config->project,
-                        4 => '-u',
-                        );
-
-        $configThema = new Config($args);
-
-        $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
-        $analyze->run();
-
-        $this->addSnitch(array('step'   => 'External lib',
-                              'project' => $this->config->project));
-
-        unset($analyze);
 
         display("Running files".PHP_EOL);
         $analyze = new Files($this->gremlin, $this->config, Tasks::IS_SUBTASK);
@@ -219,7 +239,7 @@ class Project extends Tasks {
         }
 
         try {
-            $analyzeConfig = Config($args);
+            $analyzeConfig = new Config($args);
 
             $analyze = new Analyze($this->gremlin, $analyzeConfig, Tasks::IS_SUBTASK);
             $analyze->run();
@@ -240,10 +260,18 @@ class Project extends Tasks {
             $audit_end = time();
             $query = "g.V().count()";
             $res = $this->gremlin->query($query);
-            $nodes = $res->results[0];
+            if (is_object($res)) {
+                $nodes = $res->results[0];
+            } else {
+                $nodes = $res[0];
+            }
             $query = "g.E().count()";
             $res = $this->gremlin->query($query);
-            $links = $res->results[0];
+            if (is_object($res)) {
+                $links = $res->results[0];
+            } else {
+                $links = $res[0];
+            }
 
             $this->datastore->addRow('hash', array('audit_end'    => $audit_end,
                                                    'audit_length' => $audit_end - $audit_start,

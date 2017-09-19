@@ -38,7 +38,7 @@ class AvoidOptionalProperties extends Analyzer {
              ->back('first');
         $this->prepareQuery();
 
-        // if (empty($this->a)) 
+        // if (empty($this->a))
         $this->atomIs('Member')
              ->outIs('OBJECT')
              ->codeIs('$this')
@@ -47,7 +47,6 @@ class AvoidOptionalProperties extends Analyzer {
              ->savePropertyAs('code', 'name')
              ->back('first')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->functioncallIs(array('\\empty', '\\isset', '\\is_null'))
              ->_as('results')
              ->goToClass()
@@ -82,7 +81,6 @@ class AvoidOptionalProperties extends Analyzer {
 
         $this->atomIs('Method')
              ->analyzerIs('Classes/Constructor')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->hasOut('TYPEHINT')
              ->outIs('RIGHT')

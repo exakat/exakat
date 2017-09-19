@@ -33,7 +33,6 @@ class UseSystemTmp extends Analyzer {
 
         // string literal fopen('a', 'r');
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_CONSTANT_ENCAPSED_STRING')
@@ -44,7 +43,6 @@ class UseSystemTmp extends Analyzer {
         // string literal fopen("a$b", 'r');
         // may need some regex to exclude http...
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->is('constant', true)
@@ -58,7 +56,6 @@ class UseSystemTmp extends Analyzer {
         // string literal fopen('a'.$b, 'r');
         // may need some regex to exclude http...
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->is('constant', true)

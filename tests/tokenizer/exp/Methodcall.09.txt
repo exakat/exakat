@@ -1,31 +1,26 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Methodcall.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             a
-            Label : ARGUMENTS
-              (
+            Label : ARGUMENT
+              require
               Label : ARGUMENT
-                require
-                Label : ARGUMENTS
+                .
+                Label : CONCAT
+                  __DIR__
+                Label : CONCAT
                   '/b.php'
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      __DIR__
-                    Label : CONCAT
-                      '/b.php'
-                Label : NAME
-                  require
+              Label : NAME
+                require
             Label : NAME
               a
           Label : OBJECT

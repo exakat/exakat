@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Label.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case @B :  /**/  
               Label : CASE
                 @
@@ -20,37 +19,35 @@ Label : PROJECT
                   B
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     ->
+                    Label : MEMBER
+                      C
                     Label : OBJECT
                       $this
-                    Label : PROPERTY
-                      C
                   Label : RIGHT
                     D
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     ->
+                    Label : MEMBER
+                      E
                     Label : OBJECT
                       $this
-                    Label : PROPERTY
-                      E
                   Label : RIGHT
                     ->
                     Label : METHOD
                       F
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'G'
+                      Label : ARGUMENT
+                        'G'
                       Label : NAME
                         F
                     Label : OBJECT
                       $this
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void

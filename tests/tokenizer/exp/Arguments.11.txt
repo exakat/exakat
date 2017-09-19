@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -20,22 +19,20 @@ Label : PROJECT
                 !
                 Label : NOT
                   in_array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'd'
-                      Label : VARIABLE
-                        ->
-                        Label : OBJECT
-                          $b
-                        Label : PROPERTY
-                          c
-                    Label : ARGUMENT
-                      $e
                   Label : NAME
                     in_array
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'd'
+                    Label : VARIABLE
+                      ->
+                      Label : MEMBER
+                        c
+                      Label : OBJECT
+                        $b
+                  Label : ARGUMENT
+                    $e
               Label : RIGHT
                 (
                 Label : CODE
@@ -44,46 +41,42 @@ Label : PROJECT
                     !
                     Label : NOT
                       preg_match
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          '/^\w+$/'
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'h'
-                          Label : VARIABLE
-                            ->
-                            Label : OBJECT
-                              $f
-                            Label : PROPERTY
-                              g
                       Label : NAME
                         preg_match
+                      Label : ARGUMENT
+                        '/^\w+$/'
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'h'
+                        Label : VARIABLE
+                          ->
+                          Label : MEMBER
+                            g
+                          Label : OBJECT
+                            $f
                   Label : RIGHT
                     !
                     Label : NOT
                       file_exists
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          .
-                          Label : CONCAT
-                            I
-                          Label : CONCAT
-                            'j'
-                          Label : CONCAT
-                            [
-                            Label : INDEX
-                              'm'
-                            Label : VARIABLE
-                              ->
-                              Label : OBJECT
-                                $k
-                              Label : PROPERTY
-                                l
-                          Label : CONCAT
-                            'n'
+                      Label : ARGUMENT
+                        .
+                        Label : CONCAT
+                          I
+                        Label : CONCAT
+                          'j'
+                        Label : CONCAT
+                          [
+                          Label : INDEX
+                            'm'
+                          Label : VARIABLE
+                            ->
+                            Label : MEMBER
+                              l
+                            Label : OBJECT
+                              $k
+                        Label : CONCAT
+                          'n'
                       Label : NAME
                         file_exists
             Label : ELSE
@@ -92,9 +85,9 @@ Label : PROJECT
                 'r'
               Label : VARIABLE
                 ->
+                Label : MEMBER
+                  q
                 Label : OBJECT
                   $p
-                Label : PROPERTY
-                  q
             Label : THEN
               'o'

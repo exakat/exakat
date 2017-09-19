@@ -1,38 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Typehint.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-              Label : TYPEHINT
-                namespace\Stdclass
-            Label : ARGUMENT
-              $b
-              Label : TYPEHINT
-                namespace\Stdclass
-            Label : ARGUMENT
-              $c
-              Label : DEFAULT
-                null
-              Label : TYPEHINT
-                namespace\Stdclass
+          Label : ARGUMENT
+            $a
+            Label : TYPEHINT
+              namespace\Stdclass
+          Label : ARGUMENT
+            $b
+            Label : TYPEHINT
+              namespace\Stdclass
+          Label : ARGUMENT
+            $c
+            Label : DEFAULT
+              null
+            Label : TYPEHINT
+              namespace\Stdclass
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 1
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

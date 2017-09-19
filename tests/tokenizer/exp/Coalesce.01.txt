@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Coalesce.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -22,7 +21,7 @@ Label : PROJECT
                 $_GET
             Label : RIGHT
               'c'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $d
@@ -34,15 +33,13 @@ Label : PROJECT
                 E
               Label : METHOD
                 f
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $g
+                Label : ARGUMENT
+                  $g
                 Label : NAME
                   f
             Label : RIGHT
               $h
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $i
@@ -50,10 +47,8 @@ Label : PROJECT
             ??
             Label : LEFT
               j
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'l'
+              Label : ARGUMENT
+                'l'
               Label : NAME
                 j
             Label : RIGHT

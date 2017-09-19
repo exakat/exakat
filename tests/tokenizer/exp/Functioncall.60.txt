@@ -1,40 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.60.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : METHOD
             a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                $c
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              $c
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 if
                 Label : CONDITION
                   !
                   Label : NOT
                     e
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $f
+                    Label : ARGUMENT
+                      $f
                     Label : NAME
                       e
                 Label : THEN
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     return
                     Label : RETURN
                       null

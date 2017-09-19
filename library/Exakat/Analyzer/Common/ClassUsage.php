@@ -88,9 +88,7 @@ class ClassUsage extends Analyzer {
         $this->prepareQuery();
 
         $this->atomFunctionIs('\\class_alias')
-             ->outIs('ARGUMENTS')
-             ->outIs('ARGUMENT')
-             ->is('rank', 0)
+             ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->noDelimiterIs($classes);
         $this->prepareQuery();

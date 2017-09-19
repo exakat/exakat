@@ -32,7 +32,6 @@ class ShouldUseConstants extends Analyzer {
         $positions = array(0, 1, 2, 3, /*4, 5,*/ 6);
         foreach($positions as $position) {
             $this->atomFunctionIs($functions['functions' . $position])
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIsNot(array('Logical', 'Variable', 'Array', 'Member', 'Identifier', 'Nsname', 'Staticproperty', 'Staticconstant', 'Staticmethodcall', 'Methodcall'))
@@ -40,11 +39,10 @@ class ShouldUseConstants extends Analyzer {
             $this->prepareQuery();
 
             $this->atomFunctionIs($functions['functions' . $position])
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->atomIs('Logical')
-                 ->raw('where( __.repeat( __.out('.$this->linksDown.') ).emit( label().is(without("Identifier", "Nsname", "Parenthesis", "Logical")) ).times('.self::MAX_LOOPING.') )')
+                 ->raw('where( __.repeat( __.out() ).emit( label().is(without("Identifier", "Nsname", "Parenthesis", "Logical")) ).times('.self::MAX_LOOPING.') )')
                  ->back('first');
             $this->prepareQuery();
         }

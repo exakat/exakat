@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.05.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
-              Label : DEFAULT
-                1
+          Label : ARGUMENT
+            $a
+            Label : DEFAULT
+              1
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 1
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

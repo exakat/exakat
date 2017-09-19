@@ -1,48 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Var.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : EXTENDS
             C
           Label : METHOD
             D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-                Label : DEFAULT
-                  'E'
+            Label : ARGUMENT
+              $b
+              Label : DEFAULT
+                'E'
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    F
                   Label : OBJECT
                     $c
-                  Label : PROPERTY
-                    F
                 Label : RIGHT
                   $d
             Label : NAME
               D
           Label : METHOD
             G
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   .
@@ -50,10 +45,10 @@ Label : PROJECT
                     'H'
                   Label : CONCAT
                     ->
+                    Label : MEMBER
+                      I
                     Label : OBJECT
                       $e
-                    Label : PROPERTY
-                      I
                   Label : CONCAT
                     'J'
             Label : NAME

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -30,37 +29,29 @@ Label : PROJECT
                     'd'
                 Label : ELSE
                   substr
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      md5
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          microtime
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                          Label : NAME
-                            microtime
-                      Label : NAME
-                        md5
-                    Label : ARGUMENT
-                      -
-                      Label : SIGN
-                        $g
                   Label : NAME
                     substr
+                  Label : ARGUMENT
+                    md5
+                    Label : ARGUMENT
+                      microtime
+                      Label : ARGUMENT
+                        Void
+                      Label : NAME
+                        microtime
+                    Label : NAME
+                      md5
+                  Label : ARGUMENT
+                    -
+                    Label : SIGN
+                      $g
                 Label : THEN
                   substr
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $e
-                    Label : ARGUMENT
-                      0
-                    Label : ARGUMENT
-                      $f
+                  Label : ARGUMENT
+                    $e
+                  Label : ARGUMENT
+                    0
+                  Label : ARGUMENT
+                    $f
                   Label : NAME
                     substr

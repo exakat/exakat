@@ -1,57 +1,54 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Not.21.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
             Label : LEFT
               ->
+              Label : MEMBER
+                B
               Label : OBJECT
                 $this
-              Label : PROPERTY
-                B
             Label : RIGHT
               $b
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               throw
               Label : THROW
                 new
                 Label : NEW
                   N
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'O'
+                  Label : ARGUMENT
+                    'O'
                   Label : NAME
                     N
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  C
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  C
               Label : RIGHT
                 &
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    C
                   Label : OBJECT
                     $this
-                  Label : PROPERTY
-                    C
                 Label : RIGHT
                   ~
                   Label : NOT
@@ -60,17 +57,17 @@ Label : PROJECT
                       E
                     Label : CONSTANT
                       F
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  G
                 Label : OBJECT
                   $this
-                Label : PROPERTY
-                  G
               Label : RIGHT
                 1
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             P

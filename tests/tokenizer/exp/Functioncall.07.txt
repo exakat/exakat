@@ -1,18 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              's'
+          Label : ARGUMENT
+            's'
           Label : NAME
             echo

@@ -1,190 +1,169 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Typehint.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $matches
-                Label : TYPEHINT
-                  array
+            Label : ARGUMENT
+              $matches
+              Label : TYPEHINT
+                array
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   new
                   Label : NEW
                     Match
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          1
-                        Label : VARIABLE
-                          $matches
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          0
-                        Label : VARIABLE
-                          $matches
                     Label : NAME
                       Match
-        Label : ELEMENT
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        1
+                      Label : VARIABLE
+                        $matches
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        0
+                      Label : VARIABLE
+                        $matches
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $matches
-                Label : TYPEHINT
-                  callable
+            Label : ARGUMENT
+              $matches
+              Label : TYPEHINT
+                callable
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   new
                   Label : NEW
                     Match
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          1
-                        Label : VARIABLE
-                          $matches
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          0
-                        Label : VARIABLE
-                          $matches
                     Label : NAME
                       Match
-        Label : ELEMENT
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        1
+                      Label : VARIABLE
+                        $matches
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        0
+                      Label : VARIABLE
+                        $matches
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $matches
-                Label : TYPEHINT
-                  x
+            Label : ARGUMENT
+              $matches
+              Label : TYPEHINT
+                x
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   new
                   Label : NEW
                     Match
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          1
-                        Label : VARIABLE
-                          $matches
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          0
-                        Label : VARIABLE
-                          $matches
                     Label : NAME
                       Match
-        Label : ELEMENT
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        1
+                      Label : VARIABLE
+                        $matches
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        0
+                      Label : VARIABLE
+                        $matches
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $matches
-                Label : TYPEHINT
-                  x\d
+            Label : ARGUMENT
+              $matches
+              Label : TYPEHINT
+                x\d
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   new
                   Label : NEW
                     Match
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          1
-                        Label : VARIABLE
-                          $matches
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          0
-                        Label : VARIABLE
-                          $matches
                     Label : NAME
                       Match
-        Label : ELEMENT
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        1
+                      Label : VARIABLE
+                        $matches
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        0
+                      Label : VARIABLE
+                        $matches
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             function
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $matches
-                Label : TYPEHINT
-                  \x\d
+            Label : ARGUMENT
+              $matches
+              Label : TYPEHINT
+                \x\d
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 return
                 Label : RETURN
                   new
                   Label : NEW
                     Match
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          1
-                        Label : VARIABLE
-                          $matches
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          0
-                        Label : VARIABLE
-                          $matches
                     Label : NAME
                       Match
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        1
+                      Label : VARIABLE
+                        $matches
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        0
+                      Label : VARIABLE
+                        $matches

@@ -40,7 +40,7 @@ $query = <<<GREMLIN
 g.V().hasLabel("Member")
      .not( where( __.out("OBJECT").has("code", "\\\$this")) )
      .out("MEMBER")
-     .hasLabel("Identifier")
+     .hasLabel("Name")
      .values("code")
      .unique()
 GREMLIN;
@@ -58,6 +58,7 @@ GREMLIN;
 
         // Static properties
         // Case of property::property (that's another public access)
+        $LOOPS = self::MAX_LOOPING;
         $query = <<<GREMLIN
 g.V().hasLabel("Staticproperty")
      .out("CLASS")
@@ -71,7 +72,7 @@ g.V().hasLabel("Staticproperty")
      .as("property")
      .repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV()).until(hasLabel("Class", "File") )
      .or( hasLabel("File"), 
-        __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times(15)
+        __.repeat( __.as("x").out("EXTENDS", "IMPLEMENTS").in("DEFINITION").where(neq("x")) ).emit().times($LOOPS)
           .where( __.out("PPP").out("PPP").filter{ it.get().value("code") == name; } )
           .filter{it.get().value("fullnspath") != fns; }
         )

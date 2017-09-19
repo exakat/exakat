@@ -36,7 +36,6 @@ class WpdbBestUsage extends Analyzer {
              ->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs(array('get_var', 'get_col', 'get_results', 'get_row', 'query', 'prepare', 'query'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              // If it's a property, we accept $wpdb
@@ -52,7 +51,6 @@ class WpdbBestUsage extends Analyzer {
              ->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs(array('get_var', 'get_col', 'get_results', 'get_row', 'query', 'prepare', 'query'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->tokenIs('T_QUOTE')

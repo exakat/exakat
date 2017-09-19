@@ -64,14 +64,12 @@ class IsModified extends Analyzer {
         // arguments : reference variable in a custom function
         $this->atomIs('Functioncall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
              ->_as('results')
              ->back('first')
              ->functionDefinition()
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
              ->is('reference', true)
@@ -80,8 +78,7 @@ class IsModified extends Analyzer {
 
         // function/methods definition : all modified by incoming values
         // simple variable
-        $this->atomIs(self::$FUNCTION_METHOD)
-             ->outIs('ARGUMENTS')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->atomIs(self::$VARIABLES_ALL);
         $this->prepareQuery();
@@ -89,8 +86,7 @@ class IsModified extends Analyzer {
         // simple variable + default value : already done in line 18
 
         // typehint
-        $this->atomIs(self::$FUNCTION_METHOD)
-             ->outIs('ARGUMENTS')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->atomIs($atoms);
@@ -112,7 +108,6 @@ class IsModified extends Analyzer {
         
         foreach($references as $position => $functions) {
             $this->atomFunctionIs($functions)
-                 ->outIs('ARGUMENTS')
                  ->outIs('ARGUMENT')
                  ->is('rank', $position)
                  ->outIsIE('VARIABLE')
@@ -123,7 +118,6 @@ class IsModified extends Analyzer {
         // Class constructors (__construct)
         $this->atomIs('Newcall')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs($atoms)
              ->savePropertyAs('rank', 'rank')
@@ -132,7 +126,6 @@ class IsModified extends Analyzer {
              ->classDefinition()
              ->outIs('METHOD')
              ->analyzerIs('Classes/Constructor')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
              ->is('reference', true)

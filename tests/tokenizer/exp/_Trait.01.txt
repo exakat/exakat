@@ -1,42 +1,37 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Trait.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
+          Label : NAME
+            B
           Label : METHOD
             C
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               C
           Label : METHOD
             D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 Void
             Label : NAME
               D
-          Label : NAME
-            B
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : EXTENDS
             F
@@ -46,7 +41,7 @@ Label : PROJECT
             use
             Label : USE
               G
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : EXTENDS
             I

@@ -29,7 +29,6 @@ class ChildRemoveTypehint extends Analyzer {
     
     public function analyze() {
         $this->atomIs('Method')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->savePropertyAs('rank', 'rank')
              ->outIs('TYPEHINT')
@@ -42,7 +41,6 @@ class ChildRemoveTypehint extends Analyzer {
              ->outIs('NAME')
              ->samePropertyAs('code', 'name')
              ->inIs('NAME')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->samePropertyAs('rank', 'rank')
              ->hasNoOut('TYPEHINT')

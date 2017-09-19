@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Reference.41.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             (bool)
@@ -20,17 +19,15 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     b
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       b
                   Label : OBJECT
                     $a
                 Label : RIGHT
                   $c
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             (bool)
@@ -44,15 +41,13 @@ Label : PROJECT
                     a
                   Label : METHOD
                     b
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       b
                 Label : RIGHT
                   $c
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             (bool)
@@ -66,10 +61,8 @@ Label : PROJECT
                     $a
                   Label : METHOD
                     b
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       b
                 Label : RIGHT

@@ -1,36 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Block.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $h
                 Label : RIGHT
                   array
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      =>
-                      Label : KEY
-                        'a'
-                      Label : VALUE
-                        'b'
-            Label : ELEMENT
+                  Label : ARGUMENT
+                    =>
+                    Label : INDEX
+                      'a'
+                    Label : VALUE
+                      'b'
+            Label : EXPRESSION
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $g
@@ -38,14 +35,12 @@ Label : PROJECT
                   ->
                   Label : METHOD
                     d
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $e
-                        Label : PROPERTY
-                          f
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        f
+                      Label : OBJECT
+                        $e
                     Label : NAME
                       d
                   Label : OBJECT

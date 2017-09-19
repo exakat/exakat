@@ -35,7 +35,6 @@ class Arrayindex extends Analyzer {
 
         // list( 'a' => 2) = ['b' => 2];
         $this->atomFunctionIs('\\list')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')
@@ -44,7 +43,6 @@ class Arrayindex extends Analyzer {
 
         // array( 'a' => 2) = ['b' => 2];
         $this->atomIs('Arrayliteral')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('Keyvalue')
              ->outIs('INDEX')

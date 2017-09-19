@@ -43,7 +43,7 @@ GREMLIN;
              ->outIs('FILE')
              ->outIs('EXPRESSION')
              ->outIs('CODE')
-             ->raw('coalesce( __.out("EXPRESSION").hasLabel("Declare").out("DECLARE").out("ARGUMENT").has("fullcode", "strict_types = 1"), 
+             ->raw('coalesce( __.out("EXPRESSION").hasLabel("Declare").out("ARGUMENT").has("fullcode", "strict_types = 1"), 
 filter{ true; })')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
@@ -76,7 +76,7 @@ filter{ true; })')
              ->outIs('FILE')
              ->outIs('EXPRESSION')
              ->outIs('CODE')
-             ->raw('coalesce( __.out("EXPRESSION").hasLabel("Declare").out("DECLARE").out("ARGUMENT").has("fullcode", "strict_types = 1"), 
+             ->raw('coalesce( __.out("EXPRESSION").hasLabel("Declare").out("ARGUMENT").has("fullcode", "strict_types = 1"), 
 filter{ true; })')
              ->raw('map{ '.$mapping.' }')
              ->raw('filter{ x2 in ***}', $types)

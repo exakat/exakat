@@ -1,39 +1,36 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Multiplication.32.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             2
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
                 Label : INDEX
                   ->
+                  Label : MEMBER
+                    p
                   Label : OBJECT
                     ->
                     Label : METHOD
                       m
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          Void
+                      Label : ARGUMENT
+                        Void
                       Label : NAME
                         m
                     Label : OBJECT
                       $c
-                  Label : PROPERTY
-                    p
                 Label : VARIABLE
                   $x
               Label : RIGHT
@@ -42,13 +39,13 @@ Label : PROJECT
                   3
                 Label : RIGHT
                   4
-        Label : ELEMENT
+        Label : EXPRESSION
           *
           Label : LEFT
             $a
           Label : RIGHT
             'b'
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             $c

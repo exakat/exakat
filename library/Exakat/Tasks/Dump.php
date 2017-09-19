@@ -220,11 +220,11 @@ SQL;
 
         $this->log->log("$class : dumped $saved");
 
-        if ($count != $saved) {
+        if ($count == $saved) {
+            display("All $saved results saved for $class\n");
+        } else {
             assert($count == $saved, 'results were not correctly dumped in '.$class. ' '.$saved.'/'.$count);
             display("$saved results saved, $count expected for $class\n");
-        } else {
-            display("All $saved results saved for $class\n");
         }
     }
 
@@ -683,14 +683,11 @@ g.V().hasLabel("Class", "Interface", "Trait")
      .sideEffect{classe = it.get().value('fullnspath'); }
      .out('PPP') // Out of the CIT
 .sideEffect{ 
-    x = ['static':it.get().vertices(OUT, "STATIC").any(),
-
-         'public':it.get().vertices(OUT, "PUBLIC").any(),
-         'protected':it.get().vertices(OUT, "PROTECTED").any(),
-         'private':it.get().vertices(OUT, "PRIVATE").any(),
-         'var':it.get().vertices(OUT, "VAR").any(),
-         
-         'class': classe];
+    x_static = it.get().vertices(OUT, "STATIC").any();
+    x_public = it.get().vertices(OUT, "PUBLIC").any();
+    x_protected = it.get().vertices(OUT, "PROTECTED").any();
+    x_private = it.get().vertices(OUT, "PRIVATE").any();
+    x_var = it.get().vertices(OUT, "VAR").any();
 }
 .out('PPP') // out to the details
 .map{ 
@@ -702,9 +699,14 @@ g.V().hasLabel("Class", "Interface", "Trait")
         v = it.get().vertices(OUT, "RIGHT").next().value("fullcode");
     }
 
-    x["name"] = name;
-    x["value"] = v;
-    x;
+    x = ["class":classe,
+         "static":x_static,
+         "public":x_public,
+         "protected":x_protected,
+         "private":x_private,
+         "var":x_var,
+         "name": name,
+         "value": v];
 }
 
 GREMLIN
@@ -752,18 +754,26 @@ GREMLIN
         $this->sqlite->query('CREATE TABLE constants (  id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                 constant INTEGER,
                                                 citId INTEGER,
+                                                visibility STRING,
                                                 value TEXT
                                                  )');
 
         $query = <<<GREMLIN
-g.V().hasLabel("Class", "Interface", "Trait")
-     .sideEffect{classe = it.get().value('fullnspath'); }
+g.V().hasLabel("Class")
      .out('CONST')
+.sideEffect{ 
+    x_public = it.get().vertices(OUT, "PUBLIC").any();
+    x_protected = it.get().vertices(OUT, "PROTECTED").any();
+    x_private = it.get().vertices(OUT, "PRIVATE").any();
+}
      .out('CONST')
-.map{ 
+     .map{ 
     x = ['name': it.get().vertices(OUT, 'NAME').next().value("code"),
          'value': it.get().vertices(OUT, 'VALUE').next().value("fullcode"),
-         'class': classe
+         "public":x_public,
+         "protected":x_protected,
+         "private":x_private,
+         'class': it.get().vertices(IN, 'CONST').next().vertices(IN, 'CONST').next().value("fullnspath")
          ];
 }
 
@@ -779,13 +789,23 @@ GREMLIN
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].", '".$this->sqlite->escapeString($row->value)."')";
+            if ($row->public) {
+                $visibility = 'public';
+            } elseif ($row->protected) {
+                $visibility = 'protected';
+            } elseif ($row->private) {
+                $visibility = 'private';
+            } else {
+                $visibility = '';
+            }
+
+            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].", '".$visibility."', '".$this->sqlite->escapeString($row->value)."')";
 
             ++$total;
         }
 
         if (!empty($query)) {
-            $query = 'INSERT INTO constants ("id", "constant", "citId", "value") VALUES '.join(', ', $query);
+            $query = 'INSERT INTO constants ("id", "constant", "citId", "visibility", "value") VALUES '.join(', ', $query);
             $this->sqlite->query($query);
         }
         display("$total constants\n");
@@ -1043,11 +1063,11 @@ GREMLIN;
 
         // New
         $query = <<<GREMLIN
-g.V().hasLabel("New").out('NEW')
-     .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value('fullcode'); })
+g.V().hasLabel("New").out("NEW")
+     .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ calling = it.get().value("fullcode"); })
      .in("DEFINITION")
-     .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
-     .map{ [ 'file':calling, 'include':called];}
+     .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value("fullcode"); })
+     .map{ [ "file":calling, "include":called];}
 GREMLIN;
         $res = $this->gremlin->query($query);
         $query = array();

@@ -32,9 +32,9 @@ class AssignedTwiceOrMore extends Analyzer {
         $query = <<<GREMLIN
 g.V().hasLabel($list).where( 
             __.sideEffect{counts = [:]; names = [];}
-              .out("BLOCK").repeat( __.out({$this->linksDown})).emit(hasLabel("Assignation")).times($maxLooping)
+              .out("BLOCK").repeat( __.out({$this->linksDown})).emit().times($maxLooping)
               .hasLabel("Assignation").has("code", "=")
-              .out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Heredoc").in("RIGHT")
+              .where( __.out("RIGHT").hasLabel("Integer", "Real", "Boolean", "Null", "Heredoc"))
               .out("LEFT").hasLabel("Variable")
               .sideEffect{ k = it.get().value("fullcode"); 
                            if (counts[k] == null) {

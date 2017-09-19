@@ -1,19 +1,18 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.27.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       a
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             3
-    Label : ELEMENT
+    Label : EXPRESSION
       b

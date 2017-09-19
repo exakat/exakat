@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Constant.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            f
-            Label : ARGUMENT
-              d\e\f
+          Label : ARGUMENT
+            d\e\f
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $x
           Label : RIGHT
             g\h\i
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a

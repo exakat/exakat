@@ -1,29 +1,26 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Property.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
+            Label : ARGUMENT
+              ->
+              Label : MEMBER
+                False
+              Label : OBJECT
                 ->
+                Label : MEMBER
+                  c
                 Label : OBJECT
-                  ->
-                  Label : OBJECT
-                    $b
-                  Label : PROPERTY
-                    c
-                Label : PROPERTY
-                  False
+                  $b
             Label : NAME
               a
           Label : OBJECT

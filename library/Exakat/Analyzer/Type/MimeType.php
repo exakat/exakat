@@ -26,22 +26,12 @@ namespace Exakat\Analyzer\Type;
 use Exakat\Analyzer\Analyzer;
 
 class MimeType extends Analyzer {
-    public static $mimeTypes = array(
-'application',
-'audio',
-'example',
-'image',
-'message',
-'model',
-'multipart',
-'text',
-'video',
-    );
-    
     public function analyze() {
+        $mimeTypes = $this->loadIni('mime_types.ini', 'mime');
+
         $this->atomIs('String')
              ->hasNoOut('CONCAT')
-             ->regexIs('code', '[\'\"]('.implode('|', self::$mimeTypes).')/[a-zA-Z0-9+\\\\-]+[\'\"]');
+             ->regexIs('code', '[\'\"]('.implode('|', $mimeTypes).')/[a-zA-Z0-9+\\\\-]+[\'\"]');
         $this->prepareQuery();
     }
 }

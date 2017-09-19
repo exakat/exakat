@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Addition.27.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,47 +15,41 @@ Label : PROJECT
             new
             Label : NEW
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  +
-                  Label : LEFT
-                    array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        =>
-                        Label : KEY
-                          'C'
-                        Label : VALUE
-                          .
-                          Label : CONCAT
-                            D
-                          Label : CONCAT
-                            'E'
-                      Label : ARGUMENT
-                        =>
-                        Label : KEY
-                          'F'
-                        Label : VALUE
-                          .
-                          Label : CONCAT
-                            G
-                          Label : CONCAT
-                            'H'
-                  Label : RIGHT
+              Label : ARGUMENT
+                +
+                Label : LEFT
+                  array
+                  Label : ARGUMENT
+                    =>
+                    Label : INDEX
+                      'C'
+                    Label : VALUE
+                      .
+                      Label : CONCAT
+                        D
+                      Label : CONCAT
+                        'E'
+                  Label : ARGUMENT
+                    =>
+                    Label : INDEX
+                      'F'
+                    Label : VALUE
+                      .
+                      Label : CONCAT
+                        G
+                      Label : CONCAT
+                        'H'
+                Label : RIGHT
+                  include
+                  Label : ARGUMENT
+                    (
+                    Label : CODE
+                      .
+                      Label : CONCAT
+                        I
+                      Label : CONCAT
+                        'J'
+                  Label : NAME
                     include
-                    Label : ARGUMENTS
-                      )
-                      Label : ARGUMENT
-                        (
-                        Label : CODE
-                          .
-                          Label : CONCAT
-                            I
-                          Label : CONCAT
-                            'J'
-                    Label : NAME
-                      include
               Label : NAME
                 B

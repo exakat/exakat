@@ -27,7 +27,6 @@ class FopenMode extends Analyzer {
     public function analyze() {
         // fopen('path/to/file', 'bbc')
         $this->atomFunctionIs('\\fopen')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 1)
              ->atomIs('String') // No checks on variable or properties.
              ->hasNoOut('CONCAT')

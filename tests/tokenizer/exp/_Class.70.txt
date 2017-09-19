@@ -1,52 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.70.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              new
-              Label : NEW
-                class
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $i
-                  Label : ARGUMENT
-                    $j
-                  Label : ARGUMENT
-                    $k
-                Label : DEFINITION
-                  $this
-                Label : METHOD
-                  __construct
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
+          Label : ARGUMENT
+            new
+            Label : NEW
+              class
+              Label : ARGUMENT
+                $i
+              Label : METHOD
+                __construct
+                Label : ARGUMENT
+                  $i
+                Label : BLOCK
+                  {}
+                  Label : EXPRESSION
+                    =
+                    Label : LEFT
+                      ->
+                      Label : MEMBER
+                        i
+                      Label : OBJECT
+                        $this
+                    Label : RIGHT
                       $i
-                  Label : BLOCK
-                    {}
-                    Label : ELEMENT
-                      =
-                      Label : LEFT
-                        ->
-                        Label : OBJECT
-                          $this
-                        Label : PROPERTY
-                          i
-                      Label : RIGHT
-                        $i
-                  Label : NAME
-                    __construct
-                  Label : PUBLIC
-                    public
+                Label : NAME
+                  __construct
+                Label : PUBLIC
+                  public
+              Label : ARGUMENT
+                $j
+              Label : ARGUMENT
+                $k
           Label : NAME
             var_dump

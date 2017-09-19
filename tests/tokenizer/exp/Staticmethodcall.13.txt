@@ -1,22 +1,21 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticmethodcall.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               use
               Label : USE
                 B\F
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : EXTENDS
                 F\D
@@ -24,7 +23,7 @@ Label : PROJECT
                   B\F
               Label : NAME
                 D
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 F\K
@@ -32,10 +31,8 @@ Label : PROJECT
                   B\F
               Label : METHOD
                 L
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'M'
+                Label : ARGUMENT
+                  'M'
                 Label : NAME
                   L
           Label : NAME

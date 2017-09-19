@@ -1,54 +1,51 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.54.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  .
-                  Label : CONCAT
-                    'b'
-                  Label : CONCAT
-                    'c'
-                Label : VALUE
-                  1
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  .
-                  Label : CONCAT
-                    'd'
-                  Label : CONCAT
-                    'e'
-                Label : VALUE
-                  .
-                  Label : CONCAT
-                    'f'
-                  Label : CONCAT
-                    'g'
-                  Label : CONCAT
-                    'h'
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  3
-                Label : VALUE
-                  .
-                  Label : CONCAT
-                    'i'
-                  Label : CONCAT
-                    'j'
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                .
+                Label : CONCAT
+                  'b'
+                Label : CONCAT
+                  'c'
+              Label : VALUE
+                1
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                .
+                Label : CONCAT
+                  'd'
+                Label : CONCAT
+                  'e'
+              Label : VALUE
+                .
+                Label : CONCAT
+                  'f'
+                Label : CONCAT
+                  'g'
+                Label : CONCAT
+                  'h'
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                3
+              Label : VALUE
+                .
+                Label : CONCAT
+                  'i'
+                Label : CONCAT
+                  'j'

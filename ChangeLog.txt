@@ -1,4 +1,4 @@
-Version 0.12.5 (White Deer Spirit, Coming up)
+Version 0.12.13 (King of the Southern Hill, Coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,92 @@ Version 0.12.5 (White Deer Spirit, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.12.12 (Ruler of the Kingdom of Miefa, 2017-09-18)
++ Report
+    + Ambassador : fixed collect of interfaces and trait names
++ Analyzer
+    + New analyzer : ext/Parle
+    + New analyzer : help optimize pathinfo() usage
+    + New analyzer : catch array_values() usage with list and pathinfo()
+    + Updated analyzer : Don't show error messages with catch->getMessage();
+    + Updated analyzer : No concat in loop handles $x = $c . $x;
+    + Checked unit tests : 2456 / 2461 test pass (99% pass). 
++ Tokenizer
+    + Added support for ', " and > in file names. Still missing support for \
+    + Restaured fallback to global constants.
+    + Fixed special case : <?php ++$x ?>
+
+Version 0.12.11 (Half-Guanyin, 2017-09-11)
++ Architecture
+    + Added support options for branches and tags
+    + Added support for config in server mode
++ Report
+    + Fixed methods dump for interfaces.
++ Analyzer
+    + Added all analysis to report could be private/protected for 
++ Tokenizer
+    + Fixed handling of '<' char in paths
+
+Version 0.12.10 (Golden Nosed Albino Rat Spirit, 2017-09-04)
++ Architecture
+    + Upgraded server version with config alteration features.
+    + New generated config-cache
++ Report
+    + Fixed property names in Visibility report
++ Analyzer
+    + Arrays/IsModified : arrays are not modified unless in a (unset)
++ Tokenizer
+    + Fixed 'constant' for functioncalls
+    + Introduced 'Name' for Identifier without a fullnspath
+    + Added support for branches and tags in init
+    + Fixed edge case with $o->$$b
+
+Version 0.12.9 (Lady Earth Flow, 2017-08-28)
++ Architecture
+    + Creates config.cache, with cached calculated configs. Remove to update.
++ Report
+    + GraphQL : Upgraded GraphQL report, with relationships.
++ Analyzer
+    + New analyzer : suggest moving for() to foreach()
+    + New analyzer : shell_exec/exec/`backtick` favorite
+    + Update analysis : Abstract Static is for PHP 7.0-
++ Tokenizer
+    + Removed Arguments and ARGUMENTS. 
+    + Finished 'factory' from Config.
+    + Better handling of long path names.
+
+Version 0.12.8 (ruler of the Kingdom of Biqiu, 2017-08-21)
++ Analyzer
+    + New analyzer : use foreach, not for()
+    + New analyzer : ext/fam, ext/rdkafka
++ Tokenizer
+    + Fixed edge case where pathnames are too long on OSX.
+
+Version 0.12.7 (Old Man of the South Pole, 2017-08-14)
++ Architecture
+    + Fixed project_vcs when none is used.
++ Analyzer
+    + Better documentation for in_array replacements and array_unique()
+    + Added support for PHP 7.1.8 and 7.0.22
+
+Version 0.12.6 (White Faced Vixen Spirit, 2017-08-07)
++ Analyzer
+    + New analysis : no negative for strings before 7.1
+    + New analysis : use in_array instead of ||
+    + Updated analysis : preg_quote has no delimiter
++ Tokenizer
+    + Fixed bug in handling real value for negative numbers
+
+Version 0.12.5 (White Deer Spirit, 2017-07-31)
++ Architecture
+    + Removed config singleton
++ Report
+    + New report : simpletables (HTML)
++ Analyzer
+    + New analysis : report optional parameters
+    + New analysis : report concat inside a loop
+    + Updated analysis : Could Be Class Constant, when no visibility is provided.
 
 Version 0.12.4 (peacock Mahamayuri, 2017-07-24)
 + Architecture

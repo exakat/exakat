@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.95.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
@@ -18,173 +17,165 @@ Label : PROJECT
               $d
             Label : THEN
               ;
-              Label : ELEMENT
+              Label : EXPRESSION
                 ++
                 Label : POSTPLUSPLUS
                   $e
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  'B'
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  'C'
-                Label : ARGUMENT
-                  ?
-                  Label : CONDITION
-                    !
-                    Label : NOT
-                      empty
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'E'
-                          Label : VARIABLE
-                            [
-                            Label : INDEX
-                              'D'
-                            Label : VARIABLE
-                              $c
-                      Label : NAME
-                        empty
-                  Label : ELSE
-                    .
-                    Label : CONCAT
-                      'G'
-                    Label : CONCAT
+              Label : ARGUMENT
+                'B'
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                'C'
+              Label : ARGUMENT
+                ?
+                Label : CONDITION
+                  !
+                  Label : NOT
+                    empty
+                    Label : ARGUMENT
                       [
                       Label : INDEX
-                        'I'
+                        'E'
                       Label : VARIABLE
                         [
                         Label : INDEX
                           'D'
                         Label : VARIABLE
                           $c
-                  Label : THEN
-                    'F'
-                Label : ARGUMENT
-                  'J'
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'L'
-                  Label : VARIABLE
+                    Label : NAME
+                      empty
+                Label : ELSE
+                  .
+                  Label : CONCAT
+                    'G'
+                  Label : CONCAT
                     [
                     Label : INDEX
-                      'D'
+                      'I'
                     Label : VARIABLE
-                      $c
-                Label : ARGUMENT
-                  'M'
-                Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'D'
+                      Label : VARIABLE
+                        $c
+                Label : THEN
+                  'F'
+              Label : ARGUMENT
+                'J'
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'L'
+                Label : VARIABLE
                   [
                   Label : INDEX
-                    'L'
+                    'D'
                   Label : VARIABLE
-                    [
-                    Label : INDEX
-                      'D'
-                    Label : VARIABLE
-                      $c
-                Label : ARGUMENT
-                  'P'
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  'Q'
+                    $c
+              Label : ARGUMENT
+                'M'
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'L'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'D'
+                  Label : VARIABLE
+                    $c
+              Label : ARGUMENT
+                'P'
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                'Q'
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  'B'
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  'C'
-                Label : ARGUMENT
-                  ?
-                  Label : CONDITION
-                    !
-                    Label : NOT
-                      empty
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'E'
-                          Label : VARIABLE
-                            [
-                            Label : INDEX
-                              'D'
-                            Label : VARIABLE
-                              $c
-                      Label : NAME
-                        empty
-                  Label : ELSE
-                    .
-                    Label : CONCAT
-                      'G'
-                    Label : CONCAT
+              Label : ARGUMENT
+                'B'
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                'C'
+              Label : ARGUMENT
+                ?
+                Label : CONDITION
+                  !
+                  Label : NOT
+                    empty
+                    Label : ARGUMENT
                       [
                       Label : INDEX
-                        'I'
+                        'E'
                       Label : VARIABLE
                         [
                         Label : INDEX
                           'D'
                         Label : VARIABLE
                           $c
-                  Label : THEN
-                    'F'
-                Label : ARGUMENT
-                  'J'
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'L'
-                  Label : VARIABLE
+                    Label : NAME
+                      empty
+                Label : ELSE
+                  .
+                  Label : CONCAT
+                    'G'
+                  Label : CONCAT
                     [
                     Label : INDEX
-                      'D'
+                      'I'
                     Label : VARIABLE
-                      $c
-                Label : ARGUMENT
-                  'M'
-                Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'D'
+                      Label : VARIABLE
+                        $c
+                Label : THEN
+                  'F'
+              Label : ARGUMENT
+                'J'
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'L'
+                Label : VARIABLE
                   [
                   Label : INDEX
-                    'L'
+                    'D'
                   Label : VARIABLE
-                    [
-                    Label : INDEX
-                      'D'
-                    Label : VARIABLE
-                      $c
-                Label : ARGUMENT
-                  'P'
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  'Q'
+                    $c
+              Label : ARGUMENT
+                'M'
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'L'
+                Label : VARIABLE
+                  [
+                  Label : INDEX
+                    'D'
+                  Label : VARIABLE
+                    $c
+              Label : ARGUMENT
+                'P'
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                'Q'
               Label : NAME
                 echo
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

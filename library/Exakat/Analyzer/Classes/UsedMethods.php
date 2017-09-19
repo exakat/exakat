@@ -59,8 +59,7 @@ class UsedMethods extends Analyzer {
 
         $callables = $this->query(<<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZED")
-.not( hasLabel("Function", "Method") )
-.where( or( hasLabel("String"), hasLabel("Arguments")) )
+.where( or( hasLabel("String"), hasLabel("Arrayliteral")) )
 .map{
     // Strings
     if (it.get().label() == 'String') {
@@ -70,7 +69,7 @@ g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZ
         } else {
             it.get().value("noDelimiter").toLowerCase();
         }
-    } else if (it.get().label() == 'Arguments') {
+    } else if (it.get().label() == 'Arrayliteral') {
         it.get().vertices(OUT, "ARGUMENT").each{
             if (it.value("rank") == 1) {
                 s = it.value("noDelimiter").toLowerCase();

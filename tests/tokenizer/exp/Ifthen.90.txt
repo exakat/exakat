@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.90.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             &&
@@ -48,7 +47,7 @@ Label : PROJECT
                 'F'
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 &&
@@ -66,17 +65,15 @@ Label : PROJECT
                     'Y'
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   require
-                  Label : ARGUMENTS
-                    )
-                    Label : ARGUMENT
-                      (
-                      Label : CODE
-                        'Z'
+                  Label : ARGUMENT
+                    (
+                    Label : CODE
+                      'Z'
                   Label : NAME
                     require
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     ==
@@ -92,7 +89,7 @@ Label : PROJECT
                       'Y'
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         [
@@ -104,7 +101,7 @@ Label : PROJECT
                           $j
                       Label : RIGHT
                         $i
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         [
@@ -116,7 +113,7 @@ Label : PROJECT
                           $k
                       Label : RIGHT
                         'AB'
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $l
@@ -146,7 +143,7 @@ Label : PROJECT
                         AD
                       Label : VARIABLE
                         $b
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $m
@@ -156,19 +153,17 @@ Label : PROJECT
                       $i
                     Label : VARIABLE
                       $j
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $m
                   Label : RIGHT
                     AF
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $m
+                    Label : ARGUMENT
+                      $m
                     Label : NAME
                       AF
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $c
@@ -176,97 +171,87 @@ Label : PROJECT
                     @
                     Label : AT
                       G
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $d
-                        Label : ARGUMENT
-                          $b
-                        Label : ARGUMENT
-                          .
-                          Label : CONCAT
-                            'H'
-                          Label : CONCAT
+                      Label : ARGUMENT
+                        $d
+                      Label : ARGUMENT
+                        $b
+                      Label : ARGUMENT
+                        .
+                        Label : CONCAT
+                          'H'
+                        Label : CONCAT
+                          I
+                          Label : ARGUMENT
+                            $e
+                          Label : ARGUMENT
+                            0
+                          Label : ARGUMENT
+                            $b
+                          Label : NAME
                             I
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                $e
-                              Label : ARGUMENT
-                                0
-                              Label : ARGUMENT
-                                $b
-                            Label : NAME
-                              I
+                        Label : CONCAT
+                          "
                           Label : CONCAT
-                            "
-                            Label : CONCAT
-                              J
-                            Label : CONCAT
-                              $lAK
-                            Label : CONCAT
-                              $mAL
-                            Label : CONCAT
-                              $fN
+                            J
                           Label : CONCAT
+                            $lAK
+                          Label : CONCAT
+                            $mAL
+                          Label : CONCAT
+                            $fN
+                        Label : CONCAT
+                          I
+                          Label : ARGUMENT
+                            $e
+                          Label : ARGUMENT
+                            1
+                          Label : ARGUMENT
+                            $b
+                          Label : NAME
                             I
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                $e
-                              Label : ARGUMENT
-                                1
-                              Label : ARGUMENT
-                                $b
-                            Label : NAME
-                              I
-                          Label : CONCAT
-                            'P'
-                          Label : CONCAT
+                        Label : CONCAT
+                          'P'
+                        Label : CONCAT
+                          I
+                          Label : ARGUMENT
+                            $e
+                          Label : ARGUMENT
+                            2
+                          Label : ARGUMENT
+                            $b
+                          Label : NAME
                             I
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                $e
-                              Label : ARGUMENT
-                                2
-                              Label : ARGUMENT
-                                $b
-                            Label : NAME
-                              I
-                          Label : CONCAT
-                            'R'
+                        Label : CONCAT
+                          'R'
                       Label : NAME
                         G
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     $c
                   Label : ELSE
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       .
                       Label : CONCAT
                         'U'
                       Label : CONCAT
                         V
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $d
-                          Label : ARGUMENT
-                            $b
                         Label : NAME
                           V
+                        Label : ARGUMENT
+                          $d
+                        Label : ARGUMENT
+                          $b
                       Label : CONCAT
                         'W'
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       while
                       Label : BLOCK
                         ;
-                        Label : ELEMENT
+                        Label : EXPRESSION
                           =
                           Label : LEFT
                             $h
@@ -288,17 +273,15 @@ Label : PROJECT
                             @
                             Label : AT
                               S
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $c
-                                Label : ARGUMENT
-                                  $b
                               Label : NAME
                                 S
+                              Label : ARGUMENT
+                                $c
+                              Label : ARGUMENT
+                                $b
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $c
@@ -306,103 +289,93 @@ Label : PROJECT
                 @
                 Label : AT
                   G
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $d
-                    Label : ARGUMENT
-                      $b
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        'H'
-                      Label : CONCAT
+                  Label : ARGUMENT
+                    $d
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    .
+                    Label : CONCAT
+                      'H'
+                    Label : CONCAT
+                      I
+                      Label : ARGUMENT
+                        $e
+                      Label : ARGUMENT
+                        0
+                      Label : ARGUMENT
+                        $b
+                      Label : NAME
                         I
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $e
-                          Label : ARGUMENT
-                            0
-                          Label : ARGUMENT
-                            $b
-                        Label : NAME
-                          I
+                    Label : CONCAT
+                      "
                       Label : CONCAT
-                        "
-                        Label : CONCAT
-                          J
-                        Label : CONCAT
-                          [
-                          Label : INDEX
-                            K
-                          Label : VARIABLE
-                            $b
-                        Label : CONCAT
-                          L
-                        Label : CONCAT
-                          $aM
-                        Label : CONCAT
-                          $fN
+                        J
                       Label : CONCAT
+                        [
+                        Label : INDEX
+                          K
+                        Label : VARIABLE
+                          $b
+                      Label : CONCAT
+                        L
+                      Label : CONCAT
+                        $aM
+                      Label : CONCAT
+                        $fN
+                    Label : CONCAT
+                      I
+                      Label : ARGUMENT
+                        $e
+                      Label : ARGUMENT
+                        1
+                      Label : ARGUMENT
+                        $b
+                      Label : NAME
                         I
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $e
-                          Label : ARGUMENT
-                            1
-                          Label : ARGUMENT
-                            $b
-                        Label : NAME
-                          I
-                      Label : CONCAT
-                        'P'
-                      Label : CONCAT
+                    Label : CONCAT
+                      'P'
+                    Label : CONCAT
+                      I
+                      Label : ARGUMENT
+                        $e
+                      Label : ARGUMENT
+                        1
+                      Label : ARGUMENT
+                        $b
+                      Label : NAME
                         I
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $e
-                          Label : ARGUMENT
-                            1
-                          Label : ARGUMENT
-                            $b
-                        Label : NAME
-                          I
-                      Label : CONCAT
-                        'R'
+                    Label : CONCAT
+                      'R'
                   Label : NAME
                     G
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $c
               Label : ELSE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   .
                   Label : CONCAT
                     'U'
                   Label : CONCAT
                     V
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $d
-                      Label : ARGUMENT
-                        $b
                     Label : NAME
                       V
+                    Label : ARGUMENT
+                      $d
+                    Label : ARGUMENT
+                      $b
                   Label : CONCAT
                     'W'
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   while
                   Label : BLOCK
                     ;
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       =
                       Label : LEFT
                         $h
@@ -424,11 +397,9 @@ Label : PROJECT
                         @
                         Label : AT
                           S
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              $c
-                            Label : ARGUMENT
-                              $b
                           Label : NAME
                             S
+                          Label : ARGUMENT
+                            $c
+                          Label : ARGUMENT
+                            $b

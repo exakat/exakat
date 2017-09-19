@@ -30,7 +30,6 @@ class SimplePreg extends Analyzer {
                            '\preg_filter', '\preg_split', '\preg_quote', '\preg_grep');
 
         $this->atomFunctionIs($functions)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('String')
              ->hasNoOut('CONCAT')

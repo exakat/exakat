@@ -35,7 +35,6 @@ class DeclareStrictType extends Analyzer {
              ->outIs('CODE')
              ->outIs('EXPRESSION')
              ->atomIs('Declare')
-             ->outIs('DECLARE')
              ->outIs('ARGUMENT')
              ->fullcodeIs('strict_types = 1')
              ->back('first');

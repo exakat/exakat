@@ -1,20 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sign.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           -
           Label : SIGN
             f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                8
+            Label : ARGUMENT
+              8
             Label : NAME
               f

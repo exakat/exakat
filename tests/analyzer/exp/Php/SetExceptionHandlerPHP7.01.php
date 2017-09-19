@@ -1,9 +1,9 @@
 <?php
 
-$expected     = array('set_exception_handler("foo3")',
-                      'set_exception_handler("\foo3")',
-                      'set_exception_handler("foo")',
-                      'set_exception_handler("\foo")',
+$expected     = array('set_exception_handler("cfoo3")',
+                      'set_exception_handler("\cfoo3")',
+                      'set_exception_handler("cfoo")',
+                      'set_exception_handler("\cfoo")',
                       'set_exception_handler("foo::bar")',
                       'set_exception_handler("foo3::bar")',
                       'set_exception_handler(function (Stdclass $a) { /**/ } )',

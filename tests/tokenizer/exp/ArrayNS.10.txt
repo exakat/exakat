@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/ArrayNS.10.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ]
@@ -32,7 +31,7 @@ Label : PROJECT
               'e'
             Label : VARIABLE
               $f
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -50,21 +49,17 @@ Label : PROJECT
                 $a
           Label : RIGHT
             chop
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
+            Label : ARGUMENT
+              substr
+              Label : NAME
                 substr
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $e
-                  Label : ARGUMENT
-                    1
-                Label : NAME
-                  substr
+              Label : ARGUMENT
+                $e
+              Label : ARGUMENT
+                1
             Label : NAME
               chop
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -86,7 +81,7 @@ Label : PROJECT
               $j
             Label : RIGHT
               1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             [
@@ -108,7 +103,7 @@ Label : PROJECT
                   ::
                   Label : CLASS
                     C
-                  Label : PROPERTY
+                  Label : MEMBER
                     $d
           Label : RIGHT
             $i

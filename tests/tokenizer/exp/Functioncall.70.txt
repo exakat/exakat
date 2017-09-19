@@ -1,52 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.70.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
+            Label : ARGUMENT
+              $a
+              Label : APPEND
                 $a
-                Label : APPEND
-                  $a
-              Label : ARGUMENT
-                ]
-                Label : APPEND
+            Label : ARGUMENT
+              ]
+              Label : APPEND
+                [
+                Label : INDEX
+                  1
+                Label : VARIABLE
+                  $b
+            Label : ARGUMENT
+              ]
+              Label : APPEND
+                [
+                Label : INDEX
+                  3
+                Label : VARIABLE
                   [
                   Label : INDEX
-                    1
+                    2
                   Label : VARIABLE
-                    $b
-              Label : ARGUMENT
-                ]
-                Label : APPEND
-                  [
-                  Label : INDEX
-                    3
-                  Label : VARIABLE
-                    [
-                    Label : INDEX
-                      2
-                    Label : VARIABLE
-                      $c
+                    $c
             Label : NAME
               list
           Label : RIGHT
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                1
-              Label : ARGUMENT
-                2
-              Label : ARGUMENT
-                3
+            Label : ARGUMENT
+              1
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              3

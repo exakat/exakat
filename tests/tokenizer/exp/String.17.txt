@@ -1,32 +1,31 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/String.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             b"aa"
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a2
           Label : RIGHT
             b"a\"a2"
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a3
           Label : RIGHT
             'a"a3'
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a4

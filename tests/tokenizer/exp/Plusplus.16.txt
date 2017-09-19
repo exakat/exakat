@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Plusplus.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           [
           Label : INDEX
             --
@@ -16,7 +15,7 @@ Label : PROJECT
               $x
           Label : VARIABLE
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           [
           Label : INDEX
             --

@@ -50,14 +50,12 @@ class Php72Deprecation extends Analyzer {
         
         // Usage of \\parse_str with no 2nd argument
         $this->atomFunctionIs('\\parse_str')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 1)
              ->back('first');
         $this->prepareQuery();
 
         // Usage of \\assert with string argument
         $this->atomFunctionIs('\\assert')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('String', 'Concatenation', 'Heredoc'))
              ->back('first');

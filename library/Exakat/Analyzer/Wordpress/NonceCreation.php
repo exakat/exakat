@@ -26,14 +26,12 @@ use Exakat\Analyzer\Analyzer;
 class NonceCreation extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\\wp_create_nonce')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 0)
              ->atomIs('String');
         $this->prepareQuery();
 
         $this->atomFunctionIs(array('\\wp_nonce_field', '\\wp_nonce_url'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('rank', 1)
              ->atomIs('String');

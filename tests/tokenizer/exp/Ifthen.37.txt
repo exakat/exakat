@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.37.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case 'b' :  /**/  
               Label : CASE
                 'b'
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     $c
@@ -26,63 +25,57 @@ Label : PROJECT
                     elseif
                     Label : CONDITION
                       empty
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'h'
-                          Label : VARIABLE
-                            $g
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'h'
+                        Label : VARIABLE
+                          $g
                       Label : NAME
                         empty
                     Label : THEN
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         Void
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       $e
-                Label : ELEMENT
+                Label : EXPRESSION
                   require_once
-                  Label : ARGUMENTS
-                    )
+                  Label : ARGUMENT
+                    a
                     Label : ARGUMENT
+                      'b'
+                    Label : NAME
                       a
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          'b'
-                      Label : NAME
-                        a
                   Label : NAME
                     require_once
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     $h
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     $g
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     false

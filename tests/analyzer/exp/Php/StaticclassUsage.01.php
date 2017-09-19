@@ -10,6 +10,6 @@ $expected     = array('\\X\\B\\ClassName::class',
                       'static::class', 
                       'self::class');
 
-$expected_not = array();
+$expected_not = array('ClassName::x( )');
 
 ?>

@@ -1,49 +1,42 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.71.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           ->
           Label : METHOD
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'C'
+            Label : ARGUMENT
+              'C'
             Label : NAME
               B
           Label : OBJECT
             $a
-        Label : ELEMENT
+        Label : EXPRESSION
           .
           Label : CONCAT
             ->
             Label : METHOD
               D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  E
+                  Label : ARGUMENT
+                    Void
+                  Label : NAME
                     E
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
-                    Label : NAME
-                      E
-                  Label : OBJECT
-                    $c
-                Label : ARGUMENT
-                  'F'
-                Label : ARGUMENT
-                  'G'
+                Label : OBJECT
+                  $c
+              Label : ARGUMENT
+                'F'
+              Label : ARGUMENT
+                'G'
               Label : NAME
                 D
             Label : OBJECT
@@ -52,14 +45,12 @@ Label : PROJECT
             ->
             Label : METHOD
               H
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'I'
-                Label : ARGUMENT
-                  'J'
-                Label : ARGUMENT
-                  'K'
+              Label : ARGUMENT
+                'I'
+              Label : ARGUMENT
+                'J'
+              Label : ARGUMENT
+                'K'
               Label : NAME
                 H
             Label : OBJECT
@@ -68,13 +59,11 @@ Label : PROJECT
             ->
             Label : METHOD
               L
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'M'
-                Label : ARGUMENT
-                  'N'
               Label : NAME
                 L
+              Label : ARGUMENT
+                'M'
+              Label : ARGUMENT
+                'N'
             Label : OBJECT
               $e

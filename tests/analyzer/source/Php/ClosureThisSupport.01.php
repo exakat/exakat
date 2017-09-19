@@ -8,6 +8,7 @@ class A {
 
   public function dontGetClosure() 
   {
+    return function($value) { return $value; };
     return $this->value;
   }
 }

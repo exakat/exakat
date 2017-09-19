@@ -1,16 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           $x
-        Label : ELEMENT
+        Label : EXPRESSION
           !
           Label : NOT
             $y

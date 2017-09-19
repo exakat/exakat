@@ -1,28 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Declare.11.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           declare
+          Label : ARGUMENT
+            =
+            Label : LEFT
+              ticks
+            Label : RIGHT
+              1
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $b
               Label : RIGHT
                 $a
-          Label : DECLARE
-            (
-            Label : ARGUMENT
-              =
-              Label : LEFT
-                ticks
-              Label : RIGHT
-                1

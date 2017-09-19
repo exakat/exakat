@@ -1,52 +1,49 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Concatenation.36.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             preg_replace
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                "
-                Label : CONCAT
-                  b
-                Label : CONCAT
-                  [
-                  Label : INDEX
-                    d
-                  Label : VARIABLE
-                    $c
-                Label : CONCAT
-                  e
-              Label : ARGUMENT
-                .
-                Label : CONCAT
-                  "f"
-                Label : CONCAT
-                  (
-                  Label : CODE
-                    +
-                    Label : LEFT
-                      [
-                      Label : INDEX
-                        'h'
-                      Label : VARIABLE
-                        $g
-                    Label : RIGHT
-                      1
-                Label : CONCAT
-                  "\\2"
-              Label : ARGUMENT
-                $i
+            Label : ARGUMENT
+              "
+              Label : CONCAT
+                b
+              Label : CONCAT
+                [
+                Label : INDEX
+                  d
+                Label : VARIABLE
+                  $c
+              Label : CONCAT
+                e
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                "f"
+              Label : CONCAT
+                (
+                Label : CODE
+                  +
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      'h'
+                    Label : VARIABLE
+                      $g
+                  Label : RIGHT
+                    1
+              Label : CONCAT
+                "\\2"
+            Label : ARGUMENT
+              $i
             Label : NAME
               preg_replace

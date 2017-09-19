@@ -44,9 +44,30 @@ GREMLIN;
             return;
         }
 
+        // $a->staticMethod (Anywhere in the code)
         $this->atomIs('Methodcall')
+             ->outIs('OBJECT')
+             ->codeIsNot('$this')
+             ->back('first')
              ->outIs('METHOD')
              ->codeIs($methods, true)
+             ->back('first');
+        $this->prepareQuery();
+
+        // $this->staticMethod (In the local class tree)
+        $this->atomIs('Methodcall')
+             ->outIs('OBJECT')
+             ->codeIs('$this')
+             ->back('first')
+             ->outIs('METHOD')
+             ->outIs('NAME')
+             ->savePropertyAs('code', 'name')
+             ->goToClass()
+             ->goToAllParents(self::INCLUDE_SELF)
+             ->outIs('METHOD')
+             ->hasOut('STATIC')
+             ->outIs('NAME')
+             ->samePropertyAs('code', 'name')
              ->back('first');
         $this->prepareQuery();
     }

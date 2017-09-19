@@ -1,27 +1,22 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.33.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       UV
-    Label : ELEMENT
+    Label : EXPRESSION
       <?=
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           <?=
-          Label : ARGUMENTS
-            <?=
+          Label : ARGUMENT
+            S
             Label : ARGUMENT
+              'UX1'
+            Label : NAME
               S
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'UX1'
-              Label : NAME
-                S
           Label : NAME
             <?=
-    Label : ELEMENT
+    Label : EXPRESSION
       UW

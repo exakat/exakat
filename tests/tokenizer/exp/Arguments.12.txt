@@ -1,50 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             str_replace
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'b'
-              Label : ARGUMENT
+            Label : ARGUMENT
+              'b'
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'e'
+              Label : VARIABLE
                 [
                 Label : INDEX
-                  'e'
+                  'd'
+                Label : VARIABLE
+                  $c
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'i'
+              Label : VARIABLE
+                [
+                Label : INDEX
+                  'h'
                 Label : VARIABLE
                   [
                   Label : INDEX
-                    'd'
+                    'g'
                   Label : VARIABLE
-                    $c
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'i'
-                Label : VARIABLE
-                  [
-                  Label : INDEX
-                    'h'
-                  Label : VARIABLE
-                    [
-                    Label : INDEX
-                      'g'
-                    Label : VARIABLE
-                      $f
+                    $f
             Label : NAME
               str_replace
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
@@ -52,7 +49,7 @@ Label : PROJECT
               $j
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $n
@@ -60,7 +57,7 @@ Label : PROJECT
                 true
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $k
@@ -74,23 +71,19 @@ Label : PROJECT
                     'l'
                   Label : VARIABLE
                     $k
-        Label : ELEMENT
+        Label : EXPRESSION
           require_once
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
+          Label : ARGUMENT
+            o
+            Label : NAME
               o
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  .
-                  Label : CONCAT
-                    'p'
-                  Label : CONCAT
-                    $q
-                Label : ARGUMENT
-                  'r'
-              Label : NAME
-                o
+            Label : ARGUMENT
+              .
+              Label : CONCAT
+                'p'
+              Label : CONCAT
+                $q
+            Label : ARGUMENT
+              'r'
           Label : NAME
             require_once

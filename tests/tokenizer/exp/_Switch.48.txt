@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.48.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case B < 3 ? -4 : C :  /**/  
               Label : CASE
                 ?
@@ -28,33 +27,33 @@ Label : PROJECT
                   -4
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case D :  /**/  
               Label : CASE
                 D
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   :
-                  Label : LABEL
+                  Label : GOTOLABEL
                     E
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   :
-                  Label : LABEL
+                  Label : GOTOLABEL
                     F
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void

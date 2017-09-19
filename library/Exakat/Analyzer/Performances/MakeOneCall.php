@@ -36,7 +36,6 @@ class MakeOneCall extends Analyzer {
              ->outIs('RIGHT')
              ->atomFunctionIs($functionsArg2)
              ->savePropertyAs('fullnspath', 'fnp')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
              ->savePropertyAs('fullcode', 'string')
              ->back('first')
@@ -45,7 +44,6 @@ class MakeOneCall extends Analyzer {
              ->outIs('RIGHT')
              ->functioncallIs($functionsArg2)
              ->samePropertyAs('fullnspath', 'fnp')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 2)
              ->samePropertyAs('fullcode', 'string')
              ->back('first');
@@ -54,29 +52,26 @@ class MakeOneCall extends Analyzer {
         // Nesting str_replace calls
         // First level calling
         $this->atomFunctionIs($functionsArg2)
-             ->hasNoIn('ARGUMENT')
+             ->hasIn('ARGUMENT')
              ->savePropertyAs('fullnspath', 'function')
-             ->outIs('ARGUMENTS')
-             ->outWithRank('ARGUMENT', 2)
+             ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
              ->samePropertyAs('fullnspath', 'function')
-             ->back('first');
+             ->hasNoIn('ARGUMENT');
         $this->prepareQuery();
 
         //Calling from another functioncall
+        // Second level calling
         $this->atomFunctionIs($functionsArg2)
              ->hasIn('ARGUMENT')
              ->savePropertyAs('fullnspath', 'function')
              ->inIs('ARGUMENT')
-             ->hasIn('ARGUMENTS')
+             ->atomIs('Functioncall')
+             ->savePropertyAs('fullnspath', 'function')
+             ->inIs('ARGUMENT')
              ->atomIs('Functioncall')
              ->samePropertyAs('fullnspath', 'function')
-             ->back('first')
-             ->outIs('ARGUMENTS')
-             ->outWithRank('ARGUMENT', 2)
-             ->atomIs('Functioncall')
-             ->samePropertyAs('fullnspath', 'function')
-             ->back('first');
+             ->hasIn('ARGUMENT');
         $this->prepareQuery();
         
         // same functions, in a foreach?

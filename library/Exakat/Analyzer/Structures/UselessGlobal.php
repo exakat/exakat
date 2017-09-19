@@ -34,20 +34,20 @@ class UselessGlobal extends Analyzer {
     public function analyze() {
 
         // Global are unused if used only once
-        $inglobal = $this->query(<<<GREMLIN
+        $query = <<<GREMLIN
 g.V().hasLabel("Globaldefinition").values("code")
-GREMLIN
-);
+GREMLIN;
+        $inglobal = $this->query($query);
 
-        $inGLobals = $this->query(<<<'GREMLIN'
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Variable", "Variablearray").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").values("globalvar")
-GREMLIN
-);
+GREMLIN;
+        $inGLobals = $this->query($query);
 
-        $implicitGLobals = $this->query(<<<'GREMLIN'
+        $query = <<<'GREMLIN'
 g.V().hasLabel("Php").out('CODE').repeat(__.out().not(hasLabel("Function", "Class", "Classanonymous", "Closure", "Trait", "Interface")) ).emit(hasLabel("Variable")).times(15).values('code')
-GREMLIN
-);
+GREMLIN;
+        $implicitGLobals = $this->query($query);
 
         $counts = array_count_values(array_merge($inGLobals, $inglobal, $implicitGLobals));
         $loneGlobal = array_filter($counts, function ($x) { return $x == 1; });

@@ -1,34 +1,29 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Dollar.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           array
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                b
-              Label : PROPERTY
-                $
-                Label : NAME
-                  $name
-        Label : ELEMENT
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              b
+            Label : MEMBER
+              $
+              Label : NAME
+                $name
+        Label : EXPRESSION
           array
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                b
-              Label : PROPERTY
-                $
-                Label : NAME
-                  $name
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              b
+            Label : MEMBER
+              $
+              Label : NAME
+                $name

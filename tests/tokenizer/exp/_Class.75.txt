@@ -1,15 +1,16 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Class.75.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
+          Label : NAME
+            x3
           Label : CONST
             const
             Label : CONST
@@ -26,8 +27,6 @@ Label : PROJECT
                 and
               Label : VALUE
                 3
-          Label : DEFINITION, DEFINITION
-            static
           Label : CONST
             const
             Label : CONST
@@ -524,5 +523,3 @@ Label : PROJECT
                 yield
               Label : VALUE
                 3
-          Label : NAME
-            x3

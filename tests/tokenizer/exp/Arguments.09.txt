@@ -1,122 +1,91 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Arguments.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
+          Label : NAME
+            a
+          Label : ARGUMENT
+            array
             Label : ARGUMENT
-              array
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'b'
+              'b'
+          Label : ARGUMENT
+            'c'
+        Label : EXPRESSION
+          a
+          Label : NAME
+            a
+          Label : ARGUMENT
+            d
+            Label : ARGUMENT
+              'b'
+            Label : NAME
+              d
+          Label : ARGUMENT
+            'c'
+        Label : EXPRESSION
+          a
+          Label : ARGUMENT
+            d
+            Label : ARGUMENT
+              'b'
+            Label : NAME
+              d
+          Label : NAME
+            a
+        Label : EXPRESSION
+          a
+          Label : ARGUMENT
+            d
+            Label : ARGUMENT
+              Void
+            Label : NAME
+              d
+          Label : NAME
+            a
+        Label : EXPRESSION
+          a
+          Label : NAME
+            a
+          Label : ARGUMENT
+            d
+            Label : ARGUMENT
+              'b'
+            Label : NAME
+              d
+          Label : ARGUMENT
+            e
             Label : ARGUMENT
               'c'
-          Label : NAME
-            a
-        Label : ELEMENT
+            Label : NAME
+              e
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
+          Label : ARGUMENT
+            d
             Label : ARGUMENT
+              'b'
+            Label : NAME
               d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'b'
-              Label : NAME
-                d
+          Label : ARGUMENT
+            e
             Label : ARGUMENT
               'c'
-          Label : NAME
-            a
-        Label : ELEMENT
-          a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'b'
-              Label : NAME
-                d
-          Label : NAME
-            a
-        Label : ELEMENT
-          a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : NAME
-                d
-          Label : NAME
-            a
-        Label : ELEMENT
-          a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'b'
-              Label : NAME
-                d
-            Label : ARGUMENT
+            Label : NAME
               e
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'c'
-              Label : NAME
-                e
-          Label : NAME
-            a
-        Label : ELEMENT
-          a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              d
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'b'
-              Label : NAME
-                d
-            Label : ARGUMENT
-              e
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'c'
-              Label : NAME
-                e
-            Label : ARGUMENT
+          Label : ARGUMENT
+            f
+            Label : NAME
               f
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  2
-                Label : ARGUMENT
-                  3
-              Label : NAME
-                f
+            Label : ARGUMENT
+              2
+            Label : ARGUMENT
+              3
           Label : NAME
             a

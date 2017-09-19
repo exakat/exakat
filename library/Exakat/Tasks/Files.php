@@ -25,10 +25,11 @@ namespace Exakat\Tasks;
 
 use Exakat\Phpexec;
 use Exakat\Config;
-use Exakat\Exceptions\ProjectNeeded;
-use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\MissingFile;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoFileToProcess;
+use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\ProjectNeeded;
 
 class Files extends Tasks {
     const CONCURENCE = self::ANYTIME;
@@ -80,11 +81,25 @@ class Files extends Tasks {
 
         $tmpFileName = $this->config->projects_root.'/projects/.exakat/files.'.getmypid().'.txt';
         $path = $this->config->projects_root.'/projects/'.$dir.'/code';
-        $tmpFiles = array_map(function ($file) use ($path) { return str_replace(array('(', ')', ' ', '$'), array('\\(', '\\)', '\\ ', '\\$'), '.'.$file);}, $files);
+        $tmpFiles = array_map(function ($file) use ($path) {
+            return str_replace(array('\\', '(', ')', ' ', '$', '<', "'", '"', ),
+                               array('\\\\', '\\(', '\\)', '\\ ', '\\$', '\\<', "\\'", '\\"', ),
+                               '.'.$file);
+                               }, $files);
         file_put_contents($tmpFileName, implode("\n", $tmpFiles));
 
         $versions = $this->config->other_php_versions;
         $versions = array('54', '55', '56', '70', '71', '72', '73');
+
+        $missing = array();
+        foreach($files as $file) {
+            if (!file_exists($path.$file)) {
+                $missing[] = $file;
+            }
+        }
+        if (!empty($missing)) {
+            throw new MissingFile($missing);
+        }
 
         $analyzingVersion = $this->config->phpversion[0].$this->config->phpversion[2];
         $id = array_search($analyzingVersion, $versions);
@@ -94,7 +109,7 @@ class Files extends Tasks {
         foreach($versions as $version) {
             if (empty($this->config->{'php'.$version})) {
                 // This version is not defined
-                continue; 
+                continue;
             }
             $toRemoveFromFiles = array();
             display('Check compilation for '.$version);
@@ -254,7 +269,7 @@ class Files extends Tasks {
                         $incompilables[$fileName] = array('error' => $r[1], 'file' => $fileName, 'line' => $r[3]);
                     }
                 } elseif (substr($resFile, 0, 14) == 'Errors parsing') {
-                    continue; 
+                    continue;
                 } else {
                     assert(false,  "'".print_r($resFile, true)."'\n");
                 }

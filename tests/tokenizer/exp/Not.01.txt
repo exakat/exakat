@@ -1,16 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Not.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           !
           Label : NOT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

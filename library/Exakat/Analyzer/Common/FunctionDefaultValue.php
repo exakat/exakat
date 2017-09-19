@@ -32,7 +32,6 @@ class FunctionDefaultValue extends Analyzer {
         $this->atomIs('Functioncall')
              ->codeIs($this->code)
              ->hasNoIn('METHOD')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', $this->rank)
              ->back('first');
         $this->prepareQuery();

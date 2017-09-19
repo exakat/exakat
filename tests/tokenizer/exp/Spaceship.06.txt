@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Spaceship.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !==
@@ -20,23 +19,21 @@ Label : PROJECT
                   $handle
                 Label : RIGHT
                   fopen
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      "people.csv"
-                    Label : ARGUMENT
-                      "r"
                   Label : NAME
                     fopen
+                  Label : ARGUMENT
+                    "people.csv"
+                  Label : ARGUMENT
+                    "r"
             Label : RIGHT
               FALSE
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               while
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $data
@@ -54,57 +51,49 @@ Label : PROJECT
                       $row
                     Label : RIGHT
                       fgetcsv
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $handle
-                        Label : ARGUMENT
-                          1000
-                        Label : ARGUMENT
-                          ","
+                      Label : ARGUMENT
+                        $handle
+                      Label : ARGUMENT
+                        1000
+                      Label : ARGUMENT
+                        ","
                       Label : NAME
                         fgetcsv
                 Label : RIGHT
                   FALSE
-            Label : ELEMENT
+            Label : EXPRESSION
               fclose
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $handle
+              Label : ARGUMENT
+                $handle
               Label : NAME
                 fclose
-        Label : ELEMENT
+        Label : EXPRESSION
           usort
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $data
-            Label : ARGUMENT
-              function
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $left
-                Label : ARGUMENT
-                  $right
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  return
-                  Label : RETURN
-                    <=>
-                    Label : LEFT
-                      [
-                      Label : INDEX
-                        1
-                      Label : VARIABLE
-                        $left
-                    Label : RIGHT
-                      [
-                      Label : INDEX
-                        1
-                      Label : VARIABLE
-                        $right
           Label : NAME
             usort
+          Label : ARGUMENT
+            $data
+          Label : ARGUMENT
+            function
+            Label : ARGUMENT
+              $left
+            Label : ARGUMENT
+              $right
+            Label : BLOCK
+              {}
+              Label : EXPRESSION
+                return
+                Label : RETURN
+                  <=>
+                  Label : LEFT
+                    [
+                    Label : INDEX
+                      1
+                    Label : VARIABLE
+                      $left
+                  Label : RIGHT
+                    [
+                    Label : INDEX
+                      1
+                    Label : VARIABLE
+                      $right

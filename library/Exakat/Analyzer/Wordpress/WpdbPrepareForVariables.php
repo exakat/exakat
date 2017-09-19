@@ -36,13 +36,12 @@ class WpdbPrepareForVariables extends Analyzer {
              ->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs($methods)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs(array('String', 'Heredoc'))
              ->outIs('CONCAT')
              ->atomIs(array('Variable', 'Array', 'Member'))
              // If it's a property, we accept $wpdb
-             ->raw('where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )')
+             ->raw('not( __.where( __.out("OBJECT").has("code", "\$wpdb") ) )')
              ->back('results');
         $this->prepareQuery();
 
@@ -54,13 +53,12 @@ class WpdbPrepareForVariables extends Analyzer {
              ->atomIs('Methodcall')
              ->outIs('METHOD')
              ->codeIs($methods)
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs('Concatenation')
              ->outIs('CONCAT')
              ->atomIs(array('Variable', 'Array', 'Member'))
              // If it's a property, we accept $wpdb
-             ->raw('where( __.out("OBJECT").has("code", "\$wpdb").count().is(eq(0)) )')
+             ->raw('not( __.where( __.out("OBJECT").has("code", "\$wpdb") ) )')
              ->back('results');
         $this->prepareQuery();
     }

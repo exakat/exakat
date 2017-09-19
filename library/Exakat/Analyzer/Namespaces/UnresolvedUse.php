@@ -45,9 +45,9 @@ class UnresolvedUse extends Analyzer {
         $this->atomIs('Use')
              ->hasNoClassTrait()
              ->outIs('USE')
-             ->analyzerIsNot(array('Classes/IsExtClass', 
-                                   'Interfaces/IsExtInterface', 
-                                   'Traits/IsExtTrait', 
+             ->analyzerIsNot(array('Classes/IsExtClass',
+                                   'Interfaces/IsExtInterface',
+                                   'Traits/IsExtTrait',
                                    'Composer/IsComposerNsname'))
              ->fullnspathIsNot($all);
         $this->prepareQuery();

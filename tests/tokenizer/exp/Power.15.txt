@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Power.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           **
           Label : LEFT
             ::
@@ -16,15 +15,13 @@ Label : PROJECT
               a
             Label : METHOD
               x
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  1
+              Label : ARGUMENT
+                1
               Label : NAME
                 x
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           **
           Label : LEFT
             ::
@@ -32,10 +29,8 @@ Label : PROJECT
               a
             Label : METHOD
               x
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  1
+              Label : ARGUMENT
+                1
               Label : NAME
                 x
           Label : RIGHT
@@ -44,13 +39,11 @@ Label : PROJECT
               a2
             Label : METHOD
               x2
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  12
+              Label : ARGUMENT
+                12
               Label : NAME
                 x2
-        Label : ELEMENT
+        Label : EXPRESSION
           **
           Label : LEFT
             2
@@ -60,9 +53,7 @@ Label : PROJECT
               a2
             Label : METHOD
               x2
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  12
+              Label : ARGUMENT
+                12
               Label : NAME
                 x2

@@ -1,43 +1,38 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ->
+            Label : MEMBER
+              B
             Label : OBJECT
               $a
-            Label : PROPERTY
-              B
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'D'
+              Label : ARGUMENT
+                'D'
               Label : NAME
                 C
-            Label : ELEMENT
+            Label : EXPRESSION
               D
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   F
               Label : OBJECT
                 $b
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

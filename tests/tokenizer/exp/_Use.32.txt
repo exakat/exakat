@@ -1,13 +1,12 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Use.32.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : CONST
             const
@@ -15,7 +14,7 @@ Label : PROJECT
             FooLibrary\Bar\Baz
           Label : USE
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : FUNCTION
             function
@@ -23,7 +22,7 @@ Label : PROJECT
             FooLibrary\Bar\Baz
           Label : USE
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           use
           Label : GROUPUSE
             FooLibrary\Bar\Baz

@@ -1,64 +1,57 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Coalesce.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foo
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 ??
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    names
                   Label : OBJECT
                     $this
-                  Label : PROPERTY
-                    names
                 Label : RIGHT
                   =
                   Label : LEFT
                     ->
+                    Label : MEMBER
+                      names
                     Label : OBJECT
                       $this
-                    Label : PROPERTY
-                      names
                   Label : RIGHT
                     array_keys
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $this
-                        Label : PROPERTY
-                          fields
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        fields
+                      Label : OBJECT
+                        $this
                     Label : NAME
                       array_keys
-            Label : ELEMENT
+            Label : EXPRESSION
               static
               Label : STATIC
                 $a
-            Label : ELEMENT
+            Label : EXPRESSION
               print_r
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $a
+              Label : ARGUMENT
+                $a
               Label : NAME
                 print_r
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $a
@@ -66,113 +59,95 @@ Label : PROJECT
                 new
                 Label : NEW
                   stdclass
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     stdclass
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  fields
                 Label : OBJECT
                   $a
-                Label : PROPERTY
-                  fields
               Label : RIGHT
                 [
-                Label : ARGUMENTS
-                  [
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    2
-                  Label : ARGUMENT
-                    3
-            Label : ELEMENT
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  2
+                Label : ARGUMENT
+                  3
+            Label : EXPRESSION
               =
               Label : LEFT
                 ->
+                Label : MEMBER
+                  names
                 Label : OBJECT
                   $a
-                Label : PROPERTY
-                  names
               Label : RIGHT
                 null
-            Label : ELEMENT
+            Label : EXPRESSION
               return
               Label : RETURN
                 ??
                 Label : LEFT
                   ->
+                  Label : MEMBER
+                    names
                   Label : OBJECT
                     $a
-                  Label : PROPERTY
-                    names
                 Label : RIGHT
                   =
                   Label : LEFT
                     ->
+                    Label : MEMBER
+                      names
                     Label : OBJECT
                       $a
-                    Label : PROPERTY
-                      names
                   Label : RIGHT
                     count
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $a
-                        Label : PROPERTY
-                          fields
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        fields
+                      Label : OBJECT
+                        $a
                     Label : NAME
                       count
           Label : DEFINITION
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               foo
           Label : DEFINITION
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               foo
           Label : NAME
             foo
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
+          Label : ARGUMENT
+            foo
             Label : ARGUMENT
+              Void
+            Label : NAME
               foo
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : NAME
-                foo
           Label : NAME
             var_dump
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
+          Label : ARGUMENT
+            foo
             Label : ARGUMENT
+              Void
+            Label : NAME
               foo
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
-              Label : NAME
-                foo
           Label : NAME
             var_dump

@@ -1,64 +1,59 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Label.16.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case T_LNUMBER :  /**/  
               Label : CASE
                 T_LNUMBER
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $a
-                Label : ELEMENT
+                Label : EXPRESSION
                   goto
                   Label : GOTO
                     T_C
-            Label : ELEMENT
+            Label : EXPRESSION
               case T_B :  /**/  
               Label : CASE
                 T_B
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $a
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      'a'
+                  Label : ARGUMENT
+                    'a'
                   Label : NAME
                     echo
           Label : NAME
             $t
-        Label : ELEMENT
+        Label : EXPRESSION
           :
-          Label : LABEL
+          Label : GOTOLABEL
             T_C
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              'fin'
+          Label : ARGUMENT
+            'fin'
           Label : NAME
             echo

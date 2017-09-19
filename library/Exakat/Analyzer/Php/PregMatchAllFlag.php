@@ -27,12 +27,10 @@ class PregMatchAllFlag extends Analyzer {
     public function analyze() {
         // Using default configuration
         $this->atomFunctionIs('\preg_match_all')
-             ->outIs('ARGUMENTS')
              ->noChildWithRank('ARGUMENT', 3)
              ->outWithRank('ARGUMENT', 2)
              ->savePropertyAs('code', 'r')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->nextSiblings() // Do we really need all of them? May be limit to 3/5
              ->atomIs('Foreach')
              ->outIs('SOURCE')
@@ -61,7 +59,6 @@ class PregMatchAllFlag extends Analyzer {
 
         // Using explicit configuration
         $this->atomFunctionIs('\preg_match_all')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 3)
              ->atomIs(array('Identifier', 'Nsname'))
              ->fullnspathIs('\preg_pattern_order')
@@ -69,7 +66,6 @@ class PregMatchAllFlag extends Analyzer {
              ->outWithRank('ARGUMENT', 2)
              ->savePropertyAs('code', 'r')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->nextSiblings() // Do we really need all of them? May be limit to 3/5
              ->atomIs('Foreach')
              ->outIs('SOURCE')

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticproperty.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : DEFINITION
             static
@@ -18,46 +17,40 @@ Label : PROJECT
             B
           Label : METHOD
             D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $b
                 Label : RIGHT
                   'E'
-              Label : ELEMENT
+              Label : EXPRESSION
                 =
                 Label : LEFT
                   $c
                 Label : RIGHT
                   'F'
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   static
                 Label : METHOD
                   $b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
+                  Label : ARGUMENT
+                    $c
                   Label : NAME
                     $b
-              Label : ELEMENT
+              Label : EXPRESSION
                 ::
                 Label : CLASS
                   B
                 Label : METHOD
                   $b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      $c
+                  Label : ARGUMENT
+                    $c
                   Label : NAME
                     $b
             Label : NAME
@@ -66,22 +59,18 @@ Label : PROJECT
               static
           Label : METHOD
             H
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $d
+            Label : ARGUMENT
+              $d
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      __METHOD__
-                    Label : CONCAT
-                      'I'
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    __METHOD__
+                  Label : CONCAT
+                    'I'
                 Label : NAME
                   echo
             Label : NAME
@@ -90,22 +79,18 @@ Label : PROJECT
               static
           Label : METHOD
             J
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $d
+            Label : ARGUMENT
+              $d
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 echo
-                Label : ARGUMENTS
-                  echo
-                  Label : ARGUMENT
-                    .
-                    Label : CONCAT
-                      __METHOD__
-                    Label : CONCAT
-                      'I'
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    __METHOD__
+                  Label : CONCAT
+                    'I'
                 Label : NAME
                   echo
             Label : NAME
@@ -124,15 +109,13 @@ Label : PROJECT
                 'C'
             Label : STATIC
               static
-        Label : ELEMENT
+        Label : EXPRESSION
           ::
           Label : CLASS
             B
           Label : METHOD
             D
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               D

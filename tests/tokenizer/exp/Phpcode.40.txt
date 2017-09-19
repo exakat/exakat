@@ -1,56 +1,47 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.40.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $b
-            Label : ARGUMENT
-              $c
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Q
-            Label : ELEMENT
+            Label : EXPRESSION
               <?=
-              Label : ARGUMENTS
-                <?=
-                Label : ARGUMENT
-                  $g
+              Label : ARGUMENT
+                $g
               Label : NAME
                 <?=
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               R
-            Label : ELEMENT
+            Label : EXPRESSION
               <?=
-              Label : ARGUMENTS
-                <?=
+              Label : ARGUMENT
+                E
                 Label : ARGUMENT
+                  'T'
+                Label : NAME
                   E
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'T'
-                  Label : NAME
-                    E
               Label : NAME
                 <?=
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
-            Label : ELEMENT
+            Label : EXPRESSION
               E
+          Label : ARGUMENT
+            $b
+          Label : ARGUMENT
+            $c
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

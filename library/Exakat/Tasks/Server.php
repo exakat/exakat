@@ -36,7 +36,7 @@ class Server extends Tasks {
         }
 
         if (file_exists($this->config->dir_root.'/projects/index.php')) {
-            display('A server is already running. Aborting.');
+            display('A server is already installed. Aborting.');
             return;
         }
 

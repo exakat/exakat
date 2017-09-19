@@ -1,68 +1,55 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yield.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           a
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               foreach
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   yield
                   Label : YIELD
                     Void
               Label : SOURCE
                 range
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    1
-                  Label : ARGUMENT
-                    3
                 Label : NAME
                   range
+                Label : ARGUMENT
+                  1
+                Label : ARGUMENT
+                  3
               Label : VALUE
                 $i
           Label : DEFINITION
             a
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               a
           Label : NAME
             a
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
+          Label : ARGUMENT
+            iterator_to_array
             Label : ARGUMENT
-              iterator_to_array
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  a
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
-                  Label : NAME
-                    a
+              a
+              Label : ARGUMENT
+                Void
               Label : NAME
-                iterator_to_array
+                a
+            Label : NAME
+              iterator_to_array
           Label : NAME
             var_dump

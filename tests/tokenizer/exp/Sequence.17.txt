@@ -1,56 +1,49 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.17.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ||
             Label : LEFT
               empty
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'b'
-                  Label : VARIABLE
-                    $a
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'b'
+                Label : VARIABLE
+                  $a
               Label : NAME
                 empty
             Label : RIGHT
               !
               Label : NOT
                 in_array
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'd'
-                    Label : VARIABLE
-                      $c
-                  Label : ARGUMENT
-                    array
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'e'
-                      Label : ARGUMENT
-                        'f'
-                      Label : ARGUMENT
-                        'g'
                 Label : NAME
                   in_array
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'd'
+                  Label : VARIABLE
+                    $c
+                Label : ARGUMENT
+                  array
+                  Label : ARGUMENT
+                    'e'
+                  Label : ARGUMENT
+                    'f'
+                  Label : ARGUMENT
+                    'g'
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [

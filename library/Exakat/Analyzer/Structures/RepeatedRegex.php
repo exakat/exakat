@@ -31,12 +31,11 @@ class RepeatedRegex extends Analyzer {
         $functionsList = '"\\\\'.implode('", "\\\\', $functions).'"';
     
         $repeatedRegex = $this->query('g.V().hasLabel("Functioncall").has("fullnspath", within('.$functionsList.'))
-        .out("ARGUMENTS").out("ARGUMENT").hasLabel("String").not(where(__.out("CONCAT")))
+        .out("ARGUMENT").hasLabel("String").not(where(__.out("CONCAT")))
         .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b > 1}.keySet()');
 
         // regex
         $this->atomFunctionIs(array('\\preg_match'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs('String')
              ->hasNoOut('CONCAT')

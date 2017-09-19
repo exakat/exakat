@@ -1,67 +1,56 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Staticclass.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            class
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                inGlobalScope
-              Label : CLASS
-                class
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              inGlobalScope
+            Label : CLASS
+              class
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           x
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               print
-              Label : ARGUMENTS
-                class
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    inFunctionScope
-                  Label : CLASS
-                    class
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  inFunctionScope
+                Label : CLASS
+                  class
               Label : NAME
                 print
           Label : NAME
             x
-        Label : ELEMENT
+        Label : EXPRESSION
           trait
           Label : METHOD
             tx
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 print
-                Label : ARGUMENTS
-                  class
-                  Label : ARGUMENT
-                    ::
-                    Label : CLASS
-                      inTraitMethodScope
-                    Label : CLASS
-                      class
+                Label : ARGUMENT
+                  ::
+                  Label : CLASS
+                    inTraitMethodScope
+                  Label : CLASS
+                    class
                 Label : NAME
                   print
             Label : NAME

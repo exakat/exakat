@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Static.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             a
@@ -87,37 +86,37 @@ Label : PROJECT
           Label : PPP
             static
             Label : PPP
-              $x1
-            Label : PPP
               $y1
+            Label : PPP
+              $x1
             Label : STATIC
               static
           Label : PPP
             static
-            Label : PPP
-              =
-              Label : LEFT
-                $x2
-              Label : RIGHT
-                1
             Label : PPP
               =
               Label : LEFT
                 $y2
               Label : RIGHT
                 1
+            Label : PPP
+              =
+              Label : LEFT
+                $x2
+              Label : RIGHT
+                1
             Label : STATIC
               static
           Label : PPP
             static
+            Label : PPP
+              $y3
             Label : PPP
               =
               Label : LEFT
                 $x3
               Label : RIGHT
                 1
-            Label : PPP
-              $y3
             Label : STATIC
               static
           Label : PPP
@@ -135,9 +134,9 @@ Label : PROJECT
           Label : PPP
             static
             Label : PPP
-              $x5
-            Label : PPP
               $y5
+            Label : PPP
+              $x5
             Label : PPP
               $z5
             Label : PPP
@@ -149,13 +148,13 @@ Label : PROJECT
             Label : PPP
               =
               Label : LEFT
-                $x6
+                $y6
               Label : RIGHT
                 1
             Label : PPP
               =
               Label : LEFT
-                $y6
+                $x6
               Label : RIGHT
                 1
             Label : PPP
@@ -175,6 +174,8 @@ Label : PROJECT
           Label : PPP
             static
             Label : PPP
+              $y7
+            Label : PPP
               =
               Label : LEFT
                 $x7
@@ -187,13 +188,13 @@ Label : PROJECT
               Label : RIGHT
                 1
             Label : PPP
-              $y7
-            Label : PPP
               $a7
             Label : STATIC
               static
           Label : PPP
             static
+            Label : PPP
+              $x8
             Label : PPP
               =
               Label : LEFT
@@ -201,15 +202,13 @@ Label : PROJECT
               Label : RIGHT
                 1
             Label : PPP
+              $z8
+            Label : PPP
               =
               Label : LEFT
                 $a8
               Label : RIGHT
                 1
-            Label : PPP
-              $x8
-            Label : PPP
-              $z8
             Label : PRIVATE
               private
             Label : STATIC
@@ -229,9 +228,9 @@ Label : PROJECT
           Label : PPP
             static
             Label : PPP
-              $x11
-            Label : PPP
               $y11
+            Label : PPP
+              $x11
             Label : PPP
               $z11
             Label : STATIC

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Not.07.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             =
@@ -18,21 +17,17 @@ Label : PROJECT
                 $handle
             Label : RIGHT
               fopen
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  '/tmp/test'
-                Label : ARGUMENT
-                  'r+b'
               Label : NAME
                 fopen
+              Label : ARGUMENT
+                '/tmp/test'
+              Label : ARGUMENT
+                'r+b'
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  1
+              Label : ARGUMENT
+                1
               Label : NAME
                 echo

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.93.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ==
@@ -18,13 +17,13 @@ Label : PROJECT
               1
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 $newHash
               Label : RIGHT
                 ''
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 ==
@@ -34,29 +33,27 @@ Label : PROJECT
                   2
               Label : ELSE
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     false
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   if
                   Label : CONDITION
                     !
                     Label : NOT
                       empty
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $newHash
+                      Label : ARGUMENT
+                        $newHash
                       Label : NAME
                         empty
                   Label : THEN
                     {}
-                    Label : ELEMENT
+                    Label : EXPRESSION
                       Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     true

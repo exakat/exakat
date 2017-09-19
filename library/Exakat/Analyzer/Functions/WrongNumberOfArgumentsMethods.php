@@ -50,7 +50,6 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
             $this->atomIs(array('Methodcall', 'Staticmethodcall'))
                  ->outIs('METHOD')
                  ->codeIs($f)
-                 ->outIs('ARGUMENTS')
                  ->isLess('count', $nb)
                  ->back('first');
             $this->prepareQuery();
@@ -60,7 +59,6 @@ class WrongNumberOfArgumentsMethods extends Analyzer {
             $this->atomIs(array('Methodcall', 'Staticmethodcall'))
                  ->outIs('METHOD')
                  ->codeIs($f)
-                 ->outIs('ARGUMENTS')
                  ->isMore('count', $nb)
                  ->back('first');
             $this->prepareQuery();

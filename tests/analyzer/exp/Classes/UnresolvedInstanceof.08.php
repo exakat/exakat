@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$a instanceof TimeDate');
+$expected     = array('$a instanceof TimeDate',
+                     );
 
-$expected_not = array('$a instanceof DateTime');
+$expected_not = array('$a instanceof DateTime',
+                     );
 
 ?>

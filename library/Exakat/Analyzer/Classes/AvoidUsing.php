@@ -57,7 +57,6 @@ class AvoidUsing extends Analyzer {
 
         // class may be used in a typehint
         $this->atomIs(array('Function', 'Method', 'Closure'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIs('TYPEHINT')
              ->fullnspathIs($classesPath)

@@ -1,15 +1,14 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.34.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       A
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           +=
           Label : LEFT
             $a
@@ -21,39 +20,33 @@ Label : PROJECT
                 \C\D
               Label : METHOD
                 E
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    [
-                    Label : INDEX
-                      'F'
-                    Label : VARIABLE
-                      $b
+                Label : ARGUMENT
+                  [
+                  Label : INDEX
+                    'F'
+                  Label : VARIABLE
+                    $b
                 Label : NAME
                   E
             Label : ELSE
               1
             Label : THEN
               0
-        Label : ELEMENT
+        Label : EXPRESSION
           F
-        Label : ELEMENT
+        Label : EXPRESSION
           H
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ::
-              Label : CLASS
-                I\J
-              Label : METHOD
+          Label : ARGUMENT
+            ::
+            Label : CLASS
+              I\J
+            Label : METHOD
+              K
+              Label : ARGUMENT
+                Void
+              Label : NAME
                 K
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  K
           Label : NAME
             H
-    Label : ELEMENT
+    Label : EXPRESSION
       R

@@ -1,67 +1,58 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.36.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       UV
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           S
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'UX1'
+          Label : ARGUMENT
+            'UX1'
           Label : NAME
             S
-        Label : ELEMENT
+        Label : EXPRESSION
           UY
-        Label : ELEMENT
+        Label : EXPRESSION
           f
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 $a
               Label : ELSE
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   UZb
-                Label : ELEMENT
+                Label : EXPRESSION
                   ++
                   Label : POSTPLUSPLUS
                     $b
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   UZa
-                Label : ELEMENT
+                Label : EXPRESSION
                   <?=
-                  Label : ARGUMENTS
-                    <?=
-                    Label : ARGUMENT
-                      ++
-                      Label : POSTPLUSPLUS
-                        $a
+                  Label : ARGUMENT
+                    ++
+                    Label : POSTPLUSPLUS
+                      $a
                   Label : NAME
                     <?=
           Label : NAME
             f
-        Label : ELEMENT
+        Label : EXPRESSION
           S
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              'UX3'
+          Label : ARGUMENT
+            'UX3'
           Label : NAME
             S
-    Label : ELEMENT
+    Label : EXPRESSION
       UW

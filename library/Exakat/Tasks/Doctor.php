@@ -251,7 +251,7 @@ class Doctor extends Tasks {
 
             $ini = file_get_contents($this->config->dir_root.'/server/exakat.ini');
             $ini = str_replace(array('{$version}', '{$version_path}'),
-                               array( $version,     $_SERVER['_']), 
+                               array( $version,     $_SERVER['_']),
                                $ini);
 
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);

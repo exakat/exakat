@@ -26,6 +26,7 @@ namespace Exakat\Loader;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exceptions\LoadError;
+use Exakat\Exceptions\NoSuchFile;
 use Exakat\Graph\Tinkergraph as Graph;
 use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
@@ -50,7 +51,7 @@ class GSNeo4j {
     private $calls = array();
     private $json = array();
     private $project = null;
-    private $id = 0;
+    private $id = 1;
 
     private $gsneo4j = null;
     private $path = null;
@@ -59,7 +60,6 @@ class GSNeo4j {
     public function __construct($gremlin, $config) {
         $this->config = $config;
         
-        // Force autoload
         $this->gsneo4j = $gremlin;
         $this->path = $this->config->projects_root.'/projects/.exakat/gsneo4j.graphson';
         $this->pathDefinition = $this->config->projects_root.'/projects/.exakat/gsneo4j.definition.graphson';
@@ -83,36 +83,92 @@ class GSNeo4j {
 
         self::saveTokenCounts();
 
-        $links = array();
-        foreach($this->calls as $type => $fnps) {
-            foreach($fnps as $fnp => $usage) {
-                if (empty($usage['definitions'])) { continue; }
-                if (empty($usage['calls'])) { continue; }
-                
-                $calls = array_merge(...array_values($usage['calls']));
-                $definitions = array_merge(...array_values($usage['definitions']));
-                
-                foreach($calls as $call) {
-                    $links[$call] = $definitions;
-                }
-            }
+        $sqlite3 = new \Sqlite3($this->config->projects_root.'/projects/.exakat/calls.sqlite');
+
+        $outE = array();
+        $res = $sqlite3->query('SELECT definitions.id AS definition, GROUP_CONCAT(COALESCE(calls.id, calls2.id)) AS call
+FROM definitions
+LEFT JOIN calls 
+    ON definitions.type       = calls.type       AND
+       definitions.fullnspath = calls.fullnspath
+LEFT JOIN calls calls2
+    ON definitions.type       = calls2.type       AND
+       definitions.fullnspath = calls2.globalpath AND
+       calls2.fullnspath      != calls2.globalpath 
+WHERE calls.id IS NOT NULL OR calls2.id IS NOT NULL
+GROUP BY definitions.id
+       ');
+       
+        while($row = $res->fetchArray(SQLITE3_NUM)) {
+            $outE[$row[0]] = explode(',', $row[1]);
+        }
+       
+        $inE = array();
+        $res = $sqlite3->query('SELECT calls.id AS call, GROUP_CONCAT(COALESCE(definitions.id, definitions2.id)) AS definition
+FROM calls
+LEFT JOIN definitions 
+    ON definitions.type       = calls.type       AND
+       definitions.fullnspath = calls.fullnspath
+LEFT JOIN definitions definitions2
+    ON definitions.type       = calls.type       AND
+       definitions.fullnspath = calls.globalpath  AND
+       calls.fullnspath      != calls.globalpath 
+WHERE definitions.id IS NOT NULL OR definitions2.id IS NOT NULL
+GROUP BY calls.id
+       ');
+       
+        while($row = $res->fetchArray(SQLITE3_NUM)) {
+           $inE[$row[0]] = explode(',', $row[1]);
+        }
+       
+        $linksId = array();
+        $fp = fopen($this->path, 'a');
+        if (!is_resource($fp)) {
+            throw new NoSuchFile($this->path);
+        }
+        $fpDefinitions = fopen($this->pathDefinition, 'r');
+        if (!is_resource($fpDefinitions)) {
+            throw new NoSuchFile($this->pathDefinition);
         }
 
-        $fp = fopen($this->path, 'a');
-        $fpDefinitions = fopen($this->pathDefinition, 'r');
         while(!feof($fpDefinitions)) {
             $row = fgets($fpDefinitions);
             if (empty($row)) {continue; }
             $json = json_decode($row);
-            
-            if (!isset($links[$json->id])) {
-                fwrite($fp, $row);
-                continue; 
+
+            if (isset($inE[$json->id])) {
+                $json->inE->DEFINITION = array();
+                foreach($inE[$json->id] as $d) {
+                    if (isset($linksId[$json->id.'->'.$d])) {
+                        $id = $linksId[$json->id.'->'.$d];
+                    } else {
+                        $id = $this->id++;
+                        $linksId[$json->id.'->'.$d] = $id;
+                    }
+
+                    $s = new \stdClass();
+                    $s->id = $id;
+                    $s->outV = (int) $d;
+
+                    $json->inE->DEFINITION[] = $s;
+                }
             }
 
-            $json->inE->DEFINITION = array();
-            foreach($links[$json->id] as $d) {
-                $json->inE->DEFINITION[] = (object) ["id" => $this->id++,"outV" => $d];
+            if (isset($outE[$json->id])) {
+                $json->outE->DEFINITION = array();
+                foreach($outE[$json->id] as $d) {
+                    if (isset($linksId[$d.'->'.$json->id])) {
+                        $id = $linksId[$d.'->'.$json->id];
+                    } else {
+                        $id = $this->id++;
+                        $linksId[$d.'->'.$json->id] = $id;
+                    }
+
+                    $s = new \stdClass();
+                    $s->id = $id;
+                    $s->inV = (int) $d;
+                    $json->outE->DEFINITION[] = $s;
+                }
             }
             
             fwrite($fp, json_encode($json).PHP_EOL);
@@ -120,6 +176,12 @@ class GSNeo4j {
         fclose($fp);
         fclose($fpDefinitions);
         unlink($this->pathDefinition);
+        unset($sqlite3);
+        unlink($this->config->projects_root.'/projects/.exakat/calls.sqlite');
+
+        $this->calls = array();
+        $this->json = array();
+        gc_collect_cycles();
         
         display('loading nodes');
 
@@ -137,10 +199,10 @@ class GSNeo4j {
 
     private function cleanCsv() {
         if (file_exists($this->path)) {
-//            unlink($this->path);
+            unlink($this->path);
         }
         if (file_exists($this->pathDefinition)) {
-//            unlink($this->pathDefinition);
+            unlink($this->pathDefinition);
         }
     }
 
@@ -159,42 +221,16 @@ class GSNeo4j {
         $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant');
         $integerValues = array('count', 'intval', 'args_max', 'args_min');
         
+        $fileName = 'unknown';
+        
         $json = array();
         foreach($atoms as $atom) {
-            $atom = (array) $atom;
-            $label = $atom['atom'];
-            $this->labels[$label] = 1;
-            
-            $object = array('id'    => $atom['id'],
-                            'label' => $label,
-                            'outE'  => new \stdClass(),
-                            'inE'   => new \stdClass());
-        
-            $properties = array();
-            foreach($atom as $l => $value) {
-                if ($l === 'id') { continue; }
-                if ($value === null) { continue; }
-                
-                if (!in_array($l, array('atom', 'rank', 'token', 'fullcode', 'code', 'line')) && 
-                    !in_array($label, Load::$PROP_OPTIONS[$l])) {
-                    continue;
-                };
-
-                if (in_array($l, array('globalvar')) && 
-                    !$value) {
-                    continue;
-                };
-        
-                if (in_array($l, $booleanValues)) {
-                    $value = (boolean) $value;
-                } elseif (in_array($l, $integerValues)) {
-                    $value = (integer) $value;
-                }
-                $properties[$l] = [(object) ['id' => $this->id++, 'value' => $value]];
+            $this->labels[$atom->atom] = 1;
+            if ($atom->atom === 'File') {
+                $fileName = $atom->code;
             }
-        
-            $object['properties'] = $properties;
-            $json[$atom['id']] = (object) $object;
+
+            $json[$atom->id] = $atom->toGraphsonLine($this->id);
         }
 
         if ($this->project === null) {
@@ -206,18 +242,20 @@ class GSNeo4j {
             foreach($a as $b) {
                 foreach($b as $c) {
                     foreach($c as $d) {
-                        if ($d['origin'] === 1) {
-                            $this->project->outE->PROJECT[] = (object) array("id" => $this->id++,"inV" => $d['destination']);
-                        } elseif (isset($json[$d['origin']]->outE)) {
-                            $json[$d['origin']]->outE->$type[] = (object) array("id" => $this->id++,"inV" => $d['destination']);
-                        } else {
-                            $json[$d['origin']]->outE     = (object) array( $type => [ (object) ["id" => $this->id++,"inV" => $d['destination']]]);
-                        }
+                        $linkId = $this->id++;
 
                         if (isset($json[$d['destination']]->inE)) {
-                            $json[$d['destination']]->inE->$type[] = (object) array("id" => $this->id++,"outV" => $d['origin']);
+                            $json[$d['destination']]->inE->$type[] = (object) array("id" => $linkId,"outV" => $d['origin']);
                         } else {
-                            $json[$d['destination']]->inE = (object) array( $type => [ (object) ["id" => $this->id++,"outV" => $d['origin']]]);
+                            $json[$d['destination']]->inE = (object) array( $type => [ (object) ["id" => $linkId,"outV" => $d['origin']]]);
+                        }
+
+                        if ($d['origin'] === 1) {
+                            $this->project->outE->PROJECT[] = (object) array("id" => $linkId,"inV" => $d['destination']);
+                        } elseif (isset($json[$d['origin']]->outE)) {
+                            $json[$d['origin']]->outE->$type[] = (object) array("id" => $linkId,"inV" => $d['destination']);
+                        } else {
+                            $json[$d['origin']]->outE     = (object) array( $type => [ (object) ["id" => $linkId,"inV" => $d['destination']]]);
                         }
                     }
                 }
@@ -228,16 +266,21 @@ class GSNeo4j {
         $fpDefinition = fopen($this->pathDefinition, 'a');
 
         foreach($json as $j) {
-            if (in_array($j->label, array('Functioncall', 'Function', 'Class', 'Classanonymous', 'Newcall', 'Variableobject', 
-                                          'Identifier', 'Nsname', 'Interface', 'Trait', 'String', 'Constant', 'Arguments',
-                                          'Variable', 'Variablearray', ))) {
-                assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
-                fwrite($fpDefinition, $this->json_encode($j).PHP_EOL);
+            if (in_array($j->label, array('Functioncall', 'Function', 
+                                          'Class', 'Classanonymous', 'Newcall', 'Interface', 'Trait', 
+                                          'Identifier', 'Nsname', 'Constant', 
+                                          'String', 
+//                                          'Variable', 'Variablearray', 'Variableobject', 
+                                          ))) {
+                $X = $this->json_encode($j);
+                assert(!json_last_error(), $fileName.' : error encoding for definition '.$j->label.' : '.json_last_error_msg()."\n".' '.print_r($j, true));
+                fwrite($fpDefinition, $X.PHP_EOL);
             } elseif ($j->label === 'Project') {
                 // Just continue;
             } else {
-                assert(!json_last_error(), 'Error encoding '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
-                fwrite($fp, $this->json_encode($j).PHP_EOL);
+                $X = $this->json_encode($j);
+                assert(!json_last_error(), $fileName.' : error encoding normal '.$j->label.' : '.json_last_error_msg()."\n".print_r($j, true));
+                fwrite($fp, $X.PHP_EOL);
             }
         }
 
@@ -247,7 +290,7 @@ class GSNeo4j {
 
     public function saveDefinitions($exakatDir, $calls) {
         //each time...
-        $this->calls = $calls;
+//        $this->calls = $calls;
     }
 
     public function json_encode($object) {
@@ -259,6 +302,9 @@ class GSNeo4j {
         }
         if (isset($object->properties['noDelimiter'])) {
             $object->properties['noDelimiter'][0]->value = utf8_encode($object->properties['noDelimiter'][0]->value);
+        }
+        if (isset($object->properties['globalvar'])) {
+            $object->properties['globalvar'][0]->value = utf8_encode($object->properties['globalvar'][0]->value);
         }
         return json_encode($object);
     }

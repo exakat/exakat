@@ -28,7 +28,6 @@ class FunctionsUsingReference extends Analyzer {
     public function analyze() {
         // Spot references in function definitions
         $this->atomIs('Function')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->is('reference', true)
              ->back('first');

@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           global
           Label : GLOBAL
             $a
@@ -16,22 +15,22 @@ Label : PROJECT
             $b
           Label : GLOBAL
             $c
-        Label : ELEMENT
+        Label : EXPRESSION
           class
           Label : NAME
             x
           Label : PPP
             protected
             Label : PPP
+              $y
+            Label : PPP
+              $x
+            Label : PPP
               =
               Label : LEFT
                 $z
               Label : RIGHT
                 3
-            Label : PPP
-              $x
-            Label : PPP
-              $y
             Label : PPP
               $a
             Label : PROTECTED

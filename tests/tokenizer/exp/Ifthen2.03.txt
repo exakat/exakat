@@ -1,40 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen2.03.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             0
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               W
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'X'
+              Label : ARGUMENT
+                'X'
               Label : NAME
                 W
-            Label : ELEMENT
+            Label : EXPRESSION
               W
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'Z'
-                Label : ARGUMENT
-                  'AA'
               Label : NAME
                 W
+              Label : ARGUMENT
+                'Z'
+              Label : ARGUMENT
+                'AA'
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 &&
@@ -42,14 +37,12 @@ Label : PROJECT
                   !
                   Label : NOT
                     empty
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        [
-                        Label : INDEX
-                          'B'
-                        Label : VARIABLE
-                          $a
+                    Label : ARGUMENT
+                      [
+                      Label : INDEX
+                        'B'
+                      Label : VARIABLE
+                        $a
                     Label : NAME
                       empty
                 Label : RIGHT
@@ -70,14 +63,12 @@ Label : PROJECT
                     !
                     Label : NOT
                       empty
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          [
-                          Label : INDEX
-                            'B'
-                          Label : VARIABLE
-                            $a
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'B'
+                        Label : VARIABLE
+                          $a
                       Label : NAME
                         empty
                   Label : RIGHT
@@ -92,65 +83,53 @@ Label : PROJECT
                         $a
                 Label : ELSE
                   ;
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     R
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'S'
+                    Label : ARGUMENT
+                      'S'
                     Label : NAME
                       R
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     T
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'H'
-                      Label : ARGUMENT
-                        'V'
                     Label : NAME
                       T
-                Label : THEN
-                  ;
-                  Label : ELEMENT
-                    M
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'N'
-                    Label : NAME
-                      M
-                  Label : ELEMENT
-                    M
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        'H'
-                      Label : ARGUMENT
-                        'Q'
-                    Label : NAME
-                      M
-              Label : THEN
-                ;
-                Label : ELEMENT
-                  E
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'F'
-                  Label : NAME
-                    E
-                Label : ELEMENT
-                  E
-                  Label : ARGUMENTS
-                    (
                     Label : ARGUMENT
                       'H'
                     Label : ARGUMENT
-                      'I'
+                      'V'
+                Label : THEN
+                  ;
+                  Label : EXPRESSION
+                    M
+                    Label : ARGUMENT
+                      'N'
+                    Label : NAME
+                      M
+                  Label : EXPRESSION
+                    M
+                    Label : NAME
+                      M
+                    Label : ARGUMENT
+                      'H'
+                    Label : ARGUMENT
+                      'Q'
+              Label : THEN
+                ;
+                Label : EXPRESSION
+                  E
+                  Label : ARGUMENT
+                    'F'
                   Label : NAME
                     E
-            Label : ELEMENT
+                Label : EXPRESSION
+                  E
+                  Label : NAME
+                    E
+                  Label : ARGUMENT
+                    'H'
+                  Label : ARGUMENT
+                    'I'
+            Label : EXPRESSION
               Void
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

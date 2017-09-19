@@ -1,36 +1,33 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Return.27.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             array
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'Jan'
-                Label : VALUE
-                  ''
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'Feb'
-                Label : VALUE
-                  ''
-              Label : ARGUMENT
-                =>
-                Label : KEY
-                  'Mar'
-                Label : VALUE
-                  ''
-        Label : ELEMENT
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'Jan'
+              Label : VALUE
+                ''
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'Feb'
+              Label : VALUE
+                ''
+            Label : ARGUMENT
+              =>
+              Label : INDEX
+                'Mar'
+              Label : VALUE
+                ''
+        Label : EXPRESSION
           Void

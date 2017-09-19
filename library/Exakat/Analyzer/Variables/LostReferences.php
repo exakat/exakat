@@ -31,7 +31,6 @@ class LostReferences extends Analyzer {
              ->is('reference', true)
              ->savePropertyAs('code', 'parameter')
              ->inIs('ARGUMENT')
-             ->inIs('ARGUMENTS')
              ->outIs('BLOCK')
              ->atomInside('Assignation')
              ->outIs('LEFT')

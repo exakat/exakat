@@ -9,6 +9,6 @@ $a7 = $b and $c;
 $a8 = $b xor $c;
 $a9 = $b or $c;
 $a10 = $b OR $c;
-$a = $b ^ $c;
+$a = $b || $c;
 
 ?>

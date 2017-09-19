@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 14 Aug 2017 15:50:02 +0000
-.. comment: Generation hash : 596eb24f53a8c46db66ef3f9821b41d4393af84f
+.. comment: Generation date : Mon, 18 Sep 2017 14:01:44 +0000
+.. comment: Generation hash : 37d41fabfd7365f6bfb548d4b775665f4084d953
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 305 analysis
+Total : 312 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -119,6 +119,9 @@ Total : 305 analysis
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
+* :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
+* :ref:`Could Be Protected Class Constant <could-be-protected-class-constant>`
+* :ref:`Could Be Protected Method <could-be-protected-method>`
 * :ref:`Could Be Protected Property <could-be-protected-property>`
 * :ref:`Could Be Static <could-be-static>`
 * :ref:`Could Be Typehinted Callable <could-be-typehinted-callable>`
@@ -182,10 +185,12 @@ Total : 305 analysis
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical Mistakes <logical-mistakes>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
+* :ref:`Logical To in_array <logical-to-in\_array>`
 * :ref:`Lone Blocks <lone-blocks>`
 * :ref:`Long Arguments <long-arguments>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
+* :ref:`Method Used Below <method-used-below>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
 * :ref:`Mismatched Typehint <mismatched-typehint>`
@@ -223,6 +228,7 @@ Total : 305 analysis
 * :ref:`No Parenthesis For Language Construct <no-parenthesis-for-language-construct>`
 * :ref:`No Public Access <no-public-access>`
 * :ref:`No Real Comparison <no-real-comparison>`
+* :ref:`No Reference On Left Side <no-reference-on-left-side>`
 * :ref:`No Return Used <no-return-used>`
 * :ref:`No Self Referencing Constant <no-self-referencing-constant>`
 * :ref:`No Substr() One <no-substr()-one>`
@@ -245,15 +251,16 @@ Total : 305 analysis
 * :ref:`Overwritten Literals <overwritten-literals>`
 * :ref:`PHP Keywords As Names <php-keywords-as-names>`
 * :ref:`Parent, Static Or Self Outside Class <parent,-static-or-self-outside-class>`
+* :ref:`Pathinfo() Returns May Vary <pathinfo()-returns-may-vary>`
 * :ref:`Phpinfo`
 * :ref:`Pre-increment`
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Preprocessable`
 * :ref:`Print And Die <print-and-die>`
-* :ref:`Property Could Be Private <property-could-be-private>`
-* :ref:`Property Used Below <property-used-below>`
+* :ref:`Property Could Be Private Method <property-could-be-private-method>`
+* :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * :ref:`Property Used In One Method Only <property-used-in-one-method-only>`
-* :ref:`Property/Variable Confusion <property/variable-confusion>`
+* :ref:`Property Variable Confusion <property-variable-confusion>`
 * :ref:`Queries In Loops <queries-in-loops>`
 * :ref:`Randomly Sorted Arrays <randomly-sorted-arrays>`
 * :ref:`Redeclared PHP Functions <redeclared-php-functions>`
@@ -275,6 +282,7 @@ Total : 305 analysis
 * :ref:`Should Typecast <should-typecast>`
 * :ref:`Should Use Coalesce <should-use-coalesce>`
 * :ref:`Should Use Constants <should-use-constants>`
+* :ref:`Should Use Foreach <should-use-foreach>`
 * :ref:`Should Use Local Class <should-use-local-class>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use SetCookie() <should-use-setcookie()>`
@@ -289,7 +297,6 @@ Total : 305 analysis
 * :ref:`String May Hold A Variable <string-may-hold-a-variable>`
 * :ref:`Strings With Strange Space <strings-with-strange-space>`
 * :ref:`Strpos Comparison <strpos-comparison>`
-* :ref:`Structures/NoReferenceOnLeft`
 * :ref:`Suspicious Comparison <suspicious-comparison>`
 * :ref:`Switch To Switch <switch-to-switch>`
 * :ref:`Switch Without Default <switch-without-default>`
@@ -445,7 +452,6 @@ CompatibilityPHP53
 Total : 60 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
-* :ref:`... Usage <...-usage>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Binary Glossary <binary-glossary>`
@@ -459,11 +465,12 @@ Total : 60 analysis
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
+* :ref:`Ellipsis Usage <ellipsis-usage>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Function Subscripting <function-subscripting>`
 * :ref:`Group Use Declaration <group-use-declaration>`
-* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
+* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Isset With Constant <isset-with-constant>`
 * :ref:`List Short Syntax <list-short-syntax>`
@@ -513,7 +520,6 @@ CompatibilityPHP54
 Total : 57 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
-* :ref:`... Usage <...-usage>`
 * :ref:`::class`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
@@ -526,11 +532,12 @@ Total : 57 analysis
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Dereferencing String And Arrays <dereferencing-string-and-arrays>`
+* :ref:`Ellipsis Usage <ellipsis-usage>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Foreach With list() <foreach-with-list()>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Group Use Declaration <group-use-declaration>`
-* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
+* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Isset With Constant <isset-with-constant>`
@@ -578,7 +585,6 @@ CompatibilityPHP55
 Total : 55 analysis
 
 * :ref:`** For Exponent <**-for-exponent>`
-* :ref:`... Usage <...-usage>`
 * :ref:`Anonymous Classes <anonymous-classes>`
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
@@ -588,12 +594,13 @@ Total : 55 analysis
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
 * :ref:`Define With Array <define-with-array>`
+* :ref:`Ellipsis Usage <ellipsis-usage>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Exponent Usage <exponent-usage>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Group Use Declaration <group-use-declaration>`
-* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
+* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Isset With Constant <isset-with-constant>`
@@ -651,7 +658,7 @@ Total : 48 analysis
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
 * :ref:`Group Use Declaration <group-use-declaration>`
-* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
+* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Isset With Constant <isset-with-constant>`
@@ -707,7 +714,7 @@ Total : 44 analysis
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
+* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -759,7 +766,7 @@ Total : 53 analysis
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
 * :ref:`Functions Removed In PHP 5.5 <functions-removed-in-php-5.5>`
-* :ref:`GroupUse Trailing Comma <groupuse-trailing-comma>`
+* :ref:`Group Use Trailing Comma <group-use-trailing-comma>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.3 <hash-algorithms-incompatible-with-php-5.3>`
 * :ref:`Hash Algorithms Incompatible With PHP 5.4/5 <hash-algorithms-incompatible-with-php-5.4/5>`
 * :ref:`Hexadecimal In String <hexadecimal-in-string>`
@@ -946,12 +953,13 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 25 analysis
+Total : 26 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
 * :ref:`Avoid array_push() <avoid-array\_push()>`
 * :ref:`Avoid array_unique() <avoid-array\_unique()>`
+* :ref:`Avoid glob() Usage <avoid-glob()-usage>`
 * :ref:`Could Use Short Assignation <could-use-short-assignation>`
 * :ref:`Echo With Concat <echo-with-concat>`
 * :ref:`Eval() Usage <eval()-usage>`
@@ -964,7 +972,6 @@ Total : 25 analysis
 * :ref:`No Count With 0 <no-count-with-0>`
 * :ref:`No Substr() One <no-substr()-one>`
 * :ref:`No array_merge() In Loops <no-array\_merge()-in-loops>`
-* :ref:`Performances/NoGlob`
 * :ref:`Performances/timeVsstrtotime`
 * :ref:`Pre-increment`
 * :ref:`Should Use Function Use <should-use-function-use>`
@@ -972,6 +979,7 @@ Total : 25 analysis
 * :ref:`Simplify Regex <simplify-regex>`
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`Use Class Operator <use-class-operator>`
+* :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
 
 .. _security:
@@ -996,7 +1004,7 @@ Total : 24 analysis
 * :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
 * :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`
-* :ref:`Safe CurlOptions <safe-curloptions>`
+* :ref:`Safe Curl Options <safe-curl-options>`
 * :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`

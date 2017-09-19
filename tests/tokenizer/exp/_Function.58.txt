@@ -1,44 +1,37 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.58.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           B
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $a
+          Label : ARGUMENT
+            $a
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ?
               Label : CONDITION
                 (
                 Label : CODE
                   C
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      'D'
+                  Label : ARGUMENT
+                    'D'
                   Label : NAME
                     C
               Label : ELSE
                 die
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'F'
+                Label : ARGUMENT
+                  'F'
                 Label : NAME
                   die
               Label : THEN
                 'D'
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

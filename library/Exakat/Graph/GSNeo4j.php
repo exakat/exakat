@@ -54,7 +54,7 @@ class GSNeo4j extends Graph {
     }
     
     private function checkConfiguration() {
-        ini_set('default_socket_timeout', 3600);
+        ini_set('default_socket_timeout', 10600);
         $this->db->open();
     }
 

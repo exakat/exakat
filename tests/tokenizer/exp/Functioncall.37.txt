@@ -1,18 +1,15 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.37.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           die
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              '34'
+          Label : ARGUMENT
+            '34'
           Label : NAME
             die

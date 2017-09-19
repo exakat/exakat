@@ -1,26 +1,25 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Try.09.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           try
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $a
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $b
-            Label : ELEMENT
+            Label : EXPRESSION
               ++
               Label : POSTPLUSPLUS
                 $c
@@ -28,15 +27,15 @@ Label : PROJECT
             catch
             Label : BLOCK
               {}
-              Label : ELEMENT
+              Label : EXPRESSION
                 ++
                 Label : POSTPLUSPLUS
                   $f
-              Label : ELEMENT
+              Label : EXPRESSION
                 ++
                 Label : POSTPLUSPLUS
                   $g
-              Label : ELEMENT
+              Label : EXPRESSION
                 ++
                 Label : POSTPLUSPLUS
                   $h

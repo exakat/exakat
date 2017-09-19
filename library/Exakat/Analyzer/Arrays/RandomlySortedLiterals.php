@@ -29,10 +29,10 @@ class RandomlySortedLiterals extends Analyzer {
         $arrays = $this->query(<<<GREMLIN
 g.V().hasLabel("Arrayliteral")
      .has("constant", true)
-     .out("ARGUMENTS")
-     .not( hasLabel("Void") )
+     .not( where( out("ARGUMENT").has("rank", 0).hasLabel("Void")) )
      .where( __.sideEffect{ liste = [];}
                .out("ARGUMENT")
+               .not( hasLabel("Void") )
                .sideEffect{ 
                     if (it.get().label() == "String" || it.get().label() == "Void" ) {
                         liste.add(it.get().value("noDelimiter"));
@@ -46,15 +46,19 @@ g.V().hasLabel("Arrayliteral")
      .groupCount("m").cap("m").toList()[0].findAll{ a,b -> b > 1}.keySet();
 GREMLIN
 );
-        
         if (empty($arrays)) {
             return;
         }
 
+        if($arrays[0] instanceof \stdClass) {
+            $arrays = array_map(function ($x) { return (array) $x; }, $arrays);
+        }
+
         $this->atomIs('Arrayliteral')
              ->is('constant', true)
-             ->outIs('ARGUMENTS')
+             ->outWithRank('ARGUMENT', 0)
              ->atomIsNot('Void')
+             ->back('first')
              ->raw('where( __.sideEffect{ liste = [];}
                              .out("ARGUMENT")
                              .not( hasLabel("Void") )
@@ -66,7 +70,8 @@ GREMLIN
                                 }
                              }
                              .count())')
-             ->raw('filter{ x = ***;  liste.sort() in x.values(); }', $arrays)
+             ->raw('filter{ x = ***;  liste.sort(false) in x; }', $arrays)
+             //.values() is not needed for tinkergraph
              ->back('first');
         $this->prepareQuery();
     }

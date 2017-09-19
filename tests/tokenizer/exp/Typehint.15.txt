@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Typehint.15.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,41 +15,35 @@ Label : PROJECT
             new
             Label : NEW
               sadf
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  =
-                  Label : LEFT
-                    $b
-                  Label : RIGHT
-                    3
-              Label : NAME
-                sadf
-        Label : ELEMENT
-          =
-          Label : LEFT
-            $a
-          Label : RIGHT
-            sadf
-            Label : ARGUMENTS
-              (
               Label : ARGUMENT
-                >
+                =
                 Label : LEFT
                   $b
                 Label : RIGHT
                   3
-            Label : NAME
-              sadf
-        Label : ELEMENT
+              Label : NAME
+                sadf
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             sadf
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $c
+            Label : ARGUMENT
+              >
+              Label : LEFT
+                $b
+              Label : RIGHT
+                3
+            Label : NAME
+              sadf
+        Label : EXPRESSION
+          =
+          Label : LEFT
+            $a
+          Label : RIGHT
+            sadf
+            Label : ARGUMENT
+              $c
             Label : NAME
               sadf

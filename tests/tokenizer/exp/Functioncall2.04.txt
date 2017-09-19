@@ -1,49 +1,44 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall2.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
+              Label : ARGUMENT
+                +
+                Label : LEFT
+                  3
+                Label : RIGHT
+                  3
+              Label : NAME
                 echo
-                Label : ARGUMENT
-                  +
+            Label : EXPRESSION
+              Void
+        Label : EXPRESSION
+          if
+          Label : CONDITION
+            $a
+          Label : THEN
+            ;
+            Label : EXPRESSION
+              echo
+              Label : ARGUMENT
+                (
+                Label : CODE
+                  *
                   Label : LEFT
                     3
                   Label : RIGHT
-                    3
-              Label : NAME
-                echo
-            Label : ELEMENT
-              Void
-        Label : ELEMENT
-          if
-          Label : CONDITION
-            $a
-          Label : THEN
-            ;
-            Label : ELEMENT
-              echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  (
-                  Label : CODE
-                    *
-                    Label : LEFT
-                      3
-                    Label : RIGHT
-                      5
+                    5
               Label : NAME
                 echo

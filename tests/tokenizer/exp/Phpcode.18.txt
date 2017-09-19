@@ -1,15 +1,14 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Phpcode.18.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           
 
-        Label : ELEMENT
+        Label : EXPRESSION
           Void

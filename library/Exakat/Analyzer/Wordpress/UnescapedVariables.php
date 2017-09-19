@@ -31,7 +31,6 @@ class UnescapedVariables extends Analyzer {
         
         // echo esc_attr($a) . $unescapedVar
         $this->atomFunctionIs(array('\\echo', '\\print'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty', 'Concatenation'))
@@ -42,7 +41,6 @@ class UnescapedVariables extends Analyzer {
 
         // echo esc_attr($a) . $unescapedVar
         $this->atomFunctionIs(array('\\echo', '\\print'))
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->outIsIE('CODE')
              ->outIsIE('CONCAT')

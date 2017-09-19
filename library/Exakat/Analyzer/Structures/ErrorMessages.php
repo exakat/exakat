@@ -36,7 +36,6 @@ class ErrorMessages extends Analyzer {
         // die('true')
         // exit ('30');
         $this->atomFunctionIs(array('\\die', '\\exit'))
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
         $this->prepareQuery();
@@ -47,7 +46,6 @@ class ErrorMessages extends Analyzer {
              ->outIs('NEW')
              ->atomIs('Newcall')
              ->fullnspathIs('\\exception')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
         $this->prepareQuery();
@@ -57,7 +55,6 @@ class ErrorMessages extends Analyzer {
              ->outIs('THROW')
              ->atomIs('New')
              ->outIs('NEW')
-             ->outIs('ARGUMENTS')
              ->outWithRank('ARGUMENT', 0)
              ->atomIs($messages);
         $this->prepareQuery();
@@ -72,7 +69,6 @@ class ErrorMessages extends Analyzer {
              ->classDefinition()
              ->analyzerIs('Exceptions/DefinedExceptions')
              ->back('new')
-             ->outIs('ARGUMENTS')
              ->outIs('ARGUMENT')
              ->atomIs($messages);
         $this->prepareQuery();

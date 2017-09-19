@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Not.19.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -18,19 +17,17 @@ Label : PROJECT
               \b
             Label : METHOD
               instance
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $d
-                Label : ARGUMENT
-                  null
-                Label : ARGUMENT
-                  !
-                  Label : NOT
-                    instanceof
-                    Label : CLASS
-                      \E
-                    Label : VARIABLE
-                      $d
+              Label : ARGUMENT
+                $d
+              Label : ARGUMENT
+                null
+              Label : ARGUMENT
+                !
+                Label : NOT
+                  instanceof
+                  Label : CLASS
+                    \E
+                  Label : VARIABLE
+                    $d
               Label : NAME
                 instance

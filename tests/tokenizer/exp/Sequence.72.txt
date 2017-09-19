@@ -1,126 +1,111 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.72.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
           Label : RIGHT
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'C'
-              Label : ARGUMENT
-                'D'
             Label : NAME
               B
-        Label : ELEMENT
+            Label : ARGUMENT
+              'C'
+            Label : ARGUMENT
+              'D'
+        Label : EXPRESSION
           =
           Label : LEFT
             list
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $b
-              Label : ARGUMENT
-                $c
-              Label : ARGUMENT
-                $d
-              Label : ARGUMENT
-                $e
+            Label : ARGUMENT
+              $b
+            Label : ARGUMENT
+              $c
+            Label : ARGUMENT
+              $d
+            Label : ARGUMENT
+              $e
             Label : NAME
               list
           Label : RIGHT
             $f
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                $g
-              Label : ARGUMENT
-                $h
-              Label : ARGUMENT
-                $i
-              Label : ARGUMENT
-                $j
+            Label : ARGUMENT
+              $g
+            Label : ARGUMENT
+              $h
+            Label : ARGUMENT
+              $i
+            Label : ARGUMENT
+              $j
             Label : NAME
               $f
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $k
           Label : RIGHT
             E
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'F'
-              Label : ARGUMENT
-                'G'
             Label : NAME
               E
-        Label : ELEMENT
+            Label : ARGUMENT
+              'F'
+            Label : ARGUMENT
+              'G'
+        Label : EXPRESSION
           H
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $l
-            Label : ARGUMENT
-              $m
-            Label : ARGUMENT
-              $n
-            Label : ARGUMENT
-              $o
-            Label : ARGUMENT
-              $p
+          Label : ARGUMENT
+            $l
+          Label : ARGUMENT
+            $m
+          Label : ARGUMENT
+            $n
+          Label : ARGUMENT
+            $o
+          Label : ARGUMENT
+            $p
           Label : NAME
             H
-        Label : ELEMENT
+        Label : EXPRESSION
           $q
-          Label : ARGUMENTS
-            (
+          Label : ARGUMENT
+            'I'
+          Label : ARGUMENT
+            [
+            Label : INDEX
+              'J'
+            Label : VARIABLE
+              $r
+          Label : ARGUMENT
+            array
             Label : ARGUMENT
-              'I'
-            Label : ARGUMENT
-              [
+              =>
               Label : INDEX
-                'J'
-              Label : VARIABLE
-                $r
+                'K'
+              Label : VALUE
+                [
+                Label : INDEX
+                  'L'
+                Label : VARIABLE
+                  $s
             Label : ARGUMENT
-              array
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'K'
-                  Label : VALUE
-                    [
-                    Label : INDEX
-                      'L'
-                    Label : VARIABLE
-                      $s
-                Label : ARGUMENT
-                  =>
-                  Label : KEY
-                    'M'
-                  Label : VALUE
-                    [
-                    Label : INDEX
-                      'N'
-                    Label : VARIABLE
-                      $t
+              =>
+              Label : INDEX
+                'M'
+              Label : VALUE
+                [
+                Label : INDEX
+                  'N'
+                Label : VARIABLE
+                  $t
           Label : NAME
             $q
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             $u

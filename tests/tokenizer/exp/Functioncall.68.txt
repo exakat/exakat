@@ -1,25 +1,22 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.68.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             isset
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                [
-                Label : INDEX
-                  'B'
-                Label : VARIABLE
-                  $a
+            Label : ARGUMENT
+              [
+              Label : INDEX
+                'B'
+              Label : VARIABLE
+                $a
             Label : NAME
               isset
           Label : ELSE
@@ -46,79 +43,67 @@ Label : PROJECT
                   'J'
               Label : ELSE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        'D'
-                      Label : VARIABLE
-                        $a
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      'D'
+                    Label : VARIABLE
+                      $a
                   Label : NAME
                     echo
               Label : THEN
                 ;
-                Label : ELEMENT
-                  echo
-                  Label : ARGUMENTS
-                    echo
-                    Label : ARGUMENT
-                      .
-                      Label : CONCAT
-                        [
-                        Label : INDEX
-                          'K'
-                        Label : VARIABLE
-                          $a
-                      Label : CONCAT
-                        'L'
-                      Label : CONCAT
-                        [
-                        Label : INDEX
-                          'M'
-                        Label : VARIABLE
-                          $a
-                  Label : NAME
-                    echo
-            Label : THEN
-              ;
-              Label : ELEMENT
-                echo
-                Label : ARGUMENTS
+                Label : EXPRESSION
                   echo
                   Label : ARGUMENT
                     .
                     Label : CONCAT
-                      E
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          F
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              [
-                              Label : INDEX
-                                'G'
-                              Label : VARIABLE
-                                $a
-                          Label : NAME
-                            F
-                      Label : NAME
-                        E
+                      [
+                      Label : INDEX
+                        'K'
+                      Label : VARIABLE
+                        $a
                     Label : CONCAT
-                      'H'
+                      'L'
+                    Label : CONCAT
+                      [
+                      Label : INDEX
+                        'M'
+                      Label : VARIABLE
+                        $a
+                  Label : NAME
+                    echo
+            Label : THEN
+              ;
+              Label : EXPRESSION
+                echo
+                Label : ARGUMENT
+                  .
+                  Label : CONCAT
+                    E
+                    Label : ARGUMENT
+                      F
+                      Label : ARGUMENT
+                        [
+                        Label : INDEX
+                          'G'
+                        Label : VARIABLE
+                          $a
+                      Label : NAME
+                        F
+                    Label : NAME
+                      E
+                  Label : CONCAT
+                    'H'
                 Label : NAME
                   echo
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  'C'
+              Label : ARGUMENT
+                'C'
               Label : NAME
                 echo

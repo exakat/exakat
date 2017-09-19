@@ -1,27 +1,26 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.61.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               interface
+              Label : NAME
+                C
               Label : METHOD
                 do
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $b
-                    Label : TYPEHINT
-                      D
+                Label : ARGUMENT
+                  $b
+                  Label : TYPEHINT
+                    D
                 Label : BLOCK
                   Void
                 Label : NAME
@@ -30,19 +29,15 @@ Label : PROJECT
                   public
               Label : METHOD
                 foreach
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $c
-                  Label : ARGUMENT
-                    $d
+                Label : ARGUMENT
+                  $c
+                Label : ARGUMENT
+                  $d
                 Label : BLOCK
                   Void
                 Label : NAME
                   foreach
                 Label : PUBLIC
                   public
-              Label : NAME
-                C
           Label : NAME
             B

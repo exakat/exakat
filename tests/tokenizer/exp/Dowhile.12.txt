@@ -1,41 +1,38 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Dowhile.12.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           do
           Label : BLOCK
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 1
               Label : ELSE
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
               Label : THEN
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   ->
                   Label : METHOD
                     f
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        4
-                      Label : ARGUMENT
-                        5
-                      Label : ARGUMENT
-                        6
+                    Label : ARGUMENT
+                      4
+                    Label : ARGUMENT
+                      5
+                    Label : ARGUMENT
+                      6
                     Label : NAME
                       f
                   Label : OBJECT
@@ -52,7 +49,7 @@ Label : PROJECT
                           4
                     Label : VARIABLE
                       $x
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void

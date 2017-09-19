@@ -1,67 +1,62 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.56.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             !
             Label : NOT
               isset
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  ::
-                  Label : CLASS
-                    self
-                  Label : PROPERTY
-                    $a
+              Label : ARGUMENT
+                ::
+                Label : CLASS
+                  self
+                Label : MEMBER
+                  $a
               Label : NAME
                 isset
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               ->
               Label : METHOD
                 E
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   E
               Label : OBJECT
                 ::
                 Label : CLASS
                   self
-                Label : PROPERTY
+                Label : MEMBER
                   $d
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 ::
                 Label : CLASS
                   self
-                Label : PROPERTY
+                Label : MEMBER
                   $b
               Label : RIGHT
                 new
                 Label : NEW
                   C
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-        Label : ELEMENT
+        Label : EXPRESSION
           return
           Label : RETURN
             ::
             Label : CLASS
               self
-            Label : PROPERTY
+            Label : MEMBER
               $f

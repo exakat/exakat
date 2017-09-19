@@ -29,7 +29,7 @@ class DefinedProperty extends Analyzer {
 
     public function analyze() {
         // locally defined
-        // defined in parents (Extended)
+        // defined in local class (private included)
         $this->atomIs('Member')
              ->outIs('OBJECT')
              ->codeIs('$this')
@@ -37,8 +37,24 @@ class DefinedProperty extends Analyzer {
              ->outIs('MEMBER')
              ->savePropertyAs('code', 'property')
              ->goToClass()
-             ->goToAllParents(self::INCLUDE_SELF)
              ->outIs('PPP')
+             ->atomIs('Ppp')
+             ->outIs('PPP')
+             ->samePropertyAs('propertyname', 'property')
+             ->back('first');
+        $this->prepareQuery();
+
+        // defined in parent class (private excluded)
+        $this->atomIs('Member')
+             ->outIs('OBJECT')
+             ->codeIs('$this')
+             ->inIs('OBJECT')
+             ->outIs('MEMBER')
+             ->savePropertyAs('code', 'property')
+             ->goToClass()
+             ->goToAllParents(self::EXCLUDE_SELF)
+             ->outIs('PPP')
+             ->hasNoOut('PRIVATE')
              ->atomIs('Ppp')
              ->outIs('PPP')
              ->samePropertyAs('propertyname', 'property')

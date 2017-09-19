@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Void.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             =
@@ -16,17 +15,15 @@ Label : PROJECT
               $a
             Label : RIGHT
               B
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $b
-                Label : ARGUMENT
-                  'C'
               Label : NAME
                 B
+              Label : ARGUMENT
+                $b
+              Label : ARGUMENT
+                'C'
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               if
               Label : CONDITION
                 &&
@@ -34,67 +31,55 @@ Label : PROJECT
                   !
                   Label : NOT
                     D
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        E
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $c
-                          Label : ARGUMENT
-                            0
-                          Label : ARGUMENT
-                            $d
-                        Label : NAME
-                          E
-                      Label : ARGUMENT
-                        $e
                     Label : NAME
                       D
+                    Label : ARGUMENT
+                      E
+                      Label : ARGUMENT
+                        $c
+                      Label : ARGUMENT
+                        0
+                      Label : ARGUMENT
+                        $d
+                      Label : NAME
+                        E
+                    Label : ARGUMENT
+                      $e
                 Label : RIGHT
                   !
                   Label : NOT
                     F
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        G
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            $f
-                          Label : ARGUMENT
-                            1
-                          Label : ARGUMENT
-                            H
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                $g
-                              Label : ARGUMENT
-                                'I'
-                            Label : NAME
-                              H
-                        Label : NAME
-                          G
-                      Label : ARGUMENT
-                        $h
                     Label : NAME
                       F
+                    Label : ARGUMENT
+                      G
+                      Label : ARGUMENT
+                        $f
+                      Label : ARGUMENT
+                        1
+                      Label : ARGUMENT
+                        H
+                        Label : NAME
+                          H
+                        Label : ARGUMENT
+                          $g
+                        Label : ARGUMENT
+                          'I'
+                      Label : NAME
+                        G
+                    Label : ARGUMENT
+                      $h
               Label : THEN
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   unset
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        $j
-                      Label : VARIABLE
-                        $i
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      $j
+                    Label : VARIABLE
+                      $i
                   Label : NAME
                     unset
-            Label : ELEMENT
+            Label : EXPRESSION
               Void

@@ -1,97 +1,84 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Functioncall.77.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               B
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  ->
-                  Label : METHOD
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  D
+                  Label : ARGUMENT
+                    $a
+                  Label : NAME
                     D
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $a
-                    Label : NAME
-                      D
-                  Label : OBJECT
-                    [
-                    Label : INDEX
-                      'C'
-                    Label : VARIABLE
-                      $b
+                Label : OBJECT
+                  [
+                  Label : INDEX
+                    'C'
+                  Label : VARIABLE
+                    $b
               Label : NAME
                 echo
-            Label : ELEMENT
+            Label : EXPRESSION
               E
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-        Label : ELEMENT
+        Label : EXPRESSION
           F
-        Label : ELEMENT
+        Label : EXPRESSION
           echo
-          Label : ARGUMENTS
-            echo
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                G
-                Label : ARGUMENTS
-                  (
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              G
+              Label : ARGUMENT
+                ->
+                Label : METHOD
+                  D
                   Label : ARGUMENT
-                    ->
-                    Label : METHOD
-                      D
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
-                          $c
-                        Label : ARGUMENT
-                          array
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              Void
-                        Label : ARGUMENT
-                          $d
-                      Label : NAME
-                        D
-                    Label : OBJECT
-                      [
-                      Label : INDEX
-                        'C'
-                      Label : VARIABLE
-                        $b
-                Label : NAME
-                  G
-              Label : OBJECT
-                $b
+                    $c
+                  Label : ARGUMENT
+                    array
+                    Label : ARGUMENT
+                      Void
+                  Label : ARGUMENT
+                    $d
+                  Label : NAME
+                    D
+                Label : OBJECT
+                  [
+                  Label : INDEX
+                    'C'
+                  Label : VARIABLE
+                    $b
+              Label : NAME
+                G
+            Label : OBJECT
+              $b
           Label : NAME
             echo
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             $a
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               J
-        Label : ELEMENT
+        Label : EXPRESSION
           Void
-    Label : ELEMENT
+    Label : EXPRESSION
       K

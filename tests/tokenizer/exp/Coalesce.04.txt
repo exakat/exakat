@@ -1,56 +1,45 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Coalesce.04.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           foo
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              Void
+          Label : ARGUMENT
+            Void
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  "executed!"
-                Label : ARGUMENT
-                  PHP_EOL
               Label : NAME
                 echo
+              Label : ARGUMENT
+                "executed!"
+              Label : ARGUMENT
+                PHP_EOL
           Label : DEFINITION
             foo
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                Void
+            Label : ARGUMENT
+              Void
             Label : NAME
               foo
           Label : NAME
             foo
-        Label : ELEMENT
+        Label : EXPRESSION
           var_dump
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              ??
-              Label : LEFT
-                true
-              Label : RIGHT
+          Label : ARGUMENT
+            ??
+            Label : LEFT
+              true
+            Label : RIGHT
+              foo
+              Label : ARGUMENT
+                Void
+              Label : NAME
                 foo
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
-                Label : NAME
-                  foo
           Label : NAME
             var_dump

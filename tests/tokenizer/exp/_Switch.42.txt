@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.42.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case $a instanceof \C :  /**/  
               Label : CASE
                 instanceof
@@ -22,11 +21,11 @@ Label : PROJECT
                   $a
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'D'
-            Label : ELEMENT
+            Label : EXPRESSION
               case $b instanceof \E :  /**/  
               Label : CASE
                 instanceof
@@ -36,11 +35,11 @@ Label : PROJECT
                   $b
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'F'
-            Label : ELEMENT
+            Label : EXPRESSION
               case $c instanceof \G :  /**/  
               Label : CASE
                 instanceof
@@ -50,11 +49,11 @@ Label : PROJECT
                   $c
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'H'
-            Label : ELEMENT
+            Label : EXPRESSION
               case $d instanceof \I :  /**/  
               Label : CASE
                 instanceof
@@ -64,11 +63,11 @@ Label : PROJECT
                   $d
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'J'
-            Label : ELEMENT
+            Label : EXPRESSION
               case $e instanceof \K :  /**/  
               Label : CASE
                 instanceof
@@ -78,38 +77,32 @@ Label : PROJECT
                   $e
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     'L'
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   throw
                   Label : THROW
                     new
                     Label : NEW
                       \M
-                      Label : ARGUMENTS
-                        (
-                        Label : ARGUMENT
+                      Label : ARGUMENT
+                        N
+                        Label : NAME
                           N
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'O'
-                            Label : ARGUMENT
-                              P
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $f
-                              Label : NAME
-                                P
+                        Label : ARGUMENT
+                          'O'
+                        Label : ARGUMENT
+                          P
+                          Label : ARGUMENT
+                            $f
                           Label : NAME
-                            N
+                            P
                       Label : NAME
                         \M
           Label : NAME

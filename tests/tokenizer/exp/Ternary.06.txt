@@ -1,14 +1,13 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ternary.06.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             $a
@@ -16,14 +15,12 @@ Label : PROJECT
             ?
             Label : CONDITION
               b
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  [
-                  Label : INDEX
-                    'd'
-                  Label : VARIABLE
-                    $c
+              Label : ARGUMENT
+                [
+                Label : INDEX
+                  'd'
+                Label : VARIABLE
+                  $c
               Label : NAME
                 b
             Label : ELSE

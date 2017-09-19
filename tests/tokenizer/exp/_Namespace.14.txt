@@ -1,94 +1,83 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Namespace.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
           Label : NAME
             B
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
           Label : NAME
             C
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
           Label : NAME
             D
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
              
-            Label : ELEMENT
+            Label : EXPRESSION
               class
               Label : METHOD
                 F
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    $a
+                Label : ARGUMENT
+                  $a
                 Label : BLOCK
                   {}
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     if
                     Label : CONDITION
                       ===
                       Label : LEFT
                         G
-                        Label : ARGUMENTS
-                          (
+                        Label : ARGUMENT
+                          H
                           Label : ARGUMENT
+                            I
+                          Label : ARGUMENT
+                            0
+                          Label : ARGUMENT
+                            1
+                          Label : NAME
                             H
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                I
-                              Label : ARGUMENT
-                                0
-                              Label : ARGUMENT
-                                1
-                            Label : NAME
-                              H
                         Label : NAME
                           G
                       Label : RIGHT
                         'J'
                     Label : ELSE
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         if
                         Label : CONDITION
                           K
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'Q'
+                          Label : ARGUMENT
+                            'Q'
                           Label : NAME
                             K
                         Label : THEN
                           {}
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             return
                             Label : RETURN
                               V
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $a
+                              Label : ARGUMENT
+                                $a
                               Label : NAME
                                 V
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         static
                         Label : STATIC
                           =
@@ -96,7 +85,7 @@ Label : PROJECT
                             $b
                           Label : RIGHT
                             Z
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         if
                         Label : CONDITION
                           ===
@@ -106,7 +95,7 @@ Label : PROJECT
                             Z
                         Label : THEN
                           {}
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             =
                             Label : LEFT
                               $b
@@ -114,15 +103,13 @@ Label : PROJECT
                               @
                               Label : AT
                                 AB
-                                Label : ARGUMENTS
-                                  (
-                                  Label : ARGUMENT
-                                    'AC'
-                                  Label : ARGUMENT
-                                    'AD'
                                 Label : NAME
                                   AB
-                      Label : ELEMENT
+                                Label : ARGUMENT
+                                  'AC'
+                                Label : ARGUMENT
+                                  'AD'
+                      Label : EXPRESSION
                         if
                         Label : CONDITION
                           &&
@@ -140,122 +127,102 @@ Label : PROJECT
                               AF
                         Label : THEN
                           {}
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             return
                             Label : RETURN
                               AG
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $b
-                                Label : ARGUMENT
-                                  $a
                               Label : NAME
                                 AG
-                      Label : ELEMENT
+                              Label : ARGUMENT
+                                $b
+                              Label : ARGUMENT
+                                $a
+                      Label : EXPRESSION
                         if
                         Label : CONDITION
                           K
-                          Label : ARGUMENTS
-                            (
-                            Label : ARGUMENT
-                              'L'
+                          Label : ARGUMENT
+                            'L'
                           Label : NAME
                             K
                         Label : THEN
                           {}
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             return
                             Label : RETURN
                               O
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $a
-                                Label : ARGUMENT
-                                  AK
                               Label : NAME
                                 O
+                              Label : ARGUMENT
+                                $a
+                              Label : ARGUMENT
+                                AK
                     Label : THEN
                       {}
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         if
                         Label : CONDITION
                           &&
                           Label : LEFT
                             K
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                'L'
+                            Label : ARGUMENT
+                              'L'
                             Label : NAME
                               K
                           Label : RIGHT
                             K
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                'N'
+                            Label : ARGUMENT
+                              'N'
                             Label : NAME
                               K
                         Label : THEN
                           {}
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             return
                             Label : RETURN
                               O
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $a
+                              Label : ARGUMENT
+                                $a
                               Label : NAME
                                 O
-                      Label : ELEMENT
+                      Label : EXPRESSION
                         if
                         Label : CONDITION
                           &&
                           Label : LEFT
                             K
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                'Q'
+                            Label : ARGUMENT
+                              'Q'
                             Label : NAME
                               K
                           Label : RIGHT
                             R
-                            Label : ARGUMENTS
-                              (
-                              Label : ARGUMENT
-                                S
-                              Label : ARGUMENT
-                                'T'
-                              Label : ARGUMENT
-                                'U'
+                            Label : ARGUMENT
+                              S
+                            Label : ARGUMENT
+                              'T'
+                            Label : ARGUMENT
+                              'U'
                             Label : NAME
                               R
                         Label : THEN
                           {}
-                          Label : ELEMENT
+                          Label : EXPRESSION
                             return
                             Label : RETURN
                               V
-                              Label : ARGUMENTS
-                                (
-                                Label : ARGUMENT
-                                  $a
+                              Label : ARGUMENT
+                                $a
                               Label : NAME
                                 V
-                  Label : ELEMENT
+                  Label : EXPRESSION
                     throw
                     Label : THROW
                       new
                       Label : NEW
                         \AL
-                        Label : ARGUMENTS
-                          (
-                          Label : ARGUMENT
-                            'AM'
+                        Label : ARGUMENT
+                          'AM'
                         Label : NAME
                           \AL
                 Label : NAME

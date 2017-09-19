@@ -1,50 +1,43 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Declare.14.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             B
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                'C'
+            Label : ARGUMENT
+              'C'
             Label : NAME
               B
           Label : ELSE
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               declare
+              Label : ARGUMENT
+                =
+                Label : LEFT
+                  E
+                Label : RIGHT
+                  1
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $b
                   Label : RIGHT
                     $b
-              Label : DECLARE
-                (
-                Label : ARGUMENT
-                  =
-                  Label : LEFT
-                    E
-                  Label : RIGHT
-                    1
           Label : THEN
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               D
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 D

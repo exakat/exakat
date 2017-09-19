@@ -1,54 +1,45 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Function.64.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           h
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              function
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  $f
-                Label : ARGUMENT
-                  $g
-              Label : BLOCK
-                {}
-                Label : ELEMENT
-                  ++
-                  Label : POSTPLUSPLUS
-                    $a
-            Label : ARGUMENT
-              ->
-              Label : METHOD
-                d
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    'e'
-                Label : NAME
-                  d
-              Label : OBJECT
-                (
-                Label : CODE
-                  new
-                  Label : NEW
-                    A
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        $b
-                      Label : ARGUMENT
-                        $c
-                    Label : NAME
-                      A
           Label : NAME
             h
+          Label : ARGUMENT
+            function
+            Label : ARGUMENT
+              $f
+            Label : ARGUMENT
+              $g
+            Label : BLOCK
+              {}
+              Label : EXPRESSION
+                ++
+                Label : POSTPLUSPLUS
+                  $a
+          Label : ARGUMENT
+            ->
+            Label : METHOD
+              d
+              Label : ARGUMENT
+                'e'
+              Label : NAME
+                d
+            Label : OBJECT
+              (
+              Label : CODE
+                new
+                Label : NEW
+                  A
+                  Label : NAME
+                    A
+                  Label : ARGUMENT
+                    $b
+                  Label : ARGUMENT
+                    $c

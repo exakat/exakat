@@ -1,38 +1,35 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Yield.01.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           generateRange
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $start
-            Label : ARGUMENT
-              $end
-            Label : ARGUMENT
-              $step
-              Label : DEFAULT
-                1
+          Label : ARGUMENT
+            $start
+          Label : ARGUMENT
+            $end
+          Label : ARGUMENT
+            $step
+            Label : DEFAULT
+              1
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               for
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   yield
                   Label : YIELD
                     $i
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   <
                   Label : LEFT
                     $i
@@ -40,7 +37,7 @@ Label : PROJECT
                     $end
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   +=
                   Label : LEFT
                     $i
@@ -48,7 +45,7 @@ Label : PROJECT
                     $step
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $i
@@ -56,35 +53,31 @@ Label : PROJECT
                     $start
           Label : DEFINITION
             generateRange
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                1000000
             Label : NAME
               generateRange
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              1000000
           Label : NAME
             generateRange
-        Label : ELEMENT
+        Label : EXPRESSION
           generateRange2
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $start
-            Label : ARGUMENT
-              $end
-            Label : ARGUMENT
-              $step
-              Label : DEFAULT
-                1
+          Label : ARGUMENT
+            $start
+          Label : ARGUMENT
+            $end
+          Label : ARGUMENT
+            $step
+            Label : DEFAULT
+              1
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               for
               Label : BLOCK
                 {}
-                Label : ELEMENT
+                Label : EXPRESSION
                   yield
                   Label : YIELD
                     [
@@ -92,16 +85,16 @@ Label : PROJECT
                       1
                     Label : VARIABLE
                       $i
-                Label : ELEMENT
+                Label : EXPRESSION
                   yield
                   Label : YIELD
                     ?
                     Label : CONDITION
                       ->
+                      Label : MEMBER
+                        y
                       Label : OBJECT
                         $i
-                      Label : PROPERTY
-                        y
                     Label : ELSE
                       +
                       Label : LEFT
@@ -112,7 +105,7 @@ Label : PROJECT
                       'd'
               Label : FINAL
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   <
                   Label : LEFT
                     $i
@@ -120,7 +113,7 @@ Label : PROJECT
                     $end
               Label : INCREMENT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   +=
                   Label : LEFT
                     $i
@@ -128,7 +121,7 @@ Label : PROJECT
                     $step
               Label : INIT
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   =
                   Label : LEFT
                     $i
@@ -136,27 +129,23 @@ Label : PROJECT
                     $start
           Label : NAME
             generateRange2
-        Label : ELEMENT
+        Label : EXPRESSION
           foreach
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               echo
-              Label : ARGUMENTS
-                echo
-                Label : ARGUMENT
-                  $number
+              Label : ARGUMENT
+                $number
               Label : NAME
                 echo
           Label : SOURCE
             generateRange
-            Label : ARGUMENTS
-              (
-              Label : ARGUMENT
-                0
-              Label : ARGUMENT
-                1000000
             Label : NAME
               generateRange
+            Label : ARGUMENT
+              0
+            Label : ARGUMENT
+              1000000
           Label : VALUE
             $number

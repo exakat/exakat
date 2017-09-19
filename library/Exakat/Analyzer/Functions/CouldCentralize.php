@@ -37,7 +37,7 @@ g.V().hasLabel('Functioncall')
      .has('fullnspath', without($excludedList))
      .where( 
       __.sideEffect{x = [it.get().value('fullnspath')];}
-        .out('ARGUMENTS').out('ARGUMENT').has('rank', $i)
+        .out('ARGUMENT').has('rank', $i)
         .hasLabel('String').sideEffect{x.add(it.get().value('code')); }
       )
      .map{ x; }
@@ -66,7 +66,6 @@ GREMLIN;
             $this->atomFunctionIs($functions)
                  ->analyzerIsNot('Functions/CouldCentralize')
                  ->savePropertyAs('fullnspath', 'name')
-                 ->outIs('ARGUMENTS')
                  ->outWithRank('ARGUMENT', $i)
                  ->isHash('code', $args, 'name')
                  ->back('first');

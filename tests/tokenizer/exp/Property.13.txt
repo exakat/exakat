@@ -1,120 +1,111 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Property.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              c
             Label : OBJECT
               ::
               Label : CLASS
                 A
               Label : METHOD
                 b
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   b
-            Label : PROPERTY
-              c
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              c
             Label : OBJECT
               ::
               Label : CLASS
                 A
               Label : METHOD
                 b
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   b
-            Label : PROPERTY
-              c
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              e
             Label : OBJECT
               ->
+              Label : MEMBER
+                d
               Label : OBJECT
                 ->
+                Label : MEMBER
+                  c
                 Label : OBJECT
                   ::
                   Label : CLASS
                     A
                   Label : METHOD
                     b
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        Void
+                    Label : ARGUMENT
+                      Void
                     Label : NAME
                       b
-                Label : PROPERTY
-                  c
-              Label : PROPERTY
-                d
-            Label : PROPERTY
-              e
           Label : RIGHT
             1
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              d
             Label : OBJECT
               ->
+              Label : MEMBER
+                c
               Label : OBJECT
                 ->
                 Label : METHOD
                   b
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      Void
+                  Label : ARGUMENT
+                    Void
                   Label : NAME
                     b
                 Label : OBJECT
                   $A
-              Label : PROPERTY
-                c
-            Label : PROPERTY
-              d
           Label : RIGHT
             2
-        Label : ELEMENT
+        Label : EXPRESSION
           =
           Label : LEFT
             ->
+            Label : MEMBER
+              d
             Label : OBJECT
               ->
+              Label : MEMBER
+                c
               Label : OBJECT
                 ->
+                Label : MEMBER
+                  b
                 Label : OBJECT
                   $A
-                Label : PROPERTY
-                  b
-              Label : PROPERTY
-                c
-            Label : PROPERTY
-              d
           Label : RIGHT
             3

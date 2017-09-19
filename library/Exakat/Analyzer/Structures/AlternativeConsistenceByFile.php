@@ -39,7 +39,7 @@ class AlternativeConsistenceByFile extends Analyzer {
     .repeat( __.out()).emit().times('.self::MAX_LOOPING.').hasLabel('.$atomsList.')
     .or( __.has("alternative").sideEffect{ alternative = alternative + 1; },
          __.sideEffect{ normal = normal + 1; })
-    .count().is(gt(0))
+    .fold()
     )')
             ->filter('normal > 0 && alternative > 0')
             ->back('first');

@@ -1,18 +1,17 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/_Switch.46.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           switch
           Label : CASES
              /**/ 
-            Label : ELEMENT
+            Label : EXPRESSION
               case self::ALGORITHM_NONE :  /**/  
               Label : CASE
                 ::
@@ -22,13 +21,13 @@ Label : PROJECT
                   ALGORITHM_NONE
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   Void
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               case self::ALGORITHM_DSA :  /**/  
               Label : CASE
                 ::
@@ -38,7 +37,7 @@ Label : PROJECT
                   ALGORITHM_DSA
               Label : CODE
                 ;
-            Label : ELEMENT
+            Label : EXPRESSION
               case self::ALGORITHM_RSA :  /**/  
               Label : CASE
                 ::
@@ -48,37 +47,35 @@ Label : PROJECT
                   ALGORITHM_RSA
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   .=
                   Label : LEFT
                     $data
                   Label : RIGHT
                     base64_decode
-                    Label : ARGUMENTS
-                      (
-                      Label : ARGUMENT
-                        ->
-                        Label : OBJECT
-                          $this
-                        Label : PROPERTY
-                          key
+                    Label : ARGUMENT
+                      ->
+                      Label : MEMBER
+                        key
+                      Label : OBJECT
+                        $this
                     Label : NAME
                       base64_decode
-                Label : ELEMENT
+                Label : EXPRESSION
                   break
                   Label : BREAK
                     Void
-            Label : ELEMENT
+            Label : EXPRESSION
               default
               Label : CODE
                 ;
-                Label : ELEMENT
+                Label : EXPRESSION
                   return
                   Label : RETURN
                     null
           Label : NAME
             ->
+            Label : MEMBER
+              algorithm
             Label : OBJECT
               $this
-            Label : PROPERTY
-              algorithm

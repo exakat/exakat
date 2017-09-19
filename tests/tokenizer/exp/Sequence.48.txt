@@ -1,35 +1,28 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Sequence.48.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           print
-          Label : ARGUMENTS
-            )
-            Label : ARGUMENT
+          Label : ARGUMENT
+            a
+            Label : NAME
               a
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  'b'
-                Label : ARGUMENT
-                  "c"
-              Label : NAME
-                a
+            Label : ARGUMENT
+              'b'
+            Label : ARGUMENT
+              "c"
           Label : NAME
             print
-        Label : ELEMENT
+        Label : EXPRESSION
           A
-        Label : ELEMENT
+        Label : EXPRESSION
           f
-          Label : ARGUMENTS
-            (
-            Label : ARGUMENT
-              $d
+          Label : ARGUMENT
+            $d
           Label : NAME
             f

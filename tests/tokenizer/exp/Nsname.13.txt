@@ -1,135 +1,120 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Nsname.13.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             A\B
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             A\B\C
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             A\B\C\D
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               Void
           Label : NAME
             A\B\C\D\E
-        Label : ELEMENT
+        Label : EXPRESSION
           namespace
           Label : BLOCK
             {}
-            Label : ELEMENT
+            Label : EXPRESSION
               C\D\E
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 C\D\E
-            Label : ELEMENT
+            Label : EXPRESSION
               X\A
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 X\A
-            Label : ELEMENT
+            Label : EXPRESSION
               \G
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 \G
-            Label : ELEMENT
+            Label : EXPRESSION
               Y\B\C
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 Y\B\C
-            Label : ELEMENT
+            Label : EXPRESSION
               Z\D\E\F
-              Label : ARGUMENTS
-                (
-                Label : ARGUMENT
-                  Void
+              Label : ARGUMENT
+                Void
               Label : NAME
                 Z\D\E\F
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 C\D\E
               Label : CONSTANT
                 K
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 \C\D\E
               Label : CONSTANT
                 K
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 C2\D\E
-              Label : PROPERTY
+              Label : MEMBER
                 $k
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 \C2\D\E
-              Label : PROPERTY
+              Label : MEMBER
                 $k
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 C3\D\E
               Label : METHOD
                 l
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   l
-            Label : ELEMENT
+            Label : EXPRESSION
               ::
               Label : CLASS
                 \C3\D\E
               Label : METHOD
                 l
-                Label : ARGUMENTS
-                  (
-                  Label : ARGUMENT
-                    Void
+                Label : ARGUMENT
+                  Void
                 Label : NAME
                   l
           Label : NAME

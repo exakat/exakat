@@ -1,24 +1,23 @@
 Whole
 Label : PROJECT
-  ./tests/tokenizer/source/Ifthen.51.php
   Label : FILE
     ;
-    Label : ELEMENT
+    Label : EXPRESSION
       <?php
 
       Label : CODE
         ;
-        Label : ELEMENT
+        Label : EXPRESSION
           if
           Label : CONDITION
             ->
+            Label : MEMBER
+              b
             Label : OBJECT
               $a
-            Label : PROPERTY
-              b
           Label : ELSE
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
@@ -34,20 +33,18 @@ Label : PROJECT
                 1
           Label : THEN
             ;
-            Label : ELEMENT
+            Label : EXPRESSION
               =
               Label : LEFT
                 [
                 Label : INDEX
                   d
-                  Label : ARGUMENTS
-                    (
-                    Label : ARGUMENT
-                      [
-                      Label : INDEX
-                        $f
-                      Label : VARIABLE
-                        $e
+                  Label : ARGUMENT
+                    [
+                    Label : INDEX
+                      $f
+                    Label : VARIABLE
+                      $e
                   Label : NAME
                     d
                 Label : VARIABLE
