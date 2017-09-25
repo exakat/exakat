@@ -8,7 +8,19 @@ class A {
     function notOverwritten2() {}
 }
 
-class AA extends A {
+class AA extends A { 
+    function keepTypehint(A $a) {}
+    function dropTypehint($a) {}
+    function addTypehint(A $a) {}
+}
+
+class AAA extends AA {
+    function keepTypehint(A $a) {}
+    function dropTypehint($a) {}
+    function addTypehint(A $a) {}
+ }
+
+class AAAA extends AAA { 
     function keepTypehint(A $a) {}
     function dropTypehint($a) {}
     function addTypehint(A $a) {}
