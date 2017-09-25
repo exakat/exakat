@@ -602,6 +602,14 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         return $this;
     }
 
+    public function atomInsideNoBlock($atom) {
+        assert($this->assertAtom($atom));
+        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Sequence")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $this->addMethod($gremlin);
+        
+        return $this;
+    }
+
     public function atomInsideNoAnonymous($atom) {
         assert($this->assertAtom($atom));
         $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
