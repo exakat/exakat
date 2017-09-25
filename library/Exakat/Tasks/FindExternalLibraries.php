@@ -47,6 +47,7 @@ class FindExternalLibraries extends Tasks {
                              'dompdf'           => self::PARENT_DIR,
                              'fpdf'             => self::FILE_ONLY,
                              'graph'            => self::PARENT_DIR, // Jpgraph
+                             'jpgraph'          => self::PARENT_DIR,
                              'html2pdf'         => self::WHOLE_DIR, // contains tcpdf
                              'htmlpurifier'     => self::FILE_ONLY,
                              'http_class'       => self::WHOLE_DIR,

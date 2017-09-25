@@ -110,8 +110,11 @@ class Project extends Tasks {
             $info['vcs_type'] = 'git';
             
             $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
-            $info['vcs_url'] = $r[1];
+            if (preg_match('#url = (\S+)\s#is', $gitConfig, $r)) {
+                $info['vcs_url'] = $r[1];
+            } else {
+                $info['vcs_url'] = 'No URL';
+            }
 
             $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
             $info['vcs_branch'] = trim($res, " *\n");

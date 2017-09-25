@@ -2218,7 +2218,7 @@ HTML;
 HTML;
 
         foreach($classes as $id) {
-            list($path, $class) = explode(':', $id);
+            list(, $class) = explode(':', $id);
             $visibilityTable .= '<tr><td colspan="9">class '.$class.'</td></tr>'.PHP_EOL.
                                 (isset($constants[$id])  ? implode('', $constants[$id])  : '').
                                 (isset($properties[$id]) ? implode('', $properties[$id]) : '').

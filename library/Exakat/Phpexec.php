@@ -77,8 +77,11 @@ class Phpexec {
 
         $this->isCurrentVersion = substr(PHP_VERSION, 0, 3) === $phpversion3;
         if ($this->isCurrentVersion === true) {
-            preg_match('/^(\d\.\d+\.\d+)/', PHP_VERSION, $r);
-            $this->actualVersion = $r[1];
+            if (preg_match('/^(\d\.\d+\.\d+)/', PHP_VERSION, $r)) {
+                $this->actualVersion = $r[1];
+            } else {
+                $this->actualVersion = PHP_VERSION;
+            }
 
             if (substr($this->actualVersion, 0, 3) !== $this->requestedVersion) {
                 throw new NoPhpBinary('PHP binary for version '.$this->requestedVersion.' ('.$_SERVER['_'].') doesn\'t have the right middle version : "'.$this->actualVersion.'". Please, check config/exakat.ini');
