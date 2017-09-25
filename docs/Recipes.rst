@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 18 Sep 2017 14:01:44 +0000
-.. comment: Generation hash : 37d41fabfd7365f6bfb548d4b775665f4084d953
+.. comment: Generation date : Mon, 25 Sep 2017 14:19:02 +0000
+.. comment: Generation hash : 858b6c0ed031fbbb66bca5cce4e24445558c6c1e
 
 
 .. _analyze:
@@ -458,7 +458,7 @@ Total : 60 analysis
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
 * :ref:`Const With Array <const-with-array>`
@@ -526,7 +526,7 @@ Total : 57 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -589,7 +589,7 @@ Total : 55 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -652,7 +652,7 @@ Total : 48 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
@@ -708,7 +708,7 @@ Total : 44 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
@@ -760,7 +760,7 @@ Total : 53 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`

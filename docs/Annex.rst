@@ -346,7 +346,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
   * Assign With And (Php/AssignAnd ; Analyze)
   * Avoid Concat In Loop (Performances/NoConcatInLoop ; Performances)
-  * Child Class Remove Typehint (Classes/ChildRemoveTypehint)
+  * Child Class Removes Typehint (Classes/ChildRemoveTypehint)
   * Isset Multiple Arguments (Php/IssetMultipleArgs ; Suggestions)
   * Logical Operators Favorite (Php/LetterCharsLogicalFavorite ; Preferences)
   * No Magic With Array (Classes/NoMagicWithArray ; Analyze)
@@ -1711,15 +1711,17 @@ List of external links mentionned in this documentation.
 * `download <https://www.exakat.io/download-exakat/>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
+* `empty() <http://www.php.net/manual/en/function.empty.php>`_
 * `Enchant spelling library <http://php.net/manual/en/book.enchant.php>`_
 * `Ereg <http://php.net/manual/en/function.ereg.php>`_
 * `Ev <http://php.net/manual/en/book.ev.php>`_
+* `Event <http://php.net/event>`_
 * `Exakat <http://www.exakat.io/>`_
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
 * `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
 * `Exceptions <http://php.net/manual/en/language.exceptions.php>`_
-* `exif <http://php.net/manual/en/book.exif.php>`_
+* `Exchangeable image information <http://php.net/manual/en/book.exif.php>`_
 * `expect <http://php.net/manual/en/book.expect.php>`_
 * `ext-http <https://github.com/m6w6/ext-http>`_
 * `ext/ast <https://pecl.php.net/package/ast>`_
@@ -1741,8 +1743,9 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
@@ -1782,6 +1785,7 @@ List of external links mentionned in this documentation.
 * `libevent <http://www.libevent.org/>`_
 * `libmongoc <https://github.com/mongodb/mongo-c-driver>`_
 * `libxml <http://www.php.net/manual/en/book.libxml.php>`_
+* `Lightweight Directory Access Protocol <http://php.net/manual/en/book.ldap.php>`_
 * `list <http://php.net/manual/en/function.list.php>`_
 * `List of function aliases <http://php.net/manual/en/aliases.php>`_
 * `List of HTTP header fields <https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`_
@@ -1833,6 +1837,7 @@ List of external links mentionned in this documentation.
 * `PHP Data Object <http://php.net/manual/en/book.pdo.php>`_
 * `PHP extension for libsodium <https://github.com/jedisct1/libsodium-php>`_
 * `PHP gmagick <http://www.php.net/manual/en/book.gmagick.php>`_
+* `PHP Options And Information <http://php.net/manual/en/book.info.php>`_
 * `PHP Options/Info Functions <http://php.net/manual/en/ref.info.php>`_
 * `PHP RFC: Allow abstract function override <https://wiki.php.net/rfc/allow-abstract-function-override>`_
 * `PHP RFC: Deprecate and Remove Bareword (Unquoted) Strings <https://wiki.php.net/rfc/deprecate-bareword-strings>`_
@@ -1853,9 +1858,11 @@ List of external links mentionned in this documentation.
 * `PSR7 <http://www.php-fig.org/psr/psr-7/>`_
 * `Putting glob to the test <https://www.phparch.com/2010/04/putting-glob-to-the-test/>`_
 * `Quick Start <https://github.com/zendframework/zend-mvc/blob/master/doc/book/quick-start.md>`_
+* `Rar archiving <http://php.net/manual/en/book.rar.php>`_
 * `References <http://php.net/references>`_
 * `Reflection <http://php.net/manual/en/book.reflection.php>`_
 * `Regular Expressions (Perl-Compatible) <http://php.net/manual/en/book.pcre.php>`_
+* `resources <http://php.net/manual/en/language.types.resource.php>`_
 * `Return Inside Finally Block <https://www.owasp.org/index.php/Return_Inside_Finally_Block>`_
 * `RFC 7159 <http://www.faqs.org/rfcs/rfc7159>`_
 * `RFC 7230 <https://tools.ietf.org/html/rfc7230>`_
@@ -1889,6 +1896,7 @@ List of external links mentionned in this documentation.
 * `the docs online <http://exakat.readthedocs.io/en/latest/Rules.html>`_
 * `The Linux NIS(YP)/NYS/NIS+ HOWTO <http://www.tldp.org/HOWTO/NIS-HOWTO/index.html>`_
 * `The main PPA for PHP (5.6, 7.0, 7.1)  <https://launchpad.net/~ondrej/+archive/ubuntu/php>`_
+* `Tidy <http://php.net/manual/en/book.tidy.php>`_
 * `tokenizer <http://www.php.net/tokenizer>`_
 * `tokyo_tyrant <http://php.net/manual/en/book.tokyo-tyrant.php>`_
 * `trader <https://pecl.php.net/package/trader>`_
@@ -1896,8 +1904,10 @@ List of external links mentionned in this documentation.
 * `Traits <http://php.net/trait>`_
 * `Tutorial 1: Let’s learn by example <https://docs.phalconphp.com/en/latest/reference/tutorial.html>`_
 * `Type hinting for interfaces <http://phpenthusiast.com/object-oriented-php-tutorials/type-hinting-for-interfaces>`_
+* `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_
 * `Understanding Dependency Injection <http://php-di.org/doc/understanding-di.html>`_
 * `Unicode spaces <https://www.cs.tut.fi/~jkorpela/chars/spaces.html>`_
+* `Using namespaces: Aliasing/Importing <http://php.net/manual/en/language.namespaces.importing.php>`_
 * `V8 Javascript Engine <https://bugs.chromium.org/p/v8/issues/list>`_
 * `vagrant <https://www.vagrantup.com/docs/installation/>`_
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
