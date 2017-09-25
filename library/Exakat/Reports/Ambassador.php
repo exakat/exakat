@@ -651,6 +651,14 @@ JAVASCRIPT;
         $tags[] = 'SCRIPTSEVERITY';
         $code[] = $severity['script'];
 
+        // Marking the audit date
+        $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
+        $revision = $this->datastore->getHash('revision');
+        if (!empty($revision)) {
+            $revision .= ' - Revision : '.$revision;
+        }
+        $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
+
         // top 10
         $fileHTML = $this->getTopFile();
         $finalHTML = $this->injectBloc($finalHTML, 'TOPFILE', $fileHTML);
@@ -1160,14 +1168,6 @@ JAVASCRIPT;
                                     </div><div style="color:black; text-align:center;">'.$totalAnalyzerReporting.'</div>
                                 </div>
                                 <div class="pourcentage">'.$percentAnalyzer.'%</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="sub-div">
-                                <p>Date of audit : '.$audit_date.'</p>
-                            </div>
-                            <div class="sub-div">
-                                <p>Revision : '.$this->datastore->getHash('revision').'</p>
                             </div>
                         </div>
                     </div>
