@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_UncheckedResources extends Analyzer {
-    /* 6 methods */
+    /* 8 methods */
 
     public function testStructures_UncheckedResources01()  { $this->generic_test('Structures_UncheckedResources.01'); }
     public function testStructures_UncheckedResources02()  { $this->generic_test('Structures_UncheckedResources.02'); }
@@ -16,5 +16,7 @@ class Structures_UncheckedResources extends Analyzer {
     public function testStructures_UncheckedResources04()  { $this->generic_test('Structures_UncheckedResources.04'); }
     public function testStructures_UncheckedResources05()  { $this->generic_test('Structures_UncheckedResources.05'); }
     public function testStructures_UncheckedResources06()  { $this->generic_test('Structures/UncheckedResources.06'); }
+    public function testStructures_UncheckedResources07()  { $this->generic_test('Structures/UncheckedResources.07'); }
+    public function testStructures_UncheckedResources08()  { $this->generic_test('Structures/UncheckedResources.08'); }
 }
 ?>
