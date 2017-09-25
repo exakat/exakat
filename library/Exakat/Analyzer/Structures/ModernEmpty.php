@@ -27,12 +27,20 @@ use Exakat\Analyzer\Analyzer;
 class ModernEmpty extends Analyzer {
     protected $phpVersion = '5.5+';
     
+    public function dependsOn() {
+        return array('Variables/IsRead',
+                     'Classes/IsRead',
+                     'Arrays/IsRead',
+                     );
+    }
+    
     public function analyze() {
         // $a = source();
         // if (empty($a)) {}
         // No check for reuse yet
         $this->atomIs('Assignation')
              ->outIs('LEFT')
+             ->atomIs(self::$CONTAINERS)
              ->savePropertyAs('fullcode', 'variable')
              ->back('first')
              ->nextSibling()
@@ -40,7 +48,14 @@ class ModernEmpty extends Analyzer {
              ->functioncallIs('\\empty')
              ->outIs('ARGUMENT')
              ->samePropertyAs('fullcode', 'variable')
-             ->back('first');
+             ->back('first')
+             ->raw('not(__.where( __.in("EXPRESSION")
+                                    .emit().repeat(__.not(hasLabel("'.implode('", "', self::$CONTAINERS).'")).out()).times('.self::MAX_LOOPING.')
+                                    .hasLabel("'.implode('", "', self::$CONTAINERS).'").filter{ it.get().value("fullcode") == variable }
+                                    .not( __.where(__.in("ARGUMENT").hasLabel("Functioncall").has("token", "T_EMPTY")))
+                                    .where( __.in("ANALYZED").has("analyzer", within("Variables/IsRead", "Classes/IsRead", "Arrays/IsRead")))
+                                )
+                  )');
         $this->prepareQuery();
     }
 }
