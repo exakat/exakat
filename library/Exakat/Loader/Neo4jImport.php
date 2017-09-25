@@ -176,7 +176,7 @@ GREMLIN;
                                'origin'      => '',
                                'encoding'    => '',
                                'block'       => '',
-                               'intval'      => 'long',
+                               'intval'      => '',         // long
                                'strval'      => '',
                                'enclosing'   => '',         //boolean
                                'args_max'    => '',         //int
