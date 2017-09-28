@@ -53,13 +53,21 @@ function init($args) {
             error('Malformed VCS', '');
         }
         
-        $vcs = $url['scheme'].'://'.$url['host'].(!empty($url['port']) ? ':'.$url['port'] : '').$url['path'];
+        $pass = '';
+        if (!empty($url['user'])) {
+            $pass .= escapeshellarg($url['user']).':'.(isset($url['pass']) ? escapeshellarg($url['pass']) : '').'@';
+        }
+        $vcs = $url['scheme'].'://'.
+               $pass.
+               $url['host'].
+               (!empty($url['port']) ? ':'.$url['port'] : '').
+               $url['path'];
         
         if (empty($project)) {
             $project = autoprojectname();
         }
 
-        shell_exec('/usr/bin/php exakat.phar init -p '.$project.' -R '.escapeshellarg($vcs));
+        shell_exec('/usr/bin/php exakat.phar init -p '.$project.' -R '.$vcs);
     } elseif (isset($_REQUEST['code'])) {
         $php = $_REQUEST['code'];
         if (strpos($php, '<?php') === false) {
