@@ -149,7 +149,6 @@ GREMLIN;
                         unset($params[$name]);
                     }
                 } else { // a short string (less than 2000) : hardcoded
-                    var_dump($value);
                     if (is_int($value)) {
                         $query = str_replace($name, $value, $query);
                     } else {
