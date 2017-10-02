@@ -295,7 +295,6 @@ GROUP BY calls.id
 
     public function json_encode($object) {
         if (isset($object->properties['fullcode']) && !mb_check_encoding($object->properties['fullcode'][0]->value, 'UTF-8')) {
-            print "Fixing : ".$object->properties['fullcode'][0]->value .PHP_EOL;
             $object->properties['fullcode'][0]->value = utf8_encode($object->properties['fullcode'][0]->value);
         }
         if (isset($object->properties['code']) && !mb_check_encoding($object->properties['code'][0]->value, 'UTF-8')) {
