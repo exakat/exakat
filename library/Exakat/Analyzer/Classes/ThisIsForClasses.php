@@ -26,6 +26,7 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class ThisIsForClasses extends Analyzer {
+    protected $phpVersion = '7.1-';
 
     public function analyze() {
         // General case
