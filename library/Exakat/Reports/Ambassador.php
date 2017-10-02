@@ -139,7 +139,11 @@ class Ambassador extends Reports {
         $this->generateExtensionsBreakdown();
         $this->generateFiles();
         $this->generateAnalyzers();
+
         $this->generateIssues();
+        $this->generatePerformances();
+        $this->generateSecurity();
+        
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
@@ -325,6 +329,16 @@ class Ambassador extends Reports {
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
 
         $this->putBasedPage('analyzers_doc', $finalHTML);
+    }
+
+    private function generateSecurity() {
+        $this->generateIssuesEngine('security_issues',
+                                    $this->getIssuesFaceted('Security') );
+    }
+
+    private function generatePerformances() {
+        $this->generateIssuesEngine('performances_issues',
+                                    $this->getIssuesFaceted('Performances') );
     }
 
     private function generateFavorites() {
