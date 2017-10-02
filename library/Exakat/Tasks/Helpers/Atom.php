@@ -94,6 +94,13 @@ class Atom {
         $this->bracket       = $this->bracket     ? 1 : null;
         $this->close_tag     = $this->close_tag   ? 1 : null;
         $this->aliased       = $this->aliased     ? 1 : null;
+        
+        if ($this->intval > 2147483647) {
+            $this->intval = 2147483647;
+        }
+        if ($this->intval < -2147483648) {
+            $this->intval = -2147483648;
+        }
 
         $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
 
@@ -130,6 +137,13 @@ class Atom {
 
         $this->enclosing     = !$this->enclosing  ? null : 1;
         $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
+
+        if ($this->intval > 2147483647) {
+            $this->intval = 2147483647;
+        }
+        if ($this->intval < -2147483648) {
+            $this->intval = -2147483648;
+        }
 
         $return = array( $this->id,
                          $this->atom,
