@@ -57,7 +57,8 @@ class Ambassador extends Reports {
                                  'functions'  => 'Functions',
                                  'traits'     => 'Traits',
                                  'namespaces' => 'Namespaces',
-                                 'exceptions' => 'Exceptions');
+//                                 'exceptions' => 'Exceptions'
+                                 );
 
     private $compatibilities = array('53' => 'Compatibility PHP 5.3',
                                      '54' => 'Compatibility PHP 5.4',
@@ -1897,13 +1898,13 @@ SQL;
     }
 
     protected function generatePhpConfiguration() {
-        $phpConfiguration = new PhpConfiguration($this->config);
-        $report = $phpConfiguration->generate(null, null);
+        $phpConfiguration = new PhpCompilation($this->config);
+        $report = $phpConfiguration->generate(null, Reports::STDOUT);
 
         $id = strpos($report, "\n\n\n");
-        $configline = substr($report, 0, $id);
+        $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array("&nbsp;", "<br />\n",), $configline);
-
+        
         $html = $this->getBasedPage('php_compilation');
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
         $html = $this->injectBloc($html, 'TITLE', 'PHP Configurations\' list');
@@ -2173,8 +2174,8 @@ HTML;
                                   'analyzer'    => 'Functions/Functionnames'),
             'namespaces' => array('description' => 'List of all defined namespaces in the code.',
                                   'analyzer'    => 'Namespaces/Namespacesnames'),
-            'exceptions' => array('description' => 'List of all defined exceptions.',
-                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
+//            'exceptions' => array('description' => 'List of all defined exceptions.',
+//                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
         );
         foreach($this->inventories as $fileName => $theTitle) {
             $theDescription = $definitions[$fileName]['description'];
@@ -2192,6 +2193,154 @@ HTML;
             $html = $this->injectBloc($html, 'TABLE', $theTable);
             $this->putBasedPage('inventories_'.$fileName, $html);
         }
+        $this->generateExceptionTree();
+    }
+
+    private function generateExceptionTree() {
+        $exceptions = array (
+  'Throwable' => 
+  array (
+    'Error' => 
+    array (
+      'ParseError' => 
+      array (
+      ),
+      'TypeError' => 
+      array (
+        'ArgumentCountError' => 
+        array (
+        ),
+      ),
+      'ArithmeticError' => 
+      array (
+        'DivisionByZeroError' => 
+        array (
+        ),
+      ),
+      'AssertionError' => 
+      array (
+      ),
+    ),
+    'Exception' => 
+    array (
+      'ErrorException' => 
+      array (
+      ),
+      'ClosedGeneratorException' => 
+      array (
+      ),
+      'DOMException' => 
+      array (
+      ),
+      'LogicException' => 
+      array (
+        'BadFunctionCallException' => 
+        array (
+          'BadMethodCallException' => 
+          array (
+          ),
+        ),
+        'DomainException' => 
+        array (
+        ),
+        'InvalidArgumentException' => 
+        array (
+        ),
+        'LengthException' => 
+        array (
+        ),
+        'OutOfRangeException' => 
+        array (
+        ),
+      ),
+      'RuntimeException' => 
+      array (
+        'OutOfBoundsException' => 
+        array (
+        ),
+        'OverflowException' => 
+        array (
+        ),
+        'RangeException' => 
+        array (
+        ),
+        'UnderflowException' => 
+        array (
+        ),
+        'UnexpectedValueException' => 
+        array (
+        ),
+        'PDOException' => 
+        array (
+        ),
+      ),
+      'PharException' => 
+      array (
+      ),
+      'ReflectionException' => 
+      array (
+      ),
+    ),
+  ),
+);
+        $list = array();
+
+        $theTable = '';
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Exceptions/DefinedExceptions"');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (!preg_match('/ extends (\S+)/', $row['fullcode'], $r)) {
+                continue;
+            }
+            $parent = strtolower($r[1]);
+            if ($parent[0] != '\\') {
+                $parent = '\\'.$parent;
+            }
+
+            if (!isset($list[$parent])) {
+                $list[$parent] = array();
+            } 
+            
+            $list[$parent][] = $row['fullcode'];
+        }
+        
+        foreach($list as &$l) {
+            sort($l);
+        }
+        $theTable = $this->tree2ul($exceptions, $list);
+
+       $html = $this->getBasedPage('empty');
+       $html = $this->injectBloc($html, 'TITLE', 'Exceptions inventory');
+       $html = $this->injectBloc($html, 'DESCRIPTION', '');
+       $html = $this->injectBloc($html, 'CONTENT', $theTable);
+       $this->putBasedPage('inventories_exceptions', $html);
+    }
+    
+    private function tree2ul($tree, $display) {
+        if (empty($tree)) {
+            return '';
+        }
+        $return = '<ul>';
+        
+        foreach($tree as $k => $v) {
+            $return .= '<li>';
+
+            $parent = '\\'.strtolower($k);
+            if (isset($display[$parent])) {
+                $return .= '<div style="font-weight: bold">'.$k.'</div><ul><li>'.implode('</li><li>', $display[$parent]).'</li></ul>';
+            } else {
+                $return .= '<div style="font-weight: bold; color: darkgray">'.$k.'</div>';
+            }
+
+            if (is_array($v)) {
+                $return .= $this->tree2ul($v, $display);
+            } 
+
+            $return .= '</li>';
+        }
+        
+        $return .= '</ul>';
+        
+        return $return;
     }
 
     private function generateVisibilitySuggestions() {
@@ -2223,14 +2372,13 @@ HTML;
                                 (isset($constants[$id])  ? implode('', $constants[$id])  : '').
                                 (isset($properties[$id]) ? implode('', $properties[$id]) : '').
                                 (isset($methods[$id])    ? implode('', $methods[$id])    : '');
-            
         }
 
         $visibilityTable .= '</table>';
 
         $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Titre');
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Description');
+        $html = $this->injectBloc($html, 'TITLE', 'Visibility recommendations');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Below, is a summary of all classes and their component\'s visiblity. Whenever a visibility is set and used at the right level, a green star is presented. Whenever it is set to a level, but could be updated to another, red and orange stars are mentioned. ');
         $html = $this->injectBloc($html, 'CONTENT', $visibilityTable);
         $this->putBasedPage('visibility_suggestions', $html);
     }
