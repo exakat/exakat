@@ -83,14 +83,23 @@ class Update extends Tasks {
                 display('Git pull for '.$project);
                 $res = shell_exec('cd '.$path.'/code/; git branch | grep \\*');
                 $branch = substr(trim($res), 2);
-
-                $resInitial = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
+                
+                if (strpos($branch, ' detached at ') !== false) {
+                    $resInitial = shell_exec('cd '.$path.'/code/; git checkout master --quiet; git pull');
+                    $branch = 'master';
+                    
+                } else {
+                    $resInitial = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
+                }
 
                 $date = trim(shell_exec('cd '.$path.'/code/; git pull --quiet; git log -1 --format=%cd '));
-
                 $resFinal = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
+                if (strpos($resFinal, ' ') !== false) {
+                    list($resFinal, ) = explode(' ', $resFinal);
+                }
+
                 if ($resFinal != $resInitial) {
-                    display( "Git updated to commit $res (Last commit : $date)");
+                    display( "Git updated to commit $resFinal (Last commit : $date)");
                 } else {
                     display( "No update available (Last commit : $date)");
                 }
