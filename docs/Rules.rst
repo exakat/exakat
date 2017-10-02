@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 25 Sep 2017 14:19:02 +0000
-.. comment: Generation hash : 858b6c0ed031fbbb66bca5cce4e24445558c6c1e
+.. comment: Generation date : Mon, 02 Oct 2017 17:32:30 +0000
+.. comment: Generation hash : ce22347382b5a4b6b447e4c83d5c4352db3f3169
 
 
 .. _$http\_raw\_post\_data:
@@ -4987,6 +4987,23 @@ Functions Removed In PHP 5.4
 
 
 Those functions were removed in PHP 5.4.
+
+.. code-block:: php
+
+   <?php
+   
+   // Deprecated as of PHP 5.4.0
+   $link = mysql_connect('localhost', 'mysql_user', 'mysql_password');
+   $db_list = mysql_list_dbs($link);
+   
+   while ($row = mysql_fetch_object($db_list)) {
+        echo $row->Database . \n;
+   }
+   
+   ?>
+
+
+See also `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_.
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/Php54RemovedFunctions                                                                                                                                                                   |
@@ -12942,6 +12959,47 @@ Original idea by Vladimir Reznichenko.
 +--------------+---------------------------------+
 
 
+.. _switch-fallthrough:
+
+Switch Fallthrough
+##################
+
+
+A switch with fallthrough is prone to errors. 
+
+A fallthrough happens when a case or default clause in a switch statement is not finished by a `'break <http://php.net/manual/en/control-structures.break.php>`_ (or equivalent);
+CWE report this as a security concern, unless well documented.
+
+A fallthrough may be used as a feature. It is undistinguisable from an error.
+
+.. code-block:: php
+
+   <?php
+   switch($variable) {
+       case 1 : 
+            
+           'break ;
+       case 2 : 
+           'break ;
+       default: 
+           ++$a;
+       case 4 : 
+           'break ;
+   }
+   ?>
+
+
+This analysis cannot take into account comments abouts the fallthough. 
+
+See also `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_.
+
++--------------+------------------------+
+| Command Line | Structures/Fallthrough |
++--------------+------------------------+
+| Analyzers    | :ref:`Security`        |
++--------------+------------------------+
+
+
 .. _switch-to-switch:
 
 Switch To Switch
@@ -17025,7 +17083,7 @@ Zend Classes
 ############
 
 
-Spot Zend Classes in the code.
+Zend Classes are used in the code.
 
 Classes are detected by checking the full namespaced name with the prefix 'zend_' (Zend Framework 1) or '\zend\' (Zend Framework 2).
 

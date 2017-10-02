@@ -119,6 +119,7 @@ Glossary
     + `Break`
 
       + :ref:`Break With 0 <break-with-0>`
+      + :ref:`Switch Fallthrough <switch-fallthrough>`
 
     + `basename()`
 
@@ -137,6 +138,7 @@ Glossary
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
+      + :ref:`Switch Fallthrough <switch-fallthrough>`
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
       + :ref:`Switch Without Default <switch-without-default>`

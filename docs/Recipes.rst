@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 25 Sep 2017 14:19:02 +0000
-.. comment: Generation hash : 858b6c0ed031fbbb66bca5cce4e24445558c6c1e
+.. comment: Generation date : Mon, 02 Oct 2017 17:32:30 +0000
+.. comment: Generation hash : ce22347382b5a4b6b447e4c83d5c4352db3f3169
 
 
 .. _analyze:
@@ -987,7 +987,7 @@ Total : 26 analysis
 Security
 ++++++++
 
-Total : 24 analysis
+Total : 25 analysis
 
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
@@ -1008,6 +1008,7 @@ Total : 24 analysis
 * :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`
+* :ref:`Switch Fallthrough <switch-fallthrough>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`parse_str() Warning <parse\_str()-warning>`
