@@ -19,4 +19,8 @@ trait t {
     }
 }
 
+    function foo() {
+        foreach($a as $b => $this) {}
+    }
+
 ?>

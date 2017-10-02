@@ -2,21 +2,13 @@
 
 //foreach($a as $this => $b) {}
 
-function foo() {
-//    foreach($a as $this => $b) {}
-}
+$a = function () {
+    echo $this;
+};
 
-class c {
-    function foo() {
-//        foreach($a as $this => $b) {}
-    }
-}
+$a = function () use ($THIS) {
+    echo $this;
+};
 
-
-trait t {
-    function foo() {
-//        foreach($a as $b => $this) {}
-    }
-}
 
 ?>

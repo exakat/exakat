@@ -1,5 +1,7 @@
 <?php
 
+use \arrayaccess as a;
+
 class x {
 
     function init() {
@@ -10,6 +12,19 @@ class x {
         }
 
         $this[] = 3;
+    }
+}
+
+class xx implements a {
+
+    function init() {
+        $names = range('a', 'g');
+        
+        foreach($names as $n) {
+            $this[3];
+        }
+
+        $this[] = 4;
     }
 }
 

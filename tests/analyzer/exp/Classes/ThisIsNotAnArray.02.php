@@ -1,6 +1,8 @@
 <?php
 
-$expected     = array();
+$expected     = array('$this[5]', 
+                      '$this[6]',
+                     );
 
 $expected_not = array('$this[]', 
                       '$this[]', 
@@ -9,6 +11,7 @@ $expected_not = array('$this[]',
                       '$this[2]', 
                       '$this[]', 
                       '$this[3]', 
-                      '$this[4]');
+                      '$this[4]',
+                     );
 
 ?>

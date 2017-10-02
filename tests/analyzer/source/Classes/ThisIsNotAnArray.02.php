@@ -24,4 +24,16 @@ class D extends C {
     }
 }
 
+class AA {
+    function x () {
+        $this[5] = 1;
+    }
+}
+
+class BB extends AA {
+    function x () {
+        $this[6];
+    }
+}
+
 ?>
