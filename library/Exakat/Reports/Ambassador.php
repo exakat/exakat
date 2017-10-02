@@ -2239,7 +2239,9 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateMethod"');
         $couldBePrivate = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname);
+            if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
+                continue;
+            }
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
 
             if (isset($couldBePrivate[$fullnspath])) {
@@ -2252,7 +2254,9 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedMethod"');
         $couldBeProtected = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname);
+            if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
+                continue;
+            }
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
             
             if (isset($couldBeProtected[$fullnspath])) {
@@ -2324,7 +2328,9 @@ HTML;
 
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
-            preg_match('/^(\w+) = /i', $row['fullcode'], $code);
+            if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
+                continue;
+            }
 
             if (isset($couldBePrivate[$fullnspath])) {
                 $couldBePrivate[$fullnspath][] = $code[1];
@@ -2341,7 +2347,9 @@ HTML;
             }
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
-            preg_match('/^(\w+) = /i', $row['fullcode'], $code);
+            if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
+                continue;
+            }
             
             if (isset($couldBeProtected[$fullnspath])) {
                 $couldBeProtected[$fullnspath][] = $code[1];
@@ -2618,7 +2626,7 @@ HTML;
                 }
             }
 
-            $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
+            $source = @show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.$this->toHtmlEncoding($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function($x) { static $i = 0; return '<br /><a name="l'.++$i.'" />'; }, $source);
