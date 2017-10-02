@@ -2715,6 +2715,7 @@ HTML;
                             'Switch'              => 'Switch',
                             'Case'                => 'Case',
                             'Default'             => 'Default',
+                            'Fallthrough'         => 'Structures/Fallthrough',
                             'For'                 => 'For',
                             'Foreach'             => 'Foreach',
                             'While'               => 'While',
