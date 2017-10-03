@@ -297,7 +297,7 @@ class Ambassador extends Reports {
             $analyzer = Analyzer::getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
 
-            $analyzersDocHTML.='<h2><a href="issues.html#analyzer='.$analyzerName.'" id="'.md5($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
+            $analyzersDocHTML.='<h2><a href="issues.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
 
             $badges = array();
             $v = $description->getVersionAdded();
@@ -1656,10 +1656,10 @@ $issues
       var analyzerParam = window.location.hash.split('analyzer=')[1];
       var fileParam = window.location.hash.split('file=')[1];
       if(analyzerParam !== undefined) {
-        $('#analyzer .facetlist').find("[data-analyzer='" + md5(analyzerParam) + "']").click();
+        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam.toLowerCase() + "']").click();
       }
       if(fileParam !== undefined) {
-        $('#file .facetlist').find("[data-file='" + md5(fileParam) + "']").click();
+        $('#file .facetlist').find("[data-file='" + fileParam.toLowerCase() + "']").click();
       }
     });
   </script>
@@ -1698,19 +1698,19 @@ SQL;
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $item['analyzer'] =  $ini['name'];
-            $item['analyzer_md5'] = md5($row['analyzer']);
-            $item['file' ] =  $row['file'];
-            $item['file_md5' ] =  md5($row['file']);
-            $item['code' ] = $this->PHPSyntax($row['fullcode']);
-            $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus'] = $this->PHPSyntax($row['fullcode']);
-            $item['link_file'] = $row['file'];
-            $item['line' ] =  $row['line'];
-            $item['severity'] = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
-            $item['complexity'] = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
-            $item['recipe' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
-            $lines = explode("\n", $ini['description']);
+            $item['analyzer']     =  $ini['name'];
+            $item['analyzer_md5'] = $this->toId($row['analyzer']);
+            $item['file' ]        =  $row['file'];
+            $item['file_md5' ]    =  $this->toId($row['file']);
+            $item['code' ]        = $this->PHPSyntax($row['fullcode']);
+            $item['code_detail']  = "<i class=\"fa fa-plus \"></i>";
+            $item['code_plus']    = $this->PHPSyntax($row['fullcode']);
+            $item['link_file']    = $row['file'];
+            $item['line' ]        =  $row['line'];
+            $item['severity']     = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
+            $item['complexity']   = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
+            $item['recipe' ]      =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $lines                = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
 
             $items[] = json_encode($item);
@@ -2134,7 +2134,7 @@ SQL
             }
             $result = $this->Compatibility($result, $l);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#'.md5($l).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#'.$this->toId($l).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
             $compatibility .= "<tr><td>$link $name</td><td>$result</td></tr>\n";
         }
 
@@ -2938,6 +2938,10 @@ HTML;
     
     private function toHtmlEncoding($text) {
         return htmlentities($text, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+    }
+    
+    private function toId($name) {
+        return str_replace('/', '_', strtolower($name));
     }
 }
 
