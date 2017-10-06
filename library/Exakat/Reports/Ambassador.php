@@ -668,9 +668,9 @@ JAVASCRIPT;
 
         // Marking the audit date
         $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
-        $revision = $this->datastore->getHash('revision');
-        if (!empty($revision)) {
-            $revision .= ' - Revision : '.$revision;
+        $audit_name = $this->datastore->getHash('audit_name');
+        if (!empty($audit_name)) {
+            $audit_date .= ' - &quote;'.$audit_name.'&quote;';
         }
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
 
@@ -1119,7 +1119,7 @@ JAVASCRIPT;
             'Number of PHP files'                   => $this->datastore->getHash('files'),
             'Number of lines of code'               => $this->datastore->getHash('loc'),
             'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
-            'PHP used'                              => $php->getActualVersion() //.' (version '.$this->config->phpversion.' configured)'
+            'PHP used'                              => $this->datastore->getHash('php_version'),
         );
 
         // fichier

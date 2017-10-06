@@ -102,7 +102,8 @@ class Project extends Tasks {
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
                                                'exakat_version' => Exakat::VERSION,
                                                'exakat_build'   => Exakat::BUILD,
-                                               'php_version'    => $this->config->phpversion
+                                               'php_version'    => $this->config->phpversion,
+                                               'audit_name'     => $this->generateName(),
                                          ));
 
         if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
@@ -385,6 +386,23 @@ class Project extends Tasks {
             }
         }
         $VERBOSE = $oldVerbose;
+    }
+    
+    private function generateName() {
+        $ini = parse_ini_file('./data/audit_names.ini');
+        
+        $names = $ini['names'];
+        $adjectives = $ini['adjectives'];
+        
+        shuffle($names);
+        shuffle($adjectives);
+        
+        $x = mt_rand(0, PHP_INT_MAX);
+        
+        $name = $names[ $x % count($names) - 1];
+        $adjective = $adjectives[ $x % count($adjectives) - 1];
+
+        return $adjective.' '.$name;
     }
 }
 
