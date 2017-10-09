@@ -247,7 +247,7 @@ MENU;
         $analyzersDocHTML = "";
 
         foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzerName) {
-            $analyzer = Analyzer::getInstance($analyzerName, $this->config);
+            $analyzer = Analyzer::getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
 
@@ -644,6 +644,7 @@ JAVASCRIPT;
     }
 
     public function generateDashboard() {
+
         $baseHTML = $this->getBasedPage('index');
 
         $tags = array();
@@ -1508,7 +1509,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], $this->config);
+            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number']);
         }
@@ -1582,8 +1583,7 @@ SQL;
         );
     }
 
-    private function generateIssues()
-    {
+    private function generateIssues() {
         $baseHTML = $this->getBasedPage('issues');
 
         $issues = makeList($this->getIssuesFaceted($this->themesToShow), '');
@@ -2003,7 +2003,7 @@ SQL
 
         $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Slim/UsedRoutes"');
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            $routes .= '<tr><td>'.$this->PHPSyntax($row['fullcode']).'</td><td>'.$row[file].'</td><td>'.$row[line].'</td></tr>'.PHP_EOL;
+            $routes .= '<tr><td>'.$this->PHPSyntax($row['fullcode']).'</td><td>'.$row['file'].'</td><td>'.$row['line'].'</td></tr>'.PHP_EOL;
         }
         
         $routes = <<<HTML
