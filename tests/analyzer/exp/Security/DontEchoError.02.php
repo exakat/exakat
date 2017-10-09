@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('echo mysql_error( )');
+$expected     = array('echo mysql_error( )',
+                     );
 
-$expected_not = array('echo $i[\'j\']( )');
+$expected_not = array('echo $i[\'j\']( )',
+                     );
 
 ?>
