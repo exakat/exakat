@@ -141,6 +141,7 @@ class Ambassador extends Reports {
         $this->generateAnalyzers();
 
         $this->generateIssues();
+        $this->generateNoIssues();
         $this->generatePerformances();
         $this->generateSecurity();
         
@@ -297,7 +298,7 @@ class Ambassador extends Reports {
             $analyzer = Analyzer::getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
 
-            $analyzersDocHTML.='<h2><a href="issues.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
+            $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
 
             $badges = array();
             $v = $description->getVersionAdded();
@@ -1359,6 +1360,49 @@ SQL;
         $row = $result->fetchArray(\SQLITE3_ASSOC);
 
         return $row['number'];
+    }
+    
+    private function generateNoIssues() {
+        $list = array_merge(Analyzer::getThemeAnalyzers('Analysis'),
+                            Analyzer::getThemeAnalyzers('Security'),
+                            Analyzer::getThemeAnalyzers('Performances'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP71'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP72'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP73'),
+                            array('Project/Dump')
+                            );
+        $list = '"'.implode('", "', $list).'"';
+
+        $query = <<<SQL
+SELECT analyzer AS analyzer FROM resultsCounts
+WHERE analyzer NOT IN ($list) AND 
+      count = 0
+SQL;
+        $result = $this->sqlite->query($query);
+
+        $baseHTML = $this->getBasedPage('no_issues');
+
+        $filesHTML = '';
+
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+
+            $filesHTML.= "<tr>";
+            $filesHTML.='<td><a href="analyzers_doc.html#analyzer='.$row['analyzer'].'" id="'.$this->toId($row['analyzer']).'"><i class="fa fa-book" style="font-size: 14px"></i></a>
+                         &nbsp; '.$analyzer->getDescription()->getName().'</td>';
+            $filesHTML.= "</tr>";
+        }
+
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'No Issues Analysis');
+
+        $this->putBasedPage('no_issues', $finalHTML);
     }
 
     private function generateFiles() {
