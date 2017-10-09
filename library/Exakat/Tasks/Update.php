@@ -160,7 +160,8 @@ class Update extends Tasks {
         }
         
         display('Running files');
-        $updateCache = new Files($this->gremlin, $this->config);
+        $updateCache = new Files($this->gremlin, new Config(array(1 => '-p', 
+                                                                  2 => $project)));
         $updateCache->run();
     }
 }
