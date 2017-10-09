@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('$modified',
-                      '$modified2',);
+                      '$modified2',
+                     );
 
-$expected_not = array('$read',);
+$expected_not = array('$read',
+                     );
 
 ?>

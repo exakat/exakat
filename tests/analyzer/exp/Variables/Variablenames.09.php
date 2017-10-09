@@ -6,8 +6,10 @@ $expected     = array('$a',
                       '$d', 
                       '$e', 
                       '$g',
-                      '$i');
+                      '$i',
+                     );
 
-$expected_not = array('$aFoo');
+$expected_not = array('$aFoo',
+                     );
 
 ?>

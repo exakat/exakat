@@ -4,9 +4,11 @@ $expected     = array('$dynamicFunction',
                       '$dynamicMethod', 
                       '$dynamicStaticMethod',
                       '$object', 
-                      '$object');
+                      '$object',
+                      );
 
 $expected_not = array('$staticProperty', 
-                      'aClass');
+                      'aClass',
+                      );
 
 ?>

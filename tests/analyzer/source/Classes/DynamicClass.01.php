@@ -10,5 +10,6 @@ $class = "x";
 $class::Staticmethod();
 print $class::$property."\n";
 constant($class."::constante");
+constant("x::constante");
  
 ?>

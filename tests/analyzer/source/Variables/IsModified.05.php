@@ -25,6 +25,7 @@ foreach($e as &$f) {
 }
 
 foreach($g as &$h) {
+    $j .= $i;
     (unset) $h;
 }
 

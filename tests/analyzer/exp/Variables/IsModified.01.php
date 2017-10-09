@@ -2,9 +2,11 @@
 
 $expected     = array('$a',
                       '$written',
-                      '$c');
+                      '$c',
+                      );
 
 $expected_not = array('$b', 
-                      '$read');
+                      '$read',
+                     );
 
 ?>

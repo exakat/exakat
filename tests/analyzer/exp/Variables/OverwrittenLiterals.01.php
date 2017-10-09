@@ -12,7 +12,7 @@ $expected     = array('$ow2',
 $expected_not = array('$now3',
                       '$now4',
                       '$now4',
-                      '$b'
+                      '$b',
                       );
 
 ?>

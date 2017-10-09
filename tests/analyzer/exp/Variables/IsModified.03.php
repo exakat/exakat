@@ -10,10 +10,12 @@ $expected     = array('$read3b',
                       '&$written1',
                       '$w1',
                       '$w2',
-                      '$w3');
+                      '$w3',
+                      );
 
 $expected_not = array('$r1',
                       '$r2',
-                      '$r3');
+                      '$r3',
+                      );
 
 ?>

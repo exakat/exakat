@@ -2,9 +2,11 @@
 
 $expected     = array('$b', 
                       '$x', 
-                      '$this');
+                      '$this',
+                      );
 
 $expected_not = array('$children', 
-                      'Y');
+                      'Y',
+                      );
 
 ?>

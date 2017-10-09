@@ -1,9 +1,11 @@
 <?php
 
 $expected     = array('$outQuote', 
-                      '{$inQuoteVariable}');
+                      '{$inQuoteVariable}',
+                     );
 
 $expected_not = array('A', 
-                      'B');
+                      'B',
+                     );
 
 ?>

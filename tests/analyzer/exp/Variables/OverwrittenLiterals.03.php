@@ -2,6 +2,7 @@
 
 $expected     = array();
 
-$expected_not = array('$i');
+$expected_not = array('$i',
+                     );
 
 ?>

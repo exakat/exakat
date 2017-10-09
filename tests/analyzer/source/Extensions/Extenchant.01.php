@@ -22,4 +22,5 @@ if (enchant_broker_dict_exists($r,$tag)) {
 } else {
 }
 enchant_broker_free($r);
+A::enchant_broker_free($r2);
 ?>
