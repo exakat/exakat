@@ -51,7 +51,7 @@ class Slim extends Ambassador {
         $this->severities        = $this->docs->getSeverities();
     }
 
-    private function getBasedPage($file) {
+    protected function getBasedPage($file) {
         static $baseHTML;
 
         if (empty($baseHTML)) {
@@ -109,7 +109,7 @@ MENU;
         file_put_contents($this->tmpName.'/datas/'.$file.'.html', $html);
     }
 
-    private function injectBloc($html, $bloc, $content) {
+    protected function injectBloc($html, $bloc, $content) {
         return str_replace("{{".$bloc."}}", $content, $html);
     }
 
