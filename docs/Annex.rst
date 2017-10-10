@@ -40,6 +40,8 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Internal
 * Inventory
 * Level 1
+* Level 2
+* Level 3
 * Newfeatures
 * OneFile
 * PHP recommendations
@@ -306,10 +308,16 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.12.15
+
+  * Always Anchor Regex (Security/AnchorRegex)
+  * Multiple Type Variable (Structures/MultipleTypeVariable ; Analyze)
+
 * 0.12.14
 
   * Regex Inventory (Type/Regex ; Inventory)
-  * Switch Fallthrough (Structures/Fallthrough)
+  * Switch Fallthrough (Structures/Fallthrough ; Inventory, Security)
+  * Upload Filename Injection (Security/UploadFilenameInjection)
 
 * 0.12.12
 
@@ -1661,6 +1669,7 @@ List of external links mentionned in this documentation.
 * ` <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
+* `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_
 * `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
@@ -1703,6 +1712,7 @@ List of external links mentionned in this documentation.
 * `curl <http://www.php.net/curl>`_
 * `Curl for PHP <http://php.net/manual/en/book.curl.php>`_
 * `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_
+* `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/definitions/625.html>`_
 * `Cyrus <http://php.net/manual/en/book.cyrus.php>`_
 * `Data filtering <http://php.net/manual/en/book.filter.php>`_
 * `Data structures <http://docs.php.net/manual/en/book.ds.php>`_

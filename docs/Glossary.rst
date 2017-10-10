@@ -172,6 +172,7 @@ Glossary
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Unreachable Code <unreachable-code>`
+      + :ref:`Upload Filename Injection <upload-filename-injection>`
 
     + `count()`
 

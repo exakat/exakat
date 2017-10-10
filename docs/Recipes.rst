@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 02 Oct 2017 17:32:30 +0000
-.. comment: Generation hash : ce22347382b5a4b6b447e4c83d5c4352db3f3169
+.. comment: Generation date : Mon, 09 Oct 2017 15:00:53 +0000
+.. comment: Generation hash : c18137cd05ea4e3ef6c77f49606d5b44a652bf09
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 312 analysis
+Total : 313 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -203,6 +203,7 @@ Total : 312 analysis
 * :ref:`Multiple Constant Definition <multiple-constant-definition>`
 * :ref:`Multiple Identical Trait Or Interface <multiple-identical-trait-or-interface>`
 * :ref:`Multiple Index Definition <multiple-index-definition>`
+* :ref:`Multiple Type Variable <multiple-type-variable>`
 * :ref:`Multiples Identical Case <multiples-identical-case>`
 * :ref:`Multiply By One <multiply-by-one>`
 * :ref:`Must Return Methods <must-return-methods>`
@@ -987,8 +988,9 @@ Total : 26 analysis
 Security
 ++++++++
 
-Total : 25 analysis
+Total : 27 analysis
 
+* :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 * :ref:`Compare Hash <compare-hash>`
@@ -1010,6 +1012,7 @@ Total : 25 analysis
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`
 * :ref:`Switch Fallthrough <switch-fallthrough>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
+* :ref:`Upload Filename Injection <upload-filename-injection>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`parse_str() Warning <parse\_str()-warning>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`
