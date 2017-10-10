@@ -8,7 +8,7 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Structures_ShouldPreprocess extends Analyzer {
-    /* 6 methods */
+    /* 8 methods */
 
     public function testStructures_ShouldPreprocess01()  { $this->generic_test('Structures_ShouldPreprocess.01'); }
     public function testStructures_ShouldPreprocess02()  { $this->generic_test('Structures_ShouldPreprocess.02'); }
@@ -16,5 +16,7 @@ class Structures_ShouldPreprocess extends Analyzer {
     public function testStructures_ShouldPreprocess04()  { $this->generic_test('Structures/ShouldPreprocess.04'); }
     public function testStructures_ShouldPreprocess05()  { $this->generic_test('Structures/ShouldPreprocess.05'); }
     public function testStructures_ShouldPreprocess06()  { $this->generic_test('Structures/ShouldPreprocess.06'); }
+    public function testStructures_ShouldPreprocess07()  { $this->generic_test('Structures/ShouldPreprocess.07'); }
+    public function testStructures_ShouldPreprocess08()  { $this->generic_test('Structures/ShouldPreprocess.08'); }
 }
 ?>

@@ -112,6 +112,28 @@ g.V().hasLabel("String").not(has("noDelimiter"))
 GREMLIN;
         $this->gremlin->query($query);
 
+        display('toInt');
+        $integerValues = array('rank', 'count', 'intval', 'args_max', 'args_min');
+        foreach($integerValues as $property) {
+            $query = <<<GREMLIN
+g.V().has("$property").sideEffect{ 
+    it.get().property("$property", Integer.parseInt(it.get().property("$property").value()) );
+}
+GREMLIN;
+            $this->gremlin->query($query);
+        }
+
+        $booleanValues = array('alternative', 'heredoc', 'reference', 'variadic', 'absolute', 'enclosing', 'bracket', 'close_tag', 'aliased', 'boolean', 'constant');
+        foreach($booleanValues as $property) {
+            $query = <<<GREMLIN
+g.V().has("$property").sideEffect{ 
+    it.get().property("$property", true);
+}
+GREMLIN;
+            $this->gremlin->query($query);
+        }
+
+
         $this->cleanCsv();
         display('Cleaning CSV');
 
@@ -138,34 +160,34 @@ GREMLIN;
                                ':LABEL'      => '',
                                'code'        => '',
                                'fullcode'    => '',
-                               'line'        => 'int',
+                               'line'        => '',        //int
                                'token'       => '',
-                               'rank'        => 'int',
+                               'rank'        => '',         //int
                                'alternative' => 'boolean',
                                'reference'   => 'boolean',
                                'heredoc'     => 'boolean',
                                'delimiter'   => '',
                                'noDelimiter' => '',
                                'variadic'    => 'boolean',
-                               'count'       => 'int',
+                               'count'       => '',         //int
                                'fullnspath'  => '',
                                'absolute'    => 'boolean',
                                'alias'       => '',
                                'origin'      => '',
                                'encoding'    => '',
                                'block'       => '',
-                               'intval'      => 'long',
+                               'intval'      => '',         // long
                                'strval'      => '',
-                               'enclosing'   => 'boolean',
-                               'args_max'    => 'int',
-                               'args_min'    => 'int',
+                               'enclosing'   => '',         //boolean
+                               'args_max'    => '',         //int
+                               'args_min'    => '',         //int
                                'bracket'     => 'boolean',
                                'close_tag'   => 'boolean',
                                'aliased'     => 'boolean',
                                'boolean'     => 'boolean',
                                'propertyname'=> '',
                                'constant'    => 'boolean',
-                               'root'        => 'int',
+                               'root'        => '',        //int
                                'globalvar'   => '',
                                'binaryString'=> '');
 

@@ -6,6 +6,10 @@ class A  {
 	var $var = 4, $var2 = 10;
 	
 	static public $staticpublic = 5, $staticpublic2 = 7;
+	
+	function foo() {
+	    $normalVariable = 2;
+	}
 }
 
 ?>

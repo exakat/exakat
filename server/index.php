@@ -53,13 +53,21 @@ function init($args) {
             error('Malformed VCS', '');
         }
         
-        $vcs = $url['scheme'].'://'.$url['host'].(!empty($url['port']) ? ':'.$url['port'] : '').$url['path'];
+        $pass = '';
+        if (!empty($url['user'])) {
+            $pass .= escapeshellarg($url['user']).':'.(isset($url['pass']) ? escapeshellarg($url['pass']) : '').'@';
+        }
+        $vcs = $url['scheme'].'://'.
+               $pass.
+               $url['host'].
+               (!empty($url['port']) ? ':'.$url['port'] : '').
+               $url['path'];
         
         if (empty($project)) {
             $project = autoprojectname();
         }
 
-        shell_exec('/usr/bin/php exakat.phar init -p '.$project.' -R '.escapeshellarg($vcs));
+        shell_exec('/usr/bin/php exakat.phar init -p '.$project.' -R '.$vcs);
     } elseif (isset($_REQUEST['code'])) {
         $php = $_REQUEST['code'];
         if (strpos($php, '<?php') === false) {
@@ -184,11 +192,11 @@ function status($args) {
 }
 
 function config($args) {
-    $project = $args[0];
-    
-    if (empty($project)) {
+    if (empty($args[0])) {
         return;
     }
+
+    $project = $args[0];
     
     if (!file_exists(__DIR__.'/'.$project.'/config.ini')) {
         return;
@@ -209,7 +217,7 @@ function config($args) {
         $extensions = array_filter($extensions, function ($x) { return preg_match('/^\.[a-zA-Z0-9]+$/', $x); });
 
         if (!empty($extensions)) {
-            $extensions = join(',', $extensions);
+            $extensions = implode(',', $extensions);
             $ini = preg_replace("/file_extensions = .+?\n/", 'file_extensions = "'.$extensions.'";'.PHP_EOL, $ini);
         }
         $status[] = 'file_extensions';
@@ -288,15 +296,13 @@ function config($args) {
     }
 
     if (empty($status)) {
-        echo json_encode($status);
-        die();
+        die(json_encode($status));
     }
     $size = file_put_contents(__DIR__.'/'.$project.'/config.ini', $ini);
     
     $status = array('saved'   => $size, 
                     'options' => $status);
-    echo json_encode($status);
-    die();
+    die(json_encode($status));
 }
 
 

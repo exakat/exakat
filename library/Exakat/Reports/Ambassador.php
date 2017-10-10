@@ -35,7 +35,7 @@ class Ambassador extends Reports {
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
-    private $tmpName           = '';
+    protected $tmpName           = '';
 
     private $docs              = array();
     private $frequences        = array();
@@ -57,7 +57,8 @@ class Ambassador extends Reports {
                                  'functions'  => 'Functions',
                                  'traits'     => 'Traits',
                                  'namespaces' => 'Namespaces',
-                                 'exceptions' => 'Exceptions');
+//                                 'exceptions' => 'Exceptions'
+                                 );
 
     private $compatibilities = array('53' => 'Compatibility PHP 5.3',
                                      '54' => 'Compatibility PHP 5.4',
@@ -111,7 +112,7 @@ class Ambassador extends Reports {
         return $combinePageHTML;
     }
 
-    private function putBasedPage($file, $html) {
+    protected function putBasedPage($file, $html) {
         if (strpos($html, '{{BLOC-JS}}') !== false) {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
@@ -138,7 +139,12 @@ class Ambassador extends Reports {
         $this->generateExtensionsBreakdown();
         $this->generateFiles();
         $this->generateAnalyzers();
+
         $this->generateIssues();
+        $this->generateNoIssues();
+        $this->generatePerformances();
+        $this->generateSecurity();
+        
         $this->generateAnalyzersList();
         $this->generateExternalLib();
 
@@ -186,7 +192,7 @@ class Ambassador extends Reports {
         $this->cleanFolder();
     }
 
-    private function initFolder() {
+    protected function initFolder() {
         if ($this->finalName === null) {
             return "Can't produce Devoops format to stdout";
         }
@@ -200,7 +206,7 @@ class Ambassador extends Reports {
         copyDir($this->config->dir_root.'/media/devfaceted', $this->tmpName );
     }
 
-    private function cleanFolder() {
+    protected function cleanFolder() {
         if (file_exists($this->tmpName.'/datas/base.html')) {
             unlink($this->tmpName.'/datas/base.html');
             unlink($this->tmpName.'/datas/menu.html');
@@ -259,7 +265,7 @@ class Ambassador extends Reports {
                 .'</code></pre><p>';
     }
 
-    private function setPHPBlocs($description){
+    protected function setPHPBlocs($description){
         $description = nl2br($description);
 
         $description = preg_replace("#`(.*?) <(.*?)>`_#is", '<a href="$2" title="$1">$1 <i class="fa fa-sign-out"></i></a>', $description);
@@ -292,7 +298,7 @@ class Ambassador extends Reports {
             $analyzer = Analyzer::getInstance($analyzerName, null, $this->config);
             $description = $analyzer->getDescription();
 
-            $analyzersDocHTML.='<h2><a href="issues.html#analyzer='.$analyzerName.'" id="'.md5($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
+            $analyzersDocHTML.='<h2><a href="analyzers_doc.html#analyzer='.$analyzerName.'" id="'.$this->toId($analyzerName).'">'.$description->getName().' <i class="fa fa-search" style="font-size: 14px"></i></a></h2>';
 
             $badges = array();
             $v = $description->getVersionAdded();
@@ -324,6 +330,16 @@ class Ambassador extends Reports {
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Analyzers\' documentation');
 
         $this->putBasedPage('analyzers_doc', $finalHTML);
+    }
+
+    private function generateSecurity() {
+        $this->generateIssuesEngine('security_issues',
+                                    $this->getIssuesFaceted('Security') );
+    }
+
+    private function generatePerformances() {
+        $this->generateIssuesEngine('performances_issues',
+                                    $this->getIssuesFaceted('Performances') );
     }
 
     private function generateFavorites() {
@@ -650,6 +666,14 @@ JAVASCRIPT;
         $finalHTML = $this->injectBloc($finalHTML, 'BLOCSEVERITY', $severity['html']);
         $tags[] = 'SCRIPTSEVERITY';
         $code[] = $severity['script'];
+
+        // Marking the audit date
+        $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
+        $audit_name = $this->datastore->getHash('audit_name');
+        if (!empty($audit_name)) {
+            $audit_date .= ' - &quot;'.$audit_name.'&quot;';
+        }
+        $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
 
         // top 10
         $fileHTML = $this->getTopFile();
@@ -1096,7 +1120,7 @@ JAVASCRIPT;
             'Number of PHP files'                   => $this->datastore->getHash('files'),
             'Number of lines of code'               => $this->datastore->getHash('loc'),
             'Number of lines of code with comments' => $this->datastore->getHash('locTotal'),
-            'PHP used'                              => $php->getActualVersion() //.' (version '.$this->config->phpversion.' configured)'
+            'PHP used'                              => $this->datastore->getHash('php_version'),
         );
 
         // fichier
@@ -1160,14 +1184,6 @@ JAVASCRIPT;
                                     </div><div style="color:black; text-align:center;">'.$totalAnalyzerReporting.'</div>
                                 </div>
                                 <div class="pourcentage">'.$percentAnalyzer.'%</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="sub-div">
-                                <p>Date of audit : '.$audit_date.'</p>
-                            </div>
-                            <div class="sub-div">
-                                <p>Revision : '.$this->datastore->getHash('revision').'</p>
                             </div>
                         </div>
                     </div>
@@ -1344,6 +1360,49 @@ SQL;
         $row = $result->fetchArray(\SQLITE3_ASSOC);
 
         return $row['number'];
+    }
+    
+    private function generateNoIssues() {
+        $list = array_merge(Analyzer::getThemeAnalyzers('Analysis'),
+                            Analyzer::getThemeAnalyzers('Security'),
+                            Analyzer::getThemeAnalyzers('Performances'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP53'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP54'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP55'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP56'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP70'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP71'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP72'),
+                            Analyzer::getThemeAnalyzers('CompatibilityPHP73'),
+                            array('Project/Dump')
+                            );
+        $list = '"'.implode('", "', $list).'"';
+
+        $query = <<<SQL
+SELECT analyzer AS analyzer FROM resultsCounts
+WHERE analyzer NOT IN ($list) AND 
+      count = 0
+SQL;
+        $result = $this->sqlite->query($query);
+
+        $baseHTML = $this->getBasedPage('no_issues');
+
+        $filesHTML = '';
+
+        while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
+            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
+
+            $filesHTML.= "<tr>";
+            $filesHTML.='<td><a href="analyzers_doc.html#analyzer='.$row['analyzer'].'" id="'.$this->toId($row['analyzer']).'"><i class="fa fa-book" style="font-size: 14px"></i></a>
+                         &nbsp; '.$analyzer->getDescription()->getName().'</td>';
+            $filesHTML.= "</tr>";
+        }
+
+        $finalHTML = $this->injectBloc($baseHTML, 'BLOC-FILES', $filesHTML);
+        $finalHTML = $this->injectBloc($finalHTML, 'BLOC-JS', '<script src="scripts/datatables.js"></script>');
+        $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'No Issues Analysis');
+
+        $this->putBasedPage('no_issues', $finalHTML);
     }
 
     private function generateFiles() {
@@ -1588,9 +1647,10 @@ SQL;
                                     $this->getIssuesFaceted($this->themesToShow) );
     }
     
-    private function generateIssuesEngine($filename, $issues) {
+    protected function generateIssuesEngine($filename, $issues) {
         $baseHTML = $this->getBasedPage($filename, $issues);
 
+        $total = count($issues);
         $issues = implode(', '.PHP_EOL, $issues);
         $blocjs = <<<JAVASCRIPTCODE
         
@@ -1641,10 +1701,10 @@ $issues
       var analyzerParam = window.location.hash.split('analyzer=')[1];
       var fileParam = window.location.hash.split('file=')[1];
       if(analyzerParam !== undefined) {
-        $('#analyzer .facetlist').find("[data-analyzer='" + md5(analyzerParam) + "']").click();
+        $('#analyzer .facetlist').find("[data-analyzer='" + analyzerParam.toLowerCase() + "']").click();
       }
       if(fileParam !== undefined) {
-        $('#file .facetlist').find("[data-file='" + md5(fileParam) + "']").click();
+        $('#file .facetlist').find("[data-file='" + fileParam.toLowerCase() + "']").click();
       }
     });
   </script>
@@ -1652,6 +1712,7 @@ JAVASCRIPTCODE;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' list');
+        $finalHTML = $this->injectBloc($finalHTML, 'TOTAL', $total);
         $this->putBasedPage($filename, $finalHTML);
     }
 
@@ -1683,19 +1744,19 @@ SQL;
         while($row = $result->fetchArray(\SQLITE3_ASSOC)) {
             $item = array();
             $ini = parse_ini_file($this->config->dir_root.'/human/en/'.$row['analyzer'].'.ini');
-            $item['analyzer'] =  $ini['name'];
-            $item['analyzer_md5'] = md5($row['analyzer']);
-            $item['file' ] =  $row['file'];
-            $item['file_md5' ] =  md5($row['file']);
-            $item['code' ] = $this->PHPSyntax($row['fullcode']);
-            $item['code_detail'] = "<i class=\"fa fa-plus \"></i>";
-            $item['code_plus'] = $this->PHPSyntax($row['fullcode']);
-            $item['link_file'] = $row['file'];
-            $item['line' ] =  $row['line'];
-            $item['severity'] = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
-            $item['complexity'] = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
-            $item['recipe' ] =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
-            $lines = explode("\n", $ini['description']);
+            $item['analyzer']     =  $ini['name'];
+            $item['analyzer_md5'] = $this->toId($row['analyzer']);
+            $item['file' ]        =  $row['file'];
+            $item['file_md5' ]    =  $this->toId($row['file']);
+            $item['code' ]        = $this->PHPSyntax($row['fullcode']);
+            $item['code_detail']  = "<i class=\"fa fa-plus \"></i>";
+            $item['code_plus']    = $this->PHPSyntax($row['fullcode']);
+            $item['link_file']    = $row['file'];
+            $item['line' ]        =  $row['line'];
+            $item['severity']     = "<i class=\"fa fa-warning\" style=\"color: ".$severityColors[$this->severities[$row['analyzer']]]."\"></i>";
+            $item['complexity']   = "<i class=\"fa fa-cog\" style=\"color: ".$TTFColors[$this->timesToFix[$row['analyzer']]]."\"></i>";
+            $item['recipe' ]      =  implode(', ', $this->themesForAnalyzer[$row['analyzer']]);
+            $lines                = explode("\n", $ini['description']);
             $item['analyzer_help' ] = $lines[0];
 
             $items[] = json_encode($item);
@@ -1897,13 +1958,13 @@ SQL;
     }
 
     protected function generatePhpConfiguration() {
-        $phpConfiguration = new PhpConfiguration($this->config);
-        $report = $phpConfiguration->generate(null, null);
+        $phpConfiguration = new PhpCompilation($this->config);
+        $report = $phpConfiguration->generate(null, Reports::STDOUT);
 
         $id = strpos($report, "\n\n\n");
-        $configline = substr($report, 0, $id);
+        $configline = trim($report);
         $configline = str_replace(array(' ', "\n") , array("&nbsp;", "<br />\n",), $configline);
-
+        
         $html = $this->getBasedPage('php_compilation');
         $html = $this->injectBloc($html, 'COMPILATION', $configline);
         $html = $this->injectBloc($html, 'TITLE', 'PHP Configurations\' list');
@@ -2119,7 +2180,7 @@ SQL
             }
             $result = $this->Compatibility($result, $l);
             $name = $ini['name'];
-            $link = '<a href="analyzers_doc.html#'.md5($l).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
+            $link = '<a href="analyzers_doc.html#'.$this->toId($l).'" alt="Documentation for $name"><i class="fa fa-book"></i></a>';
             $compatibility .= "<tr><td>$link $name</td><td>$result</td></tr>\n";
         }
 
@@ -2173,8 +2234,8 @@ HTML;
                                   'analyzer'    => 'Functions/Functionnames'),
             'namespaces' => array('description' => 'List of all defined namespaces in the code.',
                                   'analyzer'    => 'Namespaces/Namespacesnames'),
-            'exceptions' => array('description' => 'List of all defined exceptions.',
-                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
+//            'exceptions' => array('description' => 'List of all defined exceptions.',
+//                                  'analyzer'    => 'Exceptions/DefinedExceptions'),
         );
         foreach($this->inventories as $fileName => $theTitle) {
             $theDescription = $definitions[$fileName]['description'];
@@ -2192,6 +2253,154 @@ HTML;
             $html = $this->injectBloc($html, 'TABLE', $theTable);
             $this->putBasedPage('inventories_'.$fileName, $html);
         }
+        $this->generateExceptionTree();
+    }
+
+    private function generateExceptionTree() {
+        $exceptions = array (
+  'Throwable' => 
+  array (
+    'Error' => 
+    array (
+      'ParseError' => 
+      array (
+      ),
+      'TypeError' => 
+      array (
+        'ArgumentCountError' => 
+        array (
+        ),
+      ),
+      'ArithmeticError' => 
+      array (
+        'DivisionByZeroError' => 
+        array (
+        ),
+      ),
+      'AssertionError' => 
+      array (
+      ),
+    ),
+    'Exception' => 
+    array (
+      'ErrorException' => 
+      array (
+      ),
+      'ClosedGeneratorException' => 
+      array (
+      ),
+      'DOMException' => 
+      array (
+      ),
+      'LogicException' => 
+      array (
+        'BadFunctionCallException' => 
+        array (
+          'BadMethodCallException' => 
+          array (
+          ),
+        ),
+        'DomainException' => 
+        array (
+        ),
+        'InvalidArgumentException' => 
+        array (
+        ),
+        'LengthException' => 
+        array (
+        ),
+        'OutOfRangeException' => 
+        array (
+        ),
+      ),
+      'RuntimeException' => 
+      array (
+        'OutOfBoundsException' => 
+        array (
+        ),
+        'OverflowException' => 
+        array (
+        ),
+        'RangeException' => 
+        array (
+        ),
+        'UnderflowException' => 
+        array (
+        ),
+        'UnexpectedValueException' => 
+        array (
+        ),
+        'PDOException' => 
+        array (
+        ),
+      ),
+      'PharException' => 
+      array (
+      ),
+      'ReflectionException' => 
+      array (
+      ),
+    ),
+  ),
+);
+        $list = array();
+
+        $theTable = '';
+        $res = $this->sqlite->query('SELECT fullcode, file, line FROM results WHERE analyzer="Exceptions/DefinedExceptions"');
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            if (!preg_match('/ extends (\S+)/', $row['fullcode'], $r)) {
+                continue;
+            }
+            $parent = strtolower($r[1]);
+            if ($parent[0] != '\\') {
+                $parent = '\\'.$parent;
+            }
+
+            if (!isset($list[$parent])) {
+                $list[$parent] = array();
+            } 
+            
+            $list[$parent][] = $row['fullcode'];
+        }
+        
+        foreach($list as &$l) {
+            sort($l);
+        }
+        $theTable = $this->tree2ul($exceptions, $list);
+
+       $html = $this->getBasedPage('empty');
+       $html = $this->injectBloc($html, 'TITLE', 'Exceptions inventory');
+       $html = $this->injectBloc($html, 'DESCRIPTION', '');
+       $html = $this->injectBloc($html, 'CONTENT', $theTable);
+       $this->putBasedPage('inventories_exceptions', $html);
+    }
+    
+    private function tree2ul($tree, $display) {
+        if (empty($tree)) {
+            return '';
+        }
+        $return = '<ul>';
+        
+        foreach($tree as $k => $v) {
+            $return .= '<li>';
+
+            $parent = '\\'.strtolower($k);
+            if (isset($display[$parent])) {
+                $return .= '<div style="font-weight: bold">'.$k.'</div><ul><li>'.implode('</li><li>', $display[$parent]).'</li></ul>';
+            } else {
+                $return .= '<div style="font-weight: bold; color: darkgray">'.$k.'</div>';
+            }
+
+            if (is_array($v)) {
+                $return .= $this->tree2ul($v, $display);
+            } 
+
+            $return .= '</li>';
+        }
+        
+        $return .= '</ul>';
+        
+        return $return;
     }
 
     private function generateVisibilitySuggestions() {
@@ -2218,19 +2427,18 @@ HTML;
 HTML;
 
         foreach($classes as $id) {
-            list($path, $class) = explode(':', $id);
+            list(, $class) = explode(':', $id);
             $visibilityTable .= '<tr><td colspan="9">class '.$class.'</td></tr>'.PHP_EOL.
                                 (isset($constants[$id])  ? implode('', $constants[$id])  : '').
                                 (isset($properties[$id]) ? implode('', $properties[$id]) : '').
                                 (isset($methods[$id])    ? implode('', $methods[$id])    : '');
-            
         }
 
         $visibilityTable .= '</table>';
 
         $html = $this->getBasedPage('empty');
-        $html = $this->injectBloc($html, 'TITLE', 'Titre');
-        $html = $this->injectBloc($html, 'DESCRIPTION', 'Description');
+        $html = $this->injectBloc($html, 'TITLE', 'Visibility recommendations');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Below, is a summary of all classes and their component\'s visiblity. Whenever a visibility is set and used at the right level, a green star is presented. Whenever it is set to a level, but could be updated to another, red and orange stars are mentioned. ');
         $html = $this->injectBloc($html, 'CONTENT', $visibilityTable);
         $this->putBasedPage('visibility_suggestions', $html);
     }
@@ -2239,7 +2447,9 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBePrivateMethod"');
         $couldBePrivate = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname);
+            if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
+                continue;
+            }
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
 
             if (isset($couldBePrivate[$fullnspath])) {
@@ -2252,7 +2462,9 @@ HTML;
         $res = $this->sqlite->query('SELECT * FROM results WHERE analyzer="Classes/CouldBeProtectedMethod"');
         $couldBeProtected = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-            preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname);
+            if (!preg_match('/(class|interface|trait) (\S+) /i', $row['class'], $classname)) {
+                continue;
+            }
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[2]);
             
             if (isset($couldBeProtected[$fullnspath])) {
@@ -2324,7 +2536,9 @@ HTML;
 
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
-            preg_match('/^(\w+) = /i', $row['fullcode'], $code);
+            if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
+                continue;
+            }
 
             if (isset($couldBePrivate[$fullnspath])) {
                 $couldBePrivate[$fullnspath][] = $code[1];
@@ -2341,7 +2555,9 @@ HTML;
             }
             $fullnspath = $row['namespace'].'\\'.strtolower($classname[1]);
             
-            preg_match('/^(\w+) = /i', $row['fullcode'], $code);
+            if (!preg_match('/^(.+) = /i', $row['fullcode'], $code)) {
+                continue;
+            }
             
             if (isset($couldBeProtected[$fullnspath])) {
                 $couldBeProtected[$fullnspath][] = $code[1];
@@ -2545,6 +2761,7 @@ HTML;
                             'Switch'              => 'Switch',
                             'Case'                => 'Case',
                             'Default'             => 'Default',
+                            'Fallthrough'         => 'Structures/Fallthrough',
                             'For'                 => 'For',
                             'Foreach'             => 'Foreach',
                             'While'               => 'While',
@@ -2618,7 +2835,7 @@ HTML;
                 }
             }
 
-            $source = show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
+            $source = @show_source(dirname($this->tmpName).'/code/'.$row['file'], true);
             $files .= '<li><a href="#" id="'.$id.'" class="menuitem">'.$this->toHtmlEncoding($row['file'])."</a></li>\n";
             $source = substr($source, 6, -8);
             $source = preg_replace_callback('#<br />#is', function($x) { static $i = 0; return '<br /><a name="l'.++$i.'" />'; }, $source);
@@ -2767,6 +2984,10 @@ HTML;
     
     private function toHtmlEncoding($text) {
         return htmlentities($text, ENT_COMPAT | ENT_HTML401, 'UTF-8');
+    }
+    
+    protected function toId($name) {
+        return str_replace('/', '_', strtolower($name));
     }
 }
 

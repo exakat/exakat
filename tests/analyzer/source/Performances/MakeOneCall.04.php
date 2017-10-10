@@ -1,7 +1,7 @@
 <?php
 
 // Same subjects
-$a = preg_replace($a1, $b1, $c);
+$c = preg_replace($a1, $b1, $a);
 $a = preg_replace($a2, $b2, $c);
 
 // Different subjects

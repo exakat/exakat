@@ -9,8 +9,10 @@ $expected     = array('enchant_broker_init( )',
                       'enchant_dict_check($d, "soong")', 
                       'enchant_dict_suggest($d, "soong")', 
                       'enchant_broker_free_dict($d)', 
-                      'enchant_broker_free($r)');
+                      'enchant_broker_free($r)',
+                      );
 
-$expected_not = array();
+$expected_not = array('enchant_broker_free($r2)',
+                     );
 
 ?>

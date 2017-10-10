@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 18 Sep 2017 14:01:44 +0000
-.. comment: Generation hash : 37d41fabfd7365f6bfb548d4b775665f4084d953
+.. comment: Generation date : Mon, 09 Oct 2017 15:00:53 +0000
+.. comment: Generation hash : c18137cd05ea4e3ef6c77f49606d5b44a652bf09
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 312 analysis
+Total : 313 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -203,6 +203,7 @@ Total : 312 analysis
 * :ref:`Multiple Constant Definition <multiple-constant-definition>`
 * :ref:`Multiple Identical Trait Or Interface <multiple-identical-trait-or-interface>`
 * :ref:`Multiple Index Definition <multiple-index-definition>`
+* :ref:`Multiple Type Variable <multiple-type-variable>`
 * :ref:`Multiples Identical Case <multiples-identical-case>`
 * :ref:`Multiply By One <multiply-by-one>`
 * :ref:`Must Return Methods <must-return-methods>`
@@ -458,7 +459,7 @@ Total : 60 analysis
 * :ref:`Break With 0 <break-with-0>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Closure May Use $this <closure-may-use-$this>`
 * :ref:`Const With Array <const-with-array>`
@@ -526,7 +527,7 @@ Total : 57 analysis
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
 * :ref:`Cant Use Return Value In Write Context <cant-use-return-value-in-write-context>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -589,7 +590,7 @@ Total : 55 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Class Const With Array <class-const-with-array>`
 * :ref:`Const With Array <const-with-array>`
 * :ref:`Constant Scalar Expressions <constant-scalar-expressions>`
@@ -652,7 +653,7 @@ Total : 48 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Define With Array <define-with-array>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Functions Removed In PHP 5.4 <functions-removed-in-php-5.4>`
@@ -708,7 +709,7 @@ Total : 44 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
@@ -760,7 +761,7 @@ Total : 53 analysis
 * :ref:`Break With Non Integer <break-with-non-integer>`
 * :ref:`Calltime Pass By Reference <calltime-pass-by-reference>`
 * :ref:`Cant Inherit Abstract Method <cant-inherit-abstract-method>`
-* :ref:`Child Class Remove Typehint <child-class-remove-typehint>`
+* :ref:`Child Class Removes Typehint <child-class-removes-typehint>`
 * :ref:`Empty List <empty-list>`
 * :ref:`Empty With Expression <empty-with-expression>`
 * :ref:`Foreach Don't Change Pointer <foreach-don't-change-pointer>`
@@ -987,8 +988,9 @@ Total : 26 analysis
 Security
 ++++++++
 
-Total : 24 analysis
+Total : 27 analysis
 
+* :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
 * :ref:`Avoid sleep()/usleep() <avoid-sleep()/usleep()>`
 * :ref:`Compare Hash <compare-hash>`
@@ -1008,7 +1010,9 @@ Total : 24 analysis
 * :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`
+* :ref:`Switch Fallthrough <switch-fallthrough>`
 * :ref:`Unserialize Second Arg <unserialize-second-arg>`
+* :ref:`Upload Filename Injection <upload-filename-injection>`
 * :ref:`Use random_int() <use-random\_int()>`
 * :ref:`parse_str() Warning <parse\_str()-warning>`
 * :ref:`preg_replace With Option e <preg\_replace-with-option-e>`

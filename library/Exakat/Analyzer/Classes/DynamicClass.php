@@ -26,6 +26,10 @@ namespace Exakat\Analyzer\Classes;
 use Exakat\Analyzer\Analyzer;
 
 class DynamicClass extends Analyzer {
+    public function dependsOn() {
+        return array('Functions/MarkCallable');
+    }
+
     public function analyze() {
         $this->atomIs('Staticmethodcall')
              ->outIs('CLASS')
@@ -36,6 +40,13 @@ class DynamicClass extends Analyzer {
         $this->atomIs('Staticproperty')
              ->outIs('CLASS')
              ->atomIs(array('Variable', 'Array', 'Member', 'Staticproperty'))
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomFunctionIs('\\constant')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
+             ->hasIn('DEFINITION')
              ->back('first');
         $this->prepareQuery();
         

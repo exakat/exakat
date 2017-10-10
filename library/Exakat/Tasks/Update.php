@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\ProjectNeeded;
 
 class Update extends Tasks {
@@ -40,6 +41,7 @@ class Update extends Tasks {
             $projects = array_diff($projects, array('test'));
             
             print "Updating ".count($projects)." projects".PHP_EOL;
+            shuffle($projects);
             foreach($projects as $project) {
                 display("updating $project".PHP_EOL);
                 $this->update($project);
@@ -83,14 +85,23 @@ class Update extends Tasks {
                 display('Git pull for '.$project);
                 $res = shell_exec('cd '.$path.'/code/; git branch | grep \\*');
                 $branch = substr(trim($res), 2);
-
-                $resInitial = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
+                
+                if (strpos($branch, ' detached at ') !== false) {
+                    $resInitial = shell_exec('cd '.$path.'/code/; git checkout master --quiet; git pull');
+                    $branch = 'master';
+                    
+                } else {
+                    $resInitial = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
+                }
 
                 $date = trim(shell_exec('cd '.$path.'/code/; git pull --quiet; git log -1 --format=%cd '));
-
                 $resFinal = shell_exec('cd '.$path.'/code/; git show-ref --heads '.$branch);
+                if (strpos($resFinal, ' ') !== false) {
+                    list($resFinal, ) = explode(' ', $resFinal);
+                }
+
                 if ($resFinal != $resInitial) {
-                    display( "Git updated to commit $res (Last commit : $date)");
+                    display( "Git updated to commit $resFinal (Last commit : $date)");
                 } else {
                     display( "No update available (Last commit : $date)");
                 }
@@ -148,11 +159,17 @@ class Update extends Tasks {
 
             default :
                 display('No VCS found to update. git, mercurial, svn and bazaar are supported.');
+                return;
         }
         
         display('Running files');
-        $updateCache = new Files($this->gremlin, $this->config);
-        $updateCache->run();
+        $updateCache = new Files($this->gremlin, new Config(array(1 => '-p', 
+                                                                  2 => $project)));
+        try {
+            $updateCache->run();
+        } catch (NoFileToProcess $e) {
+            // OK, just carry on. 
+        }
     }
 }
 

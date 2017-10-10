@@ -9,22 +9,11 @@ $expected     = array('bax( )',  // namespace a
 
                       'f\\abx( )', // namespace d12
                       'bax( )',
-/*
-                      'a\\ab( )', // namespace d1
-                      'f\\ab( )',
-                      'ba( )',
-
-                      'e\\ab( )', // namespace d1
-                      'f\\ab( )',
-                      'ba( )',
-
-                      'e\\ab( )', // namespace d
-                      'a\\ab( )',
-                      'f\\ab( )',
-                      'ba( )'
-                      */
                       );
 
-$expected_not = array();
+$expected_not = array('e\abx( )',
+                      'a\abx( )',
+                      'f\abx()',
+                     );
 
 ?>

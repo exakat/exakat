@@ -3441,7 +3441,8 @@ SQL;
                     } else {
                         list($fullnspath, $aliased) = $this->getFullnspath($namespace, 'class');
 
-                        $namespace->fullnspath      = $fullnspath;
+                        $namespace->fullnspath = $fullnspath;
+                        $namespace->aliased    = $aliased;
                         $this->addCall('class', $namespace->fullnspath, $namespace);
                     }
                 }
@@ -4371,6 +4372,7 @@ SQL;
         
         list($fullnspath, $aliased) = $this->getFullnspath($right);
         $this->addCall('class', $fullnspath, $right);
+        $this->aliased = $aliased;
 
         $instanceof->code     = $this->tokens[$current][1];
         $instanceof->fullcode = $left->fullcode.' '.$this->tokens[$current][1].' '.$right->fullcode;

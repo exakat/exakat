@@ -29,10 +29,18 @@ class Server extends Tasks {
     const CONCURENCE = self::ANYTIME;
 
     public function run() {
-        if ($this->config->stop === true) {
+        if ($this->config->stop    === true ||
+            $this->config->restart === true
+            ) {
             $display = @file_get_contents('http://localhost:7447/stop/');
+            if (empty($display)) {
+                $display = 'No server found';
+            }
             display('Shut down server ('.$display.')');
-            return;
+            
+            if ($this->config->stop === true) { 
+                return;
+            }
         }
 
         if (file_exists($this->config->dir_root.'/projects/index.php')) {
@@ -52,6 +60,7 @@ class Server extends Tasks {
 
         display('Start server');
         exec($this->config->php.' -S 0.0.0.0:7447 -t '.$this->config->projects_root.'/projects/ '.$this->config->projects_root.'/projects/index.php > /dev/null 2 > /dev/null &');
+        display('Started server');
     }
 }
 

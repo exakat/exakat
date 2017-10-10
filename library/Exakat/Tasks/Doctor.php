@@ -180,8 +180,11 @@ class Doctor extends Tasks {
                 $stats['neo4j']['pid'] = file_get_contents($pidPath);
             } else {
                 $res = shell_exec('ps aux | grep gremlin | grep plugin');
-                preg_match('/^\w+\s+(\d+)\s/is', $res, $r);
-                $stats['neo4j']['pid'] = $r[1];
+                if (preg_match('/^\w+\s+(\d+)\s/is', $res, $r)) {
+                    $stats['neo4j']['pid'] = $r[1];
+                } else {
+                    $stats['neo4j']['pid'] = 'Unknown';
+                }
             }
 
             $json = @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/db/data/');

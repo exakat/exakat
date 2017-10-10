@@ -154,7 +154,7 @@ class Analyze extends Tasks {
             }
 
             assert(empty($dependencies),
-                   "Dependencies depending on each other : can't finalize. Aborting\n".print_r($dependencies, true));
+                   "Dependencies are not all satisfied : can't finalize. Aborting\n".print_r($dependencies, true));
         }
 
         $total_results = 0;

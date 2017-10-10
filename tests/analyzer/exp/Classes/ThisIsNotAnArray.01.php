@@ -1,8 +1,11 @@
 <?php
 
 $expected     = array('$this[$n]', 
-                      '$this[]');
+                      '$this[]',
+                     );
 
-$expected_not = array();
+$expected_not = array('$this[3]', 
+                      '$this[]',
+                     )
 
 ?>

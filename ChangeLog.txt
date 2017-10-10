@@ -1,4 +1,4 @@
-Version 0.12.13 (King of the Southern Hill, Coming up)
+Version 0.12.16 (Tawny Lion Demon, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,40 @@ Version 0.12.13 (King of the Southern Hill, Coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.12.15 (Nine Headed Lion, 2017-10-09)
++ Architecture
+    + Server : now supports stop, start and restart.
+    + Every audit gets a random name, for easy differentiation
+    + Added support for PHP 7.3
++ Report
+    + Ambassador : list of analyzers that report nothing : Good job! 
+    + Slim report : fixed build
++ Analyzer
+    + New analyzer : file upload names vulnerability check
+    + New analyzer : variable that may hold different types of date
+    + New analyzer : always anchor regex
+    + Checked unit tests : 2475 / 2480 test pass (99% pass). 
+
+Version 0.12.14 (Grand Saint of Nine Spirits, 2017-10-02)
++ Architecture
+    + Support UTF-8 on Gremlin Server (other encoding are not)
+    + Better display of vcs updates
++ Report
+    + Ambassador : added Security and Performances
+    + Ambassador : Upgraded exception presentation
++ Analyzer
+    + New analyzer : report fallthrough in switch
+    + New analyzer : inventory regex 
+    + Added support for PHP 7.1.10 and 7.0.24
+
+Version 0.12.13 (King of the Southern Hill, 2017-09-25)
++ Architecture
+    + Code cleaning
++ Report
+    + Ambassador : changed display of the audit
++ Analyzer
+    + Refactored several analysis
 
 Version 0.12.12 (Ruler of the Kingdom of Miefa, 2017-09-18)
 + Report

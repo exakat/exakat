@@ -173,6 +173,7 @@ class Config {
                                  '-stop'      => 'stop',
                                  '-ping'      => 'ping',
                                  '-restart'   => 'restart',
+                                 '-start'     => 'start',
                                  '-collect'   => 'collect',
 
     // Vcs

@@ -28,9 +28,11 @@ class Dependencywheel extends Reports {
     const FILE_EXTENSION = '';
     const FILE_FILENAME  = 'wheel';
     
-    private $select = array();
-    private $tmpName     = '';
-    private $finalName   = '';
+    private $select       = array();
+    private $tmpName      = '';
+    private $finalName    = '';
+    private $packagenames = '';
+    private $matrix       = '';
 
     public function generate($folder, $name= 'wheel') {
         $this->finalName = $folder.'/'.$name;
@@ -121,7 +123,7 @@ class Dependencywheel extends Reports {
         }
         unset($result);
 
-        $this->matrix = json_encode($results);
+        $this->matrix       = json_encode($results);
         $this->packagenames = json_encode($packagenames);
     }
     
@@ -142,9 +144,9 @@ class Dependencywheel extends Reports {
     private function cleanFolder() {
         $html = file_get_contents($this->tmpName.'/index.html');
 
-        $html = str_replace('<MATRIX>', $this->matrix, $html);
-        $html = str_replace('<PROJECT>', $this->config->project, $html);
-        $html = str_replace('<PACKAGENAMES>', $this->packagenames, $html);
+        $html = str_replace('<MATRIX>',       $this->matrix,          $html);
+        $html = str_replace('<PROJECT>',      $this->config->project, $html);
+        $html = str_replace('<PACKAGENAMES>', $this->packagenames,    $html);
 
         file_put_contents($this->tmpName.'/index.html', $html);
 

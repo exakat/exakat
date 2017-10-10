@@ -87,8 +87,8 @@ class Project extends Tasks {
         $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
         $analyze->run();
 
-        $this->addSnitch(array('step'   => 'External lib',
-                              'project' => $this->config->project));
+        $this->addSnitch(array('step'    => 'External lib',
+                               'project' => $this->config->project));
         unset($analyze);
 
         $this->logTime('Start');
@@ -102,7 +102,8 @@ class Project extends Tasks {
         $this->datastore->addRow('hash', array('audit_start'    => $audit_start,
                                                'exakat_version' => Exakat::VERSION,
                                                'exakat_build'   => Exakat::BUILD,
-                                               'php_version'    => $this->config->phpversion
+                                               'php_version'    => $this->config->phpversion,
+                                               'audit_name'     => $this->generateName(),
                                          ));
 
         if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config')) {
@@ -110,8 +111,11 @@ class Project extends Tasks {
             $info['vcs_type'] = 'git';
             
             $gitConfig = file_get_contents($this->config->projects_root.'/projects/'.$this->config->project.'/code/.git/config');
-            preg_match('#url = (\S+)\s#is', $gitConfig, $r);
-            $info['vcs_url'] = $r[1];
+            if (preg_match('#url = (\S+)\s#is', $gitConfig, $r)) {
+                $info['vcs_url'] = $r[1];
+            } else {
+                $info['vcs_url'] = 'No URL';
+            }
 
             $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git branch');
             $info['vcs_branch'] = trim($res, " *\n");
@@ -382,6 +386,23 @@ class Project extends Tasks {
             }
         }
         $VERBOSE = $oldVerbose;
+    }
+    
+    private function generateName() {
+        $ini = parse_ini_file($this->config->dir_root.'/data/audit_names.ini');
+        
+        $names = $ini['names'];
+        $adjectives = $ini['adjectives'];
+        
+        shuffle($names);
+        shuffle($adjectives);
+        
+        $x = mt_rand(0, PHP_INT_MAX);
+        
+        $name = $names[ $x % count($names) - 1];
+        $adjective = $adjectives[ $x % count($adjectives) - 1];
+
+        return ucfirst($adjective).' '.$name;
     }
 }
 

@@ -54,25 +54,27 @@ class UncheckedResources extends Analyzer {
                      ->hasNoIn('CONDITION')
                      ->_as('result')
                      ->outIs('LEFT')
+                     ->atomIs(self::$CONTAINERS)
                      ->savePropertyAs('fullcode', 'tmpvar')
                      ->inIs('LEFT')
                      ->nextSibling()
-                     ->atomInside('Variable')
-                     ->samePropertyAs('code', 'tmpvar')
+                     ->atomInsideNoBlock(self::$CONTAINERS)
+                     ->samePropertyAs('fullcode', 'tmpvar')
 
                      // checked with a is_resource
-                     ->raw('where( __.in("ARGUMENT").has("fullnspath", "\\\\is_resource").count().is(eq(0)) )')
+                     ->raw('not( where( __.in("ARGUMENT").has("fullnspath", "\\\\is_resource") ) )')
                      // checked with a !$variable
                      ->hasNoIn('NOT')
 
                      // checked as the condition in a if/then or while
-                     ->raw('where( __.in("CONDITION").hasLabel("Ifthen", "While" ).count().is(eq(0)) )')
+                     ->raw('not( where( __.in("CONDITION").hasLabel("Ifthen", "While" ) ) )')
 
                      // checked with a $variable &&
-                     ->raw('where( __.in("LEFT", "RIGHT").hasLabel("Logical").count().is(eq(0)) )')
+                     ->raw('not( where( __.in("LEFT", "RIGHT").hasLabel("Logical") ) )')
                      
                      // checked with a if ($resource == false) or while($resource == false)
                      ->hasNoComparison()
+
                      ->back('result');
                 $this->prepareQuery();
             }

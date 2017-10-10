@@ -27,6 +27,10 @@ use Exakat\Analyzer\Analyzer;
 use Exakat\Data\Methods;
 
 class ShouldPreprocess extends Analyzer {
+    public function dependsOn() {
+        return array('Constants/IsPhpConstant');
+    }
+    
     public function analyze() {
         $dynamicAtoms = array('Variable', 'Array', 'Member', 'Magicconstant', 'Staticmethodcall', 'Staticproperty', 'Methodcall');
         //'Functioncall' : if they also have only constants.
@@ -38,13 +42,19 @@ class ShouldPreprocess extends Analyzer {
         // Operator only working on constants
         $tokenList = makeList( self::$FUNCTIONS_TOKENS );
         $this->atomIs(array('Addition', 'Multiplication', 'Concatenation', 'Power', 'Bitshift', 'Logical', 'Not'))
+             ->hasNoInstruction('Constant')
+
             // Functioncall, that are not authorized
-             ->raw('not( where( __.emit( ).repeat( out('.$this->linksDown.') ).times('.self::MAX_LOOPING.')
+             ->raw('not( where( __.emit( ).repeat( out() ).times('.self::MAX_LOOPING.')
                                           .hasLabel("Functioncall").has("fullnspath")
                                           .has("token", within('.$tokenList.'))
                                           .filter{ !(it.get().value("fullnspath") in ***) } ) )', $functionList)
-             ->noAtomInside($dynamicAtoms)
-             ;
+            // PHP Constantes are not authorized
+             ->raw('not( where( __.emit( ).repeat( out() ).times('.self::MAX_LOOPING.')
+                                          .hasLabel("Identifier", "Nsname").has("fullnspath")
+                                          .where( __.in("ANALYZED").has("analyzer", "Constants/IsPhpConstant"))
+                        )     )')
+             ->noAtomInside($dynamicAtoms);
         $this->prepareQuery();
         
         $functionListNoArray = array_diff($functionList,

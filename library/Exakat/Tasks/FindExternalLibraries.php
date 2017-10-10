@@ -47,6 +47,7 @@ class FindExternalLibraries extends Tasks {
                              'dompdf'           => self::PARENT_DIR,
                              'fpdf'             => self::FILE_ONLY,
                              'graph'            => self::PARENT_DIR, // Jpgraph
+                             'jpgraph'          => self::PARENT_DIR,
                              'html2pdf'         => self::WHOLE_DIR, // contains tcpdf
                              'htmlpurifier'     => self::FILE_ONLY,
                              'http_class'       => self::WHOLE_DIR,
@@ -136,7 +137,8 @@ class FindExternalLibraries extends Tasks {
         $ignoreLength = 0;
         foreach($files as $id => $file) {
             if (substr($file, 0, $ignoreLength) == $ignore) {
-                print "Ignore $file ($ignore)\n"; continue;
+                display( "Ignore $file ($ignore)\n"); 
+                continue;
             }
             $s = $this->process($path.$file);
 

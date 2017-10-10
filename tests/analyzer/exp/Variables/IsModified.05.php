@@ -11,8 +11,11 @@ $expected     = array('$h',
                       '$d', 
                       '$d', 
                       '$d', 
-                      '$d');
+                      '$d',
+                      '$j',
+                     );
 
-$expected_not = array();
+$expected_not = array('$i',
+                     );
 
 ?>

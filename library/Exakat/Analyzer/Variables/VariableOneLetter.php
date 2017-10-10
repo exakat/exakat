@@ -42,8 +42,7 @@ class VariableOneLetter extends Analyzer {
         $this->atomIs('Variable')
              ->tokenIs(array('T_CURLY_OPEN', 'T_DOLLAR_OPEN_CURLY_BRACES'))
              ->analyzerIs('Variables/Variablenames')
-             ->fullcodeLength(' == 4 ')
-             ;
+             ->fullcodeLength(' == 4 ');
         $this->prepareQuery();
         
         // {$variables}
@@ -52,8 +51,7 @@ class VariableOneLetter extends Analyzer {
              ->analyzerIs('Variables/Variablenames')
              ->outIs('NAME')
              ->tokenIs('T_STRING')
-             ->fullcodeLength(' == 1 ')
-             ;
+             ->fullcodeLength(' == 1 ');
         $this->prepareQuery();
     }
 }

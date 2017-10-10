@@ -130,7 +130,10 @@ CYPHER;
         // Load relations
         $files = glob($this->config->projects_root.'/projects/.exakat/rels.g3.*.csv');
         foreach($files as $file) {
-            preg_match('/rels\.g3\.(.*)\.(.*)\.(.*)\.csv$/', $file, $r);
+            if (!preg_match('/rels\.g3\.(.*)\.(.*)\.(.*)\.csv$/', $file, $r)) {
+                // Ignore non-formatted files.
+                continue;
+            }
             $edge = $r[1];
             $origin = $r[2];
             $destination = $r[3];
@@ -198,7 +201,7 @@ GREMLIN;
         $php .= '$links = '.var_export($links, true).';'.PHP_EOL;
         $php .= '?'.'>';
 
-        file_put_contents( '/tmp/export.php', $php );
+        file_put_contents( sys_get_temp_dir().'/export.php', $php );
         
         static $extras = array();
 

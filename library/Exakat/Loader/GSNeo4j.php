@@ -294,16 +294,16 @@ GROUP BY calls.id
     }
 
     public function json_encode($object) {
-        if (isset($object->properties['fullcode'])) {
+        if (isset($object->properties['fullcode']) && !mb_check_encoding($object->properties['fullcode'][0]->value, 'UTF-8')) {
             $object->properties['fullcode'][0]->value = utf8_encode($object->properties['fullcode'][0]->value);
         }
-        if (isset($object->properties['code'])) {
+        if (isset($object->properties['code']) && !mb_check_encoding($object->properties['code'][0]->value, 'UTF-8')) {
             $object->properties['code'][0]->value = utf8_encode($object->properties['code'][0]->value);
         }
-        if (isset($object->properties['noDelimiter'])) {
+        if (isset($object->properties['noDelimiter']) && !mb_check_encoding($object->properties['noDelimiter'][0]->value, 'UTF-8')) {
             $object->properties['noDelimiter'][0]->value = utf8_encode($object->properties['noDelimiter'][0]->value);
         }
-        if (isset($object->properties['globalvar'])) {
+        if (isset($object->properties['globalvar']) && !mb_check_encoding($object->properties['globalvar'][0]->value, 'UTF-8')) {
             $object->properties['globalvar'][0]->value = utf8_encode($object->properties['globalvar'][0]->value);
         }
         return json_encode($object);

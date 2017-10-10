@@ -5,9 +5,11 @@ $expected     = array('$a',
                       'NS1\TH1 $e', 
                       'TH2 $d = null', 
                       'TH1 $c', 
-                      '$b = 1');
+                      '$b = 1',
+                      );
 
 $expected_not = array('null',
-                      '1');
+                      '1',
+                     );
 
 ?>

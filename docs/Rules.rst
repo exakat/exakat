@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 18 Sep 2017 14:01:44 +0000
-.. comment: Generation hash : 37d41fabfd7365f6bfb548d4b775665f4084d953
+.. comment: Generation date : Mon, 09 Oct 2017 15:00:53 +0000
+.. comment: Generation hash : c18137cd05ea4e3ef6c77f49606d5b44a652bf09
 
 
 .. _$http\_raw\_post\_data:
@@ -645,6 +645,59 @@ This analysis reports files that are using both syntax at the same time. This is
 +--------------+-----------------------------------------+
 
 
+.. _always-anchor-regex:
+
+Always Anchor Regex
+###################
+
+
+Unanchored regex finds the requested pattern, and leaves room for malicious content. 
+
+Without ^ and $, the regex is searches for any pattern that satisfies its criteria, leaving any unused part of the string available for abitrary content. It is recommended to use both anchor
+
+.. code-block:: php
+
+   <?php
+   
+   $birthday = getSomeDate($_GET);
+   
+   // Permissive version : $birthday = '1970-01-01<script>xss();</script>';
+   if (!preg_match('/\d{4}-\d{2}-\d{2}/', $birthday) {
+       error('Wrong data format for your birthday!');
+   }
+   
+   // Restrictive version : $birthday = '1970-01-01';
+   if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthday) {
+       error('Wrong data format for your birthday!');
+   }
+   
+   echo 'Your birthday is on '.$birthday;
+   
+   ?>
+
+
+Note that $ may be a line ending, still leaving room after it for injection.
+
+.. code-block:: php
+
+   <?php
+   
+   $birthday = '1970-01-01'.PHP_EOL.'<script>xss();</script>';
+   
+   ?>
+
+
+This analysis reports false positive when the regex is used to search a pattern in a much larger string. Check if this rule doesn't apply, though.
+
+See also `CWE-625: Permissive Regular Expression <https://cwe.mitre.org/data/definitions/625.html>`_.
+
++--------------+----------------------+
+| Command Line | Security/AnchorRegex |
++--------------+----------------------+
+| Analyzers    | :ref:`Security`      |
++--------------+----------------------+
+
+
 .. _always-positive-comparison:
 
 Always Positive Comparison
@@ -886,7 +939,7 @@ It is recommended to store the values in an array, and then use `'implode() <htt
    ?>
 
 
-The same doesn't apply to += or *=, with `'array_sum() <http://www.php.net/array_sum>`_ and array_multiply(), as addition and multiplication works on the current memory allocation, and don't need to allocate new memory at each step.
+The same doesn't apply to addition and multiplication, with `'array_sum() <http://www.php.net/array_sum>`_ and array_multiply(), as those operations work on the current memory allocation, and don't need to allocate new memory at each step.
 
 +--------------+-----------------------------+
 | Command Line | Performances/NoConcatInLoop |
@@ -2111,10 +2164,10 @@ Using a type test without else is also accepted here. This is a special treatmen
 +--------------+--------------------------+
 
 
-.. _child-class-remove-typehint:
+.. _child-class-removes-typehint:
 
-Child Class Remove Typehint
-###########################
+Child Class Removes Typehint
+############################
 
 
 PHP 7.2 introduced the ability to remove a typehint when overloarding a method. This is not valid code for older versions.
@@ -4988,6 +5041,23 @@ Functions Removed In PHP 5.4
 
 Those functions were removed in PHP 5.4.
 
+.. code-block:: php
+
+   <?php
+   
+   // Deprecated as of PHP 5.4.0
+   $link = mysql_connect('localhost', 'mysql_user', 'mysql_password');
+   $db_list = mysql_list_dbs($link);
+   
+   while ($row = mysql_fetch_object($db_list)) {
+        echo $row->Database . \n;
+   }
+   
+   ?>
+
+
+See also `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_.
+
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/Php54RemovedFunctions                                                                                                                                                                   |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -5874,6 +5944,9 @@ In PHP 7.0 and older, those sequences were silently adapted (divided by 0).
    
    ?>
 
+
+See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
+
 +--------------+---------------------------------------------------------------------------------+
 | Command Line | Type/OctalInString                                                              |
 +--------------+---------------------------------------------------------------------------------+
@@ -6444,7 +6517,7 @@ Make One Call With Array
 ########################
 
 
-Call preg_replace_call() and `'str_replace() <http://www.php.net/str_replace>`_ with an array.  once with `'preg_replace_callback_array() <http://www.php.net/preg_replace_callback_array>`_.
+Avoid calling the same function several times by batching the calls with arrays.
 
 Calling the same function to chain modifications tends to be slower than calling the same function with all the transformations at the same time. Some PHP functions accept scalars or arrays, and using the later is more efficient.
 
@@ -6923,6 +6996,9 @@ Modernize Empty With Expression
    
    ?>
 
+
+See also `empty() <http://www.php.net/manual/en/function.empty.php>`_.
+
 +--------------+------------------------+
 | Command Line | Structures/ModernEmpty |
 +--------------+------------------------+
@@ -7212,6 +7288,48 @@ They are indeed overwriting each other. This is most probably a typo.
 +--------------+------------------------------+
 | Analyzers    | :ref:`Analyze`               |
 +--------------+------------------------------+
+
+
+.. _multiple-type-variable:
+
+Multiple Type Variable
+######################
+
+
+Avoid using the same variable with different types of data. 
+
+It is recommended to use different names for differently typed data, while processing them. This prevents errors where one believe the variable holds the former type, while it has already been casted to the later.
+
+Incrementing variables, with math operations or concatenation, is OK : the content changes, but not the type. And casting the variable without storing it in itself is OK. 
+
+.. code-block:: php
+
+   <?php
+   
+   // $x is an array
+   $x = range('a', 'z');
+   // $x is now a string
+   $x = join('', $x);
+   $c = count($x); // $x is not an array anymore
+   
+   
+   // $letters is an array
+   $letters = range('a', 'z');
+   // $alphabet is a string
+   $alphabet = join('', $letters);
+   
+   // Here, $letters is cast by PHP, but the variable is changed.
+   if ($letters) { 
+       $count = count($letters); // $letters is still an array 
+   }
+   
+   ?>
+
++--------------+---------------------------------+
+| Command Line | Structures/MultipleTypeVariable |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
 
 
 .. _multiples-identical-case:
@@ -10977,7 +11095,7 @@ Rethrown Exceptions
 
 Throwing a caught exception is usually useless and dead code.
 
-When exception are caught, they should be processed or transformed, but not rethrown.
+When exceptions are caught, they should be processed or transformed, but not rethrown as is.
 
 Those issues often happen when a catch structure was positioned for debug purposes, but lost its usage later. 
 
@@ -12936,6 +13054,47 @@ Original idea by Vladimir Reznichenko.
 +--------------+---------------------------------+
 
 
+.. _switch-fallthrough:
+
+Switch Fallthrough
+##################
+
+
+A switch with fallthrough is prone to errors. 
+
+A fallthrough happens when a case or default clause in a switch statement is not finished by a `'break <http://php.net/manual/en/control-structures.break.php>`_ (or equivalent);
+CWE report this as a security concern, unless well documented.
+
+A fallthrough may be used as a feature. It is undistinguisable from an error.
+
+.. code-block:: php
+
+   <?php
+   switch($variable) {
+       case 1 : 
+            
+           'break ;
+       case 2 : 
+           'break ;
+       default: 
+           ++$a;
+       case 4 : 
+           'break ;
+   }
+   ?>
+
+
+This analysis cannot take into account comments abouts the fallthough. 
+
+See also `CWE-484: Omitted Break Statement in Switch <https://cwe.mitre.org/data/definitions/484.html>`_.
+
++--------------+------------------------+
+| Command Line | Structures/Fallthrough |
++--------------+------------------------+
+| Analyzers    | :ref:`Security`        |
++--------------+------------------------+
+
+
 .. _switch-to-switch:
 
 Switch To Switch
@@ -13497,7 +13656,7 @@ Unchecked Resources
 
 Resources are created, but never checked before being used. This is not safe.
 
-Always check that resources are correctly created before using them
+Always check that resources are correctly created before using them.
 
 .. code-block:: php
 
@@ -13526,6 +13685,9 @@ Always check that resources are correctly created before using them
    bzclose(bzopen('file'));
    
    ?>
+
+
+See also `resources <http://php.net/manual/en/language.types.resource.php>`_.
 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/UncheckedResources                                                                               |
@@ -15120,6 +15282,60 @@ Nonces were created in the code with  wp_nonce_field(), wp_nonce_url() and wp_no
 +--------------+---------------------------+
 
 
+.. _upload-filename-injection:
+
+Upload Filename Injection
+#########################
+
+
+When receiving a file via Upload, it is recommended to store it under a self-generated name. Any storage that uses the original filename, or even a part of it may be vulnerable to injections.
+
+.. code-block:: php
+
+   <?php
+   
+   // Security error ! the $_FILES['upload']['filename'] is provided by the sender.
+   // 'a.<script>alert(\'a\')</script>'; may lead to a HTML injection.
+   $extension = substr( strrchr($_FILES['upload']['name'], '.') ,1);
+   if (!in_array($extension, array('gif', 'jpeg', 'jpg')) { 
+       // process error
+       'continue;
+   }
+   // Md5 provides a name without special characters
+   $name = md5($_FILES['upload']['filename']);
+   if(@move_uploaded_file($_FILES['upload']['tmp_name'], '/var/no-www/upload/'.$name.'.'.$extension)) {
+       safeStoring($name.'.'.$extension, $_FILES['upload']['filename']);
+   }
+   
+   // Security error ! the $_FILES['upload']['filename'] is provided by the sender.
+   if(@move_uploaded_file($_FILES['upload']['tmp_name'], $_FILES['upload']['filename'])) {
+       safeStoring($_FILES['upload']['filename']);
+   }
+   
+   // Security error ! the $_FILES['upload']['filename'] is provided by the sender.
+   // 'a.<script>alert('a')</script>'; may lead to a HTML injection.
+   $extension = substr( strrchr($_FILES['upload']['name'], '.') ,1);
+   $name = md5($_FILES['upload']['filename']);
+   if(@move_uploaded_file($_FILES['upload']['tmp_name'], $name.'.'.$extension)) {
+       safeStoring($name.'.'.$extension, $_FILES['upload']['filename']);
+   }
+   
+   ?>
+
+
+It is highly recommended to validate any incoming file, generate a name for it, and store the result in a folder outside the web folder. Also, avoid accepting PHP scripts, if possible.
+
+See also `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_, 
+`CWE-616: Incomplete Identification of Uploaded File Variables <https://cwe.mitre.org/data/definitions/616.html>`_, 
+`Why File Upload Forms are a Major Security Threat <https://www.acunetix.com/websitesecurity/upload-forms-threat/>`_.
+
++--------------+----------------------------------+
+| Command Line | Security/UploadFilenameInjection |
++--------------+----------------------------------+
+| Analyzers    | :ref:`Security`                  |
++--------------+----------------------------------+
+
+
 .. _use-$wpdb-api:
 
 Use $wpdb Api
@@ -16074,6 +16290,9 @@ There is no need to overcast returned values.
    
    ?>
 
+
+See also `Type juggling <http://php.net/manual/en/language.types.type-juggling.php>`_.
+
 +--------------+---------------------------+
 | Command Line | Structures/UselessCasting |
 +--------------+---------------------------+
@@ -17013,9 +17232,9 @@ Zend Classes
 ############
 
 
-Spot Zend Classes in the code.
+Zend Classes are used in the code.
 
-Classes are detected by checking the full namespaced name with the prefix \'zend_\' (Zend Framework 1) or \'\zend\' (Zend Framework 2).
+Classes are detected by checking the full namespaced name with the prefix 'zend_' (Zend Framework 1) or '\zend\' (Zend Framework 2).
 
 .. code-block:: php
 

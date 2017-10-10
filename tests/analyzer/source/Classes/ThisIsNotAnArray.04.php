@@ -10,6 +10,14 @@ class x implements ArrayAccess {
         }
 
         $this[] = 3;
+        $this->f;
+    }
+}
+
+class x2 {
+
+    function init() {
+        $this[3] = 4;
     }
 }
 

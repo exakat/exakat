@@ -83,17 +83,24 @@ class Atom {
         $this->strval        = addcslashes($this->strval     , '\\"');
         $this->noDelimiter   = addcslashes($this->noDelimiter, '\\"');
 
-        $this->alternative   = $this->alternative ? 'true' : 'false';
-        $this->reference     = $this->reference   ? 'true' : 'false';
-        $this->heredoc       = $this->heredoc     ? 'true' : 'false';
-        $this->variadic      = $this->variadic    ? 'true' : 'false';
-        $this->absolute      = $this->absolute    ? 'true' : 'false';
-        $this->constant      = $this->constant    ? 'true' : 'false';
-        $this->boolean       = $this->boolean     ? 'true' : 'false';
-        $this->enclosing     = $this->enclosing   ?  null  : 'false';
-        $this->bracket       = $this->bracket     ? 'true' : 'false';
-        $this->close_tag     = $this->close_tag   ? 'true' : 'false';
-        $this->aliased       = $this->aliased     ? 'true' : 'false';
+        $this->alternative   = $this->alternative ? 1 : null;
+        $this->reference     = $this->reference   ? 1 : null;
+        $this->heredoc       = $this->heredoc     ? 1 : null;
+        $this->variadic      = $this->variadic    ? 1 : null;
+        $this->absolute      = $this->absolute    ? 1 : null;
+        $this->constant      = $this->constant    ? 1 : null;
+        $this->boolean       = $this->boolean     ? 1 : null;
+        $this->enclosing     = $this->enclosing   ? 1 : null;
+        $this->bracket       = $this->bracket     ? 1 : null;
+        $this->close_tag     = $this->close_tag   ? 1 : null;
+        $this->aliased       = $this->aliased     ? 1 : null;
+        
+        if ($this->intval > 2147483647) {
+            $this->intval = 2147483647;
+        }
+        if ($this->intval < -2147483648) {
+            $this->intval = -2147483648;
+        }
 
         $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
 
@@ -130,6 +137,13 @@ class Atom {
 
         $this->enclosing     = !$this->enclosing  ? null : 1;
         $this->globalvar     = !$this->globalvar  ? null : $this->globalvar;
+
+        if ($this->intval > 2147483647) {
+            $this->intval = 2147483647;
+        }
+        if ($this->intval < -2147483648) {
+            $this->intval = -2147483648;
+        }
 
         $return = array( $this->id,
                          $this->atom,
