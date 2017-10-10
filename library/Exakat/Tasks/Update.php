@@ -26,6 +26,7 @@ namespace Exakat\Tasks;
 use Exakat\Config;
 use Exakat\Exceptions\NoCodeInProject;
 use Exakat\Exceptions\NoSuchProject;
+use Exakat\Exceptions\NoFileToProcess;
 use Exakat\Exceptions\ProjectNeeded;
 
 class Update extends Tasks {
@@ -40,6 +41,7 @@ class Update extends Tasks {
             $projects = array_diff($projects, array('test'));
             
             print "Updating ".count($projects)." projects".PHP_EOL;
+            shuffle($projects);
             foreach($projects as $project) {
                 display("updating $project".PHP_EOL);
                 $this->update($project);
@@ -157,12 +159,17 @@ class Update extends Tasks {
 
             default :
                 display('No VCS found to update. git, mercurial, svn and bazaar are supported.');
+                return;
         }
         
         display('Running files');
         $updateCache = new Files($this->gremlin, new Config(array(1 => '-p', 
                                                                   2 => $project)));
-        $updateCache->run();
+        try {
+            $updateCache->run();
+        } catch (NoFileToProcess $e) {
+            // OK, just carry on. 
+        }
     }
 }
 
