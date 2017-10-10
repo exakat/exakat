@@ -188,7 +188,7 @@ GREMLIN;
                            'message'   => 'MMMMMMMMMM' );
                 echo json_encode( (object) $s), "\n";
             }
-            die();
+            return;
         }
 
         if ($this->config->output) {

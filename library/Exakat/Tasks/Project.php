@@ -87,8 +87,8 @@ class Project extends Tasks {
         $analyze = new FindExternalLibraries($this->gremlin, $configThema, Tasks::IS_SUBTASK);
         $analyze->run();
 
-        $this->addSnitch(array('step'   => 'External lib',
-                              'project' => $this->config->project));
+        $this->addSnitch(array('step'    => 'External lib',
+                               'project' => $this->config->project));
         unset($analyze);
 
         $this->logTime('Start');
@@ -389,7 +389,7 @@ class Project extends Tasks {
     }
     
     private function generateName() {
-        $ini = parse_ini_file('./data/audit_names.ini');
+        $ini = parse_ini_file($this->config->dir_root.'/data/audit_names.ini');
         
         $names = $ini['names'];
         $adjectives = $ini['adjectives'];
@@ -402,7 +402,7 @@ class Project extends Tasks {
         $name = $names[ $x % count($names) - 1];
         $adjective = $adjectives[ $x % count($adjectives) - 1];
 
-        return $adjective.' '.$name;
+        return ucfirst($adjective).' '.$name;
     }
 }
 
