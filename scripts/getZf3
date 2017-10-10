@@ -65,7 +65,6 @@ $components = array(
 'zend-stdlib',
 'zendxml'
                     );
-//$components = array('zend-session');
 
 $begin = microtime(true);
 $sqlite = new \Sqlite3(dirname(__DIR__).'/data/zendf3.sqlite');
@@ -79,8 +78,9 @@ $end = microtime(true);
 
 $versions = 0;
 foreach($components as $component) {
-    print "Component  \n";
-    $sqlite->query('INSERT INTO components VALUES (null, "'.$component.'")');
+    $componentSQL = str_replace(array('-', 'zend_'), array('_', 'zend-'), $component);
+    print "Component '$component' / $componentSQL \n";
+    $sqlite->query('INSERT INTO components VALUES (null, "'.$componentSQL.'")');
     $componentId = $sqlite->lastInsertRowID();
     
     $versions += readRelease($component, $componentId);
@@ -100,7 +100,7 @@ function readRelease($component, $componentId) {
     $versions = explode("\n", trim($res));
     $versions = array_filter($versions, function ($x) { return version_compare('2.4.99', str_replace('release-', '', $x)) < 0; });
     
-    print count($versions)." for $component\n";
+    print count($versions).' versions for $component : '.implode(', ', $versions).PHP_EOL;
     foreach($versions as $version) {
         $sqlite->query('INSERT INTO releases VALUES (null, "'.$version.'", '.$componentId.')');
         $versionId = $sqlite->lastInsertRowID();
@@ -108,6 +108,16 @@ function readRelease($component, $componentId) {
         print "$versionId\n";
     
         processVersion($component, $version, $versionId);
+        
+        preg_match('/^release-(\d)\.(\d).(\d)$/', $version, $v);
+        preg_match('/^zend-(.+)$/', $component, $n);
+        $path = 'library/Exakat/Analyzer/ZendF/Zf3'.ucfirst($n[1]).$v[1].$v[2].'.php';
+        
+        if (!file_exists($path)) {
+            print "$component $version is missing\n";
+        } else {
+            print "$component $version is ready\n";
+        }
     }
     
     shell_exec('cd projects/'.$component.'/code/; git checkout HEAD');
@@ -125,40 +135,13 @@ function processVersion($component, $version, $versionId) {
     $all = array();
     foreach($dir as $file) {
         $all[] = processFile($file);
-        $all[] = processFileForDeprecated($file);
     }
     $all = call_user_func_array('array_merge_recursive', $all);
-    $all['Class']     = array_filter($all['Class'],     function ($k) { return substr($k, 0, 5) === 'Zend\\'; }, ARRAY_FILTER_USE_KEY);
-    $all['Interface'] = array_filter($all['Interface'], function ($k) { return substr($k, 0, 5) === 'Zend\\'; }, ARRAY_FILTER_USE_KEY);
-    $all['Trait']     = array_filter($all['Trait'],     function ($k) { return substr($k, 0, 5) === 'Zend\\'; }, ARRAY_FILTER_USE_KEY);
+    $all['Class']      = array_filter($all['Class'],      function ($k) { return substr($k, 0, 5) === 'Zend\\'; }, ARRAY_FILTER_USE_KEY);
+    $all['Interface']  = array_filter($all['Interface'],  function ($k) { return substr($k, 0, 5) === 'Zend\\'; }, ARRAY_FILTER_USE_KEY);
+    $all['Trait']      = array_filter($all['Trait'],      function ($k) { return substr($k, 0, 5) === 'Zend\\'; }, ARRAY_FILTER_USE_KEY);
+    $all['Deprecated'] = array_filter($all['Deprecated'], function ($k) { return substr($k, 0, 5) === 'Zend\\'; }, ARRAY_FILTER_USE_KEY);
 
-    $res = shell_exec('cd projects/'.$component.'/code/; grep -ri -A 6 @deprecated * ');
-    $deprecated = explode("\n--\n", $res);
-    foreach($deprecated as $d) {
-        if (preg_match('/^class (.*?)\s/s', $d, $r)) {
-            $found = array();
-            foreach($all['Class'] as $ns => $classes) {
-                if (in_array($r[1], $classes)) {
-                    $found[] = "$ns\\$r[1]";
-                }
-            }
-            
-            if (empty($found)) {
-//                print "---\n$r[1]\n$d\n---\n";
-//                print_r($all['Class']);
-            } else {
-//                print count($found)." deprecated\n";
-                foreach($found as $f) {
-                    $sqlite->query('INSERT INTO deprecated VALUES (null, "'.$f.'", '.$versionId.', "class")');
-                }
-            }
-        } else {
-//            print "Deprecated $d\n";
-        }
-    }
-//    print_r($deprecated);
-//    print $res;
-//    print_r($all['Class']);
     save_cit($versionId, $all);
     
 }
@@ -192,28 +175,30 @@ function save_cit($releaseId, $all) {
     foreach($all['Trait'] as $namespace => $list) {
         $namespaceId = save($sqlite, 'namespaces', array('namespace'  => $namespace,
                                                          'release_id' => $releaseId));
-        foreach($list as $interfaceName) {
+        foreach($list as $traitName) {
             ++$traits;
             $traitId = save($sqlite, 'traits',     array('trait'        => $interfaceName,
                                                          'namespace_id' => $namespaceId));
         }
     }
-
+    
     $deprecated = 0;
     foreach($all['Deprecated'] as $namespace => $list) {
         $namespaceId = save($sqlite, 'namespaces', array('namespace'  => $namespace,
-                                                         'release_id' => $releaseId));
-        foreach($list as $d) {
+                                                         'release_id' => $releaseId,
+                                                         ));
+        foreach($list as $deprecatedCIT) {
             ++$deprecated;
-            $traitId = save($sqlite, 'deprecated',     array('namespace_id' => $namespaceId,
-                                                             'type'         => $d['type'],
-                                                             'name'         => $d['name'],
-                                                             'cit'          => $d['cit'],
-                                                             ));
+            $deprecatedId = save($sqlite, 'deprecated', array('type'         => $deprecatedCIT['type'],
+                                                              'name'         => $deprecatedCIT['name'],
+                                                              'cit'          => $deprecatedCIT['cit'],
+                                                              'namespace_id' => $namespaceId,
+                                                              ));
         }
     }
     
-//    print "$release : $classes Classes, $interfaces Interfaces, $traits Traits\n";
+
+    print "$releaseId : $classes Classes, $interfaces Interfaces, $traits Traits, $deprecated Deprecated\n";
 }
 
 function save ($sqlite, $table, $data) {

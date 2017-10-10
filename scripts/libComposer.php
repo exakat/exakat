@@ -71,7 +71,7 @@ SQL
 
     $res = shell_exec('composer show '.$vendor.'/'.$component.' "'.$version.'" 2>&1');
     if (!preg_match_all("#versions : (.*?)\n#s", $res, $r)) {
-        print 'composer show '.$vendor.'/'.$component.' "'.$version.'" 2>&1'."\n";
+        print 'composer show '.$vendor.'\\'.$component.' "'.$version.'" 2>&1'."\n";
         print_r($res);
         die();
     }
@@ -98,7 +98,9 @@ SQL
     }
     
     if (empty($versionId)) {
-        die("Couldn't find versions for '$v'\n");
+        print "Couldn't find versions for '$v'\n";
+        print "SELECT id FROM versions WHERE component_id = $componentId AND version= '$v';\n$version requested\n";
+        die();
     }
 
     if ($dir === '') {
@@ -230,17 +232,27 @@ function recursiveReaddir($tmpdir) {
 function processFile($file) {
     $tokens = token_get_all(file_get_contents($file));
     
-    $return = array('Class'     => array(),
-                    'Interface' => array(),
-                    'Trait'     => array());
+    $return = array('Class'      => array(),
+                    'Interface'  => array(),
+                    'Trait'      => array(),
+                    'Deprecated' => array(),
+                    );
     $namespace = 'global';
+    $cit = '';
+    $deprecated = false;
     
     foreach($tokens as $id => $token) {
         if (is_array($token)) {
             switch($token[0]) {
+                case T_DOC_COMMENT : 
+                    if (strpos($token[1], '@deprecated') !== false) {
+                        $deprecated = true;
+                    }
+                    break;
+                    
                 case T_NAMESPACE : 
                     $namespace = '';
-                    for ($i = $id + 2; ($tokens[$i] != ';') && ($tokens[$i] != '{') && ($i - $id < 20); ++$i) {
+                    for ($i = $id + 2; ($tokens[$i] != ';') && ($tokens[$i] != '{') && ($i - $id < 20); $i++) {
                         if (is_array($tokens[$i])) {
                             $namespace .= $tokens[$i][1];
                         } else {
@@ -248,6 +260,30 @@ function processFile($file) {
                         }
                     }
                     $namespace = trim($namespace);
+                    break;
+
+                case T_CONST : 
+                    if ($deprecated === true) {
+                        $return['Deprecated'][$namespace][] = array('name' => $tokens[$id + 2][1],
+                                                                    'cit'  => $cit,
+                                                                    'type' => 'const',
+                                                                    );
+                        $deprecated = false;
+                    }
+                    break;
+
+                case T_PRIVATE : 
+                case T_PUBLIC : 
+                case T_PROTECTED : 
+                    if ($tokens[$id + 2][0] != T_VARIABLE) { continue; }
+                    
+                    if ($deprecated === true) {
+                        $return['Deprecated'][$namespace][] = array('name' => $tokens[$id + 2][1],
+                                                                    'cit'  => $cit,
+                                                                    'type' => 'property',
+                                                                    );
+                        $deprecated = false;
+                    }
                     break;
 
                 case T_CLASS : 
@@ -259,14 +295,46 @@ function processFile($file) {
                     if ($tokens[$id + 2][0] != T_STRING) { break 1; }
 
                     $return['Class'][$namespace][] = $tokens[$id + 2][1];
+                    $cit = $namespace.'/'.$tokens[$id + 2][1];
+                    if ($deprecated === true) {
+                        $return['Deprecated'][$namespace][] = array('name' => $tokens[$id + 2][1],
+                                                                    'cit'  => '',
+                                                                    'type' => 'class',
+                                                                    );
+                        $deprecated = false;
+                    }
+                    break;
+
+                case T_FUNCTION : 
+                    if ($deprecated === true) {
+                        $return['Deprecated'][$namespace][] = array('name' => $tokens[$id + 2][1],
+                                                                    'cit'  => $cit,
+                                                                    'type' => 'function',
+                                                                    );
+                        $deprecated = false;
+                    }
                     break;
 
                 case T_INTERFACE : 
                     $return['Interface'][$namespace][] = $tokens[$id + 2][1];
+                    if ($deprecated === true) {
+                        $return['Deprecated'][$namespace][] = array('name' => $tokens[$id + 2][1],
+                                                                    'cit'  => '',
+                                                                    'type' => 'interface',
+                                                                    );
+                        $deprecated = false;
+                    }
                     break;
 
                 case T_TRAIT : 
                     $return['Trait'][$namespace][] = $tokens[$id + 2][1];
+                    if ($deprecated === true) {
+                        $return['Deprecated'][$namespace][] = array('name' => $tokens[$id + 2][1],
+                                                                    'cit'  => '',
+                                                                    'type' => 'trait',
+                                                                    );
+                        $deprecated = false;
+                    }
                     break;
                 
                 default : 
