@@ -35,7 +35,7 @@ class Ambassador extends Reports {
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
-    private $tmpName           = '';
+    protected $tmpName           = '';
 
     private $docs              = array();
     private $frequences        = array();
@@ -112,7 +112,7 @@ class Ambassador extends Reports {
         return $combinePageHTML;
     }
 
-    private function putBasedPage($file, $html) {
+    protected function putBasedPage($file, $html) {
         if (strpos($html, '{{BLOC-JS}}') !== false) {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
@@ -192,7 +192,7 @@ class Ambassador extends Reports {
         $this->cleanFolder();
     }
 
-    private function initFolder() {
+    protected function initFolder() {
         if ($this->finalName === null) {
             return "Can't produce Devoops format to stdout";
         }
@@ -206,7 +206,7 @@ class Ambassador extends Reports {
         copyDir($this->config->dir_root.'/media/devfaceted', $this->tmpName );
     }
 
-    private function cleanFolder() {
+    protected function cleanFolder() {
         if (file_exists($this->tmpName.'/datas/base.html')) {
             unlink($this->tmpName.'/datas/base.html');
             unlink($this->tmpName.'/datas/menu.html');
@@ -265,7 +265,7 @@ class Ambassador extends Reports {
                 .'</code></pre><p>';
     }
 
-    private function setPHPBlocs($description){
+    protected function setPHPBlocs($description){
         $description = nl2br($description);
 
         $description = preg_replace("#`(.*?) <(.*?)>`_#is", '<a href="$2" title="$1">$1 <i class="fa fa-sign-out"></i></a>', $description);
@@ -671,7 +671,7 @@ JAVASCRIPT;
         $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
         $audit_name = $this->datastore->getHash('audit_name');
         if (!empty($audit_name)) {
-            $audit_date .= ' - &quote;'.$audit_name.'&quote;';
+            $audit_date .= ' - &quot;'.$audit_name.'&quot;';
         }
         $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
 
@@ -1647,9 +1647,10 @@ SQL;
                                     $this->getIssuesFaceted($this->themesToShow) );
     }
     
-    private function generateIssuesEngine($filename, $issues) {
+    protected function generateIssuesEngine($filename, $issues) {
         $baseHTML = $this->getBasedPage($filename, $issues);
 
+        $total = count($issues);
         $issues = implode(', '.PHP_EOL, $issues);
         $blocjs = <<<JAVASCRIPTCODE
         
@@ -1711,6 +1712,7 @@ JAVASCRIPTCODE;
 
         $finalHTML = $this->injectBloc($baseHTML, 'BLOC-JS', $blocjs);
         $finalHTML = $this->injectBloc($finalHTML, 'TITLE', 'Issues\' list');
+        $finalHTML = $this->injectBloc($finalHTML, 'TOTAL', $total);
         $this->putBasedPage($filename, $finalHTML);
     }
 
@@ -2984,7 +2986,7 @@ HTML;
         return htmlentities($text, ENT_COMPAT | ENT_HTML401, 'UTF-8');
     }
     
-    private function toId($name) {
+    protected function toId($name) {
         return str_replace('/', '_', strtolower($name));
     }
 }
