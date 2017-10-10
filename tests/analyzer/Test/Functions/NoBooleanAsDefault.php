@@ -8,8 +8,9 @@ spl_autoload_register('Autoload::autoload_phpunit');
 spl_autoload_register('Autoload::autoload_library');
 
 class Functions_NoBooleanAsDefault extends Analyzer {
-    /* 1 methods */
+    /* 2 methods */
 
     public function testFunctions_NoBooleanAsDefault01()  { $this->generic_test('Functions/NoBooleanAsDefault.01'); }
+    public function testFunctions_NoBooleanAsDefault02()  { $this->generic_test('Functions/NoBooleanAsDefault.02'); }
 }
 ?>
