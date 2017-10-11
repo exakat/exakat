@@ -27,8 +27,9 @@ use Exakat\Analyzer\Analyzer;
 
 class EchoTagUsage extends Analyzer {
     public function analyze() {
-        $this->atomIs('Phpcode')
-             ->is('tag', "'<?='");
+        // <?= $a;
+        $this->atomIs('Functioncall')
+             ->is('code', '<?=');
         $this->prepareQuery();
     }
 }
