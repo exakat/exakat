@@ -3891,6 +3891,7 @@ SQL;
     /// processing binary operators
     //////////////////////////////////////////////////////
     private function processSign() {
+
         $signExpression = $this->tokens[$this->id][1];
         $code = $signExpression.'1';
         while (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_PLUS, \Exakat\Tasks\T_MINUS))) {
@@ -3899,7 +3900,8 @@ SQL;
             $code *= $this->tokens[$this->id][1].'1';
         }
 
-        if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER || $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
+        if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER || 
+             $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
             $operand = $this->processNext();
 
@@ -3913,6 +3915,9 @@ SQL;
         }
         
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $finals[] = '-';
+        $finals[] = '+';
+        
         $noSequence = $this->isContext(self::CONTEXT_NOSEQUENCE);
         if ($noSequence === false) {
             $this->toggleContext(self::CONTEXT_NOSEQUENCE);
@@ -3955,6 +3960,7 @@ SQL;
         $current = $this->id;
 
         $finals = $this->precedence->get($this->tokens[$this->id][0]);
+        $finals = array_slice($finals, 1);
 
         $addition = $this->addAtom('Addition');
         $this->addLink($addition, $left, 'LEFT');
@@ -3963,7 +3969,20 @@ SQL;
         do {
             $this->processNext();
 
-            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_EQUAL, \Exakat\Tasks\T_PLUS_EQUAL, \Exakat\Tasks\T_AND_EQUAL, \Exakat\Tasks\T_CONCAT_EQUAL, \Exakat\Tasks\T_DIV_EQUAL, \Exakat\Tasks\T_MINUS_EQUAL, \Exakat\Tasks\T_MOD_EQUAL, \Exakat\Tasks\T_MUL_EQUAL, \Exakat\Tasks\T_OR_EQUAL, \Exakat\Tasks\T_POW_EQUAL, \Exakat\Tasks\T_SL_EQUAL, \Exakat\Tasks\T_SR_EQUAL, \Exakat\Tasks\T_XOR_EQUAL))) {
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_EQUAL, 
+                                                                \Exakat\Tasks\T_PLUS_EQUAL, 
+                                                                \Exakat\Tasks\T_AND_EQUAL, 
+                                                                \Exakat\Tasks\T_CONCAT_EQUAL, 
+                                                                \Exakat\Tasks\T_DIV_EQUAL, 
+                                                                \Exakat\Tasks\T_MINUS_EQUAL, 
+                                                                \Exakat\Tasks\T_MOD_EQUAL, 
+                                                                \Exakat\Tasks\T_MUL_EQUAL, 
+                                                                \Exakat\Tasks\T_OR_EQUAL, 
+                                                                \Exakat\Tasks\T_POW_EQUAL, 
+                                                                \Exakat\Tasks\T_SL_EQUAL, 
+                                                                \Exakat\Tasks\T_SR_EQUAL, 
+                                                                \Exakat\Tasks\T_XOR_EQUAL,
+                                                                ))) {
                 $this->processNext();
             }
         } while (!in_array($this->tokens[$this->id + 1][0], $finals)) ;
