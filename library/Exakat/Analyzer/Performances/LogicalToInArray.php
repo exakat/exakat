@@ -26,26 +26,33 @@ use Exakat\Analyzer\Analyzer;
 
 class LogicalToInArray extends Analyzer {
     public function analyze() {
+        // $a == 'a' || $a == 'b'
+        // ($a == 'a') || ($a == 'b')
+        // $a == 'a' || $b == 'b' || $a == 'c'
         $this->atomIs('Logical')
              ->tokenIs(array('T_LOGICAL_OR', 'T_BOOLEAN_OR'))
 
              ->outIs('LEFT')
+             ->outIsIE('CODE')
              ->atomIs('Comparison')
              ->codeIs(array('==', '==='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(array('Variable'))
-             ->savePropertyAs('code', 'name')
+             ->atomIs(self::$CONTAINERS)
+             ->savePropertyAs('fullcode', 'name')
              ->inIs(array('LEFT', 'RIGHT'))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(self::$LITERALS)
              ->back('first')
              
+             ->raw('emit().repeat( __.out("RIGHT", "LEFT")).times('.self::MAX_LOOPING.').hasLabel("Logical").has("token", within("T_LOGICAL_OR", "T_BOOLEAN_OR"))')
+             
              ->outIs('RIGHT')
+             ->outIsIE('CODE')
              ->atomIs('Comparison')
              ->codeIs(array('==', '==='))
              ->outIs(array('LEFT', 'RIGHT'))
-             ->atomIs(array('Variable'))
-             ->samePropertyAs('code', 'name')
+             ->atomIs(self::$CONTAINERS)
+             ->samePropertyAs('fullcode', 'name')
              ->inIs(array('LEFT', 'RIGHT'))
              ->outIs(array('LEFT', 'RIGHT'))
              ->atomIs(self::$LITERALS)
