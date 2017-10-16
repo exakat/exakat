@@ -42,21 +42,23 @@ class Inventories extends Reports {
         mkdir($path, 0777);
 
         $this->saveInventory('Constants/Constantnames', "$folder/$name/constants.csv");
-        $this->saveInventory('Variables/Variablesnames', "$folder/$name/variables.csv");
         $this->saveInventory('Functions/Functionnames', "$folder/$name/functions.csv");
         $this->saveInventory('Classes/Classnames', "$folder/$name/classes.csv");
         $this->saveInventory('Interfaces/Interfacenames', "$folder/$name/interfaces.csv");
         $this->saveInventory('Traits/Traitnames', "$folder/$name/traits.csv");
         $this->saveInventory('Namespaces/Namespacesnames', "$folder/$name/namespaces.csv");
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/exceptions.csv");
-        $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/errorMessages.csv");
-        $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/comparedLiterals.csv");
 
-        $this->saveAtom('Integer', "$path/integers.csv");
-        $this->saveAtom('Array',   "$path/arrays.csv");
-        $this->saveAtom('Heredoc', "$path/heredoc.csv");
-        $this->saveAtom('Real',    "$path/real.csv");
-        $this->saveAtom('String',  "$path/strings.csv");
+        $this->saveInventory('Variables/Variablesnames', "$folder/$name/variables.csv");
+        $this->saveInventory('Php/IncomingVariables', "$folder/$name/incomingGPC.csv");
+        $this->saveInventory('Php/SessionVariables', "$folder/$name/sesssions.csv");
+        $this->saveInventory('Variables/GlobalVariables', "$folder/$name/globals.csv");
+
+        $this->saveAtom('Integer',      "$path/integers.csv");
+        $this->saveAtom('ArrayLiteral', "$path/arrays.csv");
+        $this->saveAtom('Heredoc',      "$path/heredoc.csv");
+        $this->saveAtom('Real',         "$path/real.csv");
+        $this->saveAtom('String',       "$path/strings.csv");
     }
 
     private function saveInventory($analyzer, $file) {
@@ -74,6 +76,10 @@ class Inventories extends Reports {
 
     private function saveAtom($atom, $file) {
         $res = $this->sqlite->query('SELECT name, file, line FROM literal'.$atom);
+        if ($res === false) {
+            file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
+            return;
+        }
         $fp = fopen($file, 'w+');
         fputcsv($fp, array('Name', 'File', 'Line'));
         $step = 0;

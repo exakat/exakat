@@ -142,6 +142,7 @@ Glossary
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
       + :ref:`Switch Without Default <switch-without-default>`
+      + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Useless Switch <useless-switch>`
       + :ref:`ZF3 Usage Of Deprecated <zf3-usage-of-deprecated>`
@@ -171,6 +172,7 @@ Glossary
       + :ref:`Break Outside Loop <break-outside-loop>`
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
+      + :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
       + :ref:`Unreachable Code <unreachable-code>`
       + :ref:`Upload Filename Injection <upload-filename-injection>`
 
@@ -445,6 +447,7 @@ Glossary
       + :ref:`Should Use Coalesce <should-use-coalesce>`
       + :ref:`Should Use array_column() <should-use-array\_column()>`
       + :ref:`Slow Functions <slow-functions>`
+      + :ref:`Too Complex Expression <too-complex-expression>`
       + :ref:`Use Instanceof <use-instanceof>`
 
 

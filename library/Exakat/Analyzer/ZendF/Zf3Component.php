@@ -39,7 +39,7 @@ class Zf3Component extends Analyzer {
         }
 
         $analyzerId = null;
-        
+
         $classes    = $data->getClasses($this->component, $this->version);
         if (!empty($classes)) {
             $classes    = call_user_func_array('array_merge', array_values($classes));

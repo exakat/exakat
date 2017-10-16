@@ -16,31 +16,51 @@ Label : PROJECT
               Label : CODE
                 +
                 Label : LEFT
-                  -
+                  (int)
+                  Label : CAST
+                    (
+                    Label : CODE
+                      /
+                      Label : LEFT
+                        *
+                        Label : LEFT
+                          $a
+                        Label : RIGHT
+                          $b
+                      Label : RIGHT
+                        2
+                Label : RIGHT
+                  +
                   Label : LEFT
+                    $c
+                  Label : RIGHT
                     +
                     Label : LEFT
-                      (int)
-                      Label : CAST
-                        (
-                        Label : CODE
-                          /
-                          Label : LEFT
-                            *
-                            Label : LEFT
-                              $a
-                            Label : RIGHT
-                              $b
-                          Label : RIGHT
-                            2
+                      3
                     Label : RIGHT
-                      +
+                      -
                       Label : LEFT
-                        $c
+                        (int)
+                        Label : CAST
+                          (
+                          Label : CODE
+                            /
+                            Label : LEFT
+                              $d
+                            Label : RIGHT
+                              4
                       Label : RIGHT
                         +
                         Label : LEFT
-                          3
+                          (int)
+                          Label : CAST
+                            (
+                            Label : CODE
+                              /
+                              Label : LEFT
+                                $e
+                              Label : RIGHT
+                                5
                         Label : RIGHT
                           (int)
                           Label : CAST
@@ -48,28 +68,8 @@ Label : PROJECT
                             Label : CODE
                               /
                               Label : LEFT
-                                $d
+                                $f
                               Label : RIGHT
-                                4
-                  Label : RIGHT
-                    (int)
-                    Label : CAST
-                      (
-                      Label : CODE
-                        /
-                        Label : LEFT
-                          $e
-                        Label : RIGHT
-                          5
-                Label : RIGHT
-                  (int)
-                  Label : CAST
-                    (
-                    Label : CODE
-                      /
-                      Label : LEFT
-                        $f
-                      Label : RIGHT
-                        6
+                                6
             Label : RIGHT
               7

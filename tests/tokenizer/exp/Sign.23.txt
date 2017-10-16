@@ -10,22 +10,22 @@ Label : PROJECT
         Label : EXPRESSION
           echo
           Label : ARGUMENT
-            -
+            +
             Label : LEFT
-              +
-              Label : LEFT
-                $a
-              Label : RIGHT
-                2
+              $a
             Label : RIGHT
-              [
-              Label : INDEX
-                b
-                Label : ARGUMENT
-                  'c'
-                Label : NAME
+              -
+              Label : LEFT
+                2
+              Label : RIGHT
+                [
+                Label : INDEX
                   b
-              Label : VARIABLE
-                $y
+                  Label : ARGUMENT
+                    'c'
+                  Label : NAME
+                    b
+                Label : VARIABLE
+                  $y
           Label : NAME
             echo

@@ -13,6 +13,8 @@ Label : PROJECT
             const
             Label : NAME
               x
+              Label : DEFINITION
+                x
             Label : VALUE
               array
               Label : ARGUMENT

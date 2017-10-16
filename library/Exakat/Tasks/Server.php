@@ -38,7 +38,7 @@ class Server extends Tasks {
             }
             display('Shut down server ('.$display.')');
             
-            if ($this->config->stop === true) { 
+            if ($this->config->stop === true) {
                 return;
             }
         }

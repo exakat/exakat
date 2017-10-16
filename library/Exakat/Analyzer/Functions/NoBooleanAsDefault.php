@@ -26,11 +26,10 @@ use Exakat\Analyzer\Analyzer;
 
 class NoBooleanAsDefault extends Analyzer {
     public function analyze() {
-        $this->atomIs('Function')
+        $this->atomIs(self::$FUNCTIONS_ALL)
              ->outIs('ARGUMENT')
-             ->outIs('RIGHT')
-             ->outIsIE(array('THEN', 'ELSE'))
-             ->atomIs('Boolean')
+             ->outIs('DEFAULT')
+             ->atomInside('Boolean')
              ->back('first');
         $this->prepareQuery();
     }

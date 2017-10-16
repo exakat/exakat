@@ -12,30 +12,30 @@ Label : PROJECT
           Label : LEFT
             $a
           Label : RIGHT
-            -
+            +
             Label : LEFT
-              +
+              (
+              Label : CODE
+                <<
+                Label : LEFT
+                  (
+                  Label : CODE
+                    +
+                    Label : LEFT
+                      1
+                    Label : RIGHT
+                      (
+                      Label : CODE
+                        >>
+                        Label : LEFT
+                          $b
+                        Label : RIGHT
+                          2
+                Label : RIGHT
+                  3
+            Label : RIGHT
+              -
               Label : LEFT
-                (
-                Label : CODE
-                  <<
-                  Label : LEFT
-                    (
-                    Label : CODE
-                      +
-                      Label : LEFT
-                        1
-                      Label : RIGHT
-                        (
-                        Label : CODE
-                          >>
-                          Label : LEFT
-                            $b
-                          Label : RIGHT
-                            2
-                  Label : RIGHT
-                    3
-              Label : RIGHT
                 (
                 Label : CODE
                   +
@@ -49,5 +49,5 @@ Label : PROJECT
                         $c
                       Label : RIGHT
                         5
-            Label : RIGHT
-              6
+              Label : RIGHT
+                6

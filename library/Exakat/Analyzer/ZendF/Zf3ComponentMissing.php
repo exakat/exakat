@@ -27,7 +27,7 @@ use Exakat\Data\ZendF3;
 
 class Zf3ComponentMissing extends Analyzer {
     // MVC are only default values for tests.
-    protected $component = 'zend-mvc';
+    protected $component = 'none';
     protected $version = '2.5';
     
     public function dependsOn() {
@@ -44,8 +44,7 @@ class Zf3ComponentMissing extends Analyzer {
         $classes = $this->makeFullnspath($classes);
         
         $this->analyzerIs($analyzer)
-             ->fullnspathIsNot($classes)
-             ->back('first');
+             ->fullnspathIsNot($classes);
         $this->prepareQuery();
     }
 }

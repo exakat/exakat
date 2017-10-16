@@ -163,12 +163,12 @@ class Update extends Tasks {
         }
         
         display('Running files');
-        $updateCache = new Files($this->gremlin, new Config(array(1 => '-p', 
+        $updateCache = new Files($this->gremlin, new Config(array(1 => '-p',
                                                                   2 => $project)));
         try {
             $updateCache->run();
         } catch (NoFileToProcess $e) {
-            // OK, just carry on. 
+            // OK, just carry on.
         }
     }
 }

@@ -3,7 +3,7 @@
 include_once(dirname(__DIR__).'/library/Autoload.php');
 spl_autoload_register('Autoload::autoload_library');
 
-$component = 'zend-stdlib';
+$component = 'zend-permissions-acl';
 
 if (!file_exists('projects/'.$component)){
     die("No such project as $component. Aborting\n");
@@ -17,7 +17,6 @@ $res = $sqlite->query('SELECT * FROM components
     WHERE components.component = "'.$component.'"');
 
 while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
-    print_r($row);
     processRelease($component, str_replace('release-', '', $row['release']));
 }
 
@@ -31,6 +30,11 @@ function processRelease($component, $version) {
     }
     $componentShort = ucfirst(str_replace('zend-', '', str_replace('-', '-', $component)));
     $className = 'Zf3'.$componentShort.$version2;
+    
+    if (file_exists('library/Exakat/Analyzer/ZendF/'.$className.'.php')) {
+        print $className." already exists. Skipping.\n";
+        return;
+    }
 
     $php = <<<PHP
 <?php
@@ -221,20 +225,20 @@ PHP;
     
     file_put_contents('tests/analyzer/exp/ZendF/'.$className.'.01.php', $php);
 
-// add to sqlite
-$analyzersSqlite = new Sqlite3('data/analyzers.sqlite');
-$category = 'ZendF';
-
-$idZendF = $analyzersSqlite->query("SELECT id FROM categories WHERE name='ZendFramework'")->fetchArray();
-$idZendF = $idZendF[0];
-
-$analyzersSqlite->query("INSERT INTO analyzers ('folder', 'name') VALUES ('$category', '$className')");
-$id = $analyzersSqlite->lastInsertRowID();
-
-$analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', '$idZendF')"); 
-// 38 is id for All
-$analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', 38)"); 
-unset($analyzersSqlite);
+    // add to sqlite
+    $analyzersSqlite = new Sqlite3('data/analyzers.sqlite');
+    $category = 'ZendF';
+    
+    $idZendF = $analyzersSqlite->query("SELECT id FROM categories WHERE name='ZendFramework'")->fetchArray();
+    $idZendF = $idZendF[0];
+    
+    $analyzersSqlite->query("INSERT INTO analyzers ('folder', 'name') VALUES ('$category', '$className')");
+    $id = $analyzersSqlite->lastInsertRowID();
+    
+    $analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', '$idZendF')"); 
+    // 38 is id for All
+    $analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', 38)"); 
+    unset($analyzersSqlite);
 }
 
 function processComponent($component) {
@@ -243,7 +247,7 @@ function processComponent($component) {
     
     if (file_exists(__DIR__.'/../library/Exakat/Analyzer/ZendF/'.$className.'.php')) {
         print "$component already exists\n";
-        die();
+        return;
     }
 
     $exakatVersion = \Exakat\Exakat::VERSION;
@@ -366,20 +370,21 @@ PHP;
 PHP;
     
     file_put_contents('tests/analyzer/exp/ZendF/'.$className.'.01.php', $php);    
-// add to sqlite
-$analyzersSqlite = new Sqlite3('data/analyzers.sqlite');
-$category = 'ZendF';
 
-$idZendF = $analyzersSqlite->query("SELECT id FROM categories WHERE name='ZendFramework'")->fetchArray();
-$idZendF = $idZendF[0];
-
-$analyzersSqlite->query("INSERT INTO analyzers ('folder', 'name') VALUES ('$category', '$className')");
-$id = $analyzersSqlite->lastInsertRowID();
-
-$analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', '$idZendF')"); 
-// 38 is id for All
-$analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', 38)"); 
-unset($analyzersSqlite);
+    // add to sqlite
+    $analyzersSqlite = new Sqlite3('data/analyzers.sqlite');
+    $category = 'ZendF';
+    
+    $idZendF = $analyzersSqlite->query("SELECT id FROM categories WHERE name='ZendFramework'")->fetchArray();
+    $idZendF = $idZendF[0];
+    
+    $analyzersSqlite->query("INSERT INTO analyzers ('folder', 'name') VALUES ('$category', '$className')");
+    $id = $analyzersSqlite->lastInsertRowID();
+    
+    $analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', '$idZendF')"); 
+    // 38 is id for All
+    $analyzersSqlite->query("INSERT INTO analyzers_categories VALUES ('$id', 38)"); 
+    unset($analyzersSqlite);
 }
 
 function getCounts($type, $zend3, $component, $version = null) {

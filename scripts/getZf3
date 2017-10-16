@@ -96,7 +96,7 @@ print number_format(1000 * ($end - $begin), 2). " ms\n";
 
 function readRelease($component, $componentId) {
     global $sqlite;
-    $res = shell_exec('cd projects/'.$component.'/code/; git fetch --all --quiet ; git tag -l | egrep \'release-[23]\.[0-9]\.0$\'');
+    $res = shell_exec('cd projects/'.$component.'/code/; git pull; git checkout --quiet master; git tag -l | egrep \'release-[23]\.[0-9]\.0$\'');
     $versions = explode("\n", trim($res));
     $versions = array_filter($versions, function ($x) { return version_compare('2.4.99', str_replace('release-', '', $x)) < 0; });
     
@@ -120,7 +120,7 @@ function readRelease($component, $componentId) {
         }
     }
     
-    shell_exec('cd projects/'.$component.'/code/; git checkout HEAD');
+    shell_exec('cd projects/'.$component.'/code/; git checkout --quiet master');
     
     return count($versions);
 }
