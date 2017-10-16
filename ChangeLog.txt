@@ -1,4 +1,4 @@
-Version 0.12.16 (Tawny Lion Demon, coming up)
+Version 0.12.17 (Roushi Demon, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,22 @@ Version 0.12.16 (Tawny Lion Demon, coming up)
     + 
 + Tokenizer
     + 
+
+Version 0.12.16 (Tawny Lion Demon, 2017/10/16)
++ Report
+    + Beta version for Drill Instructor
+    + Upgraded Inventories report with Sessions, Cookies, Incoming variables
++ Analyzer
+    + New analysis : Expression too complex.
+    + New analysis : Session Handler must implements SessionUpdateTimestampHandlerInterface
+    + New analysis : is Zero : additions that negate some terms
+    + New analysis : unconditional loops
+    + Upgraded Zend Framework review with latest versions (feed, http, eventmanager...)
+    + Upgraded 'Strange names' with new typos
+    + Upgraded 'Logical to in_array' to handle separated comparisons
+    + Checked unit tests : 2515 / 2505 test pass (99% pass). 
++ Tokenizer
+    + Fixed bug with Sign in Additions.
 
 Version 0.12.15 (Nine Headed Lion, 2017-10-09)
 + Architecture
