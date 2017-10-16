@@ -98,7 +98,8 @@ SQL;
             $query = <<<SQL
 CREATE TABLE resultsCounts ( id INTEGER PRIMARY KEY AUTOINCREMENT,
                              analyzer STRING,
-                             count INTEGER DEFAULT -6
+                             count INTEGER DEFAULT -6,
+                            CONSTRAINT "analyzers" UNIQUE (analyzer) ON CONFLICT REPLACE
                            )
 SQL;
             $this->sqlite->query($query);
@@ -844,14 +845,16 @@ g.V().$filter.has('constant', true)
          ];
 }
 
-GREMLIN
-            ;
+GREMLIN;
             $res = $this->gremlin->query($query);
-            if (!($res instanceof \stdClass)) {
-                continue;
+            if ($res instanceof \stdClass) {
+                $res = $res->results;
+            } elseif (is_array($res)) {
+                // nothing, really 
+            } else {
+                assert(false, '$res is not an array, nor an object.');
             }
-            $res = $res->results;
-
+    
             $total = 0;
             $query = array();
             foreach($res as $value => $row) {
