@@ -42,6 +42,7 @@ Exakat groups analysis by themes. This way, analyzing 'Security' runs all possib
 * Level 1
 * Level 2
 * Level 3
+* Level 4
 * Newfeatures
 * OneFile
 * PHP recommendations
@@ -65,6 +66,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Ambassador
   * AmbassadorNoMenu
   * Devoops
+  * Drillinstructor
   * Text
   * Xml
   * Uml
@@ -308,10 +310,30 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.12.16
+
+  * Cookies Variables (Php/CookiesVariables)
+  * Incoming Variables (Php/IncomingVariables ; Inventory)
+  * Session Variables (Php/SessionVariables ; Inventory)
+  * Too Complex Expression (Structures/ComplexExpression ; Analyze)
+  * Unconditional Break In Loop (Structures/UnconditionLoopBreak ; Analyze, Level 3)
+  * zend-eventmanager 3.2.0 Undefined Classes (ZendF/Zf3Eventmanager32 ; ZendFramework)
+  * zend-feed 2.8.0 Undefined Classes (ZendF/Zf3Feed28 ; ZendFramework)
+  * zend-http 2.7.0 Undefined Classes (ZendF/Zf3Http27 ; ZendFramework)
+  * zend-mail 2.8.0 Undefined Classes (ZendF/Zf3Mail28 ; ZendFramework)
+  * zend-modulemanager 2.8.0 Undefined Classes (ZendF/Zf3Modulemanager28 ; ZendFramework)
+  * zend-mvc 3.1.0 Undefined Classes (ZendF/Zf3Mvc31 ; ZendFramework)
+  * zend-session 2.8.0 Undefined Classes (ZendF/Zf3Session28 ; ZendFramework)
+  * zend-test 3.1.0 Undefined Classes (ZendF/Zf3Test31 ; ZendFramework)
+  * zend-validator 2.9.0 Undefined Classes (ZendF/Zf3Validator29 ; ZendFramework)
+
 * 0.12.15
 
   * Always Anchor Regex (Security/AnchorRegex)
-  * Multiple Type Variable (Structures/MultipleTypeVariable ; Analyze)
+  * Is Actually Zero (Structures/IsZero ; Analyze, Level 2)
+  * Multiple Type Variable (Structures/MultipleTypeVariable ; Analyze, Level 4)
+  * Security/SessionLazyWrite (Security/SessionLazyWrite ; Security)
+  * zend-code 3.2.0 Undefined Classes (ZendF/Zf3Code32 ; ZendFramework, ZendFramework)
 
 * 0.12.14
 
@@ -329,7 +351,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Be Protected Class Constant (Classes/CouldBeProtectedConstant ; Analyze)
   * Could Be Protected Method (Classes/CouldBeProtectedMethod ; Analyze)
   * Method Used Below (Classes/MethodUsedBelow ; Analyze)
-  * Pathinfo() Returns May Vary (Php/PathinfoReturns ; Analyze)
+  * Pathinfo() Returns May Vary (Php/PathinfoReturns ; Analyze, Level 4)
   * Property Could Be Private Method (Classes/CouldBePrivateMethod)
 
 * 0.12.10
@@ -362,7 +384,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Child Class Removes Typehint (Classes/ChildRemoveTypehint)
   * Isset Multiple Arguments (Php/IssetMultipleArgs ; Suggestions)
   * Logical Operators Favorite (Php/LetterCharsLogicalFavorite ; Preferences)
-  * No Magic With Array (Classes/NoMagicWithArray ; Analyze)
+  * No Magic With Array (Classes/NoMagicWithArray ; Analyze, Level 4)
   * Optional Parameter (Functions/OptionalParameter ; DefensiveProgrammingTM)
   * PHP 7.2 Object Keyword (Php/Php72ObjectKeyword ; CompatibilityPHP72, CompatibilityPHP73)
   * PHP 72 Removed Classes (Php/Php72RemovedClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71)
@@ -387,7 +409,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Const Or Define (Structures/ConstDefineFavorite ; Appinfo)
   * Declare strict_types Usage (Php/DeclareStrictType ; Appinfo, Preferences)
   * Encoding Usage (Php/DeclareEncoding)
-  * Mismatched Ternary Alternatives (Structures/MismatchedTernary ; Analyze)
+  * Mismatched Ternary Alternatives (Structures/MismatchedTernary ; Analyze, Suggestions, Level 4)
   * No Return Or Throw In Finally (Structures/NoReturnInFinally ; Security)
   * Ticks Usage (Php/DeclareTicks ; Preferences)
 
@@ -449,7 +471,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.11.3
 
-  * No Return Used (Functions/NoReturnUsed ; Analyze)
+  * No Return Used (Functions/NoReturnUsed ; Analyze, Suggestions, Level 4)
   * Only Variable Passed By Reference (Functions/OnlyVariablePassedByReference ; Analyze)
   * Try With Multiple Catch (Php/TryMultipleCatch ; Appinfo)
   * ext/grpc (Extensions/Extgrpc)
@@ -471,7 +493,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Crc32() Might Be Negative (Php/Crc32MightBeNegative ; Analyze, PHP recommendations)
   * Empty Final Element (Arrays/EmptyFinal)
   * Strings With Strange Space (Type/StringWithStrangeSpace ; Analyze)
-  * Suspicious Comparison (Structures/SuspiciousComparison ; Analyze)
+  * Suspicious Comparison (Structures/SuspiciousComparison ; Analyze, Level 3)
 
 * 0.10.9
 
@@ -599,10 +621,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * zend-captcha 2.6.0 Undefined Classes (ZendF/Zf3Captcha26 ; ZendFramework)
   * zend-captcha 2.7.0 Undefined Classes (ZendF/Zf3Captcha27 ; ZendFramework)
   * zend-captcha Usage (ZendF/Zf3Captcha ; ZendFramework)
-  * zend-code 2.5.0 Undefined Classes (ZendF/Zf3Code25 ; ZendFramework)
-  * zend-code 2.6.0 Undefined Classes (ZendF/Zf3Code26 ; ZendFramework)
-  * zend-code 3.0.0 Undefined Classes (ZendF/Zf3Code30 ; ZendFramework)
-  * zend-code 3.1.0 Undefined Classes (ZendF/Zf3Code31 ; ZendFramework)
+  * zend-code 2.5.0 Undefined Classes (ZendF/Zf3Code25 ; ZendFramework, ZendFramework)
+  * zend-code 2.6.0 Undefined Classes (ZendF/Zf3Code26 ; ZendFramework, ZendFramework)
+  * zend-code 3.0.0 Undefined Classes (ZendF/Zf3Code30 ; ZendFramework, ZendFramework)
+  * zend-code 3.1.0 Undefined Classes (ZendF/Zf3Code31 ; ZendFramework, ZendFramework)
   * zend-code Usage (ZendF/Zf3Code ; ZendFramework)
   * zend-console 2.5.0 Undefined Classes (ZendF/Zf3Console25 ; ZendFramework)
   * zend-console 2.6.0 Undefined Classes (ZendF/Zf3Console26 ; ZendFramework)
@@ -753,14 +775,14 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Multiple Alias Definitions Per File (Namespaces/MultipleAliasDefinitionPerFile ; Analyze)
   * Property Used In One Method Only (Classes/PropertyUsedInOneMethodOnly ; Analyze)
   * Used Once Property (Classes/UsedOnceProperty ; Analyze)
-  * __DIR__ Then Slash (Structures/DirThenSlash ; Analyze)
+  * __DIR__ Then Slash (Structures/DirThenSlash ; Analyze, Level 3)
   * self, parent, static Outside Class (Classes/NoPSSOutsideClass)
 
 * 0.10.2
 
   * Class Function Confusion (Php/ClassFunctionConfusion ; Analyze)
   * Forgotten Thrown (Exceptions/ForgottenThrown)
-  * Should Use array_column() (Php/ShouldUseArrayColumn ; Analyze, Performances)
+  * Should Use array_column() (Php/ShouldUseArrayColumn ; Analyze, Performances, Suggestions, Level 4)
   * ext/libsodium (Extensions/Extlibsodium ; Appinfo, Appcontent)
 
 * 0.10.1
@@ -831,7 +853,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 
 * 0.9.1
 
-  * Avoid Using stdClass (Php/UseStdclass ; Analyze, OneFile, Codacy, Simple)
+  * Avoid Using stdClass (Php/UseStdclass ; Analyze, OneFile, Codacy, Simple, Level 4)
   * Avoid array_push() (Performances/AvoidArrayPush ; Performances, PHP recommendations)
   * Could Return Void (Functions/CouldReturnVoid)
   * Invalid Octal In String (Type/OctalInString ; Inventory, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
@@ -853,23 +875,23 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
 * 0.8.9
 
   * Array() / [  ] Consistence (Arrays/ArrayBracketConsistence)
-  * Bail Out Early (Structures/BailOutEarly ; Analyze, OneFile, Codacy, Simple)
+  * Bail Out Early (Structures/BailOutEarly ; Analyze, OneFile, Codacy, Simple, Level 4)
   * Die Exit Consistence (Structures/DieExitConsistance ; Preferences)
   * Dont Change The Blind Var (Structures/DontChangeBlindKey ; Analyze, Codacy)
   * More Than One Level Of Indentation (Structures/OneLevelOfIndentation ; Calisthenics)
   * One Dot Or Object Operator Per Line (Structures/OneDotOrObjectOperatorPerLine ; Calisthenics)
   * PHP 7.1 Microseconds (Php/Php71microseconds ; CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
-  * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Codacy, Simple)
+  * Unitialized Properties (Classes/UnitializedProperties ; Analyze, OneFile, Codacy, Simple, Suggestions, Level 4)
   * Use Wordpress Functions (Wordpress/UseWpFunctions ; Wordpress)
   * Useless Check (Structures/UselessCheck ; Analyze, OneFile, Codacy, Simple, Level 1)
 
 * 0.8.7
 
   * Dont Echo Error (Security/DontEchoError ; Analyze, Security, Codacy, Simple, Level 1)
-  * No Isset With Empty (Structures/NoIssetWithEmpty ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple)
+  * No Isset With Empty (Structures/NoIssetWithEmpty ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple, Level 4)
   * Performances/timeVsstrtotime (Performances/timeVsstrtotime ; Performances, OneFile, RadwellCodes)
   * Use Class Operator (Classes/UseClassOperator)
-  * Useless Casting (Structures/UselessCasting ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple)
+  * Useless Casting (Structures/UselessCasting ; Analyze, PHP recommendations, OneFile, RadwellCodes, Codacy, Simple, Level 4)
   * ext/rar (Extensions/Extrar ; Appinfo)
 
 * 0.8.6
@@ -895,7 +917,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * $this Is Not For Static Methods (Classes/ThisIsNotForStatic ; Analyze, Codacy)
   * ** For Exponent (Php/NewExponent ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * ::class (Php/StaticclassUsage ; CompatibilityPHP54, CompatibilityPHP53)
-  * <?= Usage (Php/EchoTagUsage ; Analyze, Appinfo, Codacy, Simple)
+  * <?= Usage (Php/EchoTagUsage ; Appinfo, Codacy, Simple)
   * @ Operator (Structures/Noscream ; Analyze, Appinfo, ClearPHP)
   * Abstract Class Usage (Classes/Abstractclass ; Appinfo, Appcontent)
   * Abstract Methods Usage (Classes/Abstractmethods ; Appinfo, Appcontent)
@@ -907,7 +929,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Aliases (Namespaces/Alias ; Appinfo)
   * Aliases Usage (Functions/AliasesUsage ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
   * All Uppercase Variables (Variables/VariableUppercase ; Coding Conventions)
-  * Already Parents Interface (Interfaces/AlreadyParentsInterface ; Analyze, Codacy)
+  * Already Parents Interface (Interfaces/AlreadyParentsInterface ; Analyze, Codacy, Level 3)
   * Altering Foreach Without Reference (Structures/AlteringForeachWithoutReference ; Analyze, ClearPHP, Codacy, Simple, Level 1)
   * Alternative Syntax (Php/AlternativeSyntax ; Appinfo)
   * Always Positive Comparison (Structures/NeverNegative ; Analyze, Codacy, Simple)
@@ -919,7 +941,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Arrays Is Modified (Arrays/IsModified ; Internal)
   * Arrays Is Read (Arrays/IsRead ; Internal)
   * Assertions (Php/AssertionUsage ; Appinfo)
-  * Assign Default To Properties (Classes/MakeDefault ; Analyze, ClearPHP, Codacy, Simple)
+  * Assign Default To Properties (Classes/MakeDefault ; Analyze, ClearPHP, Codacy, Simple, Level 2)
   * Autoloading (Php/AutoloadUsage ; Appinfo)
   * Avoid Parenthesis (Structures/PrintWithoutParenthesis ; Analyze, Codacy, Simple)
   * Avoid Those Hash Functions (Security/AvoidThoseCrypto ; Security)
@@ -985,8 +1007,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Could Be Static (Structures/CouldBeStatic ; Analyze, OneFile, Codacy)
   * Could Use Alias (Namespaces/CouldUseAlias ; Analyze, OneFile, Codacy)
   * Could Use Short Assignation (Structures/CouldUseShortAssignation ; Analyze, Performances, OneFile, Codacy, Simple)
-  * Could Use __DIR__ (Structures/CouldUseDir ; Analyze, Codacy, Simple, Suggestions)
-  * Could Use self (Classes/ShouldUseSelf ; Analyze, Codacy, Simple)
+  * Could Use __DIR__ (Structures/CouldUseDir ; Analyze, Codacy, Simple, Suggestions, Level 3)
+  * Could Use self (Classes/ShouldUseSelf ; Analyze, Codacy, Simple, Suggestions, Level 3)
   * Curly Arrays (Arrays/CurlyArrays ; Coding Conventions)
   * Custom Class Usage (Classes/AvoidUsing ; Custom)
   * Custom Constant Usage (Constants/CustomConstantUsage ; )
@@ -999,7 +1021,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Defined Properties (Classes/DefinedProperty ; Internal)
   * Defined static:: Or self:: (Classes/DefinedStaticMP ; Internal)
   * Definitions Only (Files/DefinitionsOnly ; Internal)
-  * Dependant Trait (Traits/DependantTrait ; Analyze, Codacy)
+  * Dependant Trait (Traits/DependantTrait ; Analyze, Codacy, Level 3)
   * Deprecated Code (Php/Deprecated ; Analyze, Codacy)
   * Deprecated Methodcalls in Cake 3.2 (Cakephp/Cake32DeprecatedMethods ; Cakephp)
   * Deprecated Methodcalls in Cake 3.3 (Cakephp/Cake33DeprecatedMethods ; Cakephp)
@@ -1022,7 +1044,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Dynamic Property (Classes/DynamicPropertyCall ; Appinfo)
   * Dynamically Called Classes (Classes/VariableClasses ; Appinfo)
   * Echo Or Print (Structures/EchoPrintConsistance ; Coding Conventions, Preferences)
-  * Echo With Concat (Structures/EchoWithConcat ; Analyze, Performances, Codacy, Simple)
+  * Echo With Concat (Structures/EchoWithConcat ; Analyze, Performances, Codacy, Simple, Suggestions)
   * Ellipsis Usage (Php/EllipsisUsage ; Appinfo, CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * Else If Versus Elseif (Structures/ElseIfElseif ; Analyze, Codacy, Simple)
   * Else Usage (Structures/ElseUsage ; Appinfo, Appcontent, Calisthenics)
@@ -1036,7 +1058,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Empty Namespace (Namespaces/EmptyNamespace ; Analyze, Dead code, OneFile, Codacy, Simple)
   * Empty Slots In Arrays (Arrays/EmptySlots ; Coding Conventions)
   * Empty Traits (Traits/EmptyTrait ; Analyze, Codacy, Simple)
-  * Empty Try Catch (Structures/EmptyTryCatch ; Analyze, Codacy)
+  * Empty Try Catch (Structures/EmptyTryCatch ; Analyze, Codacy, Level 3)
   * Empty With Expression (Structures/EmptyWithExpression ; CompatibilityPHP55, CompatibilityPHP56, OneFile, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Error Messages (Structures/ErrorMessages ; Appinfo, ZendFramework)
   * Eval() Usage (Structures/EvalUsage ; Analyze, Appinfo, Performances, OneFile, ClearPHP, Codacy, Simple)
@@ -1046,7 +1068,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Exponent Usage (Php/ExponentUsage ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * Ext/geoip (Extensions/Extgeoip ; Appinfo)
   * External Config Files (Files/Services ; Internal)
-  * Failed Substr Comparison (Structures/FailingSubstrComparison ; Analyze, Codacy, Simple)
+  * Failed Substr Comparison (Structures/FailingSubstrComparison ; Analyze, Codacy, Simple, Level 3)
   * File Is Component (Files/IsComponent ; Internal)
   * File Uploads (Structures/FileUploadUsage ; Appinfo)
   * File Usage (Structures/FileUsage ; Appinfo)
@@ -1079,10 +1101,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Globals (Variables/Globals ; Internal)
   * Goto Names (Php/Gotonames ; Appinfo, ClearPHP)
   * HTTP Status Code (Type/HttpStatus ; Inventory)
-  * Hardcoded Passwords (Functions/HardcodedPasswords ; Analyze, Security, OneFile, Codacy, Simple)
+  * Hardcoded Passwords (Functions/HardcodedPasswords ; Analyze, Security, OneFile, Codacy, Simple, Level 3)
   * Has Magic Property (Classes/HasMagicProperty ; Internal)
   * Has Variable Arguments (Functions/VariableArguments ; Appinfo, Internal)
-  * Hash Algorithms (Php/HashAlgos ; Analyze, Codacy)
+  * Hash Algorithms (Php/HashAlgos ; Analyze, Codacy, Level 4)
   * Hash Algorithms Incompatible With PHP 5.3 (Php/HashAlgos53 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Hash Algorithms Incompatible With PHP 5.4/5 (Php/HashAlgos54 ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Heredoc Delimiter Glossary (Type/Heredoc ; Appinfo)
@@ -1136,8 +1158,8 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Locally Unused Property (Classes/LocallyUnusedProperty ; Analyze, Dead code, Codacy, Simple)
   * Locally Used Property (Classes/LocallyUsedProperty ; Internal)
   * Logical Mistakes (Structures/LogicalMistakes ; Analyze, Codacy, Simple, Level 1)
-  * Logical Should Use Symbolic Operators (Php/LogicalInLetters ; Analyze, OneFile, ClearPHP, Codacy, Simple)
-  * Lone Blocks (Structures/LoneBlock ; Analyze, Codacy, Simple)
+  * Logical Should Use Symbolic Operators (Php/LogicalInLetters ; Analyze, OneFile, ClearPHP, Codacy, Simple, Suggestions, Level 2)
+  * Lone Blocks (Structures/LoneBlock ; Analyze, Codacy, Simple, Level 4)
   * Lost References (Variables/LostReferences ; Analyze, Codacy, Simple)
   * Magic Constant Usage (Constants/MagicConstantUsage ; Appinfo)
   * Magic Methods (Classes/MagicMethod ; Appinfo)
@@ -1167,10 +1189,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Multiple Returns (Functions/MultipleReturn ; )
   * Multiples Identical Case (Structures/MultipleDefinedCase ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
   * Multiply By One (Structures/MultiplyByOne ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
-  * Must Return Methods (Functions/MustReturn ; Analyze, Codacy, Simple)
+  * Must Return Methods (Functions/MustReturn ; Analyze, Codacy, Simple, Level 2)
   * Namespaces (Namespaces/NamespaceUsage ; Appinfo)
   * Namespaces Glossary (Namespaces/Namespacesnames ; Appinfo)
-  * Negative Power (Structures/NegativePow ; Analyze, OneFile, Codacy, Simple)
+  * Negative Power (Structures/NegativePow ; Analyze, OneFile, Codacy, Simple, Level 3)
   * Nested Ifthen (Structures/NestedIfthen ; Analyze, RadwellCodes, Codacy)
   * Nested Loops (Structures/NestedLoops ; Appinfo)
   * Nested Ternary (Structures/NestedTernary ; Analyze, ClearPHP, Codacy, Simple, Level 1)
@@ -1180,10 +1202,10 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * New Functions In PHP 5.6 (Php/Php56NewFunctions ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP53)
   * New Functions In PHP 7.0 (Php/Php70NewFunctions ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP71)
   * New Functions In PHP 7.1 (Php/Php71NewFunctions ; CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
-  * No Choice (Structures/NoChoice ; Analyze, Codacy, Simple)
+  * No Choice (Structures/NoChoice ; Analyze, Codacy, Simple, Level 2)
   * No Count With 0 (Performances/NotCountNull ; Performances)
   * No Direct Access (Structures/NoDirectAccess ; Appinfo)
-  * No Direct Call To Magic Method (Classes/DirectCallToMagicMethod ; Analyze, Codacy)
+  * No Direct Call To Magic Method (Classes/DirectCallToMagicMethod ; Analyze, Codacy, Level 2)
   * No Direct Usage (Structures/NoDirectUsage ; Analyze, Codacy, Simple)
   * No Global Modification (Wordpress/NoGlobalModification ; Wordpress)
   * No Hardcoded Hash (Structures/NoHardcodedHash ; Analyze, Security, Codacy, Simple)
@@ -1192,14 +1214,14 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * No Hardcoded Port (Structures/NoHardcodedPort ; Analyze, Security, ClearPHP, Codacy, Simple)
   * No Implied If (Structures/ImpliedIf ; Analyze, ClearPHP, Codacy, Simple)
   * No List With String (Php/NoListWithString ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * No Parenthesis For Language Construct (Structures/NoParenthesisForLanguageConstruct ; Analyze, ClearPHP, RadwellCodes, Codacy, Simple)
+  * No Parenthesis For Language Construct (Structures/NoParenthesisForLanguageConstruct ; Analyze, ClearPHP, RadwellCodes, Codacy, Simple, Suggestions, Level 2)
   * No Plus One (Structures/PlusEgalOne ; Coding Conventions, OneFile)
   * No Public Access (Classes/NoPublicAccess ; Analyze, Codacy)
-  * No Real Comparison (Type/NoRealComparison ; Analyze, Codacy, Simple)
+  * No Real Comparison (Type/NoRealComparison ; Analyze, Codacy, Simple, Level 2)
   * No Self Referencing Constant (Classes/NoSelfReferencingConstant ; Analyze, Codacy, Simple)
   * No String With Append (Php/NoStringWithAppend ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * No Substr() One (Structures/NoSubstrOne ; Analyze, Performances, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple, CompatibilityPHP73)
-  * No array_merge() In Loops (Performances/ArrayMergeInLoops ; Analyze, Performances, ClearPHP, Codacy, Simple)
+  * No Substr() One (Structures/NoSubstrOne ; Analyze, Performances, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple, CompatibilityPHP73, Level 2)
+  * No array_merge() In Loops (Performances/ArrayMergeInLoops ; Analyze, Performances, ClearPHP, Codacy, Simple, Level 2)
   * Non Ascii Variables (Variables/VariableNonascii ; Analyze, Codacy)
   * Non Static Methods Called In A Static (Classes/NonStaticMethodsCalledStatic ; Analyze, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple, CompatibilityPHP73)
   * Non-constant Index In Array (Arrays/NonConstantArray ; Analyze, Codacy, Simple)
@@ -1214,7 +1236,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Nowdoc Delimiter Glossary (Type/Nowdoc ; Appinfo)
   * Null Coalesce (Php/NullCoalesce ; Appinfo)
   * Null On New (Classes/NullOnNew ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, OneFile, Simple)
-  * Objects Don't Need References (Structures/ObjectReferences ; Analyze, OneFile, ClearPHP, Codacy, Simple)
+  * Objects Don't Need References (Structures/ObjectReferences ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 2)
   * Octal Glossary (Type/Octal ; Appinfo)
   * Old Style Constructor (Classes/OldStyleConstructor ; Analyze, Appinfo, OneFile, ClearPHP, Codacy, Simple)
   * Old Style __autoload() (Php/oldAutoloadUsage ; Analyze, OneFile, ClearPHP, Codacy, Simple)
@@ -1226,7 +1248,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Or Die (Structures/OrDie ; Analyze, OneFile, ClearPHP, Codacy, Simple)
   * Overwriting Variable (Variables/Overwriting ; Analyze, Codacy)
   * Overwritten Class Const (Classes/OverwrittenConst ; Appinfo)
-  * Overwritten Exceptions (Exceptions/OverwriteException ; Analyze, Codacy, Simple)
+  * Overwritten Exceptions (Exceptions/OverwriteException ; Analyze, Codacy, Simple, Suggestions, Level 4)
   * Overwritten Literals (Variables/OverwrittenLiterals ; Analyze, Codacy)
   * PHP 7.0 New Classes (Php/Php70NewClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP71)
   * PHP 7.0 New Interfaces (Php/Php70NewInterfaces ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP71)
@@ -1251,7 +1273,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Php 71 New Classes (Php/Php71NewClasses ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP73)
   * Php7 Relaxed Keyword (Php/Php7RelaxedKeyword ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
   * Phpinfo (Structures/PhpinfoUsage ; Analyze, OneFile, Codacy, Simple)
-  * Pre-increment (Performances/PrePostIncrement ; Analyze, Performances, Codacy, Simple)
+  * Pre-increment (Performances/PrePostIncrement ; Analyze, Performances, Codacy, Simple, Level 4)
   * Preprocess Arrays (Arrays/ShouldPreprocess ; Analyze, Codacy, Simple)
   * Preprocessable (Structures/ShouldPreprocess ; Analyze, Codacy)
   * Print And Die (Structures/PrintAndDie ; Analyze, Codacy, Simple)
@@ -1277,7 +1299,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * References (Variables/References ; Appinfo)
   * Register Globals (Security/RegisterGlobals ; Security)
   * Relay Function (Functions/RelayFunction ; Analyze, Codacy)
-  * Repeated print() (Structures/RepeatedPrint ; Analyze, Codacy, Simple)
+  * Repeated print() (Structures/RepeatedPrint ; Analyze, Codacy, Simple, Suggestions, Level 3)
   * Reserved Keywords In PHP 7 (Php/ReservedKeywords7 ; CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Resources Usage (Structures/ResourcesUsage ; Appinfo)
   * Results May Be Missing (Structures/ResultMayBeMissing ; Analyze, Codacy, Simple)
@@ -1299,7 +1321,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Should Chain Exception (Structures/ShouldChainException ; Analyze, Codacy, Simple)
   * Should Make Alias (Namespaces/ShouldMakeAlias ; Analyze, OneFile, ZendFramework, Codacy, Simple)
   * Should Typecast (Type/ShouldTypecast ; Analyze, OneFile, Codacy, Simple)
-  * Should Use Coalesce (Php/ShouldUseCoalesce ; Analyze, Codacy, Simple, Suggestions)
+  * Should Use Coalesce (Php/ShouldUseCoalesce ; Analyze, Codacy, Simple, Suggestions, Level 3)
   * Should Use Constants (Functions/ShouldUseConstants ; Analyze, Codacy, Simple)
   * Should Use Local Class (Classes/ShouldUseThis ; Analyze, ClearPHP, Codacy, Simple)
   * Should Use Prepared Statement (Security/ShouldUsePreparedStatement ; Analyze, Security, Codacy, Simple)
@@ -1308,30 +1330,30 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Simplify Regex (Structures/SimplePreg ; Performances)
   * Slow Functions (Performances/SlowFunctions ; Performances, OneFile)
   * Special Integers (Type/SpecialIntegers ; Inventory)
-  * Static Loop (Structures/StaticLoop ; Analyze, Codacy, Simple)
+  * Static Loop (Structures/StaticLoop ; Analyze, Codacy, Simple, Level 4)
   * Static Methods (Classes/StaticMethods ; Appinfo)
   * Static Methods Called From Object (Classes/StaticMethodsCalledFromObject ; Analyze, Codacy, Simple)
   * Static Methods Can't Contain $this (Classes/StaticContainsThis ; Analyze, ClearPHP, Codacy, Simple, Level 1)
   * Static Names (Classes/StaticCpm ; )
   * Static Properties (Classes/StaticProperties ; Appinfo)
   * Static Variables (Variables/StaticVariables ; Appinfo)
-  * Strict Comparison With Booleans (Structures/BooleanStrictComparison ; Analyze, Codacy, Simple)
+  * Strict Comparison With Booleans (Structures/BooleanStrictComparison ; Analyze, Codacy, Simple, Suggestions, Level 2)
   * String May Hold A Variable (Type/StringHoldAVariable ; Analyze, Codacy, Simple)
   * String glossary (Type/String ; )
-  * Strpos Comparison (Structures/StrposCompare ; Analyze, PHP recommendations, ClearPHP, Codacy, Simple)
+  * Strpos Comparison (Structures/StrposCompare ; Analyze, PHP recommendations, ClearPHP, Codacy, Simple, Level 2)
   * Super Global Usage (Php/SuperGlobalUsage ; Appinfo)
   * Super Globals Contagion (Security/SuperGlobalContagion ; Internal)
   * Switch To Switch (Structures/SwitchToSwitch ; Analyze, RadwellCodes, Codacy, Simple)
   * Switch With Too Many Default (Structures/SwitchWithMultipleDefault ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53, ClearPHP, Codacy, Simple)
   * Switch Without Default (Structures/SwitchWithoutDefault ; Analyze, ClearPHP, Codacy, Simple)
-  * Ternary In Concat (Structures/TernaryInConcat ; Analyze, Codacy, Simple)
+  * Ternary In Concat (Structures/TernaryInConcat ; Analyze, Codacy, Simple, Level 3)
   * Test Class (Classes/TestClass ; Appinfo)
   * Throw (Php/ThrowUsage ; Appinfo)
   * Throw Functioncall (Exceptions/ThrowFunctioncall ; Analyze, Codacy, Simple, Level 1)
   * Throw In Destruct (Classes/ThrowInDestruct ; Analyze, Codacy, Simple)
   * Thrown Exceptions (Exceptions/ThrownExceptions ; Appinfo)
   * Throws An Assignement (Structures/ThrowsAndAssign ; Analyze, Codacy, Simple)
-  * Timestamp Difference (Structures/TimestampDifference ; Analyze, Codacy, Simple)
+  * Timestamp Difference (Structures/TimestampDifference ; Analyze, Codacy, Simple, Level 3)
   * Too Many Children (Classes/TooManyChildren ; )
   * Trait Methods (Traits/TraitMethod ; )
   * Trait Names (Traits/Traitnames ; Appinfo)
@@ -1342,7 +1364,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Typehints (Functions/Typehints ; Appinfo)
   * URL List (Type/Url ; Inventory)
   * Uncaught Exceptions (Exceptions/UncaughtExceptions ; Analyze, Codacy)
-  * Unchecked Resources (Structures/UncheckedResources ; Analyze, ClearPHP, Codacy, Simple)
+  * Unchecked Resources (Structures/UncheckedResources ; Analyze, ClearPHP, Codacy, Simple, Level 2)
   * Undefined Caught Exceptions (Exceptions/CaughtButNotThrown ; Dead code)
   * Undefined Class Constants (Classes/UndefinedConstants ; Analyze, Codacy)
   * Undefined Classes (Classes/UndefinedClasses ; Analyze, Codacy)
@@ -1366,7 +1388,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unknown Directive Name (Php/DirectiveName ; Analyze, Codacy)
   * Unkown Regex Options (Structures/UnknownPregOption ; Analyze, Codacy, Simple)
   * Unpreprocessed Values (Structures/Unpreprocessed ; Analyze, OneFile, ClearPHP, Codacy, Simple)
-  * Unreachable Code (Structures/UnreachableCode ; Analyze, Dead code, OneFile, ClearPHP, Codacy, Simple)
+  * Unreachable Code (Structures/UnreachableCode ; Analyze, Dead code, OneFile, ClearPHP, Codacy, Simple, Suggestions, Level 3)
   * Unresolved Catch (Classes/UnresolvedCatch ; Dead code, ClearPHP)
   * Unresolved Classes (Classes/UnresolvedClasses ; Analyze, Codacy)
   * Unresolved Instanceof (Classes/UnresolvedInstanceof ; Analyze, Dead code, ClearPHP, Codacy, Simple)
@@ -1380,7 +1402,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Unused Constants (Constants/UnusedConstants ; Analyze, Dead code, Codacy, Simple)
   * Unused Functions (Functions/UnusedFunctions ; Analyze, Dead code, Codacy, Simple)
   * Unused Global (Structures/UnusedGlobal ; Analyze, Codacy, Simple)
-  * Unused Interfaces (Interfaces/UnusedInterfaces ; Analyze, Dead code, Codacy, Simple)
+  * Unused Interfaces (Interfaces/UnusedInterfaces ; Analyze, Dead code, Codacy, Simple, Suggestions, Level 2)
   * Unused Label (Structures/UnusedLabel ; Analyze, Dead code, Codacy, Simple)
   * Unused Methods (Classes/UnusedMethods ; Analyze, Dead code, Codacy, Simple)
   * Unused Private Properties (Classes/UnusedPrivateProperty ; Analyze, Dead code, OneFile, Codacy, Simple)
@@ -1401,19 +1423,19 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Use Lower Case For Parent, Static And Self (Php/CaseForPSS ; CompatibilityPHP54, CompatibilityPHP53, Codacy)
   * Use Nullable Type (Php/UseNullableType ; Appinfo, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
   * Use Object Api (Php/UseObjectApi ; Analyze, ClearPHP, Codacy, Simple)
-  * Use Pathinfo (Php/UsePathinfo ; Analyze, Codacy, Simple)
-  * Use System Tmp (Structures/UseSystemTmp ; Analyze, Codacy, Simple)
+  * Use Pathinfo (Php/UsePathinfo ; Analyze, Codacy, Simple, Level 3)
+  * Use System Tmp (Structures/UseSystemTmp ; Analyze, Codacy, Simple, Level 3)
   * Use This (Classes/UseThis ; Internal)
   * Use Web (Php/UseWeb ; Appinfo)
   * Use With Fully Qualified Name (Namespaces/UseWithFullyQualifiedNS ; Analyze, Coding Conventions, PHP recommendations, Codacy, Simple)
   * Use const (Constants/ConstRecommended ; Analyze, Coding Conventions, Codacy)
   * Use password_hash() (Php/Password55 ; CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, CompatibilityPHP73)
-  * Use random_int() (Php/BetterRand ; Analyze, Security, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple, CompatibilityPHP73)
+  * Use random_int() (Php/BetterRand ; Analyze, Security, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple, CompatibilityPHP73, Level 2)
   * Used Classes (Classes/UsedClass ; Internal)
   * Used Functions (Functions/UsedFunctions ; Internal)
   * Used Interfaces (Interfaces/UsedInterfaces ; Internal)
   * Used Methods (Classes/UsedMethods ; Internal)
-  * Used Once Variables (In Scope) (Variables/VariableUsedOnceByContext ; Analyze, OneFile, ClearPHP, Codacy, Simple)
+  * Used Once Variables (In Scope) (Variables/VariableUsedOnceByContext ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 4)
   * Used Once Variables (Variables/VariableUsedOnce ; Analyze, OneFile, Codacy, Simple)
   * Used Protected Method (Classes/UsedProtectedMethod ; Dead code)
   * Used Static Methods (Classes/UsedPrivateMethod ; Internal)
@@ -1422,15 +1444,15 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Used Use (Namespaces/UsedUse ; )
   * Useless Abstract Class (Classes/UselessAbstract ; Analyze, Codacy, Simple)
   * Useless Brackets (Structures/UselessBrackets ; Analyze, RadwellCodes, Codacy, Simple)
-  * Useless Constructor (Classes/UselessConstructor ; Analyze, Codacy, Simple)
+  * Useless Constructor (Classes/UselessConstructor ; Analyze, Codacy, Simple, Level 3)
   * Useless Final (Classes/UselessFinal ; Analyze, OneFile, ClearPHP, Codacy, Simple)
-  * Useless Global (Structures/UselessGlobal ; Analyze, OneFile, Codacy, Simple)
+  * Useless Global (Structures/UselessGlobal ; Analyze, OneFile, Codacy, Simple, Level 2)
   * Useless Instructions (Structures/UselessInstruction ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 1)
   * Useless Interfaces (Interfaces/UselessInterfaces ; Analyze, ClearPHP, Codacy, Simple)
   * Useless Parenthesis (Structures/UselessParenthesis ; Analyze, Codacy, Simple)
-  * Useless Return (Functions/UselessReturn ; Analyze, OneFile, Codacy, Simple)
+  * Useless Return (Functions/UselessReturn ; Analyze, OneFile, Codacy, Simple, Level 4)
   * Useless Switch (Structures/UselessSwitch ; Analyze, Codacy, Simple)
-  * Useless Unset (Structures/UselessUnset ; Analyze, OneFile, ClearPHP, Codacy, Simple)
+  * Useless Unset (Structures/UselessUnset ; Analyze, OneFile, ClearPHP, Codacy, Simple, Level 2)
   * Uses Default Values (Functions/UsesDefaultArguments ; Analyze, Codacy, Simple)
   * Uses Environnement (Php/UsesEnv ; Appinfo, Appcontent)
   * Using $this Outside A Class (Classes/UsingThisOutsideAClass ; Analyze, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple, CompatibilityPHP73)
@@ -1444,7 +1466,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Variables Variables (Variables/VariableVariables ; Appinfo)
   * Variables With Long Names (Variables/VariableLong ; )
   * Variables With One Letter Names (Variables/VariableOneLetter ; )
-  * While(List() = Each()) (Structures/WhileListEach ; Analyze, Performances, OneFile, Codacy, Simple, Suggestions)
+  * While(List() = Each()) (Structures/WhileListEach ; Analyze, Performances, OneFile, Codacy, Simple, Suggestions, Level 2)
   * Wpdb Best Usage (Wordpress/WpdbBestUsage ; Wordpress)
   * Written Only Variables (Variables/WrittenOnlyVariable ; Analyze, OneFile, Codacy, Simple)
   * Wrong Class Location (ZendF/NotInThatPath ; ZendFramework)
@@ -1463,7 +1485,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * charger_fonction() (Spip/chargerFonction ; )
   * crypt() Without Salt (Structures/CryptWithoutSalt ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, Codacy, CompatibilityPHP73)
   * error_reporting() With Integers (Structures/ErrorReportingWithInteger ; Analyze, Codacy, Simple)
-  * eval() Without Try (Structures/EvalWithoutTry ; Analyze, Codacy, Simple)
+  * eval() Without Try (Structures/EvalWithoutTry ; Analyze, Codacy, Simple, Level 3)
   * ext/0mq (Extensions/Extzmq ; Appinfo)
   * ext/amqp (Extensions/Extamqp ; Appinfo)
   * ext/apache (Extensions/Extapache ; Appinfo)
@@ -1590,7 +1612,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * ext/zlib (Extensions/Extzlib ; Appinfo)
   * func_get_arg() Modified (Functions/funcGetArgModified ; Analyze, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, Codacy, Simple, CompatibilityPHP73)
   * include_once() Usage (Structures/OnceUsage ; Analyze, Appinfo, Codacy)
-  * list() May Omit Variables (Structures/ListOmissions ; Analyze, Codacy, Simple)
+  * list() May Omit Variables (Structures/ListOmissions ; Analyze, Codacy, Simple, Suggestions, Level 3)
   * mcrypt_create_iv() With Default Values (Structures/McryptcreateivWithoutOption ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP70, CompatibilityPHP71, CompatibilityPHP72, Codacy, CompatibilityPHP73)
   * parse_str() Warning (Security/parseUrlWithoutParameters ; Security)
   * preg_match_all() Flag (Php/PregMatchAllFlag ; Analyze, Codacy, Simple)
@@ -1670,6 +1692,7 @@ List of external links mentionned in this documentation.
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_
+* `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_
 * `__toString() <http://php.net/manual/en/language.oop5.magic.php#object.tostring>`_
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
@@ -1679,8 +1702,8 @@ List of external links mentionned in this documentation.
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
 * `Aronduby Dump <https://github.com/aronduby/dump>`_
 * `Array <http://php.net/manual/en/function.types.array.php>`_
-* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Array <http://php.net/manual/en/language.types.array.php>`_
+* `array <http://php.net/manual/en/language.types.array.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
@@ -1872,6 +1895,7 @@ List of external links mentionned in this documentation.
 * `Prepare for PHP 7 error messages (part 3) <https://www.exakat.io/prepare-for-php-7-error-messages-part-3/>`_
 * `Process Control <http://php.net/manual/en/book.pcntl.php>`_
 * `proctitle <http://php.net/manual/en/book.proctitle.php>`_
+* `Properties <http://php.net/manual/en/language.oop5.properties.php>`_
 * `Pspell <http://php.net/manual/en/book.pspell.php>`_
 * `PSR-11 : Dependency injection container <https://github.com/container-interop/fig-standards/blob/master/proposed/container.md>`_
 * `PSR-13 : Link definition interface <http://www.php-fig.org/psr/psr-13/>`_
@@ -1898,7 +1922,9 @@ List of external links mentionned in this documentation.
 * `Semaphore, Shared Memory and IPC <http://php.net/manual/en/book.sem.php>`_
 * `Session <http://php.net/manual/en/book.session.php>`_
 * `session_regenerateid() <http://php.net/session_regenerate_id>`_
+* `Sessions <http://php.net/manual/en/book.session.php>`_
 * `Set-Cookie <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>`_
+* `setcookie <http://www.php.net/setcookie>`_
 * `Simplexml <http://php.net/manual/en/book.simplexml.php>`_
 * `Single Function Exit Point <http://wiki.c2.com/?SingleFunctionExitPoint>`_
 * `Slim <https://www.slimframework.com/>`_
@@ -2000,6 +2026,7 @@ List of external links mentionned in this documentation.
 * `zend-memory <https://github.com/zendframework/zend-memory>`_
 * `zend-mime <https://github.com/zendframework/zend-mime>`_
 * `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_
+* `zend-mvc <https://github.com/zendframework/zend-mvc>`_
 * `zend-navigation <https://github.com/zendframework/zend-navigation>`_
 * `zend-paginator <https://github.com/zendframework/zend-paginator>`_
 * `zend-progressbar <https://github.com/zendframework/zend-progressbar>`_
@@ -2012,6 +2039,7 @@ List of external links mentionned in this documentation.
 * `zend-tag <https://github.com/zendframework/zend-tag>`_
 * `zend-test <https://github.com/zendframework/zend-test>`_
 * `zend-text <https://github.com/zendframework/zend-text>`_
+* `zend-validator <https://github.com/zendframework/zend-validator>`_
 * `zend-xmlrpc <https://github.com/zendframework/zend-xmlrpc>`_
 * `ZeroMQ <http://zeromq.org/>`_
 * `ZHprof Documentation <http://web.archive.org/web/20110514095512/http://mirror.facebook.net/facebook/xhprof/doc.html>`_

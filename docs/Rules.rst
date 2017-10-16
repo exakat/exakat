@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 09 Oct 2017 15:00:53 +0000
-.. comment: Generation hash : c18137cd05ea4e3ef6c77f49606d5b44a652bf09
+.. comment: Generation date : Mon, 16 Oct 2017 13:10:43 +0000
+.. comment: Generation hash : 68b0de542aada7099514a6c432991d6d03af0286
 
 
 .. _$http\_raw\_post\_data:
@@ -226,24 +226,6 @@ PHP 5.5 introduced a special class constant, relying on the 'class' keyword. It 
 +--------------+------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP53`, :ref:`CompatibilityPHP54` |
 +--------------+------------------------------------------------------+
-
-
-.. _<?=-usage:
-
-<?= Usage
-#########
-
-
-Usage of the <?= tag, that echo's directly the following content.
-
-<?= $variable; 
-?>
-
-+--------------+------------------+
-| Command Line | Php/EchoTagUsage |
-+--------------+------------------+
-| Analyzers    | :ref:`Analyze`   |
-+--------------+------------------+
 
 
 .. _@-operator:
@@ -1955,6 +1937,20 @@ PHP doesn't allow when a value is turned into a reference at functioncall, since
 
 Either the function use a reference in its signature, either the reference won't pass.
 
+.. code-block:: php
+
+   <?php
+   
+   function foo($name) {
+       $arg = ucfirst(strtolower($name));
+       echo 'Hello '.$arg;
+   }
+   
+   $a = 'name';
+   foo(&$a);
+   
+   ?>
+
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/CalltimePassByReference                                                                                                                                                          |
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -3135,16 +3131,18 @@ Could Use Short Assignation
 ###########################
 
 
-Some operators have a compact 'do-and-assign' version.
+Some operators, like + or *, have a compact and fast 'do-and-assign' version.
 
 They looks like a compacted version for = and the operator. This syntax is good for readability, and saves some memory in the process. 
+
+Depending on the operator, not all permutations of arguments are possible.
 
 .. code-block:: php
 
    <?php
    
-   $a = $a + 0;
-   $a += 0;
+   $a = 10 + $a;
+   $a += 10;
    
    $b = $b - 1;
    $b -= 1;
@@ -3582,7 +3580,9 @@ Dereferencing String And Arrays
 ###############################
 
 
-PHP 5.5 introduced the direct dereferencing of strings and array. No need anymore for an intermediate variable between a string and array (or any expression generating such value) and accessing an index.
+PHP allows the direct dereferencing of strings and arrays. 
+
+This was added in PHP 5.5. There is no need anymore for an intermediate variable between a string and array (or any expression generating such value) and accessing an index.
 
 .. code-block:: php
 
@@ -4966,7 +4966,11 @@ Function Subscripting
 #####################
 
 
-This is a new PHP 5.4 feature, where one may use the result of a method directly as an array, given that the method actually returns an array. 
+It is possible to use the result of a methodcall directly as an array, without storing the result in a temporary variable.
+
+This works, given that the method actually returns an array. 
+
+This syntax was not possible until PHP 5.4. Until then, it was compulsory to store the result in a variable first. Although this is now superfluous, it has been a standard syntax in PHP, and is still being used.
 
 .. code-block:: php
 
@@ -4989,7 +4993,7 @@ This is a new PHP 5.4 feature, where one may use the result of a method directly
    ?>
 
 
-This was not possible until PHP 5.4. Is used to be necessary to put the result in a variable, and then access the desired index.
+Storing the result in a variable is still useful if the result is actually used more than once.
 
 +--------------+---------------------------------+
 | Command Line | Structures/FunctionSubscripting |
@@ -5914,6 +5918,18 @@ Constant, when defined using `'define() <http://www.php.net/define>`_ function, 
 
    
    /[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/
+   
+
+
+.. code-block:: php
+
+   <?php
+   
+   define('+3', 1); // wrong constant! 
+   
+   echo constant('+3'); // invalid constant access
+   
+   ?>
 
 +--------------+-----------------------+
 | Command Line | Constants/InvalidName |
@@ -5952,6 +5968,41 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +--------------+---------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
 +--------------+---------------------------------------------------------------------------------+
+
+
+.. _is-actually-zero:
+
+Is Actually Zero
+################
+
+
+This addition actually may be reduced because one term is actually negated by another. 
+
+This kind of error happens when the expression is very large : the more terms are included, the more chances are that some auto-annihilation happens. 
+
+This error may also be a simple typo : for example, calculating the difference between two consecutive terms.
+
+.. code-block:: php
+
+   <?php
+   
+   // This is quite obvious
+   $a = 2 - 2;
+   
+   // This is obvious too. This may be a typo-ed difference between two consecutive terms. 
+   // Could have been $c = $fx[3][4] - $fx[3][3] or $c = $fx[3][5] - $fx[3][4];
+   $c = $fx[3][4] - $fx[3][4];
+   
+   // This is less obivous
+   $a = $b[3] - $c + $d->foo(1,2,3) + $c + $b[3];
+   
+   ?>
+
++--------------+-------------------+
+| Command Line | Structures/IsZero |
++--------------+-------------------+
+| Analyzers    | :ref:`Analyze`    |
++--------------+-------------------+
 
 
 .. _is-zend-framework-1-controller:
@@ -6216,7 +6267,7 @@ Logical Mistakes
 ################
 
 
-Spot logical mistakes within logical expressions. 
+Avoid logical mistakes within long expressions. 
 
 Sometimes, the logic is not what it seems. It is important to check the actual impact of every part of the logical expression. Do not hesitate to make a table with all possible cases. If those cases are too numerous, it may be time to rethink the whole expression. 
 
@@ -6320,6 +6371,8 @@ Lone Blocks
 ###########
 
 
+Any grouped code without a commanding structure is useless. 
+
 Blocks are compulsory when defining a structure, such as a class or a function. They are most often used with flow control instructions, like if then or switch. 
 
 Blocks are also valid syntax that group several instructions together, though they have no effect at all, except confuse the reader. Most often, it is a ruin from a previous flow control instruction, whose condition was removed or commented. They should be removed. 
@@ -6328,6 +6381,7 @@ Blocks are also valid syntax that group several instructions together, though th
 
    <?php
    
+       // Lone block
        //foreach($a as $b) 
        {
            $b++;
@@ -7134,7 +7188,22 @@ Multiple Constant Definition
 ############################
 
 
-Some constants are defined several times in your code. This will lead to a fatal error, if they are defined during the same execution.
+Some constants are defined several times in your code. This will lead to a fatal error, if they are defined during the same execution. 
+
+Multiple definitions may happens at boostrap, when the application code is collecting information about the current environnement. It may also happen at inclusion time, which one set of constant being loaded, while other definition are not, avoiding conflict. Both are false positive. 
+
+.. code-block:: php
+
+   <?php
+   
+   // OS is defined twice. 
+   if (PHP_OS == 'Windows') {
+       define('OS', 'Win');
+   } else {
+       define('OS', 'Other');
+   }
+   
+   ?>
 
 +--------------+--------------------------------------+
 | Command Line | Constants/MultipleConstantDefinition |
@@ -10345,6 +10414,9 @@ The latter needs an extra memory allocation that costs about 10% of performances
    
    ?>
 
+
+This is a micro-optimisation. However, its usage is so widespread, including within loops, that it may eventually be visible. As such, it is recommended to adopt this rule, and only consider changing legacy code as they are refactored for other reasons.
+
 +--------------+-------------------------------------+
 | Command Line | Performances/PrePostIncrement       |
 +--------------+-------------------------------------+
@@ -10736,7 +10808,7 @@ Random Without Try
 ##################
 
 
-random_int() and random_bytes() require a try..catch enclosure.
+random_int() and random_bytes() require a try/catch structure around them.
 
 random_int() and random_bytes() emit Exceptions if they meet a problem. This way, failure can't be mistaken with returning an empty value, which leads to lower security. 
 
@@ -10749,7 +10821,7 @@ random_int() and random_bytes() emit Exceptions if they meet a problem. This way
    } catch (TypeError $e) {
        // Error while reading the provided parameter
    } catch (Exception $e) {
-       // Insufficient randome data generated
+       // Insufficient random data generated
    } catch (Error $e) {
        // Error with the provided parameter : <= 0
    }
@@ -11357,6 +11429,43 @@ See also `PHP RFC: Scalar Type Hints <https://wiki.php.net/rfc/scalar_type_hints
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
+.. _security/sessionlazywrite:
+
+Security/SessionLazyWrite
+#########################
+
+
+Classes that implements SessionHandlerInterface must also implements SessionUpdateTimestampHandlerInterface. 
+
+The two extra methods are used to help lazy loading : the first actually checks if a sessionId is available, and the seconds updates the time of last usage of the session data in the session storage. 
+
+This was spotted by Nicolas Grekas, and fixed in Symfony `[HttpFoundation] Make sessions secure and lazy #24523 <https://github.com/symfony/symfony/pull/24523>`_. 
+
+.. code-block:: php
+
+   <?php
+   
+   interface SessionUpdateTimestampHandlerInterface {
+       // returns a boolean to indicate that valid data is available for this sessionId, or not.
+       function validateId($sessionId);
+       
+       //called to change the last time of usage for the session data.
+       //It may be a file's touch or full write, or a simple update on the database
+       function updateTimestamp($sessionId, $sessionData);
+   }
+   
+   ?>
+
+
+See also ` <https://wiki.php.net/rfc/session-read_only-lazy_write>`_ and the `Sessions <http://php.net/manual/en/book.session.php>`_.
+
++--------------+---------------------------+
+| Command Line | Security/SessionLazyWrite |
++--------------+---------------------------+
+| Analyzers    | :ref:`Security`           |
++--------------+---------------------------+
+
+
 .. _sequences-in-for:
 
 Sequences In For
@@ -11474,7 +11583,8 @@ Several Instructions On The Same Line
 #####################################
 
 
-Usually, instructions do not share their line : one instruction, one line. This is good for readability, and help at understanding the code. This is especially important when fast-reading the code to find some special situation, where such double-meaning line way have an impact.
+Usually, instructions do not share their line : one instruction, one line. 
+This is good for readability, and help at understanding the code. This is especially important when fast-reading the code to find some special situation, where such double-meaning line way have an impact.
 
 +--------------+-----------------------------------+
 | Command Line | Structures/OneLineTwoInstructions |
@@ -13451,6 +13561,59 @@ When the difference is very small, it requires a better way to mesure time diffe
 +--------------+--------------------------------+
 
 
+.. _too-complex-expression:
+
+Too Complex Expression
+######################
+
+
+Long expressions should be broken in small chunks, to limit complexity. 
+
+Really long expressions tends to be error prone : either by typo, or by missing details. They are even harder to review, once the initialy build of the expression is gone. 
+
+As a general rule, it is recommended to keep expressions short. The analysis include any expression that is more than 15 tokens large : variable and operaors counts as one, properties, arrays count as two. Parenthesis are also counted. 
+
+PHP has no specific limit to expression size, so long expression are legal and valid. It is possible that the business logic requires a complex equation. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Why not calculate wordwrap size separatedly ? 
+   $a = explode(\n, wordwrap($this->message, floor($this->width / imagefontwidth($this->fontsize)), \n));
+   
+   // Longer but easier to read
+   $width = floor($this->width / imagefontwidth($this->fontsize)), \n);
+   $a = explode(\n, wordwrap($this->message, $width);
+   
+   // Here, some string building, including error management with @, is making the data quite complex.
+   fwrite($fp, 'HEAD ' . @$url['path'] . @$url['query'] . ' HTTP/1.0' . \r\n . 'Host: ' . @$url['host'] . \r\n\r\n)
+   
+   // Better validation of data. 
+   $http_header = 'HEAD ';
+   if ('isset($url['path'])) {
+       $http_header .= $url['path'];
+   }
+   if ('isset($url['query'])) {
+       $http_header .= $url['query'];
+   }
+   
+   $http_header .=  \r\n;
+   if ('isset($url['host'])) {
+       $http_header .= 'Host: ' . $url['host'] . \r\n\r\n;
+   }
+   
+   fwrite($fp, $http_header);
+   
+   ?>
+
++--------------+------------------------------+
+| Command Line | Structures/ComplexExpression |
++--------------+------------------------------+
+| Analyzers    | :ref:`Analyze`               |
++--------------+------------------------------+
+
+
 .. _too-many-finds:
 
 Too Many Finds
@@ -13696,6 +13859,51 @@ See also `resources <http://php.net/manual/en/language.types.resource.php>`_.
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
+
+
+.. _unconditional-break-in-loop:
+
+Unconditional Break In Loop
+###########################
+
+
+An unconditional `'break <http://php.net/manual/en/control-structures.break.php>`_ was found in a loop. Since the `'break <http://php.net/manual/en/control-structures.break.php>`_ is directly in the body of the loop, it is always executed, creating a strange loop that can only run once. 
+
+Here, `'break <http://php.net/manual/en/control-structures.break.php>`_ may also be a return, a goto or a `'continue <http://php.net/manual/en/control-structures.continue.php>`_. They all branch out of the loop. Such statement are valid, but should be moderated with a condition. 
+
+.. code-block:: php
+
+   <?php
+   
+   // return in loop should be in 
+   function summAll($array) {
+       $sum = 0;
+       
+       foreach($array as $a) {
+           // Stop at the first error
+           if (is_string($a)) {
+               return $sum;
+           }
+           $sum += $a;
+       }
+       
+       return $sum;
+   }
+   
+   // foreach loop used to collect first element in array
+   function getFirst($array) {
+       foreach($array as $a) {
+           return $a;
+       }
+   }
+   
+   ?>
+
++--------------+---------------------------------+
+| Command Line | Structures/UnconditionLoopBreak |
++--------------+---------------------------------+
+| Analyzers    | :ref:`Analyze`                  |
++--------------+---------------------------------+
 
 
 .. _undefined-caught-exceptions:
@@ -18594,11 +18802,11 @@ zend-code 2.5.0 has 71 classes, no traits and 14 interfaces;
 
   See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command Line | ZendF/Zf3Code25      |
-+--------------+----------------------+
-| Analyzers    | :ref:`ZendFramework` |
-+--------------+----------------------+
++--------------+--------------------------------------------+
+| Command Line | ZendF/Zf3Code25                            |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
++--------------+--------------------------------------------+
 
 
 .. _zend-code-2.6.0-undefined-classes:
@@ -18614,11 +18822,11 @@ zend-code 2.6.0 has 72 classes, no traits and 14 interfaces;
 1 new classe 
 .  See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command Line | ZendF/Zf3Code26      |
-+--------------+----------------------+
-| Analyzers    | :ref:`ZendFramework` |
-+--------------+----------------------+
++--------------+--------------------------------------------+
+| Command Line | ZendF/Zf3Code26                            |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
++--------------+--------------------------------------------+
 
 
 .. _zend-code-3.0.0-undefined-classes:
@@ -18634,11 +18842,11 @@ zend-code 3.0.0 has 73 classes, no traits and 14 interfaces;
 1 new classe 
 .  See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command Line | ZendF/Zf3Code30      |
-+--------------+----------------------+
-| Analyzers    | :ref:`ZendFramework` |
-+--------------+----------------------+
++--------------+--------------------------------------------+
+| Command Line | ZendF/Zf3Code30                            |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
++--------------+--------------------------------------------+
 
 
 .. _zend-code-3.1.0-undefined-classes:
@@ -18653,11 +18861,31 @@ zend-code 3.1.0 has 73 classes, no traits and 14 interfaces;
 
   See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
 
-+--------------+----------------------+
-| Command Line | ZendF/Zf3Code31      |
-+--------------+----------------------+
-| Analyzers    | :ref:`ZendFramework` |
-+--------------+----------------------+
++--------------+--------------------------------------------+
+| Command Line | ZendF/Zf3Code31                            |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
++--------------+--------------------------------------------+
+
+
+.. _zend-code-3.2.0-undefined-classes:
+
+zend-code 3.2.0 Undefined Classes
+#################################
+
+
+zend-code classes, interfaces and traits that are not defined in version 3.2.0.
+
+zend-code 3.2.0 has 75 classes, no traits and 14 interfaces;
+
+2 new classes.  
+See also : `zend-code <https://github.com/zendframework/zend-code>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+--------------------------------------------+
+| Command Line | ZendF/Zf3Code32                            |
++--------------+--------------------------------------------+
+| Analyzers    | :ref:`ZendFramework`, :ref:`ZendFramework` |
++--------------+--------------------------------------------+
 
 
 .. _zend-code-usage:
@@ -19279,6 +19507,25 @@ zend-eventmanager 3.1.0 has 14 classes, 3 traits and 9 interfaces;
 +--------------+--------------------------------------------+
 
 
+.. _zend-eventmanager-3.2.0-undefined-classes:
+
+zend-eventmanager 3.2.0 Undefined Classes
+#########################################
+
+
+zend-eventmanager classes, interfaces and traits that are not defined in version 3.2.0.
+
+zend-eventmanager 3.2.0 has 14 classes, 2 traits and 9 interfaces;
+
+  See also : `zend-eventmanager <https://github.com/zendframework/zend-eventmanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+-------------------------+
+| Command Line | ZendF/Zf3Eventmanager32 |
++--------------+-------------------------+
+| Analyzers    | :ref:`ZendFramework`    |
++--------------+-------------------------+
+
+
 .. _zend-eventmanager-usage:
 
 zend-eventmanager Usage
@@ -19351,6 +19598,25 @@ zend-feed 2.7.0 has 93 classes, no traits and 17 interfaces;
 
 +--------------+----------------------+
 | Command Line | ZendF/Zf3Feed27      |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+.. _zend-feed-2.8.0-undefined-classes:
+
+zend-feed 2.8.0 Undefined Classes
+#################################
+
+
+zend-feed classes, interfaces and traits that are not defined in version 2.8.0.
+
+zend-feed 2.8.0 has 93 classes, no traits and 17 interfaces;
+
+  See also : `zend-feed <https://github.com/zendframework/zend-feed>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Feed28      |
 +--------------+----------------------+
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
@@ -19680,6 +19946,25 @@ zend-http 2.6.0 has 97 classes, no traits and 8 interfaces;
 
 +--------------+----------------------+
 | Command Line | ZendF/Zf3Http26      |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+.. _zend-http-2.7.0-undefined-classes:
+
+zend-http 2.7.0 Undefined Classes
+#################################
+
+
+zend-http classes, interfaces and traits that are not defined in version 2.7.0.
+
+zend-http 2.7.0 has 97 classes, no traits and 8 interfaces;
+
+  See also : `zend-http <https://github.com/zendframework/zend-http>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Http27      |
 +--------------+----------------------+
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
@@ -20184,6 +20469,26 @@ zend-mail 2.7.0 has 77 classes, no traits and 16 interfaces;
 +--------------+----------------------+
 
 
+.. _zend-mail-2.8.0-undefined-classes:
+
+zend-mail 2.8.0 Undefined Classes
+#################################
+
+
+zend-mail classes, interfaces and traits that are not defined in version 2.8.0.
+
+zend-mail 2.8.0 has 77 classes, 1 traits and 16 interfaces;
+
+1 new trait 
+.  See also : `zend-mail <https://github.com/zendframework/zend-mail>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Mail28      |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
 .. _zend-mail-usage:
 
 zend-mail Usage
@@ -20454,6 +20759,25 @@ zend-modulemanager 2.7.0 has 19 classes, no traits and 27 interfaces;
 +--------------+--------------------------+
 
 
+.. _zend-modulemanager-2.8.0-undefined-classes:
+
+zend-modulemanager 2.8.0 Undefined Classes
+##########################################
+
+
+zend-modulemanager classes, interfaces and traits that are not defined in version 2.8.0.
+
+zend-modulemanager 2.8.0 has 19 classes, no traits and 27 interfaces;
+
+  See also : `zend-modulemanager <https://github.com/zendframework/zend-modulemanager>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+--------------------------+
+| Command Line | ZendF/Zf3Modulemanager28 |
++--------------+--------------------------+
+| Analyzers    | :ref:`ZendFramework`     |
++--------------+--------------------------+
+
+
 .. _zend-modulemanager-usage:
 
 zend-modulemanager Usage
@@ -20543,6 +20867,26 @@ zend-mvc, all versions 3.0.x.
 
 +--------------+----------------------+
 | Command Line | ZendF/Zf3Mvc30       |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+.. _zend-mvc-3.1.0-undefined-classes:
+
+zend-mvc 3.1.0 Undefined Classes
+################################
+
+
+zend-mvc classes, interfaces and traits that are not defined in version 3.1.0.
+
+zend-mvc 3.1.0 has 77 classes, 1 traits and 5 interfaces;
+
+5 new classes 
+.  See also : `zend-mvc <https://github.com/zendframework/zend-mvc>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Mvc31       |
 +--------------+----------------------+
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+
@@ -21154,6 +21498,25 @@ zend-session 2.7.0 has 31 classes, 1 traits and 7 interfaces;
 +--------------+----------------------+
 
 
+.. _zend-session-2.8.0-undefined-classes:
+
+zend-session 2.8.0 Undefined Classes
+####################################
+
+
+zend-session classes, interfaces and traits that are not defined in version 2.8.0.
+
+zend-session 2.8.0 has 31 classes, 1 traits and 7 interfaces;
+
+  See also : `zend-session <https://github.com/zendframework/zend-session>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Session28   |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
 .. _zend-session-usage:
 
 zend-session Usage
@@ -21464,6 +21827,25 @@ zend-test 3.0.0 has 4 classes, no traits and no interfaces;
 +--------------+--------------------------------------------+
 
 
+.. _zend-test-3.1.0-undefined-classes:
+
+zend-test 3.1.0 Undefined Classes
+#################################
+
+
+zend-test classes, interfaces and traits that are not defined in version 3.1.0.
+
+zend-test 3.1.0 has 4 classes, no traits and no interfaces;
+
+  See also : `zend-test <https://github.com/zendframework/zend-test>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Test31      |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
 .. _zend-test-usage:
 
 zend-test Usage
@@ -21625,6 +22007,25 @@ zend-validator, all versions 2.8.x.
 
 +--------------+----------------------+
 | Command Line | ZendF/Zf3Validator28 |
++--------------+----------------------+
+| Analyzers    | :ref:`ZendFramework` |
++--------------+----------------------+
+
+
+.. _zend-validator-2.9.0-undefined-classes:
+
+zend-validator 2.9.0 Undefined Classes
+######################################
+
+
+zend-validator classes, interfaces and traits that are not defined in version 2.9.0.
+
+zend-validator 2.9.0 has 104 classes, no traits and 7 interfaces;
+
+  See also : `zend-validator <https://github.com/zendframework/zend-validator>`_ and `Zend Framework <https://framework.zend.com/>`_.
+
++--------------+----------------------+
+| Command Line | ZendF/Zf3Validator29 |
 +--------------+----------------------+
 | Analyzers    | :ref:`ZendFramework` |
 +--------------+----------------------+

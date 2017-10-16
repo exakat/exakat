@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 09 Oct 2017 15:00:53 +0000
-.. comment: Generation hash : c18137cd05ea4e3ef6c77f49606d5b44a652bf09
+.. comment: Generation date : Mon, 16 Oct 2017 13:10:43 +0000
+.. comment: Generation hash : 68b0de542aada7099514a6c432991d6d03af0286
 
 
 .. _analyze:
@@ -75,12 +75,11 @@ Recipes details
 Analyze
 +++++++
 
-Total : 313 analysis
+Total : 315 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
 * :ref:`$this Is Not For Static Methods <$this-is-not-for-static-methods>`
-* :ref:`<?= Usage <<?=-usage>`
 * :ref:`@ Operator <@-operator>`
 * :ref:`Abstract Static Methods <abstract-static-methods>`
 * :ref:`Access Protected Structures <access-protected-structures>`
@@ -182,6 +181,7 @@ Total : 313 analysis
 * :ref:`Indices Are Int Or String <indices-are-int-or-string>`
 * :ref:`Instantiating Abstract Class <instantiating-abstract-class>`
 * :ref:`Invalid Constant Name <invalid-constant-name>`
+* :ref:`Is Actually Zero <is-actually-zero>`
 * :ref:`Locally Unused Property <locally-unused-property>`
 * :ref:`Logical Mistakes <logical-mistakes>`
 * :ref:`Logical Should Use Symbolic Operators <logical-should-use-symbolic-operators>`
@@ -306,11 +306,13 @@ Total : 313 analysis
 * :ref:`Throw In Destruct <throw-in-destruct>`
 * :ref:`Throws An Assignement <throws-an-assignement>`
 * :ref:`Timestamp Difference <timestamp-difference>`
+* :ref:`Too Complex Expression <too-complex-expression>`
 * :ref:`Too Many Finds <too-many-finds>`
 * :ref:`Too Many Injections <too-many-injections>`
 * :ref:`Too Many Local Variables <too-many-local-variables>`
 * :ref:`Uncaught Exceptions <uncaught-exceptions>`
 * :ref:`Unchecked Resources <unchecked-resources>`
+* :ref:`Unconditional Break In Loop <unconditional-break-in-loop>`
 * :ref:`Undefined Class Constants <undefined-class-constants>`
 * :ref:`Undefined Classes <undefined-classes>`
 * :ref:`Undefined Constants <undefined-constants>`
@@ -988,7 +990,7 @@ Total : 26 analysis
 Security
 ++++++++
 
-Total : 27 analysis
+Total : 28 analysis
 
 * :ref:`Always Anchor Regex <always-anchor-regex>`
 * :ref:`Avoid Those Hash Functions <avoid-those-hash-functions>`
@@ -1007,6 +1009,7 @@ Total : 27 analysis
 * :ref:`Random Without Try <random-without-try>`
 * :ref:`Register Globals <register-globals>`
 * :ref:`Safe Curl Options <safe-curl-options>`
+* :ref:`Security/SessionLazyWrite`
 * :ref:`Set Cookie Safe Arguments <set-cookie-safe-arguments>`
 * :ref:`Should Use Prepared Statement <should-use-prepared-statement>`
 * :ref:`Should Use session_regenerateid() <should-use-session\_regenerateid()>`
@@ -1074,7 +1077,7 @@ Total : 10 analysis
 ZendFramework
 +++++++++++++
 
-Total : 222 analysis
+Total : 237 analysis
 
 * :ref:`Action Should Be In Controller <action-should-be-in-controller>`
 * :ref:`Error Messages <error-messages>`
@@ -1119,9 +1122,15 @@ Total : 222 analysis
 * :ref:`zend-captcha 2.7.0 Undefined Classes <zend-captcha-2.7.0-undefined-classes>`
 * :ref:`zend-captcha Usage <zend-captcha-usage>`
 * :ref:`zend-code 2.5.0 Undefined Classes <zend-code-2.5.0-undefined-classes>`
+* :ref:`zend-code 2.5.0 Undefined Classes <zend-code-2.5.0-undefined-classes>`
+* :ref:`zend-code 2.6.0 Undefined Classes <zend-code-2.6.0-undefined-classes>`
 * :ref:`zend-code 2.6.0 Undefined Classes <zend-code-2.6.0-undefined-classes>`
 * :ref:`zend-code 3.0.0 Undefined Classes <zend-code-3.0.0-undefined-classes>`
+* :ref:`zend-code 3.0.0 Undefined Classes <zend-code-3.0.0-undefined-classes>`
 * :ref:`zend-code 3.1.0 Undefined Classes <zend-code-3.1.0-undefined-classes>`
+* :ref:`zend-code 3.1.0 Undefined Classes <zend-code-3.1.0-undefined-classes>`
+* :ref:`zend-code 3.2.0 Undefined Classes <zend-code-3.2.0-undefined-classes>`
+* :ref:`zend-code 3.2.0 Undefined Classes <zend-code-3.2.0-undefined-classes>`
 * :ref:`zend-code Usage <zend-code-usage>`
 * :ref:`zend-config 2.5.x <zend-config-2.5.x>`
 * :ref:`zend-config 2.6.x <zend-config-2.6.x>`
@@ -1159,11 +1168,13 @@ Total : 222 analysis
 * :ref:`zend-eventmanager 3.0.0 Undefined Classes <zend-eventmanager-3.0.0-undefined-classes>`
 * :ref:`zend-eventmanager 3.1.0 Undefined Classes <zend-eventmanager-3.1.0-undefined-classes>`
 * :ref:`zend-eventmanager 3.1.0 Undefined Classes <zend-eventmanager-3.1.0-undefined-classes>`
+* :ref:`zend-eventmanager 3.2.0 Undefined Classes <zend-eventmanager-3.2.0-undefined-classes>`
 * :ref:`zend-eventmanager Usage <zend-eventmanager-usage>`
 * :ref:`zend-eventmanager Usage <zend-eventmanager-usage>`
 * :ref:`zend-feed 2.5.0 Undefined Classes <zend-feed-2.5.0-undefined-classes>`
 * :ref:`zend-feed 2.6.0 Undefined Classes <zend-feed-2.6.0-undefined-classes>`
 * :ref:`zend-feed 2.7.0 Undefined Classes <zend-feed-2.7.0-undefined-classes>`
+* :ref:`zend-feed 2.8.0 Undefined Classes <zend-feed-2.8.0-undefined-classes>`
 * :ref:`zend-feed Usage <zend-feed-usage>`
 * :ref:`zend-file 2.5.0 Undefined Classes <zend-file-2.5.0-undefined-classes>`
 * :ref:`zend-file 2.6.0 Undefined Classes <zend-file-2.6.0-undefined-classes>`
@@ -1181,6 +1192,7 @@ Total : 222 analysis
 * :ref:`zend-form Usage <zend-form-usage>`
 * :ref:`zend-http 2.5.0 Undefined Classes <zend-http-2.5.0-undefined-classes>`
 * :ref:`zend-http 2.6.0 Undefined Classes <zend-http-2.6.0-undefined-classes>`
+* :ref:`zend-http 2.7.0 Undefined Classes <zend-http-2.7.0-undefined-classes>`
 * :ref:`zend-http Usage <zend-http-usage>`
 * :ref:`zend-i18n 2.5.0 Undefined Classes <zend-i18n-2.5.0-undefined-classes>`
 * :ref:`zend-i18n 2.6.0 Undefined Classes <zend-i18n-2.6.0-undefined-classes>`
@@ -1207,6 +1219,7 @@ Total : 222 analysis
 * :ref:`zend-mail 2.5.0 Undefined Classes <zend-mail-2.5.0-undefined-classes>`
 * :ref:`zend-mail 2.6.0 Undefined Classes <zend-mail-2.6.0-undefined-classes>`
 * :ref:`zend-mail 2.7.0 Undefined Classes <zend-mail-2.7.0-undefined-classes>`
+* :ref:`zend-mail 2.8.0 Undefined Classes <zend-mail-2.8.0-undefined-classes>`
 * :ref:`zend-mail Usage <zend-mail-usage>`
 * :ref:`zend-math 2.5.0 Undefined Classes <zend-math-2.5.0-undefined-classes>`
 * :ref:`zend-math 2.6.0 Undefined Classes <zend-math-2.6.0-undefined-classes>`
@@ -1221,11 +1234,13 @@ Total : 222 analysis
 * :ref:`zend-modulemanager 2.5.0 Undefined Classes <zend-modulemanager-2.5.0-undefined-classes>`
 * :ref:`zend-modulemanager 2.6.0 Undefined Classes <zend-modulemanager-2.6.0-undefined-classes>`
 * :ref:`zend-modulemanager 2.7.0 Undefined Classes <zend-modulemanager-2.7.0-undefined-classes>`
+* :ref:`zend-modulemanager 2.8.0 Undefined Classes <zend-modulemanager-2.8.0-undefined-classes>`
 * :ref:`zend-modulemanager Usage <zend-modulemanager-usage>`
 * :ref:`zend-mvc 2.5.x <zend-mvc-2.5.x>`
 * :ref:`zend-mvc 2.6.x <zend-mvc-2.6.x>`
 * :ref:`zend-mvc 2.7.x <zend-mvc-2.7.x>`
 * :ref:`zend-mvc 3.0.x <zend-mvc-3.0.x>`
+* :ref:`zend-mvc 3.1.0 Undefined Classes <zend-mvc-3.1.0-undefined-classes>`
 * :ref:`zend-mvc`
 * :ref:`zend-navigation 2.5.0 Undefined Classes <zend-navigation-2.5.0-undefined-classes>`
 * :ref:`zend-navigation 2.6.0 Undefined Classes <zend-navigation-2.6.0-undefined-classes>`
@@ -1258,6 +1273,7 @@ Total : 222 analysis
 * :ref:`zend-session 2.5.0 Undefined Classes <zend-session-2.5.0-undefined-classes>`
 * :ref:`zend-session 2.6.0 Undefined Classes <zend-session-2.6.0-undefined-classes>`
 * :ref:`zend-session 2.7.0 Undefined Classes <zend-session-2.7.0-undefined-classes>`
+* :ref:`zend-session 2.8.0 Undefined Classes <zend-session-2.8.0-undefined-classes>`
 * :ref:`zend-session Usage <zend-session-usage>`
 * :ref:`zend-soap 2.5.0 Undefined Classes <zend-soap-2.5.0-undefined-classes>`
 * :ref:`zend-soap 2.6.0 Undefined Classes <zend-soap-2.6.0-undefined-classes>`
@@ -1277,6 +1293,7 @@ Total : 222 analysis
 * :ref:`zend-test 2.6.0 Undefined Classes <zend-test-2.6.0-undefined-classes>`
 * :ref:`zend-test 3.0.0 Undefined Classes <zend-test-3.0.0-undefined-classes>`
 * :ref:`zend-test 3.0.0 Undefined Classes <zend-test-3.0.0-undefined-classes>`
+* :ref:`zend-test 3.1.0 Undefined Classes <zend-test-3.1.0-undefined-classes>`
 * :ref:`zend-test Usage <zend-test-usage>`
 * :ref:`zend-test Usage <zend-test-usage>`
 * :ref:`zend-text 2.5.0 Undefined Classes <zend-text-2.5.0-undefined-classes>`
@@ -1288,6 +1305,7 @@ Total : 222 analysis
 * :ref:`zend-validator 2.6.x <zend-validator-2.6.x>`
 * :ref:`zend-validator 2.7.x <zend-validator-2.7.x>`
 * :ref:`zend-validator 2.8.x <zend-validator-2.8.x>`
+* :ref:`zend-validator 2.9.0 Undefined Classes <zend-validator-2.9.0-undefined-classes>`
 * :ref:`zend-validator`
 * :ref:`zend-view 2.5.0 Undefined Classes <zend-view-2.5.0-undefined-classes>`
 * :ref:`zend-view 2.6.0 Undefined Classes <zend-view-2.6.0-undefined-classes>`
