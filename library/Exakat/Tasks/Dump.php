@@ -850,7 +850,7 @@ GREMLIN;
             if ($res instanceof \stdClass) {
                 $res = $res->results;
             } elseif (is_array($res)) {
-                // nothing, really 
+                // nothing, really
             } else {
                 assert(false, '$res is not an array, nor an object.');
             }

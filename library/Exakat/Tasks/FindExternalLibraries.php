@@ -137,7 +137,7 @@ class FindExternalLibraries extends Tasks {
         $ignoreLength = 0;
         foreach($files as $id => $file) {
             if (substr($file, 0, $ignoreLength) == $ignore) {
-                display( "Ignore $file ($ignore)\n"); 
+                display( "Ignore $file ($ignore)\n");
                 continue;
             }
             $s = $this->process($path.$file);

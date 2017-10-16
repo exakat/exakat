@@ -3900,7 +3900,7 @@ SQL;
             $code *= $this->tokens[$this->id][1].'1';
         }
 
-        if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER || 
+        if (($this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_LNUMBER ||
              $this->tokens[$this->id + 1][0] === \Exakat\Tasks\T_DNUMBER) &&
             $this->tokens[$this->id + 2][0] !== \Exakat\Tasks\T_POW) {
             $operand = $this->processNext();
@@ -3969,18 +3969,18 @@ SQL;
         do {
             $this->processNext();
 
-            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_EQUAL, 
-                                                                \Exakat\Tasks\T_PLUS_EQUAL, 
-                                                                \Exakat\Tasks\T_AND_EQUAL, 
-                                                                \Exakat\Tasks\T_CONCAT_EQUAL, 
-                                                                \Exakat\Tasks\T_DIV_EQUAL, 
-                                                                \Exakat\Tasks\T_MINUS_EQUAL, 
-                                                                \Exakat\Tasks\T_MOD_EQUAL, 
-                                                                \Exakat\Tasks\T_MUL_EQUAL, 
-                                                                \Exakat\Tasks\T_OR_EQUAL, 
-                                                                \Exakat\Tasks\T_POW_EQUAL, 
-                                                                \Exakat\Tasks\T_SL_EQUAL, 
-                                                                \Exakat\Tasks\T_SR_EQUAL, 
+            if (in_array($this->tokens[$this->id + 1][0], array(\Exakat\Tasks\T_EQUAL,
+                                                                \Exakat\Tasks\T_PLUS_EQUAL,
+                                                                \Exakat\Tasks\T_AND_EQUAL,
+                                                                \Exakat\Tasks\T_CONCAT_EQUAL,
+                                                                \Exakat\Tasks\T_DIV_EQUAL,
+                                                                \Exakat\Tasks\T_MINUS_EQUAL,
+                                                                \Exakat\Tasks\T_MOD_EQUAL,
+                                                                \Exakat\Tasks\T_MUL_EQUAL,
+                                                                \Exakat\Tasks\T_OR_EQUAL,
+                                                                \Exakat\Tasks\T_POW_EQUAL,
+                                                                \Exakat\Tasks\T_SL_EQUAL,
+                                                                \Exakat\Tasks\T_SR_EQUAL,
                                                                 \Exakat\Tasks\T_XOR_EQUAL,
                                                                 ))) {
                 $this->processNext();
