@@ -645,7 +645,7 @@ JAVASCRIPT;
                                     $this->getIssuesFaceted('Preferences') );
     }
 
-    public function generateDashboard() {
+    protected function generateDashboard() {
         $baseHTML = $this->getBasedPage('index');
 
         $tags = array();
@@ -938,7 +938,7 @@ JAVASCRIPT;
         $this->putBasedPage('index', $finalHTML);
     }
 
-    public function generateExtensionsBreakdown() {
+    protected function generateExtensionsBreakdown() {
         $finalHTML = $this->getBasedPage('extension_list');
 
         // List of extensions used
@@ -1479,7 +1479,7 @@ SQL;
         return $data;
     }
 
-    private function getTopFile() {
+    protected function getTopFile() {
         $data = $this->getFilesCount(self::TOPLIMIT);
 
         $html = '';
@@ -1502,7 +1502,7 @@ SQL;
         return $html;
     }
 
-    private function getFileOverview() {
+    protected function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
@@ -1554,7 +1554,7 @@ SQL;
         return $data;
     }
 
-    private function getTopAnalyzers() {
+    protected function getTopAnalyzers() {
         $list = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = '"'.implode('", "', $list).'"';
 
@@ -1611,7 +1611,7 @@ SQL;
         return $return;
     }
 
-    private function getAnalyzerOverview() {
+    protected function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
@@ -2975,7 +2975,7 @@ HTML;
         }
     }
     
-    private function PHPSyntax($code) {
+    protected function PHPSyntax($code) {
         $php = highlight_string('<?php |'.$code.'|; ?>', true);
         $php = substr($php, strpos($php, '|') + 1);
         $php = substr($php, 0, strrpos($php, '|'));
