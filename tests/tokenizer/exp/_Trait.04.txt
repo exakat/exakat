@@ -9,7 +9,7 @@ Label : PROJECT
         ;
         Label : EXPRESSION
           trait
-          Label : DEFINITION
+          Label : DEFINITION, DEFINITION
             Hello
           Label : METHOD
             sayHello
@@ -33,7 +33,7 @@ Label : PROJECT
           trait
           Label : DEFINITION
             'World'
-          Label : DEFINITION
+          Label : DEFINITION, DEFINITION
             World
           Label : METHOD
             sayWorld

@@ -12,22 +12,22 @@ Label : PROJECT
           Label : LEFT
             $a
           Label : RIGHT
-            +
+            -
             Label : LEFT
-              -
-              Label : LEFT
-                ->
-                Label : MEMBER
-                  {}
-                  Label : CODE
-                    ->
-                    Label : MEMBER
-                      B
-                    Label : OBJECT
-                      $c
-                Label : OBJECT
-                  $b
-              Label : RIGHT
-                $d
+              ->
+              Label : MEMBER
+                {}
+                Label : CODE
+                  ->
+                  Label : MEMBER
+                    B
+                  Label : OBJECT
+                    $c
+              Label : OBJECT
+                $b
             Label : RIGHT
-              0
+              +
+              Label : LEFT
+                $d
+              Label : RIGHT
+                0

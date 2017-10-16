@@ -10,20 +10,20 @@ Label : PROJECT
         Label : EXPRESSION
           +
           Label : LEFT
+            1
+          Label : RIGHT
             -
             Label : LEFT
+              1
+            Label : RIGHT
               +
               Label : LEFT
                 1
               Label : RIGHT
-                1
-            Label : RIGHT
-              1
-          Label : RIGHT
-            (
-            Label : CODE
-              -
-              Label : LEFT
-                1
-              Label : RIGHT
-                1
+                (
+                Label : CODE
+                  -
+                  Label : LEFT
+                    1
+                  Label : RIGHT
+                    1
