@@ -58,7 +58,7 @@ class CakePHP {
         return $return;
     }
     
-    public function getClasses($release = null) {
+    public function getClasses($component = 'cakephp', $release = null) {
         $query = 'SELECT namespaces.namespace || "\" || class AS class, release FROM classes 
                     JOIN namespaces 
                       ON classes.namespace_id = namespaces.id
@@ -66,7 +66,7 @@ class CakePHP {
                       ON namespaces.release_id = releases.id 
                     JOIN components 
                       ON releases.component_id = components.id 
-                    WHERE components.component = "cakephp"';
+                    WHERE components.component = "'.$component.'"';
         if ($release !== null) {
             $query .= " AND releases.release = \"$release.0\"";
         }
@@ -85,7 +85,7 @@ class CakePHP {
         return $return;
     }
 
-    public function getInterfaces($release = null) {
+    public function getInterfaces($component = 'cakephp', $release = null) {
         $query = 'SELECT namespaces.namespace || "\" || interface AS interface, release FROM interfaces 
                     JOIN namespaces 
                       ON interfaces.namespace_id = namespaces.id
@@ -93,7 +93,7 @@ class CakePHP {
                       ON namespaces.release_id = releases.id
                     JOIN components 
                       ON releases.component_id = components.id 
-                    WHERE components.component = "cakephp"';
+                    WHERE components.component = "'.$component.'"';
         if ($release !== null) {
             $query .= " AND releases.release = \"$release.0\"";
         }
@@ -113,7 +113,7 @@ class CakePHP {
         return $return;
     }
 
-    public function getTraits($release = null) {
+    public function getTraits($component = 'cakephp', $release = null) {
         $query = 'SELECT namespaces.namespace || "\" || trait AS trait, release FROM traits 
                     JOIN namespaces 
                       ON traits.namespace_id = namespaces.id
@@ -121,7 +121,7 @@ class CakePHP {
                       ON namespaces.release_id = releases.id
                     JOIN components 
                       ON releases.component_id = components.id 
-                    WHERE components.component = "cakephp"';
+                    WHERE components.component = "'.$component.'"';
         if ($release !== null) {
             $query .= " AND releases.release = \"$release.0\"";
         }
