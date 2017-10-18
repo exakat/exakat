@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('$i++');
+$expected     = array('$i++',
+                     );
 
-$expected_not = array();
+$expected_not = array('--$j',
+                     );
 
 ?>

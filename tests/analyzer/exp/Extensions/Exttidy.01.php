@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array('tidy');
+$expected     = array('tidy',
+                     );
 
-$expected_not = array();
+$expected_not = array('cleanRepair',
+                      '$tidy',
+                     );
 
 ?>

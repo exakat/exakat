@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array();
+$expected     = array('$z == true',
+                      '$f += 3',
+                     );
 
-$expected_not = array('$y = false');
+$expected_not = array('$y = false',
+                     );
 
 ?>
