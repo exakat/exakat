@@ -31,7 +31,7 @@ class MarkCallable extends Analyzer {
         
         $ini = $this->loadIni('php_with_callback.ini');
         foreach($ini as &$lists) {
-            $lists = $this->makeFullnspath($lists);
+            $lists = $this->makeFullNsPath($lists);
         }
         unset($lists);
 
