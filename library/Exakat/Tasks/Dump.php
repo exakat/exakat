@@ -29,7 +29,6 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\NotProjectInGraph;
-use Exakat\Exceptions\NeedsAnalysisThema;
 use Exakat\Tokenizer\Token;
 
 class Dump extends Tasks {
