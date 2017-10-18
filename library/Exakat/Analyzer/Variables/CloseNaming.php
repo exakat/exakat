@@ -26,6 +26,7 @@ use Exakat\Analyzer\Analyzer;
 class CloseNaming extends Analyzer {
     
     public function analyze() {
+        // Variables with a levenstein distance of 1 or less.
         $this->query(<<<GREMLIN
   def distance(String str1, String str2) {
     def str1_len = str1.length()
@@ -58,6 +59,46 @@ GREMLIN
             ->atomInside('Variable')
             ->raw('filter{ it.get().value("code") in found}');
         $this->prepareQuery();
+
+        $variables = $this->query(<<<GREMLIN
+g.V().hasLabel("Variable", "Variablearray", "Variableobject").values("code").unique();
+GREMLIN
+);
+
+        // Identical, except for case
+        $lowerCaseVariable = array_map('strtolower', $variables);
+        $lowerCaseVariable = array_count_values($lowerCaseVariable);
+        $doubles = array_filter($lowerCaseVariable, function($count){ return $count > 1; });
+        
+        if (!empty($doubles)) {
+            $this->atomIs(array("Variable", "Variablearray", "Variableobject"))
+                 ->codeIs($doubles);
+            $this->prepareQuery();
+        }
+
+        // Identical, except for case
+        $noUnderscoreVariables = array_map(function($x) { return str_replace('_', '', $x); }, $variables);
+        $noUnderscoreVariables = array_count_values($noUnderscoreVariables);
+        $doubles = array_filter($noUnderscoreVariables, function($count){ return $count > 1; });
+        
+        if (!empty($doubles)) {
+            $this->atomIs(array("Variable", "Variablearray", "Variableobject"))
+                  ->raw('filter{it.get().value("code").toString()
+                                                      .replaceAll( "_", "") in ***}', $doubles);
+            $this->prepareQuery();
+        }
+
+        // Identical, except for numbers
+        $noFigureVariables = array_map(function($x) { return str_replace(range('0', '9'), '', $x); }, $variables);
+        $noFigureVariables = array_count_values($noFigureVariables);
+        $doubles = array_filter($noFigureVariables, function($count){ return $count > 1; });
+        
+        if (!empty($doubles)) {
+            $this->atomIs(array("Variable", "Variablearray", "Variableobject"))
+                  ->raw('filter{it.get().value("code").toString()
+                                                      .replaceAll( "[0-9]", "") in ***}', $doubles);
+            $this->prepareQuery();
+        }
     }
 }
 
