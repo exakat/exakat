@@ -49,10 +49,13 @@ class Inventories extends Reports {
         $this->saveInventory('Namespaces/Namespacesnames', "$folder/$name/namespaces.csv");
         $this->saveInventory('Exceptions/DefinedExceptions', "$folder/$name/exceptions.csv");
 
-        $this->saveInventory('Variables/Variablesnames', "$folder/$name/variables.csv");
+        $this->saveTable('variables', "$folder/$name/variables.csv");
         $this->saveInventory('Php/IncomingVariables', "$folder/$name/incomingGPC.csv");
         $this->saveInventory('Php/SessionVariables', "$folder/$name/sesssions.csv");
         $this->saveInventory('Variables/GlobalVariables', "$folder/$name/globals.csv");
+
+        $this->saveInventory('Php/DateFormats', "$folder/$name/dateformats.csv");
+        $this->saveInventory('Type/Regex', "$folder/$name/regex.csv");
 
         $this->saveAtom('Integer',      "$path/integers.csv");
         $this->saveAtom('ArrayLiteral', "$path/arrays.csv");
@@ -85,6 +88,30 @@ class Inventories extends Reports {
         $step = 0;
         while($row = $res->fetchArray(\SQLITE3_NUM)) {
             ++$step;
+            fputcsv($fp, $row);
+        }
+        $this->count($step);
+        fclose($fp);
+    }
+
+    private function saveTable($table, $file) {
+        $res = $this->sqlite->query('SELECT * FROM '.$table);
+        if ($res === false) {
+            file_put_contents($file, 'This file is left voluntarily empty. Nothing to report here. ');
+            return;
+        }
+        $step = 0;
+        $row = $res->fetchArray(\SQLITE3_NUM);
+        unset($row['id']);
+        $fp = fopen($file, 'w+');
+
+        ++$step;
+        fputcsv($fp, array_keys($row));
+        fputcsv($fp, $row);
+
+        while($row = $res->fetchArray(\SQLITE3_NUM)) {
+            ++$step;
+            unset($row['id']);
             fputcsv($fp, $row);
         }
         $this->count($step);
