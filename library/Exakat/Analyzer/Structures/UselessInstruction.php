@@ -26,17 +26,21 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessInstruction extends Analyzer {
+    public function dependsOn() {
+        return array('Classes/IsaMagicProperty');
+    }
+
     public function analyze() {
         // Structures that should be put somewhere, and never left alone
         $this->atomIs('Sequence')
              ->hasNoIn('FINAL')
              ->outIs('EXPRESSION')
+             ->analyzerIsNot('Classes/IsaMagicProperty')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Member', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
-             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation'))
-             ;
+             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation'));
         $this->prepareQuery();
         
         // foreach($i = 0; $i < 10, $j < 20; $i++)
