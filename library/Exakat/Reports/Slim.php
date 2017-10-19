@@ -650,6 +650,9 @@ JAVASCRIPT;
         $tags = array();
         $code = array();
 
+        // Marking the audit date
+        $this->makeAuditDate($finalHTML);
+
         // Bloc top left
         $hashData = $this->getHashData();
         $finalHTML = $this->injectBloc($baseHTML, 'BLOCHASHDATA', $hashData);

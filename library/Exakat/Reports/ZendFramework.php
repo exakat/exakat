@@ -366,6 +366,9 @@ MENU;
         $tags[] = 'SCRIPTISSUES';
         $code[] = $issues['script'];
 
+        // Marking the audit date
+        $this->makeAuditDate($finalHTML);
+
         // bloc severity
         $severity = $this->getSeverityBreakdown();
         $finalHTML = $this->injectBloc($finalHTML, 'BLOCSEVERITY', $severity['html']);

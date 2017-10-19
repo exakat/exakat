@@ -201,12 +201,7 @@ MENU;
         $code[] = $severity['script'];
 
         // Marking the audit date
-        $audit_date = 'Audit date : '.date('d-m-Y h:i:s', time());
-        $audit_name = $this->datastore->getHash('audit_name');
-        if (!empty($audit_name)) {
-            $audit_date .= ' - &quot;'.$audit_name.'&quot;';
-        }
-        $finalHTML = $this->injectBloc($finalHTML, 'AUDIT_DATE', $audit_date);
+        $this->makeAuditDate($finalHTML);
 
         // top 10
         $fileHTML = $this->getTopFile();
