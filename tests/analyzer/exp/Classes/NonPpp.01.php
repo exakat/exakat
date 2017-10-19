@@ -5,8 +5,10 @@ $expected     = array('function nonPPP( ) { /**/ } ',
                       'static function staticm( ) { /**/ } ',
                       'abstract function abstractm( ) ;',
                       'var $varp',
-                      'static $staticp');
+                      'static $staticp',
+                     );
 
-$expected_not = array('function normalFunction( ) { /**/ } ');
+$expected_not = array('function normalFunction( ) { /**/ } ',
+                     );
 
 ?>
