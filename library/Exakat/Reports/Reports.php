@@ -34,7 +34,7 @@ abstract class Reports {
     const STDOUT = 'stdout';
 
     static public $FORMATS        = array('Ambassador', 'AmbassadorNoMenu', 'Devoops', 'Drillinstructor',
-                                          'Text', 'Xml', 'Uml', 'PlantUml', 'None',
+                                          'Text', 'Xml', 'Uml', 'PlantUml', 'None', 'SimpleHtml',
                                           'PhpConfiguration', 'PhpCompilation',
                                           'Inventories', 'Clustergrammer', 'FileDependencies', 'FileDependenciesHtml',
                                           'ZendFramework',  'RadwellCode', 'CodeSniffer', 'Slim',
