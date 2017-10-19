@@ -63,6 +63,7 @@ class Incompilable extends Analyzer {
         $r = Analyzer::$datastore->getHash('php_version');
         $version = $r[0].$r[2];
         $r = Analyzer::$datastore->getRow('compilation'.$version);
+        $report = array();
         
         foreach($r as $l) {
             $l['fullcode']  = $l['error'];

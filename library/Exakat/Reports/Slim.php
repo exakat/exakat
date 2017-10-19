@@ -35,7 +35,7 @@ class Slim extends Ambassador {
     protected $analyzers       = array(); // cache for analyzers [Title] = object
     protected $projectPath     = null;
     protected $finalName       = null;
-    private $tmpName           = '';
+    protected $tmpName         = '';
 
     private $docs              = null;
     private $timesToFix        = null;
@@ -100,7 +100,7 @@ MENU;
         return $combinePageHTML;
     }
 
-    private function putBasedPage($file, $html) {
+    protected function putBasedPage($file, $html) {
         if (strpos($html, '{{BLOC-JS}}') !== false) {
             $html = str_replace('{{BLOC-JS}}', '', $html);
         }
@@ -171,7 +171,7 @@ MENU;
         $this->cleanFolder();
     }
 
-    private function initFolder() {
+    protected function initFolder() {
         if ($this->finalName === Reports::STDOUT) {
             return "Can't produce Devoops format to stdout";
         }
@@ -185,7 +185,7 @@ MENU;
         copyDir($this->config->dir_root.'/media/devfaceted', $this->tmpName );
     }
 
-    private function cleanFolder() {
+    protected function cleanFolder() {
         if (file_exists($this->tmpName.'/datas/base.html')) {
             unlink($this->tmpName.'/datas/base.html');
             unlink($this->tmpName.'/datas/menu.html');
@@ -235,7 +235,7 @@ MENU;
         return $lines;
     }
 
-    private function setPHPBlocs($description){
+    protected function setPHPBlocs($description){
         $description = str_replace("<?php", '</p><pre><code class="php">&lt;?php', $description);
         $description = str_replace("?>", '?&gt;</code></pre><p>', $description);
         return $description;
@@ -649,6 +649,9 @@ JAVASCRIPT;
 
         $tags = array();
         $code = array();
+
+        // Marking the audit date
+        $this->makeAuditDate($finalHTML);
 
         // Bloc top left
         $hashData = $this->getHashData();
@@ -1418,7 +1421,7 @@ SQL;
         return $data;
     }
 
-    private function getTopFile() {
+    protected function getTopFile() {
         $data = $this->getFilesCount(self::TOPLIMIT);
 
         $html = '';
@@ -1441,7 +1444,7 @@ SQL;
         return $html;
     }
 
-    private function getFileOverview() {
+    protected function getFileOverview() {
         $data = $this->getFilesCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
@@ -1493,7 +1496,7 @@ SQL;
         return $data;
     }
 
-    private function getTopAnalyzers() {
+    protected function getTopAnalyzers() {
         $listArray = Analyzer::getThemeAnalyzers($this->themesToShow);
         $list = makeList($listArray);
         $toplimit = self::TOPLIMIT;
@@ -1552,7 +1555,7 @@ SQL;
         return $return;
     }
 
-    private function getAnalyzerOverview() {
+    protected function getAnalyzerOverview() {
         $data = $this->getAnalyzersCount(self::LIMITGRAPHE);
         $xAxis        = array();
         $dataMajor    = array();
@@ -2396,7 +2399,7 @@ HTML;
         }
     }
     
-    private function PHPSyntax($code) {
+    protected function PHPSyntax($code) {
         $php = highlight_string('<?php |'.$code.'|; ?>', true);
         $php = substr($php, strpos($php, '|') + 1);
         $php = substr($php, 0, strrpos($php, '|'));

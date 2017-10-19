@@ -314,7 +314,7 @@ MENU;
         $analyzersDocHTML = "";
 
         foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer, $this->config);
+            $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
             $analyzersDocHTML.='<h2><a href="issues.html?analyzer='.md5($description->getName()).'" id="'.md5($description->getName()).'">'.$description->getName().'</a></h2>';
 
@@ -365,6 +365,9 @@ MENU;
         $finalHTML = $this->injectBloc($finalHTML, 'BLOCISSUES', $issues['html']);
         $tags[] = 'SCRIPTISSUES';
         $code[] = $issues['script'];
+
+        // Marking the audit date
+        $this->makeAuditDate($finalHTML);
 
         // bloc severity
         $severity = $this->getSeverityBreakdown();
@@ -1025,7 +1028,7 @@ SQL
 
         $return = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], $this->config);
+            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
             $row['label'] = $analyzer->getDescription()->getName();
             $row['recipes' ] =  join(', ', $this->themesForAnalyzer[$row['analyzer']]);
 
@@ -1210,7 +1213,7 @@ SQL;
         $result = $this->sqlite->query($query);
         $data = array();
         while ($row = $result->fetchArray(\SQLITE3_ASSOC)) {
-            $analyzer = Analyzer::getInstance($row['analyzer'], $this->config);
+            $analyzer = Analyzer::getInstance($row['analyzer'], null, $this->config);
             $data[] = array('label' => $analyzer->getDescription()->getName(),
                             'value' => $row['number']);
         }
@@ -1480,7 +1483,7 @@ SQL;
         $analyzers = '';
 
         foreach(Analyzer::getThemeAnalyzers($this->themesToShow) as $analyzer) {
-            $analyzer = Analyzer::getInstance($analyzer, $this->config);
+            $analyzer = Analyzer::getInstance($analyzer, null, $this->config);
             $description = $analyzer->getDescription();
 
             $analyzers .= "<tr><td>".$description->getName()."</td></tr>\n";
@@ -1951,7 +1954,7 @@ JAVASCRIPT;
             $versionSuffix = array_map(function($x) use ($component) { return $component.$x[0].$x[2];}, $componentVersion);
             $versionSuffixList = '"'.implode('", "', $versionSuffix).'"';
             
-                $sqlQuery = <<<SQL
+            $sqlQuery = <<<SQL
             SELECT analyzer, count 
                 FROM resultsCounts
                 WHERE analyzer IN ($versionSuffixList)
@@ -1979,10 +1982,10 @@ SQL;
                     continue;
                 }
                 
-                $rows[] = $results[$analyzer] === 0 ? '<i class="fa fa-check-square-o"></i>' : '<i class="fa fa-check-o"></i>';
+                $rows[] = $results[$analyzer] === 0 ? '<i class="fa fa-check-square-o" style="color: #00ff00"></i>' : '<i class="fa fa-warning" style="color: #ff0000"></i>';
             }
             
-            $rows = array_map(function($x) { return "<td>$x</td>";}, $rows);
+            $rows = array_map(function($x) { return '<td>'.$x.'</td>';}, $rows);
 
             $table .= '<tr>'.implode($rows).'</tr>';
 

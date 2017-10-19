@@ -28,25 +28,12 @@ use Exakat\Analyzer\Analyzer;
 class HardcodedPasswords extends Analyzer {
     public function analyze() {
         // Position is 0 based
-        $passwords = array(
-                           'mysql_connect'            => 2,
-                           'mysqli_connect'           => 2,
-                           'ftp_login'                => 2,
-                           'mssql_connect'            => 2,
-                           'oci_connect'              => 1,
-                           'imap_open'                => 2,
-                           'cyrus_authenticate'       => 7,
-                           'ssh2_auth_password'       => 1,
-                           'hash_hmac'                => 2,
-                           'hash_hmac_file'           => 2,
-                           'hash_pbkdf2'              => 1,
-                           'kadm5_create_principal'   => 2,
-                           'kadm5_chpass_principal'   => 2,
-                           'kadm5_init_with_password' => 3,
-                           );
-        
+        $passwordsFunctions = $this->loadJson('php_logins.json');
+
+        $functions = (array) $passwordsFunctions->functions;
+
         $positions = array();
-        foreach($passwords as $function => $position) {
+        foreach($functions as $function => $position) {
             if (isset($positions[$position])) {
                 $positions[$position][] = '\\'.$function;
             } else {
@@ -61,6 +48,19 @@ class HardcodedPasswords extends Analyzer {
                  ->back('first');
             $this->prepareQuery();
         }
+        
+        // ['password' => 1];
+        $this->atomIs('Arrayliteral')
+             ->outIs('ARGUMENT')
+             ->atomIs('Keyvalue')
+             ->outIs('INDEX')
+             ->atomIs('String')
+             ->noDelimiterIs('password')
+             ->inIs('INDEX')
+             ->outIs('VALUE')
+             ->atomIs('String')
+             ->back('first');
+        $this->prepareQuery();
     }
 }
 

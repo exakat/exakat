@@ -64,6 +64,14 @@ class UnreachableCode extends Analyzer {
              ->atomIsNot($finalTokens);
         $this->prepareQuery();
 
+        $this->atomFunctionIs('\\assert')
+             ->outWithRank('ARGUMENT', 0)
+             ->is('boolean', false)
+             ->inIs('ARGUMENT')
+             ->nextSiblings()
+             ->atomIsNot($finalTokens);
+        $this->prepareQuery();
+
         $this->atomIs('Functioncall')
              ->hasNoIn('METHOD')
              ->tokenIs(array('T_STRING', 'T_NS_SEPARATOR'))

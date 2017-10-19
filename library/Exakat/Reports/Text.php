@@ -33,10 +33,8 @@ class Text extends Reports {
             $list = Analyzer::getThemeAnalyzers(array($this->config->thema));
             $list = '"'.join('", "', $list).'"';
         } elseif ($this->config->program !== null) {
-            print "analyze\n";
             $list = '"'.$this->config->program.'"';
         } else {
-            print "default\n";
             $list = Analyzer::getThemeAnalyzers($this->themesToShow);
             $list = '"'.join('", "', $list).'"';
         }

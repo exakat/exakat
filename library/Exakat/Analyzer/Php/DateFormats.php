@@ -20,27 +20,30 @@
  *
 */
 
-namespace Exakat\Analyzer\Structures;
+namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
 
-class RepeatedRegex extends Analyzer {
+class DateFormats extends Analyzer {
     public function analyze() {
-        // pcre_last_error is too much here
-        $functions = $this->loadIni('pcre.ini', 'functions');
-        $functionsList = '"\\\\'.implode('", "\\\\', $functions).'"';
-    
-        $repeatedRegex = $this->query('g.V().hasLabel("Functioncall").has("fullnspath", within('.$functionsList.'))
-        .out("ARGUMENT").hasLabel("String").not(where(__.out("CONCAT")))
-        .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b > 1}.keySet()');
+        // date('r');
+        $this->atomFunctionIs(array('\date', '\strftime', '\gmstrftime'))
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String');
+        $this->prepareQuery();
 
-        // regex
-        $this->atomFunctionIs(array('\\preg_match'))
-             ->outIs('ARGUMENT')
-             ->atomIs('String')
-             ->hasNoOut('CONCAT')
-             ->codeIs($repeatedRegex)
-             ->back('first');
+        // DateTime->format('r');
+        $this->atomIs('Methodcall')
+             ->outIs('METHOD')
+             ->codeIs('format')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String');
+        $this->prepareQuery();
+
+        // date_format('r');
+        $this->atomFunctionIs('\date_format')
+             ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String');
         $this->prepareQuery();
     }
 }

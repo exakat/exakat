@@ -29,7 +29,6 @@ use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Exceptions\NoSuchProject;
 use Exakat\Exceptions\NoSuchThema;
 use Exakat\Exceptions\NotProjectInGraph;
-use Exakat\Exceptions\NeedsAnalysisThema;
 use Exakat\Tokenizer\Token;
 
 class Dump extends Tasks {
@@ -112,6 +111,7 @@ SQL;
             $this->getAtomCounts();
 
             $this->collectStructures();
+            $this->collectVariables();
             $this->collectLiterals();
             $this->collectFilesDependencies();
             display('Collecting data finished');
@@ -323,12 +323,52 @@ SQL;
         }
     }
 
+    private function collectVariables() {
+        // Name spaces
+        $this->sqlite->query('DROP TABLE IF EXISTS variables');
+        $this->sqlite->query('CREATE TABLE variables (  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                        variable STRING,
+                                                        type STRING
+                                                 )');
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Variable", "Variablearray", "Variableobject").map{ ['name' : it.get().value("code"), 
+                                                                    'type' : it.get().label()        ] }.unique();
+GREMLIN;
+        $res = $this->gremlin->query($query);
+        if (isset($res->results)) {
+            $res = $res->results;
+        } else {
+            $res = (object) $res;
+        }
+
+        $total = 0;
+        $query = array();
+
+        $types = array('Variable'       => 'var',
+                       'Variablearray'  => 'array',
+                       'Variableobject' => 'object',
+                      );
+        foreach($res as $row) {
+            $type = $types[$row->type];
+            $query[] = "(null, '".strtolower($this->sqlite->escapeString($row->name))."', '".$type."')";
+            ++$total;
+        }
+        
+        if (!empty($query)) {
+            $query = 'INSERT INTO variables ("id", "variable", "type") VALUES '.join(', ', $query);
+            $this->sqlite->query($query);
+        }
+        
+        print "Variables : $total\n";
+    }
+    
     private function collectStructures() {
 
         // Name spaces
         $this->sqlite->query('DROP TABLE IF EXISTS namespaces');
         $this->sqlite->query('CREATE TABLE namespaces (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                   namespace STRING
+                                                         namespace STRING
                                                  )');
         $this->sqlite->query('INSERT INTO namespaces VALUES ( 1, "")');
 
@@ -342,7 +382,6 @@ GREMLIN
         } else {
             $res = (object) $res;
         }
-//        $res = $res->results;
 
         $total = 0;
         $query = array();

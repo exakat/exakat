@@ -1,7 +1,7 @@
 <?php
 
-$expected     = array();
+$expected     = array('(int) 60.234');
 
-$expected_not = array();
+$expected_not = array('(int) 60');
 
 ?>

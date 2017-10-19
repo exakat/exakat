@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array('recursive');
+$expected     = array('recursive',
+                      'recursiveB',
+                     );
 
-$expected_not = array();
+$expected_not = array('nonRecursive',
+                     );
 
 ?>

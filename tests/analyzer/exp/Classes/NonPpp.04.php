@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('final static function finalFS( ) { /**/ } ', 
-                      'static final function finalSF( ) { /**/ } ');
+                      'static final function finalSF( ) { /**/ } ',
+                     );
 
-$expected_not = array('function normalFunction( ) { /**/ } ');
+$expected_not = array('function normalFunction( ) { /**/ } ',
+                     );
 
 ?>

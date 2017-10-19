@@ -4,8 +4,12 @@ $expected     = array('function null( ) { /**/ } ',
                       'class true', 
                       '$this->die( )', 
                       '$this->exit( )', 
-                      '$or');
+                      '$or',
+                      );
 
-$expected_not = array();
+$expected_not = array('function',
+                      'print',
+                      'define',
+                     );
 
 ?>

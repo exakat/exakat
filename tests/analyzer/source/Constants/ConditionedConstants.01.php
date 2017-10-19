@@ -2,6 +2,8 @@
 
 function unconditionalFunction() {}
 
+define('normalConstant', 1);
+
 if (!defined('x')) { 
     define("conditionedByX", 1);
 }
