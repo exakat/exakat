@@ -66,10 +66,38 @@ class UselessInstruction extends Analyzer {
              ->atomIs('Closure');
         $this->prepareQuery();
 
-        // return $a++;
+        // return $a++; (unless it is an argument/use by reference)
+        // May also check if it is static or global (those stays).
         $this->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Postplusplus')
+             ->outIs('POSTPLUSPLUS')
+             ->atomIsNot('Variable')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Return')
+             ->outIs('RETURN')
+             ->atomIs('Postplusplus')
+             ->outIs('POSTPLUSPLUS')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'variable')
+             ->goToFunction()
+             ->outIs(array('ARGUMENT', 'USE'))
+             ->outIsIE('NAME')
+             ->samePropertyAs('code', 'variable')
+             ->isNot('reference', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Return')
+             ->outIs('RETURN')
+             ->atomIs('Postplusplus')
+             ->outIs('POSTPLUSPLUS')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'variable')
+             ->goToFunction()
+             ->raw('not(where( __.out("ARGUMENT", "USE").filter{ it.get().value("code") == variable; }))')
              ->back('first');
         $this->prepareQuery();
 
