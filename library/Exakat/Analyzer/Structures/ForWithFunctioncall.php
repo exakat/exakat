@@ -28,8 +28,22 @@ use Exakat\Analyzer\Analyzer;
 class ForWithFunctioncall extends Analyzer {
     public function analyze() {
         $this->atomIs('For')
+            // This looks for variables inside the INCREMENT
+             ->raw('where( 
+            __.sideEffect{variables = [];}
+              .out("INCREMENT").repeat( __.out()).emit().times(15)
+              .hasLabel("Variable")
+              .sideEffect{ variables.push(it.get().value("code")); }
+              .fold()
+             )')
              ->outIs('FINAL')
              ->atomInside('Functioncall')
+            // This checks for usage of increment variables inside the FINAL
+             ->raw('not(where( 
+            __.repeat( __.out()).emit().times(15)
+              .hasLabel("Variable")
+              .filter{ it.get().value("code") in variables; }
+            ))')
              ->back('first');
         $this->prepareQuery();
 
