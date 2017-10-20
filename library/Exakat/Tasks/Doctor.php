@@ -132,11 +132,26 @@ class Doctor extends Tasks {
                     $graphdb = 'tinkergraph';
 
                 }
+                
+                if (!file_exists($this->config->projects_root.'/tinkergraph/db')) {
+                    mkdir($this->config->projects_root.'/tinkergraph/db', 0755);
+                }
 
-                copy($this->config->projects_root.'/server/gsneo4j/gsneo4j.yaml',
-                     $this->config->projects_root.'/tinkergraph/conf/gsneo4j.yaml');
-                copy($this->config->projects_root.'/server/tinkergraph/conf/tinkergraph.yaml',
-                     $this->config->projects_root.'/tinkergraph/conf/tinkergraph.yaml');
+                $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
+                $gremlinVersion = basename(array_pop($gremlinJar));
+                //gremlin-core-3.2.5.jar
+                $gremlinVersion = substr($gremlinVersion, 13, -4);
+                $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
+
+                if (!copy($this->config->dir_root.'/server/gsneo4j/gsneo4j'.$version.'.yaml',
+                     $this->config->projects_root.'/tinkergraph/conf/gsneo4j.yaml')) {
+                    display('Error while copying gsneo4j'.$version.'.yaml config file to tinkergraph.');
+                }
+                if (!copy($this->config->dir_root.'/server/tinkergraph/conf/tinkergraph'.$version.'.yaml',
+                     $this->config->projects_root.'/tinkergraph/conf/tinkergraph.yaml')) {
+                    display('Error while copying tinkergraph'.$version.'.yaml config file to tinkergraph.');
+                }
+
             } else {
                 $graphdb = 'neo4j';
 
@@ -513,10 +528,12 @@ class Doctor extends Tasks {
             $gremlinVersion = substr($gremlinVersion, 13, -4);
             $stats['gremlin version'] = $gremlinVersion;
 
-            $neo4jJar = glob($this->config->gsneo4j_folder.'/ext/neo4j-gremlin-*.jar');
+            $neo4jJar = glob($this->config->gsneo4j_folder.'/ext/neo4j-gremlin/lib/neo4j-*.jar');
+            $neo4jJar = array_filter($neo4jJar, function($x) { return preg_match('#/neo4j-\d\.\d\.\d\.jar#', $x); });
             $neo4jVersion = basename(array_pop($neo4jJar));
+
             //neo4j-2.3.3.jar
-            $neo4jVersion = substr($gremlinVersion, 6, -4);
+            $neo4jVersion = substr($neo4jVersion, 6, -4);
             $stats['neo4j version'] = $neo4jVersion;
             
             if (file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
