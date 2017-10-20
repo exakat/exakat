@@ -63,6 +63,7 @@ class Doctor extends Tasks {
         $stats['exakat']['version']    = Exakat::VERSION;
         $stats['exakat']['build']      = Exakat::BUILD;
         $stats['exakat']['exakat.ini'] = $this->array2list($this->config->configFiles);
+        $stats['exakat']['graphdb']    = $this->config->graphdb;
         $stats['exakat']['reports']    = $this->array2list($this->config->project_reports);
         $stats['exakat']['themes']     = $this->array2list($this->config->project_themes);
 
@@ -94,129 +95,9 @@ class Doctor extends Tasks {
         $res = getenv('JAVA_HOME');
         $stats['java']['$JAVA_HOME'] = $res;
 
-        // neo4j
-        if (empty($this->config->neo4j_folder)) {
-            $stats['neo4j']['installed'] = 'Couldn\'t find the path to neo4j from the config/exakat.ini. Please, check it.';
-        } elseif (!file_exists($this->config->neo4j_folder)) {
-            $stats['neo4j']['installed'] = 'No (folder : '.$this->config->neo4j_folder.')';
-        } else {
-            $file = file($this->config->neo4j_folder.'/README.txt');
-            $stats['neo4j']['version'] = trim($file[0]);
-
-            if (isset($stats['java']['version']) && version_compare($stats['java']['version'], '1.8') < 0) {
-                $file = file_get_contents($this->config->neo4j_folder.'/conf/neo4j-wrapper.conf');
-                if (!preg_match('/wrapper.java.additional=-XX:MaxPermSize=(\d+\w)/is', $file, $r)) {
-                    $stats['neo4j']['MaxPermSize'] = 'Unset (64M)';
-                    $stats['neo4j']['MaxPermSize warning'] = 'Set MaxPermSize to 512 or more in neo4j/conf/neo4j-wrapper.conf, with "wrapper.java.additional=-XX:MaxPermSize=512m" around line 20';
-                } else {
-                    $stats['neo4j']['MaxPermSize'] = $r[1];
-                }
-            }
-
-            $file = file_get_contents($this->config->neo4j_folder.'/conf/neo4j-server.properties');
-            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/is', $file, $r)) {
-                $stats['neo4j']['port'] = $r[1];
-            } else {
-                $stats['neo4j']['port'] = '7474 (in fact, unset value. Using default : 7474)';
-            }
-
-            if ($stats['neo4j']['port'] != $this->config->neo4j_port) {
-                $stats['neo4j']['port_alert'] = $this->config->neo4j_port.' : configured port in config/exakat.ini is not the one in the neo4j installation. Please, sync them.';
-            }
-
-            if (preg_match('/dbms.security.auth_enabled\s*=\s*false/is', $file, $r)) {
-                $stats['neo4j']['authentication'] = 'Not enabled';
-            } else {
-                $stats['neo4j']['authentication'] = 'Enabled.';
-                if (empty($this->config->neo4j_login)) {
-                    $stats['neo4j']['login'] = 'Login is not set, but authentication is. Please, set login in config/exakat.ini';
-                } elseif (empty($this->config->neo4j_password)) {
-                    $stats['neo4j']['password'] = 'Login is set, but not password. Please, set it in config/exakat.ini';
-                }
-                $res = $this->gremlin->query('"Hello world"');
-                if ($res === null) {
-                    $stats['neo4j']['credentials'] = 'Server is not running.';
-                } elseif (isset($res->success) && $res->success === true) {
-                    $stats['neo4j']['credentials'] = 'OK.';
-                } else {
-                    $stats['neo4j']['credentials'] = 'Login or password are wrong (message : '.$res->errors[0]->message.')';
-                }
-            }
-
-            if (preg_match('#org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp#is', $file, $r)) {
-                $stats['neo4j']['gremlinPlugin'] = 'Configured.';
-            } else {
-                $stats['neo4j']['gremlinPlugin'] = 'Not found. Make sure that "org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp" is in the conf/neo4j-server.property.';
-            }
-
-            $gremlinPlugin = glob($this->config->neo4j_folder.'/plugins/*/neo4j-gremlin-3.2.0-incubating.jar');
-            if (empty($gremlinPlugin)) {
-                $stats['neo4j']['gremlinJar'] = 'neo4j-gremlin-3.2.0-incubatingcoudln\'t be found in the '.$this->config->neo4j_folder.'/plugins/* folders. Make sure gremlin is installed, and running gremlin version 3.* (3.2.0-incubating is recommended).';
-            } elseif (count($gremlinPlugin) > 1) {
-                $versions = array();
-                foreach($gremlinPlugin as $version) {
-                    $v = basename($version);
-                    $versions[] = $v;
-                }
-                $stats['neo4j']['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin : '.join(', ', $versions).'. Only one neo4j-gremlin-3.*.jar is sufficient. ';
-            } else {
-                $stats['neo4j']['gremlinJar'] = basename(trim(array_pop($gremlinPlugin)));
-            }
-
-            $stats['neo4j']['scriptFolder'] = file_exists($this->config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
-            if ($stats['neo4j']['scriptFolder'] == 'No') {
-                mkdir($this->config->neo4j_folder.'/scripts/', 0755);
-                $stats['neo4j']['scriptFolder'] = file_exists($this->config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
-            }
-
-            $context = stream_context_create(array('http'=>
-            array(
-                'timeout' => 1,
-                )
-            ));
-
-            $pidPath = $this->config->neo4j_folder.'/conf/neo4j-service.pid';
-            if (file_exists($pidPath)) {
-                $stats['neo4j']['pid'] = file_get_contents($pidPath);
-            } else {
-                $res = shell_exec('ps aux | grep gremlin | grep plugin');
-                if (preg_match('/^\w+\s+(\d+)\s/is', $res, $r)) {
-                    $stats['neo4j']['pid'] = $r[1];
-                } else {
-                    $stats['neo4j']['pid'] = 'Unknown';
-                }
-            }
-
-            $json = @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/db/data/');
-            if (empty($json)) {
-                $stats['neo4j']['running'] = 'No';
-            } else {
-                $stats['neo4j']['running'] = 'Yes';
-                $status = shell_exec('cd '.$this->config->neo4j_folder.'; ./bin/neo4j status');
-                if (strpos($status, 'Neo4j Server is running at pid') !== false) {
-                    $stats['neo4j']['running here'] = 'Yes';
-                } else {
-                    $stats['neo4j']['running here'] = 'No';
-                }
-
-                if ('{"success":true}' === @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute')) {
-                    $stats['neo4j']['gremlin'] = 'Yes';
-                } else {
-                    $stats['neo4j']['gremlin'] = 'No';
-                    $stats['neo4j']['gremlin-installation'] = 'Install gremlin plugin for neo4j';
-                }
-
-                $json = file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute?script='.urlencode('1 + 1'), false, $context);
-                if ($json === '{"success":true,"results":2}') {
-                    $stats['neo4j']['gremlin-status'] = 'OK';
-                } else {
-                    $stats['neo4j']['gremlin-status'] = 'Failed';
-                }
-            }
-
-            $stats['neo4j']['$NEO4J_HOME'] = getenv('NEO4J_HOME');
-            $stats['neo4j']['$NEO4J_HOME / config'] = realpath(getenv('NEO4J_HOME')) === realpath($this->config->neo4j_folder) ? 'Same' : 'Different';
-        }
+        $stats['tinkergraph'] = $this->getTinkerGraph();
+        $stats['gsneo4j'] = $this->getTinkerGraphNeo4j();
+        $stats['neo4j'] = $this->getNeo4j();
 
         if ($this->config->project !== 'default') {
             $stats['project']['name']             = $this->config->project_name;
@@ -239,24 +120,43 @@ class Doctor extends Tasks {
         }
 
         if (!file_exists($this->config->projects_root.'/config/exakat.ini')) {
-            $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
-
-            $neo4j_folder = getenv('NEO4J_HOME');
-            if (empty($neo4j_folder)) {
-                $neo4j_folder = 'neo4j'; // Local Installation
-            } elseif (!file_exists($neo4j_folder)) {
-                $neo4j_folder = 'neo4j'; // Local Installation
-            } elseif (!file_exists($neo4j_folder.'/scripts/')) {
-                // This Neo4J has no 'scripts' folder and we use it! Not our database
-                $neo4j_folder = 'neo4j'; // Local Installation
-            }
-            $php = $this->config->php;
-
             $ini = file_get_contents($this->config->dir_root.'/server/exakat.ini');
-            $ini = str_replace(array('{$version}', '{$version_path}'),
-                               array( $version,     $_SERVER['_']),
-                               $ini);
+            $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
+            
+            if (file_exists($this->config->projects_root.'/tinkergraph')) {
+                // tinkergraph or gsneo4j 
+                if (file_exists($this->config->projects_root.'/tinkergraph/ext/neo4j-gremlin/')) {
+                    $graphdb = 'gsneo4j';
+                    
+                } else {
+                    $graphdb = 'tinkergraph';
 
+                }
+
+                copy($this->config->projects_root.'/server/gsneo4j/gsneo4j.yaml',
+                     $this->config->projects_root.'/tinkergraph/conf/gsneo4j.yaml');
+                copy($this->config->projects_root.'/server/tinkergraph/conf/tinkergraph.yaml',
+                     $this->config->projects_root.'/tinkergraph/conf/tinkergraph.yaml');
+            } else {
+                $graphdb = 'neo4j';
+
+                $neo4j_folder = getenv('NEO4J_HOME');
+                if (empty($neo4j_folder)) {
+                    $neo4j_folder = 'neo4j'; // Local Installation
+                } elseif (!file_exists($neo4j_folder)) {
+                    $neo4j_folder = 'neo4j'; // Local Installation
+                } elseif (!file_exists($neo4j_folder.'/scripts/')) {
+                    // This Neo4J has no 'scripts' folder and we use it! Not our database
+                    $neo4j_folder = 'neo4j'; // Local Installation
+                }
+                $php = $this->config->php;
+
+            }
+
+            $ini = str_replace(array('{$version}', '{$version_path}', '{$graphdb}', ';'.$graphdb, ), 
+                               array( $version,     $_SERVER['_'],      $graphdb,    $graphdb,     ),
+                               $ini);
+            
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
         }
 
@@ -317,6 +217,9 @@ class Doctor extends Tasks {
 
         // check PHP 7.2
         $stats['PHP 7.2'] = $this->checkPHP($this->config->php72, '7.2');
+
+        // check PHP 7.3
+        $stats['PHP 7.3'] = $this->checkPHP($this->config->php73, '7.3');
 
         return $stats;
     }
@@ -434,6 +337,194 @@ class Doctor extends Tasks {
 
     private function array2line($array) {
         return implode(", ", $array);
+    }
+    
+    private function getNeo4j() {
+        $stats = array();
+        
+        // neo4j
+        if (empty($this->config->neo4j_folder)) {
+            $stats['installed'] = 'Couldn\'t find the path to neo4j from the config/exakat.ini. Please, check it.';
+        } elseif (!file_exists($this->config->neo4j_folder)) {
+            $stats['installed'] = 'No (folder : '.$this->config->neo4j_folder.')';
+        } else {
+            $file = file($this->config->neo4j_folder.'/README.txt');
+            $stats['version'] = trim($file[0]);
+
+            if (isset($stats['java']['version']) && version_compare($stats['java']['version'], '1.8') < 0) {
+                $file = file_get_contents($this->config->neo4j_folder.'/conf/neo4j-wrapper.conf');
+                if (!preg_match('/wrapper.java.additional=-XX:MaxPermSize=(\d+\w)/is', $file, $r)) {
+                    $stats['MaxPermSize'] = 'Unset (64M)';
+                    $stats['MaxPermSize warning'] = 'Set MaxPermSize to 512 or more in neo4j/conf/neo4j-wrapper.conf, with "wrapper.java.additional=-XX:MaxPermSize=512m" around line 20';
+                } else {
+                    $stats['MaxPermSize'] = $r[1];
+                }
+            }
+
+            $file = file_get_contents($this->config->neo4j_folder.'/conf/neo4j-server.properties');
+            if (preg_match('/org.neo4j.server.webserver.port *= *(\d+)/is', $file, $r)) {
+                $stats['port'] = $r[1];
+            } else {
+                $stats['port'] = '7474 (in fact, unset value. Using default : 7474)';
+            }
+
+            if ($stats['port'] != $this->config->neo4j_port) {
+                $stats['port_alert'] = $this->config->neo4j_port.' : configured port in config/exakat.ini is not the one in the neo4j installation. Please, sync them.';
+            }
+
+            if (preg_match('/dbms.security.auth_enabled\s*=\s*false/is', $file, $r)) {
+                $stats['authentication'] = 'Not enabled';
+            } else {
+                $stats['authentication'] = 'Enabled.';
+                if (empty($this->config->neo4j_login)) {
+                    $stats['login'] = 'Login is not set, but authentication is. Please, set login in config/exakat.ini';
+                } elseif (empty($this->config->neo4j_password)) {
+                    $stats['password'] = 'Login is set, but not password. Please, set it in config/exakat.ini';
+                }
+                $res = $this->gremlin->query('"Hello world"');
+                if ($res === null) {
+                    $stats['credentials'] = 'Server is not running.';
+                } elseif (isset($res->success) && $res->success === true) {
+                    $stats['credentials'] = 'OK.';
+                } else {
+                    $stats['credentials'] = 'Login or password are wrong (message : '.$res->errors[0]->message.')';
+                }
+            }
+
+            if (preg_match('#org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp#is', $file, $r)) {
+                $stats['gremlinPlugin'] = 'Configured.';
+            } else {
+                $stats['gremlinPlugin'] = 'Not found. Make sure that "org.neo4j.server.thirdparty_jaxrs_classes=com.thinkaurelius.neo4j.plugins=/tp" is in the conf/neo4j-server.property.';
+            }
+
+            $gremlinPlugin = glob($this->config->neo4j_folder.'/plugins/*/neo4j-gremlin-3.2.0-incubating.jar');
+            if (empty($gremlinPlugin)) {
+                $stats['gremlinJar'] = 'neo4j-gremlin-3.2.0-incubating coudln\'t be found in the '.$this->config->neo4j_folder.'/plugins/* folders. Make sure gremlin is installed, and running gremlin version 3.* (3.2.0-incubating is recommended).';
+            } elseif (count($gremlinPlugin) > 1) {
+                $versions = array();
+                foreach($gremlinPlugin as $version) {
+                    $v = basename($version);
+                    $versions[] = $v;
+                }
+                $stats['gremlinJar'] = 'Found '.count($gremlinPlugin).' plugins gremlin : '.join(', ', $versions).'. Only one neo4j-gremlin-3.*.jar is sufficient. ';
+            } else {
+                $stats['gremlinJar'] = basename(trim(array_pop($gremlinPlugin)));
+            }
+
+            $stats['scriptFolder'] = file_exists($this->config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
+            if ($stats['scriptFolder'] == 'No') {
+                mkdir($this->config->neo4j_folder.'/scripts/', 0755);
+                $stats['scriptFolder'] = file_exists($this->config->neo4j_folder.'/scripts/') ? 'Yes' : 'No';
+            }
+
+            $context = stream_context_create(array('http'=>
+            array(
+                'timeout' => 1,
+                )
+            ));
+
+            $pidPath = $this->config->neo4j_folder.'/conf/neo4j-service.pid';
+            if (file_exists($pidPath)) {
+                $stats['pid'] = file_get_contents($pidPath);
+            } else {
+                $res = shell_exec('ps aux | grep gremlin | grep plugin');
+                if (preg_match('/^\w+\s+(\d+)\s/is', $res, $r)) {
+                    $stats['pid'] = $r[1];
+                } else {
+                    $stats['pid'] = 'Unknown';
+                }
+            }
+
+            $json = @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/db/data/');
+            if (empty($json)) {
+                $stats['running'] = 'No';
+            } else {
+                $stats['running'] = 'Yes';
+                $status = shell_exec('cd '.$this->config->neo4j_folder.'; ./bin/neo4j status');
+                if (strpos($status, 'Neo4j Server is running at pid') !== false) {
+                    $stats['running here'] = 'Yes';
+                } else {
+                    $stats['running here'] = 'No';
+                }
+
+                if ('{"success":true}' === @file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute')) {
+                    $stats['gremlin'] = 'Yes';
+                } else {
+                    $stats['gremlin'] = 'No';
+                    $stats['gremlin-installation'] = 'Install gremlin plugin for neo4j';
+                }
+
+                $json = file_get_contents('http://'.$this->config->neo4j_host.':'.$this->config->neo4j_port.'/tp/gremlin/execute?script='.urlencode('1 + 1'), false, $context);
+                if ($json === '{"success":true,"results":2}') {
+                    $stats['gremlin-status'] = 'OK';
+                } else {
+                    $stats['gremlin-status'] = 'Failed';
+                }
+            }
+        }
+        
+        return $stats;
+    }
+
+    private function getTinkerGraph() {
+        $stats = array();
+
+        if (empty($this->config->tinkergraph_folder)) {
+            $stats['configured'] = 'No tinkergraph configured in config/exakat.ini.';
+        } elseif (!file_exists($this->config->tinkergraph_folder)) {
+            $stats['installed'] = 'No (folder : '.$this->config->tinkergraph_folder.')';
+        } else {
+            $stats['installed'] = 'Yes (folder : '.$this->config->tinkergraph_folder.')';
+            $stats['host'] = $this->config->tinkergraph_host;
+            $stats['port'] = $this->config->tinkergraph_port;
+
+            $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
+            $gremlinVersion = basename(array_pop($gremlinJar));
+            //gremlin-core-3.2.5.jar
+            $gremlinVersion = substr($gremlinVersion, 13, -4);
+            
+            $stats['gremlin version'] = $gremlinVersion;
+
+            if (file_exists($this->config->tinkergraph_port.'/db/tinkergraph.pid')) {
+                $stats['running'] = 'Yes (PID : '.trim(file_get_contents($this->config->tinkergraph_port.'/db/tinkergraph.pid')).')';
+            }
+        }
+        
+        return $stats;
+    }
+    
+    private function getTinkerGraphNeo4j() {
+        $stats = array();
+
+        if (empty($this->config->gsneo4j_folder)) {
+            $stats['configured'] = 'No tinkergraph/neo4j configured in config/exakat.ini.';
+        } elseif (!file_exists($this->config->gsneo4j_folder)) {
+            $stats['installed'] = 'No (folder : '.$this->config->gsneo4j_folder.')';
+        } elseif (!file_exists($this->config->gsneo4j_folder.'/ext/neo4j-gremlin/')) {
+            $stats['installed'] = 'Partially (missing neo4j folder : '.$this->config->gsneo4j_folder.')';
+        } else {
+            $stats['installed'] = 'Yes (folder : '.$this->config->gsneo4j_folder.')';
+            $stats['host'] = $this->config->gsneo4j_host;
+            $stats['port'] = $this->config->gsneo4j_port;
+            
+            $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
+            $gremlinVersion = basename(array_pop($gremlinJar));
+            //gremlin-core-3.2.5.jar
+            $gremlinVersion = substr($gremlinVersion, 13, -4);
+            $stats['gremlin version'] = $gremlinVersion;
+
+            $neo4jJar = glob($this->config->gsneo4j_folder.'/ext/neo4j-gremlin-*.jar');
+            $neo4jVersion = basename(array_pop($neo4jJar));
+            //neo4j-2.3.3.jar
+            $neo4jVersion = substr($gremlinVersion, 6, -4);
+            $stats['neo4j version'] = $neo4jVersion;
+            
+            if (file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
+                $stats['running'] = 'Yes (PID : '.trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid')).')';
+            }
+        }
+
+        return $stats;
     }
 }
 ?>
