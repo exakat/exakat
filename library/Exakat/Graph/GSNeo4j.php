@@ -146,7 +146,12 @@ class GSNeo4j extends Graph {
             copy( $this->config->dir_root.'/server/tinkergraph/conf/gsneo4j.yaml',
                   $this->config->tinkergraph_folder.'/conf/gsneo4j.yaml');
         }
-        exec('cd '.$this->config->gsneo4j_folder.'; rm -rf db/neo4j; bin/gremlin-server.sh conf/gsneo4j.yaml  > gremlin.log 2>&1 & echo $! > db/gsneo4j.pid ');
+
+        if (file_exists($this->config->gsneo4j_folder.'/bin/gremlin-server.exakat.sh')) {
+            exec('cd '.$this->config->gsneo4j_folder.'; rm -rf db/neo4j; bin/gremlin-server.exakat.sh start conf/gsneo4j.yaml  &');
+        } else {
+            exec('cd '.$this->config->gsneo4j_folder.'; rm -rf db/neo4j; bin/gremlin-server.sh conf/gsneo4j.yaml  > gremlin.log 2>&1 & echo $! > db/gsneo4j.pid ');
+        }
         sleep(1);
         
         $b = microtime(true);
@@ -158,12 +163,25 @@ class GSNeo4j extends Graph {
         } while (empty($res));
         $e = microtime(true);
 
-        $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid'));
+        if (file_exists($this->config->gsneo4j_folder.'/bin/gremlin-server.exakat.sh')) {
+            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/run/gremlin.pid'));
+        } else {
+            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid'));
+        }
+        
+        var_dump($this->serverInfo());
+
         display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
     }
 
     public function stop() {
+        if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
+            display('stop gremlin server 3.3.x');
+            shell_exec('cd '.$this->config->gsneo4j_folder.'; ./bin/gremlin-server.sh stop');
+        } 
+        
         if (file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
+            display('stop gremlin server 3.2.x');
             shell_exec('kill -9 $(cat '.$this->config->gsneo4j_folder.'/db/gsneo4j.pid) 2>> gremlin.log; rm -f '.$this->config->gsneo4j_folder.'/db/gsneo4j.pid');
         }
     }
