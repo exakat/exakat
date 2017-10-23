@@ -1,4 +1,4 @@
-Version 0.12.17 (Roushi Demon, coming up)
+Version 1.0.1 (Xueshi  Demon, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,28 @@ Version 0.12.17 (Roushi Demon, coming up)
 + Tokenizer
     + 
 
-Version 0.12.16 (Tawny Lion Demon, 2017/10/16)
+Version 1.0.0 (Roushi Demon, 2017-10-23)
++ Architecture
+    + Tested on Gremlin 3.2.6. Checked Gremlin 3.3.0, but it needs more work.
+    + Upgraded doctor for installation and report.
+    + Upgraded docs to set gremlin-server as default install.
++ Report
+    + Added support for Clang-style report.
+    + Ambassador : fixed link to exception Tree.
+    + Inventories : Date format, 
+    + Audit names are reported in every Ambassador-style report. 
++ Analyzer
+    + Upgraded PHP directive list.
+    + Functions In For loop : prevent issue if the function uses a loop variable.
+    + Useless instruction : do not report return $i++ if $i is reference
+    + Useless instruction : Avoir reporting properties when they are magic
+    + New analyzer : mark properties to be magic.
+    + Upgraded list of PHP logins, to report hard coded passwords.
+    + Upgraded close naming : variables that differ with 1 chars are reported.
+    + Added assert(false...) to list of branching syntax.
+    + Checked unit tests : 2525 / 2515 test pass (99% pass). 
+
+Version 0.12.16 (Tawny Lion Demon, 2017-10-16)
 + Report
     + Beta version for Drill Instructor
     + Upgraded Inventories report with Sessions, Cookies, Incoming variables
