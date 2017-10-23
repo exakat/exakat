@@ -124,88 +124,38 @@ class Doctor extends Tasks {
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             
             if (file_exists($this->config->projects_root.'/tinkergraph')) {
+                $folder = 'tinkergraph';
                 // tinkergraph or gsneo4j
                 if (file_exists($this->config->projects_root.'/tinkergraph/ext/neo4j-gremlin/')) {
                     $graphdb = 'gsneo4j';
-                    
-                    $properties = file_get_contents($this->config->projects_root.'/tinkergraph/conf/neo4j-empty.properties');
-                    $properties = preg_replace("#gremlin.neo4j.directory=.*\n#s", "gremlin.neo4j.directory=db/neo4j\n", $properties);
-                    file_put_contents($this->config->projects_root.'/tinkergraph/conf/neo4j-empty.properties', $properties);
-
-                    if (!file_exists($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
-                        if (!copy($this->config->dir_root.'/server/gsneo4j/gremlin-server.sh',
-                             $this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
-                            display('Error while copying gremlin-server.exakat.sh file to tinkergraph.');
-                        } else {
-                            chmod($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh', 0755);
-                        }
-                    }
                 } else {
                     $graphdb = 'tinkergraph';
-
-                    if (!file_exists($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
-                        if (!copy($this->config->dir_root.'/server/tinkergraph/gremlin-server.sh',
-                             $this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
-                            display('Error while copying gremlin-server.exakat.sh file to tinkergraph.');
-                        } else {
-                            chmod($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh', 0755);
-                        }
-                    }
                 }
-                
-                if (!file_exists($this->config->projects_root.'/tinkergraph/db')) {
-                    mkdir($this->config->projects_root.'/tinkergraph/db', 0755);
-                }
-
-                $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
-                $gremlinVersion = basename(array_pop($gremlinJar));
-                //gremlin-core-3.2.5.jar
-                $gremlinVersion = substr($gremlinVersion, 13, -4);
-                $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
-
-                if (!copy($this->config->dir_root.'/server/gsneo4j/gsneo4j'.$version.'.yaml',
-                     $this->config->projects_root.'/tinkergraph/conf/gsneo4j.yaml')) {
-                    display('Error while copying gsneo4j'.$version.'.yaml config file to tinkergraph.');
-                }
-                if (!copy($this->config->dir_root.'/server/tinkergraph/conf/tinkergraph'.$version.'.yaml',
-                     $this->config->projects_root.'/tinkergraph/conf/tinkergraph.yaml')) {
-                    display('Error while copying tinkergraph'.$version.'.yaml config file to tinkergraph.');
-                }
-
             } else {
                 $graphdb = 'neo4j';
 
-                $neo4j_folder = getenv('NEO4J_HOME');
+                $folder = getenv('NEO4J_HOME');
                 if (empty($neo4j_folder)) {
-                    $neo4j_folder = 'neo4j'; // Local Installation
+                    $folder = 'neo4j'; // Local Installation
                 } elseif (!file_exists($neo4j_folder)) {
-                    $neo4j_folder = 'neo4j'; // Local Installation
+                    $folder = 'neo4j'; // Local Installation
                 } elseif (!file_exists($neo4j_folder.'/scripts/')) {
                     // This Neo4J has no 'scripts' folder and we use it! Not our database
-                    $neo4j_folder = 'neo4j'; // Local Installation
+                    $folder = 'neo4j'; // Local Installation
                 }
                 $php = $this->config->php;
-
             }
 
-            $ini = str_replace(array('{$version}', '{$version_path}', '{$graphdb}', ';'.$graphdb, ),
-                               array( $version,     $_SERVER['_'],      $graphdb,    $graphdb,     ),
+            $ini = str_replace(array('{$version}', '{$version_path}', '{$graphdb}', ';'.$graphdb, '{$graphdb}_path', ),
+                               array( $version,     $_SERVER['_'],      $graphdb,    $graphdb,     $folder),
                                $ini);
             
             file_put_contents($this->config->projects_root.'/config/exakat.ini', $ini);
-        }
-
-        if (!file_exists($this->config->projects_root.'/config/')) {
-            $stats['folders']['config-folder'] = 'No';
-        } elseif (file_exists($this->config->projects_root.'/config/exakat.ini')) {
-            $stats['folders']['config-folder'] = 'Yes';
-            $stats['folders']['config.ini'] = 'Yes';
-
-            $ini = parse_ini_file($this->config->projects_root.'/config/exakat.ini');
         } else {
-            $stats['folders']['config-folder'] = 'Yes';
-            $stats['folders']['config.ini'] = 'No';
+            $graphdb = $this->config->graphdb;
         }
+        
+        $this->checkInstall($graphdb);
 
         // projects
         if (file_exists($this->config->projects_root.'/projects/')) {
@@ -224,6 +174,59 @@ class Doctor extends Tasks {
         $stats['folders']['projects/onepage'] = file_exists($this->config->projects_root.'/projects/onepage/') ? 'Yes' : 'No';
 
         return $stats;
+    }
+    
+    private function checkInstall($graphdb) {
+        if ($graphdb === 'gsneo4j') {
+            $properties = file_get_contents($this->config->projects_root.'/tinkergraph/conf/neo4j-empty.properties');
+            $properties = preg_replace("#gremlin.neo4j.directory=.*\n#s", "gremlin.neo4j.directory=db/neo4j\n", $properties);
+            file_put_contents($this->config->projects_root.'/tinkergraph/conf/neo4j-empty.properties', $properties);
+
+            if (!file_exists($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
+                if (!copy($this->config->dir_root.'/server/gsneo4j/gremlin-server.sh',
+                     $this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
+                    display('Error while copying gremlin-server.exakat.sh file to tinkergraph.');
+                } else {
+                    chmod($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh', 0755);
+                }
+            }
+            $this->checkGremlinServer();
+        } elseif ($graphdb === 'tinkergraph') {
+            if (!file_exists($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
+                if (!copy($this->config->dir_root.'/server/tinkergraph/gremlin-server.sh',
+                  $this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
+                    display('Error while copying gremlin-server.exakat.sh file to tinkergraph.');
+                } else {
+                    chmod($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh', 0755);
+                }
+            }
+            $this->checkGremlinServer();
+        } elseif ($graphdb === 'neo4j') {
+            // Nothing, really
+        } else {
+            assert(false, "Checking install with unknown graphdb : '$graphdb'");
+        }
+    }
+    
+    private function checkGremlinServer() {
+        if (!file_exists($this->config->projects_root.'/tinkergraph/db')) {
+            mkdir($this->config->projects_root.'/tinkergraph/db', 0755);
+        }
+    
+        $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
+        $gremlinVersion = basename(array_pop($gremlinJar));
+        //gremlin-core-3.2.5.jar
+        $gremlinVersion = substr($gremlinVersion, 13, -4);
+        $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
+    
+        if (!copy($this->config->dir_root.'/server/gsneo4j/gsneo4j'.$version.'.yaml',
+             $this->config->projects_root.'/tinkergraph/conf/gsneo4j.yaml')) {
+            display('Error while copying gsneo4j'.$version.'.yaml config file to tinkergraph.');
+        }
+        if (!copy($this->config->dir_root.'/server/tinkergraph/conf/tinkergraph'.$version.'.yaml',
+             $this->config->projects_root.'/tinkergraph/conf/tinkergraph.yaml')) {
+            display('Error while copying tinkergraph'.$version.'.yaml config file to tinkergraph.');
+        }
     }
 
     private function checkPHPs() {

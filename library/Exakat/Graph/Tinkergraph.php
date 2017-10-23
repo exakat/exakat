@@ -145,9 +145,15 @@ class Tinkergraph extends Graph {
                   $this->config->tinkergraph_folder.'/conf/tinkergraph.yaml');
         }
 
-        if (file_exists($this->config->gsneo4j_folder.'/bin/gremlin-server.exakat.sh')) {
+        $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
+        $gremlinVersion = basename(array_pop($gremlinJar));
+        //gremlin-core-3.2.5.jar
+        $gremlinVersion = substr($gremlinVersion, 13, -4);
+        $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
+
+        if ($version === '.3.3') {
             exec('cd '.$this->config->gsneo4j_folder.'; rm -rf db/neo4j; bin/gremlin-server.exakat.sh start conf/tinkergraph.yaml  &');
-        } else {
+        } elseif ($version === '.3.2') {
             exec('cd '.$this->config->gsneo4j_folder.'; rm -rf db/neo4j; bin/gremlin-server.sh conf/tinkergraph.yaml  > gremlin.log 2>&1 & echo $! > db/tinkergraph.pid ');
         }
         sleep(1);
@@ -161,10 +167,12 @@ class Tinkergraph extends Graph {
         } while (empty($res));
         $e = microtime(true);
 
-        if (file_exists($this->config->gsneo4j_folder.'/bin/gremlin-server.exakat.sh')) {
+        if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
             $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/run/gremlin.pid'));
-        } else {
+        } elseif ( file_exists($this->config->gsneo4j_folder.'/db/tinkergraph.pid')) {
             $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/db/tinkergraph.pid'));
+        } else {
+            $pid = 'Not yet';
         }
         display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
     }
@@ -173,6 +181,7 @@ class Tinkergraph extends Graph {
         if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
             display('stop gremlin server 3.3.x');
             shell_exec('cd '.$this->config->gsneo4j_folder.'; ./bin/gremlin-server.sh stop');
+            unlink($this->config->gsneo4j_folder.'/run/gremlin.pid');
         } 
         
         if (file_exists($this->config->gsneo4j_folder.'/db/tinkergraph.pid')) {
