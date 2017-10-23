@@ -48,14 +48,18 @@ class Dump extends Tasks {
         }
 
         $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-        if (isset($res->results[0]) && $res->results[0] === $this->config->project) {
-            // Go!
-        } elseif (is_array($res) && $res[0] === $this->config->project) {
-            // Go!
+        if (isset($res->results[0])) {
+            $projectInGraph = $res->results[0];
+        } elseif (is_array($res)) {
+            $projectInGraph = $res[0];
         } else {
-            throw new NotProjectInGraph($this->config->project, $res->results[0]);
+            $projectInGraph = 'Not found';
         }
-
+        
+        if ($projectInGraph !== $this->config->project) {
+            throw new NotProjectInGraph($this->config->project, is_array($res) ? $res[0] : $res->results[0]);
+        }
+        
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
         $this->sqliteFile = $this->config->projects_root.'/projects/'.$this->config->project.'/.dump.sqlite';
@@ -64,7 +68,6 @@ class Dump extends Tasks {
             unlink($this->sqliteFile);
             display('Removing old .dump.sqlite');
         }
-
         $this->addSnitch();
 
         if ($this->config->update === true) {
