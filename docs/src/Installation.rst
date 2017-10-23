@@ -22,18 +22,18 @@ Summary
 Presentation
 ------------
 
-Exakat is a PHP static analyzer. It relies on PHP to lint and tokenize the target code; a graph database to process the AST and the tokens; a SQLITE database to store the results and produce the various reports.
+Exakat is a PHP static analyzer. It relies on PHP to lint and tokenize the target code; a graph database to process the AST and the tokens; a SQLITE 3 database to store the results and produce the various reports.
 
-Exakat itself runs on PHP 7.0 and more recent, with a short selection of extensions. 
+Exakat itself runs on PHP 7.2, with a short selection of extensions. It is tested with PHP 7.0 and more recent.
 
 .. image:: exakat.architecture.png
     :alt: exakat architecture
     
-Source code is imported into exakat using VCS client, like git, SVN, mercurial, tar, zip, bz2 or even symlink. Only reading access is required.
+Source code is imported into exakat using VCS client, like git, SVN, mercurial, tar, zip, bz2 or even symlink. Only reading access is actually required : the code is never modified in any way. 
 
-At least one version of PHP have to be used, and it may be the same running Exakat. Extra versions are used to provide linting reports. Only one version is used for analysis. 
+At least one version of PHP have to be used, and it may be the same running Exakat. Only one version is used for analysis and it may be different from the running PHP version. For example, exakat may run with PHP 7.2 but audit code with PHP 5.6. Extra versions of PHP are used to provide compilations reports. PHP middle versions may be configured separately. Minor versions are not important, except for edge cases. 
 
-The gremlin server is used to query the source code. Once analyzes are all finished, the results are dumped into a SQLITE database and the graph may be removed. Reports are build from this database.
+The gremlin server is used to query the source code. Once analyzes are all finished, the results are dumped into a SQLITE database and the graph may be removed. Reports are build from the SQLITE database.
     
 Requirements
 ------------
@@ -43,16 +43,20 @@ Exakat relies on several parts. Some are necessary and some are optional.
 Basic requirements : 
 
 * exakat.phar, the main code.
-* Neo4j and gremlin : exakat uses this graph database, with the Gremlin 3 plugin. 
+* Gremlin server : exakat uses this graph database and the Gremlin 3 traversal language. Currently, only Gremlin Server is supported, with the tinkergraph and neo4j storage engine. Version 3.2.x are supported, 3.3.x not yet.
+* Java 8.x. Java 9.x will be supported later. Java 7.x 
 * PHP 7.0 or later to run. This version requires curl, hash, phar, sqlite3, tokenizer, mbstring and json. 
 
 Optional requirements : 
-* PHP 5.2 to 7.2 for analysis. Those versions only require the ext/tokenizer extension. 
+
+* PHP 5.2 to 7.3 for analysis. Those versions only require the ext/tokenizer extension. 
 * VCS (Version Control Software), such as Git, SVN, bazaar, Mercurial. They all are optional, though git is recommended. 
 * Archives, such as zip, tgz, tbz2 may also be opened with optional helpers.
 
 OS requirements : 
 Exakat has beed tested on OSX, Debian and Ubuntu (up to 14.04). Exakat should work on Linux distributions, may be with little work. Exakat hasn't been tested on Windows at all. 
+
+For installation, curl or wget, and zip are needed.
 
 Quick installation with OSX
 ---------------------------
@@ -65,22 +69,40 @@ PHP 7.0 or more recent, curl, homebrew are required.
     mkdir exakat
     cd exakat
     curl -o exakat.phar http://dist.exakat.io/index.php?file=latest
-    curl -sL https://raw.githubusercontent.com/exakat/gremlin3neo4j2/master/install.osx.sh | sh
+    curl -o apache-tinkerpop-gremlin-server-3.2.6-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.6/apache-tinkerpop-gremlin-server-3.2.6-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.2.6-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.6 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.6-bin.zip 
+    
+    # Optional : install neo4j engine.
+    cd tinkergraph
+    bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.2.6
+    cd ..
+    
     php exakat.phar doctor
 
 
 Quick installation with Debian/Ubuntu
 -------------------------------------
 
-Paste the following commands in a terminal prompt : the first script download the exakat.phar, and the second sets up Gremlin 3 on Neo4j 2.3.
-PHP 7.0 or more recent, wget are expected.
+Paste the following commands in a terminal prompt : the first script download the exakat.phar, and the second sets up Gremlin 3.*, with tinkergrpah and Neo4j.
+PHP 7.2 (7.0 or more recent), wget and unzip are expected.
 
 ::
 
     mkdir exakat
     cd exakat
     wget -O exakat.phar http://dist.exakat.io/index.php?file=latest
-    wget -qO- https://raw.githubusercontent.com/exakat/gremlin3neo4j2/master/install.debian.sh | sh
+    wget -O apache-tinkerpop-gremlin-server-3.2.6-bin.zip http://ftp.tudelft.nl/apache/tinkerpop/3.2.6/apache-tinkerpop-gremlin-server-3.2.6-bin.zip
+    unzip apache-tinkerpop-gremlin-server-3.2.6-bin.zip 
+    mv apache-tinkerpop-gremlin-server-3.2.6 tinkergraph
+    rm -rf apache-tinkerpop-gremlin-server-3.2.6-bin.zip 
+    
+    # Optional : install neo4j engine.
+    cd tinkergraph
+    bin/gremlin-server.sh install org.apache.tinkerpop neo4j-gremlin 3.2.6
+    cd ..
+
     php exakat.phar doctor
 
 Installation guide with Docker

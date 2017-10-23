@@ -72,6 +72,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Uml
   * PlantUml
   * None
+  * SimpleHtml
   * PhpConfiguration
   * PhpCompilation
   * Inventories
@@ -310,9 +311,14 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 0.12.17
+
+  * Classes/IsaMagicProperty (Classes/IsaMagicProperty)
+
 * 0.12.16
 
   * Cookies Variables (Php/CookiesVariables)
+  * Date Formats (Php/DateFormats ; Inventory)
   * Incoming Variables (Php/IncomingVariables ; Inventory)
   * Session Variables (Php/SessionVariables ; Inventory)
   * Too Complex Expression (Structures/ComplexExpression ; Analyze)
@@ -1462,7 +1468,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Variable Constants (Constants/VariableConstant ; Appinfo)
   * Variable Is Modified (Variables/IsModified ; Internal)
   * Variable Is Read (Variables/IsRead ; Internal)
-  * Variables Names (Variables/Variablenames ; )
+  * Variables Names (Variables/Variablenames ; Inventory, Appinfo, Internal)
   * Variables Variables (Variables/VariableVariables ; Appinfo)
   * Variables With Long Names (Variables/VariableLong ; )
   * Variables With One Letter Names (Variables/VariableOneLetter ; )
@@ -1697,6 +1703,7 @@ List of external links mentionned in this documentation.
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
+* `Anonymus Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `Apache <http://php.net/manual/en/book.apache.php>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
@@ -1705,6 +1712,7 @@ List of external links mentionned in this documentation.
 * `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
+* `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
@@ -1720,6 +1728,7 @@ List of external links mentionned in this documentation.
 * `CakePHP <https://www.cakephp.org/>`_
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
+* `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `Classes abstraction <http://php.net/abstract>`_
 * `Codeigniter <https://codeigniter.com/>`_
@@ -1808,6 +1817,7 @@ List of external links mentionned in this documentation.
 * `Heredoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc>`_
 * `hg <https://www.mercurial-scm.org/>`_
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
+* `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
 * `IIS Administration <http://www.php.net/manual/en/book.iisfunc.php>`_
@@ -1860,6 +1870,7 @@ List of external links mentionned in this documentation.
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
+* `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_

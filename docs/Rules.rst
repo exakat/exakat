@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 16 Oct 2017 13:10:43 +0000
-.. comment: Generation hash : 68b0de542aada7099514a6c432991d6d03af0286
+.. comment: Generation date : Mon, 23 Oct 2017 12:23:39 +0000
+.. comment: Generation hash : c5a2f159fde8d4252009d6e686077ffe40e7ac42
 
 
 .. _$http\_raw\_post\_data:
@@ -2096,7 +2096,30 @@ Catch Overwrite Variable
 ########################
 
 
-The try...catch structure uses some variables that also in use in this scope. In case of a caught exception, the exception will be put in the catch variable, and overwrite the current value, loosing some data.
+The try/catch structure uses some variables that also in use in this scope. In case of a caught exception, the exception will be put in the catch variable, and overwrite the current value, loosing some data.
+
+.. code-block:: php
+
+   <?php
+   
+   // variables and caught exceptions are distinct
+   $argument = 1;
+   try {
+       methodThatMayRaiseException($argument);
+   } (Exception $e) {
+       // here, $e has been changed to an exception.
+   }
+   
+   // variables and caught exceptions are overlapping
+   $e = 1;
+   try {
+       methodThatMayRaiseException();
+   } (Exception $e) {
+       // here, $e has been changed to an exception.
+   }
+   
+   ?>
+
 
 It is recommended to use another name for these catch variables.
 
@@ -2385,7 +2408,31 @@ Closure May Use $this
 
 When closure were introduced in PHP, they couldn't use the $this variable, making is cumbersome to access local properties when the closure was created within an object. 
 
+.. code-block:: php
+
+   <?php
+   
+   // Invalid code in PHP 5.4 and less
+   class Test
+   {
+       public function testing()
+       {
+           return function() {
+               var_dump($this);
+           };
+       }
+   }
+   
+   $object = new Test;
+   $function = $object->testing();
+   $function();
+       
+   ?>
+
+
 This is not the case anymore since PHP 5.4.
+
+See also `Anonymus Functions <http://php.net/manual/en/functions.anonymous.php>`_.
 
 +--------------+---------------------------+
 | Command Line | Php/ClosureThisSupport    |
@@ -2539,6 +2586,8 @@ The following variables's name are very close and may lead to confusion.
 Variables are 3 letters long (at least). Variables names build with an extra 's' are omitted.
 Variables may be scattered across the code, or close to each other. 
 
+Variables which differ only by case, or by punctuation or by numbers are reported here.
+
 .. code-block:: php
 
    <?php
@@ -2558,6 +2607,18 @@ Variables may be scattered across the code, or close to each other.
        $exept10 = 2;
        $exept8 = 3;
        
+       // Variables that differ by punctation
+       $locale = 'fr';
+       $_locate = 'en';
+   
+       // Variables that differ by numbers
+       $x11 = 'a';
+       $x12 = 'b';
+   
+       // Variables that differ by numbers
+       $songMP3 = 'a';
+       $Songmp3 = 'b';
+       
        // This even looks like a typo
        $privileges  = 1;
        $privilieges = true;
@@ -2566,6 +2627,9 @@ Variables may be scattered across the code, or close to each other.
        $rows[] = $row;
        
    ?>
+
+
+See also `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_.
 
 +--------------+-----------------------+
 | Command Line | Variables/CloseNaming |
@@ -2809,6 +2873,9 @@ As a general rule, it is recommended to make constant 'private' by default, and 
    }
    
    ?>
+
+
+See also `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_.
 
 +--------------+---------------------------------+
 | Command Line | Classes/CouldBePrivateConstante |
@@ -3131,11 +3198,13 @@ Could Use Short Assignation
 ###########################
 
 
-Some operators, like + or *, have a compact and fast 'do-and-assign' version.
+Use short assignement operator, to speed up code, and keep syntax clear.  
 
-They looks like a compacted version for = and the operator. This syntax is good for readability, and saves some memory in the process. 
+Some operators, like + or *, have a compact and fast 'do-and-assign' version. They looks like a compacted version for = and the operator. This syntax is good for readability, and saves some memory in the process. 
 
-Depending on the operator, not all permutations of arguments are possible.
+Depending on the operator, not all permutations of arguments are possible. 
+
+Addition and short assignation of addition have a different set of features when applied to arrays. Do not exchange one another in that case.
 
 .. code-block:: php
 
@@ -3172,6 +3241,11 @@ Depending on the operator, not all permutations of arguments are possible.
    $j <<= 9;
    
    ?>
+
+
+Short operators are faster than the extended version, though it is a micro-optimization.
+
+See also `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_.
 
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Structures/CouldUseShortAssignation                                                                         |
@@ -11584,7 +11658,32 @@ Several Instructions On The Same Line
 
 
 Usually, instructions do not share their line : one instruction, one line. 
+
 This is good for readability, and help at understanding the code. This is especially important when fast-reading the code to find some special situation, where such double-meaning line way have an impact.
+
+.. code-block:: php
+
+   <?php
+   
+   switch ($x) {
+       // Is it a fallthrough or not ? 
+       case 1:
+           doSomething(); 'break;
+   
+       // Easily spotted 'break.
+       case 1:
+           doSomethingElse(); 
+           'break;
+   
+       default : 
+           doDefault(); 
+           'break;
+   }
+   
+   ?>
+
+
+See also `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_.
 
 +--------------+-----------------------------------+
 | Command Line | Structures/OneLineTwoInstructions |

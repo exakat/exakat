@@ -138,6 +138,7 @@ Glossary
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
+      + :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
       + :ref:`Switch Fallthrough <switch-fallthrough>`
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
