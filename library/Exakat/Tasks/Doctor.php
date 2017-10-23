@@ -124,13 +124,33 @@ class Doctor extends Tasks {
             $version = PHP_MAJOR_VERSION.PHP_MINOR_VERSION;
             
             if (file_exists($this->config->projects_root.'/tinkergraph')) {
-                // tinkergraph or gsneo4j 
+                // tinkergraph or gsneo4j
                 if (file_exists($this->config->projects_root.'/tinkergraph/ext/neo4j-gremlin/')) {
                     $graphdb = 'gsneo4j';
                     
+                    $properties = file_get_contents($this->config->projects_root.'/tinkergraph/conf/neo4j-empty.properties');
+                    $properties = preg_replace("#gremlin.neo4j.directory=.*\n#s", "gremlin.neo4j.directory=db/neo4j\n", $properties);
+                    file_put_contents($this->config->projects_root.'/tinkergraph/conf/neo4j-empty.properties', $properties);
+
+                    if (!file_exists($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
+                        if (!copy($this->config->dir_root.'/server/gsneo4j/gremlin-server.sh',
+                             $this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
+                            display('Error while copying gremlin-server.exakat.sh file to tinkergraph.');
+                        } else {
+                            chmod($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh', 0755);
+                        }
+                    }
                 } else {
                     $graphdb = 'tinkergraph';
 
+                    if (!file_exists($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
+                        if (!copy($this->config->dir_root.'/server/tinkergraph/gremlin-server.sh',
+                             $this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh')) {
+                            display('Error while copying gremlin-server.exakat.sh file to tinkergraph.');
+                        } else {
+                            chmod($this->config->projects_root.'/tinkergraph/bin/gremlin-server.exakat.sh', 0755);
+                        }
+                    }
                 }
                 
                 if (!file_exists($this->config->projects_root.'/tinkergraph/db')) {
@@ -168,7 +188,7 @@ class Doctor extends Tasks {
 
             }
 
-            $ini = str_replace(array('{$version}', '{$version_path}', '{$graphdb}', ';'.$graphdb, ), 
+            $ini = str_replace(array('{$version}', '{$version_path}', '{$graphdb}', ';'.$graphdb, ),
                                array( $version,     $_SERVER['_'],      $graphdb,    $graphdb,     ),
                                $ini);
             

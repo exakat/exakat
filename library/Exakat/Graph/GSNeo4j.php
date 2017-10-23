@@ -169,8 +169,6 @@ class GSNeo4j extends Graph {
             $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid'));
         }
         
-        var_dump($this->serverInfo());
-
         display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
     }
 
