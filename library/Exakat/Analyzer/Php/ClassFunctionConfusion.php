@@ -31,7 +31,7 @@ class ClassFunctionConfusion extends Analyzer {
         $functions = $this->query('g.V().hasLabel("Function")
                                         .values("fullnspath").unique()');
 
-        $classes = $this->query('g.V().hasLabel("Class")
+        $classes = $this->query('g.V().hasLabel("Class", "Interface", "Trait")
                                         .values("fullnspath").unique()');
 
         $common = array_intersect($functions, $classes);
@@ -39,7 +39,7 @@ class ClassFunctionConfusion extends Analyzer {
         if (empty($common)) {
             return;
         }
-        $this->atomIs('Class')
+        $this->atomIs(array('Class', 'Trait', 'Interface'))
              ->fullnspathIs($common);
         $this->prepareQuery();
 
