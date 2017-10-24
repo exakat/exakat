@@ -31,7 +31,7 @@ class PhpCompilation extends Reports {
 
     public function generate($folder, $name = null) {
         $themed = Analyzer::getThemeAnalyzers('Appinfo');
-        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'")');
+        $res = $this->sqlite->query('SELECT analyzer, count FROM resultsCounts WHERE analyzer IN ("'.implode('", "', $themed).'") AND count > -1');
         $sources = array();
         while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
             $sources[$row['analyzer']] = $row['count'];
