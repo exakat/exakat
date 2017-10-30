@@ -32,7 +32,7 @@ class CitSameName extends Analyzer {
         $interfaces = $this->query('g.V().hasLabel("Interface").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
         $traits = $this->query('g.V().hasLabel("Trait").out("NAME").groupCount("m").by("code").cap("m").next().keySet()');
         
-        $names = array_merge($classes, $interfaces, $traits);
+        $names = array_merge($classes->toArray(), $interfaces->toArray(), $traits->toArray());
         $counts = array_count_values($names);
         $doubles = array_keys(array_filter($counts, function ($x) { return $x > 1; }));
         

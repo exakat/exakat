@@ -98,7 +98,7 @@ g.V().hasLabel("Identifier")
 
 GREMLIN;
 
-        $res = $this->runQuery($query, $title, array('arg1' => $constants));
+        $this->runQuery($query, $title, array('arg1' => $constants));
     }
     
     private function spotPHPNativeFunctions() {
@@ -131,7 +131,7 @@ GREMLIN;
         $this->logTime($title);
 
         try {
-            $res = $this->gremlin->query($query, $args);
+            $this->gremlin->query($query, $args);
         } catch (GremlinException $e) {
             // This should be handled nicely!!!
         }
@@ -158,13 +158,7 @@ g.V().hasLabel("Functioncall")
            s;
          }.unique();
 GREMLIN;
-
-        $constants = $this->gremlin->query($query);
-        if (is_array($constants)) {
-            $constantsDefine = $constants;
-        } else {
-            $constantsDefine = $constants->results;
-        }
+        $constantsDefine = $this->gremlin->query($query)->toArray();
 
         $query = <<<GREMLIN
 g.V().hasLabel("Const")
@@ -175,13 +169,7 @@ g.V().hasLabel("Const")
      .values('fullnspath').unique();
 
 GREMLIN;
-
-        $constants = $this->gremlin->query($query);
-        if (is_array($constants)) {
-            $constantsConst = $constants;
-        } else {
-            $constantsConst = $constants->results;
-        }
+        $constantsConst = $this->gremlin->query($query)->toArray();
 
         $constants = array_merge($constantsConst, $constantsDefine);
         $this->logTime('constants : '.count($constants));
@@ -204,7 +192,7 @@ g.V().hasLabel("Identifier", "Nsname")
          ).count();
 
 GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
+            $this->gremlin->query($query, array('arg1' => $constantsDefine));
 
             // Second round, with fallback to global constants
             // Based on define() definitions
@@ -230,13 +218,13 @@ g.V().hasLabel("Identifier", "Nsname")
       ).count()
 
 GREMLIN;
-                $res = $this->gremlin->query($query, array('arg1' => $constantsDefine));
+                $this->gremlin->query($query, array('arg1' => $constantsDefine));
             }
 
             $this->logTime('constants const : '.count($constantsConst));
             if (!empty($constantsConst)) {
             // Based on const definitions
-            $query = <<<GREMLIN
+                $query = <<<GREMLIN
 g.V().hasLabel("Identifier", "Nsname")
      .not( where( __.in("NAME", "DEFINITION") ) )
      .filter{ name = "\\\\" + it.get().value("fullcode").toString().toLowerCase(); 
@@ -255,12 +243,11 @@ g.V().hasLabel("Identifier", "Nsname")
        .count()
 
 GREMLIN;
-            $res = $this->gremlin->query($query, array('arg1' => $constantsConst));
+                $this->gremlin->query($query, array('arg1' => $constantsConst));
             }
             
             // TODO : handle case-insensitive
             $this->logTime('Constant definitions');
-
             display('Link constant definitions');
         } else {
             display('Link constant definitions : skipping.');

@@ -34,7 +34,7 @@ g.V().hasLabel("Member")
      .hasLabel("Name")
           .values("fullcode").unique()
 GREMLIN;
-        $publicProperties = $this->query($query);
+        $publicProperties = $this->query($query)->toArray();
         
             // Member that is not used outside this class or its children
             $this->atomIs('Ppp')

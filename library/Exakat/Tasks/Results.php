@@ -117,12 +117,13 @@ GREMLIN;
 
             $return = array();
             foreach($vertices as $k => $v) {
-                $row = array($v->fullcode,
-                             $v->file,
-                             $v->line,
-                             $v->namespace,
-                             $v->class,
-                             $v->function);
+                $row = array($v['fullcode'],
+                             $v['file'],
+                             $v['line'],
+                             $v['namespace'],
+                             $v['class'],
+                             $v['function'],
+                            );
                 $return[] = $row;
             }
         } elseif ($this->config->style == 'DISTINCT') {

@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class OverwrittenLiterals extends Analyzer {
     public function dependsOn() {
-        return array('Variables/IsModified');
+        return array('Variables/IsModified',
+                    );
     }
     
     public function analyze() {
@@ -39,7 +40,7 @@ g.V().hasLabel("Assignation").has("code", "=")
      .out("LEFT").hasLabel("Variable", "Array", "Member", "Staticproperty")
      .groupCount("m").by("fullcode").cap("m").next().findAll{ it.value > 1; }.keySet()
 GREMLIN
-);
+        )->toArray();
 
         $this->atomIs('Assignation')
              ->codeIs('=')

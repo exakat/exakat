@@ -29,7 +29,8 @@ class VariableUsedOnceByContext extends Analyzer {
     
     public function dependsOn() {
         return array('Variables/Variablenames',
-                     'Variables/InterfaceArguments');
+                     'Variables/InterfaceArguments',
+                    );
     }
     
     public function analyze() {
@@ -43,7 +44,7 @@ g.V().hasLabel("Variable", "Variablearray", "Variableobject")
                      ).groupCount("m").by("code").cap("m")
                       .toList().get(0).findAll{ a,b -> b == 1}.keySet()
 GREMLIN;
-        $variables = $this->query($query);
+        $variables = $this->query($query)->toArray();
 
         $this->atomIs(self::$VARIABLES_ALL)
              ->hasNoIn(array('PPP'))
@@ -68,7 +69,7 @@ GREMLIN;
                               }.fold()
                           )
                    .sideEffect{ names = counts.findAll{ a,b -> b == 1}.keySet() }
-                   .repeat( out('.$this->linksDown.').not( where( __.hasLabel("Function", "Closure") ) )  )
+                   .repeat( __.out().not( where( __.hasLabel("Function", "Closure") ) )  )
                    .emit( hasLabel("Variable", "Variablearray", "Variableobject").not(has("code", "\\$this")) )
                    .times('.self::MAX_LOOPING.')
                    .filter{ it.get().value("code") in names }

@@ -49,16 +49,17 @@ class UseComposer extends Analyzer {
     
     public function getDump() {
         if ($this->hasResults()) {
-            return array();
+            return array(array());
         }
 
         return array(
-            (object) array('fullcode'  => 'composer.json',
-                           'file'      => 'composer.json',
-                           'line'      => 0,
-                           'namespace' => '',
-                           'class'     => '',
-                           'function'  => '' )
+                array('fullcode'  => 'composer.json',
+                      'file'      => 'composer.json',
+                      'line'      => 0,
+                      'namespace' => '',
+                      'class'     => '',
+                      'function'  => '',
+                )
         );
     }
 

@@ -32,7 +32,8 @@ class ShouldRegenerateSessionId extends Analyzer {
     public function analyze() {
         $sessions = $this->query('g.V().hasLabel("Analysis").has("analyzer", "ZendF/UseSession")
                                        .out("ANALYZED").in("RIGHT").hasLabel("Assignation")
-                                       .out("LEFT").values("fullcode")');
+                                       .out("LEFT").values("fullcode")')
+                         ->toArray();
         // No session, no regenerateId
         if (empty($sessions)) {
             return ;
@@ -44,7 +45,7 @@ class ShouldRegenerateSessionId extends Analyzer {
                                            .out("OBJECT").has("fullcode", within('.$sessionsList.'))
                                            .count()');
                                            
-        if ($regenerateid[0] !== 0) {
+        if ($regenerateid->toString !== "0") {
             return;
         }
 

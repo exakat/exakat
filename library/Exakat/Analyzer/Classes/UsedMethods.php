@@ -27,14 +27,15 @@ use Exakat\Analyzer\Analyzer;
 
 class UsedMethods extends Analyzer {
     public function dependsOn() {
-        return array('Functions/MarkCallable');
+        return array('Functions/MarkCallable',
+                    );
     }
 
     public function analyze() {
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
         
         // Normal Methodcall
-        $methods = $this->query('g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()');
+        $methods = $this->query('g.V().hasLabel("Methodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()')->toArray();
         if (!empty($methods)) {
             $this->atomIs('Method')
                  ->_as('used')
@@ -46,7 +47,7 @@ class UsedMethods extends Analyzer {
         }
 
         // Staticmethodcall
-        $staticmethods = $this->query('g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()');
+        $staticmethods = $this->query('g.V().hasLabel("Staticmethodcall").out("METHOD").has("token", "T_STRING").map{ it.get().value("code").toLowerCase(); }.unique()')->toArray();
         if (!empty($staticmethods)) {
             $this->atomIs('Method')
                  ->_as('used')
@@ -82,7 +83,7 @@ g.V().hasLabel("Analysis").has("analyzer", "Functions/MarkCallable").out("ANALYZ
 }
 
 GREMLIN
-);
+                    )->toArray();
 
         if (!empty($callables)) {
             // method used statically in a callback with an array

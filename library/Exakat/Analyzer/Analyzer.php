@@ -28,6 +28,7 @@ use Exakat\Datastore;
 use Exakat\Config;
 use Exakat\Tokenizer\Token;
 use Exakat\Exceptions\GremlinException;
+use Exakat\Graph\GraphResults;
 
 abstract class Analyzer {
     protected $code           = null;
@@ -210,7 +211,6 @@ abstract class Analyzer {
     }
     
     public function getDump() {
-        
         $query = <<<GREMLIN
 g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALYZED')
 .sideEffect{ line = it.get().value('line');
@@ -232,14 +232,7 @@ g.V().hasLabel("Analysis").has("analyzer", "{$this->analyzerQuoted}").out('ANALY
 .map{ ['fullcode':fullcode, 'file':file, 'line':line, 'namespace':theNamespace, 'class':theClass, 'function':theFunction ];}
 
 GREMLIN;
-        $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            return $res->results;
-        } elseif (is_array($res)) {
-            return $res;
-        } else {
-            return array();
-        }
+        return $this->gremlin->query($query)->toArray();
     }
 
     public static function getSuggestionThema($thema) {
@@ -339,34 +332,25 @@ GREMLIN;
     
     public function init($analyzerId = null) {
         if ($analyzerId === null) {
-            $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'")';
-            $res = $this->query($query);
-
-            if (isset($res[0])) {
-                $res = $res[0];
-            }
-
-            if (isset($res->id)) {
-                $this->analyzerId = $res->id;
+            $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").id()';
+            $res = $this->gremlin->query($query);
+            
+            if ($res->isType(GraphResults::EMPTY)) {
+                // Creating analysis vertex
+                $query = 'g.addV("Analysis").property("analyzer", "'.$this->analyzerQuoted.'").property("atom", "Analysis").id()';
+                $res = $this->gremlin->query($query);
+                $this->analyzerId = $res->toString();
+            } else {
+                $this->analyzerId = $res->toString();
 
                 // Removing all edges
                 $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$this->analyzerQuoted.'").outE("ANALYZED").drop()';
-                $res = $this->query($query);
-            } else {
-                // Creating analysis vertex
-                $query = 'g.addV("Analysis").property("analyzer", "'.$this->analyzerQuoted.'").property("atom", "Analysis")';
-                $res = $this->query($query);
-            
-                if (!isset($res[0])) {
-                    throw new GremlinException();
-                }
-                
-                $this->analyzerId = $res[0]->id;
+                $res = $this->gremlin->query($query);
             }
         } else {
             $this->analyzerId = $analyzerId;
         }
-        
+
         return $this->analyzerId;
     }
 
@@ -434,15 +418,7 @@ GREMLIN;
             return array($result);
         }
 
-        if (is_array($result)) {
-            return $result;
-        }
-        
-        if (!isset($result->results)) {
-            return array();
-        }
-        
-        return (array) $result->results;
+        return $result;
     }
 
     public function queryHash($queryString, $arguments = array()) {
@@ -744,7 +720,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
                 $this->addMethod('not(has("'.$property.'", within(***)))', $value);
             }
         } else {
-            assert(false, 'Not understood type for isNot : '.get_type($value));
+            assert(false, 'Not understood type for isNot : '.gettype($value));
         }
         
         return $this;
@@ -862,6 +838,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
 
     public function fullnspathIsNot($code) {
         if (empty($code)) {
+            $this->addMethod('sideEffect{ }');
             return $this;
         }
 
@@ -1794,6 +1771,7 @@ GREMLIN
 
 GREMLIN;
 //        $query .= '.where( __.in("ANALYZED").has("analyzer", "'.$this->analyzerQuoted.'").count().is(eq(0)) ).groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
+        assert(!empty($this->analyzerId), "The analyzer Id for {$this->analyzerId} wasn't set. Can't save results.");
         $query .= '.dedup().groupCount("total").by(count()).addE("ANALYZED").from(g.V('.$this->analyzerId.')).cap("processed", "total")
 
 // Query (#'.(count($this->queries) + 1).') for '.$this->analyzerQuoted.'
@@ -1806,9 +1784,13 @@ GREMLIN;
         return $this->initNewQuery();
     }
 
+    public function queryDefinition($query) {
+        return $this->gremlin->query($query);
+    }
+
     public function rawQuery() {
         // @doc This is when the object is a placeholder for others.
-        if (count($this->methods) <= 1) { return true; }
+        assert(count($this->methods) > 1, "Calling rawQuery without any method build yet");
         
         $query = implode('.', $this->methods);
         $query = 'g.V().'.
@@ -1821,7 +1803,7 @@ GREMLIN;
 
         $this->initNewQuery();
         
-        return $this->query($query, $arguments);
+        return $this->gremlin->query($query, $arguments);
     }
     
     private function initNewQuery() {
@@ -1838,13 +1820,11 @@ GREMLIN;
 
         // @todo add a test here ?
         foreach($this->queries as $id => $query) {
-            $r = $this->query($query, $this->queriesArguments[$id]);
+            $r = $this->gremlin->query($query, $this->queriesArguments[$id]);
             ++$this->queryCount;
             
-            if (isset($r[0]->processed->{1})) {
-                $this->processedCount += $r[0]->processed->{1};
-                $this->rowCount       += isset($r[0]->total->{1}) ? $r[0]->total->{1} : 0;
-            }
+            $this->processedCount += $r['processed'];
+            $this->rowCount       += $r['total'];
         }
 
         // reset for the next
@@ -1931,8 +1911,10 @@ GREMLIN;
                 $v = mb_strtolower($v);
             }
             unset($v);
-        } else {
+        } elseif (is_scalar($code)) {
             $code = mb_strtolower($code);
+        } else {
+            assert(false, __METHOD__.' received an unprocessable object '.var_dump($code));
         }
     }
     

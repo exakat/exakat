@@ -44,7 +44,7 @@ g.V().hasLabel("Member")
      .values("code")
      .unique()
 GREMLIN;
-        $publicProperties = $this->query($query);
+        $publicProperties = $this->query($query)->toArray();
 
         if (!empty($publicProperties)) {
             $this->atomIs('Ppp')
@@ -79,7 +79,7 @@ g.V().hasLabel("Staticproperty")
      .select("classe", "property").by("fullnspath").by("code")
      .unique()
 GREMLIN;
-        $publicStaticProperties = $this->query($query);
+        $publicStaticProperties = $this->query($query)->toArray();
         
         if (!empty($publicStaticProperties)) {
             $calls = array();

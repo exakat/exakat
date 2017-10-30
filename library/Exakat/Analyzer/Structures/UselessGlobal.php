@@ -28,7 +28,8 @@ use Exakat\Analyzer\Analyzer;
 class UselessGlobal extends Analyzer {
     public function dependsOn() {
         return array('Variables/VariableUsedOnceByContext',
-                     'Structures/UnusedGlobal');
+                     'Structures/UnusedGlobal',
+                    );
     }
     
     public function analyze() {
@@ -37,22 +38,22 @@ class UselessGlobal extends Analyzer {
         $query = <<<GREMLIN
 g.V().hasLabel("Globaldefinition").values("code")
 GREMLIN;
-        $inglobal = $this->query($query);
+        $inglobal = $this->query($query)->toArray();
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Variable", "Variablearray").has("code", "\$GLOBALS").in("VARIABLE").hasLabel("Array").values("globalvar")
 GREMLIN;
-        $inGLobals = $this->query($query);
+        $inGLobals = $this->query($query)->toArray();
 
         $query = <<<'GREMLIN'
 g.V().hasLabel("Php").out('CODE').repeat(__.out().not(hasLabel("Function", "Class", "Classanonymous", "Closure", "Trait", "Interface")) ).emit(hasLabel("Variable")).times(15).values('code')
 GREMLIN;
-        $implicitGLobals = $this->query($query);
+        $implicitGLobals = $this->query($query)->toArray();
 
         $counts = array_count_values(array_merge($inGLobals, $inglobal, $implicitGLobals));
         $loneGlobal = array_filter($counts, function ($x) { return $x == 1; });
         $loneGlobal = array_keys($loneGlobal);
-        
+
         if (!empty($loneGlobal)) {
             $this->atomIs('Globaldefinition')
                  ->codeIs($loneGlobal);

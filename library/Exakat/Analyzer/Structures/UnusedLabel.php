@@ -55,6 +55,7 @@ g.V().hasLabel("Goto").out("GOTO")
       .unique();
 GREMLIN;
         $globalLabels = $this->query($query);
+        $globalLabels = $globalLabels->toArray();
 
         if (empty($globalLabels)) {
             return;

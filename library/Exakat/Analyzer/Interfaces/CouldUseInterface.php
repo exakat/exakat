@@ -34,7 +34,7 @@ g.V().hasLabel("Interface").as('i').out("NAME").as('name').in("NAME")
 
 GREMLIN;
 
-        $res = $this->query($query);
+        $res = $this->query($query)->toArray();
 
         if (empty($res)) {
             return;

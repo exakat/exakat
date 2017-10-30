@@ -72,7 +72,7 @@ class Incompilable extends Analyzer {
             $l['class']     = '';
             $l['function']  = '';
             
-            $report[] = (object) $l;
+            $report[] = $l;
         }
         
         return $report;

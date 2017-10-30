@@ -41,7 +41,7 @@ g.V().hasLabel("New").out("NEW")
      .values("code")
 GREMLIN;
 
-        $apps = $this->query($query);
+        $apps = $this->query($query)->toArray();
         return $apps;
     }
 }

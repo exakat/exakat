@@ -44,10 +44,7 @@ GREMLIN;
              ->is('count', 1)
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = (array) $this->rawQuery();
-        if ($types[0] instanceof \Stdclass) {
-            $types = (array) $types[0];
-        }
+        $types = (array) $this->rawQuery()->toArray();
 
         $store = array();
         $total = 0;

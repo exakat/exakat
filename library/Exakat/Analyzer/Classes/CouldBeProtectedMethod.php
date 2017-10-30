@@ -35,7 +35,7 @@ g.V().hasLabel("Methodcall")
      .values("code")
      .unique()
 GREMLIN;
-        $publicMethods = $this->query($query);
+        $publicMethods = $this->query($query)->toArray();
 
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
 
@@ -50,7 +50,7 @@ GREMLIN;
         $this->prepareQuery();
         
         // Case of property::property (that's another public access)
-        $res = $this->query('g.V().hasLabel("Staticmethodcall").as("init")
+        $publicUsage = $this->query('g.V().hasLabel("Staticmethodcall").as("init")
                                   .out("CLASS").hasLabel("Identifier", "Nsname")
                                   .not(has("code", within("self", "static"))).as("classe")
                                   .sideEffect{ fnp = it.get().value("fullnspath") }
@@ -62,14 +62,14 @@ GREMLIN;
                                   .out("METHOD").hasLabel("Methodcallname").as("method")
                                   .select("classe", "method").by("fullnspath").by("code")
                                   .unique();
-                                  ');
+                                  ')->toArray();
         
         $publicStaticMethods = array();
-        foreach($res as $value) {
-            if (isset($publicStaticMethods[$value->classe])) {
-                $publicStaticMethods[$value->classe][] = $value->method;
+        foreach($publicUsage as $value) {
+            if (isset($publicStaticMethods[$value['classe']])) {
+                $publicStaticMethods[$value['classe']][] = $value['method'];
             } else {
-                $publicStaticMethods[$value->classe] = array($value->method);
+                $publicStaticMethods[$value['classe']] = array($value['method']);
             }
         }
 

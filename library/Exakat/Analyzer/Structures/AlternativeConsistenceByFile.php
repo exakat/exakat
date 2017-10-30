@@ -29,6 +29,7 @@ class AlternativeConsistenceByFile extends Analyzer {
         $atoms = array('Ifthen', 'Foreach', 'For', 'Switch', 'While');
         $atomsList = "'".implode("', '", $atoms)."'";
 
+        // $this->linksDown is important here. 
         $this->atomIs('File')
              ->raw('sideEffect{
             normal = 0;
@@ -36,7 +37,7 @@ class AlternativeConsistenceByFile extends Analyzer {
             }')
             ->raw('where( 
     __
-    .repeat( __.out()).emit().times('.self::MAX_LOOPING.').hasLabel('.$atomsList.')
+    .repeat( __.out('.$this->linksDown.')).emit().times('.self::MAX_LOOPING.').hasLabel('.$atomsList.')
     .or( __.has("alternative").sideEffect{ alternative = alternative + 1; },
          __.sideEffect{ normal = normal + 1; })
     .fold()

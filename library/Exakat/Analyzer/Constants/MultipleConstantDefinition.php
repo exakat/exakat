@@ -54,21 +54,21 @@ g.V().hasLabel("Functioncall").has("fullnspath")
                               .map{ it.get().value("noDelimiter").toLowerCase()}
 GREMLIN
 );
-        if ($a = $this->selfCollisions($cisDefinitions)) {
+        if ($a = $this->selfCollisions($cisDefinitions->toArray())) {
             $this->applyToCisDefine($a);
         }
 
-        if ($a = $this->selfCollisions(array_merge($constDefinitions, $csDefinitions))) {
+        if ($a = $this->selfCollisions(array_merge($constDefinitions->toArray(), $csDefinitions->toArray()))) {
             $this->applyToConst(array_intersect($a, $constDefinitions));
             $this->applyToCsDefine(array_intersect($a, $csDefinitions));
         }
         
-        if ($a = $this->CsCisCollisions($csDefinitions, $cisDefinitions)) {
+        if ($a = $this->CsCisCollisions($csDefinitions->toArray(), $cisDefinitions->toArray())) {
             $this->applyToCisDefine($a);
             $this->applyToCsDefine($a);
         }
 
-        if ($a = $this->CsCisCollisions($constDefinitions, $cisDefinitions)) {
+        if ($a = $this->CsCisCollisions($constDefinitions->toArray(), $cisDefinitions->toArray())) {
             $this->applyToCisDefine($a);
             $this->applyToConst($a);
         }

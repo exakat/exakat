@@ -32,7 +32,12 @@ class RepeatedRegex extends Analyzer {
     
         $repeatedRegex = $this->query('g.V().hasLabel("Functioncall").has("fullnspath", within('.$functionsList.'))
         .out("ARGUMENT").hasLabel("String").not(where(__.out("CONCAT")))
-        .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b > 1}.keySet()');
+        .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b > 1}.keySet()')
+                              ->toArray();
+                              
+        if (empty($repeatedRegex)) {
+            return;
+        }
 
         // regex
         $this->atomFunctionIs(array('\\preg_match'))

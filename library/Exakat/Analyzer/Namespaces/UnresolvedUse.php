@@ -34,8 +34,8 @@ class UnresolvedUse extends Analyzer {
     }
 
     public function analyze() {
-        $cits = $this->query('g.V().hasLabel("Class", "Interface", "Trait").values("fullnspath").unique()');
-        $namespaces = $this->query('g.V().hasLabel("Namespace").values("fullnspath").unique()');
+        $cits = $this->query('g.V().hasLabel("Class", "Interface", "Trait").values("fullnspath").unique()')->toArray();
+        $namespaces = $this->query('g.V().hasLabel("Namespace").values("fullnspath").unique()')->toArray();
         
         $all = array_merge($cits, $namespaces);
         if (empty($all)) {

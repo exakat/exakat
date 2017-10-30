@@ -29,10 +29,12 @@ class ClassFunctionConfusion extends Analyzer {
         // class foo{}; function foo();
         // possible confusion
         $functions = $this->query('g.V().hasLabel("Function")
-                                        .values("fullnspath").unique()');
+                                        .values("fullnspath").unique()')
+                        ->toArray();
 
         $classes = $this->query('g.V().hasLabel("Class", "Interface", "Trait")
-                                        .values("fullnspath").unique()');
+                                        .values("fullnspath").unique()')
+                        ->toArray();
 
         $common = array_intersect($functions, $classes);
 

@@ -35,7 +35,8 @@ class UsedClass extends Analyzer {
         $new = $this->query(<<<GREMLIN
 g.V().hasLabel("New").out("NEW").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
-);
+)->toArray();
+
         // class used in a New
         if (!empty($new)) {
             $this->atomIs('Class')
@@ -48,7 +49,7 @@ GREMLIN
         $extends = $this->query(<<<GREMLIN
 g.V().hasLabel("Class").out("EXTENDS", "IMPLEMENTS").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
-);
+)->toArray();
         if (!empty($extends)) {
             $this->atomIs('Class')
                  ->savePropertyAs('fullnspath', 'classdns')
@@ -60,7 +61,7 @@ GREMLIN
         $staticproperties = $this->query(<<<GREMLIN
 g.V().hasLabel("Staticproperty", "Staticconstant", "Staticmethodcall", "Instanceof").out("CLASS").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
-);
+)->toArray();
         if (!empty($staticproperties)) {
             $this->atomIs('Class')
                  ->savePropertyAs('fullnspath', 'classdns')
@@ -72,7 +73,8 @@ GREMLIN
         $typehints = $this->query(<<<GREMLIN
 g.V().hasLabel("Function").out("ARGUMENT").out("TYPEHINT").not(has("fullnspath", "")).values("fullnspath").unique()
 GREMLIN
-);
+)->toArray();
+
         if (!empty($typehints)) {
             $this->atomIs('Class')
                  ->savePropertyAs('fullnspath', 'classdns')
@@ -84,7 +86,7 @@ GREMLIN
         $uses = $this->query(<<<GREMLIN
 g.V().hasLabel("Use").out("USE").values("origin").unique()
 GREMLIN
-);
+)->toArray();
         if (!empty($uses)) {
             $this->atomIs('Class')
                  ->fullnspathIs($uses);
@@ -99,7 +101,7 @@ g.V().hasLabel("String").has("token", "T_CONSTANT_ENCAPSED_STRING")
      .filter{ (it.get().value("noDelimiter") =~ /[^a-zA-Z0-9_\\x7f-\\xff]/).getCount() == 0}
      .map{ it.get().value("noDelimiter").toLowerCase(); }.unique()
 GREMLIN
-);
+)->toArray();
         if (!empty($strings)) {
             $this->atomIs('Class')
                  ->outIs('NAME')
@@ -115,7 +117,7 @@ g.V().hasLabel("String").not( where( __.out("CONCAT") ) )
                         .where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable") )
                         .map{ it.get().value("noDelimiter").substring(0, it.get().value("noDelimiter").indexOf("::") );}.unique();
 GREMLIN
-);
+)->toArray();
         $strings = $this->makeFullNsPath($strings);
         if (!empty($strings)) {
             $this->atomIs('Class')
@@ -131,7 +133,7 @@ g.V().hasLabel("Functioncall").out("ARGUMENT")
         .where( __.in("ANALYZED").has("analyzer", "Functions/MarkCallable") )
         .has("count", 2).out("ARGUMENT").has("rank", 0).values("noDelimiter").unique()
 GREMLIN
-);
+)->toArray();
         $arrays = $this->makeFullNsPath($arrays);
         
         if (!empty($arrays)) {

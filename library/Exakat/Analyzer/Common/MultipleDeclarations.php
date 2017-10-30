@@ -24,6 +24,7 @@
 namespace Exakat\Analyzer\Common;
 
 use Exakat\Analyzer\Analyzer;
+use Exakat\Graph\GraphResults;
 
 class MultipleDeclarations extends Analyzer {
     protected $atom = 'Class';
@@ -31,13 +32,13 @@ class MultipleDeclarations extends Analyzer {
     public function analyze() {
         // case-insensitive constants
 
-        $query = <<<GREMLIN
-g.V().hasLabel(atom).groupCount("m").by("fullnspath").cap("m")
-GREMLIN;
-        $res = $this->query($query, array('atom' => $this->atom) );
-        $multiples = array_keys(array_filter( (array) $res[0], function ($x) { return $x > 1; }));
+        $this->raw(<<<GREMLIN
+hasLabel("Class").groupCount("m").by("fullnspath").cap("m").next().findAll{ a,b -> b > 1}
+GREMLIN
+);
+        $multiples = $this->rawQuery();
         
-        if (empty($multiples)) {
+        if ($multiples->isType(GraphResults::EMPTY)) {
             return;
         }
 

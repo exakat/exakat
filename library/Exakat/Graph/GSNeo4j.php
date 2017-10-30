@@ -23,6 +23,7 @@
 namespace Exakat\Graph;
 
 use Exakat\Graph\Graph;
+use Exakat\Graph\GraphResults;
 use Exakat\Exceptions\UnableToReachGraphServer;
 use Exakat\Exceptions\Neo4jException;
 use Exakat\Exceptions\GremlinException;
@@ -68,33 +69,31 @@ class GSNeo4j extends Graph {
             $this->db->message->bindValue($name, $value);
         }
         $result = $this->db->send($query);
-        
+
         if (empty($result)) {
-            return $result;
-        }
-
-        if(is_array($result[0])) {
-            foreach($result as &$r) {
-                $r = (object) $r;
-                if (isset($r->properties)) {
-                    foreach($r->properties as $k => &$v) {
-                        $v[0] = (object) $v[0];
-                    }
-                }
-                if (isset($r->processed)) {
-                    $x = new \stdClass;
-                    $x->{1} = isset($r->processed[1]) ? $r->processed[1] : 0;
-                    $r->processed = $x;
-
-                    $x = new \stdClass;
-                    $x->{1} = isset($r->total[1]) ? $r->total[1] : 0;
-                    $r->total = $x;
-                }
-
+            return new GraphResults();
+        } elseif($result[0] === null) {
+            return new GraphResults();
+        } elseif(is_array($result[0])) {
+            if (isset($result[0]['processed'])) {
+                $result = array('processed' => empty($result[0]['processed']) ? 0 : array_shift($result[0]['processed']),
+                                'total'     => empty($result[0]['total'])     ? 0 : array_shift($result[0]['total']));
             }
-        }
 
-        return $result;
+            if (isset($result[0]['type'])) {
+                $result = $this->simplifyArray($result);
+            }
+
+            return new GraphResults($result);
+        } elseif (is_array($result)) {
+            return new GraphResults($result);
+        } elseif ($result instanceof \stdclass) {
+            return new GraphResults($result);
+        } else {
+            print "Processing unknown type ".gettype($result).PHP_EOL;
+            var_dump($result);
+            die();
+        }
     }
     
     public function queryOne($query, $params = array(), $load = array()) {
@@ -191,6 +190,25 @@ class GSNeo4j extends Graph {
             display('stop gremlin server 3.2.x');
             shell_exec('kill -9 $(cat '.$this->config->gsneo4j_folder.'/db/gsneo4j.pid) 2>> gremlin.log; rm -f '.$this->config->gsneo4j_folder.'/db/gsneo4j.pid');
         }
+    }
+
+    private function simplifyArray($result) {
+        $return = array();
+        
+        if (!isset($result[0]['properties'])) {
+            return $result; 
+        }
+
+        foreach($result as $r) {
+            $row = array();
+            foreach($r['properties'] as $property => $value) {
+                $row[$property] = $value[0]['value'];
+            }
+            
+            $return[] = $row;
+        }
+        
+        return $return;
     }
 }
 

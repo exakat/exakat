@@ -44,7 +44,8 @@ g.V().hasLabel("Methodcall")
      .values("code")
      .unique()
 GREMLIN;
-        $publicMethods = $this->query($query);
+        $publicMethods = $this->query($query)
+                              ->toArray();
         
         $magicMethods = $this->loadIni('php_magic_methods.ini', 'magicMethod');
 
@@ -82,7 +83,8 @@ g.V().hasLabel("Staticmethodcall")
      .select("classe", "method").by("fullnspath").by("code")
      .unique()
 GREMLIN;
-        $publicStaticMethods = $this->query($query);
+        $publicStaticMethods = $this->query($query)
+                                    ->toArray();
         
         if (!empty($publicStaticMethods)) {
             $calls = array();
