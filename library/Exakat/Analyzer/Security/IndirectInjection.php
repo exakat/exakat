@@ -37,7 +37,7 @@ g.V().hasLabel("Analysis").has("analyzer","Security/GPRAliases")
      .out("ANALYZED")
      .values("fullcode").unique()
 GREMLIN;
-        $vars = $this->query($query);
+        $vars = $this->query($query)->toArray();
         
         if (empty($vars)) {
             return;

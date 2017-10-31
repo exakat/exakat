@@ -64,6 +64,9 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
     }
 
     private function checkArray() {
+        if (empty($this->data)){
+            return; 
+        }
         $data = array_values($this->data);
         if (!$data[0] instanceof \Stdclass) {
             return;

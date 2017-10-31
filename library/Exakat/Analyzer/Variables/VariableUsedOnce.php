@@ -43,7 +43,7 @@ g.V().as("first").groupCount("processed").by(count())
      .where( __.in("GLOBAL").count().is(eq(0)) )
      .groupCount("m").by("code").cap("m").next().findAll{ a,b -> b == 1}.keySet()
 GREMLIN
-);
+)->toArray();
 
         if (empty($usedOnce)) {
             return;

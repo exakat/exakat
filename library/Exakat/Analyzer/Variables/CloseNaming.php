@@ -64,7 +64,7 @@ GREMLIN
         $variables = $this->query(<<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject").values("code").unique();
 GREMLIN
-);
+                                  );
 
         // Identical, except for case
         $lowerCaseVariable = array_map('strtolower', $variables->toArray());

@@ -27,7 +27,8 @@ use Exakat\Analyzer\Analyzer;
 
 class StaticMethodsCalledFromObject extends Analyzer {
     public function dependsOn() {
-        return array('Classes/StaticMethods');
+        return array('Classes/StaticMethods',
+                    );
     }
 
     public function analyze() {
@@ -39,7 +40,7 @@ g.V().hasLabel("Method")
      .values("code")
      .unique()
 GREMLIN;
-        $methods = $this->query($query);
+        $methods = $this->query($query)->toArray();
         if (empty($methods)) {
             return;
         }

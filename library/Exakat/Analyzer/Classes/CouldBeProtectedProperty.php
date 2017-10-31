@@ -62,10 +62,10 @@ GREMLIN;
         
         $publicStaticProperties = array();
         foreach($res as $value) {
-            if (isset($publicStaticProperties[$value->classe])) {
-                $publicStaticProperties[$value->classe][] = $value->variable;
+            if (isset($publicStaticProperties[$value['classe']])) {
+                $publicStaticProperties[$value['classe']][] = $value['variable'];
             } else {
-                $publicStaticProperties[$value->classe] = array($value->variable);
+                $publicStaticProperties[$value['classe']] = array($value['variable']);
             }
         }
         

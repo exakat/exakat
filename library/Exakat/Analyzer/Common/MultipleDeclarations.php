@@ -37,13 +37,13 @@ hasLabel("Class").groupCount("m").by("fullnspath").cap("m").next().findAll{ a,b 
 GREMLIN
 );
         $multiples = $this->rawQuery();
-        
+
         if ($multiples->isType(GraphResults::EMPTY)) {
             return;
         }
 
         $this->atomIs($this->atom)
-             ->fullnspathIs($multiples);
+             ->fullnspathIs(call_user_func_array('array_merge', $multiples->toArray()));
         $this->prepareQuery();
     }
 }

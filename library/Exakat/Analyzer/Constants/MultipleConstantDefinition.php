@@ -59,8 +59,8 @@ GREMLIN
         }
 
         if ($a = $this->selfCollisions(array_merge($constDefinitions->toArray(), $csDefinitions->toArray()))) {
-            $this->applyToConst(array_intersect($a, $constDefinitions));
-            $this->applyToCsDefine(array_intersect($a, $csDefinitions));
+            $this->applyToConst(array_intersect($a, $constDefinitions->toArray()));
+            $this->applyToCsDefine(array_intersect($a, $csDefinitions->toArray()));
         }
         
         if ($a = $this->CsCisCollisions($csDefinitions->toArray(), $cisDefinitions->toArray())) {
