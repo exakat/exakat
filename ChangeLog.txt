@@ -1,4 +1,4 @@
-Version 1.0.1 (Xueshi  Demon, coming up)
+Version 1.0.2 (Suanni Demon, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,18 @@ Version 1.0.1 (Xueshi  Demon, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.0.1 (Xueshi Demon, 2017-10-30)
++ Architecture
+    + Created Result class for Graphdb results
+    + Docker image is updated with version 1.0.1
+    + Vagrant files are updated with version 1.0.1
+    + Preparing support for Gremlin 3.3.0
++ Report
+    + Added support for PHP 7.1.11 and 7.0.25
++ Analyzer
+    + New analyzer : could be else (for consecutive opposite if/then)
+    + Checked unit tests : 2527 / 2517 test pass (99% pass). 
 
 Version 1.0.0 (Roushi Demon, 2017-10-23)
 + Architecture
