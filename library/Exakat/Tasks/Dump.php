@@ -339,7 +339,7 @@ GREMLIN;
             $this->sqlite->query($query);
         }
         
-        print "Variables : $total\n";
+        display( "Variables : $total\n");
     }
     
     private function collectStructures() {
