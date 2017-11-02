@@ -1,15 +1,14 @@
 <?php
 
 $expected     = array('strtotime("next month", mktime(0, 0, 0, 10, 31, 2017))',
-strtotime('+1 month', mktime(0, 0, 0, 10, 31, 2017)), ./test.php, 4, None, None, None
-strtotime('+2 month', mktime(0, 0, 0, 10, 31, 2017)), ./test.php, 5, None, None, None
-strtotime('-1 month', mktime(0, 0, 0, 10, 31, 2017)), ./test.php, 6, None, None, None
-strtotime("+$x month", mktime(0, 0, 0, 10, 31, 2017)), ./test.php, 7, None, None, None',
-                      '',
+                      'strtotime(\'+1 month\', mktime(0, 0, 0, 10, 31, 2017))',
+                      'strtotime(\'+2 month\', mktime(0, 0, 0, 10, 31, 2017))',
+                      'strtotime(\'-1 month\', mktime(0, 0, 0, 10, 31, 2017))',
+                      'strtotime("+$x month", mktime(0, 0, 0, 10, 31, 2017))',
                      );
 
-$expected_not = array('',
-                      '',
+$expected_not = array('strtotime("first day of next month",mktime(0,0,0,10,31,2017)))',
+                      'strtotime("last day of NEXT month",mktime(0,0,0,10,31,2017)))',
                      );
 
 ?>
