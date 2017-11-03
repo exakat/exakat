@@ -28,12 +28,14 @@ class NextMonthTrap extends Analyzer {
     public function analyze() {
         $this->atomFunctionIs('\strtotime')
              ->outWithRank('ARGUMENT', 0)
-             ->regexIs('fullcode', '(\\\\+|-).+ month')
+             ->atomIs('String')
+             ->regexIs('fullcode', '(\\\\+|-|\\\\\$)[0-9a-zA-Z_]+ month')
              ->back('first');
         $this->prepareQuery();
 
         $this->atomFunctionIs('\strtotime')
              ->outWithRank('ARGUMENT', 0)
+             ->atomIs('String')
              ->regexIs('noDelimiter', '(?i)(?<!of )next month')
              ->back('first');
         $this->prepareQuery();
