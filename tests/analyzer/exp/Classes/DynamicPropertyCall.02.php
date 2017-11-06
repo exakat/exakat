@@ -1,7 +1,8 @@
 <?php
 
 $expected     = array('$object->$propertyname1', 
-                      '$object->$propertyname1');
+                      '$object->$propertyname1',
+                     );
 
 $expected_not = array('Classe::normalPropertyname1', 
                       '$object->normalPropertyname1',

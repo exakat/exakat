@@ -1,8 +1,10 @@
 <?php
 
-$expected     = array();
+$expected     = array('f( )',
+                     );
 
 $expected_not = array('\\a\\b',
-                      '\\c\\d\\e');
+                      '\\c\\d\\e',
+                     );
 
 ?>

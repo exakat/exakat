@@ -1,7 +1,9 @@
 <?php
 
-$expected     = array('Redis');
+$expected     = array('Redis',
+                     );
 
-$expected_not = array();
+$expected_not = array('redis( )',
+                     );
 
 ?>
