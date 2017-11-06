@@ -42,10 +42,10 @@ GREMLIN;
         
         $interfaces = array();
         foreach($res as $row) {
-            if (isset($interfaces[$row->name])) {
-                $interfaces[$row->name][] = $row->method;
+            if (isset($interfaces[$row['name']])) {
+                $interfaces[$row['name']][] = $row['method'];
             } else {
-                $interfaces[$row->name] = array($row->method);
+                $interfaces[$row['name']] = array($row['method']);
             }
         }
 

@@ -89,10 +89,10 @@ GREMLIN;
         if (!empty($publicStaticMethods)) {
             $calls = array();
             foreach($publicStaticMethods as $value) {
-                if (isset($calls[$value->method])) {
-                    $calls[$value->method][] = $value->classe;
+                if (isset($calls[$value['method']])) {
+                    $calls[$value['method']][] = $value['classe'];
                 } else {
-                    $calls[$value->method] = array($value->classe);
+                    $calls[$value['method']] = array($value['classe']);
                 }
             }
             

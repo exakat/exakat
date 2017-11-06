@@ -84,10 +84,10 @@ GREMLIN;
         if (!empty($publicStaticProperties)) {
             $calls = array();
             foreach($publicStaticProperties as $value) {
-                if (isset($calls[$value->property])) {
-                    $calls[$value->property][] = $value->classe;
+                if (isset($calls[$value['property']])) {
+                    $calls[$value['property']][] = $value['classe'];
                 } else {
-                    $calls[$value->property] = array($value->classe);
+                    $calls[$value['property']] = array($value['classe']);
                 }
             }
             

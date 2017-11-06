@@ -45,7 +45,7 @@ class ShouldRegenerateSessionId extends Analyzer {
                                            .out("OBJECT").has("fullcode", within('.$sessionsList.'))
                                            .count()');
                                            
-        if ($regenerateid->toString !== "0") {
+        if ($regenerateid->toString() !== "0") {
             return;
         }
 
