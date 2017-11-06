@@ -1,4 +1,4 @@
-Version 1.0.2 (Suanni Demon, coming up)
+Version 1.0.3 (Baize Demon, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,23 @@ Version 1.0.2 (Suanni Demon, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.0.2 (Suanni Demon, 2017-11-06)
++ Architecture
+    + Better report of error messages from VCS.
+    + Updated support for Vagrant 
++ Report
+    + Ambassador : Fixed display for 'Callback'
++ Analyzer
+    + New analyzer : substr() first, then replace.
+    + New analyzer : report double prepare (WP).
+    + New analyzer : avoir the +1 month trap
+    + New analyzer : check for printf() options
+    + New analyzer : check for placeholder in prepare (WP)
+    + New analyzer : avoid direct injection into prepare (WP)
+    + New analyzer : performance recommendation for switch. 
+    + New analyzer : merge if/if into if/then/else
+    + Checked unit tests : 2536 / 2500 test pass (99% pass). 
 
 Version 1.0.1 (Xueshi Demon, 2017-10-30)
 + Architecture
