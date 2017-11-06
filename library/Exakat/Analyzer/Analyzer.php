@@ -351,6 +351,7 @@ GREMLIN;
             $this->analyzerId = $analyzerId;
         }
 
+        assert($this->analyzerId != 0, __CLASS__." was inited with Id 0. Can't save with that!");
         return $this->analyzerId;
     }
 
@@ -433,13 +434,11 @@ GREMLIN;
             return array($result);
         }
         
-        if (isset($result->results)) {
-            $result = $result->results;
-        }
-        
         $return = array();
         foreach($result as $row) {
-            $return[$row->key] = $row->value;
+            foreach($row['value'] as $value) {
+                $return[$row['key']] = $value;
+            }
         }
         return $return;
     }
@@ -580,7 +579,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
 
     public function atomInsideNoBlock($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Sequence")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Sequence")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
@@ -588,7 +587,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
 
     public function atomInsideNoAnonymous($atom) {
         assert($this->assertAtom($atom));
-        $gremlin = 'emit( hasLabel('.$this->SorA($atom).')).repeat( out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
+        $gremlin = 'emit( ).repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).')';
         $this->addMethod($gremlin);
         
         return $this;
@@ -607,7 +606,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         // Cannot use not() here : 'This traverser does not support loops: org.apache.tinkerpop.gremlin.process.traversal.traverser.B_O_Traverser'.
 //        $gremlin = 'not( where( __.emit( ).repeat( __.out() ).times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
         // Check with Structures/Unpreprocessed
-        $gremlin = 'not(where( __.repeat( __.out().not(hasLabel("Closure", "Classanonymous")) ).emit()
+        $gremlin = 'not(where( __.repeat( __.out('.$this->linksDown.').not(hasLabel("Closure", "Classanonymous")) ).emit()
                           .times('.self::MAX_LOOPING.').hasLabel('.$this->SorA($atom).') ) )';
         $this->addMethod($gremlin);
         
@@ -1761,7 +1760,7 @@ GREMLIN
             $query = 'g.V().hasLabel("Analysis").has("analyzer", "'.$r[1].'").out("ANALYZED").as("first").groupCount("processed").by(count()).'.$query;
             unset($this->methods[1]);
         } else {
-            die('No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[1]);
+            assert(false, 'No optimization : gremlin query in analyzer should have use g.V. ! '.$this->methods[1]);
         }
         
         // search what ? All ?
@@ -1961,11 +1960,13 @@ GREMLIN;
         return $this;
     }
     
-    protected function SorA($v) {
-        if (is_array($v)) {
-            return makeList($v);
+    protected function SorA($value) {
+        if (is_array($value)) {
+            return makeList($value);
+        } elseif (is_string($value)) {
+            return '"'.$value.'"';
         } else {
-            return '"'.$v.'"';
+            assert(false, '$v is not a string or an array');
         }
     }
 
