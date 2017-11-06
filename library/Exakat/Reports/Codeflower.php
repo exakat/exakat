@@ -46,6 +46,7 @@ class Codeflower extends Reports {
     }
 
     private function getFileDependencies() {
+        $files = array();
         $res = $this->sqlite->query(<<<SQL
 SELECT DISTINCT including, included 
     FROM filesDependencies
