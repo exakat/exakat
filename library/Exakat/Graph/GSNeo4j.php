@@ -200,7 +200,8 @@ class GSNeo4j extends Graph {
         }
 
         foreach($result as $r) {
-            $row = array();
+            $row = array('id'    => $r['id'],
+                         'label' => $r['label']);
             foreach($r['properties'] as $property => $value) {
                 $row[$property] = $value[0]['value'];
             }
