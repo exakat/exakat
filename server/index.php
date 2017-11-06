@@ -172,8 +172,6 @@ function status($args) {
     if (isset($args[0]) && !empty($args[0])) {
         if (!file_exists(__DIR__.'/'.$args[0])) {
     	    error('No such project', $args[0]);
-	    } elseif (!file_exists(__DIR__.'/'.$args[0].'/code/')) {
-            error('No code found', $args[0]);
         } elseif (file_exists(__DIR__.'/'.$args[0].'/')) {
             $json = shell_exec('/usr/bin/php exakat.phar status -p '.$args[0].' -json');
             echo $json;
