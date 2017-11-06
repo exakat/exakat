@@ -43,7 +43,7 @@ GREMLIN;
              ->noAtomInside('Haltcompiler')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = (array) $this->rawQuery()->toArray();
+        $types = $this->rawQuery()->toArray()[0];
 
         $store = array();
         $total = 0;
@@ -59,14 +59,16 @@ GREMLIN;
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
-        $types = '['.makeList(array_keys($types)).']';
+        if (empty($types)) {
+            return;
+        }
 
         $this->atomIs('File')
              ->outIs('FILE')
              ->outIs('EXPRESSION')
              ->atomIs('Php')
              ->raw('sideEffect{ '.$mapping.' }')
-             ->raw('filter{ x2 in '.$types.'}')
+             ->raw('filter{ x2 in ***}', $types)
              ->noAtomInside('Haltcompiler')
              ->back('first');
         $this->prepareQuery();

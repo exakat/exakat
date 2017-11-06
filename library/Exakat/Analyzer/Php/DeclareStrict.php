@@ -47,7 +47,7 @@ GREMLIN;
 filter{ true; })')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = (array) $this->rawQuery()->toArray();
+        $types = $this->rawQuery()->toArray()[0];
 
         $store = array();
         $total = 0;
@@ -73,8 +73,7 @@ filter{ true; })')
              ->outIs('FILE')
              ->outIs('EXPRESSION')
              ->outIs('CODE')
-             ->raw('coalesce( __.out("EXPRESSION").hasLabel("Declare").out("ARGUMENT").has("fullcode", "strict_types = 1"), 
-filter{ true; })')
+             ->raw('coalesce( __.out("EXPRESSION").hasLabel("Declare").out("ARGUMENT").has("fullcode", "strict_types = 1"), filter{ true; })')
              ->raw('map{ '.$mapping.' }')
              ->raw('filter{ x2 in ***}', $types)
              ->back('first');

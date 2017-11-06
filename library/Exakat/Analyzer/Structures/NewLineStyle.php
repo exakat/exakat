@@ -45,7 +45,7 @@ GREMLIN;
                              )')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = (array) $this->rawQuery()->toArray();
+        $types = $this->rawQuery()->toArray()[0];
 
         $store = array();
         $total = 0;
@@ -56,19 +56,19 @@ GREMLIN;
             $total += $c;
         }
         Analyzer::$datastore->addRowAnalyzer($this->analyzerQuoted, $store);
+
         if ($total == 0) {
             return;
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x  < 0.1 *  $total; });
-        $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
 
         $this->atomIs(array('String', 'Identifier', 'Nsname'))
              ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\php_eol"), 
                               __.hasLabel("String").has("code", "\"\\\\n\"")
                              )')
              ->raw('sideEffect{ '.$mapping.' }')
-             ->raw('filter{ x2 in '.$types.'}')
+             ->raw('filter{ x2 in ***}', $types)
              ->back('first');
         $this->prepareQuery();
     }

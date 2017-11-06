@@ -43,7 +43,7 @@ GREMLIN;
                              'T_BOOLEAN_AND',                  'T_BOOLEAN_OR', ))
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = (array) $this->rawQuery()->toArray();
+        $types = $this->rawQuery()->toArray()[0];
         
         $store = array();
         $total = 0;
