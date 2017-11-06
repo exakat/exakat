@@ -301,14 +301,13 @@ class Initproject extends Tasks {
                         $repositoryTag =  '';
                     }
                     $shell .= ' code 2>&1 ';
-                    $res = shell_exec($shell);
+                    $shellResult = shell_exec($shell);
 
                     if (($offset = strpos($res, 'fatal: ')) !== false) {
-                        $this->datastore->addRow('hash', array('init error' => trim(substr($res, $offset + 7)) ));
-                        var_dump(trim(substr($res, $offset + 7)));
-                        $res = str_replace($repositoryNormalizedURL, $repositoryURL, $res);
-                        $res = trim(substr($res, $offset + 7));
-                        display('An error prevented code initialization : '.$res.PHP_EOL.'No code was loaded.');
+                        $errorMessage = str_replace($repositoryNormalizedURL, $repositoryURL, $shellResult);
+                        $errorMessage = trim(substr($res, $offset + 7));
+                        $this->datastore->addRow('hash', array('init error' => $errorMessage ));
+                        display('An error prevented code initialization : "'.$errorMessage.'"'.PHP_EOL.'No code was loaded.');
 
                         $skipFiles = true;
                     }
@@ -333,9 +332,11 @@ ignore_dirs[] = /cache
 ignore_dirs[] = /css
 ignore_dirs[] = /data
 ignore_dirs[] = /doc
+ignore_dirs[] = /docker
 ignore_dirs[] = /docs
 ignore_dirs[] = /example
 ignore_dirs[] = /examples
+ignore_dirs[] = /images
 ignore_dirs[] = /js
 ignore_dirs[] = /lang
 ignore_dirs[] = /spec
@@ -345,6 +346,7 @@ ignore_dirs[] = /tests
 ignore_dirs[] = /tmp
 ignore_dirs[] = /vendor
 ignore_dirs[] = /version
+
 
 ;Included dirs or files, relative to code source root. Default to all.
 ;Those are added after ignoring directories
