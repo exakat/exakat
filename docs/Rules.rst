@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 23 Oct 2017 18:16:34 +0000
-.. comment: Generation hash : fd66de8a4579a7e9b35c39a8746316b3263aa3a6
+.. comment: Generation date : Mon, 06 Nov 2017 16:12:40 +0000
+.. comment: Generation hash : e2035f8ab302423c10a581b318b08759cfa5a335
 
 
 .. _$http\_raw\_post\_data:
@@ -2837,6 +2837,45 @@ Starting with PHP 5.6, even array() may be defined as constants.
 +--------------+------------------------------+
 
 
+.. _could-be-else:
+
+Could Be Else
+#############
+
+
+Merge opposition conditions into one if/then structure.
+
+When two if/then structures follow each other, using a condition and its opposite, they may be merged into one.
+
+.. code-block:: php
+
+   <?php
+   
+   // Short version
+   if ($a == 1) {
+       $b = 2;
+   } else {
+       $b = 1;
+   }
+   
+   // Long version
+   if ($a == 1) {
+       $b = 2;
+   }
+   
+   if ($a != 1) {
+       $b = 3;
+   }
+   
+   ?>
+
++--------------+------------------------+
+| Command Line | Structures/CouldBeElse |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
 .. _could-be-private-class-constant:
 
 Could Be Private Class Constant
@@ -3582,12 +3621,14 @@ Deprecated Methodcalls in Cake 3.2
 ##################################
 
 
-According to the `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_, the following are deprecated and should be changed.
+According to the Cake Migration Guide, the following are deprecated and should be changed.
 
 * Shell::error()
 * Cake\Database\Expression\QueryExpression::type()
 * Cake\ORM\ResultSet::_calculateTypeMap()                 
-* Cake\ORM\ResultSet::_castValues()
+* Cake\ORM\ResultSet::_castValues()                       
+
+See also `Cake 3.2 migration guide <http://book.cakephp.org/3.0/en/appendices/3-2-migration-guide.html>`_.
 
 +--------------+---------------------------------+
 | Command Line | Cakephp/Cake32DeprecatedMethods |
@@ -5301,7 +5342,7 @@ Group Use Trailing Comma
 ########################
 
 
-In PHP 7.2, the usage of a final empty slot was allowed with use statements.
+The usage of a final empty slot in array() was allowed with use statements. This works in PHP 7.2 and more recent.
 
 Although this empty instruction is ignored at execution, this allows for clean presentation of code, and short diff when committing in a VCS.
 
@@ -5309,11 +5350,14 @@ Although this empty instruction is ignored at execution, this allows for clean p
 
    <?php
    
+   // Valid in PHP 7.2 and more recent.
    use a\b\{c, 
             d, 
             e, 
             f,
            };
+   
+   // This won't compile in 7.1 and older.
    
    ?>
 
@@ -6760,6 +6804,21 @@ See also `Integers <http://php.net/manual/en/language.types.integer.php>`_.
 +--------------+------------------------------------------------------------------------------------------------------------+
 
 
+.. _mark-callable:
+
+Mark Callable
+#############
+
+
+Create an attribute that guess what are the called function or methods, when possible.
+
++--------------+------------------------+
+| Command Line | Functions/MarkCallable |
++--------------+------------------------+
+| Analyzers    | :ref:`Analyze`         |
++--------------+------------------------+
+
+
 .. _method-used-below:
 
 Method Used Below
@@ -7945,6 +8004,44 @@ The following functions are now native functions in PHP 7.3. It is advised to ch
 +--------------+---------------------------+
 
 
+.. _next-month-trap:
+
+Next Month Trap
+###############
+
+
+Avoid using +1 month with strtotime(). 
+
+strtotime() calculates the next month by incrementing the month number. For day number that do not exist from one month to the next, strtotime() fixes them by setting them in the next-next month. 
+
+This happens to January, March, May, July, August and October. January is also vulnerable for 29 (not every year), 30 and 31. 
+
+Avoid using '+1 month', and rely on 'first day of next month' or 'last day of next month' to extract the next month's name.
+
+.. code-block:: php
+
+   <?php
+   
+   // Base date is October 31 => 10/31
+   // +1 month adds +1 to 10 => 11/31 
+   // Since November 31rst doesn't exists, it is corrected to 12/01. 
+   echo date('F', strtotime('+1 month',mktime(0,0,0,$i,31,2017))).PHP_EOL;
+   
+   // Base date is October 31 => 10/31
+   echo date('F', strtotime('first day of next month',mktime(0,0,0,$i,31,2017))).PHP_EOL;
+   
+   ?>
+
+
+See also `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_.
+
++--------------+--------------------------+
+| Command Line | Structures/NextMonthTrap |
++--------------+--------------------------+
+| Analyzers    | :ref:`Analyze`           |
++--------------+--------------------------+
+
+
 .. _no-boolean-as-default:
 
 No Boolean As Default
@@ -8181,6 +8278,37 @@ Accessing those methods in a static way is also discouraged.
 +--------------+---------------------------------+
 | Analyzers    | :ref:`Analyze`                  |
 +--------------+---------------------------------+
+
+
+.. _no-direct-input-to-wpdb:
+
+No Direct Input To Wpdb
+#######################
+
+
+Avoid using incoming variables when building SQL queries with $wpdb->prepare() 
+
+(This is quoted directly from Anthony Ferrera blog, link below).
+In general however, go through and remove all user input from the $query side of ->prepare(). NEVER pass user input to the query side. Meaning, never do this (in any form):
+
+.. code-block:: php
+
+   <?php
+     $where = $wpdb->prepare(' WHERE foo = %s', $_GET['data']);
+     $query = $wpdb->prepare('SELECT * FROM something $where LIMIT %d, %d', 1, 2);
+   ?>
+
+
+This is known as 'double-preparing' and is not a good design.
+(End of quote).
+
+See also `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_.
+
++--------------+-------------------------------+
+| Command Line | Wordpress/NoDirectInputToWpdb |
++--------------+-------------------------------+
+| Analyzers    | :ref:`Wordpress`              |
++--------------+-------------------------------+
 
 
 .. _no-direct-usage:
@@ -9067,7 +9195,7 @@ No array_merge() In Loops
 
 `'array_merge() <http://www.php.net/array_merge>`_ is memory intensive : every call will duplicate the arguments in memory, before merging them. 
 
-Since arrays may be quite big, it is recommended to avoid using `'array_merge() <http://www.php.net/array_merge>`_ in a loop. Instead, one should use `'array_merge() <http://www.php.net/array_merge>`_ with as many arguments as possible, making the merge a on time call.
+To handle arrays that may be quite big, it is recommended to avoid using `'array_merge() <http://www.php.net/array_merge>`_ in a loop. Instead, one should use `'array_merge() <http://www.php.net/array_merge>`_ with as many arguments as possible, making the merge a on time call.
 
 .. code-block:: php
 
@@ -9084,6 +9212,7 @@ Since arrays may be quite big, it is recommended to avoid using `'array_merge() 
    foreach($source as $key => $values) {
        $b = array_merge($b, $values);
    }
+   
    
    // Faster way
    $b = array();
@@ -9385,7 +9514,7 @@ Null On New
 ###########
 
 
-Until PHP 7.0, some classes instantiation could yield null, instead of throwing an exception. 
+Until PHP 7, some classes instantiation could yield null, instead of throwing an exception. 
 
 After issuing a 'new' with those classes, it was important to check if the returned object were null or not. No exception were thrown.
 
@@ -10498,6 +10627,42 @@ This is a micro-optimisation. However, its usage is so widespread, including wit
 +--------------+-------------------------------------+
 
 
+.. _prepare-placeholder:
+
+Prepare Placeholder
+###################
+
+
+$wpdb->prepare() only allows %d, %s and %F as placeholder. All others are not available. They are even enforced since Wordpress 4.8.3. 
+
+In particular, absolute references are not allowed anymore, due to an injection vulnerability.
+
+.. code-block:: php
+
+   <?php
+   
+   // valid place holders
+     $query = $wpdb->prepare('SELECT * FROM table WHERE col = %s and col2 = %1$s and col3 = %F', 'string', 1, 1.2);
+   
+   // valid place holders : invalid Wordpress placeholder
+   // This may be a valid vsprintf placeholder.
+     $query = $wpdb->prepare('SELECT * FROM table WHERE col = %b', $integerDisplayedAsBinary);
+   
+   // valid place holders : absolute reference. $var is used twice
+     $query = $wpdb->prepare('SELECT * FROM table WHERE col = %s and %1$s', $var);
+   
+   ?>
+
+
+See also `'vprintf() <http://www.php.net/vprintf>`_ and `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_.
+
++--------------+------------------------------+
+| Command Line | Wordpress/PreparePlaceholder |
++--------------+------------------------------+
+| Analyzers    | :ref:`Wordpress`             |
++--------------+------------------------------+
+
+
 .. _preprocess-arrays:
 
 Preprocess Arrays
@@ -10637,6 +10802,43 @@ When stopping a script with `'die() <http://www.php.net/die>`_, it is possible t
 +--------------+------------------------+
 | Analyzers    | :ref:`Analyze`         |
 +--------------+------------------------+
+
+
+.. _printf-number-of-arguments:
+
+Printf Number Of Arguments
+##########################
+
+
+The number of arguments provided to `'printf() <http://www.php.net/printf>`_ or `'vprintf() <http://www.php.net/vprintf>`_ doesn't match the format string.
+
+Extra arguments are ignored, and are dead code as such. Missing arguments are reported with a warning, and nothing is displayed.
+
+.. code-block:: php
+
+   <?php
+   
+   // not enough
+   printf(' a %s ', $a1); 
+   // OK
+   printf(' a %s ', $a1, $a2); 
+   // too many
+   printf(' a %s ', $a1, $a2, $a3); 
+   
+   // not enough
+   sprintf(' a %s ', $a1); 
+   // OK
+   \sprintf(' a %s ', $a1, $a2); 
+   // too many
+   sprintf(' a %s ', $a1, $a2, $a3); 
+   
+   ?>
+
++--------------+----------------------------+
+| Command Line | Structures/PrintfArguments |
++--------------+----------------------------+
+| Analyzers    | :ref:`Analyze`             |
++--------------+----------------------------+
 
 
 .. _property-could-be-private-method:
@@ -12345,6 +12547,61 @@ The global keyword should only be used with simple variables. Since PHP 7, it ca
 +--------------+------------------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`CompatibilityPHP70`, :ref:`CompatibilityPHP71`, :ref:`CompatibilityPHP72`, :ref:`CompatibilityPHP73` |
 +--------------+------------------------------------------------------------------------------------------------------------+
+
+
+.. _simple-switch:
+
+Simple Switch
+#############
+
+
+Switches are faster when relying only on integers or strings.
+
+Since PHP 7.2, simple switches that use only strings or integers are optimized. The gain is as great as the switch is big. 
+
+.. code-block:: php
+
+   <?php
+   
+   // Optimized switch. 
+   switch($b) {
+       case a:
+           'break;
+       case b:
+           'break;
+       case c:
+           'break;
+       case d:
+           'break;
+       default :
+           'break;
+   }
+   
+   // Unoptimized switch. 
+   // Try moving the foo() call in the default, to keep the rest of the switch optimized.
+   switch($c) {
+       case a:
+           'break;
+       case foo($b):
+           'break;
+       case c:
+           'break;
+       case d:
+           'break;
+       default :
+           'break;
+   }
+   
+   ?>
+
+
+See also `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_.
+
++--------------+---------------------------+
+| Command Line | Performances/SimpleSwitch |
++--------------+---------------------------+
+| Analyzers    | :ref:`Performances`       |
++--------------+---------------------------+
 
 
 .. _simplify-regex:
@@ -15021,16 +15278,27 @@ On way to exploit unserialize, is to make PHP unserialized the data to an availa
 
    <?php
    
-   // expected Database object
-   $var = unserialize('O:7:dbClass:0:{}');
+   // safe unserialization : only the expected class will be extracted
+   $serialized = 'O:7:dbClass:0:{}';
+   $var = unserialize($serialized, ['dbClass']);
+   $var->connect();
    
-   // unexpected load of debugClass object
-   $var = unserialize('O:10:debugClass:0:{}');
+   // unsafe unserialization : $var may be of any type that was in the serialized string
+   // although, here, this is working well.
+   $serialized = 'O:7:dbClass:0:{}';
+   $var = unserialize($serialized);
+   $var->connect();
    
-   // Using the unserialized object
+   // unsafe unserialization : $var is not of the expected type.
+   // and, here, this will lead to disaster.
+   $serialized = 'O:10:debugClass:0:{}';
+   $var = unserialize($serialized);
    $var->connect();
    
    ?>
+
+
+See also `'unserialize() <http://www.php.net/unserialize>`_;
 
 +--------------+-------------------------------+
 | Command Line | Security/UnserializeSecondArg |

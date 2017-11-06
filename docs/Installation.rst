@@ -11,6 +11,7 @@ Summary
 * `Quick installation with OSX`_
 * `Quick installation with Debian/Ubuntu`_
 * `Installation guide with Docker`_
+* `Installation guide with Vagrant and Ansible`_
 * `Optional installations`_
 
 Presentation
@@ -135,3 +136,84 @@ By default, exakat works with Git repository for downloading code. You may also 
 * zip
 
 The binaries above are used with the `init` and `update` commands, to get the source code. They are optional.
+
+Installation guide with Docker
+------------------------------
+
+Installation with docker is easy, and convenient. It hides the dependency on the graph database, and keeps all files in the 'projects' folder, created in the working directory.
+
+Currently, Docker installation only ships with one PHP version (7.1), and with support for git, svn and mercurial.
+
+* Install `Docker <http://www.docker.com/>`_
+* Start Docker
+* Pull exakat. The official docker page is `exakat/exakat <https://hub.docker.com/r/exakat/exakat/>`_.
+
+::
+
+    docker pull exakat/exakat
+
+* Run exakat : 
+
+::
+
+    docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat version
+
+* Init a project : 
+
+::
+
+    docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat init -p <project name> -R <vcs_url>
+
+* Run exakat : 
+
+::
+
+    docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat project -p <project name>
+
+You may simply run any exakat command by prefixing it with the following command : 
+
+::
+
+    docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat 
+
+
+You may also create a handy shortcut, by creating an exakat.sh script and put it in your PATH : 
+
+::
+
+    cat 'docker run -it -v $(pwd)/projects:/usr/src/exakat/projects --rm --name my-exakat exakat/exakat $1' > /etc/local/sbin/exakat.sh
+    chmod u+x  /etc/local/sbin/exakat.sh
+    ./exakat.sh version
+    
+Installation guide with Vagrant and Ansible
+-------------------------------------------
+
+Installation list
+#################
+
+The exakat-vagrant repository contains an automated install for exakat. It installs everything in the working directory, or the system.
+Vagrant install works with Debian 8 and Ubuntu 15.10 images. Other images may be usable, but not tested.
+
+Pre-requisites
+##############
+
+You need the following tools : 
+
+* `git <https://git-scm.com/>`_
+* `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
+* `vagrant <https://www.vagrantup.com/docs/installation/>`_
+
+Most may easily be installed with the local package manager, or with a direct download from the editor's website. 
+
+Install with Vagrant and Ansible
+################################
+
+:: 
+
+    git clone https://github.com/exakat/exakat-vagrant
+    cd exakat-vagrant
+    // Review the Vagrant file to check the size of the virtualbox
+    vagrant up --provision
+    vagrant ssh 
+
+You are now ready to run a project.

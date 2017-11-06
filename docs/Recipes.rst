@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 23 Oct 2017 18:16:34 +0000
-.. comment: Generation hash : fd66de8a4579a7e9b35c39a8746316b3263aa3a6
+.. comment: Generation date : Mon, 06 Nov 2017 16:12:40 +0000
+.. comment: Generation hash : e2035f8ab302423c10a581b318b08759cfa5a335
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 315 analysis
+Total : 319 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -118,6 +118,7 @@ Total : 315 analysis
 * :ref:`Constants Created Outside Its Namespace <constants-created-outside-its-namespace>`
 * :ref:`Constants With Strange Names <constants-with-strange-names>`
 * :ref:`Could Be Class Constant <could-be-class-constant>`
+* :ref:`Could Be Else <could-be-else>`
 * :ref:`Could Be Private Class Constant <could-be-private-class-constant>`
 * :ref:`Could Be Protected Class Constant <could-be-protected-class-constant>`
 * :ref:`Could Be Protected Method <could-be-protected-method>`
@@ -190,6 +191,7 @@ Total : 315 analysis
 * :ref:`Long Arguments <long-arguments>`
 * :ref:`Lost References <lost-references>`
 * :ref:`Make Global A Property <make-global-a-property>`
+* :ref:`Mark Callable <mark-callable>`
 * :ref:`Method Used Below <method-used-below>`
 * :ref:`Mismatched Default Arguments <mismatched-default-arguments>`
 * :ref:`Mismatched Ternary Alternatives <mismatched-ternary-alternatives>`
@@ -211,6 +213,7 @@ Total : 315 analysis
 * :ref:`Nested Ifthen <nested-ifthen>`
 * :ref:`Nested Ternary <nested-ternary>`
 * :ref:`Never Used Properties <never-used-properties>`
+* :ref:`Next Month Trap <next-month-trap>`
 * :ref:`No Boolean As Default <no-boolean-as-default>`
 * :ref:`No Choice <no-choice>`
 * :ref:`No Class As Typehint <no-class-as-typehint>`
@@ -258,6 +261,7 @@ Total : 315 analysis
 * :ref:`Preprocess Arrays <preprocess-arrays>`
 * :ref:`Preprocessable`
 * :ref:`Print And Die <print-and-die>`
+* :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
 * :ref:`Property Could Be Private Method <property-could-be-private-method>`
 * :ref:`Property Could Be Private Property <property-could-be-private-property>`
 * :ref:`Property Used In One Method Only <property-used-in-one-method-only>`
@@ -956,7 +960,7 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 26 analysis
+Total : 27 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -979,6 +983,7 @@ Total : 26 analysis
 * :ref:`Pre-increment`
 * :ref:`Should Use Function Use <should-use-function-use>`
 * :ref:`Should Use array_column() <should-use-array\_column()>`
+* :ref:`Simple Switch <simple-switch>`
 * :ref:`Simplify Regex <simplify-regex>`
 * :ref:`Slow Functions <slow-functions>`
 * :ref:`Use Class Operator <use-class-operator>`
@@ -1059,11 +1064,13 @@ Total : 25 analysis
 Wordpress
 +++++++++
 
-Total : 10 analysis
+Total : 12 analysis
 
 * :ref:`Avoid Non Wordpress Globals <avoid-non-wordpress-globals>`
+* :ref:`No Direct Input To Wpdb <no-direct-input-to-wpdb>`
 * :ref:`No Global Modification <no-global-modification>`
 * :ref:`Nonce Creation <nonce-creation>`
+* :ref:`Prepare Placeholder <prepare-placeholder>`
 * :ref:`Strange Names For Methods <strange-names-for-methods>`
 * :ref:`Unescaped Variables In Templates <unescaped-variables-in-templates>`
 * :ref:`Unverified Nonce <unverified-nonce>`
