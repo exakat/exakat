@@ -28,6 +28,7 @@ use Exakat\Datastore;
 use Exakat\Config;
 use Exakat\Tokenizer\Token;
 use Exakat\Exceptions\GremlinException;
+use Exakat\Exceptions\NoSuchAnalyzer;
 use Exakat\Graph\GraphResults;
 
 abstract class Analyzer {
