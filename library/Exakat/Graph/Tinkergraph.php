@@ -81,21 +81,14 @@ class Tinkergraph extends Graph {
                 $result = $this->simplifyArray($result);
             }
 
-/*
-            if (isset($result[0]) && is_array($result[0]) && count($result[0]) === 1) {
-                $result = call_user_func_array('array_merge', $result);
-            }
-*/
             return new GraphResults($result);
         } elseif (is_array($result)) {
             return new GraphResults($result);
         } elseif ($result instanceof \stdclass) {
             return new GraphResults($result);
-        } else {
-            print "Processing unknown type ".gettype($result).PHP_EOL;
-            var_dump($result);
-            die();
-        }
+        } 
+        
+        assert(false, "Processing unknown type ".gettype($result).PHP_EOL.var_dump($result, false));
     }
     
     public function queryOne($query, $params = array(), $load = array()) {
