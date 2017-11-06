@@ -23,6 +23,7 @@
 namespace Exakat\Graph;
 
 use Exakat\Graph\Graph;
+use Exakat\Graph\GraphResults;
 use Exakat\Exceptions\UnableToReachGraphServer;
 use Exakat\Exceptions\Neo4jException;
 use Exakat\Exceptions\GremlinException;
@@ -68,33 +69,31 @@ class GSNeo4j extends Graph {
             $this->db->message->bindValue($name, $value);
         }
         $result = $this->db->send($query);
-        
+
         if (empty($result)) {
-            return $result;
-        }
-
-        if(is_array($result[0])) {
-            foreach($result as &$r) {
-                $r = (object) $r;
-                if (isset($r->properties)) {
-                    foreach($r->properties as $k => &$v) {
-                        $v[0] = (object) $v[0];
-                    }
-                }
-                if (isset($r->processed)) {
-                    $x = new \stdClass;
-                    $x->{1} = isset($r->processed[1]) ? $r->processed[1] : 0;
-                    $r->processed = $x;
-
-                    $x = new \stdClass;
-                    $x->{1} = isset($r->total[1]) ? $r->total[1] : 0;
-                    $r->total = $x;
-                }
-
+            return new GraphResults();
+        } elseif($result[0] === null) {
+            return new GraphResults();
+        } elseif(is_array($result[0])) {
+            if (isset($result[0]['processed'])) {
+                $result = array('processed' => empty($result[0]['processed']) ? 0 : array_shift($result[0]['processed']),
+                                'total'     => empty($result[0]['total'])     ? 0 : array_shift($result[0]['total']));
             }
-        }
 
-        return $result;
+            if (isset($result[0]['type'])) {
+                $result = $this->simplifyArray($result);
+            }
+
+            return new GraphResults($result);
+        } elseif (is_array($result)) {
+            return new GraphResults($result);
+        } elseif ($result instanceof \stdclass) {
+            return new GraphResults($result);
+        } else {
+            print "Processing unknown type ".gettype($result).PHP_EOL;
+            var_dump($result);
+            die();
+        }
     }
     
     public function queryOne($query, $params = array(), $load = array()) {
@@ -146,7 +145,18 @@ class GSNeo4j extends Graph {
             copy( $this->config->dir_root.'/server/tinkergraph/conf/gsneo4j.yaml',
                   $this->config->tinkergraph_folder.'/conf/gsneo4j.yaml');
         }
-        exec('cd '.$this->config->gsneo4j_folder.'; rm -rf db/neo4j; bin/gremlin-server.sh conf/gsneo4j.yaml  > gremlin.log 2>&1 & echo $! > db/gsneo4j.pid ');
+
+        $gremlinJar = glob($this->config->gsneo4j_folder.'/lib/gremlin-core-*.jar');
+        $gremlinVersion = basename(array_pop($gremlinJar));
+        //gremlin-core-3.2.5.jar
+        $gremlinVersion = substr($gremlinVersion, 13, -4);
+        $version = version_compare('3.3.0', $gremlinVersion) ? '.3.2' : '.3.3';
+
+        if ($version === '.3.3') {
+            exec('cd '.$this->config->gsneo4j_folder.'; rm -rf db/neo4j; bin/gremlin-server.exakat.sh start conf/gsneo4j.yaml  &');
+        } elseif ($version === '.3.2') {
+            exec('cd '.$this->config->gsneo4j_folder.'; rm -rf db/neo4j; bin/gremlin-server.sh conf/gsneo4j.yaml  > gremlin.log 2>&1 & echo $! > db/gsneo4j.pid ');
+        }
         sleep(1);
         
         $b = microtime(true);
@@ -158,14 +168,48 @@ class GSNeo4j extends Graph {
         } while (empty($res));
         $e = microtime(true);
 
-        $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid'));
+        if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
+            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/run/gremlin.pid'));
+        } elseif ( file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
+            $pid = trim(file_get_contents($this->config->gsneo4j_folder.'/db/gsneo4j.pid'));
+        } else {
+            $pid = 'Not yet';
+        }
+        
         display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
     }
 
     public function stop() {
+        if (file_exists($this->config->gsneo4j_folder.'/run/gremlin.pid')) {
+            display('stop gremlin server 3.3.x');
+            shell_exec('cd '.$this->config->gsneo4j_folder.'; ./bin/gremlin-server.sh stop');
+            unlink($this->config->gsneo4j_folder.'/run/gremlin.pid');
+        } 
+        
         if (file_exists($this->config->gsneo4j_folder.'/db/gsneo4j.pid')) {
+            display('stop gremlin server 3.2.x');
             shell_exec('kill -9 $(cat '.$this->config->gsneo4j_folder.'/db/gsneo4j.pid) 2>> gremlin.log; rm -f '.$this->config->gsneo4j_folder.'/db/gsneo4j.pid');
         }
+    }
+
+    private function simplifyArray($result) {
+        $return = array();
+        
+        if (!isset($result[0]['properties'])) {
+            return $result; 
+        }
+
+        foreach($result as $r) {
+            $row = array('id'    => $r['id'],
+                         'label' => $r['label']);
+            foreach($r['properties'] as $property => $value) {
+                $row[$property] = $value[0]['value'];
+            }
+            
+            $return[] = $row;
+        }
+        
+        return $return;
     }
 }
 

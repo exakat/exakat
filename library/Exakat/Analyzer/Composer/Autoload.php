@@ -55,13 +55,14 @@ class Autoload extends Analyzer {
         }
 
         return array(
-            (object) array('fullcode'  => 'composer.autoload',
-                           'file'      => 'composer.json',
-                           'line'      => 0,
-                           'namespace' => '',
-                           'class'     => '',
-                           'function'  => '' )
-        );
+                array('fullcode'  => 'composer.autoload',
+                     'file'      => 'composer.json',
+                     'line'      => 0,
+                     'namespace' => '',
+                     'class'     => '',
+                     'function'  => '',
+                    )
+                );
     }
 }
 

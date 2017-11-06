@@ -44,7 +44,7 @@ g.V().hasLabel("Functioncall").as("first")
      .values("noDelimiter")
      .unique()
 GREMLIN
-);
+                    )->toArray();
 
         // Search for wp_verify_nonce usage
         $list2 = $this->query(<<<GREMLIN
@@ -58,7 +58,7 @@ g.V().hasLabel("Functioncall").as("first")
      .values("noDelimiter")
      .unique()
 GREMLIN
-);
+                    )->toArray();
         $list = array_merge($list, $list2);
         
         if (empty($list)) {

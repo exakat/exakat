@@ -38,7 +38,7 @@ g.V().hasLabel("Analysis")
      .values("code")
      .unique()
 GREMLIN;
-        $constants = $this->query($query);
+        $constants = $this->query($query)->toArray();
 
         // Const from a define (case insensitive)
         $this->atomFunctionIs('\define')
@@ -78,7 +78,7 @@ g.V().hasLabel("Analysis")
       .values("fullnspath")
       .unique()
 GREMLIN;
-        $constConstants = $this->query($query);
+        $constConstants = $this->query($query)->toArray();
 
         // Const from a const
         $this->atomIs('Const')

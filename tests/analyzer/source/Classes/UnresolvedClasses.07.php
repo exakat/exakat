@@ -11,6 +11,7 @@ namespace A {
     }
     
     new D();
+    new C(1);
 }
 
 namespace A {
@@ -24,11 +25,13 @@ namespace A {
     }
     
     new C();
+    new Z();
 }
 
 namespace B {
     class D {
         public function __construct() { print __METHOD__."\n"; }
     }
+    new D(1);
 }
 ?>

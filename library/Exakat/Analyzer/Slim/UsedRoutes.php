@@ -26,7 +26,7 @@ use Exakat\Analyzer\Common\Slim;
 
 class UsedRoutes extends Slim {
     public function analyze() {
-        // Collect variables that
+        // Collect variables that store application
         $apps = $this->getAppVariables();
 
         // didn't find any application variable. Quit.

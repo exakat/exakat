@@ -34,7 +34,7 @@ g.V().hasLabel("Member")
      .hasLabel("Name")
           .values("fullcode").unique()
 GREMLIN;
-        $publicProperties = $this->query($query);
+        $publicProperties = $this->query($query)->toArray();
         
             // Member that is not used outside this class or its children
             $this->atomIs('Ppp')
@@ -62,10 +62,10 @@ GREMLIN;
         
         $publicStaticProperties = array();
         foreach($res as $value) {
-            if (isset($publicStaticProperties[$value->classe])) {
-                $publicStaticProperties[$value->classe][] = $value->variable;
+            if (isset($publicStaticProperties[$value['classe']])) {
+                $publicStaticProperties[$value['classe']][] = $value['variable'];
             } else {
-                $publicStaticProperties[$value->classe] = array($value->variable);
+                $publicStaticProperties[$value['classe']] = array($value['variable']);
             }
         }
         

@@ -28,13 +28,13 @@ use Exakat\Analyzer\Analyzer;
 class AutoloadUsage extends Analyzer {
     public function analyze() {
         $functions = array('spl_autoload_call',
-                                 'spl_autoload_functions',
-                                 'spl_autoload_extensions',
-                                 'spl_autoload_register',
-                                 'spl_autoload_unregister',
-                                 'spl_autoload',
-                                 'spl_classes',
-                                 'spl_object_hash');
+                           'spl_autoload_functions',
+                           'spl_autoload_extensions',
+                           'spl_autoload_register',
+                           'spl_autoload_unregister',
+                           'spl_autoload',
+                           'spl_classes',
+                           'spl_object_hash');
         $this->atomFunctionIs($functions);
         $this->prepareQuery();
 

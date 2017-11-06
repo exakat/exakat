@@ -6,8 +6,10 @@ $expected     = array('bzopen($filename, "w")',
                       'bzopen($filename, "r")', 
                       'bzread($bz, 10)', 
                       'bzread($bz)', 
-                      'bzclose($bz)');
+                      'bzclose($bz)',
+                     );
 
-$expected_not = array();
+$expected_not = array('bzclose($a)',
+                     );
 
 ?>

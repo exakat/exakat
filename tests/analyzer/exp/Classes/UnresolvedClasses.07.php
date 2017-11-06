@@ -1,8 +1,12 @@
 <?php
 
-$expected     = array();
+$expected     = array('Z( )',
+                     );
 
 $expected_not = array('D( )',
-                      'C( )');
+                      'C( )',
+                      'D(1)',
+                      'C(1)',
+                     );
 
 ?>

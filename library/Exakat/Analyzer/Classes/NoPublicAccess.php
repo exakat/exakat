@@ -34,7 +34,7 @@ g.V().hasLabel("Member")
      .out("MEMBER").hasLabel("Name")
      .values('code').unique();
 GREMLIN;
-        $properties = $this->query($gremlin);
+        $properties = $this->query($gremlin)->toArray();
 
         if(!empty($properties)) {
             $properties = array_values($properties);
@@ -62,7 +62,7 @@ g.V().hasLabel("Staticproperty")
      .map{ full; }
      .unique();
 GREMLIN;
-        $staticproperties = $this->query($gremlin);
+        $staticproperties = $this->query($gremlin)->toArray();
         
         if (!empty($staticproperties)) {
             $staticproperties = array_values($staticproperties);

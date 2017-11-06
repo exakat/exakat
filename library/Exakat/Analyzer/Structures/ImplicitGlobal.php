@@ -34,7 +34,7 @@ g.V().hasLabel("Global").out("GLOBAL")
      .not( where( repeat(__.in({$this->linksDown})).emit().until(hasLabel("File")).hasLabel("Function", "Method", "Closure") ) )
      .values("code").unique()
 GREMLIN;
-        $globalGlobal = $this->query($query);
+        $globalGlobal = $this->query($query)->toArray();
 
         // can't bail out here : if $globalGlobal is empty, no global was declared outside functions.
         // This is still useful

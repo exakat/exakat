@@ -72,6 +72,7 @@ Exakat produces various reports. Some are general, covering various aspects in a
   * Uml
   * PlantUml
   * None
+  * SimpleHtml
   * PhpConfiguration
   * PhpCompilation
   * Inventories
@@ -310,9 +311,25 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.0.1
+
+  * Avoid Double Prepare (Wordpress/DoublePrepare ; Unassigned)
+  * Could Be Else (Structures/CouldBeElse ; Analyze)
+  * Next Month Trap (Structures/NextMonthTrap ; Analyze)
+  * No Direct Input To Wpdb (Wordpress/NoDirectInputToWpdb ; Wordpress)
+  * Prepare Placeholder (Wordpress/PreparePlaceholder ; Wordpress)
+  * Printf Number Of Arguments (Structures/PrintfArguments ; Analyze)
+  * Simple Switch (Performances/SimpleSwitch)
+  * Substr First (Performances/SubstrFirst ; Unassigned)
+
+* 0.12.17
+
+  * Classes/IsaMagicProperty (Classes/IsaMagicProperty)
+
 * 0.12.16
 
   * Cookies Variables (Php/CookiesVariables)
+  * Date Formats (Php/DateFormats ; Inventory)
   * Incoming Variables (Php/IncomingVariables ; Inventory)
   * Session Variables (Php/SessionVariables ; Inventory)
   * Too Complex Expression (Structures/ComplexExpression ; Analyze)
@@ -1168,7 +1185,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Make Global A Property (Classes/MakeGlobalAProperty ; Analyze, Codacy, Simple)
   * Make One Call With Array (Performances/MakeOneCall ; Performances)
   * Malformed Octal (Type/MalformedOctal ; CompatibilityPHP54, CompatibilityPHP55, CompatibilityPHP56, CompatibilityPHP53)
-  * Mark Callable (Functions/MarkCallable ; Internal)
+  * Mark Callable (Functions/MarkCallable ; Analyze, Internal)
   * Md5 Strings (Type/Md5String ; Inventory)
   * Method Has Fluent Interface (Functions/HasFluentInterface ; )
   * Method Has No Fluent Interface (Functions/HasNotFluentInterface ; )
@@ -1462,7 +1479,7 @@ List of analyzers, by version of introduction, newest to oldest. In parenthesis,
   * Variable Constants (Constants/VariableConstant ; Appinfo)
   * Variable Is Modified (Variables/IsModified ; Internal)
   * Variable Is Read (Variables/IsRead ; Internal)
-  * Variables Names (Variables/Variablenames ; )
+  * Variables Names (Variables/Variablenames ; Inventory, Appinfo, Internal)
   * Variables Variables (Variables/VariableVariables ; Appinfo)
   * Variables With Long Names (Variables/VariableLong ; )
   * Variables With One Letter Names (Variables/VariableOneLetter ; )
@@ -1697,6 +1714,7 @@ List of external links mentionned in this documentation.
 * `A PHP extension for Redis <https://github.com/phpredis/phpredis/>`_
 * `Alternative PHP Cache <http://php.net/apc>`_
 * `Alternative syntax <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
+* `Anonymus Functions <http://php.net/manual/en/functions.anonymous.php>`_
 * `ansible <http://docs.ansible.com/ansible/intro_installation.html>`_
 * `Apache <http://php.net/manual/en/book.apache.php>`_
 * `APCU <http://www.php.net/manual/en/book.apcu.php>`_
@@ -1705,6 +1723,7 @@ List of external links mentionned in this documentation.
 * `Array <http://php.net/manual/en/language.types.array.php>`_
 * `array <http://php.net/manual/en/language.types.array.php>`_
 * `Arrays <http://php.net/manual/en/book.array.php>`_
+* `Assignation Operators <http://php.net/manual/en/language.operators.assignment.php>`_
 * `Autoloading Classe <http://php.net/manual/en/language.oop5.autoload.php>`_
 * `Avoid optional services as much as possible <http://bestpractices.thecodingmachine.com/php/design_beautiful_classes_and_methods.html#avoid-optional-services-as-much-as-possible>`_
 * `Backward incompatible changes PHP 7.0 <http://php.net/manual/en/migration70.incompatible.php>`_
@@ -1720,6 +1739,7 @@ List of external links mentionned in this documentation.
 * `CakePHP <https://www.cakephp.org/>`_
 * `Callback / callable <http://php.net/manual/en/language.types.callable.php>`_
 * `Changes to variable handling <http://php.net/manual/en/migration70.incompatible.php>`_
+* `Class Constants <http://php.net/manual/en/language.oop5.constants.php>`_
 * `Class Reference/wpdb <https://codex.wordpress.org/Class_Reference/wpdb>`_
 * `Classes abstraction <http://php.net/abstract>`_
 * `Codeigniter <https://codeigniter.com/>`_
@@ -1746,6 +1766,7 @@ List of external links mentionned in this documentation.
 * `Dependency Injection Smells <http://seregazhuk.github.io/2017/05/04/di-smells/>`_
 * `Deprecated features in PHP 5.4.x <http://php.net/manual/en/migration54.deprecated.php>`_
 * `DIO <http://php.net/manual/en/refs.fileprocess.file.php>`_
+* `Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
 * `Docker <http://www.docker.com/>`_
 * `Docker image <https://hub.docker.com/r/exakat/exakat/>`_
 * `docker PHP container <https://hub.docker.com/_/php/>`_
@@ -1763,6 +1784,7 @@ List of external links mentionned in this documentation.
 * `Exakat cloud <https://www.exakat.io/exakat-cloud/>`_
 * `Exakat SAS <https://www.exakat.io/get-php-expertise/>`_
 * `exakat.phar` archive from `exakat.io <http://www.exakat.io/>`_
+* `exakat/exakat <https://hub.docker.com/r/exakat/exakat/>`_
 * `Exceptions <http://php.net/manual/en/language.exceptions.php>`_
 * `Exchangeable image information <http://php.net/manual/en/book.exif.php>`_
 * `expect <http://php.net/manual/en/book.expect.php>`_
@@ -1808,6 +1830,8 @@ List of external links mentionned in this documentation.
 * `Heredoc <http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc>`_
 * `hg <https://www.mercurial-scm.org/>`_
 * `How to fix Headers already sent error in PHP <http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php>`_
+* `How to pick bad function and variable names <http://mojones.net/how-to-pick-bad-function-and-variable-names.html>`_
+* `https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_
 * `Iconv <http://php.net/iconv>`_
 * `ICU <http://site.icu-project.org/>`_
 * `IIS Administration <http://www.php.net/manual/en/book.iisfunc.php>`_
@@ -1821,6 +1845,7 @@ List of external links mentionned in this documentation.
 * `Internal Constructor Behavior <https://wiki.php.net/rfc/internal_constructor_behaviour>`_
 * `isset <http://www.php.net/isset>`_
 * `Isset Ternary <https://wiki.php.net/rfc/isset_ternary>`_
+* `It is the 31st again <https://twitter.com/rasmus/status/925431734128197632>`_
 * `Joomla <http://www.joomla.org/>`_
 * `Judy C library <http://judy.sourceforge.net/>`_
 * `Kafka client for PHP <https://github.com/arnaud-lb/php-rdkafka>`_
@@ -1860,9 +1885,11 @@ List of external links mentionned in this documentation.
 * `Newt <http://people.redhat.com/rjones/ocaml-newt/html/Newt.html>`_
 * `No Dangling Reference <https://github.com/dseguy/clearPHP/blob/master/rules/no-dangling-reference.md>`_
 * `Null Object Pattern <https://en.wikipedia.org/wiki/Null_Object_pattern#PHP>`_
+* `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/#one-dot-per-line>`_
 * `Object Calisthenics <http://williamdurand.fr/2013/06/03/object-calisthenics/>`_
 * `Object cloning <http://php.net/manual/en/language.oop5.cloning.php>`_
 * `ODBC (Unified) <http://www.php.net/manual/en/book.uodbc.php>`_
+* `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_
 * `OPcache functions <http://www.php.net/manual/en/book.opcache.php>`_
 * `Operator precedence <http://php.net/manual/en/language.operators.precedence.php>`_
 * `Oracle OCI8 <http://php.net/manual/en/book.oci8.php>`_
@@ -1878,6 +1905,7 @@ List of external links mentionned in this documentation.
 * `pecl crypto <https://pecl.php.net/package/crypto>`_
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
+* `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
 * `PHP AMQP Binding Library <https://github.com/pdezwart/php-amqp>`_
 * `PHP class name constant case sensitivity and PSR-11 <https://gist.github.com/bcremer/9e8d6903ae38a25784fb1985967c6056>`_
 * `PHP Data Object <http://php.net/manual/en/book.pdo.php>`_

@@ -22,5 +22,6 @@ echo bzread($bz, 10);
 echo bzread($bz);
 
 bzclose($bz);
+$a->bzclose($a);
 
 ?>

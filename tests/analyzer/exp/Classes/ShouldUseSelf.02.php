@@ -5,8 +5,11 @@ $expected     = array('\A\B\x::e',
                       'x::$p',
                       '\A\B\x::$p',
                       'x::method( )',
-                      '\A\B\x::method( )');
+                      '\A\B\x::method( )',
+                     );
 
-$expected_not = array();
+$expected_not = array('static::e',
+                      'parent::e',
+                     );
 
 ?>

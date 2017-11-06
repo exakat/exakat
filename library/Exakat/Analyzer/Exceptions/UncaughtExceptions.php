@@ -26,12 +26,14 @@ use Exakat\Analyzer\Analyzer;
 class UncaughtExceptions extends Analyzer {
     public function dependsOn() {
         return array('Exceptions/CaughtExceptions',
-                     'Exceptions/DefinedExceptions');
+                     'Exceptions/DefinedExceptions',
+                    );
     }
     
     public function analyze() {
         $caught = $this->query('g.V().hasLabel("Catch").out("CLASS").values("fullnspath").unique()');
-        
+        $caught = $caught->toArray();
+
         if (empty($caught)) {
             return ;
         }

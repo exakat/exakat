@@ -26,17 +26,21 @@ namespace Exakat\Analyzer\Structures;
 use Exakat\Analyzer\Analyzer;
 
 class UselessInstruction extends Analyzer {
+    public function dependsOn() {
+        return array('Classes/IsaMagicProperty');
+    }
+
     public function analyze() {
         // Structures that should be put somewhere, and never left alone
         $this->atomIs('Sequence')
              ->hasNoIn('FINAL')
              ->outIs('EXPRESSION')
+             ->analyzerIsNot('Classes/IsaMagicProperty')
              ->atomIs(array('Array', 'Addition', 'Multiplication', 'Member', 'Staticproperty', 'Boolean',
                             'Magicconstant', 'Staticconstant', 'Integer', 'Real', 'Sign', 'Nsname',
                             'Identifier', 'String', 'Instanceof', 'Bitshift', 'Comparison', 'Null', 'Logical',
                             'Heredoc', 'Power', 'Spaceship', 'Coalesce', 'New'))
-             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation'))
-             ;
+             ->noAtomInside(array('Functioncall', 'Staticmethodcall', 'Methodcall', 'Assignation'));
         $this->prepareQuery();
         
         // foreach($i = 0; $i < 10, $j < 20; $i++)
@@ -62,10 +66,38 @@ class UselessInstruction extends Analyzer {
              ->atomIs('Closure');
         $this->prepareQuery();
 
-        // return $a++;
+        // return $a++; (unless it is an argument/use by reference)
+        // May also check if it is static or global (those stays).
         $this->atomIs('Return')
              ->outIs('RETURN')
              ->atomIs('Postplusplus')
+             ->outIs('POSTPLUSPLUS')
+             ->atomIsNot('Variable')
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Return')
+             ->outIs('RETURN')
+             ->atomIs('Postplusplus')
+             ->outIs('POSTPLUSPLUS')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'variable')
+             ->goToFunction()
+             ->outIs(array('ARGUMENT', 'USE'))
+             ->outIsIE('NAME')
+             ->samePropertyAs('code', 'variable')
+             ->isNot('reference', true)
+             ->back('first');
+        $this->prepareQuery();
+
+        $this->atomIs('Return')
+             ->outIs('RETURN')
+             ->atomIs('Postplusplus')
+             ->outIs('POSTPLUSPLUS')
+             ->atomIs('Variable')
+             ->savePropertyAs('code', 'variable')
+             ->goToFunction()
+             ->raw('not(where( __.out("ARGUMENT", "USE").filter{ it.get().value("code") == variable; }))')
              ->back('first');
         $this->prepareQuery();
 

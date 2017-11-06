@@ -26,3 +26,4 @@ Contents:
    Contribute
    Contributors
    Annex
+   Installation_old

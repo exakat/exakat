@@ -99,20 +99,22 @@ SQL;
 
     public function getThemesForAnalyzer($list = null) {
         if ($list === null) {
-            $list = array('CompatibilityPHP53', 'CompatibilityPHP54', 'CompatibilityPHP55', 'CompatibilityPHP56',
-                          'CompatibilityPHP70', 'CompatibilityPHP71', 'CompatibilityPHP72', 'CompatibilityPHP73',
-                          'Dead code', 'Security', 'Analyze', 'Preferences');
+            $where = '';
         } elseif (is_string($list)) {
-            $list = array($list);
+            $where = ' WHERE c.name IN ("$list") ';
+        } elseif (is_array($list)) {
+            $where = ' WHERE c.name IN ("'.implode('', $list).'") ';
+        } else {
+            assert(false, "Wrong type for list : ".gettype($list)." in ".__METHOD__."\n");
         }
-        $listSqlite3 = '"'.implode('", "', $list).'"';
-                                          $query = <<<SQL
+
+        $query = <<<SQL
 SELECT folder||'/'||a.name AS analyzer, GROUP_CONCAT(c.name) AS categories FROM categories AS c
     JOIN analyzers_categories AS ac
         ON ac.id_categories = c.id
     JOIN analyzers AS a
         ON a.id = ac.id_analyzer
-    WHERE c.name IN ($listSqlite3)
+    $where
 	GROUP BY analyzer
 SQL;
         $res = $this->sqlite->query($query);

@@ -47,15 +47,12 @@ class Dump extends Tasks {
             throw new NoSuchProject($this->config->project);
         }
 
-        $res = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")');
-        if (isset($res->results[0]) && $res->results[0] === $this->config->project) {
-            // Go!
-        } elseif (is_array($res) && $res[0] === $this->config->project) {
-            // Go!
-        } else {
-            throw new NotProjectInGraph($this->config->project, $res->results[0]);
+        $projectInGraph = $this->gremlin->query('g.V().hasLabel("Project").values("fullcode")')->toArray()[0];
+        
+        if ($projectInGraph !== $this->config->project) {
+            throw new NotProjectInGraph($this->config->project, $projectInGraph);
         }
-
+        
         // move this to .dump.sqlite then rename at the end, or any imtermediate time
         // Mention that some are not yet arrived in the snitch
         $this->sqliteFile = $this->config->projects_root.'/projects/'.$this->config->project.'/.dump.sqlite';
@@ -64,7 +61,6 @@ class Dump extends Tasks {
             unlink($this->sqliteFile);
             display('Removing old .dump.sqlite');
         }
-
         $this->addSnitch();
 
         if ($this->config->update === true) {
@@ -108,12 +104,13 @@ SQL;
         
         if ($this->config->collect === true) {
             display('Collecting data');
+
+            $this->collectFilesDependencies();
             $this->getAtomCounts();
 
             $this->collectStructures();
             $this->collectVariables();
             $this->collectLiterals();
-            $this->collectFilesDependencies();
             display('Collecting data finished');
         }
 
@@ -193,9 +190,6 @@ SQL;
 
         $analyzer = Analyzer::getInstance($class, $this->gremlin, $this->config);
         $res = $analyzer->getDump();
-        if (!is_array($res)) {
-            return;
-        }
 
         $saved = 0;
         $severity = $analyzer->getSeverity( );
@@ -205,11 +199,16 @@ SQL;
             if (empty($result)) {
                 continue;
             }
-
-            $query[] = "(null, '".$this->sqlite->escapeString($result->fullcode)."', '".$this->sqlite->escapeString($result->file)."', 
-            ".$this->sqlite->escapeString($result->line).", '".$this->sqlite->escapeString($result->{'namespace'})."', 
-            '".$this->sqlite->escapeString($result->class)."', '".$this->sqlite->escapeString($result->function)."',
-            '".$this->sqlite->escapeString($class)."','".$this->sqlite->escapeString($severity)."')";
+            
+            $query[] = "(null, 
+                         '".$this->sqlite->escapeString($result['fullcode'])."', 
+                         '".$this->sqlite->escapeString($result['file'])."', 
+                         ". $this->sqlite->escapeString($result['line']).", 
+                         '".$this->sqlite->escapeString($result['namespace'])."', 
+                         '".$this->sqlite->escapeString($result['class'])."', 
+                         '".$this->sqlite->escapeString($result['function'])."',
+                         '".$this->sqlite->escapeString($class)."',
+                         '".$this->sqlite->escapeString($severity)."')";
             ++$saved;
         }
         
@@ -232,25 +231,25 @@ SQL;
     private function getAtomCounts() {
         $this->sqlite->query('DROP TABLE IF EXISTS atomsCounts');
         $this->sqlite->query('CREATE TABLE atomsCounts (  id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                    atom STRING,
-                                                    count INTEGER
+                                                          atom STRING,
+                                                          count INTEGER
                                               )');
 
-        $query = 'g.V().groupCount("b").by(label).cap("b");';
-        $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            $res = $res->results[0];
-        } else {
-            $res = (object) $res[0];
-        }
+        $query = 'g.V().groupCount("b").by(label).cap("b").next();';
+        $atomsCount = $this->gremlin->query($query);
 
-        $query = array();
-        foreach($res as $atom => $count) {
-            $query[] = "(null, '$atom', $count)";
+        $counts = array();
+        foreach($atomsCount as $c) {
+            foreach($c as $atom => $count) {
+                $counts[] = "(null, '$atom', $count)";
+            }
         }
         
-        $query = 'INSERT INTO atomsCounts ("id", "atom", "count") VALUES '.join(', ', $query);
+        $query = 'INSERT INTO atomsCounts ("id", "atom", "count") VALUES '.join(', ', $counts);
         $this->sqlite->query($query);
+        
+        display(count($atomsCount)." atoms\n");
+
     }
 
     private function finish() {
@@ -259,29 +258,14 @@ SQL;
         $this->collectDatastore();
 
         // Redo each time so we update the final counts
-        $res = $this->gremlin->query('g.V().count()');
-        if (isset($res->results)) {
-            $res = $res->results[0];
-        } else {
-            $res = $res[0];
-        }
-        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total nodes", '.$res.')');
+        $totalNodes = $this->gremlin->query('g.V().count()')->toString();
+        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total nodes", '.$totalNodes.')');
 
-        $res = $this->gremlin->query('g.E().count()');
-        if (isset($res->results)) {
-            $res = $res->results[0];
-        } else {
-            $res = $res[0];
-        }
-        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total edges", '.$res.')');
+        $totalEdges = $this->gremlin->query('g.E().count()')->toString();
+        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total edges", '.$totalEdges.')');
 
-        $res = $this->gremlin->query('g.V().properties().count()');
-        if (isset($res->results)) {
-            $res = $res->results[0];
-        } else {
-            $res = $res[0];
-        }
-        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total properties", '.$res.')');
+        $totalProperties = $this->gremlin->query('g.V().properties().count()')->toString();
+        $this->sqlite->query('REPLACE INTO hash VALUES(null, "total properties", '.$totalProperties.')');
 
         rename($this->sqliteFile, $this->sqliteFileFinal);
 
@@ -335,12 +319,7 @@ SQL;
 g.V().hasLabel("Variable", "Variablearray", "Variableobject").map{ ['name' : it.get().value("code"), 
                                                                     'type' : it.get().label()        ] }.unique();
 GREMLIN;
-        $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            $res = $res->results;
-        } else {
-            $res = (object) $res;
-        }
+        $variables = $this->gremlin->query($query);
 
         $total = 0;
         $query = array();
@@ -349,9 +328,9 @@ GREMLIN;
                        'Variablearray'  => 'array',
                        'Variableobject' => 'object',
                       );
-        foreach($res as $row) {
-            $type = $types[$row->type];
-            $query[] = "(null, '".strtolower($this->sqlite->escapeString($row->name))."', '".$type."')";
+        foreach($variables as $row) {
+            $type = $types[$row['type']];
+            $query[] = "(null, '".strtolower($this->sqlite->escapeString($row['name']))."', '".$type."')";
             ++$total;
         }
         
@@ -360,7 +339,7 @@ GREMLIN;
             $this->sqlite->query($query);
         }
         
-        print "Variables : $total\n";
+        display( "Variables : $total\n");
     }
     
     private function collectStructures() {
@@ -374,19 +353,13 @@ GREMLIN;
 
         $query = <<<GREMLIN
 g.V().hasLabel("Namespace").out("NAME").map{ ['name' : it.get().value("fullcode")] }.unique();
-GREMLIN
-        ;
+GREMLIN;
         $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            $res = $res->results;
-        } else {
-            $res = (object) $res;
-        }
 
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            $query[] = "(null, '\\".strtolower($this->sqlite->escapeString($row->name))."')";
+            $query[] = "(null, '\\".strtolower($this->sqlite->escapeString($row['name']))."')";
             ++$total;
         }
         
@@ -439,14 +412,8 @@ g.V().hasLabel("Class")
          ];
 }
 
-GREMLIN
-        ;
-        $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            $res = $res->results;
-        } else {
-            $res = (object) $res;
-        }
+GREMLIN;
+        $classes = $this->gremlin->query($query);
 
         $total = 0;
         $extendsId = array();
@@ -457,8 +424,8 @@ GREMLIN
         $citId = array();
         $citCount = 0;
 
-        foreach($res as $row) {
-            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
+        foreach($classes as $row) {
+            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
 
             if (isset($namespacesId[$namespace])) {
                 $namespaceId = $namespacesId[$namespace];
@@ -467,7 +434,7 @@ GREMLIN
             }
             
             $cit[] = $row;
-            $citId[$row->fullnspath] = ++$citCount;
+            $citId[$row['fullnspath']] = ++$citCount;
             
             ++$total;
         }
@@ -487,18 +454,12 @@ g.V().hasLabel("Interface")
          'final':0
          ];
 }
-GREMLIN
-        ;
+GREMLIN;
         $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            $res = $res->results;
-        } else {
-            $res = (object) $res;
-        }
 
         $total = 0;
         foreach($res as $row) {
-            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
+            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
 
             if (isset($namespacesId[$namespace])) {
                 $namespaceId = $namespacesId[$namespace];
@@ -507,7 +468,7 @@ GREMLIN
             }
             
             $cit[] = $row;
-            $citId[$row->fullnspath] = ++$citCount;
+            $citId[$row['fullnspath']] = ++$citCount;
 
             ++$total;
         }
@@ -528,18 +489,12 @@ g.V().hasLabel("Trait")
          ];
 }
 
-GREMLIN
-        ;
+GREMLIN;
         $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            $res = $res->results;
-        } else {
-            $res = (object) $res;
-        }
 
         $total = 0;
         foreach($res as $row) {
-            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row->fullnspath);
+            $namespace = preg_replace('#\\\\[^\\\\]*?$#is', '', $row['fullnspath']);
 
             if (isset($namespacesId[$namespace])) {
                 $namespaceId = $namespacesId[$namespace];
@@ -547,9 +502,9 @@ GREMLIN
                 $namespaceId = 1;
             }
             
-            $row->implements = array(); // always empty
+            $row['implements'] = array(); // always empty
             $cit[] = $row;
-            $citId[$row->fullnspath] = ++$citCount;
+            $citId[$row['fullnspath']] = ++$citCount;
 
             ++$total;
         }
@@ -560,16 +515,16 @@ GREMLIN
             $query = array();
             
             foreach($cit as $row) {
-                if (empty($row->extends)) {
+                if (empty($row['extends'])) {
                     $extends = "''";
-                } elseif (isset($citId[$row->extends])) {
-                    $extends = $citId[$row->extends];
+                } elseif (isset($citId[$row['extends']])) {
+                    $extends = $citId[$row['extends']];
                 } else {
-                    $extends = '"'.$this->sqlite->escapeString($row->extends).'"';
+                    $extends = '"'.$this->sqlite->escapeString($row['extends']).'"';
                 }
-                $namespace = preg_replace('/\\\\[^\\\\]*?$/', '', $row->fullnspath);
-                $query[] = "(".$citId[$row->fullnspath].", '".$this->sqlite->escapeString($row->name)."', ".$namespacesId[$namespace].", ".(int) $row->abstract.",".(int) $row->final.", '"
-                                .$row->type."', ".$extends.")";
+                $namespace = preg_replace('/\\\\[^\\\\]*?$/', '', $row['fullnspath']);
+                $query[] = "(".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($row['name'])."', ".$namespacesId[$namespace].", ".(int) $row['abstract'].",".(int) $row['final'].", '"
+                                .$row['type']."', ".$extends.")";
             }
 
             if (!empty($query)) {
@@ -579,15 +534,15 @@ GREMLIN
 
             $query = array();
             foreach($cit as $row) {
-                if (empty($row->implements)) {
+                if (empty($row['implements'])) {
                     continue;
                 }
 
-                foreach($row->implements as $implements) {
+                foreach($row['implements'] as $implements) {
                     if (isset($citId[$implements])) {
-                        $query[] = "(null, ".$citId[$row->fullnspath].", $citId[$implements], 'implements')";
+                        $query[] = "(null, ".$citId[$row['fullnspath']].", $citId[$implements], 'implements')";
                     } else {
-                        $query[] = "(null, ".$citId[$row->fullnspath].", '".$this->sqlite->escapeString($implements)."', 'implements')";
+                        $query[] = "(null, ".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($implements)."', 'implements')";
                     }
                 }
             }
@@ -599,15 +554,15 @@ GREMLIN
 
             $query = array();
             foreach($cit as $row) {
-                if (empty($row->uses)) {
+                if (empty($row['uses'])) {
                     continue;
                 }
                 
-                foreach($row->uses as $uses) {
+                foreach($row['uses'] as $uses) {
                     if (isset($citId[$uses])) {
-                        $query[] = "(null, ".$citId[$row->fullnspath].", $citId[$uses], 'use')";
+                        $query[] = "(null, ".$citId[$row['fullnspath']].", $citId[$uses], 'use')";
                     } else {
-                        $query[] = "(null, ".$citId[$row->fullnspath].", '".$this->sqlite->escapeString($row->name)."', 'use')";
+                        $query[] = "(null, ".$citId[$row['fullnspath']].", '".$this->sqlite->escapeString($row['name'])."', 'use')";
                     }
                 }
             }
@@ -670,33 +625,27 @@ g.V().hasLabel("Method").as('method')
          ];
 }
 
-GREMLIN
-        ;
+GREMLIN;
         $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            $res = $res->results;
-        } else {
-            $res = (object) $res;
-        }
 
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            if ($row->public) {
+            if ($row['public']) {
                 $visibility = 'public';
-            } elseif ($row->protected) {
+            } elseif ($row['protected']) {
                 $visibility = 'protected';
-            } elseif ($row->private) {
+            } elseif ($row['private']) {
                 $visibility = 'private';
             } else {
                 $visibility = '';
             }
 
-            if (!isset($citId[$row->class])) {
+            if (!isset($citId[$row['class']])) {
                 continue;
             }
-            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].
-                        ", ".(int) $row->static.", ".(int) $row->final.", ".(int) $row->abstract.", '".$visibility."')";
+            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].
+                        ", ".(int) $row['static'].", ".(int) $row['final'].", ".(int) $row['abstract'].", '".$visibility."')";
 
             ++$total;
         }
@@ -749,36 +698,30 @@ g.V().hasLabel("Class", "Interface", "Trait")
          "value": v];
 }
 
-GREMLIN
-        ;
+GREMLIN;
         $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            $res = $res->results;
-        } else {
-            $res = (object) $res;
-        }
 
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            if ($row->public) {
+            if ($row['public']) {
                 $visibility = 'public';
-            } elseif ($row->protected) {
+            } elseif ($row['protected']) {
                 $visibility = 'protected';
-            } elseif ($row->private) {
+            } elseif ($row['private']) {
                 $visibility = 'private';
-            } elseif ($row->var) {
+            } elseif ($row['var']) {
                 $visibility = '';
             } else {
                 continue;
             }
 
             // If we haven't found any definition for this class, just ignore it.
-            if (!isset($citId[$row->class])) {
+            if (!isset($citId[$row['class']])) {
                 continue;
             }
-            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].
-                        ", '".$visibility."', '".$this->sqlite->escapeString($row->value)."', ".(int) $row->static.")";
+            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].
+                        ", '".$visibility."', '".$this->sqlite->escapeString($row['value'])."', ".(int) $row['static'].")";
 
             ++$total;
         }
@@ -817,29 +760,23 @@ g.V().hasLabel("Class")
          ];
 }
 
-GREMLIN
-        ;
+GREMLIN;
         $res = $this->gremlin->query($query);
-        if (isset($res->results)) {
-            $res = $res->results;
-        } else {
-            $res = (object) $res;
-        }
 
         $total = 0;
         $query = array();
         foreach($res as $row) {
-            if ($row->public) {
+            if ($row['public']) {
                 $visibility = 'public';
-            } elseif ($row->protected) {
+            } elseif ($row['protected']) {
                 $visibility = 'protected';
-            } elseif ($row->private) {
+            } elseif ($row['private']) {
                 $visibility = 'private';
             } else {
                 $visibility = '';
             }
 
-            $query[] = "(null, '".$this->sqlite->escapeString($row->name)."', ".$citId[$row->class].", '".$visibility."', '".$this->sqlite->escapeString($row->value)."')";
+            $query[] = "(null, '".$this->sqlite->escapeString($row['name'])."', ".$citId[$row['class']].", '".$visibility."', '".$this->sqlite->escapeString($row['value'])."')";
 
             ++$total;
         }
@@ -886,18 +823,11 @@ g.V().$filter.has('constant', true)
 
 GREMLIN;
             $res = $this->gremlin->query($query);
-            if ($res instanceof \stdClass) {
-                $res = $res->results;
-            } elseif (is_array($res)) {
-                // nothing, really
-            } else {
-                assert(false, '$res is not an array, nor an object.');
-            }
     
             $total = 0;
             $query = array();
             foreach($res as $value => $row) {
-                $query[] = "('".$this->sqlite->escapeString($row->name)."','".$this->sqlite->escapeString($row->file)."',".$row->line.')';
+                $query[] = "('".$this->sqlite->escapeString($row['name'])."','".$this->sqlite->escapeString($row['file'])."',".$row['line'].')';
                 ++$total;
                 if ($total % 10000 === 0) {
                     $query = 'INSERT INTO literal'.$type.' (name, file, line) VALUES '.join(', ', $query);
@@ -921,8 +851,7 @@ GREMLIN;
                                               CONSTRAINT "encoding" UNIQUE (encoding, block)
                                             )');
 
-            $query = <<<GREMLIN
-            
+        $query = <<<GREMLIN
 g.V().hasLabel('String').map{ x = ['encoding':it.get().values('encoding')[0]];
     if (it.get().values('block').size() != 0) {
         x['block'] = it.get().values('block')[0];
@@ -932,18 +861,14 @@ g.V().hasLabel('String').map{ x = ['encoding':it.get().values('encoding')[0]];
 
 GREMLIN;
         $res = $this->gremlin->query($query);
-        if (!($res instanceof \stdClass)) {
-            return;
-        }
-        $res = $res->results;
         
         $total = 0;
         $query = array();
         foreach($res as $value => $row) {
-            if (isset($row->block)){
-                $query[] = "('$row->encoding', '$row->block')";
+            if (isset($row['block'])){
+                $query[] = '(\''.$row['encoding'].'\', \''.$row['block'].'\')';
             } else {
-                $query[] = "('$row->encoding', '')";
+                $query[] = '(\''.$row['encoding'].'\', \'\')';
             }
         }
        
@@ -963,16 +888,16 @@ GREMLIN;
 
         // Direct inclusion
         $query = 'g.V().hasLabel("File").as("file")
-                   .repeat( out() ).emit(hasLabel("Include")).times(15)
-                   .hasLabel("Include").in("NAME").as("include")
+                   .repeat( out() ).emit().times(15).hasLabel("Include").as("include")
                    .select("file", "include").by("fullcode").by("fullcode")';
         $res = $this->gremlin->query($query);
+        
         $query = array();
         if (isset($res->results)) {
             $includes = $res->results;
 
             foreach($includes as $link) {
-                $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'INCLUDE')";
+                $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'INCLUDE')";
             }
 
             if (!empty($query)) {
@@ -991,21 +916,18 @@ g.V().hasLabel("Class", "Interface").as("classe")
 .map{ [ 'file':calling, 'type':type, 'include':called];}
 GREMLIN;
 
-        $res = $this->gremlin->query($query);
+        $extends = $this->gremlin->query($query);
         $query = array();
-        if (isset($res->results)) {
-            $extends = $res->results;
 
-            foreach($extends as $link) {
-                $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', '".$link->type."')";
-            }
-
-            if (!empty($query)) {
-                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
-                $this->sqlite->query($query);
-            }
-            display(count($extends)." extends for classes ");
+        foreach($extends as $link) {
+            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', '".$link['type']."')";
         }
+
+        if (!empty($query)) {
+            $sqlQuery = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $this->sqlite->query($sqlQuery);
+        }
+        display(count($extends)." extends for classes ");
 
         // Finding extends for interfaces
         $query = <<<GREMLIN
@@ -1017,19 +939,16 @@ g.V().hasLabel("Interface").as("classe")
 GREMLIN;
         $res = $this->gremlin->query($query);
         $query = array();
-        if (isset($res->results)) {
-            $extends = $res->results;
 
-            foreach($extends as $link) {
-                $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'EXTENDS')";
-            }
-
-            if (!empty($query)) {
-                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
-                $this->sqlite->query($query);
-            }
-            display(count($extends)." extends for interfaces ");
+        foreach($res as $link) {
+            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'EXTENDS')";
         }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $this->sqlite->query($query);
+        }
+        display(count($res)." extends for interfaces ");
 
         // traits
         $query = <<<GREMLIN
@@ -1041,19 +960,16 @@ g.V().hasLabel("Class", "Trait").as("classe")
 GREMLIN;
         $res = $this->gremlin->query($query);
         $query = array();
-        if (isset($res->results)) {
-            $uses = $res->results;
 
-            foreach($uses as $link) {
-                $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'USE')";
-            }
-
-            if (!empty($query)) {
-                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
-                $this->sqlite->query($query);
-            }
-            display(count($extends)." use ");
+        foreach($res as $link) {
+            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'USE')";
         }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $this->sqlite->query($query);
+        }
+        display(count($res)." use ");
 
         // Functioncall()
         $query = <<<GREMLIN
@@ -1063,21 +979,18 @@ g.V().hasLabel("Functioncall")
 .where(__.repeat( __.in() ).emit(hasLabel("File")).times(15).hasLabel("File").sideEffect{ called = it.get().value("fullcode"); })
 .map{['file':calling, 'include':called]}
 GREMLIN;
-        $res = $this->gremlin->query($query);
+        $functioncall = $this->gremlin->query($query);
         $query = array();
-        if (isset($res->results)) {
-            $functioncalls = $res->results;
 
-            foreach($functioncalls as $link) {
-                $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'FUNCTIONCALL')";
-            }
-
-            if (!empty($query)) {
-                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
-                $this->sqlite->query($query);
-            }
-            display(count($functioncalls)." functioncall ");
+        foreach($functioncall as $link) {
+            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'FUNCTIONCALL')";
         }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $this->sqlite->query($query);
+        }
+        display(count($functioncall)." functioncall ");
 
         // constants
         $query = <<<GREMLIN
@@ -1087,21 +1000,18 @@ g.V().hasLabel("Identifier").not(where( __.in("NAME", "CLASS", "MEMBER", "AS", "
      .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
      .map{ [ 'file':calling, 'include':called];}
 GREMLIN;
-        $res = $this->gremlin->query($query);
+        $constants = $this->gremlin->query($query);
         $query = array();
-        if (isset($res->results)) {
-            $constants = $res->results;
 
-            foreach($constants as $link) {
-                $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'CONSTANT')";
-            }
-
-            if (!empty($query)) {
-                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
-                $this->sqlite->query($query);
-            }
-            display(count($constants)." constants ");
+        foreach($constants as $link) {
+            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'CONSTANT')";
         }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $this->sqlite->query($query);
+        }
+        display(count($constants)." constants ");
 
         // New
         $query = <<<GREMLIN
@@ -1113,19 +1023,16 @@ g.V().hasLabel("New").out("NEW")
 GREMLIN;
         $res = $this->gremlin->query($query);
         $query = array();
-        if (isset($res->results)) {
-            $news = $res->results;
 
-            foreach($news as $link) {
-                $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', 'NEW')";
-            }
-
-            if (!empty($query)) {
-                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
-                $this->sqlite->query($query);
-            }
-            display(count($news)." new ");
+        foreach($res as $link) {
+            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', 'NEW')";
         }
+
+        if (!empty($query)) {
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $this->sqlite->query($query);
+        }
+        display(count($res)." new ");
 
         // static calls (property, constant, method)
         $query = <<<GREMLIN
@@ -1136,22 +1043,18 @@ g.V().hasLabel("Staticconstant", "Staticmethodcall", "Staticproperty")
      .where( __.repeat( __.in() ).emit().times(15).hasLabel("File").sideEffect{ called = it.get().value('fullcode'); })
      .map{ [ 'file':calling, 'type':type, 'include':called];}
 GREMLIN;
-        $res = $this->gremlin->query($query);
+        $statics = $this->gremlin->query($query);
         $query = array();
-        if (isset($res->results)) {
-            $statics = $res->results;
 
-            foreach($statics as $link) {
-                $query[] = "(null, '".$this->sqlite->escapeString($link->file)."', '".$this->sqlite->escapeString($link->include)."', '".strtoupper($link->type)."')";
-            }
-
-            if (!empty($query)) {
-                $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
-                $this->sqlite->query($query);
-            }
-            display(count($statics)." static calls CPM");
+        foreach($statics as $link) {
+            $query[] = "(null, '".$this->sqlite->escapeString($link['file'])."', '".$this->sqlite->escapeString($link['include'])."', '".strtoupper($link['type'])."')";
         }
 
+        if (!empty($query)) {
+            $query = 'INSERT INTO filesDependencies ("id", "including", "included", "type") VALUES '.join(', ', $query);
+            $this->sqlite->query($query);
+        }
+        display(count($statics)." static calls CPM");
     }
 }
 

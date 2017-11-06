@@ -399,8 +399,8 @@ class Project extends Tasks {
         
         $x = mt_rand(0, PHP_INT_MAX);
         
-        $name = $names[ $x % count($names) - 1];
-        $adjective = $adjectives[ $x % count($adjectives) - 1];
+        $name = $names[ $x % (count($names) - 1)];
+        $adjective = $adjectives[ $x % (count($adjectives) - 1)];
 
         return ucfirst($adjective).' '.$name;
     }

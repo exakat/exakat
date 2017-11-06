@@ -34,7 +34,7 @@ g.V().hasLabel("Interface").as('i').out("NAME").as('name').in("NAME")
 
 GREMLIN;
 
-        $res = $this->query($query);
+        $res = $this->query($query)->toArray();
 
         if (empty($res)) {
             return;
@@ -42,10 +42,10 @@ GREMLIN;
         
         $interfaces = array();
         foreach($res as $row) {
-            if (isset($interfaces[$row->name])) {
-                $interfaces[$row->name][] = $row->method;
+            if (isset($interfaces[$row['name']])) {
+                $interfaces[$row['name']][] = $row['method'];
             } else {
-                $interfaces[$row->name] = array($row->method);
+                $interfaces[$row['name']] = array($row['method']);
             }
         }
 

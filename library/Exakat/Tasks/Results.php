@@ -116,13 +116,14 @@ GREMLIN;
             }
 
             $return = array();
-            foreach($vertices as $k => $v) {
-                $row = array($v->fullcode,
-                             $v->file,
-                             $v->line,
-                             $v->namespace,
-                             $v->class,
-                             $v->function);
+            foreach($vertices as $values) {
+                $row = array($values['fullcode'],
+                             $values['file'],
+                             $values['line'],
+                             $values['namespace'],
+                             $values['class'],
+                             $values['function'],
+                            );
                 $return[] = $row;
             }
         } elseif ($this->config->style == 'DISTINCT') {
@@ -130,16 +131,16 @@ GREMLIN;
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return = array();
-            foreach($vertices as $k => $v) {
-                $return[] = array($v);
+            foreach($vertices as $values) {
+                $return[] = array($values);
             }
         } elseif ($this->config->style == 'COUNTED') {
             $queryTemplate = 'g.V().hasLabel("Analysis").has("analyzer", "'.$analyzer.'").out("ANALYZED").groupCount("m")by("code").cap("m")';
             $vertices = $this->gremlin->query($queryTemplate)->results;
 
             $return = array();
-            foreach($vertices[0] as $k => $v) {
-                $return[$k] = $v;
+            foreach($vertices[0] as $k => $values) {
+                $return[$k] = $values;
             }
         }
 

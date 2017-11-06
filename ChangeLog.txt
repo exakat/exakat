@@ -1,4 +1,4 @@
-Version 0.12.17 (Roushi Demon, coming up)
+Version 1.0.3 (Baize Demon, coming up)
 + Architecture
     + 
 + Report
@@ -8,7 +8,57 @@ Version 0.12.17 (Roushi Demon, coming up)
 + Tokenizer
     + 
 
-Version 0.12.16 (Tawny Lion Demon, 2017/10/16)
+Version 1.0.2 (Suanni Demon, 2017-11-06)
++ Architecture
+    + Better report of error messages from VCS.
+    + Updated support for Vagrant 
++ Report
+    + Ambassador : Fixed display for 'Callback'
++ Analyzer
+    + New analyzer : substr() first, then replace.
+    + New analyzer : report double prepare (WP).
+    + New analyzer : avoir the +1 month trap
+    + New analyzer : check for printf() options
+    + New analyzer : check for placeholder in prepare (WP)
+    + New analyzer : avoid direct injection into prepare (WP)
+    + New analyzer : performance recommendation for switch. 
+    + New analyzer : merge if/if into if/then/else
+    + Checked unit tests : 2536 / 2500 test pass (99% pass). 
+
+Version 1.0.1 (Xueshi Demon, 2017-10-30)
++ Architecture
+    + Created Result class for Graphdb results
+    + Docker image is updated with version 1.0.1
+    + Vagrant files are updated with version 1.0.1
+    + Preparing support for Gremlin 3.3.0
++ Report
+    + Added support for PHP 7.1.11 and 7.0.25
++ Analyzer
+    + New analyzer : could be else (for consecutive opposite if/then)
+    + Checked unit tests : 2527 / 2517 test pass (99% pass). 
+
+Version 1.0.0 (Roushi Demon, 2017-10-23)
++ Architecture
+    + Tested on Gremlin 3.2.6. Checked Gremlin 3.3.0, but it needs more work.
+    + Upgraded doctor for installation and report.
+    + Upgraded docs to set gremlin-server as default install.
++ Report
+    + Added support for Clang-style report.
+    + Ambassador : fixed link to exception Tree.
+    + Inventories : Date format, 
+    + Audit names are reported in every Ambassador-style report. 
++ Analyzer
+    + Upgraded PHP directive list.
+    + Functions In For loop : prevent issue if the function uses a loop variable.
+    + Useless instruction : do not report return $i++ if $i is reference
+    + Useless instruction : Avoir reporting properties when they are magic
+    + New analyzer : mark properties to be magic.
+    + Upgraded list of PHP logins, to report hard coded passwords.
+    + Upgraded close naming : variables that differ with 1 chars are reported.
+    + Added assert(false...) to list of branching syntax.
+    + Checked unit tests : 2525 / 2515 test pass (99% pass). 
+
+Version 0.12.16 (Tawny Lion Demon, 2017-10-16)
 + Report
     + Beta version for Drill Instructor
     + Upgraded Inventories report with Sessions, Cookies, Incoming variables

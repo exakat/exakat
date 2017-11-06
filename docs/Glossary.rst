@@ -138,6 +138,8 @@ Glossary
       + :ref:`No Need For Else <no-need-for-else>`
       + :ref:`No Return Or Throw In Finally <no-return-or-throw-in-finally>`
       + :ref:`Non-lowercase Keywords <non-lowercase-keywords>`
+      + :ref:`Several Instructions On The Same Line <several-instructions-on-the-same-line>`
+      + :ref:`Simple Switch <simple-switch>`
       + :ref:`Switch Fallthrough <switch-fallthrough>`
       + :ref:`Switch To Switch <switch-to-switch>`
       + :ref:`Switch With Too Many Default <switch-with-too-many-default>`
@@ -561,6 +563,10 @@ Glossary
 
       + :ref:`var_dump()... Usage <var\_dump()...-usage>`
 
+    + `printf()`
+
+      + :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
+
     + `proc_nice()`
 
       + :ref:`New Functions In PHP 7.2 <new-functions-in-php-7.2>`
@@ -717,6 +723,11 @@ Glossary
     + `var_export()`
 
       + :ref:`var_dump()... Usage <var\_dump()...-usage>`
+
+    + `vprintf()`
+
+      + :ref:`Prepare Placeholder <prepare-placeholder>`
+      + :ref:`Printf Number Of Arguments <printf-number-of-arguments>`
 
 
 + `W`

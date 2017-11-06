@@ -10,6 +10,7 @@ Summary
 * `Can I checkout that branch?`_
 * `Can I clone with my ssh keys?`_
 * `The project is too big`_
+* `How can I run a very large project?`_
 * `Where can I find the report`_
 * `Can I run exakat on local code?`_
 * `Can I ignore a dir or a file?`_
@@ -75,6 +76,15 @@ There is a soft limit in config/exakat.ini, called 'token_limit' that initially 
 If you need to run exakat on larger sources, you may change this value to make it as large as possible. Then, the physical capacities of the machine, specially RAM, will be the actual limit. 
 
 It may be interesting to 'ignore_dir[]', from projects/<>/config.ini. 
+
+`How can I run a very large project?`_
+--------------------------------------
+
+Here are a few steps you can try when running exakat on a very large project. 
+
+* Update project/<name>/config.ini, and use ignore_dirs[] and include_dirs[] to exclude as much code as possible. Notably, frameworks, data in PHP files, tests, cache, translations, etc. 
+* Set $JAVA_OPTIONS to large quantities of RAM : JAVA_OPTIONS='-Xms1024m -Xmx6096m';
+* Check that your installation is running with 'gsneo4j' and not 'tinkergraph', in config/exakat.ini.
 
 
 `Where can I find the report`_

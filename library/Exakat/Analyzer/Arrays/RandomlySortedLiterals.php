@@ -45,13 +45,9 @@ g.V().hasLabel("Arrayliteral")
      .map{ liste.sort(false); }
      .groupCount("m").cap("m").toList()[0].findAll{ a,b -> b > 1}.keySet();
 GREMLIN
-);
+)->toArray();
         if (empty($arrays)) {
             return;
-        }
-
-        if($arrays[0] instanceof \stdClass) {
-            $arrays = array_map(function ($x) { return (array) $x; }, $arrays);
         }
 
         $this->atomIs('Arrayliteral')

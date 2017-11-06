@@ -36,7 +36,10 @@ class Drillinstructor extends Ambassador {
         parent::__construct($config);
     }
 
-    public function generate($folder, $name = 'report') {
+    public function generate($folder, $name = 'drill') {
+        if ($name === self::STDOUT) {
+            $name = 'drill';
+        }
         $this->finalName = $folder.'/'.$name;
         $this->tmpName = $folder.'/.'.$name;
 
@@ -514,10 +517,9 @@ SQL
                 $levelRows .= '<tr><td>'.$ini['name']."</td><td>$row[count]</td><td style=\"background-color: $row[color]\">$row[grade]</td></tr>\n";
             }
 
-            print $count / (count($analyzers) - 1)."\n";
-           $grade = floor($count / (count($analyzers) - 1) * (count($colors) - 1));
-           $grade = chr(65 + $grade); // B to F
-           $color = $colors[$grade];
+            $grade = floor($count / (count($analyzers) - 1) * (count($colors) - 1));
+            $grade = chr(65 + $grade); // B to F
+            $color = $colors[$grade];
             
             $levels .= '<tr><td style="background-color: #bbbbbb">Level '.$level.'</td>
                             <td style="background-color: #bbbbbb">'.$total.'</td></td>

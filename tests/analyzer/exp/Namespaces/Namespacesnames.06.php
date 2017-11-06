@@ -1,7 +1,10 @@
 <?php
 
-$expected     = array();
+$expected     = array('B',
+                     );
 
-$expected_not = array('namespace\A');
+$expected_not = array('namespace\A',
+                      'namespace\C\foo( )',
+                     );
 
 ?>

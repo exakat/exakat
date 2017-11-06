@@ -7,9 +7,12 @@ namespace a {
 }
 
 namespace c\d {
+    use f;
+    
     class e {        function __construct() { print __METHOD__."\n";} }
 
     new e();
+    new f();
 }
 
 ?>

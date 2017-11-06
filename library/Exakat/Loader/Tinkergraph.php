@@ -26,6 +26,7 @@ namespace Exakat\Loader;
 use Exakat\Config;
 use Exakat\Datastore;
 use Exakat\Exceptions\LoadError;
+use Exakat\Exceptions\NoSuchFile;
 use Exakat\Graph\Tinkergraph as Graph;
 use Exakat\Tasks\CleanDb;
 use Exakat\Tasks\Load;
@@ -69,7 +70,7 @@ class Tinkergraph {
 
     private function cleandDb() {
         display("Cleaning DB in tinkergraph\n");
-        $clean = new CleanDb(new Gremlin3($this->config), $this->config, Tasks::IS_SUBTASK);
+        $clean = new CleanDb(new Tinkergraph($this->config), $this->config, Tasks::IS_SUBTASK);
         $clean->run();
     }
 

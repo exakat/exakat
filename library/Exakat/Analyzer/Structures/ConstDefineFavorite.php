@@ -40,10 +40,7 @@ GREMLIN;
                         )')
              ->raw('map{ '.$mapping.' }')
              ->raw('groupCount("gf").cap("gf").sideEffect{ s = it.get().values().sum(); }');
-        $types = (array) $this->rawQuery();
-        if ($types[0] instanceof \Stdclass) {
-            $types = (array) $types[0];
-        }
+        $types = $this->rawQuery()->toArray()[0];
 
         $store = array();
         $total = 0;
@@ -59,14 +56,16 @@ GREMLIN;
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
-        $types = '['.str_replace('\\', '\\\\', makeList(array_keys($types))).']';
+        if (empty($types)) {
+            return;
+        }
 
         $this->atomIs(array('Const', 'Functioncall'))
              ->raw('or( __.hasLabel("Functioncall").has("fullnspath", "\\\\define"), 
                         __.hasLabel("Const").not( where( __.in("CONST") ) ) 
                         )')
              ->raw('map{ '.$mapping.' }')
-             ->raw('filter{ x2 in '.$types.'}')
+             ->raw('filter{ x2 in ***}', $types)
              ->back('first');
         $this->prepareQuery();
     }

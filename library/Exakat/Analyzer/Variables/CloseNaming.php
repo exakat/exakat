@@ -26,8 +26,9 @@ use Exakat\Analyzer\Analyzer;
 class CloseNaming extends Analyzer {
     
     public function analyze() {
+
         // Variables with a levenstein distance of 1 or less.
-        $this->query(<<<GREMLIN
+        $this->queryDefinition(<<<GREMLIN
   def distance(String str1, String str2) {
     def str1_len = str1.length()
     def str2_len = str2.length()
@@ -63,10 +64,10 @@ GREMLIN
         $variables = $this->query(<<<GREMLIN
 g.V().hasLabel("Variable", "Variablearray", "Variableobject").values("code").unique();
 GREMLIN
-);
+                                  );
 
         // Identical, except for case
-        $lowerCaseVariable = array_map('strtolower', $variables);
+        $lowerCaseVariable = array_map('strtolower', $variables->toArray());
         $lowerCaseVariable = array_count_values($lowerCaseVariable);
         $doubles = array_filter($lowerCaseVariable, function($count){ return $count > 1; });
         
@@ -77,7 +78,7 @@ GREMLIN
         }
 
         // Identical, except for case
-        $noUnderscoreVariables = array_map(function($x) { return str_replace('_', '', $x); }, $variables);
+        $noUnderscoreVariables = array_map(function($x) { return str_replace('_', '', $x); }, $variables->toArray());
         $noUnderscoreVariables = array_count_values($noUnderscoreVariables);
         $doubles = array_filter($noUnderscoreVariables, function($count){ return $count > 1; });
         
@@ -89,7 +90,7 @@ GREMLIN
         }
 
         // Identical, except for numbers
-        $noFigureVariables = array_map(function($x) { return str_replace(range('0', '9'), '', $x); }, $variables);
+        $noFigureVariables = array_map(function($x) { return str_replace(range('0', '9'), '', $x); }, $variables->toArray());
         $noFigureVariables = array_count_values($noFigureVariables);
         $doubles = array_filter($noFigureVariables, function($count){ return $count > 1; });
         

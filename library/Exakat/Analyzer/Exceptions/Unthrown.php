@@ -32,6 +32,7 @@ class Unthrown extends Analyzer {
     
     public function analyze() {
         $thrown = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").values("fullnspath").unique()');
+        $thrown = $thrown->toArray();
 
         if (empty($thrown)) {
             return;

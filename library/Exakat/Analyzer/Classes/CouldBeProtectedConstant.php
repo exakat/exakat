@@ -39,7 +39,8 @@ g.V().hasLabel("Staticconstant")
      .values("code")
      .unique()
 GREMLIN;
-        $publicUndefinedConstants = $this->query($query);
+        $publicUndefinedConstants = $this->query($query)
+                                         ->toArray();
 
         $notUsedOutside = <<<GREMLIN
 not( __.where( __.out("DEFINITION")

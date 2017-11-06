@@ -27,6 +27,7 @@ use Exakat\Exceptions\UnableToReachGraphServer;
 use Exakat\Exceptions\Neo4jException;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Tasks\Tasks;
+use Exakat\Graph\GraphResults;
 
 class Gremlin3 extends Graph {
     const CHECKED = true;
@@ -151,8 +152,10 @@ GREMLIN;
                 } else { // a short string (less than 2000) : hardcoded
                     if (is_int($value)) {
                         $query = str_replace($name, $value, $query);
-                    } else {
+                    } elseif (is_string($value)) {
                         $query = str_replace($name, "'''".addslashes($value)."'''", $query);
+                    } else {
+                        assert(false, gettype($value)." can't be prepared for query");
                     }
                     unset($params[$name]);
                 }
@@ -205,8 +208,21 @@ GREMLIN;
             }
             throw new GremlinException($result->errormessage, $query);
         }
-
-        return $result;
+        
+        if ($result instanceof \StdClass && !isset($result->results)) {
+            return new GraphResults();
+        } elseif (empty((array) $result->results)) {
+            return new GraphResults();
+        } elseif ($result->results instanceof \Stdclass) {
+            return new GraphResults(array_chunk((array) $result->results, 1));
+        } elseif (isset($result->results[0]->processed)) {
+            $result = array('processed' => empty($result->results[0]->processed->{"1"}) ? 0 : $result->results[0]->processed->{"1"},
+                            'total'     => empty($result->results[0]->total->{"1"})     ? 0 : $result->results[0]->total->{"1"},
+                           );
+            return new GraphResults($result);
+        } else {
+            return new GraphResults($result->results);
+        }
     }
 
     public function queryOne($query, $params = array(), $load = array()) {
@@ -260,6 +276,7 @@ GREMLIN;
         if (empty($array)) {
             return "{ [  ] }";
         }
+
         $keys = array_keys($array);
         $key = $keys[0];
         if (is_array($array[$key])) {
@@ -359,17 +376,16 @@ GREMLIN;
         }
         
         try {
-            $res = $this->query('g.V().count()');
+            $nodes = $this->query('g.V().count()');
         } catch (GremlinException $e) {
             $this->forceRestart();
             return;
         }
-        $nodes = $res->results[0];
 
-        if ($nodes === 0) {
+        if ($nodes->toString() === 0) {
             display('No nodes in Gremlin. No need to clean');
             return;
-        } elseif ($nodes > 10000) {
+        } elseif ($nodes->toString() > 10000) {
             display($nodes.' nodes : forcing restart');
             $this->forceRestart();
             return;

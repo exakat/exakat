@@ -29,10 +29,12 @@ class CaughtButNotThrown extends Analyzer {
 
         $phpExceptions = $this->loadIni('php_exception.ini', 'classes');
         
-        $thrown1 = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").values("fullnspath").unique()');
+        $thrown1 = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").values("fullnspath").unique()')
+                        ->toArray();
 
         $thrown2 = $this->query('g.V().hasLabel("Throw").out("THROW").out("NEW").in("DEFINITION")
-                                     .repeat( out("EXTENDS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.').values("fullnspath").unique()');
+                                     .repeat( out("EXTENDS").in("DEFINITION") ).emit().times('.self::MAX_LOOPING.').values("fullnspath").unique()')
+                        ->toArray();
         $thrown = array_merge($thrown1, $thrown2);
         
         if (empty($thrown)) {

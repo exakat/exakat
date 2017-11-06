@@ -32,7 +32,7 @@ class UsedFunctions extends Analyzer {
     
     public function analyze() {
         // function used
-        $functions = $this->query('g.V().hasLabel("Functioncall").has("fullnspath").values("fullnspath").unique()');
+        $functions = $this->query('g.V().hasLabel("Functioncall").has("fullnspath").values("fullnspath").unique()')->toArray();
         if (!empty($functions)) {
             $this->atomIs('Function')
                  ->hasName()
@@ -41,7 +41,7 @@ class UsedFunctions extends Analyzer {
         }
 
         // function name used in a string (via MarkCallable)
-        $functionsInStrings = $this->query('g.V().hasLabel("String").has("fullnspath").values("fullnspath").unique()');
+        $functionsInStrings = $this->query('g.V().hasLabel("String").has("fullnspath").values("fullnspath").unique()')->toArray();
         if (!empty($functionsInStrings)) {
             $this->atomIs('Function')
                  ->hasName()
