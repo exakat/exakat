@@ -174,7 +174,48 @@ LICENCE;
          ->exec('rm -rf release.'.Exakat::VERSION.'.tgz')
          ->run();
     }
-    
+
+    public function pharSmallBuild() {
+        $packer = $this->taskPackPhar('exakat.phar')
+                       ->stub('stub.php');
+//                       ->compress()
+// compress yield a 'too many files open' error
+
+        $composer = file_get_contents('composer.json');
+        $buildComposer = str_replace('        "consolidation/robo":"0.6.0",', '', $composer);
+        file_put_contents('composer.json', $buildComposer);
+        shell_exec('composer update --no-dev');
+        
+        $this->updateBuild();
+
+        $packer->addFile('exakat', 'exakat');
+
+        $this->taskComposerInstall()
+             ->noDev()
+             ->optimizeAutoloader()
+             ->printed(false)
+             ->run();
+
+        $folders = array('data', 
+                         'human', 
+                         'library', 
+                         'media/devfaceted', 
+                         'server', 
+                         'vendor');
+        foreach($folders as $folder) {
+            $files = Finder::create()->ignoreVCS(true)
+                                     ->files()
+                                     ->in(__DIR__.'/'.$folder);
+            foreach($files as $file) {
+                $packer->addFile($folder.'/'.$file->getRelativePathname(), $file->getRealPath());
+            }
+        }
+
+        $packer->run();
+
+        file_put_contents('composer.json', $composer);
+        shell_exec('composer update ');
+    }    
     public function pharBuild() {
         $packer = $this->taskPackPhar('exakat.phar')
                        ->stub('stub.php');
@@ -205,6 +246,7 @@ LICENCE;
                          'media/codeflower', 
                          'media/dependencies', 
                          'media/faceted', 
+                         'media/clang', 
                          'server', 
                          'vendor');
         foreach($folders as $folder) {
