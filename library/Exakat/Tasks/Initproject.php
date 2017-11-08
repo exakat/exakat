@@ -303,9 +303,9 @@ class Initproject extends Tasks {
                     $shell .= ' code 2>&1 ';
                     $shellResult = shell_exec($shell);
 
-                    if (($offset = strpos($res, 'fatal: ')) !== false) {
+                    if (($offset = strpos($shellResult, 'fatal: ')) !== false) {
                         $errorMessage = str_replace($repositoryNormalizedURL, $repositoryURL, $shellResult);
-                        $errorMessage = trim(substr($res, $offset + 7));
+                        $errorMessage = trim(substr($shellResult, $offset + 7));
                         $this->datastore->addRow('hash', array('init error' => $errorMessage ));
                         display('An error prevented code initialization : "'.$errorMessage.'"'.PHP_EOL.'No code was loaded.');
 
