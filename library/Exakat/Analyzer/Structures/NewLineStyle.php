@@ -62,6 +62,9 @@ GREMLIN;
         }
 
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x  < 0.1 *  $total; });
+        if (empty($types)) {
+            return;
+        }
 
         $this->atomIs(array('String', 'Identifier', 'Nsname'))
              ->raw('coalesce( __.hasLabel("Identifier", "Nsname").has("fullnspath").has("fullnspath", "\\\\php_eol"), 

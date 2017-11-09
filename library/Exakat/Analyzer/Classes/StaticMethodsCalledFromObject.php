@@ -40,8 +40,23 @@ g.V().hasLabel("Method")
      .values("code")
      .unique()
 GREMLIN;
-        $methods = $this->query($query)->toArray();
-        if (empty($methods)) {
+        $staticMethods = $this->query($query)->toArray();
+        if (empty($staticMethods)) {
+            return;
+        }
+
+        $query = <<<GREMLIN
+g.V().hasLabel("Method")
+     .where( __.in("METHOD").hasLabel("Class", "Trait") )
+     .not(where( __.out("STATIC") ))
+     .out("NAME")
+     .values("code")
+     .unique()
+GREMLIN;
+        $normalMethods = $this->query($query)->toArray();
+        
+        $methods = array_diff($staticMethods, $normalMethods);
+        if (empty($staticMethods)) {
             return;
         }
 
