@@ -59,13 +59,14 @@ class Doctor extends Tasks {
 
     private function checkPreRequisite() {
         // Compulsory
-        $stats['exakat']['executable'] = $this->config->executable;
-        $stats['exakat']['version']    = Exakat::VERSION;
-        $stats['exakat']['build']      = Exakat::BUILD;
-        $stats['exakat']['exakat.ini'] = $this->array2list($this->config->configFiles);
-        $stats['exakat']['graphdb']    = $this->config->graphdb;
-        $stats['exakat']['reports']    = $this->array2list($this->config->project_reports);
-        $stats['exakat']['themes']     = $this->array2list($this->config->project_themes);
+        $stats['exakat']['executable']  = $this->config->executable;
+        $stats['exakat']['version']     = Exakat::VERSION;
+        $stats['exakat']['build']       = Exakat::BUILD;
+        $stats['exakat']['exakat.ini']  = $this->array2list($this->config->configFiles);
+        $stats['exakat']['graphdb']     = $this->config->graphdb;
+        $stats['exakat']['reports']     = $this->array2list($this->config->project_reports);
+        $stats['exakat']['themes']      = $this->array2list($this->config->project_themes);
+        $stats['exakat']['tokenslimit'] = number_format($this->config->token_limit + 0, 0, '', ' ');
 
         // check for PHP
         $stats['PHP']['binary']         = phpversion();
