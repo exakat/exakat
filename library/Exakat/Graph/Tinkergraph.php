@@ -28,7 +28,6 @@ use Exakat\Exceptions\Neo4jException;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Tasks\Tasks;
 use Brightzone\GremlinDriver\Connection;
-use Brightzone\GremlinDriver\Message;
 
 class Tinkergraph extends Graph {
     const CHECKED = true;
@@ -45,9 +44,11 @@ class Tinkergraph extends Graph {
     public function __construct($config) {
         parent::__construct($config);
 
-        $this->db = new Connection([ 'host'  => $this->config->tinkergraph_host,
-                                     'port'  => $this->config->tinkergraph_port,
-                                     'graph' => 'graph'
+        $this->db = new Connection(array(
+                                     'host'     => $this->config->tinkergraph_host,
+                                     'port'     => $this->config->tinkergraph_port,
+                                     'graph'    => 'graph',
+                                     'emptySet' => true,
                                    ]);
     }
     
