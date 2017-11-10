@@ -1,10 +1,11 @@
 <?php
 
 $expected     = array('$this->getLocalStaticMethod( )', 
+                      '$b->getExternalMethod( )',
                       );
 
 $expected_not = array('$this->getLocalMethod( )', 
-                      '$b->getExternalMethod( )',
+                      '$c->getUndefinedMethod( )',
                       );
 
 ?>
