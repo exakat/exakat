@@ -49,7 +49,7 @@ class Tinkergraph extends Graph {
                                      'port'     => $this->config->tinkergraph_port,
                                      'graph'    => 'graph',
                                      'emptySet' => true,
-                                   ]);
+                                   ));
     }
     
     private function checkConfiguration() {
