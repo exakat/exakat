@@ -5,8 +5,10 @@ $expected     = array('$staticVariable6',
                       '$staticVariable3', 
                       '$staticVariable2', 
                       '$staticVariable4', 
-                      '$staticVariable5');
+                      '$staticVariable5',
+                     );
 
-$expected_not = array();
+$expected_not = array('$nonStaticProperty',
+                     );
 
 ?>

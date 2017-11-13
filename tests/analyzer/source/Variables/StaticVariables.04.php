@@ -12,6 +12,7 @@ class x {
 
 trait t {
     static public $staticTraitProperty;
+    private $nonStaticProperty = 1;
 }
 
 ?>

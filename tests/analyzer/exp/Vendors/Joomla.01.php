@@ -1,8 +1,10 @@
 <?php
 
 $expected     = array('JLoader',
-                      'JController');
+                      'JController',
+                     );
 
-$expected_not = array('JoomlaFunction');
+$expected_not = array('JoomlaFunction',
+                     );
 
 ?>
