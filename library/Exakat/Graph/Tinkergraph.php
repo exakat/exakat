@@ -159,20 +159,19 @@ class Tinkergraph extends Graph {
         $b = microtime(true);
         $round = -1;
         do {
-            $res = $this->checkConnection();
+            if (file_exists($this->config->tinkergraph_folder.'/run/gremlin.pid')) {
+                $pid = trim(file_get_contents($this->config->tinkergraph_folder.'/run/gremlin.pid'));
+            } elseif ( file_exists($this->config->tinkergraph_folder.'/db/tinkergraph.pid')) {
+                $pid = trim(file_get_contents($this->config->tinkergraph_folder.'/db/tinkergraph.pid'));
+            } else {
+                $pid = 'Not yet';
+            }
+
             ++$round;
             usleep(100000 * $round);
-        } while (empty($res));
+        } while ($pid === 'Not yet');
         $e = microtime(true);
 
-        display('Gremlin Server Connexion acquired.');
-        if (file_exists($this->config->tinkergraph.'/run/gremlin.pid')) {
-            $pid = trim(file_get_contents($this->config->tinkergraph.'/run/gremlin.pid'));
-        } elseif ( file_exists($this->config->tinkergraph.'/db/tinkergraph.pid')) {
-            $pid = trim(file_get_contents($this->config->tinkergraph.'/db/tinkergraph.pid'));
-        } else {
-            $pid = 'Not yet';
-        }
         display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
     }
 
