@@ -338,7 +338,9 @@ GREMLIN;
             
             if ($res->isType(GraphResults::EMPTY)) {
                 // Creating analysis vertex
-                $query = 'g.addV("Analysis").property("analyzer", "'.$this->analyzerQuoted.'").property("atom", "Analysis").id()';
+                $resId = $this->gremlin->getId();
+                
+                $query = 'g.addV().property(T.id, '.$resId.').property(T.label, "Analysis").property("analyzer", "'.$this->analyzerQuoted.'").property("atom", "Analysis").id()';
                 $res = $this->gremlin->query($query);
                 $this->analyzerId = $res->toString();
             } else {
