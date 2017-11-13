@@ -1,4 +1,4 @@
-Version 1.0.3 (Baize Demon, coming up)
+Version 1.0.4 (Boxiang Demon, coming up)
 + Architecture
     + 
 + Report
@@ -7,6 +7,21 @@ Version 1.0.3 (Baize Demon, coming up)
     + 
 + Tokenizer
     + 
+
+Version 1.0.3 (Baize Demon, 2017-11-13)
++ Architecture
+    + Fixed driver Tinkergraph, which was not setting the right ids.
+    + Doctor now reports $JAVA_OPTIONS, in case one need to allocate more memory
+    + Doctor now reports token limit
+    + Moved config.ini creation to first phase of init.
+    + Fixed collect of error when init with git.
+    + Upgraded driver gremlin-php to 3.0.2
++ Report
+    + Ambassador : Now reports the namespaces as a tree.
+    + New analyzer : report members that are static and not. 
+    + Updated analyzis : normal method called statically.
++ Analyzer
+    + Added support for Drupal, FuelPHP and Phalcon.
 
 Version 1.0.2 (Suanni Demon, 2017-11-06)
 + Architecture
@@ -23,7 +38,7 @@ Version 1.0.2 (Suanni Demon, 2017-11-06)
     + New analyzer : avoid direct injection into prepare (WP)
     + New analyzer : performance recommendation for switch. 
     + New analyzer : merge if/if into if/then/else
-    + Checked unit tests : 2536 / 2500 test pass (99% pass). 
+    + Checked unit tests : 2500 / 2536 test pass (99% pass). 
 
 Version 1.0.1 (Xueshi Demon, 2017-10-30)
 + Architecture
@@ -35,7 +50,7 @@ Version 1.0.1 (Xueshi Demon, 2017-10-30)
     + Added support for PHP 7.1.11 and 7.0.25
 + Analyzer
     + New analyzer : could be else (for consecutive opposite if/then)
-    + Checked unit tests : 2527 / 2517 test pass (99% pass). 
+    + Checked unit tests : 2517 / 2527 test pass (99% pass). 
 
 Version 1.0.0 (Roushi Demon, 2017-10-23)
 + Architecture
@@ -56,7 +71,7 @@ Version 1.0.0 (Roushi Demon, 2017-10-23)
     + Upgraded list of PHP logins, to report hard coded passwords.
     + Upgraded close naming : variables that differ with 1 chars are reported.
     + Added assert(false...) to list of branching syntax.
-    + Checked unit tests : 2525 / 2515 test pass (99% pass). 
+    + Checked unit tests : 2515 / 2525 test pass (99% pass). 
 
 Version 0.12.16 (Tawny Lion Demon, 2017-10-16)
 + Report
@@ -70,7 +85,7 @@ Version 0.12.16 (Tawny Lion Demon, 2017-10-16)
     + Upgraded Zend Framework review with latest versions (feed, http, eventmanager...)
     + Upgraded 'Strange names' with new typos
     + Upgraded 'Logical to in_array' to handle separated comparisons
-    + Checked unit tests : 2515 / 2505 test pass (99% pass). 
+    + Checked unit tests : 2505 / 2515 test pass (99% pass). 
 + Tokenizer
     + Fixed bug with Sign in Additions.
 
