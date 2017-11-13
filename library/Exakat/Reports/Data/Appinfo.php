@@ -354,9 +354,12 @@ class Appinfo extends Data {
                     'Frameworks' => array(
                             'Cake PHP'             => 'Cakephp/CakePHPUsed',
                             'Codeigniter'          => 'Vendors/Codeigniter',
+                            'Drupal'               => 'Vendors/Drupal',
                             'Ez'                   => 'Vendors/Ez',
+                            'Fuel'                 => 'Vendors/Fuel',
                             'Joomla'               => 'Vendors/Joomla',
                             'Laravel'              => 'Vendors/Laravel',
+                            'Phalcon'              => 'Vendors/Phalcon',
                             'Slim PHP'             => 'Slim/UseSlim',
                             'Symfony'              => 'Vendors/Symfony',
                             'Wordpress'            => 'ZendF/ZendClasses',
