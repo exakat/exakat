@@ -170,6 +170,12 @@ class Tinkergraph extends Graph {
             ++$round;
             usleep(100000 * $round);
         } while ($pid === 'Not yet');
+
+        do {
+            $res = $this->checkConnection();
+            ++$round;
+            usleep(100000 * $round);
+        } while (empty($res));
         $e = microtime(true);
 
         display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
