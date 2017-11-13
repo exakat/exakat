@@ -311,16 +311,23 @@ New analyzers
 List of analyzers, by version of introduction, newest to oldest. In parenthesis, the first element is the analyzer name, used with 'analyze -P' command, and the seconds, if any, are the recipes, used with the -T option. Recipes are separated by commas, as the same analysis may be used in several recipes.
 
 
+* 1.0.3
+
+  * Ambiguous Static (Classes/AmbiguousStatic)
+  * Drupal usage (Vendors/Drupal ; Appinfo)
+  * FuelPHP usage (Vendors/Fuel ; Appinfo, Appcontent)
+  * Phalcon usage (Vendors/Phalcon ; Appinfo)
+
 * 1.0.1
 
-  * Avoid Double Prepare (Wordpress/DoublePrepare ; Unassigned)
+  * Avoid Double Prepare (Wordpress/DoublePrepare ; Wordpress)
   * Could Be Else (Structures/CouldBeElse ; Analyze)
   * Next Month Trap (Structures/NextMonthTrap ; Analyze)
   * No Direct Input To Wpdb (Wordpress/NoDirectInputToWpdb ; Wordpress)
   * Prepare Placeholder (Wordpress/PreparePlaceholder ; Wordpress)
   * Printf Number Of Arguments (Structures/PrintfArguments ; Analyze)
   * Simple Switch (Performances/SimpleSwitch)
-  * Substr First (Performances/SubstrFirst ; Unassigned)
+  * Substr First (Performances/SubstrFirst ; Performances)
 
 * 0.12.17
 
@@ -1706,6 +1713,7 @@ List of external links mentionned in this documentation.
 * ` <http://mnapoli.fr/using-non-breakable-spaces-in-test-method-names/>`_
 * ` <https://en.wikipedia.org/wiki/Secure_Hash_Algorithms>`_
 * ` <https://wiki.php.net/rfc/list-syntax-trailing-commas>`_
+* `$HTTP_RAW_POST_DATA <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_
 * `1003.1-2008 - IEEE Standard for Information Technology - Portable Operating System Interface (POSIX(R)) <https://standards.ieee.org/findstds/standard/1003.1-2008.html>`_
 * `[blog] array_column() <https://benramsey.com/projects/array-column/>`_
 * `[CVE-2017-6090] <https://cxsecurity.com/issue/WLB-2017100031>`_
@@ -1748,6 +1756,7 @@ List of external links mentionned in this documentation.
 * `composer <https://getcomposer.org/>`_
 * `Constants <http://php.net/manual/en/language.constants.php>`_
 * `Constructors and Destructors <http://php.net/manual/en/language.oop5.decon.php>`_
+* `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop5.decon.php>`_
 * `Cookies <http://php.net/manual/en/features.cookies.php>`_
 * `Courrier Anti-pattern <https://r.je/oop-courier-anti-pattern.html>`_
 * `crc32() <http://php.net/crc32>`_
@@ -1773,6 +1782,7 @@ List of external links mentionned in this documentation.
 * `Document Object Model <http://php.net/manual/en/book.dom.php>`_
 * `dotdeb instruction <https://www.dotdeb.org/instructions/>`_
 * `download <https://www.exakat.io/download-exakat/>`_
+* `Drupal <http://www.drupal.org/>`_
 * `Eaccelerator <http://eaccelerator.net/>`_
 * `Empty interfaces are bad practice <https://r.je/empty-interfaces-bad-practice.html>`_
 * `empty() <http://www.php.net/manual/en/function.empty.php>`_
@@ -1808,10 +1818,11 @@ List of external links mentionned in this documentation.
 * `ffmpeg-php <http://ffmpeg-php.sourceforge.net/>`_
 * `filesystem <http://www.php.net/manual/en/book.filesystem.php>`_
 * `Filinfo <http://php.net/manual/en/book.fileinfo.php>`_
-* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Final Keyword <http://php.net/manual/en/language.oop5.final.php>`_
+* `Final keyword <http://php.net/manual/en/language.oop5.final.php>`_
 * `Firebase / Interbase <http://php.net/manual/en/book.ibase.php>`_
 * `Floats <http://php.net/manual/en/language.types.float.php>`_
+* `FuelPHP <https://fuelphp.com>`_
 * `Gearman on PHP <http://php.net/manual/en/book.gearman.php>`_
 * `Generalize support of negative string offsets <https://wiki.php.net/rfc/negative-string-offsets>`_
 * `GeoIP <http://php.net/manual/en/book.geoip.php>`_
@@ -1903,6 +1914,7 @@ List of external links mentionned in this documentation.
 * `PCRE <http://php.net/pcre>`_
 * `PEAR <http://pear.php.net/>`_
 * `pecl crypto <https://pecl.php.net/package/crypto>`_
+* `Phalcon <https://phalconphp.com/>`_
 * `phar <http://www.php.net/manual/en/book.phar.php>`_
 * `PHP 7.0 Backward incompatible changes <http://php.net/manual/en/migration70.incompatible.php>`_
 * `PHP 7.2's switch optimisations <https://derickrethans.nl/php7.2-switch.html>`_
@@ -1991,6 +2003,7 @@ List of external links mentionned in this documentation.
 * `Vagrant file <https://github.com/exakat/exakat-vagrant>`_
 * `Variable Scope <http://php.net/manual/en/language.variables.scope.php>`_
 * `Variables <http://php.net/manual/en/language.variables.basics.php>`_
+* `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_
 * `Wddx on PHP <http://php.net/manual/en/intro.wddx.php>`_
 * `When to declare classes final <http://ocramius.github.io/blog/when-to-declare-classes-final/>`_
 * `Why 777 Folder Permissions are a Security Risk <https://www.spiralscripts.co.uk/Blog/why-777-folder-permissions-are-a-security-risk.html>`_
