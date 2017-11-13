@@ -155,7 +155,7 @@ class Tinkergraph extends Graph {
         }
         sleep(1);
         
-        display('Started Gremlin Server');
+        display('Started Gremlin Server with Tinkergraph');
         $b = microtime(true);
         $round = -1;
         do {
@@ -194,6 +194,12 @@ class Tinkergraph extends Graph {
         }
     }
 
+    public function getId() {
+        $query = 'g.V().id().max()';
+        $resId = $this->query($query);
+        
+        return $resId->toInt() + 1;
+    }
 
     private function simplifyArray($result) {
         $return = array();
@@ -203,7 +209,8 @@ class Tinkergraph extends Graph {
         }
 
         foreach($result as $r) {
-            $row = array();
+            $row = array('id'    => $r['id'],
+                         'label' => $r['label']);
             foreach($r['properties'] as $property => $value) {
                 $row[$property] = $value[0]['value'];
             }

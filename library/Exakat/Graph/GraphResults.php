@@ -89,6 +89,10 @@ class GraphResults implements \ArrayAccess, \Iterator, \Countable {
     public function toString() {
         return (string) $this->data[0];
     }
+
+    public function toInt() {
+        return (int) $this->data[0];
+    }
     
     public function isType($type) {
         return $this->type === $type;
