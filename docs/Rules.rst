@@ -8,8 +8,8 @@ Introduction
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Rules details
-.. comment: Generation date : Mon, 06 Nov 2017 16:12:40 +0000
-.. comment: Generation hash : e2035f8ab302423c10a581b318b08759cfa5a335
+.. comment: Generation date : Mon, 13 Nov 2017 15:31:23 +0000
+.. comment: Generation hash : c6708cdf25558e56b78593ae45e75bedce54968e
 
 
 .. _$http\_raw\_post\_data:
@@ -18,7 +18,11 @@ $HTTP_RAW_POST_DATA
 ###################
 
 
-Starting at PHP 5.6, $HTTP_RAW_POST_DATA is deprecated, and should be replaced by php://input. You may get ready by setting always_populate_raw_post_data to -1.
+$HTTP_RAW_POST_DATA is deprecated, and should be replaced by php://input. 
+
+$HTTP_RAW_POST_DATA is deprecated since PHP 5.6.
+
+It is possible to ready by setting always_populate_raw_post_data to -1.
 
 .. code-block:: php
 
@@ -31,6 +35,9 @@ Starting at PHP 5.6, $HTTP_RAW_POST_DATA is deprecated, and should be replaced b
    $postdata = file_get_contents(php://input);
    
    ?>
+
+
+See also `$HTTP_RAW_POST_DATA <http://php.net/manual/en/reserved.variables.httprawpostdata.php>`_.
 
 +--------------+---------------------------------------------------------------------------------------------------------------------------------------+
 | Command Line | Php/RawPostDataUsage                                                                                                                  |
@@ -744,6 +751,43 @@ They are indeed distinct, but may lead to confusion.
 +--------------+----------------------+
 
 
+.. _ambiguous-static:
+
+Ambiguous Static
+################
+
+
+Methods or properties are sometimes defined static, and sometimes not. This is error prone, as it require a better knowledge of the code to make it static or not. 
+
+Try to keep the static-ness of methods simple, and unique. Consider renaming the methods to distinguish them easily. A method and a static method have probably different responsabilities.
+
+.. code-block:: php
+
+   <?php
+   
+   class a {
+       function mixedStaticMethod() {}
+   }
+   
+   class b {
+       static function mixedStaticMethod() {}
+   }
+   
+   /... a lot more code later .../
+   
+   $c->mixedStaticMethod();
+   // or 
+   $c::mixedStaticMethod();
+   
+   ?>
+
++--------------+-------------------------+
+| Command Line | Classes/AmbiguousStatic |
++--------------+-------------------------+
+| Analyzers    | :ref:`Analyze`          |
++--------------+-------------------------+
+
+
 .. _anonymous-classes:
 
 Anonymous Classes
@@ -928,6 +972,52 @@ The same doesn't apply to addition and multiplication, with `'array_sum() <http:
 +--------------+-----------------------------+
 | Analyzers    | :ref:`Performances`         |
 +--------------+-----------------------------+
+
+
+.. _avoid-double-prepare:
+
+Avoid Double Prepare
+####################
+
+
+Double prepare shoud be avoided, for security reasons. 
+
+When preparing in two phases, any placeholder from the first part may be escaped by the second prepare, leading to their neutralization. This way, injecting ' %s ', leads to creating %s outside quotes : ' ' %s ' ' (external quotes are from the first prepare, while the internal set of quotes are from the second).
+
+It is recommended to build the query and to prepare it in one call, to avoid such pitfall.
+
+.. code-block:: php
+
+   <?php
+   
+   // Only one prepare
+       $args = [$u, $t];
+       $res = $wpdb->prepare(' select * from table user = %s and type = %s', $args);
+   
+   // also only one prepare
+       $args = [$u];
+       $query = 'select * from table user = %s and type = %s';
+       if ( $condition) {
+           $query .= ' and type = %s';
+           $args[] = $t;
+       }
+       $res = $wpdb->prepare($query, $args);
+   
+   // double prepare
+       $where = $wpdb->prepare('where user = %s', $s); 
+       $res = $wpdb->prepare(' select * from table $where AND other = %d', );
+   
+   ?>
+
+
+See also `On WordPress Security and Contributing <https://codeseekah.com/2017/09/21/on-wordpress-security-and-contributing/>`_ and 
+`Disclosure: WordPress WPDB SQL Injection - Technical <https://blog.ircmaxell.com/2017/10/disclosure-wordpress-wpdb-sql-injection-technical.html>`_.
+
++--------------+-------------------------+
+| Command Line | Wordpress/DoublePrepare |
++--------------+-------------------------+
+| Analyzers    | :ref:`Wordpress`        |
++--------------+-------------------------+
 
 
 .. _avoid-large-array-assignation:
@@ -5007,6 +5097,9 @@ Traits, classes and interfaces are checked.
    
    ?>
 
+
+See also `Visibility <http://php.net/manual/en/language.oop5.visibility.php>`_ and `Understanding The Concept Of Visibility In Object Oriented PHP <https://torquemag.io/2016/05/understanding-concept-visibility-object-oriented-php/>`_.
+
 +--------------+-------------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/NonPpp                                                                                              |
 +--------------+-------------------------------------------------------------------------------------------------------------+
@@ -5724,7 +5817,7 @@ Iffectations
 ############
 
 
-Affectations that appears in a conditions. 
+Affectations that appears in a condition. 
 
 Iffectations are a way to do both a test and an affectations. 
 They may also be typos, such as if ($x = 3) { ... }, leading to a constant condition. 
@@ -5879,7 +5972,7 @@ Incompilable Files
 ##################
 
 
-Files that cannot be compiled, and, as such, be run by PHP. Scripts are linted against PHP versions 5.2, 5.3, 5.4, 5.5, 5.6, 7.0-dev and 7.1. 
+Files that cannot be compiled, and, as such, be run by PHP. Scripts are linted against various versions of PHP. 
 
 This is usually undesirable, as all code must compile before being executed. It may simply be that such files are not compilable because they are not yet ready for an upcoming PHP version.
 
@@ -5894,6 +5987,8 @@ This is usually undesirable, as all code must compile before being executed. It 
 
 
 Code that is incompilable with older PHP versions means that the code is breaking backward compatibility : good or bad is project decision.
+
+When the code is used as a template for PHP code generation, for example at installation time, it is recommended to use a distinct file extension, so as to distinguish them from actual PHP code.
 
 +--------------+-----------------------------------------------------------------------------------------------+
 | Command Line | Php/Incompilable                                                                              |
@@ -9590,7 +9685,9 @@ Old Style Constructor
 #####################
 
 
-A long time ago, PHP classes used to have the method bearing the same name as the class acts as the constructor.
+PHP classes used to have the method bearing the same name as the class acts as the constructor. That was PHP 4, and early PHP 5. 
+
+The manual issues a warning about this syntax : 'Old style constructors are DEPRECATED in PHP 7.0, and will be removed in a future version. You should always use `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ in new code.'
 
 .. code-block:: php
 
@@ -9626,6 +9723,8 @@ A long time ago, PHP classes used to have the method bearing the same name as th
 This is no more the case in PHP 5, which relies on `'__construct() <http://php.net/manual/en/language.oop5.decon.php>`_ to do so. Having this old style constructor may bring in confusion, unless you are also supporting old time PHP 4.
 
 Note that classes with methods bearing the class name, but inside a namespace are not following this convention, as this is not breaking backward compatibility. Those are excluded from the analyze.
+
+See also `Constructors and Destructors ¶ <http://php.net/manual/en/language.oop5.decon.php>`_.
 
 +--------------+---------------------------------------------------------------------------------------------------------+
 | Command Line | Classes/OldStyleConstructor                                                                             |
@@ -13482,6 +13581,35 @@ This analyzer list all the `'strpos() <http://www.php.net/strpos>`_-like functio
 +--------------+-----------------------------------------------------------------------------------------------------+
 | Analyzers    | :ref:`Analyze`                                                                                      |
 +--------------+-----------------------------------------------------------------------------------------------------+
+
+
+.. _substr-first:
+
+Substr First
+############
+
+
+Always start by reducing a string before applying some transformation on it. The shorter string will be processed faster. 
+
+.. code-block:: php
+
+   <?php
+   
+   // fast version
+   $result = strtolower(substr($string, $offset, $length));
+   
+   // slower version
+   $result = substr(strtolower($string), $offset, $length);
+   ?>
+
+
+The gain produced here is greater with longer strings, or greater reductions. They may also be used in loops. This is a micro-optimisation when used on short strings and single string reductions.
+
++--------------+--------------------------+
+| Command Line | Performances/SubstrFirst |
++--------------+--------------------------+
+| Analyzers    | :ref:`Performances`      |
++--------------+--------------------------+
 
 
 .. _suspicious-comparison:

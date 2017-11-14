@@ -34,7 +34,7 @@ class NamespaceUsage extends Analyzer {
     
     public function analyze() {
         $namespaces =  $this->makeFullNsPath($this->namespaces);
-        $regex = '('.addslashes(addslashes(implode('|', $namespaces))).')';
+        $regex = '^('.addslashes(addslashes(implode('|', $namespaces))).')';
 
         $this->atomIs(array('Nsname', 'Identifier'))
              ->hasNoIn(array('NAME' , 'MEMBER', 'CONSTANT', 'ALIAS', 'CLASS'))

@@ -66,8 +66,8 @@ Recipes details
 
 .. comment: The rest of the document is automatically generated. Don't modify it manually. 
 .. comment: Recipes details
-.. comment: Generation date : Mon, 06 Nov 2017 16:12:40 +0000
-.. comment: Generation hash : e2035f8ab302423c10a581b318b08759cfa5a335
+.. comment: Generation date : Mon, 13 Nov 2017 15:31:23 +0000
+.. comment: Generation hash : c6708cdf25558e56b78593ae45e75bedce54968e
 
 
 .. _analyze:
@@ -75,7 +75,7 @@ Recipes details
 Analyze
 +++++++
 
-Total : 319 analysis
+Total : 320 analysis
 
 * :ref:`$this Belongs To Classes Or Traits <$this-belongs-to-classes-or-traits>`
 * :ref:`$this Is Not An Array <$this-is-not-an-array>`
@@ -91,6 +91,7 @@ Total : 319 analysis
 * :ref:`Alternative Syntax Consistence <alternative-syntax-consistence>`
 * :ref:`Always Positive Comparison <always-positive-comparison>`
 * :ref:`Ambiguous Array Index <ambiguous-array-index>`
+* :ref:`Ambiguous Static <ambiguous-static>`
 * :ref:`Assign Default To Properties <assign-default-to-properties>`
 * :ref:`Assign With And <assign-with-and>`
 * :ref:`Assigned Twice <assigned-twice>`
@@ -960,7 +961,7 @@ Total : 24 analysis
 Performances
 ++++++++++++
 
-Total : 27 analysis
+Total : 28 analysis
 
 * :ref:`Avoid Concat In Loop <avoid-concat-in-loop>`
 * :ref:`Avoid Large Array Assignation <avoid-large-array-assignation>`
@@ -986,6 +987,7 @@ Total : 27 analysis
 * :ref:`Simple Switch <simple-switch>`
 * :ref:`Simplify Regex <simplify-regex>`
 * :ref:`Slow Functions <slow-functions>`
+* :ref:`Substr First <substr-first>`
 * :ref:`Use Class Operator <use-class-operator>`
 * :ref:`Use pathinfo() Arguments <use-pathinfo()-arguments>`
 * :ref:`While(List() = Each()) <while(list()-=-each())>`
@@ -1064,8 +1066,9 @@ Total : 25 analysis
 Wordpress
 +++++++++
 
-Total : 12 analysis
+Total : 13 analysis
 
+* :ref:`Avoid Double Prepare <avoid-double-prepare>`
 * :ref:`Avoid Non Wordpress Globals <avoid-non-wordpress-globals>`
 * :ref:`No Direct Input To Wpdb <no-direct-input-to-wpdb>`
 * :ref:`No Global Modification <no-global-modification>`

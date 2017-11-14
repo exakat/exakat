@@ -108,6 +108,17 @@ uasort($urls, function($a, $b) { return strtolower($a) <=> strtolower($b); });
 $url_list = "* ".implode("\n* ", $urls)."\n";
 
 /// URL
+$exakat_site = 'https://www.exakat.io/';
+
+$php = file_get_contents('./library/Exakat/Exakat.php');
+//    const VERSION = '1.0.3';
+preg_match('/const VERSION = \'([0-9\.]+)\';/is', $php, $r);
+$exakat_version = $r[1];
+//    const BUILD = 661;
+preg_match('/const BUILD = ([0-9]+);/is', $php, $r);
+$exakat_build = $r[1];
+
+$exakat_date = date('r', filemtime('./library/Exakat/Exakat.php'));
 
 // More to come,and automate collection too
 $attributes = array('ANALYZERS_COUNT'        => $analyzer_count,
@@ -118,6 +129,10 @@ $attributes = array('ANALYZERS_COUNT'        => $analyzer_count,
                     'REPORTS_LIST'           => $reports_list,
                     'THEMES_LIST'            => $themes_list,
                     'URL_LIST'               => $url_list,
+                    'EXAKAT_VERSION'         => $exakat_version,
+                    'EXAKAT_BUILD'           => $exakat_build,
+                    'EXAKAT_SITE'            => $exakat_site,
+                    'EXAKAT_DATE'            => $exakat_date,
                     );
 
 shell_exec('rm docs/*.rst');

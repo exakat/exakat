@@ -48,10 +48,11 @@ class GSNeo4j extends Graph {
     public function __construct($config) {
         parent::__construct($config);
         
-        $this->db = new Connection([ 'host'  => $this->config->gsneo4j_host,
-                                     'port'  => $this->config->gsneo4j_port,
-                                     'graph' => 'graph'
-                                   ]);
+        $this->db = new Connection(array( 'host'  => $this->config->gsneo4j_host,
+                                          'port'  => $this->config->gsneo4j_port,
+                                          'graph' => 'graph',
+                                          'emptySet' => true,
+                                   ) );
     }
     
     private function checkConfiguration() {

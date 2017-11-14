@@ -42,6 +42,11 @@ abstract class Graph {
     abstract public function checkConnection(); 
 
     abstract public function clean(); 
+    
+    // Produces an id for storing a new value. 
+    // null means that the graph will handle it. 
+    // This is not the case of all graph : tinkergraph doesn't.
+    public function getId() { return 'null'; } 
 
 }
 

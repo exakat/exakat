@@ -91,10 +91,14 @@ class Status extends Tasks {
         switch($this->config->project_vcs) {
             case 'git' :
                 if (file_exists($this->config->projects_root.'/projects/'.$this->config->project.'/code/')) {
-                    $status['git url'] = $this->config->project_url;
-                    $status['git status'] = trim(shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD'));
+                    $urlDetails = parse_url($this->config->project_url);
+                    if (isset($urlDetails['pass'])) {
+                        $urlDetails['pass'] = '******';
+                    }
+                    $status['git url'] = unparse_url($urlDetails);
+                    $status['git status'] = trim(shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git rev-parse HEAD 2&>1'));
 
-                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git remote update; git status -uno | grep \'up-to-date\'');
+                    $res = shell_exec('cd '.$this->config->projects_root.'/projects/'.$this->config->project.'/code/; git remote update 2>&1; git status -uno | grep \'up-to-date\' ');
                     $status['updatable'] = empty($res);
                 } else {
                     $status['updatable'] = false;

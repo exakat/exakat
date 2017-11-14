@@ -82,6 +82,10 @@ class Initproject extends Tasks {
         $this->datastore = new Datastore($this->config, Datastore::CREATE);
 
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/config.ini')) {
+            $repositoryBranch    = '';
+            $repositoryTag       = '';
+            $include_dirs        = '';
+
             if ($this->config->symlink === true) {
                 $vcs = 'symlink';
                 $projectName = basename($repositoryURL);
@@ -98,6 +102,19 @@ class Initproject extends Tasks {
                 $vcs = 'git';
                 $projectName = basename($repositoryURL);
                 $projectName = str_replace('.git', '', $projectName);
+                
+                if (!empty($this->config->branch) &&
+                    $this->config->branch !== 'master') {
+                    $repositoryBranch =  $this->config->branch;
+                    $repositoryTag =  '';
+                } elseif (!empty($this->config->tag)) {
+                    $repositoryBranch =  '';
+                    $repositoryTag =  $this->config->tag;
+                } else {
+                    $repositoryBranch =  'master';
+                    $repositoryTag =  '';
+                }
+            
             } elseif ($this->config->copy === true) {
                 $vcs = 'copy';
                 $projectName = basename($repositoryURL);
@@ -118,12 +135,63 @@ class Initproject extends Tasks {
             } elseif ($this->config->composer === true) {
                 $vcs = 'composer';
                 $projectName = str_replace('/', '_', $repositoryURL);
+
+                // Updating config.ini to include the vendor directory
+                $include_dirs = "include_dirs[] = /vendor/$repositoryURL";
             } else {
                 $vcs = '';
                 $projectName = basename($repositoryURL);
                 $projectName = preg_replace('.git', '', $projectName);
             }
 
+
+            // default initial config. Found in test project.
+            $phpversion = $this->config->phpversion;
+            $configIni = <<<INI
+;Main PHP version for this code.
+phpversion = $phpversion
+
+;Ignored dirs and files, relative to code source root.
+ignore_dirs[] = /assets
+ignore_dirs[] = /cache
+ignore_dirs[] = /css
+ignore_dirs[] = /data
+ignore_dirs[] = /doc
+ignore_dirs[] = /docker
+ignore_dirs[] = /docs
+ignore_dirs[] = /example
+ignore_dirs[] = /examples
+ignore_dirs[] = /images
+ignore_dirs[] = /js
+ignore_dirs[] = /lang
+ignore_dirs[] = /spec
+ignore_dirs[] = /sql
+ignore_dirs[] = /test
+ignore_dirs[] = /tests
+ignore_dirs[] = /tmp
+ignore_dirs[] = /vendor
+ignore_dirs[] = /version
+
+
+;Included dirs or files, relative to code source root. Default to all.
+;Those are added after ignoring directories
+include_dirs[] = /
+$include_dirs
+
+;Accepted file extensions
+file_extensions = .php,.php3,.inc,.tpl,.phtml,.tmpl,.phps,.ctp
+
+;Description of the project
+project_name        = "$projectName";
+project_url         = "$repositoryURL";
+project_vcs         = "$vcs";
+project_description = "";
+project_branch      = "$repositoryBranch";
+project_tag         = "$repositoryTag";
+
+INI;
+
+            file_put_contents($this->config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
         } else {
             display( $this->config->projects_root.'/projects/'.$project.'/config.ini already exists. Ignoring');
         }
@@ -132,10 +200,6 @@ class Initproject extends Tasks {
         $repositoryDetails = parse_url($repositoryURL);
 
         $skipFiles           = false;
-        $repositoryPackagist = '';
-        $repositoryBranch    = '';
-        $repositoryTag       = '';
-        $include_dirs        = '';
 
         if (!file_exists($this->config->projects_root.'/projects/'.$project.'/code/')) {
             switch (true) {
@@ -178,8 +242,6 @@ class Initproject extends Tasks {
                     file_put_contents($this->config->projects_root.'/projects/'.$project.'/code/composer.json', $json);
                     shell_exec('cd '.$this->config->projects_root.'/projects/'.$project.'/code; composer -q install');
 
-                    // Updating config.ini to include the vendor directory
-                    $include_dirs = "include_dirs[] = /vendor/$repositoryURL";
                     break 1;
 
                 // SVN
@@ -288,18 +350,11 @@ class Initproject extends Tasks {
                         display("Check out with branch ".$this->config->branch);
                         $shell .= ' -b '.$this->config->branch.' ';
 
-                        $repositoryBranch =  $this->config->branch;
-                        $repositoryTag =  '';
                     } elseif (!empty($this->config->tag)) {
                         display("Check out with tag ".$this->config->tag);
                         $shell .= ' -b '.$this->config->tag.' ';
 
-                        $repositoryBranch =  '';
-                        $repositoryTag =  $this->config->tag;
-                    } else {
-                        $repositoryBranch =  'master';
-                        $repositoryTag =  '';
-                    }
+                    } 
                     $shell .= ' code 2>&1 ';
                     $shellResult = shell_exec($shell);
 
@@ -320,63 +375,14 @@ class Initproject extends Tasks {
             display('Folder "code" is already existing. Leaving it intact.');
         }
 
-        // default initial config. Found in test project.
-        $phpversion = $this->config->phpversion;
-        $configIni = <<<INI
-;Main PHP version for this code.
-phpversion = $phpversion
-
-;Ignored dirs and files, relative to code source root.
-ignore_dirs[] = /assets
-ignore_dirs[] = /cache
-ignore_dirs[] = /css
-ignore_dirs[] = /data
-ignore_dirs[] = /doc
-ignore_dirs[] = /docker
-ignore_dirs[] = /docs
-ignore_dirs[] = /example
-ignore_dirs[] = /examples
-ignore_dirs[] = /images
-ignore_dirs[] = /js
-ignore_dirs[] = /lang
-ignore_dirs[] = /spec
-ignore_dirs[] = /sql
-ignore_dirs[] = /test
-ignore_dirs[] = /tests
-ignore_dirs[] = /tmp
-ignore_dirs[] = /vendor
-ignore_dirs[] = /version
-
-
-;Included dirs or files, relative to code source root. Default to all.
-;Those are added after ignoring directories
-include_dirs[] = /
-$include_dirs
-
-;Accepted file extensions
-file_extensions = .php,.php3,.inc,.tpl,.phtml,.tmpl,.phps,.ctp
-
-;Description of the project
-project_name        = "$projectName";
-project_url         = "$repositoryURL";
-project_vcs         = "$vcs";
-project_description = "";
-project_packagist   = "$repositoryPackagist";
-project_branch      = "$repositoryBranch";
-project_tag         = "$repositoryTag";
-
-INI;
-
-        file_put_contents($this->config->projects_root.'/projects/'.$project.'/config.ini', $configIni);
-
         display('Counting files');
         $this->datastore->addRow('hash', array('status' => 'Initproject'));
 
         if (!$skipFiles) {
             display('Running files');
-            $analyze = new Files($this->gremlin, $this->config);
-            $analyze->run();
-            unset($analyze);
+            // Running script as a separate process, to take into account the actual config file..
+            $shell = $this->config->php.' '.$this->config->executable.' files -p '.$this->config->project;
+            print shell_exec($shell);
         }
     }
 }

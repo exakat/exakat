@@ -197,13 +197,13 @@ Installation guide with Vagrant and Ansible
 -------------------------------------------
 
 Installation list
-#################
++++++++++++++++++
 
 The exakat-vagrant repository contains an automated install for exakat. It installs everything in the working directory, or the system.
 Vagrant install works with Debian 8 and Ubuntu 15.10 images. Other images may be usable, but not tested.
 
 Pre-requisites
-##############
+++++++++++++++
 
 You need the following tools : 
 
@@ -214,7 +214,7 @@ You need the following tools :
 Most may easily be installed with the local package manager, or with a direct download from the editor's website. 
 
 Install with Vagrant and Ansible
-################################
+++++++++++++++++++++++++++++++++
 
 :: 
 

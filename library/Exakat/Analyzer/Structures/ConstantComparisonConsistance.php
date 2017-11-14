@@ -65,11 +65,10 @@ GREMLIN;
         }
         
         $types = array_filter($types, function ($x) use ($total) { return $x > 0 && $x / $total < 0.1; });
-        $types = array_keys($types);
-        
         if (empty($types)) {
             return;
         }
+        $types = array_keys($types);
 
         $this->atomIs('Comparison')
              ->outIs(array('LEFT', 'RIGHT'))

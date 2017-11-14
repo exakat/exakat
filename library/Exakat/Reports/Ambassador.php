@@ -2249,6 +2249,7 @@ HTML;
             $this->putBasedPage('inventories_'.$fileName, $html);
         }
         $this->generateExceptionTree();
+        $this->generateNamespaceTree();
     }
 
     private function generateExceptionTree() {
@@ -2363,11 +2364,90 @@ HTML;
         }
         $theTable = $this->tree2ul($exceptions, $list);
 
-       $html = $this->getBasedPage('empty');
-       $html = $this->injectBloc($html, 'TITLE', 'Exceptions inventory');
-       $html = $this->injectBloc($html, 'DESCRIPTION', '');
-       $html = $this->injectBloc($html, 'CONTENT', $theTable);
-       $this->putBasedPage('inventories_exceptions', $html);
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Exceptions inventory');
+        $html = $this->injectBloc($html, 'DESCRIPTION', '');
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+        $this->putBasedPage('inventories_exceptions', $html);
+    }
+    
+    private function path2tree($paths) {
+        $return = array();
+        
+        $recursive = array();
+        foreach($paths as $path) {
+            $folders = explode('\\', $path);
+            
+            $first = empty($folders[0]) ? '\\' : $folders[0]; 
+            
+            if (!isset($return[$first])) {
+                $return[$first] = array();
+            }
+            
+            if (count($folders) > 2) {
+                $recursive[$first] = 1;
+            }
+            $return[$first][] = implode('\\', array_slice($folders, 1));
+        }
+        
+        foreach($recursive as $recurrent => $foo) {
+            $return[$recurrent] = $this->path2tree($return[$recurrent]);
+        }
+        
+        return $return;
+    }
+    
+    private function pathtree2ul($path) {
+        if (empty($path)) {
+            return '';
+        }
+        $return = '<ul>';
+        
+        foreach($path as $k => $v) {
+            $return .= '<li>';
+
+            $parent = '\\'.strtolower($k);
+            if (is_string($v)) {
+                $return .= '<div style="font-weight: bold">'.$v.'</div>';
+            } elseif (count($v) == 1) {
+                if (empty($v[0])) {
+                    if (empty($k)) {
+                        $return .= '<div style="font-weight: bold">\\</div>';
+                    } else {
+                        $return .= '<div style="font-weight: bold">'.$k.'</div>';
+                    }
+                } else {
+                    $return .= '<div style="font-weight: bold">'.$k.'</div>'.$this->pathtree2ul($v);
+                }
+            } else {
+                $return .= '<div style="font-weight: bold">'.$k.'</div>'.$this->pathtree2ul($v);
+            }
+
+            $return .= '</li>';
+        }
+        
+        $return .= '</ul>';
+        
+        return $return;
+    }
+    
+    private function generateNamespaceTree() {
+        $theTable = '';
+        $res = $this->sqlite->query('SELECT namespace FROM namespaces WHERE namespace != "\app\console" ORDER BY namespace');
+        
+        $paths = array();
+        while($row = $res->fetchArray(\SQLITE3_ASSOC)) {
+            $paths[] = substr($row['namespace'], 1);
+        }
+        
+        $paths = $this->path2tree($paths);
+        $theTable = $this->pathtree2ul($paths);
+        
+        $html = $this->getBasedPage('empty');
+        $html = $this->injectBloc($html, 'TITLE', 'Namespace tree');
+        $html = $this->injectBloc($html, 'DESCRIPTION', 'Here are the various namespaces in use in the code.');
+        $html = $this->injectBloc($html, 'CONTENT', $theTable);
+        $this->putBasedPage('inventories_namespaces', $html);
     }
     
     private function tree2ul($tree, $display) {

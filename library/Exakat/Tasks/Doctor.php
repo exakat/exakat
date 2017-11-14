@@ -59,13 +59,14 @@ class Doctor extends Tasks {
 
     private function checkPreRequisite() {
         // Compulsory
-        $stats['exakat']['executable'] = $this->config->executable;
-        $stats['exakat']['version']    = Exakat::VERSION;
-        $stats['exakat']['build']      = Exakat::BUILD;
-        $stats['exakat']['exakat.ini'] = $this->array2list($this->config->configFiles);
-        $stats['exakat']['graphdb']    = $this->config->graphdb;
-        $stats['exakat']['reports']    = $this->array2list($this->config->project_reports);
-        $stats['exakat']['themes']     = $this->array2list($this->config->project_themes);
+        $stats['exakat']['executable']  = $this->config->executable;
+        $stats['exakat']['version']     = Exakat::VERSION;
+        $stats['exakat']['build']       = Exakat::BUILD;
+        $stats['exakat']['exakat.ini']  = $this->array2list($this->config->configFiles);
+        $stats['exakat']['graphdb']     = $this->config->graphdb;
+        $stats['exakat']['reports']     = $this->array2list($this->config->project_reports);
+        $stats['exakat']['themes']      = $this->array2list($this->config->project_themes);
+        $stats['exakat']['tokenslimit'] = number_format($this->config->token_limit + 0, 0, '', ' ');
 
         // check for PHP
         $stats['PHP']['binary']         = phpversion();
@@ -92,8 +93,8 @@ class Doctor extends Tasks {
             $stats['java']['error'] = $res;
             $stats['java']['installation'] = 'No java found. Please, install Java Runtime (SRE) 1.7 or above from java.com web site.';
         }
-        $res = getenv('JAVA_HOME');
-        $stats['java']['$JAVA_HOME'] = $res;
+        $stats['java']['$JAVA_HOME'] = $_ENV['JAVA_HOME'] ?? '<none>';
+        $stats['java']['$JAVA_OPTIONS'] = $_ENV['JAVA_OPTIONS'] ?? ' (Use this to give more RAM to graph server)';
 
         $stats['tinkergraph'] = $this->getTinkerGraph();
         $stats['gsneo4j'] = $this->getTinkerGraphNeo4j();

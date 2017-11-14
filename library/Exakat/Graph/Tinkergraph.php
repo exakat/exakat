@@ -28,7 +28,6 @@ use Exakat\Exceptions\Neo4jException;
 use Exakat\Exceptions\GremlinException;
 use Exakat\Tasks\Tasks;
 use Brightzone\GremlinDriver\Connection;
-use Brightzone\GremlinDriver\Message;
 
 class Tinkergraph extends Graph {
     const CHECKED = true;
@@ -45,10 +44,12 @@ class Tinkergraph extends Graph {
     public function __construct($config) {
         parent::__construct($config);
 
-        $this->db = new Connection([ 'host'  => $this->config->tinkergraph_host,
-                                     'port'  => $this->config->tinkergraph_port,
-                                     'graph' => 'graph'
-                                   ]);
+        $this->db = new Connection(array(
+                                     'host'     => $this->config->tinkergraph_host,
+                                     'port'     => $this->config->tinkergraph_port,
+                                     'graph'    => 'graph',
+                                     'emptySet' => true,
+                                   ));
     }
     
     private function checkConfiguration() {
@@ -154,9 +155,22 @@ class Tinkergraph extends Graph {
         }
         sleep(1);
         
-        display('Started Gremlin Server');
+        display('Started Gremlin Server with Tinkergraph');
         $b = microtime(true);
         $round = -1;
+        do {
+            if (file_exists($this->config->tinkergraph_folder.'/run/gremlin.pid')) {
+                $pid = trim(file_get_contents($this->config->tinkergraph_folder.'/run/gremlin.pid'));
+            } elseif ( file_exists($this->config->tinkergraph_folder.'/db/tinkergraph.pid')) {
+                $pid = trim(file_get_contents($this->config->tinkergraph_folder.'/db/tinkergraph.pid'));
+            } else {
+                $pid = 'Not yet';
+            }
+
+            ++$round;
+            usleep(100000 * $round);
+        } while ($pid === 'Not yet');
+
         do {
             $res = $this->checkConnection();
             ++$round;
@@ -164,14 +178,6 @@ class Tinkergraph extends Graph {
         } while (empty($res));
         $e = microtime(true);
 
-        display('Gremlin Server Connexion acquired.');
-        if (file_exists($this->config->tinkergraph.'/run/gremlin.pid')) {
-            $pid = trim(file_get_contents($this->config->tinkergraph.'/run/gremlin.pid'));
-        } elseif ( file_exists($this->config->tinkergraph.'/db/tinkergraph.pid')) {
-            $pid = trim(file_get_contents($this->config->tinkergraph.'/db/tinkergraph.pid'));
-        } else {
-            $pid = 'Not yet';
-        }
         display('started ['.$pid.'] in '.number_format(($e - $b) * 1000, 2).' ms' );
     }
 
@@ -188,6 +194,12 @@ class Tinkergraph extends Graph {
         }
     }
 
+    public function getId() {
+        $query = 'g.V().id().max()';
+        $resId = $this->query($query);
+        
+        return $resId->toInt() + 1;
+    }
 
     private function simplifyArray($result) {
         $return = array();
@@ -197,7 +209,8 @@ class Tinkergraph extends Graph {
         }
 
         foreach($result as $r) {
-            $row = array();
+            $row = array('id'    => $r['id'],
+                         'label' => $r['label']);
             foreach($r['properties'] as $property => $value) {
                 $row[$property] = $value[0]['value'];
             }

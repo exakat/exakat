@@ -289,8 +289,7 @@ GROUP BY calls.id
     }
 
     public function saveDefinitions($exakatDir, $calls) {
-        //each time...
-//        $this->calls = $calls;
+        //unused
     }
 
     public function json_encode($object) {
