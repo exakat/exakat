@@ -55,7 +55,7 @@ class Incompilable extends Analyzer {
     }
 
     public function getDump() {
-        if ($this->hasResults()) {
+        if (!$this->hasResults()) {
             return array();
         }
         
@@ -82,7 +82,7 @@ class Incompilable extends Analyzer {
         foreach($this->config->other_php_versions as $version) {
             $r = Analyzer::$datastore->getRow('compilation'.$version);
             
-            if (count($r) > 0) {
+            if (!empty($r)) {
                 return true;
             }
         }
