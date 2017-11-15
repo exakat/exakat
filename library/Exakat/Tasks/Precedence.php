@@ -149,7 +149,7 @@ class Precedence {
 
     public function __construct($version, $config) {
 
-        $php = new Phpexec($version, $config);
+        $php = new Phpexec($version, $config->{'php'.str_replace('.', '', $config->phpversion)});
         $tokens = array_flip($php->getTokens());
 
         foreach($this->allTokens as $name) {

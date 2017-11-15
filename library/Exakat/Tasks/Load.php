@@ -238,7 +238,7 @@ class Load extends Tasks {
     public function __construct($gremlin, $config, $subtask = Tasks::IS_NOT_SUBTASK) {
         parent::__construct($gremlin, $config, $subtask);
 
-        $this->php = new Phpexec($this->config->phpversion, $this->config);
+        $this->php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         if (!$this->php->isValid()) {
             throw new InvalidPHPBinary($this->php->getVersion());
         }

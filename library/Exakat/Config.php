@@ -353,15 +353,15 @@ class Config {
 
         $other_php_versions = array();
         foreach(array('52', '53', '54', '55', '56', '70', '71', '72', '73') as $version) {
-            if (empty($this->configFiles['php'.$version])) {
+            if (empty($this->configFile['php'.$version])) {
                 continue;
             }
-            $php = new Phpexec($version[0].'.'.$version[1], $this);
+            $php = new Phpexec($version[0].'.'.$version[1], $this->configFile['php'.$version]);
             if ($php->isValid()) {
                 $other_php_versions[] = $version;
             }
         }
-
+    
         // check and default values
         $defaults = array( 'ignore_dirs'        => array('/test', '/tests', '/Tests', '/Test', '/example', '/examples', '/docs', '/doc', '/tmp', '/version', '/vendor', '/js', '/lang', '/data', '/css', '/cache', '/vendor', '/assets', '/spec', '/sql'),
                            'other_php_versions' => $other_php_versions,

@@ -63,7 +63,9 @@ class Files extends Tasks {
         $ignoredFiles = array();
         $files = array();
         $tokens = 0;
-        self::findFiles($this->config->projects_root.'/projects/'.$dir.'/code', $files, $ignoredFiles, $this->config, $tokens);
+        $path = $this->config->projects_root.'/projects/'.$dir.'/code';
+        self::findFiles($path, $files, $ignoredFiles, $this->config);
+        $tokens = $this->countTokens($path, $files, $ignoredFiles);
         $i = array();
         foreach($ignoredFiles as $file => $reason) {
             $i[] = array('file'   => $file,
@@ -398,6 +400,23 @@ class Files extends Tasks {
         }
         $this->datastore->addRow('hash', $composerInfo);
     }
+    
+    private function countTokens($path, &$files, &$ignoredFiles) {
+        $tokens = 0;
+
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
+
+        foreach($files as $id => $file) {
+            if (($t = $php->countTokenFromFile($path.$file)) < 2) {
+                unset($files[$id]);
+                $ignoredFiles[$file] = 'Not a PHP File';
+            } else {
+                $tokens += $t;
+            }
+        }
+        
+        return $tokens;
+    }
 
     private function checkLicence($dir) {
         $licenses = parse_ini_file($this->config->dir_root.'/data/license.ini');
@@ -414,7 +433,7 @@ class Files extends Tasks {
         $this->datastore->addRow('hash', array('licence_file' => 'unknown'));
     }
     
-    public static function findFiles($path, &$files, &$ignoredFiles, $config, &$tokens) {
+    public static function findFiles($path, &$files, &$ignoredFiles, $config) {
         $ignore_dirs = $config->ignore_dirs;
         $dir = $config->project;
 
@@ -460,7 +479,6 @@ class Files extends Tasks {
             $includeDirsRegex = '#^('.implode('|', $includeDirs).')#';
         }
 
-        $php = new Phpexec($config->phpversion, $config);
         $ignoredFiles = array();
 
         $d = getcwd();
@@ -498,12 +516,7 @@ class Files extends Tasks {
                 // Matching the 'ignored dir' pattern
                 unset($files[$id]);
                 $ignoredFiles[$file] = 'Ignored dir';
-            } elseif (($t = $php->countTokenFromFile($path.$file)) < 2) {
-                unset($files[$id]);
-                $ignoredFiles[$file] = 'Not a PHP File';
-            } else {
-                $tokens += $t;
-            }
+            } 
         }
     }
 }

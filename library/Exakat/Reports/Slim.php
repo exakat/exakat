@@ -1109,7 +1109,7 @@ JAVASCRIPT;
     }
 
     public function getHashData() {
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
 
         $info = array(
             'Number of PHP files'                   => $this->datastore->getHash('files'),
@@ -1719,7 +1719,7 @@ SQL;
 
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         $info[] = array('PHP used', $php->getActualVersion().' (version '.$this->config->phpversion.' configured)');
         $info[] = array('Ignored files/folders', makeList($this->config->ignore_dirs), '');
 
@@ -1827,7 +1827,7 @@ SQL;
         $info[] = array('Analysis runtime', duration($this->datastore->getHash('audit_end') - $this->datastore->getHash('audit_start')));
         $info[] = array('Report production date', date('r', strtotime('now')));
 
-        $php = new Phpexec($this->config->phpversion, $this->config);
+        $php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
         $info[] = array('PHP used', $this->config->phpversion.' ('.$php->getActualVersion().')');
 
         $info[] = array('Exakat version', Exakat::VERSION.' ( Build '.Exakat::BUILD.') ');

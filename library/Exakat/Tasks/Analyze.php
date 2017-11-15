@@ -158,7 +158,7 @@ class Analyze extends Tasks {
         }
 
         $total_results = 0;
-        $Php = new Phpexec($this->config->version, $this->config);
+        $Php = new Phpexec($this->config->phpversion, $this->config->{'php'.str_replace('.', '', $this->config->phpversion)});
 
         if (!$this->config->verbose && !$this->config->quiet) {
            $progressBar = new Progressbar(0, count($dependencies2) + 1, exec('tput cols'));
