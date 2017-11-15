@@ -219,6 +219,7 @@ class Appinfo extends Data {
                             'Crypto/Hash'         => 'Php/CryptoHashUsage',
                             'Argon2'              => 'Php/Argon2Usage',
                             'ext/openssl'         => 'Extensions/Extopenssl',
+                            'ext/libsodium'       => 'Extensions/Extlibsodium',
                             'ext/mcrypt'          => 'Extensions/Extmcrypt',
                             'ext/mhash'           => 'Extensions/Extmhahs',
                      ),
