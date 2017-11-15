@@ -24,14 +24,14 @@
 namespace Exakat\Analyzer\Php;
 
 use Exakat\Analyzer\Analyzer;
-use Exakat\Analyzer\Common\ClassUsage;
+use Exakat\Analyzer\Common\ClassDefinition;
 
-class Php72RemovedClasses extends ClassUsage {
+class Php72NewClasses extends ClassDefinition {
     protected $phpVersion = '7.2-';
     
     public function analyze() {
-        return;
-        $this->classes = array();
+        $this->classes = array('HashContext',
+                               );
         parent::analyze();
     }
 }

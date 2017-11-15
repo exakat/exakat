@@ -30,10 +30,9 @@ class Php71NewClasses extends ClassDefinition {
     protected $phpVersion = '7.1-';
     
     public function analyze() {
-        $this->classes = array(
-'Void',
-'ReflectionClassConstant'
-);
+        $this->classes = array('Void',
+                               'ReflectionClassConstant',
+                               );
         parent::analyze();
     }
 }

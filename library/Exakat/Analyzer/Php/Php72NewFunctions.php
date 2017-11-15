@@ -34,6 +34,8 @@ class Php72NewFunctions extends FunctionDefinition {
                                   'mb_chr',
                                   'mb_scrub',
                                   'stream_isatty',
+                                  'ftp_append',
+                                  'ftp_mlsd',
                                   'sapi_windows_vt100_support',
                                   'imagesetclip',
                                   'imagegetclip',
@@ -47,6 +49,14 @@ class Php72NewFunctions extends FunctionDefinition {
                                   'socket_addrinfo_connect',
                                   'socket_addrinfo_bind',
                                   'socket_addrinfo_explain',
+                                  'ldap_parse_exop',
+                                  'ldap_exop',
+                                  'ldap_exop_passwd',
+                                  'ldap_exop_whoami',
+                                  'hash_hmac_algos',
+                                  'inflate_get_status',
+                                  'inflate_get_read_len',
+                                  'openssl_pkcs7_read',
                                 );
         parent::analyze();
     }

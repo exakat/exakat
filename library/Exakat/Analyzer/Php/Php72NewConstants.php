@@ -52,6 +52,18 @@ class Php72NewConstants extends ConstantDefinition {
                                  'JSON_INVALID_UTF8_IGNORE',
                                  'JSON_INVALID_UTF8_SUBSTITUTE',
                                  'DNS_CAA',
+                                 'LDAP_EXOP_START_TLS',
+                                 'LDAP_EXOP_MODIFY_PASSWD',
+                                 'LDAP_EXOP_REFRESH',
+                                 'LDAP_EXOP_WHO_AM_I',
+                                 'LDAP_EXOP_TURN',
+                                 'PASSWORD_ARGON2I',
+                                 'PASSWORD_ARGON2_DEFAULT_MEMORY_COST',
+                                 'PASSWORD_ARGON2_DEFAULT_TIME_COST',
+                                 'PASSWORD_ARGON2_DEFAULT_THREADS',
+                                 'FILEINFO_EXTENSION',
+                                 'IMG_EFFECT_MULTIPLY',
+                                 'IMG_BMP',
         );
         parent::analyze();
     }
