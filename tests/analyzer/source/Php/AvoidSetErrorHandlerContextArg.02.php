@@ -7,7 +7,7 @@ set_error_handler('a');
 function a ($a, $b, $c, $d, $f) {}
 
 set_error_handler('a14');
-function a13($a1, $b1, $c1, $d1) {}
+function a14($a1, $b1, $c1, $d1) {}
 
 set_error_handler('a13');
 function a13($a1, $b1, $c1) {}
