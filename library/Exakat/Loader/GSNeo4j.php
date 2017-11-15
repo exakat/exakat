@@ -86,7 +86,7 @@ class GSNeo4j {
         $sqlite3 = new \Sqlite3($this->config->projects_root.'/projects/.exakat/calls.sqlite');
 
         $outE = array();
-        $res = $sqlite3->query('SELECT definitions.id AS definition, GROUP_CONCAT(COALESCE(calls.id, calls2.id)) AS call
+        $res = $sqlite3->query('SELECT definitions.id AS definition, GROUP_CONCAT(DISTINCT COALESCE(calls.id, calls2.id)) AS call
 FROM definitions
 LEFT JOIN calls 
     ON definitions.type       = calls.type       AND
@@ -104,7 +104,7 @@ GROUP BY definitions.id
         }
        
         $inE = array();
-        $res = $sqlite3->query('SELECT calls.id AS call, GROUP_CONCAT(COALESCE(definitions.id, definitions2.id)) AS definition
+        $res = $sqlite3->query('SELECT calls.id AS call, GROUP_CONCAT(DISTINCT COALESCE(definitions.id, definitions2.id)) AS definition
 FROM calls
 LEFT JOIN definitions 
     ON definitions.type       = calls.type       AND
