@@ -215,6 +215,14 @@ class Appinfo extends Data {
                             'Uses debug'          => 'Structures/UseDebug',
                      ),
 
+                    'Crypto' => array(
+                            'Crypto/Hash'         => 'Php/CryptoHashUsage',
+                            'Argon2'              => 'Php/Argon2Usage',
+                            'ext/openssl'         => 'Extensions/Extopenssl',
+                            'ext/mcrypt'          => 'Extensions/Extmcrypt',
+                            'ext/mhash'           => 'Extensions/Extmhahs',
+                     ),
+
                     'External systems' => array(
                             'System'           => 'Structures/ShellUsage',
                             'Files'            => 'Structures/FileUsage',
@@ -227,6 +235,7 @@ class Appinfo extends Data {
                             'ext/apache'     => 'Extensions/Extapache',
                             'ext/apc'        => 'Extensions/Extapc',
                             'ext/apcu'       => 'Extensions/Extapcu',
+                            'argon2'         => 'Php/Argon2Usage',
                             'ext/array'      => 'Extensions/Extarray',
                             'ext/ast'        => 'Extensions/Extast',
                             'ext/bcmath'     => 'Extensions/Extbcmath',
