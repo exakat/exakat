@@ -775,7 +775,7 @@ __.repeat( __.inE().not(hasLabel("DEFINITION", "ANALYZED")).outV() ).until(hasLa
         return $this;
     }
 
-    public function hasChildWithRank($edgeName, $rank = '0') {
+    public function hasChildWithRank($edgeName, $rank = 0) {
         $this->addMethod('where( __.out('.$this->SorA($edgeName).').has("rank", '.abs((int) $rank).') )');
 
         return $this;
